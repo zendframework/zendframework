@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.48 $"/>
-		<generation date="$Date: 2008/05/28 15:49:28 $"/>
+		<version number="$Revision: 1.53 $"/>
+		<generation date="$Date: 2009/05/05 23:06:34 $"/>
 		<language type="ar"/>
 		<territory type="TN"/>
 	</identity>
@@ -28,10 +28,30 @@
 						</dayWidth>
 					</dayContext>
 				</days>
+				<dateTimeFormats>
+					<intervalFormats>
+						<intervalFormatItem id="M">
+							<greatestDifference id="M">M‏-M</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="MMMd">
+							<greatestDifference id="d">d‏-d MMM</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="d">
+							<greatestDifference id="d">d‏-d</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="y">
+							<greatestDifference id="y">y‏-y</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="yMMMd">
+							<greatestDifference id="d">d‏-d MMM، y</greatestDifference>
+						</intervalFormatItem>
+					</intervalFormats>
+				</dateTimeFormats>
 			</calendar>
 		</calendars>
 	</dates>
 	<numbers>
+		<defaultNumberingSystem>latn</defaultNumberingSystem>
 		<symbols>
 			<nativeZeroDigit>0</nativeZeroDigit>
 			<exponential>E</exponential>
@@ -52,3 +72,4 @@
 		</currencyFormats>
 	</numbers>
 </ldml>
+

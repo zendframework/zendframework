@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.105 $"/>
-		<generation date="$Date: 2008/06/26 03:47:57 $"/>
+		<version number="$Revision: 1.125 $"/>
+		<generation date="$Date: 2009/05/05 23:06:36 $"/>
 		<language type="he"/>
 	</identity>
 	<fallback>en</fallback>
@@ -13,120 +13,70 @@
 			<localeSeparator>, </localeSeparator>
 		</localeDisplayPattern>
 		<languages>
-			<language type="aa">אתיופית</language>
+			<language type="aa">אפארית</language>
 			<language type="ab">אבחזית</language>
-			<language type="ace">ace</language>
-			<language type="ach">ach</language>
-			<language type="ada">ada</language>
 			<language type="ady">אדיגית</language>
 			<language type="ae">אבסטן</language>
 			<language type="af">אפריקאנס</language>
-			<language type="afa">אפרו-אסיאתית (אחר)</language>
+			<language type="afa">שפה אפרו-אסייתית</language>
 			<language type="afh">אפריהילי</language>
 			<language type="ain">אינו</language>
 			<language type="ak">אקאן</language>
 			<language type="akk">אכדית</language>
-			<language type="ale">ale</language>
-			<language type="alg">alg</language>
 			<language type="am">אמהרית</language>
-			<language type="an">an</language>
 			<language type="ang">אנגלית עתיקה</language>
-			<language type="anp">anp</language>
-			<language type="apa">שפות אפצ'יות</language>
+			<language type="apa">שפה אפאצ׳ית</language>
 			<language type="ar">ערבית</language>
 			<language type="arc">ארמית</language>
-			<language type="arn">arn</language>
-			<language type="arp">arp</language>
 			<language type="art">שפה מלאכותית אחרת</language>
-			<language type="arw">arw</language>
 			<language type="as">אסאמית</language>
 			<language type="ast">אסטורית</language>
-			<language type="ath">ath</language>
-			<language type="aus">שפות אוסטרליות</language>
-			<language type="av">av</language>
+			<language type="aus">שפה אוסטרלית</language>
 			<language type="awa">אוואדית</language>
 			<language type="ay">איימארית</language>
 			<language type="az">אזרית</language>
 			<language type="ba">בשקירית</language>
-			<language type="bad">bad</language>
-			<language type="bai">bai</language>
 			<language type="bal">באלוצ'י</language>
 			<language type="ban">בלינזית</language>
-			<language type="bas">bas</language>
-			<language type="bat">bat</language>
+			<language type="bat">שפות בלטיות</language>
 			<language type="be">בלארוסית</language>
 			<language type="bej">בז'ה</language>
-			<language type="bem">bem</language>
 			<language type="ber">ברברית</language>
 			<language type="bg">בולגרית</language>
 			<language type="bh">ביהארי</language>
-			<language type="bho">bho</language>
 			<language type="bi">ביסלמה</language>
-			<language type="bik">bik</language>
-			<language type="bin">bin</language>
-			<language type="bm">bm</language>
 			<language type="bn">בנגלית</language>
 			<language type="bnt">בנטו</language>
 			<language type="bo">טיבטית</language>
 			<language type="br">ברטונית</language>
-			<language type="bra">bra</language>
 			<language type="bs">בוסנית</language>
-			<language type="btk">btk</language>
-			<language type="bua">bua</language>
-			<language type="bug">bug</language>
-			<language type="byn">byn</language>
-			<language type="ca">קטלונית</language>
+			<language type="ca">קטלאנית</language>
 			<language type="cad">קאדו</language>
 			<language type="cai">אינדיאנית מרכז אמריקאית אחרת</language>
-			<language type="car">car</language>
-			<language type="cau">קווקזית אחרת</language>
-			<language type="cch">cch</language>
+			<language type="cau">שפה קווקזית</language>
 			<language type="ce">צ'צ'נית</language>
 			<language type="ceb">קבואנו</language>
-			<language type="cel">קלטית</language>
-			<language type="ch">ch</language>
-			<language type="chb">chb</language>
+			<language type="cel">שפה קלטית</language>
 			<language type="chg">צ'אגאטאי</language>
-			<language type="chk">chk</language>
-			<language type="chn">chn</language>
-			<language type="cho">cho</language>
-			<language type="chp">chp</language>
-			<language type="chr">צ'ירוקית</language>
-			<language type="chy">chy</language>
-			<language type="cmc">cmc</language>
-			<language type="co">קורסיקאית</language>
+			<language type="chr">צ'רוקי</language>
+			<language type="co">קורסיקנית</language>
 			<language type="cop">קופטית</language>
-			<language type="cpe">cpe</language>
-			<language type="cpf">cpf</language>
-			<language type="cr">cr</language>
 			<language type="crh">טטרית של קרים</language>
-			<language type="crp">crp</language>
+			<language type="crp">שפה קראולית או פידג'אנית</language>
 			<language type="cs">צ׳כית</language>
 			<language type="cu">סלאבית כנסייתית עתיקה</language>
-			<language type="cus">cus</language>
-			<language type="cv">cv</language>
 			<language type="cy">וולשית</language>
 			<language type="da">דנית</language>
 			<language type="dak">דקוטה</language>
-			<language type="dar">dar</language>
-			<language type="day">day</language>
 			<language type="de">גרמנית</language>
 			<language type="de_AT">גרמנית אוסטרית</language>
 			<language type="del">דלאוור</language>
 			<language type="den">סלאבית</language>
-			<language type="dgr">dgr</language>
-			<language type="din">din</language>
 			<language type="doi">דוגרי</language>
-			<language type="dra">dra</language>
-			<language type="dua">dua</language>
 			<language type="dum">הולנדית תיכונה</language>
 			<language type="dv">דיבהי</language>
-			<language type="dyu">dyu</language>
 			<language type="dz">דזונקה</language>
-			<language type="ee">ee</language>
-			<language type="efi">efi</language>
 			<language type="egy">מצרית עתיקה</language>
-			<language type="eka">eka</language>
 			<language type="el">יוונית</language>
 			<language type="elx">עילמית</language>
 			<language type="en">אנגלית</language>
@@ -141,39 +91,26 @@
 			<language type="es_ES">ספרדית איברית</language>
 			<language type="et">אסטונית</language>
 			<language type="eu">בסקית</language>
-			<language type="ewo">ewo</language>
 			<language type="fa">פרסית</language>
-			<language type="fan">fan</language>
-			<language type="fat">fat</language>
-			<language type="ff">ff</language>
 			<language type="fi">פינית</language>
 			<language type="fil">פיליפינית</language>
-			<language type="fiu">fiu</language>
 			<language type="fj">פיג'ית</language>
 			<language type="fo">פארואזית</language>
-			<language type="fon">fon</language>
 			<language type="fr">צרפתית</language>
 			<language type="fr_CA">צרפתית קנדית</language>
 			<language type="fr_CH">צרפתית שוויצרית</language>
 			<language type="frm">צרפתית תיכונה</language>
 			<language type="fro">צרפתית עתיקה</language>
-			<language type="frs">frs</language>
-			<language type="fur">fur</language>
+			<language type="frr">פריזית צפונית</language>
 			<language type="fy">פריזית</language>
 			<language type="ga">אירית</language>
-			<language type="gaa">gaa</language>
-			<language type="gay">gay</language>
-			<language type="gba">gba</language>
-			<language type="gd">סקוטית גאלית</language>
+			<language type="gd">גאלית סקוטית</language>
 			<language type="gem">גרמאנית אחרת</language>
 			<language type="gez">געז</language>
-			<language type="gil">gil</language>
 			<language type="gl">גליציאנית</language>
 			<language type="gn">גוארני</language>
 			<language type="gon">גונדי</language>
-			<language type="gor">gor</language>
 			<language type="got">גותית</language>
-			<language type="grb">grb</language>
 			<language type="grc">יוונית עתיקה</language>
 			<language type="gsw">גרמנית שוויצרית</language>
 			<language type="gu">גוג'ראטית</language>
@@ -181,31 +118,35 @@
 			<language type="ha">האוסה</language>
 			<language type="haw">הוואית</language>
 			<language type="he">עברית</language>
-			<language type="hi">הינדית</language>
+			<language type="hi">הינדי</language>
 			<language type="hit">חיתית</language>
 			<language type="ho">הארי מוטו</language>
 			<language type="hr">קרואטית</language>
 			<language type="ht">האיטית</language>
 			<language type="hu">הונגרית</language>
 			<language type="hy">ארמנית</language>
-			<language type="ia">אינטרלינגוה</language>
+			<language type="ia">‏אינטרלינגואה</language>
 			<language type="id">אינדונזית</language>
-			<language type="ie">אינטרלינגואה</language>
+			<language type="ie">אינטרלינגה</language>
+			<language type="ig">איגבו</language>
+			<language type="ik">ik</language>
 			<language type="ine">אינדו-אירופית אחרת</language>
 			<language type="inh">אינגושית</language>
 			<language type="io">אידו</language>
-			<language type="ira">איראנית</language>
+			<language type="ira">שפה איראנית</language>
 			<language type="is">איסלנדית</language>
 			<language type="it">איטלקית</language>
+			<language type="iu">אינוקטיטוט</language>
 			<language type="ja">יפנית</language>
-			<language type="jpr">עברית-פרסית</language>
-			<language type="jrb">עברית-ערבית</language>
-			<language type="jv">ג'אווהנית</language>
-			<language type="ka">גרוזינית</language>
+			<language type="jpr">פרסית יהודית</language>
+			<language type="jrb">ערבית יהודית</language>
+			<language type="jv">יאוונית</language>
+			<language type="ka">גיאורגית</language>
 			<language type="kab">קבילה</language>
 			<language type="kk">קזחית</language>
+			<language type="kl">קאלאליסוטית</language>
 			<language type="km">קמרית</language>
-			<language type="kn">קאנאדה</language>
+			<language type="kn">קנאדה</language>
 			<language type="ko">קוריאנית</language>
 			<language type="ks">קשמירית</language>
 			<language type="ku">כורדית</language>
@@ -214,9 +155,8 @@
 			<language type="la">לטינית</language>
 			<language type="lad">לדינו</language>
 			<language type="lb">לוקסמבורגית</language>
-			<language type="lg">lg</language>
-			<language type="ln">לינגאלה</language>
-			<language type="lo">לאו</language>
+			<language type="ln">לינגלה</language>
+			<language type="lo">לאית</language>
 			<language type="lt">ליטאית</language>
 			<language type="lv">לטבית</language>
 			<language type="mag">מאגאהית</language>
@@ -232,45 +172,45 @@
 			<language type="mn">מונגולית</language>
 			<language type="mni">מניפורית</language>
 			<language type="mo">מולדבית</language>
-			<language type="mr">מארתית</language>
-			<language type="ms">מאלזית</language>
-			<language type="mt">מלטזית</language>
+			<language type="mr">מרטהי</language>
+			<language type="ms">מלאית</language>
+			<language type="mt">מלטית</language>
 			<language type="mul">מספר שפות</language>
-			<language type="mus">mus</language>
 			<language type="my">בורמזית</language>
 			<language type="myn">מאיה</language>
-			<language type="myv">myv</language>
 			<language type="na">נאורית</language>
 			<language type="nah">נאהואטל</language>
 			<language type="nai">אינדיאנית צפון אמריקאית אחרת</language>
 			<language type="nap">נפוליטנית</language>
-			<language type="nb">נורבגית שפה הספר - בוקמול</language>
+			<language type="nb">‏נורבגית ספרותית</language>
 			<language type="nds">גרמנית תחתית</language>
 			<language type="ne">נפאלית</language>
 			<language type="nl">הולנדית</language>
 			<language type="nl_BE">פלמית</language>
 			<language type="nn">נורבגית חדשה - נינורשק</language>
 			<language type="no">נורווגית</language>
+			<language type="non">‏נורדית עתיקה</language>
 			<language type="nub">שפות נבטיות</language>
 			<language type="nv">נבחו</language>
 			<language type="nwc">נווארית קלאסית</language>
 			<language type="oc">אוקסיטנית</language>
 			<language type="or">אוריה</language>
 			<language type="ota">טורקית עותומנית</language>
-			<language type="pa">פונג'אבית</language>
+			<language type="pa">פנג'אבית</language>
 			<language type="peo">פרסית עתיקה</language>
 			<language type="phi">פיליפינית אחרת</language>
 			<language type="phn">פניקית</language>
 			<language type="pl">פולנית</language>
 			<language type="ps">פאשטו</language>
-			<language type="pt">פורטוגזית</language>
+			<language type="pt">פורטוגלית</language>
 			<language type="pt_BR">פורטוגזית ברזילאית</language>
 			<language type="raj">ראג'סטן</language>
+			<language type="rn">קירונדי</language>
 			<language type="ro">רומנית</language>
 			<language type="rom">רומאנית</language>
 			<language type="ru">רוסית</language>
 			<language type="rup">ארומנית</language>
-			<language type="rw">קיניהרואנדה</language>
+			<language type="rw">קינירואנדה</language>
 			<language type="sa">סנסקריט</language>
 			<language type="sai">שפה אינדיאנית דרום אמריקאית</language>
 			<language type="sam">ארמית שומרונית</language>
@@ -294,23 +234,26 @@
 			<language type="so">סומלית</language>
 			<language type="sq">אלבנית</language>
 			<language type="sr">סרבית</language>
+			<language type="ss">סיסוואטי</language>
 			<language type="st">ססות'ו</language>
 			<language type="su">סודנית</language>
 			<language type="sux">שומרית</language>
 			<language type="sv">שוודית</language>
 			<language type="sw">סווהילית</language>
-			<language type="syc">syc</language>
 			<language type="syr">סורית</language>
 			<language type="ta">טמילית</language>
 			<language type="te">טלוגו</language>
+			<language type="tg">טג'יקית</language>
 			<language type="th">תאי</language>
 			<language type="ti">טיגרינאית</language>
 			<language type="tk">טורקמנית</language>
 			<language type="tl">טגלוג</language>
-			<language type="tlh">קלינגונית</language>
+			<language type="tlh">קלינגון</language>
+			<language type="tn">צוואנה</language>
+			<language type="to">טונגאית</language>
 			<language type="tr">טורקית</language>
+			<language type="ts">טסונגה</language>
 			<language type="tt">טטרית</language>
-			<language type="tut">tut</language>
 			<language type="tw">טווי</language>
 			<language type="ty">טהיטית</language>
 			<language type="ug">אויגהור</language>
@@ -319,14 +262,15 @@
 			<language type="und">שפה לא ידועה או לא תקפה</language>
 			<language type="ur">אורדו</language>
 			<language type="uz">אוזבקית</language>
+			<language type="ve">וונדה</language>
 			<language type="vi">ויאטנמית</language>
+			<language type="vo">‏וולאפיק</language>
 			<language type="wo">ג'ולוף</language>
-			<language type="xh">קוהסה</language>
+			<language type="xh">קסוסה</language>
 			<language type="yap">יאפזית</language>
 			<language type="yi">יידיש</language>
 			<language type="yo">יורובה</language>
 			<language type="zap">זאפוטק</language>
-			<language type="zbl">zbl</language>
 			<language type="zen">זנאגה</language>
 			<language type="zh">סינית</language>
 			<language type="zh_Hans">סינית (מפושטת)</language>
@@ -336,84 +280,52 @@
 		</languages>
 		<scripts>
 			<script type="Arab">ערבי</script>
-			<script type="Armi">Armi</script>
 			<script type="Armn">ארמני</script>
-			<script type="Avst">Avst</script>
 			<script type="Bali">באלינזי</script>
-			<script type="Batk">Batk</script>
 			<script type="Beng">בנגלי</script>
-			<script type="Blis">Blis</script>
-			<script type="Bopo">Bopo</script>
-			<script type="Brah">Brah</script>
 			<script type="Brai">ברייל</script>
-			<script type="Bugi">Bugi</script>
-			<script type="Buhd">Buhd</script>
-			<script type="Cakm">Cakm</script>
-			<script type="Cari">Cari</script>
-			<script type="Cham">Cham</script>
 			<script type="Cher">צ׳ירוקי</script>
-			<script type="Cirt">Cirt</script>
 			<script type="Copt">קופטי</script>
 			<script type="Cprt">קפריסאי</script>
 			<script type="Cyrl">קירילי</script>
 			<script type="Cyrs">קירילי סלאבוני כנסייתי עתיק</script>
 			<script type="Deva">דוואנגרי</script>
-			<script type="Dsrt">Dsrt</script>
-			<script type="Egyd">Egyd</script>
-			<script type="Egyh">Egyh</script>
 			<script type="Egyp">כתב חרטומים</script>
 			<script type="Ethi">אתיופי</script>
-			<script type="Geok">Geok</script>
 			<script type="Geor">גאורגי</script>
-			<script type="Glag">Glag</script>
 			<script type="Goth">גותי</script>
 			<script type="Grek">יווני</script>
-			<script type="Gujr">Gujr</script>
-			<script type="Guru">Guru</script>
 			<script type="Hang">האנגול</script>
 			<script type="Hani">האן</script>
-			<script type="Hano">Hano</script>
 			<script type="Hans">האן מפושט</script>
 			<script type="Hant">האן מסורתי</script>
 			<script type="Hebr">עברי</script>
-			<script type="Hira">Hira</script>
-			<script type="Hrkt">Hrkt</script>
 			<script type="Hung">הונגרי עתיק</script>
 			<script type="Inds">אינדוס</script>
 			<script type="Ital">איטלקי עתיק</script>
-			<script type="Java">Java</script>
 			<script type="Jpan">יפני</script>
-			<script type="Kali">Kali</script>
-			<script type="Kana">Kana</script>
-			<script type="Khar">Khar</script>
 			<script type="Khmr">קמרית</script>
 			<script type="Knda">קאנדה</script>
 			<script type="Kore">קוריאני</script>
-			<script type="Kthi">Kthi</script>
-			<script type="Lana">Lana</script>
 			<script type="Laoo">לאית</script>
-			<script type="Latf">Latf</script>
 			<script type="Latg">לטיני גאלי</script>
 			<script type="Latn">לטיני</script>
-			<script type="Lepc">Lepc</script>
 			<script type="Mong">מונגולי</script>
 			<script type="Orya">אורייה</script>
-			<script type="Phlv">Phlv</script>
 			<script type="Phnx">פיניקי</script>
-			<script type="Qaai">Qaai</script>
 			<script type="Runr">רוני</script>
+			<script type="Sinh">סינהלה</script>
 			<script type="Syrc">סורי</script>
-			<script type="Syre">Syre</script>
 			<script type="Syrj">סורי מערבי</script>
 			<script type="Syrn">סורי מזרחי</script>
 			<script type="Taml">טמיל</script>
 			<script type="Telu">טלוגו</script>
+			<script type="Tglg">טגלוג</script>
 			<script type="Thai">תאי</script>
 			<script type="Tibt">טיבטי</script>
 			<script type="Ugar">אוגריתי</script>
 			<script type="Xpeo">פרסי עתיק</script>
 			<script type="Zxxx">לא כתוב</script>
-			<script type="Zyyy">Zyyy</script>
 			<script type="Zzzz">כתב לא ידוע או לא תקף</script>
 		</scripts>
 		<territories>
@@ -433,13 +345,13 @@
 			<territory type="029">קריביים</territory>
 			<territory type="030">מזרח אסיה</territory>
 			<territory type="034">דרום אסיה</territory>
-			<territory type="035">דרום-מזרח אסיה</territory>
+			<territory type="035">דרום־מזרח אסיה</territory>
 			<territory type="039">דרום אירופה</territory>
-			<territory type="053">אוסטרליה וניו-זילנד</territory>
+			<territory type="053">אוסטרליה וניו־זילנד</territory>
 			<territory type="054">מלנסיה</territory>
-			<territory type="057">האיזור המיקרונזי</territory>
+			<territory type="057">אזור מיקרונזיה</territory>
 			<territory type="061">פולינזיה</territory>
-			<territory type="062">דרום-מרכז אסיה</territory>
+			<territory type="062">דרום־מרכז אסיה</territory>
 			<territory type="142">אסיה</territory>
 			<territory type="143">מרכז אסיה</territory>
 			<territory type="145">מערב אסיה</territory>
@@ -481,7 +393,7 @@
 			<territory type="BN">ברוניי</territory>
 			<territory type="BO">בוליביה</territory>
 			<territory type="BR">ברזיל</territory>
-			<territory type="BS">איי באהאמה</territory>
+			<territory type="BS">איי בהאמה</territory>
 			<territory type="BT">בהוטן</territory>
 			<territory type="BV">איי בובה</territory>
 			<territory type="BW">בוטסוואנה</territory>
@@ -489,9 +401,9 @@
 			<territory type="BZ">בליז</territory>
 			<territory type="CA">קנדה</territory>
 			<territory type="CC">איי קוקוס</territory>
-			<territory type="CD">הרפובליקה הדמוקרטית של קונגו</territory>
+			<territory type="CD">קונגו - קינשאסה</territory>
 			<territory type="CF">הרפובליקה של מרכז אפריקה</territory>
-			<territory type="CG">קונגו</territory>
+			<territory type="CG">קונגו - ברזאויל</territory>
 			<territory type="CH">שווייץ</territory>
 			<territory type="CI">חוף השנהב</territory>
 			<territory type="CK">איי קוק</territory>
@@ -540,11 +452,11 @@
 			<territory type="GQ">גיניאה המשוונית</territory>
 			<territory type="GR">יוון</territory>
 			<territory type="GS">ג׳ורג׳יה הדרומית ואיי סנדוויץ׳ הדרומיים</territory>
-			<territory type="GT">גווטמלה</territory>
+			<territory type="GT">גואטמלה</territory>
 			<territory type="GU">גואם</territory>
 			<territory type="GW">גיניאה-ביסאו</territory>
 			<territory type="GY">גיאנה</territory>
-			<territory type="HK">הונג קונג</territory>
+			<territory type="HK">הונג קונג (מחוז מנהלי מיוחד של סין)</territory>
 			<territory type="HM">איי הרד ואיי מקדונלנד</territory>
 			<territory type="HN">הונדורס</territory>
 			<territory type="HR">קרואטיה</territory>
@@ -556,7 +468,7 @@
 			<territory type="IM">האי מאן</territory>
 			<territory type="IN">הודו</territory>
 			<territory type="IO">טריטוריה בריטית באוקיאנוס ההודי</territory>
-			<territory type="IQ">עירק</territory>
+			<territory type="IQ">עיראק</territory>
 			<territory type="IR">איראן</territory>
 			<territory type="IS">איסלנד</territory>
 			<territory type="IT">איטליה</territory>
@@ -597,7 +509,7 @@
 			<territory type="ML">מאלי</territory>
 			<territory type="MM">מייאנמאר</territory>
 			<territory type="MN">מונגוליה</territory>
-			<territory type="MO">מקאו</territory>
+			<territory type="MO">מקאו (מחוז מנהלי מיוחד של סין)</territory>
 			<territory type="MP">איי מריאנה הצפוניים</territory>
 			<territory type="MQ">מרטיניק</territory>
 			<territory type="MR">מאוריטניה</territory>
@@ -632,12 +544,11 @@
 			<territory type="PM">סנט פייר ומיקלון</territory>
 			<territory type="PN">פיטקרן</territory>
 			<territory type="PR">פורטו ריקו</territory>
-			<territory type="PS">הרשות הפלשתינית</territory>
+			<territory type="PS">הרשות הפלסטינית</territory>
 			<territory type="PT">פורטוגל</territory>
 			<territory type="PW">פאלאו</territory>
 			<territory type="PY">פרגוואי</territory>
-			<territory type="QA">קטר</territory>
-			<territory type="QO">QO</territory>
+			<territory type="QA">קטאר</territory>
 			<territory type="QU">האיחוד האירופי</territory>
 			<territory type="RE">ראוניון</territory>
 			<territory type="RO">רומניה</territory>
@@ -685,7 +596,7 @@
 			<territory type="US">ארצות הברית</territory>
 			<territory type="UY">אורוגוואי</territory>
 			<territory type="UZ">אוזבקיסטן</territory>
-			<territory type="VA">ותיקן</territory>
+			<territory type="VA">הוותיקן</territory>
 			<territory type="VC">סנט וינסנט והגרנדינים</territory>
 			<territory type="VE">ונצואלה</territory>
 			<territory type="VG">איי הבתולה הבריטיים</territory>
@@ -699,7 +610,7 @@
 			<territory type="ZA">דרום אפריקה</territory>
 			<territory type="ZM">זמביה</territory>
 			<territory type="ZW">זימבאבווה</territory>
-			<territory type="ZZ">איזור לא ידוע או לא תקף</territory>
+			<territory type="ZZ">אזור לא ידוע או לא תקין</territory>
 		</territories>
 		<variants>
 			<variant type="1901">כתיב גרמני מסורתי</variant>
@@ -743,7 +654,7 @@
 	</layout>
 	<characters>
 		<exemplarCharacters>[א-י כ ך ל מ ם נ ן ס ע פ ף צ ץ ק-ת]</exemplarCharacters>
-		<exemplarCharacters type="auxiliary">[ֽ ׄ ְ-ֹ ֻ ׂ ׁ ּ ֿ ־ ׳ ״ a-z]</exemplarCharacters>
+		<exemplarCharacters type="auxiliary">[\u05BD \u05C4\u200E \u200F \u05B0-\u05B9 \u05BB \u05C2 \u05C1 \u05BC \u05BF ־ ׳ ״ a-z]</exemplarCharacters>
 		<exemplarCharacters type="currencySymbol">[a-z]</exemplarCharacters>
 	</characters>
 	<delimiters>
@@ -753,7 +664,6 @@
 		<alternateQuotationEnd>&quot;</alternateQuotationEnd>
 	</delimiters>
 	<dates>
-		<localizedPatternChars>GanjkHmsSEDFwWxhKzAeugXZvcL</localizedPatternChars>
 		<calendars>
 			<calendar type="gregorian">
 				<months>
@@ -761,7 +671,7 @@
 						<monthWidth type="abbreviated">
 							<month type="1">ינו</month>
 							<month type="2">פבר</month>
-							<month type="3">מרץ</month>
+							<month type="3">מרס</month>
 							<month type="4">אפר</month>
 							<month type="5">מאי</month>
 							<month type="6">יונ</month>
@@ -775,7 +685,7 @@
 						<monthWidth type="wide">
 							<month type="1">ינואר</month>
 							<month type="2">פברואר</month>
-							<month type="3">מרץ</month>
+							<month type="3">מרס</month>
 							<month type="4">אפריל</month>
 							<month type="5">מאי</month>
 							<month type="6">יוני</month>
@@ -787,39 +697,17 @@
 							<month type="12">דצמבר</month>
 						</monthWidth>
 					</monthContext>
-					<monthContext type="stand-alone">
-						<monthWidth type="abbreviated">
-							<month type="3">מרס</month>
-						</monthWidth>
-						<monthWidth type="narrow">
-							<month type="1">1</month>
-							<month type="2">2</month>
-							<month type="3">3</month>
-							<month type="4">4</month>
-							<month type="5">5</month>
-							<month type="6">6</month>
-							<month type="7">7</month>
-							<month type="8">8</month>
-							<month type="9">9</month>
-							<month type="10">10</month>
-							<month type="11">11</month>
-							<month type="12">12</month>
-						</monthWidth>
-						<monthWidth type="wide">
-							<month type="3">מרס</month>
-						</monthWidth>
-					</monthContext>
 				</months>
 				<days>
 					<dayContext type="format">
 						<dayWidth type="abbreviated">
-							<day type="sun">א</day>
-							<day type="mon">ב</day>
-							<day type="tue">ג</day>
-							<day type="wed">ד</day>
-							<day type="thu">ה</day>
-							<day type="fri">ו</day>
-							<day type="sat">ש</day>
+							<day type="sun">יום א'</day>
+							<day type="mon">יום ב'</day>
+							<day type="tue">יום ג'</day>
+							<day type="wed">יום ד'</day>
+							<day type="thu">יום ה'</day>
+							<day type="fri">יום ו'</day>
+							<day type="sat">שבת</day>
 						</dayWidth>
 						<dayWidth type="wide">
 							<day type="sun">יום ראשון</day>
@@ -828,7 +716,7 @@
 							<day type="wed">יום רביעי</day>
 							<day type="thu">יום חמישי</day>
 							<day type="fri">יום שישי</day>
-							<day type="sat">שבת</day>
+							<day type="sat">יום שבת</day>
 						</dayWidth>
 					</dayContext>
 					<dayContext type="stand-alone">
@@ -882,12 +770,12 @@
 				<dateFormats>
 					<dateFormatLength type="full">
 						<dateFormat>
-							<pattern>EEEE d MMMM yyyy</pattern>
+							<pattern>EEEE, d בMMMM y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="long">
 						<dateFormat>
-							<pattern>d MMMM yyyy</pattern>
+							<pattern>d בMMMM y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="medium">
@@ -904,7 +792,7 @@
 				<timeFormats>
 					<timeFormatLength type="full">
 						<timeFormat>
-							<pattern>HH:mm:ss v</pattern>
+							<pattern>HH:mm:ss zzzz</pattern>
 						</timeFormat>
 					</timeFormatLength>
 					<timeFormatLength type="long">
@@ -924,7 +812,22 @@
 					</timeFormatLength>
 				</timeFormats>
 				<dateTimeFormats>
-					<dateTimeFormatLength>
+					<dateTimeFormatLength type="full">
+						<dateTimeFormat>
+							<pattern>{1} {0}</pattern>
+						</dateTimeFormat>
+					</dateTimeFormatLength>
+					<dateTimeFormatLength type="long">
+						<dateTimeFormat>
+							<pattern>{1} {0}</pattern>
+						</dateTimeFormat>
+					</dateTimeFormatLength>
+					<dateTimeFormatLength type="medium">
+						<dateTimeFormat>
+							<pattern>{1} {0}</pattern>
+						</dateTimeFormat>
+					</dateTimeFormatLength>
+					<dateTimeFormatLength type="short">
 						<dateTimeFormat>
 							<pattern>{1} {0}</pattern>
 						</dateTimeFormat>
@@ -940,27 +843,27 @@
 						<dateFormatItem id="MMM">LLL</dateFormatItem>
 						<dateFormatItem id="MMMEd">E d MMM</dateFormatItem>
 						<dateFormatItem id="MMMMEd">E MMMM d</dateFormatItem>
-						<dateFormatItem id="MMMMd">d MMMM</dateFormatItem>
+						<dateFormatItem id="MMMMd">d בMMMM</dateFormatItem>
 						<dateFormatItem id="MMMd">MMM d</dateFormatItem>
 						<dateFormatItem id="MMdd">dd/MM</dateFormatItem>
 						<dateFormatItem id="Md">d/M</dateFormatItem>
 						<dateFormatItem id="d">d</dateFormatItem>
 						<dateFormatItem id="mmss">mm:ss</dateFormatItem>
 						<dateFormatItem id="ms">mm:ss</dateFormatItem>
-						<dateFormatItem id="y">yyyy</dateFormatItem>
-						<dateFormatItem id="yM">yyyy-M</dateFormatItem>
-						<dateFormatItem id="yMEd">EEE, yyyy-M-d</dateFormatItem>
-						<dateFormatItem id="yMMM">yyyy MMM</dateFormatItem>
-						<dateFormatItem id="yMMMEd">EEE, yyyy MMM d</dateFormatItem>
-						<dateFormatItem id="yMMMM">yyyy MMMM</dateFormatItem>
+						<dateFormatItem id="y">y</dateFormatItem>
+						<dateFormatItem id="yM">M.yyyy</dateFormatItem>
+						<dateFormatItem id="yMEd">EEE, d.M.yyyy</dateFormatItem>
+						<dateFormatItem id="yMMM">y MMM</dateFormatItem>
+						<dateFormatItem id="yMMMEd">EEE, y MMM d</dateFormatItem>
+						<dateFormatItem id="yMMMM">MMMM y</dateFormatItem>
 						<dateFormatItem id="yQ">yyyy Q</dateFormatItem>
-						<dateFormatItem id="yQQQ">yyyy QQQ</dateFormatItem>
+						<dateFormatItem id="yQQQ">y QQQ</dateFormatItem>
 						<dateFormatItem id="yyMM">MM/yy</dateFormatItem>
 						<dateFormatItem id="yyMMM">MMM yy</dateFormatItem>
 						<dateFormatItem id="yyQ">Q yy</dateFormatItem>
-						<dateFormatItem id="yyyy">yyyy</dateFormatItem>
+						<dateFormatItem id="yyyy">y</dateFormatItem>
 						<dateFormatItem id="yyyyMM">MM/yyyy</dateFormatItem>
-						<dateFormatItem id="yyyyMMMM">MMMM yyyy</dateFormatItem>
+						<dateFormatItem id="yyyyMMMM">MMMM y</dateFormatItem>
 					</availableFormats>
 					<intervalFormats>
 						<intervalFormatFallback>{0} – {1}</intervalFormatFallback>
@@ -1023,22 +926,22 @@
 							<greatestDifference id="y">EEEE dd/MM/yy - EEEE dd/MM/yy</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMM">
-							<greatestDifference id="M">MMM-MMM yyyy</greatestDifference>
-							<greatestDifference id="y">MMM yyyy - MMM yyyy</greatestDifference>
+							<greatestDifference id="M">MMM-MMM y</greatestDifference>
+							<greatestDifference id="y">MMM y - MMM y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMEd">
-							<greatestDifference id="M">EEEE d MMM - EEEE d MMM yyyy</greatestDifference>
-							<greatestDifference id="d">EEEE d MMM - EEEE d MMM yyyy</greatestDifference>
-							<greatestDifference id="y">EEEE d MMM yyyy - EEEE d MMM yyyy</greatestDifference>
+							<greatestDifference id="M">EEEE d MMM - EEEE d MMM y</greatestDifference>
+							<greatestDifference id="d">EEEE d MMM - EEEE d MMM y</greatestDifference>
+							<greatestDifference id="y">EEEE d MMM y - EEEE d MMM y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMM">
 							<greatestDifference id="M">yyyy-MM – MM</greatestDifference>
 							<greatestDifference id="y">yyyy-MM – yyyy-MM</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMd">
-							<greatestDifference id="M">d MMM - d MMM yyyy</greatestDifference>
-							<greatestDifference id="d">d-d MMM yyyy</greatestDifference>
-							<greatestDifference id="y">d MMM yyyy - d MMM yyyy</greatestDifference>
+							<greatestDifference id="M">d MMM - d MMM y</greatestDifference>
+							<greatestDifference id="d">d-d MMM y</greatestDifference>
+							<greatestDifference id="y">d MMM y - d MMM y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMd">
 							<greatestDifference id="M">dd/MM/yy - dd/MM/yy</greatestDifference>
@@ -1062,13 +965,13 @@
 					</field>
 					<field type="day">
 						<displayName>יום</displayName>
+						<relative type="-3">לפני שלושה ימים</relative>
+						<relative type="-2">שלשום</relative>
+						<relative type="-1">אתמול</relative>
 						<relative type="0">היום</relative>
 						<relative type="1">מחר</relative>
 						<relative type="2">מחרתיים</relative>
 						<relative type="3">בעוד שלושה ימים</relative>
-						<relative type="-1">אתמול</relative>
-						<relative type="-2">שלשום</relative>
-						<relative type="-3">לפני שלושה ימים</relative>
 					</field>
 					<field type="weekday">
 						<displayName>יום בשבוע</displayName>
@@ -1099,8 +1002,25 @@
 							<month type="3">כסלו</month>
 							<month type="4">טבת</month>
 							<month type="5">שבט</month>
-							<month type="6">אדר ראשון</month>
-							<month type="7">אדר שני</month>
+							<month type="6">אדר א'</month>
+							<month type="7">אדר</month>
+							<month type="8">ניסן</month>
+							<month type="9">אייר</month>
+							<month type="10">סיון</month>
+							<month type="11">תמוז</month>
+							<month type="12">אב</month>
+							<month type="13">אלול</month>
+						</monthWidth>
+					</monthContext>
+					<monthContext type="stand-alone">
+						<monthWidth type="narrow">
+							<month type="1">תשרי</month>
+							<month type="2">חשון</month>
+							<month type="3">כסלו</month>
+							<month type="4">טבת</month>
+							<month type="5">שבט</month>
+							<month type="6">אדר א'</month>
+							<month type="7">אדר</month>
 							<month type="8">ניסן</month>
 							<month type="9">אייר</month>
 							<month type="10">סיון</month>
@@ -1118,12 +1038,32 @@
 					</eraAbbr>
 				</eras>
 				<dateFormats>
+					<dateFormatLength type="full">
+						<dateFormat>
+							<pattern numbers="hebr">EEEE, d בMMMM y</pattern>
+						</dateFormat>
+					</dateFormatLength>
+					<dateFormatLength type="long">
+						<dateFormat>
+							<pattern numbers="hebr">d בMMMM y</pattern>
+						</dateFormat>
+					</dateFormatLength>
 					<dateFormatLength type="medium">
 						<dateFormat>
-							<pattern>d MMM yyyy</pattern>
+							<pattern numbers="hebr">dd/MM/yyyy</pattern>
+						</dateFormat>
+					</dateFormatLength>
+					<dateFormatLength type="short">
+						<dateFormat>
+							<pattern numbers="hebr">dd/MM/yy</pattern>
 						</dateFormat>
 					</dateFormatLength>
 				</dateFormats>
+				<dateTimeFormats>
+					<availableFormats>
+						<dateFormatItem id="MMMMEd">E, d בMMMM</dateFormatItem>
+					</availableFormats>
+				</dateTimeFormats>
 			</calendar>
 			<calendar type="islamic">
 				<months>
@@ -1550,7 +1490,7 @@
 				<exemplarCity>קונאקרי</exemplarCity>
 			</zone>
 			<zone type="America/Guadeloupe">
-				<exemplarCity>גוואדלופ</exemplarCity>
+				<exemplarCity>גוואדלופ</exemplarCity>
 			</zone>
 			<zone type="Africa/Malabo">
 				<exemplarCity>מאלאבו</exemplarCity>
@@ -2145,13 +2085,13 @@
 		</currencyFormats>
 		<currencies>
 			<currency type="ADP">
-				<displayName>פזו אנדורי</displayName>
+				<displayName>פזטה אנדורית</displayName>
 			</currency>
 			<currency type="AED">
 				<displayName>דירהם של איחוד הנסיכויות הערביות</displayName>
 			</currency>
 			<currency type="AFN">
-				<displayName>אפגני</displayName>
+				<displayName>אפגני אפגני</displayName>
 			</currency>
 			<currency type="ALL">
 				<displayName>לק אלבני</displayName>
@@ -2160,16 +2100,16 @@
 				<displayName>דראם ארמני</displayName>
 			</currency>
 			<currency type="ANG">
-				<displayName>גילדר [ANG]</displayName>
+				<displayName>גילדן של האנטילים ההולנדיים</displayName>
 			</currency>
 			<currency type="AOA">
 				<displayName>קואנזה אנגולי</displayName>
 			</currency>
 			<currency type="AON">
-				<displayName>קואנזה חדש אנגולי</displayName>
+				<displayName>קואנזה חדש אנגולי (1990-2000)</displayName>
 			</currency>
 			<currency type="AOR">
-				<displayName>קואנזה רג'וסטדו</displayName>
+				<displayName>קואנזה רג׳וסטדו אנגולי (1995-1999)</displayName>
 			</currency>
 			<currency type="ARP">
 				<displayName>פזו ארגנטינאי (1983-1985)</displayName>
@@ -2184,10 +2124,10 @@
 				<displayName>דולר אוסטרלי</displayName>
 			</currency>
 			<currency type="AWG">
-				<displayName>פלורין</displayName>
+				<displayName>פלורין של ארובה</displayName>
 			</currency>
 			<currency type="AZM">
-				<displayName>מאנאט</displayName>
+				<displayName>מנאט אזרביג׳אני (1993-2006)</displayName>
 			</currency>
 			<currency type="AZN">
 				<displayName>מאנאט אזרביג׳ני</displayName>
@@ -2196,13 +2136,13 @@
 				<displayName>דינר של בוסניה־הרצגובינה</displayName>
 			</currency>
 			<currency type="BAM">
-				<displayName>מארק בר המרה</displayName>
+				<displayName>מארק בר המרה של בוסניה־הרצגובינה</displayName>
 			</currency>
 			<currency type="BBD">
 				<displayName>דולר ברבדיאני</displayName>
 			</currency>
 			<currency type="BDT">
-				<displayName>טאקה</displayName>
+				<displayName>טאקה בנגלדשי</displayName>
 			</currency>
 			<currency type="BEC">
 				<displayName>פרנק בלגי (בר המרה)</displayName>
@@ -2211,7 +2151,7 @@
 				<displayName>פרנק בלגי</displayName>
 			</currency>
 			<currency type="BGL">
-				<displayName>לב</displayName>
+				<displayName>לב בולגרי ישן</displayName>
 			</currency>
 			<currency type="BGN">
 				<displayName>לב בולגרי</displayName>
@@ -2235,10 +2175,10 @@
 				<displayName>פזו בוליבי</displayName>
 			</currency>
 			<currency type="BRB">
-				<displayName>קרוזיארו</displayName>
+				<displayName>קרוזיארו חדש ברזילאי (1967-1986)</displayName>
 			</currency>
 			<currency type="BRC">
-				<displayName>קרוזדו</displayName>
+				<displayName>קרוזדו ברזילאי</displayName>
 			</currency>
 			<currency type="BRL">
 				<displayName>ריאל ברזילאי</displayName>
@@ -2247,19 +2187,19 @@
 				<displayName>דולר בהאמי</displayName>
 			</currency>
 			<currency type="BTN">
-				<displayName>נגולטרום</displayName>
+				<displayName>נגולטרום בהוטני</displayName>
 			</currency>
 			<currency type="BWP">
-				<displayName>פולה</displayName>
+				<displayName>פולה בוצוואני</displayName>
 			</currency>
 			<currency type="BZD">
-				<displayName>דולר בליזאי</displayName>
+				<displayName>דולר בליזי</displayName>
 			</currency>
 			<currency type="CAD">
 				<displayName>דולר קנדי</displayName>
 			</currency>
 			<currency type="CDF">
-				<displayName>פרנק קונגיני</displayName>
+				<displayName>פרנק קונגולזי</displayName>
 			</currency>
 			<currency type="CHF">
 				<displayName>פרנק שוויצרי</displayName>
@@ -2268,19 +2208,19 @@
 				<displayName>פזו צ'ילאני</displayName>
 			</currency>
 			<currency type="CNY">
-				<displayName>יואן</displayName>
+				<displayName>יואן רנמינבי סיני</displayName>
 			</currency>
 			<currency type="COP">
 				<displayName>פזו קולומביאני</displayName>
 			</currency>
 			<currency type="CRC">
-				<displayName>קולון</displayName>
+				<displayName>קולון קוסטה־ריקני</displayName>
 			</currency>
 			<currency type="CSD">
 				<displayName>דינר סרבי ישן</displayName>
 			</currency>
 			<currency type="CSK">
-				<displayName>קורונה צ'כית [1953-1992]</displayName>
+				<displayName>קורונה צ׳כית</displayName>
 			</currency>
 			<currency type="CUP">
 				<displayName>פזו קובני</displayName>
@@ -2298,19 +2238,19 @@
 				<displayName>מרק גרמני</displayName>
 			</currency>
 			<currency type="DJF">
-				<displayName>פרנק [DJF]</displayName>
+				<displayName>פרנק ג׳יבוטי</displayName>
 			</currency>
 			<currency type="DKK">
 				<displayName>כתר דני</displayName>
 			</currency>
 			<currency type="DOP">
-				<displayName>פזו</displayName>
+				<displayName>פזו דומיניקני</displayName>
 			</currency>
 			<currency type="DZD">
-				<displayName>דינר אלג'ירי</displayName>
+				<displayName>דינר אלג׳ירי</displayName>
 			</currency>
 			<currency type="ECS">
-				<displayName>סוקר</displayName>
+				<displayName>סוקר אקואדורי</displayName>
 			</currency>
 			<currency type="EEK">
 				<displayName>קרון אסטוני</displayName>
@@ -2318,11 +2258,8 @@
 			<currency type="EGP">
 				<displayName>לירה מיצרית</displayName>
 			</currency>
-			<currency type="EQE">
-				<displayName>אקוולה</displayName>
-			</currency>
 			<currency type="ERN">
-				<displayName>נאקפה</displayName>
+				<displayName>נאקפה אריתראי</displayName>
 			</currency>
 			<currency type="ESA">
 				<displayName>פזטה [ESA]</displayName>
@@ -2334,7 +2271,7 @@
 				<displayName>פסטה ספרדי</displayName>
 			</currency>
 			<currency type="ETB">
-				<displayName>ביר</displayName>
+				<displayName>ביר אתיופי</displayName>
 			</currency>
 			<currency type="EUR">
 				<displayName>אירו</displayName>
@@ -2346,7 +2283,7 @@
 				<displayName>דולר פיג'י</displayName>
 			</currency>
 			<currency type="FKP">
-				<displayName>פאונד</displayName>
+				<displayName>לירה של איי פוקלנד</displayName>
 			</currency>
 			<currency type="FRF">
 				<displayName>פרנק צרפתי</displayName>
@@ -2355,13 +2292,13 @@
 				<displayName>לירה שטרלינג</displayName>
 			</currency>
 			<currency type="GEL">
-				<displayName>לרי</displayName>
+				<displayName>לרי גאורגי</displayName>
 			</currency>
 			<currency type="GIP">
 				<displayName>פאונד גיברלטר</displayName>
 			</currency>
 			<currency type="GMD">
-				<displayName>דלסי</displayName>
+				<displayName>דלאסי גמבי</displayName>
 			</currency>
 			<currency type="GNF">
 				<displayName>פרנק גינאי</displayName>
@@ -2370,7 +2307,7 @@
 				<displayName>דרכמה</displayName>
 			</currency>
 			<currency type="GTQ">
-				<displayName>קצאל</displayName>
+				<displayName>קצל גואטמלי</displayName>
 			</currency>
 			<currency type="GWP">
 				<displayName>פזו גינאי</displayName>
@@ -2382,13 +2319,13 @@
 				<displayName>דולר הונג קונגי</displayName>
 			</currency>
 			<currency type="HNL">
-				<displayName>למפירה</displayName>
+				<displayName>למפירה הונדורי</displayName>
 			</currency>
 			<currency type="HRK">
 				<displayName>קונה קרואטי</displayName>
 			</currency>
 			<currency type="HTG">
-				<displayName>גארד</displayName>
+				<displayName>גארד האיטי</displayName>
 			</currency>
 			<currency type="HUF">
 				<displayName>פורינט הונגרי</displayName>
@@ -2406,7 +2343,6 @@
 			<currency type="ILS">
 				<displayName>ש&quot;ח</displayName>
 				<displayName count="other">שקלים חדשים</displayName>
-				<symbol>₪</symbol>
 			</currency>
 			<currency type="INR">
 				<displayName>רופי הודית</displayName>
@@ -2439,7 +2375,7 @@
 				<displayName>סום קירגיזי</displayName>
 			</currency>
 			<currency type="KHR">
-				<displayName>ריל</displayName>
+				<displayName>ריל קמבודי</displayName>
 			</currency>
 			<currency type="KMF">
 				<displayName>פרנק קומורואי</displayName>
@@ -2457,10 +2393,10 @@
 				<displayName>דולר קיימאני</displayName>
 			</currency>
 			<currency type="KZT">
-				<displayName>טנגה</displayName>
+				<displayName>טנגה קזחסטני</displayName>
 			</currency>
 			<currency type="LAK">
-				<displayName>קיפ</displayName>
+				<displayName>קיפ לאי</displayName>
 			</currency>
 			<currency type="LBP">
 				<displayName>לירה לבנונית</displayName>
@@ -2472,7 +2408,7 @@
 				<displayName>דולר ליברי</displayName>
 			</currency>
 			<currency type="LSL">
-				<displayName>לוטי</displayName>
+				<displayName>לוטי לסותי</displayName>
 			</currency>
 			<currency type="LTL">
 				<displayName>ליטא ליטאי</displayName>
@@ -2481,7 +2417,7 @@
 				<displayName>פרנק לוקסמבורגי</displayName>
 			</currency>
 			<currency type="LVL">
-				<displayName>לט</displayName>
+				<displayName>לט לטבי</displayName>
 			</currency>
 			<currency type="LYD">
 				<displayName>דינר לובי</displayName>
@@ -2490,7 +2426,7 @@
 				<displayName>דירהם מרוקאי</displayName>
 			</currency>
 			<currency type="MAF">
-				<displayName>פרנק מאלי</displayName>
+				<displayName>פרנק מרוקאי</displayName>
 			</currency>
 			<currency type="MDL">
 				<displayName>ליאו מולדובני</displayName>
@@ -2499,7 +2435,7 @@
 				<displayName>פרנק מדגסקארי</displayName>
 			</currency>
 			<currency type="MMK">
-				<displayName>קיאט</displayName>
+				<displayName>קיאט מיאנמרי</displayName>
 			</currency>
 			<currency type="MNT">
 				<displayName>טוגרוג</displayName>
@@ -2514,10 +2450,10 @@
 				<displayName>רופי מאוריציני</displayName>
 			</currency>
 			<currency type="MVR">
-				<displayName>רופיה</displayName>
+				<displayName>רופיה מלדיבית</displayName>
 			</currency>
 			<currency type="MWK">
-				<displayName>קאווצ'ה</displayName>
+				<displayName>קואצ׳ה מלאוי</displayName>
 			</currency>
 			<currency type="MXN">
 				<displayName>פזו מקסיקני</displayName>
@@ -2535,13 +2471,13 @@
 				<displayName>דולר נמיבי</displayName>
 			</currency>
 			<currency type="NGN">
-				<displayName>נאירה</displayName>
+				<displayName>נאירה ניגרי</displayName>
 			</currency>
 			<currency type="NIO">
-				<displayName>קורדובה</displayName>
+				<displayName>קורדובה ניקראגי</displayName>
 			</currency>
 			<currency type="NLG">
-				<displayName>גילדר</displayName>
+				<displayName>גילדן הולנדי</displayName>
 			</currency>
 			<currency type="NOK">
 				<displayName>כתר נורבגי</displayName>
@@ -2553,13 +2489,13 @@
 				<displayName>דולר ניו זילנדי</displayName>
 			</currency>
 			<currency type="PAB">
-				<displayName>בלבואה</displayName>
+				<displayName>בלבואה פנמי</displayName>
 			</currency>
 			<currency type="PEN">
 				<displayName>סול פרואני חדש</displayName>
 			</currency>
 			<currency type="PGK">
-				<displayName>קינה</displayName>
+				<displayName>קינה של פפואה גינאה החדשה</displayName>
 			</currency>
 			<currency type="PHP">
 				<displayName>פזו פיליפיני</displayName>
@@ -2574,16 +2510,16 @@
 				<displayName>זלוטי (1950 - 1995)</displayName>
 			</currency>
 			<currency type="PTE">
-				<displayName>אסקודו</displayName>
+				<displayName>אסקודו פורטוגלי</displayName>
 			</currency>
 			<currency type="PYG">
-				<displayName>גווארני</displayName>
+				<displayName>גוורני פראגוואי</displayName>
 			</currency>
 			<currency type="QAR">
 				<displayName>ריאל קטארי</displayName>
 			</currency>
 			<currency type="ROL">
-				<displayName>לאו</displayName>
+				<displayName>לאו רומני ישן</displayName>
 			</currency>
 			<currency type="RON">
 				<displayName>לאו רומני חדש</displayName>
@@ -2631,7 +2567,7 @@
 				<displayName>קורונה סלובקי</displayName>
 			</currency>
 			<currency type="SLL">
-				<displayName>ליאון</displayName>
+				<displayName>ליאון סיירה לאוני</displayName>
 			</currency>
 			<currency type="SOS">
 				<displayName>שילינג סומאלי</displayName>
@@ -2643,7 +2579,7 @@
 				<displayName>גילדר סורינאמי</displayName>
 			</currency>
 			<currency type="STD">
-				<displayName>דוברה</displayName>
+				<displayName>דוברה של סן טומה ופרינסיפה</displayName>
 			</currency>
 			<currency type="SUR">
 				<displayName>רובל סובייטי</displayName>
@@ -2652,7 +2588,7 @@
 				<displayName>לירה סורית</displayName>
 			</currency>
 			<currency type="SZL">
-				<displayName>לילנגני</displayName>
+				<displayName>לילנגני סווזי</displayName>
 			</currency>
 			<currency type="THB">
 				<displayName>בהט תאילנדי</displayName>
@@ -2667,7 +2603,7 @@
 				<displayName>דינר טוניסאי</displayName>
 			</currency>
 			<currency type="TOP">
-				<displayName>פאנגה</displayName>
+				<displayName>פאאמגה טונגי</displayName>
 			</currency>
 			<currency type="TPE">
 				<displayName>אסקודו טימוראי</displayName>
@@ -2718,13 +2654,13 @@
 				<displayName>דונג וייטנאמי</displayName>
 			</currency>
 			<currency type="VUV">
-				<displayName>ואטו</displayName>
+				<displayName>ואטו של ונואטו</displayName>
 			</currency>
 			<currency type="WST">
-				<displayName>טלה</displayName>
+				<displayName>טאלה סמואי</displayName>
 			</currency>
 			<currency type="XAF">
-				<displayName>פרנק</displayName>
+				<displayName>פרנק CFA</displayName>
 			</currency>
 			<currency type="XAG">
 				<displayName>כסף</displayName>
@@ -2772,7 +2708,7 @@
 				<displayName>ראנד דרום אפריקאי</displayName>
 			</currency>
 			<currency type="ZMK">
-				<displayName>קוואצ'ה</displayName>
+				<displayName>קוואצ'ה זמבית</displayName>
 			</currency>
 			<currency type="ZRN">
 				<displayName>זאיר חדש</displayName>
@@ -2784,25 +2720,32 @@
 	</numbers>
 	<units>
 		<unit type="day">
-			<unitPattern count="one">{0} ימים</unitPattern>
+			<unitPattern count="one">{0} יום</unitPattern>
+			<unitPattern count="other">{0} ימים</unitPattern>
 		</unit>
 		<unit type="hour">
-			<unitPattern count="one">{0} שעות</unitPattern>
+			<unitPattern count="one">{0} שעה</unitPattern>
+			<unitPattern count="other">{0} שעות</unitPattern>
 		</unit>
 		<unit type="minute">
-			<unitPattern count="one">{0} דקות</unitPattern>
+			<unitPattern count="one">{0} דקה</unitPattern>
+			<unitPattern count="other">{0} דקות</unitPattern>
 		</unit>
 		<unit type="month">
-			<unitPattern count="one">{0} חודשים</unitPattern>
+			<unitPattern count="one">{0} חודש</unitPattern>
+			<unitPattern count="other">{0} חודשים</unitPattern>
 		</unit>
 		<unit type="second">
-			<unitPattern count="one">{0} שניות</unitPattern>
+			<unitPattern count="one">{0} שניה</unitPattern>
+			<unitPattern count="other">{0} שניות</unitPattern>
 		</unit>
 		<unit type="week">
-			<unitPattern count="one">{0} שבועות</unitPattern>
+			<unitPattern count="one">{0} שבוע</unitPattern>
+			<unitPattern count="other">{0} שבועות</unitPattern>
 		</unit>
 		<unit type="year">
-			<unitPattern count="one">{0} שנים</unitPattern>
+			<unitPattern count="one">{0} שנה</unitPattern>
+			<unitPattern count="other">{0} שנים</unitPattern>
 		</unit>
 	</units>
 	<posix>
@@ -2812,3 +2755,4 @@
 		</messages>
 	</posix>
 </ldml>
+

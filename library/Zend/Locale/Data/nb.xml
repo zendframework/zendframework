@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.96 $"/>
-		<generation date="$Date: 2008/06/26 03:47:58 $"/>
+		<version number="$Revision: 1.119 $"/>
+		<generation date="$Date: 2009/05/05 23:06:38 $"/>
 		<language type="nb"/>
 	</identity>
+	<fallback>nn da sv en</fallback>
 	<localeDisplayNames>
 		<localeDisplayPattern>
 			<localePattern>{0} ({1})</localePattern>
@@ -605,9 +606,12 @@
 			<script type="Osma">osmanya</script>
 			<script type="Perm">gammelpermisk</script>
 			<script type="Phag">phags-pa</script>
+			<script type="Phli">inskripsjonspahlavi</script>
+			<script type="Phlp">psalter pahlavi</script>
 			<script type="Phlv">pahlavi</script>
 			<script type="Phnx">fønikisk</script>
 			<script type="Plrd">pollard-fonetisk</script>
+			<script type="Prti">inskripsjonsparthisk</script>
 			<script type="Qaai">nedarvet</script>
 			<script type="Rjng">rejang</script>
 			<script type="Roro">rongorongo</script>
@@ -775,7 +779,7 @@
 			<territory type="GU">Guam</territory>
 			<territory type="GW">Guinea-Bissau</territory>
 			<territory type="GY">Guyana</territory>
-			<territory type="HK">Hongkong</territory>
+			<territory type="HK">Hongkong S.A.R. Kina</territory>
 			<territory type="HM">Heardøya og McDonaldøyene</territory>
 			<territory type="HN">Honduras</territory>
 			<territory type="HR">Kroatia</territory>
@@ -828,7 +832,7 @@
 			<territory type="ML">Mali</territory>
 			<territory type="MM">Myanmar</territory>
 			<territory type="MN">Mongolia</territory>
-			<territory type="MO">Macao</territory>
+			<territory type="MO">Macao S.A.R. Kina</territory>
 			<territory type="MP">Nord-Marianene</territory>
 			<territory type="MQ">Martinique</territory>
 			<territory type="MR">Mauritania</territory>
@@ -934,19 +938,28 @@
 		</territories>
 		<variants>
 			<variant type="1901">tradisjonell tysk ortografi</variant>
+			<variant type="1994">standardisert resisk ortografi</variant>
 			<variant type="1996">tysk ortografi fra 1996</variant>
+			<variant type="1606NICT">nyere mellomfransk til 1606</variant>
+			<variant type="1694ACAD">eldre nyfransk</variant>
 			<variant type="AREVELA">øst-armensk</variant>
 			<variant type="AREVMDA">vest-armensk</variant>
+			<variant type="BISKE">san giorgio- og biladialekt</variant>
 			<variant type="BOONT">boontling</variant>
 			<variant type="FONIPA">det internasjonale fonetiske alfabet (IPA)</variant>
 			<variant type="FONUPA">det uraliske fonetiske alfabet (UPA)</variant>
 			<variant type="MONOTON">monotonisk rettskriving</variant>
+			<variant type="NEDIS">natisonedialekt</variant>
+			<variant type="NJIVA">gniva- og njivadialekt</variant>
+			<variant type="OSOJS">oseacco- og osojanedialekt</variant>
 			<variant type="POLYTON">polytonisk rettskriving</variant>
+			<variant type="POSIX">dataspråk</variant>
 			<variant type="REVISED">revidert rettskriving</variant>
 			<variant type="ROZAJ">resisk dialekt</variant>
 			<variant type="SAAHO">saaho dialekt</variant>
 			<variant type="SCOTLAND">skotsk standard engelsk</variant>
 			<variant type="SCOUSE">scouse dialekt</variant>
+			<variant type="SOLBA">stolvizza- og solbicadialekt</variant>
 			<variant type="VALENCIA">valensisk dialekt</variant>
 		</variants>
 		<keys>
@@ -955,11 +968,11 @@
 			<key type="currency">valuta</key>
 		</keys>
 		<types>
-			<type type="big5han" key="collation">tradisjonell kinesisk sortering</type>
+			<type type="big5han" key="collation">tradisjonell kinesisk sortering - Big 5</type>
 			<type type="buddhist" key="calendar">buddhistisk kalender</type>
 			<type type="chinese" key="calendar">kinesisk kalender</type>
 			<type type="direct" key="collation">direkte sortering</type>
-			<type type="gb2312han" key="collation">forenklet kinesisk sortering</type>
+			<type type="gb2312han" key="collation">forenklet kinesisk sortering - GB2312</type>
 			<type type="gregorian" key="calendar">gregoriansk kalender</type>
 			<type type="hebrew" key="calendar">hebraisk kalender</type>
 			<type type="indian" key="calendar">indisk nasjonalkalender</type>
@@ -982,6 +995,18 @@
 			<codePattern type="territory">Område: {0}</codePattern>
 		</codePatterns>
 	</localeDisplayNames>
+	<layout>
+		<inText type="currency">lowercase-words</inText>
+		<inText type="fields">titlecase-firstword</inText>
+		<inText type="keys">titlecase-firstword</inText>
+		<inText type="languages">titlecase-firstword</inText>
+		<inText type="long">lowercase-words</inText>
+		<inText type="quarterWidth">titlecase-firstword</inText>
+		<inText type="scripts">lowercase-words</inText>
+		<inText type="territories">titlecase-firstword</inText>
+		<inText type="types">lowercase-words</inText>
+		<inText type="variants">lowercase-words</inText>
+	</layout>
 	<characters>
 		<exemplarCharacters>[a à b-e é f-o ó ò ô p-z æ ø å]</exemplarCharacters>
 		<exemplarCharacters type="auxiliary">[á ǎ ã č ç đ è ê í ń ñ ŋ š ŧ ü ž ä ö]</exemplarCharacters>
@@ -1000,17 +1025,17 @@
 				<dateFormats>
 					<dateFormatLength type="full">
 						<dateFormat>
-							<pattern>EEEE d. MMMM yyyy G</pattern>
+							<pattern>EEEE d. MMMM y G</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="long">
 						<dateFormat>
-							<pattern>d. MMMM yyyy G</pattern>
+							<pattern>d. MMMM y G</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="medium">
 						<dateFormat>
-							<pattern>d. MMM yyyy G</pattern>
+							<pattern>d. MMM y G</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="short">
@@ -1019,13 +1044,6 @@
 						</dateFormat>
 					</dateFormatLength>
 				</dateFormats>
-				<timeFormats>
-					<timeFormatLength type="full">
-						<timeFormat>
-							<pattern>HH.mm.ss v</pattern>
-						</timeFormat>
-					</timeFormatLength>
-				</timeFormats>
 			</calendar>
 			<calendar type="gregorian">
 				<months>
@@ -1133,8 +1151,8 @@
 						</quarterWidth>
 					</quarterContext>
 				</quarters>
-				<am>formiddag</am>
-				<pm>ettermiddag</pm>
+				<am>AM</am>
+				<pm>PM</pm>
 				<eras>
 					<eraNames>
 						<era type="0">f.Kr.</era>
@@ -1148,17 +1166,17 @@
 				<dateFormats>
 					<dateFormatLength type="full">
 						<dateFormat>
-							<pattern>EEEE d. MMMM yyyy</pattern>
+							<pattern>EEEE d. MMMM y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="long">
 						<dateFormat>
-							<pattern>d. MMMM yyyy</pattern>
+							<pattern>d. MMMM y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="medium">
 						<dateFormat>
-							<pattern>d. MMM yyyy</pattern>
+							<pattern>d. MMM y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="short">
@@ -1170,7 +1188,7 @@
 				<timeFormats>
 					<timeFormatLength type="full">
 						<timeFormat>
-							<pattern>'kl'. HH.mm.ss v</pattern>
+							<pattern>'kl'. HH.mm.ss zzzz</pattern>
 						</timeFormat>
 					</timeFormatLength>
 					<timeFormatLength type="long">
@@ -1190,13 +1208,8 @@
 					</timeFormatLength>
 				</timeFormats>
 				<dateTimeFormats>
-					<dateTimeFormatLength>
-						<dateTimeFormat>
-							<pattern>{1} {0}</pattern>
-						</dateTimeFormat>
-					</dateTimeFormatLength>
 					<availableFormats>
-						<dateFormatItem id="HHmm">HH.mm</dateFormatItem>
+						<dateFormatItem id="EEEd">EEE d</dateFormatItem>
 						<dateFormatItem id="HHmmss">HH.mm.ss</dateFormatItem>
 						<dateFormatItem id="Hm">HH.mm</dateFormatItem>
 						<dateFormatItem id="M">L</dateFormatItem>
@@ -1209,21 +1222,22 @@
 						<dateFormatItem id="MMdd">dd.MM</dateFormatItem>
 						<dateFormatItem id="Md">d.M.</dateFormatItem>
 						<dateFormatItem id="d">d.</dateFormatItem>
-						<dateFormatItem id="mmss">mm.ss</dateFormatItem>
+						<dateFormatItem id="hm">h.mm a</dateFormatItem>
+						<dateFormatItem id="hms">h.mm.ss a</dateFormatItem>
 						<dateFormatItem id="ms">mm.ss</dateFormatItem>
-						<dateFormatItem id="y">yyyy</dateFormatItem>
+						<dateFormatItem id="y">y</dateFormatItem>
 						<dateFormatItem id="yM">M yyyy</dateFormatItem>
 						<dateFormatItem id="yMEd">EEE d.M.yyyy</dateFormatItem>
-						<dateFormatItem id="yMMM">MMM yyyy</dateFormatItem>
-						<dateFormatItem id="yMMMEd">EEE d. MMM yyyy</dateFormatItem>
-						<dateFormatItem id="yMMMM">MMMM yyyy</dateFormatItem>
+						<dateFormatItem id="yMMM">MMM y</dateFormatItem>
+						<dateFormatItem id="yMMMEd">EEE d. MMM y</dateFormatItem>
+						<dateFormatItem id="yMMMM">MMMM y</dateFormatItem>
 						<dateFormatItem id="yQ">Q yyyy</dateFormatItem>
-						<dateFormatItem id="yQQQ">QQQ yyyy</dateFormatItem>
+						<dateFormatItem id="yQQQ">QQQ y</dateFormatItem>
 						<dateFormatItem id="yyMM">MM.yy</dateFormatItem>
 						<dateFormatItem id="yyMMM">MMM yy</dateFormatItem>
 						<dateFormatItem id="yyQ">Q yy</dateFormatItem>
 						<dateFormatItem id="yyQQQQ">QQQQ yy</dateFormatItem>
-						<dateFormatItem id="yyyyMMMM">MMMM yyyy</dateFormatItem>
+						<dateFormatItem id="yyyyMMMM">MMMM y</dateFormatItem>
 					</availableFormats>
 					<intervalFormats>
 						<intervalFormatFallback>{0}–{1}</intervalFormatFallback>
@@ -1286,22 +1300,22 @@
 							<greatestDifference id="y">E dd.MM.yy–E dd.MM.yy</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMM">
-							<greatestDifference id="M">MMM–MMM yyyy</greatestDifference>
-							<greatestDifference id="y">MMM yyyy–MMM yyyy</greatestDifference>
+							<greatestDifference id="M">MMM–MMM y</greatestDifference>
+							<greatestDifference id="y">MMM y–MMM y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMEd">
-							<greatestDifference id="M">E d. MMM–E d. MMM yyyy</greatestDifference>
-							<greatestDifference id="d">E d.–E d. MMM yyyy</greatestDifference>
-							<greatestDifference id="y">E d. MMM yyyy–E d. MMM yyyy</greatestDifference>
+							<greatestDifference id="M">E d. MMM–E d. MMM y</greatestDifference>
+							<greatestDifference id="d">E d.–E d. MMM y</greatestDifference>
+							<greatestDifference id="y">E d. MMM y–E d. MMM y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMM">
 							<greatestDifference id="M">MM–MM yyyy</greatestDifference>
 							<greatestDifference id="y">MM yyyy–MM yyyy</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMd">
-							<greatestDifference id="M">d. MMM–d. MMM yyyy</greatestDifference>
-							<greatestDifference id="d">d.–d. MMM yyyy</greatestDifference>
-							<greatestDifference id="y">d. MMM yyyy–d. MMM yyyy</greatestDifference>
+							<greatestDifference id="M">d. MMM–d. MMM y</greatestDifference>
+							<greatestDifference id="d">d.–d. MMM y</greatestDifference>
+							<greatestDifference id="y">d. MMM y–d. MMM y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMd">
 							<greatestDifference id="M">dd.MM.yy–dd.MM.yy</greatestDifference>
@@ -1325,13 +1339,13 @@
 					</field>
 					<field type="day">
 						<displayName>dag</displayName>
+						<relative type="-3">for tre dager siden</relative>
+						<relative type="-2">i forgårs</relative>
+						<relative type="-1">i går</relative>
 						<relative type="0">i dag</relative>
 						<relative type="1">i morgen</relative>
 						<relative type="2">i overmorgen</relative>
 						<relative type="3">om tre dager</relative>
-						<relative type="-1">i går</relative>
-						<relative type="-2">i forgårs</relative>
-						<relative type="-3">for tre dager siden</relative>
 					</field>
 					<field type="weekday">
 						<displayName>ukedag</displayName>
@@ -1574,6 +1588,7 @@
 			</zone>
 			<metazone type="Acre">
 				<long>
+					<standard>Acre-tid</standard>
 					<daylight>Acre sommertid</daylight>
 				</long>
 			</metazone>
@@ -1600,8 +1615,34 @@
 			</metazone>
 			<metazone type="Amazon">
 				<long>
+					<standard>Amazonas-tid</standard>
 					<daylight>Amazonas sommertid</daylight>
 				</long>
+			</metazone>
+			<metazone type="America_Central">
+				<long>
+					<generic>normaltid</generic>
+				</long>
+				<short>
+					<generic>CT</generic>
+					<daylight>CDT</daylight>
+				</short>
+			</metazone>
+			<metazone type="America_Eastern">
+				<short>
+					<daylight>EDT</daylight>
+				</short>
+			</metazone>
+			<metazone type="America_Mountain">
+				<short>
+					<standard>MST</standard>
+				</short>
+			</metazone>
+			<metazone type="America_Pacific">
+				<short>
+					<standard>PST</standard>
+					<daylight>PDT</daylight>
+				</short>
 			</metazone>
 			<metazone type="Arabian">
 				<long>
@@ -1615,12 +1656,22 @@
 					<daylight>ADT (arabisk)</daylight>
 				</short>
 			</metazone>
+			<metazone type="Atlantic">
+				<short>
+					<generic>AT</generic>
+					<standard>AST</standard>
+					<daylight>ADT</daylight>
+				</short>
+			</metazone>
 			<metazone type="Australia_Central">
 				<long>
 					<generic>sentralaustralsk tid</generic>
 					<standard>sentralaustralsk standardtid</standard>
 					<daylight>sentralaustralsk sommertid</daylight>
 				</long>
+				<short>
+					<generic>ACT</generic>
+				</short>
 			</metazone>
 			<metazone type="Australia_CentralWestern">
 				<long>
@@ -1635,6 +1686,9 @@
 					<standard>østaustralsk standardtid</standard>
 					<daylight>østaustralsk sommertid</daylight>
 				</long>
+				<short>
+					<generic>AET</generic>
+				</short>
 			</metazone>
 			<metazone type="Australia_Western">
 				<long>
@@ -1642,9 +1696,13 @@
 					<standard>vestaustralsk standardtid</standard>
 					<daylight>vestaustralsk sommertid</daylight>
 				</long>
+				<short>
+					<generic>AWT</generic>
+				</short>
 			</metazone>
 			<metazone type="Brasilia">
 				<long>
+					<standard>Brasilia-tid</standard>
 					<daylight>Brasilia sommertid</daylight>
 				</long>
 			</metazone>
@@ -1661,23 +1719,38 @@
 					<standard>sentraleuropeisk normaltid</standard>
 					<daylight>sentraleuropeisk sommertid</daylight>
 				</long>
+				<short>
+					<standard>CET</standard>
+					<daylight>CEST</daylight>
+				</short>
 			</metazone>
 			<metazone type="Europe_Eastern">
 				<long>
 					<standard>østeuropeisk normaltid</standard>
 					<daylight>østeuropeisk sommertid</daylight>
 				</long>
+				<short>
+					<standard>EET</standard>
+					<daylight>EEST</daylight>
+				</short>
 			</metazone>
 			<metazone type="Europe_Western">
 				<long>
 					<standard>vesteuropeisk tid</standard>
 					<daylight>vesteuropeisk sommertid</daylight>
 				</long>
+				<short>
+					<standard>WET</standard>
+					<daylight>WEST</daylight>
+				</short>
 			</metazone>
 			<metazone type="GMT">
 				<long>
 					<standard>Greenwich middeltid</standard>
 				</long>
+				<short>
+					<standard>GMT</standard>
+				</short>
 			</metazone>
 			<metazone type="Hong_Kong">
 				<long>
@@ -1741,6 +1814,9 @@
 					<standard>newzealandsk standardtid</standard>
 					<daylight>newzealandsk sommertid</daylight>
 				</long>
+				<short>
+					<generic>NZT</generic>
+				</short>
 			</metazone>
 		</timeZoneNames>
 	</dates>
@@ -1792,6 +1868,7 @@
 		<currencies>
 			<currency type="ADP">
 				<displayName>andorranske pesetas</displayName>
+				<displayName count="one">andorransk pesetas</displayName>
 			</currency>
 			<currency type="AED">
 				<displayName>UAE dirham</displayName>
@@ -1801,241 +1878,369 @@
 			</currency>
 			<currency type="AFN">
 				<displayName>afghani</displayName>
+				<symbol>AFN</symbol>
 			</currency>
 			<currency type="ALL">
 				<displayName>albanske lek</displayName>
+				<displayName count="one">albansk lek</displayName>
 			</currency>
 			<currency type="AMD">
 				<displayName>armenske dram</displayName>
+				<displayName count="one">armensk dram</displayName>
 			</currency>
 			<currency type="ANG">
 				<displayName>nederlandske antillegylden</displayName>
+				<displayName count="one">nederlandsk antillegylden</displayName>
+				<symbol>ANG</symbol>
 			</currency>
 			<currency type="AOA">
 				<displayName>angolanske kwanza</displayName>
+				<displayName count="one">angolansk kwanza</displayName>
+				<symbol>AOA</symbol>
 			</currency>
 			<currency type="AOK">
 				<displayName>angolanske kwanza (1977-1990)</displayName>
+				<displayName count="one">angolansk kwanza (1977-1990)</displayName>
 			</currency>
 			<currency type="AON">
 				<displayName>angolanske nye kwanza (1990-2000)</displayName>
+				<displayName count="one">angolansk ny kwanza</displayName>
 			</currency>
 			<currency type="AOR">
 				<displayName>angolanske kwanza reajustado (1995-1999)</displayName>
+				<displayName count="one">angolansk kwanza reajustado (1995-1999)</displayName>
 			</currency>
 			<currency type="ARA">
 				<displayName>argentinske australer</displayName>
+				<displayName count="one">argentinsk austral</displayName>
+			</currency>
+			<currency type="ARL">
+				<symbol>ARL</symbol>
+			</currency>
+			<currency type="ARM">
+				<symbol>ARM</symbol>
 			</currency>
 			<currency type="ARP">
 				<displayName>argentinske pesos (1983-1985)</displayName>
+				<displayName count="one">argentinsk pesos (1983-1985)</displayName>
 			</currency>
 			<currency type="ARS">
 				<displayName>argentinske pesos</displayName>
+				<displayName count="one">argentinsk pesos</displayName>
+				<symbol>ARS</symbol>
 			</currency>
 			<currency type="ATS">
 				<displayName>østerrikske shilling</displayName>
+				<displayName count="one">østerriksk schilling</displayName>
 				<displayName count="other">østerrikske schilling</displayName>
 			</currency>
 			<currency type="AUD">
 				<displayName>australske dollar</displayName>
+				<displayName count="one">australsk dollar</displayName>
+				<symbol>AUD</symbol>
 			</currency>
 			<currency type="AWG">
 				<displayName>arubiske gylden</displayName>
+				<displayName count="one">arubisk gylden</displayName>
+				<symbol>AWG</symbol>
 			</currency>
 			<currency type="AZM">
 				<displayName>aserbajdsjanske manat (1993-2006)</displayName>
+				<displayName count="one">aserbajdsjansk manat (1993-2006)</displayName>
 			</currency>
 			<currency type="AZN">
 				<displayName>aserbajdsjanske manat</displayName>
+				<displayName count="one">aserbajdsjansk manat</displayName>
+				<symbol>AZN</symbol>
 			</currency>
 			<currency type="BAD">
 				<displayName>bosnisk-hercegovinske dinarer</displayName>
+				<displayName count="one">bosnisk-hercegovinsk dinar</displayName>
 			</currency>
 			<currency type="BAM">
 				<displayName>bosnisk-hercegovinske mark (konvertible)</displayName>
+				<displayName count="one">bosnisk-hercegovinsk mark (konvertibel)</displayName>
+				<symbol>BAM</symbol>
 			</currency>
 			<currency type="BBD">
 				<displayName>barbadiske dollar</displayName>
+				<displayName count="one">barbadisk dollar</displayName>
+				<symbol>BBD</symbol>
 			</currency>
 			<currency type="BDT">
 				<displayName>bangladeshiske taka</displayName>
+				<displayName count="one">bangladeshisk taka</displayName>
+				<symbol>BDT</symbol>
 			</currency>
 			<currency type="BEC">
 				<displayName>belgiske franc (konvertible)</displayName>
+				<displayName count="one">belgisk franc (konvertibel)</displayName>
 			</currency>
 			<currency type="BEF">
 				<displayName>belgiske franc</displayName>
+				<displayName count="one">belgisk franc</displayName>
 			</currency>
 			<currency type="BEL">
 				<displayName>belgiske franc (finansielle)</displayName>
+				<displayName count="one">belgisk franc (finansiell)</displayName>
 			</currency>
 			<currency type="BGL">
 				<displayName>bulgarske lev (hard)</displayName>
-				<symbol>lev</symbol>
+				<displayName count="one">bulgarsk lev (hard)</displayName>
 			</currency>
 			<currency type="BGN">
 				<displayName>bulgarske lev</displayName>
+				<displayName count="one">bulgarsk lev</displayName>
 			</currency>
 			<currency type="BHD">
 				<displayName>bahrainske dinarer</displayName>
+				<displayName count="one">bahrainsk dinar</displayName>
+				<symbol>BHD</symbol>
 			</currency>
 			<currency type="BIF">
 				<displayName>burundiske franc</displayName>
+				<displayName count="one">burundisk franc</displayName>
+				<symbol>BIF</symbol>
 			</currency>
 			<currency type="BMD">
 				<displayName>bermudiske dollar</displayName>
+				<displayName count="one">bermudisk dollar</displayName>
+				<symbol>BMD</symbol>
 			</currency>
 			<currency type="BND">
 				<displayName>bruneiske dollar</displayName>
+				<displayName count="one">bruneisk dollar</displayName>
+				<symbol>BND</symbol>
 			</currency>
 			<currency type="BOB">
 				<displayName>boliviano</displayName>
+				<symbol>BOB</symbol>
 			</currency>
 			<currency type="BOP">
 				<displayName>bolivianske pesos</displayName>
+				<displayName count="one">boliviansk pesos</displayName>
+				<symbol>BOP</symbol>
 			</currency>
 			<currency type="BOV">
 				<displayName>bolivianske mvdol</displayName>
-				<displayName count="one">boliviansk mvdol</displayName>
+				<displayName count="one">BOV</displayName>
 			</currency>
 			<currency type="BRB">
 				<displayName>brasilianske cruzeiro novo (1967-1986)</displayName>
+				<displayName count="one">brasiliansk cruzeiro novo (1967-1986)</displayName>
+				<symbol>BRB</symbol>
 			</currency>
 			<currency type="BRC">
 				<displayName>brasilianske cruzado</displayName>
+				<displayName count="one">brasiliansk cruzado</displayName>
+				<symbol>BRC</symbol>
 			</currency>
 			<currency type="BRE">
 				<displayName>brasilianske cruzeiro (1990-1993)</displayName>
+				<displayName count="one">brasiliansk cruzeiro (1990-1993)</displayName>
+				<symbol>BRE</symbol>
 			</currency>
 			<currency type="BRL">
 				<displayName>brasilianske realer</displayName>
+				<displayName count="one">brasiliansk real</displayName>
 				<symbol>BRL</symbol>
 			</currency>
 			<currency type="BRN">
 				<displayName>brasilianske cruzado novo</displayName>
+				<displayName count="one">brasiliansk cruzado novo</displayName>
 			</currency>
 			<currency type="BRR">
 				<displayName>brasilianske cruzeiro</displayName>
+				<displayName count="one">brasiliansk cruzeiro</displayName>
+			</currency>
+			<currency type="BRZ">
+				<symbol>BRZ</symbol>
 			</currency>
 			<currency type="BSD">
 				<displayName>bahamske dollar</displayName>
+				<displayName count="one">bahamsk dollar</displayName>
+				<symbol>BSD</symbol>
 			</currency>
 			<currency type="BTN">
 				<displayName>bhutanske ngultrum</displayName>
+				<displayName count="one">bhutansk ngultrum</displayName>
+				<symbol>BTN</symbol>
 			</currency>
 			<currency type="BUK">
 				<displayName>burmesiske kyat</displayName>
+				<displayName count="one">burmesisk kyat</displayName>
 			</currency>
 			<currency type="BWP">
 				<displayName>botswanske pula</displayName>
+				<displayName count="one">botswansk pula</displayName>
 			</currency>
 			<currency type="BYB">
 				<displayName>hviterussiske nye rubler (1994-1999)</displayName>
+				<displayName count="one">hviterussisk ny rubel (1994-1999)</displayName>
 			</currency>
 			<currency type="BYR">
 				<displayName>hviterussiske rubler</displayName>
+				<displayName count="one">hviterussisk rubel</displayName>
 			</currency>
 			<currency type="BZD">
 				<displayName>beliziske dollar</displayName>
+				<displayName count="one">belizisk dollar</displayName>
+				<symbol>BZD</symbol>
 			</currency>
 			<currency type="CAD">
 				<displayName>kanadiske dollar</displayName>
+				<displayName count="one">kanadisk dollar</displayName>
+				<symbol>CAD</symbol>
 			</currency>
 			<currency type="CDF">
 				<displayName>kongolesiske franc (congolais)</displayName>
+				<displayName count="one">kongolesisk franc (congolais)</displayName>
 			</currency>
 			<currency type="CHE">
 				<displayName>WIR euro</displayName>
 			</currency>
 			<currency type="CHF">
 				<displayName>sveitsiske franc</displayName>
+				<displayName count="one">sveitsisk franc</displayName>
+				<symbol>CHF</symbol>
 			</currency>
 			<currency type="CHW">
 				<displayName>WIR franc</displayName>
 			</currency>
+			<currency type="CLE">
+				<symbol>CLE</symbol>
+			</currency>
 			<currency type="CLF">
 				<displayName>chilenske unidades de fomento</displayName>
+				<displayName count="one">chilensk unidades de fomento</displayName>
 			</currency>
 			<currency type="CLP">
 				<displayName>chilenske pesos</displayName>
+				<displayName count="one">chilensk pesos</displayName>
+				<symbol>CLP</symbol>
 			</currency>
 			<currency type="CNY">
 				<displayName>kinesiske yuan renminbi</displayName>
+				<displayName count="one">kinesisk yuan renminbi</displayName>
+				<symbol>CNY</symbol>
 			</currency>
 			<currency type="COP">
 				<displayName>colombianske pesos</displayName>
+				<displayName count="one">colombiansk pesos</displayName>
+				<symbol>COP</symbol>
 			</currency>
 			<currency type="COU">
 				<displayName>unidad de valor real</displayName>
 			</currency>
 			<currency type="CRC">
 				<displayName>costaricanske colon</displayName>
+				<displayName count="one">costaricansk colon</displayName>
+				<symbol>CRC</symbol>
 			</currency>
 			<currency type="CSD">
 				<displayName>gamle serbiske dinarer</displayName>
+				<displayName count="one">gammel serbisk dinar</displayName>
+				<displayName count="other">gamle serbiske dinarer</displayName>
 			</currency>
 			<currency type="CSK">
 				<displayName>tsjekkoslovakiske koruna (hard)</displayName>
+				<displayName count="one">tsjekkoslovakisk koruna (hard)</displayName>
+			</currency>
+			<currency type="CUC">
+				<symbol>CUC</symbol>
 			</currency>
 			<currency type="CUP">
 				<displayName>kubanske pesos</displayName>
+				<displayName count="one">kubansk pesos</displayName>
+				<symbol>CUP</symbol>
 			</currency>
 			<currency type="CVE">
 				<displayName>kappverdiske escudo</displayName>
+				<displayName count="one">kappverdisk escudo</displayName>
+				<displayName count="other">kappverdiske escudos</displayName>
+				<symbol>CVE</symbol>
 			</currency>
 			<currency type="CYP">
 				<displayName>kypriotiske pund</displayName>
+				<displayName count="one">kypriotisk pund</displayName>
+				<symbol>CYP</symbol>
 			</currency>
 			<currency type="CZK">
 				<displayName>tsjekkiske koruna</displayName>
+				<displayName count="one">tsjekkisk koruna</displayName>
+				<symbol>CZK</symbol>
 			</currency>
 			<currency type="DDM">
 				<displayName>østtyske ostmark</displayName>
+				<displayName count="one">østtysk ostmark</displayName>
 			</currency>
 			<currency type="DEM">
 				<displayName>tyske mark</displayName>
+				<displayName count="one">tysk mark</displayName>
 			</currency>
 			<currency type="DJF">
 				<displayName>djiboutiske franc</displayName>
+				<displayName count="one">djiboutisk franc</displayName>
+				<symbol>DJF</symbol>
 			</currency>
 			<currency type="DKK">
 				<displayName>danske kroner</displayName>
+				<displayName count="one">dansk krone</displayName>
+				<displayName count="other">danske kroner</displayName>
+				<symbol>DKK</symbol>
 			</currency>
 			<currency type="DOP">
 				<displayName>dominikanske pesos</displayName>
+				<displayName count="one">dominikansk pesos</displayName>
+				<displayName count="other">dominikanske pesos</displayName>
+				<symbol>DOP</symbol>
 			</currency>
 			<currency type="DZD">
 				<displayName>algeriske dinarer</displayName>
+				<displayName count="one">algerisk dinar</displayName>
+				<displayName count="other">algeriske dinarer</displayName>
+				<symbol>DZD</symbol>
 			</currency>
 			<currency type="ECS">
 				<displayName>ecuadorianske sucre</displayName>
+				<displayName count="one">ecuadoriansk sucre</displayName>
+				<displayName count="other">ecuadorianske sucre</displayName>
 			</currency>
 			<currency type="ECV">
 				<displayName>ecuadorianske unidad de valor constante (UVC)</displayName>
+				<displayName count="one">ecuadoriansk unidad de valor constante (UVC)</displayName>
 			</currency>
 			<currency type="EEK">
 				<displayName>estiske kroon</displayName>
+				<displayName count="one">estisk kroon</displayName>
+				<symbol>EEK</symbol>
 			</currency>
 			<currency type="EGP">
 				<displayName>egyptiske pund</displayName>
-			</currency>
-			<currency type="EQE">
-				<displayName>ekwele</displayName>
+				<displayName count="one">egyptisk pund</displayName>
+				<symbol>EGP</symbol>
 			</currency>
 			<currency type="ERN">
 				<displayName>eritreiske nakfa</displayName>
+				<displayName count="one">eritreisk nakfa</displayName>
+				<symbol>ERN</symbol>
 			</currency>
 			<currency type="ESA">
 				<displayName>spanske peseta (A-konto)</displayName>
+				<displayName count="one">spansk peseta (A-konto)</displayName>
 			</currency>
 			<currency type="ESB">
 				<displayName>spanske peseta (konvertibel konto)</displayName>
+				<displayName count="one">spansk peseta (konvertibel konto)</displayName>
 			</currency>
 			<currency type="ESP">
 				<displayName>spanske peseta</displayName>
+				<displayName count="one">spansk peseta</displayName>
 			</currency>
 			<currency type="ETB">
 				<displayName>etiopiske birr</displayName>
+				<displayName count="one">etiopisk birr</displayName>
+				<symbol>ETB</symbol>
 			</currency>
 			<currency type="EUR">
 				<displayName>euro</displayName>
@@ -2043,58 +2248,86 @@
 			</currency>
 			<currency type="FIM">
 				<displayName>finske mark</displayName>
+				<displayName count="one">finsk mark</displayName>
 			</currency>
 			<currency type="FJD">
 				<displayName>fijianske dollar</displayName>
+				<displayName count="one">fijiansk dollar</displayName>
+				<symbol>FJD</symbol>
 			</currency>
 			<currency type="FKP">
 				<displayName>Falkland-pund</displayName>
+				<symbol>FKP</symbol>
 			</currency>
 			<currency type="FRF">
 				<displayName>franske franc</displayName>
+				<displayName count="one">fransk franc</displayName>
 			</currency>
 			<currency type="GBP">
 				<displayName>britiske pund sterling</displayName>
+				<displayName count="one">britisk pund sterling</displayName>
 				<symbol>GBP</symbol>
 			</currency>
 			<currency type="GEK">
 				<displayName>georgiske kupon larit</displayName>
+				<displayName count="one">georgisk kupon larit</displayName>
 			</currency>
 			<currency type="GEL">
 				<displayName>georgiske lari</displayName>
+				<displayName count="one">georgisk lari</displayName>
 			</currency>
 			<currency type="GHC">
-				<displayName>ghanesiske cedi</displayName>
+				<displayName>ghanesisk cedi (1979-2007)</displayName>
+				<displayName count="one">ghanesisk cedi (GHC)</displayName>
+				<displayName count="other">ghanesiske cedi (GHC)</displayName>
+				<symbol>GHC</symbol>
+			</currency>
+			<currency type="GHS">
+				<displayName>ghanesisk cedi</displayName>
+				<displayName count="one">ghanesisk cedi</displayName>
+				<displayName count="other">ghanesiske cedi</displayName>
+				<symbol>GHS</symbol>
 			</currency>
 			<currency type="GIP">
 				<displayName>gibraltarske pund</displayName>
+				<displayName count="one">gibraltarsk pund</displayName>
+				<symbol>GIP</symbol>
 			</currency>
 			<currency type="GMD">
 				<displayName>gambiske dalasi</displayName>
+				<displayName count="one">gambisk dalasi</displayName>
 			</currency>
 			<currency type="GNF">
 				<displayName>guineanske franc</displayName>
+				<displayName count="one">guineansk franc</displayName>
+				<symbol>GNF</symbol>
 			</currency>
 			<currency type="GNS">
 				<displayName>guineanske syli</displayName>
+				<displayName count="one">guineansk syli</displayName>
 			</currency>
 			<currency type="GQE">
 				<displayName>ekvatorialguineanske ekwele guineana</displayName>
+				<displayName count="one">ekvatorialguineansk ekwele guineana</displayName>
 			</currency>
 			<currency type="GRD">
 				<displayName>greske drakmer</displayName>
+				<displayName count="one">gresk drakme</displayName>
 			</currency>
 			<currency type="GTQ">
 				<displayName>guatemalanske quetzal</displayName>
+				<displayName count="one">guatemalansk quetzal</displayName>
 			</currency>
 			<currency type="GWE">
 				<displayName>portugisiske guinea escudo</displayName>
+				<displayName count="one">portugisisk guinea escudo</displayName>
 			</currency>
 			<currency type="GWP">
 				<displayName>Guinea-Bissau-pesos</displayName>
 			</currency>
 			<currency type="GYD">
 				<displayName>guyanske dollar</displayName>
+				<displayName count="one">guyansk dollar</displayName>
 			</currency>
 			<currency type="HKD">
 				<displayName>Hongkong-dollar</displayName>
@@ -2104,358 +2337,506 @@
 			</currency>
 			<currency type="HRD">
 				<displayName>kroatiske dinarer</displayName>
+				<displayName count="one">kroatisk dinar</displayName>
 			</currency>
 			<currency type="HRK">
 				<displayName>kroatiske kuna</displayName>
+				<displayName count="one">kroatisk kuna</displayName>
 			</currency>
 			<currency type="HTG">
 				<displayName>haitiske gourde</displayName>
+				<displayName count="one">haitisk gourde</displayName>
 			</currency>
 			<currency type="HUF">
 				<displayName>ungarske forinter</displayName>
+				<displayName count="one">ungarsk forint</displayName>
 			</currency>
 			<currency type="IDR">
 				<displayName>indonesiske rupier</displayName>
+				<displayName count="one">indonesisk rupi</displayName>
 			</currency>
 			<currency type="IEP">
 				<displayName>irske pund</displayName>
+				<displayName count="one">irsk pund</displayName>
+				<symbol>IEP</symbol>
 			</currency>
 			<currency type="ILP">
 				<displayName>israelske pund</displayName>
+				<displayName count="one">israelsk pund</displayName>
+			</currency>
+			<currency type="ILR">
+				<displayName>israelsk gammel shekel</displayName>
+				<displayName count="one">israelsk gammel shekel</displayName>
+				<displayName count="other">israelske gamle shekler</displayName>
 			</currency>
 			<currency type="ILS">
 				<displayName>israelske nye shekler</displayName>
+				<displayName count="one">israelsk ny shekel</displayName>
 			</currency>
 			<currency type="INR">
 				<displayName>indiske rupier</displayName>
+				<displayName count="one">indisk rupi</displayName>
 				<symbol>INR</symbol>
 			</currency>
 			<currency type="IQD">
 				<displayName>irakske dinarer</displayName>
+				<displayName count="one">iraksk dinar</displayName>
 			</currency>
 			<currency type="IRR">
 				<displayName>iranske rialer</displayName>
+				<displayName count="one">iransk rial</displayName>
+			</currency>
+			<currency type="ISJ">
+				<displayName>gammel islandsk krone</displayName>
+				<displayName count="one">gammel islandsk krone</displayName>
+				<displayName count="other">gamle islandske kroner</displayName>
 			</currency>
 			<currency type="ISK">
 				<displayName>islandske kroner</displayName>
+				<displayName count="one">islandsk krone</displayName>
 			</currency>
 			<currency type="ITL">
 				<displayName>italienske lire</displayName>
+				<displayName count="one">italiensk lire</displayName>
 				<symbol>ITL</symbol>
 			</currency>
 			<currency type="JMD">
 				<displayName>jamaikanske dollar</displayName>
+				<displayName count="one">jamaikansk dollar</displayName>
 			</currency>
 			<currency type="JOD">
 				<displayName>jordanske dinarer</displayName>
+				<displayName count="one">jordansk dinar</displayName>
+				<symbol>JOD</symbol>
 			</currency>
 			<currency type="JPY">
 				<displayName>japanske yen</displayName>
+				<displayName count="one">japansk yen</displayName>
 				<symbol>JPY</symbol>
 			</currency>
 			<currency type="KES">
 				<displayName>kenyanske shilling</displayName>
+				<displayName count="one">kenyansk shilling</displayName>
 			</currency>
 			<currency type="KGS">
 				<displayName>kirgisiske som</displayName>
+				<displayName count="one">kirgisisk som</displayName>
 			</currency>
 			<currency type="KHR">
 				<displayName>kambodsjanske riel</displayName>
+				<displayName count="one">kambodsjansk riel</displayName>
 			</currency>
 			<currency type="KMF">
 				<displayName>komoriske franc</displayName>
+				<displayName count="one">komorisk franc</displayName>
 			</currency>
 			<currency type="KPW">
 				<displayName>nordkoreanske won</displayName>
+				<displayName count="one">nordkoreansk won</displayName>
 			</currency>
 			<currency type="KRW">
 				<displayName>sørkoreanske won</displayName>
+				<displayName count="one">sørkoreansk won</displayName>
 			</currency>
 			<currency type="KWD">
 				<displayName>kuwaitiske dinarer</displayName>
+				<displayName count="one">kuwaitisk dinar</displayName>
 			</currency>
 			<currency type="KYD">
 				<displayName>caymanske dollar</displayName>
+				<displayName count="one">caymansk dollar</displayName>
 			</currency>
 			<currency type="KZT">
 				<displayName>kasakhstanske tenge</displayName>
+				<displayName count="one">kasakhstansk tenge</displayName>
 			</currency>
 			<currency type="LAK">
 				<displayName>laotiske kip</displayName>
+				<displayName count="one">laotisk kip</displayName>
 			</currency>
 			<currency type="LBP">
 				<displayName>libanesiske pund</displayName>
+				<displayName count="one">libanesisk pund</displayName>
 			</currency>
 			<currency type="LKR">
 				<displayName>srilankiske rupier</displayName>
+				<displayName count="one">srilankisk rupi</displayName>
+				<symbol>LKR</symbol>
 			</currency>
 			<currency type="LRD">
 				<displayName>liberiske dollar</displayName>
+				<displayName count="one">liberisk dollar</displayName>
 			</currency>
 			<currency type="LSL">
 				<displayName>lesothiske loti</displayName>
-			</currency>
-			<currency type="LSM">
-				<displayName>maloti</displayName>
+				<displayName count="one">lesothisk loti</displayName>
 			</currency>
 			<currency type="LTL">
 				<displayName>litauiske lita</displayName>
+				<displayName count="one">litauisk lita</displayName>
+				<symbol>LTL</symbol>
 			</currency>
 			<currency type="LTT">
 				<displayName>litauiske talonas</displayName>
+				<displayName count="one">litauisk talonas</displayName>
 			</currency>
 			<currency type="LUC">
 				<displayName>luxemburgske konvertible franc</displayName>
+				<displayName count="one">luxemburgsk konvertibel franc</displayName>
 			</currency>
 			<currency type="LUF">
 				<displayName>luxemburgske franc</displayName>
+				<displayName count="one">luxemburgsk franc</displayName>
 			</currency>
 			<currency type="LUL">
 				<displayName>luxemburgske finansielle franc</displayName>
+				<displayName count="one">luxemburgsk finansiell franc</displayName>
 			</currency>
 			<currency type="LVL">
 				<displayName>latviske lats</displayName>
+				<displayName count="one">latvisk lats</displayName>
 			</currency>
 			<currency type="LVR">
 				<displayName>latviske rubler</displayName>
+				<displayName count="one">latvisk rubel</displayName>
 			</currency>
 			<currency type="LYD">
 				<displayName>libyske dinarer</displayName>
+				<displayName count="one">libysk dinar</displayName>
+				<symbol>LYD</symbol>
 			</currency>
 			<currency type="MAD">
 				<displayName>marokkanske dirham</displayName>
+				<displayName count="one">marokkansk dirham</displayName>
 			</currency>
 			<currency type="MAF">
 				<displayName>marokkanske franc</displayName>
+				<displayName count="one">marokkansk franc</displayName>
 			</currency>
 			<currency type="MDL">
 				<displayName>moldovske leu</displayName>
+				<displayName count="one">moldovsk leu</displayName>
 			</currency>
 			<currency type="MGA">
 				<displayName>madagassiske ariary</displayName>
+				<displayName count="one">madagassisk ariary</displayName>
 			</currency>
 			<currency type="MGF">
 				<displayName>madagassiske franc</displayName>
+				<displayName count="one">madagassisk franc</displayName>
 			</currency>
 			<currency type="MKD">
 				<displayName>makedonske denarer</displayName>
+				<displayName count="one">makedonsk denar</displayName>
 			</currency>
 			<currency type="MLF">
 				<displayName>maliske franc</displayName>
+				<displayName count="one">malisk franc</displayName>
 			</currency>
 			<currency type="MMK">
 				<displayName>myanmarske kyat</displayName>
+				<displayName count="one">myanmarsk kyat</displayName>
 			</currency>
 			<currency type="MNT">
 				<displayName>mongolske tugrik</displayName>
+				<displayName count="one">mongolsk tugrik</displayName>
+				<symbol>MNT</symbol>
 			</currency>
 			<currency type="MOP">
 				<displayName>makaoske pataca</displayName>
+				<displayName count="one">makaosk pataca</displayName>
 			</currency>
 			<currency type="MRO">
 				<displayName>mauritanske ouguiya</displayName>
+				<displayName count="one">mauritansk ouguiya</displayName>
 			</currency>
 			<currency type="MTL">
 				<displayName>maltesiske lira</displayName>
+				<displayName count="one">maltesisk lira</displayName>
 			</currency>
 			<currency type="MTP">
 				<displayName>maltesiske pund</displayName>
+				<displayName count="one">maltesisk pund</displayName>
+				<symbol>MTP</symbol>
 			</currency>
 			<currency type="MUR">
 				<displayName>mauritiske rupier</displayName>
+				<displayName count="one">mauritisk rupi</displayName>
 			</currency>
 			<currency type="MVR">
 				<displayName>maldiviske rufiyaa</displayName>
+				<displayName count="one">maldivisk rufiyaa</displayName>
 			</currency>
 			<currency type="MWK">
 				<displayName>malawiske kwacha</displayName>
+				<displayName count="one">malawisk kwacha</displayName>
 			</currency>
 			<currency type="MXN">
 				<displayName>meksikanske pesos</displayName>
+				<displayName count="one">meksikansk pesos</displayName>
 			</currency>
 			<currency type="MXP">
 				<displayName>meksikanske sølvpesos (1861-1992)</displayName>
+				<displayName count="one">meksikansk sølvpesos (MXP)</displayName>
+				<displayName count="other">meksikanske sølvpesos (MXP)</displayName>
+				<symbol>MXP</symbol>
 			</currency>
 			<currency type="MXV">
 				<displayName>meksikanske unidad de inversion (UDI)</displayName>
+				<displayName count="one">meksikansk unidad de inversion (UDI)</displayName>
 			</currency>
 			<currency type="MYR">
 				<displayName>malaysiske ringgit</displayName>
+				<displayName count="one">malaysisk ringgit</displayName>
 			</currency>
 			<currency type="MZE">
 				<displayName>mosambikiske escudo</displayName>
+				<displayName count="one">mosambikisk escudo</displayName>
 			</currency>
 			<currency type="MZM">
 				<displayName>gamle mosambikiske metical</displayName>
+				<displayName count="one">gammel mosambikisk metical</displayName>
 			</currency>
 			<currency type="MZN">
 				<displayName>mosambikiske metical</displayName>
+				<displayName count="one">mosambikisk metical</displayName>
 			</currency>
 			<currency type="NAD">
 				<displayName>namibiske dollar</displayName>
+				<displayName count="one">namibisk dollar</displayName>
+				<symbol>NAD</symbol>
 			</currency>
 			<currency type="NGN">
 				<displayName>nigerianske naira</displayName>
+				<displayName count="one">nigeriansk naira</displayName>
 			</currency>
 			<currency type="NIC">
 				<displayName>nicaraguanske cordoba</displayName>
+				<displayName count="one">nicaraguansk cordoba</displayName>
 			</currency>
 			<currency type="NIO">
 				<displayName>nicaraguanske cordoba oro</displayName>
+				<displayName count="one">nicaraguansk cordoba oro</displayName>
 			</currency>
 			<currency type="NLG">
 				<displayName>nederlandske gylden</displayName>
+				<displayName count="one">nederlandsk gylden</displayName>
+				<symbol>NLG</symbol>
 			</currency>
 			<currency type="NOK">
 				<displayName>norske kroner</displayName>
+				<displayName count="one">norsk krone</displayName>
+				<symbol>kr</symbol>
 			</currency>
 			<currency type="NPR">
 				<displayName>nepalske rupier</displayName>
+				<displayName count="one">nepalsk rupi</displayName>
+				<symbol>NPR</symbol>
 			</currency>
 			<currency type="NZD">
 				<displayName>new zealandske dollar</displayName>
+				<displayName count="one">new zealandsk dollar</displayName>
 			</currency>
 			<currency type="OMR">
 				<displayName>omanske rialer</displayName>
+				<displayName count="one">omansk rial</displayName>
 			</currency>
 			<currency type="PAB">
 				<displayName>panamanske balboa</displayName>
+				<displayName count="one">panamansk balboa</displayName>
 			</currency>
 			<currency type="PEI">
 				<displayName>peruvianske inti</displayName>
+				<displayName count="one">peruviansk inti</displayName>
+				<symbol>PEI</symbol>
 			</currency>
 			<currency type="PEN">
 				<displayName>peruvianske nye sol</displayName>
+				<displayName count="one">peruviansk ny sol</displayName>
 			</currency>
 			<currency type="PES">
 				<displayName>peruvianske sol</displayName>
+				<displayName count="one">peruviansk sol</displayName>
 			</currency>
 			<currency type="PGK">
 				<displayName>papuanske kina</displayName>
+				<displayName count="one">papuansk kina</displayName>
 			</currency>
 			<currency type="PHP">
 				<displayName>filippinske pesos</displayName>
+				<displayName count="one">filippinsk pesos</displayName>
 			</currency>
 			<currency type="PKR">
 				<displayName>pakistanske rupier</displayName>
+				<displayName count="one">pakistansk rupi</displayName>
+				<symbol>PKR</symbol>
 			</currency>
 			<currency type="PLN">
 				<displayName>polske zloty</displayName>
+				<displayName count="one">polsk zloty</displayName>
 			</currency>
 			<currency type="PLZ">
 				<displayName>polske zloty (1950-1995)</displayName>
+				<displayName count="one">polsk zloty (PLZ)</displayName>
+				<displayName count="other">polske zloty (PLZ)</displayName>
 			</currency>
 			<currency type="PTE">
 				<displayName>portugisiske escudo</displayName>
+				<displayName count="one">portugisisk escudo</displayName>
+				<symbol>PTE</symbol>
 			</currency>
 			<currency type="PYG">
 				<displayName>paraguayanske guarani</displayName>
+				<displayName count="one">paraguayansk guarani</displayName>
 			</currency>
 			<currency type="QAR">
 				<displayName>qatarske rialer</displayName>
+				<displayName count="one">qatarsk rial</displayName>
 			</currency>
 			<currency type="RHD">
 				<displayName>rhodesiske dollar</displayName>
+				<displayName count="one">rhodesisk dollar</displayName>
+				<symbol>RHD</symbol>
 			</currency>
 			<currency type="ROL">
 				<displayName>gamle rumenske leu</displayName>
+				<displayName count="one">gammel rumensk leu</displayName>
 			</currency>
 			<currency type="RON">
 				<displayName>rumenske leu</displayName>
+				<displayName count="one">rumensk leu</displayName>
 			</currency>
 			<currency type="RSD">
 				<displayName>serbiske dinarer</displayName>
+				<displayName count="one">serbisk dinar</displayName>
 			</currency>
 			<currency type="RUB">
 				<displayName>russiske rubler</displayName>
+				<displayName count="one">russisk rubel</displayName>
 			</currency>
 			<currency type="RUR">
 				<displayName>russiske rubler (1991-1998)</displayName>
+				<displayName count="one">russisk rubel (RUR)</displayName>
+				<displayName count="other">russiske rubler (RUR)</displayName>
 			</currency>
 			<currency type="RWF">
 				<displayName>rwandiske franc</displayName>
+				<displayName count="one">rwandisk franc</displayName>
+				<symbol>RWF</symbol>
 			</currency>
 			<currency type="SAR">
 				<displayName>saudiarabiske riyaler</displayName>
+				<displayName count="one">saudiarabisk riyal</displayName>
+				<symbol>SAR</symbol>
 			</currency>
 			<currency type="SBD">
 				<displayName>salomonske dollar</displayName>
+				<displayName count="one">salomonsk dollar</displayName>
 			</currency>
 			<currency type="SCR">
 				<displayName>seychelliske rupier</displayName>
+				<displayName count="one">seychellisk rupi</displayName>
 			</currency>
 			<currency type="SDD">
 				<displayName>sudanesiske dinarer</displayName>
+				<displayName count="one">sudansk dinar</displayName>
+				<displayName count="other">sudanske dinarer</displayName>
 			</currency>
 			<currency type="SDG">
 				<displayName>sudanske pund</displayName>
+				<displayName count="one">sudansk pund</displayName>
 			</currency>
 			<currency type="SDP">
 				<displayName>sudanesiske pund</displayName>
+				<displayName count="one">gammelt sudansk pund</displayName>
+				<displayName count="other">gamle sudanske pund</displayName>
 			</currency>
 			<currency type="SEK">
 				<displayName>svenske kroner</displayName>
+				<displayName count="one">svensk krone</displayName>
+				<symbol>SEK</symbol>
 			</currency>
 			<currency type="SGD">
 				<displayName>singaporske dollar</displayName>
+				<displayName count="one">singaporsk dollar</displayName>
 			</currency>
 			<currency type="SHP">
 				<displayName>sankthelenske pund</displayName>
+				<displayName count="one">sankthelensk pund</displayName>
 			</currency>
 			<currency type="SIT">
 				<displayName>slovenske tolar</displayName>
+				<displayName count="one">slovensk tolar</displayName>
 			</currency>
 			<currency type="SKK">
 				<displayName>slovakiske koruna</displayName>
+				<displayName count="one">slovakisk koruna</displayName>
 			</currency>
 			<currency type="SLL">
 				<displayName>sierraleonske leone</displayName>
+				<displayName count="one">sierraleonsk leone</displayName>
 				<displayName count="other">sierraleonske leone</displayName>
 			</currency>
 			<currency type="SOS">
 				<displayName>somaliske shilling</displayName>
+				<displayName count="one">somalisk shilling</displayName>
 			</currency>
 			<currency type="SRD">
 				<displayName>surinamske dollar</displayName>
+				<displayName count="one">surinamsk dollar</displayName>
 			</currency>
 			<currency type="SRG">
 				<displayName>surinamske gylden</displayName>
+				<displayName count="one">surinamsk gylden</displayName>
 			</currency>
 			<currency type="STD">
 				<displayName>Sao Tome og Principe-dobra</displayName>
 			</currency>
 			<currency type="SUR">
 				<displayName>sovjetiske rubler</displayName>
+				<displayName count="one">sovjetisk rubel</displayName>
 			</currency>
 			<currency type="SVC">
 				<displayName>salvadoranske colon</displayName>
+				<displayName count="one">salvadoransk colon</displayName>
 			</currency>
 			<currency type="SYP">
 				<displayName>syriske pund</displayName>
+				<displayName count="one">syrisk pund</displayName>
+				<symbol>SYP</symbol>
 			</currency>
 			<currency type="SZL">
 				<displayName>swazilandske lilangeni</displayName>
+				<displayName count="one">swazilandsk lilangeni</displayName>
 			</currency>
 			<currency type="THB">
 				<displayName>thailandske baht</displayName>
+				<displayName count="one">thailandsk baht</displayName>
+				<symbol>THB</symbol>
 			</currency>
 			<currency type="TJR">
 				<displayName>tadsjikiske rubler</displayName>
+				<displayName count="one">tadsjikisk rubel</displayName>
 			</currency>
 			<currency type="TJS">
 				<displayName>tadsjikiske somoni</displayName>
+				<displayName count="one">tadsjikisk somoni</displayName>
 			</currency>
 			<currency type="TMM">
 				<displayName>turkmenske manat</displayName>
+				<displayName count="one">turkmensk manat</displayName>
 			</currency>
 			<currency type="TND">
 				<displayName>tunisiske dinarer</displayName>
+				<displayName count="one">tunisisk dinar</displayName>
 			</currency>
 			<currency type="TOP">
 				<displayName>tonganske paʻanga</displayName>
+				<displayName count="one">tongansk paʻanga</displayName>
 			</currency>
 			<currency type="TPE">
 				<displayName>timoresiske escudo</displayName>
+				<displayName count="one">timoresisk escudo</displayName>
 			</currency>
 			<currency type="TRL">
 				<displayName>tyrkiske lire</displayName>
@@ -2469,58 +2850,80 @@
 			</currency>
 			<currency type="TTD">
 				<displayName>trinidadiske dollar</displayName>
+				<displayName count="one">trinidadisk dollar</displayName>
 			</currency>
 			<currency type="TWD">
 				<displayName>taiwanske nye dollar</displayName>
+				<displayName count="one">taiwansk ny dollar</displayName>
 			</currency>
 			<currency type="TZS">
 				<displayName>tanzanianske shilling</displayName>
+				<displayName count="one">tanzaniansk shilling</displayName>
 			</currency>
 			<currency type="UAH">
 				<displayName>ukrainske hryvnia</displayName>
+				<displayName count="one">ukrainsk hryvnia</displayName>
 			</currency>
 			<currency type="UAK">
 				<displayName>ukrainske karbovanetz</displayName>
+				<displayName count="one">ukrainsk karbovanetz</displayName>
 			</currency>
 			<currency type="UGS">
 				<displayName>ugandiske shilling (1966-1987)</displayName>
+				<displayName count="one">ugandisk shilling (UGS)</displayName>
 			</currency>
 			<currency type="UGX">
 				<displayName>ugandiske shilling</displayName>
+				<displayName count="one">ugandisk shilling</displayName>
 			</currency>
 			<currency type="USD">
 				<displayName>amerikanske dollar</displayName>
+				<displayName count="one">amerikansk dollar</displayName>
 				<symbol>USD</symbol>
 			</currency>
 			<currency type="USN">
 				<displayName>amerikanske dollar (neste dag)</displayName>
+				<displayName count="one">amerikansk dollar (neste dag)</displayName>
 			</currency>
 			<currency type="USS">
 				<displayName>amerikanske dollar (samme dag)</displayName>
+				<displayName count="one">amerikansk dollar (samme dag)</displayName>
+			</currency>
+			<currency type="UYI">
+				<displayName>Uruguayan Peso en Unidades Indexadas</displayName>
 			</currency>
 			<currency type="UYP">
 				<displayName>uruguayanske pesos (1975-1993)</displayName>
+				<displayName count="one">uruguayansk pesos (UYP)</displayName>
+				<displayName count="other">uruguayanske pesos (UYP)</displayName>
 			</currency>
 			<currency type="UYU">
 				<displayName>uruguayanske peso uruguayo</displayName>
+				<displayName count="one">uruguayansk peso uruguayo</displayName>
 			</currency>
 			<currency type="UZS">
 				<displayName>usbekiske sum</displayName>
+				<displayName count="one">usbekisk sum</displayName>
 			</currency>
 			<currency type="VEB">
 				<displayName>venezuelanske bolivar</displayName>
+				<displayName count="one">venezuelansk bolivar</displayName>
 			</currency>
 			<currency type="VEF">
 				<displayName>venezuelanske bolivar fuerte</displayName>
+				<displayName count="one">venezuelansk bolivar fuerte</displayName>
 			</currency>
 			<currency type="VND">
 				<displayName>vietnamesiske dong</displayName>
+				<displayName count="one">vietnamesisk dong</displayName>
 			</currency>
 			<currency type="VUV">
 				<displayName>vanuatiske vatu</displayName>
+				<displayName count="one">vanuatisk vatu</displayName>
 			</currency>
 			<currency type="WST">
 				<displayName>vestsamoiske tala</displayName>
+				<displayName count="one">vestsamoisk tala</displayName>
 			</currency>
 			<currency type="XAF">
 				<displayName>CFA franc BEAC</displayName>
@@ -2533,30 +2936,40 @@
 			</currency>
 			<currency type="XBA">
 				<displayName>europeisk sammensatt enhet</displayName>
+				<displayName count="other">europeiske sammensatte enheter</displayName>
 			</currency>
 			<currency type="XBB">
 				<displayName>europeisk monetær enhet</displayName>
+				<displayName count="other">europeiske monetære enheter</displayName>
 			</currency>
 			<currency type="XBC">
 				<displayName>europeisk kontoenhet (XBC)</displayName>
+				<displayName count="other">europeiske kontoenheter</displayName>
 			</currency>
 			<currency type="XBD">
 				<displayName>europeisk kontoenhet (XBD)</displayName>
+				<displayName count="other">europeiske kontoenheter (XBD)</displayName>
 			</currency>
 			<currency type="XCD">
 				<displayName>østkaribiske dollar</displayName>
+				<displayName count="one">østkaribisk dollar</displayName>
+				<symbol>XCD</symbol>
 			</currency>
 			<currency type="XDR">
 				<displayName>spesielle trekkrettigheter</displayName>
+				<displayName count="one">spesiell trekkrettighet</displayName>
 			</currency>
 			<currency type="XEU">
 				<displayName>europeisk valutaenhet</displayName>
+				<displayName count="other">europeiske valutaenheter</displayName>
 			</currency>
 			<currency type="XFO">
 				<displayName>franske gullfranc</displayName>
+				<displayName count="one">fransk gullfranc</displayName>
 			</currency>
 			<currency type="XFU">
 				<displayName>franske UIC-franc</displayName>
+				<displayName count="one">fransk UIC-franc</displayName>
 			</currency>
 			<currency type="XOF">
 				<displayName>CFA franc BCEAO</displayName>
@@ -2573,6 +2986,11 @@
 			<currency type="XRE">
 				<displayName>RINET-fond</displayName>
 			</currency>
+			<currency type="XTS">
+				<displayName>testvalutakode</displayName>
+				<displayName count="one">testvaluta</displayName>
+				<displayName count="other">testvaluta</displayName>
+			</currency>
 			<currency type="XXX">
 				<displayName>ukjent eller ugyldig valuta</displayName>
 				<displayName count="one">ukjent eller ugyldig valuta</displayName>
@@ -2580,36 +2998,48 @@
 			</currency>
 			<currency type="YDD">
 				<displayName>jemenittiske dinarer</displayName>
+				<displayName count="one">jemenittisk dinar</displayName>
 			</currency>
 			<currency type="YER">
 				<displayName>jemenittiske rialer</displayName>
+				<displayName count="one">jemenittisk rial</displayName>
 			</currency>
 			<currency type="YUD">
 				<displayName>jugoslaviske dinarer (hard)</displayName>
+				<displayName count="one">jugoslavisk dinar (hard)</displayName>
 			</currency>
 			<currency type="YUM">
 				<displayName>jugoslaviske noviy-dinarer</displayName>
+				<displayName count="one">jugoslavisk noviy-dinar</displayName>
 			</currency>
 			<currency type="YUN">
 				<displayName>jugoslaviske konvertible dinarer</displayName>
+				<displayName count="one">jugoslavisk konvertibel dinar</displayName>
 			</currency>
 			<currency type="ZAL">
 				<displayName>sørafrikanske rand (finansielle)</displayName>
+				<displayName count="one">sørafrikansk rand (finansiell)</displayName>
 			</currency>
 			<currency type="ZAR">
 				<displayName>sørafrikanske rand</displayName>
+				<displayName count="one">sørafrikansk rand</displayName>
 			</currency>
 			<currency type="ZMK">
 				<displayName>zambiske kwacha</displayName>
+				<displayName count="one">zambisk kwacha</displayName>
 			</currency>
 			<currency type="ZRN">
 				<displayName>zairiske nye zaire</displayName>
+				<displayName count="one">zairisk ny zaire</displayName>
+				<symbol>ZRN</symbol>
 			</currency>
 			<currency type="ZRZ">
 				<displayName>zairiske zaire</displayName>
+				<displayName count="one">zairisk zaire</displayName>
 			</currency>
 			<currency type="ZWD">
 				<displayName>zimbabwiske dollar</displayName>
+				<displayName count="one">zimbabwisk dollar</displayName>
 			</currency>
 		</currencies>
 	</numbers>

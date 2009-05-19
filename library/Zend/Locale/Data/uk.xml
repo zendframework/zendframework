@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.113 $"/>
-		<generation date="$Date: 2008/06/26 03:47:58 $"/>
+		<version number="$Revision: 1.130 $"/>
+		<generation date="$Date: 2009/05/05 23:06:41 $"/>
 		<language type="uk"/>
 	</identity>
 	<localeDisplayNames>
@@ -135,6 +135,7 @@
 			<language type="en_AU">англійська австралійська</language>
 			<language type="en_CA">англійська канадська</language>
 			<language type="en_GB">англійська британська</language>
+			<language type="en_US">англійська США</language>
 			<language type="enm">середньоанглійська</language>
 			<language type="eo">есперанто</language>
 			<language type="es">іспанська</language>
@@ -512,7 +513,7 @@
 			<language type="zu">зулуська</language>
 			<language type="zun">зуньї</language>
 			<language type="zxx">немає мовного вмісту</language>
-			<language type="zza">заза</language>
+			<language type="zza">зазакі</language>
 		</languages>
 		<scripts>
 			<script type="Arab">Арабський</script>
@@ -723,7 +724,7 @@
 			<territory type="CF">Центральноафриканська Республіка</territory>
 			<territory type="CG">Конґо - Браззавіль</territory>
 			<territory type="CH">Швейцарія</territory>
-			<territory type="CI">Кот-д’Івуар</territory>
+			<territory type="CI">Кот д’Івуар</territory>
 			<territory type="CK">Острови Кука</territory>
 			<territory type="CL">Чилі</territory>
 			<territory type="CM">Камерун</territory>
@@ -774,7 +775,7 @@
 			<territory type="GU">Гуам</territory>
 			<territory type="GW">Гвінея-Біссау</territory>
 			<territory type="GY">Гайана</territory>
-			<territory type="HK">Гонконґ</territory>
+			<territory type="HK">Гонконґ О.А.Р. Китаю</territory>
 			<territory type="HM">Острови Херд і Мак-Дональд</territory>
 			<territory type="HN">Гондурас</territory>
 			<territory type="HR">Хорватія</territory>
@@ -827,7 +828,7 @@
 			<territory type="ML">Малі</territory>
 			<territory type="MM">Мʼянма</territory>
 			<territory type="MN">Монголія</territory>
-			<territory type="MO">Макао</territory>
+			<territory type="MO">Макао О.А.Р. Китаю</territory>
 			<territory type="MP">Північні Маріанські Острови</territory>
 			<territory type="MQ">Мартиніка</territory>
 			<territory type="MR">Мавританія</territory>
@@ -954,9 +955,10 @@
 			<variant type="ROZAJ">Резьянський</variant>
 			<variant type="SAAHO">Сахо</variant>
 			<variant type="SCOTLAND">Шотландська англійська</variant>
-			<variant type="SCOUSE">Ліверпульський</variant>
+			<variant type="SCOUSE">Ліверпульський діалект</variant>
 			<variant type="SOLBA">Діалект Столвіца/Солбіка</variant>
 			<variant type="TARASK">Орфографія Тараскевича</variant>
+			<variant type="VALENCIA">Валенсійська</variant>
 		</variants>
 		<keys>
 			<key type="calendar">Календар</key>
@@ -978,7 +980,7 @@
 			<type type="phonebook" key="collation">Телефонна книга</type>
 			<type type="pinyin" key="collation">Порядок піньїн</type>
 			<type type="roc" key="calendar">Китайський григоріанський</type>
-			<type type="stroke" key="collation">Порядок ключів</type>
+			<type type="stroke" key="collation">Порядок натискання клавіш</type>
 			<type type="traditional" key="collation">Традиційний</type>
 		</types>
 		<measurementSystemNames>
@@ -992,8 +994,13 @@
 		</codePatterns>
 	</localeDisplayNames>
 	<layout>
+		<inList>titlecase-firstword</inList>
 		<inText type="currency">lowercase-words</inText>
+		<inText type="fields">titlecase-firstword</inText>
+		<inText type="keys">lowercase-words</inText>
 		<inText type="languages">lowercase-words</inText>
+		<inText type="quarterWidth">lowercase-words</inText>
+		<inText type="types">titlecase-firstword</inText>
 	</layout>
 	<characters>
 		<exemplarCharacters>[ʼ а-г ґ д е є ж-и і ї й-щ ь ю я]</exemplarCharacters>
@@ -1007,26 +1014,10 @@
 		<alternateQuotationEnd>“</alternateQuotationEnd>
 	</delimiters>
 	<dates>
-		<localizedPatternChars>GanjkHmsSEDFwWxhKzAeugXZvcL</localizedPatternChars>
 		<calendars>
 			<calendar type="coptic">
 				<months>
 					<monthContext type="format">
-						<monthWidth type="abbreviated">
-							<month type="1">Тот</month>
-							<month type="2">Бабе</month>
-							<month type="3">Хатур</month>
-							<month type="4">Кіхак</month>
-							<month type="5">Тобе</month>
-							<month type="6">Амшир</month>
-							<month type="7">Барамхат</month>
-							<month type="8">Бармуда</month>
-							<month type="9">Башнас</month>
-							<month type="10">Бауна</month>
-							<month type="11">Абіб</month>
-							<month type="12">Мисра</month>
-							<month type="13">Насі</month>
-						</monthWidth>
 						<monthWidth type="wide">
 							<month type="1">Тот</month>
 							<month type="2">Бабе</month>
@@ -1171,12 +1162,6 @@
 						</quarterWidth>
 					</quarterContext>
 					<quarterContext type="stand-alone">
-						<quarterWidth type="abbreviated">
-							<quarter type="1">I кв.</quarter>
-							<quarter type="2">II кв.</quarter>
-							<quarter type="3">III кв.</quarter>
-							<quarter type="4">IV кв.</quarter>
-						</quarterWidth>
 						<quarterWidth type="narrow">
 							<quarter type="1">1</quarter>
 							<quarter type="2">2</quarter>
@@ -1200,17 +1185,17 @@
 				<dateFormats>
 					<dateFormatLength type="full">
 						<dateFormat>
-							<pattern>EEEE, d MMMM yyyy 'р'.</pattern>
+							<pattern>EEEE, d MMMM y 'р'.</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="long">
 						<dateFormat>
-							<pattern>d MMMM yyyy 'р'.</pattern>
+							<pattern>d MMMM y 'р'.</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="medium">
 						<dateFormat>
-							<pattern>d MMM yyyy</pattern>
+							<pattern>d MMM y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="short">
@@ -1222,7 +1207,7 @@
 				<timeFormats>
 					<timeFormatLength type="full">
 						<timeFormat>
-							<pattern>HH:mm:ss v</pattern>
+							<pattern>HH:mm:ss zzzz</pattern>
 						</timeFormat>
 					</timeFormatLength>
 					<timeFormatLength type="long">
@@ -1242,11 +1227,6 @@
 					</timeFormatLength>
 				</timeFormats>
 				<dateTimeFormats>
-					<dateTimeFormatLength>
-						<dateTimeFormat>
-							<pattern>{1} {0}</pattern>
-						</dateTimeFormat>
-					</dateTimeFormatLength>
 					<availableFormats>
 						<dateFormatItem id="HHmm">HH:mm</dateFormatItem>
 						<dateFormatItem id="HHmmss">HH:mm:ss</dateFormatItem>
@@ -1260,15 +1240,15 @@
 						<dateFormatItem id="d">d</dateFormatItem>
 						<dateFormatItem id="mmss">mm:ss</dateFormatItem>
 						<dateFormatItem id="ms">mm:ss</dateFormatItem>
-						<dateFormatItem id="y">yyyy</dateFormatItem>
-						<dateFormatItem id="yMMM">LLL yyyy</dateFormatItem>
-						<dateFormatItem id="yMMMEd">EEE, d MMM yyyy</dateFormatItem>
-						<dateFormatItem id="yMMMM">LLLL yyyy</dateFormatItem>
+						<dateFormatItem id="y">y</dateFormatItem>
+						<dateFormatItem id="yMMM">LLL y</dateFormatItem>
+						<dateFormatItem id="yMMMEd">EEE, d MMM y</dateFormatItem>
+						<dateFormatItem id="yMMMM">LLLL y</dateFormatItem>
 						<dateFormatItem id="yyMM">MM.yy</dateFormatItem>
-						<dateFormatItem id="yyMMM">MMM yy</dateFormatItem>
+						<dateFormatItem id="yyMMM">LLL yy</dateFormatItem>
 						<dateFormatItem id="yyQ">Q yy</dateFormatItem>
-						<dateFormatItem id="yyyyMMMM">LLLL yyyy</dateFormatItem>
-						<dateFormatItem id="yyyyQQQQ">QQQQ yyyy 'р'.</dateFormatItem>
+						<dateFormatItem id="yyyyMMMM">LLLL y</dateFormatItem>
+						<dateFormatItem id="yyyyQQQQ">QQQQ y 'р'.</dateFormatItem>
 					</availableFormats>
 					<intervalFormats>
 						<intervalFormatFallback>{0} – {1}</intervalFormatFallback>
@@ -1324,18 +1304,18 @@
 							<greatestDifference id="y">E, dd.MM.yy – E, dd.MM.yy</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMM">
-							<greatestDifference id="M">LLL–LLL yyyy</greatestDifference>
-							<greatestDifference id="y">LLL yyyy – LLL yyyy</greatestDifference>
+							<greatestDifference id="M">LLL–LLL y</greatestDifference>
+							<greatestDifference id="y">LLL y – LLL y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMEd">
-							<greatestDifference id="M">E, d MMM – E, d MMM yyyy</greatestDifference>
-							<greatestDifference id="d">E, d – E, d MMM yyyy</greatestDifference>
-							<greatestDifference id="y">E, d MMM yyyy – E, d MMM yyyy</greatestDifference>
+							<greatestDifference id="M">E, d MMM – E, d MMM y</greatestDifference>
+							<greatestDifference id="d">E, d – E, d MMM y</greatestDifference>
+							<greatestDifference id="y">E, d MMM y – E, d MMM y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMd">
-							<greatestDifference id="M">d MMM – d MMM yyyy</greatestDifference>
-							<greatestDifference id="d">d–d MMM yyyy</greatestDifference>
-							<greatestDifference id="y">d MMM yyyy – d MMM yyyy</greatestDifference>
+							<greatestDifference id="M">d MMM – d MMM y</greatestDifference>
+							<greatestDifference id="d">d–d MMM y</greatestDifference>
+							<greatestDifference id="y">d MMM y – d MMM y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMd">
 							<greatestDifference id="M">dd.MM.yy – dd.MM.yy</greatestDifference>
@@ -1359,11 +1339,13 @@
 					</field>
 					<field type="day">
 						<displayName>День</displayName>
+						<relative type="-3">Три дні тому</relative>
+						<relative type="-2">Позавчора</relative>
+						<relative type="-1">Вчора</relative>
 						<relative type="0">Сьогодні</relative>
 						<relative type="1">Завтра</relative>
 						<relative type="2">Післязавтра</relative>
-						<relative type="-1">Вчора</relative>
-						<relative type="-2">Позавчора</relative>
+						<relative type="3">Через три дні з цього моменту</relative>
 					</field>
 					<field type="weekday">
 						<displayName>День тижня</displayName>
@@ -1388,19 +1370,6 @@
 			<calendar type="hebrew">
 				<months>
 					<monthContext type="format">
-						<monthWidth type="abbreviated">
-							<month type="1">Тішри</month>
-							<month type="2">Марчешван</month>
-							<month type="3">Числьов</month>
-							<month type="4">Тебет</month>
-							<month type="5">Шеват</month>
-							<month type="6">Адар Ⅰ</month>
-							<month type="7">Адар</month>
-							<month type="8">Нісан</month>
-							<month type="10">Сиван</month>
-							<month type="11">Таммуз</month>
-							<month type="12">Аб</month>
-						</monthWidth>
 						<monthWidth type="wide">
 							<month type="1">Тішри</month>
 							<month type="2">Марчешван</month>
@@ -1418,9 +1387,6 @@
 						</monthWidth>
 					</monthContext>
 					<monthContext type="stand-alone">
-						<monthWidth type="abbreviated">
-							<month type="6">Адар I</month>
-						</monthWidth>
 						<monthWidth type="wide">
 							<month type="6">Адар I</month>
 						</monthWidth>
@@ -1553,6 +1519,9 @@
 			<zone type="America/Catamarca">
 				<exemplarCity>Катамарка</exemplarCity>
 			</zone>
+			<zone type="America/Argentina/Salta">
+				<exemplarCity>Сальта</exemplarCity>
+			</zone>
 			<zone type="America/Jujuy">
 				<exemplarCity>Жужуй</exemplarCity>
 			</zone>
@@ -1669,6 +1638,9 @@
 			</zone>
 			<zone type="America/Cuiaba">
 				<exemplarCity>Куяба</exemplarCity>
+			</zone>
+			<zone type="America/Santarem">
+				<exemplarCity>Сантарен</exemplarCity>
 			</zone>
 			<zone type="America/Campo_Grande">
 				<exemplarCity>Кампу-Гранді</exemplarCity>
@@ -1881,7 +1853,7 @@
 				<exemplarCity>Алжир</exemplarCity>
 			</zone>
 			<zone type="Pacific/Galapagos">
-				<exemplarCity>Ґалапагос</exemplarCity>
+				<exemplarCity>Галапагоські острови (Еквадор)</exemplarCity>
 			</zone>
 			<zone type="America/Guayaquil">
 				<exemplarCity>Гуаякіль</exemplarCity>
@@ -2532,7 +2504,7 @@
 				<exemplarCity>Джонстон</exemplarCity>
 			</zone>
 			<zone type="Pacific/Wake">
-				<exemplarCity>Вей΀º</exemplarCity>
+				<exemplarCity>Вейк</exemplarCity>
 			</zone>
 			<zone type="America/Adak">
 				<exemplarCity>Адак</exemplarCity>
@@ -2692,7 +2664,7 @@
 				<long>
 					<generic>за північноамериканським центральним часом</generic>
 					<standard>за північноамериканським центральним стандартним часом</standard>
-					<daylight>за північноамериканськ΀¸м центральним літнім часом</daylight>
+					<daylight>за північноамериканським центральним літнім часом</daylight>
 				</long>
 				<commonlyUsed>true</commonlyUsed>
 			</metazone>
@@ -2832,7 +2804,7 @@
 			<metazone type="Samara">
 				<long>
 					<standard>за самарським часом</standard>
-					<daylight>за самарським літнім часом</daylight>
+					<daylight>з·а самарським літнім часом</daylight>
 				</long>
 			</metazone>
 			<metazone type="Turkey">
@@ -2917,6 +2889,9 @@
 		<currencies>
 			<currency type="ADP">
 				<displayName>Андоррська песета</displayName>
+				<displayName count="few">Андоррські песети</displayName>
+				<displayName count="many">Андоррських песет</displayName>
+				<displayName count="other">Андоррських песет</displayName>
 			</currency>
 			<currency type="AED">
 				<displayName>Дирхем ОАЕ</displayName>
@@ -2926,48 +2901,64 @@
 			</currency>
 			<currency type="AFN">
 				<displayName>Афгані</displayName>
-				<symbol>Af</symbol>
+				<displayName count="other">Афгані</displayName>
 			</currency>
 			<currency type="ALL">
 				<displayName>Албанський лек</displayName>
-				<symbol>lek</symbol>
+				<displayName count="few">Албанські леки</displayName>
+				<displayName count="many">Албанських леків</displayName>
+				<displayName count="other">албанських леків</displayName>
 			</currency>
 			<currency type="AMD">
 				<displayName>Вірменський драм</displayName>
-				<symbol>dram</symbol>
+				<displayName count="few">вірменські драми</displayName>
+				<displayName count="many">Вірменських драмів</displayName>
+				<displayName count="other">Вірменських драмів</displayName>
 			</currency>
 			<currency type="ANG">
 				<displayName>Гульден Нідерландських Антіл</displayName>
-				<symbol>NA f.</symbol>
 			</currency>
 			<currency type="AOA">
 				<displayName>Ангольська кванза</displayName>
+				<displayName count="few">ангольські кванзи</displayName>
+				<displayName count="many">ангольських кванз</displayName>
+				<displayName count="other">ангольської кванзи</displayName>
 			</currency>
 			<currency type="AOK">
 				<displayName>Ангольська кванза (1977-1990)</displayName>
+				<displayName count="few">Ангольські кванзи (1977-1990)</displayName>
+				<displayName count="many">Ангольських кванз (1977-1990)</displayName>
+				<displayName count="other">Ангольської кванзи (1977-1990)</displayName>
 			</currency>
 			<currency type="AON">
 				<displayName>Ангольська нова кванза (1990-2000)</displayName>
+				<displayName count="few">Ангольські нові кванзи (1990-2000)</displayName>
+				<displayName count="many">ангольських нових кванз (1990-2000)</displayName>
+				<displayName count="other">Ангольської нової кванзи (1990-2000)</displayName>
 			</currency>
 			<currency type="AOR">
 				<displayName>Ангольська кванза реаджастадо (1995-1999)</displayName>
+				<displayName count="few">ангольські кванзи реаджастадо (1995-1999)</displayName>
+				<displayName count="many">ангольських кванз реаджастадо (1995-1999)</displayName>
+				<displayName count="one">ангольська кванза реаджастадо (1995-1999)</displayName>
+				<displayName count="other">ангольської кванзи реаджастадо (1995-1999)</displayName>
 			</currency>
 			<currency type="ARA">
 				<displayName>Аргентинський австрал</displayName>
+				<displayName count="few">Аргентинські австрали</displayName>
+				<displayName count="many">Аргентинських австралів</displayName>
 			</currency>
 			<currency type="ARP">
 				<displayName>Аргентинський песо (1983-1985)</displayName>
 			</currency>
 			<currency type="ARS">
 				<displayName>Аргентинський песо</displayName>
-				<symbol>Arg$</symbol>
 			</currency>
 			<currency type="ATS">
 				<displayName>Австрійський шилінг</displayName>
 			</currency>
 			<currency type="AUD">
 				<displayName>Австралійський долар</displayName>
-				<symbol>$A</symbol>
 			</currency>
 			<currency type="AWG">
 				<displayName>Арубський гульден</displayName>
@@ -2983,51 +2974,42 @@
 			</currency>
 			<currency type="BAM">
 				<displayName>Конвертована марка Боснії і Герцоговини</displayName>
-				<symbol>KM</symbol>
 			</currency>
 			<currency type="BBD">
 				<displayName>Барбадоський долар</displayName>
-				<symbol>BDS$</symbol>
 			</currency>
 			<currency type="BDT">
 				<displayName>Бангладеська така</displayName>
-				<symbol>Tk</symbol>
 			</currency>
 			<currency type="BEC">
 				<displayName>Бельгійський франк (конвертований)</displayName>
 			</currency>
 			<currency type="BEF">
 				<displayName>Бельгійський франк</displayName>
-				<symbol>BF</symbol>
 			</currency>
 			<currency type="BEL">
 				<displayName>Бельгійський франк (фінансовий)</displayName>
 			</currency>
 			<currency type="BGL">
 				<displayName>Болгарський твердий лев</displayName>
-				<symbol>lev</symbol>
 			</currency>
 			<currency type="BGN">
-				<displayName>Болгарський новий лев</displayName>
+				<displayName>Болгарський новий лев</displayName>
 			</currency>
 			<currency type="BHD">
 				<displayName>Бахрейнський динар</displayName>
-				<symbol>BD</symbol>
 			</currency>
 			<currency type="BIF">
 				<displayName>Бурундійський франк</displayName>
-				<symbol>Fbu</symbol>
 			</currency>
 			<currency type="BMD">
 				<displayName>Бермудський долар</displayName>
-				<symbol>Ber$</symbol>
 			</currency>
 			<currency type="BND">
 				<displayName>Брунейський долар</displayName>
 			</currency>
 			<currency type="BOB">
 				<displayName>Болівіано</displayName>
-				<symbol>Bs</symbol>
 			</currency>
 			<currency type="BOP">
 				<displayName>Болівійське песо</displayName>
@@ -3058,7 +3040,6 @@
 			</currency>
 			<currency type="BTN">
 				<displayName>Бутанський нгултрум</displayName>
-				<symbol>Nu</symbol>
 			</currency>
 			<currency type="BUK">
 				<displayName>Бірманський кіат</displayName>
@@ -3075,15 +3056,12 @@
 				<displayName>Білоруський рубль</displayName>
 				<displayName count="few">білоруські рублі</displayName>
 				<displayName count="many">білоруських рублів</displayName>
-				<symbol>Rbl</symbol>
 			</currency>
 			<currency type="BZD">
 				<displayName>Белізький долар</displayName>
-				<symbol>BZ$</symbol>
 			</currency>
 			<currency type="CAD">
 				<displayName>Канадський долар</displayName>
-				<symbol>Can$</symbol>
 			</currency>
 			<currency type="CDF">
 				<displayName>Конголезький франк</displayName>
@@ -3093,7 +3071,6 @@
 			</currency>
 			<currency type="CHF">
 				<displayName>Швейцарський франк</displayName>
-				<symbol>SwF</symbol>
 			</currency>
 			<currency type="CHW">
 				<displayName>Франк WIR</displayName>
@@ -3103,22 +3080,18 @@
 			</currency>
 			<currency type="CLP">
 				<displayName>Чілійський песо</displayName>
-				<symbol>Ch$</symbol>
 			</currency>
 			<currency type="CNY">
 				<displayName>Китайський юань</displayName>
-				<symbol>Y</symbol>
 			</currency>
 			<currency type="COP">
 				<displayName>Колумбійський песо</displayName>
-				<symbol>Col$</symbol>
 			</currency>
 			<currency type="COU">
-				<displayName>Юнідад де валор ріал</displayName>
+				<displayName>Одиниця реальної вартості</displayName>
 			</currency>
 			<currency type="CRC">
 				<displayName>Костариканський колон</displayName>
-				<symbol>C</symbol>
 			</currency>
 			<currency type="CSD">
 				<displayName>Старий сербський динар</displayName>
@@ -3131,11 +3104,9 @@
 			</currency>
 			<currency type="CVE">
 				<displayName>Ескудо Кабо-Верде</displayName>
-				<symbol>CVEsc</symbol>
 			</currency>
 			<currency type="CYP">
 				<displayName>Кіпрський фунт</displayName>
-				<symbol>£C</symbol>
 			</currency>
 			<currency type="CZK">
 				<displayName>Чеська крона</displayName>
@@ -3148,19 +3119,15 @@
 			</currency>
 			<currency type="DJF">
 				<displayName>Джибутійський франк</displayName>
-				<symbol>DF</symbol>
 			</currency>
 			<currency type="DKK">
 				<displayName>Датська крона</displayName>
-				<symbol>DKr</symbol>
 			</currency>
 			<currency type="DOP">
 				<displayName>Домініканський песо</displayName>
-				<symbol>RD$</symbol>
 			</currency>
 			<currency type="DZD">
 				<displayName>Алжирський динар</displayName>
-				<symbol>DA</symbol>
 			</currency>
 			<currency type="ECS">
 				<displayName>Еквадорський сукре</displayName>
@@ -3173,9 +3140,6 @@
 			</currency>
 			<currency type="EGP">
 				<displayName>Єгипетський фунт</displayName>
-			</currency>
-			<currency type="EQE">
-				<displayName>Еквеле</displayName>
 			</currency>
 			<currency type="ERN">
 				<displayName>Еритрейська накфа</displayName>
@@ -3191,7 +3155,6 @@
 			</currency>
 			<currency type="ETB">
 				<displayName>Ефіопський бір</displayName>
-				<symbol>Br</symbol>
 			</currency>
 			<currency type="EUR">
 				<displayName>Євро</displayName>
@@ -3204,7 +3167,6 @@
 			</currency>
 			<currency type="FJD">
 				<displayName>Долар Фіджі</displayName>
-				<symbol>F$</symbol>
 			</currency>
 			<currency type="FKP">
 				<displayName>Фолклендський фунт</displayName>
@@ -3214,7 +3176,6 @@
 			</currency>
 			<currency type="GBP">
 				<displayName>Англійський фунт стерлінгів</displayName>
-				<symbol>£</symbol>
 			</currency>
 			<currency type="GEK">
 				<displayName>Грузинський купон</displayName>
@@ -3223,7 +3184,6 @@
 			</currency>
 			<currency type="GEL">
 				<displayName>Грузинський ларі</displayName>
-				<symbol>lari</symbol>
 			</currency>
 			<currency type="GHC">
 				<displayName>Ганський седі (1979-2007)</displayName>
@@ -3239,7 +3199,6 @@
 			</currency>
 			<currency type="GNF">
 				<displayName>Гвійнейський франк</displayName>
-				<symbol>GF</symbol>
 			</currency>
 			<currency type="GNS">
 				<displayName>Гвінейське сілі</displayName>
@@ -3252,7 +3211,6 @@
 			</currency>
 			<currency type="GTQ">
 				<displayName>Гватемальський кетсаль</displayName>
-				<symbol>Q</symbol>
 			</currency>
 			<currency type="GWE">
 				<displayName>Ескудо Португальської Гвінеї</displayName>
@@ -3262,15 +3220,12 @@
 			</currency>
 			<currency type="GYD">
 				<displayName>Гайянський долар</displayName>
-				<symbol>G$</symbol>
 			</currency>
 			<currency type="HKD">
 				<displayName>Гонконгівський долар</displayName>
-				<symbol>HK$</symbol>
 			</currency>
 			<currency type="HNL">
 				<displayName>Гондураська лемпіра</displayName>
-				<symbol>L</symbol>
 			</currency>
 			<currency type="HRD">
 				<displayName>Хорватський динар</displayName>
@@ -3283,15 +3238,12 @@
 			</currency>
 			<currency type="HUF">
 				<displayName>Угорський форинт</displayName>
-				<symbol>Ft</symbol>
 			</currency>
 			<currency type="IDR">
 				<displayName>Індонезійська рупія</displayName>
-				<symbol>Rp</symbol>
 			</currency>
 			<currency type="IEP">
 				<displayName>Ірландський фунт</displayName>
-				<symbol>IR£</symbol>
 			</currency>
 			<currency type="ILP">
 				<displayName>Ізраїльський фунт</displayName>
@@ -3301,30 +3253,24 @@
 			</currency>
 			<currency type="INR">
 				<displayName>Індійська рупія</displayName>
-				<symbol>INR</symbol>
 			</currency>
 			<currency type="IQD">
 				<displayName>Іракський динар</displayName>
-				<symbol>ID</symbol>
 			</currency>
 			<currency type="IRR">
 				<displayName>Іранський ріал</displayName>
-				<symbol>RI</symbol>
 			</currency>
 			<currency type="ISK">
 				<displayName>Ісландська крона</displayName>
 			</currency>
 			<currency type="ITL">
 				<displayName>Італійська ліра</displayName>
-				<symbol>₤</symbol>
 			</currency>
 			<currency type="JMD">
 				<displayName>Ямайський долар</displayName>
-				<symbol>J$</symbol>
 			</currency>
 			<currency type="JOD">
 				<displayName>Йорданський динар</displayName>
-				<symbol>JD</symbol>
 			</currency>
 			<currency type="JPY">
 				<displayName>Японська єна</displayName>
@@ -3332,19 +3278,15 @@
 			</currency>
 			<currency type="KES">
 				<displayName>Кенійський шилінг</displayName>
-				<symbol>K Sh</symbol>
 			</currency>
 			<currency type="KGS">
 				<displayName>Киргизький сом</displayName>
-				<symbol>som</symbol>
 			</currency>
 			<currency type="KHR">
 				<displayName>Камбоджійський рієль</displayName>
-				<symbol>CR</symbol>
 			</currency>
 			<currency type="KMF">
 				<displayName>Коморський франк</displayName>
-				<symbol>CF</symbol>
 			</currency>
 			<currency type="KPW">
 				<displayName>Вона Північної Кореї</displayName>
@@ -3354,35 +3296,27 @@
 			</currency>
 			<currency type="KWD">
 				<displayName>Кувейтський динар</displayName>
-				<symbol>KD</symbol>
 			</currency>
 			<currency type="KYD">
 				<displayName>Долар Кайманових островів</displayName>
 			</currency>
 			<currency type="KZT">
 				<displayName>Казахстанський тенге</displayName>
-				<symbol>T</symbol>
 			</currency>
 			<currency type="LAK">
 				<displayName>Лаоський кіп</displayName>
 			</currency>
 			<currency type="LBP">
 				<displayName>Ліванський фунт</displayName>
-				<symbol>LL</symbol>
 			</currency>
 			<currency type="LKR">
 				<displayName>Шрі-ланкійська рупія</displayName>
-				<symbol>SL Re</symbol>
 			</currency>
 			<currency type="LRD">
 				<displayName>Ліберійський долар</displayName>
 			</currency>
 			<currency type="LSL">
 				<displayName>Лесотський лоті</displayName>
-				<symbol>M</symbol>
-			</currency>
-			<currency type="LSM">
-				<displayName>Малоті</displayName>
 			</currency>
 			<currency type="LTL">
 				<displayName>Литовський літ</displayName>
@@ -3407,7 +3341,6 @@
 			</currency>
 			<currency type="LYD">
 				<displayName>Лівійський динар</displayName>
-				<symbol>LD</symbol>
 			</currency>
 			<currency type="MAD">
 				<displayName>Марокканський дирхем</displayName>
@@ -3426,7 +3359,6 @@
 			</currency>
 			<currency type="MKD">
 				<displayName>Македонський динар</displayName>
-				<symbol>MDen</symbol>
 			</currency>
 			<currency type="MLF">
 				<displayName>Малійський франк</displayName>
@@ -3436,18 +3368,15 @@
 			</currency>
 			<currency type="MNT">
 				<displayName>Монгольський тугрик</displayName>
-				<symbol>Tug</symbol>
 			</currency>
 			<currency type="MOP">
 				<displayName>Макао патака</displayName>
 			</currency>
 			<currency type="MRO">
 				<displayName>Мавританська угія</displayName>
-				<symbol>UM</symbol>
 			</currency>
 			<currency type="MTL">
 				<displayName>Мальтійська ліра</displayName>
-				<symbol>Lm</symbol>
 			</currency>
 			<currency type="MTP">
 				<displayName>Мальтійський фунт</displayName>
@@ -3460,11 +3389,9 @@
 			</currency>
 			<currency type="MWK">
 				<displayName>Квача (Малаві)</displayName>
-				<symbol>MK</symbol>
 			</currency>
 			<currency type="MXN">
 				<displayName>Мексиканське песо</displayName>
-				<symbol>MEX$</symbol>
 			</currency>
 			<currency type="MXP">
 				<displayName>Мексиканське срібне песо (1861-1992)</displayName>
@@ -3474,21 +3401,18 @@
 			</currency>
 			<currency type="MYR">
 				<displayName>Малайзійський рингіт</displayName>
-				<symbol>RM</symbol>
 			</currency>
 			<currency type="MZE">
 				<displayName>Мозамбіцький ескудо</displayName>
 			</currency>
 			<currency type="MZM">
 				<displayName>Старий мозамбіцький метикал</displayName>
-				<symbol>Mt</symbol>
 			</currency>
 			<currency type="MZN">
 				<displayName>Мозамбіцький метикал</displayName>
 			</currency>
 			<currency type="NAD">
 				<displayName>Намібійський долар</displayName>
-				<symbol>N$</symbol>
 			</currency>
 			<currency type="NGN">
 				<displayName>Нігерійська найра</displayName>
@@ -3504,19 +3428,15 @@
 			</currency>
 			<currency type="NOK">
 				<displayName>Норвезька крона</displayName>
-				<symbol>NKr</symbol>
 			</currency>
 			<currency type="NPR">
 				<displayName>Непальська рупія</displayName>
-				<symbol>Nrs</symbol>
 			</currency>
 			<currency type="NZD">
 				<displayName>Новозеландський долар</displayName>
-				<symbol>$NZ</symbol>
 			</currency>
 			<currency type="OMR">
 				<displayName>Оманський ріал</displayName>
-				<symbol>RO</symbol>
 			</currency>
 			<currency type="PAB">
 				<displayName>Панамська бальбоа</displayName>
@@ -3538,11 +3458,9 @@
 			</currency>
 			<currency type="PKR">
 				<displayName>Пакистанська рупія</displayName>
-				<symbol>Pra</symbol>
 			</currency>
 			<currency type="PLN">
 				<displayName>Польський злотий</displayName>
-				<symbol>Zl</symbol>
 			</currency>
 			<currency type="PLZ">
 				<displayName>Польський злотий (1950-1995)</displayName>
@@ -3555,14 +3473,12 @@
 			</currency>
 			<currency type="QAR">
 				<displayName>Катарський ріал</displayName>
-				<symbol>QR</symbol>
 			</currency>
 			<currency type="RHD">
 				<displayName>Родезійський долар</displayName>
 			</currency>
 			<currency type="ROL">
 				<displayName>Старий румунський лей</displayName>
-				<symbol>leu</symbol>
 			</currency>
 			<currency type="RON">
 				<displayName>Румунський лей</displayName>
@@ -3581,22 +3497,19 @@
 				<displayName>Російський рубль (1991-1998)</displayName>
 				<displayName count="few">російські рублі (RUR)</displayName>
 				<displayName count="many">російських рублів (RUR)</displayName>
-				<displayName count="one">Російсьий рубль RUR</displayName>
+				<displayName count="one">російський рубль (RUR)</displayName>
 			</currency>
 			<currency type="RWF">
 				<displayName>Руандійський франк</displayName>
 			</currency>
 			<currency type="SAR">
 				<displayName>Саудівський ріал</displayName>
-				<symbol>SRl</symbol>
 			</currency>
 			<currency type="SBD">
 				<displayName>Долар Соломонових Островів</displayName>
-				<symbol>SI$</symbol>
 			</currency>
 			<currency type="SCR">
 				<displayName>Сейшельська рупія</displayName>
-				<symbol>SR</symbol>
 			</currency>
 			<currency type="SDD">
 				<displayName>Суданський динар</displayName>
@@ -3609,11 +3522,9 @@
 			</currency>
 			<currency type="SEK">
 				<displayName>Шведська крона</displayName>
-				<symbol>SKr</symbol>
 			</currency>
 			<currency type="SGD">
 				<displayName>Сінгапурський долар</displayName>
-				<symbol>S$</symbol>
 			</currency>
 			<currency type="SHP">
 				<displayName>Фунт Святої Єлени</displayName>
@@ -3623,25 +3534,21 @@
 			</currency>
 			<currency type="SKK">
 				<displayName>Словацька крона</displayName>
-				<symbol>Sk</symbol>
 			</currency>
 			<currency type="SLL">
 				<displayName>Леоне Сьєрра-Леоне</displayName>
 			</currency>
 			<currency type="SOS">
 				<displayName>Сомалійський шилінг</displayName>
-				<symbol>Sh.</symbol>
 			</currency>
 			<currency type="SRD">
 				<displayName>Суринамський долар</displayName>
 			</currency>
 			<currency type="SRG">
 				<displayName>Суринамський гульден</displayName>
-				<symbol>Sf</symbol>
 			</currency>
 			<currency type="STD">
 				<displayName>Добра Сан-Томе і Прінсіпі</displayName>
-				<symbol>Db</symbol>
 			</currency>
 			<currency type="SUR">
 				<displayName>Радянський рубль</displayName>
@@ -3654,11 +3561,9 @@
 			</currency>
 			<currency type="SYP">
 				<displayName>Сирійський фунт</displayName>
-				<symbol>LS</symbol>
 			</currency>
 			<currency type="SZL">
 				<displayName>Свазілендські лілангені</displayName>
-				<symbol>E</symbol>
 			</currency>
 			<currency type="THB">
 				<displayName>Таїландський бат</displayName>
@@ -3677,7 +3582,6 @@
 			</currency>
 			<currency type="TOP">
 				<displayName>Паанга Тонго</displayName>
-				<symbol>T$</symbol>
 			</currency>
 			<currency type="TPE">
 				<displayName>Тіморський ескудо</displayName>
@@ -3687,7 +3591,6 @@
 				<displayName count="few">старі турецькі ліри</displayName>
 				<displayName count="many">старих турецьких лір</displayName>
 				<displayName count="one">стара турецька ліра</displayName>
-				<symbol>TL</symbol>
 			</currency>
 			<currency type="TRY">
 				<displayName>Турецька ліра</displayName>
@@ -3697,15 +3600,12 @@
 			</currency>
 			<currency type="TTD">
 				<displayName>Долар Тринідаду і Тобаго</displayName>
-				<symbol>TT$</symbol>
 			</currency>
 			<currency type="TWD">
 				<displayName>Новий тайванський долар</displayName>
-				<symbol>NT$</symbol>
 			</currency>
 			<currency type="TZS">
 				<displayName>Танзанійський шилінг</displayName>
-				<symbol>T Sh</symbol>
 			</currency>
 			<currency type="UAH">
 				<displayName>Українська гривня</displayName>
@@ -3713,7 +3613,6 @@
 				<displayName count="many">гривень</displayName>
 				<displayName count="one">гривня</displayName>
 				<displayName count="other">гривні</displayName>
-				<symbol>грн.</symbol>
 			</currency>
 			<currency type="UAK">
 				<displayName>Український карбованець</displayName>
@@ -3728,7 +3627,6 @@
 			</currency>
 			<currency type="UGX">
 				<displayName>Угандійський шилінг</displayName>
-				<symbol>U Sh</symbol>
 			</currency>
 			<currency type="USD">
 				<displayName>Долар США</displayName>
@@ -3748,14 +3646,12 @@
 			</currency>
 			<currency type="UYU">
 				<displayName>Уругвайське песо</displayName>
-				<symbol>Ur$</symbol>
 			</currency>
 			<currency type="UZS">
 				<displayName>Узбецький сум</displayName>
 			</currency>
 			<currency type="VEB">
 				<displayName>Венесуельський болівар</displayName>
-				<symbol>Be</symbol>
 			</currency>
 			<currency type="VEF">
 				<displayName>Венесуельський болівар фуерте</displayName>
@@ -3765,7 +3661,6 @@
 			</currency>
 			<currency type="VUV">
 				<displayName>Вануатська вату</displayName>
-				<symbol>VT</symbol>
 			</currency>
 			<currency type="WST">
 				<displayName>Тала Західного Самоа</displayName>
@@ -3793,7 +3688,6 @@
 			</currency>
 			<currency type="XCD">
 				<displayName>Східнокарибський долар</displayName>
-				<symbol>EC$</symbol>
 			</currency>
 			<currency type="XDR">
 				<displayName>Спеціальні права запозичення</displayName>
@@ -3815,7 +3709,6 @@
 			</currency>
 			<currency type="XPF">
 				<displayName>Французький тихоокеанський франк</displayName>
-				<symbol>CFPF</symbol>
 			</currency>
 			<currency type="XPT">
 				<displayName>Платина</displayName>
@@ -3837,7 +3730,6 @@
 			</currency>
 			<currency type="YER">
 				<displayName>Єменський ріал</displayName>
-				<symbol>YRl</symbol>
 			</currency>
 			<currency type="YUD">
 				<displayName>Югославський твердий динар</displayName>
@@ -3853,7 +3745,6 @@
 			</currency>
 			<currency type="ZAR">
 				<displayName>Південноафриканський ранд</displayName>
-				<symbol>R</symbol>
 			</currency>
 			<currency type="ZMK">
 				<displayName>Квача (Замбія)</displayName>
@@ -3866,7 +3757,6 @@
 			</currency>
 			<currency type="ZWD">
 				<displayName>Зімбабвійський долар</displayName>
-				<symbol>Z$</symbol>
 			</currency>
 		</currencies>
 	</numbers>
@@ -3921,3 +3811,4 @@
 		</messages>
 	</posix>
 </ldml>
+

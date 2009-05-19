@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.88 $"/>
-		<generation date="$Date: 2008/06/26 03:47:57 $"/>
+		<version number="$Revision: 1.99 $"/>
+		<generation date="$Date: 2009/05/05 23:06:37 $"/>
 		<language type="is"/>
 	</identity>
+	<fallback>nn sv nb da en</fallback>
 	<localeDisplayNames>
 		<localeDisplayPattern>
 			<localePattern>{0} ({1})</localePattern>
@@ -22,7 +23,7 @@
 			<language type="af">afríkanska</language>
 			<language type="afa">afróasísk mál (önnur)</language>
 			<language type="afh">afríhílí</language>
-			<language type="ain">aínu</language>
+			<language type="ain">aínu (Japan)</language>
 			<language type="ak">akan</language>
 			<language type="akk">akkadíska</language>
 			<language type="ale">aleúska</language>
@@ -118,7 +119,7 @@
 			<language type="de_AT">austurrísk þýska</language>
 			<language type="de_CH">svissnesk háþýska</language>
 			<language type="del">delaver</language>
-			<language type="den">slav</language>
+			<language type="den">slavneska</language>
 			<language type="dgr">dogríb</language>
 			<language type="din">dinka</language>
 			<language type="doi">dogrí</language>
@@ -144,7 +145,7 @@
 			<language type="eo">esperantó</language>
 			<language type="es">spænska</language>
 			<language type="es_419">latnesk-amerísk spænska</language>
-			<language type="es_ES">spænsk spænska</language>
+			<language type="es_ES">íberísk spænska</language>
 			<language type="et">eistneska</language>
 			<language type="eu">baskneska</language>
 			<language type="ewo">evondó</language>
@@ -343,12 +344,12 @@
 			<language type="no">norska</language>
 			<language type="nog">nógaí</language>
 			<language type="non">norræna</language>
-			<language type="nqo">nkå</language>
+			<language type="nqo">N’Ko</language>
 			<language type="nr">suðurndebele</language>
 			<language type="nso">norðursótó</language>
 			<language type="nub">núbísk mál</language>
 			<language type="nv">navahó</language>
-			<language type="nwc">klassisk nevarí</language>
+			<language type="nwc">klassísk nevaríska</language>
 			<language type="ny">Njanja; Sísjeva; Sjeva</language>
 			<language type="nym">njamvesí</language>
 			<language type="nyn">njankóle</language>
@@ -445,7 +446,7 @@
 			<language type="sux">súmerska</language>
 			<language type="sv">sænska</language>
 			<language type="sw">svahílí</language>
-			<language type="syc">klassisk sýrlenska</language>
+			<language type="syc">klassísk sýrlenska</language>
 			<language type="syr">sýrlenska</language>
 			<language type="ta">tamílska</language>
 			<language type="tai">taímál (önnur)</language>
@@ -484,7 +485,7 @@
 			<language type="uga">úgarítíska</language>
 			<language type="uk">úkraínska</language>
 			<language type="umb">úmbúndú</language>
-			<language type="und">óljóst</language>
+			<language type="und">óþekkt eða ógilt tungumál</language>
 			<language type="ur">úrdú</language>
 			<language type="uz">úsbekska</language>
 			<language type="vai">vaí</language>
@@ -517,13 +518,35 @@
 			<language type="zu">súlú</language>
 			<language type="zun">súní</language>
 			<language type="zxx">ekkert tungutengt efni</language>
-			<language type="zza">zázá</language>
+			<language type="zza">zázáíska</language>
 		</languages>
 		<scripts>
 			<script type="Arab">arabísk</script>
+			<script type="Armi">impéríska araméíska</script>
+			<script type="Armn">arméníska</script>
+			<script type="Avst">avestíska</script>
+			<script type="Bali">balinesíska</script>
+			<script type="Batk">batakíska</script>
+			<script type="Beng">bengalíska</script>
+			<script type="Blis">blisstégn</script>
+			<script type="Bopo">bopomofo</script>
+			<script type="Brah">brahmíska</script>
+			<script type="Brai">blindtégn</script>
+			<script type="Bugi">buginesíska</script>
+			<script type="Buhd">buhid</script>
+			<script type="Cakm">chakma</script>
 			<script type="Cans">Cans</script>
+			<script type="Cari">karíska</script>
+			<script type="Cham">chamíska</script>
+			<script type="Cher">cherokí</script>
+			<script type="Cirt">círth</script>
+			<script type="Copt">koptíska</script>
+			<script type="Cprt">kypriotíska</script>
 			<script type="Cyrl">kyrillísk</script>
+			<script type="Deva">dévanágríska</script>
+			<script type="Dsrt">deseret</script>
 			<script type="Ethi">eþíópísk</script>
+			<script type="Geok">georgíska (khutsuri)</script>
 			<script type="Geor">georgrísk</script>
 			<script type="Grek">grísk</script>
 			<script type="Hang">hangul</script>
@@ -533,11 +556,55 @@
 			<script type="Hebr">hebresk</script>
 			<script type="Hira">hiragana</script>
 			<script type="Hrkt">katakana eða hiragana</script>
+			<script type="Java">javanesíska</script>
 			<script type="Jpan">japönsk</script>
+			<script type="Kali">kayah li</script>
 			<script type="Kana">katakana</script>
-			<script type="Kore">kórönsk</script>
+			<script type="Khmr">khmeríska</script>
+			<script type="Kore">kórönska</script>
+			<script type="Kthi">kaithíska</script>
+			<script type="Lana">lanna</script>
+			<script type="Laoo">laotíska</script>
+			<script type="Latf">frakturlatnéska</script>
+			<script type="Latg">gaeliklatnéska</script>
 			<script type="Latn">latnesk</script>
-			<script type="Qaai">erfðir</script>
+			<script type="Lepc">lepcha</script>
+			<script type="Limb">limbu</script>
+			<script type="Lyci">lykíska</script>
+			<script type="Lydi">lydíska</script>
+			<script type="Mand">mandaíska</script>
+			<script type="Mani">manikeíska</script>
+			<script type="Mero">meroitíska</script>
+			<script type="Mong">mongólíska</script>
+			<script type="Moon">moon</script>
+			<script type="Mymr">burmesíska</script>
+			<script type="Nkoo">n-kó</script>
+			<script type="Ogam">ogham</script>
+			<script type="Orkh">orkhon</script>
+			<script type="Orya">oríja</script>
+			<script type="Qaai">(erfðir)</script>
+			<script type="Rjng">rejang</script>
+			<script type="Roro">rongorongo</script>
+			<script type="Runr">rúntégn</script>
+			<script type="Samr">samaríska</script>
+			<script type="Sara">saratí</script>
+			<script type="Shaw">shavíska</script>
+			<script type="Sinh">sinhala</script>
+			<script type="Sund">sundanesíska</script>
+			<script type="Sylo">syloti nagri</script>
+			<script type="Syrc">syriakíska</script>
+			<script type="Tale">tai le</script>
+			<script type="Taml">tamílska</script>
+			<script type="Tavt">tai viet</script>
+			<script type="Telu">telugu</script>
+			<script type="Teng">tengvar</script>
+			<script type="Tfng">tifinagh</script>
+			<script type="Tglg">tagalog</script>
+			<script type="Thai">thai</script>
+			<script type="Tibt">tibetánska</script>
+			<script type="Ugar">ugaritíska</script>
+			<script type="Vaii">vai</script>
+			<script type="Yiii">yí</script>
 			<script type="Zxxx">Óskrifað</script>
 			<script type="Zzzz">Óþekkt eða ógilt letur</script>
 		</scripts>
@@ -722,7 +789,7 @@
 			<territory type="ML">Malí</territory>
 			<territory type="MM">Mjanmar</territory>
 			<territory type="MN">Mongólía</territory>
-			<territory type="MO">Makáo</territory>
+			<territory type="MO">Makaó</territory>
 			<territory type="MP">Norður-Maríanaeyjar</territory>
 			<territory type="MQ">Martiník</territory>
 			<territory type="MR">Máritanía</territory>
@@ -838,7 +905,7 @@
 			<type type="direct" key="collation">Bein röðun</type>
 			<type type="gb2312han" key="collation">einfölduð kínversk röðun - GB2312</type>
 			<type type="gregorian" key="calendar">Gregorískt dagatal</type>
-			<type type="hebrew" key="calendar">Hebreskt  dagatal</type>
+			<type type="hebrew" key="calendar">Hebreskt dagatal</type>
 			<type type="indian" key="calendar">indverskt dagatal</type>
 			<type type="islamic" key="calendar">Íslamskt dagatal</type>
 			<type type="islamic-civil" key="calendar">Íslamskt borgaradagatal</type>
@@ -874,6 +941,7 @@
 		<alternateQuotationEnd>‘</alternateQuotationEnd>
 	</delimiters>
 	<dates>
+		<dateRangePattern>{0}–{1}</dateRangePattern>
 		<calendars>
 			<calendar type="gregorian">
 				<months>
@@ -1008,12 +1076,12 @@
 				<dateFormats>
 					<dateFormatLength type="full">
 						<dateFormat>
-							<pattern>EEEE, d. MMMM yyyy</pattern>
+							<pattern>EEEE, d. MMMM y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="long">
 						<dateFormat>
-							<pattern>d. MMMM yyyy</pattern>
+							<pattern>d. MMMM y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="medium">
@@ -1030,7 +1098,7 @@
 				<timeFormats>
 					<timeFormatLength type="full">
 						<timeFormat>
-							<pattern>HH:mm:ss v</pattern>
+							<pattern>HH:mm:ss zzzz</pattern>
 						</timeFormat>
 					</timeFormatLength>
 					<timeFormatLength type="long">
@@ -1050,11 +1118,6 @@
 					</timeFormatLength>
 				</timeFormats>
 				<dateTimeFormats>
-					<dateTimeFormatLength>
-						<dateTimeFormat>
-							<pattern>{1} {0}</pattern>
-						</dateTimeFormat>
-					</dateTimeFormatLength>
 					<availableFormats>
 						<dateFormatItem id="HHmm">HH:mm</dateFormatItem>
 						<dateFormatItem id="HHmmss">HH:mm:ss</dateFormatItem>
@@ -1069,17 +1132,17 @@
 						<dateFormatItem id="Md">d.M</dateFormatItem>
 						<dateFormatItem id="d">d</dateFormatItem>
 						<dateFormatItem id="ms">mm:ss</dateFormatItem>
-						<dateFormatItem id="y">yyyy</dateFormatItem>
+						<dateFormatItem id="y">y</dateFormatItem>
 						<dateFormatItem id="yM">M. yyyy</dateFormatItem>
 						<dateFormatItem id="yMEd">EEE d.M.yyyy</dateFormatItem>
-						<dateFormatItem id="yMMM">MMM yyyy</dateFormatItem>
-						<dateFormatItem id="yMMMEd">EEE d. MMM yyyy</dateFormatItem>
-						<dateFormatItem id="yMMMM">MMMM yyyy</dateFormatItem>
+						<dateFormatItem id="yMMM">MMM y</dateFormatItem>
+						<dateFormatItem id="yMMMEd">EEE d. MMM y</dateFormatItem>
+						<dateFormatItem id="yMMMM">MMMM y</dateFormatItem>
 						<dateFormatItem id="yQ">Q. yyyy</dateFormatItem>
-						<dateFormatItem id="yQQQ">QQQ yyyy</dateFormatItem>
+						<dateFormatItem id="yQQQ">QQQ y</dateFormatItem>
 						<dateFormatItem id="yyQ">Q yy</dateFormatItem>
 						<dateFormatItem id="yyyyM">M.yyyy</dateFormatItem>
-						<dateFormatItem id="yyyyMMMM">MMMM yyyy</dateFormatItem>
+						<dateFormatItem id="yyyyMMMM">MMMM y</dateFormatItem>
 					</availableFormats>
 					<intervalFormats>
 						<intervalFormatFallback>{0} - {1}</intervalFormatFallback>
@@ -1135,18 +1198,18 @@
 							<greatestDifference id="y">E, d.M.yyyy - E, d.M.yyyy</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMM">
-							<greatestDifference id="M">MMM-MMM yyyy</greatestDifference>
-							<greatestDifference id="y">MMM yyyy - MMM yyyy</greatestDifference>
+							<greatestDifference id="M">MMM-MMM y</greatestDifference>
+							<greatestDifference id="y">MMM y - MMM y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMEd">
-							<greatestDifference id="M">E, d. MMM - E, d. MMM yyyy</greatestDifference>
-							<greatestDifference id="d">E, d. - E, d. MMM yyyy</greatestDifference>
-							<greatestDifference id="y">E, d. MMM yyyy - E, d. MMM yyyy</greatestDifference>
+							<greatestDifference id="M">E, d. MMM - E, d. MMM y</greatestDifference>
+							<greatestDifference id="d">E, d. - E, d. MMM y</greatestDifference>
+							<greatestDifference id="y">E, d. MMM y - E, d. MMM y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMd">
-							<greatestDifference id="M">d. MMM - d. MMM yyyy</greatestDifference>
-							<greatestDifference id="d">d.-d. MMM yyyy</greatestDifference>
-							<greatestDifference id="y">d. MMM yyyy - d. MMM yyyy</greatestDifference>
+							<greatestDifference id="M">d. MMM - d. MMM y</greatestDifference>
+							<greatestDifference id="d">d.-d. MMM y</greatestDifference>
+							<greatestDifference id="y">d. MMM y - d. MMM y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMd">
 							<greatestDifference id="M">d.M.yyyy - d.M.yyyy</greatestDifference>
@@ -1170,13 +1233,13 @@
 					</field>
 					<field type="day">
 						<displayName>dagur</displayName>
+						<relative type="-3">fyrir þremur dögum</relative>
+						<relative type="-2">fyrir tveimur dögum</relative>
+						<relative type="-1">í gær</relative>
 						<relative type="0">í dag</relative>
 						<relative type="1">á morgun</relative>
 						<relative type="2">eftir tvo daga</relative>
 						<relative type="3">eftir þrjá daga</relative>
-						<relative type="-1">í gær</relative>
-						<relative type="-2">fyrir tveimur dögum</relative>
-						<relative type="-3">fyrir þremur dögum</relative>
 					</field>
 					<field type="weekday">
 						<displayName>vikudagur</displayName>
@@ -1203,6 +1266,7 @@
 			<hourFormat>+HH:mm;−HH:mm</hourFormat>
 			<gmtFormat>GMT{0}</gmtFormat>
 			<regionFormat>{0}</regionFormat>
+			<fallbackFormat>{0} ({1})</fallbackFormat>
 			<zone type="Etc/Unknown">
 				<exemplarCity>óþekkt</exemplarCity>
 			</zone>
@@ -1505,6 +1569,7 @@
 			<list>;</list>
 			<percentSign>%</percentSign>
 			<nativeZeroDigit>0</nativeZeroDigit>
+			<patternDigit>#</patternDigit>
 			<plusSign>+</plusSign>
 			<minusSign>−</minusSign>
 			<exponential>×10^</exponential>
@@ -1539,6 +1604,8 @@
 					<pattern>#,##0.00 ¤</pattern>
 				</currencyFormat>
 			</currencyFormatLength>
+			<unitPattern count="one">{0} {1}</unitPattern>
+			<unitPattern count="other">{0} {1}</unitPattern>
 		</currencyFormats>
 		<currencies>
 			<currency type="ADP">
@@ -1549,15 +1616,12 @@
 			</currency>
 			<currency type="ALL">
 				<displayName>Lek</displayName>
-				<symbol>lek</symbol>
 			</currency>
 			<currency type="AMD">
 				<displayName>Dramm</displayName>
-				<symbol>dram</symbol>
 			</currency>
 			<currency type="ANG">
 				<displayName>Hollenskt Antillugyllini</displayName>
-				<symbol>NA f.</symbol>
 			</currency>
 			<currency type="ARA">
 				<displayName>Argentine Austral</displayName>
@@ -1567,33 +1631,27 @@
 			</currency>
 			<currency type="ARS">
 				<displayName>Argentískur pesi</displayName>
-				<symbol>Arg$</symbol>
 			</currency>
 			<currency type="ATS">
 				<displayName>Austurrískur skildingur</displayName>
 			</currency>
 			<currency type="AUD">
 				<displayName>Ástralskur dalur</displayName>
-				<symbol>$A</symbol>
 			</currency>
 			<currency type="BBD">
 				<displayName>Barbadoskur dalur</displayName>
-				<symbol>BDS$</symbol>
 			</currency>
 			<currency type="BEF">
 				<displayName>Belgískur franki</displayName>
-				<symbol>BF</symbol>
 			</currency>
 			<currency type="BGL">
 				<displayName>Lef</displayName>
-				<symbol>lev</symbol>
 			</currency>
 			<currency type="BGN">
 				<displayName>Lef, nýtt</displayName>
 			</currency>
 			<currency type="BMD">
 				<displayName>Bermúdeyskur dalur</displayName>
-				<symbol>Ber$</symbol>
 			</currency>
 			<currency type="BND">
 				<displayName>Brúneiskur dalur</displayName>
@@ -1618,30 +1676,24 @@
 			</currency>
 			<currency type="BZD">
 				<displayName>Belískur dalur</displayName>
-				<symbol>BZ$</symbol>
 			</currency>
 			<currency type="CAD">
 				<displayName>Kanadískur dalur</displayName>
-				<symbol>Can$</symbol>
 			</currency>
 			<currency type="CHF">
 				<displayName>Svissneskur franki</displayName>
-				<symbol>SwF</symbol>
 			</currency>
 			<currency type="CLF">
 				<displayName>Chilean Unidades de Fomento</displayName>
 			</currency>
 			<currency type="CLP">
 				<displayName>Chileskur pesi</displayName>
-				<symbol>Ch$</symbol>
 			</currency>
 			<currency type="CNY">
 				<displayName>Júan</displayName>
-				<symbol>Y</symbol>
 			</currency>
 			<currency type="COP">
 				<displayName>Kólumbískur pesi</displayName>
-				<symbol>Col$</symbol>
 			</currency>
 			<currency type="CSK">
 				<displayName>Tékknesk króna, eldri</displayName>
@@ -1651,11 +1703,9 @@
 			</currency>
 			<currency type="CVE">
 				<displayName>Grænhöfðeyskur skúti</displayName>
-				<symbol>CVEsc</symbol>
 			</currency>
 			<currency type="CYP">
 				<displayName>Kýpverskt pund</displayName>
-				<symbol>£C</symbol>
 			</currency>
 			<currency type="CZK">
 				<displayName>Tékknesk króna</displayName>
@@ -1668,15 +1718,12 @@
 			</currency>
 			<currency type="DJF">
 				<displayName>Djibouti Franc</displayName>
-				<symbol>DF</symbol>
 			</currency>
 			<currency type="DKK">
 				<displayName>Dönsk króna</displayName>
-				<symbol>DKr</symbol>
 			</currency>
 			<currency type="DOP">
 				<displayName>Dóminískur pesi</displayName>
-				<symbol>RD$</symbol>
 			</currency>
 			<currency type="ECS">
 				<displayName>Ecuador Sucre</displayName>
@@ -1698,7 +1745,6 @@
 			</currency>
 			<currency type="FJD">
 				<displayName>Fídjeyskur dalur</displayName>
-				<symbol>F$</symbol>
 			</currency>
 			<currency type="FKP">
 				<displayName>Falklenskt pund</displayName>
@@ -1714,44 +1760,36 @@
 			</currency>
 			<currency type="GNF">
 				<displayName>Gíneufranki</displayName>
-				<symbol>GF</symbol>
 			</currency>
 			<currency type="GRD">
 				<displayName>Drakma</displayName>
 			</currency>
 			<currency type="GTQ">
 				<displayName>Guatemala Quetzal</displayName>
-				<symbol>Q</symbol>
 			</currency>
 			<currency type="GWE">
 				<displayName>Portúgalskur, gíneskur skúti</displayName>
 			</currency>
 			<currency type="GYD">
 				<displayName>Gvæjanskur dalur</displayName>
-				<symbol>G$</symbol>
 			</currency>
 			<currency type="HKD">
 				<displayName>Hong Kong-dalur</displayName>
-				<symbol>HK$</symbol>
 			</currency>
 			<currency type="HNL">
 				<displayName>Hoduras Lempira</displayName>
-				<symbol>L</symbol>
 			</currency>
 			<currency type="HRK">
 				<displayName>Kúna</displayName>
 			</currency>
 			<currency type="HUF">
 				<displayName>Fórinta</displayName>
-				<symbol>Ft</symbol>
 			</currency>
 			<currency type="IDR">
 				<displayName>Indónesísk rúpía</displayName>
-				<symbol>Rp</symbol>
 			</currency>
 			<currency type="IEP">
 				<displayName>Írskt pund</displayName>
-				<symbol>IR£</symbol>
 			</currency>
 			<currency type="ILP">
 				<displayName>Ísraelskt pund</displayName>
@@ -1761,26 +1799,24 @@
 			</currency>
 			<currency type="INR">
 				<displayName>Indversk rúpía</displayName>
-				<symbol>INR</symbol>
 			</currency>
 			<currency type="IQD">
 				<displayName>Írakskur denari</displayName>
-				<symbol>ID</symbol>
 			</currency>
 			<currency type="IRR">
 				<displayName>Íranskt ríal</displayName>
-				<symbol>RI</symbol>
 			</currency>
 			<currency type="ISK">
 				<displayName>Íslensk króna</displayName>
-				<symbol>kr.</symbol>
+				<displayName count="one">íslensk króna</displayName>
+				<displayName count="other">íslensku krónur</displayName>
+				<symbol>kr</symbol>
 			</currency>
 			<currency type="ITL">
 				<displayName>Ítölsk líra</displayName>
 			</currency>
 			<currency type="JMD">
 				<displayName>Jamaískur dalur</displayName>
-				<symbol>J$</symbol>
 			</currency>
 			<currency type="JPY">
 				<displayName>Jen</displayName>
@@ -1790,7 +1826,6 @@
 			</currency>
 			<currency type="KMF">
 				<displayName>Kómoreyskur franki</displayName>
-				<symbol>CF</symbol>
 			</currency>
 			<currency type="KPW">
 				<displayName>Norðurkóreskt vonn</displayName>
@@ -1800,29 +1835,24 @@
 			</currency>
 			<currency type="KWD">
 				<displayName>Kúveiskur denari</displayName>
-				<symbol>KD</symbol>
 			</currency>
 			<currency type="KYD">
 				<displayName>Caymaneyskur dalur</displayName>
 			</currency>
 			<currency type="KZT">
 				<displayName>Kazakhstan Tenge</displayName>
-				<symbol>T</symbol>
 			</currency>
 			<currency type="LBP">
 				<displayName>Líbanskt pund</displayName>
-				<symbol>LL</symbol>
 			</currency>
 			<currency type="LKR">
 				<displayName>Srílönsk rúpía</displayName>
-				<symbol>SL Re</symbol>
 			</currency>
 			<currency type="LRD">
 				<displayName>Líberískur dalur</displayName>
 			</currency>
 			<currency type="LSL">
 				<displayName>Lesotho Loti</displayName>
-				<symbol>M</symbol>
 			</currency>
 			<currency type="LTL">
 				<displayName>Lít</displayName>
@@ -1841,7 +1871,6 @@
 			</currency>
 			<currency type="LYD">
 				<displayName>Líbískur denari</displayName>
-				<symbol>LD</symbol>
 			</currency>
 			<currency type="MAD">
 				<displayName>Marokkóskt dírham</displayName>
@@ -1857,7 +1886,6 @@
 			</currency>
 			<currency type="MKD">
 				<displayName>Makedónskur denari</displayName>
-				<symbol>MDen</symbol>
 			</currency>
 			<currency type="MLF">
 				<displayName>Malískur franki</displayName>
@@ -1867,42 +1895,36 @@
 			</currency>
 			<currency type="MNT">
 				<displayName>Túríkur</displayName>
-				<symbol>Tug</symbol>
 			</currency>
 			<currency type="MOP">
 				<displayName>Macao Pataca</displayName>
 			</currency>
 			<currency type="MRO">
 				<displayName>Mauritania Ouguiya</displayName>
-				<symbol>UM</symbol>
 			</currency>
 			<currency type="MTL">
 				<displayName>Meltnesk líra</displayName>
-				<symbol>Lm</symbol>
 			</currency>
 			<currency type="MTP">
 				<displayName>Maltneskt pund</displayName>
 			</currency>
 			<currency type="MXN">
 				<displayName>Mexíkóskur pesi</displayName>
-				<symbol>MEX$</symbol>
 			</currency>
 			<currency type="MXP">
-				<displayName>Mexíkóskur silfurpesi  (1861-1992)</displayName>
+				<displayName>Mexíkóskur silfurpesi (1861-1992)</displayName>
 			</currency>
 			<currency type="MXV">
 				<displayName>Mexíkóskur pesi, UDI</displayName>
 			</currency>
 			<currency type="MYR">
 				<displayName>Malaysian Ringgit</displayName>
-				<symbol>RM</symbol>
 			</currency>
 			<currency type="MZE">
 				<displayName>Mósambískur skúti</displayName>
 			</currency>
 			<currency type="NAD">
 				<displayName>Namibískur dalur</displayName>
-				<symbol>N$</symbol>
 			</currency>
 			<currency type="NGN">
 				<displayName>Nigerian Naira</displayName>
@@ -1912,15 +1934,12 @@
 			</currency>
 			<currency type="NOK">
 				<displayName>Norsk króna</displayName>
-				<symbol>NKr</symbol>
 			</currency>
 			<currency type="NZD">
 				<displayName>Nýsjálenskur dalur</displayName>
-				<symbol>$NZ</symbol>
 			</currency>
 			<currency type="OMR">
 				<displayName>Ómanskt ríal</displayName>
-				<symbol>RO</symbol>
 			</currency>
 			<currency type="PAB">
 				<displayName>Balbói</displayName>
@@ -1933,7 +1952,6 @@
 			</currency>
 			<currency type="PKR">
 				<displayName>Pakistönsk rúpía</displayName>
-				<symbol>Pra</symbol>
 			</currency>
 			<currency type="PLN">
 				<displayName>pólskt zlotý</displayName>
@@ -1946,7 +1964,6 @@
 			</currency>
 			<currency type="ROL">
 				<displayName>Rúmenskt lei</displayName>
-				<symbol>leu</symbol>
 			</currency>
 			<currency type="RON">
 				<displayName>rúmensk leu</displayName>
@@ -1965,15 +1982,12 @@
 			</currency>
 			<currency type="SAR">
 				<displayName>Sádiarabískt ríal</displayName>
-				<symbol>SRl</symbol>
 			</currency>
 			<currency type="SBD">
 				<displayName>Salómonseyskur dalur</displayName>
-				<symbol>SI$</symbol>
 			</currency>
 			<currency type="SCR">
 				<displayName>Seychelles rúpía</displayName>
-				<symbol>SR</symbol>
 			</currency>
 			<currency type="SDD">
 				<displayName>Súdanskur denari</displayName>
@@ -1983,11 +1997,9 @@
 			</currency>
 			<currency type="SEK">
 				<displayName>Sænsk króna</displayName>
-				<symbol>SKr</symbol>
 			</currency>
 			<currency type="SGD">
 				<displayName>Singapúrskur dalur</displayName>
-				<symbol>S$</symbol>
 			</currency>
 			<currency type="SHP">
 				<displayName>Helenskt pund</displayName>
@@ -1997,15 +2009,12 @@
 			</currency>
 			<currency type="SKK">
 				<displayName>Slóvakísk króna</displayName>
-				<symbol>Sk</symbol>
 			</currency>
 			<currency type="SRG">
 				<displayName>Suriname Guilder</displayName>
-				<symbol>Sf</symbol>
 			</currency>
 			<currency type="STD">
 				<displayName>Sao Tome and Principe Dobra</displayName>
-				<symbol>Db</symbol>
 			</currency>
 			<currency type="SUR">
 				<displayName>Soviet Rouble</displayName>
@@ -2015,7 +2024,6 @@
 			</currency>
 			<currency type="SYP">
 				<displayName>Sýrlenskt pund</displayName>
-				<symbol>LS</symbol>
 			</currency>
 			<currency type="THB">
 				<displayName>Bat</displayName>
@@ -2034,22 +2042,18 @@
 			</currency>
 			<currency type="TRL">
 				<displayName>Tyrknesk líra</displayName>
-				<symbol>TL</symbol>
 			</currency>
 			<currency type="TRY">
 				<displayName>Ný tyrknesk líra</displayName>
 			</currency>
 			<currency type="TTD">
 				<displayName>Trínidad og Tóbagó-dalur</displayName>
-				<symbol>TT$</symbol>
 			</currency>
 			<currency type="TWD">
 				<displayName>Taívanskur dalur</displayName>
-				<symbol>NT$</symbol>
 			</currency>
 			<currency type="TZS">
 				<displayName>Tanzanian Shilling</displayName>
-				<symbol>T Sh</symbol>
 			</currency>
 			<currency type="UAH">
 				<displayName>Hrinja</displayName>
@@ -2068,21 +2072,24 @@
 			</currency>
 			<currency type="VEB">
 				<displayName>Venezuelan Bolivar</displayName>
-				<symbol>Be</symbol>
 			</currency>
 			<currency type="VND">
 				<displayName>víetnamskt dong</displayName>
 			</currency>
 			<currency type="VUV">
 				<displayName>Vanuatu Vatu</displayName>
-				<symbol>VT</symbol>
 			</currency>
 			<currency type="XAF">
 				<displayName>Miðafrískur franki, BEAC</displayName>
 			</currency>
+			<currency type="XAG">
+				<displayName>unse silfur</displayName>
+			</currency>
+			<currency type="XAU">
+				<displayName>unse gull</displayName>
+			</currency>
 			<currency type="XCD">
 				<displayName>Austur-Karíbahafsdalur</displayName>
-				<symbol>EC$</symbol>
 			</currency>
 			<currency type="XDR">
 				<displayName>Sérstök dráttarréttindi</displayName>
@@ -2096,9 +2103,14 @@
 			<currency type="XOF">
 				<displayName>Miðafrískur franki, BCEAO</displayName>
 			</currency>
+			<currency type="XPD">
+				<displayName>unse palladín</displayName>
+			</currency>
 			<currency type="XPF">
 				<displayName>Pólinesískur franki</displayName>
-				<symbol>CFPF</symbol>
+			</currency>
+			<currency type="XPT">
+				<displayName>unse platína</displayName>
 			</currency>
 			<currency type="XXX">
 				<displayName>Óþekktur eða ógildur gjaldeyrir</displayName>
@@ -2110,7 +2122,6 @@
 			</currency>
 			<currency type="YER">
 				<displayName>Jemenskt ríal</displayName>
-				<symbol>YRl</symbol>
 			</currency>
 			<currency type="YUM">
 				<displayName>Júgóslavneskur denari</displayName>
@@ -2126,7 +2137,6 @@
 			</currency>
 			<currency type="ZWD">
 				<displayName>Simbabveskur dalur</displayName>
-				<symbol>Z$</symbol>
 			</currency>
 		</currencies>
 	</numbers>
@@ -2167,3 +2177,4 @@
 		</messages>
 	</posix>
 </ldml>
+

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.70 $"/>
-		<generation date="$Date: 2008/06/17 14:12:14 $"/>
+		<version number="$Revision: 1.83 $"/>
+		<generation date="$Date: 2009/05/05 23:06:41 $"/>
 		<language type="vi"/>
 	</identity>
 	<localeDisplayNames>
@@ -48,7 +48,7 @@
 			<language type="gd">Tiếng Xentơ (Xcốt len)</language>
 			<language type="gl">Tiếng Galician</language>
 			<language type="gn">Tiếng Guarani</language>
-			<language type="gu">Tiếng  Gujarati</language>
+			<language type="gu">Tiếng Gujarati</language>
 			<language type="he">Tiếng Hê-brơ</language>
 			<language type="hi">Tiếng Hin-đi</language>
 			<language type="hr">Tiếng Crô-a-ti-a</language>
@@ -254,7 +254,7 @@
 			<territory type="GU">Đảo Gu-am</territory>
 			<territory type="GW">Ghi-nê Bít-xao</territory>
 			<territory type="GY">Guy-a-na</territory>
-			<territory type="HK">Hồng Kông</territory>
+			<territory type="HK">Đặc khu hành chính Hồng Kông thuộc CHND Trung Hoa</territory>
 			<territory type="HM">Đảo Heard và Quần đảo McDonald</territory>
 			<territory type="HN">Hôn-đu-rát</territory>
 			<territory type="HR">Crô-a-ti-a</territory>
@@ -307,7 +307,7 @@
 			<territory type="ML">Ma-li</territory>
 			<territory type="MM">Mi-an-ma</territory>
 			<territory type="MN">Mông Cổ</territory>
-			<territory type="MO">Macao</territory>
+			<territory type="MO">Đặc khu hành chính Macao thuộc CHND Trung Hoa</territory>
 			<territory type="MP">Quần Đảo Bắc Mariana</territory>
 			<territory type="MQ">MQ</territory>
 			<territory type="MR">Mô-ri-ta-ni</territory>
@@ -459,22 +459,6 @@
 							<month type="12">tháng mười hai</month>
 						</monthWidth>
 					</monthContext>
-					<monthContext type="stand-alone">
-						<monthWidth type="narrow">
-							<month type="1">1</month>
-							<month type="2">2</month>
-							<month type="3">3</month>
-							<month type="4">4</month>
-							<month type="5">5</month>
-							<month type="6">6</month>
-							<month type="7">7</month>
-							<month type="8">8</month>
-							<month type="9">9</month>
-							<month type="10">10</month>
-							<month type="11">11</month>
-							<month type="12">12</month>
-						</monthWidth>
-					</monthContext>
 				</months>
 				<days>
 					<dayContext type="format">
@@ -497,34 +481,7 @@
 							<day type="sat">Thứ bảy</day>
 						</dayWidth>
 					</dayContext>
-					<dayContext type="stand-alone">
-						<dayWidth type="narrow">
-							<day type="sun">1</day>
-							<day type="mon">2</day>
-							<day type="tue">3</day>
-							<day type="wed">4</day>
-							<day type="thu">5</day>
-							<day type="fri">6</day>
-							<day type="sat">7</day>
-						</dayWidth>
-					</dayContext>
 				</days>
-				<quarters>
-					<quarterContext type="format">
-						<quarterWidth type="abbreviated">
-							<quarter type="1">Q1</quarter>
-							<quarter type="2">Q2</quarter>
-							<quarter type="3">Q3</quarter>
-							<quarter type="4">Q4</quarter>
-						</quarterWidth>
-						<quarterWidth type="wide">
-							<quarter type="1">Q1</quarter>
-							<quarter type="2">Q2</quarter>
-							<quarter type="3">Q3</quarter>
-							<quarter type="4">Q4</quarter>
-						</quarterWidth>
-					</quarterContext>
-				</quarters>
 				<am>SA</am>
 				<pm>CH</pm>
 				<eras>
@@ -536,12 +493,12 @@
 				<dateFormats>
 					<dateFormatLength type="full">
 						<dateFormat>
-							<pattern>EEEE, 'ngày' dd MMMM 'năm' yyyy</pattern>
+							<pattern>EEEE, 'ngày' dd MMMM 'năm' y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="long">
 						<dateFormat>
-							<pattern>'Ngày' dd 'tháng' M 'năm' yyyy</pattern>
+							<pattern>'Ngày' dd 'tháng' M 'năm' y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="medium">
@@ -558,7 +515,7 @@
 				<timeFormats>
 					<timeFormatLength type="full">
 						<timeFormat>
-							<pattern>HH:mm:ss v</pattern>
+							<pattern>HH:mm:ss zzzz</pattern>
 						</timeFormat>
 					</timeFormatLength>
 					<timeFormatLength type="long">
@@ -578,7 +535,22 @@
 					</timeFormatLength>
 				</timeFormats>
 				<dateTimeFormats>
-					<dateTimeFormatLength>
+					<dateTimeFormatLength type="full">
+						<dateTimeFormat>
+							<pattern>{0} {1}</pattern>
+						</dateTimeFormat>
+					</dateTimeFormatLength>
+					<dateTimeFormatLength type="long">
+						<dateTimeFormat>
+							<pattern>{0} {1}</pattern>
+						</dateTimeFormat>
+					</dateTimeFormatLength>
+					<dateTimeFormatLength type="medium">
+						<dateTimeFormat>
+							<pattern>{0} {1}</pattern>
+						</dateTimeFormat>
+					</dateTimeFormatLength>
+					<dateTimeFormatLength type="short">
 						<dateTimeFormat>
 							<pattern>{0} {1}</pattern>
 						</dateTimeFormat>
@@ -596,13 +568,13 @@
 						<dateFormatItem id="Md">d-M</dateFormatItem>
 						<dateFormatItem id="mmss">mm:ss</dateFormatItem>
 						<dateFormatItem id="yMEd">EEE, d-M-yyyy</dateFormatItem>
-						<dateFormatItem id="yMMM">MMM yyyy</dateFormatItem>
-						<dateFormatItem id="yMMMEd">EEE, d MMM yyyy</dateFormatItem>
-						<dateFormatItem id="yMMMM">MMMM yyyy</dateFormatItem>
+						<dateFormatItem id="yMMM">MMM y</dateFormatItem>
+						<dateFormatItem id="yMMMEd">EEE, d MMM y</dateFormatItem>
+						<dateFormatItem id="yMMMM">MMMM y</dateFormatItem>
 						<dateFormatItem id="yQ">Q yyyy</dateFormatItem>
-						<dateFormatItem id="yQQQ">QQQ yyyy</dateFormatItem>
+						<dateFormatItem id="yQQQ">QQQ y</dateFormatItem>
 						<dateFormatItem id="yyQ">Q yy</dateFormatItem>
-						<dateFormatItem id="yyyy">yyyy</dateFormatItem>
+						<dateFormatItem id="yyyy">y</dateFormatItem>
 						<dateFormatItem id="yyyyMM">MM-yyyy</dateFormatItem>
 					</availableFormats>
 					<intervalFormats>
@@ -661,18 +633,18 @@
 							<greatestDifference id="y">EEEE, dd/MM/yyyy - EEEE, dd/MM/yyyy</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMM">
-							<greatestDifference id="M">'Tháng' M - 'Tháng' M 'năm' yyyy</greatestDifference>
-							<greatestDifference id="y">'Tháng' M 'năm' yyyy - 'Tháng' M 'năm' yyyy</greatestDifference>
+							<greatestDifference id="M">'Tháng' M - 'Tháng' M 'năm' y</greatestDifference>
+							<greatestDifference id="y">'Tháng' M 'năm' y - 'Tháng' M 'năm' y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMEd">
-							<greatestDifference id="M">EEEE, 'ngày' dd MMM - EEEE, 'ngày' dd MMM 'năm' yyyy</greatestDifference>
-							<greatestDifference id="d">EEEE, 'ngày' dd MMM - EEEE, 'ngày' dd MMM 'năm' yyyy</greatestDifference>
-							<greatestDifference id="y">EEEE, 'ngày' dd MMM 'năm' yyyy - EEEE, 'ngày' dd MMM 'năm' yyyy</greatestDifference>
+							<greatestDifference id="M">EEEE, 'ngày' dd MMM - EEEE, 'ngày' dd MMM 'năm' y</greatestDifference>
+							<greatestDifference id="d">EEEE, 'ngày' dd MMM - EEEE, 'ngày' dd MMM 'năm' y</greatestDifference>
+							<greatestDifference id="y">EEEE, 'ngày' dd MMM 'năm' y - EEEE, 'ngày' dd MMM 'năm' y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMd">
-							<greatestDifference id="M">'Ngày' dd 'tháng' M - 'Ngày' dd 'tháng' M 'năm' yyyy</greatestDifference>
-							<greatestDifference id="d">'Ngày' dd 'tháng' M - 'Ngày' dd 'tháng' M 'năm' yyyy</greatestDifference>
-							<greatestDifference id="y">'Ngày' dd 'tháng' M 'năm' yyyy - 'Ngày' dd 'tháng' M 'năm' yyyy</greatestDifference>
+							<greatestDifference id="M">'Ngày' dd 'tháng' M - 'Ngày' dd 'tháng' M 'năm' y</greatestDifference>
+							<greatestDifference id="d">'Ngày' dd 'tháng' M - 'Ngày' dd 'tháng' M 'năm' y</greatestDifference>
+							<greatestDifference id="y">'Ngày' dd 'tháng' M 'năm' y - 'Ngày' dd 'tháng' M 'năm' y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMd">
 							<greatestDifference id="M">dd/MM/yyyy - dd/MM/yyyy</greatestDifference>
@@ -932,7 +904,6 @@
 			</currency>
 			<currency type="INR">
 				<displayName>Rupi Ấn Độ</displayName>
-				<symbol>0≤Rs.|1≤Re.|1&lt;Rs.</symbol>
 			</currency>
 			<currency type="IQD">
 				<displayName>Dinar I-rắc</displayName>
@@ -1041,7 +1012,6 @@
 			</currency>
 			<currency type="VND">
 				<displayName>đồng</displayName>
-				<symbol>₫</symbol>
 			</currency>
 			<currency type="XAU">
 				<displayName>Vàng</displayName>
@@ -1084,3 +1054,4 @@
 		</messages>
 	</posix>
 </ldml>
+

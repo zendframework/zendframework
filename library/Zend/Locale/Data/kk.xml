@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.57 $"/>
-		<generation date="$Date: 2008/06/26 03:47:57 $"/>
+		<version number="$Revision: 1.66 $"/>
+		<generation date="$Date: 2009/05/05 23:06:37 $"/>
 		<language type="kk"/>
 	</identity>
 	<localeDisplayNames>
@@ -231,12 +231,12 @@
 				<dateFormats>
 					<dateFormatLength type="full">
 						<dateFormat>
-							<pattern>EEEE, d MMMM yyyy 'ж'.</pattern>
+							<pattern>EEEE, d MMMM y 'ж'.</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="long">
 						<dateFormat>
-							<pattern>d MMMM yyyy 'ж'.</pattern>
+							<pattern>d MMMM y 'ж'.</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="medium">
@@ -253,7 +253,7 @@
 				<timeFormats>
 					<timeFormatLength type="full">
 						<timeFormat>
-							<pattern>HH:mm:ss v</pattern>
+							<pattern>HH:mm:ss zzzz</pattern>
 						</timeFormat>
 					</timeFormatLength>
 					<timeFormatLength type="long">
@@ -273,16 +273,11 @@
 					</timeFormatLength>
 				</timeFormats>
 				<dateTimeFormats>
-					<dateTimeFormatLength>
-						<dateTimeFormat>
-							<pattern>{1} {0}</pattern>
-						</dateTimeFormat>
-					</dateTimeFormatLength>
 					<availableFormats>
 						<dateFormatItem id="MMdd">dd.MM</dateFormatItem>
 						<dateFormatItem id="yyQ">Q yy</dateFormatItem>
 						<dateFormatItem id="yyyyMM">MM.yyyy</dateFormatItem>
-						<dateFormatItem id="yyyyMMMM">MMMM yyyy 'ж'.</dateFormatItem>
+						<dateFormatItem id="yyyyMMMM">MMMM y 'ж'.</dateFormatItem>
 					</availableFormats>
 					<intervalFormats>
 						<intervalFormatFallback>{0} - {1}</intervalFormatFallback>
@@ -338,18 +333,18 @@
 							<greatestDifference id="y">E, dd.MM.yy - E, dd.MM.yy</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMM">
-							<greatestDifference id="M">MMM-MMM yyyy 'ж'.</greatestDifference>
-							<greatestDifference id="y">MMM yyyy 'ж'. - MMM yyyy 'ж'.</greatestDifference>
+							<greatestDifference id="M">MMM-MMM y 'ж'.</greatestDifference>
+							<greatestDifference id="y">MMM y 'ж'. - MMM y 'ж'.</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMEd">
-							<greatestDifference id="M">E, d MMM - E, d MMM yyyy 'ж'.</greatestDifference>
-							<greatestDifference id="d">E, d - E, d MMM yyyy 'ж'.</greatestDifference>
-							<greatestDifference id="y">E, d MMM yyyy 'ж'. - E, d MMM yyyy 'ж'.</greatestDifference>
+							<greatestDifference id="M">E, d MMM - E, d MMM y 'ж'.</greatestDifference>
+							<greatestDifference id="d">E, d - E, d MMM y 'ж'.</greatestDifference>
+							<greatestDifference id="y">E, d MMM y 'ж'. - E, d MMM y 'ж'.</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMd">
-							<greatestDifference id="M">d MMM - d MMM yyyy 'ж'.</greatestDifference>
-							<greatestDifference id="d">d-d MMM yyyy 'ж'.</greatestDifference>
-							<greatestDifference id="y">d MMM yyyy 'ж'. - d MMM yyyy 'ж'.</greatestDifference>
+							<greatestDifference id="M">d MMM - d MMM y 'ж'.</greatestDifference>
+							<greatestDifference id="d">d-d MMM y 'ж'.</greatestDifference>
+							<greatestDifference id="y">d MMM y 'ж'. - d MMM y 'ж'.</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMd">
 							<greatestDifference id="M">dd.MM.yy - dd.MM.yy</greatestDifference>
@@ -374,17 +369,13 @@
 		<currencyFormats>
 			<currencyFormatLength>
 				<currencyFormat>
-					<pattern>#,##0.00 ¤;-#,##0.00 ¤</pattern>
+					<pattern>#,##0.00 ¤</pattern>
 				</currencyFormat>
 			</currencyFormatLength>
 		</currencyFormats>
 		<currencies>
 			<currency type="KZT">
 				<symbol>тңг.</symbol>
-			</currency>
-			<currency type="XXX">
-				<displayName>Unknown or Invalid Currency</displayName>
-				<symbol>XXX</symbol>
 			</currency>
 		</currencies>
 	</numbers>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.50 $"/>
-		<generation date="$Date: 2008/06/17 14:12:15 $"/>
+		<version number="$Revision: 1.56 $"/>
+		<generation date="$Date: 2009/05/05 23:06:41 $"/>
 		<language type="ti"/>
 		<territory type="ER"/>
 	</identity>
 	<characters>
-		<exemplarCharacters>[፟ ፡ ፣-፧ ። ፠ ፨ ፲-፼ ፩-፱ ሀ-ሆ ለ-ሟ ረ-ቆ ቈ ቊ-ቍ ቐ-ቖ ቘ ቚ-ቝ በ-ኆ ኈ ኊ-ኍ ነ-ኮ ኰ ኲ-ኵ ኸ-ኾ ዀ ዂ-ዅ ወ-ዎ ዐ-ዖ ዘ-ዮ ደ-ዷ ጀ-ጎ ጐ ጒ-ጕ ጠ-ጯ ጸ-ጿ ፈ-ፗ]</exemplarCharacters>
+		<exemplarCharacters>[\u135F ፡ ፣-፧ ። ፠ ፨ ፲-፼ ፩-፱ ሀ-ሆ ለ-ሟ ረ-ቆ ቈ ቊ-ቍ ቐ-ቖ ቘ ቚ-ቝ በ-ኆ ኈ ኊ-ኍ ነ-ኮ ኰ ኲ-ኵ ኸ-ኾ ዀ ዂ-ዅ ወ-ዎ ዐ-ዖ ዘ-ዮ ደ-ዷ ጀ-ጎ ጐ ጒ-ጕ ጠ-ጯ ጸ-ጿ ፈ-ፗ]</exemplarCharacters>
 		<exemplarCharacters type="auxiliary">[᎐-᎙ ሇ ⶀ ᎀ-ᎃ ⶁ ሠ-ሧ ⶂ-ⶄ ቇ ᎄ-ᎇ ⶅ-ⶇ ኇ ⶈ-ⶊ ኯ ዏ ⶋ ዯ ⶌ ዸ-ዿ ⶍ ⶎ ጏ ጘ-ጟ ⶓ-ⶖ ⶏ-ⶑ ፀ-ፇ ᎈ-ᎏ ⶒ ፘ-ፚ ⶠ-ⶦ ⶨ-ⶮ ⶰ-ⶶ ⶸ-ⶾ ⷀ-ⷆ ⷈ-ⷎ ⷐ-ⷖ ⷘ-ⷞ]</exemplarCharacters>
 	</characters>
 	<dates>
@@ -61,7 +61,7 @@
 				<dateFormats>
 					<dateFormatLength type="full">
 						<dateFormat>
-							<pattern>EEEE፡ dd MMMM መዓልቲ yyyy G</pattern>
+							<pattern>EEEE፡ dd MMMM መዓልቲ y G</pattern>
 						</dateFormat>
 					</dateFormatLength>
 				</dateFormats>
@@ -97,18 +97,18 @@
 							<greatestDifference id="y">E፡ yyyy-MM-dd - E፡ yyyy-MM-dd</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMM">
-							<greatestDifference id="M">yyyy MMM-MMM</greatestDifference>
-							<greatestDifference id="y">yyyy MMM - yyyy MMM</greatestDifference>
+							<greatestDifference id="M">y MMM-MMM</greatestDifference>
+							<greatestDifference id="y">y MMM - y MMM</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMEd">
-							<greatestDifference id="M">E፡ dd MMM መዓልቲ yyyy G - E፡ dd MMM መዓልቲ yyyy G</greatestDifference>
-							<greatestDifference id="d">E፡ dd MMM መዓልቲ yyyy G - E፡ dd MMM መዓልቲ yyyy G</greatestDifference>
-							<greatestDifference id="y">E፡ dd MMM መዓልቲ yyyy G - E፡ dd MMM መዓልቲ yyyy G</greatestDifference>
+							<greatestDifference id="M">E፡ dd MMM መዓልቲ y G - E፡ dd MMM መዓልቲ y G</greatestDifference>
+							<greatestDifference id="d">E፡ dd MMM መዓልቲ y G - E፡ dd MMM መዓልቲ y G</greatestDifference>
+							<greatestDifference id="y">E፡ dd MMM መዓልቲ y G - E፡ dd MMM መዓልቲ y G</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMd">
-							<greatestDifference id="M">yyyy MMM d - MMM d</greatestDifference>
-							<greatestDifference id="d">yyyy MMM d-d</greatestDifference>
-							<greatestDifference id="y">yyyy MMM d - yyyy MMM d</greatestDifference>
+							<greatestDifference id="M">y MMM d - MMM d</greatestDifference>
+							<greatestDifference id="d">y MMM d-d</greatestDifference>
+							<greatestDifference id="y">y MMM d - y MMM d</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMd">
 							<greatestDifference id="M">yyyy-MM-dd - yyyy-MM-dd</greatestDifference>
@@ -120,14 +120,5 @@
 			</calendar>
 		</calendars>
 	</dates>
-	<numbers>
-		<currencies>
-			<currency type="ERN">
-				<symbol>$</symbol>
-			</currency>
-			<currency type="ETB">
-				<symbol>ETB</symbol>
-			</currency>
-		</currencies>
-	</numbers>
 </ldml>
+

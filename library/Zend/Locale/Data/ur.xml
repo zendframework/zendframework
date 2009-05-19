@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.54 $"/>
-		<generation date="$Date: 2008/06/17 14:12:14 $"/>
+		<version number="$Revision: 1.64 $"/>
+		<generation date="$Date: 2009/05/05 23:06:41 $"/>
 		<language type="ur"/>
 	</identity>
 	<localeDisplayNames>
@@ -362,7 +362,7 @@
 	</layout>
 	<characters>
 		<exemplarCharacters>[أ ؤ ا آ ب پ ت ٹ ث ج چ ح-د ڈ ذ ر ڑ ز ژ س-غ ف ق ک گ ل-ن ں و ہ ی ء ئ ے ٻ ة ٺ ټ ٽ ه ھ ي]</exemplarCharacters>
-		<exemplarCharacters type="auxiliary">[ؐ ؑ ؓ ؔ َ ِ ُ ٰ ً ّ]</exemplarCharacters>
+		<exemplarCharacters type="auxiliary">[\u0610 \u0611 \u0613 \u0614 \u064E \u0650 \u064F \u0670 \u064B \u0651]</exemplarCharacters>
 	</characters>
 	<dates>
 		<calendars>
@@ -422,17 +422,6 @@
 							<day type="sat">ہفتہ</day>
 						</dayWidth>
 					</dayContext>
-					<dayContext type="stand-alone">
-						<dayWidth type="narrow">
-							<day type="sun">1</day>
-							<day type="mon">2</day>
-							<day type="tue">3</day>
-							<day type="wed">4</day>
-							<day type="thu">5</day>
-							<day type="fri">6</day>
-							<day type="sat">7</day>
-						</dayWidth>
-					</dayContext>
 				</days>
 				<quarters>
 					<quarterContext type="format">
@@ -447,14 +436,6 @@
 							<quarter type="2">دوسری سہ ماہی</quarter>
 							<quarter type="3">تيسری سہ ماہی</quarter>
 							<quarter type="4">چوتهی سہ ماہی</quarter>
-						</quarterWidth>
-					</quarterContext>
-					<quarterContext type="stand-alone">
-						<quarterWidth type="narrow">
-							<quarter type="1">1</quarter>
-							<quarter type="2">2</quarter>
-							<quarter type="3">3</quarter>
-							<quarter type="4">4</quarter>
 						</quarterWidth>
 					</quarterContext>
 				</quarters>
@@ -473,17 +454,17 @@
 				<dateFormats>
 					<dateFormatLength type="full">
 						<dateFormat>
-							<pattern>EEEE, d, MMMM yyyy</pattern>
+							<pattern>EEEE, d, MMMM y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="long">
 						<dateFormat>
-							<pattern>d, MMMM yyyy</pattern>
+							<pattern>d, MMMM y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="medium">
 						<dateFormat>
-							<pattern>d, MMM yyyy</pattern>
+							<pattern>d, MMM y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="short">
@@ -495,7 +476,7 @@
 				<timeFormats>
 					<timeFormatLength type="full">
 						<timeFormat>
-							<pattern>h:mm:ss a v</pattern>
+							<pattern>h:mm:ss a zzzz</pattern>
 						</timeFormat>
 					</timeFormatLength>
 					<timeFormatLength type="long">
@@ -515,11 +496,6 @@
 					</timeFormatLength>
 				</timeFormats>
 				<dateTimeFormats>
-					<dateTimeFormatLength>
-						<dateTimeFormat>
-							<pattern>{1} {0}</pattern>
-						</dateTimeFormat>
-					</dateTimeFormatLength>
 					<availableFormats>
 						<dateFormatItem id="Hm">HH:mm</dateFormatItem>
 						<dateFormatItem id="M">LL</dateFormatItem>
@@ -532,14 +508,14 @@
 						<dateFormatItem id="Md">M-d</dateFormatItem>
 						<dateFormatItem id="d">د</dateFormatItem>
 						<dateFormatItem id="ms">mm:ss</dateFormatItem>
-						<dateFormatItem id="y">yyyy</dateFormatItem>
+						<dateFormatItem id="y">y</dateFormatItem>
 						<dateFormatItem id="yM">yyyy-M</dateFormatItem>
 						<dateFormatItem id="yMEd">EEE, yyyy-d-M</dateFormatItem>
-						<dateFormatItem id="yMMM">yyyy MMM</dateFormatItem>
-						<dateFormatItem id="yMMMEd">EEE, yyyy MMM d</dateFormatItem>
-						<dateFormatItem id="yMMMM">yyyy MMMM</dateFormatItem>
+						<dateFormatItem id="yMMM">y MMM</dateFormatItem>
+						<dateFormatItem id="yMMMEd">EEE, y MMM d</dateFormatItem>
+						<dateFormatItem id="yMMMM">y MMMM</dateFormatItem>
 						<dateFormatItem id="yQ">Q yyyy</dateFormatItem>
-						<dateFormatItem id="yQQQ">yyyy QQQ</dateFormatItem>
+						<dateFormatItem id="yQQQ">y QQQ</dateFormatItem>
 						<dateFormatItem id="yyQ">yy Q</dateFormatItem>
 					</availableFormats>
 					<intervalFormats>
@@ -603,22 +579,22 @@
 							<greatestDifference id="y">E, yyyy-MM-dd – E, yyyy-MM-dd</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMM">
-							<greatestDifference id="M">MMM–MMM yyyy</greatestDifference>
-							<greatestDifference id="y">MMM–MMM yyyy</greatestDifference>
+							<greatestDifference id="M">MMM–MMM y</greatestDifference>
+							<greatestDifference id="y">MMM–MMM y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMEd">
-							<greatestDifference id="M">E, MMM d – E, MMM d, yyyy</greatestDifference>
-							<greatestDifference id="d">E, MMM d – E, MMM d, yyyy</greatestDifference>
-							<greatestDifference id="y">E, MMM d, yyyy تا E, MMM d, yyyy</greatestDifference>
+							<greatestDifference id="M">E, MMM d – E, MMM d, y</greatestDifference>
+							<greatestDifference id="d">E, MMM d – E, MMM d, y</greatestDifference>
+							<greatestDifference id="y">E, MMM d, y تا E, MMM d, y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMM">
 							<greatestDifference id="M">yyyy-MM تا MM</greatestDifference>
 							<greatestDifference id="y">yyyy-MM تا yyyy-MM</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMd">
-							<greatestDifference id="M">MMM d تا MMM d, yyyy</greatestDifference>
-							<greatestDifference id="d">MMM d–d, yyyy</greatestDifference>
-							<greatestDifference id="y">MMM d, yyyy تا MMM d, yyyy</greatestDifference>
+							<greatestDifference id="M">MMM d تا MMM d, y</greatestDifference>
+							<greatestDifference id="d">MMM d–d, y</greatestDifference>
+							<greatestDifference id="y">MMM d, y تا MMM d, y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMd">
 							<greatestDifference id="M">yyyy-MM-dd تا MM-dd</greatestDifference>
@@ -642,13 +618,13 @@
 					</field>
 					<field type="day">
 						<displayName>دن</displayName>
+						<relative type="-3">ترسوں</relative>
+						<relative type="-2">پرسوں</relative>
+						<relative type="-1">کل</relative>
 						<relative type="0">آج</relative>
 						<relative type="1">کل</relative>
 						<relative type="2">پرسوں</relative>
 						<relative type="3">ترسوں</relative>
-						<relative type="-1">کل</relative>
-						<relative type="-2">پرسوں</relative>
-						<relative type="-3">ترسوں</relative>
 					</field>
 					<field type="weekday">
 						<displayName>ہفتے کا دن</displayName>
@@ -687,16 +663,6 @@
 						</monthWidth>
 					</monthContext>
 				</months>
-				<quarters>
-					<quarterContext type="format">
-						<quarterWidth type="wide">
-							<quarter type="1">پہلی سہ ماہی</quarter>
-							<quarter type="2">دوسری سہ ماہی</quarter>
-							<quarter type="3">تيسری سہ ماہی</quarter>
-							<quarter type="4">چوتهی سہ ماہی</quarter>
-						</quarterWidth>
-					</quarterContext>
-				</quarters>
 				<eras>
 					<eraNames>
 						<era type="1">عيسوی سن</era>

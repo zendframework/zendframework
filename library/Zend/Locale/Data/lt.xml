@@ -1,213 +1,651 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.92 $"/>
-		<generation date="$Date: 2008/06/15 08:09:46 $"/>
+		<version number="$Revision: 1.110 $"/>
+		<generation date="$Date: 2009/05/05 23:06:38 $"/>
 		<language type="lt"/>
 	</identity>
 	<localeDisplayNames>
 		<languages>
+			<language type="aa">afarų</language>
 			<language type="ab">abchazų</language>
+			<language type="ace">ačinezų</language>
+			<language type="ach">acoli</language>
+			<language type="ada">adangmų</language>
 			<language type="ady">adygėjų</language>
+			<language type="ae">avestų</language>
 			<language type="af">afrikanų</language>
+			<language type="afa">afroazijos kalba</language>
+			<language type="afh">afrihili</language>
+			<language type="ain">ainų</language>
+			<language type="ak">akanų</language>
+			<language type="akk">akadianų</language>
 			<language type="ale">aleutų</language>
+			<language type="alg">algonkuanų kalba</language>
+			<language type="alt">pietų altajaus</language>
 			<language type="am">amharų</language>
+			<language type="an">aragonesų</language>
 			<language type="ang">senoji anglų</language>
+			<language type="anp">angikų</language>
+			<language type="apa">apačių kalba</language>
 			<language type="ar">arabų</language>
+			<language type="arc">aramaikų</language>
+			<language type="arn">araukanų</language>
+			<language type="arp">arapahų</language>
 			<language type="art">dirbtinė kalba</language>
+			<language type="arw">aravakų</language>
 			<language type="as">asamų</language>
+			<language type="ast">asturianų</language>
+			<language type="ath">athapaskanų kalba</language>
 			<language type="aus">australų kalba</language>
+			<language type="av">avarikų</language>
+			<language type="awa">avadhi</language>
+			<language type="ay">aimarų</language>
 			<language type="az">azerbaidžaniečių</language>
 			<language type="ba">baškirų</language>
+			<language type="bad">bandų</language>
+			<language type="bai">bamilekų kalba</language>
+			<language type="bal">baluči</language>
+			<language type="ban">balinezų</language>
+			<language type="bas">basų</language>
 			<language type="bat">baltų kalba</language>
 			<language type="be">baltarusių</language>
+			<language type="bej">bėjų</language>
+			<language type="bem">bembų</language>
 			<language type="ber">berberų</language>
 			<language type="bg">bulgarų</language>
 			<language type="bh">biharų</language>
+			<language type="bho">baučpuri</language>
+			<language type="bi">bislama</language>
+			<language type="bik">bikolų</language>
+			<language type="bin">bini</language>
+			<language type="bla">siksika</language>
+			<language type="bm">bambarų</language>
 			<language type="bn">bengalų</language>
 			<language type="bnt">bantų</language>
 			<language type="bo">tibetiečių</language>
 			<language type="br">bretonų</language>
+			<language type="bra">brajų</language>
 			<language type="bs">bosnių</language>
+			<language type="btk">batakų</language>
 			<language type="bua">buriatų</language>
+			<language type="bug">buginezų</language>
+			<language type="byn">blin</language>
 			<language type="ca">katalonų</language>
+			<language type="cad">kado</language>
 			<language type="cai">Centrinės Amerikos indėnų kalba</language>
+			<language type="car">karibų</language>
 			<language type="cau">kaukaziečių kalba</language>
+			<language type="cch">atsamų</language>
 			<language type="ce">čečėnų</language>
+			<language type="ceb">cebuanų</language>
 			<language type="cel">keltų kalba</language>
+			<language type="ch">čamorų</language>
+			<language type="chb">čibča</language>
+			<language type="chg">čagatų</language>
+			<language type="chk">čukesų</language>
+			<language type="chm">mari</language>
+			<language type="chn">činuk žargonas</language>
+			<language type="cho">čoktau</language>
+			<language type="chp">čipvėjų</language>
+			<language type="chr">čerokių</language>
+			<language type="chy">čajenų</language>
+			<language type="cmc">čamikų kalba</language>
 			<language type="co">korsikiečių</language>
+			<language type="cop">koptų</language>
+			<language type="cpe">kreolų ir pidžinų kalba pagal anglų</language>
+			<language type="cpf">kreolų ir pidžinų kalba pagal prancūzų</language>
+			<language type="cpp">kreolų ir pidžinų kalba pagal portugalų</language>
+			<language type="cr">kry</language>
 			<language type="crh">krymo turkų</language>
+			<language type="crp">kreolų ir pidžinų</language>
 			<language type="cs">čekų</language>
+			<language type="csb">kašubų</language>
 			<language type="cu">bažnytinė slavų</language>
+			<language type="cus">kušitik kalba</language>
 			<language type="cv">čiuvašų</language>
 			<language type="cy">valų</language>
 			<language type="da">danų</language>
+			<language type="dak">dakotų</language>
+			<language type="dar">dargva</language>
+			<language type="day">bidayuh kalba</language>
 			<language type="de">vokiečių</language>
+			<language type="de_AT">Austrijos vokiečių</language>
+			<language type="de_CH">aukštoji Šveicarijos vokiečių</language>
+			<language type="del">delavero</language>
+			<language type="den">slave</language>
+			<language type="dgr">dogribų</language>
+			<language type="din">dinkų</language>
+			<language type="doi">dogri</language>
+			<language type="dra">dravidų kalba</language>
+			<language type="dsb">Žemutinės Serbijos</language>
+			<language type="dua">dualų</language>
+			<language type="dum">Vidurio Vokietijos</language>
+			<language type="dv">divehi</language>
+			<language type="dyu">dyulų</language>
+			<language type="dz">svazilando</language>
+			<language type="ee">eve</language>
+			<language type="efi">efik</language>
 			<language type="egy">senovės egiptiečių</language>
+			<language type="eka">ekajuk</language>
 			<language type="el">graikų</language>
+			<language type="elx">elamitų</language>
 			<language type="en">anglų</language>
 			<language type="en_AU">anglų kalba (australija)</language>
+			<language type="en_CA">Kanados anglų</language>
 			<language type="en_GB">anglų (britų)</language>
 			<language type="en_US">anglų (amerikiečių)</language>
+			<language type="enm">Vidurio Anglijos</language>
 			<language type="eo">esperanto</language>
 			<language type="es">ispanų</language>
+			<language type="es_419">Lotynų Amerikos ispanų</language>
+			<language type="es_ES">Iberijos ispanų</language>
 			<language type="et">estų</language>
 			<language type="eu">baskų</language>
+			<language type="ewo">evondo</language>
 			<language type="fa">persų</language>
+			<language type="fan">fang</language>
+			<language type="fat">fanti</language>
+			<language type="ff">fulahų</language>
 			<language type="fi">suomių</language>
 			<language type="fil">tagalų</language>
 			<language type="fiu">finougrų kalba</language>
-			<language type="fo">fareriečių</language>
+			<language type="fj">fidžio</language>
+			<language type="fo">farerų kalba</language>
+			<language type="fon">fon</language>
 			<language type="fr">prancūzų</language>
+			<language type="fr_CA">Kanados prancūzų</language>
+			<language type="fr_CH">Šveicarijos prancūzų</language>
+			<language type="frm">Vidurio Prancūzijos</language>
 			<language type="fro">senoji prancūzų</language>
 			<language type="frr">šiaurinių fryzų</language>
 			<language type="frs">rytų fryzų</language>
-			<language type="fy">Fryzų</language>
+			<language type="fur">frulan</language>
+			<language type="fy">vakarų fryzų</language>
 			<language type="ga">airių</language>
+			<language type="gaa">ga</language>
+			<language type="gay">gajo</language>
+			<language type="gba">gbaja</language>
 			<language type="gd">škotų (gėlų)</language>
 			<language type="gem">germanų kalba</language>
+			<language type="gez">gyz</language>
+			<language type="gil">kiribati</language>
 			<language type="gl">galisų</language>
+			<language type="gmh">Vidurio aukštosios Vokietijos</language>
 			<language type="gn">gvaranių</language>
+			<language type="goh">Senoji Aukštosios Vokietijos</language>
+			<language type="gon">gondi</language>
+			<language type="gor">gorontalo</language>
 			<language type="got">gotų</language>
+			<language type="grb">grebo</language>
 			<language type="grc">senovės graikų</language>
+			<language type="gsw">Šveicarijos vokiečių</language>
 			<language type="gu">gudžaratų</language>
+			<language type="gv">manks</language>
+			<language type="gwi">gvičino</language>
+			<language type="ha">hausų</language>
+			<language type="hai">haido</language>
+			<language type="haw">havajų</language>
 			<language type="he">hebrajų</language>
 			<language type="hi">hindi</language>
+			<language type="hil">hiligainon</language>
+			<language type="him">himačali</language>
+			<language type="hit">hititų</language>
+			<language type="hmn">hmong</language>
+			<language type="ho">hiri motu</language>
 			<language type="hr">kroatų</language>
+			<language type="hsb">viršutinė sorbian</language>
+			<language type="ht">haičio</language>
 			<language type="hu">vengrų</language>
+			<language type="hup">hupa</language>
 			<language type="hy">armėnų</language>
+			<language type="hz">herero</language>
 			<language type="ia">interlingva</language>
+			<language type="iba">iban</language>
 			<language type="id">indoneziečių</language>
 			<language type="ie">interkalba</language>
+			<language type="ig">igbo</language>
+			<language type="ii">sičuan ji</language>
+			<language type="ijo">ijo</language>
+			<language type="ik">inupiak</language>
+			<language type="ilo">iloko</language>
+			<language type="inc">indų kalba</language>
 			<language type="ine">indoeuropiečių kalba</language>
 			<language type="inh">ingušų</language>
+			<language type="io">ido</language>
 			<language type="ira">Iraniečių</language>
+			<language type="iro">irako kalba</language>
 			<language type="is">islandų</language>
 			<language type="it">italų</language>
+			<language type="iu">inukitut</language>
 			<language type="ja">japonų</language>
+			<language type="jbo">loiban</language>
+			<language type="jpr">judėjų persų</language>
+			<language type="jrb">judėjų arabų</language>
 			<language type="jv">javiečių</language>
 			<language type="ka">gruzinų</language>
 			<language type="kaa">karakalpakų</language>
+			<language type="kab">kabilo</language>
+			<language type="kac">kačin</language>
+			<language type="kaj">ju</language>
+			<language type="kam">kamba</language>
+			<language type="kar">karenų</language>
+			<language type="kaw">kavi</language>
 			<language type="kbd">kabardinų</language>
+			<language type="kcg">tyap</language>
+			<language type="kfo">koro</language>
+			<language type="kg">kongo</language>
+			<language type="kha">kasi</language>
+			<language type="khi">koisan kalba</language>
+			<language type="kho">kotanezų</language>
+			<language type="ki">kikui</language>
+			<language type="kj">kuaniama</language>
 			<language type="kk">kazachų</language>
+			<language type="kl">kalalisut</language>
 			<language type="km">khmerų</language>
+			<language type="kmb">kimbundu</language>
 			<language type="kn">kanadų</language>
 			<language type="ko">korėjiečių</language>
+			<language type="kok">kankani</language>
+			<language type="kos">kosreanų</language>
+			<language type="kpe">kpele</language>
+			<language type="kr">kanuri</language>
+			<language type="krc">karačiajų balkarijos</language>
+			<language type="krl">karelų</language>
+			<language type="kro">kru kalba</language>
+			<language type="kru">kuruk</language>
+			<language type="ks">kašmyro</language>
 			<language type="ku">kurdų</language>
+			<language type="kum">kumik</language>
+			<language type="kut">kutenai</language>
+			<language type="kv">komi</language>
+			<language type="kw">kornų</language>
 			<language type="ky">kirgizų</language>
 			<language type="la">lotynų</language>
+			<language type="lad">ladino</language>
+			<language type="lah">landa</language>
+			<language type="lam">lamba</language>
 			<language type="lb">liuksemburgiečių</language>
 			<language type="lez">lezginų</language>
+			<language type="lg">ganda</language>
+			<language type="li">limburgiš</language>
 			<language type="ln">lingala</language>
 			<language type="lo">laosiečių</language>
+			<language type="lol">mongo</language>
+			<language type="loz">lozi</language>
 			<language type="lt">lietuvių</language>
+			<language type="lu">luba katanga</language>
+			<language type="lua">luba lula</language>
+			<language type="lui">luiseno</language>
+			<language type="lun">lunda</language>
+			<language type="luo">luo</language>
+			<language type="lus">lušai</language>
 			<language type="lv">latvių</language>
+			<language type="mad">madurezų</language>
+			<language type="mag">magahi</language>
+			<language type="mai">maithili</language>
+			<language type="mak">makasaro</language>
+			<language type="man">mandingo</language>
+			<language type="map">austronezų</language>
+			<language type="mas">masajų</language>
+			<language type="mdf">mokša</language>
+			<language type="mdr">mandar</language>
+			<language type="men">mende</language>
+			<language type="mg">malagasijos</language>
+			<language type="mga">Vidurio Airijos</language>
+			<language type="mh">Maršalo salų</language>
+			<language type="mi">maorių</language>
+			<language type="mic">mikmak</language>
+			<language type="min">minankabu</language>
 			<language type="mis">įvairios kalbos</language>
 			<language type="mk">makedonų</language>
+			<language type="mkh">mon khmer kalba</language>
 			<language type="ml">malajalių</language>
 			<language type="mn">mongolų</language>
+			<language type="mnc">manču</language>
+			<language type="mni">manipuri</language>
+			<language type="mno">manobo kalba</language>
 			<language type="mo">moldavų</language>
+			<language type="moh">mohok</language>
+			<language type="mos">mosi</language>
 			<language type="mr">maratų</language>
 			<language type="ms">malajiečių</language>
 			<language type="mt">maltiečių</language>
 			<language type="mul">kelios kalbos</language>
+			<language type="mun">munda kalba</language>
+			<language type="mus">krykų</language>
+			<language type="mwl">mirandezų</language>
+			<language type="mwr">marvari</language>
+			<language type="my">birmiečių</language>
+			<language type="myn">majanų</language>
+			<language type="myv">erzyjų</language>
+			<language type="na">naurų</language>
+			<language type="nah">nahuatlų</language>
 			<language type="nai">Šiaurės Amerikos indėnų kalba</language>
 			<language type="nap">neapoliečių</language>
+			<language type="nb">Norvegijos bokmal</language>
+			<language type="nd">šiaurės ndebelų</language>
+			<language type="nds">Žemutinės Vokietijos</language>
 			<language type="ne">nepalų</language>
+			<language type="new">nevari</language>
+			<language type="ng">ndongų</language>
+			<language type="nia">nias</language>
+			<language type="nic">Nigerio kordofanų kalba</language>
+			<language type="niu">niuenų</language>
 			<language type="nl">olandų</language>
-			<language type="nn">norvegų nynorsk</language>
+			<language type="nl_BE">flamandų</language>
+			<language type="nn">naujoji norvegų</language>
 			<language type="no">norvegų</language>
+			<language type="nog">nogų</language>
+			<language type="non">norsu</language>
+			<language type="nqo">enko</language>
+			<language type="nr">pietų ndebele</language>
+			<language type="nso">šiaurės sothų</language>
+			<language type="nub">nubijos kalba</language>
+			<language type="nv">navajų</language>
+			<language type="nwc">klasikinė nevari</language>
+			<language type="ny">nianja</language>
+			<language type="nym">niamvezi</language>
+			<language type="nyn">niankole</language>
+			<language type="nyo">nioro</language>
+			<language type="nzi">nzima</language>
 			<language type="oc">provansalų</language>
+			<language type="oj">ojibva</language>
+			<language type="om">oromo</language>
 			<language type="or">orijų</language>
 			<language type="os">osetinų</language>
+			<language type="osa">osage</language>
+			<language type="ota">osmanų turkų</language>
+			<language type="oto">otomanų kalba</language>
 			<language type="pa">pandžabų</language>
 			<language type="paa">papuasų kalba</language>
+			<language type="pag">pangasinan</language>
+			<language type="pal">pahlavi</language>
+			<language type="pam">pampanga</language>
+			<language type="pap">papiemento</language>
+			<language type="pau">palau</language>
 			<language type="peo">senoji persų</language>
+			<language type="phi">filipinų kalba</language>
+			<language type="phn">finikiečių</language>
+			<language type="pi">pali</language>
 			<language type="pl">lenkų</language>
+			<language type="pon">ponapean</language>
+			<language type="pra">prakrit kalba</language>
+			<language type="pro">senovės provansalų</language>
 			<language type="ps">puštūnų</language>
 			<language type="pt">portugalų</language>
 			<language type="pt_BR">portugalų (Brazilijos)</language>
-			<language type="pt_PT">portugalų (Portugalijos)</language>
+			<language type="pt_PT">Iberijos portugalų</language>
+			<language type="qu">kečujų</language>
+			<language type="raj">radžastano</language>
+			<language type="rap">rapanui</language>
+			<language type="rar">rarotongan</language>
+			<language type="rm">raeto romanų</language>
+			<language type="rn">rundi</language>
 			<language type="ro">rumunų</language>
+			<language type="roa">romanų kalba</language>
+			<language type="rom">romų kalba</language>
+			<language type="root">rūt</language>
 			<language type="ru">rusų</language>
-			<language type="sa">Sanskritas</language>
+			<language type="rup">aromanių</language>
+			<language type="rw">kinjarvanda</language>
+			<language type="sa">sanskritas</language>
+			<language type="sad">sandavi</language>
 			<language type="sah">jakutų</language>
+			<language type="sai">Pietų Amerikos indėnų kalba</language>
+			<language type="sal">sališan kalba</language>
+			<language type="sam">samarėjų aramių</language>
+			<language type="sas">sasak</language>
+			<language type="sat">santali</language>
 			<language type="sc">sardiniečių</language>
 			<language type="scn">siciliečių</language>
 			<language type="sco">škotų</language>
 			<language type="sd">sindų</language>
 			<language type="se">šiaurinių samių</language>
+			<language type="sel">selkup</language>
+			<language type="sem">samitų kalba</language>
+			<language type="sg">sango</language>
 			<language type="sga">senoji airių</language>
+			<language type="sgn">ženklų kalba</language>
 			<language type="sh">serbų-kroatų</language>
+			<language type="shn">šan</language>
 			<language type="si">sinhalų</language>
+			<language type="sid">sidamo</language>
+			<language type="sio">siouan kalba</language>
+			<language type="sit">sino tibeto kalba</language>
 			<language type="sk">slovakų</language>
 			<language type="sl">slovėnų</language>
 			<language type="sla">slavų kalba</language>
+			<language type="sm">samoa</language>
+			<language type="sma">pietų sami</language>
+			<language type="smi">samių kalba</language>
+			<language type="smj">lule sami</language>
+			<language type="smn">inari sami</language>
+			<language type="sms">skolt sami</language>
+			<language type="sn">šona</language>
+			<language type="snk">soninke</language>
 			<language type="so">somalių</language>
+			<language type="sog">sogdien</language>
+			<language type="son">songhai</language>
 			<language type="sq">albanų</language>
 			<language type="sr">serbų</language>
-			<language type="st">sesuto</language>
+			<language type="srn">sranan tongo</language>
+			<language type="srr">sererų</language>
+			<language type="ss">svati</language>
+			<language type="ssa">Nilo Sacharos kalba</language>
+			<language type="st">pietų sesuto</language>
 			<language type="su">sundų</language>
+			<language type="suk">sukuma</language>
+			<language type="sus">susu</language>
 			<language type="sux">šumerų</language>
 			<language type="sv">švedų</language>
 			<language type="sw">svahili</language>
+			<language type="syc">klasikinė siriečių</language>
+			<language type="syr">sirų</language>
 			<language type="ta">tamilų</language>
+			<language type="tai">tajų kalba</language>
 			<language type="te">telugų</language>
+			<language type="tem">timne</language>
+			<language type="ter">tereno</language>
+			<language type="tet">tetum</language>
+			<language type="tg">tadžikų</language>
 			<language type="th">tajų</language>
 			<language type="ti">tigrajų</language>
+			<language type="tig">tigre</language>
+			<language type="tiv">tiv</language>
 			<language type="tk">turkmėnų</language>
+			<language type="tkl">tokelau</language>
 			<language type="tl">tagalogų</language>
-			<language type="tlh">&quot;žvaigždžių kelionių&quot;</language>
+			<language type="tlh">„žvaigždžių kelionių“</language>
+			<language type="tli">tlingit</language>
+			<language type="tmh">tamašek</language>
+			<language type="tn">tsvana</language>
+			<language type="to">tonga</language>
+			<language type="tog">niasa tongos</language>
+			<language type="tpi">tok pisin</language>
 			<language type="tr">turkų</language>
+			<language type="ts">tsonga</language>
+			<language type="tsi">tsimšian</language>
 			<language type="tt">totorių</language>
+			<language type="tum">tumbuka</language>
+			<language type="tup">tupi kalba</language>
+			<language type="tut">altaikų kalba</language>
+			<language type="tvl">tuvalu</language>
 			<language type="tw">tvi</language>
+			<language type="ty">taitiečių</language>
 			<language type="tyv">tuvių</language>
 			<language type="udm">udmurtų</language>
 			<language type="ug">uigūrų</language>
+			<language type="uga">ugaritic</language>
 			<language type="uk">ukrainiečių</language>
+			<language type="umb">umbundu</language>
 			<language type="und">nenustatyta kalba</language>
-			<language type="ur">urdu</language>
+			<language type="ur">urdų</language>
 			<language type="uz">uzbekų</language>
+			<language type="vai">vai</language>
+			<language type="ve">venda</language>
 			<language type="vi">vietnamiečių</language>
 			<language type="vo">volapiuk</language>
+			<language type="vot">votik</language>
 			<language type="wa">valonų</language>
+			<language type="wak">vakašan kalba</language>
+			<language type="wal">valamo</language>
+			<language type="war">varai</language>
+			<language type="was">vašo</language>
+			<language type="wen">sorbų kalba</language>
+			<language type="wo">volof</language>
 			<language type="xal">kalmukų</language>
 			<language type="xh">kosų</language>
+			<language type="yao">jao</language>
+			<language type="yap">japezų</language>
 			<language type="yi">jidiš</language>
+			<language type="yo">joruba</language>
+			<language type="ypk">jupik kalba</language>
+			<language type="za">chuang</language>
+			<language type="zap">zapotekų</language>
+			<language type="zbl">„Bliss“ simbolių kalba</language>
+			<language type="zen">zenaga</language>
 			<language type="zh">kinų</language>
 			<language type="zh_Hans">kinų supaprastinta</language>
 			<language type="zh_Hant">kinų tradicinė</language>
+			<language type="znd">zande</language>
 			<language type="zu">zulų</language>
+			<language type="zun">zuni</language>
+			<language type="zxx">Nėra kalbinio turinio</language>
+			<language type="zza">zaza</language>
 		</languages>
 		<scripts>
 			<script type="Arab">arabų</script>
+			<script type="Armi">imperinė aramaikų</script>
 			<script type="Armn">armėnų</script>
+			<script type="Avst">avestano</script>
+			<script type="Bali">Bali</script>
+			<script type="Batk">batak</script>
 			<script type="Beng">bengalų</script>
+			<script type="Blis">„Bliss“ simboliai</script>
+			<script type="Bopo">bopomofo</script>
+			<script type="Brah">brahmi</script>
 			<script type="Brai">brailio</script>
+			<script type="Bugi">buginezų</script>
+			<script type="Buhd">buhid</script>
+			<script type="Cakm">čakma</script>
+			<script type="Cans">suvienodinti Kanados aborigenų silabiniai</script>
+			<script type="Cari">karių</script>
+			<script type="Cham">čam</script>
 			<script type="Cher">čerokių</script>
+			<script type="Cirt">kirt</script>
 			<script type="Copt">koptų</script>
+			<script type="Cprt">kipro</script>
 			<script type="Cyrl">kirilica</script>
 			<script type="Cyrs">senoji bažnytinė slavų kirilica</script>
+			<script type="Deva">devanagari</script>
+			<script type="Dsrt">deseretas</script>
+			<script type="Egyd">Egipto liaudies</script>
+			<script type="Egyh">Egipto žynių</script>
 			<script type="Egyp">egipto hieroglifai</script>
 			<script type="Ethi">etiopų</script>
+			<script type="Geok">gruzinų kutsuri</script>
 			<script type="Geor">gruzinų</script>
+			<script type="Glag">glagolitik</script>
 			<script type="Goth">gotų</script>
 			<script type="Grek">graikų</script>
+			<script type="Gujr">gudžiarati</script>
+			<script type="Guru">gurmuki</script>
 			<script type="Hang">hangul</script>
+			<script type="Hani">han</script>
+			<script type="Hano">hanuno</script>
+			<script type="Hans">supaprastinta han</script>
+			<script type="Hant">tradicinė han</script>
 			<script type="Hebr">hebrajų</script>
 			<script type="Hira">hiragana</script>
+			<script type="Hmng">pahav hmong</script>
 			<script type="Hrkt">katakana/hiragana</script>
 			<script type="Hung">senasis vengrų</script>
+			<script type="Inds">indus</script>
 			<script type="Ital">senasis italų</script>
+			<script type="Java">javiečių</script>
 			<script type="Jpan">japonų</script>
+			<script type="Kali">kajah li</script>
 			<script type="Kana">katakana</script>
+			<script type="Khar">karošti</script>
 			<script type="Khmr">khmerų</script>
+			<script type="Knda">kanadiečių</script>
 			<script type="Kore">korejiečių</script>
+			<script type="Kthi">kaithi</script>
+			<script type="Lana">lana</script>
+			<script type="Laoo">lao</script>
+			<script type="Latf">fraktur lotynų</script>
+			<script type="Latg">gėlų lotynų</script>
 			<script type="Latn">lotynų</script>
+			<script type="Lepc">lepča</script>
+			<script type="Limb">limbu</script>
+			<script type="Lina">linijiniai A</script>
+			<script type="Linb">linijiniai B</script>
+			<script type="Lyci">lician</script>
+			<script type="Lydi">lidian</script>
+			<script type="Mand">mandėjų</script>
+			<script type="Mani">maničų</script>
 			<script type="Maya">malų hieroglifai</script>
+			<script type="Mero">meroitik</script>
+			<script type="Mlym">malajalų</script>
 			<script type="Mong">mongolų</script>
+			<script type="Moon">mūn</script>
+			<script type="Mtei">meitei majek</script>
+			<script type="Mymr">mianmaro</script>
+			<script type="Nkoo">enko</script>
+			<script type="Ogam">ogham</script>
+			<script type="Olck">ol čiki</script>
+			<script type="Orkh">orkon</script>
+			<script type="Orya">orija</script>
+			<script type="Osma">osmanų</script>
+			<script type="Perm">senieji permės</script>
+			<script type="Phag">pagsa pa</script>
+			<script type="Phli">rašytiniai pahlavi</script>
+			<script type="Phlp">pselter pahlavi</script>
+			<script type="Phlv">buk pahvali</script>
+			<script type="Phnx">foenikų</script>
+			<script type="Plrd">polard fonetinė</script>
+			<script type="Prti">rašytiniai partų</script>
+			<script type="Qaai">paveldėtas</script>
+			<script type="Rjng">rejang</script>
+			<script type="Roro">rongorongo</script>
 			<script type="Runr">runų</script>
+			<script type="Samr">samariečių</script>
+			<script type="Sara">sarati</script>
+			<script type="Saur">sauraštra</script>
+			<script type="Sgnw">ženklų raštas</script>
+			<script type="Shaw">šavių</script>
+			<script type="Sinh">sinhala</script>
+			<script type="Sund">sundų</script>
+			<script type="Sylo">syloti nagri</script>
+			<script type="Syrc">sirų</script>
+			<script type="Syre">estrangelo siriečių</script>
+			<script type="Syrj">vakarų sirų</script>
+			<script type="Syrn">rytų sirų</script>
+			<script type="Tagb">tagbanva</script>
+			<script type="Tale">tai le</script>
+			<script type="Talu">naujasis Tailando lue</script>
+			<script type="Taml">tamilų</script>
+			<script type="Tavt">tai vet</script>
+			<script type="Telu">telugų</script>
+			<script type="Teng">tengvar</script>
+			<script type="Tfng">tifinag</script>
+			<script type="Tglg">tagalogų</script>
+			<script type="Thaa">hana</script>
+			<script type="Thai">tajų</script>
+			<script type="Tibt">tibetiečių</script>
+			<script type="Ugar">ugaritik</script>
+			<script type="Vaii">vai</script>
+			<script type="Visp">matoma kalba</script>
+			<script type="Xpeo">senieji persų</script>
+			<script type="Xsux">Šumero Akado dantiraštis</script>
+			<script type="Yiii">ji</script>
+			<script type="Zmth">matematiniai simboliai</script>
+			<script type="Zsym">simbolių</script>
+			<script type="Zxxx">neparašyta</script>
+			<script type="Zyyy">bendras</script>
+			<script type="Zzzz">nežinomi arba neteisingi rašmenys</script>
 		</scripts>
 		<territories>
 			<territory type="001">Pasaulis</territory>
@@ -230,9 +668,9 @@
 			<territory type="039">Pietų Europa</territory>
 			<territory type="053">Australija ir Naujoji Zelandija</territory>
 			<territory type="054">Melanezija</territory>
-			<territory type="057">Mikronezija [057]</territory>
+			<territory type="057">Mikronezijos regionas</territory>
 			<territory type="061">Polinezija</territory>
-			<territory type="062">Pietų-vidurio Azija</territory>
+			<territory type="062">Pietų vidurio Azija</territory>
 			<territory type="142">Azija</territory>
 			<territory type="143">Centrinė Azija</territory>
 			<territory type="145">Vakarų Azija</territory>
@@ -258,7 +696,7 @@
 			<territory type="AT">Austrija</territory>
 			<territory type="AU">Australija</territory>
 			<territory type="AW">Aruba</territory>
-			<territory type="AX">Aland Islands</territory>
+			<territory type="AX">Alandų salos</territory>
 			<territory type="AZ">Azerbaidžanas</territory>
 			<territory type="BA">Bosnija ir Hercegovina</territory>
 			<territory type="BB">Barbadosas</territory>
@@ -269,6 +707,7 @@
 			<territory type="BH">Bahreinas</territory>
 			<territory type="BI">Burundis</territory>
 			<territory type="BJ">Beninas</territory>
+			<territory type="BL">Švento Baltramiejaus sala</territory>
 			<territory type="BM">Bermuda</territory>
 			<territory type="BN">Brunėjus</territory>
 			<territory type="BO">Bolivija</territory>
@@ -322,7 +761,7 @@
 			<territory type="GD">Grenada</territory>
 			<territory type="GE">Gruzija</territory>
 			<territory type="GF">Prancūzijos Gviana</territory>
-			<territory type="GG">Guernsey</territory>
+			<territory type="GG">Guernsis</territory>
 			<territory type="GH">Gana</territory>
 			<territory type="GI">Gibraltaras</territory>
 			<territory type="GL">Grenlandija</territory>
@@ -331,12 +770,12 @@
 			<territory type="GP">Gvadelupė</territory>
 			<territory type="GQ">Pusiaujo Gvinėja</territory>
 			<territory type="GR">Graikija</territory>
-			<territory type="GS">Rytų Džordžija ir Rytų Sandwich salos</territory>
+			<territory type="GS">Pietų Džordžija ir Pietų Sandvičo salos</territory>
 			<territory type="GT">Gvatemala</territory>
 			<territory type="GU">Guamas</territory>
 			<territory type="GW">Bisau Gvinėja</territory>
 			<territory type="GY">Gajana</territory>
-			<territory type="HK">Honkongas</territory>
+			<territory type="HK">Kinijos S.A.R.Honkongas</territory>
 			<territory type="HM">Heardo ir McDonaldo Salų Sritis</territory>
 			<territory type="HN">Hondūras</territory>
 			<territory type="HR">Kroatija</territory>
@@ -345,7 +784,7 @@
 			<territory type="ID">Indonezija</territory>
 			<territory type="IE">Airija</territory>
 			<territory type="IL">Izraelis</territory>
-			<territory type="IM">Meno sala</territory>
+			<territory type="IM">Meino sala</territory>
 			<territory type="IN">Indija</territory>
 			<territory type="IO">Indijos vandenyno britų sritis</territory>
 			<territory type="IQ">Irakas</territory>
@@ -382,6 +821,7 @@
 			<territory type="MC">Monakas</territory>
 			<territory type="MD">Moldova</territory>
 			<territory type="ME">Juodkalnija</territory>
+			<territory type="MF">Saint-Martin</territory>
 			<territory type="MG">Madagaskaras</territory>
 			<territory type="MH">Maršalo Salos</territory>
 			<territory type="MK">Makedonija</territory>
@@ -491,9 +931,12 @@
 			<territory type="ZW">Zimbabvė</territory>
 			<territory type="ZZ">Nežinoma ar neteisinga sritis</territory>
 		</territories>
+		<variants>
+			<variant type="POSIX">Kompiuteris</variant>
+		</variants>
 		<keys>
 			<key type="calendar">kalendorius</key>
-			<key type="collation">gretinimas</key>
+			<key type="collation">lyginimas</key>
 			<key type="currency">valiuta</key>
 		</keys>
 		<types>
@@ -509,10 +952,16 @@
 			<measurementSystemName type="US">JAV</measurementSystemName>
 			<measurementSystemName type="metric">Metrinė</measurementSystemName>
 		</measurementSystemNames>
+		<codePatterns>
+			<codePattern type="language">Kalba: {0}</codePattern>
+			<codePattern type="script">Rašmenys: {0}</codePattern>
+			<codePattern type="territory">Sritis: {0}</codePattern>
+		</codePatterns>
 	</localeDisplayNames>
 	<characters>
 		<exemplarCharacters>[a ą b c č d e ę ė f-i į y j-p r s š t u ų ū v z ž]</exemplarCharacters>
-		<exemplarCharacters type="auxiliary">[{į̇} {i̇} {i̇́} {i̇̀} {i̇̃} {j̇} q w x]</exemplarCharacters>
+		<exemplarCharacters type="auxiliary">[{į\u0307} {i\u0307} {i\u0307\u0301} {i\u0307\u0300} {i\u0307\u0303} {j\u0307} q w x]</exemplarCharacters>
+		<exemplarCharacters type="currencySymbol">[a ą b c č d e ę ė f-i į y j-p r s š t u ų ū v z ž]</exemplarCharacters>
 	</characters>
 	<delimiters>
 		<quotationStart>„</quotationStart>
@@ -521,8 +970,18 @@
 		<alternateQuotationEnd>“</alternateQuotationEnd>
 	</delimiters>
 	<dates>
-		<localizedPatternChars>GanjkHmsSEDFwWxhKzAeugXZvcL</localizedPatternChars>
+		<dateRangePattern>{0}−{1}</dateRangePattern>
 		<calendars>
+			<calendar type="buddhist">
+				<am>ryte</am>
+				<dateFormats>
+					<dateFormatLength type="full">
+						<dateFormat>
+							<pattern>y G, MMMM d, EEEE</pattern>
+						</dateFormat>
+					</dateFormatLength>
+				</dateFormats>
+			</calendar>
 			<calendar type="gregorian">
 				<months>
 					<monthContext type="format">
@@ -634,10 +1093,22 @@
 							<quarter type="4">ketvirtas ketvirtis</quarter>
 						</quarterWidth>
 					</quarterContext>
+					<quarterContext type="stand-alone">
+						<quarterWidth type="abbreviated">
+							<quarter type="1">1K</quarter>
+							<quarter type="2">2K</quarter>
+							<quarter type="3">3K</quarter>
+							<quarter type="4">4K</quarter>
+						</quarterWidth>
+					</quarterContext>
 				</quarters>
 				<am>priešpiet</am>
 				<pm>popiet</pm>
 				<eras>
+					<eraNames>
+						<era type="0">prieš Kristų</era>
+						<era type="1">po Kristaus</era>
+					</eraNames>
 					<eraAbbr>
 						<era type="0">pr. Kr.</era>
 						<era type="1">po Kr.</era>
@@ -646,12 +1117,12 @@
 				<dateFormats>
 					<dateFormatLength type="full">
 						<dateFormat>
-							<pattern>yyyy 'm'. MMMM d 'd'.,EEEE</pattern>
+							<pattern>y 'm'. MMMM d 'd'.,EEEE</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="long">
 						<dateFormat>
-							<pattern>yyyy 'm'. MMMM d 'd'.</pattern>
+							<pattern>y 'm'. MMMM d 'd'.</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="medium">
@@ -668,7 +1139,7 @@
 				<timeFormats>
 					<timeFormatLength type="full">
 						<timeFormat>
-							<pattern>HH:mm:ss v</pattern>
+							<pattern>HH:mm:ss zzzz</pattern>
 						</timeFormat>
 					</timeFormatLength>
 					<timeFormatLength type="long">
@@ -688,11 +1159,6 @@
 					</timeFormatLength>
 				</timeFormats>
 				<dateTimeFormats>
-					<dateTimeFormatLength>
-						<dateTimeFormat>
-							<pattern>{1} {0}</pattern>
-						</dateTimeFormat>
-					</dateTimeFormatLength>
 					<availableFormats>
 						<dateFormatItem id="HHmm">HH:mm</dateFormatItem>
 						<dateFormatItem id="HHmmss">HH:mm:ss</dateFormatItem>
@@ -757,18 +1223,18 @@
 							<greatestDifference id="y">yyyy-MM-ddE - yyyy-MM-ddE</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMM">
-							<greatestDifference id="M">yyyy 'm'. MMM-MMM</greatestDifference>
-							<greatestDifference id="y">yyyy 'm'. MMM - yyyy 'm'. MMM</greatestDifference>
+							<greatestDifference id="M">y 'm'. MMM-MMM</greatestDifference>
+							<greatestDifference id="y">y 'm'. MMM - y 'm'. MMM</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMEd">
-							<greatestDifference id="M">yyyy 'm'. MMM d 'd'.,E - MMM d 'd'.,E</greatestDifference>
-							<greatestDifference id="d">yyyy 'm'. MMM d 'd'.,E - d 'd'.,E</greatestDifference>
-							<greatestDifference id="y">yyyy 'm'. MMM d 'd'.,E - yyyy 'm'. MMM d 'd'.,E</greatestDifference>
+							<greatestDifference id="M">y 'm'. MMM d 'd'.,E - MMM d 'd'.,E</greatestDifference>
+							<greatestDifference id="d">y 'm'. MMM d 'd'.,E - d 'd'.,E</greatestDifference>
+							<greatestDifference id="y">y 'm'. MMM d 'd'.,E - y 'm'. MMM d 'd'.,E</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMd">
-							<greatestDifference id="M">yyyy 'm'. MMM d 'd'. - MMM d 'd'.</greatestDifference>
-							<greatestDifference id="d">yyyy 'm'. MMM d 'd'.-d 'd'.</greatestDifference>
-							<greatestDifference id="y">yyyy 'm'. MMM d 'd'. - yyyy 'm'. MMM d 'd'.</greatestDifference>
+							<greatestDifference id="M">y 'm'. MMM d 'd'. - MMM d 'd'.</greatestDifference>
+							<greatestDifference id="d">y 'm'. MMM d 'd'.-d 'd'.</greatestDifference>
+							<greatestDifference id="y">y 'm'. MMM d 'd'. - y 'm'. MMM d 'd'.</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMd">
 							<greatestDifference id="M">yyyy-MM-dd - yyyy-MM-dd</greatestDifference>
@@ -792,6 +1258,13 @@
 					</field>
 					<field type="day">
 						<displayName>diena</displayName>
+						<relative type="-3">už užvakar</relative>
+						<relative type="-2">užvakar</relative>
+						<relative type="-1">vakar</relative>
+						<relative type="0">šiandien</relative>
+						<relative type="1">rytoj</relative>
+						<relative type="2">poryt</relative>
+						<relative type="3">užporyt</relative>
 					</field>
 					<field type="weekday">
 						<displayName>savaitės diena</displayName>
@@ -806,7 +1279,7 @@
 						<displayName>minutė</displayName>
 					</field>
 					<field type="second">
-						<displayName>Sekundė</displayName>
+						<displayName>sekundė</displayName>
 					</field>
 					<field type="zone">
 						<displayName>juosta</displayName>
@@ -818,6 +1291,10 @@
 			<hourFormat>+HH:mm;−HH:mm</hourFormat>
 			<gmtFormat>GMT{0}</gmtFormat>
 			<regionFormat>{0}</regionFormat>
+			<fallbackFormat>{0} ({1})</fallbackFormat>
+			<zone type="Etc/Unknown">
+				<exemplarCity>Nežinoma</exemplarCity>
+			</zone>
 			<zone type="Europe/Andorra">
 				<exemplarCity>Andora</exemplarCity>
 			</zone>
@@ -833,17 +1310,80 @@
 			<zone type="Asia/Yerevan">
 				<exemplarCity>Jerevanas</exemplarCity>
 			</zone>
+			<zone type="Antarctica/Palmer">
+				<exemplarCity>Palmeris</exemplarCity>
+			</zone>
 			<zone type="Antarctica/South_Pole">
 				<exemplarCity>Pietų ašigalis</exemplarCity>
 			</zone>
+			<zone type="Antarctica/Syowa">
+				<exemplarCity>Syova</exemplarCity>
+			</zone>
+			<zone type="Antarctica/Vostok">
+				<exemplarCity>Vostokas</exemplarCity>
+			</zone>
 			<zone type="Antarctica/DumontDUrville">
 				<exemplarCity>Dumont D'Urville</exemplarCity>
+			</zone>
+			<zone type="America/Argentina/Rio_Gallegos">
+				<exemplarCity>Rio Galjegosas</exemplarCity>
+			</zone>
+			<zone type="America/Mendoza">
+				<exemplarCity>Mendosa</exemplarCity>
+			</zone>
+			<zone type="America/Argentina/San_Juan">
+				<exemplarCity>San Chuanas</exemplarCity>
+			</zone>
+			<zone type="America/Argentina/Ushuaia">
+				<exemplarCity>Ušuaja</exemplarCity>
+			</zone>
+			<zone type="America/Argentina/La_Rioja">
+				<exemplarCity>La Riocha</exemplarCity>
+			</zone>
+			<zone type="America/Argentina/San_Luis">
+				<exemplarCity>Sent Luisas</exemplarCity>
+			</zone>
+			<zone type="America/Catamarca">
+				<exemplarCity>Katamarka</exemplarCity>
+			</zone>
+			<zone type="America/Jujuy">
+				<exemplarCity>Chuchujus</exemplarCity>
+			</zone>
+			<zone type="America/Argentina/Tucuman">
+				<exemplarCity>Tukumanas</exemplarCity>
+			</zone>
+			<zone type="America/Cordoba">
+				<exemplarCity>Kordoba</exemplarCity>
 			</zone>
 			<zone type="America/Buenos_Aires">
 				<exemplarCity>Buenos Airės</exemplarCity>
 			</zone>
 			<zone type="Europe/Vienna">
 				<exemplarCity>Viena</exemplarCity>
+			</zone>
+			<zone type="Australia/Perth">
+				<exemplarCity>Pertas</exemplarCity>
+			</zone>
+			<zone type="Australia/Darwin">
+				<exemplarCity>Darvinas</exemplarCity>
+			</zone>
+			<zone type="Australia/Adelaide">
+				<exemplarCity>Adelaidė</exemplarCity>
+			</zone>
+			<zone type="Australia/Melbourne">
+				<exemplarCity>Melburnas</exemplarCity>
+			</zone>
+			<zone type="Australia/Hobart">
+				<exemplarCity>Hobartas</exemplarCity>
+			</zone>
+			<zone type="Australia/Sydney">
+				<exemplarCity>Sidnėjus</exemplarCity>
+			</zone>
+			<zone type="Australia/Brisbane">
+				<exemplarCity>Brisbanas</exemplarCity>
+			</zone>
+			<zone type="Australia/Lord_Howe">
+				<exemplarCity>Lordo Hau sala</exemplarCity>
 			</zone>
 			<zone type="America/Barbados">
 				<exemplarCity>Barbadosas</exemplarCity>
@@ -872,14 +1412,26 @@
 			<zone type="America/La_Paz">
 				<exemplarCity>La Pasas</exemplarCity>
 			</zone>
+			<zone type="America/Rio_Branco">
+				<exemplarCity>Rio Brankas</exemplarCity>
+			</zone>
+			<zone type="America/Manaus">
+				<exemplarCity>Manausas</exemplarCity>
+			</zone>
 			<zone type="America/Cuiaba">
 				<exemplarCity>Kujaba</exemplarCity>
+			</zone>
+			<zone type="America/Santarem">
+				<exemplarCity>Santarenas</exemplarCity>
 			</zone>
 			<zone type="America/Belem">
 				<exemplarCity>Belemas</exemplarCity>
 			</zone>
 			<zone type="America/Sao_Paulo">
 				<exemplarCity>San Paulas</exemplarCity>
+			</zone>
+			<zone type="America/Recife">
+				<exemplarCity>Resifė</exemplarCity>
 			</zone>
 			<zone type="Africa/Gaborone">
 				<exemplarCity>Gaboronas</exemplarCity>
@@ -890,11 +1442,62 @@
 			<zone type="America/Belize">
 				<exemplarCity>Belizas</exemplarCity>
 			</zone>
+			<zone type="America/Dawson">
+				<exemplarCity>Dosonas</exemplarCity>
+			</zone>
+			<zone type="America/Whitehorse">
+				<exemplarCity>Vaithorsas</exemplarCity>
+			</zone>
+			<zone type="America/Vancouver">
+				<exemplarCity>Vankuveris</exemplarCity>
+			</zone>
+			<zone type="America/Dawson_Creek">
+				<exemplarCity>Dosono įlanka</exemplarCity>
+			</zone>
+			<zone type="America/Yellowknife">
+				<exemplarCity>Jelounaifas</exemplarCity>
+			</zone>
+			<zone type="America/Edmonton">
+				<exemplarCity>Edmontonas</exemplarCity>
+			</zone>
+			<zone type="America/Cambridge_Bay">
+				<exemplarCity>Kembridžo įlanka</exemplarCity>
+			</zone>
+			<zone type="America/Regina">
+				<exemplarCity>Redžina</exemplarCity>
+			</zone>
+			<zone type="America/Winnipeg">
+				<exemplarCity>Vinipegas</exemplarCity>
+			</zone>
+			<zone type="America/Thunder_Bay">
+				<exemplarCity>Tander Bėjus</exemplarCity>
+			</zone>
+			<zone type="America/Nipigon">
+				<exemplarCity>Nipigonas</exemplarCity>
+			</zone>
+			<zone type="America/Toronto">
+				<exemplarCity>Torontas</exemplarCity>
+			</zone>
+			<zone type="America/Montreal">
+				<exemplarCity>Monrealis</exemplarCity>
+			</zone>
+			<zone type="America/Iqaluit">
+				<exemplarCity>Ikaluitas</exemplarCity>
+			</zone>
+			<zone type="America/Pangnirtung">
+				<exemplarCity>Pangnirtungas</exemplarCity>
+			</zone>
 			<zone type="America/Moncton">
 				<exemplarCity>Monktonas</exemplarCity>
 			</zone>
+			<zone type="America/Halifax">
+				<exemplarCity>Halifaksas</exemplarCity>
+			</zone>
 			<zone type="Africa/Kinshasa">
 				<exemplarCity>Kinšasa</exemplarCity>
+			</zone>
+			<zone type="Africa/Lubumbashi">
+				<exemplarCity>Lubumbašis</exemplarCity>
 			</zone>
 			<zone type="Africa/Brazzaville">
 				<exemplarCity>Brazavilis</exemplarCity>
@@ -910,6 +1513,18 @@
 			</zone>
 			<zone type="America/Santiago">
 				<exemplarCity>Santjagas</exemplarCity>
+			</zone>
+			<zone type="Asia/Kashgar">
+				<exemplarCity>Kashi</exemplarCity>
+			</zone>
+			<zone type="Asia/Urumqi">
+				<exemplarCity>Urumči</exemplarCity>
+			</zone>
+			<zone type="Asia/Chongqing">
+				<exemplarCity>Čongčingas</exemplarCity>
+			</zone>
+			<zone type="Asia/Harbin">
+				<exemplarCity>Harbinas</exemplarCity>
 			</zone>
 			<zone type="America/Costa_Rica">
 				<exemplarCity>Kosta Rika</exemplarCity>
@@ -949,6 +1564,9 @@
 			</zone>
 			<zone type="Atlantic/Canary">
 				<exemplarCity>Kanarų salos</exemplarCity>
+			</zone>
+			<zone type="Africa/Ceuta">
+				<exemplarCity>Seuta</exemplarCity>
 			</zone>
 			<zone type="Europe/Madrid">
 				<exemplarCity>Madridas</exemplarCity>
@@ -1028,6 +1646,15 @@
 			<zone type="Asia/Jakarta">
 				<exemplarCity>Džakarta</exemplarCity>
 			</zone>
+			<zone type="Asia/Pontianak">
+				<exemplarCity>Pontianakas</exemplarCity>
+			</zone>
+			<zone type="Asia/Makassar">
+				<exemplarCity>Makasaras</exemplarCity>
+			</zone>
+			<zone type="Asia/Jayapura">
+				<exemplarCity>Džajapura</exemplarCity>
+			</zone>
 			<zone type="Europe/Dublin">
 				<exemplarCity>Dublinas</exemplarCity>
 			</zone>
@@ -1076,8 +1703,17 @@
 			<zone type="America/Cayman">
 				<exemplarCity>Kaimanas</exemplarCity>
 			</zone>
+			<zone type="Asia/Aqtau">
+				<exemplarCity>Aktau</exemplarCity>
+			</zone>
+			<zone type="Asia/Oral">
+				<exemplarCity>Uralskas</exemplarCity>
+			</zone>
 			<zone type="Asia/Aqtobe">
 				<exemplarCity>Aktiubinskas</exemplarCity>
+			</zone>
+			<zone type="Asia/Qyzylorda">
+				<exemplarCity>Kzyl-Orda</exemplarCity>
 			</zone>
 			<zone type="Asia/Almaty">
 				<exemplarCity>Alma Ata</exemplarCity>
@@ -1124,6 +1760,9 @@
 			<zone type="Asia/Ulaanbaatar">
 				<exemplarCity>Ulan-Batoras</exemplarCity>
 			</zone>
+			<zone type="Asia/Choibalsan">
+				<exemplarCity>Čoibalsanas</exemplarCity>
+			</zone>
 			<zone type="Asia/Macau">
 				<exemplarCity>Makao</exemplarCity>
 			</zone>
@@ -1142,6 +1781,30 @@
 			<zone type="Indian/Maldives">
 				<exemplarCity>Maldyvai</exemplarCity>
 			</zone>
+			<zone type="America/Tijuana">
+				<exemplarCity>Tichuana</exemplarCity>
+			</zone>
+			<zone type="America/Hermosillo">
+				<exemplarCity>Hermosiljas</exemplarCity>
+			</zone>
+			<zone type="America/Mazatlan">
+				<exemplarCity>Mazatlanas</exemplarCity>
+			</zone>
+			<zone type="America/Chihuahua">
+				<exemplarCity>Čihuahua</exemplarCity>
+			</zone>
+			<zone type="America/Monterrey">
+				<exemplarCity>Monterėjus</exemplarCity>
+			</zone>
+			<zone type="America/Mexico_City">
+				<exemplarCity>Meksikas</exemplarCity>
+			</zone>
+			<zone type="America/Cancun">
+				<exemplarCity>Kankunas</exemplarCity>
+			</zone>
+			<zone type="Asia/Kuching">
+				<exemplarCity>Kučingas</exemplarCity>
+			</zone>
 			<zone type="Pacific/Norfolk">
 				<exemplarCity>Norfolkas</exemplarCity>
 			</zone>
@@ -1159,6 +1822,9 @@
 			</zone>
 			<zone type="Pacific/Tahiti">
 				<exemplarCity>Taitis</exemplarCity>
+			</zone>
+			<zone type="Pacific/Marquesas">
+				<exemplarCity>Markizo salos</exemplarCity>
 			</zone>
 			<zone type="Europe/Warsaw">
 				<exemplarCity>Varšuva</exemplarCity>
@@ -1189,6 +1855,48 @@
 			</zone>
 			<zone type="Europe/Bucharest">
 				<exemplarCity>Bukareštas</exemplarCity>
+			</zone>
+			<zone type="Europe/Kaliningrad">
+				<exemplarCity>Kaliningradas</exemplarCity>
+			</zone>
+			<zone type="Europe/Moscow">
+				<exemplarCity>Maskva</exemplarCity>
+			</zone>
+			<zone type="Europe/Volgograd">
+				<exemplarCity>Volgogradas</exemplarCity>
+			</zone>
+			<zone type="Asia/Yekaterinburg">
+				<exemplarCity>Jekaterinburgas</exemplarCity>
+			</zone>
+			<zone type="Asia/Omsk">
+				<exemplarCity>Omskas</exemplarCity>
+			</zone>
+			<zone type="Asia/Novosibirsk">
+				<exemplarCity>Novosibirskas</exemplarCity>
+			</zone>
+			<zone type="Asia/Krasnoyarsk">
+				<exemplarCity>Krasnojarskas</exemplarCity>
+			</zone>
+			<zone type="Asia/Irkutsk">
+				<exemplarCity>Irkutskas</exemplarCity>
+			</zone>
+			<zone type="Asia/Yakutsk">
+				<exemplarCity>Jakutskas</exemplarCity>
+			</zone>
+			<zone type="Asia/Vladivostok">
+				<exemplarCity>Vladivostokas</exemplarCity>
+			</zone>
+			<zone type="Asia/Sakhalin">
+				<exemplarCity>Sachalinas</exemplarCity>
+			</zone>
+			<zone type="Asia/Magadan">
+				<exemplarCity>Magadanas</exemplarCity>
+			</zone>
+			<zone type="Asia/Kamchatka">
+				<exemplarCity>Kamčiatka</exemplarCity>
+			</zone>
+			<zone type="Asia/Anadyr">
+				<exemplarCity>Anadyrė</exemplarCity>
 			</zone>
 			<zone type="Asia/Riyadh">
 				<exemplarCity>Rijadas</exemplarCity>
@@ -1253,20 +1961,41 @@
 			<zone type="America/Port_of_Spain">
 				<exemplarCity>Port of Speinas</exemplarCity>
 			</zone>
+			<zone type="Europe/Uzhgorod">
+				<exemplarCity>Užhorodas</exemplarCity>
+			</zone>
 			<zone type="Europe/Kiev">
 				<exemplarCity>Kijevas</exemplarCity>
+			</zone>
+			<zone type="Europe/Simferopol">
+				<exemplarCity>Simferopolis</exemplarCity>
+			</zone>
+			<zone type="Europe/Zaporozhye">
+				<exemplarCity>Zaporožė</exemplarCity>
+			</zone>
+			<zone type="Pacific/Midway">
+				<exemplarCity>Jungtinių Valstijų mažosios aplinkinės salos (Midway</exemplarCity>
 			</zone>
 			<zone type="Pacific/Johnston">
 				<exemplarCity>Džonstonas</exemplarCity>
 			</zone>
 			<zone type="Pacific/Wake">
-				<exemplarCity>Klivateris</exemplarCity>
+				<exemplarCity>Jungtinių Valstijų mažosios aplinkinės salos (Klivateris)</exemplarCity>
 			</zone>
 			<zone type="America/Anchorage">
 				<exemplarCity>Ankoridžas</exemplarCity>
 			</zone>
+			<zone type="America/Yakutat">
+				<exemplarCity>Jakutat</exemplarCity>
+			</zone>
+			<zone type="America/Juneau">
+				<exemplarCity>Džūnas</exemplarCity>
+			</zone>
 			<zone type="America/Los_Angeles">
 				<exemplarCity>Los Andželas</exemplarCity>
+			</zone>
+			<zone type="America/Boise">
+				<exemplarCity>Boisė</exemplarCity>
 			</zone>
 			<zone type="America/Phoenix">
 				<exemplarCity>Fyniksas</exemplarCity>
@@ -1274,17 +2003,44 @@
 			<zone type="America/Denver">
 				<exemplarCity>Denveris</exemplarCity>
 			</zone>
+			<zone type="America/North_Dakota/New_Salem">
+				<exemplarCity>Naujasis Salemas, Šiaurės Dakota</exemplarCity>
+			</zone>
+			<zone type="America/North_Dakota/Center">
+				<exemplarCity>Jungtinės Valstijos (Centras, Šiaurės Dakota)</exemplarCity>
+			</zone>
 			<zone type="America/Chicago">
 				<exemplarCity>Čikaga</exemplarCity>
 			</zone>
+			<zone type="America/Indiana/Vincennes">
+				<exemplarCity>Vincenas, Indiana</exemplarCity>
+			</zone>
 			<zone type="America/Indiana/Petersburg">
 				<exemplarCity>Peterburgas</exemplarCity>
+			</zone>
+			<zone type="America/Indiana/Knox">
+				<exemplarCity>Noksas, Indiana</exemplarCity>
+			</zone>
+			<zone type="America/Indiana/Winamac">
+				<exemplarCity>Vinamakas, Indiana</exemplarCity>
+			</zone>
+			<zone type="America/Louisville">
+				<exemplarCity>Luizvilis</exemplarCity>
+			</zone>
+			<zone type="America/Kentucky/Monticello">
+				<exemplarCity>Monticelas, Kentukis</exemplarCity>
+			</zone>
+			<zone type="America/Detroit">
+				<exemplarCity>Detroitas</exemplarCity>
 			</zone>
 			<zone type="America/New_York">
 				<exemplarCity>Niujorkas</exemplarCity>
 			</zone>
 			<zone type="America/Montevideo">
 				<exemplarCity>Montevidëjas</exemplarCity>
+			</zone>
+			<zone type="Asia/Samarkand">
+				<exemplarCity>Samarkandas</exemplarCity>
 			</zone>
 			<zone type="Asia/Tashkent">
 				<exemplarCity>Taškentas</exemplarCity>
@@ -1376,6 +2132,18 @@
 					<daylight>Ramiojo vandenyno vasaros laikas</daylight>
 				</long>
 			</metazone>
+			<metazone type="Aqtau">
+				<short>
+					<standard>AQTT (Aktau)</standard>
+					<daylight>AQTST (Aktau)</daylight>
+				</short>
+			</metazone>
+			<metazone type="Aqtobe">
+				<short>
+					<standard>AQTT (Aktobė)</standard>
+					<daylight>AQTST (Aktobė)</daylight>
+				</short>
+			</metazone>
 			<metazone type="Argentina">
 				<long>
 					<standard>Argentinos laikas</standard>
@@ -1446,17 +2214,36 @@
 					<standard>Vidurio Europos laikas</standard>
 					<daylight>Vidurio Europos vasaros laikas</daylight>
 				</long>
+				<short>
+					<standard>CET</standard>
+					<daylight>CEST</daylight>
+				</short>
 			</metazone>
 			<metazone type="Europe_Eastern">
 				<long>
 					<standard>Rytų Europos laikas</standard>
 					<daylight>Rytų Europos vasaros laikas</daylight>
 				</long>
+				<short>
+					<standard>EET</standard>
+					<daylight>EEST</daylight>
+				</short>
+			</metazone>
+			<metazone type="Europe_Western">
+				<short>
+					<standard>WET</standard>
+					<daylight>WEST</daylight>
+				</short>
 			</metazone>
 			<metazone type="French_Guiana">
 				<long>
 					<standard>Prancūzų Gajanos laikas</standard>
 				</long>
+			</metazone>
+			<metazone type="GMT">
+				<short>
+					<standard>GMT</standard>
+				</short>
 			</metazone>
 			<metazone type="Greenland_Central">
 				<long>
@@ -1519,6 +2306,12 @@
 					<daylight>Samaros vasaros laikas</daylight>
 				</long>
 			</metazone>
+			<metazone type="Samarkand">
+				<short>
+					<standard>SAMT (Samarkandas)</standard>
+					<daylight>SAMST (Samarkandas)</daylight>
+				</short>
+			</metazone>
 			<metazone type="Turkey">
 				<long>
 					<standard>Turkijos laikas</standard>
@@ -1548,15 +2341,47 @@
 		<symbols>
 			<decimal>,</decimal>
 			<group>.</group>
+			<list>;</list>
+			<percentSign>%</percentSign>
+			<nativeZeroDigit>0</nativeZeroDigit>
+			<patternDigit>#</patternDigit>
+			<plusSign>+</plusSign>
 			<minusSign>−</minusSign>
 			<exponential>×10^</exponential>
+			<perMille>‰</perMille>
+			<infinity>∞</infinity>
+			<nan>¤¤¤</nan>
 		</symbols>
+		<decimalFormats>
+			<decimalFormatLength>
+				<decimalFormat>
+					<pattern>#,##0.###</pattern>
+				</decimalFormat>
+			</decimalFormatLength>
+		</decimalFormats>
+		<scientificFormats>
+			<scientificFormatLength>
+				<scientificFormat>
+					<pattern>#E0</pattern>
+				</scientificFormat>
+			</scientificFormatLength>
+		</scientificFormats>
+		<percentFormats>
+			<percentFormatLength>
+				<percentFormat>
+					<pattern>#,##0%</pattern>
+				</percentFormat>
+			</percentFormatLength>
+		</percentFormats>
 		<currencyFormats>
 			<currencyFormatLength>
 				<currencyFormat>
 					<pattern>#,##0.00 ¤</pattern>
 				</currencyFormat>
 			</currencyFormatLength>
+			<unitPattern count="few">{0} {1}</unitPattern>
+			<unitPattern count="one">{0} {1}</unitPattern>
+			<unitPattern count="other">{0} {1}</unitPattern>
 		</currencyFormats>
 		<currencies>
 			<currency type="ADP">
@@ -1772,7 +2597,7 @@
 			</currency>
 			<currency type="BRN">
 				<displayName>Brazilijos naujasis kruzadas</displayName>
-				<displayName count="few">Brazilijos naujieji  kruzadai</displayName>
+				<displayName count="few">Brazilijos naujieji kruzadai</displayName>
 				<displayName count="one">Brazilijos naujasis kruzadas</displayName>
 				<displayName count="other">Brazilijos naujieji kruzadai</displayName>
 			</currency>
@@ -1835,8 +2660,8 @@
 			</currency>
 			<currency type="CNY">
 				<displayName>Ženminbi juanis</displayName>
-				<displayName count="one">Kinijos ženminbi juanis</displayName>
-				<displayName count="other">Kinijos ženminbi juaniai</displayName>
+				<displayName count="one">Kinijos juanis</displayName>
+				<displayName count="other">Kinijos juaniai</displayName>
 			</currency>
 			<currency type="COP">
 				<displayName>Kolumbijos pesas</displayName>
@@ -1911,7 +2736,7 @@
 				<displayName>Fidžio doleris</displayName>
 			</currency>
 			<currency type="FKP">
-				<displayName>Falklando salų svaras</displayName>
+				<displayName>Folklando salų svaras</displayName>
 			</currency>
 			<currency type="FRF">
 				<displayName>Prancūzijos frankas</displayName>
@@ -1943,7 +2768,7 @@
 				<displayName>Graikijos drachma</displayName>
 			</currency>
 			<currency type="GTQ">
-				<displayName>Gvatemalos ketcalis</displayName>
+				<displayName>Gvatemalos kecalis</displayName>
 			</currency>
 			<currency type="GWE">
 				<displayName>Portugalų Gvinėjos eskudas</displayName>
@@ -1958,7 +2783,7 @@
 				<displayName>Honkongo doleris</displayName>
 			</currency>
 			<currency type="HNL">
-				<displayName>Honduro lempira</displayName>
+				<displayName>Hondūro lempira</displayName>
 			</currency>
 			<currency type="HRD">
 				<displayName>Kroatijos dinaras</displayName>
@@ -2028,6 +2853,9 @@
 			<currency type="KWD">
 				<displayName>Kuveito dinaras</displayName>
 			</currency>
+			<currency type="KYD">
+				<displayName>Kaimanų salų doleris</displayName>
+			</currency>
 			<currency type="KZT">
 				<displayName>Kazachstano tengė</displayName>
 			</currency>
@@ -2048,7 +2876,6 @@
 			</currency>
 			<currency type="LTL">
 				<displayName>Litas</displayName>
-				<symbol>Lt</symbol>
 			</currency>
 			<currency type="LTT">
 				<displayName>Lietuvos talonas</displayName>
@@ -2099,7 +2926,7 @@
 				<displayName>Mongolijos tugrikas</displayName>
 			</currency>
 			<currency type="MOP">
-				<displayName>Macao pataka</displayName>
+				<displayName>Makao pataka</displayName>
 			</currency>
 			<currency type="MRO">
 				<displayName>Mauritanijos ugija</displayName>
@@ -2123,7 +2950,7 @@
 				<displayName>Meksikos pesas</displayName>
 			</currency>
 			<currency type="MXP">
-				<displayName>Meksikos sidabrinis pesas</displayName>
+				<displayName>Meksikos sidabrinis pesas (1861-1992)</displayName>
 			</currency>
 			<currency type="MXV">
 				<displayName>Meksikos United de Inversion (UDI)</displayName>
@@ -2282,7 +3109,7 @@
 				<displayName>Svazilendo lilangenis</displayName>
 			</currency>
 			<currency type="THB">
-				<displayName>Batas</displayName>
+				<displayName>Tailando batas</displayName>
 			</currency>
 			<currency type="TJR">
 				<displayName>Tadžikistano rublis</displayName>
@@ -2306,7 +3133,7 @@
 				<displayName>Turkijos lira</displayName>
 			</currency>
 			<currency type="TRY">
-				<displayName>Naujoji Turkijos Lira</displayName>
+				<displayName>Naujoji Turkijos lira</displayName>
 			</currency>
 			<currency type="TTD">
 				<displayName>Trinidado ir Tobago doleris</displayName>
@@ -2333,7 +3160,7 @@
 				<displayName>JAV doleris</displayName>
 			</currency>
 			<currency type="USN">
-				<displayName>JAV doleris (sekančios dienos)</displayName>
+				<displayName>JAV doleris (kitos dienos)</displayName>
 			</currency>
 			<currency type="USS">
 				<displayName>JAV doleris (šios dienos)</displayName>
@@ -2348,13 +3175,13 @@
 				<displayName>Uzbekistano sumas</displayName>
 			</currency>
 			<currency type="VEB">
-				<displayName>Bolivaras</displayName>
+				<displayName>Venesuelos bolivaras</displayName>
 			</currency>
 			<currency type="VEF">
 				<displayName>Stiprusis Venesuelos bolivaras</displayName>
 			</currency>
 			<currency type="VND">
-				<displayName>Vietnamo dongai</displayName>
+				<displayName>Vietnamo dongas</displayName>
 			</currency>
 			<currency type="WST">
 				<displayName>Vakarų Samoa tala</displayName>
@@ -2392,7 +3219,7 @@
 				<displayName>Europos piniginis vienetas (1993-1999)</displayName>
 			</currency>
 			<currency type="XFO">
-				<displayName>Auksinis - frankas</displayName>
+				<displayName>Aukso frankas</displayName>
 			</currency>
 			<currency type="XFU">
 				<displayName>Uic -frankas</displayName>
@@ -2413,6 +3240,15 @@
 			<currency type="XPT">
 				<displayName>Platina</displayName>
 			</currency>
+			<currency type="XRE">
+				<displayName>RINET fondai</displayName>
+			</currency>
+			<currency type="XTS">
+				<displayName>Tikrinamas valiutos kodas</displayName>
+			</currency>
+			<currency type="XXX">
+				<displayName>Nežinoma arba neteisinga valiuta</displayName>
+			</currency>
 			<currency type="YDD">
 				<displayName>Jemeno dinaras</displayName>
 			</currency>
@@ -2426,10 +3262,10 @@
 				<displayName>Jugoslavijos konvertuojamas dinaras</displayName>
 			</currency>
 			<currency type="ZAL">
-				<displayName>Pietų Afrikos Respublikos finansinis randas</displayName>
+				<displayName>Pietų Afrikos finansinis randas</displayName>
 			</currency>
 			<currency type="ZAR">
-				<displayName>PAR Randas</displayName>
+				<displayName>Pietų Afrikos randas</displayName>
 			</currency>
 			<currency type="ZMK">
 				<displayName>Zambijos kvača</displayName>
@@ -2445,6 +3281,43 @@
 			</currency>
 		</currencies>
 	</numbers>
+	<units>
+		<unit type="day">
+			<unitPattern count="few">{0} dienos</unitPattern>
+			<unitPattern count="one">{0} diena</unitPattern>
+			<unitPattern count="other">{0} dienų</unitPattern>
+		</unit>
+		<unit type="hour">
+			<unitPattern count="few">{0} valandos</unitPattern>
+			<unitPattern count="one">{0} valanda</unitPattern>
+			<unitPattern count="other">{0} valandų</unitPattern>
+		</unit>
+		<unit type="minute">
+			<unitPattern count="few">{0} minutės</unitPattern>
+			<unitPattern count="one">{0} minutė</unitPattern>
+			<unitPattern count="other">{0} minučių</unitPattern>
+		</unit>
+		<unit type="month">
+			<unitPattern count="few">{0} mėnesiai</unitPattern>
+			<unitPattern count="one">{0} mėnuo</unitPattern>
+			<unitPattern count="other">{0} mėnesių</unitPattern>
+		</unit>
+		<unit type="second">
+			<unitPattern count="few">{0} sekundės</unitPattern>
+			<unitPattern count="one">{0} sekundė</unitPattern>
+			<unitPattern count="other">{0} sekundžių</unitPattern>
+		</unit>
+		<unit type="week">
+			<unitPattern count="few">{0} savaitės</unitPattern>
+			<unitPattern count="one">{0} savaitė</unitPattern>
+			<unitPattern count="other">{0} savaičių</unitPattern>
+		</unit>
+		<unit type="year">
+			<unitPattern count="few">{0} metai</unitPattern>
+			<unitPattern count="one">{0} metai</unitPattern>
+			<unitPattern count="other">{0} metų</unitPattern>
+		</unit>
+	</units>
 	<posix>
 		<messages>
 			<yesstr>taip:t</yesstr>
@@ -2452,3 +3325,4 @@
 		</messages>
 	</posix>
 </ldml>
+

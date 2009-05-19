@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.66 $"/>
-		<generation date="$Date: 2008/05/28 15:49:32 $"/>
+		<version number="$Revision: 1.76 $"/>
+		<generation date="$Date: 2009/05/05 23:06:37 $"/>
 		<language type="id"/>
 	</identity>
 	<localeDisplayNames>
@@ -994,17 +994,17 @@
 				<dateFormats>
 					<dateFormatLength type="full">
 						<dateFormat>
-							<pattern>EEEE dd MMMM yyyy</pattern>
+							<pattern>EEEE, dd MMMM yyyy</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="long">
 						<dateFormat>
-							<pattern>dd MMMM yyyy</pattern>
+							<pattern>d MMMM yyyy</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="medium">
 						<dateFormat>
-							<pattern>dd MMM yyyy</pattern>
+							<pattern>d MMM yyyy</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="short">
@@ -1016,38 +1016,33 @@
 				<timeFormats>
 					<timeFormatLength type="full">
 						<timeFormat>
-							<pattern>H:mm:ss v</pattern>
+							<pattern>H:mm:ss zzzz</pattern>
 						</timeFormat>
 					</timeFormatLength>
 					<timeFormatLength type="long">
 						<timeFormat>
-							<pattern>H:mm:ss z</pattern>
+							<pattern>HH:mm:ss z</pattern>
 						</timeFormat>
 					</timeFormatLength>
 					<timeFormatLength type="medium">
 						<timeFormat>
-							<pattern>H:mm:ss</pattern>
+							<pattern>HH:mm:ss</pattern>
 						</timeFormat>
 					</timeFormatLength>
 					<timeFormatLength type="short">
 						<timeFormat>
-							<pattern>H:mm</pattern>
+							<pattern>HH:mm</pattern>
 						</timeFormat>
 					</timeFormatLength>
 				</timeFormats>
 				<dateTimeFormats>
-					<dateTimeFormatLength>
-						<dateTimeFormat>
-							<pattern>{1} {0}</pattern>
-						</dateTimeFormat>
-					</dateTimeFormatLength>
 					<availableFormats>
 						<dateFormatItem id="MMMMdd">dd MMMM</dateFormatItem>
 						<dateFormatItem id="MMdd">dd/MM</dateFormatItem>
 						<dateFormatItem id="mmss">mm:ss</dateFormatItem>
 						<dateFormatItem id="yyMM">MM/yy</dateFormatItem>
 						<dateFormatItem id="yyQ">Q yy</dateFormatItem>
-						<dateFormatItem id="yyyyMMMM">MMMM yyyy</dateFormatItem>
+						<dateFormatItem id="yyyyMMMM">MMMM y</dateFormatItem>
 					</availableFormats>
 				</dateTimeFormats>
 			</calendar>
@@ -1205,7 +1200,6 @@
 			</currency>
 			<currency type="IDR">
 				<displayName>Rupiah Indonesia</displayName>
-				<symbol>Rp</symbol>
 			</currency>
 			<currency type="ILS">
 				<displayName>Shekel Israel</displayName>
@@ -1308,6 +1302,29 @@
 			</currency>
 		</currencies>
 	</numbers>
+	<units>
+		<unit type="day">
+			<unitPattern count="other">{0} hari</unitPattern>
+		</unit>
+		<unit type="hour">
+			<unitPattern count="other">{0} jam</unitPattern>
+		</unit>
+		<unit type="minute">
+			<unitPattern count="other">{0} menit</unitPattern>
+		</unit>
+		<unit type="month">
+			<unitPattern count="other">{0} bulan</unitPattern>
+		</unit>
+		<unit type="second">
+			<unitPattern count="other">{0} detik</unitPattern>
+		</unit>
+		<unit type="week">
+			<unitPattern count="other">{0} minggu</unitPattern>
+		</unit>
+		<unit type="year">
+			<unitPattern count="other">{0} tahun</unitPattern>
+		</unit>
+	</units>
 	<posix>
 		<messages>
 			<yesstr>ya:y</yesstr>

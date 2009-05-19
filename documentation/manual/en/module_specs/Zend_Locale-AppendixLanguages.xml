@@ -191,6 +191,19 @@
                     <entry>India</entry>
                 </row>
                 <row>
+                    <entry morerows="2" valign="middle">Tibetan</entry>
+                    <entry>bo</entry>
+                    <entry>---</entry>
+                </row>
+                <row>
+                    <entry>bo_CN</entry>
+                    <entry>China</entry>
+                </row>
+                <row>
+                    <entry>bn_IN</entry>
+                    <entry>India</entry>
+                </row>
+                <row>
                     <entry morerows="1" valign="middle">Bosnian</entry>
                     <entry>bs</entry>
                     <entry>---</entry>
@@ -671,6 +684,15 @@
                     <entry>Spain</entry>
                 </row>
                 <row>
+                    <entry morerows="1" valign="middle">Swiss German</entry>
+                    <entry>gsw</entry>
+                    <entry>---</entry>
+                </row>
+                <row>
+                    <entry>gsw_CH</entry>
+                    <entry>Swiss</entry>
+                </row>
+                <row>
                     <entry morerows="1" valign="middle">Gujarati</entry>
                     <entry>gu</entry>
                     <entry>---</entry>
@@ -955,6 +977,18 @@
                     <entry>---</entry>
                 </row>
                 <row>
+                    <entry>ku_IQ</entry>
+                    <entry>Iraq</entry>
+                </row>
+                <row>
+                    <entry>ku_IR</entry>
+                    <entry>Iran</entry>
+                </row>
+                <row>
+                    <entry>ku_SY</entry>
+                    <entry>Syria</entry>
+                </row>
+                <row>
                     <entry>ku_TR</entry>
                     <entry>Turkey</entry>
                 </row>
@@ -1102,6 +1136,15 @@
                     <entry>Norway</entry>
                 </row>
                 <row>
+                    <entry morerows="1" valign="middle">Low German</entry>
+                    <entry>nds</entry>
+                    <entry>---</entry>
+                </row>
+                <row>
+                    <entry>nds_DE</entry>
+                    <entry>Germany</entry>
+                </row>
+                <row>
                     <entry morerows="2" valign="middle">Nepali</entry>
                     <entry>ne</entry>
                     <entry>---</entry>
@@ -1167,6 +1210,15 @@
                 <row>
                     <entry>ny_MW</entry>
                     <entry>Malawi</entry>
+                </row>
+                <row>
+                    <entry morerows="1" valign="middle">Occitan</entry>
+                    <entry>oc</entry>
+                    <entry>---</entry>
+                </row>
+                <row>
+                    <entry>oc_FR</entry>
+                    <entry>France</entry>
                 </row>
                 <row>
                     <entry morerows="2" valign="middle">Oromo</entry>
@@ -1549,6 +1601,15 @@
                 <row>
                     <entry>tr_TR</entry>
                     <entry>Turkey</entry>
+                </row>
+                <row>
+                    <entry morerows="1" valign="middle">Taroko</entry>
+                    <entry>trv</entry>
+                    <entry>---</entry>
+                </row>
+                <row>
+                    <entry>trv_TW</entry>
+                    <entry>Taiwan</entry>
                 </row>
                 <row>
                     <entry morerows="1" valign="middle">Tsonga</entry>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.63 $"/>
-		<generation date="$Date: 2008/06/26 03:47:57 $"/>
+		<version number="$Revision: 1.76 $"/>
+		<generation date="$Date: 2009/05/05 23:06:34 $"/>
 		<language type="az"/>
 	</identity>
 	<localeDisplayNames>
@@ -762,7 +762,7 @@
 			<territory type="GU">Quam</territory>
 			<territory type="GW">Qvineya-Bisau</territory>
 			<territory type="GY">Quyana</territory>
-			<territory type="HK">Honk Konq</territory>
+			<territory type="HK">Honk Konq çina</territory>
 			<territory type="HM">Hörd və Makdonald Adaları</territory>
 			<territory type="HN">Qonduras</territory>
 			<territory type="HR">Xorvatiya</territory>
@@ -815,7 +815,7 @@
 			<territory type="ML">Mali</territory>
 			<territory type="MM">Myanmar</territory>
 			<territory type="MN">Monqoliya</territory>
-			<territory type="MO">Makao</territory>
+			<territory type="MO">Makao Çina</territory>
 			<territory type="MP">Şimal Mariana Adaları</territory>
 			<territory type="MQ">Martiniqu</territory>
 			<territory type="MR">Mavritaniya</territory>
@@ -942,7 +942,7 @@
 		</codePatterns>
 	</localeDisplayNames>
 	<characters>
-		<exemplarCharacters>[a-c ç d e ə f g ğ h i {i̇} İ ı j-o ö p-s ş t u ü v x-z]</exemplarCharacters>
+		<exemplarCharacters>[a-c ç d e ə f g ğ h x ı i İ {i\u0307} j k q l-o ö p r s ş t u ü v y z]</exemplarCharacters>
 		<exemplarCharacters type="auxiliary">[w]</exemplarCharacters>
 	</characters>
 	<delimiters>
@@ -1066,17 +1066,17 @@
 				<dateFormats>
 					<dateFormatLength type="full">
 						<dateFormat>
-							<pattern>EEEE, yyyy MMMM dd</pattern>
+							<pattern>EEEE, d, MMMM, y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="long">
 						<dateFormat>
-							<pattern>yyyy MMMM d</pattern>
+							<pattern>d MMMM , y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="medium">
 						<dateFormat>
-							<pattern>yyyy MMM d</pattern>
+							<pattern>d MMM, y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="short">
@@ -1088,7 +1088,7 @@
 				<timeFormats>
 					<timeFormatLength type="full">
 						<timeFormat>
-							<pattern>HH:mm:ss v</pattern>
+							<pattern>HH:mm:ss zzzz</pattern>
 						</timeFormat>
 					</timeFormatLength>
 					<timeFormatLength type="long">
@@ -1108,11 +1108,6 @@
 					</timeFormatLength>
 				</timeFormats>
 				<dateTimeFormats>
-					<dateTimeFormatLength>
-						<dateTimeFormat>
-							<pattern>{1} {0}</pattern>
-						</dateTimeFormat>
-					</dateTimeFormatLength>
 					<availableFormats>
 						<dateFormatItem id="yyQ">Q yy</dateFormatItem>
 					</availableFormats>
@@ -1132,11 +1127,11 @@
 					</field>
 					<field type="day">
 						<displayName>bu gün</displayName>
+						<relative type="-3">üç gün əvvəl</relative>
+						<relative type="-1">dünən</relative>
 						<relative type="0">bu gün</relative>
 						<relative type="1">sabah</relative>
 						<relative type="3">üç gün sonra</relative>
-						<relative type="-1">dünən</relative>
-						<relative type="-3">üç gün əvvəl</relative>
 					</field>
 					<field type="weekday">
 						<displayName>həftə günü</displayName>
@@ -1623,9 +1618,6 @@
 			<zone type="Asia/Samarkand">
 				<exemplarCity>səmərkənd</exemplarCity>
 			</zone>
-			<metazone type="British">
-				<commonlyUsed>false</commonlyUsed>
-			</metazone>
 			<metazone type="Europe_Central">
 				<long>
 					<standard>Orta Avropa</standard>
@@ -1635,7 +1627,6 @@
 					<standard>Orta Avropa/standart</standard>
 					<daylight>Orta Avropa/yaz</daylight>
 				</short>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Europe_Eastern">
 				<long>
@@ -1648,15 +1639,11 @@
 				</short>
 				<commonlyUsed>true</commonlyUsed>
 			</metazone>
-			<metazone type="Irish">
-				<commonlyUsed>false</commonlyUsed>
-			</metazone>
 			<metazone type="Kuybyshev">
 				<long>
 					<standard>Kuybuşev</standard>
 					<daylight>Kuybuşev/yay</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Moscow">
 				<long>
@@ -1671,7 +1658,6 @@
 					<standard>Samara</standard>
 					<daylight>Samara/yay</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Turkey">
 				<long>
@@ -1685,7 +1671,6 @@
 					<standard>Volqoqrad</standard>
 					<daylight>Volqoqrad/yay</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 		</timeZoneNames>
 	</dates>
@@ -1731,12 +1716,10 @@
 			<currency type="ALL">
 				<displayName>Alban leki</displayName>
 				<displayName count="other">Alban leki</displayName>
-				<symbol>lek</symbol>
 			</currency>
 			<currency type="AMD">
 				<displayName>Erməni dramı</displayName>
 				<displayName count="other">Erməni dramı</displayName>
-				<symbol>dram</symbol>
 			</currency>
 			<currency type="ANG">
 				<displayName>Hollandiya antila gilderi</displayName>
@@ -1785,12 +1768,10 @@
 			<currency type="AZM">
 				<displayName>Manat</displayName>
 				<displayName count="other">Azərbaycan manatı (AZM)</displayName>
-				<symbol>man.</symbol>
 			</currency>
 			<currency type="AZN">
 				<displayName>Azərbaycan manatı</displayName>
 				<displayName count="other">Azərbaycan manatı</displayName>
-				<symbol>AZN</symbol>
 			</currency>
 			<currency type="BAD">
 				<displayName>Bosniya-Herzeqovina dinarı</displayName>
@@ -1871,7 +1852,6 @@
 			<currency type="BRL">
 				<displayName>Braziliya realı</displayName>
 				<displayName count="other">Braziliya realı</displayName>
-				<symbol>R$</symbol>
 			</currency>
 			<currency type="BRN">
 				<displayName>Braziliya kruzado novası</displayName>
@@ -1936,7 +1916,6 @@
 			<currency type="CNY">
 				<displayName>Çin yuan renminbi</displayName>
 				<displayName count="other">Çin yuanı</displayName>
-				<symbol>CNY</symbol>
 			</currency>
 			<currency type="COP">
 				<displayName>Kolombiya pesosu</displayName>
@@ -2006,10 +1985,6 @@
 				<displayName>misir paundu</displayName>
 				<displayName count="other">Misir paundu</displayName>
 			</currency>
-			<currency type="EQE">
-				<displayName>ekvele</displayName>
-				<displayName count="other">Ekvele</displayName>
-			</currency>
 			<currency type="ERN">
 				<displayName>Eirtreya nakfası</displayName>
 				<displayName count="other">Eritreya nakfası</displayName>
@@ -2033,7 +2008,6 @@
 			<currency type="EUR">
 				<displayName>Yevro</displayName>
 				<displayName count="other">yevro</displayName>
-				<symbol>€</symbol>
 			</currency>
 			<currency type="FIM">
 				<displayName>Fin markası</displayName>
@@ -2054,7 +2028,6 @@
 			<currency type="GBP">
 				<displayName>Britaniya paund sterlingi</displayName>
 				<displayName count="other">Britaniya paund sterlingi</displayName>
-				<symbol>UK£</symbol>
 			</currency>
 			<currency type="GEK">
 				<displayName>Gürcüstan kupon lariti</displayName>
@@ -2063,7 +2036,6 @@
 			<currency type="GEL">
 				<displayName>Gürcüstan larisi</displayName>
 				<displayName count="other">Gürcüstan larisi</displayName>
-				<symbol>lari</symbol>
 			</currency>
 			<currency type="GHC">
 				<displayName>Qana sedisi (1979-2007)</displayName>
@@ -2156,7 +2128,6 @@
 			<currency type="INR">
 				<displayName>Hindistan rupisi</displayName>
 				<displayName count="other">Hindistan rupisi</displayName>
-				<symbol>0≤Rs.|1≤Re.|1&lt;Rs.</symbol>
 			</currency>
 			<currency type="IQD">
 				<displayName>İraq dinarı</displayName>
@@ -2185,7 +2156,6 @@
 			<currency type="JPY">
 				<displayName>Yapon yeni</displayName>
 				<displayName count="other">Yapon yeni</displayName>
-				<symbol>JP¥</symbol>
 			</currency>
 			<currency type="KES">
 				<displayName>Kenya şillingi</displayName>
@@ -2242,10 +2212,6 @@
 			<currency type="LSL">
 				<displayName>Lesoto lotisi</displayName>
 				<displayName count="other">Lesoto lotisi</displayName>
-			</currency>
-			<currency type="LSM">
-				<displayName>Maloti</displayName>
-				<displayName count="other">Maloti</displayName>
 			</currency>
 			<currency type="LTL">
 				<displayName>Litva litası</displayName>
@@ -2462,7 +2428,6 @@
 			<currency type="RUB">
 				<displayName>Rusiya rublu</displayName>
 				<displayName count="other">Rusiya rublu</displayName>
-				<symbol>RUB</symbol>
 			</currency>
 			<currency type="RUR">
 				<displayName>Rusiya rublu (1991-1998)</displayName>
@@ -2591,7 +2556,6 @@
 			<currency type="USD">
 				<displayName>ABŞ dolları</displayName>
 				<displayName count="other">ABŞ dolları</displayName>
-				<symbol>US$</symbol>
 			</currency>
 			<currency type="USN">
 				<displayName>ABŞ dolları (yeni gün)</displayName>
@@ -2672,7 +2636,6 @@
 			<currency type="XXX">
 				<displayName>bilinməyən vəya gəcərsiz</displayName>
 				<displayName count="other">bilinməyən vəya gəcərsiz</displayName>
-				<symbol>XXX</symbol>
 			</currency>
 			<currency type="YDD">
 				<displayName>yemen dinarı</displayName>
@@ -2688,7 +2651,7 @@
 			</currency>
 			<currency type="YUM">
 				<displayName>Yuqoslaviya yeni dinarı (hard)</displayName>
-				<displayName count="other">Yuqoslaviya yeni  dinarı (hard)</displayName>
+				<displayName count="other">Yuqoslaviya yeni dinarı (hard)</displayName>
 			</currency>
 			<currency type="YUN">
 				<displayName>Yuqoslaviya dinarı (dəyişik)</displayName>
@@ -2750,3 +2713,4 @@
 		</messages>
 	</posix>
 </ldml>
+

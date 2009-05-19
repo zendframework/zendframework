@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.11 $"/>
-		<generation date="$Date: 2008/06/26 03:47:58 $"/>
+		<version number="$Revision: 1.18 $"/>
+		<generation date="$Date: 2009/05/05 23:06:41 $"/>
 		<language type="to"/>
 	</identity>
 	<localeDisplayNames>
@@ -143,7 +143,7 @@
 			<territory type="GS">ʻOtumotu Siosia-tonga mo Saniuisi-tonga</territory>
 			<territory type="GU">Kuami</territory>
 			<territory type="GY">Kuiana</territory>
-			<territory type="HK">Hongi Kongi</territory>
+			<territory type="HK">Hongi Kongi SAR Siaina</territory>
 			<territory type="HM">ʻOtumotu Heati mo Makitonali</territory>
 			<territory type="HN">Honitulasi</territory>
 			<territory type="IE">ʻAealani</territory>
@@ -374,17 +374,17 @@
 				<dateFormats>
 					<dateFormatLength type="full">
 						<dateFormat>
-							<pattern>EEEE d MMMM yyyy</pattern>
+							<pattern>EEEE d MMMM y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="long">
 						<dateFormat>
-							<pattern>d MMMM yyyy</pattern>
+							<pattern>d MMMM y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="medium">
 						<dateFormat>
-							<pattern>d MMM yyyy</pattern>
+							<pattern>d MMM y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="short">
@@ -396,7 +396,7 @@
 				<timeFormats>
 					<timeFormatLength type="full">
 						<timeFormat>
-							<pattern>HH:mm:ss v</pattern>
+							<pattern>HH:mm:ss zzzz</pattern>
 						</timeFormat>
 					</timeFormatLength>
 					<timeFormatLength type="long">
@@ -416,11 +416,6 @@
 					</timeFormatLength>
 				</timeFormats>
 				<dateTimeFormats>
-					<dateTimeFormatLength>
-						<dateTimeFormat>
-							<pattern>{1} {0}</pattern>
-						</dateTimeFormat>
-					</dateTimeFormatLength>
 					<availableFormats>
 						<dateFormatItem id="Hm">H:mm</dateFormatItem>
 						<dateFormatItem id="M">L</dateFormatItem>
@@ -433,14 +428,14 @@
 						<dateFormatItem id="Md">d-M</dateFormatItem>
 						<dateFormatItem id="d">d</dateFormatItem>
 						<dateFormatItem id="ms">mm:ss</dateFormatItem>
-						<dateFormatItem id="y">yyyy</dateFormatItem>
+						<dateFormatItem id="y">y</dateFormatItem>
 						<dateFormatItem id="yM">M-yyyy</dateFormatItem>
 						<dateFormatItem id="yMEd">EEE d-M-yyyy</dateFormatItem>
-						<dateFormatItem id="yMMM">MMM yyyy</dateFormatItem>
-						<dateFormatItem id="yMMMEd">EEE d MMM yyyy</dateFormatItem>
-						<dateFormatItem id="yMMMM">MMMM yyyy</dateFormatItem>
+						<dateFormatItem id="yMMM">MMM y</dateFormatItem>
+						<dateFormatItem id="yMMMEd">EEE d MMM y</dateFormatItem>
+						<dateFormatItem id="yMMMM">MMMM y</dateFormatItem>
 						<dateFormatItem id="yQ">yyyy Q</dateFormatItem>
-						<dateFormatItem id="yQQQ">yyyy QQQ</dateFormatItem>
+						<dateFormatItem id="yQQQ">y QQQ</dateFormatItem>
 						<dateFormatItem id="yyMM">MM-yy</dateFormatItem>
 						<dateFormatItem id="yyMMM">MMM yy</dateFormatItem>
 						<dateFormatItem id="yyQ">Q yy</dateFormatItem>
@@ -461,11 +456,11 @@
 					</field>
 					<field type="day">
 						<displayName>ʻaho</displayName>
+						<relative type="-2">ʻaneheafi</relative>
+						<relative type="-1">ʻaneafi</relative>
 						<relative type="0">ʻahó ni</relative>
 						<relative type="1">ʻapongipongi</relative>
 						<relative type="2">ʻahepongipongi</relative>
-						<relative type="-1">ʻaneafi</relative>
-						<relative type="-2">ʻaneheafi</relative>
 					</field>
 					<field type="weekday">
 						<displayName>ʻaho ʻo e uike</displayName>
@@ -614,4 +609,3 @@
 		</messages>
 	</posix>
 </ldml>
-

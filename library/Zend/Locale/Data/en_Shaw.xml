@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.5 $"/>
-		<generation date="$Date: 2008/06/26 03:47:57 $"/>
+		<version number="$Revision: 1.9 $"/>
+		<generation date="$Date: 2009/05/05 23:06:35 $"/>
 		<language type="en"/>
 		<script type="Shaw"/>
 	</identity>
@@ -143,12 +143,12 @@
 					</field>
 					<field type="day">
 						<displayName>𐑛𐑱</displayName>
+						<relative type="-3">𐑔𐑮𐑰 𐑛𐑱𐑟 𐑭𐑜𐑴</relative>
+						<relative type="-2">𐑞 𐑛𐑱 𐑚𐑰𐑓𐑹 𐑘𐑧𐑕𐑑𐑸𐑛𐑱</relative>
+						<relative type="-1">𐑘𐑧𐑕𐑑𐑸𐑛𐑱</relative>
 						<relative type="0">𐑑𐑭𐑛𐑱</relative>
 						<relative type="2">𐑞 𐑛𐑱 𐑨𐑓𐑑𐑸 𐑑𐑭𐑥𐑸𐑴</relative>
 						<relative type="3">𐑔𐑮𐑰 𐑛𐑱𐑟 𐑓𐑮𐑭𐑥 𐑙𐑬</relative>
-						<relative type="-1">𐑘𐑧𐑕𐑑𐑸𐑛𐑱</relative>
-						<relative type="-2">𐑞 𐑛𐑱 𐑚𐑰𐑓𐑹 𐑘𐑧𐑕𐑑𐑸𐑛𐑱</relative>
-						<relative type="-3">𐑔𐑮𐑰 𐑛𐑱𐑟 𐑭𐑜𐑴</relative>
 					</field>
 					<field type="weekday">
 						<displayName>𐑛𐑱 𐑝 𐑞 𐑢𐑰𐑒</displayName>
@@ -173,6 +173,7 @@
 		</calendars>
 		<timeZoneNames>
 			<gmtFormat>·𐑜𐑥𐑑{0}</gmtFormat>
+			<gmtZeroFormat>·𐑜𐑥𐑑</gmtZeroFormat>
 			<regionFormat>{0} 𐑑𐑲𐑥</regionFormat>
 		</timeZoneNames>
 	</dates>
@@ -183,4 +184,3 @@
 		</messages>
 	</posix>
 </ldml>
-

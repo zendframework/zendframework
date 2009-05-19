@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.76 $"/>
-		<generation date="$Date: 2008/06/26 03:47:57 $"/>
+		<version number="$Revision: 1.92 $"/>
+		<generation date="$Date: 2009/05/05 23:06:34 $"/>
 		<language type="be"/>
 	</identity>
 	<localeDisplayNames>
@@ -323,7 +323,7 @@
 			<territory type="GT">Гватэмала</territory>
 			<territory type="GW">Гвінея-Бісаў</territory>
 			<territory type="GY">Гаяна</territory>
-			<territory type="HK">Гон-Конг</territory>
+			<territory type="HK">Гон-Конг, Кітай (САР)</territory>
 			<territory type="HM">Гэрда востраў і МакДоналда астравы</territory>
 			<territory type="HN">Гандурас</territory>
 			<territory type="HR">Харватыя</territory>
@@ -373,7 +373,7 @@
 			<territory type="ML">Малі</territory>
 			<territory type="MM">М'янма</territory>
 			<territory type="MN">Манголія</territory>
-			<territory type="MO">Макао</territory>
+			<territory type="MO">Макао, Кітай (САР)</territory>
 			<territory type="MP">Паўночныя Марыянскія астравы</territory>
 			<territory type="MQ">Марцініка</territory>
 			<territory type="MR">Маўрытанія</territory>
@@ -499,7 +499,7 @@
 		<inText type="languages">lowercase-words</inText>
 	</layout>
 	<characters>
-		<exemplarCharacters>[а-д {дж} {дз} е ё ж з й і к-у ў ф-ш ы-я]</exemplarCharacters>
+		<exemplarCharacters>[а-д {дж} {дз} е ё ж з і й-у ў ф-ш ы-я]</exemplarCharacters>
 		<exemplarCharacters type="auxiliary">[]</exemplarCharacters>
 		<exemplarCharacters type="currencySymbol">[a-z]</exemplarCharacters>
 	</characters>
@@ -510,64 +510,30 @@
 		<alternateQuotationEnd>»</alternateQuotationEnd>
 	</delimiters>
 	<dates>
-		<localizedPatternChars>GanjkHmsSEDFwWxhKzAeugXZvcL</localizedPatternChars>
 		<calendars>
 			<calendar type="buddhist">
 				<dateFormats>
 					<dateFormatLength type="full">
 						<dateFormat>
-							<pattern>EEEE, d MMMM yyyy G</pattern>
+							<pattern>EEEE, d MMMM y G</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="long">
 						<dateFormat>
-							<pattern>d MMMM yyyy G</pattern>
+							<pattern>d MMMM y G</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="medium">
 						<dateFormat>
-							<pattern>d MMM yyyy G</pattern>
+							<pattern>d MMM y G</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="short">
 						<dateFormat>
-							<pattern>dd.MM.yyyy</pattern>
+							<pattern>d.M.yy</pattern>
 						</dateFormat>
 					</dateFormatLength>
 				</dateFormats>
-				<dateTimeFormats>
-					<availableFormats>
-						<dateFormatItem id="Md">dd.MM</dateFormatItem>
-						<dateFormatItem id="yyyyM">MM.yyyy</dateFormatItem>
-					</availableFormats>
-				</dateTimeFormats>
-			</calendar>
-			<calendar type="chinese">
-				<dateTimeFormats>
-					<availableFormats>
-						<dateFormatItem id="Md">dd.MM</dateFormatItem>
-						<dateFormatItem id="yyMM">MM.yyyy</dateFormatItem>
-						<dateFormatItem id="yyyyM">MM.yyyy</dateFormatItem>
-					</availableFormats>
-				</dateTimeFormats>
-			</calendar>
-			<calendar type="coptic">
-				<quarters>
-					<quarterContext type="format">
-						<quarterWidth type="abbreviated">
-							<quarter type="1">1-шы кв.</quarter>
-							<quarter type="2">2-гі кв.</quarter>
-							<quarter type="3">3-ці кв.</quarter>
-							<quarter type="4">4-ты кв.</quarter>
-						</quarterWidth>
-						<quarterWidth type="wide">
-							<quarter type="1">1-шы квартал</quarter>
-							<quarter type="2">2-гі квартал</quarter>
-							<quarter type="3">3-ці квартал</quarter>
-							<quarter type="4">4-ты квартал</quarter>
-						</quarterWidth>
-					</quarterContext>
-				</quarters>
 			</calendar>
 			<calendar type="gregorian">
 				<months>
@@ -703,12 +669,12 @@
 				<dateFormats>
 					<dateFormatLength type="full">
 						<dateFormat>
-							<pattern>EEEE, d MMMM yyyy</pattern>
+							<pattern>EEEE, d MMMM y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="long">
 						<dateFormat>
-							<pattern>d MMMM yyyy</pattern>
+							<pattern>d MMMM y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="medium">
@@ -725,7 +691,7 @@
 				<timeFormats>
 					<timeFormatLength type="full">
 						<timeFormat>
-							<pattern>HH.mm.ss v</pattern>
+							<pattern>HH.mm.ss zzzz</pattern>
 						</timeFormat>
 					</timeFormatLength>
 					<timeFormatLength type="long">
@@ -745,15 +711,9 @@
 					</timeFormatLength>
 				</timeFormats>
 				<dateTimeFormats>
-					<dateTimeFormatLength>
-						<dateTimeFormat>
-							<pattern>{0} {1}</pattern>
-						</dateTimeFormat>
-					</dateTimeFormatLength>
 					<availableFormats>
-						<dateFormatItem id="HHmm">HH:mm</dateFormatItem>
-						<dateFormatItem id="HHmmss">HH:mm:ss</dateFormatItem>
-						<dateFormatItem id="Hm">H:mm</dateFormatItem>
+						<dateFormatItem id="Hm">H.mm</dateFormatItem>
+						<dateFormatItem id="Hms">H.mm.ss</dateFormatItem>
 						<dateFormatItem id="M">L</dateFormatItem>
 						<dateFormatItem id="MEd">E, d MMM</dateFormatItem>
 						<dateFormatItem id="MMM">LLL</dateFormatItem>
@@ -763,19 +723,20 @@
 						<dateFormatItem id="MMMd">d MMM</dateFormatItem>
 						<dateFormatItem id="Md">d.M</dateFormatItem>
 						<dateFormatItem id="d">d</dateFormatItem>
-						<dateFormatItem id="mmss">mm:ss</dateFormatItem>
+						<dateFormatItem id="hm">h.mm a</dateFormatItem>
+						<dateFormatItem id="hms">h.mm.ss a</dateFormatItem>
 						<dateFormatItem id="ms">mm:ss</dateFormatItem>
-						<dateFormatItem id="y">yyyy</dateFormatItem>
+						<dateFormatItem id="y">y</dateFormatItem>
 						<dateFormatItem id="yM">MM/yyyy</dateFormatItem>
 						<dateFormatItem id="yMEd">EEE, dd/MM/yyyy</dateFormatItem>
-						<dateFormatItem id="yMMM">MMM yyyy</dateFormatItem>
-						<dateFormatItem id="yMMMEd">EEE, d MMM yyyy</dateFormatItem>
-						<dateFormatItem id="yMMMM">MMMM yyyy</dateFormatItem>
-						<dateFormatItem id="yQ">Q 'кв'. yyyy</dateFormatItem>
-						<dateFormatItem id="yQQQ">QQQ yyyy</dateFormatItem>
+						<dateFormatItem id="yMMM">MMM y</dateFormatItem>
+						<dateFormatItem id="yMMMEd">EEE, d MMM y</dateFormatItem>
+						<dateFormatItem id="yMMMM">MMMM y</dateFormatItem>
+						<dateFormatItem id="yQ">Q 'кв'. y</dateFormatItem>
+						<dateFormatItem id="yQQQ">QQQ y</dateFormatItem>
 						<dateFormatItem id="yyQ">Q yy</dateFormatItem>
 						<dateFormatItem id="yyyyM">MM/yyyy</dateFormatItem>
-						<dateFormatItem id="yyyyMMMM">MMMM yyyy</dateFormatItem>
+						<dateFormatItem id="yyyyMMMM">MMMM y</dateFormatItem>
 					</availableFormats>
 					<intervalFormats>
 						<intervalFormatFallback>{0} - {1}</intervalFormatFallback>
@@ -831,18 +792,18 @@
 							<greatestDifference id="y">E, d.M.yy - E, d.M.yy</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMM">
-							<greatestDifference id="M">MMM-MMM yyyy</greatestDifference>
-							<greatestDifference id="y">MMM yyyy - MMM yyyy</greatestDifference>
+							<greatestDifference id="M">MMM-MMM y</greatestDifference>
+							<greatestDifference id="y">MMM y - MMM y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMEd">
-							<greatestDifference id="M">E, d MMM - E, d MMM yyyy</greatestDifference>
-							<greatestDifference id="d">E, d - E, d MMM yyyy</greatestDifference>
-							<greatestDifference id="y">E, d MMM yyyy - E, d MMM yyyy</greatestDifference>
+							<greatestDifference id="M">E, d MMM - E, d MMM y</greatestDifference>
+							<greatestDifference id="d">E, d - E, d MMM y</greatestDifference>
+							<greatestDifference id="y">E, d MMM y - E, d MMM y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMd">
-							<greatestDifference id="M">d MMM - d MMM yyyy</greatestDifference>
-							<greatestDifference id="d">d-d MMM yyyy</greatestDifference>
-							<greatestDifference id="y">d MMM yyyy - d MMM yyyy</greatestDifference>
+							<greatestDifference id="M">d MMM - d MMM y</greatestDifference>
+							<greatestDifference id="d">d-d MMM y</greatestDifference>
+							<greatestDifference id="y">d MMM y - d MMM y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMd">
 							<greatestDifference id="M">d.M.yy - d.M.yy</greatestDifference>
@@ -866,11 +827,11 @@
 					</field>
 					<field type="day">
 						<displayName>дзень</displayName>
+						<relative type="-2">пазаўчора</relative>
+						<relative type="-1">учора</relative>
 						<relative type="0">сёння</relative>
 						<relative type="1">заўтра</relative>
 						<relative type="2">паслязаўтра</relative>
-						<relative type="-1">учора</relative>
-						<relative type="-2">пазаўчора</relative>
 					</field>
 					<field type="weekday">
 						<displayName>дзень тыдня</displayName>
@@ -934,25 +895,12 @@
 			<zone type="America/New_York">
 				<exemplarCity>Нью-Ёрк</exemplarCity>
 			</zone>
-			<metazone type="Acre">
-				<commonlyUsed>false</commonlyUsed>
-			</metazone>
-			<metazone type="Alaska">
-				<commonlyUsed>false</commonlyUsed>
-			</metazone>
-			<metazone type="Alaska_Hawaii">
-				<commonlyUsed>false</commonlyUsed>
-			</metazone>
-			<metazone type="Amazon">
-				<commonlyUsed>false</commonlyUsed>
-			</metazone>
 			<metazone type="America_Central">
 				<long>
 					<generic>Паўночнаамэрыканскі цэнтральны час</generic>
 					<standard>Паўночнаамэрыканскі цэнтральны стандартны час</standard>
 					<daylight>Паўночнаамэрыканскі цэнтральны летні час</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="America_Eastern">
 				<long>
@@ -960,7 +908,6 @@
 					<standard>Паўночнаамэрыканскі усходні стандартны час</standard>
 					<daylight>Паўночнаамэрыканскі усходні летні час</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="America_Mountain">
 				<long>
@@ -968,7 +915,6 @@
 					<standard>Паўночнаамэрыканскі горны стандартны час</standard>
 					<daylight>Паўночнаамэрыканскі горны летні час</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="America_Pacific">
 				<long>
@@ -976,13 +922,6 @@
 					<standard>Ціхаакіянскі стандартны час</standard>
 					<daylight>Ціхаакіянскі летні час</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
-			</metazone>
-			<metazone type="Argentina">
-				<commonlyUsed>false</commonlyUsed>
-			</metazone>
-			<metazone type="Argentina_Western">
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Atlantic">
 				<long>
@@ -990,67 +929,30 @@
 					<standard>Атлянтычны стандартны час</standard>
 					<daylight>Атлянтычны летні час</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
-			</metazone>
-			<metazone type="Azores">
-				<commonlyUsed>false</commonlyUsed>
-			</metazone>
-			<metazone type="Bering">
-				<commonlyUsed>false</commonlyUsed>
-			</metazone>
-			<metazone type="British">
-				<commonlyUsed>false</commonlyUsed>
-			</metazone>
-			<metazone type="Cape_Verde">
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Europe_Central">
 				<long>
 					<standard>Цэнтральнаэўрапейскі час</standard>
 					<daylight>Цэнтральнаэўрапейскі летні час</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Europe_Eastern">
 				<long>
 					<standard>Усходнеэўрапейскі час</standard>
 					<daylight>Усходнеэўрапейскі летні час</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Europe_Western">
 				<long>
 					<standard>Заходнеэўрапейскі час</standard>
 					<daylight>Заходнеэўрапейскі летні час</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
-			</metazone>
-			<metazone type="Falkland">
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="GMT">
 				<long>
 					<standard>Грынвічскі час</standard>
 				</long>
 				<commonlyUsed>true</commonlyUsed>
-			</metazone>
-			<metazone type="Kuybyshev">
-				<commonlyUsed>false</commonlyUsed>
-			</metazone>
-			<metazone type="Moscow">
-				<commonlyUsed>false</commonlyUsed>
-			</metazone>
-			<metazone type="Samara">
-				<commonlyUsed>false</commonlyUsed>
-			</metazone>
-			<metazone type="South_Georgia">
-				<commonlyUsed>false</commonlyUsed>
-			</metazone>
-			<metazone type="Turkey">
-				<commonlyUsed>false</commonlyUsed>
-			</metazone>
-			<metazone type="Volgograd">
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 		</timeZoneNames>
 	</dates>
@@ -1090,7 +992,6 @@
 		<currencies>
 			<currency type="AUD">
 				<displayName>аўстралійскі даляр</displayName>
-				<symbol>$A</symbol>
 			</currency>
 			<currency type="BRL">
 				<displayName>бразільскі рэал</displayName>
@@ -1112,11 +1013,9 @@
 			</currency>
 			<currency type="GBP">
 				<displayName>англійскі фунт</displayName>
-				<symbol>£</symbol>
 			</currency>
 			<currency type="INR">
 				<displayName>індыйская рупія</displayName>
-				<symbol>Rs.</symbol>
 			</currency>
 			<currency type="JPY">
 				<displayName>японская іена</displayName>
@@ -1189,3 +1088,4 @@
 		</messages>
 	</posix>
 </ldml>
+

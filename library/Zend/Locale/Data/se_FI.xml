@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.22 $"/>
-		<generation date="$Date: 2008/06/17 14:12:15 $"/>
+		<version number="$Revision: 1.26 $"/>
+		<generation date="$Date: 2009/05/05 23:06:40 $"/>
 		<language type="se"/>
 		<territory type="FI"/>
 	</identity>
-	<fallback>fi-FI</fallback>
+	<fallback>fi_FI</fallback>
 	<localeDisplayNames>
 		<languages>
 			<language type="ang">ang</language>
@@ -172,7 +172,6 @@
 							<day type="wed">G</day>
 							<day type="thu">D</day>
 							<day type="fri">B</day>
-							<day type="sat">L</day>
 						</dayWidth>
 					</dayContext>
 				</days>
@@ -216,7 +215,7 @@
 			</calendar>
 		</calendars>
 		<timeZoneNames>
-			<fallbackFormat>{1} ({0})</fallbackFormat>
+			<gmtZeroFormat>GMT</gmtZeroFormat>
 		</timeZoneNames>
 	</dates>
 	<numbers>

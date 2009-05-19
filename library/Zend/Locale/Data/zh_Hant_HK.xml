@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.67 $"/>
-		<generation date="$Date: 2008/06/17 14:12:11 $"/>
+		<version number="$Revision: 1.77 $"/>
+		<generation date="$Date: 2009/05/05 23:06:41 $"/>
 		<language type="zh"/>
 		<script type="Hant"/>
 		<territory type="HK"/>
@@ -15,12 +15,7 @@
 		</languages>
 		<scripts>
 			<script type="Hang">韓文字母</script>
-			<script type="Kore">韓文</script>
 		</scripts>
-		<territories>
-			<territory type="IT">意大利</territory>
-			<territory type="TW">台灣</territory>
-		</territories>
 		<variants>
 			<variant type="1901">傳統德國拼字法</variant>
 			<variant type="1996">1996 德國拼字法</variant>
@@ -31,6 +26,10 @@
 			<variant type="SCOTLAND">蘇格蘭標準英語</variant>
 			<variant type="SOLBA">Stolvizza/Solbica 方言</variant>
 		</variants>
+		<types>
+			<type type="big5han" key="collation">繁體中文順序 - Big5</type>
+			<type type="gb2312han" key="collation">簡體中文順序 - GB2312</type>
+		</types>
 		<measurementSystemNames>
 			<measurementSystemName type="metric">十進制</measurementSystemName>
 		</measurementSystemNames>
@@ -41,7 +40,7 @@
 				<dateTimeFormats>
 					<availableFormats>
 						<dateFormatItem id="MMMMEd">M月d日E</dateFormatItem>
-						<dateFormatItem id="yMEd">yyyy年M月d日，E</dateFormatItem>
+						<dateFormatItem id="yMEd">y年M月d日，E</dateFormatItem>
 					</availableFormats>
 				</dateTimeFormats>
 			</calendar>
@@ -49,17 +48,17 @@
 				<dateFormats>
 					<dateFormatLength type="full">
 						<dateFormat>
-							<pattern>yyyy年M月d日EEEE</pattern>
+							<pattern>y年M月d日EEEE</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="long">
 						<dateFormat>
-							<pattern>yyyy年M月d日</pattern>
+							<pattern>y年M月d日</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="medium">
 						<dateFormat>
-							<pattern>yyyy年M月d日</pattern>
+							<pattern>y年M月d日</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="short">
@@ -76,7 +75,12 @@
 					</timeFormatLength>
 				</timeFormats>
 				<dateTimeFormats>
-					<dateTimeFormatLength>
+					<dateTimeFormatLength type="medium">
+						<dateTimeFormat>
+							<pattern>{1}{0}</pattern>
+						</dateTimeFormat>
+					</dateTimeFormatLength>
+					<dateTimeFormatLength type="short">
 						<dateTimeFormat>
 							<pattern>{1}{0}</pattern>
 						</dateTimeFormat>
@@ -125,10 +129,6 @@
 		</calendars>
 	</dates>
 	<numbers>
-		<symbols>
-			<group>，</group>
-			<list>；</list>
-		</symbols>
 		<currencyFormats>
 			<currencyFormatLength>
 				<currencyFormat>
@@ -151,6 +151,7 @@
 			</currency>
 			<currency type="HKD">
 				<displayName>港元</displayName>
+				<symbol>$</symbol>
 			</currency>
 			<currency type="ITL">
 				<displayName>意大利里拉</displayName>
@@ -166,6 +167,9 @@
 			</currency>
 			<currency type="TWD">
 				<displayName>新台幣</displayName>
+			</currency>
+			<currency type="USD">
+				<symbol>US$</symbol>
 			</currency>
 		</currencies>
 	</numbers>

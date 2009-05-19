@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.65 $"/>
-		<generation date="$Date: 2008/06/26 03:47:57 $"/>
+		<version number="$Revision: 1.76 $"/>
+		<generation date="$Date: 2009/05/05 23:06:36 $"/>
 		<language type="ga"/>
 	</identity>
 	<fallback>en_IE</fallback>
@@ -301,7 +301,7 @@
 			<territory type="GU">Guam</territory>
 			<territory type="GW">An Ghuine-Bhissau</territory>
 			<territory type="GY">An Ghuáin</territory>
-			<territory type="HK">Hong Cong</territory>
+			<territory type="HK">R.R.S. na Síne Hong Cong</territory>
 			<territory type="HM">Oileán Heard agus Oileáin McDonald</territory>
 			<territory type="HN">Hondúras</territory>
 			<territory type="HR">An Chróit</territory>
@@ -353,7 +353,7 @@
 			<territory type="ML">Mailí</territory>
 			<territory type="MM">Maenmar</territory>
 			<territory type="MN">An Mhongóil</territory>
-			<territory type="MO">Macáó</territory>
+			<territory type="MO">R.R.S. na Síne Macáó</territory>
 			<territory type="MP">Oileáin Mariana Thuaidh</territory>
 			<territory type="MQ">Martainíc</territory>
 			<territory type="MR">An Mharatáin</territory>
@@ -488,13 +488,12 @@
 		<exemplarCharacters type="auxiliary">[ḃ ċ ḋ ḟ ġ ṁ ṗ ṡ ṫ]</exemplarCharacters>
 	</characters>
 	<dates>
-		<localizedPatternChars>RbMLkUnsSElFtTauKcBeyrACvdz</localizedPatternChars>
 		<calendars>
 			<calendar type="buddhist">
 				<dateFormats>
 					<dateFormatLength type="full">
 						<dateFormat>
-							<pattern>EEEE d MMMM yyyy G</pattern>
+							<pattern>EEEE d MMMM y G</pattern>
 						</dateFormat>
 					</dateFormatLength>
 				</dateFormats>
@@ -612,17 +611,17 @@
 				<dateFormats>
 					<dateFormatLength type="full">
 						<dateFormat>
-							<pattern>EEEE d MMMM yyyy</pattern>
+							<pattern>EEEE d MMMM y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="long">
 						<dateFormat>
-							<pattern>d MMMM yyyy</pattern>
+							<pattern>d MMMM y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="medium">
 						<dateFormat>
-							<pattern>d MMM yyyy</pattern>
+							<pattern>d MMM y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="short">
@@ -634,7 +633,7 @@
 				<timeFormats>
 					<timeFormatLength type="full">
 						<timeFormat>
-							<pattern>HH:mm:ss v</pattern>
+							<pattern>HH:mm:ss zzzz</pattern>
 						</timeFormat>
 					</timeFormatLength>
 					<timeFormatLength type="long">
@@ -654,11 +653,6 @@
 					</timeFormatLength>
 				</timeFormats>
 				<dateTimeFormats>
-					<dateTimeFormatLength>
-						<dateTimeFormat>
-							<pattern>{1} {0}</pattern>
-						</dateTimeFormat>
-					</dateTimeFormatLength>
 					<availableFormats>
 						<dateFormatItem id="HHmm">HH:mm</dateFormatItem>
 						<dateFormatItem id="HHmmss">HH:mm:ss</dateFormatItem>
@@ -670,7 +664,7 @@
 						<dateFormatItem id="yyMMM">MMM yy</dateFormatItem>
 						<dateFormatItem id="yyQ">Q yy</dateFormatItem>
 						<dateFormatItem id="yyyyMM">MM/yyyy</dateFormatItem>
-						<dateFormatItem id="yyyyMMMM">MMMM yyyy</dateFormatItem>
+						<dateFormatItem id="yyyyMMMM">MMMM y</dateFormatItem>
 					</availableFormats>
 				</dateTimeFormats>
 				<fields>
@@ -688,11 +682,11 @@
 					</field>
 					<field type="day">
 						<displayName>Lá</displayName>
+						<relative type="-2">Arú inné</relative>
+						<relative type="-1">Inné</relative>
 						<relative type="0">Inniu</relative>
 						<relative type="1">Amárach</relative>
 						<relative type="2">Arú amárach</relative>
-						<relative type="-1">Inné</relative>
-						<relative type="-2">Arú inné</relative>
 					</field>
 					<field type="weekday">
 						<displayName>Lá na seachtaine</displayName>
@@ -774,15 +768,12 @@
 			</currency>
 			<currency type="AFN">
 				<displayName>Afgainí</displayName>
-				<symbol>Af</symbol>
 			</currency>
 			<currency type="ALL">
 				<displayName>Lek Albánach</displayName>
-				<symbol>lek</symbol>
 			</currency>
 			<currency type="AMD">
 				<displayName>Dram Airméanach</displayName>
-				<symbol>dram</symbol>
 			</currency>
 			<currency type="ANG">
 				<displayName>Guilder na nAntillí Ísiltíreach</displayName>
@@ -808,14 +799,12 @@
 			</currency>
 			<currency type="ARS">
 				<displayName>Peso na Airgintíne</displayName>
-				<symbol>Arg$</symbol>
 			</currency>
 			<currency type="ATS">
 				<displayName>Scilling Ostarach</displayName>
 			</currency>
 			<currency type="AUD">
 				<displayName>Dollar Astrálach</displayName>
-				<symbol>A$</symbol>
 			</currency>
 			<currency type="AWG">
 				<displayName>Guilder Aruba</displayName>
@@ -828,51 +817,42 @@
 			</currency>
 			<currency type="BAM">
 				<displayName>Marc Inathraithe Bhoisnia-Heirseagaivéin</displayName>
-				<symbol>KM</symbol>
 			</currency>
 			<currency type="BBD">
 				<displayName>Dollar Bharbadóis</displayName>
-				<symbol>BDS$</symbol>
 			</currency>
 			<currency type="BDT">
 				<displayName>Taka Bhanglaidéiseach</displayName>
-				<symbol>Tk</symbol>
 			</currency>
 			<currency type="BEC">
 				<displayName>Franc Beilgeach (inathraithe)</displayName>
 			</currency>
 			<currency type="BEF">
 				<displayName>Franc Beilgeach</displayName>
-				<symbol>BF</symbol>
 			</currency>
 			<currency type="BEL">
 				<displayName>Franc Beilgeach (airgeadúil)</displayName>
 			</currency>
 			<currency type="BGL">
 				<displayName>Lev Bulgárach Crua</displayName>
-				<symbol>lev</symbol>
 			</currency>
 			<currency type="BGN">
 				<displayName>Lev Nua Bulgárach</displayName>
 			</currency>
 			<currency type="BHD">
 				<displayName>Dínear na Bairéine</displayName>
-				<symbol>BD</symbol>
 			</currency>
 			<currency type="BIF">
 				<displayName>Franc na Burúine</displayName>
-				<symbol>Fbu</symbol>
 			</currency>
 			<currency type="BMD">
 				<displayName>Dollar Bheirmiúda</displayName>
-				<symbol>Ber$</symbol>
 			</currency>
 			<currency type="BND">
 				<displayName>Dollar Bhrúiné</displayName>
 			</currency>
 			<currency type="BOB">
 				<displayName>Boliviano</displayName>
-				<symbol>Bs</symbol>
 			</currency>
 			<currency type="BOP">
 				<displayName>Peso na Bolaive</displayName>
@@ -903,7 +883,6 @@
 			</currency>
 			<currency type="BTN">
 				<displayName>Ngultrum Bútánach</displayName>
-				<symbol>Nu</symbol>
 			</currency>
 			<currency type="BUK">
 				<displayName>Kyat Burmach</displayName>
@@ -916,15 +895,12 @@
 			</currency>
 			<currency type="BYR">
 				<displayName>Rúbal Béalarúiseach</displayName>
-				<symbol>Rbl</symbol>
 			</currency>
 			<currency type="BZD">
 				<displayName>Dollar na Beilíse</displayName>
-				<symbol>BZ$</symbol>
 			</currency>
 			<currency type="CAD">
 				<displayName>Dollar Ceanada</displayName>
-				<symbol>Can$</symbol>
 			</currency>
 			<currency type="CDF">
 				<displayName>Franc Congolais an Chongó</displayName>
@@ -937,19 +913,15 @@
 			</currency>
 			<currency type="CLP">
 				<displayName>Peso na Sile</displayName>
-				<symbol>Ch$</symbol>
 			</currency>
 			<currency type="CNY">
 				<displayName>Yuan Renminbi Síneach</displayName>
-				<symbol>Y</symbol>
 			</currency>
 			<currency type="COP">
 				<displayName>Peso na Colóime</displayName>
-				<symbol>Col$</symbol>
 			</currency>
 			<currency type="CRC">
 				<displayName>Colon Chósta Ríce</displayName>
-				<symbol>C</symbol>
 			</currency>
 			<currency type="CSK">
 				<displayName>Koruna Crua na Seicslóvaice</displayName>
@@ -959,11 +931,9 @@
 			</currency>
 			<currency type="CVE">
 				<displayName>Escudo na Rinne Verde</displayName>
-				<symbol>CVEsc</symbol>
 			</currency>
 			<currency type="CYP">
 				<displayName>Punt na Cipire</displayName>
-				<symbol>£C</symbol>
 			</currency>
 			<currency type="CZK">
 				<displayName>Koruna Phoblacht na Seice</displayName>
@@ -976,19 +946,15 @@
 			</currency>
 			<currency type="DJF">
 				<displayName>Franc Djibouti</displayName>
-				<symbol>DF</symbol>
 			</currency>
 			<currency type="DKK">
 				<displayName>Krone Danmhargach</displayName>
-				<symbol>DKr</symbol>
 			</currency>
 			<currency type="DOP">
 				<displayName>Peso Doimineacach</displayName>
-				<symbol>RD$</symbol>
 			</currency>
 			<currency type="DZD">
 				<displayName>Dínear na hAilgéire</displayName>
-				<symbol>DA</symbol>
 			</currency>
 			<currency type="ECS">
 				<displayName>Sucre Eacuadóir</displayName>
@@ -1007,7 +973,6 @@
 			</currency>
 			<currency type="ETB">
 				<displayName>Birr na hAetóipe</displayName>
-				<symbol>Br</symbol>
 			</currency>
 			<currency type="EUR">
 				<displayName>Euro</displayName>
@@ -1017,7 +982,6 @@
 			</currency>
 			<currency type="FJD">
 				<displayName>Dollar Fhidsí</displayName>
-				<symbol>F$</symbol>
 			</currency>
 			<currency type="FKP">
 				<displayName>Punt Oileáin Fháclainne</displayName>
@@ -1027,13 +991,13 @@
 			</currency>
 			<currency type="GBP">
 				<displayName>Punt Steirling</displayName>
+				<symbol>GB£</symbol>
 			</currency>
 			<currency type="GEK">
 				<displayName>Kupon Larit na Grúise</displayName>
 			</currency>
 			<currency type="GEL">
 				<displayName>Lari na Grúise</displayName>
-				<symbol>lari</symbol>
 			</currency>
 			<currency type="GHC">
 				<displayName>Cedi Ghána</displayName>
@@ -1046,7 +1010,6 @@
 			</currency>
 			<currency type="GNF">
 				<displayName>Franc Guine</displayName>
-				<symbol>GF</symbol>
 			</currency>
 			<currency type="GNS">
 				<displayName>Syli Guine</displayName>
@@ -1059,7 +1022,6 @@
 			</currency>
 			<currency type="GTQ">
 				<displayName>Quetzal Guatamala</displayName>
-				<symbol>Q</symbol>
 			</currency>
 			<currency type="GWE">
 				<displayName>Escudo na Guine Portaingéalaí</displayName>
@@ -1069,15 +1031,12 @@
 			</currency>
 			<currency type="GYD">
 				<displayName>Dollar na Guáine</displayName>
-				<symbol>G$</symbol>
 			</currency>
 			<currency type="HKD">
 				<displayName>Dollar Hong Cong</displayName>
-				<symbol>HK$</symbol>
 			</currency>
 			<currency type="HNL">
 				<displayName>Lempira Hondúrais</displayName>
-				<symbol>L</symbol>
 			</currency>
 			<currency type="HRD">
 				<displayName>Dínear na Cróite</displayName>
@@ -1090,11 +1049,9 @@
 			</currency>
 			<currency type="HUF">
 				<displayName>Forint Ungárach</displayName>
-				<symbol>Ft</symbol>
 			</currency>
 			<currency type="IDR">
 				<displayName>Rupiah Indinéiseach</displayName>
-				<symbol>Rp</symbol>
 			</currency>
 			<currency type="IEP">
 				<displayName>Punt Éireannach</displayName>
@@ -1111,11 +1068,9 @@
 			</currency>
 			<currency type="IQD">
 				<displayName>Dínear Irácach</displayName>
-				<symbol>ID</symbol>
 			</currency>
 			<currency type="IRR">
 				<displayName>Rial Iaránach</displayName>
-				<symbol>RI</symbol>
 			</currency>
 			<currency type="ISK">
 				<displayName>Krona Íoslannach</displayName>
@@ -1125,30 +1080,24 @@
 			</currency>
 			<currency type="JMD">
 				<displayName>Dollar Iamácach</displayName>
-				<symbol>J$</symbol>
 			</currency>
 			<currency type="JOD">
 				<displayName>Dínear Iordánach</displayName>
-				<symbol>JD</symbol>
 			</currency>
 			<currency type="JPY">
 				<displayName>Yen Seapánach</displayName>
 			</currency>
 			<currency type="KES">
 				<displayName>Scilling Céiniach</displayName>
-				<symbol>K Sh</symbol>
 			</currency>
 			<currency type="KGS">
 				<displayName>Som na Cirgeastáine</displayName>
-				<symbol>som</symbol>
 			</currency>
 			<currency type="KHR">
 				<displayName>Riel na Cambóide</displayName>
-				<symbol>CR</symbol>
 			</currency>
 			<currency type="KMF">
 				<displayName>Franc Chomóra</displayName>
-				<symbol>CF</symbol>
 			</currency>
 			<currency type="KPW">
 				<displayName>Won na Cóiré Thuaidh</displayName>
@@ -1158,32 +1107,27 @@
 			</currency>
 			<currency type="KWD">
 				<displayName>Dínear Cuátach</displayName>
-				<symbol>KD</symbol>
 			</currency>
 			<currency type="KYD">
 				<displayName>Dollar Oileáin Cayman</displayName>
 			</currency>
 			<currency type="KZT">
 				<displayName>Tenge Casacstánach</displayName>
-				<symbol>T</symbol>
 			</currency>
 			<currency type="LAK">
 				<displayName>Kip Laosach</displayName>
 			</currency>
 			<currency type="LBP">
 				<displayName>Punt na Liobáine</displayName>
-				<symbol>LL</symbol>
 			</currency>
 			<currency type="LKR">
 				<displayName>Rúipí Srí Lanca</displayName>
-				<symbol>SL Re</symbol>
 			</currency>
 			<currency type="LRD">
 				<displayName>Dollar na Libéire</displayName>
 			</currency>
 			<currency type="LSL">
 				<displayName>Loti Leosóta</displayName>
-				<symbol>M</symbol>
 			</currency>
 			<currency type="LTL">
 				<displayName>Lita Liotuánach</displayName>
@@ -1202,7 +1146,6 @@
 			</currency>
 			<currency type="LYD">
 				<displayName>Dínear Libia</displayName>
-				<symbol>LD</symbol>
 			</currency>
 			<currency type="MAD">
 				<displayName>Dirham Mharacó</displayName>
@@ -1221,7 +1164,6 @@
 			</currency>
 			<currency type="MKD">
 				<displayName>Denar na Macadóine</displayName>
-				<symbol>MDen</symbol>
 			</currency>
 			<currency type="MLF">
 				<displayName>Franc Mhailí</displayName>
@@ -1231,18 +1173,15 @@
 			</currency>
 			<currency type="MNT">
 				<displayName>Tugrik Mongólach</displayName>
-				<symbol>Tug</symbol>
 			</currency>
 			<currency type="MOP">
 				<displayName>Pataca Macao</displayName>
 			</currency>
 			<currency type="MRO">
 				<displayName>Ouguiya na Maratáine</displayName>
-				<symbol>UM</symbol>
 			</currency>
 			<currency type="MTL">
 				<displayName>Lira Maltach</displayName>
-				<symbol>Lm</symbol>
 			</currency>
 			<currency type="MTP">
 				<displayName>Punt Maltach</displayName>
@@ -1255,11 +1194,9 @@
 			</currency>
 			<currency type="MWK">
 				<displayName>Kwacha na Maláive</displayName>
-				<symbol>MK</symbol>
 			</currency>
 			<currency type="MXN">
 				<displayName>Peso Meicsiceo</displayName>
-				<symbol>MEX$</symbol>
 			</currency>
 			<currency type="MXP">
 				<displayName>Peso Airgid Meicsiceo (1861-1992)</displayName>
@@ -1269,18 +1206,15 @@
 			</currency>
 			<currency type="MYR">
 				<displayName>Ringgit Malaeisia</displayName>
-				<symbol>RM</symbol>
 			</currency>
 			<currency type="MZE">
 				<displayName>Escudo Mósaimbíce</displayName>
 			</currency>
 			<currency type="MZM">
 				<displayName>Metical Mósaimbíce</displayName>
-				<symbol>Mt</symbol>
 			</currency>
 			<currency type="NAD">
 				<displayName>Dollar na Namaibe</displayName>
-				<symbol>N$</symbol>
 			</currency>
 			<currency type="NGN">
 				<displayName>Naira Nígéarach</displayName>
@@ -1296,19 +1230,15 @@
 			</currency>
 			<currency type="NOK">
 				<displayName>Krone Ioruach</displayName>
-				<symbol>NKr</symbol>
 			</currency>
 			<currency type="NPR">
 				<displayName>Rúipí Neipeáil</displayName>
-				<symbol>Nrs</symbol>
 			</currency>
 			<currency type="NZD">
 				<displayName>Dollar na Nua-Shéalainne</displayName>
-				<symbol>$NZ</symbol>
 			</currency>
 			<currency type="OMR">
 				<displayName>Rial Omain</displayName>
-				<symbol>RO</symbol>
 			</currency>
 			<currency type="PAB">
 				<displayName>Balboa Panamach</displayName>
@@ -1330,11 +1260,9 @@
 			</currency>
 			<currency type="PKR">
 				<displayName>Rúipí na Pacastáine</displayName>
-				<symbol>Pra</symbol>
 			</currency>
 			<currency type="PLN">
 				<displayName>Zloty Polannach</displayName>
-				<symbol>Zl</symbol>
 			</currency>
 			<currency type="PLZ">
 				<displayName>Zloty Polannach (1950-1995)</displayName>
@@ -1347,11 +1275,9 @@
 			</currency>
 			<currency type="QAR">
 				<displayName>Rial Catarach</displayName>
-				<symbol>QR</symbol>
 			</currency>
 			<currency type="ROL">
 				<displayName>Leu Rómánach</displayName>
-				<symbol>leu</symbol>
 			</currency>
 			<currency type="RUB">
 				<displayName>Rúbal Rúiseach</displayName>
@@ -1364,15 +1290,12 @@
 			</currency>
 			<currency type="SAR">
 				<displayName>Riyal Sádach</displayName>
-				<symbol>SRl</symbol>
 			</currency>
 			<currency type="SBD">
 				<displayName>Dollar Oileáin Solomon</displayName>
-				<symbol>SI$</symbol>
 			</currency>
 			<currency type="SCR">
 				<displayName>Rúipí na Séiséil</displayName>
-				<symbol>SR</symbol>
 			</currency>
 			<currency type="SDD">
 				<displayName>Dínear na Súdáine</displayName>
@@ -1382,11 +1305,9 @@
 			</currency>
 			<currency type="SEK">
 				<displayName>Krona Sualannach</displayName>
-				<symbol>SKr</symbol>
 			</currency>
 			<currency type="SGD">
 				<displayName>Dollar Singeapóir</displayName>
-				<symbol>S$</symbol>
 			</currency>
 			<currency type="SHP">
 				<displayName>Punt San Héilin</displayName>
@@ -1396,22 +1317,18 @@
 			</currency>
 			<currency type="SKK">
 				<displayName>Koruna na Slóvaice</displayName>
-				<symbol>Sk</symbol>
 			</currency>
 			<currency type="SLL">
 				<displayName>Leone Shiarra Leon</displayName>
 			</currency>
 			<currency type="SOS">
 				<displayName>Scilling na Sómáile</displayName>
-				<symbol>Sh.</symbol>
 			</currency>
 			<currency type="SRG">
 				<displayName>Guilder Shuranaim</displayName>
-				<symbol>Sf</symbol>
 			</currency>
 			<currency type="STD">
 				<displayName>Dobra Sao Tome agus Principe</displayName>
-				<symbol>Db</symbol>
 			</currency>
 			<currency type="SUR">
 				<displayName>Rúbal Sóvéadach</displayName>
@@ -1421,11 +1338,9 @@
 			</currency>
 			<currency type="SYP">
 				<displayName>Punt Siria</displayName>
-				<symbol>LS</symbol>
 			</currency>
 			<currency type="SZL">
 				<displayName>Lilangeni na Suasalainne</displayName>
-				<symbol>E</symbol>
 			</currency>
 			<currency type="THB">
 				<displayName>Baht na Téalainne</displayName>
@@ -1444,26 +1359,21 @@
 			</currency>
 			<currency type="TOP">
 				<displayName>Paʻanga Tonga</displayName>
-				<symbol>T$</symbol>
 			</currency>
 			<currency type="TPE">
 				<displayName>Escudo Tíomóir</displayName>
 			</currency>
 			<currency type="TRL">
 				<displayName>Lira Turcach</displayName>
-				<symbol>TL</symbol>
 			</currency>
 			<currency type="TTD">
 				<displayName>Dollar Oileáin na Tríonóide agus Tobága</displayName>
-				<symbol>TT$</symbol>
 			</currency>
 			<currency type="TWD">
 				<displayName>Dollar Nua na Téaváine</displayName>
-				<symbol>NT$</symbol>
 			</currency>
 			<currency type="TZS">
 				<displayName>Scilling na Tansáine</displayName>
-				<symbol>T Sh</symbol>
 			</currency>
 			<currency type="UAH">
 				<displayName>Hryvnia Úcránach</displayName>
@@ -1476,7 +1386,6 @@
 			</currency>
 			<currency type="UGX">
 				<displayName>Scilling Uganda</displayName>
-				<symbol>U Sh</symbol>
 			</currency>
 			<currency type="USD">
 				<displayName>Dollar S.A.M.</displayName>
@@ -1492,21 +1401,18 @@
 			</currency>
 			<currency type="UYU">
 				<displayName>Peso Uruguayo Uragua</displayName>
-				<symbol>Ur$</symbol>
 			</currency>
 			<currency type="UZS">
 				<displayName>Sum na hÚisbéiceastáine</displayName>
 			</currency>
 			<currency type="VEB">
 				<displayName>Bolivar Veiniséala</displayName>
-				<symbol>Be</symbol>
 			</currency>
 			<currency type="VND">
 				<displayName>Dong Vítneamach</displayName>
 			</currency>
 			<currency type="VUV">
 				<displayName>Vatu Vanuatú</displayName>
-				<symbol>VT</symbol>
 			</currency>
 			<currency type="WST">
 				<displayName>Tala Samó Thiar</displayName>
@@ -1531,7 +1437,6 @@
 			</currency>
 			<currency type="XCD">
 				<displayName>Dollar Oirthear na Cairibe</displayName>
-				<symbol>EC$</symbol>
 			</currency>
 			<currency type="XDR">
 				<displayName>Cearta Speisialta Tarraingthe</displayName>
@@ -1550,7 +1455,6 @@
 			</currency>
 			<currency type="XPF">
 				<displayName>CFP Franc</displayName>
-				<symbol>CFPF</symbol>
 			</currency>
 			<currency type="XXX">
 				<displayName>Airgeadra Anaithnid nó Neamhbhailí</displayName>
@@ -1560,7 +1464,6 @@
 			</currency>
 			<currency type="YER">
 				<displayName>Rial Éimin</displayName>
-				<symbol>YRl</symbol>
 			</currency>
 			<currency type="YUD">
 				<displayName>Dínear Crua Iúgslavach</displayName>
@@ -1576,7 +1479,6 @@
 			</currency>
 			<currency type="ZAR">
 				<displayName>Rand na hAfraice Theas</displayName>
-				<symbol>R</symbol>
 			</currency>
 			<currency type="ZMK">
 				<displayName>Kwacha Saimbiach</displayName>
@@ -1589,7 +1491,6 @@
 			</currency>
 			<currency type="ZWD">
 				<displayName>Dollar Siombábach</displayName>
-				<symbol>Z$</symbol>
 			</currency>
 		</currencies>
 	</numbers>
@@ -1600,3 +1501,4 @@
 		</messages>
 	</posix>
 </ldml>
+

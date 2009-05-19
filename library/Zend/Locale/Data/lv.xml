@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.82 $"/>
-		<generation date="$Date: 2008/06/26 03:47:58 $"/>
+		<version number="$Revision: 1.95 $"/>
+		<generation date="$Date: 2009/05/05 23:06:38 $"/>
 		<language type="lv"/>
 	</identity>
 	<localeDisplayNames>
+		<localeDisplayPattern>
+			<localePattern>{0} ({1})</localePattern>
+			<localeSeparator>, </localeSeparator>
+		</localeDisplayPattern>
 		<languages>
 			<language type="aa">afāru</language>
 			<language type="ab">abhāzu</language>
@@ -15,30 +19,30 @@
 			<language type="ada">adangmu</language>
 			<language type="ady">adigu</language>
 			<language type="ae">avesta</language>
-			<language type="af">afrikāņu</language>
-			<language type="afa">afroaziātu valoda</language>
+			<language type="af">afrikandu</language>
+			<language type="afa">afroaziātu valodas</language>
 			<language type="afh">afrihili</language>
 			<language type="ain">ainu</language>
 			<language type="ak">akanu</language>
 			<language type="akk">akadiešu</language>
 			<language type="ale">aleutu</language>
-			<language type="alg">algonkinu valoda</language>
+			<language type="alg">algonkinu valodas</language>
 			<language type="alt">dienvidaltajiešu</language>
 			<language type="am">amharu</language>
 			<language type="an">aragoniešu</language>
 			<language type="ang">senangļu</language>
 			<language type="anp">angika</language>
-			<language type="apa">apaču valoda</language>
+			<language type="apa">apaču valodas</language>
 			<language type="ar">arābu</language>
 			<language type="arc">aramiešu</language>
 			<language type="arn">araukāņu</language>
 			<language type="arp">arapahu</language>
-			<language type="art">mākslīgā valoda</language>
+			<language type="art">mākslīgās valodas</language>
 			<language type="arw">aravaku</language>
 			<language type="as">asamiešu</language>
 			<language type="ast">astūriešu</language>
-			<language type="ath">atapasku valoda</language>
-			<language type="aus">austrāliešu valoda</language>
+			<language type="ath">atapasku valodas</language>
+			<language type="aus">austrāliešu valodas</language>
 			<language type="av">avāru</language>
 			<language type="awa">avadhu</language>
 			<language type="ay">aimaru</language>
@@ -74,9 +78,9 @@
 			<language type="byn">bilinu</language>
 			<language type="ca">katalāņu</language>
 			<language type="cad">kadu</language>
-			<language type="cai">Centrālamerikas indiāņu valoda</language>
+			<language type="cai">Centrālamerikas indiāņu valodas</language>
 			<language type="car">karību</language>
-			<language type="cau">kaukāziešu valoda</language>
+			<language type="cau">kaukāziešu valodas</language>
 			<language type="ce">čečenu</language>
 			<language type="ceb">sebuāņu</language>
 			<language type="cel">ķeltu valoda</language>
@@ -88,17 +92,17 @@
 			<language type="chn">činuku žargons</language>
 			<language type="cho">čoktavu</language>
 			<language type="chp">čipevaianu</language>
-			<language type="chr">čiroku</language>
+			<language type="chr">irokēzu</language>
 			<language type="chy">šejenu</language>
-			<language type="cmc">čamiešu valoda</language>
+			<language type="cmc">čamiešu valodas</language>
 			<language type="co">korsikāņu</language>
 			<language type="cop">koptu</language>
 			<language type="cpe">angliskās kreoliskās valodas un pidžinvalodas</language>
-			<language type="cpf">franciskā kreoliskā vai pidžinvaloda</language>
+			<language type="cpf">franciskās kreoliskās valodas un pidžinvalodas</language>
 			<language type="cpp">portugāliskās kreoliskās valodas un pidžinvalodas</language>
 			<language type="cr">krī</language>
 			<language type="crh">Krimas tatāru</language>
-			<language type="crp">kreoliskā vai pidžinvaloda</language>
+			<language type="crp">kreoliskās valodas un pidžinvalodas</language>
 			<language type="cs">čehu</language>
 			<language type="csb">kašubu</language>
 			<language type="cu">baznīcslāvu</language>
@@ -117,7 +121,7 @@
 			<language type="dgr">dogribu</language>
 			<language type="din">dinku</language>
 			<language type="doi">dogru</language>
-			<language type="dra">dravīdu valoda</language>
+			<language type="dra">dravīdu valodas</language>
 			<language type="dsb">lejassorbu</language>
 			<language type="dua">dualu</language>
 			<language type="dum">vidusholandiešu</language>
@@ -147,10 +151,10 @@
 			<language type="fat">fantu</language>
 			<language type="ff">fulu</language>
 			<language type="fi">somu</language>
-			<language type="fil">tagalu</language>
+			<language type="fil">filipīniešu</language>
 			<language type="fiu">somugru valodas</language>
 			<language type="fj">fidžiešu</language>
-			<language type="fo">faroisu</language>
+			<language type="fo">fēru</language>
 			<language type="fon">fonu</language>
 			<language type="fr">franču</language>
 			<language type="fr_CA">Kanādas franču</language>
@@ -160,20 +164,20 @@
 			<language type="frr">ziemeļfrīzu</language>
 			<language type="frs">austrumfrīzu</language>
 			<language type="fur">friūlu</language>
-			<language type="fy">frīzu</language>
+			<language type="fy">rietumfrīzu</language>
 			<language type="ga">īru</language>
 			<language type="gaa">ga</language>
 			<language type="gay">gajo</language>
 			<language type="gba">gbaju</language>
-			<language type="gd">skotu-ķeltu</language>
-			<language type="gem">ģermāņu valoda</language>
+			<language type="gd">gēlu</language>
+			<language type="gem">ģermāņu valodas</language>
 			<language type="gez">gēzu</language>
 			<language type="gil">kiribatiešu</language>
 			<language type="gl">galisiešu</language>
 			<language type="gmh">vidusaugšvācu</language>
 			<language type="gn">gvaranu</language>
 			<language type="goh">senaugšvācu</language>
-			<language type="gon">gondu</language>
+			<language type="gon">gondu valodas</language>
 			<language type="gor">gorontalu</language>
 			<language type="got">gotu</language>
 			<language type="grb">grebo</language>
@@ -202,9 +206,9 @@
 			<language type="ia">interlingva</language>
 			<language type="iba">ibanu</language>
 			<language type="id">indonēziešu</language>
-			<language type="ie">interlingue</language>
+			<language type="ie">interlingve</language>
 			<language type="ig">igbo</language>
-			<language type="ii">sičuaņas ji</language>
+			<language type="ii">Sičuaņas ji</language>
 			<language type="ijo">idžbu</language>
 			<language type="ik">inupiaku</language>
 			<language type="ilo">iloku</language>
@@ -213,8 +217,8 @@
 			<language type="inh">ingušu</language>
 			<language type="io">ido</language>
 			<language type="ira">irāņu valodas</language>
-			<language type="iro">irokēzu valoda</language>
-			<language type="is">islandiešu</language>
+			<language type="iro">irokēzu valodas</language>
+			<language type="is">īslandiešu</language>
 			<language type="it">itāliešu</language>
 			<language type="iu">inuītu</language>
 			<language type="ja">japāņu</language>
@@ -233,7 +237,7 @@
 			<language type="kfo">koru</language>
 			<language type="kg">kongu</language>
 			<language type="kha">khasu</language>
-			<language type="khi">hojsanu</language>
+			<language type="khi">hosjanu valodas</language>
 			<language type="kho">hotaniešu</language>
 			<language type="ki">kikuju</language>
 			<language type="kj">kvaņamu</language>
@@ -241,7 +245,7 @@
 			<language type="kl">grenlandiešu</language>
 			<language type="km">khmeru</language>
 			<language type="kmb">kimbundu</language>
-			<language type="kn">kannada</language>
+			<language type="kn">kannadu</language>
 			<language type="ko">korejiešu</language>
 			<language type="kok">konkanu</language>
 			<language type="kos">kosrājiešu</language>
@@ -297,11 +301,11 @@
 			<language type="mis">dažādas valodas</language>
 			<language type="mk">maķedoniešu</language>
 			<language type="mkh">monkhmeru valodas</language>
-			<language type="ml">malajalamiešu</language>
+			<language type="ml">malajalu</language>
 			<language type="mn">mongoļu</language>
 			<language type="mnc">mandžūru</language>
 			<language type="mni">manipūru</language>
-			<language type="mno">manobu valoda</language>
+			<language type="mno">manobu valodas</language>
 			<language type="mo">moldāvu</language>
 			<language type="moh">mohauku</language>
 			<language type="mos">mosu</language>
@@ -314,7 +318,7 @@
 			<language type="mwl">mirandiešu</language>
 			<language type="mwr">marvaru</language>
 			<language type="my">birmiešu</language>
-			<language type="myn">maiju valoda</language>
+			<language type="myn">maiju valodas</language>
 			<language type="myv">erzju</language>
 			<language type="na">nauruiešu</language>
 			<language type="nah">navatlu</language>
@@ -327,7 +331,7 @@
 			<language type="new">nevaru</language>
 			<language type="ng">ndongu</language>
 			<language type="nia">njasu</language>
-			<language type="nic">nigēriešu-kordofāņu valoda</language>
+			<language type="nic">nigēriešu-kordofāņu valodas</language>
 			<language type="niu">niuāņu</language>
 			<language type="nl">holandiešu</language>
 			<language type="nl_BE">flāmu</language>
@@ -335,9 +339,10 @@
 			<language type="no">norvēģu</language>
 			<language type="nog">nogaju</language>
 			<language type="non">sennorvēģu</language>
+			<language type="nqo">n-ko</language>
 			<language type="nr">dienvidndebelu</language>
 			<language type="nso">ziemeļsotu</language>
-			<language type="nub">nūbiešu valoda</language>
+			<language type="nub">nūbiešu valodas</language>
 			<language type="nv">navahu</language>
 			<language type="nwc">klasiskā nevaru</language>
 			<language type="ny">čičeva</language>
@@ -345,7 +350,7 @@
 			<language type="nyn">ņankolu</language>
 			<language type="nyo">ņoru</language>
 			<language type="nzi">nzemu</language>
-			<language type="oc">provansiešu</language>
+			<language type="oc">oksitāņu</language>
 			<language type="oj">odžibvu</language>
 			<language type="om">oromu</language>
 			<language type="or">orisiešu</language>
@@ -361,7 +366,7 @@
 			<language type="pap">papjamento</language>
 			<language type="pau">palaviešu</language>
 			<language type="peo">senpersu</language>
-			<language type="phi">filipīniešu valodas</language>
+			<language type="phi">filipīniešu valoda</language>
 			<language type="phn">feniķiešu</language>
 			<language type="pi">pāli</language>
 			<language type="pl">poļu</language>
@@ -385,27 +390,27 @@
 			<language type="ru">krievu</language>
 			<language type="rup">aromūnu</language>
 			<language type="rw">kiņaruanda</language>
-			<language type="sa">sanskrita</language>
+			<language type="sa">sanskrits</language>
 			<language type="sad">sandavu</language>
 			<language type="sah">jakutu</language>
 			<language type="sai">Dienvidamerikas indiāņu</language>
-			<language type="sal">sališu valoda</language>
-			<language type="sam">samārijas aramiešu</language>
+			<language type="sal">sališu valodas</language>
+			<language type="sam">Samārijas aramiešu</language>
 			<language type="sas">sasaku</language>
 			<language type="sat">santalu</language>
 			<language type="sc">sardīniešu</language>
 			<language type="scn">sicīliešu</language>
 			<language type="sco">skotu</language>
-			<language type="sd">sindžu</language>
+			<language type="sd">sindhu</language>
 			<language type="se">ziemeļsāmu</language>
 			<language type="sel">selkupu</language>
-			<language type="sem">semītu valoda</language>
+			<language type="sem">semītu valodas</language>
 			<language type="sg">sangu</language>
 			<language type="sga">senīru</language>
 			<language type="sgn">zīmju valodas</language>
 			<language type="sh">serbu-horvātu</language>
 			<language type="shn">šanu</language>
-			<language type="si">sinhalīzu</language>
+			<language type="si">singāļu</language>
 			<language type="sid">sidamu</language>
 			<language type="sio">siū valodas</language>
 			<language type="sit">sinotibetiešu valodas</language>
@@ -425,17 +430,17 @@
 			<language type="son">songaju</language>
 			<language type="sq">albāņu</language>
 			<language type="sr">serbu</language>
-			<language type="srn">sranantongo</language>
+			<language type="srn">sranantogo</language>
 			<language type="srr">serēru</language>
 			<language type="ss">svatu</language>
-			<language type="ssa">nīlas-sahāras valoda</language>
+			<language type="ssa">Nīlas-Sahāras valodas</language>
 			<language type="st">sesoto</language>
 			<language type="su">sundaniešu</language>
 			<language type="suk">sukumu</language>
 			<language type="sus">susu</language>
 			<language type="sux">šumeru</language>
 			<language type="sv">zviedru</language>
-			<language type="sw">svahilu</language>
+			<language type="sw">svahili</language>
 			<language type="syc">klasiskā sīriešu</language>
 			<language type="syr">sīriešu</language>
 			<language type="ta">tamilu</language>
@@ -451,8 +456,8 @@
 			<language type="tiv">tivu</language>
 			<language type="tk">turkmēņu</language>
 			<language type="tkl">tokelaviešu</language>
-			<language type="tl">tagalogu</language>
-			<language type="tlh">klingoniešu</language>
+			<language type="tl">tagalu</language>
+			<language type="tlh">klingoņu</language>
 			<language type="tli">tlinkitu</language>
 			<language type="tmh">tuaregu</language>
 			<language type="tn">cvanu</language>
@@ -464,14 +469,14 @@
 			<language type="tsi">cimšiāņu</language>
 			<language type="tt">tatāru</language>
 			<language type="tum">tumbuku</language>
-			<language type="tup">tupu valoda</language>
+			<language type="tup">tupu valodas</language>
 			<language type="tut">altajiešu valodas</language>
 			<language type="tvl">tuvaliešu</language>
-			<language type="tw">čvī</language>
+			<language type="tw">tvī</language>
 			<language type="ty">taitiešu</language>
 			<language type="tyv">tuviešu</language>
 			<language type="udm">udmurtu</language>
-			<language type="ug">uighuru</language>
+			<language type="ug">uiguru</language>
 			<language type="uga">ugaritiešu</language>
 			<language type="uk">ukraiņu</language>
 			<language type="umb">umbundu</language>
@@ -484,7 +489,7 @@
 			<language type="vo">volapiks</language>
 			<language type="vot">votu</language>
 			<language type="wa">valoņu</language>
-			<language type="wak">vakašu valoda</language>
+			<language type="wak">vakašu valodas</language>
 			<language type="wal">valamu</language>
 			<language type="war">varaju</language>
 			<language type="was">vašo</language>
@@ -496,7 +501,7 @@
 			<language type="yap">japiešu</language>
 			<language type="yi">jidišs</language>
 			<language type="yo">jorubu</language>
-			<language type="ypk">jupiku valoda</language>
+			<language type="ypk">jopiku valodas</language>
 			<language type="za">džuanu</language>
 			<language type="zap">sapoteku</language>
 			<language type="zen">zenagu</language>
@@ -506,17 +511,82 @@
 			<language type="znd">zandē</language>
 			<language type="zu">zulu</language>
 			<language type="zun">zunju</language>
-			<language type="zxx">lingvistiska satura nav</language>
+			<language type="zxx">Bez lingvistiska satura</language>
 		</languages>
 		<scripts>
 			<script type="Arab">arābu</script>
+			<script type="Armi">aramiešu</script>
+			<script type="Armn">armēņu</script>
+			<script type="Bali">baliešu</script>
+			<script type="Beng">bengāļu</script>
+			<script type="Bopo">bopomofo</script>
+			<script type="Brah">brahmi</script>
+			<script type="Brai">Braila raksts</script>
+			<script type="Cher">irokēzu</script>
+			<script type="Copt">koptu</script>
 			<script type="Cyrl">kirilica</script>
+			<script type="Cyrs">senslāvu</script>
+			<script type="Deva">devānagāri</script>
+			<script type="Egyd">demotiskais raksts</script>
+			<script type="Egyh">hierātiskais raksts</script>
+			<script type="Egyp">ēģiptiešu hieroglifi</script>
+			<script type="Ethi">etiopiešu</script>
+			<script type="Geor">gruzīnu</script>
+			<script type="Goth">gotu</script>
+			<script type="Grek">grieķu</script>
+			<script type="Gujr">gudžaratu</script>
+			<script type="Hani">ķīniešu</script>
+			<script type="Hans">ķīniešu vienkāršotā</script>
+			<script type="Hant">ķīniešu tradicionālā</script>
+			<script type="Hebr">ivrits</script>
+			<script type="Hira">hiragana</script>
+			<script type="Hrkt">katakana vai hiragana</script>
+			<script type="Hung">senungāru</script>
+			<script type="Ital">vecitāļu</script>
+			<script type="Java">javiešu</script>
+			<script type="Jpan">japāņu</script>
+			<script type="Kana">katakana</script>
+			<script type="Khmr">khmeru</script>
+			<script type="Knda">kannaru</script>
+			<script type="Kore">korejiešu</script>
+			<script type="Laoo">lao</script>
 			<script type="Latn">latīņu</script>
-			<script type="Zxxx">Bez rakstības</script>
-			<script type="Zzzz">Nezināma vai nederīga rakstība</script>
+			<script type="Lina">lineārā A</script>
+			<script type="Linb">lineārā B</script>
+			<script type="Lydi">līdiešu</script>
+			<script type="Maya">maiju</script>
+			<script type="Mlym">malajalu</script>
+			<script type="Mong">mongoļu</script>
+			<script type="Moon">Mūna raksts</script>
+			<script type="Mymr">birmiešu</script>
+			<script type="Ogam">ogamiskais raksts</script>
+			<script type="Orya">oriju</script>
+			<script type="Osma">osmaņu turku</script>
+			<script type="Phnx">feniķiešu</script>
+			<script type="Qaai">mantotā</script>
+			<script type="Roro">rongorongo</script>
+			<script type="Runr">rūnu raksts</script>
+			<script type="Samr">samariešu</script>
+			<script type="Sinh">sinhalas</script>
+			<script type="Sund">zundu</script>
+			<script type="Syrc">sīriešu</script>
+			<script type="Syrj">rietumsīriešu</script>
+			<script type="Syrn">austrumsīriešu</script>
+			<script type="Taml">tamilu</script>
+			<script type="Telu">telugu</script>
+			<script type="Tglg">tagalu</script>
+			<script type="Thaa">taana</script>
+			<script type="Thai">taju</script>
+			<script type="Tibt">tibetiešu</script>
+			<script type="Xpeo">vecpersiešu</script>
+			<script type="Xsux">šumeru-akadiešu ķīļraksts</script>
+			<script type="Yiii">ji</script>
+			<script type="Zmth">matemātiskais pieraksts</script>
+			<script type="Zxxx">bez rakstības</script>
+			<script type="Zzzz">nezināma vai nederīga rakstība</script>
 		</scripts>
 		<territories>
-			<territory type="001">Pasaule</territory>
+			<territory type="001">pasaule</territory>
 			<territory type="002">Āfrika</territory>
 			<territory type="003">Ziemeļamerika</territory>
 			<territory type="005">Dienvidamerika</territory>
@@ -527,13 +597,13 @@
 			<territory type="015">Ziemeļāfrika</territory>
 			<territory type="017">Vidusāfrika</territory>
 			<territory type="018">Āfrikas dienvidi</territory>
-			<territory type="019">Amerikas</territory>
+			<territory type="019">Amerika</territory>
 			<territory type="021">Amerikas ziemeļi</territory>
 			<territory type="029">Karību jūras reģions</territory>
 			<territory type="030">Austrumāzija</territory>
-			<territory type="034">Āzijas dienvidi</territory>
+			<territory type="034">Dienvidāzija</territory>
 			<territory type="035">Centrālaustrumāzija</territory>
-			<territory type="039">Eiropas dienvidi</territory>
+			<territory type="039">Dienvideiropa</territory>
 			<territory type="053">Austrālija un Jaunzēlande</territory>
 			<territory type="054">Melanēzija</territory>
 			<territory type="057">Mikronēzijas reģions</territory>
@@ -544,7 +614,7 @@
 			<territory type="145">Rietumāzija</territory>
 			<territory type="150">Eiropa</territory>
 			<territory type="151">Austrumeiropa</territory>
-			<territory type="154">Eiropas ziemeļi</territory>
+			<territory type="154">Ziemeļeiropa</territory>
 			<territory type="155">Rietumeiropa</territory>
 			<territory type="172">Neatkarīgo Valstu Savienība</territory>
 			<territory type="419">Latīņamerika un Karību jūras reģions</territory>
@@ -555,7 +625,7 @@
 			<territory type="AI">Angilja</territory>
 			<territory type="AL">Albānija</territory>
 			<territory type="AM">Armēnija</territory>
-			<territory type="AN">Antiļas</territory>
+			<territory type="AN">Nīderlandes Antiļas</territory>
 			<territory type="AO">Angola</territory>
 			<territory type="AQ">Antarktika</territory>
 			<territory type="AR">Argentīna</territory>
@@ -574,6 +644,7 @@
 			<territory type="BH">Bahreina</territory>
 			<territory type="BI">Burundi</territory>
 			<territory type="BJ">Benina</territory>
+			<territory type="BL">Senbartelmī</territory>
 			<territory type="BM">Bermudu salas</territory>
 			<territory type="BN">Bruneja</territory>
 			<territory type="BO">Bolīvija</territory>
@@ -585,7 +656,7 @@
 			<territory type="BY">Baltkrievija</territory>
 			<territory type="BZ">Beliza</territory>
 			<territory type="CA">Kanāda</territory>
-			<territory type="CC">Kokosu (Kīlinga) salas</territory>
+			<territory type="CC">Kokosu jeb Kīlinga salas</territory>
 			<territory type="CD">Kongo Demokrātiskā Republika</territory>
 			<territory type="CF">Centrālāfrikas Republika</territory>
 			<territory type="CG">Kongo</territory>
@@ -641,7 +712,7 @@
 			<territory type="GU">Guama</territory>
 			<territory type="GW">Gvineja-Bisava</territory>
 			<territory type="GY">Gajāna</territory>
-			<territory type="HK">Honkonga</territory>
+			<territory type="HK">Ķīnas īpašās pārvaldes apgabals Honkonga</territory>
 			<territory type="HM">Hērda un Makdonalda salas</territory>
 			<territory type="HN">Hondurasa</territory>
 			<territory type="HR">Horvātija</territory>
@@ -655,7 +726,7 @@
 			<territory type="IO">Britu Indijas okeāna teritorija</territory>
 			<territory type="IQ">Irāka</territory>
 			<territory type="IR">Irāna</territory>
-			<territory type="IS">Islande</territory>
+			<territory type="IS">Īslande</territory>
 			<territory type="IT">Itālija</territory>
 			<territory type="JE">Džērsija</territory>
 			<territory type="JM">Jamaika</territory>
@@ -687,14 +758,15 @@
 			<territory type="MC">Monako</territory>
 			<territory type="MD">Moldova</territory>
 			<territory type="ME">Melnkalne</territory>
+			<territory type="MF">Senmartēna</territory>
 			<territory type="MG">Madagaskara</territory>
 			<territory type="MH">Māršala salas</territory>
 			<territory type="MK">Maķedonija</territory>
 			<territory type="ML">Mali</territory>
 			<territory type="MM">Mjanma</territory>
 			<territory type="MN">Mongolija</territory>
-			<territory type="MO">Makao</territory>
-			<territory type="MP">Ziemeļu Marianas</territory>
+			<territory type="MO">Ķīnas īpašās pārvaldes apgabals Makao</territory>
+			<territory type="MP">Ziemeļu Marianas salas</territory>
 			<territory type="MQ">Martinika</territory>
 			<territory type="MR">Mauritānija</territory>
 			<territory type="MS">Montserrata</territory>
@@ -708,7 +780,7 @@
 			<territory type="NA">Namībija</territory>
 			<territory type="NC">Jaunkaledonija</territory>
 			<territory type="NE">Nigēra</territory>
-			<territory type="NF">Norfolka</territory>
+			<territory type="NF">Norfolkas sala</territory>
 			<territory type="NG">Nigērija</territory>
 			<territory type="NI">Nikaragva</territory>
 			<territory type="NL">Nīderlande</territory>
@@ -778,7 +850,7 @@
 			<territory type="UA">Ukraina</territory>
 			<territory type="UG">Uganda</territory>
 			<territory type="UM">ASV mazās aizjūras teritorijas</territory>
-			<territory type="US">United States</territory>
+			<territory type="US">Amerikas Savienotās Valstis</territory>
 			<territory type="UY">Urugvaja</territory>
 			<territory type="UZ">Uzbekistāna</territory>
 			<territory type="VA">Vatikāns</territory>
@@ -795,39 +867,45 @@
 			<territory type="ZA">Dienvidāfrika</territory>
 			<territory type="ZM">Zambija</territory>
 			<territory type="ZW">Zimbabve</territory>
-			<territory type="ZZ">Nezināms vai nederīgs reģions</territory>
+			<territory type="ZZ">nezināms vai nederīgs reģions</territory>
 		</territories>
 		<keys>
-			<key type="calendar">Kalendārs</key>
-			<key type="collation">šķirošana komplektos</key>
-			<key type="currency">Valūta</key>
+			<key type="calendar">kalendārs</key>
+			<key type="collation">salīdzināšana</key>
+			<key type="currency">valūta</key>
 		</keys>
 		<types>
-			<type type="big5han" key="collation">Tradicionālās ķīniešu valodas kārtošanas secība - Big5</type>
-			<type type="buddhist" key="calendar">Budistu kalendārs</type>
-			<type type="chinese" key="calendar">Ķīniešu kalendārs</type>
-			<type type="direct" key="collation">Tiešā kārtošanas secība</type>
-			<type type="gb2312han" key="collation">Vienkāršotās ķīniešu valodas kārtošanas secība - GB2312</type>
+			<type type="big5han" key="collation">tradicionālās ķīniešu valodas kārtošanas secība - Big5</type>
+			<type type="buddhist" key="calendar">budistu kalendārs</type>
+			<type type="chinese" key="calendar">ķīniešu kalendārs</type>
+			<type type="direct" key="collation">tiešā kārtošanas secība</type>
+			<type type="gb2312han" key="collation">vienkāršotās ķīniešu valodas kārtošanas secība - GB2312</type>
 			<type type="gregorian" key="calendar">Gregora kalendārs</type>
-			<type type="hebrew" key="calendar">Ebreju kalendārs</type>
+			<type type="hebrew" key="calendar">ebreju kalendārs</type>
 			<type type="indian" key="calendar">Indijas nacionālais kalendārs</type>
-			<type type="islamic" key="calendar">Islāma kalendārs</type>
-			<type type="islamic-civil" key="calendar">Islāma pilsoņu kalendārs</type>
-			<type type="japanese" key="calendar">Japāņu kalendārs</type>
-			<type type="phonebook" key="collation">Tālruņu grāmatas kārtošanas secība</type>
+			<type type="islamic" key="calendar">islāma kalendārs</type>
+			<type type="islamic-civil" key="calendar">islāma pilsoņu kalendārs</type>
+			<type type="japanese" key="calendar">japāņu kalendārs</type>
+			<type type="phonebook" key="collation">tālruņu grāmatas kārtošanas secība</type>
 			<type type="pinyin" key="collation">Pinyin kārtošanas secība</type>
 			<type type="roc" key="calendar">Ķīnas Republikas kalendārs</type>
 			<type type="stroke" key="collation">Stroke kārtošanas secība</type>
-			<type type="traditional" key="collation">Tradicionālā kārtošanas secība</type>
+			<type type="traditional" key="collation">tradicionālā kārtošanas secība</type>
 		</types>
 		<measurementSystemNames>
 			<measurementSystemName type="US">britu</measurementSystemName>
 			<measurementSystemName type="metric">metriskā</measurementSystemName>
 		</measurementSystemNames>
+		<codePatterns>
+			<codePattern type="language">Valoda: {0}</codePattern>
+			<codePattern type="script">Rakstība: {0}</codePattern>
+			<codePattern type="territory">Reģions: {0}</codePattern>
+		</codePatterns>
 	</localeDisplayNames>
 	<characters>
 		<exemplarCharacters>[a ā b c č d e ē f g ģ h i ī j k ķ l ļ m n ņ o p r s š t u ū v z ž]</exemplarCharacters>
 		<exemplarCharacters type="auxiliary">[y q w x]</exemplarCharacters>
+		<exemplarCharacters type="currencySymbol">[a-i y j-x z]</exemplarCharacters>
 	</characters>
 	<delimiters>
 		<quotationStart>“</quotationStart>
@@ -836,24 +914,24 @@
 		<alternateQuotationEnd>’</alternateQuotationEnd>
 	</delimiters>
 	<dates>
-		<localizedPatternChars>GanjkHmsSEDFwWxhKzAeugXZvcL</localizedPatternChars>
+		<dateRangePattern>{0} − {1}</dateRangePattern>
 		<calendars>
 			<calendar type="gregorian">
 				<months>
 					<monthContext type="format">
 						<monthWidth type="abbreviated">
-							<month type="1">Jan</month>
-							<month type="2">Feb</month>
-							<month type="3">Mar</month>
-							<month type="4">Apr</month>
-							<month type="5">Mai</month>
-							<month type="6">Jūn</month>
-							<month type="7">Jūl</month>
-							<month type="8">Aug</month>
-							<month type="9">Sep</month>
-							<month type="10">Okt</month>
-							<month type="11">Nov</month>
-							<month type="12">Dec</month>
+							<month type="1">janv.</month>
+							<month type="2">febr.</month>
+							<month type="3">marts</month>
+							<month type="4">apr.</month>
+							<month type="5">maijs</month>
+							<month type="6">jūn.</month>
+							<month type="7">jūl.</month>
+							<month type="8">aug.</month>
+							<month type="9">sept.</month>
+							<month type="10">okt.</month>
+							<month type="11">nov.</month>
+							<month type="12">dec.</month>
 						</monthWidth>
 						<monthWidth type="wide">
 							<month type="1">janvāris</month>
@@ -891,12 +969,12 @@
 					<dayContext type="format">
 						<dayWidth type="abbreviated">
 							<day type="sun">Sv</day>
-							<day type="mon">P</day>
-							<day type="tue">O</day>
-							<day type="wed">T</day>
-							<day type="thu">C</day>
+							<day type="mon">Pr</day>
+							<day type="tue">Ot</day>
+							<day type="wed">Tr</day>
+							<day type="thu">Ce</day>
 							<day type="fri">Pk</day>
-							<day type="sat">S</day>
+							<day type="sat">Se</day>
 						</dayWidth>
 						<dayWidth type="wide">
 							<day type="sun">svētdiena</day>
@@ -909,14 +987,6 @@
 						</dayWidth>
 					</dayContext>
 					<dayContext type="stand-alone">
-						<dayWidth type="abbreviated">
-							<day type="mon">Pr</day>
-							<day type="tue">ot</day>
-							<day type="wed">Tr</day>
-							<day type="thu">Ce</day>
-							<day type="fri">pk</day>
-							<day type="sat">Se</day>
-						</dayWidth>
 						<dayWidth type="narrow">
 							<day type="sun">S</day>
 							<day type="mon">P</day>
@@ -960,8 +1030,8 @@
 						<era type="1">mūsu ērā</era>
 					</eraNames>
 					<eraAbbr>
-						<era type="0">pmē</era>
-						<era type="1">mē</era>
+						<era type="0">p.m.ē.</era>
+						<era type="1">m.ē.</era>
 					</eraAbbr>
 					<eraNarrow>
 						<era type="0">p.m.ē.</era>
@@ -971,29 +1041,29 @@
 				<dateFormats>
 					<dateFormatLength type="full">
 						<dateFormat>
-							<pattern>EEEE, yyyy. 'gada' d. MMMM</pattern>
+							<pattern>EEEE, y. 'gada' d. MMMM</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="long">
 						<dateFormat>
-							<pattern>yyyy. 'gada' d. MMMM</pattern>
+							<pattern>y. 'gada' d. MMMM</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="medium">
 						<dateFormat>
-							<pattern>yyyy.d.M</pattern>
+							<pattern>y. 'gada' d. MMM</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="short">
 						<dateFormat>
-							<pattern>yy.d.M</pattern>
+							<pattern>dd.MM.yy</pattern>
 						</dateFormat>
 					</dateFormatLength>
 				</dateFormats>
 				<timeFormats>
 					<timeFormatLength type="full">
 						<timeFormat>
-							<pattern>HH:mm:ss v</pattern>
+							<pattern>HH:mm:ss zzzz</pattern>
 						</timeFormat>
 					</timeFormatLength>
 					<timeFormatLength type="long">
@@ -1013,116 +1083,123 @@
 					</timeFormatLength>
 				</timeFormats>
 				<dateTimeFormats>
-					<dateTimeFormatLength>
-						<dateTimeFormat>
-							<pattern>{1} {0}</pattern>
-						</dateTimeFormat>
-					</dateTimeFormatLength>
 					<availableFormats>
-						<dateFormatItem id="Ed">E d</dateFormatItem>
+						<dateFormatItem id="EEEd">EEE, d.</dateFormatItem>
+						<dateFormatItem id="Ed">EEE, d.</dateFormatItem>
 						<dateFormatItem id="H">H</dateFormatItem>
 						<dateFormatItem id="HHmm">HH:mm</dateFormatItem>
 						<dateFormatItem id="HHmmss">HH:mm:ss</dateFormatItem>
 						<dateFormatItem id="Hm">HH:mm</dateFormatItem>
 						<dateFormatItem id="M">L</dateFormatItem>
-						<dateFormatItem id="MEd">E, dd.MM</dateFormatItem>
+						<dateFormatItem id="MEd">E, dd.MM.</dateFormatItem>
 						<dateFormatItem id="MMM">LLL</dateFormatItem>
 						<dateFormatItem id="MMMEd">E, d. MMM</dateFormatItem>
 						<dateFormatItem id="MMMMEd">E, d. MMMM</dateFormatItem>
 						<dateFormatItem id="MMMMd">d. MMMM</dateFormatItem>
 						<dateFormatItem id="MMMd">d. MMM</dateFormatItem>
-						<dateFormatItem id="Md">d.M</dateFormatItem>
+						<dateFormatItem id="Md">dd.mm.</dateFormatItem>
 						<dateFormatItem id="d">d</dateFormatItem>
 						<dateFormatItem id="mmss">mm:ss</dateFormatItem>
 						<dateFormatItem id="ms">mm:ss</dateFormatItem>
-						<dateFormatItem id="y">yyyy</dateFormatItem>
-						<dateFormatItem id="yM">mm.yyyy</dateFormatItem>
-						<dateFormatItem id="yMEd">EEE, dd.mm.yyyy</dateFormatItem>
-						<dateFormatItem id="yMMM">yyyy. MMM</dateFormatItem>
-						<dateFormatItem id="yMMMEd">EEE, dd. MMM, yyyy</dateFormatItem>
-						<dateFormatItem id="yMMMM">yyyy. MMMM</dateFormatItem>
+						<dateFormatItem id="y">y. 'g'.</dateFormatItem>
+						<dateFormatItem id="yM">mm.yyyy.</dateFormatItem>
+						<dateFormatItem id="yMEd">EEE, dd.mm.yyyy.</dateFormatItem>
+						<dateFormatItem id="yMMM">yyyy. 'g'. MMM</dateFormatItem>
+						<dateFormatItem id="yMMMEd">EEE, yyyy. 'g'. dd. MMM</dateFormatItem>
+						<dateFormatItem id="yMMMM">y. 'g'. MMMM</dateFormatItem>
 						<dateFormatItem id="yQ">Q yyyy</dateFormatItem>
-						<dateFormatItem id="yQQQ">yyyy QQQ</dateFormatItem>
+						<dateFormatItem id="yQQQ">y QQQ</dateFormatItem>
 						<dateFormatItem id="yyQ">Q yy</dateFormatItem>
-						<dateFormatItem id="yyyy">yyyy. 'g'.</dateFormatItem>
+						<dateFormatItem id="yyyy">y. 'g'.</dateFormatItem>
 					</availableFormats>
 					<intervalFormats>
 						<intervalFormatFallback>{0} - {1}</intervalFormatFallback>
 						<intervalFormatItem id="M">
-							<greatestDifference id="M">M-M</greatestDifference>
+							<greatestDifference id="M">mm.–mm.</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="MEd">
-							<greatestDifference id="M">E, d.M - E, d.M</greatestDifference>
-							<greatestDifference id="d">E, d.M - E, d.M</greatestDifference>
+							<greatestDifference id="M">E, dd.MM - E, dd.MM</greatestDifference>
+							<greatestDifference id="d">E, dd.MM – E, dd.MM</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="MMM">
 							<greatestDifference id="M">MMM-MMM</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="MMMEd">
 							<greatestDifference id="M">E, d. MMM - E, d. MMM</greatestDifference>
-							<greatestDifference id="d">E, d. - E, d. MMM</greatestDifference>
+							<greatestDifference id="d">E, d. MMM – E, d. MMM</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="MMMM">
+							<greatestDifference id="M">LLLL–LLLL</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="MMMd">
 							<greatestDifference id="M">d. MMM - d. MMM</greatestDifference>
 							<greatestDifference id="d">d.-d. MMM</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="Md">
-							<greatestDifference id="M">d.M - d.M</greatestDifference>
-							<greatestDifference id="d">d.M - d.M</greatestDifference>
+							<greatestDifference id="M">dd.mm–dd.mm</greatestDifference>
+							<greatestDifference id="d">dd.mm.–dd.mm.</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="d">
-							<greatestDifference id="d">d-d</greatestDifference>
+							<greatestDifference id="d">d.–d.</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="h">
+							<greatestDifference id="a">HH–HH</greatestDifference>
 							<greatestDifference id="h">HH-HH</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="hm">
+							<greatestDifference id="a">HH:mm–HH:mm</greatestDifference>
 							<greatestDifference id="h">HH:mm-HH:mm</greatestDifference>
 							<greatestDifference id="m">HH:mm-HH:mm</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="hmv">
+							<greatestDifference id="a">HH:mm–HH:mm v</greatestDifference>
 							<greatestDifference id="h">HH:mm-HH:mm v</greatestDifference>
 							<greatestDifference id="m">HH:mm-HH:mm v</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="hv">
+							<greatestDifference id="a">HH–HH v</greatestDifference>
 							<greatestDifference id="h">HH-HH v</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="y">
-							<greatestDifference id="y">y-y</greatestDifference>
+							<greatestDifference id="y">y.–y.</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yM">
-							<greatestDifference id="M">yy.M - yy.M</greatestDifference>
-							<greatestDifference id="y">yy.M - yy.M</greatestDifference>
+							<greatestDifference id="M">mm.yyyy.–mm.yyyy.</greatestDifference>
+							<greatestDifference id="y">mm.yyyy.–mm.yyyy.</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMEd">
-							<greatestDifference id="M">E, yy.d.M - E, yy.d.M</greatestDifference>
-							<greatestDifference id="d">E, yy.d.M - E, yy.d.M</greatestDifference>
-							<greatestDifference id="y">E, yy.d.M - E, yy.d.M</greatestDifference>
+							<greatestDifference id="M">EEE, dd.mm.yy. – EEE, dd.mm.yy.</greatestDifference>
+							<greatestDifference id="d">EEE, dd.mm.yy. – EEE, dd.mm.yy.</greatestDifference>
+							<greatestDifference id="y">EEE, dd.mm.yy. – EEE, dd.mm.yy.</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMM">
-							<greatestDifference id="M">yyyy. 'gada' MMM-MMM</greatestDifference>
-							<greatestDifference id="y">yyyy. 'gada' MMM - yyyy. 'gada' MMM</greatestDifference>
+							<greatestDifference id="M">y. 'gada' MMM-MMM</greatestDifference>
+							<greatestDifference id="y">y. 'gada' MMM - y. 'gada' MMM</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMEd">
-							<greatestDifference id="M">E, yyyy. 'gada' d. MMM - E, yyyy. 'gada' d. MMM</greatestDifference>
-							<greatestDifference id="d">E, yyyy. 'gada' d. MMM - E, yyyy. 'gada' d. MMM</greatestDifference>
-							<greatestDifference id="y">E, yyyy. 'gada' d. MMM - E, yyyy. 'gada' d. MMM</greatestDifference>
+							<greatestDifference id="M">E, y. 'gada' d. MMM - E, y. 'gada' d. MMM</greatestDifference>
+							<greatestDifference id="d">E, y. 'gada' d. MMM - E, y. 'gada' d. MMM</greatestDifference>
+							<greatestDifference id="y">E, y. 'gada' d. MMM - E, y. 'gada' d. MMM</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="yMMMM">
+							<greatestDifference id="M">mm.yyyy.–mm.yyyy.</greatestDifference>
+							<greatestDifference id="y">mm.yyyy.–mm.yyyy.</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMd">
-							<greatestDifference id="M">yyyy. 'gada' d. MMM - d. MMM</greatestDifference>
-							<greatestDifference id="d">yyyy. 'gada' d.-d. MMM</greatestDifference>
-							<greatestDifference id="y">yyyy. 'gada' d. MMM - yyyy. 'gada' d. MMM</greatestDifference>
+							<greatestDifference id="M">y. 'gada' d. MMM - d. MMM</greatestDifference>
+							<greatestDifference id="d">y. 'gada' d.-d. MMM</greatestDifference>
+							<greatestDifference id="y">y. 'gada' d. MMM - y. 'gada' d. MMM</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMd">
-							<greatestDifference id="M">yy.d.M - yy.d.M</greatestDifference>
-							<greatestDifference id="d">yy.d.M - yy.d.M</greatestDifference>
-							<greatestDifference id="y">yy.d.M - yy.d.M</greatestDifference>
+							<greatestDifference id="M">dd.mm.yy.–dd.mm.yy.</greatestDifference>
+							<greatestDifference id="d">dd.mm.yyyy.–dd.mm.yyyy.</greatestDifference>
+							<greatestDifference id="y">dd.mm.yy.–dd.mm.yy.</greatestDifference>
 						</intervalFormatItem>
 					</intervalFormats>
 				</dateTimeFormats>
 				<fields>
 					<field type="era">
-						<displayName>Ēra</displayName>
+						<displayName>ēra</displayName>
 					</field>
 					<field type="year">
 						<displayName>Gads</displayName>
@@ -1134,15 +1211,20 @@
 						<displayName>Nedēļa</displayName>
 					</field>
 					<field type="day">
+						<displayName>diena</displayName>
+						<relative type="-3">aizaizvakar</relative>
+						<relative type="-2">aizvakar</relative>
+						<relative type="-1">vakar</relative>
 						<relative type="0">šodien</relative>
 						<relative type="1">rīt</relative>
 						<relative type="2">parīt</relative>
 						<relative type="3">aizparīt</relative>
-						<relative type="-1">vakar</relative>
-						<relative type="-2">aizvakar</relative>
 					</field>
 					<field type="weekday">
 						<displayName>Nedēļas diena</displayName>
+					</field>
+					<field type="dayperiod">
+						<displayName>Dayperiod</displayName>
 					</field>
 					<field type="hour">
 						<displayName>Stundas</displayName>
@@ -1158,11 +1240,52 @@
 					</field>
 				</fields>
 			</calendar>
+			<calendar type="hebrew">
+				<months>
+					<monthContext type="format">
+						<monthWidth type="wide">
+							<month type="1">tišri</month>
+							<month type="2">hešvans</month>
+							<month type="3">kisļevs</month>
+							<month type="4">tevets</month>
+							<month type="5">ševats</month>
+							<month type="7">adars</month>
+							<month type="8">nisans</month>
+							<month type="9">ijars</month>
+							<month type="10">sivans</month>
+							<month type="11">tamuzs</month>
+							<month type="12">avs</month>
+							<month type="13">eluls</month>
+						</monthWidth>
+					</monthContext>
+				</months>
+			</calendar>
+			<calendar type="islamic">
+				<months>
+					<monthContext type="format">
+						<monthWidth type="wide">
+							<month type="1">muharams</month>
+							<month type="2">safars</month>
+							<month type="3">1. rabī</month>
+							<month type="4">2. rabī</month>
+							<month type="5">1. džumādā</month>
+							<month type="6">2. džumādā</month>
+							<month type="7">radžabs</month>
+							<month type="8">šabans</month>
+							<month type="9">ramadāns</month>
+							<month type="10">šauvals</month>
+							<month type="11">du al-kidā</month>
+							<month type="12">du al-hidžā</month>
+						</monthWidth>
+					</monthContext>
+				</months>
+			</calendar>
 		</calendars>
 		<timeZoneNames>
 			<hourFormat>+HH:mm;−HH:mm</hourFormat>
 			<gmtFormat>GMT{0}</gmtFormat>
 			<regionFormat>{0}</regionFormat>
+			<fallbackFormat>{1} ({0})</fallbackFormat>
 			<zone type="Etc/Unknown">
 				<exemplarCity>Nezināma</exemplarCity>
 			</zone>
@@ -1346,6 +1469,9 @@
 			<zone type="America/Cuiaba">
 				<exemplarCity>Kujaba</exemplarCity>
 			</zone>
+			<zone type="America/Santarem">
+				<exemplarCity>Santarena</exemplarCity>
+			</zone>
 			<zone type="America/Campo_Grande">
 				<exemplarCity>Kampugrandi</exemplarCity>
 			</zone>
@@ -1369,6 +1495,9 @@
 			</zone>
 			<zone type="America/Recife">
 				<exemplarCity>Resifi</exemplarCity>
+			</zone>
+			<zone type="America/Noronha">
+				<exemplarCity>Noroņa</exemplarCity>
 			</zone>
 			<zone type="America/Nassau">
 				<exemplarCity>Naso</exemplarCity>
@@ -1571,6 +1700,9 @@
 			<zone type="Pacific/Truk">
 				<exemplarCity>Trūka</exemplarCity>
 			</zone>
+			<zone type="Pacific/Ponape">
+				<exemplarCity>Ponpeja</exemplarCity>
+			</zone>
 			<zone type="Pacific/Kosrae">
 				<exemplarCity>Kosraja</exemplarCity>
 			</zone>
@@ -1693,6 +1825,9 @@
 			</zone>
 			<zone type="Pacific/Enderbury">
 				<exemplarCity>Enderburija</exemplarCity>
+			</zone>
+			<zone type="Pacific/Kiritimati">
+				<exemplarCity>Kirisimasi</exemplarCity>
 			</zone>
 			<zone type="Pacific/Tarawa">
 				<exemplarCity>Tarava</exemplarCity>
@@ -2055,7 +2190,7 @@
 				<exemplarCity>Noma</exemplarCity>
 			</zone>
 			<zone type="America/Anchorage">
-				<exemplarCity>Aļaskas laiks</exemplarCity>
+				<exemplarCity>Ankurāža</exemplarCity>
 			</zone>
 			<zone type="America/Yakutat">
 				<exemplarCity>Jakutata</exemplarCity>
@@ -2101,6 +2236,9 @@
 			</zone>
 			<zone type="America/Indiana/Winamac">
 				<exemplarCity>Vinimaka</exemplarCity>
+			</zone>
+			<zone type="America/Indiana/Marengo">
+				<exemplarCity>Marengo</exemplarCity>
 			</zone>
 			<zone type="America/Indianapolis">
 				<exemplarCity>Indianapolisa</exemplarCity>
@@ -2150,12 +2288,73 @@
 			<zone type="Africa/Johannesburg">
 				<exemplarCity>Johannesburga</exemplarCity>
 			</zone>
+			<metazone type="Europe_Central">
+				<long>
+					<standard>Centrāleiropas laiks</standard>
+					<daylight>Centrāleiropas vasaras laiks</daylight>
+				</long>
+				<short>
+					<standard>CET</standard>
+					<daylight>CEST</daylight>
+				</short>
+			</metazone>
+			<metazone type="Europe_Eastern">
+				<long>
+					<standard>Austrumeiropas laiks</standard>
+					<daylight>Austrumeiropas vasaras laiks</daylight>
+				</long>
+				<short>
+					<standard>EET</standard>
+					<daylight>EEST</daylight>
+				</short>
+			</metazone>
+			<metazone type="Kuybyshev">
+				<long>
+					<standard>Kuibiševas laiks</standard>
+					<daylight>Kuibiševas vasaras laiks</daylight>
+				</long>
+			</metazone>
+			<metazone type="Moscow">
+				<long>
+					<generic>Maskavas laiks</generic>
+					<standard>Maskavas standarta laiks</standard>
+					<daylight>Maskavas vasaras laiks</daylight>
+				</long>
+			</metazone>
+			<metazone type="Samara">
+				<long>
+					<standard>Samaras laiks</standard>
+					<daylight>Samaras vasaras laiks</daylight>
+				</long>
+			</metazone>
+			<metazone type="Turkey">
+				<long>
+					<standard>Turcijas laiks</standard>
+					<daylight>Turcijas vasaras laiks</daylight>
+				</long>
+			</metazone>
+			<metazone type="Volgograd">
+				<long>
+					<standard>Volgogradas laiks</standard>
+					<daylight>Volgogradas vasaras laiks</daylight>
+				</long>
+			</metazone>
 		</timeZoneNames>
 	</dates>
 	<numbers>
 		<symbols>
 			<decimal>,</decimal>
 			<group> </group>
+			<list>;</list>
+			<percentSign>%</percentSign>
+			<nativeZeroDigit>0</nativeZeroDigit>
+			<patternDigit>#</patternDigit>
+			<plusSign>+</plusSign>
+			<minusSign>−</minusSign>
+			<exponential>E</exponential>
+			<perMille>‰</perMille>
+			<infinity>∞</infinity>
+			<nan>nav skaitlis</nan>
 		</symbols>
 		<decimalFormats>
 			<decimalFormatLength>
@@ -2164,6 +2363,13 @@
 				</decimalFormat>
 			</decimalFormatLength>
 		</decimalFormats>
+		<scientificFormats>
+			<scientificFormatLength>
+				<scientificFormat>
+					<pattern>#E0</pattern>
+				</scientificFormat>
+			</scientificFormatLength>
+		</scientificFormats>
 		<percentFormats>
 			<percentFormatLength>
 				<percentFormat>
@@ -2177,19 +2383,64 @@
 					<pattern>#,##0.00 ¤</pattern>
 				</currencyFormat>
 			</currencyFormatLength>
+			<unitPattern count="one">{0} {1}</unitPattern>
+			<unitPattern count="other">{0} {1}</unitPattern>
+			<unitPattern count="zero">{0} {1}</unitPattern>
 		</currencyFormats>
 		<currencies>
 			<currency type="AED">
 				<displayName>Apvienoto Arābu Emirātu dirhēms</displayName>
 			</currency>
+			<currency type="AFN">
+				<displayName>Afganistānas afgāns</displayName>
+			</currency>
+			<currency type="ALL">
+				<displayName>Albānijas leks</displayName>
+			</currency>
+			<currency type="AMD">
+				<displayName>Armēnijas drams</displayName>
+			</currency>
+			<currency type="ANG">
+				<displayName>Nīderlandes Antiļu guldenis</displayName>
+			</currency>
+			<currency type="AOA">
+				<displayName>Angolas jaunā kvanza</displayName>
+			</currency>
 			<currency type="ARS">
 				<displayName>Argentīnas peso</displayName>
+			</currency>
+			<currency type="ATS">
+				<displayName>Austrijas šiliņš</displayName>
 			</currency>
 			<currency type="AUD">
 				<displayName>Austrālijas dolārs</displayName>
 			</currency>
+			<currency type="AWG">
+				<displayName>Arubas guldenis</displayName>
+			</currency>
+			<currency type="AZN">
+				<displayName>Azerbaidžānas manats</displayName>
+			</currency>
+			<currency type="BAM">
+				<displayName>Bosnijas konvertējamā marka</displayName>
+			</currency>
+			<currency type="BBD">
+				<displayName>Barbadosas dolārs</displayName>
+			</currency>
+			<currency type="BDT">
+				<displayName>Bangladešas taka</displayName>
+			</currency>
+			<currency type="BEF">
+				<displayName>Beļģijas franks</displayName>
+			</currency>
 			<currency type="BGN">
 				<displayName>Bulgārijas leva</displayName>
+			</currency>
+			<currency type="BIF">
+				<displayName>Burundi franks</displayName>
+			</currency>
+			<currency type="BMD">
+				<displayName>Bermudu salu dolārs</displayName>
 			</currency>
 			<currency type="BND">
 				<displayName>Brunejas dolārs</displayName>
@@ -2200,8 +2451,26 @@
 			<currency type="BRL">
 				<displayName>Brazīlijas reāls</displayName>
 			</currency>
+			<currency type="BSD">
+				<displayName>Bahamu dolārs</displayName>
+			</currency>
+			<currency type="BTN">
+				<displayName>Butānas ngultrums</displayName>
+			</currency>
+			<currency type="BWP">
+				<displayName>Botsvānas pula</displayName>
+			</currency>
+			<currency type="BYR">
+				<displayName>Baltkrievijas rubelis</displayName>
+			</currency>
+			<currency type="BZD">
+				<displayName>Belizas dolārs</displayName>
+			</currency>
 			<currency type="CAD">
 				<displayName>Kanādas dolārs</displayName>
+			</currency>
+			<currency type="CDF">
+				<displayName>KDR franks</displayName>
 			</currency>
 			<currency type="CHF">
 				<displayName>Šveices franks</displayName>
@@ -2215,14 +2484,38 @@
 			<currency type="COP">
 				<displayName>Kolumbijas peso</displayName>
 			</currency>
+			<currency type="COU">
+				<displayName>Kolumbijas reāls</displayName>
+			</currency>
+			<currency type="CRC">
+				<displayName>Kostarikas kolons</displayName>
+			</currency>
+			<currency type="CUP">
+				<displayName>Kubas peso</displayName>
+			</currency>
+			<currency type="CVE">
+				<displayName>Kaboverdes eskudo</displayName>
+			</currency>
+			<currency type="CYP">
+				<displayName>Kipras mārciņa</displayName>
+			</currency>
 			<currency type="CZK">
 				<displayName>Čehijas krona</displayName>
 			</currency>
 			<currency type="DEM">
 				<displayName>Vācijas marka</displayName>
 			</currency>
+			<currency type="DJF">
+				<displayName>Džibutijas franks</displayName>
+			</currency>
 			<currency type="DKK">
 				<displayName>Dānijas krona</displayName>
+			</currency>
+			<currency type="DOP">
+				<displayName>Dominikānas peso</displayName>
+			</currency>
+			<currency type="DZD">
+				<displayName>Alžīrijas dinārs</displayName>
 			</currency>
 			<currency type="EEK">
 				<displayName>Igaunijas krona</displayName>
@@ -2230,12 +2523,26 @@
 			<currency type="EGP">
 				<displayName>Ēģiptes mārciņa</displayName>
 			</currency>
+			<currency type="ERN">
+				<displayName>Eritrejas nakfa</displayName>
+			</currency>
+			<currency type="ESP">
+				<displayName>Spānijas peseta</displayName>
+			</currency>
+			<currency type="ETB">
+				<displayName>Etiopijas birs</displayName>
+			</currency>
 			<currency type="EUR">
-				<displayName>Eiro</displayName>
-				<symbol>€</symbol>
+				<displayName>eiro</displayName>
+			</currency>
+			<currency type="FIM">
+				<displayName>Somijas marka</displayName>
 			</currency>
 			<currency type="FJD">
 				<displayName>Fidži dolārs</displayName>
+			</currency>
+			<currency type="FKP">
+				<displayName>Folklenda salu mārciņa</displayName>
 			</currency>
 			<currency type="FRF">
 				<displayName>Francijas franks</displayName>
@@ -2243,11 +2550,41 @@
 			<currency type="GBP">
 				<displayName>Lielbritānijas sterliņu mārciņa</displayName>
 			</currency>
+			<currency type="GEL">
+				<displayName>Gruzijas lari</displayName>
+			</currency>
+			<currency type="GHS">
+				<displayName>Ganas sedi</displayName>
+			</currency>
+			<currency type="GIP">
+				<displayName>Gibraltāra mārciņa</displayName>
+			</currency>
+			<currency type="GMD">
+				<displayName>Gambijas dalasi</displayName>
+			</currency>
+			<currency type="GNF">
+				<displayName>Gvinejas franks</displayName>
+			</currency>
+			<currency type="GRD">
+				<displayName>Grieķijas drahma</displayName>
+			</currency>
+			<currency type="GTQ">
+				<displayName>(Gvatemalas) ketsals</displayName>
+			</currency>
+			<currency type="GYD">
+				<displayName>Gajānas dolārs</displayName>
+			</currency>
 			<currency type="HKD">
 				<displayName>Honkongas dolārs</displayName>
 			</currency>
+			<currency type="HNL">
+				<displayName>Hondurasas lempīra</displayName>
+			</currency>
 			<currency type="HRK">
 				<displayName>Horvātijas kuna</displayName>
+			</currency>
+			<currency type="HTG">
+				<displayName>Haiti gurds</displayName>
 			</currency>
 			<currency type="HUF">
 				<displayName>Ungārijas forints</displayName>
@@ -2255,11 +2592,32 @@
 			<currency type="IDR">
 				<displayName>Indonēzijas rūpija</displayName>
 			</currency>
+			<currency type="IEP">
+				<displayName>Īrijas mārciņa</displayName>
+			</currency>
 			<currency type="ILS">
 				<displayName>Izraēlas šekelis</displayName>
 			</currency>
 			<currency type="INR">
 				<displayName>Indijas rūpija</displayName>
+			</currency>
+			<currency type="IQD">
+				<displayName>Irākas dinārs</displayName>
+			</currency>
+			<currency type="IRR">
+				<displayName>Irānas riāls</displayName>
+			</currency>
+			<currency type="ISK">
+				<displayName>Īslandes krona</displayName>
+			</currency>
+			<currency type="ITL">
+				<displayName>Itālijas lira</displayName>
+			</currency>
+			<currency type="JMD">
+				<displayName>Jamaikas dolārs</displayName>
+			</currency>
+			<currency type="JOD">
+				<displayName>Jordānas dinārs</displayName>
 			</currency>
 			<currency type="JPY">
 				<displayName>Japānas jena</displayName>
@@ -2267,25 +2625,93 @@
 			<currency type="KES">
 				<displayName>Kenijas šiliņš</displayName>
 			</currency>
+			<currency type="KGS">
+				<displayName>Kirgizstānas soms</displayName>
+			</currency>
+			<currency type="KPW">
+				<displayName>Ziemeļkorejas vona</displayName>
+			</currency>
 			<currency type="KRW">
 				<displayName>Dienvidkorejas vona</displayName>
+			</currency>
+			<currency type="KWD">
+				<displayName>Kuveitas dinārs</displayName>
 			</currency>
 			<currency type="KZT">
 				<displayName>Kazahstānas tenge</displayName>
 				<displayName count="zero">Kazahstānas tenge</displayName>
 			</currency>
+			<currency type="LAK">
+				<displayName>Laosas kips</displayName>
+			</currency>
+			<currency type="LBP">
+				<displayName>Libānas mārciņa</displayName>
+			</currency>
+			<currency type="LKR">
+				<displayName>Šrilankas rūpija</displayName>
+			</currency>
+			<currency type="LRD">
+				<displayName>Libērijas dolārs</displayName>
+			</currency>
+			<currency type="LSL">
+				<displayName>Lesoto loti</displayName>
+			</currency>
 			<currency type="LTL">
 				<displayName>Lietuvas lits</displayName>
 			</currency>
+			<currency type="LUF">
+				<displayName>Luksemburgas franks</displayName>
+			</currency>
 			<currency type="LVL">
 				<displayName>Latvijas lats</displayName>
-				<symbol>Ls</symbol>
+			</currency>
+			<currency type="LVR">
+				<displayName>Latvijas rublis</displayName>
+			</currency>
+			<currency type="LYD">
+				<displayName>Lībijas dinārs</displayName>
 			</currency>
 			<currency type="MAD">
 				<displayName>Marokas dirhēms</displayName>
 			</currency>
+			<currency type="MDL">
+				<displayName>Moldovas leja</displayName>
+			</currency>
+			<currency type="MGA">
+				<displayName>ariari</displayName>
+			</currency>
+			<currency type="MKD">
+				<displayName>Maķedonijas denārs</displayName>
+			</currency>
+			<currency type="MLF">
+				<displayName>CFA (Āfrikas) franks</displayName>
+			</currency>
+			<currency type="MMK">
+				<displayName>Mjanmas kjats</displayName>
+			</currency>
+			<currency type="MNT">
+				<displayName>Mongolijas tugriks</displayName>
+			</currency>
+			<currency type="MOP">
+				<displayName>Makao pataka</displayName>
+			</currency>
+			<currency type="MRO">
+				<displayName>Mauritānijas ugija</displayName>
+			</currency>
 			<currency type="MTL">
 				<displayName>Maltas lira</displayName>
+			</currency>
+			<currency type="MTP">
+				<displayName>Maltas mārciņa</displayName>
+			</currency>
+			<currency type="MUR">
+				<displayName>Maurīcijas rūpija</displayName>
+			</currency>
+			<currency type="MVR">
+				<displayName>Maldīvijas rūfija</displayName>
+			</currency>
+			<currency type="MWK">
+				<displayName>Malāvijas kvača</displayName>
 			</currency>
 			<currency type="MXN">
 				<displayName>Meksikas peso</displayName>
@@ -2293,14 +2719,44 @@
 			<currency type="MYR">
 				<displayName>Malaizijas ringits</displayName>
 			</currency>
+			<currency type="MZE">
+				<displayName>Mozambikas eskudo</displayName>
+			</currency>
+			<currency type="MZN">
+				<displayName>Mozambikas metikals</displayName>
+			</currency>
+			<currency type="NAD">
+				<displayName>Namībijas dolārs</displayName>
+			</currency>
+			<currency type="NGN">
+				<displayName>Nigērijas naira</displayName>
+			</currency>
+			<currency type="NIO">
+				<displayName>Kordovas oro</displayName>
+			</currency>
+			<currency type="NLG">
+				<displayName>Nīderlandes guldenis</displayName>
+			</currency>
 			<currency type="NOK">
 				<displayName>Norvēģijas krona</displayName>
+			</currency>
+			<currency type="NPR">
+				<displayName>Nepālas rūpija</displayName>
 			</currency>
 			<currency type="NZD">
 				<displayName>Jaunzēlandes dolārs</displayName>
 			</currency>
+			<currency type="OMR">
+				<displayName>Omānas riāls</displayName>
+			</currency>
+			<currency type="PAB">
+				<displayName>Panamas balboa</displayName>
+			</currency>
 			<currency type="PEN">
 				<displayName>Peru jaunais sols</displayName>
+			</currency>
+			<currency type="PGK">
+				<displayName>Papua-Jaungvinejas kina</displayName>
 			</currency>
 			<currency type="PHP">
 				<displayName>Filipīnu peso</displayName>
@@ -2311,6 +2767,12 @@
 			<currency type="PLN">
 				<displayName>Polijas zlots</displayName>
 			</currency>
+			<currency type="PTE">
+				<displayName>Portugāles eskudo</displayName>
+			</currency>
+			<currency type="QAR">
+				<displayName>Kataras riāls</displayName>
+			</currency>
 			<currency type="RON">
 				<displayName>Rumānijas leja</displayName>
 			</currency>
@@ -2320,8 +2782,20 @@
 			<currency type="RUB">
 				<displayName>Krievijas rublis</displayName>
 			</currency>
+			<currency type="RWF">
+				<displayName>Ruandas franks</displayName>
+			</currency>
 			<currency type="SAR">
 				<displayName>Saūda riāls</displayName>
+			</currency>
+			<currency type="SBD">
+				<displayName>Zālamana salu dolārs</displayName>
+			</currency>
+			<currency type="SCR">
+				<displayName>Seišelu salu rūpija</displayName>
+			</currency>
+			<currency type="SDG">
+				<displayName>Sudānas mārciņa</displayName>
 			</currency>
 			<currency type="SEK">
 				<displayName>Zviedrijas krona</displayName>
@@ -2329,42 +2803,140 @@
 			<currency type="SGD">
 				<displayName>Singapūras dolārs</displayName>
 			</currency>
+			<currency type="SHP">
+				<displayName>Sv.Helēnas salas mārciņa</displayName>
+			</currency>
 			<currency type="SIT">
 				<displayName>Slovēnijas tolars</displayName>
 			</currency>
 			<currency type="SKK">
 				<displayName>Slovakijas krona</displayName>
 			</currency>
+			<currency type="SLL">
+				<displayName>Sjerraleones leone</displayName>
+			</currency>
+			<currency type="SOS">
+				<displayName>Somālijas šiliņš</displayName>
+			</currency>
+			<currency type="SRD">
+				<displayName>Surinamas dolārs</displayName>
+			</currency>
+			<currency type="SRG">
+				<displayName>Surinamas guldenis</displayName>
+			</currency>
+			<currency type="STD">
+				<displayName>Santome un Prinsipi dobra</displayName>
+			</currency>
+			<currency type="SVC">
+				<displayName>Salvadoras kolons</displayName>
+			</currency>
+			<currency type="SZL">
+				<displayName>Svazilendas lilangeni</displayName>
+			</currency>
 			<currency type="THB">
 				<displayName>Taizemes bāts</displayName>
+			</currency>
+			<currency type="TJS">
+				<displayName>Tadžikistānas somons</displayName>
+			</currency>
+			<currency type="TMM">
+				<displayName>Turkmēnijas manats</displayName>
+			</currency>
+			<currency type="TND">
+				<displayName>Tunisijas dinārs</displayName>
+			</currency>
+			<currency type="TOP">
+				<displayName>Tongas paanga</displayName>
 			</currency>
 			<currency type="TRL">
 				<displayName>Turcijas lira</displayName>
 			</currency>
 			<currency type="TRY">
-				<displayName>Jaunā Turcijas lira</displayName>
+				<displayName>jaunā Turcijas lira</displayName>
+			</currency>
+			<currency type="TTD">
+				<displayName>Trinidādas un Tobāgo dolārs</displayName>
 			</currency>
 			<currency type="TWD">
-				<displayName>Jaunais Taivānas dolārs</displayName>
+				<displayName>jaunais Taivānas dolārs</displayName>
+			</currency>
+			<currency type="TZS">
+				<displayName>Tanzānijas šiliņš</displayName>
 			</currency>
 			<currency type="UAH">
 				<displayName>Ukrainas grivna</displayName>
 			</currency>
+			<currency type="UGX">
+				<displayName>Ugandas šiliņš</displayName>
+			</currency>
 			<currency type="USD">
 				<displayName>ASV dolārs</displayName>
+			</currency>
+			<currency type="UYU">
+				<displayName>Urugvajas peso</displayName>
+			</currency>
+			<currency type="UZS">
+				<displayName>Uzbekistānas sums</displayName>
 			</currency>
 			<currency type="VEB">
 				<displayName>Venecuēlas bolivārs</displayName>
 			</currency>
+			<currency type="VEF">
+				<displayName>Venecuēlas stiprais bolivārs</displayName>
+			</currency>
 			<currency type="VND">
 				<displayName>Vjetnamas dongi</displayName>
 			</currency>
+			<currency type="VUV">
+				<displayName>Vanuatu vatu</displayName>
+			</currency>
+			<currency type="WST">
+				<displayName>Samoa tala</displayName>
+			</currency>
+			<currency type="XAG">
+				<displayName>sudrabs</displayName>
+			</currency>
+			<currency type="XAU">
+				<displayName>zelts</displayName>
+			</currency>
+			<currency type="XBB">
+				<displayName>Eiropas naudas vienība</displayName>
+			</currency>
+			<currency type="XCD">
+				<displayName>Austrumkarību dolārs</displayName>
+			</currency>
+			<currency type="XDR">
+				<displayName>Speciālās aizņēmuma tiesības</displayName>
+			</currency>
+			<currency type="XEU">
+				<displayName>Eiropas norēķinu vienība</displayName>
+			</currency>
+			<currency type="XFO">
+				<displayName>Francijas zelta franks</displayName>
+			</currency>
+			<currency type="XFU">
+				<displayName>Francijas UIC franks</displayName>
+			</currency>
+			<currency type="XPD">
+				<displayName>pallādijs</displayName>
+			</currency>
+			<currency type="XPT">
+				<displayName>platīns</displayName>
+			</currency>
 			<currency type="XXX">
-				<displayName>Nezināma vai nederīga valūta</displayName>
-				<symbol>XXX</symbol>
+				<displayName>nezināma vai nederīga valūta</displayName>
+			</currency>
+			<currency type="YER">
+				<displayName>Jemenas riāls</displayName>
 			</currency>
 			<currency type="ZAR">
 				<displayName>Dienvidāfrikas rands</displayName>
+			</currency>
+			<currency type="ZMK">
+				<displayName>Zambijas kvača</displayName>
+			</currency>
+			<currency type="ZWD">
+				<displayName>Zimbabves dolārs</displayName>
 			</currency>
 		</currencies>
 	</numbers>
@@ -2372,37 +2944,37 @@
 		<unit type="day">
 			<unitPattern count="one">{0} diena</unitPattern>
 			<unitPattern count="other">{0} dienas</unitPattern>
-			<unitPattern count="zero">{0} dienu</unitPattern>
+			<unitPattern count="zero">{0} dienas</unitPattern>
 		</unit>
 		<unit type="hour">
 			<unitPattern count="one">{0} stunda</unitPattern>
 			<unitPattern count="other">{0} stundas</unitPattern>
-			<unitPattern count="zero">{0} stundu</unitPattern>
+			<unitPattern count="zero">{0} stundas</unitPattern>
 		</unit>
 		<unit type="minute">
 			<unitPattern count="one">{0} minūte</unitPattern>
 			<unitPattern count="other">{0} minūtes</unitPattern>
-			<unitPattern count="zero">{0} minūšu</unitPattern>
+			<unitPattern count="zero">{0} minūtes</unitPattern>
 		</unit>
 		<unit type="month">
 			<unitPattern count="one">{0} mēnesis</unitPattern>
 			<unitPattern count="other">{0} mēneši</unitPattern>
-			<unitPattern count="zero">{0} mēnešu</unitPattern>
+			<unitPattern count="zero">{0} mēneši</unitPattern>
 		</unit>
 		<unit type="second">
 			<unitPattern count="one">{0} sekunde</unitPattern>
 			<unitPattern count="other">{0} sekundes</unitPattern>
-			<unitPattern count="zero">{0} sekunžu</unitPattern>
+			<unitPattern count="zero">{0} sekundes</unitPattern>
 		</unit>
 		<unit type="week">
 			<unitPattern count="one">{0} nedēļa</unitPattern>
 			<unitPattern count="other">{0} nedēļas</unitPattern>
-			<unitPattern count="zero">{0} nedēļu</unitPattern>
+			<unitPattern count="zero">{0} nedēļas</unitPattern>
 		</unit>
 		<unit type="year">
 			<unitPattern count="one">{0} gads</unitPattern>
 			<unitPattern count="other">{0} gadi</unitPattern>
-			<unitPattern count="zero">{0} gadu</unitPattern>
+			<unitPattern count="zero">{0} gadi</unitPattern>
 		</unit>
 	</units>
 	<posix>
@@ -2412,3 +2984,4 @@
 		</messages>
 	</posix>
 </ldml>
+

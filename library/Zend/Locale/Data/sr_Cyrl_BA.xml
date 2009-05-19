@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.35 $"/>
-		<generation date="$Date: 2008/06/17 14:12:15 $"/>
+		<version number="$Revision: 1.39 $"/>
+		<generation date="$Date: 2009/05/05 23:06:40 $"/>
 		<language type="sr"/>
 		<script type="Cyrl"/>
 		<territory type="BA"/>
@@ -49,7 +49,7 @@
 				<timeFormats>
 					<timeFormatLength type="full">
 						<timeFormat>
-							<pattern>HH 'часова', mm 'минута', ss 'секунди' v</pattern>
+							<pattern>HH 'часова', mm 'минута', ss 'секунди' zzzz</pattern>
 						</timeFormat>
 					</timeFormatLength>
 					<timeFormatLength type="medium">

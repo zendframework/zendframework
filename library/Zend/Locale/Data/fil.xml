@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.18 $"/>
-		<generation date="$Date: 2008/06/26 03:47:57 $"/>
+		<version number="$Revision: 1.29 $"/>
+		<generation date="$Date: 2009/05/05 23:06:36 $"/>
 		<language type="fil"/>
 	</identity>
 	<localeDisplayNames>
@@ -323,7 +323,7 @@
 			<territory type="GR">Griyego</territory>
 			<territory type="GS">South Georgia and the South Sandwich Islands</territory>
 			<territory type="GW">Guinea-Bissau</territory>
-			<territory type="HK">Hong KOng</territory>
+			<territory type="HK">Hong Kong SAR China</territory>
 			<territory type="HM">Heard Island and McDonald Islands</territory>
 			<territory type="HN">Honduras</territory>
 			<territory type="HR">Croatia</territory>
@@ -618,17 +618,17 @@
 				<dateFormats>
 					<dateFormatLength type="full">
 						<dateFormat>
-							<pattern>EEEE, MMMM dd yyyy</pattern>
+							<pattern>EEEE, MMMM dd y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="long">
 						<dateFormat>
-							<pattern>MMMM d, yyyy</pattern>
+							<pattern>MMMM d, y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="medium">
 						<dateFormat>
-							<pattern>MMM d, yyyy</pattern>
+							<pattern>MMM d, y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="short">
@@ -640,7 +640,7 @@
 				<timeFormats>
 					<timeFormatLength type="full">
 						<timeFormat>
-							<pattern>HH:mm:ss v</pattern>
+							<pattern>HH:mm:ss zzzz</pattern>
 						</timeFormat>
 					</timeFormatLength>
 					<timeFormatLength type="long">
@@ -660,11 +660,6 @@
 					</timeFormatLength>
 				</timeFormats>
 				<dateTimeFormats>
-					<dateTimeFormatLength>
-						<dateTimeFormat>
-							<pattern>{1} {0}</pattern>
-						</dateTimeFormat>
-					</dateTimeFormatLength>
 					<availableFormats>
 						<dateFormatItem id="MEd">E, M-d</dateFormatItem>
 						<dateFormatItem id="MMM">LLL</dateFormatItem>
@@ -674,13 +669,13 @@
 						<dateFormatItem id="MMMd">MMM d</dateFormatItem>
 						<dateFormatItem id="Md">M-d</dateFormatItem>
 						<dateFormatItem id="ms">mm:ss</dateFormatItem>
-						<dateFormatItem id="y">yyyy</dateFormatItem>
+						<dateFormatItem id="y">y</dateFormatItem>
 						<dateFormatItem id="yM">yyyy-M</dateFormatItem>
 						<dateFormatItem id="yMEd">EEE, yyyy-M-d</dateFormatItem>
-						<dateFormatItem id="yMMM">yyyy MMM</dateFormatItem>
-						<dateFormatItem id="yMMMEd">EEE, yyyy MMM d</dateFormatItem>
-						<dateFormatItem id="yMMMM">yyyy MMMM</dateFormatItem>
-						<dateFormatItem id="yQQQ">yyyy QQQ</dateFormatItem>
+						<dateFormatItem id="yMMM">y MMM</dateFormatItem>
+						<dateFormatItem id="yMMMEd">EEE, y MMM d</dateFormatItem>
+						<dateFormatItem id="yMMMM">y MMMM</dateFormatItem>
+						<dateFormatItem id="yQQQ">y QQQ</dateFormatItem>
 						<dateFormatItem id="yyMM">yy-MM</dateFormatItem>
 						<dateFormatItem id="yyMMM">MMM yy</dateFormatItem>
 					</availableFormats>
@@ -700,9 +695,9 @@
 					</field>
 					<field type="day">
 						<displayName>Araw</displayName>
+						<relative type="-1">Yesterday</relative>
 						<relative type="0">Today</relative>
 						<relative type="1">Tomorrow</relative>
-						<relative type="-1">Yesterday</relative>
 					</field>
 					<field type="weekday">
 						<displayName>Araw ng Linggo</displayName>
@@ -891,7 +886,6 @@
 			</currency>
 			<currency type="INR">
 				<displayName>Indian Rupee</displayName>
-				<symbol>0≤Rs.|1≤Re.|1&lt;Rs.</symbol>
 			</currency>
 			<currency type="JPY">
 				<displayName>Japanese Yen</displayName>
@@ -922,7 +916,6 @@
 			</currency>
 			<currency type="PHP">
 				<displayName>Philippine Peso</displayName>
-				<symbol>PhP</symbol>
 			</currency>
 			<currency type="PKR">
 				<displayName>Pakistan Rupee</displayName>
@@ -979,20 +972,32 @@
 	</numbers>
 	<units>
 		<unit type="day">
-			<unitPattern count="one">{0} a</unitPattern>
-			<unitPattern count="other">{0} a</unitPattern>
+			<unitPattern count="one">{0} araw</unitPattern>
+			<unitPattern count="other">{0} araw</unitPattern>
 		</unit>
 		<unit type="hour">
-			<unitPattern count="one">{0} o</unitPattern>
-			<unitPattern count="other">{0} o</unitPattern>
+			<unitPattern count="one">{0} oras</unitPattern>
+			<unitPattern count="other">{0} oras</unitPattern>
+		</unit>
+		<unit type="minute">
+			<unitPattern count="one">{0} minuto</unitPattern>
+			<unitPattern count="other">{0} minuto</unitPattern>
+		</unit>
+		<unit type="month">
+			<unitPattern count="one">{0} buwan</unitPattern>
+			<unitPattern count="other">{0} buwan</unitPattern>
+		</unit>
+		<unit type="second">
+			<unitPattern count="one">{0} segundo</unitPattern>
+			<unitPattern count="other">{0} segundo</unitPattern>
 		</unit>
 		<unit type="week">
-			<unitPattern count="one">{0} l</unitPattern>
-			<unitPattern count="other">{0} l</unitPattern>
+			<unitPattern count="one">{0} linggo</unitPattern>
+			<unitPattern count="other">{0} linggo</unitPattern>
 		</unit>
 		<unit type="year">
-			<unitPattern count="one">{0} t</unitPattern>
-			<unitPattern count="other">{0} t</unitPattern>
+			<unitPattern count="one">{0} taon</unitPattern>
+			<unitPattern count="other">{0} taon</unitPattern>
 		</unit>
 	</units>
 	<posix>

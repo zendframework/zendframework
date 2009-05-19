@@ -243,19 +243,9 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
     {
         $measure = Zend_Locale_Data::getList('de', 'measurement');
         $this->assertEquals("001", $measure['metric']);
-        $this->assertEquals("US",  $measure['US']);
+        $this->assertEquals("LR MM US",  $measure['US']);
         $this->assertEquals("001", $measure['A4']);
-        $this->assertEquals("CA US",  $measure['US-Letter']);
-    }
-
-    /**
-     * test for reading datechars from locale
-     * expected array
-     */
-    public function testDateChars()
-    {
-        $date = Zend_Locale_Data::getContent('de_AT', 'datechars');
-        $this->assertEquals("GjMtkHmsSEDFwWahKzJeugAZvcL", $date);
+        $this->assertEquals("CA CL CO MX PH PR US VE",  $measure['US-Letter']);
     }
 
     /**
@@ -517,7 +507,7 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
                                   'weekendEnd' => 'sun'), $value);
 
         $value = Zend_Locale_Data::getList('en_US', 'week');
-        $this->assertEquals(array('minDays' => 1, 'firstDay' => 'sun', 'weekendStart' => 'sat',
+        $this->assertEquals(array('minDays' => '4', 'firstDay' => 'sun', 'weekendStart' => 'sat',
                                   'weekendEnd' => 'sun'), $value);
     }
 
@@ -578,7 +568,7 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('n. Chr.', $value);
 
         $value = Zend_Locale_Data::getContent('ar', 'era', array('islamic', 'Abbr', '0'));
-        $this->assertEquals("ه‍", $value);
+        $this->assertEquals('هـ', $value);
     }
 
     /**
@@ -601,23 +591,23 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
     public function testDate()
     {
         $date = Zend_Locale_Data::getList('de_AT', 'date');
-        $result = array("full" => "EEEE, dd. MMMM yyyy", "long" => "dd. MMMM yyyy",
+        $result = array("full" => "EEEE, dd. MMMM y", "long" => "dd. MMMM y",
                         "medium" => "dd.MM.yyyy", "short" => "dd.MM.yy");
         $this->assertEquals($result, $date);
 
         $date = Zend_Locale_Data::getList('de_AT', 'date', 'islamic');
-        $result = array("full" => "EEEE, yyyy MMMM dd", "long" => "yyyy MMMM d",
-                        "medium" => "yyyy MMM d", "short" => "yyyy-MM-dd");
+        $result = array("full" => "EEEE, y MMMM dd", "long" => "y MMMM d",
+                        "medium" => "y MMM d", "short" => "yyyy-MM-dd");
         $this->assertEquals($result, $date);
 
         $value = Zend_Locale_Data::getContent('de_AT', 'date');
         $this->assertEquals("dd.MM.yyyy", $value);
 
         $value = Zend_Locale_Data::getContent('de_AT', 'date', 'long');
-        $this->assertEquals("dd. MMMM yyyy", $value);
+        $this->assertEquals("dd. MMMM y", $value);
 
         $value = Zend_Locale_Data::getContent('ar', 'date', array('islamic', 'long'));
-        $this->assertEquals("yyyy MMMM d", $value);
+        $this->assertEquals("y MMMM d", $value);
     }
 
     /**
@@ -640,12 +630,12 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
     public function testTime()
     {
         $date = Zend_Locale_Data::getList('de_AT', 'time');
-        $result = array("full" => "HH:mm:ss v", "long" => "HH:mm:ss z",
+        $result = array("full" => "HH:mm:ss zzzz", "long" => "HH:mm:ss z",
                         "medium" => "HH:mm:ss", "short" => "HH:mm");
         $this->assertEquals($result, $date);
 
         $date = Zend_Locale_Data::getList('de_AT', 'time', 'islamic');
-        $result = array("full" => "HH:mm:ss v", "long" => "HH:mm:ss z",
+        $result = array("full" => "HH:mm:ss zzzz", "long" => "HH:mm:ss z",
                         "medium" => "HH:mm:ss", "short" => "HH:mm");
         $this->assertEquals($result, $date);
 
@@ -669,26 +659,30 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
         $result = array(
             "Ed"    => "E d.",     "H"      => "H",       "HHmm"   => "HH:mm",    "HHmmss"   => "HH:mm:ss",
             "MMMEd" => "E d. MMM", "MMMMd"  => "d. MMMM", "MMMMdd" => "dd. MMMM", "MMd"      => "d.MM.",
-            "MMdd"  => "dd.MM.",  "Md"     => "d.M.",    "hhmm"   => "HH:mm",  "hhmmss"   => "HH:mm:ss",
+            "MMdd"  => "dd.MM.",  "Md"     => "d.M.",
             'Hm' => 'H:mm', 'M' => 'L', 'MEd' => 'E, d.M.', "mmss"  => "mm:ss",   "yyMM"   => "MM.yy",
             "yyMMM"  => "MMM yy",   "yyMMdd"   => "dd.MM.yy",
-            "yyQ"   => "Q yy",    "yyQQQQ" => "QQQQ yy", "yyyy"   => "yyyy",     "yyyyMMMM" => "MMMM yyyy",
+            "yyQ"   => "Q yy",    "yyQQQQ" => "QQQQ yy", "yyyy"   => "y",     "yyyyMMMM" => "MMMM y",
             'MMM' => 'LLL', 'MMMMEd' => 'E d. MMMM', 'MMMd' => 'd. MMM', 'd' => 'd', 'ms' => 'mm:ss',
-            'y' => 'yyyy', 'yM' => 'yyyy-M', 'yMEd' => 'EEE, yyyy-M-d', 'yMMM' => 'MMM yyyy',
-            'yMMMEd' => 'EEE, d. MMM yyyy', 'yMMMM' => 'MMMM yyyy', 'yQ' => 'Q yyyy', 'yQQQ' => 'QQQ yyyy');
+            'y' => 'y', 'yM' => 'yyyy-M', 'yMEd' => 'EEE, yyyy-M-d', 'yMMM' => 'MMM y',
+            'yMMMEd' => 'EEE, d. MMM y', 'yMMMM' => 'MMMM y', 'yQ' => 'Q yyyy', 'yQQQ' => 'QQQ y',
+            'hms' => 'h:mm:ss a', 'hm' => 'h:mm a', 'Hms' => 'H:mm:ss', 'EEEd' => 'd. EEE'
+        );
         $this->assertEquals($result, $value);
 
         $value = Zend_Locale_Data::getList('de_AT', 'datetime', 'gregorian');
         $result = array(
-            "Ed"    => "E d.",     "H"      => "H",       "HHmm"   => "HH:mm",    "HHmmss"   => "HH:mm:ss",
+            "Ed"    => "E d.",     "H"      => "H",       "HHmm"   => "HH:mm",
             "MMMEd" => "E d. MMM", "MMMMd"  => "d. MMMM", "MMMMdd" => "dd. MMMM", "MMd"      => "d.MM.",
-            "MMdd"  => "dd.MM.",  "Md"     => "d.M.",    "hhmm"   => "HH:mm",  "hhmmss"   => "HH:mm:ss",
+            "MMdd"  => "dd.MM.",  "Md"     => "d.M.",  "HHmmss"   => "HH:mm:ss",
             "mmss"  => "mm:ss",   "yyMM"   => "MM.yy",   "yyMMM"  => "MMM yy",   "yyMMdd"   => "dd.MM.yy",
-            "yyQ"   => "Q yy",    "yyQQQQ" => "QQQQ yy", "yyyy"   => "yyyy",     "yyyyMMMM" => "MMMM yyyy",
+            "yyQ"   => "Q yy",    "yyQQQQ" => "QQQQ yy", "yyyy"   => "y",     "yyyyMMMM" => "MMMM y",
             'Hm' => 'H:mm', 'M' => 'L', 'MEd' => 'E, d.M.', 'MMM' => 'LLL', 'MMMMEd' => 'E d. MMMM',
-            'MMMd' => 'd. MMM', 'd' => 'd', 'ms' => 'mm:ss', 'y' => 'yyyy', 'yM' => 'yyyy-M',
-            'yMEd' => 'EEE, yyyy-M-d', 'yMMM' => 'MMM yyyy', 'yMMMEd' => 'EEE, d. MMM yyyy',
-            'yMMMM' => 'MMMM yyyy', 'yQ' => 'Q yyyy', 'yQQQ' => 'QQQ yyyy');
+            'MMMd' => 'd. MMM', 'd' => 'd', 'ms' => 'mm:ss', 'y' => 'y', 'yM' => 'yyyy-M',
+            'yMEd' => 'EEE, yyyy-M-d', 'yMMM' => 'MMM y', 'yMMMEd' => 'EEE, d. MMM y',
+            'yMMMM' => 'MMMM y', 'yQ' => 'Q yyyy', 'yQQQ' => 'QQQ y',
+            'hms' => 'h:mm:ss a', 'hm' => 'h:mm a', 'Hms' => 'H:mm:ss', 'EEEd' => 'd. EEE'
+        );
         $this->assertEquals($result, $value);
 
         $value = Zend_Locale_Data::getContent('de_AT', 'datetime');
@@ -809,7 +803,7 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
             'AOR' => 'Kwanza Reajustado', 'ARA' => 'Argentinischer Austral',
             'ARP' => 'Argentinischer Peso (1983-1985)', 'ARS' => 'Argentinischer Peso',
             'ATS' => 'Österreichischer Schilling', 'AUD' => 'Australischer Dollar', 'AWG' => 'Aruba Florin',
-            'AZM' => 'Aserbeidschan Manat', 'AZN' => 'Aserbaidschan-Manat',
+            'AZM' => 'Aserbaidschan-Manat (1993-2006)', 'AZN' => 'Aserbaidschan-Manat',
             'BAD' => 'Bosnien und Herzegowina Dinar', 'BAM' => 'Konvertierbare Mark',
             'BBD' => 'Barbados-Dollar', 'BDT' => 'Taka', 'BEC' => 'Belgischer Franc (konvertibel)',
             'BEF' => 'Belgischer Franc', 'BEL' => 'Belgischer Finanz-Franc', 'BGL' => 'Lew (1962-1999)',
@@ -825,39 +819,39 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
             'CLP' => 'Chilenischer Peso', 'CNY' => 'Renminbi Yuan', 'COP' => 'Kolumbianischer Peso',
             'COU' => 'Unidad de Valor Real', 'CRC' => 'Costa Rica Colon', 'CSD' => 'Alter Serbischer Dinar',
             'CSK' => 'Tschechoslowakische Krone', 'CUP' => 'Kubanischer Peso', 'CVE' => 'Kap Verde Escudo',
-            'CYP' => 'Zypern Pfund', 'CZK' => 'Tschechische Krone', 'DDM' => 'Mark der DDR',
+            'CYP' => 'Zypern-Pfund', 'CZK' => 'Tschechische Krone', 'DDM' => 'Mark der DDR',
             'DEM' => 'Deutsche Mark', 'DJF' => 'Dschibuti-Franc', 'DKK' => 'Dänische Krone',
             'DOP' => 'Dominikanischer Peso', 'DZD' => 'Algerischer Dinar', 'ECS' => 'Ecuadorianischer Sucre',
             'ECV' => 'Verrechnungseinheit für EC', 'EEK' => 'Estnische Krone', 'EGP' => 'Ägyptisches Pfund',
-            'EQE' => 'Ekwele', 'ERN' => 'Nakfa', 'ESA' => 'Spanische Peseta (A-Konten)',
-            'ESB' => 'Spanische Peseta (konvertibel)', 'ESP' => 'Spanische Pesete', 'ETB' => 'Birr',
-            'EUR' => 'Euro', 'FIM' => 'Finnische Mark', 'FJD' => 'Fidschi Dollar', 'FKP' => 'Falkland Pfund',
+            'ERN' => 'Nakfa', 'ESA' => 'Spanische Peseta (A-Konten)',
+            'ESB' => 'Spanische Peseta (konvertibel)', 'ESP' => 'Spanische Peseta', 'ETB' => 'Birr',
+            'EUR' => 'Euro', 'FIM' => 'Finnische Mark', 'FJD' => 'Fidschi-Dollar', 'FKP' => 'Falkland-Pfund',
             'FRF' => 'Französischer Franc', 'GBP' => 'Pfund Sterling', 'GEK' => 'Georgischer Kupon Larit',
-            'GEL' => 'Georgischer Lari', 'GHC' => 'Cedi', 'GHS' => 'Ghanaische Cedi', 'GIP' => 'Gibraltar Pfund', 'GMD' => 'Dalasi',
-            'GNF' => 'Guinea Franc', 'GNS' => 'Guineischer Syli', 'GQE' => 'Äquatorialguinea Ekwele Guineana',
+            'GEL' => 'Georgischer Lari', 'GHC' => 'Cedi', 'GHS' => 'Ghanaische Cedi', 'GIP' => 'Gibraltar-Pfund', 'GMD' => 'Dalasi',
+            'GNF' => 'Guinea-Franc', 'GNS' => 'Guineischer Syli', 'GQE' => 'Ekwele',
             'GRD' => 'Griechische Drachme', 'GTQ' => 'Quetzal', 'GWE' => 'Portugiesisch Guinea Escudo',
-            'GWP' => 'Guinea Bissau Peso', 'GYD' => 'Guyana Dollar', 'HKD' => 'Hongkong-Dollar',
+            'GWP' => 'Guinea Bissau Peso', 'GYD' => 'Guyana-Dollar', 'HKD' => 'Hongkong-Dollar',
             'HNL' => 'Lempira', 'HRD' => 'Kroatischer Dinar', 'HRK' => 'Kuna', 'HTG' => 'Gourde',
             'HUF' => 'Forint', 'IDR' => 'Rupiah', 'IEP' => 'Irisches Pfund', 'ILP' => 'Israelisches Pfund',
             'ILS' => 'Schekel', 'INR' => 'Indische Rupie', 'IQD' => 'Irak Dinar', 'IRR' => 'Rial',
-            'ISK' => 'Isländische Krone', 'ITL' => 'Italienische Lire', 'JMD' => 'Jamaika Dollar',
-            'JOD' => 'Jordanischer Dinar', 'JPY' => 'Yen', 'KES' => 'Kenia Schilling', 'KGS' => 'Som',
+            'ISK' => 'Isländische Krone', 'ITL' => 'Italienische Lira', 'JMD' => 'Jamaika-Dollar',
+            'JOD' => 'Jordanischer Dinar', 'JPY' => 'Yen', 'KES' => 'Kenia-Schilling', 'KGS' => 'Som',
             'KHR' => 'Riel', 'KMF' => 'Komoren Franc', 'KPW' => 'Nordkoreanischer Won',
             'KRW' => 'Südkoreanischer Won', 'KWD' => 'Kuwait Dinar', 'KYD' => 'Kaiman-Dollar',
             'KZT' => 'Tenge', 'LAK' => 'Kip', 'LBP' => 'Libanesisches Pfund', 'LKR' => 'Sri Lanka Rupie',
-            'LRD' => 'Liberianischer Dollar', 'LSL' => 'Loti', 'LSM' => 'Maloti', 'LTL' => 'Litauischer Litas',
+            'LRD' => 'Liberianischer Dollar', 'LSL' => 'Loti', 'LTL' => 'Litauischer Litas',
             'LTT' => 'Litauischer Talonas', 'LUC' => 'Luxemburgischer Franc (konvertibel)',
             'LUF' => 'Luxemburgischer Franc', 'LUL' => 'Luxemburgischer Finanz-Franc',
             'LVL' => 'Lettischer Lats', 'LVR' => 'Lettischer Rubel', 'LYD' => 'Libyscher Dinar',
             'MAD' => 'Marokkanischer Dirham', 'MAF' => 'Marokkanischer Franc', 'MDL' => 'Moldau Leu',
-            'MGA' => 'Madagaskar Ariary', 'MGF' => 'Madagaskar Franc', 'MKD' => 'Denar',
+            'MGA' => 'Madagaskar Ariary', 'MGF' => 'Madagaskar-Franc', 'MKD' => 'Denar',
             'MLF' => 'Malischer Franc', 'MMK' => 'Kyat', 'MNT' => 'Tugrik', 'MOP' => 'Pataca',
             'MRO' => 'Ouguiya', 'MTL' => 'Maltesische Lira', 'MTP' => 'Maltesisches Pfund',
-            'MUR' => 'Mauritius Rupie', 'MVR' => 'Rufiyaa', 'MWK' => 'Malawi Kwacha',
+            'MUR' => 'Mauritius-Rupie', 'MVR' => 'Rufiyaa', 'MWK' => 'Malawi Kwacha',
             'MXN' => 'Mexikanischer Peso', 'MXP' => 'Mexikanischer Silber-Peso (1861-1992)',
             'MXV' => 'Mexican Unidad de Inversion (UDI)', 'MYR' => 'Malaysischer Ringgit',
             'MZE' => 'Mosambikanischer Escudo', 'MZM' => 'Alter Metical', 'MZN' => 'Metical',
-            'NAD' => 'Namibia Dollar', 'NGN' => 'Naira', 'NIC' => 'Cordoba', 'NIO' => 'Gold-Cordoba',
+            'NAD' => 'Namibia-Dollar', 'NGN' => 'Naira', 'NIC' => 'Cordoba', 'NIO' => 'Gold-Cordoba',
             'NLG' => 'Holländischer Gulden', 'NOK' => 'Norwegische Krone', 'NPR' => 'Nepalesische Rupie',
             'NZD' => 'Neuseeland-Dollar', 'OMR' => 'Rial Omani', 'PAB' => 'Balboa',
             'PEI' => 'Peruanischer Inti', 'PEN' => 'Neuer Sol', 'PES' => 'Sol', 'PGK' => 'Kina',
@@ -865,32 +859,32 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
             'PLZ' => 'Zloty (1950-1995)', 'PTE' => 'Portugiesischer Escudo', 'PYG' => 'Guarani',
             'QAR' => 'Katar Riyal', 'RHD' => 'Rhodesischer Dollar', 'ROL' => 'Leu', 'RON' => 'Rumänischer Leu',
             'RSD' => 'Serbischer Dinar', 'RUB' => 'Russischer Rubel (neu)', 'RUR' => 'Russischer Rubel (alt)',
-            'RWF' => 'Ruanda Franc', 'SAR' => 'Saudi Riyal', 'SBD' => 'Salomonen Dollar',
-            'SCR' => 'Seychellen Rupie', 'SDD' => 'Sudanesischer Dinar', 'SDG' => 'Sudanesisches Pfund', 'SDP' => 'Sudanesisches Pfund (alt)',
+            'RWF' => 'Ruanda-Franc', 'SAR' => 'Saudi Riyal', 'SBD' => 'Salomonen-Dollar',
+            'SCR' => 'Seychellen-Rupie', 'SDD' => 'Sudanesischer Dinar', 'SDG' => 'Sudanesisches Pfund', 'SDP' => 'Sudanesisches Pfund (alt)',
             'SEK' => 'Schwedische Krone', 'SGD' => 'Singapur-Dollar', 'SHP' => 'St. Helena Pfund',
-            'SIT' => 'Tolar', 'SKK' => 'Slowakische Krone', 'SLL' => 'Leone', 'SOS' => 'Somalia Schilling',
+            'SIT' => 'Tolar', 'SKK' => 'Slowakische Krone', 'SLL' => 'Leone', 'SOS' => 'Somalia-Schilling',
             'SRD' => 'Surinamischer Dollar', 'SRG' => 'Suriname Gulden', 'STD' => 'Dobra',
             'SUR' => 'Sowjetischer Rubel', 'SVC' => 'El Salvador Colon', 'SYP' => 'Syrisches Pfund',
             'SZL' => 'Lilangeni', 'THB' => 'Baht', 'TJR' => 'Tadschikistan Rubel',
             'TJS' => 'Tadschikistan Somoni', 'TMM' => 'Turkmenistan-Manat', 'TND' => 'Tunesischer Dinar',
-            'TOP' => 'Paʻanga', 'TPE' => 'Timor Escudo', 'TRL' => 'Türkische Lira',
-            'TRY' => 'Neue Türkische Lira', 'TTD' => 'Trinidad und Tobago Dollar',
-            'TWD' => 'Neuer Taiwan Dollar', 'TZS' => 'Tansania Schilling', 'UAH' => 'Hryvnia',
-            'UAK' => 'Ukrainischer Karbovanetz', 'UGS' => 'Uganda Schilling (1966-1987)',
-            'UGX' => 'Uganda Schilling', 'USD' => 'US-Dollar', 'USN' => 'US Dollar (Nächster Tag)',
-            'USS' => 'US Dollar (Gleicher Tag)', 'UYP' => 'Uruguayischer Neuer Peso (1975-1993)',
+            'TOP' => 'Paʻanga', 'TPE' => 'Timor-Escudo', 'TRL' => 'Alte Türkische Lira',
+            'TRY' => 'Türkische Lira', 'TTD' => 'Trinidad- und Tobago-Dollar',
+            'TWD' => 'Neuer Taiwan-Dollar', 'TZS' => 'Tansania-Schilling', 'UAH' => 'Hryvnia',
+            'UAK' => 'Ukrainischer Karbovanetz', 'UGS' => 'Uganda-Schilling (1966-1987)',
+            'UGX' => 'Uganda-Schilling', 'USD' => 'US-Dollar', 'USN' => 'US Dollar (Nächster Tag)',
+            'USS' => 'US Dollar (Gleicher Tag)', 'UYI' => 'UYU', 'UYP' => 'Uruguayischer Neuer Peso (1975-1993)',
             'UYU' => 'Uruguayischer Peso', 'UZS' => 'Usbekistan Sum', 'VEB' => 'Bolivar', 'VEF' => 'Bolívar Fuerte', 'VND' => 'Dong',
-            'VUV' => 'Vatu', 'WST' => 'Tala', 'XAF' => 'CFA Franc (Äquatorial)', 'XAG' => 'Silber',
-            'XAU' => 'Gold', 'XBA' => 'Europäische Rechnungseinheit',
+            'VUV' => 'Vatu', 'WST' => 'Tala', 'XAF' => 'CFA Franc (Äquatorial)', 'XAG' => 'Unze Silber',
+            'XAU' => 'Unze Gold', 'XBA' => 'Europäische Rechnungseinheit',
             'XBB' => 'Europäische Währungseinheit (XBB)', 'XBC' => 'Europäische Rechnungseinheit (XBC)',
             'XBD' => 'Europäische Rechnungseinheit (XBD)', 'XCD' => 'Ostkaribischer Dollar',
             'XDR' => 'Sonderziehungsrechte', 'XEU' => 'Europäische Währungseinheit (XEU)',
             'XFO' => 'Französischer Gold-Franc', 'XFU' => 'Französischer UIC-Franc',
-            'XOF' => 'CFA Franc (West)', 'XPD' => 'Palladium', 'XPF' => 'CFP Franc', 'XPT' => 'Platin',
-            'XRE' => 'RINET Funds', 'XTS' => 'Testwährung', 'XXX' => 'Unbekannte Währung', 'YDD' => 'Jemen Dinar',
-            'YER' => 'Jemen Rial', 'YUD' => 'Jugoslawischer Dinar (1966-1990)', 'YUM' => 'Neuer Dinar',
-            'YUN' => 'Jugoslawischer Dinar (konvertibel)', 'ZAR' => 'Rand', 'ZMK' => 'Kwacha',
-            'ZRN' => 'Neuer Zaire', 'ZRZ' => 'Zaire', 'ZWD' => 'Simbabwe Dollar');
+            'XOF' => 'CFA Franc (West)', 'XPD' => 'Unze Palladium', 'XPF' => 'CFP Franc', 'XPT' => 'Unze Platin',
+            'XRE' => 'RINET Funds', 'XTS' => 'Testwährung', 'XXX' => 'Unbekannte Währung', 'YDD' => 'Jemen-Dinar',
+            'YER' => 'Jemen-Rial', 'YUD' => 'Jugoslawischer Dinar (1966-1990)', 'YUM' => 'Neuer Dinar',
+            'YUN' => 'Jugoslawischer Dinar (konvertibel)', 'ZAL' => 'Südafrikanischer Rand (Finanz)',
+            'ZAR' => 'Südafrikanischer Rand', 'ZMK' => 'Kwacha', 'ZRN' => 'Neuer Zaire', 'ZRZ' => 'Zaire', 'ZWD' => 'Simbabwe-Dollar');
         $this->assertEquals($result, $value);
 
         $value = Zend_Locale_Data::getContent('de_AT', 'nametocurrency', 'USD');
@@ -909,7 +903,7 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
             'Kwanza' => 'AOA', 'Angolanischer Kwanza (1977-1990)' => 'AOK', 'Neuer Kwanza' => 'AON',
             'Kwanza Reajustado' => 'AOR', 'Argentinischer Austral' => 'ARA', 'Argentinischer Peso (1983-1985)' => 'ARP',
             'Argentinischer Peso' => 'ARS', 'Österreichischer Schilling' => 'ATS', 'Australischer Dollar' => 'AUD',
-            'Aruba Florin' => 'AWG', 'Aserbeidschan Manat' => 'AZM', 'Aserbaidschan-Manat' => 'AZN',
+            'Aruba Florin' => 'AWG', 'Aserbaidschan-Manat (1993-2006)' => 'AZM', 'Aserbaidschan-Manat' => 'AZN',
             'Bosnien und Herzegowina Dinar' => 'BAD', 'Konvertierbare Mark' => 'BAM', 'Barbados-Dollar' => 'BBD',
             'Taka' => 'BDT', 'Belgischer Franc (konvertibel)' => 'BEC', 'Belgischer Franc' => 'BEF',
             'Belgischer Finanz-Franc' => 'BEL', 'Lew (1962-1999)' => 'BGL', 'Lew' => 'BGN', 'Bahrain-Dinar' => 'BHD',
@@ -922,64 +916,65 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
             'WIR-Euro' => 'CHE', 'Schweizer Franken' => 'CHF', 'WIR Franken' => 'CHW', 'Unidades de Fomento' => 'CLF',
             'Chilenischer Peso' => 'CLP', 'Renminbi Yuan' => 'CNY', 'Kolumbianischer Peso' => 'COP', 'Unidad de Valor Real' => 'COU',
             'Costa Rica Colon' => 'CRC', 'Alter Serbischer Dinar' => 'CSD', 'Tschechoslowakische Krone' => 'CSK',
-            'Kubanischer Peso' => 'CUP', 'Kap Verde Escudo' => 'CVE', 'Zypern Pfund' => 'CYP', 'Tschechische Krone' => 'CZK',
+            'Kubanischer Peso' => 'CUP', 'Kap Verde Escudo' => 'CVE', 'Zypern-Pfund' => 'CYP', 'Tschechische Krone' => 'CZK',
             'Mark der DDR' => 'DDM', 'Deutsche Mark' => 'DEM', 'Dschibuti-Franc' => 'DJF', 'Dänische Krone' => 'DKK',
             'Dominikanischer Peso' => 'DOP', 'Algerischer Dinar' => 'DZD', 'Ecuadorianischer Sucre' => 'ECS',
             'Verrechnungseinheit für EC' => 'ECV', 'Estnische Krone' => 'EEK', 'Ägyptisches Pfund' => 'EGP',
-            'Ekwele' => 'EQE', 'Nakfa' => 'ERN', 'Spanische Peseta (A-Konten)' => 'ESA', 'Spanische Peseta (konvertibel)' => 'ESB',
-            'Spanische Pesete' => 'ESP', 'Birr' => 'ETB', 'Euro' => 'EUR', 'Finnische Mark' => 'FIM',
-            'Fidschi Dollar' => 'FJD', 'Falkland Pfund' => 'FKP', 'Französischer Franc' => 'FRF', 'Pfund Sterling' => 'GBP',
-            'Georgischer Kupon Larit' => 'GEK', 'Georgischer Lari' => 'GEL', 'Cedi' => 'GHC', 'Gibraltar Pfund' => 'GIP',
-            'Dalasi' => 'GMD', 'Guinea Franc' => 'GNF', 'Guineischer Syli' => 'GNS', 'Äquatorialguinea Ekwele Guineana' => 'GQE',
+            'Ekwele' => 'GQE', 'Nakfa' => 'ERN', 'Spanische Peseta (A-Konten)' => 'ESA', 'Spanische Peseta (konvertibel)' => 'ESB',
+            'Spanische Peseta' => 'ESP', 'Birr' => 'ETB', 'Euro' => 'EUR', 'Finnische Mark' => 'FIM',
+            'Fidschi-Dollar' => 'FJD', 'Falkland-Pfund' => 'FKP', 'Französischer Franc' => 'FRF', 'Pfund Sterling' => 'GBP',
+            'Georgischer Kupon Larit' => 'GEK', 'Georgischer Lari' => 'GEL', 'Cedi' => 'GHC', 'Gibraltar-Pfund' => 'GIP',
+            'Dalasi' => 'GMD', 'Guinea-Franc' => 'GNF', 'Guineischer Syli' => 'GNS',
             'Griechische Drachme' => 'GRD', 'Quetzal' => 'GTQ', 'Portugiesisch Guinea Escudo' => 'GWE',
-            'Guinea Bissau Peso' => 'GWP', 'Guyana Dollar' => 'GYD', 'Hongkong-Dollar' => 'HKD', 'Lempira' => 'HNL',
+            'Guinea Bissau Peso' => 'GWP', 'Guyana-Dollar' => 'GYD', 'Hongkong-Dollar' => 'HKD', 'Lempira' => 'HNL',
             'Kroatischer Dinar' => 'HRD', 'Kuna' => 'HRK', 'Gourde' => 'HTG', 'Forint' => 'HUF', 'Rupiah' => 'IDR',
             'Irisches Pfund' => 'IEP', 'Israelisches Pfund' => 'ILP', 'Schekel' => 'ILS', 'Indische Rupie' => 'INR',
-            'Irak Dinar' => 'IQD', 'Rial' => 'IRR', 'Isländische Krone' => 'ISK', 'Italienische Lire' => 'ITL',
-            'Jamaika Dollar' => 'JMD', 'Jordanischer Dinar' => 'JOD', 'Yen' => 'JPY', 'Kenia Schilling' => 'KES',
+            'Irak Dinar' => 'IQD', 'Rial' => 'IRR', 'Isländische Krone' => 'ISK', 'Italienische Lira' => 'ITL',
+            'Jamaika-Dollar' => 'JMD', 'Jordanischer Dinar' => 'JOD', 'Yen' => 'JPY', 'Kenia-Schilling' => 'KES',
             'Som' => 'KGS', 'Riel' => 'KHR', 'Komoren Franc' => 'KMF', 'Nordkoreanischer Won' => 'KPW',
             'Südkoreanischer Won' => 'KRW', 'Kuwait Dinar' => 'KWD', 'Kaiman-Dollar' => 'KYD', 'Tenge' => 'KZT',
             'Kip' => 'LAK', 'Libanesisches Pfund' => 'LBP', 'Sri Lanka Rupie' => 'LKR', 'Liberianischer Dollar' => 'LRD',
-            'Loti' => 'LSL', 'Maloti' => 'LSM', 'Litauischer Litas' => 'LTL', 'Litauischer Talonas' => 'LTT',
+            'Loti' => 'LSL', 'Litauischer Litas' => 'LTL', 'Litauischer Talonas' => 'LTT',
             'Luxemburgischer Franc (konvertibel)' => 'LUC', 'Luxemburgischer Franc' => 'LUF', 'Luxemburgischer Finanz-Franc' => 'LUL',
             'Lettischer Lats' => 'LVL', 'Lettischer Rubel' => 'LVR', 'Libyscher Dinar' => 'LYD', 'Marokkanischer Dirham' => 'MAD',
-            'Marokkanischer Franc' => 'MAF', 'Moldau Leu' => 'MDL', 'Madagaskar Ariary' => 'MGA', 'Madagaskar Franc' => 'MGF',
+            'Marokkanischer Franc' => 'MAF', 'Moldau Leu' => 'MDL', 'Madagaskar Ariary' => 'MGA', 'Madagaskar-Franc' => 'MGF',
             'Denar' => 'MKD', 'Malischer Franc' => 'MLF', 'Kyat' => 'MMK', 'Tugrik' => 'MNT', 'Pataca' => 'MOP',
-            'Ouguiya' => 'MRO', 'Maltesische Lira' => 'MTL', 'Maltesisches Pfund' => 'MTP', 'Mauritius Rupie' => 'MUR',
+            'Ouguiya' => 'MRO', 'Maltesische Lira' => 'MTL', 'Maltesisches Pfund' => 'MTP', 'Mauritius-Rupie' => 'MUR',
             'Rufiyaa' => 'MVR', 'Malawi Kwacha' => 'MWK', 'Mexikanischer Peso' => 'MXN', 'Mexikanischer Silber-Peso (1861-1992)' => 'MXP',
             'Mexican Unidad de Inversion (UDI)' => 'MXV', 'Malaysischer Ringgit' => 'MYR', 'Mosambikanischer Escudo' => 'MZE',
-            'Alter Metical' => 'MZM', 'Metical' => 'MZN', 'Namibia Dollar' => 'NAD', 'Naira' => 'NGN', 'Cordoba' => 'NIC',
+            'Alter Metical' => 'MZM', 'Metical' => 'MZN', 'Namibia-Dollar' => 'NAD', 'Naira' => 'NGN', 'Cordoba' => 'NIC',
             'Gold-Cordoba' => 'NIO', 'Holländischer Gulden' => 'NLG', 'Norwegische Krone' => 'NOK', 'Nepalesische Rupie' => 'NPR',
             'Neuseeland-Dollar' => 'NZD', 'Rial Omani' => 'OMR', 'Balboa' => 'PAB', 'Peruanischer Inti' => 'PEI',
             'Neuer Sol' => 'PEN', 'Sol' => 'PES', 'Kina' => 'PGK', 'Philippinischer Peso' => 'PHP', 'Pakistanische Rupie' => 'PKR',
             'Zloty' => 'PLN', 'Zloty (1950-1995)' => 'PLZ', 'Portugiesischer Escudo' => 'PTE', 'Guarani' => 'PYG',
             'Katar Riyal' => 'QAR', 'Rhodesischer Dollar' => 'RHD', 'Leu' => 'ROL', 'Rumänischer Leu' => 'RON',
             'Serbischer Dinar' => 'RSD', 'Russischer Rubel (neu)' => 'RUB', 'Russischer Rubel (alt)' => 'RUR',
-            'Ruanda Franc' => 'RWF', 'Saudi Riyal' => 'SAR', 'Salomonen Dollar' => 'SBD', 'Seychellen Rupie' => 'SCR',
+            'Ruanda-Franc' => 'RWF', 'Saudi Riyal' => 'SAR', 'Salomonen-Dollar' => 'SBD', 'Seychellen-Rupie' => 'SCR',
             'Sudanesischer Dinar' => 'SDD', 'Sudanesisches Pfund' => 'SDG', 'Schwedische Krone' => 'SEK',
             'Singapur-Dollar' => 'SGD', 'St. Helena Pfund' => 'SHP', 'Tolar' => 'SIT', 'Slowakische Krone' => 'SKK',
-            'Leone' => 'SLL', 'Somalia Schilling' => 'SOS', 'Surinamischer Dollar' => 'SRD', 'Suriname Gulden' => 'SRG',
+            'Leone' => 'SLL', 'Somalia-Schilling' => 'SOS', 'Surinamischer Dollar' => 'SRD', 'Suriname Gulden' => 'SRG',
             'Dobra' => 'STD', 'Sowjetischer Rubel' => 'SUR', 'El Salvador Colon' => 'SVC', 'Syrisches Pfund' => 'SYP',
             'Lilangeni' => 'SZL', 'Baht' => 'THB', 'Tadschikistan Rubel' => 'TJR', 'Tadschikistan Somoni' => 'TJS',
-            'Turkmenistan-Manat' => 'TMM', 'Tunesischer Dinar' => 'TND', 'Paʻanga' => 'TOP', 'Timor Escudo' => 'TPE',
-            'Türkische Lira' => 'TRL', 'Neue Türkische Lira' => 'TRY', 'Trinidad und Tobago Dollar' => 'TTD',
-            'Neuer Taiwan Dollar' => 'TWD', 'Tansania Schilling' => 'TZS', 'Hryvnia' => 'UAH', 'Ukrainischer Karbovanetz' => 'UAK',
-            'Uganda Schilling (1966-1987)' => 'UGS', 'Uganda Schilling' => 'UGX', 'US-Dollar' => 'USD',
+            'Turkmenistan-Manat' => 'TMM', 'Tunesischer Dinar' => 'TND', 'Paʻanga' => 'TOP', 'Timor-Escudo' => 'TPE',
+            'Alte Türkische Lira' => 'TRL', 'Türkische Lira' => 'TRY', 'Trinidad- und Tobago-Dollar' => 'TTD',
+            'Neuer Taiwan-Dollar' => 'TWD', 'Tansania-Schilling' => 'TZS', 'Hryvnia' => 'UAH', 'Ukrainischer Karbovanetz' => 'UAK',
+            'Uganda-Schilling (1966-1987)' => 'UGS', 'Uganda-Schilling' => 'UGX', 'US-Dollar' => 'USD',
             'US Dollar (Nächster Tag)' => 'USN', 'US Dollar (Gleicher Tag)' => 'USS', 'Uruguayischer Neuer Peso (1975-1993)' => 'UYP',
             'Uruguayischer Peso' => 'UYU', 'Usbekistan Sum' => 'UZS', 'Bolivar' => 'VEB', 'Dong' => 'VND', 'Vatu' => 'VUV',
-            'Tala' => 'WST', 'CFA Franc (Äquatorial)' => 'XAF', 'Silber' => 'XAG', 'Gold' => 'XAU',
+            'Tala' => 'WST', 'CFA Franc (Äquatorial)' => 'XAF', 'Unze Silber' => 'XAG', 'Unze Gold' => 'XAU',
             'Europäische Rechnungseinheit' => 'XBA', 'Europäische Währungseinheit (XBB)' => 'XBB',
             'Europäische Rechnungseinheit (XBC)' => 'XBC', 'Europäische Rechnungseinheit (XBD)' => 'XBD',
             'Ostkaribischer Dollar' => 'XCD', 'Sonderziehungsrechte' => 'XDR', 'Europäische Währungseinheit (XEU)' => 'XEU',
             'Französischer Gold-Franc' => 'XFO', 'Französischer UIC-Franc' => 'XFU', 'CFA Franc (West)' => 'XOF',
-            'Palladium' => 'XPD', 'CFP Franc' => 'XPF', 'Platin' => 'XPT', 'RINET Funds' => 'XRE',
-            'Testwährung' => 'XTS', 'Unbekannte Währung' => 'XXX', 'Jemen Dinar' => 'YDD', 'Jemen Rial' => 'YER',
+            'Unze Palladium' => 'XPD', 'CFP Franc' => 'XPF', 'Unze Platin' => 'XPT', 'RINET Funds' => 'XRE',
+            'Testwährung' => 'XTS', 'Unbekannte Währung' => 'XXX', 'Jemen-Dinar' => 'YDD', 'Jemen-Rial' => 'YER',
             'Jugoslawischer Dinar (1966-1990)' => 'YUD', 'Neuer Dinar' => 'YUM', 'Jugoslawischer Dinar (konvertibel)' => 'YUN',
-            'Rand' => 'ZAR', 'Kwacha' => 'ZMK', 'Neuer Zaire' => 'ZRN', 'Zaire' => 'ZRZ', 'Simbabwe Dollar' => 'ZWD',
-            'Ghanaische Cedi' => 'GHS', 'Sudanesisches Pfund (alt)' => 'SDP', 'Bolívar Fuerte' => 'VEF');
+            'Südafrikanischer Rand' => 'ZAR', 'Kwacha' => 'ZMK', 'Neuer Zaire' => 'ZRN', 'Zaire' => 'ZRZ', 'Simbabwe-Dollar' => 'ZWD',
+            'Ghanaische Cedi' => 'GHS', 'Sudanesisches Pfund (alt)' => 'SDP', 'Bolívar Fuerte' => 'VEF',
+            'Südafrikanischer Rand (Finanz)' => 'ZAL', 'UYU' => 'UYI');
         $this->assertEquals($result, $value);
 
-        $value = Zend_Locale_Data::getContent('de_AT', 'currencytoname', 'Platin');
+        $value = Zend_Locale_Data::getContent('de_AT', 'currencytoname', 'Unze Platin');
         $this->assertEquals("XPT", $value);
     }
 
@@ -991,24 +986,40 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
     {
         $value = Zend_Locale_Data::getList('de_AT', 'currencysymbol');
         $result = array(
-            'AFN' => 'Af', 'ARS' => 'Arg$', 'ATS' => 'öS',
-            'AUD' => '$A', 'BAM' => 'KM', 'BBD' => 'BDS$', 'BDT' => 'Tk', 'BEF' => 'BF', 'BGL' => 'lev',
-            'BHD' => 'BD', 'BIF' => 'Fbu', 'BMD' => 'Ber$', 'BOB' => 'Bs', 'BRL' => 'R$', 'BTN' => 'Nu',
-            'BYR' => 'Rbl', 'BZD' => 'BZ$', 'CAD' => 'Can$', 'CHF' => 'SFr.', 'CLP' => 'Ch$', 'CNY' => 'Y',
-            'COP' => 'Col$', 'CRC' => 'C', 'CVE' => 'CVEsc', 'CYP' => '£C', 'DEM' => 'DM', 'DJF' => 'DF',
-            'DZD' => 'DA', 'ESP' => '₧', 'ETB' => 'Br', 'EUR' => '€', 'FJD' => 'F$', 'FRF' => 'FF',
-            'GBP' => '£', 'GEL' => 'lari', 'GNF' => 'GF', 'GYD' => 'G$', 'HNL' => 'L',
-            'HUF' => 'Ft', 'IDR' => 'Rp', 'IEP' => 'IR£', 'INR' => '0≤Rs.|1≤Re.|1<Rs.', 'IQD' => 'ID',
-            'IRR' => 'RI', 'ITL' => '₤', 'JMD' => 'J$', 'JOD' => 'JD', 'JPY' => '¥', 'KES' => 'K Sh',
-            'KGS' => 'som', 'KHR' => 'CR', 'KMF' => 'CF', 'KWD' => 'KD', 'KZT' => 'T', 'LBP' => 'LL',
-            'LKR' => 'SL Re', 'LSL' => 'M', 'LYD' => 'LD', 'MKD' => 'MDen', 'MNT' => 'Tug', 'MRO' => 'UM',
-            'MTL' => 'Lm', 'MWK' => 'MK', 'MXN' => 'MEX$', 'MYR' => 'RM', 'MZM' => 'Mt', 'MZN' => 'MTn',
-            'NAD' => 'N$', 'NOK' => 'NKr', 'NPR' => 'Nrs', 'NZD' => '$NZ', 'OMR' => 'RO', 'PHP' => 'Php',
-            'PKR' => 'Pra', 'PLN' => 'Zl', 'QAR' => 'QR', 'SAR' => 'SRl',
-            'SBD' => 'SI$', 'SCR' => 'SR', 'SGD' => 'S$', 'SKK' => 'Sk',
-            'SRG' => 'Sf', 'STD' => 'Db', 'SYP' => 'LS', 'SZL' => 'E', 'TOP' => 'T$', 'TRL' => 'TL',
-            'TTD' => 'TT$', 'TWD' => 'NT$', 'TZS' => 'T Sh', 'UGX' => 'U Sh', 'USD' => '$', 'UYU' => 'Ur$',
-            'VEB' => 'Be', 'XCD' => 'EC$', 'YER' => 'YRl', 'ZAR' => 'R', 'ZWD' => 'Z$');
+            'AFN' => 'Af', 'ARS' => 'AR$', 'ATS' => 'öS',
+            'AUD' => 'AU$', 'BAM' => 'KM', 'BBD' => 'Bds$', 'BDT' => 'Tk', 'BEF' => 'BF',
+            'BHD' => 'BD', 'BIF' => 'FBu', 'BMD' => 'BD$', 'BOB' => 'Bs', 'BRL' => 'R$', 'BTN' => 'Nu.',
+            'BZD' => 'BZ$', 'CAD' => 'CA$', 'CHF' => 'Fr.', 'CLP' => 'CL$', 'CNY' => 'CN¥',
+            'COP' => 'CO$', 'CRC' => '₡', 'CVE' => 'CV$', 'CYP' => 'CY£', 'DEM' => 'DM', 'DJF' => 'Fdj',
+            'DZD' => 'DA', 'ESP' => 'Pts', 'ETB' => 'Br', 'EUR' => '€', 'FJD' => 'FJ$', 'FRF' => '₣',
+            'GBP' => '£', 'GNF' => 'FG', 'GYD' => 'GY$', 'HNL' => 'HNL',
+            'HUF' => 'Ft', 'IDR' => 'Rp', 'IEP' => 'IR£', 'INR' => '₨',
+            'ITL' => '₤', 'JMD' => 'J$', 'JOD' => 'JD', 'JPY' => '¥', 'KES' => 'Ksh',
+            'KMF' => 'CF', 'KWD' => 'KD', 'LBP' => 'LB£',
+            'LKR' => 'SLRs', 'LSL' => 'LSL', 'LYD' => 'LD', 'MNT' => '₮', 'MRO' => 'UM',
+            'MTL' => 'Lm', 'MWK' => 'MK', 'MYR' => 'RM', 'MZM' => 'Mt', 'MZN' => 'MTn',
+            'NAD' => 'N$', 'NOK' => 'Nkr', 'NPR' => 'NPRs', 'NZD' => 'NZ$', 'PHP' => '₱',
+            'PKR' => 'PKRs', 'PLN' => 'zł', 'QAR' => 'QR', 'SAR' => 'SR',
+            'SBD' => 'SI$', 'SCR' => 'SRe', 'SGD' => 'S$', 'SKK' => 'Sk',
+            'SRG' => 'Sf', 'STD' => 'Db', 'SYP' => 'SY£', 'SZL' => 'SZL', 'TOP' => 'T$', 'TRL' => 'TRL',
+            'TTD' => 'TT$', 'TWD' => 'NT$', 'TZS' => 'TSh', 'UGX' => 'USh', 'USD' => '$', 'UYU' => '$U',
+            'VEB' => 'Bs.', 'XCD' => 'EC$', 'YER' => 'YR', 'ZAR' => 'R', 'ZWD' => 'Z$', 'CUC' => 'CUC$',
+            'ARM' => 'm$n', 'ARL' => '$L', 'ZRN' => 'NZ', 'ZRZ' => 'ZRZ', 'ZMK' => 'ZK', 'XPF' => 'CFPF',
+            'XOF' => 'CFA', 'TMM' => 'TMM', 'SDD' => 'LSd', 'SEK' => 'Skr', 'SLL' => 'Le', 'SOS' => 'Ssh',
+            'SRD' => 'SR$', 'TND' => 'DT', 'TRY' => 'TL', 'VEF' => 'Bs.F.', 'VUV' => 'VT', 'XAF' => 'FCFA',
+            'WST' => 'WS$', 'RWF' => 'RF', 'PAB' => 'B/.', 'PEI' => 'I/.', 'PEN' => 'S/.', 'PGK' => 'PGK',
+            'PTE' => 'Esc', 'RHD' => 'RH$', 'RON' => 'RON', 'RSD' => 'din.', 'LVL' => 'Ls', 'MMK' => 'MMK',
+            'MOP' => 'MOP$', 'MUR' => 'MURs', 'MVR' => 'Rf', 'MXP' => 'MX$', 'NIO' => 'C$', 'NLG' => 'fl',
+            'CLE' => 'Eº', 'BRZ' => '₢', 'VND' => '₫', 'UAH' =>'₴', 'THB' => '฿', 'SVC' => 'SV₡',
+            'SHP' => 'SH£', 'PYG' => '₲', 'NGN' => '₦', 'MTP' => 'MT£', 'LTL' => 'Lt', 'LRD' => 'L$',
+            'LAK' => '₭', 'KYD' => 'KY$', 'KRW' => '₩', 'KPW' => 'KP₩', 'ISK' => 'Ikr', 'ILS' => '₪',
+            'ILP' => 'I£', 'HTG' => 'HTG', 'HRK' => 'kn', 'HKD' => 'HK$', 'GTQ' => 'GTQ', 'GRD' => '₯',
+            'GMD' => 'GMD', 'GIP' => 'GI£', 'GHS' => 'GH₵', 'GHC' => '₵', 'FKP' => 'FK£', 'FIM' => 'mk',
+            'ERN' => 'Nfk', 'EGP' => 'EG£', 'EEK' => 'Ekr', 'DOP' => 'RD$', 'DKK' => 'Dkr', 'CZK' => 'Kč',
+            'CUP' => 'CU$', 'CDF' => 'CDF', 'BWP' => 'BWP', 'BSD' => 'BS$', 'BRR' => 'CR$', 'BRN' => 'NCz$',
+            'BRE' => 'Cr$', 'BRC' => 'Cz$', 'BRB' => 'NCr', 'BOP' => '$b.', 'BND' => 'BN$', 'AZN' => 'man.',
+            'AWG' => 'Afl.', 'ARA' => '₳', 'AOA' => 'Kz', 'ANG' => 'NAf.', 'ALL' => 'ALL'
+        );
         $this->assertEquals($result, $value);
 
         $value = Zend_Locale_Data::getContent('de_AT', 'currencysymbol', 'USD');
@@ -1043,7 +1054,7 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
             'LAK' => '0', 'LBP' => '0', 'LUF' => '0', 'LYD' => '3', 'MGA' => '0', 'MGF' => '0', 'MMK' => '0',
             'MNT' => '0', 'MRO' => '0', 'MUR' => '0', 'OMR' => '3', 'PKR' => '0', 'PYG' => '0', 'RSD' => '0',
             'RWF' => '0', 'SLL' => '0', 'SOS' => '0', 'STD' => '0', 'SYP' => '0', 'TMM' => '0', 'TND' => '3',
-            'TRL' => '0', 'TWD' => '0', 'TZS' => '0', 'UGX' => '0', 'UZS' => '0', 'VND' => '0', 'VUV' => '0',
+            'TRL' => '0', 'TZS' => '0', 'UGX' => '0', 'UZS' => '0', 'VND' => '0', 'VUV' => '0',
             'XAF' => '0', 'XOF' => '0', 'XPF' => '0', 'YER' => '0', 'ZMK' => '0', 'ZWD' => '0'), $value);
 
         $value = Zend_Locale_Data::getContent('de_AT', 'currencyfraction');
@@ -1068,7 +1079,7 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
             'LAK' => '0', 'LBP' => '0', 'LUF' => '0', 'LYD' => '0', 'MGA' => '0', 'MGF' => '0', 'MMK' => '0',
             'MNT' => '0', 'MRO' => '0', 'MUR' => '0', 'OMR' => '0', 'PKR' => '0', 'PYG' => '0', 'RSD' => '0',
             'RWF' => '0', 'SLL' => '0', 'SOS' => '0', 'STD' => '0', 'SYP' => '0', 'TMM' => '0', 'TND' => '0',
-            'TRL' => '0', 'TWD' => '0', 'TZS' => '0', 'UGX' => '0', 'UZS' => '0', 'VND' => '0', 'VUV' => '0',
+            'TRL' => '0', 'TZS' => '0', 'UGX' => '0', 'UZS' => '0', 'VND' => '0', 'VUV' => '0',
             'XAF' => '0', 'XOF' => '0', 'XPF' => '0', 'YER' => '0', 'ZMK' => '0', 'ZWD' => '0'), $value);
 
         $value = Zend_Locale_Data::getContent('de_AT', 'currencyrounding');
@@ -1090,10 +1101,10 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
             'AS' => 'USD', 'AT' => 'EUR', 'AU' => 'AUD', 'AW' => 'AWG', 'AX' => 'EUR', 'AZ' => 'AZN',
             'BA' => 'BAM', 'BB' => 'BBD', 'BD' => 'BDT', 'BE' => 'EUR', 'BF' => 'XOF', 'BG' => 'BGN',
             'BH' => 'BHD', 'BI' => 'BIF', 'BJ' => 'XOF', 'BM' => 'BMD', 'BN' => 'BND', 'BO' => 'BOB',
-            'BR' => 'BRL', 'BS' => 'BSD', 'BT' => 'INR', 'BV' => 'NOK', 'BW' => 'BWP', 'BY' => 'BYR',
+            'BR' => 'BRL', 'BS' => 'BSD', 'BT' => 'BTN', 'BV' => 'NOK', 'BW' => 'BWP', 'BY' => 'BYR',
             'BZ' => 'BZD', 'CA' => 'CAD', 'CC' => 'AUD', 'CD' => 'CDF', 'CF' => 'XAF', 'CG' => 'XAF',
             'CH' => 'CHF', 'CI' => 'XOF', 'CK' => 'NZD', 'CL' => 'CLP', 'CM' => 'XAF', 'CN' => 'CNY',
-            'CO' => 'COP', 'CR' => 'CRC', 'CS' => 'CSD', 'CU' => 'CUP', 'CV' => 'CVE', 'CX' => 'AUD',
+            'CO' => 'COP', 'CR' => 'CRC', 'CS' => 'CSD', 'CU' => 'CUC', 'CV' => 'CVE', 'CX' => 'AUD',
             'CY' => 'EUR', 'CZ' => 'CZK', 'DE' => 'EUR', 'DJ' => 'DJF', 'DK' => 'DKK', 'DM' => 'XCD',
             'DO' => 'DOP', 'DZ' => 'DZD', 'EC' => 'USD', 'EE' => 'EEK', 'EG' => 'EGP', 'EH' => 'MAD',
             'ER' => 'ERN', 'ES' => 'EUR', 'ET' => 'ETB', 'FI' => 'EUR', 'FJ' => 'FJD', 'FK' => 'FKP',
@@ -1111,23 +1122,23 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
             'MD' => 'MDL', 'ME' => 'EUR', 'MG' => 'MGA', 'MH' => 'USD', 'MK' => 'MKD', 'ML' => 'XOF',
             'MM' => 'MMK', 'MN' => 'MNT', 'MO' => 'MOP', 'MP' => 'USD', 'MQ' => 'EUR', 'MR' => 'MRO',
             'MS' => 'XCD', 'MT' => 'EUR', 'MU' => 'MUR', 'MV' => 'MVR', 'MW' => 'MWK', 'MX' => 'MXN',
-            'MY' => 'MYR', 'MZ' => 'MZN', 'NA' => 'ZAR', 'NC' => 'XPF', 'NE' => 'XOF', 'NF' => 'AUD',
+            'MY' => 'MYR', 'MZ' => 'MZN', 'NA' => 'NAD', 'NC' => 'XPF', 'NE' => 'XOF', 'NF' => 'AUD',
             'NG' => 'NGN', 'NI' => 'NIO', 'NL' => 'EUR', 'NO' => 'NOK', 'NP' => 'NPR', 'NR' => 'AUD',
             'NU' => 'NZD', 'NZ' => 'NZD', 'OM' => 'OMR', 'PA' => 'PAB', 'PE' => 'PEN', 'PF' => 'XPF',
             'PG' => 'PGK', 'PH' => 'PHP', 'PK' => 'PKR', 'PL' => 'PLN', 'PM' => 'EUR', 'PN' => 'NZD',
             'PR' => 'USD', 'PS' => 'JOD', 'PT' => 'EUR', 'PW' => 'USD', 'PY' => 'PYG', 'QA' => 'QAR',
             'RE' => 'EUR', 'RO' => 'RON', 'RS' => 'RSD', 'RU' => 'RUB', 'RW' => 'RWF', 'SA' => 'SAR',
             'SB' => 'SBD', 'SC' => 'SCR', 'SD' => 'SDG', 'SE' => 'SEK', 'SG' => 'SGD', 'SH' => 'SHP',
-            'SI' => 'EUR', 'SJ' => 'NOK', 'SK' => 'SKK', 'SL' => 'SLL', 'SM' => 'EUR', 'SN' => 'XOF',
-            'SO' => 'SOS', 'SR' => 'SRD', 'ST' => 'STD', 'SV' => 'SVC', 'SY' => 'SYP', 'SZ' => 'SZL',
+            'SI' => 'EUR', 'SJ' => 'NOK', 'SK' => 'EUR', 'SL' => 'SLL', 'SM' => 'EUR', 'SN' => 'XOF',
+            'SO' => 'SOS', 'SR' => 'SRD', 'ST' => 'STD', 'SV' => 'USD', 'SY' => 'SYP', 'SZ' => 'SZL',
             'TC' => 'USD', 'TD' => 'XAF', 'TF' => 'EUR', 'TG' => 'XOF', 'TH' => 'THB', 'TJ' => 'TJS',
-            'TK' => 'NZD', 'TL' => 'USD', 'TM' => 'TMM', 'TN' => 'TND', 'TO' => 'TOP', 'TR' => 'TRY',
+            'TK' => 'NZD', 'TL' => 'USD', 'TM' => 'TMT', 'TN' => 'TND', 'TO' => 'TOP', 'TR' => 'TRY',
             'TT' => 'TTD', 'TV' => 'AUD', 'TW' => 'TWD', 'TZ' => 'TZS', 'UA' => 'UAH', 'UG' => 'UGX',
             'UM' => 'USD', 'US' => 'USD', 'UY' => 'UYU', 'UZ' => 'UZS', 'VA' => 'EUR', 'VC' => 'XCD',
             'VE' => 'VEF', 'VG' => 'USD', 'VI' => 'USD', 'VN' => 'VND', 'VU' => 'VUV', 'WF' => 'XPF',
-            'WS' => 'WST', 'YE' => 'YER', 'YT' => 'EUR', 'ZA' => 'ZAR', 'ZM' => 'ZMK', 'ZW' => 'ZWD',
+            'WS' => 'WST', 'YE' => 'YER', 'YT' => 'EUR', 'ZA' => 'ZAR', 'ZM' => 'ZMK', 'ZW' => 'ZWL',
             'ZR' => 'ZRN', 'YU' => 'YUM', 'TP' => 'TPE', 'SU' => 'SUR', 'QU' => 'EUR', 'MF' => 'EUR',
-            'DD' => 'DDM', 'BU' => 'BUK', 'BL' => 'EUR');
+            'DD' => 'DDM', 'BU' => 'BUK', 'BL' => 'EUR', 'ZZ' => 'XAG', 'YD' => 'YDD');
         $this->assertEquals($result, $value);
 
         $value = Zend_Locale_Data::getContent('de_AT', 'currencytoregion', 'AT');
@@ -1142,16 +1153,16 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
     {
         $value = Zend_Locale_Data::getList('de_AT', 'regiontocurrency');
         $result = array(
-            'EUR' => 'AD AT AX BE BL CY DE ES FI FR GF GP GR IE IT LU MC ME MF MQ MT NL PM PT QU RE SI SM TF VA YT',
+            'EUR' => 'AD AT AX BE BL CY DE ES FI FR GF GP GR IE IT LU MC ME MF MQ MT NL PM PT QU RE SI SK SM TF VA YT',
             'AED' => 'AE', 'AFN' => 'AF', 'XCD' => 'AG AI DM GD KN LC MS VC', 'ALL' => 'AL', 'AMD' => 'AM',
             'ANG' => 'AN', 'AOA' => 'AO', 'XXX' => 'AQ', 'ARS' => 'AR', 'AWG' => 'AW', 'AZN' => 'AZ',
-            'USD' => 'AS EC FM GU IO MH MP PR PW TC TL UM US VG VI', 'AUD' => 'AU CC CX HM KI NF NR TV',
+            'USD' => 'AS EC FM GU IO MH MP PR PW SV TC TL UM US VG VI', 'AUD' => 'AU CC CX HM KI NF NR TV',
             'BAM' => 'BA', 'BBD' => 'BB', 'BDT' => 'BD', 'XOF' => 'BF BJ CI ML NE SN TG', 'BGN' => 'BG',
             'BHD' => 'BH', 'BIF' => 'BI', 'BMD' => 'BM', 'BND' => 'BN', 'BOB' => 'BO', 'BRL' => 'BR',
-            'BSD' => 'BS', 'INR' => 'BT IN', 'NOK' => 'BV NO SJ', 'BWP' => 'BW', 'BYR' => 'BY', 'BZD' => 'BZ',
+            'BSD' => 'BS', 'INR' => 'IN', 'NOK' => 'BV NO SJ', 'BWP' => 'BW', 'BYR' => 'BY', 'BZD' => 'BZ',
             'CAD' => 'CA', 'CDF' => 'CD', 'XAF' => 'CF CG CM GA GQ TD', 'CHF' => 'CH LI',
             'NZD' => 'CK NU NZ PN TK', 'CLP' => 'CL', 'CNY' => 'CN', 'COP' => 'CO', 'CRC' => 'CR',
-            'CUP' => 'CU', 'CVE' => 'CV', 'CZK' => 'CZ', 'DJF' => 'DJ', 'DKK' => 'DK FO GL', 'DOP' => 'DO',
+            'CVE' => 'CV', 'CZK' => 'CZ', 'DJF' => 'DJ', 'DKK' => 'DK FO GL', 'DOP' => 'DO',
             'DZD' => 'DZ', 'EEK' => 'EE', 'EGP' => 'EG', 'MAD' => 'EH MA', 'ERN' => 'ER', 'ETB' => 'ET',
             'FJD' => 'FJ', 'FKP' => 'FK', 'GBP' => 'GB GG GS IM JE', 'GEL' => 'GE', 'GHS' => 'GH',
             'GIP' => 'GI', 'GMD' => 'GM', 'GNF' => 'GN', 'GTQ' => 'GT', 'GWP' => 'GW', 'GYD' => 'GY',
@@ -1159,23 +1170,25 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
             'ILS' => 'IL', 'IQD' => 'IQ', 'IRR' => 'IR', 'ISK' => 'IS', 'JMD' => 'JM', 'JOD' => 'JO PS',
             'JPY' => 'JP', 'KES' => 'KE', 'KGS' => 'KG', 'KHR' => 'KH', 'KMF' => 'KM', 'KPW' => 'KP',
             'KRW' => 'KR', 'KWD' => 'KW', 'KYD' => 'KY', 'KZT' => 'KZ', 'LAK' => 'LA', 'LBP' => 'LB',
-            'LKR' => 'LK', 'LRD' => 'LR', 'ZAR' => 'LS NA ZA', 'LTL' => 'LT', 'LVL' => 'LV', 'LYD' => 'LY',
+            'LKR' => 'LK', 'LRD' => 'LR', 'ZAR' => 'LS ZA', 'LTL' => 'LT', 'LVL' => 'LV', 'LYD' => 'LY',
             'MDL' => 'MD', 'MGA' => 'MG', 'MKD' => 'MK', 'MMK' => 'MM', 'MNT' => 'MN', 'MOP' => 'MO',
             'MRO' => 'MR', 'MUR' => 'MU', 'MVR' => 'MV', 'MWK' => 'MW', 'MXN' => 'MX', 'MYR' => 'MY',
             'MZN' => 'MZ', 'XPF' => 'NC PF WF', 'NGN' => 'NG', 'NIO' => 'NI', 'NPR' => 'NP', 'OMR' => 'OM',
             'PAB' => 'PA', 'PEN' => 'PE', 'PGK' => 'PG', 'PHP' => 'PH', 'PKR' => 'PK', 'PLN' => 'PL',
             'PYG' => 'PY', 'QAR' => 'QA', 'RON' => 'RO', 'RSD' => 'RS', 'RUB' => 'RU', 'RWF' => 'RW',
             'SAR' => 'SA', 'SBD' => 'SB', 'SCR' => 'SC', 'SDG' => 'SD', 'SEK' => 'SE', 'SGD' => 'SG',
-            'SHP' => 'SH', 'SKK' => 'SK', 'SLL' => 'SL', 'SOS' => 'SO', 'SRD' => 'SR', 'STD' => 'ST',
-            'SVC' => 'SV', 'SYP' => 'SY', 'SZL' => 'SZ', 'THB' => 'TH', 'TJS' => 'TJ', 'TMM' => 'TM',
+            'SHP' => 'SH', 'SLL' => 'SL', 'SOS' => 'SO', 'SRD' => 'SR', 'STD' => 'ST',
+            'SYP' => 'SY', 'SZL' => 'SZ', 'THB' => 'TH', 'TJS' => 'TJ',
             'TND' => 'TN', 'TOP' => 'TO', 'TRY' => 'TR', 'TTD' => 'TT', 'TWD' => 'TW', 'TZS' => 'TZ',
             'UAH' => 'UA', 'UGX' => 'UG', 'UYU' => 'UY', 'UZS' => 'UZ', 'VEF' => 'VE', 'VND' => 'VN',
-            'VUV' => 'VU', 'WST' => 'WS', 'YER' => 'YE', 'ZMK' => 'ZM', 'ZWD' => 'ZW', 'ZRN' => 'ZR',
-            'YUM' => 'YU', 'TPE' => 'TP', 'SUR' => 'SU', 'DDM' => 'DD', 'CSD' => 'CS', 'BUK' => 'BU');
+            'VUV' => 'VU', 'WST' => 'WS', 'YER' => 'YE', 'ZMK' => 'ZM', 'ZRN' => 'ZR',
+            'YUM' => 'YU', 'TPE' => 'TP', 'SUR' => 'SU', 'DDM' => 'DD', 'CSD' => 'CS', 'BUK' => 'BU',
+            'XAG' => 'ZZ', 'ZWL' => 'ZW', 'YDD' => 'YD', 'TMT' => 'TM', 'NAD' => 'NA', 'CUC' => 'CU',
+            'BTN' => 'BT');
         $this->assertEquals($result, $value);
 
         $value = Zend_Locale_Data::getContent('de_AT', 'regiontocurrency', 'EUR');
-        $this->assertEquals("AD AT AX BE BL CY DE ES FI FR GF GP GR IE IT LU MC ME MF MQ MT NL PM PT QU RE SI SM TF VA YT", $value);
+        $this->assertEquals("AD AT AX BE BL CY DE ES FI FR GF GP GR IE IT LU MC ME MF MQ MT NL PM PT QU RE SI SK SM TF VA YT", $value);
     }
 
     /**
@@ -1285,9 +1298,9 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
             'af' => 'Latn', 'aii' => 'Cyrl', 'ain' => 'Kana Latn', 'ak' => 'Latn', 'akk' => 'Xsux',
             'am' => 'Ethi', 'amo' => 'Latn', 'ar' => 'Arab', 'as' => 'Beng', 'ast' => 'Latn', 'av' => 'Cyrl',
             'awa' => 'Deva', 'ay' => 'Latn', 'az' => 'Arab Cyrl Latn', 'ba' => 'Cyrl', 'bal' => 'Arab Latn',
-            'ban' => 'Latn', 'bbc' => 'Latn', 'be' => 'Cyrl', 'bem' => 'Latn', 'bfq' => 'Taml', 'bft' => 'Deva',
+            'ban' => 'Latn', 'bbc' => 'Latn', 'be' => 'Cyrl', 'bem' => 'Latn', 'bfq' => 'Taml', 'bft' => 'Arab',
             'bfy' => 'Deva', 'bg' => 'Cyrl', 'bh' => 'Deva', 'bhb' => 'Deva', 'bho' => 'Deva', 'bi' => 'Latn',
-            'bin' => 'Latn', 'bjj' => 'Deva', 'bku' => 'Buhd', 'bm' => 'Latn', 'bn' => 'Beng', 'bo' => 'Tibt',
+            'bin' => 'Latn', 'bjj' => 'Deva', 'bku' => 'Latn', 'bm' => 'Latn', 'bn' => 'Beng', 'bo' => 'Tibt',
             'br' => 'Latn', 'bra' => 'Deva', 'bs' => 'Latn', 'btv' => 'Deva', 'buc' => 'Latn', 'bug' => 'Latn',
             'bxr' => 'Cyrl', 'bya' => 'Latn', 'byn' => 'Ethi', 'ca' => 'Latn', 'cch' => 'Latn', 'ccp' => 'Beng',
             'ce' => 'Cyrl', 'ceb' => 'Latn', 'ch' => 'Latn', 'chk' => 'Latn', 'chm' => 'Cyrl Latn',
@@ -1306,7 +1319,7 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
             'hai' => 'Latn', 'haw' => 'Latn', 'he' => 'Hebr', 'hi' => 'Deva', 'hil' => 'Latn', 'hmn' => 'Latn',
             'hne' => 'Deva', 'hnn' => 'Latn', 'ho' => 'Latn', 'hoc' => 'Deva', 'hoj' => 'Deva', 'hop' => 'Latn',
             'hr' => 'Latn', 'ht' => 'Latn', 'hu' => 'Latn', 'hy' => 'Armn', 'ia' => 'Latn', 'ibb' => 'Latn',
-            'id' => 'Latn', 'ig' => 'Latn', 'ii' => 'Latn Yiii', 'ik' => 'Latn', 'ilo' => 'Latn',
+            'id' => 'Latn', 'ig' => 'Latn', 'ii' => 'Yiii', 'ik' => 'Latn', 'ilo' => 'Latn',
             'inh' => 'Cyrl', 'is' => 'Latn', 'it' => 'Latn', 'iu' => 'Cans', 'ja' => 'Jpan', 'jv' => 'Latn',
             'ka' => 'Geor', 'kaa' => 'Cyrl', 'kab' => 'Latn', 'kaj' => 'Latn', 'kam' => 'Latn', 'kbd' => 'Cyrl',
             'kca' => 'Cyrl', 'kcg' => 'Latn', 'kdt' => 'Thai', 'kfo' => 'Latn', 'kfr' => 'Deva',
@@ -1320,10 +1333,10 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
             'lif' => 'Deva Limb', 'lis' => 'Latn', 'lmn' => 'Telu', 'ln' => 'Latn', 'lo' => 'Laoo',
             'lol' => 'Latn', 'lt' => 'Latn', 'lu' => 'Latn', 'lua' => 'Latn', 'luo' => 'Latn', 'lut' => 'Latn',
             'lv' => 'Latn', 'lwl' => 'Thai', 'mad' => 'Latn', 'mag' => 'Deva', 'mai' => 'Deva', 'mak' => 'Latn',
-            'mdf' => 'Cyrl', 'mdh' => 'Latn', 'mdr' => 'Bugi', 'men' => 'Latn', 'mfe' => 'Latn', 'mg' => 'Latn',
+            'mdf' => 'Cyrl', 'mdh' => 'Latn', 'mdr' => 'Latn', 'men' => 'Latn', 'mfe' => 'Latn', 'mg' => 'Latn',
             'mh' => 'Latn', 'mi' => 'Latn', 'min' => 'Latn', 'mk' => 'Cyrl', 'ml' => 'Mlym',
             'mn' => 'Cyrl Mong', 'mnc' => 'Mong', 'mni' => 'Beng', 'mns' => 'Cyrl', 'mnw' => 'Mymr',
-            'mo' => 'Latn', 'mos' => 'Latn', 'mr' => 'Deva', 'ms' => 'Latn', 'mt' => 'Latn',
+            'mos' => 'Latn', 'mr' => 'Deva', 'ms' => 'Latn', 'mt' => 'Latn',
             'mwr' => 'Deva', 'my' => 'Mymr', 'myv' => 'Cyrl', 'na' => 'Latn',
             'nap' => 'Latn', 'nb' => 'Latn', 'nbf' => 'Latn', 'nd' => 'Latn', 'ne' => 'Deva', 'new' => 'Deva',
             'ng' => 'Latn', 'niu' => 'Latn', 'nl' => 'Latn', 'nn' => 'Latn', 'no' => 'Latn', 'nog' => 'Cyrl',
@@ -1334,7 +1347,7 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
             'pon' => 'Latn', 'pra' => 'Khar', 'prd' => 'Arab', 'prg' => 'Latn', 'ps' => 'Arab', 'pt' => 'Latn',
             'qu' => 'Latn', 'rcf' => 'Latn', 'ril' => 'Beng', 'rm' => 'Latn', 'rn' => 'Latn', 'ro' => 'Latn',
             'rom' => 'Cyrl Latn', 'ru' => 'Cyrl', 'rw' => 'Latn', 'sa' => 'Deva Sinh', 'sah' => 'Cyrl',
-            'sam' => 'Hebr', 'sas' => 'Latn', 'sat' => 'Beng Deva Olck Orya', 'scn' => 'Latn', 'sco' => 'Latn',
+            'sam' => 'Hebr Samr', 'sas' => 'Latn', 'sat' => 'Latn', 'scn' => 'Latn', 'sco' => 'Latn',
             'sd' => 'Arab Deva', 'se' => 'Latn', 'sel' => 'Cyrl', 'sg' => 'Latn', 'sga' => 'Latn Ogam',
             'shn' => 'Mymr', 'si' => 'Sinh', 'sid' => 'Latn', 'sk' => 'Latn', 'sl' => 'Latn', 'sm' => 'Latn',
             'sma' => 'Latn', 'smi' => 'Latn', 'smj' => 'Latn', 'smn' => 'Latn', 'sms' => 'Latn', 'sn' => 'Latn',
@@ -1352,8 +1365,25 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
             'vai' => 'Vaii', 've' => 'Latn', 'vi' => 'Latn', 'vo' => 'Latn', 'wa' => 'Latn', 'wal' => 'Ethi',
             'war' => 'Latn', 'wo' => 'Latn', 'xal' => 'Cyrl', 'xh' => 'Latn', 'xsr' => 'Deva',
             'xum' => 'Ital Latn', 'yao' => 'Latn', 'yap' => 'Latn', 'yi' => 'Hebr', 'yo' => 'Latn',
-            'yrk' => 'Cyrl', 'za' => 'Hans', 'zh' => 'Hans Hant', 'zu' => 'Latn', 'zbl' => 'Blis', 'nds' => 'Latn',
-            'hsb' => 'Latn', 'frs' => 'Latn', 'frr' => 'Latn', 'dsb' => 'Latn', 'kg' => 'Latn');
+            'yrk' => 'Cyrl', 'za' => 'Latn', 'zh' => 'Hans Hant', 'zu' => 'Latn', 'zbl' => 'Blis', 'nds' => 'Latn',
+            'hsb' => 'Latn', 'frs' => 'Latn', 'frr' => 'Latn', 'dsb' => 'Latn', 'kg' => 'Latn',
+            'zza' => 'Arab', 'zun' => 'Latn', 'zen' => 'Tfng', 'zap' => 'Latn', 'was' => 'Latn',
+            'vot' => 'Latn', 'unx' => 'Beng Deva', 'unr' => 'Beng Deva', 'tsi' => 'Latn', 'tog' => 'Latn',
+            'tli' => 'Latn', 'ter' => 'Latn', 'sc' => 'Latn', 'sad' => 'Latn',
+            'rup' => 'Latn', 'rar' => 'Latn', 'rap' => 'Latn', 'raj' => 'Latn', 'osa' => 'Latn',
+            'oj' => 'Cans', 'nzi' => 'Latn', 'nyo' => 'Latn', 'nia' => 'Latn', 'mwl' => 'Latn',
+            'mus' => 'Latn', 'moh' => 'Latn', 'mic' => 'Latn', 'mas' => 'Latn', 'man' => 'Latn',
+            'lus' => 'Beng', 'lun' => 'Latn', 'lui' => 'Latn', 'loz' => 'Latn', 'lam' => 'Latn',
+            'lab' => 'Lina', 'kut' => 'Latn', 'kac' => 'Mymr', 'jrb' => 'Hebr', 'jpr' => 'Hebr',
+            'iba' => 'Latn', 'hz' => 'Latn', 'hup' => 'Latn', 'grb' => 'Latn', 'gba' => 'Arab',
+            'gay' => 'Latn', 'ff' => 'Latn', 'fat' => 'Latn', 'ewo' => 'Latn', 'eka' => 'Latn',
+            'dua' => 'Latn', 'din' => 'Latn', 'den' =>'Latn', 'del' => 'Latn', 'dak' => 'Latn',
+            'csb' => 'Latn', 'crh' => 'Cyrl', 'chy' => 'Latn', 'chp' => 'Latn', 'cho' => 'Latn',
+            'chn' => 'Latn', 'car' => 'Latn', 'cad' => 'Latn', 'bua' => 'Cyrl', 'bla' => 'Latn',
+            'bik' => 'Latn', 'bej' => 'Arab', 'bas' => 'Latn', 'arw' => 'Latn', 'arp' => 'Latn',
+            'arn' => 'Latn', 'anp' => 'Deva', 'an' => 'Latn', 'alt' => 'Cyrl', 'ale' => 'Latn',
+            'ada' => 'Latn', 'ach' => 'Latn'
+        );
         $this->assertEquals($result, $value);
 
         $value = Zend_Locale_Data::getContent('de_AT', 'scripttolanguage', 'uk');
@@ -1368,23 +1398,23 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
     {
         $value = Zend_Locale_Data::getList('de_AT', 'languagetoscript');
         $result = array(
-            'Latn' => 'aa ace af ain ak amo ast ay az bal ban bbc bem bi bin bm br bs buc bug bya ca cch ceb ch chk chm chr co cpe cr cs cy da de dgr dsb dyu ee efi en eo es et ett eu fan fi fil fiu fj fo fon fr frr frs fur fy ga gaa gag gcr gd gil gl gn gor gsw gv gwi ha hai haw hil hmn hnn ho hop hr hsb ht hu ia ibb id ig ii ik ilo is it jv kab kaj kam kcg kfo kg kha ki kj kl kmb kos kpe kr krl ku kv kw la lb lg li lis ln lol lt lu lua luo lut lv mad mak mdh men mfe mg mh mi min mo mos ms mt na nap nb nbf nd nds ng niu nl nn no nr nso nv ny nym nyn oc om os osc pag pam pap pau pl pon prg pt qu rcf rm rn ro rom rw sas scn sco se sg sga sid sk sl sm sma smi smj smn sms sn snk so son sq sr srn srr ss st su suk sus sv sw tbw tem tet tg tiv tk tkl tl tmh tn to tpi tr tru ts tsg tum tvl tw ty tzm uli umb uz ve vi vo wa war wo xh xum yao yap yo zu',
-            'Cyrl' => 'ab abq ady aii av az ba be bg bxr ce chm cjs ckt cv dar dng evn gld inh kaa kbd kca kjh kk koi kpv kpy krc krl ku kum kv ky lbe lez mdf mk mn mns myv nog os rom ru sah sel sr tab tg tk tt ttt tut tyv ude udm uk uz xal yrk',
+            'Latn' => 'aa ace ach ada af ain ak ale amo an arn arp arw ast ay az bal ban bas bbc bem bi bik bin bku bla bm br bs buc bug bya ca cad car cch ceb ch chk chm chn cho chp chr chy co cpe cr cs csb cy da dak de del den dgr din dsb dua dyu ee efi eka en eo es et ett eu ewo fan fat ff fi fil fiu fj fo fon fr frr frs fur fy ga gaa gag gay gcr gd gil gl gn gor grb gsw gv gwi ha hai haw hil hmn hnn ho hop hr hsb ht hu hup hz ia iba ibb id ig ik ilo is it jv kab kaj kam kcg kfo kg kha ki kj kl kmb kos kpe kr krl ku kut kv kw la lam lb lg li lis ln lol loz lt lu lua lui lun luo lut lv mad mak man mas mdh mdr men mfe mg mh mi mic min moh mos ms mt mus mwl na nap nb nbf nd nds ng nia niu nl nn no nr nso nv ny nym nyn nyo nzi oc om os osa osc pag pam pap pau pl pon prg pt qu raj rap rar rcf rm rn ro rom rup rw sad sas sat sc scn sco se sg sga sid sk sl sm sma smi smj smn sms sn snk so son sq sr srn srr ss st su suk sus sv sw tbw tem ter tet tg tiv tk tkl tl tli tmh tn to tog tpi tr tru ts tsg tsi tum tvl tw ty tzm uli umb uz ve vi vo vot wa war was wo xh xum yao yap yo za zap zu zun',
+            'Cyrl' => 'ab abq ady aii alt av az ba be bg bua bxr ce chm cjs ckt crh cv dar dng evn gld inh kaa kbd kca kjh kk koi kpv kpy krc krl ku kum kv ky lbe lez mdf mk mn mns myv nog os rom ru sah sel sr tab tg tk tt ttt tut tyv ude udm uk uz xal yrk',
             'Kana' => 'ain', 'Xsux' => 'akk', 'Ethi' => 'am byn gez ti tig wal',
-            'Arab' => 'ar az bal cjm cop doi fa ha ks ku ky lah prd ps sd swb tg tk ug ur uz',
-            'Beng' => 'as bn ccp grt mni ril sat syl',
-            'Deva' => 'awa bft bfy bh bhb bho bjj bra btv gbm gon hi hne hoc hoj kfr kok kru ks lif mag mai mr mwr ne new pi sa sat sd xsr',
-            'Taml' => 'bfq ta', 'Buhd' => 'bku', 'Tibt' => 'bo dz', 'Cher' => 'chr', 'Cham' => 'cja',
-            'Copt' => 'cop', 'Grek' => 'cop el grc', 'Cans' => 'cr crk cwd iu', 'Glag' => 'cu', 'Thaa' => 'dv',
+            'Arab' => 'ar az bal bej bft cjm cop doi fa gba ha ks ku ky lah prd ps sd swb tg tk ug ur uz zza',
+            'Beng' => 'as bn ccp grt lus mni ril syl unr unx',
+            'Deva' => 'anp awa bfy bh bhb bho bjj bra btv gbm gon hi hne hoc hoj kfr kok kru ks lif mag mai mr mwr ne new pi sa sd unr unx xsr',
+            'Taml' => 'bfq ta', 'Tibt' => 'bo dz', 'Cher' => 'chr', 'Cham' => 'cja',
+            'Copt' => 'cop', 'Grek' => 'cop el grc', 'Cans' => 'cr crk cwd iu oj', 'Glag' => 'cu', 'Thaa' => 'dv',
             'Ital' => 'ett osc xum', 'Telu' => 'gon lmn te', 'Goth' => 'got', 'Cprt' => 'grc', 'Linb' => 'grc',
-            'Gujr' => 'gu', 'Hebr' => 'he lad sam yi', 'Armn' => 'hy', 'Yiii' => 'ii', 'Jpan' => 'ja',
-            'Geor' => 'ka', 'Thai' => 'kdt lcp lwl pi th tts', 'Talu' => 'khb', 'Mymr' => 'kht mnw my shn',
+            'Gujr' => 'gu', 'Hebr' => 'he jpr jrb lad sam yi', 'Armn' => 'hy', 'Yiii' => 'ii', 'Jpan' => 'ja',
+            'Geor' => 'ka', 'Thai' => 'kdt lcp lwl pi th tts', 'Talu' => 'khb', 'Mymr' => 'kac kht mnw my shn',
             'Khmr' => 'km', 'Knda' => 'kn tcy', 'Lepc' => 'lep', 'Limb' => 'lif',
-            'Laoo' => 'lo', 'Bugi' => 'mdr', 'Mlym' => 'ml', 'Mong' => 'mn mnc', 'Nkoo' => 'emk nqo',
-            'Orya' => 'or sat', 'Guru' => 'pa', 'Xpeo' => 'peo', 'Phnx' => 'phn', 'Sinh' => 'pi sa si',
-            'Khar' => 'pra', 'Olck' => 'sat', 'Ogam' => 'sga', 'Syrc' => 'syr', 'Tale' => 'tdd',
-            'Tfng' => 'tzm', 'Ugar' => 'uga', 'Vaii' => 'vai', 'Hans' => 'za zh', 'Hant' => 'zh',
-            'Blis' => 'zbl', 'Kore' => 'ko');
+            'Laoo' => 'lo', 'Mlym' => 'ml', 'Mong' => 'mn mnc', 'Nkoo' => 'emk nqo',
+            'Orya' => 'or', 'Guru' => 'pa', 'Xpeo' => 'peo', 'Phnx' => 'phn', 'Sinh' => 'pi sa si',
+            'Khar' => 'pra', 'Ogam' => 'sga', 'Syrc' => 'syr', 'Tale' => 'tdd',
+            'Tfng' => 'tzm zen', 'Ugar' => 'uga', 'Vaii' => 'vai', 'Hans' => 'zh', 'Hant' => 'zh',
+            'Blis' => 'zbl', 'Kore' => 'ko', 'Samr' => 'sam', 'Lina' => 'lab');
         $this->assertEquals($result, $value);
 
         $value = Zend_Locale_Data::getContent('de_AT', 'languagetoscript', 'Kana');
@@ -1398,19 +1428,19 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
     public function testTerritoryToLanguage()
     {
         $value = Zend_Locale_Data::getList('de_AT', 'territorytolanguage');
-        $result = array('aa' => 'DJ', 'ab' => 'GE', 'abr' => 'GH', 'ace' => 'ID', 'ady' => 'RU', 'af' => 'ZA',
+        $result = array('aa' => 'DJ ET', 'ab' => 'GE', 'abr' => 'GH', 'ace' => 'ID', 'ady' => 'RU', 'af' => 'ZA',
             'ak' => 'GH', 'am' => 'ET', 'ar' => 'AE BH DJ DZ EG EH ER IL IQ JO KM KW LB LY MA MR OM PS QA SA SD SY TD TN YE',
             'as' => 'IN', 'ast' => 'ES', 'av' => 'RU', 'awa' => 'IN', 'ay' => 'BO', 'az' => 'AZ',
             'ba' => 'RU', 'bal' => 'IR PK', 'ban' => 'ID', 'bbc' => 'ID', 'bcl' => 'PH', 'be' => 'BY',
             'bem' => 'ZM', 'bew' => 'ID', 'bg' => 'BG', 'bgc' => 'IN', 'bhb' => 'IN', 'bhi' => 'IN',
             'bhk' => 'PH', 'bho' => 'IN MU NP', 'bi' => 'VU', 'bin' => 'NG', 'bjj' => 'IN', 'bjn' => 'ID',
-            'bm' => 'ML', 'bn' => 'BD IN', 'bo' => 'CN', 'bqi' => 'IR', 'brh' => 'PK', 'bs' => 'BA',
+            'bm' => 'ML', 'bn' => 'BD IN', 'bo' => 'CN', 'brh' => 'PK', 'bs' => 'BA',
             'buc' => 'YT', 'bug' => 'ID', 'bya' => 'ID', 'ca' => 'AD', 'ce' => 'RU', 'ceb' => 'PH',
             'cgg' => 'UG', 'ch' => 'GU', 'chk' => 'FM', 'crk' => 'CA', 'cs' => 'CZ', 'cv' => 'RU',
             'cwd' => 'CA', 'cy' => 'GB', 'da' => 'DK GL', 'dcc' => 'IN', 'de' => 'AT BE CH DE LI LU',
             'dhd' => 'IN', 'diq' => 'TR', 'dje' => 'NE', 'doi' => 'IN', 'dv' => 'MV', 'dyu' => 'BF',
-            'dz' => 'BT', 'ee' => 'GH', 'efi' => 'NG', 'el' => 'CY GR', 'emk' => 'GN',
-            'en' => 'AG AI AS AU BB BM BS BW BZ CA CC CK CM CX DM FJ FK FM GB GD GG GH GI GM GU GY HK HN IE IM JE JM KE KI KN KY LC LR LS MH MP MS MT MU MW NA NF NG NR NU NZ PG PH PK PN PR RW SB SC SG SH SL SZ TC TK TO TT TV TZ UG UM US VC VG VI VU WS ZA ZM ZW',
+            'dz' => 'BT', 'ee' => 'GH TG', 'efi' => 'NG', 'el' => 'CY GR', 'emk' => 'GN',
+            'en' => 'AG AI AS AU BB BM BS BW BZ CA CC CK CM CX DM FJ FK FM GB GD GG GH GI GM GU GY HK HN IE IM JE JM KE KI KN KY LC LR LS MG MH MP MS MT MU MW NA NF NG NR NU NZ PG PH PK PN PR RW SB SC SG SH SL SZ TC TK TO TT TV TZ UG UM US VC VG VI VU WS ZA ZM ZW',
             'es' => 'AR BO CL CO CR CU DO EC ES GQ GT HN MX NI PA PE PH PR PY SV UY VE', 'et' => 'EE',
             'eu' => 'ES', 'fa' => 'AF IR', 'fan' => 'GQ', 'fi' => 'FI', 'fil' => 'PH', 'fj' => 'FJ', 'fo' => 'FO', 'fon' => 'BJ',
             'fr' => 'BE BF BI BJ BL CA CD CF CG CH CI CM DJ DZ FR GA GF GN GP GQ HT KM LU MA MC MF MG ML MQ MU NC NE PF PM RE RW SC SN SY TD TG TN VU WF YT',
@@ -1432,7 +1462,7 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
             'mdf' => 'RU', 'mdh' => 'PH', 'men' => 'SL', 'mer' => 'KE', 'mfa' => 'TH', 'mfe' => 'MU',
             'mg' => 'MG', 'mh' => 'MH', 'mi' => 'NZ', 'min' => 'ID', 'mk' => 'MK', 'ml' => 'IN', 'mn' => 'MN',
             'mni' => 'IN', 'mos' => 'BF', 'mr' => 'IN', 'ms' => 'BN MY SG', 'mt' => 'MT', 'mtr' => 'IN',
-            'mup' => 'IN', 'muw' => 'IN', 'my' => 'MM', 'myv' => 'RU', 'na' => 'NR', 'nap' => 'IT',
+            'mup' => 'IN', 'my' => 'MM', 'myv' => 'RU', 'na' => 'NR', 'nap' => 'IT',
             'nb' => 'NO SJ', 'nd' => 'ZW', 'ndc' => 'MZ', 'ne' => 'NP', 'ng' => 'NA', 'ngl' => 'MZ',
             'niu' => 'NU', 'nl' => 'AN AW BE NL SR', 'nn' => 'NO', 'nod' => 'TH', 'noe' => 'IN', 'nso' => 'ZA',
             'ny' => 'MW', 'nym' => 'TZ', 'nyn' => 'UG', 'om' => 'ET', 'or' => 'IN', 'os' => 'GE', 'pa' => 'IN',
@@ -1443,7 +1473,7 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
             'sck' => 'IN', 'scn' => 'IT', 'sco' => 'GB', 'sd' => 'IN', 'se' => 'NO', 'sg' => 'CF',
             'shn' => 'MM', 'si' => 'LK', 'sid' => 'ET', 'sk' => 'SK', 'sl' => 'SI', 'sm' => 'AS WS',
             'sn' => 'ZW', 'so' => 'SO', 'sou' => 'TH', 'sq' => 'AL MK', 'sr' => 'BA ME RS', 'srn' => 'SR',
-            'srr' => 'SN', 'ss' => 'SZ', 'st' => 'LS ZA', 'su' => 'ID', 'suk' => 'TZ', 'sv' => 'AX FI SE',
+            'srr' => 'SN', 'ss' => 'SZ ZA', 'st' => 'LS ZA', 'su' => 'ID', 'suk' => 'TZ', 'sv' => 'AX FI SE',
             'sw' => 'KE TZ UG', 'swb' => 'KM', 'swv' => 'IN', 'syl' => 'BD', 'ta' => 'IN LK SG', 'tcy' => 'IN',
             'te' => 'IN', 'tem' => 'SL', 'tet' => 'TL', 'tg' => 'TJ', 'th' => 'TH', 'ti' => 'ER', 'tiv' => 'NG',
             'tk' => 'TM', 'tkl' => 'TK', 'tl' => 'PH US', 'tn' => 'BW ZA', 'to' => 'TO', 'tpi' => 'PG',
@@ -1453,7 +1483,9 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
             've' => 'ZA', 'vi' => 'VN', 'vmw' => 'MZ', 'wal' => 'ET', 'war' => 'PH', 'wbq' => 'IN',
             'wbr' => 'IN', 'wls' => 'WF', 'wo' => 'SN', 'wtm' => 'IN', 'xh' => 'ZA', 'xnr' => 'IN',
             'xog' => 'UG', 'yap' => 'FM', 'yo' => 'NG', 'za' => 'CN', 'zh' => 'CN HK MO SG TW', 'zu' => 'ZA',
-            'oc' => 'FR', 'kg' => 'CD');
+            'oc' => 'FR', 'kg' => 'CD', 'unr' => 'IN', 'tum' => 'MW', 'tig' => 'ER', 'teo' => 'UG',
+            'sus' => 'GN', 'skr' => 'PK', 'mwr' => 'IN', 'laj' => 'UG', 'kea' => 'CV', 'gag' => 'MD',
+            'fuq' => 'NE', 'crs' => 'SC', 'bci' => 'CI');
         $this->assertEquals($result, $value);
 
         $value = Zend_Locale_Data::getContent('de_AT', 'territorytolanguage', 'uk');
@@ -1470,31 +1502,31 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
         $result = array('DJ' => 'aa ar fr', 'GE' => 'ab ka os', 'GH' => 'abr ak ee en gaa tw',
             'ID' => 'ace ban bbc bew bjn bug bya id jv ljp mad mak min rej sas su',
             'RU' => 'ady av ba ce cv inh kbd koi kpv krc kum lbe lez mdf myv ru sah tt tyv udm',
-            'ZA' => 'af en nso st tn ts ve xh zu', 'ET' => 'am om sid wal', 'AE' => 'ar', 'BH' => 'ar',
-            'DZ' => 'ar fr kab', 'EG' => 'ar', 'EH' => 'ar', 'ER' => 'ar ti', 'IL' => 'ar he', 'IQ' => 'ar ku',
+            'ZA' => 'af en nso ss st tn ts ve xh zu', 'ET' => 'aa am om sid wal', 'AE' => 'ar', 'BH' => 'ar',
+            'DZ' => 'ar fr kab', 'EG' => 'ar', 'EH' => 'ar', 'ER' => 'ar ti tig', 'IL' => 'ar he', 'IQ' => 'ar ku',
             'JO' => 'ar', 'KM' => 'ar fr swb', 'KW' => 'ar', 'LB' => 'ar', 'LY' => 'ar',
             'MA' => 'ar fr rif tzm', 'MR' => 'ar', 'OM' => 'ar', 'PS' => 'ar', 'QA' => 'ar', 'SA' => 'ar',
             'SD' => 'ar', 'SY' => 'ar fr ku', 'TD' => 'ar fr', 'TN' => 'ar fr', 'YE' => 'ar',
-            'IN' => 'as awa bgc bhb bhi bho bjj bn dcc dhd doi gbm gno gon gu hi hne hoc kfy kha khn kn kok kru ks lmn mag mai ml mni mr mtr mup muw noe or pa rjb sa sat sck sd swv ta tcy te ur wbq wbr wtm xnr',
+            'IN' => 'as awa bgc bhb bhi bho bjj bn dcc dhd doi gbm gno gon gu hi hne hoc kfy kha khn kn kok kru ks lmn mag mai ml mni mr mtr mup mwr noe or pa rjb sa sat sck sd swv ta tcy te unr ur wbq wbr wtm xnr',
             'ES' => 'ast es eu gl', 'FR' => 'fr oc', 'BO' => 'ay es qu', 'AZ' => 'az',
-            'PK' => 'bal brh en hno lah ur', 'PH' => 'bcl bhk ceb en es fil hil ilo mdh pag pam tl tsg war',
+            'PK' => 'bal brh en hno lah skr ur', 'PH' => 'bcl bhk ceb en es fil hil ilo mdh pag pam tl tsg war',
             'BY' => 'be ru', 'ZM' => 'bem en', 'BG' => 'bg', 'MU' => 'bho en fr mfe', 'NP' => 'bho mai ne',
             'VU' => 'bi en fr', 'NG' => 'bin efi en fuv ha ibb ig tiv yo', 'ML' => 'bm fr', 'BD' => 'bn syl',
-            'CN' => 'bo ii ug za zh', 'IR' => 'bal bqi fa glk ku lrc rmt', 'BA' => 'bs hr sr', 'YT' => 'buc fr',
-            'AD' => 'ca', 'UG' => 'cgg en lg nyn sw xog', 'GU' => 'ch en', 'FM' => 'chk en kos pon uli yap',
+            'CN' => 'bo ii ug za zh', 'IR' => 'bal fa glk ku lrc rmt', 'BA' => 'bs hr sr', 'YT' => 'buc fr',
+            'AD' => 'ca', 'UG' => 'cgg en laj lg nyn sw teo xog', 'GU' => 'ch en', 'FM' => 'chk en kos pon uli yap',
             'CA' => 'crk cwd en fr iu', 'CZ' => 'cs', 'GB' => 'cy en gd sco', 'DK' => 'da', 'GL' => 'da iu kl',
             'AT' => 'de', 'BE' => 'de fr nl', 'CH' => 'de fr gsw it rm', 'DE' => 'de', 'LI' => 'de gsw',
-            'LU' => 'de fr lb', 'TR' => 'diq ku tr', 'NE' => 'dje fr', 'MV' => 'dv', 'BF' => 'dyu fr mos',
-            'BT' => 'dz', 'CY' => 'el tr', 'GR' => 'el', 'GN' => 'emk fr', 'AG' => 'en', 'AI' => 'en',
+            'LU' => 'de fr lb', 'TR' => 'diq ku tr', 'NE' => 'dje fr fuq', 'MV' => 'dv', 'BF' => 'dyu fr mos',
+            'BT' => 'dz', 'CY' => 'el tr', 'GR' => 'el', 'GN' => 'emk fr sus', 'AG' => 'en', 'AI' => 'en',
             'AS' => 'en sm', 'AU' => 'en', 'BB' => 'en', 'BM' => 'en', 'BS' => 'en', 'BW' => 'en tn',
             'BZ' => 'en', 'CC' => 'en', 'CK' => 'en', 'CM' => 'en fr', 'CX' => 'en', 'DM' => 'en',
             'FJ' => 'en fj', 'FK' => 'en', 'GD' => 'en', 'GG' => 'en', 'GI' => 'en', 'GM' => 'en', 'GY' => 'en',
             'HK' => 'en zh', 'HN' => 'en es', 'IE' => 'en ga', 'IM' => 'en', 'JE' => 'en', 'JM' => 'en',
             'KE' => 'en guz kam ki kln luo luy mer sw', 'KI' => 'en gil', 'KN' => 'en', 'KY' => 'en',
             'LC' => 'en', 'LR' => 'en', 'LS' => 'en st', 'MH' => 'en mh', 'MP' => 'en', 'MS' => 'en',
-            'MT' => 'en mt', 'MW' => 'en ny', 'NA' => 'en kj ng', 'NF' => 'en', 'NR' => 'en na',
+            'MT' => 'en mt', 'MW' => 'en ny tum', 'NA' => 'en kj ng', 'NF' => 'en', 'NR' => 'en na',
             'NU' => 'en niu', 'NZ' => 'en mi', 'PG' => 'en ho tpi', 'PN' => 'en', 'PR' => 'en es',
-            'RW' => 'en fr rw', 'SB' => 'en', 'SC' => 'en fr', 'SG' => 'en ms ta zh', 'SH' => 'en',
+            'RW' => 'en fr rw', 'SB' => 'en', 'SC' => 'crs en fr', 'SG' => 'en ms ta zh', 'SH' => 'en',
             'SL' => 'en kri men tem', 'SZ' => 'en ss', 'TC' => 'en', 'TK' => 'en tkl', 'TO' => 'en to',
             'TT' => 'en', 'TV' => 'en tvl', 'TZ' => 'en nym suk sw', 'UM' => 'en', 'US' => 'en haw tl',
             'VC' => 'en', 'VG' => 'en', 'VI' => 'en', 'WS' => 'en sm', 'ZW' => 'en nd sn', 'AR' => 'es',
@@ -1502,16 +1534,16 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
             'GQ' => 'es fan fr', 'GT' => 'es', 'MX' => 'es', 'NI' => 'es', 'PA' => 'es', 'PE' => 'es qu',
             'PY' => 'es gn', 'SV' => 'es', 'UY' => 'es', 'VE' => 'es', 'EE' => 'et', 'AF' => 'fa haz ps',
             'FI' => 'fi sv', 'FO' => 'fo', 'BJ' => 'fon fr', 'BI' => 'fr rn', 'CD' => 'fr kg ln lu lua',
-            'CF' => 'fr sg', 'CG' => 'fr ln', 'CI' => 'fr', 'GA' => 'fr', 'GF' => 'fr gcr', 'GP' => 'fr',
-            'HT' => 'fr ht', 'MC' => 'fr', 'MG' => 'fr mg', 'MQ' => 'fr', 'NC' => 'fr', 'PF' => 'fr ty',
-            'PM' => 'fr', 'RE' => 'fr rcf', 'SN' => 'fr srr wo', 'TG' => 'fr', 'WF' => 'fr fud wls',
+            'CF' => 'fr sg', 'CG' => 'fr ln', 'CI' => 'bci fr', 'GA' => 'fr', 'GF' => 'fr gcr', 'GP' => 'fr',
+            'HT' => 'fr ht', 'MC' => 'fr', 'MG' => 'en fr mg', 'MQ' => 'fr', 'NC' => 'fr', 'PF' => 'fr ty',
+            'PM' => 'fr', 'RE' => 'fr rcf', 'SN' => 'fr srr wo', 'TG' => 'ee fr', 'WF' => 'fr fud wls',
             'NL' => 'fy nl', 'HR' => 'hr', 'HU' => 'hu', 'AM' => 'hy', 'IS' => 'is', 'IT' => 'it nap scn',
             'SM' => 'it', 'JP' => 'ja', 'KZ' => 'kk ru', 'KH' => 'km', 'AO' => 'kmb pt umb', 'KP' => 'ko',
             'KR' => 'ko', 'TH' => 'kxm mfa nod sou th tts', 'KG' => 'ky ru', 'VA' => 'la', 'LA' => 'lo',
             'LT' => 'lt', 'LV' => 'lv', 'MK' => 'mk sq', 'MN' => 'mn', 'BN' => 'ms', 'MY' => 'ms',
             'MM' => 'my shn', 'NO' => 'nb nn se', 'SJ' => 'nb', 'MZ' => 'ndc ngl pt vmw', 'AN' => 'nl pap',
-            'AW' => 'nl', 'SR' => 'nl srn', 'PW' => 'pau', 'PL' => 'pl', 'BR' => 'pt', 'CV' => 'pt',
-            'GW' => 'pt', 'PT' => 'pt', 'ST' => 'pt', 'TL' => 'pt tet', 'MD' => 'ro', 'RO' => 'ro',
+            'AW' => 'nl', 'SR' => 'nl srn', 'PW' => 'pau', 'PL' => 'pl', 'BR' => 'pt', 'CV' => 'kea pt',
+            'GW' => 'pt', 'PT' => 'pt', 'ST' => 'pt', 'TL' => 'pt tet', 'MD' => 'gag ro', 'RO' => 'ro',
             'LK' => 'si ta', 'SK' => 'sk', 'SI' => 'sl', 'SO' => 'so', 'AL' => 'sq', 'ME' => 'sr', 'RS' => 'sr',
             'AX' => 'sv', 'SE' => 'sv', 'TJ' => 'tg', 'TM' => 'tk', 'UA' => 'uk', 'AQ' => 'und', 'BV' => 'und',
             'GS' => 'und', 'HM' => 'und', 'IO' => 'und', 'TF' => 'und', 'UZ' => 'uz', 'VN' => 'vi',
@@ -1540,7 +1572,7 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
             'Pacific SA Standard Time' => 'America/Santiago', 'Atlantic Standard Time' => 'America/Halifax', 'Central Brazilian Standard Time' => 'America/Manaus',
             'Newfoundland Standard Time' => 'America/St_Johns', 'Greenland Standard Time' => 'America/Godthab',
             'E. South America Standard Time' => 'America/Sao_Paulo', 'Montevideo Standard Time' => 'America/Montevideo', 'Mid-Atlantic Standard Time' => 'Atlantic/South_Georgia',
-            'Cape Verde Standard Time' => 'Atlantic/Cape_Verde', 'Azores Standard Time' => 'Atlantic/Azores', 'Greenwich Standard Time' => 'Africa/Casablanca',
+            'Cape Verde Standard Time' => 'Atlantic/Cape_Verde', 'Azores Standard Time' => 'Atlantic/Azores', 'Greenwich Standard Time' => 'Africa/Reykjavik',
             'GMT Standard Time' => 'Europe/London', 'W. Central Africa Standard Time' => 'Africa/Lagos', 'W. Europe Standard Time' => 'Europe/Berlin',
             'Romance Standard Time' => 'Europe/Paris', 'Central European Standard Time' => 'Europe/Warsaw', 'Central Europe Standard Time' => 'Europe/Budapest',
             'South Africa Standard Time' => 'Africa/Johannesburg', 'Israel Standard Time' => 'Asia/Jerusalem', 'GTB Standard Time' => 'Europe/Istanbul',
@@ -1548,8 +1580,8 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
             'Jordan Standard Time' => 'Asia/Amman', 'Middle East Standard Time' => 'Asia/Beirut', 'Namibia Standard Time' => 'Africa/Windhoek',
             'E. Africa Standard Time' => 'Africa/Nairobi', 'Azerbaijan Standard Time' => 'Asia/Baku', 'Arab Standard Time' => 'Asia/Riyadh',
             'Georgian Standard Time' => 'Etc/GMT-3', 'Russian Standard Time' => 'Europe/Moscow', 'Arabic Standard Time' => 'Asia/Baghdad',
-            'Iran Standard Time' => 'Asia/Tehran', 'Arabian Standard Time' => 'Asia/Dubai', 'Caucasus Standard Time' => 'Asia/Tbilisi', 'Afghanistan Standard Time' => 'Asia/Kabul',
-            'West Asia Standard Time' => 'Asia/Karachi', 'Ekaterinburg Standard Time' => 'Asia/Yekaterinburg', 'India Standard Time' => 'Asia/Calcutta',
+            'Iran Standard Time' => 'Asia/Tehran', 'Arabian Standard Time' => 'Asia/Dubai', 'Caucasus Standard Time' => 'Asia/Yerevan', 'Afghanistan Standard Time' => 'Asia/Kabul',
+            'West Asia Standard Time' => 'Asia/Tashkent', 'Ekaterinburg Standard Time' => 'Asia/Yekaterinburg', 'India Standard Time' => 'Asia/Calcutta',
             'Nepal Standard Time' => 'Asia/Katmandu', 'Sri Lanka Standard Time' => 'Asia/Colombo', 'Central Asia Standard Time' => 'Asia/Dhaka',
             'N. Central Asia Standard Time' => 'Asia/Novosibirsk', 'Myanmar Standard Time' => 'Asia/Rangoon', 'SE Asia Standard Time' => 'Asia/Bangkok',
             'North Asia Standard Time' => 'Asia/Krasnoyarsk', 'W. Australia Standard Time' => 'Australia/Perth', 'Taipei Standard Time' => 'Asia/Taipei',
@@ -1561,7 +1593,9 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
             'Tonga Standard Time' => 'Pacific/Tongatapu', 'West Pacific Standard Time' => 'Pacific/Port_Moresby',
             'US Eastern Standard Time' => 'Etc/GMT+5', 'SA Eastern Standard Time' => 'Etc/GMT+3',
             'SA Western Standard Time' => 'America/La_Paz', 'North Asia East Standard Time' => 'Asia/Irkutsk',
-            'Argentina Standard Time' => 'America/Buenos_Aires', 'Armenian Standard Time' => 'Asia/Yerevan');
+            'Argentina Standard Time' => 'America/Buenos_Aires', 'Armenian Standard Time' => 'Asia/Yerevan',
+            'Pakistan Standard Time' => 'Asia/Karachi', 'Morocco Standard Time' => 'Africa/Casablanca',
+            'Mauritius Standard Time' => 'Indian/Mauritius');
         $this->assertEquals($result, $value);
 
         $value = Zend_Locale_Data::getContent('de_AT', 'timezonetowindows', 'Fiji Standard Time');
@@ -1584,15 +1618,15 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
             'America/Halifax' => 'Atlantic Standard Time', 'America/Manaus' => 'Central Brazilian Standard Time', 'America/St_Johns' => 'Newfoundland Standard Time',
             'America/Buenos_Aires' => 'Argentina Standard Time', 'America/Godthab' => 'Greenland Standard Time', 'America/Sao_Paulo' => 'E. South America Standard Time',
             'America/Montevideo' => 'Montevideo Standard Time', 'Atlantic/Cape_Verde' => 'Cape Verde Standard Time',
-            'Atlantic/Azores' => 'Azores Standard Time', 'Africa/Casablanca' => 'Greenwich Standard Time', 'Europe/London' => 'GMT Standard Time',
+            'Atlantic/Azores' => 'Azores Standard Time', 'Africa/Casablanca' => 'Morocco Standard Time', 'Europe/London' => 'GMT Standard Time',
             'Africa/Lagos' => 'W. Central Africa Standard Time', 'Europe/Berlin' => 'W. Europe Standard Time', 'Europe/Paris' => 'Romance Standard Time',
             'Europe/Warsaw' => 'Central European Standard Time', 'Africa/Johannesburg' => 'South Africa Standard Time',
             'Asia/Jerusalem' => 'Israel Standard Time', 'Europe/Istanbul' => 'GTB Standard Time',
             'Africa/Cairo' => 'Egypt Standard Time', 'Europe/Minsk' => 'E. Europe Standard Time', 'Asia/Amman' => 'Jordan Standard Time', 'Asia/Beirut' => 'Middle East Standard Time',
             'Africa/Windhoek' => 'Namibia Standard Time', 'Africa/Nairobi' => 'E. Africa Standard Time', 'Asia/Baku' => 'Azerbaijan Standard Time',
-            'Asia/Riyadh' => 'Arab Standard Time', 'Asia/Tbilisi' => 'Caucasus Standard Time', 'Europe/Moscow' => 'Russian Standard Time', 'Asia/Baghdad' => 'Arabic Standard Time',
+            'Asia/Riyadh' => 'Arab Standard Time', 'Europe/Moscow' => 'Russian Standard Time', 'Asia/Baghdad' => 'Arabic Standard Time',
             'Asia/Tehran' => 'Iran Standard Time', 'Asia/Yerevan' => 'Armenian Standard Time', 'Asia/Kabul' => 'Afghanistan Standard Time',
-            'Asia/Karachi' => 'West Asia Standard Time', 'Asia/Yekaterinburg' => 'Ekaterinburg Standard Time', 'Asia/Calcutta' => 'India Standard Time',
+            'Asia/Karachi' => 'Pakistan Standard Time', 'Asia/Yekaterinburg' => 'Ekaterinburg Standard Time', 'Asia/Calcutta' => 'India Standard Time',
             'Asia/Katmandu' => 'Nepal Standard Time', 'Asia/Colombo' => 'Sri Lanka Standard Time', 'Asia/Dhaka' => 'Central Asia Standard Time', 'Asia/Novosibirsk' => 'N. Central Asia Standard Time',
             'Asia/Rangoon' => 'Myanmar Standard Time', 'Asia/Bangkok' => 'SE Asia Standard Time', 'Asia/Krasnoyarsk' => 'North Asia Standard Time', 'Australia/Perth' => 'W. Australia Standard Time',
             'Asia/Taipei' => 'Taipei Standard Time', 'Asia/Singapore' => 'Singapore Standard Time', 'Asia/Shanghai' => 'China Standard Time',
@@ -1605,7 +1639,9 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
             'Etc/GMT+12' => 'Dateline Standard Time', 'Etc/GMT-3' => 'Georgian Standard Time',
             'Etc/GMT+3' => 'SA Eastern Standard Time', 'Etc/GMT+5' => 'US Eastern Standard Time',
             'Pacific/Port_Moresby' => 'West Pacific Standard Time', 'America/La_Paz' => 'SA Western Standard Time',
-            'Asia/Irkutsk' => 'North Asia East Standard Time', 'Atlantic/South_Georgia' => 'Mid-Atlantic Standard Time');
+            'Asia/Irkutsk' => 'North Asia East Standard Time', 'Atlantic/South_Georgia' => 'Mid-Atlantic Standard Time',
+            'Asia/Tashkent' => 'West Asia Standard Time', 'Indian/Mauritius' => 'Mauritius Standard Time',
+            'Africa/Reykjavik' => 'Greenwich Standard Time');
         $this->assertEquals($result, $value);
 
         $value = Zend_Locale_Data::getContent('de_AT', 'windowstotimezone', 'Pacific/Fiji');
@@ -1726,7 +1762,7 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
             'Pacific/Tahiti' => 'PF', 'Pacific/Tarawa' => 'KI', 'Pacific/Tongatapu' => 'TO', 'Pacific/Truk' => 'FM',
             'Pacific/Wake' => 'UM', 'Pacific/Wallis' => 'WF', 'America/Indiana/Tell_City' => 'US', 'America/Resolute' => 'CA',
             'America/St_Barthelemy' => 'BL', 'America/Santarem' => 'BR', 'America/Marigot' => 'MF',
-            'America/Argentina/San_Luis' => 'AR');
+            'America/Argentina/San_Luis' => 'AR', 'America/Argentina/Salta' => 'AR');
         $this->assertEquals($result, $value);
 
         $value = Zend_Locale_Data::getContent('de_AT', 'territorytotimezone', 'Pacific/Fiji');
@@ -1846,7 +1882,7 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
             'America/Indiana/Marengo' => 'Marengo, Indiana', 'America/Indiana/Winamac' => 'Winamac, Indiana',
             'America/Indiana/Tell_City' => 'Tell City, Indiana', 'America/Indiana/Petersburg' => 'Petersburg, Indiana',
             'America/Indiana/Vincennes' => 'Vincennes, Indiana', 'America/North_Dakota/Center' => 'Center, North Dakota',
-            'America/North_Dakota/New_Salem' => 'New Salem, North Dakota', 'America/Indiana/Knox' => 'Knox, Indiana');
+            'America/North_Dakota/New_Salem' => 'New Salem, North Dakota', 'America/Indiana/Knox' => 'Knox');
         $this->assertEquals($result, $value);
 
         $value = Zend_Locale_Data::getContent('de_AT', 'citytotimezone', 'Pacific/Fiji');
@@ -1893,7 +1929,7 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
             'Marengo, Indiana' => 'America/Indiana/Marengo', 'Winamac, Indiana' => 'America/Indiana/Winamac',
             'Tell City, Indiana' => 'America/Indiana/Tell_City', 'Petersburg, Indiana' => 'America/Indiana/Petersburg',
             'Vincennes, Indiana' => 'America/Indiana/Vincennes', 'Center, North Dakota' => 'America/North_Dakota/Center',
-            'New Salem, North Dakota' => 'America/North_Dakota/New_Salem', 'Knox, Indiana' => 'America/Indiana/Knox');
+            'New Salem, North Dakota' => 'America/North_Dakota/New_Salem', 'Knox' => 'America/Indiana/Knox');
         $this->assertEquals($result, $value);
 
         $value = Zend_Locale_Data::getContent('de_AT', 'timezonetocity', 'Fidschi');

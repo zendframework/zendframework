@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.24 $"/>
-		<generation date="$Date: 2008/06/26 03:47:58 $"/>
+		<version number="$Revision: 1.34 $"/>
+		<generation date="$Date: 2009/05/05 23:06:38 $"/>
 		<language type="ne"/>
 	</identity>
 	<localeDisplayNames>
@@ -358,7 +358,7 @@
 			<territory type="GU">गुवाम</territory>
 			<territory type="GW">गिनी-बिसाउ</territory>
 			<territory type="GY">गुयाना</territory>
-			<territory type="HK">हङकङ</territory>
+			<territory type="HK">हङकङ चिनिँया समाजवादी स्वायत्त क्षेत्र</territory>
 			<territory type="HM">हर्ड टापु र म्याकडोनाल्ड टापु</territory>
 			<territory type="HN">हन्डुरास</territory>
 			<territory type="HR">क्रोएशिया</territory>
@@ -411,7 +411,7 @@
 			<territory type="ML">माली</territory>
 			<territory type="MM">म्यान्मार</territory>
 			<territory type="MN">मङ्गोलिया</territory>
-			<territory type="MO">मकावो</territory>
+			<territory type="MO">मकावो चिनिँया स्वशासित क्षेत्र</territory>
 			<territory type="MP">उत्तरी मारिआना टापु</territory>
 			<territory type="MQ">मार्टिनिक</territory>
 			<territory type="MR">माउरिटानिया</territory>
@@ -680,17 +680,17 @@
 				<dateFormats>
 					<dateFormatLength type="full">
 						<dateFormat>
-							<pattern>EEEE, yyyy MMMM dd</pattern>
+							<pattern>EEEE, y MMMM dd</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="long">
 						<dateFormat>
-							<pattern>yyyy MMMM d</pattern>
+							<pattern>y MMMM d</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="medium">
 						<dateFormat>
-							<pattern>yyyy MMM d</pattern>
+							<pattern>y MMM d</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="short">
@@ -702,7 +702,7 @@
 				<timeFormats>
 					<timeFormatLength type="full">
 						<timeFormat>
-							<pattern>HH:mm:ss v</pattern>
+							<pattern>HH:mm:ss zzzz</pattern>
 						</timeFormat>
 					</timeFormatLength>
 					<timeFormatLength type="long">
@@ -722,11 +722,6 @@
 					</timeFormatLength>
 				</timeFormats>
 				<dateTimeFormats>
-					<dateTimeFormatLength>
-						<dateTimeFormat>
-							<pattern>{1} {0}</pattern>
-						</dateTimeFormat>
-					</dateTimeFormatLength>
 					<availableFormats>
 						<dateFormatItem id="yyQ">Q yy</dateFormatItem>
 					</availableFormats>
@@ -746,11 +741,11 @@
 					</field>
 					<field type="day">
 						<displayName>बार</displayName>
+						<relative type="-3">तीन दिन पछि</relative>
+						<relative type="-2">अस्ति</relative>
+						<relative type="-1">हिजो</relative>
 						<relative type="0">आज</relative>
 						<relative type="1">भोलि</relative>
-						<relative type="-1">हिजो</relative>
-						<relative type="-2">अस्ति</relative>
-						<relative type="-3">तीन दिन पछि</relative>
 					</field>
 					<field type="weekday">
 						<displayName>हप्ताको बार</displayName>
@@ -964,7 +959,7 @@
 				<exemplarCity>रेनिरिभर</exemplarCity>
 			</zone>
 			<zone type="America/Rankin_Inlet">
-				<exemplarCity>रान्किन इन¥लेट</exemplarCity>
+				<exemplarCity>रान्किन इन्लेट</exemplarCity>
 			</zone>
 			<zone type="America/Coral_Harbour">
 				<exemplarCity>कोराल बन्दरगाहा</exemplarCity>
@@ -1302,6 +1297,7 @@
 		</timeZoneNames>
 	</dates>
 	<numbers>
+		<defaultNumberingSystem>deva</defaultNumberingSystem>
 		<symbols>
 			<decimal>.</decimal>
 			<group>,</group>
@@ -1356,7 +1352,7 @@
 				<displayName>संयुक्त राज्य डलर</displayName>
 			</currency>
 			<currency type="XXX">
-				<displayName>अपरिचित वा अवैध मुद्रा</displayName>
+				<displayName>अपरिचित वा अवैध मुद्रा</displayName>
 			</currency>
 		</currencies>
 	</numbers>
@@ -1385,4 +1381,3 @@
 		</unit>
 	</units>
 </ldml>
-

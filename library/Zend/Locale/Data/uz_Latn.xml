@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.19 $"/>
-		<generation date="$Date: 2008/05/28 15:49:37 $"/>
+		<version number="$Revision: 1.22 $"/>
+		<generation date="$Date: 2009/05/05 23:06:41 $"/>
 		<language type="uz"/>
 		<script type="Latn"/>
 	</identity>
@@ -63,20 +63,6 @@
 							<month type="11">Noya</month>
 							<month type="12">Dek</month>
 						</monthWidth>
-						<monthWidth type="wide">
-							<month type="1">Muharram</month>
-							<month type="2">Safar</month>
-							<month type="3">Rabiul-avval</month>
-							<month type="4">Rabiul-oxir</month>
-							<month type="5">Jumodiul-ulo</month>
-							<month type="6">Jumodiul-uxro</month>
-							<month type="7">Rajab</month>
-							<month type="8">Shaʿbon</month>
-							<month type="9">Ramazon</month>
-							<month type="10">Shavvol</month>
-							<month type="11">Zil-qaʿda</month>
-							<month type="12">Zil-hijja</month>
-						</monthWidth>
 					</monthContext>
 					<monthContext type="stand-alone">
 						<monthWidth type="narrow">
@@ -92,9 +78,6 @@
 							<month type="10">O</month>
 							<month type="11">N</month>
 							<month type="12">D</month>
-						</monthWidth>
-						<monthWidth type="wide">
-							<month type="1">Yanvar</month>
 						</monthWidth>
 					</monthContext>
 				</months>
@@ -131,6 +114,26 @@
 						</dayWidth>
 					</dayContext>
 				</days>
+			</calendar>
+			<calendar type="islamic">
+				<months>
+					<monthContext type="format">
+						<monthWidth type="wide">
+							<month type="1">Muharram</month>
+							<month type="2">Safar</month>
+							<month type="3">Rabiul-avval</month>
+							<month type="4">Rabiul-oxir</month>
+							<month type="5">Jumodiul-ulo</month>
+							<month type="6">Jumodiul-uxro</month>
+							<month type="7">Rajab</month>
+							<month type="8">Shaʿbon</month>
+							<month type="9">Ramazon</month>
+							<month type="10">Shavvol</month>
+							<month type="11">Zil-qaʿda</month>
+							<month type="12">Zil-hijja</month>
+						</monthWidth>
+					</monthContext>
+				</months>
 			</calendar>
 		</calendars>
 	</dates>

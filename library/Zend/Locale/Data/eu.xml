@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.65 $"/>
-		<generation date="$Date: 2008/06/15 08:09:47 $"/>
+		<version number="$Revision: 1.77 $"/>
+		<generation date="$Date: 2009/05/05 23:06:36 $"/>
 		<language type="eu"/>
 	</identity>
 	<localeDisplayNames>
+		<localeDisplayPattern>
+			<localePattern>{0} ({1})</localePattern>
+			<localeSeparator>, </localeSeparator>
+		</localeDisplayPattern>
 		<languages>
 			<language type="af">afrikaans</language>
 			<language type="am">amharikera</language>
@@ -15,20 +19,20 @@
 			<language type="az">azerbaijanera</language>
 			<language type="be">bielorrusiera</language>
 			<language type="bg">bulgariera</language>
-			<language type="bh">biharrera</language>
+			<language type="bh">bihariera</language>
 			<language type="bn">bengalera</language>
 			<language type="br">bretoiera</language>
 			<language type="bs">bosniera</language>
 			<language type="ca">katalana</language>
 			<language type="cs">txekiera</language>
-			<language type="cy">{0&gt;welsh&lt;}100{&gt;galesera &lt;0}</language>
+			<language type="cy">galesera</language>
 			<language type="da">daniera</language>
 			<language type="de">alemanera</language>
 			<language type="el">greziera</language>
 			<language type="en">ingelera</language>
-			<language type="en_AU">ingelesa (australia)</language>
-			<language type="en_GB">ingelesa (erresuma batua)</language>
-			<language type="en_US">ingelesa (aeb)</language>
+			<language type="en_AU">ingelesa (Australia)</language>
+			<language type="en_GB">ingelesa (Erresuma Batua)</language>
+			<language type="en_US">ingelesa (AEB)</language>
 			<language type="eo">esperantoa</language>
 			<language type="es">espainiera</language>
 			<language type="et">estoniera</language>
@@ -75,7 +79,7 @@
 			<language type="mt">maltera</language>
 			<language type="ne">nepalera</language>
 			<language type="nl">nederlandera</language>
-			<language type="nn">norvegiera (nynorsk)</language>
+			<language type="nn">norvegiera berria</language>
 			<language type="no">norvegiera</language>
 			<language type="oc">okzitaniera</language>
 			<language type="or">oriya</language>
@@ -83,8 +87,8 @@
 			<language type="pl">poloniera</language>
 			<language type="ps">paxtuera</language>
 			<language type="pt">portugalera</language>
-			<language type="pt_BR">portugesa (brasil)</language>
-			<language type="pt_PT">portugesa (portugal)</language>
+			<language type="pt_BR">portugesa (Brasil)</language>
+			<language type="pt_PT">portugesa (Potugal)</language>
 			<language type="ro">errumaniera</language>
 			<language type="ru">errusiera</language>
 			<language type="sa">sanskritoa</language>
@@ -121,17 +125,99 @@
 			<language type="zh_Hant">txinera (tradizionala)</language>
 			<language type="zu">zuluera</language>
 		</languages>
+		<scripts>
+			<script type="Arab">Arab</script>
+			<script type="Armi">Armi</script>
+			<script type="Armn">Armn</script>
+			<script type="Avst">Avst</script>
+			<script type="Bali">Bali</script>
+			<script type="Batk">Batk</script>
+			<script type="Beng">Beng</script>
+			<script type="Blis">Blis</script>
+			<script type="Bopo">Bopo</script>
+			<script type="Brah">Brah</script>
+			<script type="Brai">Brai</script>
+			<script type="Bugi">Bugi</script>
+			<script type="Buhd">Buhd</script>
+			<script type="Cakm">Cakm</script>
+			<script type="Cari">Cari</script>
+			<script type="Cham">Cham</script>
+			<script type="Cher">Txer</script>
+			<script type="Cirt">Cirt</script>
+			<script type="Copt">Copt</script>
+			<script type="Cprt">Cprt</script>
+			<script type="Cyrl">Cyrl</script>
+			<script type="Deva">Deva</script>
+			<script type="Dsrt">Dsrt</script>
+			<script type="Egyd">Egyd</script>
+			<script type="Egyh">Egyh</script>
+			<script type="Egyp">Egyp</script>
+			<script type="Ethi">Etiop</script>
+			<script type="Geok">Geok</script>
+			<script type="Geor">Geor</script>
+			<script type="Glag">Glag</script>
+			<script type="Goth">Goth</script>
+			<script type="Grek">Grez</script>
+			<script type="Gujr">Gujr</script>
+			<script type="Guru">Guru</script>
+			<script type="Hang">Hang</script>
+			<script type="Hani">Hani</script>
+			<script type="Hano">Hano</script>
+			<script type="Hebr">Hebr</script>
+			<script type="Hira">Hira</script>
+			<script type="Hrkt">Hrkt</script>
+			<script type="Inds">Inds</script>
+			<script type="Java">Java</script>
+			<script type="Jpan">Jpon</script>
+			<script type="Kali">Kali</script>
+			<script type="Kana">Kana</script>
+			<script type="Khar">Khar</script>
+			<script type="Khmr">Khmr</script>
+			<script type="Knda">Knda</script>
+			<script type="Kore">Kore</script>
+			<script type="Kthi">Kthi</script>
+			<script type="Lana">Lana</script>
+			<script type="Laoo">Laoo</script>
+			<script type="Latf">Latf</script>
+			<script type="Latg">Latg</script>
+			<script type="Latn">Latn</script>
+			<script type="Lepc">Lepc</script>
+			<script type="Limb">Limb</script>
+			<script type="Lina">Lina</script>
+			<script type="Linb">Linb</script>
+			<script type="Lyci">Lyci</script>
+			<script type="Lydi">Lydi</script>
+			<script type="Mand">Mand</script>
+			<script type="Mani">Mani</script>
+			<script type="Maya">Maia</script>
+			<script type="Mero">Mero</script>
+			<script type="Mlym">Mlym</script>
+			<script type="Mong">Mong</script>
+			<script type="Moon">Moon</script>
+			<script type="Mtei">Mtei</script>
+			<script type="Mymr">Mymr</script>
+			<script type="Nkoo">Nkoo</script>
+			<script type="Phli">Phli</script>
+			<script type="Phlv">Phlv</script>
+			<script type="Prti">Prti</script>
+			<script type="Qaai">Qaai</script>
+			<script type="Syre">Syre</script>
+			<script type="Syrn">Syrn</script>
+			<script type="Talu">Talu</script>
+			<script type="Zmth">Zmth</script>
+			<script type="Zyyy">Zyyy</script>
+		</scripts>
 		<territories>
 			<territory type="AE">Arabiar Emirrerri Batuak</territory>
 			<territory type="AF">Afganistan</territory>
 			<territory type="AG">Antigua eta Barbuda</territory>
 			<territory type="AL">Albania</territory>
 			<territory type="AM">Armenia</territory>
-			<territory type="AN">Nederlandar Antillak</territory>
+			<territory type="AN">Holandarren Antillak</territory>
 			<territory type="AO">Angola</territory>
 			<territory type="AQ">Antartika</territory>
 			<territory type="AR">Argentina</territory>
-			<territory type="AS">Samoa Estatubatuarra</territory>
+			<territory type="AS">Amerikar Samoa</territory>
 			<territory type="AT">Austria</territory>
 			<territory type="AU">Australia</territory>
 			<territory type="AX">Aland Uharteak</territory>
@@ -146,7 +232,7 @@
 			<territory type="BO">Bolibia</territory>
 			<territory type="BR">Brasil</territory>
 			<territory type="BS">Bahamak</territory>
-			<territory type="BT">Bh2utan</territory>
+			<territory type="BT">Bhutan</territory>
 			<territory type="BV">Bouvet Uhartea</territory>
 			<territory type="BW">Botswana</territory>
 			<territory type="BY">Bielorrusia</territory>
@@ -249,7 +335,7 @@
 			<territory type="ML">Mali</territory>
 			<territory type="MM">Birmania</territory>
 			<territory type="MN">Mongolia</territory>
-			<territory type="MO">Macau</territory>
+			<territory type="MO">Makau</territory>
 			<territory type="MP">Iparraldeko Mariana uharteak</territory>
 			<territory type="MR">Mauritania</territory>
 			<territory type="MU">Maurizio</territory>
@@ -327,8 +413,8 @@
 			<territory type="VA">Vatikano</territory>
 			<territory type="VC">Saint Vincent eta Grenadinak</territory>
 			<territory type="VE">Venezuela</territory>
-			<territory type="VG">Virginia uharteak (Erresuma Batua)</territory>
-			<territory type="VI">Virginia uharteak (Ameriketako Estatu Batuak)</territory>
+			<territory type="VG">Birjina uharte britainiarrak</territory>
+			<territory type="VI">Birjina uharte amerikarrak</territory>
 			<territory type="VN">Vietnam</territory>
 			<territory type="VU">Vanuatu</territory>
 			<territory type="WF">Wallis eta Futuna</territory>
@@ -338,18 +424,64 @@
 			<territory type="ZM">Zambia</territory>
 			<territory type="ZW">Zimbabwe</territory>
 		</territories>
+		<variants>
+			<variant type="POLYTON">POLITON</variant>
+			<variant type="REVISED">BERRIKUSIA</variant>
+			<variant type="SAAHO">SAHO</variant>
+			<variant type="SCOTLAND">ESKOZIAR INGELESA</variant>
+			<variant type="VALENCIA">VALENTZIERA</variant>
+		</variants>
+		<keys>
+			<key type="calendar">egutegia</key>
+			<key type="collation">alfabetoa</key>
+			<key type="currency">moneta</key>
+		</keys>
+		<types>
+			<type type="big5han" key="collation">Txinera tradizionalaren alfabetoa-Big5</type>
+			<type type="buddhist" key="calendar">egutegi budista</type>
+			<type type="chinese" key="calendar">txinatar egutegia</type>
+			<type type="direct" key="collation">Zuzena</type>
+			<type type="gb2312han" key="collation">Txinera sinplifikatuaren alfabetoa -GB2312</type>
+			<type type="gregorian" key="calendar">egutegi gregoriarra</type>
+			<type type="hebrew" key="calendar">hebrear egutegia</type>
+			<type type="indian" key="calendar">indiar egutegia</type>
+			<type type="islamic" key="calendar">islamiar egutegia</type>
+			<type type="islamic-civil" key="calendar">islamiar egutegi zibila</type>
+			<type type="japanese" key="calendar">japoniar egutegia</type>
+			<type type="phonebook" key="collation">Telefonoen zerrenda</type>
+			<type type="roc" key="calendar">Txinako Errepublikako egutegia</type>
+			<type type="traditional" key="collation">Tradizionala</type>
+		</types>
+		<measurementSystemNames>
+			<measurementSystemName type="US">US</measurementSystemName>
+			<measurementSystemName type="metric">Metriko</measurementSystemName>
+		</measurementSystemNames>
+		<codePatterns>
+			<codePattern type="language">{0}</codePattern>
+			<codePattern type="script">{0}</codePattern>
+			<codePattern type="territory">{0}</codePattern>
+		</codePatterns>
 	</localeDisplayNames>
 	<characters>
 		<exemplarCharacters>[a-c ç d-n ñ o-z]</exemplarCharacters>
+		<exemplarCharacters type="auxiliary">[]</exemplarCharacters>
+		<exemplarCharacters type="currencySymbol">[a-z]</exemplarCharacters>
 	</characters>
 	<delimiters>
-		<quotationStart>‘</quotationStart>
-		<quotationEnd>’</quotationEnd>
-		<alternateQuotationStart>“</alternateQuotationStart>
-		<alternateQuotationEnd>”</alternateQuotationEnd>
+		<quotationStart>“</quotationStart>
+		<quotationEnd>”</quotationEnd>
+		<alternateQuotationStart>‘</alternateQuotationStart>
+		<alternateQuotationEnd>’</alternateQuotationEnd>
 	</delimiters>
 	<dates>
 		<calendars>
+			<calendar type="buddhist">
+				<eras>
+					<eraAbbr>
+						<era type="0">BG</era>
+					</eraAbbr>
+				</eras>
+			</calendar>
 			<calendar type="gregorian">
 				<months>
 					<monthContext type="format">
@@ -384,18 +516,18 @@
 					</monthContext>
 					<monthContext type="stand-alone">
 						<monthWidth type="narrow">
-							<month type="1">1</month>
-							<month type="2">2</month>
-							<month type="3">3</month>
-							<month type="4">4</month>
-							<month type="5">5</month>
-							<month type="6">6</month>
-							<month type="7">7</month>
-							<month type="8">8</month>
-							<month type="9">9</month>
-							<month type="10">10</month>
-							<month type="11">11</month>
-							<month type="12">12</month>
+							<month type="1">U</month>
+							<month type="2">O</month>
+							<month type="3">M</month>
+							<month type="4">A</month>
+							<month type="5">M</month>
+							<month type="6">E</month>
+							<month type="7">U</month>
+							<month type="8">A</month>
+							<month type="9">I</month>
+							<month type="10">U</month>
+							<month type="11">A</month>
+							<month type="12">A</month>
 						</monthWidth>
 					</monthContext>
 				</months>
@@ -435,10 +567,10 @@
 				<quarters>
 					<quarterContext type="format">
 						<quarterWidth type="abbreviated">
-							<quarter type="1">Hh1</quarter>
-							<quarter type="2">Hh2</quarter>
-							<quarter type="3">Hh3</quarter>
-							<quarter type="4">Hh4</quarter>
+							<quarter type="1">1Hh</quarter>
+							<quarter type="2">2Hh</quarter>
+							<quarter type="3">3Hh</quarter>
+							<quarter type="4">4Hh</quarter>
 						</quarterWidth>
 						<quarterWidth type="wide">
 							<quarter type="1">1. hiruhilekoa</quarter>
@@ -459,29 +591,29 @@
 				<dateFormats>
 					<dateFormatLength type="full">
 						<dateFormat>
-							<pattern>EEEE, yyyy'eko' MMMM'ren' dd'a'</pattern>
+							<pattern>EEEE, y'eko' MMMM'ren' dd'a'</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="long">
 						<dateFormat>
-							<pattern>yyyy'eko' MMM'ren' dd'a'</pattern>
+							<pattern>y'eko' MMM'ren' dd'a'</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="medium">
 						<dateFormat>
-							<pattern>yyyy-MMM-dd</pattern>
+							<pattern>y MMM d</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="short">
 						<dateFormat>
-							<pattern>yy-MM-dd</pattern>
+							<pattern>yyyy-MM-dd</pattern>
 						</dateFormat>
 					</dateFormatLength>
 				</dateFormats>
 				<timeFormats>
 					<timeFormatLength type="full">
 						<timeFormat>
-							<pattern>HH:mm:ss v</pattern>
+							<pattern>HH:mm:ss zzzz</pattern>
 						</timeFormat>
 					</timeFormatLength>
 					<timeFormatLength type="long">
@@ -501,21 +633,29 @@
 					</timeFormatLength>
 				</timeFormats>
 				<dateTimeFormats>
-					<dateTimeFormatLength>
-						<dateTimeFormat>
-							<pattern>{1} {0}</pattern>
-						</dateTimeFormat>
-					</dateTimeFormatLength>
 					<availableFormats>
+						<dateFormatItem id="d">d</dateFormatItem>
 						<dateFormatItem id="yyQ">Q yy</dateFormatItem>
 					</availableFormats>
 				</dateTimeFormats>
+			</calendar>
+			<calendar type="roc">
+				<eras>
+					<eraAbbr>
+						<era type="0">R.O.C. aurretik</era>
+						<era type="1">R.O.C.</era>
+					</eraAbbr>
+				</eras>
 			</calendar>
 		</calendars>
 		<timeZoneNames>
 			<hourFormat>+HH:mm;-HH:mm</hourFormat>
 			<gmtFormat>GMT{0}</gmtFormat>
 			<regionFormat>{0}</regionFormat>
+			<fallbackFormat>{1} ({0})</fallbackFormat>
+			<zone type="Etc/Unknown">
+				<exemplarCity>Ezezaguna</exemplarCity>
+			</zone>
 			<zone type="Asia/Bahrain">
 				<exemplarCity>Bahrein</exemplarCity>
 			</zone>
@@ -530,6 +670,9 @@
 			</zone>
 			<zone type="America/Dominica">
 				<exemplarCity>Dominika</exemplarCity>
+			</zone>
+			<zone type="Atlantic/Canary">
+				<exemplarCity>Espainia (Kanariak)</exemplarCity>
 			</zone>
 			<zone type="Europe/Madrid">
 				<exemplarCity>Madril</exemplarCity>
@@ -558,27 +701,305 @@
 			<zone type="Asia/Singapore">
 				<exemplarCity>Singapur</exemplarCity>
 			</zone>
+			<zone type="America/North_Dakota/Center">
+				<exemplarCity>Ameriketako Estatu Batuak (Erdialdea, Ipar Dakota)</exemplarCity>
+			</zone>
+			<metazone type="Australia_Central">
+				<commonlyUsed>true</commonlyUsed>
+			</metazone>
+			<metazone type="Australia_CentralWestern">
+				<commonlyUsed>true</commonlyUsed>
+			</metazone>
+			<metazone type="Australia_Eastern">
+				<commonlyUsed>true</commonlyUsed>
+			</metazone>
+			<metazone type="Australia_Western">
+				<commonlyUsed>true</commonlyUsed>
+			</metazone>
+			<metazone type="Azores">
+				<commonlyUsed>true</commonlyUsed>
+			</metazone>
+			<metazone type="British">
+				<commonlyUsed>true</commonlyUsed>
+			</metazone>
+			<metazone type="Cape_Verde">
+				<commonlyUsed>true</commonlyUsed>
+			</metazone>
+			<metazone type="Chamorro">
+				<commonlyUsed>true</commonlyUsed>
+			</metazone>
+			<metazone type="Chatham">
+				<commonlyUsed>true</commonlyUsed>
+			</metazone>
+			<metazone type="Christmas">
+				<commonlyUsed>true</commonlyUsed>
+			</metazone>
+			<metazone type="Cocos">
+				<commonlyUsed>true</commonlyUsed>
+			</metazone>
+			<metazone type="Cook">
+				<commonlyUsed>true</commonlyUsed>
+			</metazone>
+			<metazone type="Davis">
+				<commonlyUsed>true</commonlyUsed>
+			</metazone>
+			<metazone type="DumontDUrville">
+				<commonlyUsed>true</commonlyUsed>
+			</metazone>
+			<metazone type="Easter">
+				<commonlyUsed>true</commonlyUsed>
+			</metazone>
+			<metazone type="Europe_Central">
+				<short>
+					<standard>CET</standard>
+					<daylight>CEST</daylight>
+				</short>
+				<commonlyUsed>true</commonlyUsed>
+			</metazone>
+			<metazone type="Europe_Eastern">
+				<short>
+					<standard>EET</standard>
+					<daylight>EEST</daylight>
+				</short>
+				<commonlyUsed>true</commonlyUsed>
+			</metazone>
+			<metazone type="Europe_Western">
+				<short>
+					<standard>WET</standard>
+					<daylight>WEST</daylight>
+				</short>
+				<commonlyUsed>true</commonlyUsed>
+			</metazone>
+			<metazone type="Falkland">
+				<commonlyUsed>true</commonlyUsed>
+			</metazone>
+			<metazone type="Fiji">
+				<commonlyUsed>true</commonlyUsed>
+			</metazone>
+			<metazone type="French_Southern">
+				<commonlyUsed>true</commonlyUsed>
+			</metazone>
+			<metazone type="GMT">
+				<short>
+					<standard>GMT</standard>
+				</short>
+				<commonlyUsed>true</commonlyUsed>
+			</metazone>
+			<metazone type="Galapagos">
+				<commonlyUsed>true</commonlyUsed>
+			</metazone>
+			<metazone type="Gambier">
+				<commonlyUsed>true</commonlyUsed>
+			</metazone>
+			<metazone type="Indian_Ocean">
+				<commonlyUsed>true</commonlyUsed>
+			</metazone>
+			<metazone type="Irish">
+				<commonlyUsed>true</commonlyUsed>
+			</metazone>
+			<metazone type="Kuybyshev">
+				<commonlyUsed>true</commonlyUsed>
+			</metazone>
+			<metazone type="Lord_Howe">
+				<commonlyUsed>true</commonlyUsed>
+			</metazone>
+			<metazone type="Maldives">
+				<commonlyUsed>true</commonlyUsed>
+			</metazone>
+			<metazone type="Mauritius">
+				<commonlyUsed>true</commonlyUsed>
+			</metazone>
+			<metazone type="Mawson">
+				<commonlyUsed>true</commonlyUsed>
+			</metazone>
+			<metazone type="Moscow">
+				<commonlyUsed>true</commonlyUsed>
+			</metazone>
+			<metazone type="Reunion">
+				<commonlyUsed>true</commonlyUsed>
+			</metazone>
+			<metazone type="Rothera">
+				<commonlyUsed>true</commonlyUsed>
+			</metazone>
+			<metazone type="Samara">
+				<commonlyUsed>true</commonlyUsed>
+			</metazone>
+			<metazone type="Seychelles">
+				<commonlyUsed>true</commonlyUsed>
+			</metazone>
+			<metazone type="South_Georgia">
+				<commonlyUsed>true</commonlyUsed>
+			</metazone>
+			<metazone type="Syowa">
+				<commonlyUsed>true</commonlyUsed>
+			</metazone>
+			<metazone type="Turkey">
+				<commonlyUsed>true</commonlyUsed>
+			</metazone>
+			<metazone type="Volgograd">
+				<commonlyUsed>true</commonlyUsed>
+			</metazone>
+			<metazone type="Vostok">
+				<commonlyUsed>true</commonlyUsed>
+			</metazone>
 		</timeZoneNames>
 	</dates>
 	<numbers>
 		<symbols>
 			<decimal>,</decimal>
 			<group>.</group>
+			<list>;</list>
+			<percentSign>%</percentSign>
+			<nativeZeroDigit>0</nativeZeroDigit>
+			<patternDigit>#</patternDigit>
+			<plusSign>+</plusSign>
+			<minusSign>-</minusSign>
+			<exponential>E</exponential>
+			<perMille>‰</perMille>
+			<infinity>∞</infinity>
+			<nan>NaN</nan>
 		</symbols>
+		<decimalFormats>
+			<decimalFormatLength>
+				<decimalFormat>
+					<pattern>#,##0.###</pattern>
+				</decimalFormat>
+			</decimalFormatLength>
+		</decimalFormats>
+		<scientificFormats>
+			<scientificFormatLength>
+				<scientificFormat>
+					<pattern>#E0</pattern>
+				</scientificFormat>
+			</scientificFormatLength>
+		</scientificFormats>
 		<currencyFormats>
 			<currencyFormatLength>
 				<currencyFormat>
 					<pattern>#,##0.00 ¤</pattern>
 				</currencyFormat>
 			</currencyFormatLength>
+			<unitPattern count="one">{0}{1}</unitPattern>
+			<unitPattern count="other">{0} {1}</unitPattern>
 		</currencyFormats>
 		<currencies>
+			<currency type="BRL">
+				<displayName>BRL</displayName>
+			</currency>
+			<currency type="CNY">
+				<displayName>CNY</displayName>
+			</currency>
 			<currency type="ESP">
 				<pattern>¤ #,##0;-¤ #,##0</pattern>
 				<symbol>₧</symbol>
 				<decimal>,</decimal>
 				<group>.</group>
 			</currency>
+			<currency type="EUR">
+				<displayName>EUR</displayName>
+			</currency>
+			<currency type="GBP">
+				<displayName>GBP</displayName>
+			</currency>
+			<currency type="INR">
+				<displayName>INR</displayName>
+			</currency>
+			<currency type="JPY">
+				<displayName>JPY</displayName>
+			</currency>
+			<currency type="RUB">
+				<displayName>RUB</displayName>
+			</currency>
+			<currency type="USD">
+				<displayName>USD</displayName>
+			</currency>
+			<currency type="USN">
+				<displayName>USN</displayName>
+			</currency>
+			<currency type="USS">
+				<displayName>USS</displayName>
+			</currency>
+			<currency type="XAG">
+				<displayName>XAG</displayName>
+			</currency>
+			<currency type="XAU">
+				<displayName>XAU</displayName>
+			</currency>
+			<currency type="XBA">
+				<displayName>XBA</displayName>
+			</currency>
+			<currency type="XBB">
+				<displayName>XBB</displayName>
+			</currency>
+			<currency type="XBC">
+				<displayName>XBC</displayName>
+			</currency>
+			<currency type="XBD">
+				<displayName>XBD</displayName>
+			</currency>
+			<currency type="XDR">
+				<displayName>XDR</displayName>
+			</currency>
+			<currency type="XEU">
+				<displayName>XEU</displayName>
+			</currency>
+			<currency type="XFO">
+				<displayName>XFO</displayName>
+			</currency>
+			<currency type="XFU">
+				<displayName>XFU</displayName>
+			</currency>
+			<currency type="XPD">
+				<displayName>XPD</displayName>
+			</currency>
+			<currency type="XPT">
+				<displayName>XPT</displayName>
+			</currency>
+			<currency type="XRE">
+				<displayName>XRE</displayName>
+			</currency>
+			<currency type="XTS">
+				<displayName>XTS</displayName>
+			</currency>
+			<currency type="XXX">
+				<displayName>XXX</displayName>
+			</currency>
 		</currencies>
 	</numbers>
+	<units>
+		<unit type="day">
+			<unitPattern count="one">{0} eguna</unitPattern>
+			<unitPattern count="other">{0} egun</unitPattern>
+		</unit>
+		<unit type="hour">
+			<unitPattern count="one">{0} ordua</unitPattern>
+			<unitPattern count="other">{0} h</unitPattern>
+		</unit>
+		<unit type="minute">
+			<unitPattern count="one">{0} minutu</unitPattern>
+			<unitPattern count="other">{0} minutu</unitPattern>
+		</unit>
+		<unit type="month">
+			<unitPattern count="one">{0} hilea</unitPattern>
+		</unit>
+		<unit type="second">
+			<unitPattern count="one">{0} segundo</unitPattern>
+			<unitPattern count="other">{0} s</unitPattern>
+		</unit>
+		<unit type="week">
+			<unitPattern count="one">{0} aste</unitPattern>
+			<unitPattern count="other">{0} aste</unitPattern>
+		</unit>
+		<unit type="year">
+			<unitPattern count="one">{0} urtea</unitPattern>
+			<unitPattern count="other">{0} y</unitPattern>
+		</unit>
+	</units>
+	<posix>
+		<messages>
+			<yesstr>bai:b</yesstr>
+			<nostr>ez:e</nostr>
+		</messages>
+	</posix>
 </ldml>
+

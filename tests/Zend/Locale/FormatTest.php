@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -21,7 +20,6 @@
  * @version    $Id$
  */
 
-
 /**
  * Zend_Locale_Format
  */
@@ -32,14 +30,12 @@ require_once 'Zend/Locale/Format.php';
  */
 require_once 'PHPUnit/Framework/TestCase.php';
 
-
 /**
  * @package    Zend_Locale
  * @subpackage UnitTests
  */
 class Zend_Locale_FormatTest extends PHPUnit_Framework_TestCase
 {
-
     /**
      * teardown / cleanup
      */
@@ -56,7 +52,6 @@ class Zend_Locale_FormatTest extends PHPUnit_Framework_TestCase
             setlocale(LC_ALL, TESTS_ZEND_LOCALE_FORMAT_SETLOCALE);
         }
     }
-
 
     /**
      * test getNumber
@@ -85,7 +80,6 @@ class Zend_Locale_FormatTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(-1234567.12345,   Zend_Locale_Format::getNumber('-1.234.567,12345',   $options));
         $this->assertEquals( 1234567.12345,   Zend_Locale_Format::getNumber( '1.234.567,12345',   $options));
     }
-
 
     /**
      * test to number
@@ -820,9 +814,9 @@ class Zend_Locale_FormatTest extends PHPUnit_Framework_TestCase
         }
         // test interaction between class-wide default date format and using locale's default format
         try {
-            $result = array('date_format' => 'MMM d, yyyy', 'locale' => 'en_US', 'month' => '7',
+            $result = array('date_format' => 'MMM d, y', 'locale' => 'en_US', 'month' => '7',
                     'day' => '4', 'year' => '2007');
-            Zend_Locale_Format::setOptions(array('format_type' => 'iso', 'date_format' => 'MMM d, yyyy', 'locale' => 'en_US')); // test setUp
+            Zend_Locale_Format::setOptions(array('format_type' => 'iso', 'date_format' => 'MMM d, y', 'locale' => 'en_US')); // test setUp
         } catch (Zend_Locale_Exception $e) {
             $this->fail("exception expected");
         }

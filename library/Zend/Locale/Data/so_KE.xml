@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.46 $"/>
-		<generation date="$Date: 2008/05/28 15:49:36 $"/>
+		<version number="$Revision: 1.50 $"/>
+		<generation date="$Date: 2009/05/05 23:06:40 $"/>
 		<language type="so"/>
 		<territory type="KE"/>
 	</identity>
-	<numbers>
-		<currencies>
-			<currency type="SOS">
-				<symbol>SOS</symbol>
-			</currency>
-		</currencies>
-	</numbers>
 </ldml>

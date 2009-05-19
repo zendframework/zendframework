@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.70 $"/>
-		<generation date="$Date: 2008/06/26 03:47:57 $"/>
+		<version number="$Revision: 1.90 $"/>
+		<generation date="$Date: 2009/05/05 23:06:34 $"/>
 		<language type="bn"/>
 	</identity>
 	<localeDisplayNames>
 		<localeDisplayPattern>
+			<localePattern>{0} ({1})</localePattern>
 			<localeSeparator>, </localeSeparator>
 		</localeDisplayPattern>
 		<languages>
@@ -48,11 +49,11 @@
 			<language type="az">আজারবাইজানীয়</language>
 			<language type="ba">বাশকির</language>
 			<language type="bad">বান্দা</language>
-			<language type="bai">বামিলেকে</language>
-			<language type="bal">বেলুচীয়</language>
+			<language type="bai">বামিলেকে ভাষা</language>
+			<language type="bal">বেলুচী</language>
 			<language type="ban">বালিনীয়</language>
 			<language type="bas">বাসা</language>
-			<language type="bat">বাল্টিক</language>
+			<language type="bat">বাল্টিক ভাষা</language>
 			<language type="be">বেলারুশিয়</language>
 			<language type="bej">বেজা</language>
 			<language type="bem">বেম্বা</language>
@@ -101,7 +102,7 @@
 			<language type="cpf">ফরাসি জাত ক্রেওল অথবা পিজিন</language>
 			<language type="cpp">পোর্তুগিজ-ভিত্তিক ক্রেওল বা পিজন</language>
 			<language type="cr">ক্রি</language>
-			<language type="crh">ক্রাইমিও তুর্কি</language>
+			<language type="crh">ক্রিমিয়ান তুর্কি</language>
 			<language type="crp">ক্রেওল অথবা পিজিন</language>
 			<language type="cs">চেক</language>
 			<language type="csb">কাশুবিয়ান</language>
@@ -183,7 +184,7 @@
 			<language type="got">গথিক</language>
 			<language type="grb">গ্রেবো</language>
 			<language type="grc">প্রাচীন গ্রীক</language>
-			<language type="gsw">সুইস জার্মানি</language>
+			<language type="gsw">সুইস জার্মান</language>
 			<language type="gu">গুজরাটি</language>
 			<language type="gv">ম্যাঙ্কস</language>
 			<language type="gwi">গওইচ্’ইন</language>
@@ -207,9 +208,9 @@
 			<language type="ia">ইন্টারলিঙ্গুয়া</language>
 			<language type="iba">ইবান</language>
 			<language type="id">ইন্দোনেশীয়</language>
-			<language type="ie">ইন্টারলিঙ্গ্</language>
+			<language type="ie">ইন্টারলিঙ্গ</language>
 			<language type="ig">ইগ্‌বো</language>
-			<language type="ii">সিছুয়ান</language>
+			<language type="ii">সিচুয়ান য়ি</language>
 			<language type="ijo">ইজো</language>
 			<language type="ik">ইনুপিয়াক</language>
 			<language type="ilo">ইলোকো</language>
@@ -218,7 +219,7 @@
 			<language type="inh">ইঙ্গুশ</language>
 			<language type="io">ইডো</language>
 			<language type="ira">ইরানী ভাষা</language>
-			<language type="iro">ইরোকুওইয়ান ভাষা</language>
+			<language type="iro">ইরোকোইয়ান ভাষা</language>
 			<language type="is">আইসল্যান্ডীয়</language>
 			<language type="it">ইতালীয়</language>
 			<language type="iu">ইনুক্টিটুট</language>
@@ -286,7 +287,7 @@
 			<language type="lus">লুশাই</language>
 			<language type="lv">লাত্‌ভীয়</language>
 			<language type="mad">মাদুরেসে</language>
-			<language type="mag">মাঘি</language>
+			<language type="mag">মাগাহি</language>
 			<language type="mai">মৈথিলি</language>
 			<language type="mak">ম্যাকাসার</language>
 			<language type="man">ম্যান্ডিঙ্গো</language>
@@ -338,9 +339,9 @@
 			<language type="niu">নিউয়ান</language>
 			<language type="nl">ডাচ</language>
 			<language type="nl_BE">ফ্লেমিশ</language>
-			<language type="nn">নরওয়েজীয় (নিনর্স্ক)</language>
+			<language type="nn">নরওয়েজীয়ান নিনর্স্ক</language>
 			<language type="no">নরওয়েজীয়</language>
-			<language type="nog">নৌগাই</language>
+			<language type="nog">নোগাই</language>
 			<language type="non">প্রাচীন নর্স</language>
 			<language type="nqo">এন’কো</language>
 			<language type="nr">দক্ষিণ এনডেবেলে</language>
@@ -349,16 +350,16 @@
 			<language type="nv">নাভাজো</language>
 			<language type="nwc">প্রাচীন নেওয়ারী</language>
 			<language type="ny">নায়াঞ্জা</language>
-			<language type="nym">নায়ামওয়েজি</language>
-			<language type="nyn">নায়াঙ্কোলে</language>
-			<language type="nyo">নায়োরো</language>
+			<language type="nym">ন্যায়ামওয়েজি</language>
+			<language type="nyn">ন্যায়াঙ্কোলে</language>
+			<language type="nyo">ন্যোরো</language>
 			<language type="nzi">এন্.জিমা</language>
 			<language type="oc">অক্সিটান</language>
 			<language type="oj">ওজিবওয়া</language>
 			<language type="om">অরোমো</language>
 			<language type="or">উড়িয়া</language>
 			<language type="os">ওসেটিক</language>
-			<language type="osa">ওস্যাগে</language>
+			<language type="osa">ওসেজ</language>
 			<language type="ota">অটোমান তুর্কি</language>
 			<language type="oto">অটোমান ভাষা</language>
 			<language type="pa">পাঞ্জাবী</language>
@@ -370,12 +371,12 @@
 			<language type="pau">পালায়ুয়ান</language>
 			<language type="peo">প্রাচীন ফার্সি</language>
 			<language type="phi">ফিলিপাইন ভাষা</language>
-			<language type="phn">ফিনিশীয়</language>
+			<language type="phn">ফোনিশীয়ান</language>
 			<language type="pi">পালি</language>
 			<language type="pl">পোলিশ</language>
 			<language type="pon">পোহ্নপেইয়ান</language>
 			<language type="pra">প্রাকৃত ভাষা</language>
-			<language type="pro">প্রাচীন প্রোভেনক্যাল</language>
+			<language type="pro">প্রাচীন প্রোভেনসাল</language>
 			<language type="ps">পশ্তু</language>
 			<language type="pt">পর্তুগীজ</language>
 			<language type="pt_BR">ব্রাজিলীয় পর্তুগীজ</language>
@@ -383,7 +384,7 @@
 			<language type="qu">কেচুয়া</language>
 			<language type="raj">রাজস্থানী</language>
 			<language type="rap">রাপানুই</language>
-			<language type="rar">রারোটোগ্যান</language>
+			<language type="rar">রারোটোংগান</language>
 			<language type="rm">রেটো-রোমানীয়</language>
 			<language type="rn">রুন্দি</language>
 			<language type="ro">রোমানীয়</language>
@@ -401,7 +402,7 @@
 			<language type="sam">সামারিটান আরামিক</language>
 			<language type="sas">সাসাক</language>
 			<language type="sat">সাঁওতালি</language>
-			<language type="sc">সার্ডিনোয়ান</language>
+			<language type="sc">সার্ডিনিয়ান</language>
 			<language type="scn">সিসিলিয়ান</language>
 			<language type="sco">স্কটস</language>
 			<language type="sd">সিন্ধি</language>
@@ -412,7 +413,7 @@
 			<language type="sga">প্রাচীন আইরিশ</language>
 			<language type="sgn">চিহ্ন ভাষা</language>
 			<language type="sh">সার্বো-ক্রোয়েশিয়</language>
-			<language type="shn">শ্যান</language>
+			<language type="shn">শান</language>
 			<language type="si">সিংহলী</language>
 			<language type="sid">সিডামো</language>
 			<language type="sio">সিওয়ুয়ান ভাষা</language>
@@ -434,7 +435,7 @@
 			<language type="sq">আলবেনীয়</language>
 			<language type="sr">সার্বীয়</language>
 			<language type="srn">স্রানান টোঙ্গো</language>
-			<language type="srr">সেরে</language>
+			<language type="srr">সেরের</language>
 			<language type="ss">সোয়াতি</language>
 			<language type="ssa">নিলো-সাহারান ভাষা</language>
 			<language type="st">দক্ষিন সোথো</language>
@@ -463,12 +464,12 @@
 			<language type="tlh">ক্লিঙ্গন</language>
 			<language type="tli">ত্লিঙ্গিট</language>
 			<language type="tmh">তামাশেক</language>
-			<language type="tn">ত্‍সওয়ানা</language>
+			<language type="tn">সোয়ানা</language>
 			<language type="to">টঙ্গা</language>
 			<language type="tog">নায়াসা টোঙ্গা</language>
 			<language type="tpi">টোক পিসিন</language>
 			<language type="tr">তুর্কী</language>
-			<language type="ts">ত্‍সঙ্গা</language>
+			<language type="ts">সঙ্গা</language>
 			<language type="tsi">সিমশিয়ান</language>
 			<language type="tt">তাতার</language>
 			<language type="tum">তুম্বুকা</language>
@@ -495,10 +496,10 @@
 			<language type="wak">ওয়াকাশান ভাষা</language>
 			<language type="wal">ওয়ালামো</language>
 			<language type="war">ওয়ারে</language>
-			<language type="was">ওয়াশা</language>
+			<language type="was">ওয়াশো</language>
 			<language type="wen">সোরবিয়ান ভাষা</language>
 			<language type="wo">উওলোফ</language>
-			<language type="xal">কাল্মাইক</language>
+			<language type="xal">কাল্মইক</language>
 			<language type="xh">জোসা</language>
 			<language type="yao">ইয়াও</language>
 			<language type="yap">ইয়াপেসে</language>
@@ -531,9 +532,9 @@
 			<script type="Brah">ব্রাহ্মী</script>
 			<script type="Brai">ব্রাইলে</script>
 			<script type="Bugi">বুগি</script>
-			<script type="Buhd">বুহি্দ</script>
+			<script type="Buhd">বুহিড</script>
 			<script type="Cakm">চাকমা</script>
-			<script type="Cans">ক্যান্স</script>
+			<script type="Cans">সংযুক্ত কানাডিয়ান অ্যাব্রোজিনিয়ান সিলেবিক্স</script>
 			<script type="Cari">ক্যারিয়ান</script>
 			<script type="Cham">চ্যাম</script>
 			<script type="Cher">চেরোকি</script>
@@ -541,7 +542,7 @@
 			<script type="Copt">কোপ্টিক</script>
 			<script type="Cprt">সাইপ্রোয়েট</script>
 			<script type="Cyrl">সিরিলিক</script>
-			<script type="Cyrs">স্লাবোনিক সিরিলিক (প্রাচীন)</script>
+			<script type="Cyrs">প্রাচীন চার্চ স্লাভোনিক সিরিলিক</script>
 			<script type="Deva">দেবনাগরি</script>
 			<script type="Dsrt">দেসেরাত</script>
 			<script type="Egyd">মিশরীয় ডেমোটিক</script>
@@ -567,13 +568,13 @@
 			<script type="Hung">পুরোনো হাঙ্গেরীয়</script>
 			<script type="Inds">সিন্ধু</script>
 			<script type="Ital">প্রাচীন ইতালি</script>
-			<script type="Java">জাভা</script>
+			<script type="Java">জাভানিজ</script>
 			<script type="Jpan">জাপানী</script>
 			<script type="Kali">কায়াহ লি</script>
 			<script type="Kana">কাটাকানা</script>
 			<script type="Khar">খরোষ্ঠী</script>
 			<script type="Khmr">খমের</script>
-			<script type="Knda">কান্নাডা</script>
+			<script type="Knda">কানাড়া</script>
 			<script type="Kore">কোরিয়ান</script>
 			<script type="Kthi">কাইথি</script>
 			<script type="Lana">লান্না</script>
@@ -590,7 +591,7 @@
 			<script type="Mand">ম্যান্ডায়ীন</script>
 			<script type="Mani">ম্যানিচাইন</script>
 			<script type="Maya">মায়ান হায়ারোগ্লিপ</script>
-			<script type="Mero">মেরোটিক</script>
+			<script type="Mero">মেরোইটিক</script>
 			<script type="Mlym">মালায়ালাম</script>
 			<script type="Mong">মোঙ্গোলীয়</script>
 			<script type="Moon">মুন</script>
@@ -598,12 +599,12 @@
 			<script type="Mymr">মায়ানমার</script>
 			<script type="Nkoo">এনকো</script>
 			<script type="Ogam">ওঘাম</script>
-			<script type="Olck">ওই চিকি</script>
+			<script type="Olck">ওল চিকি</script>
 			<script type="Orkh">অর্খোন</script>
 			<script type="Orya">উড়িয়া</script>
 			<script type="Osma">ওসমানিয়</script>
 			<script type="Perm">প্রাচীন পার্মিক</script>
-			<script type="Phag">ফাগ্সপা</script>
+			<script type="Phag">ফাগ্স-পা</script>
 			<script type="Phli">খদিত পাহলভি</script>
 			<script type="Phlp">সল্টার পাহলভি</script>
 			<script type="Phlv">পুস্তক পাহলভি</script>
@@ -648,7 +649,7 @@
 			<script type="Zsym">প্রতীকসমুহ</script>
 			<script type="Zxxx">অলিখিত</script>
 			<script type="Zyyy">সাধারন</script>
-			<script type="Zzzz">অজানা বা ভুল ভাষা</script>
+			<script type="Zzzz">অজানা বা ভুল লিপি</script>
 		</scripts>
 		<territories>
 			<territory type="001">পৃথিবী</territory>
@@ -658,19 +659,19 @@
 			<territory type="009">ওসানিয়া</territory>
 			<territory type="011">পশ্চিমাঞ্চলীয় আফ্রিকা</territory>
 			<territory type="013">মধ্য আমেরিকা</territory>
-			<territory type="014">পশ্চিম আফ্রিকা</territory>
+			<territory type="014">পূর্ব আফ্রিকা</territory>
 			<territory type="015">উত্তর আফ্রিকা</territory>
 			<territory type="017">মধ্য আফ্রিকা</territory>
 			<territory type="018">দক্ষিণাঞ্চলীয় আফ্রিকা</territory>
-			<territory type="019">আমেরিকা</territory>
+			<territory type="019">আমেরিকাস</territory>
 			<territory type="021">উত্তরাঞ্চলীয় আমেরিকা</territory>
 			<territory type="029">ক্যারাবিয়ান</territory>
-			<territory type="030">পশ্চিম এশিয়া</territory>
+			<territory type="030">পূর্ব এশিয়া</territory>
 			<territory type="034">দক্ষিণাঞ্চলীয় এশিয়া</territory>
 			<territory type="035">দক্ষিন পূর্ব এশিয়া</territory>
 			<territory type="039">দক্ষিণাঞ্চলীয় ইউরোপ</territory>
-			<territory type="053">অস্ট্রেলিয়া এবং নিউজিল্যান্ড</territory>
-			<territory type="054">ম্যালেনিশা</territory>
+			<territory type="053">অস্ট্রেলিয়া এবং নিউজিল্যান্ড</territory>
+			<territory type="054">ম্যালেনেশিয়া</territory>
 			<territory type="057">ম্যালেনিশা অঞ্চল</territory>
 			<territory type="061">পলিনেশিয়া</territory>
 			<territory type="062">দক্ষিন মধ্য এশিয়া</territory>
@@ -678,11 +679,13 @@
 			<territory type="143">মধ্য এশিয়া</territory>
 			<territory type="145">পশ্চিমাঞ্চলীয় এশিয়া</territory>
 			<territory type="150">ইউরোপ</territory>
-			<territory type="151">পশ্চিম ইউরোপ</territory>
+			<territory type="151">পূর্ব ইউরোপ</territory>
 			<territory type="154">উত্তরাঞ্চলীয় ইউরোপ</territory>
 			<territory type="155">পশ্চিমাঞ্চলীয় ইউরোপ</territory>
 			<territory type="172">স্বাধীন রাষ্ট্রের কমনওয়েলথ</territory>
+			<territory type="200">চেকোস্লোভাকিয়া</territory>
 			<territory type="419">ল্যাটিন আমেরিকা এবং ক্যারাবিয়ান</territory>
+			<territory type="830">চ্যানেল দ্বীপপুঞ্জ</territory>
 			<territory type="AD">এ্যান্ডোরা</territory>
 			<territory type="AE">সংযুক্ত আরব আমিরাত</territory>
 			<territory type="AF">আফগানিস্তান</territory>
@@ -703,13 +706,13 @@
 			<territory type="BA">বসনিয়া ও হার্জেগোভিনা</territory>
 			<territory type="BB">বারবাদোস</territory>
 			<territory type="BD">বাংলাদেশ</territory>
-			<territory type="BE">বেল্জিয়ম</territory>
+			<territory type="BE">বেলজিয়াম</territory>
 			<territory type="BF">বুরকিনা ফাসো</territory>
 			<territory type="BG">বুলগেরিয়া</territory>
 			<territory type="BH">বাহরাইন</territory>
 			<territory type="BI">বুরুন্ডি</territory>
 			<territory type="BJ">বেনিন</territory>
-			<territory type="BL">সেন্ট</territory>
+			<territory type="BL">সেন্ট বারথেলিমি</territory>
 			<territory type="BM">বারমুডা</territory>
 			<territory type="BN">ব্রুনেই</territory>
 			<territory type="BO">বোলিভিয়া</territory>
@@ -719,7 +722,7 @@
 			<territory type="BV">বোভেট দ্বীপ</territory>
 			<territory type="BW">বতসোয়ানা</territory>
 			<territory type="BY">বেলোরুশিয়া</territory>
-			<territory type="BZ">বেলজিয়াম</territory>
+			<territory type="BZ">বেলিয</territory>
 			<territory type="CA">কানাডা</territory>
 			<territory type="CC">কোকোস দ্বীপপুঞ্জ</territory>
 			<territory type="CD">কঙ্গো - কিনসাসা</territory>
@@ -733,6 +736,7 @@
 			<territory type="CN">চীন</territory>
 			<territory type="CO">কোলোম্বিয়া</territory>
 			<territory type="CR">কোস্টারিকা</territory>
+			<territory type="CS">সারবিয়ান এবং মন্টেনিগ্রো</territory>
 			<territory type="CU">কিউবা</territory>
 			<territory type="CV">কেপভার্দে</territory>
 			<territory type="CX">ক্রিসমাস দ্বীপ</territory>
@@ -740,11 +744,11 @@
 			<territory type="CZ">চেক প্রজাতন্ত্র</territory>
 			<territory type="DE">জার্মানি</territory>
 			<territory type="DJ">জিবুতি</territory>
-			<territory type="DK">ডেন্মার্ক</territory>
-			<territory type="DM">ডোমেনিকা</territory>
+			<territory type="DK">ডেনমার্ক</territory>
+			<territory type="DM">ডোমিনিকা</territory>
 			<territory type="DO">ডোমেনিকান প্রজাতন্ত্র</territory>
 			<territory type="DZ">এলজিরিয়া</territory>
-			<territory type="EC">ইকোয়াডর</territory>
+			<territory type="EC">ইকুয়েডর</territory>
 			<territory type="EE">এস্তোনিয়া</territory>
 			<territory type="EG">মিশর</territory>
 			<territory type="EH">পশ্চিমী সাহারা</territory>
@@ -763,7 +767,7 @@
 			<territory type="GE">জর্জিয়া</territory>
 			<territory type="GF">ফরাসী গায়ানা</territory>
 			<territory type="GG">গ্রাঞ্জি</territory>
-			<territory type="GH">গানা</territory>
+			<territory type="GH">ঘানা</territory>
 			<territory type="GI">জিব্রাল্টার</territory>
 			<territory type="GL">গ্রীনল্যান্ড</territory>
 			<territory type="GM">গাম্বিয়া</territory>
@@ -776,7 +780,7 @@
 			<territory type="GU">গুয়াম</territory>
 			<territory type="GW">গিনি-বিসাউ</territory>
 			<territory type="GY">গিয়ানা</territory>
-			<territory type="HK">হংকং</territory>
+			<territory type="HK">হংকং এসএআর চীনা</territory>
 			<territory type="HM">হার্ড দ্বীপ এবং ম্যাকডোনাল্ড দ্বীপপুঞ্জ</territory>
 			<territory type="HN">হণ্ডুরাস</territory>
 			<territory type="HR">ক্রোয়েশিয়া</territory>
@@ -812,7 +816,7 @@
 			<territory type="LC">সেন্ট লুসিয়া</territory>
 			<territory type="LI">লিচেনস্টেইন</territory>
 			<territory type="LK">শ্রীলঙ্কা</territory>
-			<territory type="LR">লাইবিরিয়া</territory>
+			<territory type="LR">লাইবেরিয়া</territory>
 			<territory type="LS">লেসোথো</territory>
 			<territory type="LT">লিত্ভা</territory>
 			<territory type="LU">লাক্সেমবার্গ</territory>
@@ -829,7 +833,7 @@
 			<territory type="ML">মালি</territory>
 			<territory type="MM">মায়ানমার</territory>
 			<territory type="MN">মঙ্গোলিয়া</territory>
-			<territory type="MO">ম্যাকাও</territory>
+			<territory type="MO">ম্যাকাও এসএআর চীনা</territory>
 			<territory type="MP">উত্তরাঞ্চলীয় মারিয়ানা দ্বীপপুঞ্জ</territory>
 			<territory type="MQ">মার্টিনিক</territory>
 			<territory type="MR">মরিতানিয়া</territory>
@@ -846,7 +850,7 @@
 			<territory type="NE">নাইজার</territory>
 			<territory type="NF">নিরফোক দ্বীপ</territory>
 			<territory type="NG">নাইজেরিয়া</territory>
-			<territory type="NI">নিকারাগোয়া</territory>
+			<territory type="NI">নিকারাগুয়া</territory>
 			<territory type="NL">হলণ্ড</territory>
 			<territory type="NO">নরওয়ে</territory>
 			<territory type="NP">নেপাল</territory>
@@ -882,7 +886,7 @@
 			<territory type="SD">সুদান</territory>
 			<territory type="SE">সুইডেন</territory>
 			<territory type="SG">সিঙ্গাপুর</territory>
-			<territory type="SH">সেন্ট হেলেন</territory>
+			<territory type="SH">সেন্ট হেলেনা</territory>
 			<territory type="SI">স্লোভানিয়া</territory>
 			<territory type="SJ">স্বালবার্ড ও জান মেয়েন</territory>
 			<territory type="SK">শ্লোভাকিয়া</territory>
@@ -891,8 +895,8 @@
 			<territory type="SN">সেনেগাল</territory>
 			<territory type="SO">সোমালি</territory>
 			<territory type="SR">সুরিনাম</territory>
-			<territory type="ST">সাওটোমা ও প্রিন্সিপাল</territory>
-			<territory type="SV">সালভেডর</territory>
+			<territory type="ST">সাওটোমা ও প্রিন্সিপি</territory>
+			<territory type="SV">এল সালভেদর</territory>
 			<territory type="SY">সিরিয়া</territory>
 			<territory type="SZ">সোয়াজিল্যান্ড</territory>
 			<territory type="TC">তুর্কস ও কাইকোস দ্বীপপুঞ্জ</territory>
@@ -918,7 +922,7 @@
 			<territory type="UY">উরুগোয়ে</territory>
 			<territory type="UZ">উজ্বেকিস্থান</territory>
 			<territory type="VA">ভ্যাটিকান সিটি</territory>
-			<territory type="VC">সেন্ট ভিনসেন্ট ও দ্যা গ্রেনাডিনস</territory>
+			<territory type="VC">সেন্ট ভিনসেন্ট ও দ্যা গ্রেনাডিনস</territory>
 			<territory type="VE">ভেনেজুয়েলা</territory>
 			<territory type="VG">ব্রিটিশ ভার্জিন দ্বীপপুঞ্জ</territory>
 			<territory type="VI">মার্কিন ভার্জিন দ্বীপপুঞ্জ</territory>
@@ -942,14 +946,14 @@
 			<type type="big5han" key="collation">প্রথাগত চীনা সজ্জাক্রম - বিগ৫</type>
 			<type type="buddhist" key="calendar">বৌদ্ধ বর্ষপঞ্জী</type>
 			<type type="chinese" key="calendar">চীনা বর্ষপঞ্জী</type>
-			<type type="direct" key="collation">সঠিক সজ্জাক্রম</type>
-			<type type="gb2312han" key="collation">সাধারণ চীনা সজ্জাক্রম জিবি২৩১২</type>
+			<type type="direct" key="collation">প্রত্যক্ষ সজ্জাক্রম</type>
+			<type type="gb2312han" key="collation">সাধারণ চীনা সজ্জাক্রম - জিবি২৩১২</type>
 			<type type="gregorian" key="calendar">গ্রিগোরিয়ান বর্ষপঞ্জী</type>
 			<type type="hebrew" key="calendar">হিব্রু বর্ষপঞ্জী</type>
 			<type type="indian" key="calendar">ভারতীয় জাতীয় বর্ষপঞ্জী</type>
 			<type type="islamic" key="calendar">ইসলামিক বর্ষপঞ্জী</type>
-			<type type="islamic-civil" key="calendar">ইসলামিক সিভিল বর্ষপঞ্জী</type>
-			<type type="japanese" key="calendar">জাপানী বর্ষপঞ্জী</type>
+			<type type="islamic-civil" key="calendar">ইসলামিক-সিভিল বর্ষপঞ্জী</type>
+			<type type="japanese" key="calendar">জাপানি বর্ষপঞ্জী</type>
 			<type type="phonebook" key="collation">ফোনবুক সজ্জাক্রম</type>
 			<type type="pinyin" key="collation">পিনিন সজ্জাক্রম</type>
 			<type type="roc" key="calendar">গণপ্রজাতন্ত্রী চীনা বর্ষপঞ্জী</type>
@@ -968,7 +972,7 @@
 	</localeDisplayNames>
 	<characters>
 		<exemplarCharacters>[় ঁ-ঃ ৺ অ-ঋ ৠ ঌ ৡ এ ঐ ও-ড {ড়} ঢ {ঢ়} ণ ত ৎ থ-ন প-য {য়} র ল শ-হ ঽ-ৄ ৢ ৣ ে ৈ ো-্ ৗ]</exemplarCharacters>
-		<exemplarCharacters type="auxiliary">[\u200C \u200D ৸ ৹ ৲ ৳ ০-৪৷ ৫-ৱ]</exemplarCharacters>
+		<exemplarCharacters type="auxiliary">[\u200C \u200D ৺ ৸ ৹ ৲-৷ a d e E h l L m M q Q s v y ৠ ঌ ৡ ৰ ৱ ঽ ৄ ৢ ৣ]</exemplarCharacters>
 		<exemplarCharacters type="currencySymbol">[৳]</exemplarCharacters>
 	</characters>
 	<delimiters>
@@ -1088,10 +1092,6 @@
 				<am>পূর্বাহ্ণ</am>
 				<pm>অপরাহ্ণ</pm>
 				<eras>
-					<eraNames>
-						<era type="0">খৃষ্টপূর্ব</era>
-						<era type="1">খৃষ্টাব্দ</era>
-					</eraNames>
 					<eraAbbr>
 						<era type="0">খৃষ্টপূর্ব</era>
 						<era type="1">খৃষ্টাব্দ</era>
@@ -1100,17 +1100,17 @@
 				<dateFormats>
 					<dateFormatLength type="full">
 						<dateFormat>
-							<pattern>EEEE, d MMMM, yyyy</pattern>
+							<pattern>EEEE, d MMMM, y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="long">
 						<dateFormat>
-							<pattern>d MMMM, yyyy</pattern>
+							<pattern>d MMMM, y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="medium">
 						<dateFormat>
-							<pattern>d MMM, yyyy</pattern>
+							<pattern>d MMM, y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="short">
@@ -1122,7 +1122,7 @@
 				<timeFormats>
 					<timeFormatLength type="full">
 						<timeFormat>
-							<pattern>h:mm:ss a v</pattern>
+							<pattern>h:mm:ss a zzzz</pattern>
 						</timeFormat>
 					</timeFormatLength>
 					<timeFormatLength type="long">
@@ -1142,12 +1142,8 @@
 					</timeFormatLength>
 				</timeFormats>
 				<dateTimeFormats>
-					<dateTimeFormatLength>
-						<dateTimeFormat>
-							<pattern>{1} {0}</pattern>
-						</dateTimeFormat>
-					</dateTimeFormatLength>
 					<availableFormats>
+						<dateFormatItem id="EEEd">d EEE</dateFormatItem>
 						<dateFormatItem id="Hm">HH:mm</dateFormatItem>
 						<dateFormatItem id="M">L</dateFormatItem>
 						<dateFormatItem id="MEd">E, d-M</dateFormatItem>
@@ -1160,19 +1156,20 @@
 						<dateFormatItem id="Md">d/M</dateFormatItem>
 						<dateFormatItem id="d">d</dateFormatItem>
 						<dateFormatItem id="ms">mm:ss</dateFormatItem>
-						<dateFormatItem id="y">yyyy</dateFormatItem>
+						<dateFormatItem id="y">y</dateFormatItem>
 						<dateFormatItem id="yM">M/yyyy</dateFormatItem>
 						<dateFormatItem id="yMEd">EEE, d/M/yyy</dateFormatItem>
-						<dateFormatItem id="yMMM">MMM yyyy</dateFormatItem>
-						<dateFormatItem id="yMMMEd">EEE, d MMM, yyyy</dateFormatItem>
-						<dateFormatItem id="yMMMM">MMMM yyyy</dateFormatItem>
-						<dateFormatItem id="yQ">Q yyyy</dateFormatItem>
-						<dateFormatItem id="yQQQ">QQQ yyyy</dateFormatItem>
+						<dateFormatItem id="yMMM">MMM y</dateFormatItem>
+						<dateFormatItem id="yMMMEd">EEE, d MMM, y</dateFormatItem>
+						<dateFormatItem id="yMMMM">MMMM y</dateFormatItem>
+						<dateFormatItem id="yQ">Q y</dateFormatItem>
+						<dateFormatItem id="yQQQ">QQQ y</dateFormatItem>
 						<dateFormatItem id="yyQ">Q yy</dateFormatItem>
 						<dateFormatItem id="yyyyMM">MM-yyyy</dateFormatItem>
-						<dateFormatItem id="yyyyMMMM">MMMM yyyy</dateFormatItem>
+						<dateFormatItem id="yyyyMMMM">MMMM y</dateFormatItem>
 					</availableFormats>
 					<intervalFormats>
+						<intervalFormatFallback>{0} – {1}</intervalFormatFallback>
 						<intervalFormatItem id="M">
 							<greatestDifference id="M">M-M</greatestDifference>
 						</intervalFormatItem>
@@ -1232,22 +1229,22 @@
 							<greatestDifference id="y">E, d/M/yy – E, d/M/yy</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMM">
-							<greatestDifference id="M">MMM–MMM yyyy</greatestDifference>
-							<greatestDifference id="y">MMM yyyy – MMM yyyy</greatestDifference>
+							<greatestDifference id="M">MMM–MMM y</greatestDifference>
+							<greatestDifference id="y">MMM y – MMM y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMEd">
-							<greatestDifference id="M">E, d MMM – E, d MMM, yyyy</greatestDifference>
-							<greatestDifference id="d">E, d MMM – E, d MMM, yyyy</greatestDifference>
-							<greatestDifference id="y">E, d MMM, yyyy – E, d MMM, yyyy</greatestDifference>
+							<greatestDifference id="M">E, d MMM – E, d MMM, y</greatestDifference>
+							<greatestDifference id="d">E, d MMM – E, d MMM, y</greatestDifference>
+							<greatestDifference id="y">E, d MMM, y – E, d MMM, y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMM">
 							<greatestDifference id="M">MM – MM -yyyy</greatestDifference>
 							<greatestDifference id="y">MM-yyyy – MM-yyyy</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMd">
-							<greatestDifference id="M">d MMM – d MMM, yyyy</greatestDifference>
-							<greatestDifference id="d">d–d MMM, yyyy</greatestDifference>
-							<greatestDifference id="y">d MMM, yyyy – d MMM, yyyy</greatestDifference>
+							<greatestDifference id="M">d MMM – d MMM, y</greatestDifference>
+							<greatestDifference id="d">d–d MMM, y</greatestDifference>
+							<greatestDifference id="y">d MMM, y – d MMM, y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMd">
 							<greatestDifference id="M">d/M/yy – d/M/yy</greatestDifference>
@@ -1271,13 +1268,13 @@
 					</field>
 					<field type="day">
 						<displayName>দিন</displayName>
+						<relative type="-3">গত তরশু</relative>
+						<relative type="-2">গত পরশু</relative>
+						<relative type="-1">গতকাল</relative>
 						<relative type="0">আজ</relative>
 						<relative type="1">আগামীকাল</relative>
 						<relative type="2">আগামী পরশু</relative>
 						<relative type="3">আগামী তরশু</relative>
-						<relative type="-1">গতকাল</relative>
-						<relative type="-2">গত পরশু</relative>
-						<relative type="-3">গত তরশু</relative>
 					</field>
 					<field type="weekday">
 						<displayName>সপ্তাহের দিন</displayName>
@@ -1316,20 +1313,6 @@
 							<month type="11">মাঘ</month>
 							<month type="12">ফাল্গুন</month>
 						</monthWidth>
-						<monthWidth type="narrow">
-							<month type="1">১</month>
-							<month type="2">২</month>
-							<month type="3">৩</month>
-							<month type="4">৪</month>
-							<month type="5">৫</month>
-							<month type="6">৬</month>
-							<month type="7">৭</month>
-							<month type="8">৮</month>
-							<month type="9">৯</month>
-							<month type="10">১০</month>
-							<month type="11">১১</month>
-							<month type="12">১২</month>
-						</monthWidth>
 						<monthWidth type="wide">
 							<month type="1">চৈত্র</month>
 							<month type="2">বৈশাখ</month>
@@ -1360,34 +1343,14 @@
 							<month type="11">১১</month>
 							<month type="12">১২</month>
 						</monthWidth>
-						<monthWidth type="wide">
-							<month type="1">চৈত্র</month>
-							<month type="2">বৈশাখ</month>
-							<month type="3">জৈষ্ঠ্য</month>
-							<month type="4">আষাঢ়</month>
-							<month type="5">শ্রাবণ</month>
-							<month type="6">ভাদ্র</month>
-							<month type="7">আশ্বিন</month>
-							<month type="8">কার্তিক</month>
-							<month type="9">অগ্রহায়ণ</month>
-							<month type="10">পৌষ</month>
-							<month type="11">মাঘ</month>
-							<month type="12">ফাল্গুন</month>
-						</monthWidth>
 					</monthContext>
 				</months>
 				<am>পূর্বাহ্ন</am>
 				<pm>অপরাহ্ন</pm>
 				<eras>
-					<eraNames>
-						<era type="0">সাল</era>
-					</eraNames>
 					<eraAbbr>
 						<era type="0">সাল</era>
 					</eraAbbr>
-					<eraNarrow>
-						<era type="0">সাল</era>
-					</eraNarrow>
 				</eras>
 			</calendar>
 			<calendar type="islamic">
@@ -1396,50 +1359,33 @@
 						<monthWidth type="abbreviated">
 							<month type="1">মহরম</month>
 							<month type="2">সফর</month>
-							<month type="3">রবিউস আউয়াল</month>
+							<month type="3">রবিউল আউয়াল</month>
 							<month type="4">রবিউস সানি</month>
 							<month type="5">জমাদিউল আউয়াল</month>
-							<month type="6">জমাদিউল সানি</month>
+							<month type="6">জমাদিউস সানি</month>
 							<month type="7">রজব</month>
-							<month type="8">শাবান</month>
+							<month type="8">শা'বান</month>
 							<month type="9">রমজান</month>
 							<month type="10">শাওয়াল</month>
-							<month type="11">জিলকদ</month>
-							<month type="12">জিলহজ</month>
-						</monthWidth>
-						<monthWidth type="narrow">
-							<month type="1">১</month>
-							<month type="2">২</month>
-							<month type="3">৩</month>
-							<month type="4">৪</month>
-							<month type="5">৫</month>
-							<month type="6">৬</month>
-							<month type="7">৭</month>
-							<month type="8">৮</month>
-							<month type="9">৯</month>
-							<month type="10">১০</month>
-							<month type="11">১১</month>
-							<month type="12">১২</month>
+							<month type="11">জ্বিলকদ</month>
+							<month type="12">জ্বিলহজ্জ</month>
 						</monthWidth>
 						<monthWidth type="wide">
-							<month type="1">মহরম</month>
+							<month type="1">মহররম</month>
 							<month type="2">সফর</month>
-							<month type="3">রবিউস আউয়াল</month>
+							<month type="3">রবিউল আউয়াল</month>
 							<month type="4">রবিউস সানি</month>
 							<month type="5">জমাদিউল আউয়াল</month>
-							<month type="6">জমাদিউল সানি</month>
+							<month type="6">জমাদিউস সানি</month>
 							<month type="7">রজব</month>
-							<month type="8">শাবান</month>
+							<month type="8">শা'বান</month>
 							<month type="9">রমজান</month>
 							<month type="10">শাওয়াল</month>
-							<month type="11">জিলকদ</month>
-							<month type="12">জিলহজ</month>
+							<month type="11">জ্বিলকদ</month>
+							<month type="12">জ্বিলহজ্জ</month>
 						</monthWidth>
 					</monthContext>
 					<monthContext type="stand-alone">
-						<monthWidth type="abbreviated">
-							<month type="4">রবিউস সানি</month>
-						</monthWidth>
 						<monthWidth type="narrow">
 							<month type="1">১</month>
 							<month type="2">২</month>
@@ -1453,73 +1399,10 @@
 							<month type="10">১০</month>
 							<month type="11">১১</month>
 							<month type="12">১২</month>
-						</monthWidth>
-						<monthWidth type="wide">
-							<month type="1">মহরম</month>
-							<month type="2">সফর</month>
-							<month type="3">রবিউস আউয়াল</month>
-							<month type="4">রবিউস সানি</month>
-							<month type="5">জমাদিউল আউয়াল</month>
-							<month type="6">জমাদিউল সানি</month>
-							<month type="7">রজব</month>
-							<month type="8">শাবান</month>
-							<month type="9">রমজান</month>
-							<month type="10">শাওয়াল</month>
-							<month type="11">জিলকদ</month>
-							<month type="12">জিলহজ</month>
 						</monthWidth>
 					</monthContext>
 				</months>
 				<am>পূর্বাহ্ন</am>
-				<pm>অপরাহ্ন</pm>
-				<eras>
-					<eraNames>
-						<era type="0">যুগ</era>
-					</eraNames>
-					<eraAbbr>
-						<era type="0">যুগ</era>
-					</eraAbbr>
-					<eraNarrow>
-						<era type="0">যুগ</era>
-					</eraNarrow>
-				</eras>
-			</calendar>
-			<calendar type="islamic-civil">
-				<months>
-					<monthContext type="format">
-						<monthWidth type="wide">
-							<month type="1">মহরম</month>
-							<month type="2">সফর</month>
-							<month type="3">রবিউস আউয়াল</month>
-							<month type="4">রবিউস সানি</month>
-							<month type="5">জমাদিউল আউয়াল</month>
-							<month type="6">জমাদিউল সানি</month>
-							<month type="7">রজব</month>
-							<month type="8">শাবান</month>
-							<month type="9">রমজান</month>
-							<month type="10">শাওয়াল</month>
-							<month type="11">জিলকদ</month>
-							<month type="12">জিলহজ</month>
-						</monthWidth>
-					</monthContext>
-					<monthContext type="stand-alone">
-						<monthWidth type="narrow">
-							<month type="1">১</month>
-							<month type="2">২</month>
-							<month type="3">৩</month>
-							<month type="4">৪</month>
-							<month type="5">৫</month>
-							<month type="6">৬</month>
-							<month type="7">৭</month>
-							<month type="8">৮</month>
-							<month type="9">৯</month>
-							<month type="10">১০</month>
-							<month type="11">১১</month>
-							<month type="12">১২</month>
-						</monthWidth>
-					</monthContext>
-				</months>
-				<am>অপরাহ্ন</am>
 				<pm>অপরাহ্ন</pm>
 				<eras>
 					<eraAbbr>
@@ -1531,6 +1414,7 @@
 		<timeZoneNames>
 			<hourFormat>+HH:mm;-HH:mm</hourFormat>
 			<gmtFormat>গ্রীনিচ মান সময় {0}</gmtFormat>
+			<gmtZeroFormat>গ্রীনিচ মান সময়</gmtZeroFormat>
 			<regionFormat>{0} সময়</regionFormat>
 			<fallbackFormat>{1} ({0})</fallbackFormat>
 			<zone type="Etc/Unknown">
@@ -1813,7 +1697,7 @@
 				<exemplarCity>জাকার্তা</exemplarCity>
 			</zone>
 			<zone type="Asia/Pontianak">
-				<exemplarCity>পন্টিয়ান্যাক</exemplarCity>
+				<exemplarCity>পন্টিয়ান্যাক</exemplarCity>
 			</zone>
 			<zone type="Asia/Makassar">
 				<exemplarCity>মাকাসসার</exemplarCity>
@@ -2060,6 +1944,7 @@
 		</timeZoneNames>
 	</dates>
 	<numbers>
+		<defaultNumberingSystem>beng</defaultNumberingSystem>
 		<symbols>
 			<decimal>.</decimal>
 			<group>,</group>
@@ -2072,6 +1957,7 @@
 			<exponential>E</exponential>
 			<perMille>‰</perMille>
 			<infinity>∞</infinity>
+			<nan>সংখ্যা না</nan>
 		</symbols>
 		<decimalFormats>
 			<decimalFormatLength>
@@ -2171,7 +2057,7 @@
 				<displayName>বার্বেডোজ ডলার</displayName>
 			</currency>
 			<currency type="BDT">
-				<displayName>বাংলাদেশ টাকা</displayName>
+				<displayName>বাংলাদেশী টাকা</displayName>
 				<symbol>৳</symbol>
 			</currency>
 			<currency type="BEC">
@@ -2232,13 +2118,13 @@
 				<displayName>বাহামিয়ান ডলার</displayName>
 			</currency>
 			<currency type="BTN">
-				<displayName>ভুটান এনগুল্ট্রুম</displayName>
+				<displayName>ভুটানি এনগুল্ট্রুম</displayName>
 			</currency>
 			<currency type="BUK">
 				<displayName>বর্মি কিয়াৎ</displayName>
 			</currency>
 			<currency type="BWP">
-				<displayName>বত্সওয়ানা পুলা</displayName>
+				<displayName>বতসোয়ানা পুলা</displayName>
 			</currency>
 			<currency type="BYB">
 				<displayName>বেলারুশিয়ান নিউ রুবেল (১৯৯৪-১৯৯৯)</displayName>
@@ -2275,6 +2161,9 @@
 			</currency>
 			<currency type="COP">
 				<displayName>কলোম্বিয়ান পেসো</displayName>
+			</currency>
+			<currency type="COU">
+				<displayName>উনিদাদ দি ভ্যালোর রিয়েল</displayName>
 			</currency>
 			<currency type="CRC">
 				<displayName>কোস্টা রিকা কোলোন</displayName>
@@ -2327,8 +2216,8 @@
 			<currency type="EGP">
 				<displayName>মিশরীয় পাউন্ড</displayName>
 			</currency>
-			<currency type="EQE">
-				<displayName>ইকুয়েলে</displayName>
+			<currency type="ERN">
+				<displayName>এরিট্রিয়েন নাকফা</displayName>
 			</currency>
 			<currency type="ESA">
 				<displayName>স্প্যানিশ পেসেতা (একই হিসাব)</displayName>
@@ -2339,8 +2228,14 @@
 			<currency type="ESP">
 				<displayName>স্প্যানিশ পেসেতা</displayName>
 			</currency>
+			<currency type="ETB">
+				<displayName>ইথিওপিয়ান বির</displayName>
+			</currency>
 			<currency type="EUR">
 				<displayName>ইউরো</displayName>
+			</currency>
+			<currency type="FIM">
+				<displayName>ফিনিস মার্কা</displayName>
 			</currency>
 			<currency type="FJD">
 				<displayName>ফিজি ডলার</displayName>
@@ -2378,6 +2273,9 @@
 			<currency type="GNS">
 				<displayName>গিনি সাইলি</displayName>
 			</currency>
+			<currency type="GQE">
+				<displayName>ইকুয়েটোরিয়াল গিনি ইকুয়িলি</displayName>
+			</currency>
 			<currency type="GRD">
 				<displayName>গ্রীক দ্রাচমা</displayName>
 			</currency>
@@ -2414,7 +2312,7 @@
 				<displayName>হাঙ্গেরিয়ান ফোরিন্ট</displayName>
 			</currency>
 			<currency type="IDR">
-				<displayName>ইন্দোনেশিয়া রুপিয়াহ</displayName>
+				<displayName>ইন্দোনেশিয়ান রুপিয়াহ</displayName>
 			</currency>
 			<currency type="IEP">
 				<displayName>ইরিশ পাউন্ড</displayName>
@@ -2492,9 +2390,6 @@
 			<currency type="LSL">
 				<displayName>লেসুটু লোটি</displayName>
 			</currency>
-			<currency type="LSM">
-				<displayName>মালোটি</displayName>
-			</currency>
 			<currency type="LTL">
 				<displayName>লিথুইনিয়ান লিটা</displayName>
 			</currency>
@@ -2511,7 +2406,7 @@
 				<displayName>লুক্সেমবার্গ ফাইনেনশিয়াল ফ্রাঙ্ক</displayName>
 			</currency>
 			<currency type="LVL">
-				<displayName>ল্যাট্‌স</displayName>
+				<displayName>ল্যাটভিয়ান ল্যাট্‌স</displayName>
 			</currency>
 			<currency type="LVR">
 				<displayName>ল্যাটভিয়ান রুবল</displayName>
@@ -2561,14 +2456,20 @@
 			<currency type="MUR">
 				<displayName>মৌরিতানিয়ান রুপি</displayName>
 			</currency>
+			<currency type="MVR">
+				<displayName>মালদিভিয়ান রুফিয়া</displayName>
+			</currency>
 			<currency type="MWK">
-				<displayName>মালাউইয়ান কওয়াচ</displayName>
+				<displayName>মালাউই॰¯়ান কওয়াচ</displayName>
 			</currency>
 			<currency type="MXN">
 				<displayName>ম্যাক্সিকান পেসো</displayName>
 			</currency>
 			<currency type="MXP">
 				<displayName>ম্যাক্সিকান সিলভার পেসো (১৮৬১-১৯৯২)</displayName>
+			</currency>
+			<currency type="MXV">
+				<displayName>মেক্সিকান উনিদাদ দি ইনভার্সান (UDI)</displayName>
 			</currency>
 			<currency type="MYR">
 				<displayName>মালয়েশিয়ান রিঙ্গিৎ</displayName>
@@ -2686,7 +2587,7 @@
 				<displayName>প্রাচীন সুদানি পাউন্ড</displayName>
 			</currency>
 			<currency type="SEK">
-				<displayName>সুইডেশ ক্রোনা</displayName>
+				<displayName>সুইডিশ ক্রোনা</displayName>
 			</currency>
 			<currency type="SGD">
 				<displayName>সিঙ্গাপুর ডলার</displayName>
@@ -2739,6 +2640,9 @@
 			<currency type="TMM">
 				<displayName>তুর্কমেনিস্টানি মানাত</displayName>
 			</currency>
+			<currency type="TMT">
+				<displayName>তুর্কমেনিস্তান নতুন মানত</displayName>
+			</currency>
 			<currency type="TND">
 				<displayName>তিউনেশিয়ান দিনার</displayName>
 			</currency>
@@ -2784,6 +2688,9 @@
 			<currency type="USS">
 				<displayName>মার্কিন ডলার (একই দিন)</displayName>
 			</currency>
+			<currency type="UYI">
+				<displayName>উরুগুয়ায়ান পেসো এন উনিদাদেস ইনডেক্সেডাস</displayName>
+			</currency>
 			<currency type="UYP">
 				<displayName>উরুগুয়ে পেসো (১৯৭৫-১৯৯৩)</displayName>
 			</currency>
@@ -2801,6 +2708,9 @@
 			</currency>
 			<currency type="VND">
 				<displayName>ভিয়েতনামি ডঙ্গ</displayName>
+			</currency>
+			<currency type="VUV">
+				<displayName>ভানুয়াতু ভাতু</displayName>
 			</currency>
 			<currency type="WST">
 				<displayName>পশ্চিমাঞ্চলীয় সামোয়ান টালা</displayName>
@@ -2843,7 +2753,6 @@
 			</currency>
 			<currency type="XXX">
 				<displayName>অজানা বা ভুল মুদ্রা</displayName>
-				<symbol>XXX</symbol>
 			</currency>
 			<currency type="YDD">
 				<displayName>ইয়েমেনি দিনার</displayName>
@@ -2877,6 +2786,12 @@
 			</currency>
 			<currency type="ZWD">
 				<displayName>জিম্বাবুয়ে ডলার</displayName>
+			</currency>
+			<currency type="ZWL">
+				<displayName>জিম্বাবুয়ে ডলার (২০০৯)</displayName>
+			</currency>
+			<currency type="ZWR">
+				<displayName>জিম্বাবুয়ে ডলার (২০০৮)</displayName>
 			</currency>
 		</currencies>
 	</numbers>

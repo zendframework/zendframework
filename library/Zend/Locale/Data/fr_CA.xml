@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.57 $"/>
-		<generation date="$Date: 2008/06/17 18:53:46 $"/>
+		<version number="$Revision: 1.65 $"/>
+		<generation date="$Date: 2009/05/05 23:06:36 $"/>
 		<language type="fr"/>
 		<territory type="CA"/>
 	</identity>
@@ -25,7 +25,7 @@
 				<timeFormats>
 					<timeFormatLength type="full">
 						<timeFormat>
-							<pattern>HH 'h' mm 'min' ss 's' v</pattern>
+							<pattern>HH 'h' mm 'min' ss 's' zzzz</pattern>
 						</timeFormat>
 					</timeFormatLength>
 				</timeFormats>
@@ -81,19 +81,19 @@
 							<greatestDifference id="y">'du' E yy-MM-dd 'au' E yy-MM-dd</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMM">
-							<greatestDifference id="y">'de' MMM yyyy 'à' MMM yyyy</greatestDifference>
+							<greatestDifference id="y">'de' MMM y 'à' MMM y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMEd">
-							<greatestDifference id="M">'du' E d MMM 'au' E d MMM yyyy</greatestDifference>
-							<greatestDifference id="d">'du' E d 'au' E d MMM yyyy</greatestDifference>
-							<greatestDifference id="y">'du' E d MMM yyyy 'au' E d MMM yyyy</greatestDifference>
+							<greatestDifference id="M">'du' E d MMM 'au' E d MMM y</greatestDifference>
+							<greatestDifference id="d">'du' E d 'au' E d MMM y</greatestDifference>
+							<greatestDifference id="y">'du' E d MMM y 'au' E d MMM y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMM">
-							<greatestDifference id="M">MMMM  – MMMM yyyy</greatestDifference>
+							<greatestDifference id="M">MMMM – MMMM y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMd">
-							<greatestDifference id="M">'du' d MMM 'au' d MMM yyyy</greatestDifference>
-							<greatestDifference id="y">'du' d MMM yyyy 'au' d MMM yyyy</greatestDifference>
+							<greatestDifference id="M">'du' d MMM 'au' d MMM y</greatestDifference>
+							<greatestDifference id="y">'du' d MMM y 'au' d MMM y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMd">
 							<greatestDifference id="M">yy-MM-dd – yy-MM-dd</greatestDifference>
@@ -145,9 +145,6 @@
 		<currencies>
 			<currency type="CAD">
 				<symbol>$</symbol>
-			</currency>
-			<currency type="USD">
-				<symbol>$ US</symbol>
 			</currency>
 		</currencies>
 	</numbers>

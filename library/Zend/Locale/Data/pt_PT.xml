@@ -1,40 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.76 $"/>
-		<generation date="$Date: 2008/06/26 03:47:58 $"/>
+		<version number="$Revision: 1.82 $"/>
+		<generation date="$Date: 2009/05/05 23:06:39 $"/>
 		<language type="pt"/>
 		<territory type="PT"/>
 	</identity>
 	<localeDisplayNames>
 		<languages>
 			<language type="af">afrikaans</language>
-			<language type="afa">idioma afro-asiático</language>
-			<language type="afh">afrihili</language>
-			<language type="ak">akan</language>
-			<language type="alg">idioma algonquiano</language>
-			<language type="ang">inglês, arcaico (aprox. 450-1100)</language>
-			<language type="apa">idioma apache</language>
 			<language type="art">idioma artifical</language>
-			<language type="ath">idioma atabascano</language>
-			<language type="aus">idioma australiano</language>
 			<language type="awa">Awadhi</language>
 			<language type="bai">bamileke Languages</language>
-			<language type="bat">idioma báltico</language>
-			<language type="bua">buriat</language>
 			<language type="bug">Buginese</language>
-			<language type="byn">blin</language>
-			<language type="cai">idioma indígena centro-americano</language>
-			<language type="cau">idioma caucásico</language>
 			<language type="ce">chechene</language>
 			<language type="cel">idioma céltico</language>
 			<language type="chn">jargão chinook</language>
-			<language type="cmc">idioma chamic</language>
 			<language type="cpe">crioulo ou pidgin do inglês</language>
 			<language type="cpf">crioulo ou pidgin do francês</language>
 			<language type="cpp">crioulo ou pidgin do português</language>
-			<language type="crh">turco da Crimeia</language>
 			<language type="cs">checo</language>
 			<language type="cus">idioma cuchita</language>
 			<language type="de_CH">alemão alto (Suíça)</language>
@@ -42,16 +27,12 @@
 			<language type="dyu">diula</language>
 			<language type="egy">egípcio clássico</language>
 			<language type="en">Inglês</language>
-			<language type="enm">inglês, medieval (1100-1500)</language>
+			<language type="enm">inglês medieval</language>
 			<language type="et">estónio</language>
 			<language type="fiu">idioma ugro-finês</language>
-			<language type="frm">francês, medieval (aprox.1400-1600)</language>
-			<language type="fro">francês, arcaico (842-aprox.1400)</language>
+			<language type="frm">francês medieval</language>
 			<language type="frs">frísio oriental</language>
-			<language type="gem">idioma germânico</language>
-			<language type="gmh">alemão, medieval alto (aprox.1050-1500)</language>
-			<language type="goh">alemão, arcaico alto (aprox.750-1050)</language>
-			<language type="grb">grebo</language>
+			<language type="gmh">alemão medieval alto</language>
 			<language type="grc">grego clássico</language>
 			<language type="gsw">alemão da Suíça</language>
 			<language type="hsb">sorbiano superior</language>
@@ -59,48 +40,28 @@
 			<language type="iba">Iban</language>
 			<language type="ig">igbo</language>
 			<language type="ik">Inupiaq</language>
-			<language type="inc">idioma índico</language>
-			<language type="ine">idioma indo-europeu</language>
 			<language type="jv">jv</language>
-			<language type="kaa">kara-kalpak</language>
 			<language type="khi">khoisan</language>
-			<language type="kj">kuanyama</language>
-			<language type="krc">karachay-balkar</language>
 			<language type="lez">lezghiano</language>
-			<language type="lua">luba-lulua</language>
 			<language type="mga">irlandês, medieval (900-1200)</language>
 			<language type="mk">macedónio</language>
-			<language type="mkh">mon-khmer (other)</language>
-			<language type="mno">idioma manobo</language>
 			<language type="nah">Nauatle</language>
-			<language type="nai">idioma indígena norte-americano</language>
 			<language type="nds">baixo alemão</language>
 			<language type="nic">nigeriano - cordofano</language>
 			<language type="nl_BE">flamengo (Bélgica)</language>
 			<language type="non">norse, old</language>
-			<language type="nso">soto, setentrional</language>
-			<language type="nub">idioma núbio</language>
 			<language type="oc">provençal</language>
 			<language type="os">ossético</language>
-			<language type="oto">idioma otomano</language>
-			<language type="paa">idioma papuano</language>
 			<language type="peo">persa arcaico (aprox. 600-400 a.C.)</language>
-			<language type="phi">idioma filipino</language>
 			<language type="pl">polaco</language>
 			<language type="pra">idioma prácito</language>
 			<language type="pro">provençal, arcaico (até 1500)</language>
 			<language type="pt_PT">português europeu</language>
 			<language type="rm">reto-romance</language>
-			<language type="roa">idioma românico</language>
 			<language type="rom">romanês</language>
 			<language type="sai">idioma indígeno sul-americano</language>
 			<language type="sal">salishan languages</language>
-			<language type="sem">idioma semítico</language>
 			<language type="sgn">linguages de sinais</language>
-			<language type="sio">idioma sioux</language>
-			<language type="sit">idioma sino-tibetano</language>
-			<language type="sla">idioma eslavo</language>
-			<language type="smi">idioma sami</language>
 			<language type="ssa">idioma nilo-sariano</language>
 			<language type="ta">tamil</language>
 			<language type="tai">idioma tailândes</language>
@@ -109,14 +70,8 @@
 			<language type="tl">tagalogue</language>
 			<language type="to">tonga</language>
 			<language type="tog">toganês</language>
-			<language type="tup">idioma tupi</language>
-			<language type="tut">idioma altaico</language>
 			<language type="tyv">tuviniano</language>
-			<language type="wak">idioma wakashan</language>
 			<language type="wen">idioma sórbio</language>
-			<language type="ypk">idioma iúpique</language>
-			<language type="zh_Hans">chinês simplificado</language>
-			<language type="zh_Hant">chinês tradicional</language>
 			<language type="zza">zazaki</language>
 		</languages>
 		<scripts>
@@ -166,9 +121,10 @@
 			<territory type="AZ">Azerbeijão</territory>
 			<territory type="BD">Bangladeche</territory>
 			<territory type="BF">Burkina-Faso</territory>
-			<territory type="BH">Bareine</territory>
+			<territory type="BH">Bahrein</territory>
 			<territory type="BJ">Benim</territory>
 			<territory type="BS">Baamas</territory>
+			<territory type="BW">Botswana</territory>
 			<territory type="BY">Bielorrússia</territory>
 			<territory type="CC">Ilhas Cocos</territory>
 			<territory type="CD">República Democrática do Congo</territory>
@@ -178,7 +134,6 @@
 			<territory type="EE">Estónia</territory>
 			<territory type="EG">Egipto</territory>
 			<territory type="EH">Sara Ocidental</territory>
-			<territory type="ER">Eritreia</territory>
 			<territory type="FK">Ilhas Falkland ou Malvinas</territory>
 			<territory type="FM">Estados Federados da Micronésia</territory>
 			<territory type="FO">Ilhas Faroé</territory>
@@ -189,12 +144,10 @@
 			<territory type="KE">Quénia</territory>
 			<territory type="KG">Quirguizistão</territory>
 			<territory type="KN">Saint Kitts e Nevis</territory>
-			<territory type="KP">Coreia do Norte</territory>
-			<territory type="KR">Coreia do Sul</territory>
 			<territory type="KW">Cuaite</territory>
 			<territory type="KY">Ilhas Caimão</territory>
 			<territory type="KZ">Cazaquistão</territory>
-			<territory type="LA">Lao, República Popular Democrática</territory>
+			<territory type="LA">Laos, República Popular Democrática do</territory>
 			<territory type="LV">Letónia</territory>
 			<territory type="MC">Mónaco</territory>
 			<territory type="MD">Moldávia, República da</territory>
@@ -211,8 +164,8 @@
 			<territory type="PG">Papua Nova Guiné</territory>
 			<territory type="PL">Polónia</territory>
 			<territory type="PS">Território Palestiniano</territory>
+			<territory type="QA">Qatar</territory>
 			<territory type="QO">Oceânia Insular</territory>
-			<territory type="QU">União Europeia</territory>
 			<territory type="RO">Roménia</territory>
 			<territory type="SC">Seicheles</territory>
 			<territory type="SG">Singapura</territory>
@@ -230,7 +183,7 @@
 			<territory type="VI">Ilhas Virgin E.U.A.</territory>
 			<territory type="VN">Vietname</territory>
 			<territory type="YE">Iémen</territory>
-			<territory type="ZW">Zimbabué</territory>
+			<territory type="ZW">Zimbabwe</territory>
 		</territories>
 		<variants>
 			<variant type="1901">Alemão Tradicional</variant>
@@ -267,31 +220,25 @@
 		</measurementSystemNames>
 	</localeDisplayNames>
 	<characters>
-		<exemplarCharacters type="auxiliary">[á à ă â å ä ā æ ç é è ĕ ê ë ē í ì ĭ î ï ī ñ ó ò ŏ ô ö ø ō œ ß ú ù ŭ û ü ū ÿ]</exemplarCharacters>
+		<exemplarCharacters type="auxiliary">[ª á à ă â å ä ā æ ç é è ĕ ê ë ē í ì ĭ î ï ī ñ º ó ò ŏ ô ö ø ō œ ß ú ù ŭ û ü ū ÿ]</exemplarCharacters>
 	</characters>
-	<delimiters>
-		<quotationStart>‘</quotationStart>
-		<quotationEnd>’</quotationEnd>
-		<alternateQuotationStart>“</alternateQuotationStart>
-		<alternateQuotationEnd>”</alternateQuotationEnd>
-	</delimiters>
 	<dates>
 		<calendars>
 			<calendar type="buddhist">
 				<dateFormats>
 					<dateFormatLength type="full">
 						<dateFormat>
-							<pattern>EEEE, MMMM d, yyyy G</pattern>
+							<pattern>EEEE, MMMM d, y G</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="long">
 						<dateFormat>
-							<pattern>MMMM d, yyyy G</pattern>
+							<pattern>MMMM d, y G</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="medium">
 						<dateFormat>
-							<pattern>MMM d, yyyy G</pattern>
+							<pattern>MMM d, y G</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="short">
@@ -304,7 +251,6 @@
 					<availableFormats>
 						<dateFormatItem id="MMMMd">d de MMMM</dateFormatItem>
 						<dateFormatItem id="Md">d-M</dateFormatItem>
-						<dateFormatItem id="yyMM">MM-yy</dateFormatItem>
 					</availableFormats>
 				</dateTimeFormats>
 			</calendar>
@@ -353,59 +299,34 @@
 				</quarters>
 				<am>Antes do meio-dia</am>
 				<pm>Depois do meio-dia</pm>
-				<eras>
-					<eraNames>
-						<era type="0">a.C.</era>
-						<era type="1">d.C.</era>
-					</eraNames>
-				</eras>
 				<dateFormats>
 					<dateFormatLength type="medium">
 						<dateFormat>
-							<pattern>yyyy/MM/dd</pattern>
-						</dateFormat>
-					</dateFormatLength>
-					<dateFormatLength type="short">
-						<dateFormat>
-							<pattern>yy/MM/dd</pattern>
+							<pattern>d 'de' MMM 'de' yyyy</pattern>
 						</dateFormat>
 					</dateFormatLength>
 				</dateFormats>
-				<timeFormats>
-					<timeFormatLength type="full">
-						<timeFormat>
-							<pattern>HH'H'mm'm'ss's' v</pattern>
-						</timeFormat>
-					</timeFormatLength>
-				</timeFormats>
 				<dateTimeFormats>
 					<availableFormats>
-						<dateFormatItem id="MMMEd">E d MMM</dateFormatItem>
-						<dateFormatItem id="MMMMEd">EEE, d 'de' MMMM</dateFormatItem>
-						<dateFormatItem id="MMMMd">d 'de' MMMM</dateFormatItem>
-						<dateFormatItem id="MMMd">d 'de' MMM</dateFormatItem>
-						<dateFormatItem id="Md">d-M</dateFormatItem>
-						<dateFormatItem id="yyMM">MM-yy</dateFormatItem>
-						<dateFormatItem id="yyyyMM">MM-yyyy</dateFormatItem>
+						<dateFormatItem id="yQ">QQQ 'de' yyyy</dateFormatItem>
+						<dateFormatItem id="yQQQ">QQQ 'de' y</dateFormatItem>
+						<dateFormatItem id="yyQ">QQQ 'de' yy</dateFormatItem>
 					</availableFormats>
 					<intervalFormats>
-						<intervalFormatItem id="MEd">
-							<greatestDifference id="M">E, MM/dd - E, MM/dd</greatestDifference>
-							<greatestDifference id="d">E, MM/dd - E, MM/dd</greatestDifference>
+						<intervalFormatItem id="MMM">
+							<greatestDifference id="M">MMM-MMM</greatestDifference>
 						</intervalFormatItem>
-						<intervalFormatItem id="Md">
-							<greatestDifference id="M">MM/dd - MM/dd</greatestDifference>
-							<greatestDifference id="d">MM/dd - MM/dd</greatestDifference>
+						<intervalFormatItem id="hm">
+							<greatestDifference id="h">H'h' - H'h'</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="y">
+							<greatestDifference id="y">y-y</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="yMMMM">
+							<greatestDifference id="M">MM-MM 'de' yyyy</greatestDifference>
 						</intervalFormatItem>
 					</intervalFormats>
 				</dateTimeFormats>
-				<fields>
-					<field type="day">
-						<relative type="3">Em três dias</relative>
-						<relative type="-2">Anteontem</relative>
-						<relative type="-3">Trás-anteontem</relative>
-					</field>
-				</fields>
 			</calendar>
 			<calendar type="japanese">
 				<dateFormats>
@@ -1922,18 +1843,6 @@
 			<currency type="WST">
 				<displayName>Tala de Samoa Ocidental</displayName>
 			</currency>
-			<currency type="XBA">
-				<displayName>Unidade Composta Europeia</displayName>
-			</currency>
-			<currency type="XBB">
-				<displayName>Unidade Monetária Europeia</displayName>
-			</currency>
-			<currency type="XBC">
-				<displayName>Unidade de Conta Europeia (XBC)</displayName>
-			</currency>
-			<currency type="XBD">
-				<displayName>Unidade de Conta Europeia (XBD)</displayName>
-			</currency>
 			<currency type="XEU">
 				<displayName>Unidade da Moeda Europeia</displayName>
 			</currency>
@@ -1954,9 +1863,5 @@
 			</currency>
 		</currencies>
 	</numbers>
-	<posix>
-		<messages>
-			<nostr>não:n</nostr>
-		</messages>
-	</posix>
 </ldml>
+

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.65 $"/>
-		<generation date="$Date: 2008/06/17 14:12:12 $"/>
+		<version number="$Revision: 1.68 $"/>
+		<generation date="$Date: 2009/05/05 23:06:38 $"/>
 		<language type="nl"/>
 		<territory type="BE"/>
 	</identity>
@@ -30,7 +30,7 @@
 				<dateFormats>
 					<dateFormatLength type="medium">
 						<dateFormat>
-							<pattern>d-MMM-yyyy</pattern>
+							<pattern>d-MMM-y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="short">
@@ -78,4 +78,3 @@
 		</currencyFormats>
 	</numbers>
 </ldml>
-

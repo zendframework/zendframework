@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.54 $"/>
-		<generation date="$Date: 2008/05/28 15:49:31 $"/>
+		<version number="$Revision: 1.63 $"/>
+		<generation date="$Date: 2009/05/05 23:06:36 $"/>
 		<language type="gez"/>
 	</identity>
 	<localeDisplayNames>
@@ -287,7 +287,7 @@
 		</territories>
 	</localeDisplayNames>
 	<characters>
-		<exemplarCharacters>[፟ ᎐-᎙ ሀ-ሆ ለ-ሎ ሐ-ሖ መ-ሞ ሠ-ሦ ረ-ሮ ሰ-ሶ ቀ-ቆ ቈ ቊ-ቍ በ-ቦ ተ-ቶ ኀ-ኆ ኈ ኊ-ኍ ነ-ኖ አ-ኦ ከ-ኮ ኰ ኲ-ኵ ወ-ዎ ዐ-ዖ ዘ-ዞ የ-ዮ ደ-ዶ ገ-ጎ ጐ ጒ-ጕ ጠ-ጦ ጰ-ጶ ጸ-ጾ ፀ-ፆ ፈ-ፎ ፐ-ፖ]</exemplarCharacters>
+		<exemplarCharacters>[\u135F ᎐-᎙ ሀ-ሆ ለ-ሎ ሐ-ሖ መ-ሞ ሠ-ሦ ረ-ሮ ሰ-ሶ ቀ-ቆ ቈ ቊ-ቍ በ-ቦ ተ-ቶ ኀ-ኆ ኈ ኊ-ኍ ነ-ኖ አ-ኦ ከ-ኮ ኰ ኲ-ኵ ወ-ዎ ዐ-ዖ ዘ-ዞ የ-ዮ ደ-ዶ ገ-ጎ ጐ ጒ-ጕ ጠ-ጦ ጰ-ጶ ጸ-ጾ ፀ-ፆ ፈ-ፎ ፐ-ፖ]</exemplarCharacters>
 		<exemplarCharacters type="auxiliary">[ሇ ሏ ⶀ ሗ ሟ ᎀ-ᎃ ⶁ ሧ ሯ ⶂ ሷ ⶃ ሸ-ሿ ⶄ ቇ ቐ-ቖ ቘ ቚ-ቝ ቧ ᎄ-ᎇ ⶅ ቮ ቯ ቷ ⶆ ቿ ⶇ ኇ ኗ ⶈ ኟ ⶉ ኧ ⶊ ኯ ኸ-ኾ ዀ ዂ-ዅ ዏ ዟ ⶋ ዠ-ዧ ዷ ⶌ ዸ-ዿ ⶍ ጀ-ጇ ⶎ ጏ ጘ-ጟ ⶓ-ⶖ ጧ ⶏ ጨ-ጯ ⶐ ጷ ⶑ ጿ ፇ ፏ ᎈ-ᎋ ፗ ᎌ-ᎏ ⶒ ፘ-ፚ ⶠ-ⶦ ⶨ-ⶮ ⶰ-ⶶ ⶸ-ⶾ ⷀ-ⷆ ⷈ-ⷎ ⷐ-ⷖ ⷘ-ⷞ]</exemplarCharacters>
 	</characters>
 	<dates>
@@ -401,17 +401,17 @@
 				<dateFormats>
 					<dateFormatLength type="full">
 						<dateFormat>
-							<pattern>EEEE፥ dd MMMM መዓልት yyyy G</pattern>
+							<pattern>EEEE፥ dd MMMM መዓልት y G</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="long">
 						<dateFormat>
-							<pattern>dd MMMM yyyy</pattern>
+							<pattern>dd MMMM y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="medium">
 						<dateFormat>
-							<pattern>dd-MMM-yyyy</pattern>
+							<pattern>dd-MMM-y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="short">
@@ -423,7 +423,7 @@
 				<timeFormats>
 					<timeFormatLength type="full">
 						<timeFormat>
-							<pattern>h:mm:ss a v</pattern>
+							<pattern>h:mm:ss a zzzz</pattern>
 						</timeFormat>
 					</timeFormatLength>
 					<timeFormatLength type="long">
@@ -443,17 +443,12 @@
 					</timeFormatLength>
 				</timeFormats>
 				<dateTimeFormats>
-					<dateTimeFormatLength>
-						<dateTimeFormat>
-							<pattern>{1} {0}</pattern>
-						</dateTimeFormat>
-					</dateTimeFormatLength>
 					<availableFormats>
 						<dateFormatItem id="MMMMdd">dd MMMM</dateFormatItem>
 						<dateFormatItem id="MMdd">dd/MM</dateFormatItem>
 						<dateFormatItem id="yyMM">MM/yy</dateFormatItem>
 						<dateFormatItem id="yyQ">Q yy</dateFormatItem>
-						<dateFormatItem id="yyyyMMMM">MMMM yyyy</dateFormatItem>
+						<dateFormatItem id="yyyyMMMM">MMMM y</dateFormatItem>
 					</availableFormats>
 				</dateTimeFormats>
 			</calendar>
@@ -481,14 +476,9 @@
 			</currency>
 			<currency type="CNY">
 				<displayName>የቻይና ዩአን ረንሚንቢ</displayName>
-				<symbol>Y</symbol>
-			</currency>
-			<currency type="ERN">
-				<symbol>$</symbol>
 			</currency>
 			<currency type="ETB">
 				<displayName>የኢትዮጵያ ብር</displayName>
-				<symbol>ETB$</symbol>
 			</currency>
 			<currency type="EUR">
 				<displayName>አውሮ</displayName>
@@ -507,8 +497,8 @@
 			</currency>
 			<currency type="USD">
 				<displayName>የአሜሪካን ዶላር</displayName>
-				<symbol>USD</symbol>
 			</currency>
 		</currencies>
 	</numbers>
 </ldml>
+

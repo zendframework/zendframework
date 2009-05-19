@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.61 $"/>
-		<generation date="$Date: 2008/06/17 18:53:46 $"/>
+		<version number="$Revision: 1.71 $"/>
+		<generation date="$Date: 2009/05/05 23:06:36 $"/>
 		<language type="fo"/>
 	</identity>
+	<fallback>is da sv en</fallback>
 	<localeDisplayNames>
 		<languages>
 			<language type="af">afríska</language>
@@ -70,7 +71,7 @@
 			<language type="mr">marathiskt</language>
 			<language type="ms">malay</language>
 			<language type="mt">maltesiskt</language>
-			<language type="nb">norskt bokmål</language>
+			<language type="nb">norskt bokmál</language>
 			<language type="ne">nepalskt</language>
 			<language type="nl">hollendskt</language>
 			<language type="nn">nýnorskt</language>
@@ -111,9 +112,11 @@
 			<language type="vi">vietnamesiskt</language>
 			<language type="xh">xhosa</language>
 			<language type="yi">jiddiskt</language>
+			<language type="zh">kinesískt</language>
 			<language type="zu">sulu</language>
 		</languages>
 		<territories>
+			<territory type="001">heimur</territory>
 			<territory type="002">Africa</territory>
 			<territory type="003">Norðuramerika</territory>
 			<territory type="005">Suðuramerika</territory>
@@ -125,6 +128,7 @@
 			<territory type="017">Miðafrika</territory>
 			<territory type="018">Suður Afrika</territory>
 			<territory type="019">Amerika</territory>
+			<territory type="021">Amerika nor∂ur Meksiko</territory>
 			<territory type="029">Karibia</territory>
 			<territory type="030">Eysturasia</territory>
 			<territory type="034">Suðurasia</territory>
@@ -132,6 +136,7 @@
 			<territory type="039">Suðurevropa</territory>
 			<territory type="053">Avstralia og Nýsæland</territory>
 			<territory type="054">Melanesia</territory>
+			<territory type="057">Mikronesiske regionen</territory>
 			<territory type="061">Polynesia</territory>
 			<territory type="062">Suðursentralasia</territory>
 			<territory type="142">Asia</territory>
@@ -141,6 +146,7 @@
 			<territory type="151">Eysturevropa</territory>
 			<territory type="154">Norðurevropa</territory>
 			<territory type="155">Vesturevropa</territory>
+			<territory type="419">Latínamerika og Karibia</territory>
 			<territory type="AD">Andorra</territory>
 			<territory type="AE">Sameindu Emirríkini</territory>
 			<territory type="AF">Afganistan</territory>
@@ -148,9 +154,11 @@
 			<territory type="AI">Anguilla</territory>
 			<territory type="AL">Albania</territory>
 			<territory type="AM">Armenia</territory>
+			<territory type="AN">Niðurlendsku Antilloyggjar</territory>
 			<territory type="AO">Angola</territory>
 			<territory type="AQ">Antarktis</territory>
 			<territory type="AR">Argentina</territory>
+			<territory type="AS">Amerikanska Sámoa</territory>
 			<territory type="AT">Eysturríki</territory>
 			<territory type="AU">Avstralia</territory>
 			<territory type="AW">Aruba</territory>
@@ -165,21 +173,25 @@
 			<territory type="BH">Bahrain</territory>
 			<territory type="BI">Burundi</territory>
 			<territory type="BJ">Benin</territory>
+			<territory type="BL">Saint Barthélemy</territory>
 			<territory type="BM">Bermuda</territory>
 			<territory type="BN">Brunei</territory>
 			<territory type="BO">Bolivia</territory>
 			<territory type="BR">Brasilia</territory>
 			<territory type="BS">Bahamas</territory>
 			<territory type="BT">Butan</territory>
+			<territory type="BV">Bouvetoy</territory>
 			<territory type="BW">Botsvana</territory>
 			<territory type="BY">Hvítarussland</territory>
 			<territory type="BZ">Belis</territory>
 			<territory type="CA">Kanada</territory>
+			<territory type="CC">Kokosoyggjar</territory>
 			<territory type="CD">Kongo-Kinshasa</territory>
 			<territory type="CF">Miðafrikalýðveldið</territory>
 			<territory type="CG">Kongo</territory>
 			<territory type="CH">Sveis</territory>
 			<territory type="CI">Fílabeinsstrondin</territory>
+			<territory type="CK">Cooksoyggjar</territory>
 			<territory type="CL">Kili</territory>
 			<territory type="CM">Kamerun</territory>
 			<territory type="CN">Kina</territory>
@@ -187,6 +199,7 @@
 			<territory type="CR">Kosta Rika</territory>
 			<territory type="CU">Kuba</territory>
 			<territory type="CV">Grønhøvdaoyggjarnar</territory>
+			<territory type="CX">Jólaoyggjin</territory>
 			<territory type="CY">Kýpros</territory>
 			<territory type="CZ">Kekkia</territory>
 			<territory type="DE">Týskland</territory>
@@ -198,11 +211,13 @@
 			<territory type="EC">Ekvador</territory>
 			<territory type="EE">Estland</territory>
 			<territory type="EG">Egyptaland</territory>
+			<territory type="EH">Vestursahara</territory>
 			<territory type="ER">Eritrea</territory>
 			<territory type="ES">Spania</territory>
 			<territory type="ET">Etiopia</territory>
 			<territory type="FI">Finnland</territory>
 			<territory type="FJ">Fiji</territory>
+			<territory type="FK">Falklandsoyggjar</territory>
 			<territory type="FM">Mikronesia</territory>
 			<territory type="FO">Føroyar</territory>
 			<territory type="FR">Frakland</territory>
@@ -210,6 +225,7 @@
 			<territory type="GB">Stóra Bretland</territory>
 			<territory type="GD">Grenada</territory>
 			<territory type="GE">Georgia</territory>
+			<territory type="GF">Fransk Gujana</territory>
 			<territory type="GG">Guernsey</territory>
 			<territory type="GH">Ghana</territory>
 			<territory type="GI">Gibraltar</territory>
@@ -219,11 +235,13 @@
 			<territory type="GP">Guadeloupe</territory>
 			<territory type="GQ">Ekvator Guinea</territory>
 			<territory type="GR">Grikkaland</territory>
+			<territory type="GS">Suðurgeorgia</territory>
 			<territory type="GT">Guatemala</territory>
 			<territory type="GU">Guam</territory>
 			<territory type="GW">Guinea Bissau</territory>
 			<territory type="GY">Gujana</territory>
 			<territory type="HK">Hongkong</territory>
+			<territory type="HM">Heard- og McDonald-oyggjar</territory>
 			<territory type="HN">Honduras</territory>
 			<territory type="HR">Kroatia</territory>
 			<territory type="HT">Haiti</territory>
@@ -231,7 +249,9 @@
 			<territory type="ID">Indonesia</territory>
 			<territory type="IE">Írland</territory>
 			<territory type="IL">Ísrael</territory>
+			<territory type="IM">Mann</territory>
 			<territory type="IN">India</territory>
+			<territory type="IO">Bretsku Indiahavsoyggjar</territory>
 			<territory type="IQ">Irak</territory>
 			<territory type="IR">Iran</territory>
 			<territory type="IS">Ísland</territory>
@@ -249,6 +269,7 @@
 			<territory type="KP">Norður-Korea</territory>
 			<territory type="KR">Suður-Korea</territory>
 			<territory type="KW">Kuvait</territory>
+			<territory type="KY">Caymanoyggjar</territory>
 			<territory type="KZ">Kasakstan</territory>
 			<territory type="LA">Laos</territory>
 			<territory type="LB">Libanon</territory>
@@ -265,6 +286,7 @@
 			<territory type="MC">Monako</territory>
 			<territory type="MD">Moldova</territory>
 			<territory type="ME">Montenegro</territory>
+			<territory type="MF">Saint Martin</territory>
 			<territory type="MG">Madagaskar</territory>
 			<territory type="MH">Marshalloyggjarnar</territory>
 			<territory type="MK">Makedónia</territory>
@@ -272,6 +294,8 @@
 			<territory type="MM">Burma</territory>
 			<territory type="MN">Mongolia</territory>
 			<territory type="MO">Makao</territory>
+			<territory type="MP">Norðurmarianoyggjar</territory>
+			<territory type="MQ">Martinique</territory>
 			<territory type="MR">Móritania</territory>
 			<territory type="MS">Montserrat</territory>
 			<territory type="MT">Malta</territory>
@@ -282,7 +306,9 @@
 			<territory type="MY">Maleisia</territory>
 			<territory type="MZ">Mosambik</territory>
 			<territory type="NA">Namibia</territory>
+			<territory type="NC">Ný-Kaledonia</territory>
 			<territory type="NE">Niger</territory>
+			<territory type="NF">Norfolkoy</territory>
 			<territory type="NG">Nigeria</territory>
 			<territory type="NI">Nikaragua</territory>
 			<territory type="NL">Niðurlond</territory>
@@ -294,10 +320,15 @@
 			<territory type="OM">Oman</territory>
 			<territory type="PA">Panama</territory>
 			<territory type="PE">Perú</territory>
+			<territory type="PF">Franska Polynesia</territory>
 			<territory type="PG">Papua Nýguinea</territory>
 			<territory type="PH">Filipsoyggjar</territory>
 			<territory type="PK">Pakistan</territory>
 			<territory type="PL">Pólland</territory>
+			<territory type="PM">Saint-Pierre og Miquelon</territory>
+			<territory type="PN">Pitcairn</territory>
+			<territory type="PR">Puerto Rico</territory>
+			<territory type="PS">Palestinskt territorium</territory>
 			<territory type="PT">Portugal</territory>
 			<territory type="PW">Palau</territory>
 			<territory type="PY">Paraguei</territory>
@@ -314,7 +345,9 @@
 			<territory type="SD">Sudan</territory>
 			<territory type="SE">Svøríki</territory>
 			<territory type="SG">Singapor</territory>
+			<territory type="SH">Saint Helena</territory>
 			<territory type="SI">Slovenia</territory>
+			<territory type="SJ">Svalbard og Jan Mayen</territory>
 			<territory type="SK">Slovakia</territory>
 			<territory type="SL">Sierra Leone</territory>
 			<territory type="SM">San Marino</territory>
@@ -325,11 +358,14 @@
 			<territory type="SV">El Salvador</territory>
 			<territory type="SY">Syria</territory>
 			<territory type="SZ">Svasiland</territory>
+			<territory type="TC">Turks- og Caicosoyggjar</territory>
 			<territory type="TD">Kjad</territory>
 			<territory type="TG">Togo</territory>
 			<territory type="TH">Teiland</territory>
 			<territory type="TJ">Tadsjikistan</territory>
 			<territory type="TK">Tokelau</territory>
+			<territory type="TL">Eystur Timor</territory>
+			<territory type="TM">Turkmenistan</territory>
 			<territory type="TN">Tunesia</territory>
 			<territory type="TO">Tonga</territory>
 			<territory type="TR">Turkaland</territory>
@@ -345,26 +381,35 @@
 			<territory type="VA">Vatikan</territory>
 			<territory type="VC">Saint Vinsent og Grenadinoyggjar</territory>
 			<territory type="VE">Venesuela</territory>
+			<territory type="VG">Stóra Bretlands Jómfrúoyggjar</territory>
+			<territory type="VI">Sambandsríki Amerikas Jómfrúoyggjar</territory>
 			<territory type="VN">Vietnam</territory>
 			<territory type="VU">Vanuatu</territory>
+			<territory type="WF">Wallis og Futuna</territory>
 			<territory type="WS">Sámoa</territory>
 			<territory type="YE">Jemen</territory>
+			<territory type="YT">Mayotte</territory>
 			<territory type="ZA">Suðurafrika</territory>
 			<territory type="ZM">Sambia</territory>
 			<territory type="ZW">Simbabvi</territory>
 		</territories>
+		<measurementSystemNames>
+			<measurementSystemName type="US">US-einingar</measurementSystemName>
+			<measurementSystemName type="metric">SI-einingar</measurementSystemName>
+		</measurementSystemNames>
 	</localeDisplayNames>
 	<characters>
 		<exemplarCharacters>[a á b d ð e-i í j-o ó p r-u ú v x y ý æ ø]</exemplarCharacters>
 		<exemplarCharacters type="auxiliary">[c q w z]</exemplarCharacters>
 	</characters>
 	<delimiters>
-		<quotationStart>’</quotationStart>
+		<quotationStart>”</quotationStart>
 		<quotationEnd>”</quotationEnd>
-		<alternateQuotationStart>”</alternateQuotationStart>
+		<alternateQuotationStart>’</alternateQuotationStart>
 		<alternateQuotationEnd>’</alternateQuotationEnd>
 	</delimiters>
 	<dates>
+		<dateRangePattern>{0}–{1}</dateRangePattern>
 		<calendars>
 			<calendar type="gregorian">
 				<months>
@@ -467,20 +512,28 @@
 				<am>AM</am>
 				<pm>PM</pm>
 				<eras>
+					<eraNames>
+						<era type="0">fyrir Krist</era>
+						<era type="1">eftir Krist</era>
+					</eraNames>
 					<eraAbbr>
-						<era type="0">BCE</era>
-						<era type="1">CE</era>
+						<era type="0">f.Kr.</era>
+						<era type="1">e.Kr.</era>
 					</eraAbbr>
+					<eraNarrow>
+						<era type="0">f.Kr.</era>
+						<era type="1">e.Kr.</era>
+					</eraNarrow>
 				</eras>
 				<dateFormats>
 					<dateFormatLength type="full">
 						<dateFormat>
-							<pattern>EEEE dd MMMM yyyy</pattern>
+							<pattern>EEEE dd MMMM y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="long">
 						<dateFormat>
-							<pattern>d. MMM yyyy</pattern>
+							<pattern>d. MMM y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="medium">
@@ -497,7 +550,7 @@
 				<timeFormats>
 					<timeFormatLength type="full">
 						<timeFormat>
-							<pattern>HH:mm:ss v</pattern>
+							<pattern>HH:mm:ss zzzz</pattern>
 						</timeFormat>
 					</timeFormatLength>
 					<timeFormatLength type="long">
@@ -517,11 +570,6 @@
 					</timeFormatLength>
 				</timeFormats>
 				<dateTimeFormats>
-					<dateTimeFormatLength>
-						<dateTimeFormat>
-							<pattern>{1} {0}</pattern>
-						</dateTimeFormat>
-					</dateTimeFormatLength>
 					<availableFormats>
 						<dateFormatItem id="HHmm">HH:mm</dateFormatItem>
 						<dateFormatItem id="HHmmss">HH:mm:ss</dateFormatItem>
@@ -529,7 +577,7 @@
 						<dateFormatItem id="MMdd">dd-MM</dateFormatItem>
 						<dateFormatItem id="yyQ">Q yy</dateFormatItem>
 						<dateFormatItem id="yyyyMM">MM-yyyy</dateFormatItem>
-						<dateFormatItem id="yyyyMMM">MMM yyyy</dateFormatItem>
+						<dateFormatItem id="yyyyMMM">MMM y</dateFormatItem>
 					</availableFormats>
 					<intervalFormats>
 						<intervalFormatFallback>{0} - {1}</intervalFormatFallback>
@@ -585,18 +633,18 @@
 							<greatestDifference id="y">E dd-MM-yy - E dd-MM-yy</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMM">
-							<greatestDifference id="M">MMM-MMM yyyy</greatestDifference>
-							<greatestDifference id="y">MMM yyyy - MMM yyyy</greatestDifference>
+							<greatestDifference id="M">MMM-MMM y</greatestDifference>
+							<greatestDifference id="y">MMM y - MMM y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMEd">
-							<greatestDifference id="M">E dd MMM - E dd MMM yyyy</greatestDifference>
-							<greatestDifference id="d">E dd - E dd MMM yyyy</greatestDifference>
-							<greatestDifference id="y">E dd MMM yyyy - E dd MMM yyyy</greatestDifference>
+							<greatestDifference id="M">E dd MMM - E dd MMM y</greatestDifference>
+							<greatestDifference id="d">E dd - E dd MMM y</greatestDifference>
+							<greatestDifference id="y">E dd MMM y - E dd MMM y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMd">
-							<greatestDifference id="M">d. MMM - d. MMM yyyy</greatestDifference>
-							<greatestDifference id="d">d.-d. MMM yyyy</greatestDifference>
-							<greatestDifference id="y">d. MMM yyyy - d. MMM yyyy</greatestDifference>
+							<greatestDifference id="M">d. MMM - d. MMM y</greatestDifference>
+							<greatestDifference id="d">d.-d. MMM y</greatestDifference>
+							<greatestDifference id="y">d. MMM y - d. MMM y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMd">
 							<greatestDifference id="M">dd-MM-yy - dd-MM-yy</greatestDifference>
@@ -605,27 +653,101 @@
 						</intervalFormatItem>
 					</intervalFormats>
 				</dateTimeFormats>
+				<fields>
+					<field type="era">
+						<displayName>tímabil</displayName>
+					</field>
+					<field type="year">
+						<displayName>ár</displayName>
+					</field>
+					<field type="month">
+						<displayName>mánuður</displayName>
+					</field>
+					<field type="week">
+						<displayName>vika</displayName>
+					</field>
+					<field type="day">
+						<displayName>dagur</displayName>
+						<relative type="-3">í fyrrafyrradag</relative>
+						<relative type="-2">í fyrradag</relative>
+						<relative type="-1">í gær</relative>
+						<relative type="0">í dag</relative>
+						<relative type="1">á morgum</relative>
+						<relative type="2">í overmorgen</relative>
+						<relative type="3">í overovermorgen</relative>
+					</field>
+					<field type="weekday">
+						<displayName>vikudagur</displayName>
+					</field>
+					<field type="dayperiod">
+						<displayName>f.h./e.h.</displayName>
+					</field>
+					<field type="hour">
+						<displayName>klukkustund</displayName>
+					</field>
+					<field type="minute">
+						<displayName>mínúta</displayName>
+					</field>
+					<field type="second">
+						<displayName>sekund</displayName>
+					</field>
+					<field type="zone">
+						<displayName>tímabelti</displayName>
+					</field>
+				</fields>
 			</calendar>
 		</calendars>
 		<timeZoneNames>
 			<hourFormat>+HH:mm;−HH:mm</hourFormat>
 			<gmtFormat>GMT{0}</gmtFormat>
 			<regionFormat>{0}</regionFormat>
+			<fallbackFormat>{0} ({1})</fallbackFormat>
 		</timeZoneNames>
 	</dates>
 	<numbers>
 		<symbols>
 			<decimal>,</decimal>
 			<group>.</group>
+			<list>;</list>
+			<percentSign>%</percentSign>
+			<nativeZeroDigit>0</nativeZeroDigit>
+			<patternDigit>#</patternDigit>
+			<plusSign>+</plusSign>
 			<minusSign>−</minusSign>
 			<exponential>×10^</exponential>
+			<perMille>‰</perMille>
+			<infinity>∞</infinity>
+			<nan>¤¤¤</nan>
 		</symbols>
+		<decimalFormats>
+			<decimalFormatLength>
+				<decimalFormat>
+					<pattern>#,##0.###</pattern>
+				</decimalFormat>
+			</decimalFormatLength>
+		</decimalFormats>
+		<scientificFormats>
+			<scientificFormatLength>
+				<scientificFormat>
+					<pattern>#E0</pattern>
+				</scientificFormat>
+			</scientificFormatLength>
+		</scientificFormats>
+		<percentFormats>
+			<percentFormatLength>
+				<percentFormat>
+					<pattern>#,##0 %</pattern>
+				</percentFormat>
+			</percentFormatLength>
+		</percentFormats>
 		<currencyFormats>
 			<currencyFormatLength>
 				<currencyFormat>
 					<pattern>¤#,##0.00;¤-#,##0.00</pattern>
 				</currencyFormat>
 			</currencyFormatLength>
+			<unitPattern count="one">{0} {1}</unitPattern>
+			<unitPattern count="other">{0} {1}</unitPattern>
 		</currencyFormats>
 		<currencies>
 			<currency type="DKK">
@@ -633,4 +755,41 @@
 			</currency>
 		</currencies>
 	</numbers>
+	<units>
+		<unit type="day">
+			<unitPattern count="one">{0} dag</unitPattern>
+			<unitPattern count="other">{0} dage</unitPattern>
+		</unit>
+		<unit type="hour">
+			<unitPattern count="one">{0} tíma</unitPattern>
+			<unitPattern count="other">{0} tímar</unitPattern>
+		</unit>
+		<unit type="minute">
+			<unitPattern count="one">{0} minut</unitPattern>
+			<unitPattern count="other">{0} minuttir</unitPattern>
+		</unit>
+		<unit type="month">
+			<unitPattern count="one">{0} mánaði</unitPattern>
+			<unitPattern count="other">{0} mánaðir</unitPattern>
+		</unit>
+		<unit type="second">
+			<unitPattern count="one">{0} sekund</unitPattern>
+			<unitPattern count="other">{0} sekund</unitPattern>
+		</unit>
+		<unit type="week">
+			<unitPattern count="one">{0} vika</unitPattern>
+			<unitPattern count="other">{0} vikur</unitPattern>
+		</unit>
+		<unit type="year">
+			<unitPattern count="one">{0} ár</unitPattern>
+			<unitPattern count="other">{0} ár</unitPattern>
+		</unit>
+	</units>
+	<posix>
+		<messages>
+			<yesstr>já:j</yesstr>
+			<nostr>nei:n</nostr>
+		</messages>
+	</posix>
 </ldml>
+

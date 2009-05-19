@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.29 $"/>
-		<generation date="$Date: 2008/06/17 14:12:15 $"/>
+		<version number="$Revision: 1.39 $"/>
+		<generation date="$Date: 2009/05/05 23:06:36 $"/>
 		<language type="fur"/>
 	</identity>
 	<localeDisplayNames>
+		<localeDisplayPattern>
+			<localePattern>{0} ({1})</localePattern>
+			<localeSeparator>, </localeSeparator>
+		</localeDisplayPattern>
 		<languages>
 			<language type="aa">afar</language>
 			<language type="ae">avestan</language>
@@ -73,6 +77,7 @@
 			<language type="hy">armen</language>
 			<language type="id">indonesian</language>
 			<language type="ik">inupiaq</language>
+			<language type="ine">lenghe indo-europeane</language>
 			<language type="io">ido</language>
 			<language type="is">islandês</language>
 			<language type="it">talian</language>
@@ -510,10 +515,18 @@
 			<variant type="1901">Ortografie todescje tradizionâl</variant>
 			<variant type="1994">Ortografie resiane standard</variant>
 			<variant type="1996">Ortografie todescje dal 1996</variant>
+			<variant type="AREVELA">armen orientâl</variant>
+			<variant type="AREVMDA">armen ocidentâl</variant>
+			<variant type="BISKE">dialet di San Zorç di Resie</variant>
+			<variant type="LIPAW">dialet di Lipovaz dal resian</variant>
 			<variant type="NEDIS">Dialet des valadis dal Nadison</variant>
+			<variant type="NJIVA">dialet di Gnive</variant>
+			<variant type="OSOJS">dialet di Oseac</variant>
 			<variant type="POLYTON">Politoniche</variant>
 			<variant type="REVISED">Ortografie revisade</variant>
 			<variant type="ROZAJ">Resian</variant>
+			<variant type="SOLBA">dialet di Stolvize</variant>
+			<variant type="VALENCIA">valenzian</variant>
 		</variants>
 		<keys>
 			<key type="calendar">calendari</key>
@@ -682,29 +695,29 @@
 				<dateFormats>
 					<dateFormatLength type="full">
 						<dateFormat>
-							<pattern>EEEE d 'di' MMMM 'dal' yyyy</pattern>
+							<pattern>EEEE d 'di' MMMM 'dal' y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="long">
 						<dateFormat>
-							<pattern>d MMMM yyyy</pattern>
+							<pattern>d 'di' MMMM 'dal' y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="medium">
 						<dateFormat>
-							<pattern>d MMM yyyy</pattern>
+							<pattern>dd/MM/yyyy</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="short">
 						<dateFormat>
-							<pattern>d/MM/yy</pattern>
+							<pattern>dd/MM/yy</pattern>
 						</dateFormat>
 					</dateFormatLength>
 				</dateFormats>
 				<timeFormats>
 					<timeFormatLength type="full">
 						<timeFormat>
-							<pattern>HH:mm:ss v</pattern>
+							<pattern>HH:mm:ss zzzz</pattern>
 						</timeFormat>
 					</timeFormatLength>
 					<timeFormatLength type="long">
@@ -724,38 +737,90 @@
 					</timeFormatLength>
 				</timeFormats>
 				<dateTimeFormats>
-					<dateTimeFormatLength>
-						<dateTimeFormat>
-							<pattern>{1} {0}</pattern>
-						</dateTimeFormat>
-					</dateTimeFormatLength>
 					<availableFormats>
+						<dateFormatItem id="EEEd">d EEE</dateFormatItem>
 						<dateFormatItem id="Hm">H:mm</dateFormatItem>
 						<dateFormatItem id="M">L</dateFormatItem>
 						<dateFormatItem id="MEd">E d/M</dateFormatItem>
 						<dateFormatItem id="MMM">LLL</dateFormatItem>
 						<dateFormatItem id="MMMEd">E d MMM</dateFormatItem>
 						<dateFormatItem id="MMMMEd">E d MMMM</dateFormatItem>
-						<dateFormatItem id="MMMMd">d MMMM</dateFormatItem>
+						<dateFormatItem id="MMMMd">d 'di' MMMM</dateFormatItem>
 						<dateFormatItem id="MMMd">d MMM</dateFormatItem>
 						<dateFormatItem id="MMd">d/MM</dateFormatItem>
 						<dateFormatItem id="Md">d/M</dateFormatItem>
 						<dateFormatItem id="d">d</dateFormatItem>
 						<dateFormatItem id="ms">mm:ss</dateFormatItem>
-						<dateFormatItem id="y">yyyy</dateFormatItem>
+						<dateFormatItem id="y">y</dateFormatItem>
 						<dateFormatItem id="yM">M/yyyy</dateFormatItem>
 						<dateFormatItem id="yMEd">EEE, d/M/yyyy</dateFormatItem>
-						<dateFormatItem id="yMMM">MMM yyyy</dateFormatItem>
-						<dateFormatItem id="yMMMEd">EEE d MMM yyyy</dateFormatItem>
-						<dateFormatItem id="yMMMM">MMMM yyyy</dateFormatItem>
+						<dateFormatItem id="yMMM">MMM y</dateFormatItem>
+						<dateFormatItem id="yMMMEd">EEE d MMM y</dateFormatItem>
+						<dateFormatItem id="yMMMM">LLLL 'dal' y</dateFormatItem>
 						<dateFormatItem id="yQ">Q yyyy</dateFormatItem>
-						<dateFormatItem id="yQQQ">QQQ yyyy</dateFormatItem>
+						<dateFormatItem id="yQQQ">QQQ y</dateFormatItem>
 						<dateFormatItem id="yyMM">MM/yy</dateFormatItem>
 						<dateFormatItem id="yyQ">Q yy</dateFormatItem>
-						<dateFormatItem id="yyyyMMMM">MMMM yyyy</dateFormatItem>
+						<dateFormatItem id="yyyyMMMM">MMMM y</dateFormatItem>
 					</availableFormats>
 					<intervalFormats>
+						<intervalFormatFallback>{0} – {1}</intervalFormatFallback>
+						<intervalFormatItem id="M">
+							<greatestDifference id="M">M-M</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="MEd">
+							<greatestDifference id="M">E dd/MM - E dd/MM</greatestDifference>
+							<greatestDifference id="d">E dd/MM - E dd/MM</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="MMM">
+							<greatestDifference id="M">LLL-LLL</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="MMMEd">
+							<greatestDifference id="M">E d 'di' MMM - E d 'di' MMM</greatestDifference>
+							<greatestDifference id="d">E d - E d 'di' MMM</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="MMMM">
+							<greatestDifference id="M">LLLL-LLLL</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="MMMd">
+							<greatestDifference id="M">d 'di' MMM - d 'di' MMM</greatestDifference>
+							<greatestDifference id="d">d-d 'di' MMM</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="Md">
+							<greatestDifference id="M">dd/MM - dd/MM</greatestDifference>
+							<greatestDifference id="d">dd/MM - dd/MM</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="d">
+							<greatestDifference id="d">d-d</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="h">
+							<greatestDifference id="a">HH-HH</greatestDifference>
+							<greatestDifference id="h">HH-HH</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="hm">
+							<greatestDifference id="a">HH:mm-HH:mm</greatestDifference>
+							<greatestDifference id="h">HH:mm-HH:mm</greatestDifference>
+							<greatestDifference id="m">HH:mm-HH:mm</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="hmv">
+							<greatestDifference id="a">HH:mm-HH:mm v</greatestDifference>
+							<greatestDifference id="h">HH:mm-HH:mm v</greatestDifference>
+							<greatestDifference id="m">HH:mm-HH:mm v</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="hv">
+							<greatestDifference id="a">HH-HH v</greatestDifference>
+							<greatestDifference id="h">HH-HH v</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="y">
+							<greatestDifference id="y">y-y</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="yM">
+							<greatestDifference id="M">MM/yy - MM/yy</greatestDifference>
+							<greatestDifference id="y">MM/yy - MM/yy</greatestDifference>
+						</intervalFormatItem>
 						<intervalFormatItem id="yMEd">
+							<greatestDifference id="M">E dd/MM/yy - E dd/MM/yy</greatestDifference>
+							<greatestDifference id="d">E dd/MM/yy - E dd/MM/yy</greatestDifference>
 							<greatestDifference id="y">E dd/MM/yyyy - E dd/MM/yyyy</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMM">
@@ -776,6 +841,11 @@
 							<greatestDifference id="d">d - d/MM/yyyy</greatestDifference>
 							<greatestDifference id="y">dd/MM/yyyy - dd/MM/yyyy</greatestDifference>
 						</intervalFormatItem>
+						<intervalFormatItem id="yMd">
+							<greatestDifference id="M">dd/MM/yy - dd/MM/yy</greatestDifference>
+							<greatestDifference id="d">dd/MM/yy - dd/MM/yy</greatestDifference>
+							<greatestDifference id="y">dd/MM/yy - dd/MM/yy</greatestDifference>
+						</intervalFormatItem>
 					</intervalFormats>
 				</dateTimeFormats>
 				<fields>
@@ -793,13 +863,13 @@
 					</field>
 					<field type="day">
 						<displayName>dì</displayName>
+						<relative type="-3">trê dîs fa</relative>
+						<relative type="-2">îr l'altri</relative>
+						<relative type="-1">îr</relative>
 						<relative type="0">vuê</relative>
 						<relative type="1">doman</relative>
 						<relative type="2">passantdoman</relative>
 						<relative type="3">tra trê dîs</relative>
-						<relative type="-1">îr</relative>
-						<relative type="-2">îr l'altri</relative>
-						<relative type="-3">trê dîs fa</relative>
 					</field>
 					<field type="weekday">
 						<displayName>dì de setemane</displayName>
@@ -826,6 +896,7 @@
 			<hourFormat>+HH:mm;-HH:mm</hourFormat>
 			<gmtFormat>GMT{0}</gmtFormat>
 			<regionFormat>{0}</regionFormat>
+			<fallbackFormat>{1} ({0})</fallbackFormat>
 			<zone type="Etc/Unknown">
 				<exemplarCity>No cognossude</exemplarCity>
 			</zone>
@@ -852,12 +923,20 @@
 					<standard>Ore de Europe centrâl</standard>
 					<daylight>Ore estive de Europe centrâl</daylight>
 				</long>
+				<short>
+					<standard>CET</standard>
+					<daylight>CEST</daylight>
+				</short>
 			</metazone>
 			<metazone type="Europe_Eastern">
 				<long>
 					<standard>Ore de Europe orientâl</standard>
 					<daylight>Ore estive de Europe orientâl</daylight>
 				</long>
+				<short>
+					<standard>EET</standard>
+					<daylight>EEST</daylight>
+				</short>
 			</metazone>
 			<metazone type="Europe_Western">
 				<long>
@@ -874,8 +953,18 @@
 	</dates>
 	<numbers>
 		<symbols>
-			<decimal>.</decimal>
-			<group>,</group>
+			<decimal>,</decimal>
+			<group>.</group>
+			<list>;</list>
+			<percentSign>%</percentSign>
+			<nativeZeroDigit>0</nativeZeroDigit>
+			<patternDigit>#</patternDigit>
+			<plusSign>+</plusSign>
+			<minusSign>-</minusSign>
+			<exponential>E</exponential>
+			<perMille>‰</perMille>
+			<infinity>∞</infinity>
+			<nan>NaN</nan>
 		</symbols>
 		<decimalFormats>
 			<decimalFormatLength>
@@ -904,6 +993,8 @@
 					<pattern>¤ #,##0.00</pattern>
 				</currencyFormat>
 			</currencyFormatLength>
+			<unitPattern count="one">{0} {1}</unitPattern>
+			<unitPattern count="other">{0} {1}</unitPattern>
 		</currencyFormats>
 		<currencies>
 			<currency type="AMD">
@@ -1037,7 +1128,54 @@
 			</currency>
 			<currency type="USD">
 				<displayName>Dolar american</displayName>
-				<symbol>$</symbol>
+			</currency>
+			<currency type="USN">
+				<displayName>Dolar american (prossime zornade)</displayName>
+			</currency>
+			<currency type="USS">
+				<displayName>Dolar american (stesse zornade)</displayName>
+			</currency>
+			<currency type="XAG">
+				<displayName>Arint</displayName>
+			</currency>
+			<currency type="XAU">
+				<displayName>Aur</displayName>
+			</currency>
+			<currency type="XBA">
+				<displayName>Unitât composite europeane</displayName>
+			</currency>
+			<currency type="XBB">
+				<displayName>Unitât monetarie europeane</displayName>
+			</currency>
+			<currency type="XBC">
+				<displayName>Unitât di acont europeane (XBC)</displayName>
+			</currency>
+			<currency type="XBD">
+				<displayName>Unitât di acont europeane (XBD)</displayName>
+			</currency>
+			<currency type="XDR">
+				<displayName>Dirits speciâi di incas</displayName>
+			</currency>
+			<currency type="XEU">
+				<displayName>Unitât Monetarie Europeane</displayName>
+			</currency>
+			<currency type="XFO">
+				<displayName>Franc aur francês</displayName>
+			</currency>
+			<currency type="XFU">
+				<displayName>Franc UIC francês</displayName>
+			</currency>
+			<currency type="XPD">
+				<displayName>Paladi</displayName>
+			</currency>
+			<currency type="XPT">
+				<displayName>Platin</displayName>
+			</currency>
+			<currency type="XRE">
+				<displayName>fonts RINET</displayName>
+			</currency>
+			<currency type="XTS">
+				<displayName>codiç di verifiche de monede</displayName>
 			</currency>
 			<currency type="XXX">
 				<displayName>Monede no valide o no cognossude</displayName>

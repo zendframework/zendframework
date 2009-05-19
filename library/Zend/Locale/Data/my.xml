@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.26 $"/>
-		<generation date="$Date: 2008/06/17 14:12:12 $"/>
+		<version number="$Revision: 1.39 $"/>
+		<generation date="$Date: 2009/05/05 23:06:38 $"/>
 		<language type="my"/>
 	</identity>
 	<localeDisplayNames>
@@ -292,7 +292,7 @@
 			<territory type="GS">တောင် ဂျော်ဂျီယာ နှင့် တောင် ဆင်းဒဝစ်ဂျ် ကျွန်းစုများ</territory>
 			<territory type="GT">ဂွာတီမာလာ</territory>
 			<territory type="GU">ဂူအမ်</territory>
-			<territory type="HK">ဟောင်ကောင်</territory>
+			<territory type="HK">တရုတ်၏ အထူးအုပ်ချုပ်ခွင့်ရ ဟောင်ကောင်</territory>
 			<territory type="HN">ဟွန်ဒူးရပ်စ်</territory>
 			<territory type="HR">ခရိုအေးရှား</territory>
 			<territory type="HT">ဟေတီ</territory>
@@ -335,7 +335,7 @@
 			<territory type="ML">မာလီ</territory>
 			<territory type="MM">မြန်မာ</territory>
 			<territory type="MN">မွန်ဂိုးလီးယား</territory>
-			<territory type="MO">မကာအို</territory>
+			<territory type="MO">တရုတ်၏ အထူးအုပ်ချုပ်ခွင့်ရ မကာအို</territory>
 			<territory type="MV">မော်လဒိုက်</territory>
 			<territory type="MW">မာလာဝီ</territory>
 			<territory type="MX">မက္ကဆီကို</territory>
@@ -447,7 +447,7 @@
 	</localeDisplayNames>
 	<characters>
 		<exemplarCharacters>[က-အ ဣ-ဧ ဩ ဪ]</exemplarCharacters>
-		<exemplarCharacters type="auxiliary">[ံ-း ျ-ှ ာ ါ ိ-ဲ ္ ်]</exemplarCharacters>
+		<exemplarCharacters type="auxiliary">[\u1036-း ျ-\u103E ာ ါ \u102D-\u1032 \u1039 \u103A]</exemplarCharacters>
 		<exemplarCharacters type="currencySymbol">[a-z]</exemplarCharacters>
 	</characters>
 	<delimiters>
@@ -458,9 +458,6 @@
 	</delimiters>
 	<dates>
 		<calendars>
-			<calendar type="coptic">
-				<am>နံနက်</am>
-			</calendar>
 			<calendar type="gregorian">
 				<months>
 					<monthContext type="format">
@@ -594,17 +591,17 @@
 				<dateFormats>
 					<dateFormatLength type="full">
 						<dateFormat>
-							<pattern>EEEE, yyyy MMMM dd</pattern>
+							<pattern>EEEE, y MMMM dd</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="long">
 						<dateFormat>
-							<pattern>yyyy MMMM d</pattern>
+							<pattern>y MMMM d</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="medium">
 						<dateFormat>
-							<pattern>yyyy MMM d</pattern>
+							<pattern>y MMM d</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="short">
@@ -616,7 +613,7 @@
 				<timeFormats>
 					<timeFormatLength type="full">
 						<timeFormat>
-							<pattern>HH:mm:ss v</pattern>
+							<pattern>HH:mm:ss zzzz</pattern>
 						</timeFormat>
 					</timeFormatLength>
 					<timeFormatLength type="long">
@@ -636,11 +633,6 @@
 					</timeFormatLength>
 				</timeFormats>
 				<dateTimeFormats>
-					<dateTimeFormatLength>
-						<dateTimeFormat>
-							<pattern>{1} {0}</pattern>
-						</dateTimeFormat>
-					</dateTimeFormatLength>
 					<availableFormats>
 						<dateFormatItem id="Hm">H:mm</dateFormatItem>
 						<dateFormatItem id="M">L</dateFormatItem>
@@ -653,14 +645,14 @@
 						<dateFormatItem id="Md">M-d</dateFormatItem>
 						<dateFormatItem id="d">d</dateFormatItem>
 						<dateFormatItem id="ms">mm:ss</dateFormatItem>
-						<dateFormatItem id="y">yyyy</dateFormatItem>
+						<dateFormatItem id="y">y</dateFormatItem>
 						<dateFormatItem id="yM">yyyy-M</dateFormatItem>
 						<dateFormatItem id="yMEd">EEE, yyyy-M-d</dateFormatItem>
-						<dateFormatItem id="yMMM">yyyy MMM</dateFormatItem>
-						<dateFormatItem id="yMMMEd">EEE, yyyy MMM d</dateFormatItem>
-						<dateFormatItem id="yMMMM">yyyy MMMM</dateFormatItem>
+						<dateFormatItem id="yMMM">y MMM</dateFormatItem>
+						<dateFormatItem id="yMMMEd">EEE, y MMM d</dateFormatItem>
+						<dateFormatItem id="yMMMM">y MMMM</dateFormatItem>
 						<dateFormatItem id="yQ">yyyy Q</dateFormatItem>
-						<dateFormatItem id="yQQQ">yyyy QQQ</dateFormatItem>
+						<dateFormatItem id="yQQQ">y QQQ</dateFormatItem>
 						<dateFormatItem id="yyQ">Q yy</dateFormatItem>
 					</availableFormats>
 					<intervalFormats>
@@ -710,13 +702,13 @@
 							<greatestDifference id="y">EEEE၊ d-M-yyyy – EEEE၊ d-M-yyyy</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMEd">
-							<greatestDifference id="M">yyyy၊ MMM d၊ EEEE – MMM d၊ EEEE</greatestDifference>
-							<greatestDifference id="d">yyyy၊ MMM d၊ EEEE – MMM d၊ EEEE</greatestDifference>
-							<greatestDifference id="y">yyyy၊ MMM d၊ EEEE – yyyy၊ MMM d၊ EEEE</greatestDifference>
+							<greatestDifference id="M">y၊ MMM d၊ EEEE – MMM d၊ EEEE</greatestDifference>
+							<greatestDifference id="d">y၊ MMM d၊ EEEE – MMM d၊ EEEE</greatestDifference>
+							<greatestDifference id="y">y၊ MMM d၊ EEEE – y၊ MMM d၊ EEEE</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMd">
-							<greatestDifference id="M">yyyy၊ MMM d – MMM d</greatestDifference>
-							<greatestDifference id="y">yyyy MMM d – yyyy MMM d</greatestDifference>
+							<greatestDifference id="M">y၊ MMM d – MMM d</greatestDifference>
+							<greatestDifference id="y">y MMM d – y MMM d</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMd">
 							<greatestDifference id="M">d/M/yy – d/M/yy</greatestDifference>
@@ -740,11 +732,11 @@
 					</field>
 					<field type="day">
 						<displayName>ရက်</displayName>
+						<relative type="-2">တနေ့က</relative>
+						<relative type="-1">မနေ့က</relative>
 						<relative type="0">ယနေ့</relative>
 						<relative type="1">မနက်ဖြန်</relative>
 						<relative type="2">သဘက်ခါ</relative>
-						<relative type="-1">မနေ့က</relative>
-						<relative type="-2">တနေ့က</relative>
 					</field>
 					<field type="weekday">
 						<displayName>နေ့</displayName>
@@ -834,16 +826,12 @@
 					<daylight>အနောက်ပိုင်း အာဖရိက နွေရာသီ အချိန်</daylight>
 				</long>
 			</metazone>
-			<metazone type="Alaska">
-				<commonlyUsed>false</commonlyUsed>
-			</metazone>
 			<metazone type="America_Central">
 				<long>
 					<generic>အလယ်ပိုင်း အမေရိက အချိန်</generic>
 					<standard>အလယ်ပိုင်း အမေရိက စံတော်ချိန်</standard>
 					<daylight>အလယ်ပိုင်း အမေရိက နွေရာသီ အချိန်</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="America_Eastern">
 				<long>
@@ -851,7 +839,6 @@
 					<standard>အရှေ့ပိုင်း အမေရိက စံတော်ချိန်</standard>
 					<daylight>အရှေ့ပိုင်း အမေရိက အချိန်</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="America_Mountain">
 				<long>
@@ -859,7 +846,6 @@
 					<standard>အမေရိက တောင် စံတော်ချိန်</standard>
 					<daylight>အမေရိက တောင် နေ့ပိုင်း အချိန်</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="America_Pacific">
 				<long>
@@ -867,7 +853,6 @@
 					<standard>ပစိဖိတ် စံတော်ချိန်</standard>
 					<daylight>ပစိဖိတ် နေ့ပိုင်း အချိန်</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Arabian">
 				<long>
@@ -899,7 +884,6 @@
 					<standard>အတ္ထလန်တစ် စံတော်ချိန်</standard>
 					<daylight>အတ္ထလန်တစ် နေ့ပိုင်း အချိန်</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Australia_Central">
 				<long>
@@ -1027,7 +1011,6 @@
 					<standard>အနောက်ပိုင်း ဥရောပ အချိန်</standard>
 					<daylight>အနောက်ပိုင်း ဥရောပ နွေရာသီ အချိန်</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Falkland">
 				<long>
@@ -1265,6 +1248,7 @@
 		</timeZoneNames>
 	</dates>
 	<numbers>
+		<defaultNumberingSystem>mymr</defaultNumberingSystem>
 		<symbols>
 			<decimal>.</decimal>
 			<group>,</group>

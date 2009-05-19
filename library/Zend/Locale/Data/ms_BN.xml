@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.47 $"/>
-		<generation date="$Date: 2008/06/17 14:12:12 $"/>
+		<version number="$Revision: 1.51 $"/>
+		<generation date="$Date: 2009/05/05 23:06:38 $"/>
 		<language type="ms"/>
 		<territory type="BN"/>
 	</identity>
@@ -13,7 +13,7 @@
 				<dateFormats>
 					<dateFormatLength type="full">
 						<dateFormat>
-							<pattern>dd MMMM yyyy</pattern>
+							<pattern>dd MMMM y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="medium">
@@ -25,7 +25,7 @@
 				<timeFormats>
 					<timeFormatLength type="full">
 						<timeFormat>
-							<pattern>h:mm:ss aa v</pattern>
+							<pattern>h:mm:ss aa zzzz</pattern>
 						</timeFormat>
 					</timeFormatLength>
 					<timeFormatLength type="long">
@@ -90,18 +90,18 @@
 							<greatestDifference id="y">yyyy-MM-dd - yyyy-MM-dd</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMM">
-							<greatestDifference id="M">yyyy MMM-MMM</greatestDifference>
-							<greatestDifference id="y">yyyy MMM - yyyy MMM</greatestDifference>
+							<greatestDifference id="M">y MMM-MMM</greatestDifference>
+							<greatestDifference id="y">y MMM - y MMM</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMEd">
-							<greatestDifference id="M">dd MMM - dd MMM yyyy</greatestDifference>
-							<greatestDifference id="d">dd-dd MMM yyyy</greatestDifference>
-							<greatestDifference id="y">dd MMM yyyy - dd MMM yyyy</greatestDifference>
+							<greatestDifference id="M">dd MMM - dd MMM y</greatestDifference>
+							<greatestDifference id="d">dd-dd MMM y</greatestDifference>
+							<greatestDifference id="y">dd MMM y - dd MMM y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMd">
-							<greatestDifference id="M">yyyy MMM d - MMM d</greatestDifference>
-							<greatestDifference id="d">yyyy MMM d-d</greatestDifference>
-							<greatestDifference id="y">yyyy MMM d - yyyy MMM d</greatestDifference>
+							<greatestDifference id="M">y MMM d - MMM d</greatestDifference>
+							<greatestDifference id="d">y MMM d-d</greatestDifference>
+							<greatestDifference id="y">y MMM d - y MMM d</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMd">
 							<greatestDifference id="M">yyyy-MM-dd - yyyy-MM-dd</greatestDifference>
@@ -132,4 +132,3 @@
 		</currencies>
 	</numbers>
 </ldml>
-

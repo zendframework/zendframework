@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.7 $"/>
-		<generation date="$Date: 2008/05/28 15:49:32 $"/>
+		<version number="$Revision: 1.11 $"/>
+		<generation date="$Date: 2009/05/05 23:06:37 $"/>
 		<language type="ii"/>
 	</identity>
 	<localeDisplayNames>
@@ -182,7 +182,7 @@
 				<dateFormats>
 					<dateFormatLength type="long">
 						<dateFormat>
-							<pattern>yyyy MMMM d</pattern>
+							<pattern>y MMMM d</pattern>
 						</dateFormat>
 					</dateFormatLength>
 				</dateFormats>
@@ -201,11 +201,11 @@
 					</field>
 					<field type="day">
 						<displayName>ꑍ</displayName>
+						<relative type="-2">ꎴꂿꋍꑍ</relative>
+						<relative type="-1">ꀋꅔꉈ</relative>
 						<relative type="0">ꀃꑍ</relative>
 						<relative type="1">ꃆꏂꑍ</relative>
 						<relative type="2">ꌕꀿꑍ</relative>
-						<relative type="-1">ꀋꅔꉈ</relative>
-						<relative type="-2">ꎴꂿꋍꑍ</relative>
 					</field>
 					<field type="weekday">
 						<displayName>ꆏꑍ</displayName>
@@ -242,7 +242,6 @@
 		<currencies>
 			<currency type="XXX">
 				<displayName>ꅉꀋꐚꌠꌋꆀꎆꃀꀋꈁꀐꌠ</displayName>
-				<symbol>XXX</symbol>
 			</currency>
 		</currencies>
 	</numbers>

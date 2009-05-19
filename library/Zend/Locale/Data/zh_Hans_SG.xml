@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.58 $"/>
-		<generation date="$Date: 2008/06/17 14:12:12 $"/>
+		<version number="$Revision: 1.62 $"/>
+		<generation date="$Date: 2009/05/05 23:06:41 $"/>
 		<language type="zh"/>
 		<script type="Hans"/>
 		<territory type="SG"/>
@@ -40,14 +40,6 @@
 							<greatestDifference id="M">dd/MME至dd/MME</greatestDifference>
 							<greatestDifference id="d">dd/MME至dd/MME</greatestDifference>
 						</intervalFormatItem>
-						<intervalFormatItem id="MMMEd">
-							<greatestDifference id="M">ddMMME至ddMMME</greatestDifference>
-							<greatestDifference id="d">ddMMME至ddMMME</greatestDifference>
-						</intervalFormatItem>
-						<intervalFormatItem id="MMMd">
-							<greatestDifference id="M">ddMMM至dMMM</greatestDifference>
-							<greatestDifference id="d">dd至ddMMM</greatestDifference>
-						</intervalFormatItem>
 						<intervalFormatItem id="Md">
 							<greatestDifference id="M">dd/MM至dd/MM</greatestDifference>
 							<greatestDifference id="d">dd/MM至dd/MM</greatestDifference>
@@ -81,15 +73,6 @@
 							<greatestDifference id="M">dd/MM/yyE至dd/MM/yyE</greatestDifference>
 							<greatestDifference id="d">dd/MM/yyE至dd/MM/yyE</greatestDifference>
 							<greatestDifference id="y">dd/MM/yyE至dd/MM/yyE</greatestDifference>
-						</intervalFormatItem>
-						<intervalFormatItem id="yMMM">
-							<greatestDifference id="M">MMM至MMMyyyy</greatestDifference>
-							<greatestDifference id="y">MMMyyyy至MMMyyyy</greatestDifference>
-						</intervalFormatItem>
-						<intervalFormatItem id="yMMMd">
-							<greatestDifference id="M">ddMMM至ddMMMyyyy</greatestDifference>
-							<greatestDifference id="d">dd至ddMMMyyyy</greatestDifference>
-							<greatestDifference id="y">ddMMMyyyy至ddMMMyyyy</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMd">
 							<greatestDifference id="M">dd/MM/yy至dd/MM/yy</greatestDifference>

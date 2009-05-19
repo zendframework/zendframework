@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.92 $"/>
-		<generation date="$Date: 2008/06/17 14:12:13 $"/>
+		<version number="$Revision: 1.112 $"/>
+		<generation date="$Date: 2009/05/05 23:06:36 $"/>
 		<language type="fa"/>
 	</identity>
 	<localeDisplayNames>
@@ -22,14 +22,14 @@
 			<language type="af">آفریکانس</language>
 			<language type="afa">زبان افریقا و آسیایی</language>
 			<language type="afh">آفریهیلی</language>
-			<language type="ain">آینو</language>
+			<language type="ain">آینویی</language>
 			<language type="ak">آکان</language>
 			<language type="akk">آکدی</language>
 			<language type="ale">آلئوتی</language>
 			<language type="alg">زبان آلگونکینی</language>
-			<language type="alt">alt</language>
+			<language type="alt">آلتایی جنوبی</language>
 			<language type="am">امهری</language>
-			<language type="an">an</language>
+			<language type="an">آراگونی</language>
 			<language type="ang">انگلیسی باستان</language>
 			<language type="anp">آنگیکا</language>
 			<language type="apa">زبان آپاچیایی</language>
@@ -40,16 +40,13 @@
 			<language type="art">زبان ساختگی</language>
 			<language type="arw">آراواکی</language>
 			<language type="as">آسامی</language>
-			<language type="ast">ast</language>
 			<language type="ath">زبان آتاپاسکایی</language>
 			<language type="aus">زبان استرالیایی</language>
 			<language type="av">آواری</language>
-			<language type="awa">awa</language>
 			<language type="ay">آیمارایی</language>
 			<language type="az">ترکی آذربایجانی</language>
 			<language type="ba">باشغیری</language>
 			<language type="bad">باندایی</language>
-			<language type="bai">bai</language>
 			<language type="bal">بلوچی</language>
 			<language type="ban">بالیایی</language>
 			<language type="bas">باسایی</language>
@@ -64,7 +61,6 @@
 			<language type="bi">بیسلاما</language>
 			<language type="bik">بیکولی</language>
 			<language type="bin">بینی</language>
-			<language type="bla">bla</language>
 			<language type="bm">بامبارایی</language>
 			<language type="bn">بنگالی</language>
 			<language type="bnt">بانتویی</language>
@@ -81,21 +77,18 @@
 			<language type="cai">زبان سرخپوستی امریکای مرکزی</language>
 			<language type="car">کاریبی</language>
 			<language type="cau">زبان قفقازی</language>
-			<language type="cch">cch</language>
 			<language type="ce">چچنی</language>
 			<language type="ceb">سبویی</language>
 			<language type="cel">زبان سلتی</language>
 			<language type="ch">چامورویی</language>
 			<language type="chb">چیبچا</language>
-			<language type="chg">چاگاتایی</language>
-			<language type="chk">چوکزی</language>
+			<language type="chg">جغتایی</language>
+			<language type="chk">تروکی</language>
 			<language type="chm">ماریایی</language>
-			<language type="chn">chn</language>
 			<language type="cho">چوکتویی</language>
 			<language type="chp">چیپه‌ویه‌ای</language>
 			<language type="chr">چروکیایی</language>
 			<language type="chy">شایانی</language>
-			<language type="cmc">cmc</language>
 			<language type="co">کورسی</language>
 			<language type="cop">قبطی</language>
 			<language type="cpe">کریول یا پیجین مبتنی بر انگلیسی</language>
@@ -112,13 +105,12 @@
 			<language type="cy">ویلزی</language>
 			<language type="da">دانمارکی</language>
 			<language type="dak">داکوتایی</language>
-			<language type="dar">دارگوا</language>
+			<language type="dar">دارقینی</language>
 			<language type="day">دایاک</language>
 			<language type="de">آلمانی</language>
 			<language type="de_AT">آلمانی اتریش</language>
 			<language type="de_CH">آلمانی علیای سوئیس</language>
 			<language type="del">دلاواری</language>
-			<language type="den">den</language>
 			<language type="dgr">دوگریب</language>
 			<language type="din">دینکایی</language>
 			<language type="doi">دوگری</language>
@@ -126,7 +118,7 @@
 			<language type="dsb">صُربی سفلی</language>
 			<language type="dua">دوآلایی</language>
 			<language type="dum">هلندی میانه</language>
-			<language type="dv">dv</language>
+			<language type="dv">مالدیوی</language>
 			<language type="dyu">دایولایی</language>
 			<language type="dz">جونخایی</language>
 			<language type="ee">اوه‌ای</language>
@@ -169,7 +161,7 @@
 			<language type="fy">فریزی غربی</language>
 			<language type="ga">ایرلندی</language>
 			<language type="gaa">گایی</language>
-			<language type="gay">گایو</language>
+			<language type="gay">گایویی</language>
 			<language type="gba">گبایایی</language>
 			<language type="gd">گیلی اسکاتلندی</language>
 			<language type="gem">زبان ژرمنی</language>
@@ -181,7 +173,7 @@
 			<language type="goh">آلمانی علیای باستان</language>
 			<language type="gon">گوندی</language>
 			<language type="gor">گورونتالو</language>
-			<language type="got">گاتیک</language>
+			<language type="got">گوتی</language>
 			<language type="grb">گریبویی</language>
 			<language type="grc">یونانی کهن</language>
 			<language type="gsw">آلمانی سوئیسی</language>
@@ -197,7 +189,7 @@
 			<language type="him">هیماچالی</language>
 			<language type="hit">هیتی</language>
 			<language type="hmn">همونگ</language>
-			<language type="ho">هیری موتو</language>
+			<language type="ho">موتویی هیری</language>
 			<language type="hr">کرواتی</language>
 			<language type="hsb">صُربی علیا</language>
 			<language type="ht">هائیتیایی</language>
@@ -208,7 +200,7 @@
 			<language type="ia">میان‌زبان</language>
 			<language type="iba">آیبن</language>
 			<language type="id">اندونزیایی</language>
-			<language type="ie">بین زبانی</language>
+			<language type="ie">اکسیدنتال</language>
 			<language type="ig">ایگبویی</language>
 			<language type="ii">یی سیچوان</language>
 			<language type="ijo">ایجویی</language>
@@ -235,12 +227,12 @@
 			<language type="kaj">جو</language>
 			<language type="kam">کامبایی</language>
 			<language type="kar">کارنی</language>
-			<language type="kaw">کاوی</language>
+			<language type="kaw">کاویایی</language>
 			<language type="kbd">کاباردینی</language>
-			<language type="kcg">kcg</language>
+			<language type="kcg">تایپه ای</language>
 			<language type="kfo">کورو</language>
 			<language type="kg">کنگویی</language>
-			<language type="kha">خازیایی</language>
+			<language type="kha">خاسیایی</language>
 			<language type="khi">زبان خواسی</language>
 			<language type="kho">ختنی</language>
 			<language type="ki">کیکویویی</language>
@@ -252,11 +244,9 @@
 			<language type="kn">کاناده‌ای</language>
 			<language type="ko">کره‌ای</language>
 			<language type="kok">کنکانی</language>
-			<language type="kos">kos</language>
 			<language type="kpe">کپله‌ای</language>
 			<language type="kr">کانوریایی</language>
 			<language type="krc">قره‌چایی‐بالکاری</language>
-			<language type="krl">krl</language>
 			<language type="kro">کرویی</language>
 			<language type="kru">کوروخی</language>
 			<language type="ks">کشمیری</language>
@@ -291,7 +281,7 @@
 			<language type="mai">مایدیلی</language>
 			<language type="mak">ماکاسار</language>
 			<language type="man">ماندینگویی</language>
-			<language type="map">آسترونیزیایی</language>
+			<language type="map">زبان آسترونیزیایی</language>
 			<language type="mas">ماسایی</language>
 			<language type="mdf">مکشایی</language>
 			<language type="mdr">ماندار</language>
@@ -308,7 +298,7 @@
 			<language type="ml">مالایالامی</language>
 			<language type="mn">مغولی</language>
 			<language type="mnc">مانچویی</language>
-			<language type="mni">مانیپوری</language>
+			<language type="mni">میته‌ای</language>
 			<language type="mno">زبان مانوبو</language>
 			<language type="mo">مولداویایی</language>
 			<language type="moh">موهاکی</language>
@@ -319,7 +309,6 @@
 			<language type="mul">چندین زبان</language>
 			<language type="mun">زبان موندایی</language>
 			<language type="mus">کریکی</language>
-			<language type="mwl">mwl</language>
 			<language type="mwr">مارواری</language>
 			<language type="my">برمه‌ای</language>
 			<language type="myn">زبان مایایی</language>
@@ -333,24 +322,22 @@
 			<language type="nds">آلمانی سفلی</language>
 			<language type="ne">نپالی</language>
 			<language type="new">نواریایی</language>
-			<language type="ng">ندونگایی</language>
-			<language type="nia">نیاس</language>
-			<language type="nic">nic</language>
+			<language type="ng">اندونگایی</language>
+			<language type="nia">نیاسی</language>
 			<language type="niu">نیویی</language>
 			<language type="nl">هلندی</language>
-			<language type="nl_BE">هلندی بلژیک</language>
+			<language type="nl_BE">فلمنگی</language>
 			<language type="nn">نرس جدید نروژی</language>
 			<language type="no">نروژی</language>
 			<language type="nog">نغایی</language>
 			<language type="non">نرس باستان</language>
-			<language type="nqo">nqo</language>
 			<language type="nr">انده‌بله‌ای جنوبی</language>
 			<language type="nso">سوتویی شمالی</language>
 			<language type="nub">زبان نوبیایی</language>
 			<language type="nv">ناواهویی</language>
 			<language type="nwc">نواریایی کلاسیک</language>
 			<language type="ny">نیانجایی</language>
-			<language type="nym">nym</language>
+			<language type="nym">نیام‌وزیایی</language>
 			<language type="nyn">نیانکوله‌ای</language>
 			<language type="nyo">نیورویی</language>
 			<language type="nzi">نزیمایی</language>
@@ -374,9 +361,9 @@
 			<language type="phn">فنیقی</language>
 			<language type="pi">پالی</language>
 			<language type="pl">لهستانی</language>
-			<language type="pon">pon</language>
+			<language type="pon">پناپی</language>
 			<language type="pra">زبان پراکریتی</language>
-			<language type="pro">pro</language>
+			<language type="pro">پرووانسی باستان</language>
 			<language type="ps">پشتو</language>
 			<language type="pt">پرتغالی</language>
 			<language type="pt_BR">پرتغالی برزیل</language>
@@ -392,21 +379,19 @@
 			<language type="rom">رومانویی</language>
 			<language type="root">ریشه</language>
 			<language type="ru">روسی</language>
-			<language type="rup">rup</language>
 			<language type="rw">کینیارواندایی</language>
 			<language type="sa">سنسکریت</language>
 			<language type="sad">سانداوه‌ای</language>
 			<language type="sah">یاقوتی</language>
 			<language type="sai">زبان سرخپوستی امریکای جنوبی</language>
 			<language type="sal">زبان سالیشی</language>
-			<language type="sam">sam</language>
-			<language type="sas">ساساک</language>
+			<language type="sam">آرامی سامری</language>
+			<language type="sas">ساساکی</language>
 			<language type="sat">سانتالی</language>
 			<language type="sc">ساردینیایی</language>
 			<language type="scn">سیسیلی</language>
 			<language type="sco">اسکاتلندی</language>
 			<language type="sd">سندی</language>
-			<language type="se">سامی شمالی</language>
 			<language type="sel">سلکوپی</language>
 			<language type="sem">زبان سامی</language>
 			<language type="sg">سانگویی</language>
@@ -422,11 +407,6 @@
 			<language type="sl">اسلووینیایی</language>
 			<language type="sla">زبان اسلاوی</language>
 			<language type="sm">ساموآیی</language>
-			<language type="sma">سامی جنوبی</language>
-			<language type="smi">smi</language>
-			<language type="smj">سامی لول</language>
-			<language type="smn">سامی ایناری</language>
-			<language type="sms">سامی اسکالت</language>
 			<language type="sn">شونایی</language>
 			<language type="snk">سونینکه‌ای</language>
 			<language type="so">سومالیایی</language>
@@ -434,8 +414,9 @@
 			<language type="son">سونغایی</language>
 			<language type="sq">آلبانیایی</language>
 			<language type="sr">صربی</language>
+			<language type="srn">تاکی‌تاکی</language>
 			<language type="srr">سریری</language>
-			<language type="ss">ss</language>
+			<language type="ss">سوازیایی</language>
 			<language type="ssa">زبان نیلی و صحرایی</language>
 			<language type="st">سوتویی جنوبی</language>
 			<language type="su">سوندایی</language>
@@ -449,7 +430,7 @@
 			<language type="ta">تامیلی</language>
 			<language type="tai">زبان تایی</language>
 			<language type="te">تلوگویی</language>
-			<language type="tem">تیمنه‌ای</language>
+			<language type="tem">تمنه‌ای</language>
 			<language type="ter">ترنو</language>
 			<language type="tet">تتومی</language>
 			<language type="tg">تاجیکی</language>
@@ -458,7 +439,6 @@
 			<language type="tig">تیگره‌ای</language>
 			<language type="tiv">تیوی</language>
 			<language type="tk">ترکمنی</language>
-			<language type="tkl">توکلوی</language>
 			<language type="tl">تاگالوگی</language>
 			<language type="tlh">کلینگون</language>
 			<language type="tli">تلین‌گیتی</language>
@@ -466,7 +446,7 @@
 			<language type="tn">تسوانایی</language>
 			<language type="to">تونگایی</language>
 			<language type="tog">تونگایی نیاسا</language>
-			<language type="tpi">tpi</language>
+			<language type="tpi">زبان توک پیسینی</language>
 			<language type="tr">ترکی استانبولی</language>
 			<language type="ts">تسونگایی</language>
 			<language type="tsi">تسیم‌شیانی</language>
@@ -482,7 +462,7 @@
 			<language type="ug">اویغوری</language>
 			<language type="uga">اوگاریتی</language>
 			<language type="uk">اوکراینی</language>
-			<language type="umb">امبندویی</language>
+			<language type="umb">امبوندویی</language>
 			<language type="und">زبان نامشخص یا نامعتبر</language>
 			<language type="ur">اردو</language>
 			<language type="uz">ازبکی</language>
@@ -490,7 +470,7 @@
 			<language type="ve">وندایی</language>
 			<language type="vi">ویتنامی</language>
 			<language type="vo">ولاپوک</language>
-			<language type="vot">وتیک</language>
+			<language type="vot">وتی</language>
 			<language type="wa">والونی</language>
 			<language type="wak">زبان واکاشی</language>
 			<language type="wal">والامو</language>
@@ -507,7 +487,6 @@
 			<language type="ypk">زبان یوپیکی</language>
 			<language type="za">چوانگی</language>
 			<language type="zap">زاپوتکی</language>
-			<language type="zbl">zbl</language>
 			<language type="zen">زناگا</language>
 			<language type="zh">چینی</language>
 			<language type="zh_Hans">چینی ساده‌شده</language>
@@ -515,12 +494,12 @@
 			<language type="znd">زانده‌ای</language>
 			<language type="zu">زولویی</language>
 			<language type="zun">زونیایی</language>
-			<language type="zxx">zxx</language>
+			<language type="zxx">بدون محتوای زبانی</language>
 			<language type="zza">زازایی</language>
 		</languages>
 		<scripts>
 			<script type="Arab">عربی</script>
-			<script type="Armi">آرمی</script>
+			<script type="Armi">آرامی هخامنشی</script>
 			<script type="Armn">ارمنی</script>
 			<script type="Avst">اوستایی</script>
 			<script type="Bali">بالیایی</script>
@@ -533,18 +512,15 @@
 			<script type="Bugi">بوگیایی</script>
 			<script type="Buhd">بوهید</script>
 			<script type="Cakm">کاکم</script>
-			<script type="Cans">Cans</script>
 			<script type="Cari">کاری</script>
 			<script type="Cham">چمی</script>
 			<script type="Cher">چروکیایی</script>
-			<script type="Cirt">Cirt</script>
+			<script type="Cirt">کرت</script>
 			<script type="Copt">قبطی</script>
-			<script type="Cprt">Cprt</script>
+			<script type="Cprt">قبرسی</script>
 			<script type="Cyrl">سیریلی</script>
-			<script type="Cyrs">Cyrs</script>
 			<script type="Deva">دوناگری</script>
 			<script type="Dsrt">دیسرتی</script>
-			<script type="Egyd">Egyd</script>
 			<script type="Egyh">کاهنی مصری</script>
 			<script type="Egyp">هیروگلیف مصری</script>
 			<script type="Ethi">اتیوپیایی</script>
@@ -562,26 +538,22 @@
 			<script type="Hant">هان سنتی</script>
 			<script type="Hebr">عبری</script>
 			<script type="Hira">هیراگانا</script>
-			<script type="Hmng">Hmng</script>
 			<script type="Hrkt">کاتاکانا یا هیراگانا</script>
 			<script type="Hung">مجاری باستان</script>
 			<script type="Inds">ایندوس</script>
-			<script type="Ital">Ital</script>
 			<script type="Java">جاوه‌ای</script>
 			<script type="Jpan">ژاپنی</script>
 			<script type="Kali">کایالی</script>
 			<script type="Kana">کاتاکانا</script>
-			<script type="Khar">Khar</script>
 			<script type="Khmr">خمری</script>
 			<script type="Knda">کاناده‌ای</script>
 			<script type="Kore">کره‌ای</script>
 			<script type="Kthi">کثی</script>
 			<script type="Lana">لانایی</script>
 			<script type="Laoo">لائوسی</script>
-			<script type="Latf">Latf</script>
+			<script type="Latf">لاتینی فراکتور</script>
 			<script type="Latg">لاتینی گیلی</script>
 			<script type="Latn">لاتینی</script>
-			<script type="Lepc">Lepc</script>
 			<script type="Limb">لیمبایی</script>
 			<script type="Lina">خطی الف</script>
 			<script type="Linb">خطی ب</script>
@@ -596,43 +568,33 @@
 			<script type="Moon">مونی</script>
 			<script type="Mtei">مایک میتی</script>
 			<script type="Mymr">میانمار</script>
-			<script type="Nkoo">Nkoo</script>
 			<script type="Ogam">اوگامی</script>
-			<script type="Olck">Olck</script>
 			<script type="Orkh">اورخونی</script>
 			<script type="Orya">اوریه‌ای</script>
-			<script type="Osma">Osma</script>
-			<script type="Perm">Perm</script>
-			<script type="Phli">Phli</script>
+			<script type="Perm">پرمی باستان</script>
+			<script type="Phli">پهلوی کتیبه‌ای</script>
+			<script type="Phlp">پهلوی زبوری</script>
 			<script type="Phlv">پهلوی کتابی</script>
 			<script type="Phnx">فنیقی</script>
-			<script type="Plrd">Plrd</script>
-			<script type="Prti">پرتی</script>
+			<script type="Prti">پارتی کتیبه‌ای</script>
 			<script type="Qaai">موروثی</script>
 			<script type="Rjng">رجنگی</script>
-			<script type="Roro">Roro</script>
 			<script type="Runr">رونی</script>
-			<script type="Samr">ساماراتی</script>
+			<script type="Samr">سامری</script>
 			<script type="Sara">ساراتی</script>
 			<script type="Saur">سوراشترایی</script>
-			<script type="Sgnw">Sgnw</script>
 			<script type="Shaw">شاوی</script>
 			<script type="Sinh">سینهالی</script>
-			<script type="Sund">Sund</script>
 			<script type="Sylo">سیلوتی نگاری</script>
 			<script type="Syrc">سریانی</script>
-			<script type="Syre">Syre</script>
+			<script type="Syre">سریانی استرانگلو</script>
 			<script type="Syrj">سریانی غربی</script>
 			<script type="Syrn">سریانی شرقی</script>
 			<script type="Tagb">تگبنوایی</script>
-			<script type="Tale">Tale</script>
-			<script type="Talu">Talu</script>
 			<script type="Taml">تامیلی</script>
 			<script type="Telu">تلوگویی</script>
 			<script type="Teng">تنگوار</script>
-			<script type="Tfng">Tfng</script>
 			<script type="Tglg">تاگالوگی</script>
-			<script type="Thaa">ثانایی</script>
 			<script type="Thai">تایلندی</script>
 			<script type="Tibt">تبتی</script>
 			<script type="Vaii">ویایی</script>
@@ -757,9 +719,9 @@
 			<territory type="GD">گرانادا</territory>
 			<territory type="GE">گرجستان</territory>
 			<territory type="GF">گویان فرانسه</territory>
-			<territory type="GG">گورنسی</territory>
+			<territory type="GG">گرنزی</territory>
 			<territory type="GH">غنا</territory>
-			<territory type="GI">گیبرالتار</territory>
+			<territory type="GI">جبل‌الطارق</territory>
 			<territory type="GL">گروئنلند</territory>
 			<territory type="GM">گامبیا</territory>
 			<territory type="GN">گینه</territory>
@@ -771,7 +733,7 @@
 			<territory type="GU">گوام</territory>
 			<territory type="GW">گینهٔ بیسائو</territory>
 			<territory type="GY">گویان</territory>
-			<territory type="HK">هنگ‌کنگ</territory>
+			<territory type="HK">هنگ‌کنگ، ناحیهٔ ویژهٔ حکومتی چین</territory>
 			<territory type="HM">جزیرهٔ هرد و جزایر مک‌دونالد</territory>
 			<territory type="HN">هندوراس</territory>
 			<territory type="HR">کرواسی</territory>
@@ -780,9 +742,9 @@
 			<territory type="ID">اندونزی</territory>
 			<territory type="IE">ایرلند</territory>
 			<territory type="IL">اسرائیل</territory>
-			<territory type="IM">IM</territory>
+			<territory type="IM">جزیرهٔ مان</territory>
 			<territory type="IN">هند</territory>
-			<territory type="IO">مستعمره‌های انگلستان در اقیانوس هند</territory>
+			<territory type="IO">مستعمره‌های بریتانیا در اقیانوس هند</territory>
 			<territory type="IQ">عراق</territory>
 			<territory type="IR">ایران</territory>
 			<territory type="IS">ایسلند</territory>
@@ -815,7 +777,7 @@
 			<territory type="LY">لیبی</territory>
 			<territory type="MA">مراکش</territory>
 			<territory type="MC">موناکو</territory>
-			<territory type="MD">مولدووا</territory>
+			<territory type="MD">مولداوی</territory>
 			<territory type="ME">مونته‌نگرو</territory>
 			<territory type="MF">سنت مارتین</territory>
 			<territory type="MG">ماداگاسکار</territory>
@@ -824,13 +786,13 @@
 			<territory type="ML">مالی</territory>
 			<territory type="MM">میانمار</territory>
 			<territory type="MN">مغولستان</territory>
-			<territory type="MO">ماکائو</territory>
+			<territory type="MO">ماکائو، ناحیهٔ ویژهٔ حکومتی چین</territory>
 			<territory type="MP">جزایر ماریانای شمالی</territory>
 			<territory type="MQ">مارتینیک</territory>
 			<territory type="MR">موریتانی</territory>
 			<territory type="MS">مونت‌سرات</territory>
 			<territory type="MT">مالت</territory>
-			<territory type="MU">موریتیوس</territory>
+			<territory type="MU">موریس</territory>
 			<territory type="MV">مالدیو</territory>
 			<territory type="MW">مالاوی</territory>
 			<territory type="MX">مکزیک</territory>
@@ -864,7 +826,7 @@
 			<territory type="PW">پالائو</territory>
 			<territory type="PY">پاراگوئه</territory>
 			<territory type="QA">قطر</territory>
-			<territory type="QO">اقیانوسیهٔ دوردست</territory>
+			<territory type="QO">بخش‌های دورافتادهٔ اقیانوسیه</territory>
 			<territory type="QU">اتحادیهٔ اروپا</territory>
 			<territory type="RE">ریونیون</territory>
 			<territory type="RO">رومانی</territory>
@@ -932,8 +894,10 @@
 			<variant type="1901">رسم‌الخط سنتی آلمانی</variant>
 			<variant type="1996">رسم‌الخط آلمانی ۱۹۹۶ میلادی</variant>
 			<variant type="AREVELA">ارمنی شرقی</variant>
+			<variant type="AREVMDA">ارمنی غربی</variant>
 			<variant type="POSIX">کامپیوتری</variant>
 			<variant type="REVISED">رسم‌الخط تجدیدنظرشده</variant>
+			<variant type="SAAHO">ساهویی</variant>
 			<variant type="SCOTLAND">انگلیسی معیار اسکاتلند</variant>
 		</variants>
 		<keys>
@@ -955,7 +919,9 @@
 			<type type="japanese" key="calendar">تقویم ژاپنی</type>
 			<type type="persian" key="calendar">تقویم هجری شمسی</type>
 			<type type="phonebook" key="collation">ترتیب دفتر تلفن</type>
+			<type type="pinyin" key="collation">ترتیب پین‌یین چینی ساده‌شده</type>
 			<type type="roc" key="calendar">تقویم جمهوری چین</type>
+			<type type="stroke" key="collation">ترتیب حرکتی چینی سنتی</type>
 			<type type="traditional" key="collation">ترتیب سنتی</type>
 		</types>
 		<measurementSystemNames>
@@ -972,8 +938,8 @@
 		<orientation characters="right-to-left"/>
 	</layout>
 	<characters>
-		<exemplarCharacters>[َ ِ ُ ً ٍ ٌ ّ ْ ٔ آ ا ء أ ؤ ئ ب پ ت-ج چ ح-ز ژ س-غ ف ق ک گ ل-ن و ه ة ی]</exemplarCharacters>
-		<exemplarCharacters type="auxiliary">[\u200C \u200D ٖ ٰ]</exemplarCharacters>
+		<exemplarCharacters>[\u064B \u064D \u064C \u0651 \u0654 آ ا ء أ ؤ ئ ب پ ت-ج چ ح-ز ژ س-غ ف ق ک گ ل-ن و ه ة ی]</exemplarCharacters>
+		<exemplarCharacters type="auxiliary">[\u064E-\u0650 \u0652 \u0656 \u0670 ۰-۹ \u200C-\u200F]</exemplarCharacters>
 		<exemplarCharacters type="currencySymbol">[a-z ﷼]</exemplarCharacters>
 	</characters>
 	<delimiters>
@@ -1018,9 +984,6 @@
 						</monthWidth>
 					</monthContext>
 					<monthContext type="stand-alone">
-						<monthWidth type="abbreviated">
-							<alias source="locale" path="../monthWidth[@type='wide']"/>
-						</monthWidth>
 						<monthWidth type="narrow">
 							<month type="1">ژ</month>
 							<month type="2">ف</month>
@@ -1053,15 +1016,6 @@
 				</months>
 				<days>
 					<dayContext type="format">
-						<dayWidth type="abbreviated">
-							<day type="sun">یکشنبه</day>
-							<day type="mon">دوشنبه</day>
-							<day type="tue">سه‌شنبه</day>
-							<day type="wed">چهارشنبه</day>
-							<day type="thu">پنجشنبه</day>
-							<day type="fri">جمعه</day>
-							<day type="sat">شنبه</day>
-						</dayWidth>
 						<dayWidth type="wide">
 							<day type="sun">یکشنبه</day>
 							<day type="mon">دوشنبه</day>
@@ -1087,10 +1041,10 @@
 				<quarters>
 					<quarterContext type="format">
 						<quarterWidth type="abbreviated">
-							<quarter type="1">Q1</quarter>
-							<quarter type="2">Q2</quarter>
-							<quarter type="3">Q3</quarter>
-							<quarter type="4">Q4</quarter>
+							<quarter type="1">س‌م۱</quarter>
+							<quarter type="2">س‌م۲</quarter>
+							<quarter type="3">س‌م۳</quarter>
+							<quarter type="4">س‌م۴</quarter>
 						</quarterWidth>
 						<quarterWidth type="wide">
 							<quarter type="1">سه‌ماههٔ اول</quarter>
@@ -1119,17 +1073,21 @@
 						<era type="0">ق.م.</era>
 						<era type="1">م.</era>
 					</eraAbbr>
+					<eraNarrow>
+						<era type="0">ق</era>
+						<era type="1">م</era>
+					</eraNarrow>
 				</eras>
 				<dateFormats>
 					<default choice="long"/>
 					<dateFormatLength type="full">
 						<dateFormat>
-							<pattern>EEEE d MMMM yyyy GGGG</pattern>
+							<pattern>EEEE d MMMM y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="long">
 						<dateFormat>
-							<pattern>d MMMM yyyy</pattern>
+							<pattern>d MMMM y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="medium">
@@ -1146,12 +1104,12 @@
 				<timeFormats>
 					<timeFormatLength type="full">
 						<timeFormat>
-							<pattern>H:mm:ss (vvvv)</pattern>
+							<pattern>H:mm:ss (zzzz)</pattern>
 						</timeFormat>
 					</timeFormatLength>
 					<timeFormatLength type="long">
 						<timeFormat>
-							<pattern>H:mm:ss (zzzz)</pattern>
+							<pattern>H:mm:ss (z)</pattern>
 						</timeFormat>
 					</timeFormatLength>
 					<timeFormatLength type="medium">
@@ -1166,13 +1124,29 @@
 					</timeFormatLength>
 				</timeFormats>
 				<dateTimeFormats>
-					<dateTimeFormatLength>
+					<dateTimeFormatLength type="full">
 						<dateTimeFormat>
 							<pattern>{1}، ساعت {0}</pattern>
 						</dateTimeFormat>
 					</dateTimeFormatLength>
+					<dateTimeFormatLength type="long">
+						<dateTimeFormat>
+							<pattern>{1}، ساعت {0}</pattern>
+						</dateTimeFormat>
+					</dateTimeFormatLength>
+					<dateTimeFormatLength type="medium">
+						<dateTimeFormat>
+							<pattern>{1}،‏ {0}</pattern>
+						</dateTimeFormat>
+					</dateTimeFormatLength>
+					<dateTimeFormatLength type="short">
+						<dateTimeFormat>
+							<pattern>{1}،‏ {0}</pattern>
+						</dateTimeFormat>
+					</dateTimeFormatLength>
 					<availableFormats>
-						<dateFormatItem id="GGGGyyyyMMMMd">d MMMM yyyy GGGG</dateFormatItem>
+						<dateFormatItem id="EEEd">EEE d</dateFormatItem>
+						<dateFormatItem id="GGGGyyyyMMMMd">d MMMM y GGGG</dateFormatItem>
 						<dateFormatItem id="HHmmZ">HH:mm (Z)</dateFormatItem>
 						<dateFormatItem id="Hm">H:mm</dateFormatItem>
 						<dateFormatItem id="M">L</dateFormatItem>
@@ -1186,18 +1160,18 @@
 						<dateFormatItem id="d">d</dateFormatItem>
 						<dateFormatItem id="mmss">mm:ss</dateFormatItem>
 						<dateFormatItem id="ms">mm:ss</dateFormatItem>
-						<dateFormatItem id="y">yyyy</dateFormatItem>
+						<dateFormatItem id="y">y</dateFormatItem>
 						<dateFormatItem id="yM">yyyy/M</dateFormatItem>
 						<dateFormatItem id="yMEd">E yyyy/M/d</dateFormatItem>
-						<dateFormatItem id="yMMM">MMM yyyy</dateFormatItem>
-						<dateFormatItem id="yMMMEd">E d MMM yyyy</dateFormatItem>
-						<dateFormatItem id="yMMMM">MMMM yyyy</dateFormatItem>
+						<dateFormatItem id="yMMM">MMM y</dateFormatItem>
+						<dateFormatItem id="yMMMEd">E d MMM y</dateFormatItem>
+						<dateFormatItem id="yMMMM">MMMM y</dateFormatItem>
 						<dateFormatItem id="yQ">yyyy Q</dateFormatItem>
-						<dateFormatItem id="yQQQ">yyyy QQQ</dateFormatItem>
+						<dateFormatItem id="yQQQ">y QQQ</dateFormatItem>
 						<dateFormatItem id="yyQ">Q yy</dateFormatItem>
 						<dateFormatItem id="yyyyM">yyyy/M</dateFormatItem>
-						<dateFormatItem id="yyyyMMMM">MMMM yyyy</dateFormatItem>
-						<dateFormatItem id="yyyyMMMMEEEEd">EEEE d MMMM yyyy</dateFormatItem>
+						<dateFormatItem id="yyyyMMMM">MMMM y</dateFormatItem>
+						<dateFormatItem id="yyyyMMMMEEEEd">EEEE d MMMM y</dateFormatItem>
 					</availableFormats>
 					<appendItems>
 						<appendItem request="Day-Of-Week">{1} {0}</appendItem>
@@ -1227,7 +1201,7 @@
 						</intervalFormatItem>
 						<intervalFormatItem id="Md">
 							<greatestDifference id="M">M/d تا M/d</greatestDifference>
-							<greatestDifference id="d">d تا M/d</greatestDifference>
+							<greatestDifference id="d">d/M تا d/M</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="d">
 							<greatestDifference id="d">d تا d</greatestDifference>
@@ -1251,7 +1225,7 @@
 							<greatestDifference id="h">H تا H (v)</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="y">
-							<greatestDifference id="y">yyyy تا yyyy</greatestDifference>
+							<greatestDifference id="y">y تا y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yM">
 							<greatestDifference id="M">yyyy/M تا yyyy/M</greatestDifference>
@@ -1263,22 +1237,22 @@
 							<greatestDifference id="y">E yyyy/M/d تا E yyyy/M/d</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMM">
-							<greatestDifference id="M">LLL تا MMM yyyy</greatestDifference>
-							<greatestDifference id="y">MMM yyyy تا MMM yyyy</greatestDifference>
+							<greatestDifference id="M">LLL تا MMM y</greatestDifference>
+							<greatestDifference id="y">MMM y تا MMM y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMEd">
-							<greatestDifference id="M">E d LLL تا E d MMM yyyy</greatestDifference>
-							<greatestDifference id="d">E d LLL تا E d MMM yyyy</greatestDifference>
-							<greatestDifference id="y">E d MMM yyyy تا E d MMM yyyy</greatestDifference>
+							<greatestDifference id="M">E d LLL تا E d MMM y</greatestDifference>
+							<greatestDifference id="d">E d LLL تا E d MMM y</greatestDifference>
+							<greatestDifference id="y">E d MMM y تا E d MMM y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMM">
-							<greatestDifference id="M">LLLL تا MMMM yyyy</greatestDifference>
-							<greatestDifference id="y">MMMM yyyy تا MMMM yyyy</greatestDifference>
+							<greatestDifference id="M">LLLL تا MMMM y</greatestDifference>
+							<greatestDifference id="y">MMMM y تا MMMM y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMd">
-							<greatestDifference id="M">d LLL تا d MMM yyyy</greatestDifference>
-							<greatestDifference id="d">d تا d MMM yyyy</greatestDifference>
-							<greatestDifference id="y">d MMM yyyy تا d MMM yyyy</greatestDifference>
+							<greatestDifference id="M">d LLL تا d MMM y</greatestDifference>
+							<greatestDifference id="d">d تا d MMM y</greatestDifference>
+							<greatestDifference id="y">d MMM y تا d MMM y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMd">
 							<greatestDifference id="M">yyyy/M/d تا yyyy/M/d</greatestDifference>
@@ -1302,11 +1276,13 @@
 					</field>
 					<field type="day">
 						<displayName>روز</displayName>
+						<relative type="-3">سه روز پیش</relative>
+						<relative type="-2">پریروز</relative>
+						<relative type="-1">دیروز</relative>
 						<relative type="0">امروز</relative>
 						<relative type="1">فردا</relative>
 						<relative type="2">پس‌فردا</relative>
-						<relative type="-1">دیروز</relative>
-						<relative type="-2">پریروز</relative>
+						<relative type="3">سه روز بعد</relative>
 					</field>
 					<field type="weekday">
 						<displayName>روز هفته</displayName>
@@ -1331,35 +1307,6 @@
 			<calendar type="hebrew">
 				<months>
 					<monthContext type="format">
-						<monthWidth type="abbreviated">
-							<month type="1">تشری</month>
-							<month type="2">حشوان</month>
-							<month type="3">کسلو</month>
-							<month type="4">طوت</month>
-							<month type="5">شباط</month>
-							<month type="6">آذار</month>
-							<month type="7">واذار</month>
-							<month type="8">نیسان</month>
-							<month type="9">ایار</month>
-							<month type="10">سیوان</month>
-							<month type="11">تموز</month>
-							<month type="12">آب</month>
-							<month type="13">ایلول</month>
-						</monthWidth>
-						<monthWidth type="narrow">
-							<month type="1">ت</month>
-							<month type="2">ح</month>
-							<month type="3">ک</month>
-							<month type="4">ط</month>
-							<month type="5">ش</month>
-							<month type="7">و</month>
-							<month type="8">ن</month>
-							<month type="9">ا</month>
-							<month type="10">س</month>
-							<month type="11">ت</month>
-							<month type="12">آ</month>
-							<month type="13">ا</month>
-						</monthWidth>
 						<monthWidth type="wide">
 							<month type="1">تشری</month>
 							<month type="2">حشوان</month>
@@ -1377,9 +1324,6 @@
 						</monthWidth>
 					</monthContext>
 					<monthContext type="stand-alone">
-						<monthWidth type="abbreviated">
-							<month type="6">آ</month>
-						</monthWidth>
 						<monthWidth type="narrow">
 							<month type="1">ت</month>
 							<month type="2">ح</month>
@@ -1394,21 +1338,6 @@
 							<month type="11">ت</month>
 							<month type="12">آ</month>
 							<month type="13">ا</month>
-						</monthWidth>
-						<monthWidth type="wide">
-							<month type="1">تشری</month>
-							<month type="2">حشوان</month>
-							<month type="3">کسلو</month>
-							<month type="4">طوت</month>
-							<month type="5">شباط</month>
-							<month type="6">آذار</month>
-							<month type="7">واذار</month>
-							<month type="8">نیسان</month>
-							<month type="9">ایار</month>
-							<month type="10">سیوان</month>
-							<month type="11">تموز</month>
-							<month type="12">آب</month>
-							<month type="13">ایلول</month>
 						</monthWidth>
 					</monthContext>
 				</months>
@@ -1432,9 +1361,6 @@
 						</monthWidth>
 					</monthContext>
 					<monthContext type="stand-alone">
-						<monthWidth type="abbreviated">
-							<alias source="locale" path="../monthWidth[@type='wide']"/>
-						</monthWidth>
 						<monthWidth type="narrow">
 							<month type="1">م</month>
 							<month type="2">ص</month>
@@ -1449,23 +1375,10 @@
 							<month type="11">ذ</month>
 							<month type="12">ذ</month>
 						</monthWidth>
-						<monthWidth type="wide">
-							<month type="1">محرم</month>
-							<month type="2">صفر</month>
-							<month type="3">ربیع الاول</month>
-							<month type="4">ربیع الثانی</month>
-							<month type="5">جمادی الاول</month>
-							<month type="6">جمادی الثانی</month>
-							<month type="7">رجب</month>
-							<month type="8">شعبان</month>
-							<month type="9">رمضان</month>
-							<month type="10">شوال</month>
-							<month type="11">ذیقعده</month>
-							<month type="12">ذیحجه</month>
-						</monthWidth>
 					</monthContext>
 				</months>
 				<am>قبل از ظهر</am>
+				<pm>بعد از ظهر</pm>
 				<eras>
 					<eraNames>
 						<era type="0">هجری قمری</era>
@@ -1476,6 +1389,16 @@
 				</eras>
 				<dateFormats>
 					<default choice="long"/>
+					<dateFormatLength type="full">
+						<dateFormat>
+							<pattern>EEEE d MMMM y GGGG</pattern>
+						</dateFormat>
+					</dateFormatLength>
+					<dateFormatLength type="long">
+						<dateFormat>
+							<pattern>d MMMM y G</pattern>
+						</dateFormat>
+					</dateFormatLength>
 					<dateFormatLength type="medium">
 						<dateFormat>
 							<pattern>yyyy/M/d G</pattern>
@@ -1487,9 +1410,6 @@
 						</dateFormat>
 					</dateFormatLength>
 				</dateFormats>
-			</calendar>
-			<calendar type="islamic-civil">
-				<pm>بعد از ظهر</pm>
 			</calendar>
 			<calendar type="persian">
 				<months>
@@ -1524,20 +1444,6 @@
 							<month type="11">ب</month>
 							<month type="12">ا</month>
 						</monthWidth>
-						<monthWidth type="wide">
-							<month type="1">فروردین</month>
-							<month type="2">اردیبهشت</month>
-							<month type="3">خرداد</month>
-							<month type="4">تیر</month>
-							<month type="5">مرداد</month>
-							<month type="6">شهریور</month>
-							<month type="7">مهر</month>
-							<month type="8">آبان</month>
-							<month type="9">آذر</month>
-							<month type="10">دی</month>
-							<month type="11">بهمن</month>
-							<month type="12">اسفند</month>
-						</monthWidth>
 					</monthContext>
 				</months>
 				<am>قبل از ظهر</am>
@@ -1550,28 +1456,6 @@
 						<era type="0">ه‍. ش.</era>
 					</eraAbbr>
 				</eras>
-				<dateFormats>
-					<dateFormatLength type="full">
-						<dateFormat>
-							<pattern>EEEE d MMMM yyyy</pattern>
-						</dateFormat>
-					</dateFormatLength>
-					<dateFormatLength type="long">
-						<dateFormat>
-							<pattern>d MMMM yyyy</pattern>
-						</dateFormat>
-					</dateFormatLength>
-					<dateFormatLength type="medium">
-						<dateFormat>
-							<pattern>yyyy/M/d</pattern>
-						</dateFormat>
-					</dateFormatLength>
-					<dateFormatLength type="short">
-						<dateFormat>
-							<pattern>yy/M/d</pattern>
-						</dateFormat>
-					</dateFormatLength>
-				</dateFormats>
 			</calendar>
 		</calendars>
 		<timeZoneNames>
@@ -2254,7 +2138,6 @@
 					<standard>وقت افغانستان</standard>
 					<daylight>وقت تابستانی افغانستان</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Africa_Central">
 				<long>
@@ -2284,7 +2167,6 @@
 					<standard>وقت عادی آلاسکا</standard>
 					<daylight>وقت تابستانی آلاسکا</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Alaska_Hawaii">
 				<long>
@@ -2305,7 +2187,6 @@
 					<standard>وقت عادی مرکز امریکا</standard>
 					<daylight>وقت تابستانی مرکز امریکا</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="America_Eastern">
 				<long>
@@ -2313,7 +2194,6 @@
 					<standard>وقت عادی شرق امریکا</standard>
 					<daylight>وقت تابستانی شرق امریکا</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="America_Mountain">
 				<long>
@@ -2321,7 +2201,6 @@
 					<standard>وقت عادی کوهستانی امریکا</standard>
 					<daylight>وقت تابستانی کوهستانی امریکا</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="America_Pacific">
 				<long>
@@ -2329,7 +2208,6 @@
 					<standard>وقت عادی غرب امریکا</standard>
 					<daylight>وقت تابستانی غرب امریکا</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Arabian">
 				<long>
@@ -2367,7 +2245,6 @@
 					<standard>وقت عادی آتلانتیک</standard>
 					<daylight>وقت تابستانی آتلانتیک</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Australia_Central">
 				<long>
@@ -2588,9 +2465,6 @@
 					<standard>وقت گویان</standard>
 				</long>
 			</metazone>
-			<metazone type="Hawaii_Aleutian">
-				<commonlyUsed>false</commonlyUsed>
-			</metazone>
 			<metazone type="Hong_Kong">
 				<long>
 					<standard>وقت هنگ‌کنگ</standard>
@@ -2683,9 +2557,6 @@
 					<daylight>وقت تابستانی کره</daylight>
 				</long>
 			</metazone>
-			<metazone type="Kuybyshev">
-				<commonlyUsed>false</commonlyUsed>
-			</metazone>
 			<metazone type="Kyrgystan">
 				<long>
 					<standard>وقت قرقیزستان</standard>
@@ -2723,7 +2594,6 @@
 					<standard>وقت عادی مسکو</standard>
 					<daylight>وقت تابستانی مسکو</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Myanmar">
 				<long>
@@ -2785,9 +2655,6 @@
 					<standard>وقت فیلیپین</standard>
 					<daylight>وقت تابستانی فیلیپین</daylight>
 				</long>
-			</metazone>
-			<metazone type="Samara">
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Samarkand">
 				<long>
@@ -2858,7 +2725,6 @@
 					<standard>وقت ترکیه</standard>
 					<daylight>وقت تابستانی ترکیه</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Turkmenistan">
 				<long>
@@ -2899,9 +2765,6 @@
 					<standard>وقت ونزوئلا</standard>
 				</long>
 			</metazone>
-			<metazone type="Volgograd">
-				<commonlyUsed>false</commonlyUsed>
-			</metazone>
 			<metazone type="Wake">
 				<long>
 					<standard>وقت جزیرهٔ ویک</standard>
@@ -2922,6 +2785,7 @@
 		</timeZoneNames>
 	</dates>
 	<numbers>
+		<defaultNumberingSystem>arabext</defaultNumberingSystem>
 		<symbols>
 			<decimal>٫</decimal>
 			<group>٬</group>
@@ -2932,7 +2796,7 @@
 			<plusSign>+</plusSign>
 			<minusSign>−</minusSign>
 			<exponential>×۱۰^</exponential>
-			<perMille>‰</perMille>
+			<perMille>؉</perMille>
 			<infinity>∞</infinity>
 			<nan>NaN</nan>
 		</symbols>
@@ -2966,20 +2830,26 @@
 			<unitPattern count="other">{0} {1}</unitPattern>
 		</currencyFormats>
 		<currencies>
+			<currency type="ADP">
+				<displayName>پزتای آندورا</displayName>
+			</currency>
 			<currency type="AED">
 				<displayName>درهم امارات متحدهٔ عربی</displayName>
 			</currency>
 			<currency type="AFA">
-				<displayName>افغانی قدیم</displayName>
+				<displayName>افغانی افغانستان (۱۹۲۷ تا ۲۰۰۲)</displayName>
 			</currency>
 			<currency type="AFN">
-				<displayName>افغانی</displayName>
+				<displayName>افغانی افغانستان</displayName>
 			</currency>
 			<currency type="ALL">
 				<displayName>لک آلبانی</displayName>
 			</currency>
 			<currency type="AMD">
 				<displayName>درم ارمنستان</displayName>
+			</currency>
+			<currency type="ANG">
+				<displayName>گیلدر آنتیل هلند</displayName>
 			</currency>
 			<currency type="ARP">
 				<displayName>پزوی آرژانتین (۱۹۸۳ تا ۱۹۸۵)‏</displayName>
@@ -2993,8 +2863,11 @@
 			<currency type="AUD">
 				<displayName>دلار استرالیا</displayName>
 			</currency>
+			<currency type="AWG">
+				<displayName>فلورین آروبا</displayName>
+			</currency>
 			<currency type="AZM">
-				<displayName>منات قدیم جمهوری آذربایجان</displayName>
+				<displayName>منات جمهوری آذربایجان (۱۹۹۳ تا ۲۰۰۶)</displayName>
 			</currency>
 			<currency type="AZN">
 				<displayName>منات جمهوری آذربایجان</displayName>
@@ -3007,6 +2880,9 @@
 			</currency>
 			<currency type="BEF">
 				<displayName>فرانک بلژیک</displayName>
+			</currency>
+			<currency type="BEL">
+				<displayName>فرانک بلژیک (مالی)</displayName>
 			</currency>
 			<currency type="BHD">
 				<displayName>دینار بحرین</displayName>
@@ -3029,6 +2905,9 @@
 			<currency type="BSD">
 				<displayName>دلار باهاما</displayName>
 			</currency>
+			<currency type="BYB">
+				<displayName>روبل جدید بیلوروسی (۱۹۹۴ تا ۱۹۹۹)</displayName>
+			</currency>
 			<currency type="BYR">
 				<displayName>روبل بیلوروسی</displayName>
 			</currency>
@@ -3037,6 +2916,9 @@
 			</currency>
 			<currency type="CAD">
 				<displayName>دلار کانادا</displayName>
+			</currency>
+			<currency type="CDF">
+				<displayName>فرانک کنگو</displayName>
 			</currency>
 			<currency type="CHF">
 				<displayName>فرانک سوئیس</displayName>
@@ -3055,6 +2937,15 @@
 			</currency>
 			<currency type="CUP">
 				<displayName>پزوی کوبا</displayName>
+			</currency>
+			<currency type="CVE">
+				<displayName>اسکودوی کیپ ورد</displayName>
+			</currency>
+			<currency type="CYP">
+				<displayName>پوند قبرس</displayName>
+			</currency>
+			<currency type="DDM">
+				<displayName>مارک آلمان شرقی</displayName>
 			</currency>
 			<currency type="DEM">
 				<displayName>مارک آلمان</displayName>
@@ -3077,11 +2968,17 @@
 			<currency type="FJD">
 				<displayName>دلار فیجی</displayName>
 			</currency>
+			<currency type="FKP">
+				<displayName>پوند جزایر فالکلند</displayName>
+			</currency>
 			<currency type="FRF">
 				<displayName>فرانک فرانسه</displayName>
 			</currency>
 			<currency type="GBP">
 				<displayName>پوند بریتانیا</displayName>
+			</currency>
+			<currency type="GIP">
+				<displayName>پوند جبل‌الطارق</displayName>
 			</currency>
 			<currency type="GNF">
 				<displayName>فرانک گینه</displayName>
@@ -3144,6 +3041,9 @@
 			<currency type="KYD">
 				<displayName>دلار جزایر کِیمن</displayName>
 			</currency>
+			<currency type="LBP">
+				<displayName>لیرهٔ لبنان</displayName>
+			</currency>
 			<currency type="LKR">
 				<displayName>روپیهٔ سری‌لانکا</displayName>
 			</currency>
@@ -3152,6 +3052,9 @@
 			</currency>
 			<currency type="LUF">
 				<displayName>فرانک لوکزامبورگ</displayName>
+			</currency>
+			<currency type="LUL">
+				<displayName>فرانک مالی لوگزامبورگ</displayName>
 			</currency>
 			<currency type="LVR">
 				<displayName>روبل لتونی</displayName>
@@ -3168,6 +3071,9 @@
 			<currency type="MGF">
 				<displayName>فرانک ماداگاسکار</displayName>
 			</currency>
+			<currency type="MKD">
+				<displayName>دینار مقدونیه</displayName>
+			</currency>
 			<currency type="MLF">
 				<displayName>فرانک مالی</displayName>
 			</currency>
@@ -3177,8 +3083,17 @@
 			<currency type="MTP">
 				<displayName>پوند مالت</displayName>
 			</currency>
+			<currency type="MUR">
+				<displayName>روپیهٔ موریس</displayName>
+			</currency>
 			<currency type="MXN">
 				<displayName>پزوی مکزیک</displayName>
+			</currency>
+			<currency type="MXP">
+				<displayName>پزوی نقرهٔ مکزیک (۱۸۶۱ تا ۱۹۹۲)</displayName>
+			</currency>
+			<currency type="MZE">
+				<displayName>اسکودوی موزامبیک</displayName>
 			</currency>
 			<currency type="NAD">
 				<displayName>دلار نامیبیا</displayName>
@@ -3207,6 +3122,9 @@
 			<currency type="PLN">
 				<displayName>زواتی لهستان</displayName>
 			</currency>
+			<currency type="PTE">
+				<displayName>اسکودوی پرتغال</displayName>
+			</currency>
 			<currency type="QAR">
 				<displayName>ریال قطر</displayName>
 			</currency>
@@ -3220,7 +3138,7 @@
 				<displayName>روبل روسیه</displayName>
 			</currency>
 			<currency type="RUR">
-				<displayName>روبل قدیم روسیه</displayName>
+				<displayName>روبل روسیه (۱۹۹۱ تا ۱۹۹۸)</displayName>
 			</currency>
 			<currency type="RWF">
 				<displayName>فرانک رواندا</displayName>
@@ -3231,6 +3149,9 @@
 			<currency type="SBD">
 				<displayName>دلار جزایر سلیمان</displayName>
 			</currency>
+			<currency type="SCR">
+				<displayName>روپیهٔ سیشل</displayName>
+			</currency>
 			<currency type="SDD">
 				<displayName>دینار قدیم سودان</displayName>
 			</currency>
@@ -3239,6 +3160,9 @@
 			</currency>
 			<currency type="SGD">
 				<displayName>دلار سنگاپور</displayName>
+			</currency>
+			<currency type="SHP">
+				<displayName>پوند سنت هلن</displayName>
 			</currency>
 			<currency type="SRD">
 				<displayName>دلار سورینام</displayName>
@@ -3264,8 +3188,14 @@
 			<currency type="TMM">
 				<displayName>منات ترکمنستان</displayName>
 			</currency>
+			<currency type="TMT">
+				<displayName>منات جدید ترکمنستان</displayName>
+			</currency>
 			<currency type="TND">
 				<displayName>دینار تونس</displayName>
+			</currency>
+			<currency type="TPE">
+				<displayName>اسکودوی تیمور</displayName>
 			</currency>
 			<currency type="TRL">
 				<displayName>لیرهٔ قدیم ترکیه</displayName>
@@ -3283,13 +3213,25 @@
 				<displayName>شیلینگ تانزانیا</displayName>
 			</currency>
 			<currency type="UGS">
-				<displayName>شیلینگ قدیم اوگاندا</displayName>
+				<displayName>شیلینگ اوگاندا (۱۹۶۶ تا ۱۹۸۷)</displayName>
 			</currency>
 			<currency type="UGX">
 				<displayName>شیلینگ اوگاندا</displayName>
 			</currency>
 			<currency type="USD">
 				<displayName>دلار امریکا</displayName>
+			</currency>
+			<currency type="USN">
+				<displayName>دلار امریکا (روز بعد)</displayName>
+			</currency>
+			<currency type="USS">
+				<displayName>دلار امریکا (همان روز)</displayName>
+			</currency>
+			<currency type="UYP">
+				<displayName>پزوی اوروگوئه (۱۹۷۵ تا ۱۹۹۳)</displayName>
+			</currency>
+			<currency type="UYU">
+				<displayName>پزوی اوروگوئه</displayName>
 			</currency>
 			<currency type="UZS">
 				<displayName>سوم ازبکستان</displayName>
@@ -3327,6 +3269,12 @@
 			<currency type="ZWD">
 				<displayName>دلار زیمبابوه</displayName>
 			</currency>
+			<currency type="ZWL">
+				<displayName>دلار زیمبابوه (۲۰۰۹)</displayName>
+			</currency>
+			<currency type="ZWR">
+				<displayName>دلار زیمبابوه (۲۰۰۸)</displayName>
+			</currency>
 		</currencies>
 	</numbers>
 	<units>
@@ -3354,8 +3302,8 @@
 	</units>
 	<posix>
 		<messages>
-			<yesstr>بله:ب:آری:آ:y:yes</yesstr>
-			<nostr>نه:ن:خیر:خ:n:no</nostr>
+			<yesstr>بله:ب:آری:آ</yesstr>
+			<nostr>نه:ن:خیر:خ</nostr>
 		</messages>
 	</posix>
 </ldml>

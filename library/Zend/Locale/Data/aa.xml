@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.44 $"/>
-		<generation date="$Date: 2008/05/28 15:49:27 $"/>
+		<version number="$Revision: 1.53 $"/>
+		<generation date="$Date: 2009/05/05 23:06:33 $"/>
 		<language type="aa"/>
 	</identity>
 	<localeDisplayNames>
@@ -154,17 +154,17 @@
 				<dateFormats>
 					<dateFormatLength type="full">
 						<dateFormat>
-							<pattern>EEEE, MMMM dd, yyyy</pattern>
+							<pattern>EEEE, MMMM dd, y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="long">
 						<dateFormat>
-							<pattern>dd MMMM yyyy</pattern>
+							<pattern>dd MMMM y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="medium">
 						<dateFormat>
-							<pattern>dd-MMM-yyyy</pattern>
+							<pattern>dd-MMM-y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="short">
@@ -176,7 +176,7 @@
 				<timeFormats>
 					<timeFormatLength type="full">
 						<timeFormat>
-							<pattern>h:mm:ss a v</pattern>
+							<pattern>h:mm:ss a zzzz</pattern>
 						</timeFormat>
 					</timeFormatLength>
 					<timeFormatLength type="long">
@@ -196,11 +196,6 @@
 					</timeFormatLength>
 				</timeFormats>
 				<dateTimeFormats>
-					<dateTimeFormatLength>
-						<dateTimeFormat>
-							<pattern>{1} {0}</pattern>
-						</dateTimeFormat>
-					</dateTimeFormatLength>
 					<availableFormats>
 						<dateFormatItem id="yyQ">Q yy</dateFormatItem>
 					</availableFormats>
@@ -221,40 +216,6 @@
 				</currencyFormat>
 			</currencyFormatLength>
 		</currencyFormats>
-		<currencies>
-			<currency type="BRL">
-				<displayName>Brazilian Real</displayName>
-			</currency>
-			<currency type="CNY">
-				<displayName>Chinese Yuan Renminbi</displayName>
-			</currency>
-			<currency type="DJF">
-				<symbol>FD</symbol>
-			</currency>
-			<currency type="ERN">
-				<symbol>Nfk</symbol>
-			</currency>
-			<currency type="ETB">
-				<symbol>Br</symbol>
-			</currency>
-			<currency type="EUR">
-				<displayName>Euro</displayName>
-			</currency>
-			<currency type="GBP">
-				<displayName>British Pound Sterling</displayName>
-			</currency>
-			<currency type="INR">
-				<displayName>Indian Rupee</displayName>
-			</currency>
-			<currency type="JPY">
-				<displayName>Japanese Yen</displayName>
-			</currency>
-			<currency type="RUB">
-				<displayName>Russian Ruble</displayName>
-			</currency>
-			<currency type="USD">
-				<displayName>US Dollar</displayName>
-			</currency>
-		</currencies>
 	</numbers>
 </ldml>
+

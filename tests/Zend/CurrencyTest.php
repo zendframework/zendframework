@@ -304,10 +304,10 @@ class Zend_CurrencyTest extends PHPUnit_Framework_TestCase
         }
 
         $INR = new Zend_Currency('INR', 'de_AT');
-        $this->assertSame('Rs. 1,20', $INR->toCurrency(1.2));
-        $this->assertSame('Re. 1,00', $INR->toCurrency(1));
-        $this->assertSame('Rs. 0,00', $INR->toCurrency(0));
-        $this->assertSame('-Rs. 3,00', $INR->toCurrency(-3));
+        $this->assertSame('₨ 1,20', $INR->toCurrency(1.2));
+        $this->assertSame('₨ 1,00', $INR->toCurrency(1));
+        $this->assertSame('₨ 0,00', $INR->toCurrency(0));
+        $this->assertSame('-₨ 3,00', $INR->toCurrency(-3));
     }
 
     /**
@@ -518,7 +518,7 @@ class Zend_CurrencyTest extends PHPUnit_Framework_TestCase
 
         $currency = new Zend_Currency('USD', 'en_US');
         $this->assertEquals(array(0 => 'AS', 1 => 'EC', 2 => 'FM', 3 => 'GU', 4 => 'IO', 5 => 'MH', 6 => 'MP',
-            7 => 'PR', 8 => 'PW', 9 => 'TC', 10 => 'TL', 11 => 'UM', 12 => 'US', 13 => 'VG', 14 => 'VI'), $currency->getRegionList());
+            7 => 'PR', 8 => 'PW', 9 => "SV", 10 => 'TC', 11 => 'TL', 12 => 'UM', 13 => 'US', 14 => 'VG', 15 => 'VI'), $currency->getRegionList());
     }
 
     /**

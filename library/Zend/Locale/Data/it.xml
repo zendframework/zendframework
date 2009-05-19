@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.105 $"/>
-		<generation date="$Date: 2008/06/17 14:12:15 $"/>
+		<version number="$Revision: 1.120 $"/>
+		<generation date="$Date: 2009/05/05 23:06:37 $"/>
 		<language type="it"/>
 	</identity>
 	<localeDisplayNames>
@@ -534,7 +534,7 @@
 			<script type="Copt">copto</script>
 			<script type="Cprt">cipriota</script>
 			<script type="Cyrl">cirillico</script>
-			<script type="Cyrs">cirillico (variante antica chiesa slavonica)</script>
+			<script type="Cyrs">cirillico antica chiesa slavonica</script>
 			<script type="Deva">devanagari</script>
 			<script type="Dsrt">deseret</script>
 			<script type="Egyd">egiziano demotico</script>
@@ -569,8 +569,8 @@
 			<script type="Knda">kannada</script>
 			<script type="Lana">lanna</script>
 			<script type="Laoo">lao</script>
-			<script type="Latf">latino (variante fraktur)</script>
-			<script type="Latg">latino (variante gaelica)</script>
+			<script type="Latf">variante fraktur del latino</script>
+			<script type="Latg">variante gaelica del latino</script>
 			<script type="Latn">latino</script>
 			<script type="Lepc">lepcha</script>
 			<script type="Limb">limbu</script>
@@ -691,6 +691,7 @@
 			<territory type="BH">Bahrein</territory>
 			<territory type="BI">Burundi</territory>
 			<territory type="BJ">Benin</territory>
+			<territory type="BL">San Bartolomeo</territory>
 			<territory type="BM">Bermuda</territory>
 			<territory type="BN">Brunei</territory>
 			<territory type="BO">Bolivia</territory>
@@ -758,7 +759,7 @@
 			<territory type="GU">Guam</territory>
 			<territory type="GW">Guinea-Bissau</territory>
 			<territory type="GY">Guyana</territory>
-			<territory type="HK">Hong-Kong</territory>
+			<territory type="HK">Regione Amministrativa Speciale di Hong Kong della Repubblica Popolare Cinese</territory>
 			<territory type="HM">Isole Heard ed Isole McDonald</territory>
 			<territory type="HN">Honduras</territory>
 			<territory type="HR">Croazia</territory>
@@ -810,7 +811,7 @@
 			<territory type="ML">Mali</territory>
 			<territory type="MM">Myanmar</territory>
 			<territory type="MN">Mongolia</territory>
-			<territory type="MO">Macao</territory>
+			<territory type="MO">Regione Amministrativa Speciale di Macao della Repubblica Popolare Cinese</territory>
 			<territory type="MP">Isole Marianne Settentrionali</territory>
 			<territory type="MQ">Martinica</territory>
 			<territory type="MR">Mauritania</territory>
@@ -920,8 +921,8 @@
 			<variant type="AREVELA">armeno orientale</variant>
 			<variant type="AREVMDA">armeno occidentale</variant>
 			<variant type="BOONT">boontling</variant>
-			<variant type="FONIPA">fonetica IPA</variant>
-			<variant type="FONUPA">fonetica UPA</variant>
+			<variant type="FONIPA">alfabeto fonetico internazionale IPA</variant>
+			<variant type="FONUPA">alfabeto fonetico uralico UPA</variant>
 			<variant type="MONOTON">monotonico</variant>
 			<variant type="NEDIS">dialetto del Natisone</variant>
 			<variant type="POLYTON">politonico</variant>
@@ -1114,17 +1115,17 @@
 				<dateFormats>
 					<dateFormatLength type="full">
 						<dateFormat>
-							<pattern>EEEE d MMMM yyyy</pattern>
+							<pattern>EEEE d MMMM y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="long">
 						<dateFormat>
-							<pattern>dd MMMM yyyy</pattern>
+							<pattern>dd MMMM y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="medium">
 						<dateFormat>
-							<pattern>dd/MMM/yyyy</pattern>
+							<pattern>dd/MMM/y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="short">
@@ -1136,7 +1137,7 @@
 				<timeFormats>
 					<timeFormatLength type="full">
 						<timeFormat>
-							<pattern>HH.mm.ss v</pattern>
+							<pattern>HH.mm.ss zzzz</pattern>
 						</timeFormat>
 					</timeFormatLength>
 					<timeFormatLength type="long">
@@ -1156,11 +1157,6 @@
 					</timeFormatLength>
 				</timeFormats>
 				<dateTimeFormats>
-					<dateTimeFormatLength>
-						<dateTimeFormat>
-							<pattern>{1} {0}</pattern>
-						</dateTimeFormat>
-					</dateTimeFormatLength>
 					<availableFormats>
 						<dateFormatItem id="HHmm">HH.mm</dateFormatItem>
 						<dateFormatItem id="HHmmss">HH.mm.ss</dateFormatItem>
@@ -1179,18 +1175,18 @@
 						<dateFormatItem id="hhmm">hh.mm a</dateFormatItem>
 						<dateFormatItem id="hhmmss">hh.mm.ss a</dateFormatItem>
 						<dateFormatItem id="ms">mm:ss</dateFormatItem>
-						<dateFormatItem id="y">yyyy</dateFormatItem>
+						<dateFormatItem id="y">y</dateFormatItem>
 						<dateFormatItem id="yM">M/yyyy</dateFormatItem>
 						<dateFormatItem id="yMEd">EEE, d-M-yyyy</dateFormatItem>
-						<dateFormatItem id="yMMM">MMM yyyy</dateFormatItem>
-						<dateFormatItem id="yMMMEd">EEE d MMM yyyy</dateFormatItem>
-						<dateFormatItem id="yMMMM">MMMM yyyy</dateFormatItem>
+						<dateFormatItem id="yMMM">MMM y</dateFormatItem>
+						<dateFormatItem id="yMMMEd">EEE d MMM y</dateFormatItem>
+						<dateFormatItem id="yMMMM">MMMM y</dateFormatItem>
 						<dateFormatItem id="yQ">Q-yyyy</dateFormatItem>
-						<dateFormatItem id="yQQQ">QQQ yyyy</dateFormatItem>
+						<dateFormatItem id="yQQQ">QQQ y</dateFormatItem>
 						<dateFormatItem id="yyMM">MM/yy</dateFormatItem>
 						<dateFormatItem id="yyQ">Q yy</dateFormatItem>
 						<dateFormatItem id="yyQQQQ">QQQQ yy</dateFormatItem>
-						<dateFormatItem id="yyyyMMMM">MMMM yyyy</dateFormatItem>
+						<dateFormatItem id="yyyyMMMM">MMMM y</dateFormatItem>
 					</availableFormats>
 					<intervalFormats>
 						<intervalFormatFallback>{0} - {1}</intervalFormatFallback>
@@ -1253,22 +1249,22 @@
 							<greatestDifference id="y">E dd/MM/yy - E dd/MM/yy</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMM">
-							<greatestDifference id="M">MMM-MMM yyyy</greatestDifference>
-							<greatestDifference id="y">MMM yyyy - MMM yyyy</greatestDifference>
+							<greatestDifference id="M">MMM-MMM y</greatestDifference>
+							<greatestDifference id="y">MMM y - MMM y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMEd">
-							<greatestDifference id="M">E d MMM - E d MMM yyyy</greatestDifference>
-							<greatestDifference id="d">E d - E d MMM yyyy</greatestDifference>
-							<greatestDifference id="y">E d MMM yyyy - E d MMM yyyy</greatestDifference>
+							<greatestDifference id="M">E d MMM - E d MMM y</greatestDifference>
+							<greatestDifference id="d">E d - E d MMM y</greatestDifference>
+							<greatestDifference id="y">E d MMM y - E d MMM y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMM">
 							<greatestDifference id="M">yyyy-MM – MM</greatestDifference>
 							<greatestDifference id="y">yyyy-MM – yyyy-MM</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMd">
-							<greatestDifference id="M">dd MMM - dd MMM yyyy</greatestDifference>
-							<greatestDifference id="d">dd-dd MMM yyyy</greatestDifference>
-							<greatestDifference id="y">dd MMM yyyy - dd MMM yyyy</greatestDifference>
+							<greatestDifference id="M">dd MMM - dd MMM y</greatestDifference>
+							<greatestDifference id="d">dd-dd MMM y</greatestDifference>
+							<greatestDifference id="y">dd MMM y - dd MMM y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMd">
 							<greatestDifference id="M">dd/MM/yy - dd/MM/yy</greatestDifference>
@@ -1292,13 +1288,13 @@
 					</field>
 					<field type="day">
 						<displayName>giorno</displayName>
+						<relative type="-3">tre giorni fa</relative>
+						<relative type="-2">l'altro ieri</relative>
+						<relative type="-1">ieri</relative>
 						<relative type="0">oggi</relative>
 						<relative type="1">domani</relative>
 						<relative type="2">dopodomani</relative>
 						<relative type="3">tra tre giorni</relative>
-						<relative type="-1">ieri</relative>
-						<relative type="-2">l'altro ieri</relative>
-						<relative type="-3">tre giorni fa</relative>
 					</field>
 					<field type="weekday">
 						<displayName>giorno della settimana</displayName>
@@ -2032,7 +2028,7 @@
 			</metazone>
 			<metazone type="Samarkand">
 				<long>
-					<standard>Samarkand  Time</standard>
+					<standard>Samarkand Time</standard>
 					<daylight>Samarkand Summer Time</daylight>
 				</long>
 				<short>
@@ -2174,15 +2170,12 @@
 			</currency>
 			<currency type="AFN">
 				<displayName>Afgani</displayName>
-				<symbol>Af</symbol>
 			</currency>
 			<currency type="ALL">
 				<displayName>Lek Albanese</displayName>
-				<symbol>lek</symbol>
 			</currency>
 			<currency type="AMD">
 				<displayName>Dram Armeno</displayName>
-				<symbol>dram</symbol>
 			</currency>
 			<currency type="ANG">
 				<displayName>Fiorino delle Antille Olandesi</displayName>
@@ -2228,15 +2221,12 @@
 			</currency>
 			<currency type="BAM">
 				<displayName>Marco Conv. Bosnia-Erzegovina</displayName>
-				<symbol>KM</symbol>
 			</currency>
 			<currency type="BBD">
 				<displayName>Dollaro di Barbados</displayName>
-				<symbol>BDS$</symbol>
 			</currency>
 			<currency type="BDT">
 				<displayName>Taka Bangladese</displayName>
-				<symbol>Tk</symbol>
 			</currency>
 			<currency type="BEC">
 				<displayName>Franco Belga (convertibile)</displayName>
@@ -2252,19 +2242,15 @@
 			</currency>
 			<currency type="BGN">
 				<displayName>Nuovo Lev Bulgaro</displayName>
-				<symbol>lev</symbol>
 			</currency>
 			<currency type="BHD">
 				<displayName>Dinaro del Bahraini</displayName>
-				<symbol>BD</symbol>
 			</currency>
 			<currency type="BIF">
 				<displayName>Franco del Burundi</displayName>
-				<symbol>Fbu</symbol>
 			</currency>
 			<currency type="BMD">
 				<displayName>Dollaro delle Bermuda</displayName>
-				<symbol>Ber$</symbol>
 			</currency>
 			<currency type="BND">
 				<displayName>Dollaro del Brunei</displayName>
@@ -2301,7 +2287,6 @@
 			</currency>
 			<currency type="BTN">
 				<displayName>Ngultrum Butanese</displayName>
-				<symbol>Nu</symbol>
 			</currency>
 			<currency type="BUK">
 				<displayName>Kyat Birmano</displayName>
@@ -2314,11 +2299,9 @@
 			</currency>
 			<currency type="BYR">
 				<displayName>Rublo Bielorussia</displayName>
-				<symbol>Rbl</symbol>
 			</currency>
 			<currency type="BZD">
 				<displayName>Dollaro Belize</displayName>
-				<symbol>BZ$</symbol>
 			</currency>
 			<currency type="CAD">
 				<displayName>Dollaro Canadese</displayName>
@@ -2328,7 +2311,6 @@
 			</currency>
 			<currency type="CHF">
 				<displayName>Franco Svizzero</displayName>
-				<symbol>SFr.</symbol>
 			</currency>
 			<currency type="CLF">
 				<displayName>Unidades de Fomento Chilene</displayName>
@@ -2341,11 +2323,9 @@
 			</currency>
 			<currency type="COP">
 				<displayName>Peso Colombiano</displayName>
-				<symbol>Col$</symbol>
 			</currency>
 			<currency type="CRC">
 				<displayName>Colón Costaricano</displayName>
-				<symbol>C</symbol>
 			</currency>
 			<currency type="CSD">
 				<displayName>antico dinaro serbo</displayName>
@@ -2358,7 +2338,6 @@
 			</currency>
 			<currency type="CVE">
 				<displayName>Escudo del Capo Verde</displayName>
-				<symbol>CVEsc</symbol>
 			</currency>
 			<currency type="CYP">
 				<displayName>Sterlina Cipriota</displayName>
@@ -2374,18 +2353,15 @@
 			</currency>
 			<currency type="DJF">
 				<displayName>Franco Gibutiano</displayName>
-				<symbol>DF</symbol>
 			</currency>
 			<currency type="DKK">
 				<displayName>Corona Danese</displayName>
 			</currency>
 			<currency type="DOP">
 				<displayName>Peso Dominicano</displayName>
-				<symbol>RD$</symbol>
 			</currency>
 			<currency type="DZD">
 				<displayName>Dinaro Algerino</displayName>
-				<symbol>DA</symbol>
 			</currency>
 			<currency type="ECS">
 				<displayName>Sucre dell’Ecuador</displayName>
@@ -2413,7 +2389,6 @@
 			</currency>
 			<currency type="ETB">
 				<displayName>Birr Etiopico</displayName>
-				<symbol>Br</symbol>
 			</currency>
 			<currency type="EUR">
 				<displayName>Euro</displayName>
@@ -2423,7 +2398,6 @@
 			</currency>
 			<currency type="FJD">
 				<displayName>Dollaro delle Figi</displayName>
-				<symbol>F$</symbol>
 			</currency>
 			<currency type="FKP">
 				<displayName>Sterlina delle Falkland</displayName>
@@ -2439,10 +2413,12 @@
 			</currency>
 			<currency type="GEL">
 				<displayName>Lari Georgiano</displayName>
-				<symbol>lari</symbol>
 			</currency>
 			<currency type="GHC">
 				<displayName>Cedi del Ghana</displayName>
+			</currency>
+			<currency type="GHS">
+				<displayName>Cedi ghanese</displayName>
 			</currency>
 			<currency type="GIP">
 				<displayName>Sterlina di Gibilterra</displayName>
@@ -2452,7 +2428,6 @@
 			</currency>
 			<currency type="GNF">
 				<displayName>Franco della Guinea</displayName>
-				<symbol>GF</symbol>
 			</currency>
 			<currency type="GNS">
 				<displayName>Syli della Guinea</displayName>
@@ -2465,7 +2440,6 @@
 			</currency>
 			<currency type="GTQ">
 				<displayName>Quetzal Guatemalteco</displayName>
-				<symbol>Q</symbol>
 			</currency>
 			<currency type="GWE">
 				<displayName>Escudo della Guinea portoghese</displayName>
@@ -2475,14 +2449,12 @@
 			</currency>
 			<currency type="GYD">
 				<displayName>Dollaro della Guyana</displayName>
-				<symbol>G$</symbol>
 			</currency>
 			<currency type="HKD">
 				<displayName>Dollaro di Hong Kong</displayName>
 			</currency>
 			<currency type="HNL">
 				<displayName>Lempira Hoduregno</displayName>
-				<symbol>L</symbol>
 			</currency>
 			<currency type="HRD">
 				<displayName>Dinaro Croato</displayName>
@@ -2498,11 +2470,9 @@
 			</currency>
 			<currency type="IDR">
 				<displayName>Rupia Indonesiana</displayName>
-				<symbol>Rp</symbol>
 			</currency>
 			<currency type="IEP">
-				<displayName>Lira Irlandese</displayName>
-				<symbol>IR£</symbol>
+				<displayName>Sterlina irlandese</displayName>
 			</currency>
 			<currency type="ILP">
 				<displayName>Sterlina Israeliana</displayName>
@@ -2515,11 +2485,9 @@
 			</currency>
 			<currency type="IQD">
 				<displayName>Dinaro Iracheno</displayName>
-				<symbol>ID</symbol>
 			</currency>
 			<currency type="IRR">
 				<displayName>Rial Iraniano</displayName>
-				<symbol>RI</symbol>
 			</currency>
 			<currency type="ISK">
 				<displayName>Corona Islandese</displayName>
@@ -2533,7 +2501,6 @@
 			</currency>
 			<currency type="JMD">
 				<displayName>Dollaro Giamaicano</displayName>
-				<symbol>J$</symbol>
 			</currency>
 			<currency type="JOD">
 				<displayName>Dinaro Giordano</displayName>
@@ -2543,19 +2510,15 @@
 			</currency>
 			<currency type="KES">
 				<displayName>Scellino Keniota</displayName>
-				<symbol>K Sh</symbol>
 			</currency>
 			<currency type="KGS">
-				<displayName>Som  Kirghiso</displayName>
-				<symbol>som</symbol>
+				<displayName>Som Kirghiso</displayName>
 			</currency>
 			<currency type="KHR">
 				<displayName>Riel Cambogiano</displayName>
-				<symbol>CR</symbol>
 			</currency>
 			<currency type="KMF">
 				<displayName>Franco Comoriano</displayName>
-				<symbol>CF</symbol>
 			</currency>
 			<currency type="KPW">
 				<displayName>Won Nordcoreano</displayName>
@@ -2565,35 +2528,27 @@
 			</currency>
 			<currency type="KWD">
 				<displayName>Dinaro Kuwaitiano</displayName>
-				<symbol>KD</symbol>
 			</currency>
 			<currency type="KYD">
 				<displayName>Dollaro delle Isole Cayman</displayName>
 			</currency>
 			<currency type="KZT">
 				<displayName>Tenge Kazaco</displayName>
-				<symbol>T</symbol>
 			</currency>
 			<currency type="LAK">
 				<displayName>Kip Laotiano</displayName>
 			</currency>
 			<currency type="LBP">
 				<displayName>Sterlina Libanese</displayName>
-				<symbol>LL</symbol>
 			</currency>
 			<currency type="LKR">
 				<displayName>Rupia di Sri Lanka</displayName>
-				<symbol>SL Re</symbol>
 			</currency>
 			<currency type="LRD">
 				<displayName>Dollaro Liberiano</displayName>
 			</currency>
 			<currency type="LSL">
 				<displayName>Loti del Lesotho</displayName>
-				<symbol>M</symbol>
-			</currency>
-			<currency type="LSM">
-				<displayName>maloti</displayName>
 			</currency>
 			<currency type="LTL">
 				<displayName>Lita Lituana</displayName>
@@ -2618,7 +2573,6 @@
 			</currency>
 			<currency type="LYD">
 				<displayName>Dinaro Libico</displayName>
-				<symbol>LD</symbol>
 			</currency>
 			<currency type="MAD">
 				<displayName>Dirham Marocchino</displayName>
@@ -2637,7 +2591,6 @@
 			</currency>
 			<currency type="MKD">
 				<displayName>Dinaro Macedone</displayName>
-				<symbol>MDen</symbol>
 			</currency>
 			<currency type="MLF">
 				<displayName>Franco di Mali</displayName>
@@ -2647,18 +2600,15 @@
 			</currency>
 			<currency type="MNT">
 				<displayName>Tugrik Mongolo</displayName>
-				<symbol>Tug</symbol>
 			</currency>
 			<currency type="MOP">
 				<displayName>Pataca di Macao</displayName>
 			</currency>
 			<currency type="MRO">
 				<displayName>Ouguiya della Mauritania</displayName>
-				<symbol>UM</symbol>
 			</currency>
 			<currency type="MTL">
 				<displayName>Lira Maltese</displayName>
-				<symbol>Lm</symbol>
 			</currency>
 			<currency type="MTP">
 				<displayName>Sterlina Maltese</displayName>
@@ -2671,11 +2621,9 @@
 			</currency>
 			<currency type="MWK">
 				<displayName>Kwacha Malawiano</displayName>
-				<symbol>MK</symbol>
 			</currency>
 			<currency type="MXN">
 				<displayName>Peso Messicano</displayName>
-				<symbol>MEX$</symbol>
 			</currency>
 			<currency type="MXP">
 				<displayName>Peso messicano d’argento (1861-1992)</displayName>
@@ -2685,21 +2633,18 @@
 			</currency>
 			<currency type="MYR">
 				<displayName>Ringgit della Malesia</displayName>
-				<symbol>RM</symbol>
 			</currency>
 			<currency type="MZE">
 				<displayName>Escudo del Mozambico</displayName>
 			</currency>
 			<currency type="MZM">
 				<displayName>Metical del Mozambico</displayName>
-				<symbol>Mt</symbol>
 			</currency>
 			<currency type="MZN">
 				<displayName>metical del Mozambico</displayName>
 			</currency>
 			<currency type="NAD">
 				<displayName>Dollaro Namibiano</displayName>
-				<symbol>N$</symbol>
 			</currency>
 			<currency type="NGN">
 				<displayName>Naira Nigeriana</displayName>
@@ -2718,15 +2663,12 @@
 			</currency>
 			<currency type="NPR">
 				<displayName>Rupia Nepalese</displayName>
-				<symbol>Nrs</symbol>
 			</currency>
 			<currency type="NZD">
 				<displayName>Dollaro Neozelandese</displayName>
-				<symbol>$NZ</symbol>
 			</currency>
 			<currency type="OMR">
 				<displayName>Rial Omanita</displayName>
-				<symbol>RO</symbol>
 			</currency>
 			<currency type="PAB">
 				<displayName>Balboa di Panama</displayName>
@@ -2748,11 +2690,9 @@
 			</currency>
 			<currency type="PKR">
 				<displayName>Rupia del Pakistan</displayName>
-				<symbol>Pra</symbol>
 			</currency>
 			<currency type="PLN">
 				<displayName>Zloty Polacco</displayName>
-				<symbol>Zl</symbol>
 			</currency>
 			<currency type="PLZ">
 				<displayName>Zloty Polacco (1950-1995)</displayName>
@@ -2765,7 +2705,6 @@
 			</currency>
 			<currency type="QAR">
 				<displayName>Rial del Qatar</displayName>
-				<symbol>QR</symbol>
 			</currency>
 			<currency type="RHD">
 				<displayName>dollaro della Rhodesia</displayName>
@@ -2793,14 +2732,15 @@
 			</currency>
 			<currency type="SBD">
 				<displayName>Dollaro delle Isole Solomon</displayName>
-				<symbol>SI$</symbol>
 			</currency>
 			<currency type="SCR">
 				<displayName>Rupia delle Seychelles</displayName>
-				<symbol>SR</symbol>
 			</currency>
 			<currency type="SDD">
 				<displayName>Dinaro Sudanese</displayName>
+			</currency>
+			<currency type="SDG">
+				<displayName>Sterlina sudanese</displayName>
 			</currency>
 			<currency type="SDP">
 				<displayName>Sterlina Sudanese</displayName>
@@ -2819,22 +2759,21 @@
 			</currency>
 			<currency type="SKK">
 				<displayName>Corona Slovacca</displayName>
-				<symbol>Sk</symbol>
 			</currency>
 			<currency type="SLL">
 				<displayName>Leone della Sierra Leone</displayName>
 			</currency>
 			<currency type="SOS">
 				<displayName>Scellino Somalo</displayName>
-				<symbol>Sh.</symbol>
+			</currency>
+			<currency type="SRD">
+				<displayName>Dollaro surinamese</displayName>
 			</currency>
 			<currency type="SRG">
 				<displayName>Fiorino del Suriname</displayName>
-				<symbol>Sf</symbol>
 			</currency>
 			<currency type="STD">
 				<displayName>Dobra di Sao Tomé e Principe</displayName>
-				<symbol>Db</symbol>
 			</currency>
 			<currency type="SUR">
 				<displayName>Rublo Sovietico</displayName>
@@ -2844,11 +2783,9 @@
 			</currency>
 			<currency type="SYP">
 				<displayName>Sterlina Siriana</displayName>
-				<symbol>LS</symbol>
 			</currency>
 			<currency type="SZL">
 				<displayName>Lilangeni dello Swaziland</displayName>
-				<symbol>E</symbol>
 			</currency>
 			<currency type="THB">
 				<displayName>Baht Tailandese</displayName>
@@ -2867,7 +2804,6 @@
 			</currency>
 			<currency type="TOP">
 				<displayName>Paʻanga di Tonga</displayName>
-				<symbol>T$</symbol>
 			</currency>
 			<currency type="TPE">
 				<displayName>Escudo di Timor</displayName>
@@ -2884,15 +2820,12 @@
 			</currency>
 			<currency type="TTD">
 				<displayName>Dollaro di Trinidad e Tobago</displayName>
-				<symbol>TT$</symbol>
 			</currency>
 			<currency type="TWD">
 				<displayName>Nuovo dollaro taiwanese</displayName>
-				<symbol>NT$</symbol>
 			</currency>
 			<currency type="TZS">
 				<displayName>Scellino della Tanzania</displayName>
-				<symbol>T Sh</symbol>
 			</currency>
 			<currency type="UAH">
 				<displayName>Hrivna Ucraina</displayName>
@@ -2905,7 +2838,6 @@
 			</currency>
 			<currency type="UGX">
 				<displayName>Scellino Ugandese</displayName>
-				<symbol>U Sh</symbol>
 			</currency>
 			<currency type="USD">
 				<displayName>Dollaro Statunitense</displayName>
@@ -2916,32 +2848,38 @@
 			<currency type="USS">
 				<displayName>Dollaro Statunitense (Same day)</displayName>
 			</currency>
+			<currency type="UYI">
+				<displayName>Peso uruguaiano in unità indicizzate</displayName>
+			</currency>
 			<currency type="UYP">
 				<displayName>Peso Uruguaiano (1975-1993)</displayName>
 			</currency>
 			<currency type="UYU">
 				<displayName>Peso Uruguayo uruguaiano</displayName>
-				<symbol>Ur$</symbol>
 			</currency>
 			<currency type="UZS">
 				<displayName>Sum dell’Uzbekistan</displayName>
 			</currency>
 			<currency type="VEB">
 				<displayName>Bolivar Venezuelano</displayName>
-				<symbol>Be</symbol>
+			</currency>
+			<currency type="VEF">
+				<displayName>Bolívar venezuelano forte</displayName>
 			</currency>
 			<currency type="VND">
 				<displayName>Dong Vietnamita</displayName>
 			</currency>
 			<currency type="VUV">
 				<displayName>Vatu di Vanuatu</displayName>
-				<symbol>VT</symbol>
 			</currency>
 			<currency type="WST">
 				<displayName>Tala della Samoa Occidentale</displayName>
 			</currency>
 			<currency type="XAF">
 				<displayName>Franco CFA BEAC</displayName>
+			</currency>
+			<currency type="XAG">
+				<displayName>Argento</displayName>
 			</currency>
 			<currency type="XAU">
 				<displayName>Oro</displayName>
@@ -2960,7 +2898,6 @@
 			</currency>
 			<currency type="XCD">
 				<displayName>Dollaro dei Caraibi Orientali</displayName>
-				<symbol>EC$</symbol>
 			</currency>
 			<currency type="XDR">
 				<displayName>Diritti Speciali di Incasso</displayName>
@@ -2977,9 +2914,11 @@
 			<currency type="XOF">
 				<displayName>Franco CFA BCEAO</displayName>
 			</currency>
+			<currency type="XPD">
+				<displayName>Palladio</displayName>
+			</currency>
 			<currency type="XPF">
 				<displayName>Franco CFP</displayName>
-				<symbol>CFPF</symbol>
 			</currency>
 			<currency type="XPT">
 				<displayName>platino</displayName>
@@ -2999,7 +2938,6 @@
 			</currency>
 			<currency type="YER">
 				<displayName>Rial dello Yemen</displayName>
-				<symbol>YRl</symbol>
 			</currency>
 			<currency type="YUD">
 				<displayName>Dinaro Forte Yugoslavo</displayName>
@@ -3027,7 +2965,6 @@
 			</currency>
 			<currency type="ZWD">
 				<displayName>Dollaro dello Zimbabwe</displayName>
-				<symbol>Z$</symbol>
 			</currency>
 		</currencies>
 	</numbers>
@@ -3068,3 +3005,4 @@
 		</messages>
 	</posix>
 </ldml>
+

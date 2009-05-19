@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.25 $"/>
-		<generation date="$Date: 2008/06/15 08:09:47 $"/>
+		<version number="$Revision: 1.35 $"/>
+		<generation date="$Date: 2009/05/05 23:06:40 $"/>
 		<language type="se"/>
 	</identity>
+	<fallback>nb sv en</fallback>
 	<localeDisplayNames>
 		<languages>
+			<language type="ace">acehgiella</language>
 			<language type="af">afrikánsagiella</language>
 			<language type="an">aragoniagiella</language>
 			<language type="ang">boares eaŋgalasgiella</language>
-			<language type="apa">apachegielat</language>
+			<language type="apa">apacheš giella</language>
 			<language type="ar">arábagiella</language>
 			<language type="ast">asturiagiella</language>
 			<language type="be">vilges-ruoššagiella</language>
@@ -32,19 +34,20 @@
 			<language type="et">esttegiella</language>
 			<language type="fa">persijagiella</language>
 			<language type="fi">suomagiella</language>
-			<language type="fiu">fenno-ugrálaš gielat</language>
+			<language type="fiu">fenno-ugrálaš giella</language>
 			<language type="fo">fearagiella</language>
 			<language type="fr">fránskkagiella</language>
-			<language type="fy">friisagiella</language>
+			<language type="fy">oarjifriisagiella</language>
 			<language type="ga">iirragiella</language>
 			<language type="gem">germánalaš gielat</language>
 			<language type="gu">gujaratagiella</language>
 			<language type="gv">manksgiella</language>
 			<language type="hi">hindigiella</language>
 			<language type="hr">kroátiagiella</language>
-			<language type="hy">armeenalaš gielat</language>
+			<language type="hy">armeenagiella</language>
 			<language type="is">islánddagiella</language>
 			<language type="it">itáliagiella</language>
+			<language type="ja">japánagiella</language>
 			<language type="krl">gárjilgiella</language>
 			<language type="kv">komigiella</language>
 			<language type="kw">kornagiella</language>
@@ -84,8 +87,10 @@
 			<language type="uk">ukrainagiella</language>
 			<language type="wa">vallonagiella</language>
 			<language type="wen">sorbigiella</language>
+			<language type="zh">kiinnágiella</language>
 		</languages>
 		<scripts>
+			<script type="Arab">arába</script>
 			<script type="Cyrl">kyrillalaš</script>
 			<script type="Grek">greikkalaš</script>
 			<script type="Latn">láhtenaš</script>
@@ -146,20 +151,24 @@
 			<territory type="BH">Bahrain</territory>
 			<territory type="BI">Burundi</territory>
 			<territory type="BJ">Benin</territory>
+			<territory type="BL">Saint Barthélemy</territory>
 			<territory type="BM">Bermuda</territory>
 			<territory type="BN">Brunei</territory>
 			<territory type="BO">Bolivia</territory>
 			<territory type="BR">Brasil</territory>
 			<territory type="BS">Bahamas</territory>
 			<territory type="BT">Bhutan</territory>
+			<territory type="BV">Bouvet-sullot</territory>
 			<territory type="BW">Botswana</territory>
 			<territory type="BY">Vilges-Ruošša</territory>
 			<territory type="BZ">Belize</territory>
 			<territory type="CA">Kanáda</territory>
+			<territory type="CC">Cocos-sullot</territory>
 			<territory type="CD">Kongo-Kinshasa</territory>
 			<territory type="CG">Kongo-Brazzaville</territory>
 			<territory type="CH">Šveica</territory>
-			<territory type="CL">Chile</territory>
+			<territory type="CK">Cook-sullot</territory>
+			<territory type="CL">Čiile</territory>
 			<territory type="CM">Kamerun</territory>
 			<territory type="CN">Kiinná</territory>
 			<territory type="CO">Kolombia</territory>
@@ -213,6 +222,7 @@
 			<territory type="ID">Indonesia</territory>
 			<territory type="IE">Irlánda</territory>
 			<territory type="IL">Israel</territory>
+			<territory type="IM">Mann</territory>
 			<territory type="IN">India</territory>
 			<territory type="IQ">Irak</territory>
 			<territory type="IR">Iran</territory>
@@ -224,13 +234,14 @@
 			<territory type="JP">Japána</territory>
 			<territory type="KE">Kenia</territory>
 			<territory type="KG">Kirgisistan</territory>
-			<territory type="KH">Kampučea</territory>
+			<territory type="KH">Kambodža</territory>
 			<territory type="KI">Kiribati</territory>
 			<territory type="KM">Komorosullot</territory>
 			<territory type="KN">Saint Kitts ja Nevis</territory>
 			<territory type="KP">Davvi-Korea</territory>
 			<territory type="KR">Mátta-Korea</territory>
 			<territory type="KW">Kuwait</territory>
+			<territory type="KY">Cayman-sullot</territory>
 			<territory type="KZ">Kasakstan</territory>
 			<territory type="LA">Laos</territory>
 			<territory type="LB">Libanon</territory>
@@ -247,6 +258,7 @@
 			<territory type="MC">Monaco</territory>
 			<territory type="MD">Moldávia</territory>
 			<territory type="ME">Montenegro</territory>
+			<territory type="MF">Saint Martin</territory>
 			<territory type="MG">Madagaskar</territory>
 			<territory type="MH">Marshallsullot</territory>
 			<territory type="MK">Makedonia</territory>
@@ -268,6 +280,7 @@
 			<territory type="NA">Namibia</territory>
 			<territory type="NC">Ođđa-Kaledonia</territory>
 			<territory type="NE">Niger</territory>
+			<territory type="NF">Norfolksullot</territory>
 			<territory type="NG">Nigeria</territory>
 			<territory type="NI">Nicaragua</territory>
 			<territory type="NL">Vuolleeatnamat</territory>
@@ -291,13 +304,14 @@
 			<territory type="PW">Palau</territory>
 			<territory type="PY">Paraguay</territory>
 			<territory type="QA">Qatar</territory>
-			<territory type="QU">EU</territory>
+			<territory type="QU">Eurohpa Uniovdna</territory>
 			<territory type="RE">Reunion</territory>
 			<territory type="RO">Románia</territory>
 			<territory type="RS">Serbia</territory>
 			<territory type="RU">Ruošša</territory>
 			<territory type="RW">Rwanda</territory>
 			<territory type="SA">Saudi-Arábia</territory>
+			<territory type="SB">Salomon-sullot</territory>
 			<territory type="SC">Seychellsullot</territory>
 			<territory type="SD">Sudan</territory>
 			<territory type="SE">Ruoŧŧa</territory>
@@ -316,7 +330,7 @@
 			<territory type="SY">Syria</territory>
 			<territory type="SZ">Svazieana</territory>
 			<territory type="TC">Turks ja Caicos-sullot</territory>
-			<territory type="TD">Chad</territory>
+			<territory type="TD">Tčad</territory>
 			<territory type="TG">Togo</territory>
 			<territory type="TH">Thaieana</territory>
 			<territory type="TJ">Tažikistan</territory>
@@ -353,26 +367,16 @@
 			<key type="currency">valuhtta</key>
 		</keys>
 		<measurementSystemNames>
+			<measurementSystemName type="US">US</measurementSystemName>
 			<measurementSystemName type="metric">SI</measurementSystemName>
 		</measurementSystemNames>
 		<codePatterns>
 			<codePattern type="language">giella: {0}</codePattern>
 		</codePatterns>
 	</localeDisplayNames>
-	<layout>
-		<inText type="currency">lowercase-words</inText>
-		<inText type="fields">lowercase-words</inText>
-		<inText type="keys">lowercase-words</inText>
-		<inText type="languages">lowercase-words</inText>
-		<inText type="long">lowercase-words</inText>
-		<inText type="scripts">lowercase-words</inText>
-		<inText type="territories">titlecase-words</inText>
-		<inText type="types">lowercase-words</inText>
-		<inText type="variants">lowercase-words</inText>
-	</layout>
 	<characters>
 		<exemplarCharacters>[a á b c č d đ e-n ŋ o p r s š t ŧ u v z ž]</exemplarCharacters>
-		<exemplarCharacters type="auxiliary">[à å ä æ ç é è ń ñ ó ò ö ø q ú ü w-y]</exemplarCharacters>
+		<exemplarCharacters type="auxiliary">[à å ä ã æ ç é è í ń ñ ó ò ö ø q ú ü w-y]</exemplarCharacters>
 		<exemplarCharacters type="currencySymbol">[a á à å ä æ b c č d đ e é è f-n ń ŋ o ó ò ö ø p-s š t ŧ u ú v x-z ž]</exemplarCharacters>
 	</characters>
 	<delimiters>
@@ -462,7 +466,7 @@
 							<day type="wed">g</day>
 							<day type="thu">d</day>
 							<day type="fri">b</day>
-							<day type="sat">l</day>
+							<day type="sat">L</day>
 						</dayWidth>
 					</dayContext>
 				</days>
@@ -470,7 +474,7 @@
 					<quarterContext type="format">
 						<quarterWidth type="abbreviated">
 							<quarter type="1">Q1</quarter>
-							<quarter type="2">Q2</quarter>
+							<quarter type="2">K2</quarter>
 							<quarter type="3">Q3</quarter>
 							<quarter type="4">Q4</quarter>
 						</quarterWidth>
@@ -486,27 +490,32 @@
 				<pm>PM</pm>
 				<eras>
 					<eraNames>
-						<era type="0">Ovdal Kristtusa</era>
+						<era type="0">ovdal Kristtusa</era>
+						<era type="1">maŋŋel Kristtusa</era>
 					</eraNames>
 					<eraAbbr>
-						<era type="0">OK</era>
-						<era type="1">CE</era>
+						<era type="0">o.Kr.</era>
+						<era type="1">m.Kr.</era>
 					</eraAbbr>
+					<eraNarrow>
+						<era type="0">o.Kr.</era>
+						<era type="1">m.Kr.</era>
+					</eraNarrow>
 				</eras>
 				<dateFormats>
 					<dateFormatLength type="full">
 						<dateFormat>
-							<pattern>EEEE, yyyy MMMM dd</pattern>
+							<pattern>EEEE, y MMMM dd</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="long">
 						<dateFormat>
-							<pattern>yyyy MMMM d</pattern>
+							<pattern>y MMMM d</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="medium">
 						<dateFormat>
-							<pattern>yyyy MMM d</pattern>
+							<pattern>y MMM d</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="short">
@@ -518,7 +527,7 @@
 				<timeFormats>
 					<timeFormatLength type="full">
 						<timeFormat>
-							<pattern>HH:mm:ss v</pattern>
+							<pattern>HH:mm:ss zzzz</pattern>
 						</timeFormat>
 					</timeFormatLength>
 					<timeFormatLength type="long">
@@ -538,16 +547,14 @@
 					</timeFormatLength>
 				</timeFormats>
 				<dateTimeFormats>
-					<dateTimeFormatLength>
-						<dateTimeFormat>
-							<pattern>{1} {0}</pattern>
-						</dateTimeFormat>
-					</dateTimeFormatLength>
 					<availableFormats>
 						<dateFormatItem id="yyQ">Q yy</dateFormatItem>
 					</availableFormats>
 				</dateTimeFormats>
 				<fields>
+					<field type="era">
+						<displayName>éra</displayName>
+					</field>
 					<field type="year">
 						<displayName>jáhki</displayName>
 					</field>
@@ -559,12 +566,15 @@
 					</field>
 					<field type="day">
 						<displayName>beaivi</displayName>
+						<relative type="-1">ikte</relative>
+						<relative type="0">odne</relative>
+						<relative type="1">ihttin</relative>
 					</field>
 					<field type="weekday">
 						<displayName>váhkkubeaivi</displayName>
 					</field>
 					<field type="hour">
-						<displayName>tiibmu</displayName>
+						<displayName>diibmu</displayName>
 					</field>
 					<field type="minute">
 						<displayName>minuhtta</displayName>
@@ -573,16 +583,46 @@
 						<displayName>sekunda</displayName>
 					</field>
 					<field type="zone">
-						<displayName>sone</displayName>
+						<displayName>áigeavádat</displayName>
 					</field>
 				</fields>
 			</calendar>
 		</calendars>
 		<timeZoneNames>
 			<hourFormat>+HH:mm;−HH:mm</hourFormat>
-			<gmtFormat>GMT{0}</gmtFormat>
+			<gmtFormat>UTC{0}</gmtFormat>
+			<gmtZeroFormat>UTC</gmtZeroFormat>
 			<regionFormat>{0}</regionFormat>
 			<fallbackFormat>{0} ({1})</fallbackFormat>
+			<zone type="America/Sao_Paulo">
+				<exemplarCity>São Paulo</exemplarCity>
+			</zone>
+			<zone type="America/Merida">
+				<exemplarCity>Mérida</exemplarCity>
+			</zone>
+			<metazone type="Europe_Central">
+				<short>
+					<standard>CET</standard>
+					<daylight>CEST</daylight>
+				</short>
+			</metazone>
+			<metazone type="Europe_Eastern">
+				<short>
+					<standard>EET</standard>
+					<daylight>EEST</daylight>
+				</short>
+			</metazone>
+			<metazone type="Europe_Western">
+				<short>
+					<standard>WET</standard>
+					<daylight>WEST</daylight>
+				</short>
+			</metazone>
+			<metazone type="GMT">
+				<short>
+					<standard>GMT</standard>
+				</short>
+			</metazone>
 		</timeZoneNames>
 	</dates>
 	<numbers>
@@ -627,8 +667,17 @@
 					<pattern>#,##0.00 ¤</pattern>
 				</currencyFormat>
 			</currencyFormatLength>
+			<unitPattern count="one">{0} {1}</unitPattern>
+			<unitPattern count="other">{0} {1}</unitPattern>
+			<unitPattern count="two">{0} {1}</unitPattern>
 		</currencyFormats>
 		<currencies>
+			<currency type="EUR">
+				<displayName>euro</displayName>
+				<displayName count="one">euro</displayName>
+				<displayName count="other">euro</displayName>
+				<displayName count="two">euro</displayName>
+			</currency>
 			<currency type="FIM">
 				<displayName>suoma márkki</displayName>
 			</currency>
@@ -639,13 +688,49 @@
 				<displayName>ruoŧŧa kruvdno</displayName>
 			</currency>
 			<currency type="XAG">
-				<displayName>silba</displayName>
+				<displayName>uns silba</displayName>
 			</currency>
 			<currency type="XAU">
 				<displayName>golli</displayName>
 			</currency>
 		</currencies>
 	</numbers>
+	<units>
+		<unit type="day">
+			<unitPattern count="one">{0} beaivi</unitPattern>
+			<unitPattern count="other">{0} beaivi</unitPattern>
+			<unitPattern count="two">{0} beaivi</unitPattern>
+		</unit>
+		<unit type="hour">
+			<unitPattern count="one">{0} tiibmu</unitPattern>
+			<unitPattern count="two">{0} tiibmu</unitPattern>
+		</unit>
+		<unit type="minute">
+			<unitPattern count="one">{0} minuhtta</unitPattern>
+			<unitPattern count="other">{0} minuhtta</unitPattern>
+			<unitPattern count="two">{0} minuhtta</unitPattern>
+		</unit>
+		<unit type="month">
+			<unitPattern count="one">{0} mánnu</unitPattern>
+			<unitPattern count="other">{0} mánnu</unitPattern>
+			<unitPattern count="two">{0} mánnu</unitPattern>
+		</unit>
+		<unit type="second">
+			<unitPattern count="one">{0} sekunda</unitPattern>
+			<unitPattern count="other">{0} sekunda</unitPattern>
+			<unitPattern count="two">{0} sekunda</unitPattern>
+		</unit>
+		<unit type="week">
+			<unitPattern count="one">{0} váhkku</unitPattern>
+			<unitPattern count="other">{0} váhkku</unitPattern>
+			<unitPattern count="two">{0} váhkku</unitPattern>
+		</unit>
+		<unit type="year">
+			<unitPattern count="one">{0} jáhki</unitPattern>
+			<unitPattern count="other">{0} jáhki</unitPattern>
+			<unitPattern count="two">{0} jáhki</unitPattern>
+		</unit>
+	</units>
 	<posix>
 		<messages>
 			<yesstr>jo</yesstr>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.85 $"/>
-		<generation date="$Date: 2008/06/20 22:46:58 $"/>
+		<version number="$Revision: 1.105 $"/>
+		<generation date="$Date: 2009/05/05 23:06:36 $"/>
 		<language type="hi"/>
 	</identity>
 	<localeDisplayNames>
@@ -14,285 +14,636 @@
 		<languages>
 			<language type="aa">अफ़ार</language>
 			<language type="ab">अब्खाज़ियन्</language>
+			<language type="ace">अचाइनीस</language>
 			<language type="ach">अकोली</language>
+			<language type="ada">अदान्गमे</language>
+			<language type="ady">अदिघे</language>
 			<language type="ae">अवेस्तन</language>
 			<language type="af">अफ्रीकी</language>
 			<language type="afa">अफ्रो-एशियाई भाषाएँ</language>
-			<language type="afh">अफ्रीलीयाई</language>
+			<language type="afh">अफ्रिहिली</language>
 			<language type="ain">ऐनू</language>
 			<language type="ak">अकन</language>
-			<language type="akk">अकाडिनी</language>
+			<language type="akk">अक्केदिअन</language>
+			<language type="ale">अलेउत</language>
+			<language type="alg">एल्गोनक्युइअन भाषा</language>
+			<language type="alt">दक्षिणी अल्ताई</language>
 			<language type="am">अम्हारिक्</language>
 			<language type="an">अर्गोनी</language>
 			<language type="ang">पुरानी अंग्रेज़ी</language>
-			<language type="anp">अंगीका</language>
-			<language type="apa">अपाची भाषा</language>
+			<language type="anp">अंगिका</language>
+			<language type="apa">अपाचे भाषा</language>
 			<language type="ar">अरबी</language>
-			<language type="arc">अरामी</language>
+			<language type="arc">ऐरेमेक</language>
+			<language type="arn">एरोकैनियन</language>
 			<language type="arp">अराफाओ</language>
 			<language type="art">कृत्रिम भाषा</language>
+			<language type="arw">अरावक</language>
 			<language type="as">असामी</language>
+			<language type="ast">अस्तुरियन</language>
+			<language type="ath">अथापास्कान भाषा</language>
 			<language type="aus">आस्ट्रेलियाई भाषा</language>
 			<language type="av">अवेरिक</language>
 			<language type="awa">अवधी</language>
 			<language type="ay">आयमारा</language>
 			<language type="az">अज़रबैंजानी</language>
 			<language type="ba">बशख़िर</language>
+			<language type="bad">बांदा</language>
+			<language type="bai">बमिलेके भाषा</language>
 			<language type="bal">बलूची</language>
-			<language type="bat">बल्कानी भाषा</language>
+			<language type="ban">बालिनीस</language>
+			<language type="bas">बसा</language>
+			<language type="bat">बाल्टिक भाषा</language>
 			<language type="be">बैलोरूशियन्</language>
-			<language type="bg">बल्गेरियन्</language>
+			<language type="bej">बेजा</language>
+			<language type="bem">बेम्बा</language>
+			<language type="ber">बरबर</language>
+			<language type="bg">बल्गेरियाई</language>
 			<language type="bh">बिहारी</language>
 			<language type="bho">भोजपुरी</language>
 			<language type="bi">बिस्लामा</language>
+			<language type="bik">बिकोल</language>
+			<language type="bin">बिनी</language>
+			<language type="bla">सिक्सिका</language>
+			<language type="bm">बाम्बारा</language>
 			<language type="bn">बँगाली</language>
+			<language type="bnt">बन्तु</language>
 			<language type="bo">तिब्बती</language>
 			<language type="br">ब्रेटन</language>
 			<language type="bra">ब्रज</language>
 			<language type="bs">बोस्नियाई</language>
+			<language type="btk">बताक</language>
+			<language type="bua">बुरियात</language>
+			<language type="bug">बगिनीस</language>
+			<language type="byn">ब्लिन</language>
 			<language type="ca">कातालान</language>
-			<language type="cai">मध्य अमेरिकी भारतीय भाषा</language>
-			<language type="cau">काकेशी भाषा</language>
+			<language type="cad">कैड्डो</language>
+			<language type="cai">मध्य अमेरिकी इंडियन भाषा</language>
+			<language type="car">कैरिब</language>
+			<language type="cau">कॉकेशियन भाषा</language>
+			<language type="cch">अत्सम</language>
 			<language type="ce">चेचन</language>
-			<language type="cel">केल्ट भाषा</language>
+			<language type="ceb">सिबुआनो</language>
+			<language type="cel">केल्टिक भाषा</language>
+			<language type="ch">कमोरो</language>
+			<language type="chb">चिब्चा</language>
+			<language type="chg">छगाताई</language>
+			<language type="chk">चूकीस</language>
+			<language type="chm">मारी</language>
+			<language type="chn">चिनूक जारगॉन</language>
+			<language type="cho">चोक्तौ</language>
+			<language type="chp">शिपेव्यान</language>
+			<language type="chr">शेरूकी</language>
+			<language type="chy">शेयेन्न</language>
+			<language type="cmc">शैमिक भाषा</language>
 			<language type="co">कोर्सीकन</language>
+			<language type="cop">कॉप्टिक</language>
+			<language type="cpe">अंग्रेजी आधारित क्रेओल या पिजिन</language>
+			<language type="cpf">फ्रेंच आधारित क्रेओल या पिजिन</language>
+			<language type="cpp">पुर्तगाली आधारित क्रेओल या पिजिन</language>
+			<language type="cr">क्री</language>
+			<language type="crh">क्रीमीन तुर्की</language>
+			<language type="crp">क्रेओल या पिजिन</language>
 			<language type="cs">चेक</language>
+			<language type="csb">काशुबियन</language>
+			<language type="cu">चर्च साल्विक</language>
+			<language type="cus">कुशितिक भाषा</language>
+			<language type="cv">चूवाश</language>
 			<language type="cy">वेल्श</language>
 			<language type="da">डैनीश</language>
+			<language type="dak">दाकोता</language>
+			<language type="dar">दार्गवा</language>
+			<language type="day">दायक</language>
 			<language type="de">ज़र्मन</language>
 			<language type="de_AT">जर्मन (ऑस्ट्रिया)</language>
+			<language type="del">डिलैवेयर</language>
+			<language type="den">स्लेव</language>
+			<language type="dgr">डोग्रिब</language>
+			<language type="din">दिन्का</language>
+			<language type="doi">डोग्री</language>
 			<language type="dra">द्रविण भाषा</language>
+			<language type="dsb">निचला सॉर्बियन</language>
+			<language type="dua">दुआला</language>
 			<language type="dum">मध्य पुर्तगाली</language>
-			<language type="dz">भुटानी</language>
+			<language type="dv">दिवेही</language>
+			<language type="dyu">ड्युला</language>
+			<language type="dz">ज़ोन्गखा</language>
+			<language type="ee">ईवे</language>
+			<language type="efi">एफिक</language>
 			<language type="egy">प्राचीन मिस्री</language>
+			<language type="eka">एकाजुक</language>
 			<language type="el">ग्रीक</language>
+			<language type="elx">एलामाइट</language>
 			<language type="en">अंग्रेजी</language>
 			<language type="en_AU">अंग्रेज़ी (ऑस्ट्रेलिया)</language>
 			<language type="en_CA">अंग्रेज़ी(कनाडाई)</language>
 			<language type="en_GB">अंग्रेजी(ब्रिटिश)</language>
 			<language type="en_US">अंग्रेज़ी अमेरीकी</language>
+			<language type="enm">मिडिल अंग्रजी</language>
 			<language type="eo">एस्पेरान्तो</language>
 			<language type="es">स्पेनिश</language>
 			<language type="es_419">लेटिन अमेरिकी स्पेनिश</language>
 			<language type="es_ES">ईवेरियाई स्पेनिश</language>
 			<language type="et">ऐस्तोनियन्</language>
 			<language type="eu">बास्क्</language>
+			<language type="ewo">इवोन्डो</language>
 			<language type="fa">पर्शियन्</language>
+			<language type="fan">फैन्ग</language>
+			<language type="fat">फन्टी</language>
+			<language type="ff">फुलाह</language>
 			<language type="fi">फिनिश</language>
 			<language type="fil">फिलिपिनो</language>
+			<language type="fiu">फिन्नो-उग्रीयन भाषा</language>
 			<language type="fj">फ़ीजी</language>
 			<language type="fo">फिरोज़ी</language>
+			<language type="fon">फॉन</language>
 			<language type="fr">फ्रेंच</language>
 			<language type="fr_CA">फ़्रेंच(कनाडाई)</language>
+			<language type="frm">मिडिल फ्रेंच</language>
 			<language type="fro">पुरानी फ्रांसीसी</language>
+			<language type="frr">उत्तरी फ्रीसीयन</language>
+			<language type="frs">पूर्वी फ्रीसीयन</language>
+			<language type="fur">फ्रीयुलीयान</language>
 			<language type="fy">पश्चिमी फ़्रिसियाई</language>
 			<language type="ga">आयरिश</language>
+			<language type="gaa">गा</language>
 			<language type="gay">गायो</language>
+			<language type="gba">ग्बाया</language>
 			<language type="gd">स्काट्स् गायेलिक्</language>
+			<language type="gem">जर्मनिक भाषा</language>
+			<language type="gez">गीज़</language>
+			<language type="gil">गिल्बरतीस</language>
 			<language type="gl">गैलिशियन्</language>
+			<language type="gmh">मध्यकालीन हाइ जर्मन</language>
 			<language type="gn">गुआरानी</language>
+			<language type="goh">पुरातन हाइ जर्मन</language>
 			<language type="gon">गाँडी</language>
+			<language type="gor">गोरोन्तालो</language>
 			<language type="got">गॉथिक</language>
+			<language type="grb">ग्रेबो</language>
 			<language type="grc">प्राचीन यूनानी</language>
+			<language type="gsw">स्विस जर्मन</language>
 			<language type="gu">गुज़राती</language>
+			<language type="gv">मैंक्स</language>
+			<language type="gwi">ग्विच'इन</language>
 			<language type="ha">होउसा</language>
+			<language type="hai">हैडा</language>
+			<language type="haw">हावाइयन</language>
 			<language type="he">हीब्रू</language>
 			<language type="hi">हिन्दी</language>
+			<language type="hil">हिलिगेनन</language>
 			<language type="him">हिमाचली</language>
+			<language type="hit">हिताइत</language>
+			<language type="hmn">ह्मॉंग</language>
+			<language type="ho">हिरी मोटू</language>
 			<language type="hr">क्रोएशन्</language>
+			<language type="hsb">ऊपरी सॉर्बियन</language>
+			<language type="ht">हैतीयन</language>
 			<language type="hu">हंगेरी</language>
 			<language type="hup">हूपा</language>
 			<language type="hy">अरमेनियन्</language>
+			<language type="hz">हरैरो</language>
 			<language type="ia">ईन्टरलिंगुआ</language>
+			<language type="iba">इबान</language>
 			<language type="id">इन्डोनेशियाई</language>
 			<language type="ie">ईन्टरलिंगुइ</language>
+			<language type="ig">ईग्बो</language>
+			<language type="ii">सिचुआन यी</language>
+			<language type="ijo">इजो</language>
 			<language type="ik">इनुपियाक्</language>
+			<language type="ilo">इलोको</language>
+			<language type="inc">भारतीय भाषा</language>
+			<language type="ine">इंडो-युरोपीय भाषा</language>
+			<language type="inh">इंगुश</language>
+			<language type="io">इडौ</language>
 			<language type="ira">ईरानी भाषा</language>
+			<language type="iro">इरोक्युओइयन भाषा</language>
 			<language type="is">आईस्लैंडिक्</language>
 			<language type="it">इतालवी</language>
 			<language type="iu">इनूकीटूत्</language>
 			<language type="ja">जापानी</language>
+			<language type="jbo">लोज्बान</language>
+			<language type="jpr">जुदेओ-पर्शियन</language>
+			<language type="jrb">जुदेओ-अरेबिक</language>
 			<language type="jv">जावानीस</language>
 			<language type="ka">जॉर्जीयन्</language>
-			<language type="kcg">kcg</language>
+			<language type="kaa">कारा-कल्पक</language>
+			<language type="kab">कबाइल</language>
+			<language type="kac">काचिन</language>
+			<language type="kaj">ज्जु</language>
+			<language type="kam">कम्बा</language>
+			<language type="kar">कारेन</language>
+			<language type="kaw">कावी</language>
+			<language type="kbd">कबार्डियन</language>
+			<language type="kcg">त्याप</language>
+			<language type="kfo">कोरो</language>
+			<language type="kg">कोंगो</language>
+			<language type="kha">खासी</language>
+			<language type="khi">खोइसन भाषा</language>
+			<language type="kho">खोतानीस</language>
+			<language type="ki">किकुयू</language>
+			<language type="kj">क्वान्यामा</language>
 			<language type="kk">कज़ाख</language>
 			<language type="kl">ग्रीनलैंडिक</language>
 			<language type="km">कैम्बोडियन्</language>
+			<language type="kmb">किम्बन्दु</language>
 			<language type="kn">कन्नड़</language>
 			<language type="ko">कोरीयन्</language>
 			<language type="kok">कोंकणी</language>
+			<language type="kos">कोसरैन</language>
+			<language type="kpe">क्पेल्लै</language>
+			<language type="kr">कनुरी</language>
+			<language type="krc">कराचय-बल्कार</language>
+			<language type="krl">करेलियन</language>
+			<language type="kro">क्रु</language>
+			<language type="kru">कुरूख</language>
 			<language type="ks">कश्मीरी</language>
 			<language type="ku">कुरदीश</language>
+			<language type="kum">कुमीक</language>
+			<language type="kut">कुतेनाई</language>
+			<language type="kv">कोमी</language>
+			<language type="kw">कोर्निश</language>
 			<language type="ky">किरघिज़</language>
 			<language type="la">लैटीन</language>
+			<language type="lad">लादीनो</language>
+			<language type="lah">लाह्न्डा</language>
+			<language type="lam">लाम्बा</language>
+			<language type="lb">लक्ष्ज़ेमबर्गिश</language>
+			<language type="lez">लेज़्घीयन</language>
+			<language type="lg">गांडा</language>
+			<language type="li">लिंबर्गिश</language>
 			<language type="ln">लिंगाला</language>
 			<language type="lo">लाओथीयन्</language>
 			<language type="lol">मोंगो</language>
+			<language type="loz">लोज़ी</language>
 			<language type="lt">लिथुनियन्</language>
-			<language type="lv">लाटवियन् (लेट्टीश)</language>
+			<language type="lu">ल्यूबा-कटांगा</language>
+			<language type="lua">ल्यूबा-लुलुआ</language>
+			<language type="lui">लुइसेनो</language>
+			<language type="lun">लुन्डा</language>
+			<language type="luo">ल्युओ</language>
+			<language type="lus">लुशाई</language>
+			<language type="lv">लातवी</language>
+			<language type="mad">मादुरीस</language>
+			<language type="mag">मगाही</language>
+			<language type="mai">मैथिली</language>
+			<language type="mak">मकासर</language>
+			<language type="man">मन्डिन्गो</language>
+			<language type="map">ऑस्ट्रोनेशियन</language>
+			<language type="mas">मसाई</language>
+			<language type="mdf">मोक्ष</language>
 			<language type="mdr">मंधार</language>
+			<language type="men">मेन्डे</language>
 			<language type="mg">मालागासी</language>
+			<language type="mga">मिडिल आइरिश</language>
+			<language type="mh">मार्शलीज़</language>
 			<language type="mi">मेओरी</language>
+			<language type="mic">मिकमैक</language>
+			<language type="min">मिनांग्काबाउ</language>
 			<language type="mis">विविध भाषा</language>
 			<language type="mk">मैसेडोनियन्</language>
+			<language type="mkh">मॉन-ख्मेर भाषा</language>
 			<language type="ml">मलयालम</language>
 			<language type="mn">मंगोलीयाई</language>
+			<language type="mnc">मन्चु</language>
 			<language type="mni">मणिपूरी</language>
+			<language type="mno">मनोबो भाषा</language>
 			<language type="mo">मोलडावियन्</language>
+			<language type="moh">मोहौक</language>
+			<language type="mos">मोस्सी</language>
 			<language type="mr">मराठी</language>
 			<language type="ms">मलय</language>
 			<language type="mt">मालटिस्</language>
 			<language type="mul">विविध भाषाएँ</language>
 			<language type="mun">मुन्डा भाषा</language>
+			<language type="mus">क्रीक</language>
 			<language type="mwl">मिरांडी</language>
 			<language type="mwr">मारवाड़ी</language>
 			<language type="my">बर्लिस</language>
 			<language type="myn">माया भाषा</language>
-			<language type="na">नायरू</language>
+			<language type="myv">एर्ज़या</language>
+			<language type="na">नाउरू</language>
+			<language type="nah">नहुआत्ल</language>
+			<language type="nai">उत्तरी अमेरीकी इंडियन भाषा</language>
+			<language type="nap">नीपोलिटन</language>
+			<language type="nb">नॉर्वेजियन बोकमाल</language>
+			<language type="nd">उत्तरी देबेल</language>
+			<language type="nds">निचला जर्मन</language>
 			<language type="ne">नेपाली</language>
 			<language type="new">नेवाड़ी</language>
+			<language type="ng">डोन्गा</language>
+			<language type="nia">नियास</language>
+			<language type="nic">नाइगर-कोर्डोफैनियन भाषा</language>
+			<language type="niu">नियुआन</language>
 			<language type="nl">डच्</language>
-			<language type="nn">नार्वेजियन</language>
-			<language type="no">नार्वेजीयन्</language>
+			<language type="nn">नॉर्वेजियन नाइनोर्स्क</language>
+			<language type="no">नार्वेजियन</language>
+			<language type="nog">नोगाई</language>
+			<language type="non">पुराना नॉर्स</language>
+			<language type="nqo">एन्को</language>
+			<language type="nr">दक्षिण देबेल</language>
+			<language type="nso">उत्तरी सोथो</language>
+			<language type="nub">न्युबियान भाषा</language>
+			<language type="nv">नावाजो</language>
 			<language type="nwc">पारम्परिक नेवारी</language>
+			<language type="ny">न्यानजा</language>
+			<language type="nym">न्यामवेज़ी</language>
+			<language type="nyn">न्यानकोल</language>
+			<language type="nyo">न्योरो</language>
+			<language type="nzi">न्ज़ीमा</language>
 			<language type="oc">ओसीटान</language>
-			<language type="om">ओरोमो (अफ़ान)</language>
+			<language type="oj">ओजिब्वा</language>
+			<language type="om">ओरोमो</language>
 			<language type="or">उड़िया</language>
+			<language type="os">ओस्सेटिक</language>
+			<language type="osa">ओसेज</language>
+			<language type="ota">ओटोमान तुर्किश</language>
+			<language type="oto">ओटोमियन भाषा</language>
 			<language type="pa">पंजाबी</language>
+			<language type="paa">पापुआन भाषा</language>
+			<language type="pag">पंगासीनान</language>
+			<language type="pal">पाह्लावी</language>
+			<language type="pam">पाम्पान्गा</language>
+			<language type="pap">पापियामेन्टो</language>
+			<language type="pau">पलोउआन</language>
 			<language type="peo">पुरानी फारसी</language>
+			<language type="phi">फिलिपीन भाषा</language>
+			<language type="phn">फोएनिशियन</language>
 			<language type="pi">पाली</language>
 			<language type="pl">पॉलिश</language>
+			<language type="pon">पोह्नपिएन</language>
 			<language type="pra">प्राकृत</language>
-			<language type="ps">पॉशतो (पुशतो)</language>
+			<language type="pro">पुरानी प्रोवेन्सल</language>
+			<language type="ps">पॉशतो</language>
 			<language type="pt">पुर्तगाली</language>
 			<language type="pt_BR">पुर्तगाली (ब्राज़ील)</language>
 			<language type="pt_PT">ईवेरियाई पुर्तगाली</language>
 			<language type="qu">क्वेशुआ</language>
 			<language type="raj">राजस्थानी</language>
+			<language type="rap">रापानुई</language>
+			<language type="rar">रारोतोंगन</language>
 			<language type="rm">रहेय्टो-रोमान्स</language>
 			<language type="rn">रुन्दी</language>
 			<language type="ro">रोमानियाई</language>
-			<language type="root">शिखर</language>
+			<language type="roa">रोमांस भाषा</language>
+			<language type="rom">रोमानी</language>
+			<language type="root">रूट</language>
 			<language type="ru">रूसी</language>
+			<language type="rup">अरोमानियन</language>
 			<language type="rw">किन्यारवाण्डा</language>
 			<language type="sa">संस्कृत</language>
+			<language type="sad">सन्डावे</language>
+			<language type="sah">याकूत</language>
+			<language type="sai">दक्षिण अमेरीकी इंडियन भाषा</language>
+			<language type="sal">सलीशन भाषा</language>
+			<language type="sam">सामैरिटन अरैमिक</language>
+			<language type="sas">सासाक</language>
 			<language type="sat">संताली</language>
+			<language type="sc">सार्दिनियन</language>
+			<language type="scn">सिसिलियन</language>
+			<language type="sco">स्कॉट्स</language>
 			<language type="sd">सिन्धी</language>
+			<language type="se">नॉर्दन सामी</language>
+			<language type="sel">सेल्कप</language>
+			<language type="sem">सेमिटिक भाषा</language>
 			<language type="sg">सांगो</language>
+			<language type="sga">पुरानी आइरिश</language>
 			<language type="sgn">सांकेतिक भाषा</language>
 			<language type="sh">सेर्बो-क्रोएशन्</language>
+			<language type="shn">शैन</language>
 			<language type="si">शिंघालीस्</language>
+			<language type="sid">सिदामो</language>
+			<language type="sio">सिउआन भाषा</language>
 			<language type="sit">चीनी-तिब्ब्ती भाषा</language>
 			<language type="sk">स्लोवाक्</language>
 			<language type="sl">स्लोवेनियन्</language>
 			<language type="sla">स्लोवियाई भाषा</language>
 			<language type="sm">सामोन</language>
+			<language type="sma">दक्षिण सामी</language>
 			<language type="smi">सामी भाषा</language>
+			<language type="smj">ल्युल सामी</language>
+			<language type="smn">इनारी सामी</language>
+			<language type="sms">स्कोल्ट सामी</language>
 			<language type="sn">सोणा</language>
+			<language type="snk">सोनिन्के</language>
 			<language type="so">सोमाली</language>
+			<language type="sog">सोग्डिएन</language>
+			<language type="son">सोन्घाई</language>
 			<language type="sq">अल्बेनियन्</language>
 			<language type="sr">सर्बियन्</language>
+			<language type="srn">स्रानान टॉन्गो</language>
+			<language type="srr">सेरेर</language>
 			<language type="ss">स्वाती</language>
 			<language type="ssa">नील सहारी भाषा</language>
 			<language type="st">सेसोथो</language>
 			<language type="su">सुंडानी</language>
+			<language type="suk">सुकुमा</language>
 			<language type="sus">सुसु</language>
+			<language type="sux">सुमेरियन</language>
 			<language type="sv">स्विडिश</language>
 			<language type="sw">स्वाहिली</language>
+			<language type="syc">क्लासिकल सिरिएक</language>
+			<language type="syr">सिरिएक</language>
 			<language type="ta">तमिल</language>
+			<language type="tai">ताई भाषा</language>
 			<language type="te">तेलेगु</language>
+			<language type="tem">टिम्ने</language>
+			<language type="ter">तेरेनो</language>
+			<language type="tet">तेतुम</language>
 			<language type="tg">ताजिक्</language>
 			<language type="th">थाई</language>
 			<language type="ti">तिग्रीन्या</language>
+			<language type="tig">टाइग्रे</language>
+			<language type="tiv">तिव</language>
 			<language type="tk">तुक्रमेन</language>
+			<language type="tkl">तोकेलाऊ</language>
 			<language type="tl">तागालोग</language>
 			<language type="tlh">क्लिंगन</language>
+			<language type="tli">त्लिंगित</language>
+			<language type="tmh">तामाशेक</language>
 			<language type="tn">सेत्स्वाना</language>
 			<language type="to">टोंगा</language>
+			<language type="tog">न्यासा टोन्गा</language>
+			<language type="tpi">टोक पिसिन</language>
 			<language type="tr">तुर्की</language>
 			<language type="ts">सोंगा</language>
+			<language type="tsi">त्सिमीशियन</language>
 			<language type="tt">टाटर</language>
+			<language type="tum">तम्बूका</language>
+			<language type="tup">ट्यूपी भाषा</language>
+			<language type="tut">अल्तैक भाषा</language>
+			<language type="tvl">तुवालु</language>
 			<language type="tw">ट्वी</language>
+			<language type="ty">ताहितियन</language>
+			<language type="tyv">तुवीनियन</language>
+			<language type="udm">उदमुर्त</language>
 			<language type="ug">उईघुर</language>
+			<language type="uga">युगैरिटिक</language>
 			<language type="uk">यूक्रेनी</language>
+			<language type="umb">उम्बुन्डु</language>
 			<language type="und">अज्ञात या अवैध भाषा</language>
 			<language type="ur">उर्दू</language>
 			<language type="uz">उज़्बेक</language>
+			<language type="vai">वाई</language>
+			<language type="ve">वेन्दा</language>
 			<language type="vi">वियेतनामी</language>
 			<language type="vo">वोलापुक</language>
+			<language type="vot">वॉटिक</language>
+			<language type="wa">वाल्लून</language>
+			<language type="wak">वाकाशन भाषा</language>
+			<language type="wal">वलामो</language>
+			<language type="war">वारै</language>
+			<language type="was">वाशो</language>
+			<language type="wen">सॉर्बियन भाषा</language>
 			<language type="wo">वोलोफ</language>
+			<language type="xal">काल्मिक</language>
 			<language type="xh">षोसा</language>
+			<language type="yao">याओ</language>
+			<language type="yap">यापीस</language>
 			<language type="yi">येहुदी</language>
 			<language type="yo">योरूबा</language>
+			<language type="ypk">यूपिक भाषा</language>
 			<language type="za">ज़ुआंग</language>
+			<language type="zap">ज़ेपोटेक</language>
+			<language type="zbl">ब्लिसिम्बॉल्स</language>
+			<language type="zen">ज़ेनान्गा</language>
 			<language type="zh">चीनी</language>
 			<language type="zh_Hans">चीनी (सरलीकृत)</language>
 			<language type="zh_Hant">चीनी (पारम्परिक)</language>
+			<language type="znd">ज़न्डे</language>
 			<language type="zu">ज़ुलू</language>
+			<language type="zun">ज़ूनी</language>
+			<language type="zxx">कोई लिंग्विस्ट सामग्री नहीं</language>
+			<language type="zza">ज़ाज़ा</language>
 		</languages>
 		<scripts>
 			<script type="Arab">अरबी</script>
-			<script type="Armi">अर्मी</script>
+			<script type="Armi">इम्पिरियल आर्मेनिक</script>
 			<script type="Armn">अर्मेनियाई</script>
 			<script type="Avst">अवेस्तन</script>
 			<script type="Bali">बाली</script>
 			<script type="Batk">बटकी</script>
 			<script type="Beng">बंगाली</script>
-			<script type="Brah">ब्रह्ममी</script>
+			<script type="Blis">ब्लिसिम्बॉल्स</script>
+			<script type="Bopo">बोपोमोफो</script>
+			<script type="Brah">ब्रह्मी</script>
 			<script type="Brai">ब्रेल</script>
+			<script type="Bugi">बगिनीस</script>
+			<script type="Buhd">बुहिद</script>
+			<script type="Cakm">चकमा</script>
+			<script type="Cans">युनिफाइड कैनेडियन एबोरिजनल सिलेबिक्स</script>
+			<script type="Cari">करैन</script>
+			<script type="Cham">चाम</script>
 			<script type="Cher">चिरूकी</script>
-			<script type="Cirt">सिर्थ</script>
+			<script type="Cirt">किर्थ</script>
+			<script type="Copt">कॉप्टिक</script>
+			<script type="Cprt">काइप्रायट</script>
 			<script type="Cyrl">सिरिलिक</script>
+			<script type="Cyrs">ओल्ड चर्च स्लावोनिक सिरिलिक</script>
 			<script type="Deva">देवनागरी</script>
+			<script type="Dsrt">डेसरेट</script>
+			<script type="Egyd">इजिप्शियन डेमोटिक</script>
+			<script type="Egyh">इजिप्शियन हाइरेटिक</script>
+			<script type="Egyp">इजिप्शियन हाइरोग्लिफ्स</script>
 			<script type="Ethi">ईथोपियाई</script>
+			<script type="Geok">जॉर्जियन खुतसुरी</script>
+			<script type="Geor">जॉर्जियन</script>
+			<script type="Glag">ग्लेगोलिटिक</script>
+			<script type="Goth">गोथिक</script>
 			<script type="Grek">ग्रीक</script>
 			<script type="Gujr">गुजराती</script>
 			<script type="Guru">गुरमुखी</script>
 			<script type="Hang">हंगुल</script>
 			<script type="Hani">हन</script>
+			<script type="Hano">हनुनू</script>
 			<script type="Hans">सरलीकृत हन</script>
 			<script type="Hant">पारम्परिक हन</script>
 			<script type="Hebr">हिब्रू</script>
 			<script type="Hira">हीरागाना</script>
+			<script type="Hmng">पाहो ह्मोन्ग</script>
+			<script type="Hrkt">कचाकना और हिरागना</script>
+			<script type="Hung">ऑल्ड हंगेरियन</script>
 			<script type="Inds">सिन्धु</script>
 			<script type="Ital">पुरानी इटली</script>
 			<script type="Java">जावानीस</script>
 			<script type="Jpan">जापानी</script>
+			<script type="Kali">कायाह ली</script>
+			<script type="Kana">कटाकना</script>
+			<script type="Khar">खारोशथी</script>
 			<script type="Khmr">खमेर</script>
 			<script type="Knda">कन्नड़</script>
 			<script type="Kore">कोरियाई</script>
+			<script type="Kthi">कैथी</script>
 			<script type="Lana">लाना</script>
 			<script type="Laoo">लाओ</script>
 			<script type="Latf">फ्रैकतुर लैटिन</script>
+			<script type="Latg">गैलिक लेटिन</script>
 			<script type="Latn">लाटिन</script>
 			<script type="Lepc">लेपचा</script>
 			<script type="Limb">लिम्बू</script>
+			<script type="Lina">लीनियर A</script>
+			<script type="Linb">लीनियर बी</script>
+			<script type="Lyci">लिशियन</script>
+			<script type="Lydi">लिडियन</script>
+			<script type="Mand">मनडेन</script>
+			<script type="Mani">मनीशीन</script>
+			<script type="Maya">मयान हाइरोग्लिफ्स</script>
+			<script type="Mero">मेरोइटिक</script>
 			<script type="Mlym">मलयालम</script>
 			<script type="Mong">मंगोलियाई</script>
-			<script type="Moon">चाँद</script>
+			<script type="Moon">मून</script>
+			<script type="Mtei">मेइतेइ मायेक</script>
 			<script type="Mymr">म्यांमार</script>
-			<script type="Nkoo">एन् को</script>
+			<script type="Nkoo">एन्'को</script>
 			<script type="Ogam">ओगम</script>
+			<script type="Olck">ऑल चिकी</script>
 			<script type="Orkh">ओरखोन</script>
 			<script type="Orya">उडिया</script>
+			<script type="Osma">ओस्मान्या</script>
+			<script type="Perm">ओल्ड परमिक</script>
+			<script type="Phag">फाग्स-पा</script>
+			<script type="Phli">इंस्क्रिपश्नल पाहलवी</script>
+			<script type="Phlp">सॉल्टर पाहलवी</script>
+			<script type="Phlv">बुक पाहलवी</script>
+			<script type="Phnx">फोनिशियन</script>
+			<script type="Plrd">पॉलार्ड फोनेटिक</script>
+			<script type="Prti">इंस्क्रिपश्नल पार्थियन</script>
 			<script type="Qaai">विरासत</script>
+			<script type="Rjng">रीजांग</script>
+			<script type="Roro">रोन्गोरोन्गो</script>
 			<script type="Runr">रूनिक</script>
+			<script type="Samr">समरिटन</script>
 			<script type="Sara">सराती</script>
 			<script type="Saur">सौराष्ट्र</script>
 			<script type="Sgnw">सांकेतिक लेख</script>
+			<script type="Shaw">शावियान</script>
 			<script type="Sinh">सिहंली</script>
 			<script type="Sund">सूडानी</script>
+			<script type="Sylo">सिलोती नागरी</script>
+			<script type="Syrc">सिरियेक</script>
+			<script type="Syre">एस्त्रेन्जेलो सिरिएक</script>
+			<script type="Syrj">पश्चिम सिरिएक</script>
+			<script type="Syrn">पूर्व सिरिएक</script>
+			<script type="Tagb">तगबन्वा</script>
 			<script type="Tale">ताई ली</script>
-			<script type="Talu">नया ताई लुए</script>
+			<script type="Talu">नया ताई लु</script>
 			<script type="Taml">तमिल</script>
+			<script type="Tavt">ताई विएत</script>
 			<script type="Telu">तेलुगू</script>
+			<script type="Teng">तेन्गवार</script>
+			<script type="Tfng">तिफिनाघ</script>
 			<script type="Tglg">टैगालोग</script>
 			<script type="Thaa">थाना</script>
 			<script type="Thai">थाई</script>
 			<script type="Tibt">तिब्बती</script>
+			<script type="Ugar">युगारिटिक</script>
 			<script type="Vaii">वाई</script>
+			<script type="Visp">विसिबल स्पीच</script>
 			<script type="Xpeo">पुरानी फारसी</script>
+			<script type="Xsux">सुमेरो अक्कादियन सुनिफॉर्म</script>
 			<script type="Yiii">यी</script>
+			<script type="Zmth">गणितीय संकेतन</script>
+			<script type="Zsym">चिन्ह</script>
 			<script type="Zxxx">अलिखित</script>
 			<script type="Zyyy">आम</script>
 			<script type="Zzzz">अज्ञात या अवैध लिपि</script>
@@ -317,6 +668,8 @@
 			<territory type="035">दक्षिण-पूर्व एशिया</territory>
 			<territory type="039">दक्षिणी यूरोप</territory>
 			<territory type="053">ऑस्ट्रेलिया एवं न्यूजीलैंड</territory>
+			<territory type="054">मेलानेशिया</territory>
+			<territory type="057">माइक्रोनेशियन रीजन</territory>
 			<territory type="061">पोलीनेशिया</territory>
 			<territory type="062">दक्षिण-मध्य एशिया</territory>
 			<territory type="142">एशिया</territory>
@@ -326,9 +679,13 @@
 			<territory type="151">पूर्वी यूरोप</territory>
 			<territory type="154">उत्तरी यूरोप</territory>
 			<territory type="155">पश्चिमी यूरोप्</territory>
+			<territory type="172">कॉमनवेल्थ ऑफ इंडिपेंडेंट स्टेट्स</territory>
+			<territory type="200">चेकोस्लवाकिया</territory>
+			<territory type="419">लेटिन अमेरिका और कैरिबियन</territory>
+			<territory type="830">चैनल द्वीपसमूह</territory>
 			<territory type="AD">अन्डोरा</territory>
 			<territory type="AE">संयुक्त अरब अमीरात</territory>
-			<territory type="AF">अफगानिस्तान</territory>
+			<territory type="AF">अफ़गानिस्तान</territory>
 			<territory type="AG">एंटिगुआ और बरबुडा</territory>
 			<territory type="AI">एंगुइला</territory>
 			<territory type="AL">अल्बानिया</territory>
@@ -341,17 +698,18 @@
 			<territory type="AT">ऑस्ट्रिया</territory>
 			<territory type="AU">ऑस्ट्रेलिया</territory>
 			<territory type="AW">अरूबा</territory>
-			<territory type="AX">आलैंड द्वीप</territory>
-			<territory type="AZ">अजरबैजान</territory>
+			<territory type="AX">एलैंड द्वीपसमूह</territory>
+			<territory type="AZ">अज़रबैजान</territory>
 			<territory type="BA">बोस्निया और हर्ज़िगोविना</territory>
 			<territory type="BB">बारबाडोस</territory>
-			<territory type="BD">बाँग्लादेश</territory>
+			<territory type="BD">बांग्लादेश</territory>
 			<territory type="BE">बेल्जियम</territory>
 			<territory type="BF">बुर्किना फ़ासो</territory>
 			<territory type="BG">बुल्गारिया</territory>
-			<territory type="BH">बहरीन</territory>
+			<territory type="BH">बाहरेन</territory>
 			<territory type="BI">बुरुंडी</territory>
 			<territory type="BJ">बेनिन</territory>
+			<territory type="BL">सेंट बार्थेलेमी</territory>
 			<territory type="BM">बरमूडा</territory>
 			<territory type="BN">ब्रुनेई</territory>
 			<territory type="BO">बोलीविया</territory>
@@ -369,7 +727,7 @@
 			<territory type="CG">कांगो</territory>
 			<territory type="CH">स्विस</territory>
 			<territory type="CI">आईवरी कोस्ट</territory>
-			<territory type="CK">कुक द्वीप</territory>
+			<territory type="CK">कुक द्वीपसमूह</territory>
 			<territory type="CL">चिली</territory>
 			<territory type="CM">कैमरून</territory>
 			<territory type="CN">चीन</territory>
@@ -414,12 +772,12 @@
 			<territory type="GP">ग्वाडेलोप</territory>
 			<territory type="GQ">इक्वेटोरियल गिनी</territory>
 			<territory type="GR">ग्रीस</territory>
-			<territory type="GS">दक्षिण जोर्जिया और दक्षिण सैंडवीच द्वीप</territory>
+			<territory type="GS">दक्षिण जोर्जिया और दक्षिण सैंडविच द्वीपसमूह</territory>
 			<territory type="GT">गोतेदाला</territory>
 			<territory type="GU">गुआम</territory>
 			<territory type="GW">गीनी-बिसाउ</territory>
 			<territory type="GY">गुयाना</territory>
-			<territory type="HK">हाँग काँग</territory>
+			<territory type="HK">हांगकांग विशेष प्रशासनिक क्षेत्र चीन</territory>
 			<territory type="HM">हर्ड द्वीप और मैकडोनॉल्ड द्वीप</territory>
 			<territory type="HN">हाण्डूरस</territory>
 			<territory type="HR">क्रोशिया</territory>
@@ -428,6 +786,7 @@
 			<territory type="ID">इंडोनेशिया</territory>
 			<territory type="IE">आयरलैंड</territory>
 			<territory type="IL">इसराइल</territory>
+			<territory type="IM">आइल ऑफ मैन</territory>
 			<territory type="IN">भारत</territory>
 			<territory type="IO">ब्रिटिश हिंद महासागरीय क्षेत्र</territory>
 			<territory type="IQ">इराक</territory>
@@ -439,7 +798,7 @@
 			<territory type="JO">जोर्डन</territory>
 			<territory type="JP">जापान</territory>
 			<territory type="KE">केन्या</territory>
-			<territory type="KG">किर्गिज</territory>
+			<territory type="KG">किर्गिज़तान</territory>
 			<territory type="KH">कम्बोडिया</territory>
 			<territory type="KI">किरिबाती</territory>
 			<territory type="KM">कोमोरोस</territory>
@@ -447,7 +806,7 @@
 			<territory type="KP">उत्तर कोरिया</territory>
 			<territory type="KR">दक्षिण कोरिया</territory>
 			<territory type="KW">कुवैत</territory>
-			<territory type="KY">केमैन द्वीप</territory>
+			<territory type="KY">केमैन द्वीपसमूह</territory>
 			<territory type="KZ">कजाखस्तान</territory>
 			<territory type="LA">लाओस</territory>
 			<territory type="LB">लेबनान</territory>
@@ -464,20 +823,20 @@
 			<territory type="MC">मोनाको</territory>
 			<territory type="MD">मोल्डाविया</territory>
 			<territory type="ME">मोंटेनेग्रो</territory>
-			<territory type="MF">संत मार्टीन</territory>
-			<territory type="MG">मदागास्कर</territory>
+			<territory type="MF">सेंट मार्टिन</territory>
+			<territory type="MG">मैडागास्कर</territory>
 			<territory type="MH">मार्शल द्वीप</territory>
 			<territory type="MK">मैसेडोनिया</territory>
 			<territory type="ML">माली</territory>
 			<territory type="MM">म्यानमार</territory>
 			<territory type="MN">मंगोलिया</territory>
-			<territory type="MO">मकाओ</territory>
-			<territory type="MP">उत्तरी मारियाना द्वीप</territory>
+			<territory type="MO">मकाओ चीन</territory>
+			<territory type="MP">नॉर्दन मारियाना द्वीपसमूह</territory>
 			<territory type="MQ">मार्टीनिक</territory>
 			<territory type="MR">मॉरिटानिया</territory>
 			<territory type="MS">मॉन्ट्सेराट</territory>
 			<territory type="MT">माल्टा</territory>
-			<territory type="MU">मौरिस</territory>
+			<territory type="MU">मॉरिशस</territory>
 			<territory type="MV">मालदीव</territory>
 			<territory type="MW">मलावी</territory>
 			<territory type="MX">मेक्सिको</territory>
@@ -486,13 +845,13 @@
 			<territory type="NA">नामीबिया</territory>
 			<territory type="NC">न्यू कैलेडोनिया</territory>
 			<territory type="NE">नाइजर</territory>
-			<territory type="NF">नॉरफ़ॉक आइलैंड</territory>
+			<territory type="NF">नॉरफ़ॉक द्वीप</territory>
 			<territory type="NG">नाइजीरिया</territory>
 			<territory type="NI">निकारागुआ</territory>
 			<territory type="NL">नीदरलैण्ड</territory>
 			<territory type="NO">नॉर्वे</territory>
 			<territory type="NP">नेपाल</territory>
-			<territory type="NR">नॉरू</territory>
+			<territory type="NR">नाउरु</territory>
 			<territory type="NU">नीयू</territory>
 			<territory type="NZ">न्यूज़ीलैंड</territory>
 			<territory type="OM">ओमान</territory>
@@ -503,14 +862,15 @@
 			<territory type="PH">फिलीपिंस</territory>
 			<territory type="PK">पाकिस्तान</territory>
 			<territory type="PL">पोलैंड</territory>
-			<territory type="PM">सेण्‍ट पीयर और मि‍क्‍वेलोन</territory>
-			<territory type="PN">पिटकेर्न</territory>
+			<territory type="PM">सेंट पिएरे और मिक्वेलन</territory>
+			<territory type="PN">पिटकैर्न</territory>
 			<territory type="PR">पर्टो रीको</territory>
 			<territory type="PS">फ़िलिस्तीन</territory>
 			<territory type="PT">पुर्तगाल</territory>
 			<territory type="PW">पलाऊ</territory>
 			<territory type="PY">पारागुए</territory>
 			<territory type="QA">कतर</territory>
+			<territory type="QO">आउटलाइंग ओशिनिया</territory>
 			<territory type="QU">यूरोपीय संघ</territory>
 			<territory type="RE">रियूनियन</territory>
 			<territory type="RO">रोमानिया</territory>
@@ -523,9 +883,9 @@
 			<territory type="SD">सूडान</territory>
 			<territory type="SE">स्वीडन</territory>
 			<territory type="SG">सिंगापुर</territory>
-			<territory type="SH">सेण्‍ट हेलेना</territory>
+			<territory type="SH">सेंट हेलेना</territory>
 			<territory type="SI">स्लोवेनिया</territory>
-			<territory type="SJ">स्वाल्बार्ड और जॅन मेयन</territory>
+			<territory type="SJ">स्वालबर्ड और जान मायेन</territory>
 			<territory type="SK">स्लोवाकिया</territory>
 			<territory type="SL">सियरालेओन</territory>
 			<territory type="SM">सैन मेरीनो</territory>
@@ -542,27 +902,27 @@
 			<territory type="TG">टोगो</territory>
 			<territory type="TH">थाइलैंड</territory>
 			<territory type="TJ">ताजिकिस्तान</territory>
-			<territory type="TK">टोकेलौ</territory>
+			<territory type="TK">तोकेलाउ</territory>
 			<territory type="TL">पूर्वी तिमोर</territory>
 			<territory type="TM">तुर्कमेनिस्तान</territory>
 			<territory type="TN">तुनिशिया</territory>
 			<territory type="TO">टोंगा</territory>
 			<territory type="TR">तुर्की</territory>
-			<territory type="TT">ट्रिनिडाड और टोबैगो</territory>
+			<territory type="TT">त्रिनिडाड और टोबैगो</territory>
 			<territory type="TV">तुवालु</territory>
 			<territory type="TW">ताइवान</territory>
-			<territory type="TZ">तंजानिया</territory>
+			<territory type="TZ">तंजा़निया</territory>
 			<territory type="UA">यूक्रेन</territory>
 			<territory type="UG">युगांडा</territory>
-			<territory type="UM">युनाइटेड स्टेट्स छोटे आउटलाइंग द्वीप</territory>
-			<territory type="US">संयुक्त राज्य अमरिका</territory>
+			<territory type="UM">युनाइटेड स्टेट्स माइनर आउटलाइंग द्वीपसमूह</territory>
+			<territory type="US">संयुक्त राज्य अमेरिका</territory>
 			<territory type="UY">युरूगुए</territory>
 			<territory type="UZ">उजबेकिस्तान</territory>
 			<territory type="VA">वैटिकन</territory>
-			<territory type="VC">सेंट विंसेंट और द ग्रेनाडाइन्स</territory>
+			<territory type="VC">सेंट विनसेंट एंड ग्रेनाडाइन्स</territory>
 			<territory type="VE">वेनेजुएला</territory>
-			<territory type="VG">ब्रिटिश वर्जीन ऌईलैंडस्</territory>
-			<territory type="VI">ईउ, एस वर्जीन आईलैंडस्</territory>
+			<territory type="VG">ब्रिटिश वर्जिन द्वीपसमूह</territory>
+			<territory type="VI">अमेरिकी वर्जिन टापू</territory>
 			<territory type="VN">वियतनाम</territory>
 			<territory type="VU">वानुअतु</territory>
 			<territory type="WF">वालिस और फ़्यूचूना</territory>
@@ -572,7 +932,7 @@
 			<territory type="ZA">दक्षिण अफ्रीका</territory>
 			<territory type="ZM">जाम्बिया</territory>
 			<territory type="ZW">जिम्बाब्वे</territory>
-			<territory type="ZZ">अज्ञात या अवैध प्रदेश</territory>
+			<territory type="ZZ">अज्ञात या अवैध क्षेत्र</territory>
 		</territories>
 		<variants>
 			<variant type="1901">पारम्पारिक जर्मन वर्तनी</variant>
@@ -615,6 +975,7 @@
 	<characters>
 		<exemplarCharacters>[ॐ ०-९ अ-ऍ ए-ऑ ओ-न प-र ल ळ व-ह ़ ँ-ः ऽ ् ा-ॅ े-ॉ ो ौ]</exemplarCharacters>
 		<exemplarCharacters type="auxiliary">[\u200C \u200D]</exemplarCharacters>
+		<exemplarCharacters type="currencySymbol">[a-c č d-l ł m-o º p-z]</exemplarCharacters>
 	</characters>
 	<delimiters>
 		<quotationStart>'</quotationStart>
@@ -662,6 +1023,9 @@
 							<month type="11">नवम्बर</month>
 							<month type="12">दिसम्बर</month>
 						</monthWidth>
+						<monthWidth type="narrow">
+							<month type="1">ज</month>
+						</monthWidth>
 						<monthWidth type="wide">
 							<month type="1">जनवरी</month>
 							<month type="2">फरवरी</month>
@@ -679,18 +1043,18 @@
 					</monthContext>
 					<monthContext type="stand-alone">
 						<monthWidth type="narrow">
-							<month type="1">1</month>
-							<month type="2">2</month>
-							<month type="3">3</month>
-							<month type="4">4</month>
-							<month type="5">5</month>
-							<month type="6">6</month>
-							<month type="7">7</month>
-							<month type="8">8</month>
-							<month type="9">9</month>
-							<month type="10">10</month>
-							<month type="11">11</month>
-							<month type="12">12</month>
+							<month type="1">ज</month>
+							<month type="2">फ़</month>
+							<month type="3">मा</month>
+							<month type="4">अ</month>
+							<month type="5">म</month>
+							<month type="6">जू</month>
+							<month type="7">जु</month>
+							<month type="8">अ</month>
+							<month type="9">सि</month>
+							<month type="10">अ</month>
+							<month type="11">न</month>
+							<month type="12">दि</month>
 						</monthWidth>
 					</monthContext>
 				</months>
@@ -718,19 +1082,19 @@
 					<dayContext type="stand-alone">
 						<dayWidth type="narrow">
 							<day type="sun">र</day>
-							<day type="mon">2</day>
+							<day type="mon">सो</day>
 							<day type="tue">मं</day>
-							<day type="wed">4</day>
+							<day type="wed">बु</day>
 							<day type="thu">गु</day>
-							<day type="fri">6</day>
-							<day type="sat">7</day>
+							<day type="fri">शु</day>
+							<day type="sat">श</day>
 						</dayWidth>
 					</dayContext>
 				</days>
 				<quarters>
 					<quarterContext type="format">
 						<quarterWidth type="abbreviated">
-							<quarter type="2">Q2</quarter>
+							<quarter type="2">द्वितीय चौथाई</quarter>
 						</quarterWidth>
 						<quarterWidth type="wide">
 							<quarter type="1">प्रथम चौथाई</quarter>
@@ -749,8 +1113,8 @@
 						</quarterWidth>
 					</quarterContext>
 				</quarters>
-				<am>पूर्वाह्न</am>
-				<pm>अपराह्न</pm>
+				<am>AM</am>
+				<pm>PM</pm>
 				<eras>
 					<eraAbbr>
 						<era type="0">ईसापूर्व</era>
@@ -760,12 +1124,12 @@
 				<dateFormats>
 					<dateFormatLength type="full">
 						<dateFormat>
-							<pattern>EEEE d MMMM yyyy</pattern>
+							<pattern>EEEE, d MMMM y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="long">
 						<dateFormat>
-							<pattern>d MMMM yyyy</pattern>
+							<pattern>d MMMM y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="medium">
@@ -782,7 +1146,7 @@
 				<timeFormats>
 					<timeFormatLength type="full">
 						<timeFormat>
-							<pattern>h:mm:ss a v</pattern>
+							<pattern>h:mm:ss a zzzz</pattern>
 						</timeFormat>
 					</timeFormatLength>
 					<timeFormatLength type="long">
@@ -802,39 +1166,34 @@
 					</timeFormatLength>
 				</timeFormats>
 				<dateTimeFormats>
-					<dateTimeFormatLength>
-						<dateTimeFormat>
-							<pattern>{1} {0}</pattern>
-						</dateTimeFormat>
-					</dateTimeFormatLength>
 					<availableFormats>
 						<dateFormatItem id="GGGGyMMMMEEEEdd">EEEE,dd MMMM GGGGy</dateFormatItem>
 						<dateFormatItem id="HHmm">HH:mm</dateFormatItem>
 						<dateFormatItem id="HHmmss">HH:mm:ss</dateFormatItem>
 						<dateFormatItem id="Hm">H:mm</dateFormatItem>
-						<dateFormatItem id="MEd">E, M-d</dateFormatItem>
-						<dateFormatItem id="MMMEd">E MMM d</dateFormatItem>
-						<dateFormatItem id="MMMMEd">E MMMM d</dateFormatItem>
+						<dateFormatItem id="MEd">E, d/M</dateFormatItem>
+						<dateFormatItem id="MMMEd">E, d MMM</dateFormatItem>
+						<dateFormatItem id="MMMMEd">E, d MMMM</dateFormatItem>
 						<dateFormatItem id="MMMMd">d MMMM</dateFormatItem>
-						<dateFormatItem id="MMMd">MMM d</dateFormatItem>
-						<dateFormatItem id="MMMdd">MMM dd</dateFormatItem>
+						<dateFormatItem id="MMMd">d MMM</dateFormatItem>
+						<dateFormatItem id="MMMdd">dd MMM</dateFormatItem>
 						<dateFormatItem id="MMdd">dd-MM</dateFormatItem>
-						<dateFormatItem id="Md">M-d</dateFormatItem>
+						<dateFormatItem id="Md">d/M</dateFormatItem>
 						<dateFormatItem id="d">d</dateFormatItem>
 						<dateFormatItem id="hhmm">hh:mm a</dateFormatItem>
 						<dateFormatItem id="hhmmss">hh:mm:ss a</dateFormatItem>
 						<dateFormatItem id="ms">mm:ss</dateFormatItem>
-						<dateFormatItem id="y">yyyy</dateFormatItem>
-						<dateFormatItem id="yM">yyyy-M</dateFormatItem>
-						<dateFormatItem id="yMMM">yyyy MMM</dateFormatItem>
-						<dateFormatItem id="yMMMEd">EEE, yyyy MMM d</dateFormatItem>
-						<dateFormatItem id="yQ">yyyy Q</dateFormatItem>
-						<dateFormatItem id="yyMMMEEEd">EEE, MMM d, yy</dateFormatItem>
-						<dateFormatItem id="yyMMMd">MMM d, yy</dateFormatItem>
+						<dateFormatItem id="y">y</dateFormatItem>
+						<dateFormatItem id="yM">M-y</dateFormatItem>
+						<dateFormatItem id="yMMM">MMM y</dateFormatItem>
+						<dateFormatItem id="yMMMEd">EEE, d MMM y</dateFormatItem>
+						<dateFormatItem id="yQ">y Q</dateFormatItem>
+						<dateFormatItem id="yyMMMEEEd">EEE, d MMM yy</dateFormatItem>
+						<dateFormatItem id="yyMMMd">d MMM, yy</dateFormatItem>
 						<dateFormatItem id="yyMMdd">dd-MM-yy</dateFormatItem>
 						<dateFormatItem id="yyQ">Q yy</dateFormatItem>
 						<dateFormatItem id="yyyyMM">MM-yyyy</dateFormatItem>
-						<dateFormatItem id="yyyyMMMM">MMMM yyyy</dateFormatItem>
+						<dateFormatItem id="yyyyMMMM">MMMM y</dateFormatItem>
 					</availableFormats>
 				</dateTimeFormats>
 				<fields>
@@ -852,12 +1211,12 @@
 					</field>
 					<field type="day">
 						<displayName>दिन</displayName>
+						<relative type="-1">Yesterday</relative>
 						<relative type="0">Today</relative>
 						<relative type="1">Tomorrow</relative>
-						<relative type="-1">Yesterday</relative>
 					</field>
 					<field type="weekday">
-						<displayName>दिन सप्ताह का</displayName>
+						<displayName>सप्ताह का दिन</displayName>
 					</field>
 					<field type="hour">
 						<displayName>घंटा</displayName>
@@ -881,7 +1240,11 @@
 							<month type="2">वैशाख</month>
 							<month type="3">ज्येष्ठ</month>
 							<month type="4">असध</month>
+							<month type="5">श्रावण</month>
+							<month type="6">भाद्र</month>
+							<month type="7">अश्विन</month>
 							<month type="8">कार्तिक</month>
+							<month type="9">अग्रायण</month>
 							<month type="10">पौष</month>
 							<month type="11">माघ</month>
 							<month type="12">फाल्गुन</month>
@@ -891,29 +1254,11 @@
 							<month type="2">वैशाख</month>
 							<month type="3">ज्येष्ठ</month>
 							<month type="4">असध</month>
-							<month type="5">श्रवण</month>
-							<month type="6">भद्र</month>
+							<month type="5">श्रावण</month>
+							<month type="6">भाद्रपद</month>
 							<month type="7">अश्विन</month>
 							<month type="8">कार्तिक</month>
 							<month type="9">अग्रायण</month>
-							<month type="10">पौष</month>
-							<month type="11">माघ</month>
-							<month type="12">फाल्गुन</month>
-						</monthWidth>
-					</monthContext>
-					<monthContext type="stand-alone">
-						<monthWidth type="abbreviated">
-							<month type="4">असाढ़</month>
-							<month type="5">श्रावण</month>
-							<month type="6">भाद्र</month>
-							<month type="7">आश्विन</month>
-							<month type="9">अग्रहण</month>
-						</monthWidth>
-						<monthWidth type="wide">
-							<month type="1">चैत्र</month>
-							<month type="2">वैशाख</month>
-							<month type="3">ज्येष्ठ</month>
-							<month type="8">कार्तिक</month>
 							<month type="10">पौष</month>
 							<month type="11">माघ</month>
 							<month type="12">फाल्गुन</month>
@@ -1050,7 +1395,7 @@
 						<era type="81">होआन</era>
 						<era type="82">तेंजी</era>
 						<era type="83">दाईजी</era>
-						<era type="84">टेंशो</era>
+						<era type="84">टेंशो</era>
 						<era type="85">चोशो</era>
 						<era type="86">होएन</era>
 						<era type="87">ईजी</era>
@@ -1081,7 +1426,7 @@
 						<era type="113">शोगेन</era>
 						<era type="114">केंर्याकू</era>
 						<era type="115">केंपो</era>
-						<era type="116">शोक्य¯ू</era>
+						<era type="116">शोक्यू</era>
 						<era type="117">जू</era>
 						<era type="118">जेन्निन</era>
 						<era type="119">कोरोकू</era>
@@ -1612,7 +1957,7 @@
 				<exemplarCity>एडिलेड</exemplarCity>
 			</zone>
 			<zone type="Australia/Broken_Hill">
-				<exemplarCity>ब्रोकन हिल्स</exemplarCity>
+				<exemplarCity>ब्रोकन हिल</exemplarCity>
 			</zone>
 			<zone type="Australia/Currie">
 				<exemplarCity>क्यूरी</exemplarCity>
@@ -1630,7 +1975,7 @@
 				<exemplarCity>सिडनी</exemplarCity>
 			</zone>
 			<zone type="Australia/Brisbane">
-				<exemplarCity>बिर्स्बेन</exemplarCity>
+				<exemplarCity>ब्रिसबेन</exemplarCity>
 			</zone>
 			<zone type="Australia/Lord_Howe">
 				<exemplarCity>लोर्ड होवे</exemplarCity>
@@ -1675,7 +2020,7 @@
 				<exemplarCity>ला पाज़</exemplarCity>
 			</zone>
 			<zone type="America/Eirunepe">
-				<exemplarCity>ईरोंपे</exemplarCity>
+				<exemplarCity>ईरुनेपे</exemplarCity>
 			</zone>
 			<zone type="America/Rio_Branco">
 				<exemplarCity>रियो ब्रान्को</exemplarCity>
@@ -1699,7 +2044,7 @@
 				<exemplarCity>बेलेम</exemplarCity>
 			</zone>
 			<zone type="America/Araguaina">
-				<exemplarCity>अरग्वैना</exemplarCity>
+				<exemplarCity>ऐरेग्वेना</exemplarCity>
 			</zone>
 			<zone type="America/Sao_Paulo">
 				<exemplarCity>साओ पॉलो</exemplarCity>
@@ -1735,7 +2080,7 @@
 				<exemplarCity>बेलिज़े</exemplarCity>
 			</zone>
 			<zone type="America/Dawson">
-				<exemplarCity>डोसन</exemplarCity>
+				<exemplarCity>डौसन</exemplarCity>
 			</zone>
 			<zone type="America/Whitehorse">
 				<exemplarCity>व्हाईटहोर्स</exemplarCity>
@@ -1747,7 +2092,7 @@
 				<exemplarCity>वांकूवर</exemplarCity>
 			</zone>
 			<zone type="America/Dawson_Creek">
-				<exemplarCity>डोसन क्रिक</exemplarCity>
+				<exemplarCity>डौसन क्रिक</exemplarCity>
 			</zone>
 			<zone type="America/Yellowknife">
 				<exemplarCity>येलोनाईफ</exemplarCity>
@@ -1759,7 +2104,7 @@
 				<exemplarCity>स्विफ्ट करंट</exemplarCity>
 			</zone>
 			<zone type="America/Cambridge_Bay">
-				<exemplarCity>केम्ब्रिज खाडी</exemplarCity>
+				<exemplarCity>केम्ब्रिज खाड़ी</exemplarCity>
 			</zone>
 			<zone type="America/Regina">
 				<exemplarCity>रेजिना</exemplarCity>
@@ -1804,10 +2149,10 @@
 				<exemplarCity>हेलिफेक्स</exemplarCity>
 			</zone>
 			<zone type="America/Goose_Bay">
-				<exemplarCity>गूस खाडी</exemplarCity>
+				<exemplarCity>गूस खा़ड़ी</exemplarCity>
 			</zone>
 			<zone type="America/Glace_Bay">
-				<exemplarCity>ग्लेस खाडी</exemplarCity>
+				<exemplarCity>ग्लेस खा़ड़ी</exemplarCity>
 			</zone>
 			<zone type="America/Blanc-Sablon">
 				<exemplarCity>ब्लांक-सेबलोन</exemplarCity>
@@ -1840,7 +2185,7 @@
 				<exemplarCity>रारोटोंगा</exemplarCity>
 			</zone>
 			<zone type="Pacific/Easter">
-				<exemplarCity>ईस्टर द्वीप (चिली)</exemplarCity>
+				<exemplarCity>ईस्टर</exemplarCity>
 			</zone>
 			<zone type="America/Santiago">
 				<exemplarCity>सेंटिएगो</exemplarCity>
@@ -1915,7 +2260,7 @@
 				<exemplarCity>असमेरा</exemplarCity>
 			</zone>
 			<zone type="Atlantic/Canary">
-				<exemplarCity>केनरी द्वीप</exemplarCity>
+				<exemplarCity>कैनेरी</exemplarCity>
 			</zone>
 			<zone type="Africa/Ceuta">
 				<exemplarCity>क्यूटा</exemplarCity>
@@ -2101,13 +2446,13 @@
 				<exemplarCity>केमन</exemplarCity>
 			</zone>
 			<zone type="Asia/Aqtau">
-				<exemplarCity>अक्ताव</exemplarCity>
+				<exemplarCity>अक्ताउ</exemplarCity>
 			</zone>
 			<zone type="Asia/Oral">
 				<exemplarCity>ओरल</exemplarCity>
 			</zone>
 			<zone type="Asia/Aqtobe">
-				<exemplarCity>अक़्टोवे</exemplarCity>
+				<exemplarCity>अक्टोब</exemplarCity>
 			</zone>
 			<zone type="Asia/Qyzylorda">
 				<exemplarCity>केज़ेलोर्डा</exemplarCity>
@@ -2212,7 +2557,7 @@
 				<exemplarCity>टिज्यूआना</exemplarCity>
 			</zone>
 			<zone type="America/Hermosillo">
-				<exemplarCity>हर्मोसिलो</exemplarCity>
+				<exemplarCity>हर्मोसिल्लो</exemplarCity>
 			</zone>
 			<zone type="America/Mazatlan">
 				<exemplarCity>म्जाटलान</exemplarCity>
@@ -2230,7 +2575,7 @@
 				<exemplarCity>मेरिडा</exemplarCity>
 			</zone>
 			<zone type="America/Cancun">
-				<exemplarCity>कनकन</exemplarCity>
+				<exemplarCity>कैन्कन</exemplarCity>
 			</zone>
 			<zone type="Asia/Kuala_Lumpur">
 				<exemplarCity>क्वाला लम्पुर</exemplarCity>
@@ -2347,7 +2692,7 @@
 				<exemplarCity>बुक्कारेस्ट</exemplarCity>
 			</zone>
 			<zone type="Europe/Kaliningrad">
-				<exemplarCity>कालिलींग्राड</exemplarCity>
+				<exemplarCity>कालिनिंग्राड</exemplarCity>
 			</zone>
 			<zone type="Europe/Moscow">
 				<exemplarCity>मॉस्को</exemplarCity>
@@ -2368,7 +2713,7 @@
 				<exemplarCity>नॉवोसिविर्स्क्</exemplarCity>
 			</zone>
 			<zone type="Asia/Krasnoyarsk">
-				<exemplarCity>क्राशनोयार्श्क</exemplarCity>
+				<exemplarCity>क्रास्नोयार्स्क</exemplarCity>
 			</zone>
 			<zone type="Asia/Irkutsk">
 				<exemplarCity>ईर्कुत्स्क</exemplarCity>
@@ -2389,7 +2734,7 @@
 				<exemplarCity>कमचटका</exemplarCity>
 			</zone>
 			<zone type="Asia/Anadyr">
-				<exemplarCity>अनाडेर</exemplarCity>
+				<exemplarCity>अनाडाइर</exemplarCity>
 			</zone>
 			<zone type="Africa/Kigali">
 				<exemplarCity>किगालि</exemplarCity>
@@ -2518,7 +2863,7 @@
 				<exemplarCity>नोम</exemplarCity>
 			</zone>
 			<zone type="Pacific/Honolulu">
-				<exemplarCity>हानूलुलु</exemplarCity>
+				<exemplarCity>हॉनॉलुलु</exemplarCity>
 			</zone>
 			<zone type="America/Anchorage">
 				<exemplarCity>अलास्का</exemplarCity>
@@ -2548,7 +2893,7 @@
 				<exemplarCity>न्यू सालेम</exemplarCity>
 			</zone>
 			<zone type="America/North_Dakota/Center">
-				<exemplarCity>मध्य</exemplarCity>
+				<exemplarCity>मध्य, उत्तरी दाकोता</exemplarCity>
 			</zone>
 			<zone type="America/Chicago">
 				<exemplarCity>शिकागो</exemplarCity>
@@ -2566,7 +2911,7 @@
 				<exemplarCity>टेल सिटी</exemplarCity>
 			</zone>
 			<zone type="America/Indiana/Knox">
-				<exemplarCity>नोक्स</exemplarCity>
+				<exemplarCity>नौक्स, इंडियाना</exemplarCity>
 			</zone>
 			<zone type="America/Indiana/Winamac">
 				<exemplarCity>विनामेक</exemplarCity>
@@ -2649,6 +2994,7 @@
 		</timeZoneNames>
 	</dates>
 	<numbers>
+		<defaultNumberingSystem>deva</defaultNumberingSystem>
 		<symbols>
 			<decimal>.</decimal>
 			<group>,</group>
@@ -2705,7 +3051,6 @@
 			</currency>
 			<currency type="AMD">
 				<displayName>अरमेनियाई दरम</displayName>
-				<symbol>दरम</symbol>
 			</currency>
 			<currency type="ARS">
 				<displayName>अर्जेण्टीनी पीसो</displayName>
@@ -2721,7 +3066,6 @@
 			</currency>
 			<currency type="BRL">
 				<displayName>रीयाल</displayName>
-				<symbol>रीयाल</symbol>
 			</currency>
 			<currency type="CAD">
 				<displayName>कनेडियन डॉलर</displayName>
@@ -2734,14 +3078,12 @@
 			</currency>
 			<currency type="CNY">
 				<displayName>युवान</displayName>
-				<symbol>युवान</symbol>
 			</currency>
 			<currency type="COP">
 				<displayName>कोलम्बियाई पीसो</displayName>
 			</currency>
 			<currency type="CSD">
 				<displayName>सर्बिय का ढीनार</displayName>
-				<symbol>स. ढीनार</symbol>
 			</currency>
 			<currency type="CYP">
 				<displayName>साईप्रस पाऊंड</displayName>
@@ -2769,7 +3111,6 @@
 			</currency>
 			<currency type="FJD">
 				<displayName>फ़िजी का डालर</displayName>
-				<symbol>फ़िजी का डालर</symbol>
 			</currency>
 			<currency type="FRF">
 				<displayName>फ़्रांसीसी फ़्रैंक</displayName>
@@ -2779,7 +3120,6 @@
 			</currency>
 			<currency type="HKD">
 				<displayName>हाँगकाँग डॉलर</displayName>
-				<symbol>हॉंगकॉंग डॉलर</symbol>
 			</currency>
 			<currency type="HRD">
 				<displayName>क्रोएशियन दिनार</displayName>
@@ -2797,7 +3137,7 @@
 				<displayName>इस्राइली शेकेल</displayName>
 			</currency>
 			<currency type="INR">
-				<displayName>भारतीय  रूपया</displayName>
+				<displayName>भारतीय रूपया</displayName>
 				<symbol>रु.</symbol>
 			</currency>
 			<currency type="IQD">
@@ -2867,7 +3207,7 @@
 				<displayName>पाकिस्तानी रुपया</displayName>
 			</currency>
 			<currency type="PLN">
-				<displayName>पोलिश नया ज़्लॉटी</displayName>
+				<displayName>पोलिश ज़्लॉटी</displayName>
 			</currency>
 			<currency type="RHD">
 				<displayName>रोडेशियाई डालर</displayName>
@@ -2880,7 +3220,6 @@
 			</currency>
 			<currency type="RUB">
 				<displayName>रूसी रूबल</displayName>
-				<symbol>रूबल</symbol>
 			</currency>
 			<currency type="RWF">
 				<displayName>रवांडाई फ्रैंक</displayName>
@@ -2959,7 +3298,6 @@
 			</currency>
 			<currency type="XXX">
 				<displayName>अज्ञात या अवैध मुद्रा</displayName>
-				<symbol>१२,३४५.६८ रुपये</symbol>
 			</currency>
 			<currency type="ZAR">
 				<displayName>दक्षिण अफ़्रीकी रॅण्ड</displayName>
@@ -2976,16 +3314,16 @@
 			<unitPattern count="other">{0} घंटे</unitPattern>
 		</unit>
 		<unit type="minute">
-			<unitPattern count="one">{0} मिन.</unitPattern>
-			<unitPattern count="other">{0} मिन.</unitPattern>
+			<unitPattern count="one">{0} मिनट</unitPattern>
+			<unitPattern count="other">{0} मिनट</unitPattern>
 		</unit>
 		<unit type="month">
 			<unitPattern count="one">{0} महीना</unitPattern>
 			<unitPattern count="other">{0} महीने</unitPattern>
 		</unit>
 		<unit type="second">
-			<unitPattern count="one">{0} सेकं.</unitPattern>
-			<unitPattern count="other">{0} सेकं.</unitPattern>
+			<unitPattern count="one">{0} सेकंड</unitPattern>
+			<unitPattern count="other">{0} सेकंड</unitPattern>
 		</unit>
 		<unit type="week">
 			<unitPattern count="one">{0} सप्ताह</unitPattern>
@@ -3003,3 +3341,4 @@
 		</messages>
 	</posix>
 </ldml>
+

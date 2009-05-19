@@ -1,20 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.37 $"/>
-		<generation date="$Date: 2008/05/28 15:49:27 $"/>
+		<version number="$Revision: 1.40 $"/>
+		<generation date="$Date: 2009/05/05 23:06:33 $"/>
 		<language type="aa"/>
 		<territory type="ER"/>
 	</identity>
-	<numbers>
-		<currencies>
-			<currency type="ERN">
-				<symbol>$</symbol>
-			</currency>
-			<currency type="ETB">
-				<symbol>ETB</symbol>
-			</currency>
-		</currencies>
-	</numbers>
 </ldml>
+

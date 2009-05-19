@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.22 $"/>
-		<generation date="$Date: 2008/06/16 03:11:01 $"/>
+		<version number="$Revision: 1.25 $"/>
+		<generation date="$Date: 2009/05/05 23:06:38 $"/>
 		<language type="ku"/>
 	</identity>
 	<localeDisplayNames>
@@ -119,11 +119,34 @@
 	</layout>
 	<characters>
 		<exemplarCharacters>[ئ-ب پ ت ج چ ح-د ر ز ڕ ژ س ش ع غ ف ڤ ق ک گ ل ڵ م-ه ھ و ۆ ی ێ]</exemplarCharacters>
-		<exemplarCharacters type="auxiliary">[ً-ْ ء-ة ث ذ ص-ظ ك ى ي]</exemplarCharacters>
+		<exemplarCharacters type="auxiliary">[\u064B-\u0652 ء-ة ث ذ ص-ظ ك ى ي]</exemplarCharacters>
 	</characters>
 	<dates>
 		<calendars>
 			<calendar type="gregorian">
+				<days>
+					<dayContext type="format">
+						<dayWidth type="abbreviated">
+							<day type="sun">یەکشەممە</day>
+							<day type="mon">دووشەممە</day>
+							<day type="tue">سێشەممە</day>
+							<day type="wed">چوارشەممە</day>
+						</dayWidth>
+						<dayWidth type="wide">
+							<day type="sun">یەکشەممە</day>
+							<day type="mon">دووشەممە</day>
+							<day type="tue">سێشەممە</day>
+							<day type="wed">چوارشەممە</day>
+						</dayWidth>
+					</dayContext>
+					<dayContext type="stand-alone">
+						<dayWidth type="narrow">
+							<day type="sun">ی</day>
+							<day type="mon">د</day>
+							<day type="tue">س</day>
+						</dayWidth>
+					</dayContext>
+				</days>
 				<dateTimeFormats>
 					<availableFormats>
 						<dateFormatItem id="yyQ">Q yy</dateFormatItem>

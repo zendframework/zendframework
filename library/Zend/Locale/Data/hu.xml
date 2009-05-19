@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.104 $"/>
-		<generation date="$Date: 2008/06/17 14:12:12 $"/>
+		<version number="$Revision: 1.121 $"/>
+		<generation date="$Date: 2009/05/05 23:06:37 $"/>
 		<language type="hu"/>
 	</identity>
 	<localeDisplayNames>
@@ -85,7 +85,7 @@
 			<language type="ce">csecsen</language>
 			<language type="ceb">cebui</language>
 			<language type="cel">egyéb kelta</language>
-			<language type="ch">csamoro</language>
+			<language type="ch">csamoró</language>
 			<language type="chb">csibcsa</language>
 			<language type="chg">csagatáj</language>
 			<language type="chk">csukéz</language>
@@ -182,7 +182,7 @@
 			<language type="gon">gondi</language>
 			<language type="gor">gorontalo</language>
 			<language type="got">gót</language>
-			<language type="grb">grebo</language>
+			<language type="grb">grebó</language>
 			<language type="grc">ógörög</language>
 			<language type="gsw">svájci német</language>
 			<language type="gu">gudzsarati</language>
@@ -209,15 +209,15 @@
 			<language type="iba">iban</language>
 			<language type="id">indonéz</language>
 			<language type="ie">interlingue</language>
-			<language type="ig">igbo</language>
+			<language type="ig">igbó</language>
 			<language type="ii">szecsuán ji</language>
-			<language type="ijo">idzso</language>
+			<language type="ijo">idzsó</language>
 			<language type="ik">inupiak</language>
-			<language type="ilo">iloko</language>
+			<language type="ilo">ilokó</language>
 			<language type="inc">egyéb indiai</language>
 			<language type="ine">indoeurópai nyelv</language>
 			<language type="inh">ingus</language>
-			<language type="io">ido</language>
+			<language type="io">idó</language>
 			<language type="ira">iráni</language>
 			<language type="iro">irokéz nyelvek</language>
 			<language type="is">izlandi</language>
@@ -276,7 +276,7 @@
 			<language type="li">limburgi</language>
 			<language type="ln">lingala</language>
 			<language type="lo">laoszi</language>
-			<language type="lol">mongo</language>
+			<language type="lol">mongó</language>
 			<language type="loz">lozi</language>
 			<language type="lt">litván</language>
 			<language type="lu">luba-katanga</language>
@@ -290,7 +290,7 @@
 			<language type="mag">magahi</language>
 			<language type="mai">maithili</language>
 			<language type="mak">makaszar</language>
-			<language type="man">mandingo</language>
+			<language type="man">mandingó</language>
 			<language type="map">ausztronéz</language>
 			<language type="mas">masai</language>
 			<language type="mdf">moksán</language>
@@ -309,7 +309,7 @@
 			<language type="mn">mongol</language>
 			<language type="mnc">mandzsu</language>
 			<language type="mni">manipuri</language>
-			<language type="mno">manobo nyelv</language>
+			<language type="mno">manobó nyelvek</language>
 			<language type="mo">moldvai</language>
 			<language type="moh">mohawk</language>
 			<language type="mos">moszi</language>
@@ -328,7 +328,7 @@
 			<language type="nah">nahuati</language>
 			<language type="nai">észak-amerikai indián nyelv</language>
 			<language type="nap">nápolyi</language>
-			<language type="nb">norvég bokmál</language>
+			<language type="nb">norvég bokmal</language>
 			<language type="nd">északi ndebele</language>
 			<language type="nds">alsónémet</language>
 			<language type="ne">nepáli</language>
@@ -343,16 +343,16 @@
 			<language type="no">norvég</language>
 			<language type="nog">nogaj</language>
 			<language type="non">óskandináv</language>
-			<language type="nqo">n'ko</language>
+			<language type="nqo">n'kó</language>
 			<language type="nr">déli ndebele</language>
-			<language type="nso">északi szoto</language>
+			<language type="nso">északi szotó</language>
 			<language type="nub">núbiai nyelv</language>
-			<language type="nv">navaho</language>
+			<language type="nv">navahó</language>
 			<language type="nwc">klasszikus newari</language>
 			<language type="ny">nyanja</language>
 			<language type="nym">nyamvézi</language>
 			<language type="nyn">nyankole</language>
-			<language type="nyo">nyoro</language>
+			<language type="nyo">nyoró</language>
 			<language type="nzi">nzima</language>
 			<language type="oc">okszitán</language>
 			<language type="oj">ojibva</language>
@@ -367,7 +367,7 @@
 			<language type="pag">pangaszinan</language>
 			<language type="pal">pahlavi</language>
 			<language type="pam">pampangan</language>
-			<language type="pap">papiamento</language>
+			<language type="pap">papiamentó</language>
 			<language type="pau">palaui</language>
 			<language type="peo">óperzsa</language>
 			<language type="phi">Fülöp-szigeteki nyelv</language>
@@ -409,7 +409,7 @@
 			<language type="se">északi számi</language>
 			<language type="sel">szölkup</language>
 			<language type="sem">egyéb szemita</language>
-			<language type="sg">sango</language>
+			<language type="sg">szangó</language>
 			<language type="sga">óír</language>
 			<language type="sgn">jelnyelv</language>
 			<language type="sh">szerbhorvát</language>
@@ -423,10 +423,10 @@
 			<language type="sla">szláv nyelv</language>
 			<language type="sm">szamoai</language>
 			<language type="sma">déli számi</language>
-			<language type="smi">számi nyelv</language>
+			<language type="smi">lapp nyelv</language>
 			<language type="smj">lule számi</language>
 			<language type="smn">inar sami</language>
-			<language type="sms">skolt számi</language>
+			<language type="sms">koltta lapp</language>
 			<language type="sn">sona</language>
 			<language type="snk">szoninke</language>
 			<language type="so">szomáliai</language>
@@ -434,7 +434,7 @@
 			<language type="son">szongai</language>
 			<language type="sq">albán</language>
 			<language type="sr">szerb</language>
-			<language type="srn">sranai tongo</language>
+			<language type="srn">szranai tongó</language>
 			<language type="srr">szerer</language>
 			<language type="ss">sziszuati</language>
 			<language type="ssa">nílusi-szaharai nyelv</language>
@@ -451,7 +451,7 @@
 			<language type="tai">thai nyelv</language>
 			<language type="te">telugu</language>
 			<language type="tem">temne</language>
-			<language type="ter">tereno</language>
+			<language type="ter">terenó</language>
 			<language type="tet">tetum</language>
 			<language type="tg">tadzsik</language>
 			<language type="th">thai</language>
@@ -496,7 +496,7 @@
 			<language type="wak">vakas nyelv</language>
 			<language type="wal">valamo</language>
 			<language type="war">varaó</language>
-			<language type="was">vaso</language>
+			<language type="was">vasó</language>
 			<language type="wen">szorb nyelvek</language>
 			<language type="wo">volof</language>
 			<language type="xal">kalmük</language>
@@ -521,7 +521,7 @@
 		</languages>
 		<scripts>
 			<script type="Arab">Arab</script>
-			<script type="Armi">Arámi</script>
+			<script type="Armi">Birodalmi arámi</script>
 			<script type="Armn">Örmény</script>
 			<script type="Avst">Avesztán</script>
 			<script type="Bali">Balinéz</script>
@@ -589,7 +589,7 @@
 			<script type="Lyci">Líciai</script>
 			<script type="Lydi">Lídiai</script>
 			<script type="Mand">Mandai</script>
-			<script type="Mani">Manichaean</script>
+			<script type="Mani">Manicheus</script>
 			<script type="Maya">Maja hieroglifák</script>
 			<script type="Mero">Meroitikus</script>
 			<script type="Mlym">Malajálam</script>
@@ -723,8 +723,8 @@
 			<territory type="BY">Fehéroroszország</territory>
 			<territory type="BZ">Belize</territory>
 			<territory type="CA">Kanada</territory>
-			<territory type="CC">Kókusz (Keeling)-szigetek</territory>
-			<territory type="CD">Kongó, Demokratikus köztársaság</territory>
+			<territory type="CC">Kókusz-szigetek</territory>
+			<territory type="CD">Kongó - Kinshasa</territory>
 			<territory type="CF">Közép-afrikai Köztársaság</territory>
 			<territory type="CG">Kongó</territory>
 			<territory type="CH">Svájc</territory>
@@ -779,7 +779,7 @@
 			<territory type="GU">Guam</territory>
 			<territory type="GW">Guinea-Bissau</territory>
 			<territory type="GY">Guyana</territory>
-			<territory type="HK">Hongkong</territory>
+			<territory type="HK">Hongkong S.A.R, Kína</territory>
 			<territory type="HM">Heard és McDonald Szigetek</territory>
 			<territory type="HN">Honduras</territory>
 			<territory type="HR">Horvátország</territory>
@@ -832,7 +832,7 @@
 			<territory type="ML">Mali</territory>
 			<territory type="MM">Mianmar</territory>
 			<territory type="MN">Mongólia</territory>
-			<territory type="MO">Makaó</territory>
+			<territory type="MO">Makaó SAR Kína</territory>
 			<territory type="MP">Északi Mariana-szigetek</territory>
 			<territory type="MQ">Martinique</territory>
 			<territory type="MR">Mauritánia</territory>
@@ -874,7 +874,7 @@
 			<territory type="QA">Katar</territory>
 			<territory type="QO">Külső-Óceánia</territory>
 			<territory type="QU">Európai Unió</territory>
-			<territory type="RE">Reunion (francia)</territory>
+			<territory type="RE">Reunion</territory>
 			<territory type="RO">Románia</territory>
 			<territory type="RS">Szerbia</territory>
 			<territory type="RU">Oroszország</territory>
@@ -894,7 +894,7 @@
 			<territory type="SN">Szenegál</territory>
 			<territory type="SO">Szomália</territory>
 			<territory type="SR">Suriname</territory>
-			<territory type="ST">São Tomé és Príncipe</territory>
+			<territory type="ST">Sao Tomé és Príncipe</territory>
 			<territory type="SV">Salvador</territory>
 			<territory type="SY">Szíria</territory>
 			<territory type="SZ">Szváziföld</territory>
@@ -1019,7 +1019,6 @@
 		<alternateQuotationEnd>”</alternateQuotationEnd>
 	</delimiters>
 	<dates>
-		<localizedPatternChars>GanjkHmsSEDFwWxhKzAeugXZvcL</localizedPatternChars>
 		<calendars>
 			<calendar type="buddhist">
 				<eras>
@@ -1149,12 +1148,12 @@
 				<dateFormats>
 					<dateFormatLength type="full">
 						<dateFormat>
-							<pattern>yyyy. MMMM d.</pattern>
+							<pattern>y. MMMM d., EEEE</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="long">
 						<dateFormat>
-							<pattern>yyyy. MMMM d.</pattern>
+							<pattern>y. MMMM d.</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="medium">
@@ -1171,7 +1170,7 @@
 				<timeFormats>
 					<timeFormatLength type="full">
 						<timeFormat>
-							<pattern>H:mm:ss v</pattern>
+							<pattern>H:mm:ss zzzz</pattern>
 						</timeFormat>
 					</timeFormatLength>
 					<timeFormatLength type="long">
@@ -1191,30 +1190,25 @@
 					</timeFormatLength>
 				</timeFormats>
 				<dateTimeFormats>
-					<dateTimeFormatLength>
-						<dateTimeFormat>
-							<pattern>{1} {0}</pattern>
-						</dateTimeFormat>
-					</dateTimeFormatLength>
 					<availableFormats>
 						<dateFormatItem id="Hm">HH:mm</dateFormatItem>
 						<dateFormatItem id="M">L</dateFormatItem>
 						<dateFormatItem id="MEd">M. d., E</dateFormatItem>
 						<dateFormatItem id="MMM">LLL</dateFormatItem>
 						<dateFormatItem id="MMMMd">MMMM d.</dateFormatItem>
-						<dateFormatItem id="MMMd">MMM d</dateFormatItem>
+						<dateFormatItem id="MMMd">MMM d.</dateFormatItem>
 						<dateFormatItem id="MMdd">MM.dd.</dateFormatItem>
 						<dateFormatItem id="Md">M. d.</dateFormatItem>
 						<dateFormatItem id="d">d</dateFormatItem>
 						<dateFormatItem id="mmss">mm:ss</dateFormatItem>
-						<dateFormatItem id="yyQ">Q yy</dateFormatItem>
+						<dateFormatItem id="yyQ">yy/Q</dateFormatItem>
 						<dateFormatItem id="yyyyMM">yyyy.MM</dateFormatItem>
-						<dateFormatItem id="yyyyMMMM">yyyy. MMMM</dateFormatItem>
+						<dateFormatItem id="yyyyMMMM">y. MMMM</dateFormatItem>
 					</availableFormats>
 					<intervalFormats>
 						<intervalFormatFallback>{0} - {1}</intervalFormatFallback>
 						<intervalFormatItem id="M">
-							<greatestDifference id="M">M.-M.</greatestDifference>
+							<greatestDifference id="M">M-M.</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="MEd">
 							<greatestDifference id="M">MM.dd., E - MM.dd., E</greatestDifference>
@@ -1229,14 +1223,14 @@
 						</intervalFormatItem>
 						<intervalFormatItem id="MMMd">
 							<greatestDifference id="M">MMM d. - MMM d.</greatestDifference>
-							<greatestDifference id="d">MMM d.-d.</greatestDifference>
+							<greatestDifference id="d">MMM d-d.</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="Md">
 							<greatestDifference id="M">MM.dd. - MM.dd.</greatestDifference>
-							<greatestDifference id="d">MM.dd. - MM.dd.</greatestDifference>
+							<greatestDifference id="d">MM.dd-dd.</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="d">
-							<greatestDifference id="d">d.-d.</greatestDifference>
+							<greatestDifference id="d">d-d.</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="h">
 							<greatestDifference id="h">HH-HH</greatestDifference>
@@ -1256,31 +1250,31 @@
 							<greatestDifference id="y">y-y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yM">
-							<greatestDifference id="M">yyyy.MM. - yyyy.MM.</greatestDifference>
+							<greatestDifference id="M">yyyy.MM-MM.</greatestDifference>
 							<greatestDifference id="y">yyyy.MM. - yyyy.MM.</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMEd">
-							<greatestDifference id="M">yyyy.MM.dd., E - yyyy.MM.dd., E</greatestDifference>
-							<greatestDifference id="d">yyyy.MM.dd., E - yyyy.MM.dd., E</greatestDifference>
+							<greatestDifference id="M">yyyy.MM.dd., E - MM.dd., E</greatestDifference>
+							<greatestDifference id="d">yyyy.MM.dd., E - dd., E</greatestDifference>
 							<greatestDifference id="y">yyyy.MM.dd., E - yyyy.MM.dd., E</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMM">
-							<greatestDifference id="M">yyyy. MMM-MMM</greatestDifference>
-							<greatestDifference id="y">yyyy. MMM - yyyy. MMM</greatestDifference>
+							<greatestDifference id="M">y. MMM-MMM</greatestDifference>
+							<greatestDifference id="y">y. MMM - y. MMM</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMEd">
-							<greatestDifference id="M">yyyy. MMM d., E - MMM d., E</greatestDifference>
-							<greatestDifference id="d">yyyy. MMM d., E - d., E</greatestDifference>
-							<greatestDifference id="y">yyyy. MMM d., E - yyyy. MMM d., E</greatestDifference>
+							<greatestDifference id="M">y. MMM d., E - MMM d., E</greatestDifference>
+							<greatestDifference id="d">y. MMM d., E - d., E</greatestDifference>
+							<greatestDifference id="y">y. MMM d., E - y. MMM d., E</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMd">
-							<greatestDifference id="M">yyyy. MMM d. - MMM d.</greatestDifference>
-							<greatestDifference id="d">yyyy. MMM d.-d.</greatestDifference>
-							<greatestDifference id="y">yyyy. MMM d. - yyyy. MMM d.</greatestDifference>
+							<greatestDifference id="M">y. MMM d. - MMM d.</greatestDifference>
+							<greatestDifference id="d">y. MMM d-d.</greatestDifference>
+							<greatestDifference id="y">y. MMM d. - y. MMM d.</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMd">
-							<greatestDifference id="M">yyyy.MM.dd. - yyyy.MM.dd.</greatestDifference>
-							<greatestDifference id="d">yyyy.MM.dd. - yyyy.MM.dd.</greatestDifference>
+							<greatestDifference id="M">yyyy.MM.dd. - MM.dd.</greatestDifference>
+							<greatestDifference id="d">yyyy.MM.dd-dd.</greatestDifference>
 							<greatestDifference id="y">yyyy.MM.dd. - yyyy.MM.dd.</greatestDifference>
 						</intervalFormatItem>
 					</intervalFormats>
@@ -1300,13 +1294,13 @@
 					</field>
 					<field type="day">
 						<displayName>nap</displayName>
+						<relative type="-3">három nappal ezelőtt</relative>
+						<relative type="-2">tegnapelőtt</relative>
+						<relative type="-1">tegnap</relative>
 						<relative type="0">ma</relative>
 						<relative type="1">holnap</relative>
 						<relative type="2">holnapután</relative>
 						<relative type="3">három nap múlva</relative>
-						<relative type="-1">tegnap</relative>
-						<relative type="-2">tegnapelőtt</relative>
-						<relative type="-3">három nappal ezelőtt</relative>
 					</field>
 					<field type="weekday">
 						<displayName>hét napja</displayName>
@@ -1424,9 +1418,6 @@
 			<zone type="America/Rio_Branco">
 				<exemplarCity>Río Branco</exemplarCity>
 			</zone>
-			<zone type="America/Porto_Velho">
-				<exemplarCity>Pôrto Velho</exemplarCity>
-			</zone>
 			<zone type="America/Cuiaba">
 				<exemplarCity>Cuiabá</exemplarCity>
 			</zone>
@@ -1435,9 +1426,6 @@
 			</zone>
 			<zone type="America/Araguaina">
 				<exemplarCity>Araguaína</exemplarCity>
-			</zone>
-			<zone type="America/Sao_Paulo">
-				<exemplarCity>São Paulo</exemplarCity>
 			</zone>
 			<zone type="America/Maceio">
 				<exemplarCity>Maceió</exemplarCity>
@@ -1550,8 +1538,6 @@
 			<zone type="Pacific/Kiritimati">
 				<exemplarCity>Kiritimati-sziget</exemplarCity>
 			</zone>
-			<zone type="Pacific/Tarawa">
-			</zone>
 			<zone type="America/St_Kitts">
 				<exemplarCity>St. Kitts</exemplarCity>
 			</zone>
@@ -1646,6 +1632,7 @@
 				<exemplarCity>Azori-szigetek</exemplarCity>
 			</zone>
 			<zone type="Atlantic/Madeira">
+				<exemplarCity>madeirai idő</exemplarCity>
 			</zone>
 			<zone type="Europe/Lisbon">
 				<exemplarCity>Lisszabon</exemplarCity>
@@ -1740,8 +1727,6 @@
 			<zone type="Pacific/Wake">
 				<exemplarCity>Wake-sziget</exemplarCity>
 			</zone>
-			<zone type="America/Anchorage">
-			</zone>
 			<zone type="America/North_Dakota/Center">
 				<exemplarCity>Középső, Észak-Dakota</exemplarCity>
 			</zone>
@@ -1762,40 +1747,34 @@
 					<standard>Acre idő</standard>
 					<daylight>Acre nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Afghanistan">
 				<long>
 					<standard>Afganisztáni idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Africa_Central">
 				<long>
 					<generic>Mozambiki idő</generic>
 					<standard>Közép-afrikai idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Africa_Eastern">
 				<long>
 					<generic>Kenyai idő</generic>
 					<standard>Kelet-afrikai idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Africa_FarWestern">
 				<long>
 					<generic>Nyugat-szaharai idő</generic>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Africa_Southern">
 				<long>
 					<generic>Dél-afrikai idő</generic>
 					<standard>Dél-afrikai szabvány idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Africa_Western">
 				<long>
@@ -1803,14 +1782,12 @@
 					<standard>Nyugat-afrikai idő</standard>
 					<daylight>Nyugat-afrikai nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Aktyubinsk">
 				<long>
 					<standard>Aktyubinszki idő</standard>
 					<daylight>Aktyubinszki nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Alaska">
 				<long>
@@ -1818,7 +1795,6 @@
 					<standard>Alaszkai zónaidő</standard>
 					<daylight>Alaszkai nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Alaska_Hawaii">
 				<long>
@@ -1826,17 +1802,12 @@
 					<standard>Alaszkai-hawaii zónaidő</standard>
 					<daylight>Alaszkai-hawaii nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
-			</metazone>
-			<metazone type="Almaty">
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Amazon">
 				<long>
 					<standard>Amazóniai idő</standard>
 					<daylight>Amazóniai nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="America_Central">
 				<long>
@@ -1844,7 +1815,6 @@
 					<standard>Középső államokbeli zónaidő</standard>
 					<daylight>Középső államokbeli nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="America_Eastern">
 				<long>
@@ -1852,7 +1822,6 @@
 					<standard>Keleti államokbeli zónaidő</standard>
 					<daylight>Keleti államokbeli nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="America_Mountain">
 				<long>
@@ -1860,7 +1829,6 @@
 					<standard>Hegyvidéki zónaidő</standard>
 					<daylight>Hegyvidéki nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="America_Pacific">
 				<long>
@@ -1868,28 +1836,24 @@
 					<standard>Csendes-óceáni zónaidő</standard>
 					<daylight>Csendes-óceáni nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Anadyr">
 				<long>
 					<standard>Anadíri idő</standard>
 					<daylight>Anadíri nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Aqtau">
 				<long>
 					<standard>Aqtaui idő</standard>
 					<daylight>Aqtaui nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Aqtobe">
 				<long>
 					<standard>Aqtobei idő</standard>
 					<daylight>Aqtobei nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Arabian">
 				<long>
@@ -1902,20 +1866,17 @@
 					<standard>AST (arab)</standard>
 					<daylight>ADT (Arab)</daylight>
 				</short>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Argentina">
 				<long>
 					<standard>Argentína idő</standard>
 					<daylight>argentínai nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Argentina_Western">
 				<long>
 					<standard>Nyugat-Argentína idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Armenia">
 				<long>
@@ -1926,14 +1887,12 @@
 					<standard>AMT (Örményország)</standard>
 					<daylight>AMST (Örményország)</daylight>
 				</short>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Ashkhabad">
 				<long>
 					<standard>Ashabadi idő</standard>
 					<daylight>Ashabadi nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Atlantic">
 				<long>
@@ -1941,7 +1900,6 @@
 					<standard>Atlanti-óceáni zónaidő</standard>
 					<daylight>Atlanti-óceáni nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Australia_Central">
 				<long>
@@ -1949,7 +1907,6 @@
 					<standard>Ausztrál középső zónaidő</standard>
 					<daylight>Ausztrál középső nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Australia_CentralWestern">
 				<long>
@@ -1957,7 +1914,6 @@
 					<standard>Ausztrál középső nyugati zónaidő</standard>
 					<daylight>Ausztrál középső nyugati nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Australia_Eastern">
 				<long>
@@ -1965,7 +1921,6 @@
 					<standard>Ausztrál keleti zónaidő</standard>
 					<daylight>Ausztrál keleti nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Australia_Western">
 				<long>
@@ -1973,30 +1928,23 @@
 					<standard>Ausztrál nyugati zónaidő</standard>
 					<daylight>Ausztrál nyugati nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
-			</metazone>
-			<metazone type="Azerbaijan">
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Azores">
 				<long>
 					<standard>Azori idő</standard>
 					<daylight>Azori nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Baku">
 				<long>
 					<standard>Bakui idő</standard>
 					<daylight>Bakui nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Bangladesh">
 				<long>
 					<standard>Bangladesi idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Bering">
 				<long>
@@ -2008,72 +1956,61 @@
 					<standard>BST (Beringi)</standard>
 					<daylight>BDT (Beringi)</daylight>
 				</short>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Bhutan">
 				<long>
 					<standard>Butáni idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Bolivia">
 				<long>
 					<standard>Bolíviai idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Borneo">
 				<long>
 					<standard>Borneói idő</standard>
 					<daylight>Borneói nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Brasilia">
 				<long>
 					<standard>Brazíliai idő</standard>
 					<daylight>Brazíliai nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Brunei">
 				<long>
 					<standard>Brunei Darussalam-i idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Cape_Verde">
 				<long>
 					<standard>Cape verdei idő</standard>
 					<daylight>Cape verdei nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Chamorro">
 				<long>
 					<standard>Chamorroi zónaidő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Changbai">
 				<long>
 					<standard>Changbai idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Chatham">
 				<long>
 					<standard>Chathami zónaidő</standard>
 					<daylight>Chathami nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Chile">
 				<long>
 					<standard>chilei idő</standard>
 					<daylight>chilei nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="China">
 				<long>
@@ -2084,40 +2021,34 @@
 					<standard>CST (Kína)</standard>
 					<daylight>CDT (Kína)</daylight>
 				</short>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Choibalsan">
 				<long>
 					<standard>Csojbalszani idő</standard>
 					<daylight>Csojbalszani nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Christmas">
 				<long>
 					<standard>Karácsony-szigeti idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Cocos">
 				<long>
 					<standard>Kókusz-szigeteki idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Colombia">
 				<long>
 					<standard>Kolumbiai idő</standard>
 					<daylight>Kolumbiai nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Cook">
 				<long>
 					<standard>Cook-szigeteki idő</standard>
 					<daylight>Cook-szigeteki fél nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Cuba">
 				<long>
@@ -2129,57 +2060,48 @@
 					<standard>CST (Kuba)</standard>
 					<daylight>CDT (Kuba)</daylight>
 				</short>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Dacca">
 				<long>
 					<standard>Daccai idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Davis">
 				<long>
 					<standard>Davisi idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="DumontDUrville">
 				<long>
 					<standard>Dumont-d'Urville-i idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Dushanbe">
 				<long>
 					<standard>Dusanbei idő</standard>
 					<daylight>Dusanbei nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Dutch_Guiana">
 				<long>
 					<standard>Holland-guianai idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="East_Timor">
 				<long>
 					<standard>Kelet-timori idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Easter">
 				<long>
 					<standard>Húsvét-szigeteki idő</standard>
 					<daylight>Húsvét-szigeteki nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Ecuador">
 				<long>
 					<standard>Ecuadori idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Europe_Central">
 				<long>
@@ -2207,33 +2129,28 @@
 					<standard>Falkland-szigeteki idő</standard>
 					<daylight>Falkland-szigeteki nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Fiji">
 				<long>
 					<standard>Fidzsi idő</standard>
 					<daylight>Fidzsi nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="French_Guiana">
 				<long>
 					<standard>Francia-guianai idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="French_Southern">
 				<long>
 					<standard>Francia déli és antarktikus idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Frunze">
 				<long>
 					<standard>Frunzei idő</standard>
 					<daylight>Frunzei nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="GMT">
 				<long>
@@ -2245,47 +2162,40 @@
 				<long>
 					<standard>Galapagosi idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Gambier">
 				<long>
 					<standard>Gambieri idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Georgia">
 				<long>
 					<standard>Grúz idő</standard>
 					<daylight>Grúz nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Gilbert_Islands">
 				<long>
 					<standard>Gilbert-szigeteki idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Greenland_Central">
 				<long>
 					<standard>Közép-grönlandi idő</standard>
 					<daylight>Közép-grönlandi nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Greenland_Eastern">
 				<long>
 					<standard>Kelet-grönlandi idő</standard>
 					<daylight>Kelet-grönlandi nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Greenland_Western">
 				<long>
 					<standard>Nyugat-grönlandi idő</standard>
 					<daylight>Nyugat-grönlandi nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Guam">
 				<long>
@@ -2294,86 +2204,70 @@
 				<short>
 					<standard>GST (Guam)</standard>
 				</short>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Gulf">
 				<long>
 					<standard>Öbölbeli zónaidő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Guyana">
 				<long>
 					<standard>Guyanai idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Hawaii_Aleutian">
 				<long>
 					<standard>Hawaii-aleuti zónaidő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Hong_Kong">
 				<long>
 					<standard>Hongkongi idő</standard>
 					<daylight>Hongkongi nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Hovd">
 				<long>
 					<standard>Hovdi idő</standard>
 					<daylight>Hovdi nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="India">
 				<long>
 					<standard>Indiai zónaidő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Indian_Ocean">
 				<long>
 					<standard>Indiai-óceáni idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
-			</metazone>
-			<metazone type="Indochina">
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Indonesia_Central">
 				<long>
 					<standard>Közép-indonéziai idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Indonesia_Eastern">
 				<long>
 					<standard>Kelet-indonéziai idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Indonesia_Western">
 				<long>
 					<standard>Nyugat-indonéziai idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Iran">
 				<long>
 					<standard>Iráni zónaidő</standard>
 					<daylight>Iráni nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Irkutsk">
 				<long>
 					<standard>Irkutszki idő</standard>
 					<daylight>Irkutszki nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Israel">
 				<long>
@@ -2383,52 +2277,44 @@
 				<short>
 					<standard>IST (Izrael)</standard>
 				</short>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Japan">
 				<long>
 					<standard>Japán zónaidő</standard>
 					<daylight>Japán nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Kamchatka">
 				<long>
 					<standard>Petropavlovszk-kamcsatkai idő</standard>
 					<daylight>Petropavlovszk-kamcsatkai nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Karachi">
 				<long>
 					<standard>Karacsi idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Kashgar">
 				<long>
 					<standard>Kasgár idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Kazakhstan_Eastern">
 				<long>
 					<standard>Kelet-kazahsztáni zónaidő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Kazakhstan_Western">
 				<long>
 					<standard>Nyugat-kazahsztáni zónaidő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Kizilorda">
 				<long>
 					<standard>Kizilordai idő</standard>
 					<daylight>Kizilordai nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Korea">
 				<long>
@@ -2436,45 +2322,38 @@
 					<standard>Koreai zónaidő</standard>
 					<daylight>Koreai nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Kosrae">
 				<long>
 					<standard>Kosraei idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Krasnoyarsk">
 				<long>
 					<standard>Krasznojarszki idő</standard>
 					<daylight>Krasznojarszki nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Kuybyshev">
 				<long>
 					<standard>Kujbisevi idő</standard>
 					<daylight>Kujbisevi nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Kwajalein">
 				<long>
 					<standard>Kwajaleini idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Kyrgystan">
 				<long>
 					<standard>Kirgiz idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Lanka">
 				<long>
 					<standard>Lankai idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Liberia">
 				<long>
@@ -2483,19 +2362,16 @@
 				<short>
 					<generic>Libériai idő</generic>
 				</short>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Line_Islands">
 				<long>
 					<standard>Line-szigeteki idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Long_Shu">
 				<long>
 					<standard>Long-Shu idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Lord_Howe">
 				<long>
@@ -2503,70 +2379,59 @@
 					<standard>Lord howei zónaidő</standard>
 					<daylight>Lord howei nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Macau">
 				<long>
 					<standard>Macaui idő</standard>
 					<daylight>Macaui nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Magadan">
 				<long>
 					<standard>Magadáni idő</standard>
 					<daylight>Magadáni nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Malaya">
 				<long>
 					<standard>Malayai idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Malaysia">
 				<long>
 					<standard>Malajziai idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Maldives">
 				<long>
 					<standard>Maldív-szigeteki idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Marquesas">
 				<long>
 					<standard>Marquesasi idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Marshall_Islands">
 				<long>
 					<standard>Marshall-szigeteki idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Mauritius">
 				<long>
 					<standard>Mauritiusi idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Mawson">
 				<long>
 					<standard>Mawsoni idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Mongolia">
 				<long>
 					<standard>Ulánbátori idő</standard>
 					<daylight>Ulánbátori nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Moscow">
 				<long>
@@ -2574,32 +2439,27 @@
 					<standard>Moszkvai zónaidő</standard>
 					<daylight>Moszkvai nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Myanmar">
 				<long>
 					<standard>Myanmari idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Nauru">
 				<long>
 					<standard>Naurui idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Nepal">
 				<long>
 					<standard>Nepáli idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="New_Caledonia">
 				<long>
 					<standard>Új-kaledóniai idő</standard>
 					<daylight>Új-kaledóniai nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="New_Zealand">
 				<long>
@@ -2607,7 +2467,6 @@
 					<standard>Új-zélandi zónaidő</standard>
 					<daylight>Új-zélandi nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Newfoundland">
 				<long>
@@ -2615,92 +2474,78 @@
 					<standard>Új-fundlandi zónaidő</standard>
 					<daylight>Új-fundlandi nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Niue">
 				<long>
 					<standard>Niuei idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Norfolk">
 				<long>
 					<standard>Norfolk-szigeteki idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Noronha">
 				<long>
 					<standard>Fernando de Noronha-i idő</standard>
 					<daylight>Fernando de Noronha-i nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="North_Mariana">
 				<long>
 					<standard>Észak-mariana-szigeteki idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Novosibirsk">
 				<long>
 					<standard>Novoszibirzski idő</standard>
 					<daylight>Novoszibirszki nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Omsk">
 				<long>
 					<standard>Omszki idő</standard>
 					<daylight>Omszki nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Pakistan">
 				<long>
 					<standard>Pakisztáni idő</standard>
 					<daylight>Pakisztáni nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Palau">
 				<long>
 					<standard>Palaui idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Papua_New_Guinea">
 				<long>
 					<standard>Pápua új-guineai idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Paraguay">
 				<long>
 					<standard>Paraguayi idő</standard>
 					<daylight>Paraguayi nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Peru">
 				<long>
 					<standard>Perui idő</standard>
 					<daylight>Perui nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Philippines">
 				<long>
 					<standard>Fülöp-szigeteki idő</standard>
 					<daylight>Fülöp-szigeteki nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Phoenix_Islands">
 				<long>
 					<standard>Phoenix-szigeteki idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Pierre_Miquelon">
 				<long>
@@ -2708,52 +2553,44 @@
 					<standard>Pierre és Miquelon-i zónaidő</standard>
 					<daylight>Pierre és Miquelon-i nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Pitcairn">
 				<long>
 					<standard>Pitcairni idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Ponape">
 				<long>
 					<standard>Ponapei idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Qyzylorda">
 				<long>
 					<standard>Qyzylordai idő</standard>
 					<daylight>Qyzylordai nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Reunion">
 				<long>
 					<standard>Réunioni idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Rothera">
 				<long>
 					<standard>Rotherai idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Sakhalin">
 				<long>
 					<standard>Sakhalin idő</standard>
 					<daylight>Sakhalin nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Samara">
 				<long>
 					<standard>Szamarai idő</standard>
 					<daylight>Szamarai nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Samarkand">
 				<long>
@@ -2764,38 +2601,32 @@
 					<standard>SAMT (Szamarkand)</standard>
 					<daylight>SAMST (Szamarkand)</daylight>
 				</short>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Samoa">
 				<long>
 					<standard>Szamoai zónaidő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Seychelles">
 				<long>
 					<standard>Seychelle-szigeteki idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Shevchenko">
 				<long>
 					<standard>Sevcsenkói idő</standard>
 					<daylight>Sevcsenkói nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Singapore">
 				<long>
 					<standard>Szingapúri zónaidő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Solomon">
 				<long>
 					<standard>Salamon-szigeteki idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="South_Georgia">
 				<long>
@@ -2804,71 +2635,60 @@
 				<short>
 					<standard>GST (Dél-grúziai)</standard>
 				</short>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Suriname">
 				<long>
 					<standard>Szurinámi idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Sverdlovsk">
 				<long>
 					<standard>Szverdlovszki idő</standard>
 					<daylight>Szverdlovszki nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Syowa">
 				<long>
 					<standard>Syowai idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Tahiti">
 				<long>
 					<standard>Tahiti idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Tajikistan">
 				<long>
 					<standard>Tadzsikisztáni idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Tashkent">
 				<long>
 					<standard>Taskenti idő</standard>
 					<daylight>Taskenti nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Tbilisi">
 				<long>
 					<standard>Tbiliszi idő</standard>
 					<daylight>Tbiliszi nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Tokelau">
 				<long>
 					<standard>Tokelaui idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Tonga">
 				<long>
 					<standard>Tongai idő</standard>
 					<daylight>Tongai nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Truk">
 				<long>
 					<standard>Truki idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Turkey">
 				<long>
@@ -2876,114 +2696,96 @@
 					<standard>Törökországi idő</standard>
 					<daylight>Törökországi nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Turkmenistan">
 				<long>
 					<standard>Türkmenisztáni idő</standard>
 					<daylight>Türkmenisztáni nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Tuvalu">
 				<long>
 					<standard>Tuvalui idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Uralsk">
 				<long>
 					<standard>Uráli idő</standard>
 					<daylight>Uráli nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Uruguay">
 				<long>
 					<standard>Uruguayi idő</standard>
 					<daylight>Uruguayi nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Urumqi">
 				<long>
 					<standard>Urumqi idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Uzbekistan">
 				<long>
 					<standard>Üzbegisztáni idő</standard>
 					<daylight>Üzbegisztáni nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Vanuatu">
 				<long>
 					<standard>Vanuatui idő</standard>
 					<daylight>Vanuatui nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Venezuela">
 				<long>
 					<standard>Venezuelai idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Vladivostok">
 				<long>
 					<standard>Vlagyivosztoki idő</standard>
 					<daylight>Vlagyivosztoki nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Volgograd">
 				<long>
-					<generic>13:25 Oroszország (Volgográd)</generic>
 					<standard>Volgográdi idő</standard>
 					<daylight>Volgográdi nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Vostok">
 				<long>
 					<standard>Vosztoki idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Wake">
 				<long>
 					<standard>Wake-szigeti idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Wallis">
 				<long>
 					<standard>Wallis és futunai idő</standard>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Yakutsk">
 				<long>
 					<standard>Jakutszki idő</standard>
 					<daylight>Jakutszki nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Yekaterinburg">
 				<long>
 					<standard>Jekatyerinburgi idő</standard>
 					<daylight>Jekatyerinburgi nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Yerevan">
 				<long>
 					<standard>Jereváni idő</standard>
 					<daylight>Jereváni nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 			<metazone type="Yukon">
 				<long>
@@ -2991,7 +2793,6 @@
 					<standard>yukoni zónaidő</standard>
 					<daylight>Yukoni nyári idő</daylight>
 				</long>
-				<commonlyUsed>false</commonlyUsed>
 			</metazone>
 		</timeZoneNames>
 	</dates>
@@ -3048,22 +2849,18 @@
 			<currency type="AFN">
 				<displayName>Afghani</displayName>
 				<displayName count="other">Afghani</displayName>
-				<symbol>Af</symbol>
 			</currency>
 			<currency type="ALL">
 				<displayName>Albán lek</displayName>
 				<displayName count="other">Albán lek</displayName>
-				<symbol>lek</symbol>
 			</currency>
 			<currency type="AMD">
 				<displayName>Dram</displayName>
 				<displayName count="other">Örmény dram</displayName>
-				<symbol>dram</symbol>
 			</currency>
 			<currency type="ANG">
 				<displayName>Holland-antilla forint</displayName>
 				<displayName count="other">Holland Antillai guilder</displayName>
-				<symbol>NA f.</symbol>
 			</currency>
 			<currency type="AOA">
 				<displayName>Angolai kwanza</displayName>
@@ -3092,7 +2889,6 @@
 			<currency type="ARS">
 				<displayName>Peso</displayName>
 				<displayName count="other">Argentin peso</displayName>
-				<symbol>Arg$</symbol>
 			</currency>
 			<currency type="ATS">
 				<displayName>Osztrák schilling</displayName>
@@ -3101,7 +2897,6 @@
 			<currency type="AUD">
 				<displayName>Ausztrál dollár</displayName>
 				<displayName count="other">Ausztrál dollár</displayName>
-				<symbol>$A</symbol>
 			</currency>
 			<currency type="AWG">
 				<displayName>Arubai forint</displayName>
@@ -3122,17 +2917,14 @@
 			<currency type="BAM">
 				<displayName>Bozsnia-hercegovinai konvertibilis márka</displayName>
 				<displayName count="other">Bosznia-hercegovinai konvertibilis márka</displayName>
-				<symbol>KM</symbol>
 			</currency>
 			<currency type="BBD">
 				<displayName>Barbadosi dollár</displayName>
 				<displayName count="other">Barbadosi dollár</displayName>
-				<symbol>BDS$</symbol>
 			</currency>
 			<currency type="BDT">
 				<displayName>Bangladesi taka</displayName>
 				<displayName count="other">Bangladesi taka</displayName>
-				<symbol>Tk</symbol>
 			</currency>
 			<currency type="BEC">
 				<displayName>Belga frank (konvertibilis)</displayName>
@@ -3141,7 +2933,6 @@
 			<currency type="BEF">
 				<displayName>Belga frank</displayName>
 				<displayName count="other">Belga frank</displayName>
-				<symbol>BF</symbol>
 			</currency>
 			<currency type="BEL">
 				<displayName>Belga frank (pénzügyi)</displayName>
@@ -3150,7 +2941,6 @@
 			<currency type="BGL">
 				<displayName>Bolgár kemény leva</displayName>
 				<displayName count="other">Bolgár kemény leva</displayName>
-				<symbol>lev</symbol>
 			</currency>
 			<currency type="BGN">
 				<displayName>Bolgár új leva</displayName>
@@ -3159,17 +2949,14 @@
 			<currency type="BHD">
 				<displayName>Bahreini dinár</displayName>
 				<displayName count="other">Bahreini dinár</displayName>
-				<symbol>BD</symbol>
 			</currency>
 			<currency type="BIF">
 				<displayName>Burundi frank</displayName>
 				<displayName count="other">Burundi frank</displayName>
-				<symbol>Fbu</symbol>
 			</currency>
 			<currency type="BMD">
 				<displayName>Bermudai dollár</displayName>
 				<displayName count="other">Bermudai dollár</displayName>
-				<symbol>Ber$</symbol>
 			</currency>
 			<currency type="BND">
 				<displayName>Brunei dollár</displayName>
@@ -3177,8 +2964,7 @@
 			</currency>
 			<currency type="BOB">
 				<displayName>Boliviano</displayName>
-				<displayName count="other">Boliviano</displayName>
-				<symbol>Bs</symbol>
+				<displayName count="other">Bolíviai boliviano</displayName>
 			</currency>
 			<currency type="BOP">
 				<displayName>Bolíviai peso</displayName>
@@ -3190,20 +2976,19 @@
 			</currency>
 			<currency type="BRB">
 				<displayName>Brazi cruzeiro novo (1967-1986)</displayName>
-				<displayName count="other">Brazi cruzeiro novo (1967-1986)</displayName>
+				<displayName count="other">Brazil cruzeiro novo (BRB)</displayName>
 			</currency>
 			<currency type="BRC">
 				<displayName>Brazi cruzado</displayName>
-				<displayName count="other">Brazi cruzado</displayName>
+				<displayName count="other">Brazil cruzado</displayName>
 			</currency>
 			<currency type="BRE">
 				<displayName>Brazil cruzeiro (1990-1993)</displayName>
-				<displayName count="other">Brazil cruzeiro (1990-1993)</displayName>
+				<displayName count="other">Brazil cruzeiro (BRE)</displayName>
 			</currency>
 			<currency type="BRL">
 				<displayName>Brazil real</displayName>
 				<displayName count="other">Brazil real</displayName>
-				<symbol>BRL</symbol>
 			</currency>
 			<currency type="BRN">
 				<displayName>Brazil cruzado novo</displayName>
@@ -3217,7 +3002,6 @@
 			</currency>
 			<currency type="BTN">
 				<displayName>Bhutáni ngultrum</displayName>
-				<symbol>Nu</symbol>
 			</currency>
 			<currency type="BUK">
 				<displayName>Burmai kyat</displayName>
@@ -3230,15 +3014,12 @@
 			</currency>
 			<currency type="BYR">
 				<displayName>Fehérorosz rubel</displayName>
-				<symbol>Rbl</symbol>
 			</currency>
 			<currency type="BZD">
 				<displayName>Belizei dollár</displayName>
-				<symbol>BZ$</symbol>
 			</currency>
 			<currency type="CAD">
 				<displayName>Kanadai dollár</displayName>
-				<symbol>Can$</symbol>
 			</currency>
 			<currency type="CDF">
 				<displayName>Kongói frank</displayName>
@@ -3248,7 +3029,6 @@
 			</currency>
 			<currency type="CHF">
 				<displayName>Svájci frank</displayName>
-				<symbol>SwF</symbol>
 			</currency>
 			<currency type="CHW">
 				<displayName>WIR frank</displayName>
@@ -3258,22 +3038,18 @@
 			</currency>
 			<currency type="CLP">
 				<displayName>Chilei peso</displayName>
-				<symbol>Ch$</symbol>
 			</currency>
 			<currency type="CNY">
 				<displayName>Kínai jüan renminbi</displayName>
-				<symbol>Y</symbol>
 			</currency>
 			<currency type="COP">
 				<displayName>Kolumbiai peso</displayName>
-				<symbol>Col$</symbol>
 			</currency>
 			<currency type="COU">
 				<displayName>Unidad de Valor Real</displayName>
 			</currency>
 			<currency type="CRC">
 				<displayName>Costa Ricai colon</displayName>
-				<symbol>C</symbol>
 			</currency>
 			<currency type="CSD">
 				<displayName>szerb dinár</displayName>
@@ -3286,11 +3062,9 @@
 			</currency>
 			<currency type="CVE">
 				<displayName>Cape Verdei escudo</displayName>
-				<symbol>CVEsc</symbol>
 			</currency>
 			<currency type="CYP">
 				<displayName>Ciprusi font</displayName>
-				<symbol>£C</symbol>
 			</currency>
 			<currency type="CZK">
 				<displayName>Cseh korona</displayName>
@@ -3303,19 +3077,15 @@
 			</currency>
 			<currency type="DJF">
 				<displayName>Dzsibuti frank</displayName>
-				<symbol>DF</symbol>
 			</currency>
 			<currency type="DKK">
 				<displayName>Dán korona</displayName>
-				<symbol>DKr</symbol>
 			</currency>
 			<currency type="DOP">
 				<displayName>Dominikai peso</displayName>
-				<symbol>RD$</symbol>
 			</currency>
 			<currency type="DZD">
 				<displayName>Algériai dínár</displayName>
-				<symbol>DA</symbol>
 			</currency>
 			<currency type="ECS">
 				<displayName>Ecuadori sucre</displayName>
@@ -3329,9 +3099,6 @@
 			<currency type="EGP">
 				<displayName>Egyiptomi font</displayName>
 			</currency>
-			<currency type="EQE">
-				<displayName>ekwele</displayName>
-			</currency>
 			<currency type="ERN">
 				<displayName>Eritreai nakfa</displayName>
 			</currency>
@@ -3343,22 +3110,18 @@
 			</currency>
 			<currency type="ESP">
 				<displayName>Spanyol peseta</displayName>
-				<symbol>₧</symbol>
 			</currency>
 			<currency type="ETB">
 				<displayName>Etiópiai birr</displayName>
-				<symbol>Br</symbol>
 			</currency>
 			<currency type="EUR">
 				<displayName>Euro</displayName>
-				<symbol>EUR</symbol>
 			</currency>
 			<currency type="FIM">
 				<displayName>Finn markka</displayName>
 			</currency>
 			<currency type="FJD">
 				<displayName>Fidzsi dollár</displayName>
-				<symbol>F$</symbol>
 			</currency>
 			<currency type="FKP">
 				<displayName>Falkland-szigeteki font</displayName>
@@ -3368,14 +3131,12 @@
 			</currency>
 			<currency type="GBP">
 				<displayName>Brit font sterling</displayName>
-				<symbol>GBP</symbol>
 			</currency>
 			<currency type="GEK">
 				<displayName>Grúz kupon larit</displayName>
 			</currency>
 			<currency type="GEL">
 				<displayName>Grúz lari</displayName>
-				<symbol>lari</symbol>
 			</currency>
 			<currency type="GHC">
 				<displayName>Ghánai cedi (1979-2007)</displayName>
@@ -3383,7 +3144,6 @@
 			<currency type="GHS">
 				<displayName>Ghánai cedi</displayName>
 				<displayName count="other">Ghánai cedi</displayName>
-				<symbol>GH¢</symbol>
 			</currency>
 			<currency type="GIP">
 				<displayName>Gibraltári font</displayName>
@@ -3393,7 +3153,6 @@
 			</currency>
 			<currency type="GNF">
 				<displayName>Guineai frank</displayName>
-				<symbol>GF</symbol>
 			</currency>
 			<currency type="GNS">
 				<displayName>Guineai syli</displayName>
@@ -3407,7 +3166,6 @@
 			</currency>
 			<currency type="GTQ">
 				<displayName>Guatemalai quetzal</displayName>
-				<symbol>Q</symbol>
 			</currency>
 			<currency type="GWE">
 				<displayName>Portugál guinea escudo</displayName>
@@ -3417,15 +3175,12 @@
 			</currency>
 			<currency type="GYD">
 				<displayName>Guyanai dollár</displayName>
-				<symbol>G$</symbol>
 			</currency>
 			<currency type="HKD">
 				<displayName>Hongkongi dollár</displayName>
-				<symbol>HK$</symbol>
 			</currency>
 			<currency type="HNL">
 				<displayName>Hodurasi lempira</displayName>
-				<symbol>L</symbol>
 			</currency>
 			<currency type="HRD">
 				<displayName>Horvát dínár</displayName>
@@ -3438,15 +3193,12 @@
 			</currency>
 			<currency type="HUF">
 				<displayName>Magyar forint</displayName>
-				<symbol>Ft</symbol>
 			</currency>
 			<currency type="IDR">
 				<displayName>Indonéz rúpia</displayName>
-				<symbol>Rp</symbol>
 			</currency>
 			<currency type="IEP">
 				<displayName>Ír font</displayName>
-				<symbol>IR£</symbol>
 			</currency>
 			<currency type="ILP">
 				<displayName>Izraeli font</displayName>
@@ -3457,50 +3209,40 @@
 			<currency type="INR">
 				<displayName>indiai rúpia</displayName>
 				<displayName count="other">Indiai rúpia</displayName>
-				<symbol>INR</symbol>
 			</currency>
 			<currency type="IQD">
 				<displayName>Iraki dínár</displayName>
-				<symbol>ID</symbol>
 			</currency>
 			<currency type="IRR">
 				<displayName>Iráni rial</displayName>
-				<symbol>RI</symbol>
 			</currency>
 			<currency type="ISK">
 				<displayName>Izlandi korona</displayName>
 			</currency>
 			<currency type="ITL">
 				<displayName>Olasz líra</displayName>
-				<symbol>LIT</symbol>
 			</currency>
 			<currency type="JMD">
 				<displayName>Jamaikai dollár</displayName>
-				<symbol>J$</symbol>
 			</currency>
 			<currency type="JOD">
 				<displayName>Jordániai dínár</displayName>
-				<symbol>JD</symbol>
 			</currency>
 			<currency type="JPY">
 				<displayName>Japán jen</displayName>
-				<symbol>JPY</symbol>
+				<symbol>¥</symbol>
 			</currency>
 			<currency type="KES">
 				<displayName>Kenyai shilling</displayName>
-				<symbol>K Sh</symbol>
 			</currency>
 			<currency type="KGS">
 				<displayName>Kirgizisztáni szom</displayName>
-				<symbol>som</symbol>
 			</currency>
 			<currency type="KHR">
 				<displayName>Kambodzsai riel</displayName>
-				<symbol>CR</symbol>
 			</currency>
 			<currency type="KMF">
 				<displayName>Comorei frank</displayName>
-				<symbol>CF</symbol>
 			</currency>
 			<currency type="KPW">
 				<displayName>Észak-koreai won</displayName>
@@ -3510,35 +3252,27 @@
 			</currency>
 			<currency type="KWD">
 				<displayName>Kuvaiti dínár</displayName>
-				<symbol>KD</symbol>
 			</currency>
 			<currency type="KYD">
 				<displayName>Kajmán-szigeteki dollár</displayName>
 			</currency>
 			<currency type="KZT">
 				<displayName>Kazahsztáni tenge</displayName>
-				<symbol>T</symbol>
 			</currency>
 			<currency type="LAK">
 				<displayName>Laoszi kip</displayName>
 			</currency>
 			<currency type="LBP">
 				<displayName>Libanoni font</displayName>
-				<symbol>LL</symbol>
 			</currency>
 			<currency type="LKR">
 				<displayName>Sri Lankai rúpia</displayName>
-				<symbol>SL Re</symbol>
 			</currency>
 			<currency type="LRD">
 				<displayName>Libériai dollár</displayName>
 			</currency>
 			<currency type="LSL">
 				<displayName>Lesothoi loti</displayName>
-				<symbol>M</symbol>
-			</currency>
-			<currency type="LSM">
-				<displayName>Maloti</displayName>
 			</currency>
 			<currency type="LTL">
 				<displayName>Litvániai litas</displayName>
@@ -3563,7 +3297,6 @@
 			</currency>
 			<currency type="LYD">
 				<displayName>Líbiai dínár</displayName>
-				<symbol>LD</symbol>
 			</currency>
 			<currency type="MAD">
 				<displayName>Marokkói dirham</displayName>
@@ -3582,7 +3315,6 @@
 			</currency>
 			<currency type="MKD">
 				<displayName>Macedon dínár</displayName>
-				<symbol>MDen</symbol>
 			</currency>
 			<currency type="MLF">
 				<displayName>Mali frank</displayName>
@@ -3592,18 +3324,15 @@
 			</currency>
 			<currency type="MNT">
 				<displayName>Mongóliai tugrik</displayName>
-				<symbol>Tug</symbol>
 			</currency>
 			<currency type="MOP">
 				<displayName>makaói pataca</displayName>
 			</currency>
 			<currency type="MRO">
 				<displayName>Mauritániai ouguiya</displayName>
-				<symbol>UM</symbol>
 			</currency>
 			<currency type="MTL">
 				<displayName>Máltai líra</displayName>
-				<symbol>Lm</symbol>
 			</currency>
 			<currency type="MTP">
 				<displayName>Máltai font</displayName>
@@ -3616,11 +3345,9 @@
 			</currency>
 			<currency type="MWK">
 				<displayName>Malawi kwacha</displayName>
-				<symbol>MK</symbol>
 			</currency>
 			<currency type="MXN">
 				<displayName>Mexikói peso</displayName>
-				<symbol>MEX$</symbol>
 			</currency>
 			<currency type="MXP">
 				<displayName>Mexikói ezüst peso (1861-1992)</displayName>
@@ -3630,22 +3357,18 @@
 			</currency>
 			<currency type="MYR">
 				<displayName>Malajziai ringgit</displayName>
-				<symbol>RM</symbol>
 			</currency>
 			<currency type="MZE">
 				<displayName>Mozambik escudo</displayName>
 			</currency>
 			<currency type="MZM">
 				<displayName>Mozambik metical</displayName>
-				<symbol>Mt</symbol>
 			</currency>
 			<currency type="MZN">
 				<displayName>Mozambiki metikális</displayName>
-				<symbol>MTn</symbol>
 			</currency>
 			<currency type="NAD">
 				<displayName>Namíbiai dollár</displayName>
-				<symbol>N$</symbol>
 			</currency>
 			<currency type="NGN">
 				<displayName>Nigériai naira</displayName>
@@ -3661,19 +3384,15 @@
 			</currency>
 			<currency type="NOK">
 				<displayName>Norvég korona</displayName>
-				<symbol>NKr</symbol>
 			</currency>
 			<currency type="NPR">
 				<displayName>Nepáli rúpia</displayName>
-				<symbol>Nrs</symbol>
 			</currency>
 			<currency type="NZD">
 				<displayName>Új-zélandi dollár</displayName>
-				<symbol>$NZ</symbol>
 			</currency>
 			<currency type="OMR">
 				<displayName>Ománi rial</displayName>
-				<symbol>RO</symbol>
 			</currency>
 			<currency type="PAB">
 				<displayName>Panamai balboa</displayName>
@@ -3692,15 +3411,12 @@
 			</currency>
 			<currency type="PHP">
 				<displayName>Fülöp-szigeteki peso</displayName>
-				<symbol>Php</symbol>
 			</currency>
 			<currency type="PKR">
 				<displayName>Pakisztáni rúpia</displayName>
-				<symbol>Pra</symbol>
 			</currency>
 			<currency type="PLN">
 				<displayName>Lengyel zloty</displayName>
-				<symbol>Zl</symbol>
 			</currency>
 			<currency type="PLZ">
 				<displayName>Lengyel zloty (1950-1995)</displayName>
@@ -3713,7 +3429,6 @@
 			</currency>
 			<currency type="QAR">
 				<displayName>Katari rial</displayName>
-				<symbol>QR</symbol>
 			</currency>
 			<currency type="RHD">
 				<displayName>rhodéziai dollár</displayName>
@@ -3722,7 +3437,6 @@
 			<currency type="ROL">
 				<displayName>Régi román lej</displayName>
 				<displayName count="other">Régi román lej</displayName>
-				<symbol>leu</symbol>
 			</currency>
 			<currency type="RON">
 				<displayName>új román lej</displayName>
@@ -3743,15 +3457,12 @@
 			</currency>
 			<currency type="SAR">
 				<displayName>Szaúdi riyal</displayName>
-				<symbol>SRl</symbol>
 			</currency>
 			<currency type="SBD">
 				<displayName>Salamon-szigeteki dollár</displayName>
-				<symbol>SI$</symbol>
 			</currency>
 			<currency type="SCR">
 				<displayName>Seychelle-szigeteki rúpia</displayName>
-				<symbol>SR</symbol>
 			</currency>
 			<currency type="SDD">
 				<displayName>Szudáni dínár</displayName>
@@ -3767,11 +3478,9 @@
 			</currency>
 			<currency type="SEK">
 				<displayName>Svéd korona</displayName>
-				<symbol>SKr</symbol>
 			</currency>
 			<currency type="SGD">
 				<displayName>Szingapúri dollár</displayName>
-				<symbol>S$</symbol>
 			</currency>
 			<currency type="SHP">
 				<displayName>Saint Helena font</displayName>
@@ -3781,14 +3490,12 @@
 			</currency>
 			<currency type="SKK">
 				<displayName>Szlovák korona</displayName>
-				<symbol>Sk</symbol>
 			</currency>
 			<currency type="SLL">
 				<displayName>Sierra Leonei leone</displayName>
 			</currency>
 			<currency type="SOS">
 				<displayName>Szomáli shilling</displayName>
-				<symbol>Sh.</symbol>
 			</currency>
 			<currency type="SRD">
 				<displayName>Surinamei dollár</displayName>
@@ -3796,11 +3503,9 @@
 			</currency>
 			<currency type="SRG">
 				<displayName>Suriname-i gulden</displayName>
-				<symbol>Sf</symbol>
 			</currency>
 			<currency type="STD">
 				<displayName>Sao tome-i és principe-i dobra</displayName>
-				<symbol>Db</symbol>
 			</currency>
 			<currency type="SUR">
 				<displayName>Szovjet rubel</displayName>
@@ -3810,11 +3515,9 @@
 			</currency>
 			<currency type="SYP">
 				<displayName>Szíriai font</displayName>
-				<symbol>LS</symbol>
 			</currency>
 			<currency type="SZL">
 				<displayName>Szváziföldi lilangeni</displayName>
-				<symbol>E</symbol>
 			</currency>
 			<currency type="THB">
 				<displayName>Thai baht</displayName>
@@ -3834,7 +3537,6 @@
 			<currency type="TOP">
 				<displayName>tongai paanga</displayName>
 				<displayName count="other">Tongai paanga</displayName>
-				<symbol>T$</symbol>
 			</currency>
 			<currency type="TPE">
 				<displayName>Timori escudo</displayName>
@@ -3842,7 +3544,6 @@
 			<currency type="TRL">
 				<displayName>Régi török líra</displayName>
 				<displayName count="other">Régi török líra</displayName>
-				<symbol>TL</symbol>
 			</currency>
 			<currency type="TRY">
 				<displayName>új török líra</displayName>
@@ -3850,16 +3551,13 @@
 			</currency>
 			<currency type="TTD">
 				<displayName>Trinidad és tobagoi dollár</displayName>
-				<symbol>TT$</symbol>
 			</currency>
 			<currency type="TWD">
 				<displayName>Tajvani új dollár</displayName>
 				<displayName count="other">Tajvani dollár</displayName>
-				<symbol>NT$</symbol>
 			</currency>
 			<currency type="TZS">
 				<displayName>Tanzániai shilling</displayName>
-				<symbol>T Sh</symbol>
 			</currency>
 			<currency type="UAH">
 				<displayName>Ukrán hrivnya</displayName>
@@ -3873,11 +3571,10 @@
 			</currency>
 			<currency type="UGX">
 				<displayName>Ugandai shilling</displayName>
-				<symbol>U Sh</symbol>
 			</currency>
 			<currency type="USD">
 				<displayName>USA dollár</displayName>
-				<symbol>USD</symbol>
+				<symbol>$</symbol>
 			</currency>
 			<currency type="USN">
 				<displayName>USA dollár (következő napi)</displayName>
@@ -3896,26 +3593,22 @@
 			<currency type="UYU">
 				<displayName>Uruguay-i peso uruguayo</displayName>
 				<displayName count="other">Uruguayi peso</displayName>
-				<symbol>Ur$</symbol>
 			</currency>
 			<currency type="UZS">
 				<displayName>Üzbegisztáni szum</displayName>
 			</currency>
 			<currency type="VEB">
 				<displayName>Venezuelai bolívar</displayName>
-				<symbol>Be</symbol>
 			</currency>
 			<currency type="VEF">
 				<displayName>Venezuelai bolivar fuerte</displayName>
 				<displayName count="other">Venezuelai bolivar fuerte</displayName>
-				<symbol>BsF</symbol>
 			</currency>
 			<currency type="VND">
 				<displayName>Vietnámi dong</displayName>
 			</currency>
 			<currency type="VUV">
 				<displayName>Vanuatui vatu</displayName>
-				<symbol>VT</symbol>
 			</currency>
 			<currency type="WST">
 				<displayName>Nyugat-szamoai tala</displayName>
@@ -3947,7 +3640,6 @@
 			</currency>
 			<currency type="XCD">
 				<displayName>Kelet-karibi dollár</displayName>
-				<symbol>EC$</symbol>
 			</currency>
 			<currency type="XDR">
 				<displayName>Special Drawing Rights</displayName>
@@ -3971,7 +3663,6 @@
 			</currency>
 			<currency type="XPF">
 				<displayName>CFP frank</displayName>
-				<symbol>CFPF</symbol>
 			</currency>
 			<currency type="XPT">
 				<displayName>platina</displayName>
@@ -3992,7 +3683,6 @@
 			</currency>
 			<currency type="YER">
 				<displayName>Jemeni rial</displayName>
-				<symbol>YRl</symbol>
 			</currency>
 			<currency type="YUD">
 				<displayName>Jugoszláv kemény dínár</displayName>
@@ -4008,7 +3698,6 @@
 			</currency>
 			<currency type="ZAR">
 				<displayName>Dél-afrikai rand</displayName>
-				<symbol>R</symbol>
 			</currency>
 			<currency type="ZMK">
 				<displayName>Zambiai kwacha</displayName>
@@ -4021,7 +3710,6 @@
 			</currency>
 			<currency type="ZWD">
 				<displayName>Zimbabwei dollár</displayName>
-				<symbol>Z$</symbol>
 			</currency>
 		</currencies>
 	</numbers>
@@ -4055,3 +3743,4 @@
 		</messages>
 	</posix>
 </ldml>
+

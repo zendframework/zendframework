@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.56 $"/>
-		<generation date="$Date: 2008/06/15 08:09:47 $"/>
+		<version number="$Revision: 1.67 $"/>
+		<generation date="$Date: 2009/05/05 23:06:34 $"/>
 		<language type="dz"/>
 	</identity>
 	<localeDisplayNames>
@@ -172,9 +172,8 @@
 		</types>
 	</localeDisplayNames>
 	<characters>
-		<exemplarCharacters>[ཀ ྐ ཁ ྑ ག ྒ ང ྔ ཅ-ཇ ྗ ཉ ྙ ཏ ྟ ཐ ད ྡ ན ྣ པ ྤ ཕ བ ྦ མ ྨ ཙ ྩ ཚ ཛ ྫ ཝ ྭ ཞ-ཡ ྱ ར ྲ ལ ླ ཤ ྵ ས ཧ ྷ ཨ ི ུ ེ ོ]</exemplarCharacters>
+		<exemplarCharacters>[ཀ \u0F90 ཁ \u0F91 ག \u0F92 ང \u0F94 ཅ-ཇ \u0F97 ཉ \u0F99 ཏ \u0F9F ཐ ད \u0FA1 ན \u0FA3 པ \u0FA4 ཕ བ \u0FA6 མ \u0FA8 ཙ \u0FA9 ཚ ཛ \u0FAB ཝ \u0FAD ཞ-ཡ \u0FB1 ར \u0FB2 ལ \u0FB3 ཤ \u0FB5 ས ཧ \u0FB7 ཨ \u0F72 \u0F74 \u0F7A \u0F7C]</exemplarCharacters>
 		<exemplarCharacters type="auxiliary">[ཊ-ཌ ཎ ཥ]</exemplarCharacters>
-		<mapping choice="utf-8" registry="iana"/>
 	</characters>
 	<delimiters>
 		<quotationStart>&quot;</quotationStart>
@@ -293,22 +292,22 @@
 				<dateFormats>
 					<dateFormatLength type="full">
 						<dateFormat>
-							<pattern>སྤྱི་ལོ་yyyy ཟླ་ MMMM ཚེས་ dd</pattern>
+							<pattern>སྤྱི་ལོ་y ཟླ་ MMMM ཚེས་ dd</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="long">
 						<dateFormat>
-							<pattern>སྤྱི་ལོ་yyyy ཟླ་ MMMM ཚེས་ dd</pattern>
+							<pattern>སྤྱི་ལོ་y ཟླ་ MMMM ཚེས་ dd</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="medium">
 						<dateFormat>
-							<pattern>སྤྱི་ལོ་yyyy ཟླ་ MMM ཚེས་ dd</pattern>
+							<pattern>སྤྱི་ལོ་y ཟླ་ MMM ཚེས་ dd</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="short">
 						<dateFormat>
-							<pattern>སྤྱི་ལོ་ yyyy ཟླ་ MM ཚེས་ dd</pattern>
+							<pattern>yyyy-MM-dd</pattern>
 						</dateFormat>
 					</dateFormatLength>
 				</dateFormats>
@@ -316,12 +315,12 @@
 					<default choice="long"/>
 					<timeFormatLength type="full">
 						<timeFormat>
-							<pattern>ཆུ་ཚོད་ h སྐར་མ་ mm སྐར་ཆཱ་ ss a vvvv</pattern>
+							<pattern>ཆུ་ཚོད་ h སྐར་མ་ mm སྐར་ཆཱ་ ss a zzzz</pattern>
 						</timeFormat>
 					</timeFormatLength>
 					<timeFormatLength type="long">
 						<timeFormat>
-							<pattern>ཆུ་ཚོད་ h སྐར་མ་ mm སྐར་ཆཱ་ ss a zzz</pattern>
+							<pattern>ཆུ་ཚོད་ h སྐར་མ་ mm སྐར་ཆཱ་ ss a z</pattern>
 						</timeFormat>
 					</timeFormatLength>
 					<timeFormatLength type="medium">
@@ -337,16 +336,6 @@
 				</timeFormats>
 				<dateTimeFormats>
 					<default choice="long"/>
-					<dateTimeFormatLength>
-						<dateTimeFormat>
-							<pattern>{1} {0}</pattern>
-						</dateTimeFormat>
-					</dateTimeFormatLength>
-					<dateTimeFormatLength type="full">
-						<dateTimeFormat>
-							<pattern>{1} {0}</pattern>
-						</dateTimeFormat>
-					</dateTimeFormatLength>
 					<availableFormats>
 						<dateFormatItem id="yyQ">Q yy</dateFormatItem>
 					</availableFormats>
@@ -411,7 +400,6 @@
 		<currencies>
 			<currency type="BTN">
 				<displayName>དངུལ་ཀྲམ་</displayName>
-				<symbol>Nu</symbol>
 			</currency>
 		</currencies>
 	</numbers>

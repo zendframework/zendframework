@@ -384,12 +384,12 @@ class Zend_LocaleTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('S', Zend_LocaleTestHelper::getTranslation(array('gregorian', 'stand-alone', 'narrow', 'sun'), 'day', 'en'));
         $this->assertFalse(Zend_LocaleTestHelper::getTranslation(array('gregorian', 'stand-alone', 'narrow', 'xxx'), 'day'));
 
-        $this->assertEquals('EEEE, d. MMMM yyyy', Zend_LocaleTestHelper::getTranslation('full', 'date', 'de_DE'));
-        $this->assertEquals('EEEE, MMMM d, yyyy', Zend_LocaleTestHelper::getTranslation('full', 'date', 'en'));
+        $this->assertEquals('EEEE, d. MMMM y', Zend_LocaleTestHelper::getTranslation('full', 'date', 'de_DE'));
+        $this->assertEquals('EEEE, MMMM d, y', Zend_LocaleTestHelper::getTranslation('full', 'date', 'en'));
         $this->assertFalse(Zend_LocaleTestHelper::getTranslation('xxxx', 'date'));
 
-        $this->assertEquals("HH:mm:ss v", Zend_LocaleTestHelper::getTranslation('full', 'time', 'de_DE'));
-        $this->assertEquals('h:mm:ss a v', Zend_LocaleTestHelper::getTranslation('full', 'time', 'en'));
+        $this->assertEquals("HH:mm:ss zzzz", Zend_LocaleTestHelper::getTranslation('full', 'time', 'de_DE'));
+        $this->assertEquals('h:mm:ss a zzzz', Zend_LocaleTestHelper::getTranslation('full', 'time', 'en'));
         $this->assertFalse(Zend_LocaleTestHelper::getTranslation('xxxx', 'time'));
 
         $this->assertEquals('Wien', Zend_LocaleTestHelper::getTranslation('Europe/Vienna', 'citytotimezone', 'de_DE'));
@@ -404,8 +404,8 @@ class Zend_LocaleTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('EUR', Zend_LocaleTestHelper::getTranslation('Euro', 'currencytoname', 'en'));
         $this->assertFalse(Zend_LocaleTestHelper::getTranslation('xxx', 'currencytoname'));
 
-        $this->assertEquals('SFr.', Zend_LocaleTestHelper::getTranslation('CHF', 'currencysymbol', 'de_DE'));
-        $this->assertEquals('Fr.',  Zend_LocaleTestHelper::getTranslation('CHF', 'currencysymbol', 'en'));
+        $this->assertEquals('Fr.', Zend_LocaleTestHelper::getTranslation('CHF', 'currencysymbol', 'de_DE'));
+        $this->assertEquals('Fr.', Zend_LocaleTestHelper::getTranslation('CHF', 'currencysymbol', 'en'));
         $this->assertFalse(Zend_LocaleTestHelper::getTranslation('xxx', 'currencysymbol'));
 
         $this->assertEquals('EUR', Zend_LocaleTestHelper::getTranslation('AT', 'currencytoregion', 'de_DE'));
@@ -464,10 +464,10 @@ class Zend_LocaleTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(in_array('S', Zend_LocaleTestHelper::getTranslationList('day', 'de_DE', array('gregorian', 'stand-alone', 'narrow'))));
         $this->assertTrue(in_array('S', Zend_LocaleTestHelper::getTranslationList('day', 'en', array('gregorian', 'stand-alone', 'narrow'))));
 
-        $this->assertTrue(in_array('EEEE, d. MMMM yyyy', Zend_LocaleTestHelper::getTranslationList('date', 'de_DE')));
-        $this->assertTrue(in_array('EEEE, MMMM d, yyyy', Zend_LocaleTestHelper::getTranslationList('date', 'en')));
+        $this->assertTrue(in_array('EEEE, d. MMMM y', Zend_LocaleTestHelper::getTranslationList('date', 'de_DE')));
+        $this->assertTrue(in_array('EEEE, MMMM d, y', Zend_LocaleTestHelper::getTranslationList('date', 'en')));
 
-        $this->assertTrue(in_array("HH:mm:ss v", Zend_LocaleTestHelper::getTranslationList('time', 'de_DE')));
+        $this->assertTrue(in_array("HH:mm:ss zzzz", Zend_LocaleTestHelper::getTranslationList('time', 'de_DE')));
         $this->assertTrue(in_array("h:mm:ss a z", Zend_LocaleTestHelper::getTranslationList('time', 'en')));
 
         $this->assertTrue(in_array('Wien', Zend_LocaleTestHelper::getTranslationList('citytotimezone', 'de_DE')));
@@ -479,7 +479,7 @@ class Zend_LocaleTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(in_array('EUR', Zend_LocaleTestHelper::getTranslationList('currencytoname', 'de_DE')));
         $this->assertTrue(in_array('EUR', Zend_LocaleTestHelper::getTranslationList('currencytoname', 'en')));
 
-        $this->assertTrue(in_array('SFr.', Zend_LocaleTestHelper::getTranslationList('currencysymbol', 'de_DE')));
+        $this->assertTrue(in_array('Fr.', Zend_LocaleTestHelper::getTranslationList('currencysymbol', 'de_DE')));
         $this->assertTrue(in_array('Fr.', Zend_LocaleTestHelper::getTranslationList('currencysymbol', 'en')));
 
         $this->assertTrue(in_array('EUR', Zend_LocaleTestHelper::getTranslationList('currencytoregion', 'de_DE')));
@@ -498,7 +498,7 @@ class Zend_LocaleTest extends PHPUnit_Framework_TestCase
 
         $char = Zend_LocaleTestHelper::getTranslationList('characters', 'en');
         $this->assertEquals("[a-z]", $char['characters']);
-        $this->assertEquals("[á à ă â å ä ā æ ç é è ĕ ê ë ē í ì ĭ î ï ī ñ ó ò ŏ ô ö ø ō œ ß ú ù ŭ û ü ū ÿ]", $char['auxiliary']);
+        $this->assertEquals("[á à ă â å ä ã ā æ ç é è ĕ ê ë ē í ì ĭ î ï ī ñ ó ò ŏ ô ö ø ō œ ß ú ù ŭ û ü ū ÿ]", $char['auxiliary']);
         $this->assertEquals("[a-c č d-l ł m-z]", $char['currencySymbol']);
     }
 

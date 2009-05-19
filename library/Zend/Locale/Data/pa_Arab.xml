@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.20 $"/>
-		<generation date="$Date: 2008/06/15 08:09:47 $"/>
+		<version number="$Revision: 1.24 $"/>
+		<generation date="$Date: 2009/05/05 23:06:39 $"/>
 		<language type="pa"/>
 		<script type="Arab"/>
 	</identity>
@@ -23,7 +23,7 @@
 		<orientation characters="right-to-left"/>
 	</layout>
 	<characters>
-		<exemplarCharacters>[ُ ء آ ؤ ئ-ب پ ت ث ٹ ج چ ح-ذ ڈ ر ز ڑ ژ س-غ ف ق ک گ ل-ن ں ه ھ ہ و ی ے]</exemplarCharacters>
+		<exemplarCharacters>[\u064F ء آ ؤ ئ-ب پ ت ث ٹ ج چ ح-ذ ڈ ر ز ڑ ژ س-غ ف ق ک گ ل-ن ں ه ھ ہ و ی ے]</exemplarCharacters>
 		<exemplarCharacters type="auxiliary">[أ ٻ ة ٺ ټ ٽ]</exemplarCharacters>
 	</characters>
 	<dates>
@@ -106,6 +106,10 @@
 		</calendars>
 	</dates>
 	<numbers>
+		<defaultNumberingSystem>arab</defaultNumberingSystem>
+		<symbols>
+			<nativeZeroDigit>٠</nativeZeroDigit>
+		</symbols>
 		<currencies>
 			<currency type="EUR">
 				<displayName>يورو</displayName>

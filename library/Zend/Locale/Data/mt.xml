@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.77 $"/>
-		<generation date="$Date: 2008/06/09 02:17:47 $"/>
+		<version number="$Revision: 1.90 $"/>
+		<generation date="$Date: 2009/05/05 23:06:38 $"/>
 		<language type="mt"/>
 	</identity>
 	<localeDisplayNames>
@@ -823,7 +823,7 @@
 							<month type="5">Mej</month>
 							<month type="6">Ġun</month>
 							<month type="7">Lul</month>
-							<month type="8">Awi</month>
+							<month type="8">Aww</month>
 							<month type="9">Set</month>
 							<month type="10">Ott</month>
 							<month type="11">Nov</month>
@@ -837,7 +837,7 @@
 							<month type="5">Mejju</month>
 							<month type="6">Ġunju</month>
 							<month type="7">Lulju</month>
-							<month type="8">Awissu</month>
+							<month type="8">Awwissu</month>
 							<month type="9">Settembru</month>
 							<month type="10">Ottubru</month>
 							<month type="11">Novembru</month>
@@ -925,17 +925,17 @@
 				<dateFormats>
 					<dateFormatLength type="full">
 						<dateFormat>
-							<pattern>EEEE, d 'ta'’ MMMM yyyy</pattern>
+							<pattern>EEEE, d 'ta'’ MMMM y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="long">
 						<dateFormat>
-							<pattern>d 'ta'’ MMMM yyyy</pattern>
+							<pattern>d 'ta'’ MMMM y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="medium">
 						<dateFormat>
-							<pattern>dd MMM yyyy</pattern>
+							<pattern>dd MMM y</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="short">
@@ -947,7 +947,7 @@
 				<timeFormats>
 					<timeFormatLength type="full">
 						<timeFormat>
-							<pattern>HH:mm:ss v</pattern>
+							<pattern>HH:mm:ss zzzz</pattern>
 						</timeFormat>
 					</timeFormatLength>
 					<timeFormatLength type="long">
@@ -967,17 +967,12 @@
 					</timeFormatLength>
 				</timeFormats>
 				<dateTimeFormats>
-					<dateTimeFormatLength>
-						<dateTimeFormat>
-							<pattern>{1} {0}</pattern>
-						</dateTimeFormat>
-					</dateTimeFormatLength>
 					<availableFormats>
 						<dateFormatItem id="MMMMd">d 'ta'’ MMMM</dateFormatItem>
 						<dateFormatItem id="MMdd">dd/MM</dateFormatItem>
 						<dateFormatItem id="yyQ">Q yy</dateFormatItem>
 						<dateFormatItem id="yyyyMM">MM/yyyy</dateFormatItem>
-						<dateFormatItem id="yyyyMMM">MMM yyyy</dateFormatItem>
+						<dateFormatItem id="yyyyMMM">MMM y</dateFormatItem>
 					</availableFormats>
 					<intervalFormats>
 						<intervalFormatFallback>{0} - {1}</intervalFormatFallback>
@@ -1033,18 +1028,18 @@
 							<greatestDifference id="y">E, dd/MM/yyyy - E, dd/MM/yyyy</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMM">
-							<greatestDifference id="M">MMM-MMM yyyy</greatestDifference>
-							<greatestDifference id="y">MMM yyyy - MMM yyyy</greatestDifference>
+							<greatestDifference id="M">MMM-MMM y</greatestDifference>
+							<greatestDifference id="y">MMM y - MMM y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMEd">
-							<greatestDifference id="M">E, d 'ta'’ MMM - E, d 'ta'’ MMM yyyy</greatestDifference>
-							<greatestDifference id="d">E, d 'ta'’ - E, d 'ta'’ MMM yyyy</greatestDifference>
-							<greatestDifference id="y">E, d 'ta'’ MMM yyyy - E, d 'ta'’ MMM yyyy</greatestDifference>
+							<greatestDifference id="M">E, d 'ta'’ MMM - E, d 'ta'’ MMM y</greatestDifference>
+							<greatestDifference id="d">E, d 'ta'’ - E, d 'ta'’ MMM y</greatestDifference>
+							<greatestDifference id="y">E, d 'ta'’ MMM y - E, d 'ta'’ MMM y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMd">
-							<greatestDifference id="M">d 'ta'’ MMM - d 'ta'’ MMM yyyy</greatestDifference>
-							<greatestDifference id="d">d 'ta'’-d 'ta'’ MMM yyyy</greatestDifference>
-							<greatestDifference id="y">d 'ta'’ MMM yyyy - d 'ta'’ MMM yyyy</greatestDifference>
+							<greatestDifference id="M">d 'ta'’ MMM - d 'ta'’ MMM y</greatestDifference>
+							<greatestDifference id="d">d 'ta'’-d 'ta'’ MMM y</greatestDifference>
+							<greatestDifference id="y">d 'ta'’ MMM y - d 'ta'’ MMM y</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMd">
 							<greatestDifference id="M">dd/MM/yyyy - dd/MM/yyyy</greatestDifference>
@@ -1068,9 +1063,9 @@
 					</field>
 					<field type="day">
 						<displayName>Jum</displayName>
+						<relative type="-1">Lbieraħ</relative>
 						<relative type="0">Illum</relative>
 						<relative type="1">Għada</relative>
-						<relative type="-1">Lbieraħ</relative>
 					</field>
 					<field type="weekday">
 						<displayName>Jum tal-Ġimgħa</displayName>
@@ -1130,11 +1125,9 @@
 			</currency>
 			<currency type="MTL">
 				<displayName>Lira Maltija</displayName>
-				<symbol>Lm</symbol>
 			</currency>
 			<currency type="XXX">
 				<displayName>Munita Mhux Magħruf jew Mhux Validu</displayName>
-				<symbol>XXX</symbol>
 			</currency>
 		</currencies>
 	</numbers>
@@ -1145,3 +1138,4 @@
 		</messages>
 	</posix>
 </ldml>
+

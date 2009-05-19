@@ -1,21 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.53 $"/>
-		<generation date="$Date: 2008/06/15 08:09:45 $"/>
+		<version number="$Revision: 1.56 $"/>
+		<generation date="$Date: 2009/05/05 23:06:34 $"/>
 		<language type="de"/>
 		<territory type="CH"/>
 	</identity>
 	<localeDisplayNames>
+		<languages>
+			<language type="be">Weissrussisch</language>
+		</languages>
 		<territories>
 			<territory type="BD">Bangladesh</territory>
 			<territory type="BN">Brunei</territory>
 			<territory type="BW">Botswana</territory>
+			<territory type="BY">Weissrussland</territory>
 			<territory type="CV">Kapverden</territory>
 			<territory type="DJ">Djibouti</territory>
 			<territory type="GB">Grossbritannien</territory>
 			<territory type="MH">Marshall-Inseln</territory>
+			<territory type="QO">Äusseres Ozeanien</territory>
 			<territory type="RW">Rwanda</territory>
 			<territory type="SB">Salomon-Inseln</territory>
 			<territory type="ST">Sao Tomé und Principe</territory>
@@ -53,3 +58,4 @@
 		</currencyFormats>
 	</numbers>
 </ldml>
+

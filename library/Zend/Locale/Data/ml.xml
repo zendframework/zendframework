@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
 <ldml>
 	<identity>
-		<version number="$Revision: 1.57 $"/>
-		<generation date="$Date: 2008/06/26 03:47:58 $"/>
+		<version number="$Revision: 1.79 $"/>
+		<generation date="$Date: 2009/05/05 23:06:38 $"/>
 		<language type="ml"/>
 	</identity>
 	<localeDisplayNames>
@@ -23,19 +23,19 @@
 			<language type="afa">ആഫ്രോ-ഏഷ്യാറ്റിക് ഭാഷ</language>
 			<language type="afh">ആഫ്രിഹിലി</language>
 			<language type="ain">അയിനു</language>
-			<language type="ak">അഘാന്‍</language>
+			<language type="ak">അകാന്‍</language>
 			<language type="akk">അക്കാഡിയന്‍</language>
 			<language type="ale">അലൈട്ട്</language>
 			<language type="alg">അല്‍ഗോണ്‍ക്യന്‍ ഭാഷ</language>
 			<language type="alt">സതേണ്‍ അള്‍ട്ടായി</language>
-			<language type="am">അംഹാറിക്</language>
+			<language type="am">അമാറിക്</language>
 			<language type="an">അരഗോണീസ്</language>
 			<language type="ang">പഴയ ഇംഗ്ലീഷ്</language>
 			<language type="anp">ആന്‍ഗിക</language>
 			<language type="apa">അപ്പാചേ ഭാഷ</language>
 			<language type="ar">അറബി</language>
 			<language type="arc">അരമായഭാഷ</language>
-			<language type="arn">ആരൌകാനിയന്‍</language>
+			<language type="arn">ആരൗകാനിയന്‍</language>
 			<language type="arp">അരപാഹോ</language>
 			<language type="art">കൃത്രിമഭാഷ</language>
 			<language type="arw">അറാവക്</language>
@@ -55,9 +55,9 @@
 			<language type="bas">ബസ</language>
 			<language type="bat">ബാള്‍ട്ടിക് ഭാഷ</language>
 			<language type="be">ബൈലോറഷ്യന്‍</language>
-			<language type="bej">ബജ</language>
-			<language type="bem">ബംബ</language>
-			<language type="ber">ബര്‍ബര്‍</language>
+			<language type="bej">ബേജ</language>
+			<language type="bem">ബെംബ</language>
+			<language type="ber">ബെര്‍ബര്‍</language>
 			<language type="bg">ബള്‍ഗേറിയന്‍</language>
 			<language type="bh">ബീഹാറി</language>
 			<language type="bho">ഭോജ്‌പൂരി</language>
@@ -67,9 +67,9 @@
 			<language type="bla">സിക്സിക</language>
 			<language type="bm">ബംബാറ</language>
 			<language type="bn">ബംഗാളി</language>
-			<language type="bnt">ബാന്ധു</language>
+			<language type="bnt">ബാന്‌ടു</language>
 			<language type="bo">തിബറ്റന്‍</language>
-			<language type="br">ബ്രിറ്റോണ്‍</language>
+			<language type="br">ബ്രറ്റണ്‍</language>
 			<language type="bra">ബ്രജ്</language>
 			<language type="bs">ബോസ്നിയന്‍</language>
 			<language type="btk">ബാറ്റക്</language>
@@ -80,12 +80,12 @@
 			<language type="cad">കാഡോ</language>
 			<language type="cai">മദ്ധ്യ അമേരിക്കന്‍ ഇന്‍ഡ്യന്‍ ഭാഷ</language>
 			<language type="car">കാരിബ്</language>
-			<language type="cau">കാവോകേഷ്യന്‍ ഭാഷ</language>
+			<language type="cau">കൊക്കേഷ്യന്‍ ഭാഷ</language>
 			<language type="cch">അറ്റ്സാം</language>
 			<language type="ce">ചെചന്‍</language>
 			<language type="ceb">സെബുവാനോ</language>
 			<language type="cel">സെല്‍റ്റിക് ഭാഷ</language>
-			<language type="ch">ചമോറോ</language>
+			<language type="ch">കമോറോ</language>
 			<language type="chb">ചിബ്ച</language>
 			<language type="chg">ചഗതൈ</language>
 			<language type="chk">ചൂകീസ്</language>
@@ -96,13 +96,13 @@
 			<language type="chr">ചെരോകീ</language>
 			<language type="chy">ചിയേന്നേ</language>
 			<language type="cmc">ചാമിക് ഭാഷ</language>
-			<language type="co">കോര്‍സിക്കന്‍</language>
+			<language type="co">കോഴ്സിക്കണ്‍</language>
 			<language type="cop">കോപ്റ്റിക്</language>
 			<language type="cpe">ഇംഗ്ലീഷ് അധിഷ്ഠിത മിശ്ര ഭാഷ</language>
 			<language type="cpf">ഫ്രഞ്ച് അധിഷ്ഠിത മിശ്രഭാഷ</language>
 			<language type="cpp">പോര്‍ച്ചുഗീസ് അധിഷ്ടിത മിശ്ര ഭാഷ</language>
 			<language type="cr">ക്രീ</language>
-			<language type="crh">കൃമിയന്‍ ടര്‍ക്കിഷ്</language>
+			<language type="crh">ക്രിമിയന്‍ ടര്‍ക്കിഷ്</language>
 			<language type="crp">മിശ്രഭാഷ</language>
 			<language type="cs">ചെക്ക്</language>
 			<language type="csb">കാഷുബിയാന്‍</language>
@@ -126,12 +126,12 @@
 			<language type="dsb">ലോവര്‍ സോര്‍ബിയന്‍</language>
 			<language type="dua">ദ്വാല</language>
 			<language type="dum">മദ്ധ്യ ഡച്ച്</language>
-			<language type="dv">ദിവേഹി</language>
+			<language type="dv">ദിവെഹി</language>
 			<language type="dyu">ദ്വൈല</language>
 			<language type="dz">ഭൂട്ടാനി</language>
 			<language type="ee">എവ്</language>
 			<language type="efi">എഫിക്</language>
-			<language type="egy">പ്രാചീന ഈജിപ്ത്യന്‍</language>
+			<language type="egy">പ്രാചീന ഈജിപ്ഷ്യന്‍</language>
 			<language type="eka">എകാജുക്</language>
 			<language type="el">ഗ്രീക്ക്</language>
 			<language type="elx">എലാമൈറ്റ്</language>
@@ -183,12 +183,12 @@
 			<language type="gor">ഗൊറോന്‍റാലോ</language>
 			<language type="got">ഗോഥിക്ക്</language>
 			<language type="grb">ഗ്രബൊ</language>
-			<language type="grc">പുരാതനയവനഭാഷ</language>
+			<language type="grc">പുരാതന യവന ഭാഷ</language>
 			<language type="gsw">സ്വിസ് ജര്‍മന്‍</language>
 			<language type="gu">ഗുജറാത്തി</language>
 			<language type="gv">മാന്‍സ്</language>
 			<language type="gwi">ഗ്വിച്ച് ഇന്‍</language>
-			<language type="ha">ഹൌസ</language>
+			<language type="ha">ഹൗസ</language>
 			<language type="hai">ഹൈഡ</language>
 			<language type="haw">ഹവായിയന്‍</language>
 			<language type="he">ഹീബ്രു</language>
@@ -200,15 +200,15 @@
 			<language type="ho">ഹിരി മോതു</language>
 			<language type="hr">ക്രൊയേഷ്യന്‍</language>
 			<language type="hsb">അപ്പര്‍ സോര്‍ബിയന്‍</language>
-			<language type="ht">ഹെയ്തിയാന്‍</language>
+			<language type="ht">ഹെയ്തിയന്‍</language>
 			<language type="hu">ഹംഗേറിയന്‍</language>
 			<language type="hup">ഹൂപ</language>
 			<language type="hy">അര്‍മേനിയന്‍</language>
-			<language type="hz">ഹെറീറോ</language>
+			<language type="hz">ഹെരേരൊ</language>
 			<language type="ia">ഇന്‍റര്‍ലിംഗ്വാ</language>
 			<language type="iba">ഇബാന്‍</language>
 			<language type="id">ഇന്‍ഡോനേഷ്യന്‍</language>
-			<language type="ie">ഇന്‍റര്‍ലിംഗ്വി</language>
+			<language type="ie">ഇന്റര്‍ലിംഗ്വ</language>
 			<language type="ig">ഇഗ്ബോ</language>
 			<language type="ii">ഷുവാന്‍യി</language>
 			<language type="ijo">ഇജോ</language>
@@ -239,7 +239,7 @@
 			<language type="kbd">കബര്‍ഡിയാന്‍</language>
 			<language type="kcg">ട്യാപ്</language>
 			<language type="kfo">കോറോ</language>
-			<language type="kg">കോങ്ഗോ</language>
+			<language type="kg">കോംഗോ</language>
 			<language type="kha">ഘാസി</language>
 			<language type="khi">ഘോയിസന്‍ ഭാഷ</language>
 			<language type="kho">ഘോറ്റാനേസേ</language>
@@ -272,7 +272,7 @@
 			<language type="lam">ലംബ</language>
 			<language type="lb">ലക്സംബര്‍ഗിഷ്</language>
 			<language type="lez">ലഹ്ഗിയാന്‍</language>
-			<language type="lg">ഗന്ധ</language>
+			<language type="lg">ഗാന്‍ഡ</language>
 			<language type="li">ലിംബര്‍ഗിഷ്</language>
 			<language type="ln">ലിംഗാല</language>
 			<language type="lo">ലാവോ</language>
@@ -299,9 +299,9 @@
 			<language type="mg">മലഗാസി</language>
 			<language type="mga">മദ്ധ്യ ഐറിഷ്</language>
 			<language type="mh">മാര്‍ഷല്ലീസ്</language>
-			<language type="mi">മൌറി</language>
+			<language type="mi">മൗറി</language>
 			<language type="mic">മിക്മാക്</language>
-			<language type="min">മിനാങ്കബൌ</language>
+			<language type="min">മിനാങ്കബൗ</language>
 			<language type="mis">ഇതരഭാഷ</language>
 			<language type="mk">മാസിഡോണിയന്‍</language>
 			<language type="mkh">മോണ്‍-ഖമര്‍ ഭാഷ</language>
@@ -310,7 +310,7 @@
 			<language type="mnc">മന്‍ചു</language>
 			<language type="mni">മണിപ്പൂരി</language>
 			<language type="mno">മനോബോ ഭാഷ</language>
-			<language type="mo">മൊള്‍ഡോവന്‍</language>
+			<language type="mo">മോള്‍ഡാവിയന്‍</language>
 			<language type="moh">മോഹാക്</language>
 			<language type="mos">മൊസ്സി</language>
 			<language type="mr">മറാഠി</language>
@@ -324,13 +324,13 @@
 			<language type="my">ബര്‍മീസ്</language>
 			<language type="myn">മായന്‍ ഭാഷ</language>
 			<language type="myv">ഏഴ്സ്യ</language>
-			<language type="na">നൌറു</language>
+			<language type="na">നൗറു</language>
 			<language type="nah">നാഹ്വാള്‍‍ട്ട്</language>
 			<language type="nai">വടക്കേ അമേരിക്കന്‍ ഇന്‍ഡ്യന്‍ ഭാഷ</language>
 			<language type="nap">നെപ്പോളിറ്റാന്‍</language>
 			<language type="nb">നോര്‍വീജിയന്‍ ബുക്‌മല്‍</language>
 			<language type="nd">നോര്‍ത്ത് ഡെബിള്‍</language>
-			<language type="nds">ലോജര്‍മന്‍</language>
+			<language type="nds">ലോ ജര്‍മന്‍</language>
 			<language type="ne">നേപ്പാളി</language>
 			<language type="new">നേവാരി</language>
 			<language type="ng">ഡോങ്ക</language>
@@ -347,14 +347,14 @@
 			<language type="nr">ദക്ഷിണ നെഡിബിള്‍</language>
 			<language type="nso">നോര്‍ത്തേന്‍ സോതോ</language>
 			<language type="nub">നുബിയന്‍ ഭാഷ</language>
-			<language type="nv">നവജോ</language>
+			<language type="nv">നവാഹൊ</language>
 			<language type="nwc">ക്ലാസിക്കല്‍ നേവാരി</language>
 			<language type="ny">ന്യന്‍ജ</language>
 			<language type="nym">ന്യാംവേസി</language>
 			<language type="nyn">ന്യാന്‍കലേ</language>
 			<language type="nyo">ന്യോറോ</language>
 			<language type="nzi">സിമ</language>
-			<language type="oc">ഒസിറ്റാന്‍</language>
+			<language type="oc">ഒക്സിററന്‍</language>
 			<language type="oj">ഓജിബ്വാ</language>
 			<language type="om">ഒറോമൂ</language>
 			<language type="or">ഒറിയ</language>
@@ -387,7 +387,7 @@
 			<language type="rar">രാരോടോങ്കന്‍</language>
 			<language type="rm">രഹയ്ട്ടോ-റോമന്‍സ്</language>
 			<language type="rn">റുണ്ടി</language>
-			<language type="ro">റൊമാനിയന്‍</language>
+			<language type="ro">റുമേനിയന്‍</language>
 			<language type="roa">റോമന്‍സ് ഭാഷ</language>
 			<language type="rom">റോമനി</language>
 			<language type="root">മൂലഭാഷ</language>
@@ -406,12 +406,13 @@
 			<language type="scn">സിസിലിയന്‍</language>
 			<language type="sco">സ്കോട്സ്</language>
 			<language type="sd">സിന്ധി</language>
-			<language type="se">നോര്‍ത്തേന്‍ സമി</language>
+			<language type="se">വടക്കന്‍ സമി</language>
 			<language type="sel">സെല്‍കപ്</language>
 			<language type="sem">സെമറ്റിക് ഭാഷ</language>
 			<language type="sg">സാങ്കോ</language>
 			<language type="sga">പ്രാചീന ഐറിഷ്</language>
 			<language type="sgn">ആംഗ്യഭാഷ</language>
+			<language type="sh">സെര്‍ബോ-ക്രൊയേഷ്യന്‍</language>
 			<language type="shn">ഷാന്‍</language>
 			<language type="si">സിംഹള</language>
 			<language type="sid">സിഡാമോ</language>
@@ -430,7 +431,7 @@
 			<language type="snk">സോണിന്‍കെ</language>
 			<language type="so">സോമാലി</language>
 			<language type="sog">സോജിഡിയന്‍</language>
-			<language type="son">സോങ്ഗൈ</language>
+			<language type="son">സോംഗൈ</language>
 			<language type="sq">അല്‍ബേനിയന്‍</language>
 			<language type="sr">സെര്‍ബിയന്‍</language>
 			<language type="srn">ശ്രാനന്‍ ഡോങ്കോ</language>
@@ -454,17 +455,17 @@
 			<language type="tet">ടെറ്റും</language>
 			<language type="tg">താജിക്</language>
 			<language type="th">തായ്</language>
-			<language type="ti">തിഗ്രിന്യ</language>
+			<language type="ti">ടൈഗ്രിന്യ</language>
 			<language type="tig">ടൈഗ്രി</language>
 			<language type="tiv">ടിവ്</language>
-			<language type="tk">തുര്‍ക്കമന്‍</language>
-			<language type="tkl">ടൊക്കേലൌ</language>
+			<language type="tk">തുര്‍ക്മെന്‍</language>
+			<language type="tkl">ടൊക്കേലൗ</language>
 			<language type="tl">തഗാലോഗ്</language>
-			<language type="tlh">ക്ലിങ്ഗോണ്‍</language>
+			<language type="tlh">ക്ലിംഗോണ്‍</language>
 			<language type="tli">ലിംഗ്വിറ്റ്</language>
 			<language type="tmh">ടമഷേക്</language>
 			<language type="tn">ത്സ്വാന</language>
-			<language type="to">ടോംഗന്‍</language>
+			<language type="to">ടോംഗ</language>
 			<language type="tog">ന്യാസാ ഡോങ്ക</language>
 			<language type="tpi">ടോക് പിസിന്‍</language>
 			<language type="tr">തുര്‍ക്കി</language>
@@ -475,8 +476,8 @@
 			<language type="tup">തുപി ഭാഷ</language>
 			<language type="tut">അറ്റ്ലാന്‍റിക്ക് ഭാഷ</language>
 			<language type="tvl">തുവാലു</language>
-			<language type="tw">ത്വി</language>
-			<language type="ty">ടാഹിത്യന്‍</language>
+			<language type="tw">ട്വി</language>
+			<language type="ty">താഹിതിയന്‍</language>
 			<language type="tyv">തുവിനിയന്‍</language>
 			<language type="udm">ഉഡ്മുര്‍ട്ട്</language>
 			<language type="ug">ഉയ്ഘുര്‍</language>
@@ -499,7 +500,7 @@
 			<language type="wen">സോര്‍ബിയന്‍ ഭാഷ</language>
 			<language type="wo">വൊളോഫ്</language>
 			<language type="xal">കല്‍മൈക്</language>
-			<language type="xh">ക്ഷോസാ</language>
+			<language type="xh">ഖോസാ</language>
 			<language type="yao">യാവോ</language>
 			<language type="yap">യെപ്പീസ്</language>
 			<language type="yi">യിദ്ദിഷ്</language>
@@ -513,9 +514,9 @@
 			<language type="zh_Hans">ലളിതചീനഭാഷ</language>
 			<language type="zh_Hant">പരമ്പരാഗത ചൈനീസ്‌</language>
 			<language type="znd">സാന്ദെ</language>
-			<language type="zu">സുളു</language>
+			<language type="zu">സുലു</language>
 			<language type="zun">സുനി</language>
-			<language type="zxx">ഭാഷയല്ലാത്തവ</language>
+			<language type="zxx">ഭാഷേതരം</language>
 			<language type="zza">സാസാ</language>
 		</languages>
 		<scripts>
@@ -527,7 +528,7 @@
 			<script type="Batk">ബട്ടക്</script>
 			<script type="Beng">ബംഗാളി</script>
 			<script type="Blis">ബ്ലിസ് ചിത്ര ലിപി</script>
-			<script type="Bopo">ബൊപൊമോഫോ</script>
+			<script type="Bopo">ബോപ്പോമോഫോ</script>
 			<script type="Brah">ബ്രാഹ്മി</script>
 			<script type="Brai">ബ്രെയ്‌ലി</script>
 			<script type="Bugi">ബുഗിനീസ്</script>
@@ -536,7 +537,7 @@
 			<script type="Cans">ഏകീകൃത കനേഡിയന്‍ ഗോത്രലിപി</script>
 			<script type="Cari">ചരിയന്‍</script>
 			<script type="Cham">ഛം</script>
-			<script type="Cher">ചെരോക്കീ</script>
+			<script type="Cher">ചെറോക്കി</script>
 			<script type="Cirt">ചിര്‍ത്ത്</script>
 			<script type="Copt">കോപ്റ്റിക്</script>
 			<script type="Cprt">സൈപ്രിയോട്ട്</script>
@@ -559,13 +560,13 @@
 			<script type="Hani">ഹാന്‍</script>
 			<script type="Hano">ഹനുനൂ</script>
 			<script type="Hans">പരിഷ്കൃത ഹാന്‍</script>
-			<script type="Hant">പരമ്പരാഗത ചീനലിപി</script>
+			<script type="Hant">പരമ്പരാഗത ഹാന്‍</script>
 			<script type="Hebr">ഹീബ്രു</script>
-			<script type="Hira">ഹിരഗാന</script>
+			<script type="Hira">ഹിരാഗാന</script>
 			<script type="Hmng">പഹ്വാ ഹമോംഗ്</script>
-			<script type="Hrkt">കടകാനയോ ഹിരഗാനയോ</script>
+			<script type="Hrkt">കടകാനയോ ഹിരാഗാനയോ</script>
 			<script type="Hung">പുരാതന ഹംഗേറിയന്‍</script>
-			<script type="Inds">ഇന്‍ഡസ്</script>
+			<script type="Inds">സിന്ധു</script>
 			<script type="Ital">പഴയ ഇറ്റാലിയന്‍</script>
 			<script type="Java">ജാവനീസ്</script>
 			<script type="Jpan">ജാപ്പനീസ്</script>
@@ -584,7 +585,7 @@
 			<script type="Lepc">ലെപ്ച</script>
 			<script type="Limb">ലിംബു</script>
 			<script type="Lina">സമരേഖയിലുള്ള എ</script>
-			<script type="Linb">സമരേഖയിലുള്ള ബി</script>
+			<script type="Linb">ലീനിയര്‍ ബി</script>
 			<script type="Lyci">ലൈസിന്‍</script>
 			<script type="Lydi">ലൈഡിയന്‍</script>
 			<script type="Mand">മന്‍ഡേയന്‍</script>
@@ -596,7 +597,7 @@
 			<script type="Moon">മൂണ്‍</script>
 			<script type="Mtei">മേറ്റി മായക്</script>
 			<script type="Mymr">മ്യാന്‍മാര്‍</script>
-			<script type="Nkoo">ന്‍ കോ</script>
+			<script type="Nkoo">എന്‍കോ</script>
 			<script type="Ogam">ഒഖാം</script>
 			<script type="Olck">ഒല്‍ ചിക്കി</script>
 			<script type="Orkh">ഒര്‍ഖോണ്‍</script>
@@ -604,8 +605,8 @@
 			<script type="Osma">ഒസ്‌മാനിയ</script>
 			<script type="Perm">പുരാതന പെര്‍മിക്</script>
 			<script type="Phag">ഫഗസ് പ</script>
-			<script type="Phli">ഫ്ലി</script>
-			<script type="Phlp">ഫ്ല്‍പ്</script>
+			<script type="Phli">എഴുത്തു പഹല്‍വി</script>
+			<script type="Phlp">സാള്‍ട്ടര്‍ പഹല്‍വി</script>
 			<script type="Phlv">പഹല്‍വി ലിപി</script>
 			<script type="Phnx">ഫിനീഷ്യന്‍</script>
 			<script type="Plrd">പൊള്ളാര്‍ഡ് ശബ്ദലിപി</script>
@@ -616,7 +617,7 @@
 			<script type="Runr">റുണിക്</script>
 			<script type="Samr">സമരിയ</script>
 			<script type="Sara">സരതി</script>
-			<script type="Saur">സൌരാഷ്ട്ര</script>
+			<script type="Saur">സൗരാഷ്ട്ര</script>
 			<script type="Sgnw">ചിഹ്നലിപി</script>
 			<script type="Shaw">ഷാവിയന്‍</script>
 			<script type="Sinh">സിംഹള</script>
@@ -644,8 +645,8 @@
 			<script type="Xpeo">പഴയ പേര്‍ഷ്യന്‍</script>
 			<script type="Xsux">സുമേറോ അക്കാഡിയന്‍ ക്യുണിഫോം</script>
 			<script type="Yiii">യി</script>
-			<script type="Zmth">സ്മത്ത്</script>
-			<script type="Zsym">സൈം</script>
+			<script type="Zmth">ഗണിത രൂപം</script>
+			<script type="Zsym">ചിഹ്നങ്ങള്‍</script>
 			<script type="Zxxx">എഴുതപ്പെടാത്തത്</script>
 			<script type="Zyyy">സാധാരണ</script>
 			<script type="Zzzz">അറിയപ്പെടാത്തതോ നിലവിലില്ലാത്തതോ ആയ ലിപി</script>
@@ -654,12 +655,12 @@
 			<territory type="001">ലോകം</territory>
 			<territory type="002">ആഫ്രിക്ക</territory>
 			<territory type="003">വടക്കേ അമേരിക്കന്‍ ഭൂഖണ്ഡം</territory>
-			<territory type="005">ദക്ഷിണ അമേരിക്ക</territory>
+			<territory type="005">തെക്കേ അമേരിക്കന്‍ ഭൂഖണ്ഡം</territory>
 			<territory type="009">ഓഷ്യാനിയ</territory>
-			<territory type="011">പശ്ചിമആഫ്രിക്ക</territory>
+			<territory type="011">പശ്ചിമ ആഫ്രിക്ക</territory>
 			<territory type="013">മദ്ധ്യഅമേരിക്ക</territory>
 			<territory type="014">കിഴക്കന്‍ ആഫ്രിക്ക</territory>
-			<territory type="015">ഉത്തരആഫ്രിക്ക</territory>
+			<territory type="015">വടക്കേ ആഫ്രിക്ക</territory>
 			<territory type="017">മദ്ധ്യആഫ്രിക്ക</territory>
 			<territory type="018">തെക്കേ ആഫ്രിക്ക</territory>
 			<territory type="019">അമേരിക്കന്‍ ഭൂഖണ്ഡം</territory>
@@ -671,7 +672,7 @@
 			<territory type="039">തെക്കേ യൂറോപ്പ്</territory>
 			<territory type="053">ഓസ്ട്രേലിയയും ന്യൂസിലാന്‍ഡും</territory>
 			<territory type="054">മെലനേഷ്യ</territory>
-			<territory type="057">മൈക്രോനേഷ്യന്‍ ഭാഗം</territory>
+			<territory type="057">മൈക്രോനേഷ്യന്‍ പ്രദേശം</territory>
 			<territory type="061">പോളിനേഷ്യ</territory>
 			<territory type="062">ദക്ഷിണ-മദ്ധ്യ ഏഷ്യ</territory>
 			<territory type="142">ഏഷ്യ</territory>
@@ -682,11 +683,13 @@
 			<territory type="154">വടക്കേ യൂറോപ്പ്</territory>
 			<territory type="155">പശ്ചിമ യൂറോപ്പ്</territory>
 			<territory type="172">സ്വതന്ത്രരാഷ്ട്രങ്ങളുടെ കോമണ്‍‌വെല്‍ത്ത്</territory>
+			<territory type="200">ചെക്കോസ്ലോവാക്യ</territory>
 			<territory type="419">ലാറ്റിനമേരിക്കയും കരീബിയനും</territory>
+			<territory type="830">ചാനല്‍ ദ്വീപുകള്‍</territory>
 			<territory type="AD">അന്‍റോറ</territory>
 			<territory type="AE">സംയുക്ത അറബ് രാഷ്ട്രം</territory>
 			<territory type="AF">അഫ്ഗാനിസ്ഥാന്‍</territory>
-			<territory type="AG">ആന്‍റിഗ്വ ആന്‍റ് ബര്‍ബുഡ</territory>
+			<territory type="AG">ആന്‍റിഗ്വയും ബര്‍ബുഡയും</territory>
 			<territory type="AI">ആന്‍ഗ്വില്ല</territory>
 			<territory type="AL">അല്‍ബേനിയ</territory>
 			<territory type="AM">അര്‍മേനിയ</territory>
@@ -709,13 +712,14 @@
 			<territory type="BH">ബഹ്റൈന്‍</territory>
 			<territory type="BI">ബുറുണ്ടി</territory>
 			<territory type="BJ">ബെനിന്‍</territory>
+			<territory type="BL">സെന്‍റ് ബാര്‍ത്തെല്‍മി</territory>
 			<territory type="BM">ബര്‍മുഡ</territory>
-			<territory type="BN">ബ്രൂണയ്</territory>
+			<territory type="BN">ബ്രൂണൈ</territory>
 			<territory type="BO">ബൊളീവിയ</territory>
 			<territory type="BR">ബ്രസീല്‍</territory>
 			<territory type="BS">ബഹാമാസ്</territory>
 			<territory type="BT">ഭൂട്ടാന്‍</territory>
-			<territory type="BV">ബൌവെറ്റ് ഐലന്‍റ്</territory>
+			<territory type="BV">ബൗവെറ്റ് ദ്വീപ്</territory>
 			<territory type="BW">ബോട്സ്വാന</territory>
 			<territory type="BY">ബെലറൂസ്</territory>
 			<territory type="BZ">ബെലീസ്</territory>
@@ -724,7 +728,7 @@
 			<territory type="CD">കോംഗോ - കിന്‍ഷാസ</territory>
 			<territory type="CF">സെന്‍ട്രല്‍ ആഫ്രിക്കന്‍ റിപ്പബ്ലിക്</territory>
 			<territory type="CG">കോംഗോ - ബ്രാസാവില്‍</territory>
-			<territory type="CH">സ്വിറ്റ്സര്‍ലന്‍ഡ്</territory>
+			<territory type="CH">സ്വിറ്റ്സര്‍ലാന്‍ഡ്</territory>
 			<territory type="CI">ഐവറി കോസ്റ്റ്</territory>
 			<territory type="CK">കൂക്ക് ദ്വീപുകള്‍</territory>
 			<territory type="CL">ചിലി</territory>
@@ -732,6 +736,7 @@
 			<territory type="CN">ചൈന</territory>
 			<territory type="CO">കൊളംബിയ</territory>
 			<territory type="CR">കോസ്റ്ററിക്ക</territory>
+			<territory type="CS">സെര്‍ബിയയും മോണ്ടനേഗ്രോയും</territory>
 			<territory type="CU">ക്യൂബ</territory>
 			<territory type="CV">കേപ്പ് വെര്‍ഡെ</territory>
 			<territory type="CX">ക്രിസ്മസ് ദ്വീപ്</territory>
@@ -775,7 +780,8 @@
 			<territory type="GU">ഗ്വാം</territory>
 			<territory type="GW">ഗിനി-ബിസോ</territory>
 			<territory type="GY">ഗയാന</territory>
-			<territory type="HK">ഹോങ് കോങ്</territory>
+			<territory type="HK">ഹോങ് കോങ് എസ്.ഏ.ആര്‍. ചൈന</territory>
+			<territory type="HM">ഹിയേര്‍ഡ് ദ്വീപും മക്ഡൊണാള്ഡ് ദ്വീപുകളും</territory>
 			<territory type="HN">ഹോണ്ടുറാസ്</territory>
 			<territory type="HR">ക്രൊയേഷ്യ</territory>
 			<territory type="HT">ഹെയ്തി</territory>
@@ -788,7 +794,7 @@
 			<territory type="IO">ബ്രിട്ടീഷ് ഇന്ത്യന്‍ മഹാസമുദ്ര പ്രദേശം</territory>
 			<territory type="IQ">ഇറാക്ക്</territory>
 			<territory type="IR">ഇറാന്‍</territory>
-			<territory type="IS">ഐസ്‌ലാന്‍റ്</territory>
+			<territory type="IS">ഐസ്‌ലാന്റ്</territory>
 			<territory type="IT">ഇറ്റലി</territory>
 			<territory type="JE">ജേഴ്സി</territory>
 			<territory type="JM">ജമൈക്ക</territory>
@@ -827,26 +833,28 @@
 			<territory type="ML">മാലി</territory>
 			<territory type="MM">മ്യാന്‍മാര്‍</territory>
 			<territory type="MN">മംഗോളിയ</territory>
-			<territory type="MO">മക്കാവോ</territory>
+			<territory type="MO">മക്കാവോ SAR ചൈന</territory>
 			<territory type="MP">ഉത്തര മറിയാനാ ദ്വീപുകള്‍</territory>
 			<territory type="MQ">മാര്‍ട്ടീനിക്</territory>
-			<territory type="MR">മൌറിറ്റാനിയ</territory>
+			<territory type="MR">മൗറിറ്റാനിയ</territory>
 			<territory type="MS">മോണ്ട്സെറാറ്റ്</territory>
 			<territory type="MT">മാള്‍ട്ട</territory>
-			<territory type="MU">മൌറീഷ്യസ്</territory>
+			<territory type="MU">മൗറീഷ്യസ്</territory>
 			<territory type="MV">മാലിദ്വീപ്</territory>
 			<territory type="MW">മലാവി</territory>
 			<territory type="MX">മെക്സിക്കോ</territory>
 			<territory type="MY">മലേഷ്യ</territory>
 			<territory type="MZ">മൊസാംബിക്ക്</territory>
 			<territory type="NA">നമീബിയ</territory>
-			<territory type="NE">നൈഗര്‍</territory>
+			<territory type="NC">പുതിയ കാലിഡോണിയ</territory>
+			<territory type="NE">നൈജര്‍</territory>
+			<territory type="NF">നോര്‍ഫോക് ദ്വീപ്</territory>
 			<territory type="NG">നൈജീരിയ</territory>
 			<territory type="NI">നിക്കാരഗ്വ</territory>
 			<territory type="NL">നെതര്‍ലന്‍ഡ്സ്</territory>
 			<territory type="NO">നോര്‍വെ</territory>
 			<territory type="NP">നേപ്പാള്‍</territory>
-			<territory type="NR">നൌറൂ</territory>
+			<territory type="NR">നൗറൂ</territory>
 			<territory type="NU">ന്യൂവേ</territory>
 			<territory type="NZ">ന്യൂസിലാന്‍റ്</territory>
 			<territory type="OM">ഒമാന്‍</territory>
@@ -857,17 +865,18 @@
 			<territory type="PH">ഫിലിപ്പൈന്‍സ്</territory>
 			<territory type="PK">പാക്കിസ്ഥാന്‍</territory>
 			<territory type="PL">പോളണ്ട്</territory>
+			<territory type="PM">സെന്‍റ് പിറേയും മിക്വലണും</territory>
 			<territory type="PN">പിറ്റ്കെയ്ന്‍</territory>
-			<territory type="PR">പ്യൂര്‍ട്ടോ റിക്കോ</territory>
+			<territory type="PR">പോര്‍ട്ടോ റിക്കോ</territory>
 			<territory type="PS">പാലസ്തീന്‍</territory>
 			<territory type="PT">പോര്‍ച്ചുഗല്‍</territory>
 			<territory type="PW">പലാവു</territory>
 			<territory type="PY">പരാഗ്വേ</territory>
 			<territory type="QA">ഖത്തര്‍</territory>
-			<territory type="QO">നോര്‍ഫോക് ദ്വീപ്</territory>
+			<territory type="QO">പുറംദ്വീപുകള്‍</territory>
 			<territory type="QU">യൂറോപ്യന്‍ യൂണിയന്‍</territory>
 			<territory type="RE">റീയൂണിയന്‍</territory>
-			<territory type="RO">റൊമാനിയ</territory>
+			<territory type="RO">റുമേനിയ</territory>
 			<territory type="RS">സെര്‍ബിയ</territory>
 			<territory type="RU">റഷ്യ</territory>
 			<territory type="RW">റുവാണ്ട</territory>
@@ -887,11 +896,12 @@
 			<territory type="SO">സോമാലിയ</territory>
 			<territory type="SR">സുറിനാം</territory>
 			<territory type="ST">സാവോ റ്റമെ ആന്‍ഡ് പ്രിന്‍സിപ്പി</territory>
-			<territory type="SV">എല്‍ സാല്‍വദൂര്‍</territory>
+			<territory type="SV">എല്‍ സാല്‍വദോര്‍</territory>
 			<territory type="SY">സിറിയ</territory>
 			<territory type="SZ">സ്വാസിലാന്‍റ്</territory>
+			<territory type="TC">ടര്‍ക്ക്സും കൈക്കോ ദ്വീപുകളും</territory>
 			<territory type="TD">ചാഡ്</territory>
-			<territory type="TF">ദക്ഷിണ ഫ്രഞ്ച് ഭൂപ്രദേശം</territory>
+			<territory type="TF">ഫ്രഞ്ച് ദക്ഷിണ ഭൂപ്രദേശം</territory>
 			<territory type="TG">ടോഗോ</territory>
 			<territory type="TH">തായ്‌ലാന്‍ഡ്</territory>
 			<territory type="TJ">താജിക്കിസ്ഥാന്‍</territory>
@@ -907,13 +917,15 @@
 			<territory type="TZ">ടാന്‍സാനിയ</territory>
 			<territory type="UA">ഉക്രൈന്‍</territory>
 			<territory type="UG">ഉഗാണ്ട</territory>
+			<territory type="UM">യുണൈറ്റഡ് സ്റ്റേറ്റ്സും ചെറിയ പുറംദ്വീപുകളും</territory>
 			<territory type="US">അമേരിക്കന്‍ ഐക്യനാടുകള്‍</territory>
-			<territory type="UY">ഉറൂഗ്വെ</territory>
+			<territory type="UY">ഉറുഗ്വേ</territory>
 			<territory type="UZ">ഉസ്ബെക്കിസ്ഥാന്‍</territory>
 			<territory type="VA">വത്തിക്കാന്‍</territory>
+			<territory type="VC">സെന്‍റ് വിന്‍സന്‍റും ഗ്രനഡൈന്‍സും</territory>
 			<territory type="VE">വെനിസ്വേല</territory>
 			<territory type="VG">ബ്രിട്ടീഷ് വിര്‍ജിന്‍ ദ്വീപുകള്‍</territory>
-			<territory type="VI">യു എസ് വെര്‍ജിന്‍ ദ്വീപുകള്‍</territory>
+			<territory type="VI">യു.എസ്. വെര്‍ജിന്‍ ദ്വീപുകള്‍</territory>
 			<territory type="VN">വിയറ്റ്നാം</territory>
 			<territory type="VU">വന്വാത്തു</territory>
 			<territory type="WF">വാലിസ് ആന്‍ഡ് ഫ്യുചൂന</territory>
@@ -923,18 +935,18 @@
 			<territory type="ZA">ദക്ഷിണാഫ്രിക്ക</territory>
 			<territory type="ZM">സാംബിയ</territory>
 			<territory type="ZW">സിംബാബ്വേ</territory>
-			<territory type="ZZ">അറിയപ്പെടാത്തതോ നിലവിലില്ലാത്തതോ ആയ പ്രദേശം</territory>
+			<territory type="ZZ">അറിയപ്പെടാത്തതോ നിലവിലില്ലാതµതതോ ആയ പ്രദേശം</territory>
 		</territories>
 		<variants>
 			<variant type="1996">1996-ലെ ജര്‍മന്‍ ലിപി</variant>
 			<variant type="1606NICT">1606 വരെയുള്ള ആധുനികമദ്ധ്യകാല ഫ്രഞ്ച്</variant>
 			<variant type="AREVELA">കിഴക്കന്‍ അര്‍മീനിയന്‍</variant>
 			<variant type="BOONT">ബൂണ്ട്‌ലിങ്ങ്</variant>
-			<variant type="FONIPA">ഐപി‌എ  സ്വനവ്യവസ്ഥ</variant>
+			<variant type="FONIPA">ഐപി‌എ സ്വനവ്യവസ്ഥ</variant>
 			<variant type="MONOTON">മോണോറ്റോണിക്</variant>
 			<variant type="NEDIS">നേറ്റിസോണ്‍ പ്രാദേശികരൂപം</variant>
 			<variant type="NJIVA">ഗ്നിവ/നിജിവ പ്രാദേശികരൂപം</variant>
-			<variant type="POSIX">കമ്പ്യൂട്ടറിന്റെ ഉപയോഗത്തിന്</variant>
+			<variant type="POSIX">കമ്പ്യൂട്ടര്‍</variant>
 			<variant type="REVISED">പരിഷ്ക്കരിച്ച ലിപി</variant>
 		</variants>
 		<keys>
@@ -943,17 +955,17 @@
 			<key type="currency">നാണയം</key>
 		</keys>
 		<types>
-			<type type="big5han" key="collation">പരമ്പരാഗത ചൈനീസ് ക്രമീകരണം - ബിഗµ5</type>
+			<type type="big5han" key="collation">പരമ്പരാഗത ചൈനീസ് ക്രമീകരണം - ബിഗ്5</type>
 			<type type="buddhist" key="calendar">ബുദ്ധമതകലണ്ടര്‍</type>
 			<type type="chinese" key="calendar">ചൈനീസ് കലണ്ടര്‍</type>
 			<type type="direct" key="collation">പ്രത്യക്ഷക്രമീകരണം</type>
 			<type type="gb2312han" key="collation">ലളിതമായ ചൈനീസ് ക്രമീകരണം - ജീബി2312</type>
 			<type type="gregorian" key="calendar">ഇംഗ്ലീഷ് കലണ്ടര്‍</type>
-			<type type="hebrew" key="calendar">യഹൂദകലണ്ടര്‍</type>
+			<type type="hebrew" key="calendar">ഹീബ്രൂ കലണ്ടര്‍</type>
 			<type type="indian" key="calendar">ശകവര്‍ഷ കലണ്ടര്‍</type>
 			<type type="islamic" key="calendar">ഇസ്ലാം കലണ്ടര്‍</type>
-			<type type="islamic-civil" key="calendar">ഇസ്ലാം-സിവി¿ല്‍ കലണ്ടര്‍</type>
-			<type type="japanese" key="calendar">ജപ്പാനീസ് കലണ്ടര്‍</type>
+			<type type="islamic-civil" key="calendar">ഇസ്ലാം-സിവില്‍ കലണ്ടര്‍</type>
+			<type type="japanese" key="calendar">ജാപ്പനീസ് കലണ്ടര്‍</type>
 			<type type="phonebook" key="collation">ഫോണ്‍ബുക്കിലെ ക്രമീകരണം</type>
 			<type type="pinyin" key="collation">പിന്‍‌യിന്‍ ക്രമീകരണം</type>
 			<type type="roc" key="calendar">ചൈനീസ് കലണ്ടര്‍</type>
@@ -971,7 +983,7 @@
 		</codePatterns>
 	</localeDisplayNames>
 	<characters>
-		<exemplarCharacters>[\u200C \u200D അ-ഋ ൠ ഌ ൡ എ-ഐ ഒ-ന പ-ര ല വ ള ഴ റ ശ-ഹ ഃ ം ാ-ൃ െ-ൈ ൊ-ൌ ൗ ്]</exemplarCharacters>
+		<exemplarCharacters>[\u200C \u200D ഃ അ-ഋ ൠ ഌ ൡ എ-ഐ ഒ-ന പ-മ ം യ ര ല വ-ഹ ള ഴ റ ാ-ൃ െ-ൈ ൊ ോ ൗ ൌ \u0D4D]</exemplarCharacters>
 		<exemplarCharacters type="auxiliary">[a-z]</exemplarCharacters>
 		<exemplarCharacters type="currencySymbol">[a-z]</exemplarCharacters>
 	</characters>
@@ -994,7 +1006,7 @@
 							<month type="5">മേയ്</month>
 							<month type="6">ജൂണ്‍</month>
 							<month type="7">ജൂലൈ</month>
-							<month type="8">ആഗ</month>
+							<month type="8">ഓഗ</month>
 							<month type="9">സെപ്റ്റം</month>
 							<month type="10">ഒക്ടോ</month>
 							<month type="11">നവം</month>
@@ -1019,12 +1031,12 @@
 						<monthWidth type="narrow">
 							<month type="1">ജ</month>
 							<month type="2">ഫെ</month>
-							<month type="3">മ</month>
+							<month type="3">മാ</month>
 							<month type="4">ഏ</month>
 							<month type="5">മേ</month>
 							<month type="6">ജൂ</month>
 							<month type="7">ജൂ</month>
-							<month type="8">ആ</month>
+							<month type="8">ഓ</month>
 							<month type="9">സെ</month>
 							<month type="10">ഒ</month>
 							<month type="11">ന</month>
@@ -1035,18 +1047,6 @@
 				<days>
 					<dayContext type="format">
 						<dayWidth type="abbreviated">
-							<day type="sun">ഞാ</day>
-							<day type="mon">തി</day>
-							<day type="tue">ചൊ</day>
-							<day type="wed">ബു</day>
-							<day type="thu">വ്യാ</day>
-							<day type="fri">വെ</day>
-							<day type="sat">ശ</day>
-						</dayWidth>
-						<dayWidth type="narrow">
-							<day type="tue">ചൊ</day>
-						</dayWidth>
-						<dayWidth type="wide">
 							<day type="sun">ഞായര്‍</day>
 							<day type="mon">തിങ്കള്‍</day>
 							<day type="tue">ചൊവ്വ</day>
@@ -1055,19 +1055,25 @@
 							<day type="fri">വെള്ളി</day>
 							<day type="sat">ശനി</day>
 						</dayWidth>
+						<dayWidth type="wide">
+							<day type="sun">ഞായറാഴ്ച</day>
+							<day type="mon">തിങ്കളാഴ്ച</day>
+							<day type="tue">ചൊവ്വാഴ്ച</day>
+							<day type="wed">ബുധനാഴ്ച</day>
+							<day type="thu">വ്യാഴാഴ്ച</day>
+							<day type="fri">വെള്ളിയാഴ്ച</day>
+							<day type="sat">ശനിയാഴ്ച</day>
+						</dayWidth>
 					</dayContext>
 					<dayContext type="stand-alone">
 						<dayWidth type="narrow">
-							<day type="sun">ഞ</day>
-							<day type="mon">ത</day>
-							<day type="tue">ച</day>
-							<day type="wed">ബ</day>
-							<day type="thu">വ</day>
-							<day type="fri">വ</day>
+							<day type="sun">ഞാ</day>
+							<day type="mon">തി</day>
+							<day type="tue">ചൊ</day>
+							<day type="wed">ബു</day>
+							<day type="thu">വ്യാ</day>
+							<day type="fri">വെ</day>
 							<day type="sat">ശ</day>
-						</dayWidth>
-						<dayWidth type="wide">
-							<day type="mon">തിങ്കളാഴ്ച</day>
 						</dayWidth>
 					</dayContext>
 				</days>
@@ -1095,12 +1101,12 @@
 						</quarterWidth>
 					</quarterContext>
 				</quarters>
-				<am>രാവിലെ</am>
-				<pm>വൈകുന്നേരം</pm>
+				<am>am</am>
+				<pm>pm</pm>
 				<eras>
 					<eraNames>
 						<era type="0">ക്രിസ്തുവിനു് മുമ്പ്‌</era>
-						<era type="1">ക്രിസ്തുവിനു് പിമ്പ്</era>
+						<era type="1">ക്രിസ്തുവിന് പിന്‍പ്</era>
 					</eraNames>
 					<eraAbbr>
 						<era type="0">ക്രി.മു.</era>
@@ -1114,29 +1120,29 @@
 				<dateFormats>
 					<dateFormatLength type="full">
 						<dateFormat>
-							<pattern>yyyy, MMMM d, EEEE</pattern>
+							<pattern>y, MMMM d, EEEE</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="long">
 						<dateFormat>
-							<pattern>yyyy, MMMM d</pattern>
+							<pattern>y, MMMM d</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="medium">
 						<dateFormat>
-							<pattern>yyyy, MMM d</pattern>
+							<pattern>y, MMM d</pattern>
 						</dateFormat>
 					</dateFormatLength>
 					<dateFormatLength type="short">
 						<dateFormat>
-							<pattern>dd-MM-yy</pattern>
+							<pattern>dd/MM/yy</pattern>
 						</dateFormat>
 					</dateFormatLength>
 				</dateFormats>
 				<timeFormats>
 					<timeFormatLength type="full">
 						<timeFormat>
-							<pattern>h:mm:ss a v</pattern>
+							<pattern>h:mm:ss a zzzz</pattern>
 						</timeFormat>
 					</timeFormatLength>
 					<timeFormatLength type="long">
@@ -1156,13 +1162,13 @@
 					</timeFormatLength>
 				</timeFormats>
 				<dateTimeFormats>
-					<dateTimeFormatLength>
+					<dateTimeFormatLength type="medium">
 						<dateTimeFormat>
 							<pattern>{1} {0}</pattern>
 						</dateTimeFormat>
 					</dateTimeFormatLength>
 					<availableFormats>
-						<dateFormatItem id="Hm">h:mm a</dateFormatItem>
+						<dateFormatItem id="EEEd">d EEE</dateFormatItem>
 						<dateFormatItem id="M">L</dateFormatItem>
 						<dateFormatItem id="MEd">M/d, E</dateFormatItem>
 						<dateFormatItem id="MMM">LLL</dateFormatItem>
@@ -1173,18 +1179,19 @@
 						<dateFormatItem id="MMdd">dd-MM</dateFormatItem>
 						<dateFormatItem id="Md">d/M</dateFormatItem>
 						<dateFormatItem id="d">d</dateFormatItem>
+						<dateFormatItem id="hm">h:mm a</dateFormatItem>
 						<dateFormatItem id="ms">mm:ss</dateFormatItem>
-						<dateFormatItem id="y">yyyy</dateFormatItem>
-						<dateFormatItem id="yM">yyyy-M</dateFormatItem>
-						<dateFormatItem id="yMEd">yyyy-M-d, EEE</dateFormatItem>
-						<dateFormatItem id="yMMM">yyyy MMM</dateFormatItem>
-						<dateFormatItem id="yMMMEd">yyyy MMM d, EEE</dateFormatItem>
-						<dateFormatItem id="yMMMM">yyyy MMMM</dateFormatItem>
+						<dateFormatItem id="y">y</dateFormatItem>
+						<dateFormatItem id="yM">M-y</dateFormatItem>
+						<dateFormatItem id="yMEd">d-M-yyyy, EEE</dateFormatItem>
+						<dateFormatItem id="yMMM">y MMM</dateFormatItem>
+						<dateFormatItem id="yMMMEd">y MMM d, EEE</dateFormatItem>
+						<dateFormatItem id="yMMMM">y MMMM</dateFormatItem>
 						<dateFormatItem id="yQ">yyyy Q</dateFormatItem>
-						<dateFormatItem id="yQQQ">yyyy QQQ</dateFormatItem>
+						<dateFormatItem id="yQQQ">y QQQ</dateFormatItem>
 						<dateFormatItem id="yyQ">Q yy</dateFormatItem>
 						<dateFormatItem id="yyyyMM">MM-yyyy</dateFormatItem>
-						<dateFormatItem id="yyyyMMMM">MMMM yyyy</dateFormatItem>
+						<dateFormatItem id="yyyyMMMM">MMMM y</dateFormatItem>
 					</availableFormats>
 					<intervalFormats>
 						<intervalFormatFallback>{0} - {1}</intervalFormatFallback>
@@ -1247,22 +1254,22 @@
 							<greatestDifference id="y">d/M/yy, E - d/M/yy, E</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMM">
-							<greatestDifference id="M">yyyy MMM-MMM</greatestDifference>
-							<greatestDifference id="y">yyyy MMM - yyyy MMM</greatestDifference>
+							<greatestDifference id="M">y MMM-MMM</greatestDifference>
+							<greatestDifference id="y">y MMM - y MMM</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMEd">
-							<greatestDifference id="M">yyyy MMM d, E - MMM d, E</greatestDifference>
-							<greatestDifference id="d">yyyy, MMM d, E - d, E</greatestDifference>
-							<greatestDifference id="y">yyyy MMM d, E - yyyy MMM d, E</greatestDifference>
+							<greatestDifference id="M">y MMM d, E - MMM d, E</greatestDifference>
+							<greatestDifference id="d">y, MMM d, E - d, E</greatestDifference>
+							<greatestDifference id="y">y MMM d, E - y MMM d, E</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMM">
 							<greatestDifference id="M">yyyy-MM – MM</greatestDifference>
 							<greatestDifference id="y">yyyy-MM – yyyy-MM</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMd">
-							<greatestDifference id="M">yyyy MMM d - MMM d</greatestDifference>
-							<greatestDifference id="d">yyyy MMM d-d</greatestDifference>
-							<greatestDifference id="y">yyyy MMM d - yyyy MMM d</greatestDifference>
+							<greatestDifference id="M">y MMM d - MMM d</greatestDifference>
+							<greatestDifference id="d">y MMM d-d</greatestDifference>
+							<greatestDifference id="y">y MMM d - y MMM d</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMd">
 							<greatestDifference id="M">d/M/yy – d/M/yy</greatestDifference>
@@ -1286,19 +1293,19 @@
 					</field>
 					<field type="day">
 						<displayName>ദിവസം</displayName>
+						<relative type="-3">മൂന്നുദിവസം മുമ്പ്</relative>
+						<relative type="-2">മിനിഞ്ഞാന്ന്</relative>
+						<relative type="-1">ഇന്നലെ</relative>
 						<relative type="0">ഇന്നു്</relative>
 						<relative type="1">നാളെ</relative>
 						<relative type="2">മറ്റന്നാള്‍</relative>
 						<relative type="3">ഇന്നേക്ക് മൂന്നാം‌പക്കം</relative>
-						<relative type="-1">ഇന്നലെ</relative>
-						<relative type="-2">മിനിഞ്ഞാന്ന്</relative>
-						<relative type="-3">മൂന്നുദിവസം മുമ്പ്</relative>
 					</field>
 					<field type="weekday">
 						<displayName>ആഴ്ചയിലെ ദിവസം</displayName>
 					</field>
 					<field type="dayperiod">
-						<displayName>രാവിലെ/വൈകുന്നേരം</displayName>
+						<displayName>am/pm</displayName>
 					</field>
 					<field type="hour">
 						<displayName>മണിക്കൂര്‍</displayName>
@@ -1307,7 +1314,7 @@
 						<displayName>മിനിട്ട്</displayName>
 					</field>
 					<field type="second">
-						<displayName>സെക്കന്‍റ്</displayName>
+						<displayName>സെക്കന്റ്</displayName>
 					</field>
 					<field type="zone">
 						<displayName>മേഖല</displayName>
@@ -1317,23 +1324,17 @@
 			<calendar type="indian">
 				<months>
 					<monthContext type="format">
-						<monthWidth type="abbreviated">
-							<month type="3">ജ്യേഷ്ഠം</month>
-						</monthWidth>
-						<monthWidth type="narrow">
-							<month type="9">അ</month>
-						</monthWidth>
 						<monthWidth type="wide">
 							<month type="1">ചൈത്രം</month>
 							<month type="2">വൈശാഖം</month>
-							<month type="3">ജ്യേഷ്ടം</month>
+							<month type="3">ജ്യേഷ്ഠം</month>
 							<month type="4">ആഷാഢം</month>
 							<month type="5">ശ്രാവണം</month>
 							<month type="6">ഭാദ്രപാദം</month>
 							<month type="7">ആശ്വിനം</month>
-							<month type="8">കാര്‍ത്തിക</month>
-							<month type="9">അഗ്രഹായനം</month>
-							<month type="10">പൌഷം</month>
+							<month type="8">കാര്‍ത്തികം</month>
+							<month type="9">മാര്‍ഗശീര്‍ഷം</month>
+							<month type="10">പൗഷം</month>
 							<month type="11">മാഘം</month>
 							<month type="12">ഫല്‍ഗുനം</month>
 						</monthWidth>
@@ -1348,12 +1349,10 @@
 							<month type="6">ഭാ</month>
 							<month type="7">ആ</month>
 							<month type="8">കാ</month>
-							<month type="9">അ</month>
-							<month type="10">പൌ</month>
+							<month type="9">മാ</month>
+							<month type="10">പൗ</month>
 							<month type="11">മാ</month>
 							<month type="12">ഫ</month>
-						</monthWidth>
-						<monthWidth type="wide">
 						</monthWidth>
 					</monthContext>
 				</months>
@@ -1974,7 +1973,7 @@
 			</metazone>
 			<metazone type="Alaska">
 				<long>
-					<generic>അലാസ്ക്ക  സമയം</generic>
+					<generic>അലാസ്ക്ക സമയം</generic>
 					<standard>അലാസ്ക സ്റ്റാന്‍ഡേര്‍ഡ് സമയം</standard>
 					<daylight>അലാസ്ക പകല്‍ സമയം</daylight>
 				</long>
@@ -2122,7 +2121,7 @@
 			<metazone type="Australia_Western">
 				<long>
 					<generic>വെസ്റ്റേണ്‍ ഓസ്ട്രേലിയ സമയം</generic>
-					<standard>ഓസ്ട്രേലിയന്‍ ‍വെസ്റ്റേണ്‍  സ്റ്റാന്‍ഡേര്‍ഡ്</standard>
+					<standard>ഓസ്ട്രേലിയന്‍ ‍വെസ്റ്റേണ്‍ സ്റ്റാന്‍ഡേര്‍ഡ്</standard>
 					<daylight>ഓസ്ട്രേലിയന്‍ ‍വെസ്റ്റേണ്‍ പകല്‍ സമയം</daylight>
 				</long>
 			</metazone>
@@ -2180,7 +2179,7 @@
 			<metazone type="Brasilia">
 				<long>
 					<standard>ബ്രസീലിയ സമയം</standard>
-					<daylight>ബ്രസീലിയ വേനല്‍ക്കാല  സമയം</daylight>
+					<daylight>ബ്രസീലിയ വേനല്‍ക്കാല സമയം</daylight>
 				</long>
 			</metazone>
 			<metazone type="Brunei">
@@ -2471,7 +2470,7 @@
 			<metazone type="Israel">
 				<long>
 					<generic>ഇസ്രായേല്‍ സമയം</generic>
-					<standard>ഇസ്രായേല്‍  സ്റ്റാന്‍ഡേര്‍ഡ് സമയം</standard>
+					<standard>ഇസ്രായേല്‍ സ്റ്റാന്‍ഡേര്‍ഡ് സമയം</standard>
 					<daylight>ഇസ്രായേല്‍ പകല്‍ സമയം</daylight>
 				</long>
 				<short>
@@ -2516,7 +2515,7 @@
 			<metazone type="Kizilorda">
 				<long>
 					<standard>കിസിലോര്‍ഡ സമയം</standard>
-					<daylight>കിസിലോര്‍ഡ വേനല്‍ക്കാല സമയം</daylight>
+					<daylight>കിസിലോര്‍ഡ വേനല്‍ക്കാല സമയം</daylight>
 				</long>
 			</metazone>
 			<metazone type="Korea">
@@ -2700,7 +2699,7 @@
 			<metazone type="Omsk">
 				<long>
 					<standard>ഓംസ്ക് സമയം</standard>
-					<daylight>ഓംസ്ക്  വേനല്‍ക്കാല സമയം</daylight>
+					<daylight>ഓംസ്ക് വേനല്‍ക്കാല സമയം</daylight>
 				</long>
 			</metazone>
 			<metazone type="Pakistan">
@@ -2997,6 +2996,7 @@
 			<list>;</list>
 			<percentSign>%</percentSign>
 			<nativeZeroDigit>0</nativeZeroDigit>
+			<patternDigit>#</patternDigit>
 			<plusSign>+</plusSign>
 			<minusSign>-</minusSign>
 			<exponential>E</exponential>
@@ -3032,6 +3032,7 @@
 				</currencyFormat>
 			</currencyFormatLength>
 			<unitPattern count="one">{0} {1}</unitPattern>
+			<unitPattern count="other">{0} {1}</unitPattern>
 		</currencyFormats>
 		<currencies>
 			<currency type="ADP">
@@ -3053,25 +3054,21 @@
 				<displayName>അഫ്ഘാനി</displayName>
 				<displayName count="one">അഫ്ഘാനി</displayName>
 				<displayName count="other">അഫ്ഘാനിസ്</displayName>
-				<symbol>അഫ്</symbol>
 			</currency>
 			<currency type="ALL">
 				<displayName>അല്‍ബേനിയന്‍ ലെക്</displayName>
 				<displayName count="one">അല്‍ബേനിയന്‍ ലെക്</displayName>
 				<displayName count="other">അല്‍ബേനിയന്‍ ലെക്സ്</displayName>
-				<symbol>ലെക്</symbol>
 			</currency>
 			<currency type="AMD">
 				<displayName>അര്‍മേനിയന്‍ ഡ്രാം</displayName>
 				<displayName count="one">അര്‍മേനിയന്‍ ഡ്രാം</displayName>
 				<displayName count="other">അര്‍മേനിയന്‍ ഡ്രാംസ്</displayName>
-				<symbol>ഡ്രാം</symbol>
 			</currency>
 			<currency type="ANG">
 				<displayName>നെതര്‍ലന്‍ഡ്സ് ആന്‍റിലന്‍ ഗില്‍ഡര്‍</displayName>
 				<displayName count="one">നെതര്‍ലന്‍ഡ്സ് ആന്‍ഡിലന്‍ ഗില്‍ഡര്‍</displayName>
 				<displayName count="other">നെതര്‍ലന്‍ഡ്സ് ആന്‍ഡിലന്‍ ഗില്‍ഡേഴ്സ്</displayName>
-				<symbol>NA f.</symbol>
 			</currency>
 			<currency type="AOA">
 				<displayName>അംഗോളന്‍ ‍ക്വാന്‍സ</displayName>
@@ -3095,8 +3092,8 @@
 			</currency>
 			<currency type="ARA">
 				<displayName>അര്‍ജന്‍റീന്‍ ഓസ്ട്രല്‍</displayName>
-				<displayName count="one">അര്‍ജന്‍റീന്‍  ഓസ്ട്രല്‍</displayName>
-				<displayName count="other">അര്‍ജന്‍റീന്‍  ഓസ്ട്രല്‍സ്</displayName>
+				<displayName count="one">അര്‍ജന്‍റീന്‍ ഓസ്ട്രല്‍</displayName>
+				<displayName count="other">അര്‍ജന്‍റീന്‍ ഓസ്ട്രല്‍സ്</displayName>
 			</currency>
 			<currency type="ARP">
 				<displayName>അര്‍ജന്‍റീന്‍ പെയ്സോ (1983-1985)</displayName>
@@ -3107,7 +3104,6 @@
 				<displayName>അര്‍ജന്‍റീന്‍ പെയ്സോ</displayName>
 				<displayName count="one">അര്‍ജന്‍റീന്‍ പെയ്സോ</displayName>
 				<displayName count="other">അര്‍ജന്‍റീന്‍ പെയ്സോസ്</displayName>
-				<symbol>അര്‍ജ്$</symbol>
 			</currency>
 			<currency type="ATS">
 				<displayName>ഓസ്ട്രേലിയന്‍ ഷില്ലിംഗ്</displayName>
@@ -3118,7 +3114,6 @@
 				<displayName>ആസ്ട്രേലിയന്‍ ഡോളര്‍</displayName>
 				<displayName count="one">ഓസ്ട്രേലിയന്‍ ഡോളര്‍</displayName>
 				<displayName count="other">ഓസ്ട്രേലിയന്‍ ഡോളേഴ്സ്</displayName>
-				<symbol>$A</symbol>
 			</currency>
 			<currency type="AWG">
 				<displayName>അറൂബന്‍ ഗില്‍ഡര്‍</displayName>
@@ -3144,19 +3139,16 @@
 				<displayName>ബോസ്നിയ-ഹെര്‍സഗോവിന കണ്‍വേര്‍ട്ടിബിള്‍ മാര്‍ക്ക്</displayName>
 				<displayName count="one">ബോസ്നിയ ഹെര്‍സഗോവിന കണ്‍വേര്‍ട്ടിബിള്‍ മാര്‍ക്ക്</displayName>
 				<displayName count="other">ബോസ്നിയ ഹെര്‍സഗോവിന കണ്‍വേര്‍ട്ടിബിള്‍ മാര്‍ക്സ്</displayName>
-				<symbol>KM</symbol>
 			</currency>
 			<currency type="BBD">
 				<displayName>ബാര്‍ബഡോസ് ഡോളര്‍</displayName>
 				<displayName count="one">ബാര്‍ബഡോസ് ഡോളര്‍</displayName>
 				<displayName count="other">ബാര്‍ബഡോസ് ഡോളേഴ്സ്</displayName>
-				<symbol>BDS$</symbol>
 			</currency>
 			<currency type="BDT">
 				<displayName>ബംഗ്ലാദേശി ടാക്ക</displayName>
 				<displayName count="one">ബംഗ്ലാദേശ് താക്കാ</displayName>
 				<displayName count="other">ബംഗ്ലാദേശ് താക്കാസ്</displayName>
-				<symbol>Tk</symbol>
 			</currency>
 			<currency type="BEC">
 				<displayName>ബെല്‍ജിയന്‍ ഫ്രാങ്ക് (കൈമാറ്റം ചെയ്യാവുന്നത്)</displayName>
@@ -3167,7 +3159,6 @@
 				<displayName>ബെല്‍ജിയന്‍ ഫ്രാങ്ക്</displayName>
 				<displayName count="one">ബെല്‍ജിയന്‍ ഫ്രാങ്ക്</displayName>
 				<displayName count="other">ബെല്‍ജിയന്‍ ഫ്രാങ്ക്സ്</displayName>
-				<symbol>BF</symbol>
 			</currency>
 			<currency type="BEL">
 				<displayName>ബല്‍ജിയന്‍ ഫ്രാങ്ക്</displayName>
@@ -3178,7 +3169,6 @@
 				<displayName>ബള്‍ഗേറിയന്‍ ഹാര്‍ഡ് ലെവ്</displayName>
 				<displayName count="one">ബള്‍ഗേറിയന്‍ ഹാര്‍ഡ് ലെവ്</displayName>
 				<displayName count="other">ബള്‍ഗേറിയന്‍ ഹാര്‍ഡ് ലെവ്സ്</displayName>
-				<symbol>ലെവ്</symbol>
 			</currency>
 			<currency type="BGN">
 				<displayName>ബള്‍ഗേറിയന്‍ ന്യൂലവ്</displayName>
@@ -3189,19 +3179,16 @@
 				<displayName>ബഹറിന്‍ ദിനാര്‍</displayName>
 				<displayName count="one">ബഹ്റൈന്‍ ദിനാര്‍</displayName>
 				<displayName count="other">ബഹ്റൈന്‍ ദിനാര്‍സ്</displayName>
-				<symbol>BD</symbol>
 			</currency>
 			<currency type="BIF">
 				<displayName>ബുറുണ്ടി ഫ്രാങ്ക്</displayName>
 				<displayName count="one">ബുറുണ്ടി ഫ്രാങ്ക്</displayName>
 				<displayName count="other">ബുറുണ്ടി ഫ്രാങ്ക്സ്</displayName>
-				<symbol>Fbu</symbol>
 			</currency>
 			<currency type="BMD">
 				<displayName>ബെര്‍മുഡന്‍ ഡോളര്‍</displayName>
 				<displayName count="one">ബെര്‍മുഡന്‍ ഡോളര്‍</displayName>
 				<displayName count="other">ബെര്‍മുഡന്‍ ഡോളേഴ്സ്</displayName>
-				<symbol>ബെര്‍$</symbol>
 			</currency>
 			<currency type="BND">
 				<displayName>ബ്രൂണെ ഡോളര്‍</displayName>
@@ -3212,20 +3199,19 @@
 				<displayName>ബൊളീവിയാനോ</displayName>
 				<displayName count="one">ബൊളീവിയാനോ</displayName>
 				<displayName count="other">ബൊളീവിയാനോസ്</displayName>
-				<symbol>Bs</symbol>
 			</currency>
 			<currency type="BOP">
-				<displayName>ബൊളീവിയന്‍  പെയ്സോ</displayName>
+				<displayName>ബൊളീവിയന്‍ പെയ്സോ</displayName>
 				<displayName count="one">ബൊളീവിയന്‍ പെയ്സോ</displayName>
 				<displayName count="other">ബൊളീവിയന്‍ പെയ്സോസ്</displayName>
 			</currency>
 			<currency type="BOV">
-				<displayName>ബൊളീവിയന്‍  എംവിഡോള്‍</displayName>
+				<displayName>ബൊളീവിയന്‍ എംവിഡോള്‍</displayName>
 				<displayName count="one">ബൊളീവിയന്‍ എംവിഡോ</displayName>
 				<displayName count="other">ബൊളീവിയന്‍ എംവിഡോസ്</displayName>
 			</currency>
 			<currency type="BRB">
-				<displayName>ബ്രസീലിയന്‍  ക്രുസെയ്റോ നോവോ (1967-1986)</displayName>
+				<displayName>ബ്രസീലിയന്‍ ക്രുസെയ്റോ നോവോ (1967-1986)</displayName>
 				<displayName count="one">ബ്രസീലിയന്‍ ക്രുസെയ്റോ നോവോ (BRB)</displayName>
 				<displayName count="other">ബ്രസീലിയന്‍ ക്രുസെയ്റോസ് നോവോ (BRB)</displayName>
 			</currency>
@@ -3235,7 +3221,7 @@
 				<displayName count="other">ബ്രസീലിയന്‍ ക്രുസാഡോസ്</displayName>
 			</currency>
 			<currency type="BRE">
-				<displayName>ബ്രസീലിയന്‍  ക്രുസെയ്റോ (1990-1993)</displayName>
+				<displayName>ബ്രസീലിയന്‍ ക്രുസെയ്റോ (1990-1993)</displayName>
 				<displayName count="one">ബ്രസീലിയന്‍ ക്രുസെയ്റോ (BRE)</displayName>
 				<displayName count="other">ബ്രസീലിയന്‍ ക്രുസെയ്റോസ് (BRE)</displayName>
 			</currency>
@@ -3250,12 +3236,12 @@
 				<displayName count="other">ബ്രസീലിയന്‍ ക്രുസാഡോ നോവോസ്</displayName>
 			</currency>
 			<currency type="BRR">
-				<displayName>ബ്രസീലിയന്‍  ക്രുസെയ്റോ</displayName>
+				<displayName>ബ്രസീലിയന്‍ ക്രുസെയ്റോ</displayName>
 				<displayName count="one">ബ്രസീലിയന്‍ ക്രുസെയ്റോ</displayName>
 				<displayName count="other">ബ്രസീലിയന്‍ ക്രുസെയ്റോസ്</displayName>
 			</currency>
 			<currency type="BSD">
-				<displayName>ബഹാമിയന്‍  ഡോളര്‍</displayName>
+				<displayName>ബഹാമിയന്‍ ഡോളര്‍</displayName>
 				<displayName count="one">ബഹാമിയന്‍ ഡോളര്‍</displayName>
 				<displayName count="other">ബഹാമിയന്‍ ഡോളേഴ്സ്</displayName>
 			</currency>
@@ -3263,7 +3249,6 @@
 				<displayName>ഭൂട്ടാന്‍ എന്‍ഗള്‍ട്രം</displayName>
 				<displayName count="one">ഭൂട്ടാന്‍ എന്‍ഗള്‍ട്രം</displayName>
 				<displayName count="other">ഭൂട്ടാന്‍ എന്‍ഗള്‍ട്രംസ്</displayName>
-				<symbol>Nu</symbol>
 			</currency>
 			<currency type="BUK">
 				<displayName>ബര്‍മീസ് ചാറ്റ്</displayName>
@@ -3284,19 +3269,16 @@
 				<displayName>ബെലാറഷ്യന്‍ റൂബിള്‍</displayName>
 				<displayName count="one">ബെലാറഷ്യന്‍ റൂബിള്‍</displayName>
 				<displayName count="other">ബെലാറഷ്യന്‍ റൂബിള്‍സ്</displayName>
-				<symbol>Rbl</symbol>
 			</currency>
 			<currency type="BZD">
 				<displayName>ബെലീസ് ഡോളര്‍</displayName>
 				<displayName count="one">ബെലീസ് ഡോളര്‍</displayName>
 				<displayName count="other">ബെലീസ് ഡോളേഴ്സ്</displayName>
-				<symbol>BZ$</symbol>
 			</currency>
 			<currency type="CAD">
 				<displayName>കനേഡിയന്‍ ഡോളര്‍</displayName>
 				<displayName count="one">കനേഡിയന്‍ ഡോളര്‍</displayName>
 				<displayName count="other">കനേഡിയന്‍ ഡോളേഴ്സ്</displayName>
-				<symbol>Can$</symbol>
 			</currency>
 			<currency type="CDF">
 				<displayName>കോങ്കളീസ് ഫ്രാങ്ക് കോങ്കൊളൈസ്</displayName>
@@ -3312,7 +3294,6 @@
 				<displayName>സ്വിസ് ഫ്രാങ്ക്</displayName>
 				<displayName count="one">സ്വിസ് ഫ്രാങ്ക്</displayName>
 				<displayName count="other">സ്വിസ് ഫ്രാങ്ക്സ്</displayName>
-				<symbol>SwF</symbol>
 			</currency>
 			<currency type="CHW">
 				<displayName>WIR ഫ്രാങ്ക്</displayName>
@@ -3328,19 +3309,16 @@
 				<displayName>ചിലിയന്‍ പെസോ</displayName>
 				<displayName count="one">ചിലിയന്‍ പെസോ</displayName>
 				<displayName count="other">ചിലിയന്‍ പെസോസ്</displayName>
-				<symbol>Ch$</symbol>
 			</currency>
 			<currency type="CNY">
 				<displayName>ചൈനീസ് യുവാന്‍</displayName>
 				<displayName count="one">ചൈനീസ് യുവാന്‍</displayName>
 				<displayName count="other">ചൈനീസ് യുവാന്‍</displayName>
-				<symbol>Y</symbol>
 			</currency>
 			<currency type="COP">
 				<displayName>കൊളംബിയന്‍ പെസോ</displayName>
 				<displayName count="one">കൊളംബിയന്‍ പെസോ</displayName>
 				<displayName count="other">കൊളംബിയന്‍ പെസോസ്</displayName>
-				<symbol>Col$</symbol>
 			</currency>
 			<currency type="COU">
 				<displayName>യൂണിഡാഡ് ഡി വാലര്‍ റിയല്‍</displayName>
@@ -3351,7 +3329,6 @@
 				<displayName>കോസ്റ്റാ റിക്കന്‍ കോളന്‍</displayName>
 				<displayName count="one">കോസ്റ്റാ റിക്കന്‍ കോളന്‍</displayName>
 				<displayName count="other">കോസ്റ്റാ റിക്കന്‍ കോളന്‍സ്</displayName>
-				<symbol>C</symbol>
 			</currency>
 			<currency type="CSD">
 				<displayName>പ്രാചീന സെര്‍ബിയന്‍ ദിനാര്‍</displayName>
@@ -3372,13 +3349,11 @@
 				<displayName>കെയ്പ് വെര്‍ഡെ എസ്ക്യുഡോ</displayName>
 				<displayName count="one">കെയ്പ് വെര്‍ഡെ എസ്ക്യുഡോ</displayName>
 				<displayName count="other">കെയ്പ് വെര്‍ഡെ എസ്ക്യുഡോസ്</displayName>
-				<symbol>CVEsc</symbol>
 			</currency>
 			<currency type="CYP">
 				<displayName>സൈപ്രസ് പൌണ്ട്</displayName>
 				<displayName count="one">സൈപ്രസ് പൌണ്ട്</displayName>
 				<displayName count="other">സൈപ്രസ് പൌണ്ട്സ്</displayName>
-				<symbol>£C</symbol>
 			</currency>
 			<currency type="CZK">
 				<displayName>ചെക്ക് റിപ്പബ്ലിക് കൊരൂന</displayName>
@@ -3386,7 +3361,7 @@
 				<displayName count="other">ചെക്ക് റിപ്പബ്ലിക് കൊരൂനാസ്</displayName>
 			</currency>
 			<currency type="DDM">
-				<displayName>കിഴക്കന്‍  ജര്‍മന്‍ ഓസ്റ്റ്മാര്‍ക്ക്</displayName>
+				<displayName>കിഴക്കന്‍ ജര്‍മന്‍ ഓസ്റ്റ്മാര്‍ക്ക്</displayName>
 				<displayName count="one">കിഴക്കന്‍ ജര്‍മന്‍ ഓസ്റ്റ്മാര്‍ക്ക്</displayName>
 				<displayName count="other">കിഴക്കന്‍ ജര്‍മന്‍ ഓസ്റ്റ്മാര്‍ക്ക്സ്</displayName>
 			</currency>
@@ -3399,24 +3374,21 @@
 				<displayName>ജീബോട്ടി ഫ്രാങ്ക്</displayName>
 				<displayName count="one">ജീബോട്ടി ഫ്രാങ്ക്</displayName>
 				<displayName count="other">ജീബോട്ടി ഫ്രാങ്ക്സ്</displayName>
-				<symbol>DF</symbol>
 			</currency>
 			<currency type="DKK">
+				<displayName>ഡാനിഷ് ക്രോണെ</displayName>
 				<displayName count="one">ഡാനിഷ് ക്രോണ്‍</displayName>
 				<displayName count="other">ഡാനിഷ് ക്രോണ്‍സ്</displayName>
-				<symbol>DKr</symbol>
 			</currency>
 			<currency type="DOP">
 				<displayName>ഡൊമിനിക്കന്‍ പെയ്സോ</displayName>
 				<displayName count="one">ഡൊമിനിക്കന്‍ പെയ്സോ</displayName>
 				<displayName count="other">ഡൊമിനിക്കന്‍ പെയ്സോസ്</displayName>
-				<symbol>RD$</symbol>
 			</currency>
 			<currency type="DZD">
 				<displayName>അള്‍ജീരിയന്‍ ദിനാര്‍</displayName>
 				<displayName count="one">അള്‍ജീരിയന്‍ ദിനാര്‍</displayName>
 				<displayName count="other">അള്‍ജീരിയന്‍ ദിനാര്‍സ്</displayName>
-				<symbol>DA</symbol>
 			</currency>
 			<currency type="ECS">
 				<displayName>ഇക്വഡോര്‍ സൂക്രേ</displayName>
@@ -3438,11 +3410,6 @@
 				<displayName count="one">ഈജിപ്ഷ്യന്‍ പൌണ്ട്</displayName>
 				<displayName count="other">ഈജിപ്ഷ്യന്‍ പൌണ്ട്സ്</displayName>
 			</currency>
-			<currency type="EQE">
-				<displayName>എക്വീലെ</displayName>
-				<displayName count="one">എക്വീലെ</displayName>
-				<displayName count="other">എക്വീലെസ്</displayName>
-			</currency>
 			<currency type="ERN">
 				<displayName>എറിത്രിയന്‍ നക്ഫ</displayName>
 				<displayName count="one">എറിത്രിയന്‍ നക്ഫ</displayName>
@@ -3456,19 +3423,17 @@
 			<currency type="ESB">
 				<displayName>സ്പാനിഷ് പസെയ്റ്റ (കൈമാറ്റം ചെയ്യാവുന്ന അക്കൌണ്ട്)</displayName>
 				<displayName count="one">സ്പാനിഷ് പസെയ്റ്റ (കൈമാറ്റം ചെയ്യാവുന്ന അക്കൌണ്ട്)</displayName>
-				<displayName count="other">സ്പാനിഷ് പസെയ്റ്റാസ് (കൈമാറ±±±്റം ചെയ്യാവുന്ന അക്കൌണ്ട്)</displayName>
+				<displayName count="other">സ്പാനിഷ് പസെയ്റ്റാസ് (കൈമാറ്റം ചെയ്യാവുന്ന അക്കൌണ്ട്)</displayName>
 			</currency>
 			<currency type="ESP">
 				<displayName>സ്പാനിഷ് പസെയ്റ്റ</displayName>
 				<displayName count="one">സ്പാനിഷ് പസെയ്റ്റ</displayName>
 				<displayName count="other">സ്പാനിഷ് പസെയ്റ്റാസ്</displayName>
-				<symbol>₧</symbol>
 			</currency>
 			<currency type="ETB">
 				<displayName>എത്യോപ്പിയന്‍ ബിര്‍</displayName>
 				<displayName count="one">എത്യോപ്പിയന്‍ ബിര്‍</displayName>
 				<displayName count="other">എത്യോപ്പിയന്‍ ബിര്‍സ്</displayName>
-				<symbol>Br</symbol>
 			</currency>
 			<currency type="EUR">
 				<displayName>യൂറോ</displayName>
@@ -3484,7 +3449,6 @@
 				<displayName>ഫിജി ഡോളര്‍</displayName>
 				<displayName count="one">ഫിജി ഡോളര്‍</displayName>
 				<displayName count="other">ഫിജി ഡോളേഴ്സ്</displayName>
-				<symbol>F$</symbol>
 			</currency>
 			<currency type="FKP">
 				<displayName>ഫോക്‌ലാന്‍ഡ് ദ്വീപുകളുടെ പൌണ്ട്</displayName>
@@ -3500,18 +3464,16 @@
 				<displayName>ബ്രിട്ടീഷ് പൌണ്ട് സ്റ്റെര്‍ലിംങ്</displayName>
 				<displayName count="one">ബ്രിട്ടീഷ് പൌണ്ട് സ്റ്റെര്‍ലിംഗ്</displayName>
 				<displayName count="other">ബ്രിട്ടീഷ് പൌണ്ട് സ്റ്റെര്‍ലിംഗ്സ്</displayName>
-				<symbol>£</symbol>
 			</currency>
 			<currency type="GEK">
-				<displayName>ജോര്‍‍ജ്ജിയന്‍  ക്യൂപോണ്‍ ലാരിറ്റ്</displayName>
+				<displayName>ജോര്‍‍ജ്ജിയന്‍ ക്യൂപോണ്‍ ലാരിറ്റ്</displayName>
 				<displayName count="one">ജോര്‍‍ജ്ജിയന്‍ ക്യൂപോണ്‍ ലാരിറ്റ്</displayName>
 				<displayName count="other">ജോര്‍‍ജ്ജിയന്‍ ക്യൂപോണ്‍ ലാരിറ്റ്സ്</displayName>
 			</currency>
 			<currency type="GEL">
-				<displayName>ജോര്‍‍ജ്ജിയന്‍  ലാരി</displayName>
+				<displayName>ജോര്‍‍ജ്ജിയന്‍ ലാരി</displayName>
 				<displayName count="one">ജോര്‍‍ജ്ജിയന്‍ ലാരി</displayName>
 				<displayName count="other">ജോര്‍‍ജ്ജിയന്‍ ലാരിസ്</displayName>
-				<symbol>ലാരി</symbol>
 			</currency>
 			<currency type="GHC">
 				<displayName>ഘാന കെഡി (1979-2007)</displayName>
@@ -3522,7 +3484,6 @@
 				<displayName>ഘാന കെഡി</displayName>
 				<displayName count="one">ഘാന കെഡി</displayName>
 				<displayName count="other">ഘാന കെഡിസ്</displayName>
-				<symbol>GH¢</symbol>
 			</currency>
 			<currency type="GIP">
 				<displayName>ഗിബ്രാല്‍ട്ടര്‍ പൌണ്ട്</displayName>
@@ -3538,7 +3499,6 @@
 				<displayName>ഗിനിയ ഫ്രാങ്ക്</displayName>
 				<displayName count="one">ഗിനിയ ഫ്രാങ്ക്</displayName>
 				<displayName count="other">ഗിനിയ ഫ്രാങ്ക്സ്</displayName>
-				<symbol>GF</symbol>
 			</currency>
 			<currency type="GNS">
 				<displayName>ഗിനിയ സൈലി</displayName>
@@ -3559,10 +3519,9 @@
 				<displayName>ഗ്വാട്ടിമാല ക്വെറ്റ്സല്‍</displayName>
 				<displayName count="one">ഗ്വാട്ടിമാല ക്വെറ്റ്സല്‍</displayName>
 				<displayName count="other">ഗ്വാട്ടിമാല ക്വെറ്റ്സല്‍സ്</displayName>
-				<symbol>Q</symbol>
 			</currency>
 			<currency type="GWE">
-				<displayName>പോര്‍ച്ചുഗീസ്  ഗിനി എസ്ക്യൂഡോ</displayName>
+				<displayName>പോര്‍ച്ചുഗീസ് ഗിനി എസ്ക്യൂഡോ</displayName>
 				<displayName count="one">പോര്‍ച്ചുഗീസ് ഗിനി എസ്ക്യൂഡോ</displayName>
 				<displayName count="other">പോര്‍ച്ചുഗീസ് ഗിനി എസ്ക്യൂഡോസ്</displayName>
 			</currency>
@@ -3575,19 +3534,16 @@
 				<displayName>ഗയാന ഡോളര്‍</displayName>
 				<displayName count="one">ഗയാന ഡോളര്‍</displayName>
 				<displayName count="other">ഗയാന ഡോളേഴ്സ്</displayName>
-				<symbol>G$</symbol>
 			</currency>
 			<currency type="HKD">
 				<displayName>ഹോങ് കോങ് ഡോളര്‍</displayName>
 				<displayName count="one">ഹോങ് കോങ് ഡോളര്‍</displayName>
 				<displayName count="other">ഹോങ് കോങ് ഡോളേഴ്സ്</displayName>
-				<symbol>HK$</symbol>
 			</currency>
 			<currency type="HNL">
 				<displayName>ഹോന്‍ഡ്യുറാസ് ലെംപീര</displayName>
 				<displayName count="one">ഹോന്‍ഡ്യുറാസ് ലെംപീര</displayName>
 				<displayName count="other">ഹോന്‍ഡ്യുറാസ് ലെംപീരാസ്</displayName>
-				<symbol>L</symbol>
 			</currency>
 			<currency type="HRD">
 				<displayName>ക്രൊയേഷ്യന്‍ ദിനാര്‍</displayName>
@@ -3608,19 +3564,16 @@
 				<displayName>ഹംഗേറിയന്‍ ഫോറിന്‍റ്</displayName>
 				<displayName count="one">ഹംഗേറിയന്‍ ഫോറിന്‍റ്</displayName>
 				<displayName count="other">ഹംഗേറിയന്‍ ഫോറിന്‍റ്സ്</displayName>
-				<symbol>Ft</symbol>
 			</currency>
 			<currency type="IDR">
 				<displayName>ഇന്തോനേഷ്യന്‍ രൂപ</displayName>
 				<displayName count="one">ഇന്തോനേഷ്യന്‍ രൂപ</displayName>
 				<displayName count="other">ഇന്തോനേഷ്യന്‍ രൂപ</displayName>
-				<symbol>Rp</symbol>
 			</currency>
 			<currency type="IEP">
 				<displayName>ഐറിഷ് പൌണ്ട്</displayName>
 				<displayName count="one">ഐറിഷ് പൌണ്ട്</displayName>
 				<displayName count="other">ഐറിഷ് പൌണ്ട്സ്</displayName>
-				<symbol>IR£</symbol>
 			</currency>
 			<currency type="ILP">
 				<displayName>ഇസ്രയേലി പൌണ്ട്</displayName>
@@ -3642,13 +3595,11 @@
 				<displayName>ഇറാക്കി ദിനാര്‍</displayName>
 				<displayName count="one">ഇറാക്കി ദിനാര്‍</displayName>
 				<displayName count="other">ഇറാക്കി ദിനാര്‍സ്</displayName>
-				<symbol>ID</symbol>
 			</currency>
 			<currency type="IRR">
 				<displayName>ഇറാനിയന്‍ റിയാല്‍</displayName>
 				<displayName count="one">ഇറാനിയന്‍ റിയാല്‍</displayName>
 				<displayName count="other">ഇറാനിയന്‍ റിയാല്‍സ്</displayName>
-				<symbol>RI</symbol>
 			</currency>
 			<currency type="ISK">
 				<displayName>ഐസ്‌ലാന്‍ഡിക് ക്രോണ</displayName>
@@ -3659,49 +3610,41 @@
 				<displayName>ഇറ്റാലിയന്‍ ലിറ</displayName>
 				<displayName count="one">ഇറ്റാലിയന്‍ ലിറ</displayName>
 				<displayName count="other">ഇറ്റാലിയന്‍ ലിറാസ്</displayName>
-				<symbol>₤</symbol>
 			</currency>
 			<currency type="JMD">
 				<displayName>ജമൈക്കന്‍ ഡോളര്‍</displayName>
 				<displayName count="one">ജമൈക്കന്‍ ഡോളര്‍</displayName>
 				<displayName count="other">ജമൈക്കന്‍ ഡോളേഴ്സ്</displayName>
-				<symbol>J$</symbol>
 			</currency>
 			<currency type="JOD">
 				<displayName>ജോര്‍ദ്ദാന്‍ ദിനാര്‍</displayName>
 				<displayName count="one">ജോര്‍ദ്ദാന്‍ ദിനാര്‍</displayName>
 				<displayName count="other">ജോര്‍ദ്ദാന്‍ ദിനാര്‍സ്</displayName>
-				<symbol>JD</symbol>
 			</currency>
 			<currency type="JPY">
 				<displayName>ജപ്പാനീസ് യെന്‍</displayName>
 				<displayName count="one">ജാപ്പനീസ് യെന്‍</displayName>
 				<displayName count="other">ജാപ്പനീസ് യെന്‍</displayName>
-				<symbol>´</symbol>
 			</currency>
 			<currency type="KES">
 				<displayName>കെനിയന്‍ ഷില്ലിംഗ്</displayName>
 				<displayName count="one">കെനിയന്‍ ഷില്ലിംഗ്</displayName>
 				<displayName count="other">കെനിയന്‍ ഷില്ലിംഗ്സ്</displayName>
-				<symbol>K Sh</symbol>
 			</currency>
 			<currency type="KGS">
 				<displayName>കിര്‍ഗിസ്ഥാന്‍ സോം</displayName>
 				<displayName count="one">കിര്‍ഗിസ്ഥാന്‍ സോം</displayName>
 				<displayName count="other">കിര്‍ഗിസ്ഥാന്‍ സോംസ്</displayName>
-				<symbol>സോം</symbol>
 			</currency>
 			<currency type="KHR">
 				<displayName>കംബോഡിയന്‍ റീല്‍</displayName>
 				<displayName count="one">കംബോഡിയന്‍ റീല്‍</displayName>
 				<displayName count="other">കംബോഡിയന്‍ റീല്‍സ്</displayName>
-				<symbol>CR</symbol>
 			</currency>
 			<currency type="KMF">
 				<displayName>കൊമോറോ ഫ്രാങ്ക്</displayName>
 				<displayName count="one">കൊമോറോ ഫ്രാങ്ക്</displayName>
-				<displayName count="other">കൊമോറോ ഫ്രാങ്´്‍സ്</displayName>
-				<symbol>CF</symbol>
+				<displayName count="other">കൊമോറോ ഫ്രാങ്ക്‍സ്</displayName>
 			</currency>
 			<currency type="KPW">
 				<displayName>നോര്‍ത്ത് കൊറിയന്‍ വോണ്‍</displayName>
@@ -3715,20 +3658,18 @@
 			</currency>
 			<currency type="KWD">
 				<displayName>കുവൈറ്റി ദിനാര്‍</displayName>
-				<displayName count="one">KWD</displayName>
+				<displayName count="one">കുവൈറ്റ് ദിനാര്‍</displayName>
 				<displayName count="other">കുവൈറ്റി ദിനാര്‍സ്‌</displayName>
-				<symbol>KD</symbol>
 			</currency>
 			<currency type="KYD">
 				<displayName>കെയ്മന്‍ദ്വീപുകളുടെ ഡോളര്‍‌</displayName>
 				<displayName count="one">കെയ്മന്‍ദ്വീപുകളുടെ ഡോളര്‍‌</displayName>
-				<displayName count="other">കെയ്മന്‍ദ്വീപുകളുടെ ഡµളേഴ്സ്</displayName>
+				<displayName count="other">കെയ്മന്‍ദ്വീപുകളുടെ ഡോളേഴ്സ്</displayName>
 			</currency>
 			<currency type="KZT">
 				<displayName>കസാഖ്സ്ഥാന്‍ റ്റെംഗെ</displayName>
 				<displayName count="one">കസാഖ്സ്ഥാന്‍ റ്റെംഗെ</displayName>
 				<displayName count="other">കസാഖ്സ്ഥാന്‍ റ്റെംഗെസ്‌</displayName>
-				<symbol>T</symbol>
 			</currency>
 			<currency type="LAK">
 				<displayName>ലാവോഷിയന്‍ കിപ്</displayName>
@@ -3739,13 +3680,11 @@
 				<displayName>ലെബനീസ് പൌണ്ട്</displayName>
 				<displayName count="one">ലെബനീസ് പൌണ്ട്</displayName>
 				<displayName count="other">ലെബനീസ് പൌണ്ട്സ്</displayName>
-				<symbol>LL</symbol>
 			</currency>
 			<currency type="LKR">
 				<displayName>ശ്രീലങ്കന്‍ രൂപ</displayName>
 				<displayName count="one">ശ്രീലങ്കന്‍ രൂപ</displayName>
 				<displayName count="other">ശ്രീലങ്കന്‍ രൂപ</displayName>
-				<symbol>SL Re</symbol>
 			</currency>
 			<currency type="LRD">
 				<displayName>ലൈബീരിയന്‍ ഡോളര്‍</displayName>
@@ -3756,12 +3695,6 @@
 				<displayName>ലെസോതോ ലോത്തി</displayName>
 				<displayName count="one">ലെസോതോ ലോത്തി</displayName>
 				<displayName count="other">ലെസോതോ ലോത്തിസ്‌</displayName>
-				<symbol>M</symbol>
-			</currency>
-			<currency type="LSM">
-				<displayName>മലോത്തി</displayName>
-				<displayName count="one">മലോത്തി</displayName>
-				<displayName count="other">മലോത്തിസ്‌</displayName>
 			</currency>
 			<currency type="LTL">
 				<displayName>ലിത്വാനിയന്‍ ലിത</displayName>
@@ -3802,7 +3735,6 @@
 				<displayName>ലിബിയന്‍ ദിനാര്‍</displayName>
 				<displayName count="one">LYD</displayName>
 				<displayName count="other">LYD</displayName>
-				<symbol>LD</symbol>
 			</currency>
 			<currency type="MAD">
 				<displayName>മൊറോക്കന്‍ ദിര്‍ഹം</displayName>
@@ -3810,7 +3742,7 @@
 				<displayName count="other">MAD</displayName>
 			</currency>
 			<currency type="MAF">
-				<displayName>മൊറോക്കന്‍  ഫ്രാങ്ക്</displayName>
+				<displayName>മൊറോക്കന്‍ ഫ്രാങ്ക്</displayName>
 				<displayName count="one">MAF</displayName>
 				<displayName count="other">MAF</displayName>
 			</currency>
@@ -3825,7 +3757,7 @@
 				<displayName count="other">MGA</displayName>
 			</currency>
 			<currency type="MGF">
-				<displayName>മഡഗാസ്കര്‍  ഫ്രാങ്ക്</displayName>
+				<displayName>മഡഗാസ്കര്‍ ഫ്രാങ്ക്</displayName>
 				<displayName count="one">MGF</displayName>
 				<displayName count="other">MGF</displayName>
 			</currency>
@@ -3833,7 +3765,6 @@
 				<displayName>മാസിഡോണിയന്‍ ദിനാര്‍</displayName>
 				<displayName count="one">MKD</displayName>
 				<displayName count="other">MKD</displayName>
-				<symbol>Mഡെന്‍</symbol>
 			</currency>
 			<currency type="MLF">
 				<displayName>മാലി ഫ്രാങ്ക്</displayName>
@@ -3849,7 +3780,6 @@
 				<displayName>മംഗോളിയന്‍ തുഗ്രിക്</displayName>
 				<displayName count="one">MNT</displayName>
 				<displayName count="other">MNT</displayName>
-				<symbol>റ്റഗ്</symbol>
 			</currency>
 			<currency type="MOP">
 				<displayName>മകൌ പതാക്ക</displayName>
@@ -3860,13 +3790,11 @@
 				<displayName>മൌറിറ്റേനിയ ഔഗിയ</displayName>
 				<displayName count="one">MRO</displayName>
 				<displayName count="other">MRO</displayName>
-				<symbol>UM</symbol>
 			</currency>
 			<currency type="MTL">
 				<displayName>മല്‍ത്തീസ് ലിറ</displayName>
 				<displayName count="one">MTL</displayName>
 				<displayName count="other">MTL</displayName>
-				<symbol>Lm</symbol>
 			</currency>
 			<currency type="MTP">
 				<displayName>മല്‍ത്തീസ് പൌണ്ട്</displayName>
@@ -3887,16 +3815,14 @@
 				<displayName>മലാവി ക്വാച</displayName>
 				<displayName count="one">MWK</displayName>
 				<displayName count="other">MWK</displayName>
-				<symbol>MK</symbol>
 			</currency>
 			<currency type="MXN">
 				<displayName>മെക്സിക്കന്‍ പെസോ</displayName>
 				<displayName count="one">MXN</displayName>
 				<displayName count="other">MXN</displayName>
-				<symbol>MEX$</symbol>
 			</currency>
 			<currency type="MXP">
-				<displayName>മെക്സിക്കന്‍ സില്‍വര്‍ പെയ്സോ  (1861-1992)</displayName>
+				<displayName>മെക്സിക്കന്‍ സില്‍വര്‍ പെയ്സോ (1861-1992)</displayName>
 				<displayName count="one">മെക്സിക്കന്‍ സില്‍വര്‍ പെയ്സോ (MXP)</displayName>
 				<displayName count="other">മെക്സിക്കന്‍ സില്‍വര്‍ പെയ്സോസ് (MXP)</displayName>
 			</currency>
@@ -3909,7 +3835,6 @@
 				<displayName>മലേഷ്യന്‍ റിംഗിറ്റ്</displayName>
 				<displayName count="one">MYR</displayName>
 				<displayName count="other">MYR</displayName>
-				<symbol>RM</symbol>
 			</currency>
 			<currency type="MZE">
 				<displayName>മൊസാന്പിക്ക് എസ്ക്യുഡോ</displayName>
@@ -3920,19 +3845,16 @@
 				<displayName>ഓള്‍ഡ് മൊസാന്പിക്ക് മെറ്റിക്കല്‍</displayName>
 				<displayName count="one">MZM</displayName>
 				<displayName count="other">MZM</displayName>
-				<symbol>Mt</symbol>
 			</currency>
 			<currency type="MZN">
 				<displayName>മൊസാന്പിക്ക് മെറ്റിക്കല്‍</displayName>
 				<displayName count="one">MZN</displayName>
 				<displayName count="other">MZN</displayName>
-				<symbol>MTn</symbol>
 			</currency>
 			<currency type="NAD">
 				<displayName>നമീബിയന്‍ ഡോളര്‍</displayName>
 				<displayName count="one">NAD</displayName>
 				<displayName count="other">NAD</displayName>
-				<symbol>N$</symbol>
 			</currency>
 			<currency type="NGN">
 				<displayName>നൈജീരിയന്‍ നൈറ</displayName>
@@ -3955,27 +3877,24 @@
 				<displayName count="other">നെതര്‍ലന്‍ഡ്സ് ഗില്‍ഡേഴ്സ്</displayName>
 			</currency>
 			<currency type="NOK">
+				<displayName>നോര്‍വീജിയന്‍ ക്രോണെ</displayName>
 				<displayName count="one">നോര്‍വീജിയന്‍ ക്രോണ്‍</displayName>
 				<displayName count="other">നോര്‍വീജിയന്‍ ക്രോണ്‍സ്</displayName>
-				<symbol>NKr</symbol>
 			</currency>
 			<currency type="NPR">
 				<displayName>നേപ്പാളി രൂപ</displayName>
 				<displayName count="one">NPR</displayName>
 				<displayName count="other">NPR</displayName>
-				<symbol>Nrs</symbol>
 			</currency>
 			<currency type="NZD">
 				<displayName>ന്യൂസിലാന്‍ഡ് ഡോളര്‍</displayName>
 				<displayName count="one">ന്യൂസിലന്‍ഡ് ഡോളര്‍</displayName>
 				<displayName count="other">ന്യൂസിലന്‍ഡ് ഡോളേഴ്സ്</displayName>
-				<symbol>$NZ</symbol>
 			</currency>
 			<currency type="OMR">
 				<displayName>ഒമാന്‍ റിയാല്‍</displayName>
 				<displayName count="one">OMR</displayName>
 				<displayName count="other">OMR</displayName>
-				<symbol>RO</symbol>
 			</currency>
 			<currency type="PAB">
 				<displayName>പനാമെയ്നിയന്‍ ബാല്‍ബോവ</displayName>
@@ -4006,21 +3925,19 @@
 				<displayName>ഫിലിപ്പൈന്‍ പെയ്സോ</displayName>
 				<displayName count="one">ഫിലിപ്പൈന്‍ പെയ്സോ</displayName>
 				<displayName count="other">ഫിലിപ്പൈന്‍ പെയ്സോസ്</displayName>
-				<symbol>Php</symbol>
 			</currency>
 			<currency type="PKR">
 				<displayName>പാക്കിസ്ഥാനി രൂപ</displayName>
 				<displayName count="one">പാക്കിസ്ഥാനി രൂപ</displayName>
 				<displayName count="other">പാക്കിസ്ഥാനി രൂപ</displayName>
-				<symbol>Pra</symbol>
 			</currency>
 			<currency type="PLN">
+				<displayName>പോളിഷ് സ്ലോട്ടി</displayName>
 				<displayName count="one">പോളിഷ് സ്ലോട്ടി</displayName>
 				<displayName count="other">പോളിഷ് സ്ലോട്ടീസ്</displayName>
-				<symbol>Zl</symbol>
 			</currency>
 			<currency type="PLZ">
-				<displayName>പോളിഷ് സ്ലോട്ടി  (1950-1995)</displayName>
+				<displayName>പോളിഷ് സ്ലോട്ടി (1950-1995)</displayName>
 				<displayName count="one">PLZ</displayName>
 				<displayName count="other">PLZ</displayName>
 			</currency>
@@ -4105,7 +4022,7 @@
 				<displayName count="other">SDP</displayName>
 			</currency>
 			<currency type="SEK">
-				<displayName>SEK</displayName>
+				<displayName>സ്വീഡിഷ് ക്രോണ</displayName>
 				<displayName count="one">SEK</displayName>
 				<displayName count="other">SEK</displayName>
 			</currency>
@@ -4180,12 +4097,12 @@
 				<displayName count="other">തായ് ബട്ട്</displayName>
 			</currency>
 			<currency type="TJR">
-				<displayName>തജിക്സ്ഥാന്‍ റൂബിള്‍</displayName>
+				<displayName>താജിക്കിസ്ഥാന്‍ റൂബിള്‍</displayName>
 				<displayName count="one">തജിക്സ്ഥാന്‍ റൂബിള്‍</displayName>
 				<displayName count="other">തജിക്സ്ഥാന്‍ റൂബിള്‍സ്</displayName>
 			</currency>
 			<currency type="TJS">
-				<displayName>തജികിസ്ഥാന്‍ സൊമോനി</displayName>
+				<displayName>താജിക്കിസ്ഥാന്‍ സൊമോനി</displayName>
 				<displayName count="one">തജികിസ്ഥാന്‍ സൊമോനി</displayName>
 				<displayName count="other">തജികിസ്ഥാന്‍ സൊമോനിസ്</displayName>
 			</currency>
@@ -4203,7 +4120,6 @@
 				<displayName>റ്റോംഗ പാംഗ</displayName>
 				<displayName count="one">റ്റോംഗ പാംഗ</displayName>
 				<displayName count="other">റ്റോംഗ പാംഗാസ്</displayName>
-				<symbol>T$</symbol>
 			</currency>
 			<currency type="TPE">
 				<displayName>തിമോര്‍ എസ്ക്യൂഡോ</displayName>
@@ -4214,7 +4130,6 @@
 				<displayName>പ്രാചീന തുര്‍ക്കിഷ് ലിറ</displayName>
 				<displayName count="one">TRL</displayName>
 				<displayName count="other">പ്രാചീന തുര്‍ക്കിഷ് ലിറാസ്</displayName>
-				<symbol>TL</symbol>
 			</currency>
 			<currency type="TRY">
 				<displayName>തുര്‍ക്കിഷ് ലിറ</displayName>
@@ -4225,18 +4140,16 @@
 				<displayName>ട്രിനിഡാഡ് ആന്‍ഡ് റ്റൊബാഗോ ഡോളര്‍</displayName>
 				<displayName count="one">TTD</displayName>
 				<displayName count="other">TTD</displayName>
-				<symbol>TT$</symbol>
 			</currency>
 			<currency type="TWD">
+				<displayName>തായ്‌വാന്‍ ഡോളര്‍</displayName>
 				<displayName count="one">തായ്‌വാന്‍ ഡോളര്‍</displayName>
 				<displayName count="other">തായ്‌വാന്‍ ഡോളേഴ്സ്</displayName>
-				<symbol>NT$</symbol>
 			</currency>
 			<currency type="TZS">
-				<displayName>റ്റാന്‍സാനിയന്‍ ഷില്ലിംഗ്</displayName>
+				<displayName>ടാന്‍സാനിയന്‍ ഷില്ലിംഗ്</displayName>
 				<displayName count="one">TZS</displayName>
 				<displayName count="other">TZS</displayName>
-				<symbol>T Sh</symbol>
 			</currency>
 			<currency type="UAH">
 				<displayName>യുക്രേനിയന്‍ ഹ്രിവ്നിയ</displayName>
@@ -4257,7 +4170,6 @@
 				<displayName>ഉഗാണ്ടന്‍ ഷില്ലിംഗ്</displayName>
 				<displayName count="one">UGX</displayName>
 				<displayName count="other">UGX</displayName>
-				<symbol>U Sh</symbol>
 			</currency>
 			<currency type="USD">
 				<displayName>യു.എസ്. ഡോളര്‍</displayName>
@@ -4289,7 +4201,6 @@
 				<displayName>ഉറുഗ്വേ പെയ്സോ ഉറുഗായോ</displayName>
 				<displayName count="one">ഉറുഗ്വേ പെയ്സോ</displayName>
 				<displayName count="other">ഉറുഗ്വേ പെയ്സോ</displayName>
-				<symbol>Ur$</symbol>
 			</currency>
 			<currency type="UZS">
 				<displayName>ഉസ്ബക്കിസ്ഥാന്‍ സം</displayName>
@@ -4300,13 +4211,11 @@
 				<displayName>വെനസ്വേലന്‍ ബോലിവര്‍</displayName>
 				<displayName count="one">വെനസ്വേലന്‍ ബോലിവര്‍</displayName>
 				<displayName count="other">വെനസ്വേലന്‍ ബോലിവര്‍സ്</displayName>
-				<symbol>Be</symbol>
 			</currency>
 			<currency type="VEF">
 				<displayName>വെനസ്വേലന്‍ ബോലിവര്‍ ഫുവെര്‍റ്റെ</displayName>
 				<displayName count="one">വെനസ്വേലന്‍ ബോലിവര്‍ ഫുവെര്‍റ്റെ</displayName>
 				<displayName count="other">വെനസ്വേലന്‍ ബോലിവര്‍ ഫുവെര്‍റ്റെസ്</displayName>
-				<symbol>BsF</symbol>
 			</currency>
 			<currency type="VND">
 				<displayName>വിയറ്റ്നാമീസ് ഡോങ്</displayName>
@@ -4317,7 +4226,6 @@
 				<displayName>വനുവാതു വാതു</displayName>
 				<displayName count="one">വനുവാതു വാതു</displayName>
 				<displayName count="other">വനുവാതു വാതൂസ്</displayName>
-				<symbol>VT</symbol>
 			</currency>
 			<currency type="WST">
 				<displayName>പശ്ചിമ സമോവ താല</displayName>
@@ -4325,9 +4233,9 @@
 				<displayName count="other">പശ്ചിമ സമോവ താലാസ്</displayName>
 			</currency>
 			<currency type="XAF">
-				<displayName>CFA  ഫ്രാങ്ക് BEAC</displayName>
+				<displayName>CFA ഫ്രാങ്ക് BEAC</displayName>
 				<displayName count="one">CFA ഫ്രാങ്ക് BEAC</displayName>
-				<displayName count="other">CFA ഫ്രാങ്ക്സ്  BEAC</displayName>
+				<displayName count="other">CFA ഫ്രാങ്ക്സ് BEAC</displayName>
 			</currency>
 			<currency type="XAG">
 				<displayName>വെള്ളി</displayName>
@@ -4350,7 +4258,7 @@
 				<displayName count="other">യൂറോപ്യന്‍ മോണിറ്ററി യൂണിറ്റ്സ്</displayName>
 			</currency>
 			<currency type="XBC">
-				<displayName>യൂറോപ്യന്‍ യൂണിറ്റ് ഓഫ് അക്കൌണ്ട്  (XBC)</displayName>
+				<displayName>യൂറോപ്യന്‍ യൂണിറ്റ് ഓഫ് അക്കൌണ്ട് (XBC)</displayName>
 				<displayName count="one">യൂറോപ്യന്‍ യൂണിറ്റ് ഓഫ് അക്കൌണ്ട് (XBC)</displayName>
 				<displayName count="other">യൂറോപ്യന്‍ യൂണിറ്റ്സ് ഓഫ് അക്കൌണ്ട് (XBC)</displayName>
 			</currency>
@@ -4360,10 +4268,9 @@
 				<displayName count="other">യൂറോപ്യന്‍ യൂണിറ്റ്സ് ഓഫ് അക്കൌണ്ട് (XBD)</displayName>
 			</currency>
 			<currency type="XCD">
-				<displayName>കിഴക്കന്‍  കരീബിയന്‍ ഡോളര്‍</displayName>
+				<displayName>കിഴക്കന്‍ കരീബിയന്‍ ഡോളര്‍</displayName>
 				<displayName count="one">കിഴക്കന്‍ കരീബിയന്‍ ഡോളര്‍</displayName>
 				<displayName count="other">കിഴക്കന്‍ കരീബിയന്‍ ഡോളേഴ്സ്</displayName>
-				<symbol>EC$</symbol>
 			</currency>
 			<currency type="XDR">
 				<displayName>സ്പെഷ്യല്‍ ഡ്രോയിംഗ് റൈറ്റ്സ്</displayName>
@@ -4388,7 +4295,7 @@
 			<currency type="XOF">
 				<displayName>CFA ഫ്രാങ്ക് BCEAO</displayName>
 				<displayName count="one">CFA ഫ്രാങ്ക് BCEAO</displayName>
-				<displayName count="other">CFA ഫ്രാങ്ക്സ്  BCEAO</displayName>
+				<displayName count="other">CFA ഫ്രാങ്ക്സ് BCEAO</displayName>
 			</currency>
 			<currency type="XPD">
 				<displayName>പലാഡിയം</displayName>
@@ -4396,10 +4303,9 @@
 				<displayName count="other">പലാഡിയം</displayName>
 			</currency>
 			<currency type="XPF">
-				<displayName>CFP  ഫ്രാങ്ക്</displayName>
+				<displayName>CFP ഫ്രാങ്ക്</displayName>
 				<displayName count="one">CFP ഫ്രാങ്ക്</displayName>
 				<displayName count="other">CFP ഫ്രാങ്ക്സ്</displayName>
-				<symbol>CFPF</symbol>
 			</currency>
 			<currency type="XPT">
 				<displayName>പ്ലാറ്റിനം</displayName>
@@ -4412,7 +4318,7 @@
 				<displayName count="other">RINET ഫണ്ട്സ്</displayName>
 			</currency>
 			<currency type="XTS">
-				<displayName>റ്റെസ്റ്റിംഗ് കറന്‍സി കോഡ്</displayName>
+				<displayName>ടെസ്റ്റിംഗിനുള്ള കറന്‍സി കോഡ്</displayName>
 				<displayName count="one">റ്റെസ്റ്റിംഗ് കറന്‍സി കോഡ്</displayName>
 				<displayName count="other">റ്റെസ്റ്റിംഗ് കറന്‍സി കോഡ്</displayName>
 			</currency>
@@ -4420,7 +4326,6 @@
 				<displayName>അറിയപ്പെടാത്തതോ നിലവിലില്ലാത്തതോ ആയ നാണയം</displayName>
 				<displayName count="one">അറിയപ്പെടാത്തതോ നിലവിലില്ലാത്തതോ ആയ നാണയം</displayName>
 				<displayName count="other">അറിയപ്പെടാത്തതോ നിലവിലില്ലാത്തതോ ആയ നാണയം</displayName>
-				<symbol>[നാണയം അറിവില്ല]</symbol>
 			</currency>
 			<currency type="YDD">
 				<displayName>യമനി ദിനാര്‍</displayName>
@@ -4431,10 +4336,9 @@
 				<displayName>യമനി റിയാല്‍</displayName>
 				<displayName count="one">യമനി റിയാല്‍</displayName>
 				<displayName count="other">യമനി റിയാല്‍സ്</displayName>
-				<symbol>YRl</symbol>
 			</currency>
 			<currency type="YUD">
-				<displayName>യൂഗോസ്ലേവിയന്‍ ഹാരഁഡ് ദിനാര്‍</displayName>
+				<displayName>യൂഗോസ്ലേവിയന്‍ ഹാര്‍ഡ് ദിനാര്‍</displayName>
 				<displayName count="one">യൂഗോസ്ലേവിയന്‍ ഹാര്‍ഡ് ദിനാര്‍</displayName>
 				<displayName count="other">യൂഗോസ്ലേവിയന്‍ ഹാര്‍ഡ് ദിനാര്‍സ്</displayName>
 			</currency>
@@ -4454,9 +4358,9 @@
 				<displayName count="other">ദക്ഷിണാഫ്രിക്കന്‍ റാന്‍ഡ്സ് (ഫിനാന്‍ഷ്യല്‍)</displayName>
 			</currency>
 			<currency type="ZAR">
+				<displayName>ദക്ഷിണ ആഫ്രിക്കന്‍ റാന്‍ഡ്</displayName>
 				<displayName count="one">ദക്ഷിണാഫ്രിക്കന്‍ റാന്‍ഡ്</displayName>
 				<displayName count="other">ദക്ഷിണാഫ്രിക്കന്‍ റാന്‍ഡ്സ്</displayName>
-				<symbol>R</symbol>
 			</currency>
 			<currency type="ZMK">
 				<displayName>സാംബിയന്‍ ക്വാച</displayName>
@@ -4477,7 +4381,6 @@
 				<displayName>സിംബാബ്‌വെ ഡോളര്‍</displayName>
 				<displayName count="one">സിംബാബ്‌വെ ഡോളര്‍</displayName>
 				<displayName count="other">സിംബാബ്‌വെ ഡോളേഴ്സ്</displayName>
-				<symbol>Z$</symbol>
 			</currency>
 		</currencies>
 	</numbers>
@@ -4518,3 +4421,4 @@
 		</messages>
 	</posix>
 </ldml>
+

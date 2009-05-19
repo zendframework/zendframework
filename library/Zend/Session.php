@@ -57,13 +57,6 @@ class Zend_Session extends Zend_Session_Abstract
     public static $_unitTestEnabled = false;
 
     /**
-     * $_throwStartupException
-     *
-     * @var bool
-     */
-    protected static $_throwStartupExceptions = true;
-    
-    /**
      * Check whether or not the session was started
      *
      * @var bool
@@ -126,9 +119,8 @@ class Zend_Session extends Zend_Session_Abstract
      * @var array
      */
     private static $_localOptions = array(
-        'strict'                   => '_strict',
-        'remember_me_seconds'      => '_rememberMeSeconds',
-        'throw_startup_exceptions' => '_throwStartupExceptions'
+        'strict'                => '_strict',
+        'remember_me_seconds'   => '_rememberMeSeconds'
     );
 
     /**
@@ -446,7 +438,6 @@ class Zend_Session extends Zend_Session_Abstract
             throw new Zend_Session_Exception('You must explicitly start the session with Zend_Session::start() when session options are set to strict.');
         }
 
-        $filename = $linenum = null;
         if (!self::$_unitTestEnabled && headers_sent($filename, $linenum)) {
             /** @see Zend_Session_Exception */
             require_once 'Zend/Session/Exception.php';
@@ -467,27 +458,15 @@ class Zend_Session extends Zend_Session_Abstract
          */
         /** @see Zend_Session_Exception */
         if (!self::$_unitTestEnabled) {
-            
-            if (self::$_throwStartupExceptions) {
-                require_once 'Zend/Session/Exception.php';
-                set_error_handler(array('Zend_Session_Exception', 'handleSessionStartError'), E_ALL);
-            }
-            
-            $startedCleanly = session_start();
-            
-            if (self::$_throwStartupExceptions) {
-                restore_error_handler();
-            }
-            
-            if ($startedCleanly || Zend_Session_Exception::$sessionStartError !== null) {
-                if (self::$_throwStartupExceptions) {
-                    set_error_handler(array('Zend_Session_Exception', 'handleSilentWriteClose'), E_ALL);
-                }
-                session_write_close();
-                if (self::$_throwStartupExceptions) {
-                    restore_error_handler();
-                }
-                throw new Zend_Session_Exception(__CLASS__ . '::' . __FUNCTION__ . '() - ' . Zend_Session_Exception::$sessionStartError);
+            require_once 'Zend/Session/Exception.php';
+            set_error_handler(array('Zend_Session_Exception', 'handleSessionStartError'), E_ALL);
+            session_start();
+            restore_error_handler();
+            if (Zend_Session_Exception::$sessionStartError !== null) {
+            set_error_handler(array('Zend_Session_Exception', 'handleSilentWriteClose'), E_ALL);
+            session_write_close();
+            restore_error_handler();
+            throw new Zend_Session_Exception(__CLASS__ . '::' . __FUNCTION__ . '() - ' . Zend_Session_Exception::$sessionStartError);
             }
         }
 

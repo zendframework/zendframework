@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15643 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.decorators">
     <title>Erstellen von eigenem Form Markup durch Zend_Form_Decorator</title>
@@ -137,12 +137,12 @@
         </para>
 
         <para>
-            Dekoratoren implementieren nur <classname>Zend_Decorator_Interface</classname>. Das
-            Interface spezifiziert folgendes:
+            Dekoratoren implementieren nur <classname>Zend_Form_Decorator_Interface</classname>.
+            Das Interface spezifiziert folgendes:
         </para>
 
         <programlisting language="php"><![CDATA[
-interface Zend_Decorator_Interface
+interface Zend_Form_Decorator_Interface
 {
     public function __construct($options = null);
     public function setElement($element);
@@ -159,8 +159,9 @@ interface Zend_Decorator_Interface
 ]]></programlisting>
 
         <para>
-            Um es sich einfacher zu machen, kann man <classname>Zend_Decorator_Abstract</classname>
-            erweitern, welches alle Methoden außer <code>render()</code> implementiert.
+            Um es sich einfacher zu machen, kann man
+            <classname>Zend_Form_Decorator_Abstract</classname> erweitern, welches alle Methoden
+            ausser <code>render()</code> implementiert.
         </para>
 
         <para>

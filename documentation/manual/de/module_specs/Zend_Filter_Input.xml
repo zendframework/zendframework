@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15628 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.input">
     <title>Zend_Filter_Input</title>
@@ -857,6 +857,28 @@ $validators = array(
                 diese mehrere Fehlernachrichten hat, welche Schlüssel die Nachrichten haben und
                 welche Token im Nachrichtentemplate verwendet werden können.
             </para>
+
+            <para>
+                Wenn man nur eine Prüfung in der Prüfregel hat, oder aller verwendeten Prüfungen
+                die gleiche Nachricht gesetzt haben, dann kann auf Sie ohne zusätzliche Erstellung
+                eines Arrays referiert werden:
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$validators = array(
+    'month' => array(
+        new Zend_Validate_Between(1, 12),
+        'messages' => array(
+                        Zend_Validate_Between::NOT_BETWEEN =>
+                            'Month value %value% must be between ' .
+                            '%min% and %max%',
+                        Zend_Validate_Between::NOT_BETWEEN_STRICT =>
+                            'Month value %value% must be strictly between ' .
+                            '%min% and %max%'
+        )
+    )
+);
+]]></programlisting>
 
         </sect3>
 

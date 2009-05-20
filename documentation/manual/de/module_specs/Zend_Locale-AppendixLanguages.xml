@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15642 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.appendix">
 
@@ -190,6 +190,19 @@
                 </row>
                 <row>
                     <entry>bn_IN</entry>
+                    <entry>Indien</entry>
+                </row>
+                <row>
+                    <entry morerows="2" valign="middle">Tibet</entry>
+                    <entry>bo</entry>
+                    <entry>---</entry>
+                </row>
+                <row>
+                    <entry>bo_CN</entry>
+                    <entry>China</entry>
+                </row>
+                <row>
+                    <entry>bo_IN</entry>
                     <entry>Indien</entry>
                 </row>
                 <row>
@@ -673,6 +686,15 @@
                     <entry>Spanien</entry>
                 </row>
                 <row>
+                    <entry morerows="1" valign="middle">Schweizer Deutsch</entry>
+                    <entry>gsw</entry>
+                    <entry>---</entry>
+                </row>
+                <row>
+                    <entry>gsw_CH</entry>
+                    <entry>Schweiz</entry>
+                </row>
+                <row>
                     <entry morerows="1" valign="middle">Gujarati</entry>
                     <entry>gu</entry>
                     <entry>---</entry>
@@ -957,6 +979,18 @@
                     <entry>---</entry>
                 </row>
                 <row>
+                    <entry>ku_IQ</entry>
+                    <entry>Irak</entry>
+                </row>
+                <row>
+                    <entry>ku_IR</entry>
+                    <entry>Iran</entry>
+                </row>
+                <row>
+                    <entry>ku_SY</entry>
+                    <entry>Syrien</entry>
+                </row>
+                <row>
                     <entry>ku_TR</entry>
                     <entry>Türkei</entry>
                 </row>
@@ -1104,6 +1138,15 @@
                     <entry>Norwegen</entry>
                 </row>
                 <row>
+                    <entry morerows="1" valign="middle">Niederdeutsch</entry>
+                    <entry>nds</entry>
+                    <entry>---</entry>
+                </row>
+                <row>
+                    <entry>nds_DE</entry>
+                    <entry>Deutschland</entry>
+                </row>
+                <row>
                     <entry morerows="2" valign="middle">Nepalesisch</entry>
                     <entry>ne</entry>
                     <entry>---</entry>
@@ -1169,6 +1212,15 @@
                 <row>
                     <entry>ny_MW</entry>
                     <entry>Malawi</entry>
+                </row>
+                <row>
+                    <entry morerows="1" valign="middle">Okzitanisch</entry>
+                    <entry>oc</entry>
+                    <entry>---</entry>
+                </row>
+                <row>
+                    <entry>oc_FR</entry>
+                    <entry>Frankreich</entry>
                 </row>
                 <row>
                     <entry morerows="2" valign="middle">Oromo</entry>
@@ -1551,6 +1603,15 @@
                 <row>
                     <entry>tr_TR</entry>
                     <entry>Türkei</entry>
+                </row>
+                <row>
+                    <entry morerows="1" valign="middle">Taroko</entry>
+                    <entry>trv</entry>
+                    <entry>---</entry>
+                </row>
+                <row>
+                    <entry>trv_TW</entry>
+                    <entry>Taiwan</entry>
                 </row>
                 <row>
                     <entry morerows="1" valign="middle">Tsonga</entry>

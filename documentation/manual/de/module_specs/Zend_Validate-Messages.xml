@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15608 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.messages">
 
@@ -506,7 +506,7 @@
                 <row>
                     <entry morerows="1" valign="middle">Identical</entry>
                     <entry>NOT_SAME</entry>
-                    <entry>Tokens do not match</entry>
+                    <entry>The token '%token%' does not match the given token '%value%'</entry>
                 </row>
                 <row>
                     <entry>MISSING_TOKEN</entry>

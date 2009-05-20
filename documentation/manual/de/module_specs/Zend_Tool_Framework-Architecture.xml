@@ -140,6 +140,9 @@ abstract class Zend_Tool_Framework_Loader_Abstract
 ]]></programlisting>
 
         <para>
+            Die _getFiles() Methode sollte ein Array von Dateien zurückgeben (absolute Pfade). Der
+            mit ZF ausgelieferte Loader  wird IncludePath Loader genannt.
+            
             The _getFiles() method should return an array of files (absolute
             paths). The built-in loader supplied with ZF is called the
             IncludePath loader. By default, the Tooling framework will use an

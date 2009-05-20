@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15346 -->
+<!-- EN-Revision: 15606 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.acl.introduction">
     <title>Einführung</title>
@@ -13,23 +13,25 @@
     </para>
 
     <para>
-        In dieser Dokumentation
+        In dieser Dokumentation:
+    </para>
 
-        <itemizedlist>
-            <listitem>
-                <para>
-                    ist eine <emphasis>Ressource</emphasis> ein Objekt, auf das der
-                    Zugriff kontrolliert wird.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    ist eine <emphasis>Rolle</emphasis> ein Objekt, dass den Zugriff
-                    auf eine Ressource anfordern kann.
-                </para>
-            </listitem>
-        </itemizedlist>
+    <itemizedlist>
+        <listitem>
+            <para>
+                ist eine <emphasis>Ressource</emphasis> ein Objekt, auf das der
+                Zugriff kontrolliert wird.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                ist eine <emphasis>Rolle</emphasis> ein Objekt, dass den Zugriff
+                auf eine Ressource anfordern kann.
+            </para>
+        </listitem>
+    </itemizedlist>
 
+    <para>
         Einfach ausgedrückt, <emphasis>fordern Rollen den Zugriff auf Ressourcen
         an</emphasis>. Wenn z.B. ein Parkplatzhalter den Zugriff auf ein Auto anfordert, ist der
         Parkplatzhalter die anfordernde Rolle und das Auto die Ressource, weil der Zugriff auf das
@@ -48,11 +50,11 @@
             <classname>Zend_Acl</classname> stellt die Ressource
             <classname>Zend_Acl_Resource_Interface</classname> bereit, um das Erstellen von
             Ressourcen in Anwendungen zu ermöglichen. Eine Klasse muss nur dieses Interface
-            implementieren, das nur aus einer einzelnen Methode, <code>getResourceId()</code>,
-            besteht, damit <classname>Zend_Acl</classname> das Objekt als Ressource erkennen kann.
-            Zusätzlich ist <classname>Zend_Acl_Resource</classname> in
-            <classname>Zend_Acl</classname> als einfache Ressourcen Implementation enthalten, damit
-            Entwickler sie wenn nötig erweitern können.
+            implementieren, das nur aus einer einzelnen Methode,
+            <methodname>getResourceId()</methodname>, besteht, damit <classname>Zend_Acl</classname>
+            das Objekt als Ressource erkennen kann. Zusätzlich ist
+            <classname>Zend_Acl_Resource</classname> in <classname>Zend_Acl</classname> als einfache
+            Ressourcen Implementation enthalten, damit Entwickler sie wenn nötig erweitern können.
         </para>
         <para>
             <classname>Zend_Acl</classname> stellt eine Baumstruktur bereit, in die mehrere
@@ -83,9 +85,10 @@
         <para>
             Wie bei den Ressourcen, ist auch das Erstellen einer Rolle sehr einfach. Alle Rollen
             müssen <classname>Zend_Acl_Role_Interface</classname> implementieren. Dieses Interface
-            besteht aus einer einzelnen Methode, <code>getRoleId()</code>, zusätzlich wird
-            <classname>Zend_Acl_Role</classname> von <classname>Zend_Acl</classname> als einfache
-            Rollen Implementation angeboten, damit Entwickler sie bei Bedarf erweitern können.
+            besteht aus einer einzelnen Methode, <methodname>getRoleId()</methodname>, zusätzlich
+            wird <classname>Zend_Acl_Role</classname> von <classname>Zend_Acl</classname> als
+            einfache Rollen Implementation angeboten, damit Entwickler sie bei Bedarf erweitern
+            können.
         </para>
         <para>
             In <classname>Zend_Acl</classname> kann eine Rolle von einer oder mehreren Rollen
@@ -104,15 +107,13 @@
         <example id="zend.acl.introduction.roles.example.multiple_inheritance">
             <title>Mehrfache Vererbung zwischen Rollen</title>
             <para>
-                Der folgende Code definiert drei Basis Rollen - "<code>guest</code>",
-                "<code>member</code>" und "<code>admin</code>" - von denen andere Rollen erben
-                können. Dann wird eine Rolle "<code>someUser</code>" eingerichtet, die von den drei
-                anderen Rollen erbt. Die Reihenfolge, in der diese Rollen im <code>$parents</code>
-                Array erscheinen, ist wichtig. Wenn notwendig, sucht <classname>Zend_Acl</classname>
-                nach Zugriffsregeln nicht nur für die abgefragte Rolle (hier
-                "<code>someUser</code>"), sondern auch für die Rollen, von denen die abgefragte
-                Rolle erbt (hier "<code>guest</code>", "<code>member</code>" und
-                "<code>admin</code>"):
+                Der folgende Code definiert drei Basis Rollen - "guest", "member" und "admin" - von
+                denen andere Rollen erben können. Dann wird eine Rolle "someUser" eingerichtet, die
+                von den drei anderen Rollen erbt. Die Reihenfolge, in der diese Rollen im
+                <varname>$parents</varname> Array erscheinen, ist wichtig. Wenn notwendig, sucht
+                <classname>Zend_Acl</classname> nach Zugriffsregeln nicht nur für die abgefragte
+                Rolle (hier "someUser"), sondern auch für die Rollen, von denen die abgefragte
+                Rolle erbt (hier "guest", "member" und "admin"):
             </para>
             <programlisting role="php"><![CDATA[
 $acl = new Zend_Acl();
@@ -142,7 +143,7 @@ echo $acl->isAllowed('guest', 'someResource') ? 'allowed' : 'denied';
             <para>
                 Wenn <classname>Zend_Acl</classname> fortfahren würde, die für weitere
                 übergeordnete Rollen definierten Regeln zu untersuchen, würde heraus gefunden
-                werden, dass "guest" der Zugriff auf "<code>someResource</code>" verboten ist.
+                werden, dass "guest" der Zugriff auf "someResource" verboten ist.
                 Diese Tatsache führt eine Mehrdeutigkeit ein, weil nun "someUser" der Zugriff auf
                 "someResource" sowohl verboten als auch erlaubt ist, aufgrund der vererbten Regeln
                 von verschiedenen übergeordnete Rollen, die miteinander im Konflikt stehen.
@@ -150,7 +151,7 @@ echo $acl->isAllowed('guest', 'someResource') ? 'allowed' : 'denied';
             <para>
                 <classname>Zend_Acl</classname> löst diese Mehrdeutigkeit dadurch auf, dass eine
                 Abfrage beendet wird, wenn die erste Regel gefunden wird, die direkt auf die
-                Abfrage passt. In diesem Fall würde der Beispiel Code "<code>allowed</code>"
+                Abfrage passt. In diesem Fall würde der Beispiel Code "allowed"
                 ausgeben, weil die "member" Rolle vor der "guest" Rolle untersucht wird.
             </para>
         </example>
@@ -327,8 +328,8 @@ $acl->allow('administrator');
 ]]></programlisting>
 
         <para>
-            Die <code>null</code> Werte im obigen <code>allow()</code> Aufrufen werden verwendet,
-            um anzugeben, dass diese Regeln für alle Ressourcen gelten.
+            Die <constant>NULL</constant> Werte im obigen <methodname>allow()</methodname> Aufrufen
+            werden verwendet, um anzugeben, dass diese Regeln für alle Ressourcen gelten.
         </para>
 
     </sect2>
@@ -339,7 +340,8 @@ $acl->allow('administrator');
         <para>
             Wir haben nun eine flexible ACL, die in der gesamten Anwendung verwendet werden kann,
             um zu ermitteln, ob Anfragende die Genehmigung haben, Funktionen auszuführen. Abfragen
-            durchzuführen ist recht einfach mit Hilfe der <code>isAllowed()</code> Methode:
+            durchzuführen ist recht einfach mit Hilfe der <methodname>isAllowed()</methodname>
+            Methode:
         </para>
 
         <programlisting role="php"><![CDATA[

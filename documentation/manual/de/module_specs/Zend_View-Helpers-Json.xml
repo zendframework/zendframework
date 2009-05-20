@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15343 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.json">
     <title>JSON Helfer</title>
@@ -15,7 +15,7 @@
         Der JSON Helfer setzt die folgenden Header:
     </para>
 
-    <programlisting role="text"><![CDATA[
+    <programlisting language="text"><![CDATA[
 Content-Type: application/json
 ]]></programlisting>
 
@@ -28,7 +28,7 @@ Content-Type: application/json
         Die Verwendung des JSON Helfers ist sehr geradlienig:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 <?php echo $this->json($this->data) ?>
 ]]></programlisting>
 
@@ -49,7 +49,7 @@ Content-Type: application/json
             eingefügt wird.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Ein boolsches true als zweites Argument aktiviert Layouts:
 echo $this->json($this->data, true);
 
@@ -65,7 +65,7 @@ echo $this->json($this->data, array('keepLayouts' => true));
             Arrays übergeben werden:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php echo $this->json($this->data, array(
     'enableJsonExprFinder' => true,
     'keepLayouts'          => true,

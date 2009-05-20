@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.auth.adapter.digest">
 
@@ -95,7 +95,7 @@ irgendeinBenutzer:Irgendein Bereich:fde17b91c3a510ecbaf7dbd37f59d4f8
             Werte die vorher durch den Aufruf von <code>authenticate()</code> gesetzt wurden.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $adapter = new Zend_Auth_Adapter_Digest($filename,
                                         $realm,
                                         $username,

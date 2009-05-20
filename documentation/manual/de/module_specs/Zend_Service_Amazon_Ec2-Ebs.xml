@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15427 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.ec2.ebs">
     <title>Zend_Service_Amazon_Ec2: Elastischer Block Speicher (EBS)</title>
@@ -37,7 +37,7 @@
                 Volume enthält. Diese beinhalten volumeId, size, zone, status und createTime.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $ec2_ebs = new Zend_Service_Amazon_Ec2_Ebs('aws_key','aws_secret_key');
 $return = $ec2_ebs->createNewVolume(40, 'us-east-1a');
 ]]></programlisting>
@@ -54,7 +54,7 @@ $return = $ec2_ebs->createNewVolume(40, 'us-east-1a');
                 Diese enthalten volumeId, size, zone, status, createTime und snapshotId.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $ec2_ebs = new Zend_Service_Amazon_Ec2_Ebs('aws_key','aws_secret_key');
 $return = $ec2_ebs->createVolumeFromSnapshot('snap-78a54011', 'us-east-1a');
 ]]></programlisting>
@@ -72,7 +72,7 @@ $return = $ec2_ebs->createVolumeFromSnapshot('snap-78a54011', 'us-east-1a');
                 und progress.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $ec2_ebs = new Zend_Service_Amazon_Ec2_Ebs('aws_key','aws_secret_key');
 $return = $ec2_ebs->createSnapshot('volumeId');
 ]]></programlisting>
@@ -100,7 +100,7 @@ $return = $ec2_ebs->createSnapshot('volumeId');
                 device, status und attachTime.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $ec2_ebs = new Zend_Service_Amazon_Ec2_Ebs('aws_key','aws_secret_key');
 $return = $ec2_ebs->describeVolume('volumeId');
 ]]></programlisting>
@@ -119,7 +119,7 @@ $return = $ec2_ebs->describeVolume('volumeId');
                 spezifizierten instanceId aktuell angehängt sind.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $ec2_ebs = new Zend_Service_Amazon_Ec2_Ebs('aws_key','aws_secret_key');
 $return = $ec2_ebs->describeAttachedVolumes('instanceId');
 ]]></programlisting>
@@ -141,7 +141,7 @@ $return = $ec2_ebs->describeAttachedVolumes('instanceId');
                 und progress.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $ec2_ebs = new Zend_Service_Amazon_Ec2_Ebs('aws_key','aws_secret_key');
 $return = $ec2_ebs->describeSnapshot('volumeId');
 ]]></programlisting>
@@ -164,7 +164,7 @@ $return = $ec2_ebs->describeSnapshot('volumeId');
                 und attachTime.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $ec2_ebs = new Zend_Service_Amazon_Ec2_Ebs('aws_key','aws_secret_key');
 $return = $ec2_ebs->attachVolume('volumeId', 'instanceid', '/dev/sdh');
 ]]></programlisting>
@@ -184,7 +184,7 @@ $return = $ec2_ebs->attachVolume('volumeId', 'instanceid', '/dev/sdh');
                 EBS Volume enthält. Diese sind volumeId, instanceId, device, status und attachTime.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $ec2_ebs = new Zend_Service_Amazon_Ec2_Ebs('aws_key','aws_secret_key');
 $return = $ec2_ebs->detachVolume('volumeId');
 ]]></programlisting>
@@ -216,7 +216,7 @@ $return = $ec2_ebs->detachVolume('volumeId');
                 <code>deleteVolume</code> gibt ein boolsches true oder false zurück.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $ec2_ebs = new Zend_Service_Amazon_Ec2_Ebs('aws_key','aws_secret_key');
 $return = $ec2_ebs->deleteVolume('volumeId');
 ]]></programlisting>
@@ -231,7 +231,7 @@ $return = $ec2_ebs->deleteVolume('volumeId');
                 <code>deleteSnapshot</code> gibt ein boolsches true oder false zurück.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $ec2_ebs = new Zend_Service_Amazon_Ec2_Ebs('aws_key','aws_secret_key');
 $return = $ec2_ebs->deleteSnapshot('snapshotId');
 ]]></programlisting>

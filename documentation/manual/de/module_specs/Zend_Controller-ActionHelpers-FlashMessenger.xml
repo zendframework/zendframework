@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.actionhelpers.flashmessenger">
     <title>FlashMessenger</title>
@@ -30,7 +30,7 @@
             <code>/some/my-next-request</code> empfängt Sie (und löscht Sie auch).
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class SomeController extends Zend_Controller_Action
 {
     /**

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.headstyle">
     <title>HeadStyle Helfer</title>
@@ -54,7 +54,7 @@
 
         <example id="zend.view.helpers.initial.headstyle.conditional">
             <title>Headstyle mit abhängigen Kommentaren</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Skripte hinzufügen
 $this->headStyle()->appendStyle($styles, array('conditional' => 'lt IE 7');
 ]]></programlisting>
@@ -96,7 +96,7 @@ $this->headStyle()->appendStyle($styles, array('conditional' => 'lt IE 7');
             Ein neues Style Tag kann jederzeit spezifiziert werden:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Stile hinzufügen
 $this->headStyle()->appendStyle($styles);
 ]]></programlisting>
@@ -108,7 +108,7 @@ $this->headStyle()->appendStyle($styles);
             Zweck verwendet werden:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Styles in Reihenfolge bringen
 
 // Ein spezielles Offset platzieren:
@@ -126,7 +126,7 @@ $this->headStyle()->prependStyle($firstStyles);
             werden können kann der Helfer einfach wiederholt werden:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php echo $this->headStyle() ?>
 ]]></programlisting>
     </example>
@@ -141,7 +141,7 @@ $this->headStyle()->prependStyle($firstStyles);
             <code>HeadStyle</code> lässt das zu indem es in den Stack erfasst wird:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php $this->headStyle()->captureStart() ?>
 body {
     background-color: <?php echo $this->bgColor ?>;

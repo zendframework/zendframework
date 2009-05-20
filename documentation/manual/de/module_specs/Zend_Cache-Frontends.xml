@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15207 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.cache.frontends">
     <title>Zend_Cache Frontends</title>
@@ -140,7 +140,7 @@
                 "automatic_serialization" Option wäre es möglich Booleans zu speichern), kann ein
                 kompakterer Weg wie folgt gewählt werden:
             </para>
-                 <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 // Es wird angenommen das $cache existiert
 
 $id = 'myBigLoop'; // Die Cache ID von dem "das gecached werden soll"
@@ -163,7 +163,7 @@ if (!($data = $cache->load($id))) {
                 Wenn mehrere Blöcke von Daten oder Daten Instanzen gecached werden sollen, ist die
                 Idee dahinter die gleiche:
             </para>
-                 <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 // Sicherstellen, dass eindeutige Identifizierer verwendet werden:
 $id1 = 'foo';
 $id2 = 'bar';
@@ -207,7 +207,7 @@ echo($data);
                 werden.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Die kompakte Erstellung
 // (nicht gut wenn leere Strings und/oder boolsche Werte gecached werden)
 if (!($data = $cache->load($id))) {
@@ -272,7 +272,7 @@ if (!($cache->test($id))) {
                 Ein Beispiel wird ganz am Anfang des Handbuches gegeben. Hier ist es mit kleinen
                 Änderungen:
             </para>
-                 <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 // Wenn es ein Cache Miss ist, wird das puffern der Ausgabe ausgelöst
 if( ! ($cache->start('mypage'))) {
 
@@ -352,7 +352,7 @@ echo 'Hier wird nie gecached ('.time().').';
                 Die Verwendung der <code>call()</code> Funktion ist die gleiche, wie die von
                 <code>call_user_func_array()</code> in PHP:
             </para>
-                 <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 $cache->call('veryExpensiveFunc', $params);
 
 // $params ist ein Array
@@ -441,7 +441,7 @@ $cache->call('veryExpensiveFunc', $params);
             <para>
                 zum Beispiel, um einen statischen Aufruf zu cachen:
             </para>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 class Test {
 
     // Statische Methode
@@ -464,7 +464,7 @@ $result = $cache->foobar('1', '2');
             <para>
                 Um klassische Methodenaufrufe zu cachen :
             </para>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 class Test {
 
     private $_string = 'Hallo !';
@@ -785,7 +785,7 @@ $res = $cache->foobar2('1', '2');
                 Die Verwendung von <classname>Zend_Cache_Frontend_Page</classname> ist wirklich
                 trivial :
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // [...] // Benötigt, Konfiguration und Factory
 
 $cache->start();
@@ -799,7 +799,7 @@ $cache->start();
                 Cache Management in einer Bootstrap Datei zu erhalten (um es z.B. mit
                 <classname>Zend_Controller</classname> zu verwenden)
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 /*
  * Es sollte vermieden werden, zu viele Zeilen vor dem Cache Bereich zu setzen
  * zum Beispiel sollten für optimale Performanz "require_once" oder
@@ -858,7 +858,7 @@ $cache->start();
                 HTTP/200 Return Codes), notwendig sein den aktuellen Cacheprozess zu unterbrechen.
                 Deshalb zeigen wir für dieses spezielle Frontend die cancel() Methode.
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // [...] // Benötigt, Konfiguration und Factory
 
 $cache->start();

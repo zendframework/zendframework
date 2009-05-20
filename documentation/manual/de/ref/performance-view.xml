@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15569 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="performance.view">
     <title>Darstellen der View</title>
@@ -69,7 +69,7 @@
                 eingefügt wird.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class My_View extends Zend_View
 {
     /**
@@ -210,7 +210,7 @@ class My_View extends Zend_View
                 folgende schreiben um eine Login Formularbox bei jeder Seite hinzuzufügen:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class LoginPlugin extends Zend_Controller_Plugin_Abstract
 {
     protected $_stack;
@@ -250,7 +250,7 @@ class LoginPlugin extends Zend_Controller_Plugin_Abstract
                 Antwortsegment darstellen:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <?php $this->layout()->login ?>
 ]]></programlisting>
 
@@ -279,7 +279,7 @@ class LoginPlugin extends Zend_Controller_Plugin_Abstract
                 Nehmen wir als Beispiel die folgende Controller Action und das View Skript an:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class BugController extends Zend_Controller_Action
 {
     public function listAction()
@@ -304,7 +304,7 @@ echo "</ul>\n";
                 folgt einfügen:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <?php $this->action('list', 'bug') ?>
 ]]></programlisting>
 
@@ -312,7 +312,7 @@ echo "</ul>\n";
                 Das könnte zu einem View helfer geändert werden die wie folgt aussieht:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class My_View_Helper_BugList extends Zend_View_Helper_Abstract
 {
     public function bugList()
@@ -335,7 +335,7 @@ class My_View_Helper_BugList extends Zend_View_Helper_Abstract
                 Der Helfer würde dann wie folgt aufgerufen werden:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <?php $this->bugList() ?>
 ]]></programlisting>
 

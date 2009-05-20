@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15346 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.slideshare">
 
@@ -33,7 +33,7 @@
             anbieten dieser Werte wie anbei gezeigt:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Erstellt eine neue Instanz der Komponente
 $ss = new Zend_Service_SlideShare('APIKEY',
                                   'SHAREDSECRET',
@@ -55,7 +55,7 @@ $ss = new Zend_Service_SlideShare('APIKEY',
             dieser Klasse anbei zu sehen.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class Zend_Service_SlideShare_SlideShow {
 
     /**
@@ -226,7 +226,7 @@ class Zend_Service_SlideShare_SlideShow {
             durchgeführt werden.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Erstellt eine neue Instanz der Komponente
 $ss = new Zend_Service_SlideShare('APIKEY',
                                   'SHAREDSECRET',
@@ -296,7 +296,7 @@ print "Anzahl an Besuchen: {$slideshow->getNumViews()}<br/>\n";
             Ansatz verwendet wird. Ein Beispiel der Verwendung jeder Methode wird anbei gezeigt:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Erstellt eine neue Instanz der Komponente
 $ss = new Zend_Service_SlideShare('APIKEY',
                                   'SHAREDSECRET',
@@ -331,7 +331,7 @@ foreach($ss_user as $slideshow) {
             Methode angegeben werden wie anbei gezeigt:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $frontendOptions = array(
                         'lifetime' => 7200,
                         'automatic_serialization' => true);
@@ -367,7 +367,7 @@ $ss_user = $ss->getSlideShowsByUser('username', $starting_offset, $limit);
             den Standardwert zu setzen wie anbei gezeigt:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $client = new Zend_Http_Client();
 $client->setConfig(array('timeout' => 5));
 

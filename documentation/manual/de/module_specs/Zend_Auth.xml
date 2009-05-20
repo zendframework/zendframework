@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15346 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.auth.introduction">
 
@@ -65,7 +65,7 @@
             und ein Passwort für die Authentifizierung benötigt. Andere Details, wie zum Beispiel
             der Authentifizierungs-Service abgefragt wird, werden der Kürze halber ausgelassen:
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class MyAuthAdapter implements Zend_Auth_Adapter_Interface
 {
     /**
@@ -162,7 +162,7 @@ class MyAuthAdapter implements Zend_Auth_Adapter_Interface
             benutzerdefinierten Nachrichten für Authentifizierungs-Ergebnisse an den Benutzer. Die
             folgenden Ergebniscodes sind vorhanden:
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend_Auth_Result::SUCCESS
 Zend_Auth_Result::FAILURE
 Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND
@@ -177,7 +177,7 @@ Zend_Auth_Result::FAILURE_UNCATEGORIZED
             Das folgende Beispiel zeigt wie ein Entwickler anhand des Ergebniscodes verzweigen
             könnte:
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Innerhalb von AuthController / loginAction
 $result = $this->_auth->authenticate($adapter);
 
@@ -262,7 +262,7 @@ switch ($result->getCode()) {
                     da <classname>Zend_Auth::authenticate()</classname> die automatische Speicherung
                     der Identität durchführt.
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 // Eine Referenz zur Singleton Instanz von Zend_Auth speichern
 $auth = Zend_Auth::getInstance();
 
@@ -306,7 +306,7 @@ $result = $auth->authenticate($authAdapter);
                     können Entwickler <classname>Zend_Auth_Storage_Interface</classname>
                     implementieren:
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 class MyStorage implements Zend_Auth_Storage_Interface
 {
     /**
@@ -378,7 +378,7 @@ class MyStorage implements Zend_Auth_Storage_Interface
                     <classname>Zend_Auth::setStorage()</classname> aufgerufen bevor eine
                     Authentifizierungsanfrage stattfindet:
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 // Zend_Auth anweisen das die selbstdefinierte Speicherklasse verwendet wird
 Zend_Auth::getInstance()->setStorage(new MyStorage());
 
@@ -422,7 +422,7 @@ $result = Zend_Auth::getInstance()->authenticate($authAdapter);
             Das folgende Beispiel zeigt wie ein <classname>Zend_Auth</classname> Adapter indirekt
             verwendet werden kann, durch die Verwendung der <classname>Zend_Auth</classname> Klasse:
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Eine Referenz zur Singleton-Instanz von Zend_Auth erhalten
 $auth = Zend_Auth::getInstance();
 
@@ -450,7 +450,7 @@ if (!$result->isValid()) {
             Sobald die Authentifizierung in einer Anfrage durchgeführt wurde, so wie im obigen
             Beispiel, ist es sehr einfach zu Prüfen ob eine erfolgreich authentifizierte Identität
             existiert:
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $auth = Zend_Auth::getInstance();
 if ($auth->hasIdentity()) {
     // Identität existiert; auslesen
@@ -463,7 +463,7 @@ if ($auth->hasIdentity()) {
             Um eine Identität vom persistenten Speicher zu entfernen muß einfach die
             <code>clearIdentity()</code> Methode verwendet werden. Das würde typischerweise für die
             Implementierung einer "Abmelde" Operation in einer Anwendung Verwendung finden.
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend_Auth::getInstance()->clearIdentity();
 ]]></programlisting>
         </para>
@@ -477,7 +477,7 @@ Zend_Auth::getInstance()->clearIdentity();
             Methode. Adapter-spezifische Details werden in der Dokumentation jeden Adapters
             besprochen. Das folgende Beispeil verwendet <code>MyAuthAdapter</code> direkt:
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Den Authentifizierungs Adapter erstellen
 $authAdapter = new MyAuthAdapter($username, $password);
 

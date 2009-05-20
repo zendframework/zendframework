@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15346 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.statement">
 
@@ -32,7 +32,7 @@
 
         <example id="zend.db.statement.creating.example1">
             <title>Erzeugung eines SQL Statement Objekts mit query()</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $stmt = $db->query(
             'SELECT * FROM bugs WHERE reported_by = ? AND bug_status = ?',
             array('goofy', 'FIXED')
@@ -58,7 +58,7 @@ $stmt = $db->query(
 
         <example id="zend.db.statement.creating.example2">
             <title>Nutzung des SQL Statement Konstruktors</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $sql = 'SELECT * FROM bugs WHERE reported_by = ? AND bug_status = ?';
 
 $stmt = new Zend_Db_Statement_Mysqli($db, $sql);
@@ -85,7 +85,7 @@ $stmt = new Zend_Db_Statement_Mysqli($db, $sql);
 
         <example id="zend.db.statement.executing.example1">
             <title>Ausführen eines Statements mit positionierten Parametern</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $sql = 'SELECT * FROM bugs WHERE reported_by = ? AND bug_status = ?';
 
 $stmt = new Zend_Db_Statement_Mysqli($db, $sql);
@@ -103,7 +103,7 @@ $stmt->execute(array('goofy', 'FIXED'));
 
         <example id="zend.db.statement.executing.example2">
             <title>Ausführen eines Statements mit benannten Parametern</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $sql = 'SELECT * FROM bugs WHERE ' .
        'reported_by = :reporter AND bug_status = :status';
 
@@ -181,7 +181,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
 
             <example id="zend.db.statement.fetching.fetch.example">
                 <title>Nutzung fetch() in einer Schleife</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $stmt = $db->query('SELECT * FROM bugs');
 
 while ($row = $stmt->fetch()) {
@@ -213,7 +213,7 @@ while ($row = $stmt->fetch()) {
 
             <example id="zend.db.statement.fetching.fetchall.example">
                 <title>Nutzung von fetchAll()</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $stmt = $db->query('SELECT * FROM bugs');
 
 $rows = $stmt->fetchAll();
@@ -248,7 +248,7 @@ echo $rows[0]['bug_description'];
 
             <example id="zend.db.statement.fetching.fetch-mode.example">
                 <title>Ändern des Fetch-Modus</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $stmt = $db->query('SELECT * FROM bugs');
 
 $stmt->setFetchMode(Zend_Db::FETCH_NUM);
@@ -288,7 +288,7 @@ echo $rows[0][0];
 
             <example id="zend.db.statement.fetching.fetchcolumn.example">
                 <title>Nutzung von fetchColumn()</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $stmt = $db->query('SELECT bug_id, bug_description, bug_status FROM bugs');
 
 $bug_status = $stmt->fetchColumn(2);
@@ -316,7 +316,7 @@ $bug_status = $stmt->fetchColumn(2);
 
             <example id="zend.db.statement.fetching.fetchobject.example">
                 <title>Nutzung von fetchObject()</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $stmt = $db->query('SELECT bug_id, bug_description, bug_status FROM bugs');
 
 $obj = $stmt->fetchObject();
@@ -346,7 +346,7 @@ echo $obj->bug_description;
 
         <example id="zend.db.statement.binding-param.example">
             <title>Binding parameters from PHP variables</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 ]]></programlisting>
         </example>
 
@@ -368,7 +368,7 @@ echo $obj->bug_description;
 
         <example id="zend.db.statement.binding-column.example">
             <title>Binding results to PHP variables</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 ]]></programlisting>
         </example>
 

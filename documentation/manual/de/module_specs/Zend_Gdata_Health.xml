@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.health">
     <title>Verwenden von Google Health</title>
@@ -144,7 +144,7 @@
                 Das folgende Beispiel zeigt wie eine Health Service Klasse bei Verwendung der
                 ClientLogin Authentifizierung erstellt wird:
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Parameter für die ClientLogin Authentifikation
 $healthServiceName = Zend_Gdata_Health::HEALTH_SERVICE_NAME;
 //$h9ServiceName = Zend_Gdata_Health::H9_SANDBOX_SERVICE_NAME;
@@ -166,7 +166,7 @@ $service = new Zend_Gdata_Health($client);
                 Benutzers verlinkt wird. Anders als andere Google Data APIs, ist es notwendig das
                 alle Anfragen von der eigenen Anwendung digital signiert werden.
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 /*
  * Empfängt die aktuelle URL damit der AuthSub Server weiß wohin er den
  * Benutzer routen soll nachdem die Authentifizierung komplett ist.
@@ -287,7 +287,7 @@ $healthService = new Zend_Gdata_Health($client,
                     <classname>Zend_Gdata_Health_Query</classname> erzeugt und die
                     <code>getHealthProfileFeed()</code> Methode des Services aufgerufen werden:
                 </para>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $healthService = new Zend_Gdata_Health($client);
 
 // Beispielabfrage für die besten 10 Medikationen mit jeweils 2 Elementen
@@ -333,7 +333,7 @@ $profileFeed = $healthService->getHealthProfileFeed($query);
                 <classname>Zend_Gdata_Health_ProfileEntry</classname> Klasse durchgeführt werden.
                 Das gibt ein <classname>Zend_Gdata_Health_Extension_CCR</classname> zurück:
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $entries = $profileFeed->getEntries();
 foreach ($entries as $entry) {
     $medications = $entry->getCcr()->getMedications();
@@ -361,7 +361,7 @@ foreach ($entries as $entry) {
                 notwendigen CCRs von den Google Health Servern zu erhalten. Dann muß durch diese
                 Ergebnisse iteriert werden:
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $query = new Zend_Gdata_Health_Query();
 $query->setDigest("true");
 $query->setCategory("condition");
@@ -397,7 +397,7 @@ foreach ($conditions as $cond) {
                 Um eine Abfrage gegen den Profil Listen Feed durchzuführen muß die
                 <code>getHealthProfileListFeed()</code> Methode des Services aufgerufen werden:
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $client = Zend_Gdata_ClientLogin::getHttpClient('user@gmail.com',
                                                 'pa$$word',
                                                 'health');
@@ -416,7 +416,7 @@ foreach ($entries as $entry) {
                 <code>setProfileID()</code> mit der Profil ID als Argument aufgerufen. Das begrenzt
                 die weiteren API Abfragen auf genau das betreffende Profil:
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Verwende das erste Profil
 $profileID = $feed->entry[0]->getProfileID();
 $healthService->setProfileID($profileID);
@@ -445,7 +445,7 @@ echo '<p><b>Abgefragte Profil ID</b>: ' . $profileID . '</p>';
                 Notizen können durch das Verwenden der <code>sendHealthNotice()</code> Methode des
                 Health Services gesendet werden:
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $healthService = new Zend_Gdata_Health($client);
 
 $subject = "Der Titel der Notiz ist hier";

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.view.scripts">
 
@@ -26,7 +26,7 @@
         <classname>Zend_View</classname> Einführung.
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 <?php if ($this->books): ?>
 
     <!-- Eine Tabelle mit einigen Büchern. -->
@@ -69,7 +69,7 @@
             für dich übernimmt.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // schlechte View Skript Praxis:
 echo $this->variable;
 
@@ -85,7 +85,7 @@ echo $this->escape($this->variable);
             verwendet werden soll.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // erstelle eine Zend_View Instanz
 $view = new Zend_View();
 
@@ -132,7 +132,7 @@ echo $view->render(...);
                 und anzupassen, z.B. für eine PHPLIB-style Template. Das Viewskript für solch eine
                 Aufgabe könnte so aussehen:
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 include_once 'template.inc';
 $tpl = new Template();
 
@@ -159,7 +159,7 @@ if ($this->books) {
                 Dies wären die zugehörigen Template Dateien:
             </para>
 
-            <programlisting role="html"><![CDATA[
+            <programlisting language="html"><![CDATA[
 <!-- booklist.tpl -->
 <table>
     <tr>
@@ -190,7 +190,7 @@ if ($this->books) {
                 die minimale Schnittstelle, die zur Kompatibilität benötigt wird.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 /**
  * Gebe das aktuelle Template Engine Objekt zurück
  */
@@ -247,7 +247,7 @@ public function render($name);
                 Beispiel folgt ein möglicher Wrapper für Smarty:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class Zend_View_Smarty implements Zend_View_Interface
 {
     /**
@@ -427,7 +427,7 @@ class Zend_View_Smarty implements Zend_View_Interface
                 <classname>Zend_View</classname> verwenden:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Beispiel 1. In initView() des Initialisers.
 $view = new Zend_View_Smarty('/Pfad/der/Templates');
 $viewRenderer =

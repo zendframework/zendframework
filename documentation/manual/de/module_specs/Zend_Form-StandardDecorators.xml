@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.standardDecorators">
     <title>Standard Formular Dekoratoren die mit dem Zend Framework ausgeliefert werden</title>
@@ -23,7 +23,7 @@
             Beispiel Callback:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class Util
 {
     public static function label($content, $element, array $options)
@@ -107,7 +107,7 @@ class Util
             (<code>&lt;dd&gt;</code>) ein. Die Ausgabe sieht dann wie folgt aus:
         </para>
 
-        <programlisting role="html"><![CDATA[
+        <programlisting language="html"><![CDATA[
 <dt></dt>
 <dd><fieldset id="subform">
     <legend>Benutzer Information</legend>
@@ -199,7 +199,7 @@ class Util
             Standardmäßig hat die erzeugte Liste von Fehlern das folgende Markup:
         </para>
 
-        <programlisting role="html"><![CDATA[
+        <programlisting language="html"><![CDATA[
 <ul class="form-errors>
     <li><b>[Element Überschrift oder Name]</b><ul>
             <li>[Fehlermeldung]</li>
@@ -377,7 +377,7 @@ class Util
             Dekorator in der Liste.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $form->setDecorators(array(
     'PrepareElements',
     array('ViewScript', array('viewScript' => 'form.phtml')),
@@ -453,7 +453,7 @@ $form->setDecorators(array(
             Als Beispiel, kann das folgende Element hergenommen werden:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Setzt den Dekorator für das Element zu einem einzelnen, ViewScript,
 // Dekorator spezifiziert das viewScript als Option, und einige extra
 // Optionen:
@@ -472,7 +472,7 @@ $element->setDecorators(array(array('ViewScript',
             Dann könne ein View Skript die das folgende existieren:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <div class="<?php echo $this->class ?>">
     <?php echo $this->formLabel($this->element->getName(),
                          $this->element->getLabel()) ?>
@@ -496,7 +496,7 @@ $element->setDecorators(array(array('ViewScript',
                 spezifiziert wird:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Bei Erstellung des Dekorators:
 $element->addDecorator('ViewScript', array('placement' => false));
 

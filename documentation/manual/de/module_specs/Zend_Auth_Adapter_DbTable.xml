@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15346 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.auth.adapter.dbtable">
 
@@ -80,7 +80,7 @@
                 SQLite Erweiterung:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Erstellt eine In-Memory SQLite Datenbankverbindung
 $dbAdapter = new Zend_Db_Adapter_Pdo_Sqlite(array('dbname' =>
                                                   ':memory:'));
@@ -111,7 +111,7 @@ $dbAdapter->query($sqlInsert);
                 der setzenden Methoden nach der Instanziierung:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Die Instanz mit Konstruktor Parametern konfiurieren...
 $authAdapter = new Zend_Auth_Adapter_DbTable(
     $dbAdapter,
@@ -135,7 +135,7 @@ $authAdapter
                 <code>authenticate()</code> Methode, übergeben:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Die Eingabezeugnis Werte setzen (z.B. von einem Login Formular)
 $authAdapter
     ->setIdentity('my_username')
@@ -152,7 +152,7 @@ $result = $authAdapter->authenticate();
                 Tabellenzeile wenn die Authentifizierung erfolgeich war:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Die Identität ausgeben
 echo $result->getIdentity() . "\n\n";
 
@@ -195,7 +195,7 @@ Array
             zurück gibt. Der folgende Code Abschnitt zeigt diese Verwendung:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Mit Zend_Auth_Adapter_DbTable authentifizieren
 $result = $this->_auth->authenticate($adapter);
 
@@ -246,7 +246,7 @@ if ($result->isValid()) {
             angepasst werden können, um einige übliche Benutzerprobleme zu lösen.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Der Feldwert des Status eines Accounts ist nicht gleich "compromised"
 $adapter = new Zend_Auth_Adapter_DbTable(
     $db,
@@ -278,7 +278,7 @@ $adapter = new Zend_Auth_Adapter_DbTable(
             Hierfür muß die Tabelle so modifiziert werden das Sie unseren Salt-String enthält:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $sqlAlter = "ALTER TABLE [users] "
           . "ADD COLUMN [password_salt] "
           . "AFTER [password]";
@@ -291,7 +291,7 @@ $dbAdapter->query($sqlAlter);
             zu erstellen:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 for ($i = 0; $i < 50; $i++) {
     $dynamicSalt .= chr(rand(33, 126));
 }
@@ -301,7 +301,7 @@ for ($i = 0; $i < 50; $i++) {
             Und nun erstellen wir den Adapter:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $adapter = new Zend_Auth_Adapter_DbTable(
     $db,
     'users',
@@ -339,7 +339,7 @@ $adapter = new Zend_Auth_Adapter_DbTable(
             den Status eines Benutzers zu prüfen, in anderen Worten sehen ob der Account des
             Benutzers aktiviert ist.
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Das Beispiel von oben weiterführen
 $adapter = new Zend_Auth_Adapter_DbTable(
     $db,

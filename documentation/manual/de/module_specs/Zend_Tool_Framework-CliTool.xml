@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15343 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.tool.framework.clitool">
     <title>Verwenden des CLI Tools</title>
@@ -74,7 +74,7 @@
             können normalerweise an einem der folgenden Plätze gefunden werden:
         </para>
 
-        <programlisting role="text"><![CDATA[
+        <programlisting language="text"><![CDATA[
 /usr/bin
 /usr/local/bin
 /usr/local/ZendServer/bin/
@@ -134,7 +134,7 @@
             dann könnte man ein Kommando ähnlich dem folgenden ausführen:
         </para>
 
-        <programlisting role="sh"><![CDATA[
+        <programlisting language="sh"><![CDATA[
 ln -s /usr/local/share/ZendFramework/bin/zf.sh /usr/local/bin/zf
 
 # ODER (zum Beispiel)
@@ -157,7 +157,7 @@ ln -s /home/username/lib/ZendFramework/bin/zf.sh /home/username/bin/zf
             Diese können generell an einem der folgenden Plätze gefunden werden:
         </para>
 
-        <programlisting role="text"><![CDATA[
+        <programlisting language="text"><![CDATA[
 C:\PHP
 C:\Program Files\ZendServer\bin\
 C:\WAMP\PHP\bin

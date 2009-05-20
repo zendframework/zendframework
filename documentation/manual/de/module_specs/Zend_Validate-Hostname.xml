@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15346 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.hostname">
 
@@ -19,7 +19,7 @@
     <para>
         Ein normales Beispiel der Verwendung ist anbei:
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Hostname();
 if ($validator->isValid($hostname)) {
     // Hostname scheint gültig zu sein
@@ -54,7 +54,7 @@ if ($validator->isValid($hostname)) {
         erlauben, <code>ALLOW_IP</code> um IP Adressen zu erlauben, <code>ALLOW_LOCAL</code> um
         lokale Hostnamen zu erlauben, und <code>ALLOW_ALL</code> um alle drei Typen zu erlauben. Um
         nur IP Adressen zu prüfen kann das folgende Beispiel verwendet werden:
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_IP);
 if ($validator->isValid($hostname)) {
     // Hostname scheint gültig zu sein
@@ -72,7 +72,7 @@ if ($validator->isValid($hostname)) {
         können diese Typen kombiniert werden um Kombinationen zu erlauben. Um zum Beispiel DNS
         und lokale Hostnamen zu akzeptieren muß das Zend_Validate_Hostname Objekt wie folgt
         initialisiert werden:
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS |
                                         Zend_Validate_Hostname::ALLOW_IP);
 ]]></programlisting>
@@ -132,7 +132,7 @@ $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS |
         Die IDN Prüfung kann ausgeschaltet werden durch die Übergabe eines zweiten Parameters an den
         Zend_Validate_Hostname Konstruktor auf die folgende Art und Weise.
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator =
     new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS, false);
 ]]></programlisting>
@@ -162,7 +162,7 @@ $validator =
         dritter Parameter an den Zend_Validate_Hostname Konstruktor übergeben wird. Im folgenden
         Beispiel wird die IDN Prüfung durch den zweiten Parameter unterstützt.
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator =
     new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS,
                                true,

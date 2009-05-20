@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15602 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.ec2.elasticip">
     <title>Zend_Service_Amazon_Ec2: Elastische IP Adressen</title>
@@ -37,7 +37,7 @@
             <code>allocate</code> gibt die neu verknüpfte IP zurück.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $ec2_eip = new Zend_Service_Amazon_Ec2_Elasticip('aws_key','aws_secret_key');
 $ip = $ec2_eip->allocate();
 
@@ -59,7 +59,7 @@ print $ip;
             assoziiert sind.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $ec2_eip = new Zend_Service_Amazon_Ec2_Elasticip('aws_key','aws_secret_key');
 // Beschreibe alle
 $ips = $ec2_eip->describe();
@@ -81,7 +81,7 @@ $ip = $ec2_eip->describe('ip1');
             Gibt ein boolsches true oder false zurück.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $ec2_eip = new Zend_Service_Amazon_Ec2_Elasticip('aws_key','aws_secret_key');
 $ec2_eip->release('ipaddress');
 ]]></programlisting>
@@ -97,7 +97,7 @@ $ec2_eip->release('ipaddress');
             Gibt ein boolsches true oder false zurück.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $ec2_eip = new Zend_Service_Amazon_Ec2_Elasticip('aws_key','aws_secret_key');
 $ec2_eip->associate('instance_id', 'ipaddress');
 ]]></programlisting>
@@ -114,7 +114,7 @@ $ec2_eip->associate('instance_id', 'ipaddress');
             Gibt ein boolsches true oder false zurück.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $ec2_eip = new Zend_Service_Amazon_Ec2_Elasticip('aws_key','aws_secret_key');
 $ec2_eip->disassociate('ipaddress');
 ]]></programlisting>

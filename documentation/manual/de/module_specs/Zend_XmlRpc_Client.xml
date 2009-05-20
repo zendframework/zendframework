@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15341 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.xmlrpc.client">
     <title>Zend_XmlRpc_Client</title>
@@ -36,7 +36,7 @@
 
         <example id="zend.xmlrpc.client.method-calls.example-1">
             <title>XML-RPC Methodenaufruf</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $client = new Zend_XmlRpc_Client('http://framework.zend.com/xmlrpc');
 
 echo $client->call('test.sayHello');
@@ -62,7 +62,7 @@ echo $client->call('test.sayHello');
 
         <example id="zend.xmlrpc.client.method-calls.example-2">
             <title>XML-RPC Methodenaufruf mit Parametern</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $client = new Zend_XmlRpc_Client('http://framework.zend.com/xmlrpc');
 
 $arg1 = 1.1;
@@ -184,7 +184,7 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
                     Aufruf durchgeführt wird:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $client->setSkipSystemLookup(true);
 $result = $client->call('foo.bar', array(array()));
 ]]></programlisting>
@@ -327,7 +327,7 @@ $result = $client->call('foo.bar', array(array()));
 
         <example id="zend.xmlrpc.client.requests-and-responses.example-1">
             <title>Umleitung zum Standard-Namenraum</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $client = new Zend_XmlRpc_Client('http://framework.zend.com/xmlrpc');
 
 $server = $client->getProxy();           // Umleitung im Standard-Namenraum
@@ -346,7 +346,7 @@ $hello = $server->test->sayHello(1, 2);  // test.Hello(1, 2) gibt "hello" zurüc
 
         <example id="zend.xmlrpc.client.requests-and-responses.example-2">
             <title>Umleitung zu einem beliebigen Namensraum</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $client = new Zend_XmlRpc_Client('http://framework.zend.com/xmlrpc');
 
 $test  = $client->getProxy('test');     // Leitet zum "test"-Namensraum um
@@ -385,7 +385,7 @@ $hello = $test->sayHello(1, 2);         // test.Hello(1,2) gibt "hello" zurück
             <example id="zend.xmlrpc.client.error-handling.http.example-1">
                 <title>Verarbeiten von HTTP-Fehlern</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $client = new Zend_XmlRpc_Client('http://foo/404');
 
 try {
@@ -430,7 +430,7 @@ try {
             <example id="zend.xmlrpc.client.error-handling.faults.example-1">
                 <title>Verarbeiten von XML-RPC Fehlern</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $client = new Zend_XmlRpc_Client('http://framework.zend.com/xmlrpc');
 
 try {
@@ -499,7 +499,7 @@ try {
         <example id="zend.xmlrpc.client.request-to-response.example-1">
             <title>Eine Anfrage zu einer Antwort verarbeiten</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $client = new Zend_XmlRpc_Client('http://framework.zend.com/xmlrpc');
 
 $request = new Zend_XmlRpc_Request();

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15341 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.introduction">
     <title>Einführung</title>
@@ -231,7 +231,7 @@
             gewünschte Klasse, durchgeführt. Hier sind einige Beispiele:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $ss = new Zend_Gdata_Spreadsheets();
 
 // Erstellt ein Zend_Gdata_App_Spreadsheets_CellEntry
@@ -311,7 +311,7 @@ $entry->cell = $cell;
             an das Client Objekt zu übergeben.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $client = new Zend_Http_Client();
 $client->setConfig( ...options... );
 
@@ -328,7 +328,7 @@ $gdata = new Zend_Gdata($client);
             Serverfunktionalitäten zugreifen zu können.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $client = new Zend_Http_Client();
 $client->setConfig( ...options... );
 
@@ -437,7 +437,7 @@ $gdata->setMinorProtocolVersion(null);
             Es gibt eine <code>get</code> Funktion für jede <code>set</code> Funktion.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $query = new Zend_Gdata_Query();
 $query->setMaxResults(10);
 echo $query->getMaxResults();   // gibt 10 zurück
@@ -449,7 +449,7 @@ echo $query->getMaxResults();   // gibt 10 zurück
             verwendet werden.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $query = new Zend_Gdata_Query();
 $query->maxResults = 10;
 echo $query->maxResults;        // gibt 10 zurück
@@ -461,7 +461,7 @@ echo $query->maxResults;        // gibt 10 zurück
             Abfragen wiederverwendet werden soll.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $query = new Zend_Gdata_Query();
 $query->maxResults = 10;
 // ...den Feed empfangen...
@@ -482,7 +482,7 @@ $query->resetParameters();      // löscht alle Parameter
             Zend_Gdata_Feed ist.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $gdata = new Zend_Gdata();
 $query = new Zend_Gdata_Query(
         'http://www.blogger.com/feeds/blogID/posts/default');
@@ -509,7 +509,7 @@ $feed = $gdata->getFeed($query);
             nächste Seite eines Feeds empfangen werden kann:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 function getNextPage($feed) {
     $nextURL = $feed->getLink('next');
     if ($nextURL !== null) {
@@ -528,7 +528,7 @@ function getNextPage($feed) {
             Beispiel zeigt wie diese Funktion verwendet werden kann:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $gdata = new Zend_Gdata();
 $query = new Zend_Gdata_Query(
         'http://www.blogger.com/feeds/blogID/posts/default');
@@ -553,7 +553,7 @@ $feed = $gdata->retrieveAllEntriesForFeed($gdata->getFeed($query));
             werden. Hier ist ein Beispiel:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $gdata = new Zend_Gdata($client);
 $query = new Zend_Gdata_Query(
@@ -577,7 +577,7 @@ foreach ($feed as $entry) {
             an den Server zurück gespeichert werden. Hier ist ein Beispiel:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $gdata = new Zend_Gdata($client);
 $query = new Zend_Gdata_Query(
@@ -619,7 +619,7 @@ foreach ($feed as $entry) {
             String an die <code>insertEntry()</code> Funktion übergeben werden.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $gdata = new Zend_Gdata($authenticatedHttpClient);
 
 $entry = $gdata->newEntry();
@@ -658,7 +658,7 @@ echo 'Die <id> des resultierenden Eintrages ist: ' . $entryResult->id->text;
             Google Service empfangen wurde, aufgerufen werden.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $gdata = new Zend_Gdata($authenticatedHttpClient);
 // ein Google Daten Feed
 $feedUri = ...;

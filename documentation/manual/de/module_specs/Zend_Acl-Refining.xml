@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15606 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.acl.refining">
 
@@ -41,7 +41,7 @@
             geerbt werden:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Die neue Marketing Gruppe erbt Genehmigungen der Mitarbeiter
 $acl->addRole(new Zend_Acl_Role('marketing'), 'staff');
 ]]></programlisting>
@@ -52,7 +52,7 @@ $acl->addRole(new Zend_Acl_Role('marketing'), 'staff');
             wir die Ressourcen hinzu:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Ressourcen für die Regeln erstellen
 
 // Newsletter
@@ -73,7 +73,7 @@ $acl->add(new Zend_Acl_Resource('announcement'), 'news');
             Zielbereiche der ACL:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Marketing muss Newsletter und die neuesten Nachrichten veröffentlichen
 // und archivieren können
 $acl->allow('marketing',
@@ -93,7 +93,7 @@ $acl->deny(null, 'announcement', 'archive');
             Wir können nun die ACL abfragen hinsichtlich der letzten Änderungen
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 echo $acl->isAllowed('staff', 'newsletter', 'publish') ?
      "allowed" : "denied";
 // verweigert
@@ -141,7 +141,7 @@ echo $acl->isAllowed('administrator', 'announcement', 'archive') ?
             übergeben, um die Anwendung auf alle Rollen, Ressourcen und / oder Rechte anzuzeigen:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Entferne die Verweigerung, die letzten Nachrichten zu überarbeiten für
 // die Mitarbeiter (und Marketing durch die Vererbung)
 $acl->removeDeny('staff', 'latest', 'revise');
@@ -171,7 +171,7 @@ echo $acl->isAllowed('marketing', 'newsletter', 'archive') ?
             Änderungen:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Erlaube dem Marketing alle Rechte für die neuesten Nachrichten
 $acl->allow('marketing', 'latest');
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.router.routes.hostname">
     <title>Zend_Controller_Router_Route_Hostname</title>
@@ -17,7 +17,7 @@
         aufrufen kann, um die Informationen über den Benutzer "martel" zu sehen:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $hostnameRoute = new Zend_Controller_Router_Route_Hostname(
     ':username.users.example.com',
     array(

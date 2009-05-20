@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.audioscrobbler">
 
@@ -192,7 +192,7 @@
                 ein spezielles Benutzerprofil zu erhalten:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $as = new Zend_Service_Audioscrobbler();
 // Den Benutzer setzen dessen Profilinformationen man empfangen will
 $as->setUser('BigDaddy71');
@@ -209,7 +209,7 @@ print "Informationen für $profileInfo->realname können unter "
 
             <title>Die wöchentlichen Artistencharts eines Benutzers erhalten</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $as = new Zend_Service_Audioscrobbler();
 // Den Benutzer setzen dessen wöchentliche Artistencharts man empfangen will
 $as->setUser('lo_fye');
@@ -286,7 +286,7 @@ foreach ($previousWeeklyArtists as $artist) {
 
             <title>Ähnliche Artisten erhalten</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $as = new Zend_Service_Audioscrobbler();
 // Den Artisten setzen für den man ähnliche Artisten bekommen will
 $as->setArtist('LCD Soundsystem');

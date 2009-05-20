@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.filter.set.localizedtonormalized">
 
@@ -91,7 +91,7 @@
             Wie funktioniert diese Normalisierung also im Detail für Nummern:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Den Filter initiieren
 $filter = new Zend_Filter_LocalizedToNormalized();
 $filter->filter('123.456,78');
@@ -142,7 +142,7 @@ $filter->filter('123.456,78');
             wie Optionen arbeiten:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Nummerischer Filter
 $filter = new Zend_Filter_LocalizedToNormalized(array('precision' => 2));
 
@@ -165,7 +165,7 @@ $filter->filter('123.456,78901');
             mit einem eigenen Schlüssel angegeben wird.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Den Filter initiieren
 $filter = new Zend_Filter_LocalizedToNormalized();
 $filter->filter('12.April.2009');
@@ -183,7 +183,7 @@ $filter->filter('12.April.2009');
             verwendet werden.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Datumsfilter
 $filter = new Zend_Filter_LocalizedToNormalized(
     array('date_format' => 'ss:mm:HH')

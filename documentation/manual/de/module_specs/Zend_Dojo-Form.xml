@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.dojo.form" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Formular Elemente und Dekoratore für Dojo</title>
@@ -69,7 +69,7 @@
             ist, muß durch alle Unterformulare iteriert werden um Sie für Dojo zu aktivieren:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class My_Form_Custom extends Zend_Form
 {
     public function init()

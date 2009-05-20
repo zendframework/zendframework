@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15602 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.elements">
     <title>Erstellen von Form Elementen mit Hilfe von Zend_Form_Element</title>
@@ -120,7 +120,7 @@
                 sein.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class My_Decorator_Label extends Zend_Form_Decorator_Abstract
 {
     protected $_placement = 'PREPEND';
@@ -166,7 +166,7 @@ class My_Decorator_Label extends Zend_Form_Decorator_Abstract
                 nach Dekoratoren gesucht wird:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $element->addPrefixPath('My_Decorator', 'My/Decorator/', 'decorator');
 ]]></programlisting>
 
@@ -175,7 +175,7 @@ $element->addPrefixPath('My_Decorator', 'My/Decorator/', 'decorator');
                 Dekoratore diesen Pfad verwenden:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $form->addElementPrefixPath('My_Decorator', 'My/Decorator/', 'decorator');
 ]]></programlisting>
 
@@ -204,7 +204,7 @@ $form->addElementPrefixPath('My_Decorator', 'My/Decorator/', 'decorator');
             wird:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $filtered = $element->getValue();
 ]]></programlisting>
 
@@ -227,7 +227,7 @@ $filtered = $element->getValue();
             Sehen wir uns einige Beispiele an:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Konkrete Filterinstanz:
 $element->addFilter(new Zend_Filter_Alnum());
 
@@ -256,7 +256,7 @@ $element->addFilter('alnum');
                 auf dem folgenden Weg mitgeteilt werden:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $element->addPrefixPath('My_Filter', 'My/Filter/', 'filter');
 ]]></programlisting>
 
@@ -271,7 +271,7 @@ $element->addPrefixPath('My_Filter', 'My/Filter/', 'filter');
             <code>getUnfilteredValue()</code> Methode verwendet werden:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $unfiltered = $element->getUnfilteredValue();
 ]]></programlisting>
 
@@ -344,7 +344,7 @@ $unfiltered = $element->getUnfilteredValue();
             Einige Beispiele:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Konkrete Prüfinstanz:
 $element->addValidator(new Zend_Validate_Alnum());
 
@@ -373,7 +373,7 @@ $element->addValidator('alnum');
                 dies auf dem folgenden Weg mitgeteilt werden:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $element->addPrefixPath('My_Validator', 'My/Validator/', 'validate');
 ]]></programlisting>
 
@@ -389,7 +389,7 @@ $element->addPrefixPath('My_Validator', 'My/Validator/', 'validate');
             werden:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $element->addValidator('alnum', true);
 ]]></programlisting>
 
@@ -399,7 +399,7 @@ $element->addValidator('alnum', true);
             <code>addValidator()</code> als Array übergeben werden:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $element->addValidator('StringLength', false, array(6, 20));
 ]]></programlisting>
 
@@ -410,7 +410,7 @@ $element->addValidator('StringLength', false, array(6, 20));
             <code>$max</code> Parametern:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_StringLength(6, 20);
 ]]></programlisting>
 
@@ -441,7 +441,7 @@ $validator = new Zend_Validate_StringLength(6, 20);
             Konstruktor von <code>addValidator()</code> entsprechen:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $element->addValidators(array(
     array('NotEmpty', true),
     array('alnum'),
@@ -454,7 +454,7 @@ $element->addValidators(array(
             'validator', 'breakChainOnFailure', und 'options' verwendet werden:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $element->addValidators(array(
     array(
         'validator'           => 'NotEmpty',
@@ -471,7 +471,7 @@ $element->addValidators(array(
             definiert werden können:
         </para>
 
-        <programlisting role="ini"><![CDATA[
+        <programlisting language="ini"><![CDATA[
 element.validators.notempty.validator = "NotEmpty"
 element.validators.notempty.breakChainOnFailure = true
 element.validators.alnum.validator = "Alnum"
@@ -491,7 +491,7 @@ element.validators.strlen.options.max = 20
             Um ein Element zu prüfen, muss der Wert an <code>isValid()</code> übergeben werden:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 if ($element->isValid($value)) {
     // gülig
 } else {
@@ -525,7 +525,7 @@ if ($element->isValid($value)) {
                 beinhalten. So eine Prüfung könnte wie folgt aussehen:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class My_Validate_PasswordConfirmation extends Zend_Validate_Abstract
 {
     const NOT_MATCH = 'notMatch';
@@ -568,7 +568,7 @@ class My_Validate_PasswordConfirmation extends Zend_Validate_Abstract
             Prüfkette empfangen werden:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $errors   = $element->getErrors();
 $messages = $element->getMessages();
 ]]></programlisting>
@@ -829,7 +829,7 @@ $messages = $element->getMessages();
                 den Konstruktor ausgeschaltet werden:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $element = new Zend_Form_Element('foo',
                                  array('disableLoadDefaultDecorators' =>
                                      true)
@@ -850,7 +850,7 @@ $element = new Zend_Form_Element('foo',
             zu geben, ist hier ein Code der den Standarddekorator registriert:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $this->addDecorators(array(
     array('ViewHelper'),
     array('Errors'),
@@ -873,7 +873,7 @@ $this->addDecorators(array(
             vorangestellt. Die resultierende Ausgabe sieht grundsätzlich wie folgt aus:
         </para>
 
-        <programlisting role="html"><![CDATA[
+        <programlisting language="html"><![CDATA[
 <dt><label for="foo" class="optional">Foo</label></dt>
 <dd>
     <input type="text" name="foo" id="foo" value="123" />
@@ -908,7 +908,7 @@ $this->addDecorators(array(
                 werden, mit dem Alias der auf das Dekoratorobjekt oder -namen zeigt:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Alias zu 'FooBar':
 $element->addDecorator(array('FooBar' => 'HtmlTag'),
                        array('tag' => 'div'));
@@ -923,7 +923,7 @@ $decorator = $element->getDecorator('FooBar');
                 repräsentiert:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Zwei 'HtmlTag' Dekoratore hinzufügen, einen Alias auf 'FooBar' setzen:
 $element->addDecorators(
     array('HtmlTag', array('tag' => 'div')),
@@ -983,7 +983,7 @@ $fooBar  = $element->getDecorator('FooBar');
             <code>render()</code> Methode des Dekorators verwendet. Als Beispiel:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Stellt nur den ViewHelper Dekorator dar:
 echo $element->renderViewHelper();
 
@@ -1089,7 +1089,7 @@ echo $element->renderHtmlTag("Das ist der Inhalt des HTML Tags");
             Zugriff zu ihnen erlaubt:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Gleichbedeutend mit $element->setAttrib('class', 'text'):
 $element->class = 'text;
 ]]></programlisting>
@@ -1307,7 +1307,7 @@ $element->class = 'text;
             Typ von konfigurierbaren Daten übergibt:
         </para>
 
-        <programlisting role="ini"><![CDATA[
+        <programlisting language="ini"><![CDATA[
 [element]
 name = "foo"
 value = "foobar"
@@ -1373,7 +1373,7 @@ decorators.label.decorator = "Label"
             sollen. So ein Element könnte wie folgt definiert werden:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class My_Element_Text extends Zend_Form_Element
 {
     public function init()
@@ -1394,7 +1394,7 @@ class My_Element_Text extends Zend_Form_Element
             und die Erstellung der Elemente beginnen:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $form->addPrefixPath('My_Element', 'My/Element/', 'element')
      ->addElement('text', 'foo');
 ]]></programlisting>
@@ -1412,7 +1412,7 @@ $form->addPrefixPath('My_Element', 'My/Element/', 'element')
             erweiterten Klasse zu verwenden:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class My_Element_Text extends Zend_Form_Element
 {
     public function loadDefaultDecorators()

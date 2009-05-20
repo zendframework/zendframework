@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15207 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.cache.theory">
     <title>Die Theorie des Cachens</title>
@@ -36,7 +36,7 @@
             Ein guter Weg, um eine verwendbare Instanz eines <classname>Zend_Cache</classname>
             Frontends zu erstellen, wird im folgenden Beispiel gegeben:
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Wir wählen ein Backend (zum Beispiel 'File' oder 'Sqlite'...)
 $backendName = '[...]';
 
@@ -76,7 +76,7 @@ $cache = Zend_Cache::factory($frontendName,
             für diesen Datensatz angelegt werden. Dann besteht die Möglichkeit, alle markierten
             Cache Datensätze mit einer bestimmten Markierung (oder Markierungen), zu löschen:
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $cache->save($huge_data, 'myUniqueID', array('tagA', 'tagB', 'tagC'));
 ]]></programlisting>
         <note><para>
@@ -91,7 +91,7 @@ $cache->save($huge_data, 'myUniqueID', array('tagA', 'tagB', 'tagC'));
             Um eine bestimmte Cache ID zu entfernen/annullieren, kann die <code>remove()</code>
             Methode benutzt werden:
         </para>
-             <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 $cache->remove('idToRemove');
 ]]></programlisting>
         <para>
@@ -99,7 +99,7 @@ $cache->remove('idToRemove');
             <code>clean()</code> Methode benutzt werden. Zum Beispiel um alle Cache Datensätze zu
             entfernen :
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Löschen aller Datensätze
 $cache->clean(Zend_Cache::CLEANING_MODE_ALL);
 
@@ -109,7 +109,7 @@ $cache->clean(Zend_Cache::CLEANING_MODE_OLD);
         <para>
             Um Cache Einträge zu löschen, die zu den Tags 'tagA' und 'tagC' entsprechen :
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $cache->clean(
     Zend_Cache::CLEANING_MODE_MATCHING_TAG,
     array('tagA', 'tagC')
@@ -118,7 +118,7 @@ $cache->clean(
         <para>
             Um Cache Einträge zu löschen die den Tags 'tagA' oder 'tagC' nicht entsprechen:
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $cache->clean(
     Zend_Cache::CLEANING_MODE_NOT_MATCHING_TAG,
     array('tagA', 'tagC')
@@ -127,7 +127,7 @@ $cache->clean(
         <para>
             Um Cache Einträge zu löschen, die zu den Tags 'tagA' oder 'tagC' entsprechen :
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $cache->clean(
     Zend_Cache::CLEANING_MODE_MATCHING_ANY_TAG,
     array('tagA', 'tagC')

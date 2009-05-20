@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15341 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.translate">
 
@@ -65,7 +65,7 @@
             Schlüssels <classname>Zend_Translate</classname> registriert werden.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // unser Beispieladapter
 $adapter = new Zend_Translate('array', array('simple' => 'einfach'), 'de');
 Zend_Registry::set('Zend_Translate', $adapter);
@@ -93,7 +93,7 @@ echo $this->translate('simple');
             <code>setTranslator()</code> Methode aufgerufen werden.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // in der View
 $adapter = new Zend_Translate('array', array('simple' => 'einfach'), 'de');
 $this->translate()->setTranslator($adapter)->translate('simple');
@@ -111,7 +111,7 @@ $this->translate()->setTranslator($adapter)->translate('simple');
 
         <title>Direkte Verwendung</title>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // unser Beispieladapter
 $adapter = new Zend_Translate('array', array('simple' => 'einfach'), 'de');
 
@@ -144,7 +144,7 @@ print $translate->translate('simple'); // das gibt 'einfach' zurück
             werden.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // innerhalb der View
 $date = "Montag";
 $this->translate("Today is %1\$s", $date);
@@ -168,7 +168,7 @@ $this->translate("Today is %1\$s", $date);
             Oder eine Liste von Parametern verwenden und diese der Methode hinzufügen.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // innerhalb der View
 $date = "Monday";
 $month = "April";
@@ -190,7 +190,7 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s",
             Oder ein Array von Parametern verwenden und dieses der Methode hinzufügen.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // innerhalb der View
 $date = array("Monday", "April", "11:20:55");
 $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
@@ -211,7 +211,7 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
 
         <title>Das Gebietsschema dynamisch wechseln</title>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // innerhalb der View
 $date = array("Monday", "April", "11:20:55");
 $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date, 'it');
@@ -231,7 +231,7 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date, 'it');
 
         <title>Das Gebietsschema statisch wechseln</title>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // innerhalb der View
 $date = array("Monday", "April", "11:20:55");
 $this->translate()->setLocale('it');
@@ -254,7 +254,7 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
 
         <title>Das aktuell gesetzte Gebietsschema erhalten</title>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // innerhalb der View
 $date = array("Monday", "April", "11:20:55");
 

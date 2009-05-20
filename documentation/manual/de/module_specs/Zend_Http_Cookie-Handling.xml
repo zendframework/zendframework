@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.cookies">
     <title>Zend_Http_Cookie und Zend_Http_CookieJar</title>
@@ -93,7 +93,7 @@
             </itemizedlist>
             <example id="zend.http.cookies.cookie.instantiating.example-1">
                <title>Instanzieren eines Zend_Http_Cookie-Objekts</title>
-               <programlisting role="php"><![CDATA[
+               <programlisting language="php"><![CDATA[
 // Zuerst nutzen wir den Konstruktor. Der Cookie wird in zwei Stunden ablaufen
 $cookie = new Zend_Http_Cookie('foo',
                                'bar',
@@ -130,7 +130,7 @@ $cookie = Zend_Http_Cookie::fromString('foo=bar; secure;',
             vorgeschrieben ist:
             <example id="zend.http.cookies.cookie.instantiating.example-2">
                <title>Transformation eines Zend_Http_Cookie-Objekts zu einem String</title>
-               <programlisting role="php"><![CDATA[
+               <programlisting language="php"><![CDATA[
 // Erstellt einen neuen Cookie
 $cookie = new Zend_Http_Cookie('foo',
                                'two words',
@@ -220,7 +220,7 @@ echo $cookie;
         <para>
             <example id="zend.http.cookies.cookie.accessors.example-1">
                 <title>Nutzen der getter-Methoden von Zend_Http_Cookie</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Zuerst wird der Cookie erstellt
 $cookie = Zend_Http_Cookie::fromString(
     'foo=two+words; ' +
@@ -286,7 +286,7 @@ echo ($cookie->isSessionCookie() ? 'Ja' : 'Nein');
             </itemizedlist>
             <example id="zend.http.cookies.cookie.matching.example-1">
                 <title>Zutreffen von Cookies</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Erstellen eines Cookie Objekts - zuerst ein sicherer Cookie ohne Ablaufzeit
 $cookie = Zend_Http_Cookie::fromString('foo=two+words; ' +
                                        'domain=.example.com; ' +

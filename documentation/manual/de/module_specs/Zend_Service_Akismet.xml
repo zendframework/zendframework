@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.akismet">
     <title>Zend_Service_Akismet</title>
@@ -41,7 +41,7 @@
             erhaltener Schlüssel aktiv ist, kann das mit dieser Methode gemacht werden.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Instanzieren mit dem API Schlüssel und einer URL zur Anwendung oder
 // Ressource die verwendet wird
 $akismet = new Zend_Service_Akismet($apiKey,
@@ -163,7 +163,7 @@ if ($akismet->verifyKey($apiKey) {
         <example id="zend.service.akismet.isspam.example-1">
             <title>Verwendung von isSpam()</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $data = array(
     'user_ip'              => '111.222.111.222',
     'user_agent'           => 'Mozilla/5.0 (Windows; U; Windows NT ' .
@@ -206,7 +206,7 @@ if ($akismet->isSpam($data)) {
         <example id="zend.service.akismet.submitspam.example-1">
             <title>Verwendung von submitSpam()</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $data = array(
     'user_ip'              => '111.222.111.222',
     'user_agent'           => 'Mozilla/5.0 (Windows; U; Windows NT 5.2;' .
@@ -247,7 +247,7 @@ $akismet->submitSpam($data));
         <example id="zend.service.akismet.submitham.example-1">
             <title>Verwenden von submitHam()</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $data = array(
     'user_ip'              => '111.222.111.222',
     'user_agent'           => 'Mozilla/5.0 (Windows; U; Windows NT 5.2;' .

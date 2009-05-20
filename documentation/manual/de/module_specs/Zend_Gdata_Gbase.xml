@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15602 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.gbase">
     <title>Google Base verwenden</title>
@@ -106,7 +106,7 @@
                 Das nachfolgende Beispiel zeigt wir eine Base Service Klasse erstellt wird indem die
                 ClientAuth Authentifizierung verwendet wird:
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Parameter für die ClientAuth Authentifizierung
 $service = Zend_Gdata_Gbase::AUTH_SERVICE_NAME;
 $user = "sample.user@gmail.com";
@@ -122,7 +122,7 @@ $service = new Zend_Gdata_Gbase($client);
                 Ein Base Service der AuthSub verwendet kann ähnlich erstellt werden, durch einen
                 etwas längeren Code:
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 /*
  * Empfängt die aktuelle URL so das der AuthSub Server weiß wohin er
  * umleiten soll nachdem die Authentifizierung des Benutzers vollständig ist.
@@ -214,7 +214,7 @@ $service = new Zend_Gdata_Gbase(getAuthSubHttpClient());
                 Letztendlich kann ein nicht authentifizierter Server erstellt werden für die
                 Verwendung mit Feed Fetzen:
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Erstellt eine Instanz des Base Services und verwendet einen nicht authentifizierten HTTP Client
 $service = new Zend_Gdata_Gbase();
 ]]></programlisting>
@@ -247,7 +247,7 @@ $service = new Zend_Gdata_Gbase();
                     Um eine Abfrage auf Benutzerdefinierte Feed Elemente durchzuführen, gibt es die
                     <code>newItemQuery()</code> und <code>getGbaseItemFeed()</code> Methoden:
                 </para>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $service = new Zend_Gdata_Gbase($client);
 $query = $service->newItemQuery();
 $query->setBq('[title:Programming]');
@@ -269,7 +269,7 @@ $feed = $service->getGbaseItemFeed($query);
                     Um eine Abfrage über öffentliche Feed Fetzen durchzuführen, gibt es die
                     <code>newSnippetQuery()</code> und <code>getGbaseSnippetFeed()</code> Methoden:
                 </para>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $service = new Zend_Gdata_Gbase();
 $query = $service->newSnippetQuery();
 $query->setBq('[title:Programming]');
@@ -295,7 +295,7 @@ $feed = $service->getGbaseSnippetFeed($query);
                 Um über alle Attribute eines gegebenen Elements zu iterieren, gibt es die
                 <code>getGbaseAttributes()</code> Methode die über alle Ergebnisse iteriert:
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 foreach ($feed->entries as $entry) {
   // Alle Attribute erhalten und den Namen und den Textwert
   // jedes Attributes ausgeben
@@ -309,7 +309,7 @@ foreach ($feed->entries as $entry) {
                 Oder es kann auf spezielle Attributnamen gesehen werden und über die passenden
                 Ergebnisse iteriert werden:
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 foreach ($feed->entries as $entry) {
   // Gibt alle Hauptzutaten aus <g:main_ingredient>
   $baseAttributes = $entry->getGbaseAttribute("main_ingredient");
@@ -339,7 +339,7 @@ foreach ($feed->entries as $entry) {
                 Elemente können hinzugefügt werden durch Verwenden der
                 <code>insertGbaseItem()</code> Methode des Base Services:
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $service = new Zend_Gdata_Gbase($client);
 $newEntry = $service->newItemEntry();
 
@@ -378,7 +378,7 @@ $createdEntry = $service->insertGbaseItem($newEntry, $dryRun);
             <para>
                 Jedes Atribut eines Element kann aktualisiert werden wenn durch Sie iteriert wird:
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Die Überschrift aktualisieren
 $newTitle = "PHP Entwickler Handbuch zweite Editiondbook Second Edition";
 $entry->title = $service->newTitle($newTitle);
@@ -435,7 +435,7 @@ $entry->save($dryRun);
                 ein Element kann gelöscht werden indem die <code>deleteGbaseItem()</code> Methode
                 aufgerufen wird:
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $dryRun = false;
 $service->deleteGbaseItem($entry, $dryRun);
 ]]></programlisting>
@@ -443,7 +443,7 @@ $service->deleteGbaseItem($entry, $dryRun);
                 Alternativ kann <code>delete()</code> auf dem
                 <classname>Zend_Gdata_Gbase_ItemEntry</classname> Objekt aufgerufen werden:
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $dryRun = false;
 $entry->delete($dryRun);
 ]]></programlisting>

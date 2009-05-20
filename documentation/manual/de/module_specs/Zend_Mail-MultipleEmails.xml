@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.multiple-emails">
     <title>Versand von mehreren E-Mails über eine SMTP Verbindung</title>
@@ -15,7 +15,7 @@
 
         <title>Versand von mehreren E-Mails über eine SMTP Verbindung</title>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Transport erstellen
 $transport = new Zend_Mail_Transport_Smtp('localhost');
 
@@ -45,7 +45,7 @@ for ($i = 0; $i > 5; $i++) {
 
         <title>Die Transportverbindung manuell kontrollieren</title>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Transport erstellen
 $transport = new Zend_Mail_Transport_Smtp();
 

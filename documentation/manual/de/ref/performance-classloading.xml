@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15571 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="performance.classloading">
     <title>Laden von Klassen</title>
@@ -42,7 +42,7 @@
                 include_path setzt:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $paths = array(
     realpath(dirname(__FILE__) . '/../library'),
     '.',
@@ -55,7 +55,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
                 einem absoluten Pfad sind:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 define('APPLICATION_PATH', realpath(dirname(__FILE__)));
 $paths = array(
     APPLICATION_PATH . '/../library'),
@@ -139,7 +139,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
                     Verzeichnis von unserer PEAR Installation:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 library
     Archive/
     PEAR/
@@ -169,7 +169,7 @@ library
                     enden.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $paths = array(
     realpath(dirname(__FILE__) . '/../library'),
     '.'
@@ -209,7 +209,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
                 die folgenden Anweisungen aus (wobei '%' der Shell Prompt ist):
             </para>
 
-            <programlisting role="shell"><![CDATA[
+            <programlisting language="shell"><![CDATA[
 % cd path/to/ZendFramework/library
 % find . -name '*.php' -not -wholename '*/Loader/Autoloader.php' -print0 | \
   xargs -0 sed --regexp-extended --in-place 's/(require_once)/\/\/ \1/g'
@@ -229,7 +229,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
                 Code tun:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 require_once 'Zend/Loader/Autoloader.php';
 Zend_Loader_Autoloader::getInstance();
 ]]></programlisting>

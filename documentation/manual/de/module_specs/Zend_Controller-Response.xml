@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.response">
     <title>Das Response Objekt</title>
@@ -18,7 +18,7 @@
             werden.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $front->throwExceptions(true);
 ]]></programlisting>
 
@@ -27,7 +27,7 @@ $front->throwExceptions(true);
             <code>sendResponse()</code>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $response->sendResponse();
 ]]></programlisting>
 
@@ -41,7 +41,7 @@ $response->sendResponse();
                 <classname>Zend_Controller_Front::returnResponse(true)</classname> geändert werden:
             </para>
 
-            <programlisting role="php"><![CDATA[$front->returnResponse(true);
+            <programlisting language="php"><![CDATA[$front->returnResponse(true);
 $response = $front->dispatch();
 
 // ein bischen mehr verarbeiten, wie z.B. loggen...
@@ -56,7 +56,7 @@ $response->sendResponse();
             Objekt übergeben werden:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Innerhalb einer Controller Aktion:
 // Setze einen Header
 $this->getResponse()
@@ -91,7 +91,7 @@ $this->getResponse()
             statt den Inhalt auszugeben.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Erhalten nach dem Dispatch:
 $front->dispatch();
 $response = $front->getResponse();
@@ -116,7 +116,7 @@ $response->sendResponse();
             wie oben gezeigt:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $response->renderExceptions(true);
 $front->dispatch($request, $response);
 
@@ -244,7 +244,7 @@ $front->dispatch();
             zu lassen:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Angenommen diese Plugin Klasse ist im Front Controller registriert
 class MyPlugin extends Zend_Controller_Plugin_Abstract
 {
@@ -282,7 +282,7 @@ class MyController extends Zend_Controller_Action
             Bodys des Antwort Objekts mit der folgenden Struktur verursachen:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 array(
     'header'  => ..., // Header Inhalt
     'default' => ..., // Body Inhalt von MyController::fooAction()

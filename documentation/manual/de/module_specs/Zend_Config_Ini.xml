@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15207 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.config.adapters.ini">
     <title>Zend_Config_Ini</title>
@@ -31,7 +31,7 @@
             geändert werden, indem der <code>$options</code> Schlüssel <code>'nestSeparator'</code>
             geändert wird, wenn das <classname>Zend_Config_Ini</classname> Objekt instanziert wird.
             Zum Beispiel:
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $options['nestSeparator'] = ':';
 $config = new Zend_Config_Ini('/path/to/config.ini',
                               'staging',
@@ -52,7 +52,7 @@ $config = new Zend_Config_Ini('/path/to/config.ini',
             das möglicherweise nicht der Fall. Nehmen wir also an, dass sich die folgenden
             Konfigurations-Daten in der Datei <code>/path/to/config.ini</code> befinden:
         </para>
-        <programlisting role="ini"><![CDATA[
+        <programlisting language="ini"><![CDATA[
 ; Konfigurations-Daten für die Produktiv-Site
 [production]
 webhost                  = www.example.com
@@ -74,7 +74,7 @@ database.params.password = devsecret
             diesem INI-File benötigt. Es ist ein Leichtes, diese Daten zu laden, es muss nur das
             INI-File und die Staging-Sektion spezifiziert werden:
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Ini('/path/to/config.ini', 'staging');
 
 echo $config->database->params->host;   // Ausgabe "dev.example.com"

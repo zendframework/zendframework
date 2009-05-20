@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.standardElements">
     <title>Standard Form Elemente die mit dem With Zend Framework ausgeliefert werden</title>
@@ -65,7 +65,7 @@
             werden, wenn der Plugin Loader Präfixpfad spezifiziert wird:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $element->addPrefixPath('My_Captcha', 'My/Captcha/', 'captcha');
 ]]></programlisting>
 
@@ -75,7 +75,7 @@ $element->addPrefixPath('My_Captcha', 'My/Captcha/', 'captcha');
             Adapters nimmt:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Konkrete Instanz:
 $element->setCaptcha(new Zend_Captcha_Figlet());
 
@@ -89,7 +89,7 @@ $element->setCaptcha('Dumb');
             beide Schlüssel 'captcha' und 'captchaOptions':
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Verwendung eines einzelnen captcha Schlüssels:
 $element = new Zend_Form_Element_Captcha('foo', array(
     'label' => "Bitte verifizieren Sie das Sie menschlich sind",
@@ -188,7 +188,7 @@ $element = new Zend_Form_Element_Captcha('foo', array(
                 erscheinen, aber die aktuelle Verwendung ist relativ trivial:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $element = new Zend_Form_Element_File('foo');
 $element->setLabel('Ein Bild hochladen:')
         ->setDestination('/var/www/upload');
@@ -207,7 +207,7 @@ $form->addElement($element, 'foo');
                 gesetzt wird:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $form->setAttrib('enctype', 'multipart/form-data');
 ]]></programlisting>
 
@@ -218,7 +218,7 @@ $form->setAttrib('enctype', 'multipart/form-data');
                 <code>getFileName()</code> verwendet wird:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 if (!$form->isValid) {
     print "Uh oh... Prüfungsfehler";
 }
@@ -258,7 +258,7 @@ $location = $form->foo->getFileName();
             der Wert des File Elements ist.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $form->getValues();
 ]]></programlisting>
 
@@ -285,7 +285,7 @@ $form->getValues();
                 Zuerst <code>setValueDisabled(true)</code> aufrufen.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $element = new Zend_Form_Element_File('foo');
 $element->setLabel('Ein Bild hochladen:')
         ->setDestination('/var/www/upload')
@@ -298,7 +298,7 @@ $element->setLabel('Ein Bild hochladen:')
                 Instanz von <classname>Zend_File_Transfer</classname> selbst aufrufen.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $values = $form->getValues();
 
 if ($form->isValid($form->getPost())) {
@@ -339,7 +339,7 @@ if ($form->isValid($form->getPost())) {
         <example id="zend.form.standardElements.file.isuploaded">
             <title>Prüfen ob eine optionale Datei hochgeladen wurde</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $element = new Zend_Form_Element_File('foo');
 $element->setLabel('Ein Bild hochladen:')
         ->setDestination('/var/www/upload')
@@ -370,7 +370,7 @@ if ($form->foo->isUploaded()) {
                 Element erstellt wurde:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $element = new Zend_Form_Element_File('foo');
 $element->setLabel('Ein Bild hochladen:')
         ->setDestination('/var/www/upload');
@@ -416,7 +416,7 @@ $form->addElement($element, 'foo');
             dargestellt.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $element = new Zend_Form_Element_File('foo');
 $element->setLabel('Ein Bild hochladen:')
         ->setDestination('/var/www/upload')
@@ -466,7 +466,7 @@ $form->addElement($element, 'foo');
             Namen und unterschiedlichen Salts nicht kollidieren:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
 ]]></programlisting>
 
@@ -571,7 +571,7 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
             übergeben werden. Der folgende Code prüft die Werte "bar" und "bat":
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $element = new Zend_Form_Element_MultiCheckbox('foo', array(
     'multiOptions' => array(
         'foo' => 'Foo Option',

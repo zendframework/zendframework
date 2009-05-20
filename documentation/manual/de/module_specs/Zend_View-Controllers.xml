@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.view.controllers">
     <title>Controller Skripte</title>
@@ -20,7 +20,7 @@
             anderen übergeben und an den bezeichneten Eigenschaften der View Instanz zuordnen.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view = new Zend_View();
 $view->a = "Hay";
 $view->b = "Bee";
@@ -37,7 +37,7 @@ $view->c = "Sea";
             Das folgende Beispiel hat den selben Effekt wie die obigen einzelnen Übergaben.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view = new Zend_View();
 
 // übergebe ein Array mit Schlüssel-Wert Paaren,
@@ -65,7 +65,7 @@ $view->assign((array) $obj);
             Variablennamen und den Wert der Variable zu übergeben.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view = new Zend_View();
 $view->assign('a', "Hay");
 $view->assign('b', "Bee");
@@ -86,7 +86,7 @@ $view->assign('c', "Sea");
             passenden Zeit per echo() oder print() ausgeben musst.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view = new Zend_View();
 $view->a = "Hay";
 $view->b = "Bee";
@@ -114,7 +114,7 @@ echo $view->render('someView.php');
             View Skripten schauen soll.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view = new Zend_View();
 $view->setScriptPath('/path/to/app/views');
 ]]></programlisting>
@@ -132,7 +132,7 @@ $view->setScriptPath('/path/to/app/views');
             oder "Skins" für einige Views erstellen kannst, während du andere bestehen lässt.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view = new Zend_View();
 $view->addScriptPath('/path/to/app/views');
 $view->addScriptPath('/path/to/custom/');
@@ -156,7 +156,7 @@ $view->addScriptPath('/path/to/custom/');
                 Eingabe könnte zu Beispiel so einen Fall verursachen:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // $_GET['foo'] == '../../../etc'
 $view->addScriptPath($_GET['foo']);
 $view->render('passwd');

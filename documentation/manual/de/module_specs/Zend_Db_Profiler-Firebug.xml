@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15207 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.db.profiler.profilers.firebug">
     <title>Profilen mit Firebug</title>
@@ -42,7 +42,7 @@
     <example id="zend.db.profiler.profilers.firebug.example.with_front_controller">
         <title>DB Profiling mit Zend_Controller_Front</title>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // In der Bootstrap Datei
 
 $profiler = new Zend_Db_Profiler_Firebug('All DB Queries');
@@ -61,7 +61,7 @@ $db->setProfiler($profiler);
     <example id="zend.db.profiler.profilers.firebug.example.without_front_controller">
         <title>DB Profiling ohne Zend_Controller_Front</title>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $profiler = new Zend_Db_Profiler_Firebug('All DB Queries');
 $profiler->setEnabled(true);
 

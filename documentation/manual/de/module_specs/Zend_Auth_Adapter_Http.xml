@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15346 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.auth.adapter.http">
 
@@ -215,12 +215,12 @@
 
             <para>
                 Es gibt zwei gleiche einfache Wege um einen Datei Auflöser zu erstellen:
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $path     = 'files/passwd.txt';
 $resolver = new Zend_Auth_Adapter_Http_Resolver_File($path);
 ]]></programlisting>
                 oder
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $path     = 'files/passwd.txt';
 $resolver = new Zend_Auth_Adapter_Http_Resolver_File();
 $resolver->setFile($path);
@@ -238,7 +238,7 @@ $resolver->setFile($path);
 
         <para>
             Zuerst muß ein Array mit den benötigen Konfigurationswerten gesetzt werden:
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $config = array(
     'accept_schemes' => 'basic digest',
     'realm'          => 'My Web Site',
@@ -255,7 +255,7 @@ $config = array(
 
         <para>
             Dann wird ein Zend_Auth_Adapter_Http Objekt erstellt:
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $adapter = new Zend_Auth_Adapter_Http($config);
 ]]></programlisting>
         </para>
@@ -264,7 +264,7 @@ $adapter = new Zend_Auth_Adapter_Http($config);
             Da beides, Basis und Digest Authentifizierung, unterstützt werden, werden zwei
             unterschiedliche Auflösungs-Objekte benötigt. Man könnte das auch einfach durch die
             Verwendung von zwei unterschiedlichen Klassen bewerkstelligen:
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $basicResolver = new Zend_Auth_Adapter_Http_Resolver_File();
 $basicResolver->setFile('files/basicPasswd.txt');
 
@@ -279,7 +279,7 @@ $adapter->setDigestResolver($digestResolver);
         <para>
             Letztendlich führen wir die Authentifizierung durch. Der Adapter benötigt eine Referenz
             zu beidem, dem Anfrage und Antwort Objekten um seinen Job durchführen zu können:
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 assert($request instanceof Zend_Controller_Request_Http);
 assert($response instanceof Zend_Controller_Response_Http);
 

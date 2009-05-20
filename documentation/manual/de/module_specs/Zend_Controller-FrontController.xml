@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.front">
     <title>Der Front Controller</title>
@@ -61,7 +61,7 @@
                 ausgeführt werden:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Error-Handler-Plugin abschalten:
 $front->setParam('noErrorHandler', true);
 ]]></programlisting>
@@ -71,7 +71,7 @@ $front->setParam('noErrorHandler', true);
                 dem <code>dispatch()</code> ausgeführt werden:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Den ViewRenderer Action-Helper deaktivieren:
 $front->setParam('noViewRenderer', true);
 ]]></programlisting>
@@ -96,7 +96,7 @@ $front->setParam('noViewRenderer', true);
                 das auch die einzige Möglichkeit, ein Front-Controller-Objekt zu erhalten.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $front = Zend_Controller_Front::getInstance();
 ]]></programlisting>
         </sect3>
@@ -117,7 +117,7 @@ $front = Zend_Controller_Front::getInstance();
                 Ein Paar Beispiele:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Standard-Controller-Verzeichnis setzen:
 $front->setControllerDirectory('../application/controllers');
 
@@ -246,7 +246,7 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
                 benutzt werden kann, die keine Anpassung der Front-Controller-Umgebung benötigen.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Front-Controller instanzieren, Controller-Verzeichnis setzen
 // und dispatchen in einem einfachen Schritt:
 Zend_Controller_Front::run('../application/controllers');
@@ -514,7 +514,7 @@ Zend_Controller_Front::run('../application/controllers');
             die Methode <code>getInstance()</code> überschrieben werden:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class My_Controller_Front extends Zend_Controller_Front
 {
     public static function getInstance()

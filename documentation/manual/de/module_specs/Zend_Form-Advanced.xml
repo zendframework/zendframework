@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15207 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.advanced">
     <title>Fortgeschrittene Verwendung von Zend_Form</title>
@@ -22,7 +22,7 @@
             als Beispiel an:
         </para>
 
-        <programlisting role="html"><![CDATA[
+        <programlisting language="html"><![CDATA[
 <form>
     <fieldset>
         <legend>Versandadresse</legend>
@@ -80,7 +80,7 @@
             das durch die Verwendung der Array Schreibweise lösen:
         </para>
 
-        <programlisting role="html"><![CDATA[
+        <programlisting language="html"><![CDATA[
 <form>
     <fieldset>
         <legend>Versandadresse</legend>
@@ -237,7 +237,7 @@
                 verschiedenen Unterformulare:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class My_Form_Registration extends Zend_Form
 {
     public function init()
@@ -348,7 +348,7 @@ class My_Form_Registration extends Zend_Form
                 diese Information:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class My_Form_Registration extends Zend_Form
 {
     // ...
@@ -442,7 +442,7 @@ class My_Form_Registration extends Zend_Form
                 Formular Instanz hinzu:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class RegistrationController extends Zend_Controller_Action
 {
     protected $_form;
@@ -467,7 +467,7 @@ class RegistrationController extends Zend_Controller_Action
                 Schlüssen suchen, die jedes Unterformular repräsentieren.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class RegistrationController extends Zend_Controller_Action
 {
     // ...
@@ -585,7 +585,7 @@ class RegistrationController extends Zend_Controller_Action
                 Formular geprüft wird, die Prüfung gegen alle Teile der Session durchgeführt wird:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class RegistrationController extends Zend_Form
 {
     // ...
@@ -632,7 +632,7 @@ class RegistrationController extends Zend_Form
                 eine 'process' (Bearbeiten) Aktion für die Bearbeitung des Formulars benötigt.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class RegistrationController extends Zend_Controller_Action
 {
     // ...
@@ -687,7 +687,7 @@ class RegistrationController extends Zend_Controller_Action
                 Die View Skripte sind sehr einfach:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <?php // registration/index.phtml ?>
 <h2>Registration</h2>
 <?php echo $this->form ?>

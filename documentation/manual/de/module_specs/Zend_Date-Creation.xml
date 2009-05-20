@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15346 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.creation">
 
@@ -35,7 +35,7 @@
                 aktuelle Datum als <classname>Zend_Date</classname> Instanz zu erhalten.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 ]]></programlisting>
 
@@ -54,7 +54,7 @@ $date = new Zend_Date();
                 auch nur durch die Angabe von optionalen Parametern geändert werden.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $date = Zend_Date::now();
 ]]></programlisting>
 
@@ -101,7 +101,7 @@ $date = Zend_Date::now();
                 durch eine Abfrage viel kleiner ist als die Konvertierung in ein spezielles Format.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // SELECT UNIX_TIMESTAMP(my_datetime_column) FROM my_table
 $date = new Zend_Date($unixtimestamp, Zend_Date::TIMESTAMP);
 ]]></programlisting>
@@ -127,7 +127,7 @@ $date = new Zend_Date($unixtimestamp, Zend_Date::TIMESTAMP);
                 Datumswerte nach dem 1 Jänner 1970 unterstützt werden.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // SELECT datecolumn FROM my_table
 $date = new Zend_Date($datecolumn, Zend_Date::ISO_8601);
 ]]></programlisting>
@@ -191,7 +191,7 @@ $date = new Zend_Date($datecolumn, Zend_Date::ISO_8601);
                 angegeben wird, die Stunde <emphasis>0</emphasis> verwendet wird.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $datearray = array('year' => 2006,
                    'month' => 4,
                    'day' => 18,
@@ -201,7 +201,7 @@ $datearray = array('year' => 2006,
 $date = new Zend_Date($datearray);
 ]]></programlisting>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $datearray = array('year' => 2006, 'month' => 4, 'day' => 18);
 $date = new Zend_Date($datearray);
 ]]></programlisting>

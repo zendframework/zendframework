@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15346 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.adapter">
 
@@ -130,7 +130,7 @@
 
             <example id="zend.db.adapter.connecting.constructor.example">
                 <title>Nutzung eines Adapter Konstruktors</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $db = new Zend_Db_Adapter_Pdo_Mysql(array(
     'host'     => '127.0.0.1',
     'username' => 'webuser',
@@ -161,7 +161,7 @@ $db = new Zend_Db_Adapter_Pdo_Mysql(array(
 
             <example id="zend.db.adapter.connecting.factory.example">
                 <title>Nutzung der Adapter factory() Methode</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Wir benötigen das folgende Statement nicht da die
 // Zend_Db_Adapter_Pdo_Mysql Datei für uns durch die Factory
 // Methode von Zend_Db geladen wird
@@ -189,7 +189,7 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
 
             <example id="zend.db.adapter.connecting.factory.example2">
                 <title>Die factory Methode für eine eigene Adapter Klasse verwenden</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Wir müssen die Datei der Adapter Klasse nicht laden
 // weil Sie für uns durch die Factory Methode von Zend_Db geladen wird
 
@@ -236,7 +236,7 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
                         linkend="zend.config.adapters.ini">Zend_Config_Ini</link> oder <link
                         linkend="zend.config.adapters.xml">Zend_Config_Xml</link> verwendet werden.
                 </para>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $config = new Zend_Config(
     array(
         'database' => array(
@@ -346,7 +346,7 @@ $db = Zend_Db::factory($config->database);
                     (der Standard), <classname>Zend_Db::CASE_UPPER</classname> oder
                     <classname>Zend_Db::CASE_LOWER</classname> annehmen.
                 </para>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $options = array(
     Zend_Db::CASE_FOLDING => Zend_Db::CASE_UPPER
 );
@@ -376,7 +376,7 @@ $db = Zend_Db::factory('Db2', $params);
                     Bezeichner begrenzt werden müssen, so kann dies über die
                     <code>quoteIdentifier()</code> Methode von Hand getan werden.
                 </para>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $options = array(
     Zend_Db::AUTO_QUOTE_IDENTIFIERS => false
 );
@@ -395,7 +395,7 @@ $db = Zend_Db::factory('Pdo_Mysql', $params);
 
             <example id="zend.db.adapter.connecting.parameters.example3">
                 <title>Übergeben von PDO Treiber Optionen an die factory</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $pdoParams = array(
     PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true
 );
@@ -417,7 +417,7 @@ echo $db->getConnection()
 
             <example id="zend.db.adapter.connecting.parameters.example4">
                 <title>Übergabe einer Serialisierungs Option an die Factory</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $options = array(
     Zend_Db::ALLOW_SERIALIZATION => false
 );
@@ -484,7 +484,7 @@ $db = Zend_Db::factory('Pdo_Mysql', $params);
             <example
                 id="zend.db.adapter.connecting.getconnection.example">
                 <title>Umgang mit Verbindungs Exceptions</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 try {
     $db = Zend_Db::factory('Pdo_Mysql', $parameters);
     $db->getConnection();
@@ -548,7 +548,7 @@ try {
             Unit-Tests für <classname>Zend_Db</classname> verwendet.
         </para>
 
-        <programlisting role="sql"><![CDATA[
+        <programlisting language="sql"><![CDATA[
 CREATE TABLE accounts (
   account_name      VARCHAR(100) NOT NULL PRIMARY KEY
 );
@@ -625,7 +625,7 @@ CREATE TABLE bugs_products (
 
             <example id="zend.db.adapter.select.fetchall.example">
                 <title>Nutzung von fetchAll()</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $sql = 'SELECT * FROM bugs WHERE bug_id = ?';
 
 $result = $db->fetchAll($sql, 2);
@@ -712,7 +712,7 @@ $result = $db->fetchAll($sql, 2);
 
             <example id="zend.db.adapter.select.fetch-mode.example">
                 <title>Nutzung von setFetchMode()</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $db->setFetchMode(Zend_Db::FETCH_OBJ);
 
 $result = $db->fetchAll('SELECT * FROM bugs WHERE bug_id = ?', 2);
@@ -735,7 +735,7 @@ echo $result[0]->bug_description;
 
             <example id="zend.db.adapter.select.fetchassoc.example">
                 <title>Nutzung von fetchAssoc()</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $db->setFetchMode(Zend_Db::FETCH_OBJ);
 
 $result = $db->fetchAssoc('SELECT * FROM bugs WHERE bug_id = ?', 2);
@@ -761,7 +761,7 @@ echo $result[0]['bug_description'];
 
             <example id="zend.db.adapter.select.fetchcol.example">
                 <title>Nutzung von fetchCol()</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $db->setFetchMode(Zend_Db::FETCH_OBJ);
 
 $result = $db->fetchCol(
@@ -794,7 +794,7 @@ echo $result[0];
 
             <example id="zend.db.adapter.select.fetchpairs.example">
                 <title>Nutzung von fetchPairs()</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $db->setFetchMode(Zend_Db::FETCH_OBJ);
 
 $result = $db->fetchAssoc('SELECT bug_id, bug_status FROM bugs');
@@ -816,7 +816,7 @@ echo $result[2];
 
             <example id="zend.db.adapter.select.fetchrow.example">
                 <title>Nutzung von fetchRow()</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $db->setFetchMode(Zend_Db::FETCH_OBJ);
 
 $result = $db->fetchRow('SELECT * FROM bugs WHERE bug_id = 2');
@@ -841,7 +841,7 @@ echo $result->bug_description;
 
             <example id="zend.db.adapter.select.fetchone.example">
                 <title>Nutzung von fetchOne()</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $result = $db->fetchOne('SELECT bug_status FROM bugs WHERE bug_id = 2');
 
 // this is a single string value
@@ -874,7 +874,7 @@ echo $result;
 
             <example id="zend.db.adapter.write.insert.example">
                 <title>Einfügen in eine Tabelle</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $data = array(
     'created_on'      => '2007-03-22',
     'bug_description' => 'Etwas falsch',
@@ -909,7 +909,7 @@ $db->insert('bugs', $data);
 
             <example id="zend.db.adapter.write.insert.example2">
                 <title>Einfügen von Expressions in eine Tabelle</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $data = array(
     'created_on'      => new Zend_Db_Expr('CURDATE()'),
     'bug_description' => 'Etwas falsch',
@@ -943,7 +943,7 @@ $db->insert('bugs', $data);
 
             <example id="zend.db.adapter.write.lastinsertid.example-1">
                 <title>Nutzung von lastInsertId() für einen Auto-Increment Schlüssel</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $db->insert('bugs', $data);
 
 // Gib den letzten durch eine auto-inkrement Spalte erzeugten Wert zurück
@@ -965,7 +965,7 @@ $id = $db->lastInsertId();
 
             <example id="zend.db.adapter.write.lastinsertid.example-2">
                 <title>Nutzung von lastInsertId() für eine Sequenz</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $db->insert('bugs', $data);
 
 // Gib den letzten durch die 'bugs_bug_id_seq' Sequenz erstellten Wert zurück
@@ -985,7 +985,7 @@ $id = $db->lastInsertId('bugs');
 
             <example id="zend.db.adapter.write.lastinsertid.example-3">
                 <title>Nutzung von lastSequenceId()</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $db->insert('bugs', $data);
 
 // Gib den letzten durch die 'bugs_id_gen' Sequenz erstellten Wert zurück.
@@ -1071,7 +1071,7 @@ $id = $db->lastSequenceId('bugs_id_gen');
 
             <example id="zend.db.adapter.write.update.example">
                 <title>Aktualisieren von Zeilen</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $data = array(
     'updated_on'      => '2007-03-23',
     'bug_status'      => 'FIXED'
@@ -1093,7 +1093,7 @@ $n = $db->update('bugs', $data, 'bug_id = 2');
 
             <example id="zend.db.adapter.write.update.example-array">
                 <title>Aktualisieren von Zeilen unter Nutzung eines Arrays von Expressions</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $data = array(
     'updated_on'      => '2007-03-23',
     'bug_status'      => 'FIXED'
@@ -1135,7 +1135,7 @@ $n = $db->update('bugs', $data, $where);
 
             <example id="zend.db.adapter.write.delete.example">
                 <title>Löschen von Zeilen</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $n = $db->delete('bugs', 'bug_id = 3');
 ]]></programlisting>
             </example>
@@ -1163,7 +1163,7 @@ $n = $db->delete('bugs', 'bug_id = 3');
             enthalten kann, wie das Anführungszeichen, was zu ungültiger SQL Syntax führen kann. Zum
             Beispiel, zu beachten ist die ungerade Anzahl der Anführungszeichen in der folgenden
             Anfrage:
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $name = "O'Reilly";
 $sql = "SELECT * FROM bugs WHERE reported_by = '$name'";
 
@@ -1205,7 +1205,7 @@ echo $sql;
 
             <example id="zend.db.adapter.quoting.quote.example">
                 <title>Nutzung von quote()</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $name = $db->quote("O'Reilly");
 echo $name;
 // 'O\'Reilly'
@@ -1233,7 +1233,7 @@ echo $sql;
                 Fehler, wenn angenommen wird das <code>intColumn</code> einen SQL Datentyp von
                 <code>INTEGER</code> besitzt
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 SELECT * FROM atable WHERE intColumn = '123'
 ]]></programlisting>
             </para>
@@ -1246,7 +1246,7 @@ SELECT * FROM atable WHERE intColumn = '123'
 
             <example id="zend.db.adapter.quoting.quote.example-2">
                 <title>Verwenden von quote() mit einem SQL Typ</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $value = '1234';
 $sql = 'SELECT * FROM atable WHERE intColumn = '
      . $db->quote($value, 'INTEGER');
@@ -1294,7 +1294,7 @@ $sql = 'SELECT * FROM atable WHERE intColumn = '
 
             <example id="zend.db.adapter.quoting.quote-into.example">
                 <title>Nutzung von quoteInto()</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $sql = $db->quoteInto("SELECT * FROM bugs WHERE reported_by = ?", "O'Reilly");
 
 echo $sql;
@@ -1310,7 +1310,7 @@ echo $sql;
 
             <example id="zend.db.adapter.quoting.quote-into.example-2">
                 <title>Verwenden von quoteInto() mit einem SQL Typ</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $sql = $db
     ->quoteInto("SELECT * FROM bugs WHERE bug_id = ?", '1234', 'INTEGER');
 
@@ -1358,7 +1358,7 @@ echo $sql;
 
             <example id="zend.db.adapter.quoting.quote-identifier.example">
                 <title>Nutzung von quoteIdentifier()</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Wir könnten einen Tabellennamen haben, der ein in SQL reserviertes Wort ist
 $tableName = $db->quoteIdentifier("order");
 
@@ -1435,7 +1435,7 @@ echo $sql
 
         <example id="zend.db.adapter.transactions.example">
             <title>Verwalten einer Transaktion um Konsistenz sicher zu stellen</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Eine Transaktion explizit starten
 $db->beginTransaction();
 
@@ -1651,7 +1651,7 @@ try {
 
         <example id="zend.db.adapter.closing.example">
             <title>Schließen einer Datenbankverbindung</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $db->closeConnection();
 ]]></programlisting>
         </example>
@@ -1709,7 +1709,7 @@ $db->closeConnection();
 
         <example id="zend.db.adapter.other-statements.example">
             <title>Ausführen eines nicht-prepared Statements mit einem PDO Adapter</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $result = $db->getConnection()->exec('DROP TABLE bugs');
 ]]></programlisting>
         </example>
@@ -1741,7 +1741,7 @@ $result = $db->getConnection()->exec('DROP TABLE bugs');
 
         <example id="zend.db.adapter.server-version.example">
             <title>Prüfen der Server Version bevor eine Abfrage gestartet wird</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $version = $db->getServerVersion();
 if (!is_null($version)) {
     if (version_compare($version, '5.0.0', '>=')) {

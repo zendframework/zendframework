@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15207 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.router.routes.chain">
     <title>Zend_Controller_Router_Route_Chain</title>
@@ -32,7 +32,7 @@
         dann beide Routen verkettet hat:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 // Erstellung zweier Routen
 $hostnameRoute = new Zend_Controller_Router_Route_Hostname(...);
 $pathRoute     = new Zend_Controller_Router_Route(...);
@@ -51,7 +51,7 @@ $chainedRoute = $hostnameRoute->chain($pathRoute);
         Schrägstrich. Es kann Fälle geben in denen man ein anderes Trennzeichen verwenden will:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 // Zwei Routen erstellen
 $firstRoute  = new Zend_Controller_Router_Route('foo');
 $secondRoute = new Zend_Controller_Router_Route('bar');
@@ -77,7 +77,7 @@ echo $chainedRoute->assemble();
             aussehen:
         </para>
 
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <routes>
     <www type="Zend_Controller_Router_Route_Hostname">
         <route>www.example.com</route>
@@ -126,7 +126,7 @@ echo $chainedRoute->assemble();
             verwendet werden kann, und auch im Root Level funktioniert:
         </para>
 
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <routes>
     <www type="Zend_Controller_Router_Route_Chain">
         <route>www.example.com</route>
@@ -158,7 +158,7 @@ echo $chainedRoute->assemble();
             mit einem Komma zu seperieren:
         </para>
 
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <routes>
     <www-index type="Zend_Controller_Router_Route_Chain">
         <chain>www</chain>

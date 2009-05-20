@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15215 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.i18n">
     <title>Internationalisierung von Zend_Form</title>
@@ -54,7 +54,7 @@
                     und verwenden es um eine Übersetzung und/oder Lokalisierung durchzuführen:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // verwende den 'Zend_Translate' Schlüssel; $translate ist ein Zend_Translate Objekt:
 Zend_Registry::set('Zend_Translate', $translate);
 ]]></programlisting>
@@ -73,7 +73,7 @@ Zend_Registry::set('Zend_Translate', $translate);
                     werden:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Allen Prüfklassen mitteilen, dass ein spezieller Übersetzungsadapter verwendet werden soll:
 Zend_Validate_Abstract::setDefaultTranslator($translate);
 ]]></programlisting>
@@ -86,7 +86,7 @@ Zend_Validate_Abstract::setDefaultTranslator($translate);
                     von Fehlermeldungen:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Allen Formularklassen mitteilen, dass ein spezieller Übersetzungsadapter
 // verwendet werden soll, sowie, dass der Adapter für die Übersetzung von
 // Fehlermeldungen verwendet werden soll:
@@ -101,7 +101,7 @@ Zend_Form::setDefaultTranslator($translate);
                     <code>setTranslator()</code> Methode verwendet wird:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // *Dieser* Formularklassen mitteilen, dass ein spezieller Übersetzungsadapter
 // verwendet werden soll, sie wird auch für die Übersetzung von allen
 // Fehlermeldungen für alle Elemente verwendet:

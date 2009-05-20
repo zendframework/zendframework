@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15604 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.memory.memory-objects">
 
@@ -12,7 +12,7 @@
         <para>
             Um verschiebbare Memory Objekte zu Erstellen kann die <code>create([$data])</code>
             Methode des Memory Managers verwendet werden:
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->create($data);
 ]]></programlisting>
         </para>
@@ -32,7 +32,7 @@ $memObject = $memoryManager->create($data);
         <para>
             Gesperrte Memory Objekte können erstellt werden mit Hilfe der
             <code>createLocked([$data])</code> Methode des Memory Managers:
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->createLocked($data);
 ]]></programlisting>
         </para>
@@ -76,7 +76,7 @@ $memObject = $memoryManager->createLocked($data);
         <para>
             Die '<code>value</code>' Eigenschaft des Memory Containers (gesperrt oder verschiebbar)
             kann verwendet werden um mit Memory Objekt Daten zu arbeiten:
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->create($data);
 
 echo $memObject->value;
@@ -113,7 +113,7 @@ $memObject->value = substr($memObject->value, $start, $length);
 
             <title>getRef() Methode</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 public function &getRef();
 ]]></programlisting>
 
@@ -143,7 +143,7 @@ public function &getRef();
                 verändert wird. Deswegen ist es eine gute Idee die
                 <code>getRef()</code> Methode für den Zugriff auf die Werte der Daten
                 zu verwenden:
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->create($data);
 
 $value = &$memObject->getRef();
@@ -161,14 +161,14 @@ for ($count = 0; $count < strlen($value); $count++) {
 
             <title>touch() Methode</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 public function touch();
 ]]></programlisting>
             <para>
                 Die <code>touch()</code> Methode sollte in Verbindung mit
                 <code>getRef()</code> verwendet werden. Das signalisiert das der
                 Wert des Objektes sich verändert hat:
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->create($data);
 ...
 
@@ -193,7 +193,7 @@ $memObject->touch();
 
             <title>lock() Methode</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 public function lock();
 ]]></programlisting>
 
@@ -211,7 +211,7 @@ public function lock();
                 Gesperrte Objekte im Speicher garantieren auch das die Referent die
                 durch die <code>getRef()</code> Methode zurückgegeben wird gültig ist
                 bis das Objekt entsperrt wird:
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $memObject1 = $memoryManager->create($data1);
 $memObject2 = $memoryManager->create($data2);
 ...
@@ -238,7 +238,7 @@ $memObject2->unlock();
 
             <title>unlock() Methode</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 public function unlock();
 ]]></programlisting>
 
@@ -253,7 +253,7 @@ public function unlock();
 
             <title>isLocked() Methode</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 public function isLocked();
 ]]></programlisting>
 

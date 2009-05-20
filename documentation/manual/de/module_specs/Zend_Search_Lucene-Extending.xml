@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15604 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.extending">
     <title>Erweiterbarkeit</title>
@@ -31,7 +31,7 @@
             Um zwischen Analysatoren zu wechseln:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 Zend_Search_Lucene_Analysis_Analyzer::setDefault(
     new Zend_Search_Lucene_Analysis_Analyzer_Common_Text());
 ...
@@ -58,7 +58,7 @@ $index->addDocument($doc);
 
             <example id="zend.search.lucene.extending.analysis.example-1">
                 <title>Eigener Textanalysator</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 /**
  * Hier ist ein eigener Textanalysator, der Worte mit Ziffern
  * als einen Begriff behandelt
@@ -183,7 +183,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
         <para>
             Die <code>ShortWords</code> und <code>StopWords</code> Filter können mit bereits
             definierten oder eigenen Analysatoren wie folgt verwendet werden:
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $stopWords = array('a', 'an', 'at', 'the', 'and', 'or', 'is', 'am');
 $stopWordsFilter =
     new Zend_Search_Lucene_Analysis_TokenFilter_StopWords($stopWords);
@@ -194,7 +194,7 @@ $analyzer->addFilter($stopWordsFilter);
 
 Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
 ]]></programlisting>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $shortWordsFilter = new Zend_Search_Lucene_Analysis_TokenFilter_ShortWords();
 
 $analyzer =
@@ -209,7 +209,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
             Der <classname>Zend_Search_Lucene_Analysis_TokenFilter_StopWords</classname> Konstruktor
             nimmt ein Array mit Stopwörtern als Eingabe entgegen. Aber Stopwörter können auch aus
             einer Datei geladen werden:
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $stopWordsFilter = new Zend_Search_Lucene_Analysis_TokenFilter_StopWords();
 $stopWordsFilter->loadFromFile($my_stopwords_file);
 
@@ -304,7 +304,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
             Methode verwendet werden um Sie als Standard zu setzen.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class MySimilarity extends Zend_Search_Lucene_Search_Similarity {
     public function lengthNorm($fieldName, $numTerms) {
         return 1.0/sqrt($numTerms);

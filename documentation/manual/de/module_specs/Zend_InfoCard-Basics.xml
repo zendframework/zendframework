@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15343 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.infocard.basics">
     <title>Einführung</title>
@@ -29,7 +29,7 @@
             werden durch Verwenden des folgenden HTML Blocks im eigenen HTML Anmeldeformular:
         </para>
 
-        <programlisting role="html"><![CDATA[
+        <programlisting language="html"><![CDATA[
 <form action="http://example.com/server" method="POST">
   <input type='image' src='/images/ic.png' align='center'
         width='120px' style='cursor:pointer' />
@@ -83,7 +83,7 @@
             Verwendung wird anbei gezeigt:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php
 if (isset($_POST['xmlToken'])) {
 
@@ -170,7 +170,7 @@ if (isset($_POST['xmlToken'])) {
             gezeigt:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php
 if (isset($_POST['xmlToken'])) {
     $infocard = new Zend_InfoCard();
@@ -277,7 +277,7 @@ if (isset($_POST['xmlToken'])) {
             angehängt werden kann wird hier gezeigt:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // ...
 public function submitinfocardAction()
 {
@@ -356,7 +356,7 @@ public function submitinfocardAction()
             verwendet:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class myAdapter implements Zend_InfoCard_Adapter_Interface
 {
     public function storeAssertion($assertionURI,

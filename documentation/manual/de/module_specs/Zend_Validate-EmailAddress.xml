@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15346 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.email_address">
 
@@ -18,7 +18,7 @@
     <para>
         Ein Beispiel einer normalen Benutzung ist anbei:
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_EmailAddress();
 if ($validator->isValid($email)) {
     // Email Adresse scheint gültig zu sein
@@ -69,7 +69,7 @@ if ($validator->isValid($email)) {
         zusammen mit einem Beispiel, wie DNS und lokale Hostnamen, akzeptiert werden wie im Beispiel
         das anbei steht:
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_EmailAddress(
                     Zend_Validate_Hostname::ALLOW_DNS |
                     Zend_Validate_Hostname::ALLOW_LOCAL);
@@ -101,7 +101,7 @@ if ($validator->isValid($email)) {
         Platformen unterstützt. Um die MX Prüfung einzuschalten kann ein zweiter Parameter an den
         <classname>Zend_Validate_EmailAddress</classname> Konstruktor übergeben werden.
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_EmailAddress(Zend_Validate_Hostname::ALLOW_DNS,
                                             true);
 ]]></programlisting>
@@ -129,7 +129,7 @@ $validator = new Zend_Validate_EmailAddress(Zend_Validate_Hostname::ALLOW_DNS,
         <classname>Zend_Validate_Hostname</classname> Objekt das innerhalb von
         <classname>Zend_Validate_EmailAddress</classname> existiert.
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator->hostnameValidator->setValidateIdn(false);
 ]]></programlisting>
 
@@ -152,7 +152,7 @@ $validator->hostnameValidator->setValidateIdn(false);
         interne <classname>Zend_Validate_Hostname</classname> geändert wird, das innerhalb von
         <classname>Zend_Validate_EmailAddress</classname> existiert.
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator->hostnameValidator->setValidateTld(false);
 ]]></programlisting>
 

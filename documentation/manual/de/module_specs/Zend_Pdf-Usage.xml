@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15341 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.usage">
     <title>Anwendungsbeispiel für die Zend_Pdf Komponente</title>
@@ -17,7 +17,7 @@
 
     <example id="zend.pdf.usage.example-1">
         <title>Anwendungsbeispiel für die Zend_Pdf Komponente</title>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /**
  * @package Zend_Pdf
  * @subpackage demo

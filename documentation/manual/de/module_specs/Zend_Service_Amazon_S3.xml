@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15602 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.s3">
     <title>Zend_Service_Amazon_S3</title>
@@ -104,7 +104,7 @@
 
         <example id="zend.service.amazon.s3.storing-your-first.example">
             <title>Beispiel der Verwendung von Zend_Service_Amazon_S3</title>
-             <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 require_once 'Zend/Service/Amazon/S3.php';
 
 $s3 = new Zend_Service_Amazon_S3($my_aws_key, $my_aws_secret_key);
@@ -126,7 +126,7 @@ echo $s3->getObject("my-own-bucket/myobject");
             setzen:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 require_once 'Zend/Service/Amazon/S3.php';
 
 Zend_Service_Amazon_S3::setKeys($my_aws_key, $my_aws_secret_key);
@@ -175,7 +175,7 @@ $s3 = new Zend_Service_Amazon_S3();
                     <title>
                         Beispiel für das Entfernen eines Buckets in Zend_Service_Amazon_S3
                     </title>
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 require_once 'Zend/Service/Amazon/S3.php';
 
 $s3 = new Zend_Service_Amazon_S3($my_aws_key, $my_aws_secret_key);
@@ -194,7 +194,7 @@ $s3->removeBucket("my-own-bucket");
 
                 <example id="zend.service.amazon.s3.buckets.list.example">
                     <title>Beispiel für das Auflisten der Buckets in Zend_Service_Amazon_S3</title>
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 require_once 'Zend/Service/Amazon/S3.php';
 
 $s3 = new Zend_Service_Amazon_S3($my_aws_key, $my_aws_secret_key);
@@ -331,7 +331,7 @@ foreach($list as $bucket) {
                                 <title>
                                     Beispiel für ein öffentliches Objekt in Zend_Service_Amazon_S3
                                 </title>
-                                <programlisting role="php"><![CDATA[
+                                <programlisting language="php"><![CDATA[
 require_once 'Zend/Service/Amazon/S3.php';
 
 $s3 = new Zend_Service_Amazon_S3($my_aws_key, $my_aws_secret_key);
@@ -418,7 +418,7 @@ echo "Go to http://s3.amazonaws.com/my-own-bucket/Pictures/Me.png to see me!\n";
 
                 <example id="zend.service.amazon.s3.objects.list.example">
                     <title>Beispiel für die Auflistung eines Zend_Service_Amazon_S3 Objekts</title>
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 require_once 'Zend/Service/Amazon/S3.php';
 
 $s3 = new Zend_Service_Amazon_S3($my_aws_key, $my_aws_secret_key);
@@ -466,7 +466,7 @@ foreach($list as $name) {
 
         <example id="zend.service.amazon.s3.streams.example">
             <title>Beispiel für Streams mit Zend_Service_Amazon_S3</title>
-             <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 require_once 'Zend/Service/Amazon/S3.php';
 
 $s3 = new Zend_Service_Amazon_S3($my_aws_key, $my_aws_secret_key);

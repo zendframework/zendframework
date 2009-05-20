@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.filter.set.decrypt">
     <title>Decrypt</title>
@@ -34,7 +34,7 @@
             Verschlüsselung.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Verwende die Standardmäßigen Blowfish Einstellungen
 $filter = new Zend_Filter_Decrypt('myencryptionkey');
 
@@ -91,7 +91,7 @@ print $decrypted;
             </listitem>
         </itemizedlist>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Verwende openssl und gib einen privaten Schlüssel an
 $filter = new Zend_Filter_Decrypt(array(
     'adapter' => 'openssl',
@@ -117,7 +117,7 @@ $filter->setEnvelopeKey(array(
             selbst anzugeben indem die <code>setPassphrase()</code> Methode verwendet wird.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Verwende openssl und gib einen privaten Schlüssel an
 $filter = new Zend_Filter_Decrypt(array(
     'adapter' => 'openssl',
@@ -137,7 +137,7 @@ $filter->setPassphrase('mypassphrase');
             vorher verschlüsselten Inhat sieht nun wie folgt aus.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Verwende openssl und gib einen privaten Schlüssel an
 $filter = new Zend_Filter_Decrypt(array(
     'adapter' => 'openssl',

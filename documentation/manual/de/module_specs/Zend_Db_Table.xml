@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15602 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.table">
 
@@ -48,7 +48,7 @@
 
                 <title>Angeben einer Table Klasse mit ausdrücklichem Tabellennamen</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
 {
     protected $_name = 'bugs';
@@ -68,7 +68,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
                 <title>Angeben einer Table Klasse mit inbegriffenem Tabellennamen</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 class bugs extends Zend_Db_Table_Abstract
 {
     // Tabellenname entspricht dem Klassennamen
@@ -90,7 +90,7 @@ class bugs extends Zend_Db_Table_Abstract
 
                 <title>Angeben einer Table Klasse mit Schema</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Erste Möglichkeit:
 class Bugs extends Zend_Db_Table_Abstract
 {
@@ -128,7 +128,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
                 <title>Angebend von Tabellen und Schemanamen während der Instanziierung</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
 {
 }
@@ -172,7 +172,7 @@ $tableBugs = new Bugs(array('name' => 'bug_db.bugs',
 
                 <title>Beispiel für das spezifizieren eines Primärschlüssels</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
 {
     protected $_name = 'bugs';
@@ -219,7 +219,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
                 <title>Beispiel für das Überschreiben der _setupTableName() Methode</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
 {
     protected function _setupTableName()
@@ -293,7 +293,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
                 <title>Beispielverwendung der init() Methode</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
 {
     protected $_observer;
@@ -339,7 +339,7 @@ class Bugs extends Zend_Db_Table_Abstract
                     Beispiel für das Erzeugen einer Tabelle mit Nutzung eines Adapterobjekts
                 </title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $db = Zend_Db::factory('PDO_MYSQL', $options);
 
 $table = new Bugs(array('db' => $db));
@@ -366,7 +366,7 @@ $table = new Bugs(array('db' => $db));
 
                 <title>Beispiel für das erstellen von Table mit einem Standardadapter</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $db = Zend_Db::factory('PDO_MYSQL', $options);
 Zend_Db_Table_Abstract::setDefaultAdapter($db);
 
@@ -403,7 +403,7 @@ $table = new Bugs();
 
                 <title>Beispiel für das Erzeugen von Table mit einem Registry Schlüssel</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $db = Zend_Db::factory('PDO_MYSQL', $options);
 Zend_Registry::set('my_db', $db);
 
@@ -442,7 +442,7 @@ $table = new Bugs(array('db' => 'my_db'));
 
             <title>Beispiel für das Einfügen in eine Tabelle</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $data = array(
@@ -468,7 +468,7 @@ $table->insert($data);
 
             <title>Beispiel für das Einfügen von Ausdrücken in einer Tabelle</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $data = array(
@@ -509,7 +509,7 @@ $data = array(
                     Primärschlüssel
                 </title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
 {
     protected $_name = 'bugs';
@@ -561,7 +561,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
                 <title>Beispiel für das Deklaration einer Tabelle mit einer Sequenz</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
 {
     protected $_name = 'bugs';
@@ -612,7 +612,7 @@ class Bugs extends Zend_Db_Table_Abstract
                     Beispiel für das Definieren einer Tabelle mit einem natürlichen Schlüssel
                 </title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 class BugStatus extends Zend_Db_Table_Abstract
 {
     protected $_name = 'bug_status';
@@ -655,7 +655,7 @@ class BugStatus extends Zend_Db_Table_Abstract
 
             <title>Beispiel für das Aktualisieren von Zeilen in einer Tabelle</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $data = array(
@@ -707,7 +707,7 @@ $table->update($data, $where);
 
             <title>Beispiel für das Löschen von Zeilen einer Tabelle</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $where = $table->getAdapter()->quoteInto('bug_id = ?', 1235);
@@ -754,7 +754,7 @@ $table->delete($where);
 
             <title>Beispiel für das Finden von Zeilen durch Werte des Primärschlüssels</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 // Eine einzelne Zeile finden
@@ -813,7 +813,7 @@ $rows = $table->find(array(1234, 5678));
                 Primärschlüssels (5678, 'DEF').
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class BugsProducts extends Zend_Db_Table_Abstract
 {
     protected $_name = 'bugs_products';
@@ -863,7 +863,7 @@ $rows = $table->find(array(1234, 5678), array('ABC', 'DEF'));
 
                     <para>
 
-                        <programlisting role="php"><![CDATA[
+                        <programlisting language="php"><![CDATA[
 // Ein Rowset holen
 $rows = $table->fetchAll('bug_status = "NEW"', 'bug_id ASC', 10, 0);
 $rows = $table->fetchAll($table->select()->where('bug_status = ?', 'NEW')
@@ -935,7 +935,7 @@ $row = $table->fetchRow($table->select()->where('bug_status = ?', 'NEW')
 
                     <title>Einfache Verwendung</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $select = $table->select();
@@ -959,7 +959,7 @@ $rows = $table->fetchAll($select);
 
                     <title>Example of fluent interface</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $rows =
@@ -987,7 +987,7 @@ $rows =
 
                 <title>Beispiel für das Finden von Zeilen durch einen Ausdruck</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $select = $table->select()->where('bug_status = ?', 'NEW');
@@ -1009,7 +1009,7 @@ $rows = $table->fetchAll($select);
 
                 <title>Beispiel für das Finden von Zeilen durch einen Ausdruck</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $order  = 'bug_id';
@@ -1055,7 +1055,7 @@ $rows = $table->fetchAll($select);
 
                     <title>Spezielle Spalten erhalten</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $select = $table->select();
@@ -1096,7 +1096,7 @@ $rows = $table->fetchAll($select);
 
                     <title>Ausdrücke als Spalten erhalten</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $select = $table->select();
@@ -1121,7 +1121,7 @@ $rows = $table->fetchAll($select);
 
                     <title>Beispiel für das Finden von Zeilen durch einen Ausdruck</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $select = $table->select();
@@ -1186,7 +1186,7 @@ $rows = $table->fetchAll($select);
 
             <title>Beispiel für das Finden einer einzelnen Zeilen durch einen Ausdruck</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $select  = $table->select()->where('bug_status = ?', 'NEW')
@@ -1220,7 +1220,7 @@ $row = $table->fetchRow($select);
 
             <title>Beispiel für das Erhalten des Namens einer Tabelle</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $info = $table->info();
@@ -1378,7 +1378,7 @@ echo "Der Name der Tabelle ist " . $info['name'] . "\n";
                 gesetzt werden kann der für alle Tabellenobjekte verwendet wird:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Zuerst muß der Cache vorbereitet werden
 $frontendOptions = array(
     'automatic_serialization' => true
@@ -1417,7 +1417,7 @@ $bugs = new Bugs();
                 Instanz eines Tabellenobjektes gesetzt werden kann:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Zuerst den Cache vorbereiten
 $frontendOptions = array(
     'automatic_serialization' => true
@@ -1478,7 +1478,7 @@ $bugs = new Bugs(array('metadataCache' => $cache));
                 Die Struktur der Metadaten ist wie folgt:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 protected $_metadata = array(
     '<column_name>' => array(
         'SCHEMA_NAME'      => <string>,
@@ -1510,7 +1510,7 @@ protected $_metadata = array(
                 <code>metadataCacheInClass</code> Flag ausgeschaltet wird:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Bei der Instanziierung:
 $bugs = new Bugs(array('metadataCacheInClass' => false));
 
@@ -1556,7 +1556,7 @@ $bugs->setMetadataCacheInClass(false);
                     Beispiel dafür wie die Zeilen und Rowset Klassen spezifiziert werden können
                 </title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 class My_Row extends Zend_Db_Table_Row_Abstract
 {
     ...
@@ -1594,7 +1594,7 @@ $rows = $table->fetchAll($where);
 
                 <title>Beispiel für das Ändern von Zeilen und Rowset Klassen</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $where = $table->getAdapter()->quoteInto('bug_status = ?', 'NEW')
@@ -1638,7 +1638,7 @@ $rowsCustom = $table->fetchAll($where);
 
                 <title>Eigene Logik um Zeitstempel zu managen</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
 {
     protected $_name = 'bugs';
@@ -1689,7 +1689,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
                 <title>Eigene Methode um Fehler durch den Status zu finden</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
 {
     protected $_name = 'bugs';
@@ -1759,7 +1759,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
                 <title>Beispiel einer abstrakten Tabellenklasse die Beugung implementiert</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 abstract class MyAbstractTable extends Zend_Db_Table_Abstract
 {
     protected function _setupTableName()

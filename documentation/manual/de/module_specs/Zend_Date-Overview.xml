@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15346 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.overview">
 
@@ -189,7 +189,7 @@
 
         <example id="zend.date.values.example-1">
             <title>Benutzerdefinierte Eingabeformate für Daten</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $date1 = new Zend_Date('Feb 31, 2007', null, 'en_US');
 echo $date1, "\n"; // Ausgabe "Mar 3, 2007 12:00:00 AM"
 
@@ -233,7 +233,7 @@ echo $date3, "\n"; // Ausgabe "Mar 3, 2007 12:00:00 AM"
             vergessen wenn man das selbe Gebietsschema mehrere Male verwenden will.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // In der Bootstrap Datei
 $locale = new Zend_Locale('de_AT');
 Zend_Registry::set('Zend_Locale', $locale);
@@ -265,7 +265,7 @@ $date = new Zend_Date('31.Feb.2007');
 
         <example id="zend.date.basic.example-1">
             <title>Arbeiten an Teilen von Daten</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $date = new Zend_Date(); // $date's Zeitpunkt === time()
 
 // Ändert $date durch addieren von 12 Stunden

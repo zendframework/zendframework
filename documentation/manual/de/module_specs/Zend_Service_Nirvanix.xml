@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15341 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.nirvanix">
     <title>Zend_Service_Nirvanix</title>
@@ -121,7 +121,7 @@
             Operationen.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $auth = array('username' => 'Dein-Benutzername',
               'password' => 'Dein-Passwort',
               'appKey'   => 'Dein-App-Schlüssel');
@@ -199,7 +199,7 @@ $imfs->unlink('/foo.txt');
             <classname>Zend_Service_Nirvanix</classname> besitzen:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $auth = array('username' => 'Dein-Benutzername',
               'password' => 'Dein-Passwort',
               'appKey'   => 'Dein-App-Schlüssel');
@@ -249,7 +249,7 @@ $result = $imfs->renameFile(array('filePath' => '/path/to/foo.txt',
             in PHP eingebauten Funktionen wie <code>print_r()</code>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php
 $auth = array('username' => 'Dein-Benutzername',
               'password' => 'Dein-Passwort',
@@ -301,7 +301,7 @@ Zend_Service_Nirvanix_Response Object
             ein <code>ResponseCode</code> Element, wie im folgenden Beispiel, enthält:
         </para>
 
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <Response>
     <ResponseCode>0</ResponseCode>
 </Response>
@@ -320,7 +320,7 @@ Zend_Service_Nirvanix_Response Object
             <classname>Zend_Service_Nirvanix_Exception</classname> geworfen.
         </para>
 
-      <programlisting role="xml"><![CDATA[
+      <programlisting language="xml"><![CDATA[
 $auth = array('username' => 'your-username',
               'password' => 'your-password',
               'appKey'   => 'your-app-key');

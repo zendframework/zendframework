@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.consuming-rss">
     <title>Einen RSS Feed konsumieren</title>
@@ -7,7 +7,7 @@
         Einen RSS Feed zu lesen, ist so einfach wie das Instanziieren eines
         <classname>Zend_Feed_Rss</classname> Objekts mit der URL eines Feeds:
     </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $channel = new Zend_Feed_Rss('http://rss.example.com/channelName');
 ]]></programlisting>
     <para>
@@ -19,7 +19,7 @@ $channel = new Zend_Feed_Rss('http://rss.example.com/channelName');
         Sobald du ein Feed Objekt hast, kannst du auf jeden Channel-Eigenschaften eines Standard
         RSS Feeds direkt über das Objekt zugreifen:
     </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 echo $channel->title();
 ]]></programlisting>
     <para>
@@ -35,7 +35,7 @@ echo $channel->title();
         Wenn Channel-Eigenschaften Attribute beinhalten, sind diese durch die PHP Array Syntax
         ansprechbar:
     </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 echo $channel->category['domain'];
 ]]></programlisting>
     <para>
@@ -48,7 +48,7 @@ echo $channel->category['domain'];
         <classname>Zend_Feed_Abstract</classname> implementiert das <code>Iterator</code> Interface
         von PHP, so dass die Ausgabe aller Artikelüberschriften eines Channels nur dies erfordert:
     </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 foreach ($channel as $item) {
     echo $item->title() . "\n";
 }
@@ -139,7 +139,7 @@ foreach ($channel as $item) {
     <para>
         In deinem Code kannst du hiermit immer überprüfen, ob ein Element nicht leer ist:
     </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 if ($item->propname()) {
     // ... fahre fort.
 }

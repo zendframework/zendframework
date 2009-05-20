@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.docs">
     <title>Verwenden der Google Dokumente Listen Daten API</title>
@@ -27,7 +27,7 @@
             assoziiert sind.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Docs::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $docs = new Zend_Gdata_Docs($client);
@@ -51,7 +51,7 @@ $feed = $docs->getDocumentListFeed();
             interaktiven Docs.php Beispiel welches mit der Bibliothek kommt. Es demonstriert das
             Hochladen einer Datei und das Ausdrucken der Information über das Ergebnis vom Server.
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /**
  * Ein spezielles Dokument hochladen
  *
@@ -128,7 +128,7 @@ function uploadDocument($docs, $html, $originalFileName,
                 sehen, würde man eine Kategorieanfrage wie folgt durchführen.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $feed = $docs->getDocumentListFeed(
     'http://docs.google.com/feeds/documents/private/full/-/document');
 ]]></programlisting>
@@ -141,7 +141,7 @@ $feed = $docs->getDocumentListFeed(
                 folgende Abfrage verwendet werden:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $feed = $docs->getDocumentListFeed(
     'http://docs.google.com/feeds/documents/private/full/-/spreadsheet');
 ]]></programlisting>
@@ -156,7 +156,7 @@ $feed = $docs->getDocumentListFeed(
                 Suchbegriff als Parameter übergeben wird. Hier ist eine Beispielmethode welche die
                 Dokumenten Liste nach Dokumenten abfrage die den Suchstring enthalten:
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $docsQuery = new Zend_Gdata_Docs_Query();
 $docsQuery->setQuery($query);
 $feed = $client->getDocumentListFeed($docsQuery);

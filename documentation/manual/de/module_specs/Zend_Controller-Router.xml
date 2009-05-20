@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15399 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.router" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Der Standard Router</title>
@@ -25,7 +25,7 @@
             mod_rewrite Regel zu arbeiten.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 RewriteEngine on
 RewriteRule !\.(js|ico|gif|jpg|png|css|html)$ index.php
 ]]></programlisting>
@@ -34,7 +34,7 @@ RewriteRule !\.(js|ico|gif|jpg|png|css|html)$ index.php
             oder (bevorzugt):
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} -s [OR]
 RewriteCond %{REQUEST_FILENAME} -l [OR]
@@ -49,7 +49,7 @@ RewriteRule ^.*$ index.php [NC,L]
             Erweiterung installiert wurde und folgende Umschreibungsregel verwendet wird:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.php [I]
 ]]></programlisting>
 
@@ -69,7 +69,7 @@ RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.
             werden:
         </para>
 
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
      <system.webServer>
@@ -101,7 +101,7 @@ RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.
             Bei der Verwendung von Lighttpd, ist folgende Umschreibungsregel gültig:
         </para>
 
-        <programlisting role="lighttpd"><![CDATA[
+        <programlisting language="lighttpd"><![CDATA[
 url.rewrite-once = (
     ".*\?(.*)$" => "/index.php?$1",
     ".*\.(js|ico|gif|jpg|png|css|html)$" => "$0",
@@ -119,7 +119,7 @@ url.rewrite-once = (
             Code veranschaulicht die Vorgehensweise:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Einen Router erstellen
 
 $router = $ctrl->getRouter(); // gibt standardmäßig einen Rewrite Router zurück
@@ -142,7 +142,7 @@ $router->addRoute(
             <classname>Zend_Controller_Router_Route_Interface</classname> implementiert. Z.B.:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $router->addRoute('user',
                   new Zend_Controller_Router_Route('user/:username'));
 ]]></programlisting>
@@ -193,7 +193,7 @@ $router->addRoute('user',
                 <classname>Zend_View</classname> Url Helfers:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <a href=
 "<?php echo $this->url(array('username' => 'martel'), 'user') ?>">Martel</a>
 ]]></programlisting>
@@ -272,7 +272,7 @@ $router->addRoute('user',
             Einige Beispiele wie solche Routen verglichen werden:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Folgende Annahme:
 $ctrl->setControllerDirectory(
     array(
@@ -317,7 +317,7 @@ http://example/blog/archive/list/sort/alpha/date/desc
             folgt erstellt:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $compat = new Zend_Controller_Router_Route_Module(array(),
                                                   $dispatcher,
                                                   $request);
@@ -331,7 +331,7 @@ $this->addRoute('default', $compat);
             <code>removeDefaultRoutes()</code>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Löschen aller Standard Routen
 $router->removeDefaultRoutes();
 ]]></programlisting>
@@ -356,7 +356,7 @@ $router->removeDefaultRoutes();
             <xref linkend="zend.controller.request.http.baseurl" />):
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $request->setBaseUrl('/~user/application-root/');
 ]]></programlisting>
 
@@ -373,7 +373,7 @@ $request->setBaseUrl('/~user/application-root/');
             folgendem Weg gesetzt werden:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $router->setGlobalParam('lang', 'en');
 ]]></programlisting>
     </sect2>
@@ -402,7 +402,7 @@ $router->setGlobalParam('lang', 'en');
             Als Beispiel wird die folgende INI Datei angenommen:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 [production]
 routes.archive.route = "archive/:year/*"
 routes.archive.defaults.controller = archive
@@ -428,7 +428,7 @@ routes.archive.map.1 = "year"
             <classname>Zend_Config</classname> Objekt eingelesen werden:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Ini('/path/to/config.ini', 'production');
 $router = new Zend_Controller_Router_Rewrite();
 $router->addConfig($config, 'routes');
@@ -468,7 +468,7 @@ $router->addConfig($config, 'routes');
             einer einzigen Methode.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 interface Zend_Controller_Router_Interface
 {
   /**

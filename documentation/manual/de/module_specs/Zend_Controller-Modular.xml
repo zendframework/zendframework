@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15345 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.modular">
     <title>Eine konventionelle modulare Verzeichnis Struktur verwenden</title>
@@ -12,7 +12,7 @@
             wiederzuverwenden. Um so eine Verzeichnisstruktur zu zeigen:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 docroot/
     index.php
 application/
@@ -95,7 +95,7 @@ application/
             vorhanden sein. Als Beispiel:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $front->setControllerDirectory(array(
     'default' => '/path/to/application/controllers',
     'blog'    => '/path/to/application/blog/controllers'
@@ -109,7 +109,7 @@ $front->setControllerDirectory(array(
             Beispiel:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $front->addControllerDirectory('/path/to/application/news/controllers',
                                'news');
 ]]></programlisting>
@@ -121,7 +121,7 @@ $front->addControllerDirectory('/path/to/application/news/controllers',
             werden:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /**
  * Nehmen wir die folgende Verzeichnisstruktur an:
  * application/
@@ -147,7 +147,7 @@ $front->addModuleDirectory('/path/to/application/modules');
             Modulen mit <code>setModuleControllerDirectoryName()</code> verwenden:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /**
  * Das Kontroller Unterverzeichnis ändern damit es 'con' ist
  * application/
@@ -210,7 +210,7 @@ $front->addModuleDirectory('/path/to/application/modules');
             <code>useDefaultControllerAlways</code> im Front Kontroller gesetzt werden:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $front->setParam('useDefaultControllerAlways', true);
 ]]></programlisting>
     </sect2>

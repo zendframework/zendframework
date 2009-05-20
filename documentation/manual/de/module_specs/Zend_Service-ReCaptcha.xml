@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.recaptcha">
     <title>Zend_Service_ReCaptcha</title>
@@ -35,7 +35,7 @@
             öffentlichen und privaten Schlüssel übergeben:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $recaptcha = new Zend_Service_ReCaptcha($pubKey, $privKey);
 ]]></programlisting>
 
@@ -44,7 +44,7 @@ $recaptcha = new Zend_Service_ReCaptcha($pubKey, $privKey);
             werden:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 echo $recaptcha->getHTML();
 ]]></programlisting>
 
@@ -54,7 +54,7 @@ echo $recaptcha->getHTML();
             <code>verify()</code> Methode des ReCaptcha Objekts zu übergeben:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $result = $recaptcha->verify(
     $_POST['recaptcha_challenge_field'],
     $_POST['recaptcha_response_field']
@@ -67,7 +67,7 @@ $result = $recaptcha->verify(
             eine <code>isValid()</code> Methode anbietet.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 if (!$result->isValid()) {
     // Fehlerhafte Prüfung
 }

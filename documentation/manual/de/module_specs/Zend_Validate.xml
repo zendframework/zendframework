@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15343 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.introduction">
 
@@ -73,7 +73,7 @@
         <para>
             Das folgende Beispiel zeigt die Prüfung einer E-Mail Adresse:
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_EmailAddress();
 
 if ($validator->isValid($email)) {
@@ -124,7 +124,7 @@ if ($validator->isValid($email)) {
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_StringLength(8);
 
 $validator->setMessage(
@@ -146,7 +146,7 @@ if (!$validator->isValid('word')) {
             <code>setMessages()</code> Methode. Dessen Argument ist ein Array welches
             Schlüssel/Nachrichten Paare enthält.
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_StringLength(8, 12);
 
 $validator->setMessages( array(
@@ -167,7 +167,7 @@ $validator->setMessages( array(
             der Wert der als Argument von <code>isValid()</code> definiert wurde. Andere
             Eigenschaften können von Fall zu Fall in jeder Prüfklasse unterstützt werden.
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_StringLength(8, 12);
 
 if (!validator->isValid('word')) {
@@ -199,7 +199,7 @@ if (!validator->isValid('word')) {
             automatisch, erstellt eine Instanz und wendet die <code>isValid()</code> Methode an den
             Eingabedaten an.
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 if (Zend_Validate::is($email, 'EmailAddress')) {
     // Ja, die Email Adresse scheint gültig zu sein
 }
@@ -211,7 +211,7 @@ if (Zend_Validate::is($email, 'EmailAddress')) {
             Es kann auch ein Array von Konstruktor Argumenten übergeben werden, wenn diese für die
             Prüfung benötigt werden.
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 if (Zend_Validate::is($value, 'Between', array(1, 12))) {
     // Ja, $value ist zwischen 1 und 12
 }
@@ -251,7 +251,7 @@ if (Zend_Validate::is($value, 'Between', array(1, 12))) {
             gesetzte Übersetzungsinstanz zurück.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_StringLength(8, 12);
 $translate = new Zend_Translate(
     'array',
@@ -269,7 +269,7 @@ $validator->setTranslator($translate);
             manuell für alle Prüfungsklassen setzen muß und vereinfacht den Code.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate(
     'array',
     array(Zend_Validate_StringLength::TOO_SHORT => 'Übersetzt \'%value%\''),
@@ -292,7 +292,7 @@ Zend_Validate::setDefaultTranslator($translate);
             Wert zu erhalten.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_StringLength(8, 12);
 if (!$validator->isTranslatorDisabled()) {
     $validator->setDisableTranslator();

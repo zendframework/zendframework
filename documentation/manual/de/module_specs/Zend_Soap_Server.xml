@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15604 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.soap.server">
     <title>Zend_Soap_Server</title>
@@ -183,7 +183,7 @@
         <para>
             Der Erste ist das Anfügen einer Klasse zum <classname>Zend_Soap_Server</classname>
             Objekt welche eine Web Service API komplett beschreibt:
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 ...
 class MyClass {
     /**
@@ -232,7 +232,7 @@ $server->handle();
             Die zweite Methode der Definition einer Web Service API ist die Verwendung eines Sets
             von Funktionen und <code>addFunction()</code> oder <code>loadFunctions()</code>
             Methoden:
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 ...
 /**
  * Diese Funktion ...
@@ -287,7 +287,7 @@ $server->handle();
                 Standard-Eingabe Stream ('php://input') entgegen. Sie kann übergangen werden durch
                 die Angabe von optionalen Parametern an die <code>handle()</code> Methode oder durch
                 setzen einer Anfrage durch Verwendung der <code>setRequest()</code> Methode:
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 ...
 $server = new Zend_Soap_Server(...);
 ...
@@ -335,7 +335,7 @@ $server->handle();
             <para>
                 Die zuletzt bearbeitete Anfrage kann durch Verwendung der
                 <code>getLastRequest()</code> Methode als XML String empfangen werden:
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 ...
 $server = new Zend_Soap_Server(...);
 ...
@@ -362,7 +362,7 @@ $request = $server->getLastRequest();
                 </footnote>.
                 Die erzeugte Antwort wird in diesem Fall durch die <code>handle()</code> Methode
                 zurückgegeben.
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 ...
 $server = new Zend_Soap_Server(...);
 ...
@@ -378,7 +378,7 @@ $response = $server->handle();
             <para>
                 Die letzte Antwort kann auch mit der <code>getLastResponse()</code> Methode
                 empfangen werden um Vor-Bearbeitungen durchzuführen:
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 ...
 $server = new Zend_Soap_Server(...);
 ...

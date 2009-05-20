@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.books">
     <title>Die Buchsuche Daten API verwenden</title>
@@ -72,7 +72,7 @@
             deren Metadaten oder Texte dem Suchbegriff "domino" entsprechen:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $books = new Zend_Gdata_Books();
 $query = $books->newVolumeQuery();
 
@@ -94,7 +94,7 @@ foreach ($feed as $entry) {
             gezeigt wurde erzeugt eine URL die der folgenden entspricht:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 http://www.google.com/books/feeds/volumes?q=keyword&amp;min-viewability=partial
 ]]></programlisting>
 
@@ -180,7 +180,7 @@ http://www.google.com/books/feeds/volumes?q=keyword&amp;min-viewability=partial
                 vorhanden ist:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 http://www.google.com/books/p/PARTNER_COBRAND_ID?q=ball
 ]]></programlisting>
 
@@ -189,7 +189,7 @@ http://www.google.com/books/p/PARTNER_COBRAND_ID?q=ball
                 folgenden URL verwendet wird:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 http://www.google.com/books/feeds/p/PARTNER_COBRAND_ID/volumes?q=ball+-soccer
 ]]></programlisting>
 
@@ -198,7 +198,7 @@ http://www.google.com/books/feeds/p/PARTNER_COBRAND_ID/volumes?q=ball+-soccer
                 kann ein extra Parameter an <code>newVolumeQuery</code> übergeben werden
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $query =
     $books->newVolumeQuery('http://www.google.com/books/p/PARTNER_COBRAND_ID');
 ]]></programlisting>
@@ -233,7 +233,7 @@ $query =
                 <code>VolumeEntry</code> Objekt.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $entry = new Zend_Gdata_Books_VolumeEntry();
 $entry->setId(new Zend_Gdata_App_Extension_Id(VOLUME_ID));
 $entry->setRating(new Zend_Gdata_Extension_Rating(3, 1, 5, 1));
@@ -265,7 +265,7 @@ $books->insertVolume($entry, Zend_Gdata_Books::MY_ANNOTATION_FEED_URI);
                     Objekt.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $annotationUrl = $entry->getAnnotationLink()->href;
 $review        = new Zend_Gdata_Books_Extension_Review();
 
@@ -286,7 +286,7 @@ $books->insertVolume($entry, $annotationUrl);
                     Anmerkungsfeed übertragen.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $entryUrl = $entry->getId()->getText();
 $review   = new Zend_Gdata_Books_Extension_Review();
 
@@ -320,7 +320,7 @@ $books->updateVolume($entry, $entryUrl);
                     Anmerkungsfeed übergeben werden.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $annotationUrl = $entry->getAnnotationLink()->href;
 $category      = new Zend_Gdata_App_Extension_Category(
     'rated',
@@ -346,7 +346,7 @@ $books->insertVolume($entry, Zend_Gdata_Books::MY_ANNOTATION_FEED_URI);
                 empfangen muß der Wert <code>me</code> als BenutzerID verwendet werden.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $feed = $books->getVolumeFeed(
             'http://www.google.com/books/feeds/users/USER_ID/volumes');
 <i>(oder)</i>
@@ -380,7 +380,7 @@ foreach ($feed as $entry) {
                 an diesem Eintrag aufgerufen wird.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $books->deleteVolume($entry);
 ]]></programlisting>
 
@@ -428,7 +428,7 @@ $books->deleteVolume($entry);
                     erhalten muß <code>me</code> statt der <code>USER_ID</code> verwendet werden.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $feed = $books->getUserLibraryFeed();
 ]]></programlisting>
 
@@ -459,7 +459,7 @@ $feed = $books->getUserLibraryFeed();
                     zurück die das Word "Bär" enthalten:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $query = $books->newVolumeQuery(
     'http://www.google.com/books/feeds/users/' .
     'USER_ID/collections/library/volumes');
@@ -474,7 +474,7 @@ $feed = $books->getVolumeFeed($query);
                         url="#zend.gdata.books.labels">von einem Benutzer gelabelt wurden</ulink>:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $query = $books->newVolumeQuery(
     'http://www.google.com/books/feeds/users/' .
     'USER_ID/collections/library/volumes');
@@ -519,7 +519,7 @@ $feed = $books->getVolumeFeed($query);
                     hinzu:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $entry = new Zend_Gdata_Books_VolumeEntry();
 $entry->setId(new Zend_Gdata_App_Extension_Id(VOLUME_ID));
 $books->insertVolume(
@@ -533,7 +533,7 @@ $books->insertVolume(
                     der Bibliothek hinzu:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $books->insertVolume(
     $entry,
     Zend_Gdata_Books::MY_LIBRARY_FEED_URI
@@ -552,7 +552,7 @@ $books->insertVolume(
                     Objekt aufgerufen werden.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $books->deleteVolume($entry);
 ]]></programlisting>
 

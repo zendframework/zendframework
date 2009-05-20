@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.rest.client">
     <title>Zend_Rest_Client</title>
@@ -17,7 +17,7 @@
         <example id="zend.rest.client.introduction.example-1">
             <title>Eine Basis REST Anfrage</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 /**
  * Verbinden zum framework.zend.com Server und eine Begrüßung empfangen
  */
@@ -37,7 +37,7 @@ echo $client->sayHello('Davey', 'Day')->get(); // "Servus Davey, guten Tag"
                 entweder über Methoden Verkettung oder in eigenen Methodenaufrufen erfolgen:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $client->sayHello('Davey', 'Tag');
 echo $client->get();
 ]]></programlisting>
@@ -61,7 +61,7 @@ echo $client->get();
 
         <example id="zend.rest.client.return.example-1">
             <title>Antwort Status</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $result = $client->sayHello('Davey', 'Tag')->get();
 
 if ($result->isSuccess()) {
@@ -93,7 +93,7 @@ if ($result->isSuccess()) {
         <example id="zend.rest.client.return.example-2">
             <title>Technorati's Rest Service verwenden</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $technorati = new Zend_Rest_Client('http://api.technorati.com/bloginfo');
 $technorati->key($key);
 $technorati->url('http://pixelated-dreams.com');
@@ -104,7 +104,7 @@ echo $result->firstname() .' '. $result->lastname();
 
         <example id="zend.rest.client.return.example-3">
             <title>Beispiel Technorati Antwort</title>
-            <programlisting role="xml"><![CDATA[
+            <programlisting language="xml"><![CDATA[
 <?xml version="1.0" encoding="utf-8"?>
 <!-- generator="Technorati API version 1.0 /bloginfo" -->
 <!DOCTYPE tapi PUBLIC "-//Technorati, Inc.//DTD TAPI 0.02//EN"
@@ -174,7 +174,7 @@ echo $result->firstname() .' '. $result->lastname();
         <example id="zend.rest.client.args.example-1">
             <title>Anfrage Argumente setzen</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $client = new Zend_Rest_Client('http://example.org/rest');
 
 $client->arg('value1');

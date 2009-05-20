@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15341 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.filter.set.callback">
     <title>Callback</title>
@@ -13,7 +13,7 @@
         Nehmen wir an das wir einen Filter erstellen wollen der einen String umdreht.
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_Callback('strrev');
 
 print $filter->filter('Hello!');
@@ -26,7 +26,7 @@ print $filter->filter('Hello!');
         einer Klasse definiert ist, indem ein Array als Callback angegeben wird.
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 // Unsere Klassendefinition
 class MyClass
 {
@@ -50,7 +50,7 @@ print $filter->filter('Hello!');
         Wert der gefiltert werden soll zusammengehängt.
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_Callback(
     'MyMethod',
     array('key' => 'param1', 'key2' => 'param2')
@@ -63,7 +63,7 @@ $filter->filter(array('value' => 'Hello'));
         folgt aussehen:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $value = MyMethod('Hello', 'param1', 'param2');
 ]]></programlisting>
 

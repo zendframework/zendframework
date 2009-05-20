@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15343 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <appendix id="coding-standard">
   <title>Zend Framework Coding Standard für PHP</title>
@@ -175,7 +175,7 @@
                 Ausnahme der View Skripte. Die folgenden Beispiele zeigen akzeptierbare Dateinamen
                 für Zend Framework Klassen:
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 Zend/Db.php
 
 Zend/Controller/Front.php
@@ -210,7 +210,7 @@ Zend/View/Helper/FormRadio.php
             <para>
                 Das sind Beispiele akzeptierbarer Namen für Funktionen:
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 filterInput()
 
 getElementById()
@@ -308,7 +308,7 @@ widgetFactory()
             <para>
                 PHP Code muß immer mit der kompletten Form des Standard-PHP Tags abgegrenzt sein:
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 <?php
 
 ?>
@@ -333,7 +333,7 @@ widgetFactory()
                     sollte immer das Apostroph oder "einzelne Anführungszeichen" verwendet werden um
                     den String abzugrenzen:
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $a = 'Beispiel String';
 ]]></programlisting>
                 </para>
@@ -347,7 +347,7 @@ $a = 'Beispiel String';
                     mit Anführungszeichen oder "doppeltes Anführungszeichen" abzugrenzen. Das ist
                     speziell für SQL Anweisungen nützlich:
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $sql = "SELECT `id`, `name` from `people` "
      . "WHERE `name`='Fred' OR `name`='Susan'";
 ]]></programlisting>
@@ -363,7 +363,7 @@ $sql = "SELECT `id`, `name` from `people` "
                 <para>
                     Variabler Austausch ist gestatten bei Verwendung einer der Formen:
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $greeting = "Halle $name, willkommen zurück!";
 
 $greeting = "Hallo {$name}, willkommen zurück!";
@@ -373,7 +373,7 @@ $greeting = "Hallo {$name}, willkommen zurück!";
                 <para>
                     Aus Gründen der Konstistenz ist folgende Form nicht gestattet:
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $greeting = "Hallo ${name}, willkommen zurück!";
 ]]></programlisting>
                 </para>
@@ -387,7 +387,7 @@ $greeting = "Hallo ${name}, willkommen zurück!";
                     Leerzeichen muß immer vor und nach dem "." Operator hinzugefügt werden um die
                     Lesbarkeit zu erhöhen:
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $company = 'Zend' . ' ' . 'Technologies';
 ]]></programlisting>
                 </para>
@@ -398,7 +398,7 @@ $company = 'Zend' . ' ' . 'Technologies';
                     Fällen sollte jede folgende Zeile mit Leerraum aufgefüllt werden so das der "."
                     Operator genau unterhalb des "=" Operators ist:
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $sql = "SELECT `id`, `name` FROM `people` "
      . "WHERE `name` = 'Susan' "
      . "ORDER BY `name` ASC ";
@@ -425,7 +425,7 @@ $sql = "SELECT `id`, `name` FROM `people` "
                     muß ein folgendes Leerzeichen nach jeder Kommabegrenzung hinzugefügt werden um
                     die Lesbarkeit zu erhöhen:
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $sampleArray = array(1, 2, 3, 'Zend', 'Studio');
 ]]></programlisting>
                 </para>
@@ -435,7 +435,7 @@ $sampleArray = array(1, 2, 3, 'Zend', 'Studio');
                     "array" Konstrukts. In diesem Fall, muß jede folgende Zeile mit Leerzeichen
                     aufgefüllt werden so das der Beginn jeder Zeile ausgerichtet ist:
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $sampleArray = array(1, 2, 3, 'Zend', 'Studio',
                      $a, $b, $c,
                      56.44, $d, 500);
@@ -452,7 +452,7 @@ $sampleArray = array(1, 2, 3, 'Zend', 'Studio',
                     jede folgende Linie mit Leerraum aufgefüllt werden so das beide, der Schlüssel
                     und der Wert untereinander stehen:
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $sampleArray = array('firstKey'  => 'firstValue',
                      'secondKey' => 'secondValue');
 ]]></programlisting>
@@ -484,7 +484,7 @@ $sampleArray = array('firstKey'  => 'firstValue',
                 </para><para>
                     Das folgende ist ein Beispiel einer akzeptierbaren Klassendeklaration:
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 /**
  * Dokumentations Block hier
  */
@@ -548,7 +548,7 @@ class SampleClass
                     Das folgende ist ein Beispiel einer akzeptierbaren Funktionsdeklaration in einer
                     Klasse:
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 /**
  * Dokumentations Block hier
  */
@@ -570,7 +570,7 @@ class Foo
                     <emphasis>NOTIZ:</emphasis> Die Übergabe per Referenz ist die einzige erlaubt
                     Mechanismus für die Übergabe von Parametern in der Deklaration einer Funktion:
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 /**
  * Dokumentations Block hier
  */
@@ -594,7 +594,7 @@ class Foo
                     behindern und zusätzlich den Code unterbrechen wenn eine Methode später auf
                     Rückgabe durch Referenz geändert wird.
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 /**
  * Dokumentations Block hier
  */
@@ -629,7 +629,7 @@ class Foo
                     Komma Trennzeichen getrennt werden. Das folgende ist ein Beispiel für einen
                     akzeptierbaren Aufruf einer Funktion die drei Argumente benötigt:
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 threeArguments(1, 2, 3);
 ]]></programlisting>
                 </para>
@@ -645,7 +645,7 @@ threeArguments(1, 2, 3);
                     werden um die Lesbarkeit zu erhöhen. In solchen Fällen sind die normalen
                     Richtlinien für das Schreiben von Arrays trotzdem noch anzuwenden:
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 threeArguments(array(1, 2, 3), 2, 3);
 
 threeArguments(array(1, 2, 3, 'Zend', 'Studio',
@@ -682,7 +682,7 @@ threeArguments(array(1, 2, 3, 'Zend', 'Studio',
                     geschrieben. Jeder Inhalt innerhalb der Klammer muß durch Verwendung von vier
                     Leerzeichen eingerückt werden.
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 if ($a != 2) {
     $a = 2;
 }
@@ -694,7 +694,7 @@ if ($a != 2) {
                     der Formatierung ähnlich dem "if" Konstrukt. Das folgende Beispiel zeigt gültige
                     Formatierungen für "if" Anweisungen mit "else" und/oder "elseif" Konstrukten:
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 if ($a != 2) {
     $a = 2;
 } else {
@@ -735,7 +735,7 @@ if ($a != 2) {
                     Verwendung von vier zusätzlichen Leerzeichen eingerückt werden.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 switch ($numPeople) {
     case 1:
         break;
@@ -792,7 +792,7 @@ switch ($numPeople) {
                     Jede Datei die PHP Code enthält muß einen Docblock am Beginn der Datei besitzen
                     welcher mindestens diese phpDocumentor Tags enthält:
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 /**
  * Kurze Beschreibung der Datei
  *
@@ -817,7 +817,7 @@ switch ($numPeople) {
                     Jede Klasse muß einen Docblock haben welche mindestens diese phpDocumentor Tags
                     enthält:
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 /**
  * Kurze Beschreibung für die Klasse
  *
@@ -858,7 +858,7 @@ switch ($numPeople) {
                     Wenn eine Funktion/Methode eine Ausnahme werfen könnte, muß @throws für alle
                     bekannten Exception Klassen verwendet werden:
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 @throws exceptionclass [Beschreibung]
 ]]></programlisting>
                 </para>

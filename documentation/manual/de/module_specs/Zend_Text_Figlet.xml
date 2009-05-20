@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.text.figlet">
     <title>Zend_Text_Figlet</title>
@@ -100,7 +100,7 @@
             Dieses Beispiel zeigt die einfache Verwendung von
             <classname>Zend_Text_Figlet</classname> um einen einfachen FIGlet Text zu erstellen:
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $figlet = new Zend_Text_Figlet();
 echo $figlet->render('Zend');
 ]]></programlisting>
@@ -108,7 +108,7 @@ echo $figlet->render('Zend');
             Angenommen es wird eine Monospace Schriftart verwenden dann würde das Beispiel wie folgt
             aussehen:
         </para>
-        <programlisting role="text"><![CDATA[
+        <programlisting language="text"><![CDATA[
   ______    ______    _  __   ______
  |__  //   |  ___||  | \| || |  __ \\
    / //    | ||__    |  ' || | |  \ ||

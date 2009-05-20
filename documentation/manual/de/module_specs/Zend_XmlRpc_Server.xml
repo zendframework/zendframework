@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.xmlrpc.server">
     <title>Zend_XmlRpc_Server</title>
@@ -23,7 +23,7 @@
             Ein Beispiel der grundlegendsten Benutzung:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $server = new Zend_XmlRpc_Server();
 $server->setClass('My_Service_Class');
 echo $server->handle();
@@ -94,7 +94,7 @@ echo $server->handle();
             'Anbei ein Beispiel für einen solchen Hinweis:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /**
 * Dies ist eine Beispielfunktion.
 *
@@ -126,7 +126,7 @@ function myFunc($val1, $val2, $val3)
             einfach den '|'-Operator nutzen.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /**
 * Dies ist eine Beispiel-Funktion.
 *
@@ -174,7 +174,7 @@ function myFunc($val1, $val2, $val3)
             Hinzufügen der gewünschten Klasse oder Funktion einen Namensraum angeben:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Alle öffentlichten Methoden in My_Service_Class sind als
 // myservice.METHODNAME verfügbar
 $server->setClass('My_Service_Class', 'myservice');
@@ -242,7 +242,7 @@ $server->addFunction('somefunc', 'funcs');
             Weißliste hinzufügen:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 Zend_XmlRpc_Server_Fault::attachFaultException('My_Project_Exception');
 ]]></programlisting>
 
@@ -276,7 +276,7 @@ Zend_XmlRpc_Server_Fault::attachFaultException('My_Project_Exception');
         <para>
             Ein Beispiel folgt:
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 function __autoload($class)
 {
     Zend_Loader::loadClass($class);
@@ -324,7 +324,7 @@ echo $server->handle();
                 hinzu und verarbeitet eingehende Aufrufe.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 /**
  * Gibt die MD5-Summe eines Strings zurück.
  *
@@ -350,7 +350,7 @@ echo $server->handle();
                 eienr Klasse als ausführbare XML-RPC-Methoden hinzufügt.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $server = new Zend_XmlRpc_Server();
 $server->setClass('Services_Comb');
 echo $server->handle();
@@ -365,7 +365,7 @@ echo $server->handle();
                 Namensräumen hinzufügt.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 require_once 'Services/Comb.php';
 require_once 'Services/Brush.php';
 require_once 'Services/Pick.php';
@@ -393,7 +393,7 @@ echo $server->handle();
                 dessen Nachricht und Code erhalten bleibt.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 require_once 'Services/Exception.php';
 require_once 'Services/Comb.php';
 require_once 'Services/Brush.php';
@@ -424,7 +424,7 @@ echo $server->handle();
                 und durch den Server verarbeitet.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 require_once 'Services/Request.php';
 require_once 'Services/Exception.php';
 require_once 'Services/Comb.php';
@@ -460,7 +460,7 @@ echo $server->handle($request);
                 als zurückgegebene Antwort für den Server setzt.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 require_once 'Services/Request.php';
 require_once 'Services/Response.php';
 require_once 'Services/Exception.php';
@@ -500,7 +500,7 @@ echo $server->handle($request);
                 Anfragen zwischenspeichern kann.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Definieren einer Cache-Datei
 $cacheFile = dirname(__FILE__) . '/xmlrpc.cache';
 

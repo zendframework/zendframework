@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.headmeta">
     <title>HeadMeta Helfer</title>
@@ -82,7 +82,7 @@
             Schlüsselworts das mit der Seite assoziiert werden soll, geschehen:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Meta Schlüsselwörter setzen
 $this->headMeta()->appendName('keywords', 'framework php productivity');
 ]]></programlisting>
@@ -92,7 +92,7 @@ $this->headMeta()->appendName('keywords', 'framework php productivity');
             Regeln die erzwungen werden sollen, gesetzt werden:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Clientseitiges cachen verhindern
 $this->headMeta()->appendHttpEquiv('expires',
                                    'Wed, 26 Feb 1997 08:21:57 GMT')
@@ -105,7 +105,7 @@ $this->headMeta()->appendHttpEquiv('expires',
             Zeichensatzes, und der Sprache:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Setzen des Inhalttyps und des Zeichensatzes
 $this->headMeta()->appendHttpEquiv('Content-Type',
                                    'text/html; charset=UTF-8')
@@ -117,7 +117,7 @@ $this->headMeta()->appendHttpEquiv('Content-Type',
             Hilfe eines "Meta Refreshes" weitergeleitet wird:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Einen Meta Refresh mit 3 Sekunden zu einer neuen URL setzen:
 $this->headMeta()->appendHttpEquiv('Refresh',
                                    '3;URL=http://www.some.org/some.html');
@@ -128,7 +128,7 @@ $this->headMeta()->appendHttpEquiv('Refresh',
             ausgegeben werden:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php echo $this->headMeta() ?>
 ]]></programlisting>
     </example>

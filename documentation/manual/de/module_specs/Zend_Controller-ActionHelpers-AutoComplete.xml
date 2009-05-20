@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.actionhelpers.autocomplete">
     <title>AutoComplete</title>
@@ -24,7 +24,7 @@
         Die grundsätzliche Verwendung ist für jede Implementierung die selbe:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function barAction()
@@ -131,7 +131,7 @@ class FooController extends Zend_Controller_Action
             Verwendung in so einem Speicher ist:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // In der Controller Aktion:
 $this->_helper->autoCompleteDojo($data);
 ]]></programlisting>
@@ -158,7 +158,7 @@ $this->_helper->autoCompleteDojo($data);
                 mit den folgenden Inhalten:
              </para>
 
-            <programlisting role="javascript"><![CDATA[
+            <programlisting language="javascript"><![CDATA[
 dojo.provide("custom.TestNameReadStore");
 dojo.declare("custom.TestNameReadStore", dojox.data.QueryReadStore, {
     fetch:function (request) {
@@ -178,7 +178,7 @@ dojo.declare("custom.TestNameReadStore", dojox.data.QueryReadStore, {
                 Als nächstes, erstellen wir das Form Element für das wir AutoCompletion wollen:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class TestController extends Zend_Controller_Action
 {
     protected $_form;
@@ -226,7 +226,7 @@ class TestController extends Zend_Controller_Action
                 Bearbeitung der AutoCompletion:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class TestController extends Zend_Controller_Action
 {
     // ...
@@ -281,7 +281,7 @@ class TestController extends Zend_Controller_Action
                 Schritte kommentiert:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <?php // Den Datenspeicher einstellen: ?>
 <div dojoType="custom.TestNameReadStore" jsId="testStore"
     url="<?php echo $this->baseUrl() ?>/unit-test/autocomplete/format/ajax"

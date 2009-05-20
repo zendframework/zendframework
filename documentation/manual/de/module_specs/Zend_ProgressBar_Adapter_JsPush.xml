@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.progressbar.adapter.jspush">
     <title>Zend_ProgressBar_Adapter_JsPush</title>
@@ -77,14 +77,14 @@
             Dieses Beispiel zeigt ein grundsätzliches Setup von HTML, CSS und JavaScript für den
             JsPush Adapter
         </para>
-        <programlisting role="html"><![CDATA[
+        <programlisting language="html"><![CDATA[
 <div id="zend-progressbar-container">
     <div id="zend-progressbar-done"></div>
 </div>
 
 <iframe src="long-running-process.php" id="long-running-process"></iframe>
 ]]></programlisting>
-        <programlisting role="css"><![CDATA[
+        <programlisting language="css"><![CDATA[
 #long-running-process {
     position: absolute;
     left: -100px;
@@ -109,7 +109,7 @@
     background-color: #000000;
 }
 ]]></programlisting>
-        <programlisting role="javascript"><![CDATA[
+        <programlisting language="javascript"><![CDATA[
 function Zend_ProgressBar_Update(data)
 {
     document.getElementById('zend-progressbar-done').style.width = data.percent + '%';

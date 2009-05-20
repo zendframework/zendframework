@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15343 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.application.theory-of-operation">
     <title>Theorie der Funktionsweise</title>
@@ -136,7 +136,7 @@
             die folgende API definiert:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 interface Zend_Application_Bootstrap_Bootstrapper
 {
     public function __construct($application);
@@ -193,7 +193,7 @@ interface Zend_Application_Bootstrap_Bootstrapper
                 Nehmen wir die folgende Bootstrap Klasse an:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
     protected function _initFoo()
@@ -217,7 +217,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                 Um nur die <code>_initFoo()</code> Methode zu bootstrappen, machen wir das folgende:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bootstrap->bootstrap('foo');
 ]]></programlisting>
 
@@ -226,7 +226,7 @@ $bootstrap->bootstrap('foo');
                 machen wir das folgende:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bootstrap->bootstrap(array('foo', 'bar));
 ]]></programlisting>
 
@@ -235,7 +235,7 @@ $bootstrap->bootstrap(array('foo', 'bar));
                 Argumente auf:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bootstrap->bootstrap();
 ]]></programlisting>
         </sect3>
@@ -261,7 +261,7 @@ $bootstrap->bootstrap();
                 loading resource plugins:
             </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 interface Zend_Application_Bootstrap_ResourceBootstrapper
 {
     public function registerPluginResource($resource, $options = null);
@@ -302,7 +302,7 @@ interface Zend_Application_Bootstrap_ResourceBootstrapper
                 the name of the resource. As an example,
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $application = new Zend_Application(APPLICATION_ENV, array(
     'resources' => array(
         'FrontController' => array(
@@ -332,7 +332,7 @@ $application = new Zend_Application(APPLICATION_ENV, array(
                 pass that information to the application object as follows:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $application = new Zend_Application(APPLICATION_ENV, array(
     'pluginPaths' => array(
         'My_Resource' => APPLICATION_PATH . '/resources/',
@@ -357,7 +357,7 @@ $application = new Zend_Application(APPLICATION_ENV, array(
                 you can mix and match to execute resource methods as well.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Execute one:
 $bootstrap->bootstrap('FrontController');
 
@@ -402,7 +402,7 @@ $bootstrap->bootstrap();
                 As an example, consider a basic view resource:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
     protected function _initView()
@@ -419,7 +419,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                 You can then check for it and/or fetch it as follows:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Using the has/getResource() pair:
 if ($bootstrap->hasResource('view')) {
     $view = $bootstrap->getResource('view');
@@ -447,7 +447,7 @@ if (isset($container->view)) {
                 above within your action controller, you could do the following:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function init()
@@ -496,7 +496,7 @@ class FooController extends Zend_Controller_Action
                 In a resource method, such a call would look like this:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
     protected function _initRequest()
@@ -539,7 +539,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             interface is simply this:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 interface Zend_Application_Resource_Resource
 {
     public function __construct($options = null);
@@ -567,7 +567,7 @@ interface Zend_Application_Resource_Resource
             via configuration. Such a resource might look like this:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class My_Resource_View extends Zend_Application_Resource_ResourceAbstract
 {
     protected $_view;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.test.phpunit.examples">
     <title>Beispiele</title>
@@ -70,7 +70,7 @@
             ermöglichen. Schauen wir uns erstmals die Basics dieser Klasse an:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class Bugapp_Plugin_Initialize extends Zend_Controller_Plugin_Abstract
 {
     /**
@@ -138,7 +138,7 @@ class Bugapp_Plugin_Initialize extends Zend_Controller_Plugin_Abstract
             Das erlaubt es uns einen Bootstrap Callback wie folgt zu erstellen:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
     public function appBootstrap()
@@ -167,7 +167,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
             die es uns erlauben eine andere Anfrage abzusetzen.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
     // ...
@@ -197,7 +197,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
             Jetzt schreiben wir Tests:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
     // ...

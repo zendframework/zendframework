@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15215 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.forms">
     <title>Erstellen von Form durch Verwendung von Zend_Form</title>
@@ -40,7 +40,7 @@
         In der einfachsten Art, wird einfach ein Form Objekt instanziert:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 // Generelles Form Objekt:
 $form = new Zend_Form();
 
@@ -54,7 +54,7 @@ $form = new My_Form()
         potentiell neue Elemente zu erstellen:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 // Konfigurations Optionen übergeben:
 $form = new Zend_Form($config);
 ]]></programlisting>
@@ -176,7 +176,7 @@ $form = new Zend_Form($config);
             Einige Beispiele:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Eine Instanz eines Elements verwenden:
 $element = new Zend_Form_Element_Text('foo');
 $form->addElement($element);
@@ -222,7 +222,7 @@ $form->addElement('text', 'foo', array('label' => 'Foo:'));
             zuzugreifen:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // getElement():
 $foo = $form->getElement('foo');
 
@@ -236,7 +236,7 @@ $foo = $form->foo;
             einer Subform hinzufügen will). Die <code>createElement()</code> Methode erlaubt das:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // $username wird ein Zend_Form_Element_Text Objekt:
 $username = $form->createElement('text', 'username');
 ]]></programlisting>
@@ -253,7 +253,7 @@ $username = $form->createElement('text', 'username');
                 durch den Elementnamen zu erhalten:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Alle Werte erhalten:
 $values = $form->getValues();
 
@@ -267,7 +267,7 @@ $value = $form->getValue('foo');
                 <code>populate()</code> Methoden getan werden:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $form->setDefaults($data);
 $form->populate($data);
 ]]></programlisting>
@@ -278,7 +278,7 @@ $form->populate($data);
                 Methode durchgeführt werden:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $form->reset();
 ]]></programlisting>
         </sect3>
@@ -301,7 +301,7 @@ $form->reset();
                     globalen Präfix gesetzt werden. Einige Beispiele:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Einen gobalen Präfix setzen:
 // Erstellt Pfade für die Präfixe My_Foo_Filter, My_Foo_Validate,
 // und My_Foo_Decorator
@@ -335,7 +335,7 @@ $form->addElementPrefixPath('My_Foo_Decorator',
                     einen ViewHelfer und ein Label gesetzt:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $form->setElementDecorators(array(
     'ViewHelper',
     'Label'
@@ -364,7 +364,7 @@ $form->setElementDecorators(array(
                     Dekoratore für die 'foo' und 'bar' Elemente haben wollen:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $form->setElementDecorators(
     array(
         'ViewHelper',
@@ -383,7 +383,7 @@ $form->setElementDecorators(
                     <emphasis>ausgenommen</emphasis> die 'foo' und 'bar' Elemente:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $form->setElementDecorators(
     array(
         'ViewHelper',
@@ -431,7 +431,7 @@ $form->setElementDecorators(
                     üblicher Fall ist es alle Werte zu <code>trim()</code>men:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $form->setElementFilters(array('StringTrim'));
 ]]></programlisting>
             </example>
@@ -547,7 +547,7 @@ $form->setElementFilters(array('StringTrim'));
             gruppieren:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $form->addDisplayGroup(array('username', 'password'), 'login');
 ]]></programlisting>
 
@@ -556,7 +556,7 @@ $form->addDisplayGroup(array('username', 'password'), 'login');
             werden, oder über Überladung inden der Name der Anzeigegruppe verwendet wird:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // getDisplayGroup() verwenden:
 $login = $form->getDisplayGroup('login');
 
@@ -573,7 +573,7 @@ $login = $form->login;
                 der Erstellung der Anzeigegruppe, deaktiviert werden:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $form->addDisplayGroup(
     array('foo', 'bar'),
     'foobar',
@@ -605,7 +605,7 @@ $form->addDisplayGroup(
                     <code>addDisplayGroupPrefixPath()</code> Methode verwendet werden.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $form->addDisplayGroupPrefixPath('My_Foo_Decorator', 'My/Foo/Decorator');
 ]]></programlisting>
             </example>
@@ -622,7 +622,7 @@ $form->addDisplayGroupPrefixPath('My_Foo_Decorator', 'My/Foo/Decorator');
                     um sicherzustellen das die Elemente iterierbar sind):
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $form->setDisplayGroupDecorators(array(
     'FormElements',
     'Fieldset'
@@ -644,7 +644,7 @@ $form->setDisplayGroupDecorators(array(
                 wird:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Verwenden der 'My_DisplayGroup' Klasse
 $form->addDisplayGroup(
     array('username', 'password'),
@@ -664,7 +664,7 @@ $form->addDisplayGroup(
                 erstellt werden diese Klasse verwenden:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Verwenden der Klasse 'My_DisplayGroup' für alle Anzeigegruppen:
 $form->setDefaultDisplayGroupClass('My_DisplayGroup');
 ]]></programlisting>
@@ -923,7 +923,7 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
             Form hinzugefügt und ein Name vergeben werden:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $form->addSubForm($subForm, 'subform');
 ]]></programlisting>
 
@@ -932,7 +932,7 @@ $form->addSubForm($subForm, 'subform');
             Überladung mithilfe des Namens der Subform verwendet wird:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Verwenden von getSubForm():
 $subForm = $form->getSubForm('subform');
 
@@ -959,7 +959,7 @@ $subForm = $form->subform;
                 seine Elemente iterierbar sind):
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $form->setSubFormDecorators(array(
     'FormElements',
     'Fieldset'
@@ -1025,7 +1025,7 @@ $form->setSubFormDecorators(array(
             Der Name der Form kann mithilfe der name Zugriffsmethoden gesetzt und empfangen werden:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Den Namen setzen:
 $form->setName('registration');
 
@@ -1039,7 +1039,7 @@ $name = $form->getName();
             action und method verwendet werden:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // action und method setzen:
 $form->setAction('/user/login')
      ->setMethod('post');
@@ -1054,7 +1054,7 @@ $form->setAction('/user/login')
             das auf jeden gewünschten Encodingtyp gesetzt werden.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Setzt die Aktion, Methoden, und Enctype:
 $form->setAction('/user/login')
      ->setMethod('post')
@@ -1073,7 +1073,7 @@ $form->setAction('/user/login')
             welches es erlaubt es als Argument fürs Zählen zu übergeben:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $numItems = count($form);
 ]]></programlisting>
 
@@ -1084,7 +1084,7 @@ $numItems = count($form);
             auf Metadaten.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Setzen von Attributen:
 $form->setAttrib('class', 'zend-form')
      ->addAttribs(array(
@@ -1128,7 +1128,7 @@ $form->clearAttribs();
             Erstellung ist wie folgt:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $form->setDecorators(array(
     'FormElements',
     array('HtmlTag', array('tag' => 'dl')),
@@ -1140,7 +1140,7 @@ $form->setDecorators(array(
             Das erstellt eine Ausgabe wie die folgende:
         </para>
 
-        <programlisting role="html"><![CDATA[
+        <programlisting language="html"><![CDATA[
 <form action="/form/action" method="post">
 <dl>
 ...
@@ -1162,7 +1162,7 @@ $form->setDecorators(array(
                 der Erstellung der Anzeigegruppe, deaktiviert werden:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $form = new Zend_Form(array('disableLoadDefaultDecorators' => true));
 ]]></programlisting>
 
@@ -1189,7 +1189,7 @@ $form = new Zend_Form(array('disableLoadDefaultDecorators' => true));
                 werden, mit dem Alias der auf das Dekorator Objekt oder den Namen zeigt:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Alias zu 'FooBar':
 $form->addDecorator(array('FooBar' => 'HtmlTag'), array('tag' => 'div'));
 
@@ -1202,7 +1202,7 @@ $form = $element->getDecorator('FooBar');
                 die 'decorator' Option im Array übergeben werden das den Dekorator repräsentiert:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Zwei 'HtmlTag' Dekoratore hinzufügen und einen mit 'FooBar' benennen:
 $form->addDecorators(
     array('HtmlTag', array('tag' => 'div')),
@@ -1268,7 +1268,7 @@ $fooBar  = $form->getDecorator('FooBar');
             Inhalt an die <code>render()</code> Methode des Dekorators übergeben. Als Beispiel:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Stellt nur den FormElements Dekorator dar:
 echo $form->renderFormElements();
 
@@ -1296,7 +1296,7 @@ echo $form->renderFieldset("<p>Das ist der Fieldset Inhalt</p>");
             Um eine ganze form zu prüfen, kann die <code>isValid()</code> Methode verwendet werden:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 if (!$form->isValid($_POST)) {
     // Prüfung fehlgeschlagen
 }
@@ -1312,7 +1312,7 @@ if (!$form->isValid($_POST)) {
             <code>isValidPartial($data)</code> verwendet werden:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 if (!$form->isValidPartial($data)) {
     // Prüfung fehlgeschlagen
 }
@@ -1330,7 +1330,7 @@ if (!$form->isValidPartial($data)) {
             <code>processAjax()</code> führt das präzise durch:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $json = $form->processAjax($data);
 ]]></programlisting>
 
@@ -1347,7 +1347,7 @@ $json = $form->processAjax($data);
             <code>getMessages()</code> verwendet werden:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $codes = $form->getErrors();
 $messages = $form->getMessages();
 ]]></programlisting>
@@ -1365,7 +1365,7 @@ $messages = $form->getMessages();
             der Name des Elements an jede übergeben wird:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $codes = $form->getErrors('username');
 $messages = $form->getMessages('username');
 ]]></programlisting>
@@ -1751,7 +1751,7 @@ $messages = $form->getMessages('username');
             von konfigurierbaren Daten übergibt:
         </para>
 
-        <programlisting role="ini"><![CDATA[
+        <programlisting language="ini"><![CDATA[
 [element]
 name = "Registrierung"
 action = "/user/register"
@@ -1827,7 +1827,7 @@ decorators.form.decorator = "Form"
             um spezielle Form Elemente und Konfigurationen zu definieren:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class My_Form_Login extends Zend_Form
 {
     public function init()
@@ -1879,7 +1879,7 @@ class My_Form_Login extends Zend_Form
             Diese form kann instanziert werden mit einem einfachen:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $form = new My_Form_Login();
 ]]></programlisting>
 
@@ -1895,7 +1895,7 @@ $form = new My_Form_Login();
             Methode durchgeführt werden:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class My_Form_Login extends Zend_Form
 {
     public function loadDefaultDecorators()

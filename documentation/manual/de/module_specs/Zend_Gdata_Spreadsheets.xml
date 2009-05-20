@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15341 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.spreadsheets">
     <title>Google Tabellenkalkulation verwenden</title>
@@ -38,7 +38,7 @@
             authentifiziert sind.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Spreadsheets::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $spreadsheetService = new Zend_Gdata_Spreadsheets($client);
@@ -61,7 +61,7 @@ $feed = $spreadsheetService->getSpreadsheetFeed();
             mit dieser Tabellenkalkulation assoziiert sind.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $query = new Zend_Gdata_Spreadsheets_DocumentQuery();
 $query->setSpreadsheetKey($spreadsheetKey);
 $feed = $spreadsheetService->getWorksheetFeed($query);
@@ -126,7 +126,7 @@ $feed = $spreadsheetService->getWorksheetFeed($query);
                 <code>getListFeed</code> Methode des Tabellenkalkulations Services verwendet werden.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $query = new Zend_Gdata_Spreadsheets_ListQuery();
 $query->setSpreadsheetKey($spreadsheetKey);
 $query->setWorksheetId($worksheetId);
@@ -148,7 +148,7 @@ $listFeed = $spreadsheetService->getListFeed($query);
                 extrahiert und angezeigt werden:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $rowData = $listFeed->entries[1]->getCustom();
 foreach($rowData as $customEntry) {
   echo $customEntry->getColumnName() . " = " . $customEntry->getText();
@@ -161,7 +161,7 @@ foreach($rowData as $customEntry) {
                 man versucht auf einen speziellen Header zuzugreifen:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $customEntry = $listFeed->entries[1]->getCustomByName('my_heading');
 echo $customEntry->getColumnName() . " = " . $customEntry->getText();
 ]]></programlisting>
@@ -178,7 +178,7 @@ echo $customEntry->getColumnName() . " = " . $customEntry->getText();
                 gesetzt werden:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $query = new Zend_Gdata_Spreadsheets_ListQuery();
 $query->setSpreadsheetKey($spreadsheetKey);
 $query->setWorksheetId($worksheetId);
@@ -208,7 +208,7 @@ $listFeed = $spreadsheetService->getListFeed($query);
                 Person über 25. Um das tu tun, muß <code>sq</code> wie folgt gesetzt werden:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $query = new Zend_Gdata_Spreadsheets_ListQuery();
 $query->setSpreadsheetKey($spreadsheetKey);
 $query->setWorksheetId($worksheetId);
@@ -225,7 +225,7 @@ $listFeed = $spreadsheetService->getListFeed($query);
                 <code>insertRow</code> Methode des Tabellenkalkulations Services.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $insertedListEntry = $spreadsheetService->insertRow($rowData,
                                                     $spreadsheetKey,
                                                     $worksheetId);
@@ -254,7 +254,7 @@ $insertedListEntry = $spreadsheetService->insertRow($rowData,
                 des Tabellenkalkulations Services aktualisiert werden.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $updatedListEntry = $spreadsheetService->updateRow($oldListEntry,
                                                    $newRowData);
 ]]></programlisting>
@@ -277,7 +277,7 @@ $updatedListEntry = $spreadsheetService->updateRow($oldListEntry,
                 aufgerufen werden, der gelöscht werden soll:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $spreadsheetService->deleteRow($listEntry);
 ]]></programlisting>
 
@@ -286,7 +286,7 @@ $spreadsheetService->deleteRow($listEntry);
                 werden:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $listEntry->delete();
 ]]></programlisting>
         </sect3>
@@ -312,7 +312,7 @@ $listEntry->delete();
                 Methode des Tabellenkalkulations Services verwendet werden.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $query = new Zend_Gdata_Spreadsheets_CellQuery();
 $query->setSpreadsheetKey($spreadsheetKey);
 $query->setWorksheetId($worksheetId);
@@ -328,7 +328,7 @@ $cellFeed = $spreadsheetService->getCellFeed($query);
                 Arbeitsblatt repräsentiert. Diese Information kann angezeigt werden:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 foreach($cellFeed as $cellEntry) {
   $row = $cellEntry->cell->getRow();
   $col = $cellEntry->cell->getColumn();
@@ -348,7 +348,7 @@ foreach($cellFeed as $cellEntry) {
                 folgt vor:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $query = new Zend_Gdata_Spreadsheets_CellQuery();
 $query->setMinCol(1);
 $query->setMaxCol(1);
@@ -369,7 +369,7 @@ $feed = $spreadsheetService->getCellsFeed($query);
                 Spalte und dem neuen Wert der Zelle, aufgerufen werden.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $updatedCell = $spreadsheetService->updateCell($row,
                                                $col,
                                                $inputValue,

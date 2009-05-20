@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.additional">
 
@@ -60,7 +60,7 @@
 
         <example id="zend.date.additional.checking.example-1">
             <title>Prüfen von Daten</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Prüfen des Datums
 $date = '01.03.2000';
 if (Zend_Date::isDate($date)) {
@@ -117,7 +117,7 @@ if (Zend_Date::isDate($date,'dd MMMM yyyy', 'en')) {
 
         <example id="zend.date.additional.sunrise-sunset.example-1">
             <title>Alle verfügbaren Städte ausgeben</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Ausgabe der kompletten Liste aller verfügbaren Städte
 print_r (Zend_Date_Cities::getCityList());
 ]]></programlisting>
@@ -183,7 +183,7 @@ print_r (Zend_Date_Cities::getCityList());
 
         <example id="zend.date.additional.sunrise-sunset.example-2">
             <title>Die Ortsangabe für eine Stadt auslesen</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Die Ortsangabe für eine bestimmte Stadt auslesen
 // Benutzt den effektiven Horizont da kein Horizont angegeben wurde
 print_r (Zend_Date_Cities::City('Vienna'));
@@ -209,7 +209,7 @@ $mylocation = array('latitude' => 41.5, 'longitude' => 13.2446);
 
         <example id="zend.date.additional.sunrise-sunset.example-3">
             <title>Berechnung von Sonneninformationen</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Die Ortsangabe einer bestimmten Stadt auslesen
 $city = Zend_Date_Cities::City('Vienna');
 
@@ -267,7 +267,7 @@ foreach ($info as $sun) {
 
         <example id="zend.date.additional.timezones.example-1">
             <title>Arbeiten mit Zeitzonen</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Setzen einer Standardzeitzone... das muß in der Bootstrap Datei
 // oder php.ini gemacht werden. Wir setzen Sie hier nur der Vollständigkeit
 // halber um ein komplettes Beispiel zu erhalten.
@@ -313,7 +313,7 @@ print $date->getIso();
 
         <example id="zend.date.additional.timezones.example-2">
             <title>Mehrere Zeitzonen</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Setzen einer Standardzeitzone... das muß in der Bootstrap Datei oder
 // php.ini gemacht werden. Wir setzen Sie hier nur der Vollständigkeit
 // halber um ein komplettes Beispiel zu erhalten.

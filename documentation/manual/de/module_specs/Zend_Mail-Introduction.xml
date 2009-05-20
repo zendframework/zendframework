@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15215 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.introduction">
 
@@ -28,7 +28,7 @@
                 werden:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 $mail->setBodyText('Dies ist der Text dieser E-Mail.');
 $mail->setFrom('somebody@example.com', 'Ein Versender');
@@ -69,7 +69,7 @@ $mail->send();
             bequemen Flüssigen Interface verwendet werden.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 $mail->setBodyText('Das ist der Text der Nachricht.')
     ->setFrom('somebody@example.com', 'Einige Sender')
@@ -107,7 +107,7 @@ $mail->setBodyText('Das ist der Text der Nachricht.')
                 kann.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $tr = new Zend_Mail_Transport_Sendmail('-freturn_to_me@example.com');
 Zend_Mail::setDefaultTransport($tr);
 

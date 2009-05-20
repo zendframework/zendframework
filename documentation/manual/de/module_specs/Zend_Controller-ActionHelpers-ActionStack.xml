@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.actionhelpers.actionstack">
     <title>ActionStack</title>
@@ -33,7 +33,7 @@
             <classname>Zend_Controller_Action::_forward()</classname> aufgerufen werden würde:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function barAction()
@@ -63,7 +63,7 @@ class FooController extends Zend_Controller_Action
             dem <code>ActionStack</code> Helfer genauso übergeben werden.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function barAction()

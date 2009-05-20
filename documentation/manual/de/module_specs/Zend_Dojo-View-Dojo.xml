@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.dojo.view.dojo">
     <title>dojo() View Helfer</title>
@@ -54,7 +54,7 @@
             Plugin das früh abläuft; einfach das View Objekt nehmen und das folgende ausführen:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
 ]]></programlisting>
 
@@ -65,7 +65,7 @@ $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
             Modul speichern.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php // Datenspeicher für FilteringSelect einstellen ?>
 <div dojoType="custom.PairedStore" jsId="stateStore"
     url="/data/autocomplete/type/state/format/ajax"
@@ -88,7 +88,7 @@ $this->dojo()->enable()
             der Fall ist, erledigen wir einige generelle Konfigurationen und fügen Sie hinzu:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php echo $this->doctype() ?>
 <html>
 <head>
@@ -166,7 +166,7 @@ $this->dojo()->enable()
                 <code>setUseDeclarative()</code> Methode aufgerufen werden:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
 ]]></programlisting>
 
@@ -175,7 +175,7 @@ Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
                 statische <code>setUseProgrammatic()</code> Methode aufgerufen werden:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend_Dojo_View_Helper_Dojo::setUseProgrammatic();
 ]]></programlisting>
 
@@ -186,7 +186,7 @@ Zend_Dojo_View_Helper_Dojo::setUseProgrammatic();
                 erstellt.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend_Dojo_View_Helper_Dojo::setUseProgrammatic(-1);
 ]]></programlisting>
         </example>
@@ -200,7 +200,7 @@ Zend_Dojo_View_Helper_Dojo::setUseProgrammatic(-1);
             auswählen indem ein Modulpfad übergeben wird:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view->dojo()->addStylesheetModule('dijit.themes.tundra');
 ]]></programlisting>
 
@@ -217,7 +217,7 @@ $view->dojo()->addStylesheetModule('dijit.themes.tundra');
             Fällen wird es an den Body übergeben:
         </para>
 
-        <programlisting role="html"><![CDATA[
+        <programlisting language="html"><![CDATA[
 <body class="tundra">
 ]]></programlisting>
     </sect3>
@@ -273,7 +273,7 @@ $view->dojo()->addStylesheetModule('dijit.themes.tundra');
             <code>addLayer()</code> Methode für das hinzufügen von Pfaden zu benötigten Layern:
         </para>
 
-        <programlisting role="html"><![CDATA[
+        <programlisting language="html"><![CDATA[
 $view->dojo()->addLayer('/js/foo/foo.js');
 ]]></programlisting>
 

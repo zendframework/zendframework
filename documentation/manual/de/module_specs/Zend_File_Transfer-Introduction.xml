@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15346 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.file.transfer.introduction">
 
@@ -71,7 +71,7 @@
             also den <code>file</code> Controller mit der <code>upload</code> Aktion.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $adapter = new Zend_File_Transfer_Adapter_Http();
 
 $adapter->setDestination('C:\temp');
@@ -182,7 +182,7 @@ if (!$adapter->receive()) {
         <example id="zend.file.transfer.introduction.checking.example">
             <title>Dateien prüfen</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // Gibt alle bekannten internen Datei Informationen zurück
@@ -270,7 +270,7 @@ $upload->receive();
         <example id="zend.file.transfer.introduction.informations.example1">
             <title>Den Dateinamen bekommen</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 $upload->receive();
 
@@ -301,7 +301,7 @@ $names = $upload->getFileName('foo');
         <example id="zend.file.transfer.introduction.informations.example.getfilesize">
             <title>Die Größe einer Datei erhalten</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 $upload->receive();
 
@@ -327,7 +327,7 @@ $size = $upload->getFileSize();
         <example id="zend.file.transfer.introduction.informations.example2">
             <title>Den Hash einer Datei erhalten</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 $upload->receive();
 
@@ -356,7 +356,7 @@ $names = $upload->getHash('crc32', 'foo');
         <example id="zend.file.transfer.introduction.informations.getmimetype">
             <title>Den Mimetyp einer Datei bekommen</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 $upload->receive();
 
@@ -435,7 +435,7 @@ $names = $upload->getMimeType('foo');
                     Verwenden eines Progressbar Adapters um den aktuellen Status zu erhalten
                 </title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $adapter = new Zend_ProgressBar_Adapter_Console();
 $upload  = Zend_File_Transfer_Adapter_Http::getProgress($adapter);
 
@@ -549,7 +549,7 @@ while (!$upload['done']) {
 
                 <title>Händische Verwendung des Datei Fortschritts</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $upload  = Zend_File_Transfer_Adapter_Http::getProgress();
 
 while (!$upload['done']) {

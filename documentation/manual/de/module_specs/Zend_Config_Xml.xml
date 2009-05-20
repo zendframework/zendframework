@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15397 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.config.adapters.xml">
     <title>Zend_Config_Xml</title>
@@ -36,7 +36,7 @@
             das möglicherweise nicht der Fall. Nehmen wir also an, dass sich die folgenden
             Konfigurations-Daten in der Datei <code>/path/to/config.xml</code> befinden:
         </para>
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <?xml version="1.0"?>
 <configdata>
     <production>
@@ -67,7 +67,7 @@
             diesem XML-File benötigt. Es ist ein Leichtes, diese Daten zu laden, es muss nur das
             XML-File und die Staging-Sektion spezifiziert werden:
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Xml('/path/to/config.xml', 'staging');
 
 echo $config->database->params->host;   // ausgabe "dev.example.com"
@@ -84,7 +84,7 @@ echo $config->database->params->dbname; // ausgabe "dbname"
             verwendet werden. Der erste Weg Attribute zu verwenden ist das hinzufügen von Attributen
             zum Elternknoten, welcher dann in einen Kindknoten dieses Knotens übersetzt wird:
         </para>
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <?xml version="1.0"?>
 <configdata>
     <production webhost="www.example.com">
@@ -104,7 +104,7 @@ echo $config->database->params->dbname; // ausgabe "dbname"
             Handhabung das der Tag-Name nicht zweimal geschrieben werden muß. Man erstellt einfach
             einen leeren Tag, welcher seinen Wert im <code>value</code> Attribut enthält:
         </para>
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <?xml version="1.0"?>
 <configdata>
     <production>
@@ -138,7 +138,7 @@ echo $config->database->params->dbname; // ausgabe "dbname"
             wie z.B. deren Empfang von einer Datenbank. Der String wird als erster Parameter an den
             Konstruktor übergeben und muß mit den Zeichen <code>'&lt;?xml'</code> beginnen:
         </para>
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 $string = <<<EOT
 <?xml version="1.0"?>
 <config>

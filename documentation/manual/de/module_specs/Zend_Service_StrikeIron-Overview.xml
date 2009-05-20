@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15341 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.strikeiron">
     <title>Zend_Service_StrikeIron</title>
@@ -163,7 +163,7 @@
         spezifizieren. Sie bietet auch eine Factory Methode die Clients für StrikeIron Services
         zurück gibt:
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $strikeIron = new Zend_Service_StrikeIron(array('username' => 'your-username',
                                                 'password' => 'your-password'));
 
@@ -196,7 +196,7 @@ $taxBasic = $strikeIron->getService(array('class' => 'SalesUseTaxBasic'));
         gewünschtes StrikeIron Service zu erhalten, kann dieser Client verwendet werden durch Aufruf
         seiner Methoden ganz wie jedes andere PHP Objekt.
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $strikeIron = new Zend_Service_StrikeIron(array('username' => 'your-username',
                                                 'password' => 'your-password'));
 
@@ -249,7 +249,7 @@ echo $rateInfo->GST;
         Der einfachste Weg ein Ergebnis vom Service zu betrachten ist die Verwendung der eingebauten
         PHP Methode <ulink url="http://www.php.net/print_r">print_r()</ulink>:
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $strikeIron = new Zend_Service_StrikeIron(array('username' => 'your-username',
                                                 'password' => 'your-password'));
 
@@ -317,7 +317,7 @@ Zend_Service_StrikeIron_Decorator Object
         Eine Ausnahme wird geworfen wenn solch ein Fehler auftritt. Man sollte das berücksichtigen
         und solche Ausnahmen fangen wenn man Methodenaufrufe zu einem Service durchführt:
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $strikeIron = new Zend_Service_StrikeIron(array('username' => 'your-username',
                                                 'password' => 'your-password'));
 
@@ -371,7 +371,7 @@ try {
         die Möglichkeit den Account Status für diesen Service zu prüfen indem die
         <code>getSubscriptionInfo()</code> Methode dieses Clients verwendet wird:
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Einen Client für das Verkaufs / Steuerbasis Service erhalten
 $strikeIron = new Zend_Service_StrikeIron(array('username' => 'your-username',
                                                 'password' => 'your-password'));

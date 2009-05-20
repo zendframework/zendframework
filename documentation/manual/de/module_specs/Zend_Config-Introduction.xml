@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15207 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.config.introduction">
     <title>Einleitung</title>
@@ -25,7 +25,7 @@
             einfach an den <classname>Zend_Config</classname>-Konstruktor übergeben werden, um dann
             über die objektorientierte Schnittstelle auf sie zugreifen zu können:
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Gegeben ist ein Array mit Konfigurations-Daten
 $configArray = array(
     'webhost'  => 'www.example.com',
@@ -65,7 +65,7 @@ $db = Zend_Db::factory($config->database);
         <classname>Zend_Config</classname> <code>get()</code> welches den unterstützten Standardwert
         zurückgibt wenn das Daten Element nicht existiert. Zum Beispiel:
     </para>
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $host = $config->database->get('host', 'localhost');
 ]]></programlisting>
     <example id="zend.config.introduction.example.file.php">
@@ -74,7 +74,7 @@ $host = $config->database->get('host', 'localhost');
             Es ist oft gewünscht eine reine PHP-basierende Konfigurationsdatei zu verwenden. Der
             folgende Code zeigt wie das ganz einfach erreicht werden kann:
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // config.php
 return array(
     'webhost'  => 'www.example.com',
@@ -89,7 +89,7 @@ return array(
     )
 );
 ]]></programlisting>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Konfiguration konsumieren
 $config = new Zend_Config(require 'config.php');
 

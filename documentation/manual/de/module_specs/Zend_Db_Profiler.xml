@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.profiler" xmlns:xi="http://www.w3.org/2001/XInclude">
 
@@ -23,7 +23,7 @@
             Adapters oder zu einem späteren Zeitpunkt direkt an den Adapter aktiviert.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $params = array(
     'host'     => '127.0.0.1',
     'username' => 'webuser',
@@ -53,7 +53,7 @@ $db->getProfiler()->setEnabled(true);
             Ein boolsches Argument aktiviert den Profiler wenn es der Wert <code>true</code> ist,
             oder schaltet ihn mit <code>false</code> aus. Die Profiler Klasse ist die Standard
             Profiler Klasse des Adapters <classname>Zend_Db_Profiler</classname>.
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $params['profiler'] = true;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
 ]]></programlisting>
@@ -63,7 +63,7 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
             Eine Instanz eines Profiler Objektes führt dazu das der Adapter dieses Objekt verwendet.
             Der Typ des Objektes muß hierfür <classname>Zend_Db_Profiler</classname> oder eine
             Subklasse sein. Der Profiler muß separat eingeschaltet werden.
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $profiler = MyProject_Db_Profiler();
 $profiler->setEnabled(true);
 $params['profiler'] = $profiler;
@@ -81,7 +81,7 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
             <classname>Zend_Db_Profiler</classname> oder eine Subklasse sein. Die Klasse wird ohne
             Konstruktor Argumente instanziert. Die '<code>class</code>' Option wird ignoriert wenn
             die '<code>instance</code>' Option angegeben wurde.
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $params['profiler'] = array(
     'enabled' => true,
     'class'   => 'MyProject_Db_Profiler'
@@ -94,7 +94,7 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
             Letztendlich kann das Argument ein Objekt des Typs <classname>Zend_Config</classname>
             sein das Eigenschaften enthält welche als Array Schlüssel verwendet werden wie anbei
             beschrieben. Zum Beispiel könnte die Datei "config.ini" die folgenden Daten enthalten:
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 [main]
 db.profiler.class   = "MyProject_Db_Profiler"
 db.profiler.enabled = true
@@ -102,14 +102,14 @@ db.profiler.enabled = true
 
             Diese Konfiguration kann durch den folgenden PHP Code angesprochen werden:
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Ini('config.ini', 'main');
 $params['profiler'] = $config->db->profiler;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
 ]]></programlisting>
 
             Die '<code>instance</code>' Eigenschaft kann wie folgt verwendet werden:
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $profiler = new MyProject_Db_Profiler();
 $profiler->setEnabled(true);
 $configData = array(
@@ -133,7 +133,7 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
             werden:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $profiler = $db->getProfiler();
 ]]></programlisting>
 
@@ -215,7 +215,7 @@ $profiler = $db->getProfiler();
             durchgeführt worden ist:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $query = $profiler->getLastQueryProfile();
 
 echo $query->getQuery();
@@ -227,7 +227,7 @@ echo $query->getQuery();
             am längsten laufende zu finden:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $totalTime    = $profiler->getTotalElapsedSecs();
 $queryCount   = $profiler->getTotalNumQueries();
 $longestTime  = 0;
@@ -270,7 +270,7 @@ echo "Longest query: \n" . $longestQuery . "\n";
                 entfernen, muss nur der Wert null an die Methode übergeben werden.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Zeichne nur Abfragen auf, die mindestens 5 Sekunden laufen:
 $profiler->setFilterElapsedSecs(5);
 
@@ -340,7 +340,7 @@ $profiler->setFilterElapsedSecs(null);
                 entfernen, indem du <code>null</code> als einziges Argument übergibst.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // zeichne nur SELECT Abfragen auf
 $profiler->setFilterQueryType(Zend_Db_Profiler::SELECT);
 
@@ -372,7 +372,7 @@ $profiler->setFilterQueryType(null);
                 Konstanten für Abfragetypen.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Hole nur SELECT Abfragen zurück
 $profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::SELECT);
 

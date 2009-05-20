@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15341 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.measure.creation">
 
@@ -30,7 +30,7 @@
 
         <example id="zend.measure.creation.number.example-1">
             <title>Erstellung einer Maßeinheit durch Integer oder Floatwerte</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $measurement = 1234.7;
 $unit = new Zend_Measure_Length((integer)$measurement,
                                 Zend_Measure_Length::STANDARD);
@@ -66,7 +66,7 @@ echo $unit;
 
         <example id="zend.measure.creation.string.example-1">
             <title>Erstellung einer Maßeinheit durch Strings</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $mystring = "10010100111010111010100001011011101010001";
 $unit = new Zend_Measure_Number($mystring, Zend_Measure_Number::BINARY);
 
@@ -84,7 +84,7 @@ echo $unit;
 
         <example id="zend.measure.creation.string.example-2">
             <title>Gewöhliche Texteingaben welche Maßeinheiten beinhalten</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $mystring = "Mein Haus ist 125m² groß";
 $unit = new Zend_Measure_Area($mystring, Zend_Measure_Area::STANDARD);
 echo $unit; // Ausgabe "125 m²";
@@ -114,7 +114,7 @@ echo $unit; // Ausgabe "125 m²";
 
         <example id="zend.measure.creation.localized.example-1">
             <title>Lokalisierte Zeichenketten</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de');
 $mystring = "Das Boot ist 1,234.50 lang.";
 $unit = new Zend_Measure_Length($mystring,
@@ -138,7 +138,7 @@ echo $unit; // Ausgabe "1234.50 m"
             vergessen wenn man das selbe Gebietsschema mehrere Male verwenden will.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // In der Bootstrap Datei
 $locale = new Zend_Locale('de_AT');
 Zend_Registry::set('Zend_Locale', $locale);

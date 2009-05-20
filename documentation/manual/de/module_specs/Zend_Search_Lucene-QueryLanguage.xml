@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15604 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.query-language">
     <title>Abfragesprache</title>
@@ -60,7 +60,7 @@
             Es gibt zwei statische Methoden in der <classname>Zend_Search_Lucene</classname> Klasse
             welche dem Entwickler das Konfigurieren dieser Einstellungen erlauben:
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $defaultSearchField = Zend_Search_Lucene::getDefaultSearchField();
 ...
 Zend_Search_Lucene::setDefaultSearchField('contents');
@@ -79,13 +79,13 @@ Zend_Search_Lucene::setDefaultSearchField('contents');
             text ist das Standardfeld. Wenn man das "Der richtige Weg" benannte Dokument finden will
             welches den Text "gehe nicht diesen Weg" enthält, geht das mit:
         </para>
-        <programlisting role="querystring"><![CDATA[
+        <programlisting language="querystring"><![CDATA[
 title:"Der richtige Weg" AND text:go
 ]]></programlisting>
         <para>
             oder
         </para>
-        <programlisting role="querystring"><![CDATA[
+        <programlisting language="querystring"><![CDATA[
 title:"Mach es richtig" AND go
 ]]></programlisting>
         <para>
@@ -95,7 +95,7 @@ title:"Mach es richtig" AND go
         <para>
             Beachte: Das Feld nur nur für den Ausdruck, die Phrase oder die Unterabfrage gültig die
             direkt danach folgt, sodas die Abfrage
-            <programlisting role="querystring"><![CDATA[
+            <programlisting language="querystring"><![CDATA[
 title:Mach es richtig
 ]]></programlisting>
             nur "Mach" im title Feld finden wird. Es findet "es" und "richtig" im Standardfeld (wenn
@@ -123,7 +123,7 @@ title:Mach es richtig
             Die Einzelzeichen Wildcardsuche schucht nach Strings die dem Begriff entsprechen wobei
             das "?" durch ein beliebiges einzelnes Zeichen ersetzt wird. Um, zum Beispiel, nach
             "Text" oder "Test" zu suchen kann die folgende Suche verwendet werden:
-            <programlisting role="querystring"><![CDATA[
+            <programlisting language="querystring"><![CDATA[
 Te?t
 ]]></programlisting>
         </para>
@@ -132,14 +132,14 @@ Te?t
             Mehrzeichen Wildcardsuche sucht nach 0 oder mehr Zeichen wenn Strings nach passenden
             Begriffen sucht. Um, zum Beispiel, nach Test, Tests oder Tester zu suchen, kann die
             folgende Suche verwendet werden:
-            <programlisting role="querystring"><![CDATA[
+            <programlisting language="querystring"><![CDATA[
 Test*
 ]]></programlisting>
         </para>
 
         <para>
             Es können "?", "*" oder beide an jeder Stelle des Ausdrucks verwendet werden:
-            <programlisting role="querystring"><![CDATA[
+            <programlisting language="querystring"><![CDATA[
 *schrei?t*
 ]]></programlisting>
             Sucht nach "schreibt", "schreibtisch", "beschreibt", "schreist" und so weiter.
@@ -187,13 +187,13 @@ Test*
             Felder zwischen der unteren und oberen Grenze sind die durch die Bereichsabfrage
             spezifiziert wurden. Bereichsabfragen können inklusive oder exklusive der oberen und
             unteren Grenze sein. Sortierungen werden lexikalisch durchgeführt.
-            <programlisting role="querystring"><![CDATA[
+            <programlisting language="querystring"><![CDATA[
 mod_date:[20020101 TO 20030101]
 ]]></programlisting>
             Das wird Dokumente finden dessen lod_date Felder Werte zwischen 20020101 und 20030101
             inklusive haben. Es ist zu beachten das Bereichsabfragen nicht für Datumsfelder
             reserviert sind. Bereichsabfragen können auch mit nicht-datums Felder verwendet werden:
-            <programlisting role="querystring"><![CDATA[
+            <programlisting language="querystring"><![CDATA[
 title:{Aida TO Carmen}
 ]]></programlisting>
             Das wird alle Dokumente finden dessen Titel zwischen Aida und Carmen sortiert sind,
@@ -206,7 +206,7 @@ title:{Aida TO Carmen}
         <para>
             Wenn kein Feld spezifiziert wurde sucht <classname>Zend_Search_Lucene</classname>
             standardmäßig nach spezifizierten Intervallen in allen Feldern.
-            <programlisting role="querystring"><![CDATA[
+            <programlisting language="querystring"><![CDATA[
 {Aida TO Carmen}
 ]]></programlisting>
         </para>
@@ -220,14 +220,14 @@ title:{Aida TO Carmen}
             Fuzzy Suche durchzuführen muß das Tilde Symbol "~", am Ende eines einzelnen Wortbegriffs
             verwendet werden. Um zum Beispiel nach einem Begriff zu suchen der in der Aussprache
             ähnlich zu "Raum" ist kann die folgende Fuzzy Suche verwendet werden:
-            <programlisting role="querystring"><![CDATA[
+            <programlisting language="querystring"><![CDATA[
 roam~
 ]]></programlisting>
             Diese Suche wird Begriffe wie "Baum" und "Saum" finden. Zusätzliche (optionale)
             Parameter können die benötigte Ähnlichkeit spezifizieren. Der Wert muß zwischen 0 und 1
             sein. Mit einem Wert näher bei 1 werden nur Begriffe mit einer höheren Warscheinlichkeit
             gefunden. Zum Beispiel:
-            <programlisting role="querystring"><![CDATA[
+            <programlisting language="querystring"><![CDATA[
 roam~0.8
 ]]></programlisting>
             Der verwendete Standardwert wenn der Parameter nicht angegeben wurde ist 0.5.
@@ -263,7 +263,7 @@ roam~0.8
             das Tilde, "~", Symbol am Ende der Phrase verwendet werden. Um zum Beispiel nach "Zend"
             und "Framework" innerhalb von 10 Wörtern zueinander in einem Dokument zu suchen kann die
             folgende Suche verwendet werden:
-            <programlisting role="querystring"><![CDATA[
+            <programlisting language="querystring"><![CDATA[
 "Zend Framework"~10
 ]]></programlisting>
         </para>
@@ -282,18 +282,18 @@ roam~0.8
         <para>
             Das boosten erlaubt die Kontrolle der Relevanz eines Dokuments durch das boosten
             individueller Ausdrücke. Wenn man zum Beispiel nach
-            <programlisting role="querystring"><![CDATA[
+            <programlisting language="querystring"><![CDATA[
 PHP framework
 ]]></programlisting>
             sucht und will das der Ausdruck "PHP" mehr Relevanz hat, kann er durch Verwendung des ^
             Symbols zusammen mit einem Boost Faktor beim Ausdruck geboostet werden. Man würde zum
             Beispiel folgendes angeben:
-            <programlisting role="querystring"><![CDATA[
+            <programlisting language="querystring"><![CDATA[
 PHP^4 framework
 ]]></programlisting>
             Das macht Dokumente in denen der Ausdruck PHP vorkommt relevanter. Man kann genauso
             Phrasenausdrücke boosten und Unterabfragen wie im Beispiel gezeigt:
-            <programlisting role="querystring"><![CDATA[
+            <programlisting language="querystring"><![CDATA[
 "PHP framework"^4 "Zend Framework"
 ]]></programlisting>
             Standardwert ist der Boost Faktor 1. Auch wenn der Boost Faktor positiv sein muß, kann
@@ -332,7 +332,7 @@ PHP^4 framework
             <para>
                 Um nach Dokumenten zu Suchen die "PHP Framework" und "Zend Framework" enthalten kann
                 die folgende Abfrage verwendet werden:
-                <programlisting role="querystring"><![CDATA[
+                <programlisting language="querystring"><![CDATA[
 "PHP Framework" AND "Zend Framework"
 ]]></programlisting>
             </para>
@@ -346,7 +346,7 @@ PHP^4 framework
             <para>
                 Um nach Dokumenten zu Suchen die "PHP Framework" oder "Zend Framework" enthalten
                 kann die folgende Abfrage verwendet werden:
-                <programlisting role="querystring"><![CDATA[
+                <programlisting language="querystring"><![CDATA[
 "PHP Framework" OR "Zend Framework"
 ]]></programlisting>
             </para>
@@ -362,7 +362,7 @@ PHP^4 framework
             <para>
                 Um nach Dokumenten zu Suchen die "PHP Framework" enthalten aber "Zend Framework"
                 nicht kann die folgende Abfrage verwendet werden:
-                <programlisting role="querystring"><![CDATA[
+                <programlisting language="querystring"><![CDATA[
 "PHP Framework" AND NOT "Zend Framework"
 ]]></programlisting>
             </para>
@@ -384,7 +384,7 @@ PHP^4 framework
             <para>
                 Um nach Dokumenten zu Suchen die "Zend" enthalten müssen und "Framework" enthalten
                 können, kann die folgende Abfrage verwendet werden:
-                <programlisting role="querystring"><![CDATA[
+                <programlisting language="querystring"><![CDATA[
 +Zend Framework
 ]]></programlisting>
             </para>
@@ -399,7 +399,7 @@ PHP^4 framework
             <para>
                 Um nach Dokumenten zu Suchen die "PHP Framework" enthalten aber "Zend Framework"
                 nicht, kann die folgende Abfrage verwendet werden:
-                <programlisting role="querystring"><![CDATA[
+                <programlisting language="querystring"><![CDATA[
 "PHP Framework" -"Zend Framework"
 ]]></programlisting>
             </para>
@@ -422,7 +422,7 @@ PHP^4 framework
             <para>
                 Um nach Dokumenten zu Suchen die "PHP Framework" benötigen und "Zend Framework"
                 enthalten können kann die folgende Abfrage verwendet werden:
-                <programlisting role="querystring"><![CDATA[
+                <programlisting language="querystring"><![CDATA[
 +"PHP Framework" "Zend Framework"
 ]]></programlisting>
             </para>
@@ -450,7 +450,7 @@ PHP^4 framework
             von Klammern um Fälle zu gruppieren und Unterabfragen zu erstellen. Das kann nützlich
             sein wenn man die boolsche Operatoren für eine Abfrage kontrollieren will, oder
             unterschiedliche Abfragestile mischen will:
-            <programlisting role="querystring"><![CDATA[
+            <programlisting language="querystring"><![CDATA[
 +(Framework OR Bibliothek) +php
 ]]></programlisting>
             <classname>Zend_Search_Lucene</classname> unterstützt Unterabfragen von beliebigen
@@ -468,7 +468,7 @@ PHP^4 framework
         <para>
             Um nach einem Titel zu suchen die sowohl das Wort "Rückkehr" und die Phrase "rosaroter
             Panther" kann die folgende Abfrage verwendet werden:
-            <programlisting role="querystring"><![CDATA[
+            <programlisting language="querystring"><![CDATA[
 title:(+Rückkehr +"rosaroter Panther")
 ]]></programlisting>
         </para>
@@ -491,7 +491,7 @@ title:(+Rückkehr +"rosaroter Panther")
             Für andere Instanzen von solchen Zeichen kann das \ vor jedem speziellen Zeichen
             verwendet werden der escaped werden soll. Um zum Beispiel nach (1+1):2 zu suchen kann
             die folgende Abfrage verwendet werden:
-            <programlisting role="querystring"><![CDATA[
+            <programlisting language="querystring"><![CDATA[
 \(1\+1\)\:2
 ]]></programlisting>
         </para>

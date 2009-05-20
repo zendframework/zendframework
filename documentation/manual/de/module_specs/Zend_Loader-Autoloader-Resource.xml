@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15343 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.loader.autoloader-resource">
     <title>Ressource Autoloader</title>
@@ -26,7 +26,7 @@
             Nehmen wir die folgende Verzeichnis Struktur an:
         </para>
 
-        <programlisting role="text"><![CDATA[
+        <programlisting language="text"><![CDATA[
 path/to/some/directory/
     acls/
         Site.php
@@ -51,7 +51,7 @@ path/to/some/directory/
             ist:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $resourceLoader = new Zend_Loader_Autoloader_Resource(array(
     'basePath'  => 'path/to/some/directory',
     'namespace' => 'My',
@@ -81,7 +81,7 @@ $resourceLoader = new Zend_Loader_Autoloader_Resource(array(
             wir jeden unserer Ressource Typen hinzu.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $resourceLoader->addResourceType('acl', 'acls/', 'Acl')
                ->addResourceType('form', 'forms/', 'Form')
                ->addResourceType('model', 'models/');
@@ -92,7 +92,7 @@ $resourceLoader->addResourceType('acl', 'acls/', 'Acl')
             das folgende ist äquivalent zu dem obigen:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $resourceLoader->addResourceTypes(array(
     'acl' => array(
         'path'      => 'acls/',
@@ -114,7 +114,7 @@ $resourceLoader->addResourceTypes(array(
             wird, sowie eine Struktur wie anbei:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $resourceLoader = new Zend_Loader_Autoloader_Resource(array(
     'basePath'      => 'path/to/some/directory',
     'namespace'     => 'My',
@@ -147,7 +147,7 @@ $resourceLoader = new Zend_Loader_Autoloader_Resource(array(
             Mappings:
         </para>
 
-        <programlisting role="text"><![CDATA[
+        <programlisting language="text"><![CDATA[
 api/         => Api
 forms/       => Form
 models/      => Model

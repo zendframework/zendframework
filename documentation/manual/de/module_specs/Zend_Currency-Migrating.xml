@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15346 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.currency.migration">
 
@@ -24,7 +24,7 @@
             <code>setFormat()</code> Methode gesetzt werden kann.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $currency = new Zend_Currency($currency, $locale);
 ]]></programlisting>
 
@@ -87,7 +87,7 @@ $currency = new Zend_Currency($currency, $locale);
 
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $currency->setFormat(array $options);
 ]]></programlisting>
 
@@ -97,7 +97,7 @@ $currency->setFormat(array $options);
             Schlüssel enthalten können wie die <code>setFormat</code> Methode.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $currency->toCurrency($value, array $options);
 ]]></programlisting>
 

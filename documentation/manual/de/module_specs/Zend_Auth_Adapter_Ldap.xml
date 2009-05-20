@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15346 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.auth.adapter.ldap">
 
@@ -37,7 +37,7 @@
             Um <classname>Zend_Auth_Adapter_Ldap</classname> Authentifizierung in eigene Anwendungen
             schnell einzubauen, selbst wenn <classname>Zend_Controller</classname> nicht verwendet
             wird, sollte das Fleisch des eigenen Codes in etwa wie folgt aussehen:
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $username = $this->_request->getParam('username');
 $password = $this->_request->getParam('password');
 
@@ -89,7 +89,7 @@ if ($log_path) {
             ist zu beachten das <classname>Zend_Config_Ini</classname> jeden Wert der mit
             Gleichheitszeichen (<code>=</code>) geschrieben wird auch unter Anführungszeichen
             gesetzt wird (wie unten bei DNs gezeigt).
-            <programlisting role="ini"><![CDATA[
+            <programlisting language="ini"><![CDATA[
 [production]
 
 ldap.log_path = /tmp/ldap.log
@@ -155,7 +155,7 @@ ldap.server2.baseDn = "CN=Users,DC=w,DC=net"
             Ausgabe von beispielhaften Optionsparameters die twei Sets von Serveroptionen für LDAP
             Server enthalten, <code>s0.foo.net</code> und <code>dc1.w.net</code> (die gleichen
             Optionen wie in der oberen INI Repräsentation):
-            <programlisting role="output"><![CDATA[
+            <programlisting language="output"><![CDATA[
 Array
 (
     [server2] => Array

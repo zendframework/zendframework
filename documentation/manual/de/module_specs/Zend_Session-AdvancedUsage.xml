@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15346 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.session.advanced_usage">
 
@@ -25,7 +25,7 @@
 
             <title>Starten einer globalen Session</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend_Session::start();
 ]]></programlisting>
 
@@ -54,7 +54,7 @@ Zend_Session::start();
                     ähnliches) verwendet wird, und die Einstellung schon in <code>php.ini</code>
                     aktiviert ist, kann das folgende in der <code>.htaccess</code> Datei
                     (normalerweise im HTML Dokumenten Basisverzeichnis) hinzugefügt werden:
-                    <programlisting role="httpd.conf"><![CDATA[
+                    <programlisting language="httpd.conf"><![CDATA[
 php_value session.auto_start 0
 ]]></programlisting>
                 </para>
@@ -159,7 +159,7 @@ php_value session.auto_start 0
         <example id="zend.session.advanced_usage.locking.example.basic">
 
             <title>Sperren von Session Namensräumen</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $userProfileNamespace = new Zend_Session_Namespace('userProfileNamespace');
 
 // marking session as read only locked
@@ -193,7 +193,7 @@ if ($userProfileNamespace->isLocked()) {
 
             <title>Beispiel für den Verfall</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $s = new Zend_Session_Namespace('expireAll');
 $s->a = 'Apfel';
 $s->p = 'Pfirsich';
@@ -245,7 +245,7 @@ $s->setExpirationSeconds(60);
                 Anwendung 300 Sekunden Zeit gegeben die angezeigte Frage zu beantworten.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // ...
 // Im Frage-View Kontroller
 $testSpace = new Zend_Session_Namespace('testSpace');
@@ -261,7 +261,7 @@ $testSpace->accept_answer = true;
                 in der erlaubten Zeit übermittelt hat:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // ...
 // Im Frage-Prozess Kontroller
  $testSpace = new Zend_Session_Namespace('testSpace');
@@ -300,7 +300,7 @@ $testSpace->accept_answer = true;
 
             <title>Zugriff auf Session Namensräume auf eine einzelne Instanz limitieren</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Eine Instanz eines Namensraumes erstellen
 $authSpaceAccessor1 = new Zend_Session_Namespace('Zend_Auth');
 
@@ -363,7 +363,7 @@ try {
                 Das folgende illustriert wie das Problem reproduziert werden kann:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $sessionNamespace = new Zend_Session_Namespace();
 $sessionNamespace->array = array();
 // wird nicht wie gewünscht funktionieren vor PHP 5.2.1
@@ -382,7 +382,7 @@ echo $sessionNamespace->array['testKey'];
                 Namensraum gespeichert werden nachdem alle gewünschten Arraywerte gesetzt wurden.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $sessionNamespace = new Zend_Session_Namespace('Foo');
 $sessionNamespace->array = array('a', 'b', 'c');
 ]]></programlisting>
@@ -405,7 +405,7 @@ $sessionNamespace->array = array('a', 'b', 'c');
                 Array überschrieben wird.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $sessionNamespace = new Zend_Session_Namespace();
 
 // Das ursprüngliche Array hinzufügen
@@ -434,7 +434,7 @@ echo $sessionNamespace->array['fruit']; // gibt "peach" aus
                 Array enthält, die auf dieses dann indirekt zugegriffen werden.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $myNamespace = new Zend_Session_Namespace('myNamespace');
 $a = array(1, 2, 3);
 $myNamespace->someArray = array( &$a );
@@ -501,7 +501,7 @@ echo $myNamespace->someArray['foo']; // gibt "bar" aus
 
             <title>PHPUnit Test Code der auf Zend_Session beruht</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // testen von setExpirationSeconds()
 $script = 'SessionTestHelper.php';
 $s = new Zend_Session_Namespace('space');

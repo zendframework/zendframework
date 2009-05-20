@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15606 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.acl.advanced">
 
@@ -53,7 +53,7 @@
             <methodname>assert()</methodname> Methode des Interfaces implementiert:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class CleanIPAssertion implements Zend_Acl_Assert_Interface
 {
     public function assert(Zend_Acl $acl,
@@ -78,7 +78,7 @@ class CleanIPAssertion implements Zend_Acl_Assert_Interface
             <constant>TRUE</constant> zurück gibt.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $acl = new Zend_Acl();
 $acl->allow(null, null, null, new CleanIPAssertion());
 ]]></programlisting>

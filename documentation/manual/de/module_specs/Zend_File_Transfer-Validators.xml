@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15346 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.file.transfer.validators">
 
@@ -239,7 +239,7 @@
         <example id="zend.file.transfer.validators.usage.example">
             <title>Prüfungen zu einem File Transfer Objekt hinzufügen</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // Setzt eine Dateigröße von 20000 Bytes
@@ -267,7 +267,7 @@ $upload->setValidators(array(
                 spezifizieren auf dem die angegebene Prüfung gesetzt werden soll.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // Setzt die Dateigröße auf 20000 Bytes und limitiert Sie nur auf 'file2'
@@ -290,7 +290,7 @@ $upload->addValidator('Size', false, 20000, 'file2');
                 einfach wie anbei gezeigt gekoppelt werden:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // Setzt die Dateigröße auf 20000 Bytes
@@ -324,7 +324,7 @@ $upload->addValidator('Size', false, 20000)
                 gefundenen Dateien geprüft.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // Setzt die Dateigröße auf 20000 Bytes
@@ -409,7 +409,7 @@ if ($upload->isValid()) {
         <example id="zend.file.transfer.validators.count.example">
             <title>Die Count Prüfung verwenden</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // Die Anzahl der Dateien auf maximal 2 limitieren
@@ -456,7 +456,7 @@ $upload->addValidator('Count', false, array('min' =>1, 'max' => 5));
         <example id="zend.file.transfer.validators.crc32.example">
             <title>Verwenden der Crc32 Prüfung</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // Prüft ob der Inhalt der hochgeladenen Datei den angegebenen Hash hat
@@ -511,7 +511,7 @@ $upload->addValidator('Crc32', false, array('3b3652f', 'e612b69'));
         <example id="zend.file.transfer.validators.excludeextension.example">
             <title>Die ExcludeExtension Prüfung verwenden</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // Dateien mit der Erweiterung php oder exe nicht erlauben
@@ -567,7 +567,7 @@ $upload->addValidator('ExcludeExtension',
         <example id="zend.file.transfer.validators.excludemimetype.example">
             <title>Verwendung der ExcludeMimeType Prüfung</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // Verweigert den MIME Typ gif für alle gegebenen Dateien
@@ -627,7 +627,7 @@ $upload->setValidator('ExcludeMimeType', 'image');
         <example id="zend.file.transfer.validators.exists.example">
             <title>Die Exists Prüfung verwenden</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // Das temporäre Verzeichnis für die Prüfung hinzufügen
@@ -690,7 +690,7 @@ $upload->addValidator('Exists',
         <example id="zend.file.transfer.validators.extension.example">
             <title>Verwendung der Extension Prüfung</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // Limitiert die Erweiterungen auf jpg und png Dateien
@@ -778,7 +778,7 @@ if (!$upload->isValid('C:\temp\myfile.MO')) {
         <example id="zend.file.transfer.validators.filessize.example">
             <title>Verwenden der FilesSize Prüfung</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // Limitiert die Größe aller Dateien die hochgeladen werden auf 40000 Bytes
@@ -864,7 +864,7 @@ $upload->addValidator('FilesSize',
         <example id="zend.file.transfer.validators.imagesize.example">
             <title>Verwendung der ImageSize Prüfung</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // Begrenzt die Größe eines Bildes auf eine Höhe von 100-200
@@ -895,7 +895,7 @@ $upload->setImageWidth(array('minwidth' => 20, 'maxwidth' => 200));
         <example id="zend.file.transfer.validators.iscompressed.example">
             <title>Verwenden der IsCompressed Prüfung</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // Checkt ob die hochgeladene Datei komprimiert ist
@@ -933,7 +933,7 @@ $upload->addValidator('IsCompressed', false, 'zip');
         <example id="zend.file.transfer.validators.isimage.example">
             <title>Verwenden der IsImage Prüfung</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // Checkt ob die hochgeladene Datei ein Bild ist
@@ -997,7 +997,7 @@ $upload->addValidator('IsImage', false, 'jpeg');
         <example id="zend.file.transfer.validators.hash.example">
             <title>Verwenden der Hash Prüfung</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // Prüft ob der Inhalt der hochgeladenen Datei den angegebenen Hash enthält
@@ -1051,7 +1051,7 @@ $upload->addValidator('Hash',
         <example id="zend.file.transfer.validators.md5.example">
             <title>Verwenden der Md5 Prüfung</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // Prüft ob der Inhalt der hochgeladenen Datei den angegebenen Hash hat
@@ -1116,7 +1116,7 @@ $upload->addValidator('Md5',
         <example id="zend.file.transfer.validators.mimetype.example">
             <title>Verwendung der MimeType Prüfung</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // Begrenzt den MIME Typ aller gegebenen Dateien auf Gif Bilder
@@ -1197,7 +1197,7 @@ $upload->addValidator('MimeType',
         <example id="zend.file.transfer.validators.notexists.example">
             <title>Verwendung der NotExists Prüfung</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // Das temporäre Verzeichnis für die Prüfung hinzufügen
@@ -1246,7 +1246,7 @@ $upload->addValidator('NotExists',
         <example id="zend.file.transfer.validators.sha1.example">
             <title>Verwenden der Sha1 Prüfung</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // Prüft ob der Inhalt der hochgeladenen Datei den angegebenen Hash hat
@@ -1315,7 +1315,7 @@ $upload->addValidator('Sha1',
         <example id="zend.file.transfer.validators.size.example">
             <title>Verwendung der Size Prüfung</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // Limitiert die Größe einer Datei auf 40000 Bytes
@@ -1366,7 +1366,7 @@ $upload->addValidator('Size',
         <example id="zend.file.transfer.validators.wordcount.example">
             <title>Verwendung der WordCount Prüfung</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // Begrenzt die Anzahl der Wörter in Dateien auf maximal 2000

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.layout.quickstart">
     <title>Zend_Layout Schnellstart</title>
@@ -25,7 +25,7 @@
             Als Beispiel:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -60,7 +60,7 @@
             &lt;head&gt; Sektion, Navigation usw. erlauben:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -112,7 +112,7 @@
             verwenden:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // In der Bootstrap Datei:
 Zend_Layout::startMvc();
 ]]></programlisting>
@@ -128,7 +128,7 @@ Zend_Layout::startMvc();
             zugegriffen werden:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function barAction()
@@ -152,7 +152,7 @@ class FooController extends Zend_Controller_Action
             Methodenaufrufe auf dem Layout Objekt:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $this->layout()->setLayout('foo'); // alternatives Layout setzen
 ]]></programlisting>
 
@@ -161,7 +161,7 @@ $this->layout()->setLayout('foo'); // alternatives Layout setzen
             die statische <code>getMvcInstance()</code> Methode geholt werden:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Gibt null zurück wenn startMvc() nicht zuerst aufgerufen wurde
 $layout = Zend_Layout::getMvcInstance();
 ]]></programlisting>
@@ -185,7 +185,7 @@ $layout = Zend_Layout::getMvcInstance();
             diesem Segment anfügt). Das View Skript kann dann jedes separat darstellen:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <body>
     <!-- Darstellung von /nav/menu -->
     <div id="nav"><?php echo $this->layout()->nav ?></div>
@@ -233,7 +233,7 @@ $layout = Zend_Layout::getMvcInstance();
             setzen, Variablen als Objekt Eigenschaften gesetzt, und das Layout dargestellt werden:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $layout = new Zend_Layout();
 
 // Einen Layout Skript Pfad setzen:

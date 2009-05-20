@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.measure.output">
 
@@ -38,7 +38,7 @@
             Zeichenketten.
             <example id="zend.measure.output.auto.example-1">
                 <title>Automatische Ausgabe</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de');
 $mystring = "1.234.567,89 Meter";
 $unit = new Zend_Measure_Length($mystring,
@@ -69,7 +69,7 @@ echo $unit;
             Der Wert einer Maßeinheit kann mit <code>getValue()</code> ausgegeben werden.
             <example id="zend.measure.output.value.example-1">
                 <title>Ausgabe eines Wertes</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de');
 $mystring = "1.234.567,89 Meter";
 $unit = new Zend_Measure_Length($mystring,
@@ -96,7 +96,7 @@ echo $unit->getValue();
             Die Funktion <code>getType()</code> gibt die aktuelle Maßeinheit zurück.
             <example id="zend.measure.output.unit.example-1">
                 <title>Outputting units</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de');
 $mystring = "1.234.567,89";
 $unit = new Zend_Measure_Weight($mystring,

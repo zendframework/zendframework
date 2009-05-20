@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15602 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.soap.autodiscovery">
     <title>AutoDiscovery</title>
@@ -88,7 +88,7 @@
             Hier ist ein Beispiel einer üblichen Verwendung der Autodiscovery Funktionalität. Die
             Funktion <code>handle()</code> erzeugt die WSDL Datei und postet Sie an den Browser.
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class My_SoapServer_Class {
 ...
 }
@@ -125,7 +125,7 @@ $autodiscover->handle();
             </para>
 
             <para>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 if(isset($_GET['wsdl'])) {
     $autodiscover = new Zend_Soap_AutoDiscover();
     $autodiscover->setClass('HelloWorldService');
@@ -148,7 +148,7 @@ if(isset($_GET['wsdl'])) {
             Wenn eine Klasse verwendet wird um SOAP Server Funktionalitäten anzubieten, dann sollte
             die selbe Klasse an <classname>Zend_Soap_AutoDiscover</classname> für die WSDL Erzeugung
             übergeben werden:
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $autodiscover = new Zend_Soap_AutoDiscover();
 $autodiscover->setClass('My_SoapServer_Class');
 $autodiscover->handle();
@@ -227,7 +227,7 @@ $autodiscover->handle();
             Wenn ein Set von Funktionen verwendet wird um SOAP Server Funktionalität anzubieten,
             dann sollte das selbe Set mit <classname>Zend_Soap_AutoDiscovery</classname> für die
             WSDL Erzeugung verwendet werden:
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $autodiscover = new Zend_Soap_AutoDiscover();
 $autodiscover->addFunction('function1');
 $autodiscover->addFunction('function2');
@@ -384,7 +384,7 @@ $autodiscover->handle();
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $autodiscover = new Zend_Soap_AutoDiscover();
 // Standard ist 'use' => 'encoded' und
 // 'encodingStyle' => 'http://schemas.xmlsoap.org/soap/encoding/'

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.client.advanced">
     <title>Zend_Http_Client - Fortgeschrittende Nutzung</title>
@@ -22,7 +22,7 @@
             Konfigurationsparameters auf das boolesche TRUE geändert werden.
             <example id="zend.http.client.redirections.example-1">
                 <title>Strikte Umleitung von 301 und 302 Antworten nach RFC 2616 erzwingen</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Strikte Umleitungen
 $client->setConfig(array('strictredirects' => true);
 
@@ -46,7 +46,7 @@ $client->setConfig(array('strictredirects' => false);
             Arten verwendet werden:
             <example id="zend.http.client.cookies.example-1">
                 <title>Cookies setzen durch Verwendung von setCookie()</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Ganz einfach: durch Übergabe von Namen und Wert für den Cookie
 $client->setCookie('flavor', 'chocolate chips');
 
@@ -70,7 +70,7 @@ $client->setCookie($cookie);
             oder Session-Cookie erhält, bevor man weitere Anfragen versenden kann.
             <example id="zend.http.client.cookies.example-2">
                 <title>Cookie Stickiness aktivieren</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Um die Cookie Stickiness einzuschalten, setze eine Cookie Jar (Keksdose)
 $client->setCookieJar();
 
@@ -102,7 +102,7 @@ $client->request('GET');
             verwendet werden, wie das folgende Beispiel zeigt:
             <example id="zend.http.client.custom_headers.example-1">
                 <title>Setzen eines einzelnen individuellen Anfrageheaders</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Setzen eines einzelnen Headers, vorherige werden überschrieben
 $client->setHeaders('Host', 'www.example.com');
 
@@ -123,7 +123,7 @@ $client->setHeaders('Cookie', array(
             Übergabe eines Array mit Headern als einzigen Parameter verwendet werden:
             <example id="zend.http.client.custom_headers.example-2">
                 <title>Setzen eines mehreren individuellen Anfrageheaders</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Setzen von mehreren Headern, vorherige werden überschrieben
 $client->setHeaders(array(
     'Host' => 'www.example.com',
@@ -159,7 +159,7 @@ $client->setHeaders(array(
             'application/octet-stream'.
             <example id="zend.http.client.file_uploads.example-1">
                 <title>Verwendung von setFileUpload um Dateien hochzuladen</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Hochladen beliebiger Daten als Datei
 $text = 'this is some plain text';
 $client->setFileUpload('some_text.txt', 'upload', $text, 'text/plain');
@@ -198,7 +198,7 @@ $client->request('POST');
             setRawData() oder durch eine andere Methode: setEncType().
             <example id="zend.http.client.raw_post_data.example-1">
                 <title>Unverarbeitete POST Daten versenden</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $xml = '<book>' .
        '  <title>Islands in the Stream</title>' .
        '  <author>Ernest Hemingway</author>' .
@@ -236,7 +236,7 @@ $client->setRawData($xml)->setEncType('text/xml')->request('POST');
             geplant).
             <example id="zend.http.client.http_authentication.example-1">
                 <title>Setzen von Benutzer und Password für eine HTTP Authentifizierung</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Verwende die Basis Authentifizierung
 $client->setAuth('shahar', 'myPassword!', Zend_Http_Client::AUTH_BASIC);
 
@@ -295,7 +295,7 @@ $client->setAuth('shahar', 'myPassword!');
         </para>
         <example id="zend.http.client.multiple_requests.example-1">
             <title>Durchführen von aufeinander folgenden Anfrage mit einem Client</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Zuerst den Client instanzieren
 $client = new Zend_Http_Client('http://www.example.com/fetchdata.php', array(
     'keepalive' => true

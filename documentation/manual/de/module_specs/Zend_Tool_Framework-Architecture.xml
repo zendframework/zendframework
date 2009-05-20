@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15343 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.tool.framework.architecture">
     <title>Architektur</title>
@@ -20,7 +20,7 @@
             Das Interface für die Registry besteht aus der folgenden Definition:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 interface Zend_Tool_Framework_Registry_Interface
 {
     public function setClient(Zend_Tool_Framework_Client_Abstract $client);
@@ -58,7 +58,7 @@ interface Zend_Tool_Framework_Registry_Interface
             Zielklasse.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 interface Zend_Tool_Framework_Registry_EnabledInterface
 {
     public function setRegistry(
@@ -87,7 +87,7 @@ interface Zend_Tool_Framework_Registry_EnabledInterface
             (das ist das Marker Interface Pattern):
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 interface Zend_Tool_Framework_Provider_Interface
 {}
 ]]></programlisting>
@@ -97,7 +97,7 @@ interface Zend_Tool_Framework_Provider_Interface
             welcher einem Zugriff auf <classname>Zend_Tool_Framework_Registry</classname> bietet:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 abstract class Zend_Tool_Framework_Provider_Abstract
     implements Zend_Tool_Framework_Provider_Interface,
                Zend_Tool_Registry_EnabledInterface
@@ -126,7 +126,7 @@ abstract class Zend_Tool_Framework_Provider_Abstract
             Um einen Loader zu implementieren muß man die folgende abstrakte Klasse erweitern:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 abstract class Zend_Tool_Framework_Loader_Abstract
 {
 
@@ -152,7 +152,7 @@ abstract class Zend_Tool_Framework_Loader_Abstract
             gefundenen Klasse instanziiert, und dann dem richtigen Repository angehängt.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class Zend_Tool_Framework_Loader_IncludePathLoader
     extends Zend_Tool_Framework_Loader_Abstract
 {
@@ -190,7 +190,7 @@ class Zend_Tool_Framework_Loader_IncludePathLoader
             objects that implement Zend_Tool_Framework_Manifest_Metadata.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 interface Zend_Tool_Framework_Manifest_Interface
 {
     public function getMetadata();
@@ -214,7 +214,7 @@ interface Zend_Tool_Framework_Manifest_Interface
             nature:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class Zend_Tool_Framework_Manifest_Basic
 {
 
@@ -240,7 +240,7 @@ class Zend_Tool_Framework_Manifest_Basic
             These classes are described in the follow code snippet.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class Zend_Tool_Framework_Manifest_ActionMetadata
     extends Zend_Tool_Framework_Manifest_Metadata
 {
@@ -291,7 +291,7 @@ class Zend_Tool_Framework_Manifest_ProviderMetadata
             the repository.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class Zend_Tool_Framework_Manifest_Repository
 {
     /**
@@ -357,7 +357,7 @@ class Zend_Tool_Framework_Manifest_Repository
             abstract class:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 abstract class Zend_Tool_Framework_Client_Abstract
 {
     /**

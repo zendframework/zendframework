@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15467 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.migration">
     <title>Migration von vorhergehenden Versionen</title>
@@ -148,7 +148,7 @@
                     Bindestrich trennt:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $viewRenderer =
     Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
 $inflector = $viewRenderer->getInflector();
@@ -181,7 +181,7 @@ $inflector->setFilterRule(':action', array(
                     'useCaseSensitiveActions' zu bearbeiten:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $front->setParam('useCaseSensitiveActions', true);
 ]]></programlisting>
 
@@ -222,7 +222,7 @@ $front->setParam('useCaseSensitiveActions', true);
             <code>noErrorHandler</code>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $front->setParam('noErrorHandler', true);
 ]]></programlisting>
 
@@ -241,7 +241,7 @@ $front->setParam('noErrorHandler', true);
             Bootstrap vor dem Abarbeiten ausschalten:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Annahme das $front eine Instanz von Zend_Controller_Front ist
 $front->setParam('noViewRenderer', true);
 ]]></programlisting>
@@ -270,7 +270,7 @@ $front->setParam('noViewRenderer', true);
             Die einfachste Änderung ist das ausschalten des Auto-Rendering für diese Methode:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $this->_helper->viewRenderer->setNoRender();
 ]]></programlisting>
 
@@ -280,7 +280,7 @@ $this->_helper->viewRenderer->setNoRender();
             <code>preDispatch()</code> oder <code>init()</code> Methode einfügen wollen:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 public function preDispatch()
 {
     // Ausschalten des autorendern vom View Skript
@@ -340,7 +340,7 @@ public function preDispatch()
                     Vor dem verarbeiten einer Frontkontroller Instanz:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Annahme das $view bereits definiert wurde
 $viewRenderer = new Zend_Controller_Action_Helper_ViewRenderer($view);
 Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
@@ -352,7 +352,7 @@ Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
                     Jederzeit wärend des Bootstrap Prozesses:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $viewRenderer =
     Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
 $viewRenderer->setView($view);
@@ -422,7 +422,7 @@ $viewRenderer->setView($view);
             Durch bisherige Änderungen bleibt die wesentliche Verwendung der MVC Komponenten gleich:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 require_once 'Zend/Controller/Front.php';
 Zend_Controller_Front::run('/path/to/controllers');
 ]]></programlisting>
@@ -480,7 +480,7 @@ Zend_Controller_Front::run('/path/to/controllers');
                     geändert. Die Signatur ist nun:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 final protected function _forward($action,
                                   $controller = null,
                                   $module = null,
@@ -508,12 +508,12 @@ final protected function _forward($action,
             noch das folgende machen:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 require_once 'Zend/Controller/Front.php';
 Zend_Controller_Front::run('/path/to/controllers');
 ]]></programlisting>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /* -- Erstelle einen Router -- */
 $router = new Zend_Controller_RewriteRouter();
 $router->addRoute('user',
@@ -564,7 +564,7 @@ $ctrl->dispatch();
                         <para>
                             Setzen von <code>throwExceptions()</code> im Front Controller:
                         </para>
-                        <programlisting role="php"><![CDATA[
+                        <programlisting language="php"><![CDATA[
 $front->throwExceptions(true);
 ]]></programlisting>
                     </listitem>
@@ -573,7 +573,7 @@ $front->throwExceptions(true);
                         <para>
                             Setzen von <code>renderExceptions()</code> im Response objekt:
                         </para>
-                        <programlisting role="php"><![CDATA[
+                        <programlisting language="php"><![CDATA[
 $response->renderExceptions(true);
 $front->setResponse($response);
 $front->dispatch();
@@ -656,7 +656,7 @@ echo $response;
                             Objekt verfügbar und kann wie folgt abgerufen werden:
                         </para>
 
-                        <programlisting role="php"><![CDATA[
+                        <programlisting language="php"><![CDATA[
 // Hole den angeforderten Controllernamen
 // Der Zugriff erfolgte bisher über: $this->_action->getControllerName().
 // Das Beispiel unten verwendet getRequest(), obwohl man auch direkt auf die
@@ -687,7 +687,7 @@ $foo = $this->_getParam('foo', 'default');
                             <code>__call()</code> sein:
                         </para>
 
-                        <programlisting role="php"><![CDATA[
+                        <programlisting language="php"><![CDATA[
 public function __call($method, $args)
 {
     // Wenn eine nicht vorhandene 'Action' Methode angefordert wurde,

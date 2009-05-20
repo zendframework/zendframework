@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15304 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.application.examples">
     <title>Beispiele</title>
@@ -9,7 +9,7 @@
         nur ein leerer Stub sein der die Basis Bootstrapping Klasse erweitert:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
 }
@@ -19,7 +19,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         Mit einer entsprechenden Konfigurationsdatei:
     </para>
 
-    <programlisting role="ini"><![CDATA[
+    <programlisting language="ini"><![CDATA[
 ; APPLICATION_PATH/configs/application.ini
 [production]
 bootstrap.path = APPLICATION_PATH "/Bootstrap.php"
@@ -53,7 +53,7 @@ resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
         Bootstrap zu speichern.
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
     protected function _initRequest(array $options = array())
@@ -114,7 +114,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         Ressource wie folgt aussehen:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 class My_Bootstrap_Resource_View
     extends Zend_Application_Resource_ResourceAbstract
 {
@@ -151,7 +151,7 @@ class My_Bootstrap_Resource_View
         und den Kurznamen der Ressource (z.B. "view"):
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $application = new Zend_Application(
     APPLICATION_ENV,
     array(
@@ -177,7 +177,7 @@ $application = new Zend_Application(
         Eltern-Bootstrap zugreifen:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 class My_Bootstrap_Resource_Layout
     extends Zend_Application_Resource_ResourceAbstract
 {
@@ -199,7 +199,7 @@ class My_Bootstrap_Resource_Layout
         anschließend ausführen:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $application = new Zend_Application(...);
 $application->bootstrap()
             ->run();
@@ -209,7 +209,7 @@ $application->bootstrap()
         Für ein eigenes Skript müsste man einfach spezifische Ressourcen initialisieren:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $application = new Zend_Application(...);
 $application->getBootstrap('db');
 
@@ -223,7 +223,7 @@ echo $service->handle();
         Ressourcen aufzurufen, kann man auch Überladung verwenden:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $application = new Zend_Application(...);
 $application->getBootstrapDb();
 ]]></programlisting>

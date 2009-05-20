@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.dispatcher">
     <title>Der Dispatcher</title>
@@ -32,7 +32,7 @@
                 Front Kontroller oder im Dispatcher, getan werden:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Im Front Controller:
 $front->setParam('prefixDefaultModule', true);
 
@@ -69,7 +69,7 @@ $dispatcher->setParam('prefixDefaultModule', true);
             Parameter, die du zur neuen Aktion übersenden möchtest:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 public function fooAction()
 {
     // weiterleiten zu einer anderen Aktion im aktuellen Controller und Modul:
@@ -114,7 +114,7 @@ public function bazAction()
             Methoden die für jede Dispatcher Implementierung benötigt werden:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 interface Zend_Controller_Dispatcher_Interface
 {
     /**

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.action">
     <title>Action Kontroller</title>
@@ -28,7 +28,7 @@
             Soll unsere Klasse, zum Beispiel, wie folgt definiert sein:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function barAction()
@@ -68,7 +68,7 @@ class FooController extends Zend_Controller_Action
                 der folgenden Methoden ausgeschaltet werden:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function init()
@@ -100,7 +100,7 @@ class FooController extends Zend_Controller_Action
                 Setzen des <code>noRender</code> Flags des <code>ViewRenderer</code>'s:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function barAction()
@@ -141,7 +141,7 @@ class FooController extends Zend_Controller_Action
             Datenbank bei der Instanzierung verbinden will:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function init()
@@ -192,7 +192,7 @@ class FooController extends Zend_Controller_Action
                     Einige typische Aufrufe können wie folgt aussehen:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $this->getResponse()->setHeader('Content-Type', 'text/xml');
 $this->getResponse()->appendBody($content);
 ]]></programlisting>
@@ -231,7 +231,7 @@ $this->getResponse()->appendBody($content);
                         <code>_hasParam()</code> vor dem Empfangen eines Wertes aufzurufen:
                     </para>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 // Verwende des Standardwert 1 wenn id nicht gesetzt wurde
 $id = $this->_getParam('id', 1);
 
@@ -288,7 +288,7 @@ if ($this->_hasParam('id') {
                 Verzeichnisstruktur:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 applicationOrModule/
     controllers/
         IndexController.php
@@ -317,7 +317,7 @@ applicationOrModule/
                 <code>render()</code> hat die folgende Signatur:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 string render(string $action = null,
               string $name = null,
               bool $noController = false);
@@ -352,7 +352,7 @@ string render(string $action = null,
                 Einige Beispiele:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class MyController extends Zend_Controller_Action
 {
     public function fooAction()
@@ -504,7 +504,7 @@ class MyController extends Zend_Controller_Action
                 kann etwas die das folgende geschrieben werden:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class MyController extends Zend_Controller_Action
 {
     public function __call($method, $args)
@@ -529,7 +529,7 @@ class MyController extends Zend_Controller_Action
                 weiterleiten will:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class MyController extends Zend_Controller_Action
 {
     public function indexAction()
@@ -563,7 +563,7 @@ class MyController extends Zend_Controller_Action
             <code>initView()</code> Methode mit Code zu Ändern der das folgende zusammensetzt:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 abstract class My_Base_Controller extends Zend_Controller_Action
 {
     public function initView()

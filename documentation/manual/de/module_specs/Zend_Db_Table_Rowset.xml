@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15341 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.table.rowset">
 
@@ -36,7 +36,7 @@
 
             <title>Einen Zeilensatz lesen</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugs   = new Bugs();
 $rowset = $bugs->fetchAll("bug_status = 'NEW'");
 ]]></programlisting>
@@ -67,7 +67,7 @@ $rowset = $bugs->fetchAll("bug_status = 'NEW'");
 
             <title>Zeilen in einem Zeilensatz zählen</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $rowset   = $bugs->fetchAll("bug_status = 'FIXED'");
 
 $rowCount = count($rowset);
@@ -91,7 +91,7 @@ if ($rowCount > 0) {
                 eine Zeile enthält.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugs   = new Bugs();
 $rowset = $bugs->fetchAll("bug_id = 1");
 $row    = $rowset->current();
@@ -117,7 +117,7 @@ $row    = $rowset->current();
                 der Tabelle gehört.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugs = new Bugs();
 
 // Alle Zeilen aus der Tabelle lesen
@@ -156,7 +156,7 @@ foreach ($rowset as $row) {
                 verwenden um die Anzahl an Ergebnissen zu prüfen bevor eine Position gesucht wird.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugs = new Bugs();
 
 // Alle Einträge von der Tabelle holen
@@ -186,7 +186,7 @@ $row9->save();
             nicht existiert wird eine Ausnahme geworfen. Hier ist ein Beispiel:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $bugs = new Bugs();
 
 // Alle Einträge von der Tabelle holen
@@ -222,7 +222,7 @@ $row9->save();
 
             <title>Benutzung von toArray()</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugs   = new Bugs();
 $rowset = $bugs->fetchAll();
 
@@ -267,7 +267,7 @@ foreach ($rowsetArray as $rowArray) {
                 erzeugen. Dieser repräsentiert das Zeilensatz-Objekt.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugs   = new Bugs();
 $rowset = $bugs->fetchAll();
 
@@ -297,7 +297,7 @@ $serializedRowset = serialize($rowset);
                 Datenbankverbindung benötigen (beispielsweise Abfragen auf verwandte Tabellen).
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $rowsetDisconnected = unserialize($serializedRowset);
 
 // Jetzt können Objekt-Methoden und -Eigenschaften genutzt werden,
@@ -337,7 +337,7 @@ echo $row->bug_description;
 
             <title>Einen Zeilensatz als Live-Daten reaktivieren</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $rowset = unserialize($serializedRowset);
 
 $bugs = new Bugs();
@@ -376,7 +376,7 @@ $row->save();
 
         <example id="zend.db.table.rowset.extending.example">
             <title>Eine eigene Zeilensatz-Klasse angeben</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class MyRowset extends Zend_Db_Table_Rowset_Abstract
 {
     // ...Anpassungen
@@ -405,7 +405,7 @@ $bugs = new Bugs(array('rowsetClass' => 'MyRowset'));
 
         <example id="zend.db.table.rowset.extending.example-aggregate">
             <title>Eine Zeilensatz-Klasse mit einer neuen Methode</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class MyBugsRowset extends Zend_Db_Table_Rowset_Abstract
 {
     /**

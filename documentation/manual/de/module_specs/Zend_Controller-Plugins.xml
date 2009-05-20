@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.plugins" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Plugins</title>
@@ -87,7 +87,7 @@
             <classname>Zend_Controller_Plugin_Abstract</classname> ein und erweitert sie:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class MyPlugin extends Zend_Controller_Plugin_Abstract
 {
     // ...
@@ -118,7 +118,7 @@ class MyPlugin extends Zend_Controller_Plugin_Abstract
             wie ein Plugin in der Controllerkette verwendet werden kann:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class MyPlugin extends Zend_Controller_Plugin_Abstract
 {
     public function routeStartup(Zend_Controller_Request_Abstract $request)
@@ -172,7 +172,7 @@ $front->dispatch();
             folgende Ausgabe:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <p>routeStartup() aufgerufen</p>
 <p>routeShutdown() aufgerufen</p>
 <p>dispatchLoopStartup() aufgerufen</p>

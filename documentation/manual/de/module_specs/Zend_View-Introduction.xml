@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15316 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.view.introduction">
     <title>Einführung</title>
@@ -39,7 +39,7 @@
             so aussehen:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // verwende ein Modell, um die Daten der Bücher und Autoren zu erhalten
 $data = array(
     array(
@@ -81,7 +81,7 @@ echo $view->render('booklist.php');
             sehr einfaches View Skript wie folgt aussehen:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php if ($this->books): ?>
     <!-- Eine Tabelle mit einigen Büchern. -->
     <table>
@@ -128,7 +128,7 @@ echo $view->render('booklist.php');
                     und Filterpfad gesetzt wird. Es nimmt folgende Verzeichnisstruktur an:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 base/path/
     helpers/
     filters/
@@ -206,7 +206,7 @@ base/path/
                     Die Short Tags in der <code>.htaccess</code> Datei einschalten:
                 </para>
 
-                <programlisting role="apache"><![CDATA[
+                <programlisting language="apache"><![CDATA[
 php_value "short_open_tag" "on"
 ]]></programlisting>
 
@@ -223,7 +223,7 @@ php_value "short_open_tag" "on"
                     fly zu konvertieren:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $view->setUseStreamWrapper(true);
 ]]></programlisting>
 

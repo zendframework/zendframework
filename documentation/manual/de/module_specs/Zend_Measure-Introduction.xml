@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15215 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.measure.introduction">
 
@@ -23,7 +23,7 @@
             enthält. Konvertierungen sind nur für Einheiten des gleichen Typs möglich (Masse,
             Fläche, Temperatur, Beschleunigung, usw.), nicht zwischen verschiedenen Typen.
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('en');
 $unit = new Zend_Measure_Length(100, Zend_Measure_Length::METER, $locale);
 
@@ -50,7 +50,7 @@ echo $unit->convertTo(Zend_Measure_Length::YARD);
             Schreibweise <code>Length::METER</code> verwendet werden. Die Darstellungseinheit ist
             <code>m</code>.
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 echo Zend_Measure_Length::STANDARD;  // Ausgabe 'Length::METER'
 echo Zend_Measure_Length::KILOMETER; // Ausgabe 'Length::KILOMETER'
 

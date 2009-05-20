@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15428 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.ec2.keypairs">
     <title>Zend_Service_Amazon_Ec2: Schlüsselpaare</title>
@@ -18,7 +18,7 @@
             <code>create</code> gibt ein Array zurück das keyName, keyFingerprint und keyMaterial
             enthält.
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $ec2_kp = new Zend_Service_Amazon_Ec2_Keypair('aws_key','aws_secret_key');
 $return = $ec2_kp->create('my-new-key');
 ]]></programlisting>
@@ -34,7 +34,7 @@ $return = $ec2_kp->create('my-new-key');
         <para>
             <code>delete</code> gibt ein boolsches true oder false zurück.
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $ec2_kp = new Zend_Service_Amazon_Ec2_Keypair('aws_key','aws_secret_key');
 $return = $ec2_kp->delete('my-new-key');
 ]]></programlisting>
@@ -51,7 +51,7 @@ $return = $ec2_kp->delete('my-new-key');
         <para>
             <code>describe</code> gibt ein Array zurück das keyName und keyFingerprint enthält.
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $ec2_kp = new Zend_Service_Amazon_Ec2_Keypair('aws_key','aws_secret_key');
 $return = $ec2_kp->describe('my-new-key');
 ]]></programlisting>

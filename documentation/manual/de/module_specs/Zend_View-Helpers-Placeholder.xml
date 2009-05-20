@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.placeholder">
     <title>Platzhalter (PlaceHolder) Helfer</title>
@@ -21,7 +21,7 @@
             ausgegeben werden kann.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php $this->placeholder('foo')->set("Ein Text für später") ?>
 
 <?php
@@ -84,12 +84,12 @@
             </listitem>
         </itemizedlist>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <!-- Erstes View Skript -->
 <?php $this->placeholder('foo')->exchangeArray($this->data) ?>
 ]]></programlisting>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <!-- Späteres View Skript -->
 <?php
 $this->placeholder('foo')->setPrefix("<ul>\n    <li>")
@@ -111,7 +111,7 @@ $this->placeholder('foo')->setPrefix("<ul>\n    <li>")
             Eigenschaften oder als Array Schlüssel zugegriffen werden.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php $this->placeholder('foo')->bar = $this->data ?>
 <?php echo $this->placeholder('foo')->bar ?>
 
@@ -168,7 +168,7 @@ echo $foo['bar'];
             </listitem>
         </itemizedlist>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <!-- Standarderfassung: anhängen -->
 <?php $this->placeholder('foo')->captureStart();
 foreach ($this->data as $datum): ?>
@@ -182,7 +182,7 @@ foreach ($this->data as $datum): ?>
 <?php echo $this->placeholder('foo') ?>
 ]]></programlisting>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <!-- Erfassung zum Schlüssel -->
 <?php $this->placeholder('foo')->captureStart('SET', 'data');
 foreach ($this->data as $datum): ?>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15343 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.navigation.containers">
     <title>Container</title>
@@ -33,7 +33,7 @@
         <example id="zend.navigation.containers.creating.example.array">
             <title>Erstellt einen Container indem ein Array verwendet wird</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 /*
  * Erstellt einen Container von einem Array
  *
@@ -205,7 +205,7 @@ $container = new Zend_Navigation(array(
         <example id="zend.navigation.containers.creating.example.config">
             <title>Erstellung eines Containers indem ein Config Objekt erstellt wird</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 /* INHALT VON /path/to/navigation.xml:
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
@@ -408,7 +408,7 @@ $container = new Zend_Navigation($config);
         <example id="zend.navigation.containers.adding.example">
             <title>Hinzufügen von Seiten zu einem Container</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Container erstellen
 $container = new Zend_Navigation();
 
@@ -461,7 +461,7 @@ $container->setPages($pages);
         <example id="zend.navigation.containers.removing.example">
             <title>Seiten von einem Container entfernen</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $container = new Zend_Navigation(array(
     array(
         'label'  => 'Seite 1',
@@ -524,7 +524,7 @@ $container->removePages();      // Entfernt alle Seiten
         <example id="zend.navigation.containers.finding.example">
             <title>Seiten in einem Container finden</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $container = new Zend_Navigation(array(
     array(
         'label' => 'Seite 1',
@@ -621,7 +621,7 @@ $found = $container->findAllByController('index'); // Gibt Seite 2 und 3 zurück
         <example id="zend.navigation.containers.iterating.example">
             <title>Einen Container durchsuchen</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 /*
  * Erstellt einen Container von einem Array
  */
@@ -685,7 +685,7 @@ foreach ($it as $page) {
         <example id="zend.navigation.containers.other.example.toarray">
             <title>Einen Container in ein Array konvertieren</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $container = new Zend_Navigation(array(
     array(
         'label' => 'Seite 1',

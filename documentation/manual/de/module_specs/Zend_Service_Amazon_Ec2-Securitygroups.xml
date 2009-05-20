@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15434 -->
+<!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.ec2.securitygroups">
     <title>Zend_Service_Amazon_Ec2: Sicherheitsgruppen</title>
@@ -35,7 +35,7 @@
                 <code>create</code> gibt ein boolsches true oder false zurück
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $ec2_sg = new Zend_Service_Amazon_Ec2_Securitygroups('aws_key',
                                                      'aws_secret_key');
 $return = $ec2_sg->create('mygroup', 'my group description');
@@ -60,7 +60,7 @@ $return = $ec2_sg->create('mygroup', 'my group description');
                 Array enthält das alle Regeln dieser Sicherheitsgruppe enthält.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $ec2_sg = new Zend_Service_Amazon_Ec2_Securitygroups('aws_key',
                                                      'aws_secret_key');
 $return = $ec2_sg->describe('mygroup');
@@ -82,7 +82,7 @@ $return = $ec2_sg->describe('mygroup');
                 <code>delete</code> gibt ein boolsches true oder false zurück.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $ec2_sg = new Zend_Service_Amazon_Ec2_Securitygroups('aws_key',
                                                      'aws_secret_key');
 $return = $ec2_sg->delete('mygroup');
@@ -115,7 +115,7 @@ $return = $ec2_sg->delete('mygroup');
                 <code>authorizeIp</code> gibt ein boolsches true oder false zurück
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $ec2_sg = new Zend_Service_Amazon_Ec2_Securitygroups('aws_key',
                                                      'aws_secret_key');
 $return = $ec2_sg->authorizeIp('mygroup',
@@ -140,7 +140,7 @@ $return = $ec2_sg->authorizeIp('mygroup',
                 <code>authorizeGroup</code> gibt ein boolsches true oder false zurück.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $ec2_sg = new Zend_Service_Amazon_Ec2_Securitygroups('aws_key',
                                                      'aws_secret_key');
 $return = $ec2_sg->authorizeGroup('mygroup', 'securityGroupName', 'ownerId');
@@ -175,7 +175,7 @@ $return = $ec2_sg->authorizeGroup('mygroup', 'securityGroupName', 'ownerId');
                 <code>revokeIp</code> gibt ein boolsches true oder false zurück
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $ec2_sg = new Zend_Service_Amazon_Ec2_Securitygroups('aws_key',
                                                      'aws_secret_key');
 $return = $ec2_sg->revokeIp('mygroup',
@@ -202,7 +202,7 @@ $return = $ec2_sg->revokeIp('mygroup',
                 <code>revokeGroup</code> gibt ein boolsches true oder false zurück.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $ec2_sg = new Zend_Service_Amazon_Ec2_Securitygroups('aws_key',
                                                      'aws_secret_key');
 $return = $ec2_sg->revokeGroup('mygroup', 'securityGroupName', 'ownerId');

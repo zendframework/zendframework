@@ -19,5 +19,38 @@
             purpose.
         </para>
     </sect2>
+    <sect2 id="zend.service.amazon.ec2.staticmethods">
+        <title>Static Methods</title>
+        <para>
+            To make using the Ec2 class easier to use there are two static methods that can be
+            invoked from any of the Ec2 Elements.  The first static method is <code>setKeys</code>
+            which will defind you AWS Access Keys as default keys.  When you then create any new
+            object you don't need to pass in any keys to the constructor.
+        </para>
+        <example id="zend.service.amazon.ec2.staticmethods.setkeys">
+            <title>setKeys() Example</title>
+            <programlisting language="php"><![CDATA[
+Zend_Service_Amazon_Ec2_Ebs::setKeys('aws_key','aws_secret_key');
+]]></programlisting>
+        </example>
+        <para>
+            To set the region that you are working in you can call the <code>setRegion</code> to set which
+            Amazon Ec2 Region you are working in. Currently there is only two region available us-east-1
+            and eu-west-1.  If an invalid value is passed it will throw an exception stating that.
+        </para>
+        <example id="zend.service.amazon.ec2.staticmethods.setregion">
+            <title>setRegion() Example</title>
+            <programlisting language="php"><![CDATA[
+Zend_Service_Amazon_Ec2_Ebs::setRegion('us-east-1');
+]]></programlisting>
+        </example>
+        <note id="zend.service.amazon.ec2.staticmethods.setregion.note">
+            <title>Set Amazon Ec2 Region</title>
+            <para>
+                Alternativly you can set the region when you create each class as the third parameter in the
+                constructor method.
+            </para>
+        </note>
+    </sect2>
 
 </sect1>

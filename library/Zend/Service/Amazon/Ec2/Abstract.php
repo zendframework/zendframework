@@ -24,6 +24,8 @@ require_once 'Zend/Service/Amazon/Abstract.php';
 
 require_once 'Zend/Service/Amazon/Ec2/Response.php';
 
+require_once 'Zend/Service/Amazon/Ec2/Exception.php';
+
 /**
  * Provides the basic functionality to send a request to the Amazon Ec2 Query API
  *
@@ -46,9 +48,14 @@ abstract class Zend_Service_Amazon_Ec2_Abstract extends Zend_Service_Amazon_Abst
     const EC2_API_VERSION = '2008-12-01';
 
     /**
-     * Legacy parameter required by Ec2
+     * Signature Version
      */
-    const EC2_SIGNATURE_VERSION = '1';
+    const EC2_SIGNATURE_VERSION = '2';
+
+    /**
+     * Signature Encoding Method
+     */
+    const EC2_SIGNATURE_METHOD = 'HmacSHA256';
 
     /**
      * Period after which HTTP request will timeout in seconds
@@ -64,7 +71,7 @@ abstract class Zend_Service_Amazon_Ec2_Abstract extends Zend_Service_Amazon_Abst
      */
     protected function sendRequest(array $params = array())
     {
-        $url = 'https://' . self::EC2_ENDPOINT . '/';
+        $url = 'https://' . $this->_getRegion() . self::EC2_ENDPOINT . '/';
 
         $params = $this->addRequiredParameters($params);
 
@@ -118,8 +125,9 @@ abstract class Zend_Service_Amazon_Ec2_Abstract extends Zend_Service_Amazon_Abst
     {
         $parameters['AWSAccessKeyId']   = $this->_getAccessKey();
         $parameters['SignatureVersion'] = self::EC2_SIGNATURE_VERSION;
-        $parameters['Timestamp']        = gmdate('c');
+        $parameters['Expires']          = gmdate('c');
         $parameters['Version']          = self::EC2_API_VERSION;
+        $parameters['SignatureMethod']  = self::EC2_SIGNATURE_METHOD;
         $parameters['Signature']        = $this->signParameters($parameters);
 
         return $parameters;
@@ -147,17 +155,22 @@ abstract class Zend_Service_Amazon_Ec2_Abstract extends Zend_Service_Amazon_Abst
      */
     protected function signParameters(array $paramaters)
     {
-        $data = '';
+        $data = "POST\n";
+        $data .= $this->_getRegion() . self::EC2_ENDPOINT . "\n";
+        $data .= "/\n";
 
-        uksort($paramaters, 'strcasecmp');
+        uksort($paramaters, 'strcmp');
         unset($paramaters['Signature']);
 
+        $arrData = array();
         foreach($paramaters as $key => $value) {
-            $data .= $key . $value;
+            $arrData[] = $key . '=' . str_replace("%7E", "~", urlencode($value));
         }
 
+        $data .= implode('&', $arrData);
+
         require_once 'Zend/Crypt/Hmac.php';
-        $hmac = Zend_Crypt_Hmac::compute($this->_getSecretKey(), 'SHA1', $data, Zend_Crypt_Hmac::BINARY);
+        $hmac = Zend_Crypt_Hmac::compute($this->_getSecretKey(), 'SHA256', $data, Zend_Crypt_Hmac::BINARY);
 
         return base64_encode($hmac);
     }
@@ -181,7 +194,6 @@ abstract class Zend_Service_Amazon_Ec2_Abstract extends Zend_Service_Amazon_Abst
             $node    = $list->item(0);
             $code    = $xpath->evaluate('string(Code/text())', $node);
             $message = $xpath->evaluate('string(Message/text())', $node);
-            require_once 'Zend/Service/Amazon/Ec2/Exception.php';
             throw new Zend_Service_Amazon_Ec2_Exception($message, 0, $code);
         }
 

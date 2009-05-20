@@ -141,21 +141,15 @@ abstract class Zend_Tool_Framework_Loader_Abstract
 
         <para>
             Die _getFiles() Methode sollte ein Array von Dateien zurückgeben (absolute Pfade). Der
-            mit ZF ausgelieferte Loader  wird IncludePath Loader genannt.
-            
-            The _getFiles() method should return an array of files (absolute
-            paths). The built-in loader supplied with ZF is called the
-            IncludePath loader. By default, the Tooling framework will use an
-            include path based loader to find files that might include Providers
-            or Manifest Metadata objects.
-            Zend_Tool_Framework_Loader_IncludePathLoader, without any other
-            options, will search for files inside the include path that end in
-            Mainfest.php, Tool.php or Provider.php. Once found, they will be
-            tested (by the load() method of the
-            Zend_Tool_Framework_Loader_Abstract) to determine if they implement
-            any of the supported interfaces. If they do, an instance of the
-            found class is instantiated, and it is appended to the proper
-            repository.
+            mit ZF ausgelieferte Loader  wird IncludePath Loader genannt. Standardmäßig verwendet
+            das Tooling Framework einen Loader der auf dem Include Pfad basiert um Dateien zu
+            finden die Provider oder Manifest Metadaten Objekte enthalten können.
+            Zend_Tool_Framework_Loader_IncludePathLoader sucht, ohne irgendeine Option, nach
+            Dateien im Include Pfad die mit Mainfest.php, Tool.php oder Provider.php enden. Sobald
+            Sie gefunden wurden, werden Sie (durch die load() Methode von
+            Zend_Tool_Framework_Loader_Abstract) getestet um zu erkennen ob Sie irgendeines der
+            unterstützten Interfaces implementieren. Wenn Sie das tun, wird eine Instanz der
+            gefundenen Klasse instanziiert, und dann dem richtigen Repository angehängt.
         </para>
 
         <programlisting role="php"><![CDATA[

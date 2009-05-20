@@ -137,12 +137,12 @@
         </para>
 
         <para>
-            Dekoratoren implementieren nur <classname>Zend_Decorator_Interface</classname>. Das
+            Dekoratoren implementieren nur <classname>Zend_Form_Decorator_Interface</classname>. Das
             Interface spezifiziert folgendes:
         </para>
 
         <programlisting role="php"><![CDATA[
-interface Zend_Decorator_Interface
+interface Zend_Form_Decorator_Interface
 {
     public function __construct($options = null);
     public function setElement($element);
@@ -159,7 +159,7 @@ interface Zend_Decorator_Interface
 ]]></programlisting>
 
         <para>
-            Um es sich einfacher zu machen, kann man <classname>Zend_Decorator_Abstract</classname>
+            Um es sich einfacher zu machen, kann man <classname>Zend_Form_Decorator_Abstract</classname>
             erweitern, welches alle Methoden außer <code>render()</code> implementiert.
         </para>
 

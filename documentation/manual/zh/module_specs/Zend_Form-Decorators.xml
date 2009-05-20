@@ -89,11 +89,11 @@
         </para>
 
         <para>
-            装饰器只需要实现 <code>Zend_Decorator_Interface</code>。接口说明如下：
+            装饰器只需要实现 <code>Zend_Form_Decorator_Interface</code>。接口说明如下：
         </para>
 
         <programlisting role="php"><![CDATA[<?php
-interface Zend_Decorator_Interface
+interface Zend_Form_Decorator_Interface
 {
     public function __construct($options = null);
     public function setElement($element);
@@ -110,7 +110,7 @@ interface Zend_Decorator_Interface
 ?>]]></programlisting>
 
         <para>
-            要简化这个，可以继承 <code>Zend_Decorator_Abstract</code>，它实现了除 <code>render()</code> 之外的所有方法。
+            要简化这个，可以继承 <code>Zend_Form_Decorator_Abstract</code>，它实现了除 <code>render()</code> 之外的所有方法。
         </para>
 
         <para>

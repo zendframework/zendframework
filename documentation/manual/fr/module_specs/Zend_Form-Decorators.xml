@@ -138,12 +138,12 @@
 
         <para>
             Les décorateurs ont juste besoin d'implémenter l'interface
-            <classname>Zend_Decorator_Interface</classname>. Celle-ci spécifie les méthodes
+            <classname>Zend_Form_Decorator_Interface</classname>. Celle-ci spécifie les méthodes
             suivantes&#160;:
         </para>
 
         <programlisting language="php"><![CDATA[
-interface Zend_Decorator_Interface
+interface Zend_Form_Decorator_Interface
 {
     public function __construct($options = null);
     public function setElement($element);
@@ -161,7 +161,7 @@ interface Zend_Decorator_Interface
 
         <para>
             Pour vous simplifier la tâche, vous pourriez considérer le fait d'étendre
-            <classname>Zend_Decorator_Abstract</classname>, qui implémente toutes les méthodes de
+            <classname>Zend_Form_Decorator_Abstract</classname>, qui implémente toutes les méthodes de
             l'interface sauf <code>render()</code>.
         </para>
 

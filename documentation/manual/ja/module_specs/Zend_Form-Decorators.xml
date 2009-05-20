@@ -143,12 +143,12 @@
         </para>
 
         <para>
-            デコレータに必要なのは、<classname>Zend_Decorator_Interface</classname>
+            デコレータに必要なのは、<classname>Zend_Form_Decorator_Interface</classname>
             を実装することだけです。このインターフェイスの定義は次のようになります。
         </para>
 
         <programlisting role="php"><![CDATA[
-interface Zend_Decorator_Interface
+interface Zend_Form_Decorator_Interface
 {
     public function __construct($options = null);
     public function setElement($element);
@@ -165,7 +165,7 @@ interface Zend_Decorator_Interface
 ]]></programlisting>
 
         <para>
-            よりお手軽に作成するには、<classname>Zend_Decorator_Abstract</classname>
+            よりお手軽に作成するには、<classname>Zend_Form_Decorator_Abstract</classname>
             を継承したクラスを作成します。このクラスは、
             <code>render()</code> 以外のすべてのメソッドを実装しています。
         </para>

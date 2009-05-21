@@ -238,6 +238,11 @@ class Zend_Form_Decorator_ViewHelper extends Zend_Form_Decorator_Abstract
         $id            = $element->getId();
         $attribs['id'] = $id;
 
+        $helperObject  = $view->getHelper($helper);
+        if (method_exists($helperObject, 'setTranslator')) {
+            $helperObject->setTranslator($element->getTranslator());
+        }
+
         $elementContent = $view->$helper($name, $value, $attribs, $element->options);
         switch ($this->getPlacement()) {
             case self::APPEND:

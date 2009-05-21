@@ -260,6 +260,36 @@ class Zend_Form_Element_MultiselectTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @group ZF-5568
+     */
+    public function testOptGroupTranslationsShouldWorkAfterPopulatingElement()
+    {
+        $translations = array(
+            'ThisIsTheLabel'      => 'Optgroup label',
+            'ThisShouldNotShow'   => 'Foo Value',
+            'ThisShouldNeverShow' => 'Bar Value'
+        );
+        require_once 'Zend/Translate.php';
+        $translate = new Zend_Translate('array', $translations, 'en');
+        $translate->setLocale('en');
+
+        $options = array(
+            'ThisIsTheLabel' => array(
+                'foovalue' => 'ThisShouldNotShow',
+                'barvalue' => 'ThisShouldNeverShow',
+            ),
+        );
+
+        $this->element->setTranslator($translate)
+                      ->addMultiOptions($options);
+
+        $this->element->setValue('barValue');
+
+        $html = $this->element->render($this->getView());
+        $this->assertContains($translations['ThisIsTheLabel'], $html, $html);
+    }
+
+    /**
      * Used by test methods susceptible to ZF-2794, marks a test as incomplete
      *
      * @link   http://framework.zend.com/issues/browse/ZF-2794

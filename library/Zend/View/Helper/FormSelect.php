@@ -111,12 +111,16 @@ class Zend_View_Helper_FormSelect extends Zend_View_Helper_FormElement
                 . ">\n    ";
 
         // build the list of options
-        $list = array();
+        $list       = array();
+        $translator = $this->getTranslator();
         foreach ((array) $options as $opt_value => $opt_label) {
             if (is_array($opt_label)) {
                 $opt_disable = '';
                 if (is_array($disable) && in_array($opt_value, $disable)) {
                     $opt_disable = ' disabled="disabled"';
+                }
+                if (null !== $translator) {
+                    $opt_value = $translator->translate($opt_value);
                 }
                 $list[] = '<optgroup'
                         . $opt_disable

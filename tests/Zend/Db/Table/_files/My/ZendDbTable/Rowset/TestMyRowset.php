@@ -18,25 +18,23 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: TestMyRowset.php 12004 2008-10-18 14:29:41Z mikaelkael $
  */
 
 
 /**
- * @see Zend_Db_Table_Abstract
+ * @see Zend_Db_Table_Rowset_Abstract
  */
-require_once 'Zend/Db/Table/Abstract.php';
-
+require_once 'Zend/Db/Table/Rowset/Abstract.php';
 
 PHPUnit_Util_Filter::addFileToFilter(__FILE__);
 
-
-class Zend_Db_Table_TableSpecial extends Zend_Db_Table_Abstract
-{
-    // no configuration declared
-}
-
-class zfbugs_products extends Zend_Db_Table_Abstract
-{
-    // no configuration declared
-}
+/**
+ * @category   Zend
+ * @package    Zend_Db
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
+class My_ZendDbTable_Rowset_TestMyRowset extends Zend_Db_Table_Rowset_Abstract
+{}

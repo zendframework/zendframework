@@ -23,9 +23,13 @@
 
 
 /**
- * @see Zend_Db_Table_TableBugs
+ * require other test files needed, this will
+ * ensure that Zend_Loader::loadClass is not called
  */
-require_once 'Zend/Db/Table/TableBugs.php';
+require_once 'TableBugs.php';
+require_once 'TableBugsProductsCustom.php';
+require_once 'TableAccountsCustom.php';
+
 
 
 PHPUnit_Util_Filter::addFileToFilter(__FILE__);
@@ -38,33 +42,33 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__);
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Db_Table_TableBugsCustom extends Zend_Db_Table_TableBugs
+class My_ZendDbTable_TableBugsCustom extends My_ZendDbTable_TableBugs
 {
     public $isMetadataFromCache = false;
 
     protected $_metadataCacheInClass = false;
 
-    protected $_rowClass    = 'Zend_Db_Table_Row_TestMyRow';
-    protected $_rowsetClass = 'Zend_Db_Table_Rowset_TestMyRowset';
+    protected $_rowClass    = 'My_ZendDbTable_Row_TestMyRow';
+    protected $_rowsetClass = 'My_ZendDbTable_Rowset_TestMyRowset';
 
-    protected $_dependentTables = array('Zend_Db_Table_TableBugsProductsCustom');
+    protected $_dependentTables = array('My_ZendDbTable_TableBugsProductsCustom');
 
     protected $_referenceMap    = array(
         'Reporter' => array(
             'columns'           => array('reported_by'),
-            'refTableClass'     => 'Zend_Db_Table_TableAccountsCustom',
+            'refTableClass'     => 'My_ZendDbTable_TableAccountsCustom',
             'refColumns'        => array('account_name'),
             'onDelete'          => self::CASCADE,
             'onUpdate'          => self::CASCADE
         ),
         'Engineer' => array(
             'columns'           => 'assigned_to',
-            'refTableClass'     => 'Zend_Db_Table_TableAccountsCustom',
+            'refTableClass'     => 'My_ZendDbTable_TableAccountsCustom',
             'refColumns'        => 'account_name'
         ),
         'Verifier' => array(
             'columns'           => 'verified_by',
-            'refTableClass'     => 'Zend_Db_Table_TableAccountsCustom',
+            'refTableClass'     => 'My_ZendDbTable_TableAccountsCustom',
             'refColumns'        => 'account_name'
         )
     );

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework
  *
@@ -22,11 +23,21 @@
 
 
 /**
- * @see Zend_Db_Table_Row_Abstract
+ * @see My_ZendDbTable_TableAccounts
  */
-require_once 'Zend/Db/Table/Row/Abstract.php';
+require_once 'TableAccounts.php';
+
+
+/**
+ * require other test files needed, this will
+ * ensure that Zend_Loader::loadClass is not called
+ */
+require_once 'TableBugsCustom.php';
+
+
 
 PHPUnit_Util_Filter::addFileToFilter(__FILE__);
+
 
 /**
  * @category   Zend
@@ -35,7 +46,10 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__);
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Db_Table_Row_TestStandaloneRow extends Zend_Db_Table_Row_Abstract
+class My_ZendDbTable_TableAccountsCustom extends My_ZendDbTable_TableAccounts
 {
-    protected $_tableClass = 'Zend_Db_Table_TableBugs';
+    protected $_rowClass    = 'My_ZendDbTable_Row_TestMyRow';
+    protected $_rowsetClass = 'My_ZendDbTable_Rowset_TestMyRowset';
+
+    protected $_dependentTables = array('My_ZendDbTable_TableBugsCustom');
 }

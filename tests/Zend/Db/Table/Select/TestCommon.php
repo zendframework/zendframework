@@ -50,10 +50,10 @@ abstract class Zend_Db_Table_Select_TestCommon extends Zend_Db_Select_TestCommon
     {
         parent::setUp();
 
-        $this->_table['accounts']      = $this->_getTable('Zend_Db_Table_TableAccounts');
-        $this->_table['bugs']          = $this->_getTable('Zend_Db_Table_TableBugs');
-        $this->_table['bugs_products'] = $this->_getTable('Zend_Db_Table_TableBugsProducts');
-        $this->_table['products']      = $this->_getTable('Zend_Db_Table_TableProducts');
+        $this->_table['accounts']      = $this->_getTable('My_ZendDbTable_TableAccounts');
+        $this->_table['bugs']          = $this->_getTable('My_ZendDbTable_TableBugs');
+        $this->_table['bugs_products'] = $this->_getTable('My_ZendDbTable_TableBugsProducts');
+        $this->_table['products']      = $this->_getTable('My_ZendDbTable_TableProducts');
     }
 
     protected function _getTable($tableClass, $options = array())
@@ -196,7 +196,7 @@ abstract class Zend_Db_Table_Select_TestCommon extends Zend_Db_Select_TestCommon
         $table = $this->_getSelectTable('products');
         $select = $table->select();
 
-        $this->assertType('Zend_Db_Table_TableProducts', $select->getTable());
+        $this->assertType('My_ZendDbTable_Products', $select->getTable());
     }
     
     /**

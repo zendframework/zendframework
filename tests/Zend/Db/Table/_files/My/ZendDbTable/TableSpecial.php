@@ -31,15 +31,12 @@ require_once 'Zend/Db/Table/Abstract.php';
 PHPUnit_Util_Filter::addFileToFilter(__FILE__);
 
 
-/**
- * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
-class Zend_Db_Table_TableProducts extends Zend_Db_Table_Abstract
+class My_ZendDbTable_TableSpecial extends Zend_Db_Table_Abstract
 {
-    protected $_name = 'zfproducts';
-    protected $_dependentTables = array('Zend_Db_Table_TableBugsProducts');
+    // no configuration declared
+}
+
+class zfbugs_products extends Zend_Db_Table_Abstract
+{
+    // no configuration declared
 }

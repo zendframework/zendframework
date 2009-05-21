@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -18,18 +17,16 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: TestStandaloneRow.php 13552 2009-01-08 14:53:09Z norm2782 $
  */
 
 
 /**
- * @see Zend_Db_Table_Abstract
+ * @see Zend_Db_Table_Row_Abstract
  */
-require_once 'Zend/Db/Table/Abstract.php';
-
+require_once 'Zend/Db/Table/Row/Abstract.php';
 
 PHPUnit_Util_Filter::addFileToFilter(__FILE__);
-
 
 /**
  * @category   Zend
@@ -38,25 +35,7 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__);
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Db_Table_TableBugsProducts extends Zend_Db_Table_Abstract
+class My_ZendDbTable_Row_TestStandaloneRow extends Zend_Db_Table_Row_Abstract
 {
-    protected $_name    = 'zfbugs_products';
-
-    protected $_referenceMap    = array(
-        'Bug' => array(
-            'columns'           => 'bug_id', // Deliberate non-array value
-            'refTableClass'     => 'Zend_Db_Table_TableBugs',
-            'refColumns'        => array('bug_id'),
-            'onDelete'          => -1, // Deliberate false value
-            'onUpdate'          => -1 // Deliberate false value
-        ),
-        'Product' => array(
-            'columns'           => array('product_id'),
-            'refTableClass'     => 'Zend_Db_Table_TableProducts',
-            'refColumns'        => array('product_id'),
-            'onDelete'          => self::CASCADE,
-            'onUpdate'          => self::CASCADE
-        )
-    );
-
+    protected $_tableClass = 'My_ZendDbTable_TableBugs';
 }

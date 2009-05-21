@@ -257,7 +257,7 @@ abstract class Zend_Db_Table_Rowset_TestCommon extends Zend_Db_Table_TestSetup
         } catch (Zend_Exception $e) {
             $this->assertType('Zend_Db_Table_Row_Exception', $e,
                 'Expecting object of type Zend_Db_Table_Row_Exception, got '.get_class($e));
-            $this->assertEquals('The specified Table is of class Zend_Db_Table_TableProducts, expecting class to be instance of Zend_Db_Table_TableBugs', $e->getMessage());
+            $this->assertEquals('The specified Table is of class My_ZendDbTable_TableProducts, expecting class to be instance of My_ZendDbTable_TableBugs', $e->getMessage());
         }
         $this->assertFalse($connected);
     }

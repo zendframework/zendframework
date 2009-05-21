@@ -223,7 +223,7 @@ abstract class Zend_Db_TestUtil_Common
         'noprimarykey'  => 'zfnoprimarykey',
         'Documents'     => 'zfdocuments',
         'Price'         => 'zfprice',
-        'AltBugsProducts' => 'zfalt_bugs_products',
+        'AltBugsProducts' => 'zfalt_bugs_products'
     );
 
     public function getTableName($tableId)

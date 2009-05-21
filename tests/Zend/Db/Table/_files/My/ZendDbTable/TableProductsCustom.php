@@ -23,11 +23,14 @@
 
 
 /**
- * @see Zend_Db_Table_Row_Abstract
+ * require other test files needed, this will
+ * ensure that Zend_Loader::loadClass is not called
  */
-require_once 'Zend/Db/Table/Row/Abstract.php';
+require_once 'TableProducts.php';
+require_once 'TableBugsProductsCustom.php';
 
 PHPUnit_Util_Filter::addFileToFilter(__FILE__);
+
 
 /**
  * @category   Zend
@@ -36,37 +39,10 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__);
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Db_Table_Row_TestTableRow extends Zend_Db_Table_Row_Abstract
+class My_ZendDbTable_TableProductsCustom extends My_ZendDbTable_TableProducts
 {
-    protected $_tableClass = 'Zend_Db_Table_TableBugs';
+    protected $_rowClass    = 'My_ZendDbTable_Row_TestMyRow';
+    protected $_rowsetClass = 'My_ZendDbTable_Rowset_TestMyRowset';
 
-    public function setInvalidColumn()
-    {
-        $this->_transformColumn(array('bug_id'));
-    }
-
-    public function setTableToFail()
-    {
-        $this->_tableClass = 'foo';
-    }
-
-    public function setTableColsToFail()
-    {
-        $this->_data = array();
-    }
-
-    public function setPrimaryKeyToFail1()
-    {
-        $this->_primary = 'foo';
-    }
-
-    public function setPrimaryKeyToFail2()
-    {
-        $this->_primary = array();
-    }
-
-    protected function _postUpdate()
-    {
-        $this->bug_id = 0;
-    }
+    protected $_dependentTables = array('My_ZendDbTable_TableBugsProductsCustom');
 }

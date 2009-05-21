@@ -18,30 +18,16 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: TestMyRow.php 12004 2008-10-18 14:29:41Z mikaelkael $
  */
 
 
 /**
- * @see Zend_Db_Table_TableAccounts
+ * @see Zend_Db_Table_Row_Abstract
  */
-require_once 'Zend/Db/Table/TableAccounts.php';
-
-
-/**
- * @see Zend_Db_Table_Row_TestMyRow
- */
-require_once 'Zend/Db/Table/Row/TestMyRow.php';
-
-
-/**
- * @see Zend_Db_Table_Row_TestMyRowset
- */
-require_once 'Zend/Db/Table/Rowset/TestMyRowset.php';
-
+require_once 'Zend/Db/Table/Row/Abstract.php';
 
 PHPUnit_Util_Filter::addFileToFilter(__FILE__);
-
 
 /**
  * @category   Zend
@@ -50,10 +36,5 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__);
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Db_Table_TableAccountsCustom extends Zend_Db_Table_TableAccounts
-{
-    protected $_rowClass    = 'Zend_Db_Table_Row_TestMyRow';
-    protected $_rowsetClass = 'Zend_Db_Table_Rowset_TestMyRowset';
-
-    protected $_dependentTables = array('Zend_Db_Table_TableBugsCustom');
-}
+class My_ZendDbTable_Row_TestMyRow extends Zend_Db_Table_Row_Abstract
+{}

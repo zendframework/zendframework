@@ -65,7 +65,7 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
                         'sequence'        => $info['sequence'],
                         'unknownKey'      => 'testValue');
 
-        $table = new Zend_Db_Table_TableBugs($config);
+        $table = new My_ZendDbTable_TableBugs($config);
     }
 
     // ZF-2379
@@ -73,15 +73,15 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
     {
         $expectedReferences = array(
             'columns'           => array('reported_by'),
-            'refTableClass'     => 'Zend_Db_Table_TableAccounts',
+            'refTableClass'     => 'My_ZendDbTable_TableAccounts',
             'refColumns'        => array('account_name')
         );
 
         $products = $this->_table['products'];
         $products->addReference('Reporter', 'reported_by',
-                                'Zend_Db_Table_TableAccounts', 'account_name');
+                                'My_ZendDbTable_TableAccounts', 'account_name');
 
-        $references = $products->getReference('Zend_Db_Table_TableAccounts');
+        $references = $products->getReference('My_ZendDbTable_TableAccounts');
 
         $this->assertEquals($expectedReferences, $references);
     }
@@ -208,7 +208,8 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
 
     public function testTableImplicitName()
     {
-        Zend_Loader::loadClass('Zend_Db_Table_TableSpecial');
+        include_once '_files/My/ZendDbTable/TableSpecial.php';
+        
         // TableSpecial.php contains class bugs_products too.
         $table = new zfbugs_products(array('db' => $this->_db));
         $info = $table->info();
@@ -219,7 +220,7 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
     public function testTableOptionName()
     {
         $tableName = 'zfbugs';
-        $table = $this->_getTable('Zend_Db_Table_TableSpecial',
+        $table = $this->_getTable('My_ZendDbTable_TableSpecial',
             array('name' => $tableName)
         );
         $info = $table->info();
@@ -231,7 +232,7 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
     {
         $schemaName = $this->_util->getSchema();
         $tableName = 'zfbugs';
-        $table = $this->_getTable('Zend_Db_Table_TableSpecial',
+        $table = $this->_getTable('My_ZendDbTable_TableSpecial',
             array('name' => $tableName, 'schema' => $schemaName)
         );
         $info = $table->info();
@@ -241,7 +242,7 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
 
     public function testTableArgumentAdapter()
     {
-        $table = $this->_getTable('Zend_Db_Table_TableBugs',
+        $table = $this->_getTable('My_ZendDbTable_TableBugs',
             $this->_db);
         $db = $table->getAdapter();
         $this->assertSame($this->_db, $db);
@@ -249,7 +250,7 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
 
     public function testTableOptionAdapter()
     {
-        $table = $this->_getTable('Zend_Db_Table_TableBugs',
+        $table = $this->_getTable('My_ZendDbTable_TableBugs',
             array('db' => $this->_db));
         $db = $table->getAdapter();
         $this->assertSame($this->_db, $db);
@@ -257,12 +258,12 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
 
     public function testTableOptionRowClass()
     {
-        $table = $this->_getTable('Zend_Db_Table_TableBugs',
+        $table = $this->_getTable('My_ZendDbTable_TableBugs',
             array('rowClass' => 'stdClass'));
         $rowClass = $table->getRowClass();
         $this->assertEquals($rowClass, 'stdClass');
 
-        $table = $this->_getTable('Zend_Db_Table_TableBugs',
+        $table = $this->_getTable('My_ZendDbTable_TableBugs',
             array('rowsetClass' => 'stdClass'));
         $rowsetClass = $table->getRowsetClass();
         $this->assertEquals($rowsetClass, 'stdClass');
@@ -284,75 +285,75 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
     {
         $refReporter = array(
             'columns'           => array('reported_by'),
-            'refTableClass'     => 'Zend_Db_Table_TableAccounts',
+            'refTableClass'     => 'My_ZendDbTable_TableAccounts',
             'refColumns'        => array('account_id')
         );
         $refEngineer = array(
             'columns'           => array('assigned_to'),
-            'refTableClass'     => 'Zend_Db_Table_TableAccounts',
+            'refTableClass'     => 'My_ZendDbTable_TableAccounts',
             'refColumns'        => array('account_id')
         );
         $refMap = array(
             'Reporter' => $refReporter,
             'Engineer' => $refEngineer
         );
-        $table = $this->_getTable('Zend_Db_Table_TableBugs',
+        $table = $this->_getTable('My_ZendDbTable_TableBugs',
             array('referenceMap' => $refMap));
 
-        $this->assertEquals($refReporter, $table->getReference('Zend_Db_Table_TableAccounts'));
-        $this->assertEquals($refReporter, $table->getReference('Zend_Db_Table_TableAccounts', 'Reporter'));
-        $this->assertEquals($refEngineer, $table->getReference('Zend_Db_Table_TableAccounts', 'Engineer'));
+        $this->assertEquals($refReporter, $table->getReference('My_ZendDbTable_TableAccounts'));
+        $this->assertEquals($refReporter, $table->getReference('My_ZendDbTable_TableAccounts', 'Reporter'));
+        $this->assertEquals($refEngineer, $table->getReference('My_ZendDbTable_TableAccounts', 'Engineer'));
     }
 
     public function testTableExceptionOptionReferenceMap()
     {
         $refReporter = array(
             'columns'           => array('reported_by'),
-            'refTableClass'     => 'Zend_Db_Table_TableAccounts',
+            'refTableClass'     => 'My_ZendDbTable_TableAccounts',
             'refColumns'        => array('account_id')
         );
         $refEngineer = array(
             'columns'           => array('assigned_to'),
-            'refTableClass'     => 'Zend_Db_Table_TableAccounts',
+            'refTableClass'     => 'My_ZendDbTable_TableAccounts',
             'refColumns'        => array('account_id')
         );
         $refMap = array(
             'Reporter' => $refReporter,
             'Engineer' => $refEngineer
         );
-        $table = $this->_getTable('Zend_Db_Table_TableBugs',
+        $table = $this->_getTable('My_ZendDbTable_TableBugs',
             array('referenceMap' => $refMap));
 
         try {
-            $ref = $table->getReference('Zend_Db_Table_TableAccounts', 'Verifier');
+            $ref = $table->getReference('My_ZendDbTable_TableAccounts', 'Verifier');
             $this->fail('Expected to catch Zend_Db_Table_Exception');
         } catch (Zend_Exception $e) {
             $this->assertType('Zend_Db_Table_Exception', $e);
-            $this->assertEquals('No reference rule "Verifier" from table Zend_Db_Table_TableBugs to table Zend_Db_Table_TableAccounts', $e->getMessage());
+            $this->assertEquals('No reference rule "Verifier" from table My_ZendDbTable_TableBugs to table My_ZendDbTable_TableAccounts', $e->getMessage());
         }
 
         try {
-            $ref = $table->getReference('Zend_Db_Table_TableProducts');
+            $ref = $table->getReference('My_ZendDbTable_TableProducts');
             $this->fail('Expected to catch Zend_Db_Table_Exception');
         } catch (Zend_Exception $e) {
             $this->assertType('Zend_Db_Table_Exception', $e);
-            $this->assertEquals('No reference from table Zend_Db_Table_TableBugs to table Zend_Db_Table_TableProducts', $e->getMessage());
+            $this->assertEquals('No reference from table My_ZendDbTable_TableBugs to table My_ZendDbTable_TableProducts', $e->getMessage());
         }
 
         try {
-            $ref = $table->getReference('Zend_Db_Table_TableProducts', 'Product');
+            $ref = $table->getReference('My_ZendDbTable_TableProducts', 'Product');
             $this->fail('Expected to catch Zend_Db_Table_Exception');
         } catch (Zend_Exception $e) {
             $this->assertType('Zend_Db_Table_Exception', $e);
-            $this->assertEquals('No reference rule "Product" from table Zend_Db_Table_TableBugs to table Zend_Db_Table_TableProducts', $e->getMessage());
+            $this->assertEquals('No reference rule "Product" from table My_ZendDbTable_TableBugs to table My_ZendDbTable_TableProducts', $e->getMessage());
         }
 
         try {
-            $ref = $table->getReference('Zend_Db_Table_TableProducts', 'Reporter');
+            $ref = $table->getReference('My_ZendDbTable_TableProducts', 'Reporter');
             $this->fail('Expected to catch Zend_Db_Table_Exception');
         } catch (Zend_Exception $e) {
             $this->assertType('Zend_Db_Table_Exception', $e);
-            $this->assertEquals('Reference rule "Reporter" does not reference table Zend_Db_Table_TableProducts', $e->getMessage());
+            $this->assertEquals('Reference rule "Reporter" does not reference table My_ZendDbTable_TableProducts', $e->getMessage());
         }
 
     }
@@ -360,7 +361,7 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
     public function testTableOptionDependentTables()
     {
         $depTables = array('Zend_Db_Table_Foo');
-        $table = $this->_getTable('Zend_Db_Table_TableBugs',
+        $table = $this->_getTable('My_ZendDbTable_TableBugs',
             array('dependentTables' => $depTables));
         $this->assertEquals($depTables, $table->getDependentTables());
     }
@@ -384,11 +385,11 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
         /**
          * Don't use _getTable() method because it defaults the adapter
          */
-        Zend_Loader::loadClass('Zend_Db_Table_TableBugs');
+        Zend_Loader::loadClass('My_ZendDbTable_TableBugs');
         Zend_Db_Table_Abstract::setDefaultAdapter($this->_db);
         $db = Zend_Db_Table_Abstract::getDefaultAdapter();
         $this->assertSame($this->_db, $db);
-        $table = new Zend_Db_Table_TableBugs();
+        $table = new My_ZendDbTable_TableBugs();
         $db = $table->getAdapter();
         $this->assertSame($this->_db, $db);
     }
@@ -398,7 +399,7 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
         Zend_Db_Table_Abstract::setDefaultAdapter(null);
         $this->assertNull(Zend_Db_Table_Abstract::getDefaultAdapter());
         try {
-            $table = new Zend_Db_Table_TableBugs();
+            $table = new My_ZendDbTable_TableBugs();
             $this->fail('Zend_Db_Table_Exception should be thrown');
         }catch(Zend_Exception $e) {
          $this->assertType('Zend_Db_Table_Exception', $e,
@@ -420,12 +421,12 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
         /**
          * Don't use _getTable() method because it defaults the adapter
          */
-        Zend_Loader::loadClass('Zend_Db_Table_TableBugs');
+        Zend_Loader::loadClass('My_ZendDbTable_TableBugs');
         Zend_Registry::set('registered_db', $this->_db);
         Zend_Db_Table_Abstract::setDefaultAdapter('registered_db');
         $db = Zend_Db_Table_Abstract::getDefaultAdapter();
         $this->assertSame($this->_db, $db);
-        $table = new Zend_Db_Table_TableBugs();
+        $table = new My_ZendDbTable_TableBugs();
         $db = $table->getAdapter();
         $this->assertSame($this->_db, $db);
     }
@@ -454,7 +455,7 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
     public function testTableExceptionPrimaryKeyNotSpecified()
     {
         try {
-            $table = $this->_getTable('Zend_Db_Table_TableBugs', array('primary' => ''));
+            $table = $this->_getTable('My_ZendDbTable_TableBugs', array('primary' => ''));
             $primary = $table->info(Zend_Db_Table_Abstract::PRIMARY);
             $this->fail('Expected to catch Zend_Db_Table_Exception');
         } catch (Zend_Exception $e) {
@@ -468,7 +469,7 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
     public function testTableExceptionInvalidPrimaryKey()
     {
         try {
-            $table   = new Zend_Db_Table_TableBugs(array('primary' => 'foo'));
+            $table   = new My_ZendDbTable_TableBugs(array('primary' => 'foo'));
             $primary = $table->info(Zend_Db_Table_Abstract::PRIMARY);
             $this->fail('Expected to catch Zend_Db_Table_Exception');
         } catch (Zend_Exception $e) {
@@ -486,7 +487,7 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
         $tableName = $this->_util->getTableName('noprimarykey');
 
         try {
-            $table = $this->_getTable('Zend_Db_Table_TableSpecial',
+            $table = $this->_getTable('My_ZendDbTable_TableSpecial',
                 array('name' => $tableName));
             $primary = $table->info(Zend_Db_Table_Abstract::PRIMARY);
             $this->fail('Expected to catch Zend_Db_Table_Exception');
@@ -506,7 +507,7 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
         $tableName = $this->_util->getTableName('noprimarykey');
 
         try {
-            $table = $this->_getTable('Zend_Db_Table_TableSpecial',
+            $table = $this->_getTable('My_ZendDbTable_TableSpecial',
                 array('name' => $tableName, 'primary' => 'id'));
         } catch (Zend_Exception $e) {
             $this->fail('Expected to succeed without a Zend_Db_Table_Exception');
@@ -520,13 +521,13 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
 
     public function testTableAdapterException()
     {
-        Zend_Loader::loadClass('Zend_Db_Table_TableBugs');
+        Zend_Loader::loadClass('My_ZendDbTable_TableBugs');
 
         /**
          * options array points 'db' to integer scalar
          */
         try {
-            $table = new Zend_Db_Table_TableBugs(array('db' => 327));
+            $table = new My_ZendDbTable_TableBugs(array('db' => 327));
             $this->fail('Expected to catch Zend_Db_Table_Exception');
         } catch (Zend_Exception $e) {
             $this->assertType('Zend_Db_Table_Exception', $e,
@@ -539,7 +540,7 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
          */
         Zend_Registry::set('registered_db', 327);
         try {
-            $table = new Zend_Db_Table_TableBugs(array('db' => 'registered_db'));
+            $table = new My_ZendDbTable_TableBugs(array('db' => 'registered_db'));
             $this->fail('Expected to catch Zend_Db_Table_Exception');
         } catch (Zend_Exception $e) {
             $this->assertType('Zend_Db_Table_Exception', $e,
@@ -647,7 +648,7 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
         $schemaName = $this->_util->getSchema();
         $tableName = 'zfbugs';
         $identifier = join('.', array_filter(array($schemaName, $tableName)));
-        $table = $this->_getTable('Zend_Db_Table_TableSpecial',
+        $table = $this->_getTable('My_ZendDbTable_TableSpecial',
             array('name' => $tableName, 'schema' => $schemaName)
         );
 
@@ -673,7 +674,7 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
 
     public function testTableInsertSequence()
     {
-        $table = $this->_getTable('Zend_Db_Table_TableProducts',
+        $table = $this->_getTable('My_ZendDbTable_TableProducts',
             array(Zend_Db_Table_Abstract::SEQUENCE => 'zfproducts_seq'));
 
         $row = array (
@@ -815,7 +816,7 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
         $schemaName = $this->_util->getSchema();
         $tableName = 'zfbugs';
         $identifier = join('.', array_filter(array($schemaName, $tableName)));
-        $table = $this->_getTable('Zend_Db_Table_TableSpecial',
+        $table = $this->_getTable('My_ZendDbTable_TableSpecial',
             array('name' => $tableName, 'schema' => $schemaName)
         );
 
@@ -881,7 +882,7 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
         $schemaName = $this->_util->getSchema();
         $tableName = 'zfbugs';
         $identifier = join('.', array_filter(array($schemaName, $tableName)));
-        $table = $this->_getTable('Zend_Db_Table_TableSpecial',
+        $table = $this->_getTable('My_ZendDbTable_TableSpecial',
             array('name' => $tableName, 'schema' => $schemaName)
         );
 
@@ -1196,32 +1197,34 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
 
     public function testTableLoadsCustomRowClass()
     {
-        if (class_exists('Zend_Db_Table_Row_TestMyRow')) {
+        $this->_useMyIncludePath();
+        
+        if (class_exists('My_ZendDbTable_Row_TestMyRow')) {
             $this->markTestSkipped("Cannot test loading the custom Row class because it is already loaded");
             return;
         }
 
-        $this->assertFalse(class_exists('Zend_Db_Table_Row_TestMyRow', false),
+        $this->assertFalse(class_exists('My_ZendDbTable_Row_TestMyRow', false),
             'Expected TestMyRow class not to be loaded (#1)');
-        $this->assertFalse(class_exists('Zend_Db_Table_Rowset_TestMyRowset', false),
+        $this->assertFalse(class_exists('My_ZendDbTable_Rowset_TestMyRowset', false),
             'Expected TestMyRowset class not to be loaded (#1)');
 
         // instantiating the table does not creat a rowset
         // so the custom classes are not loaded yet
-        $bugsTable = $this->_getTable('Zend_Db_Table_TableBugsCustom');
+        $bugsTable = $this->_getTable('My_ZendDbTable_TableBugsCustom');
 
-        $this->assertFalse(class_exists('Zend_Db_Table_Row_TestMyRow', false),
+        $this->assertFalse(class_exists('My_ZendDbTable_Row_TestMyRow', false),
             'Expected TestMyRow class not to be loaded (#2)');
-        $this->assertFalse(class_exists('Zend_Db_Table_Rowset_TestMyRowset', false),
+        $this->assertFalse(class_exists('My_ZendDbTable_Rowset_TestMyRowset', false),
             'Expected TestMyRowset class not to be loaded (#2)');
-
+        
         // creating a rowset makes the table load the rowset class
         // and the rowset constructor loads the row class.
         $bugs = $bugsTable->fetchAll();
 
-        $this->assertTrue(class_exists('Zend_Db_Table_Row_TestMyRow', false),
+        $this->assertTrue(class_exists('My_ZendDbTable_Row_TestMyRow', false),
             'Expected TestMyRow class to be loaded (#3)');
-        $this->assertTrue(class_exists('Zend_Db_Table_Rowset_TestMyRowset', false),
+        $this->assertTrue(class_exists('My_ZendDbTable_Rowset_TestMyRowset', false),
             'Expected TestMyRowset class to be loaded (#3)');
     }
 
@@ -1258,7 +1261,7 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
         Zend_Registry::set('registered_metadata_cache', $cache);
 
         $tableBugsCustom1 = $this->_getTable(
-            'Zend_Db_Table_TableBugsCustom',
+            'My_ZendDbTable_TableBugsCustom',
             array('metadataCache' => 'registered_metadata_cache')
         );
 
@@ -1271,7 +1274,7 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
         Zend_Db_Table_Abstract::setDefaultMetadataCache($cache);
 
         try {
-            $bugsTable = $this->_getTable('Zend_Db_Table_TableBugs');
+            $bugsTable = $this->_getTable('My_ZendDbTable_TableBugs');
             $primary = $bugsTable->info(Zend_Db_Table_Abstract::PRIMARY);
             $this->fail('Expected to catch Zend_Db_Table_Exception');
         } catch (Zend_Exception $e) {
@@ -1293,7 +1296,7 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
         $cache = $this->_getCache();
 
         $tableBugsCustom1 = $this->_getTable(
-            'Zend_Db_Table_TableBugsCustom',
+            'My_ZendDbTable_TableBugsCustom',
             array('metadataCache' => $cache)
         );
 
@@ -1327,7 +1330,7 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
         $cache = $this->_getCache();
 
         $tableBugsCustom1 = $this->_getTable(
-            'Zend_Db_Table_TableBugsCustom',
+            'My_ZendDbTable_TableBugsCustom',
             array(
                 'metadataCache'        => $cache,
                 'metadataCacheInClass' => true,
@@ -1364,7 +1367,7 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
 
         Zend_Db_Table_Abstract::setDefaultMetadataCache($cache);
 
-        $tableBugsCustom1 = $this->_getTable('Zend_Db_Table_TableBugsCustom');
+        $tableBugsCustom1 = $this->_getTable('My_ZendDbTable_TableBugsCustom');
 
         $this->assertFalse($tableBugsCustom1->isMetadataFromCache);
 
@@ -1407,13 +1410,13 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
 
     public function testTableMetadataCacheException()
     {
-        Zend_Loader::loadClass('Zend_Db_Table_TableBugs');
+        Zend_Loader::loadClass('My_ZendDbTable_TableBugs');
 
         /**
          * options array points 'metadataCache' to integer scalar
          */
         try {
-            $table = new Zend_Db_Table_TableBugs(array('metadataCache' => 327));
+            $table = new My_ZendDbTable_TableBugs(array('metadataCache' => 327));
             $this->fail('Expected to catch Zend_Db_Table_Exception');
         } catch (Zend_Exception $e) {
             $this->assertType('Zend_Db_Table_Exception', $e,
@@ -1426,7 +1429,7 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
          */
         Zend_Registry::set('registered_metadata_cache', 327);
         try {
-            $table = new Zend_Db_Table_TableBugs(array('metadataCache' => 'registered_metadata_cache'));
+            $table = new My_ZendDbTable_TableBugs(array('metadataCache' => 'registered_metadata_cache'));
             $this->fail('Expected to catch Zend_Db_Table_Exception');
         } catch (Zend_Exception $e) {
             $this->assertType('Zend_Db_Table_Exception', $e,
@@ -1439,12 +1442,12 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
     {
         $table = $this->_table['products'];
         $row1 = $table->find(1)->current();
-        $rows1 = $row1->findManyToManyRowset('Zend_Db_Table_TableBugs', 'Zend_Db_Table_TableBugsProducts');
+        $rows1 = $row1->findManyToManyRowset('My_ZendDbTable_TableBugs', 'My_ZendDbTable_TableBugsProducts');
 
         $product_id = $this->_db->foldCase('product_id');
         $row1->$product_id = 999999;
         $row1->save();
-        $rows2 = $row1->findManyToManyRowset('Zend_Db_Table_TableBugs', 'Zend_Db_Table_TableBugsProducts');
+        $rows2 = $row1->findManyToManyRowset('My_ZendDbTable_TableBugs', 'My_ZendDbTable_TableBugsProducts');
 
         $this->assertEquals(999999, $row1->$product_id);
         $this->assertEquals(count($rows1), count($rows2));
@@ -1505,7 +1508,7 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
          */
         require_once 'Zend/Cache.php';
 
-        $folder = dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files';
+        $folder = dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'cachefiles';
 
         $frontendOptions = array(
             'automatic_serialization' => true
@@ -1535,7 +1538,7 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
          */
         require_once 'Zend/Cache.php';
 
-        $folder = dirname(__FILE__) . DIRECTORY_SEPARATOR . '_nofiles';
+        $folder = dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'nofiles';
         if (!file_exists($folder)) {
             mkdir($folder, 0777);
         }

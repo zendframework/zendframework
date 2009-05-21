@@ -23,21 +23,11 @@
 
 
 /**
- * @see Zend_Db_Table_TableBugsProducts
+ * require other test files needed, this will
+ * ensure that Zend_Loader::loadClass is not called
  */
-require_once 'Zend/Db/Table/TableBugsProducts.php';
-
-
-/**
- * @see Zend_Db_Table_Row_TestMyRow
- */
-require_once 'Zend/Db/Table/Row/TestMyRow.php';
-
-
-/**
- * @see Zend_Db_Table_Row_TestMyRowset
- */
-require_once 'Zend/Db/Table/Rowset/TestMyRowset.php';
+require_once 'TableBugsProducts.php';
+require_once 'TableBugsCustom.php';
 
 
 PHPUnit_Util_Filter::addFileToFilter(__FILE__);
@@ -50,22 +40,22 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__);
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Db_Table_TableBugsProductsCustom extends Zend_Db_Table_TableBugsProducts
+class My_ZendDbTable_TableBugsProductsCustom extends My_ZendDbTable_TableBugsProducts
 {
-    protected $_rowClass    = 'Zend_Db_Table_Row_TestMyRow';
-    protected $_rowsetClass = 'Zend_Db_Table_Rowset_TestMyRowset';
+    protected $_rowClass    = 'My_ZendDbTable_Row_TestMyRow';
+    protected $_rowsetClass = 'My_ZendDbTable_Rowset_TestMyRowset';
 
     protected $_referenceMap    = array(
         'Bug' => array(
             'columns'           => 'bug_id',
-            'refTableClass'     => 'Zend_Db_Table_TableBugsCustom',
+            'refTableClass'     => 'My_ZendDbTable_TableBugsCustom',
             'refColumns'        => 'bug_id',
             'onDelete'          => self::CASCADE,
             'onUpdate'          => self::CASCADE
         ),
         'Product' => array(
             'columns'           => 'product_id',
-            'refTableClass'     => 'Zend_Db_Table_TableProductsCustom',
+            'refTableClass'     => 'My_ZendDbTable_TableProductsCustom',
             'refColumns'        => 'product_id',
             'onDelete'          => 'anything but self::CASCADE',
             'onUpdate'          => 'anything but self::CASCADE'

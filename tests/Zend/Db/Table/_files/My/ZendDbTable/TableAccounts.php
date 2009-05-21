@@ -27,6 +27,12 @@
  */
 require_once 'Zend/Db/Table/Abstract.php';
 
+/**
+ * require other test files needed, this will
+ * ensure that Zend_Loader::loadClass is not called
+ */
+require_once 'TableBugs.php';
+
 
 PHPUnit_Util_Filter::addFileToFilter(__FILE__);
 
@@ -38,30 +44,8 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__);
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Db_Table_TableBugs extends Zend_Db_Table_Abstract
+class My_ZendDbTable_TableAccounts extends Zend_Db_Table_Abstract
 {
-
-    protected $_name = 'zfbugs';
-    protected $_primary = 'bug_id'; // Deliberate non-array value
-
-    protected $_dependentTables = array('Zend_Db_Table_TableBugsProducts');
-
-    protected $_referenceMap    = array(
-        'Reporter' => array(
-            'columns'           => array('reported_by'),
-            'refTableClass'     => 'Zend_Db_Table_TableAccounts',
-            'refColumns'        => array('account_name')
-        ),
-        'Engineer' => array(
-            'columns'           => array('assigned_to'),
-            'refTableClass'     => 'Zend_Db_Table_TableAccounts',
-            'refColumns'        => array('account_name')
-        ),
-        'Verifier' => array(
-            'columns'           => array('verified_by'),
-            'refTableClass'     => 'Zend_Db_Table_TableAccounts',
-            'refColumns'        => array('account_name')
-        )
-    );
-
+    protected $_name = 'zfaccounts';
+    protected $_dependentTables = array('My_ZendDbTable_TableBugs');
 }

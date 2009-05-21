@@ -831,12 +831,19 @@ class Zend_Filter_Input
                 $data[$field] = $this->_data[$field];
             } else if (isset($validatorRule[self::DEFAULT_VALUE])) {
                 /** @todo according to this code default value can't be an array. It has to be reviewed */
-            	if (is_array($validatorRule[self::DEFAULT_VALUE])) {
-                    if (isset($validatorRule[self::DEFAULT_VALUE][$key])) {
-                        $data[$field] = $validatorRule[self::DEFAULT_VALUE][$key];
-                    }
-                } else {
+            	if (!is_array($validatorRule[self::DEFAULT_VALUE])) {
+            		// Default value is a scalar
                     $data[$field] = $validatorRule[self::DEFAULT_VALUE];
+                } else {
+                	// Default value is an array. Search for corresponding key
+            		if (isset($validatorRule[self::DEFAULT_VALUE][$key])) {
+                        $data[$field] = $validatorRule[self::DEFAULT_VALUE][$key];
+                    } else if ($validatorRule[self::PRESENCE] == self::PRESENCE_REQUIRED) {
+                    	// Default value array is provided, but it doesn't have an entry for current field
+                    	// and presence is required
+                        $this->_missingFields[$validatorRule[self::RULE]][] =
+                           $this->_getMissingMessage($validatorRule[self::RULE], $field);
+                    }
                 }
             } else if ($validatorRule[self::PRESENCE] == self::PRESENCE_REQUIRED) {
                 $this->_missingFields[$validatorRule[self::RULE]][] =

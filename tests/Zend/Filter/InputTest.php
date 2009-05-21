@@ -659,6 +659,30 @@ class Zend_Filter_InputTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('field8default', $input->field8, 'Expected field8 to be non-null');
     }
 
+    /**
+     * @group ZF-6761
+     */
+    public function testValidatorMissingDefaults()
+    {
+        $validators = array(
+            'rule1'   => array('presence' => 'required',
+                               'fields'   => array('field1', 'field2'),
+                               'default'  => array('field1default'))
+        );
+        $data = array();
+        $input = new Zend_Filter_Input(null, $validators, $data);
+
+        $this->assertTrue($input->hasMissing(), 'Expected hasMissing() to return true');
+        $this->assertFalse($input->hasInvalid(), 'Expected hasInvalid() to return false');
+        $this->assertFalse($input->hasUnknown(), 'Expected hasUnknown() to return false');
+        $this->assertFalse($input->hasValid(), 'Expected hasValid() to return false');
+
+        $missing = $input->getMissing();
+        $this->assertType('array', $missing);
+        $this->assertEquals(array('rule1'), array_keys($missing));
+        $this->assertEquals(array("Field 'field2' is required by rule 'rule1', but the field is missing"), $missing['rule1']);
+    }
+
     public function testValidatorDefaultDoesNotOverwriteData()
     {
         $validators = array(

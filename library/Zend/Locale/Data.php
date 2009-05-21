@@ -800,6 +800,13 @@ class Zend_Locale_Data
                 }
                 break;
 
+            case 'postaltoterritory':
+                $_temp = self::_getFile('postalCodeData', '/supplementalData/postalCodeData/postCodeRegex', 'territoryId');
+                foreach ($_temp as $key => $keyvalue) {
+                    $temp += self::_getFile('postalCodeData', '/supplementalData/postalCodeData/postCodeRegex[@territoryId=\'' . $key . '\']', 'territoryId');
+                }
+                break;
+
             default :
                 require_once 'Zend/Locale/Exception.php';
                 throw new Zend_Locale_Exception("Unknown list ($path) for parsing locale data.");
@@ -865,10 +872,6 @@ class Zend_Locale_Data
 
             case 'key':
                 $temp = self::_getFile($locale, '/ldml/localeDisplayNames/keys/key[@type=\'' . $value . '\']', 'type');
-                break;
-
-            case 'datechars':
-                $temp = self::_getFile($locale, '/ldml/dates/localizedPatternChars', '', 'chars');
                 break;
 
             case 'defaultcalendar':
@@ -1239,6 +1242,10 @@ class Zend_Locale_Data
 
             case 'territorytoalpha3':
                 $temp = self::_getFile('supplementalData', '/supplementalData/codeMappings/territoryCodes[@alpha3=\''.$value.'\']', 'type', $value);
+                break;
+
+            case 'postaltoterritory':
+                $temp = self::_getFile('postalCodeData', '/supplementalData/postalCodeData/postCodeRegex[@territoryId=\'' . $value . '\']', 'territoryId');
                 break;
 
             default :

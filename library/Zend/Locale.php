@@ -538,9 +538,11 @@ class Zend_Locale
      *
      * @param  string|Zend_Locale $locale (Optional) Locale for language translation
      * @return array
+     * @deprecated
      */
     public static function getLanguageTranslationList($locale = null)
     {
+        trigger_error("The method getLanguageTranslationList is deprecated. Use getTranslationList('language', $locale) instead", E_USER_NOTICE);
         return self::getTranslationList('language', $locale);
     }
 
@@ -549,9 +551,11 @@ class Zend_Locale
      *
      * @param  string|Zend_Locale $locale (Optional) Locale for script translation
      * @return array
+     * @deprecated
      */
     public static function getScriptTranslationList($locale = null)
     {
+        trigger_error("The method getScriptTranslationList is deprecated. Use getTranslationList('script', $locale) instead", E_USER_NOTICE);
         return self::getTranslationList('script', $locale);
     }
 
@@ -560,9 +564,11 @@ class Zend_Locale
      *
      * @param  string|Zend_Locale $locale (Optional) Locale for country translation
      * @return array
+     * @deprecated
      */
     public static function getCountryTranslationList($locale = null)
     {
+        trigger_error("The method getCountryTranslationList is deprecated. Use getTranslationList('territory', $locale, 2) instead", E_USER_NOTICE);
         return self::getTranslationList('territory', $locale, 2);
     }
 
@@ -572,9 +578,11 @@ class Zend_Locale
      *
      * @param  string|Zend_Locale $locale (Optional) Locale for territory translation
      * @return array
+     * @deprecated
      */
     public static function getTerritoryTranslationList($locale = null)
     {
+        trigger_error("The method getTerritoryTranslationList is deprecated. Use getTranslationList('territory', $locale, 1) instead", E_USER_NOTICE);
         return self::getTranslationList('territory', $locale, 1);
     }
 
@@ -605,9 +613,11 @@ class Zend_Locale
      * @param  string $value  Name to get detailed information about
      * @param  string $locale (Optional) Locale for language translation
      * @return array
+     * @deprecated
      */
     public static function getLanguageTranslation($value, $locale = null)
     {
+        trigger_error("The method getLanguageTranslation is deprecated. Use getTranslation($value, 'language', $locale) instead", E_USER_NOTICE);
         return self::getTranslation($value, 'language', $locale);
     }
 
@@ -617,9 +627,11 @@ class Zend_Locale
      * @param  string $value  Name to get detailed information about
      * @param  string $locale (Optional) locale for script translation
      * @return array
+     * @deprecated
      */
     public static function getScriptTranslation($value, $locale = null)
     {
+        trigger_error("The method getScriptTranslation is deprecated. Use getTranslation($value, 'script', $locale) instead", E_USER_NOTICE);
         return self::getTranslation($value, 'script', $locale);
     }
 
@@ -629,9 +641,11 @@ class Zend_Locale
      * @param  string             $value  Name to get detailed information about
      * @param  string|Zend_Locale $locale (Optional) Locale for country translation
      * @return array
+     * @deprecated
      */
     public static function getCountryTranslation($value, $locale = null)
     {
+        trigger_error("The method getCountryTranslation is deprecated. Use getTranslation($value, 'country', $locale) instead", E_USER_NOTICE);
         return self::getTranslation($value, 'country', $locale);
     }
 
@@ -642,9 +656,11 @@ class Zend_Locale
      * @param  string             $value  Name to get detailed information about
      * @param  string|Zend_Locale $locale (Optional) Locale for territory translation
      * @return array
+     * @deprecated
      */
     public static function getTerritoryTranslation($value, $locale = null)
     {
+        trigger_error("The method getTerritoryTranslation is deprecated. Use getTranslation($value, 'territory', $locale) instead", E_USER_NOTICE);
         return self::getTranslation($value, 'territory', $locale);
     }
 

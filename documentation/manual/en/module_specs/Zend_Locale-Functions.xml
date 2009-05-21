@@ -230,14 +230,12 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                     <row>
                         <entry><emphasis>Language</emphasis></entry>
                         <entry>Returns a localized list of all languages. The language part of the locale
-                            is returned as key and the translation as value. For your convenience use the
-                            <code>getLanguageTranslationList()</code> method</entry>
+                            is returned as key and the translation as value</entry>
                     </row>
                     <row>
                         <entry><emphasis>Script</emphasis></entry>
                         <entry>Returns a localized list of all scripts. The script is returned as key and the
-                            translation as value. For your convenience use the
-                            <code>getScriptTranslationList()</code> method</entry>
+                            translation as value</entry>
                     </row>
                     <row>
                         <entry><emphasis>Territory</emphasis></entry>
@@ -246,10 +244,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             use '1' as value. To get only countries use '2' as value. The country part of
                             the locale is used as key where applicable. In the other case the official ISO
                             code for this territory is used. The translated territory is returned as value.
-                            For your convenience use the <code>getCountryTranslationList()</code> method
-                            to receive all countries and the <code>getTerritoryTranslationList()</code>
-                            method to receive all territories without countries. When you omit the value
-                            you will get a list with both.</entry>
+                            When you omit the value you will get a list with both.</entry>
                     </row>
                     <row>
                         <entry><emphasis>Variant</emphasis></entry>
@@ -568,6 +563,12 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             character code is used as array key and the territory (region) as array value
                         </entry>
                     </row>
+                    <row>
+                        <entry><emphasis>PostalToTerritory</emphasis></entry>
+                        <entry>Returns a list of territories with a regex for postal codes which are
+                            included within that territory. The ISO territory code ('territory') is used as
+                            array key and the regex as array value.</entry>
+                    </row>
                 </tbody>
             </tgroup>
         </table>
@@ -603,22 +604,19 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                     <row>
                         <entry><emphasis>Language</emphasis></entry>
                         <entry>Returns a translation for a language. To select the wished translation
-                            you must give the language code as value. For your convenience use the
-                            <code>getLanguageTranslation($value)</code> method</entry>
+                            you must give the language code as value</entry>
                     </row>
                     <row>
                         <entry><emphasis>Script</emphasis></entry>
                         <entry>Returns a translation for a script. To select the wished translation you
-                            must give the script code as value. For your convenience use the
-                            <code>getScriptTranslation($value)</code> method</entry>
+                            must give the script code as value</entry>
                     </row>
                     <row>
                         <entry><emphasis>Territory</emphasis> or
                             <emphasis>Country</emphasis></entry>
                         <entry>Returns a translation for a territory. This can be countries, continents
                             and territories. To select the wished variant you must give the territory
-                            code as value. For your convenience use the
-                            <code>getCountryTranslation($value)</code> method.</entry>
+                            code as value</entry>
                     </row>
                     <row>
                         <entry><emphasis>Variant</emphasis></entry>
@@ -630,11 +628,6 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry>Returns translation for a known keys. This keys are generic values used
                             in translation. These are normally calendar, collation and currency. To
                             select the wished key you must give the key code as value</entry>
-                    </row>
-                    <row>
-                        <entry><emphasis>DateChars</emphasis></entry>
-                        <entry>Returns a character table which contains all characters used when displaying
-                            dates</entry>
                     </row>
                     <row>
                         <entry><emphasis>DefaultCalendar</emphasis></entry>
@@ -945,6 +938,13 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                     <row>
                         <entry><emphasis>TerritoryToAlpha3</emphasis></entry>
                         <entry>Returns the territory (region) for a 3 sign character code</entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>PostalToTerritory</emphasis></entry>
+                        <entry>
+                            Returns the a regex for postal codes for a given territory. The
+                            territory has to be given as ISO4217 string for example '001' for
+                            world</entry>
                     </row>
                 </tbody>
             </tgroup>

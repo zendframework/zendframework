@@ -11,6 +11,69 @@
         use the new API.
     </para>
 
+    <sect2 id="zend.locale.migration.fromoneeighttoonenine">
+        <title>Migrating from 1.8 to 1.9 or newer</title>
+        <sect3 id="zend.locale.migration.fromoneeighttoonenine.depreciated">
+            <title>Depreciated methods</title>
+
+            <para>
+                Some specialized translation methods have been depreciated because they duplicate
+                existing behaviour. Note that the old methods will still work, but a user notice is
+                triggered which describes the new call. The methods will be erased with 2.0.
+                See the following list for old and new method call.
+            </para>
+
+            <table id="zend.locale.migration.fromoneeighttoonenine.depreciated.table-1">
+
+                <title>List of measurement types</title>
+
+                <tgroup cols="2">
+                    <thead>
+                        <row>
+                            <entry>Old call</entry>
+                            <entry>New call</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry>getLanguageTranslationList($locale)</entry>
+                            <entry>getTranslationList('language', $locale)</entry>
+                        </row>
+                        <row>
+                            <entry>getScriptTranslationList($locale)</entry>
+                            <entry>getTranslationList('script', $locale)</entry>
+                        </row>
+                        <row>
+                            <entry>getCountryTranslationList($locale)</entry>
+                            <entry>getTranslationList('territory', $locale, 2)</entry>
+                        </row>
+                        <row>
+                            <entry>getTerritoryTranslationList($locale)</entry>
+                            <entry>getTranslationList('territory', $locale, 1)</entry>
+                        </row>
+                        <row>
+                            <entry>getLanguageTranslation($value, $locale)</entry>
+                            <entry>getTranslation($value, 'language', $locale)</entry>
+                        </row>
+                        <row>
+                            <entry>getScriptTranslation($value, $locale)</entry>
+                            <entry>getTranslation($value, 'script', $locale)</entry>
+                        </row>
+                        <row>
+                            <entry>getCountryTranslation($value, $locale)</entry>
+                            <entry>getTranslation($value, 'country', $locale)</entry>
+                        </row>
+                        <row>
+                            <entry>getTerritoryTranslation($value, $locale)</entry>
+                            <entry>getTranslation($value, 'territory', $locale)</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+
+        </sect3>
+    </sect2>
+
     <sect2 id="zend.locale.migration.fromonesixtooneseven">
         <title>Migrating from 1.6 to 1.7 or newer</title>
         <sect3 id="zend.locale.migration.fromonesixtooneseven.islocale">

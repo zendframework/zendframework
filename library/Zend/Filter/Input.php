@@ -855,6 +855,33 @@ class Zend_Filter_Input
          * Evaluate the inputs against the validator chain.
          */
         if (count((array) $validatorRule[self::FIELDS]) > 1) {
+        	if (!$validatorRule[self::ALLOW_EMPTY]) {
+        		$emptyFieldsFound = false;
+        		$errorsList       = array();
+        		$messages         = array();
+
+        		foreach ($data as $fieldKey => $field) {
+                	$notEmptyValidator = $this->_getValidator('NotEmpty');
+                	$notEmptyValidator->setMessage($this->_getNotEmptyMessage($validatorRule[self::RULE], $fieldKey));
+
+                	if (!$notEmptyValidator->isValid($field)) {
+                		foreach ($notEmptyValidator->getMessages() as $messageKey => $message) {
+                			if (!isset($messages[$messageKey])) {
+                				$messages[$messageKey] = $message;
+                			} else {
+                				$messages[] = $message;
+                			}
+                		}
+                        $errorsList[] = $notEmptyValidator->getErrors();
+                        $emptyFieldsFound = true;
+                	}
+                }
+                if ($emptyFieldsFound) {
+                	$this->_invalidMessages[$validatorRule[self::RULE]] = $messages;
+                    $this->_invalidErrors[$validatorRule[self::RULE]]   = array_unique(call_user_func_array('array_merge', $errorsList));
+                    return;
+                }
+            }
         	if (!$validatorRule[self::VALIDATOR_CHAIN]->isValid($data)) {
         		$this->_invalidMessages[$validatorRule[self::RULE]] = $validatorRule[self::VALIDATOR_CHAIN]->getMessages();
         		$this->_invalidErrors[$validatorRule[self::RULE]] = $validatorRule[self::VALIDATOR_CHAIN]->getErrors();

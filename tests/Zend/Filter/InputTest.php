@@ -417,6 +417,62 @@ class Zend_Filter_InputTest extends PHPUnit_Framework_TestCase
             current($messages['rule2']));
     }
 
+    /**
+     * @group ZF-6711
+     *
+     */
+    public function testValidatorMultiFieldAllowEmptyProcessing()
+    {
+        $data = array(
+            'password1' => 'EREIAMJH',
+            'password2' => 'EREIAMJH',
+            'password3' => '',
+            'password4' => ''
+        );
+        $validators = array(
+            'rule1' => array(
+                'StringEquals',
+                'fields' => array('password1', 'password2')
+            ),
+            'rule2' => array(
+                Zend_Filter_Input::ALLOW_EMPTY => false,
+                'StringEquals',
+                'fields' => array('password1', 'password3')
+            ),
+            'rule3' => array(
+                Zend_Filter_Input::ALLOW_EMPTY => false,
+                'StringEquals',
+                'fields' => array('password3', 'password4')
+            )
+        );
+        $options = array(
+            Zend_Filter_Input::INPUT_NAMESPACE => 'TestNamespace'
+        );
+
+        $ip = get_include_path();
+        $dir = dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files';
+        $newIp = $dir . PATH_SEPARATOR . $ip;
+        set_include_path($newIp);
+
+        $input = new Zend_Filter_Input(null, $validators, $data, $options);
+
+        $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
+        $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
+        $this->assertFalse($input->hasUnknown(), 'Expected hasUnknown() to return false');
+        $this->assertTrue($input->hasValid(), 'Expected hasValid() to return true');
+
+        set_include_path($ip);
+        $messages = $input->getMessages();
+        $this->assertType('array', $messages);
+        $this->assertEquals(array('rule2', 'rule3'), array_keys($messages));
+        $this->assertEquals(array('isEmpty' => "You must give a non-empty value for field 'password3'"),
+                            $messages['rule2']);
+        $this->assertEquals(array('isEmpty' => "You must give a non-empty value for field 'password3'",
+                                          0 => "You must give a non-empty value for field 'password4'"
+                                 ),
+                            $messages['rule3']);
+    }
+
     public function testValidatorBreakChain()
     {
         $data = array(

@@ -23,7 +23,7 @@ require_once 'Zend/Translate/Adapter/Array.php';
  * @package    Zend_View
  * @subpackage UnitTests
  */
-class Zend_View_Helper_TranslateTest extends PHPUnit_Framework_TestCase 
+class Zend_View_Helper_TranslateTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @var Zend_View_Helper_Translate
@@ -195,12 +195,12 @@ class Zend_View_Helper_TranslateTest extends PHPUnit_Framework_TestCase
 
     public function testLocalTranslationObjectIsPreferredOverRegistry()
     {
-        $transReg = new Zend_Translate('array', array());
+        $transReg = new Zend_Translate('array', array('one' => 'eins'));
         Zend_Registry::set('Zend_Translate', $transReg);
 
         $this->assertSame($transReg->getAdapter(), $this->helper->getTranslator());
 
-        $transLoc = new Zend_Translate('array', array());
+        $transLoc = new Zend_Translate('array', array('one' => 'uno'));
         $this->helper->setTranslator($transLoc);
         $this->assertSame($transLoc->getAdapter(), $this->helper->getTranslator());
         $this->assertNotSame($transLoc->getAdapter(), $transReg->getAdapter());
@@ -211,10 +211,24 @@ class Zend_View_Helper_TranslateTest extends PHPUnit_Framework_TestCase
         $helper = $this->helper->translate();
         $this->assertSame($this->helper, $helper);
 
-        $transLoc = new Zend_Translate('array', array());
+        $transLoc = new Zend_Translate('array', array('one' => 'eins'));
         $this->helper->setTranslator($transLoc);
         $helper = $this->helper->translate();
         $this->assertSame($this->helper, $helper);
+    }
+
+    /**
+     * ZF-6724
+     */
+    public function testTranslationWithPercent()
+    {
+        $trans = new Zend_Translate('array', array('one' => 'eins', "two %1\$s" => "zwei %1\$s",
+            "three %1\$s %2\$s" => "drei %1\$s %2\$s", 'vier%ig' => 'four%'), 'de');
+        $trans->setLocale('de');
+
+        $this->helper->setTranslator($trans);
+        $this->assertEquals("four%", $this->helper->translate("vier%ig"));
+        $this->assertEquals("zwei 100", $this->helper->translate("two %1\$s", "100"));
     }
 }
 

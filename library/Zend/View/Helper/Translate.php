@@ -92,7 +92,7 @@ class Zend_View_Helper_Translate extends Zend_View_Helper_Abstract
         }
 
         $message = $translate->translate($messageid, $locale);
-        if ($count === 0) {
+        if (count($options) === 0) {
             return $message;
         }
 

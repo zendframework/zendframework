@@ -965,8 +965,8 @@ abstract class Zend_Db_Adapter_Abstract
      *
      * @param string|array|Zend_Db_Expr $ident The identifier or expression.
      * @param string $alias An optional alias.
-     * @param string $as The string to add between the identifier/expression and the alias.
      * @param boolean $auto If true, heed the AUTO_QUOTE_IDENTIFIERS config option.
+     * @param string $as The string to add between the identifier/expression and the alias.
      * @return string The quoted identifier and alias.
      */
     protected function _quoteIdentifierAs($ident, $alias = null, $auto = false, $as = ' AS ')

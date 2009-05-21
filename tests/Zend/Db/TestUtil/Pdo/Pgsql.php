@@ -119,7 +119,7 @@ class Zend_Db_TestUtil_Pdo_Pgsql extends Zend_Db_TestUtil_Pdo_Common
             . $this->_db->quoteInto(' WHERE relkind = \'r\' AND relname = ?', $tableName)
         );
         if (in_array($tableName, $tableList)) {
-            return 'DROP TABLE ' . $this->_db->quoteIdentifier($tableName);
+            return 'DROP TABLE ' . $this->_db->quoteIdentifier($tableName) . ' CASCADE';
         }
         return null;
     }

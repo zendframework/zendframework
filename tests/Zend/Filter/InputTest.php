@@ -815,8 +815,39 @@ class Zend_Filter_InputTest extends PHPUnit_Framework_TestCase
         $this->assertType('array', $messages);
         $this->assertEquals(array('month'), array_keys($messages));
         $this->assertEquals(2, count($messages['month']));
-        // $this->assertEquals($digitsMesg, $messages['month'][0]);
-        // $this->assertEquals($betweenMesg, $messages['month'][1]);
+        $this->assertEquals($digitsMesg, $messages['month']['notDigits']);
+        $this->assertEquals($betweenMesg, $messages['month']['notBetween']);
+    }
+
+    public function testValidatorMessagesFieldsMultiple()
+    {
+        $data = array('field1' => array('13abc', '234'));
+        $digitsMesg = 'Field1 should consist of digits';
+        $betweenMesg = 'Field1 should be between 1 and 12';
+        Zend_Loader::loadClass('Zend_Validate_Between');
+        $validators = array(
+            'field1' => array(
+                'digits',
+                new Zend_Validate_Between(1, 12),
+                'messages' => array(
+                    $digitsMesg,
+                    $betweenMesg
+                )
+            )
+        );
+        $input = new Zend_Filter_Input(null, $validators, $data);
+
+        $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
+        $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
+        $this->assertFalse($input->hasUnknown(), 'Expected hasUnknown() to return false');
+        $this->assertFalse($input->hasValid(), 'Expected hasValid() to return false');
+
+        $messages = $input->getMessages();
+        $this->assertType('array', $messages);
+        $this->assertEquals(array('field1'), array_keys($messages));
+        $this->assertEquals(3, count($messages['field1']));
+        $this->assertEquals($digitsMesg, $messages['field1']['notDigits']);
+        $this->assertEquals($betweenMesg, $messages['field1']['notBetween']);
     }
 
     public function testValidatorMessagesIntIndex()

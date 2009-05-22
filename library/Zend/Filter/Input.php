@@ -924,8 +924,27 @@ class Zend_Filter_Input
                 }
 
                 if (!$validatorChain->isValid($value)) {
-                    $this->_invalidMessages[$validatorRule[self::RULE]] = $validatorChain->getMessages();
-                    $this->_invalidErrors[$validatorRule[self::RULE]]   = $validatorChain->getErrors();
+                	if (isset($this->_invalidMessages[$validatorRule[self::RULE]])) {
+                		$collectedMessages = $this->_invalidMessages[$validatorRule[self::RULE]];
+                	} else {
+                		$collectedMessages = array();
+                	}
+
+                    foreach ($validatorChain->getMessages() as $messageKey => $message) {
+                        if (!isset($collectedMessages[$messageKey])) {
+                            $collectedMessages[$messageKey] = $message;
+                        } else {
+                            $collectedMessages[] = $message;
+                        }
+                    }
+
+                	$this->_invalidMessages[$validatorRule[self::RULE]] = $collectedMessages;
+                	if (isset($this->_invalidErrors[$validatorRule[self::RULE]])) {
+                        $this->_invalidErrors[$validatorRule[self::RULE]] = array_merge($this->_invalidErrors[$validatorRule[self::RULE]],
+                                                                                        $validatorChain->getErrors());
+                	} else {
+                		$this->_invalidErrors[$validatorRule[self::RULE]] = $validatorChain->getErrors();
+                	}
                     unset($this->_validFields[$fieldName]);
                     $failed = true;
                     if ($validatorRule[self::BREAK_CHAIN]) {

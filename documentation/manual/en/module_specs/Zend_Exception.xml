@@ -5,13 +5,15 @@
     <title>Using Exceptions</title>
 
     <para>
-        <classname>Zend_Exception</classname> is simply the base class for all exceptions thrown within Zend Framework.
+        <classname>Zend_Exception</classname> is simply the base class for all exceptions thrown
+        within Zend Framework.
     </para>
 
     <example id="zend.exception.using.example">
         <title>Catching an Exception</title>
         <para>
-            The following code listing demonstrates how to catch an exception thrown in a Zend Framework class:
+            The following code listing demonstrates how to catch an exception thrown in a Zend
+            Framework class:
         </para>
         <programlisting language="php"><![CDATA[
 try {

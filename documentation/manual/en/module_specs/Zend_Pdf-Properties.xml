@@ -4,7 +4,7 @@
     <!-- @todo review and revise upon completion of refactoring -->
     <title>Document Info and Metadata</title>
     <para>
-        A PDF document may include general information such as the document’s title,
+        A PDF document may include general information such as the document's title,
         author, and creation and modification dates.
     </para>
     <para>
@@ -28,7 +28,7 @@ $pdf->save($pdfPath);
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>Title</emphasis> - string, optional, the document’s title.
+                    <emphasis>Title</emphasis> - string, optional, the document's title.
                 </para>
             </listitem>
             <listitem>

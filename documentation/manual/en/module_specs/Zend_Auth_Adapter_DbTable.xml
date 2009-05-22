@@ -216,7 +216,7 @@ if ($result->isValid()) {
             <emphasis>authentication</emphasis> and not
             <emphasis>authorization</emphasis>, there are a few
             instances and problems that toe the line between which domain they fit
-            within. Depending on how you’ve decided to explain your problem, it
+            within. Depending on how you've decided to explain your problem, it
              sometimes makes sense to solve what could look like an
              authorization problem within the authentication adapter.
         </para>
@@ -247,7 +247,7 @@ $adapter = new Zend_Auth_Adapter_DbTable(
         <para>
             Another scenario can be the implementation of a salting mechanism.
             Salting is a term referring to a technique which can highly improve
-            your application’s security. It’s based on the idea that
+            your application's security. It’s based on the idea that
             concatenating a random string to every password makes it impossible
             to accomplish a successful brute force attack on the database using
             pre-computed hash values from a dictionary.
@@ -261,7 +261,7 @@ $sqlAlter = "ALTER TABLE [users] "
           . "AFTER [password]";
 ]]></programlisting>
         <para>
-            Here’s a simple way to generate a salt string for every user at
+            Here's a simple way to generate a salt string for every user at
             registration:
         </para>
         <programlisting language="php"><![CDATA[
@@ -269,7 +269,7 @@ for ($i = 0; $i < 50; $i++) {
     $dynamicSalt .= chr(rand(33, 126));
 ]]></programlisting>
         <para>
-            And now let’s build the adapter:
+            And now let's build the adapter:
         </para>
         <programlisting language="php"><![CDATA[
 $adapter = new Zend_Auth_Adapter_DbTable(

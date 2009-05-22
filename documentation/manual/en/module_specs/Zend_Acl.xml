@@ -185,7 +185,7 @@ $acl = new Zend_Acl();
             day-to-day operations, an 'Editor' group for those responsible for publishing,
             reviewing, archiving and deleting content, and finally an 'Administrator' group whose
             tasks may include all of those of the other groups as well as maintenance of sensitive
-            information, user management, back-end configuration data and backup/export. This set
+            information, user management, back-end configuration data, backup and export. This set
             of permissions can be represented in a role registry, allowing each group to inherit
             privileges from 'parent' groups, as well as providing distinct privileges for their
             unique group only. The permissions may be expressed as follows:

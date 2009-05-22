@@ -752,7 +752,7 @@ class Zend_Locale_FormatTest extends PHPUnit_Framework_TestCase
      */
     public function testSetOption()
     {
-        $this->assertEquals(7, count(Zend_Locale_Format::setOptions(array('format_type' => 'php'))));
+        $this->assertEquals(8, count(Zend_Locale_Format::setOptions(array('format_type' => 'php'))));
         $this->assertTrue(is_array(Zend_Locale_Format::setOptions()));
 
         try {

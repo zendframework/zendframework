@@ -890,6 +890,18 @@ class Zend_Locale
     }
 
     /**
+     * Disables the set cache
+     *
+     * @param  boolean $flag True disables any set cache, default is false
+     * @return void
+     */
+    public static function disableCache($flag)
+    {
+        require_once 'Zend/Locale/Data.php';
+        Zend_Locale_Data::disableCache($flag);
+    }
+
+    /**
      * Internal function, returns a single locale on detection
      *
      * @param  string|Zend_Locale $locale (Optional) Locale to work on

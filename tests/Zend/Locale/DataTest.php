@@ -2460,4 +2460,37 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
         $value = Zend_Locale_Data::getContent('de_AT', 'postaltoterritory', 'AT');
         $this->assertEquals("\d{4}", $value);
     }
+
+    /**
+     * test for reading postaltoterritory from locale
+     * expected array
+     */
+    public function testNumberingSystem()
+    {
+        $value = Zend_Locale_Data::getList('de_AT', 'numberingsystem');
+        $result = array(
+            'arab' => '٠١٢٣٤٥٦٧٨٩',
+            'arabext' => '۰۱۲۳۴۵۶۷۸۹',
+            'beng' => '০১২৩৪৫৬৭৮৯',
+            'deva' => '०१२३४५६७८९',
+            'fullwide' => '０１２３４５６７８９',
+            'gujr' => '૦૧૨૩૪૫૬૭૮૯',
+            'guru' => '੦੧੨੩੪੫੬੭੮੯',
+            'khmr' => "០១២៣៤៥៦៧៨៩",
+            'knda' => '೦೧೨೩೪೫೬೭೮೯',
+            'laoo' => '໐໑໒໓໔໕໖໗໘໙',
+            'latn' => '0123456789',
+            'mlym' => '൦൧൨൩൪൫൬൭൮൯',
+            'mong' => "᠐᠑᠒᠓᠔᠕᠖᠗᠘᠙",
+            'mymr' => "၀၁၂၃၄၅၆၇၈၉",
+            'orya' => '୦୧୨୩୪୫୬୭୮୯',
+            'telu' => '౦౧౨౩౪౫౬౭౮౯',
+            'thai' => '๐๑๒๓๔๕๖๗๘๙',
+            'tibt' => '༠༡༢༣༤༥༦༧༨༩'
+        );
+        $this->assertEquals($result, $value);
+
+        $value = Zend_Locale_Data::getContent('de_AT', 'numberingsystem', 'Arab');
+        $this->assertEquals("٠١٢٣٤٥٦٧٨٩", $value);
+    }
 }

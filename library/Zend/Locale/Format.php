@@ -42,31 +42,8 @@ class Zend_Locale_Format
                                      'fix_date'      => false,
                                      'locale'        => null,
                                      'cache'         => null,
+                                     'disableCache'  => false,
                                      'precision'     => null);
-
-    private static $_signs = array(
-        'Latn' => array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9'), // Latn - default latin
-        'Arab' => array( '٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'), // 0660 - 0669 arabic
-        'Deva' => array( '०', '१', '२', '३', '४', '५', '६', '७', '८', '९'), // 0966 - 096F devanagari
-        'Beng' => array( '০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'), // 09E6 - 09EF bengali
-        'Guru' => array( '੦', '੧', '੨', '੩', '੪', '੫', '੬', '੭', '੮', '੯'), // 0A66 - 0A6F gurmukhi
-        'Gujr' => array( '૦', '૧', '૨', '૩', '૪', '૫', '૬', '૭', '૮', '૯'), // 0AE6 - 0AEF gujarati
-        'Orya' => array( '୦', '୧', '୨', '୩', '୪', '୫', '୬', '୭', '୮', '୯'), // 0B66 - 0B6F orija
-        'Taml' => array( '௦', '௧', '௨', '௩', '௪', '௫', '௬', '௭', '௮', '௯'), // 0BE6 - 0BEF tamil
-        'Telu' => array( '౦', '౧', '౨', '౩', '౪', '౫', '౬', '౭', '౮', '౯'), // 0C66 - 0C6F telugu
-        'Knda' => array( '೦', '೧', '೨', '೩', '೪', '೫', '೬', '೭', '೮', '೯'), // 0CE6 - 0CEF kannada
-        'Mlym' => array( '൦', '൧', '൨', '൩', '൪', '൫', '൬', '൭', '൮', '൯ '), // 0D66 - 0D6F malayalam
-        'Tale' => array( '๐', '๑', '๒', '๓', '๔', '๕', '๖', '๗', '๘', '๙ '), // 0E50 - 0E59 thai
-        'Laoo' => array( '໐', '໑', '໒', '໓', '໔', '໕', '໖', '໗', '໘', '໙'), // 0ED0 - 0ED9 lao
-        'Tibt' => array( '༠', '༡', '༢', '༣', '༤', '༥', '༦', '༧', '༨', '༩ '), // 0F20 - 0F29 tibetan
-        'Mymr' => array( '၀', '၁', '၂', '၃', '၄', '၅', '၆', '၇', '၈', '၉'), // 1040 - 1049 myanmar
-        'Khmr' => array( '០', '១', '២', '៣', '៤', '៥', '៦', '៧', '៨', '៩'), // 17E0 - 17E9 khmer
-        'Mong' => array( '᠐', '᠑', '᠒', '᠓', '᠔', '᠕', '᠖', '᠗', '᠘', '᠙'), // 1810 - 1819 mongolian
-        'Limb' => array( '᥆', '᥇', '᥈', '᥉', '᥊', '᥋', '᥌', '᥍', '᥎', '᥏'), // 1946 - 194F limbu
-        'Talu' => array( '᧐', '᧑', '᧒', '᧓', '᧔', '᧕', '᧖', '᧗', '᧘', '᧙'), // 19D0 - 19D9 tailue
-        'Bali' => array( '᭐', '᭑', '᭒', '᭓', '᭔', '᭕', '᭖', '᭗', '᭘', '᭙'), // 1B50 - 1B59 balinese
-        'Nkoo' => array( '߀', '߁', '߂', '߃', '߄', '߅', '߆', '߇', '߈', '߉')  // 07C0 - 07C9 nko
-    );
 
     /**
      * Sets class wide options, if no option was given, the actual set options will be returned
@@ -172,6 +149,10 @@ class Zend_Locale_Format
                     }
                     break;
 
+                case 'disablecache' :
+                    Zend_Locale_Data::disableCache($value);
+                    break;
+
                 case 'precision' :
                     if ($value === NULL) {
                         $value = -1;
@@ -212,38 +193,30 @@ class Zend_Locale_Format
      */
     public static function convertNumerals($input, $from, $to = null)
     {
-        if (is_string($from)) {
-            $from = ucfirst(strtolower($from));
-        }
-        if (isset(self::$_signs[$from]) === false) {
+        $from   = strtolower($from);
+        $source = Zend_Locale_Data::getContent('en', 'numberingsystem', $from);
+        if (empty($source)) {
             require_once 'Zend/Locale/Exception.php';
             throw new Zend_Locale_Exception("Unknown script '$from'. Use 'Latn' for digits 0,1,2,3,4,5,6,7,8,9.");
         }
-        if (is_string($to)) {
-            $to = ucfirst(strtolower($to));
-        }
-        if (($to !== null) and (isset(self::$_signs[$to]) === false)) {
-            require_once 'Zend/Locale/Exception.php';
-            throw new Zend_Locale_Exception("Unknown script '$to'. Use 'Latn' for digits 0,1,2,3,4,5,6,7,8,9.");
-        }
 
-        if (isset(self::$_signs[$from])) {
-            for ($X = 0; $X < 10; ++$X) {
-                $source[$X + 10] = "/" . self::$_signs[$from][$X] . "/u";
-            }
-        }
-
-        if (isset(self::$_signs[$to])) {
-            for ($X = 0; $X < 10; ++$X) {
-                $dest[$X + 10] = self::$_signs[$to][$X];
+        if ($to !== null) {
+            $to     = strtolower($to);
+            $target = Zend_Locale_Data::getContent('en', 'numberingsystem', $to);
+            if (empty($target)) {
+                require_once 'Zend/Locale/Exception.php';
+                throw new Zend_Locale_Exception("Unknown script '$to'. Use 'Latn' for digits 0,1,2,3,4,5,6,7,8,9.");
             }
         } else {
-            for ($X = 0; $X < 10; ++$X) {
-                $dest[$X + 10] = $X;
-            }
+            $target = '0123456789';
         }
 
-        return preg_replace($source, $dest, $input);
+        for ($x = 0; $x < 10; ++$x) {
+            $asource[$x] = "/" . iconv_substr($source, $x, 1) . "/u";
+            $atarget[$x] = iconv_substr($target, $x, 1);
+        }
+
+        return preg_replace($asource, $atarget, $input);
     }
 
     /**

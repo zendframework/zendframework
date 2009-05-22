@@ -569,6 +569,13 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             included within that territory. The ISO territory code ('territory') is used as
                             array key and the regex as array value.</entry>
                     </row>
+                    <row>
+                        <entry><emphasis>NumberingSystem</emphasis></entry>
+                        <entry>
+                            Returns a list of scripts with the notation for digits used within the
+                            script
+                        </entry>
+                    </row>
                 </tbody>
             </tgroup>
         </table>
@@ -945,6 +952,12 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             Returns the a regex for postal codes for a given territory. The
                             territory has to be given as ISO4217 string for example '001' for
                             world</entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>NumberingSystem</emphasis></entry>
+                        <entry>
+                            Returns a scripts with the notation for digits used within this script
+                        </entry>
                     </row>
                 </tbody>
             </tgroup>

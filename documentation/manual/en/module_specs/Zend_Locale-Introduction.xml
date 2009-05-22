@@ -516,14 +516,26 @@ Zend_Locale_Format::setOptions(array('locale' => Zend_Locale_Format::STANDARD,
         <title>Speed up Zend_Locale and its subclasses</title>
 
         <para>
-            <classname>Zend_Locale</classname> and its subclasses can be speed up by the usage of <classname>Zend_Cache</classname>.
-            Use the static method <classname>Zend_Locale::setCache($cache)</classname> if you are using
-            <classname>Zend_Locale</classname>. <classname>Zend_Locale_Format</classname> can be speed up the using the option
-            <code>cache</code> within <classname>Zend_Locale_Format::setOptions(array('cache' => $adapter));</classname>.
-            If you are using both classes you should only set the cache for <classname>Zend_Locale</classname>, otherwise
-            the last set cache will overwrite the previous set cache. For convenience there are also the static
-            methods <code>getCache()</code>, <code>hasCache()</code>, <code>clearCache()</code> and
-            <code>removeCache()</code>.
+            <classname>Zend_Locale</classname> and its subclasses can be speed up by the usage of
+            <classname>Zend_Cache</classname>. Use the static method
+            <classname>Zend_Locale::setCache($cache)</classname> if you are using
+            <classname>Zend_Locale</classname>. <classname>Zend_Locale_Format</classname> can be
+            speed up the using the option <code>cache</code> within
+            <classname>Zend_Locale_Format::setOptions(array('cache' => $adapter));</classname>.
+            If you are using both classes you should only set the cache for
+            <classname>Zend_Locale</classname>, otherwise the last set cache will overwrite the
+            previous set cache. For convenience there are also the static methods
+            <methodname>getCache()</methodname>, <methodname>hasCache()</methodname>,
+            <methodname>clearCache()</methodname> and <methodname>removeCache()</methodname>.
+        </para>
+
+        <para>
+            When no cache is set, then <classname>Zend_Locale</classname> will automatically set a
+            cache itself. Sometimes it is wished to prevent that a cache is set, even if this
+            degrades performance. In this case the static
+            <methodname>disableCache(true)</methodname> method should be used. It does not only
+            disable the actual set cache, without erasing it, but also prevents that a cache is
+            automatically generated when no cache is set.
         </para>
 
     </sect2>

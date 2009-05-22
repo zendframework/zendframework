@@ -61,6 +61,14 @@ class Zend_Locale_Data
     private static $_cache = null;
 
     /**
+     * Internal option, cache disabled
+     *
+     * @var    boolean
+     * @access private
+     */
+    private static $_cacheDisabled = false;
+
+    /**
      * Read the content from locale
      *
      * Can be called like:
@@ -290,7 +298,7 @@ class Zend_Locale_Data
     {
         $locale = self::_checkLocale($locale);
 
-        if (!isset(self::$_cache)) {
+        if (!isset(self::$_cache) && !self::$_cacheDisabled) {
             require_once 'Zend/Cache.php';
             self::$_cache = Zend_Cache::factory(
                 'Core',
@@ -306,7 +314,7 @@ class Zend_Locale_Data
 
         $val = urlencode($val);
         $id = strtr('Zend_LocaleL_' . $locale . '_' . $path . '_' . $val, array('-' => '_', '%' => '_', '+' => '_'));
-        if ($result = self::$_cache->load($id)) {
+        if (!self::$_cacheDisabled && ($result = self::$_cache->load($id))) {
             return unserialize($result);
         }
 
@@ -807,6 +815,16 @@ class Zend_Locale_Data
                 }
                 break;
 
+            case 'numberingsystem':
+                $_temp = self::_getFile('numberingSystems', '/supplementalData/numberingSystems/numberingSystem', 'id');
+                foreach ($_temp as $key => $keyvalue) {
+                    $temp += self::_getFile('numberingSystems', '/supplementalData/numberingSystems/numberingSystem[@id=\'' . $key . '\']', 'digits', $key);
+                    if (empty($temp[$key])) {
+                        unset($temp[$key]);
+                    }
+                }
+                break;
+
             default :
                 require_once 'Zend/Locale/Exception.php';
                 throw new Zend_Locale_Exception("Unknown list ($path) for parsing locale data.");
@@ -833,7 +851,7 @@ class Zend_Locale_Data
     {
         $locale = self::_checkLocale($locale);
 
-        if (!isset(self::$_cache)) {
+        if (!isset(self::$_cache) && !self::$_cacheDisabled) {
             require_once 'Zend/Cache.php';
             self::$_cache = Zend_Cache::factory(
                 'Core',
@@ -848,7 +866,7 @@ class Zend_Locale_Data
         }
         $val = urlencode($val);
         $id = strtr('Zend_LocaleC_' . $locale . '_' . $path . '_' . $val, array('-' => '_', '%' => '_', '+' => '_'));
-        if ($result = self::$_cache->load($id)) {
+        if (!self::$_cacheDisabled && ($result = self::$_cache->load($id))) {
             return unserialize($result);
         }
 
@@ -1248,6 +1266,10 @@ class Zend_Locale_Data
                 $temp = self::_getFile('postalCodeData', '/supplementalData/postalCodeData/postCodeRegex[@territoryId=\'' . $value . '\']', 'territoryId');
                 break;
 
+            case 'numberingsystem':
+                $temp = self::_getFile('numberingSystems', '/supplementalData/numberingSystems/numberingSystem[@id=\'' . strtolower($value) . '\']', 'digits', $value);
+                break;
+
             default :
                 require_once 'Zend/Locale/Exception.php';
                 throw new Zend_Locale_Exception("Unknown detail ($path) for parsing locale data.");
@@ -1316,5 +1338,15 @@ class Zend_Locale_Data
     public static function clearCache()
     {
         self::$_cache->clean();
+    }
+
+    /**
+     * Disables the cache
+     *
+     * @param unknown_type $flag
+     */
+    public static function disableCache($flag)
+    {
+        self::$_cacheDisabled = (boolean) $flag;
     }
 }

@@ -576,6 +576,20 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             script
                         </entry>
                     </row>
+                    <row>
+                        <entry><emphasis>FallbackToChar</emphasis></entry>
+                        <entry>
+                            Returns a list of replacement characters for often used unicode characters.
+                            This can be used to replace "©" with "(C)" for example
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>CharToFallback</emphasis></entry>
+                        <entry>
+                            Returns a list of unicode characters for often used replacement characters.
+                            This can be used to replace "(C)" with "©" for example
+                        </entry>
+                    </row>
                 </tbody>
             </tgroup>
         </table>
@@ -957,6 +971,20 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>NumberingSystem</emphasis></entry>
                         <entry>
                             Returns a scripts with the notation for digits used within this script
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>FallbackToChar</emphasis></entry>
+                        <entry>
+                            Returns a replacement character for a often used unicode character.
+                            This can be used to replace "©" with "(C)" for example
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>CharToFallback</emphasis></entry>
+                        <entry>
+                            Returns a unicode character for a often used replacement character.
+                            This can be used to replace "(C)" with "©" for example
                         </entry>
                     </row>
                 </tbody>

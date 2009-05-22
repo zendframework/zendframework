@@ -825,6 +825,21 @@ class Zend_Locale_Data
                 }
                 break;
 
+            case 'chartofallback':
+                $_temp = self::_getFile('characters', '/supplementalData/characters/character-fallback/character', 'value');
+                foreach ($_temp as $key => $keyvalue) {
+                    $temp2 = self::_getFile('characters', '/supplementalData/characters/character-fallback/character[@value=\'' . $key . '\']/substitute', '', $key);
+                    $temp[current($temp2)] = $key;
+                }
+                break;
+
+            case 'fallbacktochar':
+                $_temp = self::_getFile('characters', '/supplementalData/characters/character-fallback/character', 'value');
+                foreach ($_temp as $key => $keyvalue) {
+                    $temp += self::_getFile('characters', '/supplementalData/characters/character-fallback/character[@value=\'' . $key . '\']/substitute', '', $key);
+                }
+                break;
+
             default :
                 require_once 'Zend/Locale/Exception.php';
                 throw new Zend_Locale_Exception("Unknown list ($path) for parsing locale data.");
@@ -1268,6 +1283,23 @@ class Zend_Locale_Data
 
             case 'numberingsystem':
                 $temp = self::_getFile('numberingSystems', '/supplementalData/numberingSystems/numberingSystem[@id=\'' . strtolower($value) . '\']', 'digits', $value);
+                break;
+
+            case 'chartofallback':
+                $_temp = self::_getFile('characters', '/supplementalData/characters/character-fallback/character', 'value');
+                foreach ($_temp as $key => $keyvalue) {
+                    $temp2 = self::_getFile('characters', '/supplementalData/characters/character-fallback/character[@value=\'' . $key . '\']/substitute', '', $key);
+                    if (current($temp2) == $value) {
+                        $temp = $key;
+                    }
+                }
+                break;
+
+                $temp = self::_getFile('characters', '/supplementalData/characters/character-fallback/character[@value=\'' . $value . '\']/substitute', '', $value);
+                break;
+
+            case 'fallbacktochar':
+                $temp = self::_getFile('characters', '/supplementalData/characters/character-fallback/character[@value=\'' . $value . '\']/substitute', '');
                 break;
 
             default :

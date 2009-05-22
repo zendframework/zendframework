@@ -2462,7 +2462,7 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * test for reading postaltoterritory from locale
+     * test for reading numberingsystem from locale
      * expected array
      */
     public function testNumberingSystem()
@@ -2492,5 +2492,35 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
 
         $value = Zend_Locale_Data::getContent('de_AT', 'numberingsystem', 'Arab');
         $this->assertEquals("٠١٢٣٤٥٦٧٨٩", $value);
+    }
+
+    /**
+     * test for reading chartofallback from locale
+     * expected array
+     */
+    public function testCharToFallback()
+    {
+        $value = Zend_Locale_Data::getList('de_AT', 'chartofallback');
+        $this->assertEquals('©', $value['(C)']);
+        $this->assertEquals('½', $value[' 1/2']);
+        $this->assertEquals('Æ', $value['AE']);
+
+        $value = Zend_Locale_Data::getContent('de_AT', 'chartofallback', '(C)');
+        $this->assertEquals("©", $value);
+    }
+
+    /**
+     * test for reading chartofallback from locale
+     * expected array
+     */
+    public function testFallbackToChar()
+    {
+        $value = Zend_Locale_Data::getList('de_AT', 'fallbacktochar');
+        $this->assertEquals('(C)', $value['©']);
+        $this->assertEquals(' 1/2', $value['½']);
+        $this->assertEquals('AE', $value['Æ']);
+
+        $value = Zend_Locale_Data::getContent('de_AT', 'fallbacktochar', '©');
+        $this->assertEquals('(C)', $value);
     }
 }

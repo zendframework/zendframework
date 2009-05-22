@@ -14,7 +14,7 @@
         <title>Basic AMF Server</title>
 
         <para>
-            Let's assume that you have created a class <code>Foo</code> with a
+            Let's assume that you have created a class <emphasis>Foo</emphasis> with a
             variety of public methods. You may create an AMF server using the
             following code:
         </para>
@@ -42,8 +42,8 @@ echo $response;
             You could also mix and match multiple classes and functions. When
             doing so, we suggest namespacing each to ensure that no method name
             collisions occur; this can be done by simply passing a second string
-            argument to either <code>addFunction()</code> or
-            <code>setClass()</code>:
+            argument to either <methodname>addFunction()</methodname> or
+            <methodname>setClass()</methodname>:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -56,11 +56,12 @@ echo $response;
 ]]></programlisting>
 
         <para>
-            The <code>Zend Amf Server</code> also allows services to be dynamically loaded
-            based on a supplied directory path. You may add as many directories as you wish
+            The <classname>Zend_Amf_Server</classname> also allows services to be dynamically
+            loaded based on a supplied directory path. You may add as many directories as you wish
             to the server. The order that you add the directories to the server will be the
             order that the LIFO search will be performed on the directories to match the class.
-            Adding directories is completed with the <code>addDirectory()</code> method.
+            Adding directories is completed with the <methodname>addDirectory()</methodname>
+            method.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -69,13 +70,14 @@ $server->addDirectory(dirname(__FILE__) .'/../package/');
 ]]></programlisting>
 
         <para>
-            When calling remote services your source name can have underscore(_) and dot(.)
+            When calling remote services your source name can have underscore ("_") and dot (".")
             directory delimiters. When an underscore is used PEAR and Zend Framework class naming
             conventions will be respected. This means that if you call the service
-            <code>com_Foo_Bar</code> the server will look for the file Bar.php in the each of the
-            included paths at <code>com/Foo/Bar.php</code>. If the dot notation is used for your
-            remote service such as <code>com.Foo.Bar</code> each included path will have
-            <code>com/Foo/Bar.php</code> append to the end to autoload Bar.php
+            <classname>com_Foo_Bar</classname> the server will look for the file Bar.php in the
+            each of the included paths at <filename>com/Foo/Bar.php</filename>. If the dot notation
+            is used for your remote service such as <filename>com.Foo.Bar</filename> each included
+            path will have <filename>com/Foo/Bar.php</filename> append to the end to autoload
+            <filename>Bar.php</filename>
         </para>
 
         <para>
@@ -141,17 +143,17 @@ class World
 
         <para>
             Say, for instance, you have created your server and placed it in the
-            <code>server.php</code> file in your application root, and thus the
-            URI is <code>http://example.com/server.php</code>. In this case, you
-            would modify your services-config.xml file to set the channel
+            <filename>server.php</filename> file in your application root, and thus the
+            URI is <filename>http://example.com/server.php</filename>. In this case, you
+            would modify your <filename>services-config.xml</filename> file to set the channel
             endpoint uri attribute to this value.
         </para>
         <para>
-            If you have never created a service-config.xml file you can do so by opening your
-            project in your Navigator window. Right click on the project name and select
-            'properties'. In the Project properties dialog go into 'Flex Build Path' menu,
-            'Library path' tab and be sure the 'rpc.swc' file is added to your projects path
-            and Press Ok to close the window.
+            If you have never created a <filename>service-config.xml</filename> file you can do so
+            by opening your project in your Navigator window. Right click on the project name and
+            select 'properties'. In the Project properties dialog go into 'Flex Build Path' menu,
+            'Library path' tab and be sure the '<filename>rpc.swc</filename>' file is added to your
+            projects path and Press Ok to close the window.
         </para>
         <para>
             You will also need to tell the compiler to use the service-config.xml to find
@@ -237,7 +239,7 @@ class World
         <para>
             Here, we've defined a new remote object identified by "myservice"
             bound to the service destination "zend" we defined in the
-            <code>services-config.xml</code> file. We then call methods on it in
+            <filename>services-config.xml</filename> file. We then call methods on it in
             in our ActionScript by simply calling "myservice.&lt;method&gt;".
             As an example:
         </para>
@@ -309,10 +311,10 @@ $server->setProduction(true);
 
         <para>
             One area to be especially careful with is PHP errors themselves.
-            When the <code>display_errors</code> INI directive is enabled, any
+            When the <emphasis>display_errors</emphasis> INI directive is enabled, any
             PHP errors for the current error reporting level are rendered
             directly in the output -- potentially disrupting the AMF response
-            payload. We suggest turning off the <code>display_errors</code>
+            payload. We suggest turning off the <emphasis>display_errors</emphasis>
             directive in production to prevent such problems
         </para>
     </sect2>
@@ -323,7 +325,7 @@ $server->setProduction(true);
         <para>
             Occasionally you may desire to manipulate the response object
             slightly, typically to return extra message headers. The
-            <code>handle()</code> method of the server returns the response
+            <methodname>handle()</methodname> method of the server returns the response
             object, allowing you to do so.
         </para>
 
@@ -361,7 +363,7 @@ echo $response;
             <listitem>
                 <para>
                     First, you may create explicit bindings at the server level,
-                    using the <code>setClassMap()</code> method. The first
+                    using the <methodname>setClassMap()</methodname> method. The first
                     argument is the ActionScript class name, the second the PHP
                     class name it maps to:
                 </para>
@@ -375,7 +377,7 @@ $server->setClassMap('ContactVO', 'Contact');
             <listitem>
                 <para>
                     Second, you can set the public property
-                    <code>$_explicitType</code> in your PHP class, with the
+                    <varname>$_explicitType</varname> in your PHP class, with the
                     value representing the ActionScript class to map to:
                 </para>
 
@@ -390,7 +392,7 @@ class Contact
             <listitem>
                 <para>
                     Third, in a similar vein, you may define the public method
-                    <code>getASClassName()</code> in your PHP class; this method
+                    <methodname>getASClassName()</methodname> in your PHP class; this method
                     should return the appropriate ActionScript class:
                 </para>
 
@@ -438,9 +440,9 @@ package
             to work properly. There are two unique AS3 meta tags in this class.
             The first is bindable which makes fire a change event when it is updated.
             The second tag is the RemoteClass tag which defines that this class can
-            have a a remote object mapped with the alias name in this case <code>ContactVO</code>
-            It is mandatory that this tag the value that was set is the PHP class are strictly
-            equivalent.
+            have a a remote object mapped with the alias name in this case
+            <emphasis>ContactVO</emphasis>. It is mandatory that this tag the value that was set
+            is the PHP class are strictly equivalent.
         </para>
         <programlisting language="as"><![CDATA[
 [Bindable]
@@ -582,7 +584,7 @@ private function onFault(fault:Object):void {
             ZendExample file now makes a connection to Zend Amf. In review you have added the
             required variables to open a connection to the remote server, defined what methods
             should be used when your application receives a response from the server, and finally
-            displayed the returned data to output via trace().
+            displayed the returned data to output via <methodname>trace()</methodname>.
         </para>
 
     </sect2>

@@ -21,9 +21,9 @@
  */
 
 /**
- * @see Zend_Tool_Framework_Manifest_Metadata
+ * @see Zend_Tool_Framework_Metadata_Interface
  */
-require_once 'Zend/Tool/Framework/Manifest/Metadata.php';
+require_once 'Zend/Tool/Framework/Metadata/Interface.php';
 
 /**
  * @category   Zend

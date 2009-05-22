@@ -198,7 +198,7 @@
             <code>addSoapOperation($binding, $soap_action)</code>
             method adds SOAP operation ('soap:operation') entry to the binding element with the specified action.
             'style' attribute of the 'soap:operation' element is not used since programming model (RPC-oriented or document-oriented)
-            may be st using <code>addSoapBinding()</code> method
+            may be using <code>addSoapBinding()</code> method
         </para>
         <para>
             'soapAction' attribute of '/definitions/binding/soap:operation' element specifies the value of the SOAPAction header

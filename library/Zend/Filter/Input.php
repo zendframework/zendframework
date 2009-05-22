@@ -905,22 +905,27 @@ class Zend_Filter_Input
             if (!is_array($field)) {
                 $field = array($field);
             }
+
+
+            $notEmptyValidator = $this->_getValidator('NotEmpty');
+            $notEmptyValidator->setMessage($this->_getNotEmptyMessage($validatorRule[self::RULE], $fieldName));
+            if ($validatorRule[self::ALLOW_EMPTY]) {
+            	$validatorChain = $validatorRule[self::VALIDATOR_CHAIN];
+            } else {
+                $validatorChain = new Zend_Validate();
+                $validatorChain->addValidator($notEmptyValidator, true /* Always break on failure */);
+                $validatorChain->addValidator($validatorRule[self::VALIDATOR_CHAIN]);
+            }
+
             foreach ($field as $value) {
-                if (empty($value)) {
-                    if ($validatorRule[self::ALLOW_EMPTY] == true) {
-                        continue;
-                    }
-                    if ($validatorRule[self::VALIDATOR_CHAIN_COUNT] == 0) {
-                        $notEmptyValidator = $this->_getValidator('NotEmpty');
-                        $notEmptyValidator->setMessage($this->_getNotEmptyMessage($validatorRule[self::RULE], $fieldName));
-                        $validatorRule[self::VALIDATOR_CHAIN]->addValidator($notEmptyValidator);
-                    }
+                if ($validatorRule[self::ALLOW_EMPTY]  &&  !$notEmptyValidator->isValid($value)) {
+                    // Field is empty AND it's allowed. Do nothing.
+                    continue;
                 }
-                if (!$validatorRule[self::VALIDATOR_CHAIN]->isValid($value)) {
-                    $this->_invalidMessages[$validatorRule[self::RULE]] =
-                        $validatorRule[self::VALIDATOR_CHAIN]->getMessages();
-                    $this->_invalidErrors[$validatorRule[self::RULE]] =
-                        $validatorRule[self::VALIDATOR_CHAIN]->getErrors();
+
+                if (!$validatorChain->isValid($value)) {
+                    $this->_invalidMessages[$validatorRule[self::RULE]] = $validatorChain->getMessages();
+                    $this->_invalidErrors[$validatorRule[self::RULE]]   = $validatorChain->getErrors();
                     unset($this->_validFields[$fieldName]);
                     $failed = true;
                     if ($validatorRule[self::BREAK_CHAIN]) {

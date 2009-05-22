@@ -542,7 +542,31 @@ class Zend_Filter_InputTest extends PHPUnit_Framework_TestCase
         $messages = $input->getMessages();
         $this->assertType('array', $messages);
         $this->assertEquals(array('field1'), array_keys($messages));
-        $this->assertEquals("'' is an empty string", current($messages['field1']));
+        $this->assertEquals("You must give a non-empty value for field 'field1'", current($messages['field1']));
+    }
+
+    public function testValidatorAllowEmptyWithOtherValidatersProcessing()
+    {
+        $data = array(
+            'field1' => ''
+        );
+        $validators = array(
+            'field1' => array(
+                'alpha',
+                Zend_Filter_Input::ALLOW_EMPTY => false
+            ),
+        );
+        $input = new Zend_Filter_Input(null, $validators, $data);
+
+        $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
+        $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
+        $this->assertFalse($input->hasUnknown(), 'Expected hasUnknown() to return false');
+        $this->assertFalse($input->hasValid(), 'Expected hasValid() to return true');
+
+        $messages = $input->getMessages();
+        $this->assertType('array', $messages);
+        $this->assertEquals(array('field1'), array_keys($messages));
+        $this->assertEquals("You must give a non-empty value for field 'field1'", current($messages['field1']));
     }
 
     public function testValidatorAllowEmptyNoValidatorChain()
@@ -737,7 +761,7 @@ class Zend_Filter_InputTest extends PHPUnit_Framework_TestCase
         $this->assertType('array', $messages);
         $this->assertEquals(array('field2', 'field3'), array_keys($messages));
         $this->assertType('array', $messages['field2']);
-        $this->assertEquals("'' is an empty string", current($messages['field2']));
+        $this->assertEquals("You must give a non-empty value for field 'field2'", current($messages['field2']));
     }
 
     public function testValidatorMessagesSingle()

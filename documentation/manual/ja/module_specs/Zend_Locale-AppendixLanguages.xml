@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15642 -->
 <sect1 id="zend.locale.appendix">
 
     <title>サポートするロケール</title>
@@ -186,6 +186,19 @@
                 <row>
                     <entry>bn_BD</entry>
                     <entry>バングラデシュ</entry>
+                </row>
+                <row>
+                    <entry>bn_IN</entry>
+                    <entry>インド</entry>
+                </row>
+                <row>
+                    <entry morerows="2" valign="middle">チベット語</entry>
+                    <entry>bo</entry>
+                    <entry>---</entry>
+                </row>
+                <row>
+                    <entry>bo_CN</entry>
+                    <entry>中国</entry>
                 </row>
                 <row>
                     <entry>bn_IN</entry>
@@ -672,6 +685,15 @@
                     <entry>スペイン</entry>
                 </row>
                 <row>
+                    <entry morerows="1" valign="middle">スイスドイツ語</entry>
+                    <entry>gsw</entry>
+                    <entry>---</entry>
+                </row>
+                <row>
+                    <entry>gsw_CH</entry>
+                    <entry>スイス</entry>
+                </row>
+                <row>
                     <entry morerows="1" valign="middle">グジャラート語</entry>
                     <entry>gu</entry>
                     <entry>---</entry>
@@ -956,6 +978,18 @@
                     <entry>---</entry>
                 </row>
                 <row>
+                    <entry>ku_IQ</entry>
+                    <entry>イラク</entry>
+                </row>
+                <row>
+                    <entry>ku_IR</entry>
+                    <entry>イラン</entry>
+                </row>
+                <row>
+                    <entry>ku_SY</entry>
+                    <entry>シリア</entry>
+                </row>
+                <row>
                     <entry>ku_TR</entry>
                     <entry>トルコ</entry>
                 </row>
@@ -1103,6 +1137,15 @@
                     <entry>ノルウェー</entry>
                 </row>
                 <row>
+                    <entry morerows="1" valign="middle">低地ドイツ語、低地サクソン語</entry>
+                    <entry>nds</entry>
+                    <entry>---</entry>
+                </row>
+                <row>
+                    <entry>nds_DE</entry>
+                    <entry>ドイツ</entry>
+                </row>
+                <row>
                     <entry morerows="2" valign="middle">ネパール語</entry>
                     <entry>ne</entry>
                     <entry>---</entry>
@@ -1168,6 +1211,15 @@
                 <row>
                     <entry>ny_MW</entry>
                     <entry>マラウィ</entry>
+                </row>
+                <row>
+                    <entry morerows="1" valign="middle">オック語</entry>
+                    <entry>oc</entry>
+                    <entry>---</entry>
+                </row>
+                <row>
+                    <entry>oc_FR</entry>
+                    <entry>フランス</entry>
                 </row>
                 <row>
                     <entry morerows="2" valign="middle">オロモ語</entry>
@@ -1550,6 +1602,15 @@
                 <row>
                     <entry>tr_TR</entry>
                     <entry>トルコ</entry>
+                </row>
+                <row>
+                    <entry morerows="1" valign="middle">タロコ語</entry>
+                    <entry>trv</entry>
+                    <entry>---</entry>
+                </row>
+                <row>
+                    <entry>trv_TW</entry>
+                    <entry>台湾</entry>
                 </row>
                 <row>
                     <entry morerows="1" valign="middle">ツォンガ語</entry>

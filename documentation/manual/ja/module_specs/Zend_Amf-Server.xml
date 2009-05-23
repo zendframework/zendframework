@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15684 -->
+<!-- EN-Revision: 15687 -->
 <sect1 id="zend.amf.server">
     <title>Zend_Amf_Server</title>
 
@@ -15,7 +15,7 @@
         <title>基本的な AMF サーバ</title>
 
         <para>
-            さまざまな public メソッドを持つクラス <code>Foo</code>
+            さまざまな public メソッドを持つクラス <emphasis>Foo</emphasis>
             を作ったものとしましょう。AMF サーバを作成するためのコードは次のようになります。
         </para>
 
@@ -40,8 +40,8 @@ echo $response;
         <para>
             複数のクラスや関数を混ぜて使用することもできます。
             その場合は、それぞれに名前空間を指定してメソッド名の衝突を回避させることをおすすめします。
-            名前空間を指定するには、<code>addFunction()</code> あういは
-            <code>setClass()</code> の 2 番目の引数に文字列を指定します。
+            名前空間を指定するには、<methodname>addFunction()</methodname> あるいは
+            <methodname>setClass()</methodname> の 2 番目の引数に文字列を指定します。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -54,11 +54,12 @@ echo $response;
 ]]></programlisting>
 
         <para>
-        <code>Zend Amf Server</code> は、指定したディレクトリパスから動的にサービスに読み込ませることもできます。
+        <classname>Zend Amf Server</classname> は、
+        指定したディレクトリパスから動的にサービスに読み込ませることもできます。
         好きなだけのディレクトリをサーバに指定することが可能です。
         サーバに後から追加したディレクトリから順に (LIFO: 後入れ先出し)
         検索を行い、クラスにマッチするディレクトリを探します。
-        ディレクトリの追加は <code>addDirectory()</code> メソッドで行います。
+        ディレクトリの追加は <methodname>addDirectory()</methodname> メソッドで行います。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -67,14 +68,14 @@ $server->addDirectory(dirname(__FILE__) .'/../package/');
 ]]></programlisting>
 
         <para>
-        リモートサービスをコールする際には、アンダースコア (_) およびどっと
-        dot(.) をディレクトリ区切り文字として使用します。
+        リモートサービスをコールする際には、アンダースコア ("_") およびドット
+        (".") をディレクトリ区切り文字として使用します。
         アンダースコアを使用すると、PEAR や Zend Framework のクラス命名規約に従った形式となります。
-        つまり、サービス <code>com_Foo_Bar</code> をコールした場合は、
+        つまり、サービス <classname>com_Foo_Bar</classname> をコールした場合は、
         インクルードされたパスのどこかにある
-        <code>com/Foo/Bar.php</code> を探します。ドット記法を使用してリモートサービスを
-        <code>com.Foo.Bar</code> のように指定すると、
-        インクルードされたパスの最後に <code>com/Foo/Bar.php</code>
+        <filename>com/Foo/Bar.php</filename> を探します。ドット記法を使用してリモートサービスを
+        <filename>com.Foo.Bar</filename> のように指定すると、
+        インクルードされたパスの最後に <filename>com/Foo/Bar.php</filename>
         を追加して Bar.php を自動的に読み込みます。
         </para>
 
@@ -141,16 +142,18 @@ class World
 
         <para>
             たとえば、作成したサーバをアプリケーションルートに
-            <code>server.php</code> という名前で配置したとしましょう。URI は
-            <code>http://example.com/server.php</code> となります。
+            <filename>server.php</filename> という名前で配置したとしましょう。URI は
+            <filename>http://example.com/server.php</filename> となります。
             この場合は、services-config.xml ファイルを編集して、
             チャンネルのエンドポイント URI 属性をこの値に変更します。
         </para>
         <para>
-            まだ service-config.xml ファイルを作っていない場合は、まずナビゲータウィンドウでプロジェクトを開きます。
+            まだ <filename>service-config.xml</filename> ファイルを作っていない場合は、
+            まずナビゲータウィンドウでプロジェクトを開きます。
             そしてプロジェクト名のところを右クリックして 'プロパティ' を選択します。
             プロジェクトのプロパティダイアログで 'Flex ビルドパス' を選択し、
-            'ライブラリパス' タブで 'rpc.swc' ファイルがプロジェクトに追加されていることを確認したら、
+            'ライブラリパス' タブで '<filename>rpc.swc</filename>'
+            ファイルがプロジェクトに追加されていることを確認したら、
             OK を押してウィンドウを閉じます。
         </para>
         <para>
@@ -240,7 +243,7 @@ class World
 
         <para>
             ここでは、新しいリモートオブジェクトに "myservice" という名前をつけ、
-            さきほど <code>services-config.xml</code> で定義した "zend"
+            さきほど <filename>services-config.xml</filename> で定義した "zend"
             にそれをバインドしています。ActionScript からメソッドをコールするには、
             "myservice.&lt;method&gt;" とするだけです。例を示します。
         </para>
@@ -312,10 +315,10 @@ $server->setProduction(true);
 
         <para>
             もうひとつ、特に注意を要するのが PHP のエラーです。
-            INI 設定 <code>display_errors</code> が有効になっていると、
+            INI 設定 <emphasis>display_errors</emphasis> が有効になっていると、
             エラー報告レベルに応じてあらゆる PHP のエラーが直接出力されてしまいます。
             これは、AMF のレスポンスを壊してしまう可能性があります。
-            運用時には <code>display_errors</code> を無効にし、
+            運用時には <emphasis>display_errors</emphasis> を無効にし、
             この問題を回避することを推奨します。
         </para>
     </sect2>
@@ -326,7 +329,7 @@ $server->setProduction(true);
         <para>
             レスポンスオブジェクトを操作したくなることもあるかもしれません。
             メッセージヘッダを追加したい場合などが考えられます。サーバの
-            <code>handle()</code> メソッドはレスポンスオブジェクトを返すので、これが利用できます。
+            <methodname>handle()</methodname> メソッドはレスポンスオブジェクトを返すので、これが利用できます。
         </para>
 
         <example id="zend.amf.server.response.messageHeaderExample">
@@ -362,7 +365,7 @@ echo $response;
             <listitem>
                 <para>
                     まず、サーバ側で明示的なバインドを行うには
-                    <code>setClassMap()</code> メソッドを使用します。
+                    <methodname>setClassMap()</methodname> メソッドを使用します。
                     最初の引数は ActionScript クラス名で、2 番目の引数は関連付ける
                     PHP クラス名となります。
                 </para>
@@ -376,7 +379,7 @@ $server->setClassMap('ContactVO', 'Contact');
             <listitem>
                 <para>
                     次に、PHP クラス内で public プロパティ
-                    <code>$_explicitType</code> を設定する方法があります。
+                    <varname>$_explicitType</varname> を設定する方法があります。
                     ここには、関連付けたい ActionScript クラス名を指定します。
                 </para>
 
@@ -391,7 +394,7 @@ class Contact
             <listitem>
                 <para>
                     3 番目の方法として、PHP クラスの public メソッド
-                    <code>getASClassName()</code> を使用することもできます。
+                    <methodname>getASClassName()</methodname> を使用することもできます。
                     このメソッドは、適切な ActionScript クラスを返すようにしなければなりません。
                 </para>
 
@@ -440,7 +443,7 @@ package
             このクラスでは、AS3 独特のメタタグが 2 つ用いられています。
             最初のタグは bindable で、これは更新時に change イベントを発火させます。
             2 番目のタグは RemoteClass で、このクラスがリモートオブジェクトを保持できること、
-            そのエイリアス名が (ここでは) <code>ContactVO</code> であることを定義します。
+            そのエイリアス名が (ここでは) <emphasis>ContactVO</emphasis> であることを定義します。
             このタグに設定される値は、PHP のクラスと正確に一致していなければなりません。
         </para>
         <programlisting language="as"><![CDATA[
@@ -584,7 +587,7 @@ private function onFault(fault:Object):void {
             ZendExample を実行すると、Zend Amf へ接続されるようになります。
             ここまでを振り返ってみましょう。まず最初にリモートサーバへの接続に必要な変数を追加し、
             サーバからのレスポンスを受け取ったときに使用するメソッドを定義し、
-            そして最後に返された結果を trace() で出力しました。
+            そして最後に返された結果を <methodname>trace()</methodname> で出力しました。
         </para>
 
     </sect2>

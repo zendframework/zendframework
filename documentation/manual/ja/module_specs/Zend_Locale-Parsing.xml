@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15672 -->
 <sect1 id="zend.locale.parsing">
 
     <title>正規化および地域化</title>
@@ -507,107 +507,11 @@ echo getScriptCode('tamoul', 'fr'); // 出力は "Taml" となります
 ]]></programlisting>
         </example>
 
-        <sect3 id="zend.locale.appendix.numberscripts.supported">
-
-            <title>サポートしている数値系の一覧</title>
-
-            <para>
-                <table id="zend.locale.appendix.numberscripts.supported.table">
-                    <title>サポートしている数値系の一覧</title>
-                    <tgroup cols="2">
-                        <thead>
-                            <row>
-                                <entry>記法名</entry>
-                                <entry>文字</entry>
-                            </row>
-                        </thead>
-                        <tbody>
-                            <row>
-                                <entry>アラビア文字</entry>
-                                <entry>Arab</entry>
-                            </row>
-                            <row>
-                                <entry>バリ文字</entry>
-                                <entry>Bali</entry>
-                            </row>
-                            <row>
-                                <entry>ベンガル文字</entry>
-                                <entry>Beng</entry>
-                            </row>
-                            <row>
-                                <entry>デーバナーガリー文字</entry>
-                                <entry>Deva</entry>
-                            </row>
-                            <row>
-                                <entry>グジャラート文字</entry>
-                                <entry>Gujr</entry>
-                            </row>
-                            <row>
-                                <entry>グルムキー文字</entry>
-                                <entry>Guru</entry>
-                            </row>
-                            <row>
-                                <entry>カンナダ文字</entry>
-                                <entry>Knda</entry>
-                            </row>
-                            <row>
-                                <entry>カンボジア文字</entry>
-                                <entry>Khmr</entry>
-                            </row>
-                            <row>
-                                <entry>ラオ文字</entry>
-                                <entry>Laoo</entry>
-                            </row>
-                            <row>
-                                <entry>リンブ文字</entry>
-                                <entry>Limb</entry>
-                            </row>
-                            <row>
-                                <entry>マラヤーラム文字</entry>
-                                <entry>Mlym</entry>
-                            </row>
-                            <row>
-                                <entry>モンゴル文字</entry>
-                                <entry>Mong</entry>
-                            </row>
-                            <row>
-                                <entry>ミャンマー文字</entry>
-                                <entry>Mymr</entry>
-                            </row>
-                            <row>
-                                <entry>タイレ文字</entry>
-                                <entry>Talu</entry>
-                            </row>
-                            <row>
-                                <entry>N'Ko</entry>
-                                <entry>Nkoo</entry>
-                            </row>
-                            <row>
-                                <entry>オリヤー文字</entry>
-                                <entry>Orya</entry>
-                            </row>
-                            <row>
-                                <entry>タミール文字</entry>
-                                <entry>Taml</entry>
-                            </row>
-                            <row>
-                                <entry>テルグ文字</entry>
-                                <entry>Telu</entry>
-                            </row>
-                            <row>
-                                <entry>タイ文字</entry>
-                                <entry>Tale</entry>
-                            </row>
-                            <row>
-                                <entry>チベット文字</entry>
-                                <entry>Tibt</entry>
-                            </row>
-                        </tbody>
-                    </tgroup>
-                </table>
-            </para>
-
-        </sect3>
+        <para>
+            サポートする数値系の一覧は
+            <methodname>Zend_Locale::getTranslationList('numberingsystem', 'en')</methodname>
+            をコールすれば取得できます。
+        </para>
 
     </sect2>
 

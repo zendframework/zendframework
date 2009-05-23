@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15672 -->
 <sect1 id="zend.locale.introduction">
 
     <title>導入</title>
@@ -579,8 +579,21 @@ Zend_Locale_Format::setOptions(array('locale' => Zend_Locale_Format::STANDARD,
             にのみキャッシュを設定します。そうしないと、
             後から設定したキャッシュがそれまでの内容を上書きしてしまうことになります。
             利便性を考慮して、静的メソッド
-            <code>getCache()</code>、<code>hasCache()</code>、<code>clearCache()</code> および
-            <code>removeCache()</code> も用意されています。
+            <methodname>getCache()</methodname>、<methodname>hasCache()</methodname>、
+            <methodname>clearCache()</methodname> および
+            <methodname>removeCache()</methodname> も用意されています。
+        </para>
+
+        <para>
+            キャッシュを設定しなかった場合は、<classname>Zend_Locale</classname>
+            が自動的にキャッシュを設定します。
+            時には、パフォーマンスが低下するのを承知のうえで
+            敢えてキャッシュを設定しないようにしたいこともあるでしょう。
+            そんな場合は、静的メソッド
+            <methodname>disableCache(true)</methodname> を使用します。
+            このメソッドは、実際に設定されているキャッシュを無効にする
+            (削除はしない) だけでなく、
+            キャッシュの設定を省略した際に自動的にキャッシュが設定されてしまうことも防ぎます。
         </para>
 
     </sect2>

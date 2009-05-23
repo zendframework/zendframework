@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15666 -->
+<!-- EN-Revision: 15672 -->
 <sect1 id="zend.locale.functions">
 
     <title>Zend_Locale の使用法</title>
@@ -717,6 +717,12 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             そして正規表現が配列の値となります。
                         </entry>
                     </row>
+                    <row>
+                        <entry><emphasis>NumberingSystem</emphasis></entry>
+                        <entry>
+                            桁表記に使用する文字の一覧を返します。
+                        </entry>
+                    </row>
                 </tbody>
             </tgroup>
         </table>
@@ -1272,6 +1278,12 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             指定した領域に対応する郵便番号の正規表現を返します。
                             領域は ISO4217 形式の文字列で指定する必要があります。
                             たとえば世界全体は '001' となります。
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>NumberingSystem</emphasis></entry>
+                        <entry>
+                            桁表記に使用する文字を返します。
                         </entry>
                     </row>
                 </tbody>

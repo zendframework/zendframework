@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15713 -->
 <sect1 id="zend.auth.adapter.http">
 
     <title>HTTP 認証アダプタ</title>
@@ -194,7 +194,7 @@
                 <code>resolve()</code> メソッドはテキストファイルを走査し、
                 ユーザ名とレルムにマッチする行を探します。テキストファイルのフォーマットは
                 Apache の htpasswd ファイルと似た形式で
-                <programlisting><![CDATA[
+                <programlisting language="txt"><![CDATA[
 <username>:<realm>:<credentials>\n
 ]]></programlisting>
                 のようになります。個々の行は

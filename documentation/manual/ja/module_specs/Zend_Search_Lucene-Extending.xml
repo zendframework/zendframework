@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15713 -->
 <sect1 id="zend.search.lucene.extending">
     <title>拡張性</title>
 
@@ -372,7 +372,7 @@ Zend_Search_Lucene_Search_Similarity::setDefault($mySimilarity);
         <para>
         Zend_Search_Lucene_Storage_Directory のメソッドは以下のとおりです。
         </para>
-        <programlisting><![CDATA[
+        <programlisting language="php"><![CDATA[
 abstract class Zend_Search_Lucene_Storage_Directory {
 /**
  * 保存先を閉じます
@@ -467,7 +467,7 @@ abstract function getFileObject($filename);
         Zend_Search_Lucene_Storage_File クラスを実装する際に
         オーバーロードしなければならないメソッドは 2 つだけです。
         </para>
-        <programlisting><![CDATA[
+        <programlisting language="php"><![CDATA[
 class MyFile extends Zend_Search_Lucene_Storage_File {
     /**
      * ファイル上の位置を指定し、そこにファイルポインタを進めます。

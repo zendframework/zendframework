@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15713 -->
 <sect1 id="zend.service.yahoo">
     <title>Zend_Service_Yahoo</title>
     <sect2 id="zend.service.yahoo.introduction">
@@ -30,7 +30,7 @@
         </para>
         <example id="zend.service.yahoo.websearch.example-1">
             <title>Yahoo! を使用したウェブの検索</title>
-            <programlisting><![CDATA[
+            <programlisting language="php"><![CDATA[
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
 $results = $yahoo->webSearch('PHP');
 foreach ($results as $result) {
@@ -53,7 +53,7 @@ foreach ($results as $result) {
         </para>
         <example id="zend.service.yahoo.imagesearch.example-1">
             <title>Yahoo! を使用した画像の検索</title>
-            <programlisting><![CDATA[
+            <programlisting language="php"><![CDATA[
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
 $results = $yahoo->imageSearch('PHP');
 foreach ($results as $result) {
@@ -73,7 +73,7 @@ foreach ($results as $result) {
         </para>
         <example id="zend.service.yahoo.videosearch.example-1">
             <title>Yahoo! を使用した動画の検索</title>
-            <programlisting><![CDATA[
+            <programlisting language="php"><![CDATA[
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
 $results = $yahoo->videoSearch('PHP');
 foreach ($results as $result) {
@@ -93,7 +93,7 @@ foreach ($results as $result) {
         </para>
         <example id="zend.service.yahoo.localsearch.example-1">
             <title>Yahoo! を使用した Local Businesses and Services の検索</title>
-            <programlisting><![CDATA[
+            <programlisting language="php"><![CDATA[
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
 $results = $yahoo->localSearch('Apple Computers', array('zip' => '95014'));
 foreach ($results as $result) {
@@ -112,7 +112,7 @@ foreach ($results as $result) {
         </para>
         <example id="zend.service.yahoo.newssearch.example-1">
             <title>Yahoo! News の検索</title>
-            <programlisting><![CDATA[
+            <programlisting language="php"><![CDATA[
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
 $results = $yahoo->newsSearch('PHP');
 foreach ($results as $result) {
@@ -132,7 +132,7 @@ foreach ($results as $result) {
         </para>
         <example id="zend.service.yahoo.inlinkdatasearch.example-1">
             <title>Yahoo! Site Explorer Inbound Links の検索</title>
-            <programlisting><![CDATA[
+            <programlisting language="php"><![CDATA[
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
 $results = $yahoo->inlinkDataSearch('http://framework.zend.com/');
 foreach ($results as $result) {
@@ -152,7 +152,7 @@ foreach ($results as $result) {
         </para>
         <example id="zend.service.yahoo.pagedatasearch.example-1">
             <title>Yahoo! Site Explorer の PageData の検索</title>
-            <programlisting><![CDATA[
+            <programlisting language="php"><![CDATA[
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
 $results = $yahoo->pageDataSearch('http://framework.zend.com/');
 foreach ($results as $result) {

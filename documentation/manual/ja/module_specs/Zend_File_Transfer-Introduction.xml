@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15713 -->
 <sect1 id="zend.file.transfer.introduction">
 
     <title>Zend_File_Transfer</title>
@@ -55,7 +55,7 @@
             まずはファイルアップロードフォームから。
             今回の例では。アップロードしたいファイルはひとつです。
         </para>
-        <programlisting><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <form enctype="multipart/form-data" action="/file/upload" method="POST">
     <input type="hidden" name="MAX_FILE_SIZE" value="100000" />
         アップロードするファイルを選択: <input name="uploadedfile" type="file" />

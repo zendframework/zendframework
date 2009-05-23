@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15713 -->
 <sect1 id="zend.rest.server">
     <title>Zend_Rest_Server</title>
 
@@ -93,7 +93,7 @@ $server->handle();
 
         <example id="zend.rest.server.customstatus.example-1">
             <title>独自のステータスを返す</title>
-            <programlisting><![CDATA[
+            <programlisting language="php"><![CDATA[
 /**
  * Say Hello
  *
@@ -125,7 +125,7 @@ $server->handle();
         <example id="zend.rest.server.customxml.example-1">
             <title>独自の XML を返す</title>
 
-            <programlisting><![CDATA[
+            <programlisting language="php"><![CDATA[
 /**
  * Say Hello
  *

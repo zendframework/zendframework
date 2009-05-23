@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15637 -->
+<!-- EN-Revision: 15713 -->
 <sect1 id="zend.db.table">
 
     <title>Zend_Db_Table</title>
@@ -1122,7 +1122,7 @@ $rows = $table->fetchAll($select);
 $table = new Bugs();
 
 // join する際には、from 部を指定して取得するのが重要です
-$select = $table->select(Zend_Db_Table::SELECT_WITH_FROM_PART); 
+$select = $table->select(Zend_Db_Table::SELECT_WITH_FROM_PART);
 $select->setIntegrityCheck(false)
        ->where('bug_status = ?', 'NEW')
        ->join('accounts', 'accounts.account_name = bugs.reported_by')
@@ -1151,7 +1151,7 @@ $rows = $table->fetchAll($select);
 
                 <title>Zend_Db_Table_Select の整合性チェックを削除し、JOIN した行を許可する</title>
 
-                <programlisting><![CDATA[
+                <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $select = $table->select(Zend_Db_Table::SELECT_WITH_FROM_PART)->setIntegrityCheck(false);

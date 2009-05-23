@@ -1,94 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.loader.load">
 
-    <title>Динамическая загрузка файлов и классов<!--Loading Files and Classes Dynamically--></title>
+    <title>Динамическая загрузка файлов и классов</title>
 
     <para>
-        Класс Zend_Loader включает в себя методы, помогающие производить
-        динамическую загрузку файлов.
-<!--
-        The Zend_Loader class includes methods to help you load files dynamically.
--->
+        Класс <classname>Zend_Loader</classname> включает в себя методы,
+        помогающие производить динамическую загрузку файлов.
     </para>
 
     <tip>
         <title>Zend_Loader vs. require_once()</title>
         <para>
-            Методы Zend_Loader лучше всего использовать, если имя файла,
-            которого нужно загрузить, является переменным - например, основано
-            на вводе пользователя или аргументе метода. Если вы загружаете файл
-            или класс, чье имя является константой, то использование Zend_Loader
+            Методы <classname>Zend_Loader</classname> лучше всего использовать,
+            когда имя файла для загрузки является переменным - например,
+            если оно базируется на данных, введенных пользователем,
+            или аргументе метода.
+            Если вы загружаете файл или класс, чье имя является постоянным,
+            то использование <classname>Zend_Loader</classname>
             не дает каких-либо преимуществ по сравнению использованием обычных
             функций PHP, таких, как
             <ulink url="http://php.net/require_once"><code>require_once()</code></ulink>.
-<!--
-            The Zend_Loader methods are best used if the filename you need to
-            load is variable.  For example, if it is based on a parameter from
-            user input or method argument.  If you are loading a file or a
-            class whose name is constant, there is no benefit to using
-            Zend_Loader over using traditional PHP functions such as
-            <ulink url="http://php.net/require_once"><code>require_once()</code></ulink>.
--->
         </para>
     </tip>
 
     <sect2 id="zend.loader.load.file">
 
-        <title>Загрузка файлов<!--Loading Files--></title>
+        <title>Загрузка файлов</title>
 
         <para>
             Статический метод <code>Zend_Loader::loadFile()</code> загружает
             файл PHP. Загружаемый файл должен содержать код PHP. Метод является
-            оберткой к PHP-функции <ulink url="http://php.net/include"><code>include()</code></ulink>.
-            Этот метод бросает исключение <code>Zend_Exception</code> в случае
-            неуспеха - например, если требуемый файл не существует.
-<!--
-            The static method <code>Zend_Loader::loadFile()</code> loads a PHP
-            file.  The file loaded may contain any PHP code.
-            The method is a wrapper for the PHP function
+            оберткой к PHP-функции
             <ulink url="http://php.net/include"><code>include()</code></ulink>.
-            This method throws <code>Zend_Exception</code> on failure, for example
-            if the specified file does not exist.
--->
+            Этот метод возвращает <code>false</code> в случае
+            неуспеха - например, если требуемый файл не существует.
         </para>
 
         <example id="zend.loader.load.file.example">
-            <title>Пример использования метода loadFile()<!--Example of loadFile() method--></title>
-            <programlisting role="php"><![CDATA[<?php
-
-Zend_Loader::loadFile($filename, $dirs=null, $once=false)
-
-?>]]></programlisting>
+            <title>Пример использования метода loadFile()</title>
+            <programlisting role="php"><![CDATA[
+Zend_Loader::loadFile($filename, $dirs=null, $once=false);
+]]></programlisting>
     </example>
 
         <para>
-            Аргумент <code>$filename</code> задает имя файла для загрузки, оно
-            не должно содержать пути к файлу. В целях безопасности производится
+            Аргумент <code>$filename</code> задает имя файла для загрузки, он
+            не должен содержать путь к файлу. В целях безопасности производится
             проверка <code>$filename</code>. <code>$filename</code> должен
             содержать только алфавитно-цифровые символы, тире ("-"), знак
             подчеркивания ("_") и точку ("."). На аргумент <code>$dirs</code>
             эти ограничения не распространяются.
-<!--
-            The <code>$filename</code> argument specifies the filename to load,
-            which must not contain any path information.
-            A security check is performed on <code>$filename</code>.
-            The <code>$filename</code> may only contain alphanumeric characters,
-            dashes ("-"), underscores ("_"), or periods (".").
-            No such restriction is placed on the <code>$dirs</code> argument.
--->
         </para>
 
         <para>
-            <code>$dirs</code> задает директории для поиска файла. Если он равен
+            Аргумент <code>$dirs</code> задает директории, в которых должен
+            производиться поиск файла. Если его значение равно
             <code>NULL</code>, то для поиска используется только
-            <code>include_path</code>. Если он является строкой или массивом, то
-            файл сначала ищется в данной директории (директориях) и затем в
-            <code>include_path</code>.
-<!--
-            The <code>$dirs</code> argument specifies directories to search for
-            the file.  If <code>NULL</code>, only the <code>include_path</code>
-            is searched.  If a string or an array, the directory or directories
-            specified will be searched, and then the <code>include_path</code>.
--->
+            <code>include_path</code>. Если его значение является строкой или
+            массивом, то файл сначала ищется в данной директории (директориях),
+            а затем в <code>include_path</code>.
         </para>
 
         <para>
@@ -97,55 +68,36 @@ Zend_Loader::loadFile($filename, $dirs=null, $once=false)
             загрузки файла использует PHP-функцию
             <ulink url="http://php.net/include"><code>include_once()</code></ulink>,
             иначе используется функция <ulink url="http://php.net/include_once"><code>include()</code></ulink>.
-<!--
-            The <code>$once</code> argument is a boolean.  If <code>TRUE</code>,
-            <code>Zend_Loader::loadFile()</code> uses the PHP function
-            <ulink url="http://php.net/include"><code>include_once()</code></ulink>
-            for loading the file, otherwise the PHP function
-            <ulink url="http://php.net/include_once"><code>include()</code></ulink>
-            is used.
--->
         </para>
 
     </sect2>
 
     <sect2 id="zend.loader.load.class">
 
-        <title>Загрузка классов<!--Loading Classes--></title>
+        <title>Загрузка классов</title>
 
         <para>
             Статический метод <code>Zend_Loader::loadClass($class, $dirs)</code>
             загружает файл PHP и затем проверяет наличие требуемого класса.
-<!--
-            The static method <code>Zend_Loader::loadClass($class, $dirs)</code>
-            loads a PHP file and then checks for the existance of the class.
--->
         </para>
 
         <example id="zend.loader.load.class.example">
-            <title>Пример использования метода loadClass()<!--Example of loadClass() method--></title>
-            <programlisting role="php"><![CDATA[<?php
-
+            <title>Пример использования метода loadClass()</title>
+            <programlisting role="php"><![CDATA[
 Zend_Loader::loadClass('Container_Tree',
     array(
         '/home/production/mylib',
         '/home/production/myapp'
     )
 );
-
-?>]]></programlisting>
+]]></programlisting>
         </example>
 
         <para>
             Строка, задающая класс, преобразуется в относительный путь
-            посредством замены знаков подчеркивания разделителями директорий и
-            добавления расширения '.php' в конец. В примере выше
-            'Container_Tree' преобразуется в 'Container/Tree.php'.
-<!--
-            The string specifying the class is converted to a relative path
-            by substituting directory separates for underscores, and appending
-            '.php'.  In the example above, 'Container_Tree' becomes 'Container/Tree.php'.
--->
+            посредством замены знаков подчеркивания разделителями директорий,
+            используемыми в вашей ОС, и добавления расширения '.php'. В примере
+            выше на Windows будет использоваться путь 'Container/Tree.php'.
         </para>
 
         <para>
@@ -153,24 +105,13 @@ Zend_Loader::loadClass('Container_Tree',
             <code>Zend_Loader::loadClass()</code> ищет в директориях в
             том порядке, в котором они были определены. Загружается первый
             найденный файл. Если файл не найден в директориях
-            <code>$dirs</code>, то производится поиск в include_path.
-<!--
-            If <code>$dirs</code> is a string or an array,
-            <code>Zend_Loader::loadClass()</code> searches the directories in
-            the order supplied.  The first matching file is loaded.  If the file
-            does not exist in the specified <code>$dirs</code>, then the
-            include_path for the PHP environment is searched.
--->
+            <code>$dirs</code>, то производится поиск в <code>include_path</code>.
         </para>
 
         <para>
-            Если файл не найден или класс не существует после загрузки, то
+            Если файл не найден, или класс не существует после загрузки, то
             <code>Zend_Loader::loadClass()</code> бросает
-            исключениеZend_Exception.
-<!--
-            If the file is not found or the class does not exist after the load,
-            <code>Zend_Loader::loadClass()</code> throws a Zend_Exception.
--->
+            исключение <code>Zend_Exception</code>.
         </para>
 
         <para>
@@ -178,39 +119,27 @@ Zend_Loader::loadClass('Container_Tree',
             <code>Zend_Loader::loadFile()</code>, поэтому имя класса должно
             содержать только алфавитно-цпфровые символы, тире ('-'), знак
             подчеркивания ('_') и точку ('.').
-<!--
-            <code>Zend_Loader::loadFile()</code> is used for loading, so the
-            class name may only contain alphanumeric characters and the hyphen
-            ('-'), underscore ('_'), and period ('.').
--->
         </para>
 
     </sect2>
 
     <sect2 id="zend.loader.load.isreadable">
 
-        <title>Проверка, является ли файл доступным для чтения<!--Testing if a File is Readable--></title>
+        <title>Проверка на возможность чтения из файла</title>
 
         <para>
             Статический метод <code>Zend_Loader::isReadable($pathname)</code>
             возвращает <code>TRUE</code>, если по заданному пути существует файл
             и он доступен для чтения, иначе возвращается <code>FALSE</code>.
-<!--
-            The static method <code>Zend_Loader::isReadable($pathname)</code>
-            returns <code>TRUE</code> if a file at the specified pathname exists
-            and is readable, FALSE otherwise.
--->
         </para>
 
         <example id="zend.loader.load.isreadable.example">
-            <title>Пример использования метода isReadable()<!--Example of isReadable() method--></title>
-            <programlisting role="php"><![CDATA[<?php
-
+            <title>Пример использования метода isReadable()</title>
+            <programlisting role="php"><![CDATA[
 if (Zend_Loader::isReadable($filename)) {
     // делаем что-либо с файлом $filename
 }
-
-?>]]></programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -218,91 +147,94 @@ if (Zend_Loader::isReadable($filename)) {
             может содержать путь к файлу. Этот метод является оберкой к
             PHP-функции
             <ulink url="http://php.net/is_readable"><code>is_readable()</code></ulink>.
-            Эта функция не производит поиск в <code>include_path</code>, в то
-            время как метод <code>Zend_Loader::isReadable()</code> производит.
-<!--
-            The <code>$filename</code> argument specifies the filename to
-            check.  This may contain path information.
-            This method is a wrapper for the PHP function
-            <ulink url="http://php.net/is_readable"><code>is_readable()</code></ulink>.
-            The PHP function does not search the <code>include_path</code>,
-            while <code>Zend_Loader::isReadable()</code> does.
--->
+            Метод <code>Zend_Loader::isReadable()</code> производит поиск в
+            <code>include_path</code>, в то время как <code>is_readable()</code>
+            этого не делает.
         </para>
 
     </sect2>
 
     <sect2 id="zend.loader.load.autoload">
 
-        <title>Использование автозагрузчика<!--Using the Autoloader--></title>
+        <title>Использование автозагрузчика</title>
 
         <para>
-            Класс Zend_Loader содержит метод, который вы можете регистрировать
+            Класс <classname>Zend_Loader</classname> содержит метод, который
+            можно регистрировать
             через автозагрузчик PHP SPL. <code>Zend_Loader::autoload()</code>
-            является методом обратного вызова. Для удобства Zend_Loader
-            предоставляет метод <code>registerAutoload()</code> для регистрации
-            своего метода <code>autoload()</code>. Если в среде PHP отсутствует
-            расширение <code>spl_autoload</code>, то метод
-            <code>registerAutoload()</code> бросает исключение Zend_Exception.
-<!--
-            The Zend_Loader class contains a method you can register with the
-            PHP SPL autoloader.  <code>Zend_Loader::autoload()</code> is the
-            callback method.  As a convenience, Zend_Loader provides the
-            <code>registerAutoload()</code> function register its
-            <code>autoload()</code> method.  If the <code>spl_autoload</code>
-            extension is not present in your PHP environment, then
-            <code>registerAutoload()</code> method throws a Zend_Exception.
--->
+            является методом обратного вызова. Для удобства
+            <classname>Zend_Loader</classname> предоставляет метод
+            <code>registerAutoload()</code> для регистрации
+            его метода <code>autoload()</code>. Если в используемой среде
+            PHP отсутствует расширение <code>spl_autoload</code>, то метод
+            <code>registerAutoload()</code> бросает исключение
+            <classname>Zend_Exception</classname>.
         </para>
 
         <example id="zend.loader.load.autoload.example">
-            <title>Пример регистрации метода обратного вызова автозагрузки<!--Example of registering the autoloader callback method--></title>
-            <programlisting role="php"><![CDATA[<?php
-
+            <title>Пример регистрации метода автозагрузки</title>
+            <programlisting role="php"><![CDATA[
 Zend_Loader::registerAutoload();
-
-?>]]></programlisting>
+]]></programlisting>
         </example>
 
         <para>
-            После регистрации метода обратного вызова автозагрузки вы можете
+            После регистрации метода автозагрузки вы можете
             ссылаться на классы из Zend Framework без их явной загрузки.
             Метод <code>autoload()</code> автоматически запускает метод
             <code>Zend_Loader::loadClass()</code>, когда вы ссылаетесь на класс.
-<!--
-            After registering the Zend Framework autoload callback, you can
-            reference classes from Zend Framework without having to load
-            them explicitly.  The <code>autoload()</code> method uses
-            <code>Zend_Loader::loadClass()</code> automatically when you
-            reference a class.
--->
         </para>
 
         <para>
-            Если вы расширили класс Zend_Loader, то можете передать опциональный
-            аргумент методу <code>registerAutoload()</code>, чтобы определить
-            класс, из которого следует регистрировать метод
+            Если вы расширили класс <classname>Zend_Loader</classname>, то
+            можете передавать методу <code>registerAutoload()</code>
+            опциональный аргумент для указания
+            класса, из которого следует регистрировать метод
             <code>autoload()</code>.
-<!--
-            If you have extended the Zend_Loader class, you can give an
-            optional argument to <code>registerAutoload()</code>, to specify
-            the class from which to register an <code>autoload()</code> method.
--->
         </para>
 
         <example id="zend.loader.load.autoload.example-extended">
-            <title>Пример регистрации метода автозагрузки из расширенного класса<!--Example of registering the autoload callback method from an extended class--></title>
-            <programlisting role="php"><![CDATA[<?php
-
+            <title>Пример регистрации метода автозагрузки из расширенного класса</title>
+            <para>
+                В силу особенностей семантики статических функций в PHP
+                вы должны реализовать код для обоих методов
+                <code>loadClass()</code> и <code>autoload()</code>, при этом
+                <code>autoload()</code> должен вызывать
+                <code>self::loadClass()</code>. Если ваш метод
+                <code>autoload()</code> делегирует родительскому классу вызов
+                <code>self::loadClass()</code> то будет вызван метод
+                родительского класса, не подкласса.
+            </para>
+            <programlisting role="php"><![CDATA[
 class My_Loader extends Zend_Loader
 {
-    // реализация собственного функционала
+    public static function loadClass($class, $dirs = null)
+    {
+        parent::loadClass($class, $dirs);
+    }
+
+    public static function autoload($class)
+    {
+        try {
+            self::loadClass($class);
+            return $class;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
 }
 
 Zend_Loader::registerAutoload('My_Loader');
-
-?>]]></programlisting>
+]]></programlisting>
         </example>
+
+        <para>
+            Регистрацию метода автозагрузки можно отменить.
+            Метод <code>registerAutoload()</code> имеет опциональный
+            второй аргумент, его значением по умолчанию является
+            <code>true</code>. Если этот аргумент равен <code>false</code>,
+            то данный метод автозагрузки удаляется из стека SPL.
+        </para>
 
     </sect2>
 

@@ -252,7 +252,7 @@ var_dump( $registry['index'] );
             <code>ArrayObject::ARRAY_AS_PROPS</code>, и инициализировать
             статический экземпляр. Необходимо сделать это до того, как будет
             сделано первое обращение к статическому реестру.
-            <emphasis role="strong">Будьте осторожны</emphasis>, используя эту
+            <emphasis>Будьте осторожны</emphasis>, используя эту
             опцию, поскольку некоторые версии PHP имеют ошибки, связанные с этой
             опцией.
 <!--
@@ -263,7 +263,7 @@ var_dump( $registry['index'] );
             object using the <code>ArrayObject::ARRAY_AS_PROPS</code> option,
             and initialize the static instance.  You must do this before
             the static registry has been accessed for the first time.
-            <emphasis role="strong">Beware</emphasis> of using this option,
+            <emphasis>Beware</emphasis> of using this option,
             since some versions of PHP have bugs when using the registry
             with this option.
 -->

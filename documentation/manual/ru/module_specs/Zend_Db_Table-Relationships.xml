@@ -146,7 +146,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis role="strong">columns</emphasis> =>
+                    <emphasis>columns</emphasis> =>
                     Строка или массив строк с имен(ем/ами)
                     столбцов внешних ключей в зависимой таблице.
                 </para>
@@ -157,7 +157,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">refTableClass</emphasis> =>
+                    <emphasis>refTableClass</emphasis> =>
                     Имя класса родительской таблицы. Используйте имя класса, а
                     не таблицы в БД.
                 </para>
@@ -175,7 +175,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">refColumns</emphasis> =>
+                    <emphasis>refColumns</emphasis> =>
                     Строка или массив строк, в котором перечислены имена
                     столбцов первичного ключа в родительской таблице.
                 </para>
@@ -195,7 +195,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">onDelete</emphasis> =>
+                    <emphasis>onDelete</emphasis> =>
                     Правило для действия, выполняемого, когда в родительской
                     таблице удаляется строка. См.
                     <xref linkend="zend.db.table.relationships.cascading" />
@@ -204,7 +204,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">onUpdate</emphasis> =>
+                    <emphasis>onUpdate</emphasis> =>
                     Правило для действия, выполняемого, когда изменяются
                     значения в столбцах первичного ключа родительской таблицы.
                     См.
@@ -776,7 +776,7 @@ $products = $bug1234->findProductsViaBugsProductsByBug();
             <title>Объявление DRI в БД</title>
             <para>
                 Объявление каскадных операций в Zend_Db_Table предназначено
-                <emphasis role="strong">только</emphasis> для тех СУРБД, которые
+                <emphasis>только</emphasis> для тех СУРБД, которые
                 не поддерживают декларативной ссылочной целостности (declarative
                 referential integrity - сокр. DRI).
             </para>
@@ -896,7 +896,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
             <title>Примечания относительно каскадных операций</title>
 
             <para>
-                <emphasis role="strong">Каскадные операции, вызываемые
+                <emphasis>Каскадные операции, вызываемые
                 Zend_Db_Table, не являются атомарными.</emphasis>
             </para>
 
@@ -939,7 +939,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
             </para>
 
             <para>
-                <emphasis role="strong">Каскадные операции в Zend_Db_Table вызываются только классом Zend_Db_Table</emphasis>
+                <emphasis>Каскадные операции в Zend_Db_Table вызываются только классом Zend_Db_Table</emphasis>
             </para>
 
             <para>
@@ -956,7 +956,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
             </para>
 
             <para>
-                <emphasis role="strong">Не существует каскадного добавления
+                <emphasis>Не существует каскадного добавления
                 <code>INSERT</code>.</emphasis>
             </para>
 

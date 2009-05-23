@@ -207,7 +207,7 @@ Zend_Session::start();
                     большинства случаев. Но необходимо будет следить за тем,
                     чтобы первый вызов
                     <code>new Zend_Session_Namespace()()</code> всегда
-                    происходил <emphasis role="strong">до того</emphasis>, как
+                    происходил <emphasis>до того</emphasis>, как
                     выходные данные будут отправлены клиенту (т.е. до того, как
                     агенту пользователя будут отправлены HTTP-заголовки),
                     если используются основанные на куках сессии
@@ -222,7 +222,7 @@ Zend_Session::start();
                     4. Correct: Just use <code>new Zend_Session_Namespace()</code> whenever needed, and the session will
                     be automatically started within Zend_Session. This offers extremely simple usage that works well in
                     most situations. However, you then become responsible for ensuring that the first <code>new
-                    Zend_Session_Namespace()</code> happens <emphasis role="strong">before</emphasis> any output (i.e.
+                    Zend_Session_Namespace()</code> happens <emphasis>before</emphasis> any output (i.e.
                     <ulink url="http://www.php.net/headers_sent">HTTP headers</ulink>
                     ) has been sent by PHP to the client, if you are using the default, cookie-based sessions (strongly
                     recommended). Using
@@ -746,7 +746,7 @@ else {
             юнит-тестов для покрытия кода в своих приложениях.
             Если при выполнении юнит-тестирований после завершения сессии были
             использованы любые связанные с записью методы, то генерируется
-            исключение "<emphasis role="strong">Zend_Session is currently marked
+            исключение "<emphasis>Zend_Session is currently marked
             as read-only</emphasis>" ("Zend_Session помечен как доступный только
             для чтения"). Тем не менее, юнит-тесты, использующие Zend_Session,
             требуют особого внимания в разработке, поскольку закрытие
@@ -761,7 +761,7 @@ else {
 <!--
             Zend Framework relies on PHPUnit to facilitate testing of itself. Many developers extend the existing
             suite of unit tests to cover the code in their applications. The exception
-            "<emphasis role="strong">Zend_Session is currently marked as read-only</emphasis>" is thrown while
+            "<emphasis>Zend_Session is currently marked as read-only</emphasis>" is thrown while
             performing unit tests, if any write-related methods are used after ending the session. However, unit tests
             using Zend_Session require extra attention, because closing (<code>Zend_Session::writeClose()</code>), or
             destroying a session (<code>Zend_Session::destroy()</code>) prevents any further setting or unsetting of

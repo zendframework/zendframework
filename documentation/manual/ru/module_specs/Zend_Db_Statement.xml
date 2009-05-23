@@ -156,7 +156,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
             <itemizedlist>
                 <listitem>
                     <para>
-                        <emphasis role="strong">Формат извлечения</emphasis> -
+                        <emphasis>Формат извлечения</emphasis> -
                         первый аргумент. Он используется для управления
                         структурой, в которой возвращаются данные. Описания
                         допустимых значений и соответствующих им форматов данных
@@ -165,7 +165,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">Ориентация курсора</emphasis> -
+                        <emphasis>Ориентация курсора</emphasis> -
                         второй аргумент. Значением по умолчанию является
                         константа Zend_Db::FETCH_ORI_NEXT, которая просто
                         означает, что каждый вызов метода <code>fetch()</code>
@@ -176,7 +176,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">Смещение</emphasis> - третий
+                        <emphasis>Смещение</emphasis> - третий
                         аргумент.
                         Если ориентация курсора - Zend_Db::FETCH_ORI_ABS, то
                         число смещения - порядковый номер строки для

@@ -17,7 +17,7 @@
 
     <para>
         Для веб-приложений, написанных с использованием PHP,
-        <emphasis role="bold">сессия</emphasis> (session) представляет собой
+        <emphasis>сессия</emphasis> (session) представляет собой
         логическую связь один-к-одному между постоянными данными на стороне
         сервера и определенным агентом пользователя (т.е. веб-броузером).
         Zend_Session помогает сохранять и управлять данными сессий, являющимися
@@ -26,18 +26,18 @@
         данные сессий не хранятся на клиентской стороне, они становятся
         доступными клиенту только если код серверной стороны добровольно
         предоставляет эти данные в ответ на запрос клиента.
-        <emphasis role="bold">Пространства имен сессий</emphasis> предоставляют
+        <emphasis>Пространства имен сессий</emphasis> предоставляют
         доступ к данным сессий с использованиием классических
         <ulink url="http://en.wikipedia.org/wiki/Namespace_%28computer_science%29">пространств имен</ulink>,
         логически реализованным как именованные группы ассоциативных массивов.
 <!--
-        With web applications written using PHP, a <emphasis role="bold">session</emphasis> represents a logical,
+        With web applications written using PHP, a <emphasis>session</emphasis> represents a logical,
         one-to-one connection between server-side, persistent state data and a particular user agent client (e.g. web
         browser). Zend_Session helps manage and preserve session data, a logical complement of cookie data, across
         multiple page requests by the same client. Unlike cookie data, session data is not stored on the client side,
         and it is only shared with the client when server-side source code voluntarily makes the data available via a
         response to a request from the client. For the purposes of this component and documentation, session data refers
-        to the server-side data managed by Zend_Session. <emphasis role="bold">Session namespaces</emphasis> provide
+        to the server-side data managed by Zend_Session. <emphasis>Session namespaces</emphasis> provide
         access to session data using classic
         <ulink url="http://en.wikipedia.org/wiki/Namespace_%28computer_science%29">namespaces</ulink>
         implemented logically as named groups of associative arrays, keyed by strings (similar to normal PHP arrays).

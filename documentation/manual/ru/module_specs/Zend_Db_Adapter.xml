@@ -271,7 +271,7 @@ $db = Zend_Db::factory($config->database);
             <itemizedlist>
                 <listitem>
                     <para>
-                        <emphasis role="strong">host</emphasis>:
+                        <emphasis>host</emphasis>:
                         строка, содержащая имя хоста или IP сервера БД. Если
                         база данных размещается на том же хосте, что и
                         приложение PHP, то вы можете использовать 'localhost'
@@ -280,26 +280,26 @@ $db = Zend_Db::factory($config->database);
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">username</emphasis>:
+                        <emphasis>username</emphasis>:
                         идентификатор учетной записи для аутентификации подключения к серверу СУРБД.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">password</emphasis>:
+                        <emphasis>password</emphasis>:
                         пароль  учетной записи для аутентификации подключения к
                         серверу СУРБД.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">dbname</emphasis>:
+                        <emphasis>dbname</emphasis>:
                         имя экземпляра БД на сервере СУРБД.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">port</emphasis>:
+                        <emphasis>port</emphasis>:
                         некоторые сервера СУРБД поддерживают сетевые соединения
                         через указанный администратором порт. Данный параметр
                         дает возможность задать порт, с которым приложение PHP
@@ -309,14 +309,14 @@ $db = Zend_Db::factory($config->database);
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">options</emphasis>:
+                        <emphasis>options</emphasis>:
                         этот параметр является ассоциативным массивом опций,
                         общих для всех классов Zend_Db_Adapter.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">driver_options</emphasis>:
+                        <emphasis>driver_options</emphasis>:
                         этот параметр является ассоциативным массивом
                         дополнительных опций, специфических для данного
                         расширения. Одним из типичных случаев использования
@@ -326,7 +326,7 @@ $db = Zend_Db::factory($config->database);
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">adapterNamespace</emphasis>:
+                        <emphasis>adapterNamespace</emphasis>:
                         имя начальной части имени класса для адаптера вместо
                         'Zend_Db_Adapter'. Используйте его, если нужно
                         использовать метод <code>factory()</code> для загрузки
@@ -493,21 +493,21 @@ try {
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis role="strong">accounts</emphasis> (учетные записи)
+                    <emphasis>accounts</emphasis> (учетные записи)
                     хранит информацию о всех пользователях системы отслеживания
                     ошибок.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">products</emphasis> (продукты)
+                    <emphasis>products</emphasis> (продукты)
                     хранит информацию обо всех программных продуктах, для
                     которых могут отслеживаться ошибки.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">bugs</emphasis> (ошибки) хранит
+                    <emphasis>bugs</emphasis> (ошибки) хранит
                     информацию об ошибках, включая текущее состояние ошибки,
                     лицо, сообщившее об ошибке, лицо, которому назначено
                     устранение ошибки и лицо, которому назначена проверка
@@ -516,7 +516,7 @@ try {
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">bugs_products</emphasis> хранит
+                    <emphasis>bugs_products</emphasis> хранит
                     связи между ошибками и продуктами. Она реализует связь
                     "многие-ко-многим", потому что одна ошибка может относиться
                     к нескольким продуктам, и один продукт может иметь множество
@@ -642,7 +642,7 @@ $result = $db->fetchAll($sql, 2);
             <itemizedlist>
                 <listitem>
                     <para>
-                        <emphasis role="strong">Zend_Db::FETCH_ASSOC</emphasis>:
+                        <emphasis>Zend_Db::FETCH_ASSOC</emphasis>:
                         возвращает данные в массиве ассоциативных массивов.
                         Ключами массива являются имена столбцов в виде строк.
                         Это режим извлечения, используемый по умолчанию в
@@ -669,7 +669,7 @@ $result = $db->fetchAll($sql, 2);
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">Zend_Db::FETCH_NUM</emphasis>:
+                        <emphasis>Zend_Db::FETCH_NUM</emphasis>:
                         возвращает данные в массиве массивов. Массив
                         индексируется целочисленными значениями в соответствии с
                         позицией данного поля в списке выборки запроса.
@@ -677,7 +677,7 @@ $result = $db->fetchAll($sql, 2);
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">Zend_Db::FETCH_BOTH</emphasis>:
+                        <emphasis>Zend_Db::FETCH_BOTH</emphasis>:
                         возвращает данные в массиве массивов. Ключами массива
                         являются как строки, так и целочисленные значения. Число
                         элементов в массиве получается в два раза больше, чем
@@ -686,7 +686,7 @@ $result = $db->fetchAll($sql, 2);
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">Zend_Db::FETCH_COLUMN</emphasis>:
+                        <emphasis>Zend_Db::FETCH_COLUMN</emphasis>:
                         возвращает данные в массиве значений. Значение в каждом
                         массиве является значением, возвращенным из одного
                         столбца результата выборки. По умолчанию это первый
@@ -695,7 +695,7 @@ $result = $db->fetchAll($sql, 2);
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">Zend_Db::FETCH_OBJ</emphasis>:
+                        <emphasis>Zend_Db::FETCH_OBJ</emphasis>:
                         возвращает данные в массиве объектов. По умолчанию
                         используется встроенный в PHP класс stdClass. Столбцы
                         результата выборки доступны в качестве открытых свойств

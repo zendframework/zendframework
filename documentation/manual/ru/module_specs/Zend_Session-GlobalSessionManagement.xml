@@ -167,7 +167,7 @@ remember_me_seconds = 864000
                     <para>
                         string <code>save_path</code> - корректное значение
                         зависит от системы и должно указываться разработчиком с
-                        использованием <emphasis role="strong">абсолютного
+                        использованием <emphasis>абсолютного
                         пути</emphasis> к директории, доступной для чтения и
                         записи процессом PHP. Если директория на заданном пути
                         не существует или недоступна, то
@@ -176,7 +176,7 @@ remember_me_seconds = 864000
                         <code>start()</code>)
 <!--
                         string <code>save_path</code> - The correct value is system dependent, and should be provided by
-                        the developer using an <emphasis role="strong">absolute path</emphasis> to a directory readable
+                        the developer using an <emphasis>absolute path</emphasis> to a directory readable
                         and writable by the PHP process.  If a writable path is not supplied, then <code>Zend_Session
                         </code> will throw an exception when started (i.e. when <code>start()</code> is called).
 -->
@@ -250,11 +250,11 @@ remember_me_seconds = 864000
                         string <code>name</code> - корректное значение зависит
                         от системы и должно устанавливаться разработчиком, с
                         использованием короткого значения,
-                        <emphasis role="strong">уникального</emphasis> для
+                        <emphasis>уникального</emphasis> для
                         приложения ZF.
 <!--
                         string <code>name</code> - The correct value is system dependent, and should be provided by
-                        the developer using a short value <emphasis role="strong">unique</emphasis> to the ZF
+                        the developer using a short value <emphasis>unique</emphasis> to the ZF
                         application.
 -->
                     </para>

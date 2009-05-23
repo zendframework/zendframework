@@ -1315,24 +1315,24 @@ echo "The table name is " . $info['name'] . "\n";
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis role="strong">name</emphasis> => имя таблицы
+                    <emphasis>name</emphasis> => имя таблицы
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">cols</emphasis> =>
+                    <emphasis>cols</emphasis> =>
                     массив имен столбцов в таблице
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">primary</emphasis> =>
+                    <emphasis>primary</emphasis> =>
                     массив имен столбцов в первичном ключе
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">metadata</emphasis> =>
+                    <emphasis>metadata</emphasis> =>
                     ассоциативный массив, включающий в себя имена столбцов и
                     соответствующие им данные о столбцах. Это информация,
                     возвращаемая методом <code>describeTable()</code>.
@@ -1340,7 +1340,7 @@ echo "The table name is " . $info['name'] . "\n";
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">rowClass</emphasis> => имя
+                    <emphasis>rowClass</emphasis> => имя
                     определенного класса, используемого для объектов строк,
                     возвращаемых методами данного экземпляра таблицы. По
                     умолчанию это Zend_Db_Table_Row.
@@ -1348,7 +1348,7 @@ echo "The table name is " . $info['name'] . "\n";
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">rowsetClass</emphasis> =>
+                    <emphasis>rowsetClass</emphasis> =>
                     имя определенного класса, используемого для объектов
                     наборов строк, возвращаемых методами данного экземпляра
                     таблицы. По умолчанию это Zend_Db_Table_Rowset.
@@ -1356,14 +1356,14 @@ echo "The table name is " . $info['name'] . "\n";
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">referenceMap</emphasis> =>
+                    <emphasis>referenceMap</emphasis> =>
                     ассоциативный массив с данными о ссылках на другие таблицы.
                     См. <xref linkend="zend.db.table.relationships.defining" />.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">dependentTables</emphasis> =>
+                    <emphasis>dependentTables</emphasis> =>
                     массив имен классов таблиц, на которые ссылается данная
                     таблица. См.
                     <xref linkend="zend.db.table.relationships.defining" />.
@@ -1371,7 +1371,7 @@ echo "The table name is " . $info['name'] . "\n";
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">schema</emphasis> =>
+                    <emphasis>schema</emphasis> =>
                     имя схемы (базы данных, пространства таблиц) для данной
                     таблицы.
                 </para>
@@ -1407,7 +1407,7 @@ echo "The table name is " . $info['name'] . "\n";
             <itemizedlist>
                 <listitem>
                     <para>
-                        <emphasis role="strong">Вызов метода
+                        <emphasis>Вызов метода
                         Zend_Db_Table_Abstract::setDefaultMetadataCache()</emphasis>
                         - Это позволяет разработчику единовременно установить
                         объект кэша, используемый в всех классах таблиц.
@@ -1415,7 +1415,7 @@ echo "The table name is " . $info['name'] . "\n";
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">Конфигурирование
+                        <emphasis>Конфигурирование
                         Zend_Db_Table_Abstract::__construct()</emphasis> - Это
                         позволяет разработчику установить объект кэша для
                         определенного экземпляра класса таблицы.

@@ -43,7 +43,7 @@
             This example illustrates basic file uploading.
             The first part is the file form. In our example there is one file to upload.
         </para>
-        <programlisting><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <form enctype="multipart/form-data" action="/file/upload" method="POST">
     <input type="hidden" name="MAX_FILE_SIZE" value="100000" />
         Choose a file to upload: <input name="uploadedfile" type="file" />

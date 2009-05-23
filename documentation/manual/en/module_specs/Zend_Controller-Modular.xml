@@ -12,7 +12,7 @@
             directory structure:
         </para>
 
-        <programlisting><![CDATA[
+        <programlisting language="txt"><![CDATA[
 docroot/
     index.php
 application/

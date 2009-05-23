@@ -23,7 +23,7 @@
         </para>
         <example id="zend.service.yahoo.websearch.example-1">
             <title>Searching the Web with Yahoo!</title>
-            <programlisting><![CDATA[
+            <programlisting language="php"><![CDATA[
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
 $results = $yahoo->webSearch('PHP');
 foreach ($results as $result) {
@@ -44,7 +44,7 @@ foreach ($results as $result) {
         </para>
         <example id="zend.service.yahoo.imagesearch.example-1">
             <title>Finding Images with Yahoo!</title>
-            <programlisting><![CDATA[
+            <programlisting language="php"><![CDATA[
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
 $results = $yahoo->imageSearch('PHP');
 foreach ($results as $result) {
@@ -63,7 +63,7 @@ foreach ($results as $result) {
         </para>
         <example id="zend.service.yahoo.videosearch.example-1">
             <title>Finding videos with Yahoo!</title>
-            <programlisting><![CDATA[
+            <programlisting language="php"><![CDATA[
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
 $results = $yahoo->videoSearch('PHP');
 foreach ($results as $result) {
@@ -82,7 +82,7 @@ foreach ($results as $result) {
         </para>
         <example id="zend.service.yahoo.localsearch.example-1">
             <title>Finding Local Businesses and Services with Yahoo!</title>
-            <programlisting><![CDATA[
+            <programlisting language="php"><![CDATA[
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
 $results = $yahoo->localSearch('Apple Computers', array('zip' => '95014'));
 foreach ($results as $result) {
@@ -101,7 +101,7 @@ foreach ($results as $result) {
         </para>
         <example id="zend.service.yahoo.newssearch.example-1">
             <title>Searching Yahoo! News</title>
-            <programlisting><![CDATA[
+            <programlisting language="php"><![CDATA[
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
 $results = $yahoo->newsSearch('PHP');
 foreach ($results as $result) {
@@ -120,7 +120,7 @@ foreach ($results as $result) {
         </para>
         <example id="zend.service.yahoo.inlinkdatasearch.example-1">
             <title>Searching Yahoo! Site Explorer Inbound Links</title>
-            <programlisting><![CDATA[
+            <programlisting language="php"><![CDATA[
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
 $results = $yahoo->inlinkDataSearch('http://framework.zend.com/');
 foreach ($results as $result) {
@@ -139,7 +139,7 @@ foreach ($results as $result) {
         </para>
         <example id="zend.service.yahoo.pagedatasearch.example-1">
             <title>Searching Yahoo! Site Explorer's PageData</title>
-            <programlisting><![CDATA[
+            <programlisting language="php"><![CDATA[
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
 $results = $yahoo->pageDataSearch('http://framework.zend.com/');
 foreach ($results as $result) {

@@ -57,7 +57,7 @@
             <para>
                 In this example, we search for PHP books at Amazon and loop through the results, printing them.
             </para>
-            <programlisting><![CDATA[
+            <programlisting language="php"><![CDATA[
 $amazon = new Zend_Service_Amazon('AMAZON_API_KEY');
 $results = $amazon->itemSearch(array('SearchIndex' => 'Books',
                                      'Keywords' => 'php'));
@@ -72,7 +72,7 @@ foreach ($results as $result) {
                 Here, we also search for PHP books at Amazon, but we instead use the Query API, which
                 resembles the Fluent Interface design pattern.
             </para>
-            <programlisting><![CDATA[
+            <programlisting language="php"><![CDATA[
 $query = new Zend_Service_Amazon_Query('AMAZON_API_KEY');
 $query->category('Books')->Keywords('PHP');
 $results = $query->search();
@@ -91,7 +91,7 @@ foreach ($results as $result) {
         </para>
         <example id="zend.service.amazon.countrycodes.example.country_code">
             <title>Choosing an Amazon Web Service Country</title>
-            <programlisting><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Connect to Amazon in Japan
 $amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'JP');
 ]]></programlisting>
@@ -112,7 +112,7 @@ $amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'JP');
         </para>
         <example id="zend.service.amazon.itemlookup.example.asin">
             <title>Looking up a Specific Amazon Item by ASIN</title>
-            <programlisting><![CDATA[
+            <programlisting language="php"><![CDATA[
 $amazon = new Zend_Service_Amazon('AMAZON_API_KEY');
 $item = $amazon->itemLookup('B0000A432X');
 ]]></programlisting>
@@ -139,7 +139,7 @@ $item = $amazon->itemLookup('B0000A432X');
         </para>
         <example id="zend.service.amazon.itemsearch.example.basic">
             <title>Performing Amazon Item Searches</title>
-            <programlisting><![CDATA[
+            <programlisting language="php"><![CDATA[
 $amazon = new Zend_Service_Amazon('AMAZON_API_KEY');
 $results = $amazon->itemSearch(array('SearchIndex' => 'Books',
                                      'Keywords' => 'php'));
@@ -200,7 +200,7 @@ foreach ($results as $result) {
                     In this example, the alternative query API is used as a fluent interface to specify options and their
                     respective values:
                 </para>
-                <programlisting><![CDATA[
+                <programlisting language="php"><![CDATA[
 $query = new Zend_Service_Amazon_Query('MY_API_KEY');
 $query->Category('Books')->Keywords('PHP');
 $results = $query->search();

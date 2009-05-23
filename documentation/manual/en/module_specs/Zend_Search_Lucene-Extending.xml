@@ -352,7 +352,7 @@ Zend_Search_Lucene_Search_Similarity::setDefault($mySimilarity);
         <para>
         <classname>Zend_Search_Lucene_Storage_Directory</classname> methods:
         </para>
-        <programlisting><![CDATA[
+        <programlisting language="php"><![CDATA[
 abstract class Zend_Search_Lucene_Storage_Directory {
 /**
  * Closes the store.
@@ -445,7 +445,7 @@ abstract function getFileObject($filename);
         Only two methods of <classname>Zend_Search_Lucene_Storage_File</classname> must be overridden in your
         implementation:
         </para>
-        <programlisting><![CDATA[
+        <programlisting language="php"><![CDATA[
 class MyFile extends Zend_Search_Lucene_Storage_File {
     /**
      * Sets the file position indicator and advances the file pointer.

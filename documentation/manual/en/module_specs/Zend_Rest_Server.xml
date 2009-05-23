@@ -93,7 +93,7 @@ $server->handle();
 
         <example id="zend.rest.server.customstatus.example-1">
             <title>Returning Custom Status</title>
-            <programlisting><![CDATA[
+            <programlisting language="php"><![CDATA[
 /**
  * Say Hello
  *
@@ -125,7 +125,7 @@ $server->handle();
         <example id="zend.rest.server.customxml.example-1">
             <title>Return Custom XML</title>
 
-            <programlisting><![CDATA[
+            <programlisting language="php"><![CDATA[
 /**
  * Say Hello
  *

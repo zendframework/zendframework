@@ -1079,7 +1079,7 @@ $rows = $table->fetchAll($select);
 $table = new Bugs();
 
 // retrieve with from part set, important when joining
-$select = $table->select(Zend_Db_Table::SELECT_WITH_FROM_PART); 
+$select = $table->select(Zend_Db_Table::SELECT_WITH_FROM_PART);
 $select->setIntegrityCheck(false)
        ->where('bug_status = ?', 'NEW')
        ->join('accounts', 'accounts.account_name = bugs.reported_by')
@@ -1107,7 +1107,7 @@ $rows = $table->fetchAll($select);
 
                 <title>Removing the integrity check on Zend_Db_Table_Select to allow JOINed rows</title>
 
-                <programlisting><![CDATA[
+                <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $select = $table->select(Zend_Db_Table::SELECT_WITH_FROM_PART)->setIntegrityCheck(false);

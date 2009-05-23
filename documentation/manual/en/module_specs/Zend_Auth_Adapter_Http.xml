@@ -179,7 +179,7 @@
                 The file resolver is a very simple class. It has a single property specifying a filename, which can also
                 be passed to the constructor. Its <code>resolve()</code> method walks through the text file, searching
                 for a line with a matching username and realm. The text file format similar to Apache htpasswd files:
-                <programlisting><![CDATA[
+                <programlisting language="txt"><![CDATA[
 <username>:<realm>:<credentials>\n
 ]]></programlisting>
                 Each line consists of three fields - username, realm, and credentials - each separated by a colon. The

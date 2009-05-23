@@ -5,11 +5,11 @@
 
     <para>
         <classname>Zend_Application_Bootstrap_Bootstrap</classname> is a concrete
-        implementation of
-        <link linkend="zend.application.core-functionality.bootstrap-bootstrapabstract">Zend_Application_Bootstrap_BootstrapAbstract</link>.
+        implementation of <link
+            linkend="zend.application.core-functionality.bootstrap-bootstrapabstract">Zend_Application_Bootstrap_BootstrapAbstract</link>.
         It's primary feature are that it registers the <link
             linkend="zend.application.available-resources.frontcontroller">Front
-            Controller resource</link>, and that the <code>run()</code> method
+            Controller resource</link>, and that the <methodname>run()</methodname> method
         first checks that a default module is defined and then dispatches the
         front controller.
     </para>

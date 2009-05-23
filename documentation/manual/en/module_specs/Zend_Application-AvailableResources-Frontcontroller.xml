@@ -13,7 +13,7 @@
     </para>
 
     <para>
-        Once initialized, the resource assigns the <code>frontController</code>
+        Once initialized, the resource assigns the <varname>$frontController</varname>
         property of the bootstrap to the <classname>Zend_Controller_Front</classname>
         instance.
     </para>
@@ -25,57 +25,57 @@
 
     <itemizedlist>
         <listitem><para>
-            <code>controllerDirectory</code>: either a string value
+            <emphasis>controllerDirectory</emphasis>: either a string value
             specifying a single controller directory, or an array of
-            module/controller directory pairs.
+            module to controller directory pairs.
         </para></listitem>
 
         <listitem><para>
-            <code>moduleControllerDirectoryName</code>: a string value
+            <emphasis>moduleControllerDirectoryName</emphasis>: a string value
             indicating the subdirectory under a module that contains
             controllers.
         </para></listitem>
 
         <listitem><para>
-            <code>moduleDirectory</code>: directory under which modules may be
+            <emphasis>moduleDirectory</emphasis>: directory under which modules may be
             found.
         </para></listitem>
 
         <listitem><para>
-            <code>defaultControllerName</code>: base name of the default
+            <emphasis>defaultControllerName</emphasis>: base name of the default
             controller (normally "index").
         </para></listitem>
 
         <listitem><para>
-            <code>defaultAction</code>: base name of the default action
+            <emphasis>defaultAction</emphasis>: base name of the default action
             (normally "index").
         </para></listitem>
 
         <listitem><para>
-            <code>defaultModule</code>: base name of the default module
+            <emphasis>defaultModule</emphasis>: base name of the default module
             (normally "default").
         </para></listitem>
 
         <listitem><para>
-            <code>baseUrl</code>: explicit base URL to the application (normally
+            <emphasis>baseUrl</emphasis>: explicit base URL to the application (normally
             auto-detected).
         </para></listitem>
 
         <listitem><para>
-            <code>plugins</code>: array of front controller plugin class names.
+            <emphasis>plugins</emphasis>: array of front controller plugin class names.
             The resource will instantiate each class (with no constructor
             arguments) and then register the instance with the front controller.
         </para></listitem>
 
         <listitem><para>
-            <code>params</code>: array of key/value pairs to register with the
+            <emphasis>params</emphasis>: array of key to value pairs to register with the
             front controller.
         </para></listitem>
     </itemizedlist>
 
     <para>
         If an unrecognized key is provided, it is registered as a front
-        controller parameter by passing it to <code>setParam()</code>.
+        controller parameter by passing it to <methodname>setParam()</methodname>.
     </para>
 
     <example id="zend.application.available-resources.frontcontroller.configExample">
@@ -107,7 +107,7 @@ resources.frontController.env = APPLICATION_ENV
         <para>
             Once your Front Controller resource has been initialized, you can
             fetch the Front Controller instance via the
-            <code>frontController</code> property of your bootstrap.
+            <varname>$frontController</varname> property of your bootstrap.
         </para>
 
         <programlisting language="php"><![CDATA[

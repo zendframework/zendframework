@@ -16,16 +16,16 @@
 
     <itemizedlist>
         <listitem><para>
-            <code>adapter</code>: <classname>Zend_Db</classname> adapter type.
+            <emphasis>adapter</emphasis>: <classname>Zend_Db</classname> adapter type.
         </para></listitem>
 
         <listitem><para>
-            <code>params</code>: associative array of configuration
+            <emphasis>params</emphasis>: associative array of configuration
             parameters to use when retrieving the adapter instance.
         </para></listitem>
 
         <listitem><para>
-            <code>isDefaultTableAdapter</code>: whether or not to establish this
+            <emphasis>isDefaultTableAdapter</emphasis>: whether or not to establish this
             adapter as the default table adapter.
         </para></listitem>
     </itemizedlist>
@@ -69,7 +69,7 @@ $resource = $bootstrap->getPluginResource('db');
 
         <para>
             Once you have the resource object, you can fetch the DB adapter
-            using the <code>getDbAdapter()</code> method:
+            using the <methodname>getDbAdapter()</methodname> method:
         </para>
 
         <programlisting language="php"><![CDATA[

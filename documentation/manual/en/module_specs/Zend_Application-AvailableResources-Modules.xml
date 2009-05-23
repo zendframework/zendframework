@@ -7,7 +7,7 @@
         <classname>Zend_Application_Resource_Modules</classname> is used to initialize
         your application modules. If your module has a
         <filename>Bootstrap.php</filename> file in its root, and it contains a class
-        named <code>Module_Bootstrap</code> (where "Module" is the module name),
+        named <classname>Module_Bootstrap</classname> (where "Module" is the module name),
         then it will use that class to bootstrap the module.
     </para>
 
@@ -35,7 +35,7 @@
         <title>Configuring Modules</title>
         <para>
             You can specify module-specific configuration using the module name
-            as a prefix/sub-section in your configuration file.
+            as a prefix or sub-section in your configuration file.
         </para>
 
         <para>
@@ -84,7 +84,7 @@ news.resources.layout.layout = "news"
             On occasion, you may need to retrieve the bootstrap object for a
             specific module -- perhaps to run discrete bootstrap methods, or to
             fetch the autoloader in order to configure it. This can be done
-            using the Modules resource's <code>getExecutedBootstraps()</code>
+            using the Modules resource's <methodname>getExecutedBootstraps()</methodname>
             method.
         </para>
 

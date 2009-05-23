@@ -15,7 +15,7 @@
             <code>Zend_Form</code>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $form = new Zend_Form;
 ]]>
         </programlisting>
@@ -33,7 +33,7 @@ $form = new Zend_Form;
             <code>setAction()</code> и <code>setMethod()</code>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $form->setAction('/resource/process')
      ->setMethod('post');
 ]]>
@@ -53,7 +53,7 @@ $form->setAction('/resource/process')
             идентификатор элемента формы, то установите атрибут "id":
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $form->setAttrib('id', 'login');
 ]]>
         </programlisting>
@@ -127,7 +127,7 @@ $form->setAttrib('id', 'login');
             Некоторые примеры:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Инстанцирование элемента и его передача объекту формы:
 $form->addElement(new Zend_Form_Element_Text('username'));
 
@@ -152,7 +152,7 @@ $form->addElement('text', 'username');
             или имена валидаторов:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $username = new Zend_Form_Element_Text('username');
 
 // Передача объекта Zend_Validate_*:
@@ -168,7 +168,7 @@ $username->addValidator('alnum');
             третий параметр:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Передача шаблона
 $username->addValidator('regex', false, array('/^[a-z]/i'));
 ]]>
@@ -186,7 +186,7 @@ $username->addValidator('regex', false, array('/^[a-z]/i'));
             передачи определенной опции при создании элемента. В первом случае:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Указание того, что элемент обязателен для заполнения:
 $username->setRequired(true);
 ]]>
@@ -204,7 +204,7 @@ $username->setRequired(true);
             нижнему регистру:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $username->addFilter('StringToLower');
 ]]>
         </programlisting>
@@ -214,7 +214,7 @@ $username->addFilter('StringToLower');
             такой, как показано ниже:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $username->addValidator('alnum')
          ->addValidator('regex', false, array('/^[a-z]/'))
          ->setRequired(true)
@@ -239,7 +239,7 @@ $username->addValidators(array('alnum',
             неявным образом сделать все это, попробуйте следующее:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $form->addElement('text', 'username', array(
     'validators' => array(
         'alnum',
@@ -270,7 +270,7 @@ $form->addElement('text', 'username', array(
             или просто вывести форму с помощью echo.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Явный вызов render() с передачей объекта вида:
 echo $form->render($view);
 
@@ -287,7 +287,7 @@ echo $form;
             в скрипте вида весьма прост:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php echo $this->form ?>
 ]]>
         </programlisting>
@@ -303,7 +303,7 @@ echo $form;
             так:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $element->addDecorators(array(
     'ViewHelper',
     'Errors',
@@ -352,7 +352,7 @@ $element->addDecorators(array(
             используя:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $element->setOrder(10);
 ]]>
         </programlisting>
@@ -361,7 +361,7 @@ $element->setOrder(10);
             Или путем передачи в качестве опции при создании элемента:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $form->addElement('text', 'username', array('order' => 10));
 ]]>
         </programlisting>
@@ -385,7 +385,7 @@ $form->addElement('text', 'username', array('order' => 10));
             (например, запросы веб-сервисов):
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 if ($form->isValid($_POST)) {
     // успех
 } else {
@@ -404,7 +404,7 @@ if ($form->isValid($_POST)) {
             заполнения:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 if ($form->isValidPartial($_POST)) {
     // все предоставленные элементы прошли все проверки на корректность
 } else {
@@ -425,7 +425,7 @@ if ($form->isValidPartial($_POST)) {
             то вы можете извлечь прошедшие фильтрацию данные:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $values = $form->getValues();
 ]]>
         </programlisting>
@@ -434,7 +434,7 @@ $values = $form->getValues();
             Для того, чтобы извлечь нефильтрованные данные, используйте:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $unfiltered = $form->getUnfilteredValues();
 ]]>
         </programlisting>
@@ -450,7 +450,7 @@ $unfiltered = $form->getUnfilteredValues();
             декораторы по умолчанию:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 if (!$form->isValid($_POST)) {
     echo $form;
 
@@ -502,7 +502,7 @@ if (!$form->isValid($_POST)) {
             построения формы:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $form = new Zend_Form();
 $form->setAction('/user/login')
      ->setMethod('post');
@@ -533,7 +533,7 @@ $form->addElement($username)
             Затем создается контроллер для отображения формы и ее обработки:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class UserController extends Zend_Controller_Action
 {
     public function getForm()
@@ -572,7 +572,7 @@ class UserController extends Zend_Controller_Action
             ...и скрипт вида для отображения формы:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <h2>Please login:</h2>
 <?= $this->form ?>
 ]]>
@@ -631,7 +631,7 @@ user.login.elements.submit.type = "submit"
             Вы можете потом передать это конструктору формы:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Ini($configFile, 'development');
 $form   = new Zend_Form($config->user->login);
 ]]></programlisting>

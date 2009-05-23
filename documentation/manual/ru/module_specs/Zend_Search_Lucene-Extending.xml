@@ -49,7 +49,7 @@
 -->
         </para>
 
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 Zend_Search_Lucene_Analysis_Analyzer::setDefault(
     new Zend_Search_Lucene_Analysis_Analyzer_Common_Text());
 ...
@@ -90,7 +90,7 @@ $index->addDocument($doc);]]></programlisting>
 
             <example>
                 <title>Собственный анализатор текста<!--Custom text Analyzer.--></title>
-                <programlisting role="php"><![CDATA[<?php
+                <programlisting language="php"><![CDATA[<?php
 /** Это созданный пользователем текстовый анализатор, который интерпретирует слова с цифрами как один элемент. */
 
 /** Zend_Search_Lucene_Analysis_Analyzer hierarchy */
@@ -249,7 +249,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
 -->
         </para>
 
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 $stopWords = array('a', 'an', 'at', 'the', 'and', 'or', 'is', 'am');
 $stopWordsFilter = new Zend_Search_Lucene_Analysis_TokenFilter_StopWords($stopWords);
 
@@ -258,7 +258,7 @@ $analyzer->addFilter($stopWordsFilter);
 
 Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);]]></programlisting>
 
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 $shortWordsFilter = new Zend_Search_Lucene_Analysis_TokenFilter_ShortWords();
 
 $analyzer = new Zend_Search_Lucene_Analysis_Analyzer_Common_TextNum_CaseInsensitive();
@@ -277,7 +277,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);]]></programlisting>
 -->
         </para>
 
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 $stopWordsFilter = new Zend_Search_Lucene_Analysis_TokenFilter_StopWords();
 $stopWordsFilter->loadFromFile($my_stopwords_file);
 
@@ -430,7 +430,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);]]></programlisting>
 -->
         </para>
 
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 
 class MySimilarity extends Zend_Search_Lucene_Search_Similarity {
     public function lengthNorm($fieldName, $numTerms) {

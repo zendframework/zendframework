@@ -32,7 +32,7 @@
 
     <example>
         <title>Сохранение документа PDF<!-- Save PDF document. --></title>
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 ...
 // Загрузка документа PDF
 $pdf = Zend_Pdf::load($fileName);

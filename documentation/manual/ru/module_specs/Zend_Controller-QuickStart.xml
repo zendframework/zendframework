@@ -43,7 +43,7 @@
                 структуру приложения. Ниже приведено типовое решение:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 application/
     controllers/
         IndexController.php
@@ -80,7 +80,7 @@ html/
                 приведенной выше структуры следующим образом:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} -s [OR]
 RewriteCond %{REQUEST_FILENAME} -l [OR]
@@ -150,7 +150,7 @@ RewriteRule ^.*$ index.php [NC,L]
                 и добавьте следующие строки:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend_Controller_Front::run('/path/to/app/controllers');
 ]]>
             </programlisting>
@@ -208,7 +208,7 @@ Zend_Controller_Front::run('/path/to/app/controllers');
                 введите следующее:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 /** Zend_Controller_Action */
 class IndexController extends Zend_Controller_Action
 {
@@ -253,7 +253,7 @@ class IndexController extends Zend_Controller_Action
                 Создайте этот файл и добавьте в него какой-либо HTML-код:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <!DOCTYPE html
 PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -282,7 +282,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
                 <code>ErrorController</code> с методом <code>errorAction</code>.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class ErrorController extends Zend_Controller_Action
 {
     public function errorAction()
@@ -301,7 +301,7 @@ class ErrorController extends Zend_Controller_Action
                 его содержимого:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <!DOCTYPE html
 PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">

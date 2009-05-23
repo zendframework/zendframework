@@ -39,7 +39,7 @@
 
         <example id="zend.loader.load.file.example">
             <title>Пример использования метода loadFile()</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend_Loader::loadFile($filename, $dirs=null, $once=false);
 ]]></programlisting>
     </example>
@@ -83,7 +83,7 @@ Zend_Loader::loadFile($filename, $dirs=null, $once=false);
 
         <example id="zend.loader.load.class.example">
             <title>Пример использования метода loadClass()</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend_Loader::loadClass('Container_Tree',
     array(
         '/home/production/mylib',
@@ -135,7 +135,7 @@ Zend_Loader::loadClass('Container_Tree',
 
         <example id="zend.loader.load.isreadable.example">
             <title>Пример использования метода isReadable()</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 if (Zend_Loader::isReadable($filename)) {
     // делаем что-либо с файлом $filename
 }
@@ -173,7 +173,7 @@ if (Zend_Loader::isReadable($filename)) {
 
         <example id="zend.loader.load.autoload.example">
             <title>Пример регистрации метода автозагрузки</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend_Loader::registerAutoload();
 ]]></programlisting>
         </example>
@@ -205,7 +205,7 @@ Zend_Loader::registerAutoload();
                 <code>self::loadClass()</code> то будет вызван метод
                 родительского класса, не подкласса.
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class My_Loader extends Zend_Loader
 {
     public static function loadClass($class, $dirs = null)

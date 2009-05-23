@@ -17,7 +17,7 @@
         Regex:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route_Regex(
     'archive/(\d+)',
     array(
@@ -36,7 +36,7 @@ $router->addRoute('archive', $route);
         значений может выглядеть следующим образом:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $values = array(
     1            => '2006',
     'controller' => 'archive',
@@ -79,7 +79,7 @@ $values = array(
         Вы можете получать содержимое заданного подшаблона обычным способом:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 public function showAction()
 {
     $request = $this->getRequest();
@@ -104,7 +104,7 @@ public function showAction()
         отлавливать только число:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route_Regex(
     'archive(?:/(\d+))?',
     array(
@@ -127,7 +127,7 @@ $router->addRoute('archive', $route);
         простой пример:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route_Regex(
     'archive/(\d+)',
     array(
@@ -147,7 +147,7 @@ $router->addRoute('archive', $route);
         значения:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $values = array(
     'year'       => '2006',
     'controller' => 'archive',
@@ -163,7 +163,7 @@ $values = array(
     </para>
 
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route_Regex(
     'archive/(\d+)',
     array( ... ),
@@ -192,7 +192,7 @@ $route = new Zend_Controller_Router_Route_Regex(
         Конечно, при желании вы можете смешивать числовые и именованные ключи:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route_Regex(
     'archive/(\d+)/page/(\d+)',
     array( ... ),
@@ -208,7 +208,7 @@ $route = new Zend_Controller_Router_Route_Regex(
         следующие значения:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $values = array(
     'year'       => '2006',
     2            => 10,
@@ -226,7 +226,7 @@ $values = array(
         четвертый параметр конструктора:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route_Regex(
     'archive/(\d+)',
     array( ... ),
@@ -249,7 +249,7 @@ $route = new Zend_Controller_Router_Route_Regex(
         этой задачи:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route_Regex(
     'blog/archive/(\d+)-(.+)\.html',
     array(

@@ -92,7 +92,7 @@
             абстрактный класс <code>Zend_Controller_Plugin_Abstract</code>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class MyPlugin extends Zend_Controller_Plugin_Abstract
 {
     // ...
@@ -127,7 +127,7 @@ class MyPlugin extends Zend_Controller_Plugin_Abstract
             демонстрирует использование плагина в цепочке контроллеров:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class MyPlugin extends Zend_Controller_Plugin_Abstract
 {
     public function routeStartup(Zend_Controller_Request_Abstract $request)
@@ -181,7 +181,7 @@ $front->dispatch();
             следующий вывод:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <p>routeStartup() called</p>
 <p>routeShutdown() called</p>
 <p>dispatchLoopStartup() called</p>

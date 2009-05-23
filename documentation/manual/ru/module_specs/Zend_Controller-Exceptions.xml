@@ -78,7 +78,7 @@
                     ErrorHandler. Например:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $front->throwExceptions(true);
 try {
     $front->dispatch();
@@ -127,7 +127,7 @@ try {
                     метод <code>getException()</code>. Например:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $front->returnResponse(true);
 $response = $front->dispatch();
 if ($response->isException()) {
@@ -188,7 +188,7 @@ if ($response->isException()) {
                             следующую директиву:
                         </para>
 
-                        <programlisting role="php"><![CDATA[
+                        <programlisting language="php"><![CDATA[
 $front->setParam('useDefaultControllerAlways', true);
 
 // или
@@ -243,7 +243,7 @@ $dispatcher->setParam('useDefaultControllerAlways', true);
                             Например:
                         </para>
 
-                        <programlisting role="php"><![CDATA[
+                        <programlisting language="php"><![CDATA[
 class My_Controller_Action extends Zend_Controller_Action
 {
     public function __call($method, $args)
@@ -275,7 +275,7 @@ class My_Controller_Action extends Zend_Controller_Action
                             запрошенное действие. Например:
                         </para>
 
-                        <programlisting role="php"><![CDATA[
+                        <programlisting language="php"><![CDATA[
 class My_Controller_Dispatcher extends Zend_Controller_Dispatcher
 {
     public function getAction($request)
@@ -352,7 +352,7 @@ class My_Controller_Dispatcher extends Zend_Controller_Dispatcher
                             Например:
                         </para>
 
-                        <programlisting role="php"><![CDATA[
+                        <programlisting language="php"><![CDATA[
 class My_Controller_PreDispatchPlugin extends Zend_Controller_Plugin_Abstract
 {
     public function preDispatch(Zend_Controller_Request_Abstract $request)

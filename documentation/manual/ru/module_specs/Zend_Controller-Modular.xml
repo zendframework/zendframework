@@ -100,7 +100,7 @@ application/
             присутствовать ключ <code>default</code>. Например:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $front->setControllerDirectory(array(
       'default' => '/path/to/application/controllers',
       'blog'    => '/path/to/application/blog/controllers'
@@ -115,7 +115,7 @@ $front->setControllerDirectory(array(
             добавлен в пространство имен <code>default</code>. Например:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $front->addControllerDirectory('/path/to/application/news/controllers',
                                'news');
 ]]>
@@ -129,7 +129,7 @@ $front->addControllerDirectory('/path/to/application/news/controllers',
             <code>addModuleDirectory()</code>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /**
  * Предполагается следующая структура директорий:
  * application/
@@ -157,7 +157,7 @@ $front->addModuleDirectory('/path/to/application/modules');
             модулей</code>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /**
  * Изменяем поддиректорию для контроллеров на 'con'
  * application/
@@ -229,7 +229,7 @@ $front->addModuleDirectory('/path/to/application/modules');
             фронт-контроллере:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $front->setParam('useDefaultControllerAlways', true);
 ]]>
         </programlisting>

@@ -57,7 +57,7 @@
                 следующее до вызова метода <code>dispatch()</code>:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Отключение плагина ErrorHandler:
 $front->setParam('noErrorHandler', true);
 ]]>
@@ -68,7 +68,7 @@ $front->setParam('noErrorHandler', true);
                 следующее до вызова метода <code>dispatch()</code>:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Отключение помощника ViewRenderer:
 $front->setParam('noViewRenderer', true);
 ]]>
@@ -96,7 +96,7 @@ $front->setParam('noViewRenderer', true);
                 инстанцирования объекта фронт-контроллера.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $front = Zend_Controller_Front::getInstance();
 ]]>
             </programlisting>
@@ -119,7 +119,7 @@ $front = Zend_Controller_Front::getInstance();
                 Примеры:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Установка директории контроллеров, используемой по умолчанию:
 $front->setControllerDirectory('../application/controllers');
 
@@ -263,7 +263,7 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
                 требующего специальной настройки фронт-контроллера.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Инстанцирование фронт-контроллера, установка директории контроллера и
 // выполнение диспетчеризации в одном вызове:
 Zend_Controller_Front::run('../application/controllers');
@@ -565,7 +565,7 @@ Zend_Controller_Front::run('../application/controllers');
             минимум, переопределить метод <code>getInstance()</code>.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class My_Controller_Front extends Zend_Controller_Front
 {
     public static function getInstance()

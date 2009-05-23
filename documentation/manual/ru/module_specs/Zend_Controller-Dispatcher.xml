@@ -33,7 +33,7 @@
                 фронт-контроллер или диспетчер.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Через фронт-контроллер:
 $front->setParam('prefixDefaultModule', true);
 
@@ -76,7 +76,7 @@ $dispatcher->setParam('prefixDefaultModule', true);
             действию.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 public function fooAction()
 {
     // переход к другому действию в текущем контроллере и модуле:
@@ -125,7 +125,7 @@ public function bazAction()
             диспетчера:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 interface Zend_Controller_Dispatcher_Interface
 {
     /**

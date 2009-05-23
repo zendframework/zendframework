@@ -12,7 +12,7 @@
         пользователя должно быть длиной от 6 до 12 символов и состоять только из
         алфавитно-цифровых символов:
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Создает цепочку валидаторов и добавляет валидаторы в нее
 $validatorChain = new Zend_Validate();
 $validatorChain->addValidator(new Zend_Validate_StringLength(6, 12))
@@ -52,7 +52,7 @@ if ($validatorChain->isValid($username)) {
         алфавитно-цифровые символы не должна
         производиться, если не была пройдена проверка на длину строки:
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validatorChain->addValidator(new Zend_Validate_StringLength(6, 12), true)
         ->addValidator(new Zend_Validate_Alnum());
 ]]></programlisting>

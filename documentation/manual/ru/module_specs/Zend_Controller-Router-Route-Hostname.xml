@@ -15,7 +15,7 @@
         того, чтобы увидеть информацию о пользователе "martel":
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $hostnameRoute = new Zend_Controller_Router_Route_Hostname(
     ':username.users.example.com',
     array(

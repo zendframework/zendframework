@@ -21,7 +21,7 @@
     <para>
         Следующий пример демонстрирует, как можно создавать свои фильтры:
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class MyFilter implements Zend_Filter_Interface
 {
     public function filter($value)
@@ -39,7 +39,7 @@ class MyFilter implements Zend_Filter_Interface
     <para>
         Добавление экземпляра этого фильтра в цепочку фильтров:
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $filterChain = new Zend_Filter();
 $filterChain->addFilter(new MyFilter());
 ]]></programlisting>

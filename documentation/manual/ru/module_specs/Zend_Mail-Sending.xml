@@ -24,7 +24,7 @@
             Sending E-Mail via SMTP
 -->
         </title>
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 require_once 'Zend/Mail/Transport/Smtp.php';
 $tr = new Zend_Mail_Transport_Smtp('mail.example.com');
 Zend_Mail::setDefaultTransport($tr);

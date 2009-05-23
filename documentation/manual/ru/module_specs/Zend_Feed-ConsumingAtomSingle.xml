@@ -17,7 +17,7 @@
 
     <example id="zend.feed.consuming-atom-single-entry.example.atom">
         <title>Чтение отдельного сообщения ленты Atom</title>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $feed = new Zend_Feed_Atom('http://atom.example.com/feed/1');
 echo 'The feed has: ' . $feed->count() . ' entry.';
 
@@ -34,7 +34,7 @@ $entry = $feed->current();
 
     <example id="zend.feed.consuming-atom-single-entry.example.entryatom">
         <title>Непосредственное использование объекта сообщения Atom</title>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $entry = new Zend_Feed_Entry_Atom('http://atom.example.com/feed/1');
 echo $entry->title();
 ]]>

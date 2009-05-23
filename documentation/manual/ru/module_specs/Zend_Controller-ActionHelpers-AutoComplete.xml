@@ -24,7 +24,7 @@
         Базовое использование одинаково для всех реализаций:
     </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function barAction()
@@ -136,7 +136,7 @@ class FooController extends Zend_Controller_Action
             пригодном для использования с хранилищем в Dojo:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // в контроллере действий:
 $this->_helper->autoCompleteDojo($data);
 ]]>
@@ -189,7 +189,7 @@ dojo.declare("custom.TestNameReadStore", dojox.data.QueryReadStore, {
                 автодополнение:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class TestController extends Zend_Controller_Action
 {
     protected $_form;
@@ -239,7 +239,7 @@ class TestController extends Zend_Controller_Action
                 автодополнения:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class TestController extends Zend_Controller_Action
 {
     // ...
@@ -294,7 +294,7 @@ class TestController extends Zend_Controller_Action
                 скрипт вида с комментариями:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <? // установка хранилища данных: ?>
 <div dojoType="custom.TestNameReadStore" jsId="testStore"
     url="<?= $this->baseUrl() ?>/unit-test/autocomplete/format/ajax"

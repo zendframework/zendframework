@@ -26,7 +26,7 @@
         Ниже приведен пример скрипта вида из введения:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 <?php if ($this->books): ?>
 
     <!-- Таблица из нескольких книг. -->
@@ -71,7 +71,7 @@
             который выполняет экранирование.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // плохая практика
 echo $this->variable;
 
@@ -88,7 +88,7 @@ echo $this->escape($this->variable);
             экранирующую функцию обратного вызова использовать.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // создание экземпляра Zend_View
 $view = new Zend_View();
 
@@ -137,7 +137,7 @@ echo $view->render(...);
                 шаблоны в стиле PHPLIB).
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 include_once 'template.inc';
 $tpl = new Template();
 
@@ -197,7 +197,7 @@ if ($this->books) {
                 совместимости интерфейс:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 /**
  * Возвращает объект используемого шаблонизатора
  */
@@ -255,7 +255,7 @@ public function render($name);
                 вариант "обертки" для Smarty:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class Zend_View_Smarty implements Zend_View_Interface
 {
     /**
@@ -441,7 +441,7 @@ class Zend_View_Smarty implements Zend_View_Interface
                 <classname>Zend_View</classname>.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 //Пример 1. В initView() инициализатора
 $view = new Zend_View_Smarty('/path/to/templates');
 $viewRenderer =

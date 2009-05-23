@@ -40,7 +40,7 @@
 -->
         </para>
 
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 require_once 'Zend/Server/Reflection.php';
 $class    = Zend_Server_Reflection::reflectClass('My_Class');
 $function = Zend_Server_Reflection::reflectFunction('my_function');

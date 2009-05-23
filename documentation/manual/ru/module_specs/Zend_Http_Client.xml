@@ -34,7 +34,7 @@
 -->
             <example>
                 <title>Инстанцирование объекта Zend_Http_Client<!--Instantiating a Zend_Http_Client object--></title>
-                <programlisting role="php">
+                <programlisting language="php">
 <![CDATA[<?php
     require_once 'Zend/Http/Client.php';
 
@@ -179,7 +179,7 @@
 -->
             <example>
                 <title>Выполнение простого запроса GET<!--Preforming a Simple GET Request--></title>
-                <programlisting role="php">
+                <programlisting language="php">
 <![CDATA[<?php
     require_once 'Zend/Http/Client.php';
 
@@ -219,7 +219,7 @@
 -->
             <example>
                 <title>Использование методов запроса, отличных от GET<!--Using Request Methods Other Than GET--></title>
-                <programlisting role="php">
+                <programlisting language="php">
 <![CDATA[<?php
     // Выполнение запроса POST
     $response = $client->request('POST');
@@ -254,7 +254,7 @@
 -->
             <example>
                 <title>Установка параметров GET<!--Setting GET Parameters--></title>
-                <programlisting role="php">
+                <programlisting language="php">
 <![CDATA[<?php
     // Установка параметра GET с использованием метода setParameterGet
     $client->setParameterGet('knight', 'lancelot');
@@ -286,7 +286,7 @@
 -->
             <example>
                 <title>Установка параметров POST<!--Setting POST Parameters--></title>
-                <programlisting role="php">
+                <programlisting language="php">
 <![CDATA[<?php
     // Установка параметра POST
     $client->setParameterPost('language', 'fr');

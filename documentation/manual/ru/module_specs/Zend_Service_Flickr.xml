@@ -16,7 +16,7 @@
         </para>
         <example>
             <title>Простой поиск фотографий в Flickr</title>
-            <programlisting role="php"><![CDATA[<?php
+            <programlisting language="php"><![CDATA[<?php
 require_once 'Zend/Service/Flickr.php';
 
 $flickr = new Zend_Service_Flickr('MY_API_KEY');
@@ -70,7 +70,7 @@ foreach ($results as $result) {
                 В этом примере мы, имея e-mail пользователя Flickr, ищем его
                 открытые фотографии, используя метод <code>userSearch()</code>:
             </para>
-            <programlisting role="php"><![CDATA[<?php
+            <programlisting language="php"><![CDATA[<?php
 require_once 'Zend/Service/Flickr.php';
 
 $flickr = new Zend_Service_Flickr('MY_API_KEY');
@@ -92,7 +92,7 @@ foreach ($results as $result) {
         </para>
         <example id="zend.service.flickr.grouppoolgetphotos.example-1">
             <title>Извлечение фотографий из пула группы через ID группы</title>
-            <programlisting role="php"><![CDATA[<?php
+            <programlisting language="php"><![CDATA[<?php
     require_once 'Zend/Service/Flickr.php';
 
     $flickr = new Zend_Service_Flickr('MY_API_KEY');
@@ -124,7 +124,7 @@ foreach ($results as $result) {
                 Имея ID изображения, легко извлечь информацию об этом
                 изображении:
             </para>
-            <programlisting role="php"><![CDATA[<?php
+            <programlisting language="php"><![CDATA[<?php
 require_once 'Zend/Service/Flickr.php';
 
 $flickr = new Zend_Service_Flickr('MY_API_KEY');

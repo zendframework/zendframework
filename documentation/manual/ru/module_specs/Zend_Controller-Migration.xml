@@ -143,7 +143,7 @@
                     имени действия знаком тире:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $viewRenderer =
     Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
 $inflector = $viewRenderer->getInflector();
@@ -180,7 +180,7 @@ $inflector->setFilterRule(':action', array(
                     новый флаг фронт-контроллера 'useCaseSensitiveActions':
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $front->setParam('useCaseSensitiveActions', true);
 ]]>
 </programlisting>
@@ -224,7 +224,7 @@ $front->setParam('useCaseSensitiveActions', true);
             <code>noErrorHandler</code> во фронт-контроллере:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $front->setParam('noErrorHandler', true);
 ]]>
         </programlisting>
@@ -246,7 +246,7 @@ $front->setParam('noErrorHandler', true);
             начала процесса диспетчеризации:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // $front является экземпляром Zend_Controller_Front
 $front->setParam('noViewRenderer', true);
 ]]>
@@ -286,7 +286,7 @@ $front->setParam('noViewRenderer', true);
             методе:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $this->_helper->viewRenderer->setNoRender();
 ]]>
         </programlisting>
@@ -298,7 +298,7 @@ $this->_helper->viewRenderer->setNoRender();
             <code>preDispatch()</code> или <code>init()</code>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 public function preDispatch()
 {
     // отключение авторендеринга скриптов вида
@@ -362,7 +362,7 @@ public function preDispatch()
                     До начала диспетчеризации экземпляра фронт-контроллера:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Предполагается, что $view уже определен
 $viewRenderer = new Zend_Controller_Action_Helper_ViewRenderer($view);
 Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
@@ -375,7 +375,7 @@ Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
                     В любой точке процесса загрузки (bootstrap process):
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $viewRenderer =
     Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
 $viewRenderer->setView($view);]]>
@@ -452,7 +452,7 @@ $viewRenderer->setView($view);]]>
             Базовое использование компонент MVC не изменилось:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 Zend_Controller_Front::run('/path/to/controllers');
 ]]>
         </programlisting>
@@ -513,7 +513,7 @@ Zend_Controller_Front::run('/path/to/controllers');
                     Его сигнатура теперь:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 final protected function _forward($action,
                                   $controller = null,
                                   $module = null,
@@ -543,12 +543,12 @@ final protected function _forward($action,
             следующий код будет корректно выполняться и в версии 0.6.0:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 Zend_Controller_Front::run('/path/to/controllers');
 ]]>
         </programlisting>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /* -- создание маршрутизатора -- */
 $router = new Zend_Controller_RewriteRouter();
 $router->addRoute('user',
@@ -603,7 +603,7 @@ $ctrl->dispatch();
                             Установка <code>throwExceptions()</code> во
                             фронт-контроллере:
                         </para>
-                        <programlisting role="php"><![CDATA[
+                        <programlisting language="php"><![CDATA[
 $front->throwExceptions(true);
 ]]>
                         </programlisting>
@@ -614,7 +614,7 @@ $front->throwExceptions(true);
                             Установка <code>renderExceptions()</code> в объекте
                             ответа:
                         </para>
-                        <programlisting role="php"><![CDATA[
+                        <programlisting language="php"><![CDATA[
 $response->renderExceptions(true);
 $front->setResponse($response);
 $front->dispatch();
@@ -713,7 +713,7 @@ echo $response;
                             получить следующим образом:
                         </para>
 
-                        <programlisting role="php"><![CDATA[
+                        <programlisting language="php"><![CDATA[
 // Извлечение имени запрошенного контроллера
 // Ранее доступ был через $this->_action->getControllerName().
 // Пример ниже использует getRequest(), хотя вы можете обращаться напрямую
@@ -744,7 +744,7 @@ $foo = $this->_getParam('foo', 'default');]]>
                             умолчанию через <code>__call()</code>:
                         </para>
 
-                        <programlisting role="php"><![CDATA[
+                        <programlisting language="php"><![CDATA[
 public function __call($method, $args)
 {
     // Если запрошен несуществующий метод действия, то вызывается метод

@@ -18,7 +18,7 @@
             Чтение ленты Atom, вывод <code>title</code> и <code>summary</code>
             для каждого сообщения:
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $feed = new Zend_Feed_Atom('http://atom.example.com/feed/');
 echo 'The feed contains ' . $feed->count() . ' entries.' . "\n\n";
 foreach ($feed as $entry) {

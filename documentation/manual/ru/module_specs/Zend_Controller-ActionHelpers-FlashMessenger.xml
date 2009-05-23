@@ -29,7 +29,7 @@
             (и удалит его).
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class SomeController extends Zend_Controller_Action
 {
     /**

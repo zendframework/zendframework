@@ -17,7 +17,7 @@
         обеспечения такой функциональности может выглядеть следующим образом:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route(
     'author/:username',
     array(
@@ -62,7 +62,7 @@ $router->addRoute('user', $route);
         следующего массива пар ключ/значение:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $values = array(
     'username'   => 'martel',
     'controller' => 'profile',
@@ -80,7 +80,7 @@ $values = array(
         <code>Zend_Controller_Request::getParam()</code>.
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 public function userinfoAction()
 {
     $request = $this->getRequest();
@@ -99,7 +99,7 @@ public function userinfoAction()
         приближенно воспроизводит поведение маршрута Module:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route(
     ':module/:controller/:action/*',
     array('module' => 'default')
@@ -119,7 +119,7 @@ $router->addRoute('default', $route);
             значениями в качестве значений переменных по умолчанию:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route(
     'archive/:year',
     array('year' => 2006)
@@ -146,7 +146,7 @@ $router->addRoute('archive', $route);
             умолчанию:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route(
     'archive/:year',
     array(
@@ -176,7 +176,7 @@ $router->addRoute('archive', $route);
             регулярных выражений:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route(
     'archive/:year',
     array(

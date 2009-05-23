@@ -22,7 +22,7 @@
             Простой пример использования:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $server = new Zend_XmlRpc_Server();
 $server->setClass('My_Service_Class');
 echo $server->handle();
@@ -96,7 +96,7 @@ echo $server->handle();
             Пример того, как указывается XML-RPC тип
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /**
 * Это пример функции
 *
@@ -127,7 +127,7 @@ function myFunc($val1, $val2, $val3)
             оператора '|':
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /**
 * Это пример функции
 *
@@ -178,7 +178,7 @@ function myFunc($val1, $val2, $val3)
             класса:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Все открытые методы в My_Service_Class можно будет вызывать как
 // myservice.имя_метода
 $server->setClass('My_Service_Class', 'myservice');
@@ -245,7 +245,7 @@ $server->addFunction('somefunc', 'funcs');
             для включения данного класса исключения в список разрешенных.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 Zend_XmlRpc_Server_Fault::attachFaultException('My_Project_Exception');
 ]]></programlisting>
 
@@ -284,7 +284,7 @@ Zend_XmlRpc_Server_Fault::attachFaultException('My_Project_Exception');
         <para>
             Пример использования:
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 function __autoload($class)
 {
     Zend_Loader::loadClass($class);
@@ -332,7 +332,7 @@ echo $server->handle();
                 входящие вызовы.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 /**
  * Возвращает сумму MD5 переданного значения
  *
@@ -358,7 +358,7 @@ echo $server->handle();
                 в качестве доступных для диспетчеризации XML-RPC методов.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 require_once 'Services/Comb.php';
 
 $server = new Zend_XmlRpc_Server();
@@ -375,7 +375,7 @@ echo $server->handle();
                 каждый со своим пространством имен.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 require_once 'Services/Comb.php';
 require_once 'Services/Brush.php';
 require_once 'Services/Pick.php';
@@ -398,7 +398,7 @@ echo $server->handle();
                 ответ с сообщением об ошибке.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 require_once 'Services/Exception.php';
 require_once 'Services/Comb.php';
 require_once 'Services/Brush.php';
@@ -423,7 +423,7 @@ echo $server->handle();
                 передается серверу для обработки.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 require_once 'Services/Request.php';
 require_once 'Services/Exception.php';
 require_once 'Services/Comb.php';
@@ -453,7 +453,7 @@ echo $server->handle($request);
                 для возвращаемого ответа.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 require_once 'Services/Request.php';
 require_once 'Services/Response.php';
 require_once 'Services/Exception.php';
@@ -487,7 +487,7 @@ echo $server->handle($request);
                 запросами.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Указание файла кэша
 $cacheFile = dirname(__FILE__) . '/xmlrpc.cache';
 

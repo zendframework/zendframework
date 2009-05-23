@@ -17,7 +17,7 @@
 
     <example id="zend.feed.custom-feed.example.extending">
         <title>Расширение класса сообщения Atom с добавлением специальных пространств имен</title>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /**
  * Специальный класс сообщения знает URI ленты и может автоматически
  * добавлять дополнительные пространства имен
@@ -76,7 +76,7 @@ class MyEntry extends Zend_Feed_Entry_Atom
             Далее для использования этого класса просто создаете его экземпляр
             и устанавливаете свойство <code>myUpdated</code>:
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $entry = new MyEntry();
 $entry->myUpdated = '2005-04-19T15:30';
 

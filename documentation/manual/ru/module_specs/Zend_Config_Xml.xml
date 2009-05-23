@@ -69,7 +69,7 @@
             конфигурационные данные из файла XML. Загрузить эти данные, указав
             файл XML и нужный раздел, довольно просто:
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Xml('/path/to/config.xml', 'staging');
 
 echo $config->database->params->host;   // выведет "dev.example.com"

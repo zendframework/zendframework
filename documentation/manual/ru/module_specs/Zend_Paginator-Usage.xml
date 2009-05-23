@@ -60,7 +60,7 @@
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[$paginator = new Zend_Paginator(new Zend_Paginator_Adapter_array($array));]]>
+            <programlisting language="php"><![CDATA[$paginator = new Zend_Paginator(new Zend_Paginator_Adapter_array($array));]]>
             </programlisting>
         </para>
 
@@ -71,7 +71,7 @@
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[$paginator = Zend_Paginator::factory($array);]]>
+            <programlisting language="php"><![CDATA[$paginator = Zend_Paginator::factory($array);]]>
             </programlisting>
         </para>
 
@@ -88,7 +88,7 @@
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[$paginator->setCurrentPageNumber($pageNumber);]]>
+            <programlisting language="php"><![CDATA[$paginator->setCurrentPageNumber($pageNumber);]]>
             </programlisting>
         </para>
 
@@ -105,7 +105,7 @@
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[routes.example.route = articles/:articleName/:pageNumber
+            <programlisting language="php"><![CDATA[routes.example.route = articles/:articleName/:pageNumber
 routes.example.defaults.controller = articles
 routes.example.defaults.action = view
 routes.example.defaults.pageNumber = 1
@@ -120,7 +120,7 @@ routes.example.reqs.pageNumber = \d+]]>
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[$paginator->setCurrentPageNumber($this->_getParam('pageNumber'));]]>
+            <programlisting language="php"><![CDATA[$paginator->setCurrentPageNumber($this->_getParam('pageNumber'));]]>
             </programlisting>
         </para>
 
@@ -137,7 +137,7 @@ routes.example.reqs.pageNumber = \d+]]>
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[$this->view->paginator = $paginator;]]>
+            <programlisting language="php"><![CDATA[$this->view->paginator = $paginator;]]>
             </programlisting>
         </para>
     </sect2>
@@ -158,7 +158,7 @@ routes.example.reqs.pageNumber = \d+]]>
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[<html>
+            <programlisting language="php"><![CDATA[<html>
 <body>
 <h1>Example</h1>
 <?php if (count($this->paginator)): ?>
@@ -270,7 +270,7 @@ routes.example.reqs.pageNumber = \d+]]>
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[Zend_Paginator::setDefaultScrollingStyle('Sliding');
+            <programlisting language="php"><![CDATA[Zend_Paginator::setDefaultScrollingStyle('Sliding');
 Zend_View_Helper_PaginationControl::setDefaultViewPartial('my_pagination_control.phtml');
 $paginator->setView($view);]]>
             </programlisting>
@@ -283,7 +283,7 @@ $paginator->setView($view);]]>
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[<?= $this->paginator; ?>]]>
+            <programlisting language="php"><![CDATA[<?= $this->paginator; ?>]]>
             </programlisting>
         </para>
 
@@ -298,7 +298,7 @@ $paginator->setView($view);]]>
             <para>
                 Постраничная навигация для результатов поиска
 
-                <programlisting role="php"><![CDATA[<!--
+                <programlisting language="php"><![CDATA[<!--
 См. http://developer.yahoo.com/ypatterns/pattern.php?pattern=searchpagination
 -->
 
@@ -334,7 +334,7 @@ $paginator->setView($view);]]>
             <para>
                 Постраничная навигация для элементов
 
-                <programlisting role="php"><![CDATA[<!--
+                <programlisting language="php"><![CDATA[<!--
 См. http://developer.yahoo.com/ypatterns/pattern.php?pattern=itempagination
 -->
 
@@ -379,7 +379,7 @@ of <?= $this->totalItemCount; ?>
             <para>
                 Постраничная навигация в виде выпадающего списка
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 <?php if ($this->pageCount): ?>
 <select id="paginationControl" size="1">
 <?php foreach ($this->pagesInRange as $page): ?>

@@ -102,7 +102,7 @@
 -->
         </para>
 
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 require_once('Zend/Search/Lucene.php');
 
 $index = Zend_Search_Lucene::open('/data/my_index');
@@ -180,7 +180,7 @@ $index->find($query);]]>   </programlisting>
                 Actually, in some cases it's only way to search for values within untokenized fields:
 -->
 
-                <programlisting role="php"><![CDATA[<?php
+                <programlisting language="php"><![CDATA[<?php
 $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr);
 
 $pathTerm  = new Zend_Search_Lucene_Index_Term('/data/doc_dir/' . $filename, 'path');
@@ -201,7 +201,7 @@ $hits = $index->find($query);]]></programlisting>
                 <code>Zend_Search_Lucene_Search_QueryParser::parse()</code> method also takes optional encoding parameter,
                 which can specify query string encoding:
 -->
-            <programlisting role="php"><![CDATA[<?php
+            <programlisting language="php"><![CDATA[<?php
 $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr, 'iso-8859-5');]]></programlisting>
             </para>
 
@@ -219,7 +219,7 @@ $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr, 'iso-8859-5
                 It's also possible to specify default query string encoding with
                 <code>Zend_Search_Lucene_Search_QueryParser::setDefaultEncoding()</code> method:
 -->
-            <programlisting role="php"><![CDATA[<?php
+            <programlisting language="php"><![CDATA[<?php
 Zend_Search_Lucene_Search_QueryParser::setDefaultEncoding('iso-8859-5');
 ...
 $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr);]]></programlisting>
@@ -266,7 +266,7 @@ $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr);]]></progra
             the corresponding document has two fields: title and author.
 -->
         </para>
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 require_once('Zend/Search/Lucene.php');
 
 $index = Zend_Search_Lucene::open('/data/my_index');
@@ -303,7 +303,7 @@ foreach ($hits as $hit) {
 -->
         </para>
 
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 require_once('Zend/Search/Lucene.php');
 
 $index = Zend_Search_Lucene::open('/data/my_index');
@@ -382,7 +382,7 @@ foreach ($hits as $hit) {
 -->
         </para>
 
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 $hits = $index->find($query);
 
 foreach ($hits as $hit) {
@@ -420,7 +420,7 @@ foreach ($hits as $hit) {
 <!--
             <code>$index->find()</code> call may take several optional parameters:
 -->
-            <programlisting role="php"><![CDATA[<?php
+            <programlisting language="php"><![CDATA[<?php
 $index->find($query [, $sortField [, $sortType [, $sortOrder]]] [, $sortField2 [, $sortType [, $sortOrder]]] ...);]]></programlisting>
         </para>
 
@@ -460,11 +460,11 @@ $index->find($query [, $sortField [, $sortType [, $sortOrder]]] [, $sortField2 [
 <!--
             Examples:
 -->
-            <programlisting role="php"><![CDATA[<?php
+            <programlisting language="php"><![CDATA[<?php
 $index->find($query, 'quantity', SORT_NUMERIC, SORT_DESC);]]></programlisting>
-            <programlisting role="php"><![CDATA[<?php
+            <programlisting language="php"><![CDATA[<?php
 $index->find($query, 'fname', SORT_STRING, 'lname', SORT_STRING);]]></programlisting>
-            <programlisting role="php"><![CDATA[<?php
+            <programlisting language="php"><![CDATA[<?php
 $index->find($query, 'name', SORT_STRING, 'quantity', SORT_NUMERIC, SORT_DESC);]]></programlisting>
         </para>
 
@@ -492,7 +492,7 @@ $index->find($query, 'name', SORT_STRING, 'quantity', SORT_NUMERIC, SORT_DESC);]
             method allows to highlight HTML document terms
             in context of search query:
 -->
-            <programlisting role="php"><![CDATA[<?php
+            <programlisting language="php"><![CDATA[<?php
 $query = Zend_Search_Lucene_Search_QueryParser::parse($queryStr);
 $hits = $index->find($query);
 ...

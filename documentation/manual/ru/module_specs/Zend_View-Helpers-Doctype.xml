@@ -50,7 +50,7 @@
             Поэтому лучше всего указывать ее в вашем файле загрузки:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $doctypeHelper = new Zend_View_Helper_Doctype();
 $doctypeHelper->doctype('XHTML1_STRICT');
 ]]></programlisting>
@@ -59,7 +59,7 @@ $doctypeHelper->doctype('XHTML1_STRICT');
             И затем выводить ее в самом начале вашего скрипта вида:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php echo $this->doctype() ?>
 ]]></programlisting>
 
@@ -74,7 +74,7 @@ $doctypeHelper->doctype('XHTML1_STRICT');
             возвращаемого при вызове помощника.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $doctype = $view->doctype()->getDoctype();
 ]]></programlisting>
 
@@ -84,7 +84,7 @@ $doctype = $view->doctype()->getDoctype();
             достаточно:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 if ($view->doctype()->isXhtml()) {
     // сделать что-то
 }

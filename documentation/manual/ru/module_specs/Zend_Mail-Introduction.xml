@@ -30,7 +30,7 @@
             the PHP <ulink url="http://php.net/mail"><code>mail()</code></ulink> function, do the following:
 -->
         </para>
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 require_once 'Zend/Mail.php';
 $mail = new Zend_Mail();
 $mail->setBodyText('This is the text of the mail.');

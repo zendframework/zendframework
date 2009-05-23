@@ -67,7 +67,7 @@
             В данном случае правила валидации просты - входное значение
             должно иметь тип <code>float</code>.
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class MyValid_Float extends Zend_Validate_Abstract
 {
     const FLOAT = 'float';
@@ -129,7 +129,7 @@ class MyValid_Float extends Zend_Validate_Abstract
         <para>
             Эти возможные причины переводятся в определения в классе:
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class MyValid_NumericBetween extends Zend_Validate_Abstract
 {
     const MSG_NUMERIC = 'msgNumeric';
@@ -230,7 +230,7 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
         <para>
             Следующий класс реализует эти критерии валидации:
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class MyValid_PasswordStrength extends Zend_Validate_Abstract
 {
     const LENGTH = 'length';

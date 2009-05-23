@@ -56,7 +56,7 @@
             используя аксессор <code>setView()</code>:
         </para>
 
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 $view = new My_Custom_View();
 $layout->setView($view);
 ?>]]></programlisting>
@@ -89,7 +89,7 @@ $layout->setView($view);
                 меток заполнения</link>:
             </para>
 
-            <programlisting role="php"><![CDATA[<?php
+            <programlisting language="php"><![CDATA[<?php
 $placeholders = new Zend_View_Helper_Placeholder();
 $layoutVars   = $placeholders->placeholder('Zend_Layout')->getArrayCopy();
 ?>]]></programlisting>
@@ -182,7 +182,7 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')->getArrayCopy();
                 и имеет аксессоры для установки этих значений.
             </para>
 
-            <programlisting role="php"><![CDATA[<?php
+            <programlisting language="php"><![CDATA[<?php
 // Установка шаблона:
 $layout->setInflectorTarget('layouts/:script.:suffix');
 
@@ -209,7 +209,7 @@ $layout->setViewSuffix('php');
                 скрипт в поддиректории 'layouts'.
             </para>
 
-            <programlisting role="php"><![CDATA[<?php
+            <programlisting language="php"><![CDATA[<?php
 $layout->getInflector()->setTarget('layouts/:script.:suffix')
                        ->setStaticRule('suffix', 'html')
                        ->setFilterRule(array('CamelCaseToUnderscore'));
@@ -226,7 +226,7 @@ $layout->getInflector()->setTarget('layouts/:script.:suffix')
                 различных типов. <code>Zend_Layout</code> поддерживает это.
             </para>
 
-            <programlisting role="php"><![CDATA[<?php
+            <programlisting language="php"><![CDATA[<?php
 $inflector = new Zend_Filter_Inflector('layouts/:script.:suffix');
 $inflector->addRules(array(
     ':script' => array('CamelCaseToUnderscore'),

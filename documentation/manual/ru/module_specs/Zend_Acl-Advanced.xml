@@ -53,7 +53,7 @@
             интерфейса:
          </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class CleanIPAssertion implements Zend_Acl_Assert_Interface
 {
     public function assert(Zend_Acl $acl,
@@ -78,7 +78,7 @@ class CleanIPAssertion implements Zend_Acl_Assert_Interface
             только тогда, когда метод утверждения возвращает true.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $acl = new Zend_Acl();
 $acl->allow(null, null, null, new CleanIPAssertion());
 ]]></programlisting>

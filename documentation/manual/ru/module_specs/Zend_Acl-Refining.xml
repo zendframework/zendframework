@@ -44,7 +44,7 @@
             наследовала права группы 'сотрудник':
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Новая группа 'маркетинг' наследует права от группы 'сотрудник'
 $acl->addRole(new Zend_Acl_Role('marketing'), 'staff');
 ]]></programlisting>
@@ -55,7 +55,7 @@ $acl->addRole(new Zend_Acl_Role('marketing'), 'staff');
             новости"). Теперь добавим эти ресурсы:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Создаем ресурсы для этих ролей
 
 // подписка
@@ -75,7 +75,7 @@ $acl->add(new Zend_Acl_Resource('announcement'), 'news');
             Затем определяются более точные правила для целевых областей ACL.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Маркетинг должен иметь возможность публиковать и удалять подписку
 // и последние новости
 $acl->allow('marketing',
@@ -95,7 +95,7 @@ $acl->deny(null, 'announcement', 'archive');
             изменений:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 echo $acl->isAllowed('staff', 'newsletter', 'publish') ?
      "разрешен" : "запрещен";
 // запрещен
@@ -144,7 +144,7 @@ echo $acl->isAllowed('administrator', 'announcement', 'archive') ?
             всем ролям, ресурсам, и/или привилегиям:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Убираем запрет на редактирование последних новостей для 'пользователя'
 // (и маркетинга через наследование)
 $acl->removeDeny('staff', 'latest', 'revise');
@@ -172,7 +172,7 @@ echo $acl->isAllowed('marketing', 'newsletter', 'archive') ?
             для привилегий переопределяет такой порядок изменений:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Разрешить маркетингу все действия над последними новостями
 $acl->allow('marketing', 'latest');
 

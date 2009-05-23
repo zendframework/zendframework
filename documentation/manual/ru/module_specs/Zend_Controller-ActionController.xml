@@ -27,7 +27,7 @@
             Для примера предположим, что ваш класс определен следующим образом:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function barAction()
@@ -70,7 +70,7 @@ class FooController extends Zend_Controller_Action
                 своем контроллере действия, используя один из следующих методов:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function init()
@@ -105,7 +105,7 @@ class FooController extends Zend_Controller_Action
                 <code>ViewRenderer</code>:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function barAction()
@@ -151,7 +151,7 @@ class FooController extends Zend_Controller_Action
             если вы хотите устанавливать соединение с БД при инстанцировании:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function init()
@@ -207,7 +207,7 @@ class FooController extends Zend_Controller_Action
                     Некоторые типичные вызовы могут выглядеть следующим образом:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $this->getResponse()->setHeader('Content-Type', 'text/xml');
 $this->getResponse()->appendBody($content);
 ]]>
@@ -252,7 +252,7 @@ $this->getResponse()->appendBody($content);
                         вызова <code>_hasParam()</code> до получения значения:
                     </para>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 // Используется значение по умолчанию 1, если id не установлен
 $id = $this->_getParam('id', 1);
 
@@ -313,7 +313,7 @@ if ($this->_hasParam('id') {
                 предположения по структуре директорий:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 applicationOrModule/
     controllers/
         IndexController.php
@@ -345,7 +345,7 @@ applicationOrModule/
                 <code>render()</code> имеет следующую сигнатуру:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 string render(string $action = null,
               string $name = null,
               bool $noController = false);
@@ -387,7 +387,7 @@ string render(string $action = null,
                 Некоторые примеры:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class MyController extends Zend_Controller_Action
 {
     public function fooAction()
@@ -550,7 +550,7 @@ class MyController extends Zend_Controller_Action
                 написать нечто подобное:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class MyController extends Zend_Controller_Action
 {
     public function __call($method, $args)
@@ -575,7 +575,7 @@ class MyController extends Zend_Controller_Action
                 производить переход на страницу контроллера по умолчанию:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class MyController extends Zend_Controller_Action
 {
     public function indexAction()
@@ -611,7 +611,7 @@ class MyController extends Zend_Controller_Action
             свой метод <code>initView()</code>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 abstract class My_Base_Controller extends Zend_Controller_Action
 {
     public function initView()

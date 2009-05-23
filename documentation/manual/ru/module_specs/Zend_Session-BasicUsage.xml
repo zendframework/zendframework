@@ -53,7 +53,7 @@
 
         <example>
             <title>Подсчет количества просмотров страниц<!--Counting Page Views--></title>
-<programlisting role="php">
+<programlisting language="php">
 <![CDATA[<?php
     require_once 'Zend/Session.php';
 
@@ -99,7 +99,7 @@
 
         <example>
             <title>Новый подход: избежание конфликтов с помощью пространств имен<!--New Way: Namespaces Avoid Collisions--></title>
-<programlisting role="php">
+<programlisting language="php">
 <![CDATA[<?php
     // in the Zend_Auth component
     require_once 'Zend/Session.php';
@@ -124,7 +124,7 @@
 
         <example>
             <title>Старый подход: обращение к сессиям PHP<!--Old Way: PHP Session Access--></title>
-<programlisting role="php">
+<programlisting language="php">
 <![CDATA[<?php
     $_SESSION['Zend_Auth']['user'] = "myusername";
     $_SESSION['Some_Web_Service']['user'] = "mywebusername";
@@ -150,7 +150,7 @@
 
         <example>
             <title>Итерация по сессии<!--Session Iteration--></title>
-<programlisting role="php">
+<programlisting language="php">
 <![CDATA[<?php
     // Zend_Session is iteratable
     require_once 'Zend/Session.php';
@@ -182,7 +182,7 @@
 
         <example>
             <title>Доступ к сессионным данным<!--Accessing Session Data--></title>
-<programlisting role="php">
+<programlisting language="php">
 <![CDATA[<?php
             $object->property = $value;
             echo (isset($object->property) ? 'set' : 'unset');

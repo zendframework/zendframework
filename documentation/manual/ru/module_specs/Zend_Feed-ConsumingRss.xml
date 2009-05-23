@@ -5,7 +5,7 @@
         с URI ленты:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $channel = new Zend_Feed_Rss('http://rss.example.com/channelName');
 ]]>
     </programlisting>
@@ -20,7 +20,7 @@ $channel = new Zend_Feed_Rss('http://rss.example.com/channelName');
         свойствам канала RSS (channel) непосредственно в объекте:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 echo $channel->title();
 ]]>
     </programlisting>
@@ -39,7 +39,7 @@ echo $channel->title();
         синтаксис массива PHP:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 echo $channel->category['domain'];
 ]]>
     </programlisting>
@@ -56,7 +56,7 @@ echo $channel->category['domain'];
         всех статей в канале будет выглядеть следующим образом:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 foreach ($channel as $item) {
     echo $item->title() . "\n";
 }
@@ -177,7 +177,7 @@ foreach ($channel as $item) {
         следующим образом:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 if ($item->propname()) {
     // ... обработка
 }

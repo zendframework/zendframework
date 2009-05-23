@@ -51,7 +51,7 @@
         specify this:
 -->
     </para>
-    <programlisting role="php"><![CDATA[<?php
+    <programlisting language="php"><![CDATA[<?php
 // Декодировать объект как объект
 $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
 ?>]]></programlisting>

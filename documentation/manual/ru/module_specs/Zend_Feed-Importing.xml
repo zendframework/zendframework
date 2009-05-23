@@ -6,7 +6,7 @@
         <code>Zend_Feed::import()</code>:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $feed = Zend_Feed::import('http://feeds.example.com/feedName');
 ]]>
     </programlisting>
@@ -16,7 +16,7 @@ $feed = Zend_Feed::import('http://feeds.example.com/feedName');
         ленты из файла или строки:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 // импортирование ленты из текстового файла
 $feedFromFile = Zend_Feed::importFile('feed.xml');
 
@@ -55,7 +55,7 @@ $feedFromPHP = Zend_Feed::importString($feedString);
 
             <title>Импортирование массива</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Импортирование ленты из массива
 $atomFeedFromArray = Zend_Feed::importArray($array);
 
@@ -72,7 +72,7 @@ $rssFeedFromArray = Zend_Feed::importArray($array, 'rss');
                 Формат массива должен соответствовать следующей структуре:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 array(
       'title'       => 'заголовок ленты', // обязательный
       'link'        => 'канонический URL ленты', // обязательный
@@ -248,7 +248,7 @@ array(
                 <code>Zend_Feed::importBuilder()</code>:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Импортирование ленты из специального созданного ресурса-компоновщика
 $atomFeedFromArray =
     Zend_Feed::importBuilder(new Zend_Feed_Builder($array));
@@ -276,7 +276,7 @@ $rssFeedFromArray =
                 <code>send()</code> или <code>saveXml()</code>.
             </para>
 
-            <programlisting role="php">
+            <programlisting language="php">
 <![CDATA[
 assert($feed instanceof Zend_Feed_Abstract);
 

@@ -89,7 +89,7 @@
                         помощников:
                     </para>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $viewRenderer = new Zend_Controller_Action_Helper_ViewRenderer();
 $viewRenderer->setView($view)
              ->setViewSuffix('php');
@@ -104,7 +104,7 @@ Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
                         <code>ViewRenderer</code> через брокер помощников:
                     </para>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
 $viewRenderer->setView($view)
              ->setViewSuffix('php');
@@ -126,7 +126,7 @@ $viewRenderer->setView($view)
             помощников:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
 ]]>
         </programlisting>
@@ -153,7 +153,7 @@ Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
             В качестве примера рассмотрим следующий класс:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Класс контроллера, модуль foo:
 class Foo_BarController extends Zend_Controller_Action
 {
@@ -287,7 +287,7 @@ $this->foo(); // вызывает Foo_View_Helper_Foo::foo()
                     контроллера.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Рендеринг 'foo' вместо текущего скрипта вида
 $this->_helper->viewRenderer('foo');
 
@@ -313,7 +313,7 @@ $this->_helper->viewRenderer('form', 'html', true);
             <code>initView()</code>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view    = new Zend_View(array('encoding' => 'UTF-8'));
 $options = array('noController' => true, 'neverRender' => true);
 $viewRenderer =
@@ -640,7 +640,7 @@ $viewRenderer =
                 переменные в своих методах действий.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // В вашем файле загрузки:
 Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
 
@@ -725,7 +725,7 @@ class Foo_BarController extends Zend_Controller_Action
                 (<code>setNoRender()</code>).
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Класс контроллера baz, модуль bar:
 class Bar_BazController extends Zend_Controller_Action
 {
@@ -774,7 +774,7 @@ class Bar_BatController extends Zend_Controller_Action
                 вызов метода <code>setRender()</code>.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Класс контроллера bar, модуль foo:
 class Foo_BarController extends Zend_Controller_Action
 {
@@ -819,7 +819,7 @@ class Foo_BarController extends Zend_Controller_Action
                 тот же объект.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Класс контроллера bar, модуль foo:
 class Foo_BarController extends Zend_Controller_Action
 {
@@ -871,7 +871,7 @@ class Foo_BarController extends Zend_Controller_Action
                 скрипта вида.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 /**
  * В вашем файле загрузки:
  */
@@ -898,7 +898,7 @@ Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
                 сделайте несколько вызовов метода <code>render()</code>:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class SearchController extends Zend_Controller_Action
 {
     public function resultsAction()

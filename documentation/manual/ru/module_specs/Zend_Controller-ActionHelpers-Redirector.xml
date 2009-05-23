@@ -142,7 +142,7 @@
                 перенаправлении.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class SomeController extends Zend_Controller_Action
 {
     /**
@@ -189,7 +189,7 @@ class SomeController extends Zend_Controller_Action
                 производиться выход <code>exit()</code>.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // АЛЬТЕРНАТИВНЫЙ ПРИМЕР
 class AlternativeController extends Zend_Controller_Action
 {
@@ -232,7 +232,7 @@ class AlternativeController extends Zend_Controller_Action
                 действия в цепочку.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class ForwardController extends Zend_Controller_Action
 {
     /**
@@ -278,7 +278,7 @@ class ForwardController extends Zend_Controller_Action
                 следующий маршрут:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route(
     'blog/:year/:month/:day/:id',
     array('controller' => 'archive',
@@ -295,7 +295,7 @@ $router->addRoute('blogArchive', $route);
                 URL <code>/blog/2006/4/24/42</code>.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class BlogAdminController extends Zend_Controller_Action
 {
     /**

@@ -57,7 +57,7 @@
 
         <example id="zend.view.helpers.initial.headscript.conditional">
             <title>Скрипты с условными комментариями</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // добавление скриптов
 $this->headScript()->appendFile(
     '/js/prototype.js',
@@ -133,7 +133,7 @@ $this->headScript()->appendFile(
             методом <code>setAllowArbitraryAttributes()</code>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $this->headScript()->setAllowArbitraryAttributes(true);
 ]]></programlisting>
     </note>
@@ -147,7 +147,7 @@ $this->headScript()->setAllowArbitraryAttributes(true);
             файлы со скриптами, так и сами скрипты.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // добавление скриптов
 $this->headScript()->appendFile('/js/prototype.js')
                    ->appendScript($onloadScript);
@@ -162,7 +162,7 @@ $this->headScript()->appendFile('/js/prototype.js')
             смещению:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Размещение скриптов в определенном порядке
 
 // Добавление по определенному смещению
@@ -181,7 +181,7 @@ $this->headScript()->prependFile('/js/prototype.js');
             "выводите" помощника:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php echo $this->headScript() ?>
 ]]></programlisting>
     </example>
@@ -197,7 +197,7 @@ $this->headScript()->prependFile('/js/prototype.js');
             вывод в стек:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php $this->headScript()->captureStart() ?>
 var action = '<?php echo $this->baseUrl ?>';
 $('foo_form').action = action;

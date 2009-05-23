@@ -34,7 +34,7 @@
             изменения ключа <code>'nestSeparator'</code> в массиве
             <code>$options</code> при создании объекта <classname>Zend_Config_Ini</classname>.
             Например:
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $options['nestSeparator'] = ':';
 $config = new Zend_Config_Ini('/path/to/config.ini',
                               'staging',
@@ -79,7 +79,7 @@ database.params.password = devsecret
             конфигурационные данные из файла INI. Загрузить эти данные,
             указав файл INI и нужный раздел, довольно просто:
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Ini('/path/to/config.ini', 'staging');
 
 echo $config->database->params->host;   // выведет "dev.example.com"

@@ -61,7 +61,7 @@
             входных данных - амперсандом (<code>&amp;</code>) и двойными
             кавычками (<code>&quot;</code>).
             
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $htmlEntities = new Zend_Filter_HtmlEntities();
 
 echo $htmlEntities->filter('&'); // &amp;
@@ -89,7 +89,7 @@ echo $htmlEntities->filter('"'); // &quot;
             создает его экземпляр и применяет метод <code>filter()</code> к
             входным данным.
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 echo Zend_Filter::get('&', 'HtmlEntities');
 ]]></programlisting>
 
@@ -99,7 +99,7 @@ echo Zend_Filter::get('&', 'HtmlEntities');
             Можно также передавать массив аргументов для конструктора, если это
             необходимо для используемого класса фильтра.
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 echo Zend_Filter::get('"', 'HtmlEntities', array(ENT_QUOTES));
 ]]></programlisting>
 

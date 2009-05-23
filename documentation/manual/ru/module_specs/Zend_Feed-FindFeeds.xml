@@ -6,7 +6,7 @@
        дает возможность извлечь все ленты, на которые ссылается веб-страница,
        всего одним вызовом метода:
     </para>
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $feedArray = Zend_Feed::findFeeds('http://www.example.com/news.html');
 ]]>
     </programlisting>

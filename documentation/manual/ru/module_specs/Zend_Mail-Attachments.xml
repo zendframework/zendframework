@@ -26,7 +26,7 @@
             E-Mail Messages with Attachments
 -->
         </title>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php
 require_once 'Zend/Mail.php';
 $mail = new Zend_Mail();
@@ -46,7 +46,7 @@ $mail->addAttachment($myImage, 'image/gif', Zend_Mime::DISPOSITION_INLINE, Zend_
         returns a <code>Zend_Mime_Part</code> object:
 -->
     </para>
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 <?php
 require_once 'Zend/Mail.php';
 $mail = new Zend_Mail();

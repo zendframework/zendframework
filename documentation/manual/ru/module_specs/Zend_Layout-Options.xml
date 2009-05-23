@@ -103,7 +103,7 @@
             объекта конфигурации:
         </para>
 
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 $options = array(
     'layout'     => 'foo',
     'layoutPath' => '/path/to/layouts',
@@ -111,7 +111,7 @@ $options = array(
 );
 ?>]]></programlisting>
 
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 /**
 [layout]
 layout = "foo"
@@ -135,7 +135,7 @@ $config = new Zend_Config_Ini('/path/to/layout.ini', 'layout');
                 Передача массива:
             </para>
 
-            <programlisting role="php"><![CDATA[<?php
+            <programlisting language="php"><![CDATA[<?php
 // Использование конструктора:
 $layout = new Zend_Layout($options);
 
@@ -147,7 +147,7 @@ $layout = Zend_Layout::startMvc($options);
                 Использование объекта конфигурации:
             </para>
 
-            <programlisting role="php"><![CDATA[<?php
+            <programlisting language="php"><![CDATA[<?php
 $config = new Zend_Config_Ini('/path/to/layout.ini', 'layout');
 
 // Использование конструктора:
@@ -173,7 +173,7 @@ $layout = Zend_Layout::startMvc($config);
                 сделать это легко и быстро:
             </para>
 
-            <programlisting role="php"><![CDATA[<?php
+            <programlisting language="php"><![CDATA[<?php
 // Использование массива опций:
 $layout->setOptions($options);
 
@@ -200,7 +200,7 @@ $layout->setConfig($options);
                 непосредственно друг за другом:
             </para>
 
-            <programlisting role="php"><![CDATA[<?php
+            <programlisting language="php"><![CDATA[<?php
 $layout->setLayout('foo')
        ->setLayoutPath('/path/to/layouts')
        ->setContentKey('CONTENT');

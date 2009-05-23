@@ -103,7 +103,7 @@
             Zend_Search_Lucene also contains limited functionaliy utf-8 analyzer. It can be turned on with the following code:
 -->
 
-            <programlisting role="php"><![CDATA[<?php
+            <programlisting language="php"><![CDATA[<?php
 Zend_Search_Lucene_Analysis_Analyzer::setDefault(
     new Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8());]]></programlisting>
         </para>
@@ -155,7 +155,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
 <!--
             Case insensitivity my be emulated with <code>strtolower()</code> conversion:
 -->
-            <programlisting role="php"><![CDATA[<?php
+            <programlisting language="php"><![CDATA[<?php
 setlocale(LC_CTYPE, 'de_DE.iso-8859-1');
 
 ...
@@ -183,7 +183,7 @@ $doc->addField(Zend_Search_Lucene_Field::UnIndexed('_title', $title));]]></progr
 <!--
             The same conversion has to be performed with query string:
 -->
-            <programlisting role="php"><![CDATA[<?php
+            <programlisting language="php"><![CDATA[<?php
 setlocale(LC_CTYPE, 'de_DE.iso-8859-1');
 
 ...

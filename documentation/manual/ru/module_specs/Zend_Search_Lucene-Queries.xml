@@ -15,7 +15,7 @@
 <!--
         User query can be combined with queries created through API. Use query parser to construct query from a string:
 -->
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 $query = Zend_Search_Lucene_Search_QueryParser::parse($queryString);]]></programlisting>
     </para>
 
@@ -54,7 +54,7 @@ $query = Zend_Search_Lucene_Search_QueryParser::parse($queryString);]]></program
 <!--
         Thus that's good idea to catch Zend_Search_Lucene_Search_QueryParserException and make appropriate message:
 -->
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 try {
     $query = Zend_Search_Lucene_Search_QueryParser::parse($queryString);
 } catch (Zend_Search_Lucene_Search_QueryParserException $e) {
@@ -97,7 +97,7 @@ try {
         Query construction by API:
 -->
         </para>
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 $term  = new Zend_Search_Lucene_Index_Term('word1', 'field1');
 $query = new Zend_Search_Lucene_Search_Query_Term($term);
 $hits  = $index->find($query);]]></programlisting>
@@ -109,7 +109,7 @@ $hits  = $index->find($query);]]></programlisting>
 <!--
             Term field is optional. Zend_Search_Lucene searches through all fields if field is not specified:
 -->
-            <programlisting role="php"><![CDATA[<?php
+            <programlisting language="php"><![CDATA[<?php
 $term  = new Zend_Search_Lucene_Index_Term('word1');  // Search 'word1' through all indexed fields
 $query = new Zend_Search_Lucene_Search_Query_Term($term);
 $hits  = $index->find($query);]]></programlisting>
@@ -234,7 +234,7 @@ $hits  = $index->find($query);]]></programlisting>
         Query construction by API:
 -->
         </para>
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 $query = new Zend_Search_Lucene_Search_Query_MultiTerm();
 
 $query->addTerm(new Zend_Search_Lucene_Index_Term('word1'), true);
@@ -313,7 +313,7 @@ $hits  = $index->find($query);]]></programlisting>
 -->
         </para>
 
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 $query1 = new Zend_Search_Lucene_Search_Query_Phrase();
 
 // Добавление 'word1' в относительную позицию 0.
@@ -360,7 +360,7 @@ $query4 = new Zend_Search_Lucene_Search_Query_Phrase(
 -->
         </para>
 
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 Zend_Search_Lucene_Search_Query_Phrase([array $terms[, array $offsets[, string $field]]]);]]></programlisting>
 
         <para>
@@ -406,7 +406,7 @@ Zend_Search_Lucene_Search_Query_Phrase([array $terms[, array $offsets[, string $
             Thus:
 -->
         </para>
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 $query = new Zend_Search_Lucene_Search_Query_Phrase(array('zend', 'framework'));]]></programlisting>
         <para>
             будет искать фразу 'zend framework'.
@@ -415,7 +415,7 @@ $query = new Zend_Search_Lucene_Search_Query_Phrase(array('zend', 'framework'));
 -->
         </para>
 
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 $query = new Zend_Search_Lucene_Search_Query_Phrase(array('zend', 'download'), array(0, 2));]]></programlisting>
         <para>
             будет искать фразу 'zend ????? download', такой запрос соответствует фразам
@@ -427,7 +427,7 @@ $query = new Zend_Search_Lucene_Search_Query_Phrase(array('zend', 'download'), a
 -->
         </para>
 
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 $query = new Zend_Search_Lucene_Search_Query_Phrase(array('zend', 'framework'), null, 'title');]]></programlisting>
 
         <para>
@@ -448,7 +448,7 @@ $query = new Zend_Search_Lucene_Search_Query_Phrase(array('zend', 'framework'), 
             Required <code>Zend_Search_Lucene_Index_Term</code> object and optional position:
 -->
         </para>
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 Zend_Search_Lucene_Search_Query_Phrase::addTerm(Zend_Search_Lucene_Index_Term $term[, integer $position]);]]></programlisting>
 
         <para>
@@ -474,7 +474,7 @@ Zend_Search_Lucene_Search_Query_Phrase::addTerm(Zend_Search_Lucene_Index_Term $t
             Thus:
 -->
         </para>
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 $query = new Zend_Search_Lucene_Search_Query_Phrase();
 $query->addTerm(new Zend_Search_Lucene_Index_Term('zend'));
 $query->addTerm(new Zend_Search_Lucene_Index_Term('framework'));]]></programlisting>
@@ -485,7 +485,7 @@ $query->addTerm(new Zend_Search_Lucene_Index_Term('framework'));]]></programlist
 -->
         </para>
 
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 $query = new Zend_Search_Lucene_Search_Query_Phrase();
 $query->addTerm(new Zend_Search_Lucene_Index_Term('zend'), 0);
 $query->addTerm(new Zend_Search_Lucene_Index_Term('framework'), 2);]]></programlisting>
@@ -498,7 +498,7 @@ $query->addTerm(new Zend_Search_Lucene_Index_Term('framework'), 2);]]></programl
             'zend core download', 'zend framework download' and so on.
 -->
         </para>
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 $query = new Zend_Search_Lucene_Search_Query_Phrase();
 $query->addTerm(new Zend_Search_Lucene_Index_Term('zend', 'title'));
 $query->addTerm(new Zend_Search_Lucene_Index_Term('framework', 'title'));]]></programlisting>
@@ -555,7 +555,7 @@ $query->addTerm(new Zend_Search_Lucene_Index_Term('framework', 'title'));]]></pr
 -->
         </para>
 
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 // Запрос без пропусков.
 $query = new Zend_Search_Lucene_Search_Query_Phrase(array('word1', 'word2'));
 

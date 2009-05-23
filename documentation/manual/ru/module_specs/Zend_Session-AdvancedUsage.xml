@@ -35,7 +35,7 @@
 
         <example>
             <title>Старт общей сессии<!--Starting the Global Session--></title>
-<programlisting role="php">
+<programlisting language="php">
 <![CDATA[<?php
 ...
 require_once 'Zend/Session.php';
@@ -273,7 +273,7 @@ Zend_Session::start();
 
         <example>
             <title>Блокировка пространств имен<!--Locking Session Namespaces--></title>
-<programlisting role="php">
+<programlisting language="php">
 <![CDATA[<?php
     // assuming:
     $userProfileNamespace = new Zend_Session_Namespace('userProfileNamespace');
@@ -307,7 +307,7 @@ Zend_Session::start();
 
         <example>
             <title>Блокировка сессий в видах<!--Locking Sessions in Views--></title>
-<programlisting role="php">
+<programlisting language="php">
 <![CDATA[<?php
 class FooModule_View extends Zend_View
 {
@@ -365,7 +365,7 @@ class FooModule_View extends Zend_View
 
         <example>
             <title>Примеры установки времени жизни<!--Expiration Examples--></title>
-<programlisting role="php">
+<programlisting language="php">
 <![CDATA[<?php
 $s = new Zend_Session_Namespace('expireAll');
 $s->a = 'apple';
@@ -423,7 +423,7 @@ $s->setExpirationSeconds(60);
 
         <example>
             <title>Сессии с пространствами имен для контроллеров с автоматическим истечением времени<!--Namespaced Sessions for Controllers with Automatic Expiration--></title>
-<programlisting role="php">
+<programlisting language="php">
 <![CDATA[<?php
 require_once 'Zend/Session.php';
 // контроллер для вывода вопроса
@@ -499,7 +499,7 @@ else {
 
         <example>
             <title>Ограничение до единичных экземпляров<!--Limiting to Single Instances--></title>
-<programlisting role="php">
+<programlisting language="php">
 <![CDATA[<?php
     require_once 'Zend/Session.php';
     $authSpaceAccessor1 = new Zend_Session_Namespace('Zend_Auth');
@@ -562,7 +562,7 @@ else {
 
         <example>
             <title>Известные проблемы с массивами<!--Known problem with arrays--></title>
-<programlisting role="php">
+<programlisting language="php">
 <![CDATA[<?php
     $sessionNamespace = new Zend_Session_Namespace('Foo');
     $sessionNamespace->array = array();
@@ -582,7 +582,7 @@ else {
 
         <example>
             <title>Обходной путь: извлечение, изменение и сохранение<!--Workaround: fetch, modify, save--></title>
-<programlisting role="php">
+<programlisting language="php">
 <![CDATA[<?php
     $sessionNamespace = new Zend_Session_Namespace('Foo');
     $sessionNamespace->array = array('tree' => 'apple');
@@ -602,7 +602,7 @@ else {
 
         <example>
             <title>Обходной путь: сохранение массива, содержащего ссылку<!--Workaround: store array containing reference--></title>
-<programlisting role="php">
+<programlisting language="php">
 <![CDATA[<?php
     $myNamespace = new Zend_Session_Namespace('mySpace');
 
@@ -662,7 +662,7 @@ else {
 
         <example>
             <title>Пример: Простой доступ к ID авторизации<!--Example: Simplified access of authorization ids--></title>
-<programlisting role="php">
+<programlisting language="php">
 <![CDATA[<?php
     // pre-authentication request
     require_once 'Zend/Auth/Adapter/Digest.php';
@@ -797,7 +797,7 @@ else {
 
         <example>
             <title>Использование PHPUnit для тестирования кода, написанного с использованием Zend_Session*<!--Using PHPUnit to test code written using Zend_Session*--></title>
-<programlisting role="php">
+<programlisting language="php">
 <![CDATA[<?php
         // testing setExpirationSeconds()
         require 'tests/Zend/Session/SessionTestHelper.php'; // also see SessionTest.php in trunk/

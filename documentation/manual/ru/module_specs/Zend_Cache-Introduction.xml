@@ -27,7 +27,7 @@
             связывает их. В этом первом примере мы будем использовать
             фронтэнд <code>Core</code> с бэкэндом <code>File</code>.
        </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $frontendOptions = array(
    'lifetime' => 7200, // время жизни кэша - 2 часа
    'automatic_serialization' => true
@@ -65,7 +65,7 @@ $cache = Zend_Cache::factory('Core',
             в кэш не нужно будет даже подключаться к базе данных: записи
             извлекаются из кэша и выполняется процедура, обратная сериализации.
        </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // $cache определен в предыдущем примере
 
 // проверка, есть ли уже запись в кэше:
@@ -105,7 +105,7 @@ print_r($result);
             запуске весь участок кода будет пропущен, вместо этого извлекаются
             данные из кэша (до тех пор, пока записи действительны).
        </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $frontendOptions = array(
    'lifetime' => 30,                   // время жизни кэша - 30 секунд
    'automatic_serialization' => false  // уже установлено по умолчанию

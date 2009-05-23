@@ -25,7 +25,7 @@
             чтобы использовать преимущества простого объектно-ориентированного
             интерфейса.
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Массив конфигурационных данных
 $configArray = array(
     'webhost'  => 'www.example.com',
@@ -67,7 +67,7 @@ $db = Zend_Db::factory($config->database);
         который будет возвращать значение по умолчанию, если элемент
         данных не существует. Например:
     </para>
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $host = $config->database->get('host', 'localhost');
 ]]></programlisting>
     <example id="zend.config.introduction.example.file.php">
@@ -77,7 +77,7 @@ $host = $config->database->get('host', 'localhost');
             основанный на "чистом" PHP. Следующий код показывает, как просто
             этого достичь:
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // config.php
 return array(
     'webhost'  => 'www.example.com',
@@ -91,7 +91,7 @@ return array(
         )
     )
 );]]></programlisting>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Использование конфигурации
 $config = new Zend_Config(require 'config.php');
 

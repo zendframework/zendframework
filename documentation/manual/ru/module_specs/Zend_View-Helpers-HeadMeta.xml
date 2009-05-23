@@ -88,7 +88,7 @@
             и ключевыми словами для вашей страницы:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // установка мета-ключевых слов
 $this->headMeta()->appendName('keywords', 'framework php productivity');
 ]]></programlisting>
@@ -99,7 +99,7 @@ $this->headMeta()->appendName('keywords', 'framework php productivity');
             с требуемыми правилами кэширования:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // отключает кэширование на клиентской стороне
 $this->headMeta()->appendHttpEquiv('expires',
                                    'Wed, 26 Feb 1997 08:21:57 GMT')
@@ -112,7 +112,7 @@ $this->headMeta()->appendHttpEquiv('expires',
             содержимого, кодировки и языка документа:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // установка типа содержимого и кодировки
 $this->headMeta()->appendHttpEquiv('Content-Type',
                                    'text/html; charset=UTF-8')
@@ -124,7 +124,7 @@ $this->headMeta()->appendHttpEquiv('Content-Type',
             промежуточного сообщения до перенаправления:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // установка мета-обновления через 3 секунды с новым URL:
 $this->headMeta()->appendHttpEquiv('Refresh',
                                    '3;URL=http://www.some.org/some.html');
@@ -135,7 +135,7 @@ $this->headMeta()->appendHttpEquiv('Refresh',
             "выводите" помощника:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php echo $this->headMeta() ?>
 ]]></programlisting>
     </example>

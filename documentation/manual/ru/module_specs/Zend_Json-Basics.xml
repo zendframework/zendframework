@@ -10,7 +10,7 @@
         <code>Zend_Json::decode()</code>.
 -->
     </para>
-    <programlisting role="php"><![CDATA[<?php
+    <programlisting language="php"><![CDATA[<?php
 // Получение значения:
 $phpNative = Zend_Json::decode($encodedValue);
 

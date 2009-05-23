@@ -113,7 +113,7 @@
             <code>Zend_Controller_Action::_getParam('error_handler')</code>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class ErrorController extends Zend_Controller_Action
 {
     public function errorAction()
@@ -158,7 +158,7 @@ class ErrorController extends Zend_Controller_Action
             положительного ответа указывать страницу 404:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class ErrorController extends Zend_Controller_Action
 {
     public function errorAction()
@@ -190,7 +190,7 @@ class ErrorController extends Zend_Controller_Action
             <code>error_handler</code>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 public function errorAction()
 {
         $errors = $this->_getParam('error_handler');
@@ -245,7 +245,7 @@ public function errorAction()
             каких-либо видов:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $this->getResponse()->clearBody();
 ]]>
         </programlisting>
@@ -256,7 +256,7 @@ $this->getResponse()->clearBody();
 
         <example id="zend.controller.plugins.standard.errorhandler.examples.example-1">
             <title>Стандартное использование</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $front = Zend_Controller_Front::getInstance();
 $front->registerPlugin(new Zend_Controller_Plugin_ErrorHandler());
 ]]>
@@ -265,7 +265,7 @@ $front->registerPlugin(new Zend_Controller_Plugin_ErrorHandler());
 
         <example id="zend.controller.plugins.standard.errorhandler.examples.example-2">
             <title>Установка другого обработчика ошибок</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $front = Zend_Controller_Front::getInstance();
 $front->registerPlugin(new Zend_Controller_Plugin_ErrorHandler(array(
     'module'     => 'mystuff',
@@ -278,7 +278,7 @@ $front->registerPlugin(new Zend_Controller_Plugin_ErrorHandler(array(
 
         <example id="zend.controller.plugins.standard.errorhandler.examples.example-3">
             <title>Использование аксессоров</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $plugin = new Zend_Controller_Plugin_ErrorHandler();
 $plugin->setErrorHandlerModule('mystuff')
        ->setErrorHandlerController('static')
@@ -299,7 +299,7 @@ $front->registerPlugin($plugin);
             ошибок. Ниже приводится простой пример такого контроллера.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class ErrorController extends Zend_Controller_Action
 {
     public function errorAction()

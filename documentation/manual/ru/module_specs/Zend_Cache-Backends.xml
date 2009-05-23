@@ -323,7 +323,7 @@
             или '_' между словами 'Zend' и 'Platform', когда используете метод
             <code>Zend_Cache::factory()</code>:
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $cache = Zend_Cache::factory('Core', 'Zend Platform');
 ]]></programlisting>
         <para>

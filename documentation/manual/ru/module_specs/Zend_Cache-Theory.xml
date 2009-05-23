@@ -39,7 +39,7 @@
             фронтэнда <classname>Zend_Cache</classname> является код показанный в
             следующем примере:
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Выбираем бэкэнд (например, 'File' или 'Sqlite'...)
 $backendName = '[...]';
 
@@ -80,7 +80,7 @@ $cache = Zend_Cache::factory($frontendName,
             установить массив тегов к данной записи. После этого вы можете
             удалить все записи кэша, помеченные данным тегом (тегами).
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $cache->save($huge_data, 'myUniqueID', array('tagA', 'tagB', 'tagC'));
 ]]></programlisting>
         <note>
@@ -99,7 +99,7 @@ $cache->save($huge_data, 'myUniqueID', array('tagA', 'tagB', 'tagC'));
             определенным идентификатором, вы можете использовать метод
             <code>remove()</code>:
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $cache->remove('idToRemove');
 ]]></programlisting>
         <para>
@@ -107,7 +107,7 @@ $cache->remove('idToRemove');
             недействительными несколько записей кэша, вы можете использовать
             метод <code>clean()</code>. Например, чтобы удалить все записи кэша:
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // удаление всех записей
 $cache->clean(Zend_Cache::CLEANING_MODE_ALL);
 
@@ -117,7 +117,7 @@ $cache->clean(Zend_Cache::CLEANING_MODE_OLD);
         <para>
             Если вы хотите удалить записи кэша, помеченные тегами 'tagA' и 'tagC':
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $cache->clean(
     Zend_Cache::CLEANING_MODE_MATCHING_TAG,
     array('tagA', 'tagC')
@@ -127,7 +127,7 @@ $cache->clean(
             Если вы хотите удалить записи кэша, <emphasis>не</emphasis> помеченные тегами 'tagA' и 'tagC':
             If you want to remove cache entries not matching the tags 'tagA' or 'tagC':
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $cache->clean(
     Zend_Cache::CLEANING_MODE_NOT_MATCHING_TAG,
     array('tagA', 'tagC')
@@ -136,7 +136,7 @@ $cache->clean(
         <para>
             Если вы хотите удалить записи кэша, помеченные тегами 'tagA' <emphasis>или</emphasis> 'tagC':
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $cache->clean(
     Zend_Cache::CLEANING_MODE_MATCHING_ANY_TAG,
     array('tagA', 'tagC')

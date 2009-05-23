@@ -39,7 +39,7 @@
 
     <example id="zend.feed.introduction.example.rss">
         <title>Использование Zend_Feed в работе с данными ленты RSS</title>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Извлечение последних новостей Slashdot
 try {
     $slashdotRss =

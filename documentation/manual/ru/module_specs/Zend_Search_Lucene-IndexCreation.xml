@@ -24,7 +24,7 @@
 -->
         </para>
 
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 // Создание индекса
 $index = Zend_Search_Lucene::create('/data/my-index');
 
@@ -62,7 +62,7 @@ $index->addDocument($doc);
 -->
         </para>
 
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 // Открытие существующего индекса
 $index = Zend_Search_Lucene::open('/data/my-index');
 
@@ -98,7 +98,7 @@ $index->addDocument($doc);
 -->
         </para>
 
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 $removePath = ...;
 $hits = $index->find('path:' . $removePath);
 foreach ($hits as $hit) {
@@ -138,7 +138,7 @@ foreach ($hits as $hit) {
 -->
         </para>
 
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 $indexSize = $index->count();
 $documents = $index->numDocs();
 ?>]]></programlisting>
@@ -151,7 +151,7 @@ $documents = $index->numDocs();
 -->
         </para>
 
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 for ($count = 0; $count < $index->maxDoc(); $count++) {
     if ($index->isDeleted($count)) {
         echo "Document #$id is deleted.\n";
@@ -221,7 +221,7 @@ for ($count = 0; $count < $index->maxDoc(); $count++) {
             index segments into new one:
 -->
         </para>
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 // Открытие существующего индекса
 $index = Zend_Search_Lucene::open('/data/my-index');
 

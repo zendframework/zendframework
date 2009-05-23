@@ -47,7 +47,7 @@
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[return array_slice($this->_array, $offset, $itemCountPerPage);]]>
+            <programlisting language="php"><![CDATA[return array_slice($this->_array, $offset, $itemCountPerPage);]]>
             </programlisting>
         </para>
 
@@ -70,7 +70,7 @@
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[public function getPages(Zend_Paginator $paginator, $pageRange = null);]]>
+            <programlisting language="php"><![CDATA[public function getPages(Zend_Paginator $paginator, $pageRange = null);]]>
             </programlisting>
         </para>
 
@@ -88,7 +88,7 @@
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[return $paginator->getPagesInRange($lowerBound, $upperBound);]]>
+            <programlisting language="php"><![CDATA[return $paginator->getPagesInRange($lowerBound, $upperBound);]]>
             </programlisting>
         </para>
 
@@ -105,7 +105,7 @@
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[// Префикс нового класса стиля прокрутки
+            <programlisting language="php"><![CDATA[// Префикс нового класса стиля прокрутки
 $prefix = 'My_Paginator_ScrollingStyle';
 
 // Путь к новому стилю прокрутки

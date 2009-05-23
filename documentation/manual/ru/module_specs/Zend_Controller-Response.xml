@@ -15,7 +15,7 @@
             <code>Zend_Controller_Front::throwExceptions(true)</code>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $front->throwExceptions(true);
 ]]>
         </programlisting>
@@ -25,7 +25,7 @@ $front->throwExceptions(true);
             метод <code>sendResponse()</code>.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $response->sendResponse();
 ]]>
         </programlisting>
@@ -42,7 +42,7 @@ $response->sendResponse();
                 <code>Zend_Controller_Front::returnResponse(true)</code>:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $front->returnResponse(true);
 $response = $front->dispatch();
 
@@ -59,7 +59,7 @@ $response->sendResponse();
             помещайте их в объект ответа:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Внутри контроллера действий:
 // Установка заголовка
 $this->getResponse()
@@ -102,7 +102,7 @@ $this->getResponse()
             объект ответа вместо его вывода.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Получение объекта ответа после диспетчеризации:
 $front->dispatch();
 $response = $front->getResponse();
@@ -129,7 +129,7 @@ $response->sendResponse();
             ниже:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $response->renderExceptions(true);
 $front->dispatch($request, $response);
 
@@ -277,7 +277,7 @@ $front->dispatch();
             страницы:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Предполагается, что класс плагина зарегистрирован во фронт-контроллере
 class MyPlugin extends Zend_Controller_Plugin_Abstract
 {
@@ -317,7 +317,7 @@ class MyController extends Zend_Controller_Action
             структуру:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 array(
     'header'  => ..., // содержимое верха страницы
     'default' => ..., // содержимое тела страницы из MyController::fooAction()

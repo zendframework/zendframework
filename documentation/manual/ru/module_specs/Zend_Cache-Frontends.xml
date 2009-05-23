@@ -154,7 +154,7 @@
                 булевы значения), вы можете использовать более компактную
                 конструкцию, как показано ниже:
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // предполагается, что переменная $cache уже установлена
 
 $id = 'myBigLoop'; // идентификатор того, что мы хотим закэшировать
@@ -177,7 +177,7 @@ if (!($data = $cache->load($id))) {
                 Если вы хотите закэшировать несколько блоков или экземпляров
                 данных, то принцип будет тот же:
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // убедитесь, что используете уникальные идентификаторы:
 $id1 = 'foo';
 $id2 = 'bar';
@@ -219,7 +219,7 @@ echo($data);]]></programlisting>
                 подходит. Проверка на наличие записи кэша должна производиться
                 созданным для этого методом.
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Копмпактная форма. Не подходит, если могут кэшироваться
 // пустые строки и значения булевого типа
 if (!($data = $cache->load($id))) {
@@ -283,7 +283,7 @@ if (!($cache->test($id))) {
                 Пример был дан в самом начале данного руководства. Здесь
                 он с небольшими изменениями:
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // если имеет место промах кэша,
 // то начинается буферизация вывода
 if (!($cache->start('mypage'))) {
@@ -368,7 +368,7 @@ echo 'This is never cached ('.time().').';
                 Функция <code>call()</code> используется так же, как и
                 <code>call_user_func_array()</code> в PHP:
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $cache->call('veryExpensiveFunc', $params);
 
 // $params является массивом
@@ -469,7 +469,7 @@ $cache->call('veryExpensiveFunc', $params);
             <para>
                 Кэширование статических вызовов:
             </para>
-            <programlisting role="php"><![CDATA[<?php
+            <programlisting language="php"><![CDATA[<?php
 class Test {
 
     // Статический метод
@@ -492,7 +492,7 @@ $result = $cache->foobar('1', '2');
             <para>
                 Кэширование обычных вызовов методов:
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class Test {
 
     private $_string = 'hello !';
@@ -860,7 +860,7 @@ $result = $cache->foobar2('1', '2');
                 Использование <classname>Zend_Cache_Frontend_Page</classname> довольно
                 простое:
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // [...]
 
 $cache->start();
@@ -874,7 +874,7 @@ $cache->start();
                 централизованного управления кэшированием в загрузочном файле
                 (например, для использования с <classname>Zend_Controller</classname>).
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 /*
  * Вы должны избегать слишком большого количества строк кода перед этим участком
  * кэша. Например, для наибольшей производительности "require_once" или
@@ -933,7 +933,7 @@ $cache->start();
                 возврата, отличный от HTTP/200. Поэтому мы добавили метод
                 <code>cancel()</code>:
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // [...]
 
 $cache->start();

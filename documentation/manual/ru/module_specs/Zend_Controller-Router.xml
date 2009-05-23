@@ -27,7 +27,7 @@
             ниже:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 RewriteEngine on
 RewriteRule !\.(js|ico|gif|jpg|png|css|html)$ index.php
 ]]>
@@ -37,7 +37,7 @@ RewriteRule !\.(js|ico|gif|jpg|png|css|html)$ index.php
             или (более предпочтителен):
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} -s [OR]
 RewriteCond %{REQUEST_FILENAME} -l [OR]
@@ -55,7 +55,7 @@ RewriteRule ^.*$ index.php [NC,L]
             перезаписи:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.php [I]
 ]]>
         </programlisting>
@@ -129,7 +129,7 @@ url.rewrite-once = (
             его во фронт-контроллер. Следующий код иллюстрирует эту процедуру:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Создание маршрутизатора
 
 $router = $ctrl->getRouter(); // по умолчанию возвращает rewrite router
@@ -154,7 +154,7 @@ $router->addRoute(
             <code>Zend_Controller_Router_Route</code>. Например:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $router->addRoute('user',
                   new Zend_Controller_Router_Route('user/:username'));
 ]]>
@@ -206,7 +206,7 @@ $router->addRoute('user',
                 <code>Zend_View</code> для URL:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <a href=
 "<?= $this->url(array('username' => 'martel'), 'user') ?>">Martel</a>
 ]]>
@@ -294,7 +294,7 @@ $router->addRoute('user',
             Некоторые примеры того, чему будут соответствовать такие маршруты:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Допустим, есть следующие настройки:
 $ctrl->setControllerDirectory(
     array(
@@ -340,7 +340,7 @@ http://example/blog/archive/list/sort/alpha/date/desc
             приблизительно следующим образом:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $compat = new Zend_Controller_Router_Route_Module(array(),
                                                   $dispatcher,
                                                   $request);
@@ -356,7 +356,7 @@ $this->addRoute('default', $compat);
             <code>removeDefaultRoutes()</code>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Удаление всех маршрутов по умолчанию
 $router->removeDefaultRoutes();
 ]]>
@@ -383,7 +383,7 @@ $router->removeDefaultRoutes();
             <xref linkend="zend.controller.request.http.baseurl" />):
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $request->setBaseUrl('/~user/application-root/');
 ]]>
         </programlisting>
@@ -402,7 +402,7 @@ $request->setBaseUrl('/~user/application-root/');
             Вы можете устанавливать глобальный параметр следующим образом:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $router->setGlobalParam('lang', 'en');
 ]]>
         </programlisting>
@@ -439,7 +439,7 @@ $router->setGlobalParam('lang', 'en');
             В качестве примера рассмотрим следующий INI-файл:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 [production]
 routes.archive.route = "archive/:year/*"
 routes.archive.defaults.controller = archive
@@ -466,7 +466,7 @@ routes.archive.map.1 = "year"
             <code>Zend_Config</code> как показано ниже:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Ini('/path/to/config.ini', 'production');
 $router = new Zend_Controller_Router_Rewrite();
 $router->addConfig($config, 'routes');
@@ -510,7 +510,7 @@ $router->addConfig($config, 'routes');
             метод.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 interface Zend_Controller_Router_Interface
 {
   /**

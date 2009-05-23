@@ -26,7 +26,7 @@
             Пример:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -65,7 +65,7 @@
                 таких областей, как раздел &lt;head&gt;, навигация и т.п.:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -121,7 +121,7 @@
             использования в MVC:
         </para>
 
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 // В вашем файле загрузки:
 Zend_Layout::startMvc();
 ?>]]></programlisting>
@@ -137,7 +137,7 @@ Zend_Layout::startMvc();
             к помощнику действий:
         </para>
 
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 class FooController extends Zend_Controller_Action
 {
     public function barAction()
@@ -162,7 +162,7 @@ class FooController extends Zend_Controller_Action
             вызывать методы объекта макета:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php $this->layout()->setLayout('foo'); // установка другого макета ?>
 ]]></programlisting>
 
@@ -172,7 +172,7 @@ class FooController extends Zend_Controller_Action
             <code>getMvcInstance()</code>:
         </para>
 
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 // Возвращает null, если до этого не был вызван startMvc()
 $layout = Zend_Layout::getMvcInstance();
 ?>]]></programlisting>
@@ -201,7 +201,7 @@ $layout = Zend_Layout::getMvcInstance();
             их рендеринг по отдельности:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <body>
     <!-- рендеринг /nav/menu -->
     <div id="nav"><?= $this->layout()->nav ?></div>
@@ -250,7 +250,7 @@ $layout = Zend_Layout::getMvcInstance();
             и производите рендеринг макета:
         </para>
 
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 $layout = new Zend_Layout();
 
 // Установка пути к скриптам макета:

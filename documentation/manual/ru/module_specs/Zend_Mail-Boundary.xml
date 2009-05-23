@@ -24,7 +24,7 @@
             Changing the MIME Boundary
 -->
         </title>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php
 require_once 'Zend/Mail.php';
 $mail = new Zend_Mail();

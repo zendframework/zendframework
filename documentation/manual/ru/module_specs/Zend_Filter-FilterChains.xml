@@ -13,7 +13,7 @@
         составляется цепочка из фильтров. Следующий код демонстрирует
         создание цепочки из двух фильтров для имени пользователя:
         
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Создание цепочки фильтров и добавление в нее фильтров
 $filterChain = new Zend_Filter();
 $filterChain->addFilter(new Zend_Filter_Alpha())

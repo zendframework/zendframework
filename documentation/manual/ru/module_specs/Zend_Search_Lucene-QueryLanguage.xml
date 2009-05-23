@@ -95,7 +95,7 @@
             There are two static methods in Zend_Search_Lucene class, which allow to operate with this settengs:
 -->
         </para>
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 $defaultSearchField = Zend_Search_Lucene::getDefaultSearchField();
 ...
 Zend_Search_Lucene::setDefaultSearchField('contents');]]></programlisting>

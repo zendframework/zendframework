@@ -23,7 +23,7 @@
             адаптеру для включения.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $params = array(
     'host'     => '127.0.0.1',
     'username' => 'webuser',
@@ -56,7 +56,7 @@ $db->getProfiler()->setEnabled(true);
             <code>true</code>, и выключает его, если имеет значение
             <code>false</code>. По умолчанию адаптер использует класс
             профилировщика <code>Zend_Db_Profiler</code>.
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $params['profiler'] = true;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
 ]]>
@@ -67,7 +67,7 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
             Передача объекта профилировщика заставляет адаптер использовать его.
             Объект должен принадлежать классу <code>Zend_Db_Profiler</code> или
             его производному.
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $profiler = MyProject_Db_Profiler();
 $profiler->setEnabled(true);
 $params['profiler'] = $profiler;
@@ -87,7 +87,7 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
             инстанцируется конструктором без передачи аргументов. Опция
             '<code>class</code>' игнорируется, если установлена опция
             '<code>instance</code>'.
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $params['profiler'] = array(
     'enabled' => true,
     'class'   => 'MyProject_Db_Profiler'
@@ -111,7 +111,7 @@ db.profiler.enabled = true
 
             Эта конфигурация может быть применена так, как показано в коде ниже:
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Ini('config.ini', 'main');
 $params['profiler'] = $config->db->profiler;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
@@ -120,7 +120,7 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
 
             Свойство '<code>instance</code>' может быть использовано следующим
             образом:
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $profiler = new MyProject_Db_Profiler();
 $profiler->setEnabled(true);
 $configData = array(
@@ -145,7 +145,7 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
             метод <code>getProfiler()</code> адаптера:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $profiler = $db->getProfiler();
 ]]>
         </programlisting>
@@ -228,7 +228,7 @@ $profiler = $db->getProfiler();
             последним:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $query = $profiler->getLastQueryProfile();
 
 echo $query->getQuery();
@@ -242,7 +242,7 @@ echo $query->getQuery();
             тот, который выполняется дольше всех:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $totalTime    = $profiler->getTotalElapsedSecs();
 $queryCount   = $profiler->getTotalNumQueries();
 $longestTime  = 0;
@@ -289,7 +289,7 @@ echo "Longest query: \n" . $longestQuery . "\n";
                 null.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Профилировать только те запросы, которые отнимают не менее 5 секунд:
 $profiler->setFilterElapsedSecs(5);
 
@@ -366,7 +366,7 @@ $profiler->setFilterElapsedSecs(null);
                 качестве единственного аргумента.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // профилирование только запросов SELECT
 $profiler->setFilterQueryType(Zend_Db_Profiler::SELECT);
 
@@ -400,7 +400,7 @@ $profiler->setFilterQueryType(null);
                 <xref linkend="zend.db.profiler.advanced.filtertype" />.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Получение только профилей запросов SELECT
 $profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::SELECT);
 

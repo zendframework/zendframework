@@ -83,7 +83,7 @@
             ранее.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php // установка ссылок в скрипте вида:
 $this->headLink()->appendStylesheet('/styles/basic.css')
                  ->headLink(array('rel' => 'favicon',

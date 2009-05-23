@@ -42,7 +42,7 @@
 -->
     </para>
 
-    <programlisting role="php"><![CDATA[<?php
+    <programlisting language="php"><![CDATA[<?php
 public $type = ZMime::TYPE_OCTETSTREAM;
 public $encoding = ZMime::ENCODING_8BIT;
 public $id;

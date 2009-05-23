@@ -33,7 +33,7 @@
             <code>Zend_Controller_Action::_forward()</code>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function barAction()
@@ -65,7 +65,7 @@ class FooController extends Zend_Controller_Action
             помощнику <code>ActionStack</code>.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function barAction()

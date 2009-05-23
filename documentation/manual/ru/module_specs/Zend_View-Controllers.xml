@@ -21,7 +21,7 @@
             по одной через объявление свойств экземпляра вида.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view = new Zend_View();
 $view->a = "Hay";
 $view->b = "Bee";
@@ -40,7 +40,7 @@ $view->c = "Sea";
             переменных.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view = new Zend_View();
 
 // определение массива из пар ключ-значение, где
@@ -68,7 +68,7 @@ $view->assign((array) $obj);
             и ее значения.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view = new Zend_View();
 $view->assign('a', "Hay");
 $view->assign('b', "Bee");
@@ -92,7 +92,7 @@ $view->assign('c', "Sea");
             где это нужно.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view = new Zend_View();
 $view->a = "Hay";
 $view->b = "Bee";
@@ -122,7 +122,7 @@ echo $view->render('someView.php');
             используйте метод <code>setScriptPath()</code>.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view = new Zend_View();
 $view->setScriptPath('/path/to/app/views');
 ]]></programlisting>
@@ -142,7 +142,7 @@ $view->setScriptPath('/path/to/app/views');
             для всех или только определенных видов.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view = new Zend_View();
 $view->addScriptPath('/path/to/app/views');
 $view->addScriptPath('/path/to/custom/');
@@ -166,7 +166,7 @@ $view->addScriptPath('/path/to/custom/');
                 Например, для атаки может использоваться следующий ввод:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // $_GET['foo'] == '../../../etc'
 $view->addScriptPath($_GET['foo']);
 $view->render('passwd');

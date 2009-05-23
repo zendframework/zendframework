@@ -37,7 +37,7 @@
 
         <example id="zend.xmlrpc.client.method-calls.example-1">
             <title>Вызов метода XML-RPC</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $client = new Zend_XmlRpc_Client('http://framework.zend.com/xmlrpc');
 
 echo $client->call('test.sayHello');
@@ -63,7 +63,7 @@ echo $client->call('test.sayHello');
 
         <example id="zend.xmlrpc.client.method-calls.example-2">
             <title>Вызов метода XML-RPC с параметрами</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $client = new Zend_XmlRpc_Client('http://framework.zend.com/xmlrpc');
 
 $arg1 = 1.1;
@@ -190,7 +190,7 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
                     собственно запроса к методу XML-RPC:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $client->setSkipSystemLookup(true);
 $result = $client->call('foo.bar', array(array()));
 ]]></programlisting>
@@ -339,7 +339,7 @@ $result = $client->call('foo.bar', array(array()));
 
         <example id="zend.xmlrpc.client.requests-and-responses.example-1">
             <title>Прокси-объект к пространству имен по умолчанию</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $client = new Zend_XmlRpc_Client('http://framework.zend.com/xmlrpc');
 
 // Создание прокси-объекта к пространству имен по умолчанию
@@ -360,7 +360,7 @@ $hello = $server->test->sayHello(1, 2);
 
         <example id="zend.xmlrpc.client.requests-and-responses.example-2">
             <title>Прокси-объект к произвольному пространству имен</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $client = new Zend_XmlRpc_Client('http://framework.zend.com/xmlrpc');
 
 // Создание прокси-объекта к пространству имен "test"
@@ -401,7 +401,7 @@ $hello = $test->sayHello(1, 2);
             <example id="zend.xmlrpc.client.error-handling.http.example-1">
                 <title>Обработка ошибок HTTP</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $client = new Zend_XmlRpc_Client('http://foo/404');
 
 try {
@@ -447,7 +447,7 @@ try {
             <example id="zend.xmlrpc.client.error-handling.faults.example-1">
                 <title>Обработка ошибок XML-RPC</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $client = new Zend_XmlRpc_Client('http://framework.zend.com/xmlrpc');
 
 try {
@@ -519,7 +519,7 @@ try {
         <example id="zend.xmlrpc.client.request-to-response.example-1">
             <title>Выполнение запроса</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $client = new Zend_XmlRpc_Client('http://framework.zend.com/xmlrpc');
 
 $request = new Zend_XmlRpc_Request();

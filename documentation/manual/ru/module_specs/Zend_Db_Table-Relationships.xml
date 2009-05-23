@@ -36,7 +36,7 @@
             Ниже приведено определение классов для этих таблиц:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class Accounts extends Zend_Db_Table_Abstract
 {
     protected $_name            = 'accounts';
@@ -227,7 +227,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
             Используйте следующий метод:
         </para>
 
-        <programlisting role="php">
+        <programlisting language="php">
 <![CDATA[
 $row->findDependentRowset($table, [$rule]);
 ]]>
@@ -255,7 +255,7 @@ $row->findDependentRowset($table, [$rule]);
                 <code>Bugs</code>, о которых сообщил данный пользователь.
             </para>
 
-            <programlisting role="php">
+            <programlisting language="php">
 <![CDATA[
 $accountsTable = new Accounts();
 $accountsRowset = $accountsTable->find(1234);
@@ -294,7 +294,7 @@ $bugsReportedByUser = $user1234->findDependentRowset('Bugs');
                 примере - <code>'Engineer'</code>.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $accountsTable = new Accounts();
 $accountsRowset = $accountsTable->find(1234);
 $user1234 = $accountsRowset->current();
@@ -319,7 +319,7 @@ $bugsAssignedToUser = $user1234->findDependentRowset('Bugs', 'Engineer');
                     должны быть отсортированы по имени.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $accountsTable = new Accounts();
 $accountsRowset = $accountsTable->find(1234);
 $user1234 = $accountsRowset->current();
@@ -388,7 +388,7 @@ $bugsAssignedToUser = $user1234->findDependentRowset('Bugs',
                 таблицы и ключа правила в качестве аргументов.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $accountsTable = new Accounts();
 $accountsRowset = $accountsTable->find(1234);
 $user1234 = $accountsRowset->current();
@@ -416,7 +416,7 @@ $bugsAssignedTo = $user1234->findBugsByEngineer();
             Используйте метод:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $row->findParentRow($table, [$rule]);
 ]]>
         </programlisting>
@@ -444,7 +444,7 @@ $row->findParentRow($table, [$rule]);
                 соответствующей пользователю, сообщившем об этой ошибке.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugsTable = new Bugs();
 $bugsRowset = $bugsTable->fetchAll(array('bug_status = ?' => 'NEW'));
 $bug1 = $bugsRowset->current();
@@ -483,7 +483,7 @@ $reporter = $bug1->findParentRow('Accounts');
                 <code>'Engineer'</code>.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugsTable = new Bugs();
 $bugsRowset = $bugsTable->fetchAll(array('bug_status = ?', 'NEW'));
 $bug1 = $bugsRowset->current();
@@ -546,7 +546,7 @@ $engineer = $bug1->findParentRow('Accounts', 'Engineer');
                 имени таблицы и ключа правила в качестве аргументов.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugsTable = new Bugs();
 $bugsRowset = $bugsTable->fetchAll(array('bug_status = ?', 'NEW'));
 $bug1 = $bugsRowset->current();
@@ -575,7 +575,7 @@ $engineer = $bug1->findParentAccountsByEngineer();
             таблицу пересечений. Используйте метод:
         </para>
 
-        <programlisting role="php">
+        <programlisting language="php">
 <![CDATA[
 $row->findManyToManyRowset($table,
                            $intersectionTable,
@@ -619,7 +619,7 @@ $row->findManyToManyRowset($table,
                 которых сообщил этот пользователь.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugsTable = new Bugs();
 $bugsRowset = $bugsTable->find(1234);
 $bug1234 = $bugsRowset->current();
@@ -677,7 +677,7 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
                 которым относится данная ошибка.
             </para>
 
-            <programlisting role="php">
+            <programlisting language="php">
 <![CDATA[
 $bugsTable = new Bugs();
 $bugsRowset = $bugsTable->find(1234);
@@ -750,7 +750,7 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
                 относится данная ошибка.
             </para>
 
-            <programlisting role="php">
+            <programlisting language="php">
 <![CDATA[
 $bugsTable = new Bugs();
 $bugsRowset = $bugsTable->find(1234);
@@ -814,7 +814,7 @@ $products = $bug1234->findProductsViaBugsProductsByBug();
                 автоматического удаления зависимых строк в таблице
                 <code>Bugs</code>.
             </para>
-            <programlisting role="php">
+            <programlisting language="php">
 <![CDATA[
 $productsTable  = new Products();
 $productsRowset = $productsTable->find(1234);
@@ -872,7 +872,7 @@ $product1234->delete();
                 результат, используя значение <code>self::NO_ACTION</code> или
                 пропустив элемент <code>'onUpdate'</code>.
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class BugsProducts extends Zend_Db_Table_Abstract
 {
     ...

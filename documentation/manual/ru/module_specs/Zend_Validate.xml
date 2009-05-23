@@ -79,7 +79,7 @@
         <para>
             Следующий пример демонстрирует проверку адреса e-mail:
     
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_EmailAddress();
 
 if ($validator->isValid($email)) {
@@ -135,7 +135,7 @@ if ($validator->isValid($email)) {
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_StringLength(8);
 
 $validator->setMessage(
@@ -158,7 +158,7 @@ if (!$validator->isValid('слово')) {
             метод <code>setMessages()</code>. Его аргумент является массивом,
             содержащим пары ключ/значение.
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_StringLength(8, 12);
 
 $validator->setMessages( array(
@@ -180,7 +180,7 @@ $validator->setMessages( array(
             <code>isValid()</code>. Другие свойства могут поддерживаться не
             всеми классами валидации.
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_StringLength(8, 12);
 
 if (!validator->isValid('слово')) {
@@ -214,7 +214,7 @@ if (!validator->isValid('слово')) {
             загружает класс, создает его экземпляр и применяет метод
             <code>isValid()</code> к входным данным.
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 if (Zend_Validate::is($email, 'EmailAddress')) {
     // Да, похоже, email валиден
 }
@@ -226,7 +226,7 @@ if (Zend_Validate::is($email, 'EmailAddress')) {
             Вы можете также передавать массив аргументов конструктора,
             если они нужны для данного класса валидации.
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 if (Zend_Validate::is($value, 'Between', array(1, 12))) {
     // Да, $value имеет значение в диапазоне между 1 и 12
 }
@@ -271,7 +271,7 @@ if (Zend_Validate::is($value, 'Between', array(1, 12))) {
             экземпляр переводчика.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_StringLength(8, 12);
 $translate = new Zend_Translate(
     'array',
@@ -292,7 +292,7 @@ $validator->setTranslator($translate);
             валидации и упрощает ваш код.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate(
     'array',
     array(Zend_Validate_StringLength::TOO_SHORT => 'Translated \'%value%\''),
@@ -316,7 +316,7 @@ Zend_Validate::setDefaultTranslator($translate);
             значения используйте <code>translatorIsDisabled()</code>.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_StringLength(8, 12);
 if (!$validator->isTranslatorDisabled()) {
     $validator->setDisableTranslator();

@@ -46,7 +46,7 @@
 
                 <title>Объявление класса таблицы с явным определением имени таблицы</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
 {
     protected $_name = 'bugs';
@@ -66,7 +66,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
                 <title>Объявление класса таблицы с неявным определением имени таблицы</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 class bugs extends Zend_Db_Table_Abstract
 {
     // имя таблицы соответствует имени класса
@@ -91,7 +91,7 @@ class bugs extends Zend_Db_Table_Abstract
 
                 <title>Объявление класса таблицы со схемой</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Первый способ:
 class Bugs extends Zend_Db_Table_Abstract
 {
@@ -130,7 +130,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
                 <title>Объявление имен таблицы и схемы во время инстанцирования</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
 {
 }
@@ -176,7 +176,7 @@ $tableBugs = new Bugs(array('name' => 'bug_db.bugs',
 
                 <title>Пример определения первичного ключа</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
 {
     protected $_name = 'bugs';
@@ -225,7 +225,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
                 <title>Пример переопределения метода _setupTableName()</title>
 
-                <programlisting role="php">
+                <programlisting language="php">
 <![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
 {
@@ -304,7 +304,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
                     <title>Пример использования метода init()</title>
 
-                    <programlisting role="php">
+                    <programlisting language="php">
 <![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
 {
@@ -353,7 +353,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
                 <title>Пример создания экземпляра таблицы с использованием объекта адаптера</title>
 
-                <programlisting role="php">
+                <programlisting language="php">
 <![CDATA[
 $db = Zend_Db::factory('PDO_MYSQL', $options);
 
@@ -382,7 +382,7 @@ $table = new Bugs(array('db' => $db));
 
                 <title>Пример создания экземпляра таблицы с адаптером, используемым по умолчанию</title>
 
-                <programlisting role="php">
+                <programlisting language="php">
 <![CDATA[
 $db = Zend_Db::factory('PDO_MYSQL', $options);
 Zend_Db_Table_Abstract::setDefaultAdapter($db);
@@ -424,7 +424,7 @@ $table = new Bugs();
 
                 <title>Пример создания экземпляра таблицы с использованием ключа реестра</title>
 
-                <programlisting role="php">
+                <programlisting language="php">
 <![CDATA[
 $db = Zend_Db::factory('PDO_MYSQL', $options);
 Zend_Registry::set('my_db', $db);
@@ -469,7 +469,7 @@ $table = new Bugs(array('db' => 'my_db'));
 
             <title>Пример добавления строк в таблицу</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $data = array(
@@ -496,7 +496,7 @@ $table->insert($data);
 
             <title>Пример добавления выражений в таблицу</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $data = array(
@@ -538,7 +538,7 @@ $data = array(
 
                 <title>Пример объявления таблицы с автоинкрементным первичным ключом</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
 {
     protected $_name = 'bugs';
@@ -595,7 +595,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
                 <title>Пример объявления таблицы с последовательностью</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
 {
     protected $_name = 'bugs';
@@ -648,7 +648,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
                 <title>Пример объявления таблицы с естественным ключом</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 class BugStatus extends Zend_Db_Table_Abstract
 {
     protected $_name = 'bug_status';
@@ -694,7 +694,7 @@ class BugStatus extends Zend_Db_Table_Abstract
 
             <title>Пример обновления строк в таблице</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $data = array(
@@ -748,7 +748,7 @@ $table->update($data, $where);
 
             <title>Пример удаления строк из таблицы</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $where = $table->getAdapter()->quoteInto('bug_id = ?', 1235);
@@ -797,7 +797,7 @@ $table->delete($where);
 
             <title>Пример извлечения строк по значениям первичного ключа</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 // Запрос одной строки
@@ -858,7 +858,7 @@ $rows = $table->find(array(1234, 5678));
                 (5678, 'DEF').
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class BugsProducts extends Zend_Db_Table_Abstract
 {
     protected $_name = 'bugs_products';
@@ -910,7 +910,7 @@ $rows = $table->find(array(1234, 5678), array('ABC', 'DEF'));
 
                     <para>
 
-                        <programlisting role="php">
+                        <programlisting language="php">
 <![CDATA[
 // Извлечение набора строк
 $rows = $table->fetchAll('bug_status = "NEW"', 'bug_id ASC', 10, 0);
@@ -991,7 +991,7 @@ $row = $table->fetchRow($table->select()->where('bug_status = ?', 'NEW')
 
                     <title>Простое использование</title>
 
-                    <programlisting role="php">
+                    <programlisting language="php">
 <![CDATA[
 $table = new Bugs();
 
@@ -1017,7 +1017,7 @@ $rows = $table->fetchAll($select);
 
                     <title>Пример использования fluent interface</title>
 
-                    <programlisting role="php">
+                    <programlisting language="php">
 <![CDATA[
 $table = new Bugs();
 
@@ -1047,7 +1047,7 @@ $rows =
 
                 <title>Пример поиска строк по выражению</title>
 
-                <programlisting role="php">
+                <programlisting language="php">
 <![CDATA[
 $table = new Bugs();
 
@@ -1072,7 +1072,7 @@ $rows = $table->fetchAll($select);
 
                 <title>Пример поиска строк по выражению</title>
 
-                <programlisting role="php">
+                <programlisting language="php">
 <![CDATA[
 $table = new Bugs();
 
@@ -1119,7 +1119,7 @@ $rows = $table->fetchAll($select);
 
                     <title>Извлечение определенных столбцов</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $select = $table->select();
@@ -1164,7 +1164,7 @@ $rows = $table->fetchAll($select);
 
                     <title>Извлечение выражений как столбцов</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $select = $table->select();
@@ -1191,7 +1191,7 @@ $rows = $table->fetchAll($select);
 
                     <title>Использование таблицы поиска для фильтрации результатов, возвращаемых fetchAll()</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $select = $table->select();
@@ -1260,7 +1260,7 @@ $rows = $table->fetchAll($select);
 
             <title>Пример поиска одной строки по выражению</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $select  = $table->select()->where('bug_status = ?', 'NEW')
@@ -1295,7 +1295,7 @@ $row = $table->fetchRow($select);
 
             <title>Пример получения имени таблицы</title>
 
-            <programlisting role="php">
+            <programlisting language="php">
 <![CDATA[
 $table = new Bugs();
 
@@ -1440,7 +1440,7 @@ echo "The table name is " . $info['name'] . "\n";
                 используемый по умолчанию во всех объектах таблиц:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Сначала создается объект кэша
 $frontendOptions = array(
     'automatic_serialization' => true
@@ -1485,7 +1485,7 @@ $bugs = new Bugs();
                 метаданных для одного конкретного объекта таблицы:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Сначала создается объект кэша
 $frontendOptions = array(
     'automatic_serialization' => true
@@ -1566,7 +1566,7 @@ $bugs = new Bugs(array('metadataCache' => $cache));
 
                 <title>Пример указания классов строки и набора строк</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 class My_Row extends Zend_Db_Table_Row_Abstract
 {
     ...
@@ -1606,7 +1606,7 @@ $rows = $table->fetchAll($where);
 
                 <title>Пример смены используемых для строк и наборов строк классов</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $where = $table->getAdapter()->quoteInto('bug_status = ?', 'NEW')
@@ -1653,7 +1653,7 @@ $rowsCustom = $table->fetchAll($where);
 
                 <title>Собственная логика для управления отметками времени</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
 {
     protected $_name = 'bugs';
@@ -1706,7 +1706,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
                 <title>Метод для поиска ошибок с определенным статусом</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
 {
     protected $_name = 'bugs';
@@ -1782,7 +1782,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
                 <title>Пример абстрактного класса таблицы, реализующего инфлекцию</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 abstract class MyAbstractTable extends Zend_Db_Table_Abstract
 {
     protected function _setupTableName()

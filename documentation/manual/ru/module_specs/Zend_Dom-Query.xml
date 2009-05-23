@@ -151,7 +151,7 @@
             из HTML-кода, приведенного выше:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $dom = new Zend_Dom_Query($html);
 $results = $dom->query('.foo .bar a');
 

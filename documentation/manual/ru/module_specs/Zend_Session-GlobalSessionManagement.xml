@@ -67,7 +67,7 @@
 -->
             <example>
                 <title>Использование Zend_Config для конфирурирования Zend_Session<!--Using Zend_Config to Configure Zend_Session--></title>
-<programlisting role="php"><![CDATA[<?php
+<programlisting language="php"><![CDATA[<?php
 $config = new Zend_Config_Ini('myapp.ini', 'sandbox');
 require_once 'Zend/Session.php';
 Zend_Session::setOptions($config->toArray());
@@ -79,7 +79,7 @@ Zend_Session::setOptions($config->toArray());
 -->
             <example>
                 <title>myapp.ini</title>
-<programlisting role="php">
+<programlisting language="php">
 <![CDATA[
 ;  Настройки по умолчанию для производственного сервера
 [live]
@@ -567,7 +567,7 @@ remember_me_seconds = 864000
 
             <example>
                 <title>Анонимная сессия и фиксация сессии<!--Anonymous Sessions and Session Fixation--></title>
-<programlisting role="php"><![CDATA[<?php
+<programlisting language="php"><![CDATA[<?php
 require_once 'Zend/Session.php';
 $defaultNamespace = new Zend_Session_Namespace();
 
@@ -914,7 +914,7 @@ if (!isset($defaultNamespace->initialized))
 
         <example>
             <title>Уничтожение всех пространств имен<!--Unsetting All Namespaces--></title>
-<programlisting role="php"><![CDATA[<?php
+<programlisting language="php"><![CDATA[<?php
 foreach(Zend_Session::getIterator() as $space) {
     try {
         $core->namespaceUnset($space);

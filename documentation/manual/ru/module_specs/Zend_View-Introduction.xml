@@ -40,7 +40,7 @@
             Скрипт контроллера может выглядеть наподобие этого:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // использование модели для получения данных о заголовках и авторах книг
 $data = array(
     array(
@@ -83,7 +83,7 @@ echo $view->render('booklist.php');
             вида может выглядеть следующим образом:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php if ($this->books): ?>
 
     <!-- Таблица из нескольких книг. -->
@@ -133,7 +133,7 @@ echo $view->render('booklist.php');
                     директорий:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 base/path/
     helpers/
     filters/
@@ -242,7 +242,7 @@ php_value "short_open_tag" "on"
                     на лету преобразовывать короткие теги в полные:
                 </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view->setUseStreamWrapper(true);
 ]]></programlisting>
 

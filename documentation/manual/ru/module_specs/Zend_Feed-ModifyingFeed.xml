@@ -10,7 +10,7 @@
 
     <example id="zend.feed.modifying-feed.example.modifying">
         <title>Изменение существующего сообщения в ленте</title>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $feed = new Zend_Feed_Atom('http://atom.example.com/feed/1');
 $entry = $feed->current();
 
@@ -50,7 +50,7 @@ echo $entry->saveXML();
 
     <example id="zend.feed.modifying-feed.example.creating">
         <title>Создание сообщения Atom с элементами в специальном пространстве имен</title>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $entry = new Zend_Feed_Entry_Atom();
 // id уже присвоен сервером
 $entry->title = 'my custom entry';

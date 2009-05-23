@@ -9,7 +9,7 @@
 
     <example id="zend.exception.using.example">
         <title>Пример отлова исключения</title>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 try {
     Zend_Loader::loadClass('nonexistantclass');
 } catch (Zend_Exception $e) {

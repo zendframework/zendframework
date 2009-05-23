@@ -33,7 +33,7 @@
 
             <title>Пример извлечения набора строк</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugs   = new Bugs();
 $rowset = $bugs->fetchAll("bug_status = 'NEW'");
 ]]>
@@ -67,7 +67,7 @@ $rowset = $bugs->fetchAll("bug_status = 'NEW'");
 
             <title>Подсчет количества строк в наборе строк</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $rowset   = $bugs->fetchAll("bug_status = 'FIXED'");
 
 $rowCount = count($rowset);
@@ -93,7 +93,7 @@ if ($rowCount > 0) {
                 содержит только одну строку.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugs   = new Bugs();
 $rowset = $bugs->fetchAll("bug_id = 1");
 $row    = $rowset->current();
@@ -122,7 +122,7 @@ $row    = $rowset->current();
                 одной записи в таблице.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugs = new Bugs();
 
 // извлечение всех записей из таблицы
@@ -161,7 +161,7 @@ foreach ($rowset as $row) {
                 пример:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugs = new Bugs();
 
 // извлечение всех строк из таблицы
@@ -200,7 +200,7 @@ $row9->save();
 
             <title>Использование toArray()</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugs   = new Bugs();
 $rowset = $bugs->fetchAll();
 
@@ -249,7 +249,7 @@ foreach ($rowsetArray as $rowArray) {
                 в виде последовательности байт.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugs   = new Bugs();
 $rowset = $bugs->fetchAll();
 
@@ -282,7 +282,7 @@ $serializedRowset = serialize($rowset);
                 таблицам).
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $rowsetDisconnected = unserialize($serializedRowset);
 
 // Теперь вы можете использовать свойства и методы объекта, но только для чтения
@@ -327,7 +327,7 @@ echo $row->bug_description;
 
             <title>Пример восстановления соединения для набора строк</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $rowset = unserialize($serializedRowset);
 
 $bugs = new Bugs();
@@ -370,7 +370,7 @@ $row->save();
 
             <title>Указание своего класса набора строк</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class MyRowset extends Zend_Db_Table_Rowset_Abstract
 {
     // ...кастомизация
@@ -403,7 +403,7 @@ class Products extends Zend_Db_Table_Abstract
 
             <title>Пример класса набора строк с новым методом</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class MyBugsRowset extends Zend_Db_Table_Rowset_Abstract
 {
     /**

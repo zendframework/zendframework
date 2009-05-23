@@ -39,7 +39,7 @@
         <code>sendJson()</code>:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function barAction()
@@ -70,7 +70,7 @@ class FooController extends Zend_Controller_Action
             значения <code>true</code> сохранит макеты включенными:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function barAction()

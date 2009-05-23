@@ -24,7 +24,7 @@
 
     <example>
         <title>Демонстрация использования модуля Zend_Pdf<!-- Zend_Pdf module usage demo.--></title>
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 /**
  * @package Zend_Pdf
  * @subpackage demo

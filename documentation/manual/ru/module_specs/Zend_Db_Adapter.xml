@@ -118,7 +118,7 @@
 
             <example id="zend.db.adapter.connecting.constructor.example">
                 <title>Использование конструктора адаптера</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $db = new Zend_Db_Adapter_Pdo_Mysql(array(
     'host'     => '127.0.0.1',
     'username' => 'webuser',
@@ -153,7 +153,7 @@ $db = new Zend_Db_Adapter_Pdo_Mysql(array(
 
             <example id="zend.db.adapter.connecting.factory.example">
                 <title>Использование метода-фабрики адаптеров</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Нам не нужно использовать следующее предложение, поскольку
 // файл Zend_Db_Adapter_Pdo_Mysql будет загружен через
 // метод-фабрику Zend_Db
@@ -183,7 +183,7 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
 
             <example id="zend.db.adapter.connecting.factory.example2">
                 <title>Использование метода-фабрики для пользовательского класса адаптера</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Нам не нужно загружать файл с классом адаптера,
 // поскольку он будет загружен через метод-фабрику Zend_Db
 
@@ -229,7 +229,7 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
                     <link linkend="zend.config.adapters.ini">Zend_Config_Ini</link>
                     или <link linkend="zend.config.adapters.xml">Zend_Config_Xml</link>.
                 </para>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $config = new Zend_Config(
     array(
         'database' => array(
@@ -347,7 +347,7 @@ $db = Zend_Db::factory($config->database);
                     <code>Zend_Db::CASE_UPPER</code> и
                     <code>Zend_Db::CASE_LOWER</code>.
                 </para>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $options = array(
     Zend_Db::CASE_FOLDING => Zend_Db::CASE_UPPER
 );
@@ -381,7 +381,7 @@ $db = Zend_Db::factory('Db2', $params);
                     кавычки, то оно должно производиться самостоятельно с
                     использованием метода <code>quoteIdentifier()</code>.
                 </para>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $options = array(
     Zend_Db::AUTO_QUOTE_IDENTIFIERS => false
 );
@@ -401,7 +401,7 @@ $db = Zend_Db::factory('Pdo_Mysql', $params);
 
             <example id="zend.db.adapter.connecting.parameters.example3">
                 <title>Передача фабрике опций драйвера PDO</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $pdoParams = array(
     PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true
 );
@@ -462,7 +462,7 @@ echo $db->getConnection()
 
             <example id="zend.db.adapter.connecting.getconnection.example">
                 <title>Обработка исключений при соединении</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 try {
     $db = Zend_Db::factory('Pdo_Mysql', $parameters);
     $db->getConnection();
@@ -611,7 +611,7 @@ CREATE TABLE bugs_products (
 
             <example id="zend.db.adapter.select.fetchall.example">
                 <title>Использование fetchAll()</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $sql = 'SELECT * FROM bugs WHERE bug_id = ?';
 
 $result = $db->fetchAll($sql, 2);
@@ -706,7 +706,7 @@ $result = $db->fetchAll($sql, 2);
 
             <example id="zend.db.adapter.select.fetch-mode.example">
                 <title>Использование setFetchMode()</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $db->setFetchMode(Zend_Db::FETCH_OBJ);
 
 $result = $db->fetchAll('SELECT * FROM bugs WHERE bug_id = ?', 2);
@@ -731,7 +731,7 @@ echo $result[0]->bug_description;
 
             <example id="zend.db.adapter.select.fetchassoc.example">
                 <title>Использование fetchAssoc()</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $db->setFetchMode(Zend_Db::FETCH_OBJ);
 
 $result = $db->fetchAssoc('SELECT * FROM bugs WHERE bug_id = ?', 2);
@@ -761,7 +761,7 @@ echo $result[0]['bug_description'];
 
             <example id="zend.db.adapter.select.fetchcol.example">
                 <title>Использование fetchCol()</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $db->setFetchMode(Zend_Db::FETCH_OBJ);
 
 $result = $db->fetchCol(
@@ -797,7 +797,7 @@ echo $result[0];
 
             <example id="zend.db.adapter.select.fetchpairs.example">
                 <title>Использование fetchPairs()</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $db->setFetchMode(Zend_Db::FETCH_OBJ);
 
 $result = $db->fetchPairs('SELECT bug_id, bug_status FROM bugs');
@@ -820,7 +820,7 @@ echo $result[2];
 
             <example id="zend.db.adapter.select.fetchrow.example">
                 <title>Использование fetchRow()</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $db->setFetchMode(Zend_Db::FETCH_OBJ);
 
 $result = $db->fetchRow('SELECT * FROM bugs WHERE bug_id = 2');
@@ -846,7 +846,7 @@ echo $result->bug_description;
 
             <example id="zend.db.adapter.select.fetchone.example">
                 <title>Использование fetchOne()</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $result = $db->fetchOne('SELECT bug_status FROM bugs WHERE bug_id = 2');
 
 // это единственное строковое значение
@@ -882,7 +882,7 @@ echo $result;
 
             <example id="zend.db.adapter.write.insert.example">
                 <title>Добавление в таблицу</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $data = array(
     'created_on'      => '2007-03-22',
     'bug_description' => 'Something wrong',
@@ -922,7 +922,7 @@ $db->insert('bugs', $data);
 
             <example id="zend.db.adapter.write.insert.example2">
                 <title>Добавление выражений в таблицу</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $data = array(
     'created_on'      => new Zend_Db_Expr('CURDATE()'),
     'bug_description' => 'Something wrong',
@@ -961,7 +961,7 @@ $db->insert('bugs', $data);
 
             <example id="zend.db.adapter.write.lastinsertid.example-1">
                 <title>Использование lastInsertId() для автоинкрементного ключа</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $db->insert('bugs', $data);
 
 // возвращает последнее значение, сгенерированное автоинкрементным столбцом
@@ -989,7 +989,7 @@ $id = $db->lastInsertId();
 
             <example id="zend.db.adapter.write.lastinsertid.example-2">
                 <title>Использование lastInsertId() для последовательности</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $db->insert('bugs', $data);
 
 // возвращает последнее значение, сгенерированное
@@ -1013,7 +1013,7 @@ $id = $db->lastInsertId('bugs');
 
             <example id="zend.db.adapter.write.lastinsertid.example-3">
                 <title>Использование lastSequenceId()</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $db->insert('bugs', $data);
 
 // возвращает последнее значение, сгенерированное
@@ -1111,7 +1111,7 @@ $id = $db->lastSequenceId('bugs_id_gen');
 
             <example id="zend.db.adapter.write.update.example">
                 <title>Обновление строк</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $data = array(
     'updated_on'      => '2007-03-23',
     'bug_status'      => 'FIXED'
@@ -1135,7 +1135,7 @@ $n = $db->update('bugs', $data, 'bug_id = 2');
 
             <example id="zend.db.adapter.write.update.example-array">
                 <title>Обновление строк с использованием массива выражений</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $data = array(
     'updated_on'      => '2007-03-23',
     'bug_status'      => 'FIXED'
@@ -1180,7 +1180,7 @@ $n = $db->update('bugs', $data, $where);
 
             <example id="zend.db.adapter.write.delete.example">
                 <title>Удаление строк</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $n = $db->delete('bugs', 'bug_id = 3');
 ]]>
                 </programlisting>
@@ -1212,7 +1212,7 @@ $n = $db->delete('bugs', 'bug_id = 3');
             символы, такие, как символы кавычек, то в результате может
             получиться недопустимый код SQL. Например, обратите внимание на
             несоответствие кавычек в следующем запросе:
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $name = "O'Reilly";
 $sql = "SELECT * FROM bugs WHERE reported_by = '$name'";
 
@@ -1259,7 +1259,7 @@ echo $sql;
 
             <example id="zend.db.adapter.quoting.quote.example">
                 <title>Использование quote()</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $name = $db->quote("O'Reilly");
 echo $name;
 // 'O\'Reilly'
@@ -1290,7 +1290,7 @@ echo $sql;
                 реализациях SQL, если столбец <code>intColumn</code> имеет
                 целочисленный тип данных <code>INTEGER</code>.
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 SELECT * FROM atable WHERE intColumn = '123'
 ]]>
                 </programlisting>
@@ -1304,7 +1304,7 @@ SELECT * FROM atable WHERE intColumn = '123'
 
             <example id="zend.db.adapter.quoting.quote.example-2">
                 <title>Использование quote() с указанием типа SQL</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $value = '1234';
 $sql = 'SELECT * FROM atable WHERE intColumn = '
      . $db->quote($value, 'INTEGER');
@@ -1357,7 +1357,7 @@ $sql = 'SELECT * FROM atable WHERE intColumn = '
 
             <example id="zend.db.adapter.quoting.quote-into.example">
                 <title>Использование quoteInto()</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $sql = $db->quoteInto("SELECT * FROM bugs WHERE reported_by = ?", "O'Reilly");
 
 echo $sql;
@@ -1374,7 +1374,7 @@ echo $sql;
 
             <example id="zend.db.adapter.quoting.quote-into.example-2">
                 <title>Использование quoteInto() с указанием типа SQL</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $sql = $db->quoteInto("SELECT * FROM bugs WHERE bug_id = ?", '1234', 'INTEGER');
 
 echo $sql;
@@ -1429,7 +1429,7 @@ echo $sql;
 
             <example id="zend.db.adapter.quoting.quote-identifier.example">
                 <title>Использование quoteIdentifier()</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // мы можем иметь имя таблицы,
 // которое является зарезервированным в SQL словом
 $tableName = $db->quoteIdentifier("order");
@@ -1513,7 +1513,7 @@ echo $sql
 
         <example id="zend.db.adapter.transactions.example">
             <title>Управление транзакциями для обеспечения согласованности данных</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Старт транзакции явным образом
 $db->beginTransaction();
 
@@ -1710,7 +1710,7 @@ try {
 
         <example id="zend.db.adapter.closing.example">
             <title>Закрытие соединения с БД</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $db->closeConnection();
 ]]>
             </programlisting>
@@ -1772,7 +1772,7 @@ $db->closeConnection();
 
         <example id="zend.db.adapter.other-statements.example">
             <title>Запуск неподготовленного оператора в адаптере PDO</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $result = $db->getConnection()->exec('DROP TABLE bugs');
 ]]>
             </programlisting>

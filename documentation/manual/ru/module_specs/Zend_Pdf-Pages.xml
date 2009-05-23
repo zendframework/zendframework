@@ -86,7 +86,7 @@
 
     <example>
         <title>Управление страницами документа PDF<!-- PDF document pages management. --></title>
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 ...
 // Изменение порядка страниц на противоположный
 $pdf->pages = array_reverse($pdf->pages);

@@ -72,7 +72,7 @@
 
             <title>Пример использования метода select() адаптера БД</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $db = Zend_Db::factory( ...опции... );
 $select = $db->select();
 ]]>
@@ -89,7 +89,7 @@ $select = $db->select();
 
             <title>Пример создания нового объекта Select</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $db = Zend_Db::factory( ...опции... );
 $select = new Zend_Db_Select($db);
 ]]>
@@ -114,7 +114,7 @@ $select = new Zend_Db_Select($db);
 
             <title>Пример использования методов для добавления предложений</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Создание объекта Zend_Db_Select
 $select = $db->select();
 
@@ -143,7 +143,7 @@ $select->order( ...определение критериев сортировк�
 
             <title>Пример использования fluent interface</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $select = $db->select()
     ->from( ...определение таблицы и столбцов... )
     ->where( ...определение критериев поиска... )
@@ -176,7 +176,7 @@ $select = $db->select()
 
                 <title>Пример использования метода from()</title>
 
-                <programlisting role="php">
+                <programlisting language="php">
 <![CDATA[
 // Строит запрос:
 //   SELECT *
@@ -205,7 +205,7 @@ $select = $db->select()
 
                 <title>Пример задания корреляционного имени таблицы</title>
 
-                <programlisting role="php">
+                <programlisting language="php">
 <![CDATA[
 // Строит запрос:
 //   SELECT p.*
@@ -228,7 +228,7 @@ $select = $db->select()
 
                 <title>Пример задания имени схемы</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Строит запрос:
 //   SELECT *
 //   FROM "myschema"."products"
@@ -286,7 +286,7 @@ $select = $db->select()
 
                 <title>Пример указания столбцов</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Строит запрос:
 //   SELECT p."product_id", p."product_name"
 //   FROM "products" AS p
@@ -353,7 +353,7 @@ $select = $db->select()
 
                 <title>Пример указания столбцов, содержащих выражения</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Строит запрос:
 //   SELECT p."product_id", LOWER(product_name)
 //   FROM "products" AS p
@@ -420,7 +420,7 @@ $select = $db->select()
 
                 <title>Пример заключения в кавычки столбцов в выражении</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Строится следующий запрос, при этом имя столбца "from" в выражении
 // заключается в кавычки:
 //   SELECT p."from" + 10 AS origin
@@ -458,7 +458,7 @@ $select = $db->select()
 
                 <title>Пример добавления столбцов через метод <code>columns()</code></title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Строится следующий запрос:
 //   SELECT p."product_id", p."product_name"
 //   FROM "products" AS p
@@ -499,7 +499,7 @@ $select = $db->select()
 
                 <title>Пример использования метода join()</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Строит запрос:
 //   SELECT p."product_id", p."product_name", l.*
 //   FROM "products" AS p JOIN "line_items" AS l
@@ -553,7 +553,7 @@ $select = $db->select()
 
                 <title>Пример извлечения без столбцов</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Строит запрос:
 //   SELECT p."product_id", p."product_name"
 //   FROM "products" AS p JOIN "line_items" AS l
@@ -703,7 +703,7 @@ $select = $db->select()
 
                 <title>Пример использования метода joinUsing()</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Строится запрос:
 //   SELECT *
 //   FROM "table1"
@@ -767,7 +767,7 @@ $select = $db->select()
 
                 <title>Пример использования метода where()</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Строится запрос:
 //   SELECT product_id, product_name, price
 //   FROM "products"
@@ -810,7 +810,7 @@ $select = $db->select()
 
                 <title>Пример параметра в методе where()</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Строит запрос:
 //   SELECT product_id, product_name, price
 //   FROM "products"
@@ -838,7 +838,7 @@ $select = $db->select()
 
                 <title>Пример нескольких вызовов метода where()</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Строит запрос:
 //   SELECT product_id, product_name, price
 //   FROM "products"
@@ -871,7 +871,7 @@ $select = $db->select()
 
                 <title>Пример использования метода orWhere()</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Строит запрос:
 //   SELECT product_id, product_name, price
 //   FROM "products"
@@ -903,7 +903,7 @@ $select = $db->select()
 
                 <title>Пример заключения булевых выражений в скобки</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Строит запрос:
 //   SELECT product_id, product_name, price
 //   FROM "products"
@@ -957,7 +957,7 @@ $select = $db->select()
 
                 <title>Пример использования метода group()</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Строит запрос:
 //   SELECT p."product_id", COUNT(*) AS line_items_per_product
 //   FROM "products" AS p JOIN "line_items" AS l
@@ -1017,7 +1017,7 @@ $select = $db->select()
 
                 <title>Пример использования метода having()</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Строит запрос:
 //   SELECT p."product_id", COUNT(*) AS line_items_per_product
 //   FROM "products" AS p JOIN "line_items" AS l
@@ -1089,7 +1089,7 @@ $select = $db->select()
 
                 <title>Пример использования метода order()</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Строит запрос:
 //   SELECT p."product_id", COUNT(*) AS line_items_per_product
 //   FROM "products" AS p JOIN "line_items" AS l
@@ -1139,7 +1139,7 @@ $select = $db->select()
 
                 <title>Пример использования метода limit()</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Строит запрос:
 //   SELECT p."product_id", p."product_name"
 //   FROM "products" AS p
@@ -1183,7 +1183,7 @@ $select = $db->select()
 
                 <title>Пример использования метода limitPage()</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Строит запрос:
 //   SELECT p."product_id", p."product_name"
 //   FROM "products" AS p
@@ -1213,7 +1213,7 @@ $select = $db->select()
 
                 <title>Пример использования метода distinct()</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Строит запрос:
 //   SELECT DISTINCT p."product_name"
 //   FROM "products" AS p
@@ -1241,7 +1241,7 @@ $select = $db->select()
 
                 <title>Пример использования метода forUpdate()</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Строит запрос:
 //   SELECT FOR UPDATE p.*
 //   FROM "products" AS p
@@ -1288,7 +1288,7 @@ $select = $db->select()
 
                 <title>Пример использования метода query() адаптера БД</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $select = $db->select()
              ->from('products');
 
@@ -1316,7 +1316,7 @@ $result = $stmt->fetchAll();
 
                 <title>Пример использования метода query() объекта Select</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $select = $db->select()
              ->from('products');
 
@@ -1343,7 +1343,7 @@ $result = $stmt->fetchAll();
 
                 <title>Пример использования метода __toString()</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $select = $db->select()
              ->from('products');
 
@@ -1463,7 +1463,7 @@ echo "$sql\n";
 
                 <title>Пример использования метода getPart()</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $select = $db->select()
              ->from('products')
              ->order('product_id');
@@ -1513,7 +1513,7 @@ print_r( $orderData );
 
                 <title>Пример использования метода reset()</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Строит запрос:
 //   SELECT p.*
 //   FROM "products" AS p

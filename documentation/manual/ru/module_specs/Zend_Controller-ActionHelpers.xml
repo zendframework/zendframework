@@ -49,7 +49,7 @@
                     передайте ему имя, и будет возвращен объект помощника:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $flashMessenger = $this->_helper->getHelper('FlashMessenger');
 $flashMessenger->addMessage('We did something in the last request');
 ]]>
@@ -63,7 +63,7 @@ $flashMessenger->addMessage('We did something in the last request');
                     помощника так же, как если бы он был свойством этого брокера:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $flashMessenger = $this->_helper->FlashMessenger;
 $flashMessenger->addMessage('We did something in the last request');
 ]]>
@@ -79,7 +79,7 @@ $flashMessenger->addMessage('We did something in the last request');
                     <code>addMessage()</code>:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $this->_helper->FlashMessenger('We did something in the last request');
 ]]>
                 </programlisting>
@@ -115,7 +115,7 @@ $this->_helper->FlashMessenger('We did something in the last request');
             <code>addHelper</code>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 Zend_Controller_Action_HelperBroker::addHelper($helper);
 ]]>
         </programlisting>
@@ -136,7 +136,7 @@ Zend_Controller_Action_HelperBroker::addHelper($helper);
                     соглашениям по именованию классов Zend Framework-а.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Добавление помощников, начинающихся
 // с My_Action_Helpers в My/Action/Helpers/
 Zend_Controller_Action_HelperBroker::addPrefix('My_Action_Helpers');
@@ -153,7 +153,7 @@ Zend_Controller_Action_HelperBroker::addPrefix('My_Action_Helpers');
                     директориям собственные префиксы классов.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Добавление помощников, начинающихся с Helper в Plugins/Helpers/
 Zend_Controller_Action_HelperBroker::addPath('./Plugins/Helpers',
                                              'Helper');
@@ -183,7 +183,7 @@ Zend_Controller_Action_HelperBroker::addPath('./Plugins/Helpers',
             имя помощника без префикса:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Проверка, зарегистрирован ли помощник 'redirector' в брокере:
 if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
     echo 'Redirector helper registered';
@@ -209,7 +209,7 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
             который является коротким именем помощника (без префикса).
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Проверка, зарегистрирован ли помощник 'redirector' в брокере,
 // и его извлечение:
 if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
@@ -231,7 +231,7 @@ $redirector =
             - короткое имя помощника без префикса:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Удаление помощника 'redirector' из брокера, помещенное
 // в условную конструкцию
 if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
@@ -362,7 +362,7 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
             образом:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Перенаправление на /blog/view/item/id/42
 $this->_helper->redirector('item', 'view', 'blog', array('id' => 42));
 ]]>

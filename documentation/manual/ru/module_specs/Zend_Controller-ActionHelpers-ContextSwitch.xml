@@ -40,7 +40,7 @@
         В качестве примера рассмотрим следующий контроллер:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 class NewsController extends Zend_Controller_Action
 {
     /**
@@ -75,7 +75,7 @@ class NewsController extends Zend_Controller_Action
         возвращать и ответ в формате XML:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 class NewsController extends Zend_Controller_Action
 {
     public function init()
@@ -167,7 +167,7 @@ class NewsController extends Zend_Controller_Action
                     автоматической сериализации JSON:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
 ]]>
                 </programlisting>
@@ -315,7 +315,7 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
             контроллера:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function listAction()
@@ -343,7 +343,7 @@ class FooController extends Zend_Controller_Action
             можем добавить следующий код в метод <code>init()</code>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function init()
@@ -362,7 +362,7 @@ class FooController extends Zend_Controller_Action
             в контроллере:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public $contexts = array(
@@ -471,7 +471,7 @@ class FooController extends Zend_Controller_Action
             вызвать метод <code>initContext()</code> в контроллере действий:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class NewsController extends Zend_Controller_Action
 {
     public function init()
@@ -489,7 +489,7 @@ class NewsController extends Zend_Controller_Action
             передачей контекста методу <code>initContext()</code>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $contextSwitch->initContext('xml');
 ]]>
         </programlisting>
@@ -514,7 +514,7 @@ $contextSwitch->initContext('xml');
                     это нужно делать до вызова <code>initContext()</code>.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $contextSwitch->setAutoJsonSerialization(false);
 $contextSwitch->initContext();
 ]]>
@@ -761,7 +761,7 @@ $contextSwitch->initContext();
                 JSON.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class CommentController extends Zend_Controller_Action
 {
     public function init()

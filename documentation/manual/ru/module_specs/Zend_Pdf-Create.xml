@@ -33,7 +33,7 @@
         Создание нового или загрузка существующего документа PDF
         <!-- Create new or load existing PDF document.-->
         </title>
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 ...
 // Создание нового документа PDF
 $pdf1 = new Zend_Pdf();
@@ -79,7 +79,7 @@ $pdf3 = Zend_Pdf::parse($pdfString);
 
     <example>
         <title>Извлечение определенной версии документа PDF<!--Requesting specified revision of the PDF document.--></title>
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 ...
 // Загрузка предыдущей версии документа PDF
 $pdf1 = Zend_Pdf::load($fileName, 1);

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15603 -->
 <sect1 id="zend.validate.writing_validators">
 
     <title>バリデータの書き方</title>
@@ -27,7 +27,7 @@
     <para>
         上の <classname>Zend_Validate_Interface</classname> についての説明からも推測できるように、
         Zend Framework が提供しているバリデーションクラスの返り値は、
-        検証に成功したか失敗したかを表す boolean 値となります。また、<emphasis role="bold">なぜ</emphasis>
+        検証に成功したか失敗したかを表す boolean 値となります。また、<emphasis>なぜ</emphasis>
         検証が失敗したのかについての情報も提供します。この理由がわかると、
         アプリケーション側で何かと便利です。たとえば、ユーザビリティ改善のための統計情報として利用することなどができます。　
     </para>
@@ -259,7 +259,7 @@ class MyValid_PasswordStrength extends Zend_Validate_Abstract
 
             <code>isValid()</code> では四つのチェックを行っていますが、
             チェックに失敗してもその場では <code>false</code> を返していないことに注目しましょう。
-            これにより、入力されたパスワードが満たしていない条件を <emphasis role="bold">すべて</emphasis>
+            これにより、入力されたパスワードが満たしていない条件を <emphasis>すべて</emphasis>
             示すことができるようになります。たとえば、パスワードとして入力された値が
             "<code>#$%</code>" だったとすると、<code>isValid()</code>
             は四つのメッセージをすべて作成し、後で <code>getMessages()</code>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15603 -->
 <sect1 id="zend.translate.using">
 
     <title>翻訳アダプタの使用法</title>
@@ -69,10 +69,10 @@ $translate = new Zend_Translate
 ]]></programlisting>
 
         この例では、
-        <emphasis role="strong">Gettext アダプタ</emphasis>
+        <emphasis>Gettext アダプタ</emphasis>
         を使うことにしました。
-        <emphasis role="strong">source-de.mo</emphasis> というファイルを
-        <emphasis role="strong">/path/to/translation</emphasis> に置いています。
+        <emphasis>source-de.mo</emphasis> というファイルを
+        <emphasis>/path/to/translation</emphasis> に置いています。
         この gettext ファイルにはドイツ語の翻訳が含まれています。
         また、その後で別途フランス語のファイルも追加しています。
     </para>
@@ -133,9 +133,9 @@ print $translate->_(2) . "\n";
         その言語に存在するかどうかを探します。
         翻訳文字列が見つからない場合は、<classname>Zend_Locale</classname>
         で定義されているその次の言語の翻訳を探します。
-        つまり "<emphasis role="strong">de_AT</emphasis>" の場合は
-        "<emphasis role="strong">de</emphasis>" のみで探します。
-        "<emphasis role="strong">de</emphasis>" の翻訳も見つからない場合は、
+        つまり "<emphasis>de_AT</emphasis>" の場合は
+        "<emphasis>de</emphasis>" のみで探します。
+        "<emphasis>de</emphasis>" の翻訳も見つからない場合は、
         もとのメッセージをそのまま返します。
         このようにして、たとえ翻訳文字列がなくても何らかの出力を得ることになっています。
         <classname>Zend_Translate</classname> は、文字列の翻訳の際に
@@ -356,7 +356,7 @@ $translate = new Zend_Translate('array', '/path/to/myarray.php', 'de');
             Gettext ソースファイルは、GNU の gettext ライブラリで作成します。
             あなたのコードをパースして gettext ソースファイルを作成してくれるツールが、
             フリーで公開されています。このファイルは、拡張子が
-            <emphasis role="strong">*.mo</emphasis> のバイナリファイルとなります。
+            <emphasis>*.mo</emphasis> のバイナリファイルとなります。
             ファイルを作成するためのフリーソフトウェアのひとつに
             <ulink url="http://sourceforge.net/projects/poedit/">poEdit</ulink>
             があります。これは、ファイルの作成だけでなく翻訳作業自体もサポートしています。
@@ -371,7 +371,7 @@ $translate->addTranslation('/path/to/german.mo', 'de');
         <para>
             ご覧の通り、アダプタの使用法はまったく同じです。
             違っているのはたったの一点だけ。
-            <emphasis role="strong">array</emphasis> が <emphasis role="strong">gettext</emphasis>
+            <emphasis>array</emphasis> が <emphasis>gettext</emphasis>
             になっているということです。
             その他の部分は、どのアダプタを使用してもまったく同じになります。
             gettext アダプタを使用する際には、
@@ -660,7 +660,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                             新しい翻訳データを読み込む際に、
                             新しいインスタンスを作成する代わりに使用します。
                         </entry>
-                        <entry><emphasis role="strong">false</emphasis></entry>
+                        <entry><emphasis>false</emphasis></entry>
                     </row>
                     <row>
                         <entry>disableNotices</entry>
@@ -669,7 +669,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                             true に設定すると、翻訳が存在しないことについての注意メッセージを無効にします。
                             実運用環境ではこのオプションを true に設定しなければなりません。
                         </entry>
-                        <entry><emphasis role="strong">false</emphasis></entry>
+                        <entry><emphasis>false</emphasis></entry>
                     </row>
                     <row>
                         <entry>ignore</entry>
@@ -677,13 +677,13 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                         <entry>
                            このプレフィックスで始まるすべてのディレクトリとファイルが、
                            ファイルを探す際に無視されます。この値のデフォルトは
-                           <emphasis role="strong">'.'</emphasis>
+                           <emphasis>'.'</emphasis>
                            で、すべての隠しファイルを無視するようになります。
                            この値を 'tmp' に設定すると、たとえば 'tmpImages' や 'tmpFiles'
                            といった名前のファイルやディレクトリ
                            (とその配下のすべてのディレクトリ) を無視します。
                         </entry>
-                        <entry><emphasis role="strong">.</emphasis></entry>
+                        <entry><emphasis>.</emphasis></entry>
                     </row>
                     <row>
                         <entry>log</entry>
@@ -692,7 +692,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                             未翻訳のメッセージや注意が書き込まれる
                             <classname>Zend_Log</classname> のインスタンス
                         </entry>
-                        <entry><emphasis role="strong">null</emphasis></entry>
+                        <entry><emphasis>null</emphasis></entry>
                     </row>
                     <row>
                         <entry>logMessage</entry>
@@ -700,7 +700,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                         <entry>
                             ログに書き込まれるメッセージ
                         </entry>
-                        <entry><emphasis role="strong">Untranslated message within '%locale%': %message%</emphasis></entry>
+                        <entry><emphasis>Untranslated message within '%locale%': %message%</emphasis></entry>
                     </row>
                     <row>
                         <entry>logUntranslated</entry>
@@ -709,7 +709,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                             このオプションを true に設定すると、翻訳できなかったすべてのメッセージ ID
                             が添付のログに書き込まれます。
                         </entry>
-                        <entry><emphasis role="strong">false</emphasis></entry>
+                        <entry><emphasis>false</emphasis></entry>
                     </row>
                     <row>
                         <entry>scan</entry>
@@ -723,7 +723,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                             詳細は <xref linkend="zend.translate.using.detection" />
                             を参照ください。
                         </entry>
-                        <entry><emphasis role="strong">null</emphasis></entry>
+                        <entry><emphasis>null</emphasis></entry>
                     </row>
                     <row>
                         <entry>delimiter</entry>
@@ -731,19 +731,19 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                         <entry>
                             ソースと翻訳を区切る際に使用する記号を指定します。
                         </entry>
-                        <entry><emphasis role="strong">;</emphasis></entry>
+                        <entry><emphasis>;</emphasis></entry>
                     </row>
                     <row>
                         <entry>enclosure</entry>
                         <entry>Csv</entry>
                         <entry>値を囲むための文字を定義します。デフォルトはダブルクォートです。</entry>
-                        <entry><emphasis role="strong">"</emphasis></entry>
+                        <entry><emphasis>"</emphasis></entry>
                     </row>
                     <row>
                         <entry>length</entry>
                         <entry>Csv</entry>
                         <entry>CSV の行の長さの最大値を定義します。0 にすると、自動的に検出します。</entry>
-                        <entry><emphasis role="strong">0</emphasis></entry>
+                        <entry><emphasis>0</emphasis></entry>
                     </row>
                 </tbody>
             </tgroup>
@@ -902,7 +902,7 @@ $translate->setLocale('it_IT');
 
             <para>
                 自動検出を再度有効にしたい場合は、<code>setLocale()</code>
-                で言語として <emphasis role="strong">auto</emphasis>
+                で言語として <emphasis>auto</emphasis>
                 を指定します。これにより、<classname>Zend_Translate</classname>
                 の自動検出機能が再度有効になります。
             </para>
@@ -1354,7 +1354,7 @@ $translate->translate('unknown string');
         <note>
             <para>
                 注意: 追加されているロケールの数や翻訳データの量によっては、
-                返される配列は <emphasis role="strong">非常に大きな</emphasis>
+                返される配列は <emphasis>非常に大きな</emphasis>
                 ものとなります。
             </para>
         </note>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15603 -->
 <sect1 id="zend.session.introduction">
 
     <title>導入</title>
@@ -13,7 +13,7 @@
     </para>
 
     <para>
-        PHP で書かれたウェブアプリケーションでは、<emphasis role="bold">セッション</emphasis>
+        PHP で書かれたウェブアプリケーションでは、<emphasis>セッション</emphasis>
         を使用してサーバ側 (状態を保持するデータ)
         とクライアント側 (特定のユーザエージェント。たとえばウェブブラウザ)
         の論理的な一対一の関係を表します。
@@ -28,7 +28,7 @@
         に保存されたり <classname>Zend_Session</classname> で管理されたり、
         独立して <classname>Zend_Session_Namespace</classname> のアクセス用オブジェクトで管理されたりする
         サーバ側のデータをさすものとします。
-        <emphasis role="bold">セッション名前空間</emphasis>
+        <emphasis>セッション名前空間</emphasis>
         により、セッションデータに対して昔ながらの
         <ulink url="http://en.wikipedia.org/wiki/Namespace_%28computer_science%29">名前空間</ulink>
         を使用したアクセスが可能となります。

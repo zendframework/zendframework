@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15628 -->
 <sect1 id="zend.filter.input">
     <title>Zend_Filter_Input</title>
 
@@ -893,6 +893,28 @@ $validators = array(
                 それらのメッセージのキー、そしてメッセージのテンプレートで使用できるトークン
                 等についての情報については、各バリデータクラスのドキュメントを参照ください。
             </para>
+
+            <para>
+                検証ルールのなかにバリデータがひとつだけしかない場合、
+                あるいはすべてのバリデータで同じメッセージセットを使用する場合は、
+                配列構造で追加しなくても参照できます。
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$validators = array(
+    'month' => array(
+        new Zend_Validate_Between(1, 12),
+        'messages' => array(
+                        Zend_Validate_Between::NOT_BETWEEN =>
+                            '月の値 %value% は、' .
+                            '%min% 以上 %max% 以下の値でなければなりません',
+                        Zend_Validate_Between::NOT_BETWEEN_STRICT =>
+                            '月の値 %value% は、%min% より大きく、' .
+                            'かつ %max% より小さい値でなければなりません'
+        )
+    )
+);
+]]></programlisting>
 
         </sect3>
 

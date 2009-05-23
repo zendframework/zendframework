@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15289 -->
+<!-- EN-Revision: 15718 -->
 <sect2 id="zend.application.core-functionality.bootstrap-bootstrap">
     <title>Zend_Application_Bootstrap_Bootstrap</title>
 
@@ -12,7 +12,7 @@
         <link linkend="zend.application.available-resources.frontcontroller">フロントコントローラリソース</link>
         を登録し、デフォルトのモジュールが定義されていることと、
         それからフロントコントローラをディスパッチすることを最初にチェックする
-        <code>run()</code>メソッドという主要なフィーチャーです。
+        <methodname>run()</methodname>メソッドという主要なフィーチャーです。
     </para>
 
     <para>

@@ -34,7 +34,7 @@
                     <entry><code>void</code></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$options</code>: <emphasis>optional</emphasis>.
+                            <varname>$options</varname>: <emphasis>optional</emphasis>.
                             Options with which to set resource state.
                         </para></listitem>
                     </itemizedlist></entry>
@@ -52,7 +52,7 @@
                     <entry><classname>Zend_Application_Resource_ResourceAbstract</classname></entry>
                     <entry><itemizedlist>
                             <listitem><para>
-                                <code>$bootstrap</code>: <emphasis>required</emphasis>.
+                                <varname>$bootstrap</varname>: <emphasis>required</emphasis>.
                                 Parent bootstrap initializing this resource.
                             </para></listitem>
                     </itemizedlist></entry>
@@ -75,7 +75,7 @@
                     <entry><classname>Zend_Application_Resource_ResourceAbstract</classname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$options</code>: <emphasis>required</emphasis>.
+                            <varname>$options</varname>: <emphasis>required</emphasis>.
                             Options with which to set state.
                         </para></listitem>
                     </itemizedlist></entry>
@@ -171,7 +171,7 @@ $view = $bootstrap->getResource('My_Resource_View');
         <para>
             This brings us to the third option. You can specify an explicit name
             that a given resource class will register as. This can be done by
-            adding a public <code>$_explicitType</code> property to the resource
+            adding a public <varname>$_explicitType</varname> property to the resource
             plugin class, with a string value; that value will then be used
             whenever you wish to reference the plugin resource via the
             bootstrap. As an example, let's define our own view class:

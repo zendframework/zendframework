@@ -37,7 +37,7 @@
         </para>
 
         <para>
-            The helper broker is stored as the <code>$_helper</code> member of
+            The helper broker is stored as the <varname>$_helper</varname> member of
             <classname>Zend_Controller_Action</classname>; use the broker to retrieve or
             call on helpers. Some methods for doing so include:
         </para>
@@ -166,7 +166,7 @@ Zend_Controller_Action_HelperBroker::addPath('./Plugins/Helpers',
 
         <para>
             To determine if a helper exists in the helper broker, use
-            <code>hasHelper($name)</code>, where <code>$name</code> is the short
+            <code>hasHelper($name)</code>, where <varname>$name</varname> is the short
             name of the helper (minus the prefix):
         </para>
 
@@ -191,7 +191,7 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
         </para>
 
         <para>
-            Both methods take a single argument, <code>$name</code>, which is
+            Both methods take a single argument, <varname>$name</varname>, which is
             the short name of the helper (minus the prefix).
         </para>
 
@@ -211,7 +211,7 @@ $redirector =
 
         <para>
             Finally, to delete a registered helper from the broker, use
-            <code>removeHelper($name)</code>, where <code>$name</code> is the
+            <code>removeHelper($name)</code>, where <varname>$name</varname> is the
             short name of the helper (minus the prefix):
         </para>
 

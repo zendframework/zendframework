@@ -113,7 +113,7 @@ $opts->setAliases(
         <title>Adding Argument Lists</title>
         <para>
             By default, <classname>Zend_Console_Getopt</classname> uses
-            <code>$_SERVER['argv']</code> for the array of command-line
+            <varname>$_SERVER['argv']</varname> for the array of command-line
             arguments to parse. You can alternatively specify the array of
             arguments as the second constructor argument. Finally, you
             can append more arguments to those already used using the

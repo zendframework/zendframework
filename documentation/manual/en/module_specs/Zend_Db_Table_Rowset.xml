@@ -340,7 +340,7 @@ $row->save();
         <para>
             You can use an alternative concrete class for instances of Rowsets
             by extending <classname>Zend_Db_Table_Rowset_Abstract</classname>. Specify the custom
-            Rowset class by name either in the <code>$_rowsetClass</code>
+            Rowset class by name either in the <varname>$_rowsetClass</varname>
             protected member of a Table class, or in the array argument of the
             constructor of a Table object.
         </para>

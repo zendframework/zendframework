@@ -50,7 +50,7 @@ $cache = Zend_Cache::factory($frontendName,
                              $backendOptions);
 ]]></programlisting>
         <para>
-            In the following examples we will assume that the <code>$cache</code> variable holds a
+            In the following examples we will assume that the <varname>$cache</varname> variable holds a
             valid, instantiated frontend as shown and that you understand how to pass parameters
             to your chosen backends.
         </para>
@@ -71,7 +71,7 @@ $cache = Zend_Cache::factory($frontendName,
 $cache->save($huge_data, 'myUniqueID', array('tagA', 'tagB', 'tagC'));
 ]]></programlisting>
         <note><para>
-            note than the <code>save()</code> method accepts an optional fourth argument : <code>$specificLifetime</code>
+            note than the <code>save()</code> method accepts an optional fourth argument : <varname>$specificLifetime</varname>
             (if != false, it sets a specific lifetime for this particular cache record)
         </para></note>
     </sect2>

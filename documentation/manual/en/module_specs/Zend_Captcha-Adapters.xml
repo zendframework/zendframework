@@ -41,7 +41,7 @@
             <listitem><para>
                 <code>setTimeout($ttl)</code> and <code>getTimeout()</code>
                 allow you to specify the time-to-live of the session token, and
-                to retrieve the current value. <code>$ttl</code> should be
+                to retrieve the current value. <varname>$ttl</varname> should be
                 specified in seconds.
             </para></listitem>
 
@@ -156,7 +156,7 @@
 
             <listitem><para>
                 <code>setFont($font)</code> and <code>getFont()</code> allow
-                you to specify the font you will use. <code>$font</code>
+                you to specify the font you will use. <varname>$font</varname>
                 should be a fully qualified path to the font file.
                 This value is required; the CAPTCHA will throw an
                 exception during generation if the font file has not been specified.

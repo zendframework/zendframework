@@ -244,7 +244,7 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
 
             <listitem><para>
                 <code>addContexts(array $contexts)</code>: add many contexts at
-                once. The <code>$contexts</code> array should be an array of
+                once. The <varname>$contexts</varname> array should be an array of
                 context/specification pairs. If any of the contexts already
                 exists, it will throw an exception.
             </para></listitem>
@@ -341,7 +341,7 @@ class FooController extends Zend_Controller_Action
 
         <para>
             Alternately, you could simply define the array property
-            <code>$contexts</code>:
+            <varname>$contexts</varname>:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -373,7 +373,7 @@ class FooController extends Zend_Controller_Action
                     <code>addActionContext($action, $context)</code>: marks one
                     or more contexts as available to an action. If mappings
                     already exists, simply appends to those mappings.
-                    <code>$context</code> may be a single context, or an array
+                    <varname>$context</varname> may be a single context, or an array
                     of contexts.
                 </para>
 
@@ -392,13 +392,13 @@ class FooController extends Zend_Controller_Action
                     <code>setActionContext($action, $context)</code>: marks one
                     or more contexts as available to an action. If mappings
                     already exists, it replaces them with those specified.
-                    <code>$context</code> may be a single context, or an array
+                    <varname>$context</varname> may be a single context, or an array
                     of contexts.
             </para></listitem>
 
             <listitem><para>
                     <code>addActionContexts(array $contexts)</code>: add several
-                    action/context pairings at once. <code>$contexts</code>
+                    action/context pairings at once. <varname>$contexts</varname>
                     should be an associative array of action/context pairs. It
                     proxies to <code>addActionContext()</code>, meaning that if
                     pairings already exist, it appends to them.
@@ -424,7 +424,7 @@ class FooController extends Zend_Controller_Action
             <listitem><para>
                     <code>removeActionContext($action, $context)</code>: remove
                     one or more contexts from a given action.
-                    <code>$context</code> may be a single context or an array of
+                    <varname>$context</varname> may be a single context or an array of
                     contexts.
             </para></listitem>
 
@@ -515,8 +515,8 @@ $contextSwitch->initContext();
             <listitem>
                 <para>
                     <code>addHeader($context, $header, $content)</code>: Add a
-                    response header for a given context. <code>$header</code> is
-                    the header name, and <code>$content</code> is the value to
+                    response header for a given context. <varname>$header</varname> is
+                    the header name, and <varname>$content</varname> is the value to
                     pass for that header.
                 </para>
 
@@ -527,7 +527,7 @@ $contextSwitch->initContext();
                 </para>
 
                 <para>
-                    If the <code>$header</code> specified already exists for the
+                    If the <varname>$header</varname> specified already exists for the
                     context, an exception will be thrown.
                 </para>
             </listitem>
@@ -546,7 +546,7 @@ $contextSwitch->initContext();
                     <code>addHeaders($context, array $headers)</code>: Add
                     multiple headers at once to a given context. Proxies to
                     <code>addHeader()</code>, so if the header already exists,
-                    an exception will be thrown. <code>$headers</code> is an
+                    an exception will be thrown. <varname>$headers</varname> is an
                     array of header/context pairs.
                 </para>
             </listitem>
@@ -588,14 +588,14 @@ $contextSwitch->initContext();
                     a callback at a given trigger for a given context. Triggers
                     may be either 'init' or 'post' (indicating callback will be
                     called at either context initialization or postDispatch).
-                    <code>$callback</code> should be a valid PHP callback.
+                    <varname>$callback</varname> should be a valid PHP callback.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     <code>setCallbacks($context, array $callbacks)</code>: set
-                    multiple callbacks for a given context. <code>$callbacks</code>
+                    multiple callbacks for a given context. <varname>$callbacks</varname>
                     should be trigger/callback pairs. In actuality, the most callbacks
                     that can be registered are two, one for initialization and
                     one for post processing.
@@ -688,7 +688,7 @@ $contextSwitch->initContext();
 
         <para>
             First, it uses a different action controller property for
-            determining contexts, <code>$ajaxable</code>. This is so you can
+            determining contexts, <varname>$ajaxable</varname>. This is so you can
             have different contexts used for AJAX versus normal HTTP requests.
             The various <code>*ActionContext*()</code> methods of
             <code>AjaxContext</code> will write to this property.

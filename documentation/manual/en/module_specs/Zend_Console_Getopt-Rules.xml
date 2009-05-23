@@ -12,7 +12,7 @@
     <para>
         The constructor takes two more arguments, both of which are optional.
         The second argument may contain the command-line arguments.
-        This defaults to <code>$_SERVER['argv']</code>.
+        This defaults to <varname>$_SERVER['argv']</varname>.
     </para>
     <para>
         The third argument of the constructor may contain an

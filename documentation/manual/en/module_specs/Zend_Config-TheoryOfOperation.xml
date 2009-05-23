@@ -66,10 +66,10 @@
     </para>
     <para>
         If you have two <classname>Zend_Config</classname> objects, you can merge them into a single
-        object using the <code>merge()</code> function. For example, given <code>$config</code> and
-        <code>$localConfig</code>, you can merge data from <code>$localConfig</code> to <code>$config</code> using
-        <code>$config->merge($localConfig);</code>. The items in <code>$localConfig</code> will override
-        any items with the same name in <code>$config</code>.
+        object using the <code>merge()</code> function. For example, given <varname>$config</varname> and
+        <varname>$localConfig</varname>, you can merge data from <varname>$localConfig</varname> to <varname>$config</varname> using
+        <code>$config->merge($localConfig);</code>. The items in <varname>$localConfig</varname> will override
+        any items with the same name in <varname>$config</varname>.
         <note>
             <para>
                 The <classname>Zend_Config</classname> object that is performing the merge must have been constructed

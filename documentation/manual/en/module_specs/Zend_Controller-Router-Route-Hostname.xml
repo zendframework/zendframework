@@ -45,7 +45,7 @@ $router->addRoute('user', $hostnameRoute->chain($plainPathRoute);
         that is, that a hostname route alone would match any path. So what you
         have to do is to chain a path route to the hostname route. This is done
         like in the example by calling <code>$hostnameRoute->chain($pathRoute);</code>.
-        By doing this, <code>$hostnameRoute</code> isn't modified, but a new
+        By doing this, <varname>$hostnameRoute</varname> isn't modified, but a new
         route (<classname>Zend_Controller_Router_Route_Chain</classname>) is returned,
         which can then be given to the router.
     </para>

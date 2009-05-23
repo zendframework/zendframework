@@ -274,7 +274,7 @@ if ($this->_hasParam('id') {
             <classname>Zend_Controller_Action</classname> provides a rudimentary and
             flexible mechanism for view integration. Two methods accomplish
             this, <code>initView()</code> and <code>render()</code>; the former
-            method lazy-loads the <code>$view</code> public property, and the
+            method lazy-loads the <varname>$view</varname> public property, and the
             latter renders a view based on the current requested action, using
             the directory hierarchy to determine the script path.
         </para>
@@ -286,10 +286,10 @@ if ($this->_hasParam('id') {
                 <code>initView()</code> initializes the view object.
                 <code>render()</code> calls <code>initView()</code> in order to
                 retrieve the view object, but it may be initialized at any time;
-                by default it populates the <code>$view</code> property with a
+                by default it populates the <varname>$view</varname> property with a
                 <classname>Zend_View</classname> object, but any class implementing
                 <classname>Zend_View_Interface</classname> may be used. If
-                <code>$view</code> is already initialized, it simply returns
+                <varname>$view</varname> is already initialized, it simply returns
                 that property.
             </para>
 
@@ -338,16 +338,16 @@ string render(string $action = null,
                 <code>render()</code> renders a view script. If no arguments are
                 passed, it assumes that the script requested is
                 <code>[controller]/[action].phtml</code> (where
-                <code>.phtml</code> is the value of the <code>$viewSuffix</code>
-                property). Passing a value for <code>$action</code> will render
+                <code>.phtml</code> is the value of the <varname>$viewSuffix</varname>
+                property). Passing a value for <varname>$action</varname> will render
                 that template in the <code>[controller]</code> subdirectory. To
                 override using the <code>[controller]</code> subdirectory, pass
-                a true value for <code>$noController</code>. Finally, templates
+                a true value for <varname>$noController</varname>. Finally, templates
                 are rendered into the response object; if you wish to render to
                 a specific <link
                     linkend="zend.controller.response.namedsegments">named
                     segment</link> in the response object, pass a value to
-                <code>$name</code>.
+                <varname>$name</varname>.
             </para>
 
             <note><para>

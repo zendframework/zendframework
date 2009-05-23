@@ -160,7 +160,7 @@ $front->dispatch();
                     <code>setHeader($name, $value, $replace = false)</code> is
                     used to set an individual header. By default, it does not
                     replace existing headers of the same name in the object;
-                    however, setting <code>$replace</code> to true will force it
+                    however, setting <varname>$replace</varname> to true will force it
                     to do so.
                 </para>
 
@@ -181,7 +181,7 @@ $front->dispatch();
 
                 <para>
                     Internally, it calls <code>setHeader()</code> with the
-                    <code>$replace</code> flag on to ensure only one such header
+                    <varname>$replace</varname> flag on to ensure only one such header
                     is ever sent.
                 </para>
             </listitem>
@@ -316,7 +316,7 @@ array(
             <listitem>
                 <para>
                     <code>setBody()</code> and <code>appendBody()</code> both
-                    allow you to pass a second value, <code>$name</code>,
+                    allow you to pass a second value, <varname>$name</varname>,
                     indicating a named segment. In each case, if you provide
                     this, it will overwrite that specific named segment or
                     create it if it does not exist (appending to the array by
@@ -331,7 +331,7 @@ array(
             <listitem>
                 <para>
                     <code>prepend($name, $content)</code> will create a segment
-                    named <code>$name</code> and place it at the beginning of
+                    named <varname>$name</varname> and place it at the beginning of
                     the array. If the segment exists already, it will be removed
                     prior to the operation (i.e., overwritten and replaced).
                 </para>
@@ -340,7 +340,7 @@ array(
             <listitem>
                 <para>
                     <code>append($name, $content)</code> will create a segment
-                    named <code>$name</code> and place it at the end of
+                    named <varname>$name</varname> and place it at the end of
                     the array. If the segment exists already, it will be removed
                     prior to the operation (i.e., overwritten and replaced).
                 </para>
@@ -350,10 +350,10 @@ array(
                 <para>
                     <code>insert($name, $content, $parent = null, $before =
                         false)</code> will create a segment named
-                    <code>$name</code>. If provided with a <code>$parent</code>
+                    <varname>$name</varname>. If provided with a <varname>$parent</varname>
                     segment, the new segment will be placed either before or
                     after that segment (based on the value of
-                    <code>$before</code>) in the array. If the segment exists
+                    <varname>$before</varname>) in the array. If the segment exists
                     already, it will be removed prior to the operation (i.e.,
                     overwritten and replaced).
                 </para>
@@ -362,7 +362,7 @@ array(
             <listitem>
                 <para>
                     <code>clearBody($name = null)</code> will remove a single
-                    named segment if a <code>$name</code> is provided (and the
+                    named segment if a <varname>$name</varname> is provided (and the
                     entire array otherwise).
                 </para>
             </listitem>
@@ -370,10 +370,10 @@ array(
             <listitem>
                 <para>
                     <code>getBody($spec = false)</code> can be used to retrieve a single
-                    array segment if <code>$spec</code> is the name of a named
-                    segment. If <code>$spec</code> is false, it returns a string
+                    array segment if <varname>$spec</varname> is the name of a named
+                    segment. If <varname>$spec</varname> is false, it returns a string
                     formed by concatenating all named segments in order. If
-                    <code>$spec</code> is true, it returns the body content
+                    <varname>$spec</varname> is true, it returns the body content
                     array.
                 </para>
             </listitem>

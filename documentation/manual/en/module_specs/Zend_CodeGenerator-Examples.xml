@@ -271,7 +271,7 @@ class Foo
 
         <para>
             In the example below, we will assume you've defined
-            <code>$foo</code> per one of the class definitions in a previous
+            <varname>$foo</varname> per one of the class definitions in a previous
             example.
         </para>
 

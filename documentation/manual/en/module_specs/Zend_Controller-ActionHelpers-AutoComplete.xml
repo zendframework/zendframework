@@ -102,7 +102,7 @@ class FooController extends Zend_Controller_Action
         <listitem><para>
                 <code>direct($data, $sendNow = true, $keepLayouts =
                     false)</code> is used when calling the helper as a method of
-                the helper broker. The <code>$sendNow</code> flag is used to
+                the helper broker. The <varname>$sendNow</varname> flag is used to
                 determine whether to call <code>sendAutoCompletion()</code> or
                 <code>prepareAutoCompletion()</code>, respectively.
         </para></listitem>

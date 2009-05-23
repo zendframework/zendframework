@@ -68,7 +68,7 @@ if ($log_path) {
 ]]></programlisting>
             Of course, the logging code is optional, but it is highly recommended that you use a logger.
             <classname>Zend_Auth_Adapter_Ldap</classname> will record just about every bit of information anyone could want in
-            <code>$messages</code> (more below), which is a nice feature in itself for something that has a history of
+            <varname>$messages</varname> (more below), which is a nice feature in itself for something that has a history of
             being notoriously difficult to debug.
         </para>
 
@@ -131,7 +131,7 @@ ldap.server2.baseDn = "CN=Users,DC=w,DC=net"
         </para>
 
         <para>
-            The <code>$options</code> parameter is required and must be an array containing one or more sets of
+            The <varname>$options</varname> parameter is required and must be an array containing one or more sets of
             options. Note that it is <emphasis>an array of arrays</emphasis> of
             <link linkend="zend.ldap"><classname>Zend_Ldap</classname></link> options. Even if you will be using only one LDAP server, the
             options must still be within another array.

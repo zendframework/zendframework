@@ -509,11 +509,11 @@ final protected function _forward($action,
 ]]></programlisting>
 
                 <para>
-                    <code>$action</code> is always required; if no controller is
+                    <varname>$action</varname> is always required; if no controller is
                     specified, an action in the current controller is assumed.
-                    <code>$module</code> is always ignored unless
-                    <code>$controller</code> is specified. Finally, any
-                    <code>$params</code> provided will be appended to the
+                    <varname>$module</varname> is always ignored unless
+                    <varname>$controller</varname> is specified. Finally, any
+                    <varname>$params</varname> provided will be appended to the
                     request object. If you do not require the controller or
                     module, but still need to pass parameters, simply specify
                     null for those values.
@@ -667,7 +667,7 @@ echo $response;
                     <listitem><para>
                         <code>_redirect()</code> now takes an optional second
                         argument, the HTTP code to return with the redirect, and
-                        an optional third argument, <code>$prependBase</code>,
+                        an optional third argument, <varname>$prependBase</varname>,
                         that can indicate that the base URL registered with the
                         request object should be prepended to the url specified.
                     </para></listitem>

@@ -65,9 +65,9 @@
             The following example shows the usage of <classname>Zend_Auth_Adapter_OpenId</classname>.
             As previously mentioned, the <classname>Zend_Auth_Adapter_OpenId::authenticate()</classname>
             must be called two times. The first time is after the user submits the HTML form with the
-            <code>$_POST['openid_action']</code> set to <code>"login"</code>,
+            <varname>$_POST['openid_action']</varname> set to <code>"login"</code>,
             and the second time is after the HTTP redirection from OpenID server with
-            <code>$_GET['openid_mode']</code> or <code>$_POST['openid_mode']</code>
+            <varname>$_GET['openid_mode']</varname> or <varname>$_POST['openid_mode']</varname>
             set.
         </para>
 

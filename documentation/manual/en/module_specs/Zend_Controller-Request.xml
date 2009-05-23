@@ -43,7 +43,7 @@
             Based on the type of request, there may be more methods available.
             The default request used, <classname>Zend_Controller_Request_Http</classname>,
             for instance, has methods for retrieving the request URI, path
-            information, <code>$_GET</code> and <code>$_POST</code> parameters,
+            information, <varname>$_GET</varname> and <varname>$_POST</varname> parameters,
             etc.
         </para>
 
@@ -97,10 +97,10 @@
             <para>
                 Specific superglobals can be accessed using a public method as
                 an alternative. For example, the raw value of
-                <code>$_POST['user']</code> can be accessed by calling
+                <varname>$_POST['user']</varname> can be accessed by calling
                 <code>getPost('user')</code> on the request object. These
                 include <code>getQuery()</code> for retrieving
-                <code>$_GET</code> elements, and <code>getHeader()</code> for
+                <varname>$_GET</varname> elements, and <code>getHeader()</code> for
                 retrieving request headers.
             </para>
 
@@ -171,9 +171,9 @@
                 <para>
                     If you are using Apache's 404 handler to pass incoming
                     requests to the front controller, or using a PT flag with
-                    rewrite rules, <code>$_SERVER['REDIRECT_URL']</code>
+                    rewrite rules, <varname>$_SERVER['REDIRECT_URL']</varname>
                     contains the URI you need, not
-                    <code>$_SERVER['REQUEST_URI']</code>. If you are using such
+                    <varname>$_SERVER['REQUEST_URI']</varname>. If you are using such
                     a setup and getting invalid routing, you should use the
                     <classname>Zend_Controller_Request_Apache404</classname> class instead
                     of the default Http class for your request object:

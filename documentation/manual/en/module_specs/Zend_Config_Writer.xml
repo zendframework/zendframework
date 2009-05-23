@@ -10,8 +10,8 @@
         work the same. You instantiate a writer with specific options, which
         can be <code>filename</code> and <code>config</code>. Then
         you call the <code>write()</code> method of the writer and the config
-        file is created. You can also give <code>$filename</code> and
-        <code>$config</code> directly to the <code>write()</code> method.
+        file is created. You can also give <varname>$filename</varname> and
+        <varname>$config</varname> directly to the <code>write()</code> method.
         Currently the following writers are shipped with
         <classname>Zend_Config_Writer</classname>:
     </para>

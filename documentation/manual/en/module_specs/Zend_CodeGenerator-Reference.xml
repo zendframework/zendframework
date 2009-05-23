@@ -32,7 +32,7 @@ abstract class Zend_CodeGenerator_Abstract
             <para>
                 The constructor first calls <code>_init()</code> (which is left
                 empty for the concrete extending class to implement), then
-                passes the <code>$options</code> parameter to
+                passes the <varname>$options</varname> parameter to
                 <code>setOptions()</code>, and finally calls
                 <code>_prepare()</code> (again, to be implemented by an
                 extending class).

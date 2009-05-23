@@ -488,7 +488,7 @@ class FooController extends Zend_Controller_Action
             <para>
                 As noted previously, all resources -- whether methods or plugins
                 -- are bootstrapped by calling <code>bootstrap($resource)</code>,
-                where <code>$resource</code> is the name of a resource, an array
+                where <varname>$resource</varname> is the name of a resource, an array
                 of resources, or, left empty, indicates all resources should be
                 run.
             </para>

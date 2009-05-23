@@ -184,7 +184,7 @@ $this->foo(); // call Foo_View_Helper_Foo::foo()
                 <para>
                     <code>setView($view)</code> allows you to set the view
                     object for the <code>ViewRenderer</code>. It gets set as
-                    the public class property <code>$view</code>.
+                    the public class property <varname>$view</varname>.
                 </para>
             </listitem>
 
@@ -235,7 +235,7 @@ $this->foo(); // call Foo_View_Helper_Foo::foo()
             <listitem>
                 <para>
                     <code>setScriptAction($name)</code> can be used to
-                    specify the action script to render. <code>$name</code>
+                    specify the action script to render. <varname>$name</varname>
                     should be the name of the script minus the file suffix (and
                     without the controller subdirectory, unless
                     <code>noController</code> has been turned on). If not
@@ -421,7 +421,7 @@ $viewRenderer =
             <listitem><para>
                     <code>setInflector($inflector, $reference)</code> allows you
                     to set a custom inflector for use with the
-                    <code>ViewRenderer</code>. If <code>$reference</code> is
+                    <code>ViewRenderer</code>. If <varname>$reference</varname> is
                     true, it will set the suffix and module directory as static
                     references to <code>ViewRenderer</code> properties, as well
                     as the target.
@@ -502,7 +502,7 @@ $viewRenderer =
                     named path segment. When using this method, the
                     <code>ViewRenderer</code> does no autodetermination of the
                     script name, but instead directly passes the
-                    <code>$script</code> argument directly to the view object's
+                    <varname>$script</varname> argument directly to the view object's
                     <code>render()</code> method.
                 </para>
 
@@ -526,7 +526,7 @@ $viewRenderer =
                 <para>
                     <code>getViewScript($action, $vars)</code> creates the path
                     to a view script based on the action passed and/or any
-                    variables passed in <code>$vars</code>. Keys for this array
+                    variables passed in <varname>$vars</varname>. Keys for this array
                     may include any of the path specification keys ('moduleDir',
                     'module', 'controller', 'action', and 'suffix'). Any
                     variables passed will be used; otherwise, values based on
@@ -561,11 +561,11 @@ $viewRenderer =
             <listitem>
                 <para>
                     <code>render($action, $name, $noController)</code> checks
-                    first to see if either <code>$name</code> or
-                    <code>$noController</code> have been passed, and if so, sets
+                    first to see if either <varname>$name</varname> or
+                    <varname>$noController</varname> have been passed, and if so, sets
                     the appropriate flags (responseSegment and noController,
                     respectively) in the ViewRenderer. It then passes the
-                    <code>$action</code> argument, if any, on to
+                    <varname>$action</varname> argument, if any, on to
                     <code>getViewScript()</code>. Finally, it passes the
                     calculated view script path to <code>renderScript()</code>.
                 </para>
@@ -595,9 +595,9 @@ $viewRenderer =
                     <code>renderBySpec($action, $vars, $name)</code> allows you
                     to pass path specification variables in order to determine
                     the view script path to create. It passes
-                    <code>$action</code> and <code>$vars</code> to
+                    <varname>$action</varname> and <varname>$vars</varname> to
                     <code>getScriptPath()</code>, and then passes the resulting
-                    script path and <code>$name</code> on to
+                    script path and <varname>$name</varname> on to
                     <code>renderScript()</code>.
                 </para>
             </listitem>

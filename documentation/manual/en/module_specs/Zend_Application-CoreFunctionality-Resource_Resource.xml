@@ -28,7 +28,7 @@
                     <entry><code>void</code></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$options</code>: <emphasis>optional</emphasis>.
+                            <varname>$options</varname>: <emphasis>optional</emphasis>.
                             Options with which to set resource state.
                         </para></listitem>
                     </itemizedlist></entry>
@@ -46,7 +46,7 @@
                     <entry><classname>Zend_Application_Resource_Resource</classname></entry>
                     <entry><itemizedlist>
                             <listitem><para>
-                                <code>$bootstrap</code>: <emphasis>required</emphasis>.
+                                <varname>$bootstrap</varname>: <emphasis>required</emphasis>.
                                 Parent bootstrap initializing this resource.
                             </para></listitem>
                     </itemizedlist></entry>
@@ -69,7 +69,7 @@
                     <entry><classname>Zend_Application_Resource_Resource</classname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$options</code>: <emphasis>required</emphasis>.
+                            <varname>$options</varname>: <emphasis>required</emphasis>.
                             Options with which to set state.
                         </para></listitem>
                     </itemizedlist></entry>

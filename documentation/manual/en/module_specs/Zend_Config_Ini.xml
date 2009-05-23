@@ -25,7 +25,7 @@
         <title>Key Separator</title>
         <para>
             By default, the key separator character is the period character (<code>.</code>). This can be changed,
-            however, by changing the <code>$options</code> key <code>'nestSeparator'</code> when constructing the
+            however, by changing the <varname>$options</varname> key <code>'nestSeparator'</code> when constructing the
             <classname>Zend_Config_Ini</classname> object. For example:
             <programlisting language="php"><![CDATA[
 $options['nestSeparator'] = ':';
@@ -86,17 +86,17 @@ echo $config->database->params->dbname; // prints "dbname"
             </thead>
             <tbody>
                 <row>
-                    <entry><code>$filename</code></entry>
+                    <entry><varname>$filename</varname></entry>
                     <entry>The INI file to load.</entry>
                 </row>
                 <row>
-                    <entry><code>$section</code></entry>
+                    <entry><varname>$section</varname></entry>
                     <entry>The [section] within the ini file that is to be loaded. Setting
                         this parameter to null will load all sections. Alternatively, an
                         array of section names may be supplied to load multiple sections.</entry>
                 </row>
                 <row>
-                    <entry><code>$options = false</code></entry>
+                    <entry><varname>$options = false</varname></entry>
                     <entry>Options array. The following keys are supported:
                         <itemizedlist>
                             <listitem><para><emphasis>allowModifications</emphasis>: Set to true to allow subsequent modification of loaded file. Defaults to false</para></listitem>

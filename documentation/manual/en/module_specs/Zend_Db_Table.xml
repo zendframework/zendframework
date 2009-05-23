@@ -39,7 +39,7 @@
 
             <para>
                 Declare the database table for which this class is defined, using the protected
-                variable <code>$_name</code>. This is a string, and must contain the name of the
+                variable <varname>$_name</varname>. This is a string, and must contain the name of the
                 table spelled as it appears in the database.
             </para>
 
@@ -77,9 +77,9 @@ class bugs extends Zend_Db_Table_Abstract
 
             <para>
                 You can also declare the schema for the table, either with the protected variable
-                <code>$_schema</code>, or with the schema prepended to the table name in the
-                <code>$_name</code> property. Any schema specified with the <code>$_name</code>
-                property takes precedence over a schema specified with the <code>$_schema</code>
+                <varname>$_schema</varname>, or with the schema prepended to the table name in the
+                <varname>$_name</varname> property. Any schema specified with the <varname>$_name</varname>
+                property takes precedence over a schema specified with the <varname>$_schema</varname>
                 property. In some RDBMS brands, the term for schema is "database" or "tablespace,"
                 but it is used similarly.
             </para>
@@ -117,7 +117,7 @@ class Bugs extends Zend_Db_Table_Abstract
             <para>
                 The schema and table names may also be specified via constructor configuration
                 directives, which override any default values specified with the
-                <code>$_name</code> and <code>$_schema</code> properties. A schema specification
+                <varname>$_name</varname> and <varname>$_schema</varname> properties. A schema specification
                 given with the <code>name</code> directive overrides any value provided with the
                 <code>schema</code> option.
             </para>
@@ -161,7 +161,7 @@ $tableBugs = new Bugs(array('name' => 'bug_db.bugs',
 
             <para>
                 Every table must have a primary key. You can declare the column for the primary key
-                using the protected variable <code>$_primary</code>. This is either a string that
+                using the protected variable <varname>$_primary</varname>. This is either a string that
                 names the single column for the primary key, or else it is an array of column names
                 if your primary key is a compound key.
             </para>
@@ -253,7 +253,7 @@ class Bugs extends Zend_Db_Table_Abstract
                     <para>
                         <code>_setupMetadata()</code> sets the schema if the table name contains
                         the pattern "schema.table"; calls <code>describeTable()</code> to get
-                        metadata information; defaults the <code>$_cols</code> array to the columns
+                        metadata information; defaults the <varname>$_cols</varname> array to the columns
                         reported by <code>describeTable()</code>. By overriding this method, you
                         can specify the columns.
                     </para>
@@ -263,7 +263,7 @@ class Bugs extends Zend_Db_Table_Abstract
                     <para>
                         <code>_setupPrimaryKey()</code> defaults the primary key columns to those
                         reported by <code>describeTable()</code>; checks that the primary key
-                        columns are included in the <code>$_cols</code> array. By overriding this
+                        columns are included in the <varname>$_cols</varname> array. By overriding this
                         method, you can specify the primary key columns.
                     </para>
                 </listitem>
@@ -485,7 +485,7 @@ $data = array(
 
             <para>
                 In <classname>Zend_Db_Table_Abstract</classname>, if you define the protected variable
-                <code>$_sequence</code> to be the Boolean value <code>true</code>, then the class
+                <varname>$_sequence</varname> to be the Boolean value <code>true</code>, then the class
                 assumes that the table has an auto-incrementing primary key.
             </para>
 
@@ -516,7 +516,7 @@ class Bugs extends Zend_Db_Table_Abstract
                 based on the table and column name, and uses the sequence to generate key values
                 for new rows. IBM DB2 has an <code>IDENTITY</code> notation that works similarly.
                 If you use either of these notations, treat your <classname>Zend_Db_Table</classname> class as having an
-                auto-incrementing column with respect to declaring the <code>$_sequence</code>
+                auto-incrementing column with respect to declaring the <varname>$_sequence</varname>
                 member as <code>true</code>.
             </para>
 
@@ -532,7 +532,7 @@ class Bugs extends Zend_Db_Table_Abstract
             </para>
 
             <para>
-                If you define <code>$_sequence</code> to be a string, then <classname>Zend_Db_Table_Abstract</classname>
+                If you define <varname>$_sequence</varname> to be a string, then <classname>Zend_Db_Table_Abstract</classname>
                 assumes the string to name a sequence object in the database. The sequence is
                 invoked to generate a new value, and this value is used in the <code>INSERT</code>
                 operation.
@@ -578,7 +578,7 @@ class Bugs extends Zend_Db_Table_Abstract
             </para>
 
             <para>
-                If you define the <code>$_sequence</code> to be the Boolean value
+                If you define the <varname>$_sequence</varname> to be the Boolean value
                 <code>false</code>, then <classname>Zend_Db_Table_Abstract</classname> assumes that the table has a
                 natural primary key. You must provide values for the primary key columns in the
                 array of data to the <code>insert()</code> method, or else this method throws a
@@ -1465,7 +1465,7 @@ $bugs->setMetadataCacheInClass(false);
 
             <para>
                 The flag is enabled by default, which ensures that the
-                <code>$_metadata</code> array is only populated once per
+                <varname>$_metadata</varname> array is only populated once per
                 instance.
             </para>
         </sect3>
@@ -1657,20 +1657,20 @@ class Bugs extends Zend_Db_Table_Abstract
             <para>
                 For example, if your table class name is "<code>BugsProducts</code>", it would
                 match the physical table in the database called "<code>bugs_products</code>," if
-                you omit the explicit declaration of the <code>$_name</code> class property. In
+                you omit the explicit declaration of the <varname>$_name</varname> class property. In
                 this inflection mapping, the class name spelled in "CamelCase" format would be
                 transformed to lower case, and words are separated with an underscore.
             </para>
 
             <para>
                 You can specify the database table name independently from the class name by
-                declaring the table name with the <code>$_name</code> class property in each of
+                declaring the table name with the <varname>$_name</varname> class property in each of
                 your table classes.
             </para>
 
             <para>
                 <classname>Zend_Db_Table_Abstract</classname> performs no inflection to map the class name to the table
-                name. If you omit the declaration of <code>$_name</code> in your table class, the
+                name. If you omit the declaration of <varname>$_name</varname> in your table class, the
                 class maps to a database table that matches the spelling of the class name exactly.
             </para>
 

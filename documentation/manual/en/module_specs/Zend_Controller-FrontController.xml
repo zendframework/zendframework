@@ -370,7 +370,7 @@ Zend_Controller_Front::run('../application/controllers');
                     <code>registerPlugin(Zend_Controller_Plugin_Abstract $plugin, $stackIndex = null)</code>
                     allows you to register <link
                         linkend="zend.controller.plugins">plugin objects</link>.
-                    By setting the optional <code>$stackIndex</code>, you can
+                    By setting the optional <varname>$stackIndex</varname>, you can
                     control the order in which plugins will execute.
                 </para>
             </listitem>
@@ -380,7 +380,7 @@ Zend_Controller_Front::run('../application/controllers');
                     <code>unregisterPlugin($plugin)</code> let you
                     unregister <link
                         linkend="zend.controller.plugins">plugin objects</link>.
-                    <code>$plugin</code> may be either a plugin object or a
+                    <varname>$plugin</varname> may be either a plugin object or a
                     string denoting the class of plugin to unregister.
                 </para>
             </listitem>
@@ -440,8 +440,8 @@ Zend_Controller_Front::run('../application/controllers');
             <listitem>
                 <para>
                     <code>setParam($name, $value)</code> allows you to set a
-                    single parameter of <code>$name</code> with value
-                    <code>$value</code>.
+                    single parameter of <varname>$name</varname> with value
+                    <varname>$value</varname>.
                 </para>
             </listitem>
 
@@ -455,7 +455,7 @@ Zend_Controller_Front::run('../application/controllers');
             <listitem>
                 <para>
                     <code>getParam($name)</code> allows you to retrieve a single
-                    parameter at a time, using <code>$name</code> as the
+                    parameter at a time, using <varname>$name</varname> as the
                     identifier.
                 </para>
             </listitem>

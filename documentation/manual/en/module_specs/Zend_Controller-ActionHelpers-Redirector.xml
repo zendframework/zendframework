@@ -78,9 +78,9 @@
                     <code>setUseAbsoluteUri()</code> can be used to force the
                     <code>Redirector</code> to use absolute URIs when
                     redirecting. When this option is set, it uses the value of
-                    <code>$_SERVER['HTTP_HOST']</code>,
-                    <code>$_SERVER['SERVER_PORT']</code>, and
-                    <code>$_SERVER['HTTPS']</code> to form a full URI to the URL
+                    <varname>$_SERVER['HTTP_HOST']</varname>,
+                    <varname>$_SERVER['SERVER_PORT']</varname>, and
+                    <varname>$_SERVER['HTTPS']</varname> to form a full URI to the URL
                     specified by one of the redirect methods. This option is off
                     by default, but may be enabled by default in later releases.
                 </para>

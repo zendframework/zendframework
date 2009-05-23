@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15621 -->
+<!-- EN-Revision: 15685 -->
 <sect1 id="zend.soap.wsdl">
     <title>WSDLアクセッサ</title>
 
@@ -97,7 +97,7 @@
             WSDL文書 (/definitions/portType) に新規のポートタイプを追加します。
         </para>
         <para>
-            Zend_Soap_Server実行に関して定義されるウェブサービスメソッドのセットと結びつきます。
+            Zend_Soap_Serverの実装に関して定義されるウェブサービスメソッドのセットと結びつきます。
         </para>
         <para>
             詳しくは<ulink url="http://www.w3.org/TR/wsdl#_porttypes"/>をご覧ください。
@@ -112,7 +112,7 @@
             指定されたポート・タイプに加えます。
         </para>
         <para>
-            各々のポート・オペレーションはZend_Soap_Server実行に関して、
+            各々のポート・オペレーションはZend_Soap_Server実装では、
             クラス・メソッド（ウェブサービスがクラスに基づくならば）
             または関数（ウェブサービスがメソッドセットに基づくならば）に対応します。
         </para>
@@ -159,7 +159,7 @@
         </para>
 
         <para>
-            Zend_Soap_Server実行ではWSDL文書の 'binding' 要素のために<code>$serviceName . 'Binding'</code> の名前が使われます。
+            Zend_Soap_Serverの実装ではWSDL文書の 'binding' 要素のために<code>$serviceName . 'Binding'</code> の名前が使われます。
         </para>
     </sect2>
 
@@ -176,7 +176,7 @@
             <code>XML_Tree_Node</code>オブジェクトをそのメソッドは取得します。
         </para>
         <para>
-            Zend_Soap_Serverを実行すると、 'soap:body' 要素を
+            Zend_Soap_Serverの実装で、 'soap:body' 要素を
             '&lt;soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/&gt;
             として定義している入出力エントリで、
             ウェブサービス・メソッドごとに対応するバインディング・エントリを加えます。
@@ -190,7 +190,7 @@
         <title>addSoapBinding()メソッド</title>
         <para>
             <code>addSoapBinding($binding, $style = 'document', $transport = 'http://schemas.xmlsoap.org/soap/http')</code>
-            メソッドは、指定されたスタイルとトランスポート（Zend_Soap_Server実行では、HTTPについてRPCスタイルを使用します）で
+            メソッドは、指定されたスタイルとトランスポート（Zend_Soap_Serverの実装では、HTTPについてRPCスタイルを使用します）で
             SOAPバインディング項目 ('soap:binding') をバインディング要素（それは、あるポートタイプにすでにリンクされます）に追加します。
         </para>
         <para>
@@ -217,7 +217,7 @@
             他のトランスポートのために指定しては<emphasis>いけません</emphasis>。
         </para>
         <para>
-            Zend_Soap_Server実行では、SOAP操作アクション名のために
+            Zend_Soap_Serverの実装では、SOAP操作アクション名のために
             <code>$serviceUri . '#' . $methodName</code>を使います。
         </para>
         <para>
@@ -228,15 +228,17 @@
     <sect2 id="zend.soap.wsdl.add_service">
         <title>addService()メソッド</title>
         <para>
-            <code>addService($name, $port_name, $binding, $location)</code> method adds '/definitions/service' element to
-            the WSDL document with the specified Wed Service name, port name, binding, and location.
+            <code>addService($name, $port_name, $binding, $location)</code>メソッドは
+            指定したウェブサービス名やポートタイプ及びバインディング、ロケーションとともに
+            WSDL文書に '/definitions/service' 要素を追加します。
         </para>
         <para>
-            WSDL 1.1 allows to have several port types (sets of operations) per service. This ability is not used by
-            Zend_Soap_Server implementation and not supported by <classname>Zend_Soap_Wsdl</classname> class.
+            WSDL 1.1では、サービスごとにいくつかのポートタイプ(操作のセット)を持つことができます。
+            この能力はZend_Soap_Serverの実装では使われず、
+            <classname>Zend_Soap_Wsdl</classname>クラスでサポートされません。
         </para>
         <para>
-            Zend_Soap_Serverの実行に使用します:
+            Zend_Soap_Serverの実装に使用します:
             <itemizedlist>
                 <listitem>
                     <para>
@@ -250,25 +252,25 @@
                 </listitem>
                 <listitem>
                     <para>
-                        <code>'tns:' . $name . 'Binding'</code>
+                        バインディング名として<code>'tns:' . $name . 'Binding'</code>
                             <footnote>
                                 <para>
-                                    <code>'tns:' namespace</code> is defined as script URI
-                                    (<code>'http://'  .$_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']</code>).
+                                    <code>'tns:' namespace</code>はスクリプトのURI
+                                    (<code>'http://'  .$_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']</code>)
+                                    として定義されます。
                                 </para>
                             </footnote>
-                            as binding name,
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        script URI<footnote><para><code>'http://'  .$_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']</code></para></footnote>
-                        as a service URI for Web Service definition using classes.
+                        クラスを使うウェブサービスの定義のためのサービスURIとしてスクリプトのURI
+                        <footnote><para><code>'http://'  .$_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']</code></para></footnote>
                     </para>
                 </listitem>
             </itemizedlist>
-            where <code>$name</code> is a class name for the Web Service definition mode using class and
-            script name for  the Web Service definition mode using set of functions.
+            <code>$name</code>がクラスを使うウェブサービス定義モードのためのクラス名と
+            関数のセットを使うウェブサービス定義モードのためのスクリプト名前であるところ。
         </para>
         <para>
             詳しくは<ulink url="http://www.w3.org/TR/wsdl#_services"/>をご覧ください。
@@ -278,7 +280,7 @@
     <sect2 id="zend.soap.wsdl.types">
         <title>型のマッピング</title>
         <para>
-            Zend_Soap WSDLアクセッサの実行では、PHPとSOAP型の間で以下の型マッピングを使用します:
+            Zend_Soap WSDLアクセッサの実装では、PHPとSOAP型の間で以下の型マッピングを使用します:
             <itemizedlist>
                 <listitem>
                     <para>PHP文字列 &lt;-&gt; <code>xsd:string</code></para>
@@ -300,30 +302,33 @@
                 </listitem>
                 <listitem>
                     <para>
-                        PHP class &lt;-&gt; based on complex type strategy (See: <xref linkend="zend.soap.wsdl.types.add_complex" />)
+                        PHPクラス &lt;-&gt; 複雑な型のストラテジーに基づいた (<xref linkend="zend.soap.wsdl.types.add_complex" />参照)
                         <footnote>
                             <para>
-                                By default <classname>Zend_Soap_Wsdl</classname> will be created with the <classname>Zend_Soap_Wsdl_Strategy_DefaultComplexType</classname>
-                                class as detection algorithm for complex types. The first parameter of the AutoDiscover constructor takes
-                                any complex type strategy implementing <classname>Zend_Soap_Wsdl_Strategy_Interface</classname> or a string with the name
-                                of the class. For backwards compatibility with <code>$extractComplexType</code> boolean variables are parsed
-                                the following way: If true, <classname>Zend_Soap_Wsdl_Strategy_DefaultComplexType</classname>, if false
-                                <classname>Zend_Soap_Wsdl_Strategy_AnyType</classname>.
+                                デフォルトで、<classname>Zend_Soap_Wsdl</classname>は複雑な型のための検出アルゴリズムとして
+                                <classname>Zend_Soap_Wsdl_Strategy_DefaultComplexType</classname>クラスで生成されます。
+                                AutoDiscoverコンストラクタの最初のパラメータは、
+                                クラスの名前で<classname>Zend_Soap_Wsdl_Strategy_Interface</classname>またはストリングを実装している、
+                                どんな複雑な型ストラテジーでもとります。
+                                <code>$extractComplexType</code>との後方互換性のために、
+                                ブール変数は、以下の方法で解析されます:
+                                もしtrueなら、<classname>Zend_Soap_Wsdl_Strategy_DefaultComplexType</classname>、
+                                もしfalseなら、<classname>Zend_Soap_Wsdl_Strategy_AnyType</classname>。
                             </para>
-                        </footnote>.
+                        </footnote>
                     </para>
                 </listitem>
                 <listitem>
                     <para>PHP void &lt;-&gt; 空の型</para>
                 </listitem>
                 <listitem>
-                    <para>If type is not matched to any of these types by some reason, then <code>xsd:anyType</code> is used.</para>
+                    なんらかの理由でこれらの型のいずれとも型が一致しなければ、<code>xsd:anyType</code>が使われます。
                 </listitem>
             </itemizedlist>
 
-            Where <code>xsd:</code> is "http://www.w3.org/2001/XMLSchema" namespace,
-            <code>soap-enc:</code> is a "http://schemas.xmlsoap.org/soap/encoding/" namespace,
-            <code>tns:</code> is a "target namespace" for a service.
+            <code>xsd:</code> が "http://www.w3.org/2001/XMLSchema" ネームスペースであるところでは、
+            <code>soap-enc:</code> は "http://schemas.xmlsoap.org/soap/encoding/" ネームスペースで、
+            <code>tns:</code> はサービスのための "target namespace" です。
         </para>
 
         <sect3 id="zend.soap.wsdl.types.retrieve">
@@ -351,74 +356,77 @@ $soapMyClassType = $wsdl->getType('MyClass');
         <sect3 id="zend.soap.wsdl.types.add_complex">
             <title>複雑な型の情報を追加する</title>
             <para>
-                <code>addComplexType($type)</code> method is used to add complex types (PHP classes) to a WSDL document.
+                <code>addComplexType($type)</code>メソッドは、
+                複雑な型（PHPクラス）をWSDL文書に追加するために使われます。
             </para>
 
             <para>
-                It's automatically used by <code>getType()</code> method to add corresponding complex types
-                of method parameters or return types.
+                メソッド・パラメータの対応する複雑な型を追加するか、型を返すために、
+                <code>getType()</code>メソッドによってそれは自動的に使われます。
             </para>
 
             <para>
-                Its detection and building algorithm is based on the currently
-                active detection strategy for complex types. You can set the detection strategy either by
-                specifying the class name as string or instance of a <classname>Zend_Soap_Wsdl_Strategy_Interface</classname>
-                implementation as the third parameter of the constructor or using the <code>setComplexTypeStrategy($strategy)</code>
-                function of Zend_Soap_Wsdl. The following detection strategies currently exist:
+                その検出とビルドのアルゴリズムは、複雑な型に対して現在実装中の検出ストラテジーに基づきます。
+                文字列でのクラス名指定、
+                または、コンストラクタの第３パラメータとして<classname>Zend_Soap_Wsdl_Strategy_Interface</classname>を実装したインスタンス、
+                または、Zend_Soap_Wsdlの<code>setComplexTypeStrategy($strategy)</code>関数の利用のいずれかにより、
+                検出ストラテジーを設定できます。
+                以下の検出ストラテジーが、現在存在します:
             </para>
 
             <itemizedlist>
                 <listitem>
-                    <para>Class <classname>Zend_Soap_Wsdl_Strategy_DefaultComplexType</classname>: Enabled by default (when no
-                    third constructor parameter is set). Iterates over the public attributes of a class type and
-                    registers them as subtypes of the complex object type.</para>
+                    <para>クラス<classname>Zend_Soap_Wsdl_Strategy_DefaultComplexType</classname>:
+                    デフォルトで許可されます（第3のコンストラクタ・パラメータが設定されないとき）。
+                    クラス型の public 属性項目を反復して、
+                    複雑なオブジェクト型のサブタイプとして登録します。</para>
                 </listitem>
                 <listitem>
-                    <para>Class <classname>Zend_Soap_Wsdl_Strategy_AnyType</classname>: Casts all complex types into the
-                    simple XSD type xsd:anyType. Be careful this shortcut for complex type detection can probably only
-                    be handled successfully by weakly typed languages such as PHP.
-                    </para>
+                    <para>クラス<classname>Zend_Soap_Wsdl_Strategy_AnyType</classname>:
+                    単純なXSD型 xsd:anyType に、すべての複雑な型を投げます。
+                    複雑な型検出のこのショートカットが
+                    PHPのような型検査の弱い言語により、うまく取り扱われるかどうか注意してください。</para>
                 </listitem>
                 <listitem>
-                    <para>Class <classname>Zend_Soap_Wsdl_Strategy_ArrayOfTypeSequence</classname>: This strategy allows
-                    to specify return parameters of the type: <code>int[]</code> or <code>string[]</code>. It can only
-                    handle simple PHP types such as int, string, boolean, float and so on, but allows to specify
-                    nested arrays of arrays of type.</para>
+                    <para>クラス<classname>Zend_Soap_Wsdl_Strategy_ArrayOfTypeSequence</classname>:
+                    このストラテジーにより、以下のようにタイプの戻りパラメータを指定できます:
+                    <code>int[]</code>または<code>string[]</code>.
+                    それは単純なPHP型（例えばint）、文字列、ブール値、floatなどを取り扱えるばかりではなく、
+                    タイプの配列の入れ子の配列も指定できます。</para>
                 </listitem>
                 <listitem>
-                    <para>Class <classname>Zend_Soap_Wsdl_Strategy_ArrayOfTypeComplex</classname>: This strategy allows
-                    to detect very complex arrays of objects. Objects types are detected based on the
-                    <classname>Zend_Soap_Wsdl_Strategy_DefaultComplexType</classname> and an array is wrapped
-                    around that definition.</para>
+                    <para>クラス<classname>Zend_Soap_Wsdl_Strategy_ArrayOfTypeComplex</classname>:
+                    このストラテジーにより、非常に複雑な多数のオブジェクトを見つけることができます。
+                    オブジェクト型は<classname>Zend_Soap_Wsdl_Strategy_DefaultComplexType</classname>に基づいて
+                    検出されます。配列はその定義の周囲を包まれます。</para>
                 </listitem>
                 <listitem>
-                    <para>Class <classname>Zend_Soap_Wsdl_Strategy_Composite</classname>: This strategy can
-                    combine all strategies by connecting PHP Complex types (Classnames) to the desired strategy
-                    via the <code>connectTypeToStrategy($type, $strategy)</code> method. A complete typemap can be
-                    given to the constructor as an array with <code>$type</code> -> <code>$strategy</code> pairs.
-                    The second parameter specifies the default strategy that will be used if an unknown type is
-                    requested for adding. This parameter defaults to the <classname>Zend_Soap_Wsdl_Strategy_DefaultComplexType</classname>
-                    strategy.</para>
+                    <para>クラス<classname>Zend_Soap_Wsdl_Strategy_Composite</classname>:
+                    このストラテジーは、<code>connectTypeToStrategy($type, $strategy)</code>メソッドを通じて
+                    希望するストラテジーにPHPの複雑な型（クラス名）を接続することによって、
+                    すべてのストラテジーを結合することができます。
+                    完全なタイプマップを、<code>$type</code> -> <code>$strategy</code> のペアを持つ配列として
+                    コンストラクタに与えられます。
+                    もし未知の型の追加が必要であれば、第２パラメータで使われるデフォルト・ストラテジーを指定します。
+                    このパラメータのデフォルトは、<classname>Zend_Soap_Wsdl_Strategy_DefaultComplexType</classname>です。</para>
                 </listitem>
             </itemizedlist>
 
             <para>
-                <code>addComplexType()</code> method creates '/definitions/types/xsd:schema/xsd:complexType' element for
-                each described complex type with name of the specified PHP class.
+                <code>addComplexType()</code>メソッドは、指定されたPHPクラスの名前で、
+                記述された複雑な型ごとに '/definitions/types/xsd:schema/xsd:complexType' 要素を生成します。
             </para>
 
             <para>
-                Class property <emphasis>MUST</emphasis> have docblock section with the described PHP type to have property
-                included into WSDL description.
+                クラスのプロパティは、プロパティをWSDL記述にインクルードしておくために、記述されたPHP型でdocblock部を持って<emphasis>いなければなりません</emphasis>。
             </para>
 
             <para>
-                <code>addComplexType()</code> checks if type is already described within types section of the WSDL document.
+                <code>addComplexType()</code>は型がWSDL文書の型セクションの範囲内ですでに記述されるかどうか調べます。
             </para>
 
             <para>
-                It prevents duplications if this method is called two or more times and recursion in the types definition
-                section.
+                このメソッドが型定義部で２回以上再帰で呼ばれると、それは重複を防ぎます。
             </para>
 
             <para>
@@ -431,11 +439,12 @@ $soapMyClassType = $wsdl->getType('MyClass');
     <sect2 id="zend.soap.wsdl.add_documentation">
         <title>addDocumentation()メソッド</title>
         <para>
-            <code>addDocumentation($input_node, $documentation)</code> method adds human readable documentation using
-            optional 'wsdl:document' element.
+            <code>addDocumentation($input_node, $documentation)</code>メソッドは、
+            オプションの 'wsdl:document' 要素を用いて人間の読める文書を追加します。
         </para>
         <para>
-            '/definitions/binding/soap:binding' element is used to signify that the binding is bound to the SOAP protocol format.
+            '/definitions/binding/soap:binding' 要素は、
+            バインディングがSOAPプロトコル構成にバインドされることを示すために使われます。
         </para>
         <para>
             詳しくは<ulink url="http://www.w3.org/TR/wsdl#_documentation"/>をご覧ください。

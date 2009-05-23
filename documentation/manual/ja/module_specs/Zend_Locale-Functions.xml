@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15672 -->
+<!-- EN-Revision: 15686 -->
 <sect1 id="zend.locale.functions">
 
     <title>Zend_Locale の使用法</title>
@@ -721,6 +721,20 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>NumberingSystem</emphasis></entry>
                         <entry>
                             桁表記に使用する文字の一覧を返します。
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>FallbackToChar</emphasis></entry>
+                        <entry>
+                            よく使われる unicode 文字の置換用文字の一覧を返します。
+                            これを使用して、たとえば "©" を "(C)" に置換したりします。
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>CharToFallback</emphasis></entry>
+                        <entry>
+                            よく使われる置換用文字に対応する unicode 文字の一覧を返します。
+                            これを使用して、たとえば "(C)" を "©" に置換したりします。
                         </entry>
                     </row>
                 </tbody>

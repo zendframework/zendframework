@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15101 -->
+<!-- EN-Revision: 15606 -->
 <sect1 id="zend.acl.refining">
 
     <title>アクセス制御の洗練</title>
@@ -127,9 +127,9 @@ echo $acl->isAllowed('administrator', 'announcement', 'archive') ?
 
         <para>
         ACL からひとつあるいは複数のアクセス規則を削除するには、
-        <code>removeAllow()</code> メソッドあるいは <code>removeDeny()</code>
-        メソッドを使用します。<code>allow()</code> および <code>deny()</code>
-        と同様、<code>null</code> 値を指定すると
+        <methodname>removeAllow()</methodname> メソッドあるいは <methodname>removeDeny()</methodname>
+        メソッドを使用します。<methodname>allow()</methodname> および <methodname>deny()</methodname>
+        と同様、<constant>NULL</constant> 値を指定すると
         すべてのロールやリソース、権限を表すことになります。
         </para>
 
@@ -157,7 +157,7 @@ echo $acl->isAllowed('marketing', 'newsletter', 'archive') ?
 
         <para>
         上で説明したように、徐々に権限を変更していくこともできますが、
-        権限に対して <code>null</code> 値を設定すると、
+        権限に対して <constant>NULL</constant> 値を設定すると、
         このような変更を一括で行うことができます。
         </para>
 

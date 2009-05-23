@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15346 -->
+<!-- EN-Revision: 15606 -->
 <sect1 id="zend.acl.introduction">
     <title>導入</title>
 
@@ -12,22 +12,24 @@
 
     <para>
         このドキュメントにおいて、
+    </para>
 
-        <itemizedlist>
-            <listitem>
-                <para>
-                    <emphasis>リソース (Resource)</emphasis>
-                    とは、アクセス制御の対象となるオブジェクトのことです。
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <emphasis>ロール (Role)</emphasis>
-                    とは、リソースに対してのアクセスを要求するオブジェクトのことです。
-                </para>
-            </listitem>
-        </itemizedlist>
+    <itemizedlist>
+        <listitem>
+            <para>
+                <emphasis>リソース (Resource)</emphasis>
+                とは、アクセス制御の対象となるオブジェクトのことです。
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <emphasis>ロール (Role)</emphasis>
+                とは、リソースに対してのアクセスを要求するオブジェクトのことです。
+            </para>
+        </listitem>
+    </itemizedlist>
 
+    <para>
         簡単に言うと、<emphasis>ロールがリソースに対してのアクセスを要求する</emphasis>
         ということです。たとえば、ある人が自動車を利用したいと考えているとしましょう。
         この場合、自動車を誰が利用できるのかが管理されているとすると
@@ -48,7 +50,7 @@
             開発者がリソースを作成するの手助けする機能が含まれています。
             リソースクラスは、単にこのインターフェイスを実装するだけで作成できます。
             このインターフェイスに含まれるメソッドはひとつだけで、それは
-            <code>getResourceId()</code> です。このメソッドにより、
+            <methodname>getResourceId()</methodname> です。このメソッドにより、
             <classname>Zend_Acl</classname> はそのオブジェクトがリソースであると判断します。さらに、
             基本的なリソースの実装を含む <classname>Zend_Acl_Resource</classname>
             が <classname>Zend_Acl</classname> にインクルードされています。
@@ -86,7 +88,7 @@
             開発者がロールを作成するの手助けする機能が含まれています。
             ロールクラスは、単にこのインターフェイスを実装するだけで作成できます。
             このインターフェイスに含まれるメソッドはひとつだけで、それは
-            <code>getRoleId()</code> です。このメソッドにより、
+            <methodname>getRoleId()</methodname> です。このメソッドにより、
             Zend_Acl はそのオブジェクトがロールであると判断します。さらに、
             基本的なロールの実装を含む <classname>Zend_Acl_Role</classname>
             が <classname>Zend_Acl</classname> にインクルードされています。
@@ -110,12 +112,12 @@
         <example id="zend.acl.introduction.roles.example.multiple_inheritance">
             <title>ロールの多重継承</title>
             <para>
-                以下のコードでは、基本となる三つのロール "<code>guest</code>"、"<code>member</code>"
-                および "<code>admin</code>" を定義しています。他のロールはこれらを継承することになります。
-                次に、"<code>someUser</code>" というロールを作成してこれらの三つのロールを継承します。
+                以下のコードでは、基本となる三つのロール "guest"、"member"
+                および "admin" を定義しています。他のロールはこれらを継承することになります。
+                次に、"someUser" というロールを作成してこれらの三つのロールを継承します。
                 これらのロールが配列 <code>$parents</code> にあらわれる順序が重要となります。
-                問い合わせ先のロール (ここでは "<code>someUser</code>" にアクセス規則が定義されていないが
-                その継承元 (ここでは "<code>guest</code>"、"<code>member</code>" および "<code>admin</code>")
+                問い合わせ先のロール (ここでは "someUser" にアクセス規則が定義されていないが
+                その継承元 (ここでは "guest"、"member" および "admin")
                 には定義されているという場合、<classname>Zend_Acl</classname> はそちらを検索します。
             </para>
             <programlisting role="php"><![CDATA[
@@ -146,7 +148,7 @@ echo $acl->isAllowed('someUser', 'someResource') ? 'allowed' : 'denied';
             </para>
             <para>
                 しかし、仮に <classname>Zend_Acl</classname> がさらに別の親に対しても規則の検索を続けたとすると、
-                "guest" は "<code>someResource</code>" へのアクセスが拒否されていることに気づくことでしょう。
+                "guest" は "someResource" へのアクセスが拒否されていることに気づくことでしょう。
                 これは問題となります。というのも、"someUser" は
                 "someResource" へのアクセスが許可されていると同時に拒否されているわけで、
                 それぞれ別の親ロールから取得した規則が衝突することになるからです。
@@ -156,7 +158,7 @@ echo $acl->isAllowed('someUser', 'someResource') ? 'allowed' : 'denied';
                 直近に継承されたロールの優先度が高くなるようにしています。
                 今回の場合は、"member" のほうが
                 "guest" ロールより先に調べられ、例のコードの出力は
-                "<code>allowed</code>" となります。
+                "allowed" となります。
             </para>
         </example>
         <note>
@@ -328,7 +330,7 @@ $acl->allow('administrator');
 ]]></programlisting>
 
         <para>
-            上の <code>allow()</code> のコールにおける <code>null</code> は、
+            上の <methodname>allow()</methodname> のコールにおける <constant>NULL</constant> は、
             規則をすべてのリソースに対して適用することを意味します。
         </para>
 
@@ -341,7 +343,7 @@ $acl->allow('administrator');
             これで、柔軟な ACL が作成できました。これにより、
             ウェブアプリケーションの使用者が、
             ある機能を使用するために必要な権限を持っているかを調べられるようになりました。
-            問い合わせを行うのは簡単で、単に <code>isAllowed()</code>
+            問い合わせを行うのは簡単で、単に <methodname>isAllowed()</methodname>
             メソッドを使用するだけです。
         </para>
 

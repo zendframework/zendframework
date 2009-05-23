@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15101 -->
+<!-- EN-Revision: 15606 -->
 <sect1 id="zend.acl.advanced">
 
     <title>高度な使用法</title>
@@ -23,7 +23,7 @@
         データの使用法にはさまざまなものが考えられるので、
         ACL データの保存は、場面に応じて開発者側で考えることになります。
         <classname>Zend_Acl</classname> はシリアライズ可能なので、ACL オブジェクトを PHP の
-        <ulink url="http://php.net/serialize"><code>serialize()</code></ulink>
+        <ulink url="http://php.net/serialize"><methodname>serialize()</methodname></ulink>
         関数でシリアライズすることができます。シリアライズした結果を、
         ファイルやデータベースあるいはキャッシュなどのお好みの場所に保存することができます。
         </para>
@@ -46,7 +46,7 @@
         <para>
         <classname>Zend_Acl</classname> は、条件付きの規則を <classname>Zend_Acl_Assert_Interface</classname>
         でサポートしています。規則のアサーション用インターフェイスを使用するには、
-        これを実装したクラスで <code>assert()</code> メソッドを作成します。
+        これを実装したクラスで <methodname>assert()</methodname> メソッドを作成します。
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -71,7 +71,7 @@ class CleanIPAssertion implements Zend_Acl_Assert_Interface
         アサーションクラスを作成したら、条件付きの規則を定義を割り当てる際に
         このアサーションクラスのインスタンスを指定します。
         アサーションつきで作成された規則は、アサーションメソッドが
-        true を返す場合にのみ適用されます。
+        <constant>TRUE</constant> を返す場合にのみ適用されます。
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -93,8 +93,8 @@ $acl->allow(null, null, null, new CleanIPAssertion());
         </para>
 
         <para>
-        アサーションオブジェクトの <code>assert()</code> メソッドは、認証問い合わせ
-        (すなわち <code>isAllowed()</code>) が適用される ACL、ロール、リソース
+        アサーションオブジェクトの <methodname>assert()</methodname> メソッドは、認証問い合わせ
+        (すなわち <methodname>isAllowed()</methodname>) が適用される ACL、ロール、リソース
         および権限に渡されます。これを用いて、必要な場所でアサーションクラスが
         条件を判断します。
         </para>

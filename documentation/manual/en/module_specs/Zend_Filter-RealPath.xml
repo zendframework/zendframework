@@ -27,8 +27,8 @@ $filtered = $filter->filter();
 ]]></programlisting>
 
     <para>
-        Sometimes it is usefull to get also paths when they don't exist, f.e. when you want to
-        get the real path for a path which you want to create. You can then eighter give a
+        Sometimes it is useful to get also paths when they don't exist, f.e. when you want to
+        get the real path for a path which you want to create. You can then either give a
         <constant>FALSE</constant> at initiation, or use <methodname>setExists()</methodname> to
         set it.
     </para>

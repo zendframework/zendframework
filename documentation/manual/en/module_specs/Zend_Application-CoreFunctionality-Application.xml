@@ -28,7 +28,7 @@
             </thead>
             <tbody>
                 <row>
-                    <entry><code>phpSettings</code></entry>
+                    <entry><emphasis>phpSettings</emphasis></entry>
                     <entry><para>
                         Array of <filename>php.ini</filename> settings to use. Keys should be the
                         <filename>php.ini</filename> keys.
@@ -36,15 +36,15 @@
                 </row>
 
                 <row>
-                    <entry><code>includePaths</code></entry>
+                    <entry><emphasis>includePaths</emphasis></entry>
                     <entry><para>
                         Additional paths to prepend to the
-                        <code>include_path</code>. Should be an array of paths.
+                        <emphasis>include_path</emphasis>. Should be an array of paths.
                     </para></entry>
                 </row>
 
                 <row>
-                    <entry><code>autoloaderNamespaces</code></entry>
+                    <entry><emphasis>autoloaderNamespaces</emphasis></entry>
                     <entry><para>
                         Array of additional namespaces to register with the
                         <classname>Zend_Loader_Autoloader</classname> instance.
@@ -52,7 +52,7 @@
                 </row>
 
                 <row>
-                    <entry><code>bootstrap</code></entry>
+                    <entry><emphasis>bootstrap</emphasis></entry>
                     <entry><para>
                         Either the string path to the bootstrap class, or an array
                         with elements for the 'path' and 'class' for the application
@@ -84,11 +84,11 @@
             </thead>
             <tbody>
                 <row>
-                    <entry><code>__construct($environment, $options = null)</code></entry>
+                    <entry><methodname>__construct($environment, $options = null)</methodname></entry>
                     <entry><code>void</code></entry>
                     <entry><itemizedlist>
                             <listitem><para>
-                                <code>$environment</code>: <emphasis>required</emphasis>,.
+                                <varname>$environment</varname>: <emphasis>required</emphasis>,.
                                 String representing the current application
                                 environment. Typical strings might include
                                 "development", "testing", "qa", or
@@ -98,7 +98,7 @@
 
                             <listitem>
                             <para>
-                                <code>$options</code>: <emphasis>optional</emphasis>.
+                                <varname>$options</varname>: <emphasis>optional</emphasis>.
                                 Argument may be one of the following values:
                             </para>
                             <itemizedlist>
@@ -106,7 +106,7 @@
                                     <emphasis>String</emphasis>: path to
                                     a <classname>Zend_Config</classname> file to load
                                     as configuration for your application.
-                                    <code>$environment</code> will be used
+                                    <varname>$environment</varname> will be used
                                     to determine what section of the
                                     configuration to pull.
                                 </para></listitem>
@@ -118,7 +118,7 @@
                                 </para></listitem>
 
                                 <listitem><para>
-                                    <emphasis>Zend_Config</emphasis>:
+                                    <emphasis><classname>Zend_Config</classname></emphasis>:
                                     configuration object instance.
                                 </para></listitem>
                             </itemizedlist>
@@ -129,12 +129,12 @@
                         used to set initial object state. An instance of
                         <classname>Zend_Loader_Autoloader</classname> is registered
                         during instantiation. Options passed to the
-                        constructor are passed to <code>setOptions()</code>.
+                        constructor are passed to <methodname>setOptions()</methodname>.
                     </para></entry>
                 </row>
 
                 <row>
-                    <entry><code>getEnvironment()</code></entry>
+                    <entry><methodname>getEnvironment()</methodname></entry>
                     <entry><code>string</code></entry>
                     <entry>N/A</entry>
                     <entry><para>
@@ -144,7 +144,7 @@
                 </row>
 
                 <row>
-                    <entry><code>getAutoloader()</code></entry>
+                    <entry><methodname>getAutoloader()</methodname></entry>
                     <entry><classname>Zend_Loader_Autoloader</classname></entry>
                     <entry>N/A</entry>
                     <entry><para>
@@ -154,11 +154,11 @@
                 </row>
 
                 <row>
-                    <entry><code>setOptions(array $options)</code></entry>
+                    <entry><methodname>setOptions(array $options)</methodname></entry>
                     <entry><classname>Zend_Application</classname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$options</code>: <emphasis>required</emphasis>.
+                            <varname>$options</varname>: <emphasis>required</emphasis>.
                             An array of application options.
                         </para></listitem>
                     </itemizedlist></entry>
@@ -168,13 +168,13 @@
                         matching the various setter methods will be passed
                         to those methods. As an example, the option
                         "phpSettings" will then be passed to
-                        <code>setPhpSettings()</code>. (Option names are
+                        <methodname>setPhpSettings()</methodname>. (Option names are
                         case insensitive.)
                     </para></entry>
                 </row>
 
                 <row>
-                    <entry><code>getOptions()</code></entry>
+                    <entry><methodname>getOptions()</methodname></entry>
                     <entry><code>array</code></entry>
                     <entry>N/A</entry>
                     <entry><para>
@@ -185,12 +185,12 @@
                 </row>
 
                 <row>
-                    <entry><code>hasOption($key)</code></entry>
+                    <entry><methodname>hasOption($key)</methodname></entry>
                     <entry><code>boolean</code></entry>
                     <entry>
                     <itemizedlist>
                         <listitem><para>
-                            <code>$key</code>: String option key to lookup
+                            <varname>$key</varname>: String option key to lookup
                         </para></listitem>
                     </itemizedlist>
                     </entry>
@@ -202,11 +202,11 @@
                 </row>
 
                 <row>
-                    <entry><code>getOption($key)</code></entry>
+                    <entry><methodname>getOption($key)</methodname></entry>
                     <entry><code>mixed</code></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$key</code>: String option key to lookup
+                            <varname>$key</varname>: String option key to lookup
                         </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
@@ -216,16 +216,16 @@
                 </row>
 
                 <row>
-                    <entry><code>setPhpSettings(array $settings, $prefix = '')</code></entry>
+                    <entry><methodname>setPhpSettings(array $settings, $prefix = '')</methodname></entry>
                     <entry><classname>Zend_Application</classname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$settings</code>: <emphasis>required</emphasis>.
+                            <varname>$settings</varname>: <emphasis>required</emphasis>.
                             Associative array of PHP INI settings.
                         </para></listitem>
 
                         <listitem><para>
-                            <code>$prefix</code>: <emphasis>optional</emphasis>.
+                            <varname>$prefix</varname>: <emphasis>optional</emphasis>.
                             String prefix with which to prepend option keys.
                             Used internally to allow mapping nested arrays
                             to dot-separated php.ini keys. In normal usage,
@@ -242,11 +242,11 @@
                 </row>
 
                 <row>
-                    <entry><code>setAutoloaderNamespaces(array $namespaces)</code></entry>
+                    <entry><methodname>setAutoloaderNamespaces(array $namespaces)</methodname></entry>
                     <entry><classname>Zend_Application</classname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$namespaces</code>: <emphasis>required</emphasis>.
+                            <varname>$namespaces</varname>: <emphasis>required</emphasis>.
                             Array of strings representing the namespaces to
                             register with the <classname>Zend_Loader_Autoloader</classname>
                             instance.
@@ -259,22 +259,22 @@
                 </row>
 
                 <row>
-                    <entry><code>setBootstrap($path, $class = null)</code></entry>
+                    <entry><methodname>setBootstrap($path, $class = null)</methodname></entry>
                     <entry><classname>Zend_Application</classname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$path</code>: <emphasis>required</emphasis>.
-                            May be either a <classname>Zend_Application_Bootstrap_Bootstrapper
-                            </classname> instance, a string path to the bootstrap class,
+                            <varname>$path</varname>: <emphasis>required</emphasis>. May be either a
+                            <classname>Zend_Application_Bootstrap_Bootstrapper</classname>
+                            instance, a string path to the bootstrap class,
                             an associative array of classname =&gt;
                             filename, or an associative array with the keys
                             'class' and 'path'.
                         </para></listitem>
 
                         <listitem><para>
-                            <code>$class</code>: <emphasis>optional</emphasis>.
-                            If <code>$path</code> is a string,
-                            <code>$class</code> may be specified, and should
+                            <varname>$class</varname>: <emphasis>optional</emphasis>.
+                            If <varname>$path</varname> is a string,
+                            <varname>$class</varname> may be specified, and should
                             be a string class name of the class contained in
                             the file represented by path.
                         </para></listitem>
@@ -282,8 +282,11 @@
                 </row>
 
                 <row>
-                    <entry><code>getBootstrap()</code></entry>
-                    <entry><code>null | Zend_Application_Bootstrap_Bootstrapper</code></entry>
+                    <entry><methodname>getBootstrap()</methodname></entry>
+                    <entry>
+                        <code>null</code> |
+                        <classname>Zend_Application_Bootstrap_Bootstrapper</classname>
+                    </entry>
                     <entry>N/A</entry>
                     <entry><para>
                         Retrieve the registered bootstrap instance.
@@ -291,21 +294,21 @@
                 </row>
 
                 <row>
-                    <entry><code>bootstrap()</code></entry>
+                    <entry><methodname>bootstrap()</methodname></entry>
                     <entry><code>void</code></entry>
                     <entry>N/A</entry>
                     <entry><para>
-                        Call the bootstrap's <code>bootstrap()</code>
+                        Call the bootstrap's <methodname>bootstrap()</methodname>
                         method to bootstrap the application.
                     </para></entry>
                 </row>
 
                 <row>
-                    <entry><code>run()</code></entry>
+                    <entry><methodname>run()</methodname></entry>
                     <entry><code>void</code></entry>
                     <entry>N/A</entry>
                     <entry><para>
-                        Call the bootstrap's <code>run()</code>
+                        Call the bootstrap's <methodname>run()</methodname>
                         method to dispatch the application.
                     </para></entry>
                 </row>

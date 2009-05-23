@@ -168,9 +168,9 @@ class Zend_Tool_Framework_Loader_IncludePathLoader
 ]]></programlisting>
 
         <para>
-            As you can see, the IncludePath loader will search all include_paths
-            for the files that match the $_filterAcceptFilePattern and NOT match
-            the $_filterDenyDirectoryPattern.
+            Wie man sieht, durchsucht der IncludePath Loader alle include_paths nach den Dateien
+            die $_filterAcceptFilePattern entsprechen und $_filterDenyDirectoryPattern NICHT
+            entsprechen.
         </para>
     </sect2>
 
@@ -178,16 +178,16 @@ class Zend_Tool_Framework_Loader_IncludePathLoader
         <title>Manifests</title>
 
         <para>
-            In short, the Manifest shall contain specific or arbitrary metadata
-            that is useful to any provider or client, as well as be responsible
-            for loading any additional providers into the provider repository.
+            Kurz gesagt, sollte ein Manifest spezielle oder eigene Metadaten enthalten, die für
+            jeden Provider oder Client nützlich sind, sowie dafür verantwortlich sein alle
+            zusätzlichen Provider in das Provider Repository zu laden.
         </para>
 
         <para>
-            To introduce metadata into the manifest repository, all one must do
-            is implement the empty Zend_Tool_Framework_Manifest_Interface, and
-            provide a getMetadata() method which shall return an array of
-            objects that implement Zend_Tool_Framework_Manifest_Metadata.
+            Um Metadaten in ein Manifest Repository einzuführen, müssen alle das leere
+            Zend_Tool_Framework_Manifest_Interface implementieren, und eine
+            getMetadata() Methode anbieten die ein Array von Objekten zurückgeben sollte, welches
+            Zend_Tool_Framework_Manifest_Metadata implementiert.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -198,20 +198,17 @@ interface Zend_Tool_Framework_Manifest_Interface
 ]]></programlisting>
 
         <para>
-            Metadata objects are loaded (by a loader defined below) into the
-            Manfiest Repository (Zend_Tool_Framework_Manifest_Repository).
-            Manifests will be processed after all Providers have been found a
-            loaded into the provider repository. This shall allow Manifests to
-            created Metadata objects based on what is currently inside the
-            provider repository.
+            Metadaten Objekte werden in das Manifest Repository
+            (Zend_Tool_Framework_Manifest_Repository) geladen (durch einen wie unten definierten
+            Loader). Manifeste werden ausgeführt nachdem alle Provider gefunden und in das
+            Provider Repository geladen wurden. Das sollte es Manifeste erlauben Metadaten Objekte,
+            basierend auf dem was aktuell im Provider Repository ist, zu erstellen.
         </para>
 
         <para>
-            There are a few different metadata classes that can be used to
-            describe metadata. The Zend_Tool_Framework_Manifest_Metadata is the
-            base metadata object. As you can see by the following code snippet,
-            the base metadata class is fairly lightweight and abstract in
-            nature:
+            Es gibt ein paar andere Metadaten Klassen die dazu verwendet werden können um Metadaten
+            zu beschreiben. Wie man durch das folgende Code Snippet sieht, ist die grundsätzliche
+            Metadaten Klasse recht leichtgewichtig und von Natur aus abstrakt:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -232,12 +229,11 @@ class Zend_Tool_Framework_Manifest_Basic
 ]]></programlisting>
 
         <para>
-            There are other built in metadata classes as well for describing
-            more specialized metadata: ActionMetadata and ProviderMetadata.
-            These classes will help you describe in more detail metadata that is
-            specific to either actions or providers, and the reference is
-            expected to be a reference to an action or a provider respectively.
-            These classes are described in the follow code snippet.
+            Es gibt andere eingebaute Metadaten Klassen für das beschreiben von spezialisierteren
+            Metadaten: ActionMetadata und ProviderMetadata. Diese Klassen helfen dabei Metadaten
+            detailierter zu beschreiben die spezifisch für Actions oder Provider ist, und von der
+            Referenz wird erwartet das Sie entweder eine Referenz zu einer Action oder einem
+            Provider ist. Diese Klassen werden im folgenden Code Snippet beschrieben.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -269,26 +265,24 @@ class Zend_Tool_Framework_Manifest_ProviderMetadata
 ]]></programlisting>
 
         <para>
-            'Type' in these classes is used to describe the type of metadata the
-            object is responsible for. In the cases of the ActionMetadata, the
-            type would be 'Action', and conversely in the case of the
-            ProviderMetadata the type is 'Provider'. These metadata types will
-            also include additional structured information about both the
-            "thing" they are describing as well as the object (the
-            ->getReference()) they are referencing with this new metadata.
+            Der 'Type' in diesen Klassen wird verwendet um den Typ der Metadaten zu beschreiben
+            für den das Objekt verantwortlich ist. Im Fall von ActionMetadata würde der Typ
+            'Action' sein, und für ProviderMetadata ist der Typ natürlich 'Provider'. Diese
+            Typen der Metadaten werden enthalten auch zusätzliche strukturierte Informationen,
+            sowohl über das "Ding" das Sie beschreiben, als auch über das Objekt (das
+            ->getReference() ) auf das Sie mit diesen neuen Metadaten referenzieren.
         </para>
 
         <para>
-            In order to create your own metadata type, all one must do is extend
-            the base Zend_Tool_Framework_Manifest_Metadata class and return
-            these new metadata objects via a local Manifest class/object. These
-            user based classes will live in the Manifest Repository
+            Um einen eigenen Metadaten Typ zu erstellen, müssen alle die grundsätzliche
+            Zend_Tool_Framework_Manifest_Metadata Klasse erweitern und diese neuen Metadaten
+            Objekte über die lokale Manifest Klasse/Objekt zurückgeben. Diese Benutzerbasierten
+            Klassen werden alle im Manifest Repository leben.
         </para>
 
         <para>
-            Once these metadata objects are in the repository there are then two
-            different methods that can be used in order to search for them in
-            the repository.
+            Sobald diese Metadaten Objekte im Repository sind gibt es zwei unterschiedliche
+            Methoden die verwendet werden können um nach Ihnen im Repository zu suchen.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -331,30 +325,28 @@ class Zend_Tool_Framework_Manifest_Repository
 ]]></programlisting>
 
         <para>
-            Looking at the search methods above, the signatures allow for
-            extremely flexible searching. In order to find a metadata object,
-            simply pass in an array of matching constraints via an array. If
-            the data is accessible through the Property accessor (the
-            getSomething() methods implemented on the metadata object), then it
-            will be passed back to the user as a "found" metadata object.
+            Wenn man sich die Suchmethoden von oben anschaut, erlauben die Signaturen eine extrem
+            flexible Suche. Um ein Metadaten Objekt zu finden, muss man einfach ein Array von
+            passenden Abhängigkeiten über ein Array anhängen. Wenn auf die Daten über den Property
+            Accessor zugegriffen werden kann (die getSomething() Methoden implementieren das
+            Metadaten Objekt), dann wird es an den Benutzer als "gefundenes" Metadaten Objekt
+            zurück gegeben.
         </para>
     </sect2>
 
     <sect2 id="zend.tool.framework.architecture.clients">
-        <title>Clients</title>
+        <title>Clienten</title>
 
         <para>
-            Clients are the interface which bridges a user or external tool into
-            the Zend_Tool_Framework system. Clients can come in all shapes and
-            sizes: RPC endpoints, Command Line Interface, or even a web
-            interface. Zend_Tool has implemented the command line interface as
-            the default interface for interacting with the Zend_Tool_Framework
-            system.
+            Clienten sind das Interface welches einen Benutzer oder ein externes Tool in das
+            System von Zend_Tool_Framework verknüpft. Clienten können in allen Formen und Größen
+            vorkommen: RPC Endpunkte, Kommandozeilen Interface, oder sogar ein Web Interface.
+            Zend_Tool hat das Kommandozeilen Interface als standard Interface für die Interaktion
+            mit dem Zend_Tool_Framework System implementiert.
         </para>
 
         <para>
-            To implement a client, one would need to extend the following
-            abstract class:
+            Um einen Client zu implementieren, muss man die folgende abstrakte Klasse erweitern:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -387,10 +379,12 @@ abstract class Zend_Tool_Framework_Client_Abstract
 ]]></programlisting>
 
         <para>
-            As you can see, there is 1 method required to fulfill the needs of a
-            client (two othres suggested), the initialization, prehandling and post handling. For a
-            more in depth study of how the command line client works, please see
-            <ulink url="http://framework.zend.com/svn/framework/standard/trunk/library/Zend/Tool/Framework/Client/Console.php">source code</ulink>.
+            Wie man sieht gibt es 1 Methode benötigte Methode um die Notwendigkeiten eines
+            Cliente zu erfüllen (zwei andere sind empfohlen), die Initialisierung, Vorbehandlung
+            (pre handling) und Nachbehandlung (post handling). Für eine tiefere Studie darüber wie
+            das Kommandozeilen Interface arbeitet, schauen Sie bitte im <ulink
+                url="http://framework.zend.com/svn/framework/standard/trunk/library/Zend/Tool/Framework/Client/Console.php">Source
+                Code</ulink>.
         </para>
 
     </sect2>

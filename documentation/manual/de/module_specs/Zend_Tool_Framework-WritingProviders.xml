@@ -5,25 +5,24 @@
     <title>Erstellen von Providern für die Verwendung mit Zend_Tool_Framework</title>
 
     <para>
-        In general, a provider, on its own, is nothing more than the shell for a
-        developer to bundle up some capabilities they wish to dispatch with the
-        command line (or other) clients. It is an analogue to what a
-        "controller" is inside of your MVC application.
+        Generell ist ein Provider für sich selbst nichts mehr als die Shell für einen Entwickler
+        um einige Fähigkeiten zu bündeln die man mit dem Kommandozeilen (oder einem anderen)
+        Client ausliefern will. Das ist analog zu dem was ein "Controller" in einer MVC Anwendung
+        ist.
     </para>
 
     <sect2 id="zend.tool.framework.writing-providers.basic">
-        <title>Basic Instructions for Creating Providers</title>
+        <title>Grundsätzliche Anweisungen für die Erstellung von Providern</title>
 
         <para>
-            As an example, if a developer wants to add the capability of showing
-            the version of a datafile that his 3rd party component is working
-            from, there is only one class the developer would need to implement.
-            Assuming the component is called <code>My_Component</code>, he would
-            create a class named <code>My_Component_HelloProvider</code> in a
-            file named <code>HelloProvider.php</code> somewhere on the
-            <code>include_path</code>. This class would implement
-            <classname>Zend_Tool_Framework_Provider_Interface</classname>, and the body of
-            this file would only have to look like the following:
+            Wenn, als Beispiel, ein Entwickler die Fähigkeit hinzufügen will, die Version einer
+            Datendatei anzuzeigen, mit der seine 3rd Party Komponente arbeitet, gibt es nur eine
+            Klasse die der Entwickler implementieren muss. Angenommen die Komponente heisst
+            <code>My_Component</code>, dann würde er eine Klasse erstellen die
+            <code>My_Component_HelloProvider</code> heisst und in einer Datei ist die
+            <code>HelloProvider.php</code> heisst und irgendwo im <code>include_path</code> ist.
+            Diese Klasse würde <classname>Zend_Tool_Framework_Provider_Interface</classname>
+            implementieren, und der Body dieser Datei würde nur wie folgt auszusehen haben:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -32,15 +31,14 @@ class My_Component_HelloProvider
 {
     public function say()
     {
-        echo 'Hello from my provider!';
+        echo 'Hallo von meinem Provider!';
     }
 }
 ]]></programlisting>
 
         <para>
-            Given that code above, and assuming the developer wishes to access
-            this functionality through the console client, the call would look
-            like this:
+            Durch den obigen Code, und der Annahme das der Entwickler den Zugriff auf diese
+            funktionalität über den Consolen Client will, würde der Aufruf wie folgt aussehen:
         </para>
 
         <programlisting language="sh"><![CDATA[
@@ -50,24 +48,21 @@ Hello from my provider!
     </sect2>
 
     <sect2 id="zend.tool.framework.writing-providers.advanced">
-        <title>Advanced Development Information</title>
+        <title>Fortgeschrittene Informationen für die Entwicklung</title>
 
         <para>
-            The above "Hello World" example is great for simple commands, but
-            what about something more advanced?  As your scripting and tooling
-            needs grow, you might find that you need the ability to accept
-            variables. Much like function signatures have parameters, your
-            tooling requests can also accept parameters.
+            Das obige "Hello World" Beispiel ist perfekt für einfache Kommandos, aber was ist mit
+            etwas fortgeschrittenerem? Wenn das Scripting und Tooling wächst, kann die
+            Notwendigkeit entstehen Variablen zu akzeptieren. So wie Signaturen von Funktionen
+            Parameter haben, kann eine Tooling Anfrage auch Parameter akzeptieren.
         </para>
 
         <para>
-            Just as each tooling request can be isolated to a method within a
-            class, the parameters of a tooling request can also be isolated in a
-            very well known place. Parameters of the action methods of a
-            provider can include the same parameters you want your client to
-            utilize when calling that provider and action combination. For
-            example, if you wanted to accept a name in the above example, you
-            would probably do this in OO code:
+            So wie jede Tooling Anfrage in einer Methode in einer Klasse isoliert werden kann,
+            können die Parameter einer Tooling Anfrage auch in einem sehr bekannten Platz isoliert
+            werden. Parameter von Action Methoden eines Providers können die selben Parameter
+            enthalten die man im Client verwenden will, wenn man den Namen im obigen Beispiel
+            akzeptieren will, und man würde das in OO Code warscheinlich wie folgt tun:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -76,37 +71,34 @@ class My_Component_HelloProvider
 {
     public function say($name = 'Ralph')
     {
-        echo 'Hello' . $name . ', from my provider!';
+        echo 'Hallo' . $name . ', von meinem Provider!';
     }
 }
 ]]></programlisting>
 
         <para>
-            The above example can then be called via the command line <code>zf
-                say hello Joe</code>. "Joe" will be supplied to the provider as
-            a parameter of the method call. Also note, as you see that the
-            parameter is optional, that means it is also optional on the command
-            line, so that <code>zf say hello</code> will still work, and default
-            to the name "Ralph".
+            Das obige Beispiel kann pber di Kommandozeile wie folgt aufgerufen werden:
+            <code>zf say hello Joe</code>. "Joe" wird dem Provider als Parameter des
+            Methodenaufrufs zur Verfügung gestellt. Es ist auch zu beachten das der Parameter
+            optional ist, was bedeutet das er auch auf der Kommandozeile optional ist, so das
+            <code>zf say hello</code> weiterhin funktioniert, und der Standardname "Ralph" ist.
         </para>
 
         <para>
-            Another interesting feature you might wish to implement is
-            <emphasis>pretendability</emphasis>. Pretendabilty is the ability
-            for your provider to "pretend" as if it is doing the requested
-            action and provider combination and give the user as much
-            information about what it <emphasis>would</emphasis> do without
-            actually doing it. This might be an important notion when doing
-            heavy database or filesystem modifications that the user might not
-            otherwise want to do.
+            Ein anderes interessantes Feature das man implementieren kann ist
+            <emphasis>Voranstellbarkeit</emphasis>. Voranstellbarkeit ist die Fähigkeit des
+            Providers "Voranzustellen" wie wenn er die angefragte Aktion und Provider
+            Kombination ausführt, und dem Benutzer so viel Information wie möglich darüber gibt
+            was er tun <emphasis>würde</emphasis> ohne es wirklich zu tun. Das kann eine wichtige
+            Option sein wenn viele Datenbank oder Dateisystem Änderungen durchzuführen sind, die
+            der Benutzer andernfalls nicht tun würde.
         </para>
 
         <para>
-            Pretendability is easy to implement. There are two parts to this
-            feature: 1) marking the provider as having the ability to "pretend",
-            and 2) checking the request to ensure the current request was indeed
-            asked to be "pretended". This feature is demonstrated in the code
-            sample below.
+            Voranstellbarkeit ist einfach zu implementieren. Es gibt zwei Teile dieses Features:
+            1) Markieren des Providers, das er die Fähigkeit des "voranstellens" hat und 2) prüfen
+            der Anfrage um Sicherzustellen das die aktuelle Anfrage wirklich das "voranstellen"
+            angefragt hat. Dieses Feature wird im nächsten Code Beispiel demonstriert.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -117,9 +109,9 @@ class My_Component_HelloProvider
     public function say($name = 'Ralph')
     {
         if ($this->_registry->getRequest()->isPretend()) {
-            echo 'I would say hello to ' . $name . '.';
+            echo 'Ich würde zu ' . $name . ' hallo sagen.';
         } else {
-            echo 'Hello' . $name . ', from my provider!';
+            echo 'Hallo' . $name . ', von meinem Provider!';
         }
     }
 }

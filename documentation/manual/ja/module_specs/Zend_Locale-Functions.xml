@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15666 -->
 <sect1 id="zend.locale.functions">
 
     <title>Zend_Locale の使用法</title>
@@ -240,9 +240,6 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry>
                           地域化された全言語の一覧を返します。
                           ロケールの言語部分がキー、そしてその翻訳が値となります。
-                          利便性のために
-                          <code>getLanguageTranslationList()</code>
-                          メソッドも使用することが可能です。
                         </entry>
                     </row>
                     <row>
@@ -250,9 +247,6 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry>
                           地域化された全文字の一覧を返します。
                           ロケールの文字部分がキー、そしてその翻訳が値となります。
-                          利便性のために
-                          <code>getScriptTranslationList()</code>
-                          メソッドも使用することが可能です。
                         </entry>
                     </row>
                     <row>
@@ -264,10 +258,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                           国のみを取得するには値として '2' を使用します。
                           可能な場合、ロケールの国部分をキーとして使用します。
                           それ以外の場合は、この領域が使用している公式 ISO コードをキーとして使用します。
-                          領域を翻訳したものが値となります。利便性のために、
-                          すべての国を取得する <code>getCountryTranslationList()</code>
-                          メソッドとすべての領域 (国以外) を取得する
-                          <code>getTerritoryTranslationList()</code> メソッドが用意されています。
+                          領域を翻訳したものが値となります。
                           値を省略した場合は、両方の一覧を取得します。
                         </entry>
                     </row>
@@ -718,6 +709,14 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             そして領域 (地域) が配列の値となります。
                         </entry>
                     </row>
+                    <row>
+                        <entry><emphasis>PostalToTerritory</emphasis></entry>
+                        <entry>
+                            その郵便番号が使われている領域の一覧を正規表現で返します。
+                            ISO 領域コード ('territory') が配列のキー、
+                            そして正規表現が配列の値となります。
+                        </entry>
+                    </row>
                 </tbody>
             </tgroup>
         </table>
@@ -757,9 +756,6 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry>
                           言語の翻訳を返します。
                           希望通りの翻訳を選択するために、言語コードを値として指定する必要があります。
-                          利便性のために
-                          <code>getLanguageTranslation($value)</code>
-                          メソッドも使用することが可能です。
                         </entry>
                     </row>
                     <row>
@@ -767,9 +763,6 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry>
                           文字の翻訳を返します。
                           希望通りの翻訳を選択するために、文字コードを値として指定する必要があります。
-                          利便性のために
-                          <code>getScriptTranslation($value)</code>
-                          メソッドも使用することが可能です。
                         </entry>
                     </row>
                     <row>
@@ -779,9 +772,6 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                           領域の翻訳を返します。
                           これは国、大陸および領域のいずれかとなります。
                           希望通りの翻訳を選択するために、領域コードを値として指定する必要があります。
-                          利便性のために
-                          <code>getCountryTranslation($value)</code>
-                          メソッドも使用することが可能です。
                         </entry>
                     </row>
                     <row>
@@ -798,12 +788,6 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                           このキーは、翻訳で使用する一般的な値です。
                           通常はカレンダーや文字照合、通貨などです。
                           希望通りのキーを選択するために、キーコードを値として指定する必要があります。
-                        </entry>
-                    </row>
-                    <row>
-                        <entry><emphasis>DateChars</emphasis></entry>
-                        <entry>
-                          日付の表示に使用するすべての文字を含む文字テーブルを返します。
                         </entry>
                     </row>
                     <row>
@@ -1281,6 +1265,14 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                     <row>
                         <entry><emphasis>TerritoryToAlpha3</emphasis></entry>
                         <entry>3 桁の文字コードに対応する領域 (地域) を返します。</entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>PostalToTerritory</emphasis></entry>
+                        <entry>
+                            指定した領域に対応する郵便番号の正規表現を返します。
+                            領域は ISO4217 形式の文字列で指定する必要があります。
+                            たとえば世界全体は '001' となります。
+                        </entry>
                     </row>
                 </tbody>
             </tgroup>

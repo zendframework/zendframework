@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <sect3 id="zend.controller.actionhelpers.autocomplete">
     <title>AutoComplete</title>
 
@@ -25,7 +25,7 @@
         どの実装についての基本的な使用法は同じです。
     </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function barAction()
@@ -132,7 +132,7 @@ class FooController extends Zend_Controller_Action
             そうすると、適切な形式の JSON オブジェクトを返します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // コントローラのアクション内で
 $this->_helper->autoCompleteDojo($data);
 ]]></programlisting>
@@ -163,7 +163,7 @@ $this->_helper->autoCompleteDojo($data);
                 という javascript ファイルを作成し、次のようなコードを書きます。
             </para>
 
-            <programlisting role="javascript"><![CDATA[
+            <programlisting language="javascript"><![CDATA[
 dojo.provide("custom.TestNameReadStore");
 dojo.declare("custom.TestNameReadStore", dojox.data.QueryReadStore, {
     fetch:function (request) {
@@ -184,7 +184,7 @@ dojo.declare("custom.TestNameReadStore", dojox.data.QueryReadStore, {
                 次に、オートコンプリートを行うためのフォーム要素を作成します。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class TestController extends Zend_Controller_Action
 {
     protected $_form;
@@ -234,7 +234,7 @@ class TestController extends Zend_Controller_Action
                 オートコンプリートの処理用のエンドポイントを作成してみましょう。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class TestController extends Zend_Controller_Action
 {
     // ...
@@ -291,7 +291,7 @@ class TestController extends Zend_Controller_Action
                 適宜コメントを入れてあります。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <?php // データストアの準備 ?>
 <div dojoType="custom.TestNameReadStore" jsId="testStore"
     url="<?php echo $this->baseUrl() ?>/unit-test/autocomplete/format/ajax"

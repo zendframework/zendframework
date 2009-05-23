@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.controller.request">
     <title>リクエストオブジェクト</title>
     <sect2 id="zend.controller.request.introduction">
@@ -184,7 +184,7 @@
                     クラスを使用してリクエストオブジェクトを作成しなければなりません。
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $request = new Zend_Controller_Request_Apache404();
 $front->setRequest($request);
 ]]></programlisting>
@@ -241,7 +241,7 @@ $front->setRequest($request);
                 独自のベース URL を設定する例を示します。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 /**
  * Zend_Controller_Front で独自のベース URL を指定することによるリクエストのディスパッチ
  */
@@ -324,7 +324,7 @@ $response   = $controller->dispatch();
             このクラスでは、次のようなメソッドを定義しています。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 abstract class Zend_Controller_Request_Abstract
 {
     /**

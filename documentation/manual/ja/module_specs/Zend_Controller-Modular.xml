@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15345 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.controller.modular">
     <title>モジュラーディレクトリ構造の規約の使用</title>
 
@@ -101,7 +101,7 @@ application/
             次の例のようになります。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $front->setControllerDirectory(array(
     'default' => '/path/to/application/controllers',
     'blog'    => '/path/to/application/blog/controllers'
@@ -115,7 +115,7 @@ $front->setControllerDirectory(array(
             次の例のようになります。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $front->addControllerDirectory('/path/to/application/news/controllers',
                                'news');
 ]]></programlisting>
@@ -126,7 +126,7 @@ $front->addControllerDirectory('/path/to/application/news/controllers',
             これを行うのが <code>addModuleDirectory()</code> メソッドです。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /**
  * 次のような構造を想定しています
  * application/
@@ -153,7 +153,7 @@ $front->addModuleDirectory('/path/to/application/modules');
             <code>setModuleControllerDirectoryName()</code> を使用します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /**
  * コントローラのディレクトリを、次のように 'con' に変更します
  * application/
@@ -218,7 +218,7 @@ $front->addModuleDirectory('/path/to/application/modules');
             <code>useDefaultControllerAlways</code> を指定します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $front->setParam('useDefaultControllerAlways', true);
 ]]></programlisting>
     </sect2>

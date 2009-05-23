@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.session.basic_usage">
 
     <title>基本的な使用法</title>
@@ -24,7 +24,7 @@
         スーパーグローバル配列 <code>$_SESSION</code> のエントリに対応します。
         名前空間をキーとして使用します。
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $myNamespace = new Zend_Session_Namespace('myNamespace');
 
 // $myNamespace は $_SESSION['myNamespace'] に対応します
@@ -54,7 +54,7 @@ $myNamespace = new Zend_Session_Namespace('myNamespace');
 
             <title>ページビューの数え方</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $defaultNamespace = new Zend_Session_Namespace('Default');
 
 if (isset($defaultNamespace->numberOfPageRequests)) {
@@ -91,7 +91,7 @@ echo "このセッションでページがリクエストされた回数: ",
 
             <title>新しい方法: 名前空間の衝突を避ける</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Zend_Auth コンポーネント用
 $authNamespace = new Zend_Session_Namespace('Zend_Auth');
 $authNamespace->user = "myusername";
@@ -112,7 +112,7 @@ $webServiceNamespace->user = "mywebusername";
 
             <title>古い方法: PHP のセッションへのアクセス</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $_SESSION['Zend_Auth']['user'] = "myusername";
 $_SESSION['Some_Web_Service']['user'] = "mywebusername";
 ]]></programlisting>
@@ -135,7 +135,7 @@ $_SESSION['Some_Web_Service']['user'] = "mywebusername";
 
             <title>セッションの順次処理</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $aNamespace =
     new Zend_Session_Namespace('some_namespace_with_data_present');
 
@@ -164,7 +164,7 @@ foreach ($aNamespace as $index => $value) {
 
             <title>セッションデータへのアクセス</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $namespace = new Zend_Session_Namespace(); // デフォルトの名前空間
 
 $namespace->foo = 100;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15615 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.validate.set" xmlns:xi="http://www.w3.org/2001/XInclude">
 
     <title>標準のバリデーションクラス群</title>
@@ -128,7 +128,7 @@
             IBAN 番号の検証方法は 2 通りあります。最初の方法では、国を表すロケールを指定します。
             その国に対して、指定した IBAN 番号の検証を行います。
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Iban('de_AT');
 $iban = 'AT611904300234573201';
 if ($validator->isValid($iban)) {
@@ -144,7 +144,7 @@ if ($validator->isValid($iban)) {
             これは、IBAN 番号をひとつの国に対して検証したい場合に使用します。
             もっとシンプルな方法としては、この例のようにロケールを指定しないものもあります。
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Iban();
 $iban = 'AT611904300234573201';
 if ($validator->isValid($iban)) {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15341 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.service.strikeiron">
     <title>Zend_Service_StrikeIron</title>
 
@@ -159,7 +159,7 @@
         そのコンストラクタで StrikeIron アカウント情報やその他のオプションを設定することができます。
         また、StrikeIron の各種サービス用のクライアントを帰すファクトリメソッドも用意しています。
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $strikeIron = new Zend_Service_StrikeIron(array('username' => 'あなたのユーザ名',
                                                 'password' => 'あなたのパスワード'));
 
@@ -194,7 +194,7 @@ $taxBasic = $strikeIron->getService(array('class' => 'SalesUseTaxBasic'));
         <code>getService()</code> で StrikeIron サービス用のクライアントを取得したら、
         あとは普通の PHP オブジェクトと同様にそのメソッドをコールすることができます。
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $strikeIron = new Zend_Service_StrikeIron(array('username' => 'あなたのユーザ名',
                                                 'password' => 'あなたのパスワード'));
 
@@ -252,7 +252,7 @@ echo $rateInfo->GST;
         <ulink url="http://www.php.net/print_r">print_r()</ulink>
         のような PHP の組み込み関数を使うことです。
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php
 $strikeIron = new Zend_Service_StrikeIron(array('username' => 'あなたのユーザ名',
                                                 'password' => 'あなたのパスワード'));
@@ -325,7 +325,7 @@ Zend_Service_StrikeIron_Decorator Object
         例外が発生することを想定して、
         サービスのメソッドをコールする際には例外処理を書く必要があります。
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $strikeIron = new Zend_Service_StrikeIron(array('username' => 'あなたのユーザ名',
                                                 'password' => 'あなたのパスワード'));
 
@@ -382,7 +382,7 @@ try {
         そのサービスの購入状況を調べる
         <code>getSubscriptionInfo()</code> メソッドが存在します。
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Sales & Use Tax Basic サービス用のクライアントを取得します
 $strikeIron = new Zend_Service_StrikeIron(array('username' => 'あなたのユーザ名',
                                                 'password' => 'あなたのパスワード'));

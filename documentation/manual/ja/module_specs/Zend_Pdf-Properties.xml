@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15604 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.pdf.info">
     <!-- @todo review and revise upon completion of refactoring -->
     <title>ドキュメントの情報およびメタデータ</title>
@@ -13,7 +13,7 @@
         歴史的に、この情報は特別な Info 構造体に格納されるようになっています。
         この構造体を読み書きするには、<classname>Zend_Pdf</classname> オブジェクトの public プロパティ
         <code>properties</code> の連想配列を使用します。
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $pdf = Zend_Pdf::load($pdfPath);
 
 echo $pdf->properties['Title'] . "\n";
@@ -185,7 +185,7 @@ $pdf->save($pdfPath);
         この XML ドキュメントを PDF から取得したり PDF に添付したりするには、それぞれ
         <classname>Zend_Pdf::getMetadata()</classname> メソッドおよび
         <classname>Zend_Pdf::setMetadata($metadata)</classname> メソッドを使用します。
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $pdf = Zend_Pdf::load($pdfPath);
 $metadata = $pdf->getMetadata();
 $metadataDOM = new DOMDocument();

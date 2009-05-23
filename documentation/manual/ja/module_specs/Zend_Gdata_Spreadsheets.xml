@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15341 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.gdata.spreadsheets">
     <title>Google Spreadsheets の使用法</title>
 
@@ -36,7 +36,7 @@
             オブジェクトに、認証済みユーザのスプレッドシート一覧が格納されます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Spreadsheets::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $spreadsheetService = new Zend_Gdata_Spreadsheets($client);
@@ -58,7 +58,7 @@ $feed = $spreadsheetService->getSpreadsheetFeed();
             を指定すると、そのスプレッドシートのワークシート一覧を含むフィードを取得できます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $query = new Zend_Gdata_Spreadsheets_DocumentQuery();
 $query->setSpreadsheetKey($spreadsheetKey);
 $feed = $spreadsheetService->getWorksheetFeed($query);
@@ -123,7 +123,7 @@ $feed = $spreadsheetService->getWorksheetFeed($query);
                 <code>getListFeed</code> メソッドを使用します。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $query = new Zend_Gdata_Spreadsheets_ListQuery();
 $query->setSpreadsheetKey($spreadsheetKey);
 $query->setWorksheetId($worksheetId);
@@ -144,7 +144,7 @@ $listFeed = $spreadsheetService->getListFeed($query);
               この配列の内容を取り出して表示するには次のようにします。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $rowData = $listFeed->entries[1]->getCustom();
 foreach($rowData as $customEntry) {
   echo $customEntry->getColumnName() . " = " . $customEntry->getText();
@@ -157,7 +157,7 @@ foreach($rowData as $customEntry) {
               これは、特定のヘッダにアクセスしたい場合などに便利です。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $customEntry = $listFeed->entries[1]->getCustomByName('my_heading');
 echo $customEntry->getColumnName() . " = " . $customEntry->getText();
 ]]></programlisting>
@@ -173,7 +173,7 @@ echo $customEntry->getColumnName() . " = " . $customEntry->getText();
                 オブジェクトの reverse プロパティを true に設定します。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $query = new Zend_Gdata_Spreadsheets_ListQuery();
 $query->setSpreadsheetKey($spreadsheetKey);
 $query->setWorksheetId($worksheetId);
@@ -204,7 +204,7 @@ $listFeed = $spreadsheetService->getListFeed($query);
                 次のように <code>sq</code> を設定します。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $query = new Zend_Gdata_Spreadsheets_ListQuery();
 $query->setSpreadsheetKey($spreadsheetKey);
 $query->setWorksheetId($worksheetId);
@@ -221,7 +221,7 @@ $listFeed = $spreadsheetService->getListFeed($query);
                 <code>insertRow</code> メソッドを使用します。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $insertedListEntry = $spreadsheetService->insertRow($rowData,
                                                     $spreadsheetKey,
                                                     $worksheetId);
@@ -250,7 +250,7 @@ $insertedListEntry = $spreadsheetService->insertRow($rowData,
                 <code>updateRow</code> メソッドを使用してその中身を更新することができます。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $updatedListEntry = $spreadsheetService->updateRow($oldListEntry,
                                                    $newRowData);
 ]]></programlisting>
@@ -274,7 +274,7 @@ $updatedListEntry = $spreadsheetService->updateRow($oldListEntry,
                 削除したい既存のエントリを指定します。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $spreadsheetService->deleteRow($listEntry);
 ]]></programlisting>
 
@@ -283,7 +283,7 @@ $spreadsheetService->deleteRow($listEntry);
                 メソッドをコールするという手もあります。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $listEntry->delete();
 ]]></programlisting>
         </sect3>
@@ -309,7 +309,7 @@ $listEntry->delete();
                 <code>getCellFeed</code> メソッドを使用します。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $query = new Zend_Gdata_Spreadsheets_CellQuery();
 $query->setSpreadsheetKey($spreadsheetKey);
 $query->setWorksheetId($worksheetId);
@@ -325,7 +325,7 @@ $cellFeed = $spreadsheetService->getCellFeed($query);
                 この情報を表示するには次のようにします。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 foreach($cellFeed as $cellEntry) {
   $row = $cellEntry->cell->getRow();
   $col = $cellEntry->cell->getColumn();
@@ -344,7 +344,7 @@ foreach($cellFeed as $cellEntry) {
                 次のようにすると、最初のカラムだけを含むセルフィードを取得することができます。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $query = new Zend_Gdata_Spreadsheets_CellQuery();
 $query->setMinCol(1);
 $query->setMaxCol(1);
@@ -366,7 +366,7 @@ $feed = $spreadsheetService->getCellsFeed($query);
                 <code>updateCell</code> をコールします。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $updatedCell = $spreadsheetService->updateCell($row,
                                                $col,
                                                $inputValue,

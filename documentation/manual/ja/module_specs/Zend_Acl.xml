@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15606 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.acl.introduction">
     <title>導入</title>
 
@@ -120,7 +120,7 @@
                 その継承元 (ここでは "guest"、"member" および "admin")
                 には定義されているという場合、<classname>Zend_Acl</classname> はそちらを検索します。
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $acl = new Zend_Acl();
 
 $acl->addRole(new Zend_Acl_Role('guest'))
@@ -181,7 +181,7 @@ echo $acl->isAllowed('someUser', 'someResource') ? 'allowed' : 'denied';
             ACL のインスタンスを作成します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $acl = new Zend_Acl();
 ]]></programlisting>
 
@@ -251,7 +251,7 @@ $acl = new Zend_Acl();
             これらのグループを、次のようにしてロールレジストリに追加します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $acl = new Zend_Acl();
 
 // Zend_Acl_Role を使用して、グループをロールレジストリに追加します
@@ -301,7 +301,7 @@ $acl->addRole(new Zend_Acl_Role('administrator'));
             上で定義した基本的な権限を適用するには、次のようにします。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $acl = new Zend_Acl();
 
 $roleGuest = new Zend_Acl_Role('guest');
@@ -347,7 +347,7 @@ $acl->allow('administrator');
             メソッドを使用するだけです。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 echo $acl->isAllowed('guest', null, 'view') ?
      "allowed" : "denied";
 // allowed となります

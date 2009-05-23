@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.service.flickr">
     <title>Zend_Service_Flickr</title>
     <sect2 id="zend.service.flickr.introduction">
@@ -19,7 +19,7 @@
         </para>
         <example id="zend.service.flickr.introduction.example-1">
             <title>単純な Flickr 検索</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $flickr = new Zend_Service_Flickr('MY_API_KEY');
 
 $results = $flickr->tagSearch("php");
@@ -71,7 +71,7 @@ foreach ($results as $result) {
                 この例では、メールアドレスがわかっている Flickr ユーザが公開している写真を
                 <code>userSearch()</code> メソッドを用いて探します。
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $flickr = new Zend_Service_Flickr('MY_API_KEY');
 
 $results = $flickr->userSearch($userEmail);
@@ -91,7 +91,7 @@ foreach ($results as $result) {
         </para>
         <example id="zend.service.flickr.grouppoolgetphotos.example-1">
             <title>グループ ID を指定し、グループにプールされている写真を取得する</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $flickr = new Zend_Service_Flickr('MY_API_KEY');
 
     $results = $flickr->groupPoolGetPhotos($groupId);
@@ -122,7 +122,7 @@ $flickr = new Zend_Service_Flickr('MY_API_KEY');
             <para>
                 Flickr 画像 ID を使用すると、簡単に画像の情報が取得できます。
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $flickr = new Zend_Service_Flickr('MY_API_KEY');
 
 $image = $flickr->getImageDetails($imageId);

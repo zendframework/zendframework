@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15142 -->
+<!-- EN-Revision: 15617 -->
 <sect3 id="zend.controller.actionhelpers.json">
     <title>JSON</title>
 
@@ -27,7 +27,7 @@
                 <classname>Zend_Json_Expr</classname> によるエンコードを有効にしたりする。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $this->_helper->json($data, array('enableJsonExprFinder' => true));
 ]]></programlisting>
         </listitem>
@@ -52,7 +52,7 @@ $this->_helper->json($data, array('enableJsonExprFinder' => true));
         <code>sendJson()</code> といったメソッドをコールするだけです。
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function barAction()
@@ -82,7 +82,7 @@ class FooController extends Zend_Controller_Action
             <code>true</code> を渡すと、レイアウト機能を有効なままにします。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $this->_helper->json($data, true);
 ]]></programlisting>
 
@@ -92,7 +92,7 @@ $this->_helper->json($data, true);
             のオプションを含むさまざまなオプションを指定することができます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $this->_helper->json($data, array('keepLayouts' => true);
 ]]></programlisting>
     </note>
@@ -108,7 +108,7 @@ $this->_helper->json($data, array('keepLayouts' => true);
             オプションに <code>true</code> を設定します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $this->_helper->json($data, array('enableJsonExprFinder' => true);
 ]]></programlisting>
 
@@ -118,7 +118,7 @@ $this->_helper->json($data, array('enableJsonExprFinder' => true);
             これらすべてのオプションが <classname>Zend_Json::encode()</classname> に渡されます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $this->_helper->json($data, array(
     'enableJsonExprFinder' => true, 
     'keepLayouts'          => true,

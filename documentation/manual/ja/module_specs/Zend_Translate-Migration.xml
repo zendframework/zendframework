@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.translate.migration">
 
     <title>以前のバージョンからの移行</title>
@@ -50,7 +50,7 @@
                     'fr' がリクエストされたものと家庭します。この翻訳は登録されていません。
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $language = new Zend_Translate('gettext',
                                '/path/to/translations',
                                'auto');
@@ -61,7 +61,7 @@ $language = new Zend_Translate('gettext',
                     オプションを追加すると、この notice は発生しなくなります。
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $language = new Zend_Translate('gettext',
                                '/path/to/translations',
                                'auto',

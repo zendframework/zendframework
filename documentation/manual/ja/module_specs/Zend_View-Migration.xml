@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.view.migration">
     <title>以前のバージョンからの移行</title>
 
@@ -23,7 +23,7 @@
             メソッドに渡されると、LFI 攻撃を受ける可能性が出てきます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // $_GET['foobar'] = '../../../../etc/passwd' だったら……
 echo $view->render($_GET['foobar']); // LFI
 ]]></programlisting>
@@ -45,7 +45,7 @@ echo $view->render($_GET['foobar']); // LFI
                 <code>setLfiProtection()</code> メソッドをコールします。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // コンストラクタでの無効化
 $view = new Zend_View(array('lfiProtectionOn' => false));
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15341 -->
+<!-- EN-Revision: 15617 -->
 <sect3 id="zend.controller.plugins.standard.errorhandler">
     <title>Zend_Controller_Plugin_ErrorHandler</title>
 
@@ -109,7 +109,7 @@
             を使用します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class ErrorController extends Zend_Controller_Action
 {
     public function errorAction()
@@ -152,7 +152,7 @@ class ErrorController extends Zend_Controller_Action
             最初のふたつの型であった場合に、404 ページを返せばいいわけです。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class ErrorController extends Zend_Controller_Action
 {
     public function errorAction()
@@ -183,7 +183,7 @@ class ErrorController extends Zend_Controller_Action
             <code>exception</code> を使用します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 public function errorAction()
 {
         $errors = $this->_getParam('error_handler');
@@ -236,7 +236,7 @@ public function errorAction()
             ビューのレンダリング前に以前の内容を消去しておく必要があります。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $this->getResponse()->clearBody();
 ]]></programlisting>
     </sect4>
@@ -246,7 +246,7 @@ $this->getResponse()->clearBody();
 
         <example id="zend.controller.plugins.standard.errorhandler.examples.example-1">
             <title>標準的な使用法</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $front = Zend_Controller_Front::getInstance();
 $front->registerPlugin(new Zend_Controller_Plugin_ErrorHandler());
 ]]></programlisting>
@@ -254,7 +254,7 @@ $front->registerPlugin(new Zend_Controller_Plugin_ErrorHandler());
 
         <example id="zend.controller.plugins.standard.errorhandler.examples.example-2">
             <title>別のエラーハンドラの設定</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $front = Zend_Controller_Front::getInstance();
 $front->registerPlugin(new Zend_Controller_Plugin_ErrorHandler(array(
     'module'     => 'mystuff',
@@ -266,7 +266,7 @@ $front->registerPlugin(new Zend_Controller_Plugin_ErrorHandler(array(
 
         <example id="zend.controller.plugins.standard.errorhandler.examples.example-3">
             <title>アクセス用メソッドの使用</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $plugin = new Zend_Controller_Plugin_ErrorHandler();
 $plugin->setErrorHandlerModule('mystuff')
        ->setErrorHandlerController('static')
@@ -285,7 +285,7 @@ $front->registerPlugin($plugin);
             エラーコントローラが必要です。以下にシンプルな例を示します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class ErrorController extends Zend_Controller_Action
 {
     public function errorAction()

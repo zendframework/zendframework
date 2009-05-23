@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.service.strikeiron.advanced-uses">
     <title>Zend_Service_StrikeIron: 応用編</title>
 
@@ -26,7 +26,7 @@
         <code>getService()</code> のオプションに
         <code>class</code> ではなく <code>wsdl</code> を指定します。
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $strikeIron = new Zend_Service_StrikeIron(array('username' => 'あなたのユーザ名',
                                                 'password' => 'あなたのパスワード'));
 
@@ -97,7 +97,7 @@ echo $result->listingName;
         <ulink url="http://www.php.net/manual/ja/function.soap-soapclient-getlastresponse.php"><code>__getLastRequest()</code></ulink>
         のような適切なメソッドをコールします。
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $strikeIron =
     new Zend_Service_StrikeIron(array('username' => 'あなたのユーザ名',
                                       'password' => 'あなたのパスワード',

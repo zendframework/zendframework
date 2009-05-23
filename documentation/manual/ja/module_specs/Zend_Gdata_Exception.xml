@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.gdata.exception">
     <title>Gdata の例外処理</title>
 
@@ -10,7 +10,7 @@
         <code>Zedn_Gdata</code> がスローする例外は、すべて <classname>Zend_Gdata_App_Exception</classname> でキャッチできます。
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 try {
     $client =
         Zend_Gdata_ClientLogin::getHttpClient($username, $password);
@@ -82,7 +82,7 @@ try {
         API ドキュメントを参照ください。
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 try {
     $client = Zend_Gdata_ClientLogin::getHttpClient($username,
                                                     $password,

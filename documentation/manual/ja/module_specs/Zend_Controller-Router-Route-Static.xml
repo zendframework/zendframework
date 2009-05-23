@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <sect3 id="zend.controller.router.routes.static">
     <title>Zend_Controller_Router_Route_Static</title>
 
@@ -12,7 +12,7 @@
         そんなときには静的なルートを使用します。
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route_Static(
     'login',
     array('controller' => 'auth', 'action' => 'login')
@@ -51,7 +51,7 @@ $router->addRoute('login', $route);
             パラメータをフロントコントローラに渡すこともできます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $front->setParam('useDefaultControllerAlways', true);
 ]]></programlisting>
 

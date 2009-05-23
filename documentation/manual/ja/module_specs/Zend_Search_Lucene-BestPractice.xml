@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15341 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.search.lucene.best-practice">
     <title>ベストプラクティス</title>
 
@@ -27,7 +27,7 @@
             そのフィールドにアクセスするには <code>getDocument()</code>
             メソッドを使う必要があります。
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $hits = $index->find($query);
 
 foreach ($hits as $hit) {
@@ -83,7 +83,7 @@ foreach ($hits as $hit) {
 
         <para>
             インデックスの最適化を行うには <code>optimize()</code> メソッドを使用します。
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $index = Zend_Search_Lucene::open($indexPath);
 
 $index->optimize();
@@ -312,7 +312,7 @@ $index->optimize();
 
         <para>
             まずは、強制的にスコープ外に出す方法です。
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $index = Zend_Search_Lucene::open($indexPath);
 
 ...
@@ -322,7 +322,7 @@ unset($index);]]></programlisting>
 
         <para>
             そしてもうひとつは、スクリプトの終了前にコミット操作を行うことです。
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $index = Zend_Search_Lucene::open($indexPath);
 
 $index->commit();
@@ -348,7 +348,7 @@ $index->commit();
 
         <para>
             これは <code>find()</code> メソッドよりも効率的です。
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // find() メソッドでクエリ文字列を指定することによるドキュメントの取得
 $query = $idFieldName . ':' . $docId;
 $hits  = $index->find($query);
@@ -464,7 +464,7 @@ foreach ($docIds as $id) {
 
         <para>
             フィールドを作成するメソッドで、エンコーディングをオプションのパラメータによって指定することができます。
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $doc = new Zend_Search_Lucene_Document();
 $doc->addField(Zend_Search_Lucene_Field::Text('title',
                                               $title,
@@ -479,7 +479,7 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
         <para>
             このエンコーディング指定を省略すると、現在のロケールをもとに判断を行ないます。
             ロケールの指定時に、言語だけでなく文字セットも指定することができます。
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 setlocale(LC_ALL, 'fr_FR');
 ...
 
@@ -503,7 +503,7 @@ setlocale(LC_ALL, 'ja_JP.UTF-8');
         <para>
             検索の前にクエリのパースを行なう場合、
             エンコーディングはオプションのパラメータとして指定することができます。
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $query =
     Zend_Search_Lucene_Search_QueryParser::parse($queryStr, 'iso-8859-5');
 $hits = $index->find($query);
@@ -514,7 +514,7 @@ $hits = $index->find($query);
         <para>
             デフォルトのエンコーディングを指定するには <code>setDefaultEncoding()</code>
             メソッドを使用します。
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend_Search_Lucene_Search_QueryParser::setDefaultEncoding('iso-8859-1');
 $hits = $index->find($queryStr);
 ...

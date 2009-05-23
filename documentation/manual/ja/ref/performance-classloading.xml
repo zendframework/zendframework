@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15571 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="performance.classloading">
     <title>クラスの読み込み</title>
 
@@ -43,7 +43,7 @@
                 もうひとつはPHPの <methodname>realpath()</methodname> 関数を使ってinclude_pathを設定することです:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $paths = array(
     realpath(dirname(__FILE__) . '/../library'),
     '.',
@@ -56,7 +56,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
                 相対パスを使用することが<emphasis>できます</emphasis>。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 define('APPLICATION_PATH', realpath(dirname(__FILE__)));
 $paths = array(
     APPLICATION_PATH . '/../library'),
@@ -138,7 +138,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
                 同様にインストールしたPEARから必要なディレクトリを設定します。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 library
     Archive/
     PEAR/
@@ -167,7 +167,7 @@ library
                 結果としてパス２つだけに到達します。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $paths = array(
     realpath(dirname(__FILE__) . '/../library'),
     '.'
@@ -213,7 +213,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
                 ('%'記号はシェルプロンプトを示します):
             </para>
 
-            <programlisting role="shell"><![CDATA[
+            <programlisting language="shell"><![CDATA[
 % cd path/to/ZendFramework/library
 % find . -name '*.php' -not -wholename '*/Loader/Autoloader.php' -print0 | \
   xargs -0 sed --regexp-extended --in-place 's/(require_once)/\/\/ \1/g'
@@ -235,7 +235,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
                 "<filename>public/index.php</filename>"ファイルで下記のコードを記述することにより実施できます。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 require_once 'Zend/Loader/Autoloader.php';
 Zend_Loader_Autoloader::getInstance();
 ]]></programlisting>

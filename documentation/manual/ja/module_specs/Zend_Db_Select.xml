@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15602 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.db.select">
 
     <title>Zend_Db_Select</title>
@@ -76,7 +76,7 @@
 
             <title>データベースアダプタの select() メソッドの例</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $db = Zend_Db::factory( ...options... );
 $select = $db->select();
 ]]></programlisting>
@@ -91,7 +91,7 @@ $select = $db->select();
 
             <title>新しい Select オブジェクトの作成の例</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $db = Zend_Db::factory( ...options... );
 $select = new Zend_Db_Select($db);
 ]]></programlisting>
@@ -113,7 +113,7 @@ $select = new Zend_Db_Select($db);
 
             <title>メソッドを使用して句を追加する例</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Zend_Db_Select オブジェクトを作成します
 $select = $db->select();
 
@@ -139,7 +139,7 @@ $select->order( ...ソート条件を指定します... );
 
             <title>流れるようなインターフェイスの使用例</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $select = $db->select()
     ->from( ...テーブルとカラムを指定します... )
     ->where( ...検索条件を指定します... )
@@ -170,7 +170,7 @@ $select = $db->select()
 
                 <title>from() メソッドの例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // できあがるクエリは、このようになります
 //   SELECT *
 //   FROM "products"
@@ -194,7 +194,7 @@ $select = $db->select()
 
                 <title>テーブルの相関名を指定する例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // できあがるクエリは、このようになります
 //   SELECT p.*
 //   FROM "products" AS p
@@ -219,7 +219,7 @@ $select = $db->select()
 
                 <title>スキーマ名の指定の例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // できあがるクエリは、このようになります
 //   SELECT *
 //   FROM "myschema"."products"
@@ -277,7 +277,7 @@ $select = $db->select()
 
                 <title>カラムを指定する例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // できあがるクエリは、このようになります
 //   SELECT p."product_id", p."product_name"
 //   FROM "products" AS p
@@ -343,7 +343,7 @@ $select = $db->select()
 
                 <title>式を含むカラムの指定の例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // できあがるクエリは、このようになります
 //   SELECT p."product_id", LOWER(product_name)
 //   FROM "products" AS p
@@ -410,7 +410,7 @@ $select = $db->select()
 
                 <title>式の中のカラムをクォートする例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // このクエリを作成する際に、式の中にある特別なカラム名 "from" をクォートします
 //   SELECT p."from" + 10 AS origin
 //   FROM "products" AS p
@@ -446,7 +446,7 @@ $select = $db->select()
 
                 <title>columns() メソッドでカラムを追加する例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // できあがるクエリは、このようになります
 //   SELECT p."product_id", p."product_name"
 //   FROM "products" AS p
@@ -486,7 +486,7 @@ $select = $db->select()
 
                 <title>join() メソッドの例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // できあがるクエリは、このようになります
 //   SELECT p."product_id", p."product_name", l.*
 //   FROM "products" AS p JOIN "line_items" AS l
@@ -539,7 +539,7 @@ $select = $db->select()
 
                 <title>カラムを指定しない例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // できあがるクエリは、このようになります
 //   SELECT p."product_id", p."product_name"
 //   FROM "products" AS p JOIN "line_items" AS l
@@ -700,7 +700,7 @@ $select = $db->select()
 
                 <title>joinUsing() メソッドの例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // できあがるクエリは、このようになります
 //   SELECT *
 //   FROM "table1"
@@ -764,7 +764,7 @@ $select = $db->select()
 
                 <title>where() メソッドの例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // できあがるクエリは、このようになります
 //   SELECT product_id, product_name, price
 //   FROM "products"
@@ -806,7 +806,7 @@ $select = $db->select()
 
                 <title>where() メソッドでのパラメータの例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // できあがるクエリは、このようになります
 //   SELECT product_id, product_name, price
 //   FROM "products"
@@ -832,7 +832,7 @@ $select = $db->select()
 
                 <title>複数の where() メソッドの例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // できあがるクエリは、このようになります
 //   SELECT product_id, product_name, price
 //   FROM "products"
@@ -864,7 +864,7 @@ $select = $db->select()
 
                 <title>orWhere() メソッドの例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // できあがるクエリは、このようになります
 //   SELECT product_id, product_name, price
 //   FROM "products"
@@ -894,7 +894,7 @@ $select = $db->select()
 
                 <title>論理式を括弧で囲む例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // できあがるクエリは、このようになります
 //   SELECT product_id, product_name, price
 //   FROM "products"
@@ -947,7 +947,7 @@ $select = $db->select()
 
                 <title>group() メソッドの例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // できあがるクエリは、このようになります
 //   SELECT p."product_id", COUNT(*) AS line_items_per_product
 //   FROM "products" AS p JOIN "line_items" AS l
@@ -1004,7 +1004,7 @@ $select = $db->select()
 
                 <title>having() メソッドの例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // できあがるクエリは、このようになります
 //   SELECT p."product_id", COUNT(*) AS line_items_per_product
 //   FROM "products" AS p JOIN "line_items" AS l
@@ -1072,7 +1072,7 @@ $select = $db->select()
 
                 <title>order() メソッドの例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // できあがるクエリは、このようになります
 //   SELECT p."product_id", COUNT(*) AS line_items_per_product
 //   FROM "products" AS p JOIN "line_items" AS l
@@ -1119,7 +1119,7 @@ $select = $db->select()
 
                 <title>limit() メソッドの例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // できあがるクエリは、このようになります
 //   SELECT p."product_id", p."product_name"
 //   FROM "products" AS p
@@ -1159,7 +1159,7 @@ $select = $db->select()
 
                 <title>limitPage() メソッドの例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // できあがるクエリは、このようになります
 //   SELECT p."product_id", p."product_name"
 //   FROM "products" AS p
@@ -1188,7 +1188,7 @@ $select = $db->select()
 
                 <title>distinct() メソッドの例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // できあがるクエリは、このようになります
 //   SELECT DISTINCT p."product_name"
 //   FROM "products" AS p
@@ -1215,7 +1215,7 @@ $select = $db->select()
 
                 <title>forUpdate() メソッドの例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // できあがるクエリは、このようになります
 //   SELECT FOR UPDATE p.*
 //   FROM "products" AS p
@@ -1260,7 +1260,7 @@ $select = $db->select()
 
                 <title>Db アダプタの query() メソッドの使用例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $select = $db->select()
              ->from('products');
 
@@ -1290,7 +1290,7 @@ $result = $stmt->fetchAll();
 
                 <title>Select オブジェクトの query メソッドの使用例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $select = $db->select()
              ->from('products');
 
@@ -1316,7 +1316,7 @@ $result = $stmt->fetchAll();
 
                 <title>__toString() メソッドの例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $select = $db->select()
              ->from('products');
 
@@ -1445,7 +1445,7 @@ echo "$sql\n";
 
                 <title>getPart() メソッドの例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $select = $db->select()
              ->from('products')
              ->order('product_id');
@@ -1493,7 +1493,7 @@ print_r( $orderData );
 
                 <title>reset() メソッドの例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // できあがるクエリは、このようになります
 //   SELECT p.*
 //   FROM "products" AS p

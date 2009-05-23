@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.service.simpy">
     <title>Zend_Service_Simpy</title>
     <sect2 id="zend.service.simpy.introduction">
@@ -61,7 +61,7 @@
         </para>
         <example id="zend.service.simpy.links.querying">
             <title>リンクの問い合わせ</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $simpy = new Zend_Service_Simpy('あなたのユーザ名', 'あなたのパスワード');
 
 /* 直近に追加された 10 件のリンクを探します */
@@ -115,7 +115,7 @@ $linkQuery->setAfterDate('2006-12-09');
         </para>
         <example id="zend.service.simpy.links.modifying">
             <title>リンクの変更</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $simpy = new Zend_Service_Simpy('あなたのユーザ名', 'あなたのパスワード');
 
 /* リンクを保存します */
@@ -157,7 +157,7 @@ foreach ($linkSet as $link) {
         </para>
         <example id="zend.service.simpy.tags.working">
             <title>タグの処理</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $simpy = new Zend_Service_Simpy('あなたのユーザ名', 'あなたのパスワード');
 
 /* タグつきでリンクを保存します */
@@ -205,7 +205,7 @@ $simpy->mergeTags('framework', 'development', 'frameworks');
         </para>
         <example id="zend.service.simpy.notes.working">
             <title>メモの扱い</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $simpy = new Zend_Service_Simpy('あなたのユーザ名', 'あなたのパスワード');
 
 /* メモを保存します */
@@ -258,7 +258,7 @@ $simpy->deleteNote($note->getId());
         </para>
         <example id="zend.service.simpy.watchlists.retrieving">
             <title>ウォッチリストの取得</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $simpy = new Zend_Service_Simpy('あなたのユーザ名', 'あなたのパスワード');
 
 /* すべてのウォッチリストの一覧を取得します */

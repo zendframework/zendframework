@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15343 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.filter.inflector">
     <title>Zend_Filter_Inflector</title>
 
@@ -27,7 +27,7 @@
     <example id="zend.filter.inflector.camel_case_example">
         <title>MixedCase あるいは camelCase のテキストを別形式に変換する</title>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $inflector = new Zend_Filter_Inflector('pages/:page.:suffix');
 $inflector->setRules(array(
     ':page'  => array('Word_CamelCaseToDash', 'StringToLower'),
@@ -92,7 +92,7 @@ $filtered = $inflector->filter(array('page' => $string));
             を除いた名前を指定します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // ルールとして Zend_Filter_Word_CamelCaseToDash を使用します
 $inflector->addRules(array('script' => 'Word_CamelCaseToDash'));
 ]]></programlisting>
@@ -103,7 +103,7 @@ $inflector->addRules(array('script' => 'Word_CamelCaseToDash'));
             <code>addFilterPrefixPath()</code> を使用します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $inflector->addFilterPrefixPath('My_Filter', 'My/Filter/');
 ]]></programlisting>
 
@@ -112,7 +112,7 @@ $inflector->addFilterPrefixPath('My_Filter', 'My/Filter/');
             それを直接操作することもできます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $loader = $inflector->getPluginLoader();
 $loader->addPrefixPath('My_Filter', 'My/Filter/');
 ]]></programlisting>
@@ -142,7 +142,7 @@ $loader->addPrefixPath('My_Filter', 'My/Filter/');
             コンストラクタの 3 番目の引数で指定します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // コンストラクタ経由
 $inflector = new Zend_Filter_Inflector('#foo/#bar.#sfx', null, '#');
 
@@ -159,7 +159,7 @@ $inflector->setTargetReplacementIdentifier('#');
             この際に使用できるのが <code>setTarget()</code> です。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $inflector = $layout->getInflector();
 $inflector->setTarget('layouts/:script.phtml');
 ]]></programlisting>
@@ -172,7 +172,7 @@ $inflector->setTarget('layouts/:script.phtml');
             そのためには <code>setTargetReference()</code> を使用します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class Foo
 {
     /**
@@ -237,7 +237,7 @@ class Foo
                 <code>setStaticRule()</code> メソッドを使用して、ルールの設定や変更を行います。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $inflector = new Zend_Filter_Inflector(':script.:suffix');
 $inflector->setStaticRule('suffix', 'phtml');
 
@@ -254,7 +254,7 @@ $inflector->setStaticRule('suffix', 'php');
                 <code>setStaticRuleReference()</code> メソッドです。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class Foo
 {
     /**
@@ -327,7 +327,7 @@ class Foo
                 </para></listitem>
             </itemizedlist>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $inflector = new Zend_Filter_Inflector(':script.:suffix');
 
 // ルールとして Zend_Filter_Word_CamelCaseToDash フィルタを使用するように設定します
@@ -376,7 +376,7 @@ $inflector->setFilterRule('script', array(
             <example id="zend.filter.inflector.rules.multiple.example">
                 <title>複数のルールの一括設定</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Could also use setRules() with this notation:
 $inflector->addRules(array(
     // フィルタルール
@@ -483,7 +483,7 @@ $inflector->addRules(array(
         <example id="zend.filter.inflector.config.example">
             <title>Zend_Filter_Inflector での Zend_Config の使用法</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // コンストラクタで
 $config    = new Zend_Config($options);
 $inflector = new Zend_Filter_Inflector($config);

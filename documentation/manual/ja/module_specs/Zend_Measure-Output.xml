@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.measure.output">
 
     <title>計測値の出力</title>
@@ -37,7 +37,7 @@
             <classname>Zend_Measure</classname> は、文字列の自動的な出力をサポートしています。
             <example id="zend.measure.output.auto.example-1">
                 <title>自動的な出力</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de');
 $mystring = "1.234.567,89 Meter";
 $unit = new Zend_Measure_Length($mystring,
@@ -72,7 +72,7 @@ echo $unit;
             計測値の値だけを出力するには <code>getValue()</code> を使用します。
             <example id="zend.measure.output.value.example-1">
                 <title>値の出力</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de');
 $mystring = "1.234.567,89 Meter";
 $unit = new Zend_Measure_Length($mystring,
@@ -100,7 +100,7 @@ echo $unit->getValue();
             関数 <code>getType()</code> は、現在の単位を返します。
             <example id="zend.measure.output.unit.example-1">
                 <title>単位の出力</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de');
 $mystring = "1.234.567,89";
 $unit = new Zend_Measure_Weight($mystring,

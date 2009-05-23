@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15215 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.mail.smtp-authentication">
   <title>SMTP 認証</title>
 
@@ -14,7 +14,7 @@
   <example id="zend.mail.smtp-authentication.example-1">
     <title>Zend_Mail_Transport_Smtp での認証の有効化</title>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $config = array('auth' => 'login',
                 'username' => 'myusername',
                 'password' => 'password');

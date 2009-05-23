@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15615 -->
+<!-- EN-Revision: 15617 -->
 <sect3 id="zend.view.helpers.initial.partial">
     <title>Partial ヘルパー</title>
 
@@ -38,7 +38,7 @@
             次のようなスクリプトを考えてみましょう。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php // partial.phtml ?>
 <ul>
     <li>From: <?php echo $this->escape($this->from) ?></li>
@@ -50,7 +50,7 @@
             これを、ビュースクリプトから次のようにコールします。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php echo $this->partial('partial.phtml', array(
     'from' => 'Team Framework',
     'subject' => 'view partials')); ?>
@@ -60,7 +60,7 @@
             レンダリングした結果は、このようになります。
         </para>
 
-        <programlisting role="html"><![CDATA[
+        <programlisting language="html"><![CDATA[
 <ul>
     <li>From: Team Framework</li>
     <li>Subject: view partials</li>
@@ -108,7 +108,7 @@
                 'objectKey' を設定します。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // オブジェクトを、変数 'model' として渡すよう通知します
 $view->partial()->setObjectKey('model');
 
@@ -153,7 +153,7 @@ $view->partialLoop()->setObjectKey('model');
             次のような部分ビュースクリプトを考えます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php // partialLoop.phtml ?>
     <dt><?php echo $this->key ?></dt>
     <dd><?php echo $this->value ?></dd>
@@ -163,7 +163,7 @@ $view->partialLoop()->setObjectKey('model');
             そして "モデル" はこのようになります。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $model = array(
     array('key' => 'Mammal', 'value' => 'Camel'),
     array('key' => 'Bird', 'value' => 'Penguin'),
@@ -177,13 +177,13 @@ $model = array(
             <code>PartialLoop</code> ヘルパーを実行します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <dl>
 <?php echo $this->partialLoop('partialLoop.phtml', $model) ?>
 </dl>
 ]]></programlisting>
 
-        <programlisting role="html"><![CDATA[
+        <programlisting language="html"><![CDATA[
 <dl>
     <dt>Mammal</dt>
     <dd>Camel</dd>
@@ -216,7 +216,7 @@ $model = array(
             次のようにします。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php echo $this->partial('pager.phtml', 'list', $pagerData) ?>
 ]]></programlisting>
 

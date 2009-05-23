@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.search.lucene.java-lucene">
     <title>Java Lucene との相互運用</title>
 
@@ -56,7 +56,7 @@
             を使用してファイルのインデックスを作成する方法を示す例です。
         </para>
 
-        <programlisting role="java"><![CDATA[
+        <programlisting language="java"><![CDATA[
 /**
 * インデックスの作成
 */

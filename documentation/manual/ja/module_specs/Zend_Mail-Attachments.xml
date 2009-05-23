@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.mail.attachments">
     <title>ファイルの添付</title>
     <para>
@@ -12,7 +12,7 @@
     </para>
     <example id="zend.mail.attachments.example-1">
         <title>ファイルを添付したメール</title>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 // メッセージを作成します...
 $mail->createAttachment($someBinaryString);
@@ -28,7 +28,7 @@ $mail->createAttachment($myImage,
         <code>createAttachment()</code> メソッドの返す値は
         <classname>Zend_Mime_Part</classname> オブジェクトです。
     </para>
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 
 $at = $mail->createAttachment($myImage);
@@ -43,7 +43,7 @@ $mail->send();
         もうひとつの方法は、<classname>Zend_Mime_Part</classname> のインスタンスを作成して
         それを <code>addAttachment()</code> で追加するものです。
     </para>
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 
 $at = new Zend_Mime_Part($myImage);

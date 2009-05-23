@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <sect3 id="zend.controller.actionhelpers.actionstack">
     <title>ActionStack</title>
 
@@ -35,7 +35,7 @@
             をコールするのが一番シンプルな方法です。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function barAction()
@@ -66,7 +66,7 @@ class FooController extends Zend_Controller_Action
             ヘルパーに渡すこともできます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function barAction()

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15617 -->
 <sect3 id="zend.view.helpers.initial.action">
     <title>Action ビューヘルパー</title>
 
@@ -36,7 +36,7 @@
             次のようにします。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <div id="sidebar right">
     <div class="item">
         <?php echo $this->action('list',

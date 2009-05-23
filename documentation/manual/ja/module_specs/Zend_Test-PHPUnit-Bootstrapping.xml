@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15341 -->
+<!-- EN-Revision: 15617 -->
 <sect2 id="zend.test.phpunit.bootstrapping">
     <title>テストケースの起動</title>
 
@@ -29,7 +29,7 @@
         を準備するだけの役割となります。
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
     public $bootstrap = '/path/to/bootstrap/file.php'
@@ -47,7 +47,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         メソッドである場合は、クラスレベルで設定することができます。
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
     public $bootstrap = array('App', 'bootstrap');
@@ -61,7 +61,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         <code>setUp()</code> メソッドを利用することを推奨します。
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
     public function setUp()

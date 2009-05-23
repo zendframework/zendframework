@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15215 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.measure.types">
 
     <title>計測値の型</title>
@@ -308,7 +308,7 @@
             その代わりに下線を使用します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $great = '_X';
 $locale = new Zend_Locale('en');
 $unit = new Zend_Measure_Number($great,Zend_Measure_Number::ROMAN, $locale);

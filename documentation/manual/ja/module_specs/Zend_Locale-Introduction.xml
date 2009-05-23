@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15346 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.locale.introduction">
 
     <title>導入</title>
@@ -169,7 +169,7 @@
 
         <example id="zend.locale.representation.example-1">
             <title>特定のロケールの選択</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_DE'); // ドイツ語 _ ドイツ
 ]]></programlisting>
         </example>
@@ -220,7 +220,7 @@ $locale = new Zend_Locale('de_DE'); // ドイツ語 _ ドイツ
 
         <example id="zend.locale.selection.example-1">
             <title>ロケールの自動選択</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $locale  = new Zend_Locale();
 
 // デフォルトの挙動で、上と同じです
@@ -339,7 +339,7 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
 
         <example id="zend.locale.selection.automatic.example-1">
             <title>自動ロケールの使用法</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // 自動検出なし
 //$locale = new Zend_Locale(Zend_Locale::BROWSER);
 //$date = new Zend_Date($locale);
@@ -372,7 +372,7 @@ $date = new Zend_Date('auto');
 
         <example id="zend.locale.defaultlocale.example-1">
             <title>ロケールの例外処理</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // 起動ファイル内で
 try {
     $locale = new Zend_Locale('auto');
@@ -402,7 +402,7 @@ $date = new Zend_Date($locale);
 
         <example id="zend.locale.defaultlocale.example-2">
             <title>デフォルトのロケールの設定</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // 起動ファイル内で
 Zend_Locale::setDefault('de');
 
@@ -433,7 +433,7 @@ $date = new Zend_Date();
 
         <example id="zend.locale.interoperate.example-1">
             <title>日付のデフォルトが、ウェブのユーザのロケールになる例</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $date = new Zend_Date('2006',Zend_Date::YEAR);
 ]]></programlisting>
         </example>
@@ -446,7 +446,7 @@ $date = new Zend_Date('2006',Zend_Date::YEAR);
 
         <example id="zend.locale.interoperate.example-2">
             <title>デフォルトのロケール選択のオーバーライド</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $usLocale = new Zend_Locale('en_US');
 $date = new Zend_Date('2006',Zend_Date::YEAR, $usLocale);
 $temp = new Zend_Measure_Temperature('100,10',
@@ -463,7 +463,7 @@ $temp = new Zend_Measure_Temperature('100,10',
 
         <example id="zend.locale.interoperate.example-3">
             <title>デフォルトのロケールを使用する際のパフォーマンスの最適化</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale();
 $date = new Zend_Date('2006', Zend_Date::YEAR, $locale);
 $temp = new Zend_Measure_Temperature('100,10',
@@ -491,7 +491,7 @@ $temp = new Zend_Measure_Temperature('100,10',
 
         <example id="zend.locale.frameworkwidelocale.example">
             <title>アプリケーション単位のロケールの使用例</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // 起動ファイルで
 $locale = new Zend_Locale('de_AT');
 Zend_Registry::set('Zend_Locale', $locale);
@@ -531,7 +531,7 @@ echo $date->getDate();
 
         <example id="zend.locale.formatoptions.example-1">
             <title>日付のデフォルトを、ウェブユーザの正しいロケールに設定する</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend_Locale_Format::setOptions(array('locale' => 'en_US',
                                      'fix_date' => true,
                                      'format_type' => 'php'));
@@ -548,7 +548,7 @@ Zend_Locale_Format::setOptions(array('locale' => 'en_US',
 
         <example id="zend.locale.formatoptions.example-2">
             <title>setOptions() での STANDARD の使用</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend_Locale_Format::setOptions(array('locale' => 'en_US',
                                      'date_format' => 'dd.MMMM.YYYY'));
 // グローバル設定の日付書式をオーバーライドします

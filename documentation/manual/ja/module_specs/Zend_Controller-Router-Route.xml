@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <sect3 id="zend.controller.router.routes.standard">
     <title>Zend_Controller_Router_Route</title>
 
@@ -18,7 +18,7 @@
         この機能を実現するためのルートは、次のようになります。
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route(
     'author/:username',
     array(
@@ -59,7 +59,7 @@ $router->addRoute('user', $route);
         この例が返す変数は、以下のようなキーと値のペアを持つ配列となります。
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $values = array(
     'username'   => 'martel',
     'controller' => 'profile',
@@ -75,7 +75,7 @@ $values = array(
         <classname>Zend_Controller_Request::getParam()</classname> メソッドを使用します。
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 public function userinfoAction()
 {
     $request = $this->getRequest();
@@ -93,7 +93,7 @@ public function userinfoAction()
         次のルートは、Module ルートの挙動をまねたものです。
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route(
     ':module/:controller/:action/*',
     array('module' => 'default')
@@ -112,7 +112,7 @@ $router->addRoute('default', $route);
             対応する値にそのデフォルト値を指定します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route(
     'archive/:year',
     array('year' => 2006)
@@ -137,7 +137,7 @@ $router->addRoute('archive', $route);
             ルートのデフォルトとしてコントローラとアクションを定義しておく必要があります。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route(
     'archive/:year',
     array(
@@ -165,7 +165,7 @@ $router->addRoute('archive', $route);
             これは、正規表現で指定します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route(
     'archive/:year',
     array(
@@ -273,7 +273,7 @@ $router->addRoute('archive', $route);
             もっともシンプルな方法は、次のようになります。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // 翻訳器を準備します
 $translator = new Zend_Translate('array', array(), 'en');
 $translator->addTranslation(array('archive' => 'archiv',
@@ -293,7 +293,7 @@ Zend_Controller_Router_Route::setDefaultTranslator($translator);
             これは、静的セグメントを使用する例です。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // ルートを作成します
 $route = new Zend_Controller_Router_Route(
     '@archive',
@@ -316,7 +316,7 @@ $route->assemble(array());
             モジュールルートの翻訳済みバージョンを作ることができます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // ルートを作成します
 $route = new Zend_Controller_Router_Route(
     ':@controller/:@action/*',
@@ -338,7 +338,7 @@ $route->assemble(array('controller' => 'archive', 'foo' => 'bar'));
             静的セグメントと動的セグメントを同時に使用することもできます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // ルートを作成します
 $route = new Zend_Controller_Router_Route(
     '@archive/:@mode/:value',

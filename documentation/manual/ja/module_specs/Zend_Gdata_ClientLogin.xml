@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.gdata.clientlogin">
     <title>ClientLogin による認証</title>
 
@@ -84,7 +84,7 @@
             クライアントオブジェクトを作成します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Google アカウントの情報を指定します
 $email = 'johndoe@gmail.com';
 $passwd = 'xxxxxxxx';

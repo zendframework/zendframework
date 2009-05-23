@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15606 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.acl.refining">
 
     <title>アクセス制御の洗練</title>
@@ -37,7 +37,7 @@
         'marketing' を作成し、'staff' の権限を継承させます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // 新しいグループ marketing は staff の権限を引き継ぎます
 $acl->addRole(new Zend_Acl_Role('marketing'), 'staff');
 ]]></programlisting>
@@ -48,7 +48,7 @@ $acl->addRole(new Zend_Acl_Role('marketing'), 'staff');
         に限定されることに注目しましょう。ここで、これらのリソースを追加します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // 規則を適用するリソースを作成します
 
 // ニュースレター
@@ -68,7 +68,7 @@ $acl->add(new Zend_Acl_Resource('announcement'), 'news');
         そして、次のような特別な規則を、ACL の該当範囲に適用します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Marketing は、ニュースレターおよび最新ニュースを公開、保存できなければなりません
 $acl->allow('marketing',
             array('newsletter', 'latest'),
@@ -85,7 +85,7 @@ $acl->deny(null, 'announcement', 'archive');
         これで、最新の変更内容を反映した ACL への問い合わせが行えるようになります。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 echo $acl->isAllowed('staff', 'newsletter', 'publish') ?
      "allowed" : "denied";
 // denied となります
@@ -133,7 +133,7 @@ echo $acl->isAllowed('administrator', 'announcement', 'archive') ?
         すべてのロールやリソース、権限を表すことになります。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // 最新ニュースの改変拒否を staff (そして継承による marketing) から削除します
 $acl->removeDeny('staff', 'latest', 'revise');
 
@@ -161,7 +161,7 @@ echo $acl->isAllowed('marketing', 'newsletter', 'archive') ?
         このような変更を一括で行うことができます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // marketing に対して、最新のニュースへのアクセスを許可します
 $acl->allow('marketing', 'latest');
 

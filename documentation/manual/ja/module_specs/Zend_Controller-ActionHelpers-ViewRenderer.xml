@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <sect3 id="zend.controller.actionhelpers.viewrenderer">
     <title>ViewRenderer</title>
 
@@ -91,7 +91,7 @@
                         ヘルパーブローカにそれを渡して登録する。
                     </para>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $viewRenderer = new Zend_Controller_Action_Helper_ViewRenderer();
 $viewRenderer->setView($view)
              ->setViewSuffix('php');
@@ -105,7 +105,7 @@ Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
                         ヘルパーブローカから必要に応じて作成、取得する。
                     </para>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $viewRenderer =
     Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
 $viewRenderer->setView($view)
@@ -126,7 +126,7 @@ $viewRenderer->setView($view)
             <code>getStaticHelper()</code> メソッドを使用するのがいちばん簡単です。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
 ]]></programlisting>
 
@@ -151,7 +151,7 @@ Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
             例として、次のようなクラスを考えてみましょう。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // foo モジュールのコントローラクラス
 class Foo_BarController extends Zend_Controller_Action
 {
@@ -279,7 +279,7 @@ $this->foo(); // Foo_View_Helper_Foo::foo() をコールします
                     はこのメソッドのエイリアスで、コントローラ内から簡単にコールすることができます。
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // 現在のアクションスクリプトではなく 'foo' をレンダリングします
 $this->_helper->viewRenderer('foo');
 
@@ -305,7 +305,7 @@ $this->_helper->viewRenderer('form', 'html', true);
             で説明したフラグと同じものです。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view    = new Zend_View(array('encoding' => 'UTF-8'));
 $options = array('noController' => true, 'neverRender' => true);
 $viewRenderer =
@@ -621,7 +621,7 @@ $viewRenderer =
                 アクションメソッドで変数の値を設定するというものです。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // 起動ファイル内で
 Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
 
@@ -700,7 +700,7 @@ class Foo_BarController extends Zend_Controller_Action
                 自動レンダリングを無効にする (<code>setNoRender()</code>) かです。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Bar モジュールの Baz コントローラクラス
 class Bar_BazController extends Zend_Controller_Action
 {
@@ -747,7 +747,7 @@ class Bar_BatController extends Zend_Controller_Action
                 これは <code>setRender()</code> を起動します。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Foo モジュールの Bar コントローラクラス
 class Foo_BarController extends Zend_Controller_Action
 {
@@ -790,7 +790,7 @@ class Foo_BarController extends Zend_Controller_Action
                 どちらも同じオブジェクトへの参照を取得することになります。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Foo モジュールの Bar コントローラクラス
 class Foo_BarController extends Zend_Controller_Action
 {
@@ -838,7 +838,7 @@ class Foo_BarController extends Zend_Controller_Action
                 'tpl' を設定します。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 /**
  * 起動ファイル
  */
@@ -864,7 +864,7 @@ Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
                 <code>render()</code> を必要なだけコールすればいいのです。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class SearchController extends Zend_Controller_Action
 {
     public function resultsAction()

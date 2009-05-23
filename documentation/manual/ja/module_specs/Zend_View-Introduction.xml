@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15316 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.view.introduction">
 
     <title>導入</title>
@@ -41,7 +41,7 @@
             コントローラスクリプトは、おそらくこのようになるでしょう。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // 本の著者およびタイトルを取得するためにモデルを使用します
 $data = array(
     array(
@@ -84,7 +84,7 @@ echo $view->render('booklist.php');
             したがって、基本的なビュースクリプトはこのようになります。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
  if ($this->books): ?>
 
     <!-- 本の一覧 -->
@@ -133,7 +133,7 @@ echo $view->render('booklist.php');
                     次のようなディレクトリ構成を想定しています。
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 base/path/
     helpers/
     filters/
@@ -217,7 +217,7 @@ base/path/
                     短いタグを、<code>.htaccess</code> ファイルで有効にします。
                 </para>
 
-                <programlisting role="apache"><![CDATA[
+                <programlisting language="apache"><![CDATA[
 php_value "short_open_tag" "on"
 ]]></programlisting>
 
@@ -234,7 +234,7 @@ php_value "short_open_tag" "on"
                     短いタグを逐次長いタグに変換します。
                 </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view->setUseStreamWrapper(true);
 ]]></programlisting>
 

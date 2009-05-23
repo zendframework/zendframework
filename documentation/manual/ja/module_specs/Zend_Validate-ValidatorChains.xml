@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15615 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.validate.validator_chains">
 
     <title>バリデータチェイン</title>
@@ -12,7 +12,7 @@
         で説明した例を解決するための方法を示すものです。
         ユーザ名が 6 文字から 12 文字までの英数字であるかどうかを検証します。
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // バリデータチェインを作成し、そこにバリデータを追加します
 $validatorChain = new Zend_Validate();
 $validatorChain->addValidator(new Zend_Validate_StringLength(6, 12))
@@ -49,7 +49,7 @@ if ($validatorChain->isValid($username)) {
         上の例を次のように書き直すと、長さの検証に失敗した場合は
         英数字の検証を行わなくなります。
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validatorChain->addValidator(new Zend_Validate_StringLength(6, 12), true)
         ->addValidator(new Zend_Validate_Alnum());
 ]]></programlisting>

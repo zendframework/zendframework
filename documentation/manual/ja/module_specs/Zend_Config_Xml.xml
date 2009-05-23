@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15397 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.config.adapters.xml">
     <title>Zend_Config_Xml</title>
     <para>
@@ -36,7 +36,7 @@
             ここでは、次のような内容の設定データが
             <code>/path/to/config.xml</code> に存在するものとします。
         </para>
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <?xml version="1.0"?>
 <configdata>
     <production>
@@ -66,7 +66,7 @@
             次に、開発者が開発環境用の設定データを XML ファイルから読み込むことを考えます。
             これは簡単なことで、単に XML ファイルとセクションを指定するだけです。
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Xml('/path/to/config.xml', 'staging');
 
 echo $config->database->params->host;   // "dev.example.com" と出力します
@@ -84,7 +84,7 @@ echo $config->database->params->dbname; // "dbname" と出力します
             親ノードに属性を追加するものです。
             これが、そのノードの子と見なされます。
         </para>
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <?xml version="1.0"?>
 <configdata>
     <production webhost="www.example.com">
@@ -105,7 +105,7 @@ echo $config->database->params->dbname; // "dbname" と出力します
             単純に空のタグを作成し、その値を <code>value</code>
             属性に含めます。
         </para>
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <?xml version="1.0"?>
 <configdata>
     <production>
@@ -140,7 +140,7 @@ echo $config->database->params->dbname; // "dbname" と出力します
             文字列はコンストラクタの最初のパラメータとして渡し、最初は
             <code>'&lt;?xml'</code> で始まらなければなりません。
         </para>
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 $string = <<<EOT
 <?xml version="1.0"?>
 <config>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15346 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.file.transfer.validators">
 
     <title>Zend_File_Transfer 用のバリデータ</title>
@@ -247,7 +247,7 @@
         <example id="zend.file.transfer.validators.usage.example">
             <title>ファイル転送用のバリデータの追加</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // ファイルサイズを 20000 バイトに設定します
@@ -276,7 +276,7 @@ $upload->setValidators(array(
                 指定したファイルに対してのみバリデータを設定します。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // ファイルサイズを 20000 バイトとし、それを 'file2' にのみ適用します
@@ -301,7 +301,7 @@ $upload->addValidator('Size', false, 20000, 'file2');
                 複数回のコールは以下のように書くことができます。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // ファイルサイズを 20000 バイトに設定します
@@ -335,7 +335,7 @@ $upload->addValidator('Size', false, 20000)
                 すべてのファイルが検証対象となります。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // ファイルサイズを 20000 バイトに設定します
@@ -417,7 +417,7 @@ if ($upload->isValid()) {
         <example id="zend.file.transfer.validators.count.example">
             <title>Count バリデータの使用法</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // ファイルの数を最大 2 に制限します
@@ -463,7 +463,7 @@ $upload->addValidator('Count', false, array('min' =>1, 'max' => 5));
         <example id="zend.file.transfer.validators.crc32.example">
             <title>Crc32 バリデータの使用法</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // アップロードされたファイルのハッシュが指定したものと一致するかどうかをチェックします
@@ -518,7 +518,7 @@ $upload->addValidator('Crc32', false, array('3b3652f', 'e612b69'));
         <example id="zend.file.transfer.validators.excludeextension.example">
             <title>ExcludeExtension バリデータの使用法</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // 拡張子 php あるいは exe のファイルは許可しません
@@ -577,7 +577,7 @@ $upload->addValidator('ExcludeExtension',
         <example id="zend.file.transfer.validators.excludemimetype.example">
             <title>ExcludeMimeType バリデータの使用法</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // すべてのファイルで gif 画像の MIME 型を許可しません
@@ -637,7 +637,7 @@ $upload->addValidator('ExcludeMimeType', false, 'image');
         <example id="zend.file.transfer.validators.exists.example">
             <title>Exists バリデータの使用法</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // temp ディレクトリをチェック対象に追加します
@@ -701,7 +701,7 @@ $upload->addValidator('Exists',
         <example id="zend.file.transfer.validators.extension.example">
             <title>Extension バリデータの使用法</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // 拡張子を jpg と png のみに制限します
@@ -791,7 +791,7 @@ if (!$upload->isValid('C:\temp\myfile.MO')) {
         <example id="zend.file.transfer.validators.filessize.example">
             <title>FilesSize バリデータの使用法</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // アップロードされるファイルサイズの合計を 40000 バイトまでに制限します
@@ -875,7 +875,7 @@ $upload->addValidator('FilesSize',
         <example id="zend.file.transfer.validators.imagesize.example">
             <title>ImageSize バリデータの使用法</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // 画像の高さを 100-200 ピクセル、幅を 40-80 ピクセルに制限します
@@ -907,7 +907,7 @@ $upload->setImageWidth(array('minwidth' => 20, 'maxwidth' => 200));
         <example id="zend.file.transfer.validators.iscompressed.example">
             <title>IsCompressed バリデータの使用法</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // アップロードされたファイルが圧縮アーカイブであるかどうかチェックします
@@ -947,7 +947,7 @@ $upload->addValidator('IsCompressed', false, 'zip');
         <example id="zend.file.transfer.validators.isimage.example">
             <title>IsImage バリデータの使用法</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // アップロードされたファイルが画像ファイルであるかどうかチェックします
@@ -1010,7 +1010,7 @@ $upload->addValidator('IsImage', false, 'jpeg');
         <example id="zend.file.transfer.validators.hash.example">
             <title>Hash バリデータの使用法</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // アップロードされたファイルのハッシュが指定したものと一致するかどうかをチェックします
@@ -1065,7 +1065,7 @@ $upload->addValidator('Hash',
         <example id="zend.file.transfer.validators.md5.example">
             <title>Md5 バリデータの使用法</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // アップロードされたファイルのハッシュが指定したものと一致するかどうかをチェックします
@@ -1132,7 +1132,7 @@ $upload->addValidator('Md5',
         <example id="zend.file.transfer.validators.mimetype.example">
             <title>MimeType バリデータの使用法</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // MIME 型を制限し、gif 画像のみを許可するようにします
@@ -1214,7 +1214,7 @@ $upload->addValidator('MimeType',
         <example id="zend.file.transfer.validators.notexists.example">
             <title>NotExists バリデータの使用法</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // temp ディレクトリをチェック対象に追加します
@@ -1262,7 +1262,7 @@ $upload->addValidator('NotExists', false,
         <example id="zend.file.transfer.validators.sha1.example">
             <title>sha1 バリデータの使用法</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // アップロードされたファイルのハッシュが指定したものと一致するかどうかをチェックします
@@ -1342,7 +1342,7 @@ $upload->addValidator('Sha1',
         <example id="zend.file.transfer.validators.size.example">
             <title>Size バリデータの使用法</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // ファイルサイズを 40000 バイトまでに制限します
@@ -1394,7 +1394,7 @@ $upload->addValidator('Size',
         <example id="zend.file.transfer.validators.wordcount.example">
             <title>WordCount バリデータの使用法</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // ファイル内の単語数を 2000 語までに制限します

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.controller.exceptions">
     <title>MVC での例外</title>
 
@@ -73,7 +73,7 @@
                     例外を自分自身で処理できるようになります。たとえば次のようになります。
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $front->throwExceptions(true);
 try {
     $front->dispatch();
@@ -116,7 +116,7 @@ try {
                     たとえば次のようになります。
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $front->returnResponse(true);
 $response = $front->dispatch();
 if ($response->isException()) {
@@ -169,7 +169,7 @@ if ($response->isException()) {
                             以下のディレクティブを追加します。
                         </para>
 
-                        <programlisting role="php"><![CDATA[
+                        <programlisting language="php"><![CDATA[
 $front->setParam('useDefaultControllerAlways', true);
 
 // あるいは
@@ -218,7 +218,7 @@ $dispatcher->setParam('useDefaultControllerAlways', true);
                             たとえば次のようになります。
                         </para>
 
-                        <programlisting role="php"><![CDATA[
+                        <programlisting language="php"><![CDATA[
 class My_Controller_Action extends Zend_Controller_Action
 {
     public function __call($method, $args)
@@ -247,7 +247,7 @@ class My_Controller_Action extends Zend_Controller_Action
                             たとえば次のようになります。
                         </para>
 
-                        <programlisting role="php"><![CDATA[
+                        <programlisting language="php"><![CDATA[
 class My_Controller_Dispatcher extends Zend_Controller_Dispatcher
 {
     public function getAction($request)
@@ -317,7 +317,7 @@ class My_Controller_Dispatcher extends Zend_Controller_Dispatcher
                             たとえば次のようになります。
                         </para>
 
-                        <programlisting role="php"><![CDATA[
+                        <programlisting language="php"><![CDATA[
 class My_Controller_PreDispatchPlugin extends Zend_Controller_Plugin_Abstract
 {
     public function preDispatch(Zend_Controller_Request_Abstract $request)

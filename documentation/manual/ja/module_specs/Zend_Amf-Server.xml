@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15341 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.amf.server">
     <title>Zend_Amf_Server</title>
 
@@ -19,7 +19,7 @@
             を作ったものとしましょう。AMF サーバを作成するためのコードは次のようになります。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $server = new Zend_Amf_Server();
 $server->setClass('Foo');
 $response = $server->handle();
@@ -30,7 +30,7 @@ echo $response;
             もうひとつの方法として、単純な関数をコールバックとしてアタッチすることもできます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $server = new Zend_Amf_Server();
 $server->addFunction('myUberCoolFunction');
 $response = $server->handle();
@@ -44,7 +44,7 @@ echo $response;
             <code>setClass()</code> の 2 番目の引数に文字列を指定します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $server = new Zend_Amf_Server();
 $server->addFunction('myUberCoolFunction', 'my')
        ->setClass('Foo', 'foo')
@@ -61,7 +61,7 @@ echo $response;
         ディレクトリの追加は <code>addDirectory()</code> メソッドで行います。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $server->addDirectory(dirname(__FILE__) .'/../services/');
 $server->addDirectory(dirname(__FILE__) .'/../package/');
 ]]></programlisting>
@@ -94,7 +94,7 @@ $server->addDirectory(dirname(__FILE__) .'/../package/');
             次の例をごらんください。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // アタッチする関数
 
 /**
@@ -108,7 +108,7 @@ function helloWorld($name, $greeting = 'Hello')
 }
 ]]></programlisting>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // アタッチするクラス
 
 class World
@@ -180,7 +180,7 @@ class World
         そしてファイルを保存することを忘れないようにしましょう。
         </para>
 
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
 <services-config>
     <services>
@@ -213,7 +213,7 @@ class World
             <classname>Zend_Amf_Server</classname> に指定します。
         </para>
 
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <channel-definition id="zend-endpoint"
     <endpoint uri="http://example.com/server.php"
         class="flex.messaging.endpoints.AMFEndpoint"/>
@@ -231,7 +231,7 @@ class World
             MXML で次のように記述します。
         </para>
 
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <mx:RemoteObject id="myservice"
     fault="faultHandler(event)"
     showBusyCursor="true"
@@ -245,7 +245,7 @@ class World
             "myservice.&lt;method&gt;" とするだけです。例を示します。
         </para>
 
-        <programlisting role="ActionScript"><![CDATA[
+        <programlisting language="ActionScript"><![CDATA[
 myservice.hello("Wade");
 ]]></programlisting>
 
@@ -254,7 +254,7 @@ myservice.hello("Wade");
             "myservice.&lt;namespace&gt;.&lt;method&gt;" のようにします。
         </para>
 
-        <programlisting role="ActionScript"><![CDATA[
+        <programlisting language="ActionScript"><![CDATA[
 myservice.world.hello("Wade");
 ]]></programlisting>
 
@@ -286,7 +286,7 @@ myservice.world.hello("Wade");
             production モードを無効にするには、次のようにします。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $server->setProduction(false);
 ]]></programlisting>
 
@@ -294,7 +294,7 @@ $server->setProduction(false);
             再度有効にするには、true を渡します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $server->setProduction(true);
 ]]></programlisting>
 
@@ -337,7 +337,7 @@ $server->setProduction(true);
                 'bar' を設定したものをレスポンスに追加してからそれを返します。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $response = $server->handle();
 $response->addAmfHeader(new Zend_Amf_Value_MessageHeader('foo', true, 'bar'))
 echo $response;
@@ -367,7 +367,7 @@ echo $response;
                     PHP クラス名となります。
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // ActionScript クラス 'ContactVO' と PHP クラス 'Contact' を関連付けます
 $server->setClassMap('ContactVO', 'Contact');
 ]]></programlisting>
@@ -380,7 +380,7 @@ $server->setClassMap('ContactVO', 'Contact');
                     ここには、関連付けたい ActionScript クラス名を指定します。
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 class Contact
 {
     public $_explicitType = 'ContactVO';
@@ -395,7 +395,7 @@ class Contact
                     このメソッドは、適切な ActionScript クラスを返すようにしなければなりません。
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 class Contact
 {
     public function getASClassName()
@@ -417,7 +417,7 @@ class Contact
             という名前をつけて終了を押すと、新しいファイルがあらわれます。
             次のコードをコピーして、クラスを作成しましょう。
         </para>
-        <programlisting role="as"><![CDATA[
+        <programlisting language="as"><![CDATA[
 package
 {
     [Bindable]
@@ -443,7 +443,7 @@ package
             そのエイリアス名が (ここでは) <code>ContactVO</code> であることを定義します。
             このタグに設定される値は、PHP のクラスと正確に一致していなければなりません。
         </para>
-        <programlisting role="as"><![CDATA[
+        <programlisting language="as"><![CDATA[
 [Bindable]
 private var myContact:ContactVO;
 
@@ -487,7 +487,7 @@ private function getContactHandler(event:ResultEvent):void {
             次のコードを Main.as にコピーしましょう。これから、
             このコードの中身を追いかけながら何をやっているのかを説明していきます。
         </para>
-        <programlisting role="as"><![CDATA[
+        <programlisting language="as"><![CDATA[
 package {
   import flash.display.MovieClip;
   import flash.events.*;
@@ -526,7 +526,7 @@ package {
             ひとつめが NetConnection で、これはクライアントとサーバの間でパイプのような働きをします。
             もうひとつは Responder オブジェクトで、これはコールが成功したかどうかなどのサーバからの返り値を処理します。
         </para>
-        <programlisting role="as"><![CDATA[
+        <programlisting language="as"><![CDATA[
 import flash.net.NetConnection;
 import flash.net.Responder;
 ]]></programlisting>
@@ -534,7 +534,7 @@ import flash.net.Responder;
             クラスの中で 3 つの変数を用意します。これらがそれぞれ NetConnection、Responder
             そして <classname>Zend_Amf_Server</classname> へのゲートウェイ URL をあらわします。
         </para>
-        <programlisting role="as"><![CDATA[
+        <programlisting language="as"><![CDATA[
 private var gateway:String = "http://example.com/server.php";
 private var connection:NetConnection;
 private var responder:Responder;
@@ -545,7 +545,7 @@ private var responder:Responder;
             レスポンダでは、サーバからのレスポンスを処理するメソッドが 2 つ定義されています。
             わかりやすくするため、それぞれ onResult および onFault と名づけます。
         </para>
-        <programlisting role="as"><![CDATA[
+        <programlisting language="as"><![CDATA[
 responder = new Responder(onResult, onFault);
 connection = new NetConnection;
 connection.connect(gateway);
@@ -555,7 +555,7 @@ connection.connect(gateway);
             ここで、データをサーバに送信します。
             <classname>Zend_Amf_Server</classname> World->hello 関数をコールするコードを 1 行追加しています。
         </para>
-        <programlisting role="as"><![CDATA[
+        <programlisting language="as"><![CDATA[
 connection.call("World.hello", responder, params);
 ]]></programlisting>
         <para>
@@ -563,7 +563,7 @@ connection.call("World.hello", responder, params);
             onResult と onFault を定義しました。サーバから正しい結果が返ってきたとき用の関数を追加します。
             成功時のイベントハンドラは、サーバへの接続が正しく処理されるたびに毎回実行されます。
         </para>
-        <programlisting role="as"><![CDATA[
+        <programlisting language="as"><![CDATA[
 private function onResult(result:Object):void {
     // Display the returned data
     trace(String(result));
@@ -574,7 +574,7 @@ private function onResult(result:Object):void {
             たとえば、サーバからエラーが返された場合、サーバへの URL が無効な場合、
             リモート側にサービスやメソッドが存在しない場合など、接続時に問題が発生した場合にコールされることになります。
         </para>
-        <programlisting role="as"><![CDATA[
+        <programlisting language="as"><![CDATA[
 private function onFault(fault:Object):void {
     trace(String(fault.description));
 }

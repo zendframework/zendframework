@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15343 -->
+<!-- EN-Revision: 15617 -->
 <sect3 id="zend.view.helpers.initial.json">
     <title>JSON ヘルパー</title>
 
@@ -16,7 +16,7 @@
         JSON ヘルパーは次のようなヘッダを設定します。
     </para>
 
-    <programlisting role="text"><![CDATA[
+    <programlisting language="text"><![CDATA[
 Content-Type: application/json
 ]]></programlisting>
 
@@ -29,7 +29,7 @@ Content-Type: application/json
         JSON ヘルパーの使用法は、このように非常に単純です。
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 <?php echo $this->json($this->data) ?>
 ]]></programlisting>
 
@@ -51,7 +51,7 @@ Content-Type: application/json
             <code>true</code> にします。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // 2 番目の引数に true を指定するとレイアウトが有効になります
 echo $this->json($this->data, true);
 
@@ -67,7 +67,7 @@ echo $this->json($this->data, array('keepLayouts' => true));
             オプションに <code>true</code> を設定します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php echo $this->json($this->data, array(
     'enableJsonExprFinder' => true, 
     'keepLayouts'          => true,

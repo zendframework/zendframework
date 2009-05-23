@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.service.strikeiron.bundled-services">
     <title>Zend_Service_StrikeIron: バンドルされているサービス</title>
 
@@ -33,7 +33,7 @@
         このサービスの <code>getZipCode()</code> メソッドは、
         アメリカやカナダの郵便番号についての情報を取得します。
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $strikeIron = new Zend_Service_StrikeIron(array('username' => 'あなたのユーザ名',
                                                 'password' => 'あなたのパスワード'));
 
@@ -99,7 +99,7 @@ $status = $response->serviceStatus;
         このサービスの <code>verifyAddressUSA()</code> メソッドは、
         アメリカの住所を検証します。
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $strikeIron = new Zend_Service_StrikeIron(array('username' => 'あなたのユーザ名',
                                                 'password' => 'あなたのパスワード'));
 
@@ -161,7 +161,7 @@ if ($result->addressErrorNumber != 0) {
         <code>getTaxRateUSA()</code> および <code>getTaxRateCanada()</code> は、
         それぞれアメリカとカナダの販売・消費税の情報を取得します。
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $strikeIron = new Zend_Service_StrikeIron(array('username' => 'あなたのユーザ名',
                                                 'password' => 'あなたのパスワード'));
 

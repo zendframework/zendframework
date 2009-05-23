@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15207 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.dojo.data">
     <title>Zend_Dojo_Data: dojo.data エンベロープ</title>
 
@@ -22,7 +22,7 @@
         サーバ側からは、データを次のような JSON 形式で返します。
     </para>
 
-    <programlisting role="javascript"><![CDATA[
+    <programlisting language="javascript"><![CDATA[
 {
     identifier: '<name>',
     <label: '<label>',>
@@ -51,7 +51,7 @@
         <example id="zend.dojo.data.usage.constructor">
             <title>コンストラクタでの Zend_Dojo_Data の初期化</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $data = new Zend_Dojo_Data('id', $items);
 ]]></programlisting>
         </example>
@@ -59,7 +59,7 @@ $data = new Zend_Dojo_Data('id', $items);
         <example id="zend.dojo.data.usage.mutators">
             <title>設定用メソッドでの Zend_Dojo_Data の初期化</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $data = new Zend_Dojo_Data();
 $data->setIdentifier('id')
      ->addItems($items);
@@ -75,7 +75,7 @@ $data->setIdentifier('id')
         <example id="zend.dojo.data.usage.append">
             <title>Zend_Dojo_Data へのデータの追加</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $data = new Zend_Dojo_Data($identifier, $items);
 $data->addItem($someItem);
 
@@ -140,7 +140,7 @@ $data->addItems($someMoreItems);
         <example id="zend.dojo.data.usage.label">
             <title>Zend_Dojo_Data での label フィールドの指定</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $data->setLabel('name');
 ]]></programlisting>
         </example>
@@ -154,7 +154,7 @@ $data->setLabel('name');
         <example id="zend.dojo.data.usage.populate">
             <title>JSON からの Zend_Dojo_Data の作成</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $data->fromJson($json);
 ]]></programlisting>
         </example>
@@ -183,7 +183,7 @@ $data->fromJson($json);
             以下の使用例をご覧ください。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // "numRows" を 100 に設定します
 $data->setMetadata('numRows', 100);
 
@@ -231,7 +231,7 @@ $data->clearMetadata();
             メソッドを使用するものと配列表記を使用するものの 2 通りがあります。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // getItem() を使用します
 $item = $data->getItem('foo');
 
@@ -244,7 +244,7 @@ $item = $data['foo'];
             あるいは更新したり削除したり作成したり調べたりすることができます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // アイテムの更新あるいは作成
 $data['foo'] = array('title' => 'Foo', 'email' => 'foo@foo.com');
 
@@ -261,7 +261,7 @@ if (isset($data[foo])) {
             内部的には、すべてのアイテムは配列として格納されています。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 foreach ($data as $item) {
     echo $item['title'] . ': ' . $item['description'] . "\n";
 }
@@ -271,7 +271,7 @@ foreach ($data as $item) {
             count で、アイテムの総数を調べることも可能です。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 echo count($data), " items found!";
 ]]></programlisting>
 
@@ -280,7 +280,7 @@ echo count($data), " items found!";
             JSON への変換は単に echo するか文字列にキャストするだけで可能です。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 echo $data; // JSON 文字列として echo
 
 $json = (string) $data; // 文字列へのキャスト == JSON へのキャスト

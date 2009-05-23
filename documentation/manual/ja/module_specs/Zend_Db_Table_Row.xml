@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15215 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.db.table.row">
 
     <title>Zend_Db_Table_Row</title>
@@ -41,7 +41,7 @@
 
             <title>行の取得の例</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugs = new Bugs();
 $row = $bugs->fetchRow($bugs->select()->where('bug_id = ?', 1));
 ]]></programlisting>
@@ -58,7 +58,7 @@ $row = $bugs->fetchRow($bugs->select()->where('bug_id = ?', 1));
 
             <title>行セット内の行を読み込む例</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugs = new Bugs();
 $rowset = $bugs->fetchAll($bugs->select()->where('bug_status = ?', 1));
 $row = $rowset->current();
@@ -79,7 +79,7 @@ $row = $rowset->current();
 
                 <title>行からカラムを読み込む例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $bugs = new Bugs();
 $row = $bugs->fetchRow($bugs->select()->where('bug_id = ?', 1));
 
@@ -121,7 +121,7 @@ echo $row->bug_description;
 
                 <title>toArray() メソッドの使用例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $bugs = new Bugs();
 $row = $bugs->fetchRow($bugs->select()->where('bug_id = ?', 1));
 
@@ -183,7 +183,7 @@ foreach ($rowArray as $column => $value) {
 
                 <title>行のカラムの内容を変更する例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $bugs = new Bugs();
 $row = $bugs->fetchRow($bugs->select()->where('bug_id = ?', 1));
 
@@ -214,7 +214,7 @@ $row->save();
 
                 <title>テーブルに新しい行を作成する例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $bugs = new Bugs();
 $newRow = $bugs->createRow();
 
@@ -237,7 +237,7 @@ $newRow->save();
 
                 <title>テーブルに新しい行を作成し、値を代入する例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $data = array(
     'bug_description' => '...説明...',
     'bug_status'      => 'NEW'
@@ -282,7 +282,7 @@ $newRow->save();
 
                 <title>setFromArray() で新しい行の値を設定する例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $bugs = new Bugs();
 $newRow = $bugs->createRow();
 
@@ -316,7 +316,7 @@ $newRow->save();
 
                 <title>行の削除の例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $bugs = new Bugs();
 $row = $bugs->fetchRow('bug_id = 1');
 
@@ -361,7 +361,7 @@ $row->delete();
 
                 <title>行のシリアライズの例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $bugs = new Bugs();
 $row = $bugs->fetchRow('bug_id = 1');
 
@@ -397,7 +397,7 @@ $serializedRow = serialize($row);
 
                 <title>シリアライズした行の復元の例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $rowClone = unserialize($serializedRow);
 
 // これでオブジェクトのプロパティを使用できますが、読み込み専用です
@@ -442,7 +442,7 @@ echo $rowClone->bug_description;
 
                 <title>行の復活の例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $rowClone = unserialize($serializedRow);
 
 $bugs = new Bugs();
@@ -480,7 +480,7 @@ $rowClone->save();
 
             <title>独自の行クラスの指定</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class MyRow extends Zend_Db_Table_Row_Abstract
 {
     // ...独自の処理
@@ -516,7 +516,7 @@ $bugs = new Bugs(array('rowClass' => 'MyRow'));
 
                     <title>init() メソッドの使用例</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 class MyApplicationRow extends Zend_Db_Table_Row_Abstract
 {
     protected $_role;
@@ -579,7 +579,7 @@ class MyApplicationRow extends Zend_Db_Table_Row_Abstract
                     ただし、それはアプリケーションの設定でログ記録を有効にしている場合のみとします。
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 class MyLoggingRow extends Zend_Db_Table_Row_Abstract
 {
     protected function _insert()
@@ -618,7 +618,7 @@ if ($loggingEnabled) {
                     この例では、ログ記録用のコードは全テーブルクラスで同一です。
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 class MyLoggingRow extends Zend_Db_Table_Row_Abstract
 {
     protected function _insert()
@@ -681,7 +681,7 @@ class Products extends Zend_Db_Table_Abstract
                     メソッドを使用して、データベースのテーブル内のカラム名を変更しています。
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 class MyInflectedRow extends Zend_Db_Table_Row_Abstract
 {
     protected function _transformColumn($columnName)

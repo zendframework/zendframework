@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.server.reflection">
     <title>Zend_Server_Reflection</title>
 
@@ -26,7 +26,7 @@
             基本的な使用法は簡単です。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $class    = Zend_Server_Reflection::reflectClass('My_Class');
 $function = Zend_Server_Reflection::reflectFunction('my_function');
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.text.figlet">
     <title>Zend_Text_Figlet</title>
     <para>
@@ -111,7 +111,7 @@
             の基本的な使用法を説明するためにシンプルな
             FIGlet テキストを作成するものです。
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 require_once 'Zend/Text/Figlet.php';
 $figlet = new Zend_Text_Figlet();
 echo $figlet->render('Zend');
@@ -119,7 +119,7 @@ echo $figlet->render('Zend');
         <para>
             等幅フォントを使用すると、この結果は次のようになります。
         </para>
-        <programlisting role="text"><![CDATA[
+        <programlisting language="text"><![CDATA[
   ______    ______    _  __   ______
  |__  //   |  ___||  | \| || |  __ \\
    / //    | ||__    |  ' || | |  \ ||

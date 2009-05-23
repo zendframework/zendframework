@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <sect3 id="zend.controller.actionhelpers.redirector">
     <title>Redirector</title>
 
@@ -141,7 +141,7 @@
                 URL を指定しています。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class SomeController extends Zend_Controller_Action
 {
     /**
@@ -186,7 +186,7 @@ class SomeController extends Zend_Controller_Action
                 <code>exit()</code> が実行されるということです。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // 別の例
 class AlternativeController extends Zend_Controller_Action
 {
@@ -226,7 +226,7 @@ class AlternativeController extends Zend_Controller_Action
                 また、アクションチェインではなくリダイレクトを行います。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class ForwardController extends Zend_Controller_Action
 {
     /**
@@ -271,7 +271,7 @@ class ForwardController extends Zend_Controller_Action
                 次のようなルートが登録されているものと仮定します。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route(
     'blog/:year/:month/:day/:id',
     array('controller' => 'archive',
@@ -287,7 +287,7 @@ $router->addRoute('blogArchive', $route);
                 <code>/blog/2006/4/24/42</code> となります。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class BlogAdminController extends Zend_Controller_Action
 {
     /**

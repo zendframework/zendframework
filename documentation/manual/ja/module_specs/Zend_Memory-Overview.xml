@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15215 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.memory.overview">
     <title>概要</title>
 
@@ -39,7 +39,7 @@
                 指定したバックエンドオプションでメモリマネージャオブジェクトの
                 インスタンスを作成します。
             </para>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $backendOptions = array(
     'cache_dir' => './tmp/' // スワップしたメモリブロックを配置するディレクトリ
 );
@@ -112,7 +112,7 @@ $loadedFiles[$index3]->value[$charIndex] = '_';
             <para>
                 この属性 <code>value</code> は、オブジェクトのプロパティとして扱うことができます。
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->create($data);
 
 echo $memObject->value;

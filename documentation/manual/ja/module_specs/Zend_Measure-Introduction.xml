@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15215 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.measure.introduction">
 
     <title>導入</title>
@@ -25,7 +25,7 @@
             変換は、同じ型 (重さ、面積、温度、速度など) の単位間でのみ行うことができます。
             型が違う場合は変換できません。
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('en');
 $unit = new Zend_Measure_Length(100, Zend_Measure_Length::METER, $locale);
 
@@ -54,7 +54,7 @@ echo $unit->convertTo(Zend_Measure_Length::YARD);
             <code>Length::METER</code> という記法を使用する必要があります。
             表示単位は <code>m</code> です。
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 echo Zend_Measure_Length::STANDARD;  // 出力は 'Length::METER' となります
 echo Zend_Measure_Length::KILOMETER; // 出力は 'Length::KILOMETER' となります
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15571 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="performance.database">
     <title>Zend_Dbパフォーマンス</title>
 
@@ -92,7 +92,7 @@
                 と <methodname>array_walk</methodname> の組み合わせを利用してください。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // $adapter はDBアダプターです。Zend_Db_Tableでは、
 // $this->getAdapter() を使ってそれを参照します
 $sql = vsprintf(

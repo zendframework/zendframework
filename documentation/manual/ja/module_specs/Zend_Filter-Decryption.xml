@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <sect2 id="zend.filter.set.decrypt">
     <title>Decrypt</title>
     <para>
@@ -34,7 +34,7 @@
             オプションを指定しさえすれば、復号は暗号化と同じくらい単純なことです。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // デフォルト設定の blowfish を使用します
 $filter = new Zend_Filter_Decrypt('myencryptionkey');
 
@@ -90,7 +90,7 @@ print $decrypted;
             </listitem>
         </itemizedlist>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // openssl を使用し、秘密鍵を指定します
 $filter = new Zend_Filter_Decrypt(array(
     'adapter' => 'openssl',
@@ -115,7 +115,7 @@ $filter->setEnvelopeKey(array(
             そのために使用するのが <code>setPassphrase()</code> メソッドです。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // openssl を使用し、秘密鍵を指定します
 $filter = new Zend_Filter_Decrypt(array(
     'adapter' => 'openssl',
@@ -135,7 +135,7 @@ $filter->setPassphrase('mypassphrase');
             暗号化したコンテンツの復号を行う完全な例は、このようになります。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // openssl を使用し、秘密鍵を指定します
 $filter = new Zend_Filter_Decrypt(array(
     'adapter' => 'openssl',

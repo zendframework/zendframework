@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15341 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.db.table.rowset">
 
     <title>Zend_Db_Table_Rowset</title>
@@ -34,7 +34,7 @@
 
             <title>行セットの取得の例</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugs   = new Bugs();
 $rowset = $bugs->fetchAll("bug_status = 'NEW'");
 ]]></programlisting>
@@ -65,7 +65,7 @@ $rowset = $bugs->fetchAll("bug_status = 'NEW'");
 
             <title>行セット内の行の数を数える</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $rowset   = $bugs->fetchAll("bug_status = 'FIXED'");
 
 $rowCount = count($rowset);
@@ -89,7 +89,7 @@ if ($rowCount > 0) {
                 これは、行セットに含まれる行数がひとつである場合に最適です。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugs   = new Bugs();
 $rowset = $bugs->fetchAll("bug_id = 1");
 $row    = $rowset->current();
@@ -114,7 +114,7 @@ $row    = $rowset->current();
                 オブジェクトとなり、これがテーブルの各行に対応します。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugs = new Bugs();
 
 // テーブルのすべてのレコードを取得します
@@ -152,7 +152,7 @@ foreach ($rowset as $row) {
                 <code>count()</code> を使って結果の行数を確認してから移動するようにしましょう。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugs = new Bugs();
 
 // テーブルのすべてのレコードを取得します
@@ -184,7 +184,7 @@ $row9->save();
                 例を示します。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugs = new Bugs();
 
 // テーブルのすべてのレコードを取得します
@@ -220,7 +220,7 @@ $row9->save();
 
             <title>toArray() の使用法</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugs   = new Bugs();
 $rowset = $bugs->fetchAll();
 
@@ -265,7 +265,7 @@ foreach ($rowsetArray as $rowArray) {
                 行セットオブジェクトのバイトストリームを含む文字列を作成します。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugs   = new Bugs();
 $rowset = $bugs->fetchAll();
 
@@ -295,7 +295,7 @@ $serializedRowset = serialize($rowset);
                 (たとえば従属テーブルに対するクエリなど) も実行できません。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $rowsetDisconnected = unserialize($serializedRowset);
 
 // これでオブジェクトのプロパティを使用できますが、読み込み専用です
@@ -332,7 +332,7 @@ echo $row->bug_description;
 
             <title>生きたデータとしての行セットの復活</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $rowset = unserialize($serializedRowset);
 
 $bugs = new Bugs();
@@ -371,7 +371,7 @@ $row->save();
 
         <example id="zend.db.table.rowset.extending.example">
             <title>独自の行セットクラスの指定</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class MyRowset extends Zend_Db_Table_Rowset_Abstract
 {
     // ...独自の処理
@@ -400,7 +400,7 @@ $bugs = new Bugs(array('rowsetClass' => 'MyRowset'));
 
         <example id="zend.db.table.rowset.extending.example-aggregate">
             <title>行セットクラスに新しいメソッドを追加する例</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class MyBugsRowset extends Zend_Db_Table_Rowset_Abstract
 {
     /**

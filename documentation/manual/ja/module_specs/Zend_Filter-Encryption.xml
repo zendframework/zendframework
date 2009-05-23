@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <sect2 id="zend.filter.set.encrypt">
     <title>Encrypt</title>
     <para>
@@ -16,7 +16,7 @@
         フィルタを初期化する際に、どのアダプタを使うかを選ばなければなりません。
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 // Mcrypt アダプタを使用します
 $filter1 = new Zend_Filter_Encrypt(array('adapter' => 'mcrypt'));
 
@@ -30,7 +30,7 @@ $filter2 = new Zend_Filter_Encrypt(array('adapter' => 'openssl'));
         メソッドで、実際に設定されているアダプタを取得することができます。
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 // Mcrypt アダプタを使用します
 $filter = new Zend_Filter_Encrypt();
 $filter->setAdapter('openssl');
@@ -151,7 +151,7 @@ $filter->setAdapter('openssl');
             </para>
         </note>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // デフォルト設定の blowfish を使用します
 $filter = new Zend_Filter_Encrypt('myencryptionkey');
 
@@ -201,7 +201,7 @@ print $encrypted;
             メソッドで取得あるいは設定することができます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // openssl を使用し、秘密鍵を指定します
 $filter = new Zend_Filter_Encrypt(array(
     'adapter' => 'openssl',
@@ -228,7 +228,7 @@ $filter->setPublicKey(array(
             公開鍵だけではなく (暗号化された鍵を復号するための) パスフレーズも必要となります。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // openssl を使用し、秘密鍵を指定します
 $filter = new Zend_Filter_Encrypt(array(
     'adapter' => 'openssl',
@@ -258,7 +258,7 @@ $filter->setPassphrase('mypassphrase');
             <code>OpenSSL</code> でコンテンツの暗号化を行う完全な例は、このようになります。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // openssl を使用し、秘密鍵を指定します
 $filter = new Zend_Filter_Encrypt(array(
     'adapter' => 'openssl',

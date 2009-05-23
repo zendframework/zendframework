@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.http.cookies">
     <title>Zend_Http_Cookie および Zend_Http_CookieJar</title>
 
@@ -87,7 +87,7 @@
             </itemizedlist>
             <example id="zend.http.cookies.cookie.instantiating.example-1">
                <title>Zend_Http_Cookie のインスタンスの作成</title>
-               <programlisting role="php"><![CDATA[
+               <programlisting language="php"><![CDATA[
 // まずはコンストラクタを使用します。このクッキーの有効期限は二時間です。
 $cookie = new Zend_Http_Cookie('foo',
                                'bar',
@@ -122,7 +122,7 @@ $cookie = Zend_Http_Cookie::fromString('foo=bar; secure;',
             この値は URL エンコードされ、そのまま Cookie ヘッダとして使用できるようになります。
             <example id="zend.http.cookies.cookie.instantiating.example-2">
                <title>Zend_Http_Cookie オブジェクトの文字列化</title>
-               <programlisting role="php"><![CDATA[
+               <programlisting language="php"><![CDATA[
 // 新しいクッキーを作成します。
 $cookie = new Zend_Http_Cookie('foo',
                                'two words',
@@ -205,7 +205,7 @@ echo $cookie;
         <para>
             <example id="zend.http.cookies.cookie.accessors.example-1">
                 <title>Zend_Http_Cookie のゲッターメソッドの使用法</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // まずクッキーを作成します
 $cookie =
     Zend_Http_Cookie::fromString('foo=two+words; ' +
@@ -270,7 +270,7 @@ echo ($cookie->isSessionCookie() ? 'Yes' : 'No');
             </itemizedlist>
             <example id="zend.http.cookies.cookie.matching.example-1">
                 <title>クッキーがマッチするかどうかの確認</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // まずクッキーオブジェクトを作成します。これはセキュアなセッションクッキーです。
 $cookie = Zend_Http_Cookie::fromString('foo=two+words; ' +
                                        'domain=.example.com; ' +

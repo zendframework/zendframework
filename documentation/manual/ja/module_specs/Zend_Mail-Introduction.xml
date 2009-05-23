@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15215 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.mail.introduction">
 
     <title>導入</title>
@@ -28,7 +28,7 @@
                 を用いて送信するには、次のようにします。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 $mail->setBodyText('This is the text of the mail.');
 $mail->setFrom('somebody@example.com', 'Some Sender');
@@ -68,7 +68,7 @@ $mail->send();
             流れるようなインターフェイス形式でコールすることもできます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 $mail->setBodyText('This is the text of the mail.')
     ->setFrom('somebody@example.com', 'Some Sender')
@@ -105,7 +105,7 @@ $mail->setBodyText('This is the text of the mail.')
                 関数の Return-Path を変更する方法を示すものです。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $tr = new Zend_Mail_Transport_Sendmail('-freturn_to_me@example.com');
 Zend_Mail::setDefaultTransport($tr);
 

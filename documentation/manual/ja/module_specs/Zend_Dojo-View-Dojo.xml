@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <sect2 id="zend.dojo.view.dojo">
     <title>dojo() ビューヘルパー</title>
 
@@ -46,7 +46,7 @@
             ビューオブジェクトを取得して次のコードを実行しましょう。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
 ]]></programlisting>
 
@@ -58,7 +58,7 @@ $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
             'custom' モジュールに格納します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php // FilteringSelect 用のデータストアの設定 ?>
 <div dojoType="custom.PairedStore" jsId="stateStore"
     url="/data/autocomplete/type/state/format/ajax"
@@ -82,7 +82,7 @@ $this->dojo()->enable()
             有効ならさらに設定を行ってそれを使用します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php echo $this->doctype() ?>
 <html>
 <head>
@@ -161,7 +161,7 @@ $this->dojo()->enable()
                 <code>setUseDeclarative()</code> をコールします。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
 ]]></programlisting>
 
@@ -170,7 +170,7 @@ Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
                 <code>setUseProgrammatic()</code> をコールします。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend_Dojo_View_Helper_Dojo::setUseProgrammatic();
 ]]></programlisting>
 
@@ -181,7 +181,7 @@ Zend_Dojo_View_Helper_Dojo::setUseProgrammatic();
                 dijit を装飾するための javascript は生成されません。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend_Dojo_View_Helper_Dojo::setUseProgrammatic(-1);
 ]]></programlisting>
         </example>
@@ -195,7 +195,7 @@ Zend_Dojo_View_Helper_Dojo::setUseProgrammatic(-1);
             テーマを選択するにはモジュールパスにそれを渡します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view->dojo()->addStylesheetModule('dijit.themes.tundra');
 ]]></programlisting>
 
@@ -211,7 +211,7 @@ $view->dojo()->addStylesheetModule('dijit.themes.tundra');
             もっともよくある例は、body に指定するものです。
         </para>
 
-        <programlisting role="html"><![CDATA[
+        <programlisting language="html"><![CDATA[
 <body class="tundra">
 ]]></programlisting>
     </sect3>
@@ -266,7 +266,7 @@ $view->dojo()->addStylesheetModule('dijit.themes.tundra');
             これで必要なレイヤーへのパスを追加します。
         </para>
 
-        <programlisting role="html"><![CDATA[
+        <programlisting language="html"><![CDATA[
 $view->dojo()->addLayer('/js/foo/foo.js');
 ]]></programlisting>
 

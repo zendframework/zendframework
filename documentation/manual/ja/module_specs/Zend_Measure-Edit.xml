@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.measure.edit">
 
     <title>計測値の操作</title>
@@ -75,7 +75,7 @@
 
         <example id="zend.measure.edit.convert.example-1">
             <title>変換</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de');
 $mystring = "1.234.567,89";
 $unit = new Zend_Measure_Weight($mystring,'POND', $locale);
@@ -110,7 +110,7 @@ print "Ton:".$unit->convertTo(Zend_Measure_Weight::TON, 3);
         <para>
             <example id="zend.measure.edit.add.example-1">
                 <title>単位の加算</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // オブジェクトを定義します
 $unit = new Zend_Measure_Length(200, Zend_Measure_Length::CENTIMETER);
 $unit2 = new Zend_Measure_Length(1, Zend_Measure_Length::METER);
@@ -139,7 +139,7 @@ echo $sum; // "300 cm" と出力します
                 <para>
                     減算も、加算と同じように動作します。
                 </para>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // オブジェクトを定義します
 $unit = new Zend_Measure_Length(200, Zend_Measure_Length::CENTIMETER);
 $unit2 = new Zend_Measure_Length(1, Zend_Measure_Length::METER);
@@ -167,7 +167,7 @@ echo $sum;
         <para>
             <example id="zend.measure.edit.equal.example-1">
                 <title>異なる計測値</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // 値を定義します
 $unit = new Zend_Measure_Length(100, Zend_Measure_Length::CENTIMETER);
 $unit2 = new Zend_Measure_Length(1, Zend_Measure_Length::METER);
@@ -181,7 +181,7 @@ if ($unit->equals($unit2)) {
             </example>
             <example id="zend.measure.edit.equal.example-2">
                 <title>同一の計測値</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // 値を定義します
 $unit = new Zend_Measure_Length(100, Zend_Measure_Length::CENTIMETER);
 $unit2 = new Zend_Measure_Length(1, Zend_Measure_Length::METER);
@@ -214,7 +214,7 @@ if ($unit->equals($unit2)) {
         <para>
             <example id="zend.measure.edit.compare.example-1">
                 <title>差</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $unit = new Zend_Measure_Length(100, Zend_Measure_Length::CENTIMETER);
 $unit2 = new Zend_Measure_Length(1, Zend_Measure_Length::METER);
 $unit3 = new Zend_Measure_Length(1.2, Zend_Measure_Length::METER);
@@ -240,7 +240,7 @@ print "Greater:".$unit3->compare($unit2);
         <para>
             <example id="zend.measure.edit.changevalue.example-1">
                 <title>値の変更</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
 $unit = new Zend_Measure_Length(1,Zend_Measure_Length::METER);
 
@@ -269,7 +269,7 @@ echo $unit;
 
         <example id="zend.measure.edit.changetype.example-1">
             <title>型の変更</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $unit = new Zend_Measure_Length(1,Zend_Measure_Length::METER);
 echo $unit; // "1 m" と出力します
 

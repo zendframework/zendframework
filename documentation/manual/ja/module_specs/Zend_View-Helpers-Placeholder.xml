@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15617 -->
 <sect3 id="zend.view.helpers.initial.placeholder">
     <title>Placeholder ヘルパー</title>
 
@@ -23,7 +23,7 @@
             これを処理するなり、単純に echo するなりして使用できます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php $this->placeholder('foo')->set("Some text for later") ?>
 
 <?php
@@ -83,12 +83,12 @@
             </para></listitem>
         </itemizedlist>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <!-- 最初のビュースクリプト -->
 <?php $this->placeholder('foo')->exchangeArray($this->data) ?>
 ]]></programlisting>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <!-- 後で使用するビュースクリプト -->
 <?php
 $this->placeholder('foo')->setPrefix("<ul>\n    <li>")
@@ -111,7 +111,7 @@ $this->placeholder('foo')->setPrefix("<ul>\n    <li>")
             キーへのアクセスは、オブジェクトのプロパティか配列のキーのいずれでも可能です。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php $this->placeholder('foo')->bar = $this->data ?>
 <?php echo $this->placeholder('foo')->bar ?>
 
@@ -174,7 +174,7 @@ echo $foo['bar'];
             </para></listitem>
         </itemizedlist>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <!-- デフォルトのキャプチャは追記モードです -->
 <?php $this->placeholder('foo')->captureStart();
 foreach ($this->data as $datum): ?>
@@ -188,7 +188,7 @@ foreach ($this->data as $datum): ?>
 <?php echo $this->placeholder('foo') ?>
 ]]></programlisting>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <!-- 特定のキーにキャプチャします -->
 <?php $this->placeholder('foo')->captureStart('SET', 'data');
 foreach ($this->data as $datum): ?>

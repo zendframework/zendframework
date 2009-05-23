@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15346 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.translate.adapter">
 
     <title>Zend_Translate のアダプタ</title>
@@ -320,7 +320,7 @@
             次のコードは、独自のアダプタクラスを実装する例を示すものです。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 try {
     $translate = new Zend_Translate('Company_Translate_Adapter_MyFormat',
                                     '/path/to/translate.xx',
@@ -357,7 +357,7 @@ try {
             <code>removeCache()</code> も用意されています。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $cache = Zend_Cache::factory('Core',
                              'File',
                              $frontendOptions,

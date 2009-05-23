@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.view.controllers">
     <title>コントローラスクリプト</title>
 
@@ -20,7 +20,7 @@
             通常は、ビューインスタンスのプロパティへの代入を行います。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view = new Zend_View();
 $view->a = "Hay";
 $view->b = "Bee";
@@ -38,7 +38,7 @@ $view->c = "Sea";
             上でひとつひとつプロパティを代入していたのと同じように動作します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view = new Zend_View();
 
 // キー/値 の組み合わせからなる配列を作成します。
@@ -64,7 +64,7 @@ $view->assign((array) $obj);
             この場合は最初の引数が変数名、そしてその次に変数の値を指定します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view = new Zend_View();
 $view->assign('a', "Hay");
 $view->assign('b', "Bee");
@@ -87,7 +87,7 @@ $view->assign('c', "Sea");
             する必要があります。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view = new Zend_View();
 $view->a = "Hay";
 $view->b = "Bee";
@@ -116,7 +116,7 @@ echo $view->render('someView.php');
             setScriptPath() メソッドを使用します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view = new Zend_View();
 $view->setScriptPath('/path/to/app/views');
 ]]></programlisting>
@@ -135,7 +135,7 @@ $view->setScriptPath('/path/to/app/views');
             を作成し、その他のビューはそのままにしておくことが可能となります。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view = new Zend_View();
 $view->addScriptPath('/path/to/app/views');
 $view->addScriptPath('/path/to/custom/');
@@ -161,7 +161,7 @@ $view->addScriptPath('/path/to/custom/');
                 たとえば、次のようなスクリプトが問題を引き起こします。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // $_GET['foo'] == '../../../etc'
 $view->addScriptPath($_GET['foo']);
 $view->render('passwd');

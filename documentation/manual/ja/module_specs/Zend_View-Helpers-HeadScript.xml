@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15617 -->
 <sect3 id="zend.view.helpers.initial.headscript">
     <title>HeadScript ヘルパー</title>
 
@@ -55,7 +55,7 @@
 
         <example id="zend.view.helpers.initial.headscript.conditional">
             <title>Headscript で条件コメントを使う例</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // スクリプトを追加します
 $this->headScript()->appendFile(
     '/js/prototype.js',
@@ -130,7 +130,7 @@ $this->headScript()->appendFile(
             <code>setAllowArbitraryAttributes()</code> メソッドを使用します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $this->headScript()->setAllowArbitraryAttributes(true);
 ]]></programlisting>
     </note>
@@ -144,7 +144,7 @@ $this->headScript()->setAllowArbitraryAttributes(true);
             スクリプト自体を指定することも可能です。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // スクリプトを追加します
 $this->headScript()->appendFile('/js/prototype.js')
                    ->appendScript($onloadScript);
@@ -157,7 +157,7 @@ $this->headScript()->appendFile('/js/prototype.js')
             といったディレクティブです。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // スクリプトの順番を指定します
 
 // 特定の位置を指定し、確実に最後に読み込まれるようにします
@@ -175,7 +175,7 @@ $this->headScript()->prependFile('/js/prototype.js');
             あとはレイアウトスクリプトでそれを出力するだけです。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php echo $this->headScript() ?>
 ]]></programlisting>
     </example>
@@ -190,7 +190,7 @@ $this->headScript()->prependFile('/js/prototype.js');
             <code>HeadScript</code> は、スタックにキャプチャすることでこれを実現します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php $this->headScript()->captureStart() ?>
 var action = '<?php echo $this->baseUrl ?>';
 $('foo_form').action = action;

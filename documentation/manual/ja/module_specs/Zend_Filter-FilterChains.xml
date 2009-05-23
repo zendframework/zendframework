@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.filter.filter_chains">
 
     <title>フィルタチェイン</title>
@@ -12,7 +12,7 @@
         <classname>Zend_Filter</classname> は、複数のフィルタを連結する機能を提供しています。
         以下のコードで、二つのフィルタをユーザ名に対して適用する方法を説明します。
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <// フィルタチェインを作成し、そこにフィルタを追加します
 $filterChain = new Zend_Filter();
 $filterChain->addFilter(new Zend_Filter_Alpha())

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15207 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.file.transfer.migration">
 
     <title>以前のバージョンからの移行</title>
@@ -53,7 +53,7 @@
                 <example id="zend.file.transfer.migration.fromonesixonetooneseven.validators.rename.example">
                     <title>rename フィルタの 1.6 から 1.7 での変更点</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 // 1.6 の例
 $upload = new Zend_File_Transfer_Adapter_Http();
 $upload->addFilter('Rename',
@@ -88,7 +88,7 @@ $upload->addFilter('Rename',
                 <example id="zend.file.transfer.migration.fromonesixonetooneseven.validators.count.example">
                     <title>count バリデータの 1.6 から 1.7 での変更点</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 // 1.6 の例
 $upload = new Zend_File_Transfer_Adapter_Http();
 $upload->addValidator('Count',
@@ -123,7 +123,7 @@ $upload->addValidator('Count',
                 <example id="zend.file.transfer.migration.fromonesixonetooneseven.validators.extension.example">
                     <title>extension バリデータの 1.6 から 1.7 での変更点</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 // 1.6 の例
 $upload = new Zend_File_Transfer_Adapter_Http();
 $upload->addValidator('Extension',
@@ -167,7 +167,7 @@ $upload->addValidator('Extension',
                 <example id="zend.file.transfer.migration.fromonesixonetooneseven.validators.filessize.example">
                     <title>filessize バリデータの 1.6 から 1.7 での変更点</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 // 1.6 の例
 $upload = new Zend_File_Transfer_Adapter_Http();
 $upload->addValidator('FilesSize',
@@ -209,7 +209,7 @@ $upload->setUseByteSting(true); // set flag
                 <example id="zend.file.transfer.migration.fromonesixonetooneseven.validators.hash.example">
                     <title>hash バリデータの 1.6 から 1.7 での変更点</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 // 1.6 の例
 $upload = new Zend_File_Transfer_Adapter_Http();
 $upload->addValidator('Hash',
@@ -246,7 +246,7 @@ $upload->addValidator('Hash',
                 <example id="zend.file.transfer.migration.fromonesixonetooneseven.validators.imagesize.example">
                     <title>imagesize バリデータの 1.6 から 1.7 での変更点</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 // 1.6 の例
 $upload = new Zend_File_Transfer_Adapter_Http();
 $upload->addValidator('ImageSize',
@@ -284,7 +284,7 @@ $upload->addValidator('ImageSize',
                 <example id="zend.file.transfer.migration.fromonesixonetooneseven.validators.size.example">
                     <title>size バリデータの 1.6 から 1.7 での変更点</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 // 1.6 の例
 $upload = new Zend_File_Transfer_Adapter_Http();
 $upload->addValidator('Size',
@@ -339,7 +339,7 @@ $upload->addValidator('Size',
             <example id="zend.file.transfer.migration.fromonesixonetoonesixtwo.example">
                 <title>ファイルバリデータを 1.6.1 から 1.6.2 に移行する方法</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // 1.6.1 での例
 $upload = new Zend_File_Transfer_Adapter_Http();
 $upload->addValidator('FilesSize', array('1B', '100kB'));

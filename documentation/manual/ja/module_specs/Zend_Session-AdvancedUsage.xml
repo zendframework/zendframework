@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15346 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.session.advanced_usage">
 
     <title>高度な使用法</title>
@@ -24,7 +24,7 @@
 
             <title>グローバルセッションの開始</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend_Session::start();
 ]]></programlisting>
 
@@ -53,7 +53,7 @@ Zend_Session::start();
                     <code>php.ini</code> でこの設定が有効になっている、かつそれを無効にすることができない
                     という場合は、<code>.htaccess</code> ファイル (通常は HTML のドキュメントルートにあります)
                     に以下の内容を追加します。
-                    <programlisting role="httpd.conf"><![CDATA[
+                    <programlisting language="httpd.conf"><![CDATA[
 php_value session.auto_start 0
 ]]></programlisting>
                 </para>
@@ -161,7 +161,7 @@ php_value session.auto_start 0
 
             <title>セッション名前空間のロック</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $userProfileNamespace = new Zend_Session_Namespace('userProfileNamespace');
 
 // このセッションに読み取り専用ロックをかけます
@@ -194,7 +194,7 @@ if ($userProfileNamespace->isLocked()) {
 
             <title>有効期限切れの例</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $s = new Zend_Session_Namespace('expireAll');
 $s->a = 'apple';
 $s->p = 'pear';
@@ -245,7 +245,7 @@ $s->setExpirationSeconds(60);
                 この場合は、表示されている質問に 300 秒以内に答えることになります。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // ...
 // 質問を表示するコントローラ
 $testSpace = new Zend_Session_Namespace('testSpace');
@@ -260,7 +260,7 @@ $testSpace->accept_answer = true;
                 時間内に回答したかどうかをもとにして、回答を受け付けるかどうかを判断しています。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // ...
 // 回答を処理するコントローラ
 $testSpace = new Zend_Session_Namespace('testSpace');
@@ -297,7 +297,7 @@ else {
 
             <title>セッション名前空間へのアクセスを単一のインスタンスに制限する</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // 名前空間のインスタンスを作成します
 $authSpaceAccessor1 = new Zend_Session_Namespace('Zend_Auth');
 
@@ -358,7 +358,7 @@ try {
                 問題の再現手順は、このようになります。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $sessionNamespace = new Zend_Session_Namespace();
 $sessionNamespace->array = array();
 
@@ -377,7 +377,7 @@ echo $sessionNamespace->array['testKey'];
                 可能なら、先に配列のすべての値を設定してからセッションに格納するようにすればこの問題を回避できます。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $sessionNamespace = new Zend_Session_Namespace('Foo');
 $sessionNamespace->array = array('a', 'b', 'c');
 ]]></programlisting>
@@ -399,7 +399,7 @@ $sessionNamespace->array = array('a', 'b', 'c');
                 修正したコピーを再度代入してもとの配列を上書きします。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $sessionNamespace = new Zend_Session_Namespace();
 
 // 配列を代入します
@@ -428,7 +428,7 @@ echo $sessionNamespace->array['fruit']; // prints "peach"
                 間接的にアクセスするようにします。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $myNamespace = new Zend_Session_Namespace('myNamespace');
 $a = array(1, 2, 3);
 $myNamespace->someArray = array( &$a );
@@ -494,7 +494,7 @@ echo $myNamespace->someArray['foo']; // "bar" と表示されます
 
             <title>PHPUnit で Zend_Session を使用したコードをテストする例</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // testing setExpirationSeconds()
 $script = 'SessionTestHelper.php';
 $s = new Zend_Session_Namespace('space');

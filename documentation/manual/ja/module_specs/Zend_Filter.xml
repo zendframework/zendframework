@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15343 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.filter.introduction">
 
     <title>導入</title>
@@ -60,7 +60,7 @@
             以下の例は、アンパサンド (<code>&amp;</code>) およびダブルクォート (<code>&quot;</code>)
             の二つの入力データに対してフィルタを適用するものです。
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $htmlEntities = new Zend_Filter_HtmlEntities();
 
 echo $htmlEntities->filter('&'); // &amp;
@@ -85,7 +85,7 @@ echo $htmlEntities->filter('"'); // &quot;
             <code>get()</code> メソッドは自動的にクラスを読み込んでそのインスタンスを作成し、
             指定した入力に対して <code>filter()</code> メソッドを適用します。
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 echo Zend_Filter::get('&', 'HtmlEntities');
 ]]></programlisting>
 
@@ -95,7 +95,7 @@ echo Zend_Filter::get('&', 'HtmlEntities');
             フィルタクラスのコンストラクタにオプションを指定する必要がある場合は、
             それを配列で渡すことができます。
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 echo Zend_Filter::get('"', 'HtmlEntities', array(ENT_QUOTES));
 ]]></programlisting>
 

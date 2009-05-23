@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15343 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.validate.introduction">
 
     <title>導入</title>
@@ -73,7 +73,7 @@
         <para>
             以下の例では、電子メールアドレスの検証方法を説明します。
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_EmailAddress();
 
 if ($validator->isValid($email)) {
@@ -120,7 +120,7 @@ if ($validator->isValid($email)) {
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_StringLength(8);
 
 $validator->setMessage(
@@ -140,7 +140,7 @@ if (!$validator->isValid('word')) {
             複数のメッセージを <code>setMessages()</code> メソッドで設定することもできます。
             その場合の引数は、キー/メッセージ のペアの配列です。
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_StringLength(8, 12);
 
 $validator->setMessages( array(
@@ -158,7 +158,7 @@ $validator->setMessages( array(
             これは、<code>isValid()</code> の引数として渡した値を返します。
             その他のプロパティについては、バリデーションクラスによって異なります。
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 require_once 'Zend/Validate/StringLength.php';
 
 $validator = new Zend_Validate_StringLength(8, 12);
@@ -191,7 +191,7 @@ if (!validator->isValid('word')) {
             <code>is()</code> メソッドは自動的にクラスを読み込んでそのインスタンスを作成し、
             指定した入力に対して <code>isValid()</code> メソッドを適用します。
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 if (Zend_Validate::is($email, 'EmailAddress')) {
     // email は妥当な形式です
 }
@@ -203,7 +203,7 @@ if (Zend_Validate::is($email, 'EmailAddress')) {
             バリデータクラスのコンストラクタにオプションを指定する必要がある場合は、
             それを配列で渡すことができます。
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 require_once 'Zend/Validate.php';
 
 if (Zend_Validate::is($value, 'Between', array(1, 12))) {
@@ -245,7 +245,7 @@ if (Zend_Validate::is($value, 'Between', array(1, 12))) {
             <code>getTranslator()</code> メソッドは、設定されているインスタンスを返します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_StringLength(8, 12);
 $translate = new Zend_Translate(
     'array',
@@ -264,7 +264,7 @@ $validator->setTranslator($translate);
             個々のバリデータクラスで手動で翻訳器を設定せずに済むのでコードがシンプルになります。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate(
     'array',
     array(Zend_Validate_StringLength::TOO_SHORT => 'Translated \'%value%\''),
@@ -287,7 +287,7 @@ Zend_Validate::setDefaultTranslator($translate);
             で現在の値を取得することができます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_StringLength(8, 12);
 if (!$validator->isTranslatorDisabled()) {
     $validator->setDisableTranslator();

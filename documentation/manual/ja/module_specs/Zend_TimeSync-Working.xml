@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15346 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.timesync.working">
 
     <title>Zend_TimeSync の動作</title>
@@ -31,7 +31,7 @@
             単に時刻を取得したいタイムサーバを指定するだけでいいのです。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $server = new Zend_TimeSync('0.pool.ntp.org');
 
 print $server->getDate()->getIso();
@@ -74,7 +74,7 @@ print $server->getDate()->getIso();
             後から <code>addServer()</code> メソッドでタイムサーバを追加するかのいずれかです。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $server = new Zend_TimeSync(array('0.pool.ntp.org',
                                   '1.pool.ntp.org',
                                   '2.pool.ntp.org'));
@@ -96,7 +96,7 @@ print $server->getDate()->getIso();
             初期化やタイムサーバの追加の際に 2 番目のパラメータで指定することもできます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $server = new Zend_TimeSync(array('generic'  => '0.pool.ntp.org',
                                   'fallback' => '1.pool.ntp.org',
                                   'reserve'  => '2.pool.ntp.org'));
@@ -131,7 +131,7 @@ print $server->getDate()->getIso();
             NTP しか使用しないのなら、先ほどまでの例のようにプロトコル指定を省略しても構いません。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $server = new Zend_TimeSync(array('generic'  => 'ntp:\\0.pool.ntp.org',
                                   'fallback' => 'ntp:\\1.pool.ntp.org',
                                   'reserve'  => 'ntp:\\2.pool.ntp.org'));
@@ -165,7 +165,7 @@ print $server->getDate()->getIso();
             ポートを指定しなかった場合は、<classname>Zend_TimeSync</classname> は標準のポートを使用します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $server = new Zend_TimeSync(array('generic'  => 'ntp:\\0.pool.ntp.org:200',
                                   'fallback' => 'ntp:\\1.pool.ntp.org'));
 $server->addServer('sntp:\\internal.myserver.com:399', 'additional');
@@ -203,7 +203,7 @@ print $server->getDate()->getIso();
             指定しなかった場合は、すべてのオプションを返します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 Zend_TimeSync::setOptions(array('timeout' => 3, 'myoption' => 'timesync'));
 $server = new Zend_TimeSync(array('generic'  => 'ntp:\\0.pool.ntp.org',
                                   'fallback' => 'ntp:\\1.pool.ntp.org'));
@@ -237,7 +237,7 @@ print "Timeout = " . Zend_TimeSync::getOptions('timeout');
             パラメータを省略した場合は、現在のタイムサーバを返します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $server = new Zend_TimeSync(array('generic'  => 'ntp:\\0.pool.ntp.org',
                                   'fallback' => 'ntp:\\1.pool.ntp.org'));
 $server->addServer('sntp:\\internal.myserver.com', 'additional');
@@ -257,7 +257,7 @@ $server = $server->setServer('additional');
             この情報を取得するには <code>getInfo()</code> メソッドを使用します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $server = new Zend_TimeSync(array('generic'  => 'ntp:\\0.pool.ntp.org',
                                   'fallback' => 'ntp:\\1.pool.ntp.org'));
 
@@ -280,7 +280,7 @@ print_r ($server->getInfo());
             発生した例外をすべて処理するには、次の例のようにします。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $serverlist = array(
         // 無効なサーバを指定します
         'invalid_a'  => 'ntp://a.foo.bar.org',

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15615 -->
+<!-- EN-Revision: 15617 -->
 <sect2 id="zend.validate.set.email_address">
 
     <title>メールアドレス</title>
@@ -19,7 +19,7 @@
     <para>
         基本的な使用法は、以下のようになります。
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_EmailAddress();
 if ($validator->isValid($email)) {
     // メールアドレスは正しい形式のようです
@@ -72,7 +72,7 @@ if ($validator->isValid($email)) {
         詳細は <classname>Zend_Validate_Hostname</classname> を参照ください。
         たとえば DNS ホスト名およびローカルホスト名のどちらも許可するには、次のようにします。
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_EmailAddress(
                     Zend_Validate_Hostname::ALLOW_DNS |
                     Zend_Validate_Hostname::ALLOW_LOCAL);
@@ -107,7 +107,7 @@ if ($validator->isValid($email)) {
         MX のチェックを有効にするには、<classname>Zend_Validate_EmailAddress</classname>
         コンストラクタの 2 番目のパラメータを渡します。
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_EmailAddress(Zend_Validate_Hostname::ALLOW_DNS,
                                             true);
 ]]></programlisting>
@@ -134,7 +134,7 @@ $validator = new Zend_Validate_EmailAddress(Zend_Validate_Hostname::ALLOW_DNS,
         無効にするには、<classname>Zend_Validate_EmailAddress</classname> が内部で保持している
         <classname>Zend_Validate_Hostname</classname> オブジェクトの設定を変更します。
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator->hostnameValidator->setValidateIdn(false);
 ]]></programlisting>
 
@@ -156,7 +156,7 @@ $validator->hostnameValidator->setValidateIdn(false);
         無効にするには、<classname>Zend_Validate_EmailAddress</classname> が内部で保持している
         <classname>Zend_Validate_Hostname</classname> オブジェクトの設定を変更します。
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator->hostnameValidator->setValidateTld(false);
 ]]></programlisting>
 

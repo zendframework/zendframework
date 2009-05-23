@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.controller.actionhelpers" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>アクションヘルパー</title>
 
@@ -52,7 +52,7 @@
                     そのヘルパーオブジェクトが返されます。
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $flashMessenger = $this->_helper->getHelper('FlashMessenger');
 $flashMessenger->addMessage('先ほどのリクエストで、あることをしました');
 ]]></programlisting>
@@ -64,7 +64,7 @@ $flashMessenger->addMessage('先ほどのリクエストで、あることをし
                     まるでブローカのプロパティであるかのようにヘルパーを操作できます。
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $flashMessenger = $this->_helper->FlashMessenger;
 $flashMessenger->addMessage('先ほどのリクエストで、あることをしました');
 ]]></programlisting>
@@ -79,7 +79,7 @@ $flashMessenger->addMessage('先ほどのリクエストで、あることをし
                     <code>addMessage()</code> をコールします。
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $this->_helper->FlashMessenger('先ほどのリクエストで、あることをしました');
 ]]></programlisting>
             </listitem>
@@ -111,7 +111,7 @@ $this->_helper->FlashMessenger('先ほどのリクエストで、あることを
             <code>addHelper</code> を使用します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 Zend_Controller_Action_HelperBroker::addHelper($helper);
 ]]></programlisting>
 
@@ -131,7 +131,7 @@ Zend_Controller_Action_HelperBroker::addHelper($helper);
                     パスを決定します。
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // My/Action/Helpers/ にある、名前が My_Action_Helpers で始まるヘルパーを追加します
 Zend_Controller_Action_HelperBroker::addPrefix('My_Action_Helpers');
 ]]></programlisting>
@@ -145,7 +145,7 @@ Zend_Controller_Action_HelperBroker::addPrefix('My_Action_Helpers');
                     これは、指定したディレクトリにある指定したプレフィックスのクラスを追加します。
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Plugins/Helpers/ にある、名前が Helper で始まるヘルパーを追加します
 Zend_Controller_Action_HelperBroker::addPath('./Plugins/Helpers',
                                              'Helper');
@@ -174,7 +174,7 @@ Zend_Controller_Action_HelperBroker::addPath('./Plugins/Helpers',
             を指定します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // 'redirector' ヘルパーがブローカに登録されているかどうかを調べます
 if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
     echo 'Redirector helper registered';
@@ -202,7 +202,7 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
             を指定します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // 'redirector' ヘルパーがブローカに登録されているかどうかを調べ、取得します
 if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
     $redirector =
@@ -222,7 +222,7 @@ $redirector =
             を指定します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // 'redirector' ヘルパーがブローカに登録されている場合にはそれを削除します
 if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
     Zend_Controller_Action_HelperBroker::removeHelper('redirector')
@@ -338,7 +338,7 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
             のエイリアスとなっているので、このようにして使用することができます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // /blog/view/item/id/42 にリダイレクトします
 $this->_helper->redirector('item', 'view', 'blog', array('id' => 42));
 ]]></programlisting>

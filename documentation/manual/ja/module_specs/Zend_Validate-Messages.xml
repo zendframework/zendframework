@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15615 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.validate.messages">
 
     <title>検証メッセージ</title>
@@ -503,7 +503,7 @@
         これは、検証に失敗したときにバリデータが返す可能性のあるメッセージを配列で返します。
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Alnum();
 $messages  = $validator->getMessageTemplates();
 ]]></programlisting>

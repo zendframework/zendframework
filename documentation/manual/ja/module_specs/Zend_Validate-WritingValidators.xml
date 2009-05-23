@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15615 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.validate.writing_validators">
 
     <title>バリデータの書き方</title>
@@ -59,7 +59,7 @@
             次の例は、非常に単純なバリデータの書き方を説明するものです。
             ここで定義している検証規則は非常に単純で、入力値が浮動小数点値かどうかのみを調べています。
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class MyValid_Float extends Zend_Validate_Abstract
 {
     const FLOAT = 'float';
@@ -118,7 +118,7 @@ class MyValid_Float extends Zend_Validate_Abstract
         <para>
             これらの原因に応じて、クラス内でメッセージへの変換が行われます。
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class MyValid_NumericBetween extends Zend_Validate_Abstract
 {
     const MSG_NUMERIC = 'msgNumeric';
@@ -211,7 +211,7 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
         <para>
             この検証規則を実装したクラスは、次のようになります。
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class MyValid_PasswordStrength extends Zend_Validate_Abstract
 {
     const LENGTH = 'length';

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.http.client.advanced">
     <title>Zend_Http_Client - 高度な使用法</title>
 
@@ -24,7 +24,7 @@
             'strictredirects' を TRUE に設定します。
             <example id="zend.http.client.redirections.example-1">
                 <title>301 や 302 のレスポンスに対する RFC 2616 準拠のリダイレクト</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // 厳格なリダイレクト
 $client->setConfig(array('strictredirects' => true));
 
@@ -47,7 +47,7 @@ $client->setConfig(array('strictredirects' => false));
             setCookie() メソッドを使用します。このメソッドにはいくつかの用法があります。
             <example id="zend.http.client.cookies.example-1">
                 <title>setCookie() によるクッキーの設定</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // 簡単でシンプルな方法: クッキーの名前と値を指定します。
 $client->setCookie('flavor', 'chocolate chips');
 
@@ -71,7 +71,7 @@ $client->setCookie($cookie);
             認証情報やセッション ID のクッキーを取得してから次のリクエストに進む場合などに便利です。
             <example id="zend.http.client.cookies.example-2">
                 <title>クッキーの持続化</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // クッキーの持続性を有効にし、ジャーに保存します
 $client->setCookieJar();
 
@@ -102,7 +102,7 @@ $client->request('GET');
             このメソッドには、さまざまな用法があります。それを以下の例で説明します。
             <example id="zend.http.client.custom_headers.example-1">
                 <title>独自のリクエストヘッダの設定</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // ひとつのヘッダを設定します。既存の値を上書きします。
 $client->setHeaders('Host', 'www.example.com');
 
@@ -123,7 +123,7 @@ $client->setHeaders('Cookie', array(
             その場合は、ヘッダの配列をパラメータとして指定します。
             <example id="zend.http.client.custom_headers.example-2">
                 <title>複数の独自リクエストヘッダの設定</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // 複数のヘッダを設定します。既存の値を上書きします。
 $client->setHeaders(array(
     'Host' => 'www.example.com',
@@ -161,7 +161,7 @@ $client->setHeaders(array(
             application/octet-stream となります。
             <example id="zend.http.client.file_uploads.example-1">
                 <title>setFileUpload によるファイルのアップロード</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // 任意のデータをファイルとしてアップロードします。
 $text = 'this is some plain text';
 $client->setFileUpload('some_text.txt', 'upload', $text, 'text/plain');
@@ -202,7 +202,7 @@ $client->request('POST');
             setRawData() 以外にも、別のメソッド setEncType() を使用することもできます。
             <example id="zend.http.client.raw_post_data.example-1">
                 <title>生の POST データの送信</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $xml = '<book>' .
        '  <title>海流の中の島々</title>' .
        '  <author>アーネスト・ヘミングウェイ</author>' .
@@ -240,7 +240,7 @@ $client->setRawData($xml)->setEncType('text/xml')->request('POST');
             (将来的にはダイジェスト認証もサポートする予定です)。
             <example id="zend.http.client.http_authentication.example-1">
                 <title>HTTP 認証用のユーザとパスワードの設定</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // ベーシック認証を使用します。
 $client->setAuth('shahar', 'myPassword!', Zend_Http_Client::AUTH_BASIC);
 
@@ -297,7 +297,7 @@ $client->setAuth('shahar', 'myPassword!');
         </para>
         <example id="zend.http.client.multiple_requests.example-1">
             <title>単一のクライアントによる連続したリクエストの実行</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // まず、クライアントのインスタンスを作成します。
 $client = new Zend_Http_Client('http://www.example.com/fetchdata.php', array(
     'keepalive' => true

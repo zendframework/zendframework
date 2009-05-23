@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15341 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.soap.client">
     <title>Zend_Soap_Client</title>
 
@@ -127,7 +127,7 @@
                         <code>SOAP_COMPRESSION_ACCEPT</code>や<code>SOAP_COMPRESSION_GZIP</code>、
                         <code>SOAP_COMPRESSION_DEFLATE</code>の組み合わせです。
                         下記のように使われるでしょう:
-                        <programlisting role="php"><![CDATA[
+                        <programlisting language="php"><![CDATA[
 // レスポンスの圧縮を受け付けます
 $client = new Zend_Soap_Client("some.wsdl",
   array('compression' => SOAP_COMPRESSION_ACCEPT));
@@ -161,7 +161,7 @@ $client = new Zend_Soap_Client("some.wsdl",
 
         <para>
             それを下記の例のように使います:
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 //****************************************************************
 //                サーバのコード
 //****************************************************************

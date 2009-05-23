@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15604 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.memory.memory-objects">
 
     <title>メモリオブジェクト</title>
@@ -12,7 +12,7 @@
         <para>
             移動可能なメモリオブジェクトを作成するには、メモリマネージャの
             <code>create([$data])</code> メソッドを使用します。
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->create($data);
 ]]></programlisting>
         </para>
@@ -33,7 +33,7 @@ $memObject = $memoryManager->create($data);
         <para>
             ロックされたメモリオブジェクトを作成するには、メモリマネージャの
             <code>createLocked([$data])</code> メソッドを使用します。
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->createLocked($data);
 ]]></programlisting>
         </para>
@@ -75,7 +75,7 @@ $memObject = $memoryManager->createLocked($data);
         <para>
             (移動可能な、あるいはロックされた) メモリコンテナの '<code>value</code>'
             プロパティを使用して、メモリオブジェクトのデータを扱います。
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->create($data);
 
 echo $memObject->value;
@@ -111,7 +111,7 @@ $memObject->value = substr($memObject->value, $start, $length);
 
             <title>getRef() メソッド</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 public function &getRef();
 ]]></programlisting>
 
@@ -139,7 +139,7 @@ public function &getRef();
                 これはアプリケーションから直接変更することになります。
                 つまり、データの内容を処理する際には <code>getRef()</code>
                 メソッドを使用するのがうまいやり方となります。
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->create($data);
 
 $value = &$memObject->getRef();
@@ -157,14 +157,14 @@ for ($count = 0; $count < strlen($value); $count++) {
 
             <title>touch() メソッド</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 public function touch();
 ]]></programlisting>
             <para>
                 <code>touch()</code> メソッドは
                 <code>getRef()</code> と同じように使用しなければなりません。
                 これは、オブジェクトの値が変更されたことを通知します。
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->create($data);
 ...
 
@@ -189,7 +189,7 @@ $memObject->touch();
 
             <title>lock() メソッド</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 public function lock();
 ]]></programlisting>
 
@@ -205,7 +205,7 @@ public function lock();
             <para>
                 オブジェクトをメモリ内にロックすることで、ロックを解除するまでは
                 <code>getRef()</code> メソッドの返す参照が有効であることが保証されます。
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $memObject1 = $memoryManager->create($data1);
 $memObject2 = $memoryManager->create($data2);
 ...
@@ -232,7 +232,7 @@ $memObject2->unlock();
 
             <title>unlock() メソッド</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 public function unlock();
 ]]></programlisting>
 
@@ -248,7 +248,7 @@ public function unlock();
 
             <title>isLocked() メソッド</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 public function isLocked();
 ]]></programlisting>
 

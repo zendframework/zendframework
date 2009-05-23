@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15341 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.gdata.introduction">
     <title>導入</title>
     <para>
@@ -234,7 +234,7 @@
             以下に例を示します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $ss = new Zend_Gdata_Spreadsheets();
 
 // Zend_Gdata_App_Spreadsheets_CellEntry を作成します
@@ -315,7 +315,7 @@ $entry->cell = $cell;
             クライアントオブジェクトに対する設定オプションを指定することができます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $client = new Zend_Http_Client();
 $client->setConfig( ...オプション... );
 
@@ -331,7 +331,7 @@ $gdata = new Zend_Gdata($client);
             は、必要なプロトコルのバージョンを指定してサーバの機能にアクセスする必要があります。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $client = new Zend_Http_Client();
 $client->setConfig( ...オプション... );
 
@@ -452,7 +452,7 @@ $gdata->setMinorProtocolVersion(null);
             <code>get</code> 関数もあります。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $query = new Zend_Gdata_Query();
 $query->setMaxResults(10);
 echo $query->getMaxResults();   // 10 を返します
@@ -464,7 +464,7 @@ echo $query->getMaxResults();   // 10 を返します
             つまり、パラメータの名前をクラスの仮想的なメンバとして扱うことができます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $query = new Zend_Gdata_Query();
 $query->maxResults = 10;
 echo $query->maxResults;        // 10 を返します
@@ -476,7 +476,7 @@ echo $query->maxResults;        // 10 を返します
             を使いまわす場合などに便利です。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $query = new Zend_Gdata_Query();
 $query->maxResults = 10;
 // ...フィードを取得します...
@@ -496,7 +496,7 @@ $gdata->resetParameters();      // すべてのパラメータを消去します
             このクラスのデフォルトは <classname>Zend_Gdata_Feed</classname> です。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $gdata = new Zend_Gdata();
 $query = new Zend_Gdata_Query(
         'http://www.blogger.com/feeds/blogID/posts/default');
@@ -524,7 +524,7 @@ $feed = $gdata->getFeed($query);
             この例は、フィードの次のページを取得する方法を示すものです。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 function getNextPage($feed) {
     $nextURL = $feed->getLink('next');
     if ($nextURL !== null) {
@@ -544,7 +544,7 @@ function getNextPage($feed) {
             この関数の使用法を、次の例で示します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $gdata = new Zend_Gdata();
 $query = new Zend_Gdata_Query(
         'http://www.blogger.com/feeds/blogID/posts/default');
@@ -570,7 +570,7 @@ $feed = $gdata->retrieveAllEntriesForFeed($gdata->getFeed($query));
             あるいはマジックメソッドを使用します。以下に例を示します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $gdata = new Zend_Gdata($client);
 $query = new Zend_Gdata_Query(
@@ -593,7 +593,7 @@ foreach ($feed as $entry) {
             エントリを取得したら、それを更新してサーバに保存することができます。以下に例を示します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $gdata = new Zend_Gdata($client);
 $query = new Zend_Gdata_Query(
@@ -636,7 +636,7 @@ foreach ($feed as $entry) {
             <code>insertEntry()</code> 関数に渡すこともできます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $gdata = new Zend_Gdata($authenticatedHttpClient);
 
 $entry = $gdata->newEntry();
@@ -677,7 +677,7 @@ echo 'この結果のエントリの <id> は、' . $entryResult->id->text;
             <code>$entry->delete()</code> をコールすることもできます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $gdata = new Zend_Gdata($authenticatedHttpClient);
 // Google Data のフィード
 $feedUri = ...;

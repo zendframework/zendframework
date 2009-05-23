@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.text.table.introduction">
     <title>Zend_Text_Table</title>
     <para>
@@ -135,7 +135,7 @@
             この例では、<classname>Zend_Text_Table</classname>
             でシンプルな表を作成するための方法を示します。
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $table = new Zend_Text_Table(array('columnWidths' => array(10, 20)));
 
 // シンプルな例
@@ -154,7 +154,7 @@ echo $table;
         <para>
             この結果は次のようになります。
         </para>
-        <programlisting role="text"><![CDATA[
+        <programlisting language="text"><![CDATA[
 ┌──────────┬────────────────────┐
 │Zend      │Framework           │
 └──────────┴────────────────────┘

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.console.getopt.rules">
     <title>Getopt の規則の宣言</title>
     <para>
@@ -39,7 +39,7 @@
         </para>
         <example id="zend.console.getopt.rules.short.example">
             <title>短い形式の構文の使用</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
 ]]></programlisting>
         </example>
@@ -100,7 +100,7 @@ $opts = new Zend_Console_Getopt('abp:');
         </para>
         <example id="zend.console.getopt.rules.long.example">
             <title>長い形式の構文の使用</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt(
   array(
     'apple|a'    => 'リンゴです。パラメータは不要です。',

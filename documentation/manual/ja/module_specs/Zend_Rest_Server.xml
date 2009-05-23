@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15235 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.rest.server">
     <title>Zend_Rest_Server</title>
 
@@ -18,7 +18,7 @@
         <example id="zend.rest.server.usage.example-1">
             <title>基本的な Zend_Rest_Server の使用法 - クラス</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $server = new Zend_Rest_Server();
 $server->setClass('My_Service_Class');
 $server->handle();
@@ -28,7 +28,7 @@ $server->handle();
         <example id="zend.rest.server.usage.example-2">
             <title>基本的な Zend_Rest_Server の使用法 - 関数</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 /**
  * Say Hello
  *

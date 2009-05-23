@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15341 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.view.helpers" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>ビューヘルパー</title>
 
@@ -132,7 +132,7 @@
                     これらの内容を簡単にまとめた例を示します。
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // '1' および '0' でチェック状態と未チェック状態を表します。これはチェックされていません
 echo $this->formCheckbox('foo');
 
@@ -310,7 +310,7 @@ echo $this->formCheckbox('foo',
             読み込みやインスタンス作成は、必要に応じて自動的に行われます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // ビュースクリプト内では、$this は Zend_View のインスタンスを指します。
 //
 // select の選択肢を、変数 $countries に
@@ -334,7 +334,7 @@ echo $this->formCheckbox('foo',
             ビュースクリプトの出力結果は、次のようになります。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <form action="action.php" method="post">
     <p><label>メールアドレス:
         <input type="text" name="email" value="you@example.com" size="32" />
@@ -389,7 +389,7 @@ echo $this->formCheckbox('foo',
             'Zend_View_Helper_' であると見なされます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view = new Zend_View();
 
 // パスを /path/to/more/helpers 、プレフィックスを 'My_View_Helper' と設定します
@@ -404,7 +404,7 @@ $view->setHelperPath('/path/to/more/helpers', 'My_View_Helper');
             新しいヘルパーを追加したりすることができるようになります。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view = new Zend_View();
 // /path/to/some/helpers をクラスプレフィックス 'My_View_Helper' で追加します
 $view->addHelperPath('/path/to/some/helpers', 'My_View_Helper');
@@ -485,7 +485,7 @@ $view->addHelperPath('/other/path/to/helpers', 'Your_View_Helper');
             <code>SpecialPurpose</code> ヘルパーのコードの例を示します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class My_View_Helper_SpecialPurpose extends Zend_View_Helper_Abstract
 {
     protected $_count = 0;
@@ -504,7 +504,7 @@ class My_View_Helper_SpecialPurpose extends Zend_View_Helper_Abstract
             <classname>Zend_View</classname> インスタンスの中でそれが持続します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // ビュースクリプト内では、$this は Zend_View インスタンスを指すことを覚えておきましょう。
 echo $this->specialPurpose();
 echo $this->specialPurpose();
@@ -514,7 +514,7 @@ echo $this->specialPurpose();
         <para>
             出力結果は、次のようになります。
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 'The Jerk' を 1 回見ました。
 'The Jerk' を 2 回見ました。
 'The Jerk' を 3 回見ました。
@@ -528,7 +528,7 @@ echo $this->specialPurpose();
             <code>setView($view)</code> メソッドを定義しなければなりません。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class My_View_Helper_ScriptPath
 {
     public $view;

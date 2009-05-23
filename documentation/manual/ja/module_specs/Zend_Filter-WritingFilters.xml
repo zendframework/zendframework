@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.filter.writing_filters">
 
     <title>フィルタの書き方</title>
@@ -22,7 +22,7 @@
     <para>
         以下の例で、独自のフィルタを作成する方法を説明します。
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class MyFilter implements Zend_Filter_Interface
 {
     public function filter($value)
@@ -39,7 +39,7 @@ class MyFilter implements Zend_Filter_Interface
     <para>
         このフィルタのインスタンスをフィルタチェインに追加するには、次のようにします。
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $filterChain = new Zend_Filter();
 $filterChain->addFilter(new MyFilter());
 ]]></programlisting>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15602 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.form.elements">
     <title>Zend_Form_Element を用いたフォーム要素の作成</title>
 
@@ -124,7 +124,7 @@
                 このクラスは、"My/Decorator/Label.php" というファイルで定義されることになります。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class My_Decorator_Label extends Zend_Form_Decorator_Abstract
 {
     protected $_placement = 'PREPEND';
@@ -170,7 +170,7 @@ class My_Decorator_Label extends Zend_Form_Decorator_Abstract
                 要素に指定してみましょう。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $element->addPrefixPath('My_Decorator', 'My/Decorator/', 'decorator');
 ]]></programlisting>
 
@@ -179,7 +179,7 @@ $element->addPrefixPath('My_Decorator', 'My/Decorator/', 'decorator');
                 すべてのデコレータがこのパスを考慮するようになります。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $form->addElementPrefixPath('My_Decorator', 'My/Decorator/', 'decorator');
 ]]></programlisting>
 
@@ -209,7 +209,7 @@ $form->addElementPrefixPath('My_Decorator', 'My/Decorator/', 'decorator');
             で取得する際に行われます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $filtered = $element->getValue();
 ]]></programlisting>
 
@@ -232,7 +232,7 @@ $filtered = $element->getValue();
             では、例を見てみましょう。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // フィルタのインスタンス
 $element->addFilter(new Zend_Filter_Alnum());
 
@@ -261,7 +261,7 @@ $element->addFilter('alnum');
                 <classname>Zend_Form_Element</classname> に次のように通知します。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $element->addPrefixPath('My_Filter', 'My/Filter/', 'filter');
 ]]></programlisting>
 
@@ -275,7 +275,7 @@ $element->addPrefixPath('My_Filter', 'My/Filter/', 'filter');
             <code>getUnfilteredValue()</code> メソッドを使用します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $unfiltered = $element->getUnfilteredValue();
 ]]></programlisting>
 
@@ -350,7 +350,7 @@ $unfiltered = $element->getUnfilteredValue();
             では、例を見てみましょう。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // バリデータのインスタンス
 $element->addValidator(new Zend_Validate_Alnum());
 
@@ -379,7 +379,7 @@ $element->addValidator('alnum');
                 <classname>Zend_Form_Element</classname> に次のように通知します。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $element->addPrefixPath('My_Validator', 'My/Validator/', 'validate');
 ]]></programlisting>
 
@@ -394,7 +394,7 @@ $element->addPrefixPath('My_Validator', 'My/Validator/', 'validate');
             <code>true</code> を渡します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $element->addValidator('alnum', true);
 ]]></programlisting>
 
@@ -404,7 +404,7 @@ $element->addValidator('alnum', true);
             <code>addValidator()</code> の 3 番目のパラメータに配列形式で指定します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $element->addValidator('StringLength', false, array(6, 20));
 ]]></programlisting>
 
@@ -415,7 +415,7 @@ $element->addValidator('StringLength', false, array(6, 20));
             <code>$min</code> と <code>$max</code> を指定しています。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_StringLength(6, 20);
 ]]></programlisting>
 
@@ -447,7 +447,7 @@ $validator = new Zend_Validate_StringLength(6, 20);
             <code>addValidator()</code> に渡されます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $element->addValidators(array(
     array('NotEmpty', true),
     array('alnum'),
@@ -461,7 +461,7 @@ $element->addValidators(array(
             を持つ配列を使用することもできます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $element->addValidators(array(
     array(
         'validator'           => 'NotEmpty',
@@ -477,7 +477,7 @@ $element->addValidators(array(
             この使用法は、設定ファイルを用いてバリデータを設定する場合に便利です。
         </para>
 
-        <programlisting role="ini"><![CDATA[
+        <programlisting language="ini"><![CDATA[
 element.validators.notempty.validator = "NotEmpty"
 element.validators.notempty.breakChainOnFailure = true
 element.validators.alnum.validator = "Alnum"
@@ -498,7 +498,7 @@ element.validators.strlen.options.max = 20
             <code>isValid()</code> に渡します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 if ($element->isValid($value)) {
     // 有効
 } else {
@@ -536,7 +536,7 @@ if ($element->isValid($value)) {
                 このようなバリデータは、次のように書きます。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class My_Validate_PasswordConfirmation extends Zend_Validate_Abstract
 {
     const NOT_MATCH = 'notMatch';
@@ -580,7 +580,7 @@ class My_Validate_PasswordConfirmation extends Zend_Validate_Abstract
             エラーコードとメッセージを取得することができます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $errors   = $element->getErrors();
 $messages = $element->getMessages();
 ]]></programlisting>
@@ -854,7 +854,7 @@ $messages = $element->getMessages();
                 'disableLoadDefaultDecorators' を指定します。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $element = new Zend_Form_Element('foo',
                                  array('disableLoadDefaultDecorators' =>
                                       true)
@@ -876,7 +876,7 @@ $element = new Zend_Form_Element('foo',
             例として、デフォルトのデコレータを登録するコードを示します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $this->addDecorators(array(
     array('ViewHelper'),
     array('Errors'),
@@ -902,7 +902,7 @@ $this->addDecorators(array(
             出力結果は、基本的にはこのようになります。
         </para>
 
-        <programlisting role="html"><![CDATA[
+        <programlisting language="html"><![CDATA[
 <dt><label for="foo" class="optional">Foo</label></dt>
 <dd>
     <input type="text" name="foo" id="foo" value="123" />
@@ -938,7 +938,7 @@ $this->addDecorators(array(
                 この配列には、デコレータオブジェクトあるいはデコレータ名を指すエイリアスを指定します。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // 'FooBar' へのエイリアス
 $element->addDecorator(array('FooBar' => 'HtmlTag'),
                        array('tag' => 'div'));
@@ -953,7 +953,7 @@ $decorator = $element->getDecorator('FooBar');
                 デコレータを表す配列を 'decorator' オプションに渡す必要があります。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // ふたつの 'HtmlTag' デコレータを使用するため、片方に 'FooBar' というエイリアスを指定します
 $element->addDecorators(
     array('HtmlTag', array('tag' => 'div')),
@@ -1014,7 +1014,7 @@ $fooBar  = $element->getDecorator('FooBar');
             <code>render()</code> メソッドにコンテンツとして渡されます。次の例を参照ください。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // ViewHelper デコレータのみをレンダリングします
 echo $element->renderViewHelper();
 
@@ -1131,7 +1131,7 @@ echo $element->renderHtmlTag("This is the html tag content");
             <classname>Zend_Form_Element</classname> はオーバーロードを使用してこの機能を実現しています。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // $element->setAttrib('class', 'text') と同じ意味です
 $element->class = 'text;
 ]]></programlisting>
@@ -1321,7 +1321,7 @@ $element->class = 'text;
             例として、すべての型の設定データを渡すファイルを見てみましょう。
         </para>
 
-        <programlisting role="ini"><![CDATA[
+        <programlisting language="ini"><![CDATA[
 [element]
 name = "foo"
 value = "foobar"
@@ -1387,7 +1387,7 @@ decorators.label.decorator = "Label"
             このような要素は、次のように定義します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class My_Element_Text extends Zend_Form_Element
 {
     public function init()
@@ -1408,7 +1408,7 @@ class My_Element_Text extends Zend_Form_Element
             この要素のプレフィックスパスを登録した上で要素を作成します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $form->addPrefixPath('My_Element', 'My/Element/', 'element')
      ->addElement('text', 'foo');
 ]]></programlisting>
@@ -1426,7 +1426,7 @@ $form->addPrefixPath('My_Element', 'My/Element/', 'element')
             継承したクラスで、このデコレータ群を置き換えることができます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class My_Element_Text extends Zend_Form_Element
 {
     public function loadDefaultDecorators()

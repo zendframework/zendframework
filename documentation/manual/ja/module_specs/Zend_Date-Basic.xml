@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.date.basic">
 
     <title>基本メソッド</title>
@@ -40,7 +40,7 @@
 
         <example id="zend.date.basic.creation.example-1">
             <title>現在の日付の作成</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 
 // 現在のタイムスタンプを出力します
@@ -73,7 +73,7 @@ print $date;
 
             <example id="zend.date.simple.functions.get.example-1">
                 <title>get() - 日付の出力</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 
 // 指定した日付を出力します
@@ -96,7 +96,7 @@ print $date->get();
 
             <example id="zend.date.simple.functions.set.example-1">
                 <title>set() - 日付の設定</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 
 // 新しい時刻を設定します
@@ -122,7 +122,7 @@ print $date->get(Zend_Date::W3C);
 
             <example id="zend.date.simple.functions.add.example-1">
                 <title>add() - 日付の加算</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 
 // $date に 12 時間加算します
@@ -152,7 +152,7 @@ echo "toString() で取得した日付 = ", $date, "\n";
 
             <example id="zend.date.simple.functions.compare.example-1">
                 <title>compare() - 日付の比較</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 
 // 二つの時刻を比較します
@@ -171,7 +171,7 @@ if ($date->compare(10, Zend_Date::MINUTE) == -1) {
 
             <example id="zend.date.simple.functions.compare.example-2">
                 <title>equals() - 日付あるいはその一部の同一性</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 
 // 二つの日付を比較します

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.feed.importing">
 
     <title>フィードの読み込み</title>
@@ -11,7 +11,7 @@
         メソッドを使用すればよいのです。
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $feed = Zend_Feed::import('http://feeds.example.com/feedName');
 ]]></programlisting>
 
@@ -20,7 +20,7 @@ $feed = Zend_Feed::import('http://feeds.example.com/feedName');
         文字列変数からフィードを読み込むこともできます。
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 // テキストファイルからフィードを読み込みます
 $feedFromFile = Zend_Feed::importFile('feed.xml');
 
@@ -55,7 +55,7 @@ $feedFromPHP = Zend_Feed::importString($feedString);
 
             <title>独自の配列の読み込み</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // フィードを配列から読み込みます
 $atomFeedFromArray = Zend_Feed::importArray($array);
 
@@ -71,7 +71,7 @@ $rssFeedFromArray = Zend_Feed::importArray($array, 'rss');
                 配列の書式は、次のような構造になっていなければなりません。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 array(
     // 必須
     'title' => 'フィードのタイトル',
@@ -314,7 +314,7 @@ array(
                 これが、<classname>Zend_Feed::importBuilder()</classname> の使用例です。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // 独自のビルダソースからフィードを読み込みます
 $atomFeedFromArray =
     Zend_Feed::importBuilder(new Zend_Feed_Builder($array));
@@ -340,7 +340,7 @@ $rssFeedFromArray =
                 <code>send()</code> メソッドあるいは <code>saveXml()</code> メソッドを使用します。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 assert($feed instanceof Zend_Feed_Abstract);
 
 // フィードを標準出力に出力します

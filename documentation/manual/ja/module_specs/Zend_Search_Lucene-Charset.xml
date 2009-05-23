@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15602 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.search.lucene.charset">
     <title>文字セット</title>
 
@@ -85,7 +85,7 @@
         <para>
              これを有効にするには、以下のようなコードを使用します。
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend_Search_Lucene_Analysis_Analyzer::setDefault(
     new Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8());
 ]]></programlisting>
@@ -117,7 +117,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
         <para>
              PCRE が UTF-8 に対応しているかどうかを調べるには、次のコードを使用します。
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 if (@preg_match('/\pL/u', 'a') == 1) {
     echo "PCRE は unicode をサポートしています。\n";
 } else {
@@ -138,7 +138,7 @@ if (@preg_match('/\pL/u', 'a') == 1) {
             まず、インデックス化の前に元データを正規化し、
             検索の際にはクエリ文字列を小文字に変換します。
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // インデックス化
 setlocale(LC_CTYPE, 'de_DE.iso-8859-1');
 
@@ -162,7 +162,7 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('title',
 $doc->addField(Zend_Search_Lucene_Field::UnIndexed('_title', $title));
 ]]></programlisting>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // 検索
 setlocale(LC_CTYPE, 'de_DE.iso-8859-1');
 

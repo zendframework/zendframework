@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15341 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.codegenerator.introduction">
     <title>導入</title>
 
@@ -23,7 +23,7 @@
             その<code>generate()</code>メソッドを呼びます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 //構成をコンストラクタに渡す
 $file = new Zend_CodeGenerator_Php_File(array(
     'classes' => array(
@@ -62,7 +62,7 @@ file_put_contents('World.php', $file->generate());
             上記のサンプルは両方とも同じ結果でレンダリングされます:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php
 
 class World
@@ -90,7 +90,7 @@ class World
             それから下記のようにできます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $class = Zend_CodeGenerator_Php_Class::fromReflection(
     new Zend_Reflection_Class('World')
 );
@@ -114,7 +114,7 @@ file_put_contents('World.php', $file->generate());
             クラスファイルの結果はこのようになります:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php
 
 class World

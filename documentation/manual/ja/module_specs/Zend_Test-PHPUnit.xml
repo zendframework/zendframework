@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.test.phpunit" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Zend_Test_PHPUnit</title>
 
@@ -43,7 +43,7 @@
             適切なクラスをいちいち require することを考えなくてすむようにしています。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
     public function setUp()

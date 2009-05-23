@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15615 -->
+<!-- EN-Revision: 15617 -->
 <sect2 id="zend.validate.set.hostname">
 
     <title>ホスト名</title>
@@ -20,7 +20,7 @@
     <para>
        基本的な使用法は、以下のようになります。
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Hostname();
 if ($validator->isValid($hostname)) {
     // ホスト名は正しい形式のようです
@@ -54,7 +54,7 @@ if ($validator->isValid($hostname)) {
         <code>ALLOW_IP</code> は IP アドレスを許可します。また <code>ALLOW_LOCAL</code>
         はローカルネットワーク名を許可し、<code>ALLOW_ALL</code> はこれら三種類をすべて許可します。
         IP アドレスだけをチェックするには、以下の例のようにします。
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_IP);
 if ($validator->isValid($hostname)) {
     // ホスト名は正しい形式のようです
@@ -72,7 +72,7 @@ if ($validator->isValid($hostname)) {
         これらの形式を組み合わせることもできます。
         たとえば、DNS およびローカルホスト名を許可するには、
         Zend_Validate_Hostname のインスタンスを次のように作成します。
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS | Zend_Validate_Hostname::ALLOW_IP);]]></programlisting>
 
     </para>
@@ -133,7 +133,7 @@ $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS | Zend
         IDN の検証を無効にするには、Zend_Validate_Hostname
         のコンストラクタに二番目のパラメータを次のように渡します。
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS, false);]]></programlisting>
 
         あるいは、TRUE または FALSE を
@@ -160,7 +160,7 @@ $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS, false
         TLD の検証を無効にするには、Zend_Validate_Hostname のコンストラクタに三番目のパラメータを渡します。
         以下の例では、IDN の検証は二番目のパラメータで有効にしています。
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS, true, false);]]></programlisting>
 
         あるいは、TRUE または FALSE を

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15215 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.progressbar.introduction" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Zend_ProgressBar</title>
 
@@ -24,7 +24,7 @@
             何かのファイルの処理を行いたい場合は、たとえば次のようになります。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $progressBar = new Zend_ProgressBar($adapter, 0, $fileSize);
 
 while (!feof($fp)) {

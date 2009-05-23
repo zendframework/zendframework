@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15617 -->
 <sect2 id="zend.validate.Db">
     <title>Db_RecordExists および Db_NoRecordExists</title>
 
@@ -18,7 +18,7 @@
             このバリデータの基本的な使用例です。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // メールアドレスがデータベース内に存在するかどうかを調べます
 $validator = new Zend_Validate_Db_RecordExists('users', 'emailaddress');
 if ($validator->isValid($emailaddress)) {
@@ -37,7 +37,7 @@ if ($validator->isValid($emailaddress)) {
             エラーメッセージが表示されます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // ユーザ名がデータベースに存在しないことを調べます
 $validator = new Zend_Validate_Db_NoRecordExists('users', 'username');
 if ($validator->isValid($username)) {
@@ -75,7 +75,7 @@ if ($validator->isValid($username)) {
             (たとえばユーザ情報のフォームなどで使用します)。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // そのユーザ名のユーザがほかにいないことを調べます
 $user_id   = $user->getId();
 $validator = new Zend_Validate_Db_NoRecordExists(
@@ -110,7 +110,7 @@ if ($validator->isValid($username)) {
             これは、複合キーに対するチェックの際に便利です。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $post_id   = $post->getId();
 $clause    = $db->quoteInto('post_id = ?', $category_id);
 $validator = new Zend_Validate_Db_RecordExists(
@@ -148,7 +148,7 @@ if ($validator->isValid($username)) {
             以下に例を示します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Db_RecordExists('users', 'id', null, $dbAdapter);
 ]]></programlisting>
     </sect3>

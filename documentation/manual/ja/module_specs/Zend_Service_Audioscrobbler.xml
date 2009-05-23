@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.service.audioscrobbler">
 
     <title>Zend_Service_Audioscrobbler</title>
@@ -189,7 +189,7 @@
                 指定したユーザのプロファイル情報を取得します。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $as = new Zend_Service_Audioscrobbler();
 // プロファイル情報を取得したいユーザを設定します
 $as->setUser('BigDaddy71');
@@ -206,7 +206,7 @@ print "$profileInfo->realname の情報は "
 
             <title>あるユーザの週間アーティストチャートの取得</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $as = new Zend_Service_Audioscrobbler();
 // 週間アーティストチャートを取得したいユーザを設定します
 $as->setUser('lo_fye');
@@ -286,7 +286,7 @@ foreach ($previousWeeklyArtists as $artist) {
 
             <title>関連するアーティストの取得</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $as = new Zend_Service_Audioscrobbler();
 // 関連アーティストを取得したいアーティストを設定します
 $as->setArtist('LCD Soundsystem');

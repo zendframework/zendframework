@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15341 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.pdf.usage">
     <title>Zend_Pdf モジュールの使用例</title>
     <para>
@@ -17,7 +17,7 @@
 
     <example id="zend.pdf.usage.example-1">
         <title>Zend_Pdf モジュールの使用例</title>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /**
  * @package Zend_Pdf
  * @subpackage demo

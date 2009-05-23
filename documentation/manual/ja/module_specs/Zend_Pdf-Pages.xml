@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15604 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.pdf.pages">
     <title>ページの操作</title>
     <sect2 id="zend.pdf.pages.creation">
@@ -64,7 +64,7 @@
 
         <example id="zend.pdf.pages.example-1">
             <title>PDF ドキュメントのページの操作</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 ...
 // ページの並び順を反転します
 $pdf->pages = array_reverse($pdf->pages);
@@ -91,7 +91,7 @@ unset($pdf->pages[$id]);
 
         <example id="zend.pdf.pages.example-2">
             <title>既存のページの複製</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 ...
 // テンプレートページを別の変数に格納します
 $template = $pdf->pages[$templatePageIndex];

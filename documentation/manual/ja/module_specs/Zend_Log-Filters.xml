@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.log.filters">
     <title>フィルタ</title>
 
@@ -15,7 +15,7 @@
         すべてのライターの前にフィルタをかけるには、任意の数のフィルタを
         <code>addFilter()</code> メソッドでログオブジェクトに追加します。
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $logger = new Zend_Log();
 
 $writer = new Zend_Log_Writer_Stream('php://output');
@@ -43,7 +43,7 @@ $logger->emerg('緊急メッセージ');
         特定のライターインスタンスに対してだけフィルタをかけるには、ライターの
         <code>addFilter</code> メソッドを使用します。
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $logger = new Zend_Log();
 
 $writer1 = new Zend_Log_Writer_Stream('/path/to/first/logfile');

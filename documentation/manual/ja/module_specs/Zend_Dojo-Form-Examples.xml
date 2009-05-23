@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15207 -->
+<!-- EN-Revision: 15617 -->
 <sect2 id="zend.dojo.form.examples">
     <title>Dojo Formサンプル</title>
 
@@ -17,7 +17,7 @@
             そして、それ自身のタブの中に各々のサブ・フォームを表示します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class My_Form_Test extends Zend_Dojo_Form
 {
     /**
@@ -365,7 +365,7 @@ class My_Form_Test extends Zend_Dojo_Form
             最初の例では既存のフォームの例を修飾して見せています。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $form = new My_Custom_Form();
 Zend_Dojo::enableForm($form);
 $form->addElement(
@@ -391,7 +391,7 @@ array(
             あるいは、フォームの初期化でわずかな微調整をすることができます:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class My_Custom_Form extends Zend_Form
 {
     public function init()

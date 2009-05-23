@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15341 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.measure.creation">
 
     <title>計測値の作成</title>
@@ -36,7 +36,7 @@
 
         <example id="zend.measure.creation.number.example-1">
             <title>整数および浮動小数点数を使用しての作成</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $measurement = 1234.7;
 $unit = new Zend_Measure_Length((integer)$measurement,
                                 Zend_Measure_Length::STANDARD);
@@ -73,7 +73,7 @@ echo $unit;
 
         <example id="zend.measure.creation.string.example-1">
             <title>文字列を使用しての作成</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $mystring = "10010100111010111010100001011011101010001";
 $unit = new Zend_Measure_Number($mystring, Zend_Measure_Number::BINARY);
 
@@ -91,7 +91,7 @@ echo $unit;
 
         <example id="zend.measure.creation.string.example-2">
             <title>計測値を含む任意の入力テキスト</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $mystring = "My house is 125m² in size";
 $unit = new Zend_Measure_Area($mystring, Zend_Measure_Area::STANDARD);
 echo $unit; // 出力は "125 m² in size" となります
@@ -122,7 +122,7 @@ echo $unit; // 出力は "125 m² in size" となります
 
         <example id="zend.measure.creation.localized.example-1">
             <title>ローカライズされた文字列</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de');
 $mystring = "The boat is 1,234.50 long.";
 $unit = new Zend_Measure_Length($mystring,
@@ -147,7 +147,7 @@ echo $unit; // 出力は "1234.50 m" となります
             各インスタンスで毎回ロケールを設定する手間を省けます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // 起動ファイルで
 $locale = new Zend_Locale('de_AT');
 Zend_Registry::set('Zend_Locale', $locale);

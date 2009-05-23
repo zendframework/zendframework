@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.gdata.authsub">
     <title>AuthSub による認証</title>
 
@@ -74,7 +74,7 @@
             クライアントオブジェクトを作成します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $my_calendar = 'http://www.google.com/calendar/feeds/default/private/full';
 
 if (!isset($_SESSION['cal_token'])) {
@@ -113,7 +113,7 @@ $cal = new Zend_Gdata_Calendar($client);
             を使用します。そうしないと、このトークンはいつまでも有効なままになります。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // アプリケーションのセキュリティ問題を避けるため、注意してこの値を作成します
 $php_self = htmlentities(substr($_SERVER['PHP_SELF'],
                          0,

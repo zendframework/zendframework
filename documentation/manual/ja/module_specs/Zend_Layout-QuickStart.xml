@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.layout.quickstart">
     <title>Zend_Layout クイックスタート</title>
 
@@ -27,7 +27,7 @@
             たとえばこのようになります。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -65,7 +65,7 @@
             セクションやナビゲーション部などのコンテンツを取得することができます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -120,7 +120,7 @@
             のインスタンスの作成方法を見てみましょう。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // 起動ファイル内で
 Zend_Layout::startMvc();
 ]]></programlisting>
@@ -138,7 +138,7 @@ Zend_Layout::startMvc();
             アクションヘルパーでレイアウトのインスタンスにアクセスします。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function barAction()
@@ -163,7 +163,7 @@ class FooController extends Zend_Controller_Action
             これにより、レイアウトオブジェクトのメソッドをすぐにコールできるようになります。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php $this->layout()->setLayout('foo'); // 別のレイアウトを設定します ?>
 ]]></programlisting>
 
@@ -173,7 +173,7 @@ class FooController extends Zend_Controller_Action
             <code>getMvcInstance()</code> を使用します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // startMvc() がまだコールされていない場合は null を返します
 $layout = Zend_Layout::getMvcInstance();
 ]]></programlisting>
@@ -202,7 +202,7 @@ $layout = Zend_Layout::getMvcInstance();
             そして、ビュースクリプト側ではそれを個別にレンダリングします。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <body>
     <!-- /nav/menu のレンダリング -->
     <div id="nav"><?php echo $this->layout()->nav ?></div>
@@ -249,7 +249,7 @@ $layout = Zend_Layout::getMvcInstance();
             レイアウトをレンダリングします。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $layout = new Zend_Layout();
 
 // レイアウトスクリプトのパスを設定します

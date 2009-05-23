@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15207 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.config.introduction">
     <title>導入</title>
     <para>
@@ -25,7 +25,7 @@
             単にそれを <classname>Zend_Config</classname> のコンストラクタに渡すだけで、
             シンプルなオブジェクト指向のインターフェイスを使用することができます。
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // 設定データは配列で渡されます
 $configArray = array(
     'webhost'  => 'www.example.com',
@@ -66,7 +66,7 @@ $db = Zend_Db::factory($config->database);
         これは、指定した要素が存在しない場合にデフォルト値を返すように設定できます。
         たとえば次のように使用します。
     </para>
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $host = $config->database->get('host', 'localhost');
 ]]></programlisting>
     <example id="zend.config.introduction.example.file.php">
@@ -75,7 +75,7 @@ $host = $config->database->get('host', 'localhost');
             設定ファイルそのものを PHP で書きたいこともあるでしょう。
             以下のようにすると、簡単にそれを行うことができます。
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // config.php
 return array(
     'webhost'  => 'www.example.com',
@@ -90,7 +90,7 @@ return array(
     )
 );
 ]]></programlisting>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // 設定を読み込みます
 $config = new Zend_Config(require 'config.php');
 

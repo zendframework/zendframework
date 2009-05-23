@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15602 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.gdata.gbase">
     <title>Google Base の使用法</title>
     <para>
@@ -106,7 +106,7 @@
             <para>
                 以下の例は、ClientAuth 認証を使用した Base サービスクラスを作成するものです。
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // ClientAuth 認証用のパラメータ
 $service = Zend_Gdata_Gbase::AUTH_SERVICE_NAME;
 $user = "sample.user@gmail.com";
@@ -119,7 +119,7 @@ $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $service = new Zend_Gdata_Gbase($client);
 ]]></programlisting>
 <para>AuthSub を使用した Base サービスの作成方法も同様ですが、少し冗長になります。</para>
-<programlisting role="php"><![CDATA[
+<programlisting language="php"><![CDATA[
 /*
  * 現在の URL を取得し、AuthSub サーバが認証完了後に
  * リダイレクトする先を取得できるようにします
@@ -208,7 +208,7 @@ session_start();
 $service = new Zend_Gdata_Gbase(getAuthSubHttpClient());
 ]]></programlisting>
 <para>最後に、snippets フィード用の未認証のサーバを作成する方法を示します。</para>
-<programlisting role="php"><![CDATA[
+<programlisting language="php"><![CDATA[
 // Base サービスのインスタンスを、未認証の HTTP クライアントで作成します
 $service = new Zend_Gdata_Gbase();
 ]]></programlisting>
@@ -243,7 +243,7 @@ $service = new Zend_Gdata_Gbase();
                     <code>newItemQuery()</code> メソッドおよび <code>getGbaseItemFeed()</code>
                     メソッドを実行します。
                 </para>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $service = new Zend_Gdata_Gbase($client);
 $query = $service->newItemQuery();
 $query->setBq('[title:Programming]');
@@ -265,7 +265,7 @@ $feed = $service->getGbaseItemFeed($query);
                     <code>newSnippetQuery()</code> メソッドおよび
                     <code>getGbaseSnippetFeed()</code> メソッドを実行します。
                 </para>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $service = new Zend_Gdata_Gbase();
 $query = $service->newSnippetQuery();
 $query->setBq('[title:Programming]');
@@ -291,7 +291,7 @@ $feed = $service->getGbaseSnippetFeed($query);
                 指定したアイテムのすべての属性を順に処理するには、
                 <code>getGbaseAttributes()</code> を実行してその結果を処理します。
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 foreach ($feed->entries as $entry) {
   // すべての属性を取得し、各属性について名前とテキスト値を表示します
   $baseAttributes = $entry->getGbaseAttributes();
@@ -303,7 +303,7 @@ foreach ($feed->entries as $entry) {
             <para>
                 あるいは、特定の属性の名前を指定してそれにマッチする結果を取得することもできます。
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 foreach ($feed->entries as $entry) {
   // すべての主原料 <g:main_ingredient> を表示します
   $baseAttributes = $entry->getGbaseAttribute("main_ingredient");
@@ -333,7 +333,7 @@ foreach ($feed->entries as $entry) {
                 アイテムを追加するには、Base サービスの
                 <code>insertGbaseItem()</code> メソッドを使用します。
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $service = new Zend_Gdata_Gbase($client);
 $newEntry = $service->newItemEntry();
 
@@ -372,7 +372,7 @@ $createdEntry = $service->insertGbaseItem($newEntry, $dryRun);
             <para>
                 アイテムの各属性要素の値を変更することができます。
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // タイトルを更新します
 $newTitle = "PHP Developer Handbook Second Edition";
 $entry->title = $service->newTitle($newTitle);
@@ -429,7 +429,7 @@ $entry->save($dryRun);
                 アイテムを削除するには、<code>deleteGbaseItem()</code>
                 メソッドをコールします。
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $dryRun = false;
 $service->deleteGbaseItem($entry, $dryRun);
 ]]></programlisting>
@@ -437,7 +437,7 @@ $service->deleteGbaseItem($entry, $dryRun);
                 あるいは、<classname>Zend_Gdata_Gbase_ItemEntry</classname> オブジェクトの
                 <code>delete()</code> を実行することもできます。
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $dryRun = false;
 $entry->delete($dryRun);
 ]]></programlisting>

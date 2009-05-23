@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15341 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.search.lucene.index-creation">
     <title>インデックスの構築</title>
 
@@ -19,7 +19,7 @@
             API を用いてファイルをインデックス化する例を示します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // インデックスを作成します
 $index = Zend_Search_Lucene::create('/data/my-index');
 
@@ -49,7 +49,7 @@ $index->addDocument($doc);
             create() メソッドではなく open() メソッドをコールするということです。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // 既存のインデックスをオープンします。
 $index = Zend_Search_Lucene::open('/data/my-index');
 
@@ -79,7 +79,7 @@ $index->addDocument($doc);
             この ID は、クエリでヒットした内容から 'id' プロパティで取得できます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $removePath = ...;
 $hits = $index->find('path:' . $removePath);
 foreach ($hits as $hit) {
@@ -107,7 +107,7 @@ foreach ($hits as $hit) {
              <classname>Zend_Search_Lucene::numDocs()</classname> は、削除されていないドキュメントの総数を返します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $indexSize = $index->count();
 $documents = $index->numDocs();
 ]]></programlisting>
@@ -117,7 +117,7 @@ $documents = $index->numDocs();
             メソッドで、そのドキュメントが削除されているかどうかを調べます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 for ($count = 0; $count < $index->maxDoc(); $count++) {
     if ($index->isDeleted($count)) {
         echo "ドキュメント #$id は削除されました。\n";
@@ -162,7 +162,7 @@ for ($count = 0; $count < $index->maxDoc(); $count++) {
             インデックス全体の最適化を行うには、<classname>Zend_Search_Lucene::optimize()</classname>
             をコールします。これは、すべてのインデックスセグメントを新しいひとつのセグメントにまとめます。
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // 既存のインデックスをオープンします
 $index = Zend_Search_Lucene::open('/data/my-index');
 
@@ -271,7 +271,7 @@ $index->optimize();
             メソッドを使用します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // 現在のデフォルトのファイルパーミッションを取得します
 $currentPermissions =
     Zend_Search_Lucene_Storage_Directory_Filesystem::getDefaultFilePermissions();

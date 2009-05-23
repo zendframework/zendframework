@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.view.abstract">
     <title>Zend_View_Abstract</title>
 
@@ -32,7 +32,7 @@
         内部的には、<classname>Zend_View::_run()</classname> がやっているのは次のような処理です。
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 protected function _run()
 {
     include func_get_arg(0);

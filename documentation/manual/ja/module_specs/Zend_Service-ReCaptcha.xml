@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.service.recaptcha">
     <title>Zend_Service_ReCaptcha</title>
 
@@ -40,7 +40,7 @@
             公開鍵と秘密鍵を渡します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $recaptcha = new Zend_Service_ReCaptcha($pubKey, $privKey);
 ]]></programlisting>
 
@@ -49,7 +49,7 @@ $recaptcha = new Zend_Service_ReCaptcha($pubKey, $privKey);
             <code>getHTML()</code> メソッドをコールするだけです。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 echo $recaptcha->getHTML();
 ]]></programlisting>
 
@@ -61,7 +61,7 @@ echo $recaptcha->getHTML();
             メソッドに渡します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $result = $recaptcha->verify(
     $_POST['recaptcha_challenge_field'],
     $_POST['recaptcha_response_field']
@@ -74,7 +74,7 @@ $result = $recaptcha->verify(
             このオブジェクトは <code>isValid()</code> メソッドを提供しています。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 if (!$result->isValid()) {
     // 検証に失敗
 }

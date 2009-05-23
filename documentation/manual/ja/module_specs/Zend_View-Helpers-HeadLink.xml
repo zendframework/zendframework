@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15617 -->
 <sect3 id="zend.view.helpers.initial.headlink">
     <title>HeadLink ヘルパー</title>
 
@@ -80,7 +80,7 @@
             セクションの中でヘルパーを出力することになります。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php // ビュースクリプトのリンクを設定します
 $this->headLink()->appendStylesheet('/styles/basic.css')
                  ->headLink(array('rel' => 'favicon',

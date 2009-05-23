@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15501 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.date.constants">
 
     <title>日付関数全般用の定数</title>
@@ -690,7 +690,7 @@
 
         <example id="zend.date.constants.selfdefinedformats.example-1">
             <title>ISO 書式を使用した独自書式</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
 $date = new Zend_Date(1234567890, false, $locale);
 print $date->toString("'Era:GGGG='GGGG, ' Date:yy.MMMM.dd'yy.MMMM.dd");
@@ -1140,7 +1140,7 @@ print $date->toString("'Era:GGGG='GGGG, ' Date:yy.MMMM.dd'yy.MMMM.dd");
 
         <example id="zend.date.constants.phpformats.example-1">
             <title>PHP の指定子を使用した独自書式</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
 Zend_Date::setOptions(array('format_type' => 'php'));
 $date = new Zend_Date(1234567890, false, $locale);

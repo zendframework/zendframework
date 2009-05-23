@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15207 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.cache.frontends">
     <title><classname>Zend_Cache</classname> のフロントエンド</title>
 
@@ -140,7 +140,7 @@
                 ("automatic_serialization" オプションを使用すると boolean も保存できるので)、
                 このようにもう少しコンパクトに作成することが可能です。
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // すでに $cache が存在するものとします
 
 $id = 'myBigLoop'; //「キャッシュしたい内容」のキャッシュ ID
@@ -162,7 +162,7 @@ if (!($data = $cache->load($id))) {
             <para>
                 複数のブロックやデータのインスタンスをキャッシュしたい場合も、考え方は同じです。
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // 一意な ID を使用するようにしましょう
 $id1 = 'foo';
 $id2 = 'bar';
@@ -204,7 +204,7 @@ echo($data);
                 上で示したコンパクトな例を使用することはできません。
                 キャッシュレコードを正式に調べる必要があります。
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // コンパクトな構文
 // (空の文字列や boolean をキャッシュする場合はうまくいきません)
 if (!($data = $cache->load($id))) {
@@ -267,7 +267,7 @@ if (!($cache->test($id))) {
             <para>
                 このマニュアルの冒頭に示した例とほとんど同じですが、少しだけ変更を加えています。
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // キャッシュが見つからなかった場合に、出力バッファリングが起動します
 if (!($cache->start('mypage'))) {
 
@@ -347,7 +347,7 @@ echo 'これはキャッシュされません ('.time().').';
                 <code>call()</code> 関数の使用法は、PHP の
                 <code>call_user_func_array()</code> と同じです。
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $cache->call('veryExpensiveFunc', $params);
 
 // $params は配列です。
@@ -433,7 +433,7 @@ $cache->call('veryExpensiveFunc', $params);
             <para>
                 例えば、スタティックメソッドのコールをキャッシュするには次のようにします。
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class Test {
 
     // スタティックメソッド
@@ -456,7 +456,7 @@ $result = $cache->foobar('1', '2');
             <para>
                 通常のメソッドのコールをキャッシュするには次のようにします。
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class Test {
 
     private $_string = 'hello !';
@@ -751,7 +751,7 @@ $result = $cache->foobar2('1', '2');
             <para>
                 <classname>Zend_Cache_Frontend_Page</classname> の使用法は、きわめて簡単です。
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // [...] // require、設定そしてファクトリ
 
 $cache->start();
@@ -764,7 +764,7 @@ $cache->start();
                 もう少し複雑な例を見てみましょう。これは、起動ファイル
                 (例えば <classname>Zend_Controller</classname> など) 内でキャッシュを集中管理する方法を示したものです。
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 /*
  * キャッシュセクションの前には、あまり多くの行を書かないようにしましょう。
  * 例えば、処理速度を最適化するためには "require_once" や "Zend_Loader::loadClass"
@@ -820,7 +820,7 @@ $cache->start();
                 現在のキャッシュ処理をキャンセルする必要が生じることもあります。
                 そこで、このフロントエンド用に cancel() メソッドを用意しました。
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // [...] // require, configuration そして factory
 
 $cache->start();

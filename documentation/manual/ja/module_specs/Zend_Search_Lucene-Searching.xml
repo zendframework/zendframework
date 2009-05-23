@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15289 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.search.lucene.searching">
     <title>インデックスの検索</title>
 
@@ -62,7 +62,7 @@
             どちらの方法を使用したとしても、インデックスを検索する API メソッドは同じです。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $index = Zend_Search_Lucene::open('/data/my_index');
 
 $index->find($query);
@@ -103,7 +103,7 @@ $index->find($query);
                 実際のところ、これが
                 トークン化されたいないフィールドを検索する唯一の方法となることもあります。
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr);
 
 $pathTerm  = new Zend_Search_Lucene_Index_Term(
@@ -123,7 +123,7 @@ $hits = $index->find($query);
                 <classname>Zend_Search_Lucene_Search_QueryParser::parse()</classname>
                 メソッドはオプションのパラメータでエンコーディングを受け取ることができます。
                 ここで、クエリ文字列のエンコーディングを指定します。
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr,
                                                           'iso-8859-5');
 ]]></programlisting>
@@ -137,7 +137,7 @@ $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr,
                 デフォルトのクエリ文字列エンコーディングを
                 <classname>Zend_Search_Lucene_Search_QueryParser::setDefaultEncoding()</classname>
                 メソッドで指定することもできます。
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 Zend_Search_Lucene_Search_QueryParser::setDefaultEncoding('iso-8859-5');
 ...
 $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr);
@@ -169,7 +169,7 @@ $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr);
             この例で、ヒットしたドキュメントには
             title と author の 2 つのフィールドが含まれています。
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $index = Zend_Search_Lucene::open('/data/my_index');
 
 $hits = $index->find($query);
@@ -195,7 +195,7 @@ foreach ($hits as $hit) {
             メソッドを使用し、その <code>getFieldValue()</code>
             メソッドでフィールドの値を取得します。
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $index = Zend_Search_Lucene::open('/data/my_index');
 
 $hits = $index->find($query);
@@ -239,7 +239,7 @@ foreach ($hits as $hit) {
             <classname>Zend_Search_Lucene</classname> では、結果セットの件数を制限するためのメソッドとして
             <code>getResultSetLimit()</code> と
             <code>setResultSetLimit()</code> を用意しています。
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $currentResultSetLimit = Zend_Search_Lucene::getResultSetLimit();
 
 Zend_Search_Lucene::setResultSetLimit($newLimit);
@@ -273,7 +273,7 @@ Zend_Search_Lucene::setResultSetLimit($newLimit);
         <para>
             検索結果のスコアを取得するには <code>score</code> プロパティを使用します。
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $hits = $index->find($query);
 
 foreach ($hits as $hit) {
@@ -301,7 +301,7 @@ foreach ($hits as $hit) {
 
         <para>
             <code>$index->find()</code> のコール時に、オプションのパラメータを指定することができます。
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $index->find($query [, $sortField [, $sortType [, $sortOrder]]]
                     [, $sortField2 [, $sortType [, $sortOrder]]]
              ...);
@@ -327,13 +327,13 @@ $index->find($query [, $sortField [, $sortType [, $sortOrder]]]
 
         <para>
             例を以下に示します。
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $index->find($query, 'quantity', SORT_NUMERIC, SORT_DESC);
 ]]></programlisting>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $index->find($query, 'fname', SORT_STRING, 'lname', SORT_STRING);
 ]]></programlisting>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $index->find($query, 'name', SORT_STRING, 'quantity', SORT_NUMERIC, SORT_DESC);
 ]]></programlisting>
         </para>
@@ -354,7 +354,7 @@ $index->find($query, 'name', SORT_STRING, 'quantity', SORT_NUMERIC, SORT_DESC);
             まず最初の方法が、<classname>Zend_Search_Lucene_Document_Html</classname> クラス
             (詳細は <link linkend="zend.search.lucene.index-creation.html-documents">HTML ドキュメントの節</link>
             を参照ください) を用いて次のようにすることです。
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 /**
  * テキストを指定した色で強調する
  *
@@ -364,7 +364,7 @@ $index->find($query, 'name', SORT_STRING, 'quantity', SORT_NUMERIC, SORT_DESC);
  */
 public function highlight($words, $colour = '#66ffff');
 ]]></programlisting>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 /**
  * テキストを、指定したビューヘルパーあるいはコールバック関数で強調する
  *
@@ -395,7 +395,7 @@ public function highlightExtended($words, $callback, $params = array())
         </para>
         <para>
             <link linkend="zend.view.helpers">ビューヘルパー</link> も、ビュースクリプトのコンテキストでコールバックとして使えます。
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $doc->highlightExtended('word1 word2 word3...', array($this, 'myViewHelper'));
 ]]></programlisting>
         </para>
@@ -426,7 +426,7 @@ $doc->highlightExtended('word1 word2 word3...', array($this, 'myViewHelper'));
             もうひとつの方法は、
             <code>Zend_Search_Lucene_Search_Query->highlightMatches(string $inputHTML[, Zend_Search_Lucene_Search_Highlighter_Interface $highlighter])</code>
             メソッドを使うことです。
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $query = Zend_Search_Lucene_Search_QueryParser::parse($queryStr);
 $highlightedHTML = $query->highlightMatches($sourceHTML);
 ]]></programlisting>
@@ -440,7 +440,7 @@ $highlightedHTML = $query->highlightMatches($sourceHTML);
             オプションの 3 番目のパラメータは、
             <code>Zend_Search_Lucene_Search_Highlighter_Interface</code>
             インターフェイスを実装したオブジェクトです。
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 interface Zend_Search_Lucene_Search_Highlighter_Interface
 {
     /**

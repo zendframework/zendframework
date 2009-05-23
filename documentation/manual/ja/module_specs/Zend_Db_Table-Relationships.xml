@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15346 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.db.table.relationships">
 
     <title>導入</title>
@@ -39,7 +39,7 @@
             以下に、これらのテーブルに対応する PHP クラス定義を示します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class Accounts extends Zend_Db_Table_Abstract
 {
     protected $_name            = 'accounts';
@@ -228,7 +228,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
             使用するメソッドは、次のようになります。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $row->findDependentRowset($table, [$rule]);
 ]]></programlisting>
 
@@ -254,7 +254,7 @@ $row->findDependentRowset($table, [$rule]);
                 テーブルから探す方法を示します。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $accountsTable = new Accounts();
 $accountsRowset = $accountsTable->find(1234);
 $user1234 = $accountsRowset->current();
@@ -292,7 +292,7 @@ $bugsReportedByUser = $user1234->findDependentRowset('Bugs');
                 <code>'Engineer'</code> です。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $accountsTable = new Accounts();
 $accountsRowset = $accountsTable->find(1234);
 $user1234 = $accountsRowset->current();
@@ -319,7 +319,7 @@ $bugsAssignedToUser = $user1234->findDependentRowset('Bugs', 'Engineer');
                     最大 3 件までを名前の順に取得します。
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $accountsTable = new Accounts();
 $accountsRowset = $accountsTable->find(1234);
 $user1234 = $accountsRowset->current();
@@ -388,7 +388,7 @@ $bugsAssignedToUser = $user1234->findDependentRowset('Bugs',
                 マジックメソッドを使用します。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $accountsTable = new Accounts();
 $accountsRowset = $accountsTable->find(1234);
 $user1234 = $accountsRowset->current();
@@ -414,7 +414,7 @@ $bugsAssignedTo = $user1234->findBugsByEngineer();
             使用するメソッドは、次のようになります。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $row->findParentRow($table, [$rule]);
 ]]></programlisting>
 
@@ -441,7 +441,7 @@ $row->findParentRow($table, [$rule]);
                 <code>Accounts</code> テーブルから探す方法を示します。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugsTable = new Bugs();
 $bugsRowset = $bugsTable->fetchAll(array('bug_status = ?' => 'NEW'));
 $bug1 = $bugsRowset->current();
@@ -478,7 +478,7 @@ $reporter = $bug1->findParentRow('Accounts');
                 <code>'Engineer'</code> です。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugsTable = new Bugs();
 $bugsRowset = $bugsTable->fetchAll(array('bug_status = ?', 'NEW'));
 $bug1 = $bugsRowset->current();
@@ -539,7 +539,7 @@ $engineer = $bug1->findParentRow('Accounts', 'Engineer');
                 マジックメソッドを使用します。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugsTable = new Bugs();
 $bugsRowset = $bugsTable->fetchAll(array('bug_status = ?', 'NEW'));
 $bug1 = $bugsRowset->current();
@@ -567,7 +567,7 @@ $engineer = $bug1->findParentAccountsByEngineer();
             使用するメソッドは、次のようになります。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $row->findManyToManyRowset($table,
                            $intersectionTable,
                            [$rule1,
@@ -608,7 +608,7 @@ $row->findManyToManyRowset($table,
                 これは、そのバグに関連する製品を表すものです。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugsTable = new Bugs();
 $bugsRowset = $bugsTable->find(1234);
 $bug1234 = $bugsRowset->current();
@@ -664,7 +664,7 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
                 これは、そのバグに関連する製品を表すものです。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugsTable = new Bugs();
 $bugsRowset = $bugsTable->find(1234);
 $bug1234 = $bugsRowset->current();
@@ -736,7 +736,7 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
                 そのバグに関連する製品を見つけます。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugsTable = new Bugs();
 $bugsRowset = $bugsTable->find(1234);
 $bug1234 = $bugsRowset->current();
@@ -805,7 +805,7 @@ $products = $bug1234->findProductsViaBugsProductsByBug();
                 自動的に削除するように設定されています。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $productsTable = new Products();
 $productsRowset = $productsTable->find(1234);
 $product1234 = $productsRowset->current();
@@ -863,7 +863,7 @@ $product1234->delete();
                 エントリ自体を省略しても同じ結果となります。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class BugsProducts extends Zend_Db_Table_Abstract
 {
     ...

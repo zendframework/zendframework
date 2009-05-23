@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15346 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.date.overview">
 
     <title>Zend_Date API の概要</title>
@@ -176,7 +176,7 @@
 
         <example id="zend.date.values.example-1">
             <title>ユーザ定義の入力日付書式</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $date1 = new Zend_Date('Feb 31, 2007', null, 'en_US');
 echo $date1, "\n"; // 出力は "Mar 3, 2007 12:00:00 AM" となります
 
@@ -222,7 +222,7 @@ echo $date3, "\n"; // 出力は "Mar 3, 2007 12:00:00 AM" となります
             各インスタンスで毎回ロケールを設定する手間を省けます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // 起動ファイルで
 $locale = new Zend_Locale('de_AT');
 Zend_Registry::set('Zend_Locale', $locale);
@@ -258,7 +258,7 @@ $date = new Zend_Date('31.Feb.2007');
 
         <example id="zend.date.basic.example-1">
             <title>日付要素の操作</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $date = new Zend_Date(); // $date のタイムスタンプは time() の返す値と等しくなります
 
 // $date に 12 時間足します

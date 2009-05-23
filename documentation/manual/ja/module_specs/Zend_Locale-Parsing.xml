@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.locale.parsing">
 
     <title>正規化および地域化</title>
@@ -53,7 +53,7 @@
 
         <example id="zend.locale.number.normalize.example-1">
             <title>数値の正規化</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
 $number = Zend_Locale_Format::getNumber('13.524,678',
                                         array('locale' => $locale,
@@ -101,7 +101,7 @@ print $number; // 13524.678 を返します
 
             <example id="zend.locale.number.normalize.precision.example-1">
                 <title>精度を指定した数値の正規化</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
 $number = Zend_Locale_Format::getNumber('13.524,678',
                                         array('precision' => 1,
@@ -136,7 +136,7 @@ print $number; // 13524.67 を返します
 
         <example id="zend.locale.number.localize.example-1">
             <title>数値の地域化</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
 $number = Zend_Locale_Format::toNumber(13547.36,
                                        array('locale' => $locale));
@@ -164,7 +164,7 @@ print $number;
 
         <example id="zend.locale.number.localize.example-2">
             <title>精度を指定した数値の地域化</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
 $number = Zend_Locale_Format::toNumber(13547.3678,
                                        array('precision' => 2,
@@ -233,7 +233,7 @@ print $number;
 
         <example id="zend.locale.number.localize.example-3">
             <title>自分で定義した数値書式の使用</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
 $number = Zend_Locale_Format::toNumber(13547.3678,
                                        array('number_format' => '#,#0.00',
@@ -266,7 +266,7 @@ print $number;
 
         <example id="zend.locale.number.test.example-1">
             <title>数値かどうかの確認</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale();
 if (Zend_Locale_Format::isNumber('13.445,36', array('locale' => 'de_AT')) {
     print "数値です";
@@ -289,7 +289,7 @@ if (Zend_Locale_Format::isNumber('13.445,36', array('locale' => 'de_AT')) {
 
         <example id="zend.locale.float.normalize.example-1">
             <title>浮動小数点値の正規化</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
 $number = Zend_Locale_Format::getFloat('13.524,678',
                                        array('precision' => 2,
@@ -314,7 +314,7 @@ print $number;
 
         <example id="zend.locale.float.localize.example-1">
             <title>浮動小数点値の地域化</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
 $number = Zend_Locale_Format::toFloat(13547.3655,
                                       array('precision' => 1,
@@ -340,7 +340,7 @@ print $number;
 
         <example id="zend.locale.float.test.example-1">
             <title>浮動小数点値かどうかの確認</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
 if (Zend_Locale_Format::isFloat('13.445,36', array('locale' => $locale)) {
     print "float です";
@@ -363,7 +363,7 @@ if (Zend_Locale_Format::isFloat('13.445,36', array('locale' => $locale)) {
 
         <example id="zend.locale.integer.normalize.example-1">
             <title>整数値の正規化</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
 $number = Zend_Locale_Format::getInteger('13.524,678',
                                          array('locale' => $locale));
@@ -386,7 +386,7 @@ print $number;
 
         <example id="zend.locale.integer.localize.example-1">
             <title>整数値の地域化</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
 $number = Zend_Locale_Format::toInteger(13547.3655,
                                         array('locale' => $locale));
@@ -410,7 +410,7 @@ print $number;
 
         <example id="zend.locale.integer.test.example-1">
             <title>整数値かどうかの確認</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
 if (Zend_Locale_Format::isInteger('13.445', array('locale' => $locale)) {
     print "integer です";
@@ -464,7 +464,7 @@ if (Zend_Locale_Format::isInteger('13.445', array('locale' => $locale)) {
 
         <example id="zend.locale.numbersystems.example-1">
             <title>東アラビア文字から European/Latin 文字への変換</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $arabicScript = "١‎٠٠";   // アラビア文字で "100" を表します
 $latinScript = Zend_Locale_Format::convertNumerals($arabicScript,
                                                    'Arab',
@@ -481,7 +481,7 @@ print "\n正規化したもの: " . $latinScript;
 
         <example id="zend.locale.numbersystems.example-2">
             <title>ラテン文字から東アラビア文字への変換</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $latinScript = '123';
 $arabicScript = Zend_Locale_Format::convertNumerals($latinScript,
                                                     'Latn',
@@ -494,7 +494,7 @@ print "\n地域化したもの: " . $arabicScript;
 
         <example id="zend.locale.numbersystems.example-3">
             <title>各国語での文字名を使用した、4 文字の CLDR 文字コードの取得</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 function getScriptCode($scriptName, $locale)
 {
     $scripts2names = Zend_Locale_Data::getList($locale, 'script');

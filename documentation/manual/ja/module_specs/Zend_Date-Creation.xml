@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15346 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.date.creation">
 
     <title>日付の作成</title>
@@ -33,7 +33,7 @@
                 のインスタンスを作成すれば現在の日付情報が得られます。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 ]]></programlisting>
 
@@ -52,7 +52,7 @@ $date = new Zend_Date();
                 オプションのパラメータで値を変更することはできません。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $date = Zend_Date::now();
 ]]></programlisting>
 
@@ -98,7 +98,7 @@ $date = Zend_Date::now();
                 それを特定の書式に変換するのにかかる時間よるはるかに短くなります。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // SELECT UNIX_TIMESTAMP(my_datetime_column) FROM my_table
 $date = new Zend_Date($unixtimestamp, Zend_Date::TIMESTAMP);
 ]]></programlisting>
@@ -126,7 +126,7 @@ $date = new Zend_Date($unixtimestamp, Zend_Date::TIMESTAMP);
                 以降の日付しかサポートしていないという点を考慮する必要があります。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // SELECT datecolumn FROM my_table
 $date = new Zend_Date($datecolumn, Zend_Date::ISO_8601);
 ]]></programlisting>
@@ -192,7 +192,7 @@ $date = new Zend_Date($datecolumn, Zend_Date::ISO_8601);
                 <emphasis>0</emphasis> 時として扱われるということです。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $datearray = array('year' => 2006,
                    'month' => 4,
                    'day' => 18,
@@ -202,7 +202,7 @@ $datearray = array('year' => 2006,
 $date = new Zend_Date($datearray)
 ;]]></programlisting>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $datearray = array('year' => 2006, 'month' => 4, 'day' => 18);
 $date = new Zend_Date($datearray);
 ]]></programlisting>

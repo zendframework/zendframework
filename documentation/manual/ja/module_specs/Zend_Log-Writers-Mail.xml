@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15215 -->
+<!-- EN-Revision: 15617 -->
 <sect2 id="zend.log.writers.mail">
     <title>Email への書き込み</title>
 
@@ -25,7 +25,7 @@
         基本的な使い方は以下のとおりです。
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 $mail->setFrom('errors@example.org')
      ->addTo('project_developers@example.org');
@@ -83,7 +83,7 @@ $log->error('unable to connect to database');
             <classname>Zend_Layout</classname> で独自のフォーマッタを使用する方法を以下に示します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 $mail->setFrom('errors@example.org')
      ->addTo('project_developers@example.org');

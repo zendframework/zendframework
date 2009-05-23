@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15207 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.cache.theory">
     <title>キャッシュの仕組み</title>
     <para>
@@ -38,7 +38,7 @@
             使用可能な <classname>Zend_Cache</classname> フロントエンドのインスタンスを作成する方法を、
             以下の例で示します。
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // バックエンドを選びます (例えば 'File' や 'Sqlite'...)
 $backendName = '[...]';
 
@@ -78,7 +78,7 @@ $cache = Zend_Cache::factory($frontendName,
             適用するタグを配列で指定することができます。これを使用すると、
             指定したタグが設定されているキャッシュレコードのみを削除するといったことが可能となります。
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $cache->save($huge_data, 'myUniqueID', array('tagA', 'tagB', 'tagC'));
 ]]></programlisting>
         <note><para>
@@ -93,14 +93,14 @@ $cache->save($huge_data, 'myUniqueID', array('tagA', 'tagB', 'tagC'));
             特定のキャッシュ ID を削除/無効化するには、<code>remove()</code>
             メソッドを使用します。
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $cache->remove('削除するID');
 ]]></programlisting>
         <para>
             一回の操作で複数のキャッシュ ID を削除/無効化するには、<code>clean()</code>
             メソッドを使用します。例えば、すべてのキャッシュレコードを削除するには次のようにします。
         </para>
-        <programlisting role="php"><![CDATA[// すべてのレコードを削除します
+        <programlisting language="php"><![CDATA[// すべてのレコードを削除します
 $cache->clean(Zend_Cache::CLEANING_MODE_ALL);
 
 // 有効期限切れのレコードのみ削除します
@@ -109,7 +109,7 @@ $cache->clean(Zend_Cache::CLEANING_MODE_OLD);
         <para>
             タグ 'tagA' および 'tagC' に該当するキャッシュエントリを削除するには、このようにします。
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $cache->clean(
     Zend_Cache::CLEANING_MODE_MATCHING_TAG,
     array('tagA', 'tagC')
@@ -118,7 +118,7 @@ $cache->clean(
         <para>
             タグ 'tagA' にも 'tagC' にも該当しないキャッシュエントリを削除するには、このようにします。
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $cache->clean(
     Zend_Cache::CLEANING_MODE_NOT_MATCHING_TAG,
     array('tagA', 'tagC')
@@ -127,7 +127,7 @@ $cache->clean(
         <para>
             タグ 'tagA' または 'tagC' に該当するキャッシュエントリを削除するには、このようにします。
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $cache->clean(
     Zend_Cache::CLEANING_MODE_MATCHING_ANY_TAG,
     array('tagA', 'tagC')

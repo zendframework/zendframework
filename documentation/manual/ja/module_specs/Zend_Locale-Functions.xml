@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15346 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.locale.functions">
 
     <title>Zend_Locale の使用法</title>
@@ -24,7 +24,7 @@
 
         <example id="zend.locale.copying.example-1">
             <title>clone</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('ar');
 
 // $locale オブジェクトをシリアライズして保存します
@@ -59,7 +59,7 @@ print "copied: ", $copiedLocale;
 
         <example id="zend.locale.equals.example-1">
             <title>ロケールが同一かどうかの調査</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale();
 $mylocale = new Zend_Locale('en_US');
 
@@ -93,7 +93,7 @@ if ($locale->equals($mylocale)) {
 
         <example id="zend.locale.getdefault.example-1">
             <title>デフォルトロケールの取得</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale();
 
 // すべてのデフォルトロケールを返します
@@ -146,7 +146,7 @@ print_r($found2);
 
         <example id="zend.locale.setlocale.example-1">
             <title>setLocale</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale();
 
 // 実際のロケール
@@ -173,7 +173,7 @@ print $locale->toString();
 
         <example id="zend.locale.getlocale.example-1">
             <title>getLanguage および getRegion</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale();
 
 // ロケールが 'ja_JP' の場合は、'ja' が言語として返されます
@@ -204,7 +204,7 @@ print $locale->getRegion();
 
         <example id="zend.locale.getdata.example-1">
             <title>getTranslationList</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $list = Zend_Locale::getTranslationList('language', 'de_AT');
 
 print_r ($list);
@@ -1375,7 +1375,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
 
         <example id="zend.locale.getdata.example-3">
             <title>getTranslationList</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // すべての国名をドイツ語で表示します
 print_r(Zend_Locale::getTranslationList('country', 'de'));
 ]]></programlisting>
@@ -1388,7 +1388,7 @@ print_r(Zend_Locale::getTranslationList('country', 'de'));
 
         <example id="zend.locale.getdata.example-4">
             <title>国の名前を、ある言語から別の言語に変換する</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $code2name = Zend_Locale::getLanguageTranslationList('en_US');
 $name2code = array_flip($code2name);
 $frenchCode = $name2code['French'];
@@ -1412,7 +1412,7 @@ echo Zend_Locale::getLanguageTranslation($frenchCode, 'de_AT');
 
         <example id="zend.locale.getdata.example-6">
             <title>すべての言語を、その国のネイティブ言語で書き出す</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $list = Zend_Locale::getLanguageTranslationList('auto');
 
 foreach($list as $language => $content) {
@@ -1474,7 +1474,7 @@ foreach($list as $language => $content) {
 
         <example id="zend.locale.getquestion.example-1">
             <title>getQuestion()</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale();
 // 設問の文字列
 print_r($locale->getQuestion('de'));
@@ -1528,7 +1528,7 @@ Array
 
         <example id="zend.locale.getlocalelist.example-1">
             <title>getLocaleList()</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $localelist = Zend_Locale::getLocaleList();
 ]]></programlisting>
         </example>
@@ -1553,7 +1553,7 @@ $localelist = Zend_Locale::getLocaleList();
 
         <example id="zend.locale.detection.example-1">
             <title>シンプルなロケールの検出</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $input = 'to_RU';
 if (Zend_Locale::isLocale($input)) {
     print "'{$input}' is a locale";
@@ -1590,7 +1590,7 @@ if (Zend_Locale::isLocale($input)) {
 
         <example id="zend.locale.detection.example-2">
             <title>厳格なロケール検出</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $input = 'to_RU';
 if (Zend_Locale::isLocale($input, true)) {
     print "'{$input}' is a locale";
@@ -1609,7 +1609,7 @@ if (Zend_Locale::isLocale($input, true)) {
 
         <example id="zend.locale.detection.example-3">
             <title>ロケールに対応した振る舞いの実装</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 if ($locale === null) {
     $locale = new Zend_Locale();
 }
@@ -1679,7 +1679,7 @@ if ($locale instanceof Zend_Locale) {
 
         <example id="zend.locale.detection.example-4">
             <title>ZF 1.8 以降でのロケール対応の振る舞いの実装</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $locale = Zend_Locale::findLocale($inputstring);
 ]]></programlisting>
         </example>

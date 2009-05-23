@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15346 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.auth.adapter.http">
 
     <title>HTTP 認証アダプタ</title>
@@ -208,12 +208,12 @@
 
             <para>
                 ファイルリゾルバを作成する方法は次の二通りで、どちらも同じくらい簡単です。まずは
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $path     = 'files/passwd.txt';
 $resolver = new Zend_Auth_Adapter_Http_Resolver_File($path);
 ]]></programlisting>
                 もうひとつは
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $path     = 'files/passwd.txt';
 $resolver = new Zend_Auth_Adapter_Http_Resolver_File();
 $resolver->setFile($path);
@@ -232,7 +232,7 @@ $resolver->setFile($path);
 
         <para>
             まず、必須設定項目を含む配列を作成します。
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $config = array(
     'accept_schemes' => 'basic digest',
     'realm'          => 'My Web Site',
@@ -249,7 +249,7 @@ $config = array(
 
         <para>
             次に、Zend_Auth_Adapter_Http オブジェクトを作成します。
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 require_once 'Zend/Auth/Adapter/Http.php';
 $adapter = new Zend_Auth_Adapter_Http($config);
 ]]></programlisting>
@@ -259,7 +259,7 @@ $adapter = new Zend_Auth_Adapter_Http($config);
             ベーシック認証およびダイジェスト認証の両方をサポートしているので、
             ふたつのリゾルバオブジェクトを作成する必要があります。
             これは、単にふたつの異なるクラスを作成するだけの簡単なことです。
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $basicResolver = new Zend_Auth_Adapter_Http_Resolver_File();
 $basicResolver->setFile('files/basicPasswd.txt');
 
@@ -274,7 +274,7 @@ $adapter->setDigestResolver($digestResolver);
         <para>
             最後に、認証を行います。このアダプタは、
             リクエストオブジェクトおよびレスポンスオブジェクトの両方を参照する必要があります。
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 assert($request instanceof Zend_Controller_Request_Http);
 assert($response instanceof Zend_Controller_Response_Http);
 

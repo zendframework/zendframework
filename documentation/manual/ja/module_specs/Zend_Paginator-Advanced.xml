@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.paginator.advanced">
     <title>高度な使用法</title>
 
@@ -54,7 +54,7 @@
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 return array_slice($this->_array, $offset, $itemCountPerPage);
 ]]></programlisting>
         </para>
@@ -77,7 +77,7 @@ return array_slice($this->_array, $offset, $itemCountPerPage);
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 public function getPages(Zend_Paginator $paginator, $pageRange = null);
 ]]></programlisting>
         </para>
@@ -96,7 +96,7 @@ public function getPages(Zend_Paginator $paginator, $pageRange = null);
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 return $paginator->getPagesInRange($lowerBound, $upperBound);
 ]]></programlisting>
         </para>
@@ -114,7 +114,7 @@ return $paginator->getPagesInRange($lowerBound, $upperBound);
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $prefix = 'My_Paginator_ScrollingStyle';
 $path   = 'My/Paginator/ScrollingStyle/';
 Zend_Paginator::addScrollingStylePrefixPath($prefix, $path);
@@ -133,7 +133,7 @@ Zend_Paginator::addScrollingStylePrefixPath($prefix, $path);
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $paginator = Zend_Paginator::factory($someData);
 $fO = array('lifetime' => 3600, 'automatic_serialization' => true);
 $bO = array('cache_dir'=>'/tmp');
@@ -150,7 +150,7 @@ Zend_Paginator::setCache($cache);
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $paginator = Zend_Paginator::factory($someData);
 // $cache は Zend_Cache_Core のインスタンスです
 Zend_Paginator::setCache($cache);
@@ -169,7 +169,7 @@ $paginator->setCacheEnable(false);
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $paginator = Zend_Paginator::factory($someData);
 Zend_Paginator::setCache($cache);
 $items = $paginator->getCurrentItems();
@@ -191,7 +191,7 @@ $paginator->clearPageItemCache();
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $paginator = Zend_Paginator::factory($someData);
 Zend_Paginator::setCache($cache);
 // アイテムを取得します
@@ -208,7 +208,7 @@ $paginator->setItemCountPerPage(2);
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $paginator = Zend_Paginator::factory($someData);
 $paginator->setItemCountPerPage(3);
 Zend_Paginator::setCache($cache);

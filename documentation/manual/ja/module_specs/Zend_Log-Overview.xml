@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.log.overview">
     <title>概要</title>
 
@@ -50,7 +50,7 @@
         ログの記録を開始するには、ライターのインスタンスを作成し、
         それをログのインスタンスに渡します。
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $logger = new Zend_Log();
 $writer = new Zend_Log_Writer_Stream('php://output');
 
@@ -65,7 +65,7 @@ $logger->addWriter($writer);
       <para>
         一方、ログのコンストラクタで直接ライターを指定することも可能です。
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $writer = new Zend_Log_Writer_Stream('php://output');
 $logger = new Zend_Log($writer);
 ]]></programlisting>
@@ -81,7 +81,7 @@ $logger = new Zend_Log($writer);
         メッセージをログに記録するには、ログのインスタンスの <code>log()</code>
         メソッドを実行し、メッセージと優先度を渡します。
 
-      <programlisting role="php"><![CDATA[
+      <programlisting language="php"><![CDATA[
 $logger->log('Informational message', Zend_Log::INFO);
 ]]></programlisting>
 
@@ -95,7 +95,7 @@ $logger->log('Informational message', Zend_Log::INFO);
       こちらも別の方法が使用できます。<code>log()</code> メソッドをコールするかわりに、
       優先度と同じ名前のメソッドをコールできます。
 
-      <programlisting role="php"><![CDATA[
+      <programlisting language="php"><![CDATA[
 $logger->log('Informational message', Zend_Log::INFO);
 $logger->info('Informational message');
 
@@ -113,7 +113,7 @@ $logger->emerg('Emergency message');
       アタッチされている各ライターのインスタンスメソッド
       <code>shutdown()</code> をコールしてからログオブジェクトを破棄します。
 
-      <programlisting role="php"><![CDATA[
+      <programlisting language="php"><![CDATA[
 $logger = null;
 ]]></programlisting>
 
@@ -127,7 +127,7 @@ $logger = null;
     <para>
       <classname>Zend_Log</classname> クラスでは以下の優先度を定義しています。
 
-      <programlisting role="php"><![CDATA[
+      <programlisting language="php"><![CDATA[
 EMERG   = 0;  // 緊急事態 (Emergency): システムが使用不可能です
 ALERT   = 1;  // 警報 (Alert): 至急対応が必要です
 CRIT    = 2;  // 危機 (Critical): 危機的な状況です
@@ -168,14 +168,14 @@ DEBUG   = 7;  // デバッグ (Debug): デバッグメッセージ
       ユーザ定義の優先度を実行時に追加するには、ログの
       <code>addPriority()</code> メソッドを使用します。
 
-      <programlisting role="php"><![CDATA[
+      <programlisting language="php"><![CDATA[
 $logger->addPriority('FOO', 8);
 ]]></programlisting>
 
       上の例では、新しい優先度 <code>FOO</code> を
       <code>8</code> という値で定義しています。これで、次のようにして新しい優先度でログ出力できるようになります。
 
-      <programlisting role="php"><![CDATA[
+      <programlisting language="php"><![CDATA[
 $logger->log('Foo message', 8);
 $logger->foo('Foo Message');
 ]]></programlisting>
@@ -205,7 +205,7 @@ $logger->foo('Foo Message');
       将来のイベントにたいして常に特定の項目を追加するようにするには、
       <code>setEventItem()</code> メソッドをコールしてキーと値を指定します。
 
-      <programlisting role="php"><![CDATA[
+      <programlisting language="php"><![CDATA[
 $logger->setEventItem('pid', getmypid());
 ]]></programlisting>
 

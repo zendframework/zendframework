@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.dojo.view" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Dojo ビューヘルパー</title>
 
@@ -25,7 +25,7 @@
             そのためには <code>addHelperPath()</code> をコールします。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
 ]]></programlisting>
 
@@ -34,7 +34,7 @@ $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
             <code>enableView()</code> メソッドでそれを行うこともできます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 Zend_Dojo::enableView($view);
 ]]></programlisting>
     </example>

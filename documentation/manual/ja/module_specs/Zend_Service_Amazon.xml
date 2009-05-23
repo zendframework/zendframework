@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15215 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.service.amazon">
     <title>Zend_Service_Amazon</title>
     <sect2 id="zend.service.amazon.introduction">
@@ -164,7 +164,7 @@ foreach ($results as $result) {
                 <code>ResponseGroup</code> オプションを使用すると、
                 レスポンスで返される情報を制御することができます。
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $amazon = new Zend_Service_Amazon('AMAZON_API_KEY');
 $results = $amazon->itemSearch(array(
     'SearchIndex'   => 'Books',

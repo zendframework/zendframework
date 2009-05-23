@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.locale.date.datesandtimes">
 
     <title>日付および時刻の扱い</title>
@@ -154,7 +154,7 @@
 
         <example id="zend.locale.date.normalize.example-1">
             <title>日付の正規化</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $dateString = Zend_Locale_Format::getDate('13.04.2006',
                                           array('date_format' =>
                                                     'dd.MM.yyyy')
@@ -209,7 +209,7 @@ Array
 
         <example id="zend.locale.date.normalize.example-2">
             <title>ロケールを指定した日付の正規化</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
 $date = Zend_Locale_Format::getDate('13.04.2006',
                                     array('date_format' =>
@@ -228,7 +228,7 @@ print_r ($date);
 
         <example id="zend.locale.date.normalize.example-3">
             <title>日付と時刻の正規化</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
 $date = Zend_Locale_Format::getDate('13.04.2005 22:14:55',
                                     array('date_format' =>
@@ -249,7 +249,7 @@ print_r ($date);
 
         <example id="zend.locale.date.normalize.example-4">
             <title>ユーザ定義の日付書式への正規化</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $date = Zend_Locale_Format::getDate('13200504T551422',
                                     array('date_format' =>
                                               'ddyyyyMM ssmmHH')
@@ -360,7 +360,7 @@ print_r ($date);
 
         <example id="zend.locale.date.normalize.example-5">
             <title>入力された日付の訂正処理</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $date = Zend_Locale_Format::getDate('41.10.20',
                                     array('date_format' => 'ddMMyy',
                                           'fix_date' => true)
@@ -390,7 +390,7 @@ print_r ($date);
 
         <example id="zend.locale.date.test.example-1">
             <title>日付かどうかの確認</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
 if (Zend_Locale_Format::checkDateFormat('13.Apr.2006',
                                         array('date_format' =>
@@ -420,7 +420,7 @@ if (Zend_Locale_Format::checkDateFormat('13.Apr.2006',
 
         <example id="zend.locale.time.normalizing.example-1">
             <title>未知の時刻の正規化</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
 if (Zend_Locale_Format::getTime('13:44:42',
                                 array('date_format' =>
@@ -448,7 +448,7 @@ if (Zend_Locale_Format::getTime('13:44:42',
 
         <example id="zend.locale.time.test.example-1">
             <title>時刻かどうかの確認</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
 if (Zend_Locale_Format::checkDateFormat('13:44:42',
                                         array('date_format' => 'HH:mm:ss',

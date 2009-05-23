@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.feed.consuming-atom">
 <title>Atom フィードの使用</title>
 
@@ -21,7 +21,7 @@
             Atom フィードを読み込み、各エントリの <code>title</code> と
             <code>summary</code> を表示します。
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $feed = new Zend_Feed_Atom('http://atom.example.com/feed/');
 echo 'このフィードには ' . $feed->count() . ' 件のエントリが含まれます。' . "\n\n";
 foreach ($feed as $entry) {

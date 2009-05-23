@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15343 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.http.client.adapters">
     <title>Zend_Http_Client - 接続アダプタ</title>
 
@@ -145,7 +145,7 @@
         </para>
         <example id="zend.http.client.adapters.socket.example-1">
             <title>HTTPS トランスポート層の変更</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // 設定パラメータを指定します
 $config = array(
     'adapter'      => 'Zend_Http_Client_Adapter_Socket',
@@ -249,7 +249,7 @@ $response = $client->request();
         </para>
         <example id="zend.http.client.adapters.proxy.example-1">
             <title>プロキシサーバを使用した Zend_Http_Client の使用法</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // 接続パラメータを設定します
 $config = array(
     'adapter'    => 'Zend_Http_Client_Adapter_Proxy',
@@ -294,7 +294,7 @@ $client = new Zend_Http_Client('http://www.example.com', $config);
         </para>
         <example id="zend.http.client.adapters.test.example-1">
             <title>HTTP レスポンススタブを使用したテスト</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // 新しいアダプタとクライアントのインスタンスを作成します
 $adapter = new Zend_Http_Client_Adapter_Test();
 $client = new Zend_Http_Client('http://www.example.com', array(
@@ -335,7 +335,7 @@ $response = $client->request('GET');
         </para>
         <example id="zend.http.client.adapters.test.example-2">
             <title>複数の HTTP レスポンススタブを使用したテスト</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // 新しいアダプタおよびクライアントのインスタンスを作成します
 $adapter = new Zend_Http_Client_Adapter_Test();
 $client = new Zend_Http_Client('http://www.example.com', array(
@@ -405,7 +405,7 @@ $adapter->addResponse(
 
         <example id="zend.http.client.adapters.curl.example-1">
             <title>cURL オプションの設定</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $config = array(
     'adapter'   => 'Zend_Http_Client_Adapter_Curl',
     'curloptions' => array(CURLOPT_FOLLOWLOCATION => true),
@@ -431,7 +431,7 @@ $client = new Zend_Http_Client($uri, $config);
                 cURL を使用して、巨大なファイルを HTTP 越しに転送することができます。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $putFileSize   = filesize("filepath");
 $putFileHandle = fopen("filepath", "r");
 
@@ -466,7 +466,7 @@ $client->request("PUT");
         </para>
         <example id="zend.http.client.adapters.extending.example-1">
             <title>独自の接続アダプタの作成</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class MyApp_Http_Client_Adapter_BananaProtocol
     implements Zend_Http_Client_Adapter_Interface
 {

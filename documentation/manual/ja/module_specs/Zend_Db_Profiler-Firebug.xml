@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15207 -->
+<!-- EN-Revision: 15617 -->
 <sect3 id="zend.db.profiler.profilers.firebug">
     <title>Firebug によるプロファイリング</title>
 
@@ -44,7 +44,7 @@
     <example id="zend.db.profiler.profilers.firebug.example.with_front_controller">
         <title>Zend_Controller_Front を使った DB のプロファイリング</title>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // 起動ファイル
 
 $profiler = new Zend_Db_Profiler_Firebug('All DB Queries');
@@ -63,7 +63,7 @@ $db->setProfiler($profiler)
     <example id="zend.db.profiler.profilers.firebug.example.without_front_controller">
         <title>Zend_Controller_Front を使わない DB のプロファイリング</title>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $profiler = new Zend_Db_Profiler_Firebug('All DB Queries');
 $profiler->setEnabled(true);
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15602 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.layout.options">
     <title>Zend_Layout の設定オプション</title>
 
@@ -115,7 +115,7 @@
             配列と <code>$config</code> オブジェクトを前提としています。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $options = array(
     'layout'     => 'foo',
     'layoutPath' => '/path/to/layouts',
@@ -123,7 +123,7 @@ $options = array(
 );
 ]]></programlisting>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /**
 [layout]
 layout = "foo"
@@ -148,7 +148,7 @@ $config = new Zend_Config_Ini('/path/to/layout.ini', 'layout');
                 まず、配列を渡す方法を見てみましょう。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // コンストラクタを使用します
 $layout = new Zend_Layout($options);
 
@@ -160,7 +160,7 @@ $layout = Zend_Layout::startMvc($options);
                 次に config オブジェクトを使用する方法です。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Ini('/path/to/layout.ini', 'layout');
 
 // コンストラクタを使用します
@@ -186,7 +186,7 @@ $layout = Zend_Layout::startMvc($config);
                 を使用します。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // オプションの配列を使用します
 $layout->setOptions($options);
 
@@ -213,7 +213,7 @@ $layout->setConfig($options);
                 メソッドコールを連結して行えます。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $layout->setLayout('foo')
        ->setLayoutPath('/path/to/layouts')
        ->setContentKey('CONTENT');

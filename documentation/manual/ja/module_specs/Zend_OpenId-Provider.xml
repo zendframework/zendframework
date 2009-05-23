@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.openid.provider">
     <title>Zend_OpenId_Provider</title>
     <para>
@@ -30,7 +30,7 @@
 
         <example id="zend.openid.provider.example-1">
             <title>識別子</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <?php
 // テスト用の識別子を準備します
 define("TEST_SERVER", Zend_OpenId::absoluteURL("example-8.php"));
@@ -71,7 +71,7 @@ if (!$server->hasUser(TEST_ID)) {
 
         <example id="zend.openid.provider.example-2">
             <title>シンプルな識別プロバイダ</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $server = new Zend_OpenId_Provider("example-8-login.php",
                                    "example-8-trust.php");
 $ret = $server->handle();
@@ -123,7 +123,7 @@ if (is_string($ret)) {
 
         <example id="zend.openid.provider.example-3">
             <title>シンプルなログイン画面</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <?php
 $server = new Zend_OpenId_Provider();
 
@@ -189,7 +189,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' &&
 
         <example id="zend.openid.provider.example-4">
             <title>シンプルな信頼画面</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <?php
 $server = new Zend_OpenId_Provider();
 
@@ -266,7 +266,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' &&
 
         <example id="zend.openid.provider.example-5">
             <title>すべてをまとめたもの</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $server = new Zend_OpenId_Provider();
 
 define("TEST_ID", Zend_OpenId::absoluteURL("example-9-id.php"));
@@ -316,7 +316,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' &&
 
         <example id="zend.openid.provider.example-6">
             <title>プロファイルを関連付けた識別子</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <?php
 define("TEST_SERVER", Zend_OpenId::absoluteURL("example-10.php"));
 define("TEST_ID", Zend_OpenId::selfURL());
@@ -371,7 +371,7 @@ if (!$server->hasUser(TEST_ID)) {
 
         <example id="zend.openid.provider.example-7">
             <title>SREG を使用したプロバイダ</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $server = new Zend_OpenId_Provider();
 $sreg = new Zend_OpenId_Extension_Sreg();
 

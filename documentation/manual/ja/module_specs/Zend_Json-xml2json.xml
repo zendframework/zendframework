@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.json.xml2json">
     <title>XML から JSON への変換</title>
     <para>
@@ -21,7 +21,7 @@
         このパラメータを省略した場合のデフォルトの挙動は、
         XML の属性を無視します。この関数の使用法は、以下のようになります。
     </para>
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 // fromXml 関数の入力には、XML を含む文字列を渡します
 $jsonContents = Zend_Json::fromXml($xmlStringContents, true);
 ]]></programlisting>
@@ -53,7 +53,7 @@ $jsonContents = Zend_Json::fromXml($xmlStringContents, true);
         <classname>Zend_Json::fromXml()</classname> 関数に渡す XML 入力文字列です。
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
 <books>
     <book id="1">
@@ -80,7 +80,7 @@ $jsonContents = Zend_Json::fromXml($xmlStringContents, true);
         <classname>Zend_Json::fromXml()</classname> 関数が返す JSON 文字列です。
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 {
    "books" : {
       "book" : [ {

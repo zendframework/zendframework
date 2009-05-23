@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15346 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.file.transfer.introduction">
 
     <title>Zend_File_Transfer</title>
@@ -74,7 +74,7 @@
             となります。そこで、<code>file</code> コントローラにアクション
             <code>upload</code> を作成します。
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $adapter = new Zend_File_Transfer_Adapter_Http();
 
 $adapter->setDestination('C:\temp');
@@ -187,7 +187,7 @@ if (!$adapter->receive()) {
         <example id="zend.file.transfer.introduction.checking.example">
             <title>ファイルのチェック</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // すべての既知の内部ファイル情報を返します
@@ -277,7 +277,7 @@ $upload->receive();
         <example id="zend.file.transfer.introduction.informations.example1">
             <title>ファイル名の取得</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 $upload->receive();
 
@@ -308,7 +308,7 @@ $names = $upload->getFileName('foo');
         <example id="zend.file.transfer.introduction.informations.example.getfilesize">
             <title>ファイルのサイズの取得</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 $upload->receive();
 
@@ -333,7 +333,7 @@ $size = $upload->getFileSize();
         <example id="zend.file.transfer.introduction.informations.example2">
             <title>ファイルのハッシュの取得</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 $upload->receive();
 
@@ -360,7 +360,7 @@ $names = $upload->getHash('crc32', 'foo');
         <example id="zend.file.transfer.introduction.informations.getmimetype">
             <title>ファイルの mimetype の取得</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 $upload->receive();
 
@@ -435,7 +435,7 @@ $names = $upload->getMimeType('foo');
 
                 <title>progressbar アダプタを使用した実際の状態の取得</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $adapter = new Zend_ProgressBar_Adapter_Console();
 $upload  = Zend_File_Transfer_Adapter_Http::getProgress($adapter);
 
@@ -550,7 +550,7 @@ while (!$upload['done']) {
 
                 <title>手動での進捗状況表示の使用法</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $upload  = Zend_File_Transfer_Adapter_Http::getProgress();
 
 while (!$upload['done']) {

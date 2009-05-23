@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.openid.consumer">
     <title>Zend_OpenId_Consumer の基本</title>
     <para>
@@ -50,7 +50,7 @@
 
         <example id="zend.openid.consumer.example-1">
             <title>シンプルな OpenID ログインフォーム</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <html><body>
 <form method="post" action="example-1_2.php"><fieldset>
 <legend>OpenID ログイン</legend>
@@ -74,7 +74,7 @@
 
         <example id="zend.openid.consumer.example-1_2">
             <title>認証リクエストのハンドラ</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $consumer = new Zend_OpenId_Consumer();
 if (!$consumer->login($_POST['openid_identifier'], 'example-1_3.php')) {
     die("OpenID でのログインに失敗しました。");
@@ -121,7 +121,7 @@ if (!$consumer->login($_POST['openid_identifier'], 'example-1_3.php')) {
 
         <example id="zend.openid.consumer.example-1_3">
             <title>認証の応答の検証</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $consumer = new Zend_OpenId_Consumer();
 if ($consumer->verify($_GET, $id)) {
     echo "有効 " . htmlspecialchars($id);
@@ -155,7 +155,7 @@ if ($consumer->verify($_GET, $id)) {
 
         <example id="zend.openid.consumer.example-2">
             <title>完全な OpenID ログインスクリプト</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <?php
 $status = "";
 if (isset($_POST['openid_action']) &&
@@ -230,7 +230,7 @@ if (isset($_POST['openid_action']) &&
 
         <example id="zend.openid.consumer.example-3_2">
             <title>指定したレルムへの認証リクエスト</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $consumer = new Zend_OpenId_Consumer();
 if (!$consumer->login($_POST['openid_identifier'],
                       'example-3_3.php',
@@ -263,7 +263,7 @@ if (!$consumer->login($_POST['openid_identifier'],
 
         <example id="zend.openid.consumer.example-4">
             <title>対話形式でない即時確認</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $consumer = new Zend_OpenId_Consumer();
 if (!$consumer->check($_POST['openid_identifier'], 'example-4_3.php')) {
     die("OpenID でのログインに失敗しました。");
@@ -312,7 +312,7 @@ if (!$consumer->check($_POST['openid_identifier'], 'example-4_3.php')) {
 
         <example id="zend.openid.consumer.example-5">
             <title>データベースストレージ</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class DbStorage extends Zend_OpenId_Consumer_Storage
 {
     private $_db;
@@ -595,7 +595,7 @@ $consumer = new Zend_OpenId_Consumer($storage);
 
         <example id="zend.openid.consumer.example-6_2">
             <title>Simple Registration Extension のリクエストの送信</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $sreg = new Zend_OpenId_Extension_Sreg(array(
     'nickname'=>true,
     'email'=>false,
@@ -630,7 +630,7 @@ if (!$consumer->login($_POST['openid_identifier'],
 
         <example id="zend.openid.consumer.example-6_3">
             <title>Simple Registration Extension の応答内容の検証</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $sreg = new Zend_OpenId_Extension_Sreg(array(
     'nickname'=>true,
     'email'=>false,
@@ -702,7 +702,7 @@ if ($consumer->verify($_GET, $id, $sreg)) {
 
         <example id="zend.openid.consumer.example-7">
             <title>OpenID 用の Zend_Auth アダプタ</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <?php
 class OpenIdAdapter implements Zend_Auth_Adapter_Interface {
     private $_id = null;

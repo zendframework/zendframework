@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15346 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.auth.adapter.dbtable">
     <title>データベースのテーブルでの認証</title>
     <sect2 id="zend.auth.adapter.dbtable.introduction">
@@ -68,7 +68,7 @@
                 簡単なテーブルスキーマを作成し、そして後で認証クエリを実行するための行を追加します。
                 この例を実行するには、PDO SQLite 拡張モジュールが有効になっている必要があります。
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // メモリ内で SQLite データベース接続を作成します
 $dbAdapter = new Zend_Db_Adapter_Pdo_Sqlite(array('dbname' =>
                                                   ':memory:'));
@@ -95,7 +95,7 @@ $dbAdapter->query($sqlInsert);]]></programlisting>
                 設定オプションの値は、コンストラクタで渡すか、
                 あるいはインスタンスを作成した後に設定用メソッドで指定します。
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // コンストラクタにパラメータを渡し、インスタンスを設定します
 $authAdapter = new Zend_Auth_Adapter_DbTable(
     $dbAdapter,
@@ -117,7 +117,7 @@ $authAdapter
                 認証クエリを処理するには、入力された証明情報をアダプタに渡してから
                 <code>authenticate()</code> メソッドをコールします。
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // 入力情報 (ログインフォームからの値など) を設定します
 $authAdapter
     ->setIdentity('my_username')
@@ -131,7 +131,7 @@ $result = $authAdapter->authenticate();]]></programlisting>
                 メソッドに加え、<classname>Zend_Auth_Adapter_DbTable</classname>
                 は認証の成功時にテーブルの行を取得する機能もサポートしています。
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // ID を表示します
 echo $result->getIdentity() . "\n\n";
 
@@ -166,7 +166,7 @@ Array
             <code>stdClass</code> オブジェクトを返します。
             次のコードで、使用法をご確認ください。
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Zend_Auth_Adapter_DbTable による認証を行います
 $result = $this->_auth->authenticate($adapter);
 
@@ -206,7 +206,7 @@ if ($result->isValid()) {
             に組み込まれている仕組みを使用すると、
             認証時にありがちな問題を解決するチェックを加えることができます。
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // アカウントの status フィールドが "compromised" ではない
 $adapter = new Zend_Auth_Adapter_DbTable(
     $db,
@@ -233,7 +233,7 @@ $adapter = new Zend_Auth_Adapter_DbTable(
         <para>
             salt 文字列を格納するために、テーブルの構造を変更する必要があります。
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $sqlAlter = "ALTER TABLE [users] "
           . "ADD COLUMN [password_salt] "
           . "AFTER [password]";
@@ -242,14 +242,14 @@ $dbAdapter->query($sqlAlter);]]></programlisting>
         <para>
             すべてのユーザに対して登録時に salt 文字列を生成するシンプルな方法を示します。
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 for ($i = 0; $i < 50; $i++) {
     $dynamicSalt .= chr(rand(33, 126));
 }]]></programlisting>
         <para>
             それではアダプタを作成してみましょう。
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $adapter = new Zend_Auth_Adapter_DbTable(
     $db,
     'users',
@@ -281,7 +281,7 @@ $adapter = new Zend_Auth_Adapter_DbTable(
             たとえばユーザの状態のチェック、
             つまりそのユーザアカウントが有効になっているかどうかの確認などがあります。
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // 上の例の続き
 $adapter = new Zend_Auth_Adapter_DbTable(
     $db,

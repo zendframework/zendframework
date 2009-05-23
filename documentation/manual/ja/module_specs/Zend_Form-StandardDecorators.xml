@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.form.standardDecorators">
     <title>Zend Framework に同梱されている標準のデコレータ</title>
 
@@ -26,7 +26,7 @@
             コールバックの例は、次のようになります。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class Util
 {
     public static function label($content, $element, array $options)
@@ -117,7 +117,7 @@ class Util
             としてラップします。出力は、次のようになります。
         </para>
 
-        <programlisting role="html"><![CDATA[
+        <programlisting language="html"><![CDATA[
 <dt></dt>
 <dd><fieldset id="subform">
     <legend>User Information</legend>
@@ -212,7 +212,7 @@ class Util
             デフォルトでは、生成されるエラー一覧は次のようなマークアップになります。
         </para>
 
-        <programlisting role="html"><![CDATA[
+        <programlisting language="html"><![CDATA[
 <ul class="form-errors>
     <li><b>[要素の label あるいは name]</b><ul>
             <li>[エラーメッセージ]</li>
@@ -394,7 +394,7 @@ class Util
             一般的には、これをリスト内の最初のデコレータとして設定します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $form->setDecorators(array(
     'PrepareElements',
     array('ViewScript', array('viewScript' => 'form.phtml')),
@@ -471,7 +471,7 @@ $form->setDecorators(array(
             例として、次のような要素を考えてみましょう。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // 要素のデコレータとして、ViewScript デコレータを指定し、
 // ビュースクリプトとその他のオプションを設定します
 $element->setDecorators(array(array('ViewScript', array(
@@ -489,7 +489,7 @@ $element->setDecorators(array(array('ViewScript',
             そして、次のようなビュースクリプトを作成します
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <div class="<?php echo $this->class ?>">
     <?php echo $this->formLabel($this->element->getName(),
                          $this->element->getLabel()) ?>
@@ -513,7 +513,7 @@ $element->setDecorators(array(array('ViewScript',
                 に false を設定します。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // デコレータの作成時
 $element->addDecorator('ViewScript', array('placement' => false));
 

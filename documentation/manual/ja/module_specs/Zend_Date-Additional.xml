@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.date.additional">
 
     <title>動作例</title>
@@ -59,7 +59,7 @@
 
         <example id="zend.date.additional.checking.example-1">
             <title>日付の確認</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // 日付を確認します
 $date = '01.03.2000';
 if (Zend_Date::isDate($date)) {
@@ -114,7 +114,7 @@ if (Zend_Date::isDate($date,'dd MMMM yyyy', 'en')) {
 
         <example id="zend.date.additional.sunrise-sunset.example-1">
             <title>利用可能な都市の取得</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // 利用可能な都市の一覧を出力します
 print_r (Zend_Date_Cities::getCityList());
 ]]></programlisting>
@@ -176,7 +176,7 @@ print_r (Zend_Date_Cities::getCityList());
 
         <example id="zend.date.additional.sunrise-sunset.example-2">
             <title>都市の位置の取得</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // 定義済みの都市の位置を取得します
 // 水平線を指定していないので、effective horizon を使用します
 print_r (Zend_Date_Cities::City('Vienna'));
@@ -201,7 +201,7 @@ $mylocation = array('latitude' => 41.5, 'longitude' => 13.2446);
 
         <example id="zend.date.additional.sunrise-sunset.example-3">
             <title>太陽の情報の算出</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // 定義済みの都市の位置を取得します
 $city = Zend_Date_Cities::City('Vienna');
 
@@ -261,7 +261,7 @@ foreach ($info as $sun) {
 
         <example id="zend.date.additional.timezones.example-1">
             <title>タイムゾーンの処理</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // デフォルトのタイムゾーンを設定します。
 // これは、起動ファイルか php.ini で設定します。
 // ここで設定しているのは、単体でサンプルとして完結させるためです。
@@ -307,7 +307,7 @@ print $date->getIso();
 
         <example id="zend.date.additional.timezones.example-2">
             <title>複数のタイムゾーン</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // デフォルトのタイムゾーンを設定します。
 // これは、起動ファイルか php.ini で設定します。
 // ここで設定しているのは、単体でサンプルとして完結させるためです。

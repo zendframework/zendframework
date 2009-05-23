@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15343 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.infocard.basics">
     <title>導入</title>
 
@@ -33,7 +33,7 @@
             HTML のログインフォームの中で次のような HTML ブロックを使用します。
         </para>
 
-        <programlisting role="html"><![CDATA[
+        <programlisting language="html"><![CDATA[
 <form action="http://example.com/server" method="POST">
   <input type='image' src='/images/ic.png' align='center'
         width='120px' style='cursor:pointer' />
@@ -87,7 +87,7 @@
             この手法での使用例を以下に示します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php
 if (isset($_POST['xmlToken'])) {
 
@@ -175,7 +175,7 @@ if (isset($_POST['xmlToken'])) {
             以下に使用例を示します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php
 if (isset($_POST['xmlToken'])) {
     $infocard = new Zend_InfoCard();
@@ -287,7 +287,7 @@ if (isset($_POST['xmlToken'])) {
             以下に示します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // ...
 public function submitinfocardAction()
 {
@@ -367,7 +367,7 @@ public function submitinfocardAction()
             アダプタを設定してアプリケーション内で使用しています。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class myAdapter implements Zend_InfoCard_Adapter_Interface
 {
     public function storeAssertion($assertionURI,

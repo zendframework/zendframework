@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.gdata.photos">
     <title>Picasa Web Albums の使用法</title>
 
@@ -128,7 +128,7 @@
             <para>
                 以下の例は、ClientAuth 認証を使用してサービスクラスを作成するものです。
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // ClientAuth 認証用のパラメータ
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $user = "sample.user@gmail.com";
@@ -145,7 +145,7 @@ $service = new Zend_Gdata_Photos($client);
                 AuthSub を使用するサービスを作成するのもほぼ同様ですが、
                 少々長めになります。
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 session_start();
 
 /**
@@ -233,7 +233,7 @@ $service = new Zend_Gdata_Photos(getAuthSubHttpClient());
 ]]></programlisting>
 
             <para>未認証のサーバを作成して、公開フィードへのアクセスに使用することができます。</para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // サービスのインスタンスを、未認証の HTTP クライアントで作成します
 $service = new Zend_Gdata_Photos();
 ]]></programlisting>
@@ -273,7 +273,7 @@ $service = new Zend_Gdata_Photos();
         </itemizedlist>
 
         <para>新しい <code>UserQuery</code> を作成するには次のようにします。</para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $service = new Zend_Gdata_Photos($client);
@@ -398,7 +398,7 @@ $query->setUser("sample.user");
             </para>
 
             <para>ユーザのフィードにアクセスするには、ユーザ名を <code>getUserFeed</code> メソッドに渡します。</para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $service = new Zend_Gdata_Photos($client);
@@ -411,7 +411,7 @@ try {
 ]]></programlisting>
 
             <para>あるいは、クエリを作成してフィードにアクセスすることもできます。この場合は、まず次のようにします。</para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $service = new Zend_Gdata_Photos($client);
@@ -427,7 +427,7 @@ try {
 ]]></programlisting>
 
             <para>クエリを作成すると、ユーザエントリオブジェクトも取得できるようになります。</para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $service = new Zend_Gdata_Photos($client);
@@ -451,7 +451,7 @@ try {
             <para>
                 アルバムのフィードにアクセスするには、クエリオブジェクトを作成してそれを <code>getAlbumFeed</code> に渡します。
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $service = new Zend_Gdata_Photos($client);
@@ -475,7 +475,7 @@ try {
             </para>
 
             <para>クエリを作成すると、アルバムエントリオブジェクトも取得できるようになります。</para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $service = new Zend_Gdata_Photos($client);
@@ -500,7 +500,7 @@ try {
             <para>
                 写真のフィードにアクセスするには、クエリオブジェクトを作成してそれを <code>getPhotoFeed</code> に渡します。
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $service = new Zend_Gdata_Photos($client);
@@ -518,7 +518,7 @@ try {
 ]]></programlisting>
 
             <para>クエリを作成すると、写真エントリオブジェクトも取得できるようになります。</para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $service = new Zend_Gdata_Photos($client);
@@ -546,7 +546,7 @@ try {
             </para>
 
             <para>指定した写真のコメントを処理するには、次のようにします。</para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $service = new Zend_Gdata_Photos($client);
@@ -580,7 +580,7 @@ try {
             </para>
 
             <para>指定した写真のタグを処理するには、次のようにします。</para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $service = new Zend_Gdata_Photos($client);
@@ -614,7 +614,7 @@ try {
         <sect3 id="zend.gdata.photos.album_creation">
             <title>アルバムの作成</title>
             <para>このサービスは、認証済みユーザ用の新しいアルバムの作成をサポートしています。</para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $service = new Zend_Gdata_Photos($client);
@@ -629,7 +629,7 @@ $service->insertAlbumEntry($entry);
         <sect3 id="zend.gdata.photos.photo_creation">
             <title>写真の作成</title>
             <para>このサービスは、認証済みユーザ用の新しい写真の作成をサポートしています。</para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $service = new Zend_Gdata_Photos($client);
@@ -656,7 +656,7 @@ $service->insertPhotoEntry($entry, $albumEntry);
         <sect3 id="zend.gdata.photos.comment_creation">
             <title>コメントの作成</title>
             <para>このサービスは、写真への新しいコメントの作成をサポートしています。</para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $service = new Zend_Gdata_Photos($client);
@@ -680,7 +680,7 @@ $service->insertCommentEntry($entry, $photoEntry);
         <sect3 id="zend.gdata.photos.tag_creation">
             <title>タグの作成</title>
             <para>このサービスは、写真への新しいタグの作成をサポートしています。</para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $service = new Zend_Gdata_Photos($client);
@@ -709,7 +709,7 @@ $service->insertTagEntry($entry, $photoEntry);
         <sect3 id="zend.gdata.photos.album_deletion">
             <title>アルバムの削除</title>
             <para>このサービスは、認証済みユーザ用のアルバムの削除をサポートしています。</para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $service = new Zend_Gdata_Photos($client);
@@ -728,7 +728,7 @@ $service->deleteAlbumEntry($entry, true);
         <sect3 id="zend.gdata.photos.photo_deletion">
             <title>写真の削除</title>
             <para>このサービスは、認証済みユーザ用の写真の削除をサポートしています。</para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $service = new Zend_Gdata_Photos($client);
@@ -748,7 +748,7 @@ $service->deletePhotoEntry($entry, true);
         <sect3 id="zend.gdata.photos.comment_deletion">
             <title>コメントの削除</title>
             <para>このサービスは、認証済みユーザのコメントの削除をサポートしています。</para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $service = new Zend_Gdata_Photos($client);
@@ -770,7 +770,7 @@ $service->deleteCommentEntry($entry, true);
         <sect3 id="zend.gdata.photos.tag_deletion">
             <title>タグの削除</title>
             <para>このサービスは、認証済みユーザのタグの削除をサポートしています。</para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $service = new Zend_Gdata_Photos($client);
@@ -812,7 +812,7 @@ $service->deleteTagEntry($tagEntry, true);
                 削除時のバージョン管理の処理方法については <code>deleteAlbumEntry</code>
                 で見ることができます。
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // $album は、削除したい albumEntry です
 try {
     $this->delete($album);

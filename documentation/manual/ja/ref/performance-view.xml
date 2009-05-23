@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15569 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="performance.view">
     <title>ビューのレンダリング</title>
 
@@ -78,7 +78,7 @@
                 あるいはメソッドに完全なヘルパ実装を詰め込みます。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class My_View extends Zend_View
 {
     /**
@@ -216,7 +216,7 @@ class My_View extends Zend_View
                 <methodname>dispatchLoopStartup()</methodname> プラグインを書けるでしょう。:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class LoginPlugin extends Zend_Controller_Plugin_Abstract
 {
     protected $_stack;
@@ -255,7 +255,7 @@ class LoginPlugin extends Zend_Controller_Plugin_Abstract
                 レイアウトスクリプトでそのレスポンスセグメントを単純にレンダリングするでしょう。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <?php $this->layout()->login ?>
 ]]></programlisting>
 
@@ -287,7 +287,7 @@ class LoginPlugin extends Zend_Controller_Plugin_Abstract
                 ビュースクリプトを考えてみましょう:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class BugController extends Zend_Controller_Action
 {
     public function listAction()
@@ -313,7 +313,7 @@ echo "</ul>\n";
                 下記のようにして呼び出すでしょう:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <?php $this->action('list', 'bug') ?>
 ]]></programlisting>
 
@@ -321,7 +321,7 @@ echo "</ul>\n";
                 これは下記のように見えるビューヘルパにリファクタリングできるでしょう。:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class My_View_Helper_BugList extends Zend_View_Helper_Abstract
 {
     public function bugList()
@@ -345,7 +345,7 @@ class My_View_Helper_BugList extends Zend_View_Helper_Abstract
                 それからヘルパを下記のように呼び出すでしょう:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <?php $this->bugList() ?>
 ]]></programlisting>
 

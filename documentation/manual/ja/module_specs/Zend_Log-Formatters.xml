@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.log.formatters">
   <title>フォーマッタ</title>
   <para>
@@ -23,7 +23,7 @@
       これは、何もフォーマッタを指定しなかった場合に自動的に設定されます。
       デフォルトの設定は、次のようになります。
 
-      <programlisting role="php"><![CDATA[
+      <programlisting language="php"><![CDATA[
 $format = '%timestamp% %priorityName% (%priority%): %message%' . PHP_EOL;
 $formatter = new Zend_Log_Formatter_Simple($format);
 ]]></programlisting>
@@ -33,7 +33,7 @@ $formatter = new Zend_Log_Formatter_Simple($format);
       フォーマッタを個々のライターオブジェクトに対して設定するには、ライターの
       <code>setFormatter()</code> メソッドを使用します。
 
-      <programlisting role="php"><![CDATA[
+      <programlisting language="php"><![CDATA[
 $writer = new Zend_Log_Writer_Stream('php://output');
 $formatter = new Zend_Log_Formatter_Simple('hello %message%' . PHP_EOL);
 $writer->setFormatter($formatter);
@@ -64,7 +64,7 @@ $logger->info('there');
       <classname>Zend_Log_Formatter_Xml</classname> は、ログのデータを XML 文字列に変換します。
       デフォルトでは、イベントデータ配列のすべての項目を自動的に記録します。
 
-      <programlisting role="php"><![CDATA[
+      <programlisting language="php"><![CDATA[
 $writer = new Zend_Log_Writer_Stream('php://output');
 $formatter = new Zend_Log_Formatter_Xml();
 $writer->setFormatter($formatter);
@@ -79,7 +79,7 @@ $logger->info('通知メッセージ');
     <para>
       上のコードの出力は、次のような XML になります (可読性を確保するため空白を補っています)。
 
-      <programlisting role="xml"><![CDATA[
+      <programlisting language="xml"><![CDATA[
 <logEntry>
   <timestamp>2007-04-06T07:24:37-07:00</timestamp>
   <message>通知メッセージ</message>
@@ -95,7 +95,7 @@ $logger->info('通知メッセージ');
       ルート要素の名前を指定します。また、
       二番目のパラメータには要素名の対応を表す連想配列を指定します。
 
-      <programlisting role="php"><![CDATA[
+      <programlisting language="php"><![CDATA[
 $writer = new Zend_Log_Writer_Stream('php://output');
 $formatter = new Zend_Log_Formatter_Xml('log',
                                         array('msg' => 'message',
@@ -114,7 +114,7 @@ $logger->info('通知メッセージ');
       <code>msg</code> をイベントデータの項目 <code>message</code> に対応させます。
       出力結果は次のようになります。
 
-      <programlisting role="xml"><![CDATA[
+      <programlisting language="xml"><![CDATA[
 <log>
   <msg>通知メッセージ</msg>
   <level>INFO</level>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15615 -->
+<!-- EN-Revision: 15617 -->
 <appendix id="coding-standard">
   <title>Zend Framework PHP 標準コーディング規約</title>
     <sect1 id="coding-standard.overview">
@@ -168,7 +168,7 @@
                 ただしビュースクリプトは例外です。次の例は、Zend Framework
                 のクラスに使用できるファイル名を示すものです。
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 Zend/Db.php
 
 Zend/Controller/Front.php
@@ -206,7 +206,7 @@ Zend/View/Helper/FormRadio.php
             <para>
                 条件を満たす関数名の例を示します。
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 filterInput()
 
 getElementById()
@@ -304,7 +304,7 @@ widgetFactory()
             <para>
                 PHP のコードの区切りには、標準 PHP タグを常に使用しなければなりません。
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 <?php
 
 ?>
@@ -330,7 +330,7 @@ widgetFactory()
                     場合は、アポストロフィあるいは「シングルクォート」
                     で文字列を囲まなければなりません。
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $a = '文字列の例';
 ]]></programlisting>
                 </para>
@@ -344,7 +344,7 @@ $a = '文字列の例';
                     引用符あるいは「ダブルクォート」で文字列を囲んでもかまいません。
                     特に SQL 文などでこのような場合がよくあるでしょう。
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $sql = "SELECT `id`, `name` from `people` "
      . "WHERE `name`='Fred' OR `name`='Susan'";
 ]]></programlisting>
@@ -359,7 +359,7 @@ $sql = "SELECT `id`, `name` from `people` "
                 <para>
                     変数の展開を行うには、次のような方法を使用します。
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $greeting = "こんにちは $name さん。ようこそ!";
 
 $greeting = "こんにちは {$name} さん。ようこそ!";
@@ -369,7 +369,7 @@ $greeting = "こんにちは {$name} さん。ようこそ!";
                 <para>
                     一貫性を保つため、以下の形式は許可されません。
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $greeting = "こんにちは ${name} さん。ようこそ!";
 ]]></programlisting>
                 </para>
@@ -382,7 +382,7 @@ $greeting = "こんにちは ${name} さん。ようこそ!";
                     文字列の連結には "." 演算子を使用しなければなりません。コードを読みやすくするため、
                     "." 演算子の前後には常にスペースを入れなければなりません。
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $company = 'Zend' . ' ' . 'Technologies';
 ]]></programlisting>
                 </para>
@@ -393,7 +393,7 @@ $company = 'Zend' . ' ' . 'Technologies';
                     2 行目以降の行頭にスペースを入れ、各行の "." 演算子が最初の行の
                     "=" 演算子と同じ位置にくるようにしなければなりません。
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $sql = "SELECT `id`, `name` FROM `people` "
      . "WHERE `name` = 'Susan' "
      . "ORDER BY `name` ASC ";
@@ -420,7 +420,7 @@ $sql = "SELECT `id`, `name` FROM `people` "
                     コードを読みやすくするため、
                     要素を区切るカンマの後にスペースを入れなければなりません。
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $sampleArray = array(1, 2, 3, 'Zend', 'Studio');
 ]]></programlisting>
                 </para>
@@ -430,7 +430,7 @@ $sampleArray = array(1, 2, 3, 'Zend', 'Studio');
                     その場合は、2 行目以降の行頭にスペースを入れ、
                     各行の開始位置が以下のようになるようにしなければなりません。
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $sampleArray = array(1, 2, 3, 'Zend', 'Studio',
                      $a, $b, $c,
                      56.44, $d, 500);
@@ -447,7 +447,7 @@ $sampleArray = array(1, 2, 3, 'Zend', 'Studio',
                     2 行目以降の行頭などにスペースを入れ、
                     キーと値の位置がそれぞれ揃うようにしなければなりません。
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $sampleArray = array('firstKey'  => 'firstValue',
                      'secondKey' => 'secondValue');
 ]]></programlisting>
@@ -478,7 +478,7 @@ $sampleArray = array('firstKey'  => 'firstValue',
                 </para><para>
                     これらの条件を満たすクラス宣言の例です。
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 /**
  * これがドキュメントブロックです
  */
@@ -536,7 +536,7 @@ class SampleClass
                 <para>
                     クラス内の関数宣言の例として適切なものを次に示します。
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 /**
  * これがドキュメントブロックです
  */
@@ -557,7 +557,7 @@ class Foo
                 <para>
                     <emphasis>注意:</emphasis> 値の参照渡しは、メソッドの宣言時にパラメータを渡す部分においてのみ可能です。
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 /**
  * これがドキュメントブロックです
  */
@@ -580,7 +580,7 @@ class Foo
                     返り値は括弧で囲んではいけません。これは可読性を下げますし、
                     将来そのメソッドが参照を返すようになった場合にコードが壊れてしまいます。
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 /**
  * これがドキュメントブロックです
  */
@@ -615,7 +615,7 @@ class Foo
                     例えば 3 つの引数を受け取る関数をコールする場合の例は、
                     以下のようになります。
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 threeArguments(1, 2, 3);
 ]]></programlisting>
                 </para>
@@ -630,7 +630,7 @@ threeArguments(1, 2, 3);
                     "array" 構文を含め、それを複数行に分けることもできます。
                     そのような場合の記述法は、以下のようになります。
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 threeArguments(array(1, 2, 3), 2, 3);
 
 threeArguments(array(1, 2, 3, 'Zend', 'Studio',
@@ -664,7 +664,7 @@ threeArguments(array(1, 2, 3, 'Zend', 'Studio',
                     終了波括弧は、常に改行してそれのみで記述します。
                     波括弧の中では、空白 4 文字の字下げを使用します。
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 if ($a != 2) {
     $a = 2;
 }
@@ -675,7 +675,7 @@ if ($a != 2) {
                     "elseif" あるいは "else" を含む "if" 文の場合の決まりは、通常の "if" と同じです。
                     次の例は、"if" 文に "else" や "elseif" が含まれる場合のものです。
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 if ($a != 2) {
     $a = 2;
 } else {
@@ -715,7 +715,7 @@ if ($a != 2) {
                     各 "case" 文の中身は、さらに 4 文字ぶん字下げします。
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 switch ($numPeople) {
     case 1:
         break;
@@ -775,7 +775,7 @@ switch ($numPeople) {
                     phpDocumentor タグを含むドキュメントブロックを、
                     ファイルの先頭に記述しなければなりません。
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 /**
  * ファイルについての短い説明
  *
@@ -800,7 +800,7 @@ switch ($numPeople) {
                     各クラスには、最低限これらの phpDocumentor タグを含む
                     docblock が必要です。
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 /**
  * クラスについての短い説明
  *
@@ -840,7 +840,7 @@ switch ($numPeople) {
                 <para>
                     関数/メソッドが例外をスローする場合には、すべての既知の例外クラスに対して @throws を使用します。
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 @throws exceptionclass [description]
 ]]></programlisting>
                 </para>

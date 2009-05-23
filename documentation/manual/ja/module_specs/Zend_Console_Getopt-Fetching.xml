@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.console.getopt.fetching">
     <title>オプションおよび引数の取得</title>
     <para>
@@ -34,7 +34,7 @@
         </para>
         <example id="zend.console.getopt.fetching.exceptions.example">
             <title>Getopt の例外処理</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 try {
     $opts = new Zend_Console_Getopt('abp:');
     $opts->parse();
@@ -80,7 +80,7 @@ try {
         </para>
         <example id="zend.console.getopt.fetching.byname.example.setoption">
             <title>getOption() の使用法</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
 $b = $opts->getOption('b');
 $p_parameter = $opts->getOption('p');
@@ -93,7 +93,7 @@ $p_parameter = $opts->getOption('p');
         </para>
         <example id="zend.console.getopt.fetching.byname.example.magic">
             <title>マジックメソッド __get() および __isset() の使用例</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
 if (isset($opts->b)) {
     echo "オプション b を取得しました。\n";
@@ -161,7 +161,7 @@ $p_parameter = $opts->p; // 設定されていない場合は null となりま�
         </para>
         <example id="zend.console.getopt.fetching.remainingargs.example">
             <title>getRemainingArgs() の使用法</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
 $opts->setArguments(array('-p', 'p_parameter', 'filename'));
 $args = $opts->getRemainingArgs(); // array('filename') を返します

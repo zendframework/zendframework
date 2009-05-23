@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.controller.action">
     <title>アクションコントローラ</title>
 
@@ -29,7 +29,7 @@
             たとえば、次のようなクラスを見てみましょう。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function barAction()
@@ -73,7 +73,7 @@ class FooController extends Zend_Controller_Action
                 以下のいずれかの方法を使用します。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function init()
@@ -107,7 +107,7 @@ class FooController extends Zend_Controller_Action
                 フラグを設定することもできます。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function barAction()
@@ -150,7 +150,7 @@ class FooController extends Zend_Controller_Action
             初期化時にデータベースに接続したいなら次のようにします。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function init()
@@ -204,7 +204,7 @@ class FooController extends Zend_Controller_Action
                     典型的な使用法は、このようになります。
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $this->getResponse()->setHeader('Content-Type', 'text/xml');
 $this->getResponse()->appendBody($content);
 ]]></programlisting>
@@ -248,7 +248,7 @@ $this->getResponse()->appendBody($content);
                         <code>_hasParam()</code> をコールする必要がなくなります。
                     </para>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 // id が設定されていない場合のデフォルト値を 1 とします
 $id = $this->_getParam('id', 1);
 
@@ -306,7 +306,7 @@ if ($this->_hasParam('id') {
                 デフォルトの実装は、以下のようなディレクトリ階層を前提としています。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 applicationOrModule/
     controllers/
         IndexController.php
@@ -336,7 +336,7 @@ applicationOrModule/
                 <code>render()</code> のシグネチャは次のとおりです。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 string render(string $action = null,
               string $name = null,
               bool $noController = false);
@@ -374,7 +374,7 @@ string render(string $action = null,
                 例を見てみましょう。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class MyController extends Zend_Controller_Action
 {
     public function fooAction()
@@ -532,7 +532,7 @@ class MyController extends Zend_Controller_Action
                 たとえば、エラーメッセージを表示させたい場合は次のようになります。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class MyController extends Zend_Controller_Action
 {
     public function __call($method, $args)
@@ -557,7 +557,7 @@ class MyController extends Zend_Controller_Action
             </para>
 
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class MyController extends Zend_Controller_Action
 {
     public function indexAction()
@@ -590,7 +590,7 @@ class MyController extends Zend_Controller_Action
             <code>initView()</code> メソッドを次のように書き換えることになるでしょう。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 abstract class My_Base_Controller extends Zend_Controller_Action
 {
     public function initView()

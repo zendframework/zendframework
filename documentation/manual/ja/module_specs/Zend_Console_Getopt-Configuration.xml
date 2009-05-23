@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15207 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.console.getopt.configuration">
     <title>Zend_Console_Getopt の設定</title>
 
@@ -19,7 +19,7 @@
         </para>
         <example id="zend.console.getopt.configuration.addrules.example">
             <title>addRules() の使用法</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
 $opts->addRules(
   array(
@@ -47,7 +47,7 @@ $opts->addRules(
         </para>
         <example id="zend.console.getopt.configuration.addhelp.example">
             <title>setHelp() の使用法</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
 $opts->setHelp(
     array(
@@ -83,7 +83,7 @@ $opts->setHelp(
         </para>
         <example id="zend.console.getopt.configuration.addaliases.example">
             <title>setAliases() の使用法</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
 $opts->setAliases(
     array(
@@ -124,7 +124,7 @@ $opts->setAliases(
         </para>
         <example id="zend.console.getopt.configuration.addargs.example">
             <title>addArguments() および setArguments() の使用法</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // デフォルトでは、コンストラクタは $_SERVER['argv'] を使用します
 $opts = new Zend_Console_Getopt('abp:');
 
@@ -210,7 +210,7 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
         </para>
         <example id="zend.console.getopt.configuration.config.example.setoption">
             <title>setOption() の使用法</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
 $opts->setOption('ignoreCase', true);
 ]]></programlisting>
@@ -224,7 +224,7 @@ $opts->setOption('ignoreCase', true);
         </para>
         <example id="zend.console.getopt.configuration.config.example.setoptions">
             <title>setOptions() の使用法</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
 $opts->setOptions(
     array(

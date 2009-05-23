@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.exception.using">
 
     <title>例外の使用法</title>
@@ -15,7 +15,7 @@
         <para>
             次のコードは、Zend Framework のクラスからスローされた例外をキャッチする方法を示すものです。
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 try {
     // Zend_Loader::loadClass() で、存在しないクラスを指定してコールすると
     // Zend_Loader で例外がスローされます

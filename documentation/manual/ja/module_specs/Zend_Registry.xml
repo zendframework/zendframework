@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15215 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.registry.using">
 
     <title>レジストリの使用法</title>
@@ -30,7 +30,7 @@
 
         <example id="zend.registry.using.storing.example">
             <title>set() メソッドの使用例</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend_Registry::set('index', $value);
 ]]></programlisting>
         </example>
@@ -59,7 +59,7 @@ Zend_Registry::set('index', $value);
 
         <example id="zend.registry.using.retrieving.example">
             <title>get() メソッドの使用例</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $value = Zend_Registry::get('index');
 ]]></programlisting>
         </example>
@@ -73,7 +73,7 @@ $value = Zend_Registry::get('index');
 
         <example id="zend.registry.using.retrieving.example-iterating">
             <title>レジストリの順次処理の例</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $registry = Zend_Registry::getInstance();
 
 foreach ($registry as $index => $value) {
@@ -110,7 +110,7 @@ foreach ($registry as $index => $value) {
 
         <example id="zend.registry.using.constructing.example">
             <title>レジストリを作成する例</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $registry = new Zend_Registry(array('index' => $value));
 ]]></programlisting>
         </example>
@@ -125,7 +125,7 @@ $registry = new Zend_Registry(array('index' => $value));
 
         <example id="zend.registry.using.constructing.example-setinstance">
             <title>シングルトンレジストリの初期化の例</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $registry = new Zend_Registry(array('index' => $value));
 
 Zend_Registry::setInstance($registry);
@@ -151,7 +151,7 @@ Zend_Registry::setInstance($registry);
 
         <example id="zend.registry.using.array-access.example">
             <title>配列アクセスの例</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $registry = Zend_Registry::getInstance();
 
 $registry['index'] = $value;
@@ -190,7 +190,7 @@ var_dump( $registry['index'] );
 
         <example id="zend.registry.using.array-object.example">
             <title>オブジェクト形式のアクセスの例</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // アプリケーションの起動ファイルでの記述
 $registry = new Zend_Registry(array(), ArrayObject::ARRAY_AS_PROPS)
 Zend_Registry::setInstance($registry);
@@ -224,7 +224,7 @@ var_dump($registry->index);
 
         <example id="zend.registry.using.isset.example-isregistered">
             <title>isRegistered() メソッドの使用例</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 if (Zend_Registry::isRegistered($index)) {
     $value = Zend_Registry::get($index);
 }
@@ -238,7 +238,7 @@ if (Zend_Registry::isRegistered($index)) {
 
         <example id="zend.registry.using.isset.example-isset">
             <title>isset() メソッドの使用例</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $registry = Zend_Registry::getInstance();
 
 // 配列風の構文でのアクセス
@@ -273,7 +273,7 @@ if (isset($registry->index)) {
 
         <example id="zend.registry.using.subclassing.example">
             <title>シングルトンレジストリのクラス名を指定する例</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend_Registry::setClassName('My_Registry');
 
 Zend_Registry::set('index', $value);
@@ -319,7 +319,7 @@ Zend_Registry::set('index', $value);
 
         <example id="zend.registry.using.unsetting.example">
             <title>_unsetInstance() メソッドの例</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend_Registry::set('index', $value);
 
 Zend_Registry::_unsetInstance();

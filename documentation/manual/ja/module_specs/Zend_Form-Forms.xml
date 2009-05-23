@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15215 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.form.forms">
     <title>Zend_Form によるフォームの作成</title>
 
@@ -41,7 +41,7 @@
         もっとも基本的な使用法は、単にフォームオブジェクトを作成するものです。
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 // 汎用的なフォームオブジェクト
 $form = new Zend_Form();
 
@@ -54,7 +54,7 @@ $form = new My_Form()
         これを使用すると、オブジェクトの状態を設定したり新しい要素を作成したりすることができます。
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 // 設定オプションを渡します
 $form = new Zend_Form($config);
 ]]></programlisting>
@@ -185,7 +185,7 @@ $form = new Zend_Form($config);
             例を示します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // 要素のインスタンスを使用します
 $element = new Zend_Form_Element_Text('foo');
 $form->addElement($element);
@@ -232,7 +232,7 @@ $form->addElement('text', 'foo', array('label' => 'Foo:'));
             property:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // getElement():
 $foo = $form->getElement('foo');
 
@@ -247,7 +247,7 @@ $foo = $form->foo;
             そんな場合は <code>createElement()</code> メソッドを使用します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // $username は Zend_Form_Element_Text オブジェクトとなります
 $username = $form->createElement('text', 'username');
 ]]></programlisting>
@@ -263,7 +263,7 @@ $username = $form->createElement('text', 'username');
                 要素名を指定して特定の要素の値を取得することができます。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // すべての値を取得します
 $values = $form->getValues();
 
@@ -277,7 +277,7 @@ $value = $form->getValue('foo');
                 <code>populate()</code> メソッドを使用します。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $form->setDefaults($data);
 $form->populate($data);
 ]]></programlisting>
@@ -287,7 +287,7 @@ $form->populate($data);
                 これを行うには <code>reset()</code> メソッドを使用します。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $form->reset();
 ]]></programlisting>
         </sect3>
@@ -310,7 +310,7 @@ $form->reset();
                     グローバルプレフィックスを使用したりする例です。
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // グローバルプレフィックスパスの設定:
 // プレフィックス My_Foo_Filter、My_Foo_Validate、
 // My_Foo_Decorator のパスを作成します。
@@ -346,7 +346,7 @@ $form->addElementPrefixPath('My_Foo_Decorator',
                     Label デコレータを設定します。
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $form->setElementDecorators(array(
     'ViewHelper',
     'Label'
@@ -377,7 +377,7 @@ $form->setElementDecorators(array(
                     要素 'foo' および 'bar' に対してのみ使用するものです。
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $form->setElementDecorators(
     array(
         'ViewHelper',
@@ -396,7 +396,7 @@ $form->setElementDecorators(
                     すべての要素に対して使用します。
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $form->setElementDecorators(
     array(
         'ViewHelper',
@@ -444,7 +444,7 @@ $form->setElementDecorators(
                     たとえば、すべての値を <code>trim()</code> するなどです。
                 </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $form->setElementFilters(array('StringTrim'));
 ]]></programlisting>
             </example>
@@ -563,7 +563,7 @@ $form->setElementFilters(array('StringTrim'));
             'login' にまとめることができます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $form->addDisplayGroup(array('username', 'password'), 'login');
 ]]></programlisting>
 
@@ -573,7 +573,7 @@ $form->addDisplayGroup(array('username', 'password'), 'login');
             あるいは表示グループ名を指定します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // getDisplayGroup() の使用
 $login = $form->getDisplayGroup('login');
 
@@ -591,7 +591,7 @@ $login = $form->login;
                 'disableLoadDefaultDecorators' を指定します。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $form->addDisplayGroup(
     array('foo', 'bar'),
     'foobar',
@@ -623,7 +623,7 @@ $form->addDisplayGroup(
                     <code>addDisplayGroupPrefixPath()</code> メソッドを使用します。
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $form->addDisplayGroupPrefixPath('My_Foo_Decorator', 'My/Foo/Decorator');
 ]]></programlisting>
             </example>
@@ -642,7 +642,7 @@ $form->addDisplayGroupPrefixPath('My_Foo_Decorator', 'My/Foo/Decorator');
                     を設定します。
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $form->setDisplayGroupDecorators(array(
     'FormElements',
     'Fieldset'
@@ -665,7 +665,7 @@ $form->setDisplayGroupDecorators(array(
                 このときに使用するキーは 'displayGroupClass' です。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // 'My_DisplayGroup' クラスを使用します
 $form->addDisplayGroup(
     array('username', 'password'),
@@ -685,7 +685,7 @@ $form->addDisplayGroup(
                 同じクラスを使わせることもできます。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // すべての表示グループで 'My_DisplayGroup' クラスを使用します
 $form->setDefaultDisplayGroupClass('My_DisplayGroup');
 ]]></programlisting>
@@ -918,7 +918,7 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
             サブフォームをアタッチするには、単にそれを要素に追加して名前を指定するだけです。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $form->addSubForm($subForm, 'subform');
 ]]></programlisting>
 
@@ -927,7 +927,7 @@ $form->addSubForm($subForm, 'subform');
             <code>getSubForm($name)</code> を使用するかあるいはサブフォームの名前を使用します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // getSubForm() の使用
 $subForm = $form->getSubForm('subform');
 
@@ -954,7 +954,7 @@ $subForm = $form->subform;
                 (FormElements デコレータは、要素を順次処理するために必須です)。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $form->setSubFormDecorators(array(
     'FormElements',
     'Fieldset'
@@ -1022,7 +1022,7 @@ $form->setSubFormDecorators(array(
             フォームの名前を設定したり取得したりするには name アクセサを使用します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // 名前を設定します
 $form->setName('registration');
 
@@ -1037,7 +1037,7 @@ $name = $form->getName();
             method アクセサを使用します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // アクションとメソッドを設定します
 $form->setAction('/user/login')
      ->setMethod('post');
@@ -1054,7 +1054,7 @@ $form->setAction('/user/login')
             しかし、これ以外にも任意のエンコード形式を指定することができます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // アクションとメソッド、そして enctype を設定します
 $form->setAction('/user/login')
      ->setMethod('post')
@@ -1073,7 +1073,7 @@ $form->setAction('/user/login')
             インターフェイスを実装しており、count 関数の引数として使用することができます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $numItems = count($form);
 ]]></programlisting>
 
@@ -1084,7 +1084,7 @@ $numItems = count($form);
             これがメタデータにアクセスするための唯一の方法となります。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // 属性を設定します
 $form->setAttrib('class', 'zend-form')
      ->addAttribs(array(
@@ -1130,7 +1130,7 @@ $form->clearAttribs();
             以下のコードと同様です。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $form->setDecorators(array(
     'FormElements',
     array('HtmlTag', array('tag' => 'dl')),
@@ -1142,7 +1142,7 @@ $form->setDecorators(array(
             これは、次のような出力をします。
         </para>
 
-        <programlisting role="html"><![CDATA[
+        <programlisting language="html"><![CDATA[
 <form action="/form/action" method="post">
 <dl>
 ...
@@ -1165,7 +1165,7 @@ $form->setDecorators(array(
                 'disableLoadDefaultDecorators' を指定します。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $form = new Zend_Form(array('disableLoadDefaultDecorators' => true));
 ]]></programlisting>
 
@@ -1194,7 +1194,7 @@ $form = new Zend_Form(array('disableLoadDefaultDecorators' => true));
                 この配列には、デコレータオブジェクトあるいはデコレータ名を指すエイリアスを指定します。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // 'FooBar' へのエイリアス
 $form->addDecorator(array('FooBar' => 'HtmlTag'), array('tag' => 'div'));
 
@@ -1208,7 +1208,7 @@ $form = $element->getDecorator('FooBar');
                 デコレータを表す配列を 'decorator' オプションに渡す必要があります。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // ふたつの 'HtmlTag' デコレータを使用するため、片方に 'FooBar' というエイリアスを指定します
 $form->addDecorators(
     array('HtmlTag', array('tag' => 'div')),
@@ -1276,7 +1276,7 @@ $fooBar  = $form->getDecorator('FooBar');
             <code>render()</code> メソッドにコンテンツとして渡されます。次の例を参照ください。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // FormElements デコレータのみをレンダリングします
 echo $form->renderFormElements();
 
@@ -1305,7 +1305,7 @@ echo $form->renderFieldset("<p>This is fieldset content</p>");
             フォーム全体のバリデーションを行うには <code>isValid()</code> メソッドを使用します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 if (!$form->isValid($_POST)) {
     // 検証に失敗しました
 }
@@ -1321,7 +1321,7 @@ if (!$form->isValid($_POST)) {
             <code>isValidPartial($data)</code> を使用します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 if (!$form->isValidPartial($data)) {
     // 検証に失敗しました
 }
@@ -1339,7 +1339,7 @@ if (!$form->isValidPartial($data)) {
             <code>processAjax()</code> が、まさにその作業を行うメソッドです。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $json = $form->processAjax($data);
 ]]></programlisting>
 
@@ -1357,7 +1357,7 @@ $json = $form->processAjax($data);
             <code>getMessages()</code> で取得することができます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $codes = $form->getErrors();
 $messages = $form->getMessages();
 ]]></programlisting>
@@ -1374,7 +1374,7 @@ $messages = $form->getMessages();
             それぞれのメソッドに要素名を渡します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $codes = $form->getErrors('username');
 $messages = $form->getMessages('username');
 ]]></programlisting>
@@ -1723,7 +1723,7 @@ $messages = $form->getMessages('username');
             例として、すべての型の設定データを渡すファイルを見てみましょう。
         </para>
 
-        <programlisting role="ini"><![CDATA[
+        <programlisting language="ini"><![CDATA[
 [element]
 name = "registration"
 action = "/user/register"
@@ -1799,7 +1799,7 @@ decorators.form.decorator = "Form"
             メソッドでフォーム要素などの設定を行います。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class My_Form_Login extends Zend_Form
 {
     public function init()
@@ -1851,7 +1851,7 @@ class My_Form_Login extends Zend_Form
             このフォームのインスタンスを作成するのは、次のように簡単です。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $form = new My_Form_Login();
 ]]></programlisting>
 
@@ -1867,7 +1867,7 @@ $form = new My_Form_Login();
             この場合は <code>loadDefaultDecorators()</code> メソッドを上書きします。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class My_Form_Login extends Zend_Form
 {
     public function loadDefaultDecorators()

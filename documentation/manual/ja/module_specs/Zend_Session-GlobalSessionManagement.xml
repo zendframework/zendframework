@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15346 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.session.global_session_management">
 
     <title>グローバルセッションの管理</title>
@@ -52,7 +52,7 @@
                 で設定するには、まず設定オプションを INI ファイルに追加します。
             </para>
 
-            <programlisting role="ini"><![CDATA[
+            <programlisting language="ini"><![CDATA[
 ; 本番サーバのデフォルト設定
 [production]
 ; bug_compat_42
@@ -99,7 +99,7 @@ remember_me_seconds = 864000
                 <classname>Zend_Session::setOptions()</classname> に渡します。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Ini('myapp.ini', 'development');
 
 Zend_Session::setOptions($config->toArray());
@@ -445,7 +445,7 @@ Zend_Session::setOptions($config->toArray());
 
                 <title>セッション固定化</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $defaultNamespace = new Zend_Session_Namespace();
 
 if (!isset($defaultNamespace->initialized)) {

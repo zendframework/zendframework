@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15207 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.cache.introduction">
     <title>導入</title>
     <para>
@@ -29,7 +29,7 @@
             を使用します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $frontendOptions = array(
    'lifetime' => 7200, // キャッシュの有効期限を 2 時間とします
    'automatic_serialization' => true
@@ -68,7 +68,7 @@ $cache = Zend_Cache::factory('Core',
             アンシリアライズしてデータを取得すればよいのです。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // $cache は先ほどの例で作成したものです
 
 // キャッシュがすでに存在するかどうかを調べます
@@ -105,7 +105,7 @@ print_r($result);
             このセクションが読み飛ばされ、その代わりにキャッシュから取得したデータが使用されます
             (キャッシュレコードが有効なものである限ります)。
        </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $frontendOptions = array(
    'lifetime' => 30,                   // キャッシュの有効期間は 30 秒です
    'automatic_serialization' => false  // これはデフォルト値です

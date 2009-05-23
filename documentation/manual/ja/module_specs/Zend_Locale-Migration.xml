@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.locale.migration">
 
     <title>以前のバージョンからの移行</title>
@@ -34,7 +34,7 @@
             <example id="zend.locale.migration.fromonesixtooneseven.example">
                 <title>isLocale() を 1.6 用から 1.7 用に変更する方法</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // 1.6 の例
 if ($locale = Zend_Locale::isLocale($locale)) {
     // ここで何かします
@@ -55,7 +55,7 @@ if (Zend_Locale::isLocale($locale)) {
                     そのロケールが正しくて再ルーティングが発生しなかったかどうかがわかることに注意しましょう。
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // 1.6 の例
 if ($locale = Zend_Locale::isLocale($locale, false)) {
     // ここで何かします
@@ -98,7 +98,7 @@ if (Zend_Locale::isLocale($locale, false)) {
             <example id="zend.locale.migration.fromonesixtooneseven.getdefault.example">
                 <title>getDefault() を 1.6 用から 1.7 用に変更する方法</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // 1.6 の例
 $locales = $locale->getDefault(Zend_Locale::BROWSER);
 

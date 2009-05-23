@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.json.advanced">
     <title>Zend_Json の高度な使用法</title>
 
@@ -32,7 +32,7 @@
             オブジェクトを連想配列にデコードします。しかし、
             もしオブジェクトとして受け取りたいのなら、そのように指定することもできます。
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // JSONオブジェクトをPHPオブジェクトにデコードします
 $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
 ]]></programlisting>
@@ -84,7 +84,7 @@ $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
             そんなときは次のようにコールします。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 Zend_Json::$useBuiltinEncoderDecoder = true:
 ]]></programlisting>
     </sect2>
@@ -114,7 +114,7 @@ Zend_Json::$useBuiltinEncoderDecoder = true:
             次のようにして使用します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $data = array(
     'onClick' => new Zend_Json_Expr('function() {'
               . 'alert("I am a valid javascript callback '

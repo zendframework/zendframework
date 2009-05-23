@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15617 -->
 <sect3 id="zend.view.helpers.initial.object">
     <title>HTML オブジェクトヘルパー</title>
 
@@ -56,7 +56,7 @@
             リソースの URI を引数として渡すだけの簡単な作業です。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php echo $this->htmlFlash('/path/to/flash.swf'); ?>
 ]]></programlisting>
 
@@ -64,7 +64,7 @@
             この結果は、次のような HTML となります。
         </para>
 
-        <programlisting role="html"><![CDATA[
+        <programlisting language="html"><![CDATA[
 <object data="/path/to/flash.swf"
         type="application/x-shockwave-flash"
         classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
@@ -99,7 +99,7 @@
             これらすべての引数を使用した例をごらんください。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 echo $this->htmlObject(
     '/path/to/file.ext',
     'mime/type',

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15602 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.db.table">
 
     <title>Zend_Db_Table</title>
@@ -49,7 +49,7 @@
 
                 <title>テーブル名を明示的に指定することによるテーブルクラスの宣言</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
 {
     protected $_name = 'bugs';
@@ -67,7 +67,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
                 <title>テーブル名を暗黙的に指定することによるテーブルクラスの宣言</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 class bugs extends Zend_Db_Table_Abstract
 {
     // テーブル名とクラス名が一致します
@@ -91,7 +91,7 @@ class bugs extends Zend_Db_Table_Abstract
 
                 <title>テーブルクラスでのスキーマの宣言</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // 一つ目の方法
 class Bugs extends Zend_Db_Table_Abstract
 {
@@ -129,7 +129,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
                 <title>インスタンス作成時のテーブル名とスキーマ名の指定</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
 {
 }
@@ -174,7 +174,7 @@ $tableBugs = new Bugs(array('name' => 'bug_db.bugs',
 
                 <title>主キーを指定する例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
 {
     protected $_name = 'bugs';
@@ -220,7 +220,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
                 <title>_setupTableName() メソッドのオーバーライドの例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
 {
     protected function _setupTableName()
@@ -297,7 +297,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
                 <title>init() メソッドの使用例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
 {
     protected $_observer;
@@ -343,7 +343,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
                 <title>アダプタオブジェクトを使用した、テーブルの作成の例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $db = Zend_Db::factory('PDO_MYSQL', $options);
 
 $table = new Bugs(array('db' => $db));
@@ -372,7 +372,7 @@ $table = new Bugs(array('db' => $db));
 
                 <title>デフォルトアダプタを使用した、テーブルの作成の例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $db = Zend_Db::factory('PDO_MYSQL', $options);
 Zend_Db_Table_Abstract::setDefaultAdapter($db);
 
@@ -408,7 +408,7 @@ $table = new Bugs();
 
                 <title>レジストリのキーを使用した、テーブルの作成の例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $db = Zend_Db::factory('PDO_MYSQL', $options);
 Zend_Registry::set('my_db', $db);
 
@@ -448,7 +448,7 @@ $table = new Bugs(array('db' => 'my_db'));
 
             <title>テーブルへの挿入の例</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $data = array(
@@ -473,7 +473,7 @@ $table->insert($data);
 
             <title>式をテーブルに挿入する例</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $data = array(
@@ -511,7 +511,7 @@ $data = array(
 
                 <title>自動インクリメントの主キーを持つテーブルを宣言する例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
 {
     protected $_name = 'bugs';
@@ -563,7 +563,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
                 <title>シーケンスを用いたテーブルを宣言する例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
 {
     protected $_name = 'bugs';
@@ -613,7 +613,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
                 <title>自然キーを用いたテーブルを宣言する例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 class BugStatus extends Zend_Db_Table_Abstract
 {
     protected $_name = 'bug_status';
@@ -656,7 +656,7 @@ class BugStatus extends Zend_Db_Table_Abstract
 
             <title>テーブルの行の更新の例</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $data = array(
@@ -709,7 +709,7 @@ $table->update($data, $where);
 
             <title>テーブルからの行の削除の例</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $where = $table->getAdapter()->quoteInto('bug_id = ?', 1235);
@@ -756,7 +756,7 @@ $table->delete($where);
 
             <title>主キーの値によって行を捜す例</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 // 単一の行を探し、
@@ -812,7 +812,7 @@ $rows = $table->find(array(1234, 5678));
                 (5678, 'DEF') となります。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class BugsProducts extends Zend_Db_Table_Abstract
 {
     protected $_name = 'bugs_products';
@@ -860,7 +860,7 @@ $rows = $table->find(array(1234, 5678), array('ABC', 'DEF'));
 
                     <para>
 
-                        <programlisting role="php"><![CDATA[
+                        <programlisting language="php"><![CDATA[
 // 行セットを取得します
 $rows = $table->fetchAll('bug_status = "NEW"', 'bug_id ASC', 10, 0);
 $rows = $table->fetchAll($table->select()->where('bug_status = ?', 'NEW')
@@ -932,7 +932,7 @@ $row = $table->fetchRow($table->select()->where('bug_status = ?', 'NEW')
 
                     <title>単純な使用法</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $select = $table->select();
@@ -956,7 +956,7 @@ $rows = $table->fetchAll($select);
 
                     <title>流れるようなインターフェイスの例</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $rows =
@@ -984,7 +984,7 @@ $rows =
 
                 <title>式から行を取得する例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $select = $table->select()->where('bug_status = ?', 'NEW');
@@ -1006,7 +1006,7 @@ $rows = $table->fetchAll($select);
 
                 <title>式を使用した行の検索の例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $order  = 'bug_id';
@@ -1051,7 +1051,7 @@ $rows = $table->fetchAll($select);
 
                     <title>指定したカラムの取得</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $select = $table->select();
@@ -1092,7 +1092,7 @@ $rows = $table->fetchAll($select);
 
                     <title>式の結果をカラムとして取得する</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $select = $table->select();
@@ -1118,7 +1118,7 @@ $rows = $table->fetchAll($select);
 
                     <title>ルックアップテーブルによる fetchAll() の結果の絞込み</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $select = $table->select();
@@ -1181,7 +1181,7 @@ $rows = $table->fetchAll($select);
 
             <title>式から単一の行を取得する例</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $select  = $table->select()->where('bug_status = ?', 'NEW')
@@ -1214,7 +1214,7 @@ $row = $table->fetchRow($select);
 
             <title>テーブル名を取得する例</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $info = $table->info();
@@ -1367,7 +1367,7 @@ echo "テーブル名は " . $info['name'] . " です\n";
                 次のコードは、デフォルトのメタデータキャッシュをすべてのテーブルオブジェクトで使用する方法を示すものです。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // まずキャッシュを作成します
 $frontendOptions = array(
     'automatic_serialization' => true
@@ -1405,7 +1405,7 @@ $bugs = new Bugs();
                 次のコードは、メタデータキャッシュを特定のテーブルオブジェクトに設定する方法を示すものです。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // まずキャッシュを作成します
 $frontendOptions = array(
     'automatic_serialization' => true
@@ -1466,7 +1466,7 @@ $bugs = new Bugs(array('metadataCache' => $cache));
                 メタデータの構造は次のようになります。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 protected $_metadata = array(
     '<column_name>' => array(
         'SCHEMA_NAME'      => <string>,
@@ -1498,7 +1498,7 @@ protected $_metadata = array(
                 <code>metadataCacheInClass</code> フラグをオフにします。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // インスタンス作成時
 $bugs = new Bugs(array('metadataCacheInClass' => false));
 
@@ -1545,7 +1545,7 @@ $bugs->setMetadataCacheInClass(false);
 
                 <title>行クラスおよび行セットクラスの指定の例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 class My_Row extends Zend_Db_Table_Row_Abstract
 {
     ...
@@ -1584,7 +1584,7 @@ $rows = $table->fetchAll($where);
 
                 <title>行クラスおよび行セットクラスの変更の例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $where = $table->getAdapter()->quoteInto('bug_status = ?', 'NEW')
@@ -1628,7 +1628,7 @@ $rowsCustom = $table->fetchAll($where);
 
                 <title>タイムスタンプを処理する独自ロジック</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
 {
     protected $_name = 'bugs';
@@ -1680,7 +1680,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
                 <title>状況を指定してバグを検索する独自メソッド</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
 {
     protected $_name = 'bugs';
@@ -1747,7 +1747,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
                 <title>語尾変化を実装した抽象テーブルクラスの例</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 abstract class MyAbstractTable extends Zend_Db_Table_Abstract
 {
     protected function _setupTableName()

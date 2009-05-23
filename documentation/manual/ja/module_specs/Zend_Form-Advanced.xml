@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15207 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.form.advanced">
     <title>Zend_Form の高度な使用法</title>
 
@@ -21,7 +21,7 @@
             たとえば次のようなフォームを例に考えてみましょう。
         </para>
 
-        <programlisting role="html"><![CDATA[
+        <programlisting language="html"><![CDATA[
 <form>
     <fieldset>
         <legend>配送先</legend>
@@ -79,7 +79,7 @@
             これを解決するには、配列記法を使用します。
         </para>
 
-        <programlisting role="html"><![CDATA[
+        <programlisting language="html"><![CDATA[
 <form>
     <fieldset>
         <legend>配送先</legend>
@@ -238,7 +238,7 @@
                 その中でサブフォームをいくつか定義します。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class My_Form_Registration extends Zend_Form
 {
     public function init()
@@ -348,7 +348,7 @@ class My_Form_Registration extends Zend_Form
                 では、これらの機能のとっかかりを先ほどのクラスに追加してみましょう。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class My_Form_Registration extends Zend_Form
 {
     // ...
@@ -442,7 +442,7 @@ class My_Form_Registration extends Zend_Form
                 そして、フォームのインスタンスを取得するためのメソッドを追加します。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class RegistrationController extends Zend_Controller_Action
 {
     protected $_form;
@@ -467,7 +467,7 @@ class RegistrationController extends Zend_Controller_Action
                 各サブフォームに対応するキーが存在するかどうかを調べるというわけです。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class RegistrationController extends Zend_Controller_Action
 {
     // ...
@@ -587,7 +587,7 @@ class RegistrationController extends Zend_Controller_Action
                 フォーム全体の検証を行う際にセッションの全セグメントを検証するメソッドなどです。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class RegistrationController extends Zend_Controller_Action
 {
     // ...
@@ -636,7 +636,7 @@ class RegistrationController extends Zend_Controller_Action
                 アクションが必要となります。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class RegistrationController extends Zend_Controller_Action
 {
     // ...
@@ -693,7 +693,7 @@ class RegistrationController extends Zend_Controller_Action
                 ビュースクリプトは非常にシンプルなものになります。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <?php // registration/index.phtml ?>
 <h2>登録</h2>
 <?php echo $this->form ?>

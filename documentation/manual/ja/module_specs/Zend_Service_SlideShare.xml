@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15346 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.service.slideshare">
 
     <title>導入</title>
@@ -33,7 +33,7 @@
             オブジェクトのインスタンスを作成し、それぞれの値を次のように指定しましょう。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // このコンポーネントの新しいインスタンスを作成します
 $ss = new Zend_Service_SlideShare('APIKEY',
                                   'SHAREDSECRET',
@@ -54,7 +54,7 @@ $ss = new Zend_Service_SlideShare('APIKEY',
             このクラスの構造を擬似コードで表すと次のようになります。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class Zend_Service_SlideShare_SlideShow {
 
     /**
@@ -221,7 +221,7 @@ class Zend_Service_SlideShare_SlideShow {
             オブジェクトをこのように使用します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // このコンポーネントの新しいインスタンスを作成します
 $ss = new Zend_Service_SlideShare('APIKEY',
                                   'SHAREDSECRET',
@@ -288,7 +288,7 @@ print "閲覧回数: {$slideshow->getNumViews()}<br/>\n";
             各メソッドの使用例を以下に示します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // このコンポーネントの新しいインスタンスを作成します
 $ss = new Zend_Service_SlideShare('APIKEY',
                                   'SHAREDSECRET',
@@ -324,7 +324,7 @@ foreach($ss_user as $slideshow) {
             <code>setCacheObject</code> メソッドでこのように指定します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $frontendOptions = array(
                         'lifetime' => 7200,
                         'automatic_serialization' => true);
@@ -359,7 +359,7 @@ $ss_user = $ss->getSlideShowsByUser('username', $starting_offset, $limit);
             たとえば接続のタイムアウト秒数をデフォルトから変更したい場合などに便利です。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $client = new Zend_Http_Client();
 $client->setConfig(array('timeout' => 5));
 

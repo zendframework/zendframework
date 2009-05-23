@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15399 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.controller.router"  xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>標準のルータ</title>
     <sect2 id="zend.controller.router.introduction">
@@ -25,7 +25,7 @@
             以下の単純な mod_rewrite ルール (のいずれか) で動作するように設計されています。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 RewriteEngine on
 RewriteRule !\.(js|ico|gif|jpg|png|css|html)$ index.php
 ]]></programlisting>
@@ -34,7 +34,7 @@ RewriteRule !\.(js|ico|gif|jpg|png|css|html)$ index.php
             あるいは (推奨)
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} -s [OR]
 RewriteCond %{REQUEST_FILENAME} -l [OR]
@@ -49,7 +49,7 @@ RewriteRule ^.*$ index.php [NC,L]
             を Isapi 拡張モジュールとしてインストールします。そして次のようなルールを記述します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.php [I]
 ]]></programlisting>
 
@@ -69,7 +69,7 @@ RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.
             次のように設定して使います。
         </para>
 
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
      <system.webServer>
@@ -101,7 +101,7 @@ RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.
             Lighttpd の場合は、次のようなルールを使用します。
         </para>
 
-        <programlisting role="lighttpd"><![CDATA[
+        <programlisting language="lighttpd"><![CDATA[
 url.rewrite-once = (
     ".*\?(.*)$" => "/index.php?$1",
     ".*\.(js|ico|gif|jpg|png|css|html)$" => "$0",
@@ -119,7 +119,7 @@ url.rewrite-once = (
             以下にコードの例を示します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // ルータを作成します
 
 $router = $ctrl->getRouter(); // デフォルトで rewrite ルータを返します
@@ -142,7 +142,7 @@ $router->addRoute(
             を実装したクラスの新しいインスタンスを渡します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $router->addRoute('user',
                   new Zend_Controller_Router_Route('user/:username'));
 ]]></programlisting>
@@ -182,7 +182,7 @@ $router->addRoute('user',
                 <classname>Zend_View</classname> の url ヘルパーです。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <a href=
 "<?php echo $this->url(array('username' => 'martel'), 'user') ?>">Martel</a>
 ]]></programlisting>
@@ -262,7 +262,7 @@ $router->addRoute('user',
             ルータのマッチ処理についての例を示します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // 以下の設定を前提とします
 $ctrl->setControllerDirectory(
     array(
@@ -307,7 +307,7 @@ http://example/blog/archive/list/sort/alpha/date/desc
             これは、以下のようにして作成します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $compat = new Zend_Controller_Router_Route_Module(array(),
                                                   $dispatcher,
                                                   $request);
@@ -321,7 +321,7 @@ $this->addRoute('default', $compat);
             で削除することもできます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // すべてのデフォルトルートを削除します
 $router->removeDefaultRoutes();
 ]]></programlisting>
@@ -346,7 +346,7 @@ $router->removeDefaultRoutes();
             (<xref linkend="zend.controller.request.http.baseurl" /> を参照ください)。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $request->setBaseUrl('/~user/application-root/');
 ]]></programlisting>
 
@@ -365,7 +365,7 @@ $request->setBaseUrl('/~user/application-root/');
             グローバルパラメータは、このように設定します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $router->setGlobalParam('lang', 'en');
 ]]></programlisting>
     </sect2>
@@ -396,7 +396,7 @@ $router->setGlobalParam('lang', 'en');
             例として、次のような INI ファイルを考えてみましょう。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 [production]
 routes.archive.route = "archive/:year/*"
 routes.archive.defaults.controller = archive
@@ -422,7 +422,7 @@ routes.archive.map.1 = "year"
             <classname>Zend_Config</classname> オブジェクトに読み込みます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Ini('/path/to/config.ini', 'production');
 $router = new Zend_Controller_Router_Rewrite();
 $router->addConfig($config, 'routes');
@@ -461,7 +461,7 @@ $router->addConfig($config, 'routes');
             method.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 interface Zend_Controller_Router_Interface
 {
   /**

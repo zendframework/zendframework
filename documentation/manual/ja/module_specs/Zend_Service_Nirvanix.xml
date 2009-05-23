@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15341 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.service.nirvanix">
     <title>Zend_Service_Nirvanix</title>
 
@@ -128,7 +128,7 @@
             には、これら 3 つの操作のための便利なメソッドが用意されています。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $auth = array('username' => 'your-username',
               'password' => 'your-password',
               'appKey'   => 'your-app-key');
@@ -208,7 +208,7 @@ $imfs->unlink('/foo.txt');
             <classname>Zend_Service_Nirvanix</classname> には用意されていません。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $auth = array('username' => 'your-username',
               'password' => 'your-password',
               'appKey'   => 'your-app-key');
@@ -262,7 +262,7 @@ $result = $imfs->renameFile(array('filePath' => '/path/to/foo.txt',
             などを使用することです。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php
 $auth = array('username' => 'your-username',
               'password' => 'your-password',
@@ -317,7 +317,7 @@ Zend_Service_Nirvanix_Response Object
             たとえば次のようになります。
         </para>
 
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <Response>
    <ResponseCode>0</ResponseCode>
 </Response>
@@ -339,7 +339,7 @@ Zend_Service_Nirvanix_Response Object
             <classname>Zend_Service_Nirvanix_Exception</classname> がスローされます。
         </para>
 
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 $auth = array('username' => 'your-username',
               'password' => 'your-password',
               'appKey'   => 'your-app-key');

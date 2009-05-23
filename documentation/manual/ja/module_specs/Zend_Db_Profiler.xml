@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.db.profiler" xmlns:xi="http://www.w3.org/2001/XInclude">
 
     <title>Zend_Db_Profiler</title>
@@ -21,7 +21,7 @@
             あるいは後からアダプタに指示します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $params = array(
     'host'     => '127.0.0.1',
     'username' => 'webuser',
@@ -53,7 +53,7 @@ $db->getProfiler()->setEnabled(true);
             にすると、プロファイラを無効にします。プロファイラのクラスは、
             そのアダプタのデフォルトのプロファイラクラスである
             <classname>Zend_Db_Profiler</classname> となります。
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $params['profiler'] = true;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
 ]]></programlisting>
@@ -64,7 +64,7 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
             このオブジェクトの型は、<classname>Zend_Db_Profiler</classname>
             あるいはそのサブクラスでなければなりません。
             プロファイラを有効にするには、次にようにします。
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $profiler = MyProject_Db_Profiler();
 $profiler->setEnabled(true);
 $params['profiler'] = $profiler;
@@ -83,7 +83,7 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
             このクラスは、コンストラクタに何も引数を渡さないでインスタンス化されます。
             '<code>class</code>' の内容は、
             '<code>instance</code>' を指定した際には無視されます。
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $params['profiler'] = array(
     'enabled' => true,
     'class'   => 'MyProject_Db_Profiler'
@@ -96,7 +96,7 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
             また、引数は <classname>Zend_Config</classname> のオブジェクトで渡すこともできます。
             このオブジェクトのプロパティが、先ほどの連想配列のキーと同じように解釈されます。
             たとえば、次のような内容の "config.ini" ファイルがあったとしましょう。
-            <programlisting role="ini"><![CDATA[
+            <programlisting language="ini"><![CDATA[
 [main]
 db.profiler.class   = "MyProject_Db_Profiler"
 db.profiler.enabled = true
@@ -104,14 +104,14 @@ db.profiler.enabled = true
 
             この設定を適用するには、次のような PHP コードを書きます。
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Ini('config.ini', 'main');
 $params['profiler'] = $config->db->profiler;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
 ]]></programlisting>
 
             '<code>instance</code>' プロパティは、次のように使用します。
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $profiler = new MyProject_Db_Profiler();
 $profiler->setEnabled(true);
 $configData = array(
@@ -136,7 +136,7 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
             プロファイラを取得できます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $profiler = $db->getProfiler();
 ]]></programlisting>
 
@@ -222,7 +222,7 @@ $profiler = $db->getProfiler();
             例えば、直近に実行されたクエリが実際のところどんなものだったのかを知るには次のようにします。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $query = $profiler->getLastQueryProfile();
 
 echo $query->getQuery();
@@ -234,7 +234,7 @@ echo $query->getQuery();
             それから、個々のクエリを調べ、一番時間がかかっているのはどれかを見つけます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $totalTime    = $profiler->getTotalElapsedSecs();
 $queryCount   = $profiler->getTotalNumQueries();
 $longestTime  = 0;
@@ -276,7 +276,7 @@ echo "一番時間のかかっているクエリ: \n" . $longestQuery . "\n";
                 メソッドに null 値を渡します。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // 所要時間が 5 秒以上のクエリのみ調べます
 $profiler->setFilterElapsedSecs(5);
 
@@ -348,7 +348,7 @@ $profiler->setFilterElapsedSecs(null);
                 <code>null</code> だけを渡します。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // SELECT クエリのみを調べます
 $profiler->setFilterQueryType(Zend_Db_Profiler::SELECT);
 
@@ -380,7 +380,7 @@ $profiler->setFilterQueryType(null);
                 を参照ください。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // SELECT クエリの情報のみを取得します
 $profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::SELECT);
 

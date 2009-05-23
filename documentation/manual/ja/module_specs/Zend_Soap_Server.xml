@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15604 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.soap.server">
     <title>Zend_Soap_Server</title>
 
@@ -174,7 +174,7 @@
         <para>
             最初の一つは、ウェブサービスAPIを完全に記述しなければならない<classname>Zend_Soap_Server</classname>オブジェクトに対して、
             いくつかのクラスを付与することです:
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 ...
 class MyClass {
     /**
@@ -221,7 +221,7 @@ $server->handle();
         <para>
             ウェブサービスAPIを定義する２つ目の方法は、
             関数のセットや<code>addFunction()</code>または<code>loadFunctions()</code>メソッドを使うことです:
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 ...
 /**
  * この関数は...
@@ -277,7 +277,7 @@ $server->handle();
                 それは、<code>handle()</code>メソッドにオプションのパラメータを供給することによって、
                 または、<code>setRequest()</code>メソッドを用いてリクエストを設定することによって
                 上書きされるかもしれません:
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 ...
 $server = new Zend_Soap_Server(...);
 ...
@@ -325,7 +325,7 @@ $server->handle();
 
             <para>
                 最後に処理されたリクエストは<code>getLastRequest()</code>メソッドを使ってXML文字列として取得されます:
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 ...
 $server = new Zend_Soap_Server(...);
 ...
@@ -350,7 +350,7 @@ $request = $server->getLastRequest();
                     </para>
                 </footnote>
                 生成されたレスポンスはこの場合、<code>handle()</code>メソッドにより戻されます。
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 ...
 $server = new Zend_Soap_Server(...);
 ...
@@ -365,7 +365,7 @@ $response = $server->handle();
 
             <para>
                 ある処理のために、最後のレスポンスを<code>getLastResponse()</code>メソッドで取得することもできます:
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 ...
 $server = new Zend_Soap_Server(...);
 ...

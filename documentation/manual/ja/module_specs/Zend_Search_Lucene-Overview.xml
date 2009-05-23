@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15225 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.search.lucene.overview">
     <title>概要</title>
 
@@ -80,7 +80,7 @@
                 さまざまな性質のフィールドを作成するための静的メソッドが定義されています。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $doc = new Zend_Search_Lucene_Document();
 
 // フィールドはトークン化されませんが、インデックス化されて保存されます。
@@ -117,7 +117,7 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
                 エンコーディングはドキュメントによって異なるでしょうし、
                 同一ドキュメント内でもフィールドによって異なることもあるでしょう。
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $doc = new Zend_Search_Lucene_Document();
 $doc->addField(Zend_Search_Lucene_Field::Text('title',
                                               $title,
@@ -131,7 +131,7 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
             <para>
                 エンコーディングパラメータを省略した場合は、
                 現在のロケールが処理時に使用されます。たとえば次のようになります。
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 setlocale(LC_ALL, 'de_DE.iso-8859-1');
 ...
 $doc->addField(Zend_Search_Lucene_Field::UnStored('contents', $contents));
@@ -272,7 +272,7 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents', $contents));
         <para>
             <classname>Zend_Search_Lucene</classname> には HTML をパースする機能もあります。
             次のようにして、HTML ファイルや文字列からドキュメントを直接作成することができます。
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $doc = Zend_Search_Lucene_Document_Html::loadHTMLFile($filename);
 $index->addDocument($doc);
 ...
@@ -328,7 +328,7 @@ $index->addDocument($doc);
 
         <para>
             パースされたドキュメントに、ユーザが別のフィールドを拡張することができます。
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $doc = Zend_Search_Lucene_Document_Html::loadHTML($htmlString);
 $doc->addField(Zend_Search_Lucene_Field::UnIndexed('created',
                                                    time()));
@@ -345,7 +345,7 @@ $index->addDocument($doc);
             <classname>Zend_Search_Lucene_Document_Html::getLinks()</classname> および
             <classname>Zend_Search_Lucene_Document_Html::getHeaderLinks()</classname>
             メソッドでリンクを取得することもできます。
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $doc = Zend_Search_Lucene_Document_Html::loadHTML($htmlString);
 $linksArray = $doc->getLinks();
 $headerLinksArray = $doc->getHeaderLinks();
@@ -370,7 +370,7 @@ $headerLinksArray = $doc->getHeaderLinks();
         <title>Word 2007 ドキュメント</title>
         <para>
             <classname>Zend_Search_Lucene</classname> には Word 2007 のパース機能があります。Word 2007 ファイルから直接ドキュメントを作成することができます。
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $doc = Zend_Search_Lucene_Document_Docx::loadDocxFile($filename);
 $index->addDocument($doc);
 ]]></programlisting>
@@ -439,7 +439,7 @@ $index->addDocument($doc);
 
         <para>
             パースしたドキュメントに、プログラマが任意のフィールドを追加することができます。
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $doc = Zend_Search_Lucene_Document_Docx::loadDocxFile($filename);
 $doc->addField(Zend_Search_Lucene_Field::UnIndexed(
     'indexTime',
@@ -459,7 +459,7 @@ $index->addDocument($doc);
         <title>Powerpoint 2007 ドキュメント</title>
         <para>
             <classname>Zend_Search_Lucene</classname> には Powerpoint 2007 のパース機能があります。Powerpoint 2007 ファイルから直接ドキュメントを作成することができます。
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $doc = Zend_Search_Lucene_Document_Pptx::loadPptxFile($filename);
 $index->addDocument($doc);
 ]]></programlisting>
@@ -528,7 +528,7 @@ $index->addDocument($doc);
 
         <para>
             パースしたドキュメントに、プログラマが任意のフィールドを追加することができます。
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $doc = Zend_Search_Lucene_Document_Pptx::loadPptxFile($filename);
 $doc->addField(Zend_Search_Lucene_Field::UnIndexed(
     'indexTime',
@@ -545,7 +545,7 @@ $index->addDocument($doc);
         <title>Excel 2007 ドキュメント</title>
         <para>
             <classname>Zend_Search_Lucene</classname> には Excel 2007 のパース機能があります。Excel 2007 ファイルから直接ドキュメントを作成することができます。
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $doc = Zend_Search_Lucene_Document_Xlsx::loadXlsxFile($filename);
 $index->addDocument($doc);
 ]]></programlisting>
@@ -614,7 +614,7 @@ $index->addDocument($doc);
 
         <para>
             パースしたドキュメントに、プログラマが任意のフィールドを追加することができます。
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $doc = Zend_Search_Lucene_Document_Xlsx::loadXlsxFile($filename);
 $doc->addField(Zend_Search_Lucene_Field::UnIndexed(
     'indexTime',

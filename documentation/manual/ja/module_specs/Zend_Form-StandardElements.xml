@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.form.standardElements">
     <title>Zend Framework に同梱されている標準のフォーム要素</title>
 
@@ -68,7 +68,7 @@
             追加のキー 'CAPTCHA' あるいは 'captcha' を指定します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $element->addPrefixPath('My_Captcha', 'My/Captcha/', 'captcha');
 ]]></programlisting>
 
@@ -78,7 +78,7 @@ $element->addPrefixPath('My_Captcha', 'My/Captcha/', 'captcha');
             CAPTCHA アダプタの短い名前を指定します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // 具象インスタンス
 $element->setCaptcha(new Zend_Captcha_Figlet());
 
@@ -92,7 +92,7 @@ $element->setCaptcha('Dumb');
             キー 'captcha' と 'captchaOptions' の両方を指定します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // 単一の captcha キーの使用
 $element = new Zend_Form_Element_Captcha('foo', array(
     'label' => "あなたが人間かどうかを確認します",
@@ -202,7 +202,7 @@ $element = new Zend_Form_Element_Captcha('foo', array(
                 でも、実際に使ってみると比較的簡単なものです。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $element = new Zend_Form_Element_File('foo');
 $element->setLabel('Upload an image:')
         ->setDestination('/var/www/upload');
@@ -221,7 +221,7 @@ $form->addElement($element, 'foo');
                 これは、フォームの 'enctype' 属性で指定します。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $form->setAttrib('enctype', 'multipart/form-data');
 ]]></programlisting>
 
@@ -231,7 +231,7 @@ $form->setAttrib('enctype', 'multipart/form-data');
                 さらに、最終的な場所を取得するには <code>getFileName()</code> を使用します。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 if (!$form->isValid) {
     print "あららら... 検証エラー";
 }
@@ -272,7 +272,7 @@ $location = $form->foo->getFileName();
             このような挙動となる理由は、ファイルそのものが file 要素の値となるからです。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $form->getValues();
 ]]></programlisting>
 
@@ -298,7 +298,7 @@ $form->getValues();
                 まずは <code>setValueDisabled(true)</code> をコールします。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $element = new Zend_Form_Element_File('foo');
 $element->setLabel('Upload an image:')
         ->setDestination('/var/www/upload')
@@ -311,7 +311,7 @@ $element->setLabel('Upload an image:')
                 あるいは <classname>Zend_File_Transfer</classname> のインスタンスを自分で作成しなければなりません。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $values = $form->getValues();
 
 if ($form->isValid($form->getPost())) {
@@ -352,7 +352,7 @@ if ($form->isValid($form->getPost())) {
         <example id="zend.form.standardElements.file.isuploaded">
             <title>オプションのファイルがアップロードされたかどうかの確認</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $element = new Zend_Form_Element_File('foo');
 $element->setLabel('Upload an image:')
         ->setDestination('/var/www/upload')
@@ -382,7 +382,7 @@ if ($form->foo->isUploaded()) {
                 作成した後にさらに <code>setMultiFile()</code> をコールするだけです。
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $element = new Zend_Form_Element_File('foo');
 $element->setLabel('Upload an image:')
         ->setDestination('/var/www/upload');
@@ -429,7 +429,7 @@ $form->addElement($element, 'foo');
             それが file 要素のレンダリング時に用いられます。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $element = new Zend_Form_Element_File('foo');
 $element->setLabel('Upload an image:')
         ->setDestination('/var/www/upload')
@@ -481,7 +481,7 @@ $form->addElement($element, 'foo');
             名前が同じでも salt が異なればハッシュは衝突しません。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
 ]]></programlisting>
 
@@ -594,7 +594,7 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
             次の例は、値 "bar" と "bat" をチェックします。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $element = new Zend_Form_Element_MultiCheckbox('foo', array(
     'multiOptions' => array(
         'foo' => 'Foo Option',

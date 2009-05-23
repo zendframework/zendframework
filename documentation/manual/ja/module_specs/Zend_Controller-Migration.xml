@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15467 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.controller.migration">
     <title>以前のバージョンからの移行</title>
 
@@ -155,7 +155,7 @@
                     アクションの単語間をダッシュで区切らないようにします。
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $viewRenderer =
     Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
 $inflector = $viewRenderer->getInflector();
@@ -188,7 +188,7 @@ $inflector->setFilterRule(':action', array(
                     'useCaseSensitiveActions' を設定します。
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $front->setParam('useCaseSensitiveActions', true);
 ]]></programlisting>
 
@@ -229,7 +229,7 @@ $front->setParam('useCaseSensitiveActions', true);
             <code>noErrorHandler</code> を設定します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $front->setParam('noErrorHandler', true);
 ]]></programlisting>
 
@@ -249,7 +249,7 @@ $front->setParam('noErrorHandler', true);
             <code>ViewRenderer</code> を無効にしてからディスパッチを行うことです。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // $front は Zend_Controller_Front のインスタンスであるとします
 $front->setParam('noViewRenderer', true);
 ]]></programlisting>
@@ -277,7 +277,7 @@ $front->setParam('noViewRenderer', true);
             一番簡単なのは、そのメソッド内で自動レンダリングを無効にすることです。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $this->_helper->viewRenderer->setNoRender();
 ]]></programlisting>
 
@@ -287,7 +287,7 @@ $this->_helper->viewRenderer->setNoRender();
             メソッドあるいは <code>init()</code> メソッド内に書くといいでしょう。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 public function preDispatch()
 {
     // ビュースクリプトの自動レンダリングを無効にします
@@ -349,7 +349,7 @@ public function preDispatch()
                     フロントコントローラのインスタンスをディスパッチする前なら
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // $view はすでに定義されているものとします
 $viewRenderer = new Zend_Controller_Action_Helper_ViewRenderer($view);
 Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
@@ -361,7 +361,7 @@ Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
                     起動処理の中ならどこでも
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $viewRenderer =
     Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
 $viewRenderer->setView($view);]]></programlisting>
@@ -435,7 +435,7 @@ $viewRenderer->setView($view);]]></programlisting>
             前回変更された、もっとも基本的な MVC コンポーネントの使用法は、そのまま同じです。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 Zend_Controller_Front::run('/path/to/controllers');
 ]]></programlisting>
 
@@ -492,7 +492,7 @@ Zend_Controller_Front::run('/path/to/controllers');
                     新しいシグネチャは次のとおりです。
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 final protected function _forward($action,
                                   $controller = null,
                                   $module = null,
@@ -522,11 +522,11 @@ final protected function _forward($action,
             次のいずれの方法も使用可能です。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 Zend_Controller_Front::run('/path/to/controllers');
 ]]></programlisting>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /* -- ルータを作成します -- */
 $router = new Zend_Controller_RewriteRouter();
 $router->addRoute('user',
@@ -582,7 +582,7 @@ $ctrl->dispatch();
                             フロントコントローラで <code>throwExceptions()</code>
                             を設定します。
                         </para>
-                        <programlisting role="php"><![CDATA[
+                        <programlisting language="php"><![CDATA[
 $front->throwExceptions(true);
 ]]></programlisting>
                     </listitem>
@@ -592,7 +592,7 @@ $front->throwExceptions(true);
                             レスポンスオブジェクトで <code>renderExceptions()</code>
                             を設定します。
                         </para>
-                        <programlisting role="php"><![CDATA[
+                        <programlisting language="php"><![CDATA[
 $response->renderExceptions(true);
 $front->setResponse($response);
 $front->dispatch();
@@ -680,7 +680,7 @@ echo $response;
                             これらは現在はリクエストオブジェクトから次のようにして取得できるようになっています。
                         </para>
 
-                        <programlisting role="php"><![CDATA[
+                        <programlisting language="php"><![CDATA[
 // 要求されたコントローラ名を取得します。
 // その際には $this->_action->getControllerName() を使用します。
 // 以下の例では getRequest() を使用していますが、直接 $_request プロパティに
@@ -708,7 +708,7 @@ $foo = $this->_getParam('foo', 'default');
                             <code>__call()</code> を使用してデフォルトのアクションに誘導します。
                         </para>
 
-                        <programlisting role="php"><![CDATA[
+                        <programlisting language="php"><![CDATA[
 public function __call($method, $args)
 {
     // 存在しない 'Action' メソッドが要求された場合に、

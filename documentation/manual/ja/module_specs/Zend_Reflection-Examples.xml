@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15192 -->
+<!-- EN-Revision: 15602 -->
 <sect1 id="zend.reflection.examples">
     <title>Zend_Reflectionサンプル</title>
 
@@ -27,7 +27,6 @@ echo "     It has " . count($functions) . ":\n";
 foreach ($functions as $function) {
     echo "         " . $function->getName() . "\n";
 }
-
 ]]></programlisting>
     </example>
 

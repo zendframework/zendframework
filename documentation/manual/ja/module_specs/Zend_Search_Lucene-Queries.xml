@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15341 -->
+<!-- EN-Revision: 15602 -->
 <sect1 id="zend.search.lucene.query-api">
     <title>クエリ作成用の API</title>
 
@@ -194,7 +194,6 @@ $hits  = $index->find($query);
         <para>
             MultiTerm クエリのコンストラクタで、単語のリストを指定することもできます。
             <programlisting role="php"><![CDATA[
-
 $terms = array(new Zend_Search_Lucene_Index_Term('word1'),
                new Zend_Search_Lucene_Index_Term('word2', 'author'),
                new Zend_Search_Lucene_Index_Term('word3'));
@@ -299,7 +298,6 @@ $hits  = $index->find($query);
         API で作成するクエリ
         </para>
         <programlisting role="php"><![CDATA[
-
 $query = new Zend_Search_Lucene_Search_Query_Boolean();
 
 $subquery1 = new Zend_Search_Lucene_Search_Query_MultiTerm();
@@ -324,7 +322,6 @@ $hits  = $index->find($query);
         <para>
             Boolean クエリのコンストラクタで、単語のリストを指定することもできます。
             <programlisting role="php"><![CDATA[
-
 ...
 $subqueries = array($subquery1, $subquery2, $subquery3);
 $signs = array(true, null, false);
@@ -430,7 +427,6 @@ field1:test~
         <para>
             API で作成するクエリ
             <programlisting role="php"><![CDATA[
-
 $term = new Zend_Search_Lucene_Index_Term('test', 'field1');
 $query = new Zend_Search_Lucene_Search_Query_Fuzzy($term);
 $hits  = $index->find($query);
@@ -453,7 +449,6 @@ field1:test~0.4
         <para>
             API で作成するクエリ
             <programlisting role="php"><![CDATA[
-
 $term = new Zend_Search_Lucene_Index_Term('test', 'field1');
 $query = new Zend_Search_Lucene_Search_Query_Fuzzy($term, 0.4);
 $hits  = $index->find($query);
@@ -465,7 +460,6 @@ $hits  = $index->find($query);
             このフィールドを省略した場合、<classname>Zend_Search_Lucene</classname>
             は各ドキュメントのすべてのフィールドを検索します。
             <programlisting role="php"><![CDATA[
-
 $term = new Zend_Search_Lucene_Index_Term('test');
 $query = new Zend_Search_Lucene_Search_Query_Fuzzy($term);
 $hits  = $index->find($query);

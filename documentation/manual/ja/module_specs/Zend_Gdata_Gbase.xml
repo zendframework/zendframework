@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15602 -->
 <sect1 id="zend.gdata.gbase">
     <title>Google Base の使用法</title>
     <para>
@@ -120,7 +120,6 @@ $service = new Zend_Gdata_Gbase($client);
 ]]></programlisting>
 <para>AuthSub を使用した Base サービスの作成方法も同様ですが、少し冗長になります。</para>
 <programlisting role="php"><![CDATA[
-
 /*
  * 現在の URL を取得し、AuthSub サーバが認証完了後に
  * リダイレクトする先を取得できるようにします

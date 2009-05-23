@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15341 -->
+<!-- EN-Revision: 15602 -->
 <sect1 id="zend.soap.autodiscovery">
     <title>AutoDiscovery</title>
 
@@ -120,7 +120,8 @@ if(isset($_GET['wsdl'])) {
     $soap = new Zend_Soap_Server("http://example.com/soap.php?wsdl");
     $soap->setClass('HelloWorldService');
     $soap->handle();
-}]]></programlisting>
+}
+]]></programlisting>
             </para>
         </note>
     </sect2>

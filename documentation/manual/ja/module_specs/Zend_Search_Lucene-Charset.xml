@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15602 -->
 <sect1 id="zend.search.lucene.charset">
     <title>文字セット</title>
 
@@ -118,7 +118,6 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
              PCRE が UTF-8 に対応しているかどうかを調べるには、次のコードを使用します。
 
             <programlisting role="php"><![CDATA[
-
 if (@preg_match('/\pL/u', 'a') == 1) {
     echo "PCRE は unicode をサポートしています。\n";
 } else {
@@ -140,7 +139,6 @@ if (@preg_match('/\pL/u', 'a') == 1) {
             検索の際にはクエリ文字列を小文字に変換します。
 
             <programlisting role="php"><![CDATA[
-
 // インデックス化
 setlocale(LC_CTYPE, 'de_DE.iso-8859-1');
 

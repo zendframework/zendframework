@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15207 -->
+<!-- EN-Revision: 15602 -->
 <sect1 id="zend.db.select">
 
     <title>Zend_Db_Select</title>
@@ -462,7 +462,8 @@ $select = $db->select()
 $select = $db->select()
              ->from(array('p' => 'products'), 'p.product_id')
              ->columns('product_name', 'p');
-             // あるいは columns('p.product_name')]]></programlisting>
+             // あるいは columns('p.product_name')
+]]></programlisting>
 
             </example>
 

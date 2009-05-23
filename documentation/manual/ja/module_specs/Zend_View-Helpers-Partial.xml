@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15602 -->
 <sect3 id="zend.view.helpers.initial.partial">
     <title>Partial ヘルパー</title>
 
@@ -39,7 +39,6 @@
         </para>
 
         <programlisting role="php"><![CDATA[
-
 <?php // partial.phtml ?>
 <ul>
     <li>From: <?php echo $this->escape($this->from) ?></li>
@@ -52,7 +51,6 @@
         </para>
 
         <programlisting role="php"><![CDATA[
-
 <?php echo $this->partial('partial.phtml', array(
     'from' => 'Team Framework',
     'subject' => 'view partials')); ?>

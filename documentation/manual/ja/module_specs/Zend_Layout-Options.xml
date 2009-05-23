@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15343 -->
+<!-- EN-Revision: 15602 -->
 <sect1 id="zend.layout.options">
     <title>Zend_Layout の設定オプション</title>
 
@@ -161,7 +161,6 @@ $layout = Zend_Layout::startMvc($options);
             </para>
 
             <programlisting role="php"><![CDATA[
-
 $config = new Zend_Config_Ini('/path/to/layout.ini', 'layout');
 
 // コンストラクタを使用します

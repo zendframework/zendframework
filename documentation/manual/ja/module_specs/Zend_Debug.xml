@@ -16,7 +16,6 @@
     <example id="zend.debug.dumping.example">
         <title>dump() メソッドの例</title>
         <programlisting role="php"><![CDATA[
-
 Zend_Debug::dump($var, $label=null, $echo=true);
 ]]></programlisting>
     </example>

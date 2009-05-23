@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15422 -->
+<!-- EN-Revision: 15602 -->
 <sect1 id="zend.db.table">
 
     <title>Zend_Db_Table</title>
@@ -1367,7 +1367,7 @@ echo "テーブル名は " . $info['name'] . " です\n";
                 次のコードは、デフォルトのメタデータキャッシュをすべてのテーブルオブジェクトで使用する方法を示すものです。
             </para>
 
-            <programlisting role="php"><![CDATA[<
+            <programlisting role="php"><![CDATA[
 // まずキャッシュを作成します
 $frontendOptions = array(
     'automatic_serialization' => true

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15341 -->
+<!-- EN-Revision: 15602 -->
 <sect1 id="zend.pdf.drawing">
     <title>描画</title>
 
@@ -474,7 +474,6 @@ $pdfPage->setFont($font, 36)
         <example id="zend.pdf.drawing.extracting-fonts.example-1">
             <title>読み込んだドキュメントからのフォントの抽出</title>
             <programlisting role="php"><![CDATA[
-
 ...
 $pdf = Zend_Pdf::load($documentPath);
 ...
@@ -503,7 +502,6 @@ $firstPageFonts = $firstPage->extractFonts();
         <example id="zend.pdf.drawing.extracting-fonts.example-2">
             <title>フォント名の指定による、読み込んだドキュメントからのフォントの抽出</title>
             <programlisting role="php"><![CDATA[
-
 ...
 $pdf = new Zend_Pdf();
 ...
@@ -522,7 +520,6 @@ $pdf->save($docPath);
 ...
 ]]></programlisting>
             <programlisting role="php"><![CDATA[
-
 ...
 $pdf = Zend_Pdf::load($docPath);
 ...
@@ -549,7 +546,6 @@ $pdf->save($docPath, true /* インクリメンタル更新モード */);
                         つまり、抽出されたフォントは元のフォントメトリクス
                         (テキストの幅の計算に使用するもの) と同じものになりません。
             <programlisting role="php"><![CDATA[
-
 ...
 $font = $pdf->extractFont($fontName);
 $originalFont = Zend_Pdf_Font::fontWithPath($fontPath);
@@ -1073,7 +1069,6 @@ public function getFontSize();
         <para>
         透明度を設定するには <classname>Zend_Pdf_Page::setAlpha()</classname> メソッドを使用します。
         <programlisting role="php"><![CDATA[
-
 /**
  * 透明度を設定します
  *

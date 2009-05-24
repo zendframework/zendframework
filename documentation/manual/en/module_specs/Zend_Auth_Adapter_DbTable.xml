@@ -18,7 +18,7 @@
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>tableName</code>: This is the name of the database
+                        <emphasis>tableName</emphasis>: This is the name of the database
                          table that contains the authentication credentials,
                         and against which the database authentication query is
                         performed.
@@ -26,7 +26,7 @@
                 </listitem>
                 <listitem>
                     <para>
-                        <code>identityColumn</code>: This is the name of the
+                        <emphasis>identityColumn</emphasis>: This is the name of the
                         database table column used to represent the identity.
                         The identity column must contain unique values, such as
                         a username or e-mail address.
@@ -34,22 +34,22 @@
                 </listitem>
                 <listitem>
                     <para>
-                        <code>credentialColumn</code>: This is the name of the
+                        <emphasis>credentialColumn</emphasis>: This is the name of the
                         database table column used to represent the credential.
                         Under a simple identity and password authentication
                         scheme, the credential value corresponds to the
-                        password. See also the <code>credentialTreatment</code>
+                        password. See also the <emphasis>credentialTreatment</emphasis>
                         option.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>credentialTreatment</code>: In many cases,
+                        <emphasis>credentialTreatment</emphasis>: In many cases,
                         passwords and other sensitive data are encrypted,
                         hashed, encoded, obscured, salted or otherwise treated
                         through some function or algorithm. By specifying a
                         parameterized treatment string with this method, such as
-                         <code>'MD5(?)'</code> or <code>'PASSWORD(?)'</code>, a
+                        'MD5(?)' or 'PASSWORD(?)', a
                         developer may apply such arbitrary SQL upon input
                         credential data. Since these functions are specific to
                         the underlying RDBMS, check the database manual for the
@@ -125,7 +125,7 @@ $authAdapter
                 At this point, the authentication adapter instance is ready to
                 accept authentication queries. In order to formulate an
                 authentication query, the input credential values are passed to
-                the adapter prior to calling the <code>authenticate()</code>
+                the adapter prior to calling the <methodname>authenticate()</methodname>
                 method:
             </para>
             <programlisting language="php"><![CDATA[
@@ -139,7 +139,7 @@ $authAdapter
 ]]></programlisting>
             <para>
                 In addition to the availability of the
-                <code>getIdentity()</code> method upon the authentication result
+                <methodname>getIdentity()</methodname> method upon the authentication result
                 object, <classname>Zend_Auth_Adapter_DbTable</classname> also supports
                 retrieving the table row upon authentication success:
             </para>
@@ -175,8 +175,8 @@ Array
             authentication. Another use case scenario, where developers want to
             store to the persistent storage mechanism of <classname>Zend_Auth</classname>
             an identity object containing other useful information, is solved by
-             using the <code>getResultRowObject()</code> method to return a
-            <code>stdClass</code> object. The following code snippet illustrates
+             using the <methodname>getResultRowObject()</methodname> method to return a
+            <emphasis>stdClass</emphasis> object. The following code snippet illustrates
             its use:
         </para>
         <programlisting language="php"><![CDATA[
@@ -291,7 +291,7 @@ $adapter = new Zend_Auth_Adapter_DbTable(
             </para>
         </note>
         <para>
-            Another alternative is to use the <code>getDbSelect()</code> method
+            Another alternative is to use the <methodname>getDbSelect()</methodname> method
             of the Zend_Auth_Adapter_DbTable after the adapter has been constructed.
             This method will return the Zend_Db_Select object instance it will use
             to complete the authenticate() routine. It is important to note that

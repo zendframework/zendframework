@@ -100,37 +100,37 @@
                     </thead>
                     <tbody>
                         <row>
-                            <entry><code>accept_schemes</code></entry>
+                            <entry><emphasis>accept_schemes</emphasis></entry>
                             <entry>Yes</entry>
                             <entry>
                                 Determines which authentication schemes the adapter will accept from the client. Must be
-                                a space-separated list containing <code>'basic'</code> and/or <code>'digest'</code>.
+                                a space-separated list containing <emphasis>'basic'</emphasis> and/or <emphasis>'digest'</emphasis>.
                             </entry>
                         </row>
                         <row>
-                            <entry><code>realm</code></entry>
+                            <entry><emphasis>realm</emphasis></entry>
                             <entry>Yes</entry>
                             <entry>
                                 Sets the authentication realm; usernames should be unique within a given realm.
                             </entry>
                         </row>
                         <row>
-                            <entry><code>digest_domains</code></entry>
-                            <entry>Yes, when <code>'accept_schemes'</code> contains <code>'digest'</code></entry>
+                            <entry><emphasis>digest_domains</emphasis></entry>
+                            <entry>Yes, when <emphasis>'accept_schemes'</emphasis> contains <emphasis>'digest'</emphasis></entry>
                             <entry>
                                 Space-separated list of URIs for which the same authentication information is valid. The
                                 URIs need not all point to the same server.
                             </entry>
                         </row>
                         <row>
-                            <entry><code>nonce_timeout</code></entry>
-                            <entry>Yes, when <code>'accept_schemes'</code> contains <code>'digest'</code></entry>
+                            <entry><emphasis>nonce_timeout</emphasis></entry>
+                            <entry>Yes, when <emphasis>'accept_schemes'</emphasis> contains <emphasis>'digest'</emphasis></entry>
                             <entry>
                                 Sets the number of seconds for which the nonce is valid. See notes below.
                             </entry>
                         </row>
                         <row>
-                            <entry><code>proxy_auth</code></entry>
+                            <entry><emphasis>proxy_auth</emphasis></entry>
                             <entry>No</entry>
                             <entry>
                                 Disabled by default. Enable to perform Proxy authentication, instead of normal origin
@@ -144,7 +144,7 @@
 
         <note>
             <para>
-                The current implementation of the <code>nonce_timeout</code> has some interesting side effects. This
+                The current implementation of the <emphasis>nonce_timeout</emphasis> has some interesting side effects. This
                 setting is supposed to determine the valid lifetime of a given nonce, or effectively how long a client's
                 authentication information is accepted. Currently, if it's set to 3600 (for example), it will cause the
                 adapter to prompt the client for new credentials every hour, on the hour. This will be resolved in a
@@ -177,7 +177,7 @@
 
             <para>
                 The file resolver is a very simple class. It has a single property specifying a filename, which can also
-                be passed to the constructor. Its <code>resolve()</code> method walks through the text file, searching
+                be passed to the constructor. Its <methodname>resolve()</methodname> method walks through the text file, searching
                 for a line with a matching username and realm. The text file format similar to Apache htpasswd files:
                 <programlisting language="txt"><![CDATA[
 <username>:<realm>:<credentials>\n
@@ -223,9 +223,9 @@ $config = array(
 );
 ]]></programlisting>
             This array will cause the adapter to accept either Basic or Digest authentication, and will require
-            authenticated access to all the areas of the site under <code>/members_only</code> and
-            <code>/my_account</code>. The realm value is usually displayed by the browser in the password dialog box.
-            The <code>nonce_timeout</code>, of course, behaves as described above.
+            authenticated access to all the areas of the site under <filename>/members_only</filename> and
+            <filename>/my_account</filename>. The realm value is usually displayed by the browser in the password dialog box.
+            The <emphasis>nonce_timeout</emphasis>, of course, behaves as described above.
         </para>
 
         <para>

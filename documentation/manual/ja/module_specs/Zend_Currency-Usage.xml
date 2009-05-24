@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15730 -->
 <sect1 id="zend.currency.usage">
 
     <title>通貨の操作方法</title>
@@ -231,9 +231,8 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
                 </para>
                 <para>
                     数値を表示する際に使用する文字です。詳細な情報は、
-                    <classname>Zend_Locale</classname> のドキュメントにある
-                    <link linkend="zend.locale.appendix.numberscripts.supported">サポートする数値系</link>
-                    を参照ください。
+                    <link linkend="zend.locale.numbersystems" /> にある
+                    <classname>Zend_Locale</classname> のドキュメントを参照ください。
                 </para>
             </listitem>
             <listitem>
@@ -271,9 +270,7 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
                     数値の表示に使用する数字の種類を定義します。ほとんどのロケールでは、
                     デフォルトの数字は <emphasis>'Latn'</emphasis>
                     です。これは 0 から 9 を使用します。それ以外には
-                    'Arab' (アラビア数字) なども使用できます。サポートしている数字は
-                    <link linkend="zend.locale.appendix.numberscripts.supported">この表</link>
-                    を参照ください。
+                    'Arab' (アラビア数字) なども使用できます。
                 </para>
             </listitem>
             <listitem>

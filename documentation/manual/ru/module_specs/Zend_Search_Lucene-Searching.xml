@@ -242,15 +242,15 @@ $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr);]]></progra
         <para>
             Результат поиска является массивом объектов
             Zend_Search_Lucene_Search_QueryHit. Все эти объекты имеют два
-            свойства: <code>$hit->document</code> - номер документа в индексе,
-            <code>$hit->score</code> - ранг "хита" в результате поиска.
+            свойства: <varname>$hit->document</varname> - номер документа в индексе,
+            <varname>$hit->score</varname> - ранг "хита" в результате поиска.
             Результат упорядочен по рангу ("хиты" с наибольшим рангом идут
             первыми).
 
 <!--
             The search result is an array of Zend_Search_Lucene_Search_QueryHit objects.  Each of these has
-            two properties: <code>$hit->document</code> is a document number within
-            the index and <code>$hit->score</code> is a score of the hit in
+            two properties: <varname>$hit->document</varname> is a document number within
+            the index and <varname>$hit->score</varname> is a score of the hit in
             a search result. Result is ordered by score (top scores come first).
 -->
         </para>
@@ -415,30 +415,30 @@ foreach ($hits as $hit) {
         </para>
 
         <para>
-            <code>$index->find()</code> может принимать несколько необязательных
+            <varname>$index->find()</varname> может принимать несколько необязательных
             параметров:
 <!--
-            <code>$index->find()</code> call may take several optional parameters:
+            <varname>$index->find()</varname> call may take several optional parameters:
 -->
             <programlisting language="php"><![CDATA[<?php
 $index->find($query [, $sortField [, $sortType [, $sortOrder]]] [, $sortField2 [, $sortType [, $sortOrder]]] ...);]]></programlisting>
         </para>
 
         <para>
-            <code>$sortField</code> является именем сохраненного в индексе поля
+            <varname>$sortField</varname> является именем сохраненного в индексе поля
             для сортировки результата.
 <!--
-            <code>$sortField</code> is a name of stored field to sort result.
+            <varname>$sortField</varname> is a name of stored field to sort result.
 -->
         </para>
 
         <para>
-            <code>$sortType</code> может быть опущен или принимать значения
+            <varname>$sortType</varname> может быть опущен или принимать значения
             <code>SORT_REGULAR</code> (сравнивать элементы как обычно, значение по умолчанию),
             <code>SORT_NUMERIC</code> (сравнивать элементы как числа),
             <code>SORT_STRING</code> (сравнивать элементы как строки).
 <!--
-            <code>$sortType</code> may be omitted or take values
+            <varname>$sortType</varname> may be omitted or take values
             <code>SORT_REGULAR</code> (compare items normally, default value),
             <code>SORT_NUMERIC</code> (compare items numerically),
             <code>SORT_STRING</code> (compare items as strings).
@@ -446,11 +446,11 @@ $index->find($query [, $sortField [, $sortType [, $sortOrder]]] [, $sortField2 [
         </para>
 
         <para>
-            <code>$sortOrder</code> может быть опущен или принимать значения
+            <varname>$sortOrder</varname> может быть опущен или принимать значения
             <code>SORT_ASC</code> (сортировать в порядке возрастания, значение по умолчанию),
             <code>SORT_DESC</code> (сортировать в порядке убывания).
 <!--
-            <code>$sortOrder</code> may be omitted or take values
+            <varname>$sortOrder</varname> may be omitted or take values
             <code>SORT_ASC</code> (sort in ascending order, default value),
             <code>SORT_DESC</code> (sort in descending order).
 -->

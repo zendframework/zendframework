@@ -37,9 +37,9 @@
     </itemizedlist>
 
     <para>
-        Параметр <code>$keyValue</code> используется для установки значения
-        атрибута 'name' или 'http-equiv'; <code>$content</code> является
-        значением атрибута 'content', а <code>$modifiers</code> - необязательный
+        Параметр <varname>$keyValue</varname> используется для установки значения
+        атрибута 'name' или 'http-equiv'; <varname>$content</varname> является
+        значением атрибута 'content', а <varname>$modifiers</varname> - необязательный
         параметр, который может быть ассоциативным массивом с ключами 'lang'
         и/или 'scheme'.
     </para>
@@ -49,9 +49,9 @@
         <code>headMeta()</code>, который имеет следующую сигнатуру:
         <code>headMeta($content,
             $keyValue, $keyType = 'name', $modifiers = array(), $placement =
-            'APPEND')</code>. Через <code>$keyValue</code> передается содержимое
-        ключа, указанного в <code>$keyType</code> (ключом может быть 'name' или
-        'http-equiv'). <code>$placement</code> может иметь одно из следующих
+            'APPEND')</code>. Через <varname>$keyValue</varname> передается содержимое
+        ключа, указанного в <varname>$keyType</varname> (ключом может быть 'name' или
+        'http-equiv'). <varname>$placement</varname> может иметь одно из следующих
         значений: 'SET' (замена всех ранее сохраненных значений), 'APPEND'
         (добавление в конец стека) или 'PREPEND' (добавление в начало стека).
     </para>

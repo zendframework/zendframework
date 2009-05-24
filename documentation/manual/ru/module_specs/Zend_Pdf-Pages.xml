@@ -73,12 +73,12 @@
     </para>
 
     <para>
-    Страницы документа хранятся в открытом члене <code>$pages</code> класса
+    Страницы документа хранятся в открытом члене <varname>$pages</varname> класса
     <code>Zend_Pdf</code>. Это массив объектов <code>Zend_Pdf_Page</code>.
     Он полностью описывает набор и порядок страниц документа и с ним можно
     работать, как с обычным массивом:
 <!--
-    Document pages are stored in <code>$pages</code> public member of <code>Zend_Pdf</code> class.
+    Document pages are stored in <varname>$pages</varname> public member of <code>Zend_Pdf</code> class.
     It's an array of <code>Zend_Pdf_Page</code> objects. It completely defines set and order of document pages
     and can be manipulated as a common array:
 -->

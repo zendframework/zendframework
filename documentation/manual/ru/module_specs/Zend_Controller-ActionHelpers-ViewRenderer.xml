@@ -72,7 +72,7 @@
                 <code>ViewRenderer</code> включен по умолчанию. Вы можете
                 отключить его через параметр фронт-контроллера
                 <code>noViewRenderer</code>
-                (<code>$front->setParam('noViewRenderer', true)</code>) или
+                (<varname>$front->setParam('noViewRenderer', true)</varname>) или
                 посредством удаления помощника из стека брокера помощников
                 (<code>Zend_Controller_Action_HelperBroker::removeHelper('viewRenderer')</code>).
             </para>
@@ -136,7 +136,7 @@ Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
             <code>ViewRenderer</code> для инстанцирования объекта вида. Каждый
             раз, когда инстанцируется контроллер, вызывается метод
             <code>init()</code> помощника <code>ViewRenderer</code>, что
-            приводит к установке свойства <code>$view</code> данного контроллера
+            приводит к установке свойства <varname>$view</varname> данного контроллера
             действий и вызову метода <code>addScriptPath()</code> с путем
             относительно текущего модуля; он будет вызван с префиксом класса,
             соответствующим имени текущего модуля, что эффективно
@@ -187,7 +187,7 @@ $this->foo(); // вызывает Foo_View_Helper_Foo::foo()
                 <para>
                     <code>setView($view)</code> позволяет установить объект вида
                     для <code>ViewRenderer</code>. Объект сохраняется в
-                    открытом свойстве <code>$view</code> класса.
+                    открытом свойстве <varname>$view</varname> класса.
                 </para>
             </listitem>
 
@@ -242,7 +242,7 @@ $this->foo(); // вызывает Foo_View_Helper_Foo::foo()
                 <para>
                     <code>setScriptAction($name)</code> может использоваться для
                     того, чтобы указать скрипт действия для рендеринга.
-                    <code>$name</code> должен быть именем скрипта без суффикса
+                    <varname>$name</varname> должен быть именем скрипта без суффикса
                     (и без поддиректории контроллера, за исключением того
                     случая, когда включен <code>noController</code>). Если не
                     задан, то ищется скрипт вида с именем, аналогичным имени
@@ -436,7 +436,7 @@ $viewRenderer =
                 <para>
                     <code>setInflector($inflector, $reference)</code> позволяет
                     устанавливать свой инфлектор для использования с
-                    <code>ViewRenderer</code>. Если <code>$reference</code>
+                    <code>ViewRenderer</code>. Если <varname>$reference</varname>
                     равен true, то суффикс и директория модуля будут установлены
                     как статические ссылки на свойства
                     <code>ViewRenderer</code>, так же, как и цель.
@@ -521,7 +521,7 @@ $viewRenderer =
                     в опционально заданный именованный сегмент. Если
                     используется этот метод, то <code>ViewRenderer</code> не
                     производит автоматическое определение имени скрипта, вместо
-                    этого он напрямую передает аргумент <code>$script</code>
+                    этого он напрямую передает аргумент <varname>$script</varname>
                     методу <code>render()</code> объекта вида.
                 </para>
 
@@ -581,11 +581,11 @@ $viewRenderer =
             <listitem>
                 <para>
                     <code>render($action, $name, $noController)</code> сначала
-                    проверяет, были ли переданы параметры <code>$name</code> или
-                    <code>$noController</code>, и если были переданы, то
+                    проверяет, были ли переданы параметры <varname>$name</varname> или
+                    <varname>$noController</varname>, и если были переданы, то
                     устанавливает соответствующие флаги (responseSegment и
                     noController соответственно) в ViewRenderer. Затем он
-                    передает параметр <code>$action</code> (если есть) методу
+                    передает параметр <varname>$action</varname> (если есть) методу
                     <code>getViewScript()</code>. Наконец, он передает
                     полученный путь к скрипту вида методу
                     <code>renderScript()</code>.
@@ -616,9 +616,9 @@ $viewRenderer =
                     <code>renderBySpec($action, $vars, $name)</code> позволяет
                     передавать переменные спецификации пути для определения
                     создаваемого пути к скрипту вида. Он передает
-                    <code>$action</code> и <code>$vars</code> методу
+                    <varname>$action</varname> и <varname>$vars</varname> методу
                     <code>getScriptPath()</code>, затем передает полученный путь
-                    и <code>$name</code> методу <code>renderScript()</code>.
+                    и <varname>$name</varname> методу <code>renderScript()</code>.
                 </para>
             </listitem>
         </itemizedlist>

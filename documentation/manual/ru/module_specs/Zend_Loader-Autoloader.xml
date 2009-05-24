@@ -223,7 +223,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><code>string|false</code></entry>
                         <entry><itemizedlist>
                             <listitem><para>
-                                <code>$class</code>, <emphasis>обязательный</emphasis>.
+                                <varname>$class</varname>, <emphasis>обязательный</emphasis>.
                                 Строка с именем класса для загрузки.
                             </para></listitem>
                         </itemizedlist></entry>
@@ -238,7 +238,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><classname>Zend_Loader_Autoloader</classname></entry>
                         <entry><itemizedlist>
                             <listitem><para>
-                                <code>$callback</code>, <emphasis>обязательный</emphasis>.
+                                <varname>$callback</varname>, <emphasis>обязательный</emphasis>.
                             </para></listitem>
                         </itemizedlist></entry>
                         <entry><para>
@@ -264,7 +264,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><classname>Zend_Loader_Autoloader</classname></entry>
                         <entry><itemizedlist>
                             <listitem><para>
-                                <code>$autoloaders</code>, <emphasis>обязательный</emphasis>.
+                                <varname>$autoloaders</varname>, <emphasis>обязательный</emphasis>.
                             </para></listitem>
                         </itemizedlist></entry>
                         <entry><para>
@@ -289,7 +289,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><code>array</code></entry>
                         <entry><itemizedlist>
                             <listitem><para>
-                                <code>$namespace</code>, <emphasis>обязательный</emphasis>
+                                <varname>$namespace</varname>, <emphasis>обязательный</emphasis>
                             </para></listitem>
                         </itemizedlist></entry>
                         <entry><para>
@@ -304,13 +304,13 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><classname>Zend_Loader_Autoloader</classname></entry>
                         <entry><itemizedlist>
                             <listitem><para>
-                                <code>$namespace</code>, <emphasis>обязательный</emphasis>.
+                                <varname>$namespace</varname>, <emphasis>обязательный</emphasis>.
                             </para></listitem>
                         </itemizedlist></entry>
                         <entry><para>
                             Регистрирует одно или более пространств имен с
                             используемым по умолчанию автозагрузчиком.
-                            Если <code>$namespace</code> является строкой,
+                            Если <varname>$namespace</varname> является строкой,
                             то она регистрируется как пространство имен;
                             если же массив строк, то все они
                             регистрируются как пространства имен.
@@ -322,13 +322,13 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><classname>Zend_Loader_Autoloader</classname></entry>
                         <entry><itemizedlist>
                             <listitem><para>
-                                <code>$namespace</code>, <emphasis>обязательный</emphasis>.
+                                <varname>$namespace</varname>, <emphasis>обязательный</emphasis>.
                             </para></listitem>
                         </itemizedlist></entry>
                         <entry><para>
                             Отменяет регистрацию одного или более пространств
                             имен из используемого по умолчанию автозагрузчика.
-                            Если <code>$namespace</code> является строкой,
+                            Если <varname>$namespace</varname> является строкой,
                             то отменяется регистрация пространства имен
                             под этим именем;
                             если это массив строк, то отменяются
@@ -352,7 +352,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><code>boolean|Zend_Loader_Autoloader</code></entry>
                         <entry><itemizedlist>
                             <listitem><para>
-                                <code>$flag</code>, <emphasis>опциональный</emphasis>.
+                                <varname>$flag</varname>, <emphasis>опциональный</emphasis>.
                             </para></listitem>
                         </itemizedlist></entry>
                         <entry><para>
@@ -375,7 +375,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><classname>Zend_Loader_Autoloader</classname></entry>
                         <entry><itemizedlist>
                             <listitem><para>
-                                <code>$flag</code>, <emphasis>обязательный</emphasis>.
+                                <varname>$flag</varname>, <emphasis>обязательный</emphasis>.
                             </para></listitem>
                         </itemizedlist></entry>
                         <entry><para>
@@ -406,7 +406,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><code>array</code></entry>
                         <entry><itemizedlist>
                             <listitem><para>
-                                <code>$class</code>, <emphasis>обязательный</emphasis>.
+                                <varname>$class</varname>, <emphasis>обязательный</emphasis>.
                             </para></listitem>
                         </itemizedlist></entry>
                         <entry><para>
@@ -423,12 +423,12 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><classname>Zend_Loader_Autoloader</classname></entry>
                         <entry><itemizedlist>
                             <listitem><para>
-                                <code>$callback</code>, <emphasis>обязательный</emphasis>.
+                                <varname>$callback</varname>, <emphasis>обязательный</emphasis>.
                                 Обратный вызов PHP
                             </para></listitem>
 
                             <listitem><para>
-                                <code>$namespace</code>, <emphasis>опциональный</emphasis>.
+                                <varname>$namespace</varname>, <emphasis>опциональный</emphasis>.
                                 Строка с префиксом имен классов, используемым в
                                 качестве пространства имен.
                             </para></listitem>
@@ -448,12 +448,12 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><classname>Zend_Loader_Autoloader</classname></entry>
                         <entry><itemizedlist>
                             <listitem><para>
-                                <code>$callback</code>, <emphasis>обязательный</emphasis>.
+                                <varname>$callback</varname>, <emphasis>обязательный</emphasis>.
                                 Обратный вызов PHP
                             </para></listitem>
 
                             <listitem><para>
-                                <code>$namespace</code>, <emphasis>опциональный</emphasis>.
+                                <varname>$namespace</varname>, <emphasis>опциональный</emphasis>.
                                 Строка с префиксом имен классов, используемым в
                                 качестве пространства имен.
                             </para></listitem>
@@ -473,12 +473,12 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><classname>Zend_Loader_Autoloader</classname></entry>
                         <entry><itemizedlist>
                             <listitem><para>
-                                <code>$callback</code>, <emphasis>обязательный</emphasis>.
+                                <varname>$callback</varname>, <emphasis>обязательный</emphasis>.
                                 Обратный вызов PHP
                             </para></listitem>
 
                             <listitem><para>
-                                <code>$namespace</code>, <emphasis>опциональный</emphasis>.
+                                <varname>$namespace</varname>, <emphasis>опциональный</emphasis>.
                                 Строка, представляющая собой префикс имен
                                 классов (используемый в качестве пространства
                                 имен) или массив строк с префиксами.

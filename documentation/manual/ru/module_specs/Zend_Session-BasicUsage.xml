@@ -9,9 +9,9 @@
         сессии, несмотря на то, что есть пространство имен по умолчанию для тех,
         кому нужно только одно пространство имен для всех данных сессии.
         <code>Zend_Session</code> использует расширение ext/session и его
-        суперглобальный массив <code>$_SESSION</code> в качестве механизма
+        суперглобальный массив <varname>$_SESSION</varname> в качестве механизма
         хранения постоянных данных сессии. Несмотря на то, что
-        <code>$_SESSION</code> остается доступным в глобальном пространстве
+        <varname>$_SESSION</varname> остается доступным в глобальном пространстве
         имен, разработчики должны избегать прямого обращения к нему с тем, чтобы
         можно было наиболее безопасно и эффективно использовать возможности
         <code>Zend_Session</code> и <code>Zend_Session_Namespace</code> для
@@ -20,8 +20,8 @@
         <code>Zend_Session_Namespace</code> creates instances of containers providing the primary API for manipulating
         session data in Zend Framework. Namespaces are used to segregate all session data, although a default
         namespace exists for those who only want one namespace for all their session data. <code>Zend_Session</code>
-        utilizes ext/session and its special <code>$_SESSION</code> superglobal as the storage mechanism for session
-        state data. While <code>$_SESSION</code> is still available in PHP's global namespace, developers should refrain
+        utilizes ext/session and its special <varname>$_SESSION</varname> superglobal as the storage mechanism for session
+        state data. While <varname>$_SESSION</varname> is still available in PHP's global namespace, developers should refrain
         from directly accessing it, so that <code>Zend_Session</code> and <code>Zend_Session_Namespace</code> can most
         effectively and securely provide its suite of session related functionality.
 -->

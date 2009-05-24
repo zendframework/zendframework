@@ -32,7 +32,7 @@
             По умолчанию разделителем ключей является символ точки
             (<code>.</code>). Он может быть заменен на любой другой путем
             изменения ключа <code>'nestSeparator'</code> в массиве
-            <code>$options</code> при создании объекта <classname>Zend_Config_Ini</classname>.
+            <varname>$options</varname> при создании объекта <classname>Zend_Config_Ini</classname>.
             Например:
             <programlisting language="php"><![CDATA[
 $options['nestSeparator'] = ':';
@@ -98,11 +98,11 @@ echo $config->database->params->dbname; // выведет "dbname"
             </thead>
             <tbody>
                 <row>
-                    <entry><code>$filename</code></entry>
+                    <entry><varname>$filename</varname></entry>
                     <entry>INI-файл для загрузки</entry>
                 </row>
                 <row>
-                    <entry><code>$section</code></entry>
+                    <entry><varname>$section</varname></entry>
                     <entry>
                         Раздел в INI-файле, который должен быть загружен.
                         Установка этого параметра в null вызовет загрузку всех
@@ -111,7 +111,7 @@ echo $config->database->params->dbname; // выведет "dbname"
                     </entry>
                 </row>
                 <row>
-                    <entry><code>$options = false</code></entry>
+                    <entry><varname>$options = false</varname></entry>
                     <entry>
                         Массив опций. Поддерживаются следующие ключи:
                         <itemizedlist>

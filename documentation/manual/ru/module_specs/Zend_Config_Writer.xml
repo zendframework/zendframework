@@ -13,7 +13,7 @@
         (имя файла) и <code>config</code> (конфигурационные данные).
         Затем вы вызываете метод <code>write()</code> объекта, и он
         создает конфигурационный файл. Вы можете также передавать
-        <code>$filename</code> и <code>$config</code> непосредственно
+        <varname>$filename</varname> и <varname>$config</varname> непосредственно
         методу <code>write()</code>. В настоящее время вместе с
         <classname>Zend_Config_Writer</classname> поставляются следующие адаптеры:
     </para>
@@ -50,7 +50,7 @@
         параметр объекта <classname>Zend_Config</classname> через аксессор
         <code>-&gt;</code>. Для того, чтобы создать раздел в корне или
         ветку, создавайте новый массив
-        (<code>$config-&gt;branch = array();</code>). Для того, чтобы
+        (<varname>$config-&gt;branch = array();</varname>). Для того, чтобы
         указать, от какого раздела наследует другой, вызывайте метод в корне
         объекта <classname>Zend_Config</classname>.
     </para>

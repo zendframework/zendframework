@@ -284,13 +284,13 @@ $front->setParam('noViewRenderer', true);
 
         <itemizedlist>
             <listitem><para>
-                Вызов <code>$this-&gt;render()</code>
+                Вызов <varname>$this-&gt;render()</varname>
             </para></listitem>
             <listitem><para>
-                Вызов <code>$this-&gt;_forward()</code>
+                Вызов <varname>$this-&gt;_forward()</varname>
             </para></listitem>
             <listitem><para>
-                Вызов <code>$this-&gt;_redirect()</code>
+                Вызов <varname>$this-&gt;_redirect()</varname>
             </para></listitem>
             <listitem><para>
                 Вызов помощника действий <code>Redirector</code>
@@ -348,7 +348,7 @@ public function preDispatch()
                     Если вызывается <code>render()</code> с аргументами и не
                     производится впоследствии каких-либо действий или рендеринга
                     нескольких скриптов вида, то можно заменить эти вызовы на
-                    чтение <code>$this-&gt;_helper-&gt;viewRenderer()</code>.
+                    чтение <varname>$this-&gt;_helper-&gt;viewRenderer()</varname>.
                 </para>
             </listitem>
         </itemizedlist>
@@ -533,11 +533,11 @@ final protected function _forward($action,
 ]]></programlisting>
 
                 <para>
-                    <code>$action</code> - обязательный аргумент. Если не был
+                    <varname>$action</varname> - обязательный аргумент. Если не был
                     определен контроллер, то предполагается, что вызывается
-                    действие в текущем контроллере. <code>$module</code> всегда
+                    действие в текущем контроллере. <varname>$module</varname> всегда
                     игнорируется, если не определен контроллер. Все переданные в
-                    аргументе <code>$params</code> параметры будут добавлены в
+                    аргументе <varname>$params</varname> параметры будут добавлены в
                     объект запроса. Если вы не запрашиваете контроллер или
                     модуль, но нужно передать параметры, то просто укажите null
                     на месте соответствующих аргументов.
@@ -701,7 +701,7 @@ echo $response;
                         Метод <code>_redirect()</code> теперь принимает второй
                         необязательный аргумент, HTTP-код, который должен
                         возвращаться при перенаправлении, и третий
-                        необязательный аргумент, <code>$prependBase</code>,
+                        необязательный аргумент, <varname>$prependBase</varname>,
                         который указывает, что базовый URL, зарегистрированный в
                         объекте запроса, должен предшествовать URL, переданному
                         в первом аргументе.

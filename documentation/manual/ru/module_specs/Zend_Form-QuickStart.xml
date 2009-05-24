@@ -380,8 +380,8 @@ $form->addElement('text', 'username', array('order' => 10));
         </para>
 
         <para>
-            Откуда идут данные? Вы можете использовать <code>$_POST</code>,
-            <code>$_GET</code>, и любые другие источники данных
+            Откуда идут данные? Вы можете использовать <varname>$_POST</varname>,
+            <varname>$_GET</varname>, и любые другие источники данных
             (например, запросы веб-сервисов):
         </para>
 

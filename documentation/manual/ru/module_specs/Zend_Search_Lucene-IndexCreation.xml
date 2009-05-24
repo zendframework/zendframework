@@ -263,13 +263,13 @@ $index->optimize();
             </para>
             <para>
                 <emphasis>MaxBufferedDocs</emphasis> может быть получен или
-                установлен через методы <code>$index->getMaxBufferedDocs()</code>
-                и <code>$index->setMaxBufferedDocs($maxBufferedDocs)</code>
+                установлен через методы <varname>$index->getMaxBufferedDocs()</varname>
+                и <varname>$index->setMaxBufferedDocs($maxBufferedDocs)</varname>
                 соответственно.
 <!--
                 <emphasis>MaxBufferedDocs</emphasis> can be retrieved or set by
-                <code>$index->getMaxBufferedDocs()</code> or
-                <code>$index->setMaxBufferedDocs($maxBufferedDocs)</code> calls.
+                <varname>$index->getMaxBufferedDocs()</varname> or
+                <varname>$index->setMaxBufferedDocs($maxBufferedDocs)</varname> calls.
 -->
             </para>
             <para>
@@ -303,13 +303,13 @@ $index->optimize();
             </para>
             <para>
                 <emphasis>MaxMergeDocs</emphasis> может быть получен или
-                установлен через методы <code>$index->getMaxMergeDocs()</code>
-                и <code>$index->setMaxMergeDocs($maxMergeDocs)</code>
+                установлен через методы <varname>$index->getMaxMergeDocs()</varname>
+                и <varname>$index->setMaxMergeDocs($maxMergeDocs)</varname>
                 соответственно.
 <!--
                 <emphasis>MaxMergeDocs</emphasis> can be retrieved or set by
-                <code>$index->getMaxMergeDocs()</code> or
-                <code>$index->setMaxMergeDocs($maxMergeDocs)</code> calls.
+                <varname>$index->getMaxMergeDocs()</varname> or
+                <varname>$index->setMaxMergeDocs($maxMergeDocs)</varname> calls.
 -->
             </para>
             <para>
@@ -367,13 +367,13 @@ $index->optimize();
             </para>
             <para>
                 <emphasis>MergeFactor</emphasis> может быть получен или
-                установлен через методы <code>$index->getMergeFactor()</code>
-                и <code>$index->setMergeFactor($mergeFactor)</code>
+                установлен через методы <varname>$index->getMergeFactor()</varname>
+                и <varname>$index->setMergeFactor($mergeFactor)</varname>
                 соответственно.
 <!--
                 <emphasis>MergeFactor</emphasis> can be retrieved or set by
-                <code>$index->getMergeFactor()</code> or
-                <code>$index->setMergeFactor($mergeFactor)</code> calls.
+                <varname>$index->getMergeFactor()</varname> or
+                <varname>$index->setMergeFactor($mergeFactor)</varname> calls.
 -->
             </para>
             <para>

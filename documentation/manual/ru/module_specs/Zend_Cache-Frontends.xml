@@ -617,10 +617,10 @@ $result = $cache->foobar2('1', '2');
             </para>
             <para>
                 Идентификатор кэша вычисляется автоматически
-                с использованием <code>$_SERVER['REQUEST_URI']</code> и
-                (в зависимости от опций) <code>$_GET</code>,
-                <code>$_POST</code>, <code>$_SESSION</code>,
-                <code>$_COOKIE</code>, <code>$_FILES</code>.
+                с использованием <varname>$_SERVER['REQUEST_URI']</varname> и
+                (в зависимости от опций) <varname>$_GET</varname>,
+                <varname>$_POST</varname>, <varname>$_SESSION</varname>,
+                <varname>$_COOKIE</varname>, <varname>$_FILES</varname>.
                 Кроме этого, вы используете только один метод для вызова
                 (<code>start()</code>), потому что <code>end()</code> вызывается
                 автоматически, когда страница заканчивается.
@@ -688,7 +688,7 @@ $result = $cache->foobar2('1', '2');
                                               <code>cache_with_get_variables</code>:
                                               если <code>true</code>, кэширование
                                               включено, даже если в массиве
-                                              <code>$_GET</code> есть переменные
+                                              <varname>$_GET</varname> есть переменные
                                           </para>
                                       </listitem>
                                       <listitem>
@@ -698,7 +698,7 @@ $result = $cache->foobar2('1', '2');
                                               <code>cache_with_post_variables</code>:
                                               если <code>true</code>, кэширование
                                               включено, даже если в массиве
-                                              <code>$_POST</code> есть переменные
+                                              <varname>$_POST</varname> есть переменные
                                           </para>
                                       </listitem>
                                       <listitem>
@@ -708,7 +708,7 @@ $result = $cache->foobar2('1', '2');
                                               <code>cache_with_session_variables</code>:
                                               если <code>true</code>, кэширование
                                               включено, даже если в массиве
-                                              <code>$_SESSION</code> есть
+                                              <varname>$_SESSION</varname> есть
                                               переменные
                                           </para>
                                       </listitem>
@@ -719,7 +719,7 @@ $result = $cache->foobar2('1', '2');
                                               <code>cache_with_files_variables</code>:
                                               если <code>true</code>, кэширование
                                               включено, даже если в массиве
-                                              <code>$_FILES</code> есть переменные
+                                              <varname>$_FILES</varname> есть переменные
                                           </para>
                                       </listitem>
                                       <listitem>
@@ -729,7 +729,7 @@ $result = $cache->foobar2('1', '2');
                                               <code>cache_with_cookie_variables</code>:
                                               если <code>true</code>, кэширование
                                               включено, даже если в массиве
-                                              <code>$_COOKIE</code> есть
+                                              <varname>$_COOKIE</varname> есть
                                               переменные
                                           </para>
                                       </listitem>
@@ -741,7 +741,7 @@ $result = $cache->foobar2('1', '2');
                                               если <code>true</code>, то
                                               идентификатор кэша будет зависеть
                                               от содержимого массива
-                                              <code>$_GET</code>
+                                              <varname>$_GET</varname>
                                           </para>
                                       </listitem>
                                       <listitem>
@@ -752,7 +752,7 @@ $result = $cache->foobar2('1', '2');
                                               если <code>true</code>, то
                                               идентификатор кэша будет зависеть
                                               от содержимого массива
-                                              <code>$_POST</code>
+                                              <varname>$_POST</varname>
                                           </para>
                                       </listitem>
                                       <listitem>
@@ -763,7 +763,7 @@ $result = $cache->foobar2('1', '2');
                                               если <code>true</code>, то
                                               идентификатор кэша будет зависеть
                                               от содержимого массива
-                                              <code>$_SESSION</code>
+                                              <varname>$_SESSION</varname>
                                           </para>
                                       </listitem>
                                       <listitem>
@@ -774,7 +774,7 @@ $result = $cache->foobar2('1', '2');
                                               если <code>true</code>, то
                                               идентификатор кэша будет зависеть от
                                               содержимого массива
-                                              <code>$_FILES</code>
+                                              <varname>$_FILES</varname>
                                           </para>
                                       </listitem>
                                       <listitem>
@@ -785,7 +785,7 @@ $result = $cache->foobar2('1', '2');
                                               если <code>true</code>, то
                                               идентификатор кэша будет зависеть от
                                               содержимого массива
-                                              <code>$_COOKIE</code>
+                                              <varname>$_COOKIE</varname>
                                           </para>
                                       </listitem>
                                       <listitem>
@@ -831,10 +831,10 @@ $result = $cache->foobar2('1', '2');
                                   этого массива являются регулярные выражения
                                   (PCRE), значениями — ассоциативные массивы со
                                   специальными опциями, которые устанавливаются,
-                                  если <code>$_SERVER['REQUEST_URI']</code>
+                                  если <varname>$_SERVER['REQUEST_URI']</varname>
                                   соответствует регулярному выражению
                                   (см. default_options в этом списке доступных
-                                  опций). Если <code>$_SERVER['REQUEST_URI']</code>
+                                  опций). Если <varname>$_SERVER['REQUEST_URI']</varname>
                                   соответствует нескольким регулярным
                                   выражениям, то используется только последнее
                                   из них.

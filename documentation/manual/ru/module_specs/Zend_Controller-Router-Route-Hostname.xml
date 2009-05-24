@@ -49,8 +49,8 @@ $router->addRoute('user', $hostnameRoute->chain($plainPathRoute);
         пути. Поэтому нужно объединять маршруты по имени хоста
         с маршрутами по пути. Это можно делать так, как
         показано в примере выше - путем вызова
-        <code>$hostnameRoute->chain($pathRoute);</code>.
-        При этом <code>$hostnameRoute</code> не изменяется, но будет
+        <varname>$hostnameRoute->chain($pathRoute);</varname>.
+        При этом <varname>$hostnameRoute</varname> не изменяется, но будет
         возвращен новый маршрут
         (<classname>Zend_Controller_Router_Route_Chain</classname>), который
         может быть передан маршрутизатору.

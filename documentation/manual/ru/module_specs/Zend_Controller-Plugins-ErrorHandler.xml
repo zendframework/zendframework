@@ -127,7 +127,7 @@ class ErrorController extends Zend_Controller_Action
 
         <para>
             Имея объект ошибки, вы можете получить тип ошибки через
-            <code>$errors->type</code>. Тип ошибки может быть одним из
+            <varname>$errors->type</varname>. Тип ошибки может быть одним из
             следующих:
         </para>
 

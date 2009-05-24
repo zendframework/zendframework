@@ -111,7 +111,7 @@ echo $view->render('someView.php');
             вида относительно вызывающего скрипта.
             Например, если скрипт контроллера находится в директории
             "/path/to/app/controllers" и он вызывает скрипт вида
-            следующим образом: <code>$view->render('someView.php')</code>, то
+            следующим образом: <varname>$view->render('someView.php')</varname>, то
             <classname>Zend_View</classname> будет искать скрипт вида по пути
             "/path/to/app/controllers/someView.php".
         </para>
@@ -128,7 +128,7 @@ $view->setScriptPath('/path/to/app/views');
 ]]></programlisting>
 
         <para>
-            Теперь, когда вы вызываете <code>$view->render('someView.php')</code>,
+            Теперь, когда вы вызываете <varname>$view->render('someView.php')</varname>,
             он будет искать файл "/path/to/app/views/someView.php".
         </para>
 

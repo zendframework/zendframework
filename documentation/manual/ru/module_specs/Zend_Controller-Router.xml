@@ -62,11 +62,11 @@ RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.
         <note>
             <title>IIS Isapi_Rewrite</title>
             <para>
-                Если используется IIS, то <code>$_SERVER['REQUEST_URI']</code>
+                Если используется IIS, то <varname>$_SERVER['REQUEST_URI']</varname>
                 не будет определен, либо будет установлен как пустая
                 строка. В этом случае
                 <classname>Zend_Controller_Request_Http</classname> попытается
-                использовать <code>$_SERVER['HTTP_X_REWRITE_URL']</code>,
+                использовать <varname>$_SERVER['HTTP_X_REWRITE_URL']</varname>,
                 значение которого устанавливается расширением Isapi_Rewrite.
             </para>
         </note>

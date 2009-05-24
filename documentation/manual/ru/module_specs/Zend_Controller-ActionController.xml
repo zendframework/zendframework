@@ -283,7 +283,7 @@ if ($this->_hasParam('id') {
             <classname>Zend_Controller_Action</classname> предоставляет простейший и
             гибкий механизм интеграции видов. Два метода осуществляют это:
             <code>initView()</code> и <code>render()</code>. Первый метод
-            выполняет отложенную загрузку открытого свойства <code>$view</code>,
+            выполняет отложенную загрузку открытого свойства <varname>$view</varname>,
             второй выполняет рендеринг вида, основываясь на запрошенном в данный
             момент действии, используя иерархию директорий для определения пути
             к скрипту.
@@ -297,10 +297,10 @@ if ($this->_hasParam('id') {
                 <code>render()</code> вызывает <code>initView()</code> для
                 извлечения объекта вида, но этот объект может быть
                 инициализирован в любое время. По умолчанию
-                <code>initView()</code> заполняет свойство <code>$view</code>
+                <code>initView()</code> заполняет свойство <varname>$view</varname>
                 объектом <classname>Zend_View</classname>, но может также использоваться
                 любой класс, реализующий интерфейс
-                <classname>Zend_View_Interface</classname>. Если <code>$view</code> уже
+                <classname>Zend_View_Interface</classname>. Если <varname>$view</varname> уже
                 инициализирован, то просто возвращается это свойство.
             </para>
 
@@ -351,16 +351,16 @@ string render(string $action = null,
                 переданы аргументы, то предполагается, что запрашивается скрипт
                 <code>[controller]/[action].phtml</code> (где
                 <code>.phtml</code> - значение свойства
-                <code>$viewSuffix</code>). Передача значения для
-                <code>$action</code> вызовет генерацию этого шаблона в
+                <varname>$viewSuffix</varname>). Передача значения для
+                <varname>$action</varname> вызовет генерацию этого шаблона в
                 поддиректории <code>[controller]</code>. Для того, чтобы
                 отменить использование поддиректории <code>[controller]</code>,
-                передавайте значение true для <code>$noController</code>.
+                передавайте значение true для <varname>$noController</varname>.
                 Шаблоны рендерятся в объект ответа, если же вы хотите сохранить
                 результат в
                 <link linkend="zend.controller.response.namedsegments">именованный
                 сегмент</link> объекта ответа, то передавайте значение для
-                <code>$name</code>.
+                <varname>$name</varname>.
             </para>
 
             <note><para>

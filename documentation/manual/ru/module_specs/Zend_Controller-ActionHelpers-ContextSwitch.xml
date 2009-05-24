@@ -257,7 +257,7 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
 
             <listitem><para>
                 <code>addContexts(array $contexts)</code>: добавляет несколько
-                контекстов одновременно. Массив <code>$contexts</code> должен
+                контекстов одновременно. Массив <varname>$contexts</varname> должен
                 содержать пары контекст/спецификация. Если какой-либо из
                 контекстов уже существует, то бросается исключение.
             </para></listitem>
@@ -355,7 +355,7 @@ class FooController extends Zend_Controller_Action
 ]]></programlisting>
 
         <para>
-            Мы можем также просто определить свойство <code>$contexts</code>
+            Мы можем также просто определить свойство <varname>$contexts</varname>
             в контроллере:
         </para>
 
@@ -390,18 +390,18 @@ class FooController extends Zend_Controller_Action
                     <code>addActionContext($action, $context)</code>: помечает
                     один или более контекстов как доступные для действия
                     $action. Если связи уже существуют, то производится
-                    добавление к ним. <code>$context</code> может быть как
+                    добавление к ним. <varname>$context</varname> может быть как
                     одним контекстом, так и массивом контекстов.
                 </para>
 
                 <para>
-                    Если <code>$context</code> имеет значение <code>true</code>,
+                    Если <varname>$context</varname> имеет значение <code>true</code>,
                     то все доступные в <code>ContextSwitch</code> контексты
                     помечаются как доступные для действия.
                 </para>
 
                 <para>
-                    Пустое значение аргумента <code>$context</code> отключит
+                    Пустое значение аргумента <varname>$context</varname> отключит
                     все контексты для данного действия.
                 </para>
             </listitem>
@@ -411,18 +411,18 @@ class FooController extends Zend_Controller_Action
                     один или более контекстов как доступные для действия
                     $action. Если связи уже существуют, то метод заменяет их
                     указанными.
-                    <code>$context</code> может быть как одним контекстом, так и
+                    <varname>$context</varname> может быть как одним контекстом, так и
                     массивом контекстов.
             </para></listitem>
 
             <listitem><para>
                     <code>addActionContexts(array $contexts)</code>: добавляет
                     одновременно несколько пар действие/контекст.
-                    <code>$contexts</code> должен быть ассоциативным массивом
+                    <varname>$contexts</varname> должен быть ассоциативным массивом
                     пар действие/контекст. Использует метод
                     <code>addActionContext()</code>, это означает, что если
                     связи для данного действия уже существуют, то указанные в
-                    <code>$contexts</code> связи добавляются к ним.
+                    <varname>$contexts</varname> связи добавляются к ним.
             </para></listitem>
 
             <listitem><para>
@@ -447,7 +447,7 @@ class FooController extends Zend_Controller_Action
             <listitem><para>
                     <code>removeActionContext($action, $context)</code>:
                     удаляет один или более контекстов из действия $action.
-                    <code>$context</code> может быть как
+                    <varname>$context</varname> может быть как
                     одним контекстом, так и массивом контекстов.
             </para></listitem>
 
@@ -541,8 +541,8 @@ $contextSwitch->initContext();
                 <para>
                     <code>addHeader($context, $header, $content)</code>:
                     Добавляет заголовок ответа для контекста $context.
-                    <code>$header</code> является именем заголовка, а
-                    <code>$content</code> - значением для этого заголовка.
+                    <varname>$header</varname> является именем заголовка, а
+                    <varname>$content</varname> - значением для этого заголовка.
                 </para>
 
                 <para>
@@ -572,7 +572,7 @@ $contextSwitch->initContext();
                     Добавляет несколько заголовков к контексту $context.
                     Использует <code>addHeader()</code>, поэтому
                     если заголовок уже существует, то бросается исключение.
-                    <code>$headers</code> является массивом пар
+                    <varname>$headers</varname> является массивом пар
                     заголовок/значение.
                 </para>
             </listitem>
@@ -615,7 +615,7 @@ $contextSwitch->initContext();
                     и контекста $context. Триггерами могут быть 'init' или
                     'post' (выбор триггера определяет, когда будет вызвана
                     функция - во время инициализации контекста или операции
-                    <code>postDispatch()</code>). <code>$callback</code> должен
+                    <code>postDispatch()</code>). <varname>$callback</varname> должен
                     быть действующей PHP-функцией обратного вызова.
                 </para>
             </listitem>
@@ -624,7 +624,7 @@ $contextSwitch->initContext();
                 <para>
                     <code>setCallbacks($context, array $callbacks)</code>:
                     устанавливает несколько функций обратного вызова для
-                    данного контекста. <code>$callbacks</code> должен быть
+                    данного контекста. <varname>$callbacks</varname> должен быть
                     массивом пар триггер/функция обратного вызова. В
                     действительности можно зарегистрировать максимум две
                     функции обратного вызова, одна для инициализации, другая для
@@ -719,7 +719,7 @@ $contextSwitch->initContext();
 
         <para>
             Во-первых, он использует другое свойство контроллера для
-            определения контекстов, а именно <code>$ajaxable</code>. Поэтому вы
+            определения контекстов, а именно <varname>$ajaxable</varname>. Поэтому вы
             можете одновременно использовать различные контексты для AJAX и
             обычных HTTP-запросов. Все методы
             <code>*ActionContext*()</code> помощника <code>AjaxContext</code>

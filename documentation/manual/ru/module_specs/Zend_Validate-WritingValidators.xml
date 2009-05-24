@@ -174,7 +174,7 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
 }
 ]]></programlisting>
 
-            Открытые свойства <code>$minimum</code> и <code>$maximum</code>
+            Открытые свойства <varname>$minimum</varname> и <varname>$maximum</varname>
             были созданы для установки нижней и верхней границ диапазона
             соответственно.
             В классе также определены две переменные сообщений, которые

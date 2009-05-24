@@ -98,14 +98,14 @@ class BugsProducts extends Zend_Db_Table_Abstract
         <para>
             Если вы используете Zend_Db_Table для эмулирования каскадных
             операций обновления и удаления, то объявите массив
-            <code>$_dependentTables</code> в классе для
+            <varname>$_dependentTables</varname> в классе для
             родительской таблицы. Перечислите имена классов всех зависимых
             таблиц. Используйте имена классов, а не таблиц в БД.
         </para>
 
         <note>
             <para>
-                Пропустите объявление массива <code>$_dependentTables</code>,
+                Пропустите объявление массива <varname>$_dependentTables</varname>,
                 если используете ограничения ссылочной на сервере СУРБД для
                 реализации каскадных операций. См.
                 <xref linkend="zend.db.table.relationships.cascading" /> для
@@ -114,7 +114,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
         </note>
 
         <para>
-            Объявите массив <code>$_referenceMap</code> во всех классах
+            Объявите массив <varname>$_referenceMap</varname> во всех классах
             зависимых таблиц. Это ассоциативный массив "правил связей". Правило
             связи определяет, какая таблица является родительской в конкретной
             связи, и какие столбцы в зависимой таблице ссылаются на какие
@@ -123,7 +123,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
         <para>
             Ключом правила является строка, используемая как индекс массива
-            <code>$_referenceMap</code>. Этот ключ правила используется для
+            <varname>$_referenceMap</varname>. Этот ключ правила используется для
             идентификации каждой связи. Выбирайте для него описательное имя.
             Лучше всего использовать строку, которая может быть частью имени
             метода, как вы увидите позднее.
@@ -138,7 +138,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
         </para>
 
         <para>
-            Значением каждого правила в массиве <code>$_referenceMap</code>
+            Значением каждого правила в массиве <varname>$_referenceMap</varname>
             является также ассоциативный массив. Элементы этого массива описаны
             ниже:
         </para>
@@ -170,7 +170,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
                     <code>products</code>, но имеет также три связи с таблицей
                     <code>accounts</code>.
                     Помещайте каждую ссылку в отдельную запись в массиве
-                    <code>$_referenceMap</code>.
+                    <varname>$_referenceMap</varname>.
                 </para>
             </listitem>
             <listitem>
@@ -235,12 +235,12 @@ $row->findDependentRowset($table, [$rule]);
 
         <para>
             Этот метод возвращает объект Zend_Db_Table_Rowset_Abstract,
-            содержащий набор строк из зависимой таблицы <code>$table</code>,
-            ссылающихся на строку, представленную объектом <code>$row</code>.
+            содержащий набор строк из зависимой таблицы <varname>$table</varname>,
+            ссылающихся на строку, представленную объектом <varname>$row</varname>.
         </para>
 
         <para>
-            Первый аргумент <code>$table</code> может быть строкой с именем
+            Первый аргумент <varname>$table</varname> может быть строкой с именем
             класса зависимой таблицы. Вы можете также определить зависимую
             таблицу, используя объект класса этой таблицы.
         </para>
@@ -268,8 +268,8 @@ $bugsReportedByUser = $user1234->findDependentRowset('Bugs');
         </example>
 
         <para>
-            Втрой аргумент <code>$rule</code> является опциональным. Это строка
-            с ключом правила в массиве <code>$_referenceMap</code> класса
+            Втрой аргумент <varname>$rule</varname> является опциональным. Это строка
+            с ключом правила в массиве <varname>$_referenceMap</varname> класса
             зависимой таблицы.
             Если вы не определите правило, то будет использоваться первое
             правило из массива, ссылающееся на родительскую таблицу.
@@ -345,12 +345,12 @@ $bugsAssignedToUser = $user1234->findDependentRowset('Bugs',
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>$row->find&lt;TableClass&gt;()</code>
+                    <varname>$row->find&lt;TableClass&gt;()</varname>
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>$row->find&lt;TableClass&gt;By&lt;Rule&gt;()</code>
+                    <varname>$row->find&lt;TableClass&gt;By&lt;Rule&gt;()</varname>
                 </para>
             </listitem>
         </itemizedlist>
@@ -428,7 +428,7 @@ $row->findParentRow($table, [$rule]);
         </para>
 
         <para>
-            Первый аргумент <code>$table</code> может быть строкой с именем
+            Первый аргумент <varname>$table</varname> может быть строкой с именем
             класса родительской таблицы. Вы можете также задавать родительскую
             таблицу, используя объект класса этой таблицы.
         </para>
@@ -456,8 +456,8 @@ $reporter = $bug1->findParentRow('Accounts');
         </example>
 
         <para>
-            Второй аргумент <code>$rule</code> является опциональным. Это строка
-            с ключом правила в массиве <code>$_referenceMap</code> класса
+            Второй аргумент <varname>$rule</varname> является опциональным. Это строка
+            с ключом правила в массиве <varname>$_referenceMap</varname> класса
             зависимой таблицы.
             Если вы не определите правило, то будет использоваться первое
             правило в массиве, ссылающееся на родительскую таблицу.
@@ -506,14 +506,14 @@ $engineer = $bug1->findParentRow('Accounts', 'Engineer');
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>$row->findParent&lt;TableClass&gt;([Zend_Db_Table_Select $select])</code>
+                    <varname>$row->findParent&lt;TableClass&gt;([Zend_Db_Table_Select $select])</varname>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>$row->findParent&lt;TableClass&gt;By&lt;Rule&gt;([Zend_Db_Table_Select
-                    $select])</code>
+                    <varname>$row->findParent&lt;TableClass&gt;By&lt;Rule&gt;([Zend_Db_Table_Select
+                    $select])</varname>
                 </para>
             </listitem>
         </itemizedlist>
@@ -589,20 +589,20 @@ $row->findManyToManyRowset($table,
 
         <para>
             Этот метод возвращает объект Zend_Db_Table_Rowset_Abstract,
-            содержащий строки из таблицы <code>$table</code>, соответствующие
-            связи "многие-ко-многим". Текущий объект строки <code>$row</code>
+            содержащий строки из таблицы <varname>$table</varname>, соответствующие
+            связи "многие-ко-многим". Текущий объект строки <varname>$row</varname>
             исходной таблицы используется в поиске строк в таблице пересечений
             и производится объединение с целевой таблицей.
         </para>
 
         <para>
-            Первый аргумент <code>$table</code> может быть именем класса целевой
+            Первый аргумент <varname>$table</varname> может быть именем класса целевой
             таблицы в связи "многие-ко-многим". Вы можете также задавать целевую
             таблицу, используя объект класса этой таблицы.
         </para>
 
         <para>
-            Второй аргумент <code>$intersectionTable</code> может быть именем
+            Второй аргумент <varname>$intersectionTable</varname> может быть именем
             класса таблицы пересечений между двумя таблицами в связи
             "многие-ко-многим". Вы можете также задавать таблицу пересечений,
             используя объект класса этой таблицы.
@@ -632,20 +632,20 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
         </example>
 
         <para>
-            Третий и четвертый аргументы - <code>$rule1</code> и
-            <code>$rule2</code> - являются опциональными. Это строки с ключами
-            правил в массиве <code>$_referenceMap</code> класса таблицы
+            Третий и четвертый аргументы - <varname>$rule1</varname> и
+            <varname>$rule2</varname> - являются опциональными. Это строки с ключами
+            правил в массиве <varname>$_referenceMap</varname> класса таблицы
             пересечений.
         </para>
 
         <para>
-            <code>$rule1</code> должен содержать ключ правила для ссылок таблицы
+            <varname>$rule1</varname> должен содержать ключ правила для ссылок таблицы
             пересечений на исходную таблицу. В данном примере это связь между
             таблицами <code>BugsProducts</code> и <code>Bugs</code>.
         </para>
 
         <para>
-            <code>$rule2</code> должен содержать ключ правила для ссылок таблицы
+            <varname>$rule2</varname> должен содержать ключ правила для ссылок таблицы
             пересечений на целевую таблицу. В данном примере это связь между
             таблицами <code>Bugs</code> и <code>Products</code>
         </para>
@@ -653,7 +653,7 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
         <para>
             Как и в случае использования методов для извлечения родительских и
             зависимых строк, если вы не зададите правило, то метод использует
-            первое правило в массиве <code>$_referenceMap</code>,
+            первое правило в массиве <varname>$_referenceMap</varname>,
             соответствующее таблицам в связи. Если нужно использовать другое
             правило, то необходимо указать ключ.
         </para>
@@ -661,8 +661,8 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
         <para>
             В примере кода выше ключ правила не указан, поэтому по умолчанию
             используются первые подходящие правила из массива. В данном случае
-            для правила <code>$rule1</code> будет использоваться
-            <code>'Reporter'</code>, для правила <code>$rule2</code> -
+            для правила <varname>$rule1</varname> будет использоваться
+            <code>'Reporter'</code>, для правила <varname>$rule2</varname> -
             <code>'Product'</code>.
         </para>
 
@@ -702,22 +702,22 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>$row->find&lt;TableClass&gt;Via&lt;IntersectionTableClass&gt;
-                    ([Zend_Db_Table_Select $select])</code>
+                    <varname>$row->find&lt;TableClass&gt;Via&lt;IntersectionTableClass&gt;
+                    ([Zend_Db_Table_Select $select])</varname>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>$row->find&lt;TableClass&gt;Via&lt;IntersectionTableClass&gt;By&lt;Rule1&gt;
-                    ([Zend_Db_Table_Select $select])</code>
+                    <varname>$row->find&lt;TableClass&gt;Via&lt;IntersectionTableClass&gt;By&lt;Rule1&gt;
+                    ([Zend_Db_Table_Select $select])</varname>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>$row->find&lt;TableClass&gt;Via&lt;IntersectionTableClass&gt;By&lt;Rule1&gt;And&lt;Rule2&gt;
-                    ([Zend_Db_Table_Select $select])</code>
+                    <varname>$row->find&lt;TableClass&gt;Via&lt;IntersectionTableClass&gt;By&lt;Rule1&gt;And&lt;Rule2&gt;
+                    ([Zend_Db_Table_Select $select])</varname>
                 </para>
             </listitem>
         </itemizedlist>
@@ -846,7 +846,7 @@ $product1234->delete();
 
         <para>
             Для объявления каскадных связей в Zend_Db_Table отредактируйте
-            правила в массиве <code>$_referenceMap</code>. Установите в
+            правила в массиве <varname>$_referenceMap</varname>. Установите в
             ассоциативного массиве под ключами  <code>'onDelete'</code> и
             <code>'onUpdate'</code> значение 'cascade' (или константу
             <code>self::CASCADE</code>). До того, как строка будет удалена из

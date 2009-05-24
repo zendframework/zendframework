@@ -36,10 +36,10 @@
     </itemizedlist>
 
     <para>
-        В методах <code>*File()</code> через параметр <code>$src</code>
+        В методах <code>*File()</code> через параметр <varname>$src</varname>
         указывается местоположение скрипта, который требуется загрузить; обычно
         оно указывется в виде URL или пути к нему.
-        В методах <code>*Script()</code> через параметр <code>$script</code>
+        В методах <code>*Script()</code> через параметр <varname>$script</varname>
         передается скриптовый код, который требуется включить в
         элемент <code>&lt;script&gt;</code>.
     </para>
@@ -52,7 +52,7 @@
             комментарии с тем, чтобы скрыть его от определенных
             браузеров. Для того, чтобы добавить условные теги,
             передавайте условие через параметр
-            <code>$attrs</code> в вызове метода, как показано в примере:
+            <varname>$attrs</varname> в вызове метода, как показано в примере:
         </para>
 
         <example id="zend.view.helpers.initial.headscript.conditional">
@@ -79,12 +79,12 @@ $this->headScript()->appendFile(
         Для быстрого добавления скриптовых элементов Вы можете использовать
         метод <code>headScript()</code>, сигнатура этого метода -
         <code>headScript($mode = 'FILE', $spec, $placement = 'APPEND')</code>.
-        Параметр <code>$mode</code> может иметь значение 'FILE' или 'SCRIPT',
+        Параметр <varname>$mode</varname> может иметь значение 'FILE' или 'SCRIPT',
         в зависимости от того, ссылаетесь ли вы на уже существующий скрипт или
         передаете код для влючения в элемент
-        <code>&lt;script&gt;</code>. <code>$spec</code> содержит либо путь к
+        <code>&lt;script&gt;</code>. <varname>$spec</varname> содержит либо путь к
         файлу, к которому нужно добавить ссылку, либо сам скриптовый код.
-        <code>$placement</code> должен иметь одно из следующих значений:
+        <varname>$placement</varname> должен иметь одно из следующих значений:
         'APPEND', 'PREPEND' или 'SET'.
     </para>
 

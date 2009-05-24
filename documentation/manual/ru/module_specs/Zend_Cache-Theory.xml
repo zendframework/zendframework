@@ -61,7 +61,7 @@ $cache = Zend_Cache::factory($frontendName,
 ]]></programlisting>
         <para>
             В последующих примерах мы предполагаем, что переменная
-            <code>$cache</code> содержит инстанцированный, как показано в
+            <varname>$cache</varname> содержит инстанцированный, как показано в
             примере, фронтэнд, и что вы понимаете, как передавать параметры
             выбранному вами бэкэнду.
         </para>
@@ -86,7 +86,7 @@ $cache->save($huge_data, 'myUniqueID', array('tagA', 'tagB', 'tagC'));
         <note>
             <para>
                 Метод <code>save()</code> принимает также необязательный
-                четвертый параметр: <code>$specificLifetime</code>. Если он не
+                четвертый параметр: <varname>$specificLifetime</varname>. Если он не
                 равен <code>false</code>, то устанавливается время жизни
                 текущей записи кэша.
             </para>

@@ -86,7 +86,7 @@ public $charset;
       <itemizedlist>
         <listitem>
             <para>
-                <code>$charset</code>
+                <varname>$charset</varname>
                 должен соответствовать текущему набору символов содержимого, если это
                 содержимое имеет текстовый тип (простой текст или HTML).
 <!--
@@ -97,7 +97,7 @@ public $charset;
 
         <listitem>
             <para>
-                <code>$id</code>
+                <varname>$id</varname>
                 может быть установлен для идентификации содержимого для включенных
                 изображений в сообщении HTML.
 <!--
@@ -108,7 +108,7 @@ public $charset;
 
         <listitem>
             <para>
-                <code>$filename</code>
+                <varname>$filename</varname>
                 содержит имя файла, которое будет получено при загрузке.
 <!--
                 contains the name the file will get when downloading it.
@@ -118,7 +118,7 @@ public $charset;
 
         <listitem>
             <para>
-                <code>$disposition</code>
+                <varname>$disposition</varname>
                 определяет, должен ли фал быть приложен в качестве вложения или
                 использоваться внутри сообщения HTML.
 <!--
@@ -129,7 +129,7 @@ public $charset;
 
         <listitem>
             <para>
-                <code>$description</code>
+                <varname>$description</varname>
                 используется только для информационных целей.
 <!--
                 is only used for informational purposes.

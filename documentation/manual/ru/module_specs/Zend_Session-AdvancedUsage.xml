@@ -348,7 +348,7 @@ class FooModule_View extends Zend_View
             количестве секунд или на концепции "прыжков" (hops), в которой
             "прыжком" считается каждый успешный запрос, в котором активируется
             пространство имен через, как минимум, один
-            <code>$space = new Zend_Session_Namespace('myspace');</code>.
+            <varname>$space = new Zend_Session_Namespace('myspace');</varname>.
 <!--
             Limits can be placed on the longevity of both namespaces and
             individual keys in namespaces. Common use cases
@@ -359,7 +359,7 @@ class FooModule_View extends Zend_View
             be based on elapsed seconds, or based on the concept of "hops",
             where a hop occurs for each successive
             request that activates the namespace via at least one
-            <code>$space = new Zend_Session_Namespace('myspace');</code>.
+            <varname>$space = new Zend_Session_Namespace('myspace');</varname>.
 -->
         </para>
 
@@ -481,7 +481,7 @@ else {
             имен до одного экземпляра модет привести к большему объему кода или
             к его усложнению, поскольку он отменяет возможность использования
             директив вида
-            <code>$aNamespace = new Zend_Session_Namespace('aNamespace');</code>
+            <varname>$aNamespace = new Zend_Session_Namespace('aNamespace');</varname>
             после того, как был создан первый экземпляр. Это продемонстрировано
             в примере ниже:
 <!--
@@ -492,7 +492,7 @@ else {
             a single instance object for each namespace. This increases protection from changes by components that
             should not modify a particular session namespace, because they won't have easy access. However, limiting a
             namespace to a single instance may lead to more code or more complex code, as it removes access to the
-            convient <code>$aNamespace = new Zend_Session_Namespace('aNamespace');</code>, after the first intance has
+            convient <varname>$aNamespace = new Zend_Session_Namespace('aNamespace');</varname>, after the first intance has
             been created, as follows in the example below:
 -->
         </para>
@@ -521,7 +521,7 @@ else {
             директиву <code>new Zend_Session_Namespace('Zend_Auth')</code>
             нельзя использовать после того, как будет выполнен приведенный выше
             код, то разработчику нужно будет где-либо сохранять объект
-            (<code>$authSpaceAccessor2</code> в
+            (<varname>$authSpaceAccessor2</varname> в
             примере выше), если в дальнейшем при обработке того же запроса
             необходим доступ к этому пространству имен сессии.
             Например, вы можете сохранять экземпляр в статической переменной или
@@ -532,7 +532,7 @@ else {
             Zend_Session's that are instantiated with the 'Zend_Auth' namespace are not allowed, and will thus cause an
             exception. Since <code>new Zend_Session_Namespace('Zend_Auth')</code> will not be allowed after the code
             above has been executed, the developer becomes responsible for storing the instance object
-            (<code>$authSpaceAccessor2</code> in the example above) somewhere, if access to this session namespace is
+            (<varname>$authSpaceAccessor2</varname> in the example above) somewhere, if access to this session namespace is
             needed at a later time during the same request. For example, a developer may store the instance in a static
             variable, or pass it to other methods that might need access to this session namespace. Session locking (see
             above) provides a more convenient, and less burdensome approach to limiting access to namespaces.
@@ -780,7 +780,7 @@ else {
             более точно имитирует второй, последующий, запрос из броузера.
             Отдельный процесс начинается с "чистой" сессии, так же, как при
             выполнении любого PHP-скрипта для веб-запроса. Кроме этого,
-            любые изменения в <code>$_SESSION[]</code>, произведенные при вызове
+            любые изменения в <varname>$_SESSION[]</varname>, произведенные при вызове
             процесса, становятся доступными и в дочернем процессе, что дает
             родительскому процессу возможность закрыть сессию до использования
             <code>exec()</code>.
@@ -789,7 +789,7 @@ else {
             <code>tests/Zend/Session/SessionTest.php and SessionTestHelper.php</code>, which make use of PHP's
             <code>exec()</code> to launch a separate process. The new process more accurately simulates a second,
             successive request from a browser. The separate process begins with a "clean" session, just like any PHP
-            script execution for a web request. Also, any changes to <code>$_SESSION[]</code> made in the calling
+            script execution for a web request. Also, any changes to <varname>$_SESSION[]</varname> made in the calling
             process become available to the child process, provided the parent closed the session before using
             <code>exec()</code>
 -->

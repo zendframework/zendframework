@@ -45,16 +45,16 @@ Zend_Loader::loadFile($filename, $dirs=null, $once=false);
     </example>
 
         <para>
-            Аргумент <code>$filename</code> задает имя файла для загрузки, он
+            Аргумент <varname>$filename</varname> задает имя файла для загрузки, он
             не должен содержать путь к файлу. В целях безопасности производится
-            проверка <code>$filename</code>. <code>$filename</code> должен
+            проверка <varname>$filename</varname>. <varname>$filename</varname> должен
             содержать только алфавитно-цифровые символы, тире ("-"), знак
-            подчеркивания ("_") и точку ("."). На аргумент <code>$dirs</code>
+            подчеркивания ("_") и точку ("."). На аргумент <varname>$dirs</varname>
             эти ограничения не распространяются.
         </para>
 
         <para>
-            Аргумент <code>$dirs</code> задает директории, в которых должен
+            Аргумент <varname>$dirs</varname> задает директории, в которых должен
             производиться поиск файла. Если его значение равно
             <code>NULL</code>, то для поиска используется только
             <code>include_path</code>. Если его значение является строкой или
@@ -63,7 +63,7 @@ Zend_Loader::loadFile($filename, $dirs=null, $once=false);
         </para>
 
         <para>
-            Аргумент <code>$once</code> является значением булевого типа. Если
+            Аргумент <varname>$once</varname> является значением булевого типа. Если
             равен <code>TRUE</code>, то <code>Zend_Loader::loadFile()</code> для
             загрузки файла использует PHP-функцию
             <ulink url="http://php.net/include"><code>include_once()</code></ulink>,
@@ -101,11 +101,11 @@ Zend_Loader::loadClass('Container_Tree',
         </para>
 
         <para>
-            Если <code>$dirs</code> является строкой или массивом, то
+            Если <varname>$dirs</varname> является строкой или массивом, то
             <code>Zend_Loader::loadClass()</code> ищет в директориях в
             том порядке, в котором они были определены. Загружается первый
             найденный файл. Если файл не найден в директориях
-            <code>$dirs</code>, то производится поиск в <code>include_path</code>.
+            <varname>$dirs</varname>, то производится поиск в <code>include_path</code>.
         </para>
 
         <para>
@@ -143,7 +143,7 @@ if (Zend_Loader::isReadable($filename)) {
         </example>
 
         <para>
-            Аргумент <code>$filename</code> задает имя файла для проверки. Он
+            Аргумент <varname>$filename</varname> задает имя файла для проверки. Он
             может содержать путь к файлу. Этот метод является оберкой к
             PHP-функции
             <ulink url="http://php.net/is_readable"><code>is_readable()</code></ulink>.

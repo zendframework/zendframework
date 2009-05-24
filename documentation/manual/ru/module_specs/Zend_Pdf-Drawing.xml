@@ -395,12 +395,12 @@ public function setLineDashingPattern($pattern, $phase = 0);]]>
         <para>
         Методы <code>Zend_Pdf_Page::drawRectangle()</code>, <code>Zend_Pdf_Page::drawPoligon()</code>,
         <code>Zend_Pdf_Page::drawCircle()</code> и <code>Zend_Pdf_Page::drawEllipse()</code>
-        принимают аргумент <code>$fillType</code> как необязательный параметр.
+        принимают аргумент <varname>$fillType</varname> как необязательный параметр.
         Это может быть:
 <!--
         <code>Zend_Pdf_Page::drawRectangle()</code>, <code>Zend_Pdf_Page::drawPoligon()</code>,
         <code>Zend_Pdf_Page::drawCircle()</code> and <code>Zend_Pdf_Page::drawEllipse()</code> methods take
-        <code>$fillType</code> argument as an optional parameter. It can be:
+        <varname>$fillType</varname> argument as an optional parameter. It can be:
 -->
         </para>
 
@@ -425,10 +425,10 @@ public function setLineDashingPattern($pattern, $phase = 0);]]>
 
         <para>
         Метод <code>Zend_Pdf_Page::drawPoligon()</code> принимает дополнительный
-        параметр <code>$fillMethod</code>:
+        параметр <varname>$fillMethod</varname>:
 <!--
         <code>Zend_Pdf_Page::drawPoligon()</code> methods also takes an additional parameter
-        <code>$fillMethod</code>:
+        <varname>$fillMethod</varname>:
 -->
         </para>
         <itemizedlist>

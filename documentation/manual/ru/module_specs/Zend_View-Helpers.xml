@@ -48,13 +48,13 @@
 
     <para>
         Для того, чтобы использовать помощника в своем скрипте вида, вызывайте
-        его, используя <code>$this->имяПомощника()</code>.
+        его, используя <varname>$this->имяПомощника()</varname>.
         В этом случае <classname>Zend_View</classname> загрузит класс
         <code>Zend_View_Helper_ИмяПомощника</code>, создаст его экземпляр и
         вызовет его метод <code>имяПомощника()</code>. Экземпляр объекта
         сохраняется в экземпляре <classname>Zend_View</classname> и будет повторно
         использоваться им во всех будущих вызовах
-        <code>$this->имяПомощника()</code>.
+        <varname>$this->имяПомощника()</varname>.
     </para>
 
     <sect2 id="zend.view.helpers.initial">
@@ -85,20 +85,20 @@
             <listitem><para>
                 <code>fieldset($name, $content, $attribs):</code> Создает
                 XHTML-элемент <code>fieldset</code> (набор полей). Если массив
-                <code>$attribs</code> содержит в ключ 'legend', то это значение
+                <varname>$attribs</varname> содержит в ключ 'legend', то это значение
                 используется для элемента <code>legend</code>. Элемент
                 <code>fieldset</code> будет содержать в себе значение
-                параметра <code>$content</code>, переданного помощнику.
+                параметра <varname>$content</varname>, переданного помощнику.
             </para></listitem>
 
             <listitem><para>
                 <code>form($name, $attribs, $content):</code> Генерирует
                 XHTML-элемент <code>form</code> (форма). Все элементы массива
-                <code>$attribs</code> и добавляются как аттрибуты тега
-                <code>form</code>. Если параметр <code>$content</code> передан и
+                <varname>$attribs</varname> и добавляются как аттрибуты тега
+                <code>form</code>. Если параметр <varname>$content</varname> передан и
                 не имеет значение false, то это содержимое добавляется между
                 открывающим и закрывающим тегами формы. Если же
-                <code>$content</code> имеет булево значение false (значение по
+                <varname>$content</varname> имеет булево значение false (значение по
                 умолчанию), то будет сгенерирован только открывающий тег формы.
             </para></listitem>
 
@@ -115,16 +115,16 @@
                 </para>
 
                 <para>
-                    По умолчанию, если не был передан параметры <code>$value</code>
-                    и <code>$options</code>, то значение '1' соотвествует
+                    По умолчанию, если не был передан параметры <varname>$value</varname>
+                    и <varname>$options</varname>, то значение '1' соотвествует
                     выбранному состоянию, '0' - не выбранному. Если был передан
-                    параметр <code>$value</code>, но
-                    не передан <code>$options</code>, то значение
-                    <code>$value</code> соотвествует выбранному состоянию.
+                    параметр <varname>$value</varname>, но
+                    не передан <varname>$options</varname>, то значение
+                    <varname>$value</varname> соотвествует выбранному состоянию.
                 </para>
 
                 <para>
-                    <code>$options</code> должен быть массивом. Если это
+                    <varname>$options</varname> должен быть массивом. Если это
                     индексный массив, то первое значение соответствует
                     выбранному состоянию, второе - не выбранному состоянию,
                     все остальные значения игнорируются. Вы можете также
@@ -132,7 +132,7 @@
                 </para>
 
                 <para>
-                    Если параметр $options был передан, и <code>$value</code>
+                    Если параметр $options был передан, и <varname>$value</varname>
                     соответствует значению в выбранном состоянии, то элемент
                     будет помечен как выбранный. Вы можете также помечать
                     элемент как выбранный или не выбранный путем передачи
@@ -201,8 +201,8 @@ echo $this->formCheckbox('foo',
                 <para>
                     <code>formErrors($errors, $options):</code> Генерирует
                     ненумерованный список XHTML для вывода сообщений об ошибках.
-                    <code>$errors</code> должен быть строкой или массивом строк.
-                    <code>$options</code> должен заключать в себе все аттрибуты,
+                    <varname>$errors</varname> должен быть строкой или массивом строк.
+                    <varname>$options</varname> должен заключать в себе все аттрибуты,
                     которые вы хотите поместить в открывающий тег списка.
                 </para>
 
@@ -218,7 +218,7 @@ echo $this->formCheckbox('foo',
                             используется
                             '&lt;ul class="errors"%s"&gt;&lt;li&gt;', где %s
                             заменяется аттрибутами, указанными в
-                            <code>$options</code>.
+                            <varname>$options</varname>.
                     </para></listitem>
 
                     <listitem><para>
@@ -246,19 +246,19 @@ echo $this->formCheckbox('foo',
             <listitem><para>
                 <code>formLabel($name, $value, $attribs):</code> Создает элемент
                 &lt;label&gt;, устанавливая значение аттрибута <code>for</code>
-                равным значению <code>$name</code>, и содержимое элемента равным
-                значению <code>$value</code>. Если в <code>$attribs</code> был
+                равным значению <varname>$name</varname>, и содержимое элемента равным
+                значению <varname>$value</varname>. Если в <varname>$attribs</varname> был
                 передан <code>disable</code>, то ничего не будет возвращено.
             </para></listitem>
 
             <listitem><para>
                 <code>formMultiCheckbox($name, $value, $attribs, $options,
                     $listsep):</code>
-                Создает список флажков опций. <code>$options</code> должен
+                Создает список флажков опций. <varname>$options</varname> должен
                 быть ассоциативным массивом, который может быть произвольной
-                глубины. <code>$value</code> может быть скалярным значением или
+                глубины. <varname>$value</varname> может быть скалярным значением или
                 массивом выбранных значений, которые соответствуют ключам в
-                массиве <code>$options</code>. <code>$listsep</code> по
+                массиве <varname>$options</varname>. <varname>$listsep</varname> по
                 умолчанию является переносом строки в HTML ("&lt;br /&gt;"). По
                 умолчанию этот элемент интерпретируется как массив - все флажки
                 опций имеют одно и то же имя и передаются как массив.
@@ -272,10 +272,10 @@ echo $this->formCheckbox('foo',
             <listitem><para>
                 <code>formRadio($name, $value, $attribs, $options)</code>: Создает
                 последовательность элементов <code>&lt;input type="radio" /&gt;</code>
-                (переключатель опций). В массиве <code>$options</code> ключ
+                (переключатель опций). В массиве <varname>$options</varname> ключ
                 является значением переключателя, значение является содержимым
                 элемента <code>label</code> к переключателю. Переключатель опций
-                со значением <code>$value</code> будет предварительно выбранным.
+                со значением <varname>$value</varname> будет предварительно выбранным.
             </para></listitem>
 
             <listitem><para>
@@ -287,10 +287,10 @@ echo $this->formCheckbox('foo',
                 <code>formSelect($name, $value, $attribs, $options)</code>:
                 Создает блок <code>&lt;select&gt;...&lt;/select&gt;</code>,
                 с опциями <code>&lt;option&gt;</code>, соотвествующими
-                элементам массива <code>$options</code>. В массиве
-                <code>$options</code> ключ является значением опции,
+                элементам массива <varname>$options</varname>. В массиве
+                <varname>$options</varname> ключ является значением опции,
                 значение - текстом опции. Опция со значением
-                <code>$value</code> будет предварительно выбранной.
+                <varname>$value</varname> будет предварительно выбранной.
             </para></listitem>
 
             <listitem><para>
@@ -310,21 +310,21 @@ echo $this->formCheckbox('foo',
 
             <listitem><para>
                 <code>url($urlOptions, $name, $reset):</code> Создает строку
-                URL, основываясь на машруте с именем <code>$name</code>.
-                <code>$urlOptions</code> должен быть ассоциативным массивом пар
+                URL, основываясь на машруте с именем <varname>$name</varname>.
+                <varname>$urlOptions</varname> должен быть ассоциативным массивом пар
                 ключ-значение для использования в данном маршруте.
             </para></listitem>
 
             <listitem><para>
                 <code>htmlList($items, $ordered, $attribs, $escape):</code>
                 Генерирует маркированный или нумерованный список на основе
-                <code>$items</code>. Если <code>$items</code> является
+                <varname>$items</varname>. Если <varname>$items</varname> является
                 многомерным массивом, то будут построены вложенные списки. Если
-                <code>$escape</code> установлен в true (значение по умолчанию),
+                <varname>$escape</varname> установлен в true (значение по умолчанию),
                 то все пункты будут экранированы с использованием механизма,
                 зарегистрированного в объекте вида. Передавайте значение false,
                 если хотите использовать разметку в своих списках. Если
-                <code>$ordered</code> установлен в false (значение по
+                <varname>$ordered</varname> установлен в false (значение по
                 умолчанию), то генерируется маркированный список, иначе -
                 нумерованный.
             </para></listitem>
@@ -518,7 +518,7 @@ $view->addHelperPath('/other/path/to/helpers', 'Your_View_Helper');
                 Класс должен иметь открытый метод, имя которого
                 соответствует имени помощника. Это метод, который будет
                 вызываться, когда в вашем шаблоне производится вызов
-                <code>$this->specialPurpose()</code>. В нашем примере с
+                <varname>$this->specialPurpose()</varname>. В нашем примере с
                 помощником "specialPurpose" объявление требуемого метода должно
                 быть <code>public function specialPurpose()</code>.
             </para></listitem>

@@ -39,7 +39,7 @@
         </para>
 
         <para>
-            Брокер помощников хранится как член <code>$_helper</code> класса
+            Брокер помощников хранится как член <varname>$_helper</varname> класса
             <classname>Zend_Controller_Action</classname>; используйте брокер для
             получения или вызова помощников. Методы для этого включают в себя:
         </para>
@@ -175,7 +175,7 @@ Zend_Controller_Action_HelperBroker::addPath('./Plugins/Helpers',
 
         <para>
             Для определения того, есть ли помощник в брокере, используйте
-            <code>hasHelper($name)</code>, где <code>$name</code> - короткое
+            <code>hasHelper($name)</code>, где <varname>$name</varname> - короткое
             имя помощника без префикса:
         </para>
 
@@ -200,7 +200,7 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
         </para>
 
         <para>
-            Оба метода принимают единственный аргумент, <code>$name</code>,
+            Оба метода принимают единственный аргумент, <varname>$name</varname>,
             который является коротким именем помощника (без префикса).
         </para>
 
@@ -221,7 +221,7 @@ $redirector =
 
         <para>
             Наконец, для удаления зарегистрированного помощника из брокера
-            используйте <code>removeHelper($name)</code>, где <code>$name</code>
+            используйте <code>removeHelper($name)</code>, где <varname>$name</varname>
             - короткое имя помощника без префикса:
         </para>
 

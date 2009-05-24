@@ -157,11 +157,11 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
 
             <para>
                 Каждый из этх методов (исключая метод <code>Zend_Search_Lucene_Field::Binary()</code>)
-                имеет необязательный параметр <code>$encoding</code>. Через него
+                имеет необязательный параметр <varname>$encoding</varname>. Через него
                 указывается кодировка для входных данных.
 <!--
                 Each of these methods (excluding <code>Zend_Search_Lucene_Field::Binary()</code> method) has optional
-                <code>$encoding</code> parаmeter. It specifies input data encoding.
+                <varname>$encoding</varname> parаmeter. It specifies input data encoding.
 -->
             </para>
 

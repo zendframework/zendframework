@@ -14,7 +14,7 @@ $feedArray = Zend_Feed::findFeeds('http://www.example.com/news.html');
         Здесь метод <code>findFeeds()</code> возвращает массив объектов лент
         <code>Zend_Feed_Abstract</code>, на которые ссылались теги
         <code>&lt;link&gt;</code> в коде веб-страницы <code>news.html</code>.
-        В зависимости от типа ленты, каждый элемент массива <code>$feedArray</code>
+        В зависимости от типа ленты, каждый элемент массива <varname>$feedArray</varname>
         может быть экземпляром <code>Zend_Feed_Rss</code> или <code>Zend_Feed_Atom</code>.
         <code>Zend_Feed</code> будет генерировать исключение <code>Zend_Feed_Exception</code>
         в случае ошибки, такой, как возврат HTTP-кода 404 или плохо сформированная лента.

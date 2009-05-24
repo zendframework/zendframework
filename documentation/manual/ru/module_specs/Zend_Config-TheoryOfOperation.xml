@@ -33,7 +33,7 @@
     <para>
         По умолчанию через <classname>Zend_Config</classname> конфигурационные данные
         доступны только для чтения, и операция присваивания (например,
-        <code>$config->database->host = 'example.com'</code>)
+        <varname>$config->database->host = 'example.com'</varname>)
         вызовет исключение. Тем не менее, это поведение
         может быть отменено при вызове конструктора, и тогда
         можно будет изменять конфигурационные данные.
@@ -82,11 +82,11 @@
     <para>
         Если вы имеете два объекта <classname>Zend_Config</classname>, то можете объединить
         их в один, используя функцию <code>merge()</code>. Например, имея
-        <code>$config</code> и <code>$localConfig</code> вы можете объединить
-        данные из <code>$localConfig</code> с данными из <code>$config</code>,
-        используя <code>$config->merge($localConfig);</code>. Элементы
-        из <code>$localConfig</code> при совпадении имен заменят собой элементы
-        <code>$config</code>.
+        <varname>$config</varname> и <varname>$localConfig</varname> вы можете объединить
+        данные из <varname>$localConfig</varname> с данными из <varname>$config</varname>,
+        используя <varname>$config->merge($localConfig);</varname>. Элементы
+        из <varname>$localConfig</varname> при совпадении имен заменят собой элементы
+        <varname>$config</varname>.
         <note>
             <para>
                 Объект <classname>Zend_Config</classname>, который выполняет объединение,

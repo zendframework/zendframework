@@ -107,7 +107,7 @@ class FooController extends Zend_Controller_Action
                 <code>direct($data, $sendNow = true, $keepLayouts =
                     false)</code>
                 используется, когда помощник вызывается как метод брокера
-                помощников. Флаг <code>$sendNow</code> используется для
+                помощников. Флаг <varname>$sendNow</varname> используется для
                 определения того, какой метод вызывать -
                 <code>sendAutoCompletion()</code> или
                 <code>prepareAutoCompletion()</code>. По умолчанию ответ

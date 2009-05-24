@@ -342,7 +342,7 @@ remember_me_seconds = 864000
                 определяемой связи "один-к-одному" между посетителем сайта и
                 хранилищем постоянных данных сессии, уникальным для каждого
                 посетителя. Zend_Session* является оберткой к этому механизму
-                хранения (<code>$_SESSION</code>) с объектно-ориентированным
+                хранения (<varname>$_SESSION</varname>) с объектно-ориентированным
                 интерфейсом. К сожалению, если атакующий получил доступ к
                 идентификатору сессии в куках, то он может угнать сессию
                 посетителя. Эта проблема не является присущей только PHP или
@@ -358,7 +358,7 @@ remember_me_seconds = 864000
                 identifiers. The cookie's value is the unique identifier of your browser's session. PHP's ext/session
                 uses this identifier to maintain a unique one-to-one relationship between website visitors, and
                 persistent session data storage unique to each visitor. Zend_Session* wraps this storage mechanism
-                (<code>$_SESSION</code>) with an object-oriented interface. Unfortunately, if an attacker gains access
+                (<varname>$_SESSION</varname>) with an object-oriented interface. Unfortunately, if an attacker gains access
                 to the value of the cookie (the session id), an attacker might be able to hijack a visitor's session.
                 This problem is not unique to PHP, or Zend Framework. The <code>regenerateId()</code> method allows
                 an application to change the session id (stored in the visitor's cookie) to a new, random, unpredictable
@@ -663,14 +663,14 @@ if (!isset($defaultNamespace->initialized))
             <code>true</code> (по умолчанию он равен <code>true</code>), при
             этом будет удалена кука с идентификатором сессии в агенте
             пользователя. Установленный в <code>true</code> необязательный
-            параметр <code>$readonly</code> блокирует возможность записи в
+            параметр <varname>$readonly</varname> блокирует возможность записи в
             данные сессии (т.е. в $_SESSION) для экземпляров
             Zend_Session_Namespace и методов Zend_Session.
 <!--
             <code>Zend_Session::destroy()</code> destroys all of the persistent data associated with the current
             session. However, no variables in PHP are affected, so your namespaced sessions (instances of
             <code>Zend_Session_Namespace</code>) remain readable. To complete a "logout", set the optional parameter to
-            true (default is true) to also delete the user agent's session id cookie. The optinal <code>$readonly</code>
+            true (default is true) to also delete the user agent's session id cookie. The optinal <varname>$readonly</varname>
             parameter removes the ability for Zend_Session_Namespace instances, and Zend_Session methods to write to the
             session data store (i.e. $_SESSION).
 -->
@@ -679,11 +679,11 @@ if (!isset($defaultNamespace->initialized))
         <note>
             <title>Исключения<!--Throws--></title>
             <para>
-                По умолчанию <code>$readonly</code> установлен в
+                По умолчанию <varname>$readonly</varname> установлен в
                 <code>true</code> и дальнейшие действия, подразумевающие запись
                 в хранилище данных сессии, вызовут генерацию исключения.
 <!--
-                By default, <code>$readonly</code> is enabled and further actions involving writing to the session data
+                By default, <varname>$readonly</varname> is enabled and further actions involving writing to the session data
                 store will throw an error.
 -->
             </para>
@@ -698,7 +698,7 @@ if (!isset($defaultNamespace->initialized))
         <para>
             Этот метод не делает ничего, кроме переключения флага в
             Zend_Session для предотвращения дальнейшей записи в хранилище
-            данных сессии (т.е.<code>$_SESSION</code>). Одним из вариантов его
+            данных сессии (т.е.<varname>$_SESSION</varname>). Одним из вариантов его
             использования является временное отключение возможности записи в
             хранилище данных сессии через экземпляры
             <code>Zend_Session_Namespace</code> или методы
@@ -708,7 +708,7 @@ if (!isset($defaultNamespace->initialized))
             экземпляры или методы вызовет генерацию исключения.
 <!--
             This method does absolutely nothing more than toggle a flag in Zend_Session to prevent further writing to
-            the session data store (i.e. <code>$_SESSION</code>). We are specifically requesting feedback on this
+            the session data store (i.e. <varname>$_SESSION</varname>). We are specifically requesting feedback on this
             feature. Potential uses/abuses might include temporarily disabling the use of
             <code>Zend_Session_Namespace</code> instances or <code>Zend_Session</code> methods to write to the session
             data store, while execution is transfered to view-related code. Attempts to perform actions involving writes
@@ -739,14 +739,14 @@ if (!isset($defaultNamespace->initialized))
         <note>
             <title>Исключения<!--Throws--></title>
             <para>
-                По умолчанию <code>$readonly</code> включен и дальнейшие
+                По умолчанию <varname>$readonly</varname> включен и дальнейшие
                 действия, подразумевающие запись в хранилище данных сессии,
                 вызовут генерацию исключения.
 <!--
-                By default, <code>$readonly</code> is enabled and further actions involving writing to the session data
+                By default, <varname>$readonly</varname> is enabled and further actions involving writing to the session data
                 store will throw an error. However, some legacy application might expect $_SESSION to remain writeable
                 after ending the session via session_write_close(). Although not considered "best practice", the
-                <code>$readonly</code> option is available for those who need it.
+                <varname>$readonly</varname> option is available for those who need it.
 -->
             </para>
         </note>
@@ -870,14 +870,14 @@ if (!isset($defaultNamespace->initialized))
             Не рекомендуется к использованию: Используйте
             <code>getIterator()</code> в Zend_Session_Namespace. Этот метод
             возвращает массив содержимого пространства имен
-            <code>$namespace</code>. Этот метод позднее может быть определен как
+            <varname>$namespace</varname>. Этот метод позднее может быть определен как
             закрытый. Если вы считаете, что есть разумные причины оставить этот
             метод открытым, то пишите в список рассылки
             <ulink url="mailto:fw-auth@lists.zend.com">fw-auth@lists.zend.com</ulink>.
             Участие в связанных темах также приветствуется :)
 <!--
             DEPRECATED: Use <code>getIterator()</code> in Zend_Session_Namespace. This method returns an array of the
-            contents of <code>$namespace</code>. If you have logical reasons to keep this method publicly accessible,
+            contents of <varname>$namespace</varname>. If you have logical reasons to keep this method publicly accessible,
             please provide feedback to the
             <ulink url="mailto:fw-auth@lists.zend.com">fw-auth@lists.zend.com</ulink>
             mail list. Actually, all participation on any relevant topic is welcome :)

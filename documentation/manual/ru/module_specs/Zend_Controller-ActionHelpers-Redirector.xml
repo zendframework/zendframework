@@ -84,9 +84,9 @@
                     принуждения <code>Redirector</code>-а применять
                     абсолютные URI при произведении перенаправления. Когда эта
                     опция установлена, то используются значения
-                    <code>$_SERVER['HTTP_HOST']</code>,
-                    <code>$_SERVER['SERVER_PORT']</code> и
-                    <code>$_SERVER['HTTPS']</code> для формирования полного URI
+                    <varname>$_SERVER['HTTP_HOST']</varname>,
+                    <varname>$_SERVER['SERVER_PORT']</varname> и
+                    <varname>$_SERVER['HTTPS']</varname> для формирования полного URI
                     из URL, определенного одним из методов перенаправления. Эта
                     опция по умолчанию отключена, но может быть включена по
                     умолчанию в последующих релизах.

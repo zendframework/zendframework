@@ -244,9 +244,9 @@ $query->addTerm(new Zend_Search_Lucene_Index_Term('word3'), false);
 $hits  = $index->find($query);]]></programlisting>
 
         <para>
-            Массив <code>$signs</code> содержит информацию о типах элементов:
+            Массив <varname>$signs</varname> содержит информацию о типах элементов:
 <!--
-            <code>$signs</code> array contains an information about term type:
+            <varname>$signs</varname> array contains an information about term type:
 -->
             <itemizedlist>
                 <listitem>
@@ -364,28 +364,28 @@ $query4 = new Zend_Search_Lucene_Search_Query_Phrase(
 Zend_Search_Lucene_Search_Query_Phrase([array $terms[, array $offsets[, string $field]]]);]]></programlisting>
 
         <para>
-            <code>$terms</code> является массивом строк, который содержит набор
+            <varname>$terms</varname> является массивом строк, который содержит набор
             элементов фразы. Если он опущен или равен <code>null</code>,
             то строится пустой запрос.
 <!--
-            <code>$terms</code> is an array of strings, which contains a set of phrase terms.
+            <varname>$terms</varname> is an array of strings, which contains a set of phrase terms.
             If it's omitted or equal to null, then empty query is constructed.
 -->
         </para>
 
         <para>
-            <code>$offsets</code> является массивом целочисленных значений,
+            <varname>$offsets</varname> является массивом целочисленных значений,
             который содержит смещения элементов во фразе. Если он опущен или равен
             <code>null</code>, то позиции элементов предполагаются как
             <code>array(0, 1, 2, 3, ...)</code>.
 <!--
-            <code>$offsets</code> is an array of integers, which contains offsets of terms in a phrase.
+            <varname>$offsets</varname> is an array of integers, which contains offsets of terms in a phrase.
             If it's omitted or equal to null, then terms positions are supposed as <code>array(0, 1, 2, 3, ...)</code>.
 -->
         </para>
 
         <para>
-            <code>$field</code> является строкой, которая указывает поле
+            <varname>$field</varname> является строкой, которая указывает поле
             документа, в котором производится поиск. Если он опущен или равен
             <code>null</code>, то поиск производится в поле по умолчанию.
             Данная версия Zend_Search_Lucene трактует поле 'contents'
@@ -393,7 +393,7 @@ Zend_Search_Lucene_Search_Query_Phrase([array $terms[, array $offsets[, string $
             планируется добавить возможность указания любого поля,
             как выбираемого по умолчанию.
 <!--
-            <code>$field</code> is a string, which indicates searched document field.
+            <varname>$field</varname> is a string, which indicates searched document field.
             If it's omitted or equal to null, then default field is searched.
             This version of Zend_Search_Lucene treates 'contents' field as a default, but it's planned to change this
             behavior to "any field" in next versions.
@@ -452,20 +452,20 @@ $query = new Zend_Search_Lucene_Search_Query_Phrase(array('zend', 'framework'), 
 Zend_Search_Lucene_Search_Query_Phrase::addTerm(Zend_Search_Lucene_Index_Term $term[, integer $position]);]]></programlisting>
 
         <para>
-            <code>$term</code> описывает следующий элемент во фразе. Он должен
+            <varname>$term</varname> описывает следующий элемент во фразе. Он должен
             указывать на то же самое поле, что и предыдущие элементы,
             иначе будет сгенерировано исключение.
 <!--
-            <code>$term</code> describes next term in a phrase. It must indicate
+            <varname>$term</varname> describes next term in a phrase. It must indicate
             the same field as previous terms.
             Otherwise an exception will be thrown.
 -->
         </para>
 
         <para>
-            <code>$position</code> указывает позицию элемента.
+            <varname>$position</varname> указывает позицию элемента.
 <!--
-            <code>$position</code> indicates term position.
+            <varname>$position</varname> indicates term position.
 -->
         </para>
 

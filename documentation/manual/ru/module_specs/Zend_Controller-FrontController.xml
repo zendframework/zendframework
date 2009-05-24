@@ -389,7 +389,7 @@ Zend_Controller_Front::run('../application/controllers');
                     позволяет регистрировать <link
                         linkend="zend.controller.plugins">объекты плагинов</link>.
                     Путем установки опционального параметра
-                    <code>$stackIndex</code>, вы можете
+                    <varname>$stackIndex</varname>, вы можете
                     контролировать порядок, в котором выполняются плагины.
                 </para>
             </listitem>
@@ -399,7 +399,7 @@ Zend_Controller_Front::run('../application/controllers');
                     <code>unregisterPlugin($plugin)</code> позволяет отменять
                     регистрацию <link
                         linkend="zend.controller.plugins">объектов плагинов</link>.
-                    <code>$plugin</code> может быть как объектом плагина, так и строкой, обозначающей класс плагина, регистрацию которого надо отменить.
+                    <varname>$plugin</varname> может быть как объектом плагина, так и строкой, обозначающей класс плагина, регистрацию которого надо отменить.
                 </para>
             </listitem>
 
@@ -459,8 +459,8 @@ Zend_Controller_Front::run('../application/controllers');
             <listitem>
                 <para>
                     <code>setParam($name, $value)</code> дает возможность
-                    установить единственный параметр с именем <code>$name</code>
-                    и значением <code>$value</code>.
+                    установить единственный параметр с именем <varname>$name</varname>
+                    и значением <varname>$value</varname>.
                 </para>
             </listitem>
 
@@ -475,7 +475,7 @@ Zend_Controller_Front::run('../application/controllers');
             <listitem>
                 <para>
                     <code>getParam($name)</code> дает возможность извлечь один
-                    параметр за один раз, используя его имя <code>$name</code> в
+                    параметр за один раз, используя его имя <varname>$name</varname> в
                     качестве идентификатора.
                 </para>
             </listitem>

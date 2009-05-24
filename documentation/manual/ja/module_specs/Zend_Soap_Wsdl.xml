@@ -322,7 +322,7 @@
                     <para>PHP void &lt;-&gt; 空の型</para>
                 </listitem>
                 <listitem>
-                    なんらかの理由でこれらの型のいずれとも型が一致しなければ、<code>xsd:anyType</code>が使われます。
+                    <para>なんらかの理由でこれらの型のいずれとも型が一致しなければ、<code>xsd:anyType</code>が使われます。</para>
                 </listitem>
             </itemizedlist>
 

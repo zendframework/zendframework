@@ -207,8 +207,8 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
                 </para>
                 <para>
                     The script which shall be used to display digits. Detailed information about scripts and their
-                    usage can be found in the documentation of <classname>Zend_Locale</classname> in
-                    <link linkend="zend.locale.appendix.numberscripts.supported">supported number scripts</link>.
+                    usage can be found in the documentation of <classname>Zend_Locale</classname> in the chapter
+                    <link linkend="zend.locale.numbersystems" />.
                 </para>
             </listitem>
             <listitem>
@@ -243,8 +243,7 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
                     <emphasis>script</emphasis>: Defined which script should be used for
                     displaying digits. The default script for most locales is
                     <emphasis>'Latn'</emphasis>, which includes the digits 0 to 9. Other
-                    scripts such as 'Arab' (Arabian) can be used. All supported scripts can be found in
-                    <link linkend="zend.locale.appendix.numberscripts.supported">this table</link>.
+                    scripts such as 'Arab' (Arabian) can be used.
                 </para>
             </listitem>
             <listitem>

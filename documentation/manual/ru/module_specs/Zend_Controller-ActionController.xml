@@ -1,10 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.controller.action">
     <title>Контроллеры действий</title>
 
     <sect2 id="zend.controller.action.introduction">
         <title>Введение</title>
         <para>
-            <code>Zend_Controller_Action</code> - абстрактный класс,
+            <classname>Zend_Controller_Action</classname> - абстрактный класс,
             который можно использовать для реализации контроллеров действий
             для последующего их использования с фронт-контроллером при
             разработке сайта, основанного на паттерне Model-View-Controller
@@ -12,13 +14,13 @@
         </para>
 
         <para>
-            Для того, чтобы использовать <code>Zend_Controller_Action</code>,
+            Для того, чтобы использовать <classname>Zend_Controller_Action</classname>,
             нужно создать его подкласс в своей действующей директории
             контроллеров (или расширить его для создания своего базового класса
             контроллеров действий). Работа с ним в основном сводится к
             созданию его подкласса и написании методов действий, соответствующих
             различным действиям, которые должен обрабатывать этот контроллер.
-            Маршрутизатор и диспетчер компоненты <code>Zend_Controller</code>
+            Маршрутизатор и диспетчер компоненты <classname>Zend_Controller</classname>
             будут считать за методы действий все методы в классе
             контроллера с именем, заканчивающимся на 'Action'.
         </para>
@@ -40,8 +42,7 @@ class FooController extends Zend_Controller_Action
         // делает что-нибудь
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Приведенный выше класс <code>FooController</code> (контроллер
@@ -88,8 +89,7 @@ class FooController extends Zend_Controller_Action
             ->setParam('noViewRenderer', true);
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 <code>initView()</code>, <code>getViewScript()</code>,
@@ -114,8 +114,7 @@ class FooController extends Zend_Controller_Action
         $this->_helper->viewRenderer->setNoRender();
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Основные причины для отключения <code>ViewRenderer</code> - вам
@@ -164,15 +163,14 @@ class FooController extends Zend_Controller_Action
         ));
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 
     <sect2 id="zend.controller.action.prepostdispatch">
         <title>Перехватчики Pre- и Post-Dispatch</title>
 
         <para>
-            <code>Zend_Controller_Action</code> определяет два метода, которые
+            <classname>Zend_Controller_Action</classname> определяет два метода, которые
             вызываются до и после требуемого действия,
             <code>preDispatch()</code> и <code>postDispatch()</code>. Они
             могут быть полезны в различных случаях - например, проверка
@@ -210,8 +208,7 @@ class FooController extends Zend_Controller_Action
                 <programlisting language="php"><![CDATA[
 $this->getResponse()->setHeader('Content-Type', 'text/xml');
 $this->getResponse()->appendBody($content);
-]]>
-                </programlisting>
+]]></programlisting>
             </listitem>
 
             <listitem>
@@ -262,8 +259,7 @@ if ($this->_hasParam('id') {
 } else {
     $id = 1;
 }
-]]>
-                    </programlisting>
+]]></programlisting>
                 </note>
             </listitem>
         </itemizedlist>
@@ -284,7 +280,7 @@ if ($this->_hasParam('id') {
         </note>
 
         <para>
-            <code>Zend_Controller_Action</code> предоставляет простейший и
+            <classname>Zend_Controller_Action</classname> предоставляет простейший и
             гибкий механизм интеграции видов. Два метода осуществляют это:
             <code>initView()</code> и <code>render()</code>. Первый метод
             выполняет отложенную загрузку открытого свойства <code>$view</code>,
@@ -302,9 +298,9 @@ if ($this->_hasParam('id') {
                 извлечения объекта вида, но этот объект может быть
                 инициализирован в любое время. По умолчанию
                 <code>initView()</code> заполняет свойство <code>$view</code>
-                объектом <code>Zend_View</code>, но может также использоваться
+                объектом <classname>Zend_View</classname>, но может также использоваться
                 любой класс, реализующий интерфейс
-                <code>Zend_View_Interface</code>. Если <code>$view</code> уже
+                <classname>Zend_View_Interface</classname>. Если <code>$view</code> уже
                 инициализирован, то просто возвращается это свойство.
             </para>
 
@@ -323,8 +319,7 @@ applicationOrModule/
                 index.phtml
         helpers/
         filters/
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Другими словами, предполагается, что скрипты вида находятся в
@@ -349,8 +344,7 @@ applicationOrModule/
 string render(string $action = null,
               string $name = null,
               bool $noController = false);
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 <code>render()</code> рендерит скрипт вида. Если не были
@@ -415,8 +409,7 @@ class MyController extends Zend_Controller_Action
         $this->render();
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
     </sect2>
 
@@ -425,7 +418,7 @@ class MyController extends Zend_Controller_Action
 
         <para>
             Кроме аксессоров и методов интеграции видов,
-            <code>Zend_Controller_Action</code> имеет несколько сервисных
+            <classname>Zend_Controller_Action</classname> имеет несколько сервисных
             методов для выполнения распространенных зачач в методах действий
             (или в методах pre- и post-dispatch).
         </para>
@@ -508,7 +501,7 @@ class MyController extends Zend_Controller_Action
 
         <para>
             Задумано, что в порядке создания контроллеров действий должны
-            создаваться подклассы от <code>Zend_Controller_Action</code>.
+            создаваться подклассы от <classname>Zend_Controller_Action</classname>.
             Как минимум, вам нужно будет определить методы действий, которые
             может вызывать контроллер.
         </para>
@@ -518,7 +511,7 @@ class MyController extends Zend_Controller_Action
             можете также обнаружить, что большинство установок или сервисных
             методов повторяются в ваших различных контроллерах. В этом случае
             создание общего базового контроллера, расширяющего
-            <code>Zend_Controller_Action</code>, может решить проблему
+            <classname>Zend_Controller_Action</classname>, может решить проблему
             избыточности.
         </para>
 
@@ -535,7 +528,7 @@ class MyController extends Zend_Controller_Action
 
             <para>
                 По умолчанию этот метод бросает исключение
-                <code>Zend_Controller_Action_Exception</code>, означающее, что
+                <classname>Zend_Controller_Action_Exception</classname>, означающее, что
                 требуемый метод не найден в контроллере. Если требуемый метод
                 заканчивается строкой 'Action', то предполагается, что было
                 запрошено действие и оно не существует; такая ошибка приводит к
@@ -567,8 +560,7 @@ class MyController extends Zend_Controller_Action
                             500);
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Другая возможность состоит в том, что вы можете
@@ -598,8 +590,7 @@ class MyController extends Zend_Controller_Action
                             500);
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -628,8 +619,7 @@ abstract class My_Base_Controller extends Zend_Controller_Action
         return $this->view;
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Надеемся, из написанного в этом разделе вы смогли увидеть, насколько

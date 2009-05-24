@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.controller.migration">
     <title>Переход с предыдущих версий</title>
 
@@ -8,6 +10,24 @@
         архитектуру.
     </para>
 
+    <sect2 id="zend.controller.migration.fromoneseventooneeight">
+        <title>Переход с 1.7.x на 1.8.0 и более поздние версии</title>
+
+        <sect3 id="zend.controller.migration.fromoneseventooneeight.router">
+            <title>Изменения в стандартном маршруте</title>
+
+            <para>
+                Поскольку в новый стандартный маршрут были добавлены
+                переводимые сегменты, символ <code>@</code> стал
+                специальным символом в начале сегмента маршрута.
+                Для того, чтобы можно было использовать его в статических
+                сегментах, вы должны экранировать его путем добавления второго
+                символа <code>@</code>. То же самое правило теперь применяется
+                и к символу <code>:</code>.
+            </para>
+        </sect3>
+    </sect2>
+
     <sect2 id="zend.controller.migration.fromonesixtooneseven">
         <title>Переход с 1.6.x на 1.7.0 и более поздние версии</title>
 
@@ -16,7 +36,7 @@
 
             <para>
                 Пользователи обратили наше внимание на тот факт, что
-                <code>Zend_Controller_Action_Helper_ViewRenderer</code>
+                <classname>Zend_Controller_Action_Helper_ViewRenderer</classname>
                 использует не присутствующий в интерфейсе метод из
                 абстрактного класса диспетчера. Мы добавили
                 этот метод в интерфейс диспетчера для того,
@@ -30,7 +50,7 @@
                     необработанное имя контроллера (в том виде, в котором оно
                     хранится в объекте запроса) и преобразовывать его в имя
                     класса контроллера, наследующего от
-                    <code>Zend_Controller_Action</code>.
+                    <classname>Zend_Controller_Action</classname>.
                 </para></listitem>
             </itemizedlist>
         </sect3>
@@ -44,8 +64,8 @@
 
             <para>
                 Пользователи обратили наше внимание на тот факт, что
-                <code>Zend_Controller_Front</code> и
-                <code>Zend_Controller_Router_Route_Module</code> используют
+                <classname>Zend_Controller_Front</classname> и
+                <classname>Zend_Controller_Router_Route_Module</classname> используют
                 методы диспетчера, которые не определены в его интерфейсе.
                 Мы добавили следующие три метода в его интерфейс для того,
                 чтобы гарантировать работу созданного вами диспетчера с
@@ -138,7 +158,7 @@
                 <para>
                     Второй лучший вариант: ViewRenderer теперь делегирует
                     определение скриптов вида инфлектору
-                    <code>Zend_Filter_Inflector</code>; вы можете изменить
+                    <classname>Zend_Filter_Inflector</classname>; вы можете изменить
                     правила инфлектора так, чтобы он более не разделял слова в
                     имени действия знаком тире:
                 </para>
@@ -154,8 +174,7 @@ $inflector->setFilterRule(':action', array(
     ),
     'StringToLower'
 ));
-]]>
-                </programlisting>
+]]></programlisting>
 
                 <para>
                     Приведенный выше код изменит инфлектор таким образом, чтобы
@@ -182,8 +201,7 @@ $inflector->setFilterRule(':action', array(
 
                 <programlisting language="php"><![CDATA[
 $front->setParam('useCaseSensitiveActions', true);
-]]>
-</programlisting>
+]]></programlisting>
 
                 <para>
                     Это позволит вам использовать camelCase в URL-ах и они будут
@@ -226,8 +244,7 @@ $front->setParam('useCaseSensitiveActions', true);
 
         <programlisting language="php"><![CDATA[
 $front->setParam('noErrorHandler', true);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Помощник действий <code>ViewRenderer</code> автоматизирует
@@ -249,8 +266,7 @@ $front->setParam('noErrorHandler', true);
         <programlisting language="php"><![CDATA[
 // $front является экземпляром Zend_Controller_Front
 $front->setParam('noViewRenderer', true);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Но в долгосрочной перспективе это не лучшее решение, поскольку
@@ -288,8 +304,7 @@ $front->setParam('noViewRenderer', true);
 
         <programlisting language="php"><![CDATA[
 $this->_helper->viewRenderer->setNoRender();
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Если вы обнаружили, что ни один из методов действий не производит
@@ -305,8 +320,7 @@ public function preDispatch()
     $this->_helper->viewRenderer->setNoRender()
     // ... еще код ..
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Если вы вызываете <code>render()</code> и используете
@@ -366,8 +380,7 @@ public function preDispatch()
 // Предполагается, что $view уже определен
 $viewRenderer = new Zend_Controller_Action_Helper_ViewRenderer($view);
 Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
-]]>
-                </programlisting>
+]]></programlisting>
             </listitem>
 
             <listitem>
@@ -378,8 +391,8 @@ Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
                 <programlisting language="php"><![CDATA[
 $viewRenderer =
     Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
-$viewRenderer->setView($view);]]>
-                </programlisting>
+$viewRenderer->setView($view);
+]]></programlisting>
             </listitem>
         </itemizedlist>
 
@@ -454,8 +467,7 @@ $viewRenderer->setView($view);]]>
 
         <programlisting language="php"><![CDATA[
 Zend_Controller_Front::run('/path/to/controllers');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Тем не менее, структура директорий была подвергнута пересмотру,
@@ -466,17 +478,17 @@ Zend_Controller_Front::run('/path/to/controllers');
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>Zend_Controller_Router</code> удален в пользу
+                    <classname>Zend_Controller_Router</classname> удален в пользу
                     использования Rewrite Router.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>Zend_Controller_RewriteRouter</code> переименован в
-                    <code>Zend_Controller_Router_Rewrite</code>, теперь это
+                    <classname>Zend_Controller_RewriteRouter</classname> переименован в
+                    <classname>Zend_Controller_Router_Rewrite</classname>, теперь это
                     стандартный маршрутизатор, поставляемый с фреймворком.
-                    <code>Zend_Controller_Front</code> будет использовать его по
+                    <classname>Zend_Controller_Front</classname> будет использовать его по
                     умолчанию, если не был установлен другой маршрутизатор.
                 </para>
             </listitem>
@@ -484,7 +496,7 @@ Zend_Controller_Front::run('/path/to/controllers');
             <listitem>
                 <para>
                     Добавлен новый класс маршрута для использования с Rewrite
-                    Router - <code>Zend_Controller_Router_Route_Module</code>.
+                    Router - <classname>Zend_Controller_Router_Route_Module</classname>.
                     Он включает в себя маршрут по умолчанию, используемый
                     MVC, и поддерживает <link
                         linkend="zend.controller.modular">модули
@@ -494,15 +506,15 @@ Zend_Controller_Front::run('/path/to/controllers');
 
             <listitem>
                 <para>
-                    <code>Zend_Controller_Router_StaticRoute</code> переименован
-                    в <code>Zend_Controller_Router_Route_Static</code>.
+                    <classname>Zend_Controller_Router_StaticRoute</classname> переименован
+                    в <classname>Zend_Controller_Router_Route_Static</classname>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>Zend_Controller_Dispatcher</code> переименован в
-                    <code>Zend_Controller_Dispatcher_Standard</code>.
+                    <classname>Zend_Controller_Dispatcher</classname> переименован в
+                    <classname>Zend_Controller_Dispatcher_Standard</classname>.
                 </para>
             </listitem>
 
@@ -518,8 +530,7 @@ final protected function _forward($action,
                                   $controller = null,
                                   $module = null,
                                   array $params = null);
-]]>
-                </programlisting>
+]]></programlisting>
 
                 <para>
                     <code>$action</code> - обязательный аргумент. Если не был
@@ -545,8 +556,7 @@ final protected function _forward($action,
 
         <programlisting language="php"><![CDATA[
 Zend_Controller_Front::run('/path/to/controllers');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <programlisting language="php"><![CDATA[
 /* -- создание маршрутизатора -- */
@@ -563,8 +573,7 @@ $ctrl->setRouter($router);
 /* -- установка директории контроллеров и запуск диспетчеризации -- */
 $ctrl->setControllerDirectory('/path/to/controllers');
 $ctrl->dispatch();
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Рекомендуется использовать объект ответа для сбора содержимого и
@@ -605,8 +614,7 @@ $ctrl->dispatch();
                         </para>
                         <programlisting language="php"><![CDATA[
 $front->throwExceptions(true);
-]]>
-                        </programlisting>
+]]></programlisting>
                     </listitem>
 
                     <listitem>
@@ -624,8 +632,7 @@ $front->returnResponse(true);
 $response = $front->dispatch();
 $response->renderExceptions(true);
 echo $response;
-]]>
-                        </programlisting>
+]]></programlisting>
                     </listitem>
                 </itemizedlist>
             </listitem>
@@ -634,20 +641,20 @@ echo $response;
                 <code>Zend_Controller_Dispatcher_Interface::dispatch()</code>
                 теперь принимает и возвращает объект запроса
                 <xref linkend="zend.controller.request" />
-                вместо метки <code>Zend_Controller_Dispatcher_Token</code>.
+                вместо метки <classname>Zend_Controller_Dispatcher_Token</classname>.
             </para></listitem>
 
             <listitem><para>
                 <code>Zend_Controller_Router_Interface::route()</code>
                 теперь принимает и возвращает объект ответа
                 <xref linkend="zend.controller.request" />
-                вместо метки <code>Zend_Controller_Dispatcher_Token</code>
+                вместо метки <classname>Zend_Controller_Dispatcher_Token</classname>
             </para></listitem>
 
             <listitem>
                 <para>
-                    Изменения <code>Zend_Controller_Action</code> включают в
-                    себя следующие:
+                    Изменения <classname>Zend_Controller_Action</classname> включают в
+                    себя следующее:
                 </para>
 
                 <itemizedlist>
@@ -704,7 +711,7 @@ echo $response;
                         <para>
                             Свойство <code>_action</code> больще не
                             устанавливается. Это свойство было объектом класса
-                            <code>Zend_Controller_Dispatcher_Token</code>,
+                            <classname>Zend_Controller_Dispatcher_Token</classname>,
                             которй больше не существует в текущем воплощении.
                             Единственным назначением метки (token) было
                             предоставление информации о запрошенных контроллере,
@@ -732,8 +739,8 @@ $params = $this->_getParams();
 
 // запрашивается параметр 'foo', если параметр не найден,
 // то используется значение по умолчанию 'default'
-$foo = $this->_getParam('foo', 'default');]]>
-                        </programlisting>
+$foo = $this->_getParam('foo', 'default');
+]]></programlisting>
                     </listitem>
 
                     <listitem>
@@ -755,8 +762,7 @@ public function __call($method, $args)
 
     throw new Zend_Controller_Exception('Invalid method called');
 }
-]]>
-                        </programlisting>
+]]></programlisting>
                     </listitem>
                 </itemizedlist>
             </listitem>
@@ -771,8 +777,8 @@ public function __call($method, $args)
             </para></listitem>
 
             <listitem><para>
-                <code>Zend_Controller_Plugin_Interface</code> был заменен на
-                <code>Zend_Controller_Plugin_Abstract</code>. Все методы теперь
+                <classname>Zend_Controller_Plugin_Interface</classname> был заменен на
+                <classname>Zend_Controller_Plugin_Abstract</classname>. Все методы теперь
                 принимают и возвращают объект ответа
                 <xref linkend="zend.controller.request" /> вместо метки
                 диспетчеризации.

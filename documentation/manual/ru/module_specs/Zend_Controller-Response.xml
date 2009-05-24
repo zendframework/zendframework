@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.controller.response">
     <title>Объект ответа</title>
 
@@ -17,8 +19,7 @@
 
         <programlisting language="php"><![CDATA[
 $front->throwExceptions(true);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Для отправки выходных данных, включая заголовки, используйте
@@ -27,8 +28,7 @@ $front->throwExceptions(true);
 
         <programlisting language="php"><![CDATA[
 $response->sendResponse();
-]]>
-        </programlisting>
+]]></programlisting>
 
         <note>
             <para>
@@ -49,8 +49,7 @@ $response = $front->dispatch();
 // производим необходимые манипуляции с данными (например,
 // журналирование), затем отправляем выходные данные:
 $response->sendResponse();
-]]>
-            </programlisting>
+]]></programlisting>
         </note>
 
         <para>
@@ -65,8 +64,7 @@ $response->sendResponse();
 $this->getResponse()
     ->setHeader('Content-Type', 'text/html')
     ->appendBody($content);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Этим достигается то, что все заголовки будут отправлены
@@ -118,8 +116,7 @@ $response = $front->dispatch();
 
 // В конце выводим ответ
 $response->sendResponse();
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             По умолчанию сообщения исключений не отображаются. Это поведение
@@ -142,8 +139,7 @@ $response->sendResponse();
 // или:
 $front->throwExceptions(true);
 $front->dispatch();
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 
     <sect2 id="zend.controller.response.headers">
@@ -308,8 +304,7 @@ class MyController extends Zend_Controller_Action
         $this->render();
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             В примере выше вызов <code>/my/foo</code> приведет к тому, что
@@ -323,8 +318,7 @@ array(
     'default' => ..., // содержимое тела страницы из MyController::fooAction()
     'footer'  => ...  // содержимое низа страницы
 );
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Рендеринг производится в том порядке, в котором элементы
@@ -509,9 +503,10 @@ array(
 
         <para>
             Базовым классом ответа является
-            <code>Zend_Controller_Response_Abstract</code>, все создаваемые
-            вами подклассы должны наследовать от него или одного из его
-            потомков. Доступные методы были перечислены в предыдущих разделах.
+            <classname>Zend_Controller_Response_Abstract</classname>, все
+            создаваемые вами подклассы должны наследовать от него или одного из
+            его потомков. Доступные методы были перечислены в предыдущих
+            разделах.
         </para>
 
         <para>

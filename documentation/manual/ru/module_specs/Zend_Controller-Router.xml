@@ -1,24 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.controller.router"  xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Стандартный маршрутизатор: Zend_Controller_Router_Rewrite</title>
+    <title>Стандартный маршрутизатор</title>
     <sect2 id="zend.controller.router.introduction">
         <title>Введение</title>
         <para>
-            <code>Zend_Controller_Router_Rewrite</code> является стандартным
-            маршрутизатором Zend Framework. Маршрутизация - это процесс принятия
+            <classname>Zend_Controller_Router_Rewrite</classname> является стандартным
+            маршрутизатором фреймворка. Маршрутизация - это процесс принятия
             конечной точки URI (той части URI, которая
             идет после базового URL) и ее разложения на параметры
             для определения того, какой контроллер и какое действие этого
             контроллера должны получить запрос. Значения контроллера,
             действия и необязательных параметров сохраняются в объекте
-            <code>Zend_Controller_Request_Http</code>, который затем
+            <classname>Zend_Controller_Request_Http</classname>, который затем
             обрабатывается диспетчером
-            <code>Zend_Controller_Dispatcher_Standard</code>. Маршрутизация
+            <classname>Zend_Controller_Dispatcher_Standard</classname>. Маршрутизация
             производится только один раз – когда вначале
             получен запрос и до того, как первый контроллер будет запущен.
         </para>
 
         <para>
-            <code>Zend_Controller_Router_Rewrite</code> спроектирован для
+            <classname>Zend_Controller_Router_Rewrite</classname> спроектирован для
             того, чтобы обеспечить функциональность, подобную mod_rewrite,
             с использованием чистого PHP. Он отчасти основан на маршрутизации,
             используемой в Ruby on Rails и не требует каких-либо предварительных
@@ -30,11 +32,10 @@
         <programlisting language="php"><![CDATA[
 RewriteEngine on
 RewriteRule !\.(js|ico|gif|jpg|png|css|html)$ index.php
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
-            или (более предпочтителен):
+            или (более предпочтительный вариант):
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -44,8 +45,7 @@ RewriteCond %{REQUEST_FILENAME} -l [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^.*$ - [NC,L]
 RewriteRule ^.*$ index.php [NC,L]
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Rewrite Router может также использоваться с веб-сервером IIS версии
@@ -57,8 +57,7 @@ RewriteRule ^.*$ index.php [NC,L]
 
         <programlisting language="php"><![CDATA[
 RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.php [I]
-]]>
-        </programlisting>
+]]></programlisting>
 
         <note>
             <title>IIS Isapi_Rewrite</title>
@@ -66,7 +65,7 @@ RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.
                 Если используется IIS, то <code>$_SERVER['REQUEST_URI']</code>
                 не будет определен, либо будет установлен как пустая
                 строка. В этом случае
-                <code>Zend_Controller_Request_Http</code> попытается
+                <classname>Zend_Controller_Request_Http</classname> попытается
                 использовать <code>$_SERVER['HTTP_X_REWRITE_URL']</code>,
                 значение которого устанавливается расширением Isapi_Rewrite.
             </para>
@@ -77,7 +76,7 @@ RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.
             и он может быть сконфигурирован следующим образом:
         </para>
 
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
      <system.webServer>
@@ -110,14 +109,13 @@ RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.
             правило перезаписи:
         </para>
 
-        <programlisting role="lighttpd"><![CDATA[
+        <programlisting language="lighttpd"><![CDATA[
 url.rewrite-once = (
     ".*\?(.*)$" => "/index.php?$1",
     ".*\.(js|ico|gif|jpg|png|css|html)$" => "$0",
     "" => "/index.php"
 )
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 
     <sect2 id="zend.controller.router.usage">
@@ -139,8 +137,7 @@ $router->addRoute(
                                      array('controller' => 'user',
                                            'action' => 'info'))
 );
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 
     <sect2 id="zend.controller.router.basic">
@@ -151,17 +148,16 @@ $router->addRoute(
             определение пользовательских маршрутов. Маршруты добавляются
             посредством вызовом метода <code>addRoute()</code> и передачей ему
             экземпляра класса, реализующего
-            <code>Zend_Controller_Router_Route</code>. Например:
+            <classname>Zend_Controller_Router_Route</classname>. Например:
         </para>
 
         <programlisting language="php"><![CDATA[
 $router->addRoute('user',
                   new Zend_Controller_Router_Route('user/:username'));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
-            Rewrite Router поставляется вместе с пятью базовыми типами
+            Rewrite Router поставляется вместе с шестью базовыми типами
             маршрутов (один из которых является специальным):
         </para>
 
@@ -177,6 +173,9 @@ $router->addRoute('user',
             </para></listitem>
             <listitem><para>
                 <xref linkend="zend.controller.router.routes.hostname" />
+            </para></listitem>
+            <listitem><para>
+                <xref linkend="zend.controller.router.routes.chain" />
             </para></listitem>
             <listitem><para>
                 <xref linkend="zend.controller.router.default-routes" /> *
@@ -202,15 +201,14 @@ $router->addRoute('user',
 
         <note>
             <para>
-                Наиболее часто имя маршрута используется через хелпер
-                <code>Zend_View</code> для URL:
+                Наиболее часто имя маршрута используется через хелпер для URL
+                компоненты <classname>Zend_View</classname>:
             </para>
 
             <programlisting language="php"><![CDATA[
 <a href=
-"<?= $this->url(array('username' => 'martel'), 'user') ?>">Martel</a>
-]]>
-            </programlisting>
+"<?php echo $this->url(array('username' => 'martel'), 'user') ?>">Martel</a>
+]]></programlisting>
 
             <para>
                В результате значением атрибута href будет
@@ -223,7 +221,7 @@ $router->addRoute('user',
             маршрутам и сопоставления их определений с текущим URI запроса.
             Когда найдено соответствие, то из объекта маршрута возвращаются
             значения переменных и добавляются в объект
-            <code>Zend_Controller_Request</code> для дальнейшего использования в
+            <classname>Zend_Controller_Request</classname> для дальнейшего использования в
             диспетчере и пользовательских контроллерах. Если соответствие не
             найдено, то проверяется следующий маршрут в цепочке.
         </para>
@@ -259,7 +257,7 @@ $router->addRoute('user',
         <para>
             Есть три специальные переменные, которые могут использоваться в
             маршрутах: 'module', 'controller' и 'action'. Эти
-            переменные используются диспетчером <code>Zend_Controller_Dispatcher</code>
+            переменные используются диспетчером <classname>Zend_Controller_Dispatcher</classname>
             для нахождения контроллера и действия, которым передается
             управление.
         </para>
@@ -276,10 +274,10 @@ $router->addRoute('user',
     </sect2>
 
     <sect2 id="zend.controller.router.default-routes">
-        <title>Маршруты по умолчанию</title>
+        <title>Маршруты, используемые по умолчанию</title>
 
         <para>
-            <code>Zend_Controller_Router_Rewrite</code> изначально
+            <classname>Zend_Controller_Router_Rewrite</classname> изначально
             сконфигурирован с одним маршрутом по умолчанию, который будет
             соответствовать URI вида <code>контроллер/действие</code>. Кроме
             того, в качестве первого элемента пути может быть указано имя
@@ -330,12 +328,11 @@ http://example/blog/archive/list/sort/alpha/date/desc
     action     == list
     sort       == alpha
     date       == desc
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Маршрутом, используемым по умолчанию, является объект
-            <code>Zend_Controller_Router_Route_Module</code>, сохраненный в
+            <classname>Zend_Controller_Router_Route_Module</classname>, сохраненный в
             RewriteRouter под именем (индексом) 'default'. Он создается
             приблизительно следующим образом:
         </para>
@@ -345,8 +342,7 @@ $compat = new Zend_Controller_Router_Route_Module(array(),
                                                   $dispatcher,
                                                   $request);
 $this->addRoute('default', $compat);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Если вы не хотите использовать этот маршрут по умолчанию в своей
@@ -359,8 +355,7 @@ $this->addRoute('default', $compat);
         <programlisting language="php"><![CDATA[
 // Удаление всех маршрутов по умолчанию
 $router->removeDefaultRoutes();
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
 
@@ -372,21 +367,20 @@ $router->removeDefaultRoutes();
             <code>http://domain.com/~user/application-root/</code>), в этом
             случае базовый URL приложения (<code>/~user/application-root</code>)
             должен автоматически определяться в объекте
-            <code>Zend_Controller_Request_Http</code> и соответствующим образом
+            <classname>Zend_Controller_Request_Http</classname> и соответствующим образом
             использоваться.
         </para>
 
         <para>
             Если базовый URL определяется некорректно, то вы можете
             переопределить его через метод <code>setBaseUrl()</code> объекта
-            <code>Zend_Controller_Request_Http</code> (см.
+            <classname>Zend_Controller_Request_Http</classname> (см.
             <xref linkend="zend.controller.request.http.baseurl" />):
         </para>
 
         <programlisting language="php"><![CDATA[
 $request->setBaseUrl('/~user/application-root/');
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
 
@@ -404,8 +398,7 @@ $request->setBaseUrl('/~user/application-root/');
 
         <programlisting language="php"><![CDATA[
 $router->setGlobalParam('lang', 'en');
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 
     <sect2 id="zend.controller.router.routes">
@@ -422,16 +415,19 @@ $router->setGlobalParam('lang', 'en');
         <xi:include href="Zend_Controller-Router-Route-Hostname.xml">
             <xi:fallback><xi:include href="../../en/module_specs/Zend_Controller-Router-Route-Hostname.xml" /></xi:fallback>
         </xi:include>
+        <xi:include href="Zend_Controller-Router-Route-Chain.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_Controller-Router-Route-Chain.xml" /></xi:fallback>
+        </xi:include>
     </sect2>
 
     <sect2 id="zend.controller.router.add-config">
-        <title>Использование <code>Zend_Config</code> вместе с RewriteRouter</title>
+        <title>Использование Zend_Config вместе с RewriteRouter</title>
 
         <para>
             Иногда может быть более удобным обновлять конфигурационный файл
             с новыми маршрутами, чем изменять код. Это возможно благодаря методу
             <code>addConfig()</code>. В сущности, вы создаете конфигурацию,
-            совместимую с <code>Zend_Config</code>, считываете ее в своем коде и
+            совместимую с <classname>Zend_Config</classname>, считываете ее в своем коде и
             передаете RewriteRouter.
         </para>
 
@@ -458,20 +454,18 @@ routes.archive.defaults.controller = "archive"
 routes.archive.defaults.action = "show"
 routes.archive.map.1 = "year"
 ; ИЛИ: routes.archive.map.year = 1
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Этот INI-файл может быть затем прочитан в объект
-            <code>Zend_Config</code> как показано ниже:
+            <classname>Zend_Config</classname> как показано ниже:
         </para>
 
         <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Ini('/path/to/config.ini', 'production');
 $router = new Zend_Controller_Router_Rewrite();
 $router->addConfig($config, 'routes');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             В примере выше мы говорим маршрутизатору, чтобы он использовал
@@ -482,12 +476,12 @@ $router->addConfig($config, 'routes');
             одну или более записей 'defaults'; опционально может быть одна
             или более записей 'reqs' (сокращение от 'required'). Все это
             соответствует трем аргументам, передаваемым объекту
-            <code>Zend_Controller_Router_Route_Interface</code>.
+            <classname>Zend_Controller_Router_Route_Interface</classname>.
             Опция с ключом 'type' может использоваться для определения класса,
             используемого для данного маршрута; по умолчанию используется
-            класс <code>Zend_Controller_Router_Route</code>. В примере выше
+            класс <classname>Zend_Controller_Router_Route</classname>. В примере выше
             для маршрута 'news' должен использоваться класс
-            <code>Zend_Controller_Router_Route_Static</code>.
+            <classname>Zend_Controller_Router_Route_Static</classname>.
         </para>
     </sect2>
 
@@ -505,7 +499,7 @@ $router->addConfig($config, 'routes');
         <para>
             В какой-то момент вы можете захотеть использовать другую парадигму
             маршрутизации. Интерфейс
-            <code>Zend_Controller_Router_Interface</code> дает минимальную
+            <classname>Zend_Controller_Router_Interface</classname> дает минимальную
             информацию, необходимую для создания маршрута и содержит всего один
             метод.
         </para>
@@ -520,8 +514,7 @@ interface Zend_Controller_Router_Interface
    */
   public function route(Zend_Controller_Request_Abstract $request);
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Маршрутизация производится только один раз - когда в систему

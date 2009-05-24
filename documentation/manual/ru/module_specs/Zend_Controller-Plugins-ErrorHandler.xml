@@ -1,8 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect3 id="zend.controller.plugins.standard.errorhandler">
     <title>Zend_Controller_Plugins_ErrorHandler</title>
 
     <para>
-        <code>Zend_Controller_Plugins_ErrorHandler</code> представляет собой
+        <classname>Zend_Controller_Plugins_ErrorHandler</classname> представляет собой
         плагин для обработки исключений, брошенных вашим приложением, включая
         те, которые вызваны отсутствием запрошенного контроллера или
         действия. Он является альтернативой способам, перечисленным в <link
@@ -36,7 +38,7 @@
     </para>
 
     <para>
-        По умолчанию <code>Zend_Controller_Plugins_ErrorHandler</code> будет
+        По умолчанию <classname>Zend_Controller_Plugins_ErrorHandler</classname> будет
         производить переход к
         <code>ErrorController::errorAction()</code> в модуле по умолчанию. Вы
         можете установить альтернативные значения для перехода, используя
@@ -81,7 +83,7 @@
     </para>
 
     <para>
-        <code>Zend_Controller_Plugin_ErrorHandler</code> регистрирует
+        <classname>Zend_Controller_Plugin_ErrorHandler</classname> регистрирует
         перехватчик <code>postDispatch()</code> и проверяет, есть ли
         зарегистрированые исключения в
         <link linkend="zend.controller.response">объекте ответа</link>.
@@ -121,8 +123,7 @@ class ErrorController extends Zend_Controller_Action
         $errors = $this->_getParam('error_handler');
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Имея объект ошибки, вы можете получить тип ошибки через
@@ -181,8 +182,7 @@ class ErrorController extends Zend_Controller_Action
         }
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Вы можете извлекать исключение, которое инициировало вызов
@@ -194,7 +194,6 @@ class ErrorController extends Zend_Controller_Action
 public function errorAction()
 {
         $errors = $this->_getParam('error_handler');
-
 
         switch ($errors->type) {
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
@@ -222,8 +221,8 @@ public function errorAction()
                             $exception->getTraceAsString());
                 break;
         }
-}]]>
-        </programlisting>
+}
+]]></programlisting>
     </sect4>
 
     <sect4 id="zend.controller.plugins.standard.errorhandler.buffer">
@@ -247,8 +246,7 @@ public function errorAction()
 
         <programlisting language="php"><![CDATA[
 $this->getResponse()->clearBody();
-]]>
-        </programlisting>
+]]></programlisting>
     </sect4>
 
     <sect4 id="zend.controller.plugins.standard.errorhandler.examples">
@@ -259,8 +257,7 @@ $this->getResponse()->clearBody();
             <programlisting language="php"><![CDATA[
 $front = Zend_Controller_Front::getInstance();
 $front->registerPlugin(new Zend_Controller_Plugin_ErrorHandler());
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <example id="zend.controller.plugins.standard.errorhandler.examples.example-2">
@@ -272,8 +269,7 @@ $front->registerPlugin(new Zend_Controller_Plugin_ErrorHandler(array(
     'controller' => 'static',
     'action'     => 'error'
 )));
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <example id="zend.controller.plugins.standard.errorhandler.examples.example-3">
@@ -332,8 +328,7 @@ EOH;
         $this->view->content = $content;
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
     </sect4>
 </sect3>
 <!--

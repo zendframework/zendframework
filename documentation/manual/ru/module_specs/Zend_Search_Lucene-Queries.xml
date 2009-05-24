@@ -86,7 +86,7 @@ try {
         Query string:
 -->
         </para>
-        <programlisting role="querystring"><![CDATA[word1]]>
+        <programlisting language="querystring"><![CDATA[word1]]>
         </programlisting>
 
         <para>или</para>
@@ -199,7 +199,7 @@ $hits  = $index->find($query);]]></programlisting>
             Query string:
 -->
         </para>
-        <programlisting role="querystring"><![CDATA[+word1 author:word2 -word3]]></programlisting>
+        <programlisting language="querystring"><![CDATA[+word1 author:word2 -word3]]></programlisting>
 
         <itemizedlist>
             <listitem>

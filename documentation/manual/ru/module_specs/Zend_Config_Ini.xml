@@ -57,7 +57,7 @@ $config = new Zend_Config_Ini('/path/to/config.ini',
             более сложных случаях. Допустим, конфигурационные данные
             находятся в файле <code>/path/to/config.ini</code>:
         </para>
-        <programlisting role="ini"><![CDATA[
+        <programlisting language="ini"><![CDATA[
 ; Конфигурационные данные производственного сайта
 [production]
 webhost                  = www.example.com

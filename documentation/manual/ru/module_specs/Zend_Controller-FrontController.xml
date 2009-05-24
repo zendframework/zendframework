@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.controller.front">
     <title>Фронт-контроллер</title>
 
@@ -5,17 +7,18 @@
         <title>Обзор</title>
 
         <para>
-            <code>Zend_Controller_Front</code> реализует
+            <classname>Zend_Controller_Front</classname> реализует
             <ulink url="http://www.martinfowler.com/eaaCatalog/frontController.html">паттерн
-            Front Controller</ulink>, используемый в приложениях MVC. Его
-            назначение состоит в инициализации окружения запроса, проложении
+            Front Controller</ulink>, используемый в приложениях <ulink
+                url="http://en.wikipedia.org/wiki/Model-view-controller">MVC</ulink>.
+            Его назначение состоит в инициализации окружения запроса, проложении
             маршрута приходящего запроса и последующем запуске выявленных
             действий. Он агрегирует все ответы и возвращает их по завершении
             процесса.
         </para>
 
         <para>
-            <code>Zend_Controller_Front</code> также реализует
+            <classname>Zend_Controller_Front</classname> также реализует
             <ulink url="http://en.wikipedia.org/wiki/Singleton_pattern">паттерн
             Singleton</ulink>, это означает, что в любое время может быть
             доступен только один экземпляр этого класса. Это позволяет ему также
@@ -24,7 +27,7 @@
         </para>
 
         <para>
-            <code>Zend_Controller_Front</code> регистрирует в себе <link
+            <classname>Zend_Controller_Front</classname> регистрирует в себе <link
             linkend="zend.controller.plugins">брокер плагинов</link> (plugin
             broker), что позволяет с помощью плагинов отслеживать события,
             инициируемые фронт-контроллером.
@@ -60,8 +63,7 @@
             <programlisting language="php"><![CDATA[
 // Отключение плагина ErrorHandler:
 $front->setParam('noErrorHandler', true);
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Для того, чтобы отключить <code>ViewRenderer</code>, сделайте
@@ -71,8 +73,7 @@ $front->setParam('noErrorHandler', true);
             <programlisting language="php"><![CDATA[
 // Отключение помощника ViewRenderer:
 $front->setParam('noViewRenderer', true);
-]]>
-            </programlisting>
+]]></programlisting>
         </note>
 
     </sect2>
@@ -98,8 +99,7 @@ $front->setParam('noViewRenderer', true);
 
             <programlisting language="php"><![CDATA[
 $front = Zend_Controller_Front::getInstance();
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.controller.front.methods.primary.setcontrollerdirectory">
@@ -132,8 +132,7 @@ $front->setControllerDirectory(array(
 
 // Добавление директории модуля 'foo':
 $front->addControllerDirectory('../modules/foo/controllers', 'foo');
-]]>
-            </programlisting>
+]]></programlisting>
 
             <note>
                 <para>
@@ -267,8 +266,7 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
 // Инстанцирование фронт-контроллера, установка директории контроллера и
 // выполнение диспетчеризации в одном вызове:
 Zend_Controller_Front::run('../application/controllers');
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
     </sect2>
 
@@ -558,10 +556,10 @@ Zend_Controller_Front::run('../application/controllers');
     </sect2>
 
     <sect2 id="zend.controller.front.subclassing">
-        <title>Создание подклассов фронт-контроллера</title>
+        <title>Расширение фронт-контроллера</title>
 
         <para>
-            При создании подкласса фронт-контроллера, необходимо, как
+            При наследовании от фронт-контроллера, необходимо, как
             минимум, переопределить метод <code>getInstance()</code>.
         </para>
 
@@ -577,16 +575,15 @@ class My_Controller_Front extends Zend_Controller_Front
         return self::$_instance;
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Такое переопределение метода <code>getInstance()</code> гарантирует
             то, что последующий вызов
             <code>Zend_Controller_Front::getInstance()</code> вернет экземпляр
             созданного вами подкласса вместо экземпляра
-            <code>Zend_Controller_Front</code> - это особенно полезно для
-            некоторых альтернативных маршрутизаторов и помощников видов.
+            <classname>Zend_Controller_Front</classname> - это особенно полезно
+            для некоторых альтернативных маршрутизаторов и помощников видов.
         </para>
 
         <para>

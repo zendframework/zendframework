@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect3 id="zend.controller.actionhelpers.viewrenderer">
     <title>ViewRenderer</title>
 
@@ -94,8 +96,7 @@ $viewRenderer = new Zend_Controller_Action_Helper_ViewRenderer();
 $viewRenderer->setView($view)
              ->setViewSuffix('php');
 Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
-]]>
-                    </programlisting>
+]]></programlisting>
                 </listitem>
 
                 <listitem>
@@ -105,11 +106,11 @@ Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
                     </para>
 
                     <programlisting language="php"><![CDATA[
-$viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
+$viewRenderer =
+    Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
 $viewRenderer->setView($view)
              ->setViewSuffix('php');
-]]>
-                    </programlisting>
+]]></programlisting>
                 </listitem>
             </itemizedlist>
         </note>
@@ -128,8 +129,7 @@ $viewRenderer->setView($view)
 
         <programlisting language="php"><![CDATA[
 Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Во время инстанцирования контроллера действий производится вызов
@@ -175,8 +175,7 @@ class Foo_BarController extends Zend_Controller_Action
 
 // в одном из ваших скриптов вида:
 $this->foo(); // вызывает Foo_View_Helper_Foo::foo()
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             <code>ViewRenderer</code> также определяет несколько аксессоров для
@@ -294,8 +293,7 @@ $this->_helper->viewRenderer('foo');
 // Рендеринг form.phtml в сегмент ответа 'html' в обход
 // поддиректории:
 $this->_helper->viewRenderer('form', 'html', true);
-]]>
-                </programlisting>
+]]></programlisting>
 
                 <note><para>
                         <code>setRender()</code> и <code>direct()</code> в
@@ -318,8 +316,7 @@ $view    = new Zend_View(array('encoding' => 'UTF-8'));
 $options = array('noController' => true, 'neverRender' => true);
 $viewRenderer =
     new Zend_Controller_Action_Helper_ViewRenderer($view, $options);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             <code>ViewRenderer</code> имеет несколько дополнительных методов для
@@ -466,8 +463,8 @@ $viewRenderer =
 
                     <para>
                         Внутри себя инфлектор использует фильтры
-                        <code>Zend_Filter_Word_CamelCaseToDash</code> и
-                        <code>Zend_Filter_StringToLower</code>.
+                        <classname>Zend_Filter_Word_CamelCaseToDash</classname> и
+                        <classname>Zend_Filter_StringToLower</classname>.
                     </para>
                 </listitem>
 
@@ -483,9 +480,9 @@ $viewRenderer =
 
                     <para>
                         Внутри себя инфлектор использует фильтры
-                        <code>Zend_Filter_Word_CamelCaseToDash</code>,
-                        <code>Zend_Filter_Word_UnderscoreToSeparator</code> и
-                        <code>Zend_Filter_StringToLower</code>.
+                        <classname>Zend_Filter_Word_CamelCaseToDash</classname>,
+                        <classname>Zend_Filter_Word_UnderscoreToSeparator</classname> и
+                        <classname>Zend_Filter_StringToLower</classname>.
                     </para>
                 </listitem>
 
@@ -502,9 +499,9 @@ $viewRenderer =
 
                     <para>
                         Внутри себя инфлектор использует фильтры
-                        <code>Zend_Filter_Word_CamelCaseToDash</code>,
-                        <code>Zend_Filter_PregReplace</code> и
-                        <code>Zend_Filter_StringToLower</code>.
+                        <classname>Zend_Filter_Word_CamelCaseToDash</classname>,
+                        <classname>Zend_Filter_PregReplace</classname> и
+                        <classname>Zend_Filter_StringToLower</classname>.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -676,8 +673,7 @@ class Foo_BarController extends Zend_Controller_Action
         $this->_redirect('/index');
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <note>
@@ -745,8 +741,7 @@ class Bar_BatController extends Zend_Controller_Action
         $this->_helper->viewRenderer->setNoRender();
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <note>
@@ -803,8 +798,7 @@ class Foo_BarController extends Zend_Controller_Action
     }
 
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <example id="zend.controller.actionhelper.viewrenderer.basicusage.example-4">
@@ -837,8 +831,7 @@ class Foo_BarController extends Zend_Controller_Action
         $view->setEscape('htmlspecialchars');
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect4>
 
@@ -885,8 +878,7 @@ $viewRenderer->setViewBasePathSpec('/opt/vendor/templates')
              ->setViewScriptPathNoControllerSpec(':action.:suffix')
              ->setViewSuffix('tpl');
 Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <example id="zend.controller.actionhelper.viewrenderer.advancedusage.example-2">
@@ -919,8 +911,7 @@ class SearchController extends Zend_Controller_Action
         // рендеринг скрипта вида
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect4>
 </sect3>

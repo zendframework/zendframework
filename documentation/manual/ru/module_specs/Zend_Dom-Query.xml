@@ -118,7 +118,7 @@
                     ссылка со словом 'One' в листинге ниже:
                 </para>
 
-                <programlisting role="html"><![CDATA[
+                <programlisting language="html"><![CDATA[
 <div>
 <table>
     <tr>

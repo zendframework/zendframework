@@ -531,7 +531,7 @@ try {
             для Zend_Db.
         </para>
 
-        <programlisting role="sql"><![CDATA[
+        <programlisting language="sql"><![CDATA[
 CREATE TABLE accounts (
   account_name      VARCHAR(100) NOT NULL PRIMARY KEY
 );

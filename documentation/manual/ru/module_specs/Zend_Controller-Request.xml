@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.controller.request">
     <title>Объект запроса</title>
     <sect2 id="zend.controller.request.introduction">
@@ -6,7 +8,7 @@
             Объект запроса - это простой "объект значений"
             (<ulink url="http://www.patternsforphp.com/wiki/Value_Object">value
             object</ulink>), который передается между
-            <code>Zend_Controller_Front</code>, маршрутизатором,
+            <classname>Zend_Controller_Front</classname>, маршрутизатором,
             диспетчером и контроллерами. Он хранит в себе имена запрошенных
             модуля, контроллера, действия и необязательные параметры, а также
             остальную среду (переменные) запроса, будь это HTTP, CLI или
@@ -45,7 +47,7 @@
         <para>
             Методов, которые можно использовать в запросе, может быть больше, в
             зависимости от типа запроса. Например, используемый по умолчанию
-            запрос <code>Zend_Controller_Request_Http</code> имеет методы для
+            запрос <classname>Zend_Controller_Request_Http</classname> имеет методы для
             получения URI запроса, пути в нем, параметров <code>$_GET</code> и
             <code>$_POST</code>, и т.д.
         </para>
@@ -76,7 +78,7 @@
             <title>Доступ к данным запроса</title>
 
             <para>
-                <code>Zend_Controller_Request_Http</code> инкапсулирует доступ к
+                <classname>Zend_Controller_Request_Http</classname> инкапсулирует доступ к
                 соответствующим значениям, таким, как имя и значение ключа для
                 переменных контроллера и действия, и все дополнительные
                 параметры, полученные из URI. Он также позволяет обращаться
@@ -92,7 +94,7 @@
                 <title>Суперглобальные данные</title>
                 <para>
                     Когда получаете доступ к суперглобальным данным через
-                    <code>Zend_Controller_Request_Http</code> как к публичным
+                    <classname>Zend_Controller_Request_Http</classname> как к публичным
                     свойствам, то необходимо помнить, что имя свойства (ключ
                     суперглобального массива) сопоставляются с суперглобальными
                     массивами в определенной последовательности: 1. GET,
@@ -189,20 +191,19 @@
                     <code>$_SERVER['REQUEST_URI']</code>. Если вы используете
                     такие установки и получаете неверную маршрутизацию, то
                     должны использовать для своего объекта запроса класс
-                    <code>Zend_Controller_Request_Apache404</code> вместо
-                    <code>Zend_Controller_Request_Http</code>, используемого по
+                    <classname>Zend_Controller_Request_Apache404</classname> вместо
+                    <classname>Zend_Controller_Request_Http</classname>, используемого по
                     умолчанию.
                 </para>
 
                 <programlisting language="php"><![CDATA[
 $request = new Zend_Controller_Request_Apache404();
 $front->setRequest($request);
-]]>
-                </programlisting>
+]]></programlisting>
 
                 <para>
                     Этот класс расширяет
-                    <code>Zend_Controller_Request_Http</code> и просто изменяет
+                    <classname>Zend_Controller_Request_Http</classname> и просто изменяет
                     автоопределение URI запроса. Он может использоваться в
                     качестве замены.
                 </para>
@@ -214,9 +215,9 @@ $front->setRequest($request);
             <title>Базовый URL и поддиректории</title>
 
             <para>
-                <code>Zend_Controller_Request_Http</code> позволяет использовать
-                <code>Zend_Controller_Router_Rewrite</code> в поддиректориях.
-                <code>Zend_Controller_Request_Http</code> попытается автоматически
+                <classname>Zend_Controller_Request_Http</classname> позволяет использовать
+                <classname>Zend_Controller_Router_Rewrite</classname> в поддиректориях.
+                <classname>Zend_Controller_Request_Http</classname> попытается автоматически
                 определить ваш базовый URL и соответствующим образом установить
                 его.
             </para>
@@ -250,10 +251,10 @@ $front->setRequest($request);
                 Если базовый URL определяется некорректно, то вы можете заменить
                 его своим базовым путем с помощью метода
                 <code>setBaseUrl()</code>, который есть в классах
-                <code>Zend_Http_Request</code>,
-                <code>Zend_Controller_Request_Http</code> и
-                <code>Zend_Controller_Front</code>. Легче всего установить его
-                через <code>Zend_Controller_Front</code>, который в свою очередь
+                <classname>Zend_Http_Request</classname>,
+                <classname>Zend_Controller_Request_Http</classname> и
+                <classname>Zend_Controller_Front</classname>. Легче всего установить его
+                через <classname>Zend_Controller_Front</classname>, который в свою очередь
                 установит его в объекте запроса. Пример установки своего
                 базового URL:
             </para>
@@ -268,8 +269,7 @@ $controller->setControllerDirectory('./application/controllers')
            ->setRouter($router)
            ->setBaseUrl('/projects/myapp'); // установка базового URL!
 $response   = $controller->dispatch();
-]]>
-            </programlisting>
+]]></programlisting>
 
         </sect3>
 
@@ -302,7 +302,8 @@ $response   = $controller->dispatch();
             <title>Определение запросов AJAX</title>
 
             <para>
-                <code>Zend_Controller_Request_Http</code> имеет зачаточный метод
+                <classname>Zend_Controller_Request_Http</classname> имеет
+                рудиментарный метод
                 для определения запросов AJAX: <code>isXmlHttpRequest()</code>.
                 Этот метод проверяет наличие заголовка HTTP-запроса
                 <code>X-Requested-With</code> со значением 'XMLHttpRequest'.
@@ -326,7 +327,7 @@ $response   = $controller->dispatch();
                 заголовки HTTP-запросов. Если ваша библиотека не отправляет этот
                 заголовок, то просто добавьте его в качестве заголовка ответа,
                 чтобы быть уверенным в том, что метод
-                <code>isXmlHttpRequest()</code> работает для вас.
+                <code>isXmlHttpRequest()</code> работает в вашем случае.
             </para>
         </sect3>
     </sect2>
@@ -336,7 +337,7 @@ $response   = $controller->dispatch();
 
         <para>
             Базовый класс запроса, используемый для всех объектов запроса, -
-            абстрактный класс <code>Zend_Controller_Request_Abstract</code>.
+            абстрактный класс <classname>Zend_Controller_Request_Abstract</classname>.
             Он определяет следующие методы:
         </para>
 
@@ -422,8 +423,7 @@ abstract class Zend_Controller_Request_Abstract
      */
     public function isDispatched();
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Объект запроса является контейнером для переменных запроса. Цепочке

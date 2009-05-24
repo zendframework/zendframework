@@ -1,8 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect3 id="zend.controller.router.routes.standard">
     <title>Zend_Controller_Router_Route</title>
 
     <para>
-        <code>Zend_Controller_Router_Route</code> - стандартный маршрут
+        <classname>Zend_Controller_Router_Route</classname> - стандартный маршрут
         фреймворка. Он сочетает в себе легкость использования и гибкость
         определения маршрутов. Каждый маршрут состоит в основном из карты URL
         (статических и динамических частей (переменных)), и может быть
@@ -27,11 +29,10 @@ $route = new Zend_Controller_Router_Route(
 );
 
 $router->addRoute('user', $route);
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
-        Первый параметр конструктора <code>Zend_Controller_Router_Route</code> -
+        Первый параметр конструктора <classname>Zend_Controller_Router_Route</classname> -
         определение маршрута, которое будет сопоставляться с URL. Определения
         маршрутов содержат статические и динамические части, разделенные
         символом косой черты ('/'). Статические части являются обычным текстом:
@@ -56,7 +57,7 @@ $router->addRoute('user', $route);
         Этот маршрут должен сработать, когда вы вводите
         <code>http://domain.com/author/martel</code> в своем броузере, в этом
         случае все его переменные будут добавлены в объект
-        <code>Zend_Controller_Request</code> и будут доступны в вашем
+        <classname>Zend_Controller_Request</classname> и будут доступны в вашем
         контроллере <code>ProfileController</code>.
         Переменные, возвращаемые в этом примере, могут быть представленые в виде
         следующего массива пар ключ/значение:
@@ -68,11 +69,10 @@ $values = array(
     'controller' => 'profile',
     'action'     => 'userinfo'
 );
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
-        Затем <code>Zend_Controller_Dispatcher_Standard</code> должен вызвать
+        Затем <classname>Zend_Controller_Dispatcher_Standard</classname> должен вызвать
         метод <code>userinfoAction()</code> вашего класса
         <code>ProfileController</code> (используется модуль по умолчанию),
         основываясь на этих значениях. Вы сможете получать эти переменные через
@@ -88,8 +88,7 @@ public function userinfoAction()
 
     $username = $this->_getParam('username');
 }
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         Определение маршрута может содержать в себе еще один специальный символ
@@ -105,8 +104,7 @@ $route = new Zend_Controller_Router_Route(
     array('module' => 'default')
 );
 $router->addRoute('default', $route);
-]]>
-    </programlisting>
+]]></programlisting>
 
     <sect4 id="zend.controller.router.routes.standard.variable-defaults">
         <title>Значения переменных по умолчанию</title>
@@ -114,7 +112,7 @@ $router->addRoute('default', $route);
         <para>
             Любая переменная в маршруте может иметь значение по умолчанию, для
             этого используется второй параметр конструктора
-            <code>Zend_Controller_Router_Route</code>. Этот параметр является
+            <classname>Zend_Controller_Router_Route</classname>. Этот параметр является
             массивом с ключами, представляющими имена переменных, и со
             значениями в качестве значений переменных по умолчанию:
         </para>
@@ -125,8 +123,7 @@ $route = new Zend_Controller_Router_Route(
     array('year' => 2006)
 );
 $router->addRoute('archive', $route);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Маршрут выше будет соответствовать URL-ам
@@ -136,11 +133,11 @@ $router->addRoute('archive', $route);
         </para>
 
         <para>
-            В этом примере переменная year будет добавлена в объект запроса.
+            В этом примере переменная <code>year</code> будет добавлена в объект запроса.
             Поскольку не была предоставлена информация для маршрутизации (не
-            определены параметры controller и action), то управление будет
+            определены параметры <code>controller</code> и <code>action</code>), то управление будет
             передано контроллеру и методу действия, используемым по умолчанию
-            (оба определены в <code>Zend_Controller_Dispatcher_Abstract</code>).
+            (оба определены в <classname>Zend_Controller_Dispatcher_Abstract</classname>).
             Для того, чтобы сделать этот пример более полезным, нужно
             передать действительные контроллер и действие в качестве значений по
             умолчанию:
@@ -156,8 +153,7 @@ $route = new Zend_Controller_Router_Route(
     )
 );
 $router->addRoute('archive', $route);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             В результате будет вызван метод <code>showAction()</code> класса
@@ -171,7 +167,7 @@ $router->addRoute('archive', $route);
 
         <para>
             Можно передать конструктору
-            <code>Zend_Controller_Router_Route</code> третий параметр, в котором
+            <classname>Zend_Controller_Router_Route</classname> третий параметр, в котором
             установлены требования к переменным. Они определяются как части
             регулярных выражений:
         </para>
@@ -187,8 +183,7 @@ $route = new Zend_Controller_Router_Route(
     array('year' => '\d+')
 );
 $router->addRoute('archive', $route);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             В случае маршрута, определенного таким образом, маршрутизатор будет
@@ -199,6 +194,189 @@ $router->addRoute('archive', $route);
             соответствовать этому маршруту, вместо этого будет произведен
             переход к следующему маршруту в цепочке.
         </para>
+    </sect4>
+
+    <sect4 id="zend.controller.router.routes.standard.translated-segments">
+        <title>Переводимые сегменты</title>
+
+        <para>
+            Стандартный маршрут поддерживает переводимые сегменты. Для того,
+            чтобы использовать эту возможность, нужно как минимум указать,
+            какой переводчик (экземпляр <classname>Zend_Translate</classname>)
+            должен использоваться - одним из следующих способов:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    Поместить его в реестр с ключом <code>Zend_Translate</code>.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Установить через статический метод
+                    <classname>Zend_Controller_Router_Route::setDefaultTranslator()</classname>.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Передать его конструктору в качестве четвертого параметра.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            По умолчанию используется локаль, указанная в экземпляре
+            <classname>Zend_Translate</classname>. Для того, чтобы
+            переопределить ее, вы можете установить ее значение (экземпляр
+            <classname>Zend_Locale</classname> или строка с локалью)
+            одним из следующих способов:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    Поместить ее в реестр с ключом
+                    <classname>Zend_Locale</classname>.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Установить через статический метод
+                    <classname>Zend_Controller_Router_Route::setDefaultLocale()</classname>.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Передать ее конструктору в качестве пятого параметра.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Передать ее как параметр <code>@locale</code> методу
+                    <code>assemble()</code>.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            Переводимые сегменты делятся на два типа. У статических
+            сегментов в начале ставится один символ <code>@</code>,
+            они будут переведены в соответствии текущей локалью при сборке URL
+            и преобразованы обратно в идентификатор сообщения при сопоставлении
+            URL с маршрутом.
+            У динамических сегментов в начале ставится <code>:@</code>.
+            При сборке URL данный параметр будет переведен и результат перевода
+            будет добавлен на его место.
+            При сопоставлении переведенный параметр из URL будет преобразован
+            обратно в идентификатор сообщения.
+        </para>
+
+        <note>
+            <title>Идентификаторы сообщений и отдельный языковый файл</title>
+            <para>
+                Может случайно получиться так, что идентификатор сообщения,
+                который вы собираетесь использовать в одном из своих
+                маршрутов, уже используется в ваших скриптах вида или где-то
+                еще.
+                Для того, чтобы иметь полный контроль над вашими
+                URL-ами, следует использовать отдельный языковый файл для
+                сообщений, используемых в маршруте.
+            </para>
+        </note>
+
+        <para>
+            Следующий пример демонстрирует наиболее простой способ подготовки
+            стандартного маршрута с использованием переводимых сегментов:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// Подготовка переводчика
+$translator = new Zend_Translate('array', array(), 'en');
+$translator->addTranslation(array('archive' => 'archiv',
+                                  'year'    => 'jahr',
+                                  'month'   => 'monat',
+                                  'index'   => 'uebersicht'),
+                            'de');
+
+// Установка текущей локали для переводчика
+$translator->setLocale('en');
+
+// Установка его в качестве используемого по умолчанию для маршрутов
+Zend_Controller_Router_Route::setDefaultTranslator($translator);
+]]></programlisting>
+
+        <para>
+            Этот пример демонстрирует использование статических сегментов:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// Создание маршрута
+$route = new Zend_Controller_Router_Route(
+    '@archive',
+    array(
+        'controller' => 'archive',
+        'action'     => 'index'
+    )
+);
+$router->addRoute('archive', $route);
+
+// Сборка URL в локали, используемой по умолчанию: archive
+$route->assemble(array());
+
+// Сборка URL в немецкой локали: archiv
+$route->assemble(array());
+]]></programlisting>
+
+        <para>
+            Вы можете использовать динамические сегменты для создания
+            переведенных версий как в случае использования маршрутов основанных
+            на модулях:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// Создание маршрута
+$route = new Zend_Controller_Router_Route(
+    ':@controller/:@action/*',
+    array(
+        'controller' => 'index',
+        'action'     => 'index'
+    )
+);
+$router->addRoute('archive', $route);
+
+// Сборка URL в локали, используемой по умолчанию: archive/index/foo/bar
+$route->assemble(array('controller' => 'archive', 'foo' => 'bar'));
+
+// Сборка URL в немецкой локали: archiv/uebersicht/foo/bar
+$route->assemble(array('controller' => 'archive', 'foo' => 'bar'));
+]]></programlisting>
+
+        <para>
+            Вы можете также комбинировать статические и динамические сегменты:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// Создание маршрута
+$route = new Zend_Controller_Router_Route(
+    '@archive/:@mode/:value',
+    array(
+        'mode'       => 'year'
+        'value'      => 2005,
+        'controller' => 'archive',
+        'action'     => 'show'
+    ),
+    array('mode'  => '(month|year)'
+          'value' => '\d+')
+);
+$router->addRoute('archive', $route);
+
+// Сборка URL в локали, используемой по умолчанию: archive/month/5
+$route->assemble(array('mode' => 'month', 'value' => '5'));
+
+// Сборка URL в немецкой локали: archiv/monat/5
+$route->assemble(array('mode' => 'month', 'value' => '5', '@locale' => 'de'));
+]]></programlisting>
     </sect4>
 </sect3>
 <!--

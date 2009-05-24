@@ -317,7 +317,7 @@ $element->addDecorators(array(
             Код выше создает вывод наподобие следующего:
         </para>
 
-        <programlisting role="html"><![CDATA[
+        <programlisting language="html"><![CDATA[
 <dt><label for="username" class="required">Username</dt>
 <dd>
     <input type="text" name="username" value="123-abc" />
@@ -600,7 +600,7 @@ class UserController extends Zend_Controller_Action
             ключ для формы ('login'):
         </para>
 
-        <programlisting role="ini"><![CDATA[
+        <programlisting language="ini"><![CDATA[
 [development]
 ; общие метаданные для формы
 user.login.action = "/user/login"

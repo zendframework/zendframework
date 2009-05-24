@@ -1,5 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.controller.modular">
-    <title>Использование определенной соглашением модульной структуры директорий</title>
+    <title>Использование модульной структуры директорий</title>
 
     <sect2 id="zend.controller.modular.introduction">
         <title>Введение</title>
@@ -10,8 +12,7 @@
             пример такой структуры:
         </para>
 
-        <programlisting>
-<![CDATA[
+        <programlisting language="txt"><![CDATA[
 docroot/
     index.php
 application/
@@ -46,8 +47,7 @@ application/
                 list/
             helpers/
             filters/
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             В этой парадигме имена модулей используются как префиксы к
@@ -105,8 +105,7 @@ $front->setControllerDirectory(array(
       'default' => '/path/to/application/controllers',
       'blog'    => '/path/to/application/blog/controllers'
 ));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Метод <code>addControllerDirectory()</code> принимает необязательный
@@ -118,8 +117,7 @@ $front->setControllerDirectory(array(
         <programlisting language="php"><![CDATA[
 $front->addControllerDirectory('/path/to/application/news/controllers',
                                'news');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Лучшее напоследок: самый легкий способ определения
@@ -142,8 +140,7 @@ $front->addControllerDirectory('/path/to/application/news/controllers',
  *             controllers/
  */
 $front->addModuleDirectory('/path/to/application/modules');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Пример выше определит модули <code>default</code>, <code>foo</code>
@@ -171,8 +168,7 @@ $front->addModuleDirectory('/path/to/application/modules');
  */
 $front->setModuleControllerDirectoryName('con');
 $front->addModuleDirectory('/path/to/application/modules');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <note><para>
             Вы можете указать, что для модулей не должна использоваться
@@ -186,8 +182,8 @@ $front->addModuleDirectory('/path/to/application/modules');
 
         <para>
             Маршрут, используемый по умолчанию в
-            <code>Zend_Controller_Router_Rewrite</code>, является объектом типа
-            <code>Zend_Controller_Router_Route_Module</code>. Этот маршрут
+            <classname>Zend_Controller_Router_Rewrite</classname>, является объектом типа
+            <classname>Zend_Controller_Router_Route_Module</classname>. Этот маршрут
             использует один из следующих шаблонов маршрутизации:
         </para>
 
@@ -211,7 +207,7 @@ $front->addModuleDirectory('/path/to/application/modules');
     </sect2>
 
     <sect2 id="zend.controller.modular.defaultcontroller">
-        <title>Молуль или глобальный контроллер по умолчанию</title>
+        <title>Модуль или глобальный контроллер по умолчанию</title>
 
         <para>
             В маршрутизаторе, используемом по умолчанию, если контроллер не был
@@ -224,15 +220,14 @@ $front->addModuleDirectory('/path/to/application/modules');
         </para>
 
         <para>
-            Если хотите всегда использовать глобальное пространство имен, то
+            Если требуется всегда использовать глобальное пространство имен, то
             установите параметр <code>useGlobalDefault</code> во
             фронт-контроллере:
         </para>
 
         <programlisting language="php"><![CDATA[
 $front->setParam('useDefaultControllerAlways', true);
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 </sect1>
 <!--

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect3 id="zend.controller.router.routes.chain">
+    <title>Zend_Controller_Router_Route_Chain</title>
+
+    <para>
+        <classname>Zend_Controller_Router_Route_Chain</classname>
+        является маршрутом, который позволяет объединять несколько маршрутов
+        между собой. Это позволяет, например, объединять маршруты по имени
+        хоста с маршрутами по пути или несколько маршрутов по пути.
+        Объединение может быть произведено программным путем или в
+        конфигурационном файле.
+    </para>
+
+    <note>
+        <title>Приоритет параметров</title>
+        <para>
+            При объединении маршрутов параметры внешнего маршрута имеют
+            больший приоритет, чем параметры внутреннего маршрута. 
+            Таким образом, если вы определили контроллер одновременно во
+            внутреннем и внешнем маршрутах, то будет выбран контроллер из
+            внешнего маршрута.
+        </para>
+    </note>
+    
+    <para>
+        При объединении маршрутов программным путем есть два способа достижения
+        этого. Первый состоит в создании нового экземпляра класса
+        <classname>Zend_Controller_Router_Route_Chain</classname>
+        и последующем вызове метода <code>chain</code> несколько раз
+        со всеми маршрутами, которые должны быть объединены между собой.
+        Другой состоит в том, чтобы брать первый маршрут, например, маршрут по
+        имени хоста, и вызывать его метод <code>chain</code> с маршрутом,
+        который должен быть добавлен к нему.
+        При этом маршрут по имени хоста не изменяется, но будет
+        возвращен новый экземпляр класса
+        <classname>Zend_Controller_Router_Route_Chain</classname>, который
+        объединяет в себе два маршрута:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+// Создаются два маршрута
+$hostnameRoute = new Zend_Controller_Router_Route_Hostname(...);
+$pathRoute     = new Zend_Controller_Router_Route(...);
+
+// Первый способ - объединение через маршрут-"цепочку
+$chainedRoute = new Zend_Controller_Router_Route_Chain();
+$chainedRoute->chain($hostnameRoute)
+             ->chain($pathRoute);
+
+// Второй способ - непосредственное объединение
+$chainedRoute = $hostnameRoute->chain($pathRoute);
+]]></programlisting>
+
+    <para>
+        При объединении маршрутов их разделителем по умолчанию будет
+        косая черта. Но может понадобиться использовать и другие разделители:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+// Создаются два маршрута
+$firstRoute  = new Zend_Controller_Router_Route('foo');
+$secondRoute = new Zend_Controller_Router_Route('bar');
+
+// Объединение с использованием другого разделителя
+$chainedRoute = $firstRoute->chain($secondRoute, '-');
+
+// Результирующий маршрут: "foo-bar"
+echo $chainedRoute->assemble();
+]]></programlisting>
+
+    <sect4 id="zend.controller.router.routes.chain.config">
+        <title>Объединение маршрутов через Zend_Config</title>
+
+        <para>
+            Для объединения маршрутов в конфигурационном файле есть
+            дополнительные параметры. Наиболее простой способ состоит в
+            использовании параметра <code>chains</code>.
+            Это просто список маршрутов, которые будут
+            объединены с родительским. Ни родительский, ни дочерний
+            маршруты не будут добавлены в маршрутизатор напрямую, в него будет
+            добавлен только составленный из них маршрут. Имя объединенного
+            маршрута в маршрутизаторе будет состоять из имени родительского
+            маршрута и имени дочернего маршрута, объединенных с использованием
+            тире (-). Простая конфигурация в формате XML может выглядеть
+            следующим образом:
+        </para>
+
+        <programlisting language="xml"><![CDATA[
+<routes>
+    <www type="Zend_Controller_Router_Route_Hostname">
+        <route>www.example.com</route>
+        <chains>
+            <language type="Zend_Controller_Router_Route">
+                <route>:language</route>
+                <reqs language="[a-z]{2}">
+                <chains>
+                    <index type="Zend_Controller_Router_Route_Static">
+                        <route></route>
+                        <defaults module="default" controller="index" action="index" />
+                    </index>
+                    <imprint type="Zend_Controller_Router_Route_Static">
+                        <route>imprint</route>
+                        <defaults module="default" controller="index" action="index" />
+                    </imprint>
+                </chains>
+            </language>
+        </chains>
+    </www>
+    <users type="Zend_Controller_Router_Route_Hostname">
+        <route>users.example.com</route>
+        <chains>
+            <profile type="Zend_Controller_Router_Route">
+                <route>:username</route>
+                <defaults module="users" controller="profile" action="index" />
+            </profile>
+        </chains>
+    </users>
+    <misc type="Zend_Controller_Router_Route_Static">
+        <route>misc</route>
+    </misc>
+</routes>
+]]></programlisting>
+
+        <para>
+            Результатом будет три маршрута: <code>www-language-index</code>,
+            <code>www-language-imprint</code> и <code>users-language-profile</code>,
+            которые будут соответствовать только именам хоста, подходящим под
+            заданные определения, и маршрут <code>misc</code>, который будет
+            соответствовать любым именам хоста.
+        </para>
+
+        <para>
+            Альтернативный способ создания объединенных маршрутов состоит в
+            применении параметра <code>chain</code>,
+            который может использоваться только с маршрутами типа
+            <classname>Zend_Controller_Router_Route_Chain</classname>,
+            эти маршруты указываются на том же уровне, что и остальные:
+        </para>
+
+        <programlisting language="xml"><![CDATA[
+<routes>
+    <www type="Zend_Controller_Router_Route_Chain">
+        <route>www.example.com</route>
+    </www>
+    <language type="Zend_Controller_Router_Route">
+        <route>:language</route>
+        <reqs language="[a-z]{2}">
+    </language>
+    <index type="Zend_Controller_Router_Route_Static">
+        <route></route>
+        <defaults module="default" controller="index" action="index" />
+    </index>
+    <imprint type="Zend_Controller_Router_Route_Static">
+        <route>imprint</route>
+        <defaults module="default" controller="index" action="index" />
+    </imprint>
+
+    <www-index type="Zend_Controller_Router_Route_Chain">
+        <chain>www, language, index</chain>
+    </www-index>
+    <www-imprint type="Zend_Controller_Router_Route_Chain">
+        <chain>www, language, imprint</chain>
+    </www-imprint>
+</routes>
+]]></programlisting>
+
+        <para>
+            Вы можете также передавать параметр <code>chain</code> в виде
+            массива вместо перечисления маршрутов через запятую:
+        </para>
+
+        <programlisting language="xml"><![CDATA[
+<routes>
+    <www-index type="Zend_Controller_Router_Route_Chain">
+        <chain>www</chain>
+        <chain>language</chain>
+        <chain>index</chain>
+    </www-index>
+    <www-imprint type="Zend_Controller_Router_Route_Chain">
+        <chain>www</chain>
+        <chain>language</chain>
+        <chain>imprint</chain>
+    </www-imprint>
+</routes>
+]]></programlisting>
+    </sect4>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

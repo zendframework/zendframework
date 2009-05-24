@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.controller.exceptions">
     <title>Исключения</title>
 
@@ -16,7 +18,7 @@
             Сообщения исключений и данные обратной трассировки часто содержат
             важную системную информацию, такую, как текст запросов SQL,
             местонахождение файлов и т.п. Поэтому в целях защиты вашего сайта
-            <code>Zend_Controller_Front</code> по умолчанию отлавливает все
+            <classname>Zend_Controller_Front</classname> по умолчанию отлавливает все
             исключения и регистрирует их в объектах ответа; в свою очередь,
             объект ответа по умолчанию не отображает сообщения исключений.
         </para>
@@ -85,8 +87,7 @@ try {
 } catch (Exception $e) {
     // самостоятельная обработка исключения
 }
-]]>
-                </programlisting>
+]]></programlisting>
 
                 <para>
                     Возможно, этот метод является наиболее легким способом
@@ -137,8 +138,7 @@ if ($response->isException()) {
     $response->sendHeaders();
     $response->outputBody();
 }
-]]>
-                </programlisting>
+]]></programlisting>
 
                 <para>
                     Основное преимущество этого метода по сравнению с
@@ -194,8 +194,7 @@ $front->setParam('useDefaultControllerAlways', true);
 // или
 
 $dispatcher->setParam('useDefaultControllerAlways', true);
-]]>
-                        </programlisting>
+]]></programlisting>
 
                         <para>
                             Когда этот флаг установлен, то диспетчер будет
@@ -212,7 +211,7 @@ $dispatcher->setParam('useDefaultControllerAlways', true);
                         <para>
                             Исключение, бросаемое методом
                             <code>dispatch()</code>, является экземпляром класса
-                            <code>Zend_Controller_Dispatcher_Exception</code>,
+                            <classname>Zend_Controller_Dispatcher_Exception</classname>,
                             содержащим текст 'Invalid controller specified'
                             (указан недействительный контроллер).
                             Используйте один из методов, описанных в
@@ -238,7 +237,7 @@ $dispatcher->setParam('useDefaultControllerAlways', true);
                 <itemizedlist>
                     <listitem>
                         <para>
-                            Создать подкласс <code>Zend_Controller_Action</code>
+                            Создать подкласс <classname>Zend_Controller_Action</classname>
                             и переопределить в нем метод <code>__call()</code>.
                             Например:
                         </para>
@@ -257,8 +256,7 @@ class My_Controller_Action extends Zend_Controller_Action
         throw new Exception('Invalid method');
     }
 }
-]]>
-                        </programlisting>
+]]></programlisting>
                         <para>
                             Пример выше перехватывает любые вызовы
                             несуществующих методов действий и перенаправляет их
@@ -269,7 +267,7 @@ class My_Controller_Action extends Zend_Controller_Action
                     <listitem>
                         <para>
                             Создать подкласс
-                            <code>Zend_Controller_Dispatcher</code> и
+                            <classname>Zend_Controller_Dispatcher</classname> и
                             переопределить в нем метод <code>getAction()</code>
                             так, чтобы он проводил проверку того, существует ли
                             запрошенное действие. Например:
@@ -298,8 +296,7 @@ class My_Controller_Dispatcher extends Zend_Controller_Dispatcher
         return $action;
     }
 }
-]]>
-                        </programlisting>
+]]></programlisting>
 
                         <para>
                             Код выше проверяет существование запрошенного
@@ -327,7 +324,7 @@ class My_Controller_Dispatcher extends Zend_Controller_Dispatcher
                         </para>
 
                         <para>
-                            Создав подкласс <code>Zend_Controller_Action</code>
+                            Создав подкласс <classname>Zend_Controller_Action</classname>
                             и модифицировав метод <code>preDispatch()</code>, вы
                             можете изменить все
                             свои контроллеры так, чтобы они переходили
@@ -357,29 +354,28 @@ class My_Controller_PreDispatchPlugin extends Zend_Controller_Plugin_Abstract
 {
     public function preDispatch(Zend_Controller_Request_Abstract $request)
     {
-        $dispatcher =
-            Zend_Controller_Front::getInstance()->getDispatcher();
-        $controller = $dispatcher->getController($request);
+        $front      = Zend_Controller_Front::getInstance();
+        $dispatcher = $front->getDispatcher();
+        $class      = $dispatcher->getControllerClass($request);
         if (!$controller) {
-            $controller =
-                $dispatcher->getDefaultControllerName($request);
+            $class = $dispatcher->getDefaultControllerClass($request);
         }
-        $action     = $dispatcher->getAction($request);
 
-        if (!method_exists($controller, $action)) {
-            $defaultAction = $dispatcher->getDefaultAction();
+        $r      = new ReflectionClass($class);
+        $action = $dispatcher->getActionMethod($request);
+
+        if (!$r->hasMethod($action)) {
+            $defaultAction  = $dispatcher->getDefaultAction();
             $controllerName = $request->getControllerName();
-            $response =
-                Zend_Controller_Front::getInstance()->getResponse();
-            $response->setRedirect('/' . $controllerName .
-                                   '/' . $defaultAction);
+            $response       = $front->getResponse();
+            $response->setRedirect('/' . $controllerName
+                                  . '/' . $defaultAction);
             $response->sendHeaders();
             exit;
         }
     }
 }
-]]>
-                        </programlisting>
+]]></programlisting>
 
                         <para>
                             В этом примере мы проверяем, доступно ли в

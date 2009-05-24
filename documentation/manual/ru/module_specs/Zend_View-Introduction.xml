@@ -224,7 +224,7 @@ base/path/
                     Включить короткие теги в своем файле <code>.htaccess</code>:
                 </para>
 
-                <programlisting role="apache"><![CDATA[
+                <programlisting language="apache"><![CDATA[
 php_value "short_open_tag" "on"
 ]]></programlisting>
 

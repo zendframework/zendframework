@@ -39,7 +39,7 @@
             более сложных случаях. Допустим, конфигурационные данные
             находятся в файле <code>/path/to/config.xml</code>:
         </para>
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <?xml version="1.0"?>
 <configdata>
     <production>
@@ -89,7 +89,7 @@ echo $config->database->params->dbname; // выведет "dbname"
             атрибутов в родительский узел, они потом будут преобразованы в
             потомки этого узла:
         </para>
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <?xml version="1.0"?>
 <configdata>
     <production webhost="www.example.com">
@@ -110,7 +110,7 @@ echo $config->database->params->dbname; // выведет "dbname"
             тегов дважды. Вы просто создаете пустой тег, значение которого
             содержится в атрибуте <code>value</code>:
         </para>
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <?xml version="1.0"?>
 <configdata>
     <production>
@@ -146,7 +146,7 @@ echo $config->database->params->dbname; // выведет "dbname"
             первого параметра и должна начинаться с символов
             <code>'&lt;?xml'</code>:
         </para>
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 $string = <<<EOT
 <?xml version="1.0"?>
 <config>

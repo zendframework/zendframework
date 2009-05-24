@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.controller.actionhelpers" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Помощники действий</title>
 
@@ -7,7 +9,7 @@
             Помощники действий (action helpers) дают разработчикам возможность
             добавлять функционал во время выполнения или по требованию в любые
             контроллеры действий, которые наследуют от
-            <code>Zend_Controller_Action</code>.
+            <classname>Zend_Controller_Action</classname>.
             Помощники действий помогают снизить необходимость в наследовании от
             абстрактного контроллера действий при добавлении общего
             функционала в контроллер действий.
@@ -19,7 +21,7 @@
             подобную той, которая используется в
             <link linkend="zend.view.helpers">Zend_View_Helper</link> и
             <link linkend="zend.controller.plugins">Zend_Controller_Plugin</link>.
-            Помощники действий (как и <code>Zend_View_Helper</code>) могут быть
+            Помощники действий (как и <classname>Zend_View_Helper</classname>) могут быть
             загружены и вызваны по требованию, либо инстанцироваться во время
             запроса (начальной загрузки) или создания контроллера действий
             (init()). Для того, чтобы лучше разобраться с этим, см. ниже раздел
@@ -38,7 +40,7 @@
 
         <para>
             Брокер помощников хранится как член <code>$_helper</code> класса
-            <code>Zend_Controller_Action</code>; используйте брокер для
+            <classname>Zend_Controller_Action</classname>; используйте брокер для
             получения или вызова помощников. Методы для этого включают в себя:
         </para>
 
@@ -52,8 +54,7 @@
                 <programlisting language="php"><![CDATA[
 $flashMessenger = $this->_helper->getHelper('FlashMessenger');
 $flashMessenger->addMessage('We did something in the last request');
-]]>
-                </programlisting>
+]]></programlisting>
             </listitem>
 
             <listitem>
@@ -66,8 +67,7 @@ $flashMessenger->addMessage('We did something in the last request');
                 <programlisting language="php"><![CDATA[
 $flashMessenger = $this->_helper->FlashMessenger;
 $flashMessenger->addMessage('We did something in the last request');
-]]>
-                </programlisting>
+]]></programlisting>
             </listitem>
 
             <listitem>
@@ -81,8 +81,7 @@ $flashMessenger->addMessage('We did something in the last request');
 
                 <programlisting language="php"><![CDATA[
 $this->_helper->FlashMessenger('We did something in the last request');
-]]>
-                </programlisting>
+]]></programlisting>
             </listitem>
         </itemizedlist>
 
@@ -105,7 +104,7 @@ $this->_helper->FlashMessenger('We did something in the last request');
         <title>Брокер помощников</title>
 
         <para>
-            <code>Zend_Controller_Action_HelperBroker</code> управляет
+            <classname>Zend_Controller_Action_HelperBroker</classname> управляет
             регистрацией объектов помощников и путей к помощникам, а также
             извлечением помощников по требованию.
         </para>
@@ -117,8 +116,7 @@ $this->_helper->FlashMessenger('We did something in the last request');
 
         <programlisting language="php"><![CDATA[
 Zend_Controller_Action_HelperBroker::addHelper($helper);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Само собой, инстанцирование и передача помощников брокеру отнимают
@@ -140,8 +138,7 @@ Zend_Controller_Action_HelperBroker::addHelper($helper);
 // Добавление помощников, начинающихся
 // с My_Action_Helpers в My/Action/Helpers/
 Zend_Controller_Action_HelperBroker::addPrefix('My_Action_Helpers');
-]]>
-                </programlisting>
+]]></programlisting>
             </listitem>
 
             <listitem>
@@ -157,8 +154,7 @@ Zend_Controller_Action_HelperBroker::addPrefix('My_Action_Helpers');
 // Добавление помощников, начинающихся с Helper в Plugins/Helpers/
 Zend_Controller_Action_HelperBroker::addPath('./Plugins/Helpers',
                                              'Helper');
-]]>
-                </programlisting>
+]]></programlisting>
             </listitem>
         </itemizedlist>
 
@@ -188,8 +184,7 @@ Zend_Controller_Action_HelperBroker::addPath('./Plugins/Helpers',
 if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
     echo 'Redirector helper registered';
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Есть также два статических метода для извлечения помощников из
@@ -222,8 +217,7 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
 $redirector =
     Zend_Controller_Action_HelperBroker::getStaticHelper('redirector');
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Наконец, для удаления зарегистрированного помощника из брокера
@@ -237,8 +231,7 @@ $redirector =
 if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
     Zend_Controller_Action_HelperBroker::removeHelper('redirector')
 }
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 
     <sect2 id="zend.controller.actionhelper.stockhelpers">
@@ -285,11 +278,11 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
         <title>Написание собственных помощников</title>
 
         <para>
-            Помощники действий расширяют
-            <code>Zend_Controller_Action_Helper_Abstract</code>, абстрактный
-            класс, дающий базовый интерфейс и функционал, который требуется для
-            использования с брокером помощников. Он включает в себя следующие
-            методы:
+            Помощники действий наследуют от абстрактного класса
+            <classname>Zend_Controller_Action_Helper_Abstract</classname>,
+            который предоставляет базовый интерфейс и функционал, необходимые
+            для использования с брокером помощников. Он включает в себя
+            следующие методы:
         </para>
 
         <itemizedlist>
@@ -344,8 +337,8 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
                     извлекает ту часть имени класса, которая следует после
                     последнего символа подчеркивания, иначе возвращается полное
                     имя класса. Например, если класс называется
-                    <code>Zend_Controller_Action_Helper_Redirector</code>, то он
-                    вернет <code>Redirector</code>, а если класс называется
+                    <classname>Zend_Controller_Action_Helper_Redirector</classname>,
+                    то он вернет <code>Redirector</code>, а если класс называется
                     <code>FooMessage</code> то он просто вернет свое полное имя.
                 </para>
             </listitem>
@@ -365,8 +358,7 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
         <programlisting language="php"><![CDATA[
 // Перенаправление на /blog/view/item/id/42
 $this->_helper->redirector('item', 'view', 'blog', array('id' => 42));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Метод брокера помощников <code>__call()</code> ищет помощника с

@@ -102,7 +102,7 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
             <code>Zend_Config</code>, содержащим свойства, аналогичные ключам
             массива, описанного выше. К примеру, файл "config.ini" может
             содержать следующие данные:
-            <programlisting role="ini"><![CDATA[
+            <programlisting language="ini"><![CDATA[
 [main]
 db.profiler.class   = "MyProject_Db_Profiler"
 db.profiler.enabled = true

@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.controller.dispatcher">
     <title>Диспетчер</title>
 
@@ -6,12 +8,12 @@
 
         <para>
             Диспетчеризация — это процесс принятия объекта запроса
-            (<code>Zend_Controller_Request_Abstract</code>), извлечения
+            (<classname>Zend_Controller_Request_Abstract</classname>), извлечения
             содержащихся в нем имени модуля, имени контроллера, имени действия и
             необязательных параметров, затем инстанцирования контроллера и
             вызова действия в нем. Если не найдены модуль, контроллер или
             действие, то будут использоваться значения по умолчанию.
-            <code>Zend_Controller_Dispatcher_Standard</code> определяет
+            <classname>Zend_Controller_Dispatcher_Standard</classname> определяет
             <code>index</code> как значение по умолчанию для контроллера и
             действия, и <code>default</code> - для модуля, но позволяет
             разработчику изменять эти значения, используя
@@ -39,8 +41,7 @@ $front->setParam('prefixDefaultModule', true);
 
 // Через диспетчер:
 $dispatcher->setParam('prefixDefaultModule', true);
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Это позволяет повторно использовать существующий модуль в
@@ -96,15 +97,14 @@ public function bazAction()
     // Foo_BarController::bazAction():
     $this->_forward('baz', 'bar', 'foo', array('baz' => 'bogus'));
 }
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 
     <sect2 id="zend.controller.dispatcher.subclassing">
         <title>Создание подклассов диспетчера</title>
 
         <para>
-            <code>Zend_Controller_Front</code> сначала вызывает
+            <classname>Zend_Controller_Front</classname> сначала вызывает
             маршрутизатор для получения первого действия в запросе. Затем он
             входит в цикл диспетчеризации, в котором вызывается диспетчер для
             запуска действия.
@@ -120,7 +120,7 @@ public function bazAction()
         </para>
 
         <para>
-            <code>Zend_Controller_Dispatcher_Interface</code> определяет
+            <classname>Zend_Controller_Dispatcher_Interface</classname> определяет
             следующие методы, которые требуется использовать во всех реализациях
             диспетчера:
         </para>
@@ -272,14 +272,13 @@ interface Zend_Controller_Dispatcher_Interface
      */
     public function getDefaultAction();
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Однако в большинстве случаев вам достаточно будет только расширить
-            абстрактный класс <code>Zend_Controller_Dispatcher_Abstract</code>,
+            абстрактный класс <classname>Zend_Controller_Dispatcher_Abstract</classname>,
             в котором уже определены все эти методы или класс
-            <code>Zend_Controller_Dispatcher_Standard</code> для изменения
+            <classname>Zend_Controller_Dispatcher_Standard</classname> для изменения
             функционала стандартного диспетчера.
         </para>
 

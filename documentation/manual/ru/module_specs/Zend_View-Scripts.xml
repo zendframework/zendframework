@@ -164,7 +164,7 @@ if ($this->books) {
                 Это может соответствовать следующему файлу шаблона:
             </para>
 
-            <programlisting role="html"><![CDATA[
+            <programlisting language="html"><![CDATA[
 <!-- booklist.tpl -->
 <table>
     <tr>

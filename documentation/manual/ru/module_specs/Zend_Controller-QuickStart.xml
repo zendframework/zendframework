@@ -1,15 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.controller.quickstart">
     <title>Zend_Controller - Быстрый старт</title>
 
     <sect2 id="zend.controller.quickstart.introduction">
         <title>Введение</title>
         <para>
-            <code>Zend_Controller</code> является ядром системы MVC в Zend
+            <classname>Zend_Controller</classname> является ядром системы MVC в Zend
             Framework. Аббревиатура MVC - сокращение от
             <ulink url="http://en.wikipedia.org/wiki/Model-view-controller">Model-View-Controller</ulink>
             (модель-вид-контроллер), это паттерн проектирования, предназначенный
             для отделения логики приложения от логики представления.
-            <code>Zend_Controller_Front</code> реализует паттерн
+            <classname>Zend_Controller_Front</classname> реализует паттерн
             <ulink url="http://www.martinfowler.com/eaaCatalog/frontController.html">Front
             Controller</ulink>, в котором все запросы перехватываются
             фронт-контроллером (front controller) и перенаправляются отдельным
@@ -17,7 +19,7 @@
             производится по запрошенному URL.
         </para>
         <para>
-            Система <code>Zend_Controller</code> построена с расчетом на
+            Система <classname>Zend_Controller</classname> построена с расчетом на
             расширяемость как через наследование от уже существующих классов
             и написание новых классов, реализующих различные интерфейсы и
             абстрактные классы, образующих основу семейства классов
@@ -32,7 +34,7 @@
         <para>
             Если вам нужна более подробная информация, то сразу переходите к
             следующим разделам. Если хотите быстро начать работать с
-            <code>Zend_Controller</code>, то читайте далее.
+            <classname>Zend_Controller</classname>, то читайте далее.
         </para>
 
         <sect3 id="zend.controller.quickstart.go.directory">
@@ -89,13 +91,28 @@ RewriteRule ^.*$ - [NC,L]
 RewriteRule ^.*$ index.php [NC,L]
 ]]>
             </programlisting>
-            
+
+            <note>
+                <title>Узнайте больше о mod_rewrite</title>
+
+                <para>
+                    Приведенные выше правила перезаписи позволяют получить
+                    доступ к любому файлу в корневой для веб-документов
+                    директории вашего виртуального хоста. Если
+                    в ней есть файлы, которые нужно скрыть от посторонних глаз,
+                    то вы наверное захотите установить более строгие правила.
+                    Перейдите на сайт Apache, чтобы
+                    <ulink
+                        url="http://httpd.apache.org/docs/2.0/mod/mod_rewrite.html">узнать больше о mod_rewrite</ulink>.
+                </para>
+            </note>
+
             <para>
                 Если у вас IIS 7.0, то используйте следующую
                 конфигурацию перезаписи:
             </para>
 
-            <programlisting role="xml"><![CDATA[
+            <programlisting language="xml"><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
      <system.webServer>
@@ -152,8 +169,7 @@ RewriteRule ^.*$ index.php [NC,L]
 
             <programlisting language="php"><![CDATA[
 Zend_Controller_Front::run('/path/to/app/controllers');
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Этот код выполняет инстанцирование и запуск фронт-контроллера,
@@ -180,7 +196,7 @@ Zend_Controller_Front::run('/path/to/app/controllers');
             </para>
 
             <para>
-                Диспетчер <code>Zend_Controller</code> принимает значение
+                Диспетчер <classname>Zend_Controller</classname>-а принимает значение
                 контроллера и находит соответствующий ему класс. По умолчанию
                 это имя контроллера, начинающееся с заглавной буквы и со словом
                 <code>Controller</code> в конце. Таким образом, контроллер
@@ -216,8 +232,7 @@ class IndexController extends Zend_Controller_Action
     {
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 По умолчанию включен помощник действий <link
@@ -225,7 +240,7 @@ class IndexController extends Zend_Controller_Action
                 Это означает, что, просто определив метод действия и
                 соответствующий скрипт вида, вы получите рендеринг контента.
                 По умолчанию в MVC в качестве "вида" используется
-                <code>Zend_View</code>. <code>render()</code> использует имя
+                <classname>Zend_View</classname>. <code>render()</code> использует имя
                 контроллера (например, <code>index</code>) и имя текущего
                 действия (например, <code>index</code>) для определения того,
                 какой шаблон тянуть. По умолчанию шаблоны имеют расширение
@@ -266,8 +281,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     <h1>Hello, World!</h1>
 </body>
 </html>
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.controller.quickstart.go.errorhandler">
@@ -289,8 +303,7 @@ class ErrorController extends Zend_Controller_Action
     {
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Согласно уже обсуждаемой выше структуре директорий этот файл
@@ -315,8 +328,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     <p>An error occurred; please try again later.</p>
 </body>
 </html>
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.controller.quickstart.go.finish">

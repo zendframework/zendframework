@@ -59,9 +59,9 @@ echo $response;
             The <classname>Zend_Amf_Server</classname> also allows services to be dynamically
             loaded based on a supplied directory path. You may add as many directories as you wish
             to the server. The order that you add the directories to the server will be the
-            order that the LIFO search will be performed on the directories to match the class.
-            Adding directories is completed with the <methodname>addDirectory()</methodname>
-            method.
+            order that the <emphasis>LIFO</emphasis> search will be performed on the directories to
+            match the class. Adding directories is completed with the
+            <methodname>addDirectory()</methodname> method.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -71,12 +71,13 @@ $server->addDirectory(dirname(__FILE__) .'/../package/');
 
         <para>
             When calling remote services your source name can have underscore ("_") and dot (".")
-            directory delimiters. When an underscore is used PEAR and Zend Framework class naming
-            conventions will be respected. This means that if you call the service
-            <classname>com_Foo_Bar</classname> the server will look for the file Bar.php in the
-            each of the included paths at <filename>com/Foo/Bar.php</filename>. If the dot notation
-            is used for your remote service such as <filename>com.Foo.Bar</filename> each included
-            path will have <filename>com/Foo/Bar.php</filename> append to the end to autoload
+            directory delimiters. When an underscore is used <emphasis>PEAR</emphasis> and Zend
+            Framework class naming conventions will be respected. This means that if you call the
+            service <classname>com_Foo_Bar</classname> the server will look for the file
+            <filename>Bar.php</filename> in the each of the included paths at
+            <filename>com/Foo/Bar.php</filename>. If the dot notation is used for your remote
+            service such as <filename>com.Foo.Bar</filename> each included path will have
+            <filename>com/Foo/Bar.php</filename> append to the end to autoload
             <filename>Bar.php</filename>
         </para>
 
@@ -156,14 +157,14 @@ class World
             projects path and Press Ok to close the window.
         </para>
         <para>
-            You will also need to tell the compiler to use the service-config.xml to find
-            the RemoteObject endpoint. To do this open your project properties panel again by
-            right clicking on the project folder from your Navigator and selecting properties.
-            From the properties popup select 'Flex Compiler' and add the
-            string: -services "services-config.xml". Press Apply then OK to return to update
-            the option. What you have just done is told the Flex compiler to look to the
-            services-config.xml file for runtime variables that will be used by the
-            RemotingObject class.
+            You will also need to tell the compiler to use the
+            <filename>service-config.xml</filename> to find the RemoteObject endpoint. To do this
+            open your project properties panel again by right clicking on the project folder from
+            your Navigator and selecting properties. From the properties popup select 'Flex
+            Compiler' and add the string: -services "services-config.xml". Press Apply then OK to
+            return to update the option. What you have just done is told the Flex compiler to look
+            to the <filename>services-config.xml</filename> file for runtime variables that will be
+            used by the RemotingObject class.
         </para>
         <para>
             We now need to tell Flex which services configuration file to use for connecting to
@@ -173,9 +174,10 @@ class World
             the file 'services-config.xml' and press finish.
         </para>
         <para>
-            Flex has created the new services-config.xml and has it open. Use the following example
-            text for your services-config.xml file. Make sure that you update your endpoint to
-            match that of your testing server. Make sure you save the file.
+            Flex has created the new <filename>services-config.xml</filename> and has it open. Use
+            the following example text for your <filename>services-config.xml</filename> file. Make
+            sure that you update your endpoint to match that of your testing server. Make sure you
+            save the file.
         </para>
 
         <programlisting language="xml"><![CDATA[
@@ -225,8 +227,8 @@ class World
         </para>
 
         <para>
-            Within our Flex MXML files, we need to bind a RemoteObject to the
-            service. In MXML, this might be done as follows:
+            Within our Flex <emphasis>MXML</emphasis> files, we need to bind a RemoteObject to the
+            service. In <emphasis>MXML</emphasis>, this might be done as follows:
         </para>
 
         <programlisting language="xml"><![CDATA[
@@ -239,7 +241,7 @@ class World
         <para>
             Here, we've defined a new remote object identified by "myservice"
             bound to the service destination "zend" we defined in the
-            <filename>services-config.xml</filename> file. We then call methods on it in
+            <filename>services-config.xml</filename> file. We then call methods on it
             in our ActionScript by simply calling "myservice.&lt;method&gt;".
             As an example:
         </para>
@@ -349,7 +351,7 @@ echo $response;
         <title>Typed Objects</title>
 
         <para>
-            Similar to SOAP, AMF allows passing objects between the client and
+            Similar to <emphasis>SOAP</emphasis>, AMF allows passing objects between the client and
             server. This allows a great amount of flexibility and coherence
             between the two environments.
         </para>
@@ -440,7 +442,7 @@ package
             to work properly. There are two unique AS3 meta tags in this class.
             The first is bindable which makes fire a change event when it is updated.
             The second tag is the RemoteClass tag which defines that this class can
-            have a a remote object mapped with the alias name in this case
+            have a remote object mapped with the alias name in this case
             <emphasis>ContactVO</emphasis>. It is mandatory that this tag the value that was set
             is the PHP class are strictly equivalent.
         </para>
@@ -472,18 +474,20 @@ private function getContactHandler(event:ResultEvent):void {
         </para>
         <para>
             Open Flash CS and create and new Flash File (ActionScript 3). Name the document
-            ZendExample.fla and save the document into a folder that you will use for this example.
-            Create a new AS3 file in the same directory and call the file Main.as. Have both files
-            open in your editor. We are now going to connect the two files via the document class.
-            Select ZendExample and click on the stage. From the stage properties panel change the
-            Document class to Main. This links the Main.as ActionScript file with the user
-            interface in ZendExample.fla. When you run the Flash file ZendExample the Main.as class
-            will now be run. Next we will add ActionScript to make the AMF call.
+            <filename>ZendExample.fla</filename> and save the document into a folder that you will
+            use for this example. Create a new AS3 file in the same directory and call the file
+            <filename>Main.as</filename>. Have both files open in your editor. We are now going to
+            connect the two files via the document class. Select ZendExample and click on the
+            stage. From the stage properties panel change the Document class to Main. This links
+            the <filename>Main.as</filename> ActionScript file with the user interface in
+            <filename>ZendExample.fla</filename>. When you run the Flash file ZendExample the
+            <filename>Main.as</filename> class will now be run. Next we will add ActionScript to
+            make the AMF call.
         </para>
         <para>
             We now are going to make a Main class so that we can send the data to the server and
-            display the result. Copy the following code into your Main.as file and then we will
-            walk through the code to describe what each element's role is.
+            display the result. Copy the following code into your <filename>Main.as</filename> file
+            and then we will walk through the code to describe what each element's role is.
         </para>
         <programlisting language="as"><![CDATA[
 package {

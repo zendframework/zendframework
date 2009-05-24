@@ -26,7 +26,7 @@
             <tbody>
                 <row>
                     <entry><methodname>__construct($application)</methodname></entry>
-                    <entry><code>void</code></entry>
+                    <entry><type>Void</type></entry>
                     <entry><itemizedlist>
                         <listitem><para>
                             <varname>$application</varname>: <emphasis>required</emphasis>.
@@ -73,7 +73,7 @@
 
                 <row>
                     <entry><methodname>getOption()</methodname></entry>
-                    <entry><code>array</code></entry>
+                    <entry><type>Array</type></entry>
                     <entry>N/A</entry>
                     <entry><para>
                         Returns all options registered via
@@ -83,7 +83,7 @@
 
                 <row>
                     <entry><methodname>hasOption($key)</methodname></entry>
-                    <entry><code>boolean</code></entry>
+                    <entry><type>Boolean</type></entry>
                     <entry><itemizedlist>
                         <listitem><para>
                             <varname>$key</varname>: <emphasis>required</emphasis>.
@@ -95,7 +95,7 @@
 
                 <row>
                     <entry><methodname>getOption($key)</methodname></entry>
-                    <entry><code>mixed</code></entry>
+                    <entry><type>Mixed</type></entry>
                     <entry><itemizedlist>
                         <listitem><para>
                             <varname>$key</varname>: <emphasis>required</emphasis>.
@@ -141,7 +141,7 @@
 
                 <row>
                     <entry><methodname>getEnvironment()</methodname></entry>
-                    <entry><code>string</code></entry>
+                    <entry><type>String</type></entry>
                     <entry>N/A</entry>
                     <entry><para>
                         Retrieve the environment string registered with the
@@ -151,7 +151,7 @@
 
                 <row>
                     <entry><methodname>getClassResources()</methodname></entry>
-                    <entry><code>array</code></entry>
+                    <entry><type>Array</type></entry>
                     <entry>N/A</entry>
                     <entry><para>
                         Retrieve a list of available resource initializer names
@@ -162,7 +162,7 @@
 
                 <row>
                     <entry><methodname>getContainer()</methodname></entry>
-                    <entry><code>object</code></entry>
+                    <entry><type>Object</type></entry>
                     <entry>N/A</entry>
                     <entry><para>
                         Retrieves the container that stores resources. If no
@@ -192,7 +192,7 @@
 
                 <row>
                     <entry><methodname>hasResource($name)</methodname></entry>
-                    <entry><code>boolean</code></entry>
+                    <entry><type>Boolean</type></entry>
                     <entry><itemizedlist>
                         <listitem><para>
                             <varname>$name</varname>, <emphasis>required</emphasis>.
@@ -210,7 +210,7 @@
 
                 <row>
                     <entry><methodname>getResource($name)</methodname></entry>
-                    <entry><code>mixed</code></entry>
+                    <entry><type>Mixed</type></entry>
                     <entry><itemizedlist>
                         <listitem><para>
                             <varname>$name</varname>, <emphasis>required</emphasis>.
@@ -228,7 +228,7 @@
 
                 <row>
                     <entry><methodname>bootstrap($resource = null)</methodname></entry>
-                    <entry><code>mixed</code></entry>
+                    <entry><type>Mixed</type></entry>
                     <entry><itemizedlist>
                         <listitem><para>
                             <varname>$resource</varname>: <emphasis>optional</emphasis>.
@@ -254,7 +254,7 @@
 
                 <row>
                     <entry><methodname>run()</methodname></entry>
-                    <entry><code>void</code></entry>
+                    <entry><type>Void</type></entry>
                     <entry>N/A</entry>
                     <entry><para>
                         Defines what application logic to run after
@@ -264,7 +264,7 @@
 
                 <row>
                     <entry><methodname>__call($method, $args)</methodname></entry>
-                    <entry><code>mixed</code></entry>
+                    <entry><type>Mixed</type></entry>
                     <entry><itemizedlist>
                         <listitem><para>
                             <varname>$method</varname>: <emphasis>required</emphasis>.

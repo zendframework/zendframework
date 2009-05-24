@@ -7,9 +7,10 @@
         <classname>Zend_Application_Bootstrap_ResourceBootstrapper</classname> is an
         interface to use when a bootstrap class will be loading external
         resources -- i.e., one or more resources will not be defined directly in
-        the class, but rather via plugins. It should be used in conjunction with
-        <link linkend="zend.application.core-functionality.bootstrap-bootstrapper">Zend_Application_Bootstrap_Bootstrapper</link>;
-        <link linkend="zend.application.core-functionality.bootstrap-bootstrapabstract">Zend_Application_Bootstrap_BootstrapAbstract</link>
+        the class, but rather via plugins. It should be used in conjunction with <link
+            linkend="zend.application.core-functionality.bootstrap-bootstrapper">Zend_Application_Bootstrap_Bootstrapper</link>;
+        <link
+            linkend="zend.application.core-functionality.bootstrap-bootstrapabstract">Zend_Application_Bootstrap_BootstrapAbstract</link>
         implements this functionality.
     </para>
 
@@ -30,8 +31,9 @@
             </thead>
             <tbody>
                 <row>
-                    <entry><code>registerPluginResource($resource, $options =
-                            null)</code></entry>
+                    <entry>
+                        <methodname>registerPluginResource($resource, $options = null)</methodname>
+                    </entry>
                     <entry>
                         <classname>Zend_Application_Bootstrap_ResourceBootstrapper</classname>
                     </entry>
@@ -56,7 +58,7 @@
                 </row>
 
                 <row>
-                    <entry><code>unregisterPluginResource($resource)</code></entry>
+                    <entry><methodname>unregisterPluginResource($resource)</methodname></entry>
                     <entry>
                         <classname>Zend_Application_Bootstrap_ResourceBootstrapper</classname>
                     </entry>
@@ -72,8 +74,8 @@
                 </row>
 
                 <row>
-                    <entry><code>hasPluginResource($resource)</code></entry>
-                    <entry><code>boolean</code></entry>
+                    <entry><methodname>hasPluginResource($resource)</methodname></entry>
+                    <entry><type>Boolean</type></entry>
                     <entry><itemizedlist>
                         <listitem><para>
                             <varname>$resource</varname>: <emphasis>required</emphasis>.
@@ -87,7 +89,7 @@
                 </row>
 
                 <row>
-                    <entry><code>getPluginResource($resource)</code></entry>
+                    <entry><methodname>getPluginResource($resource)</methodname></entry>
                     <entry><classname>Zend_Application_Resource_Resource</classname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
@@ -101,8 +103,8 @@
                 </row>
 
                 <row>
-                    <entry><code>getPluginResourceNames()</code></entry>
-                    <entry><code>array</code></entry>
+                    <entry><methodname>getPluginResourceNames()</methodname></entry>
+                    <entry><type>Array</type></entry>
                     <entry>N/A</entry>
                     <entry><para>
                         Retrieve a list of all registered plugin resource names.
@@ -110,8 +112,10 @@
                 </row>
 
                 <row>
-                    <entry><code>setPluginLoader(Zend_Loader_PluginLoader_Interface
-                            $loader)</code></entry>
+                    <entry>
+                        <methodname>setPluginLoader(Zend_Loader_PluginLoader_Interface
+                            $loader)</methodname>
+                    </entry>
                     <entry>
                         <classname>Zend_Application_Bootstrap_ResourceBootstrapper</classname>
                     </entry>
@@ -129,7 +133,7 @@
                 </row>
 
                 <row>
-                    <entry><code>getPluginLoader()</code></entry>
+                    <entry><methodname>getPluginLoader()</methodname></entry>
                     <entry><classname>Zend_Loader_PluginLoader_Interface</classname></entry>
                     <entry>N/A</entry>
                     <entry><para>

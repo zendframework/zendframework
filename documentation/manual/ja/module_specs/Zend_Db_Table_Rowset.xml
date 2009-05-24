@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <sect1 id="zend.db.table.rowset">
 
     <title>Zend_Db_Table_Rowset</title>
@@ -365,7 +365,7 @@ $row->save();
             <classname>Zend_Db_Table_Rowset_Abstract</classname> を継承した新たな具象クラスを作成し、
             それを用いて行セットのインスタンスを作成することができます。
             独自の行クラスを指定するには、テーブルクラスの protected
-            メンバである <code>$_rowsetClass</code> を使用するか、
+            メンバである <varname>$_rowsetClass</varname> を使用するか、
             テーブルオブジェクトのコンストラクタの引数の配列で指定します。
         </para>
 

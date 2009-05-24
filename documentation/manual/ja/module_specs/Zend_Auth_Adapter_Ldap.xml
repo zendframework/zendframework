@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <sect1 id="zend.auth.adapter.ldap">
 
     <title>LDAP 認証</title>
@@ -74,7 +74,7 @@ if ($log_path) {
             もちろんログを記録するかどうかは自由ですが、
             ロガーを使用することを強く推奨します。
             <classname>Zend_Auth_Adapter_Ldap</classname> は、皆がほしがるであろう情報をすべて
-            <code>$messages</code> (詳細は以下で) に記録します。
+            <varname>$messages</varname> (詳細は以下で) に記録します。
             この機能を使用すれば、デバッグを容易に行えるようになります。
         </para>
 
@@ -143,7 +143,7 @@ ldap.server2.baseDn = "CN=Users,DC=w,DC=net"
         </para>
 
         <para>
-            <code>$options</code> パラメータは必須で、
+            <varname>$options</varname> パラメータは必須で、
             ひとつあるいは複数のオプションを含む配列でなければなりません。
             これは、<link linkend="zend.ldap"><classname>Zend_Ldap</classname></link> のオプションの
             <emphasis>配列の配列</emphasis> であることに注意しましょう。

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15713 -->
+<!-- EN-Revision: 15719 -->
 <sect1 id="zend.db.table">
 
     <title>Zend_Db_Table</title>
@@ -41,7 +41,7 @@
 
             <para>
                 そのクラスが定義しているデータベースのテーブルを定義するには、
-                protected な変数 <code>$_name</code> を使用します。
+                protected な変数 <varname>$_name</varname> を使用します。
                 これは文字列で、データベースでのテーブル名を指定する必要があります。
             </para>
 
@@ -78,10 +78,10 @@ class bugs extends Zend_Db_Table_Abstract
 
             <para>
                 テーブルのスキーマについても、protected 変数
-                <code>$_schema</code> で宣言することができます。
-                あるいは <code>$_name</code> プロパティでテーブル名の前にスキーマ名をつなげて指定することもできます。
-                <code>$_name</code> で指定したスキーマのほうが、
-                <code>$_schema</code> プロパティで指定したスキーマよりも優先されます。
+                <varname>$_schema</varname> で宣言することができます。
+                あるいは <varname>$_name</varname> プロパティでテーブル名の前にスキーマ名をつなげて指定することもできます。
+                <varname>$_name</varname> で指定したスキーマのほうが、
+                <varname>$_schema</varname> プロパティで指定したスキーマよりも優先されます。
                 RDBMS によってはスキーマのことを「データベース」や「表領域」
                 などということもありますが、同じように使用できます。
                 スキーマを、テーブル名の一部として宣言することもできます。
@@ -119,7 +119,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
             <para>
                 スキーマ名とテーブル名は、コンストラクタの設定ディレクティブでも指定することができます。
-                これは、<code>$_name</code> や <code>$_schema</code>
+                これは、<varname>$_name</varname> や <varname>$_schema</varname>
                 といったプロパティで設定したデフォルト値を上書きします。
                 <code>name</code> ディレクティブで指定したスキーマ名は、
                 <code>schema</code> オプションで指定したスキーマ名より優先されます。
@@ -165,7 +165,7 @@ $tableBugs = new Bugs(array('name' => 'bug_db.bugs',
             <para>
                 すべてのテーブルは主キーを持たなければなりません。
                 主キーカラムを宣言するには、protected 変数
-                <code>$_primary</code> を使用します。
+                <varname>$_primary</varname> を使用します。
                 これは、単一のカラムの名前を表す文字列か、
                 もし主キーが複合キーの場合はカラム名の配列となります。
             </para>
@@ -263,7 +263,7 @@ class Bugs extends Zend_Db_Table_Abstract
                         はテーブル名が "schema.table" 形式の場合にスキーマを設定し、
                         <code>describeTable()</code> をコールしてメタデータ情報を取得します。
                         このメソッドが返す配列のカラム
-                        <code>$_cols</code> の情報をデフォルトで使用します。
+                        <varname>$_cols</varname> の情報をデフォルトで使用します。
                         このメソッドをオーバーライドすると、カラムを指定することができます。
                     </para>
                 </listitem>
@@ -272,7 +272,7 @@ class Bugs extends Zend_Db_Table_Abstract
                     <para>
                         <code>_setupPrimaryKey()</code>
                         はデフォルトの主キーを <code>describeTable()</code>
-                        から取得した内容に設定し、配列 <code>$_cols</code>
+                        から取得した内容に設定し、配列 <varname>$_cols</varname>
                         に主キーカラムが含まれているかどうかを調べます。
                         このメソッドをオーバーライドすると、主キーカラムを指定することができます。
                     </para>
@@ -503,7 +503,7 @@ $data = array(
 
             <para>
                 <classname>Zend_Db_Table_Abstract</classname> で protected 変数
-                <code>$_sequence</code> の値を boolean の <code>true</code>
+                <varname>$_sequence</varname> の値を boolean の <code>true</code>
                 にすると、そのテーブルは自動インクリメントの主キーを持つものとみなされます。
             </para>
 
@@ -535,7 +535,7 @@ class Bugs extends Zend_Db_Table_Abstract
                 新しい行を作成した際にはこのシーケンスを用いてキーの値を生成します。
                 IBM DB2 には、これと同等の動作をする <code>IDENTITY</code> という記法があります。
                 これらの記法を使用する場合は、<classname>Zend_Db_Table</classname> クラスで
-                <code>$_sequence</code> を <code>true</code> と設定し、
+                <varname>$_sequence</varname> を <code>true</code> と設定し、
                 自動インクリメントを有効にしてください。
             </para>
 
@@ -552,7 +552,7 @@ class Bugs extends Zend_Db_Table_Abstract
             </para>
 
             <para>
-                <code>$_sequence</code> に文字列を設定すると、
+                <varname>$_sequence</varname> に文字列を設定すると、
                 <classname>Zend_Db_Table_Abstract</classname> は、それがデータベースの
                 シーケンスオブジェクトの名前であるとみなします。
                 シーケンスを実行して新しい値を生成し、その値を
@@ -601,7 +601,7 @@ class Bugs extends Zend_Db_Table_Abstract
             </para>
 
             <para>
-                <code>$_sequence</code> の値を boolean の <code>false</code>
+                <varname>$_sequence</varname> の値を boolean の <code>false</code>
                 にすると、<classname>Zend_Db_Table_Abstract</classname> はそのテーブルが自然キーを持つものとみなします。
                 <code>insert()</code> メソッドを使用する際には、
                 主キーカラムの値をデータの配列で指定する必要があります。
@@ -1510,7 +1510,7 @@ $bugs->setMetadataCacheInClass(false);
 
             <para>
                 このフラグはデフォルトで有効になっています。この場合は、
-                <code>$_metadata</code> 配列はインスタンスの作成時にのみ作成されます。
+                <varname>$_metadata</varname> 配列はインスタンスの作成時にのみ作成されます。
             </para>
         </sect3>
     </sect2>
@@ -1712,7 +1712,7 @@ class Bugs extends Zend_Db_Table_Abstract
             <para>
                 たとえば、テーブルのクラス名が
                 "<code>BugsProducts</code>" だとすると、クラスのプロパティ
-                <code>$_name</code> を明示的に宣言しなかった場合は
+                <varname>$_name</varname> を明示的に宣言しなかった場合は
                 データベース内の物理的なテーブル
                 "<code>bugs_products</code>" にマッチします。この関連付けでは、
                 "CamelCase" 形式のクラス名が小文字に変換され、単語の区切りがアンダースコアに変わります。
@@ -1720,13 +1720,13 @@ class Bugs extends Zend_Db_Table_Abstract
 
             <para>
                 データベースのテーブル名を、クラス名とは独立したものにすることもできます。
-                その場合は、テーブルクラスのプロパティ <code>$_name</code>
+                その場合は、テーブルクラスのプロパティ <varname>$_name</varname>
                 に、そのクラス名を指定します。
             </para>
 
             <para>
                 <classname>Zend_Db_Table_Abstract</classname> は、クラス名とテーブル名を関連付けるための語尾変化は行いません。
-                テーブルクラスで <code>$_name</code> の宣言を省略すると、
+                テーブルクラスで <varname>$_name</varname> の宣言を省略すると、
                 そのクラス名に正確に一致する名前のテーブルと関連付けられます。
             </para>
 

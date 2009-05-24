@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <sect1 id="zend.date.constants">
 
     <title>日付関数全般用の定数</title>
 
     <para>
-        <classname>Zend_Date</classname> のメソッドでパラメータ <code>$parts</code>
+        <classname>Zend_Date</classname> のメソッドでパラメータ <varname>$parts</varname>
         を持つものはすべて、以下の定数のいずれかをパラメータとして指定することができます。
         これにより、日付の中の特定の要素や使用する書式
         (例: RFC 822) を指定します。
@@ -561,7 +561,7 @@
             特に注意すべきなのは <classname>Zend_Date::DATES</classname> です。これは、
             <classname>Zend_Date</classname> で <emphasis>入力</emphasis>
             フォーマットを指定する際に使用すると、特別な働きをします。
-            入力フォーマットとして <code>$part</code> で使用すると、
+            入力フォーマットとして <varname>$part</varname> で使用すると、
             この定数は、さまざまな類似日付書式をできるだけ受け入れようとします。
             経験則にもとづいて入力日付文字列を自動的に分解し、単純なエラーを (もしあれば)
             できるだけ修正します。たとえば年、月、日の順序がおかしい場合などです。

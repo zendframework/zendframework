@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <sect1 id="zend.controller.action">
     <title>アクションコントローラ</title>
 
@@ -283,7 +283,7 @@ if ($this->_hasParam('id') {
             ビューの統合のためのちょっとした柔軟な仕組みを提供しています。
             これを行うのは <code>initView()</code> と <code>render()</code>
             のふたつのメソッドです。前者のメソッドはパブリックプロパティ
-            <code>$view</code> の遅延読み込みを行い、
+            <varname>$view</varname> の遅延読み込みを行い、
             後者のメソッドはアクションの要求にもとづいてビューをレンダリングします。
             その際に、ディレクトリ階層をもとにスクリプトのパスを決定します。
         </para>
@@ -297,9 +297,9 @@ if ($this->_hasParam('id') {
                 をコールしてビューオブジェクトを取得しますが、
                 その初期化はいつでも好きなときに行うことができます。
                 デフォルトでは、取得した結果は <classname>Zend_View</classname>
-                オブジェクトのプロパティ <code>$view</code> に格納されますが、
+                オブジェクトのプロパティ <varname>$view</varname> に格納されますが、
                 <classname>Zend_View_Interface</classname> を実装したクラスなら何でも好きなものを使用することができます。
-                <code>$view</code> がすでに初期化されている場合は、そのプロパティの内容を返します。
+                <varname>$view</varname> がすでに初期化されている場合は、そのプロパティの内容を返します。
             </para>
 
             <para>
@@ -346,16 +346,16 @@ string render(string $action = null,
                 <code>render()</code> はビュースクリプトをレンダリングします。
                 引数を省略した場合は、<code>[controller]/[action].phtml</code>
                 が指定されたものとみなします（<code>.phtml</code>
-                は <code>$viewSuffix</code> プロパティの値です）。
-                <code>$action</code> を指定すると、<code>[controller]</code>
+                は <varname>$viewSuffix</varname> プロパティの値です）。
+                <varname>$action</varname> を指定すると、<code>[controller]</code>
                 ディレクトリにあるその名前のテンプレートをレンダリングします。
                 <code>[controller]</code> ディレクトリを使用しないようにするには、
-                <code>$noController</code> に true を指定します。
+                <varname>$noController</varname> に true を指定します。
                 テンプレートをレンダリングした結果はレスポンスオブジェクトに格納されます。
                 レスポンスオブジェクトの中の、
                 <link linkend="zend.controller.response.namedsegments">
                 特定の名前をつけた部分</link> に格納したい場合は、
-                <code>$name</code> の値を指定します。
+                <varname>$name</varname> の値を指定します。
             </para>
 
             <note><para>

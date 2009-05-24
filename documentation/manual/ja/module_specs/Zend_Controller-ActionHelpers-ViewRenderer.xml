@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <sect3 id="zend.controller.actionhelpers.viewrenderer">
     <title>ViewRenderer</title>
 
@@ -184,7 +184,7 @@ $this->foo(); // Foo_View_Helper_Foo::foo() をコールします
                 <para>
                     <code>setView($view)</code>
                     は <code>ViewRenderer</code> が使用するビューオブジェクトを設定します。
-                    これは、クラスのプロパティ <code>$view</code> の値を設定します。
+                    これは、クラスのプロパティ <varname>$view</varname> の値を設定します。
                 </para>
             </listitem>
 
@@ -236,7 +236,7 @@ $this->foo(); // Foo_View_Helper_Foo::foo() をコールします
                 <para>
                     <code>setScriptAction($name)</code>
                     を使用すると、レンダリングするアクションスクリプトを指定することができます。
-                    <code>$name</code> は、スクリプト名から拡張子を除いたもの
+                    <varname>$name</varname> は、スクリプト名から拡張子を除いたもの
                     (そして、<code>noController</code> が指定されていない限り、
                     コントローラのディレクトリ名も除いたもの) となります。
                     指定しなかった場合は、リクエストオブジェクト内のアクションに基づいた名前の
@@ -424,7 +424,7 @@ $viewRenderer =
             <listitem><para>
                     <code>setInflector($inflector, $reference)</code> は、
                     <code>ViewRenderer</code> で使用する独自のインフレクタを設定します。
-                    <code>$reference</code> が true の場合は、
+                    <varname>$reference</varname> が true の場合は、
                     対象だけでなくサフィックスやモジュールディレクトリも
                     <code>ViewRenderer</code> のプロパティへの静的な参照とします。
             </para></listitem>
@@ -507,7 +507,7 @@ $viewRenderer =
                     オプションで、パスセグメントの名前を指定することもできます。
                     このメソッドを使用する際には、<code>ViewRenderer</code>
                     はスクリプト名を自動的に決定することはありません。
-                    そのかわりに、<code>$script</code> で指定された内容を直接
+                    そのかわりに、<varname>$script</varname> で指定された内容を直接
                     ビューオブジェクトの <code>render()</code> メソッドに渡します。
                 </para>
 
@@ -532,7 +532,7 @@ $viewRenderer =
                     <code>getViewScript($action, $vars)</code>
                     は、渡されたアクションや <code>$vars</code>
                     で指定した変数の値に基づいてビュースクリプトのパスを作成します。
-                    <code>$vars</code> 配列のキーは、パスを指定するためのキー
+                    <varname>$vars</varname> 配列のキーは、パスを指定するためのキー
                     ('moduleDir'、'module'、'controller'、'action' および 'suffix')
                     のいずれかとなります。渡された変数の値をもとにしてパスを作成します。
                     なにも渡されなかった場合は、現在のリクエストの内容をもとにしてパスを作成します。
@@ -567,11 +567,11 @@ $viewRenderer =
             <listitem>
                 <para>
                     <code>render($action, $name, $noController)</code>
-                    は、まず <code>$name</code> あるいは
-                    <code>$noController</code> が指定されているかどうかを調べます。
+                    は、まず <varname>$name</varname> あるいは
+                    <varname>$noController</varname> が指定されているかどうかを調べます。
                     指定されている場合は、ViewRenderer の対応するフラグ
                     (それぞれ responseSegment と noController) を設定します。
-                    次に、<code>$action</code> 引数が指定されていれば、
+                    次に、<varname>$action</varname> 引数が指定されていれば、
                     それを <code>getViewScript()</code> に渡します。
                     最後に、取得したビュースクリプトのパスを
                     <code>renderScript()</code> に渡します。
@@ -601,9 +601,9 @@ $viewRenderer =
                 <para>
                     <code>renderBySpec($action, $vars, $name)</code>
                     は、パス指定用の変数を渡してビュースクリプトのパスを決定します。
-                    <code>$action</code> および <code>$vars</code> の内容を
+                    <varname>$action</varname> および <varname>$vars</varname> の内容を
                     <code>getScriptPath()</code> に、そしてその結果得られたスクリプトのパスと
-                    <code>$name</code> を <code>renderScript()</code> に渡します。
+                    <varname>$name</varname> を <code>renderScript()</code> に渡します。
                 </para>
             </listitem>
         </itemizedlist>

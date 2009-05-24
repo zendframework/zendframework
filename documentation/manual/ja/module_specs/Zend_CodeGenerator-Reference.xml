@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <sect1 id="zend.codegenerator.reference">
     <title>Zend_CodeGeneratorリファレンス</title>
 
@@ -33,7 +33,7 @@ abstract class Zend_CodeGenerator_Abstract
             <para>
                 コンストラクタは最初に<code>_init()</code>を呼び出します。
                 （それは、具体的に拡張するクラスを実装するために空のままにされます）
-                それから<code>setOptions()</code>に<code>$options</code>パラメータを渡し、
+                それから<code>setOptions()</code>に<varname>$options</varname>パラメータを渡し、
                 最後に<code>_prepare()</code>を呼び出します。
                 （<!-- TODO -->again, 
                 クラスの拡張によって実装されます。）

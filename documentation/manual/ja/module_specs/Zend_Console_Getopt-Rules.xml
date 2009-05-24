@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <sect1 id="zend.console.getopt.rules">
     <title>Getopt の規則の宣言</title>
     <para>
@@ -14,7 +14,7 @@
         コンストラクタには、さらに二つの引数を指定します。
         これらはオプションです。二番目の引数に指定するのは
         コマンドライン引数です。デフォルトは
-        <code>$_SERVER['argv']</code> となります。
+        <varname>$_SERVER['argv']</varname> となります。
     </para>
     <para>
         コンストラクタの三番目の引数には、設定オプションを指定します。

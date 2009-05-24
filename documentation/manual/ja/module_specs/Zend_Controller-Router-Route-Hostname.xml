@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <sect3 id="zend.controller.router.routes.hostname">
     <title>Zend_Controller_Router_Route_Hostname</title>
 
@@ -49,7 +49,7 @@ $router->addRoute('user', $hostnameRoute->chain($plainPathRoute);
         hostname ルートの後には path ルートをつなげなければなりません。
         例に示したように、<code>$hostnameRoute->chain($pathRoute);</code>
         のようにコールすることになります。こうすると、
-        <code>$hostnameRoute</code> には何も変更は加えられませんが、新たなルート
+        <varname>$hostnameRoute</varname> には何も変更は加えられませんが、新たなルート
         (<classname>Zend_Controller_Router_Route_Chain</classname>) が返されます。
         そして、これをルータに渡します。
     </para>

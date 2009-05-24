@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <sect1 id="zend.cache.theory">
     <title>キャッシュの仕組み</title>
     <para>
@@ -59,7 +59,7 @@ $cache = Zend_Cache::factory($frontendName,
                              $backendOptions);
 ]]></programlisting>
          <para>
-            これ以降のドキュメントでは、<code>$cache</code>
+            これ以降のドキュメントでは、<varname>$cache</varname>
             の中身が有効なフロントエンドになっているものとします。また、
             選択したバックエンドにパラメータを渡す方法は理解できているものとします。
         </para>
@@ -83,7 +83,7 @@ $cache->save($huge_data, 'myUniqueID', array('tagA', 'tagB', 'tagC'));
 ]]></programlisting>
         <note><para>
             <code>save()</code> メソッドには、オプションの第四引数
-            <code>$specificLifetime</code> を指定できることに注意しましょう
+            <varname>$specificLifetime</varname> を指定できることに注意しましょう
             (false 以外を指定することで、このキャッシュレコードの有効期限を特定の値に設定できます)。
         </para></note>
     </sect2>

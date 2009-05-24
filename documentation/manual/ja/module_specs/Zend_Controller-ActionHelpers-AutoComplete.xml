@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <sect3 id="zend.controller.actionhelpers.autocomplete">
     <title>AutoComplete</title>
 
@@ -102,7 +102,7 @@ class FooController extends Zend_Controller_Action
         <listitem><para>
                 <code>direct($data, $sendNow = true, $keepLayouts =
                     false)</code> は、このヘルパーをヘルパーブローカのメソッドとしてコールする場合に使用します。
-                <code>$sendNow</code> フラグは、
+                <varname>$sendNow</varname> フラグは、
                 <code>sendAutoCompletion()</code> と
                 <code>prepareAutoCompletion()</code> のどちらをコールするかを指定するものです。
         </para></listitem>

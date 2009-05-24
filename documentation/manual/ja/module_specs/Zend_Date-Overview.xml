@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <sect1 id="zend.date.overview">
 
     <title>Zend_Date API の概要</title>
@@ -23,7 +23,7 @@
                 いくつかのメソッドでは、PHP の <code>date()</code> 関数と似た形式の日付書式文字列を使用します。
                 PHP の日付書式指定子のほうが ISO 書式指定子よりなじみがあるという場合は、
                 <classname>Zend_Date::setOptions(array('format_type' => 'php'))</classname>
-                とすることができます。こうすると、<code>$format</code>
+                とすることができます。こうすると、<varname>$format</varname>
                 パラメータを持つすべての関数で PHP の日付書式指定子が使用できるようになります。
                 <classname>Zend_Date::setOptions(array('format_type' => 'iso'))</classname>
                 とすると、デフォルトのモードに戻ります。このモードは、
@@ -157,20 +157,20 @@
         </para>
 
         <para>
-            ほとんどのメソッドで、引数 <code>$part</code> に定数を指定できます。
+            ほとんどのメソッドで、引数 <varname>$part</varname> に定数を指定できます。
             これにより、日付のどの部分を選択するかを指定します。この定数は、
             たとえば <classname>Zend_Date::HOUR</classname> のようになります。
             これらの定数は、以下のすべての関数で使用できます。使用可能なすべての定数の一覧は
             <xref linkend="zend.date.constants.list" /> にあります。
-            <code>$part</code> を省略した場合は、<classname>Zend_Date::TIMESTAMP</classname>
+            <varname>$part</varname> を省略した場合は、<classname>Zend_Date::TIMESTAMP</classname>
             が指定されたものとみなします。また、ユーザ定義の書式を
-            <code>$part</code> で使用することもできます。ここには、
+            <varname>$part</varname> で使用することもできます。ここには、
             <link linkend="zend.locale.date.normalize"><classname>Zend_Locale_Format::getDate()</classname>
             </link>
             と同様のコードを使用します。
             日付オブジェクトが明らかに無効な値を用いて作成された場合 (たとえば月が 12 より大きいなど) は、
             <classname>Zend_Date</classname> は例外をスローします。ただし、特定の日付フォーマットが指定されている場合、
-            つまり <code>$part</code> が <code>null</code> あるいは <classname>Zend_Date::DATES</classname> ("あいまいな" フォーマット)
+            つまり <varname>$part</varname> が <code>null</code> あるいは <classname>Zend_Date::DATES</classname> ("あいまいな" フォーマット)
             のいずれかである場合は別です。
         </para>
 
@@ -190,27 +190,27 @@ echo $date3, "\n"; // 出力は "Mar 3, 2007 12:00:00 AM" となります
         </example>
 
         <para>
-            オプションのパラメータ <code>$locale</code> を指定すると、
-            その <code>$locale</code> をもとに <code>$date</code> オペランドを解決します。
+            オプションのパラメータ <varname>$locale</varname> を指定すると、
+            その <varname>$locale</varname> をもとに <varname>$date</varname> オペランドを解決します。
             つまり、日付文字列に含まれる月名や曜日名などを、そのロケールにあわせて適切に解釈します
             (<code>
             <link linkend="zend.locale.date.normalize">Zend_Locale_Format::getDate()</link>
             </code> を参照ください)。
-            各地域固有の形式の文字列で <code>$date</code> オペランドが指定された際に
-            自動で正規化が行われるのは、<code>$part</code> が
+            各地域固有の形式の文字列で <varname>$date</varname> オペランドが指定された際に
+            自動で正規化が行われるのは、<varname>$part</varname> が
             定数 <classname>Zend_Date::DATE*</classname> あるいは <classname>Zend_Date::TIME*</classname> のいずれかであるときです。
-            <code>$date</code> が日付を含む文字列の場合は、
+            <varname>$date</varname> が日付を含む文字列の場合は、
             月名や曜日名をパースする際に使用する言語はロケールをもとに決定します。
-            入力パラメータ <code>$date</code> が指定されなかった場合は、
-            <code>$locale</code> パラメータの内容をもとにして地域化した結果
+            入力パラメータ <varname>$date</varname> が指定されなかった場合は、
+            <varname>$locale</varname> パラメータの内容をもとにして地域化した結果
             (日付書式を文字列で表したもの) を出力します。
-            入力パラメータ <code>$date</code> に具体的な型が指定されている場合もあります
-            (たとえば <code>addHour()</code> では <code>$hour</code> です)。
+            入力パラメータ <varname>$date</varname> に具体的な型が指定されている場合もあります
+            (たとえば <code>addHour()</code> では <varname>$hour</varname> です)。
             このような場合でも、引数として <classname>Zend_Date</classname>
             オブジェクトを使用できることに注意しましょう。
-            <code>$locale</code> を指定しなかった場合は、
+            <varname>$locale</varname> を指定しなかった場合は、
             現在のオブジェクトのロケールを使用して
-            <code>$date</code> を解釈します。あるいは出力用書式を選択します。
+            <varname>$date</varname> を解釈します。あるいは出力用書式を選択します。
         </para>
 
         <para>
@@ -242,16 +242,16 @@ $date = new Zend_Date('31.Feb.2007');
             は、日付全般に対して使用できます。それぞれのメソッドは、
             そのインスタンスが保持する日付の値を操作します。
             これらのメソッドのうち、<code>get()</code>
-            以外ではすべて <code>$date</code> オペランドが必要となります。
+            以外ではすべて <varname>$date</varname> オペランドが必要となります。
             ここには <classname>Zend_Date</classname> のインスタンスか
             数値文字列、あるいは整数値を指定します。
-            これらのメソッドで <code>$date</code> にオブジェクト以外を指定した場合、
+            これらのメソッドで <varname>$date</varname> にオブジェクト以外を指定した場合、
             それはタイムスタンプであるとみなされます。
-            しかし、<code>$part</code> オペランドを使用すると、
+            しかし、<varname>$part</varname> オペランドを使用すると、
             ふたつの日付データが日付のどの部分を表すものなのかを指定できます。
             たとえば "年"、"分" などが指定できます。それだけではなく、
             "December 31, 2007 23:59:59" のような長い形式の文字列も
-            <code>$date</code> に指定できます。
+            <varname>$date</varname> に指定できます。
             <code>compare()</code> および <code>get()</code>
             以外のメソッドは、処理の結果としてオブジェクト内の日付が変更されます。
         </para>
@@ -285,10 +285,10 @@ print $date;
 
         <para>
             これらの便利なメソッドの機能は、基本操作メソッドと同等です。
-            しかし、<code>$date</code> オペランドに文字列や整数値を使用する場合は、
+            しかし、<varname>$date</varname> オペランドに文字列や整数値を使用する場合は、
             メソッド名のサフィックスが指す日付要素以外を指定することはできません。
-            つまり、<code>$date</code> が文字列あるいは整数値の場合は、
-            <code>$date</code> オペランドの単位が
+            つまり、<varname>$date</varname> が文字列あるいは整数値の場合は、
+            <varname>$date</varname> オペランドの単位が
             メソッド名によって ("Year" や "Minute" などに) 決まるということです。
         </para>
 
@@ -367,8 +367,8 @@ print $date;
                                 <ulink url="http://ja.wikipedia.org/wiki/%E6%97%A5">Day (日)</ulink>
                             </entry>
                             <entry>
-                             <classname>Zend_Date::DAY_SHORT</classname> は <code>$date</code>
-                             から抽出します。これは、<code>$date</code> オペランドが
+                             <classname>Zend_Date::DAY_SHORT</classname> は <varname>$date</varname>
+                             から抽出します。これは、<varname>$date</varname> オペランドが
                              <classname>Zend_Date</classname> のインスタンスであるか、
                              あるいは数値文字列である場合に行われます。
                              それ以外の場合は、以下の定数によって指定した規約に基づいて抽出します。
@@ -382,8 +382,8 @@ print $date;
                                 <ulink url="http://ja.wikipedia.org/wiki/%E9%80%B1">Week (週)</ulink>
                             </entry>
                             <entry>
-                             <classname>Zend_Date::WEEK</classname> は <code>$date</code>
-                             から抽出します。これは、<code>$date</code> オペランドが
+                             <classname>Zend_Date::WEEK</classname> は <varname>$date</varname>
+                             から抽出します。これは、<varname>$date</varname> オペランドが
                              <classname>Zend_Date</classname> のインスタンスであるか、
                              あるいは数値文字列である場合に行われます。
                              それ以外の場合は例外が発生します (グレゴリオ暦とみなして処理します)。
@@ -392,10 +392,10 @@ print $date;
                         <row>
                             <entry>Date (日)</entry>
                             <entry>
-                             <classname>Zend_Date::DAY_MEDIUM</classname> は <code>$date</code>
-                             から抽出します。これは、<code>$date</code> オペランドが
+                             <classname>Zend_Date::DAY_MEDIUM</classname> は <varname>$date</varname>
+                             から抽出します。これは、<varname>$date</varname> オペランドが
                              <classname>Zend_Date</classname> のインスタンスである場合に行われます。
-                             それ以外の場合は、文字列 <code>$date</code>
+                             それ以外の場合は、文字列 <varname>$date</varname>
                              を正規化して Zend_Date::DATE_MEDIUM 形式の日付にしようとします。
                              <classname>Zend_Date::DAY_MEDIUM</classname> の書式は、
                              そのオブジェクトのロケールに依存します。
@@ -405,8 +405,8 @@ print $date;
                             <entry>Weekday (曜日)</entry>
                             <entry>
                              曜日は、0 (日曜日) から 6 (土曜日) までの数字で表されます。
-                             <classname>Zend_Date::WEEKDAY_DIGIT</classname> は <code>$date</code>
-                             から抽出します。これは、<code>$date</code> オペランドが
+                             <classname>Zend_Date::WEEKDAY_DIGIT</classname> は <varname>$date</varname>
+                             から抽出します。これは、<varname>$date</varname> オペランドが
                              <classname>Zend_Date</classname> のインスタンスであるか、
                              あるいは数値文字列である場合に行われます。
                              それ以外の場合は、以下の定数によって指定した規約に基づいて抽出します。
@@ -460,7 +460,7 @@ print $date;
             <para>
                 便利なメソッド群ではなく以下の基本操作を使用する場合には、
                 <link linkend="zend.date.constants.list">適切な定数</link>
-                を <code>$part</code> パラメータで指定します。
+                を <varname>$part</varname> パラメータで指定します。
             </para>
 
             <table id="id.date.basic.operations.table">
@@ -481,8 +481,8 @@ print $date;
                                 </para>
                                 <para>
                                     <code>get($part)</code> を使用して、このオブジェクトの日付の
-                                    <code>$part</code> の部分を取得します。
-                                    結果は、<code>$locale</code>
+                                    <varname>$part</varname> の部分を取得します。
+                                    結果は、<varname>$locale</varname>
                                     にもとづいて地域化された書式の文字列か整数値となります。
                                     BCMath 拡張モジュールを使用している場合は、
                                     大きな値の場合に整数ではなく数値文字列が返されるかもしれません。
@@ -500,8 +500,8 @@ print $date;
                                     <emphasis>set($date, $part = null, $locale = null)</emphasis>
                                 </para>
                                 <para>
-                                    ロケール <code>$locale</code> の入力データ <code>$date</code>
-                                    から、 <code>$part</code> に対応する部分の値を
+                                    ロケール <varname>$locale</varname> の入力データ <varname>$date</varname>
+                                    から、 <varname>$part</varname> に対応する部分の値を
                                     現在のオブジェクトに設定します。
                                 </para>
                             </entry>
@@ -513,8 +513,8 @@ print $date;
                                     <emphasis>add($date, $part = null, $locale = null)</emphasis>
                                 </para>
                                 <para>
-                                    ロケール <code>$locale</code> の入力データ <code>$date</code>
-                                    から、 <code>$part</code> に対応する部分の値を
+                                    ロケール <varname>$locale</varname> の入力データ <varname>$date</varname>
+                                    から、 <varname>$part</varname> に対応する部分の値を
                                     現在のオブジェクトに加えます。
                                 </para>
                             </entry>
@@ -526,8 +526,8 @@ print $date;
                                     <emphasis>sub($date, $part = null, $locale = null)</emphasis>
                                 </para>
                                 <para>
-                                    ロケール <code>$locale</code> の入力データ <code>$date</code>
-                                    から、 <code>$part</code> に対応する部分の値を
+                                    ロケール <varname>$locale</varname> の入力データ <varname>$date</varname>
+                                    から、 <varname>$part</varname> に対応する部分の値を
                                     現在のオブジェクトから引きます。
                                 </para>
                             </entry>
@@ -540,8 +540,8 @@ print $date;
                                 </para>
                                 <para>
                                     オブジェクトの複製を返します。もとのオブジェクトの日付のうち
-                                    <code>$part</code> の部分のみがコピーされます。
-                                    複製のロケールは、<code>$locale</code> で任意のものに指定できます。
+                                    <varname>$part</varname> の部分のみがコピーされます。
+                                    複製のロケールは、<varname>$locale</varname> で任意のものに指定できます。
                                 </para>
                             </entry>
                         </row>
@@ -552,7 +552,7 @@ print $date;
                                     <emphasis>compare($date, $part = null, $locale = null)</emphasis>
                                 </para>
                                 <para>
-                                    <code>$date</code> の <code>$part</code> 部分を
+                                    <varname>$date</varname> の <varname>$part</varname> 部分を
                                     このオブジェクトのタイムスタンプと比較します。等しい場合は 0、
                                     このオブジェクトの値のほうが $date の内容より新しい場合に 1、
                                     それ以外の場合に -1 を返します。
@@ -594,8 +594,8 @@ print $date;
                                 <emphasis>equals($date, $part = null, $locale = null)</emphasis>
                             </para>
                             <para>
-                                ロケール <code>$locale</code> で格納されている日付 <code>$date</code>
-                                の要素 <code>$part</code> がこのオブジェクトの日付要素と等しい場合に true、
+                                ロケール <varname>$locale</varname> で格納されている日付 <varname>$date</varname>
+                                の要素 <varname>$part</varname> がこのオブジェクトの日付要素と等しい場合に true、
                                 それ以外の場合に false を返します。
                             </para>
                         </entry>
@@ -607,9 +607,9 @@ print $date;
                                 <emphasis>isEarlier($date, $part = null, $locale = null)</emphasis>
                             </para>
                             <para>
-                                このオブジェクトの日付要素 <code>$part</code> が、
-                                ロケール <code>$locale</code> で格納されている日付 <code>$date</code>
-                                の要素 <code>$part</code> より前である場合に true を返します。
+                                このオブジェクトの日付要素 <varname>$part</varname> が、
+                                ロケール <varname>$locale</varname> で格納されている日付 <varname>$date</varname>
+                                の要素 <varname>$part</varname> より前である場合に true を返します。
                             </para>
                         </entry>
                     </row>
@@ -620,9 +620,9 @@ print $date;
                                 <emphasis>isLater($date, $part = null, $locale = null)</emphasis>
                             </para>
                             <para>
-                                このオブジェクトの日付要素 <code>$part</code> が、
-                                ロケール <code>$locale</code> で格納されている日付 <code>$date</code>
-                                の要素 <code>$part</code> より後である場合に true を返します。
+                                このオブジェクトの日付要素 <varname>$part</varname> が、
+                                ロケール <varname>$locale</varname> で格納されている日付 <varname>$date</varname>
+                                の要素 <varname>$part</varname> より後である場合に true を返します。
                             </para>
                         </entry>
                     </row>
@@ -723,10 +723,10 @@ print $date;
                             </para>
                             <para>
                                 直接実行することもできますし、マジックメソッド <code>__toString()</code>
-                                から間接的にコールされることもあります。The
+                                から間接的にコールされることもあります。
                                 <code>toString()</code> メソッドは、自動的にオブジェクトの値の書式を設定します。
                                 この書式は、オブジェクトのロケールか、あるいはオプションで指定した
-                                <code>$locale</code> にもとづいて決まります。
+                                <varname>$locale</varname> にもとづいて決まります。
                                 サポートする書式コードの一覧は、
                                 <xref linkend="zend.date.constants.selfdefinedformats" />
                                 を参照ください。
@@ -818,9 +818,9 @@ print $date;
                                 <emphasis>toValue($part = null)</emphasis>
                             </para>
                             <para>
-                                指定した日付要素 <code>$part</code> の、
+                                指定した日付要素 <varname>$part</varname> の、
                                 そのオブジェクトのロケールにもとづいた整数表現を返します。
-                                <code>$part</code> で <classname>Zend_Date::MONTH_NAME_SHORT</classname>
+                                <varname>$part</varname> で <classname>Zend_Date::MONTH_NAME_SHORT</classname>
                                 のような非数値要素を選択した場合は、
                                 <code>false</code> を返します。
                                 <emphasis>注意:</emphasis> このメソッドは
@@ -841,8 +841,8 @@ print $date;
                                 <emphasis>get($part = null, $locale = null)</emphasis>
                             </para>
                             <para>
-                                このメソッドは、オブジェクトの日付要素 <code>$part</code>
-                                をロケール <code>$locale</code> に変換したものを、
+                                このメソッドは、オブジェクトの日付要素 <varname>$part</varname>
+                                をロケール <varname>$locale</varname> に変換したものを、
                                 文字列あるいは整数値で返します。
                                 詳細な情報は <xref linkend="id.date.basic.operations" />
                                 を参照ください。
@@ -858,7 +858,7 @@ print $date;
                             <para>
                                 この関数は、<code>new Zend_Date()</code> と同等です。
                                 これは、現在の日付を表す <classname>Zend_Date</classname>
-                                オブジェクトに、ロケール <code>$locale</code>
+                                オブジェクトに、ロケール <varname>$locale</varname>
                                 を指定して返します。
                             </para>
                         </entry>

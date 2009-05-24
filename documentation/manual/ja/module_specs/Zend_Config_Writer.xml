@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <sect1 id="zend.config.writer.introduction">
     <title>Zend_Config_Writer</title>
     <para>
@@ -12,8 +12,8 @@
         まず、<code>filename</code> や <code>config</code>
         のオプションを指定してライターのインスタンスを作成します。
         それからライターの <code>write()</code> メソッドをコールすると、
-        設定ファイルが作成されます。<code>$filename</code> や
-        <code>$config</code> を、直接 <code>write()</code>
+        設定ファイルが作成されます。<varname>$filename</varname> や
+        <varname>$config</varname> を、直接 <code>write()</code>
         メソッドで設定することもできます。現在は、次のライターが
         <classname>Zend_Config_Writer</classname> に同梱されています。
     </para>

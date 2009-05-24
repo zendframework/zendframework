@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <sect1 id="zend.debug.dumping">
 
     <title>変数の出力</title>
@@ -21,20 +21,20 @@ Zend_Debug::dump($var, $label=null, $echo=true);
     </example>
 
     <para>
-        引数 <code>$var</code> で指定した式や変数についての情報を
+        引数 <varname>$var</varname> で指定した式や変数についての情報を
         <classname>Zend_Debug::dump()</classname> メソッドが出力します。
     </para>
 
     <para>
-        引数 <code>$label</code> は、<classname>Zend_Debug::dump()</classname>
+        引数 <varname>$label</varname> は、<classname>Zend_Debug::dump()</classname>
         の出力の前に出力される文字列です。
         これは、たとえば複数の変数の内容を出力する際に便利です。
     </para>
 
     <para>
-        論理型の <code>$echo</code> で、<code>Zend::dump()</code> の結果を
+        論理型の <varname>$echo</varname> で、<code>Zend::dump()</code> の結果を
         echo するかどうかを指定します。<code>TRUE</code> の場合は出力が
-        echo されます。<code>$echo</code> の設定にかかわらず、
+        echo されます。<varname>$echo</varname> の設定にかかわらず、
         出力結果は常にメソッドの返り値となります。
     </para>
 

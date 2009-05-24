@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <sect1 id="zend.auth.adapter.openid">
 
     <title>Open ID 認証</title>
@@ -71,9 +71,9 @@
             次の例は、<classname>Zend_Auth_Adapter_OpenId</classname> の使用方法を示すものです。
             先ほど説明したように、<classname>Zend_Auth_Adapter_OpenId::authenticate()</classname>
             が 2 回コールされています。一度目、つまり HTML フォームから送信されたときは
-            <code>$_POST['openid_action']</code> が <code>"login"</code>
+            <varname>$_POST['openid_action']</varname> が <code>"login"</code>
             となっており、二度目、つまり OpenID サーバからリダイレクトで戻ってきたときは
-            <code>$_GET['openid_mode']</code> あるいは <code>$_POST['openid_mode']</code>
+            <varname>$_GET['openid_mode']</varname> あるいは <code>$_POST['openid_mode']</code>
             が設定されています。
         </para>
 

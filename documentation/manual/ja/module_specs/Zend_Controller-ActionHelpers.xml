@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <sect1 id="zend.controller.actionhelpers" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>アクションヘルパー</title>
 
@@ -39,7 +39,7 @@
 
         <para>
             ヘルパーブローカは、<classname>Zend_Controller_Action</classname>
-            の <code>$_helper</code> に格納されます。
+            の <varname>$_helper</varname> に格納されます。
             このブローカを使用して、ヘルパーを取得したりコールしたりします。
             以下のような方法があります。
         </para>
@@ -169,7 +169,7 @@ Zend_Controller_Action_HelperBroker::addPath('./Plugins/Helpers',
 
         <para>
             ヘルパークラスがヘルパーブローカ内に存在するかどうかを調べるには
-            <code>hasHelper($name)</code> を使用します。<code>$name</code>
+            <code>hasHelper($name)</code> を使用します。<varname>$name</varname>
             には、ヘルパーのショートネーム (プレフィックスを除いたもの)
             を指定します。
         </para>
@@ -197,7 +197,7 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
 
         <para>
             どちらのメソッドも、引数はひとつだけです。
-            この引数 <code>$name</code>
+            この引数 <varname>$name</varname>
             には、ヘルパーのショートネーム (プレフィックスを除いたもの)
             を指定します。
         </para>
@@ -217,7 +217,7 @@ $redirector =
 
         <para>
             最後に、登録済みのヘルパーをブローカから削除するには
-            <code>removeHelper($name)</code> を使用します。<code>$name</code>
+            <code>removeHelper($name)</code> を使用します。<varname>$name</varname>
             には、ヘルパーのショートネーム (プレフィックスを除いたもの)
             を指定します。
         </para>

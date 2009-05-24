@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <sect1 id="zend.console.getopt.configuration">
     <title>Zend_Console_Getopt の設定</title>
 
@@ -111,7 +111,7 @@ $opts->setAliases(
         <title>引数リストの追加</title>
         <para>
             デフォルトでは、<classname>Zend_Console_Getopt</classname> は
-            <code>$_SERVER['argv']</code> の配列を使用して
+            <varname>$_SERVER['argv']</varname> の配列を使用して
             コマンドライン引数をパースします。
             コンストラクタの二番目の引数として、引数を含む別の配列を指定することもできます。
             さらに、もっと別の引数を追加するには

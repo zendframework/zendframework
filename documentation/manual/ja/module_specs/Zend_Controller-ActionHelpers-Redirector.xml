@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <sect3 id="zend.controller.actionhelpers.redirector">
     <title>Redirector</title>
 
@@ -81,9 +81,9 @@
                     <code>Redirector</code> がリダイレクトの際に絶対
                     URL を使用するようになります。
                     このオプションを設定すると、
-                    <code>$_SERVER['HTTP_HOST']</code> や
-                    <code>$_SERVER['SERVER_PORT']</code>、そして
-                    <code>$_SERVER['HTTPS']</code> の内容をもとにして
+                    <varname>$_SERVER['HTTP_HOST']</varname> や
+                    <varname>$_SERVER['SERVER_PORT']</varname>、そして
+                    <varname>$_SERVER['HTTPS']</varname> の内容をもとにして
                     リダイレクト用の完全な URL を作成します。
                     このオプションのデフォルト値はオフですが、
                     将来のリリースではデフォルトで有効になるかもしれません。

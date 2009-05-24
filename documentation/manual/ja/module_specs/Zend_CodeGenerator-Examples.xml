@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <sect1 id="zend.codegenerator.examples">
     <title>Zend_CodeGeneratorサンプル</title>
 
@@ -267,7 +267,7 @@ class Foo
         </para>
 
         <para>
-            下記の例では、前述の例のクラス定義の１つにつき<code>$foo</code>を定義したと仮定します。
+            下記の例では、前述の例のクラス定義の１つにつき<varname>$foo</varname>を定義したと仮定します。
         </para>
 
         <programlisting language="php"><![CDATA[

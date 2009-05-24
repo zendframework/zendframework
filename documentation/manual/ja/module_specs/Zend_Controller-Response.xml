@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <sect1 id="zend.controller.response">
     <title>レスポンスオブジェクト</title>
 
@@ -163,7 +163,7 @@ $front->dispatch();
                     <code>setHeader($name, $value, $replace = false)</code>
                     を使用して、個々のヘッダを設定します。デフォルトでは、
                     同名のヘッダがすでに存在した場合に既存のヘッダを置換することはありません。
-                    しかし、<code>$replace</code> を true に設定すると、
+                    しかし、<varname>$replace</varname> を true に設定すると、
                     既存のヘッダを上書きするようになります。
                 </para>
 
@@ -183,7 +183,7 @@ $front->dispatch();
 
                 <para>
                     内部的には、このメソッドは
-                    <code>$replace</code> フラグをオンにして
+                    <varname>$replace</varname> フラグをオンにして
                     <code>setHeader()</code> をコールしています。
                 </para>
             </listitem>
@@ -314,7 +314,7 @@ array(
             <listitem>
                 <para>
                     <code>setBody()</code> および <code>appendBody()</code>
-                    の二番目のパラメータである <code>$name</code>
+                    の二番目のパラメータである <varname>$name</varname>
                     に、セグメント名を渡すことができます。
                     これを指定すると、指定したセグメントの内容を上書きします
                     (存在しない場合は新たに作成し、配列に追加します)。
@@ -328,7 +328,7 @@ array(
             <listitem>
                 <para>
                     <code>prepend($name, $content)</code> は、
-                    <code>$name</code> という名前のセグメントを作成して、
+                    <varname>$name</varname> という名前のセグメントを作成して、
                     それを配列の先頭に追加します。同じ名前のセグメントが存在する場合は、
                     まずそれを削除してから追加します(つまり、既存のものを上書きします)。
                 </para>
@@ -337,7 +337,7 @@ array(
             <listitem>
                 <para>
                     <code>append($name, $content)</code> は、
-                    <code>$name</code> という名前のセグメントを作成して、
+                    <varname>$name</varname> という名前のセグメントを作成して、
                     それを配列の最後に追加します。同じ名前のセグメントが存在する場合は、
                     まずそれを削除してから追加します(つまり、既存のものを上書きします)。
                 </para>
@@ -346,10 +346,10 @@ array(
             <listitem>
                 <para>
                     <code>insert($name, $content, $parent = null, $before =
-                        false)</code> は、<code>$name</code> という名前のセグメントを作成します。
-                    <code>$parent</code> セグメントを指定すると、
+                        false)</code> は、<varname>$name</varname> という名前のセグメントを作成します。
+                    <varname>$parent</varname> セグメントを指定すると、
                     新しいセグメントはそのセグメントの前か後ろ
-                    (<code>$before</code> の値で決まります)
+                    (<varname>$before</varname> の値で決まります)
                     に配置されます。同じ名前のセグメントが存在する場合は、
                     まずそれを削除してから追加します(つまり、既存のものを上書きします)。
                 </para>
@@ -358,7 +358,7 @@ array(
             <listitem>
                 <para>
                     <code>clearBody($name = null)</code>
-                    に <code>$name</code> を指定すると、その名前のセグメントを消去します
+                    に <varname>$name</varname> を指定すると、その名前のセグメントを消去します
                     (省略した場合は、配列全体を消去します)。
                 </para>
             </listitem>
@@ -366,10 +366,10 @@ array(
             <listitem>
                 <para>
                     <code>getBody($spec = false)</code> で
-                    <code>$spec</code> にセグメント名を指定すると、そのセグメントを取得できます。
-                    <code>$spec</code> に false を指定すると、
+                    <varname>$spec</varname> にセグメント名を指定すると、そのセグメントを取得できます。
+                    <varname>$spec</varname> に false を指定すると、
                     すべてのセグメントの内容を順番に連結した結果を文字列で返します。
-                    <code>$spec</code> に true を指定すると、本文の配列を返します。
+                    <varname>$spec</varname> に true を指定すると、本文の配列を返します。
                 </para>
             </listitem>
         </itemizedlist>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15719 -->
 <sect1 id="zend.config.theory_of_operation">
     <title>動作原理</title>
     <para>
@@ -84,10 +84,10 @@
     <para>
         ふたつの <classname>Zend_Config</classname> オブジェクトがある場合に、
         <code>merge()</code> 関数でそれをひとつにまとめることができます。
-        たとえば、<code>$config</code> と <code>$localConfig</code>
-        がある場合に <code>$localConfig</code> のデータを <code>$config</code>
+        たとえば、<varname>$config</varname> と <varname>$localConfig</varname>
+        がある場合に <varname>$localConfig</varname> のデータを <varname>$config</varname>
         に統合するには <code>$config->merge($localConfig);</code> とします。
-        <code>$localConfig</code> の中に <code>$config</code>
+        <varname>$localConfig</varname> の中に <varname>$config</varname>
         と同名の項目がある場合は、もとの値は上書きされます。
         <note>
             <para>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <sect1 id="zend.cache.frontends">
     <title><classname>Zend_Cache</classname> のフロントエンド</title>
 
@@ -580,9 +580,9 @@ $result = $cache->foobar2('1', '2');
             </para>
             <para>
                 一方、「キャッシュ ID」は自動的に生成されます。この ID は、
-                <code>$_SERVER['REQUEST_URI']</code> および (オプションの設定によっては)
-                <code>$_GET</code>、<code>$_POST</code>、<code>$_SESSION</code>、
-                <code>$_COOKIE</code>、<code>$_FILES</code> をもとにして生成されます。
+                <varname>$_SERVER['REQUEST_URI']</varname> および (オプションの設定によっては)
+                <varname>$_GET</varname>、<varname>$_POST</varname>、<varname>$_SESSION</varname>、
+                <varname>$_COOKIE</varname>、<varname>$_FILES</varname> をもとにして生成されます。
                 さらに、ひとつのメソッド (<code>start()</code>) をコールするだけで使用できます。
                 <code>end()</code> は、ページの終了時に自動的にコールされます。
             </para>
@@ -640,61 +640,61 @@ $result = $cache->foobar2('1', '2');
                                       <listitem>
                                           <para>
                                               <code>(boolean, デフォルトは false) cache_with_get_variables</code> :
-                                              true の場合は、<code>$_GET</code> 配列に変数が含まれていてもキャッシュがオンのままになります。
+                                              true の場合は、<varname>$_GET</varname> 配列に変数が含まれていてもキャッシュがオンのままになります。
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
                                               <code>(boolean, デフォルトは false) cache_with_post_variables</code> :
-                                              true の場合は、<code>$_POST</code> 配列に変数が含まれていてもキャッシュがオンのままになります。
+                                              true の場合は、<varname>$_POST</varname> 配列に変数が含まれていてもキャッシュがオンのままになります。
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
                                               <code>(boolean, デフォルトは false) cache_with_session_variables</code> :
-                                              true の場合は、<code>$_SESSION</code> 配列に変数が含まれていてもキャッシュがオンのままになります。
+                                              true の場合は、<varname>$_SESSION</varname> 配列に変数が含まれていてもキャッシュがオンのままになります。
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
                                               <code>(boolean, デフォルトは false) cache_with_files_variables</code> :
-                                              true の場合は、<code>$_FILES</code> 配列に変数が含まれていてもキャッシュがオンのままになります。
+                                              true の場合は、<varname>$_FILES</varname> 配列に変数が含まれていてもキャッシュがオンのままになります。
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
                                               <code>(boolean, デフォルトは false) cache_with_cookie_variables</code> :
-                                              true の場合は、<code>$_COOKIE</code> 配列に変数が含まれていてもキャッシュがオンのままになります。
+                                              true の場合は、<varname>$_COOKIE</varname> 配列に変数が含まれていてもキャッシュがオンのままになります。
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
                                               <code>(boolean, デフォルトは true) make_id_with_get_variables</code> :
-                                              true の場合は、キャッシュ ID が <code>$_GET</code> 配列の内容に依存するようになります。
+                                              true の場合は、キャッシュ ID が <varname>$_GET</varname> 配列の内容に依存するようになります。
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
                                               <code>(boolean, デフォルトは true) make_id_with_post_variables</code> :
-                                              true の場合は、キャッシュ ID が <code>$_POST</code> 配列の内容に依存するようになります。
+                                              true の場合は、キャッシュ ID が <varname>$_POST</varname> 配列の内容に依存するようになります。
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
                                               <code>(boolean, デフォルトは true) make_id_with_session_variables</code> :
-                                              true の場合は、キャッシュ ID が <code>$_SESSION</code> 配列の内容に依存するようになります。
+                                              true の場合は、キャッシュ ID が <varname>$_SESSION</varname> 配列の内容に依存するようになります。
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
                                               <code>(boolean, デフォルトは true) make_id_with_files_variables</code> :
-                                              true の場合は、キャッシュ ID が <code>$_FILES</code> 配列の内容に依存するようになります。
+                                              true の場合は、キャッシュ ID が <varname>$_FILES</varname> 配列の内容に依存するようになります。
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
                                               <code>(boolean, デフォルトは true) make_id_with_cookie_variables</code> :
-                                              true の場合は、キャッシュ ID が <code>$_COOKIE</code> 配列の内容に依存するようになります。
+                                              true の場合は、キャッシュ ID が <varname>$_COOKIE</varname> 配列の内容に依存するようになります。
                                           </para>
                                       </listitem>
                                       <listitem>

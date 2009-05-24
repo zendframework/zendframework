@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <sect1 id="zend.controller.router"  xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>標準のルータ</title>
     <sect2 id="zend.controller.router.introduction">
@@ -56,10 +56,10 @@ RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.
         <note>
             <title>IIS Isapi_Rewrite</title>
             <para>
-                IIS を使用すると、<code>$_SERVER['REQUEST_URI']</code>
+                IIS を使用すると、<varname>$_SERVER['REQUEST_URI']</varname>
                 が存在しないか空の文字列に設定されます。このような場合、
                 <classname>Zend_Controller_Request_Http</classname> は
-                <code>$_SERVER['HTTP_X_REWRITE_URL']</code> の値を使用します。これは
+                <varname>$_SERVER['HTTP_X_REWRITE_URL']</varname> の値を使用します。これは
                 Isapi_Rewrite 拡張モジュールが設定します。
             </para>
         </note>

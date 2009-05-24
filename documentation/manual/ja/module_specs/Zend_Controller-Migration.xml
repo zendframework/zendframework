@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <sect1 id="zend.controller.migration">
     <title>以前のバージョンからの移行</title>
 
@@ -500,12 +500,12 @@ final protected function _forward($action,
 ]]></programlisting>
 
                 <para>
-                    <code>$action</code> は常に必須です。
+                    <varname>$action</varname> は常に必須です。
                     コントローラを指定しなかった場合は、
                     現在のコントローラ内のアクションであるとみなされます。
-                    <code>$controller</code> を指定しなかった場合は、
-                    <code>$module</code> は常に無視されます。
-                    最後に、<code>$params</code> で指定した任意の値が
+                    <varname>$controller</varname> を指定しなかった場合は、
+                    <varname>$module</varname> は常に無視されます。
+                    最後に、<varname>$params</varname> で指定した任意の値が
                     リクエストオブジェクトに追加されます。
                     コントローラやモジュールは不要だがパラメータは渡したいという場合は、
                     コントローラやモジュールに null を指定します。
@@ -665,7 +665,7 @@ echo $response;
                     <listitem><para>
                         <code>_redirect()</code> にはオプションで二番目、三番目の引数が追加されました。
                         二番目の引数はリダイレクト時に返す HTTP コードです。
-                        三番目の引数 <code>$prependBase</code>
+                        三番目の引数 <varname>$prependBase</varname>
                         を使用すると、リクエストオブジェクトに登録したベース URL
                         を URL の前に連結することを指示できます。
                     </para></listitem>

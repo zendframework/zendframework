@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <sect1 id="zend.controller.request">
     <title>リクエストオブジェクト</title>
     <sect2 id="zend.controller.request.introduction">
@@ -45,7 +45,7 @@
             たとえば、デフォルトのリクエストで使用する
             <classname>Zend_Controller_Request_Http</classname> の場合は、
             リクエストされた URI やパス情報、
-            <code>$_GET</code> パラメータや <code>$_POST</code>
+            <varname>$_GET</varname> パラメータや <varname>$_POST</varname>
             パラメータを取得するメソッドが使用可能となります。
         </para>
 
@@ -100,9 +100,9 @@
             <para>
                 特定のスーパーグローバルにアクセスするには、
                 パブリックメソッドを使用する方法もあります。たとえば、
-                <code>$_POST['user']</code> の値を取得するには、リクエストオブジェクト上で
+                <varname>$_POST['user']</varname> の値を取得するには、リクエストオブジェクト上で
                 <code>getPost('user')</code> をコールします。同様に、
-                <code>$_GET</code> 要素の場合は <code>getQuery()</code>、
+                <varname>$_GET</varname> 要素の場合は <code>getQuery()</code>、
                 リクエストヘッダの場合は <code>getHeader()</code>
                 を使用します。
             </para>
@@ -175,8 +175,8 @@
                     リクエストをフロントコントローラに渡したり、
                     PT フラグを rewrite ルールで使用したりする場合は、
                     必要な URI 情報が含まれるのが
-                    <code>$_SERVER['REQUEST_URI']</code>
-                    ではなく <code>$_SERVER['REDIRECT_URL']</code>
+                    <varname>$_SERVER['REQUEST_URI']</varname>
+                    ではなく <varname>$_SERVER['REDIRECT_URL']</varname>
                     であることに注意しましょう。
                     この設定を使用して無効なルーティングを取得したい場合は、
                     デフォルトの Http クラスではなく

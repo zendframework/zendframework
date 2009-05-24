@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <sect1 id="zend.config.adapters.ini">
     <title>Zend_Config_Ini</title>
     <para>
@@ -33,7 +33,7 @@
             デフォルトでは、キーの区切り文字はピリオド (<code>.</code>) です。
             しかし、これは変更することもできます。変更するには、
             <classname>Zend_Config_Ini</classname> オブジェクトの作成時に
-            <code>$options</code> のキー
+            <varname>$options</varname> のキー
             <code>'nestSeparator'</code> を設定します。たとえばこのようになります。
             <programlisting language="php"><![CDATA[
 $options['nestSeparator'] = ':';
@@ -99,11 +99,11 @@ echo $config->database->params->dbname; // "dbname" と出力します
             </thead>
             <tbody>
                 <row>
-                    <entry><code>$filename</code></entry>
+                    <entry><varname>$filename</varname></entry>
                     <entry>読み込む INI ファイル。</entry>
                 </row>
                 <row>
-                    <entry><code>$section</code></entry>
+                    <entry><varname>$section</varname></entry>
                     <entry>
                         ini ファイルの中の、読み込む [section]。
                         このパラメータを null にすると、すべてのセクションを読み込みます。
@@ -111,7 +111,7 @@ echo $config->database->params->dbname; // "dbname" と出力します
                     </entry>
                 </row>
                 <row>
-                    <entry><code>$options = false</code></entry>
+                    <entry><varname>$options = false</varname></entry>
                     <entry>オプションの配列。以下のキーをサポートしています。
                         <itemizedlist>
                             <listitem><para><emphasis>allowModifications</emphasis>: true を指定すると、読み込んだファイルを後で変更することができます。デフォルトは false です。</para></listitem>

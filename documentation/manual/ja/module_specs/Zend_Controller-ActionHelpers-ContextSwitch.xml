@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <sect3 id="zend.controller.actionhelpers.contextswitch">
     <title>ContextSwitch および AjaxContext</title>
 
@@ -253,7 +253,7 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
 
             <listitem><para>
                 <code>addContexts(array $contexts)</code>:
-                複数のコンテキストを一度に追加する。配列 <code>$contexts</code>
+                複数のコンテキストを一度に追加する。配列 <varname>$contexts</varname>
                 は、コンテキスト/設定 のペアの配列となります。
                 既に存在するコンテキストを指定した場合は例外をスローします。
             </para></listitem>
@@ -353,7 +353,7 @@ class FooController extends Zend_Controller_Action
 
         <para>
             あるいは、単純に配列プロパティ
-            <code>$contexts</code> を設定することもできます。
+            <varname>$contexts</varname> を設定することもできます。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -386,7 +386,7 @@ class FooController extends Zend_Controller_Action
                     <code>addActionContext($action, $context)</code>:
                     ひとつあるいは複数のコンテキストを、あるアクションで使用できるようにする。
                     関連付けがすでに設定されている場合は、それに追記します。
-                    <code>$context</code> は、単一のコンテキストか
+                    <varname>$context</varname> は、単一のコンテキストか
                     コンテキストの配列となります。
                 </para>
 
@@ -405,14 +405,14 @@ class FooController extends Zend_Controller_Action
                     <code>setActionContext($action, $context)</code>:
                     ひとつあるいは複数のコンテキストを、あるアクションで使用できるようにする。
                     関連付けがすでに設定されている場合は、指定したものでそれを置き換えます。
-                    <code>$context</code> は、単一のコンテキストか
+                    <varname>$context</varname> は、単一のコンテキストか
                     コンテキストの配列となります。
             </para></listitem>
 
             <listitem><para>
                     <code>addActionContexts(array $contexts)</code>:
                     いくつかの アクション/コンテキスト のペアを一度に追加する。
-                    <code>$contexts</code> は、アクション/コンテキスト
+                    <varname>$contexts</varname> は、アクション/コンテキスト
                     のペアの連想配列です。これは <code>addActionContext()</code>
                     へのプロキシとなります。つまり、既に別のペアが登録されている場合は
                     そこに追記します。
@@ -438,7 +438,7 @@ class FooController extends Zend_Controller_Action
             <listitem><para>
                     <code>removeActionContext($action, $context)</code>:
                     ひとつあるいは複数のコンテキストを、指定したアクションから削除する。
-                    <code>$context</code> は、単一のコンテキストか
+                    <varname>$context</varname> は、単一のコンテキストか
                     コンテキストの配列となります。
             </para></listitem>
 
@@ -533,8 +533,8 @@ $contextSwitch->initContext();
                 <para>
                     <code>addHeader($context, $header, $content)</code>:
                     指定したコンテキストにレスポンスヘッダを追加します。
-                    <code>$header</code> はヘッダの名前で、
-                    <code>$content</code> はそのヘッダに渡す値となります。
+                    <varname>$header</varname> はヘッダの名前で、
+                    <varname>$content</varname> はそのヘッダに渡す値となります。
                 </para>
 
                 <para>
@@ -544,7 +544,7 @@ $contextSwitch->initContext();
                 </para>
 
                 <para>
-                    指定した <code>$header</code> がそのコンテキストに既に存在する場合は、
+                    指定した <varname>$header</varname> がそのコンテキストに既に存在する場合は、
                     例外をスローします。
                 </para>
             </listitem>
@@ -564,7 +564,7 @@ $contextSwitch->initContext();
                     指定したコンテキストに一度に複数のヘッダを追加します。
                     <code>addHeader()</code> へのプロキシとして動作するので、
                     そのヘッダがすでに存在する場合は例外をスローします。
-                    <code>$headers</code> は ヘッダ/コンテキスト
+                    <varname>$headers</varname> は ヘッダ/コンテキスト
                     のペアの配列です。
                 </para>
             </listitem>
@@ -606,7 +606,7 @@ $contextSwitch->initContext();
                     指定したコンテキストにおける指定したトリガーのコールバックを設定します。
                     トリガーに指定できる値は 'init' あるいは 'post'
                     (それぞれ、コンテキストの初期化時と postDispatch 時を表します) です。
-                    <code>$callback</code> は PHP のコールバックとして正しい形式でなければなりません。
+                    <varname>$callback</varname> は PHP のコールバックとして正しい形式でなければなりません。
                 </para>
             </listitem>
 
@@ -614,9 +614,9 @@ $contextSwitch->initContext();
                 <para>
                     <code>setCallbacks($context, array $callbacks)</code>:
                     指定したコンテキストに複数のコールバックを設定します。
-                    <code>$callbacks</code> は トリガー/コールバック
+                    <varname>$callbacks</varname> は トリガー/コールバック
                     のペアとなります。実際のところ、登録できるコールバックは
-                    ほとんどふたつだけで、初期化用のものと後処理ようのものです。
+                    ほとんどふたつだけで、初期化用のものと後処理用のものです。
                 </para>
             </listitem>
 
@@ -708,7 +708,7 @@ $contextSwitch->initContext();
 
         <para>
             まず、コンテキストを決めるアクションコントローラのプロパティは
-            <code>$ajaxable</code> となります。これにより、
+            <varname>$ajaxable</varname> となります。これにより、
             AJAX 用と通常の HTTP リクエスト用で別のコンテキストを使用できるようになります。
             <code>AjaxContext</code> の <code>*ActionContext*()</code>
             系のメソッドは、このプロパティに書き込みます。

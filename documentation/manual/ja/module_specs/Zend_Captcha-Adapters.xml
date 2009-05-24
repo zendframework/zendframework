@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15207 -->
+<!-- EN-Revision: 15719 -->
 <sect1 id="zend.captcha.adapters">
     <title>CAPTCHA アダプタ</title>
 
@@ -40,7 +40,7 @@
             <listitem><para>
                 <code>setTimeout($ttl)</code> と <code>getTimeout()</code>
                 で、セッショントークンの有効期限を設定したり現在の値を取得したりします。
-                <code>$ttl</code> は秒数で指定します。
+                <varname>$ttl</varname> は秒数で指定します。
             </para></listitem>
 
             <listitem><para>
@@ -157,7 +157,7 @@
 
             <listitem><para>
                 <code>setFont($font)</code> と <code>getFont()</code>
-                で、使用するフォントを指定します。<code>$font</code> には、
+                で、使用するフォントを指定します。<varname>$font</varname> には、
                 使用するフォントのパスをフルパス形式で指定する必要があります。
                 この値を設定しなければ、CAPTCHA の生成時に例外がスローされます。
                 フォントは必須です。

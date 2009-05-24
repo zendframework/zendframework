@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <sect1 id="zend.db.table.relationships">
 
     <title>導入</title>
@@ -99,7 +99,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
         <para>
             <classname>Zend_Db_Table</classname> で UPDATE や DELETE の連鎖操作をエミュレートする場合は、
-            配列 <code>$_dependentTables</code> を親テーブルで宣言し、
+            配列 <varname>$_dependentTables</varname> を親テーブルで宣言し、
             従属しているテーブルをそこで指定します。
             SQL でのテーブル名ではなく、クラス名を使用するようにしましょう。
         </para>
@@ -108,7 +108,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
             <para>
                 RDBMS サーバが実装している参照整合性制約によって連鎖操作を行う場合は、
-                <code>$_dependentTables</code> を宣言しません。
+                <varname>$_dependentTables</varname> を宣言しません。
                 詳細は <xref linkend="zend.db.table.relationships.cascading" />
                 を参照ください。
             </para>
@@ -116,14 +116,14 @@ class BugsProducts extends Zend_Db_Table_Abstract
         </note>
 
         <para>
-            各従属テーブルのクラス内で、配列 <code>$_referenceMap</code>
+            各従属テーブルのクラス内で、配列 <varname>$_referenceMap</varname>
             を宣言します。これは、参照の "ルール" を定義する連想配列となります。
             参照ルールとは、リレーションの親テーブルが何になるのか、
             従属テーブルのどのカラムと親テーブルのどのカラムが対応するのかを示すものです。
         </para>
 
         <para>
-            ルールのキーを、配列 <code>$_referenceMap</code>
+            ルールのキーを、配列 <varname>$_referenceMap</varname>
             のインデックスとして使用します。
             このルールのキーは、各リレーションを指定する際に使用します。
             わかりやすい名前をつけるようにしましょう。
@@ -139,7 +139,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
         </para>
 
         <para>
-            配列 <code>$_referenceMap</code>
+            配列 <varname>$_referenceMap</varname>
             の各ルールエントリの内容もまた、連想配列です。
             このルールエントリの内容について、以下で説明します。
         </para>
@@ -171,7 +171,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
                     テーブルから <code>products</code> テーブルへの参照はひとつだけです。
                     しかし、<code>bugs</code> テーブルから
                     <code>accounts</code> テーブルへの参照は三つあります。
-                    それぞれの参照を、配列 <code>$_referenceMap</code>
+                    それぞれの参照を、配列 <varname>$_referenceMap</varname>
                     の個別のエントリとします。
                 </para>
             </listitem>
@@ -234,12 +234,12 @@ $row->findDependentRowset($table, [$rule]);
 
         <para>
             このメソッドは <classname>Zend_Db_Table_Rowset_Abstract</classname> オブジェクトを返します。
-            その中には、従属テーブル <code>$table</code>
-            の行のうち、<code>$row</code> が指す行を参照しているものが含まれます。
+            その中には、従属テーブル <varname>$table</varname>
+            の行のうち、<varname>$row</varname> が指す行を参照しているものが含まれます。
         </para>
 
         <para>
-            最初の引数 <code>$table</code> には、
+            最初の引数 <varname>$table</varname> には、
             従属テーブルのクラス名を表す文字列を指定します。
             文字列ではなく、テーブルクラスのオブジェクトで指定することもできます。
         </para>
@@ -265,8 +265,8 @@ $bugsReportedByUser = $user1234->findDependentRowset('Bugs');
         </example>
 
         <para>
-            二番目の引数 <code>$rule</code> はオプションです。
-            これは、従属テーブルクラスの配列 <code>$_referenceMap</code>
+            二番目の引数 <varname>$rule</varname> はオプションです。
+            これは、従属テーブルクラスの配列 <varname>$_referenceMap</varname>
             でのルールのキーの名前を指定します。
             ルールを指定しなかった場合は、配列の中で
             その親テーブルを参照している最初のルールを使用します。
@@ -425,7 +425,7 @@ $row->findParentRow($table, [$rule]);
         </para>
 
         <para>
-            最初の引数 <code>$table</code> には、
+            最初の引数 <varname>$table</varname> には、
             親テーブルのクラス名を表す文字列を指定します。
             文字列ではなく、テーブルクラスのオブジェクトで指定することもできます。
         </para>
@@ -452,8 +452,8 @@ $reporter = $bug1->findParentRow('Accounts');
         </example>
 
         <para>
-            二番目の引数 <code>$rule</code> はオプションです。
-            これは、従属テーブルクラスの配列 <code>$_referenceMap</code>
+            二番目の引数 <varname>$rule</varname> はオプションです。
+            これは、従属テーブルクラスの配列 <varname>$_referenceMap</varname>
             でのルールのキーの名前を指定します。
             ルールを指定しなかった場合は、配列の中で
             その親テーブルを参照している最初のルールを使用します。
@@ -579,20 +579,20 @@ $row->findManyToManyRowset($table,
 
         <para>
             このメソッドは <classname>Zend_Db_Table_Rowset_Abstract</classname> オブジェクトを返します。
-            その中には、テーブル <code>$table</code>
+            その中には、テーブル <varname>$table</varname>
             の行のうち、多対多のリレーションを満たすものが含まれます。
-            元テーブルの行 <code>$row</code> を使用して中間テーブルの行を探し、
+            元テーブルの行 <varname>$row</varname> を使用して中間テーブルの行を探し、
             さらにそれを対象テーブルと結合します。
         </para>
 
         <para>
-            最初の引数 <code>$table</code> には、
+            最初の引数 <varname>$table</varname> には、
             多対多のリレーションの対象テーブルのクラス名を表す文字列を指定します。
             文字列ではなく、テーブルクラスのオブジェクトで指定することもできます。
         </para>
 
         <para>
-            二番目の引数 <code>$intersectionTable</code> には、
+            二番目の引数 <varname>$intersectionTable</varname> には、
             多対多のリレーションの中間テーブルのクラス名を表す文字列を指定します。
             文字列ではなく、テーブルクラスのオブジェクトで指定することもできます。
         </para>
@@ -620,27 +620,27 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
         </example>
 
         <para>
-            三番目と四番目の引数 <code>$rule1</code> および
-            <code>$rule2</code> はオプションです。
-            これは、中間テーブルの配列 <code>$_referenceMap</code>
+            三番目と四番目の引数 <varname>$rule1</varname> および
+            <varname>$rule2</varname> はオプションです。
+            これは、中間テーブルの配列 <varname>$_referenceMap</varname>
             でのルールのキーの名前を表す文字列です。
         </para>
 
         <para>
-            <code>$rule1</code> は、中間テーブルから元テーブルへのリレーションを表す
+            <varname>$rule1</varname> は、中間テーブルから元テーブルへのリレーションを表す
             ルールのキーです。この例では、<code>BugsProducts</code> から
             <code>Bugs</code> へのリレーションがそれにあたります。
         </para>
 
         <para>
-            <code>$rule2</code> は、中間テーブルから対象テーブルへのリレーションを表す
+            <varname>$rule2</varname> は、中間テーブルから対象テーブルへのリレーションを表す
             ルールのキーです。この例では、<code>Bugs</code> から
             <code>Products</code> へのリレーションがそれにあたります。
         </para>
 
         <para>
             親や従属行を取得するメソッドと同様、もしルールを指定しなければ、
-            配列 <code>$_referenceMap</code>
+            配列 <varname>$_referenceMap</varname>
             の中でそのリレーションに該当する最初のルールを使用します。
             最初のもの以外のルールを使用する必要がある場合は、
             キーを指定しなければなりません。
@@ -649,8 +649,8 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
         <para>
             上の例のコードでは、ルールのキーを指定していません。
             したがって、マッチする最初のルールをデフォルトで使用します。
-            ここでは、<code>$rule1</code> が <code>'Reporter'</code>、
-            そして <code>$rule2</code> が <code>'Product'</code> になります。
+            ここでは、<varname>$rule1</varname> が <code>'Reporter'</code>、
+            そして <varname>$rule2</varname> が <code>'Product'</code> になります。
         </para>
 
         <example id="zend.db.table.relationships.fetching.many-to-many.example-by">
@@ -833,7 +833,7 @@ $product1234->delete();
 
         <para>
             <classname>Zend_Db_Table</classname> で連鎖リレーションを宣言するには、
-            <code>$_referenceMap</code> の中でのルールを編集し、
+            <varname>$_referenceMap</varname> の中でのルールを編集し、
             連想配列のキー <code>'onDelete'</code> および
             <code>'onUpdate'</code> に文字列 'cascade'
             (あるいは定数 <code>self::CASCADE</code>)

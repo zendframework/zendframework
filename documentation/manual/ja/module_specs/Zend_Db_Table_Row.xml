@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <sect1 id="zend.db.table.row">
 
     <title>Zend_Db_Table_Row</title>
@@ -472,7 +472,7 @@ $rowClone->save();
             <classname>Zend_Db_Table_Row_Abstract</classname> を継承した具象クラスを新たに作成し、
             それを用いて行のインスタンスを作成することができます。
             独自の行クラスを指定するには、テーブルクラスの protected
-            メンバである <code>$_rowClass</code> を使用するか、
+            メンバである <varname>$_rowClass</varname> を使用するか、
             テーブルオブジェクトのコンストラクタの引数の配列で指定します。
         </para>
 

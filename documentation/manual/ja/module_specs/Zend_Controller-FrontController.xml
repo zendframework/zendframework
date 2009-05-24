@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <sect1 id="zend.controller.front">
     <title>フロントコントローラ</title>
 
@@ -350,7 +350,7 @@ Zend_Controller_Front::run('../application/controllers');
                 <para>
                     <code>registerPlugin(Zend_Controller_Plugin_Abstract $plugin, $stackIndex = null)</code>
                     は、<link linkend="zend.controller.plugins">プラグインオブジェクト</link>
-                    を登録します。オプションの <code>$stackIndex</code>
+                    を登録します。オプションの <varname>$stackIndex</varname>
                     を設定すると、プラグインの実行順を制御することができます。
                 </para>
             </listitem>
@@ -359,7 +359,7 @@ Zend_Controller_Front::run('../application/controllers');
                 <para>
                     <code>unregisterPlugin($plugin)</code> は、
                     <link linkend="zend.controller.plugins">プラグインオブジェクト</link>
-                    の登録を解除します。<code>$plugin</code>
+                    の登録を解除します。<varname>$plugin</varname>
                     にはプラグインオブジェクトそのものか、あるいはプラグインのクラス名を表す文字列を指定します。
                     ここで指定したプラグインの登録を解除します。
                 </para>
@@ -417,8 +417,8 @@ Zend_Controller_Front::run('../application/controllers');
             <listitem>
                 <para>
                     <code>setParam($name, $value)</code> は、
-                    パラメータ <code>$name</code> の値を
-                    <code>$value</code> に設定します。
+                    パラメータ <varname>$name</varname> の値を
+                    <varname>$value</varname> に設定します。
                 </para>
             </listitem>
 
@@ -432,7 +432,7 @@ Zend_Controller_Front::run('../application/controllers');
             <listitem>
                 <para>
                     <code>getParam($name)</code> は、
-                    <code>$name</code> で指定した名前のパラメータの値を取得します。
+                    <varname>$name</varname> で指定した名前のパラメータの値を取得します。
                 </para>
             </listitem>
 

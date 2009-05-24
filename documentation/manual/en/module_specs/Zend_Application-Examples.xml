@@ -31,10 +31,10 @@ resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
 
     <para>
         However, should custom initialization be necessary, you have two
-        choices. First, you can write methods prefixed with <code>_init</code>
+        choices. First, you can write methods prefixed with <emphasis>_init</emphasis>
         to specify discrete code to bootstrap. These methods will be called by
-        <code>bootstrap()</code>, and can also be called as if they were public methods:
-        <code>bootstrap&lt;resource&gt;()</code>. They should accept an optional
+        <methodname>bootstrap()</methodname>, and can also be called as if they were public methods:
+        <methodname>bootstrap&lt;resource&gt;()</methodname>. They should accept an optional
         array of options.
     </para>
 
@@ -42,7 +42,7 @@ resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
         If your resource method returns a value, it will be stored in a
         container in the bootstrap. This can be useful when different resources
         need to interact (such as one resource injecting itself into another).
-        The method <code>getResource()</code> can then be used to retrieve those
+        The method <methodname>getResource()</methodname> can then be used to retrieve those
         values.
     </para>
 
@@ -76,7 +76,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 ]]></programlisting>
 
     <para>
-        Note in this example the call to <code>bootstrap()</code>;
+        Note in this example the call to <methodname>bootstrap()</methodname>;
         this ensures that the front controller has been initialized prior to
         calling this method. That call may trigger either a resource or another
         method in the class.
@@ -109,7 +109,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     <para>
         Resource plugins implement <classname>Zend_Application_Bootstrap_Resource</classname>,
         which defines simply that they allow injection of the caller and
-        options, and that they have an <code>init()</code> method. As an
+        options, and that they have an <methodname>init()</methodname> method. As an
         example, a custom "View" bootstrap resource might look like the
         following:
     </para>
@@ -220,7 +220,7 @@ echo $service->handle();
 ]]></programlisting>
 
     <para>
-        Instead of using the <code>bootstrap()</code> method to call the
+        Instead of using the <methodname>bootstrap()</methodname> method to call the
         internal methods or resources, you may also use overloading:
     </para>
 

@@ -179,15 +179,15 @@ interface Zend_Application_Bootstrap_Bootstrapper
                 The <classname>Zend_Application_Bootstrap_BootstrapAbstract</classname>
                 implementation provides a simple convention for defining class
                 resource methods. Any protected method beginning with a name
-                prefixed with <code>_init</code> will be considered a resource
+                prefixed with <emphasis>_init</emphasis> will be considered a resource
                 method.
             </para>
 
             <para>
                 To bootstrap a single resource method, use the
-                <code>bootstrap()</code> method, and pass it the name of the
+                <methodname>bootstrap()</methodname> method, and pass it the name of the
                 resource. The name will be the method name minus the
-                <code>_init</code> prefix.
+                <emphasis>_init</emphasis> prefix.
             </para>
 
             <para>
@@ -220,7 +220,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 ]]></programlisting>
 
             <para>
-                To bootstrap just the <code>_initFoo()</code> method, do the
+                To bootstrap just the <methodname>_initFoo()</methodname> method, do the
                 following:
             </para>
 
@@ -229,8 +229,8 @@ $bootstrap->bootstrap('foo');
 ]]></programlisting>
 
             <para>
-                To bootstrap the <code>_initFoo()</code> and
-                <code>_initBar()</code> methods, do the following:
+                To bootstrap the <methodname>_initFoo()</methodname> and
+                <methodname>_initBar()</methodname> methods, do the following:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -238,7 +238,7 @@ $bootstrap->bootstrap(array('foo', 'bar));
 ]]></programlisting>
 
             <para>
-                To bootstrap all resource methods, call <code>bootstrap()</code>
+                To bootstrap all resource methods, call <methodname>bootstrap()</methodname>
                 with no arguments:
             </para>
 
@@ -334,8 +334,8 @@ $application = new Zend_Application(APPLICATION_ENV, array(
 
             <para>
                 As an example, let's assume you have custom resource plugins in
-                <code>APPLICATION_PATH/resources/</code> and that they share the
-                common class prefix of <code>My_Resource</code>. You would then
+                <filename>APPLICATION_PATH/resources/</filename> and that they share the
+                common class prefix of <classname>My_Resource</classname>. You would then
                 pass that information to the application object as follows:
             </para>
 
@@ -357,7 +357,7 @@ $application = new Zend_Application(APPLICATION_ENV, array(
             </para>
 
             <para>
-                Just like resource methods, you use the <code>bootstrap()</code>
+                Just like resource methods, you use the <methodname>bootstrap()</methodname>
                 method to execute resource plugins. Just like with resource
                 methods, you can specify either a single resource plugin,
                 multiple plugins (via an array), or all plugins. Additionally,
@@ -397,11 +397,11 @@ $bootstrap->bootstrap();
                 object. Resources are then registered as properties named after
                 the resource name. By default, an instance of
                 <classname>Zend_Registry</classname> is used, but you may also specify any
-                other object you wish. The methods <code>setContainer()</code>
-                and <code>getContainer()</code> may be used to manipulate the
-                container itself. <code>getResource($resource)</code> can be
+                other object you wish. The methods <methodname>setContainer()</methodname>
+                and <methodname>getContainer()</methodname> may be used to manipulate the
+                container itself. <methodname>getResource($resource)</methodname> can be
                 used to fetch a given resource from the container, and
-                <code>hasResource($resource)</code> to check if the resource has
+                <methodname>hasResource($resource)</methodname> to check if the resource has
                 actually been registered.
             </para>
 
@@ -444,7 +444,7 @@ if (isset($container->view)) {
                 means that you need access to the bootstrap in order to fetch
                 resources. <classname>Zend_Application_Bootstrap_Bootstrap</classname>
                 provides some convenience for this: during its
-                <code>run()</code> execution, it registers itself as the front
+                <methodname>run()</methodname> execution, it registers itself as the front
                 controller parameter "bootstrap", which allows you to fetch it
                 from the router, dispatcher, plugins, and action controllers.
             </para>
@@ -487,7 +487,7 @@ class FooController extends Zend_Controller_Action
 
             <para>
                 As noted previously, all resources -- whether methods or plugins
-                -- are bootstrapped by calling <code>bootstrap($resource)</code>,
+                -- are bootstrapped by calling <methodname>bootstrap($resource)</methodname>,
                 where <varname>$resource</varname> is the name of a resource, an array
                 of resources, or, left empty, indicates all resources should be
                 run.
@@ -495,7 +495,7 @@ class FooController extends Zend_Controller_Action
 
             <para>
                 If a resource depends on another resource, it should call
-                <code>bootstrap()</code> within its code to ensure that resource
+                <methodname>bootstrap()</methodname> within its code to ensure that resource
                 has been executed. Subsequent calls to it will then be ignored.
             </para>
 

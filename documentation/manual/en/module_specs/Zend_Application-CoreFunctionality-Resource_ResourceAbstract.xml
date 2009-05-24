@@ -12,7 +12,7 @@
     </para>
 
     <para>
-        Note: this abstract class does not implement the <code>init()</code>
+        Note: this abstract class does not implement the <methodname>init()</methodname>
         method; this is left for definition in concrete extensions of the
         class.
     </para>
@@ -30,8 +30,8 @@
             </thead>
             <tbody>
                 <row>
-                    <entry><code>__construct($options = null)</code></entry>
-                    <entry><code>void</code></entry>
+                    <entry><methodname>__construct($options = null)</methodname></entry>
+                    <entry><type>Void</type></entry>
                     <entry><itemizedlist>
                         <listitem><para>
                             <varname>$options</varname>: <emphasis>optional</emphasis>.
@@ -46,8 +46,8 @@
 
                 <row>
                     <entry>
-                        <code>setBootstrap(Zend_Application_Bootstrap_Bootstrapper
-                        $bootstrap)</code>
+                        <methodname>setBootstrap(Zend_Application_Bootstrap_Bootstrapper
+                            $bootstrap)</methodname>
                     </entry>
                     <entry><classname>Zend_Application_Resource_ResourceAbstract</classname></entry>
                     <entry><itemizedlist>
@@ -62,7 +62,7 @@
                 </row>
 
                 <row>
-                    <entry><code>getBootstrap()</code></entry>
+                    <entry><methodname>getBootstrap()</methodname></entry>
                     <entry><classname>Zend_Application_Bootstrap_Bootstrapper</classname></entry>
                     <entry>N/A</entry>
                     <entry><para>
@@ -71,7 +71,7 @@
                 </row>
 
                 <row>
-                    <entry><code>setOptions(array $options)</code></entry>
+                    <entry><methodname>setOptions(array $options)</methodname></entry>
                     <entry><classname>Zend_Application_Resource_ResourceAbstract</classname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
@@ -85,8 +85,8 @@
                 </row>
 
                 <row>
-                    <entry><code>getOptions()</code></entry>
-                    <entry><code>array</code></entry>
+                    <entry><methodname>getOptions()</methodname></entry>
+                    <entry><type>Array</type></entry>
                     <entry>N/A</entry>
                     <entry><para>
                         Retrieve registered options.

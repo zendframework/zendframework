@@ -43,7 +43,7 @@ print $filter->filter('Hello!');
 
     <para>
         It is also possible to define default parameters, which are given to the called method
-        as array when the filter is executed. This array will be concated with the value which
+        as array when the filter is executed. This array will be concatenated with the value which
         will be filtered.
     </para>
 

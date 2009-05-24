@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15687 -->
+<!-- EN-Revision: 15728 -->
 <sect1 id="zend.amf.server">
     <title>Zend_Amf_Server</title>
 
@@ -57,7 +57,7 @@ echo $response;
         <classname>Zend Amf Server</classname> は、
         指定したディレクトリパスから動的にサービスに読み込ませることもできます。
         好きなだけのディレクトリをサーバに指定することが可能です。
-        サーバに後から追加したディレクトリから順に (LIFO: 後入れ先出し)
+        サーバに後から追加したディレクトリから順に (<emphasis>LIFO</emphasis>: 後入れ先出し)
         検索を行い、クラスにマッチするディレクトリを探します。
         ディレクトリの追加は <methodname>addDirectory()</methodname> メソッドで行います。
         </para>
@@ -70,13 +70,14 @@ $server->addDirectory(dirname(__FILE__) .'/../package/');
         <para>
         リモートサービスをコールする際には、アンダースコア ("_") およびドット
         (".") をディレクトリ区切り文字として使用します。
-        アンダースコアを使用すると、PEAR や Zend Framework のクラス命名規約に従った形式となります。
+        アンダースコアを使用すると、<emphasis>PEAR</emphasis> や
+        Zend Framework のクラス命名規約に従った形式となります。
         つまり、サービス <classname>com_Foo_Bar</classname> をコールした場合は、
         インクルードされたパスのどこかにある
         <filename>com/Foo/Bar.php</filename> を探します。ドット記法を使用してリモートサービスを
         <filename>com.Foo.Bar</filename> のように指定すると、
         インクルードされたパスの最後に <filename>com/Foo/Bar.php</filename>
-        を追加して Bar.php を自動的に読み込みます。
+        を追加して <filename>Bar.php</filename> を自動的に読み込みます。
         </para>
 
         <para>
@@ -157,7 +158,7 @@ class World
             OK を押してウィンドウを閉じます。
         </para>
         <para>
-            また、リモートオブジェクトのエンドポイントを探す際に service-config.xml
+            また、リモートオブジェクトのエンドポイントを探す際に <filename>service-config.xml</filename>
             を使用することをコンパイラに指定する必要もあります。
             ナビゲータのプロジェクトフォルダを右クリックしてプロパティを選択し、
             もういちどプロジェクトのプロパティパネルを開きます。
@@ -165,7 +166,7 @@ class World
             -services "services-config.xml" を追加します。
             適用、そして OK を押してオプションを更新します。
             これで結局何をやったのかというと、実行時の変数を
-            service-config.xml から読み込んで RemotingObject クラスで使うよう
+            <filename>services-config.xml</filename> から読み込んで RemotingObject クラスで使うよう
             Flex コンパイラに指示したということです。
         </para>
         <para>
@@ -177,8 +178,8 @@ class World
             ファイル名を 'services-config.xml' と指定して終了を押します。
         </para>
         <para>
-        Flex は新しい services-config.xml ファイルを作成し、それを開きます。
-        次の例のとおりに services-config.xml ファイルを作成してください。
+        Flex は新しい <filename>services-config.xml</filename> ファイルを作成し、それを開きます。
+        次の例のとおりに <filename>services-config.xml</filename> ファイルを作成してください。
         エンドポイントの部分はあなたが使用するサーバに書き換えます。
         そしてファイルを保存することを忘れないようにしましょう。
         </para>
@@ -230,8 +231,9 @@ class World
         </para>
 
         <para>
-            Flex の MXML ファイルで、RemoteObject をサービスにバインドしなければなりません。
-            MXML で次のように記述します。
+            Flex の <emphasis>MXML</emphasis> ファイルで、
+            RemoteObject をサービスにバインドしなければなりません。
+            <emphasis>MXML</emphasis> で次のように記述します。
         </para>
 
         <programlisting language="xml"><![CDATA[
@@ -352,7 +354,8 @@ echo $response;
         <title>型付きオブジェクト</title>
 
         <para>
-            SOAP と同様、AMF でもクライアントとサーバの間でオブジェクトをやりとりすることができます。
+            <emphasis>SOAP</emphasis> と同様、
+            AMF でもクライアントとサーバの間でオブジェクトをやりとりすることができます。
             これにより、クライアントとサーバの間での柔軟性と一貫性を確保することができます。
         </para>
 
@@ -474,20 +477,24 @@ private function getContactHandler(event:ResultEvent):void {
         </para>
         <para>
             Flash CS を開き、新規 Flash ファイル (ActionScript 3) を作成します。
-            そのドキュメントに ZendExample.fla という名前をつけ、このサンプルを使用するフォルダに保存します。
-            次に、同じディレクトリに新規 AS3 ファイルを作成し、Main.as という名前をつけます。
+            そのドキュメントに <filename>ZendExample.fla</filename> という名前をつけ、
+            このサンプルを使用するフォルダに保存します。
+            次に、同じディレクトリに新規 AS3 ファイルを作成し、
+            <filename>Main.as</filename> という名前をつけます。
             そして両方のファイルをエディタで開きます。
             これから、ドキュメントクラスを通じてふたつのファイルをつないできます。
             ZendExample を選択し、ステージ上でクリックします。
             ステージのプロパティパネルで、ドキュメントクラスを Main に変更します。
-            これで、ActionScript ファイル Main.as が ZendExample.fla
-            のユーザインターフェイスとつながります。
-            Flash ファイル ZendExample を実行すると、Main.as クラスが実行されるようになるのです。
+            これで、ActionScript ファイル <filename>Main.as</filename> が
+            <filename>ZendExample.fla</filename> のユーザインターフェイスとつながります。
+            Flash ファイル ZendExample を実行すると、
+            <filename>Main.as</filename> クラスが実行されるようになるのです。
             次に、AMF をコールする ActionScript を追加します。
         </para>
         <para>
-            それでは、Main クラスを作成していきましょう。これを用いてデータをサーバに送信し、結果を表示します。
-            次のコードを Main.as にコピーしましょう。これから、
+            それでは、Main クラスを作成していきましょう。
+            これを用いてデータをサーバに送信し、結果を表示します。
+            次のコードを <filename>Main.as</filename> にコピーしましょう。これから、
             このコードの中身を追いかけながら何をやっているのかを説明していきます。
         </para>
         <programlisting language="as"><![CDATA[

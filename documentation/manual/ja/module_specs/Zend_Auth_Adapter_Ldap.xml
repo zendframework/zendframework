@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15719 -->
+<!-- EN-Revision: 15735 -->
 <sect1 id="zend.auth.adapter.ldap">
 
     <title>LDAP 認証</title>
@@ -81,15 +81,15 @@ if ($log_path) {
         <para>
             上のコードでは、<classname>Zend_Config_Ini</classname> を用いてアダプタのオプションを読み込んでいます。
             これもまた必須ではありません。普通の配列を使用しても同様に動作します。
-            以下に <code>application/config/config.ini</code> ファイルの例を示します。
+            以下に <filename>application/config/config.ini</filename> ファイルの例を示します。
             このファイルでは、ふたつの別のサーバの設定を記述しています。
             複数のサーバのオプションを設定しておくと、
             アダプタ側では認証に成功するまで順にそれぞれのサーバへの認証を試みます。
-            サーバの名前 (<code>server1</code> や <code>server2</code> など)
+            サーバの名前 ('server1' や 'server2' など)
             は任意です。オプション配列についての詳細は、以下の
             <emphasis>サーバのオプション</emphasis> に関するセクションを参照ください。
             <classname>Zend_Config_Ini</classname> では、等号
-            (<code>=</code>) を含む値 (以下の例では DN など)
+            (<emphasis>=</emphasis>) を含む値 (以下の例では DN など)
             はクォートしなければならないことに注意しましょう。
             <programlisting language="ini"><![CDATA[
 [production]
@@ -115,9 +115,9 @@ ldap.server2.accountCanonicalForm = 3
 ldap.server2.baseDn = "CN=Users,DC=w,DC=net"
 ]]></programlisting>
             この設定を使用すると、<classname>Zend_Auth_Adapter_Ldap</classname>
-            はまず OpenLDAP サーバ <code>s0.foo.net</code> でのユーザ認証を試みます。
+            はまず OpenLDAP サーバ <filename>s0.foo.net</filename> でのユーザ認証を試みます。
             何らかの理由で認証に失敗した場合は、AD サーバ
-            <code>dc1.w.net</code> を用いて認証を試みます。
+            <filename>dc1.w.net</filename> を用いて認証を試みます。
         </para>
 
         <para>
@@ -153,10 +153,10 @@ ldap.server2.baseDn = "CN=Users,DC=w,DC=net"
 
         <para>
             以下に、サンプルのオプションパラメータを
-            <ulink url="http://php.net/print_r"><code>print_r()</code></ulink>
+            <ulink url="http://php.net/print_r"><methodname>print_r()</methodname></ulink>
             で出力した例を示します。これは、ふたつの LDAP サーバ
-            <code>s0.foo.net</code> と
-            <code>dc1.w.net</code> の設定を含むものです
+            <filename>s0.foo.net</filename> と
+            <filename>dc1.w.net</filename> の設定を含むものです
             (先ほどの INI ファイルと同じ設定です)。
             <programlisting language="output"><![CDATA[
 Array
@@ -187,7 +187,7 @@ Array
 ]]></programlisting>
             上の各オプションで設定した内容の違いの主な理由は、AD へのバインド時にはユーザ名が
             DN 形式である必要がないということです (以下の <emphasis>サーバのオプション</emphasis>
-            における <code>bindRequiresDn</code> の説明を参照ください)。
+            における <emphasis>bindRequiresDn</emphasis> の説明を参照ください)。
             つまり、認証時のユーザ名から DN を取得するために使用する多くのオプションは
             省略できるということです。
         </para>
@@ -207,12 +207,12 @@ Array
         </note>
 
         <para>
-            サーバの名前 (上の例における '<code>server1</code>' や '<code>server2</code>')
+            サーバの名前 (上の例における 'server1' や 'server2')
             は基本的には何でもかまいません。しかし、<classname>Zend_Config</classname> を用いる場合は、
             (数値インデックスではなく) 識別子を使用しなければなりません。また、
             各ファイルフォーマットで特別な意味を持つ文字
-            (INI のプロパティ区切り文字 '<code>.</code>' や
-            XML エンティティ参照の '<code>&amp;</code>' など)
+            (INI のプロパティ区切り文字 '<emphasis>.</emphasis>' や
+            XML エンティティ参照の '<emphasis>&amp;</emphasis>' など)
             は含まないようにしましょう。
         </para>
 
@@ -226,7 +226,7 @@ Array
         <note>
             <title>認証メソッドの中では実際に何が行われているのか?</title>
             <para>
-                <code>authenticate()</code> メソッドがコールされると、
+                <methodname>authenticate()</methodname> メソッドがコールされると、
                 アダプタは各サーバ設定を順に処理し、内部で管理する
                 <classname>Zend_Ldap</classname> のインスタンスに設定したうえでユーザ名とパスワードを指定して
                 <classname>Zend_Ldap::bind()</classname> メソッドをコールします。
@@ -243,10 +243,10 @@ Array
                 バインドに失敗した場合は <classname>Zend_Ldap</classname> は <classname>Zend_Ldap_Exception</classname>
                 をスローします。これは <classname>Zend_Auth_Adapter_Ldap</classname> で捕捉され、
                 次に設定されているサーバでの認証を試みます。
-                バインドが成功した場合はそこで処理を終了し、アダプタの <code>authenticate()</code>
+                バインドが成功した場合はそこで処理を終了し、アダプタの <methodname>authenticate()</methodname>
                 メソッドは成功したという結果を返します。
                 設定されているサーバをすべて試したけれどもどれも成功しなかったという場合は、
-                認証は失敗し、<code>authenticate()</code> は最後のエラーメッセージとともにその結果を返します。
+                認証は失敗し、<methodname>authenticate()</methodname> は最後のエラーメッセージとともにその結果を返します。
             </para>
         </note>
 
@@ -254,8 +254,8 @@ Array
             <classname>Zend_Auth_Adapter_Ldap</classname> コンストラクタのパラメータに渡す
             ユーザ名とパスワードは、認証に用いる情報
             (つまり、HTML のログインフォームでユーザが入力した情報)
-            を表します。これらは、<code>setUsername()</code> メソッドと
-            <code>setPassword()</code> メソッドで指定することもできます。
+            を表します。これらは、<methodname>setUsername()</methodname> メソッドと
+            <methodname>setPassword()</methodname> メソッドで指定することもできます。
         </para>
 
     </sect2>
@@ -289,8 +289,8 @@ Array
                     <entry><emphasis>port</emphasis></entry>
                     <entry>
                         LDAP サーバが待ち受けるポート。<emphasis>useSsl</emphasis> が
-                        <code>true</code> の場合、デフォルトの <emphasis>port</emphasis>
-                        は 636 となります。<emphasis>useSsl</emphasis> が <code>false</code>
+                        <constant>TRUE</constant> の場合、デフォルトの <emphasis>port</emphasis>
+                        は 636 となります。<emphasis>useSsl</emphasis> が <constant>FALSE</constant>
                         の場合、デフォルトの <emphasis>port</emphasis> は 389 です。
                     </entry>
                   </row>
@@ -298,12 +298,12 @@ Array
                     <entry>useStartTls</entry>
                     <entry>
                         LDAP クライアントが TLS (SSLv2) で暗号化されたトランスポートを用いるかどうか。
-                        実運用環境では、この値を <code>true</code> にすることを強く推奨します。
+                        実運用環境では、この値を <constant>TRUE</constant> にすることを強く推奨します。
                         そうすれば、パスワードが平文で転送されることを防ぐことができます。
-                        デフォルト値は <code>false</code> です。
+                        デフォルト値は <constant>FALSE</constant> です。
                         というのも、別途証明書のインストールを要するサーバが多く存在するからです。
-                        <code>useSsl</code> と <code>useStartTls</code> は互いに排他的です。
-                        <code>useStartTls</code> オプションのほうが <code>useSsl</code>
+                        <emphasis>useSsl</emphasis> と <emphasis>useStartTls</emphasis> は互いに排他的です。
+                        <emphasis>useStartTls</emphasis> オプションのほうが <emphasis>useSsl</emphasis>
                         よりおすすめですが、中にはこの新しい仕組みをサポートしていないサーバもあります。
                     </entry>
                   </row>
@@ -311,9 +311,9 @@ Array
                     <entry>useSsl</entry>
                     <entry>
                         LDAP クライアントが SSL で暗号化されたトランスポートを用いるかどうか。
-                        <code>useSsl</code> と <code>useStartTls</code> は互いに排他的ですが、
+                        <emphasis>useSsl</emphasis> と <emphasis>useStartTls</emphasis> は互いに排他的ですが、
                         サーバや LDAP クライアントライブラリが対応している場合は
-                        <code>useStartTls</code> を使うことを推奨します。
+                        <emphasis>useStartTls</emphasis> を使うことを推奨します。
                         この値によって、デフォルトの <emphasis>port</emphasis>
                         の値が変わります (上の <emphasis>port</emphasis> の説明を参照ください)。
                     </entry>
@@ -324,7 +324,7 @@ Array
                         アカウントの DN を探す際に使用するアカウントの DN。
                         バインド時のユーザ名が DN 形式であることを要求する
                         LDAP サーバで、このオプションを使用します。
-                        <emphasis>bindRequiresDn</emphasis> が <code>true</code>
+                        <emphasis>bindRequiresDn</emphasis> が <constant>TRUE</constant>
                         の場合はこのオプションが必須となります。
                         このアカウントは特権アカウントである必要はありません。<emphasis>baseDn</emphasis>
                         配下のオブジェクトに対する読み込み権限がありさえすればいいのです
@@ -347,18 +347,18 @@ Array
                         <emphasis>CN=Alice Baker,OU=Sales,DC=foo,DC=net</emphasis>
                         のような DN 形式でなければならないものもあります (基本的に、AD
                         <emphasis>以外</emphasis> のすべてのサーバがそうです)。
-                        このオプションが <code>true</code> の場合、
+                        このオプションが <constant>TRUE</constant> の場合、
                         もし認証対象のユーザ名が DN 形式でなければ
                         <classname>Zend_Ldap</classname> に自動的に DN を取得させ、
                         その DN で再度バインドさせるようにします。
-                        デフォルト値は <code>false</code> です。現時点で、
+                        デフォルト値は <constant>FALSE</constant> です。現時点で、
                         バインド時のユーザ名が DN 形式で <emphasis>なくてもよい</emphasis>
                         サーバとして知られているのは Microsoft Active Directory Server (ADS)
                         のみです。したがって、AD を使用する場合はこのオプションを
-                        <code>false</code> にしてもかまいません (そうするべきです。
+                        <constant>FALSE</constant> にしてもかまいません (そうするべきです。
                         DN を取得するために、サーバとの余計なやりとりが発生してしまうわけですから)。
                         それ以外の場合 (OpenLDAP など) は、このオプションを
-                        <code>true</code> にしなければなりません。このオプションは、
+                        <constant>TRUE</constant> にしなければなりません。このオプションは、
                         アカウントを検索する際に使用する
                         <emphasis>acountFilterFormat</emphasis>
                         のデフォルト値にも影響を及ぼします。
@@ -408,7 +408,7 @@ Array
                     <entry><emphasis>accountDomainName</emphasis></entry>
                     <entry>
                         対象となる LDAP サーバの FQDN ドメイン
-                        (例 <code>example.com</code>)。
+                        (例 <filename>example.com</filename>)。
                         このオプションは、名前を正規化する際に使用します。
                         バインド時に、ユーザが指定したユーザ名を必要に応じて変換します。
                         指定したユーザ名がそのサーバに存在するかどうかを調べる際にも使用します
@@ -443,25 +443,25 @@ Array
                     <entry>
                         アカウントを検索する際に使用する LDAP 検索フィルタ。
                         この文字列は
-                        <ulink url="http://php.net/printf"><code>printf()</code></ulink>
-                        形式のものとなり、ユーザ名を表す '<code>%s</code>'
+                        <ulink url="http://php.net/printf"><methodname>printf()</methodname></ulink>
+                        形式のものとなり、ユーザ名を表す '<emphasis>%s</emphasis>'
                         をひとつ含む必要があります。デフォルト値は
-                        '<code>(&amp;(objectClass=user)(sAMAccountName=%s))</code>' です。
-                        ただし、<code>bindRequiresDn</code> が <code>true</code>
+                        '<emphasis>(&amp;(objectClass=user)(sAMAccountName=%s))</emphasis>' です。
+                        ただし、<emphasis>bindRequiresDn</emphasis> が <constant>TRUE</constant>
                         の場合のデフォルト値は
-                        '<code>(&amp;(objectClass=posixAccount)(uid=%s))</code>'
+                        '<emphasis>(&amp;(objectClass=posixAccount)(uid=%s))</emphasis>'
                         となります。たとえば、何らかの理由で AD 環境で
-                        <code>bindRequiresDn = true</code> を使いたい場合は
-                        <code>accountFilterFormat = '(&amp;(objectClass=user)(sAMAccountName=%s))</code>'
+                        <emphasis>bindRequiresDn = true</emphasis> を使いたい場合は
+                        <emphasis>accountFilterFormat = '(&amp;(objectClass=user)(sAMAccountName=%s))</emphasis>'
                         と設定する必要があります。
                     </entry>
                   </row>
                   <row>
                     <entry><emphasis>optReferrals</emphasis></entry>
                     <entry>
-                        <code>true</code> に設定すると、
+                        <constant>TRUE</constant> に設定すると、
                         参照先を追跡するよう LDAP クライアントに指示します。
-                        デフォルト値は <code>false</code> です。
+                        デフォルト値は <constant>FALSE</constant> です。
                     </entry>
                   </row>
                 </tbody>
@@ -471,12 +471,12 @@ Array
 
         <note>
             <para>
-                <code>useStartTls = true</code> あるいは
-                <code>useSsl = true</code> としていると、LDAP クライアント側で
+                <emphasis>useStartTls = true</emphasis> あるいは
+                <emphasis>useSsl = true</emphasis> としていると、LDAP クライアント側で
                 「サーバの証明書を検証できない」というエラーが発生することに気づかれるかもしれません。
                 PHP の LDAP 拡張モジュールは OpenLDAP クライアントライブラリと密接につながっているので、
-                この問題を解決するには OpenLDAP クライアントの <code>ldap.conf</code> で
-                "<code>TLS_REQCERT never</code>" を設定 (そしてウェブサーバを再起動)
+                この問題を解決するには OpenLDAP クライアントの <filename>ldap.conf</filename> で
+                "<emphasis>TLS_REQCERT never</emphasis>" を設定 (そしてウェブサーバを再起動)
                 して OpenLDAP クライアントライブラリがサーバを信頼するようにします。
                 もしいわゆる「なりすまし」が心配なら、
                 LDAP サーバのルート証明書をエクスポートしてそれをウェブサーバに配置すれば、
@@ -491,7 +491,7 @@ Array
         <title>デバッグメッセージの収集</title>
 
         <para>
-            <classname>Zend_Auth_Adapter_Ldap</classname> は、<classname>authenticate()</classname>
+            <classname>Zend_Auth_Adapter_Ldap</classname> は、<methodname>authenticate()</methodname>
             メソッド内でのデバッグ情報を収集します。この情報は、<classname>Zend_Auth_Result</classname>
             オブジェクト内にメッセージとして保存されます。<classname>Zend_Auth_Result::getMessages()</classname>
             が返す配列は次のような形式になります。
@@ -569,14 +569,14 @@ Array
                       <row>
                         <entry><emphasis>useStartTls</emphasis></entry>
                         <entry>
-                            セキュリティの観点からは、これは <code>true</code> にしておくべきです。
+                            セキュリティの観点からは、これは <constant>TRUE</constant> にしておくべきです。
                             この場合、サーバに証明書をインストールしておく必要があります。
                         </entry>
                       </row>
                       <row>
                         <entry><emphasis>useSsl</emphasis></entry>
                         <entry>
-                            <code>useStartTls</code> の代替として用いられます (上を参照ください)。
+                            <emphasis>useStartTls</emphasis> の代替として用いられます (上を参照ください)。
                         </entry>
                       </row>
                       <row>
@@ -666,13 +666,13 @@ Array
                       <row>
                         <entry><emphasis>useStartTls</emphasis></entry>
                         <entry>
-                            セキュリティの観点からは、これは <code>true</code> にしておくべきです。
+                            セキュリティの観点からは、これは <constant>TRUE</constant> にしておくべきです。
                             この場合、サーバに証明書をインストールしておく必要があります。
                         </entry>
                       </row>
                       <row>
                         <entry>
-                            <code>useStartTls</code> の代替として用いられます (上を参照ください)。
+                            <emphasis>useStartTls</emphasis> の代替として用いられます (上を参照ください)。
                         </entry>
                       </row>
                       <row>
@@ -694,7 +694,7 @@ Array
                       <row>
                         <entry><emphasis>bindRequiresDn</emphasis></entry>
                         <entry>
-                            必須、かつ <code>true</code> である必要があります。
+                            必須、かつ <constant>TRUE</constant> である必要があります。
                             OpenLDAP のバインド時には、ユーザ名が DN 形式であることが必須だからです。
                         </entry>
                       </row>

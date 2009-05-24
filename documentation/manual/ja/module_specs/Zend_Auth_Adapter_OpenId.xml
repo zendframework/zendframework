@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15719 -->
+<!-- EN-Revision: 15735 -->
 <sect1 id="zend.auth.adapter.openid">
 
     <title>Open ID 認証</title>
@@ -46,7 +46,7 @@
             他の <classname>Zend_Auth</classname> アダプタ同様、<classname>Zend_Auth_Adapter_OpenId</classname>
             クラスは <classname>Zend_Auth_Adapter_Interface</classname> を実装しています。
             このインターフェイスで定義されているメソッドは
-            <code>authenticate()</code> です。
+            <methodname>authenticate()</methodname> です。
             このメソッドは認証そのものを行います。
             このメソッドをコールする前にオブジェクトを準備しておく必要があります。
             「準備」とは、OpenID の識別子を設定したりその他の
@@ -71,7 +71,7 @@
             次の例は、<classname>Zend_Auth_Adapter_OpenId</classname> の使用方法を示すものです。
             先ほど説明したように、<classname>Zend_Auth_Adapter_OpenId::authenticate()</classname>
             が 2 回コールされています。一度目、つまり HTML フォームから送信されたときは
-            <varname>$_POST['openid_action']</varname> が <code>"login"</code>
+            <varname>$_POST['openid_action']</varname> が <emphasis>"login"</emphasis>
             となっており、二度目、つまり OpenID サーバからリダイレクトで戻ってきたときは
             <varname>$_GET['openid_mode']</varname> あるいは <code>$_POST['openid_mode']</code>
             が設定されています。

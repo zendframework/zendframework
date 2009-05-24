@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15713 -->
+<!-- EN-Revision: 15735 -->
 <sect1 id="zend.auth.adapter.http">
 
     <title>HTTP 認証アダプタ</title>
@@ -106,38 +106,38 @@
                     </thead>
                     <tbody>
                         <row>
-                            <entry><code>accept_schemes</code></entry>
+                            <entry><emphasis>accept_schemes</emphasis></entry>
                             <entry>Yes</entry>
                             <entry>
                                 そのアダプタがクライアントからどの認証スキームを受け取るのかを設定します。
-                                <code>'basic'</code> や <code>'digest'</code>
+                                <emphasis>'basic'</emphasis> や <emphasis>'digest'</emphasis>
                                 を含む空白区切りの文字列でなければなりません。
                             </entry>
                         </row>
                         <row>
-                            <entry><code>realm</code></entry>
+                            <entry><emphasis>realm</emphasis></entry>
                             <entry>Yes</entry>
                             <entry>
                                 認証レルムを設定します。ユーザ名は、指定したレルム内で一意でなければなりません。
                             </entry>
                         </row>
                         <row>
-                            <entry><code>digest_domains</code></entry>
-                            <entry><code>'accept_schemes'</code> が <code>'digest'</code> を含む場合は Yes</entry>
+                            <entry><emphasis>digest_domains</emphasis></entry>
+                            <entry><emphasis>'accept_schemes'</emphasis> が <emphasis>'digest'</emphasis> を含む場合は Yes</entry>
                             <entry>
                                 空白区切りの URI のリストで、同じ認証情報が有効となる場所を指定します。
                                 URL は同一サーバ上でなくてもかまいません。
                             </entry>
                         </row>
                         <row>
-                            <entry><code>nonce_timeout</code></entry>
-                            <entry><code>'accept_schemes'</code> が <code>'digest'</code> を含む場合は Yes</entry>
+                            <entry><emphasis>nonce_timeout</emphasis></entry>
+                            <entry><emphasis>'accept_schemes'</emphasis> が <emphasis>'digest'</emphasis> を含む場合は Yes</entry>
                             <entry>
                                 nonce の有効期限を秒数で指定します。以下の注意を参照ください。
                             </entry>
                         </row>
                         <row>
-                            <entry><code>proxy_auth</code></entry>
+                            <entry><emphasis>proxy_auth</emphasis></entry>
                             <entry>No</entry>
                             <entry>
                                 デフォルトでは無効です。有効にすると、
@@ -151,7 +151,7 @@
 
         <note>
             <para>
-                現在の <code>nonce_timeout</code> の実装には、いくつかの副作用があります。
+                現在の <emphasis>nonce_timeout</emphasis> の実装には、いくつかの副作用があります。
                 この設定は、指定した nonce の有効期限、
                 つまり事実上はクライアントの認証情報の有効期限を指定するためのものです。
                 現在は、これを (たとえば) 3600 に設定すると、
@@ -191,7 +191,7 @@
                 ファイルリゾルバは、非常にシンプルなクラスです。
                 ファイル名を指定するプロパティを保持しており、
                 コンストラクタでこれを指定することができます。
-                <code>resolve()</code> メソッドはテキストファイルを走査し、
+                <methodname>resolve()</methodname> メソッドはテキストファイルを走査し、
                 ユーザ名とレルムにマッチする行を探します。テキストファイルのフォーマットは
                 Apache の htpasswd ファイルと似た形式で
                 <programlisting language="txt"><![CDATA[
@@ -241,10 +241,10 @@ $config = array(
 );
 ]]></programlisting>
             この配列は、アダプタに対してベーシック認証およびダイジェスト認証の両方を受け付けるように指定します。
-            また、<code>/members_only</code> および <code>/my_account</code>
+            また、<filename>/members_only</filename> および <filename>/my_account</filename>
             の配下では認証済みアクセスが必要となるようにします。
             realm の値は、通常はブラウザのパスワードダイアログボックスに表示されます。
-            <code>nonce_timeout</code> は、もちろん、先ほど説明したとおりの振る舞いをします。
+            <emphasis>nonce_timeout</emphasis> は、もちろん、先ほど説明したとおりの振る舞いをします。
         </para>
 
         <para>

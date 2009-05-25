@@ -54,7 +54,7 @@ class Zend_Application_Resource_ModulesTest extends PHPUnit_Framework_TestCase
         // Store original autoloaders
         $this->loaders = spl_autoload_functions();
         if (!is_array($this->loaders)) {
-            // spl_autoload_functions does not return empty array when no 
+            // spl_autoload_functions does not return empty array when no
             // autoloaders registered...
             $this->loaders = array();
         }
@@ -135,9 +135,10 @@ class Zend_Application_Resource_ModulesTest extends PHPUnit_Framework_TestCase
         $resource->setBootstrap($this->bootstrap);
         $resource->init();
         $bootstraps = $resource->getExecutedBootstraps();
-        $test       = array_keys((array) $bootstraps);
-        $expected   = array('bar', 'foo-bar', 'foo');
-        $this->assertEquals($expected, $test);
+        $this->assertEquals(3, count((array)$bootstraps));
+        $this->assertArrayHasKey('bar',     (array)$bootstraps);
+        $this->assertArrayHasKey('foo-bar', (array)$bootstraps);
+        $this->assertArrayHasKey('foo',     (array)$bootstraps);
     }
 
     public function testShouldReturnExecutedBootstrapsWhenComplete()
@@ -150,9 +151,10 @@ class Zend_Application_Resource_ModulesTest extends PHPUnit_Framework_TestCase
         $resource = new Zend_Application_Resource_Modules(array());
         $resource->setBootstrap($this->bootstrap);
         $bootstraps = $resource->init();
-        $test       = array_keys((array) $bootstraps);
-        $expected   = array('bar', 'foo-bar', 'foo');
-        $this->assertEquals($expected, $test);
+        $this->assertEquals(3, count((array)$bootstraps));
+        $this->assertArrayHasKey('bar',     (array)$bootstraps);
+        $this->assertArrayHasKey('foo-bar', (array)$bootstraps);
+        $this->assertArrayHasKey('foo',     (array)$bootstraps);
     }
 }
 

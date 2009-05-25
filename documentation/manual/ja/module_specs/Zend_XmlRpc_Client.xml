@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15744 -->
 <sect1 id="zend.xmlrpc.client">
     <title>Zend_XmlRpc_Client</title>
 
@@ -109,7 +109,7 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
                 <code>call()</code> のパラメータをネイティブの PHP
                 型で渡します。つまり <code>string</code>、
                 <code>integer</code>、<code>float</code>、
-                <code>boolean</code>、<code>array</code> あるいは
+                <type>Boolean</type>、<code>array</code> あるいは
                 <code>object</code> で渡すということです。
                 このとき、PHP のネイティブ型は自動的に検出され、
                 以下の表にしたがって XML-RPC 型に変換されます。

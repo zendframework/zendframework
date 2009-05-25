@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15742 -->
+<!-- EN-Revision: 15744 -->
 <sect1 id="zend.cache.frontends">
     <title><classname>Zend_Cache</classname> のフロントエンド</title>
 
@@ -72,7 +72,7 @@
                           </row>
                           <row>
                               <entry><code>logging</code></entry>
-                              <entry><code>boolean</code></entry>
+                              <entry><type>Boolean</type></entry>
                               <entry><constant>FALSE</constant></entry>
                               <entry>
                                 true を指定すると、<classname>Zend_Log</classname> によるロギングが有効になります
@@ -81,7 +81,7 @@
                           </row>
                           <row>
                               <entry><code>write_control</code></entry>
-                              <entry><code>boolean</code></entry>
+                              <entry><type>Boolean</type></entry>
                               <entry><constant>TRUE</constant></entry>
                               <entry>
                                 書き込み制御を有効/無効にします (壊れたエントリを検出するため、
@@ -94,7 +94,7 @@
                           </row>
                           <row>
                               <entry><code>automatic_serialization</code></entry>
-                              <entry><code>boolean</code></entry>
+                              <entry><type>Boolean</type></entry>
                               <entry><constant>FALSE</constant></entry>
                               <entry>
                                 自動シリアライズを有効/無効にします。
@@ -117,7 +117,7 @@
                           </row>
                           <row>
                               <entry><code>ignore_user_abort</code></entry>
-                              <entry><code>boolean</code></entry>
+                              <entry><type>Boolean</type></entry>
                               <entry><constant>FALSE</constant></entry>
                               <entry>
                                 true を指定すると、save() メソッド内で PHP の
@@ -314,7 +314,7 @@ echo 'これはキャッシュされません ('.time().').';
                      <tbody>
                           <row>
                               <entry><code>cache_by_default</code></entry>
-                              <entry><code>boolean</code></entry>
+                              <entry><type>Boolean</type></entry>
                               <entry><constant>TRUE</constant></entry>
                               <entry>
                                   true の場合は、関数のコール結果がデフォルトでキャッシュされます。
@@ -401,7 +401,7 @@ $cache->call('veryExpensiveFunc', $params);
                          </row>
                          <row>
                               <entry><code>cache_by_default</code></entry>
-                              <entry><code>boolean</code></entry>
+                              <entry><type>Boolean</type></entry>
                               <entry><constant>TRUE</constant></entry>
                               <entry>
                                   true を設定すると、デフォルトでキャッシュされます。
@@ -546,7 +546,7 @@ $result = $cache->foobar2('1', '2');
                          </row>
                          <row>
                               <entry><code>ignore_missing_master_files</code></entry>
-                              <entry><code>boolean</code></entry>
+                              <entry><type>Boolean</type></entry>
                               <entry><constant>FALSE</constant></entry>
                               <entry>
                                   true の場合は、マスタファイルが存在しない場合は無視します
@@ -609,7 +609,7 @@ $result = $cache->foobar2('1', '2');
                      <tbody>
                          <row>
                               <entry><code>http_conditional</code></entry>
-                              <entry><code>boolean</code></entry>
+                              <entry><type>Boolean</type></entry>
                               <entry><constant>FALSE</constant></entry>
                               <entry>
                                   http_conditional システムを使用します (現時点ではまだ実装されていません)。
@@ -617,7 +617,7 @@ $result = $cache->foobar2('1', '2');
                          </row>
                          <row>
                               <entry><code>debug_header</code></entry>
-                              <entry><code>boolean</code></entry>
+                              <entry><type>Boolean</type></entry>
                               <entry><constant>FALSE</constant></entry>
                               <entry>
                                   true の場合は、キャッシュされた各ページの先頭に

@@ -54,14 +54,9 @@ class Zend_Amf_TypeloaderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Contact', $class);
     }
 
-    public function testExceptionClassMap() {
-        try {
-            $class = Zend_Amf_Parse_TypeLoader::loadType('com.example.vo.Bogus');
-        }
-        catch (Zend_Amf_Exception $expected) {
-            return;
-        }
-        $this->fail('An expected exception has not been raised.');
+    public function testUnknownClassMap() {
+        $class = Zend_Amf_Parse_TypeLoader::loadType('com.example.vo.Bogus');
+        $this->assertEquals('stdClass', $class);
     }
 }
 

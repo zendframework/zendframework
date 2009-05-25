@@ -308,8 +308,8 @@
                                 デフォルトで、<classname>Zend_Soap_Wsdl</classname>は複雑な型のための検出アルゴリズムとして
                                 <classname>Zend_Soap_Wsdl_Strategy_DefaultComplexType</classname>クラスで生成されます。
                                 AutoDiscoverコンストラクタの最初のパラメータは、
-                                クラスの名前で<classname>Zend_Soap_Wsdl_Strategy_Interface</classname>またはストリングを実装している、
-                                どんな複雑な型ストラテジーでもとります。
+                                <classname>Zend_Soap_Wsdl_Strategy_Interface</classname>を実装した、
+                                どんな複雑な型ストラテジーでも、クラスの名前を持つ文字列でもとります。
                                 <code>$extractComplexType</code>との後方互換性のために、
                                 ブール変数は、以下の方法で解析されます:
                                 もしtrueなら、<classname>Zend_Soap_Wsdl_Strategy_DefaultComplexType</classname>、

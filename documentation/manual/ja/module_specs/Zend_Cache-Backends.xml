@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15740 -->
 <sect1 id="zend.cache.backends">
     <title><classname>Zend_Cache</classname> のバックエンド</title>
     <para>
@@ -29,17 +29,17 @@
                  </thead>
                  <tbody>
                       <row>
-                          <entry><code>cache_dir</code></entry>
-                          <entry><code>string</code></entry>
-                          <entry><code>'/tmp/'</code></entry>
+                          <entry><emphasis>cache_dir</emphasis></entry>
+                          <entry><type>String</type></entry>
+                          <entry><filename>'/tmp/'</filename></entry>
                           <entry>
                               キャッシュファイルを書き込むディレクトリ。
                           </entry>
                       </row>
                       <row>
-                          <entry><code>file_locking</code></entry>
-                          <entry><code>boolean</code></entry>
-                          <entry><code>true</code></entry>
+                          <entry><emphasis>file_locking</emphasis></entry>
+                          <entry><type>Boolean</type></entry>
+                          <entry><constant>TRUE</constant></entry>
                           <entry>
                             ファイルロックを有効/無効にします。
                             不慮の事故でキャッシュが破壊されることを防げますが、
@@ -47,9 +47,9 @@
                           </entry>
                       </row>
                       <row>
-                          <entry><code>read_control</code></entry>
-                          <entry><code>boolean</code></entry>
-                          <entry><code>true</code></entry>
+                          <entry><emphasis>read_control</emphasis></entry>
+                          <entry><type>Boolean</type></entry>
+                          <entry><constant>TRUE</constant></entry>
                           <entry>
                             読み込み制御を有効/無効にします。有効にすると
                             キャッシュファイルに制御キーが埋め込まれます。
@@ -57,9 +57,9 @@
                           </entry>
                       </row>
                       <row>
-                          <entry><code>read_control_type</code></entry>
-                          <entry><code>string</code></entry>
-                          <entry><code>'crc32'</code></entry>
+                          <entry><emphasis>read_control_type</emphasis></entry>
+                          <entry><type>String</type></entry>
+                          <entry>'crc32'</entry>
                           <entry>
                             読み込み制御の方式 (読み込み制御が有効な場合にのみ使用します)。
                             使用可能な値は
@@ -71,9 +71,9 @@
                         </entry>
                       </row>
                       <row>
-                          <entry><code>hashed_directory_level</code></entry>
-                          <entry><code>int</code></entry>
-                          <entry><code>0</code></entry>
+                          <entry><emphasis>hashed_directory_level</emphasis></entry>
+                          <entry><type>Integer</type></entry>
+                          <entry>0</entry>
                           <entry>
                             ディレクトリ構造のレベルを指定します。0 は "ディレクトリ階層を作らない"、
                             1 は "一段階のサブディレクトリを作る"、2 は "二段階の……" を意味します。
@@ -84,17 +84,17 @@
                           </entry>
                       </row>
                       <row>
-                          <entry><code>hashed_directory_umask</code></entry>
-                          <entry><code>int</code></entry>
-                          <entry><code>0700</code></entry>
+                          <entry><emphasis>hashed_directory_umask</emphasis></entry>
+                          <entry><type>Integer</type></entry>
+                          <entry>0700</entry>
                           <entry>
                               ディレクトリ構造の umask を指定します。
                         </entry>
                       </row>
                       <row>
-                          <entry><code>file_name_prefix</code></entry>
-                          <entry><code>string</code></entry>
-                          <entry><code>'zend_cache'</code></entry>
+                          <entry><emphasis>file_name_prefix</emphasis></entry>
+                          <entry><type>String</type></entry>
+                          <entry>'zend_cache'</entry>
                           <entry>
                               キャッシュファイルのプレフィックスを設定します。
                               このオプションを設定する際には十分注意しましょう。
@@ -104,17 +104,17 @@
                         </entry>
                       </row>
                       <row>
-                          <entry><code>cache_file_umask</code></entry>
-                          <entry><code>int</code></entry>
-                          <entry><code>0700</code></entry>
+                          <entry><emphasis>cache_file_umask</emphasis></entry>
+                          <entry><type>Integer</type></entry>
+                          <entry>0700</entry>
                           <entry>
                               キャッシュファイルの umask を設定します。
                           </entry>
                       </row>
                        <row>
-                          <entry><code>metatadatas_array_max_size</code></entry>
-                          <entry><code>int</code></entry>
-                          <entry><code>100</code></entry>
+                          <entry><emphasis>metatadatas_array_max_size</emphasis></entry>
+                          <entry><type>Integer</type></entry>
+                          <entry>100</entry>
                           <entry>
                               メタデータ配列の内部最大サイズを設定します
                               (よくわからない場合はこの値を変更してはいけません)。
@@ -146,17 +146,17 @@
                  </thead>
                  <tbody>
                       <row>
-                          <entry><code>cache_db_complete_path (必須)</code></entry>
-                          <entry><code>string</code></entry>
-                          <entry><code>null</code></entry>
+                          <entry><emphasis>cache_db_complete_path (必須)</emphasis></entry>
+                          <entry><type>String</type></entry>
+                          <entry><constant>NULL</constant></entry>
                           <entry>
                               SQLite データベースへの (ファイル名も含めた) フルパス。
                           </entry>
                       </row>
                       <row>
-                          <entry><code>automatic_vacuum_factor</code></entry>
-                          <entry><code>int</code></entry>
-                          <entry><code>10</code></entry>
+                          <entry><emphasis>automatic_vacuum_factor</emphasis></entry>
+                          <entry><type>Integer</type></entry>
+                          <entry>10</entry>
                           <entry>
                               自動バキューム処理の設定を行います。
                               自動バキューム処理とは、clean() や delete()
@@ -203,13 +203,11 @@
                  </thead>
                  <tbody>
                       <row>
-                          <entry><code>servers</code></entry>
-                          <entry><code>array</code></entry>
+                          <entry><emphasis>servers</emphasis></entry>
+                          <entry><type>Array</type></entry>
                           <entry>
-                            <code>
                               array(array('host' => 'localhost', 'port' => 11211, 'persistent' => true, 'weight' => 1,
                               'timeout' => 5, 'retry_interval' => 15, 'status' => true, 'failure_callback' => '' ))
-                            </code>
                           </entry>
                           <entry>
                               memcached サーバの配列です。各 memcached サーバの情報は、
@@ -225,17 +223,17 @@
                           </entry>
                       </row>
                       <row>
-                          <entry><code>compression</code></entry>
-                          <entry><code>boolean</code></entry>
-                          <entry><code>false</code></entry>
+                          <entry><emphasis>compression</emphasis></entry>
+                          <entry><type>Boolean</type></entry>
+                          <entry><constant>FALSE</constant></entry>
                           <entry>
                              その場での圧縮処理を行いたい場合に true を指定します。
                           </entry>
                       </row>
                       <row>
-                          <entry><code>compatibility</code></entry>
-                          <entry><code>boolean</code></entry>
-                          <entry><code>false</code></entry>
+                          <entry><emphasis>compatibility</emphasis></entry>
+                          <entry><type>Boolean</type></entry>
+                          <entry><constant>FALSE</constant></entry>
                           <entry>
                              古い memcache サーバ/拡張モジュールとの互換性モードを使用したい場合に
                              true を指定します。
@@ -289,17 +287,17 @@
                  </thead>
                  <tbody>
                       <row>
-                          <entry><code>user</code></entry>
-                          <entry><code>string</code></entry>
-                          <entry><code>null</code></entry>
+                          <entry><emphasis>user</emphasis></entry>
+                          <entry><type>String</type></entry>
+                          <entry><constant>NULL</constant></entry>
                           <entry>
                               xcache.admin.user です。clean() メソッドを使う際に必要です。
                           </entry>
                       </row>
                       <row>
-                          <entry><code>password</code></entry>
-                          <entry><code>string</code></entry>
-                          <entry><code>null</code></entry>
+                          <entry><emphasis>password</emphasis></entry>
+                          <entry><type>String</type></entry>
+                          <entry><constant>NULL</constant></entry>
                           <entry>
                               xcache.admin.pass (MD5 ではない平文形式) です。
                               clean() メソッドを使う際に必要です。
@@ -318,7 +316,7 @@
         </para>
         <para>
             このバックエンドはタグをサポートしています。しかし、
-            クリーニングモード <code>CLEANING_MODE_NOT_MATCHING_TAG</code> はサポートしていません。
+            クリーニングモード <constant>CLEANING_MODE_NOT_MATCHING_TAG</constant> はサポートしていません。
         </para>
         <para>
             <classname>Zend_Cache::factory()</classname> メソッドでこのバックエンドを指定する場合は、
@@ -361,41 +359,41 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
                  </thead>
                  <tbody>
                       <row>
-                          <entry><code>slow_backend</code></entry>
-                          <entry><code>string</code></entry>
-                          <entry><code>File</code></entry>
+                          <entry><emphasis>slow_backend</emphasis></entry>
+                          <entry><type>String</type></entry>
+                          <entry>File</entry>
                           <entry>
                               "低速" バックエンドの名前。
                           </entry>
                       </row>
                       <row>
-                          <entry><code>fast_backend</code></entry>
-                          <entry><code>string</code></entry>
-                          <entry><code>Apc</code></entry>
+                          <entry><emphasis>fast_backend</emphasis></entry>
+                          <entry><type>String</type></entry>
+                          <entry>Apc</entry>
                           <entry>
                               "高速" バックエンドの名前。
                           </entry>
                       </row>
                       <row>
-                          <entry><code>slow_backend_options</code></entry>
-                          <entry><code>array</code></entry>
-                          <entry><code>array()</code></entry>
+                          <entry><emphasis>slow_backend_options</emphasis></entry>
+                          <entry><type>Array</type></entry>
+                          <entry><methodname>array()</methodname></entry>
                           <entry>
                               "低速" バックエンドのオプション。
                           </entry>
                       </row>
                       <row>
-                          <entry><code>fast_backend_options</code></entry>
-                          <entry><code>array</code></entry>
-                          <entry><code>array()</code></entry>
+                          <entry><emphasis>fast_backend_options</emphasis></entry>
+                          <entry><type>Array</type></entry>
+                          <entry><methodname>array()</methodname></entry>
                           <entry>
                               "高速" バックエンドのオプション。
                           </entry>
                       </row>
                       <row>
-                          <entry><code>slow_backend_custom_naming</code></entry>
-                          <entry><code>boolean</code></entry>
-                          <entry><code>false</code></entry>
+                          <entry><emphasis>slow_backend_custom_naming</emphasis></entry>
+                          <entry><type>Boolean</type></entry>
+                          <entry><constant>FALSE</constant></entry>
                           <entry>
                               true の場合は、引数 slow_backend を完全なクラス名として使用します。
                               false の場合は、引数をクラス名 "Zend_Cache_Backend_[...]"
@@ -403,9 +401,9 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
                           </entry>
                       </row>
                       <row>
-                          <entry><code>fast_backend_custom_naming</code></entry>
-                          <entry><code>boolean</code></entry>
-                          <entry><code>false</code></entry>
+                          <entry><emphasis>fast_backend_custom_naming</emphasis></entry>
+                          <entry><type>Boolean</type></entry>
+                          <entry><constant>FALSE</constant></entry>
                           <entry>
                               true の場合は、引数 fast_backend を完全なクラス名として使用します。
                               false の場合は、引数をクラス名 "Zend_Cache_Backend_[...]"
@@ -413,36 +411,36 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
                           </entry>
                       </row>
                       <row>
-                          <entry><code>slow_backend_autoload</code></entry>
-                          <entry><code>boolean</code></entry>
-                          <entry><code>false</code></entry>
+                          <entry><emphasis>slow_backend_autoload</emphasis></entry>
+                          <entry><type>Boolean</type></entry>
+                          <entry><constant>FALSE</constant></entry>
                           <entry>
                               true の場合は、低速バックエンドに対して require_once を行いません
                               (独自のバックエンドを使用する場合にのみ有用です)。
                           </entry>
                       </row>
                       <row>
-                          <entry><code>fast_backend_autoload</code></entry>
-                          <entry><code>boolean</code></entry>
-                          <entry><code>false</code></entry>
+                          <entry><emphasis>fast_backend_autoload</emphasis></entry>
+                          <entry><type>Boolean</type></entry>
+                          <entry><constant>FALSE</constant></entry>
                           <entry>
                               true の場合は、高速バックエンドに対して require_once を行いません
                               (独自のバックエンドを使用する場合にのみ有用です)。
                           </entry>
                       </row>
                       <row>
-                          <entry><code>auto_refresh_fast_cache</code></entry>
-                          <entry><code>boolean</code></entry>
-                          <entry><code>true</code></entry>
+                          <entry><emphasis>auto_refresh_fast_cache</emphasis></entry>
+                          <entry><type>Boolean</type></entry>
+                          <entry><constant>TRUE</constant></entry>
                           <entry>
                               true の場合は、キャッシュレコードにヒットしたときに
                               高速キャッシュを自動的にリフレッシュします。
                           </entry>
                       </row>
                       <row>
-                          <entry><code>stats_update_factor</code></entry>
-                          <entry><code>integer</code></entry>
-                          <entry><code>10</code></entry>
+                          <entry><emphasis>stats_update_factor</emphasis></entry>
+                          <entry><type>Integer</type></entry>
+                          <entry>10</entry>
                           <entry>
                               高速バックエンドを使用率の計算を無効化 / 効率化します
                               (レコードをキャッシュに書き込む際の

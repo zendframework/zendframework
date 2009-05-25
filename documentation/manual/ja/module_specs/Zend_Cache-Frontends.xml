@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15719 -->
+<!-- EN-Revision: 15740 -->
 <sect1 id="zend.cache.frontends">
     <title><classname>Zend_Cache</classname> のフロントエンド</title>
 
@@ -38,20 +38,20 @@
                      </thead>
                      <tbody>
                           <row>
-                              <entry><code>caching</code></entry>
-                              <entry><code>boolean</code></entry>
-                              <entry><code>true</code></entry>
+                              <entry><emphasis>caching</emphasis></entry>
+                              <entry><type>Boolean</type></entry>
+                              <entry><constant>TRUE</constant></entry>
                               <entry>
                                   キャッシングを有効/無効にします
                                   (キャッシュされたスクリプトのデバッグ時に有用です)。
                               </entry>
                           </row>
                           <row>
-                              <entry><code>cache_id_prefix</code></entry>
-                              <entry><code>string</code></entry>
-                              <entry><code>null</code></entry>
+                              <entry><emphasis>cache_id_prefix</emphasis></entry>
+                              <entry><type>String</type></entry>
+                              <entry><constant>NULL</constant></entry>
                               <entry>
-                                すべてのキャッシュ ID のプレフィックス。<code>null</code> を指定すると、
+                                すべてのキャッシュ ID のプレフィックス。<constant>NULL</constant> を指定すると、
                                 プレフィックスは使用しません。
                                 キャッシュ ID のプレフィックスは、いわばキャッシュ内での名前空間です。
                                 これによって、複数のアプリケーションやウェブサイトで
@@ -62,11 +62,11 @@
                               </entry>
                           </row>
                           <row>
-                              <entry><code>lifetime</code></entry>
-                              <entry><code>int</code></entry>
-                              <entry><code>3600</code></entry>
+                              <entry><emphasis>lifetime</emphasis></entry>
+                              <entry><type>Integer</type></entry>
+                              <entry>3600</entry>
                               <entry>
-                                キャッシュの有効期間 (秒)。<code>null</code>
+                                キャッシュの有効期間 (秒)。<constant>NULL</constant>
                                 を指定すると、有効期間が無期限となります。
                               </entry>
                           </row>

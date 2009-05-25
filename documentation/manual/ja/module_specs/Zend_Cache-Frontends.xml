@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15745 -->
+<!-- EN-Revision: 15746 -->
 <sect1 id="zend.cache.frontends">
     <title><classname>Zend_Cache</classname> のフロントエンド</title>
 
@@ -517,7 +517,7 @@ $result = $cache->foobar2('1', '2');
                      <tbody>
                          <row>
                               <entry><code>master_file (非推奨)</code></entry>
-                              <entry><code>string</code></entry>
+                              <entry><type>String</type></entry>
                               <entry><code></code></entry>
                               <entry>
                                   マスタファイルへのフルパス。
@@ -533,7 +533,7 @@ $result = $cache->foobar2('1', '2');
                          </row>
                          <row>
                               <entry><code>master_files_mode</code></entry>
-                              <entry><code>string</code></entry>
+                              <entry><type>String</type></entry>
                               <entry><classname>Zend_Cache_Frontend_File::MODE_OR</classname></entry>
                               <entry>
                                   <classname>Zend_Cache_Frontend_File::MODE_AND</classname> あるいは

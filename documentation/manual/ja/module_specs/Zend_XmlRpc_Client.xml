@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15745 -->
+<!-- EN-Revision: 15746 -->
 <sect1 id="zend.xmlrpc.client">
     <title>Zend_XmlRpc_Client</title>
 
@@ -49,7 +49,7 @@ echo $client->call('test.sayHello');
         <para>
             リモートメソッドのコールによって返される XML-RPC の値は、
             自動的に PHP のネイティブ型に変換されます。
-            上の例では PHP の <code>string</code> が返されるので、
+            上の例では PHP の <type>String</type> が返されるので、
             それをそのまま使用することができます。
         </para>
 
@@ -107,7 +107,7 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
             <title>PHP ネイティブ変数をパラメータとして渡す</title>
             <para>
                 <code>call()</code> のパラメータをネイティブの PHP
-                型で渡します。つまり <code>string</code>、
+                型で渡します。つまり <type>String</type>、
                 <code>integer</code>、<code>float</code>、
                 <type>Boolean</type>、<type>Array</type> あるいは
                 <code>object</code> で渡すということです。

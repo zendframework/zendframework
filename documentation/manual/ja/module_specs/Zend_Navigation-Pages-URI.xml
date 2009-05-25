@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15743 -->
+<!-- EN-Revision: 15746 -->
 <sect2 id="zend.navigation.pages.uri">
     <title>Zend_Navigation_Page_Uri</title>
 
@@ -12,7 +12,7 @@
         画面の共通オプションに加えて、URI画面にはたった一つのオプション、
         <code>uri</code>があります。
         <code>$page->getHref()</code>を呼び出すときに<code>uri</code>が戻されます。
-        それは<code>string</code>かまたは<constant>NULL</constant>です。
+        それは<type>String</type>かまたは<constant>NULL</constant>です。
     </para>
 
     <note>
@@ -43,7 +43,7 @@
             <tbody>
                 <row>
                     <entry><code>uri</code></entry>
-                    <entry><code>string</code></entry>
+                    <entry><type>String</type></entry>
                     <entry><constant>NULL</constant></entry>
                     <entry>
                         画面へのURI。さまざまな文字列またはnullになりうる。

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15719 -->
+<!-- EN-Revision: 15741 -->
 <sect1 id="zend.db.table">
 
     <title>Zend_Db_Table</title>
@@ -601,7 +601,7 @@ class Bugs extends Zend_Db_Table_Abstract
             </para>
 
             <para>
-                <varname>$_sequence</varname> の値を boolean の <code>false</code>
+                <varname>$_sequence</varname> の値を boolean の <constant>FALSE</constant>
                 にすると、<classname>Zend_Db_Table_Abstract</classname> はそのテーブルが自然キーを持つものとみなします。
                 <code>insert()</code> メソッドを使用する際には、
                 主キーカラムの値をデータの配列で指定する必要があります。

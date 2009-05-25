@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15719 -->
+<!-- EN-Revision: 15741 -->
 <sect1 id="zend.date.overview">
 
     <title>Zend_Date API の概要</title>
@@ -822,7 +822,7 @@ print $date;
                                 そのオブジェクトのロケールにもとづいた整数表現を返します。
                                 <varname>$part</varname> で <classname>Zend_Date::MONTH_NAME_SHORT</classname>
                                 のような非数値要素を選択した場合は、
-                                <code>false</code> を返します。
+                                <constant>FALSE</constant> を返します。
                                 <emphasis>注意:</emphasis> このメソッドは
                                 <link linkend="id.date.basic.operations"><code>get()</code></link>
                                 をコールし、結果を PHP の integer 型にキャストします。つまり、

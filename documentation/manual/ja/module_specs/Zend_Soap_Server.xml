@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15741 -->
 <sect1 id="zend.soap.server">
     <title>Zend_Soap_Server</title>
 
@@ -342,7 +342,7 @@ $request = $server->getLastRequest();
             <para>
                 <classname>Zend_Soap_Server::handle()</classname>メソッドは、出力ストリームに生成されたレスポンスを自動的に送ります。
                 それは<code>setReturnResponse()</code>にパラメータとして
-                <code>true</code>または<code>false</code>を与えてブロックできます。
+                <code>true</code>または<constant>FALSE</constant>を与えてブロックできます。
                 <footnote>
                     <para>
                         戻るレスポンスフラグの現在の状態は

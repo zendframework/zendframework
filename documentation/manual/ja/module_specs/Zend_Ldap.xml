@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15741 -->
 <sect1 id="zend.ldap.using">
 
     <title>導入</title>
@@ -175,7 +175,7 @@ echo "$acctname\n";
                             LDAP クライアント側に TLS (SSLv2) での暗号化トランスポートを要求するか否か。
                             実運用環境では <code>true</code> を指定することを強く推奨します。
                             これにより、パスワードが平文で送られてしまうことを防ぎます。
-                            デフォルト値は <code>false</code> です。というのも、
+                            デフォルト値は <constant>FALSE</constant> です。というのも、
                             この機能を使用するにはサーバ側に別途証明書のインストールが必要となることが多いからです。
                             <code>useSsl</code> オプションと <code>useStartTls</code> オプションは共存できません。
                             <code>useStartTls</code> オプションのほうが <code>useSsl</code>
@@ -206,7 +206,7 @@ echo "$acctname\n";
                         <entry>
                             <code>true</code> を指定すると、ユーザ名が DN 形式でない場合に
                             <classname>Zend_Ldap</classname> はバインド時に使用してアカウントの DN を取得します。
-                            デフォルト値は <code>false</code> です。
+                            デフォルト値は <constant>FALSE</constant> です。
                         </entry>
                       </row>
                       <row>
@@ -270,7 +270,7 @@ echo "$acctname\n";
                         <entry>
                             <code>true</code> に設定すると、
                             参照先を追跡するよう LDAP クライアントに指示します。
-                            デフォルト値は <code>false</code> です。
+                            デフォルト値は <constant>FALSE</constant> です。
                         </entry>
                       </row>
                     </tbody>

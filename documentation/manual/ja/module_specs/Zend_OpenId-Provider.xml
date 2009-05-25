@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15741 -->
 <sect1 id="zend.openid.provider">
     <title>Zend_OpenId_Provider</title>
     <para>
@@ -62,7 +62,7 @@ if (!$server->hasUser(TEST_ID)) {
             成功した場合、<classname>Zend_OpenId_Provider::handle</classname>
             メソッドは文字列を返します。これはそのまま OpenID
             対応のサイトに戻さなければなりません。
-            失敗した場合は <code>false</code> を返します。
+            失敗した場合は <constant>FALSE</constant> を返します。
             この例では、失敗した場合に HTTP 403 レスポンスを返しています。
             このページをウェブブラウザで表示しようとすると、
             HTTP 403 レスポンスが返されます。リクエストが

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15719 -->
+<!-- EN-Revision: 15741 -->
 <sect1 id="zend.controller.response">
     <title>レスポンスオブジェクト</title>
 
@@ -154,7 +154,7 @@ $front->dispatch();
                     ヘッダがすでに送信されているかどうかを調べます。
                     オプションのフラグで、ヘッダが送信済みの場合に例外をスローするかどうかを指定します。
                     この設定は、プロパティ <code>headersSentThrowsException</code>
-                    を <code>false</code> にすることで上書きできます。
+                    を <constant>FALSE</constant> にすることで上書きできます。
                 </para>
             </listitem>
 

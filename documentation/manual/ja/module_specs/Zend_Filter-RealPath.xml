@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15715 -->
+<!-- EN-Revision: 15741 -->
 <sect2 id="zend.filter.set.realpath">
     <title>RealPath</title>
 
@@ -14,7 +14,7 @@
 
     <para>
         たとえばファイルが存在しない場合、
-        <classname>Zend_Filter_RealPath</classname>は失敗すると<code>FALSE</code>を返します。
+        <classname>Zend_Filter_RealPath</classname>は失敗すると<constant>FALSE</constant>を返します。
         もし最後のパスのコンポーネントだけが存在しない場合、
         BSDシステムでは<classname>Zend_Filter_RealPath</classname>は失敗しますが、
         他のシステムでは<constant>FALSE</constant>を返します。

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15741 -->
 <sect1 id="zend.loader.load">
 
     <title>ファイルやクラスの動的な読み込み</title>
@@ -124,7 +124,7 @@ Zend_Loader::loadClass('Container_Tree',
         <para>
             静的メソッド <classname>Zend_Loader::isReadable($pathname)</classname>
             は、指定した場所にファイルが存在して読み込み可能な場合に
-            <code>TRUE</code>、それ以外の場合に <code>FALSE</code> を返します。
+            <code>TRUE</code>、それ以外の場合に <constant>FALSE</constant> を返します。
         </para>
 
         <example id="zend.loader.load.isreadable.example">
@@ -221,7 +221,7 @@ Zend_Loader::registerAutoload('My_Loader');
             autoload コールバックを削除することもできます。
             <code>registerAutoload()</code> にはオプションで 2 番目の引数を指定することができ、
             デフォルトでは <code>true</code> が設定されるようになっています。
-            この引数を <code>false</code> とすると、
+            この引数を <constant>FALSE</constant> とすると、
             指定したコールバックが SPL の autoload スタックから削除されます。
         </para>
 

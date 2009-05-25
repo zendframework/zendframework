@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15741 -->
 <sect1 id="zend.validate.introduction">
 
     <title>導入</title>
@@ -48,7 +48,7 @@
         </para>
 
         <para>
-            <code>isValid()</code> が <code>false</code> を返した場合、
+            <code>isValid()</code> が <constant>FALSE</constant> を返した場合、
             <code>getMessages()</code> がメッセージの配列を提供します。
             ここには検証が失敗した理由が含まれます。
             配列のキーは、検証に失敗した原因を表す短い文字列となります。

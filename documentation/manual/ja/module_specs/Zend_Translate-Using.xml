@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15741 -->
 <sect1 id="zend.translate.using">
 
     <title>翻訳アダプタの使用法</title>
@@ -581,8 +581,8 @@ $translate->addTranslation('/path/to/other.ini', 'it');
             INI ファイルの値に非英数字が含まれる場合は、値をダブルクォート (<code>"</code>)
             で囲まなければなりません。また、ini ファイルのキーとしては使えない予約語があります。
             予約語には <code>null</code>, <code>yes</code>, <code>no</code>, <code>true</code>
-            そして <code>false</code> があります。
-            値に <code>null</code>, <code>no</code> および <code>false</code>
+            そして <constant>FALSE</constant> があります。
+            値に <code>null</code>, <code>no</code> および <constant>FALSE</constant>
             を指定するとそれは <code>""</code>
             と同じ扱いとなり、<code>yes</code> と <code>true</code> を指定するとそれは
             <code>1</code> と同じ扱いとなります。

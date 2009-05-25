@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15741 -->
 <sect1 id="zend.gdata.gapps">
     <title>Google Apps Provisioning の使用法</title>
 
@@ -307,7 +307,7 @@ $user = $user->save();
                 <para>
                     同様に、強制しないようにするなら
                     <code>login->changePasswordAtNextLogin</code>
-                    を <code>false</code> に設定します。
+                    を <constant>FALSE</constant> に設定します。
                 </para>
 
             </sect4>
@@ -343,7 +343,7 @@ $user = $user->save();
                 <para>
                     アクセス制限を解除するには、同様に
                     <code>login->suspended</code>
-                    を <code>false</code> に設定します。
+                    を <constant>FALSE</constant> に設定します。
                 </para>
 
             </sect4>
@@ -366,7 +366,7 @@ $user = $user->save();
                 <para>
                     だいたい予想はつくでしょうが、
                     <code>login->admin</code> プロパティを
-                    <code>false</code> に設定すれば管理者権限を剥奪することができます。
+                    <constant>FALSE</constant> に設定すれば管理者権限を剥奪することができます。
                 </para>
 
             </sect4>

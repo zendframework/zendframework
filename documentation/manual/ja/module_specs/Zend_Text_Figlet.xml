@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15741 -->
 <sect1 id="zend.text.figlet">
     <title>Zend_Text_Figlet</title>
     <para>
@@ -59,7 +59,7 @@
                     <code>handleParagraphs</code> - 改行の処理方法を示す boolean 値。
                     true を指定すると、単一の改行文字を無視してひとつの空白文字として扱います。
                     ほんとうに改行させたい場合は、改行文字を 2 つ続けます。
-                    デフォルトは <code>false</code> です。
+                    デフォルトは <constant>FALSE</constant> です。
                 </para>
             </listitem>
             <listitem>

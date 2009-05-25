@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15741 -->
 <sect1 id="zend.file.transfer.migration">
 
     <title>以前のバージョンからの移行</title>
@@ -333,7 +333,7 @@ $upload->addValidator('Size',
 
             <para>
                 既存のスクリプトを新しい API に移行するには、バリデータの定義の後に
-                <code>false</code> を追加します。
+                <constant>FALSE</constant> を追加します。
             </para>
 
             <example id="zend.file.transfer.migration.fromonesixonetoonesixtwo.example">

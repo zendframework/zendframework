@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15741 -->
 <sect1 id="zend.memory.memory-objects">
 
     <title>メモリオブジェクト</title>
@@ -256,10 +256,10 @@ public function isLocked();
                 <code>isLocked()</code> メソッドを使用して、
                 オブジェクトがロックされているかどうかを調べます。
                 オブジェクトがロックされている場合は <code>true</code>、
-                ロックされていない場合は <code>false</code> を返します。
+                ロックされていない場合は <constant>FALSE</constant> を返します。
                 "ロックされている" オブジェクトについては、これは常に
                 <code>true</code> を返します。また "移動可能な" オブジェクトの場合は
-                <code>true</code> あるいは <code>false</code> のいずれかを返します。
+                <code>true</code> あるいは <constant>FALSE</constant> のいずれかを返します。
             </para>
 
         </sect3>

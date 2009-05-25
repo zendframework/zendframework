@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15741 -->
 <sect3 id="zend.progressbar.adapter.jspull">
     <title>Zend_ProgressBar_Adapter_JsPull</title>
     <para>
@@ -13,7 +13,7 @@
         その内容は jsPush アダプタから送られてくるものとほぼ同じです。
         唯一の違いは、追加のパラメータ
         <code>finished</code> が含まれることです。このパラメータは、
-        <code>update()</code> がコールされた場合は <code>false</code>、
+        <code>update()</code> がコールされた場合は <constant>FALSE</constant>、
         <code>finish()</code> がコールされた場合は <code>true</code> となります。
     </para>
     <para>

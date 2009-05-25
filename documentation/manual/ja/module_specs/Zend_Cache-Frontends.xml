@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15740 -->
+<!-- EN-Revision: 15741 -->
 <sect1 id="zend.cache.frontends">
     <title><classname>Zend_Cache</classname> のフロントエンド</title>
 
@@ -73,7 +73,7 @@
                           <row>
                               <entry><code>logging</code></entry>
                               <entry><code>boolean</code></entry>
-                              <entry><code>false</code></entry>
+                              <entry><constant>FALSE</constant></entry>
                               <entry>
                                 true を指定すると、<classname>Zend_Log</classname> によるロギングが有効になります
                                 (しかし、処理速度は低下します)。
@@ -95,7 +95,7 @@
                           <row>
                               <entry><code>automatic_serialization</code></entry>
                               <entry><code>boolean</code></entry>
-                              <entry><code>false</code></entry>
+                              <entry><constant>FALSE</constant></entry>
                               <entry>
                                 自動シリアライズを有効/無効にします。
                                 文字列でないデータを直接保存する際に使用します
@@ -118,7 +118,7 @@
                           <row>
                               <entry><code>ignore_user_abort</code></entry>
                               <entry><code>boolean</code></entry>
-                              <entry><code>false</code></entry>
+                              <entry><constant>FALSE</constant></entry>
                               <entry>
                                 true を指定すると、save() メソッド内で PHP の
                                 ignore_user_abort フラグを設定し、
@@ -547,7 +547,7 @@ $result = $cache->foobar2('1', '2');
                          <row>
                               <entry><code>ignore_missing_master_files</code></entry>
                               <entry><code>boolean</code></entry>
-                              <entry><code>false</code></entry>
+                              <entry><constant>FALSE</constant></entry>
                               <entry>
                                   true の場合は、マスタファイルが存在しない場合は無視します
                                   (true でない場合は例外が発生します)。
@@ -610,7 +610,7 @@ $result = $cache->foobar2('1', '2');
                          <row>
                               <entry><code>http_conditional</code></entry>
                               <entry><code>boolean</code></entry>
-                              <entry><code>false</code></entry>
+                              <entry><constant>FALSE</constant></entry>
                               <entry>
                                   http_conditional システムを使用します (現時点ではまだ実装されていません)。
                               </entry>
@@ -618,7 +618,7 @@ $result = $cache->foobar2('1', '2');
                          <row>
                               <entry><code>debug_header</code></entry>
                               <entry><code>boolean</code></entry>
-                              <entry><code>false</code></entry>
+                              <entry><constant>FALSE</constant></entry>
                               <entry>
                                   true の場合は、キャッシュされた各ページの先頭に
                                   デバッグ用テキストが追加されます。

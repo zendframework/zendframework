@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15741 -->
 <sect1 id="zend.db.statement">
 
     <title>Zend_Db_Statement</title>
@@ -188,7 +188,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
 
             <para>
                 すでに結果セットのすべての行が取得済みである場合は
-                <code>fetch()</code> は <code>false</code> を返します。
+                <code>fetch()</code> は <constant>FALSE</constant> を返します。
             </para>
 
             <example id="zend.db.statement.fetching.fetch.example">
@@ -289,7 +289,7 @@ echo $rows[0][0];
                 取得するカラムの位置を表すインデックスを引数で指定します。
                 省略した場合のデフォルトは 0 となります。このメソッドは、
                 スカラー値を返します。もし結果セットのすべての行が既に取得済みである場合は
-                <code>false</code> を返します。
+                <constant>FALSE</constant> を返します。
             </para>
 
             <para>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15741 -->
 <sect1 id="zend.search.lucene.query-api">
     <title>クエリ作成用の API</title>
 
@@ -215,7 +215,7 @@ $hits  = $index->find($query);
                 </listitem>
                 <listitem>
                     <para>
-                        禁止する単語には <code>false</code> を使用します。
+                        禁止する単語には <constant>FALSE</constant> を使用します。
                     </para>
                 </listitem>
                 <listitem>
@@ -342,7 +342,7 @@ $hits  = $index->find($query);
                 </listitem>
                 <listitem>
                     <para>
-                        禁止するサブクエリには <code>false</code> を使用します。
+                        禁止するサブクエリには <constant>FALSE</constant> を使用します。
                     </para>
                 </listitem>
                 <listitem>

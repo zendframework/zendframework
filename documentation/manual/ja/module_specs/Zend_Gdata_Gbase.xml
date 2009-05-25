@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15741 -->
 <sect1 id="zend.gdata.gbase">
     <title>Google Base の使用法</title>
     <para>
@@ -325,7 +325,7 @@ foreach ($feed->entries as $entry) {
             実際に処理を行う前に、どのような操作が行われるのかを確かめることができます。
             その場合は dry-run フラグ (<code>$dryRun</code>) を <code>true</code>
             に設定します。期待通りの結果が得られることを確認したら、このフラグを
-            <code>false</code> にして実際の操作を行います。
+            <constant>FALSE</constant> にして実際の操作を行います。
         </para>
         <sect3 id="zend.gdata.gbase.crud.insert">
             <title>アイテムの追加</title>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15289 -->
+<!-- EN-Revision: 15741 -->
 <sect1 id="zend.reflection.reference">
     <title>Zend_Reflectionリファレンス</title>
 
@@ -79,7 +79,7 @@
 
             <listitem><para>
                 <code>getTag($name)</code>: 与えられた注釈タグのReflectionオブジェクト、
-                または存在しない場合<code>false</code>を返します
+                または存在しない場合<constant>FALSE</constant>を返します
             </para></listitem>
 
             <listitem><para>

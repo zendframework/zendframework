@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15741 -->
 <sect2 id="zend.validate.set.email_address">
 
     <title>メールアドレス</title>
@@ -112,7 +112,7 @@ $validator = new Zend_Validate_EmailAddress(Zend_Validate_Hostname::ALLOW_DNS,
                                             true);
 ]]></programlisting>
 
-        あるいは、<code>true</code> または <code>false</code> を
+        あるいは、<code>true</code> または <constant>FALSE</constant> を
         <code>$validator->setValidateMx()</code> に渡すことで、
         MX の検証を有効あるいは無効にすることもできます。
     </para>

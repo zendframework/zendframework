@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15628 -->
+<!-- EN-Revision: 15741 -->
 <sect1 id="zend.filter.input">
     <title>Zend_Filter_Input</title>
 
@@ -278,7 +278,7 @@ $input->setData($newData);
                 すべての入力データがバリデーションルールを通過すると、
                 <code>isValid()</code> メソッドは <code>true</code> を返します。
                 無効な形式の入力や必須フィールドの未入力がひとつでもあると、
-                <code>isValid()</code> は <code>false</code> を返します。
+                <code>isValid()</code> は <constant>FALSE</constant> を返します。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -704,12 +704,12 @@ $validators = array(
 ]]></programlisting>
 
             <para>
-                このメタコマンドのデフォルト値は <code>false</code> です。
+                このメタコマンドのデフォルト値は <constant>FALSE</constant> です。
             </para>
 
             <para>
                 非常に珍しいケースですが、バリデータは一切登録せずにメタコマンド
-                'allowEmpty' を <code>false</code> (つまり、空の値は無効とみなす)
+                'allowEmpty' を <constant>FALSE</constant> (つまり、空の値は無効とみなす)
                 と設定した検証ルールを定義すると、
                 Zend_Filter_Input はデフォルトのエラーメッセージを返します。
                 このメッセージは <code>getMessages()</code> で取得することができます。
@@ -770,7 +770,7 @@ $input = new Zend_Filter_Input(null, $validators);
 ]]></programlisting>
 
             <para>
-                このメタコマンドのデフォルト値は <code>false</code> です。
+                このメタコマンドのデフォルト値は <constant>FALSE</constant> です。
             </para>
 
             <para>

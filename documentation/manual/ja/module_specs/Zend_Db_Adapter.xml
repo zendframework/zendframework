@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15741 -->
 <sect1 id="zend.db.adapter">
 
     <title>Zend_Db_Adapter</title>
@@ -369,7 +369,7 @@ $db = Zend_Db::factory('Db2', $params);
                     アダプタが生成する SQL 文中のテーブル名やカラム名、
                     エイリアスといった識別子をすべてクォートします。これにより、
                     SQL のキーワードや特殊文字を含む識別子を使用できるようになります。
-                    この値が <code>false</code> の場合は、
+                    この値が <constant>FALSE</constant> の場合は、
                     識別子の自動クォートは行いません。
                     クォートすべき文字を使用している場合は、自分で
                     <code>quoteIdentifier()</code> メソッドをコールする必要があります。

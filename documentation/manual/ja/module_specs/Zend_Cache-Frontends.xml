@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15744 -->
+<!-- EN-Revision: 15745 -->
 <sect1 id="zend.cache.frontends">
     <title><classname>Zend_Cache</classname> のフロントエンド</title>
 
@@ -322,7 +322,7 @@ echo 'これはキャッシュされません ('.time().').';
                          </row>
                          <row>
                               <entry><code>cached_functions</code></entry>
-                              <entry><code>array</code></entry>
+                              <entry><type>Array</type></entry>
                               <entry></entry>
                               <entry>
                                   常にキャッシュされる関数の名前。
@@ -330,7 +330,7 @@ echo 'これはキャッシュされません ('.time().').';
                          </row>
                          <row>
                               <entry><code>non_cached_functions</code></entry>
-                              <entry><code>array</code></entry>
+                              <entry><type>Array</type></entry>
                               <entry></entry>
                               <entry>
                                   決してキャッシュされない関数の名前。
@@ -409,7 +409,7 @@ $cache->call('veryExpensiveFunc', $params);
                          </row>
                          <row>
                               <entry><code>cached_methods</code></entry>
-                              <entry><code>array</code></entry>
+                              <entry><type>Array</type></entry>
                               <entry></entry>
                               <entry>
                                   常にキャッシュされるメソッドの名前。
@@ -417,7 +417,7 @@ $cache->call('veryExpensiveFunc', $params);
                          </row>
                          <row>
                               <entry><code>non_cached_methods</code></entry>
-                              <entry><code>array</code></entry>
+                              <entry><type>Array</type></entry>
                               <entry></entry>
                               <entry>
                                   決してキャッシュされないメソッドの名前。
@@ -525,7 +525,7 @@ $result = $cache->foobar2('1', '2');
                          </row>
                          <row>
                               <entry><code>master_files</code></entry>
-                              <entry><code>array</code></entry>
+                              <entry><type>Array</type></entry>
                               <entry><code></code></entry>
                               <entry>
                                   マスタファイル群へのフルパスの配列。
@@ -626,7 +626,7 @@ $result = $cache->foobar2('1', '2');
                          </row>
                          <row>
                                <entry><code>default_options</code></entry>
-                              <entry><code>array</code></entry>
+                              <entry><type>Array</type></entry>
                               <entry><code>array(...説明を参照ください...)</code></entry>
                               <entry>
                                   デフォルトのオプションを表す連想配列です。
@@ -720,7 +720,7 @@ $result = $cache->foobar2('1', '2');
                          </row>
                          <row>
                               <entry><code>regexps</code></entry>
-                              <entry><code>array</code></entry>
+                              <entry><type>Array</type></entry>
                               <entry><code>array()</code></entry>
                               <entry>
                                   特定の REQUEST_URI に対してのみ適用するオプションを設定する連想配列です。
@@ -734,7 +734,7 @@ $result = $cache->foobar2('1', '2');
                          </row>
                          <row>
                               <entry><code>memorize_headers</code></entry>
-                              <entry><code>array</code></entry>
+                              <entry><type>Array</type></entry>
                               <entry><code>array()</code></entry>
                               <entry>
                                    HTTP ヘッダ名に対応する文字列の配列です。

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15745 -->
 <appendix id="coding-standard">
   <title>Zend Framework PHP 標準コーディング規約</title>
     <sect1 id="coding-standard.overview">
@@ -416,7 +416,7 @@ $sql = "SELECT `id`, `name` FROM `people` "
                 </para>
 
                 <para>
-                    <code>array</code> を使用して数値添字の配列を宣言する場合は、
+                    <type>Array</type> を使用して数値添字の配列を宣言する場合は、
                     コードを読みやすくするため、
                     要素を区切るカンマの後にスペースを入れなければなりません。
 
@@ -442,7 +442,7 @@ $sampleArray = array(1, 2, 3, 'Zend', 'Studio',
                 <title>連想配列</title>
 
                 <para>
-                    連想配列を <code>array</code> で宣言する場合には、
+                    連想配列を <type>Array</type> で宣言する場合には、
                     適宜改行をいれて複数行で宣言するようにしましょう。その場合は、
                     2 行目以降の行頭などにスペースを入れ、
                     キーと値の位置がそれぞれ揃うようにしなければなりません。

@@ -64,6 +64,17 @@ class Zend_LoaderTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        // Store original autoloaders
+        $this->loaders = spl_autoload_functions();
+        if (!is_array($this->loaders)) {
+            // spl_autoload_functions does not return empty array when no
+            // autoloaders registered...
+            $this->loaders = array();
+        }
+
+        // Store original include_path
+        $this->includePath = get_include_path();
+
         $this->error = null;
         $this->errorHandler = null;
         Zend_Loader_Autoloader::resetInstance();
@@ -74,6 +85,22 @@ class Zend_LoaderTest extends PHPUnit_Framework_TestCase
         if ($this->errorHandler !== null) {
             restore_error_handler();
         }
+
+        // Restore original autoloaders
+        $loaders = spl_autoload_functions();
+        foreach ($loaders as $loader) {
+            spl_autoload_unregister($loader);
+        }
+
+        foreach ($this->loaders as $loader) {
+            spl_autoload_register($loader);
+        }
+
+        // Retore original include_path
+        set_include_path($this->includePath);
+
+        // Reset autoloader instance so it doesn't affect other tests
+        Zend_Loader_Autoloader::resetInstance();
     }
 
     public function setErrorHandler()
@@ -427,15 +454,15 @@ class Zend_LoaderTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * In order to play nice with spl_autoload, an autoload callback should 
-     * *not* emit errors (exceptions are okay). ZF-2923 requests that this 
+     * In order to play nice with spl_autoload, an autoload callback should
+     * *not* emit errors (exceptions are okay). ZF-2923 requests that this
      * behavior be applied, which counters the previous request in ZF-2463.
      *
-     * As it is, the new behavior *will* hide parse and other errors. However, 
-     * a fatal error *will* be raised in such situations, which is as 
+     * As it is, the new behavior *will* hide parse and other errors. However,
+     * a fatal error *will* be raised in such situations, which is as
      * appropriate or more appropriate than raising an exception.
      *
-     * NOTE: Removed from test suite, as autoload functionality in Zend_Loader 
+     * NOTE: Removed from test suite, as autoload functionality in Zend_Loader
      * is now deprecated.
      *
      * @see    http://framework.zend.com/issues/browse/ZF-2463

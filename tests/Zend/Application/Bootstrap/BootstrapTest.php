@@ -54,7 +54,7 @@ class Zend_Application_Bootstrap_BootstrapTest extends PHPUnit_Framework_TestCas
         // Store original autoloaders
         $this->loaders = spl_autoload_functions();
         if (!is_array($this->loaders)) {
-            // spl_autoload_functions does not return empty array when no 
+            // spl_autoload_functions does not return empty array when no
             // autoloaders registered...
             $this->loaders = array();
         }
@@ -81,6 +81,9 @@ class Zend_Application_Bootstrap_BootstrapTest extends PHPUnit_Framework_TestCas
         foreach ($this->loaders as $loader) {
             spl_autoload_register($loader);
         }
+
+        // Reset autoloader instance so it doesn't affect other tests
+        Zend_Loader_Autoloader::resetInstance();
     }
 
     public function resetFrontController()

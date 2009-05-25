@@ -67,7 +67,7 @@ class Zend_Application_Module_AutoloaderTest extends PHPUnit_Framework_TestCase
         // Store original autoloaders
         $this->loaders = spl_autoload_functions();
         if (!is_array($this->loaders)) {
-            // spl_autoload_functions does not return empty array when no 
+            // spl_autoload_functions does not return empty array when no
             // autoloaders registered...
             $this->loaders = array();
         }
@@ -101,6 +101,9 @@ class Zend_Application_Module_AutoloaderTest extends PHPUnit_Framework_TestCase
 
         // Retore original include_path
         set_include_path($this->includePath);
+
+        // Reset autoloader instance so it doesn't affect other tests
+        Zend_Loader_Autoloader::resetInstance();
     }
 
     public function testDbTableResourceTypeShouldBeLoadedByDefault()

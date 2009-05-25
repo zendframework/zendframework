@@ -54,7 +54,7 @@ class Zend_Application_Resource_NavigationTest extends PHPUnit_Framework_TestCas
         // Store original autoloaders
         $this->loaders = spl_autoload_functions();
         if (!is_array($this->loaders)) {
-            // spl_autoload_functions does not return empty array when no 
+            // spl_autoload_functions does not return empty array when no
             // autoloaders registered...
             $this->loaders = array();
         }
@@ -80,13 +80,16 @@ class Zend_Application_Resource_NavigationTest extends PHPUnit_Framework_TestCas
         foreach ($this->loaders as $loader) {
             spl_autoload_register($loader);
         }
+
+        // Reset autoloader instance so it doesn't affect other tests
+        Zend_Loader_Autoloader::resetInstance();
     }
 
     public function testInitializationInitializesNavigationObject()
     {
 		$this->bootstrap->registerPluginResource('view');
         $resource = new Zend_Application_Resource_Navigation(array());
-        $resource->setBootstrap($this->bootstrap); 
+        $resource->setBootstrap($this->bootstrap);
         $resource->init();
         $this->assertTrue($resource->getContainer() instanceof Zend_Navigation_Container);
 		$this->bootstrap->unregisterPluginResource('view');
@@ -101,38 +104,38 @@ class Zend_Application_Resource_NavigationTest extends PHPUnit_Framework_TestCas
         $this->assertTrue($test instanceof Zend_Navigation);
 		$this->bootstrap->unregisterPluginResource('view');
     }
-    
+
     public function testContainerIsStoredInViewhelper()
     {
    		$options = array('pages'=> array(new Zend_Navigation_Page_Mvc(array(
 		    'action'     => 'index',
 		    'controller' => 'index'))));
-   		
+
     	$this->bootstrap->registerPluginResource('view');
         $resource = new Zend_Application_Resource_Navigation($options);
         $resource->setBootstrap($this->bootstrap)->init();
-                
+
         $view = $this->bootstrap->getPluginResource('view')->getView();
         $number = $view->getHelper('navigation')->navigation()->count();
-        
+
         $this->assertEquals($number,1);
 		$this->bootstrap->unregisterPluginResource('view');
     }
-        
+
     public function testContainerIsStoredInRegistry()
     {
    		$options = array('pages'=> array(new Zend_Navigation_Page_Mvc(array(
 		    'action'     => 'index',
 		    'controller' => 'index'))), 'storage' => array('registry' => true));
-   		
+
         $resource = new Zend_Application_Resource_Navigation($options);
         $resource->setBootstrap($this->bootstrap)->init();
-                
+
         $key = Zend_Application_Resource_Navigation::DEFAULT_REGISTRY_KEY;
 		$this->assertEquals(Zend_Registry::isRegistered($key),true);
 		$container = Zend_Registry::get($key);
         $number = $container->count();
-        
+
         $this->assertEquals($number,1);
 		$this->bootstrap->unregisterPluginResource('view');
     }

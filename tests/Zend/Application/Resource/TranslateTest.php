@@ -86,6 +86,9 @@ class Zend_Application_Resource_TranslateTest extends PHPUnit_Framework_TestCase
         foreach ($this->loaders as $loader) {
             spl_autoload_register($loader);
         }
+
+        // Reset autoloader instance so it doesn't affect other tests
+        Zend_Loader_Autoloader::resetInstance();
     }
 
     public function testInitializationInitializesTranslateObject()

@@ -55,7 +55,7 @@ class Zend_Application_ApplicationTest extends PHPUnit_Framework_TestCase
         // Store original autoloaders
         $this->loaders = spl_autoload_functions();
         if (!is_array($this->loaders)) {
-            // spl_autoload_functions does not return empty array when no 
+            // spl_autoload_functions does not return empty array when no
             // autoloaders registered...
             $this->loaders = array();
         }
@@ -86,6 +86,9 @@ class Zend_Application_ApplicationTest extends PHPUnit_Framework_TestCase
         foreach ($this->iniOptions as $key) {
             ini_restore($key);
         }
+
+        // Reset autoloader instance so it doesn't affect other tests
+        Zend_Loader_Autoloader::resetInstance();
     }
 
     public function testConstructorSetsEnvironment()
@@ -284,14 +287,14 @@ class Zend_Application_ApplicationTest extends PHPUnit_Framework_TestCase
         $application = new Zend_Application('testing', dirname(__FILE__) . '/_files/appconfig.inc');
         $this->assertTrue($application->hasOption('foo'));
     }
-    
+
     public function testPassingArrayOptionsWithConfigKeyShouldLoadOptions()
     {
         $application = new Zend_Application('testing', array('bar' => 'baz', 'config' => dirname(__FILE__) . '/_files/appconfig.inc'));
         $this->assertTrue($application->hasOption('foo'));
         $this->assertTrue($application->hasOption('bar'));
     }
-    
+
     public function testPassingArrayOptionsWithConfigKeyShouldLoadOptionsAndOverride()
     {
         $application = new Zend_Application('testing', array('foo' => 'baz', 'config' => dirname(__FILE__) . '/_files/appconfig.inc'));

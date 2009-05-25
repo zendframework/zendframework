@@ -148,7 +148,7 @@ $user = $gdata->insertUser($user);
             <para>
                 Individual user accounts can be retrieved by calling the
                 <code>retrieveUser()</code> convenience method. If the user is
-                not found, <code>null</code> will be returned.
+                not found, <constant>NULL</constant> will be returned.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -440,7 +440,7 @@ $nickname = $gdata->insertNickname($nickname);
             <para>
                 Nicknames can be retrieved by calling the
                 <code>retrieveNickname()</code> convenience method. This will
-                return <code>null</code> if a user is not found.
+                return <constant>NULL</constant> if a user is not found.
             </para>
 
             <programlisting language="php"><![CDATA[

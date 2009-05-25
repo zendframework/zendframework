@@ -148,7 +148,7 @@
             </link>
             . If a date object is constructed using an obviously invalid date (e.g. a month number greater than 12),
             then <classname>Zend_Date</classname> will throw an exception, unless no specific date format has been selected -i.e.
-            <varname>$part</varname> is either <code>null</code> or <classname>Zend_Date::DATES</classname> (a "loose" format).
+            <varname>$part</varname> is either <constant>NULL</constant> or <classname>Zend_Date::DATES</classname> (a "loose" format).
         </para>
 
         <example id="zend.date.values.example-1">

@@ -18,7 +18,7 @@
             PHP function. Please review this documentation to be aware of its specific behaviors,
             which propagate to <classname>Zend_Config_Ini</classname>, such as how the special values of
             <constant>TRUE</constant>, <constant>FALSE</constant>, <code>yes</code>, <code>no</code>,
-            and <code>null</code> are handled.
+            and <constant>NULL</constant> are handled.
         </para>
     </note>
     <note>

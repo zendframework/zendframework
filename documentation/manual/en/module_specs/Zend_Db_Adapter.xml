@@ -1024,7 +1024,7 @@ $id = $db->lastSequenceId('bugs_id_gen');
                 lastInsertId() method are ignored, and the value returned is the
                 most recent value generated for any table by INSERT operations
                 during the current connection. For these RDBMS brands, the
-                lastSequenceId() method always returns <code>null</code>.
+                lastSequenceId() method always returns <constant>NULL</constant>.
             </para>
 
             <note>
@@ -1776,7 +1776,7 @@ $result = $db->getConnection()->exec('DROP TABLE bugs');
         <para>
             Since release 1.7.2, you could retrieve the server version in PHP syntax
             style to be able to use <code>version_compare()</code>. If the information
-            isn't available, you will receive <code>null</code>.
+            isn't available, you will receive <constant>NULL</constant>.
         </para>
 
         <example id="zend.db.adapter.server-version.example">
@@ -1854,7 +1854,7 @@ if (!is_null($version)) {
                         <code>lastInsertId()</code> ignores its arguments and
                         always returns the last value generated for an
                         auto-increment key. The <code>lastSequenceId()</code>
-                        method returns <code>null</code>.
+                        method returns <constant>NULL</constant>.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -1950,7 +1950,7 @@ if (!is_null($version)) {
                         <code>lastInsertId()</code> ignores its arguments and
                         always returns the last value generated for an
                         auto-increment key. The <code>lastSequenceId()</code>
-                        method returns <code>null</code>.
+                        method returns <constant>NULL</constant>.
                     </para>
                 </listitem>
                 <listitem>
@@ -2011,7 +2011,7 @@ if (!is_null($version)) {
                         <code>lastInsertId()</code> ignores its arguments and
                         always returns the last value generated for an
                         auto-increment key. The <code>lastSequenceId()</code>
-                        method returns <code>null</code>.
+                        method returns <constant>NULL</constant>.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -2091,7 +2091,7 @@ if (!is_null($version)) {
                         <code>lastInsertId()</code> ignores its arguments and
                         always returns the last value generated for an
                         auto-increment key. The <code>lastSequenceId()</code>
-                        method returns <code>null</code>.
+                        method returns <constant>NULL</constant>.
                     </para>
                 </listitem>
                 <listitem>

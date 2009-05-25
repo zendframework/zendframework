@@ -333,7 +333,7 @@ $profiler->setFilterElapsedSecs(null);
 
             <para>
                 As with <code>setFilterElapsedSecs()</code>, you can remove any
-                existing filters by passing <code>null</code> as the sole
+                existing filters by passing <constant>NULL</constant> as the sole
                 argument.
             </para>
 

@@ -40,7 +40,7 @@ $index->addDocument($doc);
             The <classname>Zend_Search_Lucene_Analysis_Analyzer_Common</classname> class is designed to be an ancestor of all user
             defined analyzers. User should only define the <code>reset()</code> and <code>nextToken()</code> methods,
             which takes its string from the $_input member and returns tokens one by one
-            (a <code>null</code> value indicates the end of the stream).
+            (a <constant>NULL</constant> value indicates the end of the stream).
         </para>
 
         <para>

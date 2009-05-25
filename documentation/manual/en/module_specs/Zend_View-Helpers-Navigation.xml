@@ -123,14 +123,14 @@
                 <para>
                     <code>{get|set}MinDepth()</code> gets/set the minimum depth
                     a page must have to be included by the helper. Setting
-                    <code>null</code> means no minimum depth.
+                    <constant>NULL</constant> means no minimum depth.
                 </para>
             </listitem>
             <listitem>
                 <para>
                     <code>{get|set}MaxDepth()</code> gets/set the maximum depth
                     a page can have to be included by the helper. Setting
-                    <code>null</code> means no maximum depth.
+                    <constant>NULL</constant> means no maximum depth.
                 </para>
             </listitem>
             <listitem>
@@ -1251,14 +1251,14 @@ Output:
                         <listitem>
                             <para>
                                 <code>minDepth</code>; minimum depth. Expcects
-                                an <code>int</code> or <code>null</code> (no
+                                an <code>int</code> or <constant>NULL</constant> (no
                                 minimum depth).
                             </para>
                         </listitem>
                         <listitem>
                             <para>
                                 <code>maxDepth</code>; maximum depth. Expcects
-                                an <code>int</code> or <code>null</code> (no
+                                an <code>int</code> or <constant>NULL</constant> (no
                                 maximum depth).
                             </para>
                         </listitem>

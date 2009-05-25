@@ -38,7 +38,7 @@
         </listitem>
         <listitem>
             <para>
-                <code>elements</code>: Either <code>NULL</code> for default
+                <code>elements</code>: Either <constant>NULL</constant> for default
                 or an array with at least one of the following constants
                 of <classname>Zend_Console_ProgressBar</classname> as value:
             </para>

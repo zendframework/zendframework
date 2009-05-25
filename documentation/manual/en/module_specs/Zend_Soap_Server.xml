@@ -96,7 +96,7 @@
         <sect3 id="zend.soap.server.wsdl_mode">
             <title>Zend_Soap_Server constructor for the non-WSDL mode</title>
             <para>
-                The first constructor parameter <emphasis>must</emphasis> be set to <code>null</code> if you
+                The first constructor parameter <emphasis>must</emphasis> be set to <constant>NULL</constant> if you
                 plan to use <classname>Zend_Soap_Server</classname> functionality in non-WSDL mode.
             </para>
             <para>

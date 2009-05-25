@@ -104,7 +104,7 @@ $logger->emerg('Emergency message');
     <title>Destroying a Log</title>
     <para>
       If the Log object is no longer needed, set the variable containing it to
-      <code>null</code> to destroy it. This will automatically call the
+      <constant>NULL</constant> to destroy it. This will automatically call the
       <code>shutdown()</code> instance method of each attached Writer before
       the Log object is destroyed:
 

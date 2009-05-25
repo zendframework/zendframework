@@ -28,7 +28,7 @@
                 <row>
                     <entry><code>action</code></entry>
                     <entry><code>string</code></entry>
-                    <entry><code>null</code></entry>
+                    <entry><constant>NULL</constant></entry>
                     <entry>
                         Action name to use when generating
                         href to the page.
@@ -37,7 +37,7 @@
                 <row>
                     <entry><code>controller</code></entry>
                     <entry><code>string</code></entry>
-                    <entry><code>null</code></entry>
+                    <entry><constant>NULL</constant></entry>
                     <entry>
                         Controller name to use when generating
                         href to the page.
@@ -46,7 +46,7 @@
                 <row>
                     <entry><code>module</code></entry>
                     <entry><code>string</code></entry>
-                    <entry><code>null</code></entry>
+                    <entry><constant>NULL</constant></entry>
                     <entry>
                         Module name to use when generating
                         href to the page.
@@ -63,7 +63,7 @@
                 <row>
                     <entry><code>route</code></entry>
                     <entry><code>string</code></entry>
-                    <entry><code>null</code></entry>
+                    <entry><constant>NULL</constant></entry>
                     <entry>
                         Route name to use when generating
                         href to the page.

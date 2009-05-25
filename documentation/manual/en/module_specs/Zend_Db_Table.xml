@@ -1153,7 +1153,7 @@ $row = $table->fetchRow($select);
         <para>
             This method returns an object of type <classname>Zend_Db_Table_Row_Abstract</classname>. If the search
             criteria you specified match no rows in the database table, then
-            <code>fetchRow()</code> returns PHP's <code>null</code> value.
+            <code>fetchRow()</code> returns PHP's <constant>NULL</constant> value.
         </para>
 
     </sect2>
@@ -1308,7 +1308,7 @@ echo "The table name is " . $info['name'] . "\n";
                 </listitem>
             </itemizedlist>
 
-            In both cases, the cache specification must be either <code>null</code> (i.e., no cache
+            In both cases, the cache specification must be either <constant>NULL</constant> (i.e., no cache
             used) or an instance of
             <link linkend="zend.cache.frontends.core"><classname>Zend_Cache_Core</classname></link>. The
             methods may be used in conjunction when it is desirable to have both a default metadata

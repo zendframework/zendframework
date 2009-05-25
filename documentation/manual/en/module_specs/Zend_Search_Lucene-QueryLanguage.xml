@@ -59,7 +59,7 @@ Zend_Search_Lucene::setDefaultSearchField('contents');
 ]]></programlisting>
 
         <para>
-            The <code>null</code> value indicated that the search is performed across all fields. It's the default setting.
+            The <constant>NULL</constant> value indicated that the search is performed across all fields. It's the default setting.
         </para>
         <para>
             You can search specific fields by typing the field name followed by a colon ":" followed by the term you
@@ -90,7 +90,7 @@ title:"Do it right" AND go
 title:Do it right
 ]]></programlisting>
             Will only find "Do" in the title field. It will find "it" and "right" in the default field (if the default field is set)
-            or in all indexed fields (if the default field is set to <code>null</code>).
+            or in all indexed fields (if the default field is set to <constant>NULL</constant>).
         </para>
     </sect2>
 

@@ -75,7 +75,7 @@ try {
             of an option. If the option had a parameter, this method returns
             the value of the parameter. If the option had no parameter but
             the user did specify it on the command-line, the method returns
-            <constant>TRUE</constant>. Otherwise the method returns <code>null</code>.
+            <constant>TRUE</constant>. Otherwise the method returns <constant>NULL</constant>.
         </para>
         <example id="zend.console.getopt.fetching.byname.example.setoption">
             <title>Using getOption()</title>

@@ -207,7 +207,7 @@ $hits  = $index->find($query);
                 </listitem>
                 <listitem>
                     <para>
-                        <code>null</code> is used to define a term that is neither required nor prohibited.
+                        <constant>NULL</constant> is used to define a term that is neither required nor prohibited.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -337,7 +337,7 @@ $hits  = $index->find($query);
                 </listitem>
                 <listitem>
                     <para>
-                        <code>null</code> is used to define a subquery that is neither required nor prohibited.
+                        <constant>NULL</constant> is used to define a subquery that is neither required nor prohibited.
                     </para>
                 </listitem>
             </itemizedlist>

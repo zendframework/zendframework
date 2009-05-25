@@ -53,7 +53,7 @@
         <para>
             The optional fourth parameter is an instance of <classname>Zend_Http_Client</classname>.
             This allows you to set options in the client, such as proxy
-            server settings. If you pass <code>null</code> for this
+            server settings. If you pass <constant>NULL</constant> for this
             parameter, a generic <classname>Zend_Http_Client</classname> object is created.
         </para>
 

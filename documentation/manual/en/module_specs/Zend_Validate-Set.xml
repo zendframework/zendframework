@@ -223,7 +223,7 @@ if ($validator->isValid($iban)) {
         <para>
             Returns <constant>TRUE</constant> if and only if the string length of <code>$value</code> is at
             least a minimum and no greater than a maximum (when the max option is not
-            <code>null</code>). The <code>setMin()</code> method throws an exception if the minimum
+            <constant>NULL</constant>). The <code>setMin()</code> method throws an exception if the minimum
             length is set to a value greater than the set maximum length, and the
             <code>setMax()</code> method throws an exception if the maximum length is set to a
             value less than than the set minimum length. This class supports UTF-8 and other

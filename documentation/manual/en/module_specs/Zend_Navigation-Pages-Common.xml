@@ -38,7 +38,7 @@
                 <row>
                     <entry><code>label</code></entry>
                     <entry><code>string</code></entry>
-                    <entry><code>null</code></entry>
+                    <entry><constant>NULL</constant></entry>
                     <entry>
                         A page label, such as 'Home' or 'Blog'.
                     </entry>
@@ -46,7 +46,7 @@
                 <row>
                     <entry><code>id</code></entry>
                     <entry><code>string</code> | <code>int</code></entry>
-                    <entry><code>null</code></entry>
+                    <entry><constant>NULL</constant></entry>
                     <entry>
                         An id tag/attribute that may be used when rendering
                         the page, typically in an anchor element.
@@ -55,7 +55,7 @@
                 <row>
                     <entry><code>class</code></entry>
                     <entry><code>string</code></entry>
-                    <entry><code>null</code></entry>
+                    <entry><constant>NULL</constant></entry>
                     <entry>
                         A CSS class that may be used when rendering the page,
                         typically in an anchor element.
@@ -64,7 +64,7 @@
                 <row>
                     <entry><code>title</code></entry>
                     <entry><code>string</code></entry>
-                    <entry><code>null</code></entry>
+                    <entry><constant>NULL</constant></entry>
                     <entry>
                         A short page description, typically for using
                         as the <code>title</code> attribute in an anchor.
@@ -73,7 +73,7 @@
                 <row>
                     <entry><code>target</code></entry>
                     <entry><code>string</code></entry>
-                    <entry><code>null</code></entry>
+                    <entry><constant>NULL</constant></entry>
                     <entry>
                         Specifies a target that may be used for the page,
                         typically in an anchor element.
@@ -107,8 +107,8 @@
                 </row>
                 <row>
                     <entry><code>order</code></entry>
-                    <entry><code>string</code> | <code>int</code> | <code>null</code></entry>
-                    <entry><code>null</code></entry>
+                    <entry><code>string</code> | <code>int</code> | <constant>NULL</constant></entry>
+                    <entry><constant>NULL</constant></entry>
                     <entry>
                         Works like order for elements in
                         <link linkend="zend.form.quickstart.render">
@@ -117,15 +117,15 @@
                         you can force a page to be iterated before others by
                         setting the <code>order</code> attribute to a low number,
                         e.g. -100. If a <code>string</code> is given, it must
-                        parse to a valid <code>int</code>. If <code>null</code>
+                        parse to a valid <code>int</code>. If <constant>NULL</constant>
                         is given, it will be reset, meaning the order in which
                         the page was added to the container will be used.
                     </entry>
                 </row>
                 <row>
                     <entry><code>resource</code></entry>
-                    <entry><code>string</code> | <classname>Zend_Acl_Resource_Interface</classname> | <code>null</code></entry>
-                    <entry><code>null</code></entry>
+                    <entry><code>string</code> | <classname>Zend_Acl_Resource_Interface</classname> | <constant>NULL</constant></entry>
+                    <entry><constant>NULL</constant></entry>
                     <entry>
                         ACL resource to associate with the page. Read more in
                         <link linkend="zend.view.helpers.initial.navigation.acl">the
@@ -134,8 +134,8 @@
                 </row>
                 <row>
                     <entry><code>privilege</code></entry>
-                    <entry><code>string</code> | <code>null</code></entry>
-                    <entry><code>null</code></entry>
+                    <entry><code>string</code> | <constant>NULL</constant></entry>
+                    <entry><constant>NULL</constant></entry>
                     <entry>
                         ACL privilege to associate with the page. Read more in
                         <link linkend="zend.view.helpers.initial.navigation.acl">the
@@ -165,8 +165,8 @@
                 </row>
                 <row>
                     <entry><code>pages</code></entry>
-                    <entry><code>array</code> | <classname>Zend_Config</classname> | <code>null</code></entry>
-                    <entry><code>null</code></entry>
+                    <entry><code>array</code> | <classname>Zend_Config</classname> | <constant>NULL</constant></entry>
+                    <entry><constant>NULL</constant></entry>
                     <entry>
                         Child pages of the page. This could be an <code>array</code>
                         or <classname>Zend_Config</classname> object containing either page

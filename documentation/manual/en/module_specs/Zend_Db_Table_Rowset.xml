@@ -92,7 +92,7 @@ $row    = $rowset->current();
 
         <para>
             If the Rowset contains zero rows, <code>current()</code> returns
-            PHP's <code>null</code> value.
+            PHP's <constant>NULL</constant> value.
         </para>
 
         <example id="zend.db.table.rowset.rows.iterate.example">

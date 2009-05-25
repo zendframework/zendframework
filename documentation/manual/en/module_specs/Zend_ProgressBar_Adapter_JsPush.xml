@@ -26,7 +26,7 @@
             <para>
                 <code>finishMethodName</code>: The javascript method which
                 should be called after finish status was set. Default value is
-                <code>NULL</code>, which means nothing is done.
+                <constant>NULL</constant>, which means nothing is done.
             </para>
         </listitem>
     </itemizedlist>

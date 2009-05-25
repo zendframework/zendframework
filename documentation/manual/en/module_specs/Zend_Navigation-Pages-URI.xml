@@ -10,7 +10,7 @@
         to the common page options, a URI page takes only one option —
         <code>uri</code>. The <code>uri</code> will be returned when
         calling <code>$page->getHref()</code>, and may be a
-        <code>string</code> or <constant>NULL</constant>.
+        <type>String</type> or <constant>NULL</constant>.
     </para>
 
     <note>
@@ -37,7 +37,7 @@
             <tbody>
                 <row>
                     <entry><code>uri</code></entry>
-                    <entry><code>string</code></entry>
+                    <entry><type>String</type></entry>
                     <entry><constant>NULL</constant></entry>
                     <entry>
                         URI to page. This can be any string or null.

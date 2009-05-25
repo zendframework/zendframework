@@ -10,7 +10,7 @@
         <link linkend="zend.measure.creation.number"><code>numeric argument</code>
         </link>
         , a
-        <link linkend="zend.measure.creation.string"><code>string</code>
+        <link linkend="zend.measure.creation.string"><type>String</type>
         </link>
         without units, or a
         <link linkend="zend.measure.creation.localized"><code>localized string</code> with unit(s) specified.

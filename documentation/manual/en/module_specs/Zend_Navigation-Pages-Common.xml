@@ -37,7 +37,7 @@
             <tbody>
                 <row>
                     <entry><code>label</code></entry>
-                    <entry><code>string</code></entry>
+                    <entry><type>String</type></entry>
                     <entry><constant>NULL</constant></entry>
                     <entry>
                         A page label, such as 'Home' or 'Blog'.
@@ -45,7 +45,7 @@
                 </row>
                 <row>
                     <entry><code>id</code></entry>
-                    <entry><code>string</code> | <code>int</code></entry>
+                    <entry><type>String</type> | <code>int</code></entry>
                     <entry><constant>NULL</constant></entry>
                     <entry>
                         An id tag/attribute that may be used when rendering
@@ -54,7 +54,7 @@
                 </row>
                 <row>
                     <entry><code>class</code></entry>
-                    <entry><code>string</code></entry>
+                    <entry><type>String</type></entry>
                     <entry><constant>NULL</constant></entry>
                     <entry>
                         A CSS class that may be used when rendering the page,
@@ -63,7 +63,7 @@
                 </row>
                 <row>
                     <entry><code>title</code></entry>
-                    <entry><code>string</code></entry>
+                    <entry><type>String</type></entry>
                     <entry><constant>NULL</constant></entry>
                     <entry>
                         A short page description, typically for using
@@ -72,7 +72,7 @@
                 </row>
                 <row>
                     <entry><code>target</code></entry>
-                    <entry><code>string</code></entry>
+                    <entry><type>String</type></entry>
                     <entry><constant>NULL</constant></entry>
                     <entry>
                         Specifies a target that may be used for the page,
@@ -107,7 +107,7 @@
                 </row>
                 <row>
                     <entry><code>order</code></entry>
-                    <entry><code>string</code> | <code>int</code> | <constant>NULL</constant></entry>
+                    <entry><type>String</type> | <code>int</code> | <constant>NULL</constant></entry>
                     <entry><constant>NULL</constant></entry>
                     <entry>
                         Works like order for elements in
@@ -116,7 +116,7 @@
                         the page will be iterated in a specific order, meaning
                         you can force a page to be iterated before others by
                         setting the <code>order</code> attribute to a low number,
-                        e.g. -100. If a <code>string</code> is given, it must
+                        e.g. -100. If a <type>String</type> is given, it must
                         parse to a valid <code>int</code>. If <constant>NULL</constant>
                         is given, it will be reset, meaning the order in which
                         the page was added to the container will be used.
@@ -124,7 +124,7 @@
                 </row>
                 <row>
                     <entry><code>resource</code></entry>
-                    <entry><code>string</code> | <classname>Zend_Acl_Resource_Interface</classname> | <constant>NULL</constant></entry>
+                    <entry><type>String</type> | <classname>Zend_Acl_Resource_Interface</classname> | <constant>NULL</constant></entry>
                     <entry><constant>NULL</constant></entry>
                     <entry>
                         ACL resource to associate with the page. Read more in
@@ -134,7 +134,7 @@
                 </row>
                 <row>
                     <entry><code>privilege</code></entry>
-                    <entry><code>string</code> | <constant>NULL</constant></entry>
+                    <entry><type>String</type> | <constant>NULL</constant></entry>
                     <entry><constant>NULL</constant></entry>
                     <entry>
                         ACL privilege to associate with the page. Read more in

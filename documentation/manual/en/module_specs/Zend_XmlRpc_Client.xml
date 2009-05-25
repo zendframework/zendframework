@@ -48,7 +48,7 @@ echo $client->call('test.sayHello');
         <para>
             The XML-RPC value returned from the remote method call will be
             automatically unmarshaled and cast to the equivalent PHP native
-            type. In the example above, a PHP <code>string</code> is returned
+            type. In the example above, a PHP <type>String</type> is returned
             and is immediately ready to be used.
         </para>
 
@@ -106,7 +106,7 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
             <title>PHP Native Types as Parameters</title>
             <para>
                 Parameters may be passed to <code>call()</code> as native PHP
-                variables, meaning as a <code>string</code>,
+                variables, meaning as a <type>String</type>,
                 <code>integer</code>, <code>float</code>,
                 <type>Boolean</type>, <type>Array</type>, or an
                 <code>object</code>. In this case, each PHP native type will

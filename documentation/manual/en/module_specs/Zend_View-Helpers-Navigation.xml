@@ -80,7 +80,7 @@
                 <para>
                     <code>{get|set}Acl()</code>, <code>{get|set}Role()</code>,
                     gets/sets ACL (<classname>Zend_Acl</classname>) instance and
-                    role (<code>string</code> or
+                    role (<type>String</type> or
                     <classname>Zend_Acl_Role_Interface</classname>) used for
                     filtering out pages when rendering, and
                     <code>{get|set}UseAcl()</code> controls whether ACL should
@@ -111,7 +111,7 @@
             <listitem>
                 <para>
                     <code>{get|set}Indent()</code> gets/set indentation. The
-                    setter accepts a <code>string</code> or an <code>int</code>.
+                    setter accepts a <type>String</type> or an <code>int</code>.
                     In the case of an <code>int</code>, the helper will use
                     the given number of spaces for indentation. I.e.,
                     <code>setIndent(4)</code> means 4 initial spaces of
@@ -595,9 +595,9 @@ Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole('member');
                    <code>render()</code> method will use the
                    <code>renderPartial()</code> method. If no partial is
                    set, the <code>renderStraight()</code> method is used.
-                   The helper expects the partial to be a <code>string</code>
+                   The helper expects the partial to be a <type>String</type>
                    or an <type>Array</type> with two elements. If the partial
-                   is a <code>string</code>, it denotes the name of the partial
+                   is a <type>String</type>, it denotes the name of the partial
                    script to use. If it is an <type>Array</type>, the first
                    element will be used as the name of the partial view
                    script, and the second element is the module where the
@@ -848,7 +848,7 @@ Products, Foo Server, FAQ
                 When looking for relations in the the page instance
                 (<code>$page->getRel($type)</code> or
                 <code>$page->getRev($type)</code>), the helper accepts the
-                values of type <code>string</code>, <type>Array</type>,
+                values of type <type>String</type>, <type>Array</type>,
                 <classname>Zend_Config</classname>, or
                 <classname>Zend_Navigation_Page</classname>. If a string
                 is found, it will be converted to a
@@ -1206,9 +1206,9 @@ Output:
                     <code>render()</code> method will use the
                     <code>renderPartial()</code> method. If no partial is
                     set, the <code>renderMenu()</code> method is used.
-                    The helper expects the partial to be a <code>string</code>
+                    The helper expects the partial to be a <type>String</type>
                     or an <type>Array</type> with two elements. If the partial
-                    is a <code>string</code>, it denotes the name of the partial
+                    is a <type>String</type>, it denotes the name of the partial
                     script to use. If it is an <type>Array</type>, the first
                     element will be used as the name of the partial view
                     script, and the second element is the module where the
@@ -1244,7 +1244,7 @@ Output:
                         <listitem>
                             <para>
                                 <code>indent</code>; indentation. Expects a
-                                <code>string</code> or an <code>int</code>
+                                <type>String</type> or an <code>int</code>
                                 value.
                             </para>
                         </listitem>
@@ -1266,7 +1266,7 @@ Output:
                             <para>
                                 <code>ulClass</code>; CSS class for
                                 <code>ul</code> element. Expects a
-                                <code>string</code>.
+                                <type>String</type>.
                             </para>
                         </listitem>
                         <listitem>

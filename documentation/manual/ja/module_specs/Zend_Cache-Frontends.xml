@@ -538,7 +538,7 @@ $result = $cache->foobar2('1', '2');
                               <entry>
                                   <classname>Zend_Cache_Frontend_File::MODE_AND</classname> あるいは
                                   <classname>Zend_Cache_Frontend_File::MODE_OR</classname>。
-                                  <constant>MODE_AND</cohstant> の場合は、
+                                  <constant>MODE_AND</constant> の場合は、
                                   すべてのマスタファイルにアクセスがあるまでキャッシュが無効化されません。
                                   <constant>MODE_OR</constant> の場合は、
                                   どれかひとつのマスタファイルにアクセスがあればキャッシュを無効化します。

@@ -22,9 +22,9 @@
     <note>
         <para>
             The <classname>Zend_Auth</classname> class implements the Singleton pattern - only one instance of the class is
-            available - through its static <code>getInstance()</code> method. This means that using the <code>new</code>
-            operator and the <code>clone</code> keyword will not work with the <classname>Zend_Auth</classname> class; use
-            <classname>Zend_Auth::getInstance()</classname> instead.
+            available - through its static <methodname>getInstance()</methodname> method. This means that using the <emphasis>new</emphasis>
+            operator and the <emphasis>clone</emphasis> keyword will not work with the <classname>Zend_Auth</classname> class; use
+            <methodname>Zend_Auth::getInstance()</methodname> instead.
         </para>
     </note>
 
@@ -42,8 +42,8 @@
 
         <para>
             Each <classname>Zend_Auth</classname> adapter class implements <classname>Zend_Auth_Adapter_Interface</classname>. This interface defines one
-            method, <code>authenticate()</code>, that an adapter class must implement for performing an authentication
-            query. Each adapter class must be prepared prior to calling <code>authenticate()</code>. Such adapter
+            method, <methodname>authenticate()</methodname>, that an adapter class must implement for performing an authentication
+            query. Each adapter class must be prepared prior to calling <methodname>authenticate()</methodname>. Such adapter
             preparation includes setting up credentials (e.g., username and password) and defining values for adapter-
             specific configuration options, such as database connection settings for a database table adapter.
         </para>
@@ -80,9 +80,9 @@ class MyAuthAdapter implements Zend_Auth_Adapter_Interface
 }
 ]]></programlisting>
 
-            As indicated in its docblock, <code>authenticate()</code> must return an instance of
+            As indicated in its docblock, <methodname>authenticate()</methodname> must return an instance of
             <classname>Zend_Auth_Result</classname> (or of a class derived from <classname>Zend_Auth_Result</classname>). If for some
-            reason performing an authentication query is impossible, <code>authenticate()</code> should throw
+            reason performing an authentication query is impossible, <methodname>authenticate()</methodname> should throw
             an exception that derives from <classname>Zend_Auth_Adapter_Exception</classname>.
         </para>
 
@@ -94,19 +94,19 @@ class MyAuthAdapter implements Zend_Auth_Adapter_Interface
 
         <para>
             <classname>Zend_Auth</classname> adapters return an instance of <classname>Zend_Auth_Result</classname> with
-            <code>authenticate()</code> in order to represent the results of an authentication attempt. Adapters
+            <methodname>authenticate()</methodname> in order to represent the results of an authentication attempt. Adapters
             populate the <classname>Zend_Auth_Result</classname> object upon construction, so that the following four methods
             provide a basic set of user-facing operations that are common to the results of <classname>Zend_Auth</classname> adapters:
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>isValid()</code> - returns true if and only if the result represents a
+                        <methodname>isValid()</methodname> - returns true if and only if the result represents a
                         successful authentication attempt
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>getCode()</code> - returns a <classname>Zend_Auth_Result</classname> constant identifier for
+                        <methodname>getCode()</methodname> - returns a <classname>Zend_Auth_Result</classname> constant identifier for
                         determining the type of authentication failure or whether success has occurred. This may be
                         used in situations where the developer wishes to distinguish among several authentication
                         result types. This allows developers to maintain detailed authentication result statistics,
@@ -118,12 +118,12 @@ class MyAuthAdapter implements Zend_Auth_Adapter_Interface
                 </listitem>
                 <listitem>
                     <para>
-                        <code>getIdentity()</code> - returns the identity of the authentication attempt
+                        <methodname>getIdentity()</methodname> - returns the identity of the authentication attempt
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>getMessages()</code> - returns an array of messages regarding a failed
+                        <methodname>getMessages()</methodname> - returns an array of messages regarding a failed
                         authentication attempt
                     </para>
                 </listitem>
@@ -377,7 +377,7 @@ $result = Zend_Auth::getInstance()->authenticate($authAdapter);
             </listitem>
             <listitem>
                 <para>
-                    directly, through the adapter's <code>authenticate()</code> method
+                    directly, through the adapter's <methodname>authenticate()</methodname> method
                 </para>
             </listitem>
             </orderedlist>
@@ -424,7 +424,7 @@ if ($auth->hasIdentity()) {
         </para>
 
         <para>
-            To remove an identity from persistent storage, simply use the <code>clearIdentity()</code> method.
+            To remove an identity from persistent storage, simply use the <methodname>clearIdentity()</methodname> method.
             This typically would be used for implementing an application "logout" operation:
             <programlisting language="php"><![CDATA[
 Zend_Auth::getInstance()->clearIdentity();
@@ -435,9 +435,9 @@ Zend_Auth::getInstance()->clearIdentity();
             When the automatic use of persistent storage is inappropriate for a particular use case, a
             developer may simply bypass the use of the <classname>Zend_Auth</classname> class, using an adapter class
             directly. Direct use of an adapter class involves configuring and preparing an adapter object and
-            then calling its <code>authenticate()</code> method. Adapter-specific details are discussed in the
+            then calling its <methodname>authenticate()</methodname> method. Adapter-specific details are discussed in the
             documentation for each adapter. The following example directly utilizes
-            <code>MyAuthAdapter</code>:
+            <emphasis>MyAuthAdapter</emphasis>:
 
             <programlisting language="php"><![CDATA[
 // Set up the authentication adapter

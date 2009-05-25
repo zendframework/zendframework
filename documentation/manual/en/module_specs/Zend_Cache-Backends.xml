@@ -27,17 +27,17 @@
                  </thead>
                  <tbody>
                       <row>
-                          <entry><code>cache_dir</code></entry>
-                          <entry><code>string</code></entry>
-                          <entry><code>'/tmp/'</code></entry>
+                          <entry><emphasis>cache_dir</emphasis></entry>
+                          <entry><type>String</type></entry>
+                          <entry><filename>'/tmp/'</filename></entry>
                           <entry>
                               Directory where to store cache files
                           </entry>
                       </row>
                       <row>
-                          <entry><code>file_locking</code></entry>
-                          <entry><code>boolean</code></entry>
-                          <entry><code>true</code></entry>
+                          <entry><emphasis>file_locking</emphasis></entry>
+                          <entry><type>Boolean</type></entry>
+                          <entry><constant>TRUE</constant></entry>
                           <entry>
                             Enable / disable file_locking : Can avoid cache corruption under
                             bad circumstances but it doesn't help on multithread webservers
@@ -45,9 +45,9 @@
                           </entry>
                       </row>
                       <row>
-                          <entry><code>read_control</code></entry>
-                          <entry><code>boolean</code></entry>
-                          <entry><code>true</code></entry>
+                          <entry><emphasis>read_control</emphasis></entry>
+                          <entry><type>Boolean</type></entry>
+                          <entry><constant>TRUE</constant></entry>
                           <entry>
                             Enable / disable read control : if enabled, a control key is
                             embedded in the cache file and this key is compared with the
@@ -55,9 +55,9 @@
                           </entry>
                       </row>
                       <row>
-                          <entry><code>read_control_type</code></entry>
-                          <entry><code>string</code></entry>
-                          <entry><code>'crc32'</code></entry>
+                          <entry><emphasis>read_control_type</emphasis></entry>
+                          <entry><type>String</type></entry>
+                          <entry>'crc32'</entry>
                           <entry>
                             Type of read control (only if read control is enabled). Available values are :
                             'md5' (best but slowest), 'crc32' (lightly less safe but faster, better choice),
@@ -66,11 +66,11 @@
                         </entry>
                       </row>
                       <row>
-                          <entry><code>hashed_directory_level</code></entry>
-                          <entry><code>int</code></entry>
-                          <entry><code>0</code></entry>
+                          <entry><emphasis>hashed_directory_level</emphasis></entry>
+                          <entry><type>Integer</type></entry>
+                          <entry>0</entry>
                           <entry>
-                            Hashed directory structure level :     0 means "no hashed directory
+                            Hashed directory structure level : 0 means "no hashed directory
                              structure", 1 means "one level of directory", 2 means "two levels"...
                              This option can speed up the cache only when you have many thousands of
                              cache files. Only specific benchs can help you to choose the perfect
@@ -78,17 +78,17 @@
                           </entry>
                       </row>
                       <row>
-                          <entry><code>hashed_directory_umask</code></entry>
-                          <entry><code>int</code></entry>
-                          <entry><code>0700</code></entry>
+                          <entry><emphasis>hashed_directory_umask</emphasis></entry>
+                          <entry><type>Integer</type></entry>
+                          <entry>0700</entry>
                           <entry>
                               Umask for the hashed directory structure
                         </entry>
                       </row>
                       <row>
-                          <entry><code>file_name_prefix</code></entry>
-                          <entry><code>string</code></entry>
-                          <entry><code>'zend_cache'</code></entry>
+                          <entry><emphasis>file_name_prefix</emphasis></entry>
+                          <entry><type>String</type></entry>
+                          <entry>'zend_cache'</entry>
                           <entry>
                               prefix for cache files ; be really careful with this option because
                               a too generic value in a system cache dir (like /tmp) can cause
@@ -96,17 +96,17 @@
                         </entry>
                       </row>
                       <row>
-                          <entry><code>cache_file_umask</code></entry>
-                          <entry><code>int</code></entry>
-                          <entry><code>0700</code></entry>
+                          <entry><emphasis>cache_file_umask</emphasis></entry>
+                          <entry><type>Integer</type></entry>
+                          <entry>0700</entry>
                           <entry>
                               umask for cache files
                           </entry>
                       </row>
                        <row>
-                          <entry><code>metatadatas_array_max_size</code></entry>
-                          <entry><code>int</code></entry>
-                          <entry><code>100</code></entry>
+                          <entry><emphasis>metatadatas_array_max_size</emphasis></entry>
+                          <entry><type>Integer</type></entry>
+                          <entry>100</entry>
                           <entry>
                               internal max size for the metadatas array (don't change this value unless you
                               know what you are doing)
@@ -137,17 +137,17 @@
                  </thead>
                  <tbody>
                       <row>
-                          <entry><code>cache_db_complete_path (mandatory)</code></entry>
-                          <entry><code>string</code></entry>
-                          <entry><code>null</code></entry>
+                          <entry><emphasis>cache_db_complete_path (mandatory)</emphasis></entry>
+                          <entry><type>String</type></entry>
+                          <entry><constant>NULL</constant></entry>
                           <entry>
                               The complete path (filename included) of the SQLite database
                           </entry>
                       </row>
                       <row>
-                          <entry><code>automatic_vacuum_factor</code></entry>
-                          <entry><code>int</code></entry>
-                          <entry><code>10</code></entry>
+                          <entry><emphasis>automatic_vacuum_factor</emphasis></entry>
+                          <entry><type>Integer</type></entry>
+                          <entry>10</entry>
                           <entry>
                               Disable / Tune the automatic vacuum process.
                               The automatic vacuum process defragment the database file (and make it smaller)
@@ -188,13 +188,11 @@
                  </thead>
                  <tbody>
                       <row>
-                          <entry><code>servers</code></entry>
-                          <entry><code>array</code></entry>
+                          <entry><emphasis>servers</emphasis></entry>
+                          <entry><type>Array</type></entry>
                           <entry>
-                            <code>
                               array(array('host' => 'localhost', 'port' => 11211, 'persistent' => true, 'weight' => 1,
                               'timeout' => 5, 'retry_interval' => 15, 'status' => true, 'failure_callback' => '' ))
-                            </code>
                           </entry>
                           <entry>
                               An array of memcached servers ; each memcached server is described by an associative array :
@@ -209,17 +207,17 @@
                           </entry>
                       </row>
                       <row>
-                          <entry><code>compression</code></entry>
-                          <entry><code>boolean</code></entry>
-                          <entry><code>false</code></entry>
+                          <entry><emphasis>compression</emphasis></entry>
+                          <entry><type>Boolean</type></entry>
+                          <entry><constant>FALSE</constant></entry>
                           <entry>
                              true if you want to use on-the-fly compression
                           </entry>
                       </row>
                       <row>
-                          <entry><code>compatibility</code></entry>
-                          <entry><code>boolean</code></entry>
-                          <entry><code>false</code></entry>
+                          <entry><emphasis>compatibility</emphasis></entry>
+                          <entry><type>Boolean</type></entry>
+                          <entry><constant>FALSE</constant></entry>
                           <entry>
                              true if you want to use this compatibility mode with old memcache servers/extensions
                           </entry>
@@ -270,17 +268,17 @@
                  </thead>
                  <tbody>
                       <row>
-                          <entry><code>user</code></entry>
-                          <entry><code>string</code></entry>
-                          <entry><code>null</code></entry>
+                          <entry><emphasis>user</emphasis></entry>
+                          <entry><type>String</type></entry>
+                          <entry><constant>NULL</constant></entry>
                           <entry>
                               xcache.admin.user, necessary for the clean() method
                           </entry>
                       </row>
                       <row>
-                          <entry><code>password</code></entry>
-                          <entry><code>string</code></entry>
-                          <entry><code>null</code></entry>
+                          <entry><emphasis>password</emphasis></entry>
+                          <entry><type>String</type></entry>
+                          <entry><constant>NULL</constant></entry>
                           <entry>
                               xcache.admin.pass (in clear form, not MD5), necessary for the clean() method
                           </entry>
@@ -295,7 +293,7 @@
             This backend uses content caching API of the <ulink url="http://www.zend.com/products/platform">Zend Platform</ulink> product. Naturally, to use this backend you need to have Zend Platform installed.
         </para>
         <para>
-    This backend supports tags, but does not support <code>CLEANING_MODE_NOT_MATCHING_TAG</code> cleaning mode.
+    This backend supports tags, but does not support <constant>CLEANING_MODE_NOT_MATCHING_TAG</constant> cleaning mode.
         </para>
         <para>
             Specify this backend using a word separator -- '-', '.', ' ', or '_'
@@ -336,41 +334,41 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
                  </thead>
                  <tbody>
                       <row>
-                          <entry><code>slow_backend</code></entry>
-                          <entry><code>string</code></entry>
-                          <entry><code>File</code></entry>
+                          <entry><emphasis>slow_backend</emphasis></entry>
+                          <entry><type>String</type></entry>
+                          <entry>File</entry>
                           <entry>
                               the "slow" backend name
                           </entry>
                       </row>
                       <row>
-                          <entry><code>fast_backend</code></entry>
-                          <entry><code>string</code></entry>
-                          <entry><code>Apc</code></entry>
+                          <entry><emphasis>fast_backend</emphasis></entry>
+                          <entry><type>String</type></entry>
+                          <entry>Apc</entry>
                           <entry>
                               the "fast" backend name
                           </entry>
                       </row>
                       <row>
-                          <entry><code>slow_backend_options</code></entry>
-                          <entry><code>array</code></entry>
-                          <entry><code>array()</code></entry>
+                          <entry><emphasis>slow_backend_options</emphasis></entry>
+                          <entry><type>Array</type></entry>
+                          <entry><methodname>array()</methodname></entry>
                           <entry>
                               the "slow" backend options
                           </entry>
                       </row>
                       <row>
-                          <entry><code>fast_backend_options</code></entry>
-                          <entry><code>array</code></entry>
-                          <entry><code>array()</code></entry>
+                          <entry><emphasis>fast_backend_options</emphasis></entry>
+                          <entry><type>Array</type></entry>
+                          <entry><methodname>array()</methodname></entry>
                           <entry>
                               the "fast" backend options
                           </entry>
                       </row>
                       <row>
-                          <entry><code>slow_backend_custom_naming</code></entry>
-                          <entry><code>boolean</code></entry>
-                          <entry><code>false</code></entry>
+                          <entry><emphasis>slow_backend_custom_naming</emphasis></entry>
+                          <entry><type>Boolean</type></entry>
+                          <entry><constant>FALSE</constant></entry>
                           <entry>
                               if true, the slow_backend argument is used as a complete class name ; if false,
                               the frontend argument is used as the end of "Zend_Cache_Backend_[...]"
@@ -378,9 +376,9 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
                           </entry>
                       </row>
                       <row>
-                          <entry><code>fast_backend_custom_naming</code></entry>
-                          <entry><code>boolean</code></entry>
-                          <entry><code>false</code></entry>
+                          <entry><emphasis>fast_backend_custom_naming</emphasis></entry>
+                          <entry><type>Boolean</type></entry>
+                          <entry><constant>FALSE</constant></entry>
                           <entry>
                               if true, the fast_backend argument is used as a complete class name ; if false,
                               the frontend argument is used as the end of "Zend_Cache_Backend_[...]"
@@ -388,35 +386,35 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
                           </entry>
                       </row>
                       <row>
-                          <entry><code>slow_backend_autoload</code></entry>
-                          <entry><code>boolean</code></entry>
-                          <entry><code>false</code></entry>
+                          <entry><emphasis>slow_backend_autoload</emphasis></entry>
+                          <entry><type>Boolean</type></entry>
+                          <entry><constant>FALSE</constant></entry>
                           <entry>
                               if true, there will no require_once for the slow backend
                               (useful only for custom backends)
                           </entry>
                       </row>
                       <row>
-                          <entry><code>fast_backend_autoload</code></entry>
-                          <entry><code>boolean</code></entry>
-                          <entry><code>false</code></entry>
+                          <entry><emphasis>fast_backend_autoload</emphasis></entry>
+                          <entry><type>Boolean</type></entry>
+                          <entry><constant>FALSE</constant></entry>
                           <entry>
                               if true, there will no require_once for the fast backend
                               (useful only for custom backends)
                           </entry>
                       </row>
                       <row>
-                          <entry><code>auto_refresh_fast_cache</code></entry>
-                          <entry><code>boolean</code></entry>
-                          <entry><code>true</code></entry>
+                          <entry><emphasis>auto_refresh_fast_cache</emphasis></entry>
+                          <entry><type>Boolean</type></entry>
+                          <entry><constant>TRUE</constant></entry>
                           <entry>
                               if true, auto refresh the fast cache when a cache record is hit
                           </entry>
                       </row>
                       <row>
-                          <entry><code>stats_update_factor</code></entry>
-                          <entry><code>integer</code></entry>
-                          <entry><code>10</code></entry>
+                          <entry><emphasis>stats_update_factor</emphasis></entry>
+                          <entry><type>Integer</type></entry>
+                          <entry>10</entry>
                           <entry>
                               disable / tune the computation of the fast backend filling percentage
                               (when saving a record into cache, computation of the fast backend filling percentage

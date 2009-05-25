@@ -35,20 +35,20 @@
                      </thead>
                      <tbody>
                           <row>
-                              <entry><code>caching</code></entry>
-                              <entry><code>boolean</code></entry>
-                              <entry><code>true</code></entry>
+                              <entry><emphasis>caching</emphasis></entry>
+                              <entry><type>Boolean</type></entry>
+                              <entry><constant>TRUE</constant></entry>
                               <entry>
                                   enable / disable caching (can be very useful for the debug of
                                   cached scripts)
                               </entry>
                           </row>
                           <row>
-                              <entry><code>cache_id_prefix</code></entry>
-                              <entry><code>string</code></entry>
-                              <entry><code>null</code></entry>
+                              <entry><emphasis>cache_id_prefix</emphasis></entry>
+                              <entry><type>String</type></entry>
+                              <entry><constant>NULL</constant></entry>
                               <entry>
-                                A prefix for all cache ids, if set to <code>null</code>, no
+                                A prefix for all cache ids, if set to <constant>null</constant>, no
                                 cache id prefix will be used. The cache id prefix essentially creates
                                 a namespace in the cache, allowing multiple applications or websites
                                 to use a shared cache. Each application or website can use a different
@@ -56,11 +56,11 @@
                               </entry>
                           </row>
                           <row>
-                              <entry><code>lifetime</code></entry>
-                              <entry><code>int</code></entry>
-                              <entry><code>3600</code></entry>
+                              <entry><emphasis>lifetime</emphasis></entry>
+                              <entry><type>Integer</type></entry>
+                              <entry>3600</entry>
                               <entry>
-                                cache lifetime (in seconds), if set to <code>null</code>, the
+                                cache lifetime (in seconds), if set to <constant>NULL</constant>, the
                                 cache is valid forever.
                               </entry>
                           </row>

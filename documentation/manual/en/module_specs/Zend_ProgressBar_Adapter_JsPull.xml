@@ -11,7 +11,7 @@
         like the JSON string which is send by the jsPush adapter. The only
         difference is, that it contains an additional parameter,
         <code>finished</code>, which is either <constant>FALSE</constant> when
-        <code>update()</code> is called or <code>true</code>, when
+        <code>update()</code> is called or <constant>TRUE</constant>, when
         <code>finish()</code> is called.
     </para>
     <para>
@@ -23,7 +23,7 @@
         <listitem>
             <para>
                 <code>exitAfterSend</code>: Exits the current request after the
-                data were send to the browser. Default is <code>true</code>.
+                data were send to the browser. Default is <constant>TRUE</constant>.
             </para>
         </listitem>
     </itemizedlist>

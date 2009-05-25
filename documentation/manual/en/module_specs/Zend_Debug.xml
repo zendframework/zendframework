@@ -34,7 +34,7 @@ Zend_Debug::dump($var, $label=null, $echo=true);
     <para>
         The boolean <varname>$echo</varname> argument specifies whether the output
         of <classname>Zend_Debug::dump()</classname> is echoed or not.
-        If <code>true</code>, the output is echoed.
+        If <constant>TRUE</constant>, the output is echoed.
         Regardless of the value of the <varname>$echo</varname> argument, the
         return value of this method contains the output.
     </para>

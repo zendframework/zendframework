@@ -485,7 +485,7 @@ $data = array(
 
             <para>
                 In <classname>Zend_Db_Table_Abstract</classname>, if you define the protected variable
-                <varname>$_sequence</varname> to be the Boolean value <code>true</code>, then the class
+                <varname>$_sequence</varname> to be the Boolean value <constant>TRUE</constant>, then the class
                 assumes that the table has an auto-incrementing primary key.
             </para>
 
@@ -517,7 +517,7 @@ class Bugs extends Zend_Db_Table_Abstract
                 for new rows. IBM DB2 has an <code>IDENTITY</code> notation that works similarly.
                 If you use either of these notations, treat your <classname>Zend_Db_Table</classname> class as having an
                 auto-incrementing column with respect to declaring the <varname>$_sequence</varname>
-                member as <code>true</code>.
+                member as <constant>TRUE</constant>.
             </para>
 
         </sect3>
@@ -1397,7 +1397,7 @@ $bugs = new Bugs(array('metadataCache' => $cache));
             <para>
                 Since the information returned from the adapter's describeTable() method is an
                 array, ensure that the <code>automatic_serialization</code> option is set to
-                <code>true</code> for the <classname>Zend_Cache_Core</classname> frontend.
+                <constant>TRUE</constant> for the <classname>Zend_Cache_Core</classname> frontend.
             </para>
 
         </note>

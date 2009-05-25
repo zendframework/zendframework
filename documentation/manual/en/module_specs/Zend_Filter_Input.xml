@@ -273,7 +273,7 @@ $input->setData($newData);
 
             <para>
                 If all input data pass the validation rules, the
-                <code>isValid()</code> method returns <code>true</code>.
+                <code>isValid()</code> method returns <constant>TRUE</constant>.
                 If any field is invalid or any required field is missing,
                 <code>isValid()</code> returns <constant>FALSE</constant>.
             </para>
@@ -288,7 +288,7 @@ if ($input->isValid()) {
                 This method accepts an optional string argument, naming
                 an individual field. If the specified field passed validation
                 and is ready for fetching, <code>isValid('fieldName')</code>
-                returns <code>true</code>.
+                returns <constant>TRUE</constant>.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -554,7 +554,7 @@ $filters = array(
                 specify a password string in two fields, and they must type the
                 same string in both fields. Suppose you implement a validator
                 class that takes an array argument, and returns
-                <code>true</code> if all the values in the array are equal to
+                <constant>TRUE</constant> if all the values in the array are equal to
                 each other.
             </para>
 
@@ -684,7 +684,7 @@ echo $input->month; // echoes 1
 
             <para>
                 If in your case an empty string should be considered valid, you
-                can set the metacommand 'allowEmpty' to <code>true</code>.
+                can set the metacommand 'allowEmpty' to <constant>TRUE</constant>.
                 Then the input data passes validation if it is present in the
                 input data, but has the value of an empty string.
             </para>
@@ -746,7 +746,7 @@ $input->setOptions($options);
 
             <para>
                 Alternatively, if the value of the 'breakChainOnFailure'
-                metacommand is <code>true</code>, the validator chain
+                metacommand is <constant>TRUE</constant>, the validator chain
                 terminates after the first validator fails. The input data is
                 not checked against subsequent validators in the chain, so it
                 might cause more violations even if you correct the one

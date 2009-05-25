@@ -17,7 +17,7 @@
             'hourly', 'daily', 'weekly', 'monthly', 'yearly', or 'never'.
         </para>
         <para>
-            Returns <code>true</code> if and only if the value is a string
+            Returns <constant>TRUE</constant> if and only if the value is a string
             and is equal to one of the frequencies specified above.
         </para>
     </sect3>
@@ -32,7 +32,7 @@
             about time.
         </para>
         <para>
-            Returns <code>true</code> if and only if the given value is
+            Returns <constant>TRUE</constant> if and only if the given value is
             a string and is valid according to the protocol.
         </para>
 

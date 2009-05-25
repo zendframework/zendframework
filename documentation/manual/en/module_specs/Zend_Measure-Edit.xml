@@ -151,7 +151,7 @@ echo $sum;
 
         <para>
             Measurements can also be compared, but without automatic unit conversion. Thus, <code>equals()</code>
-            returns <code>TRUE</code>, only if both the value and the unit of measure are identical.
+            returns <constant>TRUE</constant>, only if both the value and the unit of measure are identical.
         </para>
 
         <para>

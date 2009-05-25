@@ -75,7 +75,7 @@ try {
             of an option. If the option had a parameter, this method returns
             the value of the parameter. If the option had no parameter but
             the user did specify it on the command-line, the method returns
-            <code>true</code>. Otherwise the method returns <code>null</code>.
+            <constant>TRUE</constant>. Otherwise the method returns <code>null</code>.
         </para>
         <example id="zend.console.getopt.fetching.byname.example.setoption">
             <title>Using getOption()</title>
@@ -119,7 +119,7 @@ $p_parameter = $opts->p; // null if not set
                     As a string: use the <code>toString()</code> method. The options
                     are returned as a space-separated string of "<code>flag=value</code>"
                     pairs. The value of an option that does not have a parameter
-                    is the literal string "<code>true</code>".
+                    is the literal string "<constant>TRUE</constant>".
                 </para>
             </listitem>
             <listitem>

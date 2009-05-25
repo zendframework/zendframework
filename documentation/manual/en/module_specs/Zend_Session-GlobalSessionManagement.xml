@@ -417,14 +417,14 @@ if (!isset($defaultNamespace->initialized)) {
             <classname>Zend_Session::destroy()</classname> destroys all of the persistent data associated with the current
             session. However, no variables in PHP are affected, so your namespaced sessions (instances of
             <classname>Zend_Session_Namespace</classname>) remain readable. To complete a "logout", set the optional parameter to
-            <code>true</code> (the default) to also delete the user agent's session id cookie. The optional
+            <constant>TRUE</constant> (the default) to also delete the user agent's session id cookie. The optional
             <code>$readonly</code> parameter removes the ability to create new <classname>Zend_Session_Namespace</classname>
             instances and for <classname>Zend_Session</classname> methods to write to the session data store.
         </para>
 
         <para>
             If you see the error message, "Cannot modify header information - headers already sent", then either avoid
-            using <code>true</code> as the value for the first argument (requesting removal of the session cookie), or
+            using <constant>TRUE</constant> as the value for the first argument (requesting removal of the session cookie), or
             see <xref linkend="zend.session.global_session_management.headers_sent" />. Thus,
             <classname>Zend_Session::destroy(true)</classname> must either be called before PHP has sent HTTP headers, or output
             buffering must be enabled. Also, the total output sent must not exceed the set buffer size, in order to

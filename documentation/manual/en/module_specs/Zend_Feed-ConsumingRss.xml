@@ -137,7 +137,7 @@ if ($item->propname()) {
 
     <para>
         If you use <code>$item->propname</code> instead, you will always get an empty object which will
-        evaluate to <code>TRUE</code>, so your check will fail.
+        evaluate to <constant>TRUE</constant>, so your check will fail.
     </para>
 
     <para>

@@ -104,7 +104,7 @@ $validator = new Zend_Validate_EmailAddress(Zend_Validate_Hostname::ALLOW_DNS,
                                             true);
 ]]></programlisting>
 
-        Alternatively you can either pass <code>true</code> or <constant>FALSE</constant> to
+        Alternatively you can either pass <constant>TRUE</constant> or <constant>FALSE</constant> to
         <code>$validator->setValidateMx()</code> to enable or disable MX validation.
     </para>
 

@@ -72,7 +72,7 @@
                 <row>
                     <entry><code>reset_params</code></entry>
                     <entry><code>bool</code></entry>
-                    <entry><code>true</code></entry>
+                    <entry><constant>TRUE</constant></entry>
                     <entry>
                         Whether user params should be reset
                         when generating href to the page.

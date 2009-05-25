@@ -405,7 +405,7 @@ Zend_Controller_Front::run('../application/controllers');
                 <para>
                     <code>returnResponse($flag)</code> is used to tell the front
                     controller whether to return the response
-                    (<code>true</code>) from <code>dispatch()</code>, or if the
+                    (<constant>TRUE</constant>) from <code>dispatch()</code>, or if the
                     response should be automatically emitted
                     (<constant>FALSE</constant>). By default, the response is
                     automatically emitted (by calling

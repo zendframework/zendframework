@@ -248,10 +248,10 @@ public function isLocked();
 
             <para>
                 The <code>isLocked()</code> method can be used to check if
-                object is locked. It returns <code>true</code> if the object
+                object is locked. It returns <constant>TRUE</constant> if the object
                 is locked, or <constant>FALSE</constant> if it is not locked.
-                This is always <code>true</code> for "locked" objects,
-                and may be either <code>true</code> or <constant>FALSE</constant>
+                This is always <constant>TRUE</constant> for "locked" objects,
+                and may be either <constant>TRUE</constant> or <constant>FALSE</constant>
                 for "movable" objects.
             </para>
 

@@ -12,7 +12,7 @@
     <sect2 id="zend.validate.set.alnum">
         <title>Alnum</title>
         <para>
-            Returns <code>true</code> if and only if <code>$value</code> contains only alphabetic
+            Returns <constant>TRUE</constant> if and only if <code>$value</code> contains only alphabetic
             and digit characters. This validator includes an option to also consider white space
             characters as valid.
         </para>
@@ -30,7 +30,7 @@
     <sect2 id="zend.validate.set.alpha">
         <title>Alpha</title>
         <para>
-            Returns <code>true</code> if and only if <code>$value</code> contains only alphabetic
+            Returns <constant>TRUE</constant> if and only if <code>$value</code> contains only alphabetic
             characters. This validator includes an option to also consider white space characters
             as valid.
         </para>
@@ -52,7 +52,7 @@
     <sect2 id="zend.validate.set.between">
         <title>Between</title>
         <para>
-            Returns <code>true</code> if and only if <code>$value</code> is between the minimum and
+            Returns <constant>TRUE</constant> if and only if <code>$value</code> is between the minimum and
             maximum boundary values. The comparison is inclusive by default (<code>$value</code> may
             equal a boundary value), though this may be overridden in order to do a strict
             comparison, where <code>$value</code> must be strictly greater than the minimum and
@@ -63,7 +63,7 @@
     <sect2 id="zend.validate.set.ccnum">
         <title>Ccnum</title>
         <para>
-            Returns <code>true</code> if and only if <code>$value</code> follows the Luhn algorithm
+            Returns <constant>TRUE</constant> if and only if <code>$value</code> follows the Luhn algorithm
             (mod-10 checksum) for credit card numbers.
         </para>
     </sect2>
@@ -71,7 +71,7 @@
     <sect2 id="zend.validate.set.date">
         <title>Date</title>
         <para>
-            Returns <code>true</code> if <code>$value</code> is a valid date of the format
+            Returns <constant>TRUE</constant> if <code>$value</code> is a valid date of the format
             <code>YYYY-MM-DD</code>. If the optional <code>locale</code> option is set then the date
             will be validated according to the set locale. And if the optional <code>format</code>
             option is set this format is used for the validation. for details about the optional
@@ -85,7 +85,7 @@
     <sect2 id="zend.validate.set.digits">
         <title>Digits</title>
         <para>
-            Returns <code>true</code> if and only if <code>$value</code> only contains digit
+            Returns <constant>TRUE</constant> if and only if <code>$value</code> only contains digit
             characters.
         </para>
     </sect2>
@@ -95,7 +95,7 @@
     <sect2 id="zend.validate.set.float">
         <title>Float</title>
         <para>
-            Returns <code>true</code> if and only if <code>$value</code> is a floating-point value.
+            Returns <constant>TRUE</constant> if and only if <code>$value</code> is a floating-point value.
             Since Zend Framework 1.8 this validator takes into account the actual locale from
             browser, environment or application wide set locale. You can of course use the
             get/setLocale accessors to change the used locale or give it while creating a instance
@@ -106,7 +106,7 @@
     <sect2 id="zend.validate.set.greater_than">
         <title>GreaterThan</title>
         <para>
-            Returns <code>true</code> if and only if <code>$value</code> is greater than the minimum
+            Returns <constant>TRUE</constant> if and only if <code>$value</code> is greater than the minimum
             boundary.
         </para>
     </sect2>
@@ -114,7 +114,7 @@
     <sect2 id="zend.validate.set.hex">
         <title>Hex</title>
         <para>
-            Returns <code>true</code> if and only if <code>$value</code> contains only hexadecimal
+            Returns <constant>TRUE</constant> if and only if <code>$value</code> contains only hexadecimal
             digit characters.
         </para>
     </sect2>
@@ -124,7 +124,7 @@
     <sect2 id="zend.validate.set.iban">
         <title>Iban</title>
         <para>
-            Returns <code>true</code> if and only if <code>$value</code> contains a valid IBAN
+            Returns <constant>TRUE</constant> if and only if <code>$value</code> contains a valid IBAN
             (International Bank Account Number). IBAN numbers are validated against the country
             where they are used and by a checksum.
         </para>
@@ -169,8 +169,8 @@ if ($validator->isValid($iban)) {
     <sect2 id="zend.validate.set.in_array">
         <title>InArray</title>
         <para>
-            Returns <code>true</code> if and only if a "needle" <code>$value</code> is contained in
-            a "haystack" array. If the strict option is <code>true</code>, then the type of
+            Returns <constant>TRUE</constant> if and only if a "needle" <code>$value</code> is contained in
+            a "haystack" array. If the strict option is <constant>TRUE</constant>, then the type of
             <code>$value</code> is also checked.
         </para>
     </sect2>
@@ -178,7 +178,7 @@ if ($validator->isValid($iban)) {
     <sect2 id="zend.validate.set.int">
         <title>Int</title>
         <para>
-            Returns <code>true</code> if and only if <code>$value</code> is a valid integer. Since
+            Returns <constant>TRUE</constant> if and only if <code>$value</code> is a valid integer. Since
             Zend Framework 1.8 this validator takes into account the actual locale from browser,
             environment or application wide set locale. You can of course use the get/setLocale
             accessors to change the used locale or give it while creating a instance of this
@@ -189,14 +189,14 @@ if ($validator->isValid($iban)) {
     <sect2 id="zend.validate.set.ip">
         <title>Ip</title>
         <para>
-            Returns <code>true</code> if and only if <code>$value</code> is a valid IP address.
+            Returns <constant>TRUE</constant> if and only if <code>$value</code> is a valid IP address.
         </para>
     </sect2>
 
     <sect2 id="zend.validate.set.less_than">
         <title>LessThan</title>
         <para>
-            Returns <code>true</code> if and only if <code>$value</code> is less than the maximum
+            Returns <constant>TRUE</constant> if and only if <code>$value</code> is less than the maximum
             boundary.
         </para>
     </sect2>
@@ -204,14 +204,14 @@ if ($validator->isValid($iban)) {
     <sect2 id="zend.validate.set.not_empty">
         <title>NotEmpty</title>
         <para>
-            Returns <code>true</code> if and only if <code>$value</code> is not an empty value.
+            Returns <constant>TRUE</constant> if and only if <code>$value</code> is not an empty value.
         </para>
     </sect2>
 
     <sect2 id="zend.validate.set.regex">
         <title>Regex</title>
         <para>
-            Returns <code>true</code> if and only if <code>$value</code> matches against a regular
+            Returns <constant>TRUE</constant> if and only if <code>$value</code> matches against a regular
             expression pattern.
         </para>
     </sect2>
@@ -221,7 +221,7 @@ if ($validator->isValid($iban)) {
     <sect2 id="zend.validate.set.string_length">
         <title>StringLength</title>
         <para>
-            Returns <code>true</code> if and only if the string length of <code>$value</code> is at
+            Returns <constant>TRUE</constant> if and only if the string length of <code>$value</code> is at
             least a minimum and no greater than a maximum (when the max option is not
             <code>null</code>). The <code>setMin()</code> method throws an exception if the minimum
             length is set to a value greater than the set maximum length, and the

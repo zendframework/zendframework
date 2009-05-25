@@ -43,7 +43,7 @@
             <classname>Zend_Validate_Interface</classname>, which defines two methods,
             <code>isValid()</code> and <code>getMessages()</code>. The
             <code>isValid()</code> method performs validation upon the provided
-            value, returning <code>true</code> if and only if the value passes
+            value, returning <constant>TRUE</constant> if and only if the value passes
             against the validation criteria.
         </para>
 

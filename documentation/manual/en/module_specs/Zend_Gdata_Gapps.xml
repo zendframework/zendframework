@@ -285,7 +285,7 @@ $user = $user->save();
                     A user can be forced to change their password at their
                     next login by setting the
                     <code>login->changePasswordAtNextLogin</code> property to
-                    <code>true</code>.
+                    <constant>TRUE</constant>.
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -322,7 +322,7 @@ $gdata->restoreUser('foo');
                 <para>
                     Alternatively, you can set the UserEntry's
                     <code>login->suspended</code> property to
-                    <code>true</code>.
+                    <constant>TRUE</constant>.
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -345,7 +345,7 @@ $user = $user->save();
                 <para>
                     Users can be granted the ability to administer your domain
                     by setting their <code>login->admin</code> property to
-                    <code>true</code>.
+                    <constant>TRUE</constant>.
                 </para>
 
                 <programlisting language="php"><![CDATA[

@@ -1889,7 +1889,7 @@ foreach ($this->container as $page) {
                 <para>
                     <code>{get|set}UseXmlDeclaration()</code> gets/sets a
                     flag indicating whether the XML declaration should be
-                    included when rendering. Default is <code>true</code>.
+                    included when rendering. Default is <constant>TRUE</constant>.
                 </para>
            </listitem>
            <listitem>
@@ -1897,7 +1897,7 @@ foreach ($this->container as $page) {
                     <code>{get|set}UseSitemapValidators()</code> gets/sets a
                     flag indicating whether sitemap validators should be
                     used when generating the DOM sitemap. Default is
-                    <code>true</code>.
+                    <constant>TRUE</constant>.
                 </para>
            </listitem>
            <listitem>
@@ -1905,7 +1905,7 @@ foreach ($this->container as $page) {
                     <code>{get|set}UseSchemaValidation()</code> gets/sets a
                     flag indicating whether the helper should use XML Schema
                     validation when generating the DOM sitemap. Default is
-                    <constant>FALSE</constant>. If <code>true</code>.
+                    <constant>FALSE</constant>. If <constant>TRUE</constant>.
                 </para>
            </listitem>
            <listitem>
@@ -2177,21 +2177,21 @@ echo $this->navigation()
                <para>
                    <code>{get|set}InjectContainer()</code> gets/sets a flag
                    indicating whether the container should be injected to
-                   proxied helpers. Default is <code>true</code>.
+                   proxied helpers. Default is <constant>TRUE</constant>.
                </para>
            </listitem>
            <listitem>
                <para>
                    <code>{get|set}InjectAcl()</code> gets/sets a flag
                    indicating whether the ACL/role should be injected to
-                   proxied helpers. Default is <code>true</code>.
+                   proxied helpers. Default is <constant>TRUE</constant>.
                </para>
            </listitem>
            <listitem>
                <para>
                    <code>{get|set}InjectTranslator()</code> gets/sets a flag
                    indicating whether the translator should be injected to
-                   proxied helpers. Default is <code>true</code>.
+                   proxied helpers. Default is <constant>TRUE</constant>.
                </para>
            </listitem>
            <listitem>

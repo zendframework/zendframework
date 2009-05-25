@@ -387,7 +387,7 @@ $element->addPrefixPath('My_Validator', 'My/Validator/', 'validate');
 
         <para>
             If failing a particular validation should prevent later validators
-            from firing, pass boolean <code>true</code> as the second parameter:
+            from firing, pass boolean <constant>TRUE</constant> as the second parameter:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -653,7 +653,7 @@ $messages = $element->getMessages();
             <listitem><para>
                     <code>setRequired($flag)</code> and
                     <code>isRequired()</code> allow you to set and retrieve the
-                    status of the 'required' flag. When set to boolean <code>true</code>, this
+                    status of the 'required' flag. When set to boolean <constant>TRUE</constant>, this
                     flag requires that the element be in the data processed by
                     <classname>Zend_Form</classname>.
             </para></listitem>

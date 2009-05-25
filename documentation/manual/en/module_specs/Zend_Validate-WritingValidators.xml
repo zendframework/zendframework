@@ -37,7 +37,7 @@
         message variables and message templates that correspond to the types of validation failures
         that can occur. If a value fails your validation tests, then <code>isValid()</code> should
         return <constant>FALSE</constant>. If the value passes your validation tests, then
-        <code>isValid()</code> should return <code>true</code>.
+        <code>isValid()</code> should return <constant>TRUE</constant>.
     </para>
 
     <para>

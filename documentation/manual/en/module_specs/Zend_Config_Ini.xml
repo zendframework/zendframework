@@ -17,7 +17,7 @@
             <ulink url="http://php.net/parse_ini_file"><code>parse_ini_file()</code></ulink>
             PHP function. Please review this documentation to be aware of its specific behaviors,
             which propagate to <classname>Zend_Config_Ini</classname>, such as how the special values of
-            <code>true</code>, <constant>FALSE</constant>, <code>yes</code>, <code>no</code>,
+            <constant>TRUE</constant>, <constant>FALSE</constant>, <code>yes</code>, <code>no</code>,
             and <code>null</code> are handled.
         </para>
     </note>

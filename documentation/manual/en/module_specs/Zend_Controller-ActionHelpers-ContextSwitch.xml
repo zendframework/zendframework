@@ -378,7 +378,7 @@ class FooController extends Zend_Controller_Action
                 </para>
 
                 <para>
-                    A value of <code>true</code> for the context will mark
+                    A value of <constant>TRUE</constant> for the context will mark
                     all available contexts as available for the action.
                 </para>
 

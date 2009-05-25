@@ -85,7 +85,7 @@ echo "$acctname\n";
 
             <para>
                 If <code>bind()</code> is called with a non-DN username but <code>bindRequiresDN</code> is
-                <code>true</code> and no username in DN form was supplied as an option, the bind will fail. However, if
+                <constant>TRUE</constant> and no username in DN form was supplied as an option, the bind will fail. However, if
                 a username in DN form is supplied in the options array, <classname>Zend_Ldap</classname> will first bind with
                 that username, retrieve the account DN for the username supplied to <code>bind()</code> and then re-
                 bind with that DN.
@@ -117,7 +117,7 @@ echo "$acctname\n";
 ]]></programlisting>
 
                 The <code>bind()</code> call in this example sees that the username '<code>abaker</code>' is not in DN
-                form, finds <code>bindRequiresDn</code> is <code>true</code>, uses
+                form, finds <code>bindRequiresDn</code> is <constant>TRUE</constant>, uses
                 '<code>CN=user1,DC=foo,DC=net</code>' and '<code>pass1</code>' to bind, retrieves the DN for
                 '<code>abaker</code>', unbinds and then rebinds with the newly discovered
                 '<code>CN=Alice Baker,OU=Sales,DC=foo,DC=net</code>'.
@@ -160,7 +160,7 @@ echo "$acctname\n";
                         <entry>useStartTls</entry>
                         <entry>
                             Whether or not the LDAP client should use TLS (aka SSLv2) encrypted transport. A value of
-                            <code>true</code> is strongly favored in production environments to prevent passwords from
+                            <constant>TRUE</constant> is strongly favored in production environments to prevent passwords from
                             be transmitted in clear text. The default value is <constant>FALSE</constant>, as servers
                             frequently require that a certificate be installed separately after installation.
                             The <code>useSsl</code> and <code>useStartTls</code> options are mutually exclusive.
@@ -190,7 +190,7 @@ echo "$acctname\n";
                       <row>
                         <entry>bindRequiresDn</entry>
                         <entry>
-                            If <code>true</code>, this instructs <classname>Zend_Ldap</classname> to retrieve the DN for the
+                            If <constant>TRUE</constant>, this instructs <classname>Zend_Ldap</classname> to retrieve the DN for the
                             account used to bind if the username is not already in DN form. The default value is
                             <constant>FALSE</constant>.
                         </entry>
@@ -231,7 +231,7 @@ echo "$acctname\n";
                             <ulink url="http://php.net/printf"><code>printf()</code></ulink> style expression that must
                             contain one '<code>%s</code>' to accommodate the username. The default value is
                             '<code>(&amp;(objectClass=user)(sAMAccountName=%s))</code>' unless
-                            <code>bindRequiresDn</code> is set to <code>true</code>, in which case the default is
+                            <code>bindRequiresDn</code> is set to <constant>TRUE</constant>, in which case the default is
                             '<code>(&amp;(objectClass=posixAccount)(uid=%s))</code>'. Users of custom schemas may need
                             to change this option.
                         </entry>
@@ -242,14 +242,14 @@ echo "$acctname\n";
                             Some LDAP servers can be configured to accept an empty string
                             password as an anonymous bind. This behavior is almost always
                             undesirable. For this reason, empty passwords are explicitly
-                            disallowed. Set this value to <code>true</code> to allow an
+                            disallowed. Set this value to <constant>TRUE</constant> to allow an
                             empty string password to be submitted during the bind.
                         </entry>
                       </row>
                       <row>
                         <entry>optReferrals</entry>
                         <entry>
-                            If set to <code>true</code>, this option indicates to the LDAP client that referrals should
+                            If set to <constant>TRUE</constant>, this option indicates to the LDAP client that referrals should
                             be followed. The default value is <constant>FALSE</constant>.
                         </entry>
                       </row>

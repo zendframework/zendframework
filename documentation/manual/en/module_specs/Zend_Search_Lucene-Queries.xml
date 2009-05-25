@@ -197,7 +197,7 @@ $hits  = $index->find($query);
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>true</code> is used to define required term.
+                        <constant>TRUE</constant> is used to define required term.
                     </para>
                 </listitem>
                 <listitem>
@@ -327,7 +327,7 @@ $hits  = $index->find($query);
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>true</code> is used to define required subquery.
+                        <constant>TRUE</constant> is used to define required subquery.
                     </para>
                 </listitem>
                 <listitem>

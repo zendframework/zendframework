@@ -76,7 +76,7 @@ php_value session.auto_start 0
                 <itemizedlist mark="opencircle">
                     <listitem>
                         <para>
-                            Unconditionally set the <code>strict</code> option to <code>true</code> using
+                            Unconditionally set the <code>strict</code> option to <constant>TRUE</constant> using
                             <classname>Zend_Session::setOptions()</classname> in your bootstrap.
                         </para>
                     </listitem>
@@ -258,7 +258,7 @@ else {
         </para>
 
         <para>
-            To enable this behavior, pass <code>true</code> to the second constructor argument when creating the last
+            To enable this behavior, pass <constant>TRUE</constant> to the second constructor argument when creating the last
             allowed instance of <classname>Zend_Session_Namespace</classname>. Any subsequent attempt to instantiate the same
             namespace would result in a thrown exception.
         </para>

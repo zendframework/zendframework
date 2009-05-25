@@ -76,7 +76,7 @@
                           <row>
                               <entry><code>write_control</code></entry>
                               <entry><code>boolean</code></entry>
-                              <entry><code>true</code></entry>
+                              <entry><constant>TRUE</constant></entry>
                               <entry>
                                 Enable / disable write control (the cache is read
                                 just after writing to detect corrupt entries), enabling write_control
@@ -299,7 +299,7 @@ echo 'This is never cached ('.time().').';
                           <row>
                               <entry><code>cache_by_default</code></entry>
                               <entry><code>boolean</code></entry>
-                              <entry><code>true</code></entry>
+                              <entry><constant>TRUE</constant></entry>
                               <entry>
                                   if true, function calls will be cached by default
                               </entry>
@@ -387,7 +387,7 @@ $cache->call('veryExpensiveFunc', $params);
                          <row>
                               <entry><code>cache_by_default</code></entry>
                               <entry><code>boolean</code></entry>
-                              <entry><code>true</code></entry>
+                              <entry><constant>TRUE</constant></entry>
                               <entry>
                                   if true, calls will be cached by default
                               </entry>

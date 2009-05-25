@@ -76,7 +76,7 @@ class FooController extends Zend_Controller_Action
             If you have a separate layout for JSON responses -- perhaps to wrap
             the JSON response in some sort of context -- each method in the JSON
             helper accepts a second, optional argument: a flag to enable or
-            disable layouts. Passing a boolean <code>true</code> value will keep
+            disable layouts. Passing a boolean <constant>TRUE</constant> value will keep
             layouts enabled:
         </para>
 
@@ -102,7 +102,7 @@ $this->_helper->json($data, array('keepLayouts' => true);
             <classname>Zend_Json::encode()</classname> allows the encoding of native JSON
             expressions using <code>Zend_Json_Expr</code> objects. This option
             is disabled by default. To enable this option, pass a boolean
-            <code>true</code> value to the <code>enableJsonExprFinder</code>
+            <constant>TRUE</constant> value to the <code>enableJsonExprFinder</code>
             option:
         </para>
 

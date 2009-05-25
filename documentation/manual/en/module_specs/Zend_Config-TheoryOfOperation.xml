@@ -73,7 +73,7 @@
         <note>
             <para>
                 The <classname>Zend_Config</classname> object that is performing the merge must have been constructed
-                to allow modifications, by passing <code>true</code> as the second parameter of the constructor.
+                to allow modifications, by passing <constant>TRUE</constant> as the second parameter of the constructor.
                 The <code>setReadOnly()</code> method can then be used to prevent any further modifications
                 after the merge is complete.
             </para>

@@ -156,7 +156,7 @@
                 <row>
                     <entry><code>visible</code></entry>
                     <entry><code>bool</code></entry>
-                    <entry><code>true</code></entry>
+                    <entry><constant>TRUE</constant></entry>
                     <entry>
                         Whether page should be visible for the user, or just
                         be a part of the structure. Invisible pages are skipped

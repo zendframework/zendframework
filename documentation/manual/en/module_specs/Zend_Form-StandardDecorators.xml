@@ -92,7 +92,7 @@ class Util
         <para>
             The description is escaped using the view object's escaping
             mechanisms by default. You can disable this by passing a
-            <code>false</code> value to the decorator's 'escape' option or
+            <constant>FALSE</constant> value to the decorator's 'escape' option or
             <code>setEscape()</code> method.
         </para>
     </sect2>

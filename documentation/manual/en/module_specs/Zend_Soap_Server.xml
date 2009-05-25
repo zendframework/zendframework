@@ -319,7 +319,7 @@ $request = $server->getLastRequest();
 
             <para>
                 <classname>Zend_Soap_Server::handle()</classname> method automatically emits generated response to the output stream.
-                It may be blocked using <code>setReturnResponse()</code> with <code>true</code> or <code>false</code>
+                It may be blocked using <code>setReturnResponse()</code> with <code>true</code> or <constant>FALSE</constant>
                 as a parameter<footnote>
                                 <para>
                                     Current state of the Return Response flag may be requested with

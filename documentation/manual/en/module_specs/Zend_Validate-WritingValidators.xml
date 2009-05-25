@@ -36,7 +36,7 @@
         extending class you would implement the <code>isValid()</code> method logic and define the
         message variables and message templates that correspond to the types of validation failures
         that can occur. If a value fails your validation tests, then <code>isValid()</code> should
-        return <code>false</code>. If the value passes your validation tests, then
+        return <constant>FALSE</constant>. If the value passes your validation tests, then
         <code>isValid()</code> should return <code>true</code>.
     </para>
 
@@ -172,7 +172,7 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
         <para>
             Note that if any one of the validation checks in <code>isValid()</code> fails, an
             appropriate failure message is prepared, and the method immediately returns
-            <code>false</code>. These validation rules are therefore sequentially dependent. That
+            <constant>FALSE</constant>. These validation rules are therefore sequentially dependent. That
             is, if one test should fail, there is no need to test any subsequent validation rules.
             This need not be the case, however. The following example illustrates how to write a
             class having independent validation rules, where the validation object may return
@@ -256,7 +256,7 @@ class MyValid_PasswordStrength extends Zend_Validate_Abstract
 ]]></programlisting>
 
             Note that the four criteria tests in <code>isValid()</code> do not immediately return
-            <code>false</code>. This allows the validation class to provide <emphasis>all</emphasis>
+            <constant>FALSE</constant>. This allows the validation class to provide <emphasis>all</emphasis>
             of the reasons that the input password failed to meet the validation requirements. if,
             for example, a user were to input the string "<code>#$%</code>" as a password,
             <code>isValid()</code> would cause all four validation failure messages to be returned

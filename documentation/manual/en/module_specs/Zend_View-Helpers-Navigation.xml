@@ -584,7 +584,7 @@ Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole('member');
                <para>
                    <code>{get|set}LinkLast()</code> gets/sets whether the
                    last breadcrumb should be rendered as an anchor or not.
-                   Default is <code>false</code>.
+                   Default is <constant>FALSE</constant>.
                </para>
            </listitem>
            <listitem>
@@ -1194,7 +1194,7 @@ Output:
                     <code>{get|set}RenderParents()</code> gets/sets a flag
                     specifying whether parents should be rendered when only
                     rendering active branch of a container. If set to
-                    <code>false</code>, only the deepest active menu will be
+                    <constant>FALSE</constant>, only the deepest active menu will be
                     rendered.
                 </para>
             </listitem>
@@ -1882,7 +1882,7 @@ foreach ($this->container as $page) {
                     of the native <classname>DOMDocument</classname> class.
                     Read more at
                     <ulink url="http://php.net/domdocument">PHP: DOMDocument - Manual</ulink>.
-                    Default is <code>false</code>.
+                    Default is <constant>FALSE</constant>.
                 </para>
            </listitem>
            <listitem>
@@ -1905,7 +1905,7 @@ foreach ($this->container as $page) {
                     <code>{get|set}UseSchemaValidation()</code> gets/sets a
                     flag indicating whether the helper should use XML Schema
                     validation when generating the DOM sitemap. Default is
-                    <code>false</code>. If <code>true</code>.
+                    <constant>FALSE</constant>. If <code>true</code>.
                 </para>
            </listitem>
            <listitem>

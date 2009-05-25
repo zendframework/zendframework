@@ -579,7 +579,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
             <para>
                 If you define the <varname>$_sequence</varname> to be the Boolean value
-                <code>false</code>, then <classname>Zend_Db_Table_Abstract</classname> assumes that the table has a
+                <constant>FALSE</constant>, then <classname>Zend_Db_Table_Abstract</classname> assumes that the table has a
                 natural primary key. You must provide values for the primary key columns in the
                 array of data to the <code>insert()</code> method, or else this method throws a
                 <classname>Zend_Db_Table_Exception</classname>.

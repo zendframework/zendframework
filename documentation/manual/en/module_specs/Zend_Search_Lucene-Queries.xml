@@ -202,7 +202,7 @@ $hits  = $index->find($query);
                 </listitem>
                 <listitem>
                     <para>
-                        <code>false</code> is used to define prohibited term.
+                        <constant>FALSE</constant> is used to define prohibited term.
                     </para>
                 </listitem>
                 <listitem>
@@ -332,7 +332,7 @@ $hits  = $index->find($query);
                 </listitem>
                 <listitem>
                     <para>
-                        <code>false</code> is used to define prohibited subquery.
+                        <constant>FALSE</constant> is used to define prohibited subquery.
                     </para>
                 </listitem>
                 <listitem>

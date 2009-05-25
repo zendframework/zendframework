@@ -80,7 +80,7 @@
 
             <listitem><para>
                 <code>getTag($name)</code>: Retrieve the given annotation tag
-                reflection object, or a boolean <code>false</code> if it's not
+                reflection object, or a boolean <constant>FALSE</constant> if it's not
                 present.
             </para></listitem>
 

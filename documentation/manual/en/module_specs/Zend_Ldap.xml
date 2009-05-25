@@ -161,7 +161,7 @@ echo "$acctname\n";
                         <entry>
                             Whether or not the LDAP client should use TLS (aka SSLv2) encrypted transport. A value of
                             <code>true</code> is strongly favored in production environments to prevent passwords from
-                            be transmitted in clear text. The default value is <code>false</code>, as servers
+                            be transmitted in clear text. The default value is <constant>FALSE</constant>, as servers
                             frequently require that a certificate be installed separately after installation.
                             The <code>useSsl</code> and <code>useStartTls</code> options are mutually exclusive.
                             The <code>useStartTls</code> option should be favored over <code>useSsl</code> but
@@ -192,7 +192,7 @@ echo "$acctname\n";
                         <entry>
                             If <code>true</code>, this instructs <classname>Zend_Ldap</classname> to retrieve the DN for the
                             account used to bind if the username is not already in DN form. The default value is
-                            <code>false</code>.
+                            <constant>FALSE</constant>.
                         </entry>
                       </row>
                       <row>
@@ -250,7 +250,7 @@ echo "$acctname\n";
                         <entry>optReferrals</entry>
                         <entry>
                             If set to <code>true</code>, this option indicates to the LDAP client that referrals should
-                            be followed. The default value is <code>false</code>.
+                            be followed. The default value is <constant>FALSE</constant>.
                         </entry>
                       </row>
                     </tbody>

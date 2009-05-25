@@ -333,7 +333,7 @@ $upload->addValidator('Size',
             </itemizedlist>
 
             <para>
-                To migrate your scripts to the new API, simply add a <code>false</code>
+                To migrate your scripts to the new API, simply add a <constant>FALSE</constant>
                 after defining the wished validator.
             </para>
 

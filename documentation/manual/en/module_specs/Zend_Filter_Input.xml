@@ -275,7 +275,7 @@ $input->setData($newData);
                 If all input data pass the validation rules, the
                 <code>isValid()</code> method returns <code>true</code>.
                 If any field is invalid or any required field is missing,
-                <code>isValid()</code> returns <code>false</code>.
+                <code>isValid()</code> returns <constant>FALSE</constant>.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -705,13 +705,13 @@ $validators = array(
 ]]></programlisting>
 
             <para>
-                The default value of this metacommand is <code>false</code>.
+                The default value of this metacommand is <constant>FALSE</constant>.
             </para>
 
             <para>
                 In the uncommon case that you declare a validation rule with
                 no validators, but the 'allowEmpty' metacommand is
-                <code>false</code> (that is, the field is considered invalid if
+                <constant>FALSE</constant> (that is, the field is considered invalid if
                 it is empty), Zend_Filter_Input returns a default error message
                 that you can retrieve with <code>getMessages()</code>. You can
                 specify this message using the 'notEmptyMessage' option, as an
@@ -772,7 +772,7 @@ $input = new Zend_Filter_Input(null, $validators);
 ]]></programlisting>
 
             <para>
-                The default value of this metacommand is <code>false</code>.
+                The default value of this metacommand is <constant>FALSE</constant>.
             </para>
 
             <para>

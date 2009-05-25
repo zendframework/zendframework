@@ -145,10 +145,10 @@
                 <row>
                     <entry><code>active</code></entry>
                     <entry><code>bool</code></entry>
-                    <entry><code>false</code></entry>
+                    <entry><constant>FALSE</constant></entry>
                     <entry>
                         Whether the page should be considered active for the
-                        current request. If active is <code>false</code> or not
+                        current request. If active is <constant>FALSE</constant> or not
                         given, MVC pages will check its properties against the
                         request object upon calling <code>$page->isActive()</code>.
                     </entry>

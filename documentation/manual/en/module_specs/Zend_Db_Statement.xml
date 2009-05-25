@@ -183,7 +183,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
             </itemizedlist>
 
             <para>
-                <code>fetch()</code> returns <code>false</code> if all rows of
+                <code>fetch()</code> returns <constant>FALSE</constant> if all rows of
                 the result set have been fetched.
             </para>
 
@@ -281,7 +281,7 @@ echo $rows[0][0];
                 To return a single column from the next row of the result set,
                 use <code>fetchColumn()</code>. The optional argument is the
                 integer index of the column, and it defaults to 0. This method
-                returns a scalar value, or <code>false</code> if all rows of
+                returns a scalar value, or <constant>FALSE</constant> if all rows of
                 the result set have been fetched.
             </para>
 

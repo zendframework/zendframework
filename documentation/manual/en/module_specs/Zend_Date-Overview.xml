@@ -714,7 +714,7 @@ print $date;
                             </para>
                             <para>
                                 Returns an integer representation of the selected date <varname>$part</varname> according to
-                                the conventions of the object's locale. Returns <code>false</code> when
+                                the conventions of the object's locale. Returns <constant>FALSE</constant> when
                                 <varname>$part</varname> selects a non-numeric value, such as
                                 <classname>Zend_Date::MONTH_NAME_SHORT</classname>. <emphasis>NOTE:</emphasis> This
                                 method calls

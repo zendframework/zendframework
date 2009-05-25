@@ -12,7 +12,7 @@
     </para>
 
     <para>
-        <classname>Zend_Filter_RealPath</classname> will return <code>FALSE</code> on failure, e.g.
+        <classname>Zend_Filter_RealPath</classname> will return <constant>FALSE</constant> on failure, e.g.
         if the file does not exist. On BSD systems <classname>Zend_Filter_RealPath</classname>
         doesn't fail if only the last path component doesn't exist, while other systems will return
         <constant>FALSE</constant>.

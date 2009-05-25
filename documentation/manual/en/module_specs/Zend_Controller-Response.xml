@@ -151,7 +151,7 @@ $front->dispatch();
                     indicating whether or not to throw an exception if headers
                     have already been sent. This can be overridden by setting
                     the property <code>headersSentThrowsException</code> to
-                    <code>false</code>.
+                    <constant>FALSE</constant>.
                 </para>
             </listitem>
 

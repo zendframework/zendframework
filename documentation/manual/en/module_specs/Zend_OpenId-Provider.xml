@@ -59,7 +59,7 @@ if (!$server->hasUser(TEST_ID)) {
         <para>
             On success, the method <classname>Zend_OpenId_Provider::handle</classname>
             returns a string that should be passed back to the OpenID-enabled site. On
-            failure, it returns <code>false</code>. This example will return an
+            failure, it returns <constant>FALSE</constant>. This example will return an
             HTTP 403 response if <classname>Zend_OpenId_Provider::handle</classname> fails. You will get this response if you open this script with a
             web browser, because it sends a non-OpenID conforming request.
         </para>

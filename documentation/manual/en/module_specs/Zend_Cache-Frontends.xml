@@ -67,7 +67,7 @@
                           <row>
                               <entry><code>logging</code></entry>
                               <entry><code>boolean</code></entry>
-                              <entry><code>false</code></entry>
+                              <entry><constant>FALSE</constant></entry>
                               <entry>
                                 if set to true, logging through <classname>Zend_Log</classname> is activated
                                 (but the system is slower)
@@ -87,7 +87,7 @@
                           <row>
                               <entry><code>automatic_serialization</code></entry>
                               <entry><code>boolean</code></entry>
-                              <entry><code>false</code></entry>
+                              <entry><constant>FALSE</constant></entry>
                               <entry>
                                 Enable / disable automatic serialization, it can be used to save directly datas
                                 which aren't strings (but it's slower)
@@ -106,7 +106,7 @@
                           <row>
                               <entry><code>ignore_user_abort</code></entry>
                               <entry><code>boolean</code></entry>
-                              <entry><code>false</code></entry>
+                              <entry><constant>FALSE</constant></entry>
                               <entry>
                                 if set to true, the core will set the ignore_user_abort PHP flag inside the
                                 save() method to avoid cache corruptions in some cases
@@ -528,7 +528,7 @@ $result = $cache->foobar2('1', '2');
                          <row>
                               <entry><code>ignore_missing_master_files</code></entry>
                               <entry><code>boolean</code></entry>
-                              <entry><code>false</code></entry>
+                              <entry><constant>FALSE</constant></entry>
                               <entry>
                                   if true, missing master files are ignored silently (an exception is raised else)
                               </entry>
@@ -586,7 +586,7 @@ $result = $cache->foobar2('1', '2');
                           <row>
                               <entry><code>http_conditional</code></entry>
                               <entry><code>boolean</code></entry>
-                              <entry><code>false</code></entry>
+                              <entry><constant>FALSE</constant></entry>
                               <entry>
                                   use the http_conditional system (not implemented for the moment)
                               </entry>
@@ -594,7 +594,7 @@ $result = $cache->foobar2('1', '2');
                          <row>
                               <entry><code>debug_header</code></entry>
                               <entry><code>boolean</code></entry>
-                              <entry><code>false</code></entry>
+                              <entry><constant>FALSE</constant></entry>
                               <entry>
                                   if true, a debug text is added before each cached pages
                               </entry>

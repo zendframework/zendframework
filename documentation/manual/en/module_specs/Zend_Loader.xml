@@ -122,7 +122,7 @@ Zend_Loader::loadClass('Container_Tree',
         <para>
             The static method <classname>Zend_Loader::isReadable($pathname)</classname>
             returns <code>TRUE</code> if a file at the specified pathname exists
-            and is readable, <code>FALSE</code> otherwise.
+            and is readable, <constant>FALSE</constant> otherwise.
         </para>
 
         <example id="zend.loader.load.isreadable.example">
@@ -219,7 +219,7 @@ Zend_Loader::registerAutoload('My_Loader');
             You can remove an autoload callback. The
             <code>registerAutoload()</code> has an optional second argument,
             which is <code>true</code> by default. If this argument is
-            <code>false</code>, the autoload callback is unregistered from the
+            <constant>FALSE</constant>, the autoload callback is unregistered from the
             SPL autoload stack.
         </para>
 

@@ -49,7 +49,7 @@ $db->getProfiler()->setEnabled(true);
 
         <para>
             A boolean argument sets the profiler to enabled if it is a <code>true</code> value, or disabled if
-            <code>false</code>. The profiler class is the adapter's default profiler class,
+            <constant>FALSE</constant>. The profiler class is the adapter's default profiler class,
             <classname>Zend_Db_Profiler</classname>.
             <programlisting language="php"><![CDATA[
 $params['profiler'] = true;

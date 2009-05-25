@@ -407,7 +407,7 @@ Zend_Controller_Front::run('../application/controllers');
                     controller whether to return the response
                     (<code>true</code>) from <code>dispatch()</code>, or if the
                     response should be automatically emitted
-                    (<code>false</code>). By default, the response is
+                    (<constant>FALSE</constant>). By default, the response is
                     automatically emitted (by calling
                     <classname>Zend_Controller_Response_Abstract::sendResponse()</classname>);
                     turning on <code>returnResponse()</code> will override this

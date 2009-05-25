@@ -48,7 +48,7 @@
         </para>
 
         <para>
-            If <code>isValid()</code> returns <code>false</code>, the
+            If <code>isValid()</code> returns <constant>FALSE</constant>, the
             <code>getMessages()</code> returns an array of messages explaining
             the reason(s) for validation failure. The array keys are short
             strings that identify the reasons for validation failure, and the

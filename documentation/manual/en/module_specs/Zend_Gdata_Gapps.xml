@@ -297,7 +297,7 @@ $user = $user->save();
                 <para>
                     Similarly, this can be undone by setting the
                     <code>login->changePasswordAtNextLogin</code> property to
-                    <code>false</code>.
+                    <constant>FALSE</constant>.
                 </para>
 
             </sect4>
@@ -334,7 +334,7 @@ $user = $user->save();
                 <para>
                     To restore the user's access, set the
                     <code>login->suspended</code> property to
-                    <code>false</code>.
+                    <constant>FALSE</constant>.
                 </para>
 
             </sect4>
@@ -356,7 +356,7 @@ $user = $user->save();
 
                 <para>
                     And as expected, setting a user's <code>login->admin</code>
-                    property to <code>false</code> revokes their
+                    property to <constant>FALSE</constant> revokes their
                     administrative rights.
                 </para>
 

@@ -369,9 +369,9 @@ class Zend_Amf_RequestTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('foo', $data[0]->a);
         $this->assertEquals('bar', $data[0]->b);
     }
-    
+
     /**
-     * Test to make sure that a generic object as the first paramater does not crash 
+     * Test to make sure that a generic object as the first paramater does not crash
      * @group ZF-5346
      */
     public function testAmf0ObjectFirstParameter()
@@ -604,18 +604,19 @@ class Zend_Amf_RequestTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('arnold', (string) $data[0]->lastname);
     }
 
-    public function testAmf0TypedObjecDeserializedToNativePHPObjectException()
+    public function testAmf0TypedObjecDeserializedToNativePHPObjectUnknownType()
     {
         $myRequest = file_get_contents(dirname(__FILE__) .'/Request/mock/bogusTypedObjectAmf0Request.bin');
         // send the mock object request to be deserialized
-        try {
-            $this->_request->initialize($myRequest);
-        } catch (Zend_Amf_Exception $expected) {
-            return;
-        }
-        $this->fail('Class Map worked when not defined');
-    }
+        $this->_request->initialize($myRequest);
 
+        $requestBodies = $this->_request->getAmfBodies();
+        $messageBody   = reset($requestBodies);
+        $data          = $messageBody->getData();
+        $dataObject    = reset($data);
+
+        $this->assertEquals('stdClass', get_class($dataObject));
+    }
 
     /**
      * Test Amf0 credentials sent to the server
@@ -638,7 +639,6 @@ class Zend_Amf_RequestTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('admin', $data->userid);
         $this->assertEquals('pw123', $data->password);
     }
-
 }
 
 if (PHPUnit_MAIN_METHOD == 'Zend_Amf_RequestTest::main') {

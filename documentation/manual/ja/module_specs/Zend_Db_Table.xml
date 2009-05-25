@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15742 -->
+<!-- EN-Revision: 15743 -->
 <sect1 id="zend.db.table">
 
     <title>Zend_Db_Table</title>
@@ -1197,7 +1197,7 @@ $row = $table->fetchRow($select);
         <para>
             このメソッドは、<classname>Zend_Db_Table_Row_Abstract</classname> 型のオブジェクトを返します。
             指定した検索条件に一致する行がデータベースのテーブルにない場合は、
-            <code>fetchRow()</code> は PHP の <code>null</code> 値を返します。
+            <code>fetchRow()</code> は PHP の <constant>NULL</constant> 値を返します。
         </para>
 
     </sect2>
@@ -1354,7 +1354,7 @@ echo "テーブル名は " . $info['name'] . " です\n";
                 </listitem>
             </itemizedlist>
 
-            どちらの場合においても、メソッドの引数はひとつで、<code>null</code> (キャッシュを使用しない)
+            どちらの場合においても、メソッドの引数はひとつで、<constant>NULL</constant> (キャッシュを使用しない)
             あるいは <link linkend="zend.cache.frontends.core"><classname>Zend_Cache_Core</classname></link>
             のインスタンスを指定します。これらを組み合わせることで、
             デフォルトのメタデータキャッシュを指定した上で

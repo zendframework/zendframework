@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15742 -->
+<!-- EN-Revision: 15743 -->
 <sect1 id="zend.soap.server">
     <title>Zend_Soap_Server</title>
 
@@ -110,7 +110,7 @@
             <title>非WSDLモードのためのZend_Soap_Serverコンストラクタ</title>
             <para>
                 非WSDLモードで<classname>Zend_Soap_Server</classname>機能を使うつもりなら、
-                最初のコンストラクタ・パラメータは<code>null</code>に設定し<emphasis>なければなりません</emphasis>。
+                最初のコンストラクタ・パラメータは<constant>NULL</constant>に設定し<emphasis>なければなりません</emphasis>。
             </para>
             <para>
                 この場合、'uri' オプションを設定しなければなりません。（下記参照）

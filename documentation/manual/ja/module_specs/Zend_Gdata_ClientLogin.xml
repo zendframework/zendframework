@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15743 -->
 <sect1 id="zend.gdata.clientlogin">
     <title>ClientLogin による認証</title>
 
@@ -52,7 +52,7 @@
             オプションの四番目のパラメータには <classname>Zend_Http_Client</classname>
             のインスタンスを指定できます。これによって、
             たとえばプロキシサーバなどのクライアント設定を行うことができます。
-            このパラメータに <code>null</code> を渡すと、
+            このパラメータに <constant>NULL</constant> を渡すと、
             汎用的な <classname>Zend_Http_Client</classname> オブジェクトが作成されます。
         </para>
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15743 -->
 <sect1 id="zend.registry.using">
 
     <title>レジストリの使用法</title>
@@ -42,7 +42,7 @@ Zend_Registry::set('index', $value);
         </para>
 
         <para>
-            インデックスにはスカラー値 (<code>null</code>、文字列あるいは整数) を指定します。
+            インデックスにはスカラー値 (<constant>NULL</constant>、文字列あるいは整数) を指定します。
             通常の配列と同じです。
         </para>
 

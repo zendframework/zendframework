@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15743 -->
 <sect3 id="zend.progressbar.adapter.jspush">
     <title>Zend_ProgressBar_Adapter_JsPush</title>
     <para>
@@ -27,7 +27,7 @@
             <para>
                 <code>finishMethodName</code>:
                 状態を設定した後にコールされる javascript のメソッド。
-                デフォルト値は <code>NULL</code> で、この場合は何も行われません。
+                デフォルト値は <constant>NULL</constant> で、この場合は何も行われません。
             </para>
         </listitem>
     </itemizedlist>

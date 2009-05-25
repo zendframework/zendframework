@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15742 -->
+<!-- EN-Revision: 15743 -->
 <sect1 id="zend.db.adapter">
 
     <title>Zend_Db_Adapter</title>
@@ -1009,7 +1009,7 @@ $id = $db->lastSequenceId('bugs_id_gen');
                 lastInsertId() メソッドの引数は無視されます。
                 このメソッドの返り値は、現在の接続で最後に実行された
                 INSERT 操作が生成した値となります。また、これらの RDBMS では
-                lastSequenceId() メソッドの返り値は常に <code>null</code>
+                lastSequenceId() メソッドの返り値は常に <constant>NULL</constant>
                 となります。
             </para>
 
@@ -1764,7 +1764,7 @@ $result = $db->getConnection()->exec('DROP TABLE bugs');
         <para>
             リリース 1.7.2 以降では、サーバのバージョンを取得することができます。これは、
             PHP の <code>version_compare()</code> で使用できる形式となります。
-            情報が取得できない場合は <code>null</code> が返されます。
+            情報が取得できない場合は <constant>NULL</constant> が返されます。
         </para>
 
         <example id="zend.db.adapter.server-version.example">
@@ -1842,7 +1842,7 @@ if (!is_null($version)) {
                         <code>lastInsertId()</code> に引数を指定してもそれは無視されます。
                         返り値は、常に自動インクリメントのキーの最後の値となります。
                         <code>lastSequenceId()</code> メソッドの返り値は
-                        <code>null</code> となります。
+                        <constant>NULL</constant> となります。
                     </para>
                 </listitem>
             </itemizedlist>
@@ -1941,7 +1941,7 @@ if (!is_null($version)) {
                         <code>lastInsertId()</code> に引数を指定してもそれは無視されます。
                         返り値は、常に自動インクリメントのキーの最後の値となります。
                         <code>lastSequenceId()</code> メソッドの返り値は
-                        <code>null</code> となります。
+                        <constant>NULL</constant> となります。
                     </para>
                 </listitem>
                 <listitem>
@@ -2003,7 +2003,7 @@ if (!is_null($version)) {
                         <code>lastInsertId()</code> に引数を指定してもそれは無視されます。
                         返り値は、常に自動インクリメントのキーの最後の値となります。
                         <code>lastSequenceId()</code> メソッドの返り値は
-                        <code>null</code> となります。
+                        <constant>NULL</constant> となります。
                     </para>
                 </listitem>
             </itemizedlist>
@@ -2083,7 +2083,7 @@ if (!is_null($version)) {
                         <code>lastInsertId()</code> に引数を指定してもそれは無視されます。
                         返り値は、常に自動インクリメントのキーの最後の値となります。
                         <code>lastSequenceId()</code> メソッドの返り値は
-                        <code>null</code> となります。
+                        <constant>NULL</constant> となります。
                     </para>
                 </listitem>
                 <listitem>

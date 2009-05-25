@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15742 -->
+<!-- EN-Revision: 15743 -->
 <sect1 id="zend.loader.load">
 
     <title>ファイルやクラスの動的な読み込み</title>
@@ -52,7 +52,7 @@ Zend_Loader::loadFile($filename, $dirs=null, $once=false);
 
         <para>
             引数 <code>$dirs</code> にはファイルを探すディレクトリを指定します。
-            <code>NULL</code> の場合は <code>include_path</code> の中のみを対象とします。
+            <constant>NULL</constant> の場合は <code>include_path</code> の中のみを対象とします。
             文字列あるいは配列を指定すると、指定されたディレクトリをまず探した後で、
             それから <code>include_path</code> を探します。
         </para>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15743 -->
 <sect1 id="zend.log.overview">
     <title>概要</title>
 
@@ -109,7 +109,7 @@ $logger->emerg('Emergency message');
     <title>ログの破棄</title>
     <para>
       ログオブジェクトが不要になったら、ログオブジェクトを指す変数に
-      <code>null</code> を代入してそれを破棄しましょう。これは、
+      <constant>NULL</constant> を代入してそれを破棄しましょう。これは、
       アタッチされている各ライターのインスタンスメソッド
       <code>shutdown()</code> をコールしてからログオブジェクトを破棄します。
 

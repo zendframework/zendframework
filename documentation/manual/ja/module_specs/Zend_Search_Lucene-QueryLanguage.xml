@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15743 -->
 <sect1 id="zend.search.lucene.query-language">
     <title>クエリ言語</title>
 
@@ -67,7 +67,7 @@ Zend_Search_Lucene::setDefaultSearchField('contents');
 ]]></programlisting>
 
         <para>
-            <code>null</code> 値は、すべてのフィールドを検索の対象とすることを意味します。
+            <constant>NULL</constant> 値は、すべてのフィールドを検索の対象とすることを意味します。
             これがデフォルトの設定です。
         </para>
         <para>
@@ -101,7 +101,7 @@ title:Do it right
 ]]></programlisting>
             は "Do" だけを title フィールドから探し、"it" や "right"
             はデフォルトのフィールドから探します。デフォルトのフィールドが
-            <code>null</code> に設定されている場合は、"it" や "right"
+            <constant>NULL</constant> に設定されている場合は、"it" や "right"
             はすべてのフィールドから探します。
         </para>
     </sect2>

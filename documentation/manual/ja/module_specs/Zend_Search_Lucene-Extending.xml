@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15713 -->
+<!-- EN-Revision: 15743 -->
 <sect1 id="zend.search.lucene.extending">
     <title>拡張性</title>
 
@@ -46,7 +46,7 @@ $index->addDocument($doc);
             ユーザが定義しなければならないのは <code>reset()</code> および
             <code>nextToken()</code> メソッドのみで、
             これは文字列を $_input から受け取って順に返します
-            (<code>null</code> が最後のデータを表します)。
+            (<constant>NULL</constant> が最後のデータを表します)。
         </para>
 
         <para>

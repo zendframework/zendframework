@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15743 -->
 <sect1 id="zend.file.transfer.validators">
 
     <title>Zend_File_Transfer 用のバリデータ</title>
@@ -869,7 +869,7 @@ $upload->addValidator('FilesSize',
         </para>
 
         <para>
-            サイズの検証をしたくない場合は、その部分に値 <code>null</code> を設定します。
+            サイズの検証をしたくない場合は、その部分に値 <constant>NULL</constant> を設定します。
         </para>
 
         <example id="zend.file.transfer.validators.imagesize.example">

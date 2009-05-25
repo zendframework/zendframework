@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15742 -->
+<!-- EN-Revision: 15743 -->
 <sect1 id="zend.search.lucene.query-api">
     <title>クエリ作成用の API</title>
 
@@ -220,7 +220,7 @@ $hits  = $index->find($query);
                 </listitem>
                 <listitem>
                     <para>
-                        必須・禁止のどちらでもない場合は <code>null</code> を使用します。
+                        必須・禁止のどちらでもない場合は <constant>NULL</constant> を使用します。
                     </para>
                 </listitem>
             </itemizedlist>
@@ -347,7 +347,7 @@ $hits  = $index->find($query);
                 </listitem>
                 <listitem>
                     <para>
-                        必須・禁止のどちらでもないサブクエリには <code>null</code> を使用します。
+                        必須・禁止のどちらでもないサブクエリには <constant>NULL</constant> を使用します。
                     </para>
                 </listitem>
             </itemizedlist>

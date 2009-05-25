@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15743 -->
 <sect3 id="zend.progressbar.adapter.console">
     <title>Zend_ProgressBar_Adapter_Console</title>
     <para>
@@ -43,7 +43,7 @@
         </listitem>
         <listitem>
             <para>
-                <code>elements</code>: デフォルトは <code>NULL</code>。
+                <code>elements</code>: デフォルトは <constant>NULL</constant>。
                 あるいは以下の <classname>Zend_Console_ProgressBar</classname>
                 の定数のうちの少なくともひとつを値として持つ配列。
             </para>

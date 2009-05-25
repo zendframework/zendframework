@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15742 -->
+<!-- EN-Revision: 15743 -->
 <sect1 id="zend.db.profiler" xmlns:xi="http://www.w3.org/2001/XInclude">
 
     <title>Zend_Db_Profiler</title>
@@ -345,7 +345,7 @@ $profiler->setFilterElapsedSecs(null);
             <para>
                 既存のフィルタを削除するには、
                 <code>setFilterElapsedSecs()</code> の引数に
-                <code>null</code> だけを渡します。
+                <constant>NULL</constant> だけを渡します。
             </para>
 
             <programlisting language="php"><![CDATA[

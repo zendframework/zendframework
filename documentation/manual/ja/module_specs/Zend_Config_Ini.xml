@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15742 -->
+<!-- EN-Revision: 15743 -->
 <sect1 id="zend.config.adapters.ini">
     <title>Zend_Config_Ini</title>
     <para>
@@ -23,7 +23,7 @@
             関数を使用しています。このドキュメントでは、<classname>Zend_Config_Ini</classname>
             固有の挙動に注意しましょう。例えば、特殊な値として
             <constant>TRUE</constant> や <constant>FALSE</constant>、
-            <code>yes</code>、<code>no</code> そして <code>null</code>
+            <code>yes</code>、<code>no</code> そして <constant>NULL</constant>
             を処理できることなどです。
         </para>
     </note>

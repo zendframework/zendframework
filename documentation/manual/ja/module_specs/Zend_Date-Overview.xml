@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15741 -->
+<!-- EN-Revision: 15743 -->
 <sect1 id="zend.date.overview">
 
     <title>Zend_Date API の概要</title>
@@ -170,7 +170,7 @@
             と同様のコードを使用します。
             日付オブジェクトが明らかに無効な値を用いて作成された場合 (たとえば月が 12 より大きいなど) は、
             <classname>Zend_Date</classname> は例外をスローします。ただし、特定の日付フォーマットが指定されている場合、
-            つまり <varname>$part</varname> が <code>null</code> あるいは <classname>Zend_Date::DATES</classname> ("あいまいな" フォーマット)
+            つまり <varname>$part</varname> が <constant>NULL</constant> あるいは <classname>Zend_Date::DATES</classname> ("あいまいな" フォーマット)
             のいずれかである場合は別です。
         </para>
 

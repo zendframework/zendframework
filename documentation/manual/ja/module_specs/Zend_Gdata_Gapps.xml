@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15742 -->
+<!-- EN-Revision: 15743 -->
 <sect1 id="zend.gdata.gapps">
     <title>Google Apps Provisioning の使用法</title>
 
@@ -154,7 +154,7 @@ $user = $gdata->insertUser($user);
                 各ユーザアカウントを取得するには
                 <code>retrieveUser()</code> メソッドをコールします。
                 ユーザが見つからない場合は
-                <code>null</code> が返されます。
+                <constant>NULL</constant> が返されます。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -450,7 +450,7 @@ $nickname = $gdata->insertNickname($nickname);
                 ニックネームを取得するには
                 <code>retrieveNickname()</code> メソッドをコールします。
                 ユーザが見つからない場合は
-                <code>null</code> が返されます。
+                <constant>NULL</constant> が返されます。
             </para>
 
             <programlisting language="php"><![CDATA[

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15742 -->
+<!-- EN-Revision: 15743 -->
 <sect1 id="zend.console.getopt.fetching">
     <title>オプションおよび引数の取得</title>
     <para>
@@ -76,7 +76,7 @@ try {
             このメソッドはパラメータの値を返します。
             パラメータを持っていないオプションでユーザがパラメータを指定した場合は、
             このメソッドは <constant>TRUE</constant> を返します。
-            それ以外の場合は、このメソッドは <code>null</code> を返します。
+            それ以外の場合は、このメソッドは <constant>NULL</constant> を返します。
         </para>
         <example id="zend.console.getopt.fetching.byname.example.setoption">
             <title>getOption() の使用法</title>

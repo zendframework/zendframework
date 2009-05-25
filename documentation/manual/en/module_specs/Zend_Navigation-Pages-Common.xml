@@ -81,7 +81,7 @@
                 </row>
                 <row>
                     <entry><code>rel</code></entry>
-                    <entry><code>array</code></entry>
+                    <entry><type>Array</type></entry>
                     <entry><code>array()</code></entry>
                     <entry>
                         Specifies forward relations for the page.
@@ -98,7 +98,7 @@
                 </row>
                 <row>
                     <entry><code>rev</code></entry>
-                    <entry><code>array</code></entry>
+                    <entry><type>Array</type></entry>
                     <entry><code>array()</code></entry>
                     <entry>
                         Specifies reverse relations for the page. Works exactly
@@ -165,10 +165,10 @@
                 </row>
                 <row>
                     <entry><code>pages</code></entry>
-                    <entry><code>array</code> | <classname>Zend_Config</classname> | <constant>NULL</constant></entry>
+                    <entry><type>Array</type> | <classname>Zend_Config</classname> | <constant>NULL</constant></entry>
                     <entry><constant>NULL</constant></entry>
                     <entry>
-                        Child pages of the page. This could be an <code>array</code>
+                        Child pages of the page. This could be an <type>Array</type>
                         or <classname>Zend_Config</classname> object containing either page
                         options that can be passed to the <code>factory()</code>
                         method, or actual <classname>Zend_Navigation_Page</classname>

@@ -596,9 +596,9 @@ Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole('member');
                    <code>renderPartial()</code> method. If no partial is
                    set, the <code>renderStraight()</code> method is used.
                    The helper expects the partial to be a <code>string</code>
-                   or an <code>array</code> with two elements. If the partial
+                   or an <type>Array</type> with two elements. If the partial
                    is a <code>string</code>, it denotes the name of the partial
-                   script to use. If it is an <code>array</code>, the first
+                   script to use. If it is an <type>Array</type>, the first
                    element will be used as the name of the partial view
                    script, and the second element is the module where the
                    script is found.
@@ -848,7 +848,7 @@ Products, Foo Server, FAQ
                 When looking for relations in the the page instance
                 (<code>$page->getRel($type)</code> or
                 <code>$page->getRev($type)</code>), the helper accepts the
-                values of type <code>string</code>, <code>array</code>,
+                values of type <code>string</code>, <type>Array</type>,
                 <classname>Zend_Config</classname>, or
                 <classname>Zend_Navigation_Page</classname>. If a string
                 is found, it will be converted to a
@@ -1207,9 +1207,9 @@ Output:
                     <code>renderPartial()</code> method. If no partial is
                     set, the <code>renderMenu()</code> method is used.
                     The helper expects the partial to be a <code>string</code>
-                    or an <code>array</code> with two elements. If the partial
+                    or an <type>Array</type> with two elements. If the partial
                     is a <code>string</code>, it denotes the name of the partial
-                    script to use. If it is an <code>array</code>, the first
+                    script to use. If it is an <type>Array</type>, the first
                     element will be used as the name of the partial view
                     script, and the second element is the module where the
                     script is found.

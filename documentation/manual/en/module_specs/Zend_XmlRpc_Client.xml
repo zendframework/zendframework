@@ -56,7 +56,7 @@ echo $client->call('test.sayHello');
             The first parameter of the <code>call()</code> method receives the
             name of the remote method to call. If the remote method requires
             any parameters, these can be sent by supplying a second, optional
-            parameter to <code>call()</code> with an <code>array</code> of
+            parameter to <code>call()</code> with an <type>Array</type> of
             values to pass to the remote method:
         </para>
 
@@ -108,7 +108,7 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
                 Parameters may be passed to <code>call()</code> as native PHP
                 variables, meaning as a <code>string</code>,
                 <code>integer</code>, <code>float</code>,
-                <type>Boolean</type>, <code>array</code>, or an
+                <type>Boolean</type>, <type>Array</type>, or an
                 <code>object</code>. In this case, each PHP native type will
                 be auto-detected and converted into one of the XML-RPC types
                 according to this table:

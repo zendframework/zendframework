@@ -7,7 +7,7 @@
         When extending <classname>Zend_Navigation_Page</classname>, there is
         usually no need to override the constructor or the methods
         <code>setOptions()</code> or <code>setConfig()</code>. The page
-        constructor takes a single parameter, an <code>array</code> or a
+        constructor takes a single parameter, an <type>Array</type> or a
         <classname>Zend_Config</classname> object, which is passed to
         <code>setOptions()</code> or <code>setConfig()</code> respectively.
         Those methods will in turn call <code>set()</code> method, which

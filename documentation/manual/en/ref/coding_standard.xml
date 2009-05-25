@@ -404,7 +404,7 @@ $sql = "SELECT `id`, `name` FROM `people` "
                 </para>
 
                 <para>
-                    When declaring indexed arrays with the <code>array</code> function, a trailing
+                    When declaring indexed arrays with the <type>Array</type> function, a trailing
                     space must be added after each comma delimiter to improve readability:
 
                     <programlisting language="php"><![CDATA[
@@ -429,7 +429,7 @@ $sampleArray = array(1, 2, 3, 'Zend', 'Studio',
                 <title>Associative Arrays</title>
 
                 <para>
-                    When declaring associative arrays with the <code>array</code> construct,
+                    When declaring associative arrays with the <type>Array</type> construct,
                     breaking the statement into multiple lines is encouraged. In this case, each
                     successive line must be padded with white space such that both the keys and the
                     values are aligned:

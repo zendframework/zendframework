@@ -54,7 +54,7 @@
                 </row>
                 <row>
                     <entry><code>params</code></entry>
-                    <entry><code>array</code></entry>
+                    <entry><type>Array</type></entry>
                     <entry><code>array()</code></entry>
                     <entry>
                         User params to use when generating href to the page.

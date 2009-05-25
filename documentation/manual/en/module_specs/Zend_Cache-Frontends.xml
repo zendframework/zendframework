@@ -306,7 +306,7 @@ echo 'This is never cached ('.time().').';
                          </row>
                          <row>
                               <entry><code>cached_functions</code></entry>
-                              <entry><code>array</code></entry>
+                              <entry><type>Array</type></entry>
                               <entry></entry>
                               <entry>
                                   function names which will always be cached
@@ -314,7 +314,7 @@ echo 'This is never cached ('.time().').';
                          </row>
                          <row>
                               <entry><code>non_cached_functions</code></entry>
-                              <entry><code>array</code></entry>
+                              <entry><type>Array</type></entry>
                               <entry></entry>
                               <entry>
                                   function names which must never be cached
@@ -394,7 +394,7 @@ $cache->call('veryExpensiveFunc', $params);
                          </row>
                          <row>
                               <entry><code>cached_methods</code></entry>
-                              <entry><code>array</code></entry>
+                              <entry><type>Array</type></entry>
                               <entry></entry>
                               <entry>
                                   method names which will always be cached
@@ -402,7 +402,7 @@ $cache->call('veryExpensiveFunc', $params);
                          </row>
                          <row>
                               <entry><code>non_cached_methods</code></entry>
-                              <entry><code>array</code></entry>
+                              <entry><type>Array</type></entry>
                               <entry></entry>
                               <entry>
                                   method names which must never be cached
@@ -509,7 +509,7 @@ $result = $cache->foobar2('1', '2');
                          </row>
                          <row>
                               <entry><code>master_files</code></entry>
-                              <entry><code>array</code></entry>
+                              <entry><type>Array</type></entry>
                               <entry><code></code></entry>
                               <entry>
                                   an array of complete path of master files
@@ -601,7 +601,7 @@ $result = $cache->foobar2('1', '2');
                          </row>
                          <row>
                                <entry><code>default_options</code></entry>
-                              <entry><code>array</code></entry>
+                              <entry><type>Array</type></entry>
                               <entry><code>array(...see below...)</code></entry>
                               <entry>
                                   an associative array of default options :
@@ -705,7 +705,7 @@ $result = $cache->foobar2('1', '2');
                          </row>
                          <row>
                               <entry><code>regexps</code></entry>
-                              <entry><code>array</code></entry>
+                              <entry><type>Array</type></entry>
                               <entry><code>array()</code></entry>
                               <entry>
                                     an associative array to set options only for some REQUEST_URI, keys are (PCRE) regexps, values are
@@ -716,7 +716,7 @@ $result = $cache->foobar2('1', '2');
                          </row>
                          <row>
                               <entry><code>memorize_headers</code></entry>
-                              <entry><code>array</code></entry>
+                              <entry><type>Array</type></entry>
                               <entry><code>array()</code></entry>
                               <entry>
                                    an array of strings corresponding to some HTTP headers name. Listed headers

@@ -66,7 +66,7 @@
                           </row>
                           <row>
                               <entry><code>logging</code></entry>
-                              <entry><code>boolean</code></entry>
+                              <entry><type>Boolean</type></entry>
                               <entry><constant>FALSE</constant></entry>
                               <entry>
                                 if set to true, logging through <classname>Zend_Log</classname> is activated
@@ -75,7 +75,7 @@
                           </row>
                           <row>
                               <entry><code>write_control</code></entry>
-                              <entry><code>boolean</code></entry>
+                              <entry><type>Boolean</type></entry>
                               <entry><constant>TRUE</constant></entry>
                               <entry>
                                 Enable / disable write control (the cache is read
@@ -86,7 +86,7 @@
                           </row>
                           <row>
                               <entry><code>automatic_serialization</code></entry>
-                              <entry><code>boolean</code></entry>
+                              <entry><type>Boolean</type></entry>
                               <entry><constant>FALSE</constant></entry>
                               <entry>
                                 Enable / disable automatic serialization, it can be used to save directly datas
@@ -105,7 +105,7 @@
                           </row>
                           <row>
                               <entry><code>ignore_user_abort</code></entry>
-                              <entry><code>boolean</code></entry>
+                              <entry><type>Boolean</type></entry>
                               <entry><constant>FALSE</constant></entry>
                               <entry>
                                 if set to true, the core will set the ignore_user_abort PHP flag inside the
@@ -298,7 +298,7 @@ echo 'This is never cached ('.time().').';
                      <tbody>
                           <row>
                               <entry><code>cache_by_default</code></entry>
-                              <entry><code>boolean</code></entry>
+                              <entry><type>Boolean</type></entry>
                               <entry><constant>TRUE</constant></entry>
                               <entry>
                                   if true, function calls will be cached by default
@@ -386,7 +386,7 @@ $cache->call('veryExpensiveFunc', $params);
                          </row>
                          <row>
                               <entry><code>cache_by_default</code></entry>
-                              <entry><code>boolean</code></entry>
+                              <entry><type>Boolean</type></entry>
                               <entry><constant>TRUE</constant></entry>
                               <entry>
                                   if true, calls will be cached by default
@@ -527,7 +527,7 @@ $result = $cache->foobar2('1', '2');
                          </row>
                          <row>
                               <entry><code>ignore_missing_master_files</code></entry>
-                              <entry><code>boolean</code></entry>
+                              <entry><type>Boolean</type></entry>
                               <entry><constant>FALSE</constant></entry>
                               <entry>
                                   if true, missing master files are ignored silently (an exception is raised else)
@@ -585,7 +585,7 @@ $result = $cache->foobar2('1', '2');
                      <tbody>
                           <row>
                               <entry><code>http_conditional</code></entry>
-                              <entry><code>boolean</code></entry>
+                              <entry><type>Boolean</type></entry>
                               <entry><constant>FALSE</constant></entry>
                               <entry>
                                   use the http_conditional system (not implemented for the moment)
@@ -593,7 +593,7 @@ $result = $cache->foobar2('1', '2');
                          </row>
                          <row>
                               <entry><code>debug_header</code></entry>
-                              <entry><code>boolean</code></entry>
+                              <entry><type>Boolean</type></entry>
                               <entry><constant>FALSE</constant></entry>
                               <entry>
                                   if true, a debug text is added before each cached pages

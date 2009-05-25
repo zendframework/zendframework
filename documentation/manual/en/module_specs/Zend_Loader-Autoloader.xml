@@ -359,7 +359,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
 
                     <row>
                         <entry><code>isFallbackAutoloader()</code></entry>
-                        <entry><code>boolean</code></entry>
+                        <entry><type>Boolean</type></entry>
                         <entry>N/A</entry>
                         <entry><para>
                             Retrieve the value of the flag used to indicate whether

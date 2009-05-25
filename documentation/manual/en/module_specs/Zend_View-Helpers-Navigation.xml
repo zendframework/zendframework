@@ -1273,14 +1273,14 @@ Output:
                             <para>
                                 <code>onlyActiveBranch</code>; whether only
                                 active branch should be rendered. Expects
-                                a <code>boolean</code> value.
+                                a <type>Boolean</type> value.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
                                 <code>renderParents</code>; whether parents
                                 should be rendered if only rendering active
-                                branch. Expects a <code>boolean</code> value.
+                                branch. Expects a <type>Boolean</type> value.
                             </para>
                         </listitem>
                     </itemizedlist>

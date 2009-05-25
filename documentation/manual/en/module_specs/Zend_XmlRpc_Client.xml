@@ -108,7 +108,7 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
                 Parameters may be passed to <code>call()</code> as native PHP
                 variables, meaning as a <code>string</code>,
                 <code>integer</code>, <code>float</code>,
-                <code>boolean</code>, <code>array</code>, or an
+                <type>Boolean</type>, <code>array</code>, or an
                 <code>object</code>. In this case, each PHP native type will
                 be auto-detected and converted into one of the XML-RPC types
                 according to this table:

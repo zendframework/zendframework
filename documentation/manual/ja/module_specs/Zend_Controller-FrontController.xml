@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15741 -->
+<!-- EN-Revision: 15742 -->
 <sect1 id="zend.controller.front">
     <title>フロントコントローラ</title>
 
@@ -382,7 +382,7 @@ Zend_Controller_Front::run('../application/controllers');
             <listitem>
                 <para>
                     <code>returnResponse($flag)</code> は、フロントコントローラが
-                    <code>dispatch()</code> からのレスポンスを返す (<code>true</code>)
+                    <code>dispatch()</code> からのレスポンスを返す (<constant>TRUE</constant>)
                     かレスポンスを自動的に発行する (<constant>FALSE</constant>)
                     かを切り替えます。デフォルトでは、レスポンスは
                     (<classname>Zend_Controller_Response_Abstract::sendResponse()</classname> によって)

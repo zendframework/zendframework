@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15742 -->
 <sect1 id="zend.measure.edit">
 
     <title>計測値の操作</title>
@@ -161,7 +161,7 @@ echo $sum;
         <para>
             計測値を比較することもできますが、自動的な単位変換は行われません。
             したがって、<code>equals()</code> が
-            <code>TRUE</code> を返すのは、値と単位の両方が等しい場合のみです。
+            <constant>TRUE</constant> を返すのは、値と単位の両方が等しい場合のみです。
         </para>
 
         <para>

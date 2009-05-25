@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15741 -->
+<!-- EN-Revision: 15742 -->
 <sect1 id="zend.db.profiler" xmlns:xi="http://www.w3.org/2001/XInclude">
 
     <title>Zend_Db_Profiler</title>
@@ -48,7 +48,7 @@ $db->getProfiler()->setEnabled(true);
         </para>
 
         <para>
-            boolean 引数 <code>true</code> を指定すると、
+            boolean 引数 <constant>TRUE</constant> を指定すると、
             プロファイラを有効にします。あるいは <constant>FALSE</constant>
             にすると、プロファイラを無効にします。プロファイラのクラスは、
             そのアダプタのデフォルトのプロファイラクラスである

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15741 -->
+<!-- EN-Revision: 15742 -->
 <sect1 id="zend.validate.writing_validators">
 
     <title>バリデータの書き方</title>
@@ -40,7 +40,7 @@
         発生しうる失敗の形式に対応したメッセージ変数とメッセージテンプレートを定義します。
         検証に失敗した場合には <code>isValid()</code> は <constant>FALSE</constant>
         を返さなければなりません。検証を通過した場合は、<code>isValid()</code>
-        は <code>true</code> を返さなければなりません。
+        は <constant>TRUE</constant> を返さなければなりません。
     </para>
 
     <para>

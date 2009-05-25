@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15742 -->
 <sect3 id="zend.controller.actionhelpers.json">
     <title>JSON</title>
 
@@ -79,7 +79,7 @@ class FooController extends Zend_Controller_Action
             のために、JSON ヘルパーの各メソッドには
             2 番目の引数が用意されています。
             この引数はオプションのフラグで、レイアウト機能を有効あるいは無効にします。
-            <code>true</code> を渡すと、レイアウト機能を有効なままにします。
+            <constant>TRUE</constant> を渡すと、レイアウト機能を有効なままにします。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -105,7 +105,7 @@ $this->_helper->json($data, array('keepLayouts' => true);
             <classname>Zend_Json_Expr</classname> オブジェクトを使用してエンコードすることができます。
             このオプションはデフォルトでは無効になっています。
             有効にするには、<code>enableJsonExprFinder</code>
-            オプションに <code>true</code> を設定します。
+            オプションに <constant>TRUE</constant> を設定します。
         </para>
 
         <programlisting language="php"><![CDATA[

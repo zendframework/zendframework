@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15741 -->
+<!-- EN-Revision: 15742 -->
 <sect1 id="zend.ldap.using">
 
     <title>導入</title>
@@ -89,7 +89,7 @@ echo "$acctname\n";
             <title>バインド時の、ユーザ名の自動正規化</title>
 
             <para>
-                <code>bindRequiresDN</code> が <code>true</code>
+                <code>bindRequiresDN</code> が <constant>TRUE</constant>
                 かつ DN 形式のユーザ名がオプションで設定されていない場合、
                 <code>bind()</code> を DN でないユーザ名でコールするとバインドに失敗します。
                 しかし、DN 形式のユーザ名がオプションで設定されていれば、<classname>Zend_Ldap</classname>
@@ -125,7 +125,7 @@ echo "$acctname\n";
 
                 この例において <code>bind()</code> をコールすると、
                 ユーザ名 '<code>abaker</code>' が DN 形式でないことと
-                <code>bindRequiresDn</code> が <code>true</code> であることから、まず
+                <code>bindRequiresDn</code> が <constant>TRUE</constant> であることから、まず
                 '<code>CN=user1,DC=foo,DC=net</code>' と '<code>pass1</code>'
                 を用いてバインドします。それから '<code>abaker</code>' の DN を取得し、
                 いったんバインドを解除したうえであらためて
@@ -173,7 +173,7 @@ echo "$acctname\n";
                         <entry>useStartTls</entry>
                         <entry>
                             LDAP クライアント側に TLS (SSLv2) での暗号化トランスポートを要求するか否か。
-                            実運用環境では <code>true</code> を指定することを強く推奨します。
+                            実運用環境では <constant>TRUE</constant> を指定することを強く推奨します。
                             これにより、パスワードが平文で送られてしまうことを防ぎます。
                             デフォルト値は <constant>FALSE</constant> です。というのも、
                             この機能を使用するにはサーバ側に別途証明書のインストールが必要となることが多いからです。
@@ -204,7 +204,7 @@ echo "$acctname\n";
                       <row>
                         <entry>bindRequiresDn</entry>
                         <entry>
-                            <code>true</code> を指定すると、ユーザ名が DN 形式でない場合に
+                            <constant>TRUE</constant> を指定すると、ユーザ名が DN 形式でない場合に
                             <classname>Zend_Ldap</classname> はバインド時に使用してアカウントの DN を取得します。
                             デフォルト値は <constant>FALSE</constant> です。
                         </entry>
@@ -248,7 +248,7 @@ echo "$acctname\n";
                             形式のものとなり、ユーザ名を表す '<code>%s</code>'
                             をひとつ含む必要があります。デフォルト値は
                             '<code>(&amp;(objectClass=user)(sAMAccountName=%s))</code>' です。
-                            ただし、<code>bindRequiresDn</code> が <code>true</code>
+                            ただし、<code>bindRequiresDn</code> が <constant>TRUE</constant>
                             の場合のデフォルト値は
                             '<code>(&amp;(objectClass=posixAccount)(uid=%s))</code>'
                             となります。独自のスキーマを使用している場合は、
@@ -261,14 +261,14 @@ echo "$acctname\n";
                             LDAP サーバによっては、匿名バインドの際のパスワードに空文字を設定できるものもあります。
                             この挙動は、ほとんどの場合において好ましくないものです。
                             そのため、空のパスワードは明示的に無効にしています。
-                            この値を <code>true</code> にすると、
+                            この値を <constant>TRUE</constant> にすると、
                             バインド時に空文字列のパスワードを使用できるようになります。
                         </entry>
                       </row>
                       <row>
                         <entry>optReferrals</entry>
                         <entry>
-                            <code>true</code> に設定すると、
+                            <constant>TRUE</constant> に設定すると、
                             参照先を追跡するよう LDAP クライアントに指示します。
                             デフォルト値は <constant>FALSE</constant> です。
                         </entry>

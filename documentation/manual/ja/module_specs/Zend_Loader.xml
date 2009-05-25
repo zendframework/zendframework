@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15741 -->
+<!-- EN-Revision: 15742 -->
 <sect1 id="zend.loader.load">
 
     <title>ファイルやクラスの動的な読み込み</title>
@@ -58,7 +58,7 @@ Zend_Loader::loadFile($filename, $dirs=null, $once=false);
         </para>
 
         <para>
-            引数 <code>$once</code> は論理値です。<code>TRUE</code> を指定すると、
+            引数 <code>$once</code> は論理値です。<constant>TRUE</constant> を指定すると、
             <classname>Zend_Loader::loadFile()</classname> は PHP の関数
             <ulink url="http://php.net/include"><code>include_once()</code></ulink>
             でファイルを読み込みます。それ以外の場合は
@@ -124,7 +124,7 @@ Zend_Loader::loadClass('Container_Tree',
         <para>
             静的メソッド <classname>Zend_Loader::isReadable($pathname)</classname>
             は、指定した場所にファイルが存在して読み込み可能な場合に
-            <code>TRUE</code>、それ以外の場合に <constant>FALSE</constant> を返します。
+            <constant>TRUE</constant>、それ以外の場合に <constant>FALSE</constant> を返します。
         </para>
 
         <example id="zend.loader.load.isreadable.example">
@@ -220,7 +220,7 @@ Zend_Loader::registerAutoload('My_Loader');
         <para>
             autoload コールバックを削除することもできます。
             <code>registerAutoload()</code> にはオプションで 2 番目の引数を指定することができ、
-            デフォルトでは <code>true</code> が設定されるようになっています。
+            デフォルトでは <constant>TRUE</constant> が設定されるようになっています。
             この引数を <constant>FALSE</constant> とすると、
             指定したコールバックが SPL の autoload スタックから削除されます。
         </para>

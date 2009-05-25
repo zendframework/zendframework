@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15741 -->
+<!-- EN-Revision: 15742 -->
 <sect1 id="zend.locale.functions">
 
     <title>Zend_Locale の使用法</title>
@@ -1602,7 +1602,7 @@ if (Zend_Locale::isLocale($input)) {
             しかし、この自動変換機能がじゃまになることもあるでしょう。そんな場合には
             <code>isLocale()</code> の 2 番目のパラメータを使用します。
             <code>strict</code> パラメータのデフォルトは
-            <constant>FALSE</constant> で、自動変換を無効にするにはこれを <code>true</code>
+            <constant>FALSE</constant> で、自動変換を無効にするにはこれを <constant>TRUE</constant>
             とします。
         </para>
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15742 -->
 <sect1 id="zend.session.advanced_usage">
 
     <title>高度な使用法</title>
@@ -83,7 +83,7 @@ php_value session.auto_start 0
                     <listitem>
                         <para>
                             起動コード内で、<classname>Zend_Session::setOptions()</classname> を使用して
-                            無条件にオプション <code>strict</code> を <code>true</code> にします。
+                            無条件にオプション <code>strict</code> を <constant>TRUE</constant> にします。
                         </para>
                     </listitem>
                     <listitem>
@@ -289,7 +289,7 @@ else {
 
         <para>
             この機能を有効にするには、<classname>Zend_Session_Namespace</classname>
-            のインスタンスを作成する際に、コンストラクタの第二引数に <code>true</code>
+            のインスタンスを作成する際に、コンストラクタの第二引数に <constant>TRUE</constant>
             を渡します。それ以降は、同一名前空間でインスタンスを作成しようとすると例外がスローされます。
         </para>
 

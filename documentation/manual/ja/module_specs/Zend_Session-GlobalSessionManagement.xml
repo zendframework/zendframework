@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15742 -->
 <sect1 id="zend.session.global_session_management">
 
     <title>グローバルセッションの管理</title>
@@ -518,7 +518,7 @@ if (!isset($defaultNamespace->initialized)) {
             したがって、名前空間つきのセッション
             (<classname>Zend_Session_Namespace</classname> のインスタンス)
             は読み込み可能な状態のままです。
-            「ログアウト」を行うには、オプションのパラメータを <code>true</code>
+            「ログアウト」を行うには、オプションのパラメータを <constant>TRUE</constant>
             (デフォルト) に設定し、
             ユーザエージェントのセッション ID クッキーを削除します。
             オプションのパラメータ <code>$readonly</code>
@@ -528,7 +528,7 @@ if (!isset($defaultNamespace->initialized)) {
 
         <para>
             "Cannot modify header information - headers already sent"
-            というエラーが出た場合は、最初の引数として <code>true</code>
+            というエラーが出た場合は、最初の引数として <constant>TRUE</constant>
             (セッションクッキーを削除) を使用しないようにするか、あるいは
             <xref linkend="zend.session.global_session_management.headers_sent" /> を参照ください。
             つまり、<classname>Zend_Session::destroy(true)</classname> をコールするなら

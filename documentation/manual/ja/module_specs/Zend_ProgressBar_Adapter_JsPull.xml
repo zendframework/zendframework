@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15741 -->
+<!-- EN-Revision: 15742 -->
 <sect3 id="zend.progressbar.adapter.jspull">
     <title>Zend_ProgressBar_Adapter_JsPull</title>
     <para>
@@ -14,7 +14,7 @@
         唯一の違いは、追加のパラメータ
         <code>finished</code> が含まれることです。このパラメータは、
         <code>update()</code> がコールされた場合は <constant>FALSE</constant>、
-        <code>finish()</code> がコールされた場合は <code>true</code> となります。
+        <code>finish()</code> がコールされた場合は <constant>TRUE</constant> となります。
     </para>
     <para>
         アダプタのオプションを設定するには、<code>set*</code>
@@ -26,7 +26,7 @@
         <listitem>
             <para>
                 <code>exitAfterSend</code>: データがブラウザに送信された後に、
-                現在のリクエストを終了します。デフォルトは <code>true</code> です。
+                現在のリクエストを終了します。デフォルトは <constant>TRUE</constant> です。
             </para>
         </listitem>
     </itemizedlist>

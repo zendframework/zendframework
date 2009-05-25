@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15742 -->
 <sect1 id="zend.console.getopt.fetching">
     <title>オプションおよび引数の取得</title>
     <para>
@@ -75,7 +75,7 @@ try {
             そのオプションがパラメータを持っている場合は、
             このメソッドはパラメータの値を返します。
             パラメータを持っていないオプションでユーザがパラメータを指定した場合は、
-            このメソッドは <code>true</code> を返します。
+            このメソッドは <constant>TRUE</constant> を返します。
             それ以外の場合は、このメソッドは <code>null</code> を返します。
         </para>
         <example id="zend.console.getopt.fetching.byname.example.setoption">
@@ -119,7 +119,7 @@ $p_parameter = $opts->p; // 設定されていない場合は null となりま�
                     文字列で取得: <code>toString()</code> メソッドを使用します。
                     オプションの内容が、空白で区切られた "<code>flag=value</code>"
                     形式の文字列で返されます。パラメータを持たないオプションの場合、
-                    value の部分はリテラル文字列 "<code>true</code>" となります。
+                    value の部分はリテラル文字列 "<constant>TRUE</constant>" となります。
                 </para>
             </listitem>
             <listitem>

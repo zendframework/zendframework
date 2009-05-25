@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15741 -->
+<!-- EN-Revision: 15742 -->
 <sect1 id="zend.db.table">
 
     <title>Zend_Db_Table</title>
@@ -503,7 +503,7 @@ $data = array(
 
             <para>
                 <classname>Zend_Db_Table_Abstract</classname> で protected 変数
-                <varname>$_sequence</varname> の値を boolean の <code>true</code>
+                <varname>$_sequence</varname> の値を boolean の <constant>TRUE</constant>
                 にすると、そのテーブルは自動インクリメントの主キーを持つものとみなされます。
             </para>
 
@@ -535,7 +535,7 @@ class Bugs extends Zend_Db_Table_Abstract
                 新しい行を作成した際にはこのシーケンスを用いてキーの値を生成します。
                 IBM DB2 には、これと同等の動作をする <code>IDENTITY</code> という記法があります。
                 これらの記法を使用する場合は、<classname>Zend_Db_Table</classname> クラスで
-                <varname>$_sequence</varname> を <code>true</code> と設定し、
+                <varname>$_sequence</varname> を <constant>TRUE</constant> と設定し、
                 自動インクリメントを有効にしてください。
             </para>
 
@@ -1441,7 +1441,7 @@ $bugs = new Bugs(array('metadataCache' => $cache));
             <para>
                 アダプタの describeTable() メソッドの返す内容は配列なので、
                 <classname>Zend_Cache_Core</classname> フロントエンドのオプション
-                <code>automatic_serialization</code> は <code>true</code> と設定しましょう。
+                <code>automatic_serialization</code> は <constant>TRUE</constant> と設定しましょう。
             </para>
 
         </note>

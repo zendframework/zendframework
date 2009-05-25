@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15741 -->
+<!-- EN-Revision: 15742 -->
 <sect1 id="zend.gdata.gapps">
     <title>Google Apps Provisioning の使用法</title>
 
@@ -295,7 +295,7 @@ $user = $user->save();
                 <para>
                     次にログインしたときに強制的にパスワードを変更させるようにするには、
                     <code>login->changePasswordAtNextLogin</code>
-                    を <code>true</code> に設定します。
+                    を <constant>TRUE</constant> に設定します。
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -331,7 +331,7 @@ $gdata->restoreUser('foo');
                 <para>
                     あるいは、UserEntry のプロパティ
                     <code>login->suspended</code>
-                    を <code>true</code> に設定します。
+                    を <constant>TRUE</constant> に設定します。
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -354,7 +354,7 @@ $user = $user->save();
                 <para>
                     ユーザに対してドメインの管理者権限を付与するには、プロパティ
                     <code>login->admin</code> を
-                    <code>true</code> に設定します。
+                    <constant>TRUE</constant> に設定します。
                 </para>
 
                 <programlisting language="php"><![CDATA[

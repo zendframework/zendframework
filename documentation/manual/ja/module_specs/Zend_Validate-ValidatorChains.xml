@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15742 -->
 <sect1 id="zend.validate.validator_chains">
 
     <title>バリデータチェイン</title>
@@ -43,7 +43,7 @@ if ($validatorChain->isValid($username)) {
         <classname>Zend_Validate</classname> はそのような使用法もサポートしています。
         そのためには、<code>addValidator()</code>
         メソッドの二番目のパラメータを使用します。
-        <code>$breakChainOnFailure</code> を <code>true</code>
+        <code>$breakChainOnFailure</code> を <constant>TRUE</constant>
         に設定すると、そのバリデータが失敗した時点でチェインを抜け出します。
         これにより、後に続く不要な検証や不適切な検証を行わずにすみます。
         上の例を次のように書き直すと、長さの検証に失敗した場合は

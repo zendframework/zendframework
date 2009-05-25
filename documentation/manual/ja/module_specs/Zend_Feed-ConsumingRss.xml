@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15742 -->
 <sect1 id="zend.feed.consuming-rss">
     <title>RSS フィードの使用</title>
     <para>
@@ -144,7 +144,7 @@ if ($item->propname()) {
 
     <para>
         <code>$item->propname</code> 形式を使用した場合は、
-        空のオブジェクトについても <code>TRUE</code> と評価されてしまうので、
+        空のオブジェクトについても <constant>TRUE</constant> と評価されてしまうので、
         このように調べることはできません。
     </para>
 

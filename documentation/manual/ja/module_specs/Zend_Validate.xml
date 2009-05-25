@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15741 -->
+<!-- EN-Revision: 15742 -->
 <sect1 id="zend.validate.introduction">
 
     <title>導入</title>
@@ -44,7 +44,7 @@
             <code>isValid()</code> および <code>getMessages()</code>
             のふたつのメソッドを定義するものです。
             <code>isValid()</code> メソッドは指定した値に対する検証を行います。
-            値が検証条件を満たしている場合にのみ <code>true</code> を返します。
+            値が検証条件を満たしている場合にのみ <constant>TRUE</constant> を返します。
         </para>
 
         <para>

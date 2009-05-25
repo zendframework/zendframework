@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15742 -->
 <sect1 id="zend.form.elements">
     <title>Zend_Form_Element を用いたフォーム要素の作成</title>
 
@@ -391,7 +391,7 @@ $element->addPrefixPath('My_Validator', 'My/Validator/', 'validate');
         <para>
             どれかひとつのバリデーションに失敗したときに
             それ以降のバリデータを実行しないようにさせるには、2 番目のパラメータに
-            <code>true</code> を渡します。
+            <constant>TRUE</constant> を渡します。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -659,7 +659,7 @@ $messages = $element->getMessages();
             <listitem><para>
                     <code>setRequired($flag)</code> および
                     <code>isRequired()</code> は、'required' フラグの状態を設定あるいは取得します。
-                    これを <code>true</code> に設定すると、
+                    これを <constant>TRUE</constant> に設定すると、
                     <classname>Zend_Form</classname> が処理したデータにその要素が必須であるものとします。
             </para></listitem>
 

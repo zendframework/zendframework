@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15741 -->
+<!-- EN-Revision: 15742 -->
 <sect1 id="zend.translate.using">
 
     <title>翻訳アダプタの使用法</title>
@@ -464,7 +464,7 @@ $translate = new Zend_Translate('tmx', 'path/to/mytranslation.tmx', 'en');
 
         <para>
             ソース中の特定の言語のみを翻訳対象としたい場合は、オプション
-            <code>defined_language</code> を <code>true</code>
+            <code>defined_language</code> を <constant>TRUE</constant>
             に設定します。このオプションを指定した場合は、
             対象としたい言語を <code>addLanguage()</code>
             で明示的に指定します。このオプションのデフォルト設定は、
@@ -580,11 +580,11 @@ $translate->addTranslation('/path/to/other.ini', 'it');
             INI にはいくつかの制約があります。
             INI ファイルの値に非英数字が含まれる場合は、値をダブルクォート (<code>"</code>)
             で囲まなければなりません。また、ini ファイルのキーとしては使えない予約語があります。
-            予約語には <code>null</code>, <code>yes</code>, <code>no</code>, <code>true</code>
+            予約語には <code>null</code>, <code>yes</code>, <code>no</code>, <constant>TRUE</constant>
             そして <constant>FALSE</constant> があります。
             値に <code>null</code>, <code>no</code> および <constant>FALSE</constant>
             を指定するとそれは <code>""</code>
-            と同じ扱いとなり、<code>yes</code> と <code>true</code> を指定するとそれは
+            と同じ扱いとなり、<code>yes</code> と <constant>TRUE</constant> を指定するとそれは
             <code>1</code> と同じ扱いとなります。
             <code>{}|&amp;~![()"</code> といった文字はキーの中では使えず、
             また値の中で使用すると特別な意味を持つことになります。
@@ -801,7 +801,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
         <para>
             <code>isAvailable()</code> メソッドは、
             指定した言語が既に存在するかどうかを調べます。
-            指定した言語のデータが存在する場合に <code>true</code>
+            指定した言語のデータが存在する場合に <constant>TRUE</constant>
             を返します。
         </para>
 

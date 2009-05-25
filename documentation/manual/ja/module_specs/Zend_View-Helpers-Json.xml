@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15742 -->
 <sect3 id="zend.view.helpers.initial.json">
     <title>JSON ヘルパー</title>
 
@@ -45,10 +45,10 @@ Content-Type: application/json
 
         <para>
             レイアウトを維持するには、2 番目のパラメータを
-            <code>true</code> としなければなりません。
+            <constant>TRUE</constant> としなければなりません。
             2 番目のパラメータを配列ににする場合にレイアウトを維持するには、配列に
             <code>keepLayouts</code> というキーを含め、その値を
-            <code>true</code> にします。
+            <constant>TRUE</constant> にします。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -64,7 +64,7 @@ echo $this->json($this->data, array('keepLayouts' => true));
             <classname>Zend_Json_Expr</classname> オブジェクトを使用してエンコードすることができます。
             このオプションはデフォルトでは無効になっています。
             有効にするには、<code>enableJsonExprFinder</code>
-            オプションに <code>true</code> を設定します。
+            オプションに <constant>TRUE</constant> を設定します。
         </para>
 
         <programlisting language="php"><![CDATA[

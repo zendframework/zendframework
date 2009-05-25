@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15719 -->
+<!-- EN-Revision: 15742 -->
 <sect1 id="zend.config.theory_of_operation">
     <title>動作原理</title>
     <para>
@@ -93,7 +93,7 @@
             <para>
                 <classname>Zend_Config</classname> オブジェクトをまとめる場合は、
                 変更を許可する設定で作成する必要があります。つまり、
-                コンストラクタの 2 番目のパラメータに <code>true</code> を渡します。
+                コンストラクタの 2 番目のパラメータに <constant>TRUE</constant> を渡します。
                 まとめが完了した後で <code>setReadOnly()</code>
                 メソッドを使用すると、それ以降の変更を禁じることができます。
             </para>

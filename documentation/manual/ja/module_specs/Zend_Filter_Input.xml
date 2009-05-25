@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15741 -->
+<!-- EN-Revision: 15742 -->
 <sect1 id="zend.filter.input">
     <title>Zend_Filter_Input</title>
 
@@ -276,7 +276,7 @@ $input->setData($newData);
 
             <para>
                 すべての入力データがバリデーションルールを通過すると、
-                <code>isValid()</code> メソッドは <code>true</code> を返します。
+                <code>isValid()</code> メソッドは <constant>TRUE</constant> を返します。
                 無効な形式の入力や必須フィールドの未入力がひとつでもあると、
                 <code>isValid()</code> は <constant>FALSE</constant> を返します。
             </para>
@@ -292,7 +292,7 @@ if ($input->isValid()) {
                 ここには、フィールドの名前を指定します。
                 指定したフィールドがバリデーションを通過して取得可能になると、
                 <code>isValid('fieldName')</code>
-                は <code>true</code> を返します。
+                は <constant>TRUE</constant> を返します。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -559,7 +559,7 @@ $filters = array(
                 たとえば、パスワードを登録する場合に、ふたつのフィールドに入力させて
                 その値が一致することを確認するなどといった処理は、よくあるものです。
                 配列の引数を受け取り、それらの入力フィールドの値が等しいときにだけ
-                <code>true</code> を返すバリデータを考えてみましょう。
+                <constant>TRUE</constant> を返すバリデータを考えてみましょう。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -685,7 +685,7 @@ echo $input->month; // 1 を出力します
 
             <para>
                 空の文字列も有効であるとみなしたい場合は、メタコマンド
-                'allowEmpty' を <code>true</code> に設定します。
+                'allowEmpty' を <constant>TRUE</constant> に設定します。
                 すると、入力データとして空の文字列が渡された場合も検証を通過します。
             </para>
 
@@ -744,7 +744,7 @@ $input->setOptions($options);
 
             <para>
                 一方、メタコマンド 'breakChainOnFailure' を
-                <code>true</code> とすると、
+                <constant>TRUE</constant> とすると、
                 どれかひとつのバリデータが失敗すると、
                 その時点でバリデータチェインが終了するようになります。
                 チェイン内のそれ以降のバリデータによる入力チェックは行いません。

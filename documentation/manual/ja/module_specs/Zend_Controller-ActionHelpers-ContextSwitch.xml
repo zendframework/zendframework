@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15719 -->
+<!-- EN-Revision: 15742 -->
 <sect3 id="zend.controller.actionhelpers.contextswitch">
     <title>ContextSwitch および AjaxContext</title>
 
@@ -391,7 +391,7 @@ class FooController extends Zend_Controller_Action
                 </para>
 
                 <para>
-                    コンテキストとして <code>true</code> を指定すると、
+                    コンテキストとして <constant>TRUE</constant> を指定すると、
                     すべてのコンテキストをそのアクションで使用できるようにします。
                 </para>
 

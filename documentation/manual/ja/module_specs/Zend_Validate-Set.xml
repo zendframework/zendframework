@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15742 -->
 <sect1 id="zend.validate.set" xmlns:xi="http://www.w3.org/2001/XInclude">
 
     <title>標準のバリデーションクラス群</title>
@@ -12,7 +12,7 @@
     <sect2 id="zend.validate.set.alnum">
         <title>Alnum</title>
         <para>
-            <code>$value</code> がアルファベットおよび数字のみで構成されているときにのみ <code>true</code> を返します。
+            <code>$value</code> がアルファベットおよび数字のみで構成されているときにのみ <constant>TRUE</constant> を返します。
             このバリデータでは、オプションとして空白文字を認めることもできます。
         </para>
 
@@ -29,7 +29,7 @@
     <sect2 id="zend.validate.set.alpha">
         <title>Alpha</title>
         <para>
-             <code>$value</code> がアルファベットのみで構成されているときにのみ <code>true</code> を返します。
+             <code>$value</code> がアルファベットのみで構成されているときにのみ <constant>TRUE</constant> を返します。
             このバリデータでは、オプションとして空白文字を認めることもできます。
         </para>
     </sect2>
@@ -50,7 +50,7 @@
     <sect2 id="zend.validate.set.between">
         <title>Between</title>
         <para>
-            <code>$value</code> が最小値と最大値の間にある場合にのみ <code>true</code> を返します。
+            <code>$value</code> が最小値と最大値の間にある場合にのみ <constant>TRUE</constant> を返します。
             デフォルトでは、両端の値も含めて比較します
             (<code>$value</code> が境界値と等しくてもかまいません)
             が、strict オプションを変更して、<code>$value</code> が最小値より大きくて最大値より小さい
@@ -62,7 +62,7 @@
         <title>Ccnum</title>
         <para>
             <code>$value</code> が Luhn アルゴリズム (10 で割ったあまりのチェックサム)
-            を満たすクレジットカード番号である場合にのみ <code>true</code> を返します。
+            を満たすクレジットカード番号である場合にのみ <constant>TRUE</constant> を返します。
         </para>
     </sect2>
 
@@ -70,7 +70,7 @@
         <title>Date</title>
         <para>
             <code>$value</code> が <code>YYYY-MM-DD</code> 形式の日付である場合にのみ
-            <code>true</code> を返します。オプションの <code>locale</code>
+            <constant>TRUE</constant> を返します。オプションの <code>locale</code>
             を設定すると、そのロケールに応じた検証を行います。
             オプションの <code>format</code> を設定すると、
             そのフォーマットを使用して検証を行います。オプションパラメータの詳細は
@@ -84,7 +84,7 @@
     <sect2 id="zend.validate.set.digits">
         <title>Digits</title>
         <para>
-            <code>$value</code> が数字のみで構成されている場合にのみ <code>true</code> を返します。
+            <code>$value</code> が数字のみで構成されている場合にのみ <constant>TRUE</constant> を返します。
         </para>
     </sect2>
 
@@ -93,7 +93,7 @@
     <sect2 id="zend.validate.set.float">
         <title>Float</title>
         <para>
-            <code>$value</code> が浮動小数点値である場合にのみ <code>true</code> を返します。
+            <code>$value</code> が浮動小数点値である場合にのみ <constant>TRUE</constant> を返します。
             Zend Framework 1.8 以降では、このバリデータは
             ブラウザや環境変数あるいはアプリケーションで設定されたロケールを考慮するようになります。
             もちろん、アクセサ get/setLocale を使用して、
@@ -104,14 +104,14 @@
     <sect2 id="zend.validate.set.greater_than">
         <title>GreaterThan</title>
         <para>
-            <code>$value</code> が最小値よりも大きい場合にのみ <code>true</code> を返します。
+            <code>$value</code> が最小値よりも大きい場合にのみ <constant>TRUE</constant> を返します。
         </para>
     </sect2>
 
     <sect2 id="zend.validate.set.hex">
         <title>Hex</title>
         <para>
-            <code>$value</code> が16進文字のみで構成されている場合にのみ <code>true</code> を返します。
+            <code>$value</code> が16進文字のみで構成されている場合にのみ <constant>TRUE</constant> を返します。
         </para>
     </sect2>
 
@@ -121,7 +121,7 @@
         <title>Iban</title>
         <para>
             <code>$value</code> が正しい IBAN
-            (International Bank Account Number) を含む場合にのみ <code>true</code> を返します。
+            (International Bank Account Number) を含む場合にのみ <constant>TRUE</constant> を返します。
             IBAN 番号の検証は、使用している国に対して行い、チェックサムを使用します。
         </para>
         <para>
@@ -167,7 +167,7 @@ if ($validator->isValid($iban)) {
         <title>InArray</title>
         <para>
             "needle" <code>$value</code> が "haystack" 配列に含まれる場合にのみ
-            <code>true</code> を返します。strict オプションを <code>true</code>
+            <constant>TRUE</constant> を返します。strict オプションを <constant>TRUE</constant>
             にすると、<code>$value</code> の型も確認します。
         </para>
     </sect2>
@@ -175,7 +175,7 @@ if ($validator->isValid($iban)) {
     <sect2 id="zend.validate.set.int">
         <title>Int</title>
         <para>
-            <code>$value</code> が整数値である場合にのみ <code>true</code> を返します。
+            <code>$value</code> が整数値である場合にのみ <constant>TRUE</constant> を返します。
             Zend Framework 1.8 以降では、このバリデータは
             ブラウザや環境変数あるいはアプリケーションで設定されたロケールを考慮するようになります。
             もちろん、アクセサ get/setLocale を使用して、
@@ -186,28 +186,28 @@ if ($validator->isValid($iban)) {
     <sect2 id="zend.validate.set.ip">
         <title>Ip</title>
         <para>
-            <code>$value</code> が妥当な形式の IP アドレスである場合にのみ <code>true</code> を返します。
+            <code>$value</code> が妥当な形式の IP アドレスである場合にのみ <constant>TRUE</constant> を返します。
         </para>
     </sect2>
 
     <sect2 id="zend.validate.set.less_than">
         <title>LessThan</title>
         <para>
-            <code>$value</code> が最大値よりも小さい場合にのみ <code>true</code> を返します。
+            <code>$value</code> が最大値よりも小さい場合にのみ <constant>TRUE</constant> を返します。
         </para>
     </sect2>
 
     <sect2 id="zend.validate.set.not_empty">
         <title>NotEmpty</title>
         <para>
-           <code>$value</code> が空の値でない場合にのみ <code>true</code> を返します。
+           <code>$value</code> が空の値でない場合にのみ <constant>TRUE</constant> を返します。
         </para>
     </sect2>
 
     <sect2 id="zend.validate.set.regex">
         <title>Regex</title>
         <para>
-            <code>$value</code> が正規表現パターンにマッチする場合にのみ <code>true</code> を返します。
+            <code>$value</code> が正規表現パターンにマッチする場合にのみ <constant>TRUE</constant> を返します。
         </para>
     </sect2>
 
@@ -220,7 +220,7 @@ if ($validator->isValid($iban)) {
         <para>
             文字列 <code>$value</code> の長さが最小値以上、
             かつ最大値以下 (最大値が <code>null</code> 以外のとき)
-            の場合にのみ <code>true</code> を返します。
+            の場合にのみ <constant>TRUE</constant> を返します。
             <code>setMin()</code>
             で最大値より大きい値を指定したり <code>setMax()</code>
             で最小値より小さい値を設定したりした場合に例外をスローします。

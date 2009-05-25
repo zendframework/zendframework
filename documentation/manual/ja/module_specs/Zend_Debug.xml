@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15719 -->
+<!-- EN-Revision: 15742 -->
 <sect1 id="zend.debug.dumping">
 
     <title>変数の出力</title>
@@ -33,7 +33,7 @@ Zend_Debug::dump($var, $label=null, $echo=true);
 
     <para>
         論理型の <varname>$echo</varname> で、<code>Zend::dump()</code> の結果を
-        echo するかどうかを指定します。<code>TRUE</code> の場合は出力が
+        echo するかどうかを指定します。<constant>TRUE</constant> の場合は出力が
         echo されます。<varname>$echo</varname> の設定にかかわらず、
         出力結果は常にメソッドの返り値となります。
     </para>

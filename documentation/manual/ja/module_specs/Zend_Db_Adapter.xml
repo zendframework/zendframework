@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15741 -->
+<!-- EN-Revision: 15742 -->
 <sect1 id="zend.db.adapter">
 
     <title>Zend_Db_Adapter</title>
@@ -365,7 +365,7 @@ $db = Zend_Db::factory('Db2', $params);
                 <para>
                     このオプションは、定数
                     <classname>Zend_Db::AUTO_QUOTE_IDENTIFIERS</classname> で指定します。
-                    この値が <code>true</code> (デフォルト) の場合は、
+                    この値が <constant>TRUE</constant> (デフォルト) の場合は、
                     アダプタが生成する SQL 文中のテーブル名やカラム名、
                     エイリアスといった識別子をすべてクォートします。これにより、
                     SQL のキーワードや特殊文字を含む識別子を使用できるようになります。

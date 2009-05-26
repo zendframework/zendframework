@@ -25,11 +25,6 @@
 require_once 'Zend/Validate/Abstract.php';
 
 /**
- * @see Zend_Loader
- */
-require_once 'Zend/Loader.php';
-
-/**
  * @see Zend_Validate_Ip
  */
 require_once 'Zend/Validate/Ip.php';

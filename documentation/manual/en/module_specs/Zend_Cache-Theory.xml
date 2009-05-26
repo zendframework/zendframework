@@ -4,18 +4,18 @@
     <title>The Theory of Caching</title>
     <para>
         There are three key concepts in <classname>Zend_Cache</classname>. One is the unique identifier (a string) that is used
-        to identify cache records. The second one is the <code>'lifetime'</code> directive as seen in the
+        to identify cache records. The second one is the <emphasis>'lifetime'</emphasis> directive as seen in the
         examples; it defines for how long the cached resource is considered 'fresh'. The third key concept
         is conditional execution so that parts of your code can be skipped entirely, boosting performance.
         The main frontend function (eg. <classname>Zend_Cache_Core::get()</classname>) is always designed to return
         false for a cache miss if that makes sense for the nature of a frontend. That enables end-users to
-        wrap parts of the code they would like to cache (and skip) in <code>if(){ ... }</code> statements where
+        wrap parts of the code they would like to cache (and skip) in <emphasis>if(){ ... }</emphasis> statements where
         the condition is a <classname>Zend_Cache</classname> method itself. On the end if these blocks you must save what you've
         generated, however (eg. <classname>Zend_Cache_Core::save()</classname>).
     </para>
     <note><para>
         The conditional execution design of your generating code is not necessary in some frontends
-        (<code>Function</code>, for an example) when the whole logic is implemented inside the frontend.
+        (<emphasis>Function</emphasis>, for an example) when the whole logic is implemented inside the frontend.
     </para></note>
     <note><para>
         'Cache hit' is a term for a condition when a cache record is found, is valid and is 'fresh' (in other
@@ -63,7 +63,7 @@ $cache = Zend_Cache::factory($frontendName,
     <sect2 id="zend.cache.tags">
         <title>Tagging Records</title>
         <para>
-            Tags are a way to categorize cache records. When you save a cache with the <code>save()</code>
+            Tags are a way to categorize cache records. When you save a cache with the <methodname>save()</methodname>
             method, you can set an array of tags to apply for this record. Then you will be
             able to clean all cache records tagged with a given tag (or tags):
         </para>
@@ -71,21 +71,21 @@ $cache = Zend_Cache::factory($frontendName,
 $cache->save($huge_data, 'myUniqueID', array('tagA', 'tagB', 'tagC'));
 ]]></programlisting>
         <note><para>
-            note than the <code>save()</code> method accepts an optional fourth argument : <varname>$specificLifetime</varname>
+            note than the <methodname>save()</methodname> method accepts an optional fourth argument : <varname>$specificLifetime</varname>
             (if != false, it sets a specific lifetime for this particular cache record)
         </para></note>
     </sect2>
     <sect2 id="zend.cache.clean">
         <title>Cleaning the Cache</title>
         <para>
-            To remove/invalidate in particular cache id, you can use the <code>remove()</code>
+            To remove/invalidate in particular cache id, you can use the <methodname>remove()</methodname>
             method :
         </para>
         <programlisting language="php"><![CDATA[
 $cache->remove('idToRemove');
 ]]></programlisting>
         <para>
-            To remove/invalidate several cache ids in one operation, you can use the <code>clean()</code>
+            To remove/invalidate several cache ids in one operation, you can use the <methodname>clean()</methodname>
             method. For example to remove all cache records :
         </para>
         <programlisting language="php"><![CDATA[
@@ -123,9 +123,9 @@ $cache->clean(
 );
 ]]></programlisting>
         <para>
-            Available cleaning modes are: <code>CLEANING_MODE_ALL</code>, <code>CLEANING_MODE_OLD</code>,
-            <code>CLEANING_MODE_MATCHING_TAG</code>, <code>CLEANING_MODE_NOT_MATCHING_TAG</code> and
-            <code>CLEANING_MODE_MATCHING_ANY_TAG</code>.
+            Available cleaning modes are: <constant>CLEANING_MODE_ALL</constant>, <constant>CLEANING_MODE_OLD</constant>,
+            <constant>CLEANING_MODE_MATCHING_TAG</constant>, <constant>CLEANING_MODE_NOT_MATCHING_TAG</constant> and
+            <constant>CLEANING_MODE_MATCHING_ANY_TAG</constant>.
             The latter are, as their names suggest, combined with an array of tags in cleaning operations.
         </para>
     </sect2>

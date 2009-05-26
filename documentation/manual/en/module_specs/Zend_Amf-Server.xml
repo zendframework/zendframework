@@ -59,7 +59,7 @@ echo $response;
             The <classname>Zend_Amf_Server</classname> also allows services to be dynamically
             loaded based on a supplied directory path. You may add as many directories as you wish
             to the server. The order that you add the directories to the server will be the
-            order that the <emphasis>LIFO</emphasis> search will be performed on the directories to
+            order that the <acronym>LIFO</acronym> search will be performed on the directories to
             match the class. Adding directories is completed with the
             <methodname>addDirectory()</methodname> method.
         </para>
@@ -71,7 +71,7 @@ $server->addDirectory(dirname(__FILE__) .'/../package/');
 
         <para>
             When calling remote services your source name can have underscore ("_") and dot (".")
-            directory delimiters. When an underscore is used <emphasis>PEAR</emphasis> and Zend
+            directory delimiters. When an underscore is used <acronym>PEAR</acronym> and Zend
             Framework class naming conventions will be respected. This means that if you call the
             service <classname>com_Foo_Bar</classname> the server will look for the file
             <filename>Bar.php</filename> in the each of the included paths at
@@ -227,8 +227,8 @@ class World
         </para>
 
         <para>
-            Within our Flex <emphasis>MXML</emphasis> files, we need to bind a RemoteObject to the
-            service. In <emphasis>MXML</emphasis>, this might be done as follows:
+            Within our Flex <acronym>MXML</acronym> files, we need to bind a RemoteObject to the
+            service. In <acronym>MXML</acronym>, this might be done as follows:
         </para>
 
         <programlisting language="xml"><![CDATA[
@@ -351,7 +351,7 @@ echo $response;
         <title>Typed Objects</title>
 
         <para>
-            Similar to <emphasis>SOAP</emphasis>, AMF allows passing objects between the client and
+            Similar to <acronym>SOAP</acronym>, AMF allows passing objects between the client and
             server. This allows a great amount of flexibility and coherence
             between the two environments.
         </para>

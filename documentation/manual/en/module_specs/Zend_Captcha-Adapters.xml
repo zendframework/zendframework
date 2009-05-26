@@ -33,41 +33,41 @@
 
         <itemizedlist>
             <listitem><para>
-                <code>setWordLen($length)</code> and <code>getWordLen()</code>
+                <methodname>setWordLen($length)</methodname> and <methodname>getWordLen()</methodname>
                 allow you to specify the length of the generated "word" in
                 characters, and to retrieve the current value.
             </para></listitem>
 
             <listitem><para>
-                <code>setTimeout($ttl)</code> and <code>getTimeout()</code>
+                <methodname>setTimeout($ttl)</methodname> and <methodname>getTimeout()</methodname>
                 allow you to specify the time-to-live of the session token, and
                 to retrieve the current value. <varname>$ttl</varname> should be
                 specified in seconds.
             </para></listitem>
 
             <listitem><para>
-                <code>setSessionClass($class)</code> and
-                <code>getSessionClass()</code> allow you to specify an
+                <methodname>setSessionClass($class)</methodname> and
+                <methodname>getSessionClass()</methodname> allow you to specify an
                 alternate <classname>Zend_Session_Namespace</classname> implementation to
                 use to persist the CAPTCHA token and to retrieve the
                 current value.
             </para></listitem>
 
             <listitem><para>
-                <code>getId()</code> allows you to retrieve the current token
+                <methodname>getId()</methodname> allows you to retrieve the current token
                 identifier.
             </para></listitem>
 
             <listitem><para>
-                <code>getWord()</code> allows you to retrieve the generated
+                <methodname>getWord()</methodname> allows you to retrieve the generated
                 word to use with the CAPTCHA. It will generate the word for you if
                 none has been generated yet.
             </para></listitem>
 
             <listitem><para>
-                <code>setSession(Zend_Session_Namespace $session)</code> allows
+                <methodname>setSession(Zend_Session_Namespace $session)</methodname> allows
                 you to specify a session object to use for persisting the
-                CAPTCHA token. <code>getSession()</code> allows you to retrieve
+                CAPTCHA token. <methodname>getSession()</methodname> allows you to retrieve
                 the current session object.
             </para></listitem>
         </itemizedlist>
@@ -75,10 +75,10 @@
         <para>
             All word CAPTCHAs allow you to pass an array of options to the
             constructor, or, alternately, pass them to
-            <code>setOptions()</code>. You can also pass a <classname>Zend_Config</classname>
-            object to <code>setConfig()</code>. By default, the
-            <code>wordLen</code>, <code>timeout</code>, and
-            <code>sessionClass</code> keys may all be used. Each concrete
+            <methodname>setOptions()</methodname>. You can also pass a <classname>Zend_Config</classname>
+            object to <methodname>setConfig()</methodname>. By default, the
+            <emphasis>wordLen</emphasis>, <emphasis>timeout</emphasis>, and
+            <emphasis>sessionClass</emphasis> keys may all be used. Each concrete
             implementation may define additional keys or utilize the options in
             other ways.
         </para>
@@ -138,8 +138,8 @@
 
         <itemizedlist>
             <listitem><para>
-                <code>setExpiration($expiration)</code> and
-                <code>getExpiration()</code> allow you to specify a maximum
+                <methodname>setExpiration($expiration)</methodname> and
+                <methodname>getExpiration()</methodname> allow you to specify a maximum
                 lifetime the CAPTCHA image may reside on the filesystem. This is
                 typically a longer than the session lifetime. Garbage
                 collection is run periodically each time the CAPTCHA object is
@@ -148,14 +148,14 @@
             </para></listitem>
 
             <listitem><para>
-                <code>setGcFreq($gcFreq)</code> and <code>getGcFreg()</code>
+                <methodname>setGcFreq($gcFreq)</methodname> and <methodname>getGcFreg()</methodname>
                 allow you to specify how frequently garbage collection should
-                run. Garbage collection will run every <code>1/$gcFreq</code>
+                run. Garbage collection will run every <emphasis>1/$gcFreq</emphasis>
                 calls. The default is 100.
             </para></listitem>
 
             <listitem><para>
-                <code>setFont($font)</code> and <code>getFont()</code> allow
+                <methodname>setFont($font)</methodname> and <methodname>getFont()</methodname> allow
                 you to specify the font you will use. <varname>$font</varname>
                 should be a fully qualified path to the font file.
                 This value is required; the CAPTCHA will throw an
@@ -163,37 +163,37 @@
             </para></listitem>
 
             <listitem><para>
-                <code>setFontSize($fsize)</code> and <code>getFontSize()</code>
+                <methodname>setFontSize($fsize)</methodname> and <methodname>getFontSize()</methodname>
                 allow you to specify the font size in pixels for
                 generating the CAPTCHA. The default is 24px.
             </para></listitem>
 
             <listitem><para>
-                <code>setHeight($height)</code> and <code>getHeight()</code>
+                <methodname>setHeight($height)</methodname> and <methodname>getHeight()</methodname>
                 allow you to specify the height in pixels of the generated
                 CAPTCHA image. The default is 50px.
             </para></listitem>
 
             <listitem><para>
-                <code>setWidth($width)</code> and <code>getWidth()</code>
+                <methodname>setWidth($width)</methodname> and <methodname>getWidth()</methodname>
                 allow you to specify the width in pixels of the generated
                 CAPTCHA image. The default is 200px.
             </para></listitem>
 
             <listitem><para>
-                <code>setImgDir($imgDir)</code> and <code>getImgDir()</code>
+                <methodname>setImgDir($imgDir)</methodname> and <methodname>getImgDir()</methodname>
                 allow you to specify the directory for storing CAPTCHA images.
                 The default is "./images/captcha/", relative to the bootstrap script.
             </para></listitem>
 
             <listitem><para>
-                <code>setImgUrl($imgUrl)</code> and <code>getImgUrl()</code>
+                <methodname>setImgUrl($imgUrl)</methodname> and <methodname>getImgUrl()</methodname>
                 allow you to specify the relative path to a CAPTCHA image to
                 use for HTML markup. The default is "/images/captcha/".
             </para></listitem>
 
             <listitem><para>
-                <code>setSuffix($suffix)</code> and <code>getSuffix()</code>
+                <methodname>setSuffix($suffix)</methodname> and <methodname>getSuffix()</methodname>
                 allow you to specify the filename suffix for the CAPTCHA image. The
                 default is ".png". Note: changing this value will not change the
                 type of the generated image.
@@ -219,22 +219,22 @@
 
         <itemizedlist>
             <listitem><para>
-                <code>setPrivKey($key)</code> and <code>getPrivKey()</code>
+                <methodname>setPrivKey($key)</methodname> and <methodname>getPrivKey()</methodname>
                 allow you to specify the private key to use for the ReCaptcha
                 service. This must be specified during construction, although it
                 may be overridden at any point.
             </para></listitem>
 
             <listitem><para>
-                <code>setPubKey($key)</code> and <code>getPubKey()</code>
+                <methodname>setPubKey($key)</methodname> and <methodname>getPubKey()</methodname>
                 allow you to specify the public key to use with the ReCaptcha
                 service. This must be specified during construction, although it
                 may be overridden at any point.
             </para></listitem>
 
             <listitem><para>
-                <code>setService(Zend_Service_ReCaptcha $service)</code> and
-                <code>getService()</code> allow you to set and get
+                <methodname>setService(Zend_Service_ReCaptcha $service)</methodname> and
+                <methodname>getService()</methodname> allow you to set and get
                 the ReCaptcha service object.
             </para></listitem>
         </itemizedlist>

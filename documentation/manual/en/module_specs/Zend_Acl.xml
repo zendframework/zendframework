@@ -5,8 +5,9 @@
 
     <para>
         <classname>Zend_Acl</classname> provides a lightweight and flexible access control list
-        (ACL) implementation for privileges management. In general, an application may utilize such
-        ACL's to control access to certain protected objects by other requesting objects.
+        (<acronym>ACL</acronym>) implementation for privileges management. In general, an
+        application may utilize such <acronym>ACL</acronym>'s to control access to certain
+        protected objects by other requesting objects.
     </para>
 
     <para>
@@ -36,8 +37,8 @@
     </para>
 
     <para>
-        Through the specification and use of an ACL, an application may control how roles are
-        granted access to resources.
+        Through the specification and use of an <acronym>ACL</acronym>, an application may control
+        how roles are granted access to resources.
     </para>
 
     <sect2 id="zend.acl.introduction.resources">
@@ -157,10 +158,12 @@ echo $acl->isAllowed('someUser', 'someResource') ? 'allowed' : 'denied';
         <title>Creating the Access Control List</title>
 
         <para>
-            An Access Control List (ACL) can represent any set of physical or virtual objects that
-            you wish. For the purposes of demonstration, however, we will create a basic Content
-            Management System (CMS) ACL that maintains several tiers of groups over a wide variety
-            of areas. To create a new ACL object, we instantiate the ACL with no parameters:
+            An Access Control List (<acronym>ACL</acronym>) can represent any set of physical or
+            virtual objects that you wish. For the purposes of demonstration, however, we will
+            create a basic Content Management System (<acronym>CMS</acronym>)
+            <acronym>ACL</acronym> that maintains several tiers of groups over a wide variety of
+            areas. To create a new <acronym>ACL</acronym> object, we instantiate the
+            <acronym>ACL</acronym> with no parameters:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -179,16 +182,17 @@ $acl = new Zend_Acl();
         <title>Registering Roles</title>
 
         <para>
-            CMS's will nearly always require a hierarchy of permissions to determine the authoring
-            capabilities of its users. There may be a 'Guest' group to allow limited access for
-            demonstrations, a 'Staff' group for the majority of CMS users who perform most of the
-            day-to-day operations, an 'Editor' group for those responsible for publishing,
-            reviewing, archiving and deleting content, and finally an 'Administrator' group whose
-            tasks may include all of those of the other groups as well as maintenance of sensitive
-            information, user management, back-end configuration data, backup and export. This set
-            of permissions can be represented in a role registry, allowing each group to inherit
-            privileges from 'parent' groups, as well as providing distinct privileges for their
-            unique group only. The permissions may be expressed as follows:
+            <acronym>CMS</acronym>'s will nearly always require a hierarchy of permissions to
+            determine the authoring capabilities of its users. There may be a 'Guest' group to
+            allow limited access for demonstrations, a 'Staff' group for the majority of
+            <acronym>CMS</acronym> users who perform most of the day-to-day operations, an 'Editor'
+            group for those responsible for publishing, reviewing, archiving and deleting content,
+            and finally an 'Administrator' group whose tasks may include all of those of the other
+            groups as well as maintenance of sensitive information, user management, back-end
+            configuration data, backup and export. This set of permissions can be represented in a
+            role registry, allowing each group to inherit privileges from 'parent' groups, as well
+            as providing distinct privileges for their unique group only. The permissions may be
+            expressed as follows:
         </para>
 
         <table id="zend.acl.introduction.role_registry.table.example_cms_access_controls">
@@ -261,13 +265,13 @@ $acl->addRole(new Zend_Acl_Role('administrator'));
         <title>Defining Access Controls</title>
 
         <para>
-            Now that the ACL contains the relevant roles, rules can be established that define how
-            resources may be accessed by roles. You may have noticed that we have not defined any
-            particular resources for this example, which is simplified to illustrate that the rules
-            apply to all resources. <classname>Zend_Acl</classname> provides an implementation
-            whereby rules need only be assigned from general to specific, minimizing the number of
-            rules needed, because resources and roles inherit rules that are defined upon their
-            ancestors.
+            Now that the <acronym>ACL</acronym> contains the relevant roles, rules can be
+            established that define how resources may be accessed by roles. You may have noticed
+            that we have not defined any particular resources for this example, which is simplified
+            to illustrate that the rules apply to all resources. <classname>Zend_Acl</classname>
+            provides an implementation whereby rules need only be assigned from general to
+            specific, minimizing the number of rules needed, because resources and roles inherit
+            rules that are defined upon their ancestors.
         </para>
 
         <note>
@@ -322,9 +326,10 @@ $acl->allow('administrator');
         <title>Querying an ACL</title>
 
         <para>
-            We now have a flexible ACL that can be used to determine whether requesters have
-            permission to perform functions throughout the web application. Performing queries is
-            quite simple using the <methodname>isAllowed()</methodname> method:
+            We now have a flexible <acronym>ACL</acronym> that can be used to determine whether
+            requesters have permission to perform functions throughout the web application.
+            Performing queries is quite simple using the <methodname>isAllowed()</methodname>
+            method:
         </para>
 
         <programlisting language="php"><![CDATA[

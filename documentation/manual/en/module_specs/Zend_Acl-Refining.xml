@@ -9,20 +9,20 @@
         <title>Precise Access Controls</title>
 
         <para>
-            The basic ACL as defined in the
+            The basic <acronym>ACL</acronym> as defined in the
             <link linkend="zend.acl.introduction">previous section</link> shows how various
-            privileges may be allowed upon the entire ACL (all resources). In practice, however,
-            access controls tend to have exceptions and varying degrees of complexity.
-            <classname>Zend_Acl</classname> allows to you accomplish these refinements in a
-            straightforward and flexible manner.
+            privileges may be allowed upon the entire <acronym>ACL</acronym> (all resources). In
+            practice, however, access controls tend to have exceptions and varying degrees of
+            complexity. <classname>Zend_Acl</classname> allows to you accomplish these refinements
+            in a straightforward and flexible manner.
         </para>
 
         <para>
-            For the example CMS, it has been determined that whilst the 'staff' group covers the
-            needs of the vast majority of users, there is a need for a new 'marketing' group that
-            requires access to the newsletter and latest news in the CMS. The group is fairly
-            self-sufficient and will have the ability to publish and archive both newsletters and
-            the latest news.
+            For the example <acronym>CMS</acronym>, it has been determined that whilst the 'staff'
+            group covers the needs of the vast majority of users, there is a need for a new
+            'marketing' group that requires access to the newsletter and latest news in the
+            <acronym>CMS</acronym>. The group is fairly self-sufficient and will have the ability
+            to publish and archive both newsletters and the latest news.
         </para>
 
         <para>
@@ -66,7 +66,7 @@ $acl->add(new Zend_Acl_Resource('announcement'), 'news');
 
         <para>
             Then it is simply a matter of defining these more specific rules on the target areas of
-            the ACL:
+            the <acronym>ACL</acronym>:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -86,7 +86,7 @@ $acl->deny(null, 'announcement', 'archive');
 ]]></programlisting>
 
         <para>
-            We can now query the ACL with respect to the latest changes:
+            We can now query the <acronym>ACL</acronym> with respect to the latest changes:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -130,11 +130,11 @@ echo $acl->isAllowed('administrator', 'announcement', 'archive') ?
         <title>Removing Access Controls</title>
 
         <para>
-            To remove one or more access rules from the ACL, simply use the available
-            <methodname>removeAllow()</methodname> or <methodname>removeDeny()</methodname> methods.
-            As with <methodname>allow()</methodname> and <methodname>deny()</methodname>, you may
-            provide a <constant>NULL</constant> value to indicate application to all roles,
-            resources, and/or privileges:
+            To remove one or more access rules from the <acronym>ACL</acronym>, simply use the
+            available <methodname>removeAllow()</methodname> or
+            <methodname>removeDeny()</methodname> methods. As with <methodname>allow()</methodname>
+            and <methodname>deny()</methodname>, you may provide a <constant>NULL</constant> value
+            to indicate application to all roles, resources, and/or privileges:
         </para>
 
         <programlisting language="php"><![CDATA[

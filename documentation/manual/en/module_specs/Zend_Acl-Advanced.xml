@@ -10,21 +10,22 @@
 
         <para>
             <classname>Zend_Acl</classname> was designed in such a way that it does not require any
-            particular backend technology such as a database or cache server for storage of the ACL
-            data. Its complete PHP implementation enables customized administration tools to be
-            built upon <classname>Zend_Acl</classname> with relative ease and flexibility. Many
-            situations require some form of interactive maintenance of the ACL, and
-            <classname>Zend_Acl</classname> provides methods for setting up, and querying against,
-            the access controls of an application.
+            particular backend technology such as a database or cache server for storage of the
+            <acronym>ACL</acronym> data. Its complete <acronym>PHP</acronym> implementation enables
+            customized administration tools to be built upon <classname>Zend_Acl</classname> with
+            relative ease and flexibility. Many situations require some form of interactive
+            maintenance of the <acronym>ACL</acronym>, and <classname>Zend_Acl</classname> provides
+            methods for setting up, and querying against, the access controls of an application.
         </para>
 
         <para>
-            Storage of ACL data is therefore left as a task for the developer, since use cases are
-            expected to vary widely for various situations. Because <classname>Zend_Acl</classname>
-            is serializable, ACL objects may be serialized with PHP's
-            <ulink url="http://php.net/serialize"><methodname>serialize()</methodname></ulink>
-            function, and the results may be stored anywhere the developer should desire, such as a
-            file, database, or caching mechanism.
+            Storage of <acronym>ACL</acronym> data is therefore left as a task for the developer,
+            since use cases are expected to vary widely for various situations. Because
+            <classname>Zend_Acl</classname> is serializable, <acronym>ACL</acronym> objects may be
+            serialized with <acronym>PHP</acronym>'s <ulink url="http://php.net/serialize">
+                <methodname>serialize()</methodname></ulink> function, and the results may be
+            stored anywhere the developer should desire, such as a file, database, or caching
+            mechanism.
         </para>
 
     </sect2>

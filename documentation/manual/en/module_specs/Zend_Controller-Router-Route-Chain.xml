@@ -22,7 +22,7 @@
     </note>
 
     <para>
-        When chaining programatically, there are two ways to archive this. The
+        When chaining programatically, there are two ways to achieve this. The
         first one is to create a new
         <classname>Zend_Controller_Router_Route_Chain</classname> instance and then
         calling the <code>chain</code> method multiple times with all routes

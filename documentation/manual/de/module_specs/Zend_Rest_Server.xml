@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15713 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.rest.server">
     <title>Zend_Rest_Server</title>
@@ -93,7 +93,7 @@ $server->handle();
 
         <example id="zend.rest.server.customstatus.example-1">
             <title>Einen eigenen Status zurückgeben</title>
-            <programlisting><![CDATA[
+            <programlisting language="php"><![CDATA[
 /**
  * Sag Hallo
  *
@@ -124,7 +124,7 @@ $server->handle();
         <example id="zend.rest.server.customxml.example-1">
             <title>Eigenes XML zurückgeben</title>
 
-            <programlisting><![CDATA[
+            <programlisting language="php"><![CDATA[
 /**
  * Sag Hallo
  *

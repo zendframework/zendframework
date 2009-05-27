@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15289 -->
+<!-- EN-Revision: 15717 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.core-functionality.application">
     <title>Zend_Application</title>
@@ -28,7 +28,7 @@
             </thead>
             <tbody>
                 <row>
-                    <entry><code>phpSettings</code></entry>
+                    <entry><emphasis>phpSettings</emphasis></entry>
                     <entry><para>
                         Array von <filename>php.ini</filename> Einstellungen die zu verwenden sind.
                         Die Schlüssel sollten die <filename>php.ini</filename> Schlüssel sein.
@@ -36,15 +36,15 @@
                 </row>
 
                 <row>
-                    <entry><code>includePaths</code></entry>
+                    <entry><emphasis>includePaths</emphasis></entry>
                     <entry><para>
-                        Zusätzliche Pfade die dem <code>include_path</code> vorangestellt werden.
-                        Sollte ein Array von Pfaden sein.
+                        Zusätzliche Pfade die dem <emphasis>include_path</emphasis> vorangestellt
+                        werden. Sollte ein Array von Pfaden sein.
                     </para></entry>
                 </row>
 
                 <row>
-                    <entry><code>autoloaderNamespaces</code></entry>
+                    <entry><emphasis>autoloaderNamespaces</emphasis></entry>
                     <entry><para>
                         Array von zusätzlichen Namespaces die bei der
                         <classname>Zend_Loader_Autoloader</classname> Instanz zu registrieren sind.
@@ -52,7 +52,7 @@
                 </row>
 
                 <row>
-                    <entry><code>bootstrap</code></entry>
+                    <entry><emphasis>bootstrap</emphasis></entry>
                     <entry><para>
                         Entweder der String mit dem Pfad zur Bootstrap Klasse, oder ein Array mit
                         Elementen für 'path' und 'class' für den Bootstrap der Anwendung.
@@ -83,11 +83,13 @@
             </thead>
             <tbody>
                 <row>
-                    <entry><code>__construct($environment, $options = null)</code></entry>
+                    <entry>
+                        <methodname>__construct($environment, $options = null)</methodname>
+                    </entry>
                     <entry><code>void</code></entry>
                     <entry><itemizedlist>
                             <listitem><para>
-                                <code>$environment</code>: <emphasis>Benötigt</emphasis>,.
+                                <varname>$environment</varname>: <emphasis>Benötigt</emphasis>,.
                                 String Repräsentation der aktuellen Anwendungsumgebung.
                                 Typischerweise kann ein String "development", "testing", "qa"
                                 oder "production" enthalten, wird aber von den eigenen
@@ -96,14 +98,14 @@
 
                             <listitem>
                             <para>
-                                <code>$options</code>: <emphasis>Optional</emphasis>.
+                                <varname>$options</varname>: <emphasis>Optional</emphasis>.
                                 Das Argument kann einen der folgenden Werte haben:
                             </para>
                             <itemizedlist>
                                 <listitem><para>
                                     <emphasis>String</emphasis>: Pfad zu einer
                                     <classname>Zend_Config</classname> Datei für die eigene
-                                    Anwendung. <code>$environment</code> wird verwendet um zu
+                                    Anwendung. <varname>$environment</varname> wird verwendet um zu
                                     erkennen welche Sektion der Konfiguration geholt werden soll.
                                 </para></listitem>
 
@@ -113,8 +115,8 @@
                                 </para></listitem>
 
                                 <listitem><para>
-                                    <emphasis>Zend_Config</emphasis>: Objekt Instanz der
-                                    Konfiguration.
+                                    <emphasis><classname>Zend_Config</classname></emphasis>: Objekt
+                                    Instanz der Konfiguration.
                                 </para></listitem>
                             </itemizedlist>
                         </listitem>
@@ -124,12 +126,12 @@
                         um den initialen Objektstatus zu setzen. Eine Instanz von
                         <classname>Zend_Loader_Autoloader</classname> wird wärend der Instanziierung
                         registriert. Optionen die an den Konstruktor übergeben werden, werden
-                        an <code>setOptions()</code> weitergeleitet.
+                        an <methodname>setOptions()</methodname> weitergeleitet.
                     </para></entry>
                 </row>
 
                 <row>
-                    <entry><code>getEnvironment()</code></entry>
+                    <entry><methodname>getEnvironment()</methodname></entry>
                     <entry><code>string</code></entry>
                     <entry>N/A</entry>
                     <entry><para>
@@ -138,7 +140,7 @@
                 </row>
 
                 <row>
-                    <entry><code>getAutoloader()</code></entry>
+                    <entry><methodname>getAutoloader()</methodname></entry>
                     <entry><classname>Zend_Loader_Autoloader</classname></entry>
                     <entry>N/A</entry>
                     <entry><para>
@@ -148,11 +150,11 @@
                 </row>
 
                 <row>
-                    <entry><code>setOptions(array $options)</code></entry>
+                    <entry><methodname>setOptions(array $options)</methodname></entry>
                     <entry><classname>Zend_Application</classname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$options</code>: <emphasis>Benötigt</emphasis>.
+                            <varname>$options</varname>: <emphasis>Benötigt</emphasis>.
                             Ein Array von Anweundungsoptionen.
                         </para></listitem>
                     </itemizedlist></entry>
@@ -160,13 +162,14 @@
                         Alle Optionen werden intern gespeichert, und der mehrfache Aufruf der
                         Methode wird Optionen zusammenfügen. Optionen die zu den verschiedenen
                         Setter Methoden passen werden an diese Methoden übergeben. Als Beispiel
-                        wird die Option "phpSettings" dann an <code>setPhpSettings()</code>
-                        übergeben. (Optionsnamen sind abhängig von der Groß-/Kleinschreibung.
+                        wird die Option "phpSettings" dann an
+                        <methodname>setPhpSettings()</methodname> übergeben. (Optionsnamen sind
+                        abhängig von der Groß-/Kleinschreibung.
                     </para></entry>
                 </row>
 
                 <row>
-                    <entry><code>getOptions()</code></entry>
+                    <entry><methodname>getOptions()</methodname></entry>
                     <entry><code>array</code></entry>
                     <entry>N/A</entry>
                     <entry><para>
@@ -178,12 +181,12 @@
                 </row>
 
                 <row>
-                    <entry><code>hasOption($key)</code></entry>
+                    <entry><methodname>hasOption($key)</methodname></entry>
                     <entry><code>boolean</code></entry>
                     <entry>
                     <itemizedlist>
                         <listitem><para>
-                            <code>$key</code>: String des Optionsschlüssels der gesucht wird.
+                            <varname>$key</varname>: String des Optionsschlüssels der gesucht wird.
                         </para></listitem>
                     </itemizedlist>
                     </entry>
@@ -194,11 +197,11 @@
                 </row>
 
                 <row>
-                    <entry><code>getOption($key)</code></entry>
+                    <entry><methodname>getOption($key)</methodname></entry>
                     <entry><code>mixed</code></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$key</code>: String des Optionsschlüssels der gesucht wird.
+                            <varname>$key</varname>: String des Optionsschlüssels der gesucht wird.
                         </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
@@ -208,16 +211,18 @@
                 </row>
 
                 <row>
-                    <entry><code>setPhpSettings(array $settings, $prefix = '')</code></entry>
+                    <entry>
+                        <methodname>setPhpSettings(array $settings, $prefix = '')</methodname>
+                    </entry>
                     <entry><classname>Zend_Application</classname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$settings</code>: <emphasis>Benötigt</emphasis>.
+                            <varname>$settings</varname>: <emphasis>Benötigt</emphasis>.
                             Assoziatives Array von PHP INI Einstellungen.
                         </para></listitem>
 
                         <listitem><para>
-                            <code>$prefix</code>: <emphasis>Optional</emphasis>.
+                            <varname>$prefix</varname>: <emphasis>Optional</emphasis>.
                             String Präfix der Optionsschlüssel vorangestellt werden soll. Wird
                             intern verwendet um das Mapping von verschachtelten Array zu
                             Punkt-getrennten php.ini Schlüssels zu erlauben. Bei normaler
@@ -234,11 +239,13 @@
                 </row>
 
                 <row>
-                    <entry><code>setAutoloaderNamespaces(array $namespaces)</code></entry>
+                    <entry>
+                        <methodname>setAutoloaderNamespaces(array $namespaces)</methodname>
+                    </entry>
                     <entry><classname>Zend_Application</classname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$namespaces</code>: <emphasis>Benötigt</emphasis>.
+                            <varname>$namespaces</varname>: <emphasis>Benötigt</emphasis>.
                             Array von Strings die den Namespace repräsentieren der mit der
                             <classname>Zend_Loader_Autoloader</classname> Instanz registriert wird.
                         </para></listitem>
@@ -250,11 +257,11 @@
                 </row>
 
                 <row>
-                    <entry><code>setBootstrap($path, $class = null)</code></entry>
+                    <entry><methodname>setBootstrap($path, $class = null)</methodname></entry>
                     <entry><classname>Zend_Application</classname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$path</code>: <emphasis>Benötigt</emphasis>.
+                            <varname>$path</varname>: <emphasis>Benötigt</emphasis>.
                             Kann entweder eine Instanz von
                             <classname>Zend_Application_Bootstrap_Bootstrapper</classname>, ein
                             String Pfad zur Bootstrap Klasse, ein assoziatives Array von Klassenname
@@ -263,8 +270,8 @@
                         </para></listitem>
 
                         <listitem><para>
-                            <code>$class</code>: <emphasis>Optional</emphasis>.
-                            Wenn <code>$path</code> ein String ist, kann <code>$class</code>
+                            <varname>$class</varname>: <emphasis>Optional</emphasis>. Wenn
+                            <varname>$path</varname> ein String ist, kann <varname>$class</varname>
                             spezifiziert werden, und sollte ein String des Klassennamens der
                             Klasse sein die in der Datei enthalten ist die den Pfad repräsentiert.
                         </para></listitem>
@@ -272,8 +279,11 @@
                 </row>
 
                 <row>
-                    <entry><code>getBootstrap()</code></entry>
-                    <entry><code>null | Zend_Application_Bootstrap_Bootstrapper</code></entry>
+                    <entry><methodname>getBootstrap()</methodname></entry>
+                    <entry>
+                        <code>null</code> |
+                        <classname>Zend_Application_Bootstrap_Bootstrapper</classname>
+                    </entry>
                     <entry>N/A</entry>
                     <entry><para>
                         Empfängt die registrierte Bootstrap Instanz.
@@ -281,22 +291,22 @@
                 </row>
 
                 <row>
-                    <entry><code>bootstrap()</code></entry>
+                    <entry><methodname>bootstrap()</methodname></entry>
                     <entry><code>void</code></entry>
                     <entry>N/A</entry>
                     <entry><para>
-                        Ruft die <code>bootstrap()</code> Methode des Bootstraps auf um die
-                        Anwendung zu bootstrappen.
+                        Ruft die <methodname>bootstrap()</methodname> Methode des Bootstraps auf um
+                        die Anwendung zu bootstrappen.
                     </para></entry>
                 </row>
 
                 <row>
-                    <entry><code>run()</code></entry>
+                    <entry><methodname>run()</methodname></entry>
                     <entry><code>void</code></entry>
                     <entry>N/A</entry>
                     <entry><para>
-                        Ruf die <code>run()</code> Methode des Bootstraps auf um die Anwendung
-                        auszuführen.
+                        Ruft die <methodname>run()</methodname> Methode des Bootstraps auf um die
+                        Anwendung auszuführen.
                     </para></entry>
                 </row>
             </tbody>

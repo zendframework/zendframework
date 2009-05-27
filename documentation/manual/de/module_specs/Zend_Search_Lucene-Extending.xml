@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15713 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.extending">
     <title>Erweiterbarkeit</title>
@@ -374,7 +374,7 @@ Zend_Search_Lucene_Search_Similarity::setDefault($mySimilarity);
         <classname>Zend_Search_Lucene_Storage_Directory</classname> Methoden:
         </para>
 
-        <programlisting><![CDATA[
+        <programlisting language="php"><![CDATA[
 abstract class Zend_Search_Lucene_Storage_Directory {
 /**
  * Schließt den Speicher
@@ -470,7 +470,7 @@ abstract function getFileObject($filename);
             müssen in der eigenen Implementation überschrieben werden:
         </para>
 
-        <programlisting><![CDATA[
+        <programlisting language="php"><![CDATA[
 class MyFile extends Zend_Search_Lucene_Storage_File {
     /**
      * Setzt den Indikator für die Dateiposition rückt den Dateizeiger

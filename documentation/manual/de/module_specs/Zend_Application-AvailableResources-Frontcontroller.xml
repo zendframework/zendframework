@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15712 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.available-resources.frontcontroller">
     <title>Zend_Application_Resource_Frontcontroller</title>
@@ -14,7 +14,7 @@
     </para>
 
     <para>
-        Sobald Sie initialisiert wurde, fügt die Ressource die <code>frontController</code>
+        Sobald Sie initialisiert wurde, fügt die Ressource die <varname>$frontController</varname>
         Eigenschaft vom Bootstrap in die <classname>Zend_Controller_Front</classname> Instanz hinzu.
     </para>
 
@@ -25,52 +25,56 @@
 
     <itemizedlist>
         <listitem><para>
-            <code>controllerDirectory</code>: Entweder ein Stringwert der ein einzelnes Controller
-            Verzeichnis spezifiziert, oder ein Array von Modul/Controller Verzeichnis Paaren.
+            <emphasis>controllerDirectory</emphasis>: Entweder ein Stringwert der ein einzelnes
+            Controller Verzeichnis spezifiziert, oder ein Array von Modul/Controller Verzeichnis
+            Paaren.
         </para></listitem>
 
         <listitem><para>
-            <code>moduleControllerDirectoryName</code>: Ein Stringwert der auf ein Unterverzeichnis
-            unter einem Modul zeigt, das Controller enthält.
+            <emphasis>moduleControllerDirectoryName</emphasis>: Ein Stringwert der auf ein
+            Unterverzeichnis unter einem Modul zeigt, das Controller enthält.
         </para></listitem>
 
         <listitem><para>
-            <code>moduleDirectory</code>: Verzeichnis in dem Module gefunden werden können.
+            <emphasis>moduleDirectory</emphasis>: Verzeichnis in dem Module gefunden werden können.
         </para></listitem>
 
         <listitem><para>
-            <code>defaultControllerName</code>: Basisname des Standard Controllers (normalerweise
+            <emphasis>defaultControllerName</emphasis>: Basisname des Standard Controllers
+            (normalerweise "index").
+        </para></listitem>
+
+        <listitem><para>
+            <emphasis>defaultAction</emphasis>: Basisname der Standard Aktion (normalerweise
             "index").
         </para></listitem>
 
         <listitem><para>
-            <code>defaultAction</code>: Basisname der Standard Aktion (normalerweise "index").
+            <emphasis>defaultModule</emphasis>: Basisname des Standard Moduls (normalerweise
+            "default").
         </para></listitem>
 
         <listitem><para>
-            <code>defaultModule</code>: Basisname des Standard Moduls (normalerweise "default").
+            <emphasis>baseUrl</emphasis>: Explizite Basis URL zur Anwendung (normalerweise
+            automatisch erkannt).
         </para></listitem>
 
         <listitem><para>
-            <code>baseUrl</code>: Explizite Basis URL zur Anwendung (normalerweise automatisch
-            erkannt).
+            <emphasis>plugins</emphasis>: Array von Front Controller Plugin Klassennamen. Die
+            Ressource wird jede Klasse instanziieren (ohne Contructor Argumente) und die Instanz
+            dann mit dem Front Controller registrieren.
         </para></listitem>
 
         <listitem><para>
-            <code>plugins</code>: Array von Front Controller Plugin Klassennamen. Die Ressource
-            wird jede Klasse instanziieren (ohne Contructor Argumente) und die Instanz dann mit dem
-            Front Controller registrieren.
-        </para></listitem>
-
-        <listitem><para>
-            <code>params</code>: Array von Schlüssel/Wert Paaren die mit dem Front Controller
-            registriert werden sollen.
+            <emphasis>params</emphasis>: Array von Schlüssel/Wert Paaren die mit dem Front
+            Controller registriert werden sollen.
         </para></listitem>
     </itemizedlist>
 
     <para>
         Wenn ein Schlüssel übergeben wird der nicht erkannt wird, wird dieser als Parameter beim
-        Front Controller registriert, indem er an <code>setParam()</code> übergeben wird.
+        Front Controller registriert, indem er an <methodname>setParam()</methodname> übergeben
+        wird.
     </para>
 
     <example id="zend.application.available-resources.frontcontroller.configExample">
@@ -101,7 +105,8 @@ resources.frontController.env = APPLICATION_ENV
 
         <para>
             Sobald die Front Controller Ressource initialisiert wurde, kann die Front Controller
-            Instanz über die <code>frontController</code> Eigenschaft der Bootstraps geholt werden.
+            Instanz über die <varname>$frontController</varname> Eigenschaft der Bootstraps geholt
+            werden.
         </para>
 
         <programlisting language="php"><![CDATA[

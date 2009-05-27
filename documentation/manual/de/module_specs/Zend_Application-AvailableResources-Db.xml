@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15712 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.available-resources.db">
     <title>Zend_Application_Resource_Db</title>
@@ -17,17 +17,17 @@
 
     <itemizedlist>
         <listitem><para>
-            <code>adapter</code>: <classname>Zend_Db</classname> Adaptertyp.
+            <emphasis>adapter</emphasis>: <classname>Zend_Db</classname> Adaptertyp.
         </para></listitem>
 
         <listitem><para>
-            <code>params</code>: Assoziatives Array von Konfigurationsparametern das verwendet wird
-            wenn man die Instanz des Adapter empfängt.
+            <emphasis>params</emphasis>: Assoziatives Array von Konfigurationsparametern das
+            verwendet wird wenn man die Instanz des Adapter empfängt.
         </para></listitem>
 
         <listitem><para>
-            <code>isDefaultTableAdapter</code>: Ob dieser Adapter als Standard-Tabellen Adapter
-            verwendet werden soll oder nicht.
+            <emphasis>isDefaultTableAdapter</emphasis>: Ob dieser Adapter als Standard-Tabellen
+            Adapter verwendet werden soll oder nicht.
         </para></listitem>
     </itemizedlist>
 
@@ -69,7 +69,7 @@ $resource = $bootstrap->getPluginResource('db');
 
         <para>
             Sobald man das Ressource Objekt hat, kann man den DB Adapter erhalten indem die
-            <code>getDbAdapter()</code> Methode verwendet wird:
+            <methodname>getDbAdapter()</methodname> Methode verwendet wird:
         </para>
 
         <programlisting language="php"><![CDATA[

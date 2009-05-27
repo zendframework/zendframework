@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15713 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.auth.adapter.http">
 
@@ -202,7 +202,7 @@
                 kann. Ihre <code>resolve()</code> Methode geht durch die Textdatei, und sucht nach
                 einer Zeile mit einem entsprechenden Benutzernamen und Bereich. Das Format der
                 Textdatei ist ähnlich dem von Apache htpasswd Dateien:
-                <programlisting><![CDATA[
+                <programlisting language="txt"><![CDATA[
 <benutzername>:<bereich>:<zeugnisse>\n
 ]]></programlisting>
                 Jede Zeile besteht aus drei Feldern - Benutzername, Bereich und Zeugnisse - jede

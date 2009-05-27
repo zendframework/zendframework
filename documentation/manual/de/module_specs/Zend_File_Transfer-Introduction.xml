@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15713 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.file.transfer.introduction">
 
@@ -50,7 +50,7 @@
             In unserem Beispiel gibt es nur eine Datei welche wir hochladen wollen.
         </para>
 
-        <programlisting><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <form enctype="multipart/form-data" action="/file/upload" method="POST">
     <input type="hidden" name="MAX_FILE_SIZE" value="100000" />
         Choose a file to upload: <input name="uploadedfile" type="file" />

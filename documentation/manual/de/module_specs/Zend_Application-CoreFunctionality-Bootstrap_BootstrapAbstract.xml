@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15289 -->
+<!-- EN-Revision: 15718 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.core-functionality.bootstrap-bootstrapabstract">
     <title>Zend_Application_Bootstrap_BootstrapAbstract</title>
@@ -26,11 +26,11 @@
             </thead>
             <tbody>
                 <row>
-                    <entry><code>__construct($application)</code></entry>
+                    <entry><methodname>__construct($application)</methodname></entry>
                     <entry><code>void</code></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$application</code>: <emphasis>Benötigt</emphasis>.
+                            <varname>$application</varname>: <emphasis>Benötigt</emphasis>.
                             Akzeptiert entweder ein <classname>Zend_Application</classname> oder ein
                             <classname>Zend_Application_Bootstrap_Bootstrapper</classname> Objekt
                             als sein einziges Argument.
@@ -44,11 +44,11 @@
                 </row>
 
                 <row>
-                    <entry><code>setOptions(array $options)</code></entry>
+                    <entry><methodname>setOptions(array $options)</methodname></entry>
                     <entry><classname>Zend_Application_Bootstrap_Bootstrapper</classname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$options</code>: <emphasis>Benötigt</emphasis>.
+                            <varname>$options</varname>: <emphasis>Benötigt</emphasis>.
                             Array von Optionen die zu setzen sind.
                         </para></listitem>
                     </itemizedlist></entry>
@@ -56,37 +56,38 @@
                     <para>
                         Jede Option die einen passenden Setter hat wird diesen Setter aufrufen;
                         andernfalls wird die Option einfach für ein späteres Empfangen gespeichert.
-                        Wenn die eigene Klasse, als Beispiel, eine <code>setFoo()</code> Methode
-                        definiert, würde die Option 'foo' als Wert an diese Methode übergeben
-                        werden.
+                        Wenn die eigene Klasse, als Beispiel, eine
+                        <methodname>setFoo()</methodname> Methode definiert, würde die Option 'foo'
+                        als Wert an diese Methode übergeben werden.
                     </para>
                     <para>
                         Zwei zusätzliche, spezielle Options Schnüssel können auch verwendet werden.
-                        <code>pluginPaths</code> kann verwendet werden um einen Präfix Pfad zu
-                        Plugin Ressourcen zu spezifizieren; er solte ein Array von
-                        Klassenpräfix/Instanziierungs Options Paaren sein.
-                        <code>resources</code> kann verwendet werden um eine Plugin Ressource zu
-                        spezifizieren die verwendet werden soll, und sollte aus Paaren von
-                        Plugin Ressource/Instanziierungs Optionen bestehen.
+                        <emphasis>pluginPaths</emphasis> kann verwendet werden um einen Präfix Pfad
+                        zu Plugin Ressourcen zu spezifizieren; er solte ein Array von
+                        Klassenpräfix zu Instanziierungs Options Paaren sein.
+                        <emphasis>resources</emphasis> kann verwendet werden um eine Plugin
+                        Ressource zu spezifizieren die verwendet werden soll, und sollte aus Paaren
+                        von Plugin Ressource zu Instanziierungs Optionen bestehen.
                     </para>
                     </entry>
                 </row>
 
                 <row>
-                    <entry><code>getOption()</code></entry>
+                    <entry><methodname>getOption()</methodname></entry>
                     <entry><code>array</code></entry>
                     <entry>N/A</entry>
                     <entry><para>
-                        Gibt alle über <code>setOptions()</code> registrierten Optionen zurück.
+                        Gibt alle über <methodname>setOptions()</methodname> registrierten Optionen
+                        zurück.
                     </para></entry>
                 </row>
 
                 <row>
-                    <entry><code>hasOption($key)</code></entry>
+                    <entry><methodname>hasOption($key)</methodname></entry>
                     <entry><code>boolean</code></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$key</code>: <emphasis>Benötigt</emphasis>.
+                            <varname>$key</varname>: <emphasis>Benötigt</emphasis>.
                             Optionsschlüssel der getestet werden soll.
                         </para></listitem>
                     </itemizedlist></entry>
@@ -94,11 +95,11 @@
                 </row>
 
                 <row>
-                    <entry><code>getOption($key)</code></entry>
+                    <entry><methodname>getOption($key)</methodname></entry>
                     <entry><code>mixed</code></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$key</code>: <emphasis>Benötigt</emphasis>.
+                            <varname>$key</varname>: <emphasis>Benötigt</emphasis>.
                             Optionsschlüssel der empfangen werden soll.
                         </para></listitem>
                     </itemizedlist></entry>
@@ -109,46 +110,48 @@
                 </row>
 
                 <row>
-                    <entry><code>setApplication(Zend_Application |
-                            Zend_Application_Bootstrap_Bootstrapper $application)</code></entry>
+                    <entry>
+                        <methodname>setApplication(Zend_Application |
+                        Zend_Application_Bootstrap_Bootstrapper $application)</methodname>
+                    </entry>
                     <entry>
                         <classname>Zend_Application_Bootstrap_BootstrapAbstract</classname>
                     </entry>
                     <entry><itemizedlist>
                             <listitem><para>
-                                <code>$application</code>: <emphasis>Benötigt</emphasis>.
+                                <varname>$application</varname>: <emphasis>Benötigt</emphasis>.
                             </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
-                        Registriert das Eltern-Anwendungs/Bootstrap Objekt.
+                        Registriert das Eltern-Anwendungs oder Bootstrap Objekt.
                     </para></entry>
                 </row>
 
                 <row>
-                    <entry><code>getApplication()</code></entry>
+                    <entry><methodname>getApplication()</methodname></entry>
                     <entry>
-                        <classname>Zend_Application |
-                        Zend_Application_Bootstrap_Bootstrapper</classname>
+                        <classname>Zend_Application</classname> |
+                        <classname>Zend_Application_Bootstrap_Bootstrapper</classname>
                     </entry>
                     <entry>N/A</entry>
                     <entry><para>
-                        Empfängt das Anwendungs/Bootstrap Objekt das über den Konstruktor übergeben
+                        Empfängt das Anwendungs oder Bootstrap Objekt das über den Konstruktor übergeben
                         wurde.
                     </para></entry>
                 </row>
 
                 <row>
-                    <entry><code>getEnvironment()</code></entry>
+                    <entry><methodname>getEnvironment()</methodname></entry>
                     <entry><code>string</code></entry>
                     <entry>N/A</entry>
                     <entry><para>
-                        Empfängt den Umgebungs String der mit dem Eltern-Anwendungs/Bootstrap
+                        Empfängt den Umgebungs String der mit dem Eltern-Anwendungs oder Bootstrap
                         Objekt registriert wurde.
                     </para></entry>
                 </row>
 
                 <row>
-                    <entry><code>getClassResources()</code></entry>
+                    <entry><methodname>getClassResources()</methodname></entry>
                     <entry><code>array</code></entry>
                     <entry>N/A</entry>
                     <entry><para>
@@ -159,7 +162,7 @@
                 </row>
 
                 <row>
-                    <entry><code>getContainer()</code></entry>
+                    <entry><methodname>getContainer()</methodname></entry>
                     <entry><code>object</code></entry>
                     <entry>N/A</entry>
                     <entry><para>
@@ -171,12 +174,12 @@
                 </row>
 
                 <row>
-                    <entry><code>setContainer($container)</code></entry>
+                    <entry><methodname>setContainer($container)</methodname></entry>
                     <entry><code>Zend_Application_Bootstrap_BootstrapAbstract</code></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$container</code>, <emphasis>Benötigt</emphasis>. Ein Objekt
-                            in dem Ressourcen gespeichert werden.
+                            <varname>$container</varname>, <emphasis>Benötigt</emphasis>. Ein
+                            Objekt in dem Ressourcen gespeichert werden.
                         </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
@@ -187,45 +190,47 @@
                 </row>
 
                 <row>
-                    <entry><code>hasResource($name)</code></entry>
+                    <entry><methodname>hasResource($name)</methodname></entry>
                     <entry><code>boolean</code></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$name</code>, <emphasis>Benötigt</emphasis>. Name der Ressource
-                            die zu prüfen ist.
+                            <varname>$name</varname>, <emphasis>Benötigt</emphasis>. Name der
+                            Ressource die zu prüfen ist.
                         </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
                         Wenn eine Ressourcen-Methode oder ein Plugin einen Wert zurückgibt, wird
                         dieser im Ressourcen Container gespeichert (siehe
-                        <code>getContainer()</code> und <code>setContainer()</code>). Diese
-                        Methode zeigt ob ein Wert für dies Ressouce gesetzt wurde oder nicht.
+                        <methodname>getContainer()</methodname> und
+                        <methodname>setContainer()</methodname>). Diese Methode zeigt ob ein Wert
+                        für dies Ressouce gesetzt wurde oder nicht.
                     </para></entry>
                 </row>
 
                 <row>
-                    <entry><code>getResource($name)</code></entry>
+                    <entry><methodname>getResource($name)</methodname></entry>
                     <entry><code>mixed</code></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$name</code>, <emphasis>Benötigt</emphasis>.
+                            <varname>$name</varname>, <emphasis>Benötigt</emphasis>.
                             Name der Ressource die geholt werden soll.
                         </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
                         Wenn eine Ressourcen-Methode oder ein Plugin einen Wert zurückgibt, wird
                         dieser im Ressourcen Container gespeichert (siehe
-                        <code>getContainer()</code> und <code>setContainer()</code>). Diese
-                        Methode gibt die Ressource vom Container zurück.
+                        <methodname>getContainer()</methodname> und
+                        <methodname>setContainer()</methodname>). Diese Methode gibt die Ressource
+                        vom Container zurück.
                     </para></entry>
                 </row>
 
                 <row>
-                    <entry><code>bootstrap($resource = null)</code></entry>
+                    <entry><methodname>bootstrap($resource = null)</methodname></entry>
                     <entry><code>mixed</code></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$resource</code>: <emphasis>Optional</emphasis>.
+                            <varname>$resource</varname>: <emphasis>Optional</emphasis>.
                         </para></listitem>
                     </itemizedlist></entry>
                     <entry>
@@ -247,7 +252,7 @@
                 </row>
 
                 <row>
-                    <entry><code>run()</code></entry>
+                    <entry><methodname>run()</methodname></entry>
                     <entry><code>void</code></entry>
                     <entry>N/A</entry>
                     <entry><para>
@@ -256,23 +261,23 @@
                 </row>
 
                 <row>
-                    <entry><code>__call($method, $args)</code></entry>
+                    <entry><methodname>__call($method, $args)</methodname></entry>
                     <entry><code>mixed</code></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$method</code>: <emphasis>Benötigt</emphasis>.
+                            <varname>$method</varname>: <emphasis>Benötigt</emphasis>.
                             Der Methodenname der ausgerufen werden soll.
                         </para></listitem>
 
                         <listitem><para>
-                            <code>$args</code>: <emphasis>Benötigt</emphasis>.
+                            <varname>$args</varname>: <emphasis>Benötigt</emphasis>.
                             Array von Argumenten die im Methodenausruf verwendet werden sollen.
                         </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
                         Bietet einen einfachen Weg um individuelle Ressourcen zu Bootstrappen indem
                         es erlaubt 'bootstrap&lt;ResourceName&gt;()' aufzurufen, anstatt das die
-                        <code>bootstrap()</code> Methode verwendet wird.
+                        <methodname>bootstrap()</methodname> Methode verwendet wird.
                     </para></entry>
                 </row>
             </tbody>

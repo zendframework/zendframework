@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15713 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.modular">
     <title>Eine konventionelle modulare Verzeichnis Struktur verwenden</title>
@@ -12,7 +12,7 @@
             wiederzuverwenden. Um so eine Verzeichnisstruktur zu zeigen:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="txt"><![CDATA[
 docroot/
     index.php
 application/

@@ -55,13 +55,6 @@ class Zend_Service_Amazon_S3_OnlineTest extends PHPUnit_Framework_TestCase
     protected $_amazon;
 
     /**
-     * Reference to Amazon query API object
-     *
-     * @var Zend_Service_Amazon_Query
-     */
-    protected $_query;
-
-    /**
      * Socket based HTTP client adapter
      *
      * @var Zend_Http_Client_Adapter_Socket

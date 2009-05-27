@@ -34,7 +34,7 @@
         <title>Sample DB adapter resource configuration</title>
 
         <para>
-            Below is an example INI configuration that can be used to initialize
+            Below is an example <acronym>INI</acronym> configuration that can be used to initialize
             the DB resource.
         </para>
 

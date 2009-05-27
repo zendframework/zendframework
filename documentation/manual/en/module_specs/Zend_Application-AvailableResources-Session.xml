@@ -37,7 +37,7 @@
 
     <para>
         Any other option keys passed will be passed to
-        <classname>Zend_Session::setOptions()</classname> to configure
+        <methodname>Zend_Session::setOptions()</methodname> to configure
         <classname>Zend_Session</classname>.
     </para>
 
@@ -45,7 +45,7 @@
         <title>Sample Session resource configuration</title>
 
         <para>
-            Below is a sample INI snippet showing how to configure the session
+            Below is a sample <acronym>INI</acronym> snippet showing how to configure the session
             resource. It sets several <classname>Zend_Session</classname> options, as well
             as configures a <classname>Zend_Session_SaveHandler_DbTable</classname> instance.
         </para>

@@ -57,8 +57,8 @@
         </para></listitem>
 
         <listitem><para>
-            <emphasis>baseUrl</emphasis>: explicit base URL to the application (normally
-            auto-detected).
+            <emphasis>baseUrl</emphasis>: explicit base <acronym>URL</acronym> to the application
+            (normally auto-detected).
         </para></listitem>
 
         <listitem><para>
@@ -82,7 +82,7 @@
         <title>Sample Front Controller resource configuration</title>
 
         <para>
-            Below is a sample INI snippet showing how to configure the front
+            Below is a sample <acronym>INI</acronym> snippet showing how to configure the front
             controller resource.
         </para>
 

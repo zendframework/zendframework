@@ -40,8 +40,8 @@
 
         <para>
             For example, let's assume that your application has a "news" module.
-            The following are INI and XML examples showing configuration of
-            resources in that module.
+            The following are <acronym>INI</acronym> and <acronym>XML</acronym> examples showing
+            configuration of resources in that module.
         </para>
 
         <programlisting language="ini"><![CDATA[

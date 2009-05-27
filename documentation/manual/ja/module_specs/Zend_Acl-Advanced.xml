@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15783 -->
 <sect1 id="zend.acl.advanced">
 
     <title>高度な使用法</title>
@@ -11,18 +11,18 @@
 
         <para>
         <classname>Zend_Acl</classname> は、特定のバックエンド技術 (たとえばデータベースやキャッシュサーバを使用した
-        ACL データの保存など) に依存しないように作られています。
-        すべて PHP のみで実装されているので、<classname>Zend_Acl</classname> 用の管理ツールを独自に作成して
+        <acronym>ACL</acronym> データの保存など) に依存しないように作られています。
+        すべて <acronym>PHP</acronym> のみで実装されているので、<classname>Zend_Acl</classname> 用の管理ツールを独自に作成して
         管理の手間を省くことも可能になっています。
-        ACL の管理を対話的に行いたいという場面も数多く発生するでしょう。そのため
+        <acronym>ACL</acronym> の管理を対話的に行いたいという場面も数多く発生するでしょう。そのため
         <classname>Zend_Acl</classname> では、アプリケーションのアクセス制御を設定したり、
         それに対して問い合わせたりするためのメソッドを用意しています。
         </para>
 
         <para>
         データの使用法にはさまざまなものが考えられるので、
-        ACL データの保存は、場面に応じて開発者側で考えることになります。
-        <classname>Zend_Acl</classname> はシリアライズ可能なので、ACL オブジェクトを PHP の
+        <acronym>ACL</acronym> データの保存は、場面に応じて開発者側で考えることになります。
+        <classname>Zend_Acl</classname> はシリアライズ可能なので、<acronym>ACL</acronym> オブジェクトを <acronym>PHP</acronym> の
         <ulink url="http://php.net/serialize"><methodname>serialize()</methodname></ulink>
         関数でシリアライズすることができます。シリアライズした結果を、
         ファイルやデータベースあるいはキャッシュなどのお好みの場所に保存することができます。

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15719 -->
+<!-- EN-Revision: 15783 -->
 <sect1 id="zend.captcha.adapters">
     <title>CAPTCHA アダプタ</title>
 
@@ -33,48 +33,48 @@
 
         <itemizedlist>
             <listitem><para>
-                <code>setWordLen($length)</code> と <code>getWordLen()</code>
+                <methodname>setWordLen($length)</methodname> と <methodname>getWordLen()</methodname>
                 で、生成される "単語" の文字数を設定したり現在の値を取得したりします。
             </para></listitem>
 
             <listitem><para>
-                <code>setTimeout($ttl)</code> と <code>getTimeout()</code>
+                <methodname>setTimeout($ttl)</methodname> と <methodname>getTimeout()</methodname>
                 で、セッショントークンの有効期限を設定したり現在の値を取得したりします。
                 <varname>$ttl</varname> は秒数で指定します。
             </para></listitem>
 
             <listitem><para>
-                <code>setSessionClass($class)</code> と
-                <code>getSessionClass()</code> で、CAPTCHA トークンの永続化に使用する
+                <methodname>setSessionClass($class)</methodname> と
+                <methodname>getSessionClass()</methodname> で、CAPTCHA トークンの永続化に使用する
                 <classname>Zend_Session_Namespace</classname> の実装を設定したり
                 現在の値を取得したりします。
             </para></listitem>
 
             <listitem><para>
-                <code>getId()</code> で、現在のトークン識別子を取得します。
+                <methodname>getId()</methodname> で、現在のトークン識別子を取得します。
             </para></listitem>
 
             <listitem><para>
-                <code>getWord()</code> で、CAPTCHA
+                <methodname>getWord()</methodname> で、CAPTCHA
                 に使用するために生成した単語を取得します。
                 まだ生成されていない場合は、まず生成してからそれを返します。
             </para></listitem>
 
             <listitem><para>
-                <code>setSession(Zend_Session_Namespace $session)</code>
+                <methodname>setSession(Zend_Session_Namespace $session)</methodname>
                 で、CAPTCHA トークンの永続化に使用するセッションオブジェクトを設定します。
-                <code>getSession()</code> で、現在のセッションオブジェクトを取得します。
+                <methodname>getSession()</methodname> で、現在のセッションオブジェクトを取得します。
             </para></listitem>
         </itemizedlist>
 
         <para>
             すべての Word CAPTCHA は、コンストラクタにオプションの配列を渡すことができます。
-            別の方法として、その配列を <code>setOptions()</code>
+            別の方法として、その配列を <methodname>setOptions()</methodname>
             で渡す (あるいは <classname>Zend_Config</classname> オブジェクトを
-            <code>setConfig()</code> で渡す) こともできます。
+            <methodname>setConfig()</methodname> で渡す) こともできます。
             デフォルトで、
-            <code>wordLen</code>、<code>timeout</code> および
-            <code>sessionClass</code> のキーをすべて使用します。
+            <emphasis>wordLen</emphasis>、<emphasis>timeout</emphasis> および
+            <emphasis>sessionClass</emphasis> のキーをすべて使用します。
             各具象実装では、それ以外のキーを使用したり
             違う方法でオプションを使用したりしているかもしれません。
         </para>
@@ -139,8 +139,8 @@
 
         <itemizedlist>
             <listitem><para>
-                <code>setExpiration($expiration)</code> と
-                <code>getExpiration()</code> で、
+                <methodname>setExpiration($expiration)</methodname> と
+                <methodname>getExpiration()</methodname> で、
                 CAPTCHA 画像をファイルシステム上に残す期間を設定します。
                 通常、これはセッションの有効期間より長くします。
                 CAPTCHA オブジェクトが起動されるたびにガベージコレクションが働き、
@@ -149,14 +149,14 @@
             </para></listitem>
 
             <listitem><para>
-                <code>setGcFreq($gcFreq)</code> と <code>getGcFreg()</code>
+                <methodname>setGcFreq($gcFreq)</methodname> と <methodname>getGcFreg()</methodname>
                 で、ガベージコレクションが働く頻度を設定します。ガベージコレクションは、
-                <code>1/$gcFreq</code> 回のコールごとに実行されます。
+                <emphasis>1/$gcFreq</emphasis> 回のコールごとに実行されます。
                 デフォルトは 100 です。
             </para></listitem>
 
             <listitem><para>
-                <code>setFont($font)</code> と <code>getFont()</code>
+                <methodname>setFont($font)</methodname> と <methodname>getFont()</methodname>
                 で、使用するフォントを指定します。<varname>$font</varname> には、
                 使用するフォントのパスをフルパス形式で指定する必要があります。
                 この値を設定しなければ、CAPTCHA の生成時に例外がスローされます。
@@ -164,38 +164,38 @@
             </para></listitem>
 
             <listitem><para>
-                <code>setFontSize($fsize)</code> と <code>getFontSize()</code>
+                <methodname>setFontSize($fsize)</methodname> と <methodname>getFontSize()</methodname>
                 で、CAPTCHA を生成する際に使用するフォントのサイズをピクセル単位で設定します。
                 デフォルトは 24px です。
             </para></listitem>
 
             <listitem><para>
-                <code>setHeight($height)</code> と <code>getHeight()</code>
+                <methodname>setHeight($height)</methodname> と <methodname>getHeight()</methodname>
                 で、生成される CAPTCHA 画像の高さをピクセル単位で指定します。
                 デフォルトは 50px です。
             </para></listitem>
 
             <listitem><para>
-                <code>setWidth($width)</code> と <code>getWidth()</code>
+                <methodname>setWidth($width)</methodname> と <methodname>getWidth()</methodname>
                 で、生成される CAPTCHA 画像の幅をピクセル単位で指定します。
                 デフォルトは 200px です。
             </para></listitem>
 
             <listitem><para>
-                <code>setImgDir($imgDir)</code> と <code>getImgDir()</code>
+                <methodname>setImgDir($imgDir)</methodname> と <methodname>getImgDir()</methodname>
                 で、CAPTCHA 画像を保存するディレクトリを指定します。
                 デフォルトは "./images/captcha/"
                 で、これは起動スクリプトからの相対パスとなります。
             </para></listitem>
 
             <listitem><para>
-                <code>setImgUrl($imgUrl)</code> と <code>getImgUrl()</code>
+                <methodname>setImgUrl($imgUrl)</methodname> と <methodname>getImgUrl()</methodname>
                 で、HTML マークアップ時に使用する CAPTCHA 画像への相対パスを指定します。
                 デフォルトは "/images/captcha/" です。
             </para></listitem>
 
             <listitem><para>
-                <code>setSuffix($suffix)</code> と <code>getSuffix()</code>
+                <methodname>setSuffix($suffix)</methodname> と <methodname>getSuffix()</methodname>
                 で、CAPTCHA 画像ファイル名の拡張子を指定します。デフォルトは
                 ".png" です。注意: これを変更したからといって、
                 生成される画像の形式が変わるわけではありません。
@@ -221,22 +221,22 @@
 
         <itemizedlist>
             <listitem><para>
-                <code>setPrivKey($key)</code> と <code>getPrivKey()</code>
+                <methodname>setPrivKey($key)</methodname> と <methodname>getPrivKey()</methodname>
                 で、ReCaptcha サービスで使用する秘密鍵を指定します。
                 これはオブジェクトの作成時に指定する必要がありますが、
                 その後いつでも上書きすることができます。
             </para></listitem>
 
             <listitem><para>
-                <code>setPubKey($key)</code> と <code>getPubKey()</code>
+                <methodname>setPubKey($key)</methodname> と <methodname>getPubKey()</methodname>
                 で、ReCaptcha サービスで使用する公開鍵を指定します。
                 これはオブジェクトの作成時に指定する必要がありますが、
                 その後いつでも上書きすることができます。
             </para></listitem>
 
             <listitem><para>
-                <code>setService(Zend_Service_ReCaptcha $service)</code> と
-                <code>getService()</code> で、
+                <methodname>setService(Zend_Service_ReCaptcha $service)</methodname> と
+                <methodname>getService()</methodname> で、
                 ReCaptcha サービスオブジェクトを取得したり取得したりします。
             </para></listitem>
         </itemizedlist>

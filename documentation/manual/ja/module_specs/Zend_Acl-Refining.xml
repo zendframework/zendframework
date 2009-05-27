@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15783 -->
 <sect1 id="zend.acl.refining">
 
     <title>アクセス制御の洗練</title>
@@ -10,16 +10,16 @@
         <title>的確なアクセス制御</title>
 
         <para>
-        <link linkend="zend.acl.introduction">先ほどの節</link>で定義した基本的な ACL
-        では、さまざまな規則を ACL 全体 (すべてのリソース) に対して適用しました。
+        <link linkend="zend.acl.introduction">先ほどの節</link>で定義した基本的な <acronym>ACL</acronym>
+        では、さまざまな規則を <acronym>ACL</acronym> 全体 (すべてのリソース) に対して適用しました。
         しかし実際には、アクセス制御にはさまざまな例外がつきものですし、
         もっと複雑なものになるでしょう。
         <classname>Zend_Acl</classname> では、このような目的のためにも直感的で柔軟な方法で対応できます。
         </para>
 
         <para>
-        例にあげた CMS では大半のユーザを 'staff' グループでまとめて管理していました。
-        ここでは新しく 'marketing' グループを作成し、CMS
+        例にあげた <acronym>CMS</acronym> では大半のユーザを 'staff' グループでまとめて管理していました。
+        ここでは新しく 'marketing' グループを作成し、<acronym>CMS</acronym>
         のニュースレターや最新ニュースへのアクセスを許可させる必要があるでしょう。
         このグループには、ニュースレターや最新ニュースの公開や保存権限があれば十分でしょう。
         </para>
@@ -65,7 +65,7 @@ $acl->add(new Zend_Acl_Resource('announcement'), 'news');
 ]]></programlisting>
 
         <para>
-        そして、次のような特別な規則を、ACL の該当範囲に適用します。
+        そして、次のような特別な規則を、<acronym>ACL</acronym> の該当範囲に適用します。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -82,7 +82,7 @@ $acl->deny(null, 'announcement', 'archive');
 ]]></programlisting>
 
         <para>
-        これで、最新の変更内容を反映した ACL への問い合わせが行えるようになります。
+        これで、最新の変更内容を反映した <acronym>ACL</acronym> への問い合わせが行えるようになります。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -126,7 +126,7 @@ echo $acl->isAllowed('administrator', 'announcement', 'archive') ?
         <title>アクセス制御の削除</title>
 
         <para>
-        ACL からひとつあるいは複数のアクセス規則を削除するには、
+        <acronym>ACL</acronym> からひとつあるいは複数のアクセス規則を削除するには、
         <methodname>removeAllow()</methodname> メソッドあるいは <methodname>removeDeny()</methodname>
         メソッドを使用します。<methodname>allow()</methodname> および <methodname>deny()</methodname>
         と同様、<constant>NULL</constant> 値を指定すると

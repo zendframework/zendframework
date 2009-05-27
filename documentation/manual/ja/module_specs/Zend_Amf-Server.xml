@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15728 -->
+<!-- EN-Revision: 15783 -->
 <sect1 id="zend.amf.server">
     <title>Zend_Amf_Server</title>
 
@@ -57,7 +57,7 @@ echo $response;
         <classname>Zend Amf Server</classname> は、
         指定したディレクトリパスから動的にサービスに読み込ませることもできます。
         好きなだけのディレクトリをサーバに指定することが可能です。
-        サーバに後から追加したディレクトリから順に (<emphasis>LIFO</emphasis>: 後入れ先出し)
+        サーバに後から追加したディレクトリから順に (<acronym>LIFO</acronym>: 後入れ先出し)
         検索を行い、クラスにマッチするディレクトリを探します。
         ディレクトリの追加は <methodname>addDirectory()</methodname> メソッドで行います。
         </para>
@@ -70,7 +70,7 @@ $server->addDirectory(dirname(__FILE__) .'/../package/');
         <para>
         リモートサービスをコールする際には、アンダースコア ("_") およびドット
         (".") をディレクトリ区切り文字として使用します。
-        アンダースコアを使用すると、<emphasis>PEAR</emphasis> や
+        アンダースコアを使用すると、<acronym>PEAR</acronym> や
         Zend Framework のクラス命名規約に従った形式となります。
         つまり、サービス <classname>com_Foo_Bar</classname> をコールした場合は、
         インクルードされたパスのどこかにある
@@ -231,9 +231,9 @@ class World
         </para>
 
         <para>
-            Flex の <emphasis>MXML</emphasis> ファイルで、
+            Flex の <acronym>MXML</acronym> ファイルで、
             RemoteObject をサービスにバインドしなければなりません。
-            <emphasis>MXML</emphasis> で次のように記述します。
+            <acronym>MXML</acronym> で次のように記述します。
         </para>
 
         <programlisting language="xml"><![CDATA[
@@ -354,7 +354,7 @@ echo $response;
         <title>型付きオブジェクト</title>
 
         <para>
-            <emphasis>SOAP</emphasis> と同様、
+            <acronym>SOAP</acronym> と同様、
             AMF でもクライアントとサーバの間でオブジェクトをやりとりすることができます。
             これにより、クライアントとサーバの間での柔軟性と一貫性を確保することができます。
         </para>

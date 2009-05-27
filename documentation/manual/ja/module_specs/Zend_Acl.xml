@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15680 -->
+<!-- EN-Revision: 15783 -->
 <sect1 id="zend.acl.introduction">
     <title>導入</title>
 
     <para>
-        <classname>Zend_Acl</classname> は、軽量で柔軟なアクセス制御リスト (ACL)
+        <classname>Zend_Acl</classname> は、軽量で柔軟なアクセス制御リスト (<acronym>ACL</acronym>)
         機能と権限管理機能を提供します。アプリケーションでは一般に、
         保護されたオブジェクトへのアクセスを制御するためにこれらの機能を使用します。
     </para>
@@ -37,7 +37,7 @@
     </para>
 
     <para>
-        アクセス制御リスト (ACL) での設定によって、アプリケーションは
+        アクセス制御リスト (<acronym>ACL</acronym>) での設定によって、アプリケーションは
         要求してきたオブジェクト (ロール) が制限されたオブジェクト (リソース)
         へのアクセスを認められているかどうかを制御します。
     </para>
@@ -173,12 +173,12 @@ echo $acl->isAllowed('someUser', 'someResource') ? 'allowed' : 'denied';
         <title>アクセス制御リストの作成</title>
 
         <para>
-            アクセス制御リスト (ACL) を使用して、物理的あるいは仮想的なオブジェクトの組み合わせを
+            アクセス制御リスト (<acronym>ACL</acronym>) を使用して、物理的あるいは仮想的なオブジェクトの組み合わせを
             お望みどおりに表現することができます。しかしここでは、説明用として、
-            基本的なコンテンツ管理システム (CMS) の ACL を考えます。
+            基本的なコンテンツ管理システム (<acronym>CMS</acronym>) の <acronym>ACL</acronym> を考えます。
             これは、さまざまな領域で複数階層のグループを管理するものです。
-            新しい ACL オブジェクトを作成するには、何もパラメータを指定せずに
-            ACL のインスタンスを作成します。
+            新しい <acronym>ACL</acronym> オブジェクトを作成するには、何もパラメータを指定せずに
+            <acronym>ACL</acronym> のインスタンスを作成します。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -200,7 +200,7 @@ $acl = new Zend_Acl();
             コンテンツ管理システムでは、ほとんどすべての場面で権限階層の管理が必要となります。
             これにより、ユーザの編集権限を決定します。たとえば 'Guest'
             グループに対してはデモ用に限定したアクセス権限のみを許可し、
-            'Staff' グループは通常の操作をする大半の CMS ユーザ用に作成し、
+            'Staff' グループは通常の操作をする大半の <acronym>CMS</acronym> ユーザ用に作成し、
             'Editor' グループにはコンテンツの公開やレビュー、保存や削除の権限を与え、
             最後に 'Administrator' は、その他のすべてのグループの権限に加えて
             機密情報の管理やユーザ管理、バックエンドの設定データ、
@@ -281,7 +281,7 @@ $acl->addRole(new Zend_Acl_Role('administrator'));
         <title>アクセス制御の定義</title>
 
         <para>
-            ACL に適切なロールが含まれた状態になりました。これで、リソースに対して
+            <acronym>ACL</acronym> に適切なロールが含まれた状態になりました。これで、リソースに対して
             ロールがどのようにアクセスするのかという規則を定義できる状態になりました。
             この例では特定のリソースを定義していないことにお気づきかもしれません。
             この場合、規則はすべてのリソースに対して適用されます。
@@ -341,7 +341,7 @@ $acl->allow('administrator');
         <title>ACL への問い合わせ</title>
 
         <para>
-            これで、柔軟な ACL が作成できました。これにより、
+            これで、柔軟な <acronym>ACL</acronym> が作成できました。これにより、
             ウェブアプリケーションの使用者が、
             ある機能を使用するために必要な権限を持っているかを調べられるようになりました。
             問い合わせを行うのは簡単で、単に <methodname>isAllowed()</methodname>

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 /**
  * Zend Framework
@@ -290,11 +290,11 @@ class Zend_Service_Amazon_S3_OnlineTest extends PHPUnit_Framework_TestCase
         $this->_amazon->putFile($filedir."testdata.html", $this->_bucket."/zftestfile2.html", 
             array(Zend_Service_Amazon_S3::S3_ACL_HEADER => Zend_Service_Amazon_S3::S3_ACL_PUBLIC_READ));
             
-        $url = Zend_Service_Amazon_S3::S3_ENDPOINT."/".$this->_bucket."/zftestfile.html";
+        $url = 'http://' . Zend_Service_Amazon_S3::S3_ENDPOINT."/".$this->_bucket."/zftestfile.html";
         $data = @file_get_contents($url);
         $this->assertFalse($data);
 
-        $url = Zend_Service_Amazon_S3::S3_ENDPOINT."/".$this->_bucket."/zftestfile2.html";
+        $url = 'http://' . Zend_Service_Amazon_S3::S3_ENDPOINT."/".$this->_bucket."/zftestfile2.html";
         $data = @file_get_contents($url);
         $this->assertEquals(file_get_contents($filedir."testdata.html"), $data);
     }

@@ -370,13 +370,13 @@ $db = Zend_Db::factory('Db2', $params);
                 <para>
                     Вы можете задавать эту опцию через константу
                     <code>Zend_Db::AUTO_QUOTE_IDENTIFIERS</code>. Если ее
-                    значение установлено в <code>true</code> (по умолчанию), то
+                    значение установлено в <constant>TRUE</constant> (по умолчанию), то
                     идентификаторы, такие, как имена таблиц, имена столбцов и
                     даже псевдонимы, разграничиваются во всем генерируемом
                     объектом адаптера синтаксисе SQL. Это делает возможным
                     использование идентификаторов, содержащих ключевые слова SQL
                     и специальные символы. Если его значение равно
-                    <code>false</code>, то автоматическое заключение в кавычки
+                    <constant>FALSE</constant>, то автоматическое заключение в кавычки
                     не производится. Если требуется заключение идентификаторов в
                     кавычки, то оно должно производиться самостоятельно с
                     использованием метода <code>quoteIdentifier()</code>.
@@ -1029,7 +1029,7 @@ $id = $db->lastSequenceId('bugs_id_gen');
                 lastInsertId() игнорируются, и возвращается самое последнее
                 значение, сгенерированное для любой таблицы через оператор
                 INSERT в течение данного соединения. Для этих типов СУРБД метод
-                lastSequenceId() всегда будет возвращать <code>null</code>.
+                lastSequenceId() всегда будет возвращать <constant>NULL</constant>.
             </para>
 
             <note>
@@ -1852,7 +1852,7 @@ $result = $db->getConnection()->exec('DROP TABLE bugs');
                         аргументы и всегда возвращает последнее значение,
                         сгенерированное для автоинкрементного ключа. Метод
                         <code>lastSequenceId()</code> возвращает
-                        <code>null</code>.
+                        <constant>NULL</constant>.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -1940,7 +1940,7 @@ $result = $db->getConnection()->exec('DROP TABLE bugs');
                         переданные аргументы и всегда возвращает последнее
                         значение, сгенерированное для автоинкрементного ключа.
                         Метод <code>lastSequenceId()</code> возвращает
-                        <code>null</code>.
+                        <constant>NULL</constant>.
                     </para>
                 </listitem>
                 <listitem>
@@ -1993,7 +1993,7 @@ $result = $db->getConnection()->exec('DROP TABLE bugs');
                         переданные аргументы и всегда возвращает последнее
                         значение, сгенерированное для автоинкрементного ключа.
                         Метод <code>lastSequenceId()</code> возвращает
-                        <code>null</code>.
+                        <constant>NULL</constant>.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -2072,7 +2072,7 @@ $result = $db->getConnection()->exec('DROP TABLE bugs');
                         переданные аргументы и всегда возвращает последнее
                         значение, сгенерированное для автоинкрементного ключа.
                         Метод <code>lastSequenceId()</code> возвращает
-                        <code>null</code>.
+                        <constant>NULL</constant>.
                     </para>
                 </listitem>
                 <listitem>

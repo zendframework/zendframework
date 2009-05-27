@@ -8,7 +8,7 @@
     <para>
         Управление кэшированием в Zend Framework производится через фронтэнды
         (интерфейсные части), записи кэша сохраняются через бэкэнды
-        (адаптеры <code>File</code>, <code>Sqlite</code>, <code>Memcache</code>
+        (адаптеры <emphasis>File</emphasis>, <emphasis>Sqlite</emphasis>, <emphasis>Memcache</emphasis>
         и др.), с использованием гибкой системы идентификаторов и тегов,
         благодаря которым можно потом легко удалять определенные типы записей
         (например: "удалить все записи кэша, помеченные данным тегом").
@@ -17,15 +17,15 @@
         Ядро модуля (<classname>Zend_Cache_Core</classname>) является гибким,
         универсальным и конфигурируемым. Кроме этого, для особых нужд есть
         фронтэнды, расширяющие
-        <classname>Zend_Cache_Core</classname>: <classname>Output</classname>,
-        <classname>File</classname>, <code>Function</code> и <code>Class</code>.
+        <classname>Zend_Cache_Core</classname>: <emphasis>Output</emphasis>,
+        <emphasis>File</emphasis>, <emphasis>Function</emphasis> и <emphasis>Class</emphasis>.
     </para>
     <example id="zend.cache.introduction.example-1">
         <title>Получение фронтэнда с помощью Zend_Cache::factory()</title>
         <para>
-            <code>Zend_Cache::factory()</code> инстанцирует нужные объекты и
+            <methodname>Zend_Cache::factory()</methodname> инстанцирует нужные объекты и
             связывает их. В этом первом примере мы будем использовать
-            фронтэнд <code>Core</code> с бэкэндом <code>File</code>.
+            фронтэнд <emphasis>Core</emphasis> с бэкэндом <emphasis>File</emphasis>.
        </para>
         <programlisting language="php"><![CDATA[
 $frontendOptions = array(
@@ -56,7 +56,7 @@ $cache = Zend_Cache::factory('Core',
     </note>
 
     <example id="zend.cache.introduction.example-2">
-        <title>Кэширование результатов запроса к базе данных</title>
+        <title>Кэширование результатов запросов к базе данных</title>
 
         <para>
             Теперь, имея фронтэнд, мы можем кэшировать любые типы данных,
@@ -96,12 +96,12 @@ print_r($result);
         <para>
             Мы размечаем участки, выходные данные которых хотим поместить в кэш,
             добавлением условной логики, окружая участок методами
-            <code>start()</code> и <code>end()</code>. Этот пример похож на
+            <methodname>start()</methodname> и <methodname>end()</methodname>. Этот пример похож на
             первый и является основной стратегией кэширования.
         </para>
         <para>
             Внутри выводим данные как обычно — весь вывод будет добавлен в кэш,
-            когда будет достигнут метод <code>end()</code>. При следующем
+            когда будет достигнут метод <methodname>end()</methodname>. При следующем
             запуске весь участок кода будет пропущен, вместо этого извлекаются
             данные из кэша (до тех пор, пока записи действительны).
        </para>
@@ -131,7 +131,7 @@ if(!$cache->start('mypage')) {
 echo 'This is never cached ('.time().').';
 ]]></programlisting>
        <para>
-           Обратите внимание, что мы выводим результат <code>time()</code>
+           Обратите внимание, что мы выводим результат <methodname>time()</methodname>
            дважды - это демонстрация на примере динамических данных. Попробуйте
            запустить это и обновить страницу несколько раз, и вы заметите,
            что первое число не изменяется, в то время как второе меняется в
@@ -145,8 +145,8 @@ echo 'This is never cached ('.time().').';
     </example>
     <note><para>
         Когда используете <classname>Zend_Cache</classname>, уделяйте внимание
-        идентификатору кэша (передается методам <code>save()</code> и
-        <code>start()</code>). Он должен быть уникальным для каждого кэшируемого
+        идентификатору кэша (передается методам <methodname>save()</methodname> и
+        <methodname>start()</methodname>). Он должен быть уникальным для каждого кэшируемого
         ресурса, иначе не связанные записи кэша могут затирать друг
         друга, или, что еще хуже, отображаться вместо других.
     </para></note>

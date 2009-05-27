@@ -307,7 +307,7 @@ $response   = $controller->dispatch();
                 для определения запросов AJAX: <code>isXmlHttpRequest()</code>.
                 Этот метод проверяет наличие заголовка HTTP-запроса
                 <code>X-Requested-With</code> со значением 'XMLHttpRequest'.
-                Если он найден, то возвращается <code>true</code>.
+                Если он найден, то возвращается <constant>TRUE</constant>.
             </para>
 
             <para>

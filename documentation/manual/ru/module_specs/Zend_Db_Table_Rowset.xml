@@ -104,7 +104,7 @@ $row    = $rowset->current();
 
         <para>
             Если набор строк содержит нулевое количество строк, то
-            <code>current()</code> вернет значение <code>null</code>.
+            <code>current()</code> вернет значение <constant>NULL</constant>.
         </para>
 
         <example id="zend.db.table.rowset.iterate.example">

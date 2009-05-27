@@ -101,10 +101,10 @@ $defaultSearchField = Zend_Search_Lucene::getDefaultSearchField();
 Zend_Search_Lucene::setDefaultSearchField('contents');]]></programlisting>
 
         <para>
-            Значение <code>null</code> означает, что поиск производится по всем
+            Значение <constant>NULL</constant> означает, что поиск производится по всем
             полям. Это значение настройки по умолчанию.
 <!--
-            <code>null</code> value means, that search is performed through all field. It's a default setting.
+            <constant>NULL</constant> value means, that search is performed through all field. It's a default setting.
 -->
         </para>
         <para>
@@ -152,10 +152,10 @@ Zend_Search_Lucene::setDefaultSearchField('contents');]]></programlisting>
             будет искать в поле 'title' только "Do". Поиск "it" и "right" будет
             производиться в полях, используемых по умолчанию, если установлены
             поля по умолчанию, или по всем полям, если вместо поля по умолчанию
-            установлено <code>null</code>.
+            установлено <constant>NULL</constant>.
 <!--
             Will only find "Do" in the title field. It will find "it" and "right" in the default field,
-            if default field is set, or in tha all indexed fields, if default field is set to <code>null</code>.
+            if default field is set, or in tha all indexed fields, if default field is set to <constant>NULL</constant>.
 -->
         </para>
     </sect2>

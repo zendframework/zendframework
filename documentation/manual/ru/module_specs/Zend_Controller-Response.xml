@@ -160,7 +160,7 @@ $front->dispatch();
                     если заголовки были уже отправлены. Генерация таких
                     исключений может быть отменена посредством установки
                     свойства <code>headersSentThrowsException</code> в
-                    <code>false</code>.
+                    <constant>FALSE</constant>.
                 </para>
             </listitem>
 
@@ -170,7 +170,7 @@ $front->dispatch();
                     используется для установки отдельного заголовка. По
                     умолчанию он не замещает в объекте существующие под тем же
                     именем заголовки. Но установкой
-                    <varname>$replace</varname> в <code>true</code> можно произвести
+                    <varname>$replace</varname> в <constant>TRUE</constant> можно произвести
                     принудительную замену заголовка.
                 </para>
 

@@ -529,7 +529,7 @@ $data = array(
 
             <para>
                 Если защищенная переменная в Zend_Db_Table_Abstract
-                <varname>$_sequence</varname> имеет булево значение <code>true</code>,
+                <varname>$_sequence</varname> имеет булево значение <constant>TRUE</constant>,
                 то класс предполагает, что таблица имеет автоинкрементный
                 столбец.
             </para>
@@ -566,7 +566,7 @@ class Bugs extends Zend_Db_Table_Abstract
                 Если вы используете одну из этих нотаций, то интерпретируйте
                 свой класс Zend_Db_Table как имеющий автоинкрементный столбец,
                 при этом члена <varname>$_sequence</varname> должен иметь значение
-                <code>true</code>.
+                <constant>TRUE</constant>.
             </para>
 
         </sect3>
@@ -637,7 +637,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
             <para>
                 Если вы присвоили <varname>$_sequence</varname> булево значение
-                <code>false</code>, то Zend_Db_Table_Abstract считает, что
+                <constant>FALSE</constant>, то Zend_Db_Table_Abstract считает, что
                 таблица имеет естественный первичный ключ. Вы должны
                 предоставлять значения для столбцов первичного ключа в массиве
                 данных для метода <code>insert()</code>, иначе метод бросает
@@ -1276,7 +1276,7 @@ $row = $table->fetchRow($select);
             Этот метод возвращает объект типа Zend_Db_Table_Row_Abstract. Если
             по заданному вами условию поиска не найдено ни одной строки в
             таблице БД, то <code>fetchRow()</code> вернет значение
-            <code>null</code>.
+            <constant>NULL</constant>.
         </para>
 
     </sect2>
@@ -1423,7 +1423,7 @@ echo "The table name is " . $info['name'] . "\n";
                 </listitem>
             </itemizedlist>
 
-            В обоих случаях определением кэша может быть <code>null</code>
+            В обоих случаях определением кэша может быть <constant>NULL</constant>
             (т.е. не используется кэширование) или экземпляр класса
             <link linkend="zend.cache.frontends.core"><code>Zend_Cache_Core</code></link>.
             Эти методы могут использоваться вместе для того, чтобы
@@ -1522,7 +1522,7 @@ $bugs = new Bugs(array('metadataCache' => $cache));
                 Поскольку информация, возвращаемая методом адаптера
                 describeTable(), является массивом, то убедитесь, что опция
                 <code>automatic_serialization</code> установлена в
-                <code>true</code> для фронтэнда <code>Zend_Cache_Core</code>.
+                <constant>TRUE</constant> для фронтэнда <code>Zend_Cache_Core</code>.
             </para>
 
         </note>

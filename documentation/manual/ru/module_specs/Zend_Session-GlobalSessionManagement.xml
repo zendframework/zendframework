@@ -660,9 +660,9 @@ if (!isset($defaultNamespace->initialized))
             PHP, поэтому ваши сессии с пространствами имен (экземпляры
             <code>Zend_Session_Namespace</code>) остаются доступными для чтения.
             Для выхода из системы установите необязательный параметр в
-            <code>true</code> (по умолчанию он равен <code>true</code>), при
+            <constant>TRUE</constant> (по умолчанию он равен <constant>TRUE</constant>), при
             этом будет удалена кука с идентификатором сессии в агенте
-            пользователя. Установленный в <code>true</code> необязательный
+            пользователя. Установленный в <constant>TRUE</constant> необязательный
             параметр <varname>$readonly</varname> блокирует возможность записи в
             данные сессии (т.е. в $_SESSION) для экземпляров
             Zend_Session_Namespace и методов Zend_Session.
@@ -680,7 +680,7 @@ if (!isset($defaultNamespace->initialized))
             <title>Исключения<!--Throws--></title>
             <para>
                 По умолчанию <varname>$readonly</varname> установлен в
-                <code>true</code> и дальнейшие действия, подразумевающие запись
+                <constant>TRUE</constant> и дальнейшие действия, подразумевающие запись
                 в хранилище данных сессии, вызовут генерацию исключения.
 <!--
                 By default, <varname>$readonly</varname> is enabled and further actions involving writing to the session data

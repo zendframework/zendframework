@@ -71,7 +71,7 @@
     </para>
 
         <para>
-          Функция <code>-&gt;isMultiPart()</code> вернет <code>true</code>, если
+          Функция <code>-&gt;isMultiPart()</code> вернет <constant>TRUE</constant>, если
           была зарегистрирована более чем одна часть в объекте <code>Zend_Mime_Message</code>
           и, следовательно, объект должен сгенерировать сообщение MIME типа multipart.
 <!--

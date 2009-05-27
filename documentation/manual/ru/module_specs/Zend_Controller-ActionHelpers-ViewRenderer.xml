@@ -196,7 +196,7 @@ $this->foo(); // вызывает Foo_View_Helper_Foo::foo()
                     <code>setNeverRender($flag = true)</code> может
                     использоваться для отключения или включения авторендеринга
                     глобально, т.е. для всех контроллеров. Если установлен в
-                    <code>true</code>, то <code>postDispatch()</code> не будет
+                    <constant>TRUE</constant>, то <code>postDispatch()</code> не будет
                     автоматически вызывать <code>render()</code> в текущем
                     контроллере. <code>getNeverRender()</code> возвращает
                     текущее значение.
@@ -207,7 +207,7 @@ $this->foo(); // вызывает Foo_View_Helper_Foo::foo()
                 <para>
                     <code>setNoRender($flag = true)</code> может использоваться
                     для отключения или включения авторендеринга. Если установлен
-                    в <code>true</code>, то <code>postDispatch()</code> не будет
+                    в <constant>TRUE</constant>, то <code>postDispatch()</code> не будет
                     автоматически вызывать <code>render()</code> в текущем
                     контроллере. Эта установка сбрасывается каждый раз во время
                     вызова <code>preDispatch()</code> (т.е. нужно устанавливать

@@ -53,8 +53,8 @@ $db->getProfiler()->setEnabled(true);
 
         <para>
             Аргумент булевого типа включает профилировщик, если имеет значение
-            <code>true</code>, и выключает его, если имеет значение
-            <code>false</code>. По умолчанию адаптер использует класс
+            <constant>TRUE</constant>, и выключает его, если имеет значение
+            <constant>FALSE</constant>. По умолчанию адаптер использует класс
             профилировщика <code>Zend_Db_Profiler</code>.
             <programlisting language="php"><![CDATA[
 $params['profiler'] = true;
@@ -362,7 +362,7 @@ $profiler->setFilterElapsedSecs(null);
 
             <para>
                 Как и в случае <code>setFilterElapsedSecs()</code>, вы можете
-                удалить все фильтры, передав <code>null</code> в
+                удалить все фильтры, передав <constant>NULL</constant> в
                 качестве единственного аргумента.
             </para>
 

@@ -423,8 +423,8 @@ Zend_Controller_Front::run('../application/controllers');
                 <para>
                     <code>returnResponse($flag)</code> используется для того,
                     чтобы указать фронт-контроллеру - возвращать ли ответ
-                    из <code>dispatch()</code> (<code>true</code>), либо ответ
-                    должен быть отправлен автоматически (<code>false</code>). По
+                    из <code>dispatch()</code> (<constant>TRUE</constant>), либо ответ
+                    должен быть отправлен автоматически (<constant>FALSE</constant>). По
                     умолчанию ответ отправляется автоматически
                     (через вызов
                     <code>Zend_Controller_Response_Abstract::sendResponse()</code>);

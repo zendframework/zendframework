@@ -28,17 +28,17 @@
                  </thead>
                  <tbody>
                       <row>
-                          <entry><code>cache_dir</code></entry>
-                          <entry><code>string</code></entry>
-                          <entry><code>'/tmp/'</code></entry>
+                          <entry><emphasis>cache_dir</emphasis></entry>
+                          <entry><type>String</type></entry>
+                          <entry><filename>'/tmp/'</filename></entry>
                           <entry>
                               Директория, в которой хранятся файлы кэша
                           </entry>
                       </row>
                       <row>
-                          <entry><code>file_locking</code></entry>
-                          <entry><code>boolean</code></entry>
-                          <entry><code>true</code></entry>
+                          <entry><emphasis>file_locking</emphasis></entry>
+                          <entry><type>Boolean</type></entry>
+                          <entry><constant>TRUE</constant></entry>
                           <entry>
                             Включает/отключает блокировку файлов. Позволяет
                             избежать искажения данных кэша в плохих условиях, но
@@ -47,9 +47,9 @@
                           </entry>
                       </row>
                       <row>
-                          <entry><code>read_control</code></entry>
-                          <entry><code>boolean</code></entry>
-                          <entry><code>true</code></entry>
+                          <entry><emphasis>read_control</emphasis></entry>
+                          <entry><type>Boolean</type></entry>
+                          <entry><constant>TRUE</constant></entry>
                           <entry>
                             Включает/отключает контроль чтения. Если включен,
                             то в файл кэша добавляется контрольный ключ и этот
@@ -58,9 +58,9 @@
                           </entry>
                       </row>
                       <row>
-                          <entry><code>read_control_type</code></entry>
-                          <entry><code>string</code></entry>
-                          <entry><code>'crc32'</code></entry>
+                          <entry><emphasis>read_control_type</emphasis></entry>
+                          <entry><type>String</type></entry>
+                          <entry>'crc32'</entry>
                           <entry>
                             Тип контроля чтения (только если включен
                             readControl). Возможные значения: 'md5' (лучший, но
@@ -73,35 +73,35 @@
                         </entry>
                       </row>
                       <row>
-                          <entry><code>hashed_directory_level</code></entry>
-                          <entry><code>int</code></entry>
-                          <entry><code>0</code></entry>
+                          <entry><emphasis>hashed_directory_level</emphasis></entry>
+                          <entry><type>Integer</type></entry>
+                          <entry>0</entry>
                           <entry>
                               Уровень структуры хэшированного каталога:
-                             <code>0</code> означает "нет структуры
+                             0 означает "нет структуры
                              хэшированного каталога",
-                             <code>1</code> — "один уровень каталога",
-                             <code>2</code> — "два уровня"... Эта опция ускорит
+                             1 — "один уровень каталога",
+                             2 — "два уровня"... Эта опция ускорит
                              кэширование только если у вас тысячи файлов кэша.
                              Только сравнение может помочь вам выбрать
                              оптимальное для вас значение. Возможно,
-                             <code>1</code> или <code>2</code> будут хорошими
+                             1 или 2 будут хорошими
                              значениями для начала.
                           </entry>
                       </row>
                       <row>
-                          <entry><code>hashed_directory_umask</code></entry>
-                          <entry><code>int</code></entry>
-                          <entry><code>0700</code></entry>
+                          <entry><emphasis>hashed_directory_umask</emphasis></entry>
+                          <entry><type>Integer</type></entry>
+                          <entry>0700</entry>
                           <entry>
                               Маска режима создания файлов для структуры
                               хэшированного каталога.
                         </entry>
                       </row>
                       <row>
-                          <entry><code>file_name_prefix</code></entry>
-                          <entry><code>string</code></entry>
-                          <entry><code>'zend_cache'</code></entry>
+                          <entry><emphasis>file_name_prefix</emphasis></entry>
+                          <entry><type>String</type></entry>
+                          <entry>'zend_cache'</entry>
                           <entry>
                               Префикс для файлов кэша. Будьте осторожны с этой
                               опцией, поскольку слишком общее значение в
@@ -109,6 +109,24 @@
                               может привести к катастрофическим последствиям при
                               очищении кэша.
                         </entry>
+                      </row>
+                      <row>
+                          <entry><emphasis>cache_file_umask</emphasis></entry>
+                          <entry><type>Integer</type></entry>
+                          <entry>0700</entry>
+                          <entry>
+                              umask для файлов кэша
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><emphasis>metatadatas_array_max_size</emphasis></entry>
+                          <entry><type>Integer</type></entry>
+                          <entry>100</entry>
+                          <entry>
+                              Внутренний максимальный размер для массива
+                              метаданных (не изменяйте это значение если только
+                              не знаете, что делаете)
+                          </entry>
                       </row>
                   </tbody>
               </tgroup>
@@ -135,17 +153,17 @@
                  </thead>
                  <tbody>
                       <row>
-                          <entry><code>cache_db_complete_path (обязательный)</code></entry>
-                          <entry><code>string</code></entry>
-                          <entry><code>null</code></entry>
+                          <entry><emphasis>cache_db_complete_path</emphasis> (обязательный)</entry>
+                          <entry><type>String</type></entry>
+                          <entry><constant>NULL</constant></entry>
                           <entry>
                               Полный путь (с именем файла) к базе данных SQLite.
                           </entry>
                       </row>
                       <row>
-                          <entry><code>automatic_vacuum_factor</code></entry>
-                          <entry><code>int</code></entry>
-                          <entry><code>10</code></entry>
+                          <entry><emphasis>automatic_vacuum_factor</emphasis></entry>
+                          <entry><type>Integer</type></entry>
+                          <entry>10</entry>
                           <entry>
                               Отклочение/настройка процесса автоматической
                               чистки. Автоматическая чистка дефрагментирует
@@ -193,13 +211,11 @@
                  </thead>
                  <tbody>
                       <row>
-                          <entry><code>servers</code></entry>
-                          <entry><code>array</code></entry>
+                          <entry><emphasis>servers</emphasis></entry>
+                          <entry><type>Array</type></entry>
                           <entry>
-                            <code>
                               array(array('host' => 'localhost', 'port' => 11211, 'persistent' => true, 'weight' => 1,
                               'timeout' => 5, 'retry_interval' => 15, 'status' => true, 'failure_callback' => '' ))
-                            </code>
                           </entry>
                           <entry>
                               Массив серверов memcached; каждый сервер описан
@@ -216,20 +232,20 @@
                           </entry>
                       </row>
                       <row>
-                          <entry><code>compression</code></entry>
-                          <entry><code>boolean</code></entry>
-                          <entry><code>false</code></entry>
+                          <entry><emphasis>compression</emphasis></entry>
+                          <entry><type>Boolean</type></entry>
+                          <entry><constant>FALSE</constant></entry>
                           <entry>
-                             <code>true</code>, если вы хотите использовать
+                             <constant>TRUE</constant>, если вы хотите использовать
                              компрессию "на лету"
                           </entry>
                       </row>
                       <row>
-                          <entry><code>compatibility</code></entry>
-                          <entry><code>boolean</code></entry>
-                          <entry><code>false</code></entry>
+                          <entry><emphasis>compatibility</emphasis></entry>
+                          <entry><type>Boolean</type></entry>
+                          <entry><constant>FALSE</constant></entry>
                           <entry>
-                             <code>true</code>, если нужно включить режим
+                             <constant>TRUE</constant>, если нужно включить режим
                              совместимости со старыми серверами и расширениями
                              memcache
                           </entry>
@@ -285,17 +301,17 @@
                  </thead>
                  <tbody>
                       <row>
-                          <entry><code>user</code></entry>
-                          <entry><code>string</code></entry>
-                          <entry><code>null</code></entry>
+                          <entry><emphasis>user</emphasis></entry>
+                          <entry><type>String</type></entry>
+                          <entry><constant>NULL</constant></entry>
                           <entry>
                               xcache.admin.user, необходима для метода clean()
                           </entry>
                       </row>
                       <row>
-                          <entry><code>password</code></entry>
-                          <entry><code>string</code></entry>
-                          <entry><code>null</code></entry>
+                          <entry><emphasis>password</emphasis></entry>
+                          <entry><type>String</type></entry>
+                          <entry><constant>NULL</constant></entry>
                           <entry>
                               xcache.admin.pass - пароль в незашифрованном виде,
                               необходим для метода clean()
@@ -316,12 +332,12 @@
         </para>
         <para>
             Этот бэкэнд поддерживает теги, но не поддерживает режим очищения
-            <code>CLEANING_MODE_NOT_MATCHING_TAG</code>.
+            <constant>CLEANING_MODE_NOT_MATCHING_TAG</constant>.
         </para>
         <para>
             Указывайте этот бэкэнд, используя разделитель слов '-', '.', ' ',
             или '_' между словами 'Zend' и 'Platform', когда используете метод
-            <code>Zend_Cache::factory()</code>:
+            <methodname>Zend_Cache::factory()</methodname>:
         </para>
         <programlisting language="php"><![CDATA[
 $cache = Zend_Cache::factory('Core', 'Zend Platform');
@@ -359,41 +375,41 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
                  </thead>
                  <tbody>
                       <row>
-                          <entry><code>slow_backend</code></entry>
-                          <entry><code>string</code></entry>
-                          <entry><code>File</code></entry>
+                          <entry><emphasis>slow_backend</emphasis></entry>
+                          <entry><type>String</type></entry>
+                          <entry>File</entry>
                           <entry>
                               Имя "медленного" бэкэнда
                           </entry>
                       </row>
                       <row>
-                          <entry><code>fast_backend</code></entry>
-                          <entry><code>string</code></entry>
-                          <entry><code>Apc</code></entry>
+                          <entry><emphasis>fast_backend</emphasis></entry>
+                          <entry><type>String</type></entry>
+                          <entry>Apc</entry>
                           <entry>
                               Имя "быстрого" бэкэнда
                           </entry>
                       </row>
                       <row>
-                          <entry><code>slow_backend_options</code></entry>
-                          <entry><code>array</code></entry>
-                          <entry><code>array()</code></entry>
+                          <entry><emphasis>slow_backend_options</emphasis></entry>
+                          <entry><type>Array</type></entry>
+                          <entry><methodname>array()</methodname></entry>
                           <entry>
                               Опции для "медленного" бэкэнда
                           </entry>
                       </row>
                       <row>
-                          <entry><code>fast_backend_options</code></entry>
-                          <entry><code>array</code></entry>
-                          <entry><code>array()</code></entry>
+                          <entry><emphasis>fast_backend_options</emphasis></entry>
+                          <entry><type>Array</type></entry>
+                          <entry><methodname>array()</methodname></entry>
                           <entry>
                               Опции для "быстрого" бэкэнда
                           </entry>
                       </row>
                       <row>
-                          <entry><code>slow_backend_custom_naming</code></entry>
-                          <entry><code>boolean</code></entry>
-                          <entry><code>false</code></entry>
+                          <entry><emphasis>slow_backend_custom_naming</emphasis></entry>
+                          <entry><type>Boolean</type></entry>
+                          <entry><constant>FALSE</constant></entry>
                           <entry>
                               Если равна true, то аргумент slow_backend
                               используется как полное имя класса, иначе
@@ -402,9 +418,9 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
                           </entry>
                       </row>
                       <row>
-                          <entry><code>fast_backend_custom_naming</code></entry>
-                          <entry><code>boolean</code></entry>
-                          <entry><code>false</code></entry>
+                          <entry><emphasis>fast_backend_custom_naming</emphasis></entry>
+                          <entry><type>Boolean</type></entry>
+                          <entry><constant>FALSE</constant></entry>
                           <entry>
                               Если равна true, то аргумент fast_backend
                               используется как полное имя класса, иначе
@@ -413,9 +429,9 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
                           </entry>
                       </row>
                       <row>
-                          <entry><code>slow_backend_autoload</code></entry>
-                          <entry><code>boolean</code></entry>
-                          <entry><code>false</code></entry>
+                          <entry><emphasis>slow_backend_autoload</emphasis></entry>
+                          <entry><type>Boolean</type></entry>
+                          <entry><constant>FALSE</constant></entry>
                           <entry>
                               Если равна true, то для медленного бэкэнда не
                               будет производиться включение require_once
@@ -424,9 +440,9 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
                           </entry>
                       </row>
                       <row>
-                          <entry><code>fast_backend_autoload</code></entry>
-                          <entry><code>boolean</code></entry>
-                          <entry><code>false</code></entry>
+                          <entry><emphasis>fast_backend_autoload</emphasis></entry>
+                          <entry><type>Boolean</type></entry>
+                          <entry><constant>FALSE</constant></entry>
                           <entry>
                               Если равна true, то для быстрого бэкэнда не
                               будет производиться включение require_once
@@ -435,9 +451,9 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
                           </entry>
                       </row>
                       <row>
-                          <entry><code>auto_refresh_fast_cache</code></entry>
-                          <entry><code>boolean</code></entry>
-                          <entry><code>true</code></entry>
+                          <entry><emphasis>auto_refresh_fast_cache</emphasis></entry>
+                          <entry><type>Boolean</type></entry>
+                          <entry><constant>TRUE</constant></entry>
                           <entry>
                               Если равна true, то будет производиться
                               автоматическое обновление "быстрого" кэша при
@@ -445,9 +461,9 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
                           </entry>
                       </row>
                       <row>
-                          <entry><code>stats_update_factor</code></entry>
-                          <entry><code>integer</code></entry>
-                          <entry><code>10</code></entry>
+                          <entry><emphasis>stats_update_factor</emphasis></entry>
+                          <entry><type>Integer</type></entry>
+                          <entry>10</entry>
                           <entry>
                               Настройка частоты вычисления
                               процента заполнения быстрого бэкэнда,

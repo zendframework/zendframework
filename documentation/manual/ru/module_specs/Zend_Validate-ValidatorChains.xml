@@ -44,7 +44,7 @@ if ($validatorChain->isValid($username)) {
         прошли проверку каким-либо валидатором в цепочке.
         <classname>Zend_Validate</classname> обеспечивает эту возможность с
         помощью второго параметра метода <code>addValidator()</code>. При
-        установке <varname>$breakChainOnFailure</varname> в <code>true</code>,
+        установке <varname>$breakChainOnFailure</varname> в <constant>TRUE</constant>,
         добавленный валидатор будет прерывать выполнение цепочки валидаций в
         случае неудачи. Это позволяет избежать выполнения других валидаций,
         которые были бы излишними или неподходящими в данной ситуации.

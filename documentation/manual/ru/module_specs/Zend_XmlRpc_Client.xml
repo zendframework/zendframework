@@ -49,7 +49,7 @@ echo $client->call('test.sayHello');
         <para>
             Значение XML-RPC, возвращаемое при вызове удаленного метода, будет
             автоматически приведено к эквивалентному типу в PHP. В примере выше
-            возвращается строка (тип <code>string</code> в PHP), и она уже
+            возвращается строка (тип <type>String</type> в PHP), и она уже
             готова к применению.
         </para>
 
@@ -110,8 +110,8 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
             <para>
                 Параметры могут передаваться методу <code>call()</code> как
                 переменные "родного" для PHP типа, это могут быть типы
-                <code>string</code>, <code>integer</code>, <code>float</code>,
-                <code>boolean</code>, <code>array</code> или
+                <type>String</type>, <code>integer</code>, <code>float</code>,
+                <type>Boolean</type>, <type>Array</type> или
                 <code>object</code>. В этом случае каждый из этих типов будет
                 автоматически определен и преобразован в один из типов XML-RPC
                 согласно следующей таблице:

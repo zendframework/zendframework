@@ -61,13 +61,13 @@ $index->addDocument($doc);]]></programlisting>
             анализаторов, определяемых пользователем. В наследующем классе
             достаточно определить методы <code>reset()</code> и
             <code>nextToken()</code>, которые берут строку из свойства $_input
-            и возвращают лексемы шаг за шагом (<code>null</code> означает конец
+            и возвращают лексемы шаг за шагом (<constant>NULL</constant> означает конец
             потока).
 <!--
             <code>Zend_Search_Lucene_Analysis_Analyzer_Common</code> is designed to be a parent for all user
             defined analyzers. User should only define the <code>reset()</code> and <code>nextToken()</code> methods,
             which take string from $_input member and returns tokens step by step
-            (<code>null</code> indicates end of stream).
+            (<constant>NULL</constant> indicates end of stream).
 -->
         </para>
 

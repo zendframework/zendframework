@@ -395,7 +395,7 @@ class FooController extends Zend_Controller_Action
                 </para>
 
                 <para>
-                    Если <varname>$context</varname> имеет значение <code>true</code>,
+                    Если <varname>$context</varname> имеет значение <constant>TRUE</constant>,
                     то все доступные в <code>ContextSwitch</code> контексты
                     помечаются как доступные для действия.
                 </para>
@@ -685,7 +685,7 @@ $contextSwitch->initContext();
                     только с обычным выводом и их использование не имеет смысла
                     для альтернативного контекста. Тем не менее, если вы хотите
                     использовать макеты, то можете изменить это поведение,
-                    передав значение <code>false</code> методу
+                    передав значение <constant>FALSE</constant> методу
                     <code>setAutoDisableLayout()</code>. Вы должны делать это
                     <emphasis>до</emphasis> вызова <code>initContext()</code>.
                 </para>

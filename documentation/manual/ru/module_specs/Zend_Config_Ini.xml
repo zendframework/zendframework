@@ -22,8 +22,8 @@
             Пожалуйста, почитайте документацию, чтобы получить представление об
             особенностях ее поведения, которые распространяются и на
             <classname>Zend_Config_Ini</classname> — например, о том, как обрабатываются
-            специальные значения <code>true</code>, <code>false</code>, <code>yes</code>,
-            <code>no</code> и <code>null</code>.
+            специальные значения <constant>TRUE</constant>, <constant>FALSE</constant>, <code>yes</code>,
+            <code>no</code> и <constant>NULL</constant>.
         </para>
     </note>
         <note>

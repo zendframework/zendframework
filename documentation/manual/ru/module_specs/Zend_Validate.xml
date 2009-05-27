@@ -46,12 +46,12 @@
             <classname>Zend_Validate_Interface</classname>, который определяет два
             метода - <code>isValid()</code> и <code>getMessages()</code>.
             Метод <code>isValid()</code> выполняет валидацию переданного
-            значения, возвращая <code>true</code> тогда и только тогда, когда
+            значения, возвращая <constant>TRUE</constant> тогда и только тогда, когда
             значение прошло проверку по критериям валидации.
         </para>
         
         <para>
-            Если <code>isValid()</code> возвращает <code>false</code>, то
+            Если <code>isValid()</code> возвращает <constant>FALSE</constant>, то
             <code>getMessages()</code> возвращает массив
             сообщений, поясняющих, по каким причинам валидация не была
             пройдена.

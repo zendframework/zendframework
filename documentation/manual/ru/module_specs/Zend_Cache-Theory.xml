@@ -5,24 +5,24 @@
     <para>
         Есть три ключевых понятия в <classname>Zend_Cache</classname>. Первое — уникальный
         идентификатор (строка), который служит для идентификации записей кэша.
-        Второе — это директива <code>'lifetime'</code>, которую вы могли видеть
+        Второе — это директива <emphasis>'lifetime'</emphasis>, которую вы могли видеть
         в предыдущих примерах; она определяет, в течение какого времени
         кэшируемый ресурс считается "свежим". Третье понятие — условное
         исполнение, используемое для того, чтобы части вашего кода могли быть
         пропущены целиком, этим повышается производительность. Основной метод
-        фронтэнда (например, <code>Zend_Cache_Core::get()</code>) всегда
-        спроектирован так, чтобы возвращать <code>false</code> при промахе кэша,
+        фронтэнда (например, <methodname>Zend_Cache_Core::get()</methodname>) всегда
+        спроектирован так, чтобы возвращать <constant>FALSE</constant> при промахе кэша,
         если это имеет смысл для данного фронэнда. Это дает конечным
         пользователям возможность включать части кода, которые нужно
-        кэшировать (и затем пропускать) в операторы <code>if(){ ... }</code>,
+        кэшировать (и затем пропускать) в операторы <emphasis>if(){ ... }</emphasis>,
         где условием является сам метод <classname>Zend_Cache</classname>. Но в конце
         этих блоков вы должны сохранять то, что было сгенерировано (например,
-        методом <code>Zend_Cache_Core::save()</code>).
+        методом <methodname>Zend_Cache_Core::save()</methodname>).
     </para>
     <note><para>
         Для некоторых фронтэндов включение условного исполнения в
         код не нужно, так как вся логика уже реализована в них
-        (например, <code>Function</code>).
+        (например, <emphasis>Function</emphasis>).
     </para></note>
     <note><para>
         "Попадание в кэш" — термин для определения того состояния, когда запись
@@ -66,7 +66,7 @@ $cache = Zend_Cache::factory($frontendName,
             выбранному вами бэкэнду.
         </para>
         <note><para>
-            Всегда используйте <code>Zend_Cache::factory()</code> для получения
+            Всегда используйте <methodname>Zend_Cache::factory()</methodname> для получения
             экземпляров фронтэнда. Непосредственно созданные экземпляры
             фронтэндов и бэкэндов будут работать не так, как ожидается.
         </para></note>
@@ -76,7 +76,7 @@ $cache = Zend_Cache::factory($frontendName,
         <title>Добавление тегов к записям</title>
         <para>
             Теги являются средством категоризации записей кэша. Когда вы
-            производите сохранение в кэш методом <code>save()</code>, то можете
+            производите сохранение в кэш методом <methodname>save()</methodname>, то можете
             установить массив тегов к данной записи. После этого вы можете
             удалить все записи кэша, помеченные данным тегом (тегами).
         </para>
@@ -85,9 +85,9 @@ $cache->save($huge_data, 'myUniqueID', array('tagA', 'tagB', 'tagC'));
 ]]></programlisting>
         <note>
             <para>
-                Метод <code>save()</code> принимает также необязательный
+                Метод <methodname>save()</methodname> принимает также необязательный
                 четвертый параметр: <varname>$specificLifetime</varname>. Если он не
-                равен <code>false</code>, то устанавливается время жизни
+                равен <constant>FALSE</constant>, то устанавливается время жизни
                 текущей записи кэша.
             </para>
         </note>
@@ -97,7 +97,7 @@ $cache->save($huge_data, 'myUniqueID', array('tagA', 'tagB', 'tagC'));
         <para>
             Для того, чтобы удалить или сделать недействительной запись с
             определенным идентификатором, вы можете использовать метод
-            <code>remove()</code>:
+            <methodname>remove()</methodname>:
         </para>
         <programlisting language="php"><![CDATA[
 $cache->remove('idToRemove');
@@ -105,7 +105,7 @@ $cache->remove('idToRemove');
         <para>
             Для того, чтобы одновременно удалить или сделать
             недействительными несколько записей кэша, вы можете использовать
-            метод <code>clean()</code>. Например, чтобы удалить все записи кэша:
+            метод <methodname>clean()</methodname>. Например, чтобы удалить все записи кэша:
         </para>
         <programlisting language="php"><![CDATA[
 // удаление всех записей
@@ -124,7 +124,7 @@ $cache->clean(
 );
 ]]></programlisting>
         <para>
-            Если вы хотите удалить записи кэша, <emphasis>не</emphasis> помеченные тегами 'tagA' и 'tagC':
+            Если вы хотите удалить записи кэша, не помеченные тегами 'tagA' и 'tagC':
             If you want to remove cache entries not matching the tags 'tagA' or 'tagC':
         </para>
         <programlisting language="php"><![CDATA[
@@ -134,7 +134,7 @@ $cache->clean(
 );
 ]]></programlisting>
         <para>
-            Если вы хотите удалить записи кэша, помеченные тегами 'tagA' <emphasis>или</emphasis> 'tagC':
+            Если вы хотите удалить записи кэша, помеченные тегами 'tagA' или 'tagC':
         </para>
         <programlisting language="php"><![CDATA[
 $cache->clean(
@@ -143,10 +143,10 @@ $cache->clean(
 );
 ]]></programlisting>
         <para>
-            Доступные режимы очищения: <code>CLEANING_MODE_ALL</code> (удалить
-            все), <code>CLEANING_MODE_OLD</code> (удалить устаревшие),
-            <code>CLEANING_MODE_MATCHING_TAG</code> (удалить помеченные тегом)
-            и <code>CLEANING_MODE_NOT_MATCHING_TAG</code> (удалить не помеченные
+            Доступные режимы очищения: <constant>CLEANING_MODE_ALL</constant> (удалить
+            все), <constant>CLEANING_MODE_OLD</constant> (удалить устаревшие),
+            <constant>CLEANING_MODE_MATCHING_TAG</constant> (удалить помеченные тегом)
+            и <constant>CLEANING_MODE_NOT_MATCHING_TAG</constant> (удалить не помеченные
             тегом). Последние два, как ясно из названия, передаются вместе с
             массивом тегов.
         </para>

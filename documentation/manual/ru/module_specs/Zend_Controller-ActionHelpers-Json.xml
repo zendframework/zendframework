@@ -82,7 +82,7 @@ class FooController extends Zend_Controller_Action
             чтобы включить ответ JSON в некоторый контекст), то на этот случай
             все методы в помощнике JSON принимает второй, опциональный
             аргумент - флаг для включения/отключения макетов. Передача булевого
-            значения <code>true</code> позволит оставить макеты включенными:
+            значения <constant>TRUE</constant> позволит оставить макеты включенными:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -108,7 +108,7 @@ $this->_helper->json($data, array('keepLayouts' => true);
             "родные" выражения JSON с использованием объектов
             <code>Zend_Json_Expr</code>. Эта опция по умолчанию отключена.
             Для того, чтобы включить эту опцию, передавайте
-            булево значение <code>true</code> через опцию
+            булево значение <constant>TRUE</constant> через опцию
             <code>enableJsonExprFinder</code>:
         </para>
 

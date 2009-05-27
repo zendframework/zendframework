@@ -251,7 +251,7 @@ $hits  = $index->find($query);]]></programlisting>
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>true</code> используется для определения обязательных элементов.
+                        <constant>TRUE</constant> используется для определения обязательных элементов.
 <!--
                         true is used to define required term.
 -->
@@ -260,7 +260,7 @@ $hits  = $index->find($query);]]></programlisting>
 
                 <listitem>
                     <para>
-                        <code>false</code> используется для определения запрещенных элементов.
+                        <constant>FALSE</constant> используется для определения запрещенных элементов.
 <!--
                         false is used to define prohibited term.
 -->
@@ -268,7 +268,7 @@ $hits  = $index->find($query);]]></programlisting>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>null</code> используется для определения необязательных
+                        <constant>NULL</constant> используется для определения необязательных
                         элементов.
 <!--
                         null is used to define neither required,
@@ -365,7 +365,7 @@ Zend_Search_Lucene_Search_Query_Phrase([array $terms[, array $offsets[, string $
 
         <para>
             <varname>$terms</varname> является массивом строк, который содержит набор
-            элементов фразы. Если он опущен или равен <code>null</code>,
+            элементов фразы. Если он опущен или равен <constant>NULL</constant>,
             то строится пустой запрос.
 <!--
             <varname>$terms</varname> is an array of strings, which contains a set of phrase terms.
@@ -376,7 +376,7 @@ Zend_Search_Lucene_Search_Query_Phrase([array $terms[, array $offsets[, string $
         <para>
             <varname>$offsets</varname> является массивом целочисленных значений,
             который содержит смещения элементов во фразе. Если он опущен или равен
-            <code>null</code>, то позиции элементов предполагаются как
+            <constant>NULL</constant>, то позиции элементов предполагаются как
             <code>array(0, 1, 2, 3, ...)</code>.
 <!--
             <varname>$offsets</varname> is an array of integers, which contains offsets of terms in a phrase.
@@ -387,7 +387,7 @@ Zend_Search_Lucene_Search_Query_Phrase([array $terms[, array $offsets[, string $
         <para>
             <varname>$field</varname> является строкой, которая указывает поле
             документа, в котором производится поиск. Если он опущен или равен
-            <code>null</code>, то поиск производится в поле по умолчанию.
+            <constant>NULL</constant>, то поиск производится в поле по умолчанию.
             Данная версия Zend_Search_Lucene трактует поле 'contents'
             как поле, выбираемое по умолчанию, но в следующих версиях
             планируется добавить возможность указания любого поля,

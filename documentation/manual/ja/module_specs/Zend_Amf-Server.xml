@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15783 -->
+<!-- EN-Revision: 15786 -->
 <sect1 id="zend.amf.server">
     <title>Zend_Amf_Server</title>
 
     <para>
-        <classname>Zend_Amf_Server</classname> は RPC スタイルのサーバで、
-        Adobe Flash Player からの AMF プロトコルによるリクエストを処理します。
-        他の Zend Framework のサーバクラス群と同様に SoapServer API にしたがっており、
+        <classname>Zend_Amf_Server</classname> は <acronym>RPC</acronym> スタイルのサーバで、
+        Adobe Flash Player からの <acronym>AMF</acronym> プロトコルによるリクエストを処理します。
+        他の Zend Framework のサーバクラス群と同様に SoapServer <acronym>API</acronym> にしたがっており、
         サーバを作成するための習得しやすいインターフェイスを提供します。
     </para>
 
@@ -16,7 +16,7 @@
 
         <para>
             さまざまな public メソッドを持つクラス <emphasis>Foo</emphasis>
-            を作ったものとしましょう。AMF サーバを作成するためのコードは次のようになります。
+            を作ったものとしましょう。<acronym>AMF</acronym> サーバを作成するためのコードは次のようになります。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -81,8 +81,8 @@ $server->addDirectory(dirname(__FILE__) .'/../package/');
         </para>
 
         <para>
-            スクリプトに送られたすべての AMF リクエストがサーバで処理され、
-            その結果の AMF レスポンスが返されます。
+            スクリプトに送られたすべての <acronym>AMF</acronym> リクエストがサーバで処理され、
+            その結果の <acronym>AMF</acronym> レスポンスが返されます。
         </para>
     </example>
 
@@ -91,7 +91,7 @@ $server->addDirectory(dirname(__FILE__) .'/../package/');
 
         <para>
             Zend Framework の他のサーバコンポーネント群と同様、クラスのメソッドには
-            PHP docblock 形式のドキュメントが必要です。
+            <acronym>PHP</acronym> docblock 形式のドキュメントが必要です。
             少なくとも必須引数と返り値についてのアノテーションが必要となります。
             次の例をごらんください。
         </para>
@@ -213,7 +213,7 @@ class World
 
         <para>
             この例にはポイントがふたつあります。まず
-            AMF チャネルを作成し、そしてエンドポイントの URL を
+            <acronym>AMF</acronym> チャネルを作成し、そしてエンドポイントの <acronym>URL</acronym> を
             <classname>Zend_Amf_Server</classname> に指定します。
         </para>
 
@@ -275,7 +275,7 @@ myservice.world.hello("Wade");
 
         <para>
             デフォルトでは、アタッチしたクラスや関数からスローされた例外はすべて捕捉され、
-            AMF ErrorMessage として返されます。しかし、この ErrorMessage
+            <acronym>AMF</acronym> ErrorMessage として返されます。しかし、この ErrorMessage
             オブジェクトの中身は、サーバが "production" モード (デフォルトの状態)
             であるか否かによって異なります。
         </para>
@@ -310,16 +310,16 @@ $server->setProduction(true);
                 production モードを無効にするのは、開発時のみにすることを推奨します。
                 例外メッセージやバックトレースにはシステムに関する重大な情報が含まれる可能性があり、
                 外部からアクセスされることは好ましくありません。
-                AMF はバイナリ形式ではありますが、その仕様は公開されています。
+                <acronym>AMF</acronym> はバイナリ形式ではありますが、その仕様は公開されています。
                 つまり、誰でもメッセージを解読できる可能性があるということです。
             </para>
         </note>
 
         <para>
-            もうひとつ、特に注意を要するのが PHP のエラーです。
-            INI 設定 <emphasis>display_errors</emphasis> が有効になっていると、
-            エラー報告レベルに応じてあらゆる PHP のエラーが直接出力されてしまいます。
-            これは、AMF のレスポンスを壊してしまう可能性があります。
+            もうひとつ、特に注意を要するのが <acronym>PHP</acronym> のエラーです。
+            <acronym>INI</acronym> 設定 <emphasis>display_errors</emphasis> が有効になっていると、
+            エラー報告レベルに応じてあらゆる <acronym>PHP</acronym> のエラーが直接出力されてしまいます。
+            これは、<acronym>AMF</acronym> のレスポンスを壊してしまう可能性があります。
             運用時には <emphasis>display_errors</emphasis> を無効にし、
             この問題を回避することを推奨します。
         </para>
@@ -355,13 +355,13 @@ echo $response;
 
         <para>
             <acronym>SOAP</acronym> と同様、
-            AMF でもクライアントとサーバの間でオブジェクトをやりとりすることができます。
+            <acronym>AMF</acronym> でもクライアントとサーバの間でオブジェクトをやりとりすることができます。
             これにより、クライアントとサーバの間での柔軟性と一貫性を確保することができます。
         </para>
 
         <para>
             <classname>Zend_Amf</classname> には、
-            ActionScript と PHP オブジェクトを関連付けるための 3 つのメソッドが用意されています。
+            ActionScript と <acronym>PHP</acronym> オブジェクトを関連付けるための 3 つのメソッドが用意されています。
         </para>
 
         <itemizedlist>
@@ -370,7 +370,7 @@ echo $response;
                     まず、サーバ側で明示的なバインドを行うには
                     <methodname>setClassMap()</methodname> メソッドを使用します。
                     最初の引数は ActionScript クラス名で、2 番目の引数は関連付ける
-                    PHP クラス名となります。
+                    <acronym>PHP</acronym> クラス名となります。
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -381,7 +381,7 @@ $server->setClassMap('ContactVO', 'Contact');
 
             <listitem>
                 <para>
-                    次に、PHP クラス内で public プロパティ
+                    次に、<acronym>PHP</acronym> クラス内で public プロパティ
                     <varname>$_explicitType</varname> を設定する方法があります。
                     ここには、関連付けたい ActionScript クラス名を指定します。
                 </para>
@@ -415,7 +415,7 @@ class Contact
 
         <para>
             サーバ側で ContactVO を作成したら、
-            サーバオブジェクトに対応するクラスを AS3 で書かなければなりません。
+            サーバオブジェクトに対応するクラスを <acronym>AS3</acronym> で書かなければなりません。
         </para>
         <para>
             Flex プロジェクトの src フォルダを右クリックし、新規作成 ->
@@ -441,13 +441,13 @@ package
 }
 ]]></programlisting>
         <para>
-            このクラスは、同名の PHP のクラスと構文的に同等となります。
+            このクラスは、同名の <acronym>PHP</acronym> のクラスと構文的に同等となります。
             変数名はまったく同じで、大文字小文字もあわせておかなければ正しく動作しません。
-            このクラスでは、AS3 独特のメタタグが 2 つ用いられています。
+            このクラスでは、<acronym>AS3</acronym> 独特のメタタグが 2 つ用いられています。
             最初のタグは bindable で、これは更新時に change イベントを発火させます。
             2 番目のタグは RemoteClass で、このクラスがリモートオブジェクトを保持できること、
             そのエイリアス名が (ここでは) <emphasis>ContactVO</emphasis> であることを定義します。
-            このタグに設定される値は、PHP のクラスと正確に一致していなければなりません。
+            このタグに設定される値は、<acronym>PHP</acronym> のクラスと正確に一致していなければなりません。
         </para>
         <programlisting language="as"><![CDATA[
 [Bindable]
@@ -471,7 +471,7 @@ private function getContactHandler(event:ResultEvent):void {
             <classname>Zend_Amf_Server</classname> に Flash プロジェクトから接続する方法は、
             Flex からの場合とは多少異なります。しかし、いったん接続してしまえば
             <classname>Zend_Amf_Server</classname> は flex の場合と同じように動作します。
-            次の例は Flex AS3 ファイルからでも使用できます。
+            次の例は Flex <acronym>AS3</acronym> ファイルからでも使用できます。
             同じ <classname>Zend_Amf_Server</classname> 設定ファイルを用い、
             World クラスを用いて接続します。
         </para>
@@ -479,7 +479,7 @@ private function getContactHandler(event:ResultEvent):void {
             Flash CS を開き、新規 Flash ファイル (ActionScript 3) を作成します。
             そのドキュメントに <filename>ZendExample.fla</filename> という名前をつけ、
             このサンプルを使用するフォルダに保存します。
-            次に、同じディレクトリに新規 AS3 ファイルを作成し、
+            次に、同じディレクトリに新規 <acronym>AS3</acronym> ファイルを作成し、
             <filename>Main.as</filename> という名前をつけます。
             そして両方のファイルをエディタで開きます。
             これから、ドキュメントクラスを通じてふたつのファイルをつないできます。
@@ -489,7 +489,7 @@ private function getContactHandler(event:ResultEvent):void {
             <filename>ZendExample.fla</filename> のユーザインターフェイスとつながります。
             Flash ファイル ZendExample を実行すると、
             <filename>Main.as</filename> クラスが実行されるようになるのです。
-            次に、AMF をコールする ActionScript を追加します。
+            次に、<acronym>AMF</acronym> をコールする ActionScript を追加します。
         </para>
         <para>
             それでは、Main クラスを作成していきましょう。
@@ -542,7 +542,7 @@ import flash.net.Responder;
 ]]></programlisting>
         <para>
             クラスの中で 3 つの変数を用意します。これらがそれぞれ NetConnection、Responder
-            そして <classname>Zend_Amf_Server</classname> へのゲートウェイ URL をあらわします。
+            そして <classname>Zend_Amf_Server</classname> へのゲートウェイ <acronym>URL</acronym> をあらわします。
         </para>
         <programlisting language="as"><![CDATA[
 private var gateway:String = "http://example.com/server.php";
@@ -581,7 +581,7 @@ private function onResult(result:Object):void {
 ]]></programlisting>
         <para>
             onFault 関数は、サーバから無効な結果が返ってきたときにコールされます。
-            たとえば、サーバからエラーが返された場合、サーバへの URL が無効な場合、
+            たとえば、サーバからエラーが返された場合、サーバへの <acronym>URL</acronym> が無効な場合、
             リモート側にサービスやメソッドが存在しない場合など、接続時に問題が発生した場合にコールされることになります。
         </para>
         <programlisting language="as"><![CDATA[

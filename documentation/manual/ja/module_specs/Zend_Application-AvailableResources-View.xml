@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15787 -->
 <sect2 id="zend.application.available-resources.view">
     <title>Zend_Application_Resource_View</title>
 
@@ -22,7 +22,7 @@
         <title>サンプルビューリソースの設定</title>
 
         <para>
-            下記はビューリソースを設定する方法を示すINIスニペットサンプルです。
+            下記はビューリソースを設定する方法を示す <acronym>INI</acronym> スニペットサンプルです。
         </para>
 
         <programlisting language="ini"><![CDATA[

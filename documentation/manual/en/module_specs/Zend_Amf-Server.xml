@@ -4,10 +4,10 @@
     <title>Zend_Amf_Server</title>
 
     <para>
-        <classname>Zend_Amf_Server</classname> provides an RPC-style server for handling
-        requests made from the Adobe Flash Player using the AMF protocol. Like
-        all Zend Framework server classes, it follows the SoapServer API,
-        providing an easy to remember interface for creating servers.
+        <classname>Zend_Amf_Server</classname> provides an <acronym>RPC</acronym>-style server for
+        handling requests made from the Adobe Flash Player using the <acronym>AMF</acronym>
+        protocol. Like all Zend Framework server classes, it follows the SoapServer
+        <acronym>API</acronym>, providing an easy to remember interface for creating servers.
     </para>
 
     <example id="zend.amf.server.basic">
@@ -15,7 +15,7 @@
 
         <para>
             Let's assume that you have created a class <emphasis>Foo</emphasis> with a
-            variety of public methods. You may create an AMF server using the
+            variety of public methods. You may create an <acronym>AMF</acronym> server using the
             following code:
         </para>
 
@@ -82,8 +82,8 @@ $server->addDirectory(dirname(__FILE__) .'/../package/');
         </para>
 
         <para>
-            All AMF requests sent to the script will then be handled by the
-            server, and an AMF response will be returned.
+            All <acronym>AMF</acronym> requests sent to the script will then be handled by the
+            server, and an <acronym>AMF</acronym> response will be returned.
         </para>
     </example>
 
@@ -91,8 +91,8 @@ $server->addDirectory(dirname(__FILE__) .'/../package/');
         <title>All Attached Methods and Functions Need Docblocks</title>
 
         <para>
-            Like all other server components in Zend Framework, you must
-            document your class methods using PHP docblocks. At the minimum, you
+            Like all other server components in Zend Framework, you must document your class
+            methods using <acronym>PHP</acronym> docblocks. At the minimum, you
             need to provide annotations for each required argument as well as
             the return value. As examples:
         </para>
@@ -209,8 +209,8 @@ class World
 
         <para>
             There are two key points in the example. First, but last in the
-            listing, we create an AMF channel, and specify the endpoint as the
-            URL to our <classname>Zend_Amf_Server</classname>:
+            listing, we create an <acronym>AMF</acronym> channel, and specify the endpoint as the
+            <acronym>URL</acronym> to our <classname>Zend_Amf_Server</classname>:
         </para>
 
         <programlisting language="xml"><![CDATA[
@@ -271,7 +271,7 @@ myservice.world.hello("Wade");
 
         <para>
             By default, all exceptions thrown in your attached classes or
-            functions will be caught and returned as AMF ErrorMessages. However,
+            functions will be caught and returned as <acronym>AMF</acronym> ErrorMessages. However,
             the content of these ErrorMessage objects will vary based on whether
             or not the server is in "production" mode (the default state).
         </para>
@@ -306,17 +306,17 @@ $server->setProduction(true);
                 We recommend disabling production mode only when in development.
                 Exception messages and backtraces can contain sensitive system
                 information that you may not wish for outside parties to access.
-                Even though AMF is a binary format, the specification is now
+                Even though <acronym>AMF</acronym> is a binary format, the specification is now
                 open, meaning anybody can potentially deserialize the payload.
             </para>
         </note>
 
         <para>
-            One area to be especially careful with is PHP errors themselves.
-            When the <emphasis>display_errors</emphasis> INI directive is enabled, any
-            PHP errors for the current error reporting level are rendered
-            directly in the output -- potentially disrupting the AMF response
-            payload. We suggest turning off the <emphasis>display_errors</emphasis>
+            One area to be especially careful with is <acronym>PHP</acronym> errors themselves.
+            When the <emphasis>display_errors</emphasis> <acronym>INI</acronym> directive is
+            enabled, any <acronym>PHP</acronym> errors for the current error reporting level are
+            rendered directly in the output -- potentially disrupting the <acronym>AMF</acronym>
+            response payload. We suggest turning off the <emphasis>display_errors</emphasis>
             directive in production to prevent such problems
         </para>
     </sect2>
@@ -351,14 +351,14 @@ echo $response;
         <title>Typed Objects</title>
 
         <para>
-            Similar to <acronym>SOAP</acronym>, AMF allows passing objects between the client and
-            server. This allows a great amount of flexibility and coherence
-            between the two environments.
+            Similar to <acronym>SOAP</acronym>, <acronym>AMF</acronym> allows passing objects
+            between the client and server. This allows a great amount of flexibility and
+            coherence between the two environments.
         </para>
 
         <para>
             <classname>Zend_Amf</classname> provides three methods for mapping
-            ActionScript and PHP objects.
+            ActionScript and <acronym>PHP</acronym> objects.
         </para>
 
         <itemizedlist>
@@ -366,7 +366,7 @@ echo $response;
                 <para>
                     First, you may create explicit bindings at the server level,
                     using the <methodname>setClassMap()</methodname> method. The first
-                    argument is the ActionScript class name, the second the PHP
+                    argument is the ActionScript class name, the second the <acronym>PHP</acronym>
                     class name it maps to:
                 </para>
 
@@ -378,8 +378,8 @@ $server->setClassMap('ContactVO', 'Contact');
 
             <listitem>
                 <para>
-                    Second, you can set the public property
-                    <varname>$_explicitType</varname> in your PHP class, with the
+                    Second, you can set the public property <varname>$_explicitType</varname>
+                    in your <acronym>PHP</acronym> class, with the
                     value representing the ActionScript class to map to:
                 </para>
 
@@ -394,8 +394,8 @@ class Contact
             <listitem>
                 <para>
                     Third, in a similar vein, you may define the public method
-                    <methodname>getASClassName()</methodname> in your PHP class; this method
-                    should return the appropriate ActionScript class:
+                    <methodname>getASClassName()</methodname> in your <acronym>PHP</acronym> class;
+                    this method should return the appropriate ActionScript class:
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -411,8 +411,8 @@ class Contact
         </itemizedlist>
 
         <para>
-            Although we have created the ContactVO on the server we now need to make
-            its corresponding class in AS3 for the server object to be mapped to.
+            Although we have created the ContactVO on the server we now need to make its
+            corresponding class in <acronym>AS3</acronym> for the server object to be mapped to.
         </para>
         <para>
             Right click on the src folder of the Flex project and select New -> ActionScript
@@ -437,14 +437,14 @@ package
 }
 ]]></programlisting>
         <para>
-            The class is syntactically equivalent to the PHP of the same name.
+            The class is syntactically equivalent to the <acronym>PHP</acronym> of the same name.
             The variable names are exactly the same and need to be in the same case
-            to work properly. There are two unique AS3 meta tags in this class.
+            to work properly. There are two unique <acronym>AS3</acronym> meta tags in this class.
             The first is bindable which makes fire a change event when it is updated.
             The second tag is the RemoteClass tag which defines that this class can
             have a remote object mapped with the alias name in this case
             <emphasis>ContactVO</emphasis>. It is mandatory that this tag the value that was set
-            is the PHP class are strictly equivalent.
+            is the <acronym>PHP</acronym> class are strictly equivalent.
         </para>
         <programlisting language="as"><![CDATA[
 [Bindable]
@@ -468,21 +468,21 @@ private function getContactHandler(event:ResultEvent):void {
             Connecting to your <classname>Zend_Amf_Server</classname> from your Flash project is
             slightly different than from Flex. However once the connection Flash functions with
             <classname>Zend_Amf_Server</classname> the same way is flex. The following example can
-            also be used from a Flex AS3 file. We will reuse the same
+            also be used from a Flex <acronym>AS3</acronym> file. We will reuse the same
             <classname>Zend_Amf_Server</classname> configuration along with the World class for our
             connection.
         </para>
         <para>
             Open Flash CS and create and new Flash File (ActionScript 3). Name the document
             <filename>ZendExample.fla</filename> and save the document into a folder that you will
-            use for this example. Create a new AS3 file in the same directory and call the file
-            <filename>Main.as</filename>. Have both files open in your editor. We are now going to
-            connect the two files via the document class. Select ZendExample and click on the
-            stage. From the stage properties panel change the Document class to Main. This links
-            the <filename>Main.as</filename> ActionScript file with the user interface in
-            <filename>ZendExample.fla</filename>. When you run the Flash file ZendExample the
+            use for this example. Create a new <acronym>AS3</acronym> file in the same directory
+            and call the file <filename>Main.as</filename>. Have both files open in your editor. We
+            are now going to connect the two files via the document class. Select ZendExample and
+            click on the stage. From the stage properties panel change the Document class to Main.
+            This links the <filename>Main.as</filename> ActionScript file with the user interface
+            in <filename>ZendExample.fla</filename>. When you run the Flash file ZendExample the
             <filename>Main.as</filename> class will now be run. Next we will add ActionScript to
-            make the AMF call.
+            make the <acronym>AMF</acronym> call.
         </para>
         <para>
             We now are going to make a Main class so that we can send the data to the server and
@@ -535,7 +535,8 @@ import flash.net.Responder;
 ]]></programlisting>
         <para>
             In the class we need three variables to represent the NetConnection, Responder, and
-            the gateway URL to our <classname>Zend_Amf_Server</classname> installation.
+            the gateway <acronym>URL</acronym> to our <classname>Zend_Amf_Server</classname>
+            installation.
         </para>
         <programlisting language="as"><![CDATA[
 private var gateway:String = "http://example.com/server.php";
@@ -575,8 +576,9 @@ private function onResult(result:Object):void {
 ]]></programlisting>
         <para>
             The onFault function, is called if there was an invalid response from the server. This
-            happens when there is an error on the server, the URL to the server is invalid, the
-            remote service or method does not exist, and any other connection related issues.
+            happens when there is an error on the server, the <acronym>URL</acronym> to the server
+            is invalid, the remote service or method does not exist, and any other connection
+            related issues.
         </para>
         <programlisting language="as"><![CDATA[
 private function onFault(fault:Object):void {

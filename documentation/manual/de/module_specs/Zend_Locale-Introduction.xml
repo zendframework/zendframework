@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15672 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.introduction">
 
@@ -580,8 +580,18 @@ Zend_Locale_Format::setOptions(array('locale' => Zend_Locale_Format::STANDARD,
             aufgerufen wird. Wenn beide Klassen verwendet werden sollte nur für
             <classname>Zend_Locale</classname> ein Cache gesetzt werden, da der zuletzt gesetzte
             Cache den vorher gesetzten Cache überschreibt. Der Bequemlichkeit halber gibt es auch
-            die statischen Methoden <classname>Zend_Locale::getCache()</classname>,
-            <code>hasCache()</code>, <code>clearCache()</code> und <code>removeCache()</code>.
+            die statischen Methoden <methodname>getCache()</methodname>,
+            <methodname>hasCache()</methodname>, <methodname>clearCache()</methodname> und
+            <methodname>removeCache()</methodname>.
+        </para>
+
+        <para>
+            Wenn kein Cache gesetzt wird, dann setzt <classname>Zend_Locale</classname> automatisch
+            von selbst einen Cache. Manchmal ist es gewünscht zu verhindern das ein Cache gesetzt
+            wird, selbst wenn das die Performance verringert. In diesem Fall sollte die statische
+            <methodname>disableCache(true)</methodname> Methode verwendet werden. Sie schaltet
+            nicht nur den aktuell gesetzten Cache aus, ohne Ihn zu löschen, sondern verhindert auch
+            das ein Cache automatisch erstellt wird, wenn kein Cache gesetzt ist.
         </para>
 
     </sect2>

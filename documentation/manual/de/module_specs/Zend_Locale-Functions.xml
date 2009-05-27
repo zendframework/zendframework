@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15686 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.functions">
 
@@ -244,17 +244,14 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry>
                             Gibt eine lokalisierte Liste aller Sprachen zurück. Der Sprach-Teil des
                             Gebietsschemas wird als Schlüssel und die Übersetzung als Wert
-                            zurückgegeben. Der Einfachheit halber kann die
-                            <code>getLanguageTranslationList()</code> Methode verwendet werden
+                            zurückgegeben
                         </entry>
                     </row>
                     <row>
                         <entry><emphasis>Script</emphasis></entry>
                         <entry>
                             Gibt eine lokalisierte Liste aller Schriften zurück. Die Schrift wird
-                            als Schlüssel die Übersetzung als Wert zurückgegeben. Der Einfachheit
-                            halber kann die <code>getScriptTranslationList()</code> Methode
-                            verwendet werden
+                            als Schlüssel die Übersetzung als Wert zurückgegeben
                         </entry>
                     </row>
                     <row>
@@ -266,12 +263,8 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             Länder zu erhalten muß '2' als Wert verwendet werden. Der Landes-Teil
                             des Gebietsschemas wird, wo es möglich ist, als Schlüssel verwendet. In
                             den anderen Fällen wird der offizielle ISO Code für dieses Territorium
-                            verwendet. Das übersetzte Territorium wird als Wert zurückgegeben. Der
-                            Einfachheit halber kann die <code>getCountryTranslationList()</code>
-                            Methode verwendet werden um alle Länder und die
-                            <code>getTerritoryTranslationList()</code> Methode um alle Territorien
-                            ohne Länder zu erhalten. Wenn der Wert nicht angegeben wird erhält man
-                            eine Liste mit beidem
+                            verwendet. Das übersetzte Territorium wird als Wert zurückgegeben. Wenn
+                            der Wert nicht angegeben wird erhält man eine Liste mit beidem
                         </entry>
                     </row>
                     <row>
@@ -749,6 +742,38 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             Territorium (Region) als Arraywert verwendet
                         </entry>
                     </row>
+                    <row>
+                        <entry><emphasis>PostalToTerritory</emphasis></entry>
+                        <entry>
+                            Gibt eine Liste von Territorien mit einem Regex für Post Codes zurück,
+                            welche in diesem Territorium enthalten sind. Der ISO Territory Code
+                            ('territory') wird als Arrayschlüssel und das Regex als Arraywert
+                            verwendet.
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>NumberingSystem</emphasis></entry>
+                        <entry>
+                            Gibt eine Liste von Skripten zurück mit die Schreibweise der
+                            Ziffern, die in diesem Skript verwendet werden
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>FallbackToChar</emphasis></entry>
+                        <entry>
+                            Gibt eine Liste von Ersatzzeichen für oft verwendete Unicode Zeichen
+                            zurück. Das kann verwendet werden um zum Beispiel "©" mit "(C)" zu
+                            ersetzen
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>CharToFallback</emphasis></entry>
+                        <entry>
+                            Gibt eine Liste von Unicode Zeichen für oft verwendete Ersatzzeichen
+                            zurück. Das kann verwendet werden um zum Beispiel "(C)" mit "©" zu
+                            ersetzen
+                        </entry>
+                    </row>
                 </tbody>
             </tgroup>
         </table>
@@ -787,18 +812,14 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>Language</emphasis></entry>
                         <entry>
                             Gibt eine Übersetzung für eine Sprache zurück. Um die gewünschte
-                            Übersetzung auszuwählen muß der Sprachcode als Wert angegeben werden.
-                            Der Einfachheit halber kann auch die
-                            <code>getLanguageTranslation($value)</code> Methode verwendet werden
+                            Übersetzung auszuwählen muß der Sprachcode als Wert angegeben werden
                         </entry>
                     </row>
                     <row>
                         <entry><emphasis>Script</emphasis></entry>
                         <entry>
                             Gibt eine Übersetzung für eine Schrift zurück. Um die gewünschte
-                            Übersetzung auszuwählen muß der Schriftcode als Wert angegeben werden.
-                            Der Einfachheit halber kann auch die
-                            <code>getScriptTranslation($value)</code> Methode verwendet werden
+                            Übersetzung auszuwählen muß der Schriftcode als Wert angegeben werden
                         </entry>
                     </row>
                     <row>
@@ -808,9 +829,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry>
                             Gibt eine Übersetzung für ein Territorium zurück. Das können Länder,
                             Kontinente und Territorien sein. Um die gewünschte Variante auszuwählen
-                            muß der Territory Code als Wert angegeben werden. Der Einfachheit halber
-                            kann auch die <code>getCountryTranslation($value)</code> Methode
-                            verwendet werden
+                            muß der Territory Code als Wert angegeben werden
                         </entry>
                     </row>
                     <row>
@@ -828,13 +847,6 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             Das sind normalerweise Kalender, Sammlung und Währung. Um den
                             gewünschten Schlüssel auszuwählen muß der Schlüsselcode als Wert
                             angegeben werden
-                        </entry>
-                    </row>
-                    <row>
-                        <entry><emphasis>DateChars</emphasis></entry>
-                        <entry>
-                            Gibt eine Zeichentabelle zurück welche alle Zeichen enthält wenn Daten
-                            angezeigt werden sollen
                         </entry>
                     </row>
                     <row>
@@ -1289,6 +1301,35 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>TerritoryToAlpha3</emphasis></entry>
                         <entry>
                             Gibt das Territorium (Region) für einen 3 stelligen Zeichencode zurück
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>PostalToTerritory</emphasis></entry>
+                        <entry>
+                            Gibt ein Regex für den Post Code eines angegebenen Territoriums zurück.
+                            Das Territorium muss als ISO4217 String angegeben werden, zum Beispiel
+                            '001' für Welt
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>NumberingSystem</emphasis></entry>
+                        <entry>
+                            Gibt ein Skript mit der Schreibweise der Ziffern zurück, die in diesem
+                            Skript verwendet werden
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>FallbackToChar</emphasis></entry>
+                        <entry>
+                            Gibt ein Ersatzzeichen für ein oft verwendetes Unicode Zeichen zurück.
+                            Das kann verwendet werden um zum Beispiel "©" mit "(C)" zu ersetzen
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>CharToFallback</emphasis></entry>
+                        <entry>
+                            Gibt ein Unicode Zeichen für ein oft verwendetes Ersatzzeichen zurück.
+                            Das kann verwendet werden um zum Beispiel "(C)" mit "©" zu ersetzen
                         </entry>
                     </row>
                 </tbody>

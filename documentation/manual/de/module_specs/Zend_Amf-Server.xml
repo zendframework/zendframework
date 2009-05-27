@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15687 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.amf.server">
     <title>Zend_Amf_Server</title>
@@ -15,9 +15,9 @@
         <title>AMF Server Grundlagen</title>
 
         <para>
-            Angenommen wir haben eine Klasse <code>Foo</code> mit einer Anzahl von öffentlichen
-            Methoden erstellt. Man kann einen AMF Server erstellen indem der folgende Code
-            verwendet wird:
+            Angenommen wir haben eine Klasse <emphasis>Foo</emphasis> mit einer Anzahl von
+            öffentlichen Methoden erstellt. Man kann einen AMF Server erstellen indem der folgende
+            Code verwendet wird:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -42,8 +42,8 @@ echo $response;
             Man kann auch mehrere Klassen und Funktionen mischen und verwenden. Wenn man das macht
             wird empfohlen das jede von Ihnen einen Namespace erhält um sicherzustellen das keine
             Kollision von Methodennamen stattfindet; das kann durchgeführt werden indem man einfach
-            ein zweites Stringargument entweder an <code>addFunction()</code> oder an
-            <code>setClass()</code> übergibt:
+            ein zweites Stringargument entweder an <methodname>addFunction()</methodname> oder an
+            <methodname>setClass()</methodname> übergibt:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -56,12 +56,13 @@ echo $response;
 ]]></programlisting>
 
         <para>
-            <code>Zend Amf Server</code> erlaubt es auch Services das Sie dynamisch geladen werden,
-            basierend auf dem angegebenen Verzeichnispfad. Man kann dem Server so viele
-            Verzeichnisse wie man will hinzufügen. Die Reihenfolge in der man die Verzeichnisse zum
-            Server hinzufügt ist die Reihenfolge in der die LIFO Suche auf den Verzeichnissen
-            durchgeführt wird um die Klasse zu finden. Das Hinzufügen von Verzeichnissen wird mit
-            der <code>addDirectory()</code> Methode durchgeführt.
+            <classname>Zend Amf Server</classname> erlaubt es auch Services das Sie dynamisch
+            geladen werden, basierend auf dem angegebenen Verzeichnispfad. Man kann dem Server so
+            viele Verzeichnisse wie man will hinzufügen. Die Reihenfolge in der man die
+            Verzeichnisse zum Server hinzufügt ist die Reihenfolge in der die LIFO Suche auf den
+            Verzeichnissen durchgeführt wird um die Klasse zu finden. Das Hinzufügen von
+            Verzeichnissen wird mit der <methodname>addDirectory()</methodname> Methode
+            durchgeführt.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -70,14 +71,15 @@ $server->addDirectory(dirname(__FILE__) .'/../package/');
 ]]></programlisting>
 
         <para>
-            Wenn entfernte Services aufgerufen werden kann der Quellname einen Unterstrich (_) oder
-            Punkt (.) Begrenzer im Verzeichnis haben. Wenn ein Unterstrich verwendet wird werden die
-            Namenskonventionen der PEAR und Zend Framework Klassen verwendet. Das bedeutet das wenn
-            man das Sevice <code>com_Foo_Bar</code> aufruft wird der Server nach der Datei Bar.php
-            suchen, und zwar in jedem der eingefügten Pfade unter <code>com/Foo/Bar.php</code>. Wenn
-            die Punkt Notation für entfernte Services wie für <code>com.Foo.Bar</code> verwendet
-            wird, wird jedem eingefügten Pfad <code>com/Foo/Bar.php</code> am Ende hinzugefügt um
-            Bar.php automatisch zu laden.
+            Wenn entfernte Services aufgerufen werden kann der Quellname einen Unterstrich ("_")
+            oder Punkt (".") Begrenzer im Verzeichnis haben. Wenn ein Unterstrich verwendet wird
+            werden die Namenskonventionen der PEAR und Zend Framework Klassen verwendet. Das
+            bedeutet das wenn man das Sevice <classname>com_Foo_Bar</classname> aufruft wird der
+            Server nach der Datei Bar.php suchen, und zwar in jedem der eingefügten Pfade unter
+            <filename>com/Foo/Bar.php</filename>. Wenn die Punkt Notation für entfernte Services
+            wie für <filename>com.Foo.Bar</filename> verwendet wird, wird jedem eingefügten Pfad
+            <filename>com/Foo/Bar.php</filename> am Ende hinzugefügt um
+            <filename>Bar.php</filename> automatisch zu laden.
         </para>
 
         <para>
@@ -143,19 +145,19 @@ class World
 
         <para>
             Nehmen wir zum Beispiel an das man einen Server erstellt hat und Ihn in der
-            <code>server.php</code> Datei im Anwendungsroot platziert, und die URI deswegen
-            <code>http://example.com/server.php</code> ist. In diesem Fall würde man die
-            services-config.xml Datei so modifizieren das das channel endpoint URI Attribut
-            auf diesen Wert gesetzt ist.
+            <filename>server.php</filename> Datei im Anwendungsroot platziert, und die URI deswegen
+            <filename>http://example.com/server.php</filename> ist. In diesem Fall würde man die
+            <filename>services-config.xml</filename> Datei so modifizieren das das channel
+            endpoint URI Attribut auf diesen Wert gesetzt ist.
         </para>
 
         <para>
-            Wenn man noch keine service-config.xml Datei erstellt hat kann man das tun, indem
-            man das Projekt im Navigator Fenster öffnet. Auf dem Projektnamen rechts-klickt und
-            ‘properties’ auswählt. Im Fenster der Projekteigenschaften muß man in das
-            ‘Flex Build Path’ Menü, auf den ‘Library path’ Tab und sicherstellen das die ‘rpc.swc’
-            Datei bei den Projektpfaden hinzugefügt ist und auf Ok drücken um das Fenster zu
-            schließen.
+            Wenn man noch keine <filename>service-config.xml</filename> Datei erstellt hat kann man
+            das tun, indem man das Projekt im Navigator Fenster öffnet. Auf dem Projektnamen
+            rechts-klickt und 'properties' auswählt. Im Fenster der Projekteigenschaften muß man in
+            das 'Flex Build Path' Menü, auf den 'Library path' Tab und sicherstellen das die
+            '<filename>rpc.swc</filename>' Datei bei den Projektpfaden hinzugefügt ist und auf Ok
+            drücken um das Fenster zu schließen.
         </para>
 
         <para>
@@ -163,7 +165,7 @@ class World
             den Endpunkt des RemoteObjects zu finden. Um das zu tun muß das Fenster der
             Projekteigenschaften nochmals durch einen rechts-klick auf das Projektverzeichnis
             vom Navigator aus geöffnet und Eigenschaften ausgewählt werden. Vom Eigenschaften-Popup
-            muß ‘Flex Compiler’ aufgewählt und der String: -services “services-config.xml”
+            muß 'Flex Compiler' aufgewählt und der String: -services "services-config.xml"
             hinzugefügt werden. Auf Apply drücken, anschließend auf OK um die Option zu
             aktualisieren. Was man jetzt getan hat, ist dem Flex Compiler zu sagen das er in der
             Datei services-config.xml nach Laufzeitvariablen schauen soll die von der RemotingObject
@@ -173,10 +175,10 @@ class World
         <para>
             Jetzt müssen wir Flex mitteilen welche Konfigurationsdateien der Services für die
             Verbindung zu unseren entfernten Methoden zu verwenden sind. Aus diesem Grund muß eine
-            neue ‘services-config.xml’ Datei im Flexprojekt src Verzeichnis erstellt werden. Um das
-            zu tun, muß man auf den Projektfolder rechts klicken und ‘new’ ‘File’ auswählen was
+            neue 'services-config.xml' Datei im Flexprojekt src Verzeichnis erstellt werden. Um das
+            zu tun, muß man auf den Projektfolder rechts klicken und 'new' 'File' auswählen was
             ein neues Fenster öffnet. Anschließend das Projektverzeichnis auswählen und dann die
-            Datei ‘services-config.xml’ benennen und auf beenden drücken.
+            Datei 'services-config.xml' benennen und auf beenden drücken.
         </para>
 
         <para>
@@ -245,10 +247,11 @@ class World
 ]]></programlisting>
 
         <para>
-            Hier haben wir ein neues entferntes Objekt definiert das durch "myservice" identifiziert
-            an das Serviceziel "zend" gebunden ist das wir in der <code>services-config.xml</code>
-            Datei definiert haben. Dann rufen wir die Methoden auf Ihnen in unserem ActionScript
-            einfach durch Aufruf von "myservice.&lt;method&gt;" auf. Als Beispiel:
+            Hier haben wir ein neues entferntes Objekt definiert das durch "myservice"
+            identifiziert an das Serviceziel "zend" gebunden ist das wir in der
+            <filename>services-config.xml</filename> Datei definiert haben. Dann rufen wir die
+            Methoden auf Ihnen in unserem ActionScript einfach durch Aufruf von
+            "myservice.&lt;method&gt;" auf. Als Beispiel:
         </para>
 
         <programlisting language="ActionScript"><![CDATA[
@@ -319,10 +322,10 @@ $server->setProduction(true);
 
         <para>
             Ein Feld bei dem man im speziellen Vorsichtig sein muß ist bei PHP Fehlern selbst.
-            Wenn die INI Direktive <code>display_errors</code> aktiviert ist, wird jeder PHP
-            Fehler für das aktuelle Error Reporting Level direkt in der Ausgabe dargestellt --
+            Wenn die INI Direktive <emphasis>display_errors</emphasis> aktiviert ist, wird jeder
+            PHP Fehler für das aktuelle Error Reporting Level direkt in der Ausgabe dargestellt --
             was den AMF Antwortpayload potentiell unterbrechen kann. Wir empfehlen die
-            <code>display_errors</code> Direktive in der Produktion auszuschalten um solche
+            <emphasis>display_errors</emphasis> Direktive in der Produktion auszuschalten um solche
             Probleme zu verhindern.
         </para>
     </sect2>
@@ -332,8 +335,8 @@ $server->setProduction(true);
 
         <para>
             Fallweise ist es gewünscht das Antwortobjekt leicht zu manipulieren, typischerweise um
-            zusätzliche Nachrichtenheader zurückzugeben. Die <code>handle()</code> Methode des
-            Servers gibt das Antwortobjekt zurück, was es erlaubt das zu tun.
+            zusätzliche Nachrichtenheader zurückzugeben. Die <methodname>handle()</methodname>
+            Methode des Servers gibt das Antwortobjekt zurück, was es erlaubt das zu tun.
         </para>
 
         <example id="zend.amf.server.response.messageHeaderExample">
@@ -372,9 +375,9 @@ echo $response;
             <listitem>
                 <para>
                     Erstens kann man explizite Bindungen auf Serverlevel erstellen indem die
-                    <code>setClassMap()</code> Methode verwendet wird. Das erste Argument ist der
-                    ActionScript Klassenname, das zweite ist der Name der PHP Klasse auf die gemappt
-                    wird:
+                    <methodname>setClassMap()</methodname> Methode verwendet wird. Das erste
+                    Argument ist der ActionScript Klassenname, das zweite ist der Name der PHP
+                    Klasse auf die gemappt wird:
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -385,9 +388,9 @@ $server->setClassMap('ContactVO', 'Contact');
 
             <listitem>
                 <para>
-                    Zweitens kann die öffentliche Eigenschaft <code>$_explicitType</code> in der
-                    PHP Klasse gesetzt werden, wobei der Wert die ActionScript Klasse repräsentiert
-                    auf die gemappt wird:
+                    Zweitens kann die öffentliche Eigenschaft <varname>$_explicitType</varname> in
+                    der PHP Klasse gesetzt werden, wobei der Wert die ActionScript Klasse
+                    repräsentiert auf die gemappt wird:
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -401,8 +404,8 @@ class Contact
             <listitem>
                 <para>
                     Drittens, in ähnlicher Art und Weise, kann eine öffentliche Methode
-                    <code>getASClassName()</code> in der PHP Klasse definiert werden; diese Methode
-                    sollte die passende ActionScript Klasse zurückgeben:
+                    <methodname>getASClassName()</methodname> in der PHP Klasse definiert werden;
+                    diese Methode sollte die passende ActionScript Klasse zurückgeben:
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -449,9 +452,9 @@ package
             zu arbeiten. Es gibt zwei eindeutige AS3 Metatags in dieser Klasse. Das Erste kann
             gebunden werden was ein Änderungsevent wirft wenn es aktualisiert wird. Das zweite Tag
             ist das RemoteClass Tag welches definiert das diese klasse ein gemapptes entferntes
-            Objekt haben kann, in diesem Fall mit dem Aliasnamen <code>ContactVO</code>. Es ist
-            erforderlich das dieses Tag und der Wert der in der PHP Klasse gesetzt wurde, strikt
-            identisch sind.
+            Objekt haben kann, in diesem Fall mit dem Aliasnamen <emphasis>ContactVO</emphasis>. Es
+            ist erforderlich das dieses Tag und der Wert der in der PHP Klasse gesetzt wurde,
+            strikt identisch sind.
         </para>
         <programlisting language="as"><![CDATA[
 [Bindable]
@@ -614,7 +617,7 @@ private function onFault(fault:Object):void {
             Rückblickend haben wir die benötigten Variablen hinzugefügt um eine Verbindung zum
             entfernten Server zu öffnen, definiert welche Methoden in der Anwendung verwendet werden
             sollen wenn die Anwendung eine Antwort vom Server empfängt, und schlußendlich die
-            Anzeige der zurückgegebenen Daten über trace().
+            Anzeige der zurückgegebenen Daten über <methodname>trace()</methodname>.
         </para>
 
     </sect2>

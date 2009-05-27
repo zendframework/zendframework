@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15666 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.migration">
 
@@ -11,6 +11,70 @@
         Versionen dann sollte man den unteren Richtlinien folgen um die Skripte so zu migrieren das
         sie die neue API verwenden.
     </para>
+
+    <sect2 id="zend.locale.migration.fromoneeighttoonenine">
+        <title>Migrieren von 1.8 zu 1.9 oder neueren</title>
+        <sect3 id="zend.locale.migration.fromoneeighttoonenine.depreciated">
+            <title>Abgelaufene Methoden</title>
+
+            <para>
+                Einige spezialisiertere Übersetzungsmethoden stehen nicht mehr zur Verfügung weil
+                Sie bestehende Verhaltensweisen duplizieren. Beachten Sie das die alten Methoden
+                weiterhin funktionieren, aber eine Benutzer Notiz geworfen wird, die den neuen
+                Aufruf beschreibt. Diese Methoden werden mit 2.0 entfernt. Die folgende Liste zeigt
+                die alten und neuen Methodenaufrufe.
+            </para>
+
+            <table id="zend.locale.migration.fromoneeighttoonenine.depreciated.table-1">
+
+                <title>List der Methodenaufrufe</title>
+
+                <tgroup cols="2">
+                    <thead>
+                        <row>
+                            <entry>Alter Aufruf</entry>
+                            <entry>Neuer Aufruf</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry>getLanguageTranslationList($locale)</entry>
+                            <entry>getTranslationList('language', $locale)</entry>
+                        </row>
+                        <row>
+                            <entry>getScriptTranslationList($locale)</entry>
+                            <entry>getTranslationList('script', $locale)</entry>
+                        </row>
+                        <row>
+                            <entry>getCountryTranslationList($locale)</entry>
+                            <entry>getTranslationList('territory', $locale, 2)</entry>
+                        </row>
+                        <row>
+                            <entry>getTerritoryTranslationList($locale)</entry>
+                            <entry>getTranslationList('territory', $locale, 1)</entry>
+                        </row>
+                        <row>
+                            <entry>getLanguageTranslation($value, $locale)</entry>
+                            <entry>getTranslation($value, 'language', $locale)</entry>
+                        </row>
+                        <row>
+                            <entry>getScriptTranslation($value, $locale)</entry>
+                            <entry>getTranslation($value, 'script', $locale)</entry>
+                        </row>
+                        <row>
+                            <entry>getCountryTranslation($value, $locale)</entry>
+                            <entry>getTranslation($value, 'country', $locale)</entry>
+                        </row>
+                        <row>
+                            <entry>getTerritoryTranslation($value, $locale)</entry>
+                            <entry>getTranslation($value, 'territory', $locale)</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+
+        </sect3>
+    </sect2>
 
     <sect2 id="zend.locale.migration.fromonesixtooneseven">
         <title>Migrieren von 1.6 oder 1.7 zu neueren</title>

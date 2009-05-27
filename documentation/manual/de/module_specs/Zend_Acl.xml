@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15680 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.acl.introduction">
     <title>Einführung</title>
@@ -203,7 +203,7 @@ $acl = new Zend_Acl();
             Export beinhalten. Diese Genehmigungen können durch eine Rollenregistrierung
             repräsentiert werden, die es jeder Gruppe erlaubt, die Rechte von 'übergeordneten'
             Gruppen zu erben sowie eindeutige Rechte nur für deren Gruppe bereit zu stellen. Diese
-            Genehmigungen können wir folgt ausgedrückt werden:
+            Genehmigungen können wie folgt ausgedrückt werden:
         </para>
 
         <table id="zend.acl.introduction.role_registry.table.example_cms_access_controls">

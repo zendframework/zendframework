@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.action">
     <title>Action Kontroller</title>
@@ -265,9 +265,9 @@ if ($this->_hasParam('id') {
             <classname>Zend_Controller_Action</classname> bietet einen rudimentären und flexiblen
             Mechanismus für View Integration. Zwei Methoden machen das möglich,
             <code>initView()</code> und <code>render()</code>; die erste Methode lädt die
-            öffentliche Eigenschaft <code>$view</code> träge, und die zweite rendert eine View
-            basierend auf der aktuell angefragen Aktion, wobei die Verzeichnis Hirarchie verwendet
-            wird um den Pfad des Skripts zu ermitteln.
+            öffentliche Eigenschaft <varname>$view</varname> träge, und die zweite rendert eine
+            View basierend auf der aktuell angefragen Aktion, wobei die Verzeichnis Hirarchie
+            verwendet wird um den Pfad des Skripts zu ermitteln.
         </para>
 
         <sect3 id="zend.controller.action.viewintegration.initview">
@@ -276,11 +276,11 @@ if ($this->_hasParam('id') {
             <para>
                 <code>initView()</code> initialisiert das View Objekt. <code>render()</code> ruft
                 <code>initView()</code> auf um das View Objekt zu erhalten, aber es kann jederzeit
-                initialisiert werden; standardmäßig wird die <code>$view</code> Eigenschaft mit
-                einem <classname>Zend_View</classname> Objekt bekanntgegeben, aber jede Klasse die
-                <classname>Zend_View_Interface</classname> implementiert kann verwendet werden. Wenn
-                <code>$view</code> bereits initialisiert wurde, wird diese Eigenschaft einfach
-                zurückgegeben.
+                initialisiert werden; standardmäßig wird die <varname>$view</varname> Eigenschaft
+                mit einem <classname>Zend_View</classname> Objekt bekanntgegeben, aber jede Klasse
+                die <classname>Zend_View_Interface</classname> implementiert kann verwendet werden.
+                Wenn <varname>$view</varname> bereits initialisiert wurde, wird diese Eigenschaft
+                einfach zurückgegeben.
             </para>
 
             <para>
@@ -327,13 +327,14 @@ string render(string $action = null,
                 <code>render()</code> rendert ein View Skript. Wenn keine Argumente übergeben
                 werden, wird angenommen das das angefragte Skript
                 <code>[controller]/[action].phtml</code> ist (wobei <code>.phtml</code> der Wert der
-                <code>$viewSuffix</code> Eigenschaft ist). Wenn ein Wert für <code>$action</code>
-                angegeben wird, wird das Template im <code>[controller]</code> Unterverzeichnis
-                gerendert. Um die Verwendung des <code>[controller]</code> Unterverzeichnisses zu
-                überschreiben kann ein true Wert für <code>$noController</code> übergeben werden.
-                Zuletzt werden templates in das Antwort Objekt gerendert; wenn zu einem spezifischen
+                <varname>$viewSuffix</varname> Eigenschaft ist). Wenn ein Wert für
+                <varname>$action</varname> angegeben wird, wird das Template im
+                <code>[controller]</code> Unterverzeichnis gerendert. Um die Verwendung des
+                <code>[controller]</code> Unterverzeichnisses zu überschreiben kann ein true Wert
+                für <varname>$noController</varname> übergeben werden. Zuletzt werden templates in
+                das Antwort Objekt gerendert; wenn zu einem spezifischen
                 <link linkend="zend.controller.response.namedsegments">benannten Segment</link> im
-                Antwort Objekt dargestellt werden soll, kann ein Wert an <code>$name</code>
+                Antwort Objekt dargestellt werden soll, kann ein Wert an <varname>$name</varname>
                 übergeben werden.
             </para>
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.config.adapters.ini">
     <title>Zend_Config_Ini</title>
@@ -28,8 +28,9 @@
         <title>Schlüssel Trenner</title>
         <para>
             Standardmäßig ist das Schlüssel Trennzeichen der Punkt (<code>.</code>). Dies kann
-            geändert werden, indem der <code>$options</code> Schlüssel <code>'nestSeparator'</code>
-            geändert wird, wenn das <classname>Zend_Config_Ini</classname> Objekt instanziert wird.
+            geändert werden, indem der <varname>$options</varname> Schlüssel
+            <code>'nestSeparator'</code> geändert wird, wenn das
+            <classname>Zend_Config_Ini</classname> Objekt instanziert wird.
             Zum Beispiel:
             <programlisting language="php"><![CDATA[
 $options['nestSeparator'] = ':';
@@ -93,17 +94,17 @@ echo $config->database->params->dbname; // Ausgabe "dbname"
             </thead>
             <tbody>
                 <row>
-                    <entry><code>$filename</code></entry>
+                    <entry><varname>$filename</varname></entry>
                     <entry>The INI Datei die geladen wird.</entry>
                 </row>
                 <row>
-                    <entry><code>$section</code></entry>
+                    <entry><varname>$section</varname></entry>
                     <entry>Die [section] innerhalb der ini Datei die geladen wird. Das Setzen dieses
                     Parameters auf null lädt alle Sektionen. Alternativ, kann ein Array von
                     Sektionsnamen übergeben werden um mehrere Sektionen zu laden.</entry>
                 </row>
                 <row>
-                    <entry><code>$options = false</code></entry>
+                    <entry><varname>$options = false</varname></entry>
                     <entry>Options Array. Die folgenden Schlüssel werden unterstützt:
                         <itemizedlist>
                             <listitem>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15719 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.config.theory_of_operation">
     <title>Theory of Operation</title>
@@ -74,10 +74,11 @@
     <para>
         Wenn zwei <classname>Zend_Config</classname> Objekte vorhanden sind, können diese in ein
         einzelnes Objekt zusammengeführt werden indem die <code>merge()</code> Funktion verwendet
-        wird. Angenommen es gibt <code>$config</code> und <code>$localConfig</code>, kann
-        <code>$localConfig</code> in <code>$config</code> zusammengeführt werden indem
-        <code>$config->merge($localConfig);</code> aufgerufen wird. Die Elemente in
-        <code>$localConfig</code> überschreiben gleichnamige Elemente in <code>$config</code>.
+        wird. Angenommen es gibt <varname>$config</varname> und <varname>$localConfig</varname>,
+        kann <varname>$localConfig</varname> in <varname>$config</varname> zusammengeführt werden
+        indem <code>$config->merge($localConfig);</code> aufgerufen wird. Die Elemente in
+        <varname>$localConfig</varname> überschreiben gleichnamige Elemente in
+        <varname>$config</varname>.
         <note>
             <para>
                 Das <classname>Zend_Config</classname> Objekt das die Zusammenführung durchführt muß

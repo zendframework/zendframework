@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.application.theory-of-operation">
     <title>Theorie der Funktionsweise</title>
@@ -481,7 +481,7 @@ class FooController extends Zend_Controller_Action
             <para>
                 As noted previously, all resources -- whether methods or plugins
                 -- are bootstrapped by calling <code>bootstrap($resource)</code>,
-                where <code>$resource</code> is the name of a resource, an array
+                where <varname>$resource</varname> is the name of a resource, an array
                 of resources, or, left empty, indicates all resources should be
                 run.
             </para>

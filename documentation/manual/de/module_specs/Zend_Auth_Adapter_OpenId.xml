@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.auth.adapter.openid">
 
@@ -70,9 +70,10 @@
             <classname>Zend_Auth_Adapter_OpenId</classname>. Wie vorher erwähnt wird die
             <classname>Zend_Auth_Adapter_OpenId::authenticate()</classname> Methode zweimal
             aufgerufen. Das erste Mal, ist nachdem der Benutzer das HTML Formular übermittelt hat
-            und <code>$_POST['openid_action']</code> auf <code>"login"</code> gesetzt wurde, und das
-            zweite Mal nach der HTTP Umleitung vom OpenID Server wenn
-            <code>$_GET['openid_mode']</code> oder <code>$_POST['openid_mode']</code> gesetzt wurde.
+            und <varname>$_POST['openid_action']</varname> auf <code>"login"</code> gesetzt wurde,
+            und das zweite Mal nach der HTTP Umleitung vom OpenID Server wenn
+            <varname>$_GET['openid_mode']</varname> oder <varname>$_POST['openid_mode']</varname>
+            gesetzt wurde.
         </para>
 
         <programlisting language="php"><![CDATA[

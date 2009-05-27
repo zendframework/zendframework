@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.front">
     <title>Der Front Controller</title>
@@ -356,7 +356,7 @@ Zend_Controller_Front::run('../application/controllers');
                     Mit <code>registerPlugin(Zend_Controller_Plugin_Abstract $plugin, $stackIndex =
                     null)</code> können
                     <link linkend="zend.controller.plugins">Front-Controller-Plugins</link>
-                    registriert werden. Über den optionalen <code>$stackIndex</code> kann
+                    registriert werden. Über den optionalen <varname>$stackIndex</varname> kann
                     kontrolliert werden, in welcher Reihenfolge die Plugins ausgeführt werden.
                 </para>
             </listitem>
@@ -365,7 +365,7 @@ Zend_Controller_Front::run('../application/controllers');
                 <para>
                     <code>unregisterPlugin($plugin)</code> kann registrierte <link
                         linkend="zend.controller.plugins">Plugin-Objekte</link> entfernen.
-                    <code>$plugin</code> kann entweder ein Plugin-Objekt oder eine Zeichenkette
+                    <varname>$plugin</varname> kann entweder ein Plugin-Objekt oder eine Zeichenkette
                     sein, die die Klasse des zu entfernenden Plugins angibt.
                 </para>
             </listitem>
@@ -422,7 +422,7 @@ Zend_Controller_Front::run('../application/controllers');
             <listitem>
                 <para>
                     <code>setParam($name, $value)</code> setzt einen einzelnen Parameter mit dem
-                    Namen <code>$name</code> und dem Wert <code>$value</code>.
+                    Namen <varname>$name</varname> und dem Wert <varname>$value</varname>.
                 </para>
             </listitem>
 
@@ -435,7 +435,8 @@ Zend_Controller_Front::run('../application/controllers');
 
             <listitem>
                 <para>
-                    <code>getParam($name)</code> gibt den Parameter <code>$name</code> zurück.
+                    <code>getParam($name)</code> gibt den Parameter <varname>$name</varname>
+                    zurück.
                 </para>
             </listitem>
 

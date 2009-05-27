@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.core-functionality.resource-resourceabstract">
     <title>Zend_Application_Resource_ResourceAbstract</title>
@@ -33,7 +33,7 @@
                     <entry><code>void</code></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$options</code>: <emphasis>optional</emphasis>.
+                            <varname>$options</varname>: <emphasis>optional</emphasis>.
                             Optionen mit denen der Ressource Status gesetzt wird.
                         </para></listitem>
                     </itemizedlist></entry>
@@ -52,7 +52,7 @@
                     <entry><classname>Zend_Application_Resource_Resource</classname></entry>
                     <entry><itemizedlist>
                             <listitem><para>
-                                <code>$bootstrap</code>: <emphasis>required</emphasis>.
+                                <varname>$bootstrap</varname>: <emphasis>required</emphasis>.
                                 Parent Bootstrap der diese Ressource initialisiert.
                             </para></listitem>
                     </itemizedlist></entry>
@@ -75,7 +75,7 @@
                     <entry><classname>Zend_Application_Resource_Resource</classname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$options</code>: <emphasis>required</emphasis>.
+                            <varname>$options</varname>: <emphasis>required</emphasis>.
                             Optionen mit denen der Status gesetzt werden soll.
                         </para></listitem>
                     </itemizedlist></entry>
@@ -169,8 +169,8 @@ $view = $bootstrap->getResource('My_Resource_View');
 
         <para>
             Das bringt uns zur dritten Option. Man kann einen expliziten Namen spezifizieren, zu
-            dem eine Ressourceklasse sich registriert. Das kann durch das Hinzufügen einer
-            public <code>$_explicitType</code> Eigenschaft, mit einem Stringwert, in der Plugin
+            dem eine Ressourceklasse sich registriert. Das kann durch das Hinzufügen einer public
+            <varname>$_explicitType</varname> Eigenschaft, mit einem Stringwert, in der Plugin
             Ressourceklasse durchgeführt werden; dieser Wert wird dann immer verwendet wenn man
             zur Plugin Ressource über die Bootstrap verweisen will. Als Beispiel, definieren wir
             unsere eigene View Klasse:

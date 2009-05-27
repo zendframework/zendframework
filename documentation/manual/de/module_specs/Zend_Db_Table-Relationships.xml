@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.table.relationships">
 
@@ -99,7 +99,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
         <para>
             Wenn <classname>Zend_Db_Table</classname> verwendet wird um kaskadierende UPDATE und
-            DELETE Operationen zu emulieren, muß das <code>$_dependentTables</code> Array in der
+            DELETE Operationen zu emulieren, muß das <varname>$_dependentTables</varname> Array in der
             Klasse für die Eltern-Tabelle definiert werden. Der Klassenname muß für jede abhängige
             Komponente aufgelistet werden. Hierbei muß der Klassenname und nicht der physikalische
             Name der SQL Tabelle verwendet werden.
@@ -108,7 +108,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
         <note>
 
             <para>
-                Die Deklaration von <code>$_dependentTables</code> sollte übergangen werden wenn
+                Die Deklaration von <varname>$_dependentTables</varname> sollte übergangen werden wenn
                 referentielle Integritätsverknüpfungen im RDBMS Server verwendet werden um
                 kaskadierende Operationen zu implementieren. Siehe
                 <xref linkend="zend.db.table.relationships.cascading" /> für weitere Informationen.
@@ -117,7 +117,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
         </note>
 
         <para>
-            Das <code>$_referenceMap</code> Array muß in der Klasse für jede unabhängige Tabelle
+            Das <varname>$_referenceMap</varname> Array muß in der Klasse für jede unabhängige Tabelle
             deklariert werden. Das ist ein assoziatives Array von Referenz-"Regeln". Eine
             Referenzregel identifiziert welche Tabelle in der Relation die Elterntabelle ist, und
             listet auch welche Spalten in der abhängigen Tabelle welche Spalten in der
@@ -125,7 +125,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
         </para>
 
         <para>
-            Der Schlüssel der Regel ist ein String der als Index zum <code>$_referenceMap</code>
+            Der Schlüssel der Regel ist ein String der als Index zum <varname>$_referenceMap</varname>
             Array verwendet wird. Dieser Regelschlüssel wird verwendet um jede Referenzen von
             Abhängigkeiten zu idenzifizieren. Es sollte ein sprechender Name für diesen
             Regelschlüssel ausgewählt werden. Deshalb ist es das beste einen String zu verwendet
@@ -139,7 +139,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
         </para>
 
         <para>
-            Die Werte von jedem Regeleintrag im <code>$_referenceMap</code> Array sind auch ein
+            Die Werte von jedem Regeleintrag im <varname>$_referenceMap</varname> Array sind auch ein
             assoziatives Array. Die Elemente dieses Regeleintrages werden im folgenden beschrieben:
         </para>
 
@@ -170,7 +170,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
                     gleichen Elterntabelle. In der Beispieldatenbank gibt es eine Referenz von der
                     <code>bugs</code> Tabelle zu der <code>products</code> Tabelle, aber drei
                     Referenzen von der <code>bugs</code> Tabelle zur <code>accounts</code> Tabelle.
-                    Jede Referenz sollte in einen separaten Eintrag im <code>$_referenceMap</code>
+                    Jede Referenz sollte in einen separaten Eintrag im <varname>$_referenceMap</varname>
                     Array gegeben werden.
                 </para>
             </listitem>
@@ -234,12 +234,12 @@ $row->findDependentRowset($table, [$rule]);
 
         <para>
             Diese Methode gibt ein <classname>Zend_Db_Table_Rowset_Abstract</classname> Objekt
-            zurück, welche ein Set von Zeilen der abhängigen Tabelle <code>$table</code> enthält die
-            die Zeile referenzieren die durch das <code>$row</code> Objekt identifiziert werden.
+            zurück, welche ein Set von Zeilen der abhängigen Tabelle <varname>$table</varname> enthält die
+            die Zeile referenzieren die durch das <varname>$row</varname> Objekt identifiziert werden.
         </para>
 
         <para>
-            Das erste Argument <code>$table</code> kann ein String sein, der die abhängige Tabelle
+            Das erste Argument <varname>$table</varname> kann ein String sein, der die abhängige Tabelle
             durch Ihren Klassennamen spezifiziert. Man kann die abhängige Tabelle auch durch
             Verwendung eines Objekts dieser Tabellenklasse spezifizieren.
         </para>
@@ -265,8 +265,8 @@ $bugsReportedByUser = $user1234->findDependentRowset('Bugs');
         </example>
 
         <para>
-            Das zweite Argument <code>$rule</code> ist optional. Es ist ein String der den
-            Regelschlüssel im <code>$_referenceMap</code> Array der abhängigen Tebellenklasse
+            Das zweite Argument <varname>$rule</varname> ist optional. Es ist ein String der den
+            Regelschlüssel im <varname>$_referenceMap</varname> Array der abhängigen Tebellenklasse
             benennt. Wenn keine Regel spezifiziert wird, wird die erste Regel im Array verwendet
             die die Elterntabelle referenziert. Wenn eine andere Regel als die erste verwendet
             werden soll, muß der Schlüssel spezifiziert werden.
@@ -423,7 +423,7 @@ $row->findParentRow($table, [$rule]);
         </para>
 
         <para>
-            Das erste Argument <code>$table</code> kann ein String sein der die Elterntabelle durch
+            Das erste Argument <varname>$table</varname> kann ein String sein der die Elterntabelle durch
             Ihren Klassennamen spezifiziert. Man kann die Elterntabelle auch durch Verwendung eines
             Objektes dieser Tabellenklasse spezifizieren.
         </para>
@@ -450,8 +450,8 @@ $reporter = $bug1->findParentRow('Accounts');
         </example>
 
         <para>
-            Das zweite Argument <code>$rule</code> ist optional. Es ist ein Strung der den
-            Regelschlüssel im <code>$_referenceMap</code> Array der abhängigen Tabellenklasse
+            Das zweite Argument <varname>$rule</varname> ist optional. Es ist ein Strung der den
+            Regelschlüssel im <varname>$_referenceMap</varname> Array der abhängigen Tabellenklasse
             benennt. Wenn diese Regel nicht spezifiziert wird, wird die erste Regel im Array
             genommen das die Elterntabelle referenziert. Wenn eine andere Regel als der erste
             genommen werden muß, dann muß der Schlüssel spezifiziert werden.
@@ -574,20 +574,20 @@ $row->findManyToManyRowset($table,
 
         <para>
             Diese Methode gibt ein <classname>Zend_Db_Table_Rowset_Abstract</classname> zurück
-            welches Zeilen von der Tabelle <code>$table</code> enthält, und der Viele-Zu-Viele
-            Abhängigkeit entspricht. Das aktuelle Zeilenobjekt <code>$row</code> von der originalen
+            welches Zeilen von der Tabelle <varname>$table</varname> enthält, und der Viele-Zu-Viele
+            Abhängigkeit entspricht. Das aktuelle Zeilenobjekt <varname>$row</varname> von der originalen
             Tabelle wird verwendet um Zeilen in der Verknüpfungstabelle zu finden, und es ist mit
             der Zieltabelle verbunden.
         </para>
 
         <para>
-            Das erste Argument <code>$table</code> kann ein String sein der die Zieltabelle in der
+            Das erste Argument <varname>$table</varname> kann ein String sein der die Zieltabelle in der
             Viele-Zu-Viele Verknüpfung durch seinen Klassennamen spezifiziert. Es kann auch die
             Zieltabelle durch Verwendung eines Objekts dieser Tabellenklasse spezifiziert werden.
         </para>
 
         <para>
-            Das zweite Argument <code>$intersectionTable</code> kann ein String sein, der die
+            Das zweite Argument <varname>$intersectionTable</varname> kann ein String sein, der die
             Verknüpfungstabelle zwischen diesen zwei Tabellen in der Viele-Zu-Viele Verknüpfung,
             durch seinen Klassennamen, spezifiziert. Die Verknüpfungstabelle kann auch durch
             Verwendung eines Objektes dieser Tabellenklasse spezifiziert werden.
@@ -615,19 +615,19 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
         </example>
 
         <para>
-            Das dritte und vierte Argument <code>$rule1</code> und <code>$rule2</code> sind
-            optional. Das sind Strings die den Regelschlüssel im <code>$_referenceMap</code> Array
+            Das dritte und vierte Argument <varname>$rule1</varname> und <varname>$rule2</varname> sind
+            optional. Das sind Strings die den Regelschlüssel im <varname>$_referenceMap</varname> Array
             der verknüpfungstabelle benennen.
         </para>
 
         <para>
-            Der <code>$rule1</code> Schlüssel benennt die Regel für die Verknüpfung der
+            Der <varname>$rule1</varname> Schlüssel benennt die Regel für die Verknüpfung der
             Verknüpfungstabelle zur Originaltabelle. In diesem Beispiel ist das die verknüpfung von
             <code>BugsProducts</code> zu <code>Bugs</code>.
         </para>
 
         <para>
-            Der <code>$rule2</code> Schlüssel benennt die Regel für die Verknüpfung der
+            Der <varname>$rule2</varname> Schlüssel benennt die Regel für die Verknüpfung der
             Verknüpfungstabelle zur Zieltabelle. In diesem Beispiel ist der die Verknüpfung von
             <code>Bugs</code> zu <code>Products</code>.
         </para>
@@ -635,15 +635,15 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
         <para>
             Ähnlich den Methoden für das finden von Eltern- und abhängigen Zeilen verwendet die
             Methode, wenn keine Regel spezifiziert wird, die erste Regel im
-            <code>$_referenceMap</code> Array das den Tabellen in der Verknüpfung entspricht. Wenn
+            <varname>$_referenceMap</varname> Array das den Tabellen in der Verknüpfung entspricht. Wenn
             eine andere Regel als die erste verwendet werden soll, muß der Schlüssel spezifiziert
             werden.
         </para>
 
         <para>
             Im obigen Beispiel wird der Regelschlüssel nicht spezifiziert, sodas standardmäßig die
-            ersten passenden Regeln verwendet werden. In diesem Fall ist <code>$rule1</code>
-            <code>'Reporter'</code> und <code>$rule2</code> ist <code>'Product'</code>.
+            ersten passenden Regeln verwendet werden. In diesem Fall ist <varname>$rule1</varname>
+            <code>'Reporter'</code> und <varname>$rule2</varname> ist <code>'Product'</code>.
         </para>
 
         <example id="zend.db.table.relationships.fetching.many-to-many.example-by">
@@ -827,7 +827,7 @@ $product1234->delete();
 
         <para>
             Um eine kaskadierende Abhängigkeit in <classname>Zend_Db_Table</classname> zu
-            deklarieren, müssen die Regeln in <code>$_referenceMap</code> bearbeitet werden. Die
+            deklarieren, müssen die Regeln in <varname>$_referenceMap</varname> bearbeitet werden. Die
             assoziativen Arrayschlüssel <code>'onDelete'</code> und <code>'onUpdate'</code> müssen
             auf den String 'cascade' (oder die Konstante <code>self::CASCADE</code>) gesetzt werden.
             Bevor eine Zeile von der Elterntabelle gelöscht wird oder dessen Wert des primären

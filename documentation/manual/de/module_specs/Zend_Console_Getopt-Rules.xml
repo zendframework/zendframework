@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.console.getopt.rules">
     <title>Definieren von Getopt Regeln</title>
@@ -12,7 +12,8 @@
     </para>
     <para>
         Der Constructor nimmt zwei weitere Argumente, welche optional sind. Das zweite Argument kann
-        Kommandozeilen Argumente enthalten. Sein Standardwert ist <code>$_SERVER['argv']</code>.
+        Kommandozeilen Argumente enthalten. Sein Standardwert ist
+        <varname>$_SERVER['argv']</varname>.
     </para>
     <para>
         Das dritte Argument des Constructors kann Konfigurationsoptionen enthalten um das Verhalten

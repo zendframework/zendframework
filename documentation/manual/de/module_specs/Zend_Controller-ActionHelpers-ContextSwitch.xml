@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.actionhelpers.contextswitch">
     <title>ContextSwitch und AjaxContext</title>
@@ -240,8 +240,9 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
 
             <listitem><para>
                 <code>addContexts(array $contexts)</code>: Fügt viele Kontexte auf einmal hinzu.
-                Das <code>$contexts</code> Array sollte ein Array von Kontext/Spezifikation Paaren
-                sein. Wenn einer der Kontexte bereits existiert, wird eine Ausnahme geworfen.
+                Das <varname>$contexts</varname> Array sollte ein Array von Kontext/Spezifikation
+                Paaren sein. Wenn einer der Kontexte bereits existiert, wird eine Ausnahme
+                geworfen.
             </para></listitem>
 
             <listitem><para>
@@ -335,7 +336,8 @@ class FooController extends Zend_Controller_Action
 ]]></programlisting>
 
         <para>
-            Alternativ kann einfach die Array-Eigenschaft <code>$contexts</code> definiert werden:
+            Alternativ kann einfach die Array-Eigenschaft <varname>$contexts</varname> definiert
+            werden:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -366,8 +368,8 @@ class FooController extends Zend_Controller_Action
                 <para>
                     <code>addActionContext($action, $context)</code>: markiert einen oder mehrere
                     Kontexte als in einer Aktion vorhanden. Wenn bereits Mapping existieren wird
-                    einfach bei diesen Mappings angehängt. <code>$context</code> kann ein einzelner
-                    Kontext sein, oder ein Array von Kontexten.
+                    einfach bei diesen Mappings angehängt. <varname>$context</varname> kann ein
+                    einzelner Kontext sein, oder ein Array von Kontexten.
                 </para>
 
                 <para>
@@ -383,15 +385,16 @@ class FooController extends Zend_Controller_Action
             <listitem><para>
                     <code>setActionContext($action, $context)</code>: markiert einen oder mehrere
                     Kontexte als in einer Aktion vorhanden. Wenn bereits Mappings existieren werden
-                    Sie mit den spezifizierten ersetzt. <code>$context</code> kann ein einzelner
-                    Kontext sein, oder ein Array von Kontexten.
+                    Sie mit den spezifizierten ersetzt. <varname>$context</varname> kann ein
+                    einzelner Kontext sein, oder ein Array von Kontexten.
             </para></listitem>
 
             <listitem><para>
                     <code>addActionContexts(array $contexts)</code>: fügt mehrere Aktion/Kontext
-                    Paare auf einmal hinzu. <code>$contexts</code> sollte ein assoziatives Array
-                    von Aktion/Kontext Paaren sein. Es entspricht <code>addActionContext()</code>,
-                    was bedeutet das wenn eine Paarung bereits existiert, diese hinzugefügt wird.
+                    Paare auf einmal hinzu. <varname>$contexts</varname> sollte ein assoziatives
+                    Array von Aktion/Kontext Paaren sein. Es entspricht
+                    <code>addActionContext()</code>, was bedeutet das wenn eine Paarung bereits
+                    existiert, diese hinzugefügt wird.
             </para></listitem>
 
             <listitem><para>
@@ -412,8 +415,8 @@ class FooController extends Zend_Controller_Action
 
             <listitem><para>
                     <code>removeActionContext($action, $context)</code>: entfernt ein oder mehrere
-                    Kontexte von einer gegebenen Aktion. <code>$context</code> kann ein einzelner
-                    Kontext sein, oder ein Array von Kontexten.
+                    Kontexte von einer gegebenen Aktion. <varname>$context</varname> kann ein
+                    einzelner Kontext sein, oder ein Array von Kontexten.
             </para></listitem>
 
             <listitem><para>
@@ -498,8 +501,9 @@ $contextSwitch->initContext();
             <listitem>
                 <para>
                     <code>addHeader($context, $header, $content)</code>: Fügt einen Antwort Header
-                    für einen gegebenen Kontext hinzu. <code>$header</code> ist der Headername, und
-                    <code>$content</code> ist der Wert der an diesen Header übergeben werden soll.
+                    für einen gegebenen Kontext hinzu. <varname>$header</varname> ist der
+                    Headername, und <varname>$content</varname> ist der Wert der an diesen Header
+                    übergeben werden soll.
                 </para>
 
                 <para>
@@ -508,7 +512,7 @@ $contextSwitch->initContext();
                 </para>
 
                 <para>
-                    Wenn der spezifizierte <code>$header</code> bereits für diesen Kontext
+                    Wenn der spezifizierte <varname>$header</varname> bereits für diesen Kontext
                     existiert, wird eine Ausnahme geworfen.
                 </para>
             </listitem>
@@ -526,7 +530,7 @@ $contextSwitch->initContext();
                     <code>addHeaders($context, array $headers)</code>: Fügt einen gegebenen Kontext
                     mehrere Header auf einmal hinzu. Entspricht <code>addHeader()</code>, was
                     bedeutet das eine Ausnahme geworfen wird wenn der Header bereits existiert.
-                    <code>$headers</code> ist ein Array von Header/Kontext Paaren.
+                    <varname>$headers</varname> ist ein Array von Header/Kontext Paaren.
                 </para>
             </listitem>
 
@@ -565,14 +569,14 @@ $contextSwitch->initContext();
                     bei einem gegebenen Trigger für einen gegebenen Kontext. Trigger können
                     entweder 'init' oder 'post' sein (was zeigt das der Callback entweder bei der
                     Initialisierung oder der Nachbearbeitung aufgerufen wird).
-                    <code>$callback</code> sollte ein gültiger PHP Callback sein.
+                    <varname>$callback</varname> sollte ein gültiger PHP Callback sein.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     <code>setCallbacks($context, array $callbacks)</code>: Setzt mehrere Callbacks
-                    für einen gegebenen Kontext. <code>$callbacks</code> sollte ein
+                    für einen gegebenen Kontext. <varname>$callbacks</varname> sollte ein
                     Trigger/Callback Paar sein. Aktuell sind die meisten Callbacks die registriert
                     werden können zwei, einer für Initialisierung und einer für die
                     Nachbearbeitung.
@@ -661,10 +665,11 @@ $contextSwitch->initContext();
         </para>
 
         <para>
-            Zuerst, verwendet es eine andere Action Kontroller Eigenschaft<code>$ajaxable</code>
-            um Kontexte festzustellen. Damit kann man verschiedene Kontexte verwenden für AJAX
-            gegenüber normalen HTTP Anfragen. Die verschiedenen <code>*ActionContext*()</code>
-            Methoden von <code>AjaxContext</code> schreiben in diese Eigenschaft.
+            Zuerst, verwendet es eine andere Action Kontroller Eigenschaft
+            <varname>$ajaxable</varname> um Kontexte festzustellen. Damit kann man verschiedene
+            Kontexte verwenden für AJAX gegenüber normalen HTTP Anfragen. Die verschiedenen
+            <code>*ActionContext*()</code> Methoden von <code>AjaxContext</code> schreiben in diese
+            Eigenschaft.
         </para>
 
         <para>

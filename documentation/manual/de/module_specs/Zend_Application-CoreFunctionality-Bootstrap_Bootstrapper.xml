@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15346 -->
+<!-- EN-Revision: 15719 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.core-functionality.bootstrap-bootstrapper">
     <title>Zend_Application_Bootstrap_Bootstrapper</title>
@@ -32,7 +32,7 @@
                     <entry><code>void</code></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$application</code>: <emphasis>benötigt</emphasis>.
+                            <varname>$application</varname>: <emphasis>benötigt</emphasis>.
                             Sollte ein <classname>Zend_Application</classname> oder
                             <classname>Zend_Application_Bootstrap_Bootstrapper</classname> Objekt
                             als einziges Argument akzeptieren.
@@ -50,7 +50,7 @@
                     <entry><classname>Zend_Application_Bootstrap_Bootstrapper</classname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$options</code>: <emphasis>benötigt</emphasis>.
+                            <varname>$options</varname>: <emphasis>benötigt</emphasis>.
                             Array von Optionen die gesetzt werden.
                         </para></listitem>
                     </itemizedlist></entry>
@@ -100,11 +100,11 @@
                     <entry><code>mixed</code></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$resource</code>: <emphasis>Optional</emphasis>.
+                            <varname>$resource</varname>: <emphasis>Optional</emphasis>.
                         </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
-                        Wenn <code>$resource</code> leer ist werden alle Bootstrap Ressourcen
+                        Wenn <varname>$resource</varname> leer ist werden alle Bootstrap Ressourcen
                         ausgeführt. Wird ein String angegeben, wird diese einzelne Ressource
                         ausgeführt; wird ein Array angegeben, wird jede Ressource in diesem
                         Array ausgeführt.

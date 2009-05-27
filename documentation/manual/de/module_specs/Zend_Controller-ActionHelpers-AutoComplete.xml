@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.actionhelpers.autocomplete">
     <title>AutoComplete</title>
@@ -102,7 +102,7 @@ class FooController extends Zend_Controller_Action
         <listitem><para>
                 <code>direct($data, $sendNow = true, $keepLayouts = false)</code> wird verwendet
                 wenn der Helfer als Methode des Helfer Brokers aufgerufen wird. Das
-                <code>$sendNow</code> Flag wird verwendet um festzustellen ob
+                <varname>$sendNow</varname> Flag wird verwendet um festzustellen ob
                 <code>sendAutoCompletion()</code> oder <code>prepareAutoCompletion()</code>
                 aufgerufen werden muß.
         </para></listitem>

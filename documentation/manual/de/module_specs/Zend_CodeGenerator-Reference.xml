@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.codegenerator.reference">
     <title>Zend_CodeGenerator Referenz</title>
@@ -32,7 +32,7 @@ abstract class Zend_CodeGenerator_Abstract
             <para>
                 Der Constructor ruft zuerst <code>_init()</code> auf (welches für eine konkrete
                 erweiterte Klasse für die Implementation leer gelassen ist), übergibt dann
-                den <code>$options</code> Parameter an <code>setOptions()</code> und ruft
+                den <varname>$options</varname> Parameter an <code>setOptions()</code> und ruft
                 zuletzt <code>_prepare()</code> auf (welches auch von der erweiternden Klasse
                 implementiert werden muß).
             </para>

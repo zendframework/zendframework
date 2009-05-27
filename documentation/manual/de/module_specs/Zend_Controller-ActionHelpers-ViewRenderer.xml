@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.actionhelpers.viewrenderer">
     <title>ViewRenderer</title>
@@ -179,7 +179,7 @@ $this->foo(); // Foo_View_Helper_Foo::foo() aufrufen
                 <para>
                     <code>setView($view)</code> erlaubt das Setzen des View Objektes für den
                     <code>ViewRenderer</code>. Er wird als öffentliche Klasseneigenschaft
-                    <code>$view</code> gesetzt.
+                    <varname>$view</varname> gesetzt.
                 </para>
             </listitem>
 
@@ -227,8 +227,8 @@ $this->foo(); // Foo_View_Helper_Foo::foo() aufrufen
             <listitem>
                 <para>
                     <code>setScriptAction($name)</code> kann verwendet werden um das Aktion Skript
-                    zu spezifizieren das gerendert werden soll. <code>$name</code> sollte der Name
-                    des Skripts sein, ohne den Datei Suffix (und ohne das Kontroller
+                    zu spezifizieren das gerendert werden soll. <varname>$name</varname> sollte der
+                    Name des Skripts sein, ohne den Datei Suffix (und ohne das Kontroller
                     Unterverzeichnis, ausser wenn <code>noController</code> eingeschaltet wurde).
                     Wenn nicht spezifiziert, wird nach einem View Skript gesucht das nach der Aktion
                     in Anfrage Objekt benannt ist. <code>getScriptAction()</code> empfängt den
@@ -402,9 +402,9 @@ $viewRenderer =
                 <para>
                     <code>setInflector($inflector, $reference)</code> erlaubt das Setzen eines
                     eigenen Inflectors für die Verwendung mit dem <code>ViewRenderer</code>. Wenn
-                    <code>$reference</code> true ist, setzt dieser das Suffix und Modulverzeichnis
-                    als statische Referenz zu <code>ViewRenderer</code> Eigenschaften, genauso wie
-                    das Ziel.
+                    <varname>$reference</varname> true ist, setzt dieser das Suffix und
+                    Modulverzeichnis als statische Referenz zu <code>ViewRenderer</code>
+                    Eigenschaften, genauso wie das Ziel.
                 </para>
             </listitem>
         </itemizedlist>
@@ -478,8 +478,8 @@ $viewRenderer =
                     <code>renderScript($script, $name)</code> erlaubt es ein Skript mit einem selbst
                     spezifizierten Pfad zu rendern, optional zu einem benannten Pfad Segment. Wenn
                     diese Methode verwendet wird, ermittelt der <code>ViewRenderer</code> nicht
-                    automatisch den Skriptnamen sondern übergibt das <code>$script</code> Argument
-                    direkt der <code>render()</code> Methode des View Objekts.
+                    automatisch den Skriptnamen sondern übergibt das <varname>$script</varname>
+                    Argument direkt der <code>render()</code> Methode des View Objekts.
                 </para>
 
                 <note><para>
@@ -501,8 +501,8 @@ $viewRenderer =
                 <para>
                     <code>getViewScript($action, $vars)</code> erstellt den Pfad zu einem View
                     Skript das auf einer Aktion basiert die übergeben wird, und/oder allen Variablen
-                    die in <code>$vars</code> übergeben werden. Schlüssel für dieses Array können
-                    jede der Pfad Spezifikations Schhüssel enthalten ('moduleDir', 'module',
+                    die in <varname>$vars</varname> übergeben werden. Schlüssel für dieses Array
+                    können jede der Pfad Spezifikations Schhüssel enthalten ('moduleDir', 'module',
                     'controller', 'action', und 'suffix'). Jede übergebene Variable wird verwendet;
                     andernfalls werden Werte die auf der aktuellen Anfrage basieren angewendet.
                 </para>
@@ -532,11 +532,12 @@ $viewRenderer =
             <listitem>
                 <para>
                     <code>render($action, $name, $noController)</code> prüft zuerst ob entweder
-                    <code>$name</code> oder <code>$noController</code> übergeben wurde, und wenn dem
-                    so ist, wird das betreffende Flag (respektive responseSegment und noController)
-                    im ViewRenderer gesetzt. Dann übergibt er das <code>$action</code> Argument,
-                    wenn vorhanden, an <code>getViewScript()</code>. Am Ende wird der berechnete
-                    View Skript Pfad an <code>renderScript()</code> übergeben.
+                    <varname>$name</varname> oder <varname>$noController</varname> übergeben wurde,
+                    und wenn dem so ist, wird das betreffende Flag (respektive responseSegment und
+                    noController) im ViewRenderer gesetzt. Dann übergibt er das
+                    <varname>$action</varname> Argument, wenn vorhanden, an
+                    <code>getViewScript()</code>. Am Ende wird der berechnete View Skript Pfad an
+                    <code>renderScript()</code> übergeben.
                 </para>
 
                 <note>
@@ -561,9 +562,9 @@ $viewRenderer =
                 <para>
                     <code>renderBySpec($action, $vars, $name)</code> erlaubt es Pfad Spezifikations
                     Variablen zu übergeben um den View Skript Pfad zu ermitteln der erstellt werden
-                    soll. Es übergibt <code>$action</code> und <code>$vars</code> an
+                    soll. Es übergibt <varname>$action</varname> und <varname>$vars</varname> an
                     <code>getScriptPath()</code> und übergibt anschließend den resultierenden Skript
-                    Pfad und <code>$name</code> an <code>renderScript()</code>.
+                    Pfad und <varname>$name</varname> an <code>renderScript()</code>.
                 </para>
             </listitem>
         </itemizedlist>

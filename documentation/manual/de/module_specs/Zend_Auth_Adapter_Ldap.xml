@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.auth.adapter.ldap">
 
@@ -71,10 +71,10 @@ if ($log_path) {
 }
 ]]></programlisting>
             Natürlich ist der Logging Code optional, aber es wird dringend empfohlen einen Logger
-            zu verwenden. <classname>Zend_Auth_Adapter_Ldap</classname> zeichnet fast jedes Bisschen
-            an Information in <code>$messages</code> auf das irgendwer benötigen können (mehr
-            anbei), was allerdings selbst ein nettes Feature für jemanden als History ist, kann
-            überaus schwierig zu debuggen sein.
+            zu verwenden. <classname>Zend_Auth_Adapter_Ldap</classname> zeichnet fast jedes
+            Bisschen an Information in <varname>$messages</varname> auf das irgendwer benötigen
+            können (mehr anbei), was allerdings selbst ein nettes Feature für jemanden als History
+            ist, kann überaus schwierig zu debuggen sein.
         </para>
 
         <para>
@@ -142,8 +142,8 @@ ldap.server2.baseDn = "CN=Users,DC=w,DC=net"
         </para>
 
         <para>
-            Der <code>$options</code> Parameter wird benötigt und muß ein Array sein das ein oder
-            mehrere Sets von Optionen enthält. Es ist zu beachten das es sich um
+            Der <varname>$options</varname> Parameter wird benötigt und muß ein Array sein das ein
+            oder mehrere Sets von Optionen enthält. Es ist zu beachten das es sich um
             <emphasis>Array von Arrays</emphasis> von <link
                 linkend="zend.ldap"><classname>Zend_Ldap</classname></link> Optionen handelt. Selbst
             wenn nur ein einzelner LDAP Server verwendet wird, müssen die Optionen trotzdem in einem

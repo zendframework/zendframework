@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15207 -->
+<!-- EN-Revision: 15719 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.captcha.adapters">
     <title>CAPTCHA Adapter</title>
@@ -42,7 +42,7 @@
             <listitem><para>
                 <code>setTimeout($ttl)</code> und <code>getTimeout()</code> erlauben es die
                 Lebenszeit des Sessiontokens zu spezifizieren, und den aktuellen Wert er erhalten.
-                <code>$ttl</code> sollte in Sekunden spezifiziert sein.
+                <varname>$ttl</varname> sollte in Sekunden spezifiziert sein.
             </para></listitem>
 
             <listitem><para>
@@ -148,7 +148,7 @@
 
             <listitem><para>
                 <code>setFont($font)</code> und <code>getFont()</code> erlauben es die Schrift zu
-                spezifizieren die man verwenden will. <code>$font</code> sollte ein voll
+                spezifizieren die man verwenden will. <varname>$font</varname> sollte ein voll
                 qualifizierter Pfad zu der Schriftart-Datei sein. Dieser Wert wird benötigt; das
                 CAPTCHA wird wärend der Erzeugung eine Ausnahme werfen wenn die Schriftdatei nicht
                 spezifiziert wurde.

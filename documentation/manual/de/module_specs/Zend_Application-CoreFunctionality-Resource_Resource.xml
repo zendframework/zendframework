@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15346 -->
+<!-- EN-Revision: 15719 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.core-functionality.resource-resource">
     <title>Zend_Application_Resource_Resource</title>
@@ -29,7 +29,7 @@
                     <entry><code>void</code></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$options</code>: <emphasis>Optional</emphasis>.
+                            <varname>$options</varname>: <emphasis>Optional</emphasis>.
                             Optionen mit denen der Status der Ressource gesetzt wird.
                         </para></listitem>
                     </itemizedlist></entry>
@@ -49,7 +49,7 @@
                     </entry>
                     <entry><itemizedlist>
                             <listitem><para>
-                                <code>$bootstrap</code>: <emphasis>Benötigt</emphasis>.
+                                <varname>$bootstrap</varname>: <emphasis>Benötigt</emphasis>.
                                 Eltern-Bootstrap das diese Ressource initialisiert.
                             </para></listitem>
                     </itemizedlist></entry>
@@ -72,7 +72,7 @@
                     <entry><classname>Zend_Application_Resource_Resource</classname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$options</code>: <emphasis>Benötigt</emphasis>.
+                            <varname>$options</varname>: <emphasis>Benötigt</emphasis>.
                             Optionen mit denen der Status gesetzt wird.
                         </para></listitem>
                     </itemizedlist></entry>

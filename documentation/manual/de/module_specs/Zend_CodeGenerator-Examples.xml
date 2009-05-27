@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.codegenerator.examples">
     <title>Zend_CodeGenerator Beispiele</title>
@@ -272,7 +272,7 @@ class Foo
         </para>
 
         <para>
-            Das folgende Beispiel nimmt an das wir <code>$foo</code> mit einer der
+            Das folgende Beispiel nimmt an das wir <varname>$foo</varname> mit einer der
             Klassen-Definitionen der vorherigen Beispiele definiert haben.
         </para>
 

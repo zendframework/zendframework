@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15719 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.actionhelpers" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Action Helfer</title>
@@ -34,7 +34,7 @@
         </para>
 
         <para>
-            Ein Helfer Broker wir das der <code>$_helper</code> Teilnehmer von
+            Ein Helfer Broker wir das der <varname>$_helper</varname> Teilnehmer von
             <classname>Zend_Controller_Action</classname> gespeichert; der Broker kann verwendet
             werden um Helfer zu empfangen oder aufzurufen. Einige Methoden das zu tun sind:
         </para>
@@ -157,8 +157,8 @@ Zend_Controller_Action_HelperBroker::addPath('./Plugins/Helpers',
 
         <para>
             Um zu ermitteln ob ein Helfer im Helfer Broker existiert, kann
-            <code>hasHelper($name)</code> verwendet werden, wobei <code>$name</code> der Kurzname
-            des Helfers ist (ohne das Prefix):
+            <code>hasHelper($name)</code> verwendet werden, wobei <varname>$name</varname> der
+            Kurzname des Helfers ist (ohne das Prefix):
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -180,8 +180,8 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
         </para>
 
         <para>
-            Beide Methoden nehmen ein einzelnes Argument, <code>$name</code>, welches der Kurzname
-            des Helfers (ohne den Präfix) ist.
+            Beide Methoden nehmen ein einzelnes Argument, <varname>$name</varname>, welches der
+            Kurzname des Helfers (ohne den Präfix) ist.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -200,8 +200,8 @@ $redirector =
 
         <para>
             Schlußendlich, um einen registrierten Helfer vom Broker zu entfernen, kann
-            <code>removeHelper($name)</code> verwendet werden, wobei <code>$name</code> der Kurzname
-            des Helfers ist (ohne den Prefix):
+            <code>removeHelper($name)</code> verwendet werden, wobei <varname>$name</varname> der
+            Kurzname des Helfers ist (ohne den Prefix):
         </para>
 
         <programlisting language="php"><![CDATA[

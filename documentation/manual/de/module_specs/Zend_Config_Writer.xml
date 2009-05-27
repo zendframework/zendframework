@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.config.writer.introduction">
     <title>Zend_Config_Writer</title>
@@ -11,8 +11,8 @@
         funktionieren. Der Writer wird mit speziellen Optionen instanziert, welche
         <code>filename</code> und <code>config</code> sein können. Dann wird die
         <code>write()</code> Methode des Writers aufgerufen und die Configdatei wird erstellt. Man
-        kann <code>$filename</code> und <code>$config</code> auch direkt an die <code>write()</code>
-        Methode übergeben. Aktuell werden die folgenden Writer mit
+        kann <varname>$filename</varname> und <varname>$config</varname> auch direkt an die
+        <code>write()</code> Methode übergeben. Aktuell werden die folgenden Writer mit
         <classname>Zend_Config_Writer</classname> ausgeliefert:
     </para>
 

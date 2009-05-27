@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15289 -->
+<!-- EN-Revision: 15719 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.core-functionality.bootstrap-resourcebootstrapper">
     <title>Zend_Application_Bootstrap_ResourceBootstrapper</title>
@@ -39,13 +39,13 @@
                     </entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$resource</code>: <emphasis>Benötigt</emphasis>.
+                            <varname>$resource</varname>: <emphasis>Benötigt</emphasis>.
                             Ein Ressourcen Name oder ein
                             <classname>Zend_Application_Resource_Resource</classname> Objekt.
                         </para></listitem>
 
                         <listitem><para>
-                            <code>$options</code>: <emphasis>Optional</emphasis>.
+                            <varname>$options</varname>: <emphasis>Optional</emphasis>.
                             Ein Array oder <classname>Zend_Config</classname> Objekt das an die
                             Ressource bei der Instanziierung zu übergeben ist.
                         </para></listitem>
@@ -63,7 +63,7 @@
                     </entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$resource</code>: <emphasis>Benötigt</emphasis>.
+                            <varname>$resource</varname>: <emphasis>Benötigt</emphasis>.
                             Name der Ressource die von der Klasse de-registriert werden soll.
                         </para></listitem>
                     </itemizedlist></entry>
@@ -77,7 +77,7 @@
                     <entry><code>boolean</code></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$resource</code>: <emphasis>Benötigt</emphasis>.
+                            <varname>$resource</varname>: <emphasis>Benötigt</emphasis>.
                             Name der Ressource.
                         </para></listitem>
                     </itemizedlist></entry>
@@ -91,7 +91,7 @@
                     <entry><classname>Zend_Application_Resource_Resource</classname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$resource</code>: <emphasis>Benötigt</emphasis>.
+                            <varname>$resource</varname>: <emphasis>Benötigt</emphasis>.
                             Name einer Ressource die empfangen werden soll (String).
                         </para></listitem>
                     </itemizedlist></entry>
@@ -117,7 +117,7 @@
                     </entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$loader</code>: <emphasis>Benötigt</emphasis>.
+                            <varname>$loader</varname>: <emphasis>Benötigt</emphasis>.
                             Instanz des Plugin Loaders der verwendet werden soll wenn Plugin Namen
                             auf Klassen umgewandelt werden.
                         </para></listitem>

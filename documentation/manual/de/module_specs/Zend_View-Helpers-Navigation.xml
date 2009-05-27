@@ -144,9 +144,10 @@
                     tiefste aktive Seite im angegebenen Container zu finden. Wenn keine Tiefe
                     angegeben wird, verwendet diese Methode die Werte die sie von
                     <code>getMinDepth()</code> und <code>getMaxDepth()</code> erhält. Die tiefste
-                    aktive Seite muß zwischen <code>$minDepth</code> und <code>$maxDepth</code>
-                    inklusive liegen. Gibt ein Array zurück das Referenzen zu der gefundenen
-                    Instanz der Seite enthält, und die Tiefe bei der die Seite gefunden wurde.
+                    aktive Seite muß zwischen <varname>$minDepth</varname> und
+                    <varname>$maxDepth</varname> inklusive liegen. Gibt ein Array zurück das
+                    Referenzen zu der gefundenen Instanz der Seite enthält, und die Tiefe bei der
+                    die Seite gefunden wurde.
                 </para>
             </listitem>
             <listitem>
@@ -739,25 +740,26 @@ Produkte, Foo Server, FAQ
         <para>
             Es gibt zwei Typen von Beziehungen; vorwärts und rückwärts, angezeigt durch die
             Schlüsselwörter <code>'rel'</code> und <code>'rev'</code>. Die meisten Methoden im
-            Helfer nehmen einen <code>$rel</code> Parameter entgegen, welcher entweder
+            Helfer nehmen einen <varname>$rel</varname> Parameter entgegen, welcher entweder
             <code>'rel'</code> oder <code>'rev'</code> sein muß. Die meisten Methoden nehmen auch
-            einen <code>$type</code> Parameter entgegen welcher für die Spezifikation des Linktyps
-            (z.B. alternate, start, next, prev, chapter, usw.) verwendet wird.
+            einen <varname>$type</varname> Parameter entgegen welcher für die Spezifikation des
+            Linktyps (z.B. alternate, start, next, prev, chapter, usw.) verwendet wird.
         </para>
 
         <para>
             Beziehungen können dem Seitenobjekt manuell hinzugefügt werden, oder werden durch
             das Durchlaufen des Containers, der im Helfer registriert ist, gefunden. Die Methode
             <code>findRelation($page, $rel, $type)</code> versucht zuerst den gegebenen
-            <code>$rel</code> von <code>$type</code> von der <code>$page</code> durch den Aufruf
-            von <code>$page->findRel($type)</code> oder <code>$page->findRel($type)</code> zu
-            finden. Wenn <code>$page</code> eine Beziehung hat die zu der Instanz einer Seite
-            konvertiert werden kann, wird diese Beziehung verwendet. Wenn die Instanz von
-            <code>$page</code> keinen <code>$type</code> spezifiziert hat, schaut der Helfer nach
-            einer Methode im Helfer die <code>search$rel$type</code> heißt (z.B.
-            <code>searchRelNext()</code> oder <code>searchRevAlternate()</code>). Wenn so eine
-            Methode existiert, wird Sie für die Erkennung der Beziehung der <code>$page</code>
-            verwendet indem der Container durchlaufen wird.
+            <varname>$rel</varname> von <varname>$type</varname> von der <varname>$page</varname>
+            durch den Aufruf von <code>$page->findRel($type)</code> oder
+            <code>$page->findRel($type)</code> zu finden. Wenn <varname>$page</varname> eine
+            Beziehung hat die zu der Instanz einer Seite konvertiert werden kann, wird diese
+            Beziehung verwendet. Wenn die Instanz von <varname>$page</varname> keinen
+            <varname>$type</varname> spezifiziert hat, schaut der Helfer nach einer Methode im
+            Helfer die <code>search$rel$type</code> heißt (z.B. <code>searchRelNext()</code> oder
+            <code>searchRevAlternate()</code>). Wenn so eine Methode existiert, wird Sie für die
+            Erkennung der Beziehung der <varname>$page</varname> verwendet indem der Container
+            durchlaufen wird.
         </para>
 
         <para>
@@ -1189,11 +1191,11 @@ Ausgabe:
                     <code>UL</code> Liste dar.
                 </para>
                 <para>
-                    Wenn <code>$container</code> nicht angegeben wird, wird der Container der
+                    Wenn <varname>$container</varname> nicht angegeben wird, wird der Container der
                     im Helfer registriert ist dargestellt.
                 </para>
                 <para>
-                    <code>$options</code> wird verwendet um temporär spezifizierte Optionen zu
+                    <varname>$options</varname> wird verwendet um temporär spezifizierte Optionen zu
                     überschreiben ohne das die Werte in der Helferinstanz resetiert werden. Es
                     ist ein assoziatives Array wobei jeder Schlüssel mit einer Option im Helfer
                     korrespondiert.

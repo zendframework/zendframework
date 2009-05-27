@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.cache.frontends">
     <title>Zend_Cache Frontends</title>
@@ -590,9 +590,9 @@ $res = $cache->foobar2('1', '2');
             </para>
             <para>
                 Andererseits wird die "Cache ID" automatisch berechnet mit
-                <code>$_SERVER['REQUEST_URI']</code> und (abhängig von den Optionen) mit
-                <code>$_GET</code>, <code>$_POST</code>, <code>$_SESSION</code>,
-                <code>$_COOKIE</code>, <code>$_FILES</code>. Trotzdem muß nur eine Methode
+                <varname>$_SERVER['REQUEST_URI']</varname> und (abhängig von den Optionen) mit
+                <varname>$_GET</varname>, <varname>$_POST</varname>, <varname>$_SESSION</varname>,
+                <varname>$_COOKIE</varname>, <varname>$_FILES</varname>. Trotzdem muß nur eine Methode
                 aufgerufen werden (<code>start()</code>), weil der Aufruf von <code>end()</code>
                 immer vollautomatisch ist, wenn die Seite endet.
             </para>
@@ -652,7 +652,7 @@ $res = $cache->foobar2('1', '2');
                                               <code>(boolean, false per Default)
                                               cache_with_get_variables</code> : wenn true, ist der
                                               Cache weiterhin aktiviert, selbst wenn es einige
-                                              Variablen im <code>$_GET</code> Array gibt
+                                              Variablen im <varname>$_GET</varname> Array gibt
                                           </para>
                                       </listitem>
                                       <listitem>
@@ -660,7 +660,7 @@ $res = $cache->foobar2('1', '2');
                                               <code>(boolean, false per Default)
                                               cache_with_post_variables</code> : wenn true, ist der
                                               Cache weiterhin aktiviert, selbst wenn es einige
-                                              Variablen im <code>$_POST</code> Array gibt
+                                              Variablen im <varname>$_POST</varname> Array gibt
                                           </para>
                                       </listitem>
                                       <listitem>
@@ -668,7 +668,7 @@ $res = $cache->foobar2('1', '2');
                                               <code>(boolean, false per Default)
                                               cache_with_session_variables</code> : wenn true, ist
                                               der Cache weiterhin aktiviert, selbst wenn es einige
-                                              Variablen im <code>$_SESSION</code> Array gibt
+                                              Variablen im <varname>$_SESSION</varname> Array gibt
                                           </para>
                                       </listitem>
                                       <listitem>
@@ -676,7 +676,7 @@ $res = $cache->foobar2('1', '2');
                                               <code>(boolean, false per Default)
                                               cache_with_files_variables</code> : wenn true, ist der
                                               Cache weiterhin aktiviert, selbst wenn es einige
-                                              Variablen im <code>$_FILES</code> Array gibt
+                                              Variablen im <varname>$_FILES</varname> Array gibt
                                           </para>
                                       </listitem>
                                       <listitem>
@@ -684,14 +684,14 @@ $res = $cache->foobar2('1', '2');
                                               <code>(boolean, false per Default)
                                               cache_with_cookie_variables</code> : wenn true, ist
                                               der Cache weiterhin aktiviert, selbst wenn es einige
-                                              Variablen im <code>$_COOKIE</code> Array gibt
+                                              Variablen im <varname>$_COOKIE</varname> Array gibt
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
                                               <code>(boolean, true per Default)
                                               make_id_with_get_variables</code> : wenn true, wird
-                                              die Cache ID vom Inhalt des <code>$_GET</code> Arrays
+                                              die Cache ID vom Inhalt des <varname>$_GET</varname> Arrays
                                               abhängig sein
                                           </para>
                                       </listitem>
@@ -699,7 +699,7 @@ $res = $cache->foobar2('1', '2');
                                           <para>
                                               <code>(boolean, true per Default)
                                               make_id_with_post_variables</code> : wenn true, wird
-                                              die Cache ID vom Inhalt des <code>$_POST</code> Arrays
+                                              die Cache ID vom Inhalt des <varname>$_POST</varname> Arrays
                                               abhängig sein
                                           </para>
                                       </listitem>
@@ -708,14 +708,14 @@ $res = $cache->foobar2('1', '2');
                                               <code>(boolean, true per Default)
                                               make_id_with_session_variables</code> : wenn true,
                                               wird die Cache ID vom Inhalt des
-                                              <code>$_SESSION</code> Arrays abhängig sein
+                                              <varname>$_SESSION</varname> Arrays abhängig sein
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
                                               <code>(boolean, true per Default)
                                               make_id_with_files_variables</code> : wenn true, wird
-                                              die Cache ID vom Inhalt des <code>$_FILES</code>
+                                              die Cache ID vom Inhalt des <varname>$_FILES</varname>
                                               Arrays abhängig sein
                                           </para>
                                       </listitem>
@@ -723,7 +723,7 @@ $res = $cache->foobar2('1', '2');
                                           <para>
                                               <code>(boolean, true per Default)
                                               make_id_with_cookie_variables</code> : wenn true, wird
-                                              die Cache ID vom Inhalt des <code>$_COOKIE</code>
+                                              die Cache ID vom Inhalt des <varname>$_COOKIE</varname>
                                               Arrays abhängig sein
                                           </para>
                                       </listitem>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.request">
     <title>Das Request Objekt</title>
@@ -38,8 +38,8 @@
         <para>
             Abhängig vom Typ der Anfrage können auch weitere Methoden verfügbar sein. Das
             verwendete Standard Request Object <classname>Zend_Controller_Request_Http</classname>
-            stellt z.B. Methoden zum Abfragen der Request URI, Pfadinformationen, <code>$_GET</code>
-            und <code>$_POST</code> Parameter usw. bereit.
+            stellt z.B. Methoden zum Abfragen der Request URI, Pfadinformationen,
+            <varname>$_GET</varname> und <varname>$_POST</varname> Parameter usw. bereit.
         </para>
 
         <para>
@@ -88,10 +88,10 @@
             <para>
                 Auf spezifische superglobale Werte kann alternativ über eine öffentliche Methode
                 zugegriffen werden. Zum Beispiel kann auf den unverarbeitete Wert von
-                <code>$_POST['user']</code> durch Aufruf der <code>getPost('user')</code> Methode
-                des Request Objekts zugegriffen werden. Diese beinhalten <code>getQuery()</code>,
-                um <code>$_GET</code> Elemente zu erhalten und <code>getHeader()</code>, um
-                Request Header zu erhalten.
+                <varname>$_POST['user']</varname> durch Aufruf der <code>getPost('user')</code>
+                Methode des Request Objekts zugegriffen werden. Diese beinhalten
+                <code>getQuery()</code>, um <varname>$_GET</varname> Elemente zu erhalten und
+                <code>getHeader()</code>, um Request Header zu erhalten.
             </para>
 
             <note>
@@ -157,9 +157,9 @@
                 <para>
                     Wenn Apache's 404 Handler verwendet wird um eingehende Anfragen an den Front
                     Controller zu übergeben, oder ein PT Flag mit Rewrite Regeln verwendet wird,
-                    enthält <code>$_SERVER['REDIRECT_URL']</code> die URI die benötigt wird, nicht
-                    <code>$_SERVER['REQUEST_URI']</code>. Wenn so ein Setup verwendet wird und man
-                    ungültige Routen erhält, sollte man stattdessen die
+                    enthält <varname>$_SERVER['REDIRECT_URL']</varname> die URI die benötigt wird,
+                    nicht <varname>$_SERVER['REQUEST_URI']</varname>. Wenn so ein Setup verwendet
+                    wird und man ungültige Routen erhält, sollte man stattdessen die
                     <classname>Zend_Controller_Request_Apache404</classname> Klasse statt der
                     standard Http Klasse für das Anfrage Objekt verwenden:
                 </para>

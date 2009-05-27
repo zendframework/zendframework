@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.response">
     <title>Das Response Objekt</title>
@@ -156,7 +156,7 @@ $front->dispatch();
                     <code>setHeader($name, $value, $replace = false)</code> wird verwendet um einen
                     individuellen Header zu setzen. Standardmäßig, ersetzt das keinen bereits
                     existierenden gleichnamigen Header im Objekt; Trotzdem wird das Setzen von
-                    <code>$replace</code> zu true es forcieren das zu tun.
+                    <varname>$replace</varname> zu true es forcieren das zu tun.
                 </para>
 
                 <para>
@@ -174,7 +174,7 @@ $front->dispatch();
                 </para>
 
                 <para>
-                    Intern wird <code>setHeader()</code> mit dem <code>$replace</code> Flag
+                    Intern wird <code>setHeader()</code> mit dem <varname>$replace</varname> Flag
                     aufgerufen um sicherzustellen das nur ein solcher Header jemals gesendet wird.
                 </para>
             </listitem>
@@ -304,20 +304,29 @@ array(
             <listitem>
                 <para>
                     <code>setBody()</code> und <code>appendBody()</code> erlauben das ein zweiter
-                    Wert, <code>$name</code>, übergeben wird der ein benanntes Segment indiziert. In
-                    jedem Fall wird, wenn das übergeben wird, das spezifizierte benannte Segment
-                    überschrieben oder es wird erstellt wenn es nicht existiert (standardmäßig dem
-                    Array hinzugefügt). Wenn kein benanntes Segment an <code>setBody()</code>
-                    übergeben wird, resetiert es den kompletten Inhalt des Body Arrays. Wenn kein
-                    benanntes Segment an appendBody() übergeben wird, wird der Inhalt dem Wert im
-                    'default' benannten Segment hinzugefügt.
+                    Wert, <varname>$name</varname>, übergeben wird der ein benanntes Segment
+                    indiziert. In jedem Fall wird, wenn das übergeben wird, das spezifizierte
+                    benannte Segment überschrieben oder es wird erstellt wenn es nicht existiert
+                    (standardmäßig dem Array hinzugefügt). Wenn kein benanntes Segment an
+                    <code>setBody()</code> übergeben wird, resetiert es den kompletten Inhalt des
+                    Body Arrays. Wenn kein benanntes Segment an appendBody() übergeben wird, wird
+                    der Inhalt dem Wert im 'default' benannten Segment hinzugefügt.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>prepend($name, $content)</code> erstellt ein <code>$name</code> benanntes
-                    Segment und plaziert dieses ab Beginn des Arrays. Wenn das Segment bereits
+                    <code>prepend($name, $content)</code> erstellt ein <varname>$name</varname>
+                    benanntes Segment und plaziert dieses ab Beginn des Arrays. Wenn das Segment
+                    bereits existiert, wird es vor der Operation entfernt (bzw, überschrieben und
+                    getauscht).
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>append($name, $content)</code> erstellt ein <varname>$name</varname>
+                    benanntes Segment und plaziert es am Ende des Arrays. Wenn das Segment bereits
                     existiert, wird es vor der Operation entfernt (bzw, überschrieben und
                     getauscht).
                 </para>
@@ -325,37 +334,31 @@ array(
 
             <listitem>
                 <para>
-                    <code>append($name, $content)</code> erstellt ein <code>$name</code> benanntes
-                    Segment und plaziert es am Ende des Arrays. Wenn das Segment bereits existiert,
-                    wird es vor der Operation entfernt (bzw, überschrieben und getauscht).
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
                     <code>insert($name, $content, $parent = null, $before = false)</code> erstellt
-                    ein <code>$name</code> benanntes Segment. Wenn ein <code>$parent</code> Segment
-                    angegeben wurde, wird das neue Segment entweder vor oder nach diesem Segment im
-                    Array plaziert (basierend auf dem Wert von <code>$before</code>). Wenn das
-                    Segment bereits existiert, wird es vor der Operation entfernt (bzw,
-                    überschrieben und getauscht).
+                    ein <varname>$name</varname> benanntes Segment. Wenn ein
+                    <varname>$parent</varname> Segment angegeben wurde, wird das neue Segment
+                    entweder vor oder nach diesem Segment im Array plaziert (basierend auf dem Wert
+                    von <varname>$before</varname>). Wenn das Segment bereits existiert, wird es
+                    vor der Operation entfernt (bzw, überschrieben und getauscht).
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     <code>clearBody($name = null)</code> entfernt ein einzelnes benanntes Segment
-                    wenn ein <code>$name</code> angegeben wurde (andernfalls das komplette Array).
+                    wenn ein <varname>$name</varname> angegeben wurde (andernfalls das komplette
+                    Array).
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getBody($spec = false)</code> kann verwendet werden um ein einzelnes Array
-                    Segment zu erhalten wenn <code>$spec</code> der Name des benannten Segments ist.
-                    Wenn <code>$spec</code> false ist, gibt es einen String zurück der erstellt wird
-                    durch zusammenfügen aller benannten Segmente in Ihrer Reihenfolge. Wenn
-                    <code>$spec</code> true ist, gibt er das Array des Body Inhalts zurück.
+                    <code>getBody($spec = false)</code> kann verwendet werden um ein einzelnes
+                    Array Segment zu erhalten wenn <varname>$spec</varname> der Name des
+                    benannten Segments ist. Wenn <varname>$spec</varname> false ist, gibt es einen
+                    String zurück der erstellt wird durch zusammenfügen aller benannten Segmente in
+                    Ihrer Reihenfolge. Wenn <varname>$spec</varname> true ist, gibt er das Array
+                    des Body Inhalts zurück.
                 </para>
             </listitem>
         </itemizedlist>

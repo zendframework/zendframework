@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.actionhelpers.redirector">
     <title>Redirector</title>
@@ -77,8 +77,9 @@
                     <code>setUseAbsoluteUri()</code> kann verwendet werden um den
                     <code>Redirector</code> dazu zu zwingen absolute URIs zu verwenden wenn
                     umgeleitet wird. Wenn diese Option gesetzt ist, verwendet Sie den Wert von
-                    <code>$_SERVER['HTTP_HOST']</code>, <code>$_SERVER['SERVER_PORT']</code>, und
-                    <code>$_SERVER['HTTPS']</code> um eine komplete URI zur, durch eine der
+                    <varname>$_SERVER['HTTP_HOST']</varname>,
+                    <varname>$_SERVER['SERVER_PORT']</varname>, und
+                    <varname>$_SERVER['HTTPS']</varname> um eine komplete URI zur, durch eine der
                     Umleitungsmethoden, spezifizierten URL zu erstellen. Diese Option ist
                     standardmäßig ausgeschaltet, kann aber in späteren Releases standardmäßig
                     eingeschaltet sein.

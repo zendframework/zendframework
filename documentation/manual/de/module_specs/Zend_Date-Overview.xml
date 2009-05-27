@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.overview">
 
@@ -25,7 +25,7 @@
                 Erfahrung hat als mit den ISO Zeichen für Formate dann kann man
                 <classname>Zend_Date::setOptions(array('format_type' => 'php'))</classname>
                 benutzen. Danach können PHP's Zeichen für Datumsformate für alle Funktionen
-                verwendet werden die einen <code>$format</code> Parameter akzeptieren. Durch
+                verwendet werden die einen <varname>$format</varname> Parameter akzeptieren. Durch
                 Benutzen von
                 <classname>Zend_Date::setOptions(array('format_type' => 'iso'))</classname> kann man
                 wieder auf den Standardmodus zurückwechseln der nur ISO Zeichen für Datumsformate
@@ -172,18 +172,18 @@
 
         <para>
             Die meisten Methoden erwarten eine Konstante für die Auswahl des gewünschten Teils
-            <code>$part</code> des Datums, wie z.B. <classname>Zend_Date::HOUR</classname>. Diese
-            Konstanten sind für alle unten angeführten Funktionen gültig. Eine Liste aller
+            <varname>$part</varname> des Datums, wie z.B. <classname>Zend_Date::HOUR</classname>.
+            Diese Konstanten sind für alle unten angeführten Funktionen gültig. Eine Liste aller
             vorhandenen Konstanten wird hier beschrieben: <xref
-                linkend="zend.date.constants.list" />. Wenn <code>$part</code> nicht spezifiziert
-            wird, wird <classname>Zend_Date::TIMESTAMP</classname> angenommen. Alternativ kann ein
-            benutzerdefiniertes Format für <code>$part</code> verwendet werden, mit Hilfe der
-            gleichen Mechanismen und Formatdefinitionen wie bei <link
+                linkend="zend.date.constants.list" />. Wenn <varname>$part</varname> nicht
+            spezifiziert wird, wird <classname>Zend_Date::TIMESTAMP</classname> angenommen.
+            Alternativ kann ein benutzerdefiniertes Format für <varname>$part</varname> verwendet
+            werden, mit Hilfe der gleichen Mechanismen und Formatdefinitionen wie bei <link
                 linkend="zend.locale.date.normalize"><classname>Zend_Locale_Format::getDate()</classname></link>.
             Wenn ein Datumsobjekt erstellt wird durch Verwendung eines offensichtlich falschen
             Datums (z.B. die Nummer des Monats größer als 12), wird <classname>Zend_Date</classname>
             eine Ausnahme werfen, solange kein spezielles Datumsformat ausgewählt wurde, und z.B.
-            <code>$part</code> entweder <code>null</code> oder
+            <varname>$part</varname> entweder <code>null</code> oder
             <classname>Zend_Date::DATES</classname> (ein "fehlertolerantes" Format).
         </para>
 
@@ -203,26 +203,27 @@ echo $date3, "\n"; // Ausgabe "Mar 3, 2007 12:00:00 AM"
         </example>
 
         <para>
-            Wenn der optionale <code>$locale</code> Parameter angegeben wurde, dann verdeutlicht
-            <code>$locale</code> den <code>$date</code> Operand durch Ersetzen der Monatsnamen und
-            Wochentagsnamen für die <code>$date</code> Zeichenkette, und auch Datumszeichenketten
-            können analysiert werden durch die Vorschriften dieses Gebietsschemas (siehe <code><link
+            Wenn der optionale <varname>$locale</varname> Parameter angegeben wurde, dann
+            verdeutlicht <varname>$locale</varname> den <varname>$date</varname> Operand durch
+            Ersetzen der Monatsnamen und Wochentagsnamen für die <varname>$date</varname>
+            Zeichenkette, und auch Datumszeichenketten können analysiert werden durch die
+            Vorschriften dieses Gebietsschemas (siehe <code><link
                 linkend="zend.locale.date.normalize">Zend_Locale_Format::getDate()</link></code>).
-            Die automatische Normalisierung von lokalisierten <code>$date</code> Angaben einer
+            Die automatische Normalisierung von lokalisierten <varname>$date</varname> Angaben einer
             Zeichenkette werden nur dann durchgeführt wenn eine der
             <classname>Zend_Date::DATE*</classname> oder <classname>Zend_Date::TIME*</classname>
             Konstanten verwendet wird. Das Gebietsschema identifiziert die Sprache welche verwendet
-            werden soll um Monatsnamen und Wochentagsnamen zu analysieren wenn <code>$date</code>
-            eine Zeichenkette ist die ein Datum enthält. Wenn der Eingabeparameter
-            <code>$date</code> nicht angegeben wurde, dann definiert der <code>$locale</code>
-            Parameter das Gebietsschema für lokalisierte Ausgaben (z.B. das Datumsformat für eine
-            Ausgabe als Zeichenkette). Anzumerken ist auch das der <code>$date</code> Parameter
-            stattdessen ein Typname sein kann (z.B. <code>$hour</code> für <code>addHour()</code>),
-            und das verhindert auch nicht das ein <classname>Zend_Date</classname> Objekt als
-            Argument für diesen Parameter angegeben werden kann. Wenn keine <code>$locale</code>
-            angegeben wurde, wird das Gebietsschema des aktuellen Objektes genommen um
-            <code>$date</code> zu interpretieren oder das lokalisierte Format für die Ausgabe
-            auszuwählen.
+            werden soll um Monatsnamen und Wochentagsnamen zu analysieren wenn
+            <varname>$date</varname> eine Zeichenkette ist die ein Datum enthält. Wenn der
+            Eingabeparameter <varname>$date</varname> nicht angegeben wurde, dann definiert der
+            <varname>$locale</varname> Parameter das Gebietsschema für lokalisierte Ausgaben (z.B.
+            das Datumsformat für eine Ausgabe als Zeichenkette). Anzumerken ist auch das der
+            <varname>$date</varname> Parameter stattdessen ein Typname sein kann (z.B.
+            <varname>$hour</varname> für <code>addHour()</code>), und das verhindert auch nicht das
+            ein <classname>Zend_Date</classname> Objekt als Argument für diesen Parameter angegeben
+            werden kann. Wenn keine <varname>$locale</varname> angegeben wurde, wird das
+            Gebietsschema des aktuellen Objektes genommen um <varname>$date</varname> zu
+            interpretieren oder das lokalisierte Format für die Ausgabe auszuwählen.
         </para>
 
         <para>
@@ -251,15 +252,15 @@ $date = new Zend_Date('31.Feb.2007');
         <para>
             Die Methoden <code>add(), sub(), compare(), get(), und set()</code> arbeiten generell
             mit Daten. In Jedem Fall wird die Operation auf dem Datum durchgeführt das in den
-            Objektinstanz vorhanden ist. Der <code>$date</code> Operand wird für alle dieser
+            Objektinstanz vorhanden ist. Der <varname>$date</varname> Operand wird für alle dieser
             Methoden benötigt, ausser für <code>get()</code> und kann eine
             <classname>Zend_Date</classname> Objektinstanz, eine nummerische Zeichenkette oder ein
-            Integer sein. Diese Methoden nehmen an das <code>$date</code> ein Zeitpunkt ist, wenn es
-            kein Objekt ist. Trotzdem kontrolliert der <code>$part</code> Operand an welchem
-            logischen Teil der zwei Daten gearbeitet werden soll, was Arbeiten an Teilen von Daten
-            des Objekts erlaubt, wie Jahr oder Minute selbst wenn <code>$date</code> eine lange form
-            einer Datumszeichenkette enthält wie "Dezember 31, 2007 23:59:59". Das Ergebnis der
-            Operation ändert das Datum im Objekt ausser bei <code>compare()</code> und
+            Integer sein. Diese Methoden nehmen an das <varname>$date</varname> ein Zeitpunkt ist,
+            wenn es kein Objekt ist. Trotzdem kontrolliert der <varname>$part</varname> Operand an
+            welchem logischen Teil der zwei Daten gearbeitet werden soll, was Arbeiten an Teilen von
+            Daten des Objekts erlaubt, wie Jahr oder Minute selbst wenn <varname>$date</varname>
+            eine lange form einer Datumszeichenkette enthält wie "Dezember 31, 2007 23:59:59". Das
+            Ergebnis der Operation ändert das Datum im Objekt ausser bei <code>compare()</code> und
             <code>get()</code>.
         </para>
 
@@ -289,11 +290,11 @@ print $date;
 
         <para>
             Diese üblichen Methoden haben die selbe gleichartige Funktionalität wie die Methoden für
-            die Basisoperationen, aber Sie erwarten Zeichenkette und Integer <code>$date</code>
-            Operanden welche nur die Werte enthalten welche durch den Typ definiert sind der durch
-            den Suffix der Methode definiert wurde. Deshalb identifizieren diese Methoden (z.B.
-            "Year" oder "Minute") die Einheit des <code>$date</code> Operanden wenn
-            <code>$date</code> eine Zeichenkette oder ein Integer ist
+            die Basisoperationen, aber Sie erwarten Zeichenkette und Integer
+            <varname>$date</varname> Operanden welche nur die Werte enthalten welche durch den Typ
+            definiert sind der durch den Suffix der Methode definiert wurde. Deshalb identifizieren
+            diese Methoden (z.B. "Year" oder "Minute") die Einheit des <varname>$date</varname>
+            Operanden wenn <varname>$date</varname> eine Zeichenkette oder ein Integer ist
         </para>
 
         <sect3 id="id.date.basic.parts">
@@ -387,8 +388,9 @@ print $date;
                             </entry>
                             <entry>
                                 <classname>Zend_Date::DAY_SHORT</classname> wird von
-                                <code>$date</code> extrahiert wenn der <code>$date</code> Operand
-                                eine <classname>Zend_Date</classname> Instanz oder eine nummerische
+                                <varname>$date</varname> extrahiert wenn der
+                                <varname>$date</varname> Operand eine
+                                <classname>Zend_Date</classname> Instanz oder eine nummerische
                                 Zeichenkette ist. Sonst wird versucht den Tag laut den
                                 dokumentierten Konventionen für diese Konstanten zu extrahieren:
                                 <classname>Zend_Date::WEEKDAY_NARROW</classname>,
@@ -403,8 +405,9 @@ print $date;
                                 <ulink url="http://en.wikipedia.org/wiki/Week">Woche</ulink>
                             </entry>
                             <entry>
-                                <classname>Zend_Date::WEEK</classname> wird von <code>$date</code>
-                                extrahiert wenn der <code>$date</code> Operand eine Instanz von
+                                <classname>Zend_Date::WEEK</classname> wird von
+                                <varname>$date</varname> extrahiert wenn der
+                                <varname>$date</varname> Operand eine Instanz von
                                 <classname>Zend_Date</classname> oder eine nummerische Zeichenkette
                                 ist. Sonst wird eine Ausnahme geworfen. (Gregorianischer Kalender
                                 angenommen)
@@ -414,12 +417,12 @@ print $date;
                             <entry>Datum</entry>
                             <entry>
                                 <classname>Zend_Date::DAY_MEDIUM</classname> wird aus
-                                <code>$date</code> extrahiert wenn der <code>$date</code> Operand
-                                eine Instanz von <classname>Zend_Date</classname> ist. Sonst wird
-                                versucht das Datum in ein Zend_Date::DATE_MEDIUM formatiertes Datum
-                                zu normalisieren. Das Format von
-                                <classname>Zend_Date::DATE_MEDIUM</classname> hängt vom
-                                Gebietsschema des Objektes ab.
+                                <varname>$date</varname> extrahiert wenn der
+                                <varname>$date</varname> Operand eine Instanz von
+                                <classname>Zend_Date</classname> ist. Sonst wird versucht das Datum
+                                in ein Zend_Date::DATE_MEDIUM formatiertes Datum zu normalisieren.
+                                Das Format von <classname>Zend_Date::DATE_MEDIUM</classname> hängt
+                                vom Gebietsschema des Objektes ab.
                             </entry>
                         </row>
                         <row>
@@ -427,10 +430,11 @@ print $date;
                             <entry>
                                 Wochentage werden nummerisch dargestellt von 0 (für Sonntag) bis 6
                                 (für Samstag). <classname>Zend_Date::WEEKDAY_DIGIT</classname> wird
-                                aus <code>$date</code> extrahiert wenn der <code>$date</code>
-                                Operand eine Instanz von <classname>Zend_Date</classname> oder eine
-                                numerische Zeichenkette ist. Sonst wird versucht den Tag laut den
-                                dokumentierten Konventionen für diese Konstanten zu extrahieren:
+                                aus <varname>$date</varname> extrahiert wenn der
+                                <varname>$date</varname> Operand eine Instanz von
+                                <classname>Zend_Date</classname> oder eine numerische Zeichenkette
+                                ist. Sonst wird versucht den Tag laut den dokumentierten
+                                Konventionen für diese Konstanten zu extrahieren:
                                 <classname>Zend_Date::WEEKDAY_NARROW</classname>,
                                 <classname>Zend_Date::WEEKDAY_NAME</classname>,
                                 <classname>Zend_Date::WEEKDAY_SHORT</classname>,
@@ -486,7 +490,7 @@ print $date;
                 Die unten angeführten Basisoperationen können statt den bequemlichen Operationen für
                 spezielle Datumsabschnitte verwendet werden. Die <link
                     linkend="zend.date.constants.list">entsprechenden Konstanten</link> werden für
-                den <code>$part</code> Parameter verwendet.
+                den <varname>$part</varname> Parameter verwendet.
             </para>
 
             <table id="id.date.basic.operations.table">
@@ -507,8 +511,8 @@ print $date;
                                 </para>
                                 <para>
                                     <code>get($part)</code> kann benutzt werden um einen
-                                    Datumsabschnitt <code>$part</code> dieses Datumsobjektes welcher
-                                    in ein Gebietsschema lokalisiert oder als formatierte
+                                    Datumsabschnitt <varname>$part</varname> dieses Datumsobjektes
+                                    welcher in ein Gebietsschema lokalisiert oder als formatierte
                                     Zeichenkette oder Integer gewünscht ist zurück zu bekommen.
                                     Durch Verwendung der BCMath Erweiterung können nummerische
                                     Zeichenkettten statt Integer für große Werte zurückgegeben
@@ -527,10 +531,10 @@ print $date;
                                     <emphasis>set($date, $part = null, $locale = null)</emphasis>
                                 </para>
                                 <para>
-                                    Setzt den Abschnitt <code>$part</code> des aktuellen Objektes
-                                    übereinstimmend mit dem Wert der für diesen Abschnitt in der
-                                    Eingabe <code>$date</code> und im Gebietsschema
-                                    <code>$locale</code> gefunden wurde.
+                                    Setzt den Abschnitt <varname>$part</varname> des aktuellen
+                                    Objektes übereinstimmend mit dem Wert der für diesen Abschnitt
+                                    in der Eingabe <varname>$date</varname> und im Gebietsschema
+                                    <varname>$locale</varname> gefunden wurde.
                                 </para>
                             </entry>
                         </row>
@@ -541,9 +545,10 @@ print $date;
                                     <emphasis>add($date, $part = null, $locale = null)</emphasis>
                                 </para>
                                 <para>
-                                    Addiert den Abschnitt <code>$part</code> von <code>$date</code>
-                                    welcher im Gebietsschema <code>$locale</code> geschrieben ist
-                                    zum Datum des aktuellen Objektes.
+                                    Addiert den Abschnitt <varname>$part</varname> von
+                                    <varname>$date</varname> welcher im Gebietsschema
+                                    <varname>$locale</varname> geschrieben ist zum Datum des
+                                    aktuellen Objektes.
                                 </para>
                             </entry>
                         </row>
@@ -554,9 +559,10 @@ print $date;
                                     <emphasis>sub($date, $part = null, $locale = null)</emphasis>
                                 </para>
                                 <para>
-                                    Subtrahiert den Abschnitt <code>$part</code> von
-                                    <code>$date</code> welcher im Gebietsschema <code>$locale</code>
-                                    geschrieben ist vom Datum des aktuellen Objektes.
+                                    Subtrahiert den Abschnitt <varname>$part</varname> von
+                                    <varname>$date</varname> welcher im Gebietsschema
+                                    <varname>$locale</varname> geschrieben ist vom Datum des
+                                    aktuellen Objektes.
                                 </para>
                             </entry>
                         </row>
@@ -568,9 +574,9 @@ print $date;
                                 </para>
                                 <para>
                                     Gibt ein geklontes Objekt zurück, wobei nur der gewünschte
-                                    Abschnitt <code>$part</code> des Datumsobjektes kopiert wird,
-                                    wobei im Klon das Gebietsschema von <code>$locale</code> gesetzt
-                                    wird (wenn angegeben).
+                                    Abschnitt <varname>$part</varname> des Datumsobjektes kopiert
+                                    wird, wobei im Klon das Gebietsschema von
+                                    <varname>$locale</varname> gesetzt wird (wenn angegeben).
                                 </para>
                             </entry>
                         </row>
@@ -582,10 +588,11 @@ print $date;
                                         null)</emphasis>
                                 </para>
                                 <para>
-                                    Vergleicht den Abschnitt <code>$part</code> des Datums
-                                    <code>$date</code> mit dem Zeitpunkt des Objektes. Gibt 0 zurück
-                                    wenn sie gleich sind, 1 wenn wenn der Abschnitt dieses Objektes
-                                    früher war als der Abschnitt von $date und andernfalls -1.
+                                    Vergleicht den Abschnitt <varname>$part</varname> des Datums
+                                    <varname>$date</varname> mit dem Zeitpunkt des Objektes. Gibt 0
+                                    zurück wenn sie gleich sind, 1 wenn wenn der Abschnitt dieses
+                                    Objektes früher war als der Abschnitt von $date und andernfalls
+                                    -1.
                                 </para>
                             </entry>
                         </row>
@@ -623,9 +630,9 @@ print $date;
                                 <emphasis>equals($date, $part = null, $locale = null)</emphasis>
                             </para>
                             <para>
-                                Gibt true zurück wenn der Abschnitt <code>$part</code> von
-                                <code>$date</code> der das Gebietsschema <code>$locale</code> hat,
-                                der gleiche ist wie der Abschnitt <code>$part</code> vom Datum des
+                                Gibt true zurück wenn der Abschnitt <varname>$part</varname> von
+                                <varname>$date</varname> der das Gebietsschema <varname>$locale</varname> hat,
+                                der gleiche ist wie der Abschnitt <varname>$part</varname> vom Datum des
                                 Objektes, andernfalls false
                             </para>
                         </entry>
@@ -637,9 +644,9 @@ print $date;
                                 <emphasis>isEarlier($date, $part = null, $locale = null)</emphasis>
                             </para>
                             <para>
-                                Gibt true zurück wenn der Abschnitt <code>$part</code> vom Datum des
-                                Objektes früher ist als der Abschnitt <code>$part</code> von
-                                <code>$date</code> der das Gebietsschema <code>$locale</code> hat
+                                Gibt true zurück wenn der Abschnitt <varname>$part</varname> vom Datum des
+                                Objektes früher ist als der Abschnitt <varname>$part</varname> von
+                                <varname>$date</varname> der das Gebietsschema <varname>$locale</varname> hat
                             </para>
                         </entry>
                     </row>
@@ -650,9 +657,9 @@ print $date;
                                 <emphasis>isLater($date, $part = null, $locale = null)</emphasis>
                             </para>
                             <para>
-                                Gibt true zurück wenn der Abschnitt <code>$part</code> vom Datum des
-                                Objektes später ist als der Abschnitt <code>$part</code> von
-                                <code>$date</code> der das Gebietsschema <code>$locale</code> hat
+                                Gibt true zurück wenn der Abschnitt <varname>$part</varname> vom Datum des
+                                Objektes später ist als der Abschnitt <varname>$part</varname> von
+                                <varname>$date</varname> der das Gebietsschema <varname>$locale</varname> hat
                             </para>
                         </entry>
                     </row>
@@ -762,7 +769,7 @@ print $date;
                                 <code>__toString()</code>. Die <code>toString()</code> Methode
                                 formatiert automatisch den Wert des Datumsobjektes anhand der
                                 Konventionen des Gebietsschemas des Objektes, oder einem optional
-                                definierten Gebietsschema <code>$locale</code>. Für eine Liste von
+                                definierten Gebietsschema <varname>$locale</varname>. Für eine Liste von
                                 unterstützten Formatcodes kann hier nachgeschaut werden:
                                 <xref linkend="zend.date.constants.selfdefinedformats" />.
                             </para>
@@ -868,9 +875,9 @@ print $date;
                             </para>
                             <para>
                                 Gibt eine Integer Repräsentation des ausgewählten Datumsabschnittes
-                                <code>$part</code> zurück anhand der Konventionen des Gebietsschemas
+                                <varname>$part</varname> zurück anhand der Konventionen des Gebietsschemas
                                 des Objektes. Gibt <code>false</code> zurück wenn der Abschnitt
-                                <code>$part</code> ein nicht numerischer Wert ist, wie
+                                <varname>$part</varname> ein nicht numerischer Wert ist, wie
                                 <classname>Zend_Date::MONTH_NAME_SHORT</classname>.
                                 <emphasis>NOTIZ:</emphasis> Diese Methode ruft <link
                                     linkend="id.date.basic.operations"><code>get()</code></link> auf
@@ -891,8 +898,8 @@ print $date;
                                 <emphasis>get($part = null, $locale = null)</emphasis>
                             </para>
                             <para>
-                                Diese Methode gibt den Abschnitt <code>$part</code> vom Datum des
-                                Objektes, welches mit dem Gebietsschema <code>$locale</code>
+                                Diese Methode gibt den Abschnitt <varname>$part</varname> vom Datum des
+                                Objektes, welches mit dem Gebietsschema <varname>$locale</varname>
                                 lokalisiert wurde, als formatierten String oder Integer zurück. Für
                                 weitere Informationen hier weiterlesen:
                                 <xref linkend="id.date.basic.operations" />.
@@ -909,7 +916,7 @@ print $date;
                                 Diese bequemliche Funktion ist identisch mit
                                 <code>new Zend_Date()</code>. Sie gibt das aktuelle Datum als
                                 <classname>Zend_Date</classname> Objekt zurück, welches das
-                                Gebietsschema <code>$locale</code> hat.
+                                Gebietsschema <varname>$locale</varname> hat.
                             </para>
                         </entry>
                     </row>

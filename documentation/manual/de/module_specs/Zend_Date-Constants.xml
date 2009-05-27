@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.constants">
 
     <title>Konstanten für generelle Datums Funktionen</title>
 
     <para>
-        Wo auch immer eine <classname>Zend_Date</classname> Methode einen <code>$parts</code>
+        Wo auch immer eine <classname>Zend_Date</classname> Methode einen <varname>$parts</varname>
         Parameter besitzt, kann eine der nachfolgenden Konstanten als Argument für diesen Parameter
         benutzt werden, um einen speziellen Teil des Datums auszuwählen, oder um anzuzeigen das ein
         bestimmtes Datumsformat benutzt werden oder gewünscht ist (z.B. RFC 822).
@@ -573,11 +573,11 @@
             Auf <classname>Zend_Date::DATES</classname> sollte speziell geachtet werden, da dieser
             Formatbezeichner eine besondere Bedeutung innerhalb von <classname>Zend_Date</classname>
             als <emphasis>Eingabe</emphasis>-Formatbezeichner. Wenn dieser Bezeichner als
-            Eingabeformat für <code>$part</code> benutzt wird, erlaubt diese Konstante die beste und
-            flexibelste Art um viele ähnliche Datumsformate zu akzeptieren. Heuristik wird benutzt
-            um Daten automatisch von einer Eingabe-Zeichenkette zu extrahieren und dann einfache
-            Fehler zu "beheben" (wenn vorhanden), wie zum Beispiel Jahre, Monate und Tage wenn
-            möglich.
+            Eingabeformat für <varname>$part</varname> benutzt wird, erlaubt diese Konstante die
+            beste und flexibelste Art um viele ähnliche Datumsformate zu akzeptieren. Heuristik
+            wird benutzt um Daten automatisch von einer Eingabe-Zeichenkette zu extrahieren und
+            dann einfache Fehler zu "beheben" (wenn vorhanden), wie zum Beispiel Jahre, Monate und
+            Tage wenn möglich.
         </para>
 
         <table id="zend.date.constants.list.table-8">

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15713 -->
+<!-- EN-Revision: 15719 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.table">
 
@@ -40,7 +40,7 @@
 
             <para>
                 Die Tabelle der Datenbank, für welche die Klasse bestimmt ist, wird mit der
-                protected Variablen <code>$_name</code> angegeben. Es ist ein String, welcher den
+                protected Variablen <varname>$_name</varname> angegeben. Es ist ein String, welcher den
                 Namen der Tabelle enthalten muss, wie er in der Datenbank erscheint.
             </para>
 
@@ -79,10 +79,10 @@ class bugs extends Zend_Db_Table_Abstract
 
             <para>
                 Es kann auch ein Schema für die Tabelle angegeben werden. Entweder mit der protected
-                Variablen <code>$_schema</code> oder mit dem Schema vorangestellt in der
-                <code>$_name</code> Eigenschaft. Jedes Schema welches in der <code>$_name</code>
+                Variablen <varname>$_schema</varname> oder mit dem Schema vorangestellt in der
+                <varname>$_name</varname> Eigenschaft. Jedes Schema welches in der <varname>$_name</varname>
                 Eigenschaft angegeben ist wird vorrangig gegenüber dem Schema der
-                <code>$_schema</code> Eigenschaft behandelt. In einigen RDBMS Marken ist die
+                <varname>$_schema</varname> Eigenschaft behandelt. In einigen RDBMS Marken ist die
                 Bezeichnung für Schema "database" oder "tablespace", wird aber ähnlich verwendet.
             </para>
 
@@ -118,7 +118,7 @@ class Bugs extends Zend_Db_Table_Abstract
             <para>
                 Die Schema und Tabellennamen können auch mit Konstruktor Konfigurationsdirektiven
                 angegeben werden, welche jegliche Standardwerte, angegeben in den
-                <code>$_name</code> und <code>$_schema</code> Eigenschaften, überschreiben. Eine
+                <varname>$_name</varname> und <varname>$_schema</varname> Eigenschaften, überschreiben. Eine
                 Schema Angabe welche mit der <code>name</code> Directive angegeben wurde
                 überschreibt jeglichen Wert welcher von der <code>schema</code> Option
                 bereitgestellt ist.
@@ -163,7 +163,7 @@ $tableBugs = new Bugs(array('name' => 'bug_db.bugs',
 
             <para>
                 Jede Tabelle muss einen Primärschlüssel haben. Die Spalte des Primärschlüssels kann
-                mit der protected Variablen <code>$_primary</code> angegeben werden. Sie enthält
+                mit der protected Variablen <varname>$_primary</varname> angegeben werden. Sie enthält
                 entweder einen String, welcher die einzelen Spalte benennt, oder ein Array von
                 Spaltennamen, wenn der Primärschlüssel ein zusammengesetzter Schlüssel ist.
             </para>
@@ -258,7 +258,7 @@ class Bugs extends Zend_Db_Table_Abstract
                     <para>
                         <code>_setupMetadata()</code> setzt das Schema wenn der Tabellenname dem
                         Muster "schema.table" entspricht; ruft <code>describeTable()</code> auf um
-                        Metadaten Informationen zu erhalten; Standardisiert das <code>$_cols</code>
+                        Metadaten Informationen zu erhalten; Standardisiert das <varname>$_cols</varname>
                         Array auf die Spalten wie von <code>describeTable()</code> geliefert. Durch
                         das Überschreiben dieser Methode können die Spalten angegeben werden.
                     </para>
@@ -268,7 +268,7 @@ class Bugs extends Zend_Db_Table_Abstract
                     <para>
                         <code>_setupPrimaryKey()</code> standardisiert die Primärschlüssel Spalten
                         zu denen geliefert von <code>describeTable()</code>; prüft ob die
-                        Primärschlüssel Spalten im <code>$_cols</code> Array enthalten sind. Durch
+                        Primärschlüssel Spalten im <varname>$_cols</varname> Array enthalten sind. Durch
                         das Überschreiben dieser Methode können die Primärschlüssel Spalten
                         angegeben werden.
                     </para>
@@ -497,7 +497,7 @@ $data = array(
             </para>
 
             <para>
-                Wenn die geschützte Variable <code>$_sequence</code>, in <classname>Zend_Db_Table_Abstract</classname>, als
+                Wenn die geschützte Variable <varname>$_sequence</varname>, in <classname>Zend_Db_Table_Abstract</classname>, als
                 boolscher Wert <code>true</code> definiert wird, nimmt die Klasse an das die Tabelle
                 einen automatischen Primärschlüssel hat.
             </para>
@@ -533,7 +533,7 @@ class Bugs extends Zend_Db_Table_Abstract
                 einen Schlüsselwert für neue Zeilen zu erstellen. IBM DB2 hat eine
                 <code>IDENTITY</code> Notation die ähnlich arbeitet. Wenn eine dieser Notationen
                 verwendet wird, muß der <classname>Zend_Db_Table</classname> Klasse mitgeteilt
-                werden das Sie eine automatische Spalte hat, indem <code>$_sequence</code> auf
+                werden das Sie eine automatische Spalte hat, indem <varname>$_sequence</varname> auf
                 <code>true</code> gesetzt wird.
             </para>
 
@@ -550,7 +550,7 @@ class Bugs extends Zend_Db_Table_Abstract
             </para>
 
             <para>
-                Wenn <code>$_sequence</code> als String definiert wird, nimmt
+                Wenn <varname>$_sequence</varname> als String definiert wird, nimmt
                 <classname>Zend_Db_Table_Abstract</classname> an das der String den Namen des
                 Sequenz Objektes in der Datenbank benennt. Die Sequenz wird aufgerufen um einen
                 neuen Wert zu erstellen, und dieser Wert wird in der <code>INSERT</code> Operation
@@ -598,7 +598,7 @@ class Bugs extends Zend_Db_Table_Abstract
             </para>
 
             <para>
-                Wenn <code>$_sequence</code> als boolsches <code>false</code> definiert wird, nimmt
+                Wenn <varname>$_sequence</varname> als boolsches <code>false</code> definiert wird, nimmt
                 <classname>Zend_Db_Table_Abstract</classname> an das die Tabelle einen natürlichen
                 Primärschlüssel hat. Es müssen Werte für die Spalte des Primärschlüssels im Array
                 der Daten definiert werden die an die <code>insert()</code> Methode übergeben
@@ -1522,7 +1522,7 @@ $bugs->setMetadataCacheInClass(false);
 
             <para>
                 Das Flag ist standardmäßig aktiviert, was sicherstellt das das
-                <code>$_metadata</code> Array nur einmal pro Instanz ausgeliefert wird.
+                <varname>$_metadata</varname> Array nur einmal pro Instanz ausgeliefert wird.
             </para>
         </sect3>
     </sect2>
@@ -1722,21 +1722,21 @@ class Bugs extends Zend_Db_Table_Abstract
                 Wenn zum Beispiel der Name der Table Klasse "<code>BugsProducts</code>" ist, würde
                 Sie der physikalischen Tabelle in der Datenbank entsprechen die
                 "<code>bugs_products</code>" heißt, wenn die explizite Definition der
-                <code>$_name</code> Eigenschaft der Klasse unterdrückt wird. In dieser
+                <varname>$_name</varname> Eigenschaft der Klasse unterdrückt wird. In dieser
                 Übereinstimmung der Beugung, wird der Klassenname im "CamelCase" Format geschrieben
                 und in Kleinschreibung transformiert, und Wörter mit einem Unterstrich seperiert.
             </para>
 
             <para>
                 Der Tabellenname der Datenbank kann unabhängig vom Klassennamen spezifiziert werden
-                indem der Tabellenname mit der Klasseneigenschaft <code>$_name</code> in jeder der
+                indem der Tabellenname mit der Klasseneigenschaft <varname>$_name</varname> in jeder der
                 eigenen Tabellenklassen deklariert wird.
             </para>
 
             <para>
                 <classname>Zend_Db_Table_Abstract</classname> führt keine Beugung durch um die
                 Klassennamen mit den Tabellennamen in Übereinstimmung zu bringen. Wenn die
-                Deklaration von <code>$_name</code> in der eigenen Tabellenklasse unterdrückt wird,
+                Deklaration von <varname>$_name</varname> in der eigenen Tabellenklasse unterdrückt wird,
                 wird die Klasse mit der Datenbanktabelle in Verbindung gebracht die der Schreibweise
                 des Klassennamens exakt entspricht.
             </para>

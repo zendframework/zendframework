@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.debug.dumping">
 
@@ -21,23 +21,23 @@ Zend_Debug::dump($var, $label=null, $echo=true);
     </example>
 
     <para>
-        Das <code>$var</code> Argument definiert den Ausdruck oder die Variable
+        Das <varname>$var</varname> Argument definiert den Ausdruck oder die Variable
         über die die <classname>Zend_Debug::dump()</classname> Methode Informationen ausgeben
         soll.
     </para>
 
     <para>
-        Das <code>$label</code> Argument ist eine Zeichenkette die der Ausgabe von
+        Das <varname>$label</varname> Argument ist eine Zeichenkette die der Ausgabe von
         <classname>Zend_Debug::dump()</classname> vorgestellt wurd. Das kann hilfreich sein,
         zum Beispiel, um Überschriften zu erhalten wenn Informationen über mehrere
         Variablen auf einen Bildschirm ausgegeben werden.
     </para>
 
     <para>
-        Das boolsche Argument <code>$echo</code> definiert ob die Ausgabe von
+        Das boolsche Argument <varname>$echo</varname> definiert ob die Ausgabe von
         <classname>Zend_Debug::dump()</classname> mit Echo ausgegeben wird oder nicht.
         Wenn Sie <code>true</code> ist, wird mit Echo ausgegeben, sonst nicht.
-        Unabhängig vom Wert des <code>$echo</code> Arguments enthält der
+        Unabhängig vom Wert des <varname>$echo</varname> Arguments enthält der
         Rückgabewert dieser Methode die Ausgabe.
     </para>
 

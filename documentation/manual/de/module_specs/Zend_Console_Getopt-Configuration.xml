@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.console.getopt.configuration">
     <title>Konfigurieren von Zend_Console_Getopt</title>
@@ -115,7 +115,7 @@ $opts->setAliases(
         <title>Argument Listen hinzufügen</title>
         <para>
             Standardmäßig verwendet <classname>Zend_Console_Getopt</classname>
-            <code>$_SERVER['argv']</code> für die Analyse des Arrays von
+            <varname>$_SERVER['argv']</varname> für die Analyse des Arrays von
             Kommandozeilen Argumenten. Alternativ kann das Array mit Argumenten
             als zweites Argument dem Constructor angegeben werden. Letztendlich
             können zusätzliche Argumente zu den bereits in Verwendung befindlichen

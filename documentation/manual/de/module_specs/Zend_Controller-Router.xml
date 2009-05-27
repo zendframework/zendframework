@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15719 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.router" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Der Standard Router</title>
@@ -56,11 +56,11 @@ RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.
         <note>
             <title>IIS Isapi_Rewrite</title>
             <para>
-                Bei Verwendung von IIS, wird <code>$_SERVER['REQUEST_URI']</code> entweder nicht
-                vorhanden oder auf einen leeren String gesetzt sein. In diesem Fall wird
+                Bei Verwendung von IIS, wird <varname>$_SERVER['REQUEST_URI']</varname> entweder
+                nicht vorhanden oder auf einen leeren String gesetzt sein. In diesem Fall wird
                 <classname>Zend_Controller_Request_Http</classname> versuchen, den durch die
-                Isapi_Rewrite Erweiterung gesetzten Wert <code>$_SERVER['HTTP_X_REWRITE_URL']</code>
-                zu verwenden.
+                Isapi_Rewrite Erweiterung gesetzten Wert
+                <varname>$_SERVER['HTTP_X_REWRITE_URL']</varname> zu verwenden.
             </para>
         </note>
 

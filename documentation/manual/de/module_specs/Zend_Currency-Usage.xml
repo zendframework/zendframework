@@ -231,7 +231,7 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
                     Die Schreibweise die verwendet werden soll um Ziffern anzuzeigen. Detailierte
                     Informationen über Schreibweisen und deren verwendung kann in der Dokumentation
                     von <classname>Zend_Locale</classname> im Kapitel
-                    <link linkend="zend.locale.numbersystems /"> gefunden werden.
+                    <link linkend="zend.locale.numbersystems" /> gefunden werden.
                 </para>
             </listitem>
             <listitem>

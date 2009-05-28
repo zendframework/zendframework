@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15734 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.application.quick-start">
     <title>Zend_Application Quick Start</title>
@@ -7,7 +7,7 @@
     <para>
         Es gibt zwei Wege um mit <classname>Zend_Application</classname> anzufangen, und diese
         hängen davon ab wie man das Projekt beginnt. In jedem Fall beginnt man immer mit der
-        Erstellung einer <code>Bootstrap</code> klasse und einer diesbezüglichen
+        Erstellung einer <emphasis>Bootstrap</emphasis> Klasse und einer diesbezüglichen
         Konfigurationsdatei.
     </para>
 
@@ -24,11 +24,11 @@
         <para>
             Der schnellste Weg um mit <classname>Zend_Application</classname> zu beginnen ist die
             Verwendung von <classname>Zend_Tool</classname> um das Projekt zu erstellen. Das
-            erstellt auch die <code>Bootstrap</code> Klasse und die Datei.
+            erstellt auch die <emphasis>Bootstrap</emphasis> Klasse und die Datei.
         </para>
 
         <para>
-            Um ein Projekt zu erstellen muß einfach das <code>zf</code> Kommando (auf *nix
+            Um ein Projekt zu erstellen muß einfach das <command>zf</command> Kommando (auf *nix
             Systemen) ausgeführt werden:
         </para>
 
@@ -37,7 +37,7 @@
 ]]></programlisting>
 
         <para>
-            Oder unter Windows das <code>zf.bat</code> Kommando:
+            Oder unter Windows das <filename>zf.bat</filename> Kommando:
         </para>
 
         <programlisting language="dos"><![CDATA[
@@ -90,8 +90,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         <para>
             Es ist auch zu bemerken das eine Konfigurationdatei unter
-            <code>newproject/application/configs/application.ini</code> erstellt wurde. Diese hat
-            den folgenden Inhalt:
+            <filename>newproject/application/configs/application.ini</filename> erstellt wurde.
+            Diese hat den folgenden Inhalt:
         </para>
 
         <programlisting language="dosini"><![CDATA[
@@ -164,7 +164,7 @@ $application->bootstrap()
         <itemizedlist>
             <listitem><para>
                 Eine <filename>application/Bootstrap.php</filename> Datei mit der Klasse
-                <code>Bootstrap</code> erstellen.
+                <emphasis>Bootstrap</emphasis> erstellen.
             </para></listitem>
 
             <listitem><para>
@@ -179,7 +179,7 @@ $application->bootstrap()
         </itemizedlist>
 
         <para>
-            Zuerst die eigene <code>Bootstrap</code> Klasse erstellen. Erzeuge eine Datei
+            Zuerst die eigene <emphasis>Bootstrap</emphasis> Klasse erstellen. Erzeuge eine Datei
             <filename>application/Bootstrap.php</filename> mit dem folgenden Inhalt:
         </para>
 
@@ -370,8 +370,8 @@ phpSettings.display_errors = 1
         <para>
             Jetzt fügen wir eine eigene View Ressource hinzu. Wenn die View initialisiert wird,
             will man den HTML DocType und einen Standardwert für den im HTML Kopf zu verwendenden
-            Titel setzen. Das kann durch die Änderung der <code>Bootstrap</code> Klasse und dem
-            hinzufügen einer Methode gemacht werden:
+            Titel setzen. Das kann durch die Änderung der <emphasis>Bootstrap</emphasis> Klasse und
+            dem Hinzufügen einer Methode gemacht werden:
         </para>
 
         <programlisting language="php"><![CDATA[

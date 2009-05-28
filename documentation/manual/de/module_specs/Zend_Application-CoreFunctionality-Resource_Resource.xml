@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15719 -->
+<!-- EN-Revision: 15734 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.core-functionality.resource-resource">
     <title>Zend_Application_Resource_Resource</title>
@@ -25,8 +25,8 @@
             </thead>
             <tbody>
                 <row>
-                    <entry><code>__construct($options = null)</code></entry>
-                    <entry><code>void</code></entry>
+                    <entry><methodname>__construct($options = null)</methodname></entry>
+                    <entry><type>Void</type></entry>
                     <entry><itemizedlist>
                         <listitem><para>
                             <varname>$options</varname>: <emphasis>Optional</emphasis>.
@@ -41,8 +41,8 @@
 
                 <row>
                     <entry>
-                        <code>setBootstrap(Zend_Application_Bootstrap_Bootstrapper
-                        $bootstrap)</code>
+                        <methodname>setBootstrap(Zend_Application_Bootstrap_Bootstrapper
+                            $bootstrap)</methodname>
                     </entry>
                     <entry>
                         <classname>Zend_Application_Resource_Resource</classname>
@@ -59,7 +59,7 @@
                 </row>
 
                 <row>
-                    <entry><code>getBootstrap()</code></entry>
+                    <entry><methodname>getBootstrap()</methodname></entry>
                     <entry><classname>Zend_Application_Bootstrap_Bootstrapper</classname></entry>
                     <entry>N/A</entry>
                     <entry><para>
@@ -68,7 +68,7 @@
                 </row>
 
                 <row>
-                    <entry><code>setOptions(array $options)</code></entry>
+                    <entry><methodname>setOptions(array $options)</methodname></entry>
                     <entry><classname>Zend_Application_Resource_Resource</classname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
@@ -82,8 +82,8 @@
                 </row>
 
                 <row>
-                    <entry><code>getOptions()</code></entry>
-                    <entry><code>array</code></entry>
+                    <entry><methodname>getOptions()</methodname></entry>
+                    <entry><type>Array</type></entry>
                     <entry>N/A</entry>
                     <entry><para>
                         Empfängt registrierte Optionen.
@@ -91,8 +91,8 @@
                 </row>
 
                 <row>
-                    <entry><code>init()</code></entry>
-                    <entry><code>mixed</code></entry>
+                    <entry><methodname>init()</methodname></entry>
+                    <entry><type>Mixed</type></entry>
                     <entry>N/A</entry>
                     <entry><para>
                         Strategy Pattern: Führt die Initialisierung an der Ressource durch.

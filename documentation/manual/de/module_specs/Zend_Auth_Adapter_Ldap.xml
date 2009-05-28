@@ -357,7 +357,7 @@ Array
                         <classname>Zend_Ldap</classname> das der DN automatisch empfangen wird,
                         abhängig vom Benutzernamen der authentifiziert wird, wenn er nicht bereits
                         in DN Form ist, und diesen dann wieder mit der richtigen DN zu binden. Der
-                        Standardwert ist <constant>FALSE</constat>. Aktuell ist nur von Microsoft
+                        Standardwert ist <constant>FALSE</constant>. Aktuell ist nur von Microsoft
                         Active Directory Server (ADS) bekannt das es den Benutzernamen
                         <emphasis>nicht</emphasis> in der DN Form benötigt wenn gebunden wird, und
                         deswegen kann diese Option mit AD auch <constant>FALSE</constant> sein (und

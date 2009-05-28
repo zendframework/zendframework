@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15719 -->
+<!-- EN-Revision: 15740 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.cache.frontends">
     <title>Zend_Cache Frontends</title>
@@ -40,35 +40,35 @@
                      </thead>
                      <tbody>
                           <row>
-                              <entry><code>caching</code></entry>
-                              <entry><code>boolean</code></entry>
-                              <entry><code>true</code></entry>
+                              <entry><emphasis>caching</emphasis></entry>
+                              <entry><type>Boolean</type></entry>
+                              <entry><constant>TRUE</constant></entry>
                               <entry>
                                   Ein- / Ausschalten vom Caching (kann sehr nützlich für das
                                   Debuggen von gecachten Skripten sein)
                               </entry>
                           </row>
                           <row>
-                              <entry><code>cache_id_prefix</code></entry>
-                              <entry><code>string</code></entry>
-                              <entry><code>null</code></entry>
+                              <entry><emphasis>cache_id_prefix</emphasis></entry>
+                              <entry><type>String</type></entry>
+                              <entry><constant>NULL</constant></entry>
                               <entry>
-                                  Ein Präfix für alle Cache IDs. Wenn er auf <code>null</code>
-                                  gesetzt wird, wird kein Cache ID Präfix verwendet. Der Cache ID
-                                  Präfix erstellt grundsätzlich einen Namespace im Cache, der
-                                  verschiedenen Anwendungen oder Websites die Verwendung eines
-                                  gemeinsamen Caches erlaubt. Jede Anwendung oder Website kann
-                                  einen anderen Cache ID Prüfix verwenden sodas spezielle Cache IDs
-                                  mehr als einmal verwendet werden können.
+                                  Ein Präfix für alle Cache IDs. Wenn er auf
+                                  <constant>NULL</constant> gesetzt wird, wird kein Cache ID Präfix
+                                  verwendet. Der Cache ID Präfix erstellt grundsätzlich einen
+                                  Namespace im Cache, der verschiedenen Anwendungen oder Websites
+                                  die Verwendung eines gemeinsamen Caches erlaubt. Jede Anwendung
+                                  oder Website kann einen anderen Cache ID Prüfix verwenden sodas
+                                  spezielle Cache IDs mehr als einmal verwendet werden können.
                               </entry>
                           </row>
                           <row>
-                              <entry><code>lifetime</code></entry>
-                              <entry><code>int</code></entry>
-                              <entry><code>3600</code></entry>
+                              <entry><emphasis>lifetime</emphasis></entry>
+                              <entry><type>Integer</type></entry>
+                              <entry>3600</entry>
                               <entry>
-                                Cache Lebensdauer (in Sekunden), wenn auf <code>null</code> gesetzt,
-                                ist der Cache für immer gültig.
+                                Cache Lebensdauer (in Sekunden), wenn auf <constant>NULL</constant>
+                                gesetzt, ist der Cache für immer gültig.
                               </entry>
                           </row>
                           <row>

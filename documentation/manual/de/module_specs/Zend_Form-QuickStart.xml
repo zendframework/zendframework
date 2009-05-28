@@ -356,7 +356,7 @@ $form->addElement('text', 'username', array('order' => 10));
             Nachdem ein Formular übermittelt wurde, muss diese geprüft werden, um zu sehen ob sie
             alle Prüfungen besteht. Jedes Element wird gegen die angegebenen Daten geprüft; wenn ein
             Schlüssel, der dem Elementnamen entspricht, nicht vorhanden ist, und das Element als
-            benötigt markiert ist, werden die Prüfungen mit einem <code>null</code> Wert ausgeführt.
+            benötigt markiert ist, werden die Prüfungen mit einem <constant>NULL</constant> Wert ausgeführt.
         </para>
 
         <para>

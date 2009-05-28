@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15742 -->
+<!-- EN-Revision: 15746 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.navigation">
     <title>Navigations Helfer</title>
@@ -80,7 +80,7 @@
                 <para>
                     <code>{get|set}Acl()</code>, <code>{get|set}Role()</code>,
                     empfängt/setzt ACL (<classname>Zend_Acl</classname>) Instanzen und Rollen
-                    (<code>string</code> oder <classname>Zend_Acl_Role_Interface</classname>)
+                    (<type>String</type> oder <classname>Zend_Acl_Role_Interface</classname>)
                     die bei der Darstellung für das Filtern von Seiten verwendet werden, und
                     <code>{get|set}UseAcl()</code> kontrolliert ob ACL aktiviert werden soll.
                     Die Methoden <code>hasAcl()</code> und <code>hasRole()</code> prüfen ob
@@ -109,7 +109,7 @@
             <listitem>
                 <para>
                     <code>{get|set}Indent()</code> empfängt/setzt die Einrückung. Der Setzer
-                    akzeptiert einen <code>string</code> oder ein <code>int</code>. Im
+                    akzeptiert einen <type>String</type> oder ein <code>int</code>. Im
                     Fall eines <code>int</code>'s verwendet der Helfer die angegebene Zahl
                     als Leerzeichen für die Einrückung. Z.B. bedeutet <code>setIndent(4)</code>
                     eine Einrückung von initial 4 Leerzeichen. Die Einrückung kann für alle
@@ -120,14 +120,14 @@
                 <para>
                     <code>{get|set}MinDepth()</code> empfängt/setzt die minimale Tiefe die eine
                     Seite haben muß um vom Helfer eingefügt zu werden. Das Setzen von
-                    <code>null</code> bedeutet keine minimale Tiefe.
+                    <constant>NULL</constant> bedeutet keine minimale Tiefe.
                 </para>
             </listitem>
             <listitem>
                 <para>
                     <code>{get|set}MaxDepth()</code> empfängt/setzt die maximale Tiefe die eine
                     Seite haben muß um vom Helfer eingefügt zu werden. Das Setzen von
-                    <code>null</code> bedeutet keine maximale Tiefe.
+                    <constant>NULL</constant> bedeutet keine maximale Tiefe.
                 </para>
             </listitem>
             <listitem>
@@ -583,10 +583,10 @@ Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole('member');
                    View Skript gesetzt ist, verwendet die <code>render()</code> Methode des
                    Helfers die <code>renderPartial()</code> Methode. Wenn kein partielles gesetzt
                    ist, wird die <code>renderStraight()</code> Methode verwendet. Der Helfer
-                   erwartet das der partielle ein <code>string</code> oder ein <code>array</code>
-                   mit zwei Elementen ist. Wen der Partielle ein <code>string</code> ist, benennt
+                   erwartet das der partielle ein <type>String</type> oder ein <type>Array</type>
+                   mit zwei Elementen ist. Wen der Partielle ein <type>String</type> ist, benennt
                    er den Namen des partiellen Skripts das zu verwenden ist. Wenn er ein
-                   <code>array</code> ist, wird das erste Element als Name des partiellen View
+                   <type>Array</type> ist, wird das erste Element als Name des partiellen View
                    Skripts verwendet, und das zweite Element ist das Modul in dem das Skript zu
                    finden ist.
                </para>
@@ -826,7 +826,7 @@ Produkte, Foo Server, FAQ
             <para>
                 Wenn in der Instanz der Seite nach Beziehungen gesehen wird (
                 (<code>$page->getRel($type)</code> oder <code>$page->getRev($type)</code>),
-                akzeptiert der Helfer Wert vom Typ <code>string</code>, <code>array</code>,
+                akzeptiert der Helfer Wert vom Typ <type>String</type>, <type>Array</type>,
                 <classname>Zend_Config</classname>, oder
                 <classname>Zend_Navigation_Page</classname>. Wenn ein String gefunden wird, wird
                 dieser zu einer <classname>Zend_Navigation_Page_Uri</classname> konvertiert. Wenn
@@ -1169,10 +1169,10 @@ Ausgabe:
                     Skript gesetzt ist, verwendet die <code>render()</code> Methode des Helfers
                     die <code>renderPartial()</code> Methode. Wenn kein Partieller gesetzt ist,
                     wird die <code>renderMenu()</code> Methode verwendet. Der Helfer erwartet das
-                    der Partielle ein <code>string</code>, oder ein <code>array</code> mit zwei
-                    Elementen, ist. Wenn der Partielle ein <code>string</code> ist bezeichnet er
+                    der Partielle ein <type>String</type>, oder ein <type>Array</type> mit zwei
+                    Elementen, ist. Wenn der Partielle ein <type>String</type> ist bezeichnet er
                     den Namen des partiellen Skripts das zu verwenden ist. Wenn er ein
-                    <code>array</code> ist wird das erste Element als Name des partiellen View
+                    <type>Array</type> ist wird das erste Element als Name des partiellen View
                     Skripts verwendet, und das zweite Element ist das Modul indem das Skript
                     gefunden wird.
                 </para>
@@ -1205,39 +1205,39 @@ Ausgabe:
                     <itemizedlist>
                         <listitem>
                             <para>
-                                <code>indent</code>; Einrückung. Erwartet einen <code>string</code>
+                                <code>indent</code>; Einrückung. Erwartet einen <type>String</type>
                                 oder einen <code>int</code> Wert.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
                                 <code>minDepth</code>; Minimale Tiefe. Erwartet ein
-                                <code>int</code> oder <code>null</code> (keine minimale Tiefe).
+                                <code>int</code> oder <constant>NULL</constant> (keine minimale Tiefe).
                             </para>
                         </listitem>
                         <listitem>
                             <para>
                                 <code>maxDepth</code>; Maximale Tiefe. Erwartet ein
-                                <code>int</code> oder <code>null</code> (keine maximale Tiefe).
+                                <code>int</code> oder <constant>NULL</constant> (keine maximale Tiefe).
                             </para>
                         </listitem>
                         <listitem>
                             <para>
                                 <code>ulClass</code>; CSS Klasse für das <code>ul</code> Element.
-                                Erwartet einen <code>string</code>.
+                                Erwartet einen <type>String</type>.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
                                 <code>onlyActiveBranch</code>; Ob nur der aktive Branch dargestellt
-                                werden soll. Erwartet einen <code>boolean</code> Wert.
+                                werden soll. Erwartet einen <type>Boolean</type> Wert.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
                                 <code>renderParents</code>; Ob eltern dargestellt werden sollen
                                 wenn nur der aktive Branch dargestellt wird. Erwartet einen
-                                <code>boolean</code> Wert.
+                                <type>Boolean</type> Wert.
                             </para>
                         </listitem>
                     </itemizedlist>

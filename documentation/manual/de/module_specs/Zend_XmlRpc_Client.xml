@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15746 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.xmlrpc.client">
     <title>Zend_XmlRpc_Client</title>
@@ -48,7 +48,7 @@ echo $client->call('test.sayHello');
         <para>
             Der - durch den Aufruf einer entfernten Methode - zurückgegebene, typenlose
             XML-RPC Wert wird automatisch zu dessen nativen PHP-Äquivalent umgeformt.
-            In obigem Beispiel wird ein <code>string</code> zurückgegeben und ist
+            In obigem Beispiel wird ein <type>String</type> zurückgegeben und ist
             sofort benutzbar.
         </para>
 
@@ -56,7 +56,7 @@ echo $client->call('test.sayHello');
             Der erste Parameter the Methode <code>call()</code> ist der Name der
             aufzurufenden Methode. Wenn die entfernte Methode weitere Parameter
             benötigt, können diese durch einen zweiten, optionalen Parameter des Typs
-            <code>array</code> an <code>call()</code> angegeben werden, wie folgendes
+            <type>Array</type> an <code>call()</code> angegeben werden, wie folgendes
             Beispiel zeigt:
         </para>
 
@@ -108,9 +108,9 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
             <title>Native PHP-Typen als Parameter</title>
             <para>
                 Parameter können der Methode <code>call()</code> als native
-                PHP-Variablen übergeben werden, also als <code>string</code>,
+                PHP-Variablen übergeben werden, also als <type>String</type>,
                 <code>integer</code>, <code>float</code>,
-                <code>boolean</code>, <code>array</code> oder als ein
+                <type>Boolean</type>, <type>Array</type> oder als ein
                 <code>Objekt</code>. In diesem Fall wird jeder native PHP-Typ
                 automatisch erkannt und dann in sein entsprechendes Pendant
                 konvertiert, welches in dieser Tabelle ersichtlich ist:

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15742 -->
+<!-- EN-Revision: 15743 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.adapter">
 
@@ -889,7 +889,7 @@ $db->insert('bugs', $data);
                 Spalten die nicht in dem Array definiert sind, werden nicht an die Datenbank
                 übergeben. Daher folgen sie den selben Regeln denen eine SQL INSERT Anweisung folgt:
                 wenn die Spalte einen Standardwert hat, so bekommt die Spalte der neuen Zeile diesen
-                Wert. Andernfalls behält sie den Status <code>NULL</code>.
+                Wert. Andernfalls behält sie den Status <constant>NULL</constant>.
             </para>
 
             <para>
@@ -999,7 +999,7 @@ $id = $db->lastSequenceId('bugs_id_gen');
                 ignoriert, und der zurück gegebene Wert ist der zuletzt für eirgendeine Tabelle
                 während einer INSERT Operation generierte Wert innerhalb der aktuellen Verbindung.
                 Für diese RDBMS Marken gibt die <code>lastSequenceId()</code> Methode immer
-                <code>null</code> zurück.
+                <constant>NULL</constant> zurück.
             </para>
 
             <note>
@@ -1736,7 +1736,7 @@ $result = $db->getConnection()->exec('DROP TABLE bugs');
         <para>
             Seit Release 1.7.2 kann man die Version des Servers in einem PHP artigen Stil erhalten
             damit man es mit <code>version_compare()</code> verwenden kann. Wenn die Information
-            nicht vorhanden ist erhält man <code>null</code> zurück.
+            nicht vorhanden ist erhält man <constant>NULL</constant> zurück.
         </para>
 
         <example id="zend.db.adapter.server-version.example">
@@ -1812,7 +1812,7 @@ if (!is_null($version)) {
                         MySQL unterstützt keine Sequenzen, daher ignoriert
                         <code>lastInsertId()</code> Argumente und gibt immer den letzten Wert der
                         für den auto-increment Schlüssel generiert wurde zurück. Die
-                        <code>lastSequenceId()</code> Methode gibt <code>null</code> zurück.
+                        <code>lastSequenceId()</code> Methode gibt <constant>NULL</constant> zurück.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -1883,7 +1883,7 @@ if (!is_null($version)) {
                         Microsoft SQL Server unterstützt keine Sequenzen, daher ignoriert
                         <code>lastInsertId()</code> Argumente und gibt immer den letzten Wert der
                         für den auto-increment Schlüssel generiert wurde zurück. Die
-                        <code>lastSequenceId()</code> Methode gibt <code>null</code> zurück.
+                        <code>lastSequenceId()</code> Methode gibt <constant>NULL</constant> zurück.
                     </para>
                 </listitem>
                 <listitem>
@@ -1965,7 +1965,7 @@ if (!is_null($version)) {
                         MySQL unterstützt keine Sequenzen, daher ignoriert
                         <code>lastInsertId()</code> Argumente und gibt immer den letzten Wert der
                         für den auto-increment Schlüssel generiert wurde zurück. Die
-                        <code>lastSequenceId()</code> Methode gibt <code>null</code> zurück.
+                        <code>lastSequenceId()</code> Methode gibt <constant>NULL</constant> zurück.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -2042,7 +2042,7 @@ if (!is_null($version)) {
                         SQLite unterstützt keine Sequenzen, daher ignoriert
                         <code>lastInsertId()</code> Argumente und gibt immer den letzten Wert der
                         für den auto-increment Schlüssel generiert wurde zurück. Die
-                        <code>lastSequenceId()</code> Methode gibt <code>null</code> zurück.
+                        <code>lastSequenceId()</code> Methode gibt <constant>NULL</constant> zurück.
                     </para>
                 </listitem>
                 <listitem>

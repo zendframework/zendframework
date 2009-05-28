@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15745 -->
 <!-- Reviewed: no -->
 <appendix id="coding-standard">
   <title>Zend Framework Coding Standard für PHP</title>
@@ -421,7 +421,7 @@ $sql = "SELECT `id`, `name` FROM `people` "
                 </para>
 
                 <para>
-                    Wenn indizierte Arrays mit dem <code>array</code> Funktion deklariert werden,
+                    Wenn indizierte Arrays mit dem <type>Array</type> Funktion deklariert werden,
                     muß ein folgendes Leerzeichen nach jeder Kommabegrenzung hinzugefügt werden um
                     die Lesbarkeit zu erhöhen:
 
@@ -447,7 +447,7 @@ $sampleArray = array(1, 2, 3, 'Zend', 'Studio',
                 <title>Assoziative Arrays</title>
 
                 <para>
-                    Wenn assoziative Arrays mit dem <code>array</code> Konstrukt deklariert werden,
+                    Wenn assoziative Arrays mit dem <type>Array</type> Konstrukt deklariert werden,
                     ist das Umbrechen der Anweisung in mehrere Zeilen gestattet. In diesem Fall muß
                     jede folgende Linie mit Leerraum aufgefüllt werden so das beide, der Schlüssel
                     und der Wert untereinander stehen:

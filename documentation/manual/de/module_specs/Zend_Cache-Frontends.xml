@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15742 -->
+<!-- EN-Revision: 15746 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.cache.frontends">
     <title>Zend_Cache Frontends</title>
@@ -73,7 +73,7 @@
                           </row>
                           <row>
                               <entry><code>logging</code></entry>
-                              <entry><code>boolean</code></entry>
+                              <entry><type>Boolean</type></entry>
                               <entry><constant>FALSE</constant></entry>
                               <entry>
                                 Wenn auf true gesetzt, wird das Logging durch
@@ -83,7 +83,7 @@
                           </row>
                           <row>
                               <entry><code>write_control</code></entry>
-                              <entry><code>boolean</code></entry>
+                              <entry><type>Boolean</type></entry>
                               <entry><constant>TRUE</constant></entry>
                               <entry>
                                 Ein- / Ausschalten der Schreibkontrolle (der Cache wird gleich
@@ -96,7 +96,7 @@
                           </row>
                           <row>
                               <entry><code>automatic_serialization</code></entry>
-                              <entry><code>boolean</code></entry>
+                              <entry><type>Boolean</type></entry>
                               <entry><constant>FALSE</constant></entry>
                               <entry>
                                 Ein- / Ausschalten der automatischen Serialisierung, kann dafür
@@ -117,7 +117,7 @@
                           </row>
                           <row>
                               <entry><code>ignore_user_abort</code></entry>
-                              <entry><code>boolean</code></entry>
+                              <entry><type>Boolean</type></entry>
                               <entry><constant>FALSE</constant></entry>
                               <entry>
                                 Auf true gesetzt, wird der Kern das PHP Flag ignore_user_abort
@@ -319,7 +319,7 @@ echo 'Hier wird nie gecached ('.time().').';
                      <tbody>
                           <row>
                               <entry><code>cache_by_default</code></entry>
-                              <entry><code>boolean</code></entry>
+                              <entry><type>Boolean</type></entry>
                               <entry><constant>TRUE</constant></entry>
                               <entry>
                                   Wenn true, wird der Funktionsaufruf standardmäßig gecached
@@ -327,7 +327,7 @@ echo 'Hier wird nie gecached ('.time().').';
                          </row>
                          <row>
                               <entry><code>cached_functions</code></entry>
-                              <entry><code>array</code></entry>
+                              <entry><type>Array</type></entry>
                               <entry></entry>
                               <entry>
                                   Funktionsnamen, die immer gecached werden sollen
@@ -335,7 +335,7 @@ echo 'Hier wird nie gecached ('.time().').';
                          </row>
                          <row>
                               <entry><code>non_cached_functions</code></entry>
-                              <entry><code>array</code></entry>
+                              <entry><type>Array</type></entry>
                               <entry></entry>
                               <entry>
                                   Funktionsnamen, die nie gecached werden sollen
@@ -409,7 +409,7 @@ $cache->call('veryExpensiveFunc', $params);
                          </row>
                          <row>
                               <entry><code>cache_by_default</code></entry>
-                              <entry><code>boolean</code></entry>
+                              <entry><type>Boolean</type></entry>
                               <entry><constant>TRUE</constant></entry>
                               <entry>
                                   Wenn true, wird der Aufruf standardmäßig gecached
@@ -417,7 +417,7 @@ $cache->call('veryExpensiveFunc', $params);
                          </row>
                          <row>
                               <entry><code>cached_methods</code></entry>
-                              <entry><code>array</code></entry>
+                              <entry><type>Array</type></entry>
                               <entry></entry>
                               <entry>
                                   Methodennamen, die immer gecached werden sollen
@@ -425,7 +425,7 @@ $cache->call('veryExpensiveFunc', $params);
                          </row>
                          <row>
                               <entry><code>non_cached_methods</code></entry>
-                              <entry><code>array</code></entry>
+                              <entry><type>Array</type></entry>
                               <entry></entry>
                               <entry>
                                   Methodennamen, die nie gecached werden sollen
@@ -525,7 +525,7 @@ $res = $cache->foobar2('1', '2');
                      <tbody>
                           <row>
                               <entry><code>master_File (depreciated)</code></entry>
-                              <entry><code>string</code></entry>
+                              <entry><type>String</type></entry>
                               <entry><code></code></entry>
                               <entry>
                                   Der komplette Pfad und Name der Master Datei
@@ -533,7 +533,7 @@ $res = $cache->foobar2('1', '2');
                           </row>
                           <row>
                               <entry><code>master_files</code></entry>
-                              <entry><code>array</code></entry>
+                              <entry><type>Array</type></entry>
                               <entry><code></code></entry>
                               <entry>
                                   Ein Array der kompletten Pfade der Masterdateien
@@ -541,7 +541,7 @@ $res = $cache->foobar2('1', '2');
                           </row>
                           <row>
                               <entry><code>master_files_mode</code></entry>
-                              <entry><code>string</code></entry>
+                              <entry><type>String</type></entry>
                               <entry>
                                   <classname>Zend_Cache_Frontend_File::MODE_OR</classname>
                               </entry>
@@ -556,7 +556,7 @@ $res = $cache->foobar2('1', '2');
                           </row>
                           <row>
                               <entry><code>ignore_missing_master_files</code></entry>
-                              <entry><code>boolean</code></entry>
+                              <entry><type>Boolean</type></entry>
                               <entry><constant>FALSE</constant></entry>
                               <entry>
                                   bei true werden fehlende Masterdateien leise ignoriert
@@ -618,7 +618,7 @@ $res = $cache->foobar2('1', '2');
                      <tbody>
                             <row>
                               <entry><code>http_conditional</code></entry>
-                              <entry><code>boolean</code></entry>
+                              <entry><type>Boolean</type></entry>
                               <entry><constant>FALSE</constant></entry>
                               <entry>
                                   Verwendung des http_conditional Systems (zur Zeit nicht
@@ -627,7 +627,7 @@ $res = $cache->foobar2('1', '2');
                          </row>
                          <row>
                               <entry><code>debug_header</code></entry>
-                              <entry><code>boolean</code></entry>
+                              <entry><type>Boolean</type></entry>
                               <entry><constant>FALSE</constant></entry>
                               <entry>
                                     Wenn true, wird eine Debugging Text for jeder gecacheten Seite
@@ -636,7 +636,7 @@ $res = $cache->foobar2('1', '2');
                          </row>
                          <row>
                                <entry><code>default_options</code></entry>
-                              <entry><code>array</code></entry>
+                              <entry><type>Array</type></entry>
                               <entry><code>array(...siehe unten...)</code></entry>
                               <entry>
                                   Ein assoziatives Array mit Default Optionen:
@@ -751,7 +751,7 @@ $res = $cache->foobar2('1', '2');
                          </row>
                          <row>
                               <entry><code>regexps</code></entry>
-                              <entry><code>array</code></entry>
+                              <entry><type>Array</type></entry>
                               <entry><code>array()</code></entry>
                               <entry>
                                     Ein assoziatives Array, um Optionen nur für einige REQUEST_URI
@@ -766,7 +766,7 @@ $res = $cache->foobar2('1', '2');
                          </row>
                          <row>
                               <entry><code>memorize_headers</code></entry>
-                              <entry><code>array</code></entry>
+                              <entry><type>Array</type></entry>
                               <entry><code>array()</code></entry>
                               <entry>
                                    Ein Array von Strings die zu einem HTTP Headernamen

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15741 -->
+<!-- EN-Revision: 15743 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.overview">
 
@@ -183,7 +183,7 @@
             Wenn ein Datumsobjekt erstellt wird durch Verwendung eines offensichtlich falschen
             Datums (z.B. die Nummer des Monats größer als 12), wird <classname>Zend_Date</classname>
             eine Ausnahme werfen, solange kein spezielles Datumsformat ausgewählt wurde, und z.B.
-            <varname>$part</varname> entweder <code>null</code> oder
+            <varname>$part</varname> entweder <constant>NULL</constant> oder
             <classname>Zend_Date::DATES</classname> (ein "fehlertolerantes" Format).
         </para>
 

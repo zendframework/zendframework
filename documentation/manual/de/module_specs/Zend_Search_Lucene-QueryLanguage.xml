@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15743 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.query-language">
     <title>Abfragesprache</title>
@@ -67,7 +67,7 @@ Zend_Search_Lucene::setDefaultSearchField('contents');
 ]]></programlisting>
 
         <para>
-            Der <code>null</code> Wert bedeutet, das die Suche über alle Felder durchgeführt wird.
+            Der <constant>NULL</constant> Wert bedeutet, das die Suche über alle Felder durchgeführt wird.
             Das ist die Standardeinstellung.
         </para>
         <para>
@@ -100,7 +100,7 @@ title:Mach es richtig
 ]]></programlisting>
             nur "Mach" im title Feld finden wird. Es findet "es" und "richtig" im Standardfeld (wenn
             das Standardfeld gesetzt ist) oder in allen indizierten Felder (wenn das Standardfeld
-            auf <code>null</code> gesetzt ist).
+            auf <constant>NULL</constant> gesetzt ist).
         </para>
     </sect2>
 

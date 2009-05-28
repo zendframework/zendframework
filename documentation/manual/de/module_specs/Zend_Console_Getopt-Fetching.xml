@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15742 -->
+<!-- EN-Revision: 15743 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.console.getopt.fetching">
     <title>Holen von Optionen und Argumenten</title>
@@ -79,7 +79,7 @@ try {
             wird diese Methode den Wert dieses Parameters zurückgeben. Wenn die
             Option keinen Parameter hatte, aber der Benutzer ihn auf der
             Kommandozeile definiert hat, gibt die Methode <constant>TRUE</constant> zurück.
-            Andernfalls gibt die Methode <code>null</code> zurück.
+            Andernfalls gibt die Methode <constant>NULL</constant> zurück.
         </para>
         <example id="zend.console.getopt.fetching.byname.example.setoption">
             <title>Verwenden von getOption()</title>

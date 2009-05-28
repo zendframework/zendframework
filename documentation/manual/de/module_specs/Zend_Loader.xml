@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15742 -->
+<!-- EN-Revision: 15743 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.loader.load">
 
@@ -54,7 +54,7 @@ Zend_Loader::loadFile($filename, $dirs=null, $once=false);
 
         <para>
             Das <code>$dirs</code> Argument definiert das Verzeichnis in welchem
-            nach der Datei gesucht werden soll. Wenn der Wert <code>NULL</code> ist, wird
+            nach der Datei gesucht werden soll. Wenn der Wert <constant>NULL</constant> ist, wird
             nur anhand vom <code>include_path</code> gesucht. Wenn der Wert Zeichenkette
             oder ein Array ist, wird das definierte Verzeichnis oder
             die Verzeichnisse durchsucht, gefolgt vom <code>include_path</code>.

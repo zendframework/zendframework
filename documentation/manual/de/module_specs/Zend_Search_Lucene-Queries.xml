@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15742 -->
+<!-- EN-Revision: 15743 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.query-api">
     <title>Abfrage Erzeugungs API</title>
@@ -221,7 +221,7 @@ $hits  = $index->find($query);
                 </listitem>
                 <listitem>
                     <para>
-                        <code>null</code> wird für weder notwendige noch verbotene Begriffe
+                        <constant>NULL</constant> wird für weder notwendige noch verbotene Begriffe
                         verwendet.
                     </para>
                 </listitem>
@@ -358,7 +358,7 @@ $hits  = $index->find($query);
                 </listitem>
                 <listitem>
                     <para>
-                        <code>null</code> wird verwendet um eine Unterabfrage zu definieren die
+                        <constant>NULL</constant> wird verwendet um eine Unterabfrage zu definieren die
                         weder benötigt noch verboten ist.
                     </para>
                 </listitem>

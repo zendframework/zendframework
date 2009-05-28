@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15713 -->
+<!-- EN-Revision: 15743 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.extending">
     <title>Erweiterbarkeit</title>
@@ -43,7 +43,7 @@ $index->addDocument($doc);
             Anker für alle benutzerdefinierten Analysatoren entwickelt. Benutzer sollten nur die
             <code>reset()</code> und <code>nextToken()</code> Methoden definieren, welche ihren
             String von der $_input Eigenschaft nimmt und die Abschnitte Stück für Stück zurückgibt
-            (ein <code>null</code> Wert indiziert das Ende des Streams).
+            (ein <constant>NULL</constant> Wert indiziert das Ende des Streams).
         </para>
 
         <para>

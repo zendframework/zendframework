@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15742 -->
+<!-- EN-Revision: 15746 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.navigation.pages.common">
     <title>Übliche Seiten Features</title>
@@ -37,16 +37,16 @@
             <tbody>
                 <row>
                     <entry><code>label</code></entry>
-                    <entry><code>string</code></entry>
-                    <entry><code>null</code></entry>
+                    <entry><type>String</type></entry>
+                    <entry><constant>NULL</constant></entry>
                     <entry>
                         Ein Seitenlabel, wie 'Home' oder 'Blog'.
                     </entry>
                 </row>
                 <row>
                     <entry><code>id</code></entry>
-                    <entry><code>string</code> | <code>int</code></entry>
-                    <entry><code>null</code></entry>
+                    <entry><type>String</type> | <code>int</code></entry>
+                    <entry><constant>NULL</constant></entry>
                     <entry>
                         Ein Id Tag/Attribut das verwendet werden kann wenn die Seite dargestellt
                         wird, typischerweise in einem Anker Element.
@@ -54,8 +54,8 @@
                 </row>
                 <row>
                     <entry><code>class</code></entry>
-                    <entry><code>string</code></entry>
-                    <entry><code>null</code></entry>
+                    <entry><type>String</type></entry>
+                    <entry><constant>NULL</constant></entry>
                     <entry>
                         Eine CSS Klasse die verwendet werden kann wenn die Seite dargestellt wird,
                         typischerweise ein Anker Element.
@@ -63,8 +63,8 @@
                 </row>
                 <row>
                     <entry><code>title</code></entry>
-                    <entry><code>string</code></entry>
-                    <entry><code>null</code></entry>
+                    <entry><type>String</type></entry>
+                    <entry><constant>NULL</constant></entry>
                     <entry>
                         Eine kurze Seitenbeschreibung, typischerweise für die Verwendung als
                         <code>title</code> Attribut in einem Anker.
@@ -72,8 +72,8 @@
                 </row>
                 <row>
                     <entry><code>target</code></entry>
-                    <entry><code>string</code></entry>
-                    <entry><code>null</code></entry>
+                    <entry><type>String</type></entry>
+                    <entry><constant>NULL</constant></entry>
                     <entry>
                         Spezifiziert ein Ziel das für die Seite verwendet werden kann,
                         typischerweise ein Anker Element.
@@ -81,7 +81,7 @@
                 </row>
                 <row>
                     <entry><code>rel</code></entry>
-                    <entry><code>array</code></entry>
+                    <entry><type>Array</type></entry>
                     <entry><code>array()</code></entry>
                     <entry>
                         Spezifiziert die Weiterleitungs-Relation für die Seite. Jedes Element im
@@ -97,7 +97,7 @@
                 </row>
                 <row>
                     <entry><code>rev</code></entry>
-                    <entry><code>array</code></entry>
+                    <entry><type>Array</type></entry>
                     <entry><code>array()</code></entry>
                     <entry>
                         Spezifiziert die Rückwärts Relation für die Seite. Arbeitet genauso wie
@@ -106,8 +106,8 @@
                 </row>
                 <row>
                     <entry><code>order</code></entry>
-                    <entry><code>string</code> | <code>int</code> | <code>null</code></entry>
-                    <entry><code>null</code></entry>
+                    <entry><type>String</type> | <code>int</code> | <constant>NULL</constant></entry>
+                    <entry><constant>NULL</constant></entry>
                     <entry>
                         Arbeitet die order für Elemente in
                         Works like order for elements in
@@ -116,9 +116,9 @@
                         Seite in einer speziellen Reihenfolge durchlaufen, was bedeutet das man
                         eine Seite dazu zwingen kann das eine Seite vor anderen durchlaufen wird
                         indem das <code>order</code> Attribut auf eine kleinere Nummer gesetzt
-                        wird, z.B. -100. Wenn ein <code>string</code> angegeben wird, muß dieser
+                        wird, z.B. -100. Wenn ein <type>String</type> angegeben wird, muß dieser
                         in einen gültigen <code>int</code> aufgelöst werden können. Wenn
-                        <code>null</code> angegeben wird, wird er resetiert, was bedeutet das die
+                        <constant>NULL</constant> angegeben wird, wird er resetiert, was bedeutet das die
                         Reihenfolge verwendet wird mit der die Seite in den Container hinzugefügt
                         wurde.
                     </entry>
@@ -126,10 +126,10 @@
                 <row>
                     <entry><code>resource</code></entry>
                     <entry>
-                        <code>string</code> | <classname>Zend_Acl_Resource_Interface</classname> |
-                        <code>null</code>
+                        <type>String</type> | <classname>Zend_Acl_Resource_Interface</classname> |
+                        <constant>NULL</constant>
                     </entry>
-                    <entry><code>null</code></entry>
+                    <entry><constant>NULL</constant></entry>
                     <entry>
                         ACL Ressource die mit der Seite verknüpft werden soll. Lesen Sie mehr im
                         <link linkend="zend.view.helpers.initial.navigation.acl">Kapitel ACL
@@ -138,8 +138,8 @@
                 </row>
                 <row>
                     <entry><code>privilege</code></entry>
-                    <entry><code>string</code> | <code>null</code></entry>
-                    <entry><code>null</code></entry>
+                    <entry><type>String</type> | <constant>NULL</constant></entry>
+                    <entry><constant>NULL</constant></entry>
                     <entry>
                         ACL Privileg das mit der Seite assoziiert werden soll. Lesen Sie mehr im
                         <link linkend="zend.view.helpers.initial.navigation.acl">Kapitel über ACL
@@ -169,11 +169,11 @@
                 <row>
                     <entry><code>pages</code></entry>
                     <entry>
-                        <code>array</code> | <classname>Zend_Config</classname> | <code>null</code>
+                        <type>Array</type> | <classname>Zend_Config</classname> | <constant>NULL</constant>
                     </entry>
-                    <entry><code>null</code></entry>
+                    <entry><constant>NULL</constant></entry>
                     <entry>
-                        Kind Seiten der Seite. Das sollte ein <code>array</code> oder
+                        Kind Seiten der Seite. Das sollte ein <type>Array</type> oder
                         <classname>Zend_Config</classname> Objekt sein das entweder Seiten Optionen
                         enthält die in die <code>factory()</code> Methode übergeben werden können,
                         oder die aktuelle <classname>Zend_Navigation_Page</classname> Instanz, oder

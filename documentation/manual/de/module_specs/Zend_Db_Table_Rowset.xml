@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15719 -->
+<!-- EN-Revision: 15743 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.table.rowset">
 
@@ -101,7 +101,7 @@ $row    = $rowset->current();
 
         <para>
             Wenn der Zeilensatz keine Zeilen enthält, gibt <code>current()</code> den Wert
-            <code>null</code> zurück.
+            <constant>NULL</constant> zurück.
         </para>
 
         <example id="zend.db.table.rowset.rows.iterate.example">

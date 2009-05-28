@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15743 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.registry.using">
 
@@ -43,7 +43,7 @@ Zend_Registry::set('index', $value);
         </para>
 
         <para>
-            Der Index kann ein Skalar (<code>null</code>, String oder Nummer),
+            Der Index kann ein Skalar (<constant>NULL</constant>, String oder Nummer),
             sowie ein gewöhnliches Array sein.
         </para>
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15745 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.navigation.pages.custom">
     <title>Erstellung eigener Seiten Typen</title>
@@ -8,7 +8,7 @@
         Wenn <classname>Zend_Navigation_Page</classname> erweiter wird, besteht normalerweise keine
         Notwendigkeit den Constructor oder die Methoden <code>setOptions()</code> oder
         <code>setConfig()</code> zu überladen. Der Constructor der Seite nimmt einen einzelnen
-        Parameter, ein <code>Array</code> oder ein <classname>Zend_Config</classname> Objekt,
+        Parameter, ein <type>Array</type> oder ein <classname>Zend_Config</classname> Objekt,
         welches an <code>setOptions()</code> oder an <code>setConfig()</code> übergeben wird.
         Diese Methoden rufen dann die <code>set()</code> Methode auf, welche Optionen in
         native oder eigene Eigenschaften mappt. Wenn die Option <code>internal_id</code> angegeben

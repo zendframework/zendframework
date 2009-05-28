@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15742 -->
+<!-- EN-Revision: 15743 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.profiler" xmlns:xi="http://www.w3.org/2001/XInclude">
 
@@ -337,7 +337,7 @@ $profiler->setFilterElapsedSecs(null);
 
             <para>
                 Mit <code>setFilterElapsedSecs()</code> kannst du jeden vorhandenen Filtern
-                entfernen, indem du <code>null</code> als einziges Argument übergibst.
+                entfernen, indem du <constant>NULL</constant> als einziges Argument übergibst.
             </para>
 
             <programlisting language="php"><![CDATA[

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15742 -->
+<!-- EN-Revision: 15746 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.navigation.pages.mvc">
     <title>Zend_Navigation_Page_Mvc</title>
@@ -27,16 +27,16 @@
             <tbody>
                 <row>
                     <entry><code>action</code></entry>
-                    <entry><code>string</code></entry>
-                    <entry><code>null</code></entry>
+                    <entry><type>String</type></entry>
+                    <entry><constant>NULL</constant></entry>
                     <entry>
                         Name der Aktion die verwendet wird wenn eine href zur Seite erstellt wird.
                     </entry>
                 </row>
                 <row>
                     <entry><code>controller</code></entry>
-                    <entry><code>string</code></entry>
-                    <entry><code>null</code></entry>
+                    <entry><type>String</type></entry>
+                    <entry><constant>NULL</constant></entry>
                     <entry>
                         Name des Controllers der verwendet wird wenn eine href zur Seite erstellt
                         wird.
@@ -44,15 +44,15 @@
                 </row>
                 <row>
                     <entry><code>module</code></entry>
-                    <entry><code>string</code></entry>
-                    <entry><code>null</code></entry>
+                    <entry><type>String</type></entry>
+                    <entry><constant>NULL</constant></entry>
                     <entry>
                         Name des Moduls das verwendet wird wenn eine href zur Seite erstellt wird.
                     </entry>
                 </row>
                 <row>
                     <entry><code>params</code></entry>
-                    <entry><code>array</code></entry>
+                    <entry><type>Array</type></entry>
                     <entry><code>array()</code></entry>
                     <entry>
                         Benutzer Parameter die verwendet werden wenn eine href zur Seite erstellt
@@ -61,8 +61,8 @@
                 </row>
                 <row>
                     <entry><code>route</code></entry>
-                    <entry><code>string</code></entry>
-                    <entry><code>null</code></entry>
+                    <entry><type>String</type></entry>
+                    <entry><constant>NULL</constant></entry>
                     <entry>
                         Name der Route die verwendet wird wenn eine href zur Seite erstellt wird.
                     </entry>

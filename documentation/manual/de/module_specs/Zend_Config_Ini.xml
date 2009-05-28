@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15742 -->
+<!-- EN-Revision: 15743 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.config.adapters.ini">
     <title>Zend_Config_Ini</title>
@@ -21,7 +21,7 @@
             Dokumentation klärt über spezielle Verhaltensweisen auf, die sich auch auf
             <classname>Zend_Config_Ini</classname> auswirken, z. B. wie die besonderen Werte
             <constant>TRUE</constant>, <constant>FALSE</constant>, <code>yes</code>, <code>no</code> und
-            <code>null</code> gehandhabt werden.
+            <constant>NULL</constant> gehandhabt werden.
         </para>
     </note>
     <note>

@@ -458,7 +458,7 @@ $translate = new Zend_Translate('tmx', 'path/to/mytranslation.tmx', 'en');
 
         <para>
             Wenn man nur spezielle Sprache aus der Quelle übersetzen will, kann die Option
-            '<code>defined_language</code>' auf <code>true</code> gesetzt werden. Mit dieser
+            '<code>defined_language</code>' auf <constant>TRUE</constant> gesetzt werden. Mit dieser
             Option können gewünschte Sprachen explizit mit <code>addLanguage()</code>
             hinzugefügt werden. Der Standardwert für diese Option fügt alle Sprachen hinzu.
         </para>
@@ -565,9 +565,9 @@ $translate->addTranslation('/path/to/other.ini', 'it');
             nicht alphanummerisches Zeichen enthält, muß er in doppelte Anführungszeichen
             (<code>"</code>) eingeklammert werden. Es gibt auch reservierte Wörter welche nicht als
             Schlüssel für INI Dateien verwendet werden dürfen. Diese enthalten: <code>null</code>,
-            <code>yes</code>, <code>no</code>, <code>true</code> und <code>false</code>. Die Werte
-            <code>null</code>, <code>no</code> und <code>false</code> führen zu <code>""</code>,
-            <code>yes</code> und <code>true</code> resultieren in <code>1</code>. Die Zeichen
+            <code>yes</code>, <code>no</code>, <constant>TRUE</constant> und <constant>FALSE</constant>. Die Werte
+            <code>null</code>, <code>no</code> und <constant>FALSE</constant> führen zu <code>""</code>,
+            <code>yes</code> und <constant>TRUE</constant> resultieren in <code>1</code>. Die Zeichen
             <code>{}|&amp;~![()"</code> dürfen nirgendwo im Schlüssel verwendet werden und haben im
             Wert eine spezielle Bedeutung. Diese sollten nicht verwendet werden da Sie zu
             unerwartetem Verhalten führen.
@@ -785,7 +785,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
 
         <para>
             Die <code>isAvailable()</code> Methode prüft ob eine angegebene Sprache bereits
-            vorhanden ist. Es wird <code>true</code> zurückgegeben wenn Daten für die angegebene
+            vorhanden ist. Es wird <constant>TRUE</constant> zurückgegeben wenn Daten für die angegebene
             Sprache existieren.
         </para>
 

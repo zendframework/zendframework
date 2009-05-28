@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15715 -->
+<!-- EN-Revision: 15741 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.filter.set.realpath">
     <title>RealPath</title>
@@ -13,7 +13,7 @@
     </para>
 
     <para>
-        <classname>Zend_Filter_RealPath</classname> gibt bei einem Fehler <code>FALSE</code>
+        <classname>Zend_Filter_RealPath</classname> gibt bei einem Fehler <constant>FALSE</constant>
         zurück, z.B. wenn die Datei nicht existiert. Auf BSD Systemen schlägt
         <classname>Zend_Filter_RealPath</classname> nicht fehl wenn nur die letzte Komponente des
         Pfades nicht existiert, wärend andere Systeme <constant>FALSE</constant> zurückgeben.

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15742 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.adapter">
 
@@ -368,11 +368,11 @@ $db = Zend_Db::factory('Db2', $params);
                 <para>
                     Diese Option kann über die Konstante
                     <classname>Zend_Db::AUTO_QUOTE_IDENTIFIERS</classname> angegeben werden. Wenn
-                    der Wert <code>true</code> (der Standard) ist, werden Bezeichner wie
+                    der Wert <constant>TRUE</constant> (der Standard) ist, werden Bezeichner wie
                     Tabellennamen, Spaltennamen und auch Aliase in jeder SQL Syntax die vom Adapter
                     Objekt generiert wurde begrenzt. Dies macht es einfach Bezeichner zu verwenden,
                     die SQL Schlüsselwörter oder spezielle Zeichen enthalten. Wenn der Wert
-                    <code>false</code> ist, werden Bezeichner nicht automatisch begrenzt. Wenn
+                    <constant>FALSE</constant> ist, werden Bezeichner nicht automatisch begrenzt. Wenn
                     Bezeichner begrenzt werden müssen, so kann dies über die
                     <code>quoteIdentifier()</code> Methode von Hand getan werden.
                 </para>
@@ -1529,8 +1529,8 @@ try {
                         <entry>NULLABLE</entry>
                         <entry>(boolean)</entry>
                         <entry>
-                            <code>true</code> wenn die Spalte SQL NULL akzeptiert,
-                            <code>false</code> wenn die Spalte eine NOT NULL Bedingung hat.
+                            <constant>TRUE</constant> wenn die Spalte SQL NULL akzeptiert,
+                            <constant>FALSE</constant> wenn die Spalte eine NOT NULL Bedingung hat.
                         </entry>
                     </row>
                     <row>
@@ -1552,7 +1552,7 @@ try {
                         <entry>UNSIGNED</entry>
                         <entry>(boolean)</entry>
                         <entry>
-                            <code>true</code> wenn ein Integer-basierender Typ als UNSIGNED
+                            <constant>TRUE</constant> wenn ein Integer-basierender Typ als UNSIGNED
                             angegeben wird.
                         </entry>
                     </row>
@@ -1560,7 +1560,7 @@ try {
                         <entry>PRIMARY</entry>
                         <entry>(boolean)</entry>
                         <entry>
-                            <code>true</code> wenn die Spalte Teil des Primärschlüsssels der Tabelle
+                            <constant>TRUE</constant> wenn die Spalte Teil des Primärschlüsssels der Tabelle
                             ist.
                         </entry>
                     </row>
@@ -1575,7 +1575,7 @@ try {
                         <entry>IDENTITY</entry>
                         <entry>(boolean)</entry>
                         <entry>
-                            <code>true</code> wenn die Spalte einen auto-increment Wert nutzt.
+                            <constant>TRUE</constant> wenn die Spalte einen auto-increment Wert nutzt.
                         </entry>
                     </row>
                 </tbody>

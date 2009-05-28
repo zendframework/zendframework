@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15719 -->
+<!-- EN-Revision: 15741 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.response">
     <title>Das Response Objekt</title>
@@ -147,7 +147,7 @@ $front->dispatch();
                     gesendet wurden. Sie nimmt ein zusätzliches Flag das zeigt ob eine Ausnahme
                     geworfen werden soll oder nicht, wenn bereits Header gesendet wurden. Das kann
                     durch das Setzen der Eigenschaft <code>headersSentThrowsException</code> zu
-                    <code>false</code> überschrieben werden.
+                    <constant>FALSE</constant> überschrieben werden.
                 </para>
             </listitem>
 

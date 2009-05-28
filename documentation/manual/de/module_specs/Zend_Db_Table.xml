@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15719 -->
+<!-- EN-Revision: 15742 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.table">
 
@@ -498,7 +498,7 @@ $data = array(
 
             <para>
                 Wenn die geschützte Variable <varname>$_sequence</varname>, in <classname>Zend_Db_Table_Abstract</classname>, als
-                boolscher Wert <code>true</code> definiert wird, nimmt die Klasse an das die Tabelle
+                boolscher Wert <constant>TRUE</constant> definiert wird, nimmt die Klasse an das die Tabelle
                 einen automatischen Primärschlüssel hat.
             </para>
 
@@ -534,7 +534,7 @@ class Bugs extends Zend_Db_Table_Abstract
                 <code>IDENTITY</code> Notation die ähnlich arbeitet. Wenn eine dieser Notationen
                 verwendet wird, muß der <classname>Zend_Db_Table</classname> Klasse mitgeteilt
                 werden das Sie eine automatische Spalte hat, indem <varname>$_sequence</varname> auf
-                <code>true</code> gesetzt wird.
+                <constant>TRUE</constant> gesetzt wird.
             </para>
 
         </sect3>
@@ -598,7 +598,7 @@ class Bugs extends Zend_Db_Table_Abstract
             </para>
 
             <para>
-                Wenn <varname>$_sequence</varname> als boolsches <code>false</code> definiert wird, nimmt
+                Wenn <varname>$_sequence</varname> als boolsches <constant>FALSE</constant> definiert wird, nimmt
                 <classname>Zend_Db_Table_Abstract</classname> an das die Tabelle einen natürlichen
                 Primärschlüssel hat. Es müssen Werte für die Spalte des Primärschlüssels im Array
                 der Daten definiert werden die an die <code>insert()</code> Methode übergeben
@@ -1454,7 +1454,7 @@ $bugs = new Bugs(array('metadataCache' => $cache));
                 Da die Information die von der describeTable() Methode des Adapters zurückgegeben
                 wird, ein Array ist, muß sichergestellt werden das die
                 <code>automatic_serialization</code> Option für das
-                <classname>Zend_Cache_Core</classname> Frontend auf <code>true</code> gesetzt wird.
+                <classname>Zend_Cache_Core</classname> Frontend auf <constant>TRUE</constant> gesetzt wird.
             </para>
 
         </note>

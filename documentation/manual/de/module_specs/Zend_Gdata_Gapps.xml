@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15742 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.gapps">
     <title>Google Apps Provisionierung verwenden</title>
@@ -282,7 +282,7 @@ $user = $user->save();
                 <para>
                     Ein Benutzer kann dazu gezwungen werden sein Passwort bei seinem nächsten Login
                     zu ändern, indem die <code>login->changePasswordAtNextLogin</code> Eigenschaft
-                    auf <code>true</code> gesetzt wird.
+                    auf <constant>TRUE</constant> gesetzt wird.
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -293,7 +293,7 @@ $user = $user->save();
 
                 <para>
                     Genauso kann das rückgängig gemacht werden indem die
-                    <code>login->changePasswordAtNextLogin</code> Eigenschaft auf <code>false</code>
+                    <code>login->changePasswordAtNextLogin</code> Eigenschaft auf <constant>FALSE</constant>
                     gesetzt wird.
                 </para>
 
@@ -317,7 +317,7 @@ $gdata->restoreUser('foo');
 
                 <para>
                     Alternativ kann die Eigenschaft <code>login->suspended</code> des
-                    Benutzerzugangs auf <code>true</code> gesetzt werden.
+                    Benutzerzugangs auf <constant>TRUE</constant> gesetzt werden.
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -328,7 +328,7 @@ $user = $user->save();
 
                 <para>
                     Um den Benutzerzugang wiederherzustellen muß die <code>login->suspended</code>
-                    Eigenschaft auf <code>false</code> gesetzt werden.
+                    Eigenschaft auf <constant>FALSE</constant> gesetzt werden.
                 </para>
 
             </sect4>
@@ -338,7 +338,7 @@ $user = $user->save();
 
                 <para>
                     Benutzern kann die Möglichkeit gegeben werden die Domain zu verwalten durch das
-                    setzen Ihrer <code>login->admin</code> Eigenschaft auf <code>true</code>.
+                    setzen Ihrer <code>login->admin</code> Eigenschaft auf <constant>TRUE</constant>.
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -349,7 +349,7 @@ $user = $user->save();
 
                 <para>
                     Und wie erwartet, entfernt das Setzen der Eigenschaft <code>login->admin</code>,
-                    des Benutzers auf <code>false</code>, dessen administrative Rechte.
+                    des Benutzers auf <constant>FALSE</constant>, dessen administrative Rechte.
                 </para>
 
             </sect4>

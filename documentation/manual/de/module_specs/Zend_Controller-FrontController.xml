@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15719 -->
+<!-- EN-Revision: 15742 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.front">
     <title>Der Front Controller</title>
@@ -390,7 +390,7 @@ Zend_Controller_Front::run('../application/controllers');
                 <para>
                     <code>returnResponse($flag)</code> stellt ein, ob die Antwort nach
                     <code>dispatch()</code> vom Front-Controller zurückgegeben werden soll
-                    (<code>true</code>) oder ob er sie automatisch ausgibt (<code>false</code>).
+                    (<constant>TRUE</constant>) oder ob er sie automatisch ausgibt (<constant>FALSE</constant>).
                     In der Standardeinstellung wird die Antwort automatisch ausgegeben (durch
                     Aufruf von
                     <classname>Zend_Controller_Response_Abstract::sendResponse()</classname>); das

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15628 -->
+<!-- EN-Revision: 15742 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.input">
     <title>Zend_Filter_Input</title>
@@ -262,9 +262,9 @@ $input->setData($newData);
 
             <para>
                 Wenn alle Eingabedaten die Prüfregeln bestanden haben, gibt die
-                <code>isValid()</code> Methode <code>true</code> zurück. Wenn irgendein Feld
+                <code>isValid()</code> Methode <constant>TRUE</constant> zurück. Wenn irgendein Feld
                 ungültig ist oder ein benötigtes Feld fehlt, gibt die <code>isValid()</code> Methode
-                <code>false</code> zurück.
+                <constant>FALSE</constant> zurück.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -276,7 +276,7 @@ if ($input->isValid()) {
             <para>
                 Diese Methode akzeptiert ein optionales String Argument, das ein individuelles Feld
                 benennt. Wenn das spezifizierte Feld die Prüfung passiert und bereit ist um abgeholt
-                zu werden, gibt <code>isValid('fieldName')</code> den Wert <code>true</code> zurück.
+                zu werden, gibt <code>isValid('fieldName')</code> den Wert <constant>TRUE</constant> zurück.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -528,7 +528,7 @@ $filters = array(
                 Prüfers ein Array mit den Werten dieser Felder. Zum Beispiel ist es für Benutzer
                 üblich einen Passwort String in zwei Feldern zu spezifizieren, und diese müssen den
                 selben String in beide Felder eingeben. Man kann zum Beispiel eine Prüfklasse
-                implmentieren die ein Array Argument annimmt, und <code>true</code> zurückgibt wenn
+                implmentieren die ein Array Argument annimmt, und <constant>TRUE</constant> zurückgibt wenn
                 alle Werte im Array identisch zum jeweils anderen sind.
             </para>
 
@@ -649,7 +649,7 @@ echo $input->month; // gibt 1 aus
 
             <para>
                 Wenn, in eigenen Fällen, ein leerer String als gültig angenommen werden soll, kann
-                das Metakommando 'allowEmpty' auf <code>true</code> gesetzt werden. Dann passieren
+                das Metakommando 'allowEmpty' auf <constant>TRUE</constant> gesetzt werden. Dann passieren
                 die Eingabedaten die Prüfung wenn sie in den Eingabedaten vorhanden sind, aber der
                 Wert ein leerer String ist.
             </para>
@@ -670,12 +670,12 @@ $validators = array(
 ]]></programlisting>
 
             <para>
-                Der Standardwert dieses Metakommandos ist <code>false</code>.
+                Der Standardwert dieses Metakommandos ist <constant>FALSE</constant>.
             </para>
 
             <para>
                 Im unüblichen Fall das eine Prüfregel mit keinem Prüfer definiert wird, aber das
-                'allowEmpty' Metakommando <code>false</code> ist (das bedeutet, das das Feld als
+                'allowEmpty' Metakommando <constant>FALSE</constant> ist (das bedeutet, das das Feld als
                 ungültig angenommen wird wenn es leer ist), gibt Zend_Filter_Input eine Standard
                 Fehlermeldung zurück die mit <code>getMessages()</code> empfangen werden kann. Diese
                 Meldung kann spezifiziert werden indem die 'notEmptyMessage' als Argument für den
@@ -709,7 +709,7 @@ $input->setOptions($options);
             </para>
 
             <para>
-                Alternativ, wenn der Wert des 'breakChainOnFailure' Metakommandos <code>true</code>
+                Alternativ, wenn der Wert des 'breakChainOnFailure' Metakommandos <constant>TRUE</constant>
                 ist, terminiert die Prüfkette nachdem der erste Prüfer fehlschlägt. Die Eingabedaten
                 werden nicht gegen nachfolgende Prüfer in der Kette geprüft. Sie können also weitere
                 Fehlschläge verursachen selbst wenn der eine, der gemeldet wurde, korrigiert wird.
@@ -734,7 +734,7 @@ $input = new Zend_Filter_Input(null, $validators);
 ]]></programlisting>
 
             <para>
-                Der Standardwert dieses Metakommandos ist <code>false</code>.
+                Der Standardwert dieses Metakommandos ist <constant>FALSE</constant>.
             </para>
 
             <para>

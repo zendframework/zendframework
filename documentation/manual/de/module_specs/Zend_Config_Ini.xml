@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15719 -->
+<!-- EN-Revision: 15742 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.config.adapters.ini">
     <title>Zend_Config_Ini</title>
@@ -20,7 +20,7 @@
             <ulink url="http://php.net/parse_ini_file"><code>parse_ini_file()</code></ulink>. Deren
             Dokumentation klärt über spezielle Verhaltensweisen auf, die sich auch auf
             <classname>Zend_Config_Ini</classname> auswirken, z. B. wie die besonderen Werte
-            <code>true</code>, <code>false</code>, <code>yes</code>, <code>no</code> und
+            <constant>TRUE</constant>, <constant>FALSE</constant>, <code>yes</code>, <code>no</code> und
             <code>null</code> gehandhabt werden.
         </para>
     </note>

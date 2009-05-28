@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15741 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.standardDecorators">
     <title>Standard Formular Dekoratoren die mit dem Zend Framework ausgeliefert werden</title>
@@ -88,7 +88,7 @@ class Util
 
         <para>
             Die Beschreibung wird escaped, indem der Escaping Mechanismus vom View Objekt
-            standardmäßig verwendet wird. Das kann, durch die Übergabe eines <code>false</code>
+            standardmäßig verwendet wird. Das kann, durch die Übergabe eines <constant>FALSE</constant>
             an die 'escape' Option des Dekorators, ausgeschaltet werden, oder durch die
             <code>setEscape()</code> Methode.
         </para>
@@ -492,7 +492,7 @@ $element->setDecorators(array(array('ViewScript',
             <para>
                 Es kann für das View Skript nützlich sein, den Inhalt der dem Dekorator angeboten
                 wird, zu ersetzen -- zum Beispiel wenn man ihn umschliessen will. Das kann man
-                erreichen, indem ein <code>false</code> für die 'placement' Option des Dekorators
+                erreichen, indem ein <constant>FALSE</constant> für die 'placement' Option des Dekorators
                 spezifiziert wird:
             </para>
 

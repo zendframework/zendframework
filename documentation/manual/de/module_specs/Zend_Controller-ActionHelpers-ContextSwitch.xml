@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15719 -->
+<!-- EN-Revision: 15742 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.actionhelpers.contextswitch">
     <title>ContextSwitch und AjaxContext</title>
@@ -373,7 +373,7 @@ class FooController extends Zend_Controller_Action
                 </para>
 
                 <para>
-                    Ein Wert von <code>true</code> für den Kontext markiert alle vorhandenen
+                    Ein Wert von <constant>TRUE</constant> für den Kontext markiert alle vorhandenen
                     Kontexte als vorhanden für die Aktion.
                 </para>
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15742 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.session.advanced_usage">
 
@@ -84,7 +84,7 @@ php_value session.auto_start 0
                 <itemizedlist mark="opencircle">
                     <listitem>
                         <para>
-                            Entscheidungslos, die <code>strict</code> Option auf <code>true</code>
+                            Entscheidungslos, die <code>strict</code> Option auf <constant>TRUE</constant>
                             setzen durch Verwendung von
                             <classname>Zend_Session::setOptions()</classname> in der Bootstrap
                             Datei.
@@ -290,7 +290,7 @@ $testSpace->accept_answer = true;
         </para>
 
         <para>
-            Um dieses Verhalten einzuschalten, muß <code>true</code> als zweites Argument im
+            Um dieses Verhalten einzuschalten, muß <constant>TRUE</constant> als zweites Argument im
             Konstruktor angegeben werden wenn die letzte erlaubt Instanz von
             <classname>Zend_Session_Namespace</classname> erzeugt wurde. Jeder weitere Versuch den
             selben Namensraum zu instanzieren wird in einer geworfenen Ausnahme resultieren.

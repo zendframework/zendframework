@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15742 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.profiler" xmlns:xi="http://www.w3.org/2001/XInclude">
 
@@ -50,8 +50,8 @@ $db->getProfiler()->setEnabled(true);
         </para>
 
         <para>
-            Ein boolsches Argument aktiviert den Profiler wenn es der Wert <code>true</code> ist,
-            oder schaltet ihn mit <code>false</code> aus. Die Profiler Klasse ist die Standard
+            Ein boolsches Argument aktiviert den Profiler wenn es der Wert <constant>TRUE</constant> ist,
+            oder schaltet ihn mit <constant>FALSE</constant> aus. Die Profiler Klasse ist die Standard
             Profiler Klasse des Adapters <classname>Zend_Db_Profiler</classname>.
             <programlisting language="php"><![CDATA[
 $params['profiler'] = true;

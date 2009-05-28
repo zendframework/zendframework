@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15741 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.text.figlet">
     <title>Zend_Text_Figlet</title>
@@ -56,7 +56,7 @@
                     Zeilen zu handhaben sind. Wenn er auf true gesetzt wird, werden einzelne neue
                     Zeilen ignoriert und stattdessen als einzelnes Leerzeichen behandelt. Nur
                     mehrere neue Zeilen werden als solche behandelt. Der Standardwert ist
-                    <code>false</code>.
+                    <constant>FALSE</constant>.
                 </para>
             </listitem>
             <listitem>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15742 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.loader.load">
 
@@ -61,7 +61,7 @@ Zend_Loader::loadFile($filename, $dirs=null, $once=false);
         </para>
 
         <para>
-            Das <code>$once</code> Argument ist Boolean. Wenn es <code>TRUE</code>
+            Das <code>$once</code> Argument ist Boolean. Wenn es <constant>TRUE</constant>
             ist, verwendet <classname>Zend_Loader::loadFile()</classname> die PHP Funktion
             <ulink url="http://php.net/include"><code>include_once()</code></ulink>
             für das Laden der Datei, andernfalls wird die PHP Funktion
@@ -127,8 +127,8 @@ Zend_Loader::loadClass('Container_Tree',
 
         <para>
             Die statische Methode <classname>Zend_Loader::isReadable($pathname)</classname>
-            gibt <code>TRUE</code> zurück wenn eine Datei im angegebenen Pfadnamen
-            existiert und lesbar ist, andernfalls <code>FALSE</code>.
+            gibt <constant>TRUE</constant> zurück wenn eine Datei im angegebenen Pfadnamen
+            existiert und lesbar ist, andernfalls <constant>FALSE</constant>.
         </para>
 
         <example id="zend.loader.load.isreadable.example">
@@ -227,7 +227,7 @@ Zend_Loader::registerAutoload('My_Loader');
         <para>
             Der Callback für den Autoloader kann entfernt werden. Die
             <code>registerAutoload()</code> Methode hat ein zweites optionales Argument welches
-            standardmäßig <code>true</code> ist. Wenn dieses Argument <code>false</code> ist, wird
+            standardmäßig <constant>TRUE</constant> ist. Wenn dieses Argument <constant>FALSE</constant> ist, wird
             die Registrierung des Callback des Autoloaders vom SPL Autoload Stack entfernt.
         </para>
 

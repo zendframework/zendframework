@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15741 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.file.transfer.migration">
 
@@ -351,7 +351,7 @@ $upload->addValidator('Size',
 
             <para>
                 Um also eigene Skripte auf die neue API zu migrieren, muß einfach ein
-                <code>false</code> nach der Definition der gewünschten Prüfung hinzugefügt werden.
+                <constant>FALSE</constant> nach der Definition der gewünschten Prüfung hinzugefügt werden.
             </para>
 
             <example id="zend.file.transfer.migration.fromonesixonetoonesixtwo.example">

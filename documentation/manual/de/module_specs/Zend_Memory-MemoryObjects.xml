@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15742 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.memory.memory-objects">
 
@@ -259,11 +259,11 @@ public function isLocked();
 
             <para>
                 Die <code>isLocked()</code> Methode kann verwendet werden um zu
-                Prüfen ob das Objekt gesperrt ist. Sie gibt <code>true</code>
-                zurück wenn das Objekt gesperrt ist, oder <code>false</code> wenn
+                Prüfen ob das Objekt gesperrt ist. Sie gibt <constant>TRUE</constant>
+                zurück wenn das Objekt gesperrt ist, oder <constant>FALSE</constant> wenn
                 es nicht gesperrt ist. Für "gesperrte" Objekte wird immer
-                <code>true</code> zurückgegeben, und für "verschiebbare" Objekte
-                kann entweder <code>true</code> oder <code>false</code>
+                <constant>TRUE</constant> zurückgegeben, und für "verschiebbare" Objekte
+                kann entweder <constant>TRUE</constant> oder <constant>FALSE</constant>
                 zurückgegeben werden.
             </para>
 

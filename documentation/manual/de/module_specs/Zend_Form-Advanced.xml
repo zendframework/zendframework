@@ -173,7 +173,7 @@
             <listitem>
                 <para>
                     <classname>Zend_Form::setIsArray($flag)</classname>: Durch das Setzen dieses
-                    Flags auf <code>true</code>, kann angezeigt werden, dass das komplette Formular
+                    Flags auf <constant>TRUE</constant>, kann angezeigt werden, dass das komplette Formular
                     als Array behandelt werden soll. Standardmäßig wird der Name des Formulars als
                     Name des Arrays verwendet, solange <code>setElementsBelongTo()</code> aufgerufen
                     wurde. Wenn das Formular keinen Namen spezifiziert hat, oder
@@ -570,7 +570,7 @@ class RegistrationController extends Zend_Controller_Action
             <para>
                 Sehen wir uns nun an, wie die verschiedenen Unterformulare bearbeitet und angezeigt
                 werden können. Wir können <code>getCurrentSubForm()</code> verwenden um
-                herauszufinden ob ein Unterformular übertragen wurde (<code>false</code>
+                herauszufinden ob ein Unterformular übertragen wurde (<constant>FALSE</constant>
                 Rückgabewerte zeigen an, dass keine angezeigt oder übertragen wurden) und
                 <code>getNextSubForm()</code> empfängt die Form die angezeigt werden soll. Wir
                 können die <code>prepareSubForm()</code> Methode des Formulars verwenden, um

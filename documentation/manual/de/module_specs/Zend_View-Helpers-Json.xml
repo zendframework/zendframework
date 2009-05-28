@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15742 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.json">
     <title>JSON Helfer</title>
@@ -43,9 +43,9 @@ Content-Type: application/json
         </para>
 
         <para>
-            Um Layouts zu behalten muß der zweite Parameter ein boolsches <code>true</code> sein.
+            Um Layouts zu behalten muß der zweite Parameter ein boolsches <constant>TRUE</constant> sein.
             Wenn der zweite Parameter ein Array ist, können Layouts behalten werden indem ein
-            <code>keepLayouts</code> Schlüssel mit dem boolschen Wert <code>true</code>
+            <code>keepLayouts</code> Schlüssel mit dem boolschen Wert <constant>TRUE</constant>
             eingefügt wird.
         </para>
 
@@ -61,7 +61,7 @@ echo $this->json($this->data, array('keepLayouts' => true));
             <classname>Zend_Json::encode</classname> erlaubt es native JSON Ausdrücke zu kodieren
             indem <classname>Zend_Json_Expr</classname> Objekte verwendet werden. Diese Option
             ist standardmäßig deaktiviert. Um diese Option zu aktivieren, muß ein boolsches
-            <code>true</code> an den <code>enableJsonExprFinder</code> Schlüssel des Options
+            <constant>TRUE</constant> an den <code>enableJsonExprFinder</code> Schlüssel des Options
             Arrays übergeben werden:
         </para>
 

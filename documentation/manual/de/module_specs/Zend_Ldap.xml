@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15742 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.ldap.using">
 
@@ -92,7 +92,7 @@ echo "$acctname\n";
 
             <para>
                 Wenn <code>bind()</code> mit einem nicht-DN-konformen Benutzernamen aufgerufen wird
-                aber <code>bindRequiresDN</code> <code>true</code> ist und kein Benutzername in
+                aber <code>bindRequiresDN</code> <constant>TRUE</constant> ist und kein Benutzername in
                 DN-Form als Option angegeben wird, wird die Server-Bindung fehlschlagen. Wenn
                 allerdings ein Benutzername in DN-Form im Optionen-Array übergeben wurde, wird
                 <classname>Zend_Ldap</classname> sich zuerst mit diesem Benutzernamen an den Server
@@ -127,7 +127,7 @@ echo "$acctname\n";
 
                 Der Aufruf von <code>bind()</code> in diesem Beispiel erkennt dass der Benutzername
                 '<code>abaker</code>' nicht in DN-Form ist und dass <code>bindRequiresDn</code>
-                <code>true</code> ist, verwendet '<code>CN=user1,DC=foo,DC=net</code>' und
+                <constant>TRUE</constant> ist, verwendet '<code>CN=user1,DC=foo,DC=net</code>' und
                 '<code>pass1</code>' zum Verbinden, empfängt den DN für '<code>abaker</code>',
                 löst die Bindung und bindet sich dann neu mit dem jetzt bekannten
                 '<code>CN=Alice Baker,OU=Sales,DC=foo,DC=net</code>'.
@@ -173,9 +173,9 @@ echo "$acctname\n";
                         <entry>useStartTls</entry>
                         <entry>
                             Ob der LDAP-Client TLS (auch SSL-v2) verschlüsselte Übertragung
-                            verwenden soll. Der Wert <code>true</code> ist auf jeden Fall in
+                            verwenden soll. Der Wert <constant>TRUE</constant> ist auf jeden Fall in
                             Produktivumgebungen empfohlen, damit Passwörter nicht im Klartext
-                            übertragen werden. Der Standardwert ist <code>false</code>, weil Server
+                            übertragen werden. Der Standardwert ist <constant>FALSE</constant>, weil Server
                             fast immer verlangen, dass ein Verschlüsselungszertifikat
                             nachinstalliert wird.
                         </entry>
@@ -204,10 +204,10 @@ echo "$acctname\n";
                       <row>
                         <entry>bindRequiresDn</entry>
                         <entry>
-                            Wenn dieser Wert<code>true</code> ist, wird
+                            Wenn dieser Wert<constant>TRUE</constant> ist, wird
                             <classname>Zend_Ldap</classname> den Domain-Name für den Account, der
                             zur Bindung genutzt wird, suchen, wenn der Benutzername noch nicht in
-                            DN-Form ist. Der Standardwert ist <code>false</code>.
+                            DN-Form ist. Der Standardwert ist <constant>FALSE</constant>.
                         </entry>
                       </row>
                       <row>
@@ -250,7 +250,7 @@ echo "$acctname\n";
                             der ein '<code>%s</code>' enthalten muss, das durch den Benutzernamen
                             ersetzt wird. Der Standardwert ist
                             '<code>(&amp;(objectClass=user)(sAMAccountName=%s))</code>', es sei denn
-                            <code>bindRequiresDn</code> ist <code>true</code>. In diesem Fall ist
+                            <code>bindRequiresDn</code> ist <constant>TRUE</constant>. In diesem Fall ist
                             der Standardwert
                             '<code>(&amp;(objectClass=posixAccount)(uid=%s))</code>'.
                             Wenn eigene Schemata benutzt werden, muss diese Option vielleicht
@@ -263,15 +263,15 @@ echo "$acctname\n";
                             Einige LDAP Server können so konfiguriert werden das Sie ein leeres
                             Passwort als anonyme Bindung akzeptieren. Dieses Verhalten ist fast
                             immer unerwünscht. Aus diesem Grund sind leere Passwörter explizit nicht
-                            erlaubt. Wenn dieser Wert auf <code>true</code> gesetzt wird ist die
+                            erlaubt. Wenn dieser Wert auf <constant>TRUE</constant> gesetzt wird ist die
                             Übermittlung eines leeres Passwortes wärend des Bindens erlaubt.
                         </entry>
                       </row>
                       <row>
                         <entry>optReferrals</entry>
                         <entry>
-                            Auf <code>true</code> gesetzt, zeigt diese Option dem LDAP Client das
-                            Referenzen gefolgt werden soll. Der Standardwert ist <code>false</code>.
+                            Auf <constant>TRUE</constant> gesetzt, zeigt diese Option dem LDAP Client das
+                            Referenzen gefolgt werden soll. Der Standardwert ist <constant>FALSE</constant>.
                         </entry>
                       </row>
                     </tbody>

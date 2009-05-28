@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15742 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.navigation">
     <title>Navigations Helfer</title>
@@ -573,7 +573,7 @@ Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole('member');
                <para>
                    <code>{get|set}LinkLast()</code> empfängt/setzt ob der letzte Breabcrumb
                    als Anker dargestellt werden soll oder nicht. Der Standardwert ist
-                   <code>false</code>.
+                   <constant>FALSE</constant>.
                </para>
            </listitem>
            <listitem>
@@ -1158,7 +1158,7 @@ Ausgabe:
                 <para>
                     <code>{get|set}RenderParents()</code> empfängt/setzt ein Flag das
                     spezifiziert ob Eltern nur dargestellt werden sollen wenn nur der aktive
-                    Zweig eines Containers dargestellt wird. Wenn es auf <code>false</code>
+                    Zweig eines Containers dargestellt wird. Wenn es auf <constant>FALSE</constant>
                     gesetzt wird, wird nur das tiefste aktive Menü dargestellt.
                 </para>
             </listitem>
@@ -1828,28 +1828,28 @@ foreach ($this->container as $page) {
                     <code>formatOutput</code> der nativen <classname>DOMDocument</classname>
                     Klasse. Mehr kann man unter <ulink url="http://php.net/domdocument">PHP:
                     DOMDocument - Handbuch</ulink> nachlesen. Der Standardwert ist
-                    <code>false</code>.
+                    <constant>FALSE</constant>.
                 </para>
            </listitem>
            <listitem>
                 <para>
                     <code>{get|set}UseXmlDeclaration()</code> empfängt/setzt ein Flag das
                     anzeigt ob die XML Deklaration bei der Darstellung enthalten sein soll.
-                    Der Standardwert ist <code>true</code>.
+                    Der Standardwert ist <constant>TRUE</constant>.
                 </para>
            </listitem>
            <listitem>
                 <para>
                     <code>{get|set}UseSitemapValidators()</code> empfängt/setzt ein Flag das
                     anzeigt ob Sitemap Prüfungen verwendet werden sollen wenn die DOM Sitemap
-                    dargestellt werden soll. Der Standardwert ist <code>true</code>.
+                    dargestellt werden soll. Der Standardwert ist <constant>TRUE</constant>.
                 </para>
            </listitem>
            <listitem>
                 <para>
                     <code>{get|set}UseSchemaValidation()</code> empfängt/setzt ein Flag das
                     anzeigt ob der Helfer eine XML Schema Prüfung verwenden soll wenn die DOM
-                    Sitemap erzeugt wird. Der Standardwert ist <code>false</code>.
+                    Sitemap erzeugt wird. Der Standardwert ist <constant>FALSE</constant>.
                 </para>
            </listitem>
            <listitem>
@@ -2114,21 +2114,21 @@ echo $this->navigation()
                <para>
                    <code>{get|set}InjectContainer()</code> empfängt/setzt ein Flag das anzeigt
                    ob der Container an weitergeleitete Helfer injiziiert werden soll. Der
-                   Standardwert ist <code>true</code>.
+                   Standardwert ist <constant>TRUE</constant>.
                </para>
            </listitem>
            <listitem>
                <para>
                    <code>{get|set}InjectAcl()</code> empfängt/setzt ein Flag das anzeigt ob die
                    ACL/Rolle an weitergeleitete Helfer injiziiert werden soll. Der Standardwert
-                   ist <code>true</code>.
+                   ist <constant>TRUE</constant>.
                </para>
            </listitem>
            <listitem>
                <para>
                    <code>{get|set}InjectTranslator()</code> empfängt/setzt ein Flag das anzeigt
                    ob der Übersetzer an weitergeleitete Helfer injiziiert werden soll. Der
-                   Standardwert ist <code>true</code>.
+                   Standardwert ist <constant>TRUE</constant>.
                </para>
            </listitem>
            <listitem>

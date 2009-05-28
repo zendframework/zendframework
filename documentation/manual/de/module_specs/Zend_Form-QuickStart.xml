@@ -167,7 +167,7 @@ $username->addValidator('regex', false, array('/^[a-z]/i'));
         <para>
             (Der zweite Parameter wird verwendet um anzuzeigen, ob spätere Prüfer bei einem Fehler
             dieses Prüfers ausgeführt werden sollen oder nicht; standardmäßig ist er
-            <code>false</code>.)
+            <constant>FALSE</constant>.)
         </para>
 
         <para>

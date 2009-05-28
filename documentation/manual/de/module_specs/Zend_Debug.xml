@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15719 -->
+<!-- EN-Revision: 15742 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.debug.dumping">
 
@@ -36,7 +36,7 @@ Zend_Debug::dump($var, $label=null, $echo=true);
     <para>
         Das boolsche Argument <varname>$echo</varname> definiert ob die Ausgabe von
         <classname>Zend_Debug::dump()</classname> mit Echo ausgegeben wird oder nicht.
-        Wenn Sie <code>true</code> ist, wird mit Echo ausgegeben, sonst nicht.
+        Wenn Sie <constant>TRUE</constant> ist, wird mit Echo ausgegeben, sonst nicht.
         Unabhängig vom Wert des <varname>$echo</varname> Arguments enthält der
         Rückgabewert dieser Methode die Ausgabe.
     </para>

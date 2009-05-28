@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15742 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.soap.server">
     <title>Zend_Soap_Server</title>
@@ -352,7 +352,7 @@ $request = $server->getLastRequest();
             <para>
                 Die <classname>Zend_Soap_Server::handle()</classname> Methode wirft die erzeugte
                 Antwort automatisch auf den Ausgabe Stream aus. Das kann durch Verwendung von
-                <code>setReturnResponse()</code> mit <code>true</code> oder <code>false</code> als
+                <code>setReturnResponse()</code> mit <constant>TRUE</constant> oder <constant>FALSE</constant> als
                 Parameter blockiert werden
                 <footnote>
                     <para>

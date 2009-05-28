@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15742 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.navigation.pages.common">
     <title>Übliche Seiten Features</title>
@@ -149,10 +149,10 @@
                 <row>
                     <entry><code>active</code></entry>
                     <entry><code>bool</code></entry>
-                    <entry><code>false</code></entry>
+                    <entry><constant>FALSE</constant></entry>
                     <entry>
                         Ob die Seite für die aktuelle Anfrage als aktiv betrachtet werden soll.
-                        Wenn active <code>false</code> ist oder nicht angegeben wird, werden MVC
+                        Wenn active <constant>FALSE</constant> ist oder nicht angegeben wird, werden MVC
                         Seiten Ihr Eigenschaften gegen das Anfrage Objekt prüfen wenn
                         <code>$page->isActive()</code> aufgerufen wird.
                     </entry>
@@ -160,7 +160,7 @@
                 <row>
                     <entry><code>visible</code></entry>
                     <entry><code>bool</code></entry>
-                    <entry><code>true</code></entry>
+                    <entry><constant>TRUE</constant></entry>
                     <entry>
                         Ob die Seite für den Benutzer sichtbar sein soll, oder nur ein Teil einer
                         Struktur ist. Unsichtbare Seiten werden von View Helfern übersprungen.

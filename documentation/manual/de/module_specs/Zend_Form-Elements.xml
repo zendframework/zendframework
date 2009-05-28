@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15742 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.elements">
     <title>Erstellen von Form Elementen mit Hilfe von Zend_Form_Element</title>
@@ -385,7 +385,7 @@ $element->addPrefixPath('My_Validator', 'My/Validator/', 'validate');
 
         <para>
             Wenn eine bestimmte Prüfung fehlschlägt, und die Ausführung von späteren Prüfungen
-            verhindert werden soll, kann ein <code>true</code> als zweiter Parameter übergeben
+            verhindert werden soll, kann ein <constant>TRUE</constant> als zweiter Parameter übergeben
             werden:
         </para>
 
@@ -558,7 +558,7 @@ class My_Validate_PasswordConfirmation extends Zend_Validate_Abstract
 
         <para>
             Prüfungen werden in der Reihenfolge ausgeführt. Jede Prüfung wird ausgeführt solange bis
-            eine Prüfung die mit einem <code>true</code> Wert für <code>breakChainOnFailure</code>
+            eine Prüfung die mit einem <constant>TRUE</constant> Wert für <code>breakChainOnFailure</code>
             bei Ihrer Prüfung fehlschlägt. Man sollte sichergehen, dass Prüfungen in einer
             begründeten Reihenfolge definiert werden.
         </para>
@@ -581,7 +581,7 @@ $messages = $element->getMessages();
         <para>
             Zusätzlich zu Prüfungen, kann spezifiziert werden, dass ein Element benötigt wird, indem
             <code>setRequired(true)</code> verwendet wird. Standardmäßig ist dieses Flag
-            <code>false</code>, was bedeutet, dass die Prüfkette übersprungen wird, wenn kein Wert
+            <constant>FALSE</constant>, was bedeutet, dass die Prüfkette übersprungen wird, wenn kein Wert
             an <code>isValid()</code> übergeben wird. Dieses Verhalten kann auf verschiedene Weisen
             geändert werden:
         </para>
@@ -590,10 +590,10 @@ $messages = $element->getMessages();
             <listitem>
                 <para>
                     Standardmäßig, wenn ein Element benötigt wird, ist auch ein Flag 'allowEmpty'
-                    <code>true</code>. Das bedeutet, dass, wenn ein Wert evaluiert wird, der leer
+                    <constant>TRUE</constant>. Das bedeutet, dass, wenn ein Wert evaluiert wird, der leer
                     ist, und an <code>isValid()</code> übergeben wird, die Prüfung übersprungen
                     wird. Dieses Flag kann gewechselt werden mit Hilfe der Zugriffsmethode
-                    <code>setAllowEmpty($flag)</code>; Wenn das Flag <code>false</code> ist, und ein
+                    <code>setAllowEmpty($flag)</code>; Wenn das Flag <constant>FALSE</constant> ist, und ein
                     Wert übergeben wird, werden die Prüfungen trotzdem durchlaufen.
                 </para>
             </listitem>
@@ -610,7 +610,7 @@ $messages = $element->getMessages();
 
                 <para>
                     Wenn dieses Verhalten nicht gewünscht ist kann es durch die Übergabe eines
-                    <code>false</code> Wert an <code>setAutoInsertNotEmptyValidator($flag)</code>
+                    <constant>FALSE</constant> Wert an <code>setAutoInsertNotEmptyValidator($flag)</code>
                     ausgeschaltet werden; das verhindert, dass <code>isValid()</code> die 'NotEmpty'
                     Prüfung in der Prüfkette platziert.
                 </para>
@@ -641,21 +641,21 @@ $messages = $element->getMessages();
             <listitem><para>
                     <code>setRequired($flag)</code> und <code>isRequired()</code> erlauben es den
                     Status des 'required' Flag zu setzen und zu empfangen. Wenn der Wert auf
-                    <code>true</code> gesetzt wird, erzwingt dieses Flag, dass das Element, in den
+                    <constant>TRUE</constant> gesetzt wird, erzwingt dieses Flag, dass das Element, in den
                     Daten die von <classname>Zend_Form</classname> bearbeitet werden, vorhanden ist.
             </para></listitem>
 
             <listitem><para>
                     <code>setAllowEmpty($flag)</code> und <code>getAllowEmpty()</code> erlauben es
                     das Verhalten von optionalen Elementen (z.B. Elementen in denen das 'required'
-                    Flag <code>false</code> ist) zu ändern. Wenn das 'allowEmpty' Flag
-                    <code>true</code> ist, werden leere Werte nicht an die Prüfkette übergeben.
+                    Flag <constant>FALSE</constant> ist) zu ändern. Wenn das 'allowEmpty' Flag
+                    <constant>TRUE</constant> ist, werden leere Werte nicht an die Prüfkette übergeben.
             </para></listitem>
 
             <listitem><para>
                     <code>setAutoInsertNotEmptyValidator($flag)</code> erlaubt es zu definieren ob
                     eine 'NotEmpty' Prüfung der Prüfkette vorangestellt wird wenn das Element
-                    benötigt wird. Standardmäßig ist dieses Flag <code>true</code>.
+                    benötigt wird. Standardmäßig ist dieses Flag <constant>TRUE</constant>.
             </para></listitem>
 
             <listitem><para>
@@ -1037,22 +1037,22 @@ echo $element->renderHtmlTag("Das ist der Inhalt des HTML Tags");
                 <emphasis>required</emphasis>: Ein Flag, das anzeigt ob ein Element benötigt wird
                 wenn eine Prüfung des Formulars durchgeführt wird, oder nicht. Verwendet die
                 Zugriffsmethoden <code>setRequired()</code> und <code>getRequired()</code>. Dieses
-                Flag ist standardmäßig <code>false</code>.
+                Flag ist standardmäßig <constant>FALSE</constant>.
             </para></listitem>
 
             <listitem><para>
                 <emphasis>allowEmpty</emphasis>: Ein Flag, das indiziert ob ein nicht benötigtes
-                (optionales) Element versuchen soll leere Werte zu prüfen. Wenn es <code>true</code>
-                ist, und das 'required' Flag <code>false</code>, dann werden leere Werte nicht an
-                die Prüfkette übergeben, und es wird <code>true</code> angenommen. Verwendet die
+                (optionales) Element versuchen soll leere Werte zu prüfen. Wenn es <constant>TRUE</constant>
+                ist, und das 'required' Flag <constant>FALSE</constant>, dann werden leere Werte nicht an
+                die Prüfkette übergeben, und es wird <constant>TRUE</constant> angenommen. Verwendet die
                 Zugriffsmethoden <code>setAllowEmpty()</code> und <code>getAllowEmpty()</code>.
-                Dieses Flag ist standardmäßig <code>true</code>.
+                Dieses Flag ist standardmäßig <constant>TRUE</constant>.
             </para></listitem>
 
             <listitem><para>
                 <emphasis>autoInsertNotEmptyValidator</emphasis>: Ein Flag, das indiziert, ob eine
                 'NotEmpty' Prüfung eingefügt werden soll, wenn das Element benötigt wird, oder
-                nicht. Standardmäßig ist dieses Flag <code>true</code>. Das Flag kann mit
+                nicht. Standardmäßig ist dieses Flag <constant>TRUE</constant>. Das Flag kann mit
                 <code>setAutoInsertNotEmptyValidator($flag)</code> gesetzt und der Wert mit
                 <code>autoInsertNotEmptyValidator()</code> ermittelt werden.
             </para></listitem>

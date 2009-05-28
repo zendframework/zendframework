@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15742 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.writing_validators">
 
@@ -41,8 +41,8 @@
         wird die Logik der <code>isValid()</code> Methode implementiert und die Variablen für die
         Nachrichten und Nachrichten-Templates definiert werden die zu den Typen von Prüffehlern
         passen die auftreten können. Wenn ein Wert die Prüfung nicht besteht, sollte
-        <code>isValid()</code> <code>false</code> zurückgeben. Wenn der Wert die Prüfung besteht,
-        sollte <code>isValid()</code> <code>true</code> zurückgeben.
+        <code>isValid()</code> <constant>FALSE</constant> zurückgeben. Wenn der Wert die Prüfung besteht,
+        sollte <code>isValid()</code> <constant>TRUE</constant> zurückgeben.
     </para>
 
     <para>
@@ -179,7 +179,7 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
         <para>
             Zu beachten ist, das wenn eine der Prüfungen in <code>isValid()</code> fehlschlägt, eine
             entsprechende Fehlernachricht vorbereitet wird, und die Methode sofort
-            <code>false</code> zurückgibt. Diese Prüfregeln sind deswegen sequentiell abhängig. Das
+            <constant>FALSE</constant> zurückgibt. Diese Prüfregeln sind deswegen sequentiell abhängig. Das
             bedeuted, wenn einer der Tests fehlschlägt, gibt es keinen Grund eine weitere
             nachfolgende Prüfregel zu testen. Das muß aber trotzdem nicht der Fall sein. Das
             folgende Beispiel zeigt wie man eine Klasse schreiben kann die unabhängige Prüfregeln
@@ -267,7 +267,7 @@ class MyValid_PasswordStrength extends Zend_Validate_Abstract
 ]]></programlisting>
 
             Zu beachten ist das diese vier Testkriterien in <code>isValid()</code> nicht sofort
-            <code>false</code> zurückgeben. Das erlaubt der Prüfklasse
+            <constant>FALSE</constant> zurückgeben. Das erlaubt der Prüfklasse
             <emphasis>alle</emphasis> Gründe anzubieten bei denen das Eingabepasswort
             den Prüfvoraussetzungen nicht entsprochen hat. Wenn, zum Beispiel, ein Benutzer den
             String "<code>#$%</code>" als Passwort angegeben hat, würde <code>isValid()</code> alle

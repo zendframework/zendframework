@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15742 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.introduction">
 
@@ -43,12 +43,12 @@
             <classname>Zend_Validate_Interface</classname> welche zwei Methoden definiert,
             <code>isValid()</code> und <code>getMessages()</code>. Die <code>isValid()</code>
             Methode führt eine Prüfung über die angegebenen Werte aus, und gibt nur dann
-            <code>true</code> zurück wenn der Wert gegenüber den Kriterien der Prüfung entsprochen
+            <constant>TRUE</constant> zurück wenn der Wert gegenüber den Kriterien der Prüfung entsprochen
             hat.
         </para>
 
         <para>
-            Wenn <code>isValid()</code> <code>false</code> zurück gibt, bietet
+            Wenn <code>isValid()</code> <constant>FALSE</constant> zurück gibt, bietet
             <code>getMessages()</code> ein Array von Nachrichten welche die Gründe für die
             fehlgeschlagene Prüfung beschreiben. Die Arrayschlüssel sind kurze Strings die die
             Gründe für eine fehlgeschlagene Prüfung identifizieren, und die Arraywerte sind die

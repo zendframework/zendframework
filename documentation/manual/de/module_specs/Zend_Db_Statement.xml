@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15741 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.statement">
 
@@ -175,7 +175,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
             </itemizedlist>
 
             <para>
-                <code>fetch()</code> gibt <code>false</code> zurück wenn alle Zeilen des
+                <code>fetch()</code> gibt <constant>FALSE</constant> zurück wenn alle Zeilen des
                 Ergbnissatzes geholt wurden.
             </para>
 
@@ -274,7 +274,7 @@ echo $rows[0][0];
                 <code>fetchColumn()</code> wird verwendet mm eine einzelne Spalte eines
                 Ergebnissatzes zurück zu geben. Das optionale Argument ist der Integer Index der
                 Spalte die zurück gegeben werden soll. Der Standardwert ist 0. Diese Methode gibt
-                einen scalaren Wert zurück, oder <code>false</code> wenn alle Zeilen des
+                einen scalaren Wert zurück, oder <constant>FALSE</constant> wenn alle Zeilen des
                 Ergebnissatzes bereits geholt wurden.
             </para>
 

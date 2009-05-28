@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15741 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.openid.provider">
     <title>Zend_OpenId_Provider</title>
@@ -58,7 +58,7 @@ if (!$server->hasUser(TEST_ID)) {
         <para>
             Bei Erfolg gibt die Methode <classname>Zend_OpenId_Provider::handle</classname> einen
             String zurück der zur OpenID-aktivierten Seite zurück übergeben werden sollte. Bei einem
-            Fehler wird <code>false</code> zurückgegeben. Dieses Beispiel gibt eine HTTP 403 Antwort
+            Fehler wird <constant>FALSE</constant> zurückgegeben. Dieses Beispiel gibt eine HTTP 403 Antwort
             zurück wenn <classname>Zend_OpenId_Provider::handle</classname> fehlschlägt. Man erhält
             diese Antwort wenn man dieses Skript mit einem Web-Browser öffnet, weil es eine
             nicht-OpenID konforme Anfrage sendet.

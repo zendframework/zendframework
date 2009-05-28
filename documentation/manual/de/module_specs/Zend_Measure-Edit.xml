@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15742 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.measure.edit">
 
@@ -150,7 +150,7 @@ echo $sum;
 
         <para>
             Maßeinheiten können genauso verglichen werden, aber ohne automatische Konvertierung. Das
-            bedeutet das <code>equals()</code> nur dann <code>TRUE</code> zurückgibt wenn beide,
+            bedeutet das <code>equals()</code> nur dann <constant>TRUE</constant> zurückgibt wenn beide,
             sowohl der Wert als auch die Einheit identisch sind.
         </para>
 

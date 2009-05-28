@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15719 -->
+<!-- EN-Revision: 15741 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.overview">
 
@@ -876,7 +876,7 @@ print $date;
                             <para>
                                 Gibt eine Integer Repräsentation des ausgewählten Datumsabschnittes
                                 <varname>$part</varname> zurück anhand der Konventionen des Gebietsschemas
-                                des Objektes. Gibt <code>false</code> zurück wenn der Abschnitt
+                                des Objektes. Gibt <constant>FALSE</constant> zurück wenn der Abschnitt
                                 <varname>$part</varname> ein nicht numerischer Wert ist, wie
                                 <classname>Zend_Date::MONTH_NAME_SHORT</classname>.
                                 <emphasis>NOTIZ:</emphasis> Diese Methode ruft <link

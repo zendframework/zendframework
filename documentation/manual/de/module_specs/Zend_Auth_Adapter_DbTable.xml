@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15684 -->
+<!-- EN-Revision: 15735 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.auth.adapter.dbtable">
 
@@ -24,35 +24,36 @@
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>tableName</code>: Das ist der Name der Datenbanktabelle welche die
-                        Authentifikations Zeugnisse enthält, und gegen die die Datenbank
-                        Authentifikations Abfrage durchgeführt wird.
+                        <emphasis>tableName</emphasis>: Das ist der Name der Datenbanktabelle
+                        welche die Authentifikations Zeugnisse enthält, und gegen die die
+                        Datenbank Authentifikations Abfrage durchgeführt wird.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>identityColumn</code>: Ist der Name der Spalte der Datenbanktabelle
-                        die die Identität repräsentiert. Die Spalte der Identität muß eindeutige und
-                        einmalige Werte enthalten, wie einen Benutzernamen oder eine Email Adresse.
+                        <emphasis>identityColumn</emphasis>: Ist der Name der Spalte der
+                        Datenbanktabelle die die Identität repräsentiert. Die Spalte der Identität
+                        muß eindeutige und einmalige Werte enthalten, wie einen Benutzernamen oder
+                        eine Email Adresse.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>credentialColumn</code>: Das ist der Name der Spalte der
+                        <emphasis>credentialColumn</emphasis>: Das ist der Name der Spalte der
                         Datenbanktabelle die verwendet wird um die Zeugnisse zu repräsentieren. Bei
                         einem einfachen Identitäts und Passwort-Authentifizierungs Schema
                         korrespondieren die Zeugnisse mit dem Passwort. Siehe auch die
-                        <code>credentialTreatment</code> Option.
+                        <emphasis>credentialTreatment</emphasis> Option.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>credentialTreatment</code>: In vielen Fällen sind Passwörter und
-                        andere sensitive Daten verschlüsselt, gehasht, kodiert, gesalted,
+                        <emphasis>credentialTreatment</emphasis>: In vielen Fällen sind Passwörter
+                        und andere sensitive Daten verschlüsselt, gehasht, kodiert, gesalted,
                         verschleiert oder auf andere Weise durch irgendeine Funktion oder einen
                         Algorithmus behandelt. Durch die Spezifikation eines parametrisierbaren
-                        Behandlungsstrings mit dieser Methode, wie <code>'MD5(?)'</code> oder
-                        <code>'PASSWORD(?)'</code>, könnte ein Entwickler beliebiges SQL an den
+                        Behandlungsstrings mit dieser Methode, wie 'MD5(?)' oder
+                        'PASSWORD(?)', könnte ein Entwickler beliebiges SQL an den
                         Eingabe- Zeugnis-Daten anwenden. Da diese Funktionen der darunter liegenden
                         RDBMS speziell gehören, sollte das Handbuch der Datenbank auf das
                         Vorhandensein solcher Funktionen im eigenen Datenbank System geprüft werden.
@@ -74,7 +75,7 @@
             </para>
 
             <para>
-                Der folgende Code erstellt eien Adapter für eine In-Memory Datenbank, erstellt ein
+                Der folgende Code erstellt einen Adapter für eine In-Memory Datenbank, erstellt ein
                 einfaches Datenbankschema, und fügt eine Zeile ein gegen die später eine
                 Authentifizierungs-Abfrage durchgeführt werden kann. Dieses Beispiel benötigt die
                 SQLite Erweiterung:
@@ -132,7 +133,7 @@ $authAdapter
                 An diesem Punkt ist die Instanz des Authentifizierungsadapters bereit um
                 Authentifierungsabfragen zu akzeptieren. Um eine Authentifierungsabfrage zu
                 formulieren, werden die Eingabezeugnis Werte dem Adapter vor dem Aufruf der
-                <code>authenticate()</code> Methode, übergeben:
+                <methodname>authenticate()</methodname> Methode, übergeben:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -146,8 +147,8 @@ $result = $authAdapter->authenticate();
 ]]></programlisting>
 
             <para>
-                Zusätzlich zum Vorhandensein der <code>getIdentity()</code> Methode über das
-                Authentifizierungs Ergebnisobjekt, unterstützt
+                Zusätzlich zum Vorhandensein der <methodname>getIdentity()</methodname> Methode
+                über das Authentifizierungs Ergebnisobjekt, unterstützt
                 <classname>Zend_Auth_Adapter_DbTable</classname> auch das empfangen der
                 Tabellenzeile wenn die Authentifizierung erfolgeich war:
             </para>
@@ -191,8 +192,9 @@ Array
             Verwendungs-Szenario, bei dem Entwickler ein Identitäts Objekt, welches andere nützliche
             Informationen enthält, in den dauerhaften Speichermechanismus von
             <classname>Zend_Auth</classname> abspeichern wollen, wird durch die Verwendung der
-            <code>getResultRowObject()</code> Methode gelöst die ein <code>stdClass</code> Objekt
-            zurück gibt. Der folgende Code Abschnitt zeigt diese Verwendung:
+            <methodname>getResultRowObject()</methodname> Methode gelöst die ein
+            <emphasis>stdClass</emphasis> Objekt zurück gibt. Der folgende Code Abschnitt zeigt
+            diese Verwendung:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -325,9 +327,9 @@ $adapter = new Zend_Auth_Adapter_DbTable(
         </note>
 
         <para>
-            Eine andere Alternative besteht darin die <code>getDbSelect()</code> Methode von
-            Zend_Auth_Adapter_DbTable zu verwenden nachdem der Adapter erstellt wurde. Diese
-            Methode gibt die Instanz des Zend_Db_Select Objekts zurück welches verwendet wird
+            Eine andere Alternative besteht darin die <methodname>getDbSelect()</methodname>
+            Methode von Zend_Auth_Adapter_DbTable zu verwenden nachdem der Adapter erstellt wurde.
+            Diese Methode gibt die Instanz des Zend_Db_Select Objekts zurück welches verwendet wird
             um die authenticate() Methode zu komplettieren. Es ist wichtig anzumerken das diese
             Methode immer das gleiche Objekt zurückgibt unabhängig davon ob authenticate()
             aufgerufen wurde oder nicht. Diese Objekt <emphasis>enthält keine</emphasis> Identity

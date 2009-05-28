@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15713 -->
+<!-- EN-Revision: 15735 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.auth.adapter.http">
 
@@ -110,16 +110,17 @@
                     </thead>
                     <tbody>
                         <row>
-                            <entry><code>accept_schemes</code></entry>
+                            <entry><emphasis>accept_schemes</emphasis></entry>
                             <entry>Ja</entry>
                             <entry>
-                                Ermittelt welches Authentifizierungs Schema der Adapter vom Klienten
-                                akzeptiert. Muß eine Leerzeichen-getrennte Liste sein, die
-                                <code>'basic'</code> und/oder <code>'digest'</code> enthält.
+                                Ermittelt welches Authentifizierungs Schema der Adapter vom
+                                Klienten akzeptiert. Muß eine Leerzeichen-getrennte Liste sein, die
+                                <emphasis>'basic'</emphasis> und/oder <emphasis>'digest'</emphasis>
+                                enthält.
                             </entry>
                         </row>
                         <row>
-                            <entry><code>realm</code></entry>
+                            <entry><emphasis>realm</emphasis></entry>
                             <entry>Ja</entry>
                             <entry>
                                 Setzt das Authentifizierungs-Bereich; Benutzernamen sollten im
@@ -127,9 +128,10 @@
                             </entry>
                         </row>
                         <row>
-                            <entry><code>digest_domains</code></entry>
+                            <entry><emphasis>digest_domains</emphasis></entry>
                             <entry>
-                                Ja, wenn <code>'accept_schemes'</code> <code>'digest'</code> enthält
+                                Ja, wenn <emphasis>'accept_schemes'</emphasis>
+                                <emphasis>'digest'</emphasis> enthält
                             </entry>
                             <entry>
                                 Leerzeichen-getrennte Liste von URIs für die die gleichen
@@ -138,9 +140,10 @@
                             </entry>
                         </row>
                         <row>
-                            <entry><code>nonce_timeout</code></entry>
+                            <entry><emphasis>nonce_timeout</emphasis></entry>
                             <entry>
-                                Ja, wenn <code>'accept_schemes'</code> <code>'digest'</code> enthält
+                                Ja, wenn <emphasis>'accept_schemes'</emphasis>
+                                <emphasis>'digest'</emphasis> enthält
                             </entry>
                             <entry>
                                 Setzt die Anzahl an Sekunden für die die Verfolgung gültig ist.
@@ -148,7 +151,7 @@
                             </entry>
                         </row>
                         <row>
-                            <entry><code>proxy_auth</code></entry>
+                            <entry><emphasis>proxy_auth</emphasis></entry>
                             <entry>Nein</entry>
                             <entry>
                                 Standardmäßig ausgeschaltet. Einschalten um Proxi Authentifizierung
@@ -162,13 +165,13 @@
 
         <note>
             <para>
-                Die aktuelle Implementation von <code>nonce_timeout</code> hat einige interessante
-                Nebeneffekte. Diese Einstellung soll die gültige Lebenszeit einer gegebenen
-                Verfolgung ermitteln, oder effektiv, wie lange die Authentifizierungs Information
-                eines Klienten akzeptiert wird. Aktuell ist es auf 3600 (zum Beispiel) gesetzt, und
-                führt dazu das der Klient jede Stunde um neue Zeugnisse gebeten wird. Das wird in
-                einem zukünftigen Release behoben werden, sobald Verfolgung und "stale" Support
-                implementiert werden.
+                Die aktuelle Implementation von <emphasis>nonce_timeout</emphasis> hat einige
+                interessante Nebeneffekte. Diese Einstellung soll die gültige Lebenszeit einer
+                gegebenen Verfolgung ermitteln, oder effektiv, wie lange die Authentifizierungs
+                Information eines Klienten akzeptiert wird. Aktuell ist es auf 3600 (zum Beispiel)
+                gesetzt, und führt dazu das der Klient jede Stunde um neue Zeugnisse gebeten wird.
+                Das wird in einem zukünftigen Release behoben werden, sobald Verfolgung und "stale"
+                Support implementiert werden.
             </para>
         </note>
 
@@ -199,9 +202,9 @@
             <para>
                 Der Datei Auflöser ist eine sehr einfache Klasse. Sie hat eine einzelne Eigenschaft
                 die einen Dateinamen spezifiziert, welcher auch dem Konstruktor übergeben werden
-                kann. Ihre <code>resolve()</code> Methode geht durch die Textdatei, und sucht nach
-                einer Zeile mit einem entsprechenden Benutzernamen und Bereich. Das Format der
-                Textdatei ist ähnlich dem von Apache htpasswd Dateien:
+                kann. Ihre <methodname>resolve()</methodname> Methode geht durch die Textdatei, und
+                sucht nach einer Zeile mit einem entsprechenden Benutzernamen und Bereich. Das
+                Format der Textdatei ist ähnlich dem von Apache htpasswd Dateien:
                 <programlisting language="txt"><![CDATA[
 <benutzername>:<bereich>:<zeugnisse>\n
 ]]></programlisting>
@@ -247,10 +250,11 @@ $config = array(
 );
 ]]></programlisting>
             Dieses Array bringt den Adapter dazu entwedet Basis oder Digest Authentifizierung zu
-            akzeptieren, und benötigt einen authentifizierten Zugriff auf alle Areale der Site unter
-            <code>/members_only</code> und <code>/my_account</code>. Der Bereichs Wert wird
-            normalerweise durch den Browser in der Passwort Dialog Box angezeigt.
-            <code>nonce_timeout</code> verhält sich natürlich so wie oben beschrieben.
+            akzeptieren, und benötigt einen authentifizierten Zugriff auf alle Areale der Site
+            unter <filename>/members_only</filename> und <filename>/my_account</filename>. Der
+            Bereichs Wert wird normalerweise durch den Browser in der Passwort Dialog Box
+            angezeigt. <emphasis>nonce_timeout</emphasis> verhält sich natürlich so wie oben
+            beschrieben.
         </para>
 
         <para>

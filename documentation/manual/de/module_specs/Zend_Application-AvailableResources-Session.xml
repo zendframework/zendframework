@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15712 -->
+<!-- EN-Revision: 15733 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.available-resources.session">
     <title>Zend_Application_Resource_Session</title>
@@ -18,13 +18,13 @@
 
     <itemizedlist>
         <listitem><para>
-            <emphasis>string</emphasis>: Ein String der eine Klasse benennt die
+            <type>String</type>: Ein String der eine Klasse benennt die
             <classname>Zend_Session_SaveHandler_Interface</classname> implementiert und initiiert
             werden soll.
         </para></listitem>
 
         <listitem><para>
-            <emphasis>array</emphasis>: Ein Array mit den Schlüsseln "class", und optional
+            <type>Array</type>: Ein Array mit den Schlüsseln "class", und optional
             "options", das eine Klasse benennt die
             <classname>Zend_Session_SaveHandler_Interface</classname> implementiert und iniiert
             werden, und ein Array von Optionen die an dessen Contructor übergeben werden soll.

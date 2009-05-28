@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15687 -->
+<!-- EN-Revision: 15728 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.amf.server">
     <title>Zend_Amf_Server</title>
@@ -59,10 +59,10 @@ echo $response;
             <classname>Zend Amf Server</classname> erlaubt es auch Services das Sie dynamisch
             geladen werden, basierend auf dem angegebenen Verzeichnispfad. Man kann dem Server so
             viele Verzeichnisse wie man will hinzufügen. Die Reihenfolge in der man die
-            Verzeichnisse zum Server hinzufügt ist die Reihenfolge in der die LIFO Suche auf den
-            Verzeichnissen durchgeführt wird um die Klasse zu finden. Das Hinzufügen von
-            Verzeichnissen wird mit der <methodname>addDirectory()</methodname> Methode
-            durchgeführt.
+            Verzeichnisse zum Server hinzufügt ist die Reihenfolge in der die
+            <emphasis>LIFO</emphasis> Suche auf den Verzeichnissen durchgeführt wird um die Klasse
+            zu finden. Das Hinzufügen von Verzeichnissen wird mit der
+            <methodname>addDirectory()</methodname> Methode durchgeführt.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -73,13 +73,13 @@ $server->addDirectory(dirname(__FILE__) .'/../package/');
         <para>
             Wenn entfernte Services aufgerufen werden kann der Quellname einen Unterstrich ("_")
             oder Punkt (".") Begrenzer im Verzeichnis haben. Wenn ein Unterstrich verwendet wird
-            werden die Namenskonventionen der PEAR und Zend Framework Klassen verwendet. Das
-            bedeutet das wenn man das Sevice <classname>com_Foo_Bar</classname> aufruft wird der
-            Server nach der Datei Bar.php suchen, und zwar in jedem der eingefügten Pfade unter
-            <filename>com/Foo/Bar.php</filename>. Wenn die Punkt Notation für entfernte Services
-            wie für <filename>com.Foo.Bar</filename> verwendet wird, wird jedem eingefügten Pfad
-            <filename>com/Foo/Bar.php</filename> am Ende hinzugefügt um
-            <filename>Bar.php</filename> automatisch zu laden.
+            werden die Namenskonventionen der <emphasis>PEAR</emphasis> und Zend Framework Klassen
+            verwendet. Das bedeutet das wenn man das Sevice <classname>com_Foo_Bar</classname>
+            aufruft wird der Server nach der Datei <filename>Bar.php</filename> suchen, und zwar in
+            jedem der eingefügten Pfade unter <filename>com/Foo/Bar.php</filename>. Wenn die Punkt
+            Notation für entfernte Services wie für <filename>com.Foo.Bar</filename> verwendet
+            wird, wird jedem eingefügten Pfad <filename>com/Foo/Bar.php</filename> am Ende
+            hinzugefügt um <filename>Bar.php</filename> automatisch zu laden.
         </para>
 
         <para>
@@ -161,15 +161,15 @@ class World
         </para>
 
         <para>
-            Man muß dem Compiler auch mitteilen das er die service-config.xml verwenden soll um
-            den Endpunkt des RemoteObjects zu finden. Um das zu tun muß das Fenster der
-            Projekteigenschaften nochmals durch einen rechts-klick auf das Projektverzeichnis
-            vom Navigator aus geöffnet und Eigenschaften ausgewählt werden. Vom Eigenschaften-Popup
-            muß 'Flex Compiler' aufgewählt und der String: -services "services-config.xml"
-            hinzugefügt werden. Auf Apply drücken, anschließend auf OK um die Option zu
-            aktualisieren. Was man jetzt getan hat, ist dem Flex Compiler zu sagen das er in der
-            Datei services-config.xml nach Laufzeitvariablen schauen soll die von der RemotingObject
-            Klasse verwendet werden.
+            Man muß dem Compiler auch mitteilen das er die <filename>service-config.xml</filename>
+            verwenden soll um den Endpunkt des RemoteObjects zu finden. Um das zu tun muß das
+            Fenster der Projekteigenschaften nochmals durch einen rechts-klick auf das
+            Projektverzeichnis vom Navigator aus geöffnet und Eigenschaften ausgewählt werden. Vom
+            Eigenschaften-Popup muß 'Flex Compiler' aufgewählt und der String: -services
+            "services-config.xml" hinzugefügt werden. Auf Apply drücken, anschließend auf OK um die
+            Option zu aktualisieren. Was man jetzt getan hat, ist dem Flex Compiler zu sagen das er
+            in der Datei <filename>services-config.xml</filename> nach Laufzeitvariablen schauen
+            soll die von der RemotingObject Klasse verwendet werden.
         </para>
 
         <para>
@@ -182,10 +182,11 @@ class World
         </para>
 
         <para>
-            Flex hat eine neue services-config.xml erstellt und Sie geöffnet. Verwende den folgenden
-            Beispieltext für die services-config.xml Datei. Es muß sichergestellt werden das der
-            Endpunkt so aktualisiert wird das er zu dem des eigenen Testservers passt. Anschließend
-            sicherstellen das die Datei gespeichert wird.
+            Flex hat eine neue <filename>services-config.xml</filename> erstellt und Sie geöffnet.
+            Verwende den folgenden Beispieltext für die <filename>services-config.xml</filename>
+            Datei. Es muß sichergestellt werden das der Endpunkt so aktualisiert wird das er zu dem
+            des eigenen Testservers passt. Anschließend sicherstellen das die Datei gespeichert
+            wird.
         </para>
 
         <programlisting language="xml"><![CDATA[
@@ -235,8 +236,8 @@ class World
         </para>
 
         <para>
-            In unseren Flex MXML Dateien müssen wir ein RemoteObject an das Service binden. In MXML
-            kann das wie folgt getan werden:
+            In unseren Flex <emphasis>MXML</emphasis> Dateien müssen wir ein RemoteObject an das
+            Service binden. In <emphasis>MXML</emphasis> kann das wie folgt getan werden:
         </para>
 
         <programlisting language="xml"><![CDATA[
@@ -362,8 +363,9 @@ echo $response;
         <title>Typ Objekte</title>
 
         <para>
-            Ähnlich wie SOAP, erlaubt es AMF Objekte zwischen dem Client und dem Server zu
-            übergeben. Das erlaubt eine große Flexibilität und Bindung zwischen den zwei Umgebungen.
+            Ähnlich wie <emphasis>SOAP</emphasis>, erlaubt es AMF Objekte zwischen dem Client und
+            dem Server zu übergeben. Das erlaubt eine große Flexibilität und Bindung zwischen den
+            zwei Umgebungen.
         </para>
 
         <para>
@@ -484,21 +486,24 @@ private function getContactHandler(event:ResultEvent):void {
         </para>
 
         <para>
-            Öffne Flash CS und erstelle eine neue Flash Datei (ActionScript 3). Benenne das Dokument
-            ZendExample.fla und speichere das Dokument in einem Verzeichnis das wir für dieses
-            Beispiel verwenden werden. Erstelle eine neue AS3 Datei im selben Verzeichnis und
-            benenne die Datei Main.as. Öffne beide Dateien im Editor. Wir werden jetzt diese zwei
-            Dateien über die Document Klasse verbinden. Wähle ZendExample aus und klicke auf
-            "stage". Im Eigenschaftsfenster von "stage" ändere die Document Klasse auf Main. Das
-            verbindet die Main.as ActionScript Datei mit dem Benutzer Interface von ZendExample.fla.
-            Wenn die Flashdatei ZendExample ausgeführt wird, dann wird die Klasse Main.as gestartet.
-            Als nächstes werden wir ein ActionScript hinzufügen um den AMF Aufruf durchzuführen.
+            Öffne Flash CS und erstelle eine neue Flash Datei (ActionScript 3). Benenne das
+            Dokument <filename>ZendExample.fla</filename> und speichere das Dokument in einem
+            Verzeichnis das wir für dieses Beispiel verwenden werden. Erstelle eine neue AS3 Datei
+            im selben Verzeichnis und benenne die Datei <filename>Main.as</filename>. Öffne beide
+            Dateien im Editor. Wir werden jetzt diese zwei Dateien über die Document Klasse
+            verbinden. Wähle ZendExample aus und klicke auf "stage". Im Eigenschaftsfenster von
+            "stage" ändere die Document Klasse auf Main. Das verbindet die
+            <filename>Main.as</filename> ActionScript Datei mit dem Benutzer Interface von
+            <filename>ZendExample.fla</filename>. Wenn die Flashdatei ZendExample ausgeführt wird,
+            dann wird die Klasse <filename>Main.as</filename> gestartet. Als nächstes werden wir
+            ein ActionScript hinzufügen um den AMF Aufruf durchzuführen.
         </para>
 
         <para>
             Jetzt werden wir eine Main Klasse erstellen damit wir die Daten zum Server schicken und
-            das Ergebnis anzeigen lassen können. Kopiere den folgenden Code in die Main.as Datei und
-            wird werden den Code anschauen um zu erklären was die Rolle eines jeden Elements ist.
+            das Ergebnis anzeigen lassen können. Kopiere den folgenden Code in die
+            <filename>Main.as</filename> Datei und wird werden den Code anschauen um zu erklären
+            was die Rolle eines jeden Elements ist.
         </para>
 
         <programlisting language="as"><![CDATA[

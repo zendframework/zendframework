@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15718 -->
+<!-- EN-Revision: 15733 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.core-functionality.bootstrap-bootstrapabstract">
     <title>Zend_Application_Bootstrap_BootstrapAbstract</title>
@@ -27,7 +27,7 @@
             <tbody>
                 <row>
                     <entry><methodname>__construct($application)</methodname></entry>
-                    <entry><code>void</code></entry>
+                    <entry><type>Void</type></entry>
                     <entry><itemizedlist>
                         <listitem><para>
                             <varname>$application</varname>: <emphasis>Benötigt</emphasis>.
@@ -74,7 +74,7 @@
 
                 <row>
                     <entry><methodname>getOption()</methodname></entry>
-                    <entry><code>array</code></entry>
+                    <entry><type>Array</type></entry>
                     <entry>N/A</entry>
                     <entry><para>
                         Gibt alle über <methodname>setOptions()</methodname> registrierten Optionen
@@ -84,7 +84,7 @@
 
                 <row>
                     <entry><methodname>hasOption($key)</methodname></entry>
-                    <entry><code>boolean</code></entry>
+                    <entry><type>Boolean</type></entry>
                     <entry><itemizedlist>
                         <listitem><para>
                             <varname>$key</varname>: <emphasis>Benötigt</emphasis>.
@@ -96,7 +96,7 @@
 
                 <row>
                     <entry><methodname>getOption($key)</methodname></entry>
-                    <entry><code>mixed</code></entry>
+                    <entry><type>Mixed</type></entry>
                     <entry><itemizedlist>
                         <listitem><para>
                             <varname>$key</varname>: <emphasis>Benötigt</emphasis>.
@@ -142,7 +142,7 @@
 
                 <row>
                     <entry><methodname>getEnvironment()</methodname></entry>
-                    <entry><code>string</code></entry>
+                    <entry><type>String</type></entry>
                     <entry>N/A</entry>
                     <entry><para>
                         Empfängt den Umgebungs String der mit dem Eltern-Anwendungs oder Bootstrap
@@ -152,7 +152,7 @@
 
                 <row>
                     <entry><methodname>getClassResources()</methodname></entry>
-                    <entry><code>array</code></entry>
+                    <entry><type>Array</type></entry>
                     <entry>N/A</entry>
                     <entry><para>
                         Empfängt eine Liste von vorhandenen Ressourcen Initialisierungsnamen die
@@ -163,7 +163,7 @@
 
                 <row>
                     <entry><methodname>getContainer()</methodname></entry>
-                    <entry><code>object</code></entry>
+                    <entry><type>Object</type></entry>
                     <entry>N/A</entry>
                     <entry><para>
                         Empfängt den Container der die Ressourcen speichert. Wenn aktuell kein
@@ -191,7 +191,7 @@
 
                 <row>
                     <entry><methodname>hasResource($name)</methodname></entry>
-                    <entry><code>boolean</code></entry>
+                    <entry><type>Boolean</type></entry>
                     <entry><itemizedlist>
                         <listitem><para>
                             <varname>$name</varname>, <emphasis>Benötigt</emphasis>. Name der
@@ -209,7 +209,7 @@
 
                 <row>
                     <entry><methodname>getResource($name)</methodname></entry>
-                    <entry><code>mixed</code></entry>
+                    <entry><type>Mixed</type></entry>
                     <entry><itemizedlist>
                         <listitem><para>
                             <varname>$name</varname>, <emphasis>Benötigt</emphasis>.
@@ -227,7 +227,7 @@
 
                 <row>
                     <entry><methodname>bootstrap($resource = null)</methodname></entry>
-                    <entry><code>mixed</code></entry>
+                    <entry><type>Mixed</type></entry>
                     <entry><itemizedlist>
                         <listitem><para>
                             <varname>$resource</varname>: <emphasis>Optional</emphasis>.
@@ -253,7 +253,7 @@
 
                 <row>
                     <entry><methodname>run()</methodname></entry>
-                    <entry><code>void</code></entry>
+                    <entry><type>Void</type></entry>
                     <entry>N/A</entry>
                     <entry><para>
                         Definiert welche Anwendungslogik nach dem Bootstrapping ausgeführt wird.
@@ -262,7 +262,7 @@
 
                 <row>
                     <entry><methodname>__call($method, $args)</methodname></entry>
-                    <entry><code>mixed</code></entry>
+                    <entry><type>Mixed</type></entry>
                     <entry><itemizedlist>
                         <listitem><para>
                             <varname>$method</varname>: <emphasis>Benötigt</emphasis>.

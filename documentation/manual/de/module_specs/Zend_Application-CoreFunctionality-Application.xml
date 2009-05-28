@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15717 -->
+<!-- EN-Revision: 15733 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.core-functionality.application">
     <title>Zend_Application</title>
@@ -86,7 +86,7 @@
                     <entry>
                         <methodname>__construct($environment, $options = null)</methodname>
                     </entry>
-                    <entry><code>void</code></entry>
+                    <entry><type>void</type></entry>
                     <entry><itemizedlist>
                             <listitem><para>
                                 <varname>$environment</varname>: <emphasis>Benötigt</emphasis>,.
@@ -103,14 +103,14 @@
                             </para>
                             <itemizedlist>
                                 <listitem><para>
-                                    <emphasis>String</emphasis>: Pfad zu einer
+                                    <emphasis><type>String</type></emphasis>: Pfad zu einer
                                     <classname>Zend_Config</classname> Datei für die eigene
                                     Anwendung. <varname>$environment</varname> wird verwendet um zu
                                     erkennen welche Sektion der Konfiguration geholt werden soll.
                                 </para></listitem>
 
                                 <listitem><para>
-                                    <emphasis>Array</emphasis>: Assoziatives Array von
+                                    <emphasis><type>Array</type></emphasis>: Assoziatives Array von
                                     Konfigurationsdaten für die eigene Anwendung.
                                 </para></listitem>
 
@@ -132,7 +132,7 @@
 
                 <row>
                     <entry><methodname>getEnvironment()</methodname></entry>
-                    <entry><code>string</code></entry>
+                    <entry><type>String</type></entry>
                     <entry>N/A</entry>
                     <entry><para>
                         Empfangen des Umgebungsstrings der an den Konstruktor übergeben wurde.
@@ -170,7 +170,7 @@
 
                 <row>
                     <entry><methodname>getOptions()</methodname></entry>
-                    <entry><code>array</code></entry>
+                    <entry><type>Array</type></entry>
                     <entry>N/A</entry>
                     <entry><para>
                         Empfängt alle Optionen die verwendet wurden um das Objekt zu
@@ -182,7 +182,7 @@
 
                 <row>
                     <entry><methodname>hasOption($key)</methodname></entry>
-                    <entry><code>boolean</code></entry>
+                    <entry><type>Boolean</type></entry>
                     <entry>
                     <itemizedlist>
                         <listitem><para>
@@ -198,7 +198,7 @@
 
                 <row>
                     <entry><methodname>getOption($key)</methodname></entry>
-                    <entry><code>mixed</code></entry>
+                    <entry><type>Mixed</type></entry>
                     <entry><itemizedlist>
                         <listitem><para>
                             <varname>$key</varname>: String des Optionsschlüssels der gesucht wird.
@@ -225,14 +225,14 @@
                             <varname>$prefix</varname>: <emphasis>Optional</emphasis>.
                             String Präfix der Optionsschlüssel vorangestellt werden soll. Wird
                             intern verwendet um das Mapping von verschachtelten Array zu
-                            Punkt-getrennten php.ini Schlüssels zu erlauben. Bei normaler
-                            Verwendung sollte dieses Argument nie von einem Benutzer
+                            Punkt-getrennten <filename>php.ini</filename> Schlüssels zu erlauben.
+                            Bei normaler Verwendung sollte dieses Argument nie von einem Benutzer
                             übergeben werden.
                         </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
-                        Setzt Laufzeit php.ini Einstellungen. Punkt-getrennte Einstellungen
-                        können hierarchisch verschachtelt sein (welche in
+                        Setzt Laufzeit <filename>php.ini</filename> Einstellungen. Punkt-getrennte
+                        Einstellungen können hierarchisch verschachtelt sein (welche in
                         <classname>Zend_Config</classname> INI Dateien auftreten können) über ein
                         Array-von-Arrays, und wird trotzdem korrekt aufgelöst.
                     </para></entry>
@@ -281,7 +281,7 @@
                 <row>
                     <entry><methodname>getBootstrap()</methodname></entry>
                     <entry>
-                        <code>null</code> |
+                        <constant>NULL</constant> |
                         <classname>Zend_Application_Bootstrap_Bootstrapper</classname>
                     </entry>
                     <entry>N/A</entry>
@@ -292,7 +292,7 @@
 
                 <row>
                     <entry><methodname>bootstrap()</methodname></entry>
-                    <entry><code>void</code></entry>
+                    <entry><type>Void</type></entry>
                     <entry>N/A</entry>
                     <entry><para>
                         Ruft die <methodname>bootstrap()</methodname> Methode des Bootstraps auf um
@@ -302,7 +302,7 @@
 
                 <row>
                     <entry><methodname>run()</methodname></entry>
-                    <entry><code>void</code></entry>
+                    <entry><type>Void</type></entry>
                     <entry>N/A</entry>
                     <entry><para>
                         Ruft die <methodname>run()</methodname> Methode des Bootstraps auf um die

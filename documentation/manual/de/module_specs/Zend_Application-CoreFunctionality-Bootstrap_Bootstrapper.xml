@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15719 -->
+<!-- EN-Revision: 15733 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.core-functionality.bootstrap-bootstrapper">
     <title>Zend_Application_Bootstrap_Bootstrapper</title>
@@ -28,8 +28,8 @@
             </thead>
             <tbody>
                 <row>
-                    <entry><code>__construct($application)</code></entry>
-                    <entry><code>void</code></entry>
+                    <entry><methodname>__construct($application)</methodname></entry>
+                    <entry><type>Void</type></entry>
                     <entry><itemizedlist>
                         <listitem><para>
                             <varname>$application</varname>: <emphasis>benötigt</emphasis>.
@@ -46,7 +46,7 @@
                 </row>
 
                 <row>
-                    <entry><code>setOptions(array $options)</code></entry>
+                    <entry><methodname>setOptions(array $options)</methodname></entry>
                     <entry><classname>Zend_Application_Bootstrap_Bootstrapper</classname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
@@ -62,31 +62,31 @@
                 </row>
 
                 <row>
-                    <entry><code>getApplication()</code></entry>
+                    <entry><methodname>getApplication()</methodname></entry>
                     <entry>
-                        <classname>Zend_Application |
-                        Zend_Application_Bootstrap_Bootstrapper</classname>
+                        <classname>Zend_Application</classname> |
+                        <classname>Zend_Application_Bootstrap_Bootstrapper</classname>
                     </entry>
                     <entry>N/A</entry>
                     <entry><para>
-                        Empfängt das Anwendungs/Bootstrap Objekt das über den Konstruktor übergeben
-                        wurde.
+                        Empfängt das Anwendungs oder Bootstrap Objekt das über den Konstruktor
+                        übergeben wurde.
                     </para></entry>
                 </row>
 
                 <row>
-                    <entry><code>getEnvironment()</code></entry>
-                    <entry><code>string</code></entry>
+                    <entry><methodname>getEnvironment()</methodname></entry>
+                    <entry><type>String</type></entry>
                     <entry>N/A</entry>
                     <entry><para>
-                        Empfängt den Environment String der mit dem Eltern-Anwendungs/Bootstrap
-                        Objekt registriert wurde.
+                        Empfängt den Environment String der mit dem Eltern-Anwendungs oder
+                        Bootstrap Objekt registriert wurde.
                     </para></entry>
                 </row>
 
                 <row>
-                    <entry><code>getClassResources()</code></entry>
-                    <entry><code>array</code></entry>
+                    <entry><methodname>getClassResources()</methodname></entry>
+                    <entry><type>Array</type></entry>
                     <entry>N/A</entry>
                     <entry><para>
                         Empfängt eine Liste von vorhandenen Ressource Initialisierungs-Namen
@@ -96,8 +96,8 @@
                 </row>
 
                 <row>
-                    <entry><code>bootstrap($resource = null)</code></entry>
-                    <entry><code>mixed</code></entry>
+                    <entry><methodname>bootstrap($resource = null)</methodname></entry>
+                    <entry><type>Mixed</type></entry>
                     <entry><itemizedlist>
                         <listitem><para>
                             <varname>$resource</varname>: <emphasis>Optional</emphasis>.
@@ -112,8 +112,8 @@
                 </row>
 
                 <row>
-                    <entry><code>run()</code></entry>
-                    <entry><code>void</code></entry>
+                    <entry><methodname>run()</methodname></entry>
+                    <entry><type>Void</type></entry>
                     <entry>N/A</entry>
                     <entry><para>
                         Definiert welche Anwendungslogik nach dem Bootstrapping ausgeführt wird.

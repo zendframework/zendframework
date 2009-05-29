@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15733 -->
+<!-- EN-Revision: 15787 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.available-resources.session">
     <title>Zend_Application_Resource_Session</title>
@@ -38,7 +38,7 @@
 
     <para>
         Jeder andere übergebene Optionsschlüssel wird an
-        <classname>Zend_Session::setOptions()</classname> übergeben um
+        <methodname>Zend_Session::setOptions()</methodname> übergeben um
         <classname>Zend_Session</classname> zu konfigurieren.
     </para>
 
@@ -46,10 +46,10 @@
         <title>Beispiel der Konfiguration einer Session Ressource</title>
 
         <para>
-            Anbei ist das Beispiel eines INI Abschnitts der zeigt wie die Session Ressource
-            konfiguriert werden kann. Er setzt verschiedene <classname>Zend_Session</classname>
-            Optionen, und konfiguriert eine <classname>Zend_Session_SaveHandler_DbTable</classname>
-            Instanz.
+            Anbei ist das Beispiel eines <acronym>INI</acronym> Abschnitts der zeigt wie die
+            Session Ressource konfiguriert werden kann. Er setzt verschiedene
+            <classname>Zend_Session</classname> Optionen, und konfiguriert eine
+            <classname>Zend_Session_SaveHandler_DbTable</classname> Instanz.
         </para>
 
         <programlisting language="ini"><![CDATA[

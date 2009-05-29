@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15783 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.acl.refining">
 
@@ -10,20 +10,22 @@
         <title>Präzise Zugangsbeschränkung</title>
 
         <para>
-            Die grundlegende ACL, wie sie im <link linkend="zend.acl.introduction">vorherigen
-            Kapitel</link> definiert ist, zeigt wie verschiedene Rechte für die gesamte ACL (alle
-            Ressourcen) vergeben werden können. In der Praxis tendieren Zugangsbeschränkungen
-            jedoch eher dahin, Ausnahmen und verschiedene Stufen von Komplexität zu haben.
+            Die grundlegende <acronym>ACL</acronym>, wie sie im <link
+                linkend="zend.acl.introduction">vorherigen Kapitel</link> definiert ist, zeigt wie
+            verschiedene Rechte für die gesamte <acronym>ACL</acronym> (alle Ressourcen) vergeben
+            werden können. In der Praxis tendieren Zugangsbeschränkungen jedoch eher dahin,
+            Ausnahmen und verschiedene Stufen von Komplexität zu haben.
             <classname>Zend_Acl</classname> erlaubt einem, diese Verfeinerungen auf einfache und
             flexible Weise zu bewerkstelligen.
         </para>
 
         <para>
-            Für das Beispiel CMS wurde ermittelt, dass, während die 'staff' Gruppe die Bedürfnisse
-            der überwiegenden Mehrheit der Benutzer abdeckt, es den Bedarf für eine neue 'marketing'
-            Gruppe gibt, die Zugriff auf den Newsletter und die neuesten Nachrichten im CMS
-            benötigen. Die Gruppe ist ziemlich unabhängig und wird die Möglichkeit haben, sowohl
-            Newsletter als auch die neuesten Nachrichten zu veröffentlichen und zu archivieren.
+            Für das Beispiel <acronym>CMS</acronym> wurde ermittelt, dass, während die 'staff'
+            Gruppe die Bedürfnisse der überwiegenden Mehrheit der Benutzer abdeckt, es den Bedarf
+            für eine neue 'marketing' Gruppe gibt, die Zugriff auf den Newsletter und die neuesten
+            Nachrichten im <acronym>CMS</acronym> benötigen. Die Gruppe ist ziemlich unabhängig und
+            wird die Möglichkeit haben, sowohl Newsletter als auch die neuesten Nachrichten zu
+            veröffentlichen und zu archivieren.
         </para>
 
         <para>
@@ -70,7 +72,7 @@ $acl->add(new Zend_Acl_Resource('announcement'), 'news');
 
         <para>
             Nun ist es nur eine Frage der Definition für diese spezifischeren Regeln auf die
-            Zielbereiche der ACL:
+            Zielbereiche der <acronym>ACL</acronym>:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -90,7 +92,7 @@ $acl->deny(null, 'announcement', 'archive');
 ]]></programlisting>
 
         <para>
-            Wir können nun die ACL abfragen hinsichtlich der letzten Änderungen
+            Wir können nun die <acronym>ACL</acronym> abfragen hinsichtlich der letzten Änderungen:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -134,11 +136,12 @@ echo $acl->isAllowed('administrator', 'announcement', 'archive') ?
         <title>Zugangsbeschränkungen entfernen</title>
 
         <para>
-            Um eine oder mehrere Zugangsregel von der ACL zu entfernen, verwendet man einfach die
-            vorhandenen <methodname>removeAllow()</methodname> oder
-            <methodname>removeDeny()</methodname> Methoden. Wie bei <methodname>allow()</methodname>
-            und <methodname>deny()</methodname> kann man den <constant>NULL</constant> Wert
-            übergeben, um die Anwendung auf alle Rollen, Ressourcen und / oder Rechte anzuzeigen:
+            Um eine oder mehrere Zugangsregel von der <acronym>ACL</acronym> zu entfernen,
+            verwendet man einfach die vorhandenen <methodname>removeAllow()</methodname> oder
+            <methodname>removeDeny()</methodname> Methoden. Wie bei
+            <methodname>allow()</methodname> und <methodname>deny()</methodname> kann man den
+            <constant>NULL</constant> Wert übergeben, um die Anwendung auf alle Rollen, Ressourcen
+            und / oder Rechte anzuzeigen:
         </para>
 
         <programlisting language="php"><![CDATA[

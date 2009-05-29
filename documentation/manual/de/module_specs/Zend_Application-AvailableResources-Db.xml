@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15712 -->
+<!-- EN-Revision: 15787 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.available-resources.db">
     <title>Zend_Application_Resource_Db</title>
@@ -35,8 +35,8 @@
         <title>Beispiel der Konfiguration einer DB Adapter Ressource</title>
 
         <para>
-            Anbei ist das Beispiel einer INI Konfiguration die verwendet werden kann um die DB
-            Ressource zu initialisieren.
+            Anbei ist das Beispiel einer <acronym>INI</acronym> Konfiguration die verwendet werden
+            kann um die DB Ressource zu initialisieren.
         </para>
 
         <programlisting language="ini"><![CDATA[

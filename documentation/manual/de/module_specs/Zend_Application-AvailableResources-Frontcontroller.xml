@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15712 -->
+<!-- EN-Revision: 15787 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.available-resources.frontcontroller">
     <title>Zend_Application_Resource_Frontcontroller</title>
@@ -55,8 +55,8 @@
         </para></listitem>
 
         <listitem><para>
-            <emphasis>baseUrl</emphasis>: Explizite Basis URL zur Anwendung (normalerweise
-            automatisch erkannt).
+            <emphasis>baseUrl</emphasis>: Explizite Basis <acronym>URL</acronym> zur Anwendung
+            (normalerweise automatisch erkannt).
         </para></listitem>
 
         <listitem><para>
@@ -81,8 +81,8 @@
         <title>Beispiel der Konfiguration einer Front Controller Ressource</title>
 
         <para>
-            Anbei ist ein Beispiel eines INI Abschnitts der zeigt wie die Front Controller
-            Ressource konfiguriert werden kann.
+            Anbei ist ein Beispiel eines <acronym>INI</acronym> Abschnitts der zeigt wie die Front
+            Controller Ressource konfiguriert werden kann.
         </para>
 
         <programlisting language="ini"><![CDATA[

@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15728 -->
+<!-- EN-Revision: 15786 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.amf.server">
     <title>Zend_Amf_Server</title>
 
     <para>
-        <classname>Zend_Amf_Server</classname> bietet einen RPC-artigen Server für die Behandlung
-        der Anfragen die vom Adobe Flash Player durchgeführt werden indem das AMF Protokoll
-        verwendet wird. Wie alle Zend Framework Serverklassen, folgt es der SoapServer API, und
-        bietet ein einfach zu merkendes Interface für die Erstellung von Servern.
+        <classname>Zend_Amf_Server</classname> bietet einen <acronym>RPC</acronym>-artigen Server
+        für die Behandlung der Anfragen die vom Adobe Flash Player durchgeführt werden indem das
+        <acronym>AMF</acronym> Protokoll verwendet wird. Wie alle Zend Framework Serverklassen,
+        folgt es der SoapServer <acronym>API</acronym>, und bietet ein einfach zu merkendes
+        Interface für die Erstellung von Servern.
     </para>
 
     <example id="zend.amf.server.basic">
@@ -16,8 +17,8 @@
 
         <para>
             Angenommen wir haben eine Klasse <emphasis>Foo</emphasis> mit einer Anzahl von
-            öffentlichen Methoden erstellt. Man kann einen AMF Server erstellen indem der folgende
-            Code verwendet wird:
+            öffentlichen Methoden erstellt. Man kann einen <acronym>AMF</acronym> Server erstellen
+            indem der folgende Code verwendet wird:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -60,7 +61,7 @@ echo $response;
             geladen werden, basierend auf dem angegebenen Verzeichnispfad. Man kann dem Server so
             viele Verzeichnisse wie man will hinzufügen. Die Reihenfolge in der man die
             Verzeichnisse zum Server hinzufügt ist die Reihenfolge in der die
-            <emphasis>LIFO</emphasis> Suche auf den Verzeichnissen durchgeführt wird um die Klasse
+            <acronym>LIFO</acronym> Suche auf den Verzeichnissen durchgeführt wird um die Klasse
             zu finden. Das Hinzufügen von Verzeichnissen wird mit der
             <methodname>addDirectory()</methodname> Methode durchgeführt.
         </para>
@@ -73,7 +74,7 @@ $server->addDirectory(dirname(__FILE__) .'/../package/');
         <para>
             Wenn entfernte Services aufgerufen werden kann der Quellname einen Unterstrich ("_")
             oder Punkt (".") Begrenzer im Verzeichnis haben. Wenn ein Unterstrich verwendet wird
-            werden die Namenskonventionen der <emphasis>PEAR</emphasis> und Zend Framework Klassen
+            werden die Namenskonventionen der <acronym>PEAR</acronym> und Zend Framework Klassen
             verwendet. Das bedeutet das wenn man das Sevice <classname>com_Foo_Bar</classname>
             aufruft wird der Server nach der Datei <filename>Bar.php</filename> suchen, und zwar in
             jedem der eingefügten Pfade unter <filename>com/Foo/Bar.php</filename>. Wenn die Punkt
@@ -83,8 +84,8 @@ $server->addDirectory(dirname(__FILE__) .'/../package/');
         </para>
 
         <para>
-            Alle AMF Anfragen die an das Skript gesendet werden, werden dan durch den Server
-            behandelt, und eine AMF Antwort wird zurückgegeben.
+            Alle <acronym>AMF</acronym> Anfragen die an das Skript gesendet werden, werden dann
+            durch den Server behandelt, und eine <acronym>AMF</acronym> Antwort wird zurückgegeben.
         </para>
     </example>
 
@@ -93,9 +94,9 @@ $server->addDirectory(dirname(__FILE__) .'/../package/');
 
         <para>
             Wie alle anderen Serverkomponenten im Zend Framework müssen die Klassenmethoden
-            dokumentiert werden indem PHP Docblocks verwendet werden. Mindestens muß für
-            jedes benötigte Argument eine Beschreibung angegeben werden sowie ein Rückgabewert.
-            Als Beispiel:
+            dokumentiert werden indem <acronym>PHP</acronym> Docblocks verwendet werden. Mindestens
+            muß für jedes benötigte Argument eine Beschreibung angegeben werden sowie ein
+            Rückgabewert. Als Beispiel:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -218,8 +219,8 @@ class World
 
         <para>
             Es gibt zwei Schlüsselpunkt im Beispiel. Erstens, aber letztes im Code, erstellen wir
-            einen AMF Kanal, und spezifizieren den Endpunt als die URL zu unserem
-            <classname>Zend_Amf_Server</classname>:
+            einen <acronym>AMF</acronym> Kanal, und spezifizieren den Endpunt als die
+            <acronym>URL</acronym> zu unserem <classname>Zend_Amf_Server</classname>:
         </para>
 
         <programlisting language="xml"><![CDATA[
@@ -236,8 +237,8 @@ class World
         </para>
 
         <para>
-            In unseren Flex <emphasis>MXML</emphasis> Dateien müssen wir ein RemoteObject an das
-            Service binden. In <emphasis>MXML</emphasis> kann das wie folgt getan werden:
+            In unseren Flex <acronym>MXML</acronym> Dateien müssen wir ein RemoteObject an das
+            Service binden. In <acronym>MXML</acronym> kann das wie folgt getan werden:
         </para>
 
         <programlisting language="xml"><![CDATA[
@@ -280,9 +281,9 @@ myservice.world.hello("Wade");
 
         <para>
             Standardmäßig werden alle Exceptions die in den angehängten Klassen oder Funktionen
-            geworfen werden gefangen und als AMF Fehlermeldungen zurückgegeben. Trotzdem wird der
-            Inhalt des ErrorMessage Objekts variieren basierend darauf ob der Server im
-            "Produktions" Modus ist (der Standardzustand) oder nicht.
+            geworfen werden gefangen und als <acronym>AMF</acronym> Fehlermeldungen zurückgegeben.
+            Trotzdem wird der Inhalt des ErrorMessage Objekts variieren basierend darauf ob der
+            Server im "Produktions" Modus ist (der Standardzustand) oder nicht.
         </para>
 
         <para>
@@ -322,12 +323,13 @@ $server->setProduction(true);
         </note>
 
         <para>
-            Ein Feld bei dem man im speziellen Vorsichtig sein muß ist bei PHP Fehlern selbst.
-            Wenn die INI Direktive <emphasis>display_errors</emphasis> aktiviert ist, wird jeder
-            PHP Fehler für das aktuelle Error Reporting Level direkt in der Ausgabe dargestellt --
-            was den AMF Antwortpayload potentiell unterbrechen kann. Wir empfehlen die
-            <emphasis>display_errors</emphasis> Direktive in der Produktion auszuschalten um solche
-            Probleme zu verhindern.
+            Ein Feld bei dem man im speziellen Vorsichtig sein muß ist bei <acronym>PHP</acronym>
+            Fehlern selbst. Wenn die <acronym>INI</acronym> Direktive
+            <emphasis>display_errors</emphasis> aktiviert ist, wird jeder <acronym>PHP</acronym>
+            Fehler für das aktuelle Error Reporting Level direkt in der Ausgabe dargestellt -- was
+            den <acronym>AMF</acronym> Antwortpayload potentiell unterbrechen kann. Wir empfehlen
+            die <emphasis>display_errors</emphasis> Direktive in der Produktion auszuschalten um
+            solche Probleme zu verhindern.
         </para>
     </sect2>
 
@@ -363,14 +365,14 @@ echo $response;
         <title>Typ Objekte</title>
 
         <para>
-            Ähnlich wie <emphasis>SOAP</emphasis>, erlaubt es AMF Objekte zwischen dem Client und
-            dem Server zu übergeben. Das erlaubt eine große Flexibilität und Bindung zwischen den
-            zwei Umgebungen.
+            Ähnlich wie <acronym>SOAP</acronym>, erlaubt es <acronym>AMF</acronym> Objekte zwischen
+            dem Client und dem Server zu übergeben. Das erlaubt eine große Flexibilität und Bindung
+            zwischen den zwei Umgebungen.
         </para>
 
         <para>
             <classname>Zend_Amf</classname> bietet drei Methoden für das Mappen von ActionScript und
-            PHP Objekten.
+            <acronym>PHP</acronym> Objekten.
         </para>
 
         <itemizedlist>
@@ -378,8 +380,8 @@ echo $response;
                 <para>
                     Erstens kann man explizite Bindungen auf Serverlevel erstellen indem die
                     <methodname>setClassMap()</methodname> Methode verwendet wird. Das erste
-                    Argument ist der ActionScript Klassenname, das zweite ist der Name der PHP
-                    Klasse auf die gemappt wird:
+                    Argument ist der ActionScript Klassenname, das zweite ist der Name der
+                    <acronym>PHP</acronym> Klasse auf die gemappt wird:
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -391,8 +393,8 @@ $server->setClassMap('ContactVO', 'Contact');
             <listitem>
                 <para>
                     Zweitens kann die öffentliche Eigenschaft <varname>$_explicitType</varname> in
-                    der PHP Klasse gesetzt werden, wobei der Wert die ActionScript Klasse
-                    repräsentiert auf die gemappt wird:
+                    der <acronym>PHP</acronym> Klasse gesetzt werden, wobei der Wert die
+                    ActionScript Klasse repräsentiert auf die gemappt wird:
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -406,8 +408,9 @@ class Contact
             <listitem>
                 <para>
                     Drittens, in ähnlicher Art und Weise, kann eine öffentliche Methode
-                    <methodname>getASClassName()</methodname> in der PHP Klasse definiert werden;
-                    diese Methode sollte die passende ActionScript Klasse zurückgeben:
+                    <methodname>getASClassName()</methodname> in der <acronym>PHP</acronym> Klasse
+                    definiert werden; diese Methode sollte die passende ActionScript Klasse
+                    zurückgeben:
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -424,7 +427,8 @@ class Contact
 
         <para>
             Auch wenn wir nun den ContactVO auf dem Server erstellt have müssen wir nun seine
-            korrespondierende Klasse in AS3 für das Server Objekt erstellen das gemappt werden soll.
+            korrespondierende Klasse in <acronym>AS3</acronym> für das Server Objekt erstellen das
+            gemappt werden soll.
         </para>
         <para>
             Einen Rechtsklick auf das src Verzeichnis des Flex Projekts und New -> ActionScript File
@@ -449,14 +453,14 @@ package
 }
 ]]></programlisting>
         <para>
-            Die Klasse ist syntaktisch identisch zu der von PHP mit dem gleichen Namen. Die
-            Variablennamen sind exakt die gleichen und müssen im gleichen Fall sein um korrekt
-            zu arbeiten. Es gibt zwei eindeutige AS3 Metatags in dieser Klasse. Das Erste kann
-            gebunden werden was ein Änderungsevent wirft wenn es aktualisiert wird. Das zweite Tag
-            ist das RemoteClass Tag welches definiert das diese klasse ein gemapptes entferntes
-            Objekt haben kann, in diesem Fall mit dem Aliasnamen <emphasis>ContactVO</emphasis>. Es
-            ist erforderlich das dieses Tag und der Wert der in der PHP Klasse gesetzt wurde,
-            strikt identisch sind.
+            Die Klasse ist syntaktisch identisch zu der von <acronym>PHP</acronym> mit dem gleichen
+            Namen. Die Variablennamen sind exakt die gleichen und müssen im gleichen Fall sein um
+            korrekt zu arbeiten. Es gibt zwei eindeutige <acronym>AS3</acronym> Metatags in dieser
+            Klasse. Das Erste kann gebunden werden was ein Änderungsevent wirft wenn es
+            aktualisiert wird. Das zweite Tag ist das RemoteClass Tag welches definiert das diese
+            Klasse ein gemapptes entferntes Objekt haben kann, in diesem Fall mit dem Aliasnamen
+            <emphasis>ContactVO</emphasis>. Es ist erforderlich das dieses Tag und der Wert der in
+            der <acronym>PHP</acronym> Klasse gesetzt wurde, strikt identisch sind.
         </para>
         <programlisting language="as"><![CDATA[
 [Bindable]
@@ -480,23 +484,24 @@ private function getContactHandler(event:ResultEvent):void {
             Auf den <classname>Zend_Amf_Server</classname> vom Flash Projekt aus zu verbinden ist
             etwas anders als von Flex aus. Trotzdem sind die Funktionen mit
             <classname>Zend_Amf_Server</classname> die gleichen wie mit Flex sobald die Verbindung
-            erstellt wurde. Das folgende Beispiel kann auch von einer Flex AS3 Datei aus verwendet
-            werden. Wir werden die selbe <classname>Zend_Amf_Server</classname> Konfiguration mit
-            der World Klasse unserer Verbindung wiederverwenden.
+            erstellt wurde. Das folgende Beispiel kann auch von einer Flex <acronym>AS3</acronym>
+            Datei aus verwendet werden. Wir werden die selbe <classname>Zend_Amf_Server</classname>
+            Konfiguration mit der World Klasse unserer Verbindung wiederverwenden.
         </para>
 
         <para>
             Öffne Flash CS und erstelle eine neue Flash Datei (ActionScript 3). Benenne das
             Dokument <filename>ZendExample.fla</filename> und speichere das Dokument in einem
-            Verzeichnis das wir für dieses Beispiel verwenden werden. Erstelle eine neue AS3 Datei
-            im selben Verzeichnis und benenne die Datei <filename>Main.as</filename>. Öffne beide
-            Dateien im Editor. Wir werden jetzt diese zwei Dateien über die Document Klasse
-            verbinden. Wähle ZendExample aus und klicke auf "stage". Im Eigenschaftsfenster von
-            "stage" ändere die Document Klasse auf Main. Das verbindet die
-            <filename>Main.as</filename> ActionScript Datei mit dem Benutzer Interface von
-            <filename>ZendExample.fla</filename>. Wenn die Flashdatei ZendExample ausgeführt wird,
-            dann wird die Klasse <filename>Main.as</filename> gestartet. Als nächstes werden wir
-            ein ActionScript hinzufügen um den AMF Aufruf durchzuführen.
+            Verzeichnis das wir für dieses Beispiel verwenden werden. Erstelle eine neue
+            <acronym>AS3</acronym> Datei im selben Verzeichnis und benenne die Datei
+            <filename>Main.as</filename>. Öffne beide Dateien im Editor. Wir werden jetzt diese
+            zwei Dateien über die Document Klasse verbinden. Wähle ZendExample aus und klicke auf
+            "stage". Im Eigenschaftsfenster von "stage" ändere die Document Klasse auf Main. Das
+            verbindet die <filename>Main.as</filename> ActionScript Datei mit dem Benutzer
+            Interface von <filename>ZendExample.fla</filename>. Wenn die Flashdatei ZendExample
+            ausgeführt wird, dann wird die Klasse <filename>Main.as</filename> gestartet. Als
+            nächstes werden wir ein ActionScript hinzufügen um den <acronym>AMF</acronym> Aufruf
+            durchzuführen.
         </para>
 
         <para>
@@ -555,7 +560,8 @@ import flash.net.Responder;
 
         <para>
             In der Klasse benötigen wir drei Variable um NetConnection, Responder, und die Gateway
-            URL zu unserer <classname>Zend_Amf_Server</classname> Installation zu repräsentieren.
+            <acronym>URL</acronym> zu unserer <classname>Zend_Amf_Server</classname> Installation
+            zu repräsentieren.
         </para>
 
         <programlisting language="as"><![CDATA[
@@ -606,8 +612,8 @@ private function onResult(result:Object):void {
         <para>
             Die onFault Funktion wird aufgerufen wenn eine ungültige Antwort vom Server
             zurückgekommen ist. Das passiert wenn auf dem Server ein Fehler stattgefunden hat, die
-            URL zum Server ungültig ist, der entfernte Service oder die Methode nicht existiert, und
-            bei jedem anderen Verbindungsrelevanten Problem.
+            <acronym>URL</acronym> zum Server ungültig ist, der entfernte Service oder die Methode
+            nicht existiert, und bei jedem anderen Verbindungsrelevanten Problem.
         </para>
 
         <programlisting language="as"><![CDATA[

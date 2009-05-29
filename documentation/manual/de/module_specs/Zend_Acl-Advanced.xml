@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15783 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.acl.advanced">
 
@@ -11,22 +11,22 @@
 
         <para>
             <classname>Zend_Acl</classname> wurde so entwickelt, dass keine spezielle Backend
-            Technologie benötigt wird, wie z.B. eine Datenbank oder ein Cache Server, um die ACL
-            Daten zu speichern. Die vollständige PHP Implementation ermöglicht angepasste
-            Administrationstools, die relativ einfach und flexibel auf
-            <classname>Zend_Acl</classname> aufbauen. Viele Situationen erfordern eine interaktive
-            Wartung der ACL und <classname>Zend_Acl</classname> stellt Methoden für das Einrichten
-            und Abfragen der Zugriffskontrolle einer Anwendung.
+            Technologie benötigt wird, wie z.B. eine Datenbank oder ein Cache Server, um die
+            <acronym>ACL</acronym> Daten zu speichern. Die vollständige <acronym>PHP</acronym>
+            Implementation ermöglicht angepasste Administrationstools, die relativ einfach und
+            flexibel auf <classname>Zend_Acl</classname> aufbauen. Viele Situationen erfordern eine
+            interaktive Wartung der <acronym>ACL</acronym> und <classname>Zend_Acl</classname>
+            stellt Methoden für das Einrichten und Abfragen der Zugriffskontrolle einer Anwendung.
         </para>
 
         <para>
-            Die Speicherung der ACL Daten ist deshalb die Aufgabe des Entwicklers, da sich die
-            Anwendungsfälle für verschiedene Situationen erwartungsgemäß stark unterscheiden. Da
-            <classname>Zend_Acl</classname> serialisierbar ist, können ACL Objekte mit der PHP
-            Funktion <ulink url="http://php.net/serialize">
-                <methodname>serialize()</methodname></ulink> serialisiert werden und das Ergebnis
-            kann überall gespeichert werden, wo es der Entwickler möchte, wie z.B. eine Datei, eine
-            Datenbank oder ein Cache Mechanismus.
+            Die Speicherung der <acronym>ACL</acronym> Daten ist deshalb die Aufgabe des
+            Entwicklers, da sich die Anwendungsfälle für verschiedene Situationen erwartungsgemäß
+            stark unterscheiden. Da <classname>Zend_Acl</classname> serialisierbar ist, können
+            <acronym>ACL</acronym> Objekte mit der <acronym>PHP</acronym> Funktion <ulink
+                url="http://php.net/serialize"><methodname>serialize()</methodname></ulink>
+            serialisiert werden und das Ergebnis kann überall gespeichert werden, wo es der
+            Entwickler möchte, wie z.B. eine Datei, eine Datenbank oder ein Cache Mechanismus.
         </para>
 
     </sect2>

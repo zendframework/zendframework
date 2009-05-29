@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15680 -->
+<!-- EN-Revision: 15783 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.acl.introduction">
     <title>Einführung</title>
 
     <para>
         <classname>Zend_Acl</classname> stellt eine Implementation von leichtgewichtigen und
-        flexiblen Zugriffskontrolllisten (englisch "access control list", ACL) für die
-        Rechteverwaltung bereit. Im Allgemeinen kann eine Anwendung derartige ACL's verwenden, um
-        den Zugriff auf bestimmte, geschützte Objekte durch andere anfordernde Objekte zu
-        kontrollieren.
+        flexiblen Zugriffskontrolllisten (englisch "access control list",
+        <acronym>ACL</acronym>) für die Rechteverwaltung bereit. Im Allgemeinen kann eine Anwendung
+        derartige <acronym>ACL</acronym>'s verwenden, um den Zugriff auf bestimmte, geschützte
+        Objekte durch andere anfordernde Objekte zu kontrollieren.
     </para>
 
     <para>
@@ -39,8 +39,8 @@
     </para>
 
     <para>
-        Durch die Spezifikation und die Verwendung einer ACL kann eine Anwendung kontrollieren, wie
-        Rollen den Zugriff auf Ressourcen eingeräumt bekommen.
+        Durch die Spezifikation und die Verwendung einer <acronym>ACL</acronym> kann eine Anwendung
+        kontrollieren, wie Rollen den Zugriff auf Ressourcen eingeräumt bekommen.
     </para>
 
     <sect2 id="zend.acl.introduction.resources">
@@ -168,11 +168,12 @@ echo $acl->isAllowed('guest', 'someResource') ? 'allowed' : 'denied';
         <title>Erstellen einer Zugriffskontrollliste</title>
 
         <para>
-            Eine Zugriffskontrollliste (ACL) kann jeden gewünschten Satz von körperlichen oder
-            virtuellen Objekten repräsentieren. Zu Demonstrationszwecken werden wir eine
-            grundlegende ACL für ein Redaktionssystem (CMS) erstellen, die mehrere Schichten
-            von Gruppen über eine Vielzahl von Bereichen verwaltet soll. Um ein ACL Objekt zu
-            erstellen, instanzieren wir die ACL ohne Parameter:
+            Eine Zugriffskontrollliste (<acronym>ACL</acronym>) kann jeden gewünschten Satz von
+            körperlichen oder virtuellen Objekten repräsentieren. Zu Demonstrationszwecken werden
+            wir eine grundlegende <acronym>ACL</acronym> für ein Redaktionssystem
+            (<acronym>CMS</acronym>) erstellen, die mehrere Schichten von Gruppen über eine
+            Vielzahl von Bereichen verwaltet soll. Um ein <acronym>ACL</acronym> Objekt zu
+            erstellen, instanzieren wir die <acronym>ACL</acronym> ohne Parameter:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -192,18 +193,19 @@ $acl = new Zend_Acl();
         <title>Rollen registrieren</title>
 
         <para>
-            CMS brauchen fast immer eine Hierarchie von Genehmigungen, um die
+            <acronym>CMS</acronym> brauchen fast immer eine Hierarchie von Genehmigungen, um die
             Autorenfähigkeiten seiner Benutzer festzulegen. Es kann eine 'Guest' Gruppe geben, um
             beschränkten Zugriff zur Demonstration zu ermöglichen, eine 'Staff' Gruppe für die
-            Mehrheit der CMS Nutzer, welche die meisten der alltäglichen Aufgaben erledigen, eine
-            'Editor' Gruppe für diejenigen, die für das Veröffentlichen, Überprüfen, Archivieren
-            und Löschen von Inhalten zuständig sind, sowie eine 'Administrator' Gruppe, dessen
-            Aufgabenbereiche alle der anderen Gruppen sowie die Pflege sensibler Informationen, der
-            Benutzerverwaltung, der Back-End Konfigurationsdaten und die Datensicherung sowie der
-            Export beinhalten. Diese Genehmigungen können durch eine Rollenregistrierung
-            repräsentiert werden, die es jeder Gruppe erlaubt, die Rechte von 'übergeordneten'
-            Gruppen zu erben sowie eindeutige Rechte nur für deren Gruppe bereit zu stellen. Diese
-            Genehmigungen können wie folgt ausgedrückt werden:
+            Mehrheit der <acronym>CMS</acronym> Nutzer, welche die meisten der alltäglichen
+            Aufgaben erledigen, eine 'Editor' Gruppe für diejenigen, die für das Veröffentlichen,
+            Überprüfen, Archivieren und Löschen von Inhalten zuständig sind, sowie eine
+            'Administrator' Gruppe, dessen Aufgabenbereiche alle der anderen Gruppen sowie die
+            Pflege sensibler Informationen, der Benutzerverwaltung, der Back-End
+            Konfigurationsdaten und die Datensicherung sowie der Export beinhalten. Diese
+            Genehmigungen können durch eine Rollenregistrierung repräsentiert werden, die es jeder
+            Gruppe erlaubt, die Rechte von 'übergeordneten' Gruppen zu erben sowie eindeutige
+            Rechte nur für deren Gruppe bereit zu stellen. Diese Genehmigungen können wie folgt
+            ausgedrückt werden:
         </para>
 
         <table id="zend.acl.introduction.role_registry.table.example_cms_access_controls">
@@ -277,14 +279,14 @@ $acl->addRole(new Zend_Acl_Role('administrator'));
         <title>Zugangsbeschränkung definieren</title>
 
         <para>
-            Nun, da die ACL die relevanten Rollen enthält, können Regeln eingerichtet werden, die
-            definieren, wie auf Ressourcen durch Rollen zugegriffen werden darf. Es ist zu beachten,
-            dass wir keine bestimmten Ressourcen in diesem Beispiel definiert haben, das
-            vereinfacht wurde, um zu illustrieren, dass die Regeln für alle Ressourcen gelten.
-            <classname>Zend_Acl</classname> stellt eine Implementation bereit, bei der Regeln nur
-            vom Allgemeinen zum Speziellen definiert werden müssen, um die Anzahl der benötigten
-            Regeln zu minimieren, weil Ressourcen und Rollen die Regeln erben, die in ihren
-            Vorfahren definiert worden sind.
+            Nun, da die <acronym>ACL</acronym> die relevanten Rollen enthält, können Regeln
+            eingerichtet werden, die definieren, wie auf Ressourcen durch Rollen zugegriffen werden
+            darf. Es ist zu beachten, dass wir keine bestimmten Ressourcen in diesem Beispiel
+            definiert haben, das vereinfacht wurde, um zu illustrieren, dass die Regeln für alle
+            Ressourcen gelten. <classname>Zend_Acl</classname> stellt eine Implementation bereit,
+            bei der Regeln nur vom Allgemeinen zum Speziellen definiert werden müssen, um die
+            Anzahl der benötigten Regeln zu minimieren, weil Ressourcen und Rollen die Regeln
+            erben, die in ihren Vorfahren definiert worden sind.
         </para>
 
         <note>
@@ -338,10 +340,10 @@ $acl->allow('administrator');
         <title>Abfragen einer ACL</title>
 
         <para>
-            Wir haben nun eine flexible ACL, die in der gesamten Anwendung verwendet werden kann,
-            um zu ermitteln, ob Anfragende die Genehmigung haben, Funktionen auszuführen. Abfragen
-            durchzuführen ist recht einfach mit Hilfe der <methodname>isAllowed()</methodname>
-            Methode:
+            Wir haben nun eine flexible <acronym>ACL</acronym>, die in der gesamten Anwendung
+            verwendet werden kann, um zu ermitteln, ob Anfragende die Genehmigung haben, Funktionen
+            auszuführen. Abfragen durchzuführen ist recht einfach mit Hilfe der
+            <methodname>isAllowed()</methodname> Methode:
         </para>
 
         <programlisting language="php"><![CDATA[

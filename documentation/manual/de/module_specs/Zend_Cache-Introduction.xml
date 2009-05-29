@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15750 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.cache.introduction">
     <title>Einführung</title>
@@ -8,23 +8,24 @@
     </para>
     <para>
       Cachen im Zend Framework wird mit Frontends durchgeführt, wobei Cache Datensätze über Backend
-      Adapter (<code>File</code>, <code>Sqlite</code>, <code>Memcached</code>...), durch ein
-      flexibles System von IDs und Tags, gespeichert werden. Durch deren Verwendung ist es einfach,
-      spezielle Typen von Datensätzen im Nachhinein zu Löschen (zum Beispiel: "Löschen aller Cache
-      Datensätze welche mit einem bestimmten Tag markiert sind").
+      Adapter (<emphasis>File</emphasis>, <emphasis>Sqlite</emphasis>,
+      <emphasis>Memcached</emphasis>...), durch ein flexibles System von IDs und Tags, gespeichert
+      werden. Durch deren Verwendung ist es einfach, spezielle Typen von Datensätzen im Nachhinein
+      zu Löschen (zum Beispiel: "Löschen aller Cache Datensätze welche mit einem bestimmten Tag
+      markiert sind").
     </para>
     <para>
         Der Kern des Moduls (<classname>Zend_Cache_Core</classname>) ist generell, flexibel und
         konfigurierbar. Nun gibt es - für spezielle Bedürfnisse - Cache Frontends, welche
-        <classname>Zend_Cache_Core</classname> erweitern: <code>Output</code>, <code>File</code>,
-        <code>Function</code> und <code>Class</code>.
+        <classname>Zend_Cache_Core</classname> erweitern: <emphasis>Output</emphasis>,
+        <emphasis>File</emphasis>, <emphasis>Function</emphasis> und <emphasis>Class</emphasis>.
     </para>
     <example id="zend.cache.introduction.example-1">
         <title>Ein Frontend mit Zend_Cache::factory() erzeugen</title>
         <para>
             <classname>Zend_Cache::factory()</classname> instanziiert korrekte Objekte und fügt sie
-            zusammen. In diesem ersten Beispiel wird das <code>Core</code> Frontend zusammen mit dem
-            <code>File</code> Backend verwendet.
+            zusammen. In diesem ersten Beispiel wird das <emphasis>Core</emphasis> Frontend
+            zusammen mit dem <emphasis>File</emphasis> Backend verwendet.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -97,14 +98,14 @@ print_r($result);
         <para>
             Abschnitte, in denen die Ausgabe gecached werden soll, werden 'markiert', durch
             Hinzufügen von etwas bedingter Logik, wobei der Abschnitt innerhalb der
-            <code>start()</code> und <code>end()</code> Methoden gekapselt wird (das ähnelt dem
-            ersten Beispiel, und ist eine Kernstrategie für das Cachen).
+            <methodname>start()</methodname> und <methodname>end()</methodname> Methoden gekapselt
+            wird (das ähnelt dem ersten Beispiel, und ist eine Kernstrategie für das Cachen).
         </para>
         <para>
             Darin muß die Ausgabe der Daten wie immer geschehen - jede Ausgabe wird gecached, wenn
-            die Ausführung auf die <code>end()</code> Methode trifft. Bei der nächsten Ausführung
-            wird der komplette Abschnitt übersprungen, dafür werden die Daten vom Cache geholt
-            (solange der Cache Datensatz gültig ist).
+            die Ausführung auf die <methodname>end()</methodname> Methode trifft. Bei der nächsten
+            Ausführung wird der komplette Abschnitt übersprungen, dafür werden die Daten vom Cache
+            geholt (solange der Cache Datensatz gültig ist).
         </para>
         <programlisting language="php"><![CDATA[
 $frontendOptions = array(
@@ -132,22 +133,24 @@ if(!$cache->start('mypage')) {
 echo 'Das wird nie gecached ('.time().').';
 ]]></programlisting>
         <para>
-            Zu beachten ist das das Ergebnis von <code>time()</code> zweimal ausgegeben wird; das
-            ist etwas dynamisches für Demonstrationszwecke. Beim Versuch dieses auszuführen und
-            mehrfach zu refreshen, kann bemerkt werden, dass sich die erste Nummer nie ändert,
-            während die zweite sich ändert, während die Zeit verstreicht. Das geschieht, weil die
-            erste Nummer, die im gecacheten Abschnitt ausgegeben wird, im Gegensatz zur anderen
-            Ausgabe gecached wurde. Nach einer halben Minute (die Lebensdauer wurde auf 30 Sekunden
-            gesetzt) sind die Nummern wieder identisch, weil der Cache Eintrag abgelaufen ist - er
-            muß wieder gecached werden. Man sollte das im Browser oder in der Konsole testen.
+            Zu beachten ist das das Ergebnis von <methodname>time()</methodname> zweimal ausgegeben
+            wird; das ist etwas dynamisches für Demonstrationszwecke. Beim Versuch dieses
+            auszuführen und mehrfach zu refreshen, kann bemerkt werden, dass sich die erste Nummer
+            nie ändert, während die zweite sich ändert, während die Zeit verstreicht. Das
+            geschieht, weil die erste Nummer, die im gecacheten Abschnitt ausgegeben wird, im
+            Gegensatz zur anderen Ausgabe gecached wurde. Nach einer halben Minute (die Lebensdauer
+            wurde auf 30 Sekunden gesetzt) sind die Nummern wieder identisch, weil der Cache
+            Eintrag abgelaufen ist - er muß wieder gecached werden. Man sollte das im Browser oder
+            in der Konsole testen.
         </para>
     </example>
     <note><para>
         Wenn <classname>Zend_Cache</classname> benutzt wird, muß auf die wichtigen Cache
-        Identifizierungen geachtet werden (welche an <code>save()</code> und <code>start()</code>
-        übergeben werden). Diese müssen für jede Ressource einzigartig sein, die gecached werden
-        soll. Andernfalls würden sich unverknüpfte Cache Datensätze gegenseitig entfernen oder, noch
-        schlimmer, anstatt des anderen dargestellt werden.
+        Identifizierungen geachtet werden (welche an <methodname>save()</methodname> und
+        <methodname>start()</methodname> übergeben werden). Diese müssen für jede Ressource
+        einzigartig sein, die gecached werden soll. Andernfalls würden sich unverknüpfte Cache
+        Datensätze gegenseitig entfernen oder, noch schlimmer, anstatt des anderen dargestellt
+        werden.
     </para></note>
 </sect1>
 <!--

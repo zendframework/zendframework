@@ -653,7 +653,7 @@ $server->handle();
                         <code>setEnvelope($envelopeType)</code>: Setzt den aktuelle Anfrageenvelope
                         der verwendet werden sollte um auf den Service zuzugreifen. Aktuell werden
                         die Konstanten <classname>Zend_Json_Server_Smd::ENV_JSONRPC_1</classname>
-                        und <classname>Zend_Json_Server_Smd::ENV_JSONRPC_1</classname> verwendet.
+                        und <classname>Zend_Json_Server_Smd::ENV_JSONRPC_2</classname> verwendet.
                     </para>
                 </listitem>
                 <listitem>

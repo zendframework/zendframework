@@ -127,7 +127,7 @@ abstract class Zend_Db_Table_Rowset_Abstract implements SeekableIterator, Counta
 
         // set the count of rows
         $this->_count = count($this->_data);
-        
+
         $this->init();
     }
 
@@ -308,7 +308,7 @@ abstract class Zend_Db_Table_Rowset_Abstract implements SeekableIterator, Counta
     {
         return $this->_count;
     }
-    
+
     /**
      * Take the Iterator to position $position
      * Required by interface SeekableIterator.
@@ -320,14 +320,14 @@ abstract class Zend_Db_Table_Rowset_Abstract implements SeekableIterator, Counta
     public function seek($position)
     {
         $position = (int) $position;
-        if ($position < 0 || $position > $this->_count) {
+        if ($position < 0 || $position >= $this->_count) {
             require_once 'Zend/Db/Table/Rowset/Exception.php';
             throw new Zend_Db_Table_Rowset_Exception("Illegal index $position");
         }
         $this->_pointer = $position;
-        return $this;        
+        return $this;
     }
-    
+
     /**
      * Check if an offset exists
      * Required by the ArrayAccess implementation
@@ -339,7 +339,7 @@ abstract class Zend_Db_Table_Rowset_Abstract implements SeekableIterator, Counta
     {
         return isset($this->_data[(int) $offset]);
     }
-    
+
     /**
      * Get the row for the given offset
      * Required by the ArrayAccess implementation
@@ -353,7 +353,7 @@ abstract class Zend_Db_Table_Rowset_Abstract implements SeekableIterator, Counta
 
         return $this->current();
     }
-    
+
     /**
      * Does nothing
      * Required by the ArrayAccess implementation
@@ -364,7 +364,7 @@ abstract class Zend_Db_Table_Rowset_Abstract implements SeekableIterator, Counta
     public function offsetSet($offset, $value)
     {
     }
-    
+
     /**
      * Does nothing
      * Required by the ArrayAccess implementation

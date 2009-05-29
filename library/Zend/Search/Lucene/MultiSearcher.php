@@ -867,7 +867,7 @@ class Zend_Search_Lucene_Interface_MultiSearcher implements Zend_Search_Lucene_I
     /**
      * Terms stream priority queue object
      *
-     * @var Zend_Search_Lucene_termStreamsPriorityQueue
+     * @var Zend_Search_Lucene_TermStreamsPriorityQueue
      */
     private $_termsStream = null;
 
@@ -877,7 +877,7 @@ class Zend_Search_Lucene_Interface_MultiSearcher implements Zend_Search_Lucene_I
     public function resetTermsStream()
     {
         if ($this->_termsStream === null) {
-            $this->_termsStream = new Zend_Search_Lucene_termStreamsPriorityQueue($this->_indices);
+            $this->_termsStream = new Zend_Search_Lucene_TermStreamsPriorityQueue($this->_indices);
         } else {
             $this->_termsStream->resetTermsStream();
         }

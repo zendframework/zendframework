@@ -33,7 +33,7 @@ require_once 'Zend/Search/Lucene/Index/TermsPriorityQueue.php';
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Search_Lucene_termStreamsPriorityQueue implements Zend_Search_Lucene_Index_TermsStream_Interface
+class Zend_Search_Lucene_TermStreamsPriorityQueue implements Zend_Search_Lucene_Index_TermsStream_Interface
 {
 	/**
 	 * Array of term streams (Zend_Search_Lucene_Index_TermsStream_Interface objects)

@@ -325,7 +325,7 @@ abstract class Zend_Db_Statement implements Zend_Db_Statement_Interface
                 $data[] = $row;
             }
         } else {
-            while ($val = $this->fetchColumn($col)) {
+            while (false !== ($val = $this->fetchColumn($col))) {
                 $data[] = $val;
             }
         }

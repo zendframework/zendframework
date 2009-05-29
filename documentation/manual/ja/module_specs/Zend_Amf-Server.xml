@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15786 -->
+<!-- EN-Revision: 15814 -->
 <sect1 id="zend.amf.server">
     <title>Zend_Amf_Server</title>
 
@@ -137,13 +137,13 @@ class World
 
         <para>
             <classname>Zend_Amf_Server</classname> に Flex プロジェクトから接続するのはきわめて簡単です。
-            エンドポイントの URI を
+            エンドポイントの <acronym>URI</acronym> を
             <classname>Zend_Amf_Server</classname> スクリプトに指定するだけでよいのです。
         </para>
 
         <para>
             たとえば、作成したサーバをアプリケーションルートに
-            <filename>server.php</filename> という名前で配置したとしましょう。URI は
+            <filename>server.php</filename> という名前で配置したとしましょう。<acronym>URI</acronym> は
             <filename>http://example.com/server.php</filename> となります。
             この場合は、services-config.xml ファイルを編集して、
             チャンネルのエンドポイント URI 属性をこの値に変更します。

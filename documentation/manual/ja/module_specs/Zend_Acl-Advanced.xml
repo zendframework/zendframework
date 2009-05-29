@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15783 -->
+<!-- EN-Revision: 15814 -->
 <sect1 id="zend.acl.advanced">
 
     <title>高度な使用法</title>
@@ -94,7 +94,7 @@ $acl->allow(null, null, null, new CleanIPAssertion());
 
         <para>
         アサーションオブジェクトの <methodname>assert()</methodname> メソッドは、認証問い合わせ
-        (すなわち <methodname>isAllowed()</methodname>) が適用される ACL、ロール、リソース
+        (すなわち <methodname>isAllowed()</methodname>) が適用される <acronym>ACL</acronym>、ロール、リソース
         および権限に渡されます。これを用いて、必要な場所でアサーションクラスが
         条件を判断します。
         </para>

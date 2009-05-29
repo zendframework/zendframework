@@ -6,7 +6,7 @@
     <para>
         <classname>Zend_Application</classname> provides the base functionality of the
         component, and the entry point to your Zend Framework application. It's
-        purpose is two-fold: to setup the PHP environment (including
+        purpose is two-fold: to setup the <acronym>PHP</acronym> environment (including
         autoloading), and to execute your application bootstrap.
     </para>
 
@@ -227,7 +227,8 @@
                     <entry><itemizedlist>
                         <listitem><para>
                             <varname>$settings</varname>: <emphasis>required</emphasis>.
-                            Associative array of PHP INI settings.
+                            Associative array of <acronym>PHP</acronym> <acronym>INI</acronym>
+                            settings.
                         </para></listitem>
 
                         <listitem><para>
@@ -241,9 +242,8 @@
                     <entry><para>
                         Set run-time <filename>php.ini</filename> settings. Dot-separated
                         settings may be nested hierarchically (which may
-                        occur with INI <classname>Zend_Config</classname> files) via
-                        an array-of-arrays, and will still resolve
-                        correctly.
+                        occur with <acronym>INI</acronym> <classname>Zend_Config</classname> files)
+                        via an array-of-arrays, and will still resolve correctly.
                     </para></entry>
                 </row>
 

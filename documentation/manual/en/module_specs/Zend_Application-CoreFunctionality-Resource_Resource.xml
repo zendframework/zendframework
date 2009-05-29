@@ -89,7 +89,7 @@
 
                 <row>
                     <entry><methodname>init()</methodname></entry>
-                    <entry><type>mixed</type></entry>
+                    <entry><type>Mixed</type></entry>
                     <entry>N/A</entry>
                     <entry><para>
                         Strategy pattern: run initialization of the resource.

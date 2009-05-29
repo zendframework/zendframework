@@ -138,16 +138,16 @@ class World
 
         <para>
             Connecting to your <classname>Zend_Amf_Server</classname> from your Flex
-            project is quite simple; you simply need to point your endpoint URI
+            project is quite simple; you simply need to point your endpoint <acronym>URI</acronym>
             to your <classname>Zend_Amf_Server</classname> script.
         </para>
 
         <para>
             Say, for instance, you have created your server and placed it in the
             <filename>server.php</filename> file in your application root, and thus the
-            URI is <filename>http://example.com/server.php</filename>. In this case, you
-            would modify your <filename>services-config.xml</filename> file to set the channel
-            endpoint uri attribute to this value.
+            <acronym>URI</acronym> is <filename>http://example.com/server.php</filename>. In this
+            case, you would modify your <filename>services-config.xml</filename> file to set the
+            channel endpoint uri attribute to this value.
         </para>
         <para>
             If you have never created a <filename>service-config.xml</filename> file you can do so

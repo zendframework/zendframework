@@ -91,10 +91,10 @@ $acl->allow(null, null, null, new CleanIPAssertion());
         </para>
 
         <para>
-            The <methodname>assert()</methodname> method of an assertion object is passed the ACL,
-            role, resource, and privilege to which the authorization query (i.e.,
-            <methodname>isAllowed()</methodname>) applies, in order to provide a context for the
-            assertion class to determine its conditions where needed.
+            The <methodname>assert()</methodname> method of an assertion object is passed the
+            <acronym>ACL</acronym>, role, resource, and privilege to which the authorization query
+            (i.e., <methodname>isAllowed()</methodname>) applies, in order to provide a context for
+            the assertion class to determine its conditions where needed.
         </para>
 
     </sect2>

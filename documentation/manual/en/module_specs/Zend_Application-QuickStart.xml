@@ -191,10 +191,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 ]]></programlisting>
 
         <para>
-            Now, create your configuration. For this tutorial, we will use an INI
-            style configuration; you may, of course, use an XML or PHP
-            configuration file as well. Create the file
-            <filename>application/configs/application.ini</filename>, and provide the
+            Now, create your configuration. For this tutorial, we will use an
+            <acronym>INI</acronym> style configuration; you may, of course, use an
+            <acronym>XML</acronym> or <acronym>PHP</acronym> configuration file as well. Create
+            the file <filename>application/configs/application.ini</filename>, and provide the
             following contents:
         </para>
 
@@ -372,8 +372,8 @@ phpSettings.display_errors = 1
 
         <para>
             Now, we'll add a custom view resource. When initializing the view,
-            we'll want to set the HTML DocType and a default value for the title
-            to use in the HTML head. This can be accomplished by editing your
+            we'll want to set the <acronym>HTML</acronym> DocType and a default value for the title
+            to use in the <acronym>HTML</acronym> head. This can be accomplished by editing your
             <emphasis>Bootstrap</emphasis> class to add a method:
         </para>
 

@@ -4,7 +4,7 @@
     <title>Core Functionality</title>
 
     <para>
-        Here you'll find API-like documentation about all core components of
+        Here you'll find <acronym>API</acronym>-like documentation about all core components of
         <classname>Zend_Application</classname>.
     </para>
 

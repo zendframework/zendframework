@@ -2523,4 +2523,19 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
         $value = Zend_Locale_Data::getContent('de_AT', 'fallbacktochar', '©');
         $this->assertEquals('(C)', $value);
     }
+
+    /**
+     * test for reading chartofallback from locale
+     * expected array
+     */
+    public function testLocaleUpgrade()
+    {
+        $value = Zend_Locale_Data::getList('de_AT', 'localeupgrade');
+        $this->assertEquals('en_Latn_US', $value['en']);
+        $this->assertEquals('de_Latn_DE', $value['de']);
+        $this->assertEquals('sk_Latn_SK', $value['sk']);
+
+        $value = Zend_Locale_Data::getContent('de_AT', 'localeupgrade', 'de');
+        $this->assertEquals('de_Latn_DE', $value);
+    }
 }

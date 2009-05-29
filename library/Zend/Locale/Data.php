@@ -840,6 +840,13 @@ class Zend_Locale_Data
                 }
                 break;
 
+            case 'localeupgrade':
+                $_temp = self::_getFile('likelySubtags', '/supplementalData/likelySubtags/likelySubtag', 'from');
+                foreach ($_temp as $key => $keyvalue) {
+                    $temp += self::_getFile('likelySubtags', '/supplementalData/likelySubtags/likelySubtag[@from=\'' . $key . '\']', 'to', $key);
+                }
+                break;
+
             default :
                 require_once 'Zend/Locale/Exception.php';
                 throw new Zend_Locale_Exception("Unknown list ($path) for parsing locale data.");
@@ -1300,6 +1307,10 @@ class Zend_Locale_Data
 
             case 'fallbacktochar':
                 $temp = self::_getFile('characters', '/supplementalData/characters/character-fallback/character[@value=\'' . $value . '\']/substitute', '');
+                break;
+
+            case 'localeupgrade':
+                $temp = self::_getFile('likelySubtags', '/supplementalData/likelySubtags/likelySubtag[@from=\'' . $value . '\']', 'to', $value);
                 break;
 
             default :

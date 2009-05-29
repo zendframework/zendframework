@@ -761,6 +761,20 @@ class Zend_LocaleTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * test MultiPartLocales
+     * expected boolean
+     */
+    public function testLongLocale()
+    {
+        $locale = new Zend_LocaleTestHelper('de_Latn_DE');
+        $this->assertEquals('de_DE', $locale->toString());
+        $this->assertTrue(Zend_LocaleTestHelper::isLocale('de_Latn_CAR_DE_sup3_win'));
+
+        $locale = new Zend_LocaleTestHelper('de_Latn_DE');
+        $this->assertEquals('de_DE', $locale->toString());
+    }
+
+    /**
      * Ignores a raised PHP error when in effect, but throws a flag to indicate an error occurred
      *
      * @param  integer $errno

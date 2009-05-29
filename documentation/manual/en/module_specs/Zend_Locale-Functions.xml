@@ -590,6 +590,13 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             This can be used to replace "(C)" with "©" for example
                         </entry>
                     </row>
+                    <row>
+                        <entry><emphasis>LocaleUpgrade</emphasis></entry>
+                        <entry>
+                            Returns a list of locale dependencies which can be used to upgrade a
+                            language to a full qualified locale
+                        </entry>
+                    </row>
                 </tbody>
             </tgroup>
         </table>
@@ -985,6 +992,13 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry>
                             Returns a unicode character for a often used replacement character.
                             This can be used to replace "(C)" with "©" for example
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>LocaleUpgrade</emphasis></entry>
+                        <entry>
+                            Returns a locale dependencies for a given language which can be used to
+                            upgrade this language to a full qualified locale
                         </entry>
                     </row>
                 </tbody>

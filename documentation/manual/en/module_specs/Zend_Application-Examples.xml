@@ -34,7 +34,7 @@ resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
         choices. First, you can write methods prefixed with <emphasis>_init</emphasis>
         to specify discrete code to bootstrap. These methods will be called by
         <methodname>bootstrap()</methodname>, and can also be called as if they were public methods:
-        <methodname>bootstrap&lt;resource&gt;()</methodname>. They should accept an optional
+        <emphasis>bootstrap&lt;resource&gt;()</emphasis>. They should accept an optional
         array of options.
     </para>
 

@@ -110,9 +110,9 @@
             First, if your plugins are defined within a defined prefix path, you
             may refer to them simply by their "short name" -- i.e., the portion
             of the class name following the class prefix. As an example, the
-            class "Zend_Application_Resource_View" may be referenced as simply
-            "View", as the prefix path "ZenD_Application_Resource" is already
-            registered. You may register them using the full class name or the
+            class "<classname>Zend_Application_Resource_View</classname>" may be referenced as
+            simply "View", as the prefix path "<classname>Zend_Application_Resource</classname>"
+            is already registered. You may register them using the full class name or the
             short name:
         </para>
 

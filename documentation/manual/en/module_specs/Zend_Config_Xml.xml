@@ -3,31 +3,36 @@
 <sect1 id="zend.config.adapters.xml">
     <title>Zend_Config_Xml</title>
     <para>
-        <classname>Zend_Config_Xml</classname> enables developers to store configuration data in a simple XML format and read them
-        via nested object property syntax. The root element of the XML file or string is irrelevant and may be named arbitrarily.
-        The first level of XML elements correspond with configuration data sections. The XML format supports
-        hierarchical organization through nesting of XML elements below the section-level elements. The content of a
-        leaf-level XML element corresponds to the value of a configuration datum. Section inheritance is supported by a
-        special XML attribute named <code>extends</code>, and the value of this attribute corresponds with the section
-        from which data are to be inherited by the extending section.
+        <classname>Zend_Config_Xml</classname> enables developers to store configuration data in a
+        simple XML format and read them via nested object property syntax. The root element of the
+        XML file or string is irrelevant and may be named arbitrarily. The first level of XML
+        elements correspond with configuration data sections. The XML format supports hierarchical
+        organization through nesting of XML elements below the section-level elements. The content
+        of a leaf-level XML element corresponds to the value of a configuration datum. Section
+        inheritance is supported by a special XML attribute named <emphasis>extends</emphasis>, and
+        the value of this attribute corresponds with the section from which data are to be
+        inherited by the extending section.
     </para>
     <note>
         <title>Return Type</title>
         <para>
-            Configuration data read into <classname>Zend_Config_Xml</classname> are always returned as strings.
-            Conversion of data from strings to other types is left to developers to suit their particular needs.
+            Configuration data read into <classname>Zend_Config_Xml</classname> are always returned
+            as strings. Conversion of data from strings to other types is left to developers to
+            suit their particular needs.
         </para>
     </note>
     <example id="zend.config.adapters.xml.example.using">
         <title>Using Zend_Config_Xml</title>
         <para>
-            This example illustrates a basic use of <classname>Zend_Config_Xml</classname> for loading configuration data from an
-            XML file. In this example there are configuration data for both a production system and for a staging
-            system. Because the staging system configuration data are very similar to those for production, the staging
-            section inherits from the production section. In this case, the decision is arbitrary and could have been
-            written conversely, with the production section inheriting from the staging section, though this may not be
-            the case for more complex situations. Suppose, then, that the following configuration data are contained in
-            <code>/path/to/config.xml</code>:
+            This example illustrates a basic use of <classname>Zend_Config_Xml</classname> for
+            loading configuration data from an XML file. In this example there are configuration
+            data for both a production system and for a staging system. Because the staging system
+            configuration data are very similar to those for production, the staging section
+            inherits from the production section. In this case, the decision is arbitrary and could
+            have been written conversely, with the production section inheriting from the staging
+            section, though this may not be the case for more complex situations. Suppose, then,
+            that the following configuration data are contained in
+            <filename>/path/to/config.xml</filename>:
         </para>
         <programlisting language="xml"><![CDATA[
 <?xml version="1.0"?>
@@ -56,8 +61,9 @@
 </configdata>
 ]]></programlisting>
         <para>
-            Next, assume that the application developer needs the staging configuration data from the XML file. It is a
-            simple matter to load these data by specifying the XML file and the staging section:
+            Next, assume that the application developer needs the staging configuration data from
+            the XML file. It is a simple matter to load these data by specifying the XML file and
+            the staging section:
         </para>
         <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Xml('/path/to/config.xml', 'staging');
@@ -69,11 +75,12 @@ echo $config->database->params->dbname; // prints "dbname"
     <example id="zend.config.adapters.xml.example.attributes">
         <title>Using Tag Attributes in Zend_Config_Xml</title>
         <para>
-            <classname>Zend_Config_Xml</classname> also supports two additional ways of defining nodes in the configuration. Both make use
-            of attributes. Since the <code>extends</code> and the <code>value</code> attributes are reserved keywords
-            (the latter one by the the second way of using attributes), they may not be used. The first way of
-            making usage of attributes is to add attributes in a parent node, which then will be translated into
-            children of that node:
+            <classname>Zend_Config_Xml</classname> also supports two additional ways of defining
+            nodes in the configuration. Both make use of attributes. Since the
+            <emphasis>extends</emphasis> and the <emphasis>value</emphasis> attributes are reserved
+            keywords (the latter one by the the second way of using attributes), they may not be
+            used. The first way of making usage of attributes is to add attributes in a parent
+            node, which then will be translated into children of that node:
         </para>
         <programlisting language="xml"><![CDATA[
 <?xml version="1.0"?>
@@ -91,9 +98,9 @@ echo $config->database->params->dbname; // prints "dbname"
 </configdata>
 ]]></programlisting>
         <para>
-            The other way does not really shorten the config, but keeps it easier to maintain since you don't have to write
-            the tag name twice. You simply create an empty tag with the value in the <code>value</code>
-            attribute:
+            The other way does not really shorten the config, but keeps it easier to maintain since
+            you don't have to write the tag name twice. You simply create an empty tag with the
+            value in the <emphasis>value</emphasis> attribute:
         </para>
         <programlisting language="xml"><![CDATA[
 <?xml version="1.0"?>
@@ -128,7 +135,7 @@ echo $config->database->params->dbname; // prints "dbname"
             <classname>Zend_Config_Xml</classname> is able to load an XML string directly,
             such as that retrieved from a database. The string is passed
             as the first parameter to the constructor and must start with the
-            characters <code>'&lt;?xml'</code>:
+            characters <emphasis>'&lt;?xml'</emphasis>:
         </para>
         <programlisting language="xml"><![CDATA[
 $string = <<<EOT

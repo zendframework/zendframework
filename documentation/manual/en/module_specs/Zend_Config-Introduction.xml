@@ -3,21 +3,24 @@
 <sect1 id="zend.config.introduction">
     <title>Introduction</title>
     <para>
-        <classname>Zend_Config</classname> is designed to simplify the access to, and the use of, configuration data within applications.
-        It provides a nested object property based user interface for accessing this configuration data within
-        application code. The configuration data may come from a variety of media supporting hierarchical data storage.
-        Currently <classname>Zend_Config</classname> provides adapters for configuration data that are stored in text files with
-        <link linkend="zend.config.adapters.ini"><classname>Zend_Config_Ini</classname></link> and
+        <classname>Zend_Config</classname> is designed to simplify the access to, and the use of,
+        configuration data within applications. It provides a nested object property based user
+        interface for accessing this configuration data within application code. The configuration
+        data may come from a variety of media supporting hierarchical data storage. Currently
+        <classname>Zend_Config</classname> provides adapters for configuration data that are stored
+        in text files with <link
+            linkend="zend.config.adapters.ini"><classname>Zend_Config_Ini</classname></link> and
         <link linkend="zend.config.adapters.xml"><classname>Zend_Config_Xml</classname></link>.
     </para>
     <example id="zend.config.introduction.example.using">
         <title>Using Zend_Config</title>
         <para>
-            Normally it is expected that users would use one of the adapter classes such as
-            <link linkend="zend.config.adapters.ini"><classname>Zend_Config_Ini</classname></link> or
-            <link linkend="zend.config.adapters.xml"><classname>Zend_Config_Xml</classname></link>, but if configuration data are
-            available in a PHP array, one may simply pass the data to the <classname>Zend_Config</classname> constructor in order
-            to utilize a simple object-oriented interface:
+            Normally it is expected that users would use one of the adapter classes such as <link
+                linkend="zend.config.adapters.ini"><classname>Zend_Config_Ini</classname></link> or
+            <link linkend="zend.config.adapters.xml"><classname>Zend_Config_Xml</classname></link>,
+            but if configuration data are available in a PHP array, one may simply pass the data to
+            the <classname>Zend_Config</classname> constructor in order to utilize a simple
+            object-oriented interface:
         </para>
         <programlisting language="php"><![CDATA[
 // Given an array of configuration data
@@ -50,12 +53,13 @@ $db = Zend_Db::factory($config->database);
 ]]></programlisting>
     </example>
     <para>
-        As illustrated in the example above, <classname>Zend_Config</classname> provides nested object property syntax to access
-        configuration data passed to its constructor.
+        As illustrated in the example above, <classname>Zend_Config</classname> provides nested
+        object property syntax to access configuration data passed to its constructor.
     </para>
     <para>
-        Along with the object oriented access to the data values, <classname>Zend_Config</classname> also has <code>get()</code>
-        which will return the supplied default value if the data element doesn't exist. For example:
+        Along with the object oriented access to the data values,
+        <classname>Zend_Config</classname> also has <methodname>get()</methodname> which will
+        return the supplied default value if the data element doesn't exist. For example:
     </para>
     <programlisting language="php"><![CDATA[
 $host = $config->database->get('host', 'localhost');
@@ -63,8 +67,8 @@ $host = $config->database->get('host', 'localhost');
     <example id="zend.config.introduction.example.file.php">
         <title>Using Zend_Config with a PHP Configuration File</title>
         <para>
-            It is often desirable to use a pure PHP-based configuration file. The following code illustrates how easily
-            this can be accomplished:
+            It is often desirable to use a pure PHP-based configuration file. The following code
+            illustrates how easily this can be accomplished:
         </para>
         <programlisting language="php"><![CDATA[
 // config.php

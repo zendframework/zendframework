@@ -7,25 +7,25 @@
         them in the application by using nested object property syntax. The INI format is specialized to provide both
         the ability to have a hierarchy of configuration data keys and inheritance between configuration data sections.
         Configuration data hierarchies are supported by separating the keys with the dot or period character
-        (<code>.</code>). A section may extend or inherit from another section by following the section name with a
-        colon character (<code>:</code>) and the name of the section from which data are to be inherited.
+        ("<emphasis>.</emphasis>"). A section may extend or inherit from another section by following the section name with a
+        colon character ("<emphasis>:</emphasis>) and the name of the section from which data are to be inherited.
     </para>
     <note>
         <title>Parsing the INI File</title>
         <para>
             <classname>Zend_Config_Ini</classname> utilizes the
-            <ulink url="http://php.net/parse_ini_file"><code>parse_ini_file()</code></ulink>
+            <ulink url="http://php.net/parse_ini_file"><methodname>parse_ini_file()</methodname></ulink>
             PHP function. Please review this documentation to be aware of its specific behaviors,
             which propagate to <classname>Zend_Config_Ini</classname>, such as how the special values of
-            <constant>TRUE</constant>, <constant>FALSE</constant>, <code>yes</code>, <code>no</code>,
-            and <constant>NULL</constant> are handled.
+            "<constant>TRUE</constant>", "<constant>FALSE</constant>", "yes", "no",
+            and "<constant>NULL</constant>" are handled.
         </para>
     </note>
     <note>
         <title>Key Separator</title>
         <para>
-            By default, the key separator character is the period character (<code>.</code>). This can be changed,
-            however, by changing the <varname>$options</varname> key <code>'nestSeparator'</code> when constructing the
+            By default, the key separator character is the period character ("<emphasis>.</emphasis>"). This can be changed,
+            however, by changing the <varname>$options</varname> key <emphasis>'nestSeparator'</emphasis> when constructing the
             <classname>Zend_Config_Ini</classname> object. For example:
             <programlisting language="php"><![CDATA[
 $options['nestSeparator'] = ':';
@@ -44,7 +44,7 @@ $config = new Zend_Config_Ini('/path/to/config.ini',
             section inherits from the production section. In this case, the decision is arbitrary and could have been
             written conversely, with the production section inheriting from the staging section, though this may not be
             the case for more complex situations. Suppose, then, that the following configuration data are contained in
-            <code>/path/to/config.ini</code>:
+            <filename>/path/to/config.ini</filename>:
         </para>
         <programlisting language="ini"><![CDATA[
 ; Production site configuration data

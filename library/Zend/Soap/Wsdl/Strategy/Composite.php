@@ -20,6 +20,8 @@
  * @version    $Id$
  */
 
+require_once "Zend/Soap/Wsdl/Strategy/Interface.php";
+
 class Zend_Soap_Wsdl_Strategy_Composite implements Zend_Soap_Wsdl_Strategy_Interface
 {
     /**

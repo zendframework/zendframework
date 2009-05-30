@@ -175,6 +175,8 @@ class Zend_Soap_Wsdl
      * @param string $name Name for the {@link http://www.w3.org/TR/wsdl#_messages message}
      * @param array $parts An array of {@link http://www.w3.org/TR/wsdl#_message parts}
      *                     The array is constructed like: 'name of part' => 'part xml schema data type'
+     *                     or 'name of part' => array('type' => 'part xml schema type')
+     *                     or 'name of part' => array('element' => 'part xml element name')
      * @return object The new message's XML_Tree_Node for use in {@link function addDocumentation}
      */
     public function addMessage($name, $parts)
@@ -187,7 +189,13 @@ class Zend_Soap_Wsdl
             foreach ($parts as $name => $type) {
                 $part = $this->_dom->createElement('part');
                 $part->setAttribute('name', $name);
-                $part->setAttribute('type', $type);
+                if (is_array($type)) {
+                    foreach ($type as $key => $value) {
+                        $part->setAttribute($key, $value);
+                    }
+                } else {
+                    $part->setAttribute('type', $type);
+                }
                 $message->appendChild($part);
             }
         }
@@ -586,5 +594,66 @@ class Zend_Soap_Wsdl
         $strategy->setContext($this);
         // delegates the detection of a complex type to the current strategy
         return $strategy->addComplexType($type);
+    }
+    
+    /**
+     * Parse an xsd:element represented as an array into a DOMElement.
+     * 
+     * @param array $element an xsd:element represented as an array
+     * @return DOMElement parsed element
+     */
+    private function _parseElement($element)
+    {
+        if (!is_array($element)) {
+            require_once "Zend/Soap/Wsdl/Exception.php";
+            throw new Zend_Soap_Wsdl_Exception("The 'element' parameter needs to be an associative array.");
+        }
+        
+        $elementXml = $this->_dom->createElement('xsd:element');
+        foreach ($element as $key => $value) {
+            if (in_array($key, array('sequence', 'all', 'choice'))) {
+                if (is_array($value)) {
+                    $complexType = $this->_dom->createElement('xsd:complexType');
+                    if (count($value) > 0) {
+                        $container = $this->_dom->createElement('xsd:' . $key);
+                        foreach ($value as $subelement) {
+                            $subelementXml = $this->_parseElement($subelement);
+                            $container->appendChild($subelementXml);
+                        }
+                        $complexType->appendChild($container);
+                    }
+                    $elementXml->appendChild($complexType);
+                }
+            } else {
+                $elementXml->setAttribute($key, $value);
+            }
+        }
+        return $elementXml;
+    }
+    
+    /**
+     * Add an xsd:element represented as an array to the schema.
+     * 
+     * Array keys represent attribute names and values their respective value.
+     * The 'sequence', 'all' and 'choice' keys must have an array of elements as their value,
+     * to add them to a nested complexType.
+     *
+     * Example: array( 'name' => 'MyElement',
+     *                 'sequence' => array( array('name' => 'myString', 'type' => 'string'),
+     *                                      array('name' => 'myInteger', 'type' => 'int') ) );
+     * Resulting XML: <xsd:element name="MyElement"><xsd:complexType><xsd:sequence>
+     *                  <xsd:element name="myString" type="string"/>
+     *                  <xsd:element name="myInteger" type="int"/>
+     *                </xsd:sequence></xsd:complexType></xsd:element>
+     * 
+     * @param array $element an xsd:element represented as an array
+     * @return string xsd:element for the given element array
+     */
+    public function addElement($element)
+    {
+        $schema = $this->getSchema();
+        $elementXml = $this->_parseElement($element);
+        $schema->appendChild($elementXml);
+        return 'tns:' . $element['name'];
     }
 }

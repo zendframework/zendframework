@@ -384,6 +384,10 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             for simplicity</entry>
                     </row>
                     <row>
+                        <entry><emphasis>DateItem</emphasis></entry>
+                        <entry>Returns a list of default formats for given date or time items</entry>
+                    </row>
+                    <row>
                         <entry><emphasis>Field</emphasis></entry>
                         <entry>Returns a localized list of date fields which can be used to display calendars
                             or date strings like 'month' or 'year' in a wished language. If you omit the value
@@ -779,6 +783,10 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             display date with times in the same string within the given calendar. If you
                             omit the value the 'gregorian' calendar will be used. Use
                             <link linkend="zend.date.introduction">Zend_Date</link> for simplicity</entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>DateItem</emphasis></entry>
+                        <entry>Returns the default format for a given date or time item</entry>
                     </row>
                     <row>
                         <entry><emphasis>Field</emphasis></entry>

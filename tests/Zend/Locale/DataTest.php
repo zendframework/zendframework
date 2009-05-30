@@ -657,38 +657,26 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
     {
         $value = Zend_Locale_Data::getList('de_AT', 'datetime');
         $result = array(
-            "Ed"    => "E d.",     "H"      => "H",       "HHmm"   => "HH:mm",    "HHmmss"   => "HH:mm:ss",
-            "MMMEd" => "E d. MMM", "MMMMd"  => "d. MMMM", "MMMMdd" => "dd. MMMM", "MMd"      => "d.MM.",
-            "MMdd"  => "dd.MM.",  "Md"     => "d.M.",
-            'Hm' => 'H:mm', 'M' => 'L', 'MEd' => 'E, d.M.', "mmss"  => "mm:ss",   "yyMM"   => "MM.yy",
-            "yyMMM"  => "MMM yy",   "yyMMdd"   => "dd.MM.yy",
-            "yyQ"   => "Q yy",    "yyQQQQ" => "QQQQ yy", "yyyy"   => "y",     "yyyyMMMM" => "MMMM y",
-            'MMM' => 'LLL', 'MMMMEd' => 'E d. MMMM', 'MMMd' => 'd. MMM', 'd' => 'd', 'ms' => 'mm:ss',
-            'y' => 'y', 'yM' => 'yyyy-M', 'yMEd' => 'EEE, yyyy-M-d', 'yMMM' => 'MMM y',
-            'yMMMEd' => 'EEE, d. MMM y', 'yMMMM' => 'MMMM y', 'yQ' => 'Q yyyy', 'yQQQ' => 'QQQ y',
-            'hms' => 'h:mm:ss a', 'hm' => 'h:mm a', 'Hms' => 'H:mm:ss', 'EEEd' => 'd. EEE'
+            'full' => '{1} {0}',
+            'long' => '{1} {0}',
+            'medium' => '{1} {0}',
+            'short' => '{1} {0}'
         );
         $this->assertEquals($result, $value);
 
         $value = Zend_Locale_Data::getList('de_AT', 'datetime', 'gregorian');
         $result = array(
-            "Ed"    => "E d.",     "H"      => "H",       "HHmm"   => "HH:mm",
-            "MMMEd" => "E d. MMM", "MMMMd"  => "d. MMMM", "MMMMdd" => "dd. MMMM", "MMd"      => "d.MM.",
-            "MMdd"  => "dd.MM.",  "Md"     => "d.M.",  "HHmmss"   => "HH:mm:ss",
-            "mmss"  => "mm:ss",   "yyMM"   => "MM.yy",   "yyMMM"  => "MMM yy",   "yyMMdd"   => "dd.MM.yy",
-            "yyQ"   => "Q yy",    "yyQQQQ" => "QQQQ yy", "yyyy"   => "y",     "yyyyMMMM" => "MMMM y",
-            'Hm' => 'H:mm', 'M' => 'L', 'MEd' => 'E, d.M.', 'MMM' => 'LLL', 'MMMMEd' => 'E d. MMMM',
-            'MMMd' => 'd. MMM', 'd' => 'd', 'ms' => 'mm:ss', 'y' => 'y', 'yM' => 'yyyy-M',
-            'yMEd' => 'EEE, yyyy-M-d', 'yMMM' => 'MMM y', 'yMMMEd' => 'EEE, d. MMM y',
-            'yMMMM' => 'MMMM y', 'yQ' => 'Q yyyy', 'yQQQ' => 'QQQ y',
-            'hms' => 'h:mm:ss a', 'hm' => 'h:mm a', 'Hms' => 'H:mm:ss', 'EEEd' => 'd. EEE'
+            'full' => '{1} {0}',
+            'long' => '{1} {0}',
+            'medium' => '{1} {0}',
+            'short' => '{1} {0}'
         );
         $this->assertEquals($result, $value);
 
-        $value = Zend_Locale_Data::getContent('de_AT', 'datetime');
+        $value = Zend_Locale_Data::getContent('de_AT', 'datetime', 'full');
         $this->assertEquals("{1} {0}", $value);
 
-        $value = Zend_Locale_Data::getContent('de_AT', 'datetime', 'gregorian');
+        $value = Zend_Locale_Data::getContent('de_AT', 'datetime', array('gregorian', 'long'));
         $this->assertEquals("{1} {0}", $value);
     }
 
@@ -2537,5 +2525,49 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
 
         $value = Zend_Locale_Data::getContent('de_AT', 'localeupgrade', 'de');
         $this->assertEquals('de_Latn_DE', $value);
+    }
+
+    /**
+     * test for reading datetime from locale
+     * expected array
+     */
+    public function testDateItem()
+    {
+        $value = Zend_Locale_Data::getList('de_AT', 'dateitem');
+        $result = array(
+            'EEEd' => 'd. EEE', 'Ed' => 'E d.', 'H' => 'H', 'HHmm' => 'HH:mm',
+            'HHmmss' => 'HH:mm:ss', 'Hm' => 'H:mm', 'M' => 'L', 'MEd' => 'E, d.M.',
+            'MMM' => 'LLL', 'MMMEd' => 'E d. MMM', 'MMMMEd' => 'E d. MMMM',
+            'MMMMd' => 'd. MMMM', 'MMMMdd' => 'dd. MMMM', 'MMMd' => 'd. MMM',
+            'MMd' => 'd.MM.', 'MMdd' => 'dd.MM.', 'Md' => 'd.M.', 'd' => 'd',
+            'mmss' => 'mm:ss', 'ms' => 'mm:ss', 'y' => 'y', 'yM' => 'yyyy-M',
+            'yMEd' => 'EEE, yyyy-M-d', 'yMMM' => 'MMM y', 'yMMMEd' => 'EEE, d. MMM y',
+            'yMMMM' => 'MMMM y', 'yQ' => 'Q yyyy', 'yQQQ' => 'QQQ y',
+            'yyMM' => 'MM.yy', 'yyMMM' => 'MMM yy', 'yyMMdd' => 'dd.MM.yy',
+            'yyQ' => 'Q yy', 'yyQQQQ' => 'QQQQ yy', 'yyyy' => 'y',
+            'yyyyMMMM' => 'MMMM y', 'Hms' => 'H:mm:ss', 'hm' => 'h:mm a',
+            'hms' => 'h:mm:ss a'
+        );
+        $this->assertEquals($result, $value);
+
+        $value = Zend_Locale_Data::getList('de_AT', 'dateitem', 'gregorian');
+        $result = array(
+            'EEEd' => 'd. EEE', 'Ed' => 'E d.', 'H' => 'H', 'HHmm' => 'HH:mm',
+            'HHmmss' => 'HH:mm:ss', 'Hm' => 'H:mm', 'M' => 'L', 'MEd' => 'E, d.M.',
+            'MMM' => 'LLL', 'MMMEd' => 'E d. MMM', 'MMMMEd' => 'E d. MMMM',
+            'MMMMd' => 'd. MMMM', 'MMMMdd' => 'dd. MMMM', 'MMMd' => 'd. MMM',
+            'MMd' => 'd.MM.', 'MMdd' => 'dd.MM.', 'Md' => 'd.M.', 'd' => 'd',
+            'mmss' => 'mm:ss', 'ms' => 'mm:ss', 'y' => 'y', 'yM' => 'yyyy-M',
+            'yMEd' => 'EEE, yyyy-M-d', 'yMMM' => 'MMM y', 'yMMMEd' => 'EEE, d. MMM y',
+            'yMMMM' => 'MMMM y', 'yQ' => 'Q yyyy', 'yQQQ' => 'QQQ y',
+            'yyMM' => 'MM.yy', 'yyMMM' => 'MMM yy', 'yyMMdd' => 'dd.MM.yy',
+            'yyQ' => 'Q yy', 'yyQQQQ' => 'QQQQ yy', 'yyyy' => 'y',
+            'yyyyMMMM' => 'MMMM y', 'Hms' => 'H:mm:ss', 'hm' => 'h:mm a',
+            'hms' => 'h:mm:ss a'
+        );
+        $this->assertEquals($result, $value);
+
+        $value = Zend_Locale_Data::getContent('de_AT', 'dateitem', 'MMMMd');
+        $this->assertEquals("d. MMMM", $value);
     }
 }

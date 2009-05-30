@@ -519,7 +519,20 @@ class Zend_Locale_Data
                 if (empty($value)) {
                     $value = "gregorian";
                 }
-                $temp = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/dateTimeFormats/availableFormats/dateFormatItem', 'id');
+                $temp  = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/dateTimeFormats/dateTimeFormatLength[@type=\'full\']/dateTimeFormat/pattern', '', 'full');
+                $temp += self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/dateTimeFormats/dateTimeFormatLength[@type=\'long\']/dateTimeFormat/pattern', '', 'long');
+                $temp += self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/dateTimeFormats/dateTimeFormatLength[@type=\'medium\']/dateTimeFormat/pattern', '', 'medium');
+                $temp += self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/dateTimeFormats/dateTimeFormatLength[@type=\'short\']/dateTimeFormat/pattern', '', 'short');
+                break;
+
+            case 'dateitem':
+                if (empty($value)) {
+                    $value = "gregorian";
+                }
+                $_temp  = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/dateTimeFormats/availableFormats/dateFormatItem', 'id');
+                foreach ($_temp as $key => $found) {
+                    $temp += self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/dateTimeFormats/availableFormats/dateFormatItem[@id=\'' . $key . '\']', '', $key);
+                }
                 break;
 
             case 'field':
@@ -1030,9 +1043,24 @@ class Zend_Locale_Data
 
             case 'datetime':
                 if (empty($value)) {
-                    $value = "gregorian";
+                    $value = array("gregorian", "medium");
                 }
-                $temp = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/dateTimeFormats/dateTimeFormatLength/dateTimeFormat/pattern', '', 'pattern');
+                if (!is_array($value)) {
+                    $temp = $value;
+                    $value = array("gregorian", $temp);
+                }
+                $temp = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value[0] . '\']/dateTimeFormats/dateTimeFormatLength[@type=\'' . $value[1] . '\']/dateTimeFormat/pattern', '', 'pattern');
+                break;
+
+            case 'dateitem':
+                if (empty($value)) {
+                    $value = array("gregorian", "yyMMdd");
+                }
+                if (!is_array($value)) {
+                    $temp = $value;
+                    $value = array("gregorian", $temp);
+                }
+                $temp = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value[0] . '\']/dateTimeFormats/availableFormats/dateFormatItem[@id=\'' . $value[1] . '\']', '');
                 break;
 
             case 'field':

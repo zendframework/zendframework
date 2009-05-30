@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15743 -->
+<!-- EN-Revision: 15827 -->
 <sect1 id="zend.config.adapters.ini">
     <title>Zend_Config_Ini</title>
     <para>
@@ -10,31 +10,31 @@
         この INI 形式は、階層化された設定データを扱うこと、
         そしてセクション間の継承関係を扱うことに特化されています。
         設定データの階層構造は、キーの名前をドットあるいはピリオド
-        (<code>.</code>) で区切ることによって表現します。
+        (<emphasis>.</emphasis>) で区切ることによって表現します。
         他のセクションを拡張するなどの継承関係は、
-        セクション名に続けてコロン (<code>:</code>) を、
+        セクション名に続けてコロン (<emphasis>:</emphasis>) を、
         そしてその後に継承元のセクション名を指定することで表します。
     </para>
     <note>
         <title>INI ファイルのパース</title>
         <para>
             <classname>Zend_Config_Ini</classname> は、PHP の
-            <ulink url="http://php.net/parse_ini_file"><code>parse_ini_file()</code></ulink>
+            <ulink url="http://php.net/parse_ini_file"><methodname>parse_ini_file()</methodname></ulink>
             関数を使用しています。このドキュメントでは、<classname>Zend_Config_Ini</classname>
             固有の挙動に注意しましょう。例えば、特殊な値として
-            <constant>TRUE</constant> や <constant>FALSE</constant>、
-            <code>yes</code>、<code>no</code> そして <constant>NULL</constant>
+            "<constant>TRUE</constant>" や "<constant>FALSE</constant>"、
+            "yes"、"no" そして "<constant>NULL</constant>"
             を処理できることなどです。
         </para>
     </note>
     <note>
         <title>キーの区切り文字</title>
         <para>
-            デフォルトでは、キーの区切り文字はピリオド (<code>.</code>) です。
+            デフォルトでは、キーの区切り文字はピリオド (<emphasis>.</emphasis>) です。
             しかし、これは変更することもできます。変更するには、
             <classname>Zend_Config_Ini</classname> オブジェクトの作成時に
             <varname>$options</varname> のキー
-            <code>'nestSeparator'</code> を設定します。たとえばこのようになります。
+            <emphasis>'nestSeparator'</emphasis> を設定します。たとえばこのようになります。
             <programlisting language="php"><![CDATA[
 $options['nestSeparator'] = ':';
 $config = new Zend_Config_Ini('/path/to/config.ini',
@@ -55,7 +55,7 @@ $config = new Zend_Config_Ini('/path/to/config.ini',
             今回の場合なら、逆に運用環境用のセクションを開発環境用のものから継承させてもいいでしょう。
             そうしたからといって特に状況が複雑になるわけではありません。
             ここでは、次のような内容の設定データが
-            <code>/path/to/config.ini</code> に存在するものとします。
+            <filename>/path/to/config.ini</filename> に存在するものとします。
         </para>
         <programlisting language="ini"><![CDATA[
 ; 運用環境の設定データ

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15827 -->
 <sect1 id="zend.config.adapters.xml">
     <title>Zend_Config_Xml</title>
     <para>
@@ -11,7 +11,7 @@
         セクションレベルの要素の下に XML 要素を配置することで、
         階層構造をサポートします。
         末端レベルの XML 要素が設定データの値に対応します。
-        セクションの継承は、XML の属性 <code>extends</code>
+        セクションの継承は、XML の属性 <emphasis>extends</emphasis>
         でサポートされます。この属性の値が、
         データを継承しているセクション名を表します。
     </para>
@@ -34,7 +34,7 @@
             今回の場合なら、逆に運用環境用のセクションを開発環境用のものから継承させてもいいでしょう。
             そうしたからといって特に状況が複雑になるわけではありません。
             ここでは、次のような内容の設定データが
-            <code>/path/to/config.xml</code> に存在するものとします。
+            <filename>/path/to/config.xml</filename> に存在するものとします。
         </para>
         <programlisting language="xml"><![CDATA[
 <?xml version="1.0"?>
@@ -77,8 +77,8 @@ echo $config->database->params->dbname; // "dbname" と出力します
         <title>Zend_Config_Xml におけるタグの属性の使用</title>
         <para>
             <classname>Zend_Config_Xml</classname> では、設定内でノードを定義する際にさらに 2 通りの方法を用意しています。
-            どちらも属性を使用するものです。<code>extends</code> 属性や
-            <code>value</code> 属性は予約語
+            どちらも属性を使用するものです。<emphasis>extends</emphasis> 属性や
+            <emphasis>value</emphasis> 属性は予約語
             (後者は、属性を使う 2 番目の方法で使用します)
             となり、使用できません。属性を使用する方法のひとつは、
             親ノードに属性を追加するものです。
@@ -102,7 +102,7 @@ echo $config->database->params->dbname; // "dbname" と出力します
         <para>
             もうひとつの方法は、設定ファイルの記述量を減らすことはありません。
             ただ、同じタグ名を何度も書く必要がなくなるので保守性は上がります。
-            単純に空のタグを作成し、その値を <code>value</code>
+            単純に空のタグを作成し、その値を <emphasis>value</emphasis>
             属性に含めます。
         </para>
         <programlisting language="xml"><![CDATA[
@@ -138,7 +138,7 @@ echo $config->database->params->dbname; // "dbname" と出力します
             <classname>Zend_Config_Xml</classname> は、データベースなどから取得した
             XML 文字列を直接読み込むこともできます。
             文字列はコンストラクタの最初のパラメータとして渡し、最初は
-            <code>'&lt;?xml'</code> で始まらなければなりません。
+            <emphasis>'&lt;?xml'</emphasis> で始まらなければなりません。
         </para>
         <programlisting language="xml"><![CDATA[
 $string = <<<EOT

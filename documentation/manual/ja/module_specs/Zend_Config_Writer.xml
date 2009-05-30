@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15719 -->
+<!-- EN-Revision: 15827 -->
 <sect1 id="zend.config.writer.introduction">
     <title>Zend_Config_Writer</title>
     <para>
@@ -9,11 +9,11 @@
         アダプタなしでも動作するので、使用するのも簡単です。
         デフォルトでは <classname>Zend_Config_Writer</classname>
         には 3 種類のアダプタが同梱されており、どれも同じように動作します。
-        まず、<code>filename</code> や <code>config</code>
+        まず、<emphasis>filename</emphasis> や <emphasis>config</emphasis>
         のオプションを指定してライターのインスタンスを作成します。
-        それからライターの <code>write()</code> メソッドをコールすると、
+        それからライターの <methodname>write()</methodname> メソッドをコールすると、
         設定ファイルが作成されます。<varname>$filename</varname> や
-        <varname>$config</varname> を、直接 <code>write()</code>
+        <varname>$config</varname> を、直接 <methodname>write()</methodname>
         メソッドで設定することもできます。現在は、次のライターが
         <classname>Zend_Config_Writer</classname> に同梱されています。
     </para>
@@ -38,7 +38,7 @@
 
     <para>
         例外的に、<classname>Zend_Config_Writer_Ini</classname> にはオプションのパラメータ
-        <code>nestSeparator</code> が用意されています。
+        <emphasis>nestSeparator</emphasis> が用意されています。
         これは、ノードを区切る文字を定義します。デフォルトはドットひとつで、
         これは <classname>Zend_Config_Ini</classname> のデフォルトと同じです。
     </para>
@@ -46,13 +46,13 @@
     <para>
         <classname>Zend_Config</classname> オブジェクトを変更したり作成したりする際には、
         知っておくべきことがあります。値を作成したり変更したりするには、
-        パラメータのアクセサ (<code>-&gt;</code>) で <classname>Zend_Config</classname>
+        パラメータのアクセサ (<emphasis>-&gt;</emphasis>) で <classname>Zend_Config</classname>
         オブジェクトのパラメータを設定します。
         ルート内のセクションやブランチを作成するには、新規配列を作成します
-        (<code>$config-&gt;branch = array();</code>)。
+        ("$config-&gt;branch = array();")。
         セクションの継承関係を定義するには、ルート
         <classname>Zend_Config</classname> オブジェクトの
-        <code>setExtend()</code> メソッドをコールします。
+        <methodname>setExtend()</methodname> メソッドをコールします。
     </para>
 
     <example id="zend.config.writer.example.using">
@@ -127,7 +127,7 @@ $writer->write();
             すべてのセクションを読み込んで継承を読み飛ばすことが大切です。
             そうすることで、値がマージされてしまうことがなくなります。
             そのために、コンストラクタで
-            <code>skipExtends</code> オプションを指定します。
+            <emphasis>skipExtends</emphasis> オプションを指定します。
         </para>
     </note>
 </sect1>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15719 -->
+<!-- EN-Revision: 15825 -->
 <sect1 id="zend.codegenerator.examples">
     <title>Zend_CodeGeneratorサンプル</title>
 
@@ -287,7 +287,7 @@ $file = new Zend_CodeGenerator_Php_File(array(
 ]]></programlisting>
 
         <para>
-            <code>generate()</code>を呼び出すとコードを生成します。
+            <methodname>generate()</methodname>を呼び出すとコードを生成します。
             しかし、ファイルに書き出しません。
             コンテンツを捕まえて、自分自身で書き出す必要があります。
             その例です。:
@@ -362,7 +362,7 @@ define('APPLICATION_ENV', 'testing');
             コード・ジェネレーターを使って、
             既存のPHPファイルにPHPコードを加えることができます。
             そうするためには、まずそれにたいしてreflectionを実行する必要があります。
-            静的メソッド<code>fromReflectedFileName()</code>によりこれを実行できます。
+            静的メソッド<methodname>fromReflectedFileName()</methodname>によりこれを実行できます。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -378,7 +378,7 @@ file_put_contents($path, $generator->generate());
         <para>
             コード・ジェネレーターを使って、既存のPHPファイルにPHPコードを加えることができます。
             そうするために、最初にクラスをジェネレーター・オブジェクトにマップするために、
-            静的メソッド<code>fromReflection()</code>を使ってください。
+            静的メソッド<methodname>fromReflection()</methodname>を使ってください。
             そこから追加のプロパティまたはメソッドを加えて、そしてクラスを再生成するでしょう。
         </para>
 

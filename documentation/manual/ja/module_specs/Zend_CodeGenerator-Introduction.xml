@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15825 -->
 <sect1 id="zend.codegenerator.introduction">
     <title>導入</title>
 
@@ -20,7 +20,7 @@
             最も代表的な使用例では、単にコード・ジェネレーター・クラスのインスタンスを生成して、
             それに適切な設定を渡すか、またはインスタンス化のあと設定します。
             コードを生成するために、単にオブジェクトをechoするか、
-            その<code>generate()</code>メソッドを呼びます。
+            その<methodname>generate()</methodname>メソッドを呼びます。
         </para>
 
         <programlisting language="php"><![CDATA[

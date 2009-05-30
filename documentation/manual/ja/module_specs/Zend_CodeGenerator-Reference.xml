@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15719 -->
+<!-- EN-Revision: 15825 -->
 <sect1 id="zend.codegenerator.reference">
     <title>Zend_CodeGeneratorリファレンス</title>
 
@@ -31,27 +31,27 @@ abstract class Zend_CodeGenerator_Abstract
 ]]></programlisting>
 
             <para>
-                コンストラクタは最初に<code>_init()</code>を呼び出します。
+                コンストラクタは最初に<methodname>_init()</methodname>を呼び出します。
                 （それは、具体的に拡張するクラスを実装するために空のままにされます）
-                それから<code>setOptions()</code>に<varname>$options</varname>パラメータを渡し、
-                最後に<code>_prepare()</code>を呼び出します。
+                それから<methodname>setOptions()</methodname>に<varname>$options</varname>パラメータを渡し、
+                最後に<methodname>_prepare()</methodname>を呼び出します。
                 （<!-- TODO -->again, 
                 クラスの拡張によって実装されます。）
             </para>
 
             <para>
                 Zend Frameworkのほとんどのクラスのように、
-                <code>setOptions()</code>ではクラスの既存のセッターへのオプション・キーを比較して、
+                <methodname>setOptions()</methodname>ではクラスの既存のセッターへのオプション・キーを比較して、
                 見つかったら、メソッドに値を渡します。
             </para>
 
             <para>
-                <code>__toString()</code>は最後に指定され、
-                <code>generate()</code>の代わりをします。
+                <methodname>__toString()</methodname>は最後に指定され、
+                <methodname>generate()</methodname>の代わりをします。
             </para>
 
             <para>
-                <code>setSourceContent()</code>及び<code>getSourceContent()</code>は
+                <methodname>setSourceContent()</methodname>及び<methodname>getSourceContent()</methodname>は
                 デフォルト・コンテンツを生成されたコードに設定するか、
                 一旦すべての生成作業が完了した前述のコンテンツと入れ替えることを目的とします。
             </para>
@@ -118,7 +118,7 @@ abstract class Zend_CodeGenerator_Php_Member_Abstract
                 <classname>Zend_CodeGenerator_Php_Body</classname>は、
                 ファイルの中に含む任意の手続き的なコードを生成することを目的とします。
                 そのように、単にコンテンツをオブジェクトに設定し、
-                <code>generate()</code>を実施すると、それはそのコンテンツを返します。
+                <methodname>generate()</methodname>を実施すると、それはそのコンテンツを返します。
             </para>
 
             <para>
@@ -185,18 +185,18 @@ class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
 ]]></programlisting>
 
             <para>
-                <code>setProperty()</code>メソッドは、
+                <methodname>setProperty()</methodname>メソッドは、
                 <classname>Zend_CodeGenerator_Php_Property</classname>インスタンスを生成するために
                 用いられるかもしれない情報の配列、
                 またはただ単に<classname>Zend_CodeGenerator_Php_Property</classname>インスタンス、
                 を受け入れます。
-                同様に<code>setMethod()</code>は、
+                同様に<methodname>setMethod()</methodname>は、
                 <classname>Zend_CodeGenerator_Php_Method</classname>インスタンスを生成するための、
                 情報の配列またはそのクラスの具体化したインスタンスを受け入れます。
             </para>
 
             <para>
-                <code>setDocBlock()</code>が<classname>Zend_CodeGenerator_Php_DocBlock</classname>の
+                <methodname>setDocBlock()</methodname>が<classname>Zend_CodeGenerator_Php_DocBlock</classname>の
                 インスタンスを期待することも注意してください。
             </para>
         </sect3>
@@ -211,7 +211,7 @@ class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
             </para>
 
             <para>
-                注釈タグは<code>setTag()</code>や<code>setTags()</code>メソッドを用いてセットされるかもしれません;
+                注釈タグは<methodname>setTag()</methodname>や<methodname>setTags()</methodname>メソッドを用いてセットされるかもしれません;
                 これらは<classname>Zend_CodeGenerator_Php_Docblock_Tag</classname>コンストラクタに渡されるかもしれないタグを記述している配列、
                 またはそのクラスのインスタンスどちらもそれぞれ
                 <!-- TODO -->take
@@ -410,7 +410,7 @@ class Zend_CodeGenerator_Php_Member_Container extends ArrayObject
             </para>
 
             <para>
-                パラメータは<code>setParameter()</code>または<code>setParameters()</code>を用いて設定されるかもしれません。
+                パラメータは<methodname>setParameter()</methodname>または<methodname>setParameters()</methodname>を用いて設定されるかもしれません。
                 それぞれの場合、パラメータは<classname>Zend_CodeGenerator_Php_Parameter</classname>コンストラクタに渡す情報の配列か、
                 またはそのクラスのインスタンスでなければいけません。
             </para>

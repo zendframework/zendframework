@@ -135,6 +135,12 @@
             </listitem>
             <listitem>
                 <para>
+                    <code>{get|set}RenderInvisible()</code> gets/set whether to
+                    render items that have been marked as invisible or not.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
                     <code>__call()</code> is used for proxying calls to the
                     container registered in the helper, which means you can
                     call methods on a helper as if it was a container. See <link

@@ -684,7 +684,8 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
      * Determines whether a page should be accepted when iterating
      *
      * Rules:
-     * - If a page is not visible, it is not accepted
+     * - If a page is not visible it is not accepted, unless RenderInvisible has
+     *   been set to true.
      * - If helper has no ACL, page is accepted
      * - If helper has ACL, but no role, page is not accepted
      * - If helper has ACL and role:

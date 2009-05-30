@@ -19,7 +19,7 @@
             In the most typical use case, you will simply instantiate a code
             generator class and either pass it the appropriate configuration or
             configure it after instantiation. To generate the code, you will
-            simply echo the object or call its <code>generate()</code> method.
+            simply echo the object or call its <methodname>generate()</methodname> method.
         </para>
 
         <programlisting language="php"><![CDATA[

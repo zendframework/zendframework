@@ -30,28 +30,28 @@ abstract class Zend_CodeGenerator_Abstract
 ]]></programlisting>
 
             <para>
-                The constructor first calls <code>_init()</code> (which is left
+                The constructor first calls <methodname>_init()</methodname> (which is left
                 empty for the concrete extending class to implement), then
                 passes the <varname>$options</varname> parameter to
-                <code>setOptions()</code>, and finally calls
-                <code>_prepare()</code> (again, to be implemented by an
+                <methodname>setOptions()</methodname>, and finally calls
+                <methodname>_prepare()</methodname> (again, to be implemented by an
                 extending class).
             </para>
 
             <para>
-                Like most classes in Zend Framework, <code>setOptions()</code>
+                Like most classes in Zend Framework, <methodname>setOptions()</methodname>
                 compares an option key to existing setters in the class, and
                 passes the value on to that method if found.
             </para>
 
             <para>
-                <code>__toString()</code> is marked as final, and proxies to
-                <code>generate()</code>.
+                <methodname>__toString()</methodname> is marked as final, and proxies to
+                <methodname>generate()</methodname>.
             </para>
 
             <para>
-                <code>setSourceContent()</code> and
-                <code>getSourceContent()</code> are intended to either set the
+                <methodname>setSourceContent()</methodname> and
+                <methodname>getSourceContent()</methodname> are intended to either set the
                 default content for the code being generated, or to replace said
                 content once all generation tasks are complete.
             </para>
@@ -118,7 +118,7 @@ abstract class Zend_CodeGenerator_Php_Member_Abstract
                 <classname>Zend_CodeGenerator_Php_Body</classname> is intended for
                 generating arbitrary procedural code to include within a file.
                 As such, you simply set content for the object, and it will
-                return that content when you invoke <code>generate()</code>.
+                return that content when you invoke <methodname>generate()</methodname>.
             </para>
 
             <para>
@@ -183,19 +183,19 @@ class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
 ]]></programlisting>
 
             <para>
-                The <code>setProperty()</code> method accepts an array of
+                The <methodname>setProperty()</methodname> method accepts an array of
                 information that may be used to generate a
                 <classname>Zend_CodeGenerator_Php_Property</classname> instance -- or
                 simply an instance of
                 <classname>Zend_CodeGenerator_Php_Property</classname>.
-                Likewise, <code>setMethod()</code> accepts either an array of
+                Likewise, <methodname>setMethod()</methodname> accepts either an array of
                 information for generating a
                 <classname>Zend_CodeGenerator_Php_Method</classname> instance or a
                 concrete instance of that class.
             </para>
 
             <para>
-                Note that <code>setDocBlock()</code> expects an instance of
+                Note that <methodname>setDocBlock()</methodname> expects an instance of
                 <classname>Zend_CodeGenerator_Php_DocBlock</classname>.
             </para>
         </sect3>
@@ -211,8 +211,8 @@ class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
             </para>
 
             <para>
-                Annotation tags may be set using the <code>setTag()</code> and
-                <code>setTags()</code> methods; these each take either an array
+                Annotation tags may be set using the <methodname>setTag()</methodname> and
+                <methodname>setTags()</methodname> methods; these each take either an array
                 describing the tag that may be passed to the
                 <classname>Zend_CodeGenerator_Php_Docblock_Tag</classname> constructor, or
                 an instance of that class.
@@ -419,8 +419,8 @@ class Zend_CodeGenerator_Php_Member_Container extends ArrayObject
             </para>
 
             <para>
-                Parameters may be set using <code>setParameter()</code> or
-                <code>setParameters()</code>. In each case, a parameter should
+                Parameters may be set using <methodname>setParameter()</methodname> or
+                <methodname>setParameters()</methodname>. In each case, a parameter should
                 either be an array of information to pass to the
                 <classname>Zend_CodeGenerator_Php_Parameter</classname> constructor or an
                 instance of that class.

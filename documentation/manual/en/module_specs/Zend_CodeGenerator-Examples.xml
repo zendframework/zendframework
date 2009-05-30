@@ -292,7 +292,7 @@ $file = new Zend_CodeGenerator_Php_File(array(
 ]]></programlisting>
 
         <para>
-            Calling <code>generate()</code> will generate the code -- but not
+            Calling <methodname>generate()</methodname> will generate the code -- but not
             write it to a file. You will need to capture the contents and write
             them to a file yourself. As an example:
         </para>
@@ -365,7 +365,7 @@ define('APPLICATION_ENV', 'testing');
         <para>
             You can add PHP code to an existing PHP file using the code
             generator. To do so, you need to first do reflection on it. The
-            static method <code>fromReflectedFileName()</code> allows you to do
+            static method <methodname>fromReflectedFileName()</methodname> allows you to do
             this.
         </para>
 
@@ -381,7 +381,7 @@ file_put_contents($path, $generator->generate());
         <title>Seeding PHP class generation via reflection</title>
         <para>
             You may add code to an existing class. To do so, first use the
-            static <code>fromReflection()</code> method to map the class into a
+            static <methodname>fromReflection()</methodname> method to map the class into a
             generator object. From there, you may add additional properties or
             methods, and then regenerate the class.
         </para>

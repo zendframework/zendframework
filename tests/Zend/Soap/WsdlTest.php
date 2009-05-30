@@ -26,7 +26,7 @@ require_once 'Zend/Soap/Wsdl/Strategy/ArrayOfTypeSequence.php';
  */
 class Zend_Soap_WsdlTest extends PHPUnit_Framework_TestCase
 {
-    protected function sanatizeWsdlXmlOutputForOsCompability($xmlstring)
+    protected function sanitizeWsdlXmlOutputForOsCompability($xmlstring)
     {
         $xmlstring = str_replace(array("\r", "\n"), "", $xmlstring);
         $xmlstring = preg_replace('/(>[\s]{1,}<)/', '', $xmlstring);
@@ -37,7 +37,7 @@ class Zend_Soap_WsdlTest extends PHPUnit_Framework_TestCase
     {
         $wsdl = new Zend_Soap_Wsdl('MyService', 'http://localhost/MyService.php');
 
-        $this->assertEquals($this->sanatizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
+        $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
                             '<?xml version="1.0"?>'  .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                  . 'xmlns:tns="http://localhost/MyService.php" '
@@ -53,7 +53,7 @@ class Zend_Soap_WsdlTest extends PHPUnit_Framework_TestCase
         $wsdl = new Zend_Soap_Wsdl('MyService', 'http://localhost/MyService.php');
         $wsdl->setUri('http://localhost/MyNewService.php');
 
-        $this->assertEquals($this->sanatizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
+        $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
                             '<?xml version="1.0"?>'  .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                  . 'xmlns:tns="http://localhost/MyNewService.php" '
@@ -75,7 +75,7 @@ class Zend_Soap_WsdlTest extends PHPUnit_Framework_TestCase
 
         $wsdl->addMessage('myMessage', $messageParts);
 
-        $this->assertEquals($this->sanatizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
+        $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
                             '<?xml version="1.0"?>'  .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
@@ -98,7 +98,7 @@ class Zend_Soap_WsdlTest extends PHPUnit_Framework_TestCase
 
         $wsdl->addPortType('myPortType');
 
-        $this->assertEquals($this->sanatizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
+        $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
                             '<?xml version="1.0"?>'  .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
@@ -121,7 +121,7 @@ class Zend_Soap_WsdlTest extends PHPUnit_Framework_TestCase
         $wsdl->addPortOperation($portType, 'operation2', 'tns:operation2Request', 'tns:operation2Response');
         $wsdl->addPortOperation($portType, 'operation3', 'tns:operation3Request', 'tns:operation3Response', 'tns:operation3Fault');
 
-        $this->assertEquals($this->sanatizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
+        $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
                             '<?xml version="1.0"?>'  .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
@@ -152,7 +152,7 @@ class Zend_Soap_WsdlTest extends PHPUnit_Framework_TestCase
         $wsdl->addPortType('myPortType');
         $wsdl->addBinding('MyServiceBinding', 'myPortType');
 
-        $this->assertEquals($this->sanatizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
+        $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
                             '<?xml version="1.0"?>'  .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
@@ -186,7 +186,7 @@ class Zend_Soap_WsdlTest extends PHPUnit_Framework_TestCase
                                    array('use' => 'encoded', 'encodingStyle' => "http://schemas.xmlsoap.org/soap/encoding/")
                                    );
 
-        $this->assertEquals($this->sanatizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
+        $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
                             '<?xml version="1.0"?>'  .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
@@ -237,7 +237,7 @@ class Zend_Soap_WsdlTest extends PHPUnit_Framework_TestCase
                                    array('use' => 'encoded', 'encodingStyle' => "http://schemas.xmlsoap.org/soap/encoding/")
                                   );
 
-        $this->assertEquals($this->sanatizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
+        $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
                             '<?xml version="1.0"?>'  .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
@@ -275,7 +275,7 @@ class Zend_Soap_WsdlTest extends PHPUnit_Framework_TestCase
                                    array('use' => 'encoded', 'encodingStyle' => "http://schemas.xmlsoap.org/soap/encoding/")
                                   );
 
-        $this->assertEquals($this->sanatizeWsdlXmlOutputForOsCompability($wsdl1->toXml()),
+        $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdl1->toXml()),
                             '<?xml version="1.0"?>'  .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
@@ -317,7 +317,7 @@ class Zend_Soap_WsdlTest extends PHPUnit_Framework_TestCase
                                    array('use' => 'encoded', 'encodingStyle' => "http://schemas.xmlsoap.org/soap/encoding/")
                                   );
 
-        $this->assertEquals($this->sanatizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
+        $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
                             '<?xml version="1.0"?>'  .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
@@ -351,7 +351,7 @@ class Zend_Soap_WsdlTest extends PHPUnit_Framework_TestCase
 
         $wsdl->addService('Service1', 'myPortType', 'MyServiceBinding', 'http://localhost/MyService.php');
 
-        $this->assertEquals($this->sanatizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
+        $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
                             '<?xml version="1.0"?>'  .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
@@ -378,7 +378,7 @@ class Zend_Soap_WsdlTest extends PHPUnit_Framework_TestCase
 
         $wsdl->addDocumentation($portType, 'This is a description for Port Type node.');
 
-        $this->assertEquals($this->sanatizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
+        $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
                             '<?xml version="1.0"?>'  .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
@@ -393,11 +393,43 @@ class Zend_Soap_WsdlTest extends PHPUnit_Framework_TestCase
                           . '</definitions>' );
     }
 
+    public function testAddDocumentationToSetInsertsBefore()
+    {
+        $wsdl = new Zend_Soap_Wsdl('MyService', 'http://localhost/MyService.php');
+
+        $messageParts = array();
+        $messageParts['parameter1'] = $wsdl->getType('int');
+        $messageParts['parameter2'] = $wsdl->getType('string');
+        $messageParts['parameter3'] = $wsdl->getType('mixed');
+
+        $message = $wsdl->addMessage('myMessage', $messageParts);
+        $wsdl->addDocumentation($message, "foo");
+
+        $this->assertEquals(
+            '<?xml version="1.0"?>'  .
+            '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
+               . 'xmlns:tns="http://localhost/MyService.php" '
+               . 'xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" '
+               . 'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
+               . 'xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" '
+               . 'xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" '
+               . 'name="MyService" targetNamespace="http://localhost/MyService.php">'
+               . '<message name="myMessage">'
+               .   '<documentation>foo</documentation>'
+               .   '<part name="parameter1" type="xsd:int"/>'
+               .   '<part name="parameter2" type="xsd:string"/>'
+               .   '<part name="parameter3" type="xsd:anyType"/>'
+               . '</message>'
+            . '</definitions>',
+            $this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml())
+        );
+    }
+
     function testToXml()
     {
         $wsdl = new Zend_Soap_Wsdl('MyService', 'http://localhost/MyService.php');
 
-        $this->assertEquals($this->sanatizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
+        $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
                             '<?xml version="1.0"?>'  .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
@@ -415,7 +447,7 @@ class Zend_Soap_WsdlTest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue($dom instanceOf DOMDocument);
 
-        $this->assertEquals($this->sanatizeWsdlXmlOutputForOsCompability($dom->saveXML()),
+        $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML()),
                             '<?xml version="1.0"?>'  .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
@@ -435,7 +467,7 @@ class Zend_Soap_WsdlTest extends PHPUnit_Framework_TestCase
         $wsdlDump = ob_get_contents();
         ob_end_clean();
 
-        $this->assertEquals($this->sanatizeWsdlXmlOutputForOsCompability($wsdlDump),
+        $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdlDump),
                             '<?xml version="1.0"?>'  .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
@@ -448,7 +480,7 @@ class Zend_Soap_WsdlTest extends PHPUnit_Framework_TestCase
         $wsdl->dump(dirname(__FILE__) . '/_files/dumped.wsdl');
         $dumpedContent = file_get_contents(dirname(__FILE__) . '/_files/dumped.wsdl');
 
-        $this->assertEquals($this->sanatizeWsdlXmlOutputForOsCompability($dumpedContent),
+        $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($dumpedContent),
                             '<?xml version="1.0"?>'  .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
@@ -552,7 +584,7 @@ class Zend_Soap_WsdlTest extends PHPUnit_Framework_TestCase
 
         $wsdl->addComplexType('Zend_Soap_Wsdl_Test');
 
-        $this->assertEquals($this->sanatizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
+        $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
                             '<?xml version="1.0"?>'  .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '

@@ -390,11 +390,15 @@ class Zend_Soap_Wsdl
     }
 
     /**
-     * Add a {@link http://www.w3.org/TR/wsdl#_documentation document} element to any element in the WSDL
+     * Add a documentation element to any element in the WSDL.
      *
-     * @param object $input_node An XML_Tree_Node returned by another method to add the document to
-     * @param string $document Human readable documentation for the node
-     * @return boolean
+     * Note that the WSDL {@link http://www.w3.org/TR/wsdl#_documentation specification} uses 'document',
+     * but the WSDL {@link http://schemas.xmlsoap.org/wsdl/ schema} uses 'documentation' instead.
+     * The {@link http://www.ws-i.org/Profiles/BasicProfile-1.1-2004-08-24.html#WSDL_documentation_Element WS-I Basic Profile 1.1} recommends using 'documentation'.
+     *
+     * @param object $input_node An XML_Tree_Node returned by another method to add the documentation to
+     * @param string $documentation Human readable documentation for the node
+     * @return DOMElement The documentation element
      */
     public function addDocumentation($input_node, $documentation)
     {
@@ -404,11 +408,15 @@ class Zend_Soap_Wsdl
             $node = $input_node;
         }
 
-        /** @todo Check if 'documentation' is a correct name for the element (WSDL spec uses 'document') */
         $doc = $this->_dom->createElement('documentation');
         $doc_cdata = $this->_dom->createTextNode($documentation);
         $doc->appendChild($doc_cdata);
-        $node->appendChild($doc);
+
+        if($node->hasChildNodes()) {
+            $node->insertBefore($doc, $node->firstChild);
+        } else {
+            $node->appendChild($doc);
+        }
 
         return $doc;
     }

@@ -383,7 +383,7 @@ class Zend_Soap_AutoDiscoverTest extends PHPUnit_Framework_TestCase
                 '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="' . $scriptUri . '" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="' .$name. '" targetNamespace="' . $scriptUri . '">'.
                 '<portType name="' .$name. 'Port">'.
                 '<operation name="Zend_Soap_AutoDiscover_TestFunc"><input message="tns:Zend_Soap_AutoDiscover_TestFuncRequest"/><output message="tns:Zend_Soap_AutoDiscover_TestFuncResponse"/></operation>'.
-                '<operation name="Zend_Soap_AutoDiscover_TestFunc2"><input message="tns:Zend_Soap_AutoDiscover_TestFunc2Request"/><output message="tns:Zend_Soap_AutoDiscover_TestFunc2Response"/></operation>'.
+                '<operation name="Zend_Soap_AutoDiscover_TestFunc2"><input message="tns:Zend_Soap_AutoDiscover_TestFunc2Request"/></operation>'.
                 '<operation name="Zend_Soap_AutoDiscover_TestFunc3"><input message="tns:Zend_Soap_AutoDiscover_TestFunc3Request"/><output message="tns:Zend_Soap_AutoDiscover_TestFunc3Response"/></operation>'.
                 '<operation name="Zend_Soap_AutoDiscover_TestFunc4"><input message="tns:Zend_Soap_AutoDiscover_TestFunc4Request"/><output message="tns:Zend_Soap_AutoDiscover_TestFunc4Response"/></operation>'.
                 '<operation name="Zend_Soap_AutoDiscover_TestFunc5"><input message="tns:Zend_Soap_AutoDiscover_TestFunc5Request"/><output message="tns:Zend_Soap_AutoDiscover_TestFunc5Response"/></operation>'.
@@ -455,7 +455,7 @@ class Zend_Soap_AutoDiscoverTest extends PHPUnit_Framework_TestCase
                 '<message name="Zend_Soap_AutoDiscover_TestFunc9Request"><part name="foo" type="xsd:string"/><part name="bar" type="xsd:string"/></message>'.
                 '<message name="Zend_Soap_AutoDiscover_TestFunc9Response"><part name="return" type="xsd:string"/></message>'.
                 '</definitions>';
-        $this->assertEquals($wsdl, $this->sanatizeWsdlXmlOutputForOsCompability($dom->saveXML()), "Bad WSDL generated");
+        $this->assertEquals($wsdl, $this->sanatizeWsdlXmlOutputForOsCompability($dom->saveXML()), "Generated WSDL did not match expected XML");
         $this->assertTrue($dom->schemaValidate(dirname(__FILE__) .'/schemas/wsdl.xsd'), "WSDL Did not validate");
 
         unlink(dirname(__FILE__).'/_files/addfunction2.wsdl');
@@ -777,5 +777,35 @@ class Zend_Soap_AutoDiscoverTest extends PHPUnit_Framework_TestCase
         $wsdl = $autodiscover->toXml();
 
         $this->assertContains("http://example.com/?a=b&amp;b=c", $wsdl);
+    }
+
+    /**
+     * @group ZF-6689
+     */
+    public function testNoReturnIsOneWayCallInSetClass()
+    {
+        $autodiscover = new Zend_Soap_AutoDiscover();
+        $autodiscover->setClass('Zend_Soap_AutoDiscover_NoReturnType');
+        $wsdl = $autodiscover->toXml();
+
+        $this->assertContains(
+            '<operation name="pushOneWay"><input message="tns:pushOneWayRequest"/></operation>',
+            $wsdl
+        );
+    }
+
+    /**
+     * @group ZF-6689
+     */
+    public function testNoReturnIsOneWayCallInAddFunction()
+    {
+        $autodiscover = new Zend_Soap_AutoDiscover();
+        $autodiscover->addFunction('Zend_Soap_AutoDiscover_OneWay');
+        $wsdl = $autodiscover->toXml();
+
+        $this->assertContains(
+            '<operation name="Zend_Soap_AutoDiscover_OneWay"><input message="tns:Zend_Soap_AutoDiscover_OneWayRequest"/></operation>',
+            $wsdl
+        );
     }
 }

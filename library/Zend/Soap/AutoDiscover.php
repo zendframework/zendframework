@@ -260,15 +260,6 @@ class Zend_Soap_AutoDiscover implements Zend_Server_Interface {
         $wsdl->addSoapBinding($binding, $this->_bindingStyle['style'], $this->_bindingStyle['transport']);
         $wsdl->addService($class . 'Service', $class . 'Port', 'tns:' . $class . 'Binding', $uri);
         foreach ($this->_reflection->reflectClass($class)->getMethods() as $method) {
-            /* <wsdl:portType>'s */
-            $portOperation = $wsdl->addPortOperation($port, $method->getName(), 'tns:' .$method->getName(). 'Request', 'tns:' .$method->getName(). 'Response');
-            $desc = $method->getDescription();
-            if (strlen($desc) > 0) {
-                /** @todo check, what should be done for portoperation documentation */
-                //$wsdl->addDocumentation($portOperation, $desc);
-            }
-            /* </wsdl:portType>'s */
-
             $this->_functions[] = $method->getName();
 
             $selectedPrototype = null;
@@ -283,6 +274,27 @@ class Zend_Soap_AutoDiscover implements Zend_Server_Interface {
 
             if($selectedPrototype != null) {
                 $prototype = $selectedPrototype;
+
+                $isOneWayCall = false;
+                if ($prototype->getReturnType() == "void") {
+                    $isOneWayCall = true;
+                }
+
+                if($isOneWayCall == true) {
+                    $responseMessage = false;
+                } else {
+                    $responseMessage = 'tns:' .$method->getName(). 'Response';
+                }
+
+                /* <wsdl:portType>'s */
+                $portOperation = $wsdl->addPortOperation($port, $method->getName(), 'tns:' .$method->getName(). 'Request', $responseMessage);
+                $desc = $method->getDescription();
+                if (strlen($desc) > 0) {
+                    /** @todo check, what should be done for portoperation documentation */
+                    //$wsdl->addDocumentation($portOperation, $desc);
+                }
+                /* </wsdl:portType>'s */
+
                 $args = array();
                 foreach($prototype->getParameters() as $param) {
                     $args[$param->getName()] = $wsdl->getType($param->getType());
@@ -349,12 +361,17 @@ class Zend_Soap_AutoDiscover implements Zend_Server_Interface {
                 if (strlen($desc) > 0) {
                     //$wsdl->addDocumentation($message, $desc);
                 }
+                
                 if($prototype->getReturnType() != "void") {
+                    $responseMessage = 'tns:' .$method->getName(). 'Response';
                     $returnName = "return";
                     $message = $wsdl->addMessage($method->getName() . 'Response', array($returnName => $wsdl->getType($prototype->getReturnType())));
+                } else {
+                    $responseMessage = false;
                 }
+                
                  /* <wsdl:portType>'s */
-                   $portOperation = $wsdl->addPortOperation($port, $method->getName(), 'tns:' .$method->getName(). 'Request', 'tns:' .$method->getName(). 'Response');
+                   $portOperation = $wsdl->addPortOperation($port, $method->getName(), 'tns:' .$method->getName(). 'Request', $responseMessage);
                 if (strlen($desc) > 0) {
                     //$wsdl->addDocumentation($portOperation, $desc);
                 }

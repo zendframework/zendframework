@@ -336,3 +336,23 @@ class Zend_Soap_AutoDiscover_Recursion
      */
     public $recursion;
 }
+
+/**
+ * @param string $message
+ */
+function Zend_Soap_AutoDiscover_OneWay($message)
+{
+    
+}
+
+class Zend_Soap_AutoDiscover_NoReturnType
+{
+    /**
+     *
+     * @param string $message
+     */
+    public function pushOneWay($message)
+    {
+
+    }
+}

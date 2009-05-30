@@ -347,13 +347,12 @@ $server->handle();
             <title>Zend_Json_Server_Response</title>
 
             <para>
-                <!-- TODO -->
-                The JSON-RPC response payload is encapsulated in the
-                <classname>Zend_Json_Server_Response</classname> object. This object allows
-                you to set the return value of the request, whether or not the
-                response is an error, the request identifier, the JSON-RPC
-                specification version the response conforms to, and optionally
-                the service map.
+                JSON-RPCレスポンス・ペイロードは、
+                <classname>Zend_Json_Server_Response</classname>オブジェクトにカプセル化されます。
+                このオブジェクトにより、
+                リクエストの戻り値、レスポンスがエラーかどうか、
+                リクエスト識別子、レスポンスが従うJSON-RPC仕様バージョン、
+                そして任意にサービス・マップをセットすることができます。
             </para>
 
             <para>
@@ -405,11 +404,10 @@ $server->handle();
             </itemizedlist>
 
             <para>
-                <!-- TODO -->
-                An HTTP specific version is available via
-                <classname>Zend_Json_Server_Response_Http</classname>. This class will
-                send the appropriate HTTP headers as well as serialize the
-                response as JSON.
+                HTTPに依存したバージョンは、
+                <classname>Zend_Json_Server_Response_Http</classname>を通じて利用できます。
+                このクラスはJSONとしてレスポンスをシリアライズ化するだけでなく、
+                適切なHTTPヘッダを送ります。
             </para>
         </sect3>
 
@@ -417,20 +415,17 @@ $server->handle();
             <title>Zend_Json_Server_Error</title>
 
             <para>
-                <!-- TODO -->
-                JSON-RPC has a special format for reporting error conditions.
-                All errors need to provide, minimally, an error message and error
-                code; optionally, they can provide additional data, such as a
-                backtrace.
+                JSON-RPCには、エラー状況を報告するために、特別なフォーマットがあります。
+                エラーはすべて、最小限、エラー・メッセージとエラーコードを用意する必要があります;
+                任意に、追加のデータ（例えばbacktrace）を用意することができます。
             </para>
 
             <para>
-                <!-- TODO -->
-                Error codes are derived from those recommended by <ulink
-                    url="http://xmlrpc-epi.sourceforge.net/specs/rfc.fault_codes.php">the
-                    XML-RPC EPI project</ulink>. <classname>Zend_Json_Server</classname>
-                appropriately assigns the code based on the error condition. For
-                application exceptions, the code '-32000' is used.
+                エラーコードは、
+                <ulink url="http://xmlrpc-epi.sourceforge.net/specs/rfc.fault_codes.php">
+                XML-RPC EPIプロジェクト</ulink>によって推奨されるコードに由来します。
+                <classname>Zend_Json_Server</classname>は、エラー状態に基づくコードを適切に割り当てます。
+                アプリケーション例外のためには、コード '-32000' が使われます。
             </para>
 
             <para>
@@ -474,55 +469,49 @@ $server->handle();
             <title>Zend_Json_Server_Smd</title>
 
             <para>
-                <!-- TODO -->
-                SMD stands for Service Mapping Description, a JSON schema that
-                defines how a client can interact with a particular web service.
-                At the time of this writing, the <ulink
-                    url="http://groups.google.com/group/json-schema/web/service-mapping-description-proposal">specification</ulink>
-                has not yet been formally ratified, but it is in use already
-                within Dojo toolkit as well as other JSON-RPC consumer clients.
+                SMDは、サービス・マッピング記述、
+                特定のウェブ・サービスとクライアントが相互作用できる方法を定義するJSONスキーマ、を表します。
+                この文書の時点では、
+                <ulink url="http://groups.google.com/group/json-schema/web/service-mapping-description-proposal">
+                仕様</ulink>は正式にまだ批准されませんでした、
+                しかし、それは他のJSON-RPC利用者のクライアントだけでなく、
+                Dojoツールキットの範囲内ですでに使用中です。
             </para>
 
             <para>
-                <!-- TODO -->
-                At its most basic, a Service Mapping Description indicates the
-                method of transport (POST, GET, TCP/IP, etc), the request
-                envelope type (usually based on the protocol of the server), the
-                target URL of the service provider, and a map of services
-                available. In the case of JSON-RPC, the service map is a list of
-                available methods, which each method documenting the available
-                parameters and their types, as well as the expected return value
-                type.
+                最も基本的には、サービス・マッピング記述は、トランスポート（POST、GET、TCP/IP、その他）
+                リクエスト・エンベロープ・タイプ（通常、サーバーのプロトコルに基づきます）、
+                サービスプロバイダのターゲットURL、
+                そして利用できるサービスマップのメソッドを示します。
+                JSON-RPCの場合、サービス・マップは利用できるメソッドのリストです、
+                そしてそれは、各々のメソッドの期待される戻り値タイプだけでなく、
+                利用できるパラメータとタイプを文書化します。
             </para>
 
             <para>
-                <!-- TODO -->
-                <classname>Zend_Json_Server_Smd</classname> provides an object oriented
-                way to build service maps. At its most basic, you pass it
-                metadata describing the service using mutators, and specify
-                services (methods and functions).
+                <classname>Zend_Json_Server_Smd</classname>は、
+                サービス・マップをビルドするオブジェクト指向方法を準備します。
+                最も基本的には、ミューテータを用いてサービスを記述しているメタデータをそれに渡して、
+                サービス（メソッドと関数）を指定します。
             </para>
 
             <para>
-                <!-- TODO -->
-                The service descriptions themselves are typically instances of
-                <classname>Zend_Json_Server_Smd_Service</classname>; you can also pass all
-                information as an array to the various service mutators in
-                <classname>Zend_Json_Server_Smd</classname>, and it will instantiate a
-                service object for you. The service objects contain information
-                such as the name of the service (typically the function or
-                method name), the parameters (names, types, and position), and
-                the return value type. Optionally, each service can have its own
-                target and envelope, though this functionality is rarely used.
+                サービス記述自体は、
+                一般的に<classname>Zend_Json_Server_Smd_Service</classname>のインスタンスです;
+                <classname>Zend_Json_Server_Smd</classname>の
+                いろいろなサービス・ミューテータへの配列としてすべての情報を渡すこともできます、
+                そして、それはサービス・オブジェクトのインスタンスを生成します。
+                サービス・オブジェクトは、サービス名（一般的に関数またはメソッド名）、
+                パラメータ（名前、型と位置）や戻り値の型のような情報を含みます。
+                めったに使われない機能ですが、
+                各々のサービスはそれ自身のターゲットとエンベロープを任意に持つことができます。
             </para>
 
             <para>
-                <!-- TODO -->
-                <classname>Zend_Json_Server</classname> actually does all of this behind
-                the scenes for you, by using reflection on the attached classes
-                and functions; you should create your own service maps only if
-                you need to provide custom functionality that class and function
-                introspection cannot offer.
+                付属のクラスと関数のreflectionを用いて、
+                <classname>Zend_Json_Server</classname>は舞台裏ですべてを実際に行ないます;
+                クラスと関数自身への参照で提供することができないカスタム機能を準備する必要がある場合だけ、
+                あなた自身のサービス・マップを生成しなければなりません。
             </para>
 
             <para>
@@ -645,11 +634,8 @@ $server->handle();
                         current transport.</para></listitem>
                 <listitem><para><code>setTarget($target)</code>:
                     サービスのURLエンドポイントを設定します。
-                    (一般的には、
-                    <!-- TODO -->
-                    this will be the
-                        same as the overall SMD to which the service is
-                        attached).</para></listitem>
+                    (一般的には、サービスが付与される全体的なSMDとこれは同じです。)
+                </para></listitem>
                 <listitem><para><code>getTarget()</code>:
                     サービスのURLエンドポイントを取得します。
                 </para></listitem>
@@ -663,11 +649,10 @@ $server->handle();
                 </para></listitem>
                 <listitem><para><code>addParam($type, array $options = array(),
                             $order = null)</code>:
-                            <!-- TODO -->
-                             Add a parameter to the
-                        service. By default, only the parameter type is
-                        necessary. However, you may also specify the order, as
-                        well as options such as:</para>
+                    サービスにパラメータを追加します。
+                    デフォルトで、パラメータ型だけは必要です。
+                    しかしながら、下記のオプションのように、指令を与えたいかもしれません:
+                    </para>
                     <itemizedlist>
                         <listitem><para><emphasis>name</emphasis>:
                             パラメータ名
@@ -684,13 +669,12 @@ $server->handle();
                     </itemizedlist>
                 </listitem>
                 <listitem><para><code>addParams(array $params)</code>:
-                    <!-- TODO -->
-                     Add
-                    several parameters at once; each param should be an assoc
-                    array containing minimally the key 'type' describing the
-                    parameter type, and optionally the key 'order'; any other
-                    keys will be passed as <code>$options</code> to
-                    <code>addOption()</code>.</para></listitem>
+                    一度にいくつかのパラメータを追加します;
+                    各々のパラメータは、最小限、パラメータ型を記述する '型' 、
+                    さらに任意で '順序' キーを含む連想配列でなければなりません。
+                    その他の全てのキーは<code>addOption()</code>に
+                    <code>$options</code>として渡されます。
+                </para></listitem>
                 <listitem><para><code>setParams(array $params)</code>:
                     一度に複数のパラメーターを設定します。
                     既存のパラメータを全て上書きします。

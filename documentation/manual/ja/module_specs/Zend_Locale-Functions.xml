@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+お<?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15742 -->
+<!-- EN-Revision: 15819 -->
 <sect1 id="zend.locale.functions">
 
     <title>Zend_Locale の使用法</title>
@@ -737,6 +737,13 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             これを使用して、たとえば "(C)" を "©" に置換したりします。
                         </entry>
                     </row>
+                    <row>
+                        <entry><emphasis>LocaleUpgrade</emphasis></entry>
+                        <entry>
+                            ロケールの依存性の一覧を返します。
+                            これを使用して、言語を完全修飾形式のロケールに変換します。
+                        </entry>
+                    </row>
                 </tbody>
             </tgroup>
         </table>
@@ -1298,6 +1305,27 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>NumberingSystem</emphasis></entry>
                         <entry>
                             桁表記に使用する文字を返します。
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>FallbackToChar</emphasis></entry>
+                        <entry>
+                            よく使われる unicode 文字の置換用文字を返します。
+                            これを使用して、たとえば "©" を "(C)" に置換したりします。
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>CharToFallback</emphasis></entry>
+                        <entry>
+                            よく使われる置換用文字に対応する unicode 文字を返します。
+                            これを使用して、たとえば "(C)" を "©" に置換したりします。
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>LocaleUpgrade</emphasis></entry>
+                        <entry>
+                            指定した言語に関するロケールの依存性を返します。
+                            これを使用して、この言語を完全修飾形式のロケールに変換します。
                         </entry>
                     </row>
                 </tbody>

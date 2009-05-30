@@ -125,6 +125,22 @@ interface Zend_View_Helper_Navigation_Helper
      * @return bool  whether ACL should be used
      */
     public function getUseAcl();
+    
+    /**
+     * Return renderInvisible flag
+     *
+     * @return bool
+     */
+    public function getRenderInvisible();
+
+    /**
+     * Render invisible items?
+     *
+     * @param  bool $renderInvisible                       [optional] boolean flag
+     * @return Zend_View_Helper_Navigation_HelperAbstract  fluent interface
+     *                                                     returns self
+     */
+    public function setRenderInvisible($renderInvisible = true);
 
     /**
      * Sets whether translator should be used

@@ -351,4 +351,34 @@ class Zend_View_Helper_Navigation_NavigationTest
 
         $this->assertEquals($expected, $actual);
     }
+
+    /**
+     * @group ZF-6854
+     */
+    public function testRenderInvisibleItem()
+    {
+        $container = new Zend_Navigation(array(
+            array(
+                'label' => 'Page 1',
+                'id'    => 'p1',
+                'uri'   => 'p1'
+            ),
+            array(
+                'label'   => 'Page 2',
+                'id'      => 'p2',
+                'uri'     => 'p2',
+                'visible' => false
+            )
+        ));
+
+        $render = $this->_helper->menu()->render($container);
+
+        $this->assertFalse(strpos($render, 'p2'));
+
+        $this->_helper->menu()->setRenderInvisible();
+
+        $render = $this->_helper->menu()->render($container);
+
+        $this->assertTrue(strpos($render, 'p2') !== false);
+    }
 }

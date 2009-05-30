@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15819 -->
+<!-- EN-Revision: 15831 -->
 <sect1 id="zend.locale.functions">
 
     <title>Zend_Locale の使用法</title>
@@ -444,6 +444,10 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                           <link linkend="zend.date.introduction">Zend_Date</link>
                           を使用します。
                         </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>DateItem</emphasis></entry>
+                        <entry>指定した日付項目あるいは時刻項目に関するデフォルトフォーマットの一覧を返します。</entry>
                     </row>
                     <row>
                         <entry><emphasis>Field</emphasis></entry>
@@ -1015,6 +1019,10 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                           <link linkend="zend.date.introduction">Zend_Date</link>
                           を使用します。
                         </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>DateItem</emphasis></entry>
+                        <entry>指定した日付項目あるいは時刻項目に関するデフォルトフォーマットを返します。</entry>
                     </row>
                     <row>
                         <entry><emphasis>Field</emphasis></entry>

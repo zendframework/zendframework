@@ -49,8 +49,8 @@ $form = new My_Form()
 ]]></programlisting>
 
     <para>
-        You can optionally pass in a instance of <classname>Zend_Config</classname> or an array, which will be used to set
-        object state and potentially create new elements:
+        You can optionally pass in a instance of <classname>Zend_Config</classname> or an array,
+        which will be used to set object state and potentially create new elements:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -438,8 +438,8 @@ $form->setElementDecorators(
 
                     <para>
                         So, use this method wisely, and realize that you may
-                        need to exclude some elements or manually change some elements' decorators to
-                        prevent unwanted output.
+                        need to exclude some elements or manually change some elements' decorators
+                        to prevent unwanted output.
                     </para>
                 </note>
 
@@ -768,7 +768,9 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
                     <itemizedlist>
                         <listitem><para><code>setOptions(array $options)</code></para></listitem>
 
-                        <listitem><para><code>setConfig(Zend_Config $config)</code></para></listitem>
+                        <listitem>
+                            <para><code>setConfig(Zend_Config $config)</code></para>
+                        </listitem>
                     </itemizedlist>
                 </listitem>
 
@@ -808,9 +810,18 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
 
                 <listitem><para>Elements:</para>
                     <itemizedlist>
-                        <listitem><para><code>createElement($type, $name, array $options = array())</code></para></listitem>
+                        <listitem>
+                            <para>
+                                <code>createElement($type, $name, array $options = array())</code>
+                            </para>
+                        </listitem>
 
-                        <listitem><para><code>addElement($typeOrElement, $name, array $options = array())</code></para></listitem>
+                        <listitem>
+                            <para>
+                                <code>addElement($typeOrElement, $name, array $options =
+                                    array())</code>
+                            </para>
+                        </listitem>
 
                         <listitem><para><code>addElements(array $elements)</code></para></listitem>
 
@@ -828,7 +839,11 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
 
                 <listitem><para>Plugin loaders:</para>
                     <itemizedlist>
-                        <listitem><para><code>setPluginLoader(Zend_Loader_PluginLoader $loader)</code></para></listitem>
+                        <listitem>
+                            <para>
+                                <code>setPluginLoader(Zend_Loader_PluginLoader $loader)</code>
+                            </para>
+                        </listitem>
 
                         <listitem><para><code>getPluginLoader()</code></para></listitem>
 
@@ -840,11 +855,17 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
 
                 <listitem><para>Decorators:</para>
                     <itemizedlist>
-                        <listitem><para><code>addDecorator($decorator, $options = null)</code></para></listitem>
+                        <listitem>
+                            <para><code>addDecorator($decorator, $options = null)</code></para>
+                        </listitem>
 
-                        <listitem><para><code>addDecorators(array $decorators)</code></para></listitem>
+                        <listitem>
+                            <para><code>addDecorators(array $decorators)</code></para>
+                        </listitem>
 
-                        <listitem><para><code>setDecorators(array $decorators)</code></para></listitem>
+                        <listitem>
+                            <para><code>setDecorators(array $decorators)</code></para>
+                        </listitem>
 
                         <listitem><para><code>getDecorator($name)</code></para></listitem>
 
@@ -858,17 +879,26 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
 
                 <listitem><para>Rendering:</para>
                     <itemizedlist>
-                        <listitem><para><code>setView(Zend_View_Interface $view = null)</code></para></listitem>
+                        <listitem>
+                            <para><code>setView(Zend_View_Interface $view = null)</code></para>
+                        </listitem>
 
                         <listitem><para><code>getView()</code></para></listitem>
 
-                        <listitem><para><code>render(Zend_View_Interface $view = null)</code></para></listitem>
+                        <listitem>
+                            <para><code>render(Zend_View_Interface $view = null)</code></para>
+                        </listitem>
                     </itemizedlist>
                 </listitem>
 
                 <listitem><para>I18n:</para>
                     <itemizedlist>
-                        <listitem><para><code>setTranslator(Zend_Translate_Adapter $translator = null)</code></para></listitem>
+                        <listitem>
+                            <para>
+                                <code>setTranslator(Zend_Translate_Adapter $translator =
+                                    null)</code>
+                            </para>
+                        </listitem>
 
                         <listitem><para><code>getTranslator()</code></para></listitem>
 
@@ -1291,8 +1321,8 @@ echo $form->renderFieldset("<p>This is fieldset content</p>");
 
         <para>
             A primary use case for forms is validating submitted data.
-            <classname>Zend_Form</classname> allows you to validate an entire form, a partial form, or responses for
-            XmlHttpRequests (AJAX). If the submitted data is not valid, it has
+            <classname>Zend_Form</classname> allows you to validate an entire form, a partial form,
+            or responses for XmlHttpRequests (AJAX). If the submitted data is not valid, it has
             methods for retrieving the various error codes and messages for
             elements and sub forms.
         </para>
@@ -1476,19 +1506,32 @@ $messages = $form->getMessages('username');
 
             <listitem><para>Plugin Loaders and paths:</para>
                 <itemizedlist>
-                    <listitem><para><code>setPluginLoader(Zend_Loader_PluginLoader_Interface $loader, $type = null)</code></para></listitem>
+                    <listitem>
+                        <para>
+                            <code>setPluginLoader(Zend_Loader_PluginLoader_Interface $loader, $type
+                                = null)</code>
+                        </para>
+                    </listitem>
 
                     <listitem><para><code>getPluginLoader($type = null)</code></para></listitem>
 
-                    <listitem><para><code>addPrefixPath($prefix, $path, $type = null) </code></para></listitem>
+                    <listitem>
+                        <para><code>addPrefixPath($prefix, $path, $type = null) </code></para>
+                    </listitem>
 
                     <listitem><para><code>addPrefixPaths(array $spec)</code></para></listitem>
 
-                    <listitem><para><code>addElementPrefixPath($prefix, $path, $type = null)</code></para></listitem>
+                    <listitem>
+                        <para><code>addElementPrefixPath($prefix, $path, $type = null)</code></para>
+                    </listitem>
 
-                    <listitem><para><code>addElementPrefixPaths(array $spec)</code></para></listitem>
+                    <listitem>
+                        <para><code>addElementPrefixPaths(array $spec)</code></para>
+                    </listitem>
 
-                    <listitem><para><code>addDisplayGroupPrefixPath($prefix, $path)</code></para></listitem>
+                    <listitem>
+                        <para><code>addDisplayGroupPrefixPath($prefix, $path)</code></para>
+                    </listitem>
                 </itemizedlist>
             </listitem>
 
@@ -1552,13 +1595,17 @@ $messages = $form->getMessages('username');
 
                     <listitem><para><code>setElementFilters(array $filters)</code></para></listitem>
 
-                    <listitem><para><code>setElementDecorators(array $decorators)</code></para></listitem>
+                    <listitem>
+                        <para><code>setElementDecorators(array $decorators)</code></para>
+                    </listitem>
                 </itemizedlist>
             </listitem>
 
             <listitem><para>Sub forms:</para>
                 <itemizedlist>
-                    <listitem><para><code>addSubForm(Zend_Form $form, $name, $order = null)</code></para></listitem>
+                    <listitem>
+                        <para><code>addSubForm(Zend_Form $form, $name, $order = null)</code></para>
+                    </listitem>
 
                     <listitem><para><code>addSubForms(array $subForms)</code></para></listitem>
 
@@ -1572,13 +1619,19 @@ $messages = $form->getMessages('username');
 
                     <listitem><para><code>clearSubForms()</code></para></listitem>
 
-                    <listitem><para><code>setSubFormDecorators(array $decorators)</code></para></listitem>
+                    <listitem>
+                        <para><code>setSubFormDecorators(array $decorators)</code></para>
+                    </listitem>
                 </itemizedlist>
             </listitem>
 
             <listitem><para>Display groups:</para>
                 <itemizedlist>
-                    <listitem><para><code>addDisplayGroup(array $elements, $name, $options = null)</code></para></listitem>
+                    <listitem>
+                        <para>
+                            <code>addDisplayGroup(array $elements, $name, $options = null)</code>
+                        </para>
+                    </listitem>
 
                     <listitem><para><code>addDisplayGroups(array $groups)</code></para></listitem>
 
@@ -1592,7 +1645,9 @@ $messages = $form->getMessages('username');
 
                     <listitem><para><code>clearDisplayGroups()</code></para></listitem>
 
-                    <listitem><para><code>setDisplayGroupDecorators(array $decorators)</code></para></listitem>
+                    <listitem>
+                        <para><code>setDisplayGroupDecorators(array $decorators)</code></para>
+                    </listitem>
                 </itemizedlist>
             </listitem>
 
@@ -1616,11 +1671,15 @@ $messages = $form->getMessages('username');
 
             <listitem><para>Rendering:</para>
                 <itemizedlist>
-                    <listitem><para><code>setView(Zend_View_Interface $view = null)</code></para></listitem>
+                    <listitem>
+                        <para><code>setView(Zend_View_Interface $view = null)</code></para>
+                    </listitem>
 
                     <listitem><para><code>getView()</code></para></listitem>
 
-                    <listitem><para><code>addDecorator($decorator, $options = null)</code></para></listitem>
+                    <listitem>
+                        <para><code>addDecorator($decorator, $options = null)</code></para>
+                    </listitem>
 
                     <listitem><para><code>addDecorators(array $decorators)</code></para></listitem>
 
@@ -1634,13 +1693,19 @@ $messages = $form->getMessages('username');
 
                     <listitem><para><code>clearDecorators()</code></para></listitem>
 
-                    <listitem><para><code>render(Zend_View_Interface $view = null)</code></para></listitem>
+                    <listitem>
+                        <para><code>render(Zend_View_Interface $view = null)</code></para>
+                    </listitem>
                 </itemizedlist>
             </listitem>
 
             <listitem><para>I18n:</para>
                 <itemizedlist>
-                    <listitem><para><code>setTranslator(Zend_Translate_Adapter $translator = null)</code></para></listitem>
+                    <listitem>
+                        <para>
+                            <code>setTranslator(Zend_Translate_Adapter $translator = null)</code>
+                        </para>
+                    </listitem>
 
                     <listitem><para><code>getTranslator()</code></para></listitem>
 
@@ -1695,7 +1760,9 @@ $messages = $form->getMessages('username');
                 <para>the following setters cannot be set in this way:</para>
 
                 <itemizedlist>
-                    <listitem><para><code>setAttrib (though setAttribs *will* work)</code></para></listitem>
+                    <listitem>
+                        <para><code>setAttrib (though setAttribs *will* work)</code></para>
+                    </listitem>
 
                     <listitem><para><code>setConfig</code></para></listitem>
 

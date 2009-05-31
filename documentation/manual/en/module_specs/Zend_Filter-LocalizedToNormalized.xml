@@ -16,8 +16,9 @@
 
     <note>
         <para>
-            Please note that normalization is not equal to translation. This filter can not translate
-            strings from one language into another like you could expect with months or names of days.
+            Please note that normalization is not equal to translation. This filter can not
+            translate strings from one language into another like you could expect with months or
+            names of days.
         </para>
     </note>
 
@@ -28,8 +29,8 @@
     <itemizedlist>
         <listitem>
             <para>
-                <emphasis>integer</emphasis>: Integer numbers, which are localized, will be normalized
-                to the english notation.
+                <emphasis>integer</emphasis>: Integer numbers, which are localized, will be
+                normalized to the english notation.
             </para>
         </listitem>
 
@@ -94,14 +95,16 @@ $filter->filter('123.456,78');
 
         <para>
             Let's expect you have set the locale 'de' as application wide locale.
-            <classname>Zend_Filter_LocalizedToNormalized</classname> will take the set locale and use it to
-            detect which sort of input you gave. In our example it was a value with precision. Now
-            the filter will return you the normalized representation for this value as string.
+            <classname>Zend_Filter_LocalizedToNormalized</classname> will take the set locale and
+            use it to detect which sort of input you gave. In our example it was a value with
+            precision. Now the filter will return you the normalized representation for this value
+            as string.
         </para>
 
         <para>
             You can also control how your normalized number has to look like. Therefor you can give
-            all options which are also used by <classname>Zend_Locale_Format</classname>. The most common are:
+            all options which are also used by <classname>Zend_Locale_Format</classname>. The most
+            common are:
         </para>
 
         <itemizedlist>

@@ -3,28 +3,30 @@
 <sect1 id="zend.feed.consuming-rss">
     <title>Consuming an RSS Feed</title>
     <para>
-        Reading an RSS feed is as simple as instantiating a <classname>Zend_Feed_Rss</classname> object with the URL
-        of the feed:
+        Reading an RSS feed is as simple as instantiating a <classname>Zend_Feed_Rss</classname>
+        object with the URL of the feed:
     </para>
     <programlisting language="php"><![CDATA[
 $channel = new Zend_Feed_Rss('http://rss.example.com/channelName');
 ]]></programlisting>
     <para>
-        If any errors occur fetching the feed, a <classname>Zend_Feed_Exception</classname> will be thrown.
+        If any errors occur fetching the feed, a <classname>Zend_Feed_Exception</classname> will be
+        thrown.
     </para>
 
     <para>
-        Once you have a feed object, you can access any of the standard RSS "channel" properties directly
-        on the object:
+        Once you have a feed object, you can access any of the standard RSS "channel" properties
+        directly on the object:
     </para>
     <programlisting language="php"><![CDATA[
 echo $channel->title();
 ]]></programlisting>
     <para>
-        Note the function syntax. <classname>Zend_Feed</classname> uses a convention of treating properties as XML
-        object if they are requested with variable "getter" syntax (<code>$obj->property</code>) and as
-        strings if they are access with method syntax (<code>$obj->property()</code>). This enables access
-        to the full text of any individual node while still allowing full access to all children.
+        Note the function syntax. <classname>Zend_Feed</classname> uses a convention of treating
+        properties as XML object if they are requested with variable "getter" syntax
+        (<code>$obj->property</code>) and as strings if they are access with method syntax
+        (<code>$obj->property()</code>). This enables access to the full text of any individual node
+        while still allowing full access to all children.
     </para>
 
     <para>
@@ -34,14 +36,14 @@ echo $channel->title();
 echo $channel->category['domain'];
 ]]></programlisting>
     <para>
-        Since XML attributes cannot have children, method syntax is not necessary for accessing attribute
-        values.
+        Since XML attributes cannot have children, method syntax is not necessary for accessing
+        attribute values.
     </para>
 
     <para>
         Most commonly you'll want to loop through the feed and do something with its entries.
-        <classname>Zend_Feed_Abstract</classname> implements PHP's <code>Iterator</code> interface, so printing all
-        titles of articles in a channel is just a matter of:
+        <classname>Zend_Feed_Abstract</classname> implements PHP's <code>Iterator</code> interface,
+        so printing all titles of articles in a channel is just a matter of:
     </para>
     <programlisting language="php"><![CDATA[
 foreach ($channel as $item) {
@@ -49,8 +51,8 @@ foreach ($channel as $item) {
 }
 ]]></programlisting>
     <para>
-        If you are not familiar with RSS, here are the standard elements you can expect to be available in
-        an RSS channel and in individual RSS items (entries).
+        If you are not familiar with RSS, here are the standard elements you can expect to be
+        available in an RSS channel and in individual RSS items (entries).
     </para>
 
     <para>
@@ -63,7 +65,9 @@ foreach ($channel as $item) {
                 <para><code>title</code> - The name of the channel</para>
             </listitem>
             <listitem>
-                <para><code>link</code> - The URL of the web site corresponding to the channel</para>
+                <para>
+                    <code>link</code> - The URL of the web site corresponding to the channel
+                </para>
             </listitem>
             <listitem>
                 <para><code>description</code> - A sentence or several describing the channel</para>
@@ -78,22 +82,26 @@ foreach ($channel as $item) {
     <para>
         <itemizedlist>
             <listitem>
-                <para><code>pubDate</code> - The publication date of this set of content, in RFC 822 date
-                format</para>
+                <para>
+                    <code>pubDate</code> - The publication date of this set of content, in RFC 822
+                    date format
+                </para>
             </listitem>
             <listitem>
                 <para><code>language</code> - The language the channel is written in</para>
             </listitem>
             <listitem>
-                <para><code>category</code> - One or more (specified by multiple tags) categories the
-                channel belongs to</para>
+                <para>
+                    <code>category</code> - One or more (specified by multiple tags) categories the
+                    channel belongs to
+                </para>
             </listitem>
         </itemizedlist>
     </para>
 
     <para>
-        RSS <code>&lt;item&gt;</code> elements do not have any strictly required elements. However, either
-        <code>title</code> or <code>description</code> must be present.
+        RSS <code>&lt;item&gt;</code> elements do not have any strictly required elements. However,
+        either <code>title</code> or <code>description</code> must be present.
     </para>
 
     <para>
@@ -115,13 +123,17 @@ foreach ($channel as $item) {
                 <para><code>author</code> - The author's email address</para>
             </listitem>
             <listitem>
-                <para><code>category</code> - One more more categories that the item belongs to</para>
+                <para>
+                    <code>category</code> - One more more categories that the item belongs to
+                </para>
             </listitem>
             <listitem>
                 <para><code>comments</code> - URL of comments relating to this item</para>
             </listitem>
             <listitem>
-                <para><code>pubDate</code> - The date the item was published, in RFC 822 date format</para>
+                <para>
+                    <code>pubDate</code> - The date the item was published, in RFC 822 date format
+                </para>
             </listitem>
         </itemizedlist>
     </para>
@@ -136,13 +148,13 @@ if ($item->propname()) {
 ]]></programlisting>
 
     <para>
-        If you use <code>$item->propname</code> instead, you will always get an empty object which will
-        evaluate to <constant>TRUE</constant>, so your check will fail.
+        If you use <code>$item->propname</code> instead, you will always get an empty object which
+        will evaluate to <constant>TRUE</constant>, so your check will fail.
     </para>
 
     <para>
-        For further information, the official RSS 2.0 specification is available at:
-        <ulink url="http://blogs.law.harvard.edu/tech/rss">http://blogs.law.harvard.edu/tech/rss</ulink>
+        For further information, the official RSS 2.0 specification is available at: <ulink
+            url="http://blogs.law.harvard.edu/tech/rss">http://blogs.law.harvard.edu/tech/rss</ulink>
     </para>
 </sect1>
 <!--

@@ -434,8 +434,8 @@ $inflector->addRules(array(
         <para>
             You can use <classname>Zend_Config</classname> to set rules, filter prefix
             paths, and other object state in your inflectors, either by passing
-            a <classname>Zend_Config</classname> object to the constructor or <code>setConfig()</code>.
-            The following settings may be specified:
+            a <classname>Zend_Config</classname> object to the constructor or
+            <code>setConfig()</code>. The following settings may be specified:
         </para>
 
         <itemizedlist>

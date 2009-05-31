@@ -39,12 +39,13 @@
 
                 <itemizedlist>
                     <listitem><para>
-                        Old method API: <classname>Zend_Filter_File_Rename($oldfile, $newfile, $overwrite)</classname>
+                        Old method API: <classname>Zend_Filter_File_Rename($oldfile, $newfile,
+                            $overwrite)</classname>
                     </para></listitem>
 
                     <listitem><para>
-                        New method API: <classname>Zend_Filter_File_Rename($options)</classname> where $options accepts
-                        the following array keys:
+                        New method API: <classname>Zend_Filter_File_Rename($options)</classname>
+                        where $options accepts the following array keys:
                         <emphasis>source</emphasis> equals to $oldfile,
                         <emphasis>target</emphasis> equals to $newfile,
                         <emphasis>overwrite</emphasis> equals to $overwrite
@@ -79,8 +80,8 @@ $upload->addFilter('Rename',
                     </para></listitem>
 
                     <listitem><para>
-                        New method API: <classname>Zend_Validate_File_Count($options)</classname> where $options accepts
-                        the following array keys:
+                        New method API: <classname>Zend_Validate_File_Count($options)</classname>
+                        where $options accepts the following array keys:
                         <emphasis>min</emphasis> equals to $min,
                         <emphasis>max</emphasis> equals to $max,
                     </para></listitem>
@@ -110,12 +111,14 @@ $upload->addValidator('Count',
 
                 <itemizedlist>
                     <listitem><para>
-                        Old method API: <classname>Zend_Validate_File_Extension($extension, $case)</classname>
+                        Old method API: <classname>Zend_Validate_File_Extension($extension,
+                            $case)</classname>
                     </para></listitem>
 
                     <listitem><para>
-                        New method API: <classname>Zend_Validate_File_Extension($options)</classname> where $options accepts
-                        the following array keys:
+                        New method API:
+                        <classname>Zend_Validate_File_Extension($options)</classname> where $options
+                        accepts the following array keys:
                         <emphasis>*</emphasis> equals to $extension and can have any other key,
                         <emphasis>case</emphasis> equals to $case,
                     </para></listitem>
@@ -145,12 +148,14 @@ $upload->addValidator('Extension',
 
                 <itemizedlist>
                     <listitem><para>
-                        Old method API: <classname>Zend_Validate_File_FilesSize($min, $max, $bytestring)</classname>
+                        Old method API: <classname>Zend_Validate_File_FilesSize($min, $max,
+                            $bytestring)</classname>
                     </para></listitem>
 
                     <listitem><para>
-                        New method API: <classname>Zend_Validate_File_FilesSize($options)</classname> where $options accepts
-                        the following array keys:
+                        New method API:
+                        <classname>Zend_Validate_File_FilesSize($options)</classname> where $options
+                        accepts the following array keys:
                         <emphasis>min</emphasis> equals to $min,
                         <emphasis>max</emphasis> equals to $max,
                         <emphasis>bytestring</emphasis> equals to $bytestring
@@ -196,12 +201,13 @@ $upload->setUseByteSting(true); // set flag
 
                 <itemizedlist>
                     <listitem><para>
-                        Old method API: <classname>Zend_Validate_File_Hash($hash, $algorithm)</classname>
+                        Old method API: <classname>Zend_Validate_File_Hash($hash,
+                            $algorithm)</classname>
                     </para></listitem>
 
                     <listitem><para>
-                        New method API: <classname>Zend_Validate_File_Hash($options)</classname> where $options accepts
-                        the following array keys:
+                        New method API: <classname>Zend_Validate_File_Hash($options)</classname>
+                        where $options accepts the following array keys:
                         <emphasis>*</emphasis> equals to $hash and can have any other key,
                         <emphasis>algorithm</emphasis> equals to $algorithm,
                     </para></listitem>
@@ -231,14 +237,15 @@ $upload->addValidator('Hash',
 
                 <itemizedlist>
                     <listitem><para>
-                        Old method API: <classname>Zend_Validate_File_ImageSize($minwidth, $minheight, $maxwidth, $maxheight)</classname>
+                        Old method API: <classname>Zend_Validate_File_ImageSize($minwidth,
+                            $minheight, $maxwidth, $maxheight)</classname>
                     </para></listitem>
 
                     <listitem><para>
-                        New method API: <classname>Zend_Validate_File_FilesSize($options)</classname> where $options accepts
-                        the following array keys:
-                        <emphasis>minwidth</emphasis> equals to $minwidth,
-                        <emphasis>maxwidth</emphasis> equals to $maxwidth,
+                        New method API:
+                        <classname>Zend_Validate_File_FilesSize($options)</classname> where $options
+                        accepts the following array keys: <emphasis>minwidth</emphasis> equals to
+                        $minwidth, <emphasis>maxwidth</emphasis> equals to $maxwidth,
                         <emphasis>minheight</emphasis> equals to $minheight,
                         <emphasis>maxheight</emphasis> equals to $maxheight,
                     </para></listitem>
@@ -270,12 +277,13 @@ $upload->addValidator('ImageSize',
 
                 <itemizedlist>
                     <listitem><para>
-                        Old method API: <classname>Zend_Validate_File_Size($min, $max, $bytestring)</classname>
+                        Old method API: <classname>Zend_Validate_File_Size($min, $max,
+                            $bytestring)</classname>
                     </para></listitem>
 
                     <listitem><para>
-                        New method API: <classname>Zend_Validate_File_Size($options)</classname> where $options accepts
-                        the following array keys:
+                        New method API: <classname>Zend_Validate_File_Size($options)</classname>
+                        where $options accepts the following array keys:
                         <emphasis>min</emphasis> equals to $min,
                         <emphasis>max</emphasis> equals to $max,
                         <emphasis>bytestring</emphasis> equals to $bytestring
@@ -311,10 +319,10 @@ $upload->addValidator('Size',
 
             <para>
                 As noted by users, the validators from <classname>Zend_File_Transfer</classname>
-                do not work the same way like the default ones from <classname>Zend_Form</classname>.
-                <classname>Zend_Form</classname> allows the usage of a <code>breakChainOnFailure</code>
-                parameter which breaks the validation for all further validators when an
-                validation error has occurred.
+                do not work the same way like the default ones from
+                <classname>Zend_Form</classname>. <classname>Zend_Form</classname> allows the usage
+                of a <code>breakChainOnFailure</code> parameter which breaks the validation for all
+                further validators when an validation error has occurred.
             </para>
 
             <para>
@@ -328,7 +336,8 @@ $upload->addValidator('Size',
                 </para></listitem>
 
                 <listitem><para>
-                    New method API: <code>addValidator($validator, $breakChainOnFailure, $options, $files)</code>.
+                    New method API: <code>addValidator($validator, $breakChainOnFailure, $options,
+                        $files)</code>.
                 </para></listitem>
             </itemizedlist>
 

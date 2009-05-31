@@ -5,8 +5,8 @@
 
     <para>
         Increasingly, developers need to tailor their content for multiple
-        languages and regions. <classname>Zend_Form</classname> aims to make such a task trivial, and
-        leverages functionality in both <link
+        languages and regions. <classname>Zend_Form</classname> aims to make such a task trivial,
+        and leverages functionality in both <link
             linkend="zend.translate">Zend_Translate</link> and <link
             linkend="zend.validate">Zend_Validate</link> to do so.
     </para>

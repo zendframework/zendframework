@@ -249,8 +249,8 @@ $location = $form->foo->getFileName();
             <para>
                 Within HTTP a file element has no value. For this reason and because of
                 security concerns <code>getValue()</code> returns only the uploaded filename
-                and not the complete path. If you need the file path,
-                call <code>getFileName()</code>, which returns both the path and the name of the file.
+                and not the complete path. If you need the file path, call
+                <code>getFileName()</code>, which returns both the path and the name of the file.
             </para>
         </note>
 
@@ -268,8 +268,8 @@ $form->getValues();
             <para>
                 Therefor another call of <code>receive()</code> after calling
                 <code>getValues()</code> will not have an effect. Also creating a instance of
-                <classname>Zend_File_Transfer</classname> will not have an effect as there no file anymore
-                to receive.
+                <classname>Zend_File_Transfer</classname> will not have an effect as there no file
+                anymore to receive.
             </para>
         </note>
 
@@ -445,9 +445,9 @@ $form->addElement($element, 'foo');
         <title>Zend_Form_Element_Hidden</title>
 
         <para>
-            Hidden elements inject data that should be submitted, but
-            that should not manipulated by the user .
-            <classname>Zend_Form_Element_Hidden</classname> accomplishes this with the 'formHidden' view helper.
+            Hidden elements inject data that should be submitted, but that should not manipulated by
+            the user . <classname>Zend_Form_Element_Hidden</classname> accomplishes this with the
+            'formHidden' view helper.
         </para>
     </sect2>
 
@@ -502,8 +502,8 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
         <para>
             Images need an image source. <classname>Zend_Form_Element_Image</classname>
             allows you to specify this by using the <code>setImage()</code>
-            accessor (or 'image' configuration key). You can also optionally specify a value to use when
-            submitting the image using the <code>setImageValue()</code> accessor
+            accessor (or 'image' configuration key). You can also optionally specify a value to use
+            when submitting the image using the <code>setImageValue()</code> accessor
             (or 'imageValue' configuration key). When the value set for the
             element matches the <code>imageValue</code>, then the accessor
             <code>isChecked()</code> will return true.

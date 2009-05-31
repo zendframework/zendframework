@@ -5,13 +5,14 @@
     <title>Filters for Zend_File_Transfer</title>
 
     <para>
-        <classname>Zend_File_Transfer</classname> is delivered with several file related filters which can be
-        used to automate several tasks which are often done on files. Note that file filters are
-        applied after validation. Also file filters behave slightly different that other filters.
-        They will always return the file name and not the changed content (which would be a bad idea
-        when working on 1GB files). All filters which are provided with <classname>Zend_File_Transfer</classname> can
-        be found in the <classname>Zend_Filter</classname> component and are named <classname>Zend_Filter_File_*</classname>.
-        The following filters are actually available:
+        <classname>Zend_File_Transfer</classname> is delivered with several file related filters
+        which can be used to automate several tasks which are often done on files. Note that file
+        filters are applied after validation. Also file filters behave slightly different that other
+        filters. They will always return the file name and not the changed content (which would be a
+        bad idea when working on 1GB files). All filters which are provided with
+        <classname>Zend_File_Transfer</classname> can be found in the
+        <classname>Zend_Filter</classname> component and are named
+        <classname>Zend_Filter_File_*</classname>. The following filters are actually available:
     </para>
 
     <itemizedlist>
@@ -32,8 +33,8 @@
         </listitem>
         <listitem>
             <para>
-                <code>Rename</code>: This filter can rename files, change the location and even force
-                overwriting of existing files.
+                <code>Rename</code>: This filter can rename files, change the location and even
+                force overwriting of existing files.
             </para>
         </listitem>
         <listitem>
@@ -47,7 +48,8 @@
         <title>Using filters with Zend_File_Transfer</title>
 
         <para>
-            The usage of filters is quite simple. There are several methods for adding and manipulating filters.
+            The usage of filters is quite simple. There are several methods for adding and
+            manipulating filters.
         </para>
 
         <itemizedlist>
@@ -156,17 +158,18 @@ $upload->addFilter('Rename', 'C:\picture\uploads', 'file2');
         </example>
 
         <para>
-            Generally you should simply use the <code>addFilters()</code> method, which can be called
-            multiple times.
+            Generally you should simply use the <code>addFilters()</code> method, which can be
+            called multiple times.
         </para>
 
         <example id="zend.file.transfer.filters.usage.examplemultiple">
             <title>Add multiple filters</title>
 
             <para>
-                Often it's simpler just to call <code>addFilter()</code> multiple times. One call for each
-                filter. This also increases the readability and makes your code more maintainable. As all
-                methods provide a fluent interface you can couple the calls as shown below:
+                Often it's simpler just to call <code>addFilter()</code> multiple times. One call
+                for each filter. This also increases the readability and makes your code more
+                maintainable. As all methods provide a fluent interface you can couple the calls as
+                shown below:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -197,15 +200,17 @@ $upload->addFilter('Rename', 'C:\picture\newjpg', 'file1')
         </para>
 
         <para>
-            This filter makes use of <classname>Zend_Filter_Decrypt</classname>. It supports the <code>Mcrypt</code>
-            and <code>OpenSSL</code> extensions from PHP. Please read the related section for
-            details about how to set the options for decryption and which options are supported.
+            This filter makes use of <classname>Zend_Filter_Decrypt</classname>. It supports the
+            <code>Mcrypt</code> and <code>OpenSSL</code> extensions from PHP. Please read the
+            related section for details about how to set the options for decryption and which
+            options are supported.
         </para>
 
         <para>
-            This filter supports one additional option which can be used to save the decrypted file with another
-            filename. Set the <code>filename</code> option to change the filename where the decrypted file will
-            be stored. If you suppress this option, the decrypted file will overwrite the original encrypted file.
+            This filter supports one additional option which can be used to save the decrypted file
+            with another filename. Set the <code>filename</code> option to change the filename where
+            the decrypted file will be stored. If you suppress this option, the decrypted file will
+            overwrite the original encrypted file.
         </para>
 
         <example id="zend.file.transfer.filters.decrypt.example1">
@@ -247,15 +252,17 @@ $upload->addFilter('Decrypt',
         </para>
 
         <para>
-            This filter makes use of <classname>Zend_Filter_Encrypt</classname>. It supports the <code>Mcrypt</code>
-            and <code>OpenSSL</code> extensions from PHP. Please read the related section for
-            details about how to set the options for encryption and which options are supported.
+            This filter makes use of <classname>Zend_Filter_Encrypt</classname>. It supports the
+            <code>Mcrypt</code> and <code>OpenSSL</code> extensions from PHP. Please read the
+            related section for details about how to set the options for encryption and which
+            options are supported.
         </para>
 
         <para>
-            This filter supports one additional option which can be used to save the encrypted file with another
-            filename. Set the <code>filename</code> option to change the filename where the encrypted file will
-            be stored. If you suppress this option, the encrypted file will overwrite the original file.
+            This filter supports one additional option which can be used to save the encrypted file
+            with another filename. Set the <code>filename</code> option to change the filename where
+            the encrypted file will be stored. If you suppress this option, the encrypted file will
+            overwrite the original file.
         </para>
 
         <example id="zend.file.transfer.filters.encrypt.example1">
@@ -297,8 +304,8 @@ $upload->addFilter('Encrypt',
         </para>
 
         <para>
-            At initiation you can give a string which will then be used as encoding. Or you can use the
-            <code>setEncoding()</code> method to set it afterwards.
+            At initiation you can give a string which will then be used as encoding. Or you can use
+            the <code>setEncoding()</code> method to set it afterwards.
         </para>
 
         <example id="zend.file.transfer.filters.lowercase.example">
@@ -322,8 +329,9 @@ $upload->addFilter('LowerCase', 'ISO-8859-1');
 
         <note>
             <para>
-                Note that due to the fact that the options for the LowerCase filter are optional, you must give
-                a null as second parameter (the options) when you want to limit it to a single file element.
+                Note that due to the fact that the options for the LowerCase filter are optional,
+                you must give a null as second parameter (the options) when you want to limit it to
+                a single file element.
             </para>
         </note>
 
@@ -333,14 +341,15 @@ $upload->addFilter('LowerCase', 'ISO-8859-1');
         <title>Rename filter</title>
 
         <para>
-            The <code>Rename</code> filter allows to change the destination of the upload, the filename
-            and also to overwrite existing files. It supports the following options:
+            The <code>Rename</code> filter allows to change the destination of the upload, the
+            filename and also to overwrite existing files. It supports the following options:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>source</code>: The name and destination of the old file which shall be renamed.
+                    <code>source</code>: The name and destination of the old file which shall be
+                    renamed.
                 </para>
             </listitem>
 
@@ -352,17 +361,18 @@ $upload->addFilter('LowerCase', 'ISO-8859-1');
 
             <listitem>
                 <para>
-                    <code>overwrite</code>: Sets if the old file overwrites the new one if it already exists.
-                    The default value is false.
+                    <code>overwrite</code>: Sets if the old file overwrites the new one if it
+                    already exists. The default value is false.
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
-            Additionally you can also use the method <code>setFile()</code> to set files, which erases
-            all previous set, <code>addFile()</code> to add a new file to existing ones, and
-            <code>getFile()</code> to get all actually set files. To simplify things, this filter understands
-            several notations and that methods and constructor understand the same notations.
+            Additionally you can also use the method <code>setFile()</code> to set files, which
+            erases all previous set, <code>addFile()</code> to add a new file to existing ones, and
+            <code>getFile()</code> to get all actually set files. To simplify things, this filter
+            understands several notations and that methods and constructor understand the same
+            notations.
         </para>
 
         <example id="zend.file.transfer.filters.rename.example">
@@ -381,9 +391,9 @@ $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
         </example>
 
         <para>
-            You can use different notations. Below is a table where you will find a description and the
-            intention for the supported notations. Note that when you use the Adapter or the Form Element
-            you will not be able to use all described notations.
+            You can use different notations. Below is a table where you will find a description and
+            the intention for the supported notations. Note that when you use the Adapter or the
+            Form Element you will not be able to use all described notations.
         </para>
 
         <table id="zend.file.transfer.filters.rename.notations">
@@ -407,9 +417,9 @@ $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
                             addFile('C:\uploads')
                         </entry>
                         <entry>
-                            Specifies a new location for all files when the given string is a directory.
-                            Note that you will get an exception when the file already exists, see the
-                            overwriting parameter.
+                            Specifies a new location for all files when the given string is a
+                            directory. Note that you will get an exception when the file already
+                            exists, see the overwriting parameter.
                         </entry>
                     </row>
                     <row>
@@ -417,9 +427,9 @@ $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
                             addFile('C:\uploads\file.ext')
                         </entry>
                         <entry>
-                            Specifies a new location and filename for all files when the given string is
-                            not detected as directory. Note that you will get an exception when the file
-                            already exists, see the overwriting parameter.
+                            Specifies a new location and filename for all files when the given
+                            string is not detected as directory. Note that you will get an exception
+                            when the file already exists, see the overwriting parameter.
                         </entry>
                     </row>
                     <row>
@@ -427,9 +437,10 @@ $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
                             addFile(array('C:\uploads\file.ext', 'overwrite' => true))
                         </entry>
                         <entry>
-                            Specifies a new location and filename for all files when the given string is
-                            not detected as directory and overwrites an existing file with the same target name.
-                            Note, that you will get no notification that a file was overwritten.
+                            Specifies a new location and filename for all files when the given
+                            string is not detected as directory and overwrites an existing file with
+                            the same target name. Note, that you will get no notification that a
+                            file was overwritten.
                         </entry>
                     </row>
                     <row>
@@ -437,19 +448,21 @@ $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
                             addFile(array('source' => 'C:\temp\uploads', 'target' => 'C:\uploads'))
                         </entry>
                         <entry>
-                            Specifies a new location for all files in the old location when the given strings are
-                            detected as directory. Note that you will get an exception when the file
-                            already exists, see the overwriting parameter.
+                            Specifies a new location for all files in the old location when the
+                            given strings are detected as directory. Note that you will get an
+                            exception when the file already exists, see the overwriting parameter.
                         </entry>
                     </row>
                     <row>
                         <entry>
-                            addFile(array('source' => 'C:\temp\uploads', 'target' => 'C:\uploads', 'overwrite' => true))
+                            addFile(array('source' => 'C:\temp\uploads', 'target' => 'C:\uploads',
+                            'overwrite' => true))
                         </entry>
                         <entry>
-                            Specifies a new location for all files in the old location when the given strings are
-                            detected as directory and overwrites and existing file with the same target name.
-                            Note, that you will get no notification that a file was overwritten.
+                            Specifies a new location for all files in the old location when the
+                            given strings are detected as directory and overwrites and existing file
+                            with the same target name. Note, that you will get no notification that
+                            a file was overwritten.
                         </entry>
                     </row>
                 </tbody>
@@ -468,8 +481,8 @@ $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
         </para>
 
         <para>
-            At initiation you can give a string which will then be used as encoding. Or you can use the
-            <code>setEncoding()</code> method to set it afterwards.
+            At initiation you can give a string which will then be used as encoding. Or you can use
+            the <code>setEncoding()</code> method to set it afterwards.
         </para>
 
         <example id="zend.file.transfer.filters.uppercase.example">
@@ -493,8 +506,9 @@ $upload->addFilter('UpperCase', 'ISO-8859-1');
 
         <note>
             <para>
-                Note that due to the fact that the options for the UpperCase filter are optional, you must give
-                a null as second parameter (the options) when you want to limit it to a single file element.
+                Note that due to the fact that the options for the UpperCase filter are optional,
+                you must give a null as second parameter (the options) when you want to limit it to
+                a single file element.
             </para>
         </note>
 

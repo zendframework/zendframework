@@ -17,10 +17,11 @@
     </itemizedlist>
 
     <para>
-        <classname>Zend_Form</classname> makes use of several Zend Framework components to accomplish its
-        goals, including <classname>Zend_Config</classname>, <classname>Zend_Validate</classname>,
-        <classname>Zend_Filter</classname>, <classname>Zend_Loader_PluginLoader</classname>, and
-        optionally <classname>Zend_View</classname>.
+        <classname>Zend_Form</classname> makes use of several Zend Framework components to
+        accomplish its goals, including <classname>Zend_Config</classname>,
+        <classname>Zend_Validate</classname>, <classname>Zend_Filter</classname>,
+        <classname>Zend_Loader_PluginLoader</classname>, and optionally
+        <classname>Zend_View</classname>.
     </para>
 </sect1>
 <!--

@@ -157,8 +157,8 @@ $username->addValidator('alnum');
 ]]></programlisting>
 
         <para>
-            When using this second option, you can pass constructor arguments in an array as the third
-            parameter if the validator can accept tem:
+            When using this second option, you can pass constructor arguments in an array as the
+            third parameter if the validator can accept tem:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -549,8 +549,8 @@ class UserController extends Zend_Controller_Action
 
         <para>
             As you'll note from the controller code, there's more work to do:
-            while the submission may be valid, you may still need to do some
-            authentication using <classname>Zend_Auth</classname> or another authorization mechanism.
+            while the submission may be valid, you may still need to do some authentication
+            using <classname>Zend_Auth</classname> or another authorization mechanism.
         </para>
     </sect2>
 

@@ -182,9 +182,9 @@ $form->addElementPrefixPath('My_Decorator', 'My/Decorator/', 'decorator');
 ]]></programlisting>
 
             <para>
-                After it added as in the example above, the 'My/Decorator/' path will be searched first to see if the
-                decorator exists there when you add a decorator. As a result, 'My_Decorator_Label' will
-                now be used when the 'Label' decorator is requested.
+                After it added as in the example above, the 'My/Decorator/' path will be searched
+                first to see if the decorator exists there when you add a decorator. As a result,
+                'My_Decorator_Label' will now be used when the 'Label' decorator is requested.
             </para>
         </example>
     </sect2>
@@ -196,12 +196,12 @@ $form->addElementPrefixPath('My_Decorator', 'My/Decorator/', 'decorator');
             It's often useful and/or necessary to perform some normalization on
             input prior to validation. For example, you may want to strip out
             all HTML, but run your validations on what remains to ensure the
-            submission is valid. Or you may want to trim empty space surrounding input so that a StringLength validator will use the correct length of the input without counting leading or trailing whitespace characters.
-            These operations may be performed using
-            <classname>Zend_Filter</classname>. <classname>Zend_Form_Element</classname> has
-            support for filter chains, allowing you to specify multiple,
-            sequential filters. Filtering happens both during
-            validation and when you retrieve the element value via
+            submission is valid. Or you may want to trim empty space surrounding input so that a
+            StringLength validator will use the correct length of the input without counting leading
+            or trailing whitespace characters. These operations may be performed using
+            <classname>Zend_Filter</classname>. <classname>Zend_Form_Element</classname> has support
+            for filter chains, allowing you to specify multiple, sequential filters. Filtering
+            happens both during validation and when you retrieve the element value via
             <code>getValue()</code>:
         </para>
 
@@ -421,9 +421,9 @@ $validator = new Zend_Validate_StringLength(6, 20);
 
             <para>
                 Some developers may wish to provide custom error messages for a
-                validator. The <code>$options</code> argument of the <classname>Zend_Form_Element::addValidator()</classname> method
-                 allows you to do so by providing
-                the key 'messages' and mapping it to an array of key/value pairs
+                validator. The <code>$options</code> argument of the
+                <classname>Zend_Form_Element::addValidator()</classname> method allows you to do so
+                by providing the key 'messages' and mapping it to an array of key/value pairs
                 for setting the message templates. You will need to know the
                 error codes of the various validation error types for the
                 particular validator.
@@ -653,8 +653,8 @@ $messages = $element->getMessages();
             <listitem><para>
                     <code>setRequired($flag)</code> and
                     <code>isRequired()</code> allow you to set and retrieve the
-                    status of the 'required' flag. When set to boolean <constant>TRUE</constant>, this
-                    flag requires that the element be in the data processed by
+                    status of the 'required' flag. When set to boolean <constant>TRUE</constant>,
+                    this flag requires that the element be in the data processed by
                     <classname>Zend_Form</classname>.
             </para></listitem>
 
@@ -675,7 +675,8 @@ $messages = $element->getMessages();
             </para></listitem>
 
             <listitem><para>
-                <code>addValidator($nameOrValidator, $breakChainOnFailure = false, array $options = null)</code>
+                <code>addValidator($nameOrValidator, $breakChainOnFailure = false, array $options =
+                    null)</code>
             </para></listitem>
 
             <listitem><para>
@@ -814,8 +815,8 @@ $messages = $element->getMessages();
 
             <listitem><para>
                 <emphasis>Errors</emphasis>: appends error messages to the
-                element using <classname>Zend_View_Helper_FormErrors</classname>. If none are present,
-                nothing is appended.
+                element using <classname>Zend_View_Helper_FormErrors</classname>. If none are
+                present, nothing is appended.
             </para></listitem>
 
             <listitem><para>
@@ -832,8 +833,8 @@ $messages = $element->getMessages();
 
             <listitem><para>
                 <emphasis>Label</emphasis>: prepends a label to the element
-                using <classname>Zend_View_Helper_FormLabel</classname>, and wraps it in a &lt;dt&gt;
-                tag. If no label is provided, just the definition term tag is
+                using <classname>Zend_View_Helper_FormLabel</classname>, and wraps it in a
+                &lt;dt&gt; tag. If no label is provided, just the definition term tag is
                 rendered.
             </para></listitem>
         </itemizedlist>
@@ -1133,8 +1134,8 @@ $element->class = 'text;
         <title>Standard Elements</title>
 
         <para>
-            <classname>Zend_Form</classname> ships with a number of standard elements; please read the
-            <link linkend="zend.form.standardElements">Standard Elements</link>
+            <classname>Zend_Form</classname> ships with a number of standard elements; please read
+            the <link linkend="zend.form.standardElements">Standard Elements</link>
             chapter for full details.
         </para>
     </sect2>
@@ -1157,7 +1158,11 @@ $element->class = 'text;
 
             <listitem><para>I18n:</para>
                 <itemizedlist>
-                    <listitem><para><code>setTranslator(Zend_Translate_Adapter $translator = null)</code></para></listitem>
+                    <listitem>
+                        <para>
+                            <code>setTranslator(Zend_Translate_Adapter $translator = null)</code>
+                        </para>
+                    </listitem>
                     <listitem><para><code>getTranslator()</code></para></listitem>
                     <listitem><para><code>setDisableTranslator($flag)</code></para></listitem>
                     <listitem><para><code>translatorIsDisabled()</code></para></listitem>
@@ -1181,7 +1186,9 @@ $element->class = 'text;
                     <listitem><para><code>getRequired()</code></para></listitem>
                     <listitem><para><code>setAllowEmpty($flag)</code></para></listitem>
                     <listitem><para><code>getAllowEmpty()</code></para></listitem>
-                    <listitem><para><code>setAutoInsertNotEmptyValidator($flag)</code></para></listitem>
+                    <listitem>
+                        <para><code>setAutoInsertNotEmptyValidator($flag)</code></para>
+                    </listitem>
                     <listitem><para><code>autoInsertNotEmptyValidator()</code></para></listitem>
                     <listitem><para><code>setIgnore($flag)</code></para></listitem>
                     <listitem><para><code>getIgnore()</code></para></listitem>
@@ -1195,16 +1202,28 @@ $element->class = 'text;
 
             <listitem><para>Plugin loaders and paths:</para>
                 <itemizedlist>
-                    <listitem><para><code>setPluginLoader(Zend_Loader_PluginLoader_Interface $loader, $type)</code></para></listitem>
+                    <listitem>
+                        <para>
+                            <code>setPluginLoader(Zend_Loader_PluginLoader_Interface $loader,
+                                $type)</code>
+                        </para>
+                    </listitem>
                     <listitem><para><code>getPluginLoader($type)</code></para></listitem>
-                    <listitem><para><code>addPrefixPath($prefix, $path, $type = null)</code></para></listitem>
+                    <listitem>
+                        <para><code>addPrefixPath($prefix, $path, $type = null)</code></para>
+                    </listitem>
                     <listitem><para><code>addPrefixPaths(array $spec)</code></para></listitem>
                 </itemizedlist>
             </listitem>
 
             <listitem><para>Validation:</para>
                 <itemizedlist>
-                    <listitem><para><code>addValidator($validator, $breakChainOnFailure = false, $options = array())</code></para></listitem>
+                    <listitem>
+                        <para>
+                            <code>addValidator($validator, $breakChainOnFailure = false, $options =
+                                array())</code>
+                        </para>
+                    </listitem>
                     <listitem><para><code>addValidators(array $validators)</code></para></listitem>
                     <listitem><para><code>setValidators(array $validators)</code></para></listitem>
                     <listitem><para><code>getValidator($name)</code></para></listitem>
@@ -1219,7 +1238,9 @@ $element->class = 'text;
 
             <listitem><para>Filters:</para>
                 <itemizedlist>
-                    <listitem><para><code>addFilter($filter, $options = array())</code></para></listitem>
+                    <listitem>
+                        <para><code>addFilter($filter, $options = array())</code></para>
+                    </listitem>
                     <listitem><para><code>addFilters(array $filters)</code></para></listitem>
                     <listitem><para><code>setFilters(array $filters)</code></para></listitem>
                     <listitem><para><code>getFilter($name)</code></para></listitem>
@@ -1231,16 +1252,22 @@ $element->class = 'text;
 
             <listitem><para>Rendering:</para>
                 <itemizedlist>
-                    <listitem><para><code>setView(Zend_View_Interface $view = null)</code></para></listitem>
+                    <listitem>
+                        <para><code>setView(Zend_View_Interface $view = null)</code></para>
+                    </listitem>
                     <listitem><para><code>getView()</code></para></listitem>
-                    <listitem><para><code>addDecorator($decorator, $options = null)</code></para></listitem>
+                    <listitem>
+                        <para><code>addDecorator($decorator, $options = null)</code></para>
+                    </listitem>
                     <listitem><para><code>addDecorators(array $decorators)</code></para></listitem>
                     <listitem><para><code>setDecorators(array $decorators)</code></para></listitem>
                     <listitem><para><code>getDecorator($name)</code></para></listitem>
                     <listitem><para><code>getDecorators()</code></para></listitem>
                     <listitem><para><code>removeDecorator($name)</code></para></listitem>
                     <listitem><para><code>clearDecorators()</code></para></listitem>
-                    <listitem><para><code>render(Zend_View_Interface $view = null)</code></para></listitem>
+                    <listitem>
+                        <para><code>render(Zend_View_Interface $view = null)</code></para>
+                    </listitem>
                 </itemizedlist>
             </listitem>
         </itemizedlist>

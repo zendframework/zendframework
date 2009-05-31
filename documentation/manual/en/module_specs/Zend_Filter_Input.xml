@@ -1020,18 +1020,21 @@ $input->addFilterPrefixPath('Foo_Namespace', 'Foo/Namespace');
             <para>
                 As of version 1.5 the function <code>addNamespace($namespace)</code> was deprecated
                 and exchanged with the plugin loader and the <code>addFilterPrefixPath</code> and
-                <code>addValidatorPrefixPath</code> were added. Also the constant <classname>Zend_Filter_Input::INPUT_NAMESPACE</classname>
-                is now deprecated. The constants <classname>Zend_Filter_Input::VALIDATOR_NAMESPACE</classname> and
-                <classname>Zend_Filter_Input::FILTER_NAMESPACE</classname> are available in releases after 1.7.0.
+                <code>addValidatorPrefixPath</code> were added. Also the constant
+                <classname>Zend_Filter_Input::INPUT_NAMESPACE</classname> is now deprecated. The
+                constants <classname>Zend_Filter_Input::VALIDATOR_NAMESPACE</classname> and
+                <classname>Zend_Filter_Input::FILTER_NAMESPACE</classname> are available in releases
+                after 1.7.0.
             </para>
         </note>
 
         <note>
             <para>
-                As of version 1.0.4, <classname>Zend_Filter_Input::NAMESPACE</classname>, having value <code>namespace</code>,
-                was changed to <classname>Zend_Filter_Input::INPUT_NAMESPACE</classname>, having value
-                <code>inputNamespace</code>, in order to comply with the PHP 5.3 reservation of the keyword
-                <code>namespace</code>.
+                As of version 1.0.4, <classname>Zend_Filter_Input::NAMESPACE</classname>, having
+                value <code>namespace</code>, was changed to
+                <classname>Zend_Filter_Input::INPUT_NAMESPACE</classname>, having value
+                <code>inputNamespace</code>, in order to comply with the PHP 5.3 reservation of the
+                keyword <code>namespace</code>.
             </para>
         </note>
 

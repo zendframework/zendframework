@@ -3,28 +3,29 @@
 <sect2 id="zend.filter.set.decrypt">
     <title>Decrypt</title>
     <para>
-        This filter will decrypt any given string with the provided setting. Therefor it makes use of
-        Adapters. Actually there are adapters for the <code>Mcrypt</code> and <code>OpenSSL</code>
-        extensions from php.
+        This filter will decrypt any given string with the provided setting. Therefor it makes use
+        of Adapters. Actually there are adapters for the <code>Mcrypt</code> and
+        <code>OpenSSL</code> extensions from php.
     </para>
 
     <para>
-        For details about how to encrypt content look at the <code>Encrypt</code> filter. As the basics are
-        covered within the <code>Encrypt</code> filter, we will describe here only the needed additional
-        methods and changes for decryption.
+        For details about how to encrypt content look at the <code>Encrypt</code> filter. As the
+        basics are covered within the <code>Encrypt</code> filter, we will describe here only the
+        needed additional methods and changes for decryption.
     </para>
 
     <sect3 id="zend.filter.set.decrypt.mcrypt">
         <title>Decryption with Mcrypt</title>
         <para>
-            For decrypting content which was previously encrypted with <code>Mcrypt</code> you need to have
-            the options with which the encryption has been called.
+            For decrypting content which was previously encrypted with <code>Mcrypt</code> you need
+            to have the options with which the encryption has been called.
         </para>
 
         <para>
-            There is one emminent difference for you. When you did not provide a vector at encryption you need
-            to get it after you encrypted the content by using the <code>getVector()</code> method on the
-            encryption filter. Without the correct vector you will not be able to decrypt the content.
+            There is one emminent difference for you. When you did not provide a vector at
+            encryption you need to get it after you encrypted the content by using the
+            <code>getVector()</code> method on the encryption filter. Without the correct vector you
+            will not be able to decrypt the content.
         </para>
 
         <para>
@@ -44,15 +45,16 @@ print $decrypted;
 
         <note>
             <para>
-                Note that you will get an exception if the mcrypt extension is not available in your environment.
+                Note that you will get an exception if the mcrypt extension is not available in your
+                environment.
             </para>
         </note>
 
         <note>
             <para>
-                You should also note that all settings which be checked when you create the instance or when
-                you call setEncryption(). If mcrypt detects problem with your settings an exception will be
-                thrown.
+                You should also note that all settings which be checked when you create the instance
+                or when you call setEncryption(). If mcrypt detects problem with your settings an
+                exception will be thrown.
             </para>
         </note>
     </sect3>
@@ -60,8 +62,8 @@ print $decrypted;
     <sect3 id="zend.filter.set.decrypt.openssl">
         <title>Decryption with OpenSSL</title>
         <para>
-            Decryption with <code>OpenSSL</code> is as simple as encryption. But you need to have all data
-            from the person who encrypted the content.
+            Decryption with <code>OpenSSL</code> is as simple as encryption. But you need to have
+            all data from the person who encrypted the content.
         </para>
 
         <para>
@@ -71,17 +73,17 @@ print $decrypted;
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>private</emphasis>: Your private key which will be used for decrypting the
-                    content. The private key can be eighter a filename with path of the key file, or
-                    just the content of the key file itself.
+                    <emphasis>private</emphasis>: Your private key which will be used for decrypting
+                    the content. The private key can be eighter a filename with path of the key
+                    file, or just the content of the key file itself.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>envelope</emphasis>: The encrypted envelope key from the user who encrypted
-                    the content. You can eigther provide the path and filename of the key file, or just
-                    the content of the key file itself.
+                    <emphasis>envelope</emphasis>: The encrypted envelope key from the user who
+                    encrypted the content. You can eigther provide the path and filename of the key
+                    file, or just the content of the key file itself.
                 </para>
             </listitem>
         </itemizedlist>
@@ -102,13 +104,14 @@ $filter->setEnvelopeKey(array(
 
         <note>
             <para>
-                Note that the <code>OpenSSL</code> adapter will not work when you do not provide valid keys.
+                Note that the <code>OpenSSL</code> adapter will not work when you do not provide
+                valid keys.
             </para>
         </note>
 
         <para>
-            Optionally it could be necessary to provide the passphrase for decrypting the keys themself by
-            using the <code>setPassphrase()</code> method.
+            Optionally it could be necessary to provide the passphrase for decrypting the keys
+            themself by using the <code>setPassphrase()</code> method.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -127,8 +130,8 @@ $filter->setPassphrase('mypassphrase');
 ]]></programlisting>
 
         <para>
-            At last, decode the content. Our complete example for decrypting the previously encrypted
-            content looks like this.
+            At last, decode the content. Our complete example for decrypting the previously
+            encrypted content looks like this.
         </para>
 
         <programlisting language="php"><![CDATA[

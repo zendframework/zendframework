@@ -4,14 +4,15 @@
     <title>Custom Feed and Entry Classes</title>
 
     <para>
-        Finally, you can extend the <classname>Zend_Feed</classname> classes if you'd like to provide your own format or
-        niceties like automatic handling of elements that should go into a custom namespace.
+        Finally, you can extend the <classname>Zend_Feed</classname> classes if you'd like to
+        provide your own format or niceties like automatic handling of elements that should go into
+        a custom namespace.
     </para>
 
     <para>
-        Here is an example of a custom Atom entry class that handles its own <code>myns:</code> namespace
-        entries. Note that it also makes the <code>registerNamespace()</code> call for you, so the end user
-        doesn't need to worry about namespaces at all.
+        Here is an example of a custom Atom entry class that handles its own <code>myns:</code>
+        namespace entries. Note that it also makes the <code>registerNamespace()</code> call for
+        you, so the end user doesn't need to worry about namespaces at all.
     </para>
 
     <example id="zend.feed.custom-feed.example.extending">
@@ -72,8 +73,8 @@ class MyEntry extends Zend_Feed_Entry_Atom
 }
 ]]></programlisting>
         <para>
-            Then to use this class, you'd just instantiate it directly and set the <code>myUpdated</code>
-            property:
+            Then to use this class, you'd just instantiate it directly and set the
+            <code>myUpdated</code> property:
         </para>
         <programlisting language="php"><![CDATA[
 $entry = new MyEntry();

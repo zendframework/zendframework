@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15831 -->
+<!-- EN-Revision: 15855 -->
 <sect1 id="zend.locale.functions">
 
     <title>Zend_Locale の使用法</title>
@@ -448,6 +448,14 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                     <row>
                         <entry><emphasis>DateItem</emphasis></entry>
                         <entry>指定した日付項目あるいは時刻項目に関するデフォルトフォーマットの一覧を返します。</entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>DateInterval</emphasis></entry>
+                        <entry>
+                            間隔を表示したい際に使用する日付・時刻フォーマットの一覧を返します。
+                            この一覧は多次元配列です。最初の配列が間隔の書式、
+                            その次の配列が最大の差のトークンとなります。
+                        </entry>
                     </row>
                     <row>
                         <entry><emphasis>Field</emphasis></entry>
@@ -1023,6 +1031,17 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                     <row>
                         <entry><emphasis>DateItem</emphasis></entry>
                         <entry>指定した日付項目あるいは時刻項目に関するデフォルトフォーマットを返します。</entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>DateInterval</emphasis></entry>
+                        <entry>
+                            指定した日付・時刻フォーマットの間隔フォーマットを返します。
+                            最初の値は暦のフォーマットで、通常は 'gregorian' となります。
+                            二番目の値は間隔フォーマットで、
+                            三番目の値は最大の差のトークンです。
+                            たとえば、array('gregorian', 'yMMMM', 'y') は間隔フォーマット
+                            'yMMMM' で、最大の差は 'y' となります。
+                        </entry>
                     </row>
                     <row>
                         <entry><emphasis>Field</emphasis></entry>

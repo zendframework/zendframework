@@ -8,8 +8,8 @@
 
         <title>Introduction</title>
         <para>
-            The <classname>Zend_Auth_Adapter_OpenId</classname> adapter can be used to authenticate users using
-            remote OpenID servers. This authentication method assumes that the user
+            The <classname>Zend_Auth_Adapter_OpenId</classname> adapter can be used to authenticate
+            users using remote OpenID servers. This authentication method assumes that the user
             submits only their OpenID identity to the web application. They are
             then redirected to their OpenID provider to prove identity ownership
             using a password or some other method. This password is never provided to
@@ -30,8 +30,9 @@
 
         <note>
             <para>
-                <classname>Zend_OpenId</classname> takes advantage of the <ulink url="http://php.net/gmp">GMP extension</ulink>,
-                where available. Consider enabling the GMP extension for better performance when using
+                <classname>Zend_OpenId</classname> takes advantage of the <ulink
+                    url="http://php.net/gmp">GMP extension</ulink>, where available. Consider
+                enabling the GMP extension for better performance when using
                 <classname>Zend_Auth_Adapter_OpenId</classname>.
             </para>
         </note>
@@ -40,31 +41,34 @@
     <sect2 id="zend.auth.adapter.openid.specifics">
         <title>Specifics</title>
         <para>
-            As is the case for all <classname>Zend_Auth</classname> adapters, the <classname>Zend_Auth_Adapter_OpenId</classname>
-            class implements <classname>Zend_Auth_Adapter_Interface</classname>, which
-            defines one method: <methodname>authenticate()</methodname>. This method performs
-            the authentication itself, but the object must be prepared prior to
-            calling it. Such adapter preparation includes setting up the OpenID
-            identity and some other <classname>Zend_OpenId</classname> specific options.
+            As is the case for all <classname>Zend_Auth</classname> adapters, the
+            <classname>Zend_Auth_Adapter_OpenId</classname> class implements
+            <classname>Zend_Auth_Adapter_Interface</classname>, which defines one method:
+            <methodname>authenticate()</methodname>. This method performs the authentication itself,
+            but the object must be prepared prior to calling it. Such adapter preparation includes
+            setting up the OpenID identity and some other <classname>Zend_OpenId</classname>
+            specific options.
         </para>
 
         <para>
-            However, as opposed to other <classname>Zend_Auth</classname> adapters, <classname>Zend_Auth_Adapter_OpenId</classname>
-            performs authentication on an external server in two
-            separate HTTP requests. So the <classname>Zend_Auth_Adapter_OpenId::authenticate()</classname> method
-            must be called twice. On the first invocation the method won't return, but will
-            redirect the user to their OpenID server. Then after the user is authenticated on the remote
-            server, they will be redirected back and the script for this second
-            request must call <classname>Zend_Auth_Adapter_OpenId::authenticate()</classname>
-            again to verify the signature which comes with the redirected request from the
-            server to complete the authentication process. On this second invocation, the
-            method will return the <classname>Zend_Auth_Result</classname> object as expected.
+            However, as opposed to other <classname>Zend_Auth</classname> adapters,
+            <classname>Zend_Auth_Adapter_OpenId</classname> performs authentication on an external
+            server in two separate HTTP requests. So the
+            <classname>Zend_Auth_Adapter_OpenId::authenticate()</classname> method must be called
+            twice. On the first invocation the method won't return, but will redirect the user to
+            their OpenID server. Then after the user is authenticated on the remote server, they
+            will be redirected back and the script for this second request must call
+            <classname>Zend_Auth_Adapter_OpenId::authenticate()</classname> again to verify the
+            signature which comes with the redirected request from the server to complete the
+            authentication process. On this second invocation, the method will return the
+            <classname>Zend_Auth_Result</classname> object as expected.
         </para>
 
         <para>
-            The following example shows the usage of <classname>Zend_Auth_Adapter_OpenId</classname>.
-            As previously mentioned, the <classname>Zend_Auth_Adapter_OpenId::authenticate()</classname>
-            must be called two times. The first time is after the user submits the HTML form with the
+            The following example shows the usage of
+            <classname>Zend_Auth_Adapter_OpenId</classname>. As previously mentioned, the
+            <classname>Zend_Auth_Adapter_OpenId::authenticate()</classname> must be called two
+            times. The first time is after the user submits the HTML form with the
             <varname>$_POST['openid_action']</varname> set to <emphasis>"login"</emphasis>,
             and the second time is after the HTTP redirection from OpenID server with
             <varname>$_GET['openid_mode']</varname> or <varname>$_POST['openid_mode']</varname>

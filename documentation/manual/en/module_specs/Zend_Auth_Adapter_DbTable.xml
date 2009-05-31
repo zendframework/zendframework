@@ -221,10 +221,9 @@ if ($result->isValid()) {
              authorization problem within the authentication adapter.
         </para>
         <para>
-            With that disclaimer out of the way,
-            <classname>Zend_Auth_Adapter_DbTable</classname> has some built in mechanisms that can be
-            leveraged for additional checks at authentication time to solve
-            some common user problems.
+            With that disclaimer out of the way, <classname>Zend_Auth_Adapter_DbTable</classname>
+            has some built in mechanisms that can be leveraged for additional checks at
+            authentication time to solve some common user problems.
         </para>
         <programlisting language="php"><![CDATA[
 // The status field value of an account is not equal to "compromised"

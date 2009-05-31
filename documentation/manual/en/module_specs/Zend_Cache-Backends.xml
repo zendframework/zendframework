@@ -3,8 +3,8 @@
 <sect1 id="zend.cache.backends">
     <title>Zend_Cache Backends</title>
     <para>
-        There are two kinds of backends: standard ones and extended ones. Of course, extended backends
-        offer more features.
+        There are two kinds of backends: standard ones and extended ones. Of course, extended
+        backends offer more features.
     </para>
     <sect2 id="zend.cache.backends.file">
         <title>Zend_Cache_Backend_File</title>
@@ -59,9 +59,9 @@
                           <entry><type>String</type></entry>
                           <entry>'crc32'</entry>
                           <entry>
-                            Type of read control (only if read control is enabled). Available values are :
-                            'md5' (best but slowest), 'crc32' (lightly less safe but faster, better choice),
-                            'adler32' (new choice, faster than crc32),
+                            Type of read control (only if read control is enabled). Available values
+                            are : 'md5' (best but slowest), 'crc32' (lightly less safe but faster,
+                            better choice), 'adler32' (new choice, faster than crc32),
                             'strlen' for a length only test (fastest).
                         </entry>
                       </row>
@@ -108,8 +108,8 @@
                           <entry><type>Integer</type></entry>
                           <entry>100</entry>
                           <entry>
-                              internal max size for the metadatas array (don't change this value unless you
-                              know what you are doing)
+                              internal max size for the metadatas array (don't change this value
+                              unless you know what you are doing)
                           </entry>
                       </row>
                   </tbody>
@@ -149,12 +149,12 @@
                           <entry><type>Integer</type></entry>
                           <entry>10</entry>
                           <entry>
-                              Disable / Tune the automatic vacuum process.
-                              The automatic vacuum process defragment the database file (and make it smaller)
-                              when a clean() or delete() is called :
-                              0 means no automatic vacuum ;
-                              1 means systematic vacuum (when delete() or clean() methods are called) ;
-                              x (integer) > 1 => automatic vacuum randomly 1 times on x clean() or delete().
+                              Disable / Tune the automatic vacuum process. The automatic vacuum
+                              process defragment the database file (and make it smaller) when a
+                              clean() or delete() is called: 0 means no automatic vacuum ;
+                              1 means systematic vacuum (when delete() or clean() methods are
+                              called) ; x (integer) > 1 => automatic vacuum randomly 1 times on x
+                              clean() or delete().
                           </entry>
                       </row>
                   </tbody>
@@ -164,9 +164,11 @@
     <sect2 id="zend.cache.backends.memcached">
         <title>Zend_Cache_Backend_Memcached</title>
         <para>
-            This (extended) backends stores cache records into a memcached server. <ulink url="http://www.danga.com/memcached/">memcached</ulink>
-            is a high-performance, distributed memory object caching system. To use this backend,
-            you need a memcached daemon and <ulink url="http://pecl.php.net/package/memcache">the memcache PECL extension</ulink>.
+            This (extended) backends stores cache records into a memcached server. <ulink
+                url="http://www.danga.com/memcached/">memcached</ulink> is a high-performance,
+            distributed memory object caching system. To use this backend, you need a memcached
+            daemon and <ulink url="http://pecl.php.net/package/memcache">the memcache PECL
+                extension</ulink>.
         </para>
         <para>
             Be careful : with this backend, "tags" are not supported for the moment as
@@ -191,19 +193,21 @@
                           <entry><emphasis>servers</emphasis></entry>
                           <entry><type>Array</type></entry>
                           <entry>
-                              array(array('host' => 'localhost', 'port' => 11211, 'persistent' => true, 'weight' => 1,
-                              'timeout' => 5, 'retry_interval' => 15, 'status' => true, 'failure_callback' => '' ))
+                              array(array('host' => 'localhost', 'port' => 11211, 'persistent' =>
+                                  true, 'weight' => 1, 'timeout' => 5, 'retry_interval' => 15,
+                                  'status' => true, 'failure_callback' => '' ))
                           </entry>
                           <entry>
-                              An array of memcached servers ; each memcached server is described by an associative array :
-                              'host' => (string) : the name of the memcached server,
-                              'port' => (int) : the port of the memcached server,
-                              'persistent' => (bool) : use or not persistent connections to this memcached server
-                              'weight' => (int) :the weight of the memcached server,
-                              'timeout' => (int) :the time out of the memcached server,
+                              An array of memcached servers ; each memcached server is described by
+                              an associative array : 'host' => (string) : the name of the memcached
+                              server, 'port' => (int) : the port of the memcached server,
+                              'persistent' => (bool) : use or not persistent connections to this
+                              memcached server 'weight' => (int) :the weight of the memcached
+                              server, 'timeout' => (int) :the time out of the memcached server,
                               'retry_interval' => (int) :the retry interval of the memcached server,
                               'status' => (bool) :the status of the memcached server,
-                              'failure_callback' => (callback) : the failure_callback of the memcached server
+                              'failure_callback' => (callback) : the failure_callback of the
+                              memcached server
                           </entry>
                       </row>
                       <row>
@@ -219,7 +223,8 @@
                           <entry><type>Boolean</type></entry>
                           <entry><constant>FALSE</constant></entry>
                           <entry>
-                             true if you want to use this compatibility mode with old memcache servers/extensions
+                             true if you want to use this compatibility mode with old memcache
+                             servers/extensions
                           </entry>
                       </row>
                   </tbody>
@@ -230,8 +235,8 @@
         <title>Zend_Cache_Backend_Apc</title>
         <para>
             This (extended) backends stores cache records in shared memory through
-            the <ulink url="http://pecl.php.net/package/APC">APC</ulink> (Alternative PHP Cache) extension
-            (which is of course need for using this backend).
+            the <ulink url="http://pecl.php.net/package/APC">APC</ulink> (Alternative PHP Cache)
+            extension (which is of course need for using this backend).
         </para>
         <para>
             Be careful : with this backend, "tags" are not supported for the moment as
@@ -280,7 +285,8 @@
                           <entry><type>String</type></entry>
                           <entry><constant>NULL</constant></entry>
                           <entry>
-                              xcache.admin.pass (in clear form, not MD5), necessary for the clean() method
+                              xcache.admin.pass (in clear form, not MD5), necessary for the clean()
+                              method
                           </entry>
                       </row>
                   </tbody>
@@ -290,10 +296,13 @@
     <sect2 id="zend.cache.backends.platform">
         <title>Zend_Cache_Backend_ZendPlatform</title>
         <para>
-            This backend uses content caching API of the <ulink url="http://www.zend.com/products/platform">Zend Platform</ulink> product. Naturally, to use this backend you need to have Zend Platform installed.
+            This backend uses content caching API of the <ulink
+                url="http://www.zend.com/products/platform">Zend Platform</ulink> product.
+            Naturally, to use this backend you need to have Zend Platform installed.
         </para>
         <para>
-    This backend supports tags, but does not support <constant>CLEANING_MODE_NOT_MATCHING_TAG</constant> cleaning mode.
+            This backend supports tags, but does not support
+            <constant>CLEANING_MODE_NOT_MATCHING_TAG</constant> cleaning mode.
         </para>
         <para>
             Specify this backend using a word separator -- '-', '.', ' ', or '_'
@@ -310,12 +319,13 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
     <sect2 id="zend.cache.backends.twolevels">
         <title>Zend_Cache_Backend_TwoLevels</title>
         <para>
-            This (extend) backend is an hybrid one. It stores cache records in two other backends : a fast
-            one (but limited) like Apc, Memcache... and a "slow" one like File, Sqlite...
+            This (extend) backend is an hybrid one. It stores cache records in two other backends :
+            a fast one (but limited) like Apc, Memcache... and a "slow" one like File, Sqlite...
         </para>
         <para>
-            This backend will use the priority parameter (given at the frontend level when storing a record)
-            and the remaining space in the fast backend to optimize the usage of these two backends.
+            This backend will use the priority parameter (given at the frontend level when storing a
+            record) and the remaining space in the fast backend to optimize the usage of these two
+            backends.
             FIXME
         </para>
         <para>
@@ -370,9 +380,9 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
                           <entry><type>Boolean</type></entry>
                           <entry><constant>FALSE</constant></entry>
                           <entry>
-                              if true, the slow_backend argument is used as a complete class name ; if false,
-                              the frontend argument is used as the end of "Zend_Cache_Backend_[...]"
-                              class name
+                              if true, the slow_backend argument is used as a complete class name ;
+                              if false, the frontend argument is used as the end of
+                              "Zend_Cache_Backend_[...]" class name
                           </entry>
                       </row>
                       <row>
@@ -380,9 +390,9 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
                           <entry><type>Boolean</type></entry>
                           <entry><constant>FALSE</constant></entry>
                           <entry>
-                              if true, the fast_backend argument is used as a complete class name ; if false,
-                              the frontend argument is used as the end of "Zend_Cache_Backend_[...]"
-                              class name
+                              if true, the fast_backend argument is used as a complete class name ;
+                              if false, the frontend argument is used as the end of
+                              "Zend_Cache_Backend_[...]" class name
                           </entry>
                       </row>
                       <row>
@@ -417,8 +427,8 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
                           <entry>10</entry>
                           <entry>
                               disable / tune the computation of the fast backend filling percentage
-                              (when saving a record into cache, computation of the fast backend filling percentage
-                              randomly 1 times on x cache writes)
+                              (when saving a record into cache, computation of the fast backend
+                              filling percentage randomly 1 times on x cache writes)
                           </entry>
                       </row>
                   </tbody>
@@ -428,15 +438,17 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
     <sect2 id="zend.cache.backends.zendserver">
         <title>Zend_Cache_Backend_ZendServer_Disk and Zend_Cache_Backend_ZendServer_ShMem</title>
         <para>
-            These backends store cache records using
-            <ulink url="http://www.zend.com/en/products/server/downloads-all?zfs=zf_download">Zend Server</ulink> caching functionality.
+            These backends store cache records using <ulink
+                url="http://www.zend.com/en/products/server/downloads-all?zfs=zf_download">Zend
+                Server</ulink> caching functionality.
         </para>
         <para>
-             Be careful: with these backends, "tags" are not supported for the moment as the "doNotTestCacheValidity=true" argument.
+             Be careful: with these backends, "tags" are not supported for the moment as the
+             "doNotTestCacheValidity=true" argument.
         </para>
         <para>
-             These backend work only withing Zend Server environment for pages requested through HTTP(S) and
-             don't work for command line script execution
+             These backend work only withing Zend Server environment for pages requested through
+             HTTP(S) and don't work for command line script execution
         </para>
         <para>
             There is no option for this backend.

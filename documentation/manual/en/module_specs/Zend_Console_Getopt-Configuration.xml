@@ -188,14 +188,14 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
             <listitem>
                 <para>
                     <classname>Zend_Console_Getopt::CONFIG_RULEMODE</classname>
-                    ("ruleMode") may have values <classname>Zend_Console_Getopt::MODE_ZEND</classname>
-                    ("zend") and <classname>Zend_Console_Getopt::MODE_GNU</classname>
-                    ("gnu"). It should not be necessary to use this option
-                    unless you extend the class with additional syntax forms.
-                    The two modes supported in the base <classname>Zend_Console_Getopt</classname>
-                    class are unambiguous. If the specifier is a string, the
-                    class assumes <code>MODE_GNU</code>, otherwise it assumes
-                    <code>MODE_ZEND</code>. But if you extend the class and
+                    ("ruleMode") may have values
+                    <classname>Zend_Console_Getopt::MODE_ZEND</classname> ("zend") and
+                    <classname>Zend_Console_Getopt::MODE_GNU</classname> ("gnu"). It should not be
+                    necessary to use this option unless you extend the class with additional syntax
+                    forms. The two modes supported in the base
+                    <classname>Zend_Console_Getopt</classname> class are unambiguous. If the
+                    specifier is a string, the class assumes <code>MODE_GNU</code>, otherwise it
+                    assumes <code>MODE_ZEND</code>. But if you extend the class and
                     add more syntax forms, you may need to specify the mode
                     using this option.
                 </para>

@@ -11,12 +11,12 @@
         <title>Zend_Captcha_Word</title>
 
         <para>
-            <classname>Zend_Captcha_Word</classname> is an abstract adapter that serves as the base class
-            for most other CAPTCHA adapters. It provides mutators for
+            <classname>Zend_Captcha_Word</classname> is an abstract adapter that serves as the base
+            class for most other CAPTCHA adapters. It provides mutators for
             specifying word length, session TTL, the session namespace object
             to use, and the session namespace class to use for persistence if
-            you do not wish to use <classname>Zend_Session_Namespace</classname>. <classname>Zend_Captcha_Word</classname>
-            encapsulates validation logic.
+            you do not wish to use <classname>Zend_Session_Namespace</classname>.
+            <classname>Zend_Captcha_Word</classname> encapsulates validation logic.
         </para>
 
         <para>
@@ -33,9 +33,9 @@
 
         <itemizedlist>
             <listitem><para>
-                <methodname>setWordLen($length)</methodname> and <methodname>getWordLen()</methodname>
-                allow you to specify the length of the generated "word" in
-                characters, and to retrieve the current value.
+                <methodname>setWordLen($length)</methodname> and
+                <methodname>getWordLen()</methodname> allow you to specify the length of the
+                generated "word" in characters, and to retrieve the current value.
             </para></listitem>
 
             <listitem><para>
@@ -75,9 +75,9 @@
         <para>
             All word CAPTCHAs allow you to pass an array of options to the
             constructor, or, alternately, pass them to
-            <methodname>setOptions()</methodname>. You can also pass a <classname>Zend_Config</classname>
-            object to <methodname>setConfig()</methodname>. By default, the
-            <emphasis>wordLen</emphasis>, <emphasis>timeout</emphasis>, and
+            <methodname>setOptions()</methodname>. You can also pass a
+            <classname>Zend_Config</classname> object to <methodname>setConfig()</methodname>. By
+            default, the <emphasis>wordLen</emphasis>, <emphasis>timeout</emphasis>, and
             <emphasis>sessionClass</emphasis> keys may all be used. Each concrete
             implementation may define additional keys or utilize the options in
             other ways.
@@ -85,7 +85,8 @@
 
         <note>
         <para>
-            <classname>Zend_Captcha_Word</classname> is an abstract class and may not be instantiated directly.
+            <classname>Zend_Captcha_Word</classname> is an abstract class and may not be
+            instantiated directly.
         </para>
         </note>
     </sect2>
@@ -94,8 +95,8 @@
         <title>Zend_Captcha_Dumb</title>
 
         <para>
-            The <classname>Zend_Captch_Dumb</classname> adapter is mostly self-descriptive. It provides a random
-            string that must be typed in reverse to validate. As such, it's
+            The <classname>Zend_Captch_Dumb</classname> adapter is mostly self-descriptive. It
+            provides a random string that must be typed in reverse to validate. As such, it's
             not a good CAPTCHA solution and should only be used for
             testing. It extends <classname>Zend_Captcha_Word</classname>.
         </para>
@@ -106,15 +107,15 @@
 
         <para>
             The <classname>Zend_Captcha_Figlet</classname> adapter utilizes <link
-                linkend="zend.text.figlet"><classname>Zend_Text_Figlet</classname></link> to present a
-                figlet to the user.
+                linkend="zend.text.figlet"><classname>Zend_Text_Figlet</classname></link> to present
+            a figlet to the user.
         </para>
 
         <para>
             Options passed to the constructor will also be passed to the <link
                 linkend="zend.text.figlet">Zend_Text_Figlet</link> object. See
-                the <link linkend="zend.text.figlet">Zend_Text_Figlet</link>documentation for details on what
-                configuration options are available.
+                the <link linkend="zend.text.figlet">Zend_Text_Figlet</link>documentation for
+            details on what configuration options are available.
         </para>
     </sect2>
 
@@ -163,9 +164,9 @@
             </para></listitem>
 
             <listitem><para>
-                <methodname>setFontSize($fsize)</methodname> and <methodname>getFontSize()</methodname>
-                allow you to specify the font size in pixels for
-                generating the CAPTCHA. The default is 24px.
+                <methodname>setFontSize($fsize)</methodname> and
+                <methodname>getFontSize()</methodname> allow you to specify the font size in pixels
+                for generating the CAPTCHA. The default is 24px.
             </para></listitem>
 
             <listitem><para>

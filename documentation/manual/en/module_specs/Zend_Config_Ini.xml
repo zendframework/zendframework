@@ -3,30 +3,33 @@
 <sect1 id="zend.config.adapters.ini">
     <title>Zend_Config_Ini</title>
     <para>
-        <classname>Zend_Config_Ini</classname> enables developers to store configuration data in a familiar INI format and read
-        them in the application by using nested object property syntax. The INI format is specialized to provide both
-        the ability to have a hierarchy of configuration data keys and inheritance between configuration data sections.
-        Configuration data hierarchies are supported by separating the keys with the dot or period character
-        ("<emphasis>.</emphasis>"). A section may extend or inherit from another section by following the section name with a
-        colon character ("<emphasis>:</emphasis>) and the name of the section from which data are to be inherited.
+        <classname>Zend_Config_Ini</classname> enables developers to store configuration data in a
+        familiar INI format and read them in the application by using nested object property syntax.
+        The INI format is specialized to provide both the ability to have a hierarchy of
+        configuration data keys and inheritance between configuration data sections. Configuration
+        data hierarchies are supported by separating the keys with the dot or period character
+        ("<emphasis>.</emphasis>"). A section may extend or inherit from another section by
+        following the section name with a colon character ("<emphasis>:</emphasis>) and the name of
+        the section from which data are to be inherited.
     </para>
     <note>
         <title>Parsing the INI File</title>
         <para>
-            <classname>Zend_Config_Ini</classname> utilizes the
-            <ulink url="http://php.net/parse_ini_file"><methodname>parse_ini_file()</methodname></ulink>
+            <classname>Zend_Config_Ini</classname> utilizes the <ulink
+                url="http://php.net/parse_ini_file"><methodname>parse_ini_file()</methodname></ulink>
             PHP function. Please review this documentation to be aware of its specific behaviors,
-            which propagate to <classname>Zend_Config_Ini</classname>, such as how the special values of
-            "<constant>TRUE</constant>", "<constant>FALSE</constant>", "yes", "no",
+            which propagate to <classname>Zend_Config_Ini</classname>, such as how the special
+            values of "<constant>TRUE</constant>", "<constant>FALSE</constant>", "yes", "no",
             and "<constant>NULL</constant>" are handled.
         </para>
     </note>
     <note>
         <title>Key Separator</title>
         <para>
-            By default, the key separator character is the period character ("<emphasis>.</emphasis>"). This can be changed,
-            however, by changing the <varname>$options</varname> key <emphasis>'nestSeparator'</emphasis> when constructing the
-            <classname>Zend_Config_Ini</classname> object. For example:
+            By default, the key separator character is the period character
+            ("<emphasis>.</emphasis>"). This can be changed, however, by changing the
+            <varname>$options</varname> key <emphasis>'nestSeparator'</emphasis> when constructing
+            the <classname>Zend_Config_Ini</classname> object. For example:
             <programlisting language="php"><![CDATA[
 $options['nestSeparator'] = ':';
 $config = new Zend_Config_Ini('/path/to/config.ini',
@@ -38,12 +41,14 @@ $config = new Zend_Config_Ini('/path/to/config.ini',
     <example id="zend.config.adapters.ini.example.using">
         <title>Using Zend_Config_Ini</title>
         <para>
-            This example illustrates a basic use of <classname>Zend_Config_Ini</classname> for loading configuration data from an
-            INI file. In this example there are configuration data for both a production system and for a staging
-            system. Because the staging system configuration data are very similar to those for production, the staging
-            section inherits from the production section. In this case, the decision is arbitrary and could have been
-            written conversely, with the production section inheriting from the staging section, though this may not be
-            the case for more complex situations. Suppose, then, that the following configuration data are contained in
+            This example illustrates a basic use of <classname>Zend_Config_Ini</classname> for
+            loading configuration data from an INI file. In this example there are configuration
+            data for both a production system and for a staging system. Because the staging system
+            configuration data are very similar to those for production, the staging section
+            inherits from the production section. In this case, the decision is arbitrary and could
+            have been written conversely, with the production section inheriting from the staging
+            section, though this may not be the case for more complex situations. Suppose, then,
+            that the following configuration data are contained in
             <filename>/path/to/config.ini</filename>:
         </para>
         <programlisting language="ini"><![CDATA[
@@ -64,8 +69,9 @@ database.params.username = devuser
 database.params.password = devsecret
 ]]></programlisting>
         <para>
-            Next, assume that the application developer needs the staging configuration data from the INI file. It is a
-            simple matter to load these data by specifying the INI file and the staging section:
+            Next, assume that the application developer needs the staging configuration data from
+            the INI file. It is a simple matter to load these data by specifying the INI file and
+            the staging section:
         </para>
         <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Ini('/path/to/config.ini', 'staging');
@@ -99,8 +105,18 @@ echo $config->database->params->dbname; // prints "dbname"
                     <entry><varname>$options = false</varname></entry>
                     <entry>Options array. The following keys are supported:
                         <itemizedlist>
-                            <listitem><para><emphasis>allowModifications</emphasis>: Set to true to allow subsequent modification of loaded file. Defaults to false</para></listitem>
-                            <listitem><para><emphasis>nestSeparator</emphasis>: Set to the character to be used as the nest separator. Defaults to "."</para></listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis>allowModifications</emphasis>: Set to true to allow
+                                    subsequent modification of loaded file. Defaults to false
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis>nestSeparator</emphasis>: Set to the character to be
+                                    used as the nest separator. Defaults to "."
+                                </para>
+                            </listitem>
                         </itemizedlist>
                     </entry>
                 </row>

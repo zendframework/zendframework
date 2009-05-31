@@ -7,46 +7,51 @@
         through an associative array, which may be multi-dimensional, in order to support
         organizing the data from general to specific. Concrete adapter classes
         adapt configuration data from storage to produce the associative array for the
-        <classname>Zend_Config</classname> constructor. User scripts may provide such arrays directly
-        to the <classname>Zend_Config</classname> constructor, without using an adapter class, since
-        it may be appropriate to do so in certain situations.
+        <classname>Zend_Config</classname> constructor. User scripts may provide such arrays
+        directly to the <classname>Zend_Config</classname> constructor, without using an adapter
+        class, since it may be appropriate to do so in certain situations.
     </para>
     <para>
-        Each configuration data array value becomes a property of the <classname>Zend_Config</classname> object. The key is used
-        as the property name. If a value is itself an array, then the resulting object property is created as a new
-        <classname>Zend_Config</classname> object, loaded with the array data. This occurs recursively, such that a hierarchy of
-        configuration data may be created with any number of levels.
+        Each configuration data array value becomes a property of the
+        <classname>Zend_Config</classname> object. The key is used as the property name. If a value
+        is itself an array, then the resulting object property is created as a new
+        <classname>Zend_Config</classname> object, loaded with the array data. This occurs
+        recursively, such that a hierarchy of configuration data may be created with any number of
+        levels.
     </para>
     <para>
-        <classname>Zend_Config</classname> implements the <code>Countable</code> and <code>Iterator</code>
-        interfaces in order to facilitate simple access to configuration data.
+        <classname>Zend_Config</classname> implements the <code>Countable</code> and
+        <code>Iterator</code> interfaces in order to facilitate simple access to configuration data.
         Thus, one may use the <ulink url="http://php.net/count"><code>count()</code></ulink>
         function and PHP constructs such as
         <ulink url="http://php.net/foreach"><code>foreach</code></ulink> with
         <classname>Zend_Config</classname> objects.
     </para>
     <para>
-        By default, configuration data made available through <classname>Zend_Config</classname>
-        are read-only, and an assignment (e.g.,
-        <code>$config->database->host = 'example.com'</code>)
-        results in a thrown exception. This default behavior may be overridden through the constructor,
-        however, to allow modification of data values. Also, when modifications are allowed, <classname>Zend_Config</classname>
-        supports unsetting of values (i.e. <code>unset($config->database->host);</code>). The
-        <code>readOnly()</code> method can be used to determine if modifications to a given <classname>Zend_Config</classname>
-        object are allowed and the <code>setReadOnly()</code> method can be used to stop any further
-        modifications to a <classname>Zend_Config</classname> object that was created allowing modifications.
+        By default, configuration data made available through <classname>Zend_Config</classname> are
+        read-only, and an assignment (e.g., <code>$config->database->host = 'example.com'</code>)
+        results in a thrown exception. This default behavior may be overridden through the
+        constructor, however, to allow modification of data values. Also, when modifications are
+        allowed, <classname>Zend_Config</classname> supports unsetting of values (i.e.
+        <code>unset($config->database->host);</code>). The <code>readOnly()</code> method can be
+        used to determine if modifications to a given <classname>Zend_Config</classname> object are
+        allowed and the <code>setReadOnly()</code> method can be used to stop any further
+        modifications to a <classname>Zend_Config</classname> object that was created allowing
+        modifications.
         <note>
             <para>
-                It is important not to confuse such in-memory modifications with saving configuration
-                data out to specific storage media. Tools for creating and modifying configuration
-                data for various storage media are out of scope with respect to <classname>Zend_Config</classname>.
-                Third-party open source solutions are readily available for the purpose of creating and
-                modifying configuration data for various storage media.
+                It is important not to confuse such in-memory modifications with saving
+                configuration data out to specific storage media. Tools for creating and modifying
+                configuration data for various storage media are out of scope with respect to
+                <classname>Zend_Config</classname>. Third-party open source solutions are readily
+                available for the purpose of creating and modifying configuration data for various
+                storage media.
             </para>
         </note>
     </para>
     <para>
-        Adapter classes inherit from the <classname>Zend_Config</classname> class since they utilize its functionality.
+        Adapter classes inherit from the <classname>Zend_Config</classname> class since they utilize
+        its functionality.
     </para>
     <para>
         The <classname>Zend_Config</classname> family of classes enables configuration data to be
@@ -66,16 +71,17 @@
     </para>
     <para>
         If you have two <classname>Zend_Config</classname> objects, you can merge them into a single
-        object using the <code>merge()</code> function. For example, given <varname>$config</varname> and
-        <varname>$localConfig</varname>, you can merge data from <varname>$localConfig</varname> to <varname>$config</varname> using
-        <code>$config->merge($localConfig);</code>. The items in <varname>$localConfig</varname> will override
-        any items with the same name in <varname>$config</varname>.
+        object using the <code>merge()</code> function. For example, given
+        <varname>$config</varname> and <varname>$localConfig</varname>, you can merge data from
+        <varname>$localConfig</varname> to <varname>$config</varname> using
+        <code>$config->merge($localConfig);</code>. The items in <varname>$localConfig</varname>
+        will override any items with the same name in <varname>$config</varname>.
         <note>
             <para>
-                The <classname>Zend_Config</classname> object that is performing the merge must have been constructed
-                to allow modifications, by passing <constant>TRUE</constant> as the second parameter of the constructor.
-                The <code>setReadOnly()</code> method can then be used to prevent any further modifications
-                after the merge is complete.
+                The <classname>Zend_Config</classname> object that is performing the merge must have
+                been constructed to allow modifications, by passing <constant>TRUE</constant> as the
+                second parameter of the constructor. The <code>setReadOnly()</code> method can then
+                be used to prevent any further modifications after the merge is complete.
             </para>
         </note>
     </para>

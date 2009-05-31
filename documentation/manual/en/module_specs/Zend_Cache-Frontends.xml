@@ -12,9 +12,9 @@
                 of the module. It is a generic cache frontend and is extended by other classes.
             </para>
             <note><para>
-                All frontends inherit from <classname>Zend_Cache_Core</classname> so that its methods and options
-                (described below) would also be available in other frontends, therefore they won't be
-                documented there.
+                All frontends inherit from <classname>Zend_Cache_Core</classname> so that its
+                methods and options (described below) would also be available in other frontends,
+                therefore they won't be documented there.
             </para></note>
         </sect3>
         <sect3 id="zend.cache.frontends.core.options">
@@ -49,10 +49,11 @@
                               <entry><constant>NULL</constant></entry>
                               <entry>
                                 A prefix for all cache ids, if set to <constant>null</constant>, no
-                                cache id prefix will be used. The cache id prefix essentially creates
-                                a namespace in the cache, allowing multiple applications or websites
-                                to use a shared cache. Each application or website can use a different
-                                cache id prefix so specific cache ids can be used more than once.
+                                cache id prefix will be used. The cache id prefix essentially
+                                creates a namespace in the cache, allowing multiple applications or
+                                websites to use a shared cache. Each application or website can use
+                                a different cache id prefix so specific cache ids can be used more
+                                than once.
                               </entry>
                           </row>
                           <row>
@@ -60,8 +61,8 @@
                               <entry><type>Integer</type></entry>
                               <entry>3600</entry>
                               <entry>
-                                cache lifetime (in seconds), if set to <constant>NULL</constant>, the
-                                cache is valid forever.
+                                cache lifetime (in seconds), if set to <constant>NULL</constant>,
+                                the cache is valid forever.
                               </entry>
                           </row>
                           <row>
@@ -69,8 +70,8 @@
                               <entry><type>Boolean</type></entry>
                               <entry><constant>FALSE</constant></entry>
                               <entry>
-                                if set to true, logging through <classname>Zend_Log</classname> is activated
-                                (but the system is slower)
+                                if set to true, logging through <classname>Zend_Log</classname> is
+                                activated (but the system is slower)
                               </entry>
                           </row>
                           <row>
@@ -78,8 +79,8 @@
                               <entry><type>Boolean</type></entry>
                               <entry><constant>TRUE</constant></entry>
                               <entry>
-                                Enable / disable write control (the cache is read
-                                just after writing to detect corrupt entries), enabling write_control
+                                Enable / disable write control (the cache is read just
+                                after writing to detect corrupt entries), enabling write_control
                                 will lightly slow the cache writing but not the cache reading (it
                                 can detect some corrupt cache files but it's not a perfect control)
                               </entry>
@@ -89,8 +90,8 @@
                               <entry><type>Boolean</type></entry>
                               <entry><constant>FALSE</constant></entry>
                               <entry>
-                                Enable / disable automatic serialization, it can be used to save directly datas
-                                which aren't strings (but it's slower)
+                                Enable / disable automatic serialization, it can be used to save
+                                directly datas which aren't strings (but it's slower)
                               </entry>
                           </row>
                           <row>
@@ -99,8 +100,9 @@
                               <entry>10</entry>
                               <entry>
                                 Disable / Tune the automatic cleaning process (garbage collector):
-                                0 means no automatic cache cleaning, 1 means systematic cache cleaning
-                                and x &gt; 1 means automatic random cleaning 1 times in x write operations.
+                                0 means no automatic cache cleaning, 1 means systematic cache
+                                cleaning and x &gt; 1 means automatic random cleaning 1 times in x
+                                write operations.
                               </entry>
                           </row>
                           <row>
@@ -108,8 +110,8 @@
                               <entry><type>Boolean</type></entry>
                               <entry><constant>FALSE</constant></entry>
                               <entry>
-                                if set to true, the core will set the ignore_user_abort PHP flag inside the
-                                save() method to avoid cache corruptions in some cases
+                                if set to true, the core will set the ignore_user_abort PHP flag
+                                inside the save() method to avoid cache corruptions in some cases
                               </entry>
                           </row>
                       </tbody>
@@ -123,8 +125,8 @@
                 An example is given in the manual at the very beginning.
             </para>
             <para>
-                If you store only strings into cache (because with "automatic_serialization" option, it's possible
-                to store some booleans), you can use a more compact construction like:
+                If you store only strings into cache (because with "automatic_serialization" option,
+                it's possible to store some booleans), you can use a more compact construction like:
             </para>
             <programlisting language="php"><![CDATA[
 // we assume you already have $cache
@@ -185,9 +187,9 @@ if (!($data = $cache->load($id2))) {
 echo($data);
 ]]></programlisting>
             <para>
-                If you want to cache special values (boolean with "automatic_serialization" option) or empty
-                strings you can't use the compact construction given above. You have to test formally the
-                cache record.
+                If you want to cache special values (boolean with "automatic_serialization" option)
+                or empty strings you can't use the compact construction given above. You have to
+                test formally the cache record.
             </para>
             <programlisting language="php"><![CDATA[
 // the compact construction
@@ -233,9 +235,9 @@ if (!($cache->test($id))) {
         <sect3 id="zend.cache.frontends.output.introduction">
             <title>Introduction</title>
             <para>
-                <classname>Zend_Cache_Frontend_Output</classname> is an output-capturing frontend. It utilizes
-                output buffering in PHP to capture everything between its <methodname>start()</methodname> and
-                <methodname>end()</methodname> methods.
+                <classname>Zend_Cache_Frontend_Output</classname> is an output-capturing frontend.
+                It utilizes output buffering in PHP to capture everything between its
+                <methodname>start()</methodname> and <methodname>end()</methodname> methods.
             </para>
         </sect3>
         <sect3 id="zend.cache.frontends.output.options">
@@ -249,7 +251,8 @@ if (!($cache->test($id))) {
         <sect3 id="zend.cache.frontends.output.examples">
             <title>Examples</title>
             <para>
-                An example is given in the manual at the very beginning. Here it is with minor changes:
+                An example is given in the manual at the very beginning. Here it is with minor
+                changes:
             </para>
             <programlisting language="php"><![CDATA[
 // if it is a cache miss, output buffering is triggered
@@ -266,8 +269,8 @@ if (!($cache->start('mypage'))) {
 echo 'This is never cached ('.time().').';
 ]]></programlisting>
             <para>
-                Using this form it is fairly easy to set up output caching in your already working project
-                with little or no code refactoring.
+                Using this form it is fairly easy to set up output caching in your already working
+                project with little or no code refactoring.
             </para>
         </sect3>
     </sect2>
@@ -277,9 +280,9 @@ echo 'This is never cached ('.time().').';
         <sect3 id="zend.cache.frontends.function.introduction">
             <title>Introduction</title>
             <para>
-                <classname>Zend_Cache_Frontend_Function</classname> caches the results of function calls. It has
-                a single main method named <methodname>call()</methodname> which takes a function name and parameters
-                for the call in an array.
+                <classname>Zend_Cache_Frontend_Function</classname> caches the results of function
+                calls. It has a single main method named <methodname>call()</methodname> which takes
+                a function name and parameters for the call in an array.
             </para>
         </sect3>
         <sect3 id="zend.cache.frontends.function.options">
@@ -345,9 +348,11 @@ $cache->call('veryExpensiveFunc', $params);
             </para>
             <note><para>
                 You can pass any built in or user defined function with the exception of
-                <methodname>array()</methodname>, <methodname>echo()</methodname>, <methodname>empty()</methodname>, <methodname>eval()</methodname>,
-                <methodname>exit()</methodname>, <methodname>isset()</methodname>, <methodname>list()</methodname>, <methodname>print()</methodname>
-                and <methodname>unset()</methodname>.
+                <methodname>array()</methodname>, <methodname>echo()</methodname>,
+                <methodname>empty()</methodname>, <methodname>eval()</methodname>,
+                <methodname>exit()</methodname>, <methodname>isset()</methodname>,
+                <methodname>list()</methodname>, <methodname>print()</methodname> and
+                <methodname>unset()</methodname>.
             </para></note>
         </sect3>
     </sect2>
@@ -357,8 +362,9 @@ $cache->call('veryExpensiveFunc', $params);
         <sect3 id="zend.cache.frontends.class.introduction">
             <title>Introduction</title>
             <para>
-                <classname>Zend_Cache_Frontend_Class</classname> is different from <classname>Zend_Cache_Frontend_Function</classname>
-                because it allows caching of object and static method calls.
+                <classname>Zend_Cache_Frontend_Class</classname> is different from
+                <classname>Zend_Cache_Frontend_Function</classname> because it allows caching of
+                object and static method calls.
             </para>
         </sect3>
         <sect3 id="zend.cache.frontends.class.options">
@@ -380,8 +386,9 @@ $cache->call('veryExpensiveFunc', $params);
                               <entry><type>Mixed</type></entry>
                               <entry></entry>
                               <entry>
-                                  if set to a class name, we will cache an abstract class and will use
-                                  only static calls; if set to an object, we will cache this object methods
+                                  if set to a class name, we will cache an abstract class and will
+                                  use only static calls; if set to an object, we will cache this
+                                  object methods
                               </entry>
                          </row>
                          <row>
@@ -479,8 +486,8 @@ $result = $cache->foobar2('1', '2');
             <para>
                 For instance, you have an XML configuration file which is parsed by a function
                 which returns a "config object" (like with <classname>Zend_Config</classname>). With
-                <classname>Zend_Cache_Frontend_File</classname>, you can store the "config object" into
-                cache (to avoid the parsing of the XML config file at each time) but with a
+                <classname>Zend_Cache_Frontend_File</classname>, you can store the "config object"
+                into cache (to avoid the parsing of the XML config file at each time) but with a
                 sort of strong dependency on the "master file". So, if the XML config file
                 is modified, the cache is immediately invalidated.
             </para>
@@ -518,11 +525,16 @@ $result = $cache->foobar2('1', '2');
                          <row>
                               <entry><emphasis>master_files_mode</emphasis></entry>
                               <entry><type>String</type></entry>
-                              <entry><classname>Zend_Cache_Frontend_File::MODE_OR</classname></entry>
                               <entry>
-                                  <classname>Zend_Cache_Frontend_File::MODE_AND</classname> or <classname>Zend_Cache_Frontend_File::MODE_OR</classname> ;
-                                  if <constant>MODE_AND</constant>, then all master files have to be touched to get a cache invalidation
-                                  if <constant>MODE_OR</constant>, then a single touched master file is enough to get a cache invalidation
+                                  <classname>Zend_Cache_Frontend_File::MODE_OR</classname>
+                              </entry>
+                              <entry>
+                                  <classname>Zend_Cache_Frontend_File::MODE_AND</classname> or
+                                  <classname>Zend_Cache_Frontend_File::MODE_OR</classname> ; if
+                                  <constant>MODE_AND</constant>, then all master files have to be
+                                  touched to get a cache invalidation if
+                                  <constant>MODE_OR</constant>, then a single touched master file is
+                                  enough to get a cache invalidation
                               </entry>
                          </row>
                          <row>
@@ -530,7 +542,8 @@ $result = $cache->foobar2('1', '2');
                               <entry><type>Boolean</type></entry>
                               <entry><constant>FALSE</constant></entry>
                               <entry>
-                                  if true, missing master files are ignored silently (an exception is raised else)
+                                  if true, missing master files are ignored silently (an exception
+                                  is raised else)
                               </entry>
                          </row>
                       </tbody>
@@ -540,8 +553,8 @@ $result = $cache->foobar2('1', '2');
         <sect3 id="zend.cache.frontends.file.examples">
             <title>Examples</title>
             <para>
-                Use of this frontend is the same than of <classname>Zend_Cache_Core</classname>. There
-                is no need of a specific example - the only thing to do is to
+                Use of this frontend is the same than of <classname>Zend_Cache_Core</classname>.
+                There is no need of a specific example - the only thing to do is to
                 define the <emphasis>master_file</emphasis> when using the factory.
             </para>
         </sect3>
@@ -552,15 +565,17 @@ $result = $cache->foobar2('1', '2');
         <sect3 id="zend.cache.frontends.page.introduction">
             <title>Introduction</title>
             <para>
-                <classname>Zend_Cache_Frontend_Page</classname> is like <classname>Zend_Cache_Frontend_Output</classname>
-                but designed for a complete page. It's impossible to use <classname>Zend_Cache_Frontend_Page</classname>
-                for caching only a single block.
+                <classname>Zend_Cache_Frontend_Page</classname> is like
+                <classname>Zend_Cache_Frontend_Output</classname> but designed for a complete page.
+                It's impossible to use <classname>Zend_Cache_Frontend_Page</classname> for caching
+                only a single block.
             </para>
             <para>
                 On the other hand, the "cache id" is calculated automatically with
                 <varname>$_SERVER['REQUEST_URI']</varname> and (depending on options)
-                <varname>$_GET</varname>, <varname>$_POST</varname>, <varname>$_SESSION</varname>, <varname>$_COOKIE</varname>, <varname>$_FILES</varname>.
-                More over, you have only one method to call (<methodname>start()</methodname>) because the
+                <varname>$_GET</varname>, <varname>$_POST</varname>, <varname>$_SESSION</varname>,
+                <varname>$_COOKIE</varname>, <varname>$_FILES</varname>. More over, you have only
+                one method to call (<methodname>start()</methodname>) because the
                 <methodname>end()</methodname> call is fully automatic when the page is ended.
             </para>
             <para>
@@ -608,90 +623,101 @@ $result = $cache->foobar2('1', '2');
                                   <itemizedlist>
                                       <listitem>
                                           <para>
-                                              <emphasis>(boolean, true by default) cache</emphasis> :
-                                              cache is on if true
+                                              <emphasis>(boolean, true by default) cache</emphasis>
+                                              : cache is on if true
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
-                                              <emphasis>(boolean, false by default) cache_with_get_variables</emphasis> :
-                                              if true, cache is still on even if there are some variables in
+                                              <emphasis>(boolean, false by default)
+                                                  cache_with_get_variables</emphasis> : if true,
+                                              cache is still on even if there are some variables in
                                               <varname>$_GET</varname> array
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
-                                              <emphasis>(boolean, false by default) cache_with_post_variables</emphasis> :
-                                              if true, cache is still on even if there are some variables in
+                                              <emphasis>(boolean, false by default)
+                                                  cache_with_post_variables</emphasis> : if true,
+                                              cache is still on even if there are some variables in
                                               <varname>$_POST</varname> array
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
-                                              <emphasis>(boolean, false by default) cache_with_session_variables</emphasis> :
-                                              if true, cache is still on even if there are some variables in
+                                              <emphasis>(boolean, false by default)
+                                                  cache_with_session_variables</emphasis> : if true,
+                                              cache is still on even if there are some variables in
                                               <varname>$_SESSION</varname> array
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
-                                              <emphasis>(boolean, false by default) cache_with_files_variables</emphasis> :
-                                              if true, cache is still on even if there are some variables in
+                                              <emphasis>(boolean, false by default)
+                                                  cache_with_files_variables</emphasis> : if true,
+                                              cache is still on even if there are some variables in
                                               <varname>$_FILES</varname> array
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
-                                              <emphasis>(boolean, false by default) cache_with_cookie_variables</emphasis> :
-                                              if true, cache is still on even if there are some variables in
+                                              <emphasis>(boolean, false by default)
+                                                  cache_with_cookie_variables</emphasis> : if true,
+                                              cache is still on even if there are some variables in
                                               <varname>$_COOKIE</varname> array
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
-                                              <emphasis>(boolean, true by default) make_id_with_get_variables</emphasis> :
-                                              if true, the cache id will be dependent of the content of the
+                                              <emphasis>(boolean, true by default)
+                                                   make_id_with_get_variables</emphasis> : if true,
+                                              the cache id will be dependent of the content of the
                                               <varname>$_GET</varname> array
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
-                                              <emphasis>(boolean, true by default) make_id_with_post_variables</emphasis> :
-                                              if true, the cache id will be dependent of the content of the
+                                              <emphasis>(boolean, true by default)
+                                                  make_id_with_post_variables</emphasis> : if true,
+                                              the cache id will be dependent of the content of the
                                               <varname>$_POST</varname> array
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
-                                              <emphasis>(boolean, true by default) make_id_with_session_variables</emphasis> :
-                                              if true, the cache id will be dependent of the content of the
-                                              <varname>$_SESSION</varname> array
+                                              <emphasis>(boolean, true by default)
+                                                  make_id_with_session_variables</emphasis> : if
+                                              true, the cache id will be dependent of the content of
+                                              the <varname>$_SESSION</varname> array
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
-                                              <emphasis>(boolean, true by default) make_id_with_files_variables</emphasis> :
-                                              if true, the cache id will be dependent of the content of the
+                                              <emphasis>(boolean, true by default)
+                                                  make_id_with_files_variables</emphasis> : if true,
+                                              the cache id will be dependent of the content of the
                                               <varname>$_FILES</varname> array
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
-                                              <emphasis>(boolean, true by default) make_id_with_cookie_variables</emphasis> :
-                                              if true, the cache id will be dependent of the content of the
-                                              <varname>$_COOKIE</varname> array
+                                              <emphasis>(boolean, true by default)
+                                                  make_id_with_cookie_variables</emphasis> : if
+                                              true, the cache id will be dependent of the content of
+                                              the <varname>$_COOKIE</varname> array
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
-                                              <emphasis>(int, false by default) specific_lifetime</emphasis> :
-                                              if not false, the given lifetime will be used for the choosen regexp
+                                              <emphasis>(int, false by default)
+                                                  specific_lifetime</emphasis> : if not false, the
+                                              given lifetime will be used for the choosen regexp
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
-                                              <emphasis>(array, array() by default) tags</emphasis> :
-                                              tags for the cache record
+                                              <emphasis>(array, array() by default) tags</emphasis>
+                                              : tags for the cache record
                                           </para>
                                       </listitem>
                                       <listitem>
@@ -708,10 +734,12 @@ $result = $cache->foobar2('1', '2');
                               <entry><type>Array</type></entry>
                               <entry><methodname>array()</methodname></entry>
                               <entry>
-                                    an associative array to set options only for some REQUEST_URI, keys are (PCRE) regexps, values are
-                                    associative arrays with specific options to set if the regexp matchs on $_SERVER['REQUEST_URI']
-                                  (see default_options for the list of available options) ; if several regexps match the $_SERVER['REQUEST_URI'],
-                                  only the last one will be used
+                                  an associative array to set options only for some REQUEST_URI,
+                                  keys are (PCRE) regexps, values are associative arrays with
+                                  specific options to set if the regexp matchs on
+                                  $_SERVER['REQUEST_URI'] (see default_options for the list of
+                                  available options) ; if several regexps match the
+                                  $_SERVER['REQUEST_URI'], only the last one will be used
                               </entry>
                          </row>
                          <row>
@@ -719,8 +747,9 @@ $result = $cache->foobar2('1', '2');
                               <entry><type>Array</type></entry>
                               <entry><methodname>array()</methodname></entry>
                               <entry>
-                                   an array of strings corresponding to some HTTP headers name. Listed headers
-                                   will be stored with cache datas and "replayed" when the cache is hit
+                                   an array of strings corresponding to some HTTP headers name.
+                                   Listed headers will be stored with cache datas and "replayed"
+                                   when the cache is hit
                               </entry>
                          </row>
                       </tbody>
@@ -742,8 +771,8 @@ $cache->start();
 // rest of the page ...
 ]]></programlisting>
             <para>
-                a more complex example which shows a way to get a centralized cache management in a bootstrap file
-                (for using with <classname>Zend_Controller</classname> for example)
+                a more complex example which shows a way to get a centralized cache management in a
+                bootstrap file (for using with <classname>Zend_Controller</classname> for example)
             </para>
             <programlisting language="php"><![CDATA[
 /*
@@ -799,8 +828,8 @@ $cache->start();
         <sect3 id="zend.cache.frontends.page.cancel">
             <title>The Specific Cancel Method</title>
             <para>
-                Because of design issues, in some cases (for example when using non HTTP/200 return codes),
-                you could need to cancel the current cache process. So we introduce for this
+                Because of design issues, in some cases (for example when using non HTTP/200 return
+                codes), you could need to cancel the current cache process. So we introduce for this
                 particular frontend, the cancel() method.
             </para>
             <programlisting language="php"><![CDATA[

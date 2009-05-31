@@ -9,16 +9,16 @@
         <title>Introduction</title>
 
         <para>
-            <ulink url="http://en.wikipedia.org/wiki/Digest_access_authentication">Digest authentication</ulink>
-            is a method of HTTP authentication that improves upon
-            <ulink url="http://en.wikipedia.org/wiki/Basic_authentication_scheme">Basic authentication</ulink>
-            by providing a way to authenticate without having to transmit the password in clear text across
-            the network.
+            <ulink url="http://en.wikipedia.org/wiki/Digest_access_authentication">Digest
+                authentication</ulink> is a method of HTTP authentication that improves upon
+            <ulink url="http://en.wikipedia.org/wiki/Basic_authentication_scheme">Basic
+                authentication</ulink> by providing a way to authenticate without having to
+            transmit the password in clear text across the network.
         </para>
 
         <para>
-            This adapter allows authentication against text files containing lines having the basic elements
-            of Digest authentication:
+            This adapter allows authentication against text files containing lines having the basic
+            elements of Digest authentication:
             <itemizedlist>
                 <listitem>
                     <para>
@@ -36,8 +36,8 @@
                     </para>
                 </listitem>
             </itemizedlist>
-            The above elements are separated by colons, as in the following example (in which the password is
-            "<emphasis>somePassword</emphasis>"):
+            The above elements are separated by colons, as in the following example (in which the
+            password is "<emphasis>somePassword</emphasis>"):
         </para>
 
         <programlisting language="txt"><![CDATA[
@@ -51,7 +51,8 @@ someUser:Some Realm:fde17b91c3a510ecbaf7dbd37f59d4f8
         <title>Specifics</title>
 
         <para>
-            The digest authentication adapter, <classname>Zend_Auth_Adapter_Digest</classname>, requires several input parameters:
+            The digest authentication adapter, <classname>Zend_Auth_Adapter_Digest</classname>,
+            requires several input parameters:
             <itemizedlist>
                 <listitem>
                     <para>
@@ -84,10 +85,11 @@ someUser:Some Realm:fde17b91c3a510ecbaf7dbd37f59d4f8
         <title>Identity</title>
 
         <para>
-            The digest authentication adapter returns a <classname>Zend_Auth_Result</classname> object, which has been
-            populated with the identity as an array having keys of <emphasis>realm</emphasis> and
-            <emphasis>username</emphasis>. The respective array values associated with these keys correspond to the
-            values set before <methodname>authenticate()</methodname> is called.
+            The digest authentication adapter returns a <classname>Zend_Auth_Result</classname>
+            object, which has been populated with the identity as an array having keys of
+            <emphasis>realm</emphasis> and <emphasis>username</emphasis>. The respective array
+            values associated with these keys correspond to the values set before
+            <methodname>authenticate()</methodname> is called.
         </para>
 
         <programlisting language="php"><![CDATA[

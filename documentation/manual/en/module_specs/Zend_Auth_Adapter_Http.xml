@@ -9,12 +9,13 @@
         <title>Introduction</title>
 
         <para>
-            <classname>Zend_Auth_Adapter_Http</classname> provides a mostly-compliant implementation of
-            <ulink url="http://tools.ietf.org/html/rfc2617">RFC-2617</ulink>,
-            <ulink url="http://en.wikipedia.org/wiki/Basic_authentication_scheme">Basic</ulink> and
-            <ulink url="http://en.wikipedia.org/wiki/Digest_access_authentication">Digest</ulink> HTTP Authentication.
-            Digest authentication is a method of HTTP authentication that improves upon Basic authentication by
-            providing a way to authenticate without having to transmit the password in clear text across the network.
+            <classname>Zend_Auth_Adapter_Http</classname> provides a mostly-compliant implementation
+            of <ulink url="http://tools.ietf.org/html/rfc2617">RFC-2617</ulink>, <ulink
+                url="http://en.wikipedia.org/wiki/Basic_authentication_scheme">Basic</ulink> and
+            <ulink url="http://en.wikipedia.org/wiki/Digest_access_authentication">Digest</ulink>
+            HTTP Authentication. Digest authentication is a method of HTTP authentication that
+            improves upon Basic authentication by providing a way to authenticate without having to
+            transmit the password in clear text across the network.
         </para>
 
         <para>
@@ -27,7 +28,8 @@
                 </listitem>
                 <listitem>
                     <para>
-                        Issues challenges in all supported schemes, so client can respond with any scheme it supports.
+                        Issues challenges in all supported schemes, so client can respond with any
+                        scheme it supports.
                     </para>
                 </listitem>
                 <listitem>
@@ -37,8 +39,8 @@
                 </listitem>
                 <listitem>
                     <para>
-                        Includes support for authenticating against text files and provides an interface for
-                        authenticating against other sources, such as databases.
+                        Includes support for authenticating against text files and provides an
+                        interface for authenticating against other sources, such as databases.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -49,7 +51,8 @@
             <itemizedlist>
                 <listitem>
                     <para>
-                        Nonce tracking, which would allow for "stale" support, and increased replay attack protection.
+                        Nonce tracking, which would allow for "stale" support, and increased replay
+                        attack protection.
                     </para>
                 </listitem>
                 <listitem>
@@ -72,11 +75,12 @@
         <title>Design Overview</title>
 
         <para>
-            This adapter consists of two sub-components, the HTTP authentication class itself, and the so-called
-            "Resolvers." The HTTP authentication class encapsulates the logic for carrying out both Basic and Digest
-            authentication. It uses a Resolver to look up a client's identity in some data store (text file by default),
-            and retrieve the credentials from the data store. The "resolved" credentials are then compared to the values
-            submitted by the client to determine whether authentication is successful.
+            This adapter consists of two sub-components, the HTTP authentication class itself, and
+            the so-called "Resolvers." The HTTP authentication class encapsulates the logic for
+            carrying out both Basic and Digest authentication. It uses a Resolver to look up a
+            client's identity in some data store (text file by default), and retrieve the
+            credentials from the data store. The "resolved" credentials are then compared to the
+            values submitted by the client to determine whether authentication is successful.
         </para>
 
     </sect2>
@@ -86,8 +90,9 @@
         <title>Configuration Options</title>
 
         <para>
-            The <classname>Zend_Auth_Adapter_Http</classname> class requires a configuration array passed to its constructor.
-            There are several configuration options available, and some are required:
+            The <classname>Zend_Auth_Adapter_Http</classname> class requires a configuration array
+            passed to its constructor. There are several configuration options available, and some
+            are required:
             <table id="zend.auth.adapter.configuration_options.table">
                 <title>Configuration Options</title>
                 <tgroup cols="3">
@@ -103,38 +108,48 @@
                             <entry><emphasis>accept_schemes</emphasis></entry>
                             <entry>Yes</entry>
                             <entry>
-                                Determines which authentication schemes the adapter will accept from the client. Must be
-                                a space-separated list containing <emphasis>'basic'</emphasis> and/or <emphasis>'digest'</emphasis>.
+                                Determines which authentication schemes the adapter will accept from
+                                the client. Must be a space-separated list containing
+                                <emphasis>'basic'</emphasis> and/or <emphasis>'digest'</emphasis>.
                             </entry>
                         </row>
                         <row>
                             <entry><emphasis>realm</emphasis></entry>
                             <entry>Yes</entry>
                             <entry>
-                                Sets the authentication realm; usernames should be unique within a given realm.
+                                Sets the authentication realm; usernames should be unique within a
+                                given realm.
                             </entry>
                         </row>
                         <row>
                             <entry><emphasis>digest_domains</emphasis></entry>
-                            <entry>Yes, when <emphasis>'accept_schemes'</emphasis> contains <emphasis>'digest'</emphasis></entry>
                             <entry>
-                                Space-separated list of URIs for which the same authentication information is valid. The
-                                URIs need not all point to the same server.
+                                Yes, when <emphasis>'accept_schemes'</emphasis> contains
+                                <emphasis>'digest'</emphasis>
+                            </entry>
+                            <entry>
+                                Space-separated list of URIs for which the same authentication
+                                information is valid. The URIs need not all point to the same
+                                server.
                             </entry>
                         </row>
                         <row>
                             <entry><emphasis>nonce_timeout</emphasis></entry>
-                            <entry>Yes, when <emphasis>'accept_schemes'</emphasis> contains <emphasis>'digest'</emphasis></entry>
                             <entry>
-                                Sets the number of seconds for which the nonce is valid. See notes below.
+                                Yes, when <emphasis>'accept_schemes'</emphasis> contains
+                                <emphasis>'digest'</emphasis>
+                            </entry>
+                            <entry>
+                                Sets the number of seconds for which the nonce is valid. See notes
+                                below.
                             </entry>
                         </row>
                         <row>
                             <entry><emphasis>proxy_auth</emphasis></entry>
                             <entry>No</entry>
                             <entry>
-                                Disabled by default. Enable to perform Proxy authentication, instead of normal origin
-                                server authentication.
+                                Disabled by default. Enable to perform Proxy authentication, instead
+                                of normal origin server authentication.
                             </entry>
                         </row>
                     </tbody>
@@ -144,11 +159,12 @@
 
         <note>
             <para>
-                The current implementation of the <emphasis>nonce_timeout</emphasis> has some interesting side effects. This
-                setting is supposed to determine the valid lifetime of a given nonce, or effectively how long a client's
-                authentication information is accepted. Currently, if it's set to 3600 (for example), it will cause the
-                adapter to prompt the client for new credentials every hour, on the hour. This will be resolved in a
-                future release, once nonce tracking and stale support are implemented.
+                The current implementation of the <emphasis>nonce_timeout</emphasis> has some
+                interesting side effects. This setting is supposed to determine the valid lifetime
+                of a given nonce, or effectively how long a client's authentication information is
+                accepted. Currently, if it's set to 3600 (for example), it will cause the adapter to
+                prompt the client for new credentials every hour, on the hour. This will be resolved
+                in a future release, once nonce tracking and stale support are implemented.
             </para>
         </note>
 

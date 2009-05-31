@@ -99,8 +99,10 @@ class Zend_Paginator_Adapter_DbSelect implements Zend_Paginator_Adapter_Interfac
                 $countColumnPart = $countColumnPart->__toString();
             }
 
+            $rowCountColumn = $this->_select->getAdapter()->foldCase(self::ROW_COUNT_COLUMN);
+
             // The select query can contain only one column, which should be the row count column
-            if (false === strpos($countColumnPart, self::ROW_COUNT_COLUMN)) {
+            if (false === strpos($countColumnPart, $rowCountColumn)) {
                 /**
                  * @see Zend_Paginator_Exception
                  */
@@ -111,7 +113,7 @@ class Zend_Paginator_Adapter_DbSelect implements Zend_Paginator_Adapter_Interfac
 
             $result = $rowCount->query(Zend_Db::FETCH_ASSOC)->fetch();
 
-            $this->_rowCount = count($result) > 0 ? $result[self::ROW_COUNT_COLUMN] : 0;
+            $this->_rowCount = count($result) > 0 ? $result[$rowCountColumn] : 0;
         } else if (is_integer($rowCount)) {
             $this->_rowCount = $rowCount;
         } else {
@@ -192,7 +194,9 @@ class Zend_Paginator_Adapter_DbSelect implements Zend_Paginator_Adapter_Interfac
             }
 
             $countPart  = empty($groupPart) ? 'COUNT(*)' : 'COUNT(DISTINCT ' . $groupPart . ')';
-            $expression = new Zend_Db_Expr($countPart . ' AS ' . $db->quoteIdentifier(self::ROW_COUNT_COLUMN));
+            $expression = new Zend_Db_Expr(
+                $countPart . ' AS ' . $db->quoteIdentifier($db->foldCase(self::ROW_COUNT_COLUMN))
+            );
 
             $rowCount->__toString(); // Workaround for ZF-3719 and related
             $rowCount->reset(Zend_Db_Select::COLUMNS)

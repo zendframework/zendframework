@@ -765,7 +765,7 @@ class Zend_Db_Select
                     $correlationName = $_correlationName;
                 } else {
                     // We assume just an array of identifiers, with no correlation name
-                    $tableName = $name;
+                    $tableName = $_tableName;
                     $correlationName = $this->_uniqueCorrelation($tableName);
                 }
                 break;

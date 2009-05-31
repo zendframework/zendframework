@@ -27,9 +27,9 @@ $currency = new Zend_Currency($currency, $locale);
 ]]></programlisting>
 
         <para>
-            The <code>setFormat()</code> method takes now an array of options. These options are set permanently and override all previously
-            set values. Also a new option 'precision' has been added. The
-            following options have been refactored:
+            The <code>setFormat()</code> method takes now an array of options. These options are set
+            permanently and override all previously set values. Also a new option 'precision' has
+            been added. The following options have been refactored:
 
             <itemizedlist mark='opencircle'>
                 <listitem>

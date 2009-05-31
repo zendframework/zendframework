@@ -45,8 +45,8 @@ RewriteRule ^.*$ index.php [NC,L]
 ]]></programlisting>
 
         <para>
-            The rewrite router can also be used with the IIS webserver (versions &lt;= 7.0) if <ulink
-                url="http://www.isapirewrite.com">Isapi_Rewrite</ulink> has been
+            The rewrite router can also be used with the IIS webserver (versions &lt;= 7.0) if
+            <ulink url="http://www.isapirewrite.com">Isapi_Rewrite</ulink> has been
             installed as an Isapi extension with the following rewrite rule:
         </para>
 
@@ -154,12 +154,24 @@ $router->addRoute('user',
         </para>
 
         <itemizedlist mark="opencircle">
-            <listitem><para><xref linkend="zend.controller.router.routes.standard" /></para></listitem>
-            <listitem><para><xref linkend="zend.controller.router.routes.static" /></para></listitem>
-            <listitem><para><xref linkend="zend.controller.router.routes.regex" /></para></listitem>
-            <listitem><para><xref linkend="zend.controller.router.routes.hostname" /></para></listitem>
-            <listitem><para><xref linkend="zend.controller.router.routes.chain" /></para></listitem>
-            <listitem><para><xref linkend="zend.controller.router.default-routes" /> *</para></listitem>
+            <listitem>
+                <para><xref linkend="zend.controller.router.routes.standard" /></para>
+            </listitem>
+            <listitem>
+                <para><xref linkend="zend.controller.router.routes.static" /></para>
+            </listitem>
+            <listitem>
+                <para><xref linkend="zend.controller.router.routes.regex" /></para>
+            </listitem>
+            <listitem>
+                 <para><xref linkend="zend.controller.router.routes.hostname" /></para>
+             </listitem>
+            <listitem>
+                <para><xref linkend="zend.controller.router.routes.chain" /></para>
+            </listitem>
+            <listitem>
+                <para><xref linkend="zend.controller.router.default-routes" /> *</para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -231,8 +243,8 @@ $router->addRoute('user',
         <para>
             There are three special variables which can be used in your routes
             - 'module', 'controller' and 'action'. These special variables are
-            used by <classname>Zend_Controller_Dispatcher</classname> to find a controller and action
-            to dispatch to.
+            used by <classname>Zend_Controller_Dispatcher</classname> to find a controller and
+            action to dispatch to.
         </para>
 
         <note>

@@ -18,8 +18,8 @@
             to create your own base class for action controllers). The most
             basic operation is to subclass it, and create action methods that
             correspond to the various actions you wish the controller to handle
-            for your site. <classname>Zend_Controller</classname>'s routing and dispatch handling will
-            autodiscover any methods ending in 'Action' in your class as
+            for your site. <classname>Zend_Controller</classname>'s routing and dispatch handling
+            will autodiscover any methods ending in 'Action' in your class as
             potential controller actions.
         </para>
 
@@ -264,8 +264,8 @@ if ($this->_hasParam('id') {
             <title>Default View Integration is Via the ViewRenderer</title>
 
             <para>
-                The content in this section is only valid when you have
-                explicitly disabled the <link linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>.
+                The content in this section is only valid when you have explicitly disabled the
+                <link linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>.
                 Otherwise, you can safely skip over this section.
             </para>
         </note>

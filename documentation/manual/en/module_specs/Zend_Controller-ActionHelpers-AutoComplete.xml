@@ -120,8 +120,8 @@ class FooController extends Zend_Controller_Action
             Dojo does not have an AutoCompletion widget per se, but has two
             widgets that can perform AutoCompletion: ComboBox and
             FilteringSelect. In both cases, they require a data store that
-            implements the QueryReadStore; for more information on these topics,
-            see the <ulink url="http://dojotoolkit.org/book/dojo-book-0-9/part-3-programmatic-dijit-and-dojo/data-retrieval-dojo-data-0">dojo.data</ulink>
+            implements the QueryReadStore; for more information on these topics, see the <ulink
+                url="http://dojotoolkit.org/book/dojo-book-0-9/part-3-programmatic-dijit-and-dojo/data-retrieval-dojo-data-0">dojo.data</ulink>
             documentation.
         </para>
 
@@ -332,7 +332,8 @@ dojo.require("custom.TestNameReadStore");
     <sect4 id="zend.controller.actionhelpers.autocomplete.scriptaculous">
         <title>AutoCompletion with Scriptaculous</title>
         <para>
-            <ulink url="http://wiki.script.aculo.us/scriptaculous/show/Ajax.Autocompleter">Scriptaculous</ulink>
+            <ulink
+                url="http://wiki.script.aculo.us/scriptaculous/show/Ajax.Autocompleter">Scriptaculous</ulink>
             expects an HTML response in a specific format.
         </para>
 

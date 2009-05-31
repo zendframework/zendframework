@@ -87,7 +87,9 @@ try {
             </listitem>
 
             <listitem>
-                <para><classname>Zend_Controller_Response_Abstract::renderExceptions()</classname></para>
+                <para>
+                    <classname>Zend_Controller_Response_Abstract::renderExceptions()</classname>
+                </para>
 
                 <para>
                     By passing a boolean true value to this method, you tell the

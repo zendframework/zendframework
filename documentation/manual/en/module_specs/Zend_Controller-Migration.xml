@@ -674,8 +674,8 @@ echo $response;
 
                     <listitem>
                         <para>
-                            The <code>_action</code> property is no longer set.
-                            This property was a <classname>Zend_Controller_Dispatcher_Token</classname>,
+                            The <code>_action</code> property is no longer set. This property was a
+                            <classname>Zend_Controller_Dispatcher_Token</classname>,
                             which no longer exists in the current incarnation.
                             The sole purpose of the token was to provide
                             information about the requested controller, action,
@@ -732,8 +732,8 @@ public function __call($method, $args)
             <listitem><para>
                 <classname>Zend_Controller_RewriteRouter::setRewriteBase()</classname> has
                 been removed. Use <classname>Zend_Controller_Front::setBaseUrl()</classname>
-                instead (or <classname>Zend_Controller_Request_Http::setBaseUrl()</classname>, if using
-                that request class).
+                instead (or <classname>Zend_Controller_Request_Http::setBaseUrl()</classname>, if
+                using that request class).
             </para></listitem>
 
             <listitem><para>

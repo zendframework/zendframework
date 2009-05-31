@@ -2570,4 +2570,136 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
         $value = Zend_Locale_Data::getContent('de_AT', 'dateitem', 'MMMMd');
         $this->assertEquals("d. MMMM", $value);
     }
+
+    /**
+     * test for reading intervalformat from locale
+     * expected array
+     */
+    public function testDateInterval()
+    {
+        $value = Zend_Locale_Data::getList('de_AT', 'dateinterval');
+        $result = array(
+            'M' => array('M' => 'M.-M.'),
+            'MEd' => array(
+                'M' => 'E, dd.MM. - E, dd.MM.',
+                'd' => 'E, dd.MM. - E, dd.MM.'),
+            'MMM' => array('M' => 'MMM-MMM'),
+            'MMMEd' => array(
+                'M' => 'E, dd. MMM - E, dd. MMM',
+                'd' => 'E, dd. - E, dd. MMM'),
+            'MMMM' => array('M' => 'LLLL-LLLL'),
+            'MMMd' => array(
+                'M' => 'dd. MMM - dd. MMM',
+                'd' => 'dd.-dd. MMM'),
+            'Md' => array(
+                'M' => 'dd.MM. - dd.MM.',
+                'd' => 'dd.MM. - dd.MM.'),
+            'd' => array('d' => 'd.-d.'),
+            'h' => array(
+                'a' => 'HH-HH',
+                'h' => 'HH-HH'),
+            'hm' => array(
+                'a' => 'HH:mm-HH:mm',
+                'h' => 'HH:mm-HH:mm',
+                'm' => 'HH:mm-HH:mm'),
+            'hmv' => array(
+                'a' => 'HH:mm-HH:mm v',
+                'h' => 'HH:mm-HH:mm v',
+                'm' => 'HH:mm-HH:mm v'),
+            'hv' => array(
+                'a' => 'HH-HH v',
+                'h' => 'HH-HH v'),
+            'y' => array('y' => 'y-y'),
+            'yM' => array(
+                'M' => 'MM.yy - MM.yy',
+                'y' => 'MM.yy - MM.yy'),
+            'yMEd' => array(
+                'M' => 'E, dd.MM.yy - E, dd.MM.yy',
+                'd' => 'E, dd.MM.yy - E, dd.MM.yy',
+                'y' => 'E, dd.MM.yy - E, dd.MM.yy'),
+            'yMMM' => array(
+                'M' => 'MMM-MMM y',
+                'y' => 'MMM y - MMM y'),
+            'yMMMEd' => array(
+                'M' => 'E, dd. MMM - E, dd. MMM y',
+                'd' => 'E, dd. - E, dd. MMM y',
+                'y' => 'E, dd. MMM y - E, dd. MMM y'),
+            'yMMMM' => array(
+                'M' => 'MM – MM.yyyy',
+                'y' => 'MM.yyyy – MM.yyyy'),
+            'yMMMd' => array(
+                'M' => 'dd. MMM - dd. MMM y',
+                'd' => 'dd.-dd. MMM y',
+                'y' => 'dd. MMM y - dd. MMM y'),
+            'yMd' => array(
+                'M' => 'dd.MM.yy - dd.MM.yy',
+                'd' => 'dd.MM.yy - dd.MM.yy',
+                'y' => 'dd.MM.yy - dd.MM.yy')
+        );
+        $this->assertEquals($result, $value);
+
+        $value = Zend_Locale_Data::getList('de_AT', 'dateinterval', 'gregorian');
+        $result = array(
+            'M' => array('M' => 'M.-M.'),
+            'MEd' => array(
+                'M' => 'E, dd.MM. - E, dd.MM.',
+                'd' => 'E, dd.MM. - E, dd.MM.'),
+            'MMM' => array('M' => 'MMM-MMM'),
+            'MMMEd' => array(
+                'M' => 'E, dd. MMM - E, dd. MMM',
+                'd' => 'E, dd. - E, dd. MMM'),
+            'MMMM' => array('M' => 'LLLL-LLLL'),
+            'MMMd' => array(
+                'M' => 'dd. MMM - dd. MMM',
+                'd' => 'dd.-dd. MMM'),
+            'Md' => array(
+                'M' => 'dd.MM. - dd.MM.',
+                'd' => 'dd.MM. - dd.MM.'),
+            'd' => array('d' => 'd.-d.'),
+            'h' => array(
+                'a' => 'HH-HH',
+                'h' => 'HH-HH'),
+            'hm' => array(
+                'a' => 'HH:mm-HH:mm',
+                'h' => 'HH:mm-HH:mm',
+                'm' => 'HH:mm-HH:mm'),
+            'hmv' => array(
+                'a' => 'HH:mm-HH:mm v',
+                'h' => 'HH:mm-HH:mm v',
+                'm' => 'HH:mm-HH:mm v'),
+            'hv' => array(
+                'a' => 'HH-HH v',
+                'h' => 'HH-HH v'),
+            'y' => array('y' => 'y-y'),
+            'yM' => array(
+                'M' => 'MM.yy - MM.yy',
+                'y' => 'MM.yy - MM.yy'),
+            'yMEd' => array(
+                'M' => 'E, dd.MM.yy - E, dd.MM.yy',
+                'd' => 'E, dd.MM.yy - E, dd.MM.yy',
+                'y' => 'E, dd.MM.yy - E, dd.MM.yy'),
+            'yMMM' => array(
+                'M' => 'MMM-MMM y',
+                'y' => 'MMM y - MMM y'),
+            'yMMMEd' => array(
+                'M' => 'E, dd. MMM - E, dd. MMM y',
+                'd' => 'E, dd. - E, dd. MMM y',
+                'y' => 'E, dd. MMM y - E, dd. MMM y'),
+            'yMMMM' => array(
+                'M' => 'MM – MM.yyyy',
+                'y' => 'MM.yyyy – MM.yyyy'),
+            'yMMMd' => array(
+                'M' => 'dd. MMM - dd. MMM y',
+                'd' => 'dd.-dd. MMM y',
+                'y' => 'dd. MMM y - dd. MMM y'),
+            'yMd' => array(
+                'M' => 'dd.MM.yy - dd.MM.yy',
+                'd' => 'dd.MM.yy - dd.MM.yy',
+                'y' => 'dd.MM.yy - dd.MM.yy')
+        );
+        $this->assertEquals($result, $value);
+
+        $value = Zend_Locale_Data::getContent('de_AT', 'dateinterval', array('gregorian', 'yMMMM', 'y'));
+        $this->assertEquals("MM.yyyy – MM.yyyy", $value);
+    }
 }

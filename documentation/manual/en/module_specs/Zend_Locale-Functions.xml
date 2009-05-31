@@ -388,6 +388,15 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry>Returns a list of default formats for given date or time items</entry>
                     </row>
                     <row>
+                        <entry><emphasis>DateInterval</emphasis></entry>
+                        <entry>
+                            Returns a list of date or time formats which are used when you want to
+                            display intervals. The list is a multidimentional array where the first
+                            dimension is the interval format, and the second dimension is the token
+                            with the greatest difference.
+                        </entry>
+                    </row>
+                    <row>
                         <entry><emphasis>Field</emphasis></entry>
                         <entry>Returns a localized list of date fields which can be used to display calendars
                             or date strings like 'month' or 'year' in a wished language. If you omit the value
@@ -787,6 +796,17 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                     <row>
                         <entry><emphasis>DateItem</emphasis></entry>
                         <entry>Returns the default format for a given date or time item</entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>DateInterval</emphasis></entry>
+                        <entry>
+                            Returns the interval format for a given date or time format. The first
+                            value is the calendar format, normally 'gregorian'. The second value is
+                            the interval format and the third value the token with the greatest
+                            difference. For example: array('gregorian', 'yMMMM', 'y') returns the
+                            interval format for the date format 'yMMMM' where 'y' has the greatest
+                            difference.
+                        </entry>
                     </row>
                     <row>
                         <entry><emphasis>Field</emphasis></entry>

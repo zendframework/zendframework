@@ -5,8 +5,8 @@
     <title>Zend_Date API Overview</title>
 
     <para>
-        While the <classname>Zend_Date</classname> API remains simplistic and unitary, its design remains flexible and powerful
-        through the rich permutations of operations and operands.
+        While the <classname>Zend_Date</classname> API remains simplistic and unitary, its design
+        remains flexible and powerful through the rich permutations of operations and operands.
     </para>
 
     <sect2 id="zend.date.options">
@@ -18,12 +18,15 @@
             <title>Selecting the Date Format Type</title>
 
             <para>
-                Several methods use date format strings, in a way similar to PHP's <code>date()</code>.
-                If you are more comfortable with PHP's date format specifier than with ISO format specifiers,
-                then you can use <classname>Zend_Date::setOptions(array('format_type' => 'php'))</classname>.
-                Afterward, use PHP's date format specifiers for all functions which accept a <varname>$format</varname> parameter.
-                Use <classname>Zend_Date::setOptions(array('format_type' => 'iso'))</classname> to switch back to the default mode of
-                supporting only ISO date format tokens. For a list of supported format codes, see
+                Several methods use date format strings, in a way similar to PHP's
+                <code>date()</code>. If you are more comfortable with PHP's date format specifier
+                than with ISO format specifiers, then you can use
+                <classname>Zend_Date::setOptions(array('format_type' => 'php'))</classname>.
+                Afterward, use PHP's date format specifiers for all functions which accept a
+                <varname>$format</varname> parameter. Use
+                <classname>Zend_Date::setOptions(array('format_type' => 'iso'))</classname> to
+                switch back to the default mode of supporting only ISO date format tokens. For a
+                list of supported format codes, see
                 <xref linkend="zend.date.constants.phpformats" />
             </para>
 
@@ -34,29 +37,33 @@
             <title>DST and Date Math</title>
 
             <para>
-                When dates are manipulated, sometimes they cross over a DST change, normally resulting in the date
-                losing or gaining an hour. For exmaple, when adding months to a date before a DST change, if the
-                resulting date is after the DST change, then the resulting date will appear to lose or gain an hour,
-                resulting in the time value of the date changing. For boundary dates, such as midnight of the first
-                or last day of a month, adding enough months to cross a date boundary results in the date losing
-                an hour and becoming the last hour of the preceding month, giving the appearance of an "off by 1"
-                error. To avoid this situation, the DST change ignored by using the <code>fix_dst</code> option.
-                When crossing the Summer/Winter DST boundary, normally an hour is substracted or added depending
-                on the date. For example, date math crossing the Spring DST leads to a date having a day value
-                one less than expected, if the time part of the date was originally 00:00:00. Since Zend_Date
-                is based on timestamps, and not calendar dates with a time component, the timestamp loses an hour,
-                resulting in the date having a calendar day value one less than expected.
-                To prevent such problems use the option <code>fix_dst</code>, which defaults to true, causing DST
-                to have no effect on date "math" (<code>addMOnth(), subMonth()</code>). Use
-                <classname>Zend_Date::setOptions(array('fix_dst' => false))</classname> to enable the subtraction or addition
-                of the DST adjustment when performing date "math".
+                When dates are manipulated, sometimes they cross over a DST change, normally
+                resulting in the date losing or gaining an hour. For exmaple, when adding months to
+                a date before a DST change, if the resulting date is after the DST change, then the
+                resulting date will appear to lose or gain an hour, resulting in the time value of
+                the date changing. For boundary dates, such as midnight of the first or last day of
+                a month, adding enough months to cross a date boundary results in the date losing an
+                hour and becoming the last hour of the preceding month, giving the appearance of an
+                "off by 1" error. To avoid this situation, the DST change ignored by using the
+                <code>fix_dst</code> option. When crossing the Summer/Winter DST boundary, normally
+                an hour is substracted or added depending on the date. For example, date math
+                crossing the Spring DST leads to a date having a day value one less than expected,
+                if the time part of the date was originally 00:00:00. Since Zend_Date is based on
+                timestamps, and not calendar dates with a time component, the timestamp loses an
+                hour, resulting in the date having a calendar day value one less than expected. To
+                prevent such problems use the option <code>fix_dst</code>, which defaults to true,
+                causing DST to have no effect on date "math" (<code>addMOnth(), subMonth()</code>).
+                Use <classname>Zend_Date::setOptions(array('fix_dst' => false))</classname> to
+                enable the subtraction or addition of the DST adjustment when performing date
+                "math".
             </para>
 
             <para>
-                <emphasis>If your actual timezone within the instance of <classname>Zend_Date</classname>
-                is set to UTC or GMT the option <code>'fix_dst'</code> will not be used</emphasis> because
-                these two timezones do not work with DST. When you change the timezone for this instance
-                again to a timezone which is not UTC or GMT the previous set 'fix_dst' option will be used
+                <emphasis>If your actual timezone within the instance of
+                <classname>Zend_Date</classname> is set to UTC or GMT the option
+                <code>'fix_dst'</code> will not be used</emphasis> because these two timezones do
+                not work with DST. When you change the timezone for this instance again to a
+                timezone which is not UTC or GMT the previous set 'fix_dst' option will be used
                 again for date "math".
             </para>
         </sect3>
@@ -66,19 +73,22 @@
             <title>Month Calculations</title>
 
             <para>
-                When adding or substracting months from an existing date, the resulting value for the day of
-                the month might be unexpected, if the original date fell on a day close to the end of the month.
-                For example, when adding one month to January 31st, people familiar with SQL will expect February
-                28th as the result. On the other side, people familiar with Excel and OpenOffice will expect
-                March 3rd as the result. The problem only occurs, if the resulting month does not have the day,
-                which is set in the original date. For ZF developers, the desired behavior is selectable using
-                the <code>extend_month</code> option to choose either the SQL behaviour, if set to false,
-                or the spreadsheet behaviour when set to true. The default behaviour for <code>extend_month</code>
-                is false, providing behavior compatible to SQL. By default, <classname>Zend_Date</classname> computes month
-                calculations by truncating dates to the end of the month (if necessary), without wrapping into the
-                next month when the original date designates a day of the month exceeding the number of days in
-                the resulting month. Use <classname>Zend_Date::setOptions(array('extend_month' => true));</classname>
-                to make month calculations work like popular spreadsheet programs.
+                When adding or substracting months from an existing date, the resulting value for
+                the day of the month might be unexpected, if the original date fell on a day close
+                to the end of the month. For example, when adding one month to January 31st, people
+                familiar with SQL will expect February 28th as the result. On the other side, people
+                familiar with Excel and OpenOffice will expect March 3rd as the result. The problem
+                only occurs, if the resulting month does not have the day, which is set in the
+                original date. For ZF developers, the desired behavior is selectable using the
+                <code>extend_month</code> option to choose either the SQL behaviour, if set to
+                false, or the spreadsheet behaviour when set to true. The default behaviour for
+                <code>extend_month</code> is false, providing behavior compatible to SQL. By
+                default, <classname>Zend_Date</classname> computes month calculations by truncating
+                dates to the end of the month (if necessary), without wrapping into the next month
+                when the original date designates a day of the month exceeding the number of days in
+                the resulting month. Use
+                <classname>Zend_Date::setOptions(array('extend_month' => true));</classname> to make
+                month calculations work like popular spreadsheet programs.
             </para>
 
         </sect3>
@@ -88,12 +98,13 @@
             <title>Speed up Date Localization and Normalization with Zend_Cache</title>
 
             <para>
-                You can speed up <classname>Zend_Date</classname> by using an <classname>Zend_Cache</classname> adapter.
-                This speeds up all methods of <classname>Zend_Date</classname> when you are using localized data.
-                For example all methods which accept <classname>Zend_Date::DATE</classname> and
-                <classname>Zend_Date::TIME</classname> constants would benefit from this. To set an <classname>Zend_Cache</classname>
-                adapter to <classname>Zend_Date</classname> just use
-                <classname>Zend_Date::setOptions(array('cache' => $adapter));</classname>.
+                You can speed up <classname>Zend_Date</classname> by using an
+                <classname>Zend_Cache</classname> adapter. This speeds up all methods of
+                <classname>Zend_Date</classname> when you are using localized data. For example all
+                methods which accept <classname>Zend_Date::DATE</classname> and
+                <classname>Zend_Date::TIME</classname> constants would benefit from this. To set an
+                <classname>Zend_Cache</classname> adapter to <classname>Zend_Date</classname> just
+                use <classname>Zend_Date::setOptions(array('cache' => $adapter));</classname>.
             </para>
 
         </sect3>
@@ -120,35 +131,38 @@
         <title>Working with Date Values</title>
 
         <para>
-            Once input has been normalized via the creation of a <classname>Zend_Date</classname> object, it will have an
-            associated timezone, but an internal representation using standard
-            <ulink url="http://en.wikipedia.org/wiki/Unix_Time">UNIX timestamps</ulink>
-            . In order for a date to be rendered in a localized manner, a timezone must be known first. The default
-            timezone is always GMT/UTC. To examine an object's timezone use <code>getTimeZone())</code>. To change an
-            object's timezone, use <code>setTimeZone())</code>. All manipulations of these objects are assumed to be
+            Once input has been normalized via the creation of a <classname>Zend_Date</classname>
+            object, it will have an associated timezone, but an internal representation using
+            standard <ulink url="http://en.wikipedia.org/wiki/Unix_Time">UNIX timestamps</ulink>.
+            In order for a date to be rendered in a localized manner, a timezone must be known
+            first. The default timezone is always GMT/UTC. To examine an object's timezone use
+            <code>getTimeZone())</code>. To change an object's timezone, use
+            <code>setTimeZone())</code>. All manipulations of these objects are assumed to be
             relative to this timezone.
         </para>
 
         <para>
-            Beware of mixing and matching operations with date parts between date objects for different timezones, which
-            generally produce undesireable results, unless the manipulations are only related to the timestamp.
-            Operating on <classname>Zend_Date</classname> objects having different timezones generally works, except as just
-            noted, since dates are normalized to UNIX timestamps on instantiation of <classname>Zend_Date</classname>.
+            Beware of mixing and matching operations with date parts between date objects for
+            different timezones, which generally produce undesireable results, unless the
+            manipulations are only related to the timestamp. Operating on
+            <classname>Zend_Date</classname> objects having different timezones generally works,
+            except as just noted, since dates are normalized to UNIX timestamps on instantiation of
+            <classname>Zend_Date</classname>.
         </para>
 
         <para>
-            Most methods expect a constant selecting the desired <varname>$part</varname> of a date, such as
-            <classname>Zend_Date::HOUR</classname>. These constants are valid for all of the functions below. A list of all
-            available constants is provided in
-            <xref linkend="zend.date.constants.list" />
-            . If no <varname>$part</varname> is specified, then <classname>Zend_Date::TIMESTAMP</classname> is assumed. Alternatively, a
-            user-specified format may be used for <varname>$part</varname>, using the same underlying mechanism and format
-            codes as
-            <link linkend="zend.locale.date.normalize"><classname>Zend_Locale_Format::getDate()</classname>
-            </link>
-            . If a date object is constructed using an obviously invalid date (e.g. a month number greater than 12),
-            then <classname>Zend_Date</classname> will throw an exception, unless no specific date format has been selected -i.e.
-            <varname>$part</varname> is either <constant>NULL</constant> or <classname>Zend_Date::DATES</classname> (a "loose" format).
+            Most methods expect a constant selecting the desired <varname>$part</varname> of a date,
+            such as <classname>Zend_Date::HOUR</classname>. These constants are valid for all of the
+            functions below. A list of all available constants is provided in
+            <xref linkend="zend.date.constants.list" />. If no <varname>$part</varname> is
+            specified, then <classname>Zend_Date::TIMESTAMP</classname> is assumed. Alternatively, a
+            user-specified format may be used for <varname>$part</varname>, using the same
+            underlying mechanism and format codes as <link
+                linkend="zend.locale.date.normalize"><classname>Zend_Locale_Format::getDate()</classname></link>.
+            If a date object is constructed using an obviously invalid date (e.g. a month number
+            greater than 12), then <classname>Zend_Date</classname> will throw an exception, unless
+            no specific date format has been selected -i.e. <varname>$part</varname> is either
+            <constant>NULL</constant> or <classname>Zend_Date::DATES</classname> (a "loose" format).
         </para>
 
         <example id="zend.date.values.example-1">
@@ -167,27 +181,32 @@ echo $date3, "\n"; // outputs "Mar 3, 2007 12:00:00 AM"
         </example>
 
         <para>
-            If the optional <varname>$locale</varname> parameter is provided, then the <varname>$locale</varname> disambiguates the
-            <varname>$date</varname> operand by replacing month and weekday names for string <varname>$date</varname> operands, and
-            even parsing date strings expressed according to the conventions of that locale (see <code>
-            <link linkend="zend.locale.date.normalize">Zend_Locale_Format::getDate()</link>
-            </code> ). The automatic normalization of localized <varname>$date</varname> operands of a string type occurs when
-            <varname>$part</varname> is one of the <classname>Zend_Date::DATE*</classname> or <classname>Zend_Date::TIME*</classname> constants.
-            The locale identifies which language should be used to parse month names and weekday names, if the
-            <varname>$date</varname> is a string containing a date. If there is no <varname>$date</varname> input parameter, then
-            the <varname>$locale</varname> parameter specifies the locale to use for localizing output (e.g. the date format
-            for a string representation). Note that the <varname>$date</varname> input parameter might actually have a type
-            name instead (e.g. <varname>$hour</varname> for <code>addHour()</code>), although that does not prevent the use of
-            <classname>Zend_Date</classname> objects as arguments for that parameter. If no <varname>$locale</varname> was specified,
-            then the locale of the current object is used to interpret <varname>$date</varname>, or select the localized
-            format for output.
+            If the optional <varname>$locale</varname> parameter is provided, then the
+            <varname>$locale</varname> disambiguates the <varname>$date</varname> operand by
+            replacing month and weekday names for string <varname>$date</varname> operands, and even
+            parsing date strings expressed according to the conventions of that locale (see <code>
+            <link linkend="zend.locale.date.normalize">Zend_Locale_Format::getDate()</link> </code>
+            ). The automatic normalization of localized <varname>$date</varname> operands of a
+            string type occurs when <varname>$part</varname> is one of the
+            <classname>Zend_Date::DATE*</classname> or <classname>Zend_Date::TIME*</classname>
+            constants. The locale identifies which language should be used to parse month names and
+            weekday names, if the <varname>$date</varname> is a string containing a date. If there
+            is no <varname>$date</varname> input parameter, then the <varname>$locale</varname>
+            parameter specifies the locale to use for localizing output (e.g. the date format for a
+            string representation). Note that the <varname>$date</varname> input parameter might
+            actually have a type name instead (e.g. <varname>$hour</varname> for
+            <code>addHour()</code>), although that does not prevent the use of
+            <classname>Zend_Date</classname> objects as arguments for that parameter. If no
+             <varname>$locale</varname> was specified, then the locale of the current object is used
+             to interpret <varname>$date</varname>, or select the localized format for output.
         </para>
 
         <para>
-            Since Zend Framework 1.7.0 <classname>Zend_Date</classname> does also support the usage of an application
-            wide locale. You can simply set a <classname>Zend_Locale</classname> instance to the registry like shown
-            below. With this notation you can forget about setting the locale manually with each instance when
-            you want to use the same locale multiple times.
+            Since Zend Framework 1.7.0 <classname>Zend_Date</classname> does also support the usage
+            of an application wide locale. You can simply set a <classname>Zend_Locale</classname>
+            instance to the registry like shown below. With this notation you can forget about
+            setting the locale manually with each instance when you want to use the same locale
+            multiple times.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -206,14 +225,17 @@ $date = new Zend_Date('31.Feb.2007');
         <title>Basic Zend_Date Operations Common to Many Date Parts</title>
 
         <para>
-            The methods <code>add(), sub(), compare(), get(), and set()</code> operate generically on dates. In each
-            case, the operation is performed on the date held in the instance object. The <varname>$date</varname> operand is
-            required for all of these methods, except <code>get()</code>, and may be a <classname>Zend_Date</classname> instance
-            object, a numeric string, or an integer. These methods assume <varname>$date</varname> is a timestamp, if it is
-            not an object. However, the <varname>$part</varname> operand controls which logical part of the two dates are
-            operated on, allowing operations on parts of the object's date, such as year or minute, even when
-            <varname>$date</varname> contains a long form date string, such as, "December 31, 2007 23:59:59". The result of
-            the operation changes the date in the object, except for <code>compare()</code>, and <code>get()</code>.
+            The methods <code>add(), sub(), compare(), get(), and set()</code> operate generically
+            on dates. In each case, the operation is performed on the date held in the instance
+            object. The <varname>$date</varname> operand is required for all of these methods,
+            except <code>get()</code>, and may be a <classname>Zend_Date</classname> instance
+            object, a numeric string, or an integer. These methods assume <varname>$date</varname>
+            is a timestamp, if it is not an object. However, the <varname>$part</varname> operand
+            controls which logical part of the two dates are operated on, allowing operations on
+            parts of the object's date, such as year or minute, even when <varname>$date</varname>
+            contains a long form date string, such as, "December 31, 2007 23:59:59". The result of
+            the operation changes the date in the object, except for <code>compare()</code>, and
+            <code>get()</code>.
         </para>
 
         <example id="zend.date.basic.example-1">
@@ -228,20 +250,22 @@ print $date;
         </example>
 
         <para>
-            Convenience methods exist for each combination of the basic operations and several common date parts as
-            shown in the tables below. These convenience methods help us lazy programmers avoid having to type out the
-            <link linkend="zend.date.constants.list">date part constants</link>
-            when using the general methods above. Conveniently, they are named by combining a prefix (name of a basic
-            operation) with a suffix (type of date part), such as <code>addYear()</code>. In the list below, all
-            combinations of "Date Parts" and "Basic Operations" exist. For example, the operation "add" exists for each
-            of these date parts, including <code>addDay()</code>, <code>addYear()</code>, etc.
+            Convenience methods exist for each combination of the basic operations and several
+            common date parts as shown in the tables below. These convenience methods help us lazy
+            programmers avoid having to type out the <link linkend="zend.date.constants.list">date
+                part constants</link> when using the general methods above. Conveniently, they are
+            named by combining a prefix (name of a basic operation) with a suffix (type of date
+            part), such as <code>addYear()</code>. In the list below, all combinations of "Date
+            Parts" and "Basic Operations" exist. For example, the operation "add" exists for each of
+            these date parts, including <code>addDay()</code>, <code>addYear()</code>, etc.
         </para>
 
         <para>
-            These convenience methods have the same equivalent functionality as the basic operation methods, but expect
-            string and integer <varname>$date</varname> operands containing only the values representing the type indicated by
-            the suffix of the convenience method. Thus, the names of these methods (e.g. "Year" or "Minute") identify
-            the units of the <varname>$date</varname> operand, when <varname>$date</varname> is a string or integer.
+            These convenience methods have the same equivalent functionality as the basic operation
+            methods, but expect string and integer <varname>$date</varname> operands containing only
+            the values representing the type indicated by the suffix of the convenience method.
+            Thus, the names of these methods (e.g. "Year" or "Minute") identify the units of the
+            <varname>$date</varname> operand, when <varname>$date</varname> is a string or integer.
         </para>
 
         <sect3 id="id.date.basic.parts">
@@ -260,86 +284,164 @@ print $date;
                     <tbody>
                         <row>
                             <entry>
-                                <ulink url="http://en.wikipedia.org/wiki/Unix_Time">Timestamp</ulink>
+                                <ulink
+                                    url="http://en.wikipedia.org/wiki/Unix_Time">Timestamp</ulink>
                             </entry>
                             <entry>
-                            UNIX timestamp, expressed in seconds elapsed since January 1st, 1970 00:00:00 GMT/UTC.
-                        </entry>
+                                UNIX timestamp, expressed in seconds elapsed since January 1st, 1970
+                                00:00:00 GMT/UTC.
+                            </entry>
                         </row>
                         <row>
                             <entry>
-                                <ulink url="http://en.wikipedia.org/wiki/Gregorian_calendar">Year</ulink>
+                                <ulink
+                                    url="http://en.wikipedia.org/wiki/Gregorian_calendar">Year</ulink>
                             </entry>
                             <entry>Gregorian calendar year (e.g. 2006)</entry>
                         </row>
                         <row>
                             <entry>
-                                <ulink url="http://en.wikipedia.org/wiki/Month#Julian_and_Gregorian_calendars">Month</ulink>
+                                <ulink
+                                    url="http://en.wikipedia.org/wiki/Month#Julian_and_Gregorian_calendars">Month</ulink>
                             </entry>
-                            <entry>Gregorian calendar month (1-12, localized names supported)</entry>
+                            <entry>
+                                Gregorian calendar month (1-12, localized names supported)
+                            </entry>
                         </row>
                         <row>
                             <entry>
-                                <ulink url="http://en.wikipedia.org/wiki/24-hour_clock">24 hour clock</ulink>
+                                <ulink
+                                    url="http://en.wikipedia.org/wiki/24-hour_clock">24 hour
+                                    clock</ulink>
                             </entry>
-                            <entry>Hours of the day (0-23) denote the hours elapsed, since the start of the day.</entry>
+                            <entry>
+                                Hours of the day (0-23) denote the hours elapsed, since the start of
+                                the day.
+                            </entry>
                         </row>
                         <row>
                             <entry>
                                 <ulink url="http://en.wikipedia.org/wiki/Minute">minute</ulink>
                             </entry>
-                            <entry>Minutes of the hour (0-59) denote minutes elapsed, since the start of the hour.</entry>
+                            <entry>
+                                Minutes of the hour (0-59) denote minutes elapsed, since the start
+                                of the hour.
+                            </entry>
                         </row>
                         <row>
                             <entry>
                                 <ulink url="http://en.wikipedia.org/wiki/Second">Second</ulink>
                             </entry>
-                            <entry>Seconds of the minute (0-59) denote the elapsed seconds, since the start of the minute.</entry>
+                            <entry>
+                                Seconds of the minute (0-59) denote the elapsed seconds, since the
+                                start of the minute.
+                            </entry>
                         </row>
                         <row>
                             <entry>
-                                <ulink url="http://en.wikipedia.org/wiki/Millisecond">millisecond</ulink>
+                                <ulink
+                                    url="http://en.wikipedia.org/wiki/Millisecond">millisecond</ulink>
                             </entry>
-                            <entry>Milliseconds denote thousandths of a second (0-999). <classname>Zend_Date</classname> supports two additional methods for working with time units smaller than seconds. By default, <classname>Zend_Date</classname> instances use a precision defaulting to milliseconds, as seen using <code>getFractionalPrecision()</code>. To change the precision use <code>setFractionalPrecision($precision)</code>. However, precision is limited practically to microseconds, since <classname>Zend_Date</classname> uses <code>
-                                <ulink url="http://php.net/microtime">microtime()</ulink></code>.</entry>
+                            <entry>
+                                Milliseconds denote thousandths of a second (0-999).
+                                <classname>Zend_Date</classname> supports two additional methods for
+                                working with time units smaller than seconds. By default,
+                                <classname>Zend_Date</classname> instances use a precision
+                                defaulting to milliseconds, as seen using
+                                <code>getFractionalPrecision()</code>. To change the precision use
+                                <code>setFractionalPrecision($precision)</code>. However, precision
+                                is limited practically to microseconds, since
+                                <classname>Zend_Date</classname> uses <code><ulink
+                                    url="http://php.net/microtime">microtime()</ulink></code>.
+                            </entry>
                         </row>
                         <row>
                             <entry>
                                 <ulink url="http://en.wikipedia.org/wiki/Day">Day</ulink>
                             </entry>
-                            <entry><classname>Zend_Date::DAY_SHORT</classname> is extracted from <varname>$date</varname> if the <varname>$date</varname> operand is an instance of <classname>Zend_Date</classname> or a numeric string. Otherwise, an attempt is made to extract the day according to the conventions documented for these constants: <classname>Zend_Date::WEEKDAY_NARROW</classname>, <classname>Zend_Date::WEEKDAY_NAME</classname>, <classname>Zend_Date::WEEKDAY_SHORT</classname>, <classname>Zend_Date::WEEKDAY</classname> (Gregorian calendar assumed)</entry>
+                            <entry>
+                                <classname>Zend_Date::DAY_SHORT</classname> is extracted from
+                                <varname>$date</varname> if the <varname>$date</varname> operand is
+                                an instance of <classname>Zend_Date</classname> or a numeric string.
+                                Otherwise, an attempt is made to extract the day according to the
+                                conventions documented for these constants:
+                                <classname>Zend_Date::WEEKDAY_NARROW</classname>,
+                                <classname>Zend_Date::WEEKDAY_NAME</classname>,
+                                <classname>Zend_Date::WEEKDAY_SHORT</classname>,
+                                <classname>Zend_Date::WEEKDAY</classname> (Gregorian calendar
+                                assumed)
+                            </entry>
                         </row>
                         <row>
                             <entry>
                                 <ulink url="http://en.wikipedia.org/wiki/Week">Week</ulink>
                             </entry>
-                            <entry><classname>Zend_Date::WEEK</classname> is extracted from <varname>$date</varname> if the <varname>$date</varname> operand is an instance of <classname>Zend_Date</classname> or a numeric string. Otherwise an exception is raised. (Gregorian calendar assumed)</entry>
+                            <entry>
+                                <classname>Zend_Date::WEEK</classname> is extracted from
+                                <varname>$date</varname> if the <varname>$date</varname> operand is
+                                an instance of <classname>Zend_Date</classname> or a numeric string.
+                                Otherwise an exception is raised. (Gregorian calendar assumed)
+                            </entry>
                         </row>
                         <row>
                             <entry>Date</entry>
-                            <entry><classname>Zend_Date::DAY_MEDIUM</classname> is extracted from <varname>$date</varname> if the <varname>$date</varname> operand is an instance of <classname>Zend_Date</classname>. Otherwise, an attempt is made to normalize the <varname>$date</varname> string into a Zend_Date::DATE_MEDIUM formatted date. The format of <classname>Zend_Date::DAY_MEDIUM</classname> depends on the object's locale.</entry>
+                            <entry>
+                                <classname>Zend_Date::DAY_MEDIUM</classname> is extracted from
+                                <varname>$date</varname> if the <varname>$date</varname> operand is
+                                an instance of <classname>Zend_Date</classname>. Otherwise, an
+                                attempt is made to normalize the <varname>$date</varname> string
+                                into a Zend_Date::DATE_MEDIUM formatted date. The format of
+                                <classname>Zend_Date::DAY_MEDIUM</classname> depends on the object's
+                                locale.
+                            </entry>
                         </row>
                         <row>
                             <entry>Weekday</entry>
-                            <entry>Weekdays are represented numerically as 0 (for Sunday) through 6 (for Saturday). <classname>Zend_Date::WEEKDAY_DIGIT</classname> is extracted from <varname>$date</varname>, if the <varname>$date</varname> operand is an instance of <classname>Zend_Date</classname> or a numeric string. Otherwise, an attempt is made to extract the day according to the conventions documented for these constants: <classname>Zend_Date::WEEKDAY_NARROW</classname>, <classname>Zend_Date::WEEKDAY_NAME</classname>, <classname>Zend_Date::WEEKDAY_SHORT</classname>, <classname>Zend_Date::WEEKDAY</classname> (Gregorian calendar assumed)</entry>
+                            <entry>
+                                Weekdays are represented numerically as 0 (for Sunday) through 6
+                                (for Saturday). <classname>Zend_Date::WEEKDAY_DIGIT</classname> is
+                                extracted from <varname>$date</varname>, if the
+                                <varname>$date</varname> operand is an instance of
+                                <classname>Zend_Date</classname> or a numeric string. Otherwise, an
+                                attempt is made to extract the day according to the conventions
+                                documented for these constants:
+                                <classname>Zend_Date::WEEKDAY_NARROW</classname>,
+                                <classname>Zend_Date::WEEKDAY_NAME</classname>,
+                                <classname>Zend_Date::WEEKDAY_SHORT</classname>,
+                                <classname>Zend_Date::WEEKDAY</classname> (Gregorian calendar
+                                assumed)
+                            </entry>
                         </row>
                         <row>
                             <entry>DayOfYear</entry>
-                            <entry>In <classname>Zend_Date</classname>, the day of the year represents the number of calendar days elapsed since the start of the year (0-365). As with other units above, fractions are rounded down to the nearest whole number. (Gregorian calendar assumed)
-                        </entry>
+                            <entry>
+                                In <classname>Zend_Date</classname>, the day of the year represents
+                                the number of calendar days elapsed since the start of the year
+                                (0-365). As with other units above, fractions are rounded down to
+                                the nearest whole number. (Gregorian calendar assumed)
+                            </entry>
                         </row>
                         <row>
                             <entry>
                                 <ulink url="http://www.faqs.org/rfcs/rfc822.html">Arpa</ulink>
                             </entry>
-                            <entry>Arpa dates (i.e. RFC 822 formatted dates) are supported. Output uses either a "GMT" or "Local differential hours+min" format (see section 5 of RFC 822). Before PHP 5.2.2, using the DATE_RFC822 constant with PHP date functions sometimes produces <ulink url="http://bugs.php.net/bug.php?id=40308">incorrect results</ulink>. Zend_Date's results are correct. Example: <code>Mon, 31 Dec 06 23:59:59 GMT</code>
+                            <entry>
+                                Arpa dates (i.e. RFC 822 formatted dates) are supported. Output uses
+                                either a "GMT" or "Local differential hours+min" format (see section
+                                5 of RFC 822). Before PHP 5.2.2, using the DATE_RFC822 constant with
+                                PHP date functions sometimes produces <ulink
+                                    url="http://bugs.php.net/bug.php?id=40308">incorrect
+                                    results</ulink>. Zend_Date's results are correct. Example:
+                                <code>Mon, 31 Dec 06 23:59:59 GMT</code>
                             </entry>
                         </row>
                         <row>
                             <entry>
                                 <ulink url="http://en.wikipedia.org/wiki/ISO_8601">Iso</ulink>
                             </entry>
-                            <entry>Only complete ISO 8601 dates are supported for output. Example: <code>2009-02-14T00:31:30+01:00</code>
+                            <entry>
+                                Only complete ISO 8601 dates are supported for output. Example:
+                                <code>2009-02-14T00:31:30+01:00</code>
                             </entry>
                         </row>
                     </tbody>
@@ -353,8 +455,8 @@ print $date;
             <title>List of Date Operations</title>
 
             <para>
-                The basic operations below can be used instead of the convenience operations for specific date parts, if
-                the
+                The basic operations below can be used instead of the convenience operations for
+                specific date parts, if the
                 <link linkend="zend.date.constants.list">appropriate constant</link>
                 is used for the <varname>$part</varname> parameter.
             </para>
@@ -376,12 +478,15 @@ print $date;
                                     <emphasis>get($part = null, $locale = null)</emphasis>
                                 </para>
                                 <para>
-                                    Use <code>get($part)</code> to retrieve the date <varname>$part</varname> of this object's
-                                    date localized to <varname>$locale</varname> as a formatted string or integer. When using
-                                    the BCMath extension, numeric strings might be returned instead of integers for
-                                    large values. <emphasis>NOTE:</emphasis> Unlike <code>get()</code>,
-                                    the other get*() convenience methods only return instances of <classname>Zend_Date</classname>
-                                    containing a date representing the selected or computed date/time.
+                                    Use <code>get($part)</code> to retrieve the date
+                                    <varname>$part</varname> of this object's date localized to
+                                    <varname>$locale</varname> as a formatted string or integer.
+                                    When using the BCMath extension, numeric strings might be
+                                    returned instead of integers for large values.
+                                    <emphasis>NOTE:</emphasis> Unlike <code>get()</code>, the other
+                                    get*() convenience methods only return instances of
+                                    <classname>Zend_Date</classname> containing a date representing
+                                    the selected or computed date/time.
                                 </para>
                             </entry>
                         </row>
@@ -392,8 +497,9 @@ print $date;
                                     <emphasis>set($date, $part = null, $locale = null)</emphasis>
                                 </para>
                                 <para>
-                                    Sets the <varname>$part</varname> of the current object to the corresponding value for
-                                    that part found in the input <varname>$date</varname> having a locale
+                                    Sets the <varname>$part</varname> of the current object to the
+                                    corresponding value for that part found in the input
+                                    <varname>$date</varname> having a locale
                                     <varname>$locale</varname>.
                                 </para>
                             </entry>
@@ -405,8 +511,9 @@ print $date;
                                     <emphasis>add($date, $part = null, $locale = null)</emphasis>
                                 </para>
                                 <para>
-                                    Adds the <varname>$part</varname> of <varname>$date</varname> having a locale
-                                    <varname>$locale</varname> to the current object's date.
+                                    Adds the <varname>$part</varname> of <varname>$date</varname>
+                                    having a locale <varname>$locale</varname> to the current
+                                    object's date.
                                 </para>
                             </entry>
                         </row>
@@ -417,7 +524,8 @@ print $date;
                                     <emphasis>sub($date, $part = null, $locale = null)</emphasis>
                                 </para>
                                 <para>
-                                    Subtracts the <varname>$part</varname> of <varname>$date</varname> having a locale
+                                    Subtracts the <varname>$part</varname> of
+                                    <varname>$date</varname> having a locale
                                     <varname>$locale</varname> from the current object's date.
                                 </para>
                             </entry>
@@ -429,9 +537,10 @@ print $date;
                                     <emphasis>copyPart($part, $locale = null)</emphasis>
                                 </para>
                                 <para>
-                                    Returns a cloned object, with only <varname>$part</varname> of the object's date copied to
-                                    the clone, with the clone have its locale arbitrarily set to <varname>$locale</varname>
-                                    (if specified).
+                                    Returns a cloned object, with only <varname>$part</varname> of
+                                    the object's date copied to the clone, with the clone have its
+                                    locale arbitrarily set to <varname>$locale</varname> (if
+                                    specified).
                                 </para>
                             </entry>
                         </row>
@@ -442,9 +551,10 @@ print $date;
                                     <emphasis>compare($date, $part = null, $locale = null)</emphasis>
                                 </para>
                                 <para>
-                                    compares <varname>$part</varname> of <varname>$date</varname> to this object's timestamp,
-                                    returning 0 if they are equal, 1 if this object's part was more recent than $date's
-                                    part, otherwise -1.
+                                    compares <varname>$part</varname> of <varname>$date</varname> to
+                                    this object's timestamp, returning 0 if they are equal, 1 if
+                                    this object's part was more recent than $date's part, otherwise
+                                    -1.
                                 </para>
                             </entry>
                         </row>
@@ -461,8 +571,8 @@ print $date;
         <title>Comparing Dates</title>
 
         <para>
-            The following basic operations do not have corresponding convenience methods for the date parts listed in
-            <xref linkend="zend.date.overview" />
+            The following basic operations do not have corresponding convenience methods for the
+            date parts listed in <xref linkend="zend.date.overview" />
             .
         </para>
 
@@ -483,8 +593,9 @@ print $date;
                                 <emphasis>equals($date, $part = null, $locale = null)</emphasis>
                             </para>
                             <para>
-                                returns true, if <varname>$part</varname> of <varname>$date</varname> having locale
-                                <varname>$locale</varname> is the same as this object's date <varname>$part</varname>, otherwise
+                                returns true, if <varname>$part</varname> of
+                                <varname>$date</varname> having locale <varname>$locale</varname> is
+                                the same as this object's date <varname>$part</varname>, otherwise
                                 false
                             </para>
                         </entry>
@@ -496,8 +607,9 @@ print $date;
                                 <emphasis>isEarlier($date, $part = null, $locale = null)</emphasis>
                             </para>
                             <para>
-                                returns true, if <varname>$part</varname> of this object's date is earlier than
-                                <varname>$part</varname> of <varname>$date</varname> having a locale <varname>$locale</varname>
+                                returns true, if <varname>$part</varname> of this object's date is
+                                earlier than <varname>$part</varname> of <varname>$date</varname>
+                                having a locale <varname>$locale</varname>
                             </para>
                         </entry>
                     </row>
@@ -508,8 +620,9 @@ print $date;
                                 <emphasis>isLater($date, $part = null, $locale = null)</emphasis>
                             </para>
                             <para>
-                                returns true, if <varname>$part</varname> of this object's date is later than
-                                <varname>$part</varname> of <varname>$date</varname> having a locale <varname>$locale</varname>
+                                returns true, if <varname>$part</varname> of this object's date is
+                                later than <varname>$part</varname> of <varname>$date</varname>
+                                having a locale <varname>$locale</varname>
                             </para>
                         </entry>
                     </row>
@@ -520,8 +633,8 @@ print $date;
                                 <emphasis>isToday()</emphasis>
                             </para>
                             <para>
-                                Tests if today's year, month, and day match this object's date value, using this
-                                object's timezone.
+                                Tests if today's year, month, and day match this object's date
+                                value, using this object's timezone.
                             </para>
                         </entry>
                     </row>
@@ -532,8 +645,8 @@ print $date;
                                 <emphasis>isTomorrow()</emphasis>
                             </para>
                             <para>
-                                Tests if tomorrow's year, month, and day match this object's date value, using this
-                                object's timezone.
+                                Tests if tomorrow's year, month, and day match this object's date
+                                value, using this object's timezone.
                             </para>
                         </entry>
                     </row>
@@ -544,8 +657,8 @@ print $date;
                                 <emphasis>isYesterday()</emphasis>
                             </para>
                             <para>
-                                Tests if yesterday's year, month, and day match this object's date value, using this
-                                object's timezone.
+                                Tests if yesterday's year, month, and day match this object's date
+                                value, using this object's timezone.
                             </para>
                         </entry>
                     </row>
@@ -556,9 +669,10 @@ print $date;
                                 <emphasis>isLeapYear()</emphasis>
                             </para>
                             <para>
-                                Use <code>isLeapYear()</code> to determine if the current object is a leap year, or use
-                                Zend_Date::checkLeapYear($year) to check $year, which can be a string, integer, or
-                                instance of <classname>Zend_Date</classname>. Is the year a leap year?
+                                Use <code>isLeapYear()</code> to determine if the current object is
+                                a leap year, or use Zend_Date::checkLeapYear($year) to check $year,
+                                which can be a string, integer, or instance of
+                                <classname>Zend_Date</classname>. Is the year a leap year?
                             </para>
                         </entry>
                     </row>
@@ -569,10 +683,10 @@ print $date;
                                 <emphasis>isDate($date, $format = null, $locale = null)</emphasis>
                             </para>
                             <para>
-                                This method checks if a given date is a real date and returns true if all checks are ok.
-                                It works like PHP's checkdate() function but can also check for localized month names and
-                                for dates extending the range of checkdate()
-                                false
+                                This method checks if a given date is a real date and returns true
+                                if all checks are ok. It works like PHP's checkdate() function but
+                                can also check for localized month names and for dates extending the
+                                range of checkdate() false
                             </para>
                         </entry>
                     </row>
@@ -587,7 +701,8 @@ print $date;
         <title>Getting Dates and Date Parts</title>
 
         <para>
-            Several methods support retrieving values related to a <classname>Zend_Date</classname> instance.
+            Several methods support retrieving values related to a <classname>Zend_Date</classname>
+            instance.
         </para>
 
         <table id="zend.date.others.gettingparts.table">
@@ -607,12 +722,12 @@ print $date;
                                 <emphasis>toString($format = null, $locale = null)</emphasis>
                             </para>
                             <para>
-                                Invoke directly or via the magic method <code>__toString()</code>. The
-                                <code>toString()</code> method automatically formats the date object's value according
-                                to the conventions of the object's locale, or an optionally specified
-                                <varname>$locale</varname>. For a list of supported format codes, see
-                                <xref linkend="zend.date.constants.selfdefinedformats" />
-                                .
+                                Invoke directly or via the magic method <code>__toString()</code>.
+                                The <code>toString()</code> method automatically formats the date
+                                object's value according to the conventions of the object's locale,
+                                or an optionally specified <varname>$locale</varname>. For a list of
+                                supported format codes, see
+                                <xref linkend="zend.date.constants.selfdefinedformats" />.
                             </para>
                         </entry>
                     </row>
@@ -624,8 +739,10 @@ print $date;
                             </para>
                             <para>
                                 Returns an array representation of the selected date according to
-                                the conventions of the object's locale. The returned array is equivalent to
-                                PHP's <ulink url="http://php.net/getdate">getdate()</ulink> function and includes:
+                                the conventions of the object's locale. The returned array is
+                                equivalent to PHP's <ulink
+                                    url="http://php.net/getdate">getdate()</ulink> function and
+                                includes:
                             </para>
                             <para>
                                 <itemizedlist>
@@ -713,16 +830,17 @@ print $date;
                                 <emphasis>toValue($part = null)</emphasis>
                             </para>
                             <para>
-                                Returns an integer representation of the selected date <varname>$part</varname> according to
-                                the conventions of the object's locale. Returns <constant>FALSE</constant> when
+                                Returns an integer representation of the selected date
+                                <varname>$part</varname> according to the conventions of the
+                                object's locale. Returns <constant>FALSE</constant> when
                                 <varname>$part</varname> selects a non-numeric value, such as
-                                <classname>Zend_Date::MONTH_NAME_SHORT</classname>. <emphasis>NOTE:</emphasis> This
-                                method calls
-                                <link linkend="id.date.basic.operations"><code>get()</code>
-                                </link>
-                                and casts the result to a PHP integer, which will give unpredictable results, if
-                                <code>get()</code> returns a numeric string containing a number too large for a PHP
-                                integer on your system. Use <code>get()</code> instead.
+                                <classname>Zend_Date::MONTH_NAME_SHORT</classname>.
+                                <emphasis>NOTE:</emphasis> This method calls <link
+                                    linkend="id.date.basic.operations"><code>get()</code></link>
+                                and casts the result to a PHP integer, which will give unpredictable
+                                results, if <code>get()</code> returns a numeric string containing a
+                                number too large for a PHP integer on your system. Use
+                                <code>get()</code> instead.
                             </para>
                         </entry>
                     </row>
@@ -735,9 +853,9 @@ print $date;
                                 <emphasis>get($part = null, $locale = null)</emphasis>
                             </para>
                             <para>
-                                This method returns the <varname>$part</varname> of object's date localized to
-                                <varname>$locale</varname> as a formatted string or integer. See
-                                <xref linkend="id.date.basic.operations" />
+                                This method returns the <varname>$part</varname> of object's date
+                                localized to <varname>$locale</varname> as a formatted string or
+                                integer. See <xref linkend="id.date.basic.operations" />
                                 for more information.
                             </para>
                         </entry>
@@ -749,8 +867,10 @@ print $date;
                                 <emphasis>now($locale = null)</emphasis>
                             </para>
                             <para>
-                                This convenience function is equivalent to <code>new Zend_Date()</code>. It returns the
-                                current date as a <classname>Zend_Date</classname> object, having <varname>$locale</varname>
+                                This convenience function is equivalent to <code>new
+                                Zend_Date()</code>. It returns the current date as a
+                                <classname>Zend_Date</classname> object, having
+                                <varname>$locale</varname>
                             </para>
                         </entry>
                     </row>
@@ -765,7 +885,8 @@ print $date;
         <title>Working with Fractions of Seconds</title>
 
         <para>
-            Several methods support retrieving values related to a <classname>Zend_Date</classname> instance.
+            Several methods support retrieving values related to a <classname>Zend_Date</classname>
+            instance.
         </para>
 
         <table id="zend.date.others.fractions.table">
@@ -805,8 +926,8 @@ print $date;
         <title>Sunrise / Sunset</title>
 
         <para>
-            Three methods provide access to geographically localized information about the Sun, including the time of
-            sunrise and sunset.
+            Three methods provide access to geographically localized information about the Sun,
+            including the time of sunrise and sunset.
         </para>
 
         <table id="zend.date.other.sun.table">

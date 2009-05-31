@@ -491,8 +491,9 @@ $form->addElement(
         <para>
             Editor provides a WYSIWYG editor that can be used to both create and
             edit rich HTML content. dijit.Editor is pluggable and may be
-            extended with custom plugins if desired; see <ulink url="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/advanced-editing-and-display/editor-rich-text">the
-            dijit.Editor documentation</ulink> for more details.
+            extended with custom plugins if desired; see <ulink
+                url="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/advanced-editing-and-display/editor-rich-text">the
+                dijit.Editor documentation</ulink> for more details.
         </para>
 
         <para>
@@ -619,8 +620,12 @@ $form->addElement(
 
                 <itemizedlist>
                     <listitem><para><code>addStyleSheet($styleSheet)</code></para></listitem>
-                    <listitem><para><code>addStyleSheets(array $styleSheets)</code></para></listitem>
-                    <listitem><para><code>setStyleSheets(array $styleSheets)</code></para></listitem>
+                    <listitem>
+                        <para><code>addStyleSheets(array $styleSheets)</code></para>
+                    </listitem>
+                    <listitem>
+                        <para><code>setStyleSheets(array $styleSheets)</code></para>
+                    </listitem>
                     <listitem><para><code>getStyleSheets()</code></para></listitem>
                     <listitem><para><code>hasStyleSheet($styleSheet)</code></para></listitem>
                     <listitem><para><code>removeStyleSheet($styleSheet)</code></para></listitem>
@@ -1167,7 +1172,8 @@ $form->addElement(
             </para></listitem>
 
             <listitem><para>
-                <code>setUppercase($flag)</code> and <code>getUppercase()</code>: set and retrieve the flag indicating whether or not the input should be cast to UPPERCASE.
+                <code>setUppercase($flag)</code> and <code>getUppercase()</code>: set and retrieve
+                the flag indicating whether or not the input should be cast to UPPERCASE.
             </para></listitem>
 
             <listitem><para>
@@ -1306,7 +1312,10 @@ $form->addElement(
         <title>ValidationTextBox</title>
 
         <para>
-            ValidationTextBox provides the ability to add validations and constraints to a text input. Internally, it derives from <link linkend="zend.dojo.form.elements.textBox">TextBox</link>, and adds the following accessors and mutators for manipulating dijit parameters:
+            ValidationTextBox provides the ability to add validations and constraints to a text
+            input. Internally, it derives from <link
+                linkend="zend.dojo.form.elements.textBox">TextBox</link>, and adds the following
+            accessors and mutators for manipulating dijit parameters:
         </para>
 
         <itemizedlist>

@@ -134,8 +134,8 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
             EXPLAIN are examples of statements that produce a result set.
             INSERT, UPDATE, and DELETE are examples of statements that don't
             produce a result set. You can execute the latter SQL statements
-            using <classname>Zend_Db_Statement</classname>, but you cannot call methods to fetch rows
-            of results from them.
+            using <classname>Zend_Db_Statement</classname>, but you cannot call methods to fetch
+            rows of results from them.
         </para>
 
         <sect3 id="zend.db.statement.fetching.fetch">
@@ -199,7 +199,8 @@ while ($row = $stmt->fetch()) {
             </example>
 
             <para>
-                See also <ulink url="http://www.php.net/PDOStatement-fetch">PDOStatement::fetch()</ulink>.
+                See also <ulink
+                   url="http://www.php.net/PDOStatement-fetch">PDOStatement::fetch()</ulink>.
             </para>
 
         </sect3>
@@ -230,7 +231,8 @@ echo $rows[0]['bug_description'];
             </example>
 
             <para>
-                See also <ulink url="http://www.php.net/PDOStatement-fetchAll">PDOStatement::fetchAll()</ulink>.
+                See also <ulink
+                    url="http://www.php.net/PDOStatement-fetchAll">PDOStatement::fetchAll()</ulink>.
             </para>
 
         </sect3>
@@ -268,7 +270,8 @@ echo $rows[0][0];
             </example>
 
             <para>
-                See also <ulink url="http://www.php.net/PDOStatement-setFetchMode">PDOStatement::setFetchMode()</ulink>.
+                See also <ulink
+                    url="http://www.php.net/PDOStatement-setFetchMode">PDOStatement::setFetchMode()</ulink>.
             </para>
 
         </sect3>
@@ -305,7 +308,8 @@ $bug_status = $stmt->fetchColumn(2);
             </example>
 
             <para>
-                See also <ulink url="http://www.php.net/PDOStatement-fetchColumn">PDOStatement::fetchColumn()</ulink>.
+                See also <ulink
+                    url="http://www.php.net/PDOStatement-fetchColumn">PDOStatement::fetchColumn()</ulink>.
             </para>
 
         </sect3>
@@ -335,7 +339,8 @@ echo $obj->bug_description;
             </example>
 
             <para>
-                See also <ulink url="http://www.php.net/PDOStatement-fetchObject">PDOStatement::fetchObject()</ulink>.
+                See also <ulink
+                    url="http://www.php.net/PDOStatement-fetchObject">PDOStatement::fetchObject()</ulink>.
             </para>
 
         </sect3>

@@ -5,9 +5,9 @@
     <title>Zend_Db_Adapter</title>
 
     <para>
-        <classname>Zend_Db</classname> and its related classes provide a simple SQL database interface
-        for Zend Framework. The <classname>Zend_Db_Adapter</classname> is the basic class you use to
-        connect your PHP application to an RDBMS. There is a different Adapter
+        <classname>Zend_Db</classname> and its related classes provide a simple SQL database
+        interface for Zend Framework. The <classname>Zend_Db_Adapter</classname> is the basic class
+        you use to connect your PHP application to an RDBMS. There is a different Adapter
         class for each brand of RDBMS.
     </para>
 
@@ -20,8 +20,8 @@
     <para>
         The interface of the adapter class is similar to the interface of the
         <ulink url="http://www.php.net/pdo">PHP Data Objects</ulink> extension.
-        <classname>Zend_Db</classname> provides Adapter classes to PDO drivers for the following RDBMS
-        brands:
+        <classname>Zend_Db</classname> provides Adapter classes to PDO drivers for the following
+        RDBMS brands:
     </para>
 
     <itemizedlist>
@@ -33,36 +33,40 @@
         </listitem>
         <listitem>
             <para>
-                MySQL, using the <ulink url="http://www.php.net/pdo-mysql">pdo_mysql</ulink> PHP extension
-            </para>
-        </listitem>
-        <listitem>
-            <para>
-                Microsoft SQL Server, using the <ulink url="http://www.php.net/pdo-mssql">pdo_mssql</ulink> PHP
+                MySQL, using the <ulink url="http://www.php.net/pdo-mysql">pdo_mysql</ulink> PHP
                 extension
             </para>
         </listitem>
         <listitem>
             <para>
-                Oracle, using the <ulink url="http://www.php.net/pdo-oci">pdo_oci</ulink> PHP extension
+                Microsoft SQL Server, using the <ulink
+                url="http://www.php.net/pdo-mssql">pdo_mssql</ulink> PHP extension
             </para>
         </listitem>
         <listitem>
             <para>
-                PostgreSQL, using the <ulink url="http://www.php.net/pdo-pgsql">pdo_pgsql</ulink> PHP extension
+                Oracle, using the <ulink url="http://www.php.net/pdo-oci">pdo_oci</ulink> PHP
+                extension
             </para>
         </listitem>
         <listitem>
             <para>
-                SQLite, using the <ulink url="http://www.php.net/pdo-sqlite">pdo_sqlite</ulink> PHP extension
+                PostgreSQL, using the <ulink url="http://www.php.net/pdo-pgsql">pdo_pgsql</ulink>
+                PHP extension
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                SQLite, using the <ulink url="http://www.php.net/pdo-sqlite">pdo_sqlite</ulink> PHP
+                extension
             </para>
         </listitem>
 
     </itemizedlist>
 
     <para>
-        In addition, <classname>Zend_Db</classname> provides Adapter classes that utilize PHP database
-        extensions for the following RDBMS brands:
+        In addition, <classname>Zend_Db</classname> provides Adapter classes that utilize PHP
+        database extensions for the following RDBMS brands:
     </para>
 
     <itemizedlist>
@@ -78,12 +82,14 @@
         </listitem>
         <listitem>
             <para>
-                IBM DB2 and DB2/i5, using the <ulink url="http://www.php.net/ibm_db2">ibm_db2</ulink> PHP extension
+                IBM DB2 and DB2/i5, using the <ulink
+                    url="http://www.php.net/ibm_db2">ibm_db2</ulink> PHP extension
             </para>
         </listitem>
         <listitem>
             <para>
-                Firebird/Interbase, using the <ulink url="http://www.php.net/ibase">php_interbase</ulink> PHP extension
+                Firebird/Interbase, using the <ulink
+                    url="http://www.php.net/ibase">php_interbase</ulink> PHP extension
             </para>
         </listitem>
     </itemizedlist>
@@ -92,9 +98,9 @@
         <para>
             Each <classname>Zend_Db</classname> Adapter uses a PHP extension. You must have the
             respective PHP extension enabled in your PHP environment to use a
-            <classname>Zend_Db</classname> Adapter. For example, if you use any of the PDO <classname>Zend_Db</classname>
-            Adapters, you need to enable both the PDO extension and the
-            PDO driver for the brand of RDBMS you use.
+            <classname>Zend_Db</classname> Adapter. For example, if you use any of the PDO
+            <classname>Zend_Db</classname> Adapters, you need to enable both the PDO extension and
+            the PDO driver for the brand of RDBMS you use.
         </para>
     </note>
 
@@ -174,8 +180,8 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
 
             <para>
                 If you create your own class that extends
-                <classname>Zend_Db_Adapter_Abstract_Adapter</classname>, but you do not name your class with
-                the "Zend_Db_Adapter" package prefix, you can use the
+                <classname>Zend_Db_Adapter_Abstract_Adapter</classname>, but you do not name your
+                class with the "Zend_Db_Adapter" package prefix, you can use the
                 <code>factory()</code> method to load your adapter if you
                 specify the leading portion of the adapter class with the
                 'adapterNamespace' key in the parameters array.
@@ -224,9 +230,9 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
             <example id="zend.db.adapter.connecting.factory.example1">
                 <title>Using the Adapter Factory Method with a Zend_Config Object</title>
                 <para>
-                    In the example below, a <classname>Zend_Config</classname> object is created from
-                    an array. You can also load data from an external file using classes such as
-                    <link linkend="zend.config.adapters.ini">Zend_Config_Ini</link>
+                    In the example below, a <classname>Zend_Config</classname> object is created
+                    from an array. You can also load data from an external file using classes such
+                    as <link linkend="zend.config.adapters.ini">Zend_Config_Ini</link>
                     and <link linkend="zend.config.adapters.xml">Zend_Config_Xml</link>.
                 </para>
                 <programlisting language="php"><![CDATA[
@@ -263,7 +269,8 @@ $db = Zend_Db::factory($config->database);
             <title>Adapter Parameters</title>
 
             <para>
-                The following list explains common parameters recognized by <classname>Zend_Db</classname> Adapter classes.
+                The following list explains common parameters recognized by
+                <classname>Zend_Db</classname> Adapter classes.
             </para>
 
             <itemizedlist>
@@ -476,8 +483,8 @@ $db = Zend_Db::factory('Pdo_Mysql', $params);
                 adapter itself, but for other objects that aggregate it, like a
                 <classname>Zend_Db_Select</classname> object. By default, adapters are allowed
                 to be serialized, if you don't want it, you should consider passing the
-                <classname>Zend_Db::ALLOW_SERIALIZATION=false</classname> option, see the example above.
-                To respect lazy connections principle, the adapter won't reconnect itself
+                <classname>Zend_Db::ALLOW_SERIALIZATION=false</classname> option, see the example
+                above. To respect lazy connections principle, the adapter won't reconnect itself
                 after being unserialized. You must then call <code>getConnection()
                 </code> yourself. You can make the adapter auto-reconnect by passing the
                 <classname>Zend_Db::AUTO_RECONNECT_ON_UNSERIALIZE=true</classname> as an adapter
@@ -663,8 +670,8 @@ $result = $db->fetchAll($sql, 2);
                     <para>
                         <emphasis>Zend_Db::FETCH_ASSOC</emphasis>:
                         return data in an array of associative arrays.
-                        The array keys are column names, as strings.
-                        This is the default fetch mode for <classname>Zend_Db_Adapter</classname> classes.
+                        The array keys are column names, as strings. This is the default fetch mode
+                        for <classname>Zend_Db_Adapter</classname> classes.
                     </para>
                     <para>
                         Note that if your select-list contains more than one
@@ -770,7 +777,8 @@ echo $result[0]['bug_description'];
                 of values, regardless of the value you have set for the fetch mode.
                 This only returns the first column returned by the query.
                 Any other columns returned by the query are discarded.
-                If you need to return a column other than the first, see <xref linkend="zend.db.statement.fetching.fetchcolumn" />.
+                If you need to return a column other than the first, see
+                <xref linkend="zend.db.statement.fetching.fetchcolumn" />.
             </para>
 
             <example id="zend.db.adapter.select.fetchcol.example">
@@ -924,8 +932,8 @@ $db->insert('bugs', $data);
                 default, all data values passed as strings are treated as
                 string literals. To specify that the value is an SQL
                 expression and therefore should not be quoted, pass the value
-                in the data array as an object of type <classname>Zend_Db_Expr</classname> instead of
-                a plain string.
+                in the data array as an object of type <classname>Zend_Db_Expr</classname> instead
+                of a plain string.
             </para>
 
             <example id="zend.db.adapter.write.insert.example2">
@@ -1217,13 +1225,13 @@ echo $sql;
             they might be able to make your SQL queries do things that you
             didn't intend them to do, such as return data to which the person
             should not have privilege to read. This is a serious and widespread
-            technique for violating application security, known as "SQL Injection"
-            (see <ulink url="http://en.wikipedia.org/wiki/SQL_Injection">http://en.wikipedia.org/wiki/SQL_Injection</ulink>).
+            technique for violating application security, known as "SQL Injection" (see <ulink
+                url="http://en.wikipedia.org/wiki/SQL_Injection">http://en.wikipedia.org/wiki/SQL_Injection</ulink>).
         </para>
 
         <para>
-            The <classname>Zend_Db</classname> Adapter class provides convenient functions to help you
-            reduce vulnerabilities to SQL Injection attacks in your PHP code.
+            The <classname>Zend_Db</classname> Adapter class provides convenient functions to help
+            you reduce vulnerabilities to SQL Injection attacks in your PHP code.
             The solution is to escape special characters such as quotes in PHP
             values before they are interpolated into your SQL strings.
             This protects against both accidental and deliberate manipulation
@@ -1261,8 +1269,8 @@ echo $sql;
                 Note that the return value of <code>quote()</code> includes the
                 quote delimiters around the string. This is different from
                 some functions that escape special characters but do not add
-                the quote delimiters, for example
-                <ulink url="http://www.php.net/mysqli_real_escape_string">mysql_real_escape_string()</ulink>.
+                the quote delimiters, for example <ulink
+                    url="http://www.php.net/mysqli_real_escape_string">mysql_real_escape_string()</ulink>.
             </para>
 
             <para>
@@ -1580,7 +1588,10 @@ try {
                     <row>
                         <entry>NULLABLE</entry>
                         <entry>(boolean)</entry>
-                        <entry>True if the column accepts SQL NULLs, false if the column has a NOT NULL constraint.</entry>
+                        <entry>
+                            True if the column accepts SQL NULLs, false if the column has a NOT NULL
+                            constraint.
+                        </entry>
                     </row>
                     <row>
                         <entry>LENGTH</entry>
@@ -1735,9 +1746,9 @@ $db->closeConnection();
             For example, all SQL statements run by <classname>Zend_Db</classname> are prepared, then
             executed. However, some database features are incompatible with
             prepared statements. DDL statements like CREATE and ALTER cannot
-            be prepared in MySQL. Also, SQL statements don't benefit
-            from the <ulink url="http://dev.mysql.com/doc/refman/5.1/en/query-cache-how.html">MySQL Query Cache</ulink>,
-            prior to MySQL 5.1.17.
+            be prepared in MySQL. Also, SQL statements don't benefit from the <ulink
+                url="http://dev.mysql.com/doc/refman/5.1/en/query-cache-how.html">MySQL Query
+                Cache</ulink>, prior to MySQL 5.1.17.
         </para>
 
         <para>
@@ -1955,18 +1966,18 @@ if (!is_null($version)) {
                 </listitem>
                 <listitem>
                     <para>
-                        If you are working with unicode strings in an encoding other than
-                        UCS-2 (such as UTF-8), you may have to perform a conversion in your
-                        application code or store the data in a binary column. Please
-                        refer to <ulink url="http://support.microsoft.com/kb/232580">Microsoft's Knowledge Base</ulink>
-                        for more information.
+                        If you are working with unicode strings in an encoding other than UCS-2
+                        (such as UTF-8), you may have to perform a conversion in your application
+                        code or store the data in a binary column. Please refer to <ulink
+                            url="http://support.microsoft.com/kb/232580">Microsoft's Knowledge
+                            Base</ulink> for more information.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_Db_Adapter_Pdo_Mssql</classname> sets <code>QUOTED_IDENTIFIER ON</code>
-                        immediately after connecting to a SQL Server database.
-                        This makes the driver use the standard SQL identifier
+                        <classname>Zend_Db_Adapter_Pdo_Mssql</classname> sets
+                        <code>QUOTED_IDENTIFIER ON</code> immediately after connecting to a SQL
+                        Server database. This makes the driver use the standard SQL identifier
                         delimiter symbol (<code>"</code>) instead of the
                         proprietary square-brackets syntax SQL Server uses for
                         delimiting identifiers.
@@ -2151,9 +2162,18 @@ if (!is_null($version)) {
 
                 <listitem>
                     <para>Adapter name is ZendX_Db_Adapter_Firebird.</para>
-                    <para>Remember to use the param adapterNamespace with value ZendX_Db_Adapter.</para>
-                    <para>We recommend to update the gds32.dll (or linux equivalent) bundled with php, to the same version of the server. For Firebird the equivalent gds32.dll is fbclient.dll.</para>
-                    <para>By default all identifiers (tables names, fields) are returned in upper case.</para>
+                    <para>
+                        Remember to use the param adapterNamespace with value ZendX_Db_Adapter.
+                    </para>
+                    <para>
+                        We recommend to update the gds32.dll (or linux equivalent) bundled with php,
+                        to the same version of the server. For Firebird the equivalent gds32.dll is
+                        fbclient.dll.
+                    </para>
+                    <para>
+                        By default all identifiers (tables names, fields) are returned in upper
+                        case.
+                    </para>
                 </listitem>
             </itemizedlist>
         </sect3>

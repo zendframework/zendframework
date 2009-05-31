@@ -83,8 +83,8 @@ $data->addItems($someMoreItems);
 
             <para>
                 Every dojo.data data store requires that the identifier column
-                be provided as metadata, including <classname>Zend_Dojo_Data</classname>. In fact, if you attempt to add items without an
-                identifier, it will raise an exception.
+                be provided as metadata, including <classname>Zend_Dojo_Data</classname>. In fact,
+                if you attempt to add items without an identifier, it will raise an exception.
             </para>
         </note>
 

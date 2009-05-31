@@ -327,8 +327,8 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>captureStart($id, array $params = array(), array $attribs = array())</code>:
-                    begin capturing content to include in a container.
+                    <code>captureStart($id, array $params = array(), array $attribs =
+                        array())</code>: begin capturing content to include in a container.
                     <code>$params</code> refers to the dijit params to use with
                     the container, while <code>$attribs</code> refer to any
                     general HTML attributes to use.
@@ -649,9 +649,9 @@ echo $view->dateTextBox(
                     <emphasis>Editor</emphasis>: dijit.Editor. Provides a
                     WYSIWYG editor via which users may create or edit content.
                     <code>dijit.Editor</code> is a pluggable, extensible editor
-                    with a variety of parameters you can utilize for
-                    customization; see <ulink url="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/advanced-editing-and-display/editor-rich-text">the
-                    dijit.Editor documentation</ulink> for more details.
+                    with a variety of parameters you can utilize for customization; see <ulink
+                        url="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/advanced-editing-and-display/editor-rich-text">the
+                        dijit.Editor documentation</ulink> for more details.
                 </para>
 
                 <programlisting language="php"><![CDATA[

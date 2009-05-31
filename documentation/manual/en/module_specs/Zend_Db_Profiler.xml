@@ -42,15 +42,15 @@ $db->getProfiler()->setEnabled(true);
 ]]></programlisting>
 
         <para>
-            The value of the '<code>profiler</code>' option is flexible. It is interpreted differently depending on its
-            type. Most often, you should use a simple boolean value, but other types enable you to customize the
-            profiler behavior.
+            The value of the '<code>profiler</code>' option is flexible. It is interpreted
+            differently depending on its type. Most often, you should use a simple boolean value,
+            but other types enable you to customize the profiler behavior.
         </para>
 
         <para>
-            A boolean argument sets the profiler to enabled if it is a <constant>TRUE</constant> value, or disabled if
-            <constant>FALSE</constant>. The profiler class is the adapter's default profiler class,
-            <classname>Zend_Db_Profiler</classname>.
+            A boolean argument sets the profiler to enabled if it is a <constant>TRUE</constant>
+            value, or disabled if <constant>FALSE</constant>. The profiler class is the adapter's
+            default profiler class, <classname>Zend_Db_Profiler</classname>.
             <programlisting language="php"><![CDATA[
 $params['profiler'] = true;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
@@ -58,8 +58,9 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
         </para>
 
         <para>
-            An instance of a profiler object makes the adapter use that object. The object type must be
-            <classname>Zend_Db_Profiler</classname> or a subclass thereof. Enabling the profiler is done separately.
+            An instance of a profiler object makes the adapter use that object. The object type must
+            be <classname>Zend_Db_Profiler</classname> or a subclass thereof. Enabling the profiler
+            is done separately.
             <programlisting language="php"><![CDATA[
 $profiler = MyProject_Db_Profiler();
 $profiler->setEnabled(true);
@@ -69,12 +70,14 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
         </para>
 
         <para>
-            The argument can be an associative array containing any or all of the keys '<code>enabled</code>',
-            '<code>instance</code>', and '<code>class</code>'. The '<code>enabled</code>' and '<code>instance</code>'
-            keys correspond to the boolean and instance types documented above. The '<code>class</code>' key is used
-            to name a class to use for a custom profiler. The class must be <classname>Zend_Db_Profiler</classname> or a
-            subclass. The class is instantiated with no constructor arguments. The '<code>class</code>' option is
-            ignored when the '<code>instance</code>' option is supplied.
+            The argument can be an associative array containing any or all of the keys
+            '<code>enabled</code>', '<code>instance</code>', and '<code>class</code>'. The
+            '<code>enabled</code>' and '<code>instance</code>' keys correspond to the boolean and
+            instance types documented above. The '<code>class</code>' key is used to name a class to
+            use for a custom profiler. The class must be <classname>Zend_Db_Profiler</classname> or
+            a subclass. The class is instantiated with no constructor arguments. The
+            '<code>class</code>' option is ignored when the '<code>instance</code>' option is
+            supplied.
             <programlisting language="php"><![CDATA[
 $params['profiler'] = array(
     'enabled' => true,
@@ -85,7 +88,9 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
         </para>
 
         <para>
-            Finally, the argument can be an object of type <classname>Zend_Config</classname> containing properties, which are treated as the array keys described above. For example, a file "config.ini" might contain the following data:
+            Finally, the argument can be an object of type <classname>Zend_Config</classname>
+            containing properties, which are treated as the array keys described above. For example,
+            a file "config.ini" might contain the following data:
             <programlisting language="ini"><![CDATA[
 [main]
 db.profiler.class   = "MyProject_Db_Profiler"

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15719 -->
+<!-- EN-Revision: 15850 -->
 <sect1 id="zend.controller.router"  xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>標準のルータ</title>
     <sect2 id="zend.controller.router.introduction">

@@ -13,67 +13,73 @@
             connection. Other configuration options may be set through the
             constructor and through instance methods, one for each option.
         </para>
+
         <para>
             The available configuration options include:
-            <itemizedlist>
-                <listitem>
-                    <para>
-                        <emphasis>tableName</emphasis>: This is the name of the database
-                         table that contains the authentication credentials,
-                        and against which the database authentication query is
-                        performed.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <emphasis>identityColumn</emphasis>: This is the name of the
-                        database table column used to represent the identity.
-                        The identity column must contain unique values, such as
-                        a username or e-mail address.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <emphasis>credentialColumn</emphasis>: This is the name of the
-                        database table column used to represent the credential.
-                        Under a simple identity and password authentication
-                        scheme, the credential value corresponds to the
-                        password. See also the <emphasis>credentialTreatment</emphasis>
-                        option.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <emphasis>credentialTreatment</emphasis>: In many cases,
-                        passwords and other sensitive data are encrypted,
-                        hashed, encoded, obscured, salted or otherwise treated
-                        through some function or algorithm. By specifying a
-                        parameterized treatment string with this method, such as
-                        'MD5(?)' or 'PASSWORD(?)', a
-                        developer may apply such arbitrary SQL upon input
-                        credential data. Since these functions are specific to
-                        the underlying RDBMS, check the database manual for the
-                        availability of such functions for your database system.
-                    </para>
-                </listitem>
-            </itemizedlist>
         </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>tableName</emphasis>: This is the name of the database
+                    table that contains the authentication credentials,
+                    and against which the database authentication query is
+                    performed.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>identityColumn</emphasis>: This is the name of the
+                    database table column used to represent the identity.
+                    The identity column must contain unique values, such as
+                    a username or e-mail address.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>credentialColumn</emphasis>: This is the name of the
+                    database table column used to represent the credential.
+                    Under a simple identity and password authentication
+                    scheme, the credential value corresponds to the
+                    password. See also the <emphasis>credentialTreatment</emphasis>
+                    option.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>credentialTreatment</emphasis>: In many cases,
+                    passwords and other sensitive data are encrypted,
+                    hashed, encoded, obscured, salted or otherwise treated
+                    through some function or algorithm. By specifying a
+                    parameterized treatment string with this method, such as
+                    '<methodname>MD5(?)</methodname>' or
+                    '<methodname>PASSWORD(?)</methodname>', a
+                    developer may apply such arbitrary <acronym>SQL</acronym> upon input
+                    credential data. Since these functions are specific to
+                    the underlying <acronym>RDBMS</acronym>, check the database manual for the
+                    availability of such functions for your database system.
+                </para>
+            </listitem>
+        </itemizedlist>
+
         <example id="zend.auth.adapter.dbtable.introduction.example.basic_usage">
             <title>Basic Usage</title>
             <para>
                 As explained in the introduction, the
                 <classname>Zend_Auth_Adapter_DbTable</classname> constructor requires an
                 instance of <classname>Zend_Db_Adapter_Abstract</classname> that serves as
-                 the database connection to which the authentication adapter
+                the database connection to which the authentication adapter
                 instance is bound. First, the database connection should be
                 created.
             </para>
+
             <para>
                 The following code creates an adapter for an in-memory database,
-                 creates a simple table schema, and inserts a row against
+                creates a simple table schema, and inserts a row against
                 which we can perform an authentication query later. This example
-                 requires the PDO SQLite extension to be available:
+                requires the PDO SQLite extension to be available:
             </para>
+
             <programlisting language="php"><![CDATA[
 // Create an in-memory SQLite database connection
 $dbAdapter = new Zend_Db_Adapter_Pdo_Sqlite(array('dbname' =>
@@ -96,6 +102,7 @@ $sqlInsert = "INSERT INTO users (username, password, real_name) "
 // Insert the data
 $dbAdapter->query($sqlInsert);
 ]]></programlisting>
+
             <para>
                 With the database connection and table data available, an
                 instance of <classname>Zend_Auth_Adapter_DbTable</classname> may be
@@ -103,6 +110,7 @@ $dbAdapter->query($sqlInsert);
                 constructor or deferred as parameters to setter methods after
                 instantiation:
             </para>
+
             <programlisting language="php"><![CDATA[
 // Configure the instance with constructor parameters...
 $authAdapter = new Zend_Auth_Adapter_DbTable(
@@ -128,6 +136,7 @@ $authAdapter
                 the adapter prior to calling the <methodname>authenticate()</methodname>
                 method:
             </para>
+
             <programlisting language="php"><![CDATA[
 // Set the input credential values (e.g., from a login form)
 $authAdapter
@@ -137,12 +146,14 @@ $authAdapter
 
 // Perform the authentication query, saving the result
 ]]></programlisting>
+
             <para>
                 In addition to the availability of the
                 <methodname>getIdentity()</methodname> method upon the authentication result
                 object, <classname>Zend_Auth_Adapter_DbTable</classname> also supports
                 retrieving the table row upon authentication success:
             </para>
+
             <programlisting language="php"><![CDATA[
 // Print the identity
 echo $result->getIdentity() . "\n\n";
@@ -246,7 +257,7 @@ $adapter = new Zend_Auth_Adapter_DbTable(
         <para>
             Another scenario can be the implementation of a salting mechanism.
             Salting is a term referring to a technique which can highly improve
-            your application's security. It’s based on the idea that
+            your application's security. It's based on the idea that
             concatenating a random string to every password makes it impossible
             to accomplish a successful brute force attack on the database using
             pre-computed hash values from a dictionary.
@@ -285,19 +296,20 @@ $adapter = new Zend_Auth_Adapter_DbTable(
             <para>
                 You can improve security even more by using a static salt value
                 hard coded into your application. In the case that your database
-                is compromised (e. g. by an SQL injection attack) but your web
+                is compromised (e. g. by an <acronym>SQL</acronym> injection attack) but your web
                 server is intact your data is still unusable for the attacker.
             </para>
         </note>
         <para>
             Another alternative is to use the <methodname>getDbSelect()</methodname> method
-            of the Zend_Auth_Adapter_DbTable after the adapter has been constructed.
-            This method will return the Zend_Db_Select object instance it will use
-            to complete the authenticate() routine. It is important to note that
-            this method will always return the same object regardless if authenticate()
-            has been called or not. This object <emphasis>will not</emphasis> have any of the
-            identity or credential information in it as those values are placed
-            into the select object at authenticate() time.
+            of the <classname>Zend_Auth_Adapter_DbTable</classname> after the adapter has been
+            constructed. This method will return the <classname>Zend_Db_Select</classname> object
+            instance it will use to complete the <methodname>authenticate()</methodname> routine.
+            It is important to note that this method will always return the same object regardless
+            if <methodname>authenticate()</methodname> has been called or not. This object
+            <emphasis>will not</emphasis> have any of the identity or credential information in it
+            as those values are placed into the select object at
+            <methodname>authenticate()</methodname> time.
         </para>
         <para>
             An example of a situation where one might want to use the getDbSelect()

@@ -252,8 +252,9 @@ switch ($result->getCode()) {
                     authentication is attempted, since
                     <methodname>Zend_Auth::authenticate()</methodname> performs the automatic
                     storage of the identity.
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Save a reference to the Singleton instance of Zend_Auth
 $auth = Zend_Auth::getInstance();
 
@@ -268,8 +269,6 @@ $auth->setStorage(new Zend_Auth_Storage_Session('someNamespace'));
 // success
 $result = $auth->authenticate($authAdapter);
 ]]></programlisting>
-
-                </para>
 
             </example>
 
@@ -393,7 +392,9 @@ $result = Zend_Auth::getInstance()->authenticate($authAdapter);
 
         <para>
             There are two provided ways to use <classname>Zend_Auth</classname> adapters:
-            <orderedlist>
+        </para>
+
+        <orderedlist>
             <listitem>
                 <para>
                     indirectly, through <methodname>Zend_Auth::authenticate()</methodname>
@@ -404,8 +405,7 @@ $result = Zend_Auth::getInstance()->authenticate($authAdapter);
                     directly, through the adapter's <methodname>authenticate()</methodname> method
                 </para>
             </listitem>
-            </orderedlist>
-        </para>
+        </orderedlist>
 
         <para>
             The following example illustrates how to use a <classname>Zend_Auth</classname> adapter

@@ -5,8 +5,8 @@
     <title>Introduction</title>
 
     <para>
-        <classname>Zend_Auth</classname> provides an API for authentication and includes concrete
-        authentication adapters for common use case scenarios.
+        <classname>Zend_Auth</classname> provides an <acronym>API</acronym> for authentication and
+        includes concrete authentication adapters for common use case scenarios.
     </para>
 
     <para>
@@ -37,12 +37,12 @@
 
         <para>
             A <classname>Zend_Auth</classname> adapter is used to authenticate against a particular
-            type of authentication service, such as LDAP, RDBMS, or file-based storage. Different
-            adapters are likely to have vastly different options and behaviors, but some basic
-            things are common among authentication adapters. For example, accepting authentication
-            credentials (including a purported identity), performing queries against the
-            authentication service, and returning results are common to
-            <classname>Zend_Auth</classname> adapters.
+            type of authentication service, such as <acronym>LDAP</acronym>,
+            <acronym>RDBMS</acronym>, or file-based storage. Different adapters are likely to have
+            vastly different options and behaviors, but some basic things are common among
+            authentication adapters. For example, accepting authentication credentials (including a
+            purported identity), performing queries against the authentication service, and
+            returning results are common to <classname>Zend_Auth</classname> adapters.
         </para>
 
         <para>
@@ -60,8 +60,9 @@
             The following is an example authentication adapter that requires a username and
             password to be set for authentication. Other details, such as how the authentication
             service is queried, have been omitted for brevity:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class MyAuthAdapter implements Zend_Auth_Adapter_Interface
 {
     /**
@@ -88,6 +89,7 @@ class MyAuthAdapter implements Zend_Auth_Adapter_Interface
 }
 ]]></programlisting>
 
+        <para>
             As indicated in its docblock, <methodname>authenticate()</methodname> must return an
             instance of <classname>Zend_Auth_Result</classname> (or of a class derived from
             <classname>Zend_Auth_Result</classname>). If for some reason performing an
@@ -109,41 +111,42 @@ class MyAuthAdapter implements Zend_Auth_Adapter_Interface
             <classname>Zend_Auth_Result</classname> object upon construction, so that the following
             four methods provide a basic set of user-facing operations that are common to the
             results of <classname>Zend_Auth</classname> adapters:
-            <itemizedlist>
-                <listitem>
-                    <para>
-                        <methodname>isValid()</methodname> - returns true if and only if the result
-                        represents a successful authentication attempt
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <methodname>getCode()</methodname> - returns a
-                        <classname>Zend_Auth_Result</classname> constant identifier for determining
-                        the type of authentication failure or whether success has occurred. This
-                        may be used in situations where the developer wishes to distinguish among
-                        several authentication result types. This allows developers to maintain
-                        detailed authentication result statistics, for example. Another use of this
-                        feature is to provide specific, customized messages to users for usability
-                        reasons, though developers are encouraged to consider the risks of
-                        providing such detailed reasons to users, instead of a general
-                        authentication failure message. For more information, see the notes below.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <methodname>getIdentity()</methodname> - returns the identity of the
-                        authentication attempt
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <methodname>getMessages()</methodname> - returns an array of messages
-                        regarding a failed authentication attempt
-                    </para>
-                </listitem>
-            </itemizedlist>
         </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <methodname>isValid()</methodname> - returns true if and only if the result
+                    represents a successful authentication attempt
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <methodname>getCode()</methodname> - returns a
+                    <classname>Zend_Auth_Result</classname> constant identifier for determining
+                    the type of authentication failure or whether success has occurred. This
+                    may be used in situations where the developer wishes to distinguish among
+                    several authentication result types. This allows developers to maintain
+                    detailed authentication result statistics, for example. Another use of this
+                    feature is to provide specific, customized messages to users for usability
+                    reasons, though developers are encouraged to consider the risks of
+                    providing such detailed reasons to users, instead of a general
+                    authentication failure message. For more information, see the notes below.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <methodname>getIdentity()</methodname> - returns the identity of the
+                    authentication attempt
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <methodname>getMessages()</methodname> - returns an array of messages
+                    regarding a failed authentication attempt
+                </para>
+            </listitem>
+        </itemizedlist>
 
         <para>
             A developer may wish to branch based on the type of authentication result in order to
@@ -151,8 +154,9 @@ class MyAuthAdapter implements Zend_Auth_Adapter_Interface
             locking accounts after too many unsuccessful password attempts, flagging an IP address
             after too many nonexistent identities are attempted, and providing specific, customized
             authentication result messages to the user. The following result codes are available:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 Zend_Auth_Result::SUCCESS
 Zend_Auth_Result::FAILURE
 Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND
@@ -161,12 +165,11 @@ Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID
 Zend_Auth_Result::FAILURE_UNCATEGORIZED
 ]]></programlisting>
 
-        </para>
-
         <para>
             The following example illustrates how a developer may branch on the result code:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // inside of AuthController / loginAction
 $result = $this->_auth->authenticate($adapter);
 
@@ -190,8 +193,6 @@ switch ($result->getCode()) {
 }
 ]]></programlisting>
 
-        </para>
-
     </sect2>
 
     <sect2 id="zend.auth.introduction.persistence">
@@ -205,9 +206,9 @@ switch ($result->getCode()) {
         </para>
 
         <para>
-            HTTP is a stateless protocol, however, and techniques such as cookies and sessions have
-            been developed in order to facilitate maintaining state across multiple requests in
-            server-side web applications.
+            <acronym>HTTP</acronym> is a stateless protocol, however, and techniques such as
+            cookies and sessions have been developed in order to facilitate maintaining state
+            across multiple requests in server-side web applications.
         </para>
 
         <sect3 id="zend.auth.introduction.persistence.default">
@@ -216,16 +217,16 @@ switch ($result->getCode()) {
 
             <para>
                  By default, <classname>Zend_Auth</classname> provides persistent storage of the
-                 identity from a successful authentication attempt using the PHP session. Upon a
-                 successful authentication attempt,
-                 <classname>Zend_Auth::authenticate()</classname> stores the identity from the
+                 identity from a successful authentication attempt using the <acronym>PHP</acronym>
+                 session. Upon a successful authentication attempt,
+                 <methodname>Zend_Auth::authenticate()</methodname> stores the identity from the
                  authentication result into persistent storage. Unless configured otherwise,
                  <classname>Zend_Auth</classname> uses a storage class named
                  <classname>Zend_Auth_Storage_Session</classname>, which, in turn, uses
                  <link linkend="zend.session"><classname>Zend_Session</classname></link>. A custom
                  class may instead be used by providing an object that implements
                  <classname>Zend_Auth_Storage_Interface</classname> to
-                 <classname>Zend_Auth::setStorage()</classname>.
+                 <methodname>Zend_Auth::setStorage()</methodname>.
             </para>
 
             <note>
@@ -243,13 +244,14 @@ switch ($result->getCode()) {
 
                 <para>
                     <classname>Zend_Auth_Storage_Session</classname> uses a session namespace of
-                    'Zend_Auth'. This namespace may be overridden by passing a different value to
-                    the constructor of <classname>Zend_Auth_Storage_Session</classname>, and this
-                    value is internally passed along to the constructor of
+                    '<classname>Zend_Auth</classname>'. This namespace may be overridden by passing
+                    a different value to the constructor of
+                    <classname>Zend_Auth_Storage_Session</classname>, and this value is internally
+                    passed along to the constructor of
                     <classname>Zend_Session_Namespace</classname>. This should occur before
                     authentication is attempted, since
-                    <classname>Zend_Auth::authenticate()</classname> performs the automatic storage
-                    of the identity.
+                    <methodname>Zend_Auth::authenticate()</methodname> performs the automatic
+                    storage of the identity.
 
                     <programlisting language="php"><![CDATA[
 // Save a reference to the Singleton instance of Zend_Auth
@@ -282,7 +284,7 @@ $result = $auth->authenticate($authAdapter);
                 that provided by <classname>Zend_Auth_Storage_Session</classname>. For such cases
                 developers may simply implement <classname>Zend_Auth_Storage_Interface</classname>
                 and supply an instance of the class to
-                <classname>Zend_Auth::setStorage()</classname>.
+                <methodname>Zend_Auth::setStorage()</methodname>.
             </para>
 
             <example id="zend.auth.introduction.persistence.custom.example">
@@ -293,8 +295,9 @@ $result = $auth->authenticate($authAdapter);
                     In order to use an identity persistence storage class other than
                     <classname>Zend_Auth_Storage_Session</classname>, a developer implements
                     <classname>Zend_Auth_Storage_Interface</classname>:
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 class MyStorage implements Zend_Auth_Storage_Interface
 {
     /**
@@ -359,14 +362,13 @@ class MyStorage implements Zend_Auth_Storage_Interface
 }
 ]]></programlisting>
 
-                </para>
-
                 <para>
                     In order to use this custom storage class,
-                    <classname>Zend_Auth::setStorage()</classname> is invoked before an
+                    <methodname>Zend_Auth::setStorage()</methodname> is invoked before an
                     authentication query is attempted:
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Instruct Zend_Auth to use the custom storage class
 Zend_Auth::getInstance()->setStorage(new MyStorage());
 
@@ -378,8 +380,6 @@ Zend_Auth::getInstance()->setStorage(new MyStorage());
 // success
 $result = Zend_Auth::getInstance()->authenticate($authAdapter);
 ]]></programlisting>
-
-                </para>
 
             </example>
 
@@ -396,7 +396,7 @@ $result = Zend_Auth::getInstance()->authenticate($authAdapter);
             <orderedlist>
             <listitem>
                 <para>
-                    indirectly, through <classname>Zend_Auth::authenticate()</classname>
+                    indirectly, through <methodname>Zend_Auth::authenticate()</methodname>
                 </para>
             </listitem>
             <listitem>
@@ -410,8 +410,9 @@ $result = Zend_Auth::getInstance()->authenticate($authAdapter);
         <para>
             The following example illustrates how to use a <classname>Zend_Auth</classname> adapter
             indirectly, through the use of the <classname>Zend_Auth</classname> class:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Get a reference to the singleton instance of Zend_Auth
 $auth = Zend_Auth::getInstance();
 
@@ -433,28 +434,29 @@ if (!$result->isValid()) {
     // $result->getIdentity() === $username
 }
 ]]></programlisting>
-        </para>
 
         <para>
             Once authentication has been attempted in a request, as in the above example, it is a
             simple matter to check whether a successfully authenticated identity exists:
-            <programlisting language="php"><![CDATA[
+        </para>
+
+        <programlisting language="php"><![CDATA[
 $auth = Zend_Auth::getInstance();
 if ($auth->hasIdentity()) {
     // Identity exists; get it
     $identity = $auth->getIdentity();
 }
 ]]></programlisting>
-        </para>
 
         <para>
             To remove an identity from persistent storage, simply use the
             <methodname>clearIdentity()</methodname> method. This typically would be used for
             implementing an application "logout" operation:
-            <programlisting language="php"><![CDATA[
+        </para>
+
+        <programlisting language="php"><![CDATA[
 Zend_Auth::getInstance()->clearIdentity();
 ]]></programlisting>
-        </para>
 
         <para>
             When the automatic use of persistent storage is inappropriate for a particular use
@@ -464,8 +466,9 @@ Zend_Auth::getInstance()->clearIdentity();
             <methodname>authenticate()</methodname> method. Adapter-specific details are discussed
             in the documentation for each adapter. The following example directly utilizes
             <emphasis>MyAuthAdapter</emphasis>:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Set up the authentication adapter
 $authAdapter = new MyAuthAdapter($username, $password);
 
@@ -482,7 +485,6 @@ if (!$result->isValid()) {
     // $result->getIdentity() === $username
 }
 ]]></programlisting>
-        </para>
 
     </sect2>
 

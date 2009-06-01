@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15859 -->
+<!-- EN-Revision: 15861 -->
 <sect1 id="zend.auth.introduction">
 
     <title>導入</title>
@@ -253,8 +253,9 @@ switch ($result->getCode()) {
                     のコンストラクタに渡されます。これは認証を試みる前に行う必要があります。
                     なぜなら、<methodname>Zend_Auth::authenticate()</methodname>
                     は ID を自動的に保存するからです。
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Zend_Auth のシングルトンインスタンスへの参照を保存します
 $auth = Zend_Auth::getInstance();
 
@@ -268,8 +269,6 @@ $auth->setStorage(new Zend_Auth_Storage_Session('someNamespace'));
 // 認証と結果の保存、そして成功時に ID を持続させます
 $result = $auth->authenticate($authAdapter);
 ]]></programlisting>
-
-                </para>
 
             </example>
 
@@ -385,7 +384,9 @@ $result = Zend_Auth::getInstance()->authenticate($authAdapter);
 
         <para>
             <classname>Zend_Auth</classname> の使用法には、次の二通りがあります。
-            <orderedlist>
+        </para>
+
+        <orderedlist>
             <listitem>
                 <para>
                     間接的に <methodname>Zend_Auth::authenticate()</methodname> 経由で使用する
@@ -396,8 +397,7 @@ $result = Zend_Auth::getInstance()->authenticate($authAdapter);
                     直接、アダプタの <methodname>authenticate()</methodname> メソッドを使用する
                 </para>
             </listitem>
-            </orderedlist>
-        </para>
+        </orderedlist>
 
         <para>
             次の例は、<classname>Zend_Auth</classname> アダプタを間接的に

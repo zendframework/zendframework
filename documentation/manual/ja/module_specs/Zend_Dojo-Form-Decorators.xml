@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15617 -->
+<sect2 id="zend.dojo.form.decorators">
+    <title>Dijitに特有のフォーム・デコレーター</title>
+
+    <para>
+        大部分のフォーム要素はDijit要素デコレーター
+        （要素からdijitパラメータをとって来ます）
+        を使うことができ、
+        要素で特定されたビュー・ヘルパーに、
+        これらと他のメタデータを渡すことができます。
+        しかしながら、フォームやサブ・フォーム及び表示グループをデコレートするために、
+        いろいろなレイアウトdijitsに該当するデコレーターのセットがあります。
+    </para>
+
+    <para>
+        dijitデコレーターの全てで、
+        デコレートされた与えられた要素の<code>dijitParams</code>プロパティを探して、
+        <code>$params</code>配列として使用されるdijitビュー・ヘルパーに押し付けます;
+        それから、情報の重複が起こらないように、これらは他のどの特性からも分離されます。
+    </para>
+
+    <sect3 id="zend.dojo.form.decorators.dijitElement">
+        <title>Dijit要素デコレーター</title>
+
+        <para>
+            ちょうど<link linkend="zend.form.standardDecorators.viewHelper">Viewヘルパ・デコレーター</link>のように、
+            レンダリングのときにビュー・ヘルパーとして使用される要素で、
+            Dijit要素は<code>helper</code>プロパティを予期します。
+            Dijitパラメータは一般的に直接要素から引き出されますが、
+            <code>dijitParams</code>キー（そのキーの値は、任意の連想配列でしょう）による、
+            オプションとして渡されるかもしれません。
+        </para>
+
+        <para>
+            各々の要素がユニークなID（要素の<code>getId()</code>メソッドから取得されるように）
+            を持つことは、重要です。
+            繰り返しが<code>dojo()</code>ビュー・ヘルパーの範囲内で検出されるならば、
+            デコレーターは通知の引き金を引いて、
+            識別子に<code>uniqid()</code>からの戻りを追加することによってユニークなIDを作成します。
+        </para>
+
+        <para>
+            標準的な使用法では、
+            単純に最初にデコレーター・チェーンにこのデコレーターを
+            追加オプションなしで、結びつけます。
+        </para>
+
+        <example id="zend.dojo.form.decorators.dijitElement.usage">
+            <title>Dijit要素デコレーターの使用法</title>
+
+            <programlisting language="php"><![CDATA[
+$element->setDecorators(array(
+    'DijitElement',
+    'Errors',
+    'Label',
+    'ContentPane',
+));
+]]></programlisting>
+        </example>
+    </sect3>
+
+    <sect3 id="zend.dojo.form.decorators.dijitForm">
+        <title>Dijitフォーム・デコレーター</title>
+
+        <para>
+            Dijitフォーム・デコレーターは、
+            <link linkend="zend.form.standardDecorators.form">フォーム・デコレーター</link>と非常に似ています;
+            実際、それが
+            同じビュー・ヘルパー名 ('form')を利用するので、実際、基本的に入れ替えて使うことができます。
+        </para>
+
+        <para>
+            設定のためにdijit.form.Formは少しもdijitパラメータを必要としないので、
+            プログラムされたdijitの生成が確実に機能できるように、
+            DOM IDが渡されるdijitフォーム・ビュー・ヘルパーが必要とすることが主な違いです。
+            識別子としてフォーム名を渡すことによって、デコレーターはこれを確実にします。
+        </para>
+    </sect3>
+
+    <sect3 id="zend.dojo.form.decorators.dijitContainer">
+        <title>DijitContainerベースのデコレーター</title>
+
+        <para>
+            <code>DijitContainer</code>デコレーターは、実は、
+            いろいろな他のデコレーターが由来する抽象クラスです。
+            タイトル・サポートの追加で、それは<link
+                linkend="zend.dojo.form.decorators.dijitElement">Dijit要素</link>の同じ機能を提供します。
+            多くのレイアウトdijitはタイトルを要求するか、利用することができます;
+            利用できるのであれば、DijitContainerは要素の説明プロパティを利用して、
+            渡されるならば、 'legend' もしくは 'title' デコレーター・オプションのどちらかを利用することもできます。
+            対応する翻訳による翻訳アダプターが存在するならば、タイトルは翻訳されます。
+        </para>
+
+        <para>
+            以下は、<code>DijitContainer</code>から継承するデコレーターの一覧です:
+        </para>
+
+        <itemizedlist>
+            <listitem><para>AccordionContainer</para></listitem>
+            <listitem><para>AccordionPane</para></listitem>
+            <listitem><para>BorderContainer</para></listitem>
+            <listitem><para>ContentPane</para></listitem>
+            <listitem><para>SplitContainer</para></listitem>
+            <listitem><para>StackContainer</para></listitem>
+            <listitem><para>TabContainer</para></listitem>
+        </itemizedlist>
+
+        <example id="zend.dojo.form.decorators.dijitContainer.usage">
+            <title>Dijitコンテナ・デコレーター使用法</title>
+
+            <programlisting language="php"><![CDATA[
+// フォームで TabContainer を使う:
+$form->setDecorators(array(
+    'FormElements',
+    array('TabContainer', array(
+        'id'          => 'tabContainer',
+        'style'       => 'width: 600px; height: 500px;',
+        'dijitParams' => array(
+            'tabPosition' => 'top'
+        ),
+    )),
+    'DijitForm',
+));
+
+// サブフォームで ContentPane を使う
+// (AccordionContainer 以外の全てで使うことができます):
+$subForm->setDecorators(array(
+    'FormElements',
+    array('HtmlTag', array('tag' => 'dl')),
+    'ContentPane',
+));
+]]></programlisting>
+        </example>
+    </sect3>
+</sect2>
+<!--
+vim:se ts=4 sw=4 et:
+-->

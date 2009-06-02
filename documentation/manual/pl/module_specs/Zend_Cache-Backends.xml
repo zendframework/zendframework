@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.cache.backends">
     <title>Backendy Zend_Cache</title>
 
@@ -22,17 +24,17 @@
                  </thead>
                  <tbody>
                       <row>
-                          <entry><code>cache_dir</code></entry>
-                          <entry><code>string</code></entry>
-                          <entry><code>'/tmp/'</code></entry>
+                          <entry><emphasis>cache_dir</emphasis></entry>
+                          <entry><type>String</type></entry>
+                          <entry><filename>'/tmp/'</filename></entry>
                           <entry>
                               Katalog w którym mają być przechowywane pliki bufora.
                           </entry>
                       </row>
                       <row>
-                          <entry><code>file_locking</code></entry>
-                          <entry><code>boolean</code></entry>
-                          <entry><code>true</code></entry>
+                          <entry><emphasis>file_locking</emphasis></entry>
+                          <entry><type>Boolean</type></entry>
+                          <entry><constant>TRUE</constant></entry>
                           <entry>
                             Włącza / wyłącza file_locking: Może zapobiec uszkodzeniu
                             bufora, ale nie ma to znaczenia w serwerach
@@ -40,9 +42,9 @@
                           </entry>
                       </row>
                       <row>
-                          <entry><code>read_control</code></entry>
-                          <entry><code>boolean</code></entry>
-                          <entry><code>true</code></entry>
+                          <entry><emphasis>read_control</emphasis></entry>
+                          <entry><type>Boolean</type></entry>
+                          <entry><code>TRUE</code></entry>
                           <entry>
                             Włącza / wyłącza kontrolę odczytu: jeśli włączona, klucz kontrolny
                             jest załączany w pliku bufora i ten klucz jest porównywany
@@ -50,9 +52,9 @@
                           </entry>
                       </row>
                       <row>
-                          <entry><code>read_control_type</code></entry>
-                          <entry><code>string</code></entry>
-                          <entry><code>'crc32'</code></entry>
+                          <entry><emphasis>read_control_type</emphasis></entry>
+                          <entry><type>String</type></entry>
+                          <entry><constant>'crc32'</constant></entry>
                           <entry>
                             Typ kontroli odczytu (tylko jeśli kontrola odczytu jest włączona). Dostępne wartości to:
                             'md5' (najlepszy, ale najwolniejszy), 'crc32' (odrobinę mniej bezpieczny, ale szybszy, lepszy wybór),
@@ -61,9 +63,9 @@
                         </entry>
                       </row>
                       <row>
-                          <entry><code>hashed_directory_level</code></entry>
-                          <entry><code>int</code></entry>
-                          <entry><code>0</code></entry>
+                          <entry><emphasis>hashed_directory_level</emphasis></entry>
+                          <entry><type>Integer</type></entry>
+                          <entry>0</entry>
                           <entry>
                               Poziom haszowanej struktury katalogów: 0 oznacza "brak
                               haszowanej struktury", 1 oznacza "jeden poziom katalogów",
@@ -74,17 +76,17 @@
                           </entry>
                       </row>
                       <row>
-                          <entry><code>hashed_directory_umask</code></entry>
-                          <entry><code>int</code></entry>
-                          <entry><code>0700</code></entry>
+                          <entry><emphasis>hashed_directory_umask</emphasis></entry>
+                          <entry><type>Integer</type></entry>
+                          <entry>0700</entry>
                           <entry>
                               Maska Umask dla haszowanej struktury katalogów.
                         </entry>
                       </row>
                       <row>
-                          <entry><code>file_name_prefix</code></entry>
-                          <entry><code>string</code></entry>
-                          <entry><code>'zend_cache'</code></entry>
+                          <entry><emphasis>file_name_prefix</emphasis></entry>
+                          <entry><type>String</type></entry>
+                          <entry>'zend_cache'</entry>
                           <entry>
                               przedrostek dla plików bufora ; bądź naprawdę ostrożny
                               z tą opcją, ponieważ zbyt prosta wartość w katalogu
@@ -93,17 +95,17 @@
                           </entry>
                       </row>
                       <row>
-                          <entry><code>cache_file_umask</code></entry>
-                          <entry><code>int</code></entry>
-                          <entry><code>0700</code></entry>
+                          <entry><emphasis>cache_file_umask</emphasis></entry>
+                          <entry><type>Integer</type></entry>
+                          <entry>0700</entry>
                           <entry>
                               maska umask dla plików bufora
                           </entry>
                       </row>
                       <row>
-                          <entry><code>metatadatas_array_max_size</code></entry>
-                          <entry><code>int</code></entry>
-                          <entry><code>100</code></entry>
+                          <entry><emphasis>metatadatas_array_max_size</emphasis></entry>
+                          <entry><type>Integer</type></entry>
+                          <entry>100</entry>
                           <entry>
                               wewnętrzny maksymalny rozmiar tablicy danych meta
                               (nie zmieniaj tej wartości jeśli nie jesteś do
@@ -135,17 +137,17 @@
                  </thead>
                  <tbody>
                       <row>
-                          <entry><code>cache_db_complete_path (wymagana)</code></entry>
-                          <entry><code>string</code></entry>
-                          <entry><code>null</code></entry>
+                          <entry><emphasis>cache_db_complete_path (wymagana)</emphasis></entry>
+                          <entry><type>String</type></entry>
+                          <entry><constant>NULL</constant></entry>
                           <entry>
                               Kompletna ścieżka (wraz z nazwą pliku) bazy danych SQLite
                           </entry>
                       </row>
                       <row>
-                          <entry><code>automatic_vacuum_factor</code></entry>
-                          <entry><code>int</code></entry>
-                          <entry><code>10</code></entry>
+                          <entry><emphasis>automatic_vacuum_factor</emphasis></entry>
+                          <entry><type>int</type></entry>
+                          <entry>10</entry>
                           <entry>
                               Włącza / ustawia proces automatycznego czyszczenia
                               Proces automatycznego czyszczenia defragmentuje plik bazy (i zmniejsza jego rozmiar)
@@ -186,24 +188,43 @@
                  </thead>
                  <tbody>
                       <row>
-                          <entry><code>servers</code></entry>
-                          <entry><code>array</code></entry>
-                          <entry><code>array(array('host' => 'localhost','port' => 11211, 'persistent' => true))</code></entry>
+                          <entry><emphasis>servers</emphasis></entry>
+                          <entry><type>Array</type></entry>
                           <entry>
-                              Tablica serwerów memcached ; każdy serwer memcached jest opisany przez asocjacyjną tablicę :
-                              'host' => (string) : nazwa serwera memcached,
-                              'port' => (int) : port serwera memcached,
-                              'persistent' => (bool) : używać czy nie używać stałych połączeń do tego serwera memcached
+                              array(array('host' => 'localhost', 'port' => 11211, 'persistent' =>
+                                     true, 'weight' => 1, 'timeout' => 5, 'retry_interval' => 15,
+                                     'status' => true, 'failure_callback' => '' ))
+                          </entry>
+                          <entry>
+                              Tablica serwerów memcached ; każdy serwer memcached jest 
+                              opisany przez asocjacyjną tablicę : 'host' => (string) : nazwa 
+                              serwera memcached, 'port' => (int) : port serwera memcached,
+                              'persistent' => (bool) : używać czy nie używać stałych 
+                              połączeń do tego serwera memcached, 'weight' => (int) : 
+                              waga serwera memcached, 'timeout' => (int) : timeout 
+                              serwera memcached, 'retry_interval' => (int) : przerwa
+                              między ponowieniami, 'status' => (bool) : status serwera 
+                              memcached, 'failure_callback' => (callback) : opcja  
+                              failure_callback serwera memcached
                           </entry>
                       </row>
                       <row>
-                          <entry><code>compression</code></entry>
-                          <entry><code>boolean</code></entry>
-                          <entry><code>false</code></entry>
+                          <entry><emphasis>compression</emphasis></entry>
+                          <entry><type>Boolean</type></entry>
+                          <entry><constant>FALSE</constant></entry>
                           <entry>
                              wartość true jeśli chcesz użyć kompresji w locie
                           </entry>
                       </row>
+                      <row>
+                         <entry><emphasis>compatibility</emphasis></entry>
+                         <entry><type>Boolean</type></entry>
+                         <entry><constant>FALSE</constant></entry>
+                         <entry>
+                            wartość true jeśli użyć trybu zgodności
+                            ze starymi serwerami/rozszerzeniami memcache
+                         </entry>
+                     </row>
                   </tbody>
               </tgroup>
           </table>
@@ -251,17 +272,17 @@
                  </thead>
                  <tbody>
                       <row>
-                          <entry><code>user</code></entry>
-                          <entry><code>string</code></entry>
-                          <entry><code>null</code></entry>
+                          <entry><emphasis>user</emphasis></entry>
+                          <entry><type>string</type></entry>
+                          <entry><constant>NULL</constant></entry>
                           <entry>
                               xcache.admin.user, konieczna dla metody clean()
                           </entry>
                       </row>
                       <row>
-                          <entry><code>password</code></entry>
-                          <entry><code>string</code></entry>
-                          <entry><code>null</code></entry>
+                          <entry><emphasis>password</emphasis></entry>
+                          <entry><type>string</type></entry>
+                          <entry><constant>NULL</constant></entry>
                           <entry>
                               xcache.admin.pass (w czystej postaci, nie MD5), koieczna dla metody clean()
                           </entry>
@@ -276,20 +297,165 @@
             Ten backend używa API produktu <ulink url="http://www.zend.com/products/platform">Zend Platform</ulink> do buforowania zawartości. Oczywiście aby użyć tego backendu, musisz mieć zainstalowaną aplikację Zend Platform.
         </para>
         <para>
-            Ten backend obsługuje etykiety, ale nie obsługuje trybu <code>CLEANING_MODE_NOT_MATCHING_TAG</code> czyszczenia bufora.
+            Ten backend obsługuje etykiety, ale nie obsługuje trybu <constant>CLEANING_MODE_NOT_MATCHING_TAG</constant> czyszczenia bufora.
         </para>
         <para>
             Gdy określasz nazwę tego backendu podczas użycia metody
-            <code>Zend_Cache::factory()</code>, wstaw pomiędzy słowami 'Zend'
+            <methodname>Zend_Cache::factory()</methodname>, wstaw pomiędzy słowami 'Zend'
             oraz 'Platform' jeden z dozwolonych separatorów wyrazów -- '-',
             '.', ' ', lub '_':
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $cache = Zend_Cache::factory('Core', 'Zend Platform');
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             Ten backend nie ma żadnych opcji.
+        </para>
+    </sect2>
+    <sect2 id="zend.cache.backends.twolevels">
+        <title>Zend_Cache_Backend_TwoLevels</title>
+        <para>
+            Ten backend jest backendem hybrydowym. PRzechowuje on rekordu buforu 
+            w dwóch innych backendach : w szybkim (ale ograniczonym) jak Apc, Memcache... 
+            i w wolnym takim jak File, Sqlite...
+        </para>
+        <para>
+            Ten backend będzie wykorzystywał parametr oznaczający priorytet 
+            (podany na poziomie frontendu podczas zapisywania rekordu) oraz
+            parametr oznaczający ilość miejsca do użycia przez szybki backend w 
+            celu zoptymalizowania użycia tych dwóch backendów.
+        </para>
+        <para>
+            Dostępne opcje to :
+        </para>
+        <table id="zend.cache.backends.twolevels.table">
+            <title>Opcje backendu TwoLevels</title>
+            <tgroup cols="4">
+                 <thead>
+                      <row>
+                        <entry>Opcja</entry>
+                        <entry>Typ danych</entry>
+                        <entry>Domyślna wartość</entry>
+                        <entry>Opis</entry>
+                    </row>
+                 </thead>
+                 <tbody>
+                      <row>
+                          <entry><emphasis>slow_backend</emphasis></entry>
+                          <entry><type>String</type></entry>
+                          <entry>File</entry>
+                          <entry>
+                              nazwa backendu "wolnego"
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><emphasis>fast_backend</emphasis></entry>
+                          <entry><type>String</type></entry>
+                          <entry>Apc</entry>
+                          <entry>
+                              nazwa backendu "szybkiego"
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><emphasis>slow_backend_options</emphasis></entry>
+                          <entry><type>Array</type></entry>
+                          <entry><methodname>array()</methodname></entry>
+                          <entry>
+                              opcje backendu "wolnego"
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><emphasis>fast_backend_options</emphasis></entry>
+                          <entry><type>Array</type></entry>
+                          <entry><methodname>array()</methodname></entry>
+                          <entry>
+                              opcje backendu "szybkiego"
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><emphasis>slow_backend_custom_naming</emphasis></entry>
+                          <entry><type>Boolean</type></entry>
+                          <entry><constant>FALSE</constant></entry>
+                          <entry>
+                              jeśli ma wartość true, argument slow_backend jest
+                              używany jako kompletna nazwa klasy ; jeśli ma wartość
+                              false, argument jest traktowany jako klasa z 
+                              przedrostkiem "Zend_Cache_Backend_[...]"
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><emphasis>fast_backend_custom_naming</emphasis></entry>
+                          <entry><type>Boolean</type></entry>
+                          <entry><constant>FALSE</constant></entry>
+                          <entry>
+                              jeśli ma wartość true, argument fast_backend argument jest
+                              używany jako kompletna nazwa klasy; jeśli ma wartość 
+                              false, argument jest traktowany jako klasa z 
+                              przedrostkiem "Zend_Cache_Backend_[...]"
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><emphasis>slow_backend_autoload</emphasis></entry>
+                          <entry><type>Boolean</type></entry>
+                          <entry><constant>FALSE</constant></entry>
+                          <entry>
+                              jeśli ma wartość true, dla wolnego backendu nie 
+                              będzie wywoływana funkcja require_once
+                              (użyteczne tylko dla własnych backendów)
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><emphasis>fast_backend_autoload</emphasis></entry>
+                          <entry><type>Boolean</type></entry>
+                          <entry><constant>FALSE</constant></entry>
+                          <entry>
+                              jeśli ma wartość true, dla szybkiego backendu nie 
+                              będzie wywoływana funkcja require_once
+                              (użyteczne tylko dla własnych backendów)
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><emphasis>auto_refresh_fast_cache</emphasis></entry>
+                          <entry><type>Boolean</type></entry>
+                          <entry><constant>TRUE</constant></entry>
+                          <entry>
+                              jeśli ma wartość true, bufor z szybkiego backendu 
+                              zostanie automatycznie odświeżony gdy rekord bufora
+                              istnieje
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><emphasis>stats_update_factor</emphasis></entry>
+                          <entry><type>Integer</type></entry>
+                          <entry>10</entry>
+                          <entry>
+                              włącza / ustawia procent wypełnienia szybkiego 
+                              backendu (podczas zapisywania rekordu w buforze,  
+                              obliczenie procentu wypełnienia raz na x wywołan
+                              zapisywania bufora)
+                          </entry>
+                      </row>
+                  </tbody>
+              </tgroup>
+          </table>
+    </sect2>
+    <sect2 id="zend.cache.backends.zendserver">
+        <title>Zend_Cache_Backend_ZendServer_Disk oraz Zend_Cache_Backend_ZendServer_ShMem</title>
+        <para>
+            Te backendy przechowują rekordu bufora używając metod buforowania serwera <ulink
+                url="http://www.zend.com/en/products/server/downloads-all?zfs=zf_download">Zend
+                Server</ulink>.
+        </para>
+        <para>
+             Bądź ostrożny: te backendy nie obsługują opcji "etykiet" oraz
+             argumentu "doNotTestCacheValidity=true".
+        </para>
+        <para>
+             Te backendy działają tylko w środowisku Zend Server dla stron
+             działających w oparciu o HTTP(S) i nie działają dla skryptów konsoli.
+        </para>
+        <para>
+            Te backendy nie posiadaja opcji.
         </para>
     </sect2>
 </sect1>

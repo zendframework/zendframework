@@ -1,23 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.cache.theory">
     <title>Teoria buforowania</title>
     <para>
-        Są trzy kluczowe składniki w Zend_Cache. Pierwszym jest unikalny
+        Są trzy kluczowe składniki w <classname>Zend_Cache</classname>. Pierwszym jest unikalny
         identyfikator (łańcuch znakow) który jest używany do identyfikowania
-        rekordów bufora. Drugim jest dyrektywa <code>'lifetime'</code> jaką
+        rekordów bufora. Drugim jest dyrektywa <emphasis>'lifetime'</emphasis> jaką
         pokazano w przykładach; definiuje ona jak długo buforowany zasób jest
         uznawany za 'świeży'. Trzecim kluczowym składnikiem jest warunkowe
         wykonanie więc część twojego kodu może być ominięta, co powoduje wzrost
         wydajności. Główna funkcja frontendu (np.
-        <code>Zend_Cache_Core::get()</code>) jest zawsze zaprojektowana tak, aby
+        <methodname>Zend_Cache_Core::get()</methodname>) jest zawsze zaprojektowana tak, aby
         zwracała  wartość false gdy bufor jest nieaktualny, jeśli jest to
         sensowne dla danego frontendu. To pozwala użytkownikom na ominięcie bloków
-        kodu, które chcą buforować, zawierając je w wyrażenie <code>if(){ ... }</code>
-        gdzie warunkiem jest metoda Zend_Cache. Na końcu takich bloków musisz zapisać
-        to co wygenerowałeś (np. za pomocą metody <code>Zend_Cache_Core::save()</code>).
+        kodu, które chcą buforować, zawierając je w wyrażenie <emphasis>if(){ ... }</emphasis>
+        gdzie warunkiem jest metoda <classname>Zend_Cache</classname>. Na końcu 
+        takich bloków musisz zapisać to co wygenerowałeś (np. za pomocą metody 
+        <methodname>Zend_Cache_Core::save()</methodname>).
     </para>
     <note><para>
         Warunkowe uruchamianie twojego kodu nie jest konieczne w niektórych
-        frontendach (na przykład <code>Function</code>), gdzie cała logika
+        frontendach (na przykład <emphasis>Function</emphasis>), gdzie cała logika
         jest zaimplementowana we frontendzie.
     </para></note>
     <note><para>
@@ -30,12 +33,12 @@
         pobierze rekord z bufora.
     </para></note>
     <sect2 id="zend.cache.factory">
-        <title>Metoda fabryki <code>Zend_Cache</code></title>
+        <title>Metoda fabryki Zend_Cache</title>
         <para>
             Dobrym sposobem utworzenia użytecznej instancji frontendu
-            <code>Zend_Cache</code> jest ten pokazany w poniższym przykładzie:
+            <classname>Zend_Cache</classname> jest ten pokazany w poniższym przykładzie:
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Wybieramy backend (na przykład 'File' lub 'Sqlite'...)
 $backendName = '[...]';
 
@@ -50,16 +53,18 @@ $backendOptions = array([...]);
 
 // Tworzymy instancję klasy Zend_Cache
 // (oczywiście dwa ostatnie argumenty są opcjonalne)
-$cache = Zend_Cache::factory($frontendName, $backendName, $frontendOptions, $backendOptions);
-]]>
-        </programlisting>
+$cache = Zend_Cache::factory($frontendName, 
+                             $backendName, 
+                             $frontendOptions, 
+                             $backendOptions);
+]]></programlisting>
         <para>
-            W poniższych przykładach założymy że zmienna <code>$cache</code> zawiera
+            W poniższych przykładach założymy że zmienna <varname>$cache</varname> zawiera
             poprawną instancję frontendu i to, że rozumiesz jak przekazać
             parametry do wybranego backendu.
         </para>
         <note><para>
-            Zawsze używaj metody <code>Zend_Cache::factory()</code> aby pobrać
+            Zawsze używaj metody <methodname>Zend_Cache::factory()</methodname> aby pobrać
             instancje frontendu. Tworzenie instancji frontendu czy backendu
             nie będzie przynosiło oczekiwanych rezultatów.
         </para></note>
@@ -69,17 +74,16 @@ $cache = Zend_Cache::factory($frontendName, $backendName, $frontendOptions, $bac
         <title>Nadawanie etykiet rekordom</title>
         <para>
             Etykiety są sposobem kategoryzowania rekordów bufora. Kiedy zapisujesz bufor
-            za pomocą metody <code>save()</code>, możesz ustawić tablicę etykiet, które
+            za pomocą metody <methodname>save()</methodname>, możesz ustawić tablicę etykiet, które
             mają być przypisane danemu rekordowi. Wtedy będziesz miał możliwość
             usuwania wszystkich rekordów bufora oznaczonych daną etykietą (lub etykietami):
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $cache->save($huge_data, 'myUniqueID', array('tagA', 'tagB', 'tagC'));
-]]>
-        </programlisting>
+]]></programlisting>
         <note><para>
-            Zauważ, że metoda <code>save()</code> akceptuje opcjonalny czwarty
-            argument: <code>$specificLifetime</code> (jeśli jego wartość jest
+            Zauważ, że metoda <methodname>save()</methodname> akceptuje opcjonalny czwarty
+            argument: <varname>$specificLifetime</varname> (jeśli jego wartość jest
             inna od false, ustawiany jest określony czas ważności dla
             konkretnego rekordu bufora.
         </para></note>
@@ -88,36 +92,55 @@ $cache->save($huge_data, 'myUniqueID', array('tagA', 'tagB', 'tagC'));
         <title>Czyszczenie bufora</title>
         <para>
             Aby usunąć/unieważnić rekord bufora o określonym id, możesz użyć
-            metody <code>remove()</code>:
+            metody <methodname>remove()</methodname>:
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $cache->remove('idToRemove');
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             Aby usunąć/unieważnić wiele rekordów bufora za jednym razem, możesz
-            użyć metody <code>clean()</code>. Na przykład aby usunąć wszystkie
+            użyć metody <methodname>clean()</methodname>. Na przykład aby usunąć wszystkie
             rekordy bufora:
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // czyszczenie wszystkich rekordów
 $cache->clean(Zend_Cache::CLEANING_MODE_ALL);
 
 // czyszczenie jedynie nieaktualnych rekordów
 $cache->clean(Zend_Cache::CLEANING_MODE_OLD);
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             Jeśli chcesz usunąć rekordy bufora oznaczone etykietami 'tagA' oraz 'tagC':
         </para>
-        <programlisting role="php"><![CDATA[
-$cache->clean(Zend_Cache::CLEANING_MODE_MATCHING_TAG, array('tagA', 'tagC'));
-]]>
-        </programlisting>
+        <programlisting language="php"><![CDATA[
+$cache->clean(
+    Zend_Cache::CLEANING_MODE_MATCHING_TAG, 
+    array('tagA', 'tagC')
+);
+]]></programlisting>
         <para>
-            Dostępne tryby czyszczenia bufora to: <code>CLEANING_MODE_ALL</code>,
-            <code>CLEANING_MODE_OLD</code>, <code>CLEANING_MODE_MATCHING_TAG</code>
-            oraz <code>CLEANING_MODE_NOT_MATCHING_TAG</code>. Dwa ostatnia, jak
+            Jeśli chcesz usunąć rekordy bufora nieoznaczone etykietami 'tagA' oraz 'tagC':
+        </para>
+        <programlisting language="php"><![CDATA[
+$cache->clean(
+    Zend_Cache::CLEANING_MODE_NOT_MATCHING_TAG,
+    array('tagA', 'tagC')
+);
+]]></programlisting>
+        <para>
+            Jeśli chcesz usunąć rekordy bufora oznaczone etykietami 'tagA' lub 'tagC':
+        </para>
+        <programlisting language="php"><![CDATA[
+$cache->clean(
+    Zend_Cache::CLEANING_MODE_MATCHING_ANY_TAG,
+    array('tagA', 'tagC')
+);
+]]></programlisting>
+        <para>
+            Dostępne tryby czyszczenia bufora to: <constant>CLEANING_MODE_ALL</constant>,
+            <constant>CLEANING_MODE_OLD</constant>, <constant>CLEANING_MODE_MATCHING_TAG</constant>,
+            <constant>CLEANING_MODE_NOT_MATCHING_TAG</constant> oraz
+            <constant>CLEANING_MODE_MATCHING_ANY_TAG</constant>. Trzy ostatnie, jak
             nazwa wskazuje, mogą w operacji czyszczenia być użyte wraz z tablicą
             etykiet.
         </para>

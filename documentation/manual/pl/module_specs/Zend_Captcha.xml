@@ -3,20 +3,19 @@
 
     <para>
         <ulink url="http://en.wikipedia.org/wiki/Captcha">CAPTCHA</ulink>
-        oznacza "Completely Automated Turing test to tell Computers and Humans
+        oznacza "Completely Automated Public Turing test to tell Computers and Humans
         Apart;" elementy captcha są używane w celu upewnienia się, że wysłane
         informacje zostały wpisane przez człowieka, a nie przez jakiś
-        automatyczny proces. Typowo element captcha jest używany podczas
+        automatyczny proces. Zazwyczaj element captcha jest używany podczas
         wysyłania formularza gdzie nie wymagamy aby użytkownik był zalogowany,
-        ale gdzie chcemy zapobiec wysyłaniu
-        spamu.
+        ale gdzie chcemy zapobiec wysyłaniu spamu.
     </para>
 
     <para>
         Elementy Captcha przyjmują wiele różnych form, włączając w to zadawanie
         logicznych pytań, prezentowanie krzywych czcionek, a także prezentowanie
-        obrazków i pytań odnośnie do nich. Komponent Zend_Captcha ma na celu
-        zapewnienie wielu backendów które mogą być wykorzystane jako osobne
-        komponenty lub w połączeniu z komponentem <code>Zend_Form</code>.
+        obrazków i pytań odnośnie do nich. Komponent <classname>Zend_Captcha</classname> 
+        ma na celu zapewnienie wielu backendów które mogą być wykorzystane jako osobne
+        komponenty lub w połączeniu z komponentem <classname>Zend_Form</classname>.
     </para>
 </sect1>

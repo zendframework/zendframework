@@ -1,0 +1,1460 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15851 -->
+<sect2 id="zend.dojo.form.elements">
+    <title>Dijitに特有のフォーム要素</title>
+
+    <para>
+        ビュー・ヘルパーが提供される各々のフォームdijitには、
+        対応する<classname>Zend_Form</classname>要素があります。
+        dijitパラメータを操作するための以下のメソッドがそれらすべてにあります:
+    </para>
+
+    <itemizedlist>
+        <listitem><para>
+                <code>setDijitParam($key, $value)</code>:
+                dijitパラメータを一つセットします。
+                dijitパラメータがすでに存在すれば、上書きされます。
+        </para></listitem>
+
+        <listitem><para>
+                <code>setDijitParams(array $params)</code>:
+                一度にいくつかのdijitパラメータをセットします。
+                渡されたパラメータにマッチする既存のパラメータは上書きされます。
+        </para></listitem>
+
+        <listitem><para>
+                <code>hasDijitParam($key)</code>:
+                与えられたdijitパラメータが定義されたか存在している場合はtrueを返します。
+                それ以外はfalseを返します。
+        </para></listitem>
+
+        <listitem><para>
+                <code>getDijitParam($key)</code>:
+                与えられたdijitパラメータを返します。
+                利用できない場合は null値を返します。
+        </para></listitem>
+
+        <listitem><para>
+                <code>getDijitParams()</code>:
+                dijitパラメータを全て返します。
+        </para></listitem>
+
+        <listitem><para>
+                <code>removeDijitParam($key)</code>:
+                与えられたdijitパラメータを除去します。
+        </para></listitem>
+
+        <listitem><para>
+                <code>clearDijitParams()</code>:
+                現行定義されたdijitパラメータを全て消去します。
+        </para></listitem>
+    </itemizedlist>
+
+    <para>
+        Dijitパラメータは、<code>dijitParams</code> public プロパティに保存されます。
+        このように、あなたは単にこのプロパティを要素の上に置くことによって、
+        既存のフォーム要素をdijit使用可能にすることができます;
+        あなたは、単にパラメータを操作するのを容易にするために、
+        上記のアクセッサを持っていません。
+    </para>
+
+    <para>
+        その上、dijitに特有の要素は以下に該当するデコレーターの独特な一覧を実装します:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+$element->addDecorator('DijitElement')
+        ->addDecorator('Errors')
+        ->addDecorator('HtmlTag', array('tag' => 'dd'))
+        ->addDecorator('Label', array('tag' => 'dt'));
+]]></programlisting>
+
+    <para>
+        実質的に、Dijit要素が、標準的なViewHelperデコレーターの代わりに使われます。
+    </para>
+
+    <para>
+        最後に、ベースDijit要素により、
+        確実にDojoビュー・ヘルパー・パスがビューの上に置かれることになります。
+    </para>
+
+    <para>
+        Dijit要素、DijitMultiの変化は<code>Multi</code> abstract フォーム要素の機能を提供します。
+        そして、開発者が 'multiOptions' を指定できるようにします。
+         - 一般的に select の option またはラジオ のoptionです。
+    </para>
+
+    <para>
+        以下のdijit要素は、標準的なZend Framework配布において出荷されます。
+    </para>
+
+    <sect3 id="zend.dojo.form.elements.button">
+        <title>ボタン</title>
+
+        <para>
+            <link linkend="zend.form.standardElements.button">標準的なボタン要素</link>に
+            由来していないので、
+            同じ機能を実装して、ドロップインの代わりとして使うことができます。
+            以下の機能が公開されます:
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                名前が提供されないならば、
+                <code>getLabel()</code>はボタン・ラベルとして要素名を利用します。
+                さらに、翻訳メッセージにマッチした翻訳アダプターが利用できれば、
+                それは名前を翻訳します。
+            </para></listitem>
+
+            <listitem><para>
+                <code>isChecked()</code>は、
+                提出される値がラベルにマッチするかどうか決定します;
+                もしマッチするなら、それはtrueを返します。
+                これは、フォームが提出されたとき、どのボタンが使われたかについて決定することに役立ちます。
+            </para></listitem>
+        </itemizedlist>
+
+        <para>
+            さらに、デコレーターの<code>DijitElement</code>及び
+            <code>DtDdWrapper</code>だけがボタン要素のために使われます。
+        </para>
+
+        <example id="zend.dojo.form.elements.button.example">
+            <title>ボタンdijit要素の使用例</title>
+
+            <programlisting language="php"><![CDATA[
+$form->addElement(
+    'Button',
+    'foo',
+    array(
+        'label' => 'Button Label',
+    )
+);
+]]></programlisting>
+        </example>
+    </sect3>
+
+    <sect3 id="zend.dojo.form.elements.checkBox">
+        <title>チェックボックス</title>
+
+        <para>
+            <link linkend="zend.form.standardElements.checkbox">標準的なチェックボックス要素</link>
+            に由来していないので、
+            それは同じ機能を実装します。
+            これは、以下のメソッドが公開されることを意味します
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <code>setCheckedValue($value)</code>:
+                要素がチェックされたときに使う値を設定します。
+            </para></listitem>
+
+            <listitem><para>
+                <code>getCheckedValue()</code>:
+                チェックされたときに要素で使う値を取得します。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setUncheckedValue($value)</code>:
+                チェックされていないときに要素で使う値を設定します。
+            </para></listitem>
+
+            <listitem><para>
+                <code>getUncheckedValue()</code>:
+                チェックされていないときに要素で使う値を取得します。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setChecked($flag)</code>:
+                要素をチェック済みにするか否か設定します。
+            </para></listitem>
+
+            <listitem><para>
+                <code>isChecked()</code>:
+                要素が現在チェック済みか判断します。
+            </para></listitem>
+        </itemizedlist>
+
+        <example id="zend.dojo.form.elements.checkBox.example">
+            <title>チェックボックスdijit要素の使用例</title>
+
+            <programlisting language="php"><![CDATA[
+$form->addElement(
+    'CheckBox',
+    'foo',
+    array(
+        'label'          => 'A check box',
+        'checkedValue'   => 'foo',
+        'uncheckedValue' => 'bar',
+        'checked'        => true,
+    )
+);
+]]></programlisting>
+        </example>
+    </sect3>
+
+    <sect3 id="zend.dojo.form.elements.comboBox">
+        <title>コンボボックス及びフィルタリング選択</title>
+
+        <para>
+            コンボボックス
+            <link linkend="zend.dojo.view.dijit.form">dijitビュー・ヘルパー・文書</link>
+            にみられるように、コンボボックスは選択とテキスト入力の混合です。
+            そして、自動補完及び、提示された選択肢の代わりを指定できるようにします。
+            フィルタリング選択は同じことですが、任意の入力を許しません。
+        </para>
+
+        <note>
+            <title>ラベル値を返すコンボボックス</title>
+
+            <para>
+                コンボボックスはラベル値を返します。
+                期待に反するオプション値は返しません。
+                この理由から、コンボボックスは<code>InArray</code>バリデーターを自動登録しません。
+                （FilteringSelectsがそうするけれども）
+            </para>
+        </note>
+
+        <para>
+            コンボボックスとフィルタリング選択フォーム要素は、
+            dojo.dataデータ・ストア（使用された場合）を指定することだけでなく、
+            選ばれた選択肢を調べて、セットするためにアクセッサとミューテーターを提供します。
+            それらはDijitMultiから拡張します。
+            そして、それは<code>setMultiOptions()</code>と<code>setMultiOption()</code>メソッドによって
+            選ばれた選択肢を指定することができます。
+            さらに、以下のメソッドを利用できます:
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <code>getStoreInfo()</code>:
+                現行で設定されているデータストア情報を全て取得します。
+                現行で設定されたデータがなければ、空の配列を返します。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setStoreId($identifier)</code>:
+                ストアの識別変数を設定します。
+                （通常、Dojoで 'jsId' 属性によって言及されます）
+                これは、有効なjavascript変数の名前でなければなりません。
+            </para></listitem>
+
+            <listitem><para>
+                <code>getStoreId()</code>:
+                ストアの識別変数名を取得します。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setStoreType($dojoType)</code>:
+                使用するデータストアクラスを設定します;
+                例えば "dojo.data.ItemFileReadStore"
+            </para></listitem>
+
+            <listitem><para>
+                <code>getStoreType()</code>:
+                使用するdojoデータストアクラスを取得します。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setStoreParams(array $params)</code>:
+                データ・ストア・オブジェクトを構成するために使われるパラメータをいずれも設定します。
+                例えば、 dojo.data.ItemFileReadStore データストアでは
+                dojo.dataオブジェクトを返す場所を指す 'url' パラメータを期待します。
+            </para></listitem>
+
+            <listitem><para>
+                <code>getStoreParams()</code>:
+                現行で設定されているデータストアパラメータをいずれも取得します;
+                もしなければ、空の配列を返します。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setAutocomplete($flag)</code>:
+                ユーザーが要素から離れるとき、選ばれた項目が使われるかどうかを示します。
+            </para></listitem>
+
+            <listitem><para>
+                <code>getAutocomplete()</code>:
+                自動補完フラグの値を取得します。
+            </para></listitem>
+        </itemizedlist>
+
+        <para>
+            dojo.dataストアが要素で登録されなければ、
+            登録された選択肢の配列のキーを検証する<code>InArray</code>バリデーターを
+            この要素はデフォルトで登録します。
+            <code>setRegisterInArrayValidator(false)</code>を呼び出すことでも、
+            <code>registerInArrayValidator</code>設定キーにfalse値を渡すことでも、
+            このふるまいを抑制することができます。
+        </para>
+
+        <example id="zend.dojo.form.elements.comboBox.selectExample">
+            <title>コンボボックスdijit要素を選択肢入力として使う</title>
+
+            <programlisting language="php"><![CDATA[
+$form->addElement(
+    'ComboBox',
+    'foo',
+    array(
+        'label'        => 'ComboBox (select)',
+        'value'        => 'blue',
+        'autocomplete' => false,
+        'multiOptions' => array(
+            'red'    => 'Rouge',
+            'blue'   => 'Bleu',
+            'white'  => 'Blanc',
+            'orange' => 'Orange',
+            'black'  => 'Noir',
+            'green'  => 'Vert',
+        ),
+    )
+);
+]]></programlisting>
+        </example>
+
+        <example id="zend.dojo.form.elements.comboBox.datastoreExample">
+            <title>コンボボックスdijit要素をデータ・ストアと一緒に使う</title>
+
+            <programlisting language="php"><![CDATA[
+$form->addElement(
+    'ComboBox',
+    'foo',
+    array(
+        'label'       => 'ComboBox (datastore)',
+        'storeId'     => 'stateStore',
+        'storeType'   => 'dojo.data.ItemFileReadStore',
+        'storeParams' => array(
+            'url' => '/js/states.txt',
+        ),
+        'dijitParams' => array(
+            'searchAttr' => 'name',
+        ),
+    )
+);
+]]></programlisting>
+        </example>
+
+        <para>
+            前述の例は<code>ComboBox</code>の代わりに
+            <code>FilteringSelect</code>を使用します。
+        </para>
+    </sect3>
+
+    <sect3 id="zend.dojo.form.elements.currencyTextBox">
+        <title>通貨テキストボックス</title>
+
+        <para>
+            通過テキストボックスは、主に通貨入力をサポートするためにあります。
+            通貨はローカライズされるかもしれず、小数も非小数もサポートできます。
+        </para>
+
+        <para>
+            <!-- TODO -->
+            Internally, CurrencyTextBox derives from <link
+                linkend="zend.dojo.form.elements.numberTextBox">NumberTextBox</link>,
+            <link
+                linkend="zend.dojo.form.elements.validationTextBox">ValidationTextBox</link>,
+            and <link linkend="zend.dojo.form.elements.textBox">TextBox</link>;
+            all methods available to those classes are available. In addition,
+            the following constraint methods can be used:
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <code>setCurrency($currency)</code>:
+                使用する通貨種類を設定します;
+                <ulink url="http://en.wikipedia.org/wiki/ISO_4217">ISO-4217</ulink>
+                仕様に従うでしょう。
+            </para></listitem>
+
+            <listitem><para>
+                <code>getCurrency()</code>:現行の通貨種類を取得します。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setSymbol($symbol)</code>: ３文字からなる<ulink
+                    url="http://en.wikipedia.org/wiki/ISO_4217">ISO-4217</ulink>
+                通貨記号を設定します。
+            </para></listitem>
+
+            <listitem><para>
+                <code>getSymbol()</code>:
+                現行の通貨記号を取得します。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setFractional($flag)</code>:
+                通貨で小数を許すかどうか設定します。
+            </para></listitem>
+
+            <listitem><para>
+                <code>getFractional()</code>:
+                小数フラグの状態を取得します。
+            </para></listitem>
+        </itemizedlist>
+
+        <example id="zend.dojo.form.elements.currencyTextBox.example">
+            <title>通貨テキストボックスdijit要素の使用例</title>
+
+            <programlisting language="php"><![CDATA[
+$form->addElement(
+    'CurrencyTextBox',
+    'foo',
+    array(
+        'label'          => 'Currency:',
+        'required'       => true,
+        'currency'       => 'USD',
+        'invalidMessage' => 'Invalid amount. ' .
+                            'Include dollar sign, commas, and cents.',
+        'fractional'     => false,
+    )
+);
+]]></programlisting>
+        </example>
+    </sect3>
+
+    <sect3 id="zend.dojo.form.elements.dateTextBox">
+        <title>日付テキストボックス</title>
+
+        <para>
+            日付テキストボックスは、
+            カレンダー・ドロップダウンを日付（クライアント側日付確認とフォーマッティングだけでなく）
+            を選ぶために提供します。
+        </para>
+
+        <para>
+            <!-- TODO -->
+            Internally, DateTextBox derives from <link
+                linkend="zend.dojo.form.elements.validationTextBox">ValidationTextBox</link>
+            and <link linkend="zend.dojo.form.elements.textBox">TextBox</link>;
+            all methods available to those classes are available. In addition,
+            the following methods can be used to set individual constraints:
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <code>setAmPm($flag)</code> and <code>getAmPm()</code>:
+                時刻でAM/PM 文字列を使うかどうか
+            </para></listitem>
+
+            <listitem><para>
+                <code>setStrict($flag)</code> and <code>getStrict()</code>:
+                入力を確認した時にマッチする厳しい正規表現を使うかどうか。
+                デフォルトはfalseですが、空白文字やいくつかの省略形を許します。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setLocale($locale)</code> and <code>getLocale()</code>:
+                指定した要素で使うロケールを設定または取得します。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setDatePattern($pattern)</code>及び
+                <code>getDatePattern()</code>:
+                 日付をフォーマットする<ulink
+                    url="http://www.unicode.org/reports/tr35/#Date_Format_Patterns">
+                    unicode 日付形式パターン</ulink>を提示または取得します。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setFormatLength($formatLength)</code>及び
+                <code>getFormatLength()</code>:
+                使用する形式の長さの種類を提示または取得します;
+                "long"、"short"、"medium"または"full"のどれか一つです。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setSelector($selector)</code>及び
+                <code>getSelector()</code>:
+                セレクタのスタイルを提示または取得します;
+                "date" や "time" のどちらかでしょう。
+            </para></listitem>
+        </itemizedlist>
+
+        <example id="zend.dojo.form.elements.dateTextBox.example">
+            <title>日付テキストボックスdijit要素の使用例</title>
+
+            <programlisting language="php"><![CDATA[
+$form->addElement(
+    'DateTextBox',
+    'foo',
+    array(
+        'label'          => 'Date:',
+        'required'       => true,
+        'invalidMessage' => 'Invalid date specified.',
+        'formatLength'   => 'long',
+    )
+);
+]]></programlisting>
+        </example>
+    </sect3>
+
+    <sect3 id="zend.dojo.form.elements.editor">
+        <title>エディタ</title>
+
+        <para>
+            Editor provides a WYSIWYG editor that can be used to both create and
+            edit rich HTML content. dijit.Editor is pluggable and may be
+            extended with custom plugins if desired; see <ulink
+                url="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/advanced-editing-and-display/editor-rich-text">the
+                dijit.Editor documentation</ulink> for more details.
+        </para>
+
+        <para>
+            The Editor form element provides a number of accessors and mutators
+            for manipulating various dijit parameters, as follows:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>captureEvents</emphasis> are events that connect
+                    to the editing area itself. The following accessors and
+                    mutators are available for manipulating capture events:
+                </para>
+
+                <itemizedlist>
+                    <listitem><para><code>addCaptureEvent($event)</code></para></listitem>
+                    <listitem><para><code>addCaptureEvents(array $events)</code></para></listitem>
+                    <listitem><para><code>setCaptureEvents(array $events)</code></para></listitem>
+                    <listitem><para><code>getCaptureEvents()</code></para></listitem>
+                    <listitem><para><code>hasCaptureEvent($event)</code></para></listitem>
+                    <listitem><para><code>removeCaptureEvent($event)</code></para></listitem>
+                    <listitem><para><code>clearCaptureEvents()</code></para></listitem>
+                </itemizedlist>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>events</emphasis> are standard DOM events, such as
+                    onClick, onKeyUp, etc. The following accessors and mutators
+                    are available for manipulating events:
+                </para>
+
+                <itemizedlist>
+                    <listitem><para><code>addEvent($event)</code></para></listitem>
+                    <listitem><para><code>addEvents(array $events)</code></para></listitem>
+                    <listitem><para><code>setEvents(array $events)</code></para></listitem>
+                    <listitem><para><code>getEvents()</code></para></listitem>
+                    <listitem><para><code>hasEvent($event)</code></para></listitem>
+                    <listitem><para><code>removeEvent($event)</code></para></listitem>
+                    <listitem><para><code>clearEvents()</code></para></listitem>
+                </itemizedlist>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>plugins</emphasis> add functionality to the
+                    Editor -- additional tools for the toolbar, additional
+                    styles to allow, etc. The following accessors and mutators
+                    are available for manipulating plugins:
+                </para>
+
+                <itemizedlist>
+                    <listitem><para><code>addPlugin($plugin)</code></para></listitem>
+                    <listitem><para><code>addPlugins(array $plugins)</code></para></listitem>
+                    <listitem><para><code>setPlugins(array $plugins)</code></para></listitem>
+                    <listitem><para><code>getPlugins()</code></para></listitem>
+                    <listitem><para><code>hasPlugin($plugin)</code></para></listitem>
+                    <listitem><para><code>removePlugin($plugin)</code></para></listitem>
+                    <listitem><para><code>clearPlugins()</code></para></listitem>
+                </itemizedlist>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>editActionInterval</emphasis> is used to group
+                    events for undo operations. By default, this value is 3
+                    seconds. The method
+                    <code>setEditActionInterval($interval)</code> may be used to
+                    set the value, while <code>getEditActionInterval()</code>
+                    will retrieve it.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>focusOnLoad</emphasis> is used to determine
+                    whether this particular editor will receive focus when the
+                    page has loaded. By default, this is false. The method
+                    <code>setFocusOnLoad($flag)</code> may be used to
+                    set the value, while <code>getFocusOnLoad()</code>
+                    will retrieve it.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>height</emphasis> specifies the height of the
+                    editor; by default, this is 300px. The method
+                    <code>setHeight($height)</code> may be used to set the
+                    value, while <code>getHeight()</code> will retrieve it.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>inheritWidth</emphasis> is used to determine
+                    whether the editor will use the parent container's width or
+                    simply default to 100% width. By default, this is false
+                    (i.e., it will fill the width of the window). The method
+                    <code>setInheritWidth($flag)</code> may be used to set the
+                    value, while <code>getInheritWidth()</code> will retrieve
+                    it.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>minHeight</emphasis> indicates the minimum height
+                    of the editor; by default, this is 1em. The method
+                    <code>setMinHeight($height)</code> may be used to set the
+                    value, while <code>getMinHeight()</code> will retrieve it.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>styleSheets</emphasis> indicate what additional
+                    CSS stylesheets should be used to affect the display of the
+                    Editor. By default, none are registered, and it inherits the
+                    page styles. The following accessors and mutators are
+                    available for manipulating editor stylesheets:
+                </para>
+
+                <itemizedlist>
+                    <listitem><para><code>addStyleSheet($styleSheet)</code></para></listitem>
+                    <listitem>
+                        <para><code>addStyleSheets(array $styleSheets)</code></para>
+                    </listitem>
+                    <listitem>
+                        <para><code>setStyleSheets(array $styleSheets)</code></para>
+                    </listitem>
+                    <listitem><para><code>getStyleSheets()</code></para></listitem>
+                    <listitem><para><code>hasStyleSheet($styleSheet)</code></para></listitem>
+                    <listitem><para><code>removeStyleSheet($styleSheet)</code></para></listitem>
+                    <listitem><para><code>clearStyleSheets()</code></para></listitem>
+                </itemizedlist>
+            </listitem>
+        </itemizedlist>
+
+        <example id="zend.dojo.form.elements.editor.example">
+            <title>エディタdijit要素の使用例</title>
+
+            <programlisting language="php"><![CDATA[
+$form->addElement('editor', 'content', array(
+    'plugins'            => array('undo', '|', 'bold', 'italic'),
+    'editActionInterval' => 2,
+    'focusOnLoad'        => true,
+    'height'             => '250px',
+    'inheritWidth'       => true,
+    'styleSheets'        => array('/js/custom/editor.css'),
+));
+]]></programlisting>
+        </example>
+    </sect3>
+
+    <sect3 id="zend.dojo.form.elements.horizontalSlider">
+        <title>HorizontalSlider</title>
+
+        <para>
+            HorizontalSlider provides a slider UI widget for selecting a
+            numeric value in a range. Internally, it sets the value of a hidden
+            element which is submitted by the form.
+        </para>
+
+        <para>
+            HorizontalSlider derives from the <link
+                linkend="zend.dojo.form.elements.slider">abstract Slider dijit
+                element</link>. Additionally, it has a variety of methods for
+            setting and configuring slider rules and rule labels.
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>setTopDecorationDijit($dijit)</code> and
+                    <code>setBottomDecorationDijit($dijit)</code>: set the name
+                    of the dijit to use for either the top or bottom of the
+                    slider. This should not include the "dijit.form." prefix,
+                    but rather only the final name -- one of "HorizontalRule"
+                    or "HorizontalRuleLabels".
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setTopDecorationContainer($container)</code> and
+                    <code>setBottomDecorationContainer($container)</code>:
+                    specify the name to use for the container element of the
+                    rules; e.g. 'topRule', 'topContainer', etc.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setTopDecorationLabels(array $labels)</code> and
+                    <code>setBottomDecorationLabels(array $labels)</code>: set
+                    the labels to use for one of the RuleLabels dijit types.
+                    These should be an indexed array; specify a single empty
+                    space to skip a given label position (such as the beginning
+                    or end).
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setTopDecorationParams(array $params)</code> and
+                    <code>setBottomDecorationParams(array $params)</code>:
+                    dijit parameters to use when configuring the given Rule or
+                    RuleLabels dijit.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setTopDecorationAttribs(array $attribs)</code> and
+                    <code>setBottomDecorationAttribs(array $attribs)</code>:
+                    HTML attributes to specify for the given Rule or RuleLabels
+                    HTML element container.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getTopDecoration()</code> and
+                    <code>getBottomDecoration()</code>: retrieve all metadata
+                    for a given Rule or RuleLabels definition, as provided by
+                    the above mutators.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <example id="zend.dojo.form.elements.horizontalSlider.example">
+            <title>Example HorizontalSlider dijit element usage</title>
+
+            <para>
+                The following will create a horizontal slider selection with
+                integer values ranging from -10 to 10. The top will have labels
+                at the 20%, 40%, 60%, and 80% marks. The botton will have rules
+                at 0, 50%, and 100%. Each time the value is changed, the hidden
+                element storing the value will be updated.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$form->addElement(
+    'HorizontalSlider',
+    'horizontal',
+    array(
+        'label'                     => 'HorizontalSlider',
+        'value'                     => 5,
+        'minimum'                   => -10,
+        'maximum'                   => 10,
+        'discreteValues'            => 11,
+        'intermediateChanges'       => true,
+        'showButtons'               => true,
+        'topDecorationDijit'        => 'HorizontalRuleLabels',
+        'topDecorationContainer'    => 'topContainer',
+        'topDecorationLabels'       => array(
+                ' ',
+                '20%',
+                '40%',
+                '60%',
+                '80%',
+                ' ',
+        ),
+        'topDecorationParams'      => array(
+            'container' => array(
+                'style' => 'height:1.2em; font-size=75%;color:gray;',
+            ),
+            'list' => array(
+                'style' => 'height:1em; font-size=75%;color:gray;',
+            ),
+        ),
+        'bottomDecorationDijit'     => 'HorizontalRule',
+        'bottomDecorationContainer' => 'bottomContainer',
+        'bottomDecorationLabels'    => array(
+                '0%',
+                '50%',
+                '100%',
+        ),
+        'bottomDecorationParams'   => array(
+            'list' => array(
+                'style' => 'height:1em; font-size=75%;color:gray;',
+            ),
+        ),
+    )
+);
+]]></programlisting>
+        </example>
+    </sect3>
+
+    <sect3 id="zend.dojo.form.elements.numberSpinner">
+        <title>NumberSpinner</title>
+
+        <para>
+            A number spinner is a text element for entering numeric values; it
+            also includes elements for incrementing and decrementing the value
+            by a set amount.
+        </para>
+
+        <para>
+            The following methods are available:
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <code>setDefaultTimeout($timeout)</code> and
+                <code>getDefaultTimeout()</code>: set and retrieve the default
+                timeout, in milliseconds, between when the button is held
+                pressed and the value is changed.
+            </para></listitem>
+
+            <listitem><para>
+                <code>setTimeoutChangeRate($rate)</code> and
+                <code>getTimeoutChangeRate()</code>: set and retrieve the
+                rate, in milliseconds, at which changes will be made when a
+                button is held pressed.
+            </para></listitem>
+
+            <listitem><para>
+                <code>setLargeDelta($delta)</code> and
+                <code>getLargeDelta()</code>: set and retrieve the amount by
+                which the numeric value should change when a button is held
+                pressed.
+            </para></listitem>
+
+            <listitem><para>
+                <code>setSmallDelta($delta)</code> and
+                <code>getSmallDelta()</code>: set and retrieve the delta by
+                which the number should change when a button is pressed once.
+            </para></listitem>
+
+            <listitem><para>
+                <code>setIntermediateChanges($flag)</code> and
+                <code>getIntermediateChanges()</code>: set and retrieve the
+                flag indicating whether or not each value change should be
+                shown when a button is held pressed.
+            </para></listitem>
+
+            <listitem><para>
+                <code>setRangeMessage($message)</code> and
+                <code>getRangeMessage()</code>: set and retrieve the message
+                indicating the range of values available.
+            </para></listitem>
+
+            <listitem><para>
+                <code>setMin($value)</code> and <code>getMin()</code>: set and
+                retrieve the minimum value possible.
+            </para></listitem>
+
+            <listitem><para>
+                <code>setMax($value)</code> and <code>getMax()</code>: set and
+                retrieve the maximum value possible.
+            </para></listitem>
+        </itemizedlist>
+
+        <example id="zend.dojo.form.elements.numberSpinner.example">
+            <title>NumberSpinner dijit要素の使用例</title>
+
+            <programlisting language="php"><![CDATA[
+$form->addElement(
+    'NumberSpinner',
+    'foo',
+    array(
+        'value'             => '7',
+        'label'             => 'NumberSpinner',
+        'smallDelta'        => 5,
+        'largeDelta'        => 25,
+        'defaultTimeout'    => 500,
+        'timeoutChangeRate' => 100,
+        'min'               => 9,
+        'max'               => 1550,
+        'places'            => 0,
+        'maxlength'         => 20,
+    )
+);
+]]></programlisting>
+        </example>
+    </sect3>
+
+    <sect3 id="zend.dojo.form.elements.numberTextBox">
+        <title>NumberTextBox</title>
+
+        <para>
+            A number text box is a text element for entering numeric values;
+            unlike NumberSpinner, numbers are entered manually. Validations and
+            constraints can be provided to ensure the number stays in a
+            particular range or format.
+        </para>
+
+        <para>
+            Internally, NumberTextBox derives from <link
+                linkend="zend.dojo.form.elements.validationTextBox">ValidationTextBox</link>
+            and <link linkend="zend.dojo.form.elements.textBox">TextBox</link>;
+            all methods available to those classes are available. In addition,
+            the following methods can be used to set individual constraints:
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <code>setLocale($locale)</code> and <code>getLocale()</code>:
+                specify and retrieve a specific or alternate locale to use with
+                this dijit.
+            </para></listitem>
+
+            <listitem><para>
+                <code>setPattern($pattern)</code> and
+                <code>getPattern()</code>: set and retrieve a <ulink
+                    url="http://www.unicode.org/reports/tr35/#Number_Format_Patterns">number
+                    pattern format</ulink> to use to format the number.
+            </para></listitem>
+
+            <listitem><para>
+                <code>setType($type)</code> and <code>getType()</code>: set and
+                retrieve the numeric format type to use (should be one of
+                'decimal', 'percent', or 'currency').
+            </para></listitem>
+
+            <listitem><para>
+                <code>setPlaces($places)</code> and <code>getPlaces()</code>:
+                set and retrieve the number of decimal places to support.
+            </para></listitem>
+
+            <listitem><para>
+                <code>setStrict($flag)</code> and <code>getStrict()</code>: set
+                and retrieve the value of the strict flag, which indicates how
+                much leniency is allowed in relation to whitespace and
+                non-numeric characters.
+            </para></listitem>
+        </itemizedlist>
+
+        <example id="zend.dojo.form.elements.numberTextBox.example">
+            <title>数値テキストボックスdijit要素の使用例</title>
+
+            <programlisting language="php"><![CDATA[
+$form->addElement(
+    'NumberTextBox',
+    'elevation',
+    array(
+        'label'          => 'NumberTextBox',
+        'required'       => true,
+        'invalidMessage' => 'Invalid elevation.',
+        'places'         => 0,
+        'constraints'    => array(
+            'min'    => -20000,
+            'max'    => 20000,
+        ),
+    )
+);
+]]></programlisting>
+        </example>
+    </sect3>
+
+    <sect3 id="zend.dojo.form.elements.passwordTextBox">
+        <title>PasswordTextBox</title>
+
+        <para>
+            PasswordTextBox is simply a ValidationTextBox that is tied to a
+            password input; its sole purpose is to allow for a dijit-themed text
+            entry for passwords that also provides client-side validation.
+        </para>
+
+        <para>
+            Internally, NumberTextBox derives from <link
+                linkend="zend.dojo.form.elements.validationTextBox">ValidationTextBox</link>
+            and <link linkend="zend.dojo.form.elements.textBox">TextBox</link>;
+            all methods available to those classes are available.
+        </para>
+
+        <example id="zend.dojo.form.elements.passwordTextBox.example">
+            <title>パスワードテキストボックスの使用例</title>
+
+            <programlisting language="php"><![CDATA[
+$form->addElement(
+    'PasswordTextBox',
+    'password',
+    array(
+        'label'          => 'Password',
+        'required'       => true,
+        'trim'           => true,
+        'lowercase'      => true,
+        'regExp'         => '^[a-z0-9]{6,}$',
+        'invalidMessage' => 'Invalid password; ' .
+                            'must be at least 6 alphanumeric characters',
+    )
+);
+]]></programlisting>
+        </example>
+    </sect3>
+
+    <sect3 id="zend.dojo.form.elements.radioButton">
+        <title>RadioButton</title>
+
+        <para>
+            RadioButton wraps standard radio input elements to provide a
+            consistent look and feel with other dojo dijits.
+        </para>
+
+        <para>
+            RadioButton extends from DijitMulti, which
+            allows you to specify select options via the
+            <code>setMultiOptions()</code> and <code>setMultiOption()</code>
+            methods.
+        </para>
+
+        <para>
+            By default, this element registers an <code>InArray</code> validator
+            which validates against the array keys of registered options. You
+            can disable this behavior by either calling
+            <code>setRegisterInArrayValidator(false)</code>, or by passing a
+            false value to the <code>registerInArrayValidator</code>
+            configuration key.
+        </para>
+
+        <example id="zend.dojo.form.elements.radioButton.example">
+            <title>ラジオボタンdijit要素の使用例</title>
+
+            <programlisting language="php"><![CDATA[
+$form->addElement(
+    'RadioButton',
+    'foo',
+    array(
+        'label' => 'RadioButton',
+        'multiOptions'  => array(
+            'foo' => 'Foo',
+            'bar' => 'Bar',
+            'baz' => 'Baz',
+        ),
+        'value' => 'bar',
+    )
+);
+]]></programlisting>
+        </example>
+    </sect3>
+
+    <sect3 id="zend.dojo.form.elements.simpletextarea">
+        <title>シンプルテキストエリア</title>
+
+        <para>
+            SimpleTextarea acts primarily like a standard HTML textarea. However, it
+            does not support either the rows or cols settings. Instead, the
+            textarea width should be specified using standard CSS measurements.
+            Unlike Textarea, it will not grow automatically
+        </para>
+
+        <example id="zend.dojo.form.elements.simpletextarea.example">
+            <title>シンプルテキストエリアdijit要素の使用例</title>
+
+            <programlisting language="php"><![CDATA[
+$form->addElement(
+    'SimpleTextarea',
+    'simpletextarea',
+    array(
+        'label'    => 'SimpleTextarea',
+        'required' => true,
+        'style'    => 'width: 80em; height: 25em;',
+    )
+);
+]]></programlisting>
+        </example>
+    </sect3>
+
+    <sect3 id="zend.dojo.form.elements.slider">
+        <title>Slider abstract element</title>
+
+        <para>
+            Slider is an abstract element from which
+            <link linkend="zend.dojo.form.elements.horizontalSlider">HorizontalSlider</link>
+            and
+            <link linkend="zend.dojo.form.elements.verticalSlider">VerticalSlider</link>
+            both derive. It exposes a number of common methods for configuring
+            your sliders, including:
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <code>setClickSelect($flag)</code> and
+                <code>getClickSelect()</code>: set and retrieve the flag
+                indicating whether or not clicking the slider changes the
+                value.
+            </para></listitem>
+
+            <listitem><para>
+                <code>setIntermediateChanges($flag)</code> and
+                <code>getIntermediateChanges()</code>: set and retrieve the
+                flag indicating whether or not the dijit will send a
+                notification on each slider change event.
+            </para></listitem>
+
+            <listitem><para>
+                <code>setShowButtons($flag)</code> and
+                <code>getShowButtons()</code>: set and retrieve the flag
+                indicating whether or not buttons on either end will be
+                displayed; if so, the user can click on these to change the
+                value of the slider.
+            </para></listitem>
+
+            <listitem><para>
+                <code>setDiscreteValues($value)</code> and
+                <code>getDiscreteValues()</code>: set and retrieve the number
+                of discrete values represented by the slider.
+            </para></listitem>
+
+            <listitem><para>
+                <code>setMaximum($value)</code> and <code>getMaximum()</code>:
+                set the maximum value of the slider.
+            </para></listitem>
+
+            <listitem><para>
+                <code>setMinimum($value)</code> and <code>getMinimum()</code>:
+                set the minimum value of the slider.
+            </para></listitem>
+
+            <listitem><para>
+                <code>setPageIncrement($value)</code> and
+                <code>getPageIncrement()</code>: set the amount by which the
+                slider will change on keyboard events.
+            </para></listitem>
+        </itemizedlist>
+
+        <para>
+            Example usage is provided with each concrete extending class.
+        </para>
+    </sect3>
+
+    <sect3 id="zend.dojo.form.elements.submitButton">
+        <title>SubmitButton</title>
+
+        <para>
+            While there is no Dijit named SubmitButton, we include one here to
+            provide a button dijit capable of submitting a form without
+            requiring any additional javascript bindings. It works exactly like
+            the <link linkend="zend.dojo.form.elements.button">Button
+                dijit</link>.
+        </para>
+
+        <example id="zend.dojo.form.elements.submitButton.example">
+            <title>サブミットボタンdijit要素の使用例</title>
+
+            <programlisting language="php"><![CDATA[
+$form->addElement(
+    'SubmitButton',
+    'foo',
+    array(
+        'required'   => false,
+        'ignore'     => true,
+        'label'      => 'Submit Button!',
+    )
+);
+]]></programlisting>
+        </example>
+    </sect3>
+
+    <sect3 id="zend.dojo.form.elements.textBox">
+        <title>TextBox</title>
+
+        <para>
+            TextBox is included primarily to provide a text input with
+            consistent look-and-feel to the other dijits. However, it also
+            includes some minor filtering and validation capabilities,
+            represented in the following methods:
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <code>setLowercase($flag)</code> and
+                <code>getLowercase()</code>: set and retrieve the flag
+                indicating whether or not input should be cast to lowercase.
+            </para></listitem>
+
+            <listitem><para>
+                <code>setPropercase($flag)</code> and
+                <code>getPropercase()</code>: set and retrieve the flag
+                indicating whether or not the input should be cast to Proper
+                Case.
+            </para></listitem>
+
+            <listitem><para>
+                <code>setUppercase($flag)</code> and <code>getUppercase()</code>: set and retrieve
+                the flag indicating whether or not the input should be cast to UPPERCASE.
+            </para></listitem>
+
+            <listitem><para>
+                <code>setTrim($flag)</code> and <code>getTrim()</code>: set and
+                retrieve the flag indicating whether or not leading or trailing
+                whitespace should be stripped.
+            </para></listitem>
+
+            <listitem><para>
+                <code>setMaxLength($length)</code> and
+                <code>getMaxLength()</code>: set and retrieve the maximum
+                length of input.
+            </para></listitem>
+        </itemizedlist>
+
+        <example id="zend.dojo.form.elements.textBox.example">
+            <title>テキストボックスdijit要素の使用例</title>
+
+            <programlisting language="php"><![CDATA[
+$form->addElement(
+    'TextBox',
+    'foo',
+    array(
+        'value'      => 'some text',
+        'label'      => 'TextBox',
+        'trim'       => true,
+        'propercase' => true,
+    )
+);
+]]></programlisting>
+        </example>
+    </sect3>
+
+    <sect3 id="zend.dojo.form.elements.textarea">
+        <title>Textarea</title>
+
+        <para>
+            Textarea acts primarily like a standard HTML textarea. However, it
+            does not support either the rows or cols settings. Instead, the
+            textarea width should be specified using standard CSS measurements;
+            rows should be omitted entirely. The textarea will then grow
+            vertically as text is added to it.
+        </para>
+
+        <example id="zend.dojo.form.elements.textarea.example">
+            <title>テキストエリアdijit要素の使用例</title>
+
+            <programlisting language="php"><![CDATA[
+$form->addElement(
+    'Textarea',
+    'textarea',
+    array(
+        'label'    => 'Textarea',
+        'required' => true,
+        'style'    => 'width: 200px;',
+    )
+);
+]]></programlisting>
+        </example>
+    </sect3>
+
+    <sect3 id="zend.dojo.form.elements.timeTextBox">
+        <title>TimeTextBox</title>
+
+        <para>
+            TimeTextBox is a text input that provides a drop-down for selecting
+            a time. The drop-down may be configured to show a certain window of
+            time, with specified increments.
+        </para>
+
+        <para>
+            Internally, TimeTextBox derives from <link
+                linkend="zend.dojo.form.elements.dateTextBox">DateTextBox</link>,
+            <link
+                linkend="zend.dojo.form.elements.validationTextBox">ValidationTextBox</link>
+            and <link linkend="zend.dojo.form.elements.textBox">TextBox</link>;
+            all methods available to those classes are available. In addition,
+            the following methods can be used to set individual constraints:
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <code>setTimePattern($pattern)</code> and
+                <code>getTimePattern()</code>: set and retrieve the <ulink
+                    url="http://www.unicode.org/reports/tr35/#Date_Format_Patterns">unicode
+                    time format pattern</ulink> for formatting the time.
+            </para></listitem>
+
+            <listitem><para>
+                <code>setClickableIncrement($format)</code> and
+                <code>getClickableIncrement()</code>: set the <ulink
+                    url="http://en.wikipedia.org/wiki/ISO_8601">ISO-8601</ulink>
+                string representing the amount by which every clickable element
+                in the time picker increases.
+            </para></listitem>
+
+            <listitem><para>
+                <code>setVisibleIncrement($format)</code> and
+                <code>getVisibleIncrement()</code>: set the increment visible
+                in the time chooser; must follow ISO-8601 formats.
+            </para></listitem>
+
+            <listitem><para>
+                <code>setVisibleRange($format)</code> and
+                <code>getVisibleRange()</code>: set and retrieve the range of
+                time visible in the time chooser at any given moment; must
+                follow ISO-8601 formats.
+            </para></listitem>
+        </itemizedlist>
+
+        <example id="zend.dojo.form.elements.timeTextBox.example">
+            <title>時刻テキストボックスdijit要素の使用例</title>
+
+            <para>
+                The following will create a TimeTextBox that displays 2 hours
+                at a time, with increments of 10 minutes.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$form->addElement(
+    'TimeTextBox',
+    'foo',
+    array(
+        'label'              => 'TimeTextBox',
+        'required'           => true,
+        'visibleRange'       => 'T04:00:00',
+        'visibleIncrement'   => 'T00:10:00',
+        'clickableIncrement' => 'T00:10:00',
+    )
+);
+]]></programlisting>
+        </example>
+    </sect3>
+
+    <sect3 id="zend.dojo.form.elements.validationTextBox">
+        <title>ValidationTextBox</title>
+
+        <para>
+            ValidationTextBox provides the ability to add validations and constraints to a text
+            input. Internally, it derives from <link
+                linkend="zend.dojo.form.elements.textBox">TextBox</link>, and adds the following
+            accessors and mutators for manipulating dijit parameters:
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <code>setInvalidMessage($message)</code> and
+                <code>getInvalidMessage()</code>: set and retrieve the tooltip
+                message to display when the value does not validate.
+            </para></listitem>
+
+            <listitem><para>
+                <code>setPromptMessage($message)</code> and
+                <code>getPromptMessage()</code>: set and retrieve the tooltip
+                message to display for element usage.
+            </para></listitem>
+
+            <listitem><para>
+                <code>setRegExp($regexp)</code> and <code>getRegExp()</code>:
+                set and retrieve the regular expression to use for validating
+                the element. The regular expression does not need boundaries
+                (unlike PHP's preg* family of functions).
+            </para></listitem>
+
+            <listitem><para>
+                <code>setConstraint($key, $value)</code> and
+                <code>getConstraint($key)</code>: set and retrieve additional
+                constraints to use when validating the element; used primarily
+                with subclasses. Constraints are stored in the 'constraints'
+                key of the dijit parameters.
+            </para></listitem>
+
+            <listitem><para>
+                <code>setConstraints(array $constraints)</code> and
+                <code>getConstraints()</code>: set and retrieve individual
+                constraints to use when validating the element; used primarily
+                with subclasses.
+            </para></listitem>
+
+            <listitem><para>
+                <code>hasConstraint($key)</code>: test whether a given
+                constraint exists.
+            </para></listitem>
+
+            <listitem><para>
+                <code>removeConstraint($key)</code> and
+                <code>clearConstraints()</code>: remove an individual or all
+                constraints for the element.
+            </para></listitem>
+        </itemizedlist>
+
+        <example id="zend.dojo.form.elements.validationTextBox.example">
+            <title>ValidationTextBox dijit要素の使用例</title>
+
+            <para>
+                The following will create a ValidationTextBox that requires a
+                single string consisting solely of word characters (i.e., no
+                spaces, most punctuation is invalid).
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$form->addElement(
+    'ValidationTextBox',
+    'foo',
+    array(
+        'label'          => 'ValidationTextBox',
+        'required'       => true,
+        'regExp'         => '[\w]+',
+        'invalidMessage' => 'Invalid non-space text.',
+    )
+);
+]]></programlisting>
+        </example>
+    </sect3>
+
+    <sect3 id="zend.dojo.form.elements.verticalSlider">
+        <title>VerticalSlider</title>
+
+        <para>
+            VerticalSlider is the sibling of <link
+                linkend="zend.dojo.form.elements.horizontalSlider">HorizontalSlider</link>,
+            and operates in every way like that element. The only real
+            difference is that the 'top*' and 'bottom*' methods are replaced by
+            'left*' and 'right*', and instead of using HorizontalRule and
+            HorizontalRuleLabels, VerticalRule and VerticalRuleLabels should be
+            used.
+        </para>
+
+        <example id="zend.dojo.form.elements.verticalSlider.example">
+            <title>VerticalSlider dijit要素の使用例</title>
+
+            <para>
+                The following will create a vertical slider selection with
+                integer values ranging from -10 to 10. The left will have labels
+                at the 20%, 40%, 60%, and 80% marks. The right will have rules
+                at 0, 50%, and 100%. Each time the value is changed, the hidden
+                element storing the value will be updated.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$form->addElement(
+    'VerticalSlider',
+    'foo',
+    array(
+        'label'                    => 'VerticalSlider',
+        'value'                    => 5,
+        'style'                    => 'height: 200px; width: 3em;',
+        'minimum'                  => -10,
+        'maximum'                  => 10,
+        'discreteValues'           => 11,
+        'intermediateChanges'      => true,
+        'showButtons'              => true,
+        'leftDecorationDijit'      => 'VerticalRuleLabels',
+        'leftDecorationContainer'  => 'leftContainer',
+        'leftDecorationLabels'     => array(
+                ' ',
+                '20%',
+                '40%',
+                '60%',
+                '80%',
+                ' ',
+        ),
+        'rightDecorationDijit' => 'VerticalRule',
+        'rightDecorationContainer' => 'rightContainer',
+        'rightDecorationLabels' => array(
+                '0%',
+                '50%',
+                '100%',
+        ),
+    )
+);
+]]></programlisting>
+        </example>
+    </sect3>
+</sect2>
+<!--
+vim:se ts=4 sw=4 et:
+-->

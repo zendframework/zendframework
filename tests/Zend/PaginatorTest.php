@@ -700,35 +700,39 @@ class Zend_PaginatorTest extends PHPUnit_Framework_TestCase
         $this->assertType('ArrayObject', $paginator->getCurrentItems());
     }
 
+    public function testCachedItem()
+    {
+        $this->_paginator->setCurrentPageNumber(1)->getCurrentItems();
+        $this->_paginator->setCurrentPageNumber(2)->getCurrentItems();
+        $this->_paginator->setCurrentPageNumber(3)->getCurrentItems();
+
+        $pageItems = $this->_paginator->getPageItemCache();
+        $expected = array(
+           1 => new ArrayIterator(range(1, 10)),
+           2 => new ArrayIterator(range(11, 20)),
+           3 => new ArrayIterator(range(21, 30))
+        );
+        $this->assertEquals($expected, $pageItems);
+    }
+    
     public function testClearPageItemCache()
     {
         $this->_paginator->setCurrentPageNumber(1)->getCurrentItems();
     	$this->_paginator->setCurrentPageNumber(2)->getCurrentItems();
     	$this->_paginator->setCurrentPageNumber(3)->getCurrentItems();
 
-    	$pageItems = $this->_paginator->getPageItemCache();
-
-    	$expected = array(
-    	   1 => new ArrayIterator(range(1, 10)),
-    	   2 => new ArrayIterator(range(11, 20)),
-    	   3 => new ArrayIterator(range(21, 30))
-    	);
-
-    	$this->assertEquals($expected, $pageItems);
-
-    	$this->_paginator->clearPageItemCache(2);
-    	$pageItems = $this->_paginator->getPageItemCache();
-
+        // clear only page 2 items
+        $this->_paginator->clearPageItemCache(2);
+        $pageItems = $this->_paginator->getPageItemCache();
     	$expected = array(
            1 => new ArrayIterator(range(1, 10)),
            3 => new ArrayIterator(range(21, 30))
         );
-
         $this->assertEquals($expected, $pageItems);
 
+        // clear all
         $this->_paginator->clearPageItemCache();
         $pageItems = $this->_paginator->getPageItemCache();
-
         $this->assertEquals(array(), $pageItems);
     }
 
@@ -749,22 +753,28 @@ class Zend_PaginatorTest extends PHPUnit_Framework_TestCase
 
     public function testCacheDoesNotDisturbResultsWhenChangingParam()
     {
-        $pageItems = $this->_paginator->setCurrentPageNumber(1)->getCurrentItems();
-        $expected = new ArrayIterator(range(1, 10));
-        $this->assertEquals($expected, $pageItems);
-
+        $this->_paginator->setCurrentPageNumber(1)->getCurrentItems();
         $pageItems = $this->_paginator->setItemCountPerPage(5)->getCurrentItems();
+        
         $expected = new ArrayIterator(range(1, 5));
         $this->assertEquals($expected, $pageItems);
 
         $pageItems = $this->_paginator->getItemsByPage(2);
         $expected = new ArrayIterator(range(6, 10));
         $this->assertEquals($expected, $pageItems);
-
-        $this->_paginator->setItemCountPerPage(2)->getCurrentItems();
+        
+        // change the inside Paginator scale
+        $pageItems = $this->_paginator->setItemCountPerPage(8)->setCurrentPageNumber(3)->getCurrentItems();
+        
         $pageItems = $this->_paginator->getPageItemCache();
-        $expected = array(1 =>new ArrayIterator(range(1, 2)));
-
+        $expected = array(3 => new ArrayIterator(range(17, 24)));
+        $this->assertEquals($expected, $pageItems);
+        
+        // get back to already cached data
+        $this->_paginator->setItemCountPerPage(5);
+        $pageItems = $this->_paginator->getPageItemCache();
+        $expected =array(1 => new ArrayIterator(range(1, 5)), 
+                         2 => new ArrayIterator(range(6, 10)));
         $this->assertEquals($expected, $pageItems);
     }
 

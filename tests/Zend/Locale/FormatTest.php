@@ -69,9 +69,9 @@ class Zend_Locale_FormatTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(       0,         Zend_Locale_Format::getNumber(         '0',         $options));
         $this->assertEquals(-1234567,         Zend_Locale_Format::getNumber(  '-1234567',         $options));
         $this->assertEquals( 1234567,         Zend_Locale_Format::getNumber(   '1234567',         $options));
-        $this->assertEquals(       0.1234567, Zend_Locale_Format::getNumber('         0,1234567', $options));
+        $this->assertEquals(       0.1234567, Zend_Locale_Format::getNumber('0,1234567', $options));
         $this->assertEquals(-1234567.12345,   Zend_Locale_Format::getNumber('-1.234.567,12345',   $options));
-        $this->assertEquals( 1234567.12345,   Zend_Locale_Format::getNumber(' 1.234.567,12345',   $options));
+        $this->assertEquals( 1234567.12345,   Zend_Locale_Format::getNumber('1.234.567,12345',   $options));
         $options = array('locale' => 'de_AT');
         $this->assertEquals(       0,         Zend_Locale_Format::getNumber(         '0',         $options));
         $this->assertEquals(-1234567,         Zend_Locale_Format::getNumber(  '-1234567',         $options));
@@ -128,7 +128,7 @@ class Zend_Locale_FormatTest extends PHPUnit_Framework_TestCase
     public function testIsNumberENotation()
     {
         $this->assertTrue( Zend_Locale_Format::isNumber('5,0004E+5',  array('locale' => 'de_AT')));
-        $this->assertTrue( Zend_Locale_Format::isNumber('2.34E-7',    array('locale' => 'de_AT')));
+        $this->assertTrue( Zend_Locale_Format::isNumber('2,34E-7',    array('locale' => 'de_AT')));
         $this->assertFalse(Zend_Locale_Format::isNumber('2.34E-7E-7', array('locale' => 'de_AT')));
     }
 

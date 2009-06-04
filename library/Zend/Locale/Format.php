@@ -220,17 +220,15 @@ class Zend_Locale_Format
     }
 
     /**
-     * Returns the first found number from an string
+     * Returns the normalized number from a localized one
      * Parsing depends on given locale (grouping and decimal)
      *
      * Examples for input:
-     * '  2345.4356,1234' = 23455456.1234
+     * '2345.4356,1234' = 23455456.1234
      * '+23,3452.123' = 233452.123
-     * ' 12343 ' = 12343
-     * '-9456km' = -9456
+     * '12343 ' = 12343
+     * '-9456' = -9456
      * '0' = 0
-     * '(-){0,1}(\d+(\.){0,1})*(\,){0,1})\d+'
-     * '١١٠ Tests' = 110  call: getNumber($string, 'Arab');
      *
      * @param  string $input    Input string to parse for numbers
      * @param  array  $options  Options: locale, precision. See {@link setOptions()} for details.
@@ -244,40 +242,37 @@ class Zend_Locale_Format
             return $input;
         }
 
+        if (!self::isNumber($input, $options)) {
+            require_once 'Zend/Locale/Exception.php';
+            throw new Zend_Locale_Exception('No localized value in ' . $input . ' found, or the given number does not match the localized format');
+        }
+
         // Get correct signs for this locale
         $symbols = Zend_Locale_Data::getList($options['locale'],'symbols');
-
-        // Parse input locale aware
-        $regex = '/([' . $symbols['minus'] . '-]){0,1}(\d+(\\' . $symbols['group'] . '){0,1})*(\\' .
-                        $symbols['decimal'] . '){0,1}\d+/';
-        preg_match($regex, $input, $found);
-        if (!isset($found[0])) {
-            require_once 'Zend/Locale/Exception.php';
-            throw new Zend_Locale_Exception('No value in ' . $input . ' found');
-        }
-        $found = $found[0];
         // Change locale input to be default number
-        if ($symbols['minus'] != "-")
-            $found = strtr($found,$symbols['minus'],'-');
-        $found = str_replace($symbols['group'],'', $found);
+        if ((strpos($input, $symbols['minus']) !== false) ||
+            (strpos($input, '-') !== false)) {
+            $input = strtr($input, array($symbols['minus'] => '', '-' => ''));
+            $input = '-' . $input;
+        }
 
-        // Do precision
-        if (strpos($found, $symbols['decimal']) !== false) {
+        $input = str_replace($symbols['group'],'', $input);
+        if (strpos($input, $symbols['decimal']) !== false) {
             if ($symbols['decimal'] != '.') {
-                $found = str_replace($symbols['decimal'], ".", $found);
+                $input = str_replace($symbols['decimal'], ".", $input);
             }
 
-            $pre = substr($found, strpos($found, '.') + 1);
+            $pre = substr($input, strpos($input, '.') + 1);
             if ($options['precision'] === null) {
                 $options['precision'] = strlen($pre);
             }
 
             if (strlen($pre) >= $options['precision']) {
-                $found = substr($found, 0, strlen($found) - strlen($pre) + $options['precision']);
+                $input = substr($input, 0, strlen($input) - strlen($pre) + $options['precision']);
             }
         }
 
-        return $found;
+        return $input;
     }
 
     /**
@@ -498,16 +493,117 @@ class Zend_Locale_Format
         // Get correct signs for this locale
         $symbols = Zend_Locale_Data::getList($options['locale'],'symbols');
 
-        // Parse input locale aware
-        $regex = '/^[' . $symbols['minus'] . $symbols['plus'] . '-+]?'
-               . '\d(\d*(\\' . $symbols['group'] . ')?\d+)*'
-               . '((\\' . $symbols['decimal'] . ')\d*)?([' . $symbols['exponent'] . 'eE]'
-               . '([' . $symbols['minus'] . $symbols['plus'] . '+-])?\d+)?$/';
-        preg_match($regex, $input, $found);
+        $regexs = Zend_Locale_Format::_getRegexForType('decimalnumber', $options);
+        $regexs = array_merge($regexs, Zend_Locale_Format::_getRegexForType('scientificnumber', $options));
+        foreach ($regexs as $regex) {
+            preg_match($regex, $input, $found);
+            if (isset($found[0])) {
+                return true;
+            }
+        }
 
-        if (!isset($found[0]))
-            return false;
-        return true;
+        return false;
+    }
+
+    /**
+     * Internal method to convert cldr number syntax into regex
+     *
+     * @param  string $type
+     * @return string
+     */
+    public static function _getRegexForType($type, $options)
+    {
+        $decimal  = Zend_Locale_Data::getContent($options['locale'], $type);
+        $decimal  = preg_replace('/[^#0,;\.\-Ee]/', '',$decimal);
+        $patterns = explode(';', $decimal);
+
+        if (count($patterns) == 1) {
+            $patterns[1] = '-' . $patterns[0];
+        }
+
+        $symbols = Zend_Locale_Data::getList($options['locale'],'symbols');
+
+        foreach($patterns as $pkey => $pattern) {
+            $regex[$pkey]  = '/^';
+            $rest   = 0;
+            $end    = null;
+            if (strpos($pattern, '.') !== false) {
+                $end     = substr($pattern, strpos($pattern, '.') + 1);
+                $pattern = substr($pattern, 0, -strlen($end) - 1);
+            }
+
+            if (strpos($pattern, ',') !== false) {
+                $parts = explode(',', $pattern);
+                $count = count($parts);
+                foreach($parts as $key => $part) {
+                    switch ($part) {
+                        case '#':
+                        case '-#':
+                            if ($part[0] == '-') {
+                                $regex[$pkey] .= '[' . $symbols['minus'] . '-]{0,1}';
+                            } else {
+                                $regex[$pkey] .= '[' . $symbols['plus'] . '+]{0,1}';
+                            }
+
+                            if (($parts[$key + 1]) == '##0')  {
+                                $regex[$pkey] .= '[0-9]{1,3}';
+                            } else if (($parts[$key + 1]) == '##') {
+                                $regex[$pkey] .= '[0-9]{1,2}';
+                            } else {
+                                throw new Zend_Locale_Exception('Unsupported token for numberformat (Pos 1):"' . $pattern . '"');
+                            }
+                            break;
+                        case '##':
+                            if ($parts[$key + 1] == '##0') {
+                                $regex[$pkey] .=  '(\\' . $symbols['group'] . '{0,1}[0-9]{2})*';
+                            } else {
+                                throw new Zend_Locale_Exception('Unsupported token for numberformat (Pos 2):"' . $pattern . '"');
+                            }
+                            break;
+                        case '##0':
+                            if ($parts[$key - 1] == '##') {
+                                $regex[$pkey] .= '[0-9]';
+                            } else if (($parts[$key - 1] == '#') || ($parts[$key - 1] == '-#')) {
+                                $regex[$pkey] .= '(\\' . $symbols['group'] . '{0,1}[0-9]{3})*';
+                            } else {
+                                throw new Zend_Locale_Exception('Unsupported token for numberformat (Pos 3):"' . $pattern . '"');
+                            }
+                            break;
+                        case '#0':
+                            if ($key == 0) {
+                                $regex[$pkey] .= '[0-9]*';
+                            } else {
+                                throw new Zend_Locale_Exception('Unsupported token for numberformat (Pos 4):"' . $pattern . '"');
+                            }
+                            break;
+                    }
+                }
+            }
+
+            if (strpos($pattern, 'E') !== false) {
+                if (($pattern == '#E0') || ($pattern == '#E00')) {
+                    $regex[$pkey] .= '[' . $symbols['plus']. '+]{0,1}[0-9]{1,}(\\' . $symbols['decimal'] . '[0-9]{1,})*[eE][' . $symbols['plus']. '+]{0,1}[0-9]{1,}';
+                } else if (($pattern == '-#E0') || ($pattern == '-#E00')) {
+                    $regex[$pkey] .= '[' . $symbols['minus']. '-]{0,1}[0-9]{1,}(\\' . $symbols['decimal'] . '[0-9]{1,})*[eE][' . $symbols['minus']. '-]{0,1}[0-9]{1,}';
+                } else {
+                    throw new Zend_Locale_Exception('Unsupported token for numberformat (Pos 5):"' . $pattern . '"');
+                }
+            }
+
+            if (!empty($end)) {
+                if ($end == '###') {
+                    $regex[$pkey] .= '(\\' . $symbols['decimal'] . '{1}[0-9]{1,}){0,1}';
+                } else if ($end == '###-') {
+                    $regex[$pkey] .= '(\\' . $symbols['decimal'] . '{1}[0-9]{1,}){0,1}[' . $symbols['minus']. '-]';
+                } else {
+                    throw new Zend_Locale_Exception('Unsupported token for numberformat (Pos 6):"' . $pattern . '"');
+                }
+            }
+
+            $regex[$pkey] .= '$/';
+        }
+
+        return $regex;
     }
 
     /**

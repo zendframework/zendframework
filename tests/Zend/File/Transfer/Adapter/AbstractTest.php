@@ -727,6 +727,19 @@ class Zend_File_Transfer_Adapter_AbstractTest extends PHPUnit_Framework_TestCase
             $this->assertContains('does not exist', $e->getMessage());
         }
     }
+
+    public function testTransferDestinationAtNonExistingElement()
+    {
+        $directory = dirname(__FILE__);
+        $this->adapter->setDestination($directory, 'nonexisting');
+        $this->assertEquals($directory, $this->adapter->getDestination('nonexisting'));
+        try {
+            $this->assertTrue(is_string($this->adapter->getDestination('reallynonexisting')));
+            $this->fail();
+        } catch(Exception $e) {
+            $this->assertContains('not found', $e->getMessage());
+        }
+    }
 }
 
 class Zend_File_Transfer_Adapter_AbstractTest_MockAdapter extends Zend_File_Transfer_Adapter_Abstract

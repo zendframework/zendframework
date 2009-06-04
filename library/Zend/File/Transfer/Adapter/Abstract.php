@@ -1010,7 +1010,7 @@ abstract class Zend_File_Transfer_Adapter_Abstract
             }
         } else {
             $files = $this->_getFiles($files, true, true);
-            if (empty($this->_files) and is_string($orig)) {
+            if (empty($files) and is_string($orig)) {
                 $this->_files[$orig]['destination'] = $destination;
             }
 
@@ -1030,8 +1030,18 @@ abstract class Zend_File_Transfer_Adapter_Abstract
      */
     public function getDestination($files = null)
     {
-        $files        = $this->_getFiles($files, false);
+        $orig  = $files;
+        $files = $this->_getFiles($files, false, true);
         $destinations = array();
+        if (empty($files) and is_string($orig)) {
+            if (isset($this->_files[$orig]['destination'])) {
+                $destinations[$orig] = $this->_files[$orig]['destination'];
+            } else {
+                require_once 'Zend/File/Transfer/Exception.php';
+                throw new Zend_File_Transfer_Exception(sprintf('"%s" not found by file transfer adapter', $orig));
+            }
+        }
+
         foreach ($files as $key => $content) {
             if (isset($this->_files[$key]['destination'])) {
                 $destinations[$key] = $this->_files[$key]['destination'];

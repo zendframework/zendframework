@@ -25,12 +25,7 @@
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../TestHelper.php';
-
-/**
- * @see Zend_Service_Simpy
- */
-require_once 'Zend/Service/Simpy.php';
+require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 
 /**
@@ -40,12 +35,12 @@ require_once 'Zend/Service/Simpy.php';
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_SimpyTest extends PHPUnit_Framework_TestCase
+abstract class Zend_Service_Simpy_BaseTests extends PHPUnit_Framework_TestCase
 {
     /**
-     * Simpy service consumer
+     * Simpy service consumer proxy
      *
-     * @var Zend_Service_Simpy
+     * @var Zend_Service_Simpy_BaseProxy
      */
     protected $_simpy;
 
@@ -73,19 +68,6 @@ class Zend_Service_SimpyTest extends PHPUnit_Framework_TestCase
         'tags'        => array('test'),
         'description' => 'This is a test note.'
     );
-
-    public function setUp()
-    {
-        sleep(5);
-
-        $this->_simpy = new Zend_Service_Simpy('syapizend', 'mgt37ge');
-
-        /**
-         * Until Simpy includes time zone support, timestamp values must be
-         * tested against the time zone in use by Simpy's servers
-         */
-        date_default_timezone_set('America/New_York');
-    }
 
     public function testException()
     {
@@ -141,7 +123,6 @@ class Zend_Service_SimpyTest extends PHPUnit_Framework_TestCase
         );
 
         $link = $linkSet->getIterator()->current();
-        $date = date('Y-m-d');
         extract($this->_link);
 
         $this->assertEquals(
@@ -156,16 +137,16 @@ class Zend_Service_SimpyTest extends PHPUnit_Framework_TestCase
             'URL does not match'
         );
 
-        $this->assertEquals(
-            substr($link->getModDate(), 0, 10),
-            $date,
-            'Mod date does not match'
+        $this->assertNotEquals(
+            strtotime($link->getModDate()),
+            false,
+            'Mod date is invalid'
         );
 
-        $this->assertEquals(
-            substr($link->getAddDate(), 0, 10),
-            $date,
-            'Add date does not match'
+        $this->assertNotEquals(
+            strtotime($link->getAddDate()),
+            false,
+            'Add date is invalid'
         );
 
         $this->assertEquals(
@@ -229,7 +210,9 @@ class Zend_Service_SimpyTest extends PHPUnit_Framework_TestCase
             'After date has retained its value'
         );
 
-        $linkQuery->setLimit(1);
+        $linkQuery
+            ->setLimit(1)
+            ->setDate(null);
 
         $this->assertEquals(
             $linkQuery->getLimit(),
@@ -423,10 +406,9 @@ class Zend_Service_SimpyTest extends PHPUnit_Framework_TestCase
 
     public function testGetNotes()
     {
-        $date = date('Y-m-d');
         $noteSet = $this->_simpy->getNotes();
 
-        $this->assertEquals(
+        $this->assertGreaterThanOrEqual(
             $noteSet->getLength(),
             1,
             'Note set does not have the expected size'
@@ -465,16 +447,16 @@ class Zend_Service_SimpyTest extends PHPUnit_Framework_TestCase
             'Description does not match'
         );
 
-        $this->assertEquals(
-            $note->getAddDate(),
-            $date,
-            'Add date does not match'
+        $this->assertNotEquals(
+            strtotime($note->getAddDate()),
+            false,
+            'Add date is invalid'
         );
 
-        $this->assertEquals(
-            $note->getModDate(),
-            $date,
-            'Mod date does not match'
+        $this->assertNotEquals(
+            strtotime($note->getModDate()),
+            false,
+            'Mod date is invalid'
         );
     }
 
@@ -493,16 +475,22 @@ class Zend_Service_SimpyTest extends PHPUnit_Framework_TestCase
         }
     }
 
-    public function testGetWatchlists()
+    private function _getWatchlistIterator()
     {
         $watchlistSet = $this->_simpy->getWatchlists();
-        $watchlist = $watchlistSet->getIterator()->current();
+        $watchlistSetIterator = $watchlistSet->getIterator();
 
-        $this->assertEquals(
-            $watchlistSet->getLength(),
-            1,
-            'Watchlist set does not have the expected size'
-        );
+        if (!count($watchlistSetIterator)) {
+            $this->markTestSkipped('Account has no watchlists');
+        }
+        
+        return $watchlistSetIterator;
+    }
+
+    public function testGetWatchlists()
+    {
+        $watchlistSetIterator = $this->_getWatchlistIterator(); 
+        $watchlist = $watchlistSetIterator->current();
 
         $this->assertNotNull(
             $watchlist,
@@ -512,67 +500,67 @@ class Zend_Service_SimpyTest extends PHPUnit_Framework_TestCase
 
     public function testGetWatchlist()
     {
-        $watchlist = $this->_simpy->getWatchlist('1331');
+        $watchlistSetIterator = $this->_getWatchlistIterator(); 
+        $watchlistId = $watchlistSetIterator->current()->getId();
+
+        $watchlist = $this->_simpy->getWatchlist($watchlistId);
 
         $this->assertEquals(
             $watchlist->getId(),
-            '1331',
+            $watchlistId,
             'ID does not match'
         );
 
-        $this->assertEquals(
-            $watchlist->getName(),
-            'Test Watchlist',
-            'Name does not match'
+        $watchlistName = $watchlist->getName();
+
+        $this->assertFalse(
+            empty($watchlistName),
+            'Name is empty'
         );
 
-        $this->assertEquals(
-            $watchlist->getDescription(),
-            'This is a watchlist for testing purposes. Please do not remove it.',
-            'Description does not match'
+        $this->assertNotEquals(
+            strtotime($watchlist->getAddDate()),
+            false,
+            'Add date is invalid'
         );
 
-        $this->assertEquals(
-            $watchlist->getAddDate(),
-            'Fri Dec 08 21:40:56 EST 2006',
-            'Add date does not match'
-        );
-
-        $this->assertEquals(
+        $this->assertGreaterThanOrEqual(
             $watchlist->getNewLinks(),
             0,
-            'New link count does not match'
+            'New link count is invalid'
         );
 
-        $this->assertEquals(
-            $watchlist->getUsers(),
-            array('otis'),
-            'User list does not match'
+        $this->assertTrue(
+            is_array($watchlist->getUsers()),
+            'User list is not an array'
         );
     }
 
     public function testWatchlistFilters()
     {
-        $filterSet = $this->_simpy->getWatchlist('1331')->getFilters();
+        $watchlistSetIterator = $this->_getWatchlistIterator(); 
+        $watchlistId = $watchlistSetIterator->current()->getId();
+        $watchlist = $this->_simpy->getWatchlist($watchlistId);
+        $filterSet = $watchlist->getFilters();
 
-        $this->assertEquals(
-            $filterSet->getLength(),
-            1,
-            'Filter set does not have the expected size'
-        );
+        if (!$filterSet->getLength()) {
+            $this->markTestSkipped('Watchlist has no filters');
+        }
 
         $filter = $filterSet->getIterator()->current();
 
-        $this->assertEquals(
-            $filter->getName(),
-            'Test Filter',
-            'Name does not match'
+        $filterName = $filter->getName();
+
+        $this->assertFalse(
+            empty($filterName),
+            'Name is invalid'
         );
 
-        $this->assertEquals(
-            $filter->getQuery(),
-            'zend',
-            'Query does not match'
+        $filterQuery = $filter->getQuery();
+
+        $this->assertFalse(
+            empty($filterQuery),
+            'Query is invalid'
         );
     }
 
@@ -586,18 +574,5 @@ class Zend_Service_SimpyTest extends PHPUnit_Framework_TestCase
         }
 
         return $tagArray;
-    }
-}
-
-
-class Zend_Service_SimpyTest_Skip extends PHPUnit_Framework_TestCase
-{
-    public function setUp()
-    {
-        $this->markTestSkipped('Zend_Service_Simpy tests not enabled in TestConfiguration.php');
-    }
-
-    public function testNothing()
-    {
     }
 }

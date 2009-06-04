@@ -72,9 +72,9 @@ require_once 'Zend/Service/Nirvanix/AllTests.php';
 require_once 'Zend/Service/ReCaptcha/AllTests.php';
 
 /**
- * @see Zend_Service_SimpyTest
+ * @see Zend_Service_Simpy_AllTests
  */
-require_once 'Zend/Service/SimpyTest.php';
+require_once 'Zend/Service/Simpy/AllTests.php';
 
 /**
  * @see Zend_Service_SlideShareTest
@@ -142,11 +142,7 @@ class Zend_Service_AllTests
         $suite->addTest(Zend_Service_Flickr_AllTests::suite());
         $suite->addTest(Zend_Service_Nirvanix_AllTests::suite());
         $suite->addTest(Zend_Service_ReCaptcha_AllTests::suite());
-        if (defined('TESTS_ZEND_SERVICE_SIMPY_ENABLED') && constant('TESTS_ZEND_SERVICE_SIMPY_ENABLED')) {
-            $suite->addTestSuite('Zend_Service_SimpyTest');
-        } else {
-            $suite->addTestSuite('Zend_Service_SimpyTest_Skip');
-        }
+        $suite->addTest(Zend_Service_Simpy_AllTests::suite());
         $suite->addTestSuite('Zend_Service_SlideShareTest');
         $suite->addTest(Zend_Service_StrikeIron_AllTests::suite());
         $suite->addTest(Zend_Service_Technorati_AllTests::suite());

@@ -468,6 +468,8 @@ define('TESTS_ZEND_SERVICE_FLICKR_ONLINE_APIKEY', 'Enter API key here');
  * Zend_Service_Simpy tests
  */
 define('TESTS_ZEND_SERVICE_SIMPY_ENABLED', false);
+define('TESTS_ZEND_SERVICE_SIMPY_USERNAME', 'syapizend');
+define('TESTS_ZEND_SERVICE_SIMPY_PASSWORD', 'mgt37ge');
 
 /**
  * Zend_Service_SlideShare tests

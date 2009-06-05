@@ -15,6 +15,8 @@ require_once 'Zend/Amf/TypeLoaderTest.php';
 require_once 'Zend/Amf/Util/BinaryStreamTest.php';
 require_once 'Zend/Amf/Value/MessageBodyTest.php';
 require_once 'Zend/Amf/Value/MessageHeaderTest.php';
+require_once 'Zend/Amf/AuthTest.php';
+require_once 'Zend/Amf/ResourceTest.php';
 
 class Zend_Amf_AllTests
 {
@@ -35,6 +37,8 @@ class Zend_Amf_AllTests
         $suite->addTestSuite('Zend_Amf_Util_BinaryStreamTest');
         $suite->addTestSuite('Zend_Amf_Value_MessageBodyTest');
         $suite->addTestSuite('Zend_Amf_Value_MessageHeaderTest');
+        $suite->addTestSuite('Zend_Amf_AuthTest');
+        $suite->addTestSuite('Zend_Amf_ResourceTest');
 
         return $suite;
     }

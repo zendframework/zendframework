@@ -89,8 +89,11 @@ class Zend_Amf_Parse_Amf3_Serializer extends Zend_Amf_Parse_Serializer
             }
         } else {
             // Detect Type Marker
+            if(is_resource($data)) {
+                $data = Zend_Amf_Parse_TypeLoader::handleResource($data);
+            }
              switch (true) {
-                case (null === $data):
+             	case (null === $data):
                     $markerType = Zend_Amf_Constants::AMF3_NULL;
                     break;
                 case (is_bool($data)):

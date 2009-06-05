@@ -76,4 +76,9 @@ final class Zend_Amf_Constants
     const URL_APPEND_HEADER      = 'AppendToGatewayUrl';
     const RESULT_METHOD          = '/onResult';
     const STATUS_METHOD          = '/onStatus';
+    const CREDENTIALS_HEADER     = 'Credentials';
+    const PERSISTENT_HEADER      = 'RequestPersistentHeader';
+    const DESCRIBE_HEADER        = 'DescribeService';
+    
+    const GUEST_ROLE             = 'anonymous';
 }

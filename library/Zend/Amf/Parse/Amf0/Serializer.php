@@ -95,8 +95,11 @@ class Zend_Amf_Parse_Amf0_Serializer extends Zend_Amf_Parse_Serializer
                     throw new Zend_Amf_Exception("Unknown Type Marker: " . $markerType);
             }
         } else {
+            if(is_resource($data)) {
+                $data = Zend_Amf_Parse_TypeLoader::handleResource($data);
+            }
             switch (true) {
-                case (is_int($data) || is_float($data)):
+            	case (is_int($data) || is_float($data)):
                     $markerType = Zend_Amf_Constants::AMF0_NUMBER;
                     break;
                 case (is_bool($data)):

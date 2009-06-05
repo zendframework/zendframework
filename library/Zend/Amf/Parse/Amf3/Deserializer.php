@@ -78,6 +78,7 @@ class Zend_Amf_Parse_Amf3_Deserializer extends Zend_Amf_Parse_Deserializer
         if(null === $typeMarker) {
             $typeMarker = $this->_stream->readByte();
         }
+
         switch($typeMarker) {
             case Zend_Amf_Constants::AMF3_UNDEFINED:
                  return null;
@@ -330,7 +331,6 @@ class Zend_Amf_Parse_Amf3_Deserializer extends Zend_Amf_Parse_Deserializer
             // Add the Object ot the reference table
             $this->_referenceObjects[] = $returnObject;
 
-            $properties = array();
             // Check encoding types for additional processing.
             switch ($encoding) {
                 case (Zend_Amf_Constants::ET_EXTERNAL):
@@ -354,6 +354,7 @@ class Zend_Amf_Parse_Amf3_Deserializer extends Zend_Amf_Parse_Deserializer
                         );
                     }
                     // not a refrence object read name value properties from byte stream
+                    $properties = array(); // clear value
                     do {
                         $property = $this->readString();
                         if ($property != "") {
@@ -376,6 +377,7 @@ class Zend_Amf_Parse_Amf3_Deserializer extends Zend_Amf_Parse_Deserializer
                             'propertyNames' => $propertyNames,
                         );
                     }
+                    $properties = array(); // clear value
                     foreach ($propertyNames as $property) {
                         $properties[$property] = $this->readTypeMarker();
                     }

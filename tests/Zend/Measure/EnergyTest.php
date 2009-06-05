@@ -156,7 +156,7 @@ class Zend_Measure_EnergyTest extends PHPUnit_Framework_TestCase
      */
     public function testEnergyValueString()
     {
-        $value = new Zend_Measure_Energy('string -100.100,200',Zend_Measure_Energy::STANDARD,'de');
+        $value = new Zend_Measure_Energy('-100.100,200',Zend_Measure_Energy::STANDARD,'de');
         $this->assertEquals(-100100.200, $value->getValue(),'Zend_Measure_Energy Object not returned');
     }
 
@@ -167,8 +167,8 @@ class Zend_Measure_EnergyTest extends PHPUnit_Framework_TestCase
      */
     public function testEnergyEquality()
     {
-        $value = new Zend_Measure_Energy('string -100.100,200',Zend_Measure_Energy::STANDARD,'de');
-        $newvalue = new Zend_Measure_Energy('otherstring -100.100,200',Zend_Measure_Energy::STANDARD,'de');
+        $value = new Zend_Measure_Energy('-100.100,200',Zend_Measure_Energy::STANDARD,'de');
+        $newvalue = new Zend_Measure_Energy('-100.100,200',Zend_Measure_Energy::STANDARD,'de');
         $this->assertTrue($value->equals($newvalue),'Zend_Measure_Energy Object should be equal');
     }
 
@@ -179,8 +179,8 @@ class Zend_Measure_EnergyTest extends PHPUnit_Framework_TestCase
      */
     public function testEnergyNoEquality()
     {
-        $value = new Zend_Measure_Energy('string -100.100,200',Zend_Measure_Energy::STANDARD,'de');
-        $newvalue = new Zend_Measure_Energy('otherstring -100,200',Zend_Measure_Energy::STANDARD,'de');
+        $value = new Zend_Measure_Energy('-100.100,200',Zend_Measure_Energy::STANDARD,'de');
+        $newvalue = new Zend_Measure_Energy('-100,200',Zend_Measure_Energy::STANDARD,'de');
         $this->assertFalse($value->equals($newvalue),'Zend_Measure_Energy Object should be not equal');
     }
 
@@ -239,8 +239,8 @@ class Zend_Measure_EnergyTest extends PHPUnit_Framework_TestCase
      */
     public function testEnergySetString()
     {
-        $value = new Zend_Measure_Energy('string -100.100,200',Zend_Measure_Energy::STANDARD,'de');
-        $value->setValue('otherstring -200.200,200',Zend_Measure_Energy::STANDARD,'de');
+        $value = new Zend_Measure_Energy('-100.100,200',Zend_Measure_Energy::STANDARD,'de');
+        $value->setValue('-200.200,200',Zend_Measure_Energy::STANDARD,'de');
         $this->assertEquals(-200200.200, $value->getValue(),'Zend_Measure_Energy Object not returned');
     }
 
@@ -253,7 +253,7 @@ class Zend_Measure_EnergyTest extends PHPUnit_Framework_TestCase
     {
         try {
             $value = new Zend_Measure_Energy('100',Zend_Measure_Energy::STANDARD,'de');
-            $value->setValue('otherstring -200.200,200','Energy::UNKNOWN','de');
+            $value->setValue('-200.200,200','Energy::UNKNOWN','de');
             $this->fail('Exception expected because of unknown type');
         } catch (Zend_Measure_Exception $e) {
             // success

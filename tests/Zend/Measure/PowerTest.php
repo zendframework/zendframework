@@ -156,7 +156,7 @@ class Zend_Measure_PowerTest extends PHPUnit_Framework_TestCase
      */
     public function testPowerValueString()
     {
-        $value = new Zend_Measure_Power('string -100.100,200',Zend_Measure_Power::STANDARD,'de');
+        $value = new Zend_Measure_Power('-100.100,200',Zend_Measure_Power::STANDARD,'de');
         $this->assertEquals(-100100.200, $value->getValue(),'Zend_Measure_Power Object not returned');
     }
 
@@ -167,8 +167,8 @@ class Zend_Measure_PowerTest extends PHPUnit_Framework_TestCase
      */
     public function testPowerEquality()
     {
-        $value = new Zend_Measure_Power('string -100.100,200',Zend_Measure_Power::STANDARD,'de');
-        $newvalue = new Zend_Measure_Power('otherstring -100.100,200',Zend_Measure_Power::STANDARD,'de');
+        $value = new Zend_Measure_Power('-100.100,200',Zend_Measure_Power::STANDARD,'de');
+        $newvalue = new Zend_Measure_Power('-100.100,200',Zend_Measure_Power::STANDARD,'de');
         $this->assertTrue($value->equals($newvalue),'Zend_Measure_Power Object should be equal');
     }
 
@@ -179,8 +179,8 @@ class Zend_Measure_PowerTest extends PHPUnit_Framework_TestCase
      */
     public function testPowerNoEquality()
     {
-        $value = new Zend_Measure_Power('string -100.100,200',Zend_Measure_Power::STANDARD,'de');
-        $newvalue = new Zend_Measure_Power('otherstring -100,200',Zend_Measure_Power::STANDARD,'de');
+        $value = new Zend_Measure_Power('-100.100,200',Zend_Measure_Power::STANDARD,'de');
+        $newvalue = new Zend_Measure_Power('-100,200',Zend_Measure_Power::STANDARD,'de');
         $this->assertFalse($value->equals($newvalue),'Zend_Measure_Power Object should be not equal');
     }
 
@@ -239,8 +239,8 @@ class Zend_Measure_PowerTest extends PHPUnit_Framework_TestCase
      */
     public function testPowerSetString()
     {
-        $value = new Zend_Measure_Power('string -100.100,200',Zend_Measure_Power::STANDARD,'de');
-        $value->setValue('otherstring -200.200,200',Zend_Measure_Power::STANDARD,'de');
+        $value = new Zend_Measure_Power('-100.100,200',Zend_Measure_Power::STANDARD,'de');
+        $value->setValue('-200.200,200',Zend_Measure_Power::STANDARD,'de');
         $this->assertEquals(-200200.200, $value->getValue(),'Zend_Measure_Power Object not returned');
     }
 
@@ -253,7 +253,7 @@ class Zend_Measure_PowerTest extends PHPUnit_Framework_TestCase
     {
         try {
             $value = new Zend_Measure_Power('100',Zend_Measure_Power::STANDARD,'de');
-            $value->setValue('otherstring -200.200,200','Power::UNKNOWN','de');
+            $value->setValue('-200.200,200','Power::UNKNOWN','de');
             $this->fail('Exception expected because of unknown type');
         } catch (Zend_Measure_Exception $e) {
             // success

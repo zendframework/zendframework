@@ -155,7 +155,7 @@ class Zend_Measure_CurrentTest extends PHPUnit_Framework_TestCase
      */
     public function testCurrentValueString()
     {
-        $value = new Zend_Measure_Current('string -100.100,200',Zend_Measure_Current::STANDARD,'de');
+        $value = new Zend_Measure_Current('-100.100,200',Zend_Measure_Current::STANDARD,'de');
         $this->assertEquals(-100100.200, $value->getValue(),'Zend_Measure_Current Object not returned');
     }
 
@@ -166,8 +166,8 @@ class Zend_Measure_CurrentTest extends PHPUnit_Framework_TestCase
      */
     public function testCurrentEquality()
     {
-        $value = new Zend_Measure_Current('string -100.100,200',Zend_Measure_Current::STANDARD,'de');
-        $newvalue = new Zend_Measure_Current('otherstring -100.100,200',Zend_Measure_Current::STANDARD,'de');
+        $value = new Zend_Measure_Current('-100.100,200',Zend_Measure_Current::STANDARD,'de');
+        $newvalue = new Zend_Measure_Current('-100.100,200',Zend_Measure_Current::STANDARD,'de');
         $this->assertTrue($value->equals($newvalue),'Zend_Measure_Current Object should be equal');
     }
 
@@ -178,8 +178,8 @@ class Zend_Measure_CurrentTest extends PHPUnit_Framework_TestCase
      */
     public function testCurrentNoEquality()
     {
-        $value = new Zend_Measure_Current('string -100.100,200',Zend_Measure_Current::STANDARD,'de');
-        $newvalue = new Zend_Measure_Current('otherstring -100,200',Zend_Measure_Current::STANDARD,'de');
+        $value = new Zend_Measure_Current('-100.100,200',Zend_Measure_Current::STANDARD,'de');
+        $newvalue = new Zend_Measure_Current('-100,200',Zend_Measure_Current::STANDARD,'de');
         $this->assertFalse($value->equals($newvalue),'Zend_Measure_Current Object should be not equal');
     }
 
@@ -238,8 +238,8 @@ class Zend_Measure_CurrentTest extends PHPUnit_Framework_TestCase
      */
     public function testCurrentSetString()
     {
-        $value = new Zend_Measure_Current('string -100.100,200',Zend_Measure_Current::STANDARD,'de');
-        $value->setValue('otherstring -200.200,200',Zend_Measure_Current::STANDARD,'de');
+        $value = new Zend_Measure_Current('-100.100,200',Zend_Measure_Current::STANDARD,'de');
+        $value->setValue('-200.200,200',Zend_Measure_Current::STANDARD,'de');
         $this->assertEquals(-200200.200, $value->getValue(),'Zend_Measure_Current Object not returned');
     }
 
@@ -252,7 +252,7 @@ class Zend_Measure_CurrentTest extends PHPUnit_Framework_TestCase
     {
         try {
             $value = new Zend_Measure_Current('100',Zend_Measure_Current::STANDARD,'de');
-            $value->setValue('otherstring -200.200,200','Current::UNKNOWN','de');
+            $value->setValue('-200.200,200','Current::UNKNOWN','de');
             $this->fail('Exception expected because of unknown type');
         } catch (Zend_Measure_Exception $e) {
             // success

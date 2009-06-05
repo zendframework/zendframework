@@ -155,7 +155,7 @@ class Zend_Measure_DensityTest extends PHPUnit_Framework_TestCase
      */
     public function testDensityValueString()
     {
-        $value = new Zend_Measure_Density('string -100.100,200',Zend_Measure_Density::STANDARD,'de');
+        $value = new Zend_Measure_Density('-100.100,200',Zend_Measure_Density::STANDARD,'de');
         $this->assertEquals(-100100.200, $value->getValue(),'Zend_Measure_Density Object not returned');
     }
 
@@ -166,8 +166,8 @@ class Zend_Measure_DensityTest extends PHPUnit_Framework_TestCase
      */
     public function testDensityEquality()
     {
-        $value = new Zend_Measure_Density('string -100.100,200',Zend_Measure_Density::STANDARD,'de');
-        $newvalue = new Zend_Measure_Density('otherstring -100.100,200',Zend_Measure_Density::STANDARD,'de');
+        $value = new Zend_Measure_Density('-100.100,200',Zend_Measure_Density::STANDARD,'de');
+        $newvalue = new Zend_Measure_Density('-100.100,200',Zend_Measure_Density::STANDARD,'de');
         $this->assertTrue($value->equals($newvalue),'Zend_Measure_Density Object should be equal');
     }
 
@@ -178,8 +178,8 @@ class Zend_Measure_DensityTest extends PHPUnit_Framework_TestCase
      */
     public function testDensityNoEquality()
     {
-        $value = new Zend_Measure_Density('string -100.100,200',Zend_Measure_Density::STANDARD,'de');
-        $newvalue = new Zend_Measure_Density('otherstring -100,200',Zend_Measure_Density::STANDARD,'de');
+        $value = new Zend_Measure_Density('-100.100,200',Zend_Measure_Density::STANDARD,'de');
+        $newvalue = new Zend_Measure_Density('-100,200',Zend_Measure_Density::STANDARD,'de');
         $this->assertFalse($value->equals($newvalue),'Zend_Measure_Density Object should be not equal');
     }
 
@@ -238,8 +238,8 @@ class Zend_Measure_DensityTest extends PHPUnit_Framework_TestCase
      */
     public function testDensitySetString()
     {
-        $value = new Zend_Measure_Density('string -100.100,200',Zend_Measure_Density::STANDARD,'de');
-        $value->setValue('otherstring -200.200,200',Zend_Measure_Density::STANDARD,'de');
+        $value = new Zend_Measure_Density('-100.100,200',Zend_Measure_Density::STANDARD,'de');
+        $value->setValue('-200.200,200',Zend_Measure_Density::STANDARD,'de');
         $this->assertEquals(-200200.200, $value->getValue(),'Zend_Measure_Density Object not returned');
     }
 
@@ -252,7 +252,7 @@ class Zend_Measure_DensityTest extends PHPUnit_Framework_TestCase
     {
         try {
             $value = new Zend_Measure_Density('100',Zend_Measure_Density::STANDARD,'de');
-            $value->setValue('otherstring -200.200,200','Density::UNKNOWN','de');
+            $value->setValue('-200.200,200','Density::UNKNOWN','de');
             $this->fail('Exception expected because of unknown type');
         } catch (Zend_Measure_Exception $e) {
             // success

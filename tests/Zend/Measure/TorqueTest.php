@@ -156,7 +156,7 @@ class Zend_Measure_TorqueTest extends PHPUnit_Framework_TestCase
      */
     public function testTorqueValueString()
     {
-        $value = new Zend_Measure_Torque('string -100.100,200',Zend_Measure_Torque::STANDARD,'de');
+        $value = new Zend_Measure_Torque('-100.100,200',Zend_Measure_Torque::STANDARD,'de');
         $this->assertEquals(-100100.200, $value->getValue(),'Zend_Measure_Torque Object not returned');
     }
 
@@ -167,8 +167,8 @@ class Zend_Measure_TorqueTest extends PHPUnit_Framework_TestCase
      */
     public function testTorqueEquality()
     {
-        $value = new Zend_Measure_Torque('string -100.100,200',Zend_Measure_Torque::STANDARD,'de');
-        $newvalue = new Zend_Measure_Torque('otherstring -100.100,200',Zend_Measure_Torque::STANDARD,'de');
+        $value = new Zend_Measure_Torque('-100.100,200',Zend_Measure_Torque::STANDARD,'de');
+        $newvalue = new Zend_Measure_Torque('-100.100,200',Zend_Measure_Torque::STANDARD,'de');
         $this->assertTrue($value->equals($newvalue),'Zend_Measure_Torque Object should be equal');
     }
 
@@ -179,8 +179,8 @@ class Zend_Measure_TorqueTest extends PHPUnit_Framework_TestCase
      */
     public function testTorqueNoEquality()
     {
-        $value = new Zend_Measure_Torque('string -100.100,200',Zend_Measure_Torque::STANDARD,'de');
-        $newvalue = new Zend_Measure_Torque('otherstring -100,200',Zend_Measure_Torque::STANDARD,'de');
+        $value = new Zend_Measure_Torque('-100.100,200',Zend_Measure_Torque::STANDARD,'de');
+        $newvalue = new Zend_Measure_Torque('-100,200',Zend_Measure_Torque::STANDARD,'de');
         $this->assertFalse($value->equals($newvalue),'Zend_Measure_Torque Object should be not equal');
     }
 
@@ -239,8 +239,8 @@ class Zend_Measure_TorqueTest extends PHPUnit_Framework_TestCase
      */
     public function testTorqueSetString()
     {
-        $value = new Zend_Measure_Torque('string -100.100,200',Zend_Measure_Torque::STANDARD,'de');
-        $value->setValue('otherstring -200.200,200',Zend_Measure_Torque::STANDARD,'de');
+        $value = new Zend_Measure_Torque('-100.100,200',Zend_Measure_Torque::STANDARD,'de');
+        $value->setValue('-200.200,200',Zend_Measure_Torque::STANDARD,'de');
         $this->assertEquals(-200200.200, $value->getValue(),'Zend_Measure_Torque Object not returned');
     }
 
@@ -253,7 +253,7 @@ class Zend_Measure_TorqueTest extends PHPUnit_Framework_TestCase
     {
         try {
             $value = new Zend_Measure_Torque('100',Zend_Measure_Torque::STANDARD,'de');
-            $value->setValue('otherstring -200.200,200','Torque::UNKNOWN','de');
+            $value->setValue('-200.200,200','Torque::UNKNOWN','de');
             $this->fail('Exception expected because of unknown type');
         } catch (Zend_Measure_Exception $e) {
             // success

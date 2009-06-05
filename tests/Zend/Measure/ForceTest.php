@@ -156,7 +156,7 @@ class Zend_Measure_ForceTest extends PHPUnit_Framework_TestCase
      */
     public function testForceValueString()
     {
-        $value = new Zend_Measure_Force('string -100.100,200',Zend_Measure_Force::STANDARD,'de');
+        $value = new Zend_Measure_Force('-100.100,200',Zend_Measure_Force::STANDARD,'de');
         $this->assertEquals(-100100.200, $value->getValue(),'Zend_Measure_Force Object not returned');
     }
 
@@ -167,8 +167,8 @@ class Zend_Measure_ForceTest extends PHPUnit_Framework_TestCase
      */
     public function testForceEquality()
     {
-        $value = new Zend_Measure_Force('string -100.100,200',Zend_Measure_Force::STANDARD,'de');
-        $newvalue = new Zend_Measure_Force('otherstring -100.100,200',Zend_Measure_Force::STANDARD,'de');
+        $value = new Zend_Measure_Force('-100.100,200',Zend_Measure_Force::STANDARD,'de');
+        $newvalue = new Zend_Measure_Force('-100.100,200',Zend_Measure_Force::STANDARD,'de');
         $this->assertTrue($value->equals($newvalue),'Zend_Measure_Force Object should be equal');
     }
 
@@ -179,8 +179,8 @@ class Zend_Measure_ForceTest extends PHPUnit_Framework_TestCase
      */
     public function testForceNoEquality()
     {
-        $value = new Zend_Measure_Force('string -100.100,200',Zend_Measure_Force::STANDARD,'de');
-        $newvalue = new Zend_Measure_Force('otherstring -100,200',Zend_Measure_Force::STANDARD,'de');
+        $value = new Zend_Measure_Force('-100.100,200',Zend_Measure_Force::STANDARD,'de');
+        $newvalue = new Zend_Measure_Force('-100,200',Zend_Measure_Force::STANDARD,'de');
         $this->assertFalse($value->equals($newvalue),'Zend_Measure_Force Object should be not equal');
     }
 
@@ -239,8 +239,8 @@ class Zend_Measure_ForceTest extends PHPUnit_Framework_TestCase
      */
     public function testForceSetString()
     {
-        $value = new Zend_Measure_Force('string -100.100,200',Zend_Measure_Force::STANDARD,'de');
-        $value->setValue('otherstring -200.200,200',Zend_Measure_Force::STANDARD,'de');
+        $value = new Zend_Measure_Force('-100.100,200',Zend_Measure_Force::STANDARD,'de');
+        $value->setValue('-200.200,200',Zend_Measure_Force::STANDARD,'de');
         $this->assertEquals(-200200.200, $value->getValue(),'Zend_Measure_Force Object not returned');
     }
 
@@ -253,7 +253,7 @@ class Zend_Measure_ForceTest extends PHPUnit_Framework_TestCase
     {
         try {
             $value = new Zend_Measure_Force('100',Zend_Measure_Force::STANDARD,'de');
-            $value->setValue('otherstring -200.200,200','Force::UNKNOWN','de');
+            $value->setValue('-200.200,200','Force::UNKNOWN','de');
             $this->fail('Exception expected because of unknown type');
         } catch (Zend_Measure_Exception $e) {
             // success

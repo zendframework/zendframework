@@ -139,7 +139,7 @@ class Zend_Measure_Cooking_WeightTest extends PHPUnit_Framework_TestCase
      */
     public function testCooking_WeightValueString()
     {
-        $value = new Zend_Measure_Cooking_Weight('string -100.100,200',Zend_Measure_Cooking_Weight::STANDARD,'de');
+        $value = new Zend_Measure_Cooking_Weight('-100.100,200',Zend_Measure_Cooking_Weight::STANDARD,'de');
         $this->assertEquals(-100100.200, $value->getValue(),'Zend_Measure_Cooking_Weight Object not returned');
     }
 
@@ -150,8 +150,8 @@ class Zend_Measure_Cooking_WeightTest extends PHPUnit_Framework_TestCase
      */
     public function testCooking_WeightEquality()
     {
-        $value = new Zend_Measure_Cooking_Weight('string -100.100,200',Zend_Measure_Cooking_Weight::STANDARD,'de');
-        $newvalue = new Zend_Measure_Cooking_Weight('otherstring -100.100,200',Zend_Measure_Cooking_Weight::STANDARD,'de');
+        $value = new Zend_Measure_Cooking_Weight('-100.100,200',Zend_Measure_Cooking_Weight::STANDARD,'de');
+        $newvalue = new Zend_Measure_Cooking_Weight('-100.100,200',Zend_Measure_Cooking_Weight::STANDARD,'de');
         $this->assertTrue($value->equals($newvalue),'Zend_Measure_Cooking_Weight Object should be equal');
     }
 
@@ -162,8 +162,8 @@ class Zend_Measure_Cooking_WeightTest extends PHPUnit_Framework_TestCase
      */
     public function testCooking_WeightNoEquality()
     {
-        $value = new Zend_Measure_Cooking_Weight('string -100.100,200',Zend_Measure_Cooking_Weight::STANDARD,'de');
-        $newvalue = new Zend_Measure_Cooking_Weight('otherstring -100,200',Zend_Measure_Cooking_Weight::STANDARD,'de');
+        $value = new Zend_Measure_Cooking_Weight('-100.100,200',Zend_Measure_Cooking_Weight::STANDARD,'de');
+        $newvalue = new Zend_Measure_Cooking_Weight('-100,200',Zend_Measure_Cooking_Weight::STANDARD,'de');
         $this->assertFalse($value->equals($newvalue),'Zend_Measure_Cooking_Weight Object should be not equal');
     }
 
@@ -222,8 +222,8 @@ class Zend_Measure_Cooking_WeightTest extends PHPUnit_Framework_TestCase
      */
     public function testCooking_WeightSetString()
     {
-        $value = new Zend_Measure_Cooking_Weight('string -100.100,200',Zend_Measure_Cooking_Weight::STANDARD,'de');
-        $value->setValue('otherstring -200.200,200',Zend_Measure_Cooking_Weight::STANDARD,'de');
+        $value = new Zend_Measure_Cooking_Weight('-100.100,200',Zend_Measure_Cooking_Weight::STANDARD,'de');
+        $value->setValue('-200.200,200',Zend_Measure_Cooking_Weight::STANDARD,'de');
         $this->assertEquals(-200200.200, $value->getValue(),'Zend_Measure_Cooking_Weight Object not returned');
     }
 
@@ -236,7 +236,7 @@ class Zend_Measure_Cooking_WeightTest extends PHPUnit_Framework_TestCase
     {
         try {
             $value = new Zend_Measure_Cooking_Weight('100',Zend_Measure_Cooking_Weight::STANDARD,'de');
-            $value->setValue('otherstring -200.200,200','Cooking_Weight::UNKNOWN','de');
+            $value->setValue('-200.200,200','Cooking_Weight::UNKNOWN','de');
             $this->fail('Exception expected because of unknown type');
         } catch (Zend_Measure_Exception $e) {
             // success

@@ -139,7 +139,7 @@ class Zend_Measure_Viscosity_KinematicTest extends PHPUnit_Framework_TestCase
      */
     public function testViscosity_KinematicValueString()
     {
-        $value = new Zend_Measure_Viscosity_Kinematic('string -100.100,200',Zend_Measure_Viscosity_Kinematic::STANDARD,'de');
+        $value = new Zend_Measure_Viscosity_Kinematic('-100.100,200',Zend_Measure_Viscosity_Kinematic::STANDARD,'de');
         $this->assertEquals(-100100.200, $value->getValue(),'Zend_Measure_Viscosity_Kinematic Object not returned');
     }
 
@@ -150,8 +150,8 @@ class Zend_Measure_Viscosity_KinematicTest extends PHPUnit_Framework_TestCase
      */
     public function testViscosity_KinematicEquality()
     {
-        $value = new Zend_Measure_Viscosity_Kinematic('string -100.100,200',Zend_Measure_Viscosity_Kinematic::STANDARD,'de');
-        $newvalue = new Zend_Measure_Viscosity_Kinematic('otherstring -100.100,200',Zend_Measure_Viscosity_Kinematic::STANDARD,'de');
+        $value = new Zend_Measure_Viscosity_Kinematic('-100.100,200',Zend_Measure_Viscosity_Kinematic::STANDARD,'de');
+        $newvalue = new Zend_Measure_Viscosity_Kinematic('-100.100,200',Zend_Measure_Viscosity_Kinematic::STANDARD,'de');
         $this->assertTrue($value->equals($newvalue),'Zend_Measure_Viscosity_Kinematic Object should be equal');
     }
 
@@ -162,8 +162,8 @@ class Zend_Measure_Viscosity_KinematicTest extends PHPUnit_Framework_TestCase
      */
     public function testViscosity_KinematicNoEquality()
     {
-        $value = new Zend_Measure_Viscosity_Kinematic('string -100.100,200',Zend_Measure_Viscosity_Kinematic::STANDARD,'de');
-        $newvalue = new Zend_Measure_Viscosity_Kinematic('otherstring -100,200',Zend_Measure_Viscosity_Kinematic::STANDARD,'de');
+        $value = new Zend_Measure_Viscosity_Kinematic('-100.100,200',Zend_Measure_Viscosity_Kinematic::STANDARD,'de');
+        $newvalue = new Zend_Measure_Viscosity_Kinematic('-100,200',Zend_Measure_Viscosity_Kinematic::STANDARD,'de');
         $this->assertFalse($value->equals($newvalue),'Zend_Measure_Viscosity_Kinematic Object should be not equal');
     }
 
@@ -222,8 +222,8 @@ class Zend_Measure_Viscosity_KinematicTest extends PHPUnit_Framework_TestCase
      */
     public function testViscosity_KinematicSetString()
     {
-        $value = new Zend_Measure_Viscosity_Kinematic('string -100.100,200',Zend_Measure_Viscosity_Kinematic::STANDARD,'de');
-        $value->setValue('otherstring -200.200,200',Zend_Measure_Viscosity_Kinematic::STANDARD,'de');
+        $value = new Zend_Measure_Viscosity_Kinematic('-100.100,200',Zend_Measure_Viscosity_Kinematic::STANDARD,'de');
+        $value->setValue('-200.200,200',Zend_Measure_Viscosity_Kinematic::STANDARD,'de');
         $this->assertEquals(-200200.200, $value->getValue(),'Zend_Measure_Viscosity_Kinematic Object not returned');
     }
 
@@ -236,7 +236,7 @@ class Zend_Measure_Viscosity_KinematicTest extends PHPUnit_Framework_TestCase
     {
         try {
             $value = new Zend_Measure_Viscosity_Kinematic('100',Zend_Measure_Viscosity_Kinematic::STANDARD,'de');
-            $value->setValue('otherstring -200.200,200','Viscosity_Kinematic::UNKNOWN','de');
+            $value->setValue('-200.200,200','Viscosity_Kinematic::UNKNOWN','de');
             $this->fail('Exception expected because of unknown type');
         } catch (Zend_Measure_Exception $e) {
             // success

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15814 -->
+<!-- EN-Revision: 15898 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.amf.server">
     <title>Zend_Amf_Server</title>
@@ -477,6 +477,74 @@ private function getContactHandler(event:ResultEvent):void {
         </para>
     </sect2>
 
+    <sect2 id="zend.amf.server.resources">
+        <title>Ressourcen</title>
+
+        <para>
+            <classname>Zend_Amf</classname> bietet Tools für das Mappen von Ressource Typen die
+            von Service Klassen in von ActionScript verwendbaren Daten zurückgegeben werden.
+        </para>
+
+        <para>
+            Um spezielle Ressource Typen zu behandeln, muss der Benutzer eine Plugin Klasse
+            erstellen die nach dem Ressource Namen benannt ist, mit großgeschriebenen Wörtern
+            und entfernten Leerzeichen (ein Ressouce Typ "mysql result" wird zu MysqlResult),
+            mit einem Präfix, z.B. <classname>My_MysqlResult</classname>. Diese Klasse sollte eine
+            Methode implementieren, <code>parse()</code>, die ein Argument - die Ressource -
+            annimmt und den Wert zurückgibt der an das ActionScript gesendet werden sollte. Die
+            Klasse sollte in der Datei vorhanden sein nachdem die letzte Komponente des Namens
+            benannt ist, z.B. MysqlResult.php.
+        </para>
+
+        <para>
+            Das Verzeichnis das die Plugins für das Ressource Handling enthält sollte beim Typloader
+            von Zend_Amf registriert sein:
+        <programlisting role="php"><![CDATA[
+Zend_Amf_Parse_TypeLoader::addResourceDirectory("My", "application/library/resources/My"));
+]]></programlisting>
+        </para>
+
+        <para>
+            Für eine detailierte Diskussion für das Laden von Plugins, sehen Sie bitte in das
+            Kapitel <link end="zend.loader.pluginloader">Plugin Loader</link>.
+        </para>
+
+        <para>
+            Das Standardverzeichnis für Ressourcen von <classname>Zend_Amf</classname> wird
+            automatisch registriert und enthält aktuell Handler für "mysql result" und "stream"
+            Ressourcen.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// Beispiel für die Implementierung von Ressourcen für die Behandlung von Mysql Ergebnis Typen
+class Zend_Amf_Parse_Resource_MysqlResult
+{
+    /**
+     * Parse resource into array
+     *
+     * @param resource $resource
+     * @return array
+     */
+    public function parse($resource) {
+        $result = array();
+        while($row = mysql_fetch_assoc($resource)) {
+            $result[] = $row;
+        }
+        return $result;
+    }
+}
+]]></programlisting>
+
+        <para>
+        </para>
+
+        <para>
+            Der Versuch einen unbekannten Ressource Typ zurückzugeben (z.B. einen für den kein
+            Handler Plugin existiert) führt zu einer Exception.
+        </para>
+
+    </sect2>
+
     <sect2 id="zend.amf.server.flash">
         <title>Von Flash aus auf den Server verbinden</title>
 
@@ -632,6 +700,87 @@ private function onFault(fault:Object):void {
         </para>
 
     </sect2>
+
+    <sect2 id="zend.amf.server.auth">
+        <title>Authentication</title>
+
+        <para>
+            <classname>Zend_Amf_Server</classname> erlaubt es Authentifizierung und Authorisierungs-
+            Hooks zu spezifizieren um den Zugriff auf Services zu kontrollieren. Es wird die
+            Infrastruktur verwendet die von den <link end="zend.auth">Zend_Auth</link> und
+            <link end="zend.acl">Zend_Acl</link> Komponenten angeboten wird.
+        </para>
+
+        <para>
+            Um Authentifizierung zu definieren, muß der Benutzer einen Authentifizierungs-Adapter
+            anbieten der die abstrakte Klasse <classname>Zend_Amf_Auth_Abstract</classname>
+            erweitert. Der Adapter sollte die <code>authenticate</code> Methode implementieren so
+            wie jeder normale
+            <link end="zend.auth.introduction.adapters">Authentifizierungs-Adapter</link>.
+        </para>
+
+        <para>
+            Der Adapter sollte die Eigenschaften <code>_username</code> und <code>_password</code>
+            von der Vorgängerklasse <classname>Zend_Amf_Auth_Abstract</classname> verwenden um
+            authentifizieren zu können. Diese Werte werden vom Server gesetzt, indem die
+            <code>setCredentials()</code> Methode verwendet wird, bevor <code>authenticate()</code>
+            aufgerufen wird wenn die Zugangsdaten in den AMF Anfrage-Headern empfangen wurden.
+        </para>
+
+        <para>
+            Die Identität die vom Adapter zurückgegeben wird sollte ein Objekt sein das die
+            Eigenschaft <code>role</code> enthält damit die Zugriffskontrolle von ACL funktioniert.
+        </para>
+
+        <para>
+            Wenn das Authentifizierungs Ergebnis nicht erfolgreich war, wird die Anfrage nicht
+            weiter bearbeitet und eine Fehlermeldung wird zurückgegeben mit den Gründen für den
+            Fehlschlag genommen vom Ergebnis
+        </para>
+
+        <para>
+            Der Adapter wird zum Server verbunden indem die <code>setAuth()</code> Methode verwendet
+            wird:
+        <programlisting role="php"><![CDATA[
+$server->setAuth(new My_Amf_Auth());
+]]></programlisting>
+        </para>
+
+        <para>
+            Die Zugriffskontrolle wird durchgeführt indem das <code>Zend_Acl</code> Objekt verwendet
+            wird das von der <code>setAcl()</code> Methode gesetzt wurde:
+        <programlisting role="php"><![CDATA[
+$acl = new Zend_Acl();
+createPermissions($acl); // Zugriffs-Struktur erstellen
+$server->setAcl($acl);
+]]></programlisting>
+        </para>
+
+        <para>
+            Wenn das ACL Objekt gesetzt ist, und die Klasse die aufgerufen wird die
+            <code>initAcl()</code> Methode definiert wird diese Methode, mit dem ACL Objekt als
+            Argument, aufgerufen. Die klasse kann dann zusätzliche ACL Regeln erstellen und
+            <code>true</code> zurückgeben, oder <code>false</code> wenn keine Zugriffskontrolle für
+            diese Klasse benötigt wird.
+        </para>
+
+        <para>
+            Nachdem die ACL gesetzt wurde, wird der Server prüfen ob mit der, von der
+            Authentifizierung gesetzten, Rolle Zugriff erlaubt ist, die Ressource im Klassennamen
+            ist (oder null für Funktionsaufrufe) und ob die Privilegien der Funktionsname sind.
+            Wenn keine Authentifizierung angegeben wurde, wird die <code>anonymous</code> verwendet,
+            wenn diese definiert wurde, andernfalls wird der Zugriff verweigert.
+        <programlisting role="php"><![CDATA[
+if($this->_acl->isAllowed($role, $class, $function)) {
+    return true;
+} else {
+    require_once 'Zend/Amf/Server/Exception.php';
+    throw new Zend_Amf_Server_Exception("Access not allowed");
+}
+]]></programlisting>
+        </para>
+
+        </sect2>
 
 </sect1>
 <!--

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15814 -->
+<!-- EN-Revision: 15898 -->
 <sect1 id="zend.amf.server">
     <title>Zend_Amf_Server</title>
 
@@ -462,6 +462,70 @@ private function getContactHandler(event:ResultEvent):void {
             myContact にバインドされているすべての内容は、返された
             ContactVO データで更新されます。
         </para>
+    </sect2>
+
+    <sect2 id="zend.amf.server.resources">
+        <title>リソース</title>
+        
+        <para><classname>Zend_Amf</classname> には、サービスクラスが返すリソース型を
+        	ActionScript で使用可能な形式のデータにマッピングするツールが用意されています。
+        </para>
+        
+        <para>
+        リソース型を扱うには、そのリソース名に対応する名前のプラグインクラスを作成する必要があります。
+        クラス名は、リソース名の単語の先頭を大文字化してスペースを除去したものとなり
+        (つまり、リソース型 "mysql result" の場合は MysqlResult となります)、
+        それに何らかのプレフィックスをつけてたとえば <classname>My_MysqlResult</classname>
+        のようになります。このクラスは <code>parse()</code> メソッドを実装しなければなりません。
+        このメソッドはリソースを引数として受け取り、ActionScript に送信する値を返します。
+        このクラスを記述するファイル名は、クラス名の最後の部分と同じ名前にしなければなりません。
+        たとえば先ほどの例の場合は MysqlResult.php となります。
+        </para>
+        
+        <para>
+        リソース用のプラグインを含むディレクトリは、Zend_Amf 型ローダーで登録しなければなりません。
+        <programlisting role="php"><![CDATA[
+Zend_Amf_Parse_TypeLoader::addResourceDirectory("My", "application/library/resources/My"));
+]]></programlisting>
+        </para>
+        
+        <para>プラグインのロードに関する詳細は、
+        <link end="zend.loader.pluginloader">プラグインローダー</link> を参照ください。
+        </para>
+        
+        <para>
+        <classname>Zend_Amf</classname> リソース用のデフォルトディレクトリは自動的に登録されており、
+       現在ここには "mysql result" リソースおよび "stream" リソースのプラグインが格納されています。
+        </para>
+        
+        <programlisting role="php"><![CDATA[
+// Example class implementing handling resources of type mysql result
+class Zend_Amf_Parse_Resource_MysqlResult 
+{
+    /**
+     * Parse resource into array
+     * 
+     * @param resource $resource
+     * @return array
+     */
+    public function parse($resource) {
+        $result = array();
+        while($row = mysql_fetch_assoc($resource)) {
+            $result[] = $row;
+        }
+        return $result;
+    }
+}
+]]></programlisting>
+
+	<para>
+	</para>
+	
+	<para>
+	未知のリソース型 (つまり、処理用プラグインが存在しない型)
+	を返そうとすると、例外が発生します。
+	</para>
+        
     </sect2>
 
     <sect2 id="zend.amf.server.flash">

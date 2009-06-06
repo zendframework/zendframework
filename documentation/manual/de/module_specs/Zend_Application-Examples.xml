@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15734 -->
+<!-- EN-Revision: 15823 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.application.examples">
     <title>Beispiele</title>
@@ -36,7 +36,7 @@ resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
         Code zu spezifizieren der für das Bootstrapping verwendet werden soll. Diese Methoden
         werden durch <methodname>bootstrap()</methodname> aufgerufen, und können genauso aufgerufen
         werden wie wenn Sie öffentliche Methoden wären:
-        <methodname>bootstrap&lt;resource&gt;()</methodname>. Sie sollten ein optionales Array an
+        <emphasis>bootstrap&lt;resource&gt;()</emphasis>. Sie sollten ein optionales Array an
         Optionen akzeptieren.
     </para>
 

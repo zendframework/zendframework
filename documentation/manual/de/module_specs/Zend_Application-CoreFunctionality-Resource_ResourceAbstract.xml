@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15734 -->
+<!-- EN-Revision: 15823 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.core-functionality.resource-resourceabstract">
     <title>Zend_Application_Resource_ResourceAbstract</title>
@@ -109,9 +109,10 @@
             Erstens kann man, wenn die Plugins mit einem definierten Präfix Pfad definiert wurden,
             einfach mit Ihrem "Kurz-Namen" auf die verweisen -- z.B. der Teil des Klassennamens
             der dem Klassen Präfix folgt. Als Beispiel kann auf die Klasse
-            "Zend_Application_Resource_View" einfach mit "View" verweist werden, da der Präfix
-            Pfad bereits registriert ist. Man kann Sie registrieren, indem der komplette
-            Klassenname oder der Kurzname verwendet wird:
+            "<classname>Zend_Application_Resource_View</classname>" einfach mit "View" verweist
+            werden, da der Präfix Pfad "<classname>Zend_Application_Resource</classname>" bereits
+            registriert ist. Man kann Sie registrieren, indem der komplette Klassenname oder der
+            Kurzname verwendet wird:
         </para>
 
         <programlisting language="php"><![CDATA[

@@ -1,26 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15734 -->
+<!-- EN-Revision: 15823 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.application.theory-of-operation">
     <title>Theorie der Funktionsweise</title>
 
     <para>
-        Um eine MVC Anwendung zu konfigurieren und bereit zur Auslieferung zu bekommen wird ein
-        immer größerer Anteil an Code benötigt sobald mehr Features verfügbar sind: Setzen der
-        Datenbank, Konfiguration der View und View Helfer, Konfiguration der Layouts, Registrierung
-        der Plugins, Registrierung der Aktion Helfer, und andere.
+        Um eine <acronym>MVC</acronym> Anwendung zu konfigurieren und bereit zur Auslieferung
+        zu bekommen wird ein immer größerer Anteil an Code benötigt sobald mehr Features verfügbar
+        sind: Setzen der Datenbank, Konfiguration der View und View Helfer, Konfiguration der
+        Layouts, Registrierung der Plugins, Registrierung der Aktion Helfer, und andere.
     </para>
 
     <para>
         Zusätzlich will man oft den gleichen Code wiederverwenden um Tests zu bootstrappen, einen
         Cronjob, oder ein Service Skript zu haben. Wärend es sehr einfach ist sein Bootstrap Skript
         einzubauen, gibt es oft Initialisierungen die abhängig sind von der Umgebung - man könnte
-        kein MVC für einen Cronjob benötigen, oder nur den DB Layer für ein Service Skript.
+        kein <acronym>MVC</acronym> für einen Cronjob benötigen, oder nur den DB Layer für ein
+        Service Skript.
     </para>
 
     <para>
         <classname>Zend_Application</classname> zielt darauf ab das alles einfacher zu machen und
-        bietet Wiederwervendbarkeit durch die Kapselung vom Bootstrapping in OOP Paradigmen.
+        bietet Wiederwervendbarkeit durch die Kapselung vom Bootstrapping in <acronym>OOP</acronym>
+        Paradigmen.
     </para>
 
     <para>
@@ -30,8 +32,9 @@
     <itemizedlist>
         <listitem>
             <para>
-                <classname>Zend_Application</classname>: Lädt die PHP Umgebung, inklusive
-                Inklude-Pfade und Autoloading, und instanziiert die benötigte Bootstrap Klasse.
+                <classname>Zend_Application</classname>: Lädt die <acronym>PHP</acronym> Umgebung,
+                inklusive Inklude-Pfade und Autoloading, und instanziiert die benötigte Bootstrap
+                Klasse.
             </para>
         </listitem>
         <listitem>
@@ -91,7 +94,7 @@
         </listitem>
         <listitem>
             <para>
-                Jede php.ini Einstellung die zu initialisieren ist
+                Jede <filename>php.ini</filename> Einstellung die zu initialisieren ist
             </para>
         </listitem>
         <listitem>
@@ -101,7 +104,7 @@
         </listitem>
         <listitem>
             <para>
-                Ressourcen Präfix/Pfad Paare die zu verwenden sind
+                Ressourcen Präfix zu Pfad Paare die zu verwenden sind
             </para>
         </listitem>
         <listitem>
@@ -133,7 +136,7 @@
             <classname>Zend_Application</classname>'s zweites Feld der Arbeit ist die Ausführung des
             Bootstraps der Anwendung. Bootstraps müssen mindestens
             <classname>Zend_Application_Bootstrap_Bootstrapper</classname> implementieren, welches
-            die folgende API definiert:
+            die folgende <acronym>API</acronym> definiert:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -151,9 +154,10 @@ interface Zend_Application_Bootstrap_Bootstrapper
 ]]></programlisting>
 
         <para>
-            Diese API erlaubt es dem Bootstrap die Umgebung und die Konfiguration vom Objekt der
-            Anwendung zu akzeptieren, die Ressourcen die für das Bootstrapping verantwortlich sind
-            zu melden, und dann das Bootstrappen ausführen und die Anwendung zu starten.
+            Diese <acronym>API</acronym> erlaubt es dem Bootstrap die Umgebung und die
+            Konfiguration vom Objekt der Anwendung zu akzeptieren, die Ressourcen die für das
+            Bootstrapping verantwortlich sind zu melden, und dann das Bootstrappen ausführen und
+            die Anwendung zu starten.
         </para>
 
         <para>
@@ -246,21 +250,20 @@ $bootstrap->bootstrap();
             <title>Bootstraps die Ressourcen Plugins benutzen</title>
 
             <para>
-                To make your bootstraps more re-usable, we have provided the
-                ability to push your resources into resource plugin classes.
-                This allows you to mix and match resources simply via
-                configuration. We will cover <link
-                    linkend="zend.application.theory-of-operation.resources">how
-                    to create resources</link> later; in
-                this section we will show you how to utilize them only.
+                Um Bootstraps wiederverwendbarer zu machen wurde die Fähigkeit zur Verfügung
+                gestellt Ressourcen in Ressource Plugin Klassen zu geben. Das erlaubt es Ressourcen
+                einfach über die Konfiguration zu mischen und zu sehen ob Sie passen. Wir behandeln
+                später <link linkend="zend.application.theory-of-operation.resources">wie
+                    Ressourcen erstellt werden</link>; in diesem Abschnitt zeigen wir nur wie Sie
+                angepasst werden können.
             </para>
 
             <para>
-                If your bootstrap should be capable of using resource plugins,
-                you will need to implement an additional interface,
-                <classname>Zend_Application_Bootstrap_ResourceBootstrapper</classname>.
-                This interface defines an API for locating, registering, and
-                loading resource plugins:
+                Wenn die Bootstrap dazu in der Lage sein soll Ressource Plugins zu verwenden muß
+                man ein zusätzliches Interface implementieren,
+                <classname>Zend_Application_Bootstrap_ResourceBootstrapper</classname>. Dieses
+                Interface definiert eine <acronym>API</acronym> für das Erkennen, Registrieren und
+                Laden von Ressource Plugins:
             </para>
 
         <programlisting language="php"><![CDATA[
@@ -278,30 +281,29 @@ interface Zend_Application_Bootstrap_ResourceBootstrapper
 ]]></programlisting>
 
             <para>
-                Resource plugins basically provide the ability to create
-                resource intializers that can be re-used between applications.
-                This allows you to keep your actual bootstrap relatively clean,
-                and to introduce new resources without needing to touch your
-                bootstrap itself.
+                Ressource Plugins bieten grundsätzlich die Fähigkeit Ressource Initialisierer zu
+                Erstellen die zwischen Anwendungen wiederverwendet werden können. Das erlaubt es
+                die aktuelle Bootstrap relativ klein zu halten, und neue Ressourcen einzuführen
+                ohne Sie in der Bootstrap selbst anzugreifen.
             </para>
 
             <para>
-                <classname>Zend_Application_Bootstrap_BootstrapAbstract</classname> (and
-                <classname>Zend_Application_Bootstrap_Bootstrap</classname> by extension)
-                implement this interface as well, allowing you to utilize
-                resource plugins.
+                <classname>Zend_Application_Bootstrap_BootstrapAbstract</classname> (und bei
+                Erweiterung <classname>Zend_Application_Bootstrap_Bootstrap</classname>)
+                implementiert dieses Interface genauso, und erlaubt es Ressource Plugins zu
+                verwenden.
             </para>
 
             <para>
                 To utilize resource plugins, you must specify them in the
                 options passed to the application object and/or bootstrap. These
                 options may come from a configuration file, or be passed in
-                manually. Options will be of key/options pairs, with the key
+                manually. Options will be of key to options pairs, with the key
                 representing the resource name. The resource name will be the
                 segment following the class prefix. For example, the resources
                 shipped with Zend Framework have the class prefix
-                "Zend_Application_Resource_"; anything following this would be
-                the name of the resource. As an example,
+                "<classname>Zend_Application_Resource_</classname>"; anything following this would
+                be the name of the resource. As an example,
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -435,7 +437,7 @@ if (isset($container->view)) {
 ]]></programlisting>
 
             <para>
-                Please note that the registry/container is not global. This
+                Please note that the registry and also the container is not global. This
                 means that you need access to the bootstrap in order to fetch
                 resources. <classname>Zend_Application_Bootstrap_Bootstrap</classname>
                 provides some convenience for this: during its
@@ -525,9 +527,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         <title>Resource Plugins</title>
 
         <para>
-            <link linkend="zend.application.theory-of-operation.bootstrap.resource-plugins">As noted
-                previously</link>, a good way to create re-usable bootstrap resources and to offload
-            much of your coding to discrete classes is to utilize resource
+            <link
+                linkend="zend.application.theory-of-operation.bootstrap.resource-plugins">As noted
+                previously</link>, a good way to create re-usable bootstrap resources and to
+            offload much of your coding to discrete classes is to utilize resource
             plugins. While Zend Framework ships with a number of standard
             resource plugins, the intention is that developers should write
             their own to encapsulate their own intialization needs.
@@ -564,7 +567,7 @@ interface Zend_Application_Resource_Resource
 
         <para>
             As an example, let's assume you have a common view intialization you
-            use in your applications. You have a common doctype, CSS and
+            use in your applications. You have a common doctype, <acronym>CSS</acronym> and
             JavaScript, and you want to be able to pass in a base document title
             via configuration. Such a resource might look like this:
         </para>

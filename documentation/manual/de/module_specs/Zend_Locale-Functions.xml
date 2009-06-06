@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15742 -->
+<!-- EN-Revision: 15819 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.functions">
 
@@ -774,6 +774,14 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             ersetzen
                         </entry>
                     </row>
+                    <row>
+                        <entry><emphasis>LocaleUpgrade</emphasis></entry>
+                        <entry>
+                            Gibt eine Liste von Abhängigkeiten von Gebietsschemata zurück die
+                            verwendet werden kann um eine Sprache in ein voll qualifiziertes
+                            Gebietsschema hochzurüsten.
+                        </entry>
+                    </row>
                 </tbody>
             </tgroup>
         </table>
@@ -1330,6 +1338,14 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry>
                             Gibt ein Unicode Zeichen für ein oft verwendetes Ersatzzeichen zurück.
                             Das kann verwendet werden um zum Beispiel "(C)" mit "©" zu ersetzen
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>LocaleUpgrade</emphasis></entry>
+                        <entry>
+                            Gibt die Abhängigkeit eines Gebietsschemas zurück die
+                            verwendet werden kann um eine Sprache in ein voll qualifiziertes
+                            Gebietsschema hochzurüsten.
                         </entry>
                     </row>
                 </tbody>

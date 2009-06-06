@@ -32,6 +32,7 @@ require_once 'Zend/Validate/Abstract.php';
  */
 class Zend_Validate_StringLength extends Zend_Validate_Abstract
 {
+    const INVALID   = 'stringLengthInvalid';
     const TOO_SHORT = 'stringLengthTooShort';
     const TOO_LONG  = 'stringLengthTooLong';
 
@@ -39,6 +40,7 @@ class Zend_Validate_StringLength extends Zend_Validate_Abstract
      * @var array
      */
     protected $_messageTemplates = array(
+        self::INVALID   => "Invalid type given, value should be a string",
         self::TOO_SHORT => "'%value%' is less than %min% characters long",
         self::TOO_LONG  => "'%value%' is greater than %max% characters long"
     );
@@ -198,12 +200,16 @@ class Zend_Validate_StringLength extends Zend_Validate_Abstract
      */
     public function isValid($value)
     {
-        $valueString = (string) $value;
-        $this->_setValue($valueString);
+        if (!is_string($value)) {
+            $this->_error(self::INVALID);
+            return false;
+        }
+
+        $this->_setValue($value);
         if ($this->_encoding !== null) {
-            $length = iconv_strlen($valueString, $this->_encoding);
+            $length = iconv_strlen($value, $this->_encoding);
         } else {
-            $length = iconv_strlen($valueString);
+            $length = iconv_strlen($value);
         }
 
         if ($length < $this->_min) {

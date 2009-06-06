@@ -173,4 +173,12 @@ class Zend_Validate_StringLengthTest extends PHPUnit_Framework_TestCase
         $validator->setEncoding('ISO-8859-1');
         $this->assertEquals('ISO-8859-1', $validator->getEncoding());
     }
+
+    /**
+     * @ZF-4352
+     */
+    public function testNonStringValidation()
+    {
+        $this->assertFalse($this->_validator->isValid(array(1 => 1)));
+    }
 }

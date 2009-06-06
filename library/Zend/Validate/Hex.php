@@ -35,9 +35,7 @@ require_once 'Zend/Validate/Abstract.php';
  */
 class Zend_Validate_Hex extends Zend_Validate_Abstract
 {
-    /**
-     * Validation failure message key for when the value contains characters other than hexadecimal digits
-     */
+    const INVALID = 'hexInvalid';
     const NOT_HEX = 'notHex';
 
     /**
@@ -46,6 +44,7 @@ class Zend_Validate_Hex extends Zend_Validate_Abstract
      * @var array
      */
     protected $_messageTemplates = array(
+        self::INVALID => "Invalid type given, value should be a string",
         self::NOT_HEX => "'%value%' has not only hexadecimal digit characters"
     );
 
@@ -59,11 +58,13 @@ class Zend_Validate_Hex extends Zend_Validate_Abstract
      */
     public function isValid($value)
     {
-        $valueString = (string) $value;
+        if (!is_string($value) && !is_int($value)) {
+            $this->_error(self::INVALID);
+            return false;
+        }
 
-        $this->_setValue($valueString);
-
-        if (!ctype_xdigit($valueString)) {
+        $this->_setValue($value);
+        if (!ctype_xdigit((string) $value)) {
             $this->_error();
             return false;
         }

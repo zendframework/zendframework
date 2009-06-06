@@ -106,4 +106,12 @@ class Zend_Validate_IntTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(false, $this->_validator->isValid('10 000'));
         $this->assertEquals(true, $this->_validator->isValid('10.000'));
     }
+
+    /**
+     * @ZF-4352
+     */
+    public function testNonStringValidation()
+    {
+        $this->assertFalse($this->_validator->isValid(array(1 => 1)));
+    }
 }

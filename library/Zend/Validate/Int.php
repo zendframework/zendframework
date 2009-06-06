@@ -37,12 +37,14 @@ require_once 'Zend/Locale/Format.php';
  */
 class Zend_Validate_Int extends Zend_Validate_Abstract
 {
+    const INVALID = 'intInvalid';
     const NOT_INT = 'notInt';
 
     /**
      * @var array
      */
     protected $_messageTemplates = array(
+        self::INVALID   => "Invalid type given, value should be a string or a integer",
         self::NOT_INT => "'%value%' does not appear to be an integer"
     );
 
@@ -83,18 +85,17 @@ class Zend_Validate_Int extends Zend_Validate_Abstract
      *
      * Returns true if and only if $value is a valid integer
      *
-     * @param  string $value
+     * @param  string|integer $value
      * @return boolean
      */
     public function isValid($value)
     {
-        $valueString = (string) $value;
-        $this->_setValue($valueString);
-        if (is_bool($value)) {
-            $this->_error();
+        if (!is_string($value) && !is_int($value) && !is_float($value)) {
+            $this->_error(self::INVALID);
             return false;
         }
 
+        $this->_setValue($value);
         try {
             if (!Zend_Locale_Format::isInteger($value, array('locale' => $this->_locale))) {
                 $this->_error();

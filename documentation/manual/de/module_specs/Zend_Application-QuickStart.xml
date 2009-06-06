@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15734 -->
+<!-- EN-Revision: 15814 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.application.quick-start">
     <title>Zend_Application Quick Start</title>
@@ -191,10 +191,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         <para>
             Jetzt die Konfiguration erstellen. Für dieses Tutorial, verwenden wir eine
-            Konfiguration im INI Stil; man kann natürlich genauso eine XML oder PHP
-            Konfigurationsdatei verwenden. Erstelle eine Datei
-            <filename>application/configs/application.ini</filename>, und füge den folgenden Inhalt
-            ein:
+            Konfiguration im <acronym>INI</acronym> Stil; man kann natürlich genauso eine
+            <acronym>XML</acronym> oder <acronym>PHP</acronym> Konfigurationsdatei verwenden.
+            Erstelle eine Datei <filename>application/configs/application.ini</filename>, und füge
+            den folgenden Inhalt ein:
         </para>
 
         <programlisting language="dosini"><![CDATA[
@@ -369,9 +369,10 @@ phpSettings.display_errors = 1
 
         <para>
             Jetzt fügen wir eine eigene View Ressource hinzu. Wenn die View initialisiert wird,
-            will man den HTML DocType und einen Standardwert für den im HTML Kopf zu verwendenden
-            Titel setzen. Das kann durch die Änderung der <emphasis>Bootstrap</emphasis> Klasse und
-            dem Hinzufügen einer Methode gemacht werden:
+            will man den <acronym>HTML</acronym> DocType und einen Standardwert für den im
+            <acronym>HTML</acronym> Kopf zu verwendenden Titel setzen. Das kann durch die Änderung
+            der <emphasis>Bootstrap</emphasis> Klasse und dem Hinzufügen einer Methode gemacht
+            werden:
         </para>
 
         <programlisting language="php"><![CDATA[

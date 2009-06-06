@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15786 -->
+<!-- EN-Revision: 15814 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.amf.server">
     <title>Zend_Amf_Server</title>
@@ -140,16 +140,16 @@ class World
 
         <para>
             Zum eigenen <classname>Zend_Amf_Server</classname> von einem Flex Projekt aus zu
-            verbinden ist recht einfach; man muß zur Endpunkt URI des
+            verbinden ist recht einfach; man muß zur Endpunkt <acronym>URI</acronym> des
             <classname>Zend_Amf_Server</classname> Sripts zeigen.
         </para>
 
         <para>
             Nehmen wir zum Beispiel an das man einen Server erstellt hat und Ihn in der
-            <filename>server.php</filename> Datei im Anwendungsroot platziert, und die URI deswegen
-            <filename>http://example.com/server.php</filename> ist. In diesem Fall würde man die
-            <filename>services-config.xml</filename> Datei so modifizieren das das channel
-            endpoint URI Attribut auf diesen Wert gesetzt ist.
+            <filename>server.php</filename> Datei im Anwendungsroot platziert, und die
+            <acronym>URI</acronym> deswegen <filename>http://example.com/server.php</filename> ist.
+            In diesem Fall würde man die <filename>services-config.xml</filename> Datei so
+            modifizieren das das channel endpoint uri Attribut auf diesen Wert gesetzt ist.
         </para>
 
         <para>

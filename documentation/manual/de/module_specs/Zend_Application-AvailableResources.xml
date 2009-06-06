@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15814 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.application.available-resources" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Vorhandene Ressource Plugins</title>
 
     <para>
-        Hier kann man API-artige Dokumentation über alle Ressource Plugins finden die
-        standardmäßig in <classname>Zend_Application</classname> vorhanden sind.
+        Hier kann man <acronym>API</acronym>-artige Dokumentation über alle Ressource Plugins
+        finden die standardmäßig in <classname>Zend_Application</classname> vorhanden sind.
     </para>
 
     <xi:include href="Zend_Application-AvailableResources-Db.xml" />

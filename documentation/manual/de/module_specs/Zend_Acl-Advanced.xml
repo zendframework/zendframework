@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15783 -->
+<!-- EN-Revision: 15814 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.acl.advanced">
 
@@ -96,10 +96,11 @@ $acl->allow(null, null, null, new CleanIPAssertion());
         </para>
 
         <para>
-            Der <methodname>assert()</methodname> Methode eines Behauptungsobjektes werden die ACL,
-            Rolle, Ressource and die Rechte übergeben, auf welche die Autorisierungsabfrage (d.h.,
-            <methodname>isAllowed()</methodname>) passt, um den Kontext für die Behauptungsklasse
-            bereit zu stellen, um die Bedingungen zu ermitteln wo erforderlich.
+            Der <methodname>assert()</methodname> Methode eines Behauptungsobjektes werden die
+            <acronym>ACL</acronym>, Rolle, Ressource and die Rechte übergeben, auf welche die
+            Autorisierungsabfrage (d.h., <methodname>isAllowed()</methodname>) passt, um den
+            Kontext für die Behauptungsklasse bereit zu stellen, um die Bedingungen zu ermitteln wo
+            erforderlich.
         </para>
 
     </sect2>

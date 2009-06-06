@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15814 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.application.introduction">
     <title>Einführung</title>
 
     <para>
         <classname>Zend_Application</classname> bietet eine Möglichkeit des Bootstrappings für
-        Anwendungen für wiederverwendbare Ressourcen, Normal- und Modul-basierende Bootstrap Klassen
-        und der Prüfung deren Abhängigkeit. Es nimmt auch auf die Einstellungen im PHP Environment
-        acht und führt standardmäßig Autoloading durch.
+        Anwendungen für wiederverwendbare Ressourcen, Normal- und Modul-basierende Bootstrap
+        Klassen und der Prüfung deren Abhängigkeit. Es nimmt auch auf die Einstellungen im
+        <acronym>PHP</acronym> Environment acht und führt standardmäßig Autoloading durch.
     </para>
 </sect1>

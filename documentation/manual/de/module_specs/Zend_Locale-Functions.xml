@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15831 -->
+<!-- EN-Revision: 15855 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.functions">
 
@@ -479,6 +479,16 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry>
                             Gibt eine Liste von Standardformaten für gegebene Datums oder Zeit
                             Einheiten zurück
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>DateInterval</emphasis></entry>
+                        <entry>
+                            Gibt eine Liste von Datums- oder Zeitformaten zurück die verwendet
+                            werden wenn man Intervalle darstellen will. Die Liste ist ein
+                            mehrdimentionales Array wobei die erste Dimension das Format des
+                            Intervalls und die zweite Dimension das Token mit der größten
+                            Differenz ist.
                         </entry>
                     </row>
                     <row>
@@ -1052,6 +1062,17 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry>
                             Gibt das Standardformat für ein angegebenes Datum oder Zeitelement
                             zurück
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>DateInterval</emphasis></entry>
+                        <entry>
+                            Gibt das Intervallformat für ein gegebenes Datums- oder Zeitformat
+                            zurück. Der erste Wert ist das Kalenderformat, normalerweise
+                            'gregorian'. Der zweite Wert ist das Intervallformat, und der dritte
+                            Wert ist das Token mit der größten Different. Zum Beispiel:
+                            array('gregorian', 'yMMMM', 'y') gibt das Intervallformat für das
+                            Datumsformat 'yMMMM' zurück, wobei 'y' die größte Differenz hat.
                         </entry>
                     </row>
                     <row>

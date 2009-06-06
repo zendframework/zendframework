@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15846 -->
+<!-- EN-Revision: 15860 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.auth.adapter.digest">
 
@@ -11,8 +11,9 @@
 
         <para>
             <ulink url="http://en.wikipedia.org/wiki/Digest_access_authentication">Digest
-                Authentifizierung</ulink> ist eine Methode der HTTP Authentifizierung die die
-            <ulink url="http://en.wikipedia.org/wiki/Basic_authentication_scheme">Basis
+                Authentifizierung</ulink> ist eine Methode der <acronym>HTTP</acronym>
+            Authentifizierung die die <ulink
+                url="http://en.wikipedia.org/wiki/Basic_authentication_scheme">Basis
                 Authentifizierung</ulink> verbessert indem ein Weg angeboten wird um
             Authentifizierungen, ohne die Übermittlung des Passwortes als Klartext über das
             Netzwerk, durchzuführen.
@@ -21,23 +22,28 @@
         <para>
             Dieser Adapter erlaubt Authentifizierungen gegen Textdateien die Zeilen enthalten die
             folgende Basiselemente der Digest Authentifizierung enthalten:
-            <itemizedlist>
-                <listitem>
-                    <para>
-                        Benutzername, wie z.B. "<emphasis>joe.user</emphasis>"
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        Bereich, wie z.B. "<emphasis>Administrativer Bereich</emphasis>"
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        MD5 Hash von Benutzername, Bereich und Passwort, getrennt durch Doppelpunkte
-                    </para>
-                </listitem>
-            </itemizedlist>
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    Benutzername, wie z.B. "<emphasis><filename>joe.user</filename></emphasis>"
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Bereich, wie z.B. "<emphasis>Administrativer Bereich</emphasis>"
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <acronym>MD5</acronym> Hash von Benutzername, Bereich und Passwort, getrennt
+                    durch Doppelpunkte
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
             Die obigen Elemente werden durch Doppelpunkte getrennt, wie im folgenden Beispiel (in
             dem das Passwort "<emphasis>irgendeinPasswort</emphasis>" ist):
         </para>
@@ -55,29 +61,33 @@ irgendeinBenutzer:Irgendein Bereich:fde17b91c3a510ecbaf7dbd37f59d4f8
         <para>
             Der Digest Authentifizierungs Adapter, <classname>Zend_Auth_Adapter_Digest</classname>,
             benötigt verschiedene Eingabeparameter:
-            <itemizedlist>
-                <listitem>
-                    <para>
-                        filename - Der Dateiename gegen den Authentifizierungs-Anfragen durchgeführt
-                        werden
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        realm - Digest Authentifizierungs Bereich
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        username - Digest Authentifizierungs Benutzer
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        password - Passwort für den Benutzer des Bereichs
-                    </para>
-                </listitem>
-            </itemizedlist>
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    filename - Der Dateiename gegen den Authentifizierungs-Anfragen durchgeführt
+                    werden
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    realm - Digest Authentifizierungs Bereich
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    username - Digest Authentifizierungs Benutzer
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    password - Passwort für den Benutzer des Bereichs
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
             Diese Parameter müssen vor dem Aufruf von <methodname>authenticate()</methodname>
             gesetzt werden.
         </para>

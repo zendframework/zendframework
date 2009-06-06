@@ -94,7 +94,11 @@ class Zend_Validate_BarcodeTest extends PHPUnit_Framework_TestCase
     public function testNonStringValidation()
     {
         $barcode = new Zend_Validate_Barcode('upc-a');
-        $this->assertFalse($barcode->isValid(123.40));
+        $this->assertFalse($barcode->isValid(106510000.4327));
+        $this->assertFalse($barcode->isValid(array('065100004327')));
+
+        $barcode = new Zend_Validate_Barcode('ean-13');
+        $this->assertFalse($barcode->isValid(06510000.4327));
         $this->assertFalse($barcode->isValid(array('065100004327')));
     }
 }

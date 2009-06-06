@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15827 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.config.introduction">
     <title>Einleitung</title>
@@ -62,8 +62,8 @@ $db = Zend_Db::factory($config->database);
     </para>
     <para>
         Zusätzlich zum objektorientierten Zugriff auf die Daten Werte hat
-        <classname>Zend_Config</classname> <code>get()</code> welches den unterstützten Standardwert
-        zurückgibt wenn das Daten Element nicht existiert. Zum Beispiel:
+        <classname>Zend_Config</classname> <methodname>get()</methodname> welches den unterstützten
+        Standardwert zurückgibt wenn das Daten Element nicht existiert. Zum Beispiel:
     </para>
     <programlisting language="php"><![CDATA[
 $host = $config->database->get('host', 'localhost');

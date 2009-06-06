@@ -1,35 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15743 -->
+<!-- EN-Revision: 15827 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.config.adapters.ini">
     <title>Zend_Config_Ini</title>
     <para>
         <classname>Zend_Config_Ini</classname> ermöglicht es Entwicklern, Konfigurations-Daten in
         einem vertrauten INI-Format zu speichern und sie mit einer Syntax auszulesen, die dem
-        Zugriff auf die Eigenschaften verschachtelter Objekte entspricht. Das verwendete INI-Format
-        bietet einerseits die Möglichkeit, Konfigurations-Daten hierarchisch abzulegen und
-        andererseits Vererbung zwischen Sektionen zu spezifizieren. Konfigurations-Daten-Hierarchien
-        werden durch das Trennen der Schlüsselwörter durch einen Punkt (<code>.</code>). Eine
-        Sektion kann eine andere Sektion erweitern oder beerben indem man nach dem Sektionsname
-        einen Doppelpunkt (<code>:</code>) notiert, gefolgt vom Namen der zu beerbenden Sektion.
+        Zugriff auf die Eigenschaften verschachtelter Objekte entspricht. Das verwendete
+        INI-Format bietet einerseits die Möglichkeit, Konfigurations-Daten hierarchisch abzulegen
+        und andererseits Vererbung zwischen Sektionen zu spezifizieren.
+        Konfigurations-Daten-Hierarchien werden durch das Trennen der Schlüsselwörter durch einen
+        Punkt (<emphasis>.</emphasis>). Eine Sektion kann eine andere Sektion erweitern oder
+        beerben indem man nach dem Sektionsname einen Doppelpunkt (<emphasis>:</emphasis>) notiert,
+        gefolgt vom Namen der zu beerbenden Sektion.
     </para>
     <note>
         <title>Die Ini Datei parsen</title>
         <para>
-            <classname>Zend_Config_Ini</classname> verwendet die PHP-Funktion
-            <ulink url="http://php.net/parse_ini_file"><code>parse_ini_file()</code></ulink>. Deren
-            Dokumentation klärt über spezielle Verhaltensweisen auf, die sich auch auf
+            <classname>Zend_Config_Ini</classname> verwendet die PHP-Funktion <ulink
+                url="http://php.net/parse_ini_file"><methodname>parse_ini_file()</methodname></ulink>.
+            Deren Dokumentation klärt über spezielle Verhaltensweisen auf, die sich auch auf
             <classname>Zend_Config_Ini</classname> auswirken, z. B. wie die besonderen Werte
-            <constant>TRUE</constant>, <constant>FALSE</constant>, <code>yes</code>, <code>no</code> und
-            <constant>NULL</constant> gehandhabt werden.
+            "<constant>TRUE</constant>", "<constant>FALSE</constant>", "yes", "no" und
+            "<constant>NULL</constant>" gehandhabt werden.
         </para>
     </note>
     <note>
         <title>Schlüssel Trenner</title>
         <para>
-            Standardmäßig ist das Schlüssel Trennzeichen der Punkt (<code>.</code>). Dies kann
-            geändert werden, indem der <varname>$options</varname> Schlüssel
-            <code>'nestSeparator'</code> geändert wird, wenn das
+            Standardmäßig ist das Schlüssel Trennzeichen der Punkt (<emphasis>.</emphasis>). Dies
+            kann geändert werden, indem der <varname>$options</varname> Schlüssel
+            <emphasis>'nestSeparator'</emphasis> geändert wird, wenn das
             <classname>Zend_Config_Ini</classname> Objekt instanziert wird.
             Zum Beispiel:
             <programlisting language="php"><![CDATA[
@@ -51,7 +52,7 @@ $config = new Zend_Config_Ini('/path/to/config.ini',
             diesem Fall ist die Entscheidung darüber, welche Sektion von welcher erben soll,
             willkürlich und es könnte auch anders herum gemacht werden. In komplexeren Fällen ist
             das möglicherweise nicht der Fall. Nehmen wir also an, dass sich die folgenden
-            Konfigurations-Daten in der Datei <code>/path/to/config.ini</code> befinden:
+            Konfigurations-Daten in der Datei <filename>/path/to/config.ini</filename> befinden:
         </para>
         <programlisting language="ini"><![CDATA[
 ; Konfigurations-Daten für die Produktiv-Site

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15827 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.config.adapters.xml">
     <title>Zend_Config_Xml</title>
@@ -12,8 +12,8 @@
         können im XLM-Format durch Verschachteln von XML-Elementen unterhalb der Sektions-Ebene
         umgesetzt werden. Der Inhalt eines XML-Blatt-Elementes (Leaf) ist der Wert eines
         Konfigurations-Eintrages. Die Sektions-Vererbung wird durch ein spezielles Attribut namens
-        <code>extends</code> unterstützt, der Wert des Attributs entspricht dabei dem Namen der
-        Sektion, von der Daten geerbt werden sollen.
+        <emphasis>extends</emphasis> unterstützt, der Wert des Attributs entspricht dabei dem Namen
+        der Sektion, von der Daten geerbt werden sollen.
     </para>
     <note>
         <title>Rückgabe Typen</title>
@@ -34,7 +34,7 @@
             diesem Fall ist die Entscheidung darüber, welche Sektion von welcher erben soll,
             willkürlich und es könnte auch anders herum gemacht werden. In komplexeren Fällen ist
             das möglicherweise nicht der Fall. Nehmen wir also an, dass sich die folgenden
-            Konfigurations-Daten in der Datei <code>/path/to/config.xml</code> befinden:
+            Konfigurations-Daten in der Datei <filename>/path/to/config.xml</filename> befinden:
         </para>
         <programlisting language="xml"><![CDATA[
 <?xml version="1.0"?>
@@ -79,10 +79,11 @@ echo $config->database->params->dbname; // ausgabe "dbname"
         <para>
             <classname>Zend_Config_Xml</classname> unterstützt auch zwei zusätzliche Wege der
             Definition von Knoten in der Konfiguration. Beide verwenden Attribute. Da die
-            <code>extends</code> und <code>value</code> Attribute reservierte Schlüsselwörter sind
-            (das letztere durch den zweiten Weg der Verwendung von Attributen), können sie nicht
-            verwendet werden. Der erste Weg Attribute zu verwenden ist das hinzufügen von Attributen
-            zum Elternknoten, welcher dann in einen Kindknoten dieses Knotens übersetzt wird:
+            <emphasis>extends</emphasis> und <emphasis>value</emphasis> Attribute reservierte
+            Schlüsselwörter sind (das letztere durch den zweiten Weg der Verwendung von
+            Attributen), können sie nicht verwendet werden. Der erste Weg Attribute zu
+            verwenden ist das hinzufügen von Attributen zum Elternknoten, welcher dann in einen
+            Kindknoten dieses Knotens übersetzt wird:
         </para>
         <programlisting language="xml"><![CDATA[
 <?xml version="1.0"?>
@@ -102,7 +103,7 @@ echo $config->database->params->dbname; // ausgabe "dbname"
         <para>
             Der andere Weg verkürzt die Konfiguration nicht wirklich, macht es aber einfacher in der
             Handhabung das der Tag-Name nicht zweimal geschrieben werden muß. Man erstellt einfach
-            einen leeren Tag, welcher seinen Wert im <code>value</code> Attribut enthält:
+            einen leeren Tag, welcher seinen Wert im <emphasis>value</emphasis> Attribut enthält:
         </para>
         <programlisting language="xml"><![CDATA[
 <?xml version="1.0"?>
@@ -136,7 +137,7 @@ echo $config->database->params->dbname; // ausgabe "dbname"
         <para>
             <classname>Zend_Config_Xml</classname> ist dazu in der Lage XML Strings direkt zu laden,
             wie z.B. deren Empfang von einer Datenbank. Der String wird als erster Parameter an den
-            Konstruktor übergeben und muß mit den Zeichen <code>'&lt;?xml'</code> beginnen:
+            Konstruktor übergeben und muß mit den Zeichen <emphasis>'&lt;?xml'</emphasis> beginnen:
         </para>
         <programlisting language="xml"><![CDATA[
 $string = <<<EOT

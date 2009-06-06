@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15819 -->
+<!-- EN-Revision: 15831 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.functions">
 
@@ -472,6 +472,13 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             man erhalten indem der gewünschte Kalender als String übergeben wird.
                             Der Einfachheit halber sollte <link
                                 linkend="zend.date.introduction">Zend_Date</link> verwendet werden
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>DateItem</emphasis></entry>
+                        <entry>
+                            Gibt eine Liste von Standardformaten für gegebene Datums oder Zeit
+                            Einheiten zurück
                         </entry>
                     </row>
                     <row>
@@ -1038,6 +1045,13 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             wird der 'gregorian' (Gregorianische) Kalender verwendet. Der
                             Einfachheit halber sollte <link
                                 linkend="zend.date.introduction">Zend_Date</link> verwendet werden
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>DateItem</emphasis></entry>
+                        <entry>
+                            Gibt das Standardformat für ein angegebenes Datum oder Zeitelement
+                            zurück
                         </entry>
                     </row>
                     <row>

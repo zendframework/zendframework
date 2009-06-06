@@ -149,6 +149,7 @@ class World
             case, you would modify your <filename>services-config.xml</filename> file to set the
             channel endpoint uri attribute to this value.
         </para>
+
         <para>
             If you have never created a <filename>service-config.xml</filename> file you can do so
             by opening your project in your Navigator window. Right click on the project name and
@@ -156,6 +157,7 @@ class World
             'Library path' tab and be sure the '<filename>rpc.swc</filename>' file is added to your
             projects path and Press Ok to close the window.
         </para>
+
         <para>
             You will also need to tell the compiler to use the
             <filename>service-config.xml</filename> to find the RemoteObject endpoint. To do this
@@ -166,6 +168,7 @@ class World
             to the <filename>services-config.xml</filename> file for runtime variables that will be
             used by the RemotingObject class.
         </para>
+
         <para>
             We now need to tell Flex which services configuration file to use for connecting to
             our remote methods. For this reason create a new 'services-config.xml' file into your
@@ -173,6 +176,7 @@ class World
             'new' 'File' which will popup a new window. Select the project folder and then name
             the file 'services-config.xml' and press finish.
         </para>
+
         <para>
             Flex has created the new <filename>services-config.xml</filename> and has it open. Use
             the following example text for your <filename>services-config.xml</filename> file. Make
@@ -414,11 +418,13 @@ class Contact
             Although we have created the ContactVO on the server we now need to make its
             corresponding class in <acronym>AS3</acronym> for the server object to be mapped to.
         </para>
+
         <para>
             Right click on the src folder of the Flex project and select New -> ActionScript
             File. Name the file ContactVO and press finish to see the new file. Copy the
             following code into the file to finish creating the class.
         </para>
+
         <programlisting language="as"><![CDATA[
 package
 {
@@ -436,6 +442,7 @@ package
     }
 }
 ]]></programlisting>
+
         <para>
             The class is syntactically equivalent to the <acronym>PHP</acronym> of the same name.
             The variable names are exactly the same and need to be in the same case
@@ -446,6 +453,7 @@ package
             <emphasis>ContactVO</emphasis>. It is mandatory that this tag the value that was set
             is the <acronym>PHP</acronym> class are strictly equivalent.
         </para>
+
         <programlisting language="as"><![CDATA[
 [Bindable]
 private var myContact:ContactVO;
@@ -454,6 +462,7 @@ private function getContactHandler(event:ResultEvent):void {
     myContact = ContactVO(event.result);
 }
 ]]></programlisting>
+
         <para>
             The following result event from the service call is cast instantly onto the Flex
             ContactVO. Anything that is bound to myContact will be updated with the returned
@@ -463,45 +472,48 @@ private function getContactHandler(event:ResultEvent):void {
 
     <sect2 id="zend.amf.server.resources">
         <title>Resources</title>
-        
-        <para><classname>Zend_Amf</classname> provides tools for mapping resource types
-        	returned by service classes into data consumable by ActionScript.
-        </para>
-        
+
         <para>
-        In order to handle specific resource type, the user needs to create a plugin class named 
-        after the resource name, with words capitalized and spaces removed (so, resource
-        type "mysql result" becomes MysqlResult), with some prefix, e.g. <classname>My_MysqlResult</classname>. 
-        This class should implement one method,  <code>parse()</code>, receiving one argument
-         - the resource - and returning the value that should be sent to ActionScript. 
-         The class should be located in the file named after the last component of the name,
-         e.g. MysqlResult.php. 
+            <classname>Zend_Amf</classname> provides tools for mapping resource types
+            returned by service classes into data consumable by ActionScript.
         </para>
-        
+
         <para>
-        The directory containing the resource handling plugins should be registered with Zend_Amf
-        type loader:
+            In order to handle specific resource type, the user needs to create a plugin class named
+            after the resource name, with words capitalized and spaces removed (so, resource
+            type "mysql result" becomes MysqlResult), with some prefix, e.g.
+            <classname>My_MysqlResult</classname>. This class should implement one method,
+            <code>parse()</code>, receiving one argument - the resource - and returning the value
+            that should be sent to ActionScript. The class should be located in the file named after
+            the last component of the name, e.g. MysqlResult.php.
+        </para>
+
+        <para>
+            The directory containing the resource handling plugins should be registered with
+            Zend_Amf type loader:
+        </para>
+
         <programlisting role="php"><![CDATA[
 Zend_Amf_Parse_TypeLoader::addResourceDirectory("My", "application/library/resources/My"));
 ]]></programlisting>
-        </para>
-        
-        <para>For detailed discussion of loading plugins, please see 
-        the <link end="zend.loader.pluginloader">plugin loader</link> section.
-        </para>
-        
+
         <para>
-        Default directory for <classname>Zend_Amf</classname> resources is registered automatically 
-        and currently contains handlers for "mysql result" and "stream" resources.   
+            For detailed discussion of loading plugins, please see
+            the <link end="zend.loader.pluginloader">plugin loader</link> section.
         </para>
-        
+
+        <para>
+            Default directory for <classname>Zend_Amf</classname> resources is registered automatically
+            and currently contains handlers for "mysql result" and "stream" resources.
+        </para>
+
         <programlisting role="php"><![CDATA[
 // Example class implementing handling resources of type mysql result
-class Zend_Amf_Parse_Resource_MysqlResult 
+class Zend_Amf_Parse_Resource_MysqlResult
 {
     /**
      * Parse resource into array
-     * 
+     *
      * @param resource $resource
      * @return array
      */
@@ -515,14 +527,11 @@ class Zend_Amf_Parse_Resource_MysqlResult
 }
 ]]></programlisting>
 
-	<para>
-	</para>
-	
-	<para>
-	Trying to return unknown resource type (i.e., one for which no handler plugin exists) 
-	will result in an exception.
-	</para>
-        
+        <para>
+            Trying to return unknown resource type (i.e., one for which no handler plugin exists)
+            will result in an exception.
+        </para>
+
     </sect2>
 
     <sect2 id="zend.amf.server.flash">
@@ -536,6 +545,7 @@ class Zend_Amf_Parse_Resource_MysqlResult
             <classname>Zend_Amf_Server</classname> configuration along with the World class for our
             connection.
         </para>
+
         <para>
             Open Flash CS and create and new Flash File (ActionScript 3). Name the document
             <filename>ZendExample.fla</filename> and save the document into a folder that you will
@@ -548,11 +558,13 @@ class Zend_Amf_Parse_Resource_MysqlResult
             <filename>Main.as</filename> class will now be run. Next we will add ActionScript to
             make the <acronym>AMF</acronym> call.
         </para>
+
         <para>
             We now are going to make a Main class so that we can send the data to the server and
             display the result. Copy the following code into your <filename>Main.as</filename> file
             and then we will walk through the code to describe what each element's role is.
         </para>
+
         <programlisting language="as"><![CDATA[
 package {
   import flash.display.MovieClip;
@@ -593,62 +605,74 @@ package {
             the server. The second is a Responder object which handles the return values from the
             server related to the success or failure of the call.
         </para>
+
         <programlisting language="as"><![CDATA[
 import flash.net.NetConnection;
 import flash.net.Responder;
 ]]></programlisting>
+
         <para>
             In the class we need three variables to represent the NetConnection, Responder, and
             the gateway <acronym>URL</acronym> to our <classname>Zend_Amf_Server</classname>
             installation.
         </para>
+
         <programlisting language="as"><![CDATA[
 private var gateway:String = "http://example.com/server.php";
 private var connection:NetConnection;
 private var responder:Responder;
 ]]></programlisting>
+
         <para>
             In the Main constructor we create a responder and a new connection to the
             <classname>Zend_Amf_Server</classname> endpoint. The responder defines two different
             methods for handling the response from the server. For simplicity I have called these
             onResult and onFault.
         </para>
+
         <programlisting language="as"><![CDATA[
 responder = new Responder(onResult, onFault);
 connection = new NetConnection;
 connection.connect(gateway);
 ]]></programlisting>
+
         <para>
             In the onComplete function which is run as soon as the construct has completed we send
             the data to the server. We need to add one more line that makes a call to the
             <classname>Zend_Amf_Server</classname> World->hello function.
         </para>
+
         <programlisting language="as"><![CDATA[
 connection.call("World.hello", responder, params);
 ]]></programlisting>
+
         <para>
             When we created the responder variable we defined an onResult and onFault function to
             handle the response from the server. We added this function for the successful result
             from the server. A successful event handler is run every time the connection is handled
             properly to the server.
         </para>
+
         <programlisting language="as"><![CDATA[
 private function onResult(result:Object):void {
     // Display the returned data
     trace(String(result));
 }
 ]]></programlisting>
+
         <para>
             The onFault function, is called if there was an invalid response from the server. This
             happens when there is an error on the server, the <acronym>URL</acronym> to the server
             is invalid, the remote service or method does not exist, and any other connection
             related issues.
         </para>
+
         <programlisting language="as"><![CDATA[
 private function onFault(fault:Object):void {
     trace(String(fault.description));
 }
 ]]></programlisting>
+
         <para>
             Adding in the ActionScript to make the remoting connection is now complete. Running the
             ZendExample file now makes a connection to Zend Amf. In review you have added the
@@ -658,66 +682,78 @@ private function onFault(fault:Object):void {
         </para>
 
     </sect2>
+
     <sect2 id="zend.amf.server.auth">
         <title>Authentication</title>
-        
+
         <para>
-            <classname>Zend_Amf_Server</classname> allows you to specify authentication and authorization
-            hooks to control access to the services. It is using the infrastructure provided by 
-            <link end="zend.auth">Zend_Auth</link> and <link end="zend.acl">Zend_Acl</link> components.
+            <classname>Zend_Amf_Server</classname> allows you to specify authentication and
+            authorization hooks to control access to the services. It is using the infrastructure
+            provided by <link end="zend.auth">Zend_Auth</link> and
+            <link end="zend.acl">Zend_Acl</link> components.
         </para>
-        
+
         <para>
-        	In order to define authentication, the user provides authentication adapter extening
-        	<classname>Zend_Amf_Auth_Abstract</classname> abstract class. The adapter should implement
-        	the <code>authenticate</code> method just like regular <link end="zend.auth.introduction.adapters">authentication adapter</link>.
+            In order to define authentication, the user provides authentication adapter extening
+            <classname>Zend_Amf_Auth_Abstract</classname> abstract class. The adapter should
+            implement the <methodname>authenticate()</methodname> method just like regular
+            <link end="zend.auth.introduction.adapters">authentication adapter</link>.
         </para>
-        
+
         <para>
-        	The adapter should use properties <code>_username</code> and <code>_password</code> from the
-        	parent <classname>Zend_Amf_Auth_Abstract</classname> class in order to authenticate. These
-        	values are set by the server using <code>setCredentials()</code> method before call to 
-        	<code>authenticate()</code> if the credentials are received ine the AMF request headers.
+            The adapter should use properties <emphasis>_username</emphasis> and
+            <emphasis>_password</emphasis> from the parent
+            <classname>Zend_Amf_Auth_Abstract</classname> class in order to authenticate. These
+            values are set by the server using <methodname>setCredentials()</methodname> method
+            before call to <methodname>authenticate()</methodname> if the credentials are received
+            in the <acronym>AMF</acronym> request headers.
         </para>
-        
+
         <para>
-        The identity returned by the adapter should be an object containing property <code>role</code>
-        for the ACL access control to work.
+            The identity returned by the adapter should be an object containing property
+            <emphasis>role</emphasis> for the <acronym>ACL</acronym> access control to work.
         </para>
-        
+
         <para>
-        If the authentication result is not successful, the request is not proceseed further and 
-        failure message is returned with the reasons for failure taken from the result.  
+            If the authentication result is not successful, the request is not proceseed further
+            and failure message is returned with the reasons for failure taken from the result.
         </para>
-        
+
         <para>
-        	The adapter is connected to the server using <code>setAuth()</code> method:
+            The adapter is connected to the server using <methodname>setAuth()</methodname> method:
+        </para>
+
         <programlisting role="php"><![CDATA[
 $server->setAuth(new My_Amf_Auth());
 ]]></programlisting>
-        </para>
-        
+
         <para>
-        Access control is performed by using <code>Zend_Acl</code> object set by <code>setAcl()</code> method:
+            Access control is performed by using <classname>Zend_Acl</classname> object set by
+            <methodname>setAcl()</methodname> method:
+        </para>
+
         <programlisting role="php"><![CDATA[
 $acl = new Zend_Acl();
 createPermissions($acl); // create permission structure
 $server->setAcl($acl);
 ]]></programlisting>
-        </para>
-        
+
         <para>
-        If the ACL object is set, and the class being called defines <code>initAcl()</code> method, this 
-        method will be called with the ACL object as an argument. The class then can create additional ACL
-        rules and return <code>true</code>, or return <code>false</code> if no access control is required
-        for this class.
+            If the <acronym>ACL</acronym> object is set, and the class being called defines
+            <methodname>initAcl()</methodname> method, this method will be called with the
+            <acronym>ACL</acronym> object as an argument. The class then can create additional
+            <acronym>ACL</acronym> rules and return <constant>TRUE</constant>, or return
+            <constant>FALSE</constant> if no access control is required for this class.
         </para>
-    	
-    	<para>
-    	After ACL have been set up, the server will check if access is allowed with role set by the 
-    	authentication, resource being the class name (or null for function calls) and privilege 
-    	being the function name. If no authentication was provided, then if the <code>anonymous</code>
-    	role was defined, it will be used, otherwise the access will be denied.
+
+        <para>
+            After <acronym>ACL</acronym> have been set up, the server will check if access is
+            allowed with role set by the authentication, resource being the class name (or null for
+            function calls) and privilege being the function name. If no authentication was
+            provided, then if the <emphasis>anonymous</emphasis> role was defined, it will be used,
+            otherwise the access will be denied.
+        </para>
+
         <programlisting role="php"><![CDATA[
 if($this->_acl->isAllowed($role, $class, $function)) {
     return true;
@@ -726,9 +762,8 @@ if($this->_acl->isAllowed($role, $class, $function)) {
     throw new Zend_Amf_Server_Exception("Access not allowed");
 }
 ]]></programlisting>
-    	</para>
-        
-	</sect2>
+
+    </sect2>
 
 </sect1>
 <!--

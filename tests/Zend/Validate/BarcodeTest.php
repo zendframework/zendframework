@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -87,5 +86,15 @@ class Zend_Validate_BarcodeTest extends PHPUnit_Framework_TestCase
 
         $barcode->setType('ean-13');
         $this->assertTrue($barcode->isValid('0075678164125'));
+    }
+
+    /**
+     * @ZF-4352
+     */
+    public function testNonStringValidation()
+    {
+        $barcode = new Zend_Validate_Barcode('upc-a');
+        $this->assertFalse($barcode->isValid(123.40));
+        $this->assertFalse($barcode->isValid(array('065100004327')));
     }
 }

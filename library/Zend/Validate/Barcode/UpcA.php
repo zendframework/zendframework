@@ -67,15 +67,18 @@ class Zend_Validate_Barcode_UpcA extends Zend_Validate_Abstract
      */
     public function isValid($value)
     {
-        $valueString = (string) $value;
-        $this->_setValue($valueString);
+        if (!is_string($value)) {
+            $this->_error(self::INVALID);
+            return false;
+        }
 
-        if (strlen($valueString) !== 12) {
+        $this->_setValue($value);
+        if (strlen($value) !== 12) {
             $this->_error(self::INVALID_LENGTH);
             return false;
         }
 
-        $barcode = substr($valueString, 0, -1);
+        $barcode = substr($value, 0, -1);
         $oddSum  = 0;
         $evenSum = 0;
 
@@ -90,7 +93,7 @@ class Zend_Validate_Barcode_UpcA extends Zend_Validate_Abstract
         $calculation = ($oddSum + $evenSum) % 10;
         $checksum    = ($calculation === 0) ? 0 : 10 - $calculation;
 
-        if ($valueString[11] != $checksum) {
+        if ($value[11] != $checksum) {
             $this->_error(self::INVALID);
             return false;
         }

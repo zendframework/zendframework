@@ -658,7 +658,7 @@ abstract class Zend_Date_DateObject {
     {
 
         // actual timestamp
-        if ($timestamp === null) {
+        if (!is_numeric($timestamp)) {
             return getdate();
         }
 

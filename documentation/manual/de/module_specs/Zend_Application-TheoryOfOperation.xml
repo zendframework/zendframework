@@ -295,15 +295,15 @@ interface Zend_Application_Bootstrap_ResourceBootstrapper
             </para>
 
             <para>
-                To utilize resource plugins, you must specify them in the
-                options passed to the application object and/or bootstrap. These
-                options may come from a configuration file, or be passed in
-                manually. Options will be of key to options pairs, with the key
-                representing the resource name. The resource name will be the
-                segment following the class prefix. For example, the resources
-                shipped with Zend Framework have the class prefix
-                "<classname>Zend_Application_Resource_</classname>"; anything following this would
-                be the name of the resource. As an example,
+                Um Ressource  Plugins zu verwenden müssen diese in den Optionen spezifiziert
+                werden, die dem Anwendungs Objekt und-oder der Bootstrap übergeben werden. Diese
+                Optionen können von einer Konfigurationsdatei kommen, oder manuell übergeben
+                werden. Optionen sind Paare von Schlüssel zu Optionspaaren, wobei der Schlüssel
+                den Namen der Ressource repräsentiert. Der Ressourcename ist das Segment das
+                dem Klassenpräfix folgt. Die Ressourcen, die zum Beispiel mit Zend Framework
+                ausgeliefert werden, haben den Klassenpräfix
+                "<classname>Zend_Application_Resource_</classname>"; alles was folgt würde der
+                Name der Ressource sein. Als Beispiel:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -317,23 +317,22 @@ $application = new Zend_Application(APPLICATION_ENV, array(
 ]]></programlisting>
 
             <para>
-                This indicates that the "FrontController" resource should be
-                used, with the options specified.
+                Das zeigt das die "FrontController" verwendet werden sollte, mit den spezifizierten
+                Optionen.
             </para>
 
             <para>
-                If you begin writing your own resource plugins, or utilize
-                third-party resource plugins, you will need to tell your
-                bootstrap where to look for them. Internally, the bootstrap
-                utilizes <classname>Zend_Loader_PluginLoader</classname>, so you will only
-                need to indicate the common class prefix an path pairs.
+                Wenn man beginnt eigene Ressource Plugins zu schreiben, oder Ressource Plugins von
+                dritten anzupassen, muß man der eigenen Bootstrap mitteilen wo nach Ihnen zu suchen
+                ist. Intern verwendet die Bootstrap <classname>Zend_Loader_PluginLoader</classname>
+                so dass man nur die üblichen Klassenpräfix und Pfadpaare angeben muß.
             </para>
 
             <para>
-                As an example, let's assume you have custom resource plugins in
-                <filename>APPLICATION_PATH/resources/</filename> and that they share the
-                common class prefix of <classname>My_Resource</classname>. You would then
-                pass that information to the application object as follows:
+                Als Beispiel nehmen wir an das wir eigene Ressource Plugins in
+                <filename>APPLICATION_PATH/resources/</filename> haben, und das sie den gemeinsamen
+                Klassenpräfix <classname>My_Resource</classname> teilen. Man würde diese
+                Information de Anwendungsobjekt wie folgt übergeben:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -350,42 +349,42 @@ $application = new Zend_Application(APPLICATION_ENV, array(
 ]]></programlisting>
 
             <para>
-                You would now be able to use resources from that directory.
+                Man ist jetzt in der Lage Ressource von diesem Verzeichnis zu verwenden.
             </para>
 
             <para>
-                Just like resource methods, you use the <methodname>bootstrap()</methodname>
-                method to execute resource plugins. Just like with resource
-                methods, you can specify either a single resource plugin,
-                multiple plugins (via an array), or all plugins. Additionally,
-                you can mix and match to execute resource methods as well.
+                Wie Ressource Methoden kann die <methodname>bootstrap()</methodname> Methode
+                verwendet werden um Ressource Plugins zu verwenden. Wie bei Ressource Methoden
+                kann man entweder einzelne Ressource Plugins spezifizieren, mehrere Plugins
+                (über ein Array), oder alle Plugins. Zusätzlich kann man mischen und entsprechende
+                Ressource Methoden genauso ausführen.
             </para>
 
             <programlisting language="php"><![CDATA[
-// Execute one:
+// Eine ausführen:
 $bootstrap->bootstrap('FrontController');
 
-// Execute several:
+// Mehrere ausführen:
 $bootstrap->bootstrap(array('FrontController', 'Foo'));
 
-// Execute all resource methods and plugins:
+// Alle Ressource Methoden und Plugins ausführen:
 $bootstrap->bootstrap();
 ]]></programlisting>
         </sect3>
 
         <sect3 id="zend.application.theory-of-operation.bootstrap.registry">
-            <title>Resource Registry</title>
+            <title>Ressource Registry</title>
 
             <para>
-                Many, if not all, of your resource methods or plugins will
-                initialize objects, and in many cases, these objects will be
-                needed elsewhere in your application. How can you access them?
+                Viele, wenn nicht sogar alle, der eigenen Ressource Methoden oder Plugins
+                initialisieren Objekte, und in vielen Fällen werden diese Objekte an anderen
+                Orten der Anwendung benötigt. Wie man man auf Sie zugreifen?
             </para>
 
             <para>
                 <classname>Zend_Application_Bootstrap_BootstrapAbstract</classname>
-                provides a local registry for these objects. To store your
-                objects in them, you simply return them from your resources.
+                bietet eine locale Registry für diese Objekte. Um eigene Objekte in Ihr zu
+                Speichern müssen diese einfach von den eigenen Ressourcen zurückgegeben werden.
             </para>
 
             <para>

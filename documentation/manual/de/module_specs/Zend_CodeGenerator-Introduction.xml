@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15825 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.codegenerator.introduction">
     <title>Einführung</title>
@@ -18,8 +18,8 @@
         <para>
             Der typischste Fall ist die Instanzierung einer Code Erzeugungs Klasse und entweder der
             Übergabe der entsprechenden Konfiguration oder der Konfiguration nach dessen
-            Erstellung. Um Code zu erstellen, mu0 man einfach das Objekt ausgeben, oder dessen
-            <code>generate()</code> Methode aufrufen.
+            Erstellung. Um Code zu erstellen, muß man einfach das Objekt ausgeben, oder dessen
+            <methodname>generate()</methodname> Methode aufrufen.
         </para>
 
         <programlisting language="php"><![CDATA[

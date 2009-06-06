@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15825 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.captcha.operation">
     <title>Captcha Anwendung</title>
@@ -33,14 +33,16 @@ interface Zend_Captcha_Adapter extends Zend_Validate_Interface
 
     <para>
         Die benannten Getter- und Settermethoden werden verwenden um den CAPTCHA Identifikator zu
-        spezifizieren und zu empfangen. <code>getDecorator()</code> kann verwendet werden um einen
-        <classname>Zend_Form</classname> Dekorator entweder durch seinen Namen zu spezifizieren oder
-        indem ein aktuelles Dekoratorobjekt zurückgegeben wird. Der interessantesten Methoden sind
-        aber <code>generate()</code> und <code>render()</code>. <code>generate()</code> wird
-        verwendet um das CAPTCHA Token zu erstellen. Dieser Prozess speichert das Token
-        typischerweise in der Session damit es in nachfolgenden Anfragen verglichen werden kann.
-        <code>render()</code> wird verwendet um die Informationen die das CAPTCHA repräsentieren
-        darzustellen - ob es ein Bild ist, ein Figlet, ein logisches Problem, oder andere CAPTCHA.
+        spezifizieren und zu empfangen. <methodname>getDecorator()</methodname> kann verwendet
+        werden um einen <classname>Zend_Form</classname> Dekorator entweder durch seinen Namen zu
+        Spezifizieren oder indem ein aktuelles Dekoratorobjekt zurückgegeben wird. Der
+        interessantesten Methoden sind aber <methodname>generate()</methodname> und
+        <methodname>render()</methodname>. <methodname>generate()</methodname> wird verwendet um
+        das CAPTCHA Token zu erstellen. Dieser Prozess speichert das Token typischerweise in der
+        Session damit es in nachfolgenden Anfragen verglichen werden kann.
+        <methodname>render()</methodname> wird verwendet um die Informationen die das CAPTCHA
+        repräsentieren darzustellen - ob es ein Bild ist, ein Figlet, ein logisches Problem, oder
+        andere CAPTCHA.
     </para>
 
     <para>

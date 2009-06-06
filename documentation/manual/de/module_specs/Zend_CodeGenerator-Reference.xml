@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15719 -->
+<!-- EN-Revision: 15825 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.codegenerator.reference">
     <title>Zend_CodeGenerator Referenz</title>
@@ -30,29 +30,29 @@ abstract class Zend_CodeGenerator_Abstract
 ]]></programlisting>
 
             <para>
-                Der Constructor ruft zuerst <code>_init()</code> auf (welches für eine konkrete
-                erweiterte Klasse für die Implementation leer gelassen ist), übergibt dann
-                den <varname>$options</varname> Parameter an <code>setOptions()</code> und ruft
-                zuletzt <code>_prepare()</code> auf (welches auch von der erweiternden Klasse
-                implementiert werden muß).
+                Der Constructor ruft zuerst <methodname>_init()</methodname> auf (welches für eine
+                konkrete erweiterte Klasse für die Implementation leer gelassen ist), übergibt dann
+                den <varname>$options</varname> Parameter an <methodname>setOptions()</methodname>
+                und ruft zuletzt <methodname>_prepare()</methodname> auf (welches auch von der
+                erweiternden Klasse implementiert werden muß).
             </para>
 
             <para>
-                Wie die meisten Klassen im Zend Framework, vergleicht <code>setOptions()</code>
-                den Schlüssel einer Option mit den in der Klasse existierenden Settern, und
-                übergibt den Wert an die gefundene Methode.
+                Wie die meisten Klassen im Zend Framework, vergleicht
+                <methodname>setOptions()</methodname> den Schlüssel einer Option mit den in der
+                Klasse existierenden Settern, und übergibt den Wert an die gefundene Methode.
             </para>
 
             <para>
-                <code>__toString()</code> ist als final markiert, und leitet auf
-                <code>generate()</code> weiter.
+                <methodname>__toString()</methodname> ist als final markiert, und leitet auf
+                <methodname>generate()</methodname> weiter.
             </para>
 
             <para>
-                <code>setSourceContent()</code> und <code>getSourceContent()</code> sind dazu
-                vergesehen entweder den Standardinhalt für den zu erzeugenden Code zu setzen,
-                oder um gesetzte Inhalte zu ersetzen sobald alle Arbeiten der Erzeugung
-                beendet wurden.
+                <methodname>setSourceContent()</methodname> und
+                <methodname>getSourceContent()</methodname> sind dazu vergesehen entweder den
+                Standardinhalt für den zu erzeugenden Code zu setzen, oder um gesetzte Inhalte zu
+                ersetzen sobald alle Arbeiten der Erzeugung beendet wurden.
             </para>
         </sect3>
 
@@ -116,7 +116,7 @@ abstract class Zend_CodeGenerator_Php_Member_Abstract
                 <classname>Zend_CodeGenerator_Php_Body</classname> ist dazu gedacht generellen
                 prozeduralen Code in einer Datei einzufügen. Als solches kann man einfach den Inhalt
                 für das Objekt setzen, und es wird den Inhalt zurückgeben wenn man
-                <code>generate()</code> aufruft.
+                <methodname>generate()</methodname> aufruft.
             </para>
 
             <para>
@@ -180,17 +180,18 @@ class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
 ]]></programlisting>
 
             <para>
-                Die <code>setProperty()</code> Methode akzeptiert ein Array von Informationen,
-                die verwendet werden können um eine Instanz von
+                Die <methodname>setProperty()</methodname> Methode akzeptiert ein Array von
+                Informationen, die verwendet werden können um eine Instanz von
                 <classname>Zend_CodeGenerator_Php_Property</classname> zu erstellen -- oder einfach
                 eine Instanz von <classname>Zend_CodeGenerator_Php_Property</classname> selbst.
-                Genauso akzeptiert <code>setMethod()</code> entweder ein Array von Information für
-                die Erstellung einer <classname>Zend_CodeGenerator_Php_Method</classname> Instanz
-                oder eine konkrete Instanz dieser Klasse.
+                Genauso akzeptiert <methodname>setMethod()</methodname> entweder ein Array von
+                Information für die Erstellung einer
+                <classname>Zend_CodeGenerator_Php_Method</classname> Instanz oder eine konkrete
+                Instanz dieser Klasse.
             </para>
 
             <para>
-                Beachte das <code>setDocBlock()</code> eine Instanz von
+                Beachte das <methodname>setDocBlock()</methodname> eine Instanz von
                 <classname>Zend_CodeGenerator_Php_DocBlock</classname> erwartet.
             </para>
         </sect3>
@@ -205,9 +206,9 @@ class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
             </para>
 
             <para>
-                Zusätzliche Tags können durch Verwendung der <code>setTag()</code> und
-                <code>setTags()</code> Methoden gesetzt werden; diese nehmen entweder ein Array an
-                das das Tag beschreibt das an den
+                Zusätzliche Tags können durch Verwendung der <methodname>setTag()</methodname> und
+                <methodname>setTags()</methodname> Methoden gesetzt werden; diese nehmen entweder
+                ein Array an das das Tag beschreibt das an den
                 <classname>Zend_CodeGenerator_Php_Docblock_Tag</classname> Contructor übergeben
                 wird, oder eine Instanz dieser Klasse selbst.
             </para>
@@ -407,9 +408,9 @@ class Zend_CodeGenerator_Php_Member_Container extends ArrayObject
             </para>
 
             <para>
-                Parameter könnnen durch Verwendung von <code>setParameter()</code> oder
-                <code>setParameters()</code> gesetzt werden. In jedem Fall, sollte der Parameter
-                entweder ein Array von Informationen sein die an den Constructor von
+                Parameter könnnen durch Verwendung von <methodname>setParameter()</methodname> oder
+                <methodname>setParameters()</methodname> gesetzt werden. In jedem Fall, sollte der
+                Parameter entweder ein Array von Informationen sein die an den Constructor von
                 <classname>Zend_CodeGenerator_Php_Parameter</classname> übergeben werden, oder eine
                 Instanz dieser Klasse.
             </para>

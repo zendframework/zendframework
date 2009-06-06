@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15746 -->
+<!-- EN-Revision: 15839 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.navigation">
     <title>Navigations Helfer</title>
@@ -128,6 +128,12 @@
                     <code>{get|set}MaxDepth()</code> empfängt/setzt die maximale Tiefe die eine
                     Seite haben muß um vom Helfer eingefügt zu werden. Das Setzen von
                     <constant>NULL</constant> bedeutet keine maximale Tiefe.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>{get|set}RenderInvisible()</code> empfängt/setzt ob Elemente die als
+                    unsichtbar markiert sind, dargestellt werden oder nicht.
                 </para>
             </listitem>
             <listitem>

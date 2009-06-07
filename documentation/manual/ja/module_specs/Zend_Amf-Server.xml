@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15919 -->
+<!-- EN-Revision: 15927 -->
 <sect1 id="zend.amf.server">
     <title>Zend_Amf_Server</title>
 
@@ -486,18 +486,23 @@ private function getContactHandler(event:ResultEvent):void {
            クラス名は、リソース名の単語の先頭を大文字化してスペースを除去したものとなり
             (つまり、リソース型 "mysql result" の場合は MysqlResult となります)、
             それに何らかのプレフィックスをつけてたとえば <classname>My_MysqlResult</classname>
-            のようになります。このクラスは <code>parse()</code> メソッドを実装しなければなりません。
+            のようになります。このクラスは <methodname>parse()</methodname>
+            メソッドを実装しなければなりません。
             このメソッドはリソースを引数として受け取り、ActionScript に送信する値を返します。
             このクラスを記述するファイル名は、クラス名の最後の部分と同じ名前にしなければなりません。
-            たとえば先ほどの例の場合は MysqlResult.php となります。
+            たとえば先ほどの例の場合は <filename>MysqlResult.php</filename> となります。
         </para>
 
         <para>
-        リソース用のプラグインを含むディレクトリは、Zend_Amf 型ローダーで登録しなければなりません。
+            リソース用のプラグインを含むディレクトリは、
+            <classname>Zend_Amf</classname> 型ローダーで登録しなければなりません。
         </para>
 
-        <programlisting role="php"><![CDATA[
-Zend_Amf_Parse_TypeLoader::addResourceDirectory("My", "application/library/resources/My"));
+        <programlisting language="php"><![CDATA[
+Zend_Amf_Parse_TypeLoader::addResourceDirectory(
+    "My",
+    "application/library/resources/My"
+));
 ]]></programlisting>
 
         <para>
@@ -510,7 +515,7 @@ Zend_Amf_Parse_TypeLoader::addResourceDirectory("My", "application/library/resou
             現在ここには "mysql result" リソースおよび "stream" リソースのプラグインが格納されています。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Example class implementing handling resources of type mysql result
 class Zend_Amf_Parse_Resource_MysqlResult
 {
@@ -696,8 +701,9 @@ private function onFault(fault:Object):void {
         <para>
             <classname>Zend_Amf_Server</classname> では、認証と認可のフックを指定して
             サービスへのアクセス制御をすることができます。この仕組みは、
-            <link end="zend.auth">Zend_Auth</link> および
-            <link end="zend.acl">Zend_Acl</link> コンポーネントが提供するものを使用しています。
+            <link end="zend.auth"><classname>Zend_Auth</classname></link> および
+            <link end="zend.acl"><classname>Zend_Acl</classname></link>
+            コンポーネントが提供するものを使用しています。
         </para>
 
         <para>
@@ -733,7 +739,7 @@ private function onFault(fault:Object):void {
             アダプタとサーバを関連づけるには <methodname>setAuth()</methodname> メソッドを使用します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $server->setAuth(new My_Amf_Auth());
 ]]></programlisting>
 
@@ -743,7 +749,7 @@ $server->setAuth(new My_Amf_Auth());
             <classname>Zend_Acl</classname> オブジェクトを使用します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $acl = new Zend_Acl();
 createPermissions($acl); // パーミッション情報を作成します
 $server->setAcl($acl);
@@ -768,7 +774,7 @@ $server->setAcl($acl);
             定義されている場合はそれを使用します。定義されていない場合はアクセスを拒否します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 if($this->_acl->isAllowed($role, $class, $function)) {
     return true;
 } else {

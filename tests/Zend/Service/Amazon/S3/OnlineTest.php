@@ -96,7 +96,7 @@ class Zend_Service_Amazon_S3_OnlineTest extends PHPUnit_Framework_TestCase
         $this->assertContains($this->_bucket, $list);
     }
 
-    /**
+	/**
      * Test creating object
      *
      * @return void
@@ -252,7 +252,7 @@ class Zend_Service_Amazon_S3_OnlineTest extends PHPUnit_Framework_TestCase
             $this->_amazon->isBucketAvailable("This is a Very Bad Name");
             $this->fail("Expected exception not thrown");
         } catch(Zend_Uri_Exception $e) {
-            $this->assertContains("Invalid URI", $e->getMessage());       
+            $this->assertContains("not a valid HTTP host", $e->getMessage());       
         }
         try {
             $this->_amazon->putObject("This is a Very Bad Name/And It Gets Worse", "testdata");
@@ -292,8 +292,52 @@ class Zend_Service_Amazon_S3_OnlineTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(file_get_contents($filedir."testdata.html"), $data);
     }
     
+    /**
+     * Test creating bucket with location
+     * ZF-6728
+     *
+     */
+    public function testCreateBucketEU()
+    {
+        $this->_amazon->createBucket($this->_bucket, 'EU');
+        $this->assertTrue($this->_amazon->isBucketAvailable($this->_bucket));
+        $list = $this->_amazon->getBuckets();
+        $this->assertContains($this->_bucket, $list);
+    }
+    /**
+     * Test bucket name with /'s and encoding
+     * 
+     * ZF-6855
+     *
+     */
+    public function testObjectPath()
+    {
+        $this->_amazon->createBucket($this->_bucket);
+        $filedir = dirname(__FILE__)."/_files/";
+    	$this->_amazon->putFile($filedir."testdata.html", $this->_bucket."/subdir/dir with spaces/zftestfile.html", 
+    		array(Zend_Service_Amazon_S3::S3_ACL_HEADER => Zend_Service_Amazon_S3::S3_ACL_PUBLIC_READ));
+    	$url = 'http://' . Zend_Service_Amazon_S3::S3_ENDPOINT."/".$this->_bucket."/subdir/dir%20with%20spaces/zftestfile.html";
+    	$data = @file_get_contents($url);
+        $this->assertEquals(file_get_contents($filedir."testdata.html"), $data);
+    }
+    
+	/**
+     * Test creating object with https
+     * 
+     * ZF-6686
+     */
+    public function testCreateObjectSSL()
+    {
+    	$this->_amazon->setEndpoint('https://s3.amazonaws.com');
+    	$this->assertEquals('https://s3.amazonaws.com', $this->_amazon->getEndpoint()->getUri());
+        $this->_amazon->createBucket($this->_bucket);
+        $this->_amazon->putObject($this->_bucket."/zftest", "testdata");
+        $this->assertEquals("testdata", $this->_amazon->getObject($this->_bucket."/zftest"));
+    }
+    
     public function tearDown()
     {
+    	unset($this->_amazon->debug);
         $this->_amazon->cleanBucket($this->_bucket);
         $this->_amazon->removeBucket($this->_bucket);
     }

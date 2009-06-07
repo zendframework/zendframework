@@ -483,18 +483,21 @@ private function getContactHandler(event:ResultEvent):void {
             after the resource name, with words capitalized and spaces removed (so, resource
             type "mysql result" becomes MysqlResult), with some prefix, e.g.
             <classname>My_MysqlResult</classname>. This class should implement one method,
-            <code>parse()</code>, receiving one argument - the resource - and returning the value
-            that should be sent to ActionScript. The class should be located in the file named after
-            the last component of the name, e.g. MysqlResult.php.
+            <methodname>parse()</methodname>, receiving one argument - the resource - and returning
+            the value that should be sent to ActionScript. The class should be located in the file
+            named after the last component of the name, e.g. <filename>MysqlResult.php</filename>.
         </para>
 
         <para>
             The directory containing the resource handling plugins should be registered with
-            Zend_Amf type loader:
+            <classname>Zend_Amf</classname> type loader:
         </para>
 
-        <programlisting role="php"><![CDATA[
-Zend_Amf_Parse_TypeLoader::addResourceDirectory("My", "application/library/resources/My"));
+        <programlisting language="php"><![CDATA[
+Zend_Amf_Parse_TypeLoader::addResourceDirectory(
+    "My",
+    "application/library/resources/My"
+));
 ]]></programlisting>
 
         <para>
@@ -507,7 +510,7 @@ Zend_Amf_Parse_TypeLoader::addResourceDirectory("My", "application/library/resou
             and currently contains handlers for "mysql result" and "stream" resources.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Example class implementing handling resources of type mysql result
 class Zend_Amf_Parse_Resource_MysqlResult
 {
@@ -689,8 +692,8 @@ private function onFault(fault:Object):void {
         <para>
             <classname>Zend_Amf_Server</classname> allows you to specify authentication and
             authorization hooks to control access to the services. It is using the infrastructure
-            provided by <link end="zend.auth">Zend_Auth</link> and
-            <link end="zend.acl">Zend_Acl</link> components.
+            provided by <link end="zend.auth"><classname>Zend_Auth</classname></link> and
+            <link end="zend.acl"><classname>Zend_Acl</classname></link> components.
         </para>
 
         <para>
@@ -723,7 +726,7 @@ private function onFault(fault:Object):void {
             The adapter is connected to the server using <methodname>setAuth()</methodname> method:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $server->setAuth(new My_Amf_Auth());
 ]]></programlisting>
 
@@ -732,7 +735,7 @@ $server->setAuth(new My_Amf_Auth());
             <methodname>setAcl()</methodname> method:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $acl = new Zend_Acl();
 createPermissions($acl); // create permission structure
 $server->setAcl($acl);
@@ -754,7 +757,7 @@ $server->setAcl($acl);
             otherwise the access will be denied.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 if($this->_acl->isAllowed($role, $class, $function)) {
     return true;
 } else {

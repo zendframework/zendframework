@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect3 id="zend.controller.router.routes.chain">
+    <title>Zend_Controller_Router_Route_Chain</title>
+
+    <para>
+        <classname>Zend_Controller_Router_Route_Chain</classname> es una ruta 
+        que permite encadenar juntas a múltiples rutas. 
+        Esto le permite encadenar hostname/rutas y rutas de paths, o múltiples 
+        paths de rutas por ejemplo. El encadenamiento puede hacerse 
+        programáticamente o dentro de un archivo de configuración.
+    </para>
+
+    <note>
+        <title>Prioridad de Parámetros</title>
+        <para>
+            Cuando se encadenan en conjunto varias rutas, los parámetros de la 
+            ruta exterior tienen mayor prioridad que los parámetros de la ruta 
+            interior. Así, si define un controlador en el exterior y otro en 
+            la ruta interior, será seleccionado el controlador de la ruta exterior.
+        </para>
+    </note>
+
+    <para>
+        Cuando el encadenamiento se realiza prográmaticamente, hay dos maneras 
+        de archivarlo. La primera consiste en crear una nueva instancia 
+        <classname>Zend_Controller_Router_Route_Chain</classname> y entones 
+        llamar al método <code>chain</code> varias veces con todas las rutas 
+        que deberían encadenarse juntas. La otra forma es tomar la primera 
+        ruta, por ejemplo, la  ruta del nombre del host, y llamar al método 
+        <code>chain</code> con la ruta que debería ser anexada a ella. 
+        Esto no modificará la ruta del nombre del host, pero devolverá una nueva 
+        instancia de <classname>Zend_Controller_Router_Route_Chain</classname>, 
+        teniendo entonces a ambas rutas encadenadas juntas:
+    </para>
+
+    <programlisting role="php"><![CDATA[
+// Crear dos rutas
+$hostnameRoute = new Zend_Controller_Router_Route_Hostname(...);
+$pathRoute     = new Zend_Controller_Router_Route(...);
+
+// Primera manera, encadenarlas con chain route
+$chainedRoute = new Zend_Controller_Router_Route_Chain();
+$chainedRoute->chain($hostnameRoute)
+             ->chain($pathRoute);
+
+// Segunda manera, encadenarlas directamente
+$chainedRoute = $hostnameRoute->chain($pathRoute);
+]]></programlisting>
+
+    <para>
+        Cuando las rutas se encadenan juntas, su separador por defecto es una 
+        barra ('/'). Pueden haber casos cuando quiera tener un separador 
+        diferente:
+    </para>
+
+    <programlisting role="php"><![CDATA[
+// Crear dos rutas
+$firstRoute  = new Zend_Controller_Router_Route('foo');
+$secondRoute = new Zend_Controller_Router_Route('bar');
+
+// Encadenarlas juntas con un separador diferente
+$chainedRoute = $firstRoute->chain($secondRoute, '-');
+
+// Ensamblar la ruta: "foo-bar"
+echo $chainedRoute->assemble();
+]]></programlisting>
+
+    <sect4 id="zend.controller.router.routes.chain.config">
+        <title>Encadenar Rutas via <classname>Zend_Config</classname></title>
+
+        <para>
+            Para encadenar juntas a las rutas en un archivo de configuración, 
+            hay parámetros adicionales para la configuración de aquellos. 
+            El enfoque más sencillo es utilizar los parámetros <code>chains</code>. 
+            Este es simplemente una lista de las rutas, que será encadenada con  
+            la ruta padre. Ni la ruta padre ni la ruta hijo serán añadidos 
+            directamente al router sino que sólo lo hará la ruta del 
+            encadenamiento resultante. 
+            El nombre de la ruta encadenada en el router será el nombre de la 
+            ruta padre concatenada con un guión ('-') con el nombre de la ruta 
+            hijo. Un simple config en XML se vería así:
+        </para>
+
+        <programlisting role="xml"><![CDATA[
+<routes>
+    <www type="Zend_Controller_Router_Route_Hostname">
+        <route>www.example.com</route>
+        <chains>
+            <language type="Zend_Controller_Router_Route">
+                <route>:language</route>
+                <reqs language="[a-z]{2}">
+                <chains>
+                    <index type="Zend_Controller_Router_Route_Static">
+                        <route></route>
+                        <defaults module="default" controller="index" action="index" />
+                    </index>
+                    <imprint type="Zend_Controller_Router_Route_Static">
+                        <route>imprint</route>
+                        <defaults module="default" controller="index" action="index" />
+                    </imprint>
+                </chains>
+            </language>
+        </chains>
+    </www>
+    <users type="Zend_Controller_Router_Route_Hostname">
+        <route>users.example.com</route>
+        <chains>
+            <profile type="Zend_Controller_Router_Route">
+                <route>:username</route>
+                <defaults module="users" controller="profile" action="index" />
+            </profile>
+        </chains>
+    </users>
+    <misc type="Zend_Controller_Router_Route_Static">
+        <route>misc</route>
+    </misc>
+</routes>
+]]></programlisting>
+
+        <para>
+            Esto se traducirá en las tres rutas <code>www-language-index</code>,
+            <code>www-language-imprint</code> y
+            <code>users-language-profile</code> que sólo concordarán basados 
+            en el nombre y la ruta <code>misc</code>, que se comparará con 
+            cualquier nombre de host.
+        </para>
+
+        <para>
+            La manera alternativa de crear una ruta encadenada es a través del 
+            parámetro <code>chain</code>, que sólo puede utilizarse 
+            directamente con el tipo cadena-ruta, y también trabaja en el nivel raíz:
+        </para>
+
+        <programlisting role="xml"><![CDATA[
+<routes>
+    <www type="Zend_Controller_Router_Route_Chain">
+        <route>www.example.com</route>
+    </www>
+    <language type="Zend_Controller_Router_Route">
+        <route>:language</route>
+        <reqs language="[a-z]{2}">
+    </language>
+    <index type="Zend_Controller_Router_Route_Static">
+        <route></route>
+        <defaults module="default" controller="index" action="index" />
+    </index>
+    <imprint type="Zend_Controller_Router_Route_Static">
+        <route>imprint</route>
+        <defaults module="default" controller="index" action="index" />
+    </imprint>
+
+    <www-index type="Zend_Controller_Router_Route_Chain">
+        <chain>www, language, index</chain>
+    </www-index>
+    <www-imprint type="Zend_Controller_Router_Route_Chain">
+        <chain>www, language, imprint</chain>
+    </www-imprint>
+</routes>
+]]></programlisting>
+
+        <para>
+            También puede darle el parámetro a <code>chain</code> como un array 
+            en vez de separ las rutas con comas:
+        </para>
+
+        <programlisting role="xml"><![CDATA[
+<routes>
+    <www-index type="Zend_Controller_Router_Route_Chain">
+        <chain>www</chain>
+        <chain>language</chain>
+        <chain>index</chain>
+    </www-index>
+    <www-imprint type="Zend_Controller_Router_Route_Chain">
+        <chain>www</chain>
+        <chain>language</chain>
+        <chain>imprint</chain>
+    </www-imprint>
+</routes>
+]]></programlisting>
+    </sect4>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

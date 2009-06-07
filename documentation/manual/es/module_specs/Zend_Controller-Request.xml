@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.controller.request">
+    <title>La solicitud del Objeto</title>
+    <sect2 id="zend.controller.request.introduction">
+        <title>Introducción</title>
+        <para>        		
+			La solicitud del objeto es un simple valor que es pasado entre
+            <classname>Zend_Controller_Front</classname> y el router, dispatcher, y
+            controlador de clases. Empaqueta los nombres de los módulos solicitados,
+            controlador, acción, y los parámetros opcionales, así como el resto del
+            medio de la solicitud, ya sea HTTP, el CLI, o PHP-GTK.
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                The module name is accessed by
+                <code>getModuleName()</code> and
+                <code>setModuleName()</code>.
+            </para></listitem>
+
+            <listitem><para>
+                The controller name is accessed by
+                <code>getControllerName()</code> and
+                <code>setControllerName()</code>.
+            </para></listitem>
+
+            <listitem><para>
+                The name of the action to call within that controller is
+                accessed by <code>getActionName()</code> and
+                <code>setActionName()</code>.
+            </para></listitem>
+
+            <listitem><para>
+                Parameters to be accessible by the action are an associative array
+                of key/value pairs that are retrieved by <code>getParams()</code>
+                and set with <code>setParams()</code>, or individually by
+                <code>getParam()</code> and <code>setParam()</code>.
+            </para></listitem>
+        </itemizedlist>
+
+        <para>
+            Based on the type of request, there may be more methods available.
+            The default request used, <classname>Zend_Controller_Request_Http</classname>,
+            for instance, has methods for retrieving the request URI, path
+            information, <code>$_GET</code> and <code>$_POST</code> parameters,
+            etc.
+        </para>
+
+        <para>
+            The request object is passed to the front controller, or if none is
+            provided, it is instantiated at the beginning of the dispatch
+            process, before routing occurs. It is passed through to every object
+            in the dispatch chain.
+        </para>
+
+        <para>
+            Additionally, the request object is particularly useful in testing.
+            The developer may craft the request environment, including module,
+            controller, action, parameters, URI, etc, and pass the request
+            object to the front controller to test application flow. When paired
+            with the <link linkend="zend.controller.response">response
+                object</link>, elaborate and precise unit testing of MVC
+            applications becomes possible.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.controller.request.http">
+        <title>HTTP Requests</title>
+
+        <sect3 id="zend.controller.request.http.dataacess">
+            <title>Accessing Request Data</title>
+
+            <para>
+                <classname>Zend_Controller_Request_Http</classname> encapsulates access to
+                relevant values such as the key name and value for the
+                controller and action router variables, and all additional
+                parameters parsed from the URI. It additionally allows access to
+                values contained in the superglobals as public members, and
+                manages the current Base URL and Request URI. Superglobal
+                values cannot be set on a request object, instead use the
+                setParam/getParam methods to set or retrieve user parameters.
+            </para>
+
+            <note>
+                <title>Superglobal Data</title>
+                <para>
+                    When accessing superglobal data through
+                    <classname>Zend_Controller_Request_Http</classname> as public member
+                    properties, it is necessary to keep in mind that the
+                    property name (superglobal array key) is matched to a
+                    superglobal in a specific order of precedence: 1. GET, 2.
+                    POST, 3. COOKIE, 4. SERVER, 5. ENV.
+                </para>
+            </note>
+
+            <para>
+                Specific superglobals can be accessed using a public method as
+                an alternative. For example, the raw value of
+                <code>$_POST['user']</code> can be accessed by calling
+                <code>getPost('user')</code> on the request object. These
+                include <code>getQuery()</code> for retrieving
+                <code>$_GET</code> elements, and <code>getHeader()</code> for
+                retrieving request headers.
+            </para>
+
+            <note>
+                <title>GET and POST Data</title>
+                <para>
+                    Be cautious when accessing data from the request object as
+                    it is not filtered in any way. The router and dispatcher
+                    validate and filter data for use with their tasks, but leave
+                    the data untouched in the request object.
+                </para>
+            </note>
+
+            <note>
+                <title>Retrieving the Raw POST Data</title>
+
+                <para>
+                    As of 1.5.0, you can also retrieve the raw post data via the
+                    <code>getRawBody()</code> method. This method returns false
+                    if no data was submitted in that fashion, but the full body
+                    of the post otherwise.
+                </para>
+
+                <para>
+                    This is primarily useful for accepting content when
+                    developing a RESTful MVC application.
+                </para>
+            </note>
+
+            <para>
+                You may also set user parameters in the request object using
+                <code>setParam()</code> and retrieve these later using
+                <code>getParam()</code>. The router makes use of this
+                functionality to set parameters matched in the request URI into
+                the request object.
+            </para>
+
+            <note>
+                <title>getParam() Retrieves More than User Parameters</title>
+
+                <para>
+                    In order to do some of its work, <code>getParam()</code> actually
+                    retrieves from several sources. In order of priority, these
+                    include: user parameters set via <code>setParam()</code>,
+                    <code>GET</code> parameters, and finally <code>POST</code>
+                    parameters. Be aware of this when pulling data via this
+                    method.
+                </para>
+
+                <para>
+                    If you wish to pull only from parameters you set via
+                    <code>setParam()</code>, use the <code>getUserParam()</code>.
+                </para>
+
+                <para>
+                    Additionally, as of 1.5.0, you can lock down which parameter
+                    sources will be searched. <code>setParamSources()</code>
+                    allows you to specify an empty array or an array with one or
+                    more of the values '_GET' or '_POST' indicating which
+                    parameter sources are allowed (by default, both are
+                    allowed); if you wish to restrict access to only '_GET'
+                    specify <code>setParamSources(array('_GET'))</code>.
+                </para>
+            </note>
+
+            <note>
+                <title>Apache Quirks</title>
+                <para>
+                    If you are using Apache's 404 handler to pass incoming
+                    requests to the front controller, or using a PT flag with
+                    rewrite rules, <code>$_SERVER['REDIRECT_URL']</code>
+                    contains the URI you need, not
+                    <code>$_SERVER['REQUEST_URI']</code>. If you are using such
+                    a setup and getting invalid routing, you should use the
+                    <classname>Zend_Controller_Request_Apache404</classname> class instead
+                    of the default Http class for your request object:
+                </para>
+
+                <programlisting role="php"><![CDATA[
+$request = new Zend_Controller_Request_Apache404();
+$front->setRequest($request);
+]]></programlisting>
+
+                <para>
+                    This class extends the
+                    <classname>Zend_Controller_Request_Http</classname> class and simply
+                    modifies the autodiscovery of the request URI. It can be
+                    used as a drop-in replacement.
+                </para>
+            </note>
+        </sect3>
+
+        <sect3 id="zend.controller.request.http.baseurl">
+            <title>Base Url and Subdirectories</title>
+
+            <para>
+                <classname>Zend_Controller_Request_Http</classname> allows
+                <classname>Zend_Controller_Router_Rewrite</classname> to be used in subdirectories.
+                <classname>Zend_Controller_Request_Http</classname> will attempt to automatically
+                detect your base URL and set it accordingly.
+            </para>
+
+            <para>
+                For example, if you keep your <code>index.php</code> in a
+                webserver subdirectory named
+                <code>/projects/myapp/index.php</code>, base URL (rewrite base)
+                should be set to <code>/projects/myapp</code>. This string will
+                then be stripped from the beginning of the path before
+                calculating any route matches. This frees one from the necessity
+                of prepending it to any of your routes. A route of
+                <code>'user/:username'</code> will match URIs like
+                <code>http://localhost/projects/myapp/user/martel</code> and
+                <code>http://example.com/user/martel</code>.
+            </para>
+
+            <note>
+                <title>URL Detection is Case Sensitive</title>
+                <para>
+                    Automatic base URL detection is case sensitive, so make sure your URL
+                    will match a subdirectory name in a filesystem (even on Windows
+                    machines). If it doesn't, an exception will be raised.
+                </para>
+            </note>
+
+            <para>
+                Should base URL be detected incorrectly you can override it
+                with your own base path with the help of the
+                <code>setBaseUrl()</code> method of either the
+                <classname>Zend_Controller_Request_Http</classname> class, or the
+                <classname>Zend_Controller_Front</classname> class. The easiest
+                method is to set it in <classname>Zend_Controller_Front</classname>,
+                which will proxy it into the request object. Example usage to
+                set a custom base URL:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+/**
+ * Dispatch Request with custom base URL with Zend_Controller_Front.
+ */
+$router     = new Zend_Controller_Router_Rewrite();
+$controller = Zend_Controller_Front::getInstance();
+$controller->setControllerDirectory('./application/controllers')
+           ->setRouter($router)
+           ->setBaseUrl('/projects/myapp'); // set the base url!
+$response   = $controller->dispatch();
+]]></programlisting>
+
+        </sect3>
+
+        <sect3 id="zend.controller.request.http.method">
+            <title>Determining the Request Method</title>
+
+            <para>
+                <code>getMethod()</code> allows you to determine the HTTP
+                request method used to request the current resource.
+                Additionally, a variety of methods exist that allow you to get
+                boolean responses when asking if a specific type of request has
+                been made:
+            </para>
+
+            <itemizedlist>
+                <listitem><para><code>isGet()</code></para></listitem>
+                <listitem><para><code>isPost()</code></para></listitem>
+                <listitem><para><code>isPut()</code></para></listitem>
+                <listitem><para><code>isDelete()</code></para></listitem>
+                <listitem><para><code>isHead()</code></para></listitem>
+                <listitem><para><code>isOptions()</code></para></listitem>
+            </itemizedlist>
+
+            <para>
+                The primary use case for these is for creating RESTful MVC
+                architectures.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.controller.request.http.ajax">
+            <title>Detecting AJAX Requests</title>
+
+            <para>
+                <classname>Zend_Controller_Request_Http</classname> has a rudimentary
+                method for detecting AJAX requests:
+                <code>isXmlHttpRequest()</code>. This method looks for an
+                HTTP request header <code>X-Requested-With</code> with the value
+                'XMLHttpRequest'; if found, it returns true.
+            </para>
+
+            <para>
+                Currently, this header is known to be passed by default with the
+                following JS libraries:
+            </para>
+
+            <itemizedlist>
+                <listitem><para>Prototype/Scriptaculous (and libraries derived
+                        from Prototype)</para></listitem>
+                <listitem><para>Yahoo! UI Library</para></listitem>
+                <listitem><para>jQuery</para></listitem>
+                <listitem><para>MochiKit</para></listitem>
+            </itemizedlist>
+
+            <para>
+                Most AJAX libraries allow you to send custom HTTP request
+                headers; if your library does not send this header, simply add
+                it as a request header to ensure the
+                <code>isXmlHttpRequest()</code> method works for you.
+            </para>
+        </sect3>
+    </sect2>
+
+    <sect2 id="zend.controller.request.subclassing">
+        <title>Subclassing the Request Object</title>
+
+        <para>
+            The base request class used for all request objects is the abstract
+            class <classname>Zend_Controller_Request_Abstract</classname>. At its most
+            basic, it defines the following methods:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+abstract class Zend_Controller_Request_Abstract
+{
+    /**
+     * @return string
+     */
+    public function getControllerName();
+
+    /**
+     * @param string $value
+     * @return self
+     */
+    public function setControllerName($value);
+
+    /**
+     * @return string
+     */
+    public function getActionName();
+
+    /**
+     * @param string $value
+     * @return self
+     */
+    public function setActionName($value);
+
+    /**
+     * @return string
+     */
+    public function getControllerKey();
+
+    /**
+     * @param string $key
+     * @return self
+     */
+    public function setControllerKey($key);
+
+    /**
+     * @return string
+     */
+    public function getActionKey();
+
+    /**
+     * @param string $key
+     * @return self
+     */
+    public function setActionKey($key);
+
+    /**
+     * @param string $key
+     * @return mixed
+     */
+    public function getParam($key);
+
+    /**
+     * @param string $key
+     * @param mixed $value
+     * @return self
+     */
+    public function setParam($key, $value);
+
+    /**
+     * @return array
+     */
+     public function getParams();
+
+    /**
+     * @param array $array
+     * @return self
+     */
+    public function setParams(array $array);
+
+    /**
+     * @param boolean $flag
+     * @return self
+     */
+    public function setDispatched($flag = true);
+
+    /**
+     * @return boolean
+     */
+    public function isDispatched();
+}
+]]></programlisting>
+
+        <para>
+            The request object is a container for the request environment. The
+            controller chain really only needs to know how to set and retrieve the
+            controller, action, optional parameters, and dispatched status. By
+            default, the request will search its own parameters using the
+            controller or action keys in order to determine the controller and
+            action.
+        </para>
+
+        <para>
+            Extend this class, or one of its derivatives, when you need the
+            request class to interact with a specific environment in order to
+            retrieve data for use in the above tasks. Examples include <link
+                linkend="zend.controller.request.http">the HTTP
+                environment</link>, a CLI environment, or a PHP-GTK environment.
+        </para>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

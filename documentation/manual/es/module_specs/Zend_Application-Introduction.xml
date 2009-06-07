@@ -5,7 +5,8 @@
     <title>Introducción</title>
 
     <para>
-        <classname>Zend_Application</classname> ofrece un motor de bootstrap
+        <classname>Zend_Application</classname> 
+        ofrece un motor de arranque (Bootstrapping)
         para aplicaciones que proporcionan recursos reutilizables,
         -- clases de bootstrap comunes y basadas en módulos -- y comprobación de
         dependencias. También se ocupa de establecer el entorno de PHP

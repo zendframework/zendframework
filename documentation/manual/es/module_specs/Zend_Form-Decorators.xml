@@ -146,7 +146,7 @@
         </para>
 
         <programlisting role="php"><![CDATA[
-interface Zend_Form_Decorator_Interface
+interface Zend_Decorator_Interface
 {
     public function __construct($options = null);
     public function setElement($element);

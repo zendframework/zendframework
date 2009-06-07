@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15103 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.front">
     <title>El Front Controller</title>
@@ -12,8 +13,8 @@
                 Controller pattern</ulink> usado en aplicaciones <ulink
                 url="http://en.wikipedia.org/wiki/Model-view-controller">Model-View-Controller
                 (MVC)</ulink>. 
-                Su propósito es inicializar el medio ambiente de la solicitud, 
-                rutear la solicitud entrante, y luego hacer un dispatch de 
+                Su propósito es inicializar el entorno de la solicitud, 
+                rutear la solicitud entrante, y luego hacer un envío de 
                 cualquier de las acciones descubiertas; le agrega las respuestas 
                 y las regresa cuando se completa el proceso.  
         </para>
@@ -24,12 +25,12 @@
             pattern</ulink>, significando que solo una única instancia de él 
             puede estar disponible en cualquier momento dado. 
             Esto le permite actuar también como un registro en el que los demás 
-            objetos puden extraer del proceso dispatch.
+            objetos pueden extraer del proceso dispatch.
         </para>
 
         <para>
             <classname>Zend_Controller_Front</classname> registra un <link
-                linkend="zend.controller.plugins">plugin broker</link> consígo  
+                linkend="zend.controller.plugins">plugin broker</link> consigo  
             mismo, permitiendo que diversos eventos que dispara sean observados 
             por plugins. En muchos casos, esto da el desarrollador la 
             oportunidad de adaptar el proceso de dispatch al sitio sin la 
@@ -207,7 +208,7 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
 
             <para>
                 Similarmente, <code>dispatch()</code> 
-                comprueba los objetos registados <link
+                comprueba los objetos registrados <link
                     linkend="zend.controller.router">router</link> y <link
                     linkend="zend.controller.dispatcher">dispatcher</link>
                 , instanciando las versiones por defecto de cada uno si ninguno 

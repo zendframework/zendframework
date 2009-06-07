@@ -1,5 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15103 -->
+<!-- Reviewed: no -->
 <sect1 id="zend.controller.quickstart">
-    <title>Zend_Controller Quick Start</title>
+    <title>Inicio rápido a Zend_Controller</title>
 
     <sect2 id="zend.controller.quickstart.introduction">
         <title>Introducción</title>
@@ -18,7 +21,7 @@
                 Front Controller (Controlador Frontal)
             </ulink>
             en el cual todas las transacciones HTTP (requests) son
-            interceptadas por el controlador frontal y despachado a una
+            interceptadas por el controlador frontal y enviado a una
             Acción particular de un Controlador según la URL pedida.
 
 
@@ -77,7 +80,7 @@ html/
                 Apunte su document root en su servidor web hacia el
                 directorio
                 <code>html</code>
-                de la estrctura de archivos de arriba.
+                de la estructura de archivos de arriba.
             </para>
         </sect3>
 
@@ -100,7 +103,7 @@ RewriteRule ^.*$ index.php [NC,L]
 ]]></programlisting>
 
             <para>
-                La regla de arriba redigirá las peticiones a recuros existentes
+                La regla de arriba redirigirá las peticiones a recuros existentes
                 (enlaces simbólicos existentes, archivos no vacíos, o directorios no vacíos)
         en consecuencia, y todas las otras peticiones al front controller.
             </para>

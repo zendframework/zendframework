@@ -1784,7 +1784,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
      * Return a display group
      * 
      * @param  string $name 
-     * @return array|null
+     * @return Zend_Form_DisplayGroup|null
      */
     public function getDisplayGroup($name)
     {

@@ -66,7 +66,7 @@ class Zend_Search_Lucene_SearchHighlightTest extends PHPUnit_Framework_TestCase
 
 //    public function testHtmlFragmentHighlightMatchesCyrillic()
 //    {
-//        $query = Zend_Search_Lucene_Search_QueryParser::parse('title:"некоторый текст" AND text:поехали', 'UTF-8');
+//        $query = Zend_Search_Lucene_Search_QueryParser::parse('title:"некоторый текст" AND text:поехали');
 //
 //        $highlightedHtmlFragment = $query->htmlFragmentHighlightMatches('Подсвечиваем некоторый текст с использованием Zend_Search_Lucene. Поехали!');
 //
@@ -74,14 +74,8 @@ class Zend_Search_Lucene_SearchHighlightTest extends PHPUnit_Framework_TestCase
 //                            'Text highlighting using Zend_Search_Lucene is <b style="color:black;background-color:#66ffff">the</b> <b style="color:black;background-color:#66ffff">right</b> <b style="color:black;background-color:#66ffff">way</b> to <b style="color:black;background-color:#ff66ff">go</b>!');
 //    }
 //
-//    public function testHtmlFragmentHighlightMatchesCyrillicWin1251()
+//    public function testHtmlFragmentHighlightMatchesCyrillicWindows()
 //    {
-//    	$analyzer = Zend_Search_Lucene_Analysis_Analyzer::getDefault();
-//    	Zend_Search_Lucene_Analysis_Analyzer::setDefault(
-//    	    new Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8_CaseInsensitive()
-//    	   );
-//
-//
 //        $query = Zend_Search_Lucene_Search_QueryParser::parse('title:"Некоторый текст" AND text:поехали');
 //
 //        $highlightedHtmlFragment =
@@ -89,8 +83,6 @@ class Zend_Search_Lucene_SearchHighlightTest extends PHPUnit_Framework_TestCase
 //                                                           'Windows-1251',
 //                                                           'Подсвечиваем некоторый текст с использованием Zend_Search_Lucene. Поехали!'),
 //                                                     'Windows-1251');
-//
-//        Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
 //
 //        $this->assertEquals($highlightedHtmlFragment,
 //                            'Text highlighting using Zend_Search_Lucene is <b style="color:black;background-color:#66ffff">the</b> <b style="color:black;background-color:#66ffff">right</b> <b style="color:black;background-color:#66ffff">way</b> to <b style="color:black;background-color:#ff66ff">go</b>!');

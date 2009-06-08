@@ -93,11 +93,11 @@ class Zend_Search_Lucene_Document_Html extends Zend_Search_Lucene_Document
         	if (preg_match('/<html>/i', $htmlData, $matches, PREG_OFFSET_CAPTURE)) {
         		// It's an HTML document
         		// Add additional HEAD section and recognize document
-        		$htmlTagEndOffset = $matches[0][1] + strlen($matches[0][0]);
+        		$htmlTagOffset = $matches[0][1] + strlen($matches[0][1]);
 
-        		@$this->_doc->loadHTML(iconv($defaultEncoding, 'UTF-8//IGNORE', substr($htmlData, 0, $htmlTagEndOffset))
+        		@$this->_doc->loadHTML(iconv($defaultEncoding, 'UTF-8//IGNORE', substr($htmlData, 0, $htmlTagOffset))
                                      . '<head><META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8"/></head>'
-                                     . iconv($defaultEncoding, 'UTF-8//IGNORE', substr($htmlData, $htmlTagEndOffset)));
+                                     . iconv($defaultEncoding, 'UTF-8//IGNORE', substr($htmlData, $htmlTagOffset)));
 
                 // Remove additional HEAD section
                 $xpath = new DOMXPath($this->_doc);
@@ -281,15 +281,11 @@ class Zend_Search_Lucene_Document_Html extends Zend_Search_Lucene_Document
         $matchedTokens = array_reverse($matchedTokens);
 
         foreach ($matchedTokens as $token) {
-//        	$endOffsetBinary = strlen(iconv_substr());
-
             // Cut text after matched token
             $node->splitText($token->getEndOffset());
 
             // Cut matched node
             $matchedWordNode = $node->splitText($token->getStartOffset());
-
-//            printf("%s - %d, %d\n", $token->getTermText(), $token->getStartOffset(), $token->getEndOffset());
 
             // Retrieve HTML string representation for highlihted word
             $fullCallbackparamsList = $params;

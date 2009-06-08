@@ -41,7 +41,7 @@ NEW FEATURES
 * Locale support in Zend_Validate_Int and Zend_Validate_Float,
     contributed by Thomas Weidner
 * Phonecode support in Zend_Locale, contributed by Thomas Weidner
-* Zend_Validate_Db_RecordExists and _NoRecordExists, contributed by
+* Zend_Validate_Db_RecordExists and _RecordNotExists, contributed by
     Ryan Mauger
 * Zend_Validate_Iban, contributed by Thomas Weidner
 * Zend_Validate_File_WordCount, contributed by Thomas Weidner

@@ -502,7 +502,7 @@ Zend_Amf_Parse_TypeLoader::addResourceDirectory(
 
         <para>
             For detailed discussion of loading plugins, please see
-            the <link end="zend.loader.pluginloader">plugin loader</link> section.
+            the <link linkend="zend.loader.pluginloader">plugin loader</link> section.
         </para>
 
         <para>
@@ -692,15 +692,15 @@ private function onFault(fault:Object):void {
         <para>
             <classname>Zend_Amf_Server</classname> allows you to specify authentication and
             authorization hooks to control access to the services. It is using the infrastructure
-            provided by <link end="zend.auth"><classname>Zend_Auth</classname></link> and
-            <link end="zend.acl"><classname>Zend_Acl</classname></link> components.
+            provided by <link linkend="zend.auth"><classname>Zend_Auth</classname></link> and
+            <link linkend="zend.acl"><classname>Zend_Acl</classname></link> components.
         </para>
 
         <para>
             In order to define authentication, the user provides authentication adapter extening
             <classname>Zend_Amf_Auth_Abstract</classname> abstract class. The adapter should
             implement the <methodname>authenticate()</methodname> method just like regular
-            <link end="zend.auth.introduction.adapters">authentication adapter</link>.
+            <link linkend="zend.auth.introduction.adapters">authentication adapter</link>.
         </para>
 
         <para>

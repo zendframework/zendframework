@@ -74,7 +74,7 @@ class Zend_Service_Simpy_AllTests
             constant('TESTS_ZEND_SERVICE_SIMPY_ENABLED') &&
             defined('TESTS_ZEND_SERVICE_SIMPY_USERNAME') &&
             constant('TESTS_ZEND_SERVICE_SIMPY_USERNAME') &&
-            defined('TESTS_ZEND_SERVICE_SIMPY_PASSWORD')
+            defined('TESTS_ZEND_SERVICE_SIMPY_PASSWORD') &&
             constant('TESTS_ZEND_SERVICE_SIMPY_PASSWORD')) {
             $suite->addTestSuite('Zend_Service_Simpy_OnlineTest');
         }

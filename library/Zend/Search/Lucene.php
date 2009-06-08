@@ -1148,7 +1148,7 @@ class Zend_Search_Lucene implements Zend_Search_Lucene_Interface
 
         if (count($subResults) == 0) {
             return array();
-        } else if (count($subResults) == 0) {
+        } else if (count($subResults) == 1) {
             // Index is optimized (only one segment)
             // Do not perform array reindexing
             return reset($subResults);

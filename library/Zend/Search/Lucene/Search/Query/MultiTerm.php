@@ -465,6 +465,10 @@ class Zend_Search_Lucene_Search_Query_MultiTerm extends Zend_Search_Lucene_Searc
         $score = 0.0;
 
         foreach ($this->_terms as $termId => $term) {
+if (!isset($this->_termsFreqs[$termId][$docId])) {
+	echo "Undefined offset! - $termId:$docId\n";
+}
+
             /**
              * We don't need to check that term freq is not 0
              * Score calculation is performed only for matched docs

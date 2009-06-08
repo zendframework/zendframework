@@ -94,7 +94,7 @@ class Zend_Pdf
     /**
      * Version number of generated PDF documents.
      */
-    const PDF_VERSION = 1.4;
+    const PDF_VERSION = '1.4';
 
     /**
      * PDF file header.
@@ -163,6 +163,13 @@ class Zend_Pdf
      * @var Zend_Pdf_Trailer
      */
     protected $_trailer = null;
+
+    /**
+     * PDF version specified in the file header
+     *
+     * @var string
+     */
+    protected $_pdfHeaderVersion;
 
 
     /**
@@ -289,8 +296,9 @@ class Zend_Pdf
         $this->_objFactory = Zend_Pdf_ElementFactory::createFactory(1);
 
         if ($source !== null) {
-            $this->_parser  = new Zend_Pdf_Parser($source, $this->_objFactory, $load);
-            $this->_trailer = $this->_parser->getTrailer();
+            $this->_parser           = new Zend_Pdf_Parser($source, $this->_objFactory, $load);
+            $this->_pdfHeaderVersion = $this->_parser->getPDFVersion();
+            $this->_trailer          = $this->_parser->getTrailer();
             if ($this->_trailer->Encrypt !== null) {
                 require_once 'Zend/Pdf/Exception.php';
                 throw new Zend_Pdf_Exception('Encrypted document modification is not supported');
@@ -328,7 +336,9 @@ class Zend_Pdf
                 $this->_originalProperties = $this->properties;
             }
         } else {
-            $trailerDictionary = new Zend_Pdf_Element_Dictionary();
+        	$this->_pdfHeaderVersion = Zend_Pdf::PDF_VERSION;
+
+        	$trailerDictionary = new Zend_Pdf_Element_Dictionary();
 
             /**
              * Document id
@@ -463,10 +473,13 @@ class Zend_Pdf
      */
     protected function _dumpPages()
     {
-        $pagesContainer = $this->_trailer->Root->Pages;
+    	$root = $this->_trailer->Root;
+        $pagesContainer = $root->Pages;
+
         $pagesContainer->touch();
         $pagesContainer->Kids->items->clear();
 
+        $pageReferences = array();
         foreach ($this->pages as $page ) {
             $page->render($this->_objFactory);
 
@@ -475,7 +488,92 @@ class Zend_Pdf
             $pageDictionary->Parent = $pagesContainer;
 
             $pagesContainer->Kids->items[] = $pageDictionary;
+
+            // Collect page references
+            $pageReferences[$pageDictionary->toString($this->_objFactory)] = 1;
         }
+
+        // Collect named destinations (exclude not referenced pages)
+        $namedDestinations = array();
+
+        // Walk through destinations structure
+        if ($root->Version !== null  &&  version_compare($root->Version->value, $this->_pdfHeaderVersion, '>')) {
+        	$versionIs_1_2_plus = version_compare($root->Version->value,    '1.1', '>');
+        } else {
+        	$versionIs_1_2_plus = version_compare($this->_pdfHeaderVersion, '1.1', '>');
+        }
+
+        if ($versionIs_1_2_plus) {
+        	// PDF version is 1.2+
+        	// Look for Destinations structure at Name dictionary
+        } else {
+        	// PDF version is 1.1 (or earlier)
+        	// Look for Destinations sructure at Dest entry of document catalog
+        	if ($root->Dests !== null) {
+        		if ($root->Dests->getType() != Zend_Pdf_Element::TYPE_DICTIONARY) {
+                    require_once 'Zend/Pdf/Exception.php';
+                    throw new Zend_Pdf_Exception( 'Document catalog Dests entry must be a dictionary.' );
+        		}
+
+        		foreach ($root->Dests->getKeys() as $destKey) {
+        			$destination = $root->Dests->$destKey;
+        			if ($destination->getType() == Zend_Pdf_Element::TYPE_ARRAY) {
+        				// Destination is an array, just treat it as an explicit destination array
+        				$destinationArray = $destination;
+        			} else if ($destination->getType() == Zend_Pdf_Element::TYPE_DICTIONARY) {
+        				// Destination is a dictionary, treat it as (remote) go-to action
+
+        				// Get 'D' entry (an explicit destination array)
+        				if ($destination->D === null  ||  $destination->D->getType() != Zend_Pdf_Element::TYPE_ARRAY) {
+                            require_once 'Zend/Pdf/Exception.php';
+                            throw new Zend_Pdf_Exception( 'Named destination dictionary must have \'D\' array entry.' );
+        				}
+
+                        $destinationArray = $destination->D;
+                        if ($destination->F !== null) {
+                            // It's a remote Go-To action
+                            // So we don't check page for existance, only check that it's an inderect object reference
+                            rewind($destinationArray->items);
+                            $pageDictionaryObject = current($destinationArray->items);
+                            if ($pageDictionaryObject === false  ||  !$pageDictionaryObject instanceof Zend_Pdf_Element_Object) {
+                                require_once 'Zend/Pdf/Exception.php';
+                                throw new Zend_Pdf_Exception( 'First element of explicit destination array must be an indirect object.' );
+                            }
+
+                            $namedDestinations[$destKey] = 1;
+                            continue;
+        				} else {
+                            require_once 'Zend/Pdf/Exception.php';
+                            throw new Zend_Pdf_Exception( 'PDF 1.1 named destination entry must be an array or dictionary with \'D\' entry.' );
+        				}
+        			} else {
+                        require_once 'Zend/Pdf/Exception.php';
+                        throw new Zend_Pdf_Exception( 'PDF 1.1 named destination entry must be an array or dictionary.' );
+        			}
+
+        			rewind($destinationArray->items);
+        			$pageDictionaryObject = current($destinationArray->items);
+        			if ($pageDictionaryObject === false  ||  !$pageDictionaryObject instanceof Zend_Pdf_Element_Object) {
+                        require_once 'Zend/Pdf/Exception.php';
+                        throw new Zend_Pdf_Exception( 'First element of explicit destination array must be an indirect object.' );
+        			}
+
+        			if (isset($pageReferences[$pageDictionaryObject->toString($this->_objFactory)])) {
+        				// Collect named destination if referenced page is listed within current pages set.
+                        $namedDestinations[$destKey] = 1;
+        			} else {
+        				// Remove named destination from Dest dictionary
+        				$root->Dests->touch();
+        			}
+        		}
+        	}
+        }
+
+        if ($root->OpenAction !== null) {
+//        	if ()
+
+        }
+
 
         $pagesContainer->Count->touch();
         $pagesContainer->Count->value = count($this->pages);

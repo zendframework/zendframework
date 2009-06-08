@@ -967,9 +967,9 @@ class Zend_Search_Lucene_Index_SegmentInfo implements Zend_Search_Lucene_Index_T
 // ---------------------------------------------------------------
                     $updatedFilterData = array();
 
-                    for( $count=0; $count < $termInfo->docFreq; $count++ ) {
+                    for ($count = 0; $count < $termInfo->docFreq; $count++) {
                         $docDelta = $frqFile->readVInt();
-                        if( $docDelta % 2 == 1 ) {
+                        if ($docDelta % 2 == 1) {
                             $docId += ($docDelta-1)/2;
                         } else {
                             $docId += $docDelta/2;
@@ -988,9 +988,9 @@ class Zend_Search_Lucene_Index_SegmentInfo implements Zend_Search_Lucene_Index_T
                     // Perform full scan
                     $updatedFilterData = array();
 
-                    for( $count=0; $count < $termInfo->docFreq; $count++ ) {
+                    for ($count = 0; $count < $termInfo->docFreq; $count++) {
                         $docDelta = $frqFile->readVInt();
-                        if( $docDelta % 2 == 1 ) {
+                        if ($docDelta % 2 == 1) {
                             $docId += ($docDelta-1)/2;
                         } else {
                             $docId += $docDelta/2;
@@ -1008,7 +1008,7 @@ class Zend_Search_Lucene_Index_SegmentInfo implements Zend_Search_Lucene_Index_T
             } else {
                 // Filter is present, but doesn't has data for the current segment yet
                 $filterData = array();
-                for( $count=0; $count < $termInfo->docFreq; $count++ ) {
+                for ($count = 0; $count < $termInfo->docFreq; $count++) {
                     $docDelta = $frqFile->readVInt();
                     if( $docDelta % 2 == 1 ) {
                         $docId += ($docDelta-1)/2;
@@ -1024,7 +1024,7 @@ class Zend_Search_Lucene_Index_SegmentInfo implements Zend_Search_Lucene_Index_T
                 $docsFilter->segmentFilters[$this->_name] = $filterData;
             }
         } else {
-            for( $count=0; $count < $termInfo->docFreq; $count++ ) {
+            for ($count = 0; $count < $termInfo->docFreq; $count++) {
                 $docDelta = $frqFile->readVInt();
                 if( $docDelta % 2 == 1 ) {
                     $docId += ($docDelta-1)/2;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15927 -->
+<!-- EN-Revision: 15952 -->
 <sect1 id="zend.amf.server">
     <title>Zend_Amf_Server</title>
 
@@ -507,7 +507,7 @@ Zend_Amf_Parse_TypeLoader::addResourceDirectory(
 
         <para>
             プラグインのロードに関する詳細は、
-            <link end="zend.loader.pluginloader">プラグインローダー</link> を参照ください。
+            <link linkend="zend.loader.pluginloader">プラグインローダー</link> を参照ください。
         </para>
 
         <para>
@@ -701,8 +701,8 @@ private function onFault(fault:Object):void {
         <para>
             <classname>Zend_Amf_Server</classname> では、認証と認可のフックを指定して
             サービスへのアクセス制御をすることができます。この仕組みは、
-            <link end="zend.auth"><classname>Zend_Auth</classname></link> および
-            <link end="zend.acl"><classname>Zend_Acl</classname></link>
+            <link linkend="zend.auth"><classname>Zend_Auth</classname></link> および
+            <link linkend="zend.acl"><classname>Zend_Acl</classname></link>
             コンポーネントが提供するものを使用しています。
         </para>
 
@@ -710,7 +710,7 @@ private function onFault(fault:Object):void {
             認証を定義するには、抽象クラス
             <classname>Zend_Amf_Auth_Abstract</classname> を継承した認証アダプタを作成します。
             このアダプタは、通常の
-            <link end="zend.auth.introduction.adapters">認証アダプタ</link>
+            <link linkend="zend.auth.introduction.adapters">認証アダプタ</link>
             と同様に <methodname>authenticate()</methodname> メソッドを実装しなければなりません。
         </para>
 

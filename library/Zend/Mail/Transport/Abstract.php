@@ -11,7 +11,7 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- * 
+ *
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Transport
@@ -37,7 +37,7 @@ require_once 'Zend/Mime.php';
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Mail_Transport_Abstract 
+abstract class Zend_Mail_Transport_Abstract
 {
     /**
      * Mail body
@@ -144,10 +144,10 @@ abstract class Zend_Mail_Transport_Abstract
                 . $this->EOL
                 . " " . 'boundary="' . $boundary . '"'
             );
-            $this->_headers['MIME-Version'] = array('1.0');
-
             $this->boundary = $boundary;
         }
+
+        $this->_headers['MIME-Version'] = array('1.0');
 
         return $this->_headers;
     }

@@ -35,10 +35,10 @@ require_once dirname(__FILE__) . '/../../../TestHelper.php';
 PHPUnit_Util_Filter::addFileToFilter(__FILE__);
 
 /** @see Zend_Service_Simpy_OnlineTest */
-require_once 'Zend/Service/Simpy/OnlineTest.php';
+require_once 'Zend/Service/Simpy/OnlineTests.php';
 
 /** @see Zend_Service_Simpy_OfflineTest */
-require_once 'Zend/Service/Simpy/OfflineTest.php';
+require_once 'Zend/Service/Simpy/OfflineTests.php';
 
 /**
  * @category   Zend

@@ -346,19 +346,17 @@ $form->addElement(
         <title>通貨テキストボックス</title>
 
         <para>
-            通過テキストボックスは、主に通貨入力をサポートするためにあります。
+            通貨テキストボックスは、主に通貨入力をサポートするためにあります。
             通貨はローカライズされるかもしれず、小数も非小数もサポートできます。
         </para>
 
         <para>
-            <!-- TODO -->
-            Internally, CurrencyTextBox derives from <link
-                linkend="zend.dojo.form.elements.numberTextBox">NumberTextBox</link>,
-            <link
-                linkend="zend.dojo.form.elements.validationTextBox">ValidationTextBox</link>,
-            and <link linkend="zend.dojo.form.elements.textBox">TextBox</link>;
-            all methods available to those classes are available. In addition,
-            the following constraint methods can be used:
+            内部的には、通貨テキストボックスは
+            <link linkend="zend.dojo.form.elements.numberTextBox">数値テキストボックス</link>や
+            <link linkend="zend.dojo.form.elements.validationTextBox">検証テキストボックス</link>および
+            <link linkend="zend.dojo.form.elements.textBox">テキストボックス</link>に由来します;
+            それらのクラスのメソッドが全て利用可能です。
+            さらに、下記の制約メソッドを使用できます:
         </para>
 
         <itemizedlist>
@@ -420,17 +418,17 @@ $form->addElement(
 
         <para>
             日付テキストボックスは、
-            カレンダー・ドロップダウンを日付（クライアント側日付確認とフォーマッティングだけでなく）
+            カレンダー・ドロップダウンで日付（クライアント側日付確認とフォーマッティングだけでなく）
             を選ぶために提供します。
         </para>
 
         <para>
-            <!-- TODO -->
-            Internally, DateTextBox derives from <link
-                linkend="zend.dojo.form.elements.validationTextBox">ValidationTextBox</link>
-            and <link linkend="zend.dojo.form.elements.textBox">TextBox</link>;
-            all methods available to those classes are available. In addition,
-            the following methods can be used to set individual constraints:
+            内部的に、日付テキストボックスは
+            <link linkend="zend.dojo.form.elements.validationTextBox">検証テキストボックス</link>
+            および<link linkend="zend.dojo.form.elements.textBox">テキストボックス</link>
+            に由来します;
+            それらのクラスのメソッドが全て利用可能です。さらに、
+            個別の制約を設定するために下記のメソッドを使用できます:
         </para>
 
         <itemizedlist>
@@ -894,8 +892,8 @@ $form->addElement(
             Internally, NumberTextBox derives from <link
                 linkend="zend.dojo.form.elements.validationTextBox">ValidationTextBox</link>
             and <link linkend="zend.dojo.form.elements.textBox">TextBox</link>;
-            all methods available to those classes are available. In addition,
-            the following methods can be used to set individual constraints:
+            それらのクラスのメソッドが全て利用可能です。さらに、
+            個別の制約を設定するために下記のメソッドを使用できます:
         </para>
 
         <itemizedlist>
@@ -966,7 +964,7 @@ $form->addElement(
             Internally, NumberTextBox derives from <link
                 linkend="zend.dojo.form.elements.validationTextBox">ValidationTextBox</link>
             and <link linkend="zend.dojo.form.elements.textBox">TextBox</link>;
-            all methods available to those classes are available.
+            それらのクラスのメソッドが全て利用可能です。
         </para>
 
         <example id="zend.dojo.form.elements.passwordTextBox.example">
@@ -1256,8 +1254,8 @@ $form->addElement(
             <link
                 linkend="zend.dojo.form.elements.validationTextBox">ValidationTextBox</link>
             and <link linkend="zend.dojo.form.elements.textBox">TextBox</link>;
-            all methods available to those classes are available. In addition,
-            the following methods can be used to set individual constraints:
+            それらのクラスのメソッドが全て利用可能です。さらに、
+            個別の制約を設定するために下記のメソッドを使用できます:
         </para>
 
         <itemizedlist>

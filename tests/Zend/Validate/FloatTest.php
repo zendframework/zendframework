@@ -95,4 +95,12 @@ class Zend_Validate_FloatTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('de', $this->_validator->getLocale());
         $this->assertEquals(true, $this->_validator->isValid('10,5'));
     }
+
+    /**
+     * @ZF-4352
+     */
+    public function testNonStringValidation()
+    {
+        $this->assertFalse($this->_validator->isValid(array(1 => 1)));
+    }
 }

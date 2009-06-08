@@ -104,4 +104,13 @@ class Zend_Validate_RegexTest extends PHPUnit_Framework_TestCase
             $this->assertContains('Internal error matching pattern', $e->getMessage());
         }
     }
+
+    /**
+     * @ZF-4352
+     */
+    public function testNonStringValidation()
+    {
+        $validator = new Zend_Validate_Regex('/');
+        $this->assertFalse($validator->isValid(array(1 => 1)));
+    }
 }

@@ -44,7 +44,7 @@ class Zend_Validate_Int extends Zend_Validate_Abstract
      * @var array
      */
     protected $_messageTemplates = array(
-        self::INVALID   => "Invalid type given, value should be a string or a integer",
+        self::INVALID => "Invalid type given, value should be a string or a integer",
         self::NOT_INT => "'%value%' does not appear to be an integer"
     );
 
@@ -97,7 +97,8 @@ class Zend_Validate_Int extends Zend_Validate_Abstract
 
         $this->_setValue($value);
         try {
-            if (!Zend_Locale_Format::isInteger($value, array('locale' => $this->_locale))) {
+            if (!Zend_Locale_Format::isInteger($value, array('locale' => 'en')) &&
+                !Zend_Locale_Format::isInteger($value, array('locale' => $this->_locale))) {
                 $this->_error();
                 return false;
             }

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -20,12 +19,10 @@
  * @version    $Id$
  */
 
-
 /**
  * @see Zend_Validate_Abstract
  */
 require_once 'Zend/Validate/Abstract.php';
-
 
 /**
  * @category   Zend
@@ -35,14 +32,8 @@ require_once 'Zend/Validate/Abstract.php';
  */
 class Zend_Validate_Alpha extends Zend_Validate_Abstract
 {
-    /**
-     * Validation failure message key for when the value contains non-alphabetic characters
-     */
-    const NOT_ALPHA = 'notAlpha';
-
-    /**
-     * Validation failure message key for when the value is an empty string
-     */
+    const INVALID      = 'alphaInvalid';
+    const NOT_ALPHA    = 'notAlpha';
     const STRING_EMPTY = 'stringEmpty';
 
     /**
@@ -66,6 +57,7 @@ class Zend_Validate_Alpha extends Zend_Validate_Abstract
      * @var array
      */
     protected $_messageTemplates = array(
+        self::INVALID      => "Invalid type given, value should be a string",
         self::NOT_ALPHA    => "'%value%' has not only alphabetic characters",
         self::STRING_EMPTY => "'%value%' is an empty string"
     );
@@ -113,11 +105,14 @@ class Zend_Validate_Alpha extends Zend_Validate_Abstract
      */
     public function isValid($value)
     {
-        $valueString = (string) $value;
+        if (!is_string($value)) {
+            $this->_error(self::INVALID);
+            return false;
+        }
 
-        $this->_setValue($valueString);
+        $this->_setValue($value);
 
-        if ('' === $valueString) {
+        if ('' === $value) {
             $this->_error(self::STRING_EMPTY);
             return false;
         }
@@ -132,7 +127,7 @@ class Zend_Validate_Alpha extends Zend_Validate_Abstract
 
         self::$_filter->allowWhiteSpace = $this->allowWhiteSpace;
 
-        if ($valueString !== self::$_filter->filter($valueString)) {
+        if ($value !== self::$_filter->filter($value)) {
             $this->_error(self::NOT_ALPHA);
             return false;
         }

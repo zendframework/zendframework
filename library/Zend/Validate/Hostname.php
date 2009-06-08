@@ -46,6 +46,7 @@ require_once 'Zend/Validate/Ip.php';
  */
 class Zend_Validate_Hostname extends Zend_Validate_Abstract
 {
+    const INVALID                 = 'hostnameInvalid';
     const IP_ADDRESS_NOT_ALLOWED  = 'hostnameIpAddressNotAllowed';
     const UNKNOWN_TLD             = 'hostnameUnknownTld';
     const INVALID_DASH            = 'hostnameDashCharacter';
@@ -60,6 +61,7 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
      * @var array
      */
     protected $_messageTemplates = array(
+        self::INVALID                 => "Invalid type given, value should be a string",
         self::IP_ADDRESS_NOT_ALLOWED  => "'%value%' appears to be an IP address, but IP addresses are not allowed",
         self::UNKNOWN_TLD             => "'%value%' appears to be a DNS hostname but cannot match TLD against known list",
         self::INVALID_DASH            => "'%value%' appears to be a DNS hostname but contains a dash (-) in an invalid position",
@@ -409,13 +411,16 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
      */
     public function isValid($value)
     {
-        $valueString = (string) $value;
+        if (!is_string($value)) {
+            $this->_error(self::INVALID);
+            return false;
+        }
 
-        $this->_setValue($valueString);
+        $this->_setValue($value);
 
         // Check input against IP address schema
-        if (preg_match('/^[0-9.a-e:.]*$/i', $valueString, $nothing) &&
-            $this->_ipValidator->setTranslator($this->getTranslator())->isValid($valueString)) {
+        if (preg_match('/^[0-9.a-e:.]*$/i', $value, $nothing) &&
+            $this->_ipValidator->setTranslator($this->getTranslator())->isValid($value)) {
             if (!($this->_allow & self::ALLOW_IP)) {
                 $this->_error(self::IP_ADDRESS_NOT_ALLOWED);
                 return false;
@@ -425,8 +430,8 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
         }
 
         // Check input against DNS hostname schema
-        $domainParts = explode('.', $valueString);
-        if ((count($domainParts) > 1) && (strlen($valueString) >= 4) && (strlen($valueString) <= 254)) {
+        $domainParts = explode('.', $value);
+        if ((count($domainParts) > 1) && (strlen($value) >= 4) && (strlen($value) <= 254)) {
             $status = false;
 
             do {
@@ -539,7 +544,7 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
 
         // Check input against local network name schema; last chance to pass validation
         $regexLocal = '/^(([a-zA-Z0-9\x2d]{1,63}\x2e)*[a-zA-Z0-9\x2d]{1,63}){1,254}$/';
-        $status = @preg_match($regexLocal, $valueString);
+        $status = @preg_match($regexLocal, $value);
         if (false === $status) {
             /**
              * Regex error

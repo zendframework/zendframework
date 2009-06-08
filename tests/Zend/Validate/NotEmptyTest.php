@@ -115,6 +115,14 @@ class Zend_Validate_NotEmptyTest extends PHPUnit_Framework_TestCase
     {
         $this->assertEquals(array(), $this->_validator->getMessages());
     }
+
+    /**
+     * @ZF-4352
+     */
+    public function testNonStringValidation()
+    {
+        $this->assertFalse($this->_validator->isValid(array(1 => 1)));
+    }
 }
 
 // Call Zend_Validate_NotEmptyTest::main() if this source file is executed directly.

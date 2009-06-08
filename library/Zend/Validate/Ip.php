@@ -32,12 +32,14 @@ require_once 'Zend/Validate/Abstract.php';
  */
 class Zend_Validate_Ip extends Zend_Validate_Abstract
 {
+    const INVALID        = 'ipInvalid';
     const NOT_IP_ADDRESS = 'notIpAddress';
 
     /**
      * @var array
      */
     protected $_messageTemplates = array(
+        self::INVALID        => "Invalid type given, value should be a string",
         self::NOT_IP_ADDRESS => "'%value%' does not appear to be a valid IP address"
     );
 
@@ -51,15 +53,18 @@ class Zend_Validate_Ip extends Zend_Validate_Abstract
      */
     public function isValid($value)
     {
-        $valueString = (string) $value;
+        if (!is_string($value)) {
+            $this->_error(self::INVALID);
+            return false;
+        }
 
-        $this->_setValue($valueString);
+        $this->_setValue($value);
 
-        if ((ip2long($valueString) === false) || (long2ip(ip2long($valueString)) !== $valueString)) {
+        if ((ip2long($value) === false) || (long2ip(ip2long($value)) !== $value)) {
             if (!function_exists('inet_pton')) {
                 $this->_error();
                 return false;
-            } else if ((@inet_pton($value) === false) ||(inet_ntop(@inet_pton($value)) !== $valueString)) {
+            } else if ((@inet_pton($value) === false) ||(inet_ntop(@inet_pton($value)) !== $value)) {
                 $this->_error();
                 return false;
             }

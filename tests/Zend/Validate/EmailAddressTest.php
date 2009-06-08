@@ -409,4 +409,12 @@ class Zend_Validate_EmailAddressTest extends PHPUnit_Framework_TestCase
             $this->assertFalse($this->_validator->isValid($input));
         }
     }
+
+    /**
+     * @ZF-4352
+     */
+    public function testNonStringValidation()
+    {
+        $this->assertFalse($this->_validator->isValid(array(1 => 1)));
+    }
 }

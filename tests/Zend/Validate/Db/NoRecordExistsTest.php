@@ -59,11 +59,15 @@ class Zend_Validate_Db_NoRecordExistsTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
+        if (!extension_loaded('pdo_sqlite')) {
+            $this->markTestSkipped('No sqlite available');
+        }
+
         $this->_db = new Zend_Db_Adapter_Pdo_Sqlite(
             array('dbname' => 'test')
             );
 
-	Zend_Db_Table_Abstract::setDefaultAdapter($this->_db);
+        Zend_Db_Table_Abstract::setDefaultAdapter($this->_db);
 
         $createTable = 'CREATE TABLE [users] ( '
                    . '[id] INTEGER  NOT NULL PRIMARY KEY, '
@@ -153,7 +157,7 @@ class Zend_Validate_Db_NoRecordExistsTest extends PHPUnit_Framework_TestCase
     /**
      * Test that the class throws an exception if no adapter is provided
      * and no default is set.
-     * 
+     *
      * @return void
      */
     public function testThrowsExceptionWithNoAdapter()

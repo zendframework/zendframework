@@ -107,4 +107,12 @@ class Zend_Validate_IpTest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue($this->_validator->isValid('::127.0.0.1'));
     }
+
+    /**
+     * @ZF-4352
+     */
+    public function testNonStringValidation()
+    {
+        $this->assertFalse($this->_validator->isValid(array(1 => 1)));
+    }
 }

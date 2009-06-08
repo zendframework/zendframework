@@ -122,4 +122,12 @@ class Zend_Validate_AlphaTest extends PHPUnit_Framework_TestCase
                 );
         }
     }
+
+    /**
+     * @ZF-4352
+     */
+    public function testNonStringValidation()
+    {
+        $this->assertFalse($this->_validator->isValid(array(1 => 1)));
+    }
 }

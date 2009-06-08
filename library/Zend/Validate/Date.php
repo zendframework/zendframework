@@ -32,19 +32,9 @@ require_once 'Zend/Validate/Abstract.php';
  */
 class Zend_Validate_Date extends Zend_Validate_Abstract
 {
-    /**
-     * Validation failure message key for when the value does not follow the YYYY-MM-DD format
-     */
-    const NOT_YYYY_MM_DD = 'dateNotYYYY-MM-DD';
-
-    /**
-     * Validation failure message key for when the value does not appear to be a valid date
-     */
     const INVALID        = 'dateInvalid';
-
-    /**
-     * Validation failure message key for when the value does not fit the given dateformat or locale
-     */
+    const NOT_YYYY_MM_DD = 'dateNotYYYY-MM-DD';
+    const INVALID_DATE    = 'dateInvalidDate';
     const FALSEFORMAT    = 'dateFalseFormat';
 
     /**
@@ -53,8 +43,9 @@ class Zend_Validate_Date extends Zend_Validate_Abstract
      * @var array
      */
     protected $_messageTemplates = array(
+        self::INVALID        => "Invalid type given, value should be string, or integer",
         self::NOT_YYYY_MM_DD => "'%value%' is not of the format YYYY-MM-DD",
-        self::INVALID        => "'%value%' does not appear to be a valid date",
+        self::INVALID_DATE   => "'%value%' does not appear to be a valid date",
         self::FALSEFORMAT    => "'%value%' does not fit given date format"
     );
 
@@ -144,9 +135,12 @@ class Zend_Validate_Date extends Zend_Validate_Abstract
      */
     public function isValid($value)
     {
-        $valueString = (string) $value;
+        if (!is_string($value) && !is_int($value) && !is_float($value)) {
+            $this->_error(self::INVALID);
+            return false;
+        }
 
-        $this->_setValue($valueString);
+        $this->_setValue($value);
 
         if (($this->_format !== null) or ($this->_locale !== null)) {
             require_once 'Zend/Date.php';
@@ -154,20 +148,20 @@ class Zend_Validate_Date extends Zend_Validate_Abstract
                 if ($this->_checkFormat($value) === false) {
                     $this->_error(self::FALSEFORMAT);
                 } else {
-                    $this->_error(self::INVALID);
+                    $this->_error(self::INVALID_DATE);
                 }
                 return false;
             }
         } else {
-            if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $valueString)) {
+            if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $value)) {
                 $this->_error(self::NOT_YYYY_MM_DD);
                 return false;
             }
 
-            list($year, $month, $day) = sscanf($valueString, '%d-%d-%d');
+            list($year, $month, $day) = sscanf($value, '%d-%d-%d');
 
             if (!checkdate($month, $day, $year)) {
-                $this->_error(self::INVALID);
+                $this->_error(self::INVALID_DATE);
                 return false;
             }
         }

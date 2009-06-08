@@ -35,13 +35,14 @@ require_once 'Zend/Validate/Abstract.php';
  */
 class Zend_Validate_Regex extends Zend_Validate_Abstract
 {
-
+    const INVALID   = 'regexInvalid';
     const NOT_MATCH = 'regexNotMatch';
 
     /**
      * @var array
      */
     protected $_messageTemplates = array(
+        self::INVALID   => "Invalid type given, value should be string, integer or float",
         self::NOT_MATCH => "'%value%' does not match against pattern '%pattern%'"
     );
 
@@ -103,17 +104,17 @@ class Zend_Validate_Regex extends Zend_Validate_Abstract
      */
     public function isValid($value)
     {
-        $valueString = (string) $value;
+        if (!is_string($value) && !is_int($value) && !is_float($value)) {
+            $this->_error(self::INVALID);
+            return false;
+        }
 
-        $this->_setValue($valueString);
+        $this->_setValue($value);
 
-        $status = @preg_match($this->_pattern, $valueString);
+        $status = @preg_match($this->_pattern, $value);
         if (false === $status) {
-            /**
-             * @see Zend_Validate_Exception
-             */
             require_once 'Zend/Validate/Exception.php';
-            throw new Zend_Validate_Exception("Internal error matching pattern '$this->_pattern' against value '$valueString'");
+            throw new Zend_Validate_Exception("Internal error matching pattern '$this->_pattern' against value '$value'");
         }
         if (!$status) {
             $this->_error();

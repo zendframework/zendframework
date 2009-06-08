@@ -145,4 +145,12 @@ class Zend_Validate_DigitsTest extends PHPUnit_Framework_TestCase
             );
         $this->assertThat($errors, $this->identicalTo($arrayExpected));
     }
+
+    /**
+     * @ZF-4352
+     */
+    public function testNonStringValidation()
+    {
+        $this->assertFalse($this->_validator->isValid(array(1 => 1)));
+    }
 }

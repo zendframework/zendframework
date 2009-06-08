@@ -32,12 +32,14 @@ require_once 'Zend/Validate/Abstract.php';
  */
 class Zend_Validate_NotEmpty extends Zend_Validate_Abstract
 {
+    const INVALID  = 'notEmptyInvalid';
     const IS_EMPTY = 'isEmpty';
 
     /**
      * @var array
      */
     protected $_messageTemplates = array(
+        self::INVALID  => "Invalid type given, value should be float, string, or integer",
         self::IS_EMPTY => "Value is required and can't be empty"
     );
 
@@ -51,7 +53,12 @@ class Zend_Validate_NotEmpty extends Zend_Validate_Abstract
      */
     public function isValid($value)
     {
-        $this->_setValue((string) $value);
+        if (!is_string($value) && !is_int($value) && !is_float($value) && !is_bool($value)) {
+            $this->_error(self::INVALID);
+            return false;
+        }
+
+        $this->_setValue($value);
 
         if (is_string($value)
             && (('' === $value)

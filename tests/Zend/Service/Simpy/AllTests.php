@@ -68,7 +68,7 @@ class Zend_Service_Simpy_AllTests
     {
         $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Service_Simpy');
 
-        $suite->addTestSuite('Zend_Service_Simpy_OfflineTest');
+        $suite->addTestSuite('Zend_Service_Simpy_OfflineTests');
 
         if (defined('TESTS_ZEND_SERVICE_SIMPY_ENABLED') &&
             constant('TESTS_ZEND_SERVICE_SIMPY_ENABLED') &&
@@ -76,7 +76,7 @@ class Zend_Service_Simpy_AllTests
             constant('TESTS_ZEND_SERVICE_SIMPY_USERNAME') &&
             defined('TESTS_ZEND_SERVICE_SIMPY_PASSWORD') &&
             constant('TESTS_ZEND_SERVICE_SIMPY_PASSWORD')) {
-            $suite->addTestSuite('Zend_Service_Simpy_OnlineTest');
+            $suite->addTestSuite('Zend_Service_Simpy_OnlineTests');
         }
 
         return $suite;

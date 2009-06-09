@@ -610,6 +610,13 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             language to a full qualified locale
                         </entry>
                     </row>
+                    <row>
+                        <entry><emphasis>Unit</emphasis></entry>
+                        <entry>
+                            Returns a list of localized calendar units. This can be used to translate
+                            the strings "day", "month" and so on automatically
+                        </entry>
+                    </row>
                 </tbody>
             </tgroup>
         </table>
@@ -1027,6 +1034,14 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry>
                             Returns a locale dependencies for a given language which can be used to
                             upgrade this language to a full qualified locale
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>Unit</emphasis></entry>
+                        <entry>
+                            Returns a localized calendar unit. This can be used to translate
+                            the strings "day", "month" and so on automatically. The first parameter
+                            has to be the type, and the second parameter has to be the count
                         </entry>
                     </row>
                 </tbody>

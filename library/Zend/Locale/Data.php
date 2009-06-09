@@ -870,6 +870,14 @@ class Zend_Locale_Data
                 }
                 break;
 
+            case 'unit':
+                $_temp = self::_getFile($locale, '/ldml/units/unit', 'type');
+                foreach($_temp as $key => $keyvalue) {
+                    $_temp2 = self::_getFile($locale, '/ldml/units/unit[@type=\'' . $key . '\']/unitPattern', 'count');
+                    $temp[$key] = $_temp2;
+                }
+                break;
+
             default :
                 require_once 'Zend/Locale/Exception.php';
                 throw new Zend_Locale_Exception("Unknown list ($path) for parsing locale data.");
@@ -1360,6 +1368,10 @@ class Zend_Locale_Data
 
             case 'localeupgrade':
                 $temp = self::_getFile('likelySubtags', '/supplementalData/likelySubtags/likelySubtag[@from=\'' . $value . '\']', 'to', $value);
+                break;
+
+            case 'unit':
+                $temp = self::_getFile($locale, '/ldml/units/unit[@type=\'' . $value[0] . '\']/unitPattern[@count=\'' . $value[1] . '\']', '');
                 break;
 
             default :

@@ -2702,4 +2702,26 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
         $value = Zend_Locale_Data::getContent('de_AT', 'dateinterval', array('gregorian', 'yMMMM', 'y'));
         $this->assertEquals("MM.yyyy – MM.yyyy", $value);
     }
+
+    /**
+     * test for reading intervalformat from locale
+     * expected array
+     */
+    public function testUnit()
+    {
+        $value = Zend_Locale_Data::getList('de_AT', 'unit');
+        $result = array(
+            'day' => array('one' => '{0} Tag', 'other' => '{0} Tage'),
+            'hour' => array('one' => '{0} Stunde', 'other' => '{0} Stunden'),
+            'minute' => array('one' => '{0} Minute', 'other' => '{0} Minuten'),
+            'month' => array('one' => '{0} Monat', 'other' => '{0} Monate'),
+            'second' => array('one' => '{0} Sekunde', 'other' => '{0} Sekunden'),
+            'week' => array('one' => '{0} Woche', 'other' => '{0} Wochen'),
+            'year' => array('one' => '{0} Jahr', 'other' => '{0} Jahre')
+        );
+        $this->assertEquals($result, $value);
+
+        $value = Zend_Locale_Data::getContent('de_AT', 'unit', array('day', 'one'));
+        $this->assertEquals('{0} Tag', $value);
+    }
 }

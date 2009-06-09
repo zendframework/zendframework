@@ -48,7 +48,7 @@
                               <entry><type>String</type></entry>
                               <entry><constant>NULL</constant></entry>
                               <entry>
-                                A prefix for all cache ids, if set to <constant>null</constant>, no
+                                A prefix for all cache ids, if set to <constant>NULL</constant>, no
                                 cache id prefix will be used. The cache id prefix essentially
                                 creates a namespace in the cache, allowing multiple applications or
                                 websites to use a shared cache. Each application or website can use
@@ -110,8 +110,10 @@
                               <entry><type>Boolean</type></entry>
                               <entry><constant>FALSE</constant></entry>
                               <entry>
-                                if set to true, the core will set the ignore_user_abort PHP flag
-                                inside the save() method to avoid cache corruptions in some cases
+                                if set to true, the core will set the ignore_user_abort
+                                <acronym>PHP</acronym> flag inside the
+                                <methodname>save()</methodname> method to avoid cache
+                                corruptions in some cases
                               </entry>
                           </row>
                       </tbody>
@@ -236,8 +238,9 @@ if (!($cache->test($id))) {
             <title>Introduction</title>
             <para>
                 <classname>Zend_Cache_Frontend_Output</classname> is an output-capturing frontend.
-                It utilizes output buffering in PHP to capture everything between its
-                <methodname>start()</methodname> and <methodname>end()</methodname> methods.
+                It utilizes output buffering in <acronym>PHP</acronym> to capture everything
+                between its <methodname>start()</methodname> and <methodname>end()</methodname>
+                methods.
             </para>
         </sect3>
         <sect3 id="zend.cache.frontends.output.options">
@@ -332,7 +335,7 @@ echo 'This is never cached ('.time().').';
             <title>Examples</title>
             <para>
                 Using the <methodname>call()</methodname> function is the same as using
-                <methodname>call_user_func_array()</methodname> in PHP:
+                <methodname>call_user_func_array()</methodname> in <acronym>PHP</acronym>:
             </para>
             <programlisting language="php"><![CDATA[
 $cache->call('veryExpensiveFunc', $params);
@@ -343,8 +346,8 @@ $cache->call('veryExpensiveFunc', $params);
 // $cache->call('veryExpensiveFunc', array(1, 'foo', 'bar'))
 ]]></programlisting>
             <para>
-                <classname>Zend_Cache_Frontend_Function</classname> is smart enough to cache both the
-                return value of the function and its internal output.
+                <classname>Zend_Cache_Frontend_Function</classname> is smart enough to cache both
+                the return value of the function and its internal output.
             </para>
             <note><para>
                 You can pass any built in or user defined function with the exception of
@@ -484,12 +487,14 @@ $result = $cache->foobar2('1', '2');
                 master files.
             </para>
             <para>
-                For instance, you have an XML configuration file which is parsed by a function
-                which returns a "config object" (like with <classname>Zend_Config</classname>). With
+                For instance, you have an <acronym>XML</acronym> configuration file which is parsed
+                by a function which returns a "config object" (like with
+                <classname>Zend_Config</classname>). With
                 <classname>Zend_Cache_Frontend_File</classname>, you can store the "config object"
-                into cache (to avoid the parsing of the XML config file at each time) but with a
-                sort of strong dependency on the "master file". So, if the XML config file
-                is modified, the cache is immediately invalidated.
+                into cache (to avoid the parsing of the <acronym>XML</acronym> config file at each
+                time) but with a sort of strong dependency on the "master file". So, if the
+                <acronym>XML</acronym> config file is modified, the cache is immediately
+                invalidated.
             </para>
         </sect3>
         <sect3 id="zend.cache.frontends.file.options">
@@ -526,11 +531,11 @@ $result = $cache->foobar2('1', '2');
                               <entry><emphasis>master_files_mode</emphasis></entry>
                               <entry><type>String</type></entry>
                               <entry>
-                                  <classname>Zend_Cache_Frontend_File::MODE_OR</classname>
+                                  <constant>Zend_Cache_Frontend_File::MODE_OR</constant>
                               </entry>
                               <entry>
-                                  <classname>Zend_Cache_Frontend_File::MODE_AND</classname> or
-                                  <classname>Zend_Cache_Frontend_File::MODE_OR</classname> ; if
+                                  <constant>Zend_Cache_Frontend_File::MODE_AND</constant> or
+                                  <constant>Zend_Cache_Frontend_File::MODE_OR</constant> ; if
                                   <constant>MODE_AND</constant>, then all master files have to be
                                   touched to get a cache invalidation if
                                   <constant>MODE_OR</constant>, then a single touched master file is
@@ -579,9 +584,10 @@ $result = $cache->foobar2('1', '2');
                 <methodname>end()</methodname> call is fully automatic when the page is ended.
             </para>
             <para>
-                For the moment, it's not implemented but we plan to add a HTTP conditional system
-                to save bandwidth (the system will send a HTTP 304 Not Modified if the cache is hit
-                and if the browser has already the good version).
+                For the moment, it's not implemented but we plan to add a <acronym>HTTP</acronym>
+                conditional system to save bandwidth (the system will send a
+                <acronym>HTTP</acronym> 304 Not Modified if the cache is hit and if the browser
+                has already the good version).
             </para>
         </sect3>
         <sect3 id="zend.cache.frontends.page.options">
@@ -734,12 +740,14 @@ $result = $cache->foobar2('1', '2');
                               <entry><type>Array</type></entry>
                               <entry><methodname>array()</methodname></entry>
                               <entry>
-                                  an associative array to set options only for some REQUEST_URI,
-                                  keys are (PCRE) regexps, values are associative arrays with
-                                  specific options to set if the regexp matchs on
-                                  $_SERVER['REQUEST_URI'] (see default_options for the list of
-                                  available options) ; if several regexps match the
-                                  $_SERVER['REQUEST_URI'], only the last one will be used
+                                  an associative array to set options only for some
+                                  <acronym>REQUEST_URI</acronym>, keys are
+                                  (<acronym>PCRE</acronym>) regexps, values are associative arrays
+                                  with specific options to set if the regexp matchs on
+                                  <varname>$_SERVER['REQUEST_URI']</varname> (see default_options
+                                  for the list of available options); if several regexps match the
+                                  <varname>$_SERVER['REQUEST_URI']</varname>, only the last one
+                                  will be used
                               </entry>
                          </row>
                          <row>
@@ -747,9 +755,9 @@ $result = $cache->foobar2('1', '2');
                               <entry><type>Array</type></entry>
                               <entry><methodname>array()</methodname></entry>
                               <entry>
-                                   an array of strings corresponding to some HTTP headers name.
-                                   Listed headers will be stored with cache datas and "replayed"
-                                   when the cache is hit
+                                   an array of strings corresponding to some
+                                   <acronym>HTTP</acronym> headers name. Listed headers will be
+                                   stored with cache datas and "replayed" when the cache is hit
                               </entry>
                          </row>
                       </tbody>
@@ -828,9 +836,9 @@ $cache->start();
         <sect3 id="zend.cache.frontends.page.cancel">
             <title>The Specific Cancel Method</title>
             <para>
-                Because of design issues, in some cases (for example when using non HTTP/200 return
-                codes), you could need to cancel the current cache process. So we introduce for this
-                particular frontend, the cancel() method.
+                Because of design issues, in some cases (for example when using non
+                <acronym>HTTP</acronym> 200 return codes), you could need to cancel the current
+                cache process. So we introduce for this particular frontend, the cancel() method.
             </para>
             <programlisting language="php"><![CDATA[
 // [...] // require, configuration and factory

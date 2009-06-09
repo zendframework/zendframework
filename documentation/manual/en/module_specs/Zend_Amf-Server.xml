@@ -506,8 +506,9 @@ Zend_Amf_Parse_TypeLoader::addResourceDirectory(
         </para>
 
         <para>
-            Default directory for <classname>Zend_Amf</classname> resources is registered automatically
-            and currently contains handlers for "mysql result" and "stream" resources.
+            Default directory for <classname>Zend_Amf</classname> resources is registered
+            automatically and currently contains handlers for "mysql result" and "stream"
+            resources.
         </para>
 
         <programlisting language="php"><![CDATA[

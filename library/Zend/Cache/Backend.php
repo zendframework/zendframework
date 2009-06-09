@@ -183,7 +183,9 @@ class Zend_Cache_Backend
         if ($tempFile) {
         	$dir = realpath(dirname($tempFile));
             unlink($tempFile);
-            return $dir;
+            if ($this->_isGoodTmpDir($dir)) {
+                return $dir;
+            }
         }
         if ($this->_isGoodTmpDir('/tmp')) {
         	return '/tmp';

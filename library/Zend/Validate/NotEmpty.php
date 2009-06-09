@@ -64,10 +64,10 @@ class Zend_Validate_NotEmpty extends Zend_Validate_Abstract
             && (('' === $value)
                 || preg_match('/^\s+$/s', $value))
         ) {
-            $this->_error();
+            $this->_error(self::IS_EMPTY);
             return false;
         } elseif (!is_string($value) && empty($value)) {
-            $this->_error();
+            $this->_error(self::IS_EMPTY);
             return false;
         }
 

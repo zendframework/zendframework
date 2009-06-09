@@ -29,7 +29,7 @@
                       <row>
                           <entry><emphasis>cache_dir</emphasis></entry>
                           <entry><type>String</type></entry>
-                          <entry><filename>'/tmp/'</filename></entry>
+                          <entry>'<filename>/tmp/</filename>'</entry>
                           <entry>
                               Directory where to store cache files
                           </entry>
@@ -39,9 +39,9 @@
                           <entry><type>Boolean</type></entry>
                           <entry><constant>TRUE</constant></entry>
                           <entry>
-                            Enable / disable file_locking : Can avoid cache corruption under
+                            Enable or disable file_locking : Can avoid cache corruption under
                             bad circumstances but it doesn't help on multithread webservers
-                            or on NFS filesystems...
+                            or on <acronym>NFS</acronym> filesystems...
                           </entry>
                       </row>
                       <row>
@@ -91,8 +91,9 @@
                           <entry>'zend_cache'</entry>
                           <entry>
                               prefix for cache files ; be really careful with this option because
-                              a too generic value in a system cache dir (like /tmp) can cause
-                              disasters when cleaning the cache
+                              a too generic value in a system cache dir
+                              (like <filename>/tmp</filename>) can cause disasters when cleaning
+                              the cache
                         </entry>
                       </row>
                       <row>
@@ -151,10 +152,13 @@
                           <entry>
                               Disable / Tune the automatic vacuum process. The automatic vacuum
                               process defragment the database file (and make it smaller) when a
-                              clean() or delete() is called: 0 means no automatic vacuum ;
-                              1 means systematic vacuum (when delete() or clean() methods are
-                              called) ; x (integer) > 1 => automatic vacuum randomly 1 times on x
-                              clean() or delete().
+                              <methodname>clean()</methodname> or <methodname>delete()</methodname>
+                              is called: 0 means no automatic vacuum ; 1 means systematic vacuum
+                              (when <methodname>delete()</methodname> or
+                              <methodname>clean()</methodname> methods are called) ; x (integer) >
+                              1 => automatic vacuum randomly 1 times on x
+                              <methodname>clean()</methodname> or
+                              <methodname>delete()</methodname>.
                           </entry>
                       </row>
                   </tbody>
@@ -224,7 +228,7 @@
                           <entry><constant>FALSE</constant></entry>
                           <entry>
                              true if you want to use this compatibility mode with old memcache
-                             servers/extensions
+                             servers or extensions
                           </entry>
                       </row>
                   </tbody>
@@ -235,8 +239,9 @@
         <title>Zend_Cache_Backend_Apc</title>
         <para>
             This (extended) backends stores cache records in shared memory through
-            the <ulink url="http://pecl.php.net/package/APC">APC</ulink> (Alternative PHP Cache)
-            extension (which is of course need for using this backend).
+            the <ulink url="http://pecl.php.net/package/APC">APC</ulink> (Alternative
+            <acronym>PHP</acronym> Cache) extension (which is of course need for using this
+            backend).
         </para>
         <para>
             Be careful : with this backend, "tags" are not supported for the moment as
@@ -277,7 +282,8 @@
                           <entry><type>String</type></entry>
                           <entry><constant>NULL</constant></entry>
                           <entry>
-                              xcache.admin.user, necessary for the clean() method
+                              <filename>xcache.admin.user</filename>, necessary for the
+                              <methodname>clean()</methodname> method
                           </entry>
                       </row>
                       <row>
@@ -285,8 +291,9 @@
                           <entry><type>String</type></entry>
                           <entry><constant>NULL</constant></entry>
                           <entry>
-                              xcache.admin.pass (in clear form, not MD5), necessary for the clean()
-                              method
+                              <filename>xcache.admin.pass</filename> (in clear form, not
+                              <acronym>MD5</acronym>), necessary for the
+                              <methodname>clean()</methodname> method
                           </entry>
                       </row>
                   </tbody>
@@ -296,7 +303,7 @@
     <sect2 id="zend.cache.backends.platform">
         <title>Zend_Cache_Backend_ZendPlatform</title>
         <para>
-            This backend uses content caching API of the <ulink
+            This backend uses content caching <acronym>API</acronym> of the <ulink
                 url="http://www.zend.com/products/platform">Zend Platform</ulink> product.
             Naturally, to use this backend you need to have Zend Platform installed.
         </para>
@@ -307,7 +314,7 @@
         <para>
             Specify this backend using a word separator -- '-', '.', ' ', or '_'
             -- between the words 'Zend' and 'Platform' when using the
-            <classname>Zend_Cache::factory()</classname> method:
+            <methodname>Zend_Cache::factory()</methodname> method:
         </para>
         <programlisting language="php"><![CDATA[
 $cache = Zend_Cache::factory('Core', 'Zend Platform');
@@ -326,7 +333,6 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
             This backend will use the priority parameter (given at the frontend level when storing a
             record) and the remaining space in the fast backend to optimize the usage of these two
             backends.
-            FIXME
         </para>
         <para>
             Available options are :
@@ -382,7 +388,7 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
                           <entry>
                               if true, the slow_backend argument is used as a complete class name ;
                               if false, the frontend argument is used as the end of
-                              "Zend_Cache_Backend_[...]" class name
+                              "<classname>Zend_Cache_Backend_</classname>[...]" class name
                           </entry>
                       </row>
                       <row>
@@ -392,7 +398,7 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
                           <entry>
                               if true, the fast_backend argument is used as a complete class name ;
                               if false, the frontend argument is used as the end of
-                              "Zend_Cache_Backend_[...]" class name
+                              "<classname>Zend_Cache_Backend_</classname>[...]" class name
                           </entry>
                       </row>
                       <row>
@@ -448,7 +454,8 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
         </para>
         <para>
              These backend work only withing Zend Server environment for pages requested through
-             HTTP(S) and don't work for command line script execution
+             <acronym>HTTP</acronym> or <acronym>HTTPS</acronym> and don't work for command line
+             script execution
         </para>
         <para>
             There is no option for this backend.

@@ -21,9 +21,9 @@
     <example id="zend.cache.introduction.example-1">
         <title>Getting a Frontend with Zend_Cache::factory()</title>
         <para>
-            <classname>Zend_Cache::factory()</classname> instantiates correct objects and ties them
-            together. In this first example, we will use <emphasis>Core</emphasis> frontend together
-            with <emphasis>File</emphasis> backend.
+            <methodname>Zend_Cache::factory()</methodname> instantiates correct objects and ties
+            them together. In this first example, we will use <emphasis>Core</emphasis> frontend
+            together with <emphasis>File</emphasis> backend.
         </para>
 
         <programlisting language="php"><![CDATA[

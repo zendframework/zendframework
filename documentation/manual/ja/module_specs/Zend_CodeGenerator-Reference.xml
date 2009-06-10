@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15825 -->
+<!-- EN-Revision: 15976 -->
 <sect1 id="zend.codegenerator.reference">
     <title>Zend_CodeGeneratorリファレンス</title>
 
@@ -13,7 +13,7 @@
             <para>
                 すべてのCodeGeneratorクラスが継承する基底のクラスは、
                 必要な最小限の機能性を提供します。
-                そのAPIは下記の通りです。:
+                その<acronym>API</acronym>は下記の通りです。:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -65,7 +65,7 @@ abstract class Zend_CodeGenerator_Abstract
                 <classname>Zend_CodeGenerator_Abstract</classname>を拡張し、
                 生成されたコンテンツの前に現れなければならないインデントの量だけでなく、
                 コンテンツが変わったかどうか追跡するための若干のプロパティも加えます。
-                そのAPIは下記の通りです。:
+                その<acronym>API</acronym>は下記の通りです。:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -88,7 +88,7 @@ abstract class Zend_CodeGenerator_Php_Abstract
                 クラスのメンバー - プロパティとメソッド - を生成するための基底クラスで、
                 可視性を確立するためのアクセッサとミューテータを提供します;
                 メンバーやメンバー名がabstract、staticまたはfinalのいずれにせよ。
-                そのAPIは下記の通りです。:
+                その<acronym>API</acronym>は下記の通りです。:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -123,7 +123,7 @@ abstract class Zend_CodeGenerator_Php_Member_Abstract
 
             <para>
             
-                そのクラスのAPIは下記の通りです。:
+                そのクラスの<acronym>API</acronym>は下記の通りです。:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -141,9 +141,9 @@ class Zend_CodeGenerator_Php_Body extends Zend_CodeGenerator_Php_Abstract
 
             <para>
                 <classname>Zend_CodeGenerator_Php_Class</classname>は、
-                PHPクラスを生成することを目的とします。
-                基本的機能ではPHPクラスそのものを生成し、
-                また、任意で関連したPHP DocBlockも生成します。
+                <acronym>PHP</acronym>クラスを生成することを目的とします。
+                基本的機能では<acronym>PHP</acronym>クラスそのものを生成し、
+                また、任意で関連した<acronym>PHP</acronym> DocBlockも生成します。
                 クラスは他のクラスを実装するかもしれませんし、継承するかもしれません。
                 またはabstractと指定されるかもしれません。
                 他のコード・ジェネレーター・クラスを利用して、
@@ -151,7 +151,7 @@ class Zend_CodeGenerator_Php_Body extends Zend_CodeGenerator_Php_Abstract
             </para>
 
             <para>
-                そのAPIは下記の通りです。:
+                その<acronym>API</acronym>は下記の通りです。:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -206,7 +206,7 @@ class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
 
             <para>
                 <classname>Zend_CodeGenerator_Php_Docblock</classname>は、
-                すべての標準的なdocblock機能を含む任意のPHP docblockを生成することで使うことができます:
+                すべての標準的なdocblock機能を含む任意の<acronym>PHP</acronym> docblockを生成することで使うことができます:
                 短い、または長い説明や注釈タグ。
             </para>
 
@@ -218,7 +218,7 @@ class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
             </para>
 
             <para>
-                そのAPIは下記の通りです。:
+                その<acronym>API</acronym>は下記の通りです。:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -244,12 +244,12 @@ class Zend_CodeGenerator_Php_Docblock extends Zend_CodeGenerator_Php_Abstract
 
             <para>
                 <classname>Zend_CodeGenerator_Php_Docblock_Tag</classname>は、
-                PHP docblockに含む任意の注釈タグを作成することを目的とします。
+                <acronym>PHP</acronym> docblockに含む任意の注釈タグを作成することを目的とします。
                 タグは、名前（＠記号にすぐ続く部分）と説明（タグ名に続いているすべて）を含むことになっています。
             </para>
 
             <para>
-                そのクラスのAPIは下記の通りです。:
+                そのクラスの<acronym>API</acronym>は下記の通りです。:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -281,7 +281,7 @@ class Zend_CodeGenerator_Php_Docblock_Tag
             </para>
 
             <para>
-                そのクラスのAPIは下記の通りです。:
+                そのクラスの<acronym>API</acronym>は下記の通りです。:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -311,7 +311,7 @@ class Zend_CodeGenerator_Php_Docblock_Tag_Param
             </para>
 
             <para>
-                そのクラスのAPIは下記の通りです。:
+                そのクラスの<acronym>API</acronym>は下記の通りです。:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -333,9 +333,9 @@ class Zend_CodeGenerator_Php_Docblock_Tag_Param
 
             <para>
                 <classname>Zend_CodeGenerator_Php_File</classname>は、
-                PHPコードを含むファイルの完全なコンテンツを生成することに使われます。
+                <acronym>PHP</acronym>コードを含むファイルの完全なコンテンツを生成することに使われます。
                 ファイル・レベルのdocblockと同様に必要に応じて、
-                ファイルはクラスまたは任意のPHPコードを含むかもしれません。
+                ファイルはクラスまたは任意の<acronym>PHP</acronym>コードを含むかもしれません。
             </para>
 
             <para>
@@ -347,7 +347,7 @@ class Zend_CodeGenerator_Php_Docblock_Tag_Param
             </para>
 
             <para>
-                そのクラスのAPIは下記の通りです。:
+                そのクラスの<acronym>API</acronym>は下記の通りです。:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -386,7 +386,7 @@ class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
             </para>
 
             <para>
-                そのクラスのAPIは下記の通りです。:
+                そのクラスの<acronym>API</acronym>は下記の通りです。:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -416,7 +416,7 @@ class Zend_CodeGenerator_Php_Member_Container extends ArrayObject
             </para>
 
             <para>
-                そのクラスのAPIは下記の通りです。:
+                そのクラスの<acronym>API</acronym>は下記の通りです。:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -451,7 +451,7 @@ class Zend_CodeGenerator_Php_Method
             </para>
 
             <para>
-                そのクラスのAPIは下記の通りです。:
+                そのクラスの<acronym>API</acronym>は下記の通りです。:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -485,7 +485,7 @@ class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
             </para>
 
             <para>
-                そのクラスのAPIは下記の通りです。:
+                そのクラスの<acronym>API</acronym>は下記の通りです。:
             </para>
 
             <programlisting language="php"><![CDATA[

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15825 -->
+<!-- EN-Revision: 15976 -->
 <sect1 id="zend.codegenerator.introduction">
     <title>導入</title>
 
@@ -8,7 +8,7 @@
         <classname>Zend_CodeGenerator</classname>は、
         新しいコードを作成するばかりではなく、既存のコードを更新するためにも、
         オブジェクト指向インターフェースを用いた任意のコードを生成する機能を提供します。
-        現在の実装はPHPコードを生成することに限られますが、
+        現在の実装は<acronym>PHP</acronym>コードを生成することに限られますが、
         他の仕事のためのコード生成をさせるために基底クラスを簡単に拡張することができます：
         JavaScript、設定ファイル、apache vhosts、その他。
     </para>

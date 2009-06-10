@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15825 -->
+<!-- EN-Revision: 15976 -->
 <sect1 id="zend.codegenerator.examples">
     <title>Zend_CodeGeneratorサンプル</title>
 
@@ -260,7 +260,7 @@ class Foo
         <title>PHPファイルの生成</title>
 
         <para>
-            <classname>Zend_CodeGenerator_Php_File</classname>はPHPファイルのコンテンツ生成でも使えます。
+            <classname>Zend_CodeGenerator_Php_File</classname>は<acronym>PHP</acronym>ファイルのコンテンツ生成でも使えます。
             あなたは、任意のコンテンツ本体だけでなくクラスを含めることができます。
             クラスを付与するとき、具体的な<classname>Zend_CodeGenerator_Php_Class</classname>インスタンスか、
             またはクラスを定めている配列を添付しなければなりません。
@@ -360,7 +360,7 @@ define('APPLICATION_ENV', 'testing');
 
         <para>
             コード・ジェネレーターを使って、
-            既存のPHPファイルにPHPコードを加えることができます。
+            既存の<acronym>PHP</acronym>ファイルに<acronym>PHP</acronym>コードを加えることができます。
             そうするためには、まずそれにたいしてreflectionを実行する必要があります。
             静的メソッド<methodname>fromReflectedFileName()</methodname>によりこれを実行できます。
         </para>

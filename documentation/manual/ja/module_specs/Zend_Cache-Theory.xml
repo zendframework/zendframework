@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15972 -->
+<!-- EN-Revision: 15974 -->
 <sect1 id="zend.cache.theory">
     <title>キャッシュの仕組み</title>
     <para>
@@ -12,7 +12,8 @@
         フロントエンドの主となる関数 (例えば <methodname>Zend_Cache_Core::get()</methodname>)
         は、キャッシュがヒットしなかった場合には常に false を返すよう設計されています。
         そのため、キャッシュしたい (そして読み飛ばしたい) 部分を
-        <emphasis>if(){ ... }</emphasis> 文で囲む際に、条件式として <classname>Zend_Cache</classname>
+        <emphasis><methodname>if()</methodname>{ ... }</emphasis> 文で囲む際に、
+        条件式として <classname>Zend_Cache</classname>
         のメソッド自身を使用できるようになっています。
         このブロックの最後では、出力内容を
         (例えば <methodname>Zend_Cache_Core::save()</methodname> などで)

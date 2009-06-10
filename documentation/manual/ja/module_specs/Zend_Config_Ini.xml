@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15848 -->
+<!-- EN-Revision: 15981 -->
 <sect1 id="zend.config.adapters.ini">
     <title>Zend_Config_Ini</title>
+
     <para>
-        <classname>Zend_Config_Ini</classname> は、おなじみの INI
+        <classname>Zend_Config_Ini</classname> は、おなじみの <acronym>INI</acronym>
         形式のファイルに保存された設定データを、<classname>Zend_Config</classname>
         を通じてオブジェクトのプロパティとして扱えるようにします。
-        この INI 形式は、階層化された設定データを扱うこと、
+        この <acronym>INI</acronym> 形式は、階層化された設定データを扱うこと、
         そしてセクション間の継承関係を扱うことに特化されています。
         設定データの階層構造は、キーの名前をドットあるいはピリオド
         (<emphasis>.</emphasis>) で区切ることによって表現します。
@@ -15,10 +16,12 @@
         セクション名に続けてコロン (<emphasis>:</emphasis>) を、
         そしてその後に継承元のセクション名を指定することで表します。
     </para>
+
     <note>
         <title>INI ファイルのパース</title>
+
         <para>
-            <classname>Zend_Config_Ini</classname> は、PHP の
+            <classname>Zend_Config_Ini</classname> は、<acronym>PHP</acronym> の
             <ulink url="http://php.net/parse_ini_file"><methodname>parse_ini_file()</methodname></ulink>
             関数を使用しています。このドキュメントでは、<classname>Zend_Config_Ini</classname>
             固有の挙動に注意しましょう。例えば、特殊な値として
@@ -27,28 +30,34 @@
             を処理できることなどです。
         </para>
     </note>
+
     <note>
         <title>キーの区切り文字</title>
+
         <para>
             デフォルトでは、キーの区切り文字はピリオド (<emphasis>.</emphasis>) です。
             しかし、これは変更することもできます。変更するには、
             <classname>Zend_Config_Ini</classname> オブジェクトの作成時に
             <varname>$options</varname> のキー
             <emphasis>'nestSeparator'</emphasis> を設定します。たとえばこのようになります。
-            <programlisting language="php"><![CDATA[
+        </para>
+
+        <programlisting language="php"><![CDATA[
 $options['nestSeparator'] = ':';
 $config = new Zend_Config_Ini('/path/to/config.ini',
                               'staging',
                               $options);
 ]]>
             </programlisting>
-        </para>
+
     </note>
+
     <example id="zend.config.adapters.ini.example.using">
         <title>Zend_Config_Ini の使用法</title>
+
         <para>
             この例は、<classname>Zend_Config_Ini</classname> を使用して
-            INI ファイルから設定データを読み込むための基本的な方法を説明するものです。
+            <acronym>INI</acronym> ファイルから設定データを読み込むための基本的な方法を説明するものです。
             この例では、運用環境の設定と開発環境の設定を両方管理しています。
             開発環境用の設定データは運用環境用のものと非常に似ているので、
             開発環境用のセクションは運用環境用のセクションを継承させています。
@@ -57,6 +66,7 @@ $config = new Zend_Config_Ini('/path/to/config.ini',
             ここでは、次のような内容の設定データが
             <filename>/path/to/config.ini</filename> に存在するものとします。
         </para>
+
         <programlisting language="ini"><![CDATA[
 ; 運用環境の設定データ
 [production]
@@ -75,10 +85,12 @@ database.params.username = devuser
 database.params.password = devsecret
 ]]>
 </programlisting>
+
         <para>
-            次に、開発者が開発環境用の設定データを INI ファイルから読み込むことを考えます。
-            これは簡単なことで、単に INI ファイルとセクションを指定するだけです。
+            次に、開発者が開発環境用の設定データを <acronym>INI</acronym> ファイルから読み込むことを考えます。
+            これは簡単なことで、単に <acronym>INI</acronym> ファイルとセクションを指定するだけです。
         </para>
+
         <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Ini('/path/to/config.ini', 'staging');
 
@@ -87,6 +99,7 @@ echo $config->database->params->dbname; // "dbname" と出力します
 ]]>
         </programlisting>
     </example>
+
     <note>
     <table id="zend.config.adapters.ini.table">
         <title>Zend_Config_Ini コンストラクタのパラメータ</title>
@@ -100,7 +113,7 @@ echo $config->database->params->dbname; // "dbname" と出力します
             <tbody>
                 <row>
                     <entry><varname>$filename</varname></entry>
-                    <entry>読み込む INI ファイル。</entry>
+                    <entry>読み込む <acronym>INI</acronym> ファイル。</entry>
                 </row>
                 <row>
                     <entry><varname>$section</varname></entry>

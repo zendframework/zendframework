@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15854 -->
+<!-- EN-Revision: 15975 -->
 <sect1 id="zend.form.standardElements">
     <title>Zend Framework に同梱されている標準のフォーム要素</title>
 
@@ -421,7 +421,7 @@ $form->addElement($element, 'foo');
         </note>
 
         <para>
-            クライアントからアップロードされるファイルのサイズを制限するには、
+            アップロードされるファイルのサイズを制限するには、
             フォームで受け付けるファイルサイズの最大値も設定しなければなりません。
             受け付けるサイズをクライアント側で制限するには、form のオプション
             <code>MAX_FILE_SIZE</code> を設定します。この値を

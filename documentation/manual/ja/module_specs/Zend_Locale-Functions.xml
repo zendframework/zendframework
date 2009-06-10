@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15855 -->
+<!-- EN-Revision: 15958 -->
 <sect1 id="zend.locale.functions">
 
     <title>Zend_Locale の使用法</title>
@@ -756,6 +756,13 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             これを使用して、言語を完全修飾形式のロケールに変換します。
                         </entry>
                     </row>
+                    <row>
+                        <entry><emphasis>Unit</emphasis></entry>
+                        <entry>
+                            地域化したカレンダーの単位の一覧を帰します。
+                            これを使用して、"day" や "month" などといった文字列を自動的に翻訳します。
+                        </entry>
+                    </row>
                 </tbody>
             </tgroup>
         </table>
@@ -1353,6 +1360,14 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry>
                             指定した言語に関するロケールの依存性を返します。
                             これを使用して、この言語を完全修飾形式のロケールに変換します。
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>Unit</emphasis></entry>
+                        <entry>
+                            地域化したカレンダーの単位を帰します。
+                            これを使用して、"day" や "month" などといった文字列を自動的に翻訳します。
+                            最初のパラメータには型を、そして次のパラメータには数を指定しなければなりません。
                         </entry>
                     </row>
                 </tbody>

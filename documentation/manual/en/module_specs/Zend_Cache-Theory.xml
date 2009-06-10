@@ -11,8 +11,8 @@
         function (eg. <methodname>Zend_Cache_Core::get()</methodname>) is always designed to return
         false for a cache miss if that makes sense for the nature of a frontend. That enables
         end-users to wrap parts of the code they would like to cache (and skip) in
-        <emphasis>if(){ ... }</emphasis> statements where the condition is a
-        <classname>Zend_Cache</classname> method itself. On the end if these blocks you must save
+        <emphasis><methodname>if()</methodname>{ ... }</emphasis> statements where the condition is
+        a <classname>Zend_Cache</classname> method itself. On the end if these blocks you must save
         what you've generated, however (eg. <methodname>Zend_Cache_Core::save()</methodname>).
     </para>
     <note><para>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15848 -->
+<!-- EN-Revision: 15961 -->
 <sect1 id="zend.cache.backends">
     <title><classname>Zend_Cache</classname> のバックエンド</title>
     <para>
@@ -31,7 +31,7 @@
                       <row>
                           <entry><emphasis>cache_dir</emphasis></entry>
                           <entry><type>String</type></entry>
-                          <entry><filename>'/tmp/'</filename></entry>
+                          <entry>'<filename>/tmp/</filename>'</entry>
                           <entry>
                               キャッシュファイルを書き込むディレクトリ。
                           </entry>
@@ -43,7 +43,7 @@
                           <entry>
                             ファイルロックを有効/無効にします。
                             不慮の事故でキャッシュが破壊されることを防げますが、
-                            マルチスレッドなウェブサーバ環境や NFS ファイルシステム上では役に立ちません。
+                            マルチスレッドなウェブサーバ環境や <acronym>NFS</acronym> ファイルシステム上では役に立ちません。
                           </entry>
                       </row>
                       <row>
@@ -99,7 +99,7 @@
                               キャッシュファイルのプレフィックスを設定します。
                               このオプションを設定する際には十分注意しましょう。
                               あまりにもありふれた値をシステムのキャッシュディレクトリ
-                              (/tmp など) で使用すると、
+                              (<filename>/tmp</filename> など) で使用すると、
                               キャッシュの削除の際に余計なものまで削除されてしまうはめになります。
                         </entry>
                       </row>
@@ -159,13 +159,14 @@
                           <entry>10</entry>
                           <entry>
                               自動バキューム処理の設定を行います。
-                              自動バキューム処理とは、clean() や delete()
+                              自動バキューム処理とは、<methodname>clean()</methodname> や <methodname>delete()</methodname>
                               がコールされた際に自動的にデータベースの断片化解消を行う
                               (そしてサイズを縮小する) ことです。
                               0 を指定すると、自動バキュームを行いません。
-                              1 を指定すると  (delete() や clean() がコールされると) そのたびにバキュームを行います。
+                              1 を指定すると (<methodname>delete()</methodname> や <methodname>clean()</methodname>
+                              がコールされると) そのたびにバキュームを行います。
                               x (1 より大きな整数) を指定すると、
-                              clean() や delete() が x 回コールされるたびに
+                              <methodname>clean()</methodname> や <methodname>delete()</methodname> が x 回コールされるたびに
                               一回の頻度でランダムに自動バキュームを行います。
                           </entry>
                       </row>
@@ -247,7 +248,7 @@
         <title>Zend_Cache_Backend_Apc</title>
         <para>
             この (拡張) バックエンドは、キャッシュレコードを共有メモリに保存する際に
-            <ulink url="http://pecl.php.net/package/APC">APC</ulink> (Alternative PHP Cache)
+            <ulink url="http://pecl.php.net/package/APC">APC</ulink> (Alternative <acronym>PHP</acronym> Cache)
             拡張モジュールを使用します
             (当然、このバックエンドを使用するにはこの拡張モジュールが必要です)。
         </para>
@@ -291,7 +292,8 @@
                           <entry><type>String</type></entry>
                           <entry><constant>NULL</constant></entry>
                           <entry>
-                              xcache.admin.user です。clean() メソッドを使う際に必要です。
+                              <filename>xcache.admin.user</filename> です。
+                              <methodname>clean()</methodname> メソッドを使う際に必要です。
                           </entry>
                       </row>
                       <row>
@@ -299,8 +301,8 @@
                           <entry><type>String</type></entry>
                           <entry><constant>NULL</constant></entry>
                           <entry>
-                              xcache.admin.pass (MD5 ではない平文形式) です。
-                              clean() メソッドを使う際に必要です。
+                              <filename>xcache.admin.pass</filename> (<acronym>MD5</acronym> ではない平文形式) です。
+                              <methodname>clean()</methodname> メソッドを使う際に必要です。
                           </entry>
                       </row>
                   </tbody>
@@ -311,7 +313,7 @@
         <title>Zend_Cache_Backend_ZendPlatform</title>
         <para>
             このバックエンドは、<ulink url="http://www.zend.com/products/platform">Zend Platform</ulink>
-            製品のコンテンツキャッシング API を使用します。当然、このバックエンドを使用するには
+            製品のコンテンツキャッシング <acronym>API</acronym> を使用します。当然、このバックエンドを使用するには
             Zend Platform をインストールする必要があります。
         </para>
         <para>
@@ -319,7 +321,7 @@
             クリーニングモード <constant>CLEANING_MODE_NOT_MATCHING_TAG</constant> はサポートしていません。
         </para>
         <para>
-            <classname>Zend_Cache::factory()</classname> メソッドでこのバックエンドを指定する場合は、
+            <methodname>Zend_Cache::factory()</methodname> メソッドでこのバックエンドを指定する場合は、
             'Zend' と 'Platform' の間に区切り文字を入れます。区切り文字としては
             '-'、'.'、' ' あるいは '_' が使用できます。
         </para>
@@ -341,7 +343,6 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
         <para>
             このバックエンドは priority パラメータを使用 (フロントエンドレベルで、記録開始時に指定)
             し、高速バックエンドの残りのスペースを用いてふたつのバックエンドの使用を最適化します。
-            FIXME
         </para>
         <para>
             使用可能なオプションは次のとおりです。
@@ -396,7 +397,7 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
                           <entry><constant>FALSE</constant></entry>
                           <entry>
                               true の場合は、引数 slow_backend を完全なクラス名として使用します。
-                              false の場合は、引数をクラス名 "Zend_Cache_Backend_[...]"
+                              false の場合は、引数をクラス名 "<classname>Zend_Cache_Backend_</classname>[...]"
                               の最後の部分として使用します。
                           </entry>
                       </row>
@@ -406,7 +407,7 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
                           <entry><constant>FALSE</constant></entry>
                           <entry>
                               true の場合は、引数 fast_backend を完全なクラス名として使用します。
-                              false の場合は、引数をクラス名 "Zend_Cache_Backend_[...]"
+                              false の場合は、引数をクラス名 "<classname>Zend_Cache_Backend_</classname>[...]"
                               の最後の部分として使用します。
                           </entry>
                       </row>
@@ -465,7 +466,8 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
         </para>
         <para>
              これらのバックエンドが動作するのは、Zend Server 環境で
-             HTTP(S) 越しにページをリクエストした場合のみです。
+             <acronym>HTTP</acronym> あるいは <acronym>HTTPS</acronym>
+             越しにページをリクエストした場合のみです。
              コマンドラインでスクリプトを実行した場合は動作しません。
         </para>
         <para>

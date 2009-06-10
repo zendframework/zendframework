@@ -65,12 +65,12 @@ class Zend_Validate_File_MimeTypeTest extends PHPUnit_Framework_TestCase
     public function testBasic()
     {
         $valuesExpected = array(
-            array('image/jpg', true),
+            array('image/jpg', 'image/jpeg', true),
             array('image', true),
             array('test/notype', false),
-            array('image/gif, image/jpg', true),
-            array(array('image/vasa', 'image/jpg'), true),
-            array(array('image/jpg', 'gif'), true),
+            array('image/gif, image/jpg, image/jpeg', true),
+            array(array('image/vasa', 'image/jpg', 'image/jpeg'), true),
+            array(array('image/jpg', 'image/jpeg', 'gif'), true),
             array(array('image/gif', 'gif'), false),
         );
 

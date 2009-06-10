@@ -184,4 +184,21 @@ class Zend_Filter_LocalizedToNormalizedTest extends PHPUnit_Framework_TestCase
             $this->assertEquals($output, $filter->filter($input), 'failed filter of ' . var_export($input, 1));
         }
     }
+
+    /**
+     * ZF-6532
+     */
+    public function testLongNumbers()
+    {
+        $filter = new Zend_Filter_LocalizedToNormalized(array('locale' => 'de', 'precision' => 0));
+        $this->assertEquals('1000000', $filter->filter('1.000.000,00'));
+        $this->assertEquals('10000', $filter->filter(10000));
+
+        $this->assertEquals(array(
+            'date_format' => 'dd.MM.yyyy',
+            'locale' => 'de',
+            'day' => '1',
+            'month' => '2',
+            'year' => '4'), $filter->filter('1,2.4'));
+    }
 }

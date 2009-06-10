@@ -263,7 +263,7 @@ class Foo
 
         <para>
             <classname>Zend_CodeGenerator_Php_File</classname> can be used to generate the
-            contents of a PHP file. You can include classes as well as arbitrary
+            contents of a <acronym>PHP</acronym> file. You can include classes as well as arbitrary
             content body. When attaching classes, you should attach either
             concrete <classname>Zend_CodeGenerator_Php_Class</classname> instances or an
             array defining the class.
@@ -363,8 +363,8 @@ define('APPLICATION_ENV', 'testing');
         <title>Seeding PHP file code generation via reflection</title>
 
         <para>
-            You can add PHP code to an existing PHP file using the code
-            generator. To do so, you need to first do reflection on it. The
+            You can add <acronym>PHP</acronym> code to an existing <acronym>PHP</acronym> file
+            using the code generator. To do so, you need to first do reflection on it. The
             static method <methodname>fromReflectedFileName()</methodname> allows you to do
             this.
         </para>

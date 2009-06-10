@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15848 -->
+<!-- EN-Revision: 15978 -->
 <sect1 id="zend.config.theory_of_operation">
     <title>動作原理</title>
+
     <para>
         <classname>Zend_Config</classname> のコンストラクタを通じて、
         設定データに連想配列形式でアクセスできるようになります。
@@ -16,6 +17,7 @@
         この場合はアダプタクラスは使用しません。
         場合によってはこのような方式のほうが適切なこともあるでしょう。
     </para>
+
     <para>
         設定データ配列の値が、それぞれ <classname>Zend_Config</classname>
         オブジェクトのプロパティとなります。配列のキーがプロパティ名となります。
@@ -24,45 +26,50 @@
         この処理は再帰的に行われるので、
         階層構造になっている設定データは任意のレベルでこの構造が繰り返されることになります。
     </para>
+
     <para>
-        <classname>Zend_Config</classname> は内部で <code>Countable</code>
-        インターフェイスおよび <code>Iterator</code>
+        <classname>Zend_Config</classname> は内部で <emphasis>Countable</emphasis>
+        インターフェイスおよび <emphasis>Iterator</emphasis>
         インターフェイスを実装しており、
         これを使用して設定データに容易にアクセスできるようになっています。
         つまり、<classname>Zend_Config</classname> オブジェクトに対して
-        <ulink url="http://php.net/count"><code>count()</code></ulink>
-        関数や <ulink url="http://php.net/foreach"><code>foreach</code></ulink>
+        <ulink url="http://php.net/count"><methodname>count()</methodname></ulink>
+        関数や <ulink url="http://php.net/foreach"><emphasis>foreach</emphasis></ulink>
         などを使用できるということです。
     </para>
+
     <para>
         デフォルトでは、<classname>Zend_Config</classname>
         で利用できる設定データは読み込み専用です。代入
-        (<code>$config->database->host = 'example.com'</code> など)
+        ($config->database->host = 'example.com' など)
         を行おうとすると例外がスローされます。しかし、
         コンストラクタでこの振る舞いを変更し、データの変更を許可することも可能です。
         また、変更を許可した場合には、<classname>Zend_Config</classname>
         は値の設定の解除もサポートしています
-        (<code>unset($config->database->host);</code> とします)。
-        <code>readOnly()</code> メソッドを使用すると、
+        (<methodname>unset($config->database->host);</methodname> とします)。
+        <methodname>readOnly()</methodname> メソッドを使用すると、
         指定した <classname>Zend_Config</classname> オブジェクトの変更が許可されているかどうかを取得することができます。
-        また <code>setReadOnly()</code> メソッドを使用すると、
+        また <methodname>setReadOnly()</methodname> メソッドを使用すると、
         変更を許可する設定だった <classname>Zend_Config</classname>
         オブジェクトに対してそれ以降の変更を禁じることができます。
-        <note>
-            <para>
-                メモリ上で変更したデータを何らかのメディアに保存しようとする際に、
-                ちょっと戸惑うかもしれません。
-                作成したり変更したりした設定データをメディアに保存する機能は、今のところ
-                Zend Framework の対象範囲外です。
-                設定データを作成・編集してメディアに保存するには、
-                サードパーティからオープンソースのソリューションが提供されています。
-            </para>
-        </note>
     </para>
+
+    <note>
+        <para>
+            メモリ上で変更したデータを何らかのメディアに保存しようとする際に、
+            ちょっと戸惑うかもしれません。
+            作成したり変更したりした設定データをメディアに保存する機能は、今のところ
+            <classname>Zend_Config</classname> の対象範囲外です。
+            設定データを作成・編集してメディアに保存するには、
+            サードパーティからオープンソースのソリューションが提供されています。
+        </para>
+    </note>
+
     <para>
         <classname>Zend_Config</classname> クラスを継承したアダプタクラスが、
         それぞれの内容に応じて機能を拡張します。
     </para>
+
     <para>
         <classname>Zend_Config</classname> ファミリーのクラスを使用すると、
         設定データをセクション単位でまとめることができます。
@@ -70,35 +77,38 @@
         複数のセクションを指定して読み込んだり、あるいは
         (何も指定しなければ) 全セクションを読み込んだりといったことが可能です。
     </para>
+
     <para>
         <classname>Zend_Config</classname> は単一継承モデルをサポートしており、
         設定データの特定のセクションを別のセクションに継承させることができます。
         この機能が提供されている理由は、
         さまざまな目的のために設定データを二重管理する必要をなくすためです。
         継承したセクションでは、親セクションから継承した値を上書きすることができます。
-        PHP のクラス継承と同様に、あるセクションが親セクションを継承し、
+        <acronym>PHP</acronym> のクラス継承と同様に、あるセクションが親セクションを継承し、
         そのセクションがまた上位セクションを継承し、といったことが可能です。
         しかし多重継承 (例えば、セクション C がセクション A およびセクション B
         のふたつを直接継承するなど) はサポートされていません。
     </para>
+
     <para>
         ふたつの <classname>Zend_Config</classname> オブジェクトがある場合に、
-        <code>merge()</code> 関数でそれをひとつにまとめることができます。
+        <methodname>merge()</methodname> 関数でそれをひとつにまとめることができます。
         たとえば、<varname>$config</varname> と <varname>$localConfig</varname>
         がある場合に <varname>$localConfig</varname> のデータを <varname>$config</varname>
-        に統合するには <code>$config->merge($localConfig);</code> とします。
+        に統合するには <methodname>$config->merge($localConfig);</methodname> とします。
         <varname>$localConfig</varname> の中に <varname>$config</varname>
         と同名の項目がある場合は、もとの値は上書きされます。
-        <note>
-            <para>
-                <classname>Zend_Config</classname> オブジェクトをまとめる場合は、
-                変更を許可する設定で作成する必要があります。つまり、
-                コンストラクタの 2 番目のパラメータに <constant>TRUE</constant> を渡します。
-                まとめが完了した後で <code>setReadOnly()</code>
-                メソッドを使用すると、それ以降の変更を禁じることができます。
-            </para>
-        </note>
     </para>
+
+    <note>
+        <para>
+            <classname>Zend_Config</classname> オブジェクトをまとめる場合は、
+            変更を許可する設定で作成する必要があります。つまり、
+            コンストラクタの 2 番目のパラメータに <constant>TRUE</constant> を渡します。
+            まとめが完了した後で <methodname>setReadOnly()</methodname>
+            メソッドを使用すると、それ以降の変更を禁じることができます。
+        </para>
+    </note>
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

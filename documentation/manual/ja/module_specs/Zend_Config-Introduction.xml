@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15827 -->
+<!-- EN-Revision: 15978 -->
 <sect1 id="zend.config.introduction">
     <title>導入</title>
     <para>
@@ -21,7 +21,7 @@
             通常は、<link linkend="zend.config.adapters.ini"><classname>Zend_Config_Ini</classname></link>
             あるいは <link linkend="zend.config.adapters.xml"><classname>Zend_Config_Xml</classname></link>
             のようなアダプタクラスを使用することが想定されています。
-            しかし、もし設定データが PHP の配列として存在するのなら、
+            しかし、もし設定データが <acronym>PHP</acronym> の配列として存在するのなら、
             単にそれを <classname>Zend_Config</classname> のコンストラクタに渡すだけで、
             シンプルなオブジェクト指向のインターフェイスを使用することができます。
         </para>
@@ -72,7 +72,7 @@ $host = $config->database->get('host', 'localhost');
     <example id="zend.config.introduction.example.file.php">
         <title>Zend_Config における PHP 設定ファイルの使用法</title>
         <para>
-            設定ファイルそのものを PHP で書きたいこともあるでしょう。
+            設定ファイルそのものを <acronym>PHP</acronym> で書きたいこともあるでしょう。
             以下のようにすると、簡単にそれを行うことができます。
         </para>
         <programlisting language="php"><![CDATA[

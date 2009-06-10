@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15848 -->
+<!-- EN-Revision: 15973 -->
 <sect1 id="zend.captcha.adapters">
     <title>CAPTCHA アダプタ</title>
 
@@ -13,7 +13,7 @@
 
         <para>
             <classname>Zend_Captcha_Word</classname> は抽象アダプタで、
-            その他の大半の CAPTCHA アダプタの基底クラスとなります。
+            その他の大半の <acronym>CAPTCHA</acronym> アダプタの基底クラスとなります。
             指定できる機能は、単語の長さやセッションの有効期限、
             使用するセッション名前空間オブジェクト、
             <classname>Zend_Session_Namespace</classname> を使いたくない場合に使用するセッション名前空間クラスです。
@@ -23,7 +23,7 @@
         <para>
             デフォルトでは、単語の長さは 8 文字です。またセッションのタイムアウトは
             5 分、情報の永続化には <classname>Zend_Session_Namespace</classname> を使用します
-            (使用する名前空間は "Zend_Form_Captcha_&lt;captcha ID&gt;" です)。
+            (使用する名前空間は "<classname>Zend_Form_Captcha_&lt;captcha ID&gt;</classname>" です)。
         </para>
 
         <para>
@@ -45,7 +45,8 @@
 
             <listitem><para>
                 <methodname>setSessionClass($class)</methodname> と
-                <methodname>getSessionClass()</methodname> で、CAPTCHA トークンの永続化に使用する
+                <methodname>getSessionClass()</methodname> で、
+                <acronym>CAPTCHA</acronym> トークンの永続化に使用する
                 <classname>Zend_Session_Namespace</classname> の実装を設定したり
                 現在の値を取得したりします。
             </para></listitem>
@@ -55,20 +56,20 @@
             </para></listitem>
 
             <listitem><para>
-                <methodname>getWord()</methodname> で、CAPTCHA
+                <methodname>getWord()</methodname> で、<acronym>CAPTCHA</acronym>
                 に使用するために生成した単語を取得します。
                 まだ生成されていない場合は、まず生成してからそれを返します。
             </para></listitem>
 
             <listitem><para>
                 <methodname>setSession(Zend_Session_Namespace $session)</methodname>
-                で、CAPTCHA トークンの永続化に使用するセッションオブジェクトを設定します。
+                で、<acronym>CAPTCHA</acronym> トークンの永続化に使用するセッションオブジェクトを設定します。
                 <methodname>getSession()</methodname> で、現在のセッションオブジェクトを取得します。
             </para></listitem>
         </itemizedlist>
 
         <para>
-            すべての Word CAPTCHA は、コンストラクタにオプションの配列を渡すことができます。
+            すべての Word <acronym>CAPTCHA</acronym> は、コンストラクタにオプションの配列を渡すことができます。
             別の方法として、その配列を <methodname>setOptions()</methodname>
             で渡す (あるいは <classname>Zend_Config</classname> オブジェクトを
             <methodname>setConfig()</methodname> で渡す) こともできます。
@@ -93,7 +94,7 @@
         <para>
             <classname>Zend_Captch_Dumb</classname> アダプタは、その名が示すとおりのものです。
             ランダムな文字列を用意し、それを逆からタイプさせることで検証を行います。
-            これは CAPTCHA の手法としてはあまりよいものではないので、
+            これは <acronym>CAPTCHA</acronym> の手法としてはあまりよいものではないので、
             テスト用に使うのみにしておきましょう。
             あるいは、ほかに手がない場合の最後の手段としてのみ使うようにしましょう。
             このアダプタは <classname>Zend_Captcha_Word</classname> を継承しています。
@@ -123,12 +124,14 @@
         <title>Zend_Captcha_Image</title>
 
         <para>
-            Zend_Captcha_Image アダプタは、生成された単語を受け取ってそれを画像としてレンダリングし、
+            <classname>Zend_Captcha_Image</classname> アダプタは、
+            生成された単語を受け取ってそれを画像としてレンダリングし、
             それをいろいろな方法で歪めて自動判読を困難にします。
             これを使用するには、
             <ulink url="http://php.net/gd">GD 拡張モジュール</ulink>
             を TrueType あるいは Freetype のサポートつきでコンパイルする必要があります。
-            現在、Zend_Captcha_Image アダプタが生成できるのは PNG 画像のみです。
+            現在、<classname>Zend_Captcha_Image</classname> アダプタが生成できるのは
+            <acronym>PNG</acronym> 画像のみです。
         </para>
 
         <para>
@@ -141,9 +144,9 @@
             <listitem><para>
                 <methodname>setExpiration($expiration)</methodname> と
                 <methodname>getExpiration()</methodname> で、
-                CAPTCHA 画像をファイルシステム上に残す期間を設定します。
+                <acronym>CAPTCHA</acronym> 画像をファイルシステム上に残す期間を設定します。
                 通常、これはセッションの有効期間より長くします。
-                CAPTCHA オブジェクトが起動されるたびにガベージコレクションが働き、
+                <acronym>CAPTCHA</acronym> オブジェクトが起動されるたびにガベージコレクションが働き、
                 期限切れとなった画像が削除されます。
                 値は秒数で指定します。
             </para></listitem>
@@ -159,45 +162,46 @@
                 <methodname>setFont($font)</methodname> と <methodname>getFont()</methodname>
                 で、使用するフォントを指定します。<varname>$font</varname> には、
                 使用するフォントのパスをフルパス形式で指定する必要があります。
-                この値を設定しなければ、CAPTCHA の生成時に例外がスローされます。
+                この値を設定しなければ、<acronym>CAPTCHA</acronym> の生成時に例外がスローされます。
                 フォントは必須です。
             </para></listitem>
 
             <listitem><para>
                 <methodname>setFontSize($fsize)</methodname> と <methodname>getFontSize()</methodname>
-                で、CAPTCHA を生成する際に使用するフォントのサイズをピクセル単位で設定します。
+                で、<acronym>CAPTCHA</acronym> を生成する際に使用するフォントのサイズをピクセル単位で設定します。
                 デフォルトは 24px です。
             </para></listitem>
 
             <listitem><para>
                 <methodname>setHeight($height)</methodname> と <methodname>getHeight()</methodname>
-                で、生成される CAPTCHA 画像の高さをピクセル単位で指定します。
+                で、生成される <acronym>CAPTCHA</acronym> 画像の高さをピクセル単位で指定します。
                 デフォルトは 50px です。
             </para></listitem>
 
             <listitem><para>
                 <methodname>setWidth($width)</methodname> と <methodname>getWidth()</methodname>
-                で、生成される CAPTCHA 画像の幅をピクセル単位で指定します。
+                で、生成される <acronym>CAPTCHA</acronym> 画像の幅をピクセル単位で指定します。
                 デフォルトは 200px です。
             </para></listitem>
 
             <listitem><para>
                 <methodname>setImgDir($imgDir)</methodname> と <methodname>getImgDir()</methodname>
-                で、CAPTCHA 画像を保存するディレクトリを指定します。
-                デフォルトは "./images/captcha/"
+                で、<acronym>CAPTCHA</acronym> 画像を保存するディレクトリを指定します。
+                デフォルトは "<filename>./images/captcha/</filename>"
                 で、これは起動スクリプトからの相対パスとなります。
             </para></listitem>
 
             <listitem><para>
                 <methodname>setImgUrl($imgUrl)</methodname> と <methodname>getImgUrl()</methodname>
-                で、HTML マークアップ時に使用する CAPTCHA 画像への相対パスを指定します。
-                デフォルトは "/images/captcha/" です。
+                で、<acronym>HTML</acronym> マークアップ時に使用する
+                <acronym>CAPTCHA</acronym> 画像への相対パスを指定します。
+                デフォルトは "<filename>/images/captcha/</filename>" です。
             </para></listitem>
 
             <listitem><para>
                 <methodname>setSuffix($suffix)</methodname> と <methodname>getSuffix()</methodname>
-                で、CAPTCHA 画像ファイル名の拡張子を指定します。デフォルトは
-                ".png" です。注意: これを変更したからといって、
+                で、<acronym>CAPTCHA</acronym> 画像ファイル名の拡張子を指定します。デフォルトは
+                "<filename>.png</filename>" です。注意: これを変更したからといって、
                 生成される画像の形式が変わるわけではありません。
             </para></listitem>
         </itemizedlist>
@@ -215,7 +219,7 @@
         <para>
             <classname>Zend_Captcha_ReCaptcha</classname> アダプタは、<link
                 linkend="zend.service.recaptcha">Zend_Service_ReCaptcha</link>
-            を使用して CAPTCHA の生成と検証を行います。
+            を使用して <acronym>CAPTCHA</acronym> の生成と検証を行います。
             次のメソッドを公開しています。
         </para>
 

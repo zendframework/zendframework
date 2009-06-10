@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15848 -->
+<!-- EN-Revision: 15962 -->
 <sect1 id="zend.cache.introduction">
     <title>導入</title>
     <para>
@@ -24,7 +24,7 @@
     <example id="zend.cache.introduction.example-1">
         <title>Zend_Cache::factory() によるフロントエンドの取得</title>
         <para>
-            <classname>Zend_Cache::factory()</classname> は、適切なオブジェクトを作成してそれらを互いに結び付けます。
+            <methodname>Zend_Cache::factory()</methodname> は、適切なオブジェクトを作成してそれらを互いに結び付けます。
             この最初の例では、フロントエンドに <emphasis>Core</emphasis>、バックエンドに <emphasis>File</emphasis>
             を使用します。
         </para>

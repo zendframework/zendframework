@@ -410,7 +410,7 @@ $form->addElement($element, 'foo');
         </note>
 
         <para>
-            To limit the size of the file uploaded by the client, you can
+            To limit the size of the file uploaded, you can
             specify the maximum file size by setting the <code>MAX_FILE_SIZE</code>
             option on the form. When you set this value by using the
             <code>setMaxFileSize($size)</code> method, it will be rendered with the

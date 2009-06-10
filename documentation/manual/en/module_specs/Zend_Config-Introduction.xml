@@ -18,9 +18,9 @@
             Normally it is expected that users would use one of the adapter classes such as <link
                 linkend="zend.config.adapters.ini"><classname>Zend_Config_Ini</classname></link> or
             <link linkend="zend.config.adapters.xml"><classname>Zend_Config_Xml</classname></link>,
-            but if configuration data are available in a PHP array, one may simply pass the data to
-            the <classname>Zend_Config</classname> constructor in order to utilize a simple
-            object-oriented interface:
+            but if configuration data are available in a <acronym>PHP</acronym> array, one may
+            simply pass the data to the <classname>Zend_Config</classname> constructor in order to
+            utilize a simple object-oriented interface:
         </para>
         <programlisting language="php"><![CDATA[
 // Given an array of configuration data
@@ -67,8 +67,8 @@ $host = $config->database->get('host', 'localhost');
     <example id="zend.config.introduction.example.file.php">
         <title>Using Zend_Config with a PHP Configuration File</title>
         <para>
-            It is often desirable to use a pure PHP-based configuration file. The following code
-            illustrates how easily this can be accomplished:
+            It is often desirable to use a pure <acronym>PHP</acronym>-based configuration file.
+            The following code illustrates how easily this can be accomplished:
         </para>
         <programlisting language="php"><![CDATA[
 // config.php

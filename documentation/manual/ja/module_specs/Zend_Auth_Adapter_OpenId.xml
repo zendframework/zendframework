@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15845 -->
+<!-- EN-Revision: 15960 -->
 <sect1 id="zend.auth.adapter.openid">
 
     <title>Open ID 認証</title>
@@ -17,7 +17,7 @@
             ここで入力したパスワードは、ウェブアプリケーション側には知られることはありません。
         </para>
         <para>
-            OpenID の識別子は単なる HTTP URL で、
+            OpenID の識別子は単なる <acronym>URI</acronym> で、
             指し示す先のウェブページにはそのユーザに関する情報や特別なタグが含まれます。
             タグに記述されているのは、どのサーバに対してどの情報を送信するのかという情報です。
             OpenID についての詳細は
@@ -35,7 +35,7 @@
                 <classname>Zend_OpenId</classname> は、<ulink url="http://php.net/gmp">GMP
                 拡張モジュール</ulink> が使用可能な場合はそれを使用します。
                 <classname>Zend_Auth_Adapter_OpenId</classname> を使う場合は、
-                GMP 拡張モジュールを有効にしておくとよりよいパフォーマンスが得られるでしょう。
+                <acronym>GMP</acronym> 拡張モジュールを有効にしておくとよりよいパフォーマンスが得られるでしょう。
             </para>
         </note>
     </sect2>
@@ -56,12 +56,12 @@
         <para>
             しかし、他の <classname>Zend_Auth</classname> アダプタとは異なり、
             このアダプタは認証処理を外部のサーバで行います。
-            また認証は二段階の HTTP リクエストで行います。
-            したがって、<classname>Zend_Auth_Adapter_OpenId::authenticate()</classname>
+            また認証は二段階の <acronym>HTTP</acronym> リクエストで行います。
+            したがって、<methodname>Zend_Auth_Adapter_OpenId::authenticate()</methodname>
             を二度コールする必要があります。
             一度目のコールでは、このメソッドは何も返さずに OpenID サーバにリダイレクトします。
             認証が終わってリダイレクト先から戻ってきたら、もう一度
-            <classname>Zend_Auth_Adapter_OpenId::authenticate()</classname>
+            <methodname>Zend_Auth_Adapter_OpenId::authenticate()</methodname>
             をコールしてサーバから戻されたリクエストのシグネチャを検証し、
             認証手続きを進めます。このときは、このメソッドは
             <classname>Zend_Auth_Result</classname> オブジェクトを返します。
@@ -69,10 +69,10 @@
 
         <para>
             次の例は、<classname>Zend_Auth_Adapter_OpenId</classname> の使用方法を示すものです。
-            先ほど説明したように、<classname>Zend_Auth_Adapter_OpenId::authenticate()</classname>
-            が 2 回コールされています。一度目、つまり HTML フォームから送信されたときは
+            先ほど説明したように、<methodname>Zend_Auth_Adapter_OpenId::authenticate()</methodname>
+            が 2 回コールされています。一度目、つまり <acronym>HTML</acronym> フォームから送信されたときは
             <varname>$_POST['openid_action']</varname> が <emphasis>"login"</emphasis>
-            となっており、二度目、つまり OpenID サーバからリダイレクトで戻ってきたときは
+            となっており、二度目、つまり OpenID サーバから <acronym>HTTP</acronym> リダイレクトで戻ってきたときは
             <varname>$_GET['openid_mode']</varname> あるいは <code>$_POST['openid_mode']</code>
             が設定されています。
         </para>

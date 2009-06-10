@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15848 -->
+<!-- EN-Revision: 15965 -->
 <sect1 id="zend.cache.frontends">
     <title><classname>Zend_Cache</classname> のフロントエンド</title>
 
@@ -120,8 +120,8 @@
                               <entry><type>Boolean</type></entry>
                               <entry><constant>FALSE</constant></entry>
                               <entry>
-                                true を指定すると、save() メソッド内で PHP の
-                                ignore_user_abort フラグを設定し、
+                                true を指定すると、<methodname>save()</methodname> メソッド内で
+                                <acronym>PHP</acronym> の ignore_user_abort フラグを設定し、
                                 キャッシュが破壊されることを防ぎます。
                               </entry>
                           </row>
@@ -249,7 +249,7 @@ if (!($cache->test($id))) {
             <title>導入</title>
             <para>
                 <classname>Zend_Cache_Frontend_Output</classname> は、出力を横取りするフロントエンドです。
-                これは PHP の出力バッファリング処理を使いやすくしたもので、
+                これは <acronym>PHP</acronym> の出力バッファリング処理を使いやすくしたもので、
                 <methodname>start()</methodname> メソッドと
                 <methodname>end()</methodname> メソッドの間の出力を横取りします。
             </para>
@@ -344,7 +344,7 @@ echo 'これはキャッシュされません ('.time().').';
         <sect3 id="zend.cache.frontends.function.examples">
             <title>例</title>
             <para>
-                <methodname>call()</methodname> 関数の使用法は、PHP の
+                <methodname>call()</methodname> 関数の使用法は、<acronym>PHP</acronym> の
                 <methodname>call_user_func_array()</methodname> と同じです。
             </para>
             <programlisting language="php"><![CDATA[
@@ -492,12 +492,12 @@ $result = $cache->foobar2('1', '2');
                 複数のマスタファイルを使用することもできます。
             </para>
             <para>
-                例えば、XML の設定ファイルを使用しており、それが「設定オブジェクト」
+                例えば、<acronym>XML</acronym> の設定ファイルを使用しており、それが「設定オブジェクト」
                 (<classname>Zend_Config</classname> など) を返す関数でパースされるとしましょう。
                 <classname>Zend_Cache_Frontend_File</classname> を使用すると、その「設定オブジェクト」
                 をキャッシュすることができ (これにより、
-                XML ファイルを毎回パースする必要がなくなります)、さらに「マスタファイル」
-                との間で強力な依存性を保持することができます。そのため、XML
+                <acronym>XML</acronym> ファイルを毎回パースする必要がなくなります)、さらに「マスタファイル」
+                との間で強力な依存性を保持することができます。そのため、<acronym>XML</acronym>
                 設定ファイルが更新されると、即時にキャッシュが無効になります。
             </para>
         </sect3>
@@ -534,10 +534,10 @@ $result = $cache->foobar2('1', '2');
                          <row>
                               <entry><emphasis>master_files_mode</emphasis></entry>
                               <entry><type>String</type></entry>
-                              <entry><classname>Zend_Cache_Frontend_File::MODE_OR</classname></entry>
+                              <entry><constant>Zend_Cache_Frontend_File::MODE_OR</constant></entry>
                               <entry>
-                                  <classname>Zend_Cache_Frontend_File::MODE_AND</classname> あるいは
-                                  <classname>Zend_Cache_Frontend_File::MODE_OR</classname>。
+                                  <constant>Zend_Cache_Frontend_File::MODE_AND</constant> あるいは
+                                  <constant>Zend_Cache_Frontend_File::MODE_OR</constant>。
                                   <constant>MODE_AND</constant> の場合は、
                                   すべてのマスタファイルにアクセスがあるまでキャッシュが無効化されません。
                                   <constant>MODE_OR</constant> の場合は、
@@ -587,10 +587,10 @@ $result = $cache->foobar2('1', '2');
                 <methodname>end()</methodname> は、ページの終了時に自動的にコールされます。
             </para>
             <para>
-                現時点ではまだ実装されていませんが、将来は HTTP conditional システムを追加する予定です。
+                現時点ではまだ実装されていませんが、将来は <acronym>HTTP</acronym> conditional システムを追加する予定です。
                 これにより、ネットワークの帯域を節約できるようになります
                 (キャッシュにヒットし、かつブラウザがそのバージョンを既に持っている場合に
-                HTTP 304 Not Modified を送信するようにします)。
+                <acronym>HTTP</acronym> 304 Not Modified を送信するようにします)。
             </para>
         </sect3>
         <sect3 id="zend.cache.frontends.page.options">
@@ -723,12 +723,12 @@ $result = $cache->foobar2('1', '2');
                               <entry><type>Array</type></entry>
                               <entry><methodname>array()</methodname></entry>
                               <entry>
-                                  特定の REQUEST_URI に対してのみ適用するオプションを設定する連想配列です。
-                                  キーが (PCRE の) 正規表現、対応する値は連想配列となります。
-                                  この連想配列には、正規表現が $_SERVER['REQUEST_URI']
+                                  特定の <acronym>REQUEST_URI</acronym> に対してのみ適用するオプションを設定する連想配列です。
+                                  キーが (<acronym>PCRE</acronym> の) 正規表現、対応する値は連想配列となります。
+                                  この連想配列には、正規表現が <varname>$_SERVER['REQUEST_URI']</varname>
                                   にマッチした場合に設定されるオプションを設定します
                                   (使用可能なオプションについては default_options を参照ください)。
-                                  複数の正規表現が $_SERVER['REQUEST_URI'] にマッチした場合は、
+                                  複数の正規表現が <varname>$_SERVER['REQUEST_URI']</varname> にマッチした場合は、
                                   一番最後にマッチしたもののみが使用されます。
                               </entry>
                          </row>
@@ -737,7 +737,7 @@ $result = $cache->foobar2('1', '2');
                               <entry><type>Array</type></entry>
                               <entry><methodname>array()</methodname></entry>
                               <entry>
-                                   HTTP ヘッダ名に対応する文字列の配列です。
+                                   <acronym>HTTP</acronym> ヘッダ名に対応する文字列の配列です。
                                    ここにあげられたヘッダがキャッシュデータとともに保存され、
                                    キャッシュにヒットしたときにそれが "リプレイ" されます。
                               </entry>
@@ -816,7 +816,7 @@ $cache->start();
         <sect3 id="zend.cache.frontends.page.cancel">
             <title>キャンセル用のメソッド</title>
             <para>
-                設計上の理由から、場合によっては (HTTP/200 以外のコードを使用する場合など)
+                設計上の理由から、場合によっては (<acronym>HTTP</acronym> 200 以外のコードを使用する場合など)
                 現在のキャッシュ処理をキャンセルする必要が生じることもあります。
                 そこで、このフロントエンド用に cancel() メソッドを用意しました。
             </para>

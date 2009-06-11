@@ -9,7 +9,7 @@
             <classname>Zend_Controller_Action</classname> is an abstract class you may use
             for implementing Action Controllers for use with the Front
             Controller when building a website based on the
-            Model-View-Controller (MVC) pattern.
+            Model-View-Controller (<acronym>MVC</acronym>) pattern.
         </para>
 
         <para>
@@ -43,7 +43,7 @@ class FooController extends Zend_Controller_Action
 ]]></programlisting>
 
         <para>
-            The above <code>FooController</code> class (controller
+            The above <emphasis>FooController</emphasis> class (controller
             <code>foo</code>) defines two actions, <code>bar</code> and
             <code>baz</code>.
         </para>
@@ -90,16 +90,16 @@ class FooController extends Zend_Controller_Action
 ]]></programlisting>
 
             <para>
-                <code>initView()</code>, <code>getViewScript()</code>,
-                <code>render()</code>, and <code>renderScript()</code> each
-                proxy to the <code>ViewRenderer</code> unless the helper is not
-                in the helper broker or the <code>noViewRenderer</code> flag has
+                <methodname>initView()</methodname>, <methodname>getViewScript()</methodname>,
+                <methodname>render()</methodname>, and <methodname>renderScript()</methodname> each
+                proxy to the <emphasis>ViewRenderer</emphasis> unless the helper is not
+                in the helper broker or the <emphasis>noViewRenderer</emphasis> flag has
                 been set.
             </para>
 
             <para>
                 You can also simply disable rendering for an individual view by
-                setting the <code>ViewRenderer</code>'s <code>noRender</code>
+                setting the <emphasis>ViewRenderer</emphasis>'s <emphasis>noRender</emphasis>
                 flag:
             </para>
 
@@ -115,13 +115,13 @@ class FooController extends Zend_Controller_Action
 ]]></programlisting>
 
             <para>
-                The primary reasons to disable the <code>ViewRenderer</code> are
+                The primary reasons to disable the <emphasis>ViewRenderer</emphasis> are
                 if you simply do not need a view object or if you are not
                 rendering via view scripts (for instance, when using an action
-                controller to serve web service protocols such as SOAP, XML-RPC,
-                or REST). In most cases, you will never need to globally disable
-                the <code>ViewRenderer</code>, only selectively within
-                individual controllers or actions.
+                controller to serve web service protocols such as <acronym>SOAP</acronym>,
+                <acronym>XML-RPC</acronym>, or <acronym>REST</acronym>). In most cases, you will
+                never need to globally disable the <emphasis>ViewRenderer</emphasis>, only
+                selectively within individual controllers or actions.
             </para>
         </note>
     </sect2>
@@ -130,19 +130,19 @@ class FooController extends Zend_Controller_Action
         <title>Object Initialization</title>
 
         <para>
-            While you can always override the action controller's constructor,
-            we do not recommend this. <classname>Zend_Controller_Action::__construct()</classname>
+            While you can always override the action controller's constructor, we
+            do not recommend this. <methodname>Zend_Controller_Action::__construct()</methodname>
             performs some important tasks, such as registering the request and
             response objects, as well as any custom invocation arguments passed
             in from the front controller. If you must override the constructor,
-            be sure to call <code>parent::__construct($request, $response,
-            $invokeArgs)</code>.
+            be sure to call <methodname>parent::__construct($request, $response,
+            $invokeArgs)</methodname>.
         </para>
 
         <para>
             The more appropriate way to customize instantiation is to use the
-            <code>init()</code> method, which is called as the last task of
-            <code>__construct()</code>. For example, if you want to connect to
+            <methodname>init()</methodname> method, which is called as the last task of
+            <methodname>__construct()</methodname>. For example, if you want to connect to
             a database at instantiation:
         </para>
 
@@ -167,12 +167,13 @@ class FooController extends Zend_Controller_Action
 
         <para>
             <classname>Zend_Controller_Action</classname> specifies two methods that may
-            be called to bookend a requested action, <code>preDispatch()</code>
-            and <code>postDispatch()</code>. These can be useful in a variety of
-            ways: verifying authentication and ACLs prior to running an action
-            (by calling <code>_forward()</code> in <code>preDispatch()</code>,
-            the action will be skipped), for instance, or placing generated
-            content in a sitewide template (<code>postDispatch()</code>).
+            be called to bookend a requested action, <methodname>preDispatch()</methodname>
+            and <methodname>postDispatch()</methodname>. These can be useful in a variety of
+            ways: verifying authentication and <acronym>ACL</acronym>'s prior to running an action
+            (by calling <methodname>_forward()</methodname> in
+            <methodname>preDispatch()</methodname>, the action will be skipped), for instance, or
+            placing generated content in a sitewide template
+            (<methodname>postDispatch()</methodname>).
         </para>
     </sect2>
 
@@ -186,7 +187,7 @@ class FooController extends Zend_Controller_Action
 
         <itemizedlist>
             <listitem><para>
-                <emphasis>Request Object</emphasis>: <code>getRequest()</code>
+                <emphasis>Request Object</emphasis>: <methodname>getRequest()</methodname>
                 may be used to retrieve the request object used to call the
                 action.
             </para></listitem>
@@ -194,7 +195,7 @@ class FooController extends Zend_Controller_Action
             <listitem>
                 <para>
                     <emphasis>Response Object</emphasis>:
-                    <code>getResponse()</code> may be used to retrieve the
+                    <methodname>getResponse()</methodname> may be used to retrieve the
                     response object aggregating the final response. Some typical
                     calls might look like:
                 </para>
@@ -210,34 +211,34 @@ $this->getResponse()->appendBody($content);
                     <emphasis>Invocation Arguments</emphasis>: the front
                     controller may push parameters into the router, dispatcher,
                     and action controller. To retrieve these, use
-                    <code>getInvokeArg($key)</code>; alternatively, fetch the
-                    entire list using <code>getInvokeArgs()</code>.
+                    <methodname>getInvokeArg($key)</methodname>; alternatively, fetch the
+                    entire list using <methodname>getInvokeArgs()</methodname>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     <emphasis>Request parameters</emphasis>: The request object
-                    aggregates request parameters, such as any _GET or _POST
-                    parameters, or user parameters specified in the URL's path
-                    information. To retrieve these, use
-                    <code>_getParam($key)</code> or
-                    <code>_getAllParams()</code>. You may also set request
-                    parameters using <code>_setParam()</code>; this is useful
+                    aggregates request parameters, such as any <constant>_GET</constant> or
+                    <constant>_POST</constant> parameters, or user parameters specified in the
+                    <acronym>URL</acronym>'s path information. To retrieve these, use
+                    <methodname>_getParam($key)</methodname> or
+                    <methodname>_getAllParams()</methodname>. You may also set request
+                    parameters using <methodname>_setParam()</methodname>; this is useful
                     when forwarding to additional actions.
                 </para>
 
                 <para>
                     To test whether or not a parameter exists (useful for
-                    logical branching), use <code>_hasParam($key)</code>.
+                    logical branching), use <methodname>_hasParam($key)</methodname>.
                 </para>
 
                 <note>
                     <para>
-                        <code>_getParam()</code> may take an optional second
+                        <methodname>_getParam()</methodname> may take an optional second
                         argument containing a default value to use if the
                         parameter is not set or is empty. Using it eliminates
-                        the need to call <code>_hasParam()</code> prior to
+                        the need to call <methodname>_hasParam()</methodname> prior to
                         retrieving a value:
                     </para>
 
@@ -273,8 +274,8 @@ if ($this->_hasParam('id') {
         <para>
             <classname>Zend_Controller_Action</classname> provides a rudimentary and
             flexible mechanism for view integration. Two methods accomplish
-            this, <code>initView()</code> and <code>render()</code>; the former
-            method lazy-loads the <varname>$view</varname> public property, and the
+            this, <methodname>initView()</methodname> and <methodname>render()</methodname>; the
+            former method lazy-loads the <varname>$view</varname> public property, and the
             latter renders a view based on the current requested action, using
             the directory hierarchy to determine the script path.
         </para>
@@ -283,9 +284,9 @@ if ($this->_hasParam('id') {
             <title>View Initialization</title>
 
             <para>
-                <code>initView()</code> initializes the view object.
-                <code>render()</code> calls <code>initView()</code> in order to
-                retrieve the view object, but it may be initialized at any time;
+                <methodname>initView()</methodname> initializes the view object.
+                <methodname>render()</methodname> calls <methodname>initView()</methodname> in
+                order to retrieve the view object, but it may be initialized at any time;
                 by default it populates the <varname>$view</varname> property with a
                 <classname>Zend_View</classname> object, but any class implementing
                 <classname>Zend_View_Interface</classname> may be used. If
@@ -312,10 +313,10 @@ applicationOrModule/
 
             <para>
                 In other words, view scripts are assumed to be in the
-                <code>views/scripts/</code> subdirectory, and the
+                <filename>views/scripts/</filename> subdirectory, and the
                 <code>views</code> subdirectory is assumed to contain sibling
                 functionality (helpers, filters). When determining the view
-                script name and path, the <code>views/scripts/</code> directory
+                script name and path, the <filename>views/scripts/</filename> directory
                 will be used as the base path, with directories named after the
                 individual controllers providing a hierarchy of view scripts.
             </para>
@@ -325,7 +326,7 @@ applicationOrModule/
             <title>Rendering Views</title>
 
             <para>
-                <code>render()</code> has the following signature:
+                <methodname>render()</methodname> has the following signature:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -335,10 +336,10 @@ string render(string $action = null,
 ]]></programlisting>
 
             <para>
-                <code>render()</code> renders a view script. If no arguments are
+                <methodname>render()</methodname> renders a view script. If no arguments are
                 passed, it assumes that the script requested is
-                <code>[controller]/[action].phtml</code> (where
-                <code>.phtml</code> is the value of the <varname>$viewSuffix</varname>
+                <filename>[controller]/[action].phtml</filename> (where
+                <filename>.phtml</filename> is the value of the <varname>$viewSuffix</varname>
                 property). Passing a value for <varname>$action</varname> will render
                 that template in the <code>[controller]</code> subdirectory. To
                 override using the <code>[controller]</code> subdirectory, pass
@@ -352,12 +353,12 @@ string render(string $action = null,
 
             <note><para>
                     Since controller and action names may contain word delimiter
-                    characters such as '_', '.', and '-', <code>render()</code> normalizes
-                    these to '-' when determining the script name. Internally,
+                    characters such as '_', '.', and '-', <methodname>render()</methodname>
+                    normalizes these to '-' when determining the script name. Internally,
                     it uses the dispatcher's word and path delimiters to do this
                     normalization. Thus, a request to
-                    <code>/foo.bar/baz-bat</code> will render the script
-                    <code>foo-bar/baz-bat.phtml</code>. If your action method
+                    <filename>/foo.bar/baz-bat</filename> will render the script
+                    <filename>foo-bar/baz-bat.phtml</filename>. If your action method
                     contains camelCasing, please remember that this will result
                     in '-' separated words when determining the view script
                     file name.
@@ -407,27 +408,27 @@ class MyController extends Zend_Controller_Action
             Besides the accessors and view integration methods,
             <classname>Zend_Controller_Action</classname> has several utility methods for
             performing common tasks from within your action methods (or from
-            pre-/post-dispatch).
+            pre- and post-dispatch).
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>_forward($action, $controller = null, $module = null,
-                        array $params = null)</code>: perform another action. If
-                    called in <code>preDispatch()</code>, the currently
+                    <methodname>_forward($action, $controller = null, $module = null,
+                        array $params = null)</methodname>: perform another action. If
+                    called in <methodname>preDispatch()</methodname>, the currently
                     requested action will be skipped in favor of the new one.
                     Otherwise, after the current action is processed, the action
-                    requested in _forward() will be executed.
+                    requested in <methodname>_forward()</methodname> will be executed.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>_redirect($url, array $options =
-                        array())</code>: redirect to another location. This
-                    method takes a URL and an optional set of options. By
-                    default, it performs an HTTP 302 redirect.
+                    <methodname>_redirect($url, array $options =
+                        array())</methodname>: redirect to another location. This
+                    method takes a <acronym>URL</acronym> and an optional set of options. By
+                    default, it performs an <acronym>HTTP</acronym> 302 redirect.
                 </para>
 
                 <para>
@@ -444,7 +445,7 @@ class MyController extends Zend_Controller_Action
 
                         <para>
                             You may set this option globally within the
-                            controller using the <code>setRedirectExit()</code>
+                            controller using the <methodname>setRedirectExit()</methodname>
                             accessor.
                         </para>
                     </listitem>
@@ -452,28 +453,28 @@ class MyController extends Zend_Controller_Action
                     <listitem>
                         <para>
                             <emphasis>prependBase:</emphasis> whether or not to
-                            prepend the base URL registered with the request
-                            object to the URL provided.
+                            prepend the base <acronym>URL</acronym> registered with the request
+                            object to the <acronym>URL</acronym> provided.
                         </para>
 
                         <para>
                             You may set this option globally within the
                             controller using the
-                            <code>setRedirectPrependBase()</code> accessor.
+                            <methodname>setRedirectPrependBase()</methodname> accessor.
                         </para>
                     </listitem>
 
                     <listitem>
                         <para>
-                            <emphasis>code:</emphasis> what HTTP code to utilize
-                            in the redirect. By default, an HTTP 302 is
+                            <emphasis>code:</emphasis> what <acronym>HTTP</acronym> code to utilize
+                            in the redirect. By default, an <acronym>HTTP</acronym> 302 is
                             utilized; any code between 301 and 306 may be used.
                         </para>
 
                         <para>
                             You may set this option globally within the
                             controller using the
-                            <code>setRedirectCode()</code> accessor.
+                            <methodname>setRedirectCode()</methodname> accessor.
                         </para>
                     </listitem>
                 </itemizedlist>
@@ -503,9 +504,9 @@ class MyController extends Zend_Controller_Action
 
             <para>
                 If a request to a controller is made that includes an undefined
-                action method, <classname>Zend_Controller_Action::__call()</classname>
-                will be invoked. <code>__call()</code> is, of course, PHP's
-                magic method for method overloading.
+                action method, <methodname>Zend_Controller_Action::__call()</methodname>
+                will be invoked. <methodname>__call()</methodname> is, of course,
+                <acronym>PHP</acronym>'s magic method for method overloading.
             </para>
 
             <para>
@@ -578,12 +579,12 @@ class MyController extends Zend_Controller_Action
         </example>
 
         <para>
-            Besides overriding <code>__call()</code>, each of the
+            Besides overriding <methodname>__call()</methodname>, each of the
             initialization, utility, accessor, view, and dispatch hook methods
             mentioned previously in this chapter may be overridden in order to
             customize your controllers. As an example, if you are storing your
             view object in a registry, you may want to modify your
-            <code>initView()</code> method with code resembling the following:
+            <methodname>initView()</methodname> method with code resembling the following:
         </para>
 
         <programlisting language="php"><![CDATA[

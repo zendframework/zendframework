@@ -90,7 +90,7 @@ $writer = new Zend_Config_Writer_Xml();
 $writer->write('config.xml', $config);
 ]]></programlisting>
         <para>
-            This will create an XML config file with the sections production
+            This will create an <acronym>XML</acronym> config file with the sections production
             and staging, where staging extends production.
         </para>
     </example>

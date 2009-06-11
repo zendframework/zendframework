@@ -4,14 +4,16 @@
     <title>Zend_Config_Xml</title>
     <para>
         <classname>Zend_Config_Xml</classname> enables developers to store configuration data in a
-        simple XML format and read them via nested object property syntax. The root element of the
-        XML file or string is irrelevant and may be named arbitrarily. The first level of XML
-        elements correspond with configuration data sections. The XML format supports hierarchical
-        organization through nesting of XML elements below the section-level elements. The content
-        of a leaf-level XML element corresponds to the value of a configuration datum. Section
-        inheritance is supported by a special XML attribute named <emphasis>extends</emphasis>, and
-        the value of this attribute corresponds with the section from which data are to be
-        inherited by the extending section.
+        simple <acronym>XML</acronym> format and read them via nested object property syntax. The
+        root element of the <acronym>XML</acronym> file or string is irrelevant and may be named
+        arbitrarily. The first level of <acronym>XML</acronym> elements correspond with
+        configuration data sections. The <acronym>XML</acronym> format supports hierarchical
+        organization through nesting of <acronym>XML</acronym> elements below the section-level
+        elements. The content of a leaf-level <acronym>XML</acronym> element corresponds to the
+        value of a configuration datum. Section inheritance is supported by a special
+        <acronym>XML</acronym> attribute named <emphasis>extends</emphasis>, and the value of this
+        attribute corresponds with the section from which data are to be inherited by the extending
+        section.
     </para>
     <note>
         <title>Return Type</title>
@@ -25,13 +27,13 @@
         <title>Using Zend_Config_Xml</title>
         <para>
             This example illustrates a basic use of <classname>Zend_Config_Xml</classname> for
-            loading configuration data from an XML file. In this example there are configuration
-            data for both a production system and for a staging system. Because the staging system
-            configuration data are very similar to those for production, the staging section
-            inherits from the production section. In this case, the decision is arbitrary and could
-            have been written conversely, with the production section inheriting from the staging
-            section, though this may not be the case for more complex situations. Suppose, then,
-            that the following configuration data are contained in
+            loading configuration data from an <acronym>XML</acronym> file. In this example there
+            are configuration data for both a production system and for a staging system. Because
+            the staging system configuration data are very similar to those for production, the
+            staging section inherits from the production section. In this case, the decision is
+            arbitrary and could have been written conversely, with the production section
+            inheriting from the staging section, though this may not be the case for more complex
+            situations. Suppose, then, that the following configuration data are contained in
             <filename>/path/to/config.xml</filename>:
         </para>
         <programlisting language="xml"><![CDATA[
@@ -62,8 +64,8 @@
 ]]></programlisting>
         <para>
             Next, assume that the application developer needs the staging configuration data from
-            the XML file. It is a simple matter to load these data by specifying the XML file and
-            the staging section:
+            the <acronym>XML</acronym> file. It is a simple matter to load these data by specifying
+            the <acronym>XML</acronym> file and the staging section:
         </para>
         <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Xml('/path/to/config.xml', 'staging');
@@ -78,7 +80,7 @@ echo $config->database->params->dbname; // prints "dbname"
             <classname>Zend_Config_Xml</classname> also supports two additional ways of defining
             nodes in the configuration. Both make use of attributes. Since the
             <emphasis>extends</emphasis> and the <emphasis>value</emphasis> attributes are reserved
-            keywords (the latter one by the the second way of using attributes), they may not be
+            keywords (the latter one by the second way of using attributes), they may not be
             used. The first way of making usage of attributes is to add attributes in a parent
             node, which then will be translated into children of that node:
         </para>
@@ -87,12 +89,14 @@ echo $config->database->params->dbname; // prints "dbname"
 <configdata>
     <production webhost="www.example.com">
         <database adapter="pdo_mysql">
-            <params host="db.example.com" username="dbuser" password="secret" dbname="dbname"/>
+            <params host="db.example.com" username="dbuser" password="secret"
+                    dbname="dbname"/>
         </database>
     </production>
     <staging extends="production">
         <database>
-            <params host="dev.example.com" username="devuser" password="devsecret"/>
+            <params host="dev.example.com" username="devuser"
+                    password="devsecret"/>
         </database>
     </staging>
 </configdata>
@@ -132,8 +136,8 @@ echo $config->database->params->dbname; // prints "dbname"
 <note>
         <title>XML strings</title>
         <para>
-            <classname>Zend_Config_Xml</classname> is able to load an XML string directly,
-            such as that retrieved from a database. The string is passed
+            <classname>Zend_Config_Xml</classname> is able to load an <acronym>XML</acronym> string
+            directly, such as that retrieved from a database. The string is passed
             as the first parameter to the constructor and must start with the
             characters <emphasis>'&lt;?xml'</emphasis>:
         </para>

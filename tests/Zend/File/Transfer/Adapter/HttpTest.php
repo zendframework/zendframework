@@ -140,6 +140,14 @@ class Zend_File_Transfer_Adapter_HttpTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->adapter->receive());
     }
 
+    public function testReceiveWithRenameFilterButWithoutDirectory()
+    {
+        $this->adapter->setDestination(dirname(__FILE__));
+        $this->adapter->addFilter('Rename', array('overwrite' => false));
+        $this->adapter->setOptions(array('ignoreNoFile' => true));
+        $this->assertTrue($this->adapter->receive());
+    }
+
     public function testMultiFiles()
     {
         $_FILES = array(

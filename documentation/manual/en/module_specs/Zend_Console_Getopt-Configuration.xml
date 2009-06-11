@@ -8,8 +8,8 @@
         <para>
             You can add more option rules in addition to those you specified
             in the <classname>Zend_Console_Getopt</classname> constructor, using the
-            <code>addRules()</code> method. The argument to
-            <code>addRules()</code> is the same as the first argument to the
+            <methodname>addRules()</methodname> method. The argument to
+            <methodname>addRules()</methodname> is the same as the first argument to the
             class constructor. It is either a string in the format of the
             short syntax options specification, or else an associative array
             in the format of a long syntax options specification.
@@ -41,8 +41,8 @@ $opts->addRules(
         <para>
             In addition to specifying the help strings when declaring option
             rules in the long format, you can associate help strings
-            with option rules using the <code>setHelp()</code>
-            method. The argument to the <code>setHelp()</code> method is an
+            with option rules using the <methodname>setHelp()</methodname>
+            method. The argument to the <methodname>setHelp()</methodname> method is an
             associative array, in which the key is a flag, and the value is a
             corresponding help string.
         </para>
@@ -64,7 +64,7 @@ $opts->setHelp(
             aliases as the key of the associative array.
         </para>
         <para>
-            The <code>setHelp()</code> method is the only way to define help
+            The <methodname>setHelp()</methodname> method is the only way to define help
             strings if you declared the options using the short syntax.
         </para>
     </sect2>
@@ -72,7 +72,7 @@ $opts->setHelp(
     <sect2 id="zend.console.getopt.configuration.addaliases">
         <title>Adding Option Aliases</title>
         <para>
-            You can declare aliases for options using the <code>setAliases</code>
+            You can declare aliases for options using the <methodname>setAliases()</methodname>
             method. The argument is an associative array, whose key is
             a flag string declared previously, and whose value is a new
             alias for that flag. These aliases are merged with any existing
@@ -104,7 +104,7 @@ $opts->setAliases(
             for each other.
         </para>
         <para>
-            The <code>setAliases()</code> method is the only way to define aliases
+            The <methodname>setAliases()</methodname> method is the only way to define aliases
             if you declared the options using the short syntax.
         </para>
     </sect2>
@@ -117,8 +117,8 @@ $opts->setAliases(
             arguments to parse. You can alternatively specify the array of
             arguments as the second constructor argument. Finally, you
             can append more arguments to those already used using the
-            <code>addArguments()</code> method, or you can replace the current
-            array of arguments using the <code>setArguments()</code> method.
+            <methodname>addArguments()</methodname> method, or you can replace the current
+            array of arguments using the <methodname>setArguments()</methodname> method.
             In both cases, the parameter to these methods is a simple array of
             strings. The former method appends the array to the current
             arguments, and the latter method substitutes the array for the
@@ -145,9 +145,9 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
             The third parameter to the <classname>Zend_Console_Getopt</classname>
             constructor is an array of configuration options that affect
             the behavior of the object instance returned. You can also
-            specify configuration options using the <code>setOptions()</code>
+            specify configuration options using the <methodname>setOptions()</methodname>
             method, or you can set an individual option using the
-            <code>setOption()</code> method.
+            <methodname>setOption()</methodname> method.
         </para>
         <note>
             <title>Clarifying the Term "option"</title>
@@ -168,7 +168,7 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
         <itemizedlist>
             <listitem>
                 <para>
-                    <classname>Zend_Console_Getopt::CONFIG_DASHDASH</classname> ("dashDash"),
+                    <constant>Zend_Console_Getopt::CONFIG_DASHDASH</constant> ("dashDash"),
                     if true, enables the special flag "<code>--</code>" to
                     signify the end of flags. Command-line arguments following
                     the double-dash signifier are not interpreted as options,
@@ -178,7 +178,7 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
             </listitem>
             <listitem>
                 <para>
-                    <classname>Zend_Console_Getopt::CONFIG_IGNORECASE</classname> ("ignoreCase"),
+                    <constant>Zend_Console_Getopt::CONFIG_IGNORECASE</constant> ("ignoreCase"),
                     if true, makes flags aliases of each other if they differ
                     only in their case. That is, "<code>-a</code>" and
                     "<code>-A</code>" will be considered to be synonymous flags.
@@ -187,16 +187,16 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
             </listitem>
             <listitem>
                 <para>
-                    <classname>Zend_Console_Getopt::CONFIG_RULEMODE</classname>
+                    <constant>Zend_Console_Getopt::CONFIG_RULEMODE</constant>
                     ("ruleMode") may have values
-                    <classname>Zend_Console_Getopt::MODE_ZEND</classname> ("zend") and
-                    <classname>Zend_Console_Getopt::MODE_GNU</classname> ("gnu"). It should not be
+                    <constant>Zend_Console_Getopt::MODE_ZEND</constant> ("zend") and
+                    <constant>Zend_Console_Getopt::MODE_GNU</constant> ("gnu"). It should not be
                     necessary to use this option unless you extend the class with additional syntax
                     forms. The two modes supported in the base
                     <classname>Zend_Console_Getopt</classname> class are unambiguous. If the
-                    specifier is a string, the class assumes <code>MODE_GNU</code>, otherwise it
-                    assumes <code>MODE_ZEND</code>. But if you extend the class and
-                    add more syntax forms, you may need to specify the mode
+                    specifier is a string, the class assumes <constant>MODE_GNU</constant>,
+                    otherwise it assumes <constant>MODE_ZEND</constant>. But if you extend the
+                    class and add more syntax forms, you may need to specify the mode
                     using this option.
                 </para>
             </listitem>
@@ -206,7 +206,7 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
             of this class.
         </para>
         <para>
-            The two arguments to the <code>setOption()</code> method are
+            The two arguments to the <methodname>setOption()</methodname> method are
             a configuration option name and an option value.
         </para>
         <example id="zend.console.getopt.configuration.config.example.setoption">
@@ -217,7 +217,7 @@ $opts->setOption('ignoreCase', true);
 ]]></programlisting>
         </example>
         <para>
-            The argument to the <code>setOptions()</code> method is
+            The argument to the <methodname>setOptions()</methodname> method is
             an associative array. The keys of this array are the configuration
             option names, and the values are configuration values.
             This is also the array format used in the class constructor.

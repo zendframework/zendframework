@@ -4,19 +4,19 @@
     <title>AutoComplete</title>
 
     <para>
-        Many AJAX javascript libraries offer functionality for providing
+        Many <acronym>AJAX</acronym> javascript libraries offer functionality for providing
         autocompletion whereby a selectlist of potentially matching results is
-        displayed as the user types. The <code>AutoComplete</code> helper aims
+        displayed as the user types. The <emphasis>AutoComplete</emphasis> helper aims
         to simplify returning acceptable responses to such methods.
     </para>
 
     <para>
         Since not all JS libraries implement autocompletion in the same way, the
-        <code>AutoComplete</code> helper provides some abstract base
+        <emphasis>AutoComplete</emphasis> helper provides some abstract base
         functionality necessary to many libraries, and concrete implementations
-        for individual libraries. Return types are generally either JSON arrays
-        of strings, JSON arrays of arrays (with each member array being an
-        associative array of metadata used to create the selectlist), or HTML.
+        for individual libraries. Return types are generally either <acronym>JSON</acronym> arrays
+        of strings, <acronym>JSON</acronym> arrays of arrays (with each member array being an
+        associative array of metadata used to create the selectlist), or <acronym>HTML</acronym>.
     </para>
 
     <para>
@@ -58,7 +58,7 @@ class FooController extends Zend_Controller_Action
         </para></listitem>
 
         <listitem><para>
-                Sets response body with encoded/formatted autocompletion data.
+                Sets response body with encoded or formatted autocompletion data.
         </para></listitem>
 
         <listitem><para>
@@ -72,45 +72,45 @@ class FooController extends Zend_Controller_Action
 
     <itemizedlist>
         <listitem><para>
-                <code>disableLayouts()</code> can be used to disable layouts and
+                <methodname>disableLayouts()</methodname> can be used to disable layouts and
                 the ViewRenderer. Typically, this is called within
-                <code>prepareAutoCompletion()</code>.
+                <methodname>prepareAutoCompletion()</methodname>.
         </para></listitem>
 
         <listitem><para>
-                <code>encodeJson($data, $keepLayouts = false)</code> will encode
-                data to JSON, optionally enabling or disabling layouts.
+                <methodname>encodeJson($data, $keepLayouts = false)</methodname> will encode
+                data to <acronym>JSON</acronym>, optionally enabling or disabling layouts.
                 Typically, this is called within
-                <code>prepareAutoCompletion()</code>.
+                <methodname>prepareAutoCompletion()</methodname>.
         </para></listitem>
 
         <listitem><para>
-                <code>prepareAutoCompletion($data, $keepLayouts = false)</code>
+                <methodname>prepareAutoCompletion($data, $keepLayouts = false)</methodname>
                 is used to prepare data in the response format necessary for the
                 concrete implementation, optionally enabling or disabling
                 layouts. The return value will vary based on the implementation.
         </para></listitem>
 
         <listitem><para>
-                <code>sendAutoCompletion($data, $keepLayouts = false)</code>
+                <methodname>sendAutoCompletion($data, $keepLayouts = false)</methodname>
                 is used to send data in the response format necessary for the
                 concrete implementation. It calls
-                <code>prepareAutoCompletion()</code>, and then sends the
+                <methodname>prepareAutoCompletion()</methodname>, and then sends the
                 response.
         </para></listitem>
 
         <listitem><para>
-                <code>direct($data, $sendNow = true, $keepLayouts =
-                    false)</code> is used when calling the helper as a method of
+                <methodname>direct($data, $sendNow = true, $keepLayouts =
+                    false)</methodname> is used when calling the helper as a method of
                 the helper broker. The <varname>$sendNow</varname> flag is used to
-                determine whether to call <code>sendAutoCompletion()</code> or
-                <code>prepareAutoCompletion()</code>, respectively.
+                determine whether to call <methodname>sendAutoCompletion()</methodname> or
+                <methodname>prepareAutoCompletion()</methodname>, respectively.
         </para></listitem>
     </itemizedlist>
 
     <para>
-        Currently, <code>AutoComplete</code> supports the Dojo and Scriptaculous
-        AJAX libraries.
+        Currently, <emphasis>AutoComplete</emphasis> supports the Dojo and Scriptaculous
+        <acronym>AJAX</acronym> libraries.
     </para>
 
     <sect4 id="zend.controller.actionhelpers.autocomplete.dojo">
@@ -127,7 +127,7 @@ class FooController extends Zend_Controller_Action
 
         <para>
             In Zend Framework, you can pass a simple indexed array to the
-            AutoCompleteDojo helper, and it will return a JSON response suitable
+            AutoCompleteDojo helper, and it will return a <acronym>JSON</acronym> response suitable
             for use with such a store:
         </para>
 
@@ -140,7 +140,7 @@ $this->_helper->autoCompleteDojo($data);
             <title>AutoCompletion with Dojo Using Zend MVC</title>
 
             <para>
-                AutoCompletion with Dojo via the Zend MVC requires several
+                AutoCompletion with Dojo via the Zend <acronym>MVC</acronym> requires several
                 things: generating a form object for the ComboBox on which you
                 want AutoCompletion, a controller action for serving the
                 AutoCompletion results, creating a custom QueryReadStore to connect
@@ -150,12 +150,12 @@ $this->_helper->autoCompleteDojo($data);
 
             <para>
                 First, let's look at the javascript necessary. Dojo offers a
-                complete framework for creating OOP javascript, much as Zend
-                Framework does for PHP. Part of that is the ability to create
+                complete framework for creating <acronym>OOP</acronym> javascript, much as Zend
+                Framework does for <acronym>PHP</acronym>. Part of that is the ability to create
                 pseudo-namespaces using the directory hierarchy. We'll create a
                 'custom' directory at the same level as the Dojo directory
                 that's part of the Dojo distribution. Inside that directory,
-                we'll create a javascript file, TestNameReadStore.js, with the
+                we'll create a javascript file, <filename>TestNameReadStore.js</filename>, with the
                 following contents:
             </para>
 
@@ -264,13 +264,13 @@ class TestController extends Zend_Controller_Action
 ]]></programlisting>
 
             <para>
-                In our <code>autocompleteAction()</code> we do a number of
+                In our <methodname>autocompleteAction()</methodname> we do a number of
                 things. First, we look to make sure we have a post request, and
                 that there is a 'format' parameter set to the value 'ajax';
                 these are simply to help reduce spurious queries to the action.
                 Next, we check for a 'test' parameter, and compare it against
                 our data. (I purposely leave out the implementation of
-                <code>getData()</code> here -- it could be any sort of data
+                <methodname>getData()</methodname> here -- it could be any sort of data
                 source.) Finally, we send our matches to our AutoCompletion
                 helper.
             </para>
@@ -319,7 +319,7 @@ dojo.require("custom.TestNameReadStore");
 
             <para>
                 Note the calls to view helpers such as headStyle and headScript;
-                these are placeholders, which we can then render in the HTML
+                these are placeholders, which we can then render in the <acronym>HTML</acronym>
                 head section of our layout view script.
             </para>
 
@@ -334,13 +334,13 @@ dojo.require("custom.TestNameReadStore");
         <para>
             <ulink
                 url="http://wiki.script.aculo.us/scriptaculous/show/Ajax.Autocompleter">Scriptaculous</ulink>
-            expects an HTML response in a specific format.
+            expects an <acronym>HTML</acronym> response in a specific format.
         </para>
 
         <para>
             The helper to use with this library is 'AutoCompleteScriptaculous'.
             Simply provide it an array of data, and the helper will create an
-            HTML response compatible with Ajax.Autocompleter.
+            <acronym>HTML</acronym> response compatible with Ajax.Autocompleter.
         </para>
     </sect4>
 </sect3>

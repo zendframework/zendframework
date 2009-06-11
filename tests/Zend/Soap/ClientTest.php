@@ -362,6 +362,35 @@ class Zend_Soap_ClientTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals($client->getLastRequest(), $expectedRequest);
     }
+
+    /**
+     * @group ZF-6955
+     */
+    public function testSetCookieIsDelegatedToSoapClient()
+    {
+        $fixtureCookieKey = "foo";
+        $fixtureCookieValue = "bar";
+
+        $clientMock = $this->getMock('SoapClient', array('__setCookie'), array(null, array('uri' => 'http://www.zend.com', 'location' => 'http://www.zend.com')));
+        $clientMock->expects($this->once())
+                   ->method('__setCookie')
+                   ->with($fixtureCookieKey, $fixtureCookieValue);
+
+        $soap = new Zend_Soap_Client();
+        $soap->setSoapClient($clientMock);
+
+        $soap->setCookie($fixtureCookieKey, $fixtureCookieValue);
+    }
+
+    public function testSetSoapClient()
+    {
+        $clientMock = $this->getMock('SoapClient', array('__setCookie'), array(null, array('uri' => 'http://www.zend.com', 'location' => 'http://www.zend.com')));
+
+        $soap = new Zend_Soap_Client();
+        $soap->setSoapClient($clientMock);
+
+        $this->assertSame($clientMock, $soap->getSoapClient());
+    }
 }
 
 

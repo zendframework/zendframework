@@ -4,21 +4,21 @@
     <title>ActionStack</title>
 
     <para>
-        The <code>ActionStack</code> helper allows you to push requests to the
+        The <emphasis>ActionStack</emphasis> helper allows you to push requests to the
         <link linkend="zend.controller.plugins.standard.actionstack">ActionStack</link>
         front controller plugin, effectively helping you create a queue of
         actions to execute during the request. The helper allows you to add
         actions either by specifying new request objects or
-        action/controller/module sets.
+        action - controller - module sets.
     </para>
 
     <note>
         <title>Invoking ActionStack Helper Initializes the ActionStack Plugin</title>
 
         <para>
-            Invoking the <code>ActionStack</code> helper implicitly registers
-            the <code>ActionStack</code> plugin -- which means you do not need
-            to explicitly register the <code>ActionStack</code> plugin to use
+            Invoking the <emphasis>ActionStack</emphasis> helper implicitly registers
+            the <emphasis>ActionStack</emphasis> plugin -- which means you do not need
+            to explicitly register the <emphasis>ActionStack</emphasis> plugin to use
             this functionality.
         </para>
     </note>
@@ -29,7 +29,7 @@
         <para>
             Often, it's simplest to simply specify the action, controller, and
             module (and optional request parameters), much as you would when
-            calling <classname>Zend_Controller_Action::_forward()</classname>:
+            calling <methodname>Zend_Controller_Action::_forward()</methodname>:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -58,8 +58,8 @@ class FooController extends Zend_Controller_Action
         <title>Adding a Task Using a Request Object</title>
 
         <para>
-            Sometimes the OOP nature of a request object makes most sense; you
-            can pass such an object to the <code>ActionStack</code> helper as
+            Sometimes the <acronym>OOP</acronym> nature of a request object makes most sense; you
+            can pass such an object to the <emphasis>ActionStack</emphasis> helper as
             well.
         </para>
 

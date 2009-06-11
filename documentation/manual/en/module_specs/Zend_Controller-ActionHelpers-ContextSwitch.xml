@@ -94,17 +94,17 @@ class NewsController extends Zend_Controller_Action
 
     <itemizedlist>
         <listitem><para>
-                Set the 'Content-Type' response header to 'text/xml'.
+                Set the 'Content-Type' response header to '<filename>text/xml</filename>'.
         </para></listitem>
 
         <listitem><para>
-                Change the view suffix to 'xml.phtml' (or, if you use an
+                Change the view suffix to '<filename>xml.phtml</filename>' (or, if you use an
                 alternate view suffix, 'xml.[your suffix]').
         </para></listitem>
     </itemizedlist>
 
     <para>
-        Now, you'll need to create a new view script, 'news/list.xml.phtml',
+        Now, you'll need to create a new view script, '<filename>news/list.xml.phtml</filename>',
         which will create and render the XML.
     </para>
 
@@ -118,13 +118,13 @@ class NewsController extends Zend_Controller_Action
 
     <itemizedlist>
         <listitem><para>
-                Via URL parameter: <code>/news/list/format/xml</code> (recall,
-                the default routing schema allows for arbitrary key/value pairs
+                Via URL parameter: <filename>/news/list/format/xml</filename> (recall,
+                the default routing schema allows for arbitrary key to value pairs
                 following the action)
         </para></listitem>
 
         <listitem><para>
-                Via GET parameter: <code>/news/list?format=xml</code>
+                Via GET parameter: <command>/news/list?format=xml</command>
         </para></listitem>
     </itemizedlist>
 
@@ -147,7 +147,7 @@ class NewsController extends Zend_Controller_Action
             <listitem>
                 <para>
                     <emphasis>JSON</emphasis>. The JSON context sets the
-                    'Content-Type' response header to 'application/json', and
+                    'Content-Type' response header to '<filename>application/json</filename>', and
                     the view script suffix to 'json.phtml'.
                 </para>
 
@@ -170,8 +170,8 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
             <listitem>
                 <para>
                     <emphasis>XML</emphasis>. The XML context sets the
-                    'Content-Type' response header to 'text/xml', and the view
-                    script suffix to 'xml.phtml'. You will need to create a new
+                    'Content-Type' response header to '<filename>text/xml</filename>', and the view
+                    script suffix to '<filename>xml.phtml</filename>'. You will need to create a new
                     view script for the context.
                 </para>
             </listitem>
@@ -292,7 +292,7 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
         </para>
 
         <para>
-            The principle method for adding action/context relations is
+            The principle method for adding action to context relations is
             <methodname>addActionContext()</methodname>. It expects two arguments, the
             action to which the context is being added, and either the name of a
             context or an array of contexts. As an example, consider the
@@ -383,7 +383,7 @@ class FooController extends Zend_Controller_Action
                 </para>
 
                 <para>
-                    An empty value for $context will disable all contexts for
+                    An empty value for <varname>$context</varname> will disable all contexts for
                     the given action.
                 </para>
             </listitem>
@@ -398,8 +398,8 @@ class FooController extends Zend_Controller_Action
 
             <listitem><para>
                     <methodname>addActionContexts(array $contexts)</methodname>: add several
-                    action/context pairings at once. <varname>$contexts</varname>
-                    should be an associative array of action/context pairs. It
+                    action to context pairings at once. <varname>$contexts</varname>
+                    should be an associative array of action to context pairs. It
                     proxies to <methodname>addActionContext()</methodname>, meaning that if
                     pairings already exist, it appends to them.
             </para></listitem>
@@ -407,7 +407,7 @@ class FooController extends Zend_Controller_Action
             <listitem><para>
                     <methodname>setActionContexts(array $contexts)</methodname>: acts like
                     <methodname>addActionContexts()</methodname>, but overwrites existing
-                    action/context pairs.
+                    action to context pairs.
             </para></listitem>
 
             <listitem><para>
@@ -418,7 +418,7 @@ class FooController extends Zend_Controller_Action
             <listitem><para>
                     <methodname>getActionContexts($action = null)</methodname>: returns
                     either all contexts for a given action, or all
-                    action/context pairs.
+                    action to context pairs.
             </para></listitem>
 
             <listitem><para>
@@ -596,7 +596,7 @@ $contextSwitch->initContext();
                 <para>
                     <methodname>setCallbacks($context, array $callbacks)</methodname>: set
                     multiple callbacks for a given context. <varname>$callbacks</varname>
-                    should be trigger/callback pairs. In actuality, the most callbacks
+                    should be trigger to callback pairs. In actuality, the most callbacks
                     that can be registered are two, one for initialization and
                     one for post processing.
                 </para>
@@ -612,7 +612,7 @@ $contextSwitch->initContext();
             <listitem>
                 <para>
                     <methodname>getCallbacks($context)</methodname>: retrieve all callbacks
-                    for a given context. Returns an array of trigger/callback
+                    for a given context. Returns an array of trigger to callback
                     pairs.
                 </para>
             </listitem>

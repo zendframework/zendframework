@@ -136,9 +136,9 @@
                             <emphasis>'digest'</emphasis>
                         </entry>
                         <entry>
-                            Space-separated list of URIs for which the same authentication
-                            information is valid. The URIs need not all point to the same
-                            server.
+                            Space-separated list of <acronym>URI</acronym>s for which the same
+                            authentication information is valid. The <acronym>URI</acronym>s need
+                            not all point to the same server.
                         </entry>
                     </row>
                     <row>

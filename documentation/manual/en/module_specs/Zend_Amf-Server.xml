@@ -163,18 +163,19 @@ class World
             <filename>service-config.xml</filename> to find the RemoteObject endpoint. To do this
             open your project properties panel again by right clicking on the project folder from
             your Navigator and selecting properties. From the properties popup select 'Flex
-            Compiler' and add the string: -services "services-config.xml". Press Apply then OK to
-            return to update the option. What you have just done is told the Flex compiler to look
-            to the <filename>services-config.xml</filename> file for runtime variables that will be
-            used by the RemotingObject class.
+            Compiler' and add the string: <command>-services "services-config.xml"</command>. Press
+            Apply then OK to return to update the option. What you have just done is told the Flex
+            compiler to look to the <filename>services-config.xml</filename> file for runtime
+            variables that will be used by the RemotingObject class.
         </para>
 
         <para>
             We now need to tell Flex which services configuration file to use for connecting to
-            our remote methods. For this reason create a new 'services-config.xml' file into your
-            Flex project src folder. To do this right click on the project folder and select
-            'new' 'File' which will popup a new window. Select the project folder and then name
-            the file 'services-config.xml' and press finish.
+            our remote methods. For this reason create a new
+            '<filename>services-config.xml</filename>' file into your Flex project src folder. To
+            do this right click on the project folder and select 'new' 'File' which will popup a
+            new window. Select the project folder and then name the file
+            '<filename>services-config.xml</filename>' and press finish.
         </para>
 
         <para>

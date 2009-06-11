@@ -239,7 +239,7 @@ Array
                 the username is qualified with a domain (e.g., has a domain component like
                 <filename>alice@foo.net</filename> or <filename>FOO\alice</filename>). If a domain
                 is present, but does not match either of the server's domain names
-                (<filename>foo.net</filename> or <emphasis>FOO</emphasis>), a special exception is
+                (<filename>foo.net</filename> or <acronym>FOO</acronym>), a special exception is
                 thrown and caught by <classname>Zend_Auth_Adapter_Ldap</classname> that causes that
                 server to be ignored and the next set of server options is selected. If a domain
                 <emphasis>does</emphasis> match, or if the user did not supply a qualified username,
@@ -422,26 +422,26 @@ Array
                     <row>
                         <entry><emphasis>accountDomainName</emphasis></entry>
                         <entry>
-                            The FQDN domain name for which the target <acronym>LDAP</acronym>
-                            server is an authority (e.g., <filename>example.com</filename>). This
-                            option is used to canonicalize names so that the username supplied by
-                            the user can be converted as necessary for binding. It is also used to
-                            determine if the server is an authority for the supplied username
-                            (e.g., if <emphasis>accountDomainName</emphasis> is
-                            <filename>foo.net</filename> and the user supplies
-                            <filename>bob@bar.net</filename>, the server will not be queried, and a
-                            failure will result). This option is not required, but if it is not
-                            supplied, usernames in principal name form (e.g.,
-                            <filename>alice@foo.net</filename>) are not supported. It is strongly
-                            recommended that you supply this option, as there are many use-cases
-                            that require generating the principal name form.
+                            The <acronym>FQDN</acronym> domain name for which the target
+                            <acronym>LDAP</acronym> server is an authority (e.g.,
+                            <filename>example.com</filename>). This option is used to canonicalize
+                            names so that the username supplied by the user can be converted as
+                            necessary for binding. It is also used to determine if the server is an
+                            authority for the supplied username (e.g., if
+                            <emphasis>accountDomainName</emphasis> is <filename>foo.net</filename>
+                            and the user supplies <filename>bob@bar.net</filename>, the server will
+                            not be queried, and a failure will result). This option is not
+                            required, but if it is not supplied, usernames in principal name form
+                            (e.g., <filename>alice@foo.net</filename>) are not supported. It is
+                            strongly recommended that you supply this option, as there are many
+                            use-cases that require generating the principal name form.
                         </entry>
                     </row>
                     <row>
                         <entry><emphasis>accountDomainNameShort</emphasis></entry>
                         <entry>
                             The 'short' domain for which the target <acronym>LDAP</acronym> server
-                            is an authority (e.g., <emphasis>FOO</emphasis>). Note that there is a
+                            is an authority (e.g., <acronym>FOO</acronym>). Note that there is a
                             1:1 mapping between the <emphasis>accountDomainName</emphasis> and
                             <emphasis>accountDomainNameShort</emphasis>. This option should be used
                             to specify the NetBIOS domain name for Windows networks, but may also
@@ -449,7 +449,7 @@ Array
                             server options with the backslash style
                             <emphasis>accountCanonicalForm</emphasis>). This option is not required
                             but if it is not supplied, usernames in backslash form (e.g.,
-                            <emphasis>FOO\alice</emphasis>) are not supported.
+                            <filename>FOO\alice</filename>) are not supported.
                         </entry>
                     </row>
                     <row>
@@ -489,7 +489,7 @@ Array
                 client generates an error claiming that it cannot validate the server's
                 certificate. Assuming the <acronym>PHP</acronym> <acronym>LDAP</acronym> extension
                 is ultimately linked to the OpenLDAP client libraries, to resolve this issue you
-                can set "<emphasis>TLS_REQCERT never</emphasis>" in the OpenLDAP client
+                can set "<command>TLS_REQCERT never</command>" in the OpenLDAP client
                 <filename>ldap.conf</filename> (and restart the web server) to indicate to the
                 OpenLDAP client library that you trust the server. Alternatively, if you are
                 concerned that the server could be spoofed, you can export the
@@ -568,7 +568,8 @@ Array
                 For <acronym>ADS</acronym>, the following options are noteworthy:
             </para>
 
-            <table id="zend.auth.adapter.ldap.options-common-server-specific.active-directory.table">
+            <table
+                id="zend.auth.adapter.ldap.options-common-server-specific.active-directory.table">
                 <title>Options for Active Directory</title>
                 <tgroup cols="2">
                     <thead>
@@ -752,7 +753,7 @@ Array
                                 your <emphasis>accountDomainName</emphasis> is
                                 <filename>foo.net</filename>, a good
                                 <emphasis>accountDomainNameShort</emphasis> value might be
-                                <emphasis>FOO</emphasis>).
+                                <acronym>FOO</acronym>).
                             </entry>
                       </row>
                     </tbody>

@@ -24,11 +24,11 @@
             If the user gave any invalid options on the command-line,
             the parsing function throws a <classname>Zend_Console_Getopt_Exception</classname>.
             You should catch this exception in your application code.
-            You can use the <code>parse()</code> method to force the object
+            You can use the <methodname>parse()</methodname> method to force the object
             to parse the arguments. This is useful because you can invoke
-            <code>parse()</code> in a <code>try</code> block. If it passes,
+            <methodname>parse()</methodname> in a <code>try</code> block. If it passes,
             you can be sure that the parsing won't throw an exception again.
-            The exception thrown has a custom method <code>getUsageMessage()</code>,
+            The exception thrown has a custom method <methodname>getUsageMessage()</methodname>,
             which returns as a string the formatted set of usage messages for
             all declared options.
         </para>
@@ -71,7 +71,7 @@ try {
     <sect2 id="zend.console.getopt.fetching.byname">
         <title>Fetching Options by Name</title>
         <para>
-            You can use the <code>getOption()</code> method to query the value
+            You can use the <methodname>getOption()</methodname> method to query the value
             of an option. If the option had a parameter, this method returns
             the value of the parameter. If the option had no parameter but
             the user did specify it on the command-line, the method returns
@@ -86,9 +86,9 @@ $p_parameter = $opts->getOption('p');
 ]]></programlisting>
         </example>
         <para>
-            Alternatively, you can use the magic <code>__get()</code> function
+            Alternatively, you can use the magic <methodname>__get()</methodname> function
             to retrieve the value of an option as if it were a class member
-            variable. The <code>__isset()</code> magic method is also
+            variable. The <methodname>__isset()</methodname> magic method is also
             implemented.
         </para>
         <example id="zend.console.getopt.fetching.byname.example.magic">
@@ -116,7 +116,7 @@ $p_parameter = $opts->p; // null if not set
         <itemizedlist>
             <listitem>
                 <para>
-                    As a string: use the <code>toString()</code> method. The options
+                    As a string: use the <methodname>toString()</methodname> method. The options
                     are returned as a space-separated string of "<code>flag=value</code>"
                     pairs. The value of an option that does not have a parameter
                     is the literal string "<constant>TRUE</constant>".
@@ -124,19 +124,21 @@ $p_parameter = $opts->p; // null if not set
             </listitem>
             <listitem>
                 <para>
-                    As an array: use the <code>toArray()</code> method. The options
+                    As an array: use the <methodname>toArray()</methodname> method. The options
                     are returned in a simple integer-indexed array of strings, the flag
                     strings followed by parameter strings, if any.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    As a string containing JSON data: use the <code>toJson()</code> method.
+                    As a string containing <acronym>JSON</acronym> data: use the
+                    <methodname>toJson()</methodname> method.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    As a string containing XML data: use the <code>toXml()</code> method.
+                    As a string containing <acronym>XML</acronym> data: use the
+                    <methodname>toXml()</methodname> method.
                 </para>
             </listitem>
         </itemizedlist>
@@ -156,7 +158,7 @@ $p_parameter = $opts->p; // null if not set
             After option arguments and their parameters have been
             parsed from the command-line, there may be additional arguments
             remaining. You can query these arguments using the
-            <code>getRemainingArgs()</code> method. This method returns
+            <methodname>getRemainingArgs()</methodname> method. This method returns
             an array of the strings that were not part of any options.
         </para>
         <example id="zend.console.getopt.fetching.remainingargs.example">
@@ -168,8 +170,8 @@ $args = $opts->getRemainingArgs(); // returns array('filename')
 ]]></programlisting>
         </example>
         <para>
-            <classname>Zend_Console_Getopt</classname> supports the GNU convention that
-            an argument consisting of a double-dash signifies the end of
+            <classname>Zend_Console_Getopt</classname> supports the <acronym>GNU</acronym>
+            convention that an argument consisting of a double-dash signifies the end of
             options. Any arguments following this signifier must be treated as
             non-option arguments. This is useful if you might have a non-option
             argument that begins with a dash.

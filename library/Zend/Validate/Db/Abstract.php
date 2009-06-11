@@ -111,8 +111,7 @@ abstract class Zend_Validate_Db_Abstract extends Zend_Validate_Abstract
          * Build select object
          */ 
         $select = new Zend_Db_Select($this->_adapter);
-        $select->from($this->_table)
-               ->columns($this->_field)
+        $select->from($this->_table, array($this->_field))
                ->where($this->_adapter->quoteIdentifier($this->_field).' = ?', $value); 
         if ($this->_exclude !== null) { 
             if (is_array($this->_exclude)) { 

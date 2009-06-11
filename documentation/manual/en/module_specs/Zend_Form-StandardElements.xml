@@ -407,6 +407,12 @@ $form->addElement($element, 'foo');
                 If there are 2 file elements with the same name, the second
                 element is not be displayed or submitted.
             </para>
+
+            <para>
+                Additionally, file elements are not rendered within the sub-form. So when
+                you add a file element into a subform, then the element will be rendered
+                within the main form.
+            </para>
         </note>
 
         <para>

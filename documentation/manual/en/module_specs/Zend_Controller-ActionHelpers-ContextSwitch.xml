@@ -70,8 +70,8 @@ class NewsController extends Zend_Controller_Action
 
     <para>
         Let's say that we want the <methodname>listAction()</methodname> to also be
-        available in an XML format. Instead of creating a different action, we
-        can hint that it can return an XML response:
+        available in an <acronym>XML</acronym> format. Instead of creating a different action, we
+        can hint that it can return an <acronym>XML</acronym> response:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -105,7 +105,7 @@ class NewsController extends Zend_Controller_Action
 
     <para>
         Now, you'll need to create a new view script, '<filename>news/list.xml.phtml</filename>',
-        which will create and render the XML.
+        which will create and render the <acronym>XML</acronym>.
     </para>
 
     <para>
@@ -118,13 +118,13 @@ class NewsController extends Zend_Controller_Action
 
     <itemizedlist>
         <listitem><para>
-                Via URL parameter: <filename>/news/list/format/xml</filename> (recall,
-                the default routing schema allows for arbitrary key to value pairs
+                Via <acronym>URL</acronym> parameter: <filename>/news/list/format/xml</filename>
+                (recall, the default routing schema allows for arbitrary key to value pairs
                 following the action)
         </para></listitem>
 
         <listitem><para>
-                Via GET parameter: <command>/news/list?format=xml</command>
+                Via <acronym>GET</acronym> parameter: <command>/news/list?format=xml</command>
         </para></listitem>
     </itemizedlist>
 
@@ -146,20 +146,21 @@ class NewsController extends Zend_Controller_Action
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>JSON</emphasis>. The JSON context sets the
-                    'Content-Type' response header to '<filename>application/json</filename>', and
-                    the view script suffix to 'json.phtml'.
+                    <emphasis><acronym>JSON</acronym></emphasis>. The <acronym>JSON</acronym>
+                    context sets the 'Content-Type' response header to
+                    '<filename>application/json</filename>', and the view script suffix to
+                    '<filename>json.phtml</filename>'.
                 </para>
 
                 <para>
                     By default, however, no view script is required. It will
-                    simply serialize all view variables, and emit the JSON
+                    simply serialize all view variables, and emit the <acronym>JSON</acronym>
                     response immediately.
                 </para>
 
                 <para>
-                    This behaviour can be disabled by turning off auto-JSON
-                    serialization:
+                    This behaviour can be disabled by turning off the automatic
+                    <acronym>JSON</acronym> serialization:
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -169,10 +170,10 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
 
             <listitem>
                 <para>
-                    <emphasis>XML</emphasis>. The XML context sets the
-                    'Content-Type' response header to '<filename>text/xml</filename>', and the view
-                    script suffix to '<filename>xml.phtml</filename>'. You will need to create a new
-                    view script for the context.
+                    <emphasis><acronym>XML</acronym></emphasis>. The <acronym>XML</acronym> context
+                    sets the 'Content-Type' response header to '<filename>text/xml</filename>', and
+                    the view script suffix to '<filename>xml.phtml</filename>'. You will need to
+                    create a new view script for the context.
                 </para>
             </listitem>
         </itemizedlist>
@@ -182,9 +183,10 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
         <title>Creating Custom Contexts</title>
 
         <para>
-            Sometimes, the default contexts are not enough. For instance, you
-            may wish to return YAML, or serialized PHP, an RSS or ATOM feed,
-            etc. <emphasis>ContextSwitch</emphasis> allows you to do so.
+            Sometimes, the default contexts are not enough. For instance, you may wish to return
+            <acronym>YAML</acronym>, or serialized <acronym>PHP</acronym>, an
+            <acronym>RSS</acronym> or <acronym>ATOM</acronym> feed, etc.
+            <emphasis>ContextSwitch</emphasis> allows you to do so.
         </para>
 
         <para>
@@ -201,27 +203,27 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
             </listitem>
 
             <listitem>
-                <para><emphasis>headers</emphasis>: an array of header/value
+                <para><emphasis>headers</emphasis>: an array of header to value
                     pairs you wish sent as part of the response.</para>
             </listitem>
 
             <listitem>
                 <para><emphasis>callbacks</emphasis>: an array containing one or
-                more of the keys 'init' or 'post', pointing to valid PHP
+                more of the keys 'init' or 'post', pointing to valid <acronym>PHP</acronym>
                 callbacks that can be used for context initialization and post
                 processing.</para>
 
                 <para>Initialization callbacks occur when the context is
                 detected by <emphasis>ContextSwitch</emphasis>. You can use it to
                 perform arbitrary logic that should occur. As an example,
-                the JSON context uses a callback to disable the ViewRenderer
-                when auto-JSON serialization is on.</para>
+                the <acronym>JSON</acronym> context uses a callback to disable the ViewRenderer
+                when the automatic <acronym>JSON</acronym> serialization is on.</para>
 
                 <para>Post processing occurs during the action's
                 <methodname>postDispatch()</methodname> routine, and can be used to perform
-                arbitrary logic. As an example, the JSON context uses a callback
-                to determine if auto-JSON serialization is on; if so, it
-                serializes the view variables to JSON and sends the response,
+                arbitrary logic. As an example, the <acronym>JSON</acronym> context uses a callback
+                to determine if the automatic <acronym>JSON</acronym> serialization is on; if so,
+                it serializes the view variables to <acronym>JSON</acronym> and sends the response,
                 but if not, it re-enables the ViewRenderer.</para>
             </listitem>
         </itemizedlist>
@@ -245,7 +247,7 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
             <listitem><para>
                 <methodname>addContexts(array $contexts)</methodname>: add many contexts at
                 once. The <varname>$contexts</varname> array should be an array of
-                context/specification pairs. If any of the contexts already
+                context to specification pairs. If any of the contexts already
                 exists, it will throw an exception.
             </para></listitem>
 
@@ -267,7 +269,7 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
 
             <listitem><para>
                 <methodname>getContexts()</methodname>: retrieve all contexts. Returns an
-                array of context/specification pairs.
+                array of context to specification pairs.
             </para></listitem>
 
             <listitem><para>
@@ -321,9 +323,9 @@ class FooController extends Zend_Controller_Action
 ]]></programlisting>
 
         <para>
-            Let's say we wanted to add an XML context to the 'list' action, and
-            XML and JSON contexts to the 'comments' action. We could do so in
-            the <methodname>init()</methodname> method:
+            Let's say we wanted to add an <acronym>XML</acronym> context to the 'list' action, and
+            <acronym>XML</acronym> and <acronym>JSON</acronym> contexts to the 'comments' action.
+            We could do so in the <methodname>init()</methodname> method:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -456,7 +458,7 @@ class NewsController extends Zend_Controller_Action
 
         <para>
             In some cases, you may want to force the context used; for instance,
-            you may only want to allow the XML context if context switching is
+            you may only want to allow the <acronym>XML</acronym> context if context switching is
             activated. You can do so by passing the context to
             <methodname>initContext()</methodname>:
         </para>
@@ -478,8 +480,8 @@ $contextSwitch->initContext('xml');
             <listitem>
                 <para>
                     <methodname>setAutoJsonSerialization($flag)</methodname>: By default,
-                    JSON contexts will serialize any view variables to JSON
-                    notation and return this as a response. If you wish to
+                    <acronym>JSON</acronym> contexts will serialize any view variables to
+                    <acronym>JSON</acronym> notation and return this as a response. If you wish to
                     create your own response, you should turn this off; this
                     needs to be done prior to the call to
                     <methodname>initContext()</methodname>.
@@ -547,7 +549,7 @@ $contextSwitch->initContext();
                     multiple headers at once to a given context. Proxies to
                     <methodname>addHeader()</methodname>, so if the header already exists,
                     an exception will be thrown. <varname>$headers</varname> is an
-                    array of header/context pairs.
+                    array of header to context pairs.
                 </para>
             </listitem>
 
@@ -588,7 +590,7 @@ $contextSwitch->initContext();
                     a callback at a given trigger for a given context. Triggers
                     may be either 'init' or 'post' (indicating callback will be
                     called at either context initialization or postDispatch).
-                    <varname>$callback</varname> should be a valid PHP callback.
+                    <varname>$callback</varname> should be a valid <acronym>PHP</acronym> callback.
                 </para>
             </listitem>
 
@@ -689,8 +691,9 @@ $contextSwitch->initContext();
         <para>
             First, it uses a different action controller property for
             determining contexts, <varname>$ajaxable</varname>. This is so you can
-            have different contexts used for AJAX versus normal HTTP requests.
-            The various <methodname>*ActionContext*()</methodname> methods of
+            have different contexts used for <acronym>AJAX</acronym> versus normal
+            <acronym>HTTP</acronym> requests. The various
+            *<methodname>ActionContext()</methodname>* methods of
             <emphasis>AjaxContext</emphasis> will write to this property.
         </para>
 
@@ -703,10 +706,10 @@ $contextSwitch->initContext();
         </para>
 
         <para>
-            Third, <emphasis>AjaxContext</emphasis> adds an additional context, HTML. In
-            this context, it sets the suffix to 'ajax.phtml' in order to
-            differentiate the context from a normal request. No additional
-            headers are returned.
+            Third, <emphasis>AjaxContext</emphasis> adds an additional context,
+            <acronym>HTML</acronym>. In this context, it sets the suffix to
+            '<filename>ajax.phtml</filename>' in order to differentiate the context from a normal
+            request. No additional headers are returned.
         </para>
 
         <example id="zend.controller.actionhelpers.contextswitch.ajaxcontext.example">
@@ -714,10 +717,10 @@ $contextSwitch->initContext();
 
             <para>
                 In this following example, we're allowing requests to the
-                actions 'view', 'form', and 'process' to respond to AJAX
+                actions 'view', 'form', and 'process' to respond to <acronym>AJAX</acronym>
                 requests. In the first two cases, 'view' and 'form', we'll
-                return HTML snippets with which to update the page; in the
-                latter, we'll return JSON.
+                return <acronym>HTML</acronym> snippets with which to update the page; in the
+                latter, we'll return <acronym>JSON</acronym>.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -756,11 +759,13 @@ class CommentController extends Zend_Controller_Action
 ]]></programlisting>
 
             <para>
-                On the client end, your AJAX library will simply request the
-                endpoints '/comment/view', '/comment/form', and
-                '/comment/process', and pass the 'format' parameter:
-                '/comment/view/format/html', '/comment/form/format/html',
-                '/comment/process/format/json'. (Or you can pass the parameter
+                On the client end, your <acronym>AJAX</acronym> library will simply request the
+                endpoints '<filename>/comment/view</filename>',
+                '<filename>/comment/form</filename>', and
+                '<filename>/comment/process</filename>', and pass the 'format' parameter:
+                '<filename>/comment/view/format/html</filename>',
+                '<filename>/comment/form/format/html</filename>',
+                '<filename>/comment/process/format/json</filename>'. (Or you can pass the parameter
                 via query string: e.g., "?format=json".)
             </para>
 

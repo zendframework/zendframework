@@ -222,7 +222,7 @@ $form->addElement(
             dojo.dataデータ・ストア（使用された場合）を指定することだけでなく、
             選ばれた選択肢を調べて、セットするためにアクセッサとミューテーターを提供します。
             それらはDijitMultiから拡張します。
-            そして、それは<code>setMultiOptions()</code>と<code>setMultiOption()</code>メソッドによって
+            そして、それは<code>setMultiOptions()</code>及び<code>setMultiOption()</code>メソッドによって
             選ばれた選択肢を指定することができます。
             さらに、以下のメソッドを利用できます:
         </para>
@@ -433,18 +433,18 @@ $form->addElement(
 
         <itemizedlist>
             <listitem><para>
-                <code>setAmPm($flag)</code> and <code>getAmPm()</code>:
+                <code>setAmPm($flag)</code>及び<code>getAmPm()</code>:
                 時刻でAM/PM 文字列を使うかどうか
             </para></listitem>
 
             <listitem><para>
-                <code>setStrict($flag)</code> and <code>getStrict()</code>:
+                <code>setStrict($flag)</code>及び<code>getStrict()</code>:
                 入力を確認した時にマッチする厳しい正規表現を使うかどうか。
                 デフォルトはfalseですが、空白文字やいくつかの省略形を許します。
             </para></listitem>
 
             <listitem><para>
-                <code>setLocale($locale)</code> and <code>getLocale()</code>:
+                <code>setLocale($locale)</code>及び<code>getLocale()</code>:
                 指定した要素で使うロケールを設定または取得します。
             </para></listitem>
 
@@ -493,24 +493,27 @@ $form->addElement(
         <title>エディタ</title>
 
         <para>
-            Editor provides a WYSIWYG editor that can be used to both create and
-            edit rich HTML content. dijit.Editor is pluggable and may be
-            extended with custom plugins if desired; see <ulink
-                url="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/advanced-editing-and-display/editor-rich-text">the
-                dijit.Editor documentation</ulink> for more details.
+            エディタはリッチなHTML内容を作成して、
+            編集するために利用できるWYSIWYGエディタを提供します。
+            dijit.Editorはプラグイン可能で、
+            必要に応じてカスタム・プラグインで拡張されるかもしれません;
+            詳しくは<ulink
+            url="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/advanced-editing-and-display/editor-rich-text">
+            dijit.Editorドキュメント</ulink>をご覧下さい。
         </para>
 
         <para>
-            The Editor form element provides a number of accessors and mutators
-            for manipulating various dijit parameters, as follows:
+            エディタ・フォーム要素は、
+            下記のいくつかのアクセッサとミューテーターを
+            いろいろなdijitパラメータを操作するために提供します:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>captureEvents</emphasis> are events that connect
-                    to the editing area itself. The following accessors and
-                    mutators are available for manipulating capture events:
+                    <emphasis>captureEvents</emphasis>は、
+                    編集エリア自体と連携するイベントです。
+                    捕獲したイベントを操作するために以下のアクセッサとミューテーターを利用できます:
                 </para>
 
                 <itemizedlist>
@@ -526,9 +529,9 @@ $form->addElement(
 
             <listitem>
                 <para>
-                    <emphasis>events</emphasis> are standard DOM events, such as
-                    onClick, onKeyUp, etc. The following accessors and mutators
-                    are available for manipulating events:
+                    <emphasis>events</emphasis>は、
+                    onClickやonKeyUpなどのような標準的なDOMイベントです。
+                    イベントを操作するために以下のアクセッサとミューテーターを利用できます:
                 </para>
 
                 <itemizedlist>
@@ -544,10 +547,9 @@ $form->addElement(
 
             <listitem>
                 <para>
-                    <emphasis>plugins</emphasis> add functionality to the
-                    Editor -- additional tools for the toolbar, additional
-                    styles to allow, etc. The following accessors and mutators
-                    are available for manipulating plugins:
+                    <emphasis>plugins</emphasis>はエディターにツールバーのための追加のツールや、
+                    許可する追加スタイルなどの機能を加えます。
+                    プラグインを操作するために以下のアクセッサとミューテーターを利用できます:
                 </para>
 
                 <itemizedlist>
@@ -563,63 +565,60 @@ $form->addElement(
 
             <listitem>
                 <para>
-                    <emphasis>editActionInterval</emphasis> is used to group
-                    events for undo operations. By default, this value is 3
-                    seconds. The method
-                    <code>setEditActionInterval($interval)</code> may be used to
-                    set the value, while <code>getEditActionInterval()</code>
-                    will retrieve it.
+                    <emphasis>editActionInterval</emphasis>は、
+                    アンドゥ操作のためにイベントをまとめるために使われます。
+                    デフォルトでこの値は3秒です。
+                    <code>setEditActionInterval($interval)</code>メソッドが値を設定するために使われるかもしれません。
+                    一方で、<code>getEditActionInterval()</code>が値を取得します。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>focusOnLoad</emphasis> is used to determine
-                    whether this particular editor will receive focus when the
-                    page has loaded. By default, this is false. The method
-                    <code>setFocusOnLoad($flag)</code> may be used to
-                    set the value, while <code>getFocusOnLoad()</code>
-                    will retrieve it.
+                    <emphasis>focusOnLoad</emphasis>は、
+                    ページが読み込まれたとき、
+                    この指定のエディタがフォーカスを受けるかどうか判断するために使われます。
+                    デフォルトでこれはfalseです。
+                    メソッド<code>setFocusOnLoad($flag)</code>が値を設定するために使われるかもしれません。
+                    一方で、<code>getFocusOnLoad()</code>が値を取得します。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>height</emphasis> specifies the height of the
-                    editor; by default, this is 300px. The method
-                    <code>setHeight($height)</code> may be used to set the
-                    value, while <code>getHeight()</code> will retrieve it.
+                    <emphasis>height</emphasis>はエディターの高さを指定します;
+                    デフォルトでこれは300pxです。
+                    メソッド<code>setHeight($height)</code>が値を設定するために使われるかもしれません。
+                    一方で、<code>getHeight()</code>が値を取得します。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>inheritWidth</emphasis> is used to determine
-                    whether the editor will use the parent container's width or
-                    simply default to 100% width. By default, this is false
-                    (i.e., it will fill the width of the window). The method
-                    <code>setInheritWidth($flag)</code> may be used to set the
-                    value, while <code>getInheritWidth()</code> will retrieve
-                    it.
+                    <emphasis>inheritWidth</emphasis>は、
+                    エディタが親コンテナの幅と単純にデフォルトの100%幅のどちらを使うか決定するために使われます。
+                    デフォルトでこれはfalseです。
+                    (すなわち、画面の幅一杯を満たします)
+                    メソッド<code>setInheritWidth($flag)</code>が値を設定するために使われるかもしれません。
+                    一方で、<code>getInheritWidth()</code>が値を取得します。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>minHeight</emphasis> indicates the minimum height
-                    of the editor; by default, this is 1em. The method
-                    <code>setMinHeight($height)</code> may be used to set the
-                    value, while <code>getMinHeight()</code> will retrieve it.
+                    <emphasis>minHeight</emphasis>はエディターの高さの最小値を設定します;
+                    デフォルトでこれは1emです。
+                    メソッド<code>setMinHeight($height)</code>が値を設定するために使われるかもしれません。
+                    一方で、<code>getMinHeight()</code>が値を取得します。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>styleSheets</emphasis> indicate what additional
-                    CSS stylesheets should be used to affect the display of the
-                    Editor. By default, none are registered, and it inherits the
-                    page styles. The following accessors and mutators are
-                    available for manipulating editor stylesheets:
+                    <emphasis>styleSheets</emphasis>は、
+                    どの追加CSSスタイルシートがエディタの表示に影響を及ぼすために使われるか示します。
+                    デフォルトでは何も登録されず、それはページ・スタイルを継承します。
+                    エディタ・スタイルシートを操作するために以下のアクセッサとミューテーターを利用できます:
                 </para>
 
                 <itemizedlist>
@@ -655,85 +654,86 @@ $form->addElement('editor', 'content', array(
     </sect3>
 
     <sect3 id="zend.dojo.form.elements.horizontalSlider">
-        <title>HorizontalSlider</title>
+        <title>水平スライダー</title>
 
         <para>
-            HorizontalSlider provides a slider UI widget for selecting a
-            numeric value in a range. Internally, it sets the value of a hidden
-            element which is submitted by the form.
+            水平スライダーは、
+            ある範囲で数値を選択するためのスライダーUI部品を提供します。
+            内部的には、それはフォームによって送信されるhidden要素の値をセットします。
         </para>
 
         <para>
-            HorizontalSlider derives from the <link
-                linkend="zend.dojo.form.elements.slider">abstract Slider dijit
-                element</link>. Additionally, it has a variety of methods for
-            setting and configuring slider rules and rule labels.
+            水平スライダーは、<link
+                linkend="zend.dojo.form.elements.slider">抽象的なスライダーdijit要素</link>に由来します。
+            さらに、スライダー・ルールとルール・ラベルをセットして設定するための、
+            いろいろなメソッドがあります。
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>setTopDecorationDijit($dijit)</code> and
-                    <code>setBottomDecorationDijit($dijit)</code>: set the name
-                    of the dijit to use for either the top or bottom of the
-                    slider. This should not include the "dijit.form." prefix,
-                    but rather only the final name -- one of "HorizontalRule"
-                    or "HorizontalRuleLabels".
+                    <code>setTopDecorationDijit($dijit)</code>及び
+                    <code>setBottomDecorationDijit($dijit)</code>:
+                    スライダーのトップかボトムで使うdijitの名前をセットします。
+                    これは、接頭辞 "dijit.form." を含んではいけません。
+                    むしろ final 名だけ
+                    - "HorizontalRule" または "HorizontalRuleLabels" のうちの1つ -
+                    を含まなければなりません。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setTopDecorationContainer($container)</code> and
+                    <code>setTopDecorationContainer($container)</code>及び
                     <code>setBottomDecorationContainer($container)</code>:
-                    specify the name to use for the container element of the
-                    rules; e.g. 'topRule', 'topContainer', etc.
+                    ルールのコンテナ要素のために使用する名前を指定します;
+                    例えば、'topRule' や 'topContainer'など。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setTopDecorationLabels(array $labels)</code> and
-                    <code>setBottomDecorationLabels(array $labels)</code>: set
-                    the labels to use for one of the RuleLabels dijit types.
-                    These should be an indexed array; specify a single empty
-                    space to skip a given label position (such as the beginning
-                    or end).
+                    <code>setTopDecorationLabels(array $labels)</code>及び
+                    <code>setBottomDecorationLabels(array $labels)</code>:
+                    RuleLabels dijit型のうちの1つで使用するラベルをセットします。
+                    これらは、インデックスを付けられた配列でなければなりません;
+                    与えられたラベル位置（例えば始めまたは終わり）をスキップするために、
+                    一つの空の場所を指定します。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setTopDecorationParams(array $params)</code> and
+                    <code>setTopDecorationParams(array $params)</code>及び
                     <code>setBottomDecorationParams(array $params)</code>:
-                    dijit parameters to use when configuring the given Rule or
-                    RuleLabels dijit.
+                    与えられたルール、
+                    またはRuleLabels dijitを構成するときに使うdijitパラメータです。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setTopDecorationAttribs(array $attribs)</code> and
+                    <code>setTopDecorationAttribs(array $attribs)</code>及び
                     <code>setBottomDecorationAttribs(array $attribs)</code>:
-                    HTML attributes to specify for the given Rule or RuleLabels
-                    HTML element container.
+                    与えられたルールまたはRuleLabels HTML要素コンテナのために指定するHTML属性です。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getTopDecoration()</code> and
-                    <code>getBottomDecoration()</code>: retrieve all metadata
-                    for a given Rule or RuleLabels definition, as provided by
-                    the above mutators.
+                    <code>getTopDecoration()</code>及び
+                    <code>getBottomDecoration()</code>:
+                    上記のミューテーターによって提示されたように、
+                    与えられたルールまたはRuleLabels定義のためにすべてのメタデータを取得します。
                 </para>
             </listitem>
         </itemizedlist>
 
         <example id="zend.dojo.form.elements.horizontalSlider.example">
-            <title>Example HorizontalSlider dijit element usage</title>
+            <title>水平スライダーdijit要素使用例</title>
 
             <para>
+                <!-- TODO -->
                 The following will create a horizontal slider selection with
                 integer values ranging from -10 to 10. The top will have labels
                 at the 20%, 40%, 60%, and 80% marks. The botton will have rules
@@ -804,52 +804,52 @@ $form->addElement(
 
         <itemizedlist>
             <listitem><para>
-                <code>setDefaultTimeout($timeout)</code> and
+                <code>setDefaultTimeout($timeout)</code>及び
                 <code>getDefaultTimeout()</code>: set and retrieve the default
                 timeout, in milliseconds, between when the button is held
                 pressed and the value is changed.
             </para></listitem>
 
             <listitem><para>
-                <code>setTimeoutChangeRate($rate)</code> and
+                <code>setTimeoutChangeRate($rate)</code>及び
                 <code>getTimeoutChangeRate()</code>: set and retrieve the
                 rate, in milliseconds, at which changes will be made when a
                 button is held pressed.
             </para></listitem>
 
             <listitem><para>
-                <code>setLargeDelta($delta)</code> and
+                <code>setLargeDelta($delta)</code>及び
                 <code>getLargeDelta()</code>: set and retrieve the amount by
                 which the numeric value should change when a button is held
                 pressed.
             </para></listitem>
 
             <listitem><para>
-                <code>setSmallDelta($delta)</code> and
+                <code>setSmallDelta($delta)</code>及び
                 <code>getSmallDelta()</code>: set and retrieve the delta by
                 which the number should change when a button is pressed once.
             </para></listitem>
 
             <listitem><para>
-                <code>setIntermediateChanges($flag)</code> and
+                <code>setIntermediateChanges($flag)</code>及び
                 <code>getIntermediateChanges()</code>: set and retrieve the
                 flag indicating whether or not each value change should be
                 shown when a button is held pressed.
             </para></listitem>
 
             <listitem><para>
-                <code>setRangeMessage($message)</code> and
+                <code>setRangeMessage($message)</code>及び
                 <code>getRangeMessage()</code>: set and retrieve the message
                 indicating the range of values available.
             </para></listitem>
 
             <listitem><para>
-                <code>setMin($value)</code> and <code>getMin()</code>: set and
+                <code>setMin($value)</code>及び<code>getMin()</code>: set and
                 retrieve the minimum value possible.
             </para></listitem>
 
             <listitem><para>
-                <code>setMax($value)</code> and <code>getMax()</code>: set and
+                <code>setMax($value)</code>及び<code>getMax()</code>: set and
                 retrieve the maximum value possible.
             </para></listitem>
         </itemizedlist>
@@ -898,31 +898,31 @@ $form->addElement(
 
         <itemizedlist>
             <listitem><para>
-                <code>setLocale($locale)</code> and <code>getLocale()</code>:
+                <code>setLocale($locale)</code>及び<code>getLocale()</code>:
                 specify and retrieve a specific or alternate locale to use with
                 this dijit.
             </para></listitem>
 
             <listitem><para>
-                <code>setPattern($pattern)</code> and
+                <code>setPattern($pattern)</code>及び
                 <code>getPattern()</code>: set and retrieve a <ulink
                     url="http://www.unicode.org/reports/tr35/#Number_Format_Patterns">number
                     pattern format</ulink> to use to format the number.
             </para></listitem>
 
             <listitem><para>
-                <code>setType($type)</code> and <code>getType()</code>: set and
+                <code>setType($type)</code>及び<code>getType()</code>: set and
                 retrieve the numeric format type to use (should be one of
                 'decimal', 'percent', or 'currency').
             </para></listitem>
 
             <listitem><para>
-                <code>setPlaces($places)</code> and <code>getPlaces()</code>:
+                <code>setPlaces($places)</code>及び<code>getPlaces()</code>:
                 set and retrieve the number of decimal places to support.
             </para></listitem>
 
             <listitem><para>
-                <code>setStrict($flag)</code> and <code>getStrict()</code>: set
+                <code>setStrict($flag)</code>及び<code>getStrict()</code>: set
                 and retrieve the value of the strict flag, which indicates how
                 much leniency is allowed in relation to whitespace and
                 non-numeric characters.
@@ -999,7 +999,7 @@ $form->addElement(
         <para>
             RadioButton extends from DijitMulti, which
             allows you to specify select options via the
-            <code>setMultiOptions()</code> and <code>setMultiOption()</code>
+            <code>setMultiOptions()</code>及び<code>setMultiOption()</code>
             methods.
         </para>
 
@@ -1074,21 +1074,21 @@ $form->addElement(
 
         <itemizedlist>
             <listitem><para>
-                <code>setClickSelect($flag)</code> and
+                <code>setClickSelect($flag)</code>及び
                 <code>getClickSelect()</code>: set and retrieve the flag
                 indicating whether or not clicking the slider changes the
                 value.
             </para></listitem>
 
             <listitem><para>
-                <code>setIntermediateChanges($flag)</code> and
+                <code>setIntermediateChanges($flag)</code>及び
                 <code>getIntermediateChanges()</code>: set and retrieve the
                 flag indicating whether or not the dijit will send a
                 notification on each slider change event.
             </para></listitem>
 
             <listitem><para>
-                <code>setShowButtons($flag)</code> and
+                <code>setShowButtons($flag)</code>及び
                 <code>getShowButtons()</code>: set and retrieve the flag
                 indicating whether or not buttons on either end will be
                 displayed; if so, the user can click on these to change the
@@ -1096,23 +1096,23 @@ $form->addElement(
             </para></listitem>
 
             <listitem><para>
-                <code>setDiscreteValues($value)</code> and
+                <code>setDiscreteValues($value)</code>及び
                 <code>getDiscreteValues()</code>: set and retrieve the number
                 of discrete values represented by the slider.
             </para></listitem>
 
             <listitem><para>
-                <code>setMaximum($value)</code> and <code>getMaximum()</code>:
-                set the maximum value of the slider.
+                <code>setMaximum($value)</code>及び<code>getMaximum()</code>:
+                スライダーの最大値を設定します。
             </para></listitem>
 
             <listitem><para>
-                <code>setMinimum($value)</code> and <code>getMinimum()</code>:
-                set the minimum value of the slider.
+                <code>setMinimum($value)</code>及び<code>getMinimum()</code>:
+                スライダーの最小値を設定します。
             </para></listitem>
 
             <listitem><para>
-                <code>setPageIncrement($value)</code> and
+                <code>setPageIncrement($value)</code>及び
                 <code>getPageIncrement()</code>: set the amount by which the
                 slider will change on keyboard events.
             </para></listitem>
@@ -1163,31 +1163,31 @@ $form->addElement(
 
         <itemizedlist>
             <listitem><para>
-                <code>setLowercase($flag)</code> and
+                <code>setLowercase($flag)</code>及び
                 <code>getLowercase()</code>: set and retrieve the flag
                 indicating whether or not input should be cast to lowercase.
             </para></listitem>
 
             <listitem><para>
-                <code>setPropercase($flag)</code> and
+                <code>setPropercase($flag)</code>及び
                 <code>getPropercase()</code>: set and retrieve the flag
                 indicating whether or not the input should be cast to Proper
                 Case.
             </para></listitem>
 
             <listitem><para>
-                <code>setUppercase($flag)</code> and <code>getUppercase()</code>: set and retrieve
+                <code>setUppercase($flag)</code>及び<code>getUppercase()</code>: set and retrieve
                 the flag indicating whether or not the input should be cast to UPPERCASE.
             </para></listitem>
 
             <listitem><para>
-                <code>setTrim($flag)</code> and <code>getTrim()</code>: set and
+                <code>setTrim($flag)</code>及び<code>getTrim()</code>: set and
                 retrieve the flag indicating whether or not leading or trailing
                 whitespace should be stripped.
             </para></listitem>
 
             <listitem><para>
-                <code>setMaxLength($length)</code> and
+                <code>setMaxLength($length)</code>及び
                 <code>getMaxLength()</code>: set and retrieve the maximum
                 length of input.
             </para></listitem>
@@ -1260,14 +1260,14 @@ $form->addElement(
 
         <itemizedlist>
             <listitem><para>
-                <code>setTimePattern($pattern)</code> and
+                <code>setTimePattern($pattern)</code>及び
                 <code>getTimePattern()</code>: set and retrieve the <ulink
                     url="http://www.unicode.org/reports/tr35/#Date_Format_Patterns">unicode
                     time format pattern</ulink> for formatting the time.
             </para></listitem>
 
             <listitem><para>
-                <code>setClickableIncrement($format)</code> and
+                <code>setClickableIncrement($format)</code>及び
                 <code>getClickableIncrement()</code>: set the <ulink
                     url="http://en.wikipedia.org/wiki/ISO_8601">ISO-8601</ulink>
                 string representing the amount by which every clickable element
@@ -1275,13 +1275,13 @@ $form->addElement(
             </para></listitem>
 
             <listitem><para>
-                <code>setVisibleIncrement($format)</code> and
+                <code>setVisibleIncrement($format)</code>及び
                 <code>getVisibleIncrement()</code>: set the increment visible
                 in the time chooser; must follow ISO-8601 formats.
             </para></listitem>
 
             <listitem><para>
-                <code>setVisibleRange($format)</code> and
+                <code>setVisibleRange($format)</code>及び
                 <code>getVisibleRange()</code>: set and retrieve the range of
                 time visible in the time chooser at any given moment; must
                 follow ISO-8601 formats.
@@ -1324,26 +1324,26 @@ $form->addElement(
 
         <itemizedlist>
             <listitem><para>
-                <code>setInvalidMessage($message)</code> and
+                <code>setInvalidMessage($message)</code>及び
                 <code>getInvalidMessage()</code>: set and retrieve the tooltip
                 message to display when the value does not validate.
             </para></listitem>
 
             <listitem><para>
-                <code>setPromptMessage($message)</code> and
+                <code>setPromptMessage($message)</code>及び
                 <code>getPromptMessage()</code>: set and retrieve the tooltip
                 message to display for element usage.
             </para></listitem>
 
             <listitem><para>
-                <code>setRegExp($regexp)</code> and <code>getRegExp()</code>:
+                <code>setRegExp($regexp)</code>及び<code>getRegExp()</code>:
                 set and retrieve the regular expression to use for validating
                 the element. The regular expression does not need boundaries
                 (unlike PHP's preg* family of functions).
             </para></listitem>
 
             <listitem><para>
-                <code>setConstraint($key, $value)</code> and
+                <code>setConstraint($key, $value)</code>及び
                 <code>getConstraint($key)</code>: set and retrieve additional
                 constraints to use when validating the element; used primarily
                 with subclasses. Constraints are stored in the 'constraints'
@@ -1351,7 +1351,7 @@ $form->addElement(
             </para></listitem>
 
             <listitem><para>
-                <code>setConstraints(array $constraints)</code> and
+                <code>setConstraints(array $constraints)</code>及び
                 <code>getConstraints()</code>: set and retrieve individual
                 constraints to use when validating the element; used primarily
                 with subclasses.
@@ -1363,7 +1363,7 @@ $form->addElement(
             </para></listitem>
 
             <listitem><para>
-                <code>removeConstraint($key)</code> and
+                <code>removeConstraint($key)</code>及び
                 <code>clearConstraints()</code>: remove an individual or all
                 constraints for the element.
             </para></listitem>

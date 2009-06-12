@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15825 -->
+<!-- EN-Revision: 15976 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.codegenerator.introduction">
     <title>Einführung</title>
@@ -8,8 +8,9 @@
         <classname>Zend_CodeGenerator</classname> bietet die Möglichkeit jeglichen Code zu erstellen
         indem ein Objekt Orientiertes Interface verwendet wird, um sowohl neuen Code zu erstellen
         als auch bestehenden Code upzudaten. Wärend die aktuelle Implementation darin limitiert ist
-        PHP Code zu erstellen, kann die Basisklasse einfach erweitert werden um Code Erzeugung
-        für andere Zwecke zu bieten: JavaScript, Konfigurationsdateien, Apache VHosts, usw.
+        <acronym>PHP</acronym> Code zu erstellen, kann die Basisklasse einfach erweitert werden um
+        Code Erzeugung für andere Zwecke zu bieten: JavaScript, Konfigurationsdateien, Apache
+        VHosts, usw.
     </para>
 
     <sect2 id="zend.codegenerator.introduction.theory">

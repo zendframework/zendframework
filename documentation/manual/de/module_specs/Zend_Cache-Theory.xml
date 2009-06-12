@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15848 -->
+<!-- EN-Revision: 15974 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.cache.theory">
     <title>Die Theorie des Cachens</title>
@@ -10,13 +10,13 @@
         definiert, wie lange eine gecachte Ressource als 'frisch' betrachtet wird. Das dritte
         Konzept ist die bedingte Ausführung, so das Teile des Codes komplett übersprungen werden
         können, was die Leistung steigert. Die Haupt-Frontend Funktion (eg.
-        <classname>Zend_Cache_Core::get()</classname>) ist immer so gestaltet, das false
+        <methodname>Zend_Cache_Core::get()</methodname>) ist immer so gestaltet, das false
         zurückgegeben wird, wenn ein Cache fehlt. Aber nur, wenn das für die Natur des Frontends
         Sinn macht. Das erlaubt es Endbenutzern, die Teile des Codes, die gecached (oder
-        übersprungen) werden sollen, in <emphasis>if(){ ... }</emphasis> Anweisungen zu umhüllen,
-        wobei die Bedingung die <classname>Zend_Cache</classname> Methode selbst ist. Am Ende der
-        Blöcke muss das erstellte auf alle Fälle gespeichert werden (z.B.
-        <classname>Zend_Cache_Core::save()</classname>).
+        übersprungen) werden sollen, in <emphasis><methodname>if()</methodname>{ ... }</emphasis>
+        Anweisungen zu umhüllen, wobei die Bedingung die <classname>Zend_Cache</classname> Methode
+        selbst ist. Am Ende der Blöcke muss das erstellte auf alle Fälle gespeichert werden (z.B.
+        <methodname>Zend_Cache_Core::save()</methodname>).
     </para>
     <note><para>
         Das Design der bedingten Ausführung des erzeugten Codes ist in einigen Frontends nicht
@@ -62,7 +62,7 @@ $cache = Zend_Cache::factory($frontendName,
             Parameter an das ausgewählte Backend übergeben werden.
         </para>
         <note><para>
-            Immer <classname>Zend_Cache::factory()</classname> benutzen, um eine Frontend Instanz zu
+            Immer <methodname>Zend_Cache::factory()</methodname> benutzen, um eine Frontend Instanz zu
             bekommen. Das selbstständige Instantiieren von Frontends und Backends funktioniert nicht
             so wie erwartet.
         </para></note>
@@ -89,14 +89,14 @@ $cache->save($huge_data, 'myUniqueID', array('tagA', 'tagB', 'tagC'));
     <sect2 id="zend.cache.clean">
         <title>Löschen des Caches</title>
         <para>
-            Um eine bestimmte Cache ID zu entfernen/annullieren, kann die
+            Um eine bestimmte Cache ID zu entfernen oder annullieren, kann die
             <methodname>remove()</methodname> Methode benutzt werden:
         </para>
              <programlisting language="php"><![CDATA[
 $cache->remove('idToRemove');
 ]]></programlisting>
         <para>
-            Um mehrere Cache IDs mit einer Operation zu entfernen/annulieren, kann die
+            Um mehrere Cache IDs mit einer Operation zu entfernen oder annulieren, kann die
             <methodname>clean()</methodname> Methode benutzt werden. Zum Beispiel um alle Cache
             Datensätze zu entfernen :
         </para>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15825 -->
+<!-- EN-Revision: 15974 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.captcha.operation">
     <title>Captcha Anwendung</title>
 
     <para>
-        Alle CAPTCHA Adapter implementieren <classname>Zend_Captcha_Adapter</classname>, welches wie
-        folgt aussieht:
+        Alle <acronym>CAPTCHA</acronym> Adapter implementieren
+        <classname>Zend_Captcha_Adapter</classname>, welches wie folgt aussieht:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -32,17 +32,17 @@ interface Zend_Captcha_Adapter extends Zend_Validate_Interface
 ]]></programlisting>
 
     <para>
-        Die benannten Getter- und Settermethoden werden verwenden um den CAPTCHA Identifikator zu
-        spezifizieren und zu empfangen. <methodname>getDecorator()</methodname> kann verwendet
-        werden um einen <classname>Zend_Form</classname> Dekorator entweder durch seinen Namen zu
-        Spezifizieren oder indem ein aktuelles Dekoratorobjekt zurückgegeben wird. Der
-        interessantesten Methoden sind aber <methodname>generate()</methodname> und
+        Die benannten Getter- und Settermethoden werden verwenden um den <acronym>CAPTCHA</acronym>
+        Identifikator zu spezifizieren und zu empfangen. <methodname>getDecorator()</methodname>
+        kann verwendet werden um einen <classname>Zend_Form</classname> Dekorator entweder durch
+        seinen Namen zu Spezifizieren oder indem ein aktuelles Dekoratorobjekt zurückgegeben wird.
+        Der interessantesten Methoden sind aber <methodname>generate()</methodname> und
         <methodname>render()</methodname>. <methodname>generate()</methodname> wird verwendet um
-        das CAPTCHA Token zu erstellen. Dieser Prozess speichert das Token typischerweise in der
-        Session damit es in nachfolgenden Anfragen verglichen werden kann.
-        <methodname>render()</methodname> wird verwendet um die Informationen die das CAPTCHA
-        repräsentieren darzustellen - ob es ein Bild ist, ein Figlet, ein logisches Problem, oder
-        andere CAPTCHA.
+        das <acronym>CAPTCHA</acronym> Token zu erstellen. Dieser Prozess speichert das Token
+        typischerweise in der Session damit es in nachfolgenden Anfragen verglichen werden kann.
+        <methodname>render()</methodname> wird verwendet um die Informationen die das
+        <acronym>CAPTCHA</acronym> repräsentieren darzustellen - ob es ein Bild ist, ein Figlet,
+        ein logisches Problem, oder andere <acronym>CAPTCHA</acronym>.
     </para>
 
     <para>

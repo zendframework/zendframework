@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15854 -->
+<!-- EN-Revision: 15975 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.standardElements">
     <title>Standard Form Elemente die mit dem With Zend Framework ausgeliefert werden</title>
@@ -409,7 +409,7 @@ $form->addElement($element, 'foo');
         </note>
 
         <para>
-            Um die Größe der Datei zu begrenzen, die vom Client hochgeladen wird, kann die maximale
+            Um die Größe der Datei zu begrenzen, kann die maximale
             Dateigröße spezifiziert werden indem die <code>MAX_FILE_SIZE</code> Option im Formular
             gesetzt wird. Sobald der Wert, durch die Verwendung der
             <code>setMaxFileSize($size)</code> Methode, gesetzt ist, wird er mit dem File Element

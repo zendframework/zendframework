@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15825 -->
+<!-- EN-Revision: 15976 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.codegenerator.reference">
     <title>Zend_CodeGenerator Referenz</title>
@@ -12,7 +12,8 @@
 
             <para>
                 Die Basisklasse von der alle CodeGenerator Klassen abgeleitet sind und die
-                minimal notwendige Funktionalität anbietet. Dessen API ist wie folgt:
+                minimal notwendige Funktionalität anbietet. Dessen <acronym>API</acronym> ist wie
+                folgt:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -63,7 +64,8 @@ abstract class Zend_CodeGenerator_Abstract
                 <classname>Zend_CodeGenerator_Php_Abstract</classname> erweitert
                 <classname>Zend_CodeGenerator_Abstract</classname>, und fügt einige Eigenschaften
                 hinzu für das Verfolgen ob Inhalte geändert wurden sowie der Anzahl an Einrückungen
-                die vorhanden sein sollten bevor Inhalte erzeugt werden. Die API ist wie folgt:
+                die vorhanden sein sollten bevor Inhalte erzeugt werden. Die <acronym>API</acronym>
+                ist wie folgt:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -85,8 +87,8 @@ abstract class Zend_CodeGenerator_Php_Abstract
                 <classname>Zend_CodeGenerator_Php_Member_Abstract</classname> ist eine Basisklasse
                 für die Erstellung von Klassen-Member -- Eigenschaften und Methoden -- und bietet
                 Zugriffs- und Änderungsmethoden für die Ausführung der Sichtbarkeit; ob ein
-                Member Abstrakt, Statisch, oder Final ist; und der Name des Members. Die API ist
-                wie folgt:
+                Member Abstrakt, Statisch, oder Final ist; und der Name des Members. Die
+                <acronym>API</acronym> ist wie folgt:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -120,7 +122,7 @@ abstract class Zend_CodeGenerator_Php_Member_Abstract
             </para>
 
             <para>
-                Die API der Klasse ist wie folgt:
+                Die <acronym>API</acronym> der Klasse ist wie folgt:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -137,16 +139,17 @@ class Zend_CodeGenerator_Php_Body extends Zend_CodeGenerator_Php_Abstract
             <title>Zend_CodeGenerator_Php_Class</title>
 
             <para>
-                <classname>Zend_CodeGenerator_Php_Class</classname> ist für die Erstellung von PHP
-                Klassen gedacht. Die Basisfunktionalität ist nur die Erstellung der PHP Klasse
-                selbst, sowie optional den betreffenden PHP DocBlock. Klassen können von anderen
-                Klassen abgeleitet sein, oder diese Implementieren, und können als Abstrakt markiert
+                <classname>Zend_CodeGenerator_Php_Class</classname> ist für die Erstellung von
+                <acronym>PHP</acronym> Klassen gedacht. Die Basisfunktionalität ist nur die
+                Erstellung der <acronym>PHP</acronym> Klasse selbst, sowie optional den
+                betreffenden <acronym>PHP</acronym> DocBlock. Klassen können von anderen Klassen
+                abgeleitet sein, oder diese Implementieren, und können als Abstrakt markiert
                 sein. Bei Verwendung von anderen CodeGenerator Klassen kann man auch
                 Klassenkonstanten, Eigenschaften und Methoden hinzufügen.
             </para>
 
             <para>
-                Die API ist wie folgt:
+                Die <acronym>API</acronym> ist wie folgt:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -200,9 +203,9 @@ class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
             <title>Zend_CodeGenerator_Php_Docblock</title>
 
             <para>
-                <classname>Zend_CodeGenerator_Php_Docblock</classname> kann verwendet werden um PHP
-                DocBlocks zu erstellen, inklusive aller standardmäßigen DocBlock Features: Kurz- und
-                Langbeschreibung sowie zusätzliche Tags.
+                <classname>Zend_CodeGenerator_Php_Docblock</classname> kann verwendet werden um
+                <acronym>PHP</acronym> DocBlocks zu erstellen, inklusive aller standardmäßigen
+                DocBlock Features: Kurz- und Langbeschreibung sowie zusätzliche Tags.
             </para>
 
             <para>
@@ -214,7 +217,7 @@ class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
             </para>
 
             <para>
-                Die API ist wie folgt:
+                Die <acronym>API</acronym> ist wie folgt:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -240,13 +243,13 @@ class Zend_CodeGenerator_Php_Docblock extends Zend_CodeGenerator_Php_Abstract
 
             <para>
                 <classname>Zend_CodeGenerator_Php_Docblock_Tag</classname> ist für die Erstellung
-                von eigenen Tags, zum Einfügen in PHP DocBlocks, gedacht. Von Tags wird erwartet
-                das Sie einen Namen enthalten (Der Teil der unmittelbar dem '@' Symbol folgt)
-                und eine Beschreibung (alles das dem Tag Namen folgt).
+                von eigenen Tags, zum Einfügen in <acronym>PHP</acronym> DocBlocks, gedacht. Von
+                Tags wird erwartet das Sie einen Namen enthalten (Der Teil der unmittelbar dem '@'
+                Symbol folgt) und eine Beschreibung (alles das dem Tag Namen folgt).
             </para>
 
             <para>
-                Die API der Klasse ist wie folgt:
+                Die <acronym>API</acronym> der Klasse ist wie folgt:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -278,7 +281,7 @@ class Zend_CodeGenerator_Php_Docblock_Tag
             </para>
 
             <para>
-                Die API dieser Klasse ist wie folgt:
+                Die <acronym>API</acronym> dieser Klasse ist wie folgt:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -308,7 +311,7 @@ class Zend_CodeGenerator_Php_Docblock_Tag_Param
             </para>
 
             <para>
-                Die API der Klasse ist wie folgt:
+                Die <acronym>API</acronym> der Klasse ist wie folgt:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -330,8 +333,9 @@ class Zend_CodeGenerator_Php_Docblock_Tag_Param
 
             <para>
                 <classname>Zend_CodeGenerator_Php_File</classname> wird verwendet um den kompletten
-                Inhalt einer Datei zu erstellen die PHP Code enthalten wird. Die Datei kann Klassen
-                oder eigenen PHP Code enthalten, und wenn gewünscht einen Datei-Level Docblock.
+                Inhalt einer Datei zu erstellen die <acronym>PHP</acronym> Code enthalten wird. Die
+                Datei kann Klassen oder eigenen <acronym>PHP</acronym> Code enthalten, und wenn
+                gewünscht einen Datei-Level Docblock.
             </para>
 
             <para>
@@ -344,7 +348,7 @@ class Zend_CodeGenerator_Php_Docblock_Tag_Param
             </para>
 
             <para>
-                Die API der Klasse ist wie folgt:
+                Die <acronym>API</acronym> der Klasse ist wie folgt:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -384,7 +388,7 @@ class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
             </para>
 
             <para>
-                Die API der Klasse ist wie folgt:
+                Die <acronym>API</acronym> der Klasse ist wie folgt:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -416,7 +420,7 @@ class Zend_CodeGenerator_Php_Member_Container extends ArrayObject
             </para>
 
             <para>
-                Die API der Klasse ist wie folgt:
+                Die <acronym>API</acronym> der Klasse ist wie folgt:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -451,7 +455,7 @@ class Zend_CodeGenerator_Php_Method
             </para>
 
             <para>
-                Die API der Klasse ist wie folgt:
+                Die <acronym>API</acronym> der Klasse ist wie folgt:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -485,7 +489,7 @@ class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
             </para>
 
             <para>
-                Die API der Klasse ist wie folgt:
+                Die <acronym>API</acronym> der Klasse ist wie folgt:
             </para>
 
             <programlisting language="php"><![CDATA[

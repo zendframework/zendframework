@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15825 -->
+<!-- EN-Revision: 15976 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.codegenerator.examples">
     <title>Zend_CodeGenerator Beispiele</title>
@@ -265,9 +265,9 @@ class Foo
 
         <para>
             <classname>Zend_CodeGenerator_Php_File</classname> kann verwendet werden um den Inhalt
-            einer PHP Datei zu erzeugen. Man kann Klassen inkludieren als auch eigene Inhalte. Wenn
-            Klassen angegängt werden sollte man entweder eine konkrete Instanz von
-            <classname>Zend_CodeGenerator_Php_Class</classname> oder ein Array das die Klasse
+            einer <acronym>PHP</acronym> Datei zu erzeugen. Man kann Klassen inkludieren als auch
+            eigene Inhalte. Wenn Klassen angegängt werden sollte man entweder eine konkrete Instanz
+            von <classname>Zend_CodeGenerator_Php_Class</classname> oder ein Array das die Klasse
             definiert anhängen.
         </para>
 
@@ -364,10 +364,10 @@ define('APPLICATION_ENV', 'testing');
         <title>Sähen der Code Erzeugung einer PHP Datei über Reflection</title>
 
         <para>
-            Man kann PHP Code zu einer existierenden PHP Datei hinzufügen indem der Code
-            Generator verwendet wird. Um das Durchzuführen muß man auf diesem zuerst Reflection
-            ausführen. Die statische Methode <methodname>fromReflectedFileName()</methodname>
-            erlaubt es das zu tun.
+            Man kann <acronym>PHP</acronym> Code zu einer existierenden <acronym>PHP</acronym>
+            Datei hinzufügen indem der Code Generator verwendet wird. Um das Durchzuführen muß man
+            auf diesem zuerst Reflection ausführen. Die statische Methode
+            <methodname>fromReflectedFileName()</methodname> erlaubt es das zu tun.
         </para>
 
         <programlisting language="php"><![CDATA[

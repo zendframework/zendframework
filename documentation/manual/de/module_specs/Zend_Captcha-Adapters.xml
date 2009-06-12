@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15848 -->
+<!-- EN-Revision: 15973 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.captcha.adapters">
     <title>CAPTCHA Adapter</title>
@@ -13,17 +13,19 @@
 
         <para>
             <classname>Zend_Captcha_Word</classname> ist ein abstrakter Adapter der als Basisklasse
-            für die meisten anderen CAPTCHA Adapter fungiert. Er bietet Mutatoren für die
-            Spezifizierung der Wortlänge, Session TTL, das Session Namespaceobjekt das verwendet
-            werden soll, und die Session Namespaceklasse die für die Persistenz zu verwenden ist
-            wenn man <classname>Zend_Session_Namespace</classname> nicht verwenden will.
+            für die meisten anderen <acronym>CAPTCHA</acronym> Adapter fungiert. Er bietet
+            Mutatoren für die Spezifizierung der Wortlänge, Session <acronym>TTL</acronym>, das
+            Session Namespaceobjekt das verwendet werden soll, und die Session Namespaceklasse die
+            für die Persistenz zu verwenden ist wenn man
+            <classname>Zend_Session_Namespace</classname> nicht verwenden will.
             <classname>Zend_Captcha_Word</classname> kapselt die Prüflogik.
         </para>
 
         <para>
             Standardmäßig ist die Wortlänge 8 Zeichen, das Sessiontimeout 5 Minuten und für die
             Persistenz wird <classname>Zend_Session_Namespace</classname> verwendet (wobei der
-            Namespace "Zend_Form_Captcha_&lt;captcha ID&gt;" verwendet wird).
+            Namespace "<classname>Zend_Form_Captcha_&lt;captcha ID&gt;</classname>" verwendet
+            wird).
         </para>
 
         <para>
@@ -49,8 +51,8 @@
                 <methodname>setSessionClass($class)</methodname> und
                 <methodname>getSessionClass()</methodname> erlauben es eine alternative
                 <classname>Zend_Session_Namespace</classname> Implementation zu spezifizieren die
-                verwendet werden soll um das CAPTCHA Token persistent zu machen und den aktuellen
-                Wert zu bekommen.
+                verwendet werden soll um das <acronym>CAPTCHA</acronym> Token persistent zu machen
+                und den aktuellen Wert zu bekommen.
             </para></listitem>
 
             <listitem><para>
@@ -59,28 +61,29 @@
             </para></listitem>
 
             <listitem><para>
-                <methodname>getWord()</methodname> erlaubt es das erzeugte Wort das mit dem CAPTCHA
-                verwendet wird zu erhalten. Es wird das Wort erzeugen wenn es bis dahin noch nicht
-                erstellt wurde.
+                <methodname>getWord()</methodname> erlaubt es das erzeugte Wort das mit dem
+                <acronym>CAPTCHA</acronym> verwendet wird zu erhalten. Es wird das Wort erzeugen
+                wenn es bis dahin noch nicht erstellt wurde.
             </para></listitem>
 
             <listitem><para>
                 <methodname>setSession(Zend_Session_Namespace $session)</methodname> erlaubt es ein
-                Sessionobjekt zu spezifizieren das für die Persistenz des CAPTCHA Tokens verwendet
-                wird. <methodname>getSession()</methodname> erlaubt es das aktuelle Sessionobjekt
+                Sessionobjekt zu spezifizieren das für die Persistenz des
+                <acronym>CAPTCHA</acronym> Tokens verwendet wird.
+                <methodname>getSession()</methodname> erlaubt es das aktuelle Sessionobjekt
                 zu erhalten.
             </para></listitem>
         </itemizedlist>
 
         <para>
-            Alle Wort CAPTCHAs erlauben es ein Array von Optionen an den Konstruktor zu übergeben,
-            oder alternativ dieses an <methodname>setOptions()</methodname> zu übergeben. Man kann
-            auch ein <classname>Zend_Config</classname> Objekt an
-            <methodname>setConfig()</methodname> zu übergeben. Standardmäßig können die
-            <emphasis>wordLen</emphasis>, <emphasis>timeout</emphasis>, und
-            <emphasis>sessionClass</emphasis> Schlüssel alle verwendet werden. Jede konkrete
-            Implementation kann zusätzliche Schlüssel definieren oder die Optionen auf einem
-            anderen Weg verwenden.
+            Alle Wort <acronym>CAPTCHA</acronym>s erlauben es ein Array von Optionen an den
+            Konstruktor zu übergeben, oder alternativ dieses an
+            <methodname>setOptions()</methodname> zu übergeben. Man kann auch ein
+            <classname>Zend_Config</classname> Objekt an <methodname>setConfig()</methodname> zu
+            übergeben. Standardmäßig können die <emphasis>wordLen</emphasis>,
+            <emphasis>timeout</emphasis>, und <emphasis>sessionClass</emphasis> Schlüssel alle
+            verwendet werden. Jede konkrete Implementation kann zusätzliche Schlüssel definieren
+            oder die Optionen auf einem anderen Weg verwenden.
         </para>
 
         <note>
@@ -95,10 +98,11 @@
         <title>Zend_Captcha_Dumb</title>
 
         <para>
-            Der <classname>Zend_Captcha_Dumb</classname> Adapter ist fast selbsterklärend. Er bietet
-            einen zufälligen String der in umgekehrter Reihenfolge eingegeben werden muß um
-            validiert zu werden. Als solches ist es keine gute CAPTCHA Lösung, und sollte nur für
-            Testzwecke verwendet werden. Er erweitert <classname>Zend_Captcha_Word</classname>.
+            Der <classname>Zend_Captcha_Dumb</classname> Adapter ist fast selbsterklärend. Er
+            bietet einen zufälligen String der in umgekehrter Reihenfolge eingegeben werden muß um
+            validiert zu werden. Als solches ist es keine gute <acronym>CAPTCHA</acronym> Lösung,
+            und sollte nur für Testzwecke verwendet werden. Er erweitert
+            <classname>Zend_Captcha_Word</classname>.
         </para>
     </sect2>
 
@@ -123,11 +127,12 @@
         <title>Zend_Captcha_Image</title>
 
         <para>
-            Der Zend_Captcha_Image Adapter nimmt das erzeugte Wort und stellt es als Bild dar, führt
-            diverse Verzerrungs-Permutationen durch und mach es so schwierig es automatisch zu
-            entschlüsseln. Er benötigt die <ulink url="http://php.net/gd">GD Erweiterung</ulink>
-            kompiliert mit TrueType oder Freetype Unterstützung. Aktuell kann der Zend_Captcha_Image
-            Adapter nur PNG Bilder erzeugen.
+            Der <classname>Zend_Captcha_Image</classname> Adapter nimmt das erzeugte Wort und
+            stellt es als Bild dar, führt diverse Verzerrungs-Permutationen durch und mach es so
+            schwierig es automatisch zu entschlüsseln. Er benötigt die
+            <ulink url="http://php.net/gd">GD Erweiterung</ulink> kompiliert mit TrueType oder
+            Freetype Unterstützung. Aktuell kann der <classname>Zend_Captcha_Image</classname>
+            Adapter nur <acronym>PNG</acronym> Bilder erzeugen.
         </para>
 
         <para>
@@ -139,10 +144,11 @@
             <listitem><para>
                 <methodname>setExpiration($expiration)</methodname> und
                 <methodname>getExpiration()</methodname> erlauben es eine maximale Lebenszeit zu
-                definieren die das CAPTCHA Bild auf dem Dateisystem bleibt. Das ist typischerweise
-                längerer als die Session Lifetime. Die Garbage Collection läuft periodisch jedes
-                Mal wenn das CAPTCHA Objekt enthalten ist, und löscht die Bilder die abgelaufen
-                sind. Der Wert der Löschung sollte in Sekunden angegeben werden.
+                definieren die das <acronym>CAPTCHA</acronym> Bild auf dem Dateisystem bleibt. Das
+                ist typischerweise längerer als die Session Lifetime. Die Garbage Collection läuft
+                periodisch jedes Mal wenn das <acronym>CAPTCHA</acronym> Objekt enthalten ist, und
+                löscht die Bilder die abgelaufen sind. Der Wert der Löschung sollte in Sekunden
+                angegeben werden.
             </para></listitem>
 
             <listitem><para>
@@ -156,21 +162,23 @@
                 <methodname>setFont($font)</methodname> und <methodname>getFont()</methodname>
                 erlauben es die Schrift zu Spezifizieren die man verwenden will.
                 <varname>$font</varname> sollte ein voll qualifizierter Pfad zu der
-                Schriftart-Datei sein. Dieser Wert wird benötigt; das CAPTCHA wird wärend der
-                Erzeugung eine Ausnahme werfen wenn die Schriftdatei nicht spezifiziert wurde.
+                Schriftart-Datei sein. Dieser Wert wird benötigt; das <acronym>CAPTCHA</acronym>
+                wird wärend der Erzeugung eine Ausnahme werfen wenn die Schriftdatei nicht
+                spezifiziert wurde.
             </para></listitem>
 
             <listitem><para>
                 <methodname>setFontSize($fsize)</methodname> und
                 <methodname>getFontSize()</methodname> erlauben es die Schriftgröße in Pixel zu
-                Spezifizieren die verwendet wird wenn das CAPTCHA erzeugt wird. Der Standardwert
-                ist 24px.
+                Spezifizieren die verwendet wird wenn das <acronym>CAPTCHA</acronym> erzeugt wird.
+                Der Standardwert ist 24px.
             </para></listitem>
 
             <listitem><para>
                 <methodname>setHeight($height)</methodname> und
                 <methodname>getHeight()</methodname> erlauben es die Höhe in Pixel zu Spezifizieren
-                die das erzeugte CAPTCHA Bild haben soll. Der Standardwert ist 50px.
+                die das erzeugte <acronym>CAPTCHA</acronym> Bild haben soll. Der Standardwert ist
+                50px.
             </para></listitem>
 
             <listitem><para>
@@ -182,22 +190,25 @@
             <listitem><para>
                 <methodname>setImgDir($imgDir)</methodname> und
                 <methodname>getImgDir()</methodname> erlauben es das Verzeichnis für das Speicher
-                der CAPTCHA Bilder zu spezifizieren. Der Standardwert ist "./images/captcha/", was
-                relativ zum Bootstrapskript zu sehen ist.
+                der <acronym>CAPTCHA</acronym> Bilder zu spezifizieren. Der Standardwert ist
+                "<filename>./images/captcha/</filename>", was relativ zum Bootstrapskript zu sehen
+                ist.
             </para></listitem>
 
             <listitem><para>
                 <methodname>setImgUrl($imgUrl)</methodname> und
-                <methodname>getImgUrl()</methodname> erlauben es den Relativen Pfad zum CAPTCHA
-                Bild für die Verwendung im HTML Markup zu spezifizieren. Der Standardwert ist
-                "/images/captcha/".
+                <methodname>getImgUrl()</methodname> erlauben es den Relativen Pfad zum
+                <acronym>CAPTCHA</acronym> Bild für die Verwendung im <acronym>HTML</acronym>
+                Markup zu spezifizieren. Der Standardwert ist
+                "<filename>/images/captcha/</filename>".
             </para></listitem>
 
             <listitem><para>
                 <methodname>setSuffix($suffix)</methodname> und
                 <methodname>getSuffix()</methodname> erlauben es die Endung des Dateinamens für das
-                CAPTCHA Bild zu spezifizieren. Der Standardwert ist ".png". Beachte: Das Ändern
-                dieses Wertes wird den Typ des erzeugten Bildes nicht ändern.
+                <acronym>CAPTCHA</acronym> Bild zu spezifizieren. Der Standardwert ist
+                "<filename>.png</filename>". Beachte: Das Ändern dieses Wertes wird den Typ des
+                erzeugten Bildes nicht ändern.
             </para></listitem>
         </itemizedlist>
 
@@ -213,8 +224,9 @@
 
         <para>
             Der <classname>Zend_Captcha_ReCaptcha</classname> Adapter verwendet
-            <link linkend="zend.service.recaptcha">Zend_Service_ReCaptcha</link> um CAPTCHAs zu
-            erzeugen und zu prüfen. Es bietet die folgenden Methoden an:
+            <link linkend="zend.service.recaptcha">Zend_Service_ReCaptcha</link> um
+            <acronym>CAPTCHA</acronym>s zu erzeugen und zu prüfen. Es bietet die folgenden Methoden
+            an:
         </para>
 
         <itemizedlist>

@@ -206,8 +206,7 @@ class Zend_Mime
             $str         = substr($str, strlen($token));
 
             $tmp .= $token;
-            if( (strlen($token) == 1 && strpbrk($token, '!%,.:;<>'))
-                || in_array($token, array("=3F", "=20", "=5F")) ) {
+            if($token == '=20') {
                 // only if we have a single char token or space, we can append the
                 // tempstring it to the current line or start a new line if necessary.
                 if(strlen($lines[$currentLine].$tmp) > $lineLength) {

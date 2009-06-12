@@ -276,6 +276,18 @@ class Zend_View_Helper_HeadMetaTest extends PHPUnit_Framework_TestCase
         $this->assertNotContains('unused', $string);
         $this->assertContains('name="title" content="boo bah"', $string);
     }
+    
+    /**
+     * @group #ZF-6637
+     */
+    public function testToStringWhenInvalidKeyProvidedShouldConvertThrownException()
+    {
+        $this->helper->headMeta('some-content', 'tag value', 'not allowed key');
+        $string = @$this->helper->toString();
+        $this->assertEquals('', $string);
+        $errors = error_get_last();
+        $this->assertNotEquals(0, count($errors));
+    }
 
     public function testHeadMetaHelperCreatesItemEntry()
     {

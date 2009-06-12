@@ -348,12 +348,16 @@ class Zend_Http_Client_Adapter_Curl implements Zend_Http_Client_Adapter_Interfac
             $this->_response = str_ireplace("Transfer-Encoding: chunked\r\n", '', $this->_response);
         }
 
-        // TODO: Probably the pattern for multiple handshake requests is always the same, several HTTP codes in the response. Use that information?
-        // cURL automactically handles Expect: 100-continue; and its responses. Delete the HTTP 100 CONTINUE from a response
-        // because it messes up Zend_Http_Response parsing
-        if (stripos($this->_response, "HTTP/1.1 100 Continue\r\n\r\n") !== false) {
-            $this->_response = str_ireplace("HTTP/1.1 100 Continue\r\n\r\n", '', $this->_response);
-        }
+        // Eliminate multiple HTTP responses.
+        do {
+            $parts  = preg_split('|(?:\r?\n){2}|m', $this->_response, 2);
+            $again  = false;
+
+            if (isset($parts[1]) && preg_match("|^HTTP/1\.[01](.*?)\r\n|mi", $parts[1])) {
+                $this->_response    = $parts[1];
+                $again              = true;
+            }
+        } while ($again);
 
         // cURL automatically handles Proxy rewrites, remove the "HTTP/1.0 200 Connection established" string:
         if (stripos($this->_response, "HTTP/1.0 200 Connection established\r\n\r\n") !== false) {

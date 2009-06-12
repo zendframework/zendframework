@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15848 -->
+<!-- EN-Revision: 15965 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.cache.frontends">
     <title>Zend_Cache Frontends</title>
@@ -120,9 +120,9 @@
                               <entry><type>Boolean</type></entry>
                               <entry><constant>FALSE</constant></entry>
                               <entry>
-                                Auf true gesetzt, wird der Kern das PHP Flag ignore_user_abort
-                                innerhalb der save() Methode setzen um Cache Korruption in einigen
-                                Fällen zuverhindern
+                                Auf true gesetzt, wird der Kern das <acronym>PHP</acronym> Flag
+                                ignore_user_abort innerhalb der <methodname>save()</methodname>
+                                Methode setzen um Cache Korruption in einigen Fällen zu verhindern
                               </entry>
                           </row>
                       </tbody>
@@ -254,9 +254,9 @@ if (!($cache->test($id))) {
             <title>Einführung</title>
             <para>
                 <classname>Zend_Cache_Frontend_Output</classname> ist ein Ausgabe-Empfangendes
-                Frontend. Es verwendet den Ausgabe Puffer in PHP, um alles zwischen der
-                <methodname>start()</methodname> und der <methodname>end()</methodname> Methode zu
-                fangen.
+                Frontend. Es verwendet den Ausgabe Puffer in <acronym>PHP</acronym>, um alles
+                zwischen der <methodname>start()</methodname> und der
+                <methodname>end()</methodname> Methode zu fangen.
             </para>
         </sect3>
         <sect3 id="zend.cache.frontends.output.options">
@@ -352,7 +352,7 @@ echo 'Hier wird nie gecached ('.time().').';
             <title>Beispiele</title>
             <para>
                 Die Verwendung der <methodname>call()</methodname> Funktion ist die gleiche, wie
-                die von <methodname>call_user_func_array()</methodname> in PHP:
+                die von <methodname>call_user_func_array()</methodname> in <acronym>PHP</acronym>:
             </para>
                  <programlisting language="php"><![CDATA[
 $cache->call('veryExpensiveFunc', $params);
@@ -504,13 +504,14 @@ $res = $cache->foobar2('1', '2');
                 Masterdateien zu verwenden.
             </para>
             <para>
-                Zum Beispiel eine XML Konfigurationsdatei, welche von einer Funktion geparsed wird
-                und die ein "Config Objekt" zurückgibt (wie durch
+                Zum Beispiel eine <acronym>XML</acronym> Konfigurationsdatei, welche von einer
+                Funktion geparsed wird und die ein "Config Objekt" zurückgibt (wie durch
                 <classname>Zend_Config</classname>). Mit
                 <classname>Zend_Cache_Frontend_File</classname> kann das "Config Objekt" im Cache
-                gespeichert werden (um zu Verhindern, das die XML Konfiguration jedes mal geparsed
-                wird), aber mit einer strengen Abhängigkeit zur "Masterdatei". Wenn also die XML
-                Konfigurationsdatei geändert wird, wird der Cache sofort ungültig.
+                gespeichert werden (um zu Verhindern, das die <acronym>XML</acronym> Konfiguration
+                jedes mal geparsed wird), aber mit einer strengen Abhängigkeit zur "Masterdatei".
+                Wenn also die <acronym>XML</acronym> Konfigurationsdatei geändert wird, wird der
+                Cache sofort ungültig.
             </para>
         </sect3>
         <sect3 id="zend.cache.frontends.file.options">
@@ -547,11 +548,11 @@ $res = $cache->foobar2('1', '2');
                               <entry><emphasis>master_files_mode</emphasis></entry>
                               <entry><type>String</type></entry>
                               <entry>
-                                  <classname>Zend_Cache_Frontend_File::MODE_OR</classname>
+                                  <constant>Zend_Cache_Frontend_File::MODE_OR</constant>
                               </entry>
                               <entry>
-                                  <classname>Zend_Cache_Frontend_File::MODE_AND</classname> oder
-                                  <classname>Zend_Cache_Frontend_File::MODE_OR</classname> ;
+                                  <constant>Zend_Cache_Frontend_File::MODE_AND</constant> oder
+                                  <constant>Zend_Cache_Frontend_File::MODE_OR</constant> ;
                                   bei <constant>MODE_AND</constant> müssen alle Masterdateien
                                   angegriffen werden um einen Cache ungültig zu machen, bei
                                   <constant>MODE_OR</constant> ist eine eizelne angegriffene Datei
@@ -601,9 +602,10 @@ $res = $cache->foobar2('1', '2');
                 <methodname>end()</methodname> immer vollautomatisch ist, wenn die Seite endet.
             </para>
             <para>
-                Zur Zeit ist es nicht eingebaut, aber es ist ein HTTP abhängiges System geplant, um
-                Bandbreiten zu sparen (das System wird ein "HTTP 304 nicht geändert" schicken, wenn
-                der Cache gefunden wurde und wenn der Browser bereits eine gültige Version hat).
+                Zur Zeit ist es nicht eingebaut, aber es ist ein <acronym>HTTP</acronym> abhängiges
+                System geplant, um Bandbreiten zu sparen (das System wird ein
+                "<acronym>HTTP</acronym> 304 nicht geändert" schicken, wenn der Cache gefunden
+                wurde und wenn der Browser bereits eine gültige Version hat).
             </para>
         </sect3>
         <sect3 id="zend.cache.frontends.page.options">
@@ -764,13 +766,15 @@ $res = $cache->foobar2('1', '2');
                               <entry><type>Array</type></entry>
                               <entry><methodname>array()</methodname></entry>
                               <entry>
-                                    Ein assoziatives Array, um Optionen nur für einige REQUEST_URI
-                                    zu setzen. Die Schlüssel sind reguläre Ausdrücke (PCRE), die
-                                    Werte sind ein assoziatives Array mit spezifischen Optionen, die
-                                    gesetzt werden sollen, wenn der reguläre Ausdruck auf
-                                    $_SERVER['REQUEST_URI'] passt (siehe die default_options für
-                                    eine Liste der verfügbaren Optionen); wenn verschiedene reguläre
-                                    Ausdrücke auf $_SERVER['REQUEST_URI'] passen, wird nur der
+                                    Ein assoziatives Array, um Optionen nur für einige
+                                    <acronym>REQUEST_URI</acronym> zu setzen. Die Schlüssel sind
+                                    reguläre Ausdrücke (<acronym>PCRE</acronym>), die Werte sind
+                                    ein assoziatives Array mit spezifischen Optionen, die gesetzt
+                                    werden sollen, wenn der reguläre Ausdruck auf
+                                    <varname>$_SERVER['REQUEST_URI']</varname> passt (siehe die
+                                    default_options für eine Liste der verfügbaren Optionen); wenn
+                                    verschiedene reguläre Ausdrücke auf
+                                    <varname>$_SERVER['REQUEST_URI']</varname> passen, wird nur der
                                     letzte verwendet.
                               </entry>
                          </row>
@@ -779,10 +783,10 @@ $res = $cache->foobar2('1', '2');
                               <entry><type>Array</type></entry>
                               <entry><methodname>array()</methodname></entry>
                               <entry>
-                                   Ein Array von Strings die zu einem HTTP Headernamen
-                                   korrespondieren. Aufgelistete Header werden mit den Cache Daten
-                                   gespeichert und wieder "abgespielt" wenn der Cache getroffen
-                                   wird.
+                                   Ein Array von Strings die zu einem <acronym>HTTP</acronym>
+                                   Headernamen korrespondieren. Aufgelistete Header werden mit den
+                                   Cache Daten gespeichert und wieder "abgespielt" wenn der Cache
+                                   getroffen wird.
                               </entry>
                          </row>
                       </tbody>
@@ -865,8 +869,9 @@ $cache->start();
             <title>Die spezielle cancel Methode</title>
             <para>
                 Aus Designgründen, kann es in einigen Fällen (zum Beispiel bei Verwendung von nicht
-                HTTP/200 Return Codes), notwendig sein den aktuellen Cacheprozess zu unterbrechen.
-                Deshalb zeigen wir für dieses spezielle Frontend die cancel() Methode.
+                <acronym>HTTP</acronym> 200 Return Codes), notwendig sein den aktuellen
+                Cacheprozess zu unterbrechen. Deshalb zeigen wir für dieses spezielle Frontend die
+                cancel() Methode.
             </para>
             <programlisting language="php"><![CDATA[
 // [...] // Benötigt, Konfiguration und Factory

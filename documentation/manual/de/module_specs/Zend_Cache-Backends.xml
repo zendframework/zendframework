@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15848 -->
+<!-- EN-Revision: 15961 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.cache.backends">
     <title>Zend_Cache Backends</title>
@@ -32,7 +32,7 @@
                       <row>
                           <entry><emphasis>cache_dir</emphasis></entry>
                           <entry><type>String</type></entry>
-                          <entry><filename>'/tmp/'</filename></entry>
+                          <entry>'<filename>/tmp/</filename>'</entry>
                           <entry>
                               Verzeichnis, in dem die Cache Dateien gespeichert werden
                           </entry>
@@ -42,9 +42,10 @@
                           <entry><type>Boolean</type></entry>
                           <entry><constant>TRUE</constant></entry>
                           <entry>
-                            Ein- / Ausschalten von file_locking: kann die Beschädigung des Caches
-                            unter schlechten Bedingungen verhindern, aber es hilft nicht bei
-                            Multithreaded Webservern oder bei NFS Filesystemen...
+                            Ein- oder Ausschalten von file_locking: kann die Beschädigung des
+                            Caches unter schlechten Bedingungen verhindern, aber es hilft nicht bei
+                            Multithreaded Webservern oder bei <acronym>NFS</acronym>
+                            Filesystemen...
                           </entry>
                       </row>
                       <row>
@@ -52,7 +53,7 @@
                           <entry><type>Boolean</type></entry>
                           <entry><constant>TRUE</constant></entry>
                           <entry>
-                            Ein- / Ausschalten von read_control: eingeschaltet wird ein
+                            Ein- oder Ausschalten von read_control: eingeschaltet wird ein
                             Kontrollschlüssel im Cache File inkludiert und dieser Schlüssel wird mit
                             dem Schlüssel verglichen, der nach dem Lesen berechnet wird.
                           </entry>
@@ -97,8 +98,8 @@
                           <entry>
                               Präfix für Cache Dateien; man muss mit dieser Option sehr vorsichtig
                               umgehen, weil ein zu generischer Wert in einem System Cache
-                              Verzeichnis (wie /tmp) kann beim Löschen des Caches zu großen
-                              Problemen führen.
+                              Verzeichnis (wie <filename>/tmp</filename>) kann beim Löschen des
+                              Caches zu großen Problemen führen.
                         </entry>
                       </row>
                       <row>
@@ -155,13 +156,15 @@
                           <entry><type>Integer</type></entry>
                           <entry>10</entry>
                           <entry>
-                              Deaktiviere / stelle den automatischen Vakuumprozess ein.
+                              Deaktiviert oder stellt den automatischen Vakuumprozess ein.
                               Der automatische Vakuumprozess defragmentiert die Datenbankdatei (und
-                              verkleinert sie) wenn clean() oder delete() aufgerufen wird:
-                              0 bedeutet kein automatisches Vakuum; 1 bedeutet systematisches Vakuum
-                              (wenn die delete() or clean() Methoden aufgerufen werden; x (integer)
-                              > 1 => automatisches Vakuum zufällig einmal pro x clean() oder
-                              delete() Aufrufe.
+                              verkleinert sie) wenn <methodname>clean()</methodname> oder
+                              <methodname>delete()</methodname> aufgerufen wird: 0 bedeutet kein
+                              automatisches Vakuum; 1 bedeutet systematisches Vakuum (wenn die
+                              <methodname>delete()</methodname> or <methodname>clean()</methodname>
+                              Methoden aufgerufen werden; x (integer) > 1 => automatisches Vakuum
+                              zufällig einmal pro x <methodname>clean()</methodname> oder
+                              <methodname>delete()</methodname> Aufrufe.
                           </entry>
                       </row>
                   </tbody>
@@ -231,7 +234,7 @@
                           <entry><constant>FALSE</constant></entry>
                           <entry>
                              true wenn man den Compatibility Modus mit alten Memcache
-                             Servern/Erweiterungen verwenden will
+                             Servern oder Erweiterungen verwenden will
                           </entry>
                       </row>
                   </tbody>
@@ -242,8 +245,9 @@
         <title>Zend_Cache_Backend_Apc</title>
         <para>
             Dieses (erweiterte) Backend speichert Cache Datensätze im Shared Memory durch die
-            <ulink url="http://pecl.php.net/package/APC">APC</ulink> (Alternativer PHP Cache)
-            Erweiterung (welche natürlich für die Verwendung dieses Backends benötigt wird).
+            <ulink url="http://pecl.php.net/package/APC">APC</ulink> (Alternativer
+            <acronym>PHP</acronym> Cache) Erweiterung (welche natürlich für die Verwendung dieses
+            Backends benötigt wird).
         </para>
         <para>
             Vorsicht: mit diesem Backend werden "Marker" zur Zeit nicht unterstützt genauso wie das
@@ -284,7 +288,8 @@
                         <entry><type>String</type></entry>
                         <entry><constant>NULL</constant></entry>
                         <entry>
-                              xcache.admin.user, notwendig für die clean() Methode
+                              <filename>xcache.admin.user</filename>, notwendig für die
+                              <methodname>clean()</methodname> Methode
                         </entry>
                     </row>
                     <row>
@@ -292,8 +297,9 @@
                         <entry><type>String</type></entry>
                         <entry><constant>NULL</constant></entry>
                         <entry>
-                              xcache.admin.pass (in offener Form, nicht MD5), notwendig für die
-                              clean() Methode
+                              <filename>xcache.admin.pass</filename> (in offener Form, nicht
+                              <acronym>MD5</acronym>), notwendig für die
+                              <methodname>clean()</methodname> Methode
                         </entry>
                     </row>
                 </tbody>
@@ -303,7 +309,7 @@
     <sect2 id="zend.cache.backends.platform">
         <title>Zend_Cache_Backend_ZendPlatform</title>
         <para>
-            Dieses Backend verwendet die Content Caching API des
+            Dieses Backend verwendet die Content Caching <acronym>API</acronym> des
             <ulink url="http://www.zend.com/products/platform">Zend Platform</ulink> Produktes.
             Natürlich muss man die Zend Platform installiert haben, um dieses Backend verwenden zu
             können.
@@ -315,7 +321,7 @@
         <para>
             Bei Definition dieses Backends muß ein Trennzeichen -- '-', '.', ' ', oder '_'
             -- zwischen den Wörtern 'Zend' und 'Platform' definiert sein wenn die
-            <classname>Zend_Cache::factory()</classname> Methode verwendet wird:
+            <methodname>Zend_Cache::factory()</methodname> Methode verwendet wird:
         </para>
         <programlisting language="php"><![CDATA[
 $cache = Zend_Cache::factory('Core', 'Zend Platform');
@@ -335,7 +341,6 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
             Dieses Backend verwendet den Priority Parameter (der auf Frontend Level angegeben wird
             wenn ein Eintrag gespeichert wird) und den verbleibenden Platz im schnellen Backend um
             die Verwendung dieser zwei Backends zu optimieren.
-            FIXME
         </para>
         <para>
             Vorhandene Optionen sind:
@@ -391,7 +396,8 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
                           <entry>
                               Wenn true, wird das slow_backend Argument als kompletter Klassenname
                               verwendet; wenn false, wird das frontend Argument als Ende des
-                              "Zend_Cache_Backend_[...]" Klassennamens verwendet
+                              "<classname>Zend_Cache_Backend_</classname>[...]" Klassennamens
+                              verwendet
                           </entry>
                       </row>
                       <row>
@@ -401,7 +407,8 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
                           <entry>
                               Wenn true, wird das fast_backend Argument als kompletter Klassenname
                               verwendet; wenn false, wird das frontend Argument als Ende des
-                              "Zend_Cache_Backend_[...]" Klassennamens verwendet
+                              "<classname>Zend_Cache_Backend_</classname>[...]" Klassennamens
+                              verwendet
                           </entry>
                       </row>
                       <row>
@@ -459,7 +466,8 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
         </para>
         <para>
             Diese Backends arbeiten nur nur in einer Zend Server Umgebung für Seiten die über
-            HTTP(S) angefragt wurden und nicht für Kommandozeilen Ausführung.
+            <acronym>HTTP</acronym> oder <acronym>HTTPS</acronym> angefragt wurden und nicht für
+            Kommandozeilen Ausführung.
         </para>
         <para>
             Es gibt keine Optionen für diese Backends.

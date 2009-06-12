@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15845 -->
+<!-- EN-Revision: 15960 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.auth.adapter.openid">
 
@@ -17,11 +17,11 @@
             prüfen. Dieses Passwort wird der Web Anwendung nie bekannt gegeben.
         </para>
         <para>
-            Die OpenID Identität ist nur eine URL die auf eine Webseite mit entsprechenden
-            Informationen über den Benutzer und spezielle Tags verweist welche beschreiben welcher
-            Server verwendet werden soll und welche Identität dort zu übermitteln ist. Mehr über
-            OpenID kann auf der <ulink url="http://www.openid.net/">offiziellen OpenID Site</ulink>
-            nachgelesen werden.
+            Die OpenID Identität ist nur eine <acronym>URL</acronym> die auf eine Webseite mit
+            entsprechenden Informationen über den Benutzer und spezielle Tags verweist welche
+            beschreiben welcher Server verwendet werden soll und welche Identität dort zu
+            übermitteln ist. Mehr über OpenID kann auf der
+            <ulink url="http://www.openid.net/">offiziellen OpenID Site</ulink> nachgelesen werden.
         </para>
         <para>
             Die <classname>Zend_Auth_Adapter_OpenId</classname> Klasse umgibt die
@@ -33,8 +33,9 @@
             <para>
                 <classname>Zend_OpenId</classname> hat Vorteile davon wenn die
                 <ulink url="http://php.net/gmp">GMP Erweiterung</ulink> vorhanden ist. Es sollte
-                Angedacht werden die GMP Erweiterung für eine bessere Performance einzuschalten wenn
-                <classname>Zend_Auth_Adapter_OpenId</classname> verwendet wird.
+                Angedacht werden die <acronym>GMP</acronym> Erweiterung für eine bessere
+                Performance einzuschalten wenn <classname>Zend_Auth_Adapter_OpenId</classname>
+                verwendet wird.
             </para>
         </note>
     </sect2>
@@ -54,26 +55,28 @@
         <para>
             Trotzdem, im Gegensatz zu anderen <classname>Zend_Auth</classname> Adaptern führt
             <classname>Zend_Auth_Adapter_OpenId</classname> Authentifizierungen an einem externen
-            Server durch und das wird in zwei separaten HTTP Anfragen getan. Deswegen muß
-            <classname>Zend_Auth_Adapter_OpenId::authenticate()</classname> zweimal aufgerufen
-            werden. Beim ersten Aufruf wird die Methode nichts zurückgeben, aber den Benutzer zu
-            seinem OpenID Server umleiten. Dann, nachdem der Benutzer auf dem entfernten Server
-            authentifiziert ist wird dieser wieder zurück umleiten und das Skript muß für diese
-            zweite Anfrage <classname>Zend_Auth_Adapter_OpenId::authenticate()</classname> nochmals
-            aufrufen um die Signatur zu prüfen, welche mit der umgeleiteten Anfrage vom Server
-            geschickt wird, und den Authentifikationsprozess zu beenden. Bei diesem zweiten Aufruf
-            wird wie erwartet ein <classname>Zend_Auth_Result</classname> Objekt zurückgegeben.
+            Server durch und das wird in zwei separaten <acronym>HTTP</acronym> Anfragen getan.
+            Deswegen muß <methodname>Zend_Auth_Adapter_OpenId::authenticate()</methodname> zweimal
+            aufgerufen werden. Beim ersten Aufruf wird die Methode nichts zurückgeben, aber den
+            Benutzer zu seinem OpenID Server umleiten. Dann, nachdem der Benutzer auf dem
+            entfernten Server authentifiziert ist wird dieser wieder zurück umleiten und das Skript
+            muß für diese zweite Anfrage
+            <methodname>Zend_Auth_Adapter_OpenId::authenticate()</methodname> nochmals aufrufen um
+            die Signatur zu prüfen, welche mit der umgeleiteten Anfrage vom Server geschickt wird,
+            und den Authentifikationsprozess zu beenden. Bei diesem zweiten Aufruf wird wie
+            erwartet ein <classname>Zend_Auth_Result</classname> Objekt zurückgegeben.
         </para>
 
         <para>
             Das folgende Beispiel zeigt die Verwendung von
             <classname>Zend_Auth_Adapter_OpenId</classname>. Wie vorher erwähnt wird die
-            <classname>Zend_Auth_Adapter_OpenId::authenticate()</classname> Methode zweimal
-            aufgerufen. Das erste Mal, ist nachdem der Benutzer das HTML Formular übermittelt hat
-            und <varname>$_POST['openid_action']</varname> auf <emphasis>"login"</emphasis> gesetzt wurde,
-            und das zweite Mal nach der HTTP Umleitung vom OpenID Server wenn
-            <varname>$_GET['openid_mode']</varname> oder <varname>$_POST['openid_mode']</varname>
-            gesetzt wurde.
+            <methodname>Zend_Auth_Adapter_OpenId::authenticate()</methodname> Methode zweimal
+            aufgerufen. Das erste Mal, ist nachdem der Benutzer das <acronym>HTML</acronym>
+            Formular übermittelt hat und <varname>$_POST['openid_action']</varname> auf
+            <emphasis>"login"</emphasis> gesetzt wurde, und das zweite Mal nach der
+            <acronym>HTTP</acronym> Umleitung vom OpenID Server wenn
+            <varname>$_GET['openid_mode']</varname> oder
+            <varname>$_POST['openid_mode']</varname> gesetzt wurde.
         </para>
 
         <programlisting language="php"><![CDATA[

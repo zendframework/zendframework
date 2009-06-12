@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15848 -->
+<!-- EN-Revision: 15999 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.console.getopt.configuration">
     <title>Konfigurieren von Zend_Console_Getopt</title>
@@ -9,8 +9,8 @@
         <para>
             Man kann mehr Optionsregeln hinzufügen, zusätzlich zu denen die
             schon im <classname>Zend_Console_Getopt</classname> Constructor definiert wurden,
-            durch Verwendung der <code>addRules()</code> Methode. Das Argument für
-            <code>addRules()</code> ist das gleiche wie das erste Argument für den
+            durch Verwendung der <methodname>addRules()</methodname> Methode. Das Argument für
+            <methodname>addRules()</methodname> ist das gleiche wie das erste Argument für den
             Constructor der Klasse. Es ist entweder eine Zeichenkette im Format der
             kurzen Syntax wie für das Definieren für Optionen definiert, oder ein
             assoziatives Array im Format der langen Syntax wie für das Definieren
@@ -44,8 +44,8 @@ $opts->addRules(
             Zusätzlich zum Definieren von Hilfstexten bei der Definition
             von Optionsregeln im langen Format, können Hilfstexte
             mit Optionsregeln verknüpft werden durch Verwendung der
-            <code>setHelp()</code> Methode. Das Argument für die
-            <code>setHelp()</code> Methode ist ein assoziatives Array, in welchen der
+            <methodname>setHelp()</methodname> Methode. Das Argument für die
+            <methodname>setHelp()</methodname> Methode ist ein assoziatives Array, in welchen der
             Schlüssel ein Flag ist, und der Wert der betreffende Hilfetext.
         </para>
         <example id="zend.console.getopt.configuration.addhelp.example">
@@ -66,7 +66,7 @@ $opts->setHelp(
             als Schlüssel für das assizoative Array verwendet werden.
         </para>
         <para>
-            Die <code>setHelp()</code> Methode ist der einzige Weg um einen
+            Die <methodname>setHelp()</methodname> Methode ist der einzige Weg um einen
             Hilfetext zu definieren wenn die Optionen mit der kurzen Syntax definiert
             wurden.
         </para>
@@ -75,7 +75,7 @@ $opts->setHelp(
     <sect2 id="zend.console.getopt.configuration.addaliases">
         <title>Aliase für Optionen hinzufügen</title>
         <para>
-            Aliase für Optionen können mit der <code>setAliases</code> Methode
+            Aliase für Optionen können mit der <methodname>setAliases()</methodname> Methode
             definiert werden. Das Argument ist ein assoziatives Array, dessen
             Schlüssel ein zuvor definiertes Flag, und dessen Wert ein neuer
             Alias für dieses Flag ist. Diese Aliase werden mit jedem existierenden
@@ -106,7 +106,7 @@ $opts->setAliases(
             Aliase.
         </para>
         <para>
-            Die <code>setAliases()</code> Methode ist der einzige Weg um Aliase
+            Die <methodname>setAliases()</methodname> Methode ist der einzige Weg um Aliase
             zu definieren wenn die Optionen mit der kurzen Syntax definiert wurden.
         </para>
     </sect2>
@@ -119,9 +119,9 @@ $opts->setAliases(
             Kommandozeilen Argumenten. Alternativ kann das Array mit Argumenten
             als zweites Argument dem Constructor angegeben werden. Letztendlich
             können zusätzliche Argumente zu den bereits in Verwendung befindlichen
-            hinzugefügt werden, durch Verwendung der <code>addArguments()</code> Methode,
-            oder es kann das aktuelle Array von Argumenten
-            ersetzt werden mit Hilfe der <code>setArguments()</code> Methode.
+            hinzugefügt werden, durch Verwendung der <methodname>addArguments()</methodname>
+            Methode, oder es kann das aktuelle Array von Argumenten
+            ersetzt werden mit Hilfe der <methodname>setArguments()</methodname> Methode.
             In beiden Fällen ist der Parameter für diese Methoden ein einfaches
             Array von Zeichenketten, und die letztere Methode substituiert das Array für
             seine aktuellen Argumente.
@@ -147,9 +147,9 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
             Der dritte Parameter des <classname>Zend_Console_Getopt</classname> Constructors
             ist ein Array von Optionen zur Konfiguration welche das Verhalten der
             zurückgegebenen Objektinstanz beeinflusst. Es können auch durch Verwendung
-            der <code>setOptions()</code> Optionen für die Konfiguration definiert werden,
-            oder es können auch individuelle Optionen mit der <code>setOption()</code>
-            Methode verwendet werden.
+            der <methodname>setOptions()</methodname> Optionen für die Konfiguration definiert
+            werden, oder es können auch individuelle Optionen mit der
+            <methodname>setOption()</methodname> Methode verwendet werden.
         </para>
         <note>
             <title>Klarstellung des Ausdrucks "Option"</title>
@@ -169,7 +169,7 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
         <itemizedlist>
             <listitem>
                 <para>
-                    <classname>Zend_Console_Getopt::CONFIG_DASHDASH</classname> ("dashDash"),
+                    <constant>Zend_Console_Getopt::CONFIG_DASHDASH</constant> ("dashDash"),
                     wenn aktiviert, ermöglicht dieses spezielle Flag "<code>--</code>"
                     das Ende von Flags zu signieren. Kommendozeilen Argumente welche
                     dem Doppel-Bindestrich Zeichen folgen werden nicht als Option
@@ -179,7 +179,7 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
             </listitem>
             <listitem>
                 <para>
-                    <classname>Zend_Console_Getopt::CONFIG_IGNORECASE</classname> ("ignoreCase"),
+                    <constant>Zend_Console_Getopt::CONFIG_IGNORECASE</constant> ("ignoreCase"),
                     wenn aktiviert, werden Flags als Aliase voneinander betrachtet
                     wenn Sie sich nur in der Groß-/Kleinschreibung unterscheiden.
                     Das bedeutet das "<code>-a</code>" und "<code>-A</code>" als
@@ -189,16 +189,17 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
             </listitem>
             <listitem>
                 <para>
-                    <classname>Zend_Console_Getopt::CONFIG_RULEMODE</classname> ("ruleMode") kann
-                    die Werte <classname>Zend_Console_Getopt::MODE_ZEND</classname> ("zend") und
-                    <classname>Zend_Console_Getopt::MODE_GNU</classname> ("gnu") haben. Diese Option
+                    <constant>Zend_Console_Getopt::CONFIG_RULEMODE</constant> ("ruleMode") kann
+                    die Werte <constant>Zend_Console_Getopt::MODE_ZEND</constant> ("zend") und
+                    <constant>Zend_Console_Getopt::MODE_GNU</constant> ("gnu") haben. Diese Option
                     sollte nicht verwendet werden ausser die Klasse wird erweiter um zusätzliche
                     Syntax Formen zu unterstützen. Die zwei Modi die in der Basisklasse
                     <classname>Zend_Console_Getopt</classname> unterstützt werden sind
                     eindeutig. Wenn die Angabe eine Zeichenkette ist, nimmt die Klasse
-                    <code>MODE_GNU</code> an, sonst wird <code>MODE_ZEND</code> angenommen.
-                    Aber wenn die Klasse erweitert wird, und zusätzliche Syntaxformen hinzugefügt
-                    werden, kann der Modus durch Verwendung dieser Option definiert werden.
+                    <constant>MODE_GNU</constant> an, sonst wird <constant>MODE_ZEND</constant>
+                    angenommen. Aber wenn die Klasse erweitert wird, und zusätzliche Syntaxformen
+                    hinzugefügt werden, kann der Modus durch Verwendung dieser Option definiert
+                    werden.
                 </para>
             </listitem>
         </itemizedlist>
@@ -207,7 +208,7 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
             Klasse hinzugefügt werden.
         </para>
         <para>
-            Die zwei Argumente der <code>setOption()</code> Methode sind ein Name einer
+            Die zwei Argumente der <methodname>setOption()</methodname> Methode sind ein Name einer
             Konfigurationsoption und ein Wert für die Option.
         </para>
         <example id="zend.console.getopt.configuration.config.example.setoption">
@@ -218,7 +219,7 @@ $opts->setOption('ignoreCase', true);
 ]]></programlisting>
         </example>
         <para>
-            Das Argument für die <code>setOptions()</code> Methode ist ein
+            Das Argument für die <methodname>setOptions()</methodname> Methode ist ein
             assoziatives Array. Die Schlüssel dieses Arrays sind die Namen der
             Konfigurationsoptionen, und die Werte sind die Konfigurationswerte.
             Das ist also das Array Format welches auch im Constructor der Klasse

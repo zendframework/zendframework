@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16023 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.response">
     <title>Zend_Http_Response</title>
@@ -171,7 +171,9 @@ if ($response->isError()) {
                     <para>
                         <code>string asString($br = "\n")</code>: Erhalte die komplette Rückantwort
                         als String zurück. Die Zeilen werden durch den $br Parameter umgebrochen
-                        (kann z.B. "&lt;br /&gt;" sein).
+                        (kann z.B. "&lt;br /&gt;" sein). Man kann auch die matische __toString()
+                        Methode verwenden wenn man das Objekt in einen String casten will. Diese
+                        wird dann auf asString() weiterleiten
                     </para>
                 </listitem>
             </itemizedlist>

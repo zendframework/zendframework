@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15850 -->
+<!-- EN-Revision: 16004 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.actionhelpers.autocomplete">
     <title>AutoComplete</title>
 
     <para>
-        Viele AJAX Javascript Bibliotheken bieten Funktionalitäten an für eine automatische
-        Vervollständigung wobei eine Auswahlliste von potentiell passenden Ergebnissen angezeigt
-        wird wärend der Benutzer tippt. Der <code>AutoComplete</code> Helfer zielt darauf ab
-        einfach akzeptierbare Ergebnisse zu solchen Methoden zurückzugeben.
+        Viele <acronym>AJAX</acronym> Javascript Bibliotheken bieten Funktionalitäten an für eine
+        automatische Vervollständigung wobei eine Auswahlliste von potentiell passenden Ergebnissen
+        angezeigt wird wärend der Benutzer tippt. Der <emphasis>AutoComplete</emphasis> Helfer
+        zielt darauf ab einfach akzeptierbare Ergebnisse zu solchen Methoden zurückzugeben.
     </para>
 
     <para>
         Da nicht alle JS Bibliotheken automatische Vervollständigung auf die gleiche Art
-        implementieren bietet der <code>AutoComplete</code> Helfer einige grundsätzliche abstrakte
-        Funktionalitäten zu vielen Bibliotheken und konkrete Implementierungen für individuelle
-        Bibliotheken. Zurückgegebene Typen sind generell entweder JSON Arrays von Strings, JSON
-        Arrays von Arrays (mit jedem Mitgliedsarray das ein assoziatives Array von Metadaten ist,
-        das verwendet wird um die Auswahlliste zu erstellen), oder HTML.
+        implementieren bietet der <emphasis>AutoComplete</emphasis> Helfer einige grundsätzliche
+        abstrakte Funktionalitäten zu vielen Bibliotheken und konkrete Implementierungen für
+        individuelle Bibliotheken. Zurückgegebene Typen sind generell entweder
+        <acronym>JSON</acronym> Arrays von Strings, <acronym>JSON</acronym> Arrays von Arrays (mit
+        jedem Mitgliedsarray das ein assoziatives Array von Metadaten ist, das verwendet wird um
+        die Auswahlliste zu erstellen), oder <acronym>HTML</acronym>.
     </para>
 
     <para>
@@ -60,7 +61,7 @@ class FooController extends Zend_Controller_Action
         </para></listitem>
 
         <listitem><para>
-                Antwort Body mit verschlüsselten/formatierten automatisch vervollständigten Daten
+                Antwort Body mit verschlüsselten oder formatierten automatisch vervollständigten Daten
                 setzen.
         </para></listitem>
 
@@ -75,42 +76,44 @@ class FooController extends Zend_Controller_Action
 
     <itemizedlist>
         <listitem><para>
-                <code>disableLayouts()</code> kann verwendet werden um Layouts und den ViewRenderer
-                auszuschalten. Typischerweise wird das innerhalb von
-                <code>prepareAutoCompletion()</code> aufgerufen.
+                <methodname>disableLayouts()</methodname> kann verwendet werden um Layouts und den
+                ViewRenderer auszuschalten. Typischerweise wird das innerhalb von
+                <methodname>prepareAutoCompletion()</methodname> aufgerufen.
         </para></listitem>
 
         <listitem><para>
-                <code>encodeJson($data, $keepLayouts = false)</code> verschlüsselt Daten zu JSON,
-                und aktiviert oder deaktiviert Layouts optional. Typischerweise wird das innerhalb
-                von <code>prepareAutoCompletion()</code> aufgerufen.
+                <methodname>encodeJson($data, $keepLayouts = false)</methodname> verschlüsselt
+                Daten zu <acronym>JSON</acronym>, und aktiviert oder deaktiviert Layouts optional.
+                Typischerweise wird das innerhalb von
+                <methodname>prepareAutoCompletion()</methodname> aufgerufen.
         </para></listitem>
 
         <listitem><para>
-                <code>prepareAutoCompletion($data, $keepLayouts = false)</code> wird verwendet um
-                Daten im Antwortformat vorzubereiten wenn das für die konkrete Implementation
-                notwendig ist, wobei Layouts optional aktiviert oder deaktiviert werden können.
-                Der Rückgabewert variiert basierend auf der Implementierung.
+                <methodname>prepareAutoCompletion($data, $keepLayouts = false)</methodname> wird
+                verwendet um Daten im Antwortformat vorzubereiten wenn das für die konkrete
+                Implementation notwendig ist, wobei Layouts optional aktiviert oder deaktiviert
+                werden können. Der Rückgabewert variiert basierend auf der Implementierung.
         </para></listitem>
 
         <listitem><para>
-                <code>sendAutoCompletion($data, $keepLayouts = false)</code> wird verwendet um
-                Daten im Antwortformat zu senden was für die konkrete Implementierung notendig ist.
-                Sie ruft <code>prepareAutoCompletion()</code> und sendet dann die Antwort.
+                <methodname>sendAutoCompletion($data, $keepLayouts = false)</methodname> wird
+                verwendet um Daten im Antwortformat zu senden was für die konkrete Implementierung
+                notendig ist. Sie ruft <methodname>prepareAutoCompletion()</methodname> und sendet
+                dann die Antwort.
         </para></listitem>
 
         <listitem><para>
-                <code>direct($data, $sendNow = true, $keepLayouts = false)</code> wird verwendet
-                wenn der Helfer als Methode des Helfer Brokers aufgerufen wird. Das
+                <methodname>direct($data, $sendNow = true, $keepLayouts = false)</methodname> wird
+                verwendet wenn der Helfer als Methode des Helfer Brokers aufgerufen wird. Das
                 <varname>$sendNow</varname> Flag wird verwendet um festzustellen ob
-                <code>sendAutoCompletion()</code> oder <code>prepareAutoCompletion()</code>
-                aufgerufen werden muß.
+                <methodname>sendAutoCompletion()</methodname> oder
+                <methodname>prepareAutoCompletion()</methodname> aufgerufen werden muß.
         </para></listitem>
     </itemizedlist>
 
     <para>
-        Aktuell unterstützt <code>AutoComplete</code> die folgenden Dojo und Scriptaculous AJAX
-        Bibliotheken.
+        Aktuell unterstützt <emphasis>AutoComplete</emphasis> die folgenden Dojo und Scriptaculous
+        <acronym>AJAX</acronym> Bibliotheken.
     </para>
 
     <sect4 id="zend.controller.actionhelpers.autocomplete.dojo">
@@ -127,8 +130,8 @@ class FooController extends Zend_Controller_Action
 
         <para>
             Im Zend Framework kann ein einfaches indiziertes Array an den AutoCompletionDojo Helfer
-            übergeben werden, und er wird eine JSON Antwort zurückgeben die passend für die
-            Verwendung in so einem Speicher ist:
+            übergeben werden, und er wird eine <acronym>JSON</acronym> Antwort zurückgeben die
+            passend für die Verwendung in so einem Speicher ist:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -140,22 +143,23 @@ $this->_helper->autoCompleteDojo($data);
             <title>AutoCompletion mit Dojo und der Verwendung von Zend MVC</title>
 
             <para>
-                AutoCompletion mit Dojo, über Zend MVC, benötigt verschiedene Dinge: Erstellung
-                eines Form Objekts für die Kombobox bei der man AutoCompletion will, eine
-                Kontroller Action für das anbieten der AutoCompletion Ergebnisse, Erstellung eines
-                eigenen QueryReadSote um die AutoCompletion Aktion damit zu verbinden, und
-                Erstellung des Javascripts das zur Initialisierung der AutoCompletion auf der
-                Serverseite zu verwenden ist.
+                AutoCompletion mit Dojo, über Zend <acronym>MVC</acronym>, benötigt verschiedene
+                Dinge: Erstellung eines Form Objekts für die Kombobox bei der man AutoCompletion
+                will, eine Kontroller Action für das anbieten der AutoCompletion Ergebnisse,
+                Erstellung eines eigenen QueryReadSote um die AutoCompletion Aktion damit zu
+                verbinden, und Erstellung des Javascripts das zur Initialisierung der
+                AutoCompletion auf der Serverseite zu verwenden ist.
             </para>
 
             <para>
                 Schauen wir uns zuerst das benötigte Javascript an. Dojo bietet ein komplettes
-                Framework für die Erstellung von OOP Javascript, so wie Zend Framework für PHP.
-                Teile davon sind die Möglichkeit Pseudo-Namespaces zu erstellen indem die
-                Verzeichnis Hirarchie verwendet wird. Wir erstellen ein 'custom' Verzeichnis auf
-                dem gleichen Level wie das Dojo Verzeichnis das Teil der Distribution von Dojo ist.
-                In diesem Verzeichnis, erstellen wir eine Javascript Datei, TestNameReadStore.js,
-                mit den folgenden Inhalten:
+                Framework für die Erstellung von <acronym>OOP</acronym> Javascript, so wie Zend
+                Framework für <acronym>PHP</acronym>. Teile davon sind die Möglichkeit
+                Pseudo-Namespaces zu erstellen indem die Verzeichnis Hirarchie verwendet wird. Wir
+                erstellen ein 'custom' Verzeichnis auf dem gleichen Level wie das Dojo Verzeichnis
+                das Teil der Distribution von Dojo ist. In diesem Verzeichnis, erstellen wir eine
+                Javascript Datei, <filename>TestNameReadStore.js</filename>, mit den folgenden
+                Inhalten:
              </para>
 
             <programlisting language="javascript"><![CDATA[
@@ -262,14 +266,14 @@ class TestController extends Zend_Controller_Action
 ]]></programlisting>
 
             <para>
-                in unserer <code>autocompleteAction()</code> machen wir eine Anzahl von Dingen.
-                Zuerst schauen wir darauf eine Post Anfrage durchzuführen, und das dort ein
+                in unserer <methodname>autocompleteAction()</methodname> machen wir eine Anzahl von
+                Dingen. Zuerst schauen wir darauf eine Post Anfrage durchzuführen, und das dort ein
                 'format' Parameter auf den Wert 'ajax' gesetzt ist; das hilft einfach störende
                 Anfragen zur Aktion zu reduzieren. Als nächstes prüfen wir auf den 'test'
                 Parameter, und vergleichen Ihn mit unseren Daten. (wir haben absichtlich die
-                Implementation von <code>getData()</code> hier ausgelassen -- es können einfach
-                jede Art von Datenquelle sein.) Letztendlich senden wir unsere Entsprechungen zum
-                AutoCompletion Helfer.
+                Implementation von <methodname>getData()</methodname> hier ausgelassen -- es können
+                einfach jede Art von Datenquelle sein.) Letztendlich senden wir unsere
+                Entsprechungen zum AutoCompletion Helfer.
             </para>
 
             <para>
@@ -317,8 +321,8 @@ dojo.require("custom.TestNameReadStore");
 
             <para>
                 Beachte die Aufrufe zu den View Helfern wie headStyle und headScript; das sind
-                Platzhalter, welche dann in der HTML Head Sektion des Layout View Skripts
-                dargestellt werden können.
+                Platzhalter, welche dann in der <acronym>HTML</acronym> Head Sektion des Layout
+                View Skripts dargestellt werden können.
             </para>
 
             <para>
@@ -331,13 +335,13 @@ dojo.require("custom.TestNameReadStore");
         <title>AutoCompletion mit Scriptaculous</title>
         <para>
             <ulink url="http://wiki.script.aculo.us/scriptaculous/show/Ajax.Autocompleter">Scriptaculous</ulink>
-            erwartet eine HTML Antwort in einem speziellen Format.
+            erwartet eine <acronym>HTML</acronym> Antwort in einem speziellen Format.
         </para>
 
         <para>
             Der Helfer der mit dieser Bibliothek zu verwenden ist ist 'AutoCompleteScriptaculous'.
-            Es muß einfach ein Array von Daten angegeben werden, und der Helfer wird eine HTML
-            Antwort erstellen die mit Ajax.Autocompleter kompatibel ist.
+            Es muß einfach ein Array von Daten angegeben werden, und der Helfer wird eine
+            <acronym>HTML</acronym> Antwort erstellen die mit Ajax.Autocompleter kompatibel ist.
         </para>
     </sect4>
 </sect3>

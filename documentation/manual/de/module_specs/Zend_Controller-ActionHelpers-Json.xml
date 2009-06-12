@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15742 -->
+<!-- EN-Revision: 16016 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.actionhelpers.json">
     <title>JSON</title>
 
     <para>
-        JSON Antworten sind die Antworten der Wahl wenn mit AJAX Anfragen gearbeitet wird die
-        Dataset Antworten erwarten; JSON kann sofort auf Seite des Clienten geparst werden, was zu
+        <acronym>JSON</acronym> Antworten sind die Antworten der Wahl wenn mit
+        <acronym>AJAX</acronym> Anfragen gearbeitet wird die Dataset Antworten erwarten;
+        <acronym>JSON</acronym> kann sofort auf Seite des Clienten geparst werden, was zu
         schneller Ausführung führt.
     </para>
 
     <para>
-        Der JSON Action Helfer macht verschiedene Dinge:
+        Der <acronym>JSON</acronym> Action Helfer macht verschiedene Dinge:
     </para>
 
     <itemizedlist>
@@ -22,9 +23,9 @@
         <listitem>
             <para>
                 Optional ein Array von Optionen als zweites Argument an
-                <code>Zend_Json::encode()</code> übergeben. Dieses Array von Optionen erlaubt es
-                Layouts und Kodierungen einzuschalten indem <code>Zend_Json_Expr</code> verwendet
-                wird.
+                <methodname>Zend_Json::encode()</methodname> übergeben. Dieses Array von Optionen
+                erlaubt es Layouts und Kodierungen einzuschalten indem <code>Zend_Json_Expr</code>
+                verwendet wird.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -37,7 +38,8 @@ $this->_helper->json($data, array('enableJsonExprFinder' => true));
         </para></listitem>
 
         <listitem><para>
-                Den 'Content-Type' Antwort Header auf 'application/json' setzen.
+                Den 'Content-Type' Antwort Header auf '<filename>application/json</filename>'
+                setzen.
         </para></listitem>
 
         <listitem><para>
@@ -48,7 +50,8 @@ $this->_helper->json($data, array('enableJsonExprFinder' => true));
 
     <para>
         Die Verwendung ist einfach: Entweder als Methode des Helfer Brokers aufrufen, oder eine der
-        Methoden <code>encodeJson()</code> oder <code>sendJson()</code> aufrufen:
+        Methoden <methodname>encodeJson()</methodname> oder <methodname>sendJson()</methodname>
+        aufrufen:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -73,10 +76,11 @@ class FooController extends Zend_Controller_Action
         <title>Layouts behalten</title>
 
         <para>
-            Wenn man ein separates Layout für JSON Antworten hat -- möglicherweise um die JSON
-            Antworten in einer Art Kontext zu wrappen -- akzeptiert jede Methode im JSON Helfer
-            ein zweites, optionales Argument: Ein Flag um Layouts zu aktivieren oder deaktivieren.
-            Die Übergabe eines boolschen <constant>TRUE</constant> Wertes hält Layouts aktiviert:
+            Wenn man ein separates Layout für <acronym>JSON</acronym> Antworten hat --
+            möglicherweise um die <acronym>JSON</acronym> Antworten in einer Art Kontext zu wrappen
+            -- akzeptiert jede Methode im <acronym>JSON</acronym> Helfer ein zweites, optionales
+            Argument: Ein Flag um Layouts zu aktivieren oder deaktivieren. Die Übergabe eines
+            boolschen <constant>TRUE</constant> Wertes hält Layouts aktiviert:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -97,11 +101,11 @@ $this->_helper->json($data, array('keepLayouts' => true);
         <title>Kodierung einschalten durch Verwendung von Zend_Json_Expr</title>
 
         <para>
-            <code>Zend_Json::encode()</code> erlaubt die Kodierung von nativen JSON Ausdrücken
-            indem <code>Zend_Json_Expr Objekte verwendet</code> werden. Diese Option ist
-            standardmäßig ausgeschaltet. Um diese Option einzuschalten muß ein boolscher
-            <constant>TRUE</constant> Wert an die <code>enableJsonExprFinder</code> Option übergeben
-            werden:
+            <methodname>Zend_Json::encode()</methodname> erlaubt die Kodierung von nativen
+            <acronym>JSON</acronym> Ausdrücken indem <classname>Zend_Json_Expr</classname>
+            Objekte verwendet werden. Diese Option ist standardmäßig ausgeschaltet. Um diese Option
+            einzuschalten muß ein boolscher <constant>TRUE</constant> Wert an die
+            <code>enableJsonExprFinder</code> Option übergeben werden:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -112,7 +116,7 @@ $this->_helper->json($data, array('enableJsonExprFinder' => true);
             Wenn man das durchführen will, <emphasis>muss</emphasis> man ein Array als zweite
             Option übergeben. Das erlaubt es auch andere Optionen, wie zum Beispiel die
             <code>keepLayouts</code> Option, zu kombinieren. Alle diese Optionen werden dann
-            an <code>Zend_Json::encode()</code> übergeben.
+            an <methodname>Zend_Json::encode()</methodname> übergeben.
         </para>
 
         <programlisting language="php"><![CDATA[

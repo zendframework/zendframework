@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15743 -->
+<!-- EN-Revision: 16000 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.console.getopt.fetching">
     <title>Holen von Optionen und Argumenten</title>
@@ -26,14 +26,14 @@
             Wenn ein Benutzer irgendeine ungültige Option auf der Kommandozeile
             angibt, wirft die analysierende Funktion eine
             <classname>Zend_Console_Getopt_Exception</classname>. Diese Ausnahme kann im
-            Code der Anwendung abgefangen werden. Die <code>parse()</code> Methode
+            Code der Anwendung abgefangen werden. Die <methodname>parse()</methodname> Methode
             kann verwendet werden um das Objekt dazu zu zwingen die Argumente zu
-            analysieren. Das ist deswegen nützlich weil <code>parse()</code> in
+            analysieren. Das ist deswegen nützlich weil <methodname>parse()</methodname> in
             einen <code>try</code> Block eingebettet werden kann. Wenn es erfolgreich
             ist, kann man sicher sein das die Analyse keine weiteren Ausnahmen werfen
-            wird. Die geworfene Ausnahme hat eine eigene Methode <code>getUsageMessage()</code>,
-            welche die formatierten Hinweise für die Verwendung aller definierten
-            Optionen zurückgibt.
+            wird. Die geworfene Ausnahme hat eine eigene Methode
+            <methodname>getUsageMessage()</methodname>, welche die formatierten Hinweise für die
+            Verwendung aller definierten Optionen zurückgibt.
         </para>
         <example id="zend.console.getopt.fetching.exceptions.example">
             <title>Getopt Ausnahmen auffangen</title>
@@ -74,7 +74,7 @@ try {
     <sect2 id="zend.console.getopt.fetching.byname">
         <title>Optionen durch Ihren Namen finden</title>
         <para>
-            Die <code>getOption()</code> Methode kann verwendet werden um den
+            Die <methodname>getOption()</methodname> Methode kann verwendet werden um den
             Wert einer Option abzufragen. Wenn die Option einen Parameter hatte,
             wird diese Methode den Wert dieses Parameters zurückgeben. Wenn die
             Option keinen Parameter hatte, aber der Benutzer ihn auf der
@@ -90,9 +90,9 @@ $p_parameter = $opts->getOption('p');
 ]]></programlisting>
         </example>
         <para>
-            Alternativ kann die magische <code>__get()</code> Funktion verwendet
+            Alternativ kann die magische <methodname>__get()</methodname> Funktion verwendet
             werden um der Wert einer Option zu erhalten wie wenn dieser eine
-            Variable der Klasse wäre. Die magische <code>__isset()</code> Methode
+            Variable der Klasse wäre. Die magische <methodname>__isset()</methodname> Methode
             ist auch implementiert.
         </para>
         <example id="zend.console.getopt.fetching.byname.example.magic">
@@ -120,7 +120,7 @@ $p_parameter = $opts->p; // Null wenn nicht gesetzt
         <itemizedlist>
             <listitem>
                 <para>
-                    Als Zeichenkette: verwenden der <code>toString()</code> Methode.
+                    Als Zeichenkette: verwenden der <methodname>toString()</methodname> Methode.
                     Die Optionen werden als Leerzeichen-getrennte Zeichenkette von
                     "<code>Flag=Wert</code>" Paaren zurückgegeben. Der Wert einer Option
                     welche keinen Parameter hat, ist die wörtliche Zeichenkette
@@ -129,22 +129,22 @@ $p_parameter = $opts->p; // Null wenn nicht gesetzt
             </listitem>
             <listitem>
                 <para>
-                    Als Array: verwenden der <code>toArray()</code> Methode. Die Optionen
-                    werden in einem einfachen Integer-Indizierten Array von Zeichenketten
+                    Als Array: verwenden der <methodname>toArray()</methodname> Methode. Die
+                    Optionen werden in einem einfachen Integer-Indizierten Array von Zeichenketten
                     zurückgegeben, die Flag-Zeichenketten gefolgt von den
                     Parameter-Zeichenketten, wenn vorhanden.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    Als Zeichenkette welche JSON Daten enthält: verwenden der <code>toJson()</code>
-                    Methode.
+                    Als Zeichenkette welche <acronym>JSON</acronym> Daten enthält: verwenden der
+                    <methodname>toJson()</methodname> Methode.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    Als Zeichenkette welche XML Daten enthält: verwenden der <code>toXml()</code>
-                    Methode.
+                    Als Zeichenkette welche <acronym>XML</acronym> Daten enthält: verwenden der
+                    <methodname>toXml()</methodname> Methode.
                 </para>
             </listitem>
         </itemizedlist>
@@ -162,8 +162,9 @@ $p_parameter = $opts->p; // Null wenn nicht gesetzt
         <para>
             Nachdem die Argumente der Option und deren Parameter von der Kommandozeile analysiert
             wurden, können zusätzliche Argumente zurück bleiben. Diese Argumente können abgefragt
-            werden durch Verwendung der <code>getRemainingArgs()</code> Methode. Diese Methode gibt
-            ein Array von Zeichenketten zurück welche nicht Teil irgendeiner Option waren.
+            werden durch Verwendung der <methodname>getRemainingArgs()</methodname> Methode. Diese
+            Methode gibt ein Array von Zeichenketten zurück welche nicht Teil irgendeiner Option
+            waren.
         </para>
         <example id="zend.console.getopt.fetching.remainingargs.example">
             <title>Verwenden von getRemainingArgs()</title>
@@ -174,9 +175,9 @@ $args = $opts->getRemainingArgs(); // Rückgabe array('filename')
 ]]></programlisting>
         </example>
         <para>
-            <classname>Zend_Console_Getopt</classname> unterstützt die GNU Konvention das ein
-            Argument welches auf einem Doppelten Bindestrich besteht das Ende der Optionen
-            bezeichnet. Jedes Argument welches diesem Bezeichner folgt, muß als
+            <classname>Zend_Console_Getopt</classname> unterstützt die <acronym>GNU</acronym>
+            Konvention das ein Argument welches auf einem Doppelten Bindestrich besteht das Ende
+            der Optionen bezeichnet. Jedes Argument welches diesem Bezeichner folgt, muß als
             Nicht-Options-Argument behandelt werden. Das ist nützlich wenn ein
             Nicht-Options-Argument vorhanden ist welches mit einem Bindestrich anfängt. Zum
             Beispiel: "<command>rm -- -filename-with-dash</command>".

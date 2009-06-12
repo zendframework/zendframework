@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15742 -->
+<!-- EN-Revision: 16014 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.actionhelpers.contextswitch">
     <title>ContextSwitch und AjaxContext</title>
 
     <para>
-        Der <code>ContextSwitch</code> Action Helfer ist vorgesehen für die Erleicherung bei der
-        Rückgabe von unserschiedlichen Antwortformaten oder Anfragen. Der <code>AjaxContext</code>
-        Helfer ist eine spezialisierte Version von <code>ContextSwitch</code> die die
-        Rückgabe von Antworten zu XmlHttpRequests erleichtert.
+        Der <emphasis>ContextSwitch</emphasis> Action Helfer ist vorgesehen für die Erleicherung
+        bei der Rückgabe von unserschiedlichen Antwortformaten oder Anfragen. Der
+        <emphasis>AjaxContext</emphasis> Helfer ist eine spezialisierte Version von
+        <code>ContextSwitch</code> welche die Rückgabe von Antworten zu XmlHttpRequests
+        erleichtert.
     </para>
 
     <para>
@@ -69,9 +70,9 @@ class NewsController extends Zend_Controller_Action
 ]]></programlisting>
 
     <para>
-        Angenommen wir wollen das <code>listAction()</code> auch im XML Format vorhanden ist. Statt
-        der Erstellung einer anderen Aktion, kann angezeigt werden das eine XML Antwort
-        zurückgegeben wird:
+        Angenommen wir wollen das <methodname>listAction()</methodname> auch im
+        <acronym>XML</acronym> Format vorhanden ist. Statt der Erstellung einer anderen Aktion,
+        kann angezeigt werden das eine <acronym>XML</acronym> Antwort zurückgegeben wird:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -94,18 +95,19 @@ class NewsController extends Zend_Controller_Action
 
     <itemizedlist>
         <listitem><para>
-                Setzt den 'Content-Type' Antwort Header auf 'text/xml'.
+                Setzt den 'Content-Type' Antwort Header auf '<filename>text/xml</filename>'.
         </para></listitem>
 
         <listitem><para>
-                Ändert den View Suffix auf 'xml.phtml' (oder, wenn ein alternativer View Suffix
-                verwendet wird, 'xml.[dein Suffix]').
+                Ändert den View Suffix auf '<filename>xml.phtml</filename>' (oder, wenn ein
+                alternativer View Suffix verwendet wird, 'xml.[dein Suffix]').
         </para></listitem>
     </itemizedlist>
 
     <para>
-        Jetzt muß ein neues View Skript erstellt werden, 'news/list.xml.phtml', welches das XML
-        erzeugt und darstellt.
+        Jetzt muß ein neues View Skript erstellt werden,
+        '<filename>news/list.xml.phtml</filename>', welches das <acronym>XML</acronym> erzeugt und
+        darstellt.
     </para>
 
     <para>
@@ -117,19 +119,21 @@ class NewsController extends Zend_Controller_Action
 
     <itemizedlist>
         <listitem><para>
-                über URL Parameter: <code>/news/list/format/xml</code> (beachte, das Standard
-                Routing Schema erlaubt übliche Schlüssel/Werte Paare nach der Aktion)
+                über <acronym>URL</acronym> Parameter: <filename>/news/list/format/xml</filename>
+                (beachte, das Standard Routing Schema erlaubt übliche Schlüssel/Werte Paare nach
+                der Aktion)
         </para></listitem>
 
         <listitem><para>
-                über Abfrage String: z.B., <code>/news/list?format=xml</code>
+                über <acronym>GET</acronym> Parameter: z.B.,
+                <filename>/news/list?format=xml</filename>
         </para></listitem>
     </itemizedlist>
 
     <para>
-        <code>ContextSwitch</code> erlaubt es beliebige Kontexte zu spezifizieren, inklusive
-        welche Kontextänderung stattfinden wird (wenn überhaupt), jegliche Antwort Header die
-        gesendet werden sollen, und beliebige Callbacks für Initialisierung und folgende
+        <emphasis>ContextSwitch</emphasis> erlaubt es beliebige Kontexte zu spezifizieren,
+        inklusive welche Kontextänderung stattfinden wird (wenn überhaupt), jegliche Antwort
+        Header die gesendet werden sollen, und beliebige Callbacks für Initialisierung und folgende
         Bearbeitung.
     </para>
 
@@ -137,25 +141,27 @@ class NewsController extends Zend_Controller_Action
         <title>Vorhandene Standard Kontexte</title>
 
         <para>
-            Standardmäßig sind zwei Kontexte im <code>ContextSwitch</code> Helfer vorhanden: json
-            und xml.
+            Standardmäßig sind zwei Kontexte im <emphasis>ContextSwitch</emphasis> Helfer
+            vorhanden: json und xml.
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>JSON</emphasis>. Der JSON Kontext setzt den 'Content-Type' Antwort
-                    Header auf 'application/json' und den View Skript Suffix auf 'json.phtml'.
+                    <emphasis><acronym>JSON</acronym></emphasis>. Der <acronym>JSON</acronym>
+                    Kontext setzt den 'Content-Type' Antwort Header auf
+                    '<filename>application/json</filename>' und den View Skript Suffix auf
+                    '<filename>json.phtml</filename>'.
                 </para>
 
                 <para>
                     Trotzdem wird standardmäßig kein View Skript benötigt. Es serialisiert einfach
-                    alle View Variablen und sendet die JSON Antwort sofort aus.
+                    alle View Variablen und sendet die <acronym>JSON</acronym> Antwort sofort aus.
                 </para>
 
                 <para>
-                    Dieses Verhalten kann deaktiviert werden indem die auto-JSON Serialisierung
-                    abgeschaltet wird:
+                    Dieses Verhalten kann deaktiviert werden indem die automatische
+                    <acronym>JSON</acronym> Serialisierung abgeschaltet wird:
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -165,9 +171,10 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
 
             <listitem>
                 <para>
-                    <emphasis>XML</emphasis>. Der XML Kontext setzt den 'Content-Type' Antwort
-                    Header auf 'text/xml' und den View Skript Suffix auf 'xml.phtml'. Es muß ein
-                    neues View Skript für den Kontext erstellt werden.
+                    <emphasis><acronym>XML</acronym></emphasis>. Der <acronym>XML</acronym> Kontext
+                    setzt den 'Content-Type' Antwort Header auf '<filename>text/xml</filename>' und
+                    den View Skript Suffix auf '<filename>xml.phtml</filename>'. Es muß ein neues
+                    View Skript für den Kontext erstellt werden.
                 </para>
             </listitem>
         </itemizedlist>
@@ -177,16 +184,17 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
         <title>Eigene Kontexte erstellen</title>
 
         <para>
-            Manchmal sind die Standardkontexte nicht genug. Zum Beispiel wenn man YAML zurückgeben
-            will, oder PHP serialisieren, ein RSS oder ATOM Feed, usw. <code>ContextSwitch</code>
-            erlaubt es das zu tun.
+            Manchmal sind die Standardkontexte nicht genug. Zum Beispiel wenn man
+            <acronym>YAML</acronym> zurückgeben will, oder <acronym>PHP</acronym> serialisieren,
+            ein <acronym>RSS</acronym> oder <acronym>ATOM</acronym> Feed, usw.
+            <emphasis>ContextSwitch</emphasis> erlaubt es das zu tun.
         </para>
 
         <para>
             Der einfachste Weg einen neuen Kontext hinzuzufügen ist über die
-            <code>addContext()</code> Methode. Diese Methoe nimmt zwei Argumente, den Namen des
-            Kontextes, und eine Array Spezifikation. Die Spezifikation sollte ein oder mehrere der
-            folgenden Dinge enthalten:
+            <methodname>addContext()</methodname> Methode. Diese Methoe nimmt zwei Argumente, den
+            Namen des Kontextes, und eine Array Spezifikation. Die Spezifikation sollte ein oder
+            mehrere der folgenden Dinge enthalten:
         </para>
 
         <itemizedlist>
@@ -196,29 +204,32 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
             </listitem>
 
             <listitem>
-                <para><emphasis>headers</emphasis>: Ein Array von Header/Wert Paaren das als Teil
+                <para><emphasis>headers</emphasis>: Ein Array von Header zu Wert Paaren das als Teil
                 der Antwort gesendet werden soll.</para>
             </listitem>
 
             <listitem>
                 <para>
                     <emphasis>callbacks</emphasis>: Ein Array das ein oder mehrere der Schlüssel
-                    'init' oder 'post' enthält, die auf gültige PHP Callbacks zeigen und die für die
-                    Initialisierung des Contextes und die Nachbearbeitung verwendet werden können.
+                    'init' oder 'post' enthält, die auf gültige <acronym>PHP</acronym> Callbacks
+                    zeigen und die für die Initialisierung des Contextes und die Nachbearbeitung
+                    verwendet werden können.
                 </para>
 
                 <para>Initialisierungs Callbacks treten auf wenn der Kontext durch
-                <code>ContextSwitch</code> erkannt wird. Sie können verwendet werden um spezielle
-                Logik auszuführen die stattfinden soll. Als Beispiel verwendet der JSON Kontext
-                einen Callback um den ViewRenderer auszuschalten wenn auto-JSON Serialisierung
-                eingeschaltet ist.</para>
+                <emphasis>ContextSwitch</emphasis> erkannt wird. Sie können verwendet werden um
+                spezielle Logik auszuführen die stattfinden soll. Als Beispiel verwendet der
+                <acronym>JSON</acronym> Kontext einen Callback um den ViewRenderer auszuschalten
+                wenn die automatische <acronym>JSON</acronym> Serialisierung eingeschaltet ist.
+                </para>
 
-                <para>Nachbearbeitung tritt wärend der <code>postDispatch()</code> Routine der
-                Aktion auf, und kann verwendet werden um spezielle Logik auszuführen. Als Beispiel
-                verwendet der JSON Kontext einen Callback um festzustellen ob auto-JSON
-                Serialisierung eingeschaltet ist; wenn dem so ist, serialisiert es die View
-                Variablen zu JSON und sendet die Antwort, aber wenn dem nicht so ist, schaltet es
-                den ViewRenderer wieder ein.</para>
+                <para>Nachbearbeitung tritt wärend der <methodname>postDispatch()</methodname>
+                Routine der Aktion auf, und kann verwendet werden um spezielle Logik auszuführen.
+                Als Beispiel verwendet der <acronym>JSON</acronym> Kontext einen Callback um
+                festzustellen ob die automatische <acronym>JSON</acronym> Serialisierung
+                eingeschaltet ist; wenn dem so ist, serialisiert es die View Variablen zu
+                <acronym>JSON</acronym> und sendet die Antwort, aber wenn dem nicht so ist,
+                schaltet es den ViewRenderer wieder ein.</para>
             </listitem>
         </itemizedlist>
 
@@ -228,53 +239,53 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
 
         <itemizedlist>
             <listitem><para>
-                <code>addContext($context, array $spec)</code>: Fügt einen neuen Kontext hinzu.
-                Wirft eine Ausnahme wenn der Kontext bereits existiert.
+                <methodname>addContext($context, array $spec)</methodname>: Fügt einen neuen
+                Kontext hinzu. Wirft eine Ausnahme wenn der Kontext bereits existiert.
             </para></listitem>
 
             <listitem><para>
-                <code>setContext($context, array $spec)</code>: Fügt einen neuen Kontext hinzu oder
-                überschreibt einen bestehenden Kontext. Verwendet die gleiche Spezifikation wie
-                <code>addContext()</code>.
+                <methodname>setContext($context, array $spec)</methodname>: Fügt einen neuen
+                Kontext hinzu oder überschreibt einen bestehenden Kontext. Verwendet die gleiche
+                Spezifikation wie <methodname>addContext()</methodname>.
             </para></listitem>
 
             <listitem><para>
-                <code>addContexts(array $contexts)</code>: Fügt viele Kontexte auf einmal hinzu.
-                Das <varname>$contexts</varname> Array sollte ein Array von Kontext/Spezifikation
-                Paaren sein. Wenn einer der Kontexte bereits existiert, wird eine Ausnahme
-                geworfen.
+                <methodname>addContexts(array $contexts)</methodname>: Fügt viele Kontexte auf
+                einmal hinzu. Das <varname>$contexts</varname> Array sollte ein Array von
+                Kontext zu Spezifikation Paaren sein. Wenn einer der Kontexte bereits existiert,
+                wird eine Ausnahme geworfen.
             </para></listitem>
 
             <listitem><para>
-                <code>setContexts(array $contexts)</code>: Fügt neue Kontexte hinzu und
+                <methodname>setContexts(array $contexts)</methodname>: Fügt neue Kontexte hinzu und
                 überschreibt bestehende. Verwendet die gleiche Spezifikation wie
-                <code>addContexts()</code>.
+                <methodname>addContexts()</methodname>.
             </para></listitem>
 
             <listitem><para>
-                <code>hasContext($context)</code>: Gibt true zurück wenn der Kontext existiert,
-                andernfalls false.
+                <methodname>hasContext($context)</methodname>: Gibt true zurück wenn der Kontext
+                existiert, andernfalls false.
             </para></listitem>
 
             <listitem><para>
-                <code>getContext($context)</code>: Empfängt einen einzelnen Kontext
+                <methodname>getContext($context)</methodname>: Empfängt einen einzelnen Kontext
                 durch den Namen. Gibt ein Array zurück das der Spezifikation folgt die in
-                <code>addContext()</code> verwendet wird.
+                <methodname>addContext()</methodname> verwendet wird.
             </para></listitem>
 
             <listitem><para>
-                <code>getContexts()</code>: Empfängt alle Kontexte. Gibt ein Array von
-                Kontext/Spezifikation Paaren zurück.
+                <methodname>getContexts()</methodname>: Empfängt alle Kontexte. Gibt ein Array von
+                Kontext zu Spezifikation Paaren zurück.
             </para></listitem>
 
             <listitem><para>
-                <code>removeContext($context)</code>: Entfernt einen einzelnen Kontext durch seinen
-                Namen. Gibt im Erfolgsfall true zurück, und false wenn der Kontext nicht gefunden
-                wurde.
+                <methodname>removeContext($context)</methodname>: Entfernt einen einzelnen Kontext
+                durch seinen Namen. Gibt im Erfolgsfall true zurück, und false wenn der Kontext
+                nicht gefunden wurde.
             </para></listitem>
 
             <listitem><para>
-                <code>clearContexts()</code>: Entfernt alle Kontexte.
+                <methodname>clearContexts()</methodname>: Entfernt alle Kontexte.
             </para></listitem>
         </itemizedlist>
     </sect4>
@@ -285,14 +296,14 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
         <para>
             Es gibt zwei Mechanismen für das Setzen vorhandener Kontexte. Es kann entweder manuell
             ein Array im Kontroller erstellt werden, oder es können verschiedene Methoden in
-            <code>ContextSwitch</code> verwendet werden um Sie zu bauen.
+            <emphasis>ContextSwitch</emphasis> verwendet werden um Sie zu bauen.
         </para>
 
         <para>
-            Die prinzipielle Methode für das Hinzufügen von Aktion/Kontext Relationen ist
-            <code>addActionContext()</code>. Sie erwartet zwei Argumente, die Aktion zu der der
-            Kontext hinzugefügt werden soll, und entweder den Namen des Kontextes oder ein Array
-            von Kontexten. Als Beispiel nehmen wir die folgende Controller Klasse an:
+            Die prinzipielle Methode für das Hinzufügen von Aktion zu Kontext Relationen ist
+            <methodname>addActionContext()</methodname>. Sie erwartet zwei Argumente, die Aktion zu
+            welcher der Kontext hinzugefügt werden soll, und entweder den Namen des Kontextes oder
+            ein Array von Kontexten. Als Beispiel nehmen wir die folgende Controller Klasse an:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -317,9 +328,10 @@ class FooController extends Zend_Controller_Action
 ]]></programlisting>
 
         <para>
-            Angenommen wir sollen einen XML Kontext zu der 'list' Aktion hinzufügen, und XML und
-            JSON Kontexte zu der 'comments' Aktion. Wir können das in der <code>init()</code>
-            Methode machen:
+            Angenommen wir sollen einen <acronym>XML</acronym> Kontext zu der 'list' Aktion
+            hinzufügen, und <acronym>XML</acronym> und <acronym>JSON</acronym> Kontexte zu der
+            'comments' Aktion. Wir können das in der <methodname>init()</methodname> Methode
+            machen:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -366,10 +378,11 @@ class FooController extends Zend_Controller_Action
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>addActionContext($action, $context)</code>: markiert einen oder mehrere
-                    Kontexte als in einer Aktion vorhanden. Wenn bereits Mapping existieren wird
-                    einfach bei diesen Mappings angehängt. <varname>$context</varname> kann ein
-                    einzelner Kontext sein, oder ein Array von Kontexten.
+                    <methodname>addActionContext($action, $context)</methodname>: markiert einen
+                    oder mehrere Kontexte als in einer Aktion vorhanden. Wenn bereits Mapping
+                    existieren wird einfach bei diesen Mappings angehängt.
+                    <varname>$context</varname> kann ein einzelner Kontext sein, oder ein Array von
+                    Kontexten.
                 </para>
 
                 <para>
@@ -378,50 +391,52 @@ class FooController extends Zend_Controller_Action
                 </para>
 
                 <para>
-                    Ein leerer Wert für $context deaktiviert alle Kontexte für die gegebene Aktion.
+                    Ein leerer Wert für <varname>$context</varname> deaktiviert alle Kontexte für
+                    die gegebene Aktion.
                 </para>
             </listitem>
 
             <listitem><para>
-                    <code>setActionContext($action, $context)</code>: markiert einen oder mehrere
-                    Kontexte als in einer Aktion vorhanden. Wenn bereits Mappings existieren werden
-                    Sie mit den spezifizierten ersetzt. <varname>$context</varname> kann ein
-                    einzelner Kontext sein, oder ein Array von Kontexten.
+                    <methodname>setActionContext($action, $context)</methodname>: markiert einen
+                    oder mehrere Kontexte als in einer Aktion vorhanden. Wenn bereits Mappings
+                    existieren werden Sie mit den spezifizierten ersetzt.
+                    <varname>$context</varname> kann ein einzelner Kontext sein, oder ein Array von
+                    Kontexten.
             </para></listitem>
 
             <listitem><para>
-                    <code>addActionContexts(array $contexts)</code>: fügt mehrere Aktion/Kontext
-                    Paare auf einmal hinzu. <varname>$contexts</varname> sollte ein assoziatives
-                    Array von Aktion/Kontext Paaren sein. Es entspricht
-                    <code>addActionContext()</code>, was bedeutet das wenn eine Paarung bereits
-                    existiert, diese hinzugefügt wird.
+                    <methodname>addActionContexts(array $contexts)</methodname>: fügt mehrere
+                    Aktion zu Kontext Paare auf einmal hinzu. <varname>$contexts</varname> sollte
+                    ein assoziatives Array von Aktion zu Kontext Paaren sein. Es entspricht
+                    <methodname>addActionContext()</methodname>, was bedeutet das wenn eine Paarung
+                    bereits existiert, diese hinzugefügt wird.
             </para></listitem>
 
             <listitem><para>
-                    <code>setActionContexts(array $contexts)</code>: fungiert wie
-                    <code>addActionContexts()</code>, überschreibt aber bestehende Aktion/Kontext
-                    Paare.
+                    <methodname>setActionContexts(array $contexts)</methodname>: fungiert wie
+                    <methodname>addActionContexts()</methodname>, überschreibt aber bestehende
+                    Aktion zu Kontext Paare.
             </para></listitem>
 
             <listitem><para>
-                    <code>hasActionContext($action, $context)</code>: ermittelt ob eine spezielle
-                    Aktion einen gegebenen Kontext hat.
+                    <methodname>hasActionContext($action, $context)</methodname>: ermittelt ob eine
+                    spezielle Aktion einen gegebenen Kontext hat.
             </para></listitem>
 
             <listitem><para>
-                    <code>getActionContexts($action = null)</code>: gibt entweder alle Kontexte
-                    für eine gegebene Aktion zurück, oder alle Aktion/Kontext Paare.
+                    <methodname>getActionContexts($action = null)</methodname>: gibt entweder alle
+                    Kontexte für eine gegebene Aktion zurück, oder alle Aktion zu Kontext Paare.
             </para></listitem>
 
             <listitem><para>
-                    <code>removeActionContext($action, $context)</code>: entfernt ein oder mehrere
-                    Kontexte von einer gegebenen Aktion. <varname>$context</varname> kann ein
-                    einzelner Kontext sein, oder ein Array von Kontexten.
+                    <methodname>removeActionContext($action, $context)</methodname>: entfernt ein
+                    oder mehrere Kontexte von einer gegebenen Aktion. <varname>$context</varname>
+                    kann ein einzelner Kontext sein, oder ein Array von Kontexten.
             </para></listitem>
 
             <listitem><para>
-                    <code>clearActionContexts($action = null)</code>: entfernt alle Kontexte von
-                    einer gegebenen Aktion, oder von allen Aktionen mit Kontexten.
+                    <methodname>clearActionContexts($action = null)</methodname>: entfernt alle
+                    Kontexte von einer gegebenen Aktion, oder von allen Aktionen mit Kontexten.
             </para></listitem>
         </itemizedlist>
     </sect4>
@@ -430,8 +445,8 @@ class FooController extends Zend_Controller_Action
         <title>Kontext Switching initialisieren</title>
 
         <para>
-            Um Kontext Switching zu initialisieren, muß <code>initContext()</code> im Action
-            Controller aufgerufen werden:
+            Um Kontext Switching zu initialisieren, muß <methodname>initContext()</methodname> im
+            Action Controller aufgerufen werden:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -446,9 +461,9 @@ class NewsController extends Zend_Controller_Action
 
         <para>
             In einigen Fällen, will man einen Kontext erzwingen der verwendet werden soll; zum
-            Beispiel wenn man nur den XML Kontext erlauben will wenn Kontext Switching aktiviert
-            ist. Das kann durch die Übergaben des Kontextes zu <code>initContext()</code> getan
-            werden:
+            Beispiel wenn man nur den <acronym>XML</acronym> Kontext erlauben will wenn Kontext
+            Switching aktiviert ist. Das kann durch die Übergaben des Kontextes zu
+            <methodname>initContext()</methodname> getan werden:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -461,16 +476,17 @@ $contextSwitch->initContext('xml');
 
         <para>
             Eine Vielzahl an Methoden kann verwendet werden um das Verhalten des
-            <code>ContextSwitch</code> Helfers zu verändern. Diese sind:
+            <emphasis>ContextSwitch</emphasis> Helfers zu verändern. Diese sind:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>setAutoJsonSerialization($flag)</code>: Standardmäßig serialisieren JSON
-                    Kontexte alle View Variablen in die JSON Notierung und geben diese als Antwort
-                    zurück. Wenn man seine eigene Antwort erstellen will, sollte das ausgeschaltet
-                    werden; das muß vor dem Aufruf von <code>initContext()</code> geschehen.
+                    <methodname>setAutoJsonSerialization($flag)</methodname>: Standardmäßig
+                    serialisieren <acronym>JSON</acronym> Kontexte alle View Variablen in die
+                    <acronym>JSON</acronym> Notierung und geben diese als Antwort zurück. Wenn man
+                    seine eigene Antwort erstellen will, sollte das ausgeschaltet werden; das muß
+                    vor dem Aufruf von <methodname>initContext()</methodname> geschehen.
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -479,13 +495,15 @@ $contextSwitch->initContext();
 ]]></programlisting>
 
                 <para>
-                    Der Wert des Flags erhält man mit <code>getAutoJsonSerialization()</code>.
+                    Der Wert des Flags erhält man mit
+                    <methodname>getAutoJsonSerialization()</methodname>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setSuffix($context, $suffix, $prependViewRendererSuffix)</code>: Mit
+                    <methodname>setSuffix($context, $suffix,
+                        $prependViewRendererSuffix)</methodname>: Mit
                     dieser Methode kann ein anderer Suffix spezifiziert werden der für einen
                     gegebenen Kontext verwendet werden soll. Das dritte Argument wird verwendet um
                     anzuzeigen ob der aktuelle Suffix des ViewRenderers dem neuen Suffix
@@ -500,15 +518,15 @@ $contextSwitch->initContext();
 
             <listitem>
                 <para>
-                    <code>addHeader($context, $header, $content)</code>: Fügt einen Antwort Header
-                    für einen gegebenen Kontext hinzu. <varname>$header</varname> ist der
-                    Headername, und <varname>$content</varname> ist der Wert der an diesen Header
-                    übergeben werden soll.
+                    <methodname>addHeader($context, $header, $content)</methodname>: Fügt einen
+                    Antwort Header für einen gegebenen Kontext hinzu. <varname>$header</varname>
+                    ist der Headername, und <varname>$content</varname> ist der Wert der an diesen
+                    Header übergeben werden soll.
                 </para>
 
                 <para>
-                    Jeder Kontxt kann mehrere Header haben; <code>addHeader()</code> fügt
-                    zusätzliche Header in den Header Stack des Kontextes ein.
+                    Jeder Kontxt kann mehrere Header haben; <methodname>addHeader()</methodname>
+                    fügt zusätzliche Header in den Header Stack des Kontextes ein.
                 </para>
 
                 <para>
@@ -519,137 +537,142 @@ $contextSwitch->initContext();
 
             <listitem>
                 <para>
-                    <code>setHeader($context, $header, $content)</code>: <code>setHeader()</code>
-                    funktioniert wie <code>addHeader()</code>, ausser das sie erlaubt das
+                    <methodname>setHeader($context, $header, $content)</methodname>:
+                    <methodname>setHeader()</methodname> funktioniert wie
+                    <methodname>addHeader()</methodname>, ausser das sie erlaubt das
                     existierende Kontext Header überschrieben werden.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>addHeaders($context, array $headers)</code>: Fügt einen gegebenen Kontext
-                    mehrere Header auf einmal hinzu. Entspricht <code>addHeader()</code>, was
-                    bedeutet das eine Ausnahme geworfen wird wenn der Header bereits existiert.
-                    <varname>$headers</varname> ist ein Array von Header/Kontext Paaren.
+                    <methodname>addHeaders($context, array $headers)</methodname>: Fügt einen
+                    gegebenen Kontext mehrere Header auf einmal hinzu. Entspricht
+                    <methodname>addHeader()</methodname>, was bedeutet das eine Ausnahme geworfen
+                    wird wenn der Header bereits existiert. <varname>$headers</varname> ist ein
+                    Array von Header zu Kontext Paaren.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setHeaders($context, array $headers.)</code>: Wie
-                    <code>addHeaders()</code>, nur das es <code>setHeader()</code> entspricht und
-                    damit das Überschreiben existierender Header erlaubt.
+                    <methodname>setHeaders($context, array $headers.)</methodname>: Wie
+                    <methodname>addHeaders()</methodname>, nur das es
+                    <methodname>setHeader()</methodname> entspricht und damit das Überschreiben
+                    existierender Header erlaubt.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getHeader($context, $header)</code>: Enpfängt den Wert eines Headers für
-                    einen gegebenen Kontext. Gibt null zurück wenn dieser nicht gefunden wird.
+                    <methodname>getHeader($context, $header)</methodname>: Enpfängt den Wert eines
+                    Headers für einen gegebenen Kontext. Gibt null zurück wenn dieser nicht
+                    gefunden wird.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>removeHeader($context, $header)</code>: Entfernt einen einzelnen Header
+                    <methodname>removeHeader($context, $header)</methodname>: Entfernt einen
+                    einzelnen Header für einen gegebenen Kontext.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>clearHeaders($context, $header)</methodname>: Entfernt alle Header
                     für einen gegebenen Kontext.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>clearHeaders($context, $header)</code>: Entfernt alle Header für einen
-                    gegebenen Kontext.
+                    <methodname>setCallback($context, $trigger, $callback)</methodname>: Setzt
+                    einen Callback bei einem gegebenen Trigger für einen gegebenen Kontext. Trigger
+                    können entweder 'init' oder 'post' sein (was zeigt das der Callback entweder
+                    bei der Initialisierung oder der Nachbearbeitung aufgerufen wird).
+                    <varname>$callback</varname> sollte ein gültiger <acronym>PHP</acronym>
+                    Callback sein.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setCallback($context, $trigger, $callback)</code>: Setzt einen Callback
-                    bei einem gegebenen Trigger für einen gegebenen Kontext. Trigger können
-                    entweder 'init' oder 'post' sein (was zeigt das der Callback entweder bei der
-                    Initialisierung oder der Nachbearbeitung aufgerufen wird).
-                    <varname>$callback</varname> sollte ein gültiger PHP Callback sein.
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    <code>setCallbacks($context, array $callbacks)</code>: Setzt mehrere Callbacks
-                    für einen gegebenen Kontext. <varname>$callbacks</varname> sollte ein
-                    Trigger/Callback Paar sein. Aktuell sind die meisten Callbacks die registriert
-                    werden können zwei, einer für Initialisierung und einer für die
+                    <methodname>setCallbacks($context, array $callbacks)</methodname>: Setzt
+                    mehrere Callbacks für einen gegebenen Kontext. <varname>$callbacks</varname>
+                    sollte ein Trigger zu Callback Paar sein. Aktuell sind die meisten Callbacks
+                    die registriert werden können zwei, einer für Initialisierung und einer für die
                     Nachbearbeitung.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getCallback($context, $trigger)</code>: Empfängt einen Callback für einen
-                    gegebenen Trigger in einem gegebenen Kontext.
+                    <methodname>getCallback($context, $trigger)</methodname>: Empfängt einen
+                    Callback für einen gegebenen Trigger in einem gegebenen Kontext.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getCallbacks($context)</code>: Empfängt alle Callbacks für einen gegebenen
-                    Kontext. Gibt ein Array von Trigger/Callback Paaren zurück.
+                    <methodname>getCallbacks($context)</methodname>: Empfängt alle Callbacks für
+                    einen gegebenen Kontext. Gibt ein Array von Trigger zu Callback Paaren zurück.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>removeCallback($context, $trigger)</code>: Entfernt einen Callback für
-                    einen gegebenen Trigger und Kontext.
+                    <methodname>removeCallback($context, $trigger)</methodname>: Entfernt einen
+                    Callback für einen gegebenen Trigger und Kontext.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>clearCallbacks($context)</code>: Entfernt alle Callbacks für einen
-                    gegebenen Kontext.
+                    <methodname>clearCallbacks($context)</methodname>: Entfernt alle Callbacks für
+                    einen gegebenen Kontext.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setContextParam($name)</code>: Setzt den Anfrageparameter der geprüft
-                    werden muß um zu entscheiden ob eine Kontextumschaltung angefragt wurde oder
-                    nicht. Der Wert ist standardmäßig 'format', aber dieser Zugriffspunkt kann
+                    <methodname>setContextParam($name)</methodname>: Setzt den Anfrageparameter der
+                    geprüft werden muß um zu entscheiden ob eine Kontextumschaltung angefragt wurde
+                    oder nicht. Der Wert ist standardmäßig 'format', aber dieser Zugriffspunkt kann
                     verwendet werden um einen alternativen wert zu setzen.
                 </para>
 
                 <para>
-                    <code>getContextParam()</code> kann verwendet werden um den aktuellen Wert zu
-                    erhalten.
+                    <methodname>getContextParam()</methodname> kann verwendet werden um den
+                    aktuellen Wert zu erhalten.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setAutoDisableLayout($flag)</code>: Standardmäßig sind Layouts
-                    ausgeschaltet wenn eine Kontextumschaltung erfolgt; das ist weil Layouts
-                    typischerweise dafür verwendet werden um normale Antworten darzustellen, und
-                    Sie in alternativen Kontexten keine Bedeutung haben. Wenn man trotzdem Layouts
-                    verwenden will (möglicherweise hat man ein Layout für einen neuen Kontext),
-                    kann dieses Verhalten mit der Übergabe eines false Wertes an
-                    <code>setAutoDisableLayout()</code> geändert werden. Das sollte aber
-                    <emphasis>before</emphasis> dem Aufruf von <code>initContext()</code>
-                    geschehen.
+                    <methodname>setAutoDisableLayout($flag)</methodname>: Standardmäßig sind
+                    Layouts ausgeschaltet wenn eine Kontextumschaltung erfolgt; das ist weil
+                    Layouts typischerweise dafür verwendet werden um normale Antworten
+                    darzustellen, und Sie in alternativen Kontexten keine Bedeutung haben. Wenn man
+                    trotzdem Layouts verwenden will (möglicherweise hat man ein Layout für einen
+                    neuen Kontext), kann dieses Verhalten mit der Übergabe eines false Wertes an
+                    <methodname>setAutoDisableLayout()</methodname> geändert werden. Das sollte
+                    aber <emphasis>before</emphasis> dem Aufruf von
+                    <methodname>initContext()</methodname> geschehen.
                 </para>
 
                 <para>
                     Um den Wert dieses Flags zu erhalten, kann der Zugriffspunkt
-                    <code>getAutoDisableLayout()</code> verwendet werden.
+                    <methodname>getAutoDisableLayout()</methodname> verwendet werden.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getCurrentContext()</code> kann verwendet werden um festzustellen welcher
-                    Kontext erkannt wurde, wenn überhaupt. Er gibt null zurück wenn keine
-                    Kontextumschaltung stattgefunden hat, oder wenn er aufgerufen wurde bevor
-                    <code>initContext()</code> stattgefunden hat.
+                    <methodname>getCurrentContext()</methodname> kann verwendet werden um
+                    festzustellen welcher Kontext erkannt wurde, wenn überhaupt. Er gibt null
+                    zurück wenn keine Kontextumschaltung stattgefunden hat, oder wenn er aufgerufen
+                    wurde bevor <methodname>initContext()</methodname> stattgefunden hat.
                 </para>
             </listitem>
         </itemizedlist>
@@ -659,31 +682,34 @@ $contextSwitch->initContext();
         <title>AjaxContext Funktionalität</title>
 
         <para>
-            Der <code>AjaxContext</code> Helfer erweitert <code>ContextSwitch</code>, sodas alle
-            für <code>ContextSwitch</code> gelisteten Funktionalitäten in Ihm vorhanden sind. Es
-            gibt trotzdem ein paar wichtige Änderungen.
+            Der <emphasis>AjaxContext</emphasis> Helfer erweitert
+            <emphasis>ContextSwitch</emphasis>, sodas alle für <emphasis>ContextSwitch</emphasis>
+            gelisteten Funktionalitäten in Ihm vorhanden sind. Es gibt trotzdem ein paar wichtige
+            Änderungen.
         </para>
 
         <para>
             Zuerst, verwendet es eine andere Action Kontroller Eigenschaft
             <varname>$ajaxable</varname> um Kontexte festzustellen. Damit kann man verschiedene
-            Kontexte verwenden für AJAX gegenüber normalen HTTP Anfragen. Die verschiedenen
-            <code>*ActionContext*()</code> Methoden von <code>AjaxContext</code> schreiben in diese
-            Eigenschaft.
+            Kontexte verwenden für <acronym>AJAX</acronym> gegenüber normalen
+            <acronym>HTTP</acronym> Anfragen. Die verschiedenen
+            *<methodname>ActionContext()</methodname>* Methoden von
+            <emphasis>AjaxContext</emphasis> schreiben in diese Eigenschaft.
         </para>
 
         <para>
             Zweitens, wird nur dann getriggert wenn ein XmlHttpRequest stattgefunden hat, was durch
-            die <code>isXmlHttpRequest()</code> Methode den Anfrageobjektes festgestellt wird.
-            Deshalb wird, wenn der Kontextparameter ('format') in der Anfrage übergeben wird, aber
-            die anfrage nicht als XmlHttpRequest gemacht wurde, keine Kontextumschaltung
-            getriggert.
+            die <methodname>isXmlHttpRequest()</methodname> Methode den Anfrageobjektes
+            festgestellt wird. Deshalb wird, wenn der Kontextparameter ('format') in der Anfrage
+            übergeben wird, aber die anfrage nicht als XmlHttpRequest gemacht wurde, keine
+            Kontextumschaltung getriggert.
         </para>
 
         <para>
-            Drittens, fügr der <code>AjaxContext</code> einen zusätzlichen, HTML, Kontext hinzu. In
-            diesem Kontext setzt er den Suffix auf 'ajax.phtml' um diesen Kontext von einer
-            normalen Anfrage zu unterscheiden. Es werden keine zusätzlichen Header zurückgegeben.
+            Drittens, fügt der <emphasis>AjaxContext</emphasis> einen zusätzlichen,
+            <acronym>HTML</acronym>, Kontext hinzu. In diesem Kontext setzt er den Suffix auf
+            '<filename>ajax.phtml</filename>' um diesen Kontext von einer normalen Anfrage zu
+            unterscheiden. Es werden keine zusätzlichen Header zurückgegeben.
         </para>
 
         <example id="zend.controller.actionhelpers.contextswitch.ajaxcontext.example">
@@ -691,9 +717,10 @@ $contextSwitch->initContext();
 
             <para>
                 In dem folgenden Beispiel erlauben wir Anfragen auf die Aktionen 'view', 'form' und
-                'process' auf AJAX Anfragen zu antworten. In den ersten zwei Fällen, 'view' und
-                'form' wird ein HTML Teilstück zurückgegeben mit dem die Seite aktualisiert werden
-                soll; im letzteren wird JSON zurückgegeben.
+                'process' auf <acronym>AJAX</acronym> Anfragen zu antworten. In den ersten zwei
+                Fällen, 'view' und 'form' wird ein <acronym>HTML</acronym> Teilstück zurückgegeben
+                mit dem die Seite aktualisiert werden soll; im letzteren wird
+                <acronym>JSON</acronym> zurückgegeben.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -732,11 +759,14 @@ class CommentController extends Zend_Controller_Action
 ]]></programlisting>
 
             <para>
-                Auf der Seite des Clients, wird die JAX Bibliothe einfach die Endpunkte
-                '/comment/view', '/comment/form', und '/comment/process' anfragen, und den
-                'format' Parameter übergeben: '/comment/view/format/html',
-                '/comment/form/format/html', '/comment/process/format/json'. (Oder der Parameter
-                kann über GET übergeben werden: z.B. , "?format=json".)
+                Auf der Seite des Clients, wird die <acronym>AJAX</acronym> Bibliothek einfach die
+                Endpunkte '<filename>/comment/view</filename>',
+                '<filename>/comment/form</filename>', und '<filename>/comment/process</filename>'
+                anfragen, und den 'format' Parameter übergeben:
+                '<filename>/comment/view/format/html</filename>',
+                '<filename>/comment/form/format/html</filename>',
+                '<filename>/comment/process/format/json</filename>'. (Oder der Parameter
+                kann über den Abfrage String übergeben werden: z.B. , "?format=json".)
             </para>
 
             <para>

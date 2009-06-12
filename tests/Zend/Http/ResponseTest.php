@@ -161,6 +161,7 @@ class Zend_Http_ResponseTest extends PHPUnit_Framework_TestCase
 		$response = Zend_Http_Response::fromString($response_str);
 		
 		$this->assertEquals(strtolower($response_str), strtolower($response->asString()), 'Response convertion to string does not match original string');
+		$this->assertEquals(strtolower($response_str), strtolower((string)$response), 'Response convertion to string does not match original string');
 	}
 	
 	public function testGetHeaders()

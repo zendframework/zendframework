@@ -398,6 +398,16 @@ class Zend_Http_Response
     }
 
     /**
+     * Implements magic __toString()
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->asString();
+    }
+
+    /**
      * A convenience function that returns a text representation of
      * HTTP response codes. Returns 'Unknown' for unknown codes.
      * Returns array of all codes, if $code is not specified.

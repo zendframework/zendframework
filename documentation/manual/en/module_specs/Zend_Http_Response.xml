@@ -161,7 +161,9 @@ if ($response->isError()) {
                 <listitem>
                     <para>
                         <code>string asString($br = "\n")</code>: Get the entire response message as a string.
-                        Lines are broken with the $br parameter (Can be, for example, "&lt;br /&gt;")
+                        Lines are broken with the $br parameter (Can be, for example, "&lt;br /&gt;").
+						You can also use the magic method __toString() when casting the object as a string. It will
+						then proxy to asString()
                     </para>
                 </listitem>
             </itemizedlist>

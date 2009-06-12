@@ -4,13 +4,14 @@
     <title>JSON</title>
 
     <para>
-        JSON responses are rapidly becoming the response of choice when dealing
-        with AJAX requests that expect dataset responses; JSON can be
-        immediately parsed on the client-side, leading to quick execution.
+        <acronym>JSON</acronym> responses are rapidly becoming the response of choice when dealing
+        with <acronym>AJAX</acronym> requests that expect dataset responses;
+        <acronym>JSON</acronym> can be immediately parsed on the client-side, leading to quick
+        execution.
     </para>
 
     <para>
-        The JSON action helper does several things:
+        The <acronym>JSON</acronym> action helper does several things:
     </para>
 
     <itemizedlist>
@@ -21,7 +22,7 @@
         <listitem>
             <para>
                 Optionally, an array of options to pass as the second argument
-                to <classname>Zend_Json::encode()</classname>. This array of options
+                to <methodname>Zend_Json::encode()</methodname>. This array of options
                 allows enabling layouts and encoding using
                 <classname>Zend_Json_Expr</classname>.
             </para>
@@ -36,7 +37,7 @@ $this->_helper->json($data, array('enableJsonExprFinder' => true));
         </para></listitem>
 
         <listitem><para>
-                Sets the 'Content-Type' response header to 'application/json'.
+                Sets the 'Content-Type' response header to '<filename>application/json</filename>'.
         </para></listitem>
 
         <listitem><para>
@@ -47,8 +48,8 @@ $this->_helper->json($data, array('enableJsonExprFinder' => true));
 
     <para>
         Usage is simple: either call it as a method of the helper broker, or
-        call one of the methods <code>encodeJson()</code> or
-        <code>sendJson()</code>:
+        call one of the methods <methodname>encodeJson()</methodname> or
+        <methodname>sendJson()</methodname>:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -73,9 +74,9 @@ class FooController extends Zend_Controller_Action
         <title>Keeping Layouts</title>
 
         <para>
-            If you have a separate layout for JSON responses -- perhaps to wrap
-            the JSON response in some sort of context -- each method in the JSON
-            helper accepts a second, optional argument: a flag to enable or
+            If you have a separate layout for <acronym>JSON</acronym> responses -- perhaps to wrap
+            the <acronym>JSON</acronym> response in some sort of context -- each method in the
+            <acronym>JSON</acronym> helper accepts a second, optional argument: a flag to enable or
             disable layouts. Passing a boolean <constant>TRUE</constant> value will keep
             layouts enabled:
         </para>
@@ -99,9 +100,9 @@ $this->_helper->json($data, array('keepLayouts' => true);
         <title>Enabling encoding using Zend_Json_Expr</title>
 
         <para>
-            <classname>Zend_Json::encode()</classname> allows the encoding of native JSON
-            expressions using <code>Zend_Json_Expr</code> objects. This option
-            is disabled by default. To enable this option, pass a boolean
+            <methodname>Zend_Json::encode()</methodname> allows the encoding of native
+            <acronym>JSON</acronym> expressions using <classname>Zend_Json_Expr</classname>
+            objects. This option is disabled by default. To enable this option, pass a boolean
             <constant>TRUE</constant> value to the <code>enableJsonExprFinder</code>
             option:
         </para>
@@ -114,7 +115,7 @@ $this->_helper->json($data, array('enableJsonExprFinder' => true);
             If you desire to do this, you <emphasis>must</emphasis> pass an
             array as the second argument. This also allows you to combine other
             options, such as the <code>keepLayouts</code> option. All such
-            options are then passed to <classname>Zend_Json::encode()</classname>.
+            options are then passed to <methodname>Zend_Json::encode()</methodname>.
         </para>
 
         <programlisting language="php"><![CDATA[

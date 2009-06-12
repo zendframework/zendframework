@@ -197,7 +197,7 @@ class Zend_Loader_Autoloader
     /**
      * Register a namespace to autoload
      * 
-     * @param  string $namespace 
+     * @param  string|array $namespace 
      * @return Zend_Loader_Autoloader
      */
     public function registerNamespace($namespace)
@@ -219,7 +219,7 @@ class Zend_Loader_Autoloader
     /**
      * Unload a registered autoload namespace
      * 
-     * @param  string $namespace 
+     * @param  string|array $namespace 
      * @return Zend_Loader_Autoloader
      */
     public function unregisterNamespace($namespace)

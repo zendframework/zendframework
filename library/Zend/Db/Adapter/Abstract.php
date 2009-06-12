@@ -1064,7 +1064,7 @@ abstract class Zend_Db_Adapter_Abstract
      * can invoke it.
      *
      * @param string $key
-     * @returns string
+     * @return string
      */
     public function foldCase($key)
     {

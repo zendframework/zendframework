@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15827 -->
+<!-- EN-Revision: 15978 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.config.introduction">
     <title>Einleitung</title>
@@ -21,9 +21,10 @@
             <link linkend="zend.config.adapters.ini"><classname>Zend_Config_Ini</classname></link>
             oder <link
             linkend="zend.config.adapters.xml"><classname>Zend_Config_Xml</classname></link>
-            verwenden. Wenn die Konfigurations-Daten aber als PHP-Array vorliegen, können diese auch
-            einfach an den <classname>Zend_Config</classname>-Konstruktor übergeben werden, um dann
-            über die objektorientierte Schnittstelle auf sie zugreifen zu können:
+            verwenden. Wenn die Konfigurations-Daten aber als <acronym>PHP</acronym> Array
+            vorliegen, können diese auch einfach an den <classname>Zend_Config</classname>
+            Constructor übergeben werden, um dann über die objektorientierte Schnittstelle auf sie
+            zugreifen zu können:
         </para>
         <programlisting language="php"><![CDATA[
 // Gegeben ist ein Array mit Konfigurations-Daten
@@ -71,8 +72,8 @@ $host = $config->database->get('host', 'localhost');
     <example id="zend.config.introduction.example.file.php">
         <title>Zend_Config mit einer PHP Konfigurationsdatei verwenden</title>
         <para>
-            Es ist oft gewünscht eine reine PHP-basierende Konfigurationsdatei zu verwenden. Der
-            folgende Code zeigt wie das ganz einfach erreicht werden kann:
+            Es ist oft gewünscht eine reine <acronym>PHP</acronym> basierende Konfigurationsdatei
+            zu verwenden. Der folgende Code zeigt wie das ganz einfach erreicht werden kann:
         </para>
         <programlisting language="php"><![CDATA[
 // config.php

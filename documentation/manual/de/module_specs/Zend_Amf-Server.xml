@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15959 -->
+<!-- EN-Revision: 15997 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.amf.server">
     <title>Zend_Amf_Server</title>
@@ -166,20 +166,22 @@ class World
             verwenden soll um den Endpunkt des RemoteObjects zu finden. Um das zu tun muß das
             Fenster der Projekteigenschaften nochmals durch einen rechts-klick auf das
             Projektverzeichnis vom Navigator aus geöffnet und Eigenschaften ausgewählt werden. Vom
-            Eigenschaften-Popup muß 'Flex Compiler' aufgewählt und der String: -services
-            "services-config.xml" hinzugefügt werden. Auf Apply drücken, anschließend auf OK um die
-            Option zu aktualisieren. Was man jetzt getan hat, ist dem Flex Compiler zu sagen das er
-            in der Datei <filename>services-config.xml</filename> nach Laufzeitvariablen schauen
-            soll die von der RemotingObject Klasse verwendet werden.
+            Eigenschaften-Popup muß 'Flex Compiler' aufgewählt und der String:
+            <command>-services "services-config.xml"</command> hinzugefügt werden. Auf Apply
+            drücken, anschließend auf OK um die Option zu aktualisieren. Was man jetzt getan hat,
+            ist dem Flex Compiler zu sagen das er in der Datei
+            <filename>services-config.xml</filename> nach Laufzeitvariablen schauen soll die von
+            der RemotingObject Klasse verwendet werden.
         </para>
 
         <para>
             Jetzt müssen wir Flex mitteilen welche Konfigurationsdateien der Services für die
             Verbindung zu unseren entfernten Methoden zu verwenden sind. Aus diesem Grund muß eine
-            neue 'services-config.xml' Datei im Flexprojekt src Verzeichnis erstellt werden. Um das
-            zu tun, muß man auf den Projektfolder rechts klicken und 'new' 'File' auswählen was
-            ein neues Fenster öffnet. Anschließend das Projektverzeichnis auswählen und dann die
-            Datei 'services-config.xml' benennen und auf beenden drücken.
+            neue '<filename>services-config.xml</filename>' Datei im Flexprojekt src Verzeichnis
+            erstellt werden. Um das zu tun, muß man auf den Projektfolder rechts klicken und 'new'
+            'File' auswählen was ein neues Fenster öffnet. Anschließend das Projektverzeichnis
+            auswählen und dann die Datei '<filename>services-config.xml</filename>' benennen und
+            auf Beenden drücken.
         </para>
 
         <para>

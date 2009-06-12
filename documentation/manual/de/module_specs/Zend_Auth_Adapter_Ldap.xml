@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15892 -->
+<!-- EN-Revision: 15997 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.auth.adapter.ldap">
 
@@ -247,7 +247,7 @@ Array
                 z.B. eine Domainkomponente wie <filename>alice@foo.net</filename> oder
                 <filename>FOO\alice</filename>). Wenn eine Domain vorhanden ist, aber mit keiner
                 der Domainnamen der Server (<filename>foo.net</filename> oder
-                <emphasis>FOO</emphasis>) übereinstimmt, wird eine spezielle Ausnahme geworfen und
+                <acronym>FOO</acronym>) übereinstimmt, wird eine spezielle Ausnahme geworfen und
                 durch <classname>Zend_Auth_Adapter_Ldap</classname> gefangen, was bewirkt das der
                 Server ignoriert wird und der nächste, in den Serveroptionen gesetzte Server,
                 ausgewählt wird. Wenn eine Domain <emphasis>doch</emphasis> passt, oder der
@@ -436,13 +436,13 @@ Array
                     <row>
                         <entry><emphasis>accountDomainName</emphasis></entry>
                         <entry>
-                            Der FDQN Domainname für welchen der Ziel LDAP Server eine Authorität ist
-                            (z.B., <filename>example.com</filename>). Diese Option wird verwendet um
-                            Namen zu kanonisieren sodas der Benutzername der vom Benutzer angeboten
-                            wird, wie es für das Binden notwendig ist, konvertiert werden kann. Er
-                            wird auch verwendet um festzustellen ob der Server eine Authorität für
-                            den angegebenen Benutzernamen ist (z.B., wenn
-                            <emphasis>accountDomainName</emphasis>
+                            Der <acronym>FQDN</acronym> Domainname für welchen der Ziel LDAP Server
+                            eine Authorität ist (z.B., <filename>example.com</filename>). Diese
+                            Option wird verwendet um Namen zu kanonisieren sodas der Benutzername
+                            der vom Benutzer angeboten wird, wie es für das Binden notwendig ist,
+                            konvertiert werden kann. Er wird auch verwendet um festzustellen ob der
+                            Server eine Authorität für den angegebenen Benutzernamen ist (z.B.,
+                            wenn <emphasis>accountDomainName</emphasis>
                             <emphasis>foo.net</emphasis> ist und der angegebene Benutzer
                             <emphasis>bob@bar.net</emphasis>, wird der Server nicht abgefragt, und
                             das Ergebnis wird ein Fehler sein). Diese Option wird nicht benötigt,
@@ -456,9 +456,9 @@ Array
                     <row>
                         <entry><emphasis>accountDomainNameShort</emphasis></entry>
                         <entry>
-                            Die 'short' Domain für die der Ziel LDAP Server eine Authorität ist
-                            (z.B., <emphasis>FOO</emphasis>). Es ist z ubeachten das es ein 1:1
-                            Mapping zwischen <emphasis>accountDomainName</emphasis> und
+                            Die 'short' Domain für die der Ziel <acronym>LDAP</acronym> Server eine
+                            Authorität ist (z.B., <acronym>FOO</acronym>). Es ist z ubeachten das
+                            es ein 1:1 Mapping zwischen <emphasis>accountDomainName</emphasis> und
                             <emphasis>accountDomainNameShort</emphasis> existiert. Diese
                             Option sollte verwendet werden um den NetBIOS Domainnamen für Windows
                             Netzwerke zu spezifizieren, kann aber auch von nicht-AD Servern
@@ -466,7 +466,7 @@ Array
                             Serveroptionen bei dem Schrägstrich Stil
                             <emphasis>accountCanonicalForm</emphasis>). Diese Option wird nicht
                             benötigt, aber wenn Sie nicht angegeben wird, werden Benutzernamen im
-                            Schrägstrich Stil (z.B. <emphasis>FOO\alice</emphasis>) nicht
+                            Schrägstrich Stil (z.B. <filename>FOO\alice</filename>) nicht
                             unterstützt.
                         </entry>
                     </row>
@@ -509,7 +509,7 @@ Array
                 Servers nicht überprüfen kann. Angenommen die <acronym>PHP</acronym>
                 <acronym>LDAP</acronym> Erweiterung ist ultimativ verlinkt mit der OpenLDAP Client
                 Bibliothek, muß man um dieses Problem zu lösen
-                "<emphasis>TLS_REQCERT niemals</emphasis>" im OpenLDAP Client
+                "<command>TLS_REQCERT never</command>" im OpenLDAP Client
                 <filename>ldap.conf</filename> setzen (und den Web Server restarten) um der
                 OpenLDAP Client Bibliothek anzuzeigen das man dem Server vertraut. Alternativ,
                 wenn man annimmt das der Server gehackt werden könnte kann das Basiszertifikat des
@@ -590,7 +590,8 @@ Array
                 Für <acronym>ADS</acronym> sind die folgenden Optionen beachtenswert:
             </para>
 
-            <table id="zend.auth.adapter.ldap.options-common-server-specific.active-directory.table">
+            <table
+                id="zend.auth.adapter.ldap.options-common-server-specific.active-directory.table">
                 <title>Optionen für Active Directory</title>
                 <tgroup cols="2">
                     <thead>
@@ -782,7 +783,7 @@ Array
                                 <emphasis>accountDomainName</emphasis>
                                 <emphasis>foo.net</emphasis> ist, wäre ein guter
                                 <emphasis>accountDomainNameShort</emphasis> Wert
-                                <emphasis>FOO</emphasis>).
+                                <acronym>FOO</acronym>).
                             </entry>
                         </row>
                     </tbody>

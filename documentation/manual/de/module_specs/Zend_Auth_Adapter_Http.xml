@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15867 -->
+<!-- EN-Revision: 15997 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.auth.adapter.http">
 
@@ -139,9 +139,10 @@
                             <emphasis>'digest'</emphasis> enthält
                         </entry>
                         <entry>
-                            Leerzeichen-getrennte Liste von URIs für die die gleichen
-                            Authentifizierungs Informationen gültig sind. Die URIs müssen nicht
-                            alle auf den gleichen Server zeigen.
+                            Leerzeichen-getrennte Liste von <acronym>URI</acronym>s für die die
+                            gleichen Authentifizierungs Informationen gültig sind. Die
+                            <acronym>URI</acronym>s müssen nicht alle auf den gleichen Server
+                            zeigen.
                         </entry>
                     </row>
                     <row>

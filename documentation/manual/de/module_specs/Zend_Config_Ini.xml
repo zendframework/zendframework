@@ -1,23 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15848 -->
+<!-- EN-Revision: 15981 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.config.adapters.ini">
     <title>Zend_Config_Ini</title>
+
     <para>
         <classname>Zend_Config_Ini</classname> ermöglicht es Entwicklern, Konfigurations-Daten in
-        einem vertrauten INI-Format zu speichern und sie mit einer Syntax auszulesen, die dem
-        Zugriff auf die Eigenschaften verschachtelter Objekte entspricht. Das verwendete
-        INI-Format bietet einerseits die Möglichkeit, Konfigurations-Daten hierarchisch abzulegen
-        und andererseits Vererbung zwischen Sektionen zu spezifizieren.
-        Konfigurations-Daten-Hierarchien werden durch das Trennen der Schlüsselwörter durch einen
-        Punkt (<emphasis>.</emphasis>). Eine Sektion kann eine andere Sektion erweitern oder
-        beerben indem man nach dem Sektionsname einen Doppelpunkt (<emphasis>:</emphasis>) notiert,
-        gefolgt vom Namen der zu beerbenden Sektion.
+        einem vertrauten <acronym>INI</acronym> Format zu speichern und sie mit einer Syntax
+        auszulesen, die dem Zugriff auf die Eigenschaften verschachtelter Objekte entspricht. Das
+        verwendete <acronym>INI</acronym> Format bietet einerseits die Möglichkeit, Konfigurations
+        Daten hierarchisch abzulegen und andererseits Vererbung zwischen Sektionen zu
+        spezifizieren. Konfigurations-Daten-Hierarchien werden durch das Trennen der
+        Schlüsselwörter durch einen Punkt (<emphasis>.</emphasis>). Eine Sektion kann eine andere
+        Sektion erweitern oder beerben indem man nach dem Sektionsname einen Doppelpunkt
+        (<emphasis>:</emphasis>) notiert, gefolgt vom Namen der zu beerbenden Sektion.
     </para>
+
     <note>
         <title>Die Ini Datei parsen</title>
+
         <para>
-            <classname>Zend_Config_Ini</classname> verwendet die PHP-Funktion <ulink
+            <classname>Zend_Config_Ini</classname> verwendet die <acronym>PHP</acronym> Funktion <ulink
                 url="http://php.net/parse_ini_file"><methodname>parse_ini_file()</methodname></ulink>.
             Deren Dokumentation klärt über spezielle Verhaltensweisen auf, die sich auch auf
             <classname>Zend_Config_Ini</classname> auswirken, z. B. wie die besonderen Werte
@@ -25,35 +28,42 @@
             "<constant>NULL</constant>" gehandhabt werden.
         </para>
     </note>
+
     <note>
         <title>Schlüssel Trenner</title>
+
         <para>
             Standardmäßig ist das Schlüssel Trennzeichen der Punkt (<emphasis>.</emphasis>). Dies
             kann geändert werden, indem der <varname>$options</varname> Schlüssel
             <emphasis>'nestSeparator'</emphasis> geändert wird, wenn das
             <classname>Zend_Config_Ini</classname> Objekt instanziert wird.
             Zum Beispiel:
-            <programlisting language="php"><![CDATA[
+        </para>
+
+        <programlisting language="php"><![CDATA[
 $options['nestSeparator'] = ':';
 $config = new Zend_Config_Ini('/path/to/config.ini',
                               'staging',
                               $options);
 ]]></programlisting>
-        </para>
     </note>
+
     <example id="zend.config.adapters.ini.example.using">
         <title>Zend_Config_Ini benutzen</title>
+
         <para>
             Dieses Beispiel zeigt die grundlegende Nutzung von
-            <classname>Zend_Config_Ini</classname> um Konfigurations-Daten aus einem XML-File zu
-            laden. In diesem Beispiel gibt es Konfigurations-Daten für ein Produktiv- und ein
-            Staging-System. Da sich die Daten für das Staging-System nur unwesentlich von denen für
-            das Produktiv-System unterscheiden, erbt das Staging-System vom Produktiv-System. In
-            diesem Fall ist die Entscheidung darüber, welche Sektion von welcher erben soll,
-            willkürlich und es könnte auch anders herum gemacht werden. In komplexeren Fällen ist
-            das möglicherweise nicht der Fall. Nehmen wir also an, dass sich die folgenden
-            Konfigurations-Daten in der Datei <filename>/path/to/config.ini</filename> befinden:
+            <classname>Zend_Config_Ini</classname> um Konfigurations-Daten aus einer
+            <acronym>INI</acronym> Datei zu laden. In diesem Beispiel gibt es Konfigurations-Daten
+            für ein Produktiv- und ein Staging-System. Da sich die Daten für das Staging-System nur
+            unwesentlich von denen für das Produktiv-System unterscheiden, erbt das Staging-System
+            vom Produktiv-System. In diesem Fall ist die Entscheidung darüber, welche Sektion von
+            welcher erben soll, willkürlich und es könnte auch anders herum gemacht werden. In
+            komplexeren Fällen ist das möglicherweise nicht der Fall. Nehmen wir also an, dass sich
+            die folgenden Konfigurations-Daten in der Datei
+            <filename>/path/to/config.ini</filename> befinden:
         </para>
+
         <programlisting language="ini"><![CDATA[
 ; Konfigurations-Daten für die Produktiv-Site
 [production]
@@ -71,11 +81,14 @@ database.params.host     = dev.example.com
 database.params.username = devuser
 database.params.password = devsecret
 ]]></programlisting>
+
         <para>
             Nehmen wir weiterhin an, dass der Anwendungs-Entwickler die Staging-Konfiguration aus
-            diesem INI-File benötigt. Es ist ein Leichtes, diese Daten zu laden, es muss nur das
-            INI-File und die Staging-Sektion spezifiziert werden:
+            dieser <acronym>INI</acronym> Datei benötigt. Es ist ein Leichtes, diese Daten zu laden,
+            es muss nur die <acronym>INI</acronym> Datei und die Staging-Sektion spezifiziert
+            werden:
         </para>
+
         <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Ini('/path/to/config.ini', 'staging');
 
@@ -86,6 +99,7 @@ echo $config->database->params->dbname; // Ausgabe "dbname"
     <note>
     <table id="zend.config.adapters.ini.table">
         <title>Zend_Config_Ini Kontruktor Parameter</title>
+
         <tgroup cols="2">
             <thead>
                   <row>
@@ -96,7 +110,7 @@ echo $config->database->params->dbname; // Ausgabe "dbname"
             <tbody>
                 <row>
                     <entry><varname>$filename</varname></entry>
-                    <entry>The INI Datei die geladen wird.</entry>
+                    <entry>Die <acronym>INI</acronym> Datei die geladen wird.</entry>
                 </row>
                 <row>
                     <entry><varname>$section</varname></entry>

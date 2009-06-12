@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15827 -->
+<!-- EN-Revision: 15998 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.config.adapters.xml">
     <title>Zend_Config_Xml</title>
     <para>
         <classname>Zend_Config_Xml</classname> ermöglicht es Entwicklern, Konfigurations-Daten in
-        einfachen XML-Dateien zu speichern und sie mit einer Syntax auszulesen, die dem Zugriff auf
-        die Eigenschaften verschachtelter Objekte entspricht. Der Name des Root-Elementes der
-        XML-Datei oder des Strings ist unwichtig und kann beliebig gewählt werden. Die erste Ebene
-        der XML-Struktur stellt die Konfigurationsdaten-Sektionen dar. Hirarchische Strukturen
-        können im XLM-Format durch Verschachteln von XML-Elementen unterhalb der Sektions-Ebene
-        umgesetzt werden. Der Inhalt eines XML-Blatt-Elementes (Leaf) ist der Wert eines
-        Konfigurations-Eintrages. Die Sektions-Vererbung wird durch ein spezielles Attribut namens
-        <emphasis>extends</emphasis> unterstützt, der Wert des Attributs entspricht dabei dem Namen
-        der Sektion, von der Daten geerbt werden sollen.
+        einfachen <acronym>XML</acronym> Dateien zu speichern und sie mit einer Syntax auszulesen,
+        die dem Zugriff auf die Eigenschaften verschachtelter Objekte entspricht. Der Name des
+        Root-Elementes der <acronym>XML</acronym> Datei oder des Strings ist unwichtig und kann
+        beliebig gewählt werden. Die erste Ebene der <acronym>XML</acronym> Struktur stellt die
+        Konfigurationsdaten-Sektionen dar. Hirarchische Strukturen können im <acronym>XML</acronym>
+        Format durch Verschachteln von <acronym>XML</acronym> Elementen unterhalb der
+        Sektions-Ebene umgesetzt werden. Der Inhalt eines <acronym>XML</acronym> Blatt-Elementes
+        (Leaf) ist der Wert eines Konfigurations-Eintrages. Die Sektions-Vererbung wird durch ein
+        spezielles Attribut namens <emphasis>extends</emphasis> unterstützt, der Wert des Attributs
+        entspricht dabei dem Namen der Sektion, von der Daten geerbt werden sollen.
     </para>
     <note>
         <title>Rückgabe Typen</title>
@@ -27,14 +28,15 @@
         <title>Zend_Config_Xml benutzen</title>
         <para>
             Dieses Beispiel zeigt die grundlegende Nutzung von
-            <classname>Zend_Config_Xml</classname> um Konfigurations-Daten aus einem XML-File zu
-            laden. In diesem Beispiel gibt es Konfigurations-Daten für ein Produktiv- und ein
-            Staging-System. Da sich die Daten für das Staging-System nur unwesentlich von denen für
-            das Produktiv-System unterscheiden, erbt das Staging-System vom Produktiv-System. In
-            diesem Fall ist die Entscheidung darüber, welche Sektion von welcher erben soll,
-            willkürlich und es könnte auch anders herum gemacht werden. In komplexeren Fällen ist
-            das möglicherweise nicht der Fall. Nehmen wir also an, dass sich die folgenden
-            Konfigurations-Daten in der Datei <filename>/path/to/config.xml</filename> befinden:
+            <classname>Zend_Config_Xml</classname> um Konfigurations-Daten aus einer
+            <acronym>XML</acronym> Datei zu laden. In diesem Beispiel gibt es Konfigurations-Daten
+            für ein Produktiv- und ein Staging-System. Da sich die Daten für das Staging-System nur
+            unwesentlich von denen für das Produktiv-System unterscheiden, erbt das Staging-System
+            vom Produktiv-System. In diesem Fall ist die Entscheidung darüber, welche Sektion von
+            welcher erben soll, willkürlich und es könnte auch anders herum gemacht werden. In
+            komplexeren Fällen ist das möglicherweise nicht der Fall. Nehmen wir also an, dass sich
+            die folgenden Konfigurations-Daten in der Datei
+            <filename>/path/to/config.xml</filename> befinden:
         </para>
         <programlisting language="xml"><![CDATA[
 <?xml version="1.0"?>
@@ -64,8 +66,9 @@
 ]]></programlisting>
         <para>
             Nehmen wir weiterhin an, dass der Anwendungs-Entwickler die Staging-Konfiguration aus
-            diesem XML-File benötigt. Es ist ein Leichtes, diese Daten zu laden, es muss nur das
-            XML-File und die Staging-Sektion spezifiziert werden:
+            dieser <acronym>XML</acronym> Datei benötigt. Es ist ein Leichtes, diese Daten zu
+            laden, es muss nur die <acronym>XML</acronym> Datei und die Staging-Sektion
+            spezifiziert werden:
         </para>
         <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Xml('/path/to/config.xml', 'staging');
@@ -90,12 +93,14 @@ echo $config->database->params->dbname; // ausgabe "dbname"
 <configdata>
     <production webhost="www.example.com">
         <database adapter="pdo_mysql">
-            <params host="db.example.com" username="dbuser" password="secret" dbname="dbname"/>
+            <params host="db.example.com" username="dbuser" password="secret"
+                    dbname="dbname"/>
         </database>
     </production>
     <staging extends="production">
         <database>
-            <params host="dev.example.com" username="devuser" password="devsecret"/>
+            <params host="dev.example.com" username="devuser"
+                    password="devsecret"/>
         </database>
     </staging>
 </configdata>
@@ -135,9 +140,10 @@ echo $config->database->params->dbname; // ausgabe "dbname"
     <note>
         <title>XML Strings</title>
         <para>
-            <classname>Zend_Config_Xml</classname> ist dazu in der Lage XML Strings direkt zu laden,
-            wie z.B. deren Empfang von einer Datenbank. Der String wird als erster Parameter an den
-            Konstruktor übergeben und muß mit den Zeichen <emphasis>'&lt;?xml'</emphasis> beginnen:
+            <classname>Zend_Config_Xml</classname> ist dazu in der Lage <acronym>XML</acronym>
+            Strings direkt zu laden, wie z.B. deren Empfang von einer Datenbank. Der String wird
+            als erster Parameter an den Konstruktor übergeben und muß mit den Zeichen
+            <emphasis>'&lt;?xml'</emphasis> beginnen:
         </para>
         <programlisting language="xml"><![CDATA[
 $string = <<<EOT

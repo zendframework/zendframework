@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15827 -->
+<!-- EN-Revision: 15998 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.config.writer.introduction">
     <title>Zend_Config_Writer</title>
@@ -91,8 +91,8 @@ $writer = new Zend_Config_Writer_Xml();
 $writer->write('config.xml', $config);
 ]]></programlisting>
         <para>
-            Das erstellt eine XML Config Datei mit den Sektionen production und staging, wobei
-            staging production erweitert.
+            Das erstellt eine <acronym>XML</acronym> Config Datei mit den Sektionen production und
+            staging, wobei staging production erweitert.
         </para>
     </example>
 

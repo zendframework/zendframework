@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15976 -->
+<!-- EN-Revision: 15998 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.codegenerator.introduction">
     <title>Einführung</title>
@@ -85,8 +85,9 @@ class World
         </para>
 
         <para>
-            Als Beispiel nehmen wir an das das obige in der Datei "World.php" abgespeichert wurde,
-            und wir diese bereits inkludiert haben. Wir könnten dann das folgende tun:
+            Als Beispiel nehmen wir an das das obige in der Datei "<filename>World.php</filename>"
+            abgespeichert wurde, und wir diese bereits inkludiert haben. Wir könnten dann das
+            folgende tun:
         </para>
 
         <programlisting language="php"><![CDATA[

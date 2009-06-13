@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15848 -->
+<!-- EN-Revision: 15999 -->
 <sect1 id="zend.console.getopt.configuration">
     <title>Zend_Console_Getopt の設定</title>
 
@@ -9,8 +9,8 @@
         <para>
             <classname>Zend_Console_Getopt</classname> のコンストラクタで指定するもの以外にも、
             追加でオプションの規則を指定することができます。その際には
-            <code>addRules()</code> メソッドを使用します。
-            <code>addRules()</code> に渡す引数は、コンストラクタの最初の引数と同じです。
+            <methodname>addRules()</methodname> メソッドを使用します。
+            <methodname>addRules()</methodname> に渡す引数は、コンストラクタの最初の引数と同じです。
             短い形式のオプション指定を表す文字列、
             あるいは長い形式のオプション指定を表す連想配列となります。
             オプションを指定する構文の詳細は、
@@ -41,8 +41,8 @@ $opts->addRules(
         <title>ヘルプメッセージの追加</title>
         <para>
             長い形式のオプション規則を宣言する際に指定するヘルプ文字列に加え、
-            <code>setHelp()</code> メソッドでもヘルプ文字列を規則と関連付けることができます。
-            <code>setHelp()</code> メソッドの引数は連想配列で、
+            <methodname>setHelp()</methodname> メソッドでもヘルプ文字列を規則と関連付けることができます。
+            <methodname>setHelp()</methodname> メソッドの引数は連想配列で、
             キーがフラグ名、値が対応するヘルプ文字列となります。
         </para>
         <example id="zend.console.getopt.configuration.addhelp.example">
@@ -64,14 +64,14 @@ $opts->setHelp(
         </para>
         <para>
             オプションを短い構文で宣言した場合、ヘルプ文字列を設定するには
-            <code>setHelp()</code> メソッドが唯一の手段となります。
+            <methodname>setHelp()</methodname> メソッドが唯一の手段となります。
         </para>
     </sect2>
 
     <sect2 id="zend.console.getopt.configuration.addaliases">
         <title>オプションのエイリアスの追加</title>
         <para>
-            オプションのエイリアスを宣言するには <code>setAliases</code>
+            オプションのエイリアスを宣言するには <methodname>setAliases</methodname>
             メソッドを使用します。引数は連想配列で、
             先ほど宣言したフラグがキー、そしてそのフラグのエイリアスが値となります。
             ここで指定したエイリアスが、既存のエイリアスにマージされます。
@@ -103,7 +103,7 @@ $opts->setAliases(
         </para>
         <para>
             オプションを短い構文で宣言した場合、エイリアスを定義するには
-            <code>setAliases()</code> メソッドが唯一の手段となります。
+            <methodname>setAliases()</methodname> メソッドが唯一の手段となります。
         </para>
     </sect2>
 
@@ -115,12 +115,12 @@ $opts->setAliases(
             コマンドライン引数をパースします。
             コンストラクタの二番目の引数として、引数を含む別の配列を指定することもできます。
             さらに、もっと別の引数を追加するには
-            <code>addArguments()</code> メソッドを使用し、
-            既存の引数配列を置き換えるには <code>setArguments()</code>
+            <methodname>addArguments()</methodname> メソッドを使用し、
+            既存の引数配列を置き換えるには <methodname>setArguments()</methodname>
             メソッドを使用します。どちらの場合についても、
             これらのメソッドのパラメータは単純な文字列の配列となります。
-            <code>addArguments()</code> は現在の引数にその配列を追加し、
-            <code>setArguments()</code> は現在の引数をその配列で置き換えます。
+            <methodname>addArguments()</methodname> は現在の引数にその配列を追加し、
+            <methodname>setArguments()</methodname> は現在の引数をその配列で置き換えます。
         </para>
         <example id="zend.console.getopt.configuration.addargs.example">
             <title>addArguments() および setArguments() の使用法</title>
@@ -143,10 +143,10 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
             <classname>Zend_Console_Getopt</classname> コンストラクタの
             三番目の引数は、設定オプションの配列です。
             これは、返り値となるオブジェクトのインスタンスの挙動を設定するものです。
-            設定オプションを指定するために <code>setOptions()</code>
+            設定オプションを指定するために <methodname>setOptions()</methodname>
             メソッドを指定することもできます。あるいは、
             オプションを個別に設定するには
-            <code>setOption()</code> メソッドを使用します。
+            <methodname>setOption()</methodname> メソッドを使用します。
         </para>
         <note>
             <title>"オプション" という用語について</title>
@@ -168,7 +168,7 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
         <itemizedlist>
             <listitem>
                 <para>
-                    <classname>Zend_Console_Getopt::CONFIG_DASHDASH</classname> ("dashDash")
+                    <constant>Zend_Console_Getopt::CONFIG_DASHDASH</constant> ("dashDash")
                     を true にすると、フラグの終了を表す特殊フラグ "<code>--</code>"
                     を有効にします。ダブルダッシュの後に続くコマンドライン引数は、
                     たとえダッシュで始まっていてもオプションとはみなされません。
@@ -177,7 +177,7 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
             </listitem>
             <listitem>
                 <para>
-                    <classname>Zend_Console_Getopt::CONFIG_IGNORECASE</classname> ("ignoreCase")
+                    <constant>Zend_Console_Getopt::CONFIG_IGNORECASE</constant> ("ignoreCase")
                     を true にすると、大文字小文字が違うだけのフラグをお互いエイリアスとして扱います。
                     つまり、"<code>-a</code>" と
                     "<code>-A</code>" は同じフラグとみなされます。
@@ -186,16 +186,16 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
             </listitem>
             <listitem>
                 <para>
-                    <classname>Zend_Console_Getopt::CONFIG_RULEMODE</classname>
-                    ("ruleMode") には <classname>Zend_Console_Getopt::MODE_ZEND</classname>
-                    ("zend") あるいは <classname>Zend_Console_Getopt::MODE_GNU</classname>
+                    <constant>Zend_Console_Getopt::CONFIG_RULEMODE</constant>
+                    ("ruleMode") には <constant>Zend_Console_Getopt::MODE_ZEND</constant>
+                    ("zend") あるいは <constant>Zend_Console_Getopt::MODE_GNU</constant>
                     ("gnu")  のいずれかを指定します。
                     独自の構文を使用するためにクラスを拡張する場合を除き、
                     このオプションを使用する必要はありません。
                     <classname>Zend_Console_Getopt</classname>
                     でサポートされている二つのモードは明確です。
-                    文字列を指定した場合は <code>MODE_GNU</code>、
-                    それ以外の場合は <code>MODE_ZEND</code> とみなします。
+                    文字列を指定した場合は <constant>MODE_GNU</constant>、
+                    それ以外の場合は <constant>MODE_ZEND</constant> とみなします。
                     もしクラスを拡張して別の構文形式を追加した場合は、
                     そのモードをこのオプションで指定する必要があります。
                 </para>
@@ -205,7 +205,7 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
             将来は、さらに多くの設定オプションがこのクラスに追加される予定です。
         </para>
         <para>
-            <code>setOption()</code>
+            <methodname>setOption()</methodname>
             メソッドに渡す引数は、設定オプション名とその値のふたつです。
         </para>
         <example id="zend.console.getopt.configuration.config.example.setoption">
@@ -216,7 +216,7 @@ $opts->setOption('ignoreCase', true);
 ]]></programlisting>
         </example>
         <para>
-            <code>setOptions()</code> メソッドに渡す引数は連想配列です。
+            <methodname>setOptions()</methodname> メソッドに渡す引数は連想配列です。
             そのキーが設定オプション名、そして値として設定値を指定します。
             これは、クラスのコンストラクタで使用するフォーマットでもあります。
             指定した設定項目が既存の設定にマージされるので、

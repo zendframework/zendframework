@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15850 -->
+<!-- EN-Revision: 16004 -->
 <sect3 id="zend.controller.actionhelpers.autocomplete">
     <title>AutoComplete</title>
 
     <para>
-        多くの AJAX 用 javascript ライブラリでは、
+        多くの <acronym>AJAX</acronym> 用 javascript ライブラリでは、
         オートコンプリート機能を提供しています。
         これは、ユーザがタイプした内容にマッチする可能性のある候補の一覧を表示するものです。
-        <code>AutoComplete</code> ヘルパーは、
+        <emphasis>AutoComplete</emphasis> ヘルパーは、
         このような場合に使用できるレスポンスを返すためのものです。
     </para>
 
     <para>
         オートコンプリート機能の実装方法は JS ライブラリによって異なるので、
-        <code>AutoComplete</code> では多くのライブラリで使用する共通機能を抽象化しています。
+        <emphasis>AutoComplete</emphasis> では多くのライブラリで使用する共通機能を抽象化しています。
         そして、個々のライブラリにあわせた実装を用意しています。
-        返り値の型は、JSON 形式の文字列の配列か
-        JSON 形式の配列の配列 (内部の配列は、選択リストを作成する際に使用するメタデータの連想配列)
-        あるいは HTML となります。
+        返り値の型は、<acronym>JSON</acronym> 形式の文字列の配列か
+        <acronym>JSON</acronym> 形式の配列の配列
+        (内部の配列は、選択リストを作成する際に使用するメタデータの連想配列)
+        あるいは <acronym>HTML</acronym> となります。
     </para>
 
     <para>
@@ -74,42 +75,42 @@ class FooController extends Zend_Controller_Action
 
     <itemizedlist>
         <listitem><para>
-                <code>disableLayouts()</code> は、レイアウト機能と
+                <methodname>disableLayouts()</methodname> は、レイアウト機能と
                 ViewRenderer を無効にします。一般に、これは
-                <code>prepareAutoCompletion()</code> の中でコールされます。
+                <methodname>prepareAutoCompletion()</methodname> の中でコールされます。
         </para></listitem>
 
         <listitem><para>
-                <code>encodeJson($data, $keepLayouts = false)</code>
-                はデータを JSON 形式にエンコードし、オプションでレイアウト機能の有効/無効
+                <methodname>encodeJson($data, $keepLayouts = false)</methodname>
+                はデータを <acronym>JSON</acronym> 形式にエンコードし、オプションでレイアウト機能の有効/無効
                 を切り替えます。一般に、これは
-                <code>prepareAutoCompletion()</code> の中でコールされます。
+                <methodname>prepareAutoCompletion()</methodname> の中でコールされます。
         </para></listitem>
 
         <listitem><para>
-                <code>prepareAutoCompletion($data, $keepLayouts = false)</code>
+                <methodname>prepareAutoCompletion($data, $keepLayouts = false)</methodname>
                 は、各種具象実装にあわせてレスポンスデータをフォーマットし、
                 オプションでレイアウト機能の有効/無効を切り替えます。
                 返り値は実装によって異なります。
         </para></listitem>
 
         <listitem><para>
-                <code>sendAutoCompletion($data, $keepLayouts = false)</code>
+                <methodname>sendAutoCompletion($data, $keepLayouts = false)</methodname>
                 は、各種具象実装にあわせてフォーマットしたレスポンスデータを送信します。
-                これは、<code>prepareAutoCompletion()</code> をコールしたあとでレスポンスを送信します。
+                これは、<methodname>prepareAutoCompletion()</methodname> をコールしたあとでレスポンスを送信します。
         </para></listitem>
 
         <listitem><para>
-                <code>direct($data, $sendNow = true, $keepLayouts =
-                    false)</code> は、このヘルパーをヘルパーブローカのメソッドとしてコールする場合に使用します。
+                <methodname>direct($data, $sendNow = true, $keepLayouts =
+                    false)</methodname> は、このヘルパーをヘルパーブローカのメソッドとしてコールする場合に使用します。
                 <varname>$sendNow</varname> フラグは、
-                <code>sendAutoCompletion()</code> と
-                <code>prepareAutoCompletion()</code> のどちらをコールするかを指定するものです。
+                <methodname>sendAutoCompletion()</methodname> と
+                <methodname>prepareAutoCompletion()</methodname> のどちらをコールするかを指定するものです。
         </para></listitem>
     </itemizedlist>
 
     <para>
-        現在 <code>AutoComplete</code> がサポートしている AJAX
+        現在 <emphasis>AutoComplete</emphasis> がサポートしている <acronym>AJAX</acronym>
         ライブラリは、Dojo と Scriptaculous です。
     </para>
 
@@ -129,7 +130,7 @@ class FooController extends Zend_Controller_Action
         <para>
             Zend Framework では、単純な数値添字の配列を
             AutoCompleteDojo ヘルパーに渡します。
-            そうすると、適切な形式の JSON オブジェクトを返します。
+            そうすると、適切な形式の <acronym>JSON</acronym> オブジェクトを返します。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -141,7 +142,7 @@ $this->_helper->autoCompleteDojo($data);
             <title>Zend MVC を使用した、Dojo でのオートコンプリート</title>
 
             <para>
-                Zend MVC で Dojo によるオートコンプリートを使用するには、
+                Zend <acronym>MVC</acronym> で Dojo によるオートコンプリートを使用するには、
                 いくつかの準備が必要です。オートコンプリートを使用したい
                 ComboBox 用にフォームオブj稀有とを作成し、
                 オートコンプリートの結果を提供するためのコントローラアクションを作成し、
@@ -154,12 +155,12 @@ $this->_helper->autoCompleteDojo($data);
             <para>
                 まずは、必要となる javascript を見ていきましょう。
                 Dojo は javascript によるオブジェクト指向プログラミングを行うための
-                完全なフレームワークで、ちょうど PHP における Zend Framework
+                完全なフレームワークで、ちょうど <acronym>PHP</acronym> における Zend Framework
                 のようなものです。その中には、
                 ディレクトリ構造を用いて擬似的な名前空間を作成する機能もあります。
                 ここでは、Dojo の配布ファイルの Dojo
                 ディレクトリと同じ階層に 'custom' ディレクトリを作成します。
-                そのディレクトリの中に TestNameReadStore.js
+                そのディレクトリの中に <filename>TestNameReadStore.js</filename>
                 という javascript ファイルを作成し、次のようなコードを書きます。
             </para>
 
@@ -270,13 +271,13 @@ class TestController extends Zend_Controller_Action
 ]]></programlisting>
 
             <para>
-                <code>autocompleteAction()</code>
+                <methodname>autocompleteAction()</methodname>
                 ではいくつかの作業を行っています。
                 まず、POST リクエストを受け取ったことを確実にし、
                 'format' パラメータの値を 'ajax' に設定します。
                 これにより、余計なクエリがアクションに送られることを減らします。
                 次に、'test' パラメータの内容を確認し、私たちのデータと比較します
-                (ここでは、<code>getData()</code> の実装は意図的に控えています。
+                (ここでは、<methodname>getData()</methodname> の実装は意図的に控えています。
                 何らかのデータソースを使用することになるでしょう)。
                 最後に、マッチした内容を AutoCompletion ヘルパーに送信します。
             </para>
@@ -327,7 +328,7 @@ dojo.require("custom.TestNameReadStore");
             <para>
                 headStyle や headScript といったビューヘルパーのコールに注意しましょう。
                 これらはプレースホルダで、ビュースクリプトをレンダリングする際に
-                HTML の head セクションとなります。
+                <acronym>HTML</acronym> の head セクションとなります。
             </para>
 
             <para>
@@ -340,13 +341,13 @@ dojo.require("custom.TestNameReadStore");
         <title>Scriptaculous でのオートコンプリート</title>
         <para>
             <ulink url="http://wiki.script.aculo.us/scriptaculous/show/Ajax.Autocompleter">Scriptaculous</ulink>
-            は、所定の形式の HTML レスポンスを受け取ることを想定しています。
+            は、所定の形式の <acronym>HTML</acronym> レスポンスを受け取ることを想定しています。
         </para>
 
         <para>
             このライブラリで使用するヘルパーは 'AutoCompleteScriptaculous' です。
             このヘルパーにデータの配列を渡せば、Ajax.Autocompleter
-            に対応した形式の HTML レスポンスができあがります。
+            に対応した形式の <acronym>HTML</acronym> レスポンスができあがります。
         </para>
     </sect4>
 </sect3>

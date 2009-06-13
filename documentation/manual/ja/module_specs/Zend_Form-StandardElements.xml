@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15975 -->
+<!-- EN-Revision: 16002 -->
 <sect1 id="zend.form.standardElements">
     <title>Zend Framework に同梱されている標準のフォーム要素</title>
 
@@ -417,6 +417,12 @@ $form->addElement($element, 'foo');
             <para>
                 同名の file 要素が複数存在した場合、
                 後から登場した要素は表示 (送信) されません。
+            </para>
+
+            <para>
+                さらに、file 要素はサブフォーム内ではレンダリングされません。
+                file 要素をサブフォームに追加する場合は、
+                要素のレンダリングをメインフォームで行うことになります。
             </para>
         </note>
 

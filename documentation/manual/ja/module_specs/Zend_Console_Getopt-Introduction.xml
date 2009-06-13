@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 16050 -->
 <sect1 id="zend.console.getopt.introduction">
     <title>導入</title>
     <para>
@@ -114,7 +114,7 @@
             コマンドラインをパースし、ユーザが指定したオプションを
             オブジェクト指向のメソッドで取得できるようになります。
             しかし、その情報をもとにアプリケーションで何らかの処理を行うのは別の
-            PHP クラスの仕事です。
+            <acronym>PHP</acronym> クラスの仕事です。
         </para>
     </note>
     <para>

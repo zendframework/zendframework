@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15860 -->
+<!-- EN-Revision: 16050 -->
 <sect1 id="zend.auth.adapter.dbtable">
     <title>データベースのテーブルでの認証</title>
     <sect2 id="zend.auth.adapter.dbtable.introduction">
@@ -289,7 +289,7 @@ $adapter = new Zend_Auth_Adapter_DbTable(
             <methodname>authenticate()</methodname> によってそれらが組み込まれます。
         </para>
         <para>
-            getDbSelect() メソッドを使いたくなるひとつの例としては、
+            <methodname>getDbSelect()</methodname> メソッドを使いたくなるひとつの例としては、
             たとえばユーザの状態のチェック、
             つまりそのユーザアカウントが有効になっているかどうかの確認などがあります。
         </para>

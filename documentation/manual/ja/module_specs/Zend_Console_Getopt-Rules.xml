@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15848 -->
+<!-- EN-Revision: 16050 -->
 <sect1 id="zend.console.getopt.rules">
     <title>Getopt の規則の宣言</title>
     <para>
@@ -27,7 +27,7 @@
     <sect2 id="zend.console.getopt.rules.short">
         <title>短い形式のオプションの宣言</title>
         <para>
-            <classname>Zend_Console_Getopt</classname> は、GNU Getopt
+            <classname>Zend_Console_Getopt</classname> は、<acronym>GNU</acronym> Getopt
             と似た形式のコンパクトな構文をサポートしています
             (<ulink url="http://www.gnu.org/software/libc/manual/html_node/Getopt.html">http://www.gnu.org/software/libc/manual/html_node/Getopt.html</ulink>
             を参照ください)。

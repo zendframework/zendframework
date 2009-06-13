@@ -312,9 +312,9 @@ $adapter = new Zend_Auth_Adapter_DbTable(
             <methodname>authenticate()</methodname> time.
         </para>
         <para>
-            An example of a situation where one might want to use the getDbSelect()
-            method would check the status of a user, in other words to see if that
-            user's account is enabled.
+            An example of a situation where one might want to use the
+            <methodname>getDbSelect()</methodname> method would check the status of a user, in
+            other words to see if that user's account is enabled.
         </para>
         <programlisting language="php"><![CDATA[
 // Continuing with the example from above

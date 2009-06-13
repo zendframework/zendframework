@@ -107,7 +107,7 @@
             the command-line and provide object-oriented methods for querying
             which options were given by a user, but code to use this
             information to invoke parts of your application should be in
-            another PHP class.
+            another <acronym>PHP</acronym> class.
         </para>
     </note>
     <para>

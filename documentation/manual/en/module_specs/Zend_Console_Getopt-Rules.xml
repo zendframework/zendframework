@@ -26,7 +26,7 @@
         <title>Declaring Options with the Short Syntax</title>
         <para>
             <classname>Zend_Console_Getopt</classname> supports a compact syntax similar
-            to that used by GNU Getopt (see <ulink
+            to that used by <acronym>GNU</acronym> Getopt (see <ulink
                 url="http://www.gnu.org/software/libc/manual/html_node/Getopt.html">http://www.gnu.org/software/libc/manual/html_node/Getopt.html</ulink>.
             This syntax supports only single-character flags. In a single
             string, you type each of the letters that correspond to flags

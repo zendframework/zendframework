@@ -98,6 +98,12 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
     protected $_displayGroups = array();
 
     /**
+     * Global decorators to apply to all elements
+     * @var null|array
+     */
+    protected $_elementDecorators;
+
+    /**
      * Prefix paths to use when creating elements
      * @var array
      */
@@ -306,14 +312,14 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
             unset($options['displayGroupPrefixPath']);                             
         }
 
+        if (isset($options['elementDecorators'])) {
+            $this->_elementDecorators = $options['elementDecorators'];
+            unset($options['elementDecorators']);
+        }
+
         if (isset($options['elements'])) {
             $this->setElements($options['elements']);
             unset($options['elements']);
-        }
-
-        if (isset($options['elementDecorators'])) {
-            $elementDecorators = $options['elementDecorators'];
-            unset($options['elementDecorators']);
         }
 
         if (isset($options['defaultDisplayGroupClass'])) {
@@ -353,10 +359,6 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
             } else {
                 $this->setAttrib($key, $value);
             }
-        }
-
-        if (isset($elementDecorators)) {
-            $this->setElementDecorators($elementDecorators);
         }
 
         if (isset($displayGroupDecorators)) {
@@ -981,6 +983,19 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
             if (null === $name) {
                 require_once 'Zend/Form/Exception.php';
                 throw new Zend_Form_Exception('Elements specified by string must have an accompanying name');
+            }
+
+            if (is_array($this->_elementDecorators)) {
+                if (null === $options) {
+                    $options = array('decorators' => $this->_elementDecorators);
+                } elseif ($options instanceof Zend_Config) {
+                    $options = $options->toArray();
+                }
+                if (is_array($options) 
+                    && !array_key_exists('decorators', $options)
+                ) {
+                    $options['decorators'] = $this->_elementDecorators;
+                }
             }
 
             $this->_elements[$name] = $this->createElement($element, $name, $options);
@@ -2543,6 +2558,8 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
         foreach ($elementObjs as $element) {
             $element->setDecorators($decorators);
         }
+
+        $this->_elementDecorators = $decorators;
 
         return $this;
     }

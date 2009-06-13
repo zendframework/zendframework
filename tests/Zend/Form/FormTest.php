@@ -3668,6 +3668,37 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @group ZF-6070
+     */
+    public function testIndividualElementDecoratorsShouldOverrideGlobalElementDecorators()
+    {
+        $this->form->setOptions(array(
+            'elementDecorators' => array(
+                'ViewHelper',
+                'Label',
+            ),
+            'elements' => array(
+                'foo' => array(
+                    'type' => 'text',
+                    'options' => array(
+                        'decorators' => array(
+                            'Errors',
+                            'ViewHelper',
+                        ),
+                    ),
+                ),
+            ),
+        ));
+        $element    = $this->form->getElement('foo');
+        $expected   = array('Zend_Form_Decorator_Errors', 'Zend_Form_Decorator_ViewHelper');
+        $actual     = array();
+        foreach ($element->getDecorators() as $decorator) {
+            $actual[] = get_class($decorator);
+        }
+        $this->assertSame($expected, $actual);
+    }
+
+    /**
      * Used by test methods susceptible to ZF-2794, marks a test as incomplete
      *
      * @link   http://framework.zend.com/issues/browse/ZF-2794

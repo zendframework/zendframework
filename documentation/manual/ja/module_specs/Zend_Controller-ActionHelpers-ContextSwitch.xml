@@ -495,7 +495,7 @@ $contextSwitch->initContext('xml');
                 <para>
                     <methodname>setAutoJsonSerialization($flag)</methodname>:
                     デフォルトでは、<acronym>JSON</acronym> コンテキストはビュー変数をすべてシリアライズし、
-                    <acronym>JSON<acronym> 記法にしたものをレスポンスとして返します。
+                    <acronym>JSON</acronym> 記法にしたものをレスポンスとして返します。
                     レスポンスを自分で作成したい場合はこれをオフにしなければなりません。
                     これは、<methodname>initContext()</methodname> をコールする前に行う必要があります。
                 </para>

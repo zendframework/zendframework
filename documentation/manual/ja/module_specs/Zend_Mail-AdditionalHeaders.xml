@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16051 -->
 <sect1 id="zend.mail.additional-headers">
     <title>追加のヘッダ</title>
     <para>
@@ -18,6 +18,10 @@ $mail->addHeader('X-greetingsTo', 'Mom', true); // 複数の値
 $mail->addHeader('X-greetingsTo', 'Dad', true);
 ]]></programlisting>
     </example>
+
+    <para>Reply-To: ヘッダを設定するには <code>setReplyTo($email, $name=null)</code> 関数を使用します。
+        メールアドレスと名前の間にスペースを含むのでさらにエスケープを要するためです。</para>
+
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

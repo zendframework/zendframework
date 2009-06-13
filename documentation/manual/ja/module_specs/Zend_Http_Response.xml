@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16023 -->
 <sect1 id="zend.http.response">
     <title>Zend_Http_Response</title>
 
@@ -166,6 +166,9 @@ if ($response->isError()) {
                     <para>
                         <code>string asString($br = "\n")</code>: レスポンスメッセージ全体を文字列として取得します。
                         改行は $br パラメータで指定します (たとえば "&lt;br /&gt;" などにもできます)。
+                        マジックメソッド __toString()
+                        を使ってオブジェクトを文字列にキャストすることができます。
+                        これは asString() へのプロキシとなります。
                     </para>
                 </listitem>
             </itemizedlist>

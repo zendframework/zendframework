@@ -613,6 +613,19 @@ class Zend_Mail extends Zend_Mime_Message
     }
 
     /**
+     * Set Reply-To Header
+     *
+     * @param string $email
+     * @param string $name
+     * @return Zend_Mail
+     */
+    public function setReplyTo($email, $name=null)
+    {
+        $this->_addRecipientAndHeader('Reply-To', $email, $name);
+        return $this;
+    }
+
+    /**
      * Returns the sender of the mail
      *
      * @return string

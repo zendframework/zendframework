@@ -16,6 +16,10 @@ $mail->addHeader('X-greetingsTo', 'Mom', true); // multiple values
 $mail->addHeader('X-greetingsTo', 'Dad', true);
 ]]></programlisting>
     </example>
+
+    <para>To set the Reply-To: header there exists the function <code>setReplyTo($email, $name=null)</code>,
+        because it requires additional special escaping of the different parts (email and name).</para>
+
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

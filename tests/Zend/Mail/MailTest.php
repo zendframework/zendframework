@@ -706,6 +706,18 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @group ZF-6872
+     */
+    public function testSetReplyTo()
+    {
+        $mail = new Zend_Mail('UTF-8');
+        $mail->setReplyTo("foo@zend.com", "\xe2\x82\xa0!");
+        $headers = $mail->getHeaders();
+
+        $this->assertEquals("=?UTF-8?Q?=E2=82=A0!?= <foo@zend.com>", $headers["Reply-To"][0]);
+    }
+
+    /**
      * @group ZF-1688
      * @group ZF-2559
      */

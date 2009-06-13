@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15850 -->
+<!-- EN-Revision: 16001 -->
 <sect1 id="zend.controller.action">
     <title>アクションコントローラ</title>
 
@@ -8,7 +8,7 @@
         <title>導入</title>
         <para>
             <classname>Zend_Controller_Action</classname> は、
-            モデル - ビュー - コントローラ (MVC)
+            モデル - ビュー - コントローラ (<acronym>MVC</acronym>)
             パターンにもとづいたウェブアプリケーションを作成する際に、
             フロントコントローラで使用するアクションコントローラを実装するための抽象クラスです。
         </para>
@@ -45,7 +45,7 @@ class FooController extends Zend_Controller_Action
 ]]></programlisting>
 
         <para>
-            この <code>FooController</code> クラス (<code>foo</code> コントローラ)
+            この <emphasis>FooController</emphasis> クラス (<code>foo</code> コントローラ)
             では、ふたつのアクション <code>bar</code> および <code>baz</code>
             が定義されています。
         </para>
@@ -94,16 +94,16 @@ class FooController extends Zend_Controller_Action
 ]]></programlisting>
 
             <para>
-                <code>initView()</code>、<code>getViewScript()</code>、
-                <code>render()</code> および <code>renderScript()</code>
-                は、それぞれ <code>ViewRenderer</code> へのプロキシとなります。
+                <methodname>initView()</methodname>、<methodname>getViewScript()</methodname>、
+                <methodname>render()</methodname> および <methodname>renderScript()</methodname>
+                は、それぞれ <emphasis>ViewRenderer</emphasis> へのプロキシとなります。
                 ただしヘルパーブローカ内にこのヘルパーが登録されていない場合や
-                <code>noViewRenderer</code> フラグが設定されている場合は除きます。
+                <emphasis>noViewRenderer</emphasis> フラグが設定されている場合は除きます。
             </para>
 
             <para>
                 個々のビューのレンダリングを無効にするには、単純に
-                <code>ViewRenderer</code> の <code>noRender</code>
+                <emphasis>ViewRenderer</emphasis> の <emphasis>noRender</emphasis>
                 フラグを設定することもできます。
             </para>
 
@@ -119,12 +119,13 @@ class FooController extends Zend_Controller_Action
 ]]></programlisting>
 
             <para>
-                <code>ViewRenderer</code> を無効にする場面として考えられるのは、
+                <emphasis>ViewRenderer</emphasis> を無効にする場面として考えられるのは、
                 ビューオブジェクトを必要としない場合や
                 ビュースクリプト経由でのレンダリングを行わない場合
-                (たとえば、アクションコントローラを使用して SOAP や XML-RPC、
-                REST といったウェブサービスプロトコルを扱う場合)
-                です。<code>ViewRenderer</code> をグローバルで無効にすることはまずないでしょう。
+                (たとえば、アクションコントローラを使用して <acronym>SOAP</acronym> や
+                <acronym>XML-RPC</acronym>、<acronym>REST</acronym>
+                といったウェブサービスプロトコルを扱う場合)
+                です。<emphasis>ViewRenderer</emphasis> をグローバルで無効にすることはまずないでしょう。
                 無効にするとすれば、個々のコントローラやアクション単位で行うことになります。
             </para>
         </note>
@@ -135,17 +136,18 @@ class FooController extends Zend_Controller_Action
 
         <para>
             アクションコントローラのコンストラクタをオーバーライドすることもできますが、
-            お勧めしません。<classname>Zend_Controller_Action::__construct()</classname>
+            お勧めしません。<methodname>Zend_Controller_Action::__construct()</methodname>
             は、リクエストオブジェクトやレスポンスオブジェクトを登録するなどの重要な作業を行います。
             また、フロントコントローラから渡された起動時引数の処理も行います。
             コンストラクタをオーバーライドする場合は、必ずその中で
-            <code>parent::__construct($request, $response, $invokeArgs)</code>
+            <methodname>parent::__construct($request, $response, $invokeArgs)</methodname>
             をコールするようにしましょう。
         </para>
 
         <para>
             初期化作業をカスタマイズするには、コンストラクタをオーバーライドするよりも
-            <code>init()</code> メソッドを使うほうがお勧めです。これは、<code>__construct()</code>
+            <methodname>init()</methodname> メソッドを使うほうがお勧めです。
+            これは、<methodname>__construct()</methodname>
             の中で最後にコールされます。たとえば、
             初期化時にデータベースに接続したいなら次のようにします。
         </para>
@@ -172,12 +174,13 @@ class FooController extends Zend_Controller_Action
         <para>
             <classname>Zend_Controller_Action</classname> には、
             リクエストされたアクションの前後にコールされるふたつのメソッドがあります。それが
-            <code>preDispatch()</code> と <code>postDispatch()</code> です。
+            <methodname>preDispatch()</methodname> と <methodname>postDispatch()</methodname> です。
             これらはさまざまな場面で活用できます。
-            たとえばアクションを実行する前に認証情報や ACL
-            を調べたり (<code>preDispatch()</code> の中で <code>_forward()</code> をコールすると、
+            たとえばアクションを実行する前に認証情報や <acronym>ACL</acronym>
+            を調べたり (<methodname>preDispatch()</methodname> の中で
+            <methodname>_forward()</methodname> をコールすると、
             そのアクションの処理は飛ばされます)、
-            作成したコンテンツを (<code>postDispatch()</code> で)
+            作成したコンテンツを (<methodname>postDispatch()</methodname> で)
             全サイト共通のテンプレートに配置したりといったことが考えられます。
         </para>
     </sect2>
@@ -193,14 +196,14 @@ class FooController extends Zend_Controller_Action
         <itemizedlist>
             <listitem><para>
                 <emphasis>リクエストオブジェクト</emphasis>:
-                <code>getRequest()</code> を使用してリクエストオブジェクトを取得し、
+                <methodname>getRequest()</methodname> を使用してリクエストオブジェクトを取得し、
                 それを用いてアクションをコールします。
             </para></listitem>
 
             <listitem>
                 <para>
                     <emphasis>レスポンスオブジェクト</emphasis>:
-                    <code>getResponse()</code> を使用して、最終的なレスポンスの内容を取得します。
+                    <methodname>getResponse()</methodname> を使用して、最終的なレスポンスの内容を取得します。
                     典型的な使用法は、このようになります。
                 </para>
 
@@ -216,36 +219,37 @@ $this->getResponse()->appendBody($content);
                     フロントコントローラは、パラメータを
                     ルータやディスパッチャそしてアクションコントローラに送ります。
                     これらのパラメータを取得するには、
-                    <code>getInvokeArg($key)</code> を使用します。あるいは、
+                    <methodname>getInvokeArg($key)</methodname> を使用します。あるいは、
                     すべてのパラメータを取得するには
-                    <code>getInvokeArgs()</code> を使用します。
+                    <methodname>getInvokeArgs()</methodname> を使用します。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     <emphasis>リクエストパラメータ</emphasis>:
-                    リクエストオブジェクトは、_GET や _POST
+                    リクエストオブジェクトは、<constant>_GET</constant> や <constant>_POST</constant>
                     のようなリクエストパラメータのほかに
-                    URL のパスで指定したパラメータも収集します。
-                    これらを取得するには、<code>_getParam($key)</code> あるいは
-                    <code>_getAllParams()</code> を使用します。
-                    <code>_setParam()</code> を使用して、リクエストパラメータを設定することもできます。
+                    <acronym>URL</acronym> のパスで指定したパラメータも収集します。
+                    これらを取得するには、<methodname>_getParam($key)</methodname> あるいは
+                    <methodname>_getAllParams()</methodname> を使用します。
+                    <methodname>_setParam()</methodname> を使用して、
+                    リクエストパラメータを設定することもできます。
                     これは、さらに別のアクションに転送する際などに有用です。
                 </para>
 
                 <para>
                     パラメータが存在するかどうかを調べる
                     (条件分岐の際に使用します) には、
-                    <code>_hasParam($key)</code> を使用します。
+                    <methodname>_hasParam($key)</methodname> を使用します。
                 </para>
 
                 <note>
                     <para>
-                        <code>_getParam()</code> は、オプションの二番目の引数でデフォルト値を指定することができます。
+                        <methodname>_getParam()</methodname> は、オプションの二番目の引数でデフォルト値を指定することができます。
                         もしパラメータが設定されていなかったり空だったりした場合は、このデフォルト値を使用するようになります。
                         これを用いることで、値を取得する前にいちいち
-                        <code>_hasParam()</code> をコールする必要がなくなります。
+                        <methodname>_hasParam()</methodname> をコールする必要がなくなります。
                     </para>
 
                     <programlisting language="php"><![CDATA[
@@ -281,7 +285,7 @@ if ($this->_hasParam('id') {
         <para>
             <classname>Zend_Controller_Action</classname> では、
             ビューの統合のためのちょっとした柔軟な仕組みを提供しています。
-            これを行うのは <code>initView()</code> と <code>render()</code>
+            これを行うのは <methodname>initView()</methodname> と <methodname>render()</methodname>
             のふたつのメソッドです。前者のメソッドはパブリックプロパティ
             <varname>$view</varname> の遅延読み込みを行い、
             後者のメソッドはアクションの要求にもとづいてビューをレンダリングします。
@@ -292,8 +296,8 @@ if ($this->_hasParam('id') {
             <title>ビューの初期化</title>
 
             <para>
-                <code>initView()</code> はビューオブジェクトを初期化します。
-                <code>render()</code> は <code>initView()</code>
+                <methodname>initView()</methodname> はビューオブジェクトを初期化します。
+                <methodname>render()</methodname> は <methodname>initView()</methodname>
                 をコールしてビューオブジェクトを取得しますが、
                 その初期化はいつでも好きなときに行うことができます。
                 デフォルトでは、取得した結果は <classname>Zend_View</classname>
@@ -320,11 +324,11 @@ applicationOrModule/
 
             <para>
                 言い換えると、ビュースクリプトが
-                <code>views/scripts/</code> ディレクトリ内にあり、かつ
+                <filename>views/scripts/</filename> ディレクトリ内にあり、かつ
                 <code>views</code> ディレクトリ内の同一階層に各機能
                 （ヘルパー、フィルタ）のディレクトリがあるということです。
                 ビュースクリプトの名前とパスを決定する際の基底ディレクトリとして
-                <code>views/scripts/</code> が用いられます。
+                <filename>views/scripts/</filename> が用いられます。
                 その中に、ビュースクリプトを実行するコントローラ名に基づいた名前のディレクトリが作成されます。
             </para>
         </sect3>
@@ -333,7 +337,7 @@ applicationOrModule/
             <title>ビューのレンダリング</title>
 
             <para>
-                <code>render()</code> のシグネチャは次のとおりです。
+                <methodname>render()</methodname> のシグネチャは次のとおりです。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -343,9 +347,9 @@ string render(string $action = null,
 ]]></programlisting>
 
             <para>
-                <code>render()</code> はビュースクリプトをレンダリングします。
-                引数を省略した場合は、<code>[controller]/[action].phtml</code>
-                が指定されたものとみなします（<code>.phtml</code>
+                <methodname>render()</methodname> はビュースクリプトをレンダリングします。
+                引数を省略した場合は、<filename>[controller]/[action].phtml</filename>
+                が指定されたものとみなします（<filename>.phtml</filename>
                 は <varname>$viewSuffix</varname> プロパティの値です）。
                 <varname>$action</varname> を指定すると、<code>[controller]</code>
                 ディレクトリにあるその名前のテンプレートをレンダリングします。
@@ -361,11 +365,11 @@ string render(string $action = null,
             <note><para>
                     コントローラやアクションの名前には区切り文字
                     ('_' や '.'、'-') を含めることができるので、
-                    <code>render()</code> はスクリプト名を決定する際にこれらの文字を
+                    <methodname>render()</methodname> はスクリプト名を決定する際にこれらの文字を
                     '-' に正規化します。内部的には、
                     ディスパッチャで設定されている単語やパスの区切り文字を正規化時に用います。
-                    したがって、<code>/foo.bar/baz-bat</code> へのリクエストの際に
-                    レンダリングされるスクリプトは <code>foo-bar/baz-bat.phtml</code> です。
+                    したがって、<filename>/foo.bar/baz-bat</filename> へのリクエストの際に
+                    レンダリングされるスクリプトは <filename>foo-bar/baz-bat.phtml</filename> です。
                     アクションメソッド名が camelCase 方式の場合、
                     ビュースクリプトのファイル名では単語が '-' で区切られることに注意しましょう。
             </para></note>
@@ -422,23 +426,23 @@ class MyController extends Zend_Controller_Action
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>_forward($action, $controller = null, $module =
-                        null, array $params = null)</code>:
-                    別のアクションを実行します。<code>preDispatch()</code> の中でコールすると、
+                    <methodname>_forward($action, $controller = null, $module =
+                        null, array $params = null)</methodname>:
+                    別のアクションを実行します。<methodname>preDispatch()</methodname> の中でコールすると、
                     リクエストされていたアクションは飛ばされ、
                     新しいアクションを実行します。それ以外の場合は、
                     現在のアクションの処理を済ませた後で
-                    _forward() で指定したアクションを実行します。
+                    <methodname>_forward()</methodname> で指定したアクションを実行します。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>_redirect($url, array $options =
-                        array())</code>:
-                    別の場所にリダイレクトします。このメソッドには、URL
+                    <methodname>_redirect($url, array $options =
+                        array())</methodname>:
+                    別の場所にリダイレクトします。このメソッドには、<acronym>URL</acronym>
                     のほかに任意でオプション群を指定します。
-                    デフォルトでは、HTTP 302 リダイレクトを行います。
+                    デフォルトでは、<acronym>HTTP</acronym> 302 リダイレクトを行います。
                 </para>
 
                 <para>
@@ -454,33 +458,33 @@ class MyController extends Zend_Controller_Action
 
                         <para>
                             このオプションをコントローラ全体で有効にするには、
-                            アクセスメソッド <code>setRedirectExit()</code> を使用します。
+                            アクセスメソッド <methodname>setRedirectExit()</methodname> を使用します。
                         </para>
                     </listitem>
 
                     <listitem>
                         <para>
                             <emphasis>prependBase:</emphasis>
-                            リクエストオブジェクトに登録されている基底 URL を
-                            この URL の先頭に付加するかどうか。
+                            リクエストオブジェクトに登録されている基底 <acronym>URL</acronym> を
+                            この <acronym>URL</acronym> の先頭に付加するかどうか。
                         </para>
 
                         <para>
                             このオプションをコントローラ全体で有効にするには、
-                            アクセスメソッド <code>setRedirectPrependBase()</code> を使用します。
+                            アクセスメソッド <methodname>setRedirectPrependBase()</methodname> を使用します。
                         </para>
                     </listitem>
 
                     <listitem>
                         <para>
-                            <emphasis>code:</emphasis> リダイレクトの際にどの HTTP コードを使用するか。
-                            デフォルトでは HTTP 302 を使用しますが、
+                            <emphasis>code:</emphasis> リダイレクトの際にどの <acronym>HTTP</acronym> コードを使用するか。
+                            デフォルトでは <acronym>HTTP</acronym> 302 を使用しますが、
                             301 から 306 までの任意の値を使用できます。
                         </para>
 
                         <para>
                             このオプションをコントローラ全体で有効にするには、
-                            アクセスメソッド <code>setRedirectCode()</code> を使用します。
+                            アクセスメソッド <methodname>setRedirectCode()</methodname> を使用します。
                         </para>
                     </listitem>
                 </itemizedlist>
@@ -510,8 +514,8 @@ class MyController extends Zend_Controller_Action
 
             <para>
                 コントローラへのリクエストの際に未定義のアクションメソッドが指定された場合は、
-                <classname>Zend_Controller_Action::__call()</classname> を実行します。
-                <code>__call()</code> とはもちろん、PHP
+                <methodname>Zend_Controller_Action::__call()</methodname> を実行します。
+                <methodname>__call()</methodname> とはもちろん、<acronym>PHP</acronym>
                 のマジックメソッドで、メソッドのオーバーロード用に使用するものです。
             </para>
 
@@ -584,10 +588,10 @@ class MyController extends Zend_Controller_Action
         </example>
 
         <para>
-            <code>__call()</code> をオーバーライドするかわりに、
+            <methodname>__call()</methodname> をオーバーライドするかわりに、
             これまで説明してきた各種フックメソッドをオーバーライドしてコントローラをカスタマイズすることもできます。
             たとえば、ビューオブジェクトをレジストリに保存したい場合は、
-            <code>initView()</code> メソッドを次のように書き換えることになるでしょう。
+            <methodname>initView()</methodname> メソッドを次のように書き換えることになるでしょう。
         </para>
 
         <programlisting language="php"><![CDATA[

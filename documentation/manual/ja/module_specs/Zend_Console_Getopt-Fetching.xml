@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15743 -->
+<!-- EN-Revision: 16000 -->
 <sect1 id="zend.console.getopt.fetching">
     <title>オプションおよび引数の取得</title>
     <para>
@@ -24,11 +24,11 @@
             ユーザがコマンドラインで無効な引数を指定すると、
             パース関数は <classname>Zend_Console_Getopt_Exception</classname>
             をスローします。この例外を、アプリケーションのコードで処理する必要があります。
-            <code>parse()</code> メソッドを使用して、オブジェクトに引数をパースさせます。
-            <code>try</code> ブロック内で <code>parse()</code>
+            <methodname>parse()</methodname> メソッドを使用して、オブジェクトに引数をパースさせます。
+            <code>try</code> ブロック内で <methodname>parse()</methodname>
             を実行できるので、便利です。
             パースに成功すると、それ以降で再度例外がスローされることはありません。
-            スローされた例外オブジェクトで、独自のメソッド <code>getUsageMessage()</code>
+            スローされた例外オブジェクトで、独自のメソッド <methodname>getUsageMessage()</methodname>
             が使用できます。これは、宣言されているすべてのオプションについての
             使用法を説明した文字列を返します。
         </para>
@@ -70,7 +70,7 @@ try {
     <sect2 id="zend.console.getopt.fetching.byname">
         <title>名前によるオプションの取得</title>
         <para>
-            <code>getOption()</code> メソッドを使用すると、
+            <methodname>getOption()</methodname> メソッドを使用すると、
             オプションの値を問い合わせることができます。
             そのオプションがパラメータを持っている場合は、
             このメソッドはパラメータの値を返します。
@@ -87,9 +87,9 @@ $p_parameter = $opts->getOption('p');
 ]]></programlisting>
         </example>
         <para>
-            あるいは、マジックメソッド <code>__get()</code> を使用して、
+            あるいは、マジックメソッド <methodname>__get()</methodname> を使用して、
             まるでクラスのメンバ変数であるかのようにオプションの値を取得することもできます。
-            また、マジックメソッド <code>__isset()</code> も実装しています。
+            また、マジックメソッド <methodname>__isset()</methodname> も実装しています。
         </para>
         <example id="zend.console.getopt.fetching.byname.example.magic">
             <title>マジックメソッド __get() および __isset() の使用例</title>
@@ -116,7 +116,7 @@ $p_parameter = $opts->p; // 設定されていない場合は null となりま�
         <itemizedlist>
             <listitem>
                 <para>
-                    文字列で取得: <code>toString()</code> メソッドを使用します。
+                    文字列で取得: <methodname>toString()</methodname> メソッドを使用します。
                     オプションの内容が、空白で区切られた "<code>flag=value</code>"
                     形式の文字列で返されます。パラメータを持たないオプションの場合、
                     value の部分はリテラル文字列 "<constant>TRUE</constant>" となります。
@@ -124,7 +124,7 @@ $p_parameter = $opts->p; // 設定されていない場合は null となりま�
             </listitem>
             <listitem>
                 <para>
-                    配列で取得: <code>toArray()</code> メソッドを使用します。
+                    配列で取得: <methodname>toArray()</methodname> メソッドを使用します。
                     オプションは、数値インデックスの配列で返されます。
                     配列の各要素の値は文字列で、フラグの後に
                     (もしあれば) パラメータが続きます。
@@ -132,12 +132,14 @@ $p_parameter = $opts->p; // 設定されていない場合は null となりま�
             </listitem>
             <listitem>
                 <para>
-                    JSON データを含む文字列として取得: <code>toJson()</code> メソッドを使用します。
+                    <acronym>JSON</acronym> データを含む文字列として取得:
+                    <methodname>toJson()</methodname> メソッドを使用します。
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    XML データを含む文字列として取得: <code>toXml()</code> メソッドを使用します。
+                    <acronym>XML</acronym> データを含む文字列として取得:
+                    <methodname>toXml()</methodname> メソッドを使用します。
                 </para>
             </listitem>
         </itemizedlist>
@@ -156,7 +158,7 @@ $p_parameter = $opts->p; // 設定されていない場合は null となりま�
         <para>
             オプション引数およびそのパラメータをコマンドラインからパースした後も、
             まだ追加の引数が残っているかも知れません。これらの引数を取得するには
-            <code>getRemainingArgs()</code> メソッドを使用します。このメソッドは、
+            <methodname>getRemainingArgs()</methodname> メソッドを使用します。このメソッドは、
             どのオプションにも属さない文字列の配列を返します。
         </para>
         <example id="zend.console.getopt.fetching.remainingargs.example">
@@ -168,7 +170,7 @@ $args = $opts->getRemainingArgs(); // array('filename') を返します
 ]]></programlisting>
         </example>
         <para>
-            <classname>Zend_Console_Getopt</classname> は、GNU
+            <classname>Zend_Console_Getopt</classname> は、<acronym>GNU</acronym>
             の慣習である「ダッシュふたつだけの引数があったら、
             オプションはそこで終わりとみなす」をサポートしています。
             その後に続く引数は、非オプション引数として扱わなければなりません。

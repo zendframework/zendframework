@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15827 -->
+<!-- EN-Revision: 15998 -->
 <sect1 id="zend.config.adapters.xml">
     <title>Zend_Config_Xml</title>
     <para>
-        <classname>Zend_Config_Xml</classname> を使用すると、シンプルな XML
+        <classname>Zend_Config_Xml</classname> を使用すると、シンプルな <acronym>XML</acronym>
         形式で保存した設定データを、オブジェクトのプロパティとして扱えるようになります。
-        XML ファイルあるいは文字列のルート要素は設定には関係しないので、任意の名前がつけられます。
-        その直下のレベルの XML 要素が設定データのセクションに対応します。
-        セクションレベルの要素の下に XML 要素を配置することで、
+        <acronym>XML</acronym> ファイルあるいは文字列のルート要素は設定には関係しないので、
+        任意の名前がつけられます。
+        その直下のレベルの <acronym>XML</acronym> 要素が設定データのセクションに対応します。
+        セクションレベルの要素の下に <acronym>XML</acronym> 要素を配置することで、
         階層構造をサポートします。
-        末端レベルの XML 要素が設定データの値に対応します。
-        セクションの継承は、XML の属性 <emphasis>extends</emphasis>
+        末端レベルの <acronym>XML</acronym> 要素が設定データの値に対応します。
+        セクションの継承は、<acronym>XML</acronym> の属性 <emphasis>extends</emphasis>
         でサポートされます。この属性の値が、
         データを継承しているセクション名を表します。
     </para>
@@ -27,7 +28,7 @@
         <title>Zend_Config_Xml の使用法</title>
         <para>
             この例は、<classname>Zend_Config_Xml</classname> を使用して
-            XML ファイルから設定データを読み込むための基本的な方法を説明するものです。
+            <acronym>XML</acronym> ファイルから設定データを読み込むための基本的な方法を説明するものです。
             この例では、運用環境の設定と開発環境の設定を両方管理しています。
             開発環境用の設定データは運用環境用のものと非常に似ているので、
             開発環境用のセクションは運用環境用のセクションを継承させています。
@@ -63,8 +64,8 @@
 </configdata>
 ]]></programlisting>
         <para>
-            次に、開発者が開発環境用の設定データを XML ファイルから読み込むことを考えます。
-            これは簡単なことで、単に XML ファイルとセクションを指定するだけです。
+            次に、開発者が開発環境用の設定データを <acronym>XML</acronym> ファイルから読み込むことを考えます。
+            これは簡単なことで、単に <acronym>XML</acronym> ファイルとセクションを指定するだけです。
         </para>
         <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Xml('/path/to/config.xml', 'staging');
@@ -136,7 +137,7 @@ echo $config->database->params->dbname; // "dbname" と出力します
         <title>XML 文字列</title>
         <para>
             <classname>Zend_Config_Xml</classname> は、データベースなどから取得した
-            XML 文字列を直接読み込むこともできます。
+            <acronym>XML</acronym> 文字列を直接読み込むこともできます。
             文字列はコンストラクタの最初のパラメータとして渡し、最初は
             <emphasis>'&lt;?xml'</emphasis> で始まらなければなりません。
         </para>

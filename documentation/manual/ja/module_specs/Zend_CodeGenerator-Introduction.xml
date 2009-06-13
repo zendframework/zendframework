@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15976 -->
+<!-- EN-Revision: 15998 -->
 <sect1 id="zend.codegenerator.introduction">
     <title>導入</title>
 
@@ -86,7 +86,7 @@ class World
         </para>
 
         <para>
-            例えば、上記をファイル"World.php"に保存して、すでにincludeしたとしましょう。
+            例えば、上記をファイル"<filename>World.php</filename>"に保存して、すでにincludeしたとしましょう。
             それから下記のようにできます。
         </para>
 

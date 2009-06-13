@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15827 -->
+<!-- EN-Revision: 15998 -->
 <sect1 id="zend.config.writer.introduction">
     <title>Zend_Config_Writer</title>
     <para>
@@ -93,7 +93,7 @@ $writer = new Zend_Config_Writer_Xml();
 $writer->write('config.xml', $config);
 ]]></programlisting>
         <para>
-            これは、production と staging というセクションを持つ XML
+            これは、production と staging というセクションを持つ <acronym>XML</acronym>
             設定ファイルを作成します。staging は production を継承しています。
         </para>
     </example>

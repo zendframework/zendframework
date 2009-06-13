@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15959 -->
+<!-- EN-Revision: 15997 -->
 <sect1 id="zend.amf.server">
     <title>Zend_Amf_Server</title>
 
@@ -165,7 +165,7 @@ class World
             ナビゲータのプロジェクトフォルダを右クリックしてプロパティを選択し、
             もういちどプロジェクトのプロパティパネルを開きます。
             そこで 'Flex コンパイラ' を選択して、
-            -services "services-config.xml" を追加します。
+            <command>-services "services-config.xml"</command> を追加します。
             適用、そして OK を押してオプションを更新します。
             これで結局何をやったのかというと、実行時の変数を
             <filename>services-config.xml</filename> から読み込んで RemotingObject クラスで使うよう
@@ -175,10 +175,10 @@ class World
         <para>
             それから、リモートメソッドへの接続の際に使用するサービス設定ファイルを
             Flex に教えてやる必要があります。そこで、Flex プロジェクトの src フォルダに
-            'services-config.xml' ファイルを新たに作成します。
+            '<filename>services-config.xml</filename>' ファイルを新たに作成します。
             プロジェクトフォルダで右クリックして '新規作成' 'ファイル'
             を選択すると新しいウィンドウが開きます。プロジェクトフォルダを選択し、
-            ファイル名を 'services-config.xml' と指定して終了を押します。
+            ファイル名を '<filename>services-config.xml</filename>' と指定して終了を押します。
         </para>
 
         <para>

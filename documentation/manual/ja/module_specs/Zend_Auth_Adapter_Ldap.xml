@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15892 -->
+<!-- EN-Revision: 15997 -->
 <sect1 id="zend.auth.adapter.ldap">
 
     <title>LDAP 認証</title>
@@ -245,7 +245,7 @@ Array
                 <classname>Zend_Ldap</classname> クラスは、そのユーザ名がドメインつきのものであるかどうか
                 (<filename>alice@foo.net</filename> や <filename>FOO\alice</filename> といった形式であるかどうか)
                 を調べます。ドメインが指定されているけれどもそれがどのサーバのドメイン名
-                (<filename>foo.net</filename> あるいは <emphasis>FOO</emphasis>)
+                (<filename>foo.net</filename> あるいは <acronym>FOO</acronym>)
                 とも一致しない場合は、特別な例外がスローされます。この例外は
                 <classname>Zend_Auth_Adapter_Ldap</classname> で捕捉され、
                 そのサーバを無視して次に指定されているサーバ設定を利用するようにします。
@@ -426,7 +426,7 @@ Array
                     <row>
                         <entry><emphasis>accountDomainName</emphasis></entry>
                         <entry>
-                            対象となる <acronym>LDAP</acronym> サーバの FQDN ドメイン
+                            対象となる <acronym>LDAP</acronym> サーバの <acronym>FQDN</acronym> ドメイン
                             (例 <filename>example.com</filename>)。
                             このオプションは、名前を正規化する際に使用します。
                             バインド時に、ユーザが指定したユーザ名を必要に応じて変換します。
@@ -444,7 +444,7 @@ Array
                         <entry><emphasis>accountDomainNameShort</emphasis></entry>
                         <entry>
                             対象となる <acronym>LDAP</acronym> サーバの '短い' ドメイン
-                            (例 <emphasis>FOO</emphasis>)。
+                            (例 <acronym>FOO</acronym>)。
                             <emphasis>accountDomainName</emphasis> と
                             <emphasis>accountDomainNameShort</emphasis>
                             は一対一対応となることに注意しましょう。このオプションは
@@ -495,7 +495,7 @@ Array
                 <acronym>PHP</acronym> の <acronym>LDAP</acronym> 拡張モジュールは
                 OpenLDAP クライアントライブラリと密接につながっているので、
                 この問題を解決するには OpenLDAP クライアントの <filename>ldap.conf</filename> で
-                "<emphasis>TLS_REQCERT never</emphasis>" を設定 (そしてウェブサーバを再起動)
+                "<command>TLS_REQCERT never</command>" を設定 (そしてウェブサーバを再起動)
                 して OpenLDAP クライアントライブラリがサーバを信頼するようにします。
                 もしいわゆる「なりすまし」が心配なら、<acronym>LDAP</acronym>
                 サーバのルート証明書をエクスポートしてそれをウェブサーバに配置すれば、
@@ -758,7 +758,7 @@ Array
                                 (たとえば <emphasis>accountDomainName</emphasis> が
                                 <filename>foo.net</filename> なら
                                 <emphasis>accountDomainNameShort</emphasis>
-                                の適切な値は <emphasis>FOO</emphasis> となるでしょう)。
+                                の適切な値は <acronym>FOO</acronym> となるでしょう)。
                             </entry>
                       </row>
                     </tbody>

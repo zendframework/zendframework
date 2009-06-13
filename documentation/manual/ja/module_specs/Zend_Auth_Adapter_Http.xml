@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15867 -->
+<!-- EN-Revision: 15997 -->
 <sect1 id="zend.auth.adapter.http">
 
     <title>HTTP 認証アダプタ</title>
@@ -131,8 +131,9 @@
                             <emphasis>'accept_schemes'</emphasis> が <emphasis>'digest'</emphasis> を含む場合は Yes
                         </entry>
                         <entry>
-                            空白区切りの URI のリストで、同じ認証情報が有効となる場所を指定します。
-                            URL は同一サーバ上でなくてもかまいません。
+                            空白区切りの <acronym>URI</acronym> のリストで、
+                            同じ認証情報が有効となる場所を指定します。
+                            <acronym>URI</acronym> は同一サーバ上でなくてもかまいません。
                         </entry>
                     </row>
                     <row>

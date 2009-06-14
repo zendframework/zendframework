@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15851 -->
+<!-- EN-Revision: 16068 -->
 <sect2 id="zend.dojo.form.elements">
     <title>Dijitに特有のフォーム要素</title>
 
@@ -353,7 +353,7 @@ $form->addElement(
         <para>
             内部的には、通貨テキストボックスは
             <link linkend="zend.dojo.form.elements.numberTextBox">数値テキストボックス</link>や
-            <link linkend="zend.dojo.form.elements.validationTextBox">検証テキストボックス</link>および
+            <link linkend="zend.dojo.form.elements.validationTextBox">バリデーションテキストボックス</link>および
             <link linkend="zend.dojo.form.elements.textBox">テキストボックス</link>に由来します;
             それらのクラスのメソッドが全て利用可能です。
             さらに、下記の制約メソッドを使用できます:
@@ -424,7 +424,7 @@ $form->addElement(
 
         <para>
             内部的に、日付テキストボックスは
-            <link linkend="zend.dojo.form.elements.validationTextBox">検証テキストボックス</link>
+            <link linkend="zend.dojo.form.elements.validationTextBox">バリデーションテキストボックス</link>
             および<link linkend="zend.dojo.form.elements.textBox">テキストボックス</link>
             に由来します;
             それらのクラスのメソッドが全て利用可能です。さらに、
@@ -665,7 +665,7 @@ $form->addElement('editor', 'content', array(
         <para>
             水平スライダーは、<link
                 linkend="zend.dojo.form.elements.slider">抽象的なスライダーdijit要素</link>に由来します。
-            さらに、スライダー・ルールとルール・ラベルをセットして設定するための、
+            さらに、スライダー罫線と罫線ラベルをセットして設定するための、
             いろいろなメソッドがあります。
         </para>
 
@@ -674,7 +674,7 @@ $form->addElement('editor', 'content', array(
                 <para>
                     <code>setTopDecorationDijit($dijit)</code>及び
                     <code>setBottomDecorationDijit($dijit)</code>:
-                    スライダーのトップかボトムで使うdijitの名前をセットします。
+                    スライダーの上側か下側で使うdijitの名前をセットします。
                     これは、接頭辞 "dijit.form." を含んではいけません。
                     むしろ final 名だけ
                     - "HorizontalRule" または "HorizontalRuleLabels" のうちの1つ -
@@ -686,7 +686,7 @@ $form->addElement('editor', 'content', array(
                 <para>
                     <code>setTopDecorationContainer($container)</code>及び
                     <code>setBottomDecorationContainer($container)</code>:
-                    ルールのコンテナ要素のために使用する名前を指定します;
+                    罫線コンテナ要素のために使用する名前を指定します;
                     例えば、'topRule' や 'topContainer'など。
                 </para>
             </listitem>
@@ -706,7 +706,7 @@ $form->addElement('editor', 'content', array(
                 <para>
                     <code>setTopDecorationParams(array $params)</code>及び
                     <code>setBottomDecorationParams(array $params)</code>:
-                    与えられたルール、
+                    与えられた罫線、
                     またはRuleLabels dijitを構成するときに使うdijitパラメータです。
                 </para>
             </listitem>
@@ -715,7 +715,8 @@ $form->addElement('editor', 'content', array(
                 <para>
                     <code>setTopDecorationAttribs(array $attribs)</code>及び
                     <code>setBottomDecorationAttribs(array $attribs)</code>:
-                    与えられたルールまたはRuleLabels HTML要素コンテナのために指定するHTML属性です。
+                    与えられた罫線、
+                    またはRuleLabels HTML要素コンテナのために指定するHTML属性です。
                 </para>
             </listitem>
 
@@ -724,21 +725,19 @@ $form->addElement('editor', 'content', array(
                     <code>getTopDecoration()</code>及び
                     <code>getBottomDecoration()</code>:
                     上記のミューテーターによって提示されたように、
-                    与えられたルールまたはRuleLabels定義のためにすべてのメタデータを取得します。
+                    与えられた罫線またはRuleLabels定義のためにすべてのメタデータを取得します。
                 </para>
             </listitem>
         </itemizedlist>
 
         <example id="zend.dojo.form.elements.horizontalSlider.example">
-            <title>水平スライダーdijit要素使用例</title>
+            <title>水平スライダーdijit要素の使用例</title>
 
             <para>
-                <!-- TODO -->
-                The following will create a horizontal slider selection with
-                integer values ranging from -10 to 10. The top will have labels
-                at the 20%, 40%, 60%, and 80% marks. The botton will have rules
-                at 0, 50%, and 100%. Each time the value is changed, the hidden
-                element storing the value will be updated.
+                下記では、-10から10の間の整数を選択する水平スライダーを生成します。
+                上側には20%、40%、60%そして80%で印をつけられたラベルがあります、
+                下側には、0、50%そして100%の罫線があります。
+                値が変わるたびに、値を保存しているhidden要素は更新されます。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -790,67 +789,64 @@ $form->addElement(
     </sect3>
 
     <sect3 id="zend.dojo.form.elements.numberSpinner">
-        <title>NumberSpinner</title>
+        <title>数スピナー</title>
 
         <para>
-            A number spinner is a text element for entering numeric values; it
-            also includes elements for incrementing and decrementing the value
-            by a set amount.
+            数スピナーは、数値を入力するためのテキスト要素です;
+            設定された量によって値を増加させたり、減少させるための要素を含みます。
         </para>
 
         <para>
-            The following methods are available:
+            下記のメソッドが利用できます:
         </para>
 
         <itemizedlist>
             <listitem><para>
                 <code>setDefaultTimeout($timeout)</code>及び
-                <code>getDefaultTimeout()</code>: set and retrieve the default
-                timeout, in milliseconds, between when the button is held
-                pressed and the value is changed.
+                <code>getDefaultTimeout()</code>:
+                ボタンが押されたままのときと、値が変更されるときの間の既定のタイムアウトを
+                ミリ秒単位で設定または取得します。
             </para></listitem>
 
             <listitem><para>
                 <code>setTimeoutChangeRate($rate)</code>及び
-                <code>getTimeoutChangeRate()</code>: set and retrieve the
-                rate, in milliseconds, at which changes will be made when a
-                button is held pressed.
+                <code>getTimeoutChangeRate()</code>:
+                ボタンが押されたままのとき、変化がなされる割合をミリ秒単位で設定または取得します。
             </para></listitem>
 
             <listitem><para>
                 <code>setLargeDelta($delta)</code>及び
-                <code>getLargeDelta()</code>: set and retrieve the amount by
-                which the numeric value should change when a button is held
-                pressed.
+                <code>getLargeDelta()</code>:
+                ボタンが押されたままのとき、数値が変わるべき量を設定または取得します。
             </para></listitem>
 
             <listitem><para>
                 <code>setSmallDelta($delta)</code>及び
-                <code>getSmallDelta()</code>: set and retrieve the delta by
-                which the number should change when a button is pressed once.
+                <code>getSmallDelta()</code>:
+                ボタンが一度押されたとき、数が変わるべきデルタを設定または取得します。
             </para></listitem>
 
             <listitem><para>
                 <code>setIntermediateChanges($flag)</code>及び
-                <code>getIntermediateChanges()</code>: set and retrieve the
-                flag indicating whether or not each value change should be
-                shown when a button is held pressed.
+                <code>getIntermediateChanges()</code>:
+                ボタンが押されたままのとき、
+                各々の値が変化するごとに表示されるべきかどうか示すフラグを設定または取得します。
             </para></listitem>
 
             <listitem><para>
                 <code>setRangeMessage($message)</code>及び
-                <code>getRangeMessage()</code>: set and retrieve the message
-                indicating the range of values available.
+                <code>getRangeMessage()</code>:
+                利用できる値の範囲を指示しているメッセージを設定または取得します。
             </para></listitem>
 
             <listitem><para>
-                <code>setMin($value)</code>及び<code>getMin()</code>: set and
-                retrieve the minimum value possible.
+                <code>setMin($value)</code>及び<code>getMin()</code>:
+                使用可能な最小値を設定または取得します。
             </para></listitem>
 
             <listitem><para>
-                <code>setMax($value)</code>及び<code>getMax()</code>: set and
-                retrieve the maximum value possible.
+                <code>setMax($value)</code>及び<code>getMax()</code>:
+                使用可能な最大値を設定または取得します。
             </para></listitem>
         </itemizedlist>
 
@@ -879,9 +875,10 @@ $form->addElement(
     </sect3>
 
     <sect3 id="zend.dojo.form.elements.numberTextBox">
-        <title>NumberTextBox</title>
+        <title>数値テキストボックス</title>
 
         <para>
+            <!-- TODO -->
             A number text box is a text element for entering numeric values;
             unlike NumberSpinner, numbers are entered manually. Validations and
             constraints can be provided to ensure the number stays in a
@@ -1010,6 +1007,7 @@ $form->addElement(
             <code>setRegisterInArrayValidator(false)</code>, or by passing a
             false value to the <code>registerInArrayValidator</code>
             configuration key.
+            <!-- TODO :NEXT JUMP -->
         </para>
 
         <example id="zend.dojo.form.elements.radioButton.example">
@@ -1037,10 +1035,10 @@ $form->addElement(
         <title>シンプルテキストエリア</title>
 
         <para>
-            SimpleTextarea acts primarily like a standard HTML textarea. However, it
-            does not support either the rows or cols settings. Instead, the
-            textarea width should be specified using standard CSS measurements.
-            Unlike Textarea, it will not grow automatically
+            シンプルテキストエリアは、主に標準的なHTMLの textarea のようにふるまいます。
+            しかし、それは列または行の設定をサポートしません。
+            その代わり、textarea幅は、標準的なCSS幅を使用して指定されるべきです。
+            テキストエリアとは異なり、自動的に成長しません。
         </para>
 
         <example id="zend.dojo.form.elements.simpletextarea.example">
@@ -1061,44 +1059,41 @@ $form->addElement(
     </sect3>
 
     <sect3 id="zend.dojo.form.elements.slider">
-        <title>Slider abstract element</title>
+        <title>スライダーabstract要素</title>
 
         <para>
-            Slider is an abstract element from which
-            <link linkend="zend.dojo.form.elements.horizontalSlider">HorizontalSlider</link>
-            and
-            <link linkend="zend.dojo.form.elements.verticalSlider">VerticalSlider</link>
-            both derive. It exposes a number of common methods for configuring
-            your sliders, including:
+            スライダーは
+            <link linkend="zend.dojo.form.elements.horizontalSlider">水平スライダー</link>
+            及び
+            <link linkend="zend.dojo.form.elements.verticalSlider">垂直スライダー</link>
+            の両方に由来するabstract要素です。
+            スライダーを構成するために、いくつかの一般的なメソッドを公開します:
         </para>
 
         <itemizedlist>
             <listitem><para>
                 <code>setClickSelect($flag)</code>及び
-                <code>getClickSelect()</code>: set and retrieve the flag
-                indicating whether or not clicking the slider changes the
-                value.
+                <code>getClickSelect()</code>:
+                スライダーをクリックしたら値を変更するかどうか示すフラグを設定または取得します。
             </para></listitem>
 
             <listitem><para>
                 <code>setIntermediateChanges($flag)</code>及び
-                <code>getIntermediateChanges()</code>: set and retrieve the
-                flag indicating whether or not the dijit will send a
-                notification on each slider change event.
+                <code>getIntermediateChanges()</code>:
+                各々のスライダー変化イベントにdijitが通知を送るかどうか示すフラグを設定または取得します。
             </para></listitem>
 
             <listitem><para>
                 <code>setShowButtons($flag)</code>及び
-                <code>getShowButtons()</code>: set and retrieve the flag
-                indicating whether or not buttons on either end will be
-                displayed; if so, the user can click on these to change the
-                value of the slider.
+                <code>getShowButtons()</code>:
+                どちらかの端にボタンが表示されるかどうか示すフラグを設定または取得します。;
+                もし表示されるなら、スライダーの値を変えるために、ユーザーはボタンをクリックできます。
             </para></listitem>
 
             <listitem><para>
                 <code>setDiscreteValues($value)</code>及び
-                <code>getDiscreteValues()</code>: set and retrieve the number
-                of discrete values represented by the slider.
+                <code>getDiscreteValues()</code>:
+                スライダーによって表される不連続な値の数を設定または取得します。
             </para></listitem>
 
             <listitem><para>
@@ -1113,25 +1108,24 @@ $form->addElement(
 
             <listitem><para>
                 <code>setPageIncrement($value)</code>及び
-                <code>getPageIncrement()</code>: set the amount by which the
-                slider will change on keyboard events.
+                <code>getPageIncrement()</code>:
+                スライダーがキーボード・イベントで変わる量を設定します。
             </para></listitem>
         </itemizedlist>
 
         <para>
-            Example usage is provided with each concrete extending class.
+            使用例は、各々の具体的な拡張クラスで提供されます。
         </para>
     </sect3>
 
     <sect3 id="zend.dojo.form.elements.submitButton">
-        <title>SubmitButton</title>
+        <title>サブミットボタン</title>
 
         <para>
-            While there is no Dijit named SubmitButton, we include one here to
-            provide a button dijit capable of submitting a form without
-            requiring any additional javascript bindings. It works exactly like
-            the <link linkend="zend.dojo.form.elements.button">Button
-                dijit</link>.
+            SubmitButtonという名前のDijitはありませんが、
+            どんなjavascriptとの結合も追加で必要とせずに、フォームを送信できるボタンdijitを提供するために、
+            １つをここに含めます。
+            それは、まさに<link linkend="zend.dojo.form.elements.button">ボタンdijit</link>のように動作します。
         </para>
 
         <example id="zend.dojo.form.elements.submitButton.example">
@@ -1152,44 +1146,41 @@ $form->addElement(
     </sect3>
 
     <sect3 id="zend.dojo.form.elements.textBox">
-        <title>TextBox</title>
+        <title>テキストボックス</title>
 
         <para>
-            TextBox is included primarily to provide a text input with
-            consistent look-and-feel to the other dijits. However, it also
-            includes some minor filtering and validation capabilities,
-            represented in the following methods:
+            テキストボックスは、
+            主に他のdijitsに調和したルック＆フィールで入力されるテキストを提供するために含まれます。
+            しかし、以下のメソッドで表されるいくらかのマイナーなフィルタリングとバリデーション機能も含みます:
         </para>
 
         <itemizedlist>
             <listitem><para>
                 <code>setLowercase($flag)</code>及び
-                <code>getLowercase()</code>: set and retrieve the flag
-                indicating whether or not input should be cast to lowercase.
+                <code>getLowercase()</code>:
+                入力を小文字にキャストすべきかどうか示すフラグを設定または取得します。
             </para></listitem>
 
             <listitem><para>
                 <code>setPropercase($flag)</code>及び
-                <code>getPropercase()</code>: set and retrieve the flag
-                indicating whether or not the input should be cast to Proper
-                Case.
+                <code>getPropercase()</code>:
+                入力をProper Case(訳注：先頭を大文字、他を小文字にすること)にキャストすべきかどうか示すフラグを設定または取得します。
             </para></listitem>
 
             <listitem><para>
-                <code>setUppercase($flag)</code>及び<code>getUppercase()</code>: set and retrieve
-                the flag indicating whether or not the input should be cast to UPPERCASE.
+                <code>setUppercase($flag)</code>及び<code>getUppercase()</code>:
+                入力を大文字にキャストすべきかどうか示すフラグを設定または取得します。
             </para></listitem>
 
             <listitem><para>
-                <code>setTrim($flag)</code>及び<code>getTrim()</code>: set and
-                retrieve the flag indicating whether or not leading or trailing
-                whitespace should be stripped.
+                <code>setTrim($flag)</code>及び<code>getTrim()</code>:
+                先立つまたは後続する空白を除去すべきかどうか示すフラグを設定または取得します。
             </para></listitem>
 
             <listitem><para>
                 <code>setMaxLength($length)</code>及び
-                <code>getMaxLength()</code>: set and retrieve the maximum
-                length of input.
+                <code>getMaxLength()</code>:
+                入力の長さの上限を設定または取得します。
             </para></listitem>
         </itemizedlist>
 
@@ -1212,14 +1203,14 @@ $form->addElement(
     </sect3>
 
     <sect3 id="zend.dojo.form.elements.textarea">
-        <title>Textarea</title>
+        <title>テキストエリア</title>
 
         <para>
-            Textarea acts primarily like a standard HTML textarea. However, it
-            does not support either the rows or cols settings. Instead, the
-            textarea width should be specified using standard CSS measurements;
-            rows should be omitted entirely. The textarea will then grow
-            vertically as text is added to it.
+            テキストエリアは、主に標準的なHTMLの textarea のようにふるまいます。
+            しかし、それは列または行の設定をサポートしません。
+            その代わり、textareaの幅は、標準的なCSS幅を使用して指定されるべきです;
+            列は、完全に省略されます。
+            テキストが追加されるたびに、textareaは垂直に伸びます。
         </para>
 
         <example id="zend.dojo.form.elements.textarea.example">
@@ -1243,6 +1234,7 @@ $form->addElement(
         <title>TimeTextBox</title>
 
         <para>
+            <!-- TODO -->
             TimeTextBox is a text input that provides a drop-down for selecting
             a time. The drop-down may be configured to show a certain window of
             time, with specified increments.
@@ -1313,7 +1305,7 @@ $form->addElement(
     </sect3>
 
     <sect3 id="zend.dojo.form.elements.validationTextBox">
-        <title>ValidationTextBox</title>
+        <title>バリデーションテキストボックス</title>
 
         <para>
             ValidationTextBox provides the ability to add validations and constraints to a text
@@ -1376,6 +1368,7 @@ $form->addElement(
                 The following will create a ValidationTextBox that requires a
                 single string consisting solely of word characters (i.e., no
                 spaces, most punctuation is invalid).
+                <!-- TODO END -->
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -1394,27 +1387,26 @@ $form->addElement(
     </sect3>
 
     <sect3 id="zend.dojo.form.elements.verticalSlider">
-        <title>VerticalSlider</title>
+        <title>垂直スライダー</title>
 
         <para>
-            VerticalSlider is the sibling of <link
-                linkend="zend.dojo.form.elements.horizontalSlider">HorizontalSlider</link>,
-            and operates in every way like that element. The only real
-            difference is that the 'top*' and 'bottom*' methods are replaced by
-            'left*' and 'right*', and instead of using HorizontalRule and
-            HorizontalRuleLabels, VerticalRule and VerticalRuleLabels should be
-            used.
+            垂直スライダーは<link
+                linkend="zend.dojo.form.elements.horizontalSlider">水平スライダー</link>
+            の兄弟分で、あらゆる点でその要素のように動作します。
+            唯一本当に違うところは、
+            'top*' 及び 'bottom*' メソッドが 'left*' and 'right*' で置き換えられ、
+            HorizontalRule 及び HorizontalRuleLabels を使う代わりに、
+            VerticalRule 及び VerticalRuleLabels が使われることです。
         </para>
 
         <example id="zend.dojo.form.elements.verticalSlider.example">
-            <title>VerticalSlider dijit要素の使用例</title>
+            <title>垂直スライダーdijit要素の使用例</title>
 
             <para>
-                The following will create a vertical slider selection with
-                integer values ranging from -10 to 10. The left will have labels
-                at the 20%, 40%, 60%, and 80% marks. The right will have rules
-                at 0, 50%, and 100%. Each time the value is changed, the hidden
-                element storing the value will be updated.
+                下記では、-10から10の間の整数を選択する垂直スライダーを生成します。
+                左側には20%、40%、60%そして80%で印をつけられたラベルがあります、
+                右側には、0、50%そして100%の罫線があります。
+                値が変わるたびに、値を保存しているhidden要素は更新されます。
             </para>
 
             <programlisting language="php"><![CDATA[

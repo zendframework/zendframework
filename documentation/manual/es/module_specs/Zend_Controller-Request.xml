@@ -14,161 +14,162 @@
 
         <itemizedlist>
             <listitem><para>
-                The module name is accessed by
-                <code>getModuleName()</code> and
+            	El nombre del módulo es accedido por 
+                <code>getModuleName()</code> y
                 <code>setModuleName()</code>.
             </para></listitem>
 
             <listitem><para>
-                The controller name is accessed by
-                <code>getControllerName()</code> and
+            	El nombre del controlador es accedido por 
+                <code>getControllerName()</code> y
                 <code>setControllerName()</code>.
             </para></listitem>
 
             <listitem><para>
-                The name of the action to call within that controller is
-                accessed by <code>getActionName()</code> and
+            	El nombre de la acción a llamar dentro el controlador es 
+            	accedido por <code>getActionName()</code> y
                 <code>setActionName()</code>.
             </para></listitem>
 
             <listitem><para>
-                Parameters to be accessible by the action are an associative array
-                of key/value pairs that are retrieved by <code>getParams()</code>
-                and set with <code>setParams()</code>, or individually by
-                <code>getParam()</code> and <code>setParam()</code>.
+            	Los parámetros al ser accesibles por la acción son una asociación de pares 
+            	de array llave/valor que son recuperdos por <code>getParams()</code>
+                y configurados con <code>setParams()</code>, o configurados individualmente por
+                <code>getParam()</code> y <code>setParam()</code>.
             </para></listitem>
         </itemizedlist>
 
         <para>
-            Based on the type of request, there may be more methods available.
-            The default request used, <classname>Zend_Controller_Request_Http</classname>,
-            for instance, has methods for retrieving the request URI, path
-            information, <code>$_GET</code> and <code>$_POST</code> parameters,
+        	Basado en el tipo de solicitud, puede haber más métodos disponibles.
+        	La solicitud por defecto usa, <classname>Zend_Controller_Request_Http</classname>,
+            para instanciar, tiene métodos para recuperar la solicitud URI, ruta de la 
+            información, parámetros <code>$_GET</code> y <code>$_POST</code>,
             etc.
         </para>
 
         <para>
-            The request object is passed to the front controller, or if none is
-            provided, it is instantiated at the beginning of the dispatch
-            process, before routing occurs. It is passed through to every object
-            in the dispatch chain.
+        	la solicitud objeto es pasada al controlador front, o si no es 
+        	previsto, es instanciado al principio del proceso despachador,
+        	antes de que ocurra unenrutamiento. Es pasado a través de todos los objetos
+            en la cadena del despachador.
         </para>
 
         <para>
-            Additionally, the request object is particularly useful in testing.
-            The developer may craft the request environment, including module,
-            controller, action, parameters, URI, etc, and pass the request
-            object to the front controller to test application flow. When paired
-            with the <link linkend="zend.controller.response">response
-                object</link>, elaborate and precise unit testing of MVC
-            applications becomes possible.
+        	Adicionalmente, la solicitud objeto es particularmente usado en pruebas.
+        	El desarrolador puede cambiar el entorno de la solicitud, incluyendo módulos,
+        	controladores, acciones, parámetros, URI, etc, y pasar la solicitud 
+        	objeto al controlador front para probar el flujo de la aplicación. Cuando se vincula 
+        	con el <link linkend="zend.controller.response">objeto 
+        		respuesta </link>,es posible elaborar y precisar una unidad de pruebas de aplicaciones
+        	MVC.
         </para>
     </sect2>
 
     <sect2 id="zend.controller.request.http">
-        <title>HTTP Requests</title>
+        <title>Solicitud HTTP</title>
 
         <sect3 id="zend.controller.request.http.dataacess">
-            <title>Accessing Request Data</title>
+            <title>Solicitud de acceso a datos</title>
 
             <para>
-                <classname>Zend_Controller_Request_Http</classname> encapsulates access to
-                relevant values such as the key name and value for the
-                controller and action router variables, and all additional
-                parameters parsed from the URI. It additionally allows access to
-                values contained in the superglobals as public members, and
-                manages the current Base URL and Request URI. Superglobal
-                values cannot be set on a request object, instead use the
-                setParam/getParam methods to set or retrieve user parameters.
+                <classname>Zend_Controller_Request_Http</classname> encapsula el acceso a 
+                relevantes valores tal como el nombre de la llave y el valor para el
+                controlador y variables de aación enrutamiento y todos los
+                parámetros adicionales analizados desde el URI. Adiccionalmente permite el acceso
+                a valores contenidos en las superglobales como miembros públicos y 
+                administra la actual base URL y la solicitud URI. los valores
+                Superglobales no pueden ser determinados en una solicitud objeto, en vez usar los
+                métodos setParam/getParam para determinar o recuperar los parámetros del usuario.
             </para>
 
             <note>
-                <title>Superglobal Data</title>
+                <title>Datos Superglobales</title>
                 <para>
-                    When accessing superglobal data through
-                    <classname>Zend_Controller_Request_Http</classname> as public member
-                    properties, it is necessary to keep in mind that the
-                    property name (superglobal array key) is matched to a
-                    superglobal in a specific order of precedence: 1. GET, 2.
+                	Cuando se accede a datos Superglobales a través 
+                    <classname>Zend_Controller_Request_Http</classname> como propiedades de miembros 
+                    públicos, es necesario mantener en mente que el nombre de la 
+                    propiedad (supergloabl array key) corresponda a una 
+                    supergloabl en un específico orden de precedencia:1. GET, 2.
                     POST, 3. COOKIE, 4. SERVER, 5. ENV.
                 </para>
             </note>
 
             <para>
-                Specific superglobals can be accessed using a public method as
-                an alternative. For example, the raw value of
-                <code>$_POST['user']</code> can be accessed by calling
-                <code>getPost('user')</code> on the request object. These
-                include <code>getQuery()</code> for retrieving
-                <code>$_GET</code> elements, and <code>getHeader()</code> for
-                retrieving request headers.
+            	Las supergloables específicas pueden ser accedidas usando un método público como
+            	una alternativa. Por ejemplo, el valor original de
+                <code>$_POST['user']</code> puede ser accedido llamando a 
+                <code>getPost('user')</code> en la solicitud objeto. Esto 
+                incluye <code>getQuery()</code> para recuperar elementos
+                <code>$_GET</code>, y <code>getHeader()</code> para
+                recuperar la solicitud de los encabezadores (headers).
             </para>
 
             <note>
-                <title>GET and POST Data</title>
+                <title>Datos GET y POST</title>
                 <para>
-                    Be cautious when accessing data from the request object as
-                    it is not filtered in any way. The router and dispatcher
-                    validate and filter data for use with their tasks, but leave
-                    the data untouched in the request object.
+                	Sea cauteloso cuando accede a los datos de la solicitud objeto como 
+                	no es filtrado en ninguna manera. El router y dispatcher 
+                	valida y filtra datos para usar con sus tareas, pero dejan
+                	los datos intactos en la solicitud objeto.
                 </para>
             </note>
 
             <note>
-                <title>Retrieving the Raw POST Data</title>
+                <title>Recuperando los datos POST sin procesar</title>
 
                 <para>
-                    As of 1.5.0, you can also retrieve the raw post data via the
-                    <code>getRawBody()</code> method. This method returns false
-                    if no data was submitted in that fashion, but the full body
-                    of the post otherwise.
+                	Como 1.5.0, se puede recuperar los datos sin procesar a través del
+                	método <code>getRawBody()</code>. Este método retorna falso
+                	si los datos han sido enviados de esa manera, pero si no retorna el cuerpo
+                	entero del post.
                 </para>
 
                 <para>
-                    This is primarily useful for accepting content when
-                    developing a RESTful MVC application.
+                	Esto es primordialmente útil para aceptar el contenido cuando
+                	se desarrolla una aplicación MVC simple.
                 </para>
             </note>
 
             <para>
-                You may also set user parameters in the request object using
-                <code>setParam()</code> and retrieve these later using
-                <code>getParam()</code>. The router makes use of this
-                functionality to set parameters matched in the request URI into
-                the request object.
+            	Usted puede determinar parámetros de usuario en la solicitud objeto usando
+            	<code>setParam()</code> y recuperar los mismos despues usando
+                <code>getParam()</code>. El router hace uso de esta 
+                funcionalidad para determinar parámetros correspondientes en la solicitud URI 
+                a la solicitud objeto.
             </para>
 
             <note>
-                <title>getParam() Retrieves More than User Parameters</title>
+                <title>getParam() Recupera mas que Parámetros de Usuario</title>
 
                 <para>
-                    In order to do some of its work, <code>getParam()</code> actually
-                    retrieves from several sources. In order of priority, these
-                    include: user parameters set via <code>setParam()</code>,
-                    <code>GET</code> parameters, and finally <code>POST</code>
-                    parameters. Be aware of this when pulling data via this
-                    method.
+                	En orden para hacer el mismo trabajo, <code>getParam()</code> recupera
+                	actualmente desde muchas fuentes. En orden de prioridad, estas 
+                	incluyen: parámetros de usuario determinados a través de <code>setParam()</code>,
+                    parámetros <code>GET</code>, y finalmente parámetros <code>POST</code>. 
+                    Ser conciente de esto cuando se sacan datos a través de este
+                    método.
                 </para>
 
                 <para>
-                    If you wish to pull only from parameters you set via
-                    <code>setParam()</code>, use the <code>getUserParam()</code>.
+                	Si se desea sacar solo desde parámetros se configura a través de
+                    <code>setParam()</code>, use <code>getUserParam()</code>.
                 </para>
 
                 <para>
-                    Additionally, as of 1.5.0, you can lock down which parameter
-                    sources will be searched. <code>setParamSources()</code>
-                    allows you to specify an empty array or an array with one or
-                    more of the values '_GET' or '_POST' indicating which
-                    parameter sources are allowed (by default, both are
-                    allowed); if you wish to restrict access to only '_GET'
-                    specify <code>setParamSources(array('_GET'))</code>.
+                	Además, a partir de 1.5.0, puede bloquear el parámetro que
+                    se buscará en las fuentes. <code>setParamSources()</code>
+                    le permite especificar un array vacío o un array con uno o
+                    más de los valores '_GET' o '_POST', indicando que
+                    fuente de parámetro se permite (por defecto, ambos son
+                    permitidos); si se desea restringir el acceso a solamente '_GET'
+                    especificar <code>setParamSources (array('_GET'))</code>.
                 </para>
             </note>
 
             <note>
                 <title>Apache Quirks</title>
                 <para>
+                	Si está usando Apache 404 handler para pasar 
                     If you are using Apache's 404 handler to pass incoming
                     requests to the front controller, or using a PT flag with
                     rewrite rules, <code>$_SERVER['REDIRECT_URL']</code>
@@ -403,20 +404,20 @@ abstract class Zend_Controller_Request_Abstract
 ]]></programlisting>
 
         <para>
-            The request object is a container for the request environment. The
-            controller chain really only needs to know how to set and retrieve the
-            controller, action, optional parameters, and dispatched status. By
-            default, the request will search its own parameters using the
-            controller or action keys in order to determine the controller and
-            action.
+        	La solicitud objeto es un contenedor para entorno de la solicitud. La
+			cadena del controlador sólo necesita saber cómo establecer y recuperar el
+			controlador, la acción, los parámetros opcionales, y el estado del despachador. Por
+			defecto, la solicitud buscará sus propios parámetros mediante el
+			controlador o las llaves de la acción con el fin de determinar el controlador y
+			la acción.
         </para>
 
         <para>
-            Extend this class, or one of its derivatives, when you need the
-            request class to interact with a specific environment in order to
-            retrieve data for use in the above tasks. Examples include <link
-                linkend="zend.controller.request.http">the HTTP
-                environment</link>, a CLI environment, or a PHP-GTK environment.
+     	 	Para ampliar esta clase, o uno de sus derivados, cuando se necesita la
+			clase solicitud que interactue con un entorno específico con el fin de
+			recuperar los datos para su uso en las tareas antes descritas. Los ejemplos incluyen <link
+				linkend = "zend.controller.request.http"> el entorno HTTP
+				</link>, un entorno CLI, o un entorno de PHP-GTK.
         </para>
     </sect2>
 </sect1>

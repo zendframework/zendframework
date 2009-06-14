@@ -158,7 +158,7 @@ class Zend_Http_Client_Adapter_Test implements Zend_Http_Client_Adapter_Interfac
     public function setResponse($response)
     {
         if ($response instanceof Zend_Http_Response) {
-            $response = $response->asString();
+            $response = $response->asString("\r\n");
         }
 
         $this->responses = (array)$response;
@@ -168,10 +168,14 @@ class Zend_Http_Client_Adapter_Test implements Zend_Http_Client_Adapter_Interfac
     /**
      * Add another response to the response buffer.
      *
-     * @param string $response
+     * @param string Zend_Http_Response|$response
      */
     public function addResponse($response)
     {
+     	if ($response instanceof Zend_Http_Response) {
+            $response = $response->asString("\r\n");
+        }
+        
         $this->responses[] = $response;
     }
 

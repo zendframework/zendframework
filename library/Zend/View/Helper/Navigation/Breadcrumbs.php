@@ -200,6 +200,7 @@ class Zend_View_Helper_Navigation_Breadcrumbs
             if ($this->getUseTranslator() && $t = $this->getTranslator()) {
                 $html = $t->translate($html);
             }
+            $html = $this->view->escape($html);
         }
 
         // walk back to root

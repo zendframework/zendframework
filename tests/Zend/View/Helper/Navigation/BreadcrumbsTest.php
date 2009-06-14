@@ -208,4 +208,20 @@ class Zend_View_Helper_Navigation_BreadcrumbsTest
         } catch (Zend_View_Exception $e) {
         }
     }
+    
+    public function testLastBreadcrumbShouldBeEscaped()
+    {
+        $container = new Zend_Navigation(array(
+            array(
+                'label'  => 'Live & Learn',
+                'uri'    => '#',
+                'active' => true
+            )
+        ));
+        
+        $expected = 'Live &amp; Learn';
+        $actual = $this->_helper->setMinDepth(0)->render($container);
+        
+        $this->assertEquals($expected, $actual);
+    }
 }

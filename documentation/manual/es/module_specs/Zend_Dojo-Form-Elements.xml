@@ -1131,7 +1131,8 @@ $form->addElement(
             <listitem><para>
                 <code>setPageIncrement($value)</code> y
                 <code>getPageIncrement()</code>: establece la cantidad en que  
-                cambiará el deslizador por eventos del teclado.
+                cambiará el deslizador por eventos del teclado.</para>
+                </listitem>
         </itemizedlist>
 
         <para>

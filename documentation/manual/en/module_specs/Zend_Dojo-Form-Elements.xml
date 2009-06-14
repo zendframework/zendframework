@@ -732,7 +732,7 @@ $form->addElement('editor', 'content', array(
             <para>
                 The following will create a horizontal slider selection with
                 integer values ranging from -10 to 10. The top will have labels
-                at the 20%, 40%, 60%, and 80% marks. The botton will have rules
+                at the 20%, 40%, 60%, and 80% marks. The bottom will have rules
                 at 0, 50%, and 100%. Each time the value is changed, the hidden
                 element storing the value will be updated.
             </para>

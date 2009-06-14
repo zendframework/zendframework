@@ -604,7 +604,7 @@ class My_Resource_View extends Zend_Application_Resource_ResourceAbstract
 
             $viewRenderer =
                 Zend_Controller_Action_HelperBroker::getStaticHelper(
-                    'ViewRenderer',
+                    'ViewRenderer'
                 );
             $viewRenderer->setView($view);
 

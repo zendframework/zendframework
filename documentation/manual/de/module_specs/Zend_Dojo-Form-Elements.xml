@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15851 -->
+<!-- EN-Revision: 16073 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.dojo.form.elements">
     <title>Dijit-Specifische Fomularelemente</title>
@@ -1056,7 +1056,7 @@ $form->addElement(
         </para>
 
         <para>
-            Intern wird NumberTextBox abgeleitet von
+            Intern wird PasswordTextBox abgeleitet von
             <link linkend="zend.dojo.form.elements.validationTextBox">ValidationTextBox</link> und
             <link linkend="zend.dojo.form.elements.textBox">TextBox</link>; alle in diesen Klassen
             vorhandenen Methoden sind vorhanden.

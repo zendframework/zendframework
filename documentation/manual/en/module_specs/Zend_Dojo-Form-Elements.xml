@@ -957,7 +957,7 @@ $form->addElement(
         </para>
 
         <para>
-            Internally, NumberTextBox derives from <link
+            Internally, PasswordTextBox derives from <link
                 linkend="zend.dojo.form.elements.validationTextBox">ValidationTextBox</link>
             and <link linkend="zend.dojo.form.elements.textBox">TextBox</link>;
             all methods available to those classes are available.

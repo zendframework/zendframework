@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15787 -->
+<!-- Reviewed: no -->
+<sect2 id="zend.application.available-resources.view">
+    <title>Zend_Application_Resource_View</title>
+
+    <para>
+        <classname>Zend_Application_Resource_View</classname> peut être utilisée pour configurer
+        une instance <classname>Zend_View</classname> instance. Les clés de configurations sont
+        celles de <link linkend="zend.view.introduction.options">Zend_View</link>.
+    </para>
+
+    <para>
+        Dès que l'instance est configurée, ceci crée une instace de
+        <classname>Zend_Controller_Action_Helper_ViewRenderer</classname> et enregistre le
+        ViewRenderer avec <classname>Zend_Controller_Action_HelperBroker</classname>&#160;-&#160;à
+        partir duquel vous pourrez le récupérer plus tard.
+    </para>
+
+    <example id="zend.application.available-resources.view.configExample">
+        <title>Exemple de configuration d'une ressource de vue</title>
+
+        <para>
+            Voici un extrait de configuration <acronym>INI</acronym> montrant comment configurer une
+            ressource de vue.
+        </para>
+
+        <programlisting language="ini"><![CDATA[
+resources.view.encoding = "UTF-8"
+resources.view.basePath = APPLICATION_PATH "/views/scripts"
+]]></programlisting>
+    </example>
+</sect2>

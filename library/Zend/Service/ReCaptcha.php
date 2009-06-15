@@ -387,14 +387,14 @@ class Zend_Service_ReCaptcha extends Zend_Service_Abstract
 
         $host = self::API_SERVER;
 
-        if ($this->_params['ssl'] === true) {
+        if ((bool) $this->_params['ssl'] === true) {
             $host = self::API_SECURE_SERVER;
         }
 
         $htmlBreak = '<br>';
         $htmlInputClosing = '>';
 
-        if ($this->_params['xhtml'] === true) {
+        if ((bool) $this->_params['xhtml'] === true) {
             $htmlBreak = '<br />';
             $htmlInputClosing = '/>';
         }

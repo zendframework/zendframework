@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16068 -->
+<!-- EN-Revision: 16073 -->
 <sect2 id="zend.dojo.form.elements">
-    <title>Dijitに特有のフォーム要素</title>
+    <title>Dijit固有のフォーム要素</title>
 
     <para>
         ビュー・ヘルパーが提供される各々のフォームdijitには、
@@ -60,7 +60,7 @@
     </para>
 
     <para>
-        その上、dijitに特有の要素は以下に該当するデコレーターの独特な一覧を実装します:
+        その上、dijit固有の要素は以下に該当するデコレーターの独特な一覧を実装します:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -851,7 +851,7 @@ $form->addElement(
         </itemizedlist>
 
         <example id="zend.dojo.form.elements.numberSpinner.example">
-            <title>NumberSpinner dijit要素の使用例</title>
+            <title>数スピナーdijit要素の使用例</title>
 
             <programlisting language="php"><![CDATA[
 $form->addElement(
@@ -875,20 +875,19 @@ $form->addElement(
     </sect3>
 
     <sect3 id="zend.dojo.form.elements.numberTextBox">
-        <title>数値テキストボックス</title>
+        <title>数テキストボックス</title>
 
         <para>
-            <!-- TODO -->
-            A number text box is a text element for entering numeric values;
-            unlike NumberSpinner, numbers are entered manually. Validations and
-            constraints can be provided to ensure the number stays in a
-            particular range or format.
+            数テキストボックスは、数を入力するためのテキスト要素です;
+            数スピナーとは異なり、数は手で入力します。
+            バリデーションと制約は、
+            数が特定の範囲または形式にとどまることを確実とするために提示することができます。
         </para>
 
         <para>
-            Internally, NumberTextBox derives from <link
-                linkend="zend.dojo.form.elements.validationTextBox">ValidationTextBox</link>
-            and <link linkend="zend.dojo.form.elements.textBox">TextBox</link>;
+            内部的には、数テキストボックスは<link
+                linkend="zend.dojo.form.elements.validationTextBox">バリデーションテキストボックス</link>
+            及び<link linkend="zend.dojo.form.elements.textBox">テキストボックス</link>に由来します;
             それらのクラスのメソッドが全て利用可能です。さらに、
             個別の制約を設定するために下記のメソッドを使用できます:
         </para>
@@ -896,38 +895,37 @@ $form->addElement(
         <itemizedlist>
             <listitem><para>
                 <code>setLocale($locale)</code>及び<code>getLocale()</code>:
-                specify and retrieve a specific or alternate locale to use with
-                this dijit.
+                このdijitを利用するために指定されたまたは代替のロケールを指定または取得します。
             </para></listitem>
 
             <listitem><para>
                 <code>setPattern($pattern)</code>及び
-                <code>getPattern()</code>: set and retrieve a <ulink
-                    url="http://www.unicode.org/reports/tr35/#Number_Format_Patterns">number
-                    pattern format</ulink> to use to format the number.
+                <code>getPattern()</code>:
+                数をフォーマットするために使う<ulink
+                url="http://www.unicode.org/reports/tr35/#Number_Format_Patterns">数値パターン形式</ulink>
+                を設定または取得します。
             </para></listitem>
 
             <listitem><para>
-                <code>setType($type)</code>及び<code>getType()</code>: set and
-                retrieve the numeric format type to use (should be one of
-                'decimal', 'percent', or 'currency').
+                <code>setType($type)</code>及び<code>getType()</code>:
+                使用する数の形式型を取得します。
+                ('decimal'、'percent'または'currency'のいずれかであるべきです)。
             </para></listitem>
 
             <listitem><para>
                 <code>setPlaces($places)</code>及び<code>getPlaces()</code>:
-                set and retrieve the number of decimal places to support.
+                サポートする小数位の数を設定または取得します。
             </para></listitem>
 
             <listitem><para>
-                <code>setStrict($flag)</code>及び<code>getStrict()</code>: set
-                and retrieve the value of the strict flag, which indicates how
-                much leniency is allowed in relation to whitespace and
-                non-numeric characters.
+                <code>setStrict($flag)</code>及び<code>getStrict()</code>:
+                空白文字及び数字以外の文字についてどの程度ゆるやかに許されるか示す
+                厳密性フラグの値を設定または取得します。
             </para></listitem>
         </itemizedlist>
 
         <example id="zend.dojo.form.elements.numberTextBox.example">
-            <title>数値テキストボックスdijit要素の使用例</title>
+            <title>数テキストボックスdijit要素の使用例</title>
 
             <programlisting language="php"><![CDATA[
 $form->addElement(
@@ -949,18 +947,20 @@ $form->addElement(
     </sect3>
 
     <sect3 id="zend.dojo.form.elements.passwordTextBox">
-        <title>PasswordTextBox</title>
+        <title>パスワードテキストボックス</title>
 
         <para>
-            PasswordTextBox is simply a ValidationTextBox that is tied to a
-            password input; its sole purpose is to allow for a dijit-themed text
-            entry for passwords that also provides client-side validation.
+            パスワードテキストボックスは、
+            パスワード入力のみに結び付けられたバリデーションテキストボックスです;
+            その唯一の目的は、dijitテーマを与えられたテキスト入力を
+            クライアント側バリデーションを提示するパスワードのためにできるようにすることです。
         </para>
 
         <para>
-            Internally, NumberTextBox derives from <link
-                linkend="zend.dojo.form.elements.validationTextBox">ValidationTextBox</link>
-            and <link linkend="zend.dojo.form.elements.textBox">TextBox</link>;
+            内部的には、パスワードテキストボックスは<link
+                linkend="zend.dojo.form.elements.validationTextBox">バリデーションテキストボックス</link>
+            及び<link linkend="zend.dojo.form.elements.textBox">テキストボックス</link>
+            に由来します;
             それらのクラスのメソッドが全て利用可能です。
         </para>
 
@@ -986,28 +986,25 @@ $form->addElement(
     </sect3>
 
     <sect3 id="zend.dojo.form.elements.radioButton">
-        <title>RadioButton</title>
+        <title>ラジオボタン</title>
 
         <para>
-            RadioButton wraps standard radio input elements to provide a
-            consistent look and feel with other dojo dijits.
+            ラジオボタンは、他のDojo dijitと一貫したルック＆フィールを提示するために、
+            標準的なラジオ入力要素をラップします。
         </para>
 
         <para>
-            RadioButton extends from DijitMulti, which
-            allows you to specify select options via the
-            <code>setMultiOptions()</code>及び<code>setMultiOption()</code>
-            methods.
+            ラジオボタンはDijitMultiから拡張します。
+            そして、<code>setMultiOptions()</code>及び<code>setMultiOption()</code>メソッドによって
+            選ばれた選択肢を指定することができます。
         </para>
 
         <para>
-            By default, this element registers an <code>InArray</code> validator
-            which validates against the array keys of registered options. You
-            can disable this behavior by either calling
-            <code>setRegisterInArrayValidator(false)</code>, or by passing a
-            false value to the <code>registerInArrayValidator</code>
-            configuration key.
-            <!-- TODO :NEXT JUMP -->
+            デフォルトでこの要素は、
+            配列に対して登録された選択肢のキーを確認する<code>InArray</code>バリデーターを登録します。
+            <code>setRegisterInArrayValidator(false)</code>または
+            <code>registerInArrayValidator</code>のどちらを呼び出しても、
+            設定キーにfalse値を渡すことによってこのふるまいを抑制することができます。
         </para>
 
         <example id="zend.dojo.form.elements.radioButton.example">
@@ -1231,21 +1228,20 @@ $form->addElement(
     </sect3>
 
     <sect3 id="zend.dojo.form.elements.timeTextBox">
-        <title>TimeTextBox</title>
+        <title>時刻テキストボックス</title>
 
         <para>
-            <!-- TODO -->
-            TimeTextBox is a text input that provides a drop-down for selecting
-            a time. The drop-down may be configured to show a certain window of
-            time, with specified increments.
+            時刻テキストボックスは、
+            時刻を選ぶためにドロップダウンを提示するテキスト入力です。
+            ドロップダウンは指定された増分で、時刻の特定のウインドウを示すように構成されるかもしれません。
         </para>
 
         <para>
-            Internally, TimeTextBox derives from <link
-                linkend="zend.dojo.form.elements.dateTextBox">DateTextBox</link>,
+            内部的には、時刻テキストボックスは<link
+                linkend="zend.dojo.form.elements.dateTextBox">日付テキストボックス</link>、
             <link
-                linkend="zend.dojo.form.elements.validationTextBox">ValidationTextBox</link>
-            and <link linkend="zend.dojo.form.elements.textBox">TextBox</link>;
+                linkend="zend.dojo.form.elements.validationTextBox">バリデーションテキストボックス</link>
+            及び<link linkend="zend.dojo.form.elements.textBox">テキストボックス</link>に由来します;
             それらのクラスのメソッドが全て利用可能です。さらに、
             個別の制約を設定するために下記のメソッドを使用できます:
         </para>
@@ -1253,30 +1249,33 @@ $form->addElement(
         <itemizedlist>
             <listitem><para>
                 <code>setTimePattern($pattern)</code>及び
-                <code>getTimePattern()</code>: set and retrieve the <ulink
-                    url="http://www.unicode.org/reports/tr35/#Date_Format_Patterns">unicode
-                    time format pattern</ulink> for formatting the time.
+                <code>getTimePattern()</code>:
+                時刻をフォーマットするための<ulink
+                    url="http://www.unicode.org/reports/tr35/#Date_Format_Patterns">unicode時間形式パターン</ulink>
+                を設定または取得します。
             </para></listitem>
 
             <listitem><para>
                 <code>setClickableIncrement($format)</code>及び
-                <code>getClickableIncrement()</code>: set the <ulink
+                <code>getClickableIncrement()</code>:
+                Time Pickerでクリックできる全ての要素で
+                増分値を示す<ulink
                     url="http://en.wikipedia.org/wiki/ISO_8601">ISO-8601</ulink>
-                string representing the amount by which every clickable element
-                in the time picker increases.
+                文字列を設定または取得します。
             </para></listitem>
 
             <listitem><para>
                 <code>setVisibleIncrement($format)</code>及び
-                <code>getVisibleIncrement()</code>: set the increment visible
-                in the time chooser; must follow ISO-8601 formats.
+                <code>getVisibleIncrement()</code>:
+                時刻選択にて見える増分を設定します;
+                ISO-8601フォーマットに従わなければなりません。
             </para></listitem>
 
             <listitem><para>
                 <code>setVisibleRange($format)</code>及び
-                <code>getVisibleRange()</code>: set and retrieve the range of
-                time visible in the time chooser at any given moment; must
-                follow ISO-8601 formats.
+                <code>getVisibleRange()</code>:
+                時刻選択にていつでも見える時刻の範囲を設定または取得します;
+                ISO-8601フォーマットに従わなければなりません。
             </para></listitem>
         </itemizedlist>
 
@@ -1284,8 +1283,7 @@ $form->addElement(
             <title>時刻テキストボックスdijit要素の使用例</title>
 
             <para>
-                The following will create a TimeTextBox that displays 2 hours
-                at a time, with increments of 10 minutes.
+                以下は、時刻に２時を表示する、増分が10分毎の時刻テキストボックスをつくります。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -1308,67 +1306,66 @@ $form->addElement(
         <title>バリデーションテキストボックス</title>
 
         <para>
-            ValidationTextBox provides the ability to add validations and constraints to a text
-            input. Internally, it derives from <link
-                linkend="zend.dojo.form.elements.textBox">TextBox</link>, and adds the following
-            accessors and mutators for manipulating dijit parameters:
+            バリデーションテキストボックスは、
+            バリデーションと制約をテキスト入力に加える能力を提供します。
+            内部的には、<link
+                linkend="zend.dojo.form.elements.textBox">テキストボックス</link>に由来します。
+            dijitパラメータを操作するために、以下のアクセッサとミューテーターを加えます:
         </para>
 
         <itemizedlist>
             <listitem><para>
                 <code>setInvalidMessage($message)</code>及び
-                <code>getInvalidMessage()</code>: set and retrieve the tooltip
-                message to display when the value does not validate.
+                <code>getInvalidMessage()</code>:
+                値がバリデーションされないときに表示するtooltipメッセージを設定または取得します。
             </para></listitem>
 
             <listitem><para>
                 <code>setPromptMessage($message)</code>及び
-                <code>getPromptMessage()</code>: set and retrieve the tooltip
-                message to display for element usage.
+                <code>getPromptMessage()</code>:
+                要素の使用方法のために表示されるtooltipメッセージを設定または取得します。
             </para></listitem>
 
             <listitem><para>
                 <code>setRegExp($regexp)</code>及び<code>getRegExp()</code>:
-                set and retrieve the regular expression to use for validating
-                the element. The regular expression does not need boundaries
-                (unlike PHP's preg* family of functions).
+                要素を確認するために使用する正規表現を取得します。
+                正規表現は、バウンダリ（PHPのpreg* ファミリーの関数と異なります）を必要としません。
             </para></listitem>
 
             <listitem><para>
                 <code>setConstraint($key, $value)</code>及び
-                <code>getConstraint($key)</code>: set and retrieve additional
-                constraints to use when validating the element; used primarily
-                with subclasses. Constraints are stored in the 'constraints'
-                key of the dijit parameters.
+                <code>getConstraint($key)</code>:
+                要素を確認するときに使う追加制約を設定または取得します;
+                サブクラスで主に使われます。
+                制約は、dijitパラメータの 'constraints' キーに保存されます。
             </para></listitem>
 
             <listitem><para>
                 <code>setConstraints(array $constraints)</code>及び
-                <code>getConstraints()</code>: set and retrieve individual
-                constraints to use when validating the element; used primarily
-                with subclasses.
+                <code>getConstraints()</code>:
+                要素を確認するときに使う個々の制約を設定または取得します;
+                サブクラスで主に使われます。
             </para></listitem>
 
             <listitem><para>
-                <code>hasConstraint($key)</code>: test whether a given
-                constraint exists.
+                <code>hasConstraint($key)</code>:
+                与えられた制約が存在するかどうか調べます。
             </para></listitem>
 
             <listitem><para>
                 <code>removeConstraint($key)</code>及び
-                <code>clearConstraints()</code>: remove an individual or all
-                constraints for the element.
+                <code>clearConstraints()</code>:
+                要素のために個別またはすべての制約を取り除きます。
             </para></listitem>
         </itemizedlist>
 
         <example id="zend.dojo.form.elements.validationTextBox.example">
-            <title>ValidationTextBox dijit要素の使用例</title>
+            <title>バリデーションテキストボックスdijit要素の使用例</title>
 
             <para>
-                The following will create a ValidationTextBox that requires a
-                single string consisting solely of word characters (i.e., no
-                spaces, most punctuation is invalid).
-                <!-- TODO END -->
+                以下は、
+                単語文字（すなわち、空白や大部分の句読点は無効です）だけから成る
+                一つのストリングを必要とするバリデーション・テキストボックスをつくります。
             </para>
 
             <programlisting language="php"><![CDATA[

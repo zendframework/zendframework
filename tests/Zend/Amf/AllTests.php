@@ -17,6 +17,7 @@ require_once 'Zend/Amf/Value/MessageBodyTest.php';
 require_once 'Zend/Amf/Value/MessageHeaderTest.php';
 require_once 'Zend/Amf/AuthTest.php';
 require_once 'Zend/Amf/ResourceTest.php';
+require_once 'Zend/Amf/Value/ArrayCollectionTest.php'
 
 class Zend_Amf_AllTests
 {
@@ -39,6 +40,8 @@ class Zend_Amf_AllTests
         $suite->addTestSuite('Zend_Amf_Value_MessageHeaderTest');
         $suite->addTestSuite('Zend_Amf_AuthTest');
         $suite->addTestSuite('Zend_Amf_ResourceTest');
+        $suite->addTestSuite('Zend_Amf_ArrayCollectionTest');
+        
 
         return $suite;
     }

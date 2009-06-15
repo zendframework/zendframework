@@ -29,17 +29,11 @@
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Amf_Value_Messaging_ArrayCollection implements Iterator
+class Zend_Amf_Value_Messaging_ArrayCollection implements  ArrayAccess , IteratorAggregate, Countable
 {
     /**
-     * Current index of source 
-     * @var integer
-     */
-    protected $_sourceIndex = 0;
-    
-    /**
      * Data in the ArrayCollection
-     * @var unknown_type
+     * @var ArrayObject
      */
     protected $_source;
     
@@ -49,69 +43,23 @@ class Zend_Amf_Value_Messaging_ArrayCollection implements Iterator
      */
     public function __construct($data = null)
     {
-        $this->_source = array();
+        $this->_source = new ArrayObject();
         if (!is_null($data)) {
             $this->loadSource($data); 
         }
     }
     
-    /**
-     * Get the number of elements in the collection
-     * @return integer Count
-     */
-    public function count()
-    {
-        return count($this->_source);
-    }
     
     /**
-     * Reset the iterator to the beginning of the data
-     * @return void
+     * Value is append to the last element of the ArrayCollection
+     * @param misc new value to be added to the ArrayCollection
      */
-    public function rewind()
+    public function append($value)
     {
-        $this->_sourceIndex = 0;
-    }
-    
-    /**
-     * Returns the data at the current index in the collection
-     * 
-     * @return mixed the current row or null if no rows exist. 
-     */
-    public function current()
-    {
-        if(isset($this->_source[$this->_sourceIndex])) {
-            return $this->_source[$this->_sourceIndex];
-        } else {
-            return null;
+        if(!is_null($value))
+        {
+            $this->_source->append($value); 
         }
-    }
-    
-    
-    /**
-     * Returns the collections current index number
-     * @return mixed the current row number (starts at 0), null if there is no data 
-     */
-    public function key()
-    {
-        return $this->_sourceIndex;
-    }
-
-    /**
-     * @return mixed the next row number collection, or null if not another row.
-     */
-    public function next()
-    {
-       return ++$this->_sourceIndex;
-    }
-
-    /**
-	 * checks if the iterator is valid
-	 * @return boolean is the iterator valid
-     */
-    public function valid()
-    {
-        return 0 <= $this->_sourceIndex && $this->_sourceIndex < $this->count();
     }
     
     /**
@@ -126,6 +74,65 @@ class Zend_Amf_Value_Messaging_ArrayCollection implements Iterator
         } else {
             $this->_source[] = array($name => $value); 
         }
+    }
+    
+    /**
+     * Get the number of elements in the collection
+     * @return integer Count
+     */
+    public function count()
+    {
+        return count($this->_source);
+    }
+        
+	/**
+     * Check if the specified offset exists exists for the key supplied. 
+     *
+     * @param mixed $offset
+     * @return bool true if it exists. 
+     */
+    function offsetExists($offset) {
+        return isset($this->_source[$offset]);
+    }
+
+    /**
+     * Value of given offset
+     *
+     * @param mixed $offset
+     * @return mixed
+     */
+    function offsetGet($offset) {
+        return $this->_source[$offset];
+    }
+
+    /**
+     * Update or add a new value based on the on the offset key. Careful as this will overwrite any existing propery by the same offset id
+     *
+     * @param mixed Offset to modify
+     * @param mixed New value for the offset. 
+     */
+    function offsetSet($offset,$value) {
+        if (!is_null($offset)) {
+            $this->_source[$offset] = $value;
+        }
+    }
+
+    /**
+     * Offest to delete from the collection
+     *
+     * @param mixed $offset
+     */
+    function offsetUnset($offset) {
+        unset($this->_source[$offset]);
+    }
+    
+    /**
+	 * Return the source of the iterator
+	 * @return ArrayObject
+     */
+    function getIterator()
+    {
+        return $this->_source;
     }
     
     /**
@@ -153,6 +160,9 @@ class Zend_Amf_Value_Messaging_ArrayCollection implements Iterator
                     }
                 }
             }
+        } else {
+            require_once 'Zend/Amf/Server/Exception.php';
+            throw new Zend_Amf_Server_Exception("Could not load source data into an ArrayCollection must be an Array");
         }
     }
 }

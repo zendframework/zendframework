@@ -37,6 +37,12 @@ class Zend_Amf_Parse_Amf0_Serializer extends Zend_Amf_Parse_Serializer
      * @var string Name of the class to be returned
      */
     protected $_className = '';
+    
+    /**
+     * An array of reference objects
+     * @var array
+     */
+    protected $_referenceObjects = array();
 
     /**
      * Determine type and serialize accordingly
@@ -53,46 +59,53 @@ class Zend_Amf_Parse_Amf0_Serializer extends Zend_Amf_Parse_Serializer
     public function writeTypeMarker($data, $markerType = null)
     {
         if (null !== $markerType) {
-            // Write the Type Marker to denote the following action script data type
-            $this->_stream->writeByte($markerType);
-            switch($markerType) {
-                case Zend_Amf_Constants::AMF0_NUMBER:
-                    $this->_stream->writeDouble($data);
-                    break;
-                case Zend_Amf_Constants::AMF0_BOOLEAN:
-                    $this->_stream->writeByte($data);
-                    break;
-                case Zend_Amf_Constants::AMF0_STRING:
-                    $this->_stream->writeUTF($data);
-                    break;
-                case Zend_Amf_Constants::AMF0_OBJECT:
-                    $this->writeObject($data);
-                    break;
-                case Zend_Amf_Constants::AMF0_NULL:
-                    break;
-                case Zend_Amf_Constants::AMF0_MIXEDARRAY:
-                    // Write length of numeric keys as zero.
-                    $this->_stream->writeLong(0);
-                    $this->writeObject($data);
-                    break;
-                case Zend_Amf_Constants::AMF0_ARRAY:
-                    $this->writeArray($data);
-                    break;
-                case Zend_Amf_Constants::AMF0_DATE:
-                    $this->writeDate($data);
-                    break;
-                case Zend_Amf_Constants::AMF0_LONGSTRING:
-                    $this->_stream->writeLongUTF($data);
-                    break;
-                case Zend_Amf_Constants::AMF0_TYPEDOBJECT:
-                    $this->writeTypedObject($data);
-                    break;
-                case Zend_Amf_Constants::AMF0_AMF3:
-                    $this->writeAmf3TypeMarker($data);
-                    break;
-                default:
-                    require_once 'Zend/Amf/Exception.php';
-                    throw new Zend_Amf_Exception("Unknown Type Marker: " . $markerType);
+            //try to refrence the given object
+            if( !$this->writeObjectReference($data, $markerType) ) {
+            
+                // Write the Type Marker to denote the following action script data type
+                $this->_stream->writeByte($markerType);
+                switch($markerType) {
+                    case Zend_Amf_Constants::AMF0_NUMBER:
+                        $this->_stream->writeDouble($data);
+                        break;
+                    case Zend_Amf_Constants::AMF0_BOOLEAN:
+                        $this->_stream->writeByte($data);
+                        break;
+                    case Zend_Amf_Constants::AMF0_STRING:
+                        $this->_stream->writeUTF($data);
+                        break;
+                    case Zend_Amf_Constants::AMF0_OBJECT:
+                        $this->writeObject($data);
+                        break;
+                    case Zend_Amf_Constants::AMF0_NULL:
+                        break;
+                    case Zend_Amf_Constants::AMF0_REFERENCE:
+                        $this->_stream->writeInt($data);
+                        break;
+                    case Zend_Amf_Constants::AMF0_MIXEDARRAY:
+                        // Write length of numeric keys as zero.
+                        $this->_stream->writeLong(0);
+                        $this->writeObject($data);
+                        break;
+                    case Zend_Amf_Constants::AMF0_ARRAY:
+                        $this->writeArray($data);
+                        break;
+                    case Zend_Amf_Constants::AMF0_DATE:
+                        $this->writeDate($data);
+                        break;
+                    case Zend_Amf_Constants::AMF0_LONGSTRING:
+                        $this->_stream->writeLongUTF($data);
+                        break;
+                    case Zend_Amf_Constants::AMF0_TYPEDOBJECT:
+                        $this->writeTypedObject($data);
+                        break;
+                    case Zend_Amf_Constants::AMF0_AMF3:
+                        $this->writeAmf3TypeMarker($data);
+                        break;
+                    default:
+                        require_once 'Zend/Amf/Exception.php';
+                        throw new Zend_Amf_Exception("Unknown Type Marker: " . $markerType);
+                }
             }
         } else {
             if(is_resource($data)) {
@@ -159,6 +172,33 @@ class Zend_Amf_Parse_Amf0_Serializer extends Zend_Amf_Parse_Serializer
             $this->writeTypeMarker($data, $markerType);
         }
         return $this;
+    }
+    
+	/**
+     * Check if the given object is in the reference table, write the reference if it exists,
+     * otherwise add the object to the reference table
+     * 
+     * @param mixed $object object to check for reference
+     * @param $markerType AMF type of the object to write
+     * @return Boolean true, if the reference was written, false otherwise
+     */
+    protected function writeObjectReference($object, $markerType){
+        if( $markerType == Zend_Amf_Constants::AMF0_OBJECT ||
+            $markerType == Zend_Amf_Constants::AMF0_MIXEDARRAY ||
+            $markerType == Zend_Amf_Constants::AMF0_ARRAY ||
+            $markerType == Zend_Amf_Constants::AMF0_TYPEDOBJECT ) {
+                
+            $ref = array_search($object, $this->_referenceObjects,true);
+            //handle object reference
+            if($ref !== false){
+                $this->writeTypeMarker($ref,Zend_Amf_Constants::AMF0_REFERENCE);
+                return true;
+            }
+
+            $this->_referenceObjects[] = $object;
+        }
+        
+        return false;
     }
 
     /**

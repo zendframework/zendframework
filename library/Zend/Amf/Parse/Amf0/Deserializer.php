@@ -48,13 +48,6 @@ class Zend_Amf_Parse_Amf0_Deserializer extends Zend_Amf_Parse_Deserializer
     protected $_objectEncoding = Zend_Amf_Constants::AMF0_OBJECT_ENCODING;
 
     /**
-     * refrence to AMF3 deserializer
-     *
-     * @var Zend_Amf_Parse_Amf3_Deserializer
-     */
-    protected $_deserializer = null;
-
-    /**
      * Read AMF markers and dispatch for deserialization
      *
      * Checks for AMF marker types and calls the appropriate methods
@@ -291,7 +284,8 @@ class Zend_Amf_Parse_Amf0_Deserializer extends Zend_Amf_Parse_Deserializer
      */
     public function readAmf3TypeMarker()
     {
-        $deserializer = $this->getDeserializer();
+    	require_once 'Zend/Amf/Parse/Amf3/Deserializer.php';
+        $deserializer = new Zend_Amf_Parse_Amf3_Deserializer($this->_stream);
         $this->_objectEncoding = Zend_Amf_Constants::AMF3_OBJECT_ENCODING;
         return $deserializer->readTypeMarker();
     }
@@ -305,19 +299,5 @@ class Zend_Amf_Parse_Amf0_Deserializer extends Zend_Amf_Parse_Deserializer
     public function getObjectEncoding()
     {
         return $this->_objectEncoding;
-    }
-
-    /**
-     * Get deserializer
-     *
-     * @return Zend_Amf_Parse_Amf3_Deserializer
-     */
-    public function getDeserializer()
-    {
-        if (null === $this->_deserializer) {
-            require_once 'Zend/Amf/Parse/Amf3/Deserializer.php';
-            $this->_deserializer = new Zend_Amf_Parse_Amf3_Deserializer($this->_stream);
-        }
-        return $this->_deserializer;
     }
 }

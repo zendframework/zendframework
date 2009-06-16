@@ -67,6 +67,8 @@ final class Zend_Amf_Constants
     const ET_EXTERNAL            = 0x01;
     const ET_DYNAMIC             = 0x02;
     const ET_PROXY               = 0x03;
+    
+    const FMS_OBJECT_ENCODING    = 0x01;
 
     /**
      * Special content length value that indicates "unknown" content length 

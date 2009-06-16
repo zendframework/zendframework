@@ -105,6 +105,7 @@ class Zend_Amf_Request
         $clientVersion = $stream->readUnsignedShort();
         if (($clientVersion != Zend_Amf_Constants::AMF0_OBJECT_ENCODING)
             && ($clientVersion != Zend_Amf_Constants::AMF3_OBJECT_ENCODING)
+            && ($clientVersion != Zend_Amf_Constants::FMS_OBJECT_ENCODING)
         ) {
             require_once 'Zend/Amf/Exception.php';
             throw new Zend_Amf_Exception('Unknown Player Version ' . $clientVersion);

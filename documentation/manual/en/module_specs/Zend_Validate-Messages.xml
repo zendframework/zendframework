@@ -100,6 +100,15 @@
                     <entry>'%value%' is not of the format YYYY-MM-DD</entry>
                 </row>
                 <row>
+                    <entry morerows="1" valign="middle">Db_Abstract</entry>
+                    <entry>ERROR_NO_RECORD_FOUND</entry>
+                    <entry>No record matching %value% was found</entry>
+                </row>
+                <row>
+                    <entry>ERROR_RECORD_FOUND</entry>
+                    <entry>A record matching %value% was found</entry>
+                </row>
+                <row>
                     <entry morerows="1" valign="middle">Digits</entry>
                     <entry>NOT_DIGITS</entry>
                     <entry>'%value%' contains not only digit characters</entry>

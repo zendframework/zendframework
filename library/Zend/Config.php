@@ -197,7 +197,8 @@ class Zend_Config implements Countable, Iterator
     public function toArray()
     {
         $array = array();
-        foreach ($this->_data as $key => $value) {
+        $data = $this->_data;
+        foreach ($data as $key => $value) {
             if ($value instanceof Zend_Config) {
                 $array[$key] = $value->toArray();
             } else {

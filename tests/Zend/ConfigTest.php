@@ -529,5 +529,15 @@ class Zend_ConfigTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($config->one->readOnly(), 'First level children are writable');
         $this->assertTrue($config->one->two->readOnly(), 'Second level children are writable');
     }
+    
+    public function testZF6995_toArrayDoesNotDisturbInternalIterator()
+    {
+        $config = new Zend_Config(range(1,10));
+        $config->rewind();
+        $this->assertEquals(1, $config->current());
+
+        $config->toArray();
+        $this->assertEquals(1, $config->current());
+    }
 }
 

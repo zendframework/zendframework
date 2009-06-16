@@ -36,6 +36,12 @@ require_once 'Zend/Amf/Parse/TypeLoader.php';
 class Zend_Amf_Parse_Amf3_Serializer extends Zend_Amf_Parse_Serializer
 {
     /**
+     * reference key to objects that have already been encountered. 
+     * @var array
+     */
+	private $_references = array();
+	
+    /**
      * Serialize PHP types to AMF3 and write to stream
      *
      * Checks to see if the type was declared and then either
@@ -223,6 +229,8 @@ class Zend_Amf_Parse_Amf3_Serializer extends Zend_Amf_Parse_Serializer
      */
     public function writeArray(array $array)
     {
+    	$this->_references[] = $array;
+    	
         // have to seperate mixed from numberic keys.
         $numeric = array();
         $string  = array();
@@ -254,6 +262,33 @@ class Zend_Amf_Parse_Amf3_Serializer extends Zend_Amf_Parse_Serializer
     }
 
     /**
+     * Create a reference to an existing object. 
+     * @param $key
+     * @return Zend_Amf_Parse_Amf3_Serializer
+     */
+	public function writeReference($key)
+	{
+		$this->writeInteger($key << 1);
+		return $this;
+	}
+
+	/**
+	 * Check to see if the reference already exists in the lookup table. 
+	 * @param $object
+	 * @return object reference | false if it is not found. 
+	 */
+	private function referenceExist($object)
+	{
+		$key = array_search($object, $this->_references, true);
+		if($key !== false) {
+			return $key;
+		} else { 
+			$this->_references[] = $object;
+			return false;
+		}
+	}
+
+    /**
      * Write object to ouput stream
      *
      * @param  mixed $data
@@ -261,6 +296,11 @@ class Zend_Amf_Parse_Amf3_Serializer extends Zend_Amf_Parse_Serializer
      */
     public function writeObject($object)
     {
+    	if(($key = $this->referenceExist($object)) !== false) {
+    		 $this->writeReference($key); 
+    		 return $this;
+    	}
+    	
         $encoding  = Zend_Amf_Constants::ET_PROPLIST;
         $className = '';
 

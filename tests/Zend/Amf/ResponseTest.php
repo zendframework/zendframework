@@ -566,6 +566,41 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($mockResponse, $testResponse);
     }
     
+    /**
+     * Check to make sure that cyclic references work inside of the AMF3 serializer
+     * @group ZF-6205
+     */
+    public function testReferenceObjectsToAmf3()
+    {
+        $data = new ReferenceTest();
+        $data = $data->getReference();
+        
+        // Create an acknowlege message for a response to a RemotingMessage
+        $acknowledgeMessage = new Zend_Amf_Value_Messaging_AcknowledgeMessage(null);
+        $acknowledgeMessage->correlationId = '839B091C-8DDF-F6DD-2FF1-EAA82AE39608';
+        $acknowledgeMessage->clientId = '21CC629C-58AF-2D68-A292-000006F8D883';
+        $acknowledgeMessage->messageId = '05E70A68-FF7F-D289-1A94-00004CCECA98';
+        $acknowledgeMessage->destination = null;
+        $acknowledgeMessage->timeToLive = 0;
+        $acknowledgeMessage->timestamp = '124518243200';
+        $acknowledgeMessage->body = $data;
+        
+        $newBody = new Zend_Amf_Value_MessageBody($this->responseURI,null,$acknowledgeMessage);
+
+        // serialize the data to an AMF output stream
+        $this->_response->setObjectEncoding(0x03);
+        $this->_response->addAmfBody($newBody);
+        $this->_response->finalize();
+        $testResponse = $this->_response->getResponse();
+
+        // Load the expected response.
+        $mockResponse = file_get_contents(dirname(__FILE__) .'/Response/mock/referenceObjectAmf3Response.bin');
+        
+        // Check that the response matches the expected serialized value
+        $this->assertEquals($mockResponse, $testResponse);
+        
+    }
+    
     
 
     /**
@@ -982,6 +1017,25 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
         $test = $this->_response->__toString();
         $this->assertSame($response, $test);
     }
+}
+
+/*
+ * Used to test recursive cyclic references in the serializer. 
+ *@group ZF-6205
+ */
+class ReferenceTest {
+    public function getReference() { 
+        $o = new TestObject(); 
+        $o->recursive = new TestObject(); 
+        $o->recursive->recursive = $o; 
+        return $o; 
+    }
+}
+/**
+ * @see ReferenceTest
+ */
+class TestObject {
+    public $recursive;
 }
 
 if (PHPUnit_MAIN_METHOD == 'Zend_Amf_ResponseTest::main') {

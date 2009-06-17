@@ -37,7 +37,7 @@ require_once 'Zend/Service/ReCaptcha.php';
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: $
+ * @version    $Id$
  */
 class Zend_Captcha_ReCaptcha extends Zend_Captcha_Base
 {

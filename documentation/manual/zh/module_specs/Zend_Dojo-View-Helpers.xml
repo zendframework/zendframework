@@ -788,7 +788,7 @@ echo $view->passwordTextBox(
                 </para>
 
                 <para>
-                    RadioButton 接受可选的第四个参数，<code>$options</code>，
+                    RadioButton 接受可选的第五个参数，<code>$options</code>，
                     是个联合数组，值/标签对用作radio选项。
                     你可以以 <code>$attribs</code> 键 <code>options</code> 来传递。
                 </para>

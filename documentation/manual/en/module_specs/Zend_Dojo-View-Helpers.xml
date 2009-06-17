@@ -916,7 +916,7 @@ echo $view->passwordTextBox(
                 </para>
 
                 <para>
-                    RadioButton accepts an option fourth argument,
+                    RadioButton accepts an optional fifth argument,
                     <code>$options</code>, an associative array of value/label
                     pairs used as the radio options. You may also pass these as
                     the <code>$attribs</code> key <code>options</code>.

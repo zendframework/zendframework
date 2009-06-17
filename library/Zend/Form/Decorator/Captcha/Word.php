@@ -54,6 +54,11 @@ class Zend_Form_Decorator_Captcha_Word extends Zend_Form_Decorator_Abstract
 
         $hiddenName = $name . '[id]';
         $textName   = $name . '[input]';
+        
+        $label = $element->getDecorator("Label");
+        if($label) {
+        	$label->setOption("id", "$name-input");
+        }
 
         $placement = $this->getPlacement();
         $separator = $this->getSeparator();

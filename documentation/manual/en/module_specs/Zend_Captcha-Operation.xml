@@ -59,10 +59,13 @@ $captcha = new Zend_Captcha_Figlet(array(
 ));
 
 $id = $captcha->generate();
+echo "<form method=\"post\" action=\"\">";
 echo $captcha->render($view);
+echo "</form>";
 
 // On subsequent request:
-// Assume captcha setup as before, and $value is the submitted value:
+// Assume captcha setup as before, the value of $_POST['foo']
+// would be key/value array: id => captcha ID, input => captcha value
 if ($captcha->isValid($_POST['foo'], $_POST)) {
     // Validated!
 }

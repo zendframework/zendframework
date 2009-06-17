@@ -17,7 +17,7 @@ require_once 'Zend/Amf/Value/MessageBodyTest.php';
 require_once 'Zend/Amf/Value/MessageHeaderTest.php';
 require_once 'Zend/Amf/AuthTest.php';
 require_once 'Zend/Amf/ResourceTest.php';
-require_once 'Zend/Amf/Value/ArrayCollectionTest.php'
+require_once 'Zend/Amf/Value/ArrayCollectionTest.php';
 
 class Zend_Amf_AllTests
 {

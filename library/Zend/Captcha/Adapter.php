@@ -50,7 +50,7 @@ interface Zend_Captcha_Adapter extends Zend_Validate_Interface
      * @param  mixed $element
      * @return string
      */
-    public function render(Zend_View_Interface $view, $element = null);
+    public function render(Zend_View_Interface $view = null, $element = null);
 
     /**
      * Set captcha name

@@ -294,7 +294,7 @@ $bug_status = $stmt->fetchColumn(2);
             <title>Récupérer un résultat (Row) sous forme d'objet</title>
 
             <para>
-                Pour récupérer une colonne de résultat en tant qu'objet, depuis un statement
+                Pour récupérer une ligne de résultat en tant qu'objet, depuis un statement
                 exécuté, utilisez la méthode <code>fetchObject()</code>. Celle-ci prend deux
                 paramètres optionnels. Le premier est une chaîne indiquant le nom de la classe que
                 l'on souhaite se voir retourner, par défaut il s'agit de "<code>stdClass</code>". Le

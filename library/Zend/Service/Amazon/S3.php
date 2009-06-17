@@ -126,7 +126,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
             throw new Zend_Service_Amazon_S3_Exception("Bucket name \"$bucket\" contains invalid characters");
         }
 
-        if (preg_match('/(\d+)\.(\d+)\.(\d+)\.(\d+)/', $bucket)) {
+        if (preg_match('/(\d){1,3}\.(\d){1,3}\.(\d){1,3}\.(\d){1,3}/', $bucket)) {
             /**
              * @see Zend_Service_Amazon_S3_Exception
              */

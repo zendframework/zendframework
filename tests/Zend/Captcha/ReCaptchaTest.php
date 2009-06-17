@@ -63,10 +63,10 @@ class Zend_Captcha_ReCaptchaTest extends PHPUnit_Framework_TestCase
         }
 
         $this->element = new Zend_Form_Element_Captcha(
-            'captchaR', 
+            'captchaR',
             array(
                 'captcha' => array(
-                    'ReCaptcha', 
+                    'ReCaptcha',
                     'sessionClass' => 'Zend_Captcha_ReCaptchaTest_SessionContainer'
                 )
             )
@@ -113,6 +113,21 @@ class Zend_Captcha_ReCaptchaTest extends PHPUnit_Framework_TestCase
         $this->assertNotSame($captcha->getService(), $try);
         $captcha->setService($try);
         $this->assertSame($captcha->getService(), $try);
+    }
+
+    public function testSetAndGetPublicAndPrivateKeys()
+    {
+        $captcha = new Zend_Captcha_ReCaptcha();
+        $pubKey = 'pubKey';
+        $privKey = 'privKey';
+        $captcha->setPubkey($pubKey)
+                ->setPrivkey($privKey);
+
+        $this->assertSame($pubKey, $captcha->getPubkey());
+        $this->assertSame($privKey, $captcha->getPrivkey());
+
+        $this->assertSame($pubKey, $captcha->getService()->getPublicKey());
+        $this->assertSame($privKey, $captcha->getService()->getPrivateKey());
     }
 }
 

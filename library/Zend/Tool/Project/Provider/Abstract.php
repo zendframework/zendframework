@@ -63,7 +63,7 @@ abstract class Zend_Tool_Project_Provider_Abstract extends Zend_Tool_Framework_P
     protected static $_isInitialized = false;
 
     protected $_projectPath = null;
-    
+
     /**
      * @var Zend_Tool_Project_Profile
      */
@@ -73,7 +73,7 @@ abstract class Zend_Tool_Project_Provider_Abstract extends Zend_Tool_Framework_P
      * constructor
      *
      * YOU SHOULD NOT OVERRIDE THIS, unless you know what you are doing
-     * 
+     *
      */
     public function __construct()
     {
@@ -111,7 +111,7 @@ abstract class Zend_Tool_Project_Provider_Abstract extends Zend_Tool_Framework_P
     protected function _loadProfile($loadProfileFlag = self::NO_PROFILE_THROW_EXCEPTION, $projectDirectory = null)
     {
 
-        
+
         if ($projectDirectory == null) {
             $projectDirectory = getcwd();
         }
@@ -132,7 +132,7 @@ abstract class Zend_Tool_Project_Provider_Abstract extends Zend_Tool_Framework_P
             }
         }
 
-        return true;
+        return $profile;
     }
 
     /**
@@ -149,7 +149,7 @@ abstract class Zend_Tool_Project_Provider_Abstract extends Zend_Tool_Framework_P
         }
         return $profile;
     }
-    
+
     /**
      * Return the currently loaded profile
      *
@@ -162,7 +162,7 @@ abstract class Zend_Tool_Project_Provider_Abstract extends Zend_Tool_Framework_P
                 return false;
             }
         }
-        
+
         return $this->_loadedProfile;
     }
 
@@ -170,12 +170,12 @@ abstract class Zend_Tool_Project_Provider_Abstract extends Zend_Tool_Framework_P
      * _storeProfile()
      *
      * This method will store the profile into its proper location
-     * 
+     *
      */
     protected function _storeProfile()
     {
         $projectProfileFile = $this->_loadedProfile->search('ProjectProfileFile');
-        
+
         $name = $projectProfileFile->getContext()->getPath();
 
         $this->_registry->getResponse()->appendContent('Updating project profile \'' . $name . '\'');

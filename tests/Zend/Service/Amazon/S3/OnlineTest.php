@@ -321,10 +321,10 @@ class Zend_Service_Amazon_S3_OnlineTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(file_get_contents($filedir."testdata.html"), $data);
     }
     
-	/**
+    /**
      * Test creating object with https
      * 
-     * ZF-6686
+     * ZF-7029
      */
     public function testCreateObjectSSL()
     {
@@ -335,6 +335,25 @@ class Zend_Service_Amazon_S3_OnlineTest extends PHPUnit_Framework_TestCase
         $this->assertEquals("testdata", $this->_amazon->getObject($this->_bucket."/zftest"));
     }
     
+    /**
+     * Test creating bucket with IP
+     * 
+     * ZF-6686
+     */
+    public function testBucketIPMask()
+    {
+    	try {
+    		$this->_amazon->createBucket("127.0.0.1");
+    		$this->fail("Failed to throw expected exception");
+    	} catch(Zend_Service_Amazon_S3_Exception $e) {
+    		$this->assertContains("cannot be an IP address", $e->getMessage());
+    	}
+    	$this->_amazon->createBucket("123-456-789-123");
+    	$this->assertTrue($this->_amazon->isBucketAvailable("123-456-789-123"));
+    	$this->_amazon->removeBucket("123-456-789-123");
+    }
+
+
     public function tearDown()
     {
     	unset($this->_amazon->debug);

@@ -488,6 +488,13 @@ class Zend_Date extends Zend_Date_DateObject
         return $this->date($this->_toToken($part, $locale), $this->getUnixTimestamp(), false);
     }
 
+    /**
+     * Internal method to apply tokens
+     *
+     * @param string $part
+     * @param string $locale
+     * @return string
+     */
     private function _toToken($part, $locale) {
         // get format tokens
         $comment = false;

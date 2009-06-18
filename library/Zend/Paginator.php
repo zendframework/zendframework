@@ -72,6 +72,13 @@ class Zend_Paginator implements Countable, IteratorAggregate
     protected static $_defaultScrollingStyle = 'Sliding';
 
     /**
+     * Default item count per page
+     *
+     * @var int
+     */
+    protected static $_defaultItemCountPerPage = 10;
+
+    /**
      * Scrolling style plugin loader
      *
      * @var Zend_Loader_PluginLoader
@@ -132,7 +139,7 @@ class Zend_Paginator implements Countable, IteratorAggregate
      *
      * @var integer
      */
-    protected $_itemCountPerPage = 10;
+    protected $_itemCountPerPage = null;
 
     /**
      * Number of pages
@@ -342,6 +349,26 @@ class Zend_Paginator implements Countable, IteratorAggregate
     public static function getDefaultScrollingStyle()
     {
         return self::$_defaultScrollingStyle;
+    }
+
+    /**
+     * Get the default item count per page
+     *
+     * @return int
+     */
+    public static function getDefaultItemCountPerPage()
+    {
+        return self::$_defaultItemCountPerPage;
+    }
+
+    /**
+     * Set the default item count per page
+     *
+     * @param int $count
+     */
+    public static function setDefaultItemCountPerPage($count)
+    {
+        self::$_defaultItemCountPerPage = (int) $count;
     }
 
     /**
@@ -637,6 +664,10 @@ class Zend_Paginator implements Countable, IteratorAggregate
      */
     public function getItemCountPerPage()
     {
+        if ($this->_itemCountPerPage === null) {
+            $this->_itemCountPerPage = self::getDefaultItemCountPerPage();
+        }
+
         return $this->_itemCountPerPage;
     }
 
@@ -926,7 +957,7 @@ class Zend_Paginator implements Countable, IteratorAggregate
     /**
      * Makes an Id for the cache
      * Depends on the adapter object and the page number
-     * 
+     *
      * Used to store item in cache from that Paginator instance
      *  and that current page
      *
@@ -940,11 +971,11 @@ class Zend_Paginator implements Countable, IteratorAggregate
         }
         return self::CACHE_TAG_PREFIX . $page . '_' . $this->_getCacheInternalId();
     }
-    
+
     /**
      * Get the internal cache id
      * Depends on the adapter and the item count per page
-     * 
+     *
      * Used to tag that unique Paginator instance in cache
      *
      * @return string

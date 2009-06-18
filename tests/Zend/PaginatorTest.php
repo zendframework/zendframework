@@ -714,7 +714,7 @@ class Zend_PaginatorTest extends PHPUnit_Framework_TestCase
         );
         $this->assertEquals($expected, $pageItems);
     }
-    
+
     public function testClearPageItemCache()
     {
         $this->_paginator->setCurrentPageNumber(1)->getCurrentItems();
@@ -755,25 +755,25 @@ class Zend_PaginatorTest extends PHPUnit_Framework_TestCase
     {
         $this->_paginator->setCurrentPageNumber(1)->getCurrentItems();
         $pageItems = $this->_paginator->setItemCountPerPage(5)->getCurrentItems();
-        
+
         $expected = new ArrayIterator(range(1, 5));
         $this->assertEquals($expected, $pageItems);
 
         $pageItems = $this->_paginator->getItemsByPage(2);
         $expected = new ArrayIterator(range(6, 10));
         $this->assertEquals($expected, $pageItems);
-        
+
         // change the inside Paginator scale
         $pageItems = $this->_paginator->setItemCountPerPage(8)->setCurrentPageNumber(3)->getCurrentItems();
-        
+
         $pageItems = $this->_paginator->getPageItemCache();
         $expected = array(3 => new ArrayIterator(range(17, 24)));
         $this->assertEquals($expected, $pageItems);
-        
+
         // get back to already cached data
         $this->_paginator->setItemCountPerPage(5);
         $pageItems = $this->_paginator->getPageItemCache();
-        $expected =array(1 => new ArrayIterator(range(1, 5)), 
+        $expected =array(1 => new ArrayIterator(range(1, 5)),
                          2 => new ArrayIterator(range(6, 10)));
         $this->assertEquals($expected, $pageItems);
     }
@@ -810,5 +810,24 @@ class Zend_PaginatorTest extends PHPUnit_Framework_TestCase
         }
 
         return $data;
+    }
+
+    /**
+     * @group ZF-5785
+     */
+    public function testGetSetDefaultItemCountPerPage()
+    {
+        Zend_Paginator::setConfig(new Zend_Config(array()));
+
+        $paginator = Zend_Paginator::factory(range(1, 10));
+        $this->assertEquals(10, $paginator->getItemCountPerPage());
+
+        Zend_Paginator::setDefaultItemCountPerPage(20);
+        $this->assertEquals(20, Zend_Paginator::getDefaultItemCountPerPage());
+
+        $paginator = Zend_Paginator::factory(range(1, 10));
+        $this->assertEquals(20, $paginator->getItemCountPerPage());
+
+        $this->_restorePaginatorDefaults();
     }
 }

@@ -278,7 +278,7 @@ abstract class Zend_Form_Element_Multi extends Zend_Form_Element_Xhtml
     protected function _translateOption($option, $value)
     {
         if ($this->translatorIsDisabled()) {
-            return true;
+            return false;
         }
 
         if (!isset($this->_translated[$option]) && !empty($value)) {

@@ -290,6 +290,20 @@ class Zend_Form_Element_MultiselectTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @group ZF-5937
+     */
+    public function testAddMultiOptionShouldWorkAfterTranslatorIsDisabled()
+    {
+        $options = array(
+            'foovalue' => 'Foo',
+        );
+        $this->element->setDisableTranslator(true)
+                      ->addMultiOptions($options);
+        $test = $this->element->getMultiOption('foovalue');
+        $this->assertEquals($options['foovalue'], $test);
+    }
+
+    /**
      * Used by test methods susceptible to ZF-2794, marks a test as incomplete
      *
      * @link   http://framework.zend.com/issues/browse/ZF-2794

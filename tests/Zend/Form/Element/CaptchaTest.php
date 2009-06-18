@@ -153,6 +153,15 @@ class Zend_Form_Element_CaptchaTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(array_key_exists('Zend_Form_Decorator_HtmlTag', $decorators), 'Missing HtmlTag decorator' . var_export(array_keys($decorators), 1));
         $this->assertTrue(array_key_exists('Zend_Form_Decorator_Label', $decorators), 'Missing Label decorator' . var_export(array_keys($decorators), 1));
     }
+
+    /**
+     * @group ZF-5855
+     */
+    public function testHelperDoesNotShowUpInAttribs()
+    {
+        require_once 'Zend/View.php';
+        $this->assertFalse(array_key_exists('helper', $this->element->getAttribs()));
+    }
 }
 
 class Zend_Form_Element_CaptchaTest_SessionContainer

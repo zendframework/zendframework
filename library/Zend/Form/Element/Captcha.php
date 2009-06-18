@@ -126,6 +126,24 @@ class Zend_Form_Element_Captcha extends Zend_Form_Element_Xhtml
     }    
 
     /**
+     * Return all attributes
+     *
+     * @return array
+     */
+    public function getAttribs()
+    {
+        $attribs = get_object_vars($this);
+        unset($attribs['helper']);
+        foreach ($attribs as $key => $value) {
+            if ('_' == substr($key, 0, 1)) {
+                unset($attribs[$key]);
+            }
+        }
+
+        return $attribs;
+    }
+
+    /**
      * Set options
      *
      * Overrides to allow passing captcha options

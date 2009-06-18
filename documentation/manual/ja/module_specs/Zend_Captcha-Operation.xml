@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15974 -->
+<!-- EN-Revision: 16125 -->
 <sect1 id="zend.captcha.operation">
     <title>Captcha の方法</title>
 
@@ -61,10 +61,14 @@ $captcha = new Zend_Captcha_Figlet(array(
 ));
 
 $id = $captcha->generate();
+echo "<form method=\"post\" action=\"\">";
 echo $captcha->render($view);
+echo "</form>";
 
 // それ以降のリクエスト
-// すでに captcha が準備済みで、送信された内容が $value に保存されているものとします
+// すでに captcha が準備済みで、$_POST['foo'] の中身が
+// 次のようなキー/値の配列になっているものとします
+// id => captcha ID, input => captcha value
 if ($captcha->isValid($_POST['foo'], $_POST)) {
     // 正解!
 }

@@ -7,40 +7,40 @@
         <title>Introduction</title>
 
         <para>
-            The <code>Redirector</code> helper allows you to use a redirector
+            The <emphasis>Redirector</emphasis> helper allows you to use a redirector
             object to fulfill your application's needs for redirecting to a new
             URL. It provides numerous benefits over the
-            <code>_redirect()</code> method, such as being able to preconfigure
+            <methodname>_redirect()</methodname> method, such as being able to preconfigure
             sitewide behavior into the redirector object or using the built in
-            <code>gotoSimple($action, $controller, $module, $params)</code> interface
+            <methodname>gotoSimple($action, $controller, $module, $params)</methodname> interface
             similar to that of <classname>Zend_Controller_Action::_forward()</classname>.
         </para>
 
         <para>
-            The <code>Redirector</code> has a number of methods that can be used
+            The <emphasis>Redirector</emphasis> has a number of methods that can be used
             to affect the behaviour at redirect:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>setCode()</code> can be used to set the HTTP response
+                    <methodname>setCode()</methodname> can be used to set the HTTP response
                     code to use during the redirect.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setExit()</code> can be used to force an
-                    <code>exit()</code> following a redirect. By default this is
+                    <methodname>setExit()</methodname> can be used to force an
+                    <methodname>exit()</methodname> following a redirect. By default this is
                     true.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setGotoSimple()</code> can be used to set a default URL to
-                    use if none is passed to <code>gotoSimple()</code>. Uses the API
+                    <methodname>setGotoSimple()</methodname> can be used to set a default URL to
+                    use if none is passed to <methodname>gotoSimple()</methodname>. Uses the API
                     of <classname>Zend_Controller_Action::_forward()</classname>:
                     setGotoSimple($action, $controller = null, $module = null, array
                     $params = array());
@@ -49,7 +49,7 @@
 
             <listitem>
                 <para>
-                    <code>setGotoRoute()</code> can be used to set a URL
+                    <methodname>setGotoRoute()</methodname> can be used to set a URL
                     based on a registered route. Pass in an array of key/value
                     pairs and a route name, and it will assemble the URL
                     according to the route type and definition.
@@ -58,25 +58,25 @@
 
             <listitem>
                 <para>
-                    <code>setGotoUrl()</code> can be used to set a default URL to
-                    use if none is passed to <code>gotoUrl()</code>. Accepts a
+                    <methodname>setGotoUrl()</methodname> can be used to set a default URL to
+                    use if none is passed to <methodname>gotoUrl()</methodname>. Accepts a
                     single URL string.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setPrependBase()</code> can be used to prepend the
+                    <methodname>setPrependBase()</methodname> can be used to prepend the
                     request object's base URL to a URL specified with
-                    <code>setGotoUrl()</code>, <code>gotoUrl()</code>, or
-                    <code>gotoUrlAndExit()</code>.
+                    <methodname>setGotoUrl()</methodname>, <methodname>gotoUrl()</methodname>, or
+                    <methodname>gotoUrlAndExit()</methodname>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setUseAbsoluteUri()</code> can be used to force the
-                    <code>Redirector</code> to use absolute URIs when
+                    <methodname>setUseAbsoluteUri()</methodname> can be used to force the
+                    <emphasis>Redirector</emphasis> to use absolute URIs when
                     redirecting. When this option is set, it uses the value of
                     <varname>$_SERVER['HTTP_HOST']</varname>,
                     <varname>$_SERVER['SERVER_PORT']</varname>, and
@@ -95,15 +95,17 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>gotoSimple()</code> uses <code>setGotoSimple()</code>
-                    (<code>_forward()-like API</code>) to build a URL and
+                    <methodname>gotoSimple()</methodname> uses
+                    <methodname>setGotoSimple()</methodname>
+                    (<methodname>_forward()</methodname>-like API) to build a URL and
                     perform a redirect.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>gotoRoute()</code> uses <code>setGotoRoute()</code>
+                    <methodname>gotoRoute()</methodname> uses
+                    <methodname>setGotoRoute()</methodname>
                     (<code>route-assembly</code>) to build a URL and
                     perform a redirect.
                 </para>
@@ -111,7 +113,7 @@
 
             <listitem>
                 <para>
-                    <code>gotoUrl()</code> uses <code>setGotoUrl()</code>
+                    <methodname>gotoUrl()</methodname> uses <methodname>setGotoUrl()</methodname>
                     (<code>URL string</code>) to build a URL and
                     perform a redirect.
                 </para>
@@ -120,7 +122,7 @@
 
         <para>
             Finally, you can determine the current redirect URL at any time
-            using <code>getRedirectUrl()</code>.
+            using <methodname>getRedirectUrl()</methodname>.
         </para>
     </sect4>
 
@@ -179,7 +181,7 @@ class SomeController extends Zend_Controller_Action
             <para>
                 This example assumes that the defaults are used, which means
                 that any redirect will result in an immediate
-                <code>exit()</code>.
+                <methodname>exit()</methodname>.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -214,7 +216,7 @@ class AlternativeController extends Zend_Controller_Action
             <title>Using goto()'s _forward() API</title>
 
             <para>
-                <code>gotoSimple()</code>'s API mimics that of
+                <methodname>gotoSimple()</methodname>'s API mimics that of
                 <classname>Zend_Controller_Action::_forward()</classname>. The primary
                 difference is that it builds a URL from the parameters passed,
                 and using the default <code>:module/:controller/:action/*</code>
@@ -261,7 +263,7 @@ class ForwardController extends Zend_Controller_Action
             <para>
                 The following example uses the <link
                     linkend="zend.controller.router">router's</link>
-                <code>assemble()</code> method to create a URL based on an
+                <methodname>assemble()</methodname> method to create a URL based on an
                 associative array of parameters passed. It assumes the following
                 route has been registered:
             </para>

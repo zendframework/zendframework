@@ -7,7 +7,7 @@
         <title>Introduction</title>
 
         <para>
-            The <code>ViewRenderer</code> helper is designed to satisfy the
+            The <emphasis>ViewRenderer</emphasis> helper is designed to satisfy the
             following goals:
         </para>
 
@@ -60,25 +60,25 @@
 
         <note>
             <para>
-                If you perform a <code>_forward()</code>, redirect, or
+                If you perform a <methodname>_forward()</methodname>, redirect, or
                 <code>render</code> manually, autorendering will not occur, as
                 by performing any of these actions you are telling the
-                <code>ViewRenderer</code> that you are determining your own
+                <emphasis>ViewRenderer</emphasis> that you are determining your own
                 output.
             </para>
         </note>
 
         <note>
             <para>
-                The <code>ViewRenderer</code> is enabled by default. You may
+                The <emphasis>ViewRenderer</emphasis> is enabled by default. You may
                 disable it via the front controller <code>noViewRenderer</code>
-                param (<code>$front->setParam('noViewRenderer', true)</code>) or
+                param (<methodname>$front->setParam('noViewRenderer', true)</methodname>) or
                 removing the helper from the helper broker stack
-                (<classname>Zend_Controller_Action_HelperBroker::removeHelper('viewRenderer')</classname>).
+                (<methodname>Zend_Controller_Action_HelperBroker::removeHelper('viewRenderer')</methodname>).
             </para>
 
             <para>
-                If you wish to modify settings of the <code>ViewRenderer</code>
+                If you wish to modify settings of the <emphasis>ViewRenderer</emphasis>
                 prior to dispatching the front controller, you may do so in one
                 of two ways:
             </para>
@@ -87,7 +87,7 @@
                 <listitem>
                     <para>
                         Instantiate and register your own
-                        <code>ViewRenderer</code> object and pass it to the
+                        <emphasis>ViewRenderer</emphasis> object and pass it to the
                         helper broker:
                     </para>
 
@@ -101,7 +101,7 @@ Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
 
                 <listitem>
                     <para>
-                        Initialize and/or retrieve a <code>ViewRenderer</code>
+                        Initialize and/or retrieve a <emphasis>ViewRenderer</emphasis>
                         object on demand via the helper broker:
                     </para>
 
@@ -121,9 +121,9 @@ $viewRenderer->setView($view)
 
         <para>
             At its most basic usage, you simply instantiate the
-            <code>ViewRenderer</code> and pass it to the action helper broker.
+            <emphasis>ViewRenderer</emphasis> and pass it to the action helper broker.
             The easiest way to instantiate it and register in one go is to use
-            the helper broker's <code>getStaticHelper()</code> method:
+            the helper broker's <methodname>getStaticHelper()</methodname> method:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -132,19 +132,19 @@ Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
 
         <para>
             The first time an action controller is instantiated, it will trigger
-            the <code>ViewRenderer</code> to instantiate a view object. Each
-            time a controller is instantiated, the <code>ViewRenderer</code>'s
-            <code>init()</code> method is called, which will cause it to set the
+            the <emphasis>ViewRenderer</emphasis> to instantiate a view object. Each
+            time a controller is instantiated, the <emphasis>ViewRenderer</emphasis>'s
+            <methodname>init()</methodname> method is called, which will cause it to set the
             view property of the action controller, and call
-            <code>addScriptPath()</code> with a path relative to the current
+            <methodname>addScriptPath()</methodname> with a path relative to the current
             module; this will be called with a class prefix named after the
             current module, effectively namespacing all helper and filter
             classes you define for the module.
         </para>
 
         <para>
-            Each time <code>postDispatch()</code> is called, it will call
-            <code>render()</code> for the current action.
+            Each time <methodname>postDispatch()</methodname> is called, it will call
+            <methodname>render()</methodname> for the current action.
         </para>
 
         <para>
@@ -175,91 +175,91 @@ $this->foo(); // call Foo_View_Helper_Foo::foo()
 ]]></programlisting>
 
         <para>
-            The <code>ViewRenderer</code> also defines a number of accessors to
+            The <emphasis>ViewRenderer</emphasis> also defines a number of accessors to
             allow setting and retrieving view options:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>setView($view)</code> allows you to set the view
-                    object for the <code>ViewRenderer</code>. It gets set as
+                    <methodname>setView($view)</methodname> allows you to set the view
+                    object for the <emphasis>ViewRenderer</emphasis>. It gets set as
                     the public class property <varname>$view</varname>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setNeverRender($flag = true)</code> can be used to
+                    <methodname>setNeverRender($flag = true)</methodname> can be used to
                     disable or enable autorendering globally, i.e., for all
-                    controllers. If set to true, <code>postDispatch()</code>
-                    will not automatically call <code>render()</code> in the
-                    current controller. <code>getNeverRender()</code> retrieves
+                    controllers. If set to true, <methodname>postDispatch()</methodname>
+                    will not automatically call <methodname>render()</methodname> in the
+                    current controller. <methodname>getNeverRender()</methodname> retrieves
                     the current value.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setNoRender($flag = true)</code> can be used to
+                    <methodname>setNoRender($flag = true)</methodname> can be used to
                     disable or enable autorendering. If set to true,
-                    <code>postDispatch()</code> will not automatically call
-                    <code>render()</code> in the current controller. This
-                    setting is reset each time <code>preDispatch()</code> is
+                    <methodname>postDispatch()</methodname> will not automatically call
+                    <methodname>render()</methodname> in the current controller. This
+                    setting is reset each time <methodname>preDispatch()</methodname> is
                     called (i.e., you need to set this flag for each controller
                     for which you don't want autorenderering to occur).
-                    <code>getNoRender()</code> retrieves the current value.
+                    <methodname>getNoRender()</methodname> retrieves the current value.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setNoController($flag = true)</code> can be used to
-                    tell <code>render()</code> not to look for the action script
+                    <methodname>setNoController($flag = true)</methodname> can be used to
+                    tell <methodname>render()</methodname> not to look for the action script
                     in a subdirectory named after the controller (which is the
-                    default behaviour). <code>getNoController()</code> retrieves
+                    default behaviour). <methodname>getNoController()</methodname> retrieves
                     the current value.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setNeverController($flag = true)</code> is analogous
-                    to <code>setNoController()</code>, but works on a global
+                    <methodname>setNeverController($flag = true)</methodname> is analogous
+                    to <methodname>setNoController()</methodname>, but works on a global
                     level -- i.e., it will not be reset for each dispatched
-                    action. <code>getNeverController()</code> retrieves
+                    action. <methodname>getNeverController()</methodname> retrieves
                     the current value.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setScriptAction($name)</code> can be used to
+                    <methodname>setScriptAction($name)</methodname> can be used to
                     specify the action script to render. <varname>$name</varname>
                     should be the name of the script minus the file suffix (and
                     without the controller subdirectory, unless
                     <code>noController</code> has been turned on). If not
                     specified, it looks for a view script named after the action
-                    in the request object. <code>getScriptAction()</code>
+                    in the request object. <methodname>getScriptAction()</methodname>
                     retrieves the current value.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setResponseSegment($name)</code> can be used to
+                    <methodname>setResponseSegment($name)</methodname> can be used to
                     specify which response object named segment to render into.
                     If not specified, it renders into the default segment.
-                    <code>getResponseSegment()</code> retrieves the current
+                    <methodname>getResponseSegment()</methodname> retrieves the current
                     value.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>initView($path, $prefix, $options)</code> may be called
+                    <methodname>initView($path, $prefix, $options)</methodname> may be called
                     to specify the base view path, class prefix for helper and
-                    filter scripts, and <code>ViewRenderer</code> options. You
+                    filter scripts, and <emphasis>ViewRenderer</emphasis> options. You
                     may pass any of the following flags:
                     <code>neverRender</code>, <code>noRender</code>,
                     <code>noController</code>, <code>scriptAction</code>, and
@@ -269,10 +269,10 @@ $this->foo(); // call Foo_View_Helper_Foo::foo()
 
             <listitem>
                 <para>
-                    <code>setRender($action = null, $name = null, $noController
-                        = false)</code> allows you to set any of
+                    <methodname>setRender($action = null, $name = null, $noController
+                        = false)</methodname> allows you to set any of
                     <code>scriptAction</code>, <code>responseSegment</code>, and
-                    <code>noController</code> in one pass. <code>direct()</code>
+                    <code>noController</code> in one pass. <methodname>direct()</methodname>
                     is an alias to this method, allowing you to call this method
                     easily from your controller:
                 </para>
@@ -287,18 +287,18 @@ $this->_helper->viewRenderer('form', 'html', true);
 ]]></programlisting>
 
                 <note><para>
-                        <code>setRender()</code> and <code>direct()</code> don't
-                        actually render the view script, but instead set hints
-                        that <code>postDispatch()</code> and
-                        <code>render()</code> will use to render the view.
+                        <methodname>setRender()</methodname> and <methodname>direct()</methodname>
+                        don't actually render the view script, but instead set hints
+                        that <methodname>postDispatch()</methodname> and
+                        <methodname>render()</methodname> will use to render the view.
                 </para></note>
             </listitem>
         </itemizedlist>
 
         <para>
             The constructor allows you to optionally pass the view object and
-            <code>ViewRenderer</code> options; it accepts the same flags as
-            <code>initView()</code>:
+            <emphasis>ViewRenderer</emphasis> options; it accepts the same flags as
+            <methodname>initView()</methodname>:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -319,7 +319,7 @@ $viewRenderer =
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>:moduleDir</code> refers to the current module's base
+                    <emphasis>:moduleDir</emphasis> refers to the current module's base
                     directory (by convention, the parent directory of the
                     module's controller directory).
                 </para>
@@ -327,26 +327,26 @@ $viewRenderer =
 
             <listitem>
                 <para>
-                    <code>:module</code> refers to the current module name.
+                    <emphasis>:module</emphasis> refers to the current module name.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>:controller</code> refers to the current controller name.
+                    <emphasis>:controller</emphasis> refers to the current controller name.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>:action</code> refers to the current action name.
+                    <emphasis>:action</emphasis> refers to the current action name.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>:suffix</code> refers to the view script suffix (which
-                    may be set via <code>setViewSuffix()</code>).
+                    <emphasis>:suffix</emphasis> refers to the view script suffix (which
+                    may be set via <methodname>setViewSuffix()</methodname>).
                 </para>
             </listitem>
         </itemizedlist>
@@ -358,37 +358,37 @@ $viewRenderer =
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>setViewBasePathSpec($spec)</code> allows you to change
+                    <methodname>setViewBasePathSpec($spec)</methodname> allows you to change
                     the path specification used to determine the base path to
                     add to the view object. The default specification is
                     <code>:moduleDir/views</code>. You may retrieve the current
                     specification at any time using
-                    <code>getViewBasePathSpec()</code>.
+                    <methodname>getViewBasePathSpec()</methodname>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setViewScriptPathSpec($spec)</code> allows you to
+                    <methodname>setViewScriptPathSpec($spec)</methodname> allows you to
                     change the path specification used to determine the path to
                     an individual view script (minus the base view script path).
                     The default specification is
                     <code>:controller/:action.:suffix</code>. You may retrieve
                     the current specification at any time using
-                    <code>getViewScriptPathSpec()</code>.
+                    <methodname>getViewScriptPathSpec()</methodname>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setViewScriptPathNoControllerSpec($spec)</code> allows
+                    <methodname>setViewScriptPathNoControllerSpec($spec)</methodname> allows
                     you to change the path specification used to determine the
                     path to an individual view script when
                     <code>noController</code> is in effect (minus the base view
                     script path). The default specification is
                     <code>:action.:suffix</code>. You may retrieve the current
                     specification at any time using
-                    <code>getViewScriptPathNoControllerSpec()</code>.
+                    <methodname>getViewScriptPathNoControllerSpec()</methodname>.
                 </para>
             </listitem>
         </itemizedlist>
@@ -396,7 +396,7 @@ $viewRenderer =
         <para>
             For fine-grained control over path specifications, you may use
             <link linkend="zend.filter.inflector">Zend_Filter_Inflector</link>.
-            Under the hood, the <code>ViewRenderer</code> uses an inflector to
+            Under the hood, the <emphasis>ViewRenderer</emphasis> uses an inflector to
             perform path mappings already. To interact with the inflector --
             either to set your own for use, or to modify the default inflector,
             the following methods may be used:
@@ -405,25 +405,25 @@ $viewRenderer =
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>getInflector()</code> will retrieve the inflector. If
-                    none exists yet in the <code>ViewRenderer</code>, it creates
+                    <methodname>getInflector()</methodname> will retrieve the inflector. If
+                    none exists yet in the <emphasis>ViewRenderer</emphasis>, it creates
                     one using the default rules.
                 </para>
 
                 <para>
                     By default, it uses static rule references for the suffix
                     and module directory, as well as a static target; this
-                    allows various <code>ViewRenderer</code> properties the
+                    allows various <emphasis>ViewRenderer</emphasis> properties the
                     ability to dynamically modify the inflector.
                 </para>
             </listitem>
 
             <listitem><para>
-                    <code>setInflector($inflector, $reference)</code> allows you
+                    <methodname>setInflector($inflector, $reference)</methodname> allows you
                     to set a custom inflector for use with the
-                    <code>ViewRenderer</code>. If <varname>$reference</varname> is
+                    <emphasis>ViewRenderer</emphasis>. If <varname>$reference</varname> is
                     true, it will set the suffix and module directory as static
-                    references to <code>ViewRenderer</code> properties, as well
+                    references to <emphasis>ViewRenderer</emphasis> properties, as well
                     as the target.
             </para></listitem>
         </itemizedlist>
@@ -432,7 +432,7 @@ $viewRenderer =
             <title>Default Lookup Conventions</title>
 
             <para>
-                The <code>ViewRenderer</code> does some path normalization to
+                The <emphasis>ViewRenderer</emphasis> does some path normalization to
                 make view script lookups easier. The default rules are as
                 follows:
             </para>
@@ -440,7 +440,7 @@ $viewRenderer =
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>:module</code>: MixedCase and camelCasedWords are separated by
+                        <emphasis>:module</emphasis>: MixedCase and camelCasedWords are separated by
                         dashes, and the entire string cast to lowercase. E.g.:
                         "FooBarBaz" becomes "foo-bar-baz".
                     </para>
@@ -454,7 +454,7 @@ $viewRenderer =
 
                 <listitem>
                     <para>
-                        <code>:controller</code>: MixedCase and camelCasedWords are separated
+                        <emphasis>:controller</emphasis>: MixedCase and camelCasedWords are separated
                         by dashes; underscores are converted to directory
                         separators, and the entire string cast to lower case.
                         Examples: "FooBar" becomes "foo-bar"; "FooBar_Admin"
@@ -471,7 +471,7 @@ $viewRenderer =
 
                 <listitem>
                     <para>
-                        <code>:action</code>: MixedCase and camelCasedWords are separated
+                        <emphasis>:action</emphasis>: MixedCase and camelCasedWords are separated
                         by dashes; non-alphanumeric characters are translated to
                         dashes, and the entire string cast to lower case.
                         Examples: "fooBar" becomes "foo-bar"; "foo-barBaz"
@@ -489,7 +489,7 @@ $viewRenderer =
         </note>
 
         <para>
-            The final items in the <code>ViewRenderer</code> API are the methods
+            The final items in the <emphasis>ViewRenderer</emphasis> API are the methods
             for actually determining view script paths and rendering views.
             These include:
         </para>
@@ -497,13 +497,13 @@ $viewRenderer =
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>renderScript($script, $name)</code> allows you to
+                    <methodname>renderScript($script, $name)</methodname> allows you to
                     render a script with a path you specify, optionally to a
                     named path segment. When using this method, the
-                    <code>ViewRenderer</code> does no autodetermination of the
+                    <emphasis>ViewRenderer</emphasis> does no autodetermination of the
                     script name, but instead directly passes the
                     <varname>$script</varname> argument directly to the view object's
-                    <code>render()</code> method.
+                    <methodname>render()</methodname> method.
                 </para>
 
                 <note><para>
@@ -516,15 +516,15 @@ $viewRenderer =
                     <para>
                         By default,
                         <classname>Zend_Controller_Action::renderScript()</classname>
-                        proxies to the <code>ViewRenderer</code>'s
-                        <code>renderScript()</code> method.
+                        proxies to the <emphasis>ViewRenderer</emphasis>'s
+                        <methodname>renderScript()</methodname> method.
                     </para>
                 </note>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getViewScript($action, $vars)</code> creates the path
+                    <methodname>getViewScript($action, $vars)</methodname> creates the path
                     to a view script based on the action passed and/or any
                     variables passed in <varname>$vars</varname>. Keys for this array
                     may include any of the path specification keys ('moduleDir',
@@ -534,7 +534,7 @@ $viewRenderer =
                 </para>
 
                 <para>
-                    <code>getViewScript()</code> will use either the
+                    <methodname>getViewScript()</methodname> will use either the
                     <code>viewScriptPathSpec</code> or
                     <code>viewScriptPathNoControllerSpec</code> based on the
                     setting of the <code>noController</code> flag.
@@ -552,22 +552,22 @@ $viewRenderer =
                     <para>
                         By default,
                         <classname>Zend_Controller_Action::getViewScript()</classname>
-                        proxies to the <code>ViewRenderer</code>'s
-                        <code>getViewScript()</code> method.
+                        proxies to the <emphasis>ViewRenderer</emphasis>'s
+                        <methodname>getViewScript()</methodname> method.
                     </para>
                 </note>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>render($action, $name, $noController)</code> checks
+                    <methodname>render($action, $name, $noController)</methodname> checks
                     first to see if either <varname>$name</varname> or
                     <varname>$noController</varname> have been passed, and if so, sets
                     the appropriate flags (responseSegment and noController,
                     respectively) in the ViewRenderer. It then passes the
                     <varname>$action</varname> argument, if any, on to
-                    <code>getViewScript()</code>. Finally, it passes the
-                    calculated view script path to <code>renderScript()</code>.
+                    <methodname>getViewScript()</methodname>. Finally, it passes the
+                    calculated view script path to <methodname>renderScript()</methodname>.
                 </para>
 
                 <note>
@@ -584,7 +584,7 @@ $viewRenderer =
                     <para>
                         By default,
                         <classname>Zend_Controller_Action::render()</classname> proxies to
-                        the <code>ViewRenderer</code>'s <code>render()</code>
+                        the <emphasis>ViewRenderer</emphasis>'s <methodname>render()</methodname>
                         method.
                     </para>
                 </note>
@@ -592,13 +592,13 @@ $viewRenderer =
 
             <listitem>
                 <para>
-                    <code>renderBySpec($action, $vars, $name)</code> allows you
+                    <methodname>renderBySpec($action, $vars, $name)</methodname> allows you
                     to pass path specification variables in order to determine
                     the view script path to create. It passes
                     <varname>$action</varname> and <varname>$vars</varname> to
-                    <code>getScriptPath()</code>, and then passes the resulting
+                    <methodname>getScriptPath()</methodname>, and then passes the resulting
                     script path and <varname>$name</varname> on to
-                    <code>renderScript()</code>.
+                    <methodname>renderScript()</methodname>.
                 </para>
             </listitem>
         </itemizedlist>
@@ -612,7 +612,7 @@ $viewRenderer =
 
             <para>
                 At its most basic, you simply initialize and register the
-                <code>ViewRenderer</code> helper with the helper broker in your
+                <emphasis>ViewRenderer</emphasis> helper with the helper broker in your
                 bootstrap, and then set variables in your action methods.
             </para>
 
@@ -659,18 +659,18 @@ class Foo_BarController extends Zend_Controller_Action
                 If your controller or action name is composed of several
                 words, the dispatcher requires that these are separated on
                 the URL by specific path and word delimiter characters. The
-                <code>ViewRenderer</code> replaces any path delimiter found
+                <emphasis>ViewRenderer</emphasis> replaces any path delimiter found
                 in the controller name with an actual path delimiter ('/'),
                 and any word delimiter found with a dash ('-') when creating
                 paths. Thus, a call to the action
-                <code>/foo.bar/baz.bat</code> would dispatch to
-                <code>FooBarController::bazBatAction()</code> in
+                <filename>/foo.bar/baz.bat</filename> would dispatch to
+                <methodname>FooBarController::bazBatAction()</methodname> in
                 FooBarController.php, which would render
-                <code>foo-bar/baz-bat.phtml</code>; a call to the action
-                <code>/bar_baz/baz-bat</code> would dispatch to
-                <code>Bar_BazController::bazBatAction()</code> in
-                <code>Bar/BazController.php</code> (note the path
-                separation) and render <code>bar/baz/baz-bat.phtml</code>.
+                <filename>foo-bar/baz-bat.phtml</filename>; a call to the action
+                <filename>/bar_baz/baz-bat</filename> would dispatch to
+                <methodname>Bar_BazController::bazBatAction()</methodname> in
+                <filename>Bar/BazController.php</filename> (note the path
+                separation) and render <filename>bar/baz/baz-bat.phtml</filename>.
             </para>
 
             <para>
@@ -678,7 +678,7 @@ class Foo_BarController extends Zend_Controller_Action
                 default module, but that, because of the existence of a path
                 separator, the controller receives the name
                 <code>Bar_BazController</code>, in
-                <code>Bar/BazController.php</code>. The ViewRenderer mimics
+                <filename>Bar/BazController.php</filename>. The ViewRenderer mimics
                 the controller directory hierarchy.
             </para>
         </note>
@@ -691,8 +691,8 @@ class Foo_BarController extends Zend_Controller_Action
                 autorendering -- for instance, if you're wanting to emit a
                 different type of output (XML, JSON, etc), or if you simply want
                 to emit nothing. You have two options: turn off all cases of
-                autorendering (<code>setNeverRender()</code>), or simply turn it
-                off for the current action (<code>setNoRender()</code>).
+                autorendering (<methodname>setNeverRender()</methodname>), or simply turn it
+                off for the current action (<methodname>setNoRender()</methodname>).
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -721,8 +721,8 @@ class Bar_BatController extends Zend_Controller_Action
         <note>
             <para>
                 In most cases, it makes no sense to turn off autorendering
-                globally (ala <code>setNeverRender()</code>), as the only thing
-                you then gain from <code>ViewRenderer</code> is the autosetup of
+                globally (ala <methodname>setNeverRender()</methodname>), as the only thing
+                you then gain from <emphasis>ViewRenderer</emphasis> is the autosetup of
                 the view object.
             </para>
         </note>
@@ -736,9 +736,9 @@ class Bar_BatController extends Zend_Controller_Action
                 controller that has both add and edit actions, they may both
                 display the same 'form' view, albeit with different values set.
                 You can easily change the script name used with either
-                <code>setScriptAction()</code>, <code>setRender()</code>, or
-                calling the helper as a method, which will invoke
-                <code>setRender()</code>.
+                <methodname>setScriptAction()</methodname>, <methodname>setRender()</methodname>,
+                or calling the helper as a method, which will invoke
+                <methodname>setRender()</methodname>.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -780,7 +780,7 @@ class Foo_BarController extends Zend_Controller_Action
                 What if you need to modify the view object -- for instance,
                 change the helper paths, or the encoding? You can do so either
                 by modifying the view object set in your controller, or by
-                grabbing the view object out of the <code>ViewRenderer</code>;
+                grabbing the view object out of the <emphasis>ViewRenderer</emphasis>;
                 both are references to the same object.
             </para>
 
@@ -855,7 +855,7 @@ Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
             <para>
                 At times, you may need to render multiple view scripts from a
                 single action. This is very straightforward -- simply make
-                multiple calls to <code>render()</code>:
+                multiple calls to <methodname>render()</methodname>:
             </para>
 
             <programlisting language="php"><![CDATA[

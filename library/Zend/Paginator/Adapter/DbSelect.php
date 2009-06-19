@@ -153,58 +153,64 @@ class Zend_Paginator_Adapter_DbSelect implements Zend_Paginator_Adapter_Interfac
             $rowCount = clone $this->_select;
             $db = $rowCount->getAdapter();
 
-            /**
-             * The DISTINCT and GROUP BY queries only work when selecting one column.
-             * The question is whether any RDBMS supports DISTINCT for multiple columns, without workarounds.
-             */
-            if (true === $rowCount->getPart(Zend_Db_Select::DISTINCT)) {
-                $columnParts = $rowCount->getPart(Zend_Db_Select::COLUMNS);
+            $countColumn = $db->quoteIdentifier($db->foldCase(self::ROW_COUNT_COLUMN));
 
-                $columns = array();
+            if ($rowCount->getPart(Zend_Db_Select::UNION) != array()) {
+                $expression = new Zend_Db_Expr('COUNT(*) AS ' . $countColumn);
 
-                foreach ($columnParts as $part) {
-                    if ($part[1] == Zend_Db_Select::SQL_WILDCARD || $part[1] instanceof Zend_Db_Expr) {
-                        $columns[] = $part[1];
-                    } else {
-                        $column = $db->quoteIdentifier($part[1], true);
-
-                        if (!empty($part[0])) {
-                            $column = $db->quoteIdentifier($part[0], true) . '.' . $column;
-                        }
-
-                        $columns[] = $column;
-                    }
-                }
-
-                if (count($columns) == 1 && $columns[0] == Zend_Db_Select::SQL_WILDCARD) {
-                    $groupPart = null;
-                } else {
-                    $groupPart = implode(',', $columns);
-                }
+                $rowCount = $db->select()->from($rowCount, $expression);
             } else {
-                $groupParts = $rowCount->getPart(Zend_Db_Select::GROUP);
+                /**
+                 * The DISTINCT and GROUP BY queries only work when selecting one column.
+                 * The question is whether any RDBMS supports DISTINCT for multiple columns, without workarounds.
+                 */
+                if (true === $rowCount->getPart(Zend_Db_Select::DISTINCT)) {
+                    $columnParts = $rowCount->getPart(Zend_Db_Select::COLUMNS);
 
-                foreach ($groupParts as &$part) {
-                    if (!($part == Zend_Db_Select::SQL_WILDCARD || $part instanceof Zend_Db_Expr)) {
-                        $part = $db->quoteIdentifier($part, true);
+                    $columns = array();
+
+                    foreach ($columnParts as $part) {
+                        if ($part[1] == Zend_Db_Select::SQL_WILDCARD || $part[1] instanceof Zend_Db_Expr) {
+                            $columns[] = $part[1];
+                        } else {
+                            $column = $db->quoteIdentifier($part[1], true);
+
+                            if (!empty($part[0])) {
+                                $column = $db->quoteIdentifier($part[0], true) . '.' . $column;
+                            }
+
+                            $columns[] = $column;
+                        }
                     }
+
+                    if (count($columns) == 1 && $columns[0] == Zend_Db_Select::SQL_WILDCARD) {
+                        $groupPart = null;
+                    } else {
+                        $groupPart = implode(',', $columns);
+                    }
+                } else {
+                    $groupParts = $rowCount->getPart(Zend_Db_Select::GROUP);
+
+                    foreach ($groupParts as &$part) {
+                        if (!($part == Zend_Db_Select::SQL_WILDCARD || $part instanceof Zend_Db_Expr)) {
+                            $part = $db->quoteIdentifier($part, true);
+                        }
+                    }
+
+                    $groupPart = implode(',', $groupParts);
                 }
 
-                $groupPart = implode(',', $groupParts);
+                $countPart  = empty($groupPart) ? 'COUNT(*)' : 'COUNT(DISTINCT ' . $groupPart . ')';
+                $expression = new Zend_Db_Expr($countPart . ' AS ' . $countColumn);
+
+                $rowCount->__toString(); // Workaround for ZF-3719 and related
+                $rowCount->reset(Zend_Db_Select::COLUMNS)
+                         ->reset(Zend_Db_Select::ORDER)
+                         ->reset(Zend_Db_Select::LIMIT_OFFSET)
+                         ->reset(Zend_Db_Select::GROUP)
+                         ->reset(Zend_Db_Select::DISTINCT)
+                         ->columns($expression);
             }
-
-            $countPart  = empty($groupPart) ? 'COUNT(*)' : 'COUNT(DISTINCT ' . $groupPart . ')';
-            $expression = new Zend_Db_Expr(
-                $countPart . ' AS ' . $db->quoteIdentifier($db->foldCase(self::ROW_COUNT_COLUMN))
-            );
-
-            $rowCount->__toString(); // Workaround for ZF-3719 and related
-            $rowCount->reset(Zend_Db_Select::COLUMNS)
-                     ->reset(Zend_Db_Select::ORDER)
-                     ->reset(Zend_Db_Select::LIMIT_OFFSET)
-                     ->reset(Zend_Db_Select::GROUP)
-                     ->reset(Zend_Db_Select::DISTINCT)
-                     ->columns($expression);
 
             $this->setRowCount($rowCount);
         }

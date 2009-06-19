@@ -340,4 +340,19 @@ class Zend_Paginator_Adapter_DbSelectTest extends PHPUnit_Framework_TestCase
             $this->fail($e->getMessage());
         }
     }
+
+    public function testUnionSelect()
+    {
+        $union = $this->_db->select()->union(array(
+            $this->_db->select()->from('test')->where('number <= 250'),
+            $this->_db->select()->from('test')->where('number > 250')
+        ));
+
+        //$this->_db->select()->from($union, 'count(*)')
+        $adapter = new Zend_Paginator_Adapter_DbSelect($union);
+        $expected = 500;
+        $actual = $adapter->count();
+
+        $this->assertEquals($expected, $actual);
+    }
 }

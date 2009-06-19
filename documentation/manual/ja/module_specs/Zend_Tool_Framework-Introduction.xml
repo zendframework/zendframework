@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15343 -->
+<sect1 id="zend.tool.framework.introduction">
+    <title>導入</title>
+
+    <para>
+        <classname>Zend_Tool_Framework</classname> is a framework for exposing common
+        functionalities such as the creation of project scaffolds, code
+        generation, search index generation, and much more. Functionality may be
+        written and exposed via PHP classes dropped into the PHP
+        <code>include_path</code>, providing incredible flexibility of
+        implementation. The functionality may then be consumed by writing
+        implementation and/or protocol-specific clients -- such as console
+        clients, XML-RPC, SOAP, and much more.
+    </para>
+
+    <para>
+        <classname>Zend_Tool_Framework</classname>は下記を提供します:
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                ツーリングクライアントでディスパッチ可能な機能と拡張性を開発者が生成できる
+                <code>共通の interface 及び abstract</code>です。
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>Base client functionality</emphasis> and a concrete
+                console implementation that connect external tools and
+                interfaces to the <classname>Zend_Tool_Framework</classname>. The Console
+                client may be used in CLI environments such as unix shells and
+                the Windows console.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>"Provider" and "Manifest" interfaces</emphasis> that
+                can be utilized by the tooling system. "Providers" represent the
+                functional aspect of the framework, and define the actions that
+                tooling clients may call. "Manifests" act as metadata registries
+                that provide additional context for the various defined
+                providers.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>An introspective loading system</emphasis> that will
+                scan the environment for providers and determine what is
+                required to dispatch them.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>A standard set of system providers"</emphasis> that
+                allow the system to report what the full capabilities of the
+                system are as well as provide useful feedback. This also
+                includes a comprehensive "Help System".
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <para>
+        <classname>Zend_Tool_Framework</classname>に関してこのマニュアルを通して
+        あなたが気づくであろう定義は含みます:
+    </para>
+
+    <itemizedlist>
+        <listitem><para>
+            <classname>Zend_Tool_Framework</classname> - 
+            ツーリング機能を公開するフレームワーク。
+        </para></listitem>
+
+        <listitem><para>
+            <emphasis>ツーリングクライアント</emphasis> - 
+            <classname>Zend_Tool_Framework</classname>に接続したり消費したりする開発ツール。
+        </para></listitem>
+
+        <listitem><para>
+            <emphasis>クライアント</emphasis> - ツーリングクライアントが接続したり、
+            問い合わせたり、コマンドを実行できるようなインターフェースを公開する
+            <classname>Zend_Tool_Framework</classname>。
+        </para></listitem>
+
+        <listitem><para>
+            <emphasis>コンソールクライアント／コマンドラインインターフェース／
+            zf.php</emphasis> - コマンドラインのためのツーリングクライアント。
+        </para></listitem>
+
+        <listitem><para>
+            <emphasis>プロバイダー</emphasis> - 
+            フレームワークがエクスポートするビルトイン機能のサブシステムと集まりです。
+        </para></listitem>
+
+        <listitem><para>
+            <emphasis>マニフェスト</emphasis> - プロバイダー要求データを定義して、
+            構成して、行き渡らせるためのサブシステム。
+        </para></listitem>
+
+        <listitem><para>
+            <classname>Zend_Tool_Project</classname>プロバイダー - 
+            Zend Frameworkベースのプロジェクトを生成して、
+            維持するための特別なプロバイダーのセットです。
+        </para></listitem>
+    </itemizedlist>
+</sect1>
+

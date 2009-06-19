@@ -48,7 +48,7 @@
                 </itemizedlist>
 
                 <para>
-                    It operates as a <code>postDispatch()</code> plugin, and
+                    It operates as a <methodname>postDispatch()</methodname> plugin, and
                     checks to see if a dispatcher, action controller, or
                     other exception has occurred. If so, it forwards to an error
                     handler controller.
@@ -112,8 +112,9 @@ try {
                     <classname>Zend_Controller_Front::dispatch()</classname> will not render the
                     response, but instead return it. Once you have the response,
                     you may then test to see if any exceptions were trapped using
-                    its <code>isException()</code> method, and retrieving the exceptions via
-                    the <code>getException()</code> method. As an example:
+                    its <methodname>isException()</methodname> method, and retrieving the
+                    exceptions via the <methodname>getException()</methodname> method. As an
+                    example:
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -190,7 +191,7 @@ $dispatcher->setParam('useDefaultControllerAlways', true);
 
                     <listitem>
                         <para>
-                            The exception thrown by <code>dispatch()</code> is
+                            The exception thrown by <methodname>dispatch()</methodname> is
                             a <classname>Zend_Controller_Dispatcher_Exception</classname>
                             containing the text 'Invalid controller specified'.
                             Use one of the methods outlined in <link
@@ -216,7 +217,7 @@ $dispatcher->setParam('useDefaultControllerAlways', true);
                     <listitem>
                         <para>
                             Subclass <classname>Zend_Controller_Action</classname> and
-                            override the <code>__call()</code> method. As an
+                            override the <methodname>__call()</methodname> method. As an
                             example:
                         </para>
 
@@ -245,7 +246,7 @@ class My_Controller_Action extends Zend_Controller_Action
                     <listitem>
                         <para>
                             Subclass <classname>Zend_Controller_Dispatcher</classname>
-                            and override the <code>getAction()</code> method to
+                            and override the <methodname>getAction()</methodname> method to
                             verify the action exists. As an example:
                         </para>
 
@@ -300,12 +301,12 @@ class My_Controller_Dispatcher extends Zend_Controller_Dispatcher
 
                         <para>
                             By subclassing <classname>Zend_Controller_Action</classname>
-                            and modifying <code>preDispatch()</code>, you can
+                            and modifying <methodname>preDispatch()</methodname>, you can
                             modify all of your controllers to forward to
                             another action or redirect prior to actually
                             dispatching the action. The code for this will look
                             similar to the code for overriding
-                            <code>__call()</code>, above.
+                            <methodname>__call()</methodname>, above.
                         </para>
 
                         <para>

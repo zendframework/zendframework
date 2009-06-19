@@ -17,9 +17,9 @@
             <code>index</code> for each of the controller and action defaults
             and <code>default</code> for the module default value, but allows
             the developer to change the default values for each using the
-            <code>setDefaultController()</code>,
-            <code>setDefaultAction()</code>, and <code>setDefaultModule()</code>
-            methods, respectively.
+            <methodname>setDefaultController()</methodname>,
+            <methodname>setDefaultAction()</methodname>, and
+            <methodname>setDefaultModule()</methodname> methods, respectively.
         </para>
 
         <note>
@@ -66,8 +66,9 @@ $dispatcher->setParam('prefixDefaultModule', true);
 
         <para>
             The action controller method that controls such dispatching is
-            <code>_forward()</code>; call this method from any of the
-            pre/postDispatch() or action methods, providing an action, controller,
+            <methodname>_forward()</methodname>; call this method from any of the
+            <methodname>preDispatch()</methodname>, <methodname>postDispatch()</methodname> or
+            action methods, providing an action, controller,
             module, and optionally any additional parameters you may wish to
             send to the new action:
         </para>

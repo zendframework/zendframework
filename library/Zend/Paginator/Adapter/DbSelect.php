@@ -180,9 +180,10 @@ class Zend_Paginator_Adapter_DbSelect implements Zend_Paginator_Adapter_Interfac
         $db = $rowCount->getAdapter();
 
         $countColumn = $db->quoteIdentifier($db->foldCase(self::ROW_COUNT_COLUMN));
+        $countPart = 'COUNT(1) AS ';
 
         if ($rowCount->getPart(Zend_Db_Select::UNION) != array()) {
-            $expression = new Zend_Db_Expr('COUNT(*) AS ' . $countColumn);
+            $expression = new Zend_Db_Expr($countPart . $countColumn);
 
             $rowCount = $db->select()->from($rowCount, $expression);
         } else {
@@ -190,44 +191,54 @@ class Zend_Paginator_Adapter_DbSelect implements Zend_Paginator_Adapter_Interfac
              * The DISTINCT and GROUP BY queries only work when selecting one column.
              * The question is whether any RDBMS supports DISTINCT for multiple columns, without workarounds.
              */
-            if (true === $rowCount->getPart(Zend_Db_Select::DISTINCT)) {
+            if ($rowCount->getPart(Zend_Db_Select::DISTINCT) === true) {
+                $groupPart = null;
+
                 $columnParts = $rowCount->getPart(Zend_Db_Select::COLUMNS);
 
-                $columns = array();
+                /**
+                 * If this is a DISTINCT query with multiple columns, then turn
+                 * the original query into a subquery of the COUNT query.
+                 */
+                if (count($columnParts) > 1) {
+                    $rowCount->__toString();
+                    $rowCount->reset(Zend_Db_Select::FROM);
+                    $rowCount->from($this->_select);
+                } else {
+                    $part = $columnParts[0];
 
-                foreach ($columnParts as $part) {
-                    if ($part[1] == Zend_Db_Select::SQL_WILDCARD || $part[1] instanceof Zend_Db_Expr) {
-                        $columns[] = $part[1];
-                    } else {
+                    if ($part[1] !== Zend_Db_Select::SQL_WILDCARD && !($part[1] instanceof Zend_Db_Expr)) {
                         $column = $db->quoteIdentifier($part[1], true);
 
                         if (!empty($part[0])) {
                             $column = $db->quoteIdentifier($part[0], true) . '.' . $column;
                         }
 
-                        $columns[] = $column;
+                        $groupPart = $column;
                     }
                 }
-
-                if (count($columns) == 1 && $columns[0] == Zend_Db_Select::SQL_WILDCARD) {
-                    $groupPart = null;
-                } else {
-                    $groupPart = implode(',', $columns);
-                }
             } else {
+                /**
+                 * TODO: If there is a GROUP BY clause with one column, do a
+                 * COUNT(DISTINCT column1). If there are more than one columns
+                 * take the subquery approach.
+                 */
                 $groupParts = $rowCount->getPart(Zend_Db_Select::GROUP);
 
-                foreach ($groupParts as &$part) {
+                foreach ($groupParts as $key => $part) {
                     if (!($part == Zend_Db_Select::SQL_WILDCARD || $part instanceof Zend_Db_Expr)) {
-                        $part = $db->quoteIdentifier($part, true);
+                        $groupPats[$key] = $db->quoteIdentifier($part, true);
                     }
                 }
 
                 $groupPart = implode(',', $groupParts);
             }
 
-            $countPart  = empty($groupPart) ? 'COUNT(*)' : 'COUNT(DISTINCT ' . $groupPart . ')';
-            $expression = new Zend_Db_Expr($countPart . ' AS ' . $countColumn);
+            if (!empty($groupPart)) {
+                $countPart = 'COUNT(DISTINCT ' . $groupPart . ') AS ';
+            }
+
+            $expression = new Zend_Db_Expr($countPart . $countColumn);
 
             $rowCount->__toString(); // Workaround for ZF-3719 and related
             $rowCount->reset(Zend_Db_Select::COLUMNS)

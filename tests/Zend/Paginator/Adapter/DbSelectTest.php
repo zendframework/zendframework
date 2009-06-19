@@ -370,8 +370,40 @@ class Zend_Paginator_Adapter_DbSelectTest extends PHPUnit_Framework_TestCase
 
         $adapter = new Zend_Paginator_Adapter_DbSelect($union);
 
-        $expected = 'SELECT COUNT(*) AS "zend_paginator_row_count" FROM (SELECT "test".* FROM "test" WHERE (number <= 250) UNION SELECT "test".* FROM "test" WHERE (number > 250)) AS "t"';
+        $expected = 'SELECT COUNT(1) AS "zend_paginator_row_count" FROM (SELECT "test".* FROM "test" WHERE (number <= 250) UNION SELECT "test".* FROM "test" WHERE (number > 250)) AS "t"';
 
         $this->assertEquals($expected, $adapter->getCountSelect()->__toString());
+    }
+
+    /**
+     * @group ZF-5295
+     */
+    public function testMultipleDistinctColumns()
+    {
+        $select = $this->_db->select()->from('test', array('testgroup', 'number'))
+                                      ->distinct(true);
+
+        $adapter = new Zend_Paginator_Adapter_DbSelect($select);
+
+        $expected = 'SELECT COUNT(1) AS "zend_paginator_row_count" FROM (SELECT DISTINCT "test"."testgroup", "test"."number" FROM "test") AS "t"';
+
+        $this->assertEquals($expected, $adapter->getCountSelect()->__toString());
+        $this->assertEquals(500, $adapter->count());
+    }
+
+    /**
+     * @group ZF-5295
+     */
+    public function testSingleDistinctColumn()
+    {
+        $select = $this->_db->select()->from('test', 'testgroup')
+                                      ->distinct(true);
+
+        $adapter = new Zend_Paginator_Adapter_DbSelect($select);
+
+        $expected = 'SELECT COUNT(DISTINCT "test"."testgroup") AS "zend_paginator_row_count" FROM "test"';
+
+        $this->assertEquals($expected, $adapter->getCountSelect()->__toString());
+        $this->assertEquals(2, $adapter->count());
     }
 }

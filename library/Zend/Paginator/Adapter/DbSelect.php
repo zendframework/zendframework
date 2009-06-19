@@ -223,13 +223,14 @@ class Zend_Paginator_Adapter_DbSelect implements Zend_Paginator_Adapter_Interfac
                 }
             } else {
                 $groupParts = $rowCount->getPart(Zend_Db_Select::GROUP);
+                $havingPart = $rowCount->getPart(Zend_Db_Select::HAVING);
 
                 /**
                  * If this is a GROUP BY query with multiple columns, then turn
                  * the original query into a subquery of the COUNT query.
                  */
                 if (!empty($groupParts)) {
-                    if (count($groupParts) > 1) {
+                    if (count($groupParts) > 1 || !empty($havingPart)) {
                         $rowCount->reset(Zend_Db_Select::FROM);
                         $rowCount->from($this->_select);
                     } else {
@@ -251,6 +252,7 @@ class Zend_Paginator_Adapter_DbSelect implements Zend_Paginator_Adapter_Interfac
                      ->reset(Zend_Db_Select::LIMIT_OFFSET)
                      ->reset(Zend_Db_Select::GROUP)
                      ->reset(Zend_Db_Select::DISTINCT)
+                     ->reset(Zend_Db_Select::HAVING)
                      ->columns($expression);
         }
 

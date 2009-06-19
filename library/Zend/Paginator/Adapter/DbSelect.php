@@ -176,6 +176,10 @@ class Zend_Paginator_Adapter_DbSelect implements Zend_Paginator_Adapter_Interfac
      */
     public function getCountSelect()
     {
+        /**
+         * We only need to generate a COUNT query once. It will not change for
+         * this instance.
+         */
         if ($this->_countSelect !== null) {
             return $this->_countSelect;
         }
@@ -186,65 +190,61 @@ class Zend_Paginator_Adapter_DbSelect implements Zend_Paginator_Adapter_Interfac
         $db = $rowCount->getAdapter();
 
         $countColumn = $db->quoteIdentifier($db->foldCase(self::ROW_COUNT_COLUMN));
-        $countPart = 'COUNT(1) AS ';
-        $groupPart = null;
+        $countPart   = 'COUNT(1) AS ';
+        $groupPart   = null;
+        $unionParts  = $rowCount->getPart(Zend_Db_Select::UNION);
 
-        if ($rowCount->getPart(Zend_Db_Select::UNION) != array()) {
+        /**
+         * If we're dealing with a UNION query, execute the UNION as a subquery
+         * to the COUNT query.
+         */
+        if (!empty($unionParts)) {
             $expression = new Zend_Db_Expr($countPart . $countColumn);
 
             $rowCount = $db->select()->from($rowCount, $expression);
         } else {
+            $columnParts = $rowCount->getPart(Zend_Db_Select::COLUMNS);
+            $groupParts  = $rowCount->getPart(Zend_Db_Select::GROUP);
+            $havingParts = $rowCount->getPart(Zend_Db_Select::HAVING);
+            $isDistinct  = $rowCount->getPart(Zend_Db_Select::DISTINCT);
+
             /**
-             * The DISTINCT and GROUP BY queries only work when selecting one column.
-             * The question is whether any RDBMS supports DISTINCT for multiple columns, without workarounds.
+             * If there is more than one column AND it's a DISTINCT query, more
+             * than one group, or if the query has a HAVING clause, then take
+             * the original query and use it as a subquery os the COUNT query.
              */
-            if ($rowCount->getPart(Zend_Db_Select::DISTINCT) === true) {
-                $columnParts = $rowCount->getPart(Zend_Db_Select::COLUMNS);
+            if (($isDistinct && count($columnParts) > 1) || count($groupParts) > 1 || !empty($havingParts)) {
+                $rowCount->reset(Zend_Db_Select::FROM);
+                $rowCount->from($this->_select);
+            } else if ($isDistinct) {
+                $part = $columnParts[0];
 
-                /**
-                 * If this is a DISTINCT query with multiple columns, then turn
-                 * the original query into a subquery of the COUNT query.
-                 */
-                if (count($columnParts) > 1) {
-                    $rowCount->reset(Zend_Db_Select::FROM);
-                    $rowCount->from($this->_select);
-                } else {
-                    $part = $columnParts[0];
+                if ($part[1] !== Zend_Db_Select::SQL_WILDCARD && !($part[1] instanceof Zend_Db_Expr)) {
+                    $column = $db->quoteIdentifier($part[1], true);
 
-                    if ($part[1] !== Zend_Db_Select::SQL_WILDCARD && !($part[1] instanceof Zend_Db_Expr)) {
-                        $column = $db->quoteIdentifier($part[1], true);
-
-                        if (!empty($part[0])) {
-                            $column = $db->quoteIdentifier($part[0], true) . '.' . $column;
-                        }
-
-                        $groupPart = $column;
+                    if (!empty($part[0])) {
+                        $column = $db->quoteIdentifier($part[0], true) . '.' . $column;
                     }
-                }
-            } else {
-                $groupParts = $rowCount->getPart(Zend_Db_Select::GROUP);
-                $havingPart = $rowCount->getPart(Zend_Db_Select::HAVING);
 
-                /**
-                 * If this is a GROUP BY query with multiple columns, then turn
-                 * the original query into a subquery of the COUNT query.
-                 */
-                if (!empty($groupParts)) {
-                    if (count($groupParts) > 1 || !empty($havingPart)) {
-                        $rowCount->reset(Zend_Db_Select::FROM);
-                        $rowCount->from($this->_select);
-                    } else {
-                        if ($groupParts[0] !== Zend_Db_Select::SQL_WILDCARD && !($groupParts[0] instanceof Zend_Db_Expr)) {
-                            $groupPart = $db->quoteIdentifier($groupParts[0], true);
-                        }
-                    }
+                    $groupPart = $column;
                 }
+            } else if (!empty($groupParts) && $groupParts[0] !== Zend_Db_Select::SQL_WILDCARD &&
+                       !($groupParts[0] instanceof Zend_Db_Expr)) {
+                $groupPart = $db->quoteIdentifier($groupParts[0], true);
             }
 
+            /**
+             * If the original query had a GROUP BY or a DISTINCT part and only
+             * one column was specified, create a COUNT(DISTINCT ) query instead
+             * of a regular COUNT query.
+             */
             if (!empty($groupPart)) {
                 $countPart = 'COUNT(DISTINCT ' . $groupPart . ') AS ';
             }
 
+            /**
+             * Create the COUNT part of the query
+             */
             $expression = new Zend_Db_Expr($countPart . $countColumn);
 
             $rowCount->reset(Zend_Db_Select::COLUMNS)

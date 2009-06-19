@@ -258,6 +258,25 @@ class Zend_Validate_AbstractTest extends PHPUnit_Framework_TestCase
                 Zend_Validate_AbstractTest_Concrete::FOO_MESSAGE => '%value% was passed'), $messages);
     }
 
+    public function testMaximumErrorMessageLength()
+    {
+        require_once 'Zend/Validate.php';
+        $this->assertEquals(-1, Zend_Validate::getMessageLength());
+        Zend_Validate::setMessageLength(10);
+        $this->assertEquals(10, Zend_Validate::getMessageLength());
+
+        $translator = new Zend_Translate(
+            'array',
+            array('fooMessage' => 'This is the translated message for %value%'),
+            'en'
+        );
+        $this->validator->setTranslator($translator);
+        $this->assertFalse($this->validator->isValid('bar'));
+        $messages = $this->validator->getMessages();
+        $this->assertTrue(array_key_exists('fooMessage', $messages));
+        $this->assertEquals('This is...', $messages['fooMessage']);
+    }
+
     /**
      * Ignores a raised PHP error when in effect, but throws a flag to indicate an error occurred
      *

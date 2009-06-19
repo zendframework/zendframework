@@ -94,6 +94,13 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
     protected $_translatorDisabled = false;
 
     /**
+     * Limits the maximum returned length of a error message
+     *
+     * @var Integer
+     */
+    protected static $_messageLength = -1;
+
+    /**
      * Returns array of validation failure messages
      *
      * @return array
@@ -229,6 +236,12 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
         foreach ($this->_messageVariables as $ident => $property) {
             $message = str_replace("%$ident%", (string) $this->$property, $message);
         }
+
+        $length = self::getMessageLength();
+        if (($length > -1) && (strlen($message) > $length)) {
+            $message = substr($message, 0, (self::getMessageLength() - 3)) . '...';
+        }
+
         return $message;
     }
 
@@ -394,5 +407,25 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
     public function translatorIsDisabled()
     {
         return $this->_translatorDisabled;
+    }
+
+    /**
+     * Returns the maximum allowed message length
+     *
+     * @return integer
+     */
+    public static function getMessageLength()
+    {
+        return self::$_messageLength;
+    }
+
+    /**
+     * Sets the maximum allowed message length
+     *
+     * @param integer $length
+     */
+    public static function setMessageLength($length = -1)
+    {
+        self::$_messageLength = $length;
     }
 }

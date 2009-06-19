@@ -574,6 +574,42 @@ $validator = new Zend_Validate_Alnum();
 $messages  = $validator->getMessageTemplates();
 ]]></programlisting>
 
+    <sect2 id="zend.validate.messages">
+        <title>Limit the size of a validation message</title>
+
+        <para>
+            Sometimes it is necessary to limit the maximum size a validation message can have.
+            For example when your view allows a maximum size of 100 chars to be rendered on one
+            line. To simplify the usage, <classname>Zend_Validate</classname> is able to
+            automatically limit the maximum returned size of a validation message.
+        </para>
+
+        <para>
+            To get the actual set size use
+            <methodname>Zend_Validate::getMessageLength()</methodname>. If it is -1, then the
+            returned message will not be truncated. This is default behaviour.
+        </para>
+
+        <para>
+            To limit the returned message size use
+            <methodname>Zend_Validate::setMessageLength()</methodname>. Set it to any integer size
+            you need. When the returned message exceeds the set size, then the message
+            will be truncated and the string '<emphasis>...</emphasis>' will be added instead of
+            the rest of the message.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+Zend_Validate::setMessageLength(100);
+]]></programlisting>
+
+        <note>
+            <para>
+                Note that the set message length is used for all validators, even for self defined ones
+                as long as they extend <classname>Zend_Validate_Abstract</classname>.
+            </para>
+        </note>
+    </sect2>
+
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

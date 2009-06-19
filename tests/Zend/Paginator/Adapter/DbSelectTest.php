@@ -341,6 +341,9 @@ class Zend_Paginator_Adapter_DbSelectTest extends PHPUnit_Framework_TestCase
         }
     }
 
+    /**
+     * @group ZF-5956
+     */
     public function testUnionSelect()
     {
         $union = $this->_db->select()->union(array(
@@ -348,11 +351,27 @@ class Zend_Paginator_Adapter_DbSelectTest extends PHPUnit_Framework_TestCase
             $this->_db->select()->from('test')->where('number > 250')
         ));
 
-        //$this->_db->select()->from($union, 'count(*)')
         $adapter = new Zend_Paginator_Adapter_DbSelect($union);
         $expected = 500;
         $actual = $adapter->count();
 
         $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * @group ZF-7045
+     */
+    public function testGetCountSelect()
+    {
+        $union = $this->_db->select()->union(array(
+            $this->_db->select()->from('test')->where('number <= 250'),
+            $this->_db->select()->from('test')->where('number > 250')
+        ));
+
+        $adapter = new Zend_Paginator_Adapter_DbSelect($union);
+
+        $expected = 'SELECT COUNT(*) AS "zend_paginator_row_count" FROM (SELECT "test".* FROM "test" WHERE (number <= 250) UNION SELECT "test".* FROM "test" WHERE (number > 250)) AS "t"';
+
+        $this->assertEquals($expected, $adapter->getCountSelect()->__toString());
     }
 }

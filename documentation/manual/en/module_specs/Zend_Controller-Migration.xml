@@ -17,11 +17,11 @@
 
             <para>
                 As translated segments were introduced into the new standard
-                route, the <code>@</code> character is now a special character
+                route, the '<emphasis>@</emphasis>' character is now a special character
                 in the beginning of a route segment. To be able to use it in a
                 static segment, you must escape it by prefixing it with second
-                <code>@</code> character. The same rule now applies for the
-                <code>:</code> character.
+                '<emphasis>@</emphasis>' character. The same rule now applies for the
+                '<emphasis>:</emphasis>' character.
             </para>
         </sect3>
     </sect2>
@@ -43,7 +43,7 @@
 
             <itemizedlist>
                 <listitem><para>
-                    <code>formatModuleName()</code>: should be used to take a raw
+                    <methodname>formatModuleName()</methodname>: should be used to take a raw
                 controller name, such as one that would be packaged inside a request
                 object, and reformat it to a proper class name that a class extending
                 <classname>Zend_Controller_Action</classname> would use
@@ -70,17 +70,17 @@
 
             <itemizedlist>
                 <listitem><para>
-                    <code>getDefaultModule()</code>: should return the name of
+                    <methodname>getDefaultModule()</methodname>: should return the name of
                     the default module.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getDefaultControllerName()</code>: should return the
+                    <methodname>getDefaultControllerName()</methodname>: should return the
                     name of the default controller.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getDefaultAction()</code>: should return the
+                    <methodname>getDefaultAction()</methodname>: should return the
                     name of the default action.
                 </para></listitem>
             </itemizedlist>
@@ -226,8 +226,8 @@ $front->setParam('useCaseSensitiveActions', true);
         </para>
 
         <para>
-            The <code>ErrorHandler</code> plugin runs during
-            <code>postDispatch()</code> checking for exceptions, and forwarding
+            The <emphasis>ErrorHandler</emphasis> plugin runs during
+            <methodname>postDispatch()</methodname> checking for exceptions, and forwarding
             to a specified error handler controller. You should include such a
             controller in your application. You may disable it by setting the
             front controller parameter <code>noErrorHandler</code>:
@@ -238,18 +238,18 @@ $front->setParam('noErrorHandler', true);
 ]]></programlisting>
 
         <para>
-            The <code>ViewRenderer</code> action helper automates view injection
+            The <emphasis>ViewRenderer</emphasis> action helper automates view injection
             into action controllers as well as autorendering of view scripts
             based on the current action. The primary issue you may encounter is
             if you have actions that do not render view scripts and neither
-            forward or redirect, as the <code>ViewRenderer</code> will attempt
+            forward or redirect, as the <emphasis>ViewRenderer</emphasis> will attempt
             to render a view script based on the action name.
         </para>
 
         <para>
             There are several strategies you can take to update your code. In
             the short term, you can globally disable the
-            <code>ViewRenderer</code> in your front controller bootstrap prior
+            <emphasis>ViewRenderer</emphasis> in your front controller bootstrap prior
             to dispatching:
         </para>
 
@@ -264,7 +264,7 @@ $front->setParam('noViewRenderer', true);
         </para>
 
         <para>
-            When you're ready to start using the <code>ViewRenderer</code>
+            When you're ready to start using the <emphasis>ViewRenderer</emphasis>
             functionality, there are several things to look for in your
             controller code. First, look at your action methods (the methods
             ending in 'Action'), and determine what each is doing. If none of
@@ -272,10 +272,18 @@ $front->setParam('noViewRenderer', true);
         </para>
 
         <itemizedlist>
-            <listitem><para>Calls to <code>$this-&gt;render()</code></para></listitem>
-            <listitem><para>Calls to <code>$this-&gt;_forward()</code></para></listitem>
-            <listitem><para>Calls to <code>$this-&gt;_redirect()</code></para></listitem>
-            <listitem><para>Calls to the <code>Redirector</code> action helper</para></listitem>
+            <listitem>
+                <para>Calls to <methodname>$this-&gt;render()</methodname></para>
+            </listitem>
+            <listitem>
+                <para>Calls to <methodname>$this-&gt;_forward()</methodname></para>
+            </listitem>
+            <listitem>
+                <para>Calls to <methodname>$this-&gt;_redirect()</methodname></para>
+            </listitem>
+            <listitem>
+                <para>Calls to the <emphasis>Redirector</emphasis> action helper</para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -289,7 +297,7 @@ $this->_helper->viewRenderer->setNoRender();
         <para>
             If you find that none of your action methods are rendering,
             forwarding, or redirecting, you will likely want to put the above
-            line in your <code>preDispatch()</code> or <code>init()</code>
+            line in your <methodname>preDispatch()</methodname> or <methodname>init()</methodname>
             methods:
         </para>
 
@@ -303,7 +311,7 @@ public function preDispatch()
 ]]></programlisting>
 
         <para>
-            If you are calling <code>render()</code>, and you're using <link
+            If you are calling <methodname>render()</methodname>, and you're using <link
                 linkend="zend.controller.modular">the Conventional Modular
                 directory structure</link>, you'll want to change your code to
             make use of autorendering:
@@ -318,16 +326,16 @@ public function preDispatch()
             </listitem>
             <listitem>
                 <para>
-                    If you're simply calling <code>render()</code> with no
+                    If you're simply calling <methodname>render()</methodname> with no
                     arguments, you can remove such lines.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    If you're calling <code>render()</code> with arguments, and
+                    If you're calling <methodname>render()</methodname> with arguments, and
                     not doing any processing afterwards or rendering multiple
                     view scripts, you can change these calls to read
-                    <code>$this-&gt;_helper-&gt;viewRenderer()</code>.
+                    <methodname>$this-&gt;_helper-&gt;viewRenderer()</methodname>.
                 </para>
             </listitem>
         </itemizedlist>
@@ -336,7 +344,7 @@ public function preDispatch()
             If you're not using the conventional modular directory structure,
             there are a variety of methods for setting the view base path and
             script path specifications so that you can make use of the
-            <code>ViewRenderer</code>. Please read the <link
+            <emphasis>ViewRenderer</emphasis>. Please read the <link
                 linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer
                 documentation</link> for information on these methods.
         </para>
@@ -344,7 +352,7 @@ public function preDispatch()
         <para>
             If you're using a view object from the registry, or customizing your
             view object, or using a different view implementation, you'll want
-            to inject the <code>ViewRenderer</code> with this object. This can
+            to inject the <emphasis>ViewRenderer</emphasis> with this object. This can
             be done easily at any time.
         </para>
 
@@ -375,18 +383,18 @@ $viewRenderer->setView($view);
         </itemizedlist>
 
         <para>
-            There are many ways to modify the <code>ViewRenderer</code>,
+            There are many ways to modify the <emphasis>ViewRenderer</emphasis>,
             including setting a different view script to render, specifying
             replacements for all replaceable elements of a view script path
             (including the suffix), choosing a response named segment to
             utilize, and more. If you aren't using the conventional modular
             directory structure, you can even associate different path
-            specifications with the <code>ViewRenderer</code>.
+            specifications with the <emphasis>ViewRenderer</emphasis>.
         </para>
 
         <para>
             We encourage you to adapt your code to use the
-            <code>ErrorHandler</code> and <code>ViewRenderer</code> as they are
+            <emphasis>ErrorHandler</emphasis> and <emphasis>ViewRenderer</emphasis> as they are
             now core functionality.
         </para>
     </sect2>
@@ -406,20 +414,20 @@ $viewRenderer->setView($view);
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>setRedirectCode()</code>; use
-                    <classname>Zend_Controller_Action_Helper_Redirector::setCode()</classname>.
+                    <methodname>setRedirectCode()</methodname>; use
+                    <methodname>Zend_Controller_Action_Helper_Redirector::setCode()</methodname>.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>setRedirectPrependBase()</code>; use
-                    <classname>Zend_Controller_Action_Helper_Redirector::setPrependBase()</classname>.
+                    <methodname>setRedirectPrependBase()</methodname>; use
+                    <methodname>Zend_Controller_Action_Helper_Redirector::setPrependBase()</methodname>.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>setRedirectExit()</code>; use
-                    <classname>Zend_Controller_Action_Helper_Redirector::setExit()</classname>.
+                    <methodname>setRedirectExit()</methodname>; use
+                    <methodname>Zend_Controller_Action_Helper_Redirector::setExit()</methodname>.
                 </para>
             </listitem>
         </itemizedlist>
@@ -555,9 +563,9 @@ $ctrl->dispatch();
             We encourage use of the Response object to aggregate content and
             headers. This will allow for more flexible output format switching
             (for instance, JSON or XML instead of XHTML) in your applications.
-            By default, <code>dispatch()</code> will render the response, sending both
+            By default, <methodname>dispatch()</methodname> will render the response, sending both
             headers and rendering any content. You may also have the front
-            controller return the response using <code>returnResponse()</code>,
+            controller return the response using <methodname>returnResponse()</methodname>,
             and then render the response using your own logic. A future version
             of the front controller may enforce use of the response object via
             output buffering.
@@ -585,7 +593,7 @@ $ctrl->dispatch();
                 <itemizedlist>
                     <listitem>
                         <para>
-                            Set <code>throwExceptions()</code> in the front
+                            Set <methodname>throwExceptions()</methodname> in the front
                             controller:
                         </para>
                         <programlisting language="php"><![CDATA[
@@ -595,7 +603,7 @@ $front->throwExceptions(true);
 
                     <listitem>
                         <para>
-                            Set <code>renderExceptions()</code> in the response
+                            Set <methodname>renderExceptions()</methodname> in the response
                             object:
                         </para>
                         <programlisting language="php"><![CDATA[
@@ -638,13 +646,13 @@ echo $response;
                         these to set the request, response, and invokeArgs
                         properties of the object, and if overriding the
                         constructor, you should do so as well. Better yet, use
-                        the <code>init()</code> method to do any instance
+                        the <methodname>init()</methodname> method to do any instance
                         configuration, as this method is called as the final
                         action of the constructor.
                     </para></listitem>
 
                     <listitem><para>
-                        <code>run()</code> is no longer defined as final, but is
+                        <methodname>run()</methodname> is no longer defined as final, but is
                         also no longer used by the front controller; its sole
                         purpose is for using the class as a page controller. It
                         now takes two optional arguments, a
@@ -653,19 +661,19 @@ echo $response;
                     </para></listitem>
 
                     <listitem><para>
-                        <code>indexAction()</code> no longer needs to be
+                        <methodname>indexAction()</methodname> no longer needs to be
                         defined, but is encouraged as the default action. This
                         allows using the RewriteRouter and action controllers to
                         specify different default action methods.
                     </para></listitem>
 
                     <listitem><para>
-                        <code>__call()</code> should be overridden to handle any
+                        <methodname>__call()</methodname> should be overridden to handle any
                         undefined actions automatically.
                     </para></listitem>
 
                     <listitem><para>
-                        <code>_redirect()</code> now takes an optional second
+                        <methodname>_redirect()</methodname> now takes an optional second
                         argument, the HTTP code to return with the redirect, and
                         an optional third argument, <varname>$prependBase</varname>,
                         that can indicate that the base URL registered with the
@@ -674,7 +682,7 @@ echo $response;
 
                     <listitem>
                         <para>
-                            The <code>_action</code> property is no longer set. This property was a
+                            The <varname>$_action</varname> property is no longer set. This property was a
                             <classname>Zend_Controller_Dispatcher_Token</classname>,
                             which no longer exists in the current incarnation.
                             The sole purpose of the token was to provide
@@ -707,10 +715,10 @@ $foo = $this->_getParam('foo', 'default');
 
                     <listitem>
                         <para>
-                            <code>noRouteAction()</code> has been removed. The
+                            <methodname>noRouteAction()</methodname> has been removed. The
                             appropriate way to handle non-existent action
                             methods should you wish to route them to a default
-                            action is using <code>__call()</code>:
+                            action is using <methodname>__call()</methodname>:
                         </para>
 
                         <programlisting language="php"><![CDATA[

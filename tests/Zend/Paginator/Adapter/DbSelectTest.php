@@ -406,4 +406,36 @@ class Zend_Paginator_Adapter_DbSelectTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $adapter->getCountSelect()->__toString());
         $this->assertEquals(2, $adapter->count());
     }
+
+    /**
+     * @group ZF-6330
+     */
+    public function testGroupByMultipleColumns()
+    {
+        $select = $this->_db->select()->from('test', 'testgroup')
+                                      ->group(array('number', 'testgroup'));
+
+        $adapter = new Zend_Paginator_Adapter_DbSelect($select);
+
+        $expected = 'SELECT COUNT(1) AS "zend_paginator_row_count" FROM (SELECT "test"."testgroup" FROM "test" GROUP BY "number"' . ",\n\t" . '"testgroup") AS "t"';
+
+        $this->assertEquals($expected, $adapter->getCountSelect()->__toString());
+        $this->assertEquals(500, $adapter->count());
+    }
+
+    /**
+     * @group ZF-6330
+     */
+    public function testGroupBySingleColumn()
+    {
+        $select = $this->_db->select()->from('test', 'testgroup')
+                                      ->group('test.testgroup');
+
+        $adapter = new Zend_Paginator_Adapter_DbSelect($select);
+
+        $expected = 'SELECT COUNT(DISTINCT "test"."testgroup") AS "zend_paginator_row_count" FROM "test"';
+
+        $this->assertEquals($expected, $adapter->getCountSelect()->__toString());
+        $this->assertEquals(2, $adapter->count());
+    }
 }

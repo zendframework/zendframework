@@ -168,6 +168,10 @@ class Zend_Paginator_Adapter_DbSelect implements Zend_Paginator_Adapter_Interfac
     /**
      * Get the COUNT select object for the provided query
      *
+     * TODO: Have a look at queries that have both GROUP BY and DISTINCT specified.
+     * In that use-case I'm expecting problems when either GROUP BY or DISTINCT
+     * has one column.
+     *
      * @return Zend_Db_Select
      */
     public function getCountSelect()
@@ -177,10 +181,13 @@ class Zend_Paginator_Adapter_DbSelect implements Zend_Paginator_Adapter_Interfac
         }
 
         $rowCount = clone $this->_select;
+        $rowCount->__toString(); // Workaround for ZF-3719 and related
+
         $db = $rowCount->getAdapter();
 
         $countColumn = $db->quoteIdentifier($db->foldCase(self::ROW_COUNT_COLUMN));
         $countPart = 'COUNT(1) AS ';
+        $groupPart = null;
 
         if ($rowCount->getPart(Zend_Db_Select::UNION) != array()) {
             $expression = new Zend_Db_Expr($countPart . $countColumn);
@@ -192,8 +199,6 @@ class Zend_Paginator_Adapter_DbSelect implements Zend_Paginator_Adapter_Interfac
              * The question is whether any RDBMS supports DISTINCT for multiple columns, without workarounds.
              */
             if ($rowCount->getPart(Zend_Db_Select::DISTINCT) === true) {
-                $groupPart = null;
-
                 $columnParts = $rowCount->getPart(Zend_Db_Select::COLUMNS);
 
                 /**
@@ -201,7 +206,6 @@ class Zend_Paginator_Adapter_DbSelect implements Zend_Paginator_Adapter_Interfac
                  * the original query into a subquery of the COUNT query.
                  */
                 if (count($columnParts) > 1) {
-                    $rowCount->__toString();
                     $rowCount->reset(Zend_Db_Select::FROM);
                     $rowCount->from($this->_select);
                 } else {
@@ -218,20 +222,22 @@ class Zend_Paginator_Adapter_DbSelect implements Zend_Paginator_Adapter_Interfac
                     }
                 }
             } else {
-                /**
-                 * TODO: If there is a GROUP BY clause with one column, do a
-                 * COUNT(DISTINCT column1). If there are more than one columns
-                 * take the subquery approach.
-                 */
                 $groupParts = $rowCount->getPart(Zend_Db_Select::GROUP);
 
-                foreach ($groupParts as $key => $part) {
-                    if (!($part == Zend_Db_Select::SQL_WILDCARD || $part instanceof Zend_Db_Expr)) {
-                        $groupPats[$key] = $db->quoteIdentifier($part, true);
+                /**
+                 * If this is a GROUP BY query with multiple columns, then turn
+                 * the original query into a subquery of the COUNT query.
+                 */
+                if (!empty($groupParts)) {
+                    if (count($groupParts) > 1) {
+                        $rowCount->reset(Zend_Db_Select::FROM);
+                        $rowCount->from($this->_select);
+                    } else {
+                        if ($groupParts[0] !== Zend_Db_Select::SQL_WILDCARD && !($groupParts[0] instanceof Zend_Db_Expr)) {
+                            $groupPart = $db->quoteIdentifier($groupParts[0], true);
+                        }
                     }
                 }
-
-                $groupPart = implode(',', $groupParts);
             }
 
             if (!empty($groupPart)) {
@@ -240,7 +246,6 @@ class Zend_Paginator_Adapter_DbSelect implements Zend_Paginator_Adapter_Interfac
 
             $expression = new Zend_Db_Expr($countPart . $countColumn);
 
-            $rowCount->__toString(); // Workaround for ZF-3719 and related
             $rowCount->reset(Zend_Db_Select::COLUMNS)
                      ->reset(Zend_Db_Select::ORDER)
                      ->reset(Zend_Db_Select::LIMIT_OFFSET)

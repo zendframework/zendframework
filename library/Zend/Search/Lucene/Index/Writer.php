@@ -189,11 +189,8 @@ class Zend_Search_Lucene_Index_Writer
             $segmentsFile = $directory->createFile('segments');
             $segmentsFile->writeInt((int)0xFFFFFFFF);
 
-            // write version (is initialized by current time
-            // $segmentsFile->writeLong((int)microtime(true));
-            $version = microtime(true);
-            $segmentsFile->writeInt((int)($version/((double)0xFFFFFFFF + 1)));
-            $segmentsFile->writeInt((int)($version & 0xFFFFFFFF));
+            // write version (initialized by current time)
+            $segmentsFile->writeLong(round(microtime(true)));
 
             // write name counter
             $segmentsFile->writeInt($nameCount);
@@ -214,11 +211,8 @@ class Zend_Search_Lucene_Index_Writer
             $segmentsFile = $directory->createFile(Zend_Search_Lucene::getSegmentFileName($generation));
             $segmentsFile->writeInt((int)0xFFFFFFFD);
 
-            // write version (is initialized by current time
-            // $segmentsFile->writeLong((int)microtime(true));
-            $version = microtime(true);
-            $segmentsFile->writeInt((int)($version/((double)0xFFFFFFFF + 1)));
-            $segmentsFile->writeInt((int)($version & 0xFFFFFFFF));
+            // write version (initialized by current time)
+            $segmentsFile->writeLong(round(microtime(true)));
 
             // write name counter
             $segmentsFile->writeInt($nameCount);
@@ -453,16 +447,9 @@ class Zend_Search_Lucene_Index_Writer
                 throw new Zend_Search_Lucene_Exception('Unsupported segments file format');
             }
 
-            // $version = $segmentsFile->readLong() + $this->_versionUpdate;
-            // Process version on 32-bit platforms
-            $versionHigh = $segmentsFile->readInt();
-            $versionLow  = $segmentsFile->readInt();
-            $version = $versionHigh * ((double)0xFFFFFFFF + 1) +
-                       (($versionLow < 0)? (double)0xFFFFFFFF - (-1 - $versionLow) : $versionLow);
-            $version += $this->_versionUpdate;
+            $version = $segmentsFile->readLong() + $this->_versionUpdate;
             $this->_versionUpdate = 0;
-            $newSegmentFile->writeInt((int)($version/((double)0xFFFFFFFF + 1)));
-            $newSegmentFile->writeInt((int)($version & 0xFFFFFFFF));
+            $newSegmentFile->writeLong($version);
 
             // Write segment name counter
             $newSegmentFile->writeInt($segmentsFile->readInt());
@@ -482,21 +469,18 @@ class Zend_Search_Lucene_Index_Writer
 
                 if ($srcFormat == Zend_Search_Lucene::FORMAT_PRE_2_1) {
                     // pre-2.1 index format
-                    $delGenHigh        = 0;
-                    $delGenLow         = 0;
+                    $delGen            = 0;
                     $hasSingleNormFile = false;
                     $numField          = (int)0xFFFFFFFF;
                     $isCompoundByte    = 0;
                     $docStoreOptions   = null;
                 } else {
-                    //$delGen          = $segmentsFile->readLong();
-                    $delGenHigh        = $segmentsFile->readInt();
-                    $delGenLow         = $segmentsFile->readInt();
+                    $delGen = $segmentsFile->readLong();
 
                     if ($srcFormat == Zend_Search_Lucene::FORMAT_2_3) {
                         $docStoreOffset = $segmentsFile->readInt();
 
-                        if ($docStoreOffset != -1) {
+                        if ($docStoreOffset != (int)0xFFFFFFFF) {
                             $docStoreSegment        = $segmentsFile->readString();
                             $docStoreIsCompoundFile = $segmentsFile->readByte();
 
@@ -525,14 +509,6 @@ class Zend_Search_Lucene_Index_Writer
                 if (!in_array($segName, $this->_segmentsToDelete)) {
                     // Load segment if necessary
                     if (!isset($this->_segmentInfos[$segName])) {
-                        if (PHP_INT_SIZE > 4) {
-                        	// 64-bit system
-                        	$delGen = $delGenHigh << 32  |
-                        	          $delGenLow;
-                        } else {
-                        	$delGen = $delGenHigh * ((double)0xFFFFFFFF + 1) +
-                                         (($delGenLow < 0)? (double)0xFFFFFFFF - (-1 - $delGenLow) : $delGenLow);
-                        }
                         if ($isCompoundByte == 0xFF) {
                             // The segment is not a compound file
                             $isCompound = false;
@@ -555,25 +531,11 @@ class Zend_Search_Lucene_Index_Writer
                     } else {
                         // Retrieve actual deletions file generation number
                         $delGen = $this->_segmentInfos[$segName]->getDelGen();
-
-                        if ($delGen >= 0) {
-                            if (PHP_INT_SIZE > 4) {
-                                // 64-bit system
-                                $delGenHigh = $delGen >> 32  & 0xFFFFFFFF;
-                                $delGenLow  = $delGen        & 0xFFFFFFFF;
-                            } else {
-                                $delGenHigh = (int)($delGen/((double)0xFFFFFFFF + 1));
-                                $delGenLow  =(int)($delGen & 0xFFFFFFFF);
-                            }
-                        } else {
-                            $delGenHigh = $delGenLow = (int)0xFFFFFFFF;
-                        }
                     }
 
                     $newSegmentFile->writeString($segName);
                     $newSegmentFile->writeInt($segSize);
-                    $newSegmentFile->writeInt($delGenHigh);
-                    $newSegmentFile->writeInt($delGenLow);
+                    $newSegmentFile->writeLong($delGen);
                     if ($this->_targetFormatVersion == Zend_Search_Lucene::FORMAT_2_3) {
                         if ($docStoreOptions !== null) {
                             $newSegmentFile->writeInt($docStoreOffset);

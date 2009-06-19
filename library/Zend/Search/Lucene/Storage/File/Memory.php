@@ -289,14 +289,14 @@ class Zend_Search_Lucene_Storage_File_Memory extends Zend_Search_Lucene_Storage_
      */
     public function readLong()
     {
-        $str = substr($this->_data, $this->_position, 8);
-        $this->_position += 8;
-
         /**
          * Check, that we work in 64-bit mode.
          * fseek() uses long for offset. Thus, largest index segment file size in 32bit mode is 2Gb
          */
         if (PHP_INT_SIZE > 4) {
+            $str = substr($this->_data, $this->_position, 8);
+            $this->_position += 8;
+
             return  ord($str[0]) << 56  |
                     ord($str[1]) << 48  |
                     ord($str[2]) << 40  |
@@ -306,19 +306,7 @@ class Zend_Search_Lucene_Storage_File_Memory extends Zend_Search_Lucene_Storage_
                     ord($str[6]) << 8   |
                     ord($str[7]);
         } else {
-            if ((ord($str[0])          != 0) ||
-                (ord($str[1])          != 0) ||
-                (ord($str[2])          != 0) ||
-                (ord($str[3])          != 0) ||
-                ((ord($str[0]) & 0x80) != 0)) {
-                    require_once 'Zend/Search/Lucene/Exception.php';
-                    throw new Zend_Search_Lucene_Exception('Largest supported segment size (for 32-bit mode) is 2Gb');
-            }
-
-            return  ord($str[4]) << 24  |
-                    ord($str[5]) << 16  |
-                    ord($str[6]) << 8   |
-                    ord($str[7]);
+            return $this->readLong32Bit();
         }
     }
 
@@ -348,22 +336,81 @@ class Zend_Search_Lucene_Storage_File_Memory extends Zend_Search_Lucene_Storage_
                             chr($value>>8  & 0xFF) .
                             chr($value     & 0xFF);
         } else {
-            if ($value > 0x7FFFFFFF) {
-                require_once 'Zend/Search/Lucene/Exception.php';
-                throw new Zend_Search_Lucene_Exception('Largest supported segment size (for 32-bit mode) is 2Gb');
-            }
-
-            $this->_data .= chr(0) . chr(0) . chr(0) . chr(0) .
-                            chr($value>>24 & 0xFF) .
-                            chr($value>>16 & 0xFF) .
-                            chr($value>>8  & 0xFF) .
-                            chr($value     & 0xFF);
+            $this->writeLong32Bit($value);
         }
 
         $this->_position = strlen($this->_data);
     }
 
 
+    /**
+     * Returns a long integer from the current position in the file,
+     * advances the file pointer and return it as float (for 32-bit platforms).
+     *
+     * @return integer|float
+     * @throws Zend_Search_Lucene_Exception
+     */
+    public function readLong32Bit()
+    {
+        $wordHigh = $this->readInt();
+        $wordLow  = $this->readInt();
+
+        if ($wordHigh & (int)0x80000000) {
+            // It's a negative value since the highest bit is set
+            if ($wordHigh == (int)0xFFFFFFFF  &&  ($wordLow & (int)0x80000000)) {
+                return $wordLow;
+            } else {
+                require_once 'Zend/Search/Lucene/Exception.php';
+                throw new Zend_Search_Lucene_Exception('Long integers lower than -2147483648 (0x80000000) are not supported on 32-bit platforms.');
+            }
+
+        }
+
+        if ($wordLow < 0) {
+            // Value is large than 0x7FFF FFFF. Represent low word as float.
+            $wordLow &= 0x7FFFFFFF;
+            $wordLow += (float)0x80000000;
+        }
+
+        if ($wordHigh == 0) {
+            // Return value as integer if possible
+            return $wordLow;
+        }
+
+        return $wordHigh*(float)0x100000000/* 0x00000001 00000000 */ + $wordLow;
+    }
+
+
+    /**
+     * Writes long integer to the end of file (32-bit platforms implementation)
+     *
+     * @param integer|float $value
+     * @throws Zend_Search_Lucene_Exception
+     */
+    public function writeLong32Bit($value)
+    {
+        if ($value < (int)0x80000000) {
+            require_once 'Zend/Search/Lucene/Exception.php';
+            throw new Zend_Search_Lucene_Exception('Long integers lower than -2147483648 (0x80000000) are not supported on 32-bit platforms.');
+        }
+
+        if ($value < 0) {
+            $wordHigh = (int)0xFFFFFFFF;
+            $wordLow  = (int)$value;
+        } else {
+            $wordHigh = (int)($value/(float)0x100000000/* 0x00000001 00000000 */);
+            $wordLow  = $value - $wordHigh*(float)0x100000000/* 0x00000001 00000000 */;
+
+            if ($wordLow > 0x7FFFFFFF) {
+                // Highest bit of low word is set. Translate it to the corresponding negative integer value
+                $wordLow -= 0x80000000;
+                $wordLow |= 0x80000000;
+            }
+        }
+
+        $this->writeInt($wordHigh);
+        $this->writeInt($wordLow);
+    }
 
     /**
      * Returns a variable-length integer from the current

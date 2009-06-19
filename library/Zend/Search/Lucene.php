@@ -351,8 +351,7 @@ class Zend_Search_Lucene implements Zend_Search_Lucene_Interface
         }
 
         // read version
-        // $segmentsFile->readLong();
-        $segmentsFile->readInt(); $segmentsFile->readInt();
+        $segmentsFile->readLong();
 
         // read segment name counter
         $segmentsFile->readInt();
@@ -398,8 +397,7 @@ class Zend_Search_Lucene implements Zend_Search_Lucene_Interface
         }
 
         // read version
-        // $segmentsFile->readLong();
-        $segmentsFile->readInt(); $segmentsFile->readInt();
+        $segmentsFile->readLong();
 
         // read segment name counter
         $segmentsFile->readInt();
@@ -414,19 +412,12 @@ class Zend_Search_Lucene implements Zend_Search_Lucene_Interface
             $segSize = $segmentsFile->readInt();
 
             // 2.1+ specific properties
-            //$delGen          = $segmentsFile->readLong();
-            $delGenHigh        = $segmentsFile->readInt();
-            $delGenLow         = $segmentsFile->readInt();
-            if ($delGenHigh == (int)0xFFFFFFFF  && $delGenLow == (int)0xFFFFFFFF) {
-                $delGen = -1; // There are no deletes
-            } else {
-                $delGen = ($delGenHigh << 32) | $delGenLow;
-            }
+            $delGen = $segmentsFile->readLong();
 
             if ($this->_formatVersion == self::FORMAT_2_3) {
                 $docStoreOffset = $segmentsFile->readInt();
 
-                if ($docStoreOffset != -1) {
+                if ($docStoreOffset != (int)0xFFFFFFFF) {
                     $docStoreSegment        = $segmentsFile->readString();
                     $docStoreIsCompoundFile = $segmentsFile->readByte();
 

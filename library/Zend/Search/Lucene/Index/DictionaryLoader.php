@@ -254,12 +254,14 @@ class Zend_Search_Lucene_Index_DictionaryLoader
         if ($termDictionary[0][0] != (int)0xFFFFFFFF) {
             require_once 'Zend/Search/Lucene/Exception.php';
             throw new Zend_Search_Lucene_Exception('Wrong TermInfoIndexFile file format');
-        } else if (PHP_INT_SIZE > 4){
+        }
+
+        if (PHP_INT_SIZE > 4) {
             // Treat 64-bit 0xFFFFFFFF as -1
             $termDictionary[0][0] = -1;
         }
 
-        return array(&$termDictionary, &$termInfos);
+        return array($termDictionary, $termInfos);
     }
 }
 

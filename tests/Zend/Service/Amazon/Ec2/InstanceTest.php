@@ -70,7 +70,7 @@ class Zend_Service_Amazon_Ec2_InstanceTest extends PHPUnit_Framework_TestCase
                     . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
                     . "Connection: close\r\n"
                     . "\r\n"
-                    . "<ConfirmProductInstanceResponse xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<ConfirmProductInstanceResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <result>true</result>\r\n"
                     . "  <ownerId>254933287430</ownerId>\r\n"
                     . "</ConfirmProductInstanceResponse>\r\n";
@@ -92,7 +92,7 @@ class Zend_Service_Amazon_Ec2_InstanceTest extends PHPUnit_Framework_TestCase
                     . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
                     . "Connection: close\r\n"
                     . "\r\n"
-                    . "<ConfirmProductInstanceResponse xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<ConfirmProductInstanceResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <result>false</result>\r\n"
                     . "</ConfirmProductInstanceResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
@@ -116,7 +116,7 @@ class Zend_Service_Amazon_Ec2_InstanceTest extends PHPUnit_Framework_TestCase
                     . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
                     . "Connection: close\r\n"
                     . "\r\n"
-                    . "<DescribeInstancesResponse xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<DescribeInstancesResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <reservationSet>\r\n"
                     . "    <item>\r\n"
                     . "      <reservationId>r-44a5402d</reservationId>\r\n"
@@ -156,8 +156,8 @@ class Zend_Service_Amazon_Ec2_InstanceTest extends PHPUnit_Framework_TestCase
 
         $return = $this->Zend_Service_Amazon_Ec2_Instance->describe('i-28a64341');
 
-        $this->assertEquals('r-44a5402d', $return['reservationId']);
-        $this->assertEquals('default', $return['groupSet'][0]);
+        $this->assertEquals('r-44a5402d', $return['instances'][0]['reservationId']);
+        $this->assertEquals('default', $return['instances'][0]['groupSet'][0]);
         $this->assertEquals('i-28a64341', $return['instances'][0]['instanceId']);
         $this->assertEquals('ami-6ea54007', $return['instances'][0]['imageId']);
         $this->assertEquals('m1.small', $return['instances'][0]['instanceType']);
@@ -175,7 +175,7 @@ class Zend_Service_Amazon_Ec2_InstanceTest extends PHPUnit_Framework_TestCase
                     . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
                     . "Connection: close\r\n"
                     . "\r\n"
-                    . "<DescribeInstancesResponse xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<DescribeInstancesResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <reservationSet>\r\n"
                     . "    <item>\r\n"
                     . "      <reservationId>r-44a5402d</reservationId>\r\n"
@@ -229,7 +229,7 @@ class Zend_Service_Amazon_Ec2_InstanceTest extends PHPUnit_Framework_TestCase
                     . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
                     . "Connection: close\r\n"
                     . "\r\n"
-                    . "<DescribeInstancesResponse xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<DescribeInstancesResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <reservationSet>\r\n"
                     . "    <item>\r\n"
                     . "      <reservationId>r-44a5402d</reservationId>\r\n"
@@ -308,7 +308,7 @@ class Zend_Service_Amazon_Ec2_InstanceTest extends PHPUnit_Framework_TestCase
                     . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
                     . "Connection: close\r\n"
                     . "\r\n"
-                    . "<RunInstancesResponse xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<RunInstancesResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <reservationId>r-47a5402e</reservationId>\r\n"
                     . "  <ownerId>495219933132</ownerId>\r\n"
                     . "  <groupSet>\r\n"
@@ -411,7 +411,7 @@ class Zend_Service_Amazon_Ec2_InstanceTest extends PHPUnit_Framework_TestCase
                     . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
                     . "Connection: close\r\n"
                     . "\r\n"
-                    . "<RunInstancesResponse xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<RunInstancesResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <reservationId>r-47a5402e</reservationId>\r\n"
                     . "  <ownerId>495219933132</ownerId>\r\n"
                     . "  <groupSet>\r\n"
@@ -474,7 +474,7 @@ class Zend_Service_Amazon_Ec2_InstanceTest extends PHPUnit_Framework_TestCase
                     . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
                     . "Connection: close\r\n"
                     . "\r\n"
-                    . "<TerminateInstancesResponse xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<TerminateInstancesResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <instancesSet>\r\n"
                     . "    <item>\r\n"
                     . "      <instanceId>i-28a64341</instanceId>\r\n"
@@ -511,7 +511,7 @@ class Zend_Service_Amazon_Ec2_InstanceTest extends PHPUnit_Framework_TestCase
                     . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
                     . "Connection: close\r\n"
                     . "\r\n"
-                    . "<TerminateInstancesResponse xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<TerminateInstancesResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <instancesSet>\r\n"
                     . "    <item>\r\n"
                     . "      <instanceId>i-28a64341</instanceId>\r\n"
@@ -561,7 +561,7 @@ class Zend_Service_Amazon_Ec2_InstanceTest extends PHPUnit_Framework_TestCase
                     . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
                     . "Connection: close\r\n"
                     . "\r\n"
-                    . "<RebootInstancesResponse xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<RebootInstancesResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <return>true</return>\r\n"
                     . "</RebootInstancesResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
@@ -583,7 +583,7 @@ class Zend_Service_Amazon_Ec2_InstanceTest extends PHPUnit_Framework_TestCase
                     . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
                     . "Connection: close\r\n"
                     . "\r\n"
-                    . "<RebootInstancesResponse xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<RebootInstancesResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <return>true</return>\r\n"
                     . "</RebootInstancesResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
@@ -604,7 +604,7 @@ class Zend_Service_Amazon_Ec2_InstanceTest extends PHPUnit_Framework_TestCase
                     . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
                     . "Connection: close\r\n"
                     . "\r\n"
-                    . "<GetConsoleOutputResponse xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<GetConsoleOutputResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <instanceId>i-28a64341</instanceId>\r\n"
                     . "  <timestamp>2007-01-03 15:00:00</timestamp>\r\n"
                     . "  <output>TGludXggdmVyc2lvbiAyLjYuMTYteGVuVSAoYnVpbGRlckBwYXRjaGJhdC5hbWF6b25zYSkgKGdj\r\n"
@@ -635,6 +635,64 @@ class Zend_Service_Amazon_Ec2_InstanceTest extends PHPUnit_Framework_TestCase
 . "Enabling fast FPU save and restore... done.\n");
 
         $this->assertSame($arrOutput, $return);
+    }
+
+    public function testMonitorInstance()
+    {
+        $rawHttpResponse = "HTTP/1.1 200 OK\r\n"
+                    . "Date: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
+                    . "Server: hi\r\n"
+                    . "Last-modified: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
+                    . "Status: 200 OK\r\n"
+                    . "Content-type: application/xml; charset=utf-8\r\n"
+                    . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
+                    . "Connection: close\r\n"
+                    . "\r\n"
+                    . "<MonitorInstancesResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
+                    . "  <instancesSet>"
+                    . "    <item>"
+                    . "      <instanceId>i-43a4412a</instanceId>"
+                    . "      <monitoring>"
+                    . "        <state>monitoring</state>"
+                    . "      </monitoring>"
+                    . "    </item>"
+                    . "  </instancesSet>"
+                    . "</MonitorInstancesResponse>\r\n";
+        $this->adapter->setResponse($rawHttpResponse);
+
+        $return = $this->Zend_Service_Amazon_Ec2_Instance->monitor('i-43a4412a');
+
+        $arrReturn = array(array('instanceid' => 'i-43a4412a', 'monitorstate' => 'monitoring'));
+        $this->assertSame($arrReturn, $return);
+    }
+
+    public function testUnmonitorInstance()
+    {
+        $rawHttpResponse = "HTTP/1.1 200 OK\r\n"
+                    . "Date: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
+                    . "Server: hi\r\n"
+                    . "Last-modified: Fri, 24 Oct 2008 17:24:52 GMT\r\n"
+                    . "Status: 200 OK\r\n"
+                    . "Content-type: application/xml; charset=utf-8\r\n"
+                    . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
+                    . "Connection: close\r\n"
+                    . "\r\n"
+                    . "<UnmonitorInstancesResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
+                    . "  <instancesSet>"
+                    . "    <item>"
+                    . "      <instanceId>i-43a4412a</instanceId>"
+                    . "      <monitoring>"
+                    . "        <state>pending</state>"
+                    . "      </monitoring>"
+                    . "    </item>"
+                    . "  </instancesSet>"
+                    . "</UnmonitorInstancesResponse>\r\n";
+        $this->adapter->setResponse($rawHttpResponse);
+
+        $return = $this->Zend_Service_Amazon_Ec2_Instance->unmonitor('i-43a4412a');
+
+        $arrReturn = array(array('instanceid' => 'i-43a4412a', 'monitorstate' => 'pending'));
+        $this->assertSame($arrReturn, $return);
     }
 
 }

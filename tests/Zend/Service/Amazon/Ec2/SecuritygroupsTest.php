@@ -61,7 +61,7 @@ class Zend_Service_Amazon_Ec2_SecuritygroupsTest extends PHPUnit_Framework_TestC
                     . "Connection: close\r\n"
                     . "\r\n"
                     . "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n"
-                    . "<AuthorizeSecurityGroupIngressResponse xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<AuthorizeSecurityGroupIngressResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <return>true</return>\r\n"
                     . "</AuthorizeSecurityGroupIngressResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
@@ -83,7 +83,7 @@ class Zend_Service_Amazon_Ec2_SecuritygroupsTest extends PHPUnit_Framework_TestC
                     . "Connection: close\r\n"
                     . "\r\n"
                     . "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n"
-                    . "<AuthorizeSecurityGroupIngressResponse xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<AuthorizeSecurityGroupIngressResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <return>true</return>\r\n"
                     . "</AuthorizeSecurityGroupIngressResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
@@ -105,7 +105,7 @@ class Zend_Service_Amazon_Ec2_SecuritygroupsTest extends PHPUnit_Framework_TestC
                     . "Connection: close\r\n"
                     . "\r\n"
                     . "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n"
-                    . "<AuthorizeSecurityGroupIngressResponse xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<AuthorizeSecurityGroupIngressResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <return>true</return>\r\n"
                     . "</AuthorizeSecurityGroupIngressResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
@@ -131,7 +131,7 @@ class Zend_Service_Amazon_Ec2_SecuritygroupsTest extends PHPUnit_Framework_TestC
                     . "Connection: close\r\n"
                     . "\r\n"
                     . "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n"
-                    . "<CreateSecurityGroupResponse xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<CreateSecurityGroupResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <return>true</return>\r\n"
                     . "</CreateSecurityGroupResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
@@ -157,7 +157,7 @@ class Zend_Service_Amazon_Ec2_SecuritygroupsTest extends PHPUnit_Framework_TestC
                     . "Connection: close\r\n"
                     . "\r\n"
                     . "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n"
-                    . "<DeleteSecurityGroupResponse xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<DeleteSecurityGroupResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <return>true</return>\r\n"
                     . "</DeleteSecurityGroupResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
@@ -182,7 +182,7 @@ class Zend_Service_Amazon_Ec2_SecuritygroupsTest extends PHPUnit_Framework_TestC
                     . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
                     . "Connection: close\r\n"
                     . "\r\n"
-                    . "<DescribeSecurityGroupsResponse xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<DescribeSecurityGroupsResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <securityGroupInfo>\r\n"
                     . "    <item>\r\n"
                     . "      <ownerId>UYY3TLBUXIEON5NQVUUX6OMPWBZIQNFM</ownerId>\r\n"
@@ -268,7 +268,7 @@ class Zend_Service_Amazon_Ec2_SecuritygroupsTest extends PHPUnit_Framework_TestC
                     . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
                     . "Connection: close\r\n"
                     . "\r\n"
-                    . "<DescribeSecurityGroupsResponse xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<DescribeSecurityGroupsResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <securityGroupInfo>\r\n"
                     . "    <item>\r\n"
                     . "      <ownerId>UYY3TLBUXIEON5NQVUUX6OMPWBZIQNFM</ownerId>\r\n"
@@ -329,7 +329,7 @@ class Zend_Service_Amazon_Ec2_SecuritygroupsTest extends PHPUnit_Framework_TestC
                     . "Connection: close\r\n"
                     . "\r\n"
                     . "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n"
-                    . "<RevokeSecurityGroupIngressResponse xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<RevokeSecurityGroupIngressResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <return>true</return>\r\n"
                     . "</RevokeSecurityGroupIngressResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
@@ -351,7 +351,7 @@ class Zend_Service_Amazon_Ec2_SecuritygroupsTest extends PHPUnit_Framework_TestC
                     . "Connection: close\r\n"
                     . "\r\n"
                     . "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n"
-                    . "<RevokeSecurityGroupIngressResponse xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<RevokeSecurityGroupIngressResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <return>true</return>\r\n"
                     . "</RevokeSecurityGroupIngressResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
@@ -374,7 +374,7 @@ class Zend_Service_Amazon_Ec2_SecuritygroupsTest extends PHPUnit_Framework_TestC
                     . "Connection: close\r\n"
                     . "\r\n"
                     . "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n"
-                    . "<RevokeSecurityGroupIngressResponse xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<RevokeSecurityGroupIngressResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <return>true</return>\r\n"
                     . "</RevokeSecurityGroupIngressResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);

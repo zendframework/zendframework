@@ -71,7 +71,7 @@ class Zend_Service_Amazon_Ec2_KeypairTest extends PHPUnit_Framework_TestCase
                     . "Connection: close\r\n"
                     . "\r\n"
                     . "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n"
-                    . "<CreateKeyPairResponse xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<CreateKeyPairResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "    <keyName>example-key-name</keyName>\r\n"
                     . "    <keyFingerprint>1f:51:ae:28:bf:89:e9:d8:1f:25:5d:37:2d:7d:b8:ca:9f:f5:f1:6f</keyFingerprint>\r\n"
                     . "    <keyMaterial>-----BEGIN RSA PRIVATE KEY-----\r\n"
@@ -120,7 +120,7 @@ class Zend_Service_Amazon_Ec2_KeypairTest extends PHPUnit_Framework_TestCase
                     . "Connection: close\r\n"
                     . "\r\n"
                     . "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n"
-                    . "<DescribeKeyPairsResponse xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<DescribeKeyPairsResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <keySet>\r\n"
                     . "    <item>\r\n"
                     . "      <keyName>example-key-name</keyName>\r\n"
@@ -146,7 +146,7 @@ class Zend_Service_Amazon_Ec2_KeypairTest extends PHPUnit_Framework_TestCase
                     . "Connection: close\r\n"
                     . "\r\n"
                     . "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n"
-                    . "<DescribeKeyPairsResponse xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<DescribeKeyPairsResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <keySet>\r\n"
                     . "    <item>\r\n"
                     . "      <keyName>example-key-name</keyName>\r\n"
@@ -199,7 +199,7 @@ class Zend_Service_Amazon_Ec2_KeypairTest extends PHPUnit_Framework_TestCase
                     . "Connection: close\r\n"
                     . "\r\n"
                     . "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n"
-                    . "<DeleteKeyPair xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<DeleteKeyPair xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <return>false</return>\r\n"
                     . "</DeleteKeyPair>";
         $this->adapter->setResponse($rawHttpResponse);
@@ -221,7 +221,7 @@ class Zend_Service_Amazon_Ec2_KeypairTest extends PHPUnit_Framework_TestCase
                     . "Connection: close\r\n"
                     . "\r\n"
                     . "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n"
-                    . "<DeleteKeyPair xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<DeleteKeyPair xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <return>true</return>\r\n"
                     . "</DeleteKeyPair>";
         $this->adapter->setResponse($rawHttpResponse);

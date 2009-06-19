@@ -52,7 +52,7 @@ class Zend_Service_Amazon_Ec2_ImageTest extends PHPUnit_Framework_TestCase
                     . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
                     . "Connection: close\r\n"
                     . "\r\n"
-                    . "<DeregisterImageResponse xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<DeregisterImageResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <return>true</return>\r\n"
                     . "</DeregisterImageResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
@@ -74,7 +74,7 @@ class Zend_Service_Amazon_Ec2_ImageTest extends PHPUnit_Framework_TestCase
                     . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
                     . "Connection: close\r\n"
                     . "\r\n"
-                    . "<DescribeImagesResponse xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<DescribeImagesResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <imagesSet>\r\n"
                     . "    <item>\r\n"
                     . "      <imageId>ami-be3adfd7</imageId>\r\n"
@@ -145,7 +145,7 @@ class Zend_Service_Amazon_Ec2_ImageTest extends PHPUnit_Framework_TestCase
                     . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
                     . "Connection: close\r\n"
                     . "\r\n"
-                    . "<DescribeImagesResponse xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<DescribeImagesResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <imagesSet>\r\n"
                     . "    <item>\r\n"
                     . "      <imageId>ami-be3adfd7</imageId>\r\n"
@@ -193,7 +193,7 @@ class Zend_Service_Amazon_Ec2_ImageTest extends PHPUnit_Framework_TestCase
                     . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
                     . "Connection: close\r\n"
                     . "\r\n"
-                    . "<DescribeImagesResponse xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<DescribeImagesResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <imagesSet>\r\n"
                     . "    <item>\r\n"
                     . "      <imageId>ami-be3adfd7</imageId>\r\n"
@@ -264,7 +264,7 @@ class Zend_Service_Amazon_Ec2_ImageTest extends PHPUnit_Framework_TestCase
                     . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
                     . "Connection: close\r\n"
                     . "\r\n"
-                    . "<DescribeImagesResponse xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<DescribeImagesResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <imagesSet>\r\n"
                     . "    <item>\r\n"
                     . "      <imageId>ami-be3adfd7</imageId>\r\n"
@@ -312,7 +312,7 @@ class Zend_Service_Amazon_Ec2_ImageTest extends PHPUnit_Framework_TestCase
                     . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
                     . "Connection: close\r\n"
                     . "\r\n"
-                    . "<DescribeImagesResponse xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<DescribeImagesResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <imagesSet>\r\n"
                     . "    <item>\r\n"
                     . "      <imageId>ami-be3adfd7</imageId>\r\n"
@@ -383,7 +383,7 @@ class Zend_Service_Amazon_Ec2_ImageTest extends PHPUnit_Framework_TestCase
                     . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
                     . "Connection: close\r\n"
                     . "\r\n"
-                    . "<DescribeImagesResponse xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<DescribeImagesResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <imagesSet>\r\n"
                     . "    <item>\r\n"
                     . "      <imageId>ami-be3adfd7</imageId>\r\n"
@@ -431,7 +431,7 @@ class Zend_Service_Amazon_Ec2_ImageTest extends PHPUnit_Framework_TestCase
                     . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
                     . "Connection: close\r\n"
                     . "\r\n"
-                    . "<DescribeImageAttributeResponse xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<DescribeImageAttributeResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <imageId>ami-61a54008</imageId>\r\n"
                     . "  <launchPermission>\r\n"
                     . "    <item>\r\n"
@@ -458,7 +458,7 @@ class Zend_Service_Amazon_Ec2_ImageTest extends PHPUnit_Framework_TestCase
                     . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
                     . "Connection: close\r\n"
                     . "\r\n"
-                    . "<DescribeImageAttributeResponse xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<DescribeImageAttributeResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <imageId>ami-61a54008</imageId>\r\n"
                     . "  <productCodes>\r\n"
                     . "    <item>\r\n"
@@ -485,7 +485,7 @@ class Zend_Service_Amazon_Ec2_ImageTest extends PHPUnit_Framework_TestCase
                     . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
                     . "Connection: close\r\n"
                     . "\r\n"
-                    . "<ModifyImageAttributeResponse xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<ModifyImageAttributeResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <return>true</return>\r\n"
                     . "</ModifyImageAttributeResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
@@ -505,7 +505,7 @@ class Zend_Service_Amazon_Ec2_ImageTest extends PHPUnit_Framework_TestCase
                     . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
                     . "Connection: close\r\n"
                     . "\r\n"
-                    . "<ModifyImageAttributeResponse xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<ModifyImageAttributeResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <return>true</return>\r\n"
                     . "</ModifyImageAttributeResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
@@ -533,7 +533,7 @@ class Zend_Service_Amazon_Ec2_ImageTest extends PHPUnit_Framework_TestCase
                     . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
                     . "Connection: close\r\n"
                     . "\r\n"
-                    . "<ModifyImageAttributeResponse xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<ModifyImageAttributeResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <return>true</return>\r\n"
                     . "</ModifyImageAttributeResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
@@ -555,7 +555,7 @@ class Zend_Service_Amazon_Ec2_ImageTest extends PHPUnit_Framework_TestCase
                     . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
                     . "Connection: close\r\n"
                     . "\r\n"
-                    . "<RegisterImageResponse xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<RegisterImageResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <imageId>ami-61a54008</imageId>\r\n"
                     . "</RegisterImageResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
@@ -577,7 +577,7 @@ class Zend_Service_Amazon_Ec2_ImageTest extends PHPUnit_Framework_TestCase
                     . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
                     . "Connection: close\r\n"
                     . "\r\n"
-                    . "<ResetImageAttributeResponse xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<ResetImageAttributeResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <return>true</return>\r\n"
                     . "</ResetImageAttributeResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);

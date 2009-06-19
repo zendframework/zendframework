@@ -99,6 +99,7 @@ class Zend_Service_Amazon_Ec2_Instance extends Zend_Service_Amazon_Ec2_Abstract
      *                                                ramdiskId string      The ID of the RAM disk with which to launch the instance.
      *                                                blockDeviceVirtualName string     Specifies the virtual name to map to the corresponding device name. For example: instancestore0
      *                                                blockDeviceName string            Specifies the device to which you are mapping a virtual name. For example: sdb
+     *                                                monitor boolean               Turn on CloudWatch Monitoring for an instance.
      * @return array
      */
     public function run(array $options)
@@ -159,6 +160,10 @@ class Zend_Service_Amazon_Ec2_Instance extends Zend_Service_Amazon_Ec2_Abstract
         if(isset($options['blockDeviceVirtualName']) && isset($options['blockDeviceName'])) {
             $params['BlockDeviceMapping.n.VirtualName'] = $options['blockDeviceVirtualName'];
             $params['BlockDeviceMapping.n.DeviceName'] = $options['blockDeviceName'];
+        }
+
+        if(isset($options['monitor']) && $options['monitor'] === true) {
+            $params['Monitoring.Enabled'] = true;
         }
 
         $response = $this->sendRequest($params);
@@ -232,29 +237,31 @@ class Zend_Service_Amazon_Ec2_Instance extends Zend_Service_Amazon_Ec2_Abstract
         }
 
         $response = $this->sendRequest($params);
+
         $xpath = $response->getXPath();
 
         $nodes = $xpath->query('//ec2:reservationSet/ec2:item');
 
         $return = array();
+        $return['instances'] = array();
 
         foreach($nodes as $node) {
-            $return['reservationId'] = $xpath->evaluate('string(ec2:reservationId/text())', $node);
-            $return['ownerId'] = $xpath->evaluate('string(ec2:ownerId/text())', $node);
+            if($xpath->evaluate('string(ec2:instancesSet/ec2:item/ec2:instanceState/ec2:code/text())', $node) == 48 && $ignoreTerminated) continue;
+            $item = array();
+
+            $item['reservationId'] = $xpath->evaluate('string(ec2:reservationId/text())', $node);
+            $item['ownerId'] = $xpath->evaluate('string(ec2:ownerId/text())', $node);
 
             $gs = $xpath->query('ec2:groupSet/ec2:item', $node);
             foreach($gs as $gs_node) {
-                $return['groupSet'][] = $xpath->evaluate('string(ec2:groupId/text())', $gs_node);
+                $item['groupSet'][] = $xpath->evaluate('string(ec2:groupId/text())', $gs_node);
                 unset($gs_node);
             }
             unset($gs);
 
             $is = $xpath->query('ec2:instancesSet/ec2:item', $node);
-            $return['instances'] = array();
-            foreach($is as $is_node) {
-                if($xpath->evaluate('string(ec2:instanceState/ec2:code/text())', $is_node) == 48 && $ignoreTerminated) continue;
 
-                $item = array();
+            foreach($is as $is_node) {
 
                 $item['instanceId'] = $xpath->evaluate('string(ec2:instanceId/text())', $is_node);
                 $item['imageId'] = $xpath->evaluate('string(ec2:imageId/text())', $is_node);
@@ -269,11 +276,13 @@ class Zend_Service_Amazon_Ec2_Instance extends Zend_Service_Amazon_Ec2_Abstract
                 $item['availabilityZone'] = $xpath->evaluate('string(ec2:placement/ec2:availabilityZone/text())', $is_node);
                 $item['kernelId'] = $xpath->evaluate('string(ec2:kernelId/text())', $is_node);
                 $item['ramediskId'] = $xpath->evaluate('string(ec2:ramediskId/text())', $is_node);
+                $item['amiLaunchIndex'] = $xpath->evaluate('string(ec2:amiLaunchIndex/text())', $is_node);
+                $item['monitoringState'] = $xpath->evaluate('string(ec2:monitoring/ec2:state/text())', $is_node);
 
-                $return['instances'][] = $item;
-                unset($item);
                 unset($is_node);
             }
+            $return['instances'][] = $item;
+            unset($item);
             unset($is);
         }
 
@@ -297,9 +306,8 @@ class Zend_Service_Amazon_Ec2_Instance extends Zend_Service_Amazon_Ec2_Abstract
 
         $return = array();
 
-        foreach($arrInstances['instances'] as $k => $instance) {
+        foreach($arrInstances['instances'] as $instance) {
             if($instance['imageId'] !== $imageId) continue;
-            $instance['groupSet'] = $arrInstances['groupSet'][$k];
             $return[] = $instance;
         }
 
@@ -441,4 +449,78 @@ class Zend_Service_Amazon_Ec2_Instance extends Zend_Service_Amazon_Ec2_Abstract
         return false;
     }
 
+    /**
+    * Turn on Amazon CloudWatch Monitoring for an instance or a list of instances
+    *
+    * @param array|string $instanceId           The instance or list of instances you want to enable monitoring for
+    * @return array
+    */
+    public function monitor($instanceId)
+    {
+        $params = array();
+        $params['Action'] = 'MonitorInstances';
+
+        if(is_array($instanceId) && !empty($instanceId)) {
+            foreach($instanceId as $k=>$name) {
+                $params['InstanceId.' . ($k+1)] = $name;
+            }
+        } elseif($instanceId) {
+            $params['InstanceId.1'] = $instanceId;
+        }
+
+        $response = $this->sendRequest($params);
+        $xpath = $response->getXPath();
+
+
+        $items = $xpath->query('//ec2:instancesSet/ec2:item');
+
+        $arrReturn = array();
+        foreach($items as $item) {
+            $i = array();
+            $i['instanceid'] = $xpath->evaluate('string(//ec2:instanceId/text())', $item);
+            $i['monitorstate'] = $xpath->evaluate('string(//ec2:monitoring/ec2:state/text())');
+            $arrReturn[] = $i;
+            unset($i);
+        }
+
+        return $arrReturn;
+    }
+    /**
+    * Turn off Amazon CloudWatch Monitoring for an instance or a list of instances
+    *
+    * @param array|string $instanceId           The instance or list of instances you want to disable monitoring for
+    * @return array
+    */
+    public function unmonitor($instanceId)
+    {
+        $params = array();
+        $params['Action'] = 'UnmonitorInstances';
+
+        if(is_array($instanceId) && !empty($instanceId)) {
+            foreach($instanceId as $k=>$name) {
+                $params['InstanceId.' . ($k+1)] = $name;
+            }
+        } elseif($instanceId) {
+            $params['InstanceId.1'] = $instanceId;
+        }
+
+        $response = $this->sendRequest($params);
+        $xpath = $response->getXPath();
+
+
+        $items = $xpath->query('//ec2:instancesSet/ec2:item');
+
+        $arrReturn = array();
+        foreach($items as $item) {
+            $i = array();
+            $i['instanceid'] = $xpath->evaluate('string(//ec2:instanceId/text())', $item);
+            $i['monitorstate'] = $xpath->evaluate('string(//ec2:monitoring/ec2:state/text())');
+            $arrReturn[] = $i;
+            unset($i);
+        }
+
+        return $arrReturn;
+    }
+
 }
+

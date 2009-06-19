@@ -57,7 +57,7 @@ class Zend_Service_Amazon_Ec2_ElasticipTest extends PHPUnit_Framework_TestCase
                     . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
                     . "Connection: close\r\n"
                     . "\r\n"
-                    . "<AllocateAddressResponse xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<AllocateAddressResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <publicIp>67.202.55.255</publicIp>\r\n"
                     . "</AllocateAddressResponse>";
         $this->adapter->setResponse($rawHttpResponse);
@@ -77,7 +77,7 @@ class Zend_Service_Amazon_Ec2_ElasticipTest extends PHPUnit_Framework_TestCase
                     . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
                     . "Connection: close\r\n"
                     . "\r\n"
-                    . "<AssociateAddressResponse xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<AssociateAddressResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <return>true</return>\r\n"
                     . "</AssociateAddressResponse>";
         $this->adapter->setResponse($rawHttpResponse);
@@ -102,7 +102,7 @@ class Zend_Service_Amazon_Ec2_ElasticipTest extends PHPUnit_Framework_TestCase
                     . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
                     . "Connection: close\r\n"
                     . "\r\n"
-                    . "<DescribeAddressesResponse xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<DescribeAddressesResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <addressSet>\r\n"
                     . "    <item>\r\n"
                     . "      <publicIp>67.202.55.255</publicIp>\r\n"
@@ -133,7 +133,7 @@ class Zend_Service_Amazon_Ec2_ElasticipTest extends PHPUnit_Framework_TestCase
                     . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
                     . "Connection: close\r\n"
                     . "\r\n"
-                    . "<DescribeAddressesResponse xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<DescribeAddressesResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <addressSet>\r\n"
                     . "    <item>\r\n"
                     . "      <publicIp>67.202.55.255</publicIp>\r\n"
@@ -179,7 +179,7 @@ class Zend_Service_Amazon_Ec2_ElasticipTest extends PHPUnit_Framework_TestCase
                     . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
                     . "Connection: close\r\n"
                     . "\r\n"
-                    . "<DisassociateAddressResponse xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<DisassociateAddressResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <return>true</return>\r\n"
                     . "</DisassociateAddressResponse>";
         $this->adapter->setResponse($rawHttpResponse);
@@ -204,7 +204,7 @@ class Zend_Service_Amazon_Ec2_ElasticipTest extends PHPUnit_Framework_TestCase
                     . "Expires: Tue, 31 Mar 1981 05:00:00 GMT\r\n"
                     . "Connection: close\r\n"
                     . "\r\n"
-                    . "<ReleaseAddressResponse xmlns=\"http://ec2.amazonaws.com/doc/2008-12-01/\">\r\n"
+                    . "<ReleaseAddressResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <return>true</return>\r\n"
                     . "</ReleaseAddressResponse>";
         $this->adapter->setResponse($rawHttpResponse);

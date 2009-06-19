@@ -38,8 +38,8 @@ class Zend_Application_Resource_Modules extends Zend_Application_Resource_Resour
 
     /**
      * Constructor
-     * 
-     * @param  mixed $options 
+     *
+     * @param  mixed $options
      * @return void
      */
     public function __construct($options = null)
@@ -68,7 +68,7 @@ class Zend_Application_Resource_Modules extends Zend_Application_Resource_Resour
             }
 
             $bootstrapClass = $this->_formatModuleName($module) . '_Bootstrap';
-            if (!class_exists($bootstrapClass)) {
+            if (!class_exists($bootstrapClass, false)) {
                 $bootstrapPath  = $front->getModuleDirectory($module) . '/Bootstrap.php';
                 if (file_exists($bootstrapPath)) {
                     include_once $bootstrapPath;
@@ -90,7 +90,7 @@ class Zend_Application_Resource_Modules extends Zend_Application_Resource_Resour
 
     /**
      * Get bootstraps that have been run
-     * 
+     *
      * @return ArrayObject
      */
     public function getExecutedBootstraps()
@@ -100,8 +100,8 @@ class Zend_Application_Resource_Modules extends Zend_Application_Resource_Resour
 
     /**
      * Format a module name to the module class prefix
-     * 
-     * @param  string $name 
+     *
+     * @param  string $name
      * @return string
      */
     protected function _formatModuleName($name)

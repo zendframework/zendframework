@@ -234,7 +234,7 @@ $bootstrap->bootstrap('foo');
             </para>
 
             <programlisting language="php"><![CDATA[
-$bootstrap->bootstrap(array('foo', 'bar));
+$bootstrap->bootstrap(array('foo', 'bar'));
 ]]></programlisting>
 
             <para>

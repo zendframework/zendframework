@@ -1062,7 +1062,7 @@ $upload->addValidator('Md5',
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>*</code>: Sets any key or use a numeric array. Sets the MIME type type to
+                    <code>*</code>: Sets any key or use a numeric array. Sets the MIME type to
                     validate against.
                 </para>
 

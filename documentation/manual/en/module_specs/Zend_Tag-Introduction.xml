@@ -25,7 +25,7 @@
     <para>
         To group multiple items together, <classname>Zend_Tag_ItemList</classname> exists
         as an array iterator and provides additional functionallity to calculate
-        absolute weight values based on on the given relative weights of each
+        absolute weight values based on the given relative weights of each
         item in it.
     </para>
 

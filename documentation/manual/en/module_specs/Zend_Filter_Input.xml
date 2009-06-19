@@ -99,7 +99,7 @@
 
         <para>
             Before creating an instance of Zend_Filter_Input, declare an
-            array of filter rules and and an array of validator rules.
+            array of filter rules and an array of validator rules.
             This associative array maps a rule name to a filter or
             validator or a chain of filters or validators.
         </para>

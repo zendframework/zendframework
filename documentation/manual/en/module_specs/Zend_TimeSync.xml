@@ -90,7 +90,7 @@
         </itemizedlist>
 
         <para>
-            <classname>Zend_TimeSync</classname> may provide a good solution solution in all of these cases and can be used if you are
+            <classname>Zend_TimeSync</classname> may provide a good solution in all of these cases and can be used if you are
             unable to run any services on your server.
         </para>
 

@@ -232,7 +232,12 @@ Zend_Search_Lucene::setResultSetLimit($newLimit);
         </para>
 
         <para>
-            It doesn't give the 'best N' results, but only the 'first N'<footnote><para>Returned hits are still ordered by score or by the the specified order, if given.</para></footnote>.
+            It doesn't give the 'best N' results, but only the 'first N'
+            <footnote>
+                <para>
+                    Returned hits are still ordered by score or by the specified order, if given.
+                </para>
+            </footnote>.
         </para>
     </sect2>
 

@@ -32,7 +32,7 @@
         </para>
 
         <para>
-          Each StrikeIron web service service shares a standard SOAP (and REST)
+          Each StrikeIron web service shares a standard SOAP (and REST)
           API, making it easy to integrate and manage multiple services.
           StrikeIron also manages customer billing for all services in a single
           account, making it perfect for solution providers. Get

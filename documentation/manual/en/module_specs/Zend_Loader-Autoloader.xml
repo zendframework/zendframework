@@ -447,7 +447,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                             </para></listitem>
                         </itemizedlist></entry>
                         <entry><para>
-                            Remove a concrete autoloader implementation from the
+                            Remove a concrete autoloader implementation from
                             the internal autoloader stack. If a namespace or
                             namespaces are provided, the callback will be
                             removed from that namespace or namespaces only.

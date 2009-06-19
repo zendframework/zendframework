@@ -554,7 +554,7 @@ $row->findManyToManyRowset($table,
 
         <para>
             The second argument <varname>$intersectionTable</varname> can be a string that specifies
-            the intersection table between the two tables in the the many-to-many relationship by
+            the intersection table between the two tables in the many-to-many relationship by
             its class name. You can also specify the intersection table by using an object of that
             table class.
         </para>
@@ -564,7 +564,7 @@ $row->findManyToManyRowset($table,
             <title>Fetching a Rowset with the Many-to-many Method</title>
 
             <para>
-                This example shows getting a Row object from from the origin table
+                This example shows getting a Row object from the origin table
                 <code>Bugs</code>, and finding rows from the destination table
                 <code>Products</code>, representing products related to that bug.
             </para>
@@ -616,7 +616,7 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
             <title>Fetching a Rowset with the Many-to-many Method By a Specific Rule</title>
 
             <para>
-                This example shows geting a Row object from from the origin table
+                This example shows geting a Row object from the origin table
                 <code>Bugs</code>, and finding rows from the destination table
                 <code>Products</code>, representing products related to that bug.
             </para>

@@ -486,7 +486,7 @@ $select = $db->select()
             <para>
                 The second argument to <code>join()</code> is a string that is the join condition.
                 This is an expression that declares the criteria by which rows in one table match
-                rows in the the other table. You can use correlation names in this expression.
+                rows in the other table. You can use correlation names in this expression.
             </para>
 
             <note>
@@ -1023,7 +1023,7 @@ $select = $db->select()
 
             <para>
                 Like in the <code>from()</code> and <code>group()</code> methods, column names are
-                quoted as identifiers, unless they contain contain parentheses or are an object of
+                quoted as identifiers, unless they contain parentheses or are an object of
                 type <classname>Zend_Db_Expr</classname>.
             </para>
 

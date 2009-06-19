@@ -124,7 +124,7 @@ foreach ($channel as $item) {
             </listitem>
             <listitem>
                 <para>
-                    <code>category</code> - One more more categories that the item belongs to
+                    <code>category</code> - One more categories that the item belongs to
                 </para>
             </listitem>
             <listitem>

@@ -192,7 +192,7 @@ public function lock();
                 It should be used to prevent swapping of some objects you choose.
                 Normally, this is not necessary, because the memory manager uses
                 an intelligent algorithm to choose candidates for swapping.
-                But if you exactly know, that at at this part of code some
+                But if you exactly know, that at this part of code some
                 objects should not be swapped, you may lock them.
             </para>
 

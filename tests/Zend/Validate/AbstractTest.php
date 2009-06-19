@@ -80,6 +80,7 @@ class Zend_Validate_AbstractTest extends PHPUnit_Framework_TestCase
     {
         $this->clearRegistry();
         Zend_Validate_Abstract::setDefaultTranslator(null);
+        Zend_Validate::setMessageLength(-1);
     }
 
     public function testTranslatorNullByDefault()

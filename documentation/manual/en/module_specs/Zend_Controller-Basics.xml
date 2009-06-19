@@ -126,7 +126,7 @@
                     controllers as MixedCasedClasses ending in the word
                     Controller, and action methods as camelCasedMethods ending
                     in the word Action:
-                    <code>FooController::barAction()</code>. In this case, the
+                    <methodname>FooController::barAction()</methodname>. In this case, the
                     controller would be referred to as <code>foo</code> and
                     the action as <code>bar</code>.
                 </para>
@@ -153,9 +153,9 @@
 
                     <para>
                         As an example, if you were going to the action in
-                        <code>FooBarController::bazBatAction()</code>, you'd
-                        refer to it on the url as <code>/foo-bar/baz-bat</code>
-                        or <code>/foo.bar/baz.bat</code>.
+                        <methodname>FooBarController::bazBatAction()</methodname>, you'd
+                        refer to it on the url as <filename>/foo-bar/baz-bat</filename>
+                        or <filename>/foo.bar/baz.bat</filename>.
                     </para>
                 </note>
             </listitem>

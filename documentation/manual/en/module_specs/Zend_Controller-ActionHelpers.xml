@@ -45,7 +45,7 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    Explicitly using <code>getHelper()</code>. Simply pass it a
+                    Explicitly using <methodname>getHelper()</methodname>. Simply pass it a
                     name, and a helper object is returned:
                 </para>
 
@@ -57,7 +57,7 @@ $flashMessenger->addMessage('We did something in the last request');
 
             <listitem>
                 <para>
-                    Use the helper broker's <code>__get()</code> functionality
+                    Use the helper broker's <methodname>__get()</methodname> functionality
                     and retrieve the helper as if it were a member property of
                     the broker:
                 </para>
@@ -71,10 +71,10 @@ $flashMessenger->addMessage('We did something in the last request');
             <listitem>
                 <para>
                     Finally, most action helpers implement the method
-                    <code>direct()</code> which will call a specific, default
+                    <methodname>direct()</methodname> which will call a specific, default
                     method in the helper. In the example of the
-                    <code>FlashMessenger</code>, it calls
-                    <code>addMessage()</code>:
+                    <emphasis>FlashMessenger</emphasis>, it calls
+                    <methodname>addMessage()</methodname>:
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -105,7 +105,7 @@ $this->_helper->FlashMessenger('We did something in the last request');
         </para>
 
         <para>
-            To register a helper with the broker, use <code>addHelper</code>:
+            To register a helper with the broker, use <methodname>addHelper()</methodname>:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -115,14 +115,14 @@ Zend_Controller_Action_HelperBroker::addHelper($helper);
         <para>
             Of course, instantiating and passing helpers to the broker is a bit
             time and resource intensive, so two methods exists to automate
-            things slightly: <code>addPrefix()</code> and
-            <code>addPath()</code>.
+            things slightly: <methodname>addPrefix()</methodname> and
+            <methodname>addPath()</methodname>.
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>addPrefix()</code> takes a class prefix and uses it
+                    <methodname>addPrefix()</methodname> takes a class prefix and uses it
                     to determine a path where helper classes have been defined.
                     It assumes the prefix follows Zend Framework class naming
                     conventions.
@@ -136,7 +136,7 @@ Zend_Controller_Action_HelperBroker::addPrefix('My_Action_Helpers');
 
             <listitem>
                 <para>
-                    <code>addPath()</code> takes a directory as its first
+                    <methodname>addPath()</methodname> takes a directory as its first
                     argument and a class prefix as the second argument
                     (defaulting to 'Zend_Controller_Action_Helper'). This allows
                     you to map your own class prefixes to specific directories.
@@ -159,14 +159,14 @@ Zend_Controller_Action_HelperBroker::addPath('./Plugins/Helpers',
             Internally, the helper broker uses <link
                 linkend="zend.loader.pluginloader">a PluginLoader
                 instance</link> to maintain paths. You can retrieve the
-            PluginLoader using the static method <code>getPluginLoader()</code>,
+            PluginLoader using the static method <methodname>getPluginLoader()</methodname>,
             or, alternately, inject a custom PluginLoader instance using
-            <code>setPluginLoader()</code>.
+            <methodname>setPluginLoader()</methodname>.
         </para>
 
         <para>
             To determine if a helper exists in the helper broker, use
-            <code>hasHelper($name)</code>, where <varname>$name</varname> is the short
+            <methodname>hasHelper($name)</methodname>, where <varname>$name</varname> is the short
             name of the helper (minus the prefix):
         </para>
 
@@ -179,14 +179,15 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
 
         <para>
             There are also two static methods for retrieving helpers from the helper
-            broker: <code>getExistingHelper()</code> and
-            <code>getStaticHelper()</code>. <code>getExistingHelper()</code>
+            broker: <methodname>getExistingHelper()</methodname> and
+            <methodname>getStaticHelper()</methodname>.
+            <methodname>getExistingHelper()</methodname>
             will retrieve a helper only if it has previously been invoked by or
             explicitly registered with the helper broker; it will throw an
-            exception if not. <code>getStaticHelper()</code> does the same as
-            <code>getExistingHelper()</code>, but will attempt to instantiate
+            exception if not. <methodname>getStaticHelper()</methodname> does the same as
+            <methodname>getExistingHelper()</methodname>, but will attempt to instantiate
             the helper if has not yet been registered with the helper stack.
-            <code>getStaticHelper()</code> is a good choice for retrieving
+            <methodname>getStaticHelper()</methodname> is a good choice for retrieving
             helpers which you wish to configure.
         </para>
 
@@ -211,7 +212,7 @@ $redirector =
 
         <para>
             Finally, to delete a registered helper from the broker, use
-            <code>removeHelper($name)</code>, where <varname>$name</varname> is the
+            <methodname>removeHelper($name)</methodname>, where <varname>$name</varname> is the
             short name of the helper (minus the prefix):
         </para>
 
@@ -228,14 +229,14 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
 
         <para>
             Zend Framework includes several action helpers by default:
-            <code>AutoComplete</code> for automating responses for AJAX
-            autocompletion; <code>ContextSwitch</code> and
-            <code>AjaxContext</code> for serving alternate response formats for
-            your actions; a <code>FlashMessenger</code> for handling session
-            flash messages; <code>Json</code> for encoding and sending JSON
-            responses; a <code>Redirector</code>, to provide different
+            <emphasis>AutoComplete</emphasis> for automating responses for AJAX
+            autocompletion; <emphasis>ContextSwitch</emphasis> and
+            <emphasis>AjaxContext</emphasis> for serving alternate response formats for
+            your actions; a <emphasis>FlashMessenger</emphasis> for handling session
+            flash messages; <emphasis>Json</emphasis> for encoding and sending JSON
+            responses; a <emphasis>Redirector</emphasis>, to provide different
             implementations for redirecting to internal and external pages from
-            your application; and a <code>ViewRenderer</code> to automate the
+            your application; and a <emphasis>ViewRenderer</emphasis> to automate the
             process of setting up the view object in your controllers and
             rendering views.
         </para>
@@ -262,14 +263,14 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>setActionController()</code> is used to set the current
+                    <methodname>setActionController()</methodname> is used to set the current
                     action controller.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>init()</code>, triggered by the helper broker at
+                    <methodname>init()</methodname>, triggered by the helper broker at
                     instantiation, can be used to trigger initialization in the
                     helper; this can be useful for resetting state when multiple
                     controllers use the same helper in chained actions.
@@ -278,53 +279,53 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
 
             <listitem>
                 <para>
-                    <code>preDispatch()</code>, is triggered prior to a
+                    <methodname>preDispatch()</methodname>, is triggered prior to a
                     dispatched action.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>postDispatch()</code> is triggered when a dispatched
-                    action is done -- even if a <code>preDispatch()</code>
+                    <methodname>postDispatch()</methodname> is triggered when a dispatched
+                    action is done -- even if a <methodname>preDispatch()</methodname>
                     plugin has skipped the action. Mainly useful for cleanup.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getRequest()</code> retrieves the current request
+                    <methodname>getRequest()</methodname> retrieves the current request
                     object.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getResponse()</code> retrieves the current response
+                    <methodname>getResponse()</methodname> retrieves the current response
                     object.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getName()</code> retrieves the helper name. It
+                    <methodname>getName()</methodname> retrieves the helper name. It
                     retrieves the portion of the class name following the last
                     underscore character, or the full class name otherwise. As
                     an example, if the class is named
                     <classname>Zend_Controller_Action_Helper_Redirector</classname>, it
-                    will return <code>Redirector</code>; a class named
+                    will return <emphasis>Redirector</emphasis>; a class named
                     <code>FooMessage</code> will simply return itself.
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
-            You may optionally include a <code>direct()</code> method in your
+            You may optionally include a <methodname>direct()</methodname> method in your
             helper class. If defined, it allows you to treat the helper as a
             method of the helper broker, in order to allow easy, one-off usage
             of the helper. As an example, the <link
                 linkend="zend.controller.actionhelpers.redirector">redirector</link>
-            defines <code>direct()</code> as an alias of <code>goto()</code>,
+            defines <methodname>direct()</methodname> as an alias of <methodname>goto()</methodname>,
             allowing use of the helper like this:
         </para>
 
@@ -334,7 +335,7 @@ $this->_helper->redirector('item', 'view', 'blog', array('id' => 42));
 ]]></programlisting>
 
         <para>
-            Internally, the helper broker's <code>__call()</code> method looks
+            Internally, the helper broker's <methodname>__call()</methodname> method looks
             for a helper named <code>redirector</code>, then checks to see if
             that helper has a defined <code>direct</code> class, and calls it
             with the arguments provided.

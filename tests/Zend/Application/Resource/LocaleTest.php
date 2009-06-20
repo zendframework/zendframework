@@ -103,7 +103,7 @@ class Zend_Application_Resource_LocaleTest extends PHPUnit_Framework_TestCase
     public function testOptionsPassedToResourceAreUsedToSetLocaleState()
     {
         $options = array(
-            'default'      => 'en_US',
+            'default'      => 'kok_IN',
             'registry_key' => 'Foo_Bar',
         );
 
@@ -111,7 +111,7 @@ class Zend_Application_Resource_LocaleTest extends PHPUnit_Framework_TestCase
         $resource->setBootstrap($this->bootstrap);
         $resource->init();
         $locale   = $resource->getLocale();
-        $this->assertEquals('en', $locale->__toString());
+        $this->assertEquals('kok_IN', $locale->__toString());
         $this->assertTrue(Zend_Registry::isRegistered('Foo_Bar'));
         $this->assertSame(Zend_Registry::get('Foo_Bar'), $locale);
     }

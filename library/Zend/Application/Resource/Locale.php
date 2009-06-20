@@ -60,10 +60,12 @@ class Zend_Application_Resource_Locale
     {
         if (null === $this->_locale) {
             $options = $this->getOptions();
-            if (isset($options['default'])) {
+            if (!isset($options['default'])) {
+                $this->_locale = new Zend_Locale();
+            } else { 
                 Zend_Locale::setDefault($options['default']);
+                $this->_locale = new Zend_Locale($options['default']);
             }
-            $this->_locale = new Zend_Locale();
 
             $key = (isset($options['registry_key']) && !is_numeric($options['registry_key']))
                 ? $options['registry_key']

@@ -74,7 +74,7 @@ html/
             <title>Create the Rewrite Rules</title>
 
             <para>
-                Edit the <code>html/.htaccess</code> file above to read as
+                Edit the <filename>html/.htaccess</filename> file above to read as
                 follows:
             </para>
 
@@ -155,8 +155,8 @@ RewriteRule ^.*$ index.php [NC,L]
 
             <para>
                 The bootstrap file is the page all requests are routed through
-                -- <code>html/index.php</code> in this case. Open up
-                <code>html/index.php</code> in the editor of your choice and add
+                -- <filename>html/index.php</filename> in this case. Open up
+                <filename>html/index.php</filename> in the editor of your choice and add
                 the following:
             </para>
 
@@ -178,8 +178,8 @@ Zend_Controller_Front::run('/path/to/app/controllers');
                 understand how requests are routed in Zend Framework. By
                 default, the first segment of a URL path maps to a controller,
                 and the second to an action. For example, given the URL
-                <code>http://framework.zend.com/roadmap/components</code>, the
-                path is <code>/roadmap/components</code>, which will map to the
+                <filename>http://framework.zend.com/roadmap/components</filename>, the
+                path is <filename>/roadmap/components</filename>, which will map to the
                 controller <code>roadmap</code> and the action
                 <code>components</code>. If no action is provided, the action
                 <code>index</code> is assumed, and if no controller is provided,
@@ -203,14 +203,14 @@ Zend_Controller_Front::run('/path/to/app/controllers');
                 word <code>Action</code> is appended. Thus, in our example
                 above, the action <code>components</code> becomes
                 <code>componentsAction</code>, and the final method called is
-                <code>RoadmapController::componentsAction()</code>.
+                <methodname>RoadmapController::componentsAction()</methodname>.
             </para>
 
             <para>
                 So, moving on, let's now create a default action controller and
                 action method. As noted earlier, the default controller and
                 action called are both <code>index</code>. Open the file
-                <code>application/controllers/IndexController.php</code>, and
+                <filename>application/controllers/IndexController.php</filename>, and
                 enter the following:
             </para>
 
@@ -231,19 +231,19 @@ class IndexController extends Zend_Controller_Action
                 defining an action method and a corresponding view script, you
                 will immediately get content rendered. By default,
                 <classname>Zend_View</classname> is used as the View layer in the MVC. The
-                <code>ViewRenderer</code> does some magic, and uses the
+                <emphasis>ViewRenderer</emphasis> does some magic, and uses the
                 controller name (e.g., <code>index</code>) and the current
                 action name (e.g., <code>index</code>) to determine what
                 template to pull. By default, templates end in the
-                <code>.phtml</code> extension, so this means that, in the above
-                example, the template <code>index/index.phtml</code> will be
-                rendered. Additionally, the <code>ViewRenderer</code>
+                <filename>.phtml</filename> extension, so this means that, in the above
+                example, the template <filename>index/index.phtml</filename> will be
+                rendered. Additionally, the <emphasis>ViewRenderer</emphasis>
                 automatically assumes that the directory <code>views</code> at
                 the same level as the controller directory will be the base view
                 directory, and that the actual view scripts will be in the
-                <code>views/scripts/</code> subdirectory. Thus, the template
+                <filename>views/scripts/</filename> subdirectory. Thus, the template
                 rendered will be found in
-                <code>application/views/scripts/index/index.phtml</code>.
+                <filename>application/views/scripts/index/index.phtml</filename>.
             </para>
         </sect3>
 
@@ -254,9 +254,9 @@ class IndexController extends Zend_Controller_Action
                 As mentioned <link
                     linkend="zend.controller.quickstart.go.controller">in the
                     previous section</link>, view scripts are found in
-                <code>application/views/scripts/</code>; the view script for the
+                <filename>application/views/scripts/</filename>; the view script for the
                 default controller and action is in
-                <code>application/views/scripts/index/index.phtml</code>. Create
+                <filename>application/views/scripts/index/index.phtml</filename>. Create
                 this file, and type in some HTML:
             </para>
 
@@ -284,8 +284,8 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
                     linkend="zend.controller.plugins.standard.errorhandler">the
                 error handler plugin</link> is registered. This plugin expects
                 that a controller exists to handle errors. By default, it
-                assumes an <code>ErrorController</code> in the default module
-                with an <code>errorAction</code> method:
+                assumes an <emphasis>ErrorController</emphasis> in the default module
+                with an <methodname>errorAction()</methodname> method:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -299,9 +299,9 @@ class ErrorController extends Zend_Controller_Action
 
             <para>
                 Assuming the already discussed directory layout, this file will
-                go in <code>application/controllers/ErrorController.php</code>.
+                go in <filename>application/controllers/ErrorController.php</filename>.
                 You will also need to create a view script in
-                <code>application/views/scripts/error/error.phtml</code>; sample
+                <filename>application/views/scripts/error/error.phtml</filename>; sample
                 content might look like:
             </para>
 
@@ -328,14 +328,20 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
             <para>
                 With your first controller and view under your belt, you can now
                 fire up your browser and browse to the site. Assuming
-                <code>example.com</code> is your domain, any of the following
+                <filename>example.com</filename> is your domain, any of the following
                 URLs will get to the page we've just created:
             </para>
 
             <itemizedlist>
-                <listitem><para><code>http://example.com/</code></para></listitem>
-                <listitem><para><code>http://example.com/index</code></para></listitem>
-                <listitem><para><code>http://example.com/index/index</code></para></listitem>
+                <listitem>
+                    <para><filename>http://example.com/</filename></para>
+                </listitem>
+                <listitem>
+                    <para><filename>http://example.com/index</filename></para>
+                </listitem>
+                <listitem>
+                    <para><filename>http://example.com/index/index</filename></para>
+                </listitem>
             </itemizedlist>
 
             <para>

@@ -27,7 +27,7 @@
     </itemizedlist>
 
     <para>
-        In other words, the <code>ErrorHandler</code> plugin is designed to
+        In other words, the <emphasis>ErrorHandler</emphasis> plugin is designed to
         handle HTTP 404-type errors (page missing) and 500-type errors (internal
         error). It is not intended to catch exceptions raised in other plugins
         or routing.
@@ -35,7 +35,7 @@
 
     <para>
         By default, <classname>Zend_Controller_Plugin_ErrorHandler</classname> will
-        forward to <code>ErrorController::errorAction()</code> in the default
+        forward to <methodname>ErrorController::errorAction()</methodname> in the default
         module. You may set alternate values for these by using the various
         accessors available to the plugin:
     </para>
@@ -43,28 +43,28 @@
     <itemizedlist>
         <listitem>
             <para>
-                <code>setErrorHandlerModule()</code> sets the controller module
+                <methodname>setErrorHandlerModule()</methodname> sets the controller module
                 to use.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>setErrorHandlerController()</code> sets the controller
+                <methodname>setErrorHandlerController()</methodname> sets the controller
                 to use.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>setErrorHandlerAction()</code> sets the controller action
+                <methodname>setErrorHandlerAction()</methodname> sets the controller action
                 to use.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>setErrorHandler()</code> takes an associative array, which
+                <methodname>setErrorHandler()</methodname> takes an associative array, which
                 may contain any of the keys 'module', 'controller', or 'action',
                 with which it will set the appropriate values.
             </para>
@@ -73,12 +73,12 @@
 
     <para>
         Additionally, you may pass an optional associative array to the
-        constructor, which will then proxy to <code>setErrorHandler()</code>.
+        constructor, which will then proxy to <methodname>setErrorHandler()</methodname>.
     </para>
 
     <para>
         <classname>Zend_Controller_Plugin_ErrorHandler</classname> registers a
-        <code>postDispatch()</code> hook and checks for exceptions registered in
+        <methodname>postDispatch()</methodname> hook and checks for exceptions registered in
         <link linkend="zend.controller.response">the response object</link>. If
         any are found, it attempts to forward to the registered error handler
         action.
@@ -94,7 +94,7 @@
         <title>Using the ErrorHandler as a 404 Handler</title>
 
         <para>
-            Since the <code>ErrorHandler</code> plugin captures not only
+            Since the <emphasis>ErrorHandler</emphasis> plugin captures not only
             application errors, but also errors in the controller chain arising
             from missing controller classes and/or action methods, it can be
             used as a 404 handler. To do so, you will need to have your error
@@ -119,7 +119,7 @@ class ErrorController extends Zend_Controller_Action
 
         <para>
             Once you have the error object, you can get the type via
-            <code>$errors->type</code>. It will be one of the following:
+            <varname>$errors->type</varname>. It will be one of the following:
         </para>
 
         <itemizedlist>
@@ -221,7 +221,7 @@ public function errorAction()
 
         <para>
             If you dispatch multiple actions in a request, or if your action
-            makes multiple calls to <code>render()</code>, it's possible that the
+            makes multiple calls to <methodname>render()</methodname>, it's possible that the
             response object already has content stored within it. This can lead
             to rendering a mixture of expected content and error content.
         </para>

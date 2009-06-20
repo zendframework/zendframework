@@ -4,7 +4,7 @@
     <title>ActionStack</title>
 
     <para>
-        The <code>ActionStack</code> plugin allows you to manage a stack of
+        The <emphasis>ActionStack</emphasis> plugin allows you to manage a stack of
         requests, and operates as a <code>postDispatch</code> plugin. If a
         forward (i.e., a call to another action) is already detected in the
         current request object, it does nothing. However, if not, it checks its
@@ -21,34 +21,35 @@
 
     <itemizedlist>
         <listitem><para>
-                <code>getRegistry()</code> and <code>setRegistry()</code>.
-                Internally, <code>ActionStack</code> uses a
+                <methodname>getRegistry()</methodname> and <methodname>setRegistry()</methodname>.
+                Internally, <emphasis>ActionStack</emphasis> uses a
                 <classname>Zend_Registry</classname> instance to store the stack. You can
                 substitute a different registry instance or retrieve it with
                 these accessors.
         </para></listitem>
 
         <listitem><para>
-                <code>getRegistryKey()</code> and <code>setRegistryKey()</code>.
+                <methodname>getRegistryKey()</methodname> and
+                <methodname>setRegistryKey()</methodname>.
                 These can be used to indicate which registry key to use when
                 pulling the stack. Default value is
                 'Zend_Controller_Plugin_ActionStack'.
         </para></listitem>
 
         <listitem><para>
-                <code>getStack()</code> allows you to retrieve the stack of
+                <methodname>getStack()</methodname> allows you to retrieve the stack of
                 actions in its entirety.
         </para></listitem>
 
         <listitem><para>
-                <code>pushStack()</code> and <code>popStack()</code> allow you
-                to add to and pull from the stack, respectively.
-                <code>pushStack()</code> accepts a request object.
+                <methodname>pushStack()</methodname> and <methodname>popStack()</methodname> allow
+                you to add to and pull from the stack, respectively.
+                <methodname>pushStack()</methodname> accepts a request object.
         </para></listitem>
     </itemizedlist>
 
     <para>
-        An additional method, <code>forward()</code>, expects a request object,
+        An additional method, <methodname>forward()</methodname>, expects a request object,
         and sets the state of the current request object in the front controller
         to the state of the provided request object, and markes it as
         undispatched (forcing another iteration of the dispatch loop).

@@ -9,16 +9,18 @@
         <title>Introduction</title>
 
         <para>
-            Zend Framework requires a PHP 5 interpreter with a web server configured
-            to handle PHP scripts correctly. Some features require additional extensions or
-            web server features; in most cases the framework can be used without them, although
-            performance may suffer or ancillary features may not be fully functional. An example
-            of such a dependency is mod_rewrite in an Apache environment, which can be used to
-            implement "pretty URL's" like "http://www.example.com/user/edit". If mod_rewrite is
-            not enabled, ZF can be configured to support URL's such as
-            "http://www.example.com?controller=user&amp;action=edit". Pretty URL's may be used to
-            shorten URL's for textual representation or search engine optimization (SEO),
-            but they do not directly affect the functionality of the application.
+            Zend Framework requires a <acronym>PHP</acronym> 5 interpreter with a web server
+            configured to handle <acronym>PHP</acronym> scripts correctly. Some features require
+            additional extensions or web server features; in most cases the framework can be used
+            without them, although performance may suffer or ancillary features may not be fully
+            functional. An example of such a dependency is mod_rewrite in an Apache environment,
+            which can be used to implement "pretty <acronym>URL</acronym>'s" like
+            "<filename>http://www.example.com/user/edit</filename>". If mod_rewrite is not enabled,
+            Zand Framework can be configured to support <acronym>URL</acronym>'s such as
+            "<filename>http://www.example.com?controller=user&amp;action=edit</filename>". Pretty
+            <acronym>URL</acronym>'s may be used to shorten <acronym>URL</acronym>'s for textual
+            representation or search engine optimization (<acronym>SEO</acronym>), but they do not
+            directly affect the functionality of the application.
         </para>
 
         <sect2 id="requirements.version">
@@ -26,9 +28,9 @@
             <title>PHP Version</title>
 
             <para>
-                Zend recommends the most current release of PHP for critical
+                Zend recommends the most current release of <acronym>PHP</acronym> for critical
                 security and performance enhancements, and currently supports
-                PHP 5.2.4 or later.
+                <acronym>PHP</acronym> 5.2.4 or later.
             </para>
 
             <para>
@@ -43,10 +45,11 @@
             <title>PHP Extensions</title>
 
             <para>
-                You will find a table listing all extensions typically found in PHP and how they are
-                used in Zend Framework below. You should verify that the extensions on which ZF
-                components you'll be using in your application are available in your PHP
-                environments. Many applications will not require every extension listed below.
+                You will find a table listing all extensions typically found in
+                <acronym>PHP</acronym> and how they are used in Zend Framework below. You should
+                verify that the extensions on which Zend Framework components you'll be using in
+                your application are available in your <acronym>PHP</acronym> environments. Many
+                applications will not require every extension listed below.
             </para>
 
             <para>
@@ -863,7 +866,7 @@
                                 </emphasis>
                             </entry>
                             <entry>Hard</entry>
-                            <entry>All PDO database adapters</entry>
+                            <entry>All <acronym>PDO</acronym> database adapters</entry>
                         </row>
                         <row>
                             <entry>
@@ -1422,7 +1425,7 @@
 
             <para>
                 Below is a table that lists all available Zend Framework Components
-                and which PHP extension they need. This can help guide you
+                and which <acronym>PHP</acronym> extension they need. This can help guide you
                 to know which extensions are required for your application.
                 Not all extensions used by Zend Framework are required for every
                 application.

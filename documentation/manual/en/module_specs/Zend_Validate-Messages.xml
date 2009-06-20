@@ -574,7 +574,7 @@ $validator = new Zend_Validate_Alnum();
 $messages  = $validator->getMessageTemplates();
 ]]></programlisting>
 
-    <sect2 id="zend.validate.messages">
+    <sect2 id="zend.validate.messages.limitation">
         <title>Limit the size of a validation message</title>
 
         <para>

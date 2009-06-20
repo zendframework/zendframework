@@ -4,10 +4,10 @@
     <title>Wprowadzenie</title>
 
     <para>
-        <classname>Zend_Acl</classname> zapewnia lekką i elastyczną obsługę 
-        implementacji list kontroli dostępu (<acronym>ACL</acronym>) do zarządzania 
-        uprawnieniami. Ogólnie rzecz biorąc, aplikacja może używać list 
-        <acronym>ACL</acronym> do kontrolowania dostępu do określonych chronionych 
+        <classname>Zend_Acl</classname> zapewnia lekką i elastyczną obsługę
+        implementacji list kontroli dostępu (<acronym>ACL</acronym>) do zarządzania
+        uprawnieniami. Ogólnie rzecz biorąc, aplikacja może używać list
+        <acronym>ACL</acronym> do kontrolowania dostępu do określonych chronionych
         obiektów przez inne obiekty.
     </para>
 
@@ -38,8 +38,8 @@
     </para>
 
     <para>
-        Dzięki określeniu i użyciu list kontroli dostępu (<acronym>ACL</acronym>), 
-        aplikacja może kontrolować to, w jaki sposób żądające obiekty (role) mają 
+        Dzięki określeniu i użyciu list kontroli dostępu (<acronym>ACL</acronym>),
+        aplikacja może kontrolować to, w jaki sposób żądające obiekty (role) mają
         przydzielany dostęp do chronionych obiektów (zasobów).
     </para>
 
@@ -56,9 +56,9 @@
             programistów gdy jest to potrzebne.
         </para>
         <para>
-            <classname>Zend_Acl</classname> zapewnia drzewiastą strukturę, w której 
-            mogą być dodawane zasoby (lub inaczej "obszary będące pod kontrolą"). 
-            Dzięki temu, że zasoby są przechowywane w strukturze drzewiastej, mogą 
+            <classname>Zend_Acl</classname> zapewnia drzewiastą strukturę, w której
+            mogą być dodawane zasoby (lub inaczej "obszary będące pod kontrolą").
+            Dzięki temu, że zasoby są przechowywane w strukturze drzewiastej, mogą
             być one organizowane od ogólnych (od korzeni) do szczegółowych (do gałęzi).
             Zapytanie do konkretnego zasobu automatycznie przeszuka całą
             hierarchię zasobów, dla reguł przypisanych do przodka zasobów,
@@ -73,8 +73,8 @@
             jednego zasobu itd.
         </para>
         <para>
-            <classname>Zend_Acl</classname> także obsługuje przywileje dla zasobów 
-            (np., "create", "read", "update", "delete") i programista może przypisać 
+            <classname>Zend_Acl</classname> także obsługuje przywileje dla zasobów
+            (np., "create", "read", "update", "delete") i programista może przypisać
             reguły, które mają zastosowanie do wszystkich przywilejów, lub dla
             konkretnych przywilejów dla jednego lub więcej zasobów.
         </para>
@@ -160,8 +160,8 @@ echo $acl->isAllowed('someUser', 'someResource') ? 'allowed' : 'denied';
                 sprzeczne.
             </para>
             <para>
-                <classname>Zend_Acl</classname> rozwiązuje tę niejaśność kończąc 
-                zapytanie wtedy, gdy znajdzie pierwszą regułę, wprost pasującą do 
+                <classname>Zend_Acl</classname> rozwiązuje tę niejaśność kończąc
+                zapytanie wtedy, gdy znajdzie pierwszą regułę, wprost pasującą do
                 zapytania. W tym przypadku, z tego względu, że rola "member" jest
                 sprawdzana przed rolą "guest", przykładowy kod
                 wyświetliłby "allowed".
@@ -180,7 +180,7 @@ echo $acl->isAllowed('someUser', 'someResource') ? 'allowed' : 'denied';
         <title>Tworzenie list kontroli dostępu</title>
 
         <para>
-            <acronym>ACL<acronym> może reprezentować dowolny zestaw fizycznych lub wirtualnych
+            <acronym>ACL</acronym> może reprezentować dowolny zestaw fizycznych lub wirtualnych
             obiektów których potrzebujesz. Dla celów prezentacji utworzymy <acronym>ACL</acronym>
             dla prostego Systemu Zarządzania Treścią (Content Management System
             - <acronym>CMS</acronym>), w którym różnymi obszarami zarządza kilka poziomów grup.

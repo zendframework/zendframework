@@ -18,7 +18,7 @@
     </para>
 
     <note>
-        <title>Front Controller resource dependency</title>
+        <title>Front Controller Resource Dependency</title>
 
         <para>
             The Modules resource has a dependency on the <link

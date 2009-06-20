@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -21,7 +20,6 @@
  * @version    $Id$
  */
 
-
 /**
  * Test helper
  */
@@ -31,7 +29,6 @@ require_once dirname(__FILE__) . '/../../TestHelper.php';
  * @see Zend_Filter_HtmlEntities
  */
 require_once 'Zend/Filter/HtmlEntities.php';
-
 
 /**
  * @category   Zend
@@ -122,13 +119,34 @@ class Zend_Filter_HtmlEntitiesTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Ensures that getDoubleQuote() returns expected default value
+     *
+     * @return void
+     */
+    public function testGetDoubleQuote()
+    {
+        $this->assertEquals(true, $this->_filter->getDoubleQuote());
+    }
+
+    /**
+     * Ensures that setDoubleQuote() follows expected behavior
+     *
+     * @return void
+     */
+    public function testSetDoubleQuote()
+    {
+        $this->_filter->setDoubleQuote(false);
+        $this->assertEquals(false, $this->_filter->getDoubleQuote());
+    }
+
+    /**
      * Ensure that fluent interfaces are supported
      *
      * @group ZF-3172
      */
     public function testFluentInterface()
     {
-        $instance = $this->_filter->setCharSet('UTF-8')->setQuoteStyle(ENT_QUOTES);
+        $instance = $this->_filter->setCharSet('UTF-8')->setQuoteStyle(ENT_QUOTES)->setDoubleQuote(false);
         $this->assertTrue($instance instanceof Zend_Filter_HtmlEntities);
     }
 }

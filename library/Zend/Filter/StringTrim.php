@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -20,12 +19,10 @@
  * @version    $Id$
  */
 
-
 /**
  * @see Zend_Filter_Interface
  */
 require_once 'Zend/Filter/Interface.php';
-
 
 /**
  * @category   Zend
@@ -89,9 +86,29 @@ class Zend_Filter_StringTrim implements Zend_Filter_Interface
     public function filter($value)
     {
         if (null === $this->_charList) {
-            return trim((string) $value);
+            return $this->_unicodeTrim((string) $value);
         } else {
-            return trim((string) $value, $this->_charList);
+            return $this->_unicodeTrim((string) $value, $this->_charList);
         }
+    }
+
+    /**
+     * Unicode aware trim method
+     * Fixes a PHP problem
+     *
+     * @param string $value
+     * @param string $charlist
+     * @return string
+     */
+    protected function _unicodeTrim($value, $charlist = '\\\\s')
+    {
+        $chars = preg_replace(
+            array( '/[\^\-\]\\\]/S', '/\\\{4}/S' ),
+            array( '\\\\\\0', '\\' ),
+            $charlist
+        );
+
+        $pattern = '^[' . $chars . ']*|[' . $chars . ']*$';
+        return preg_replace("/$pattern/usSD", '', $value);
     }
 }

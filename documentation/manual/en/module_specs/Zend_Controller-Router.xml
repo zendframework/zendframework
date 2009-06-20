@@ -200,7 +200,7 @@ $router->addRoute('user',
 ]]></programlisting>
 
             <para>
-                Which would result in the href: <code>user/martel</code>.
+                Which would result in the href: <filename>user/martel</filename>.
             </para>
         </note>
 
@@ -216,10 +216,10 @@ $router->addRoute('user',
 
         <para>
             If you need to determine which route was matched, you can use the
-            <code>getCurrentRouteName()</code> method, which will return the
+            <methodname>getCurrentRouteName()</methodname> method, which will return the
             identifier used when registering the route with the router. If you
             want the actual route object, you can use
-            <code>getCurrentRoute()</code>.
+            <methodname>getCurrentRoute()</methodname>.
         </para>
 
         <note>
@@ -266,11 +266,11 @@ $router->addRoute('user',
         <para>
             <classname>Zend_Controller_Router_Rewrite</classname> comes preconfigured with a default
             route, which will match URIs in the shape of
-            <code>controller/action</code>. Additionally, a module name may be
+            <filename>controller/action</filename>. Additionally, a module name may be
             specified as the first path element, allowing URIs of the form
-            <code>module/controller/action</code>. Finally, it will also match
+            <filename>module/controller/action</filename>. Finally, it will also match
             any additional parameters appended to the URI by default -
-            <code>controller/action/var1/value1/var2/value2</code>.
+            <filename>controller/action/var1/value1/var2/value2</filename>.
         </para>
 
         <para>
@@ -333,7 +333,7 @@ $this->addRoute('default', $compat);
             If you do not want this particular default route in your routing
             schema, you may override it by creating your own 'default' route
             (i.e., storing it under the name of 'default') or removing it
-            altogether by using <code>removeDefaultRoutes()</code>:
+            altogether by using <methodname>removeDefaultRoutes()</methodname>:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -348,9 +348,9 @@ $router->removeDefaultRoutes();
 
         <para>
             The rewrite router can be used in subdirectories (e.g.,
-            <code>http://domain.com/~user/application-root/</code>) in which
+            <filename>http://domain.com/~user/application-root/</filename>) in which
             case the base URL of the application
-            (<code>/~user/application-root</code>) should be automatically
+            (<filename>/~user/application-root</filename>) should be automatically
             detected by <classname>Zend_Controller_Request_Http</classname> and used
             accordingly.
         </para>
@@ -359,7 +359,7 @@ $router->removeDefaultRoutes();
             Should the base URL be detected incorrectly you can override it with
             your own base path by using
             <classname>Zend_Controller_Request_Http</classname> and calling the
-            <code>setBaseUrl()</code> method (see <xref
+            <methodname>setBaseUrl()</methodname> method (see <xref
                 linkend="zend.controller.request.http.baseurl" />):
         </para>
 
@@ -401,7 +401,7 @@ $router->setGlobalParam('lang', 'en');
         <para>
             Sometimes it is more convenient to update a configuration file with
             new routes than to change the code. This is possible via the
-            <code>addConfig()</code> method. Basically, you create a
+            <methodname>addConfig()</methodname> method. Basically, you create a
             <classname>Zend_Config</classname>-compatible configuration, and in your code read it in
             and pass it to the RewriteRouter.
         </para>

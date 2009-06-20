@@ -23,7 +23,7 @@ $front->throwExceptions(true);
 
         <para>
             To send the response output, including headers, use
-            <code>sendResponse()</code>.
+            <methodname>sendResponse()</methodname>.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -32,12 +32,12 @@ $response->sendResponse();
 
         <note>
             <para>
-                By default, the front controller calls <code>sendResponse()</code>
+                By default, the front controller calls <methodname>sendResponse()</methodname>
                 when it has finished dispatching the request; typically you will
                 never need to call it. However, if you wish to manipulate the
                 response or use it in testing, you can override this
                 behaviour by setting the <code>returnResponse</code> flag with
-                <classname>Zend_Controller_Front::returnResponse(true)</classname>:
+                <methodname>Zend_Controller_Front::returnResponse(true)</methodname>:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -81,8 +81,8 @@ $this->getResponse()
 
         <para>
             Should an exception occur in an application, check the response object's
-            <code>isException()</code> flag, and retrieve the exception using
-            <code>getException()</code>. Additionally, one may create custom
+            <methodname>isException()</methodname> flag, and retrieve the exception using
+            <methodname>getException()</methodname>. Additionally, one may create custom
             response objects that redirect to error pages, log exception messages,
             do pretty formatting of exception messages (for development
             environments), etc.
@@ -114,8 +114,8 @@ $response->sendResponse();
 
         <para>
             By default, exception messages are not displayed. This behaviour may be
-            overridden by calling <code>renderExceptions()</code>, or enabling the
-            front controller to throwExceptions(), as shown above:
+            overridden by calling <methodname>renderExceptions()</methodname>, or enabling the
+            front controller to <methodname>throwExceptions()</methodname>, as shown above:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -146,7 +146,7 @@ $front->dispatch();
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>canSendHeaders()</code> is used to determine if
+                    <methodname>canSendHeaders()</methodname> is used to determine if
                     headers have already been sent. It takes an optional flag
                     indicating whether or not to throw an exception if headers
                     have already been sent. This can be overridden by setting
@@ -157,7 +157,7 @@ $front->dispatch();
 
             <listitem>
                 <para>
-                    <code>setHeader($name, $value, $replace = false)</code> is
+                    <methodname>setHeader($name, $value, $replace = false)</methodname> is
                     used to set an individual header. By default, it does not
                     replace existing headers of the same name in the object;
                     however, setting <varname>$replace</varname> to true will force it
@@ -166,7 +166,7 @@ $front->dispatch();
 
                 <para>
                     Before setting the header, it checks with
-                    <code>canSendHeaders()</code> to see if this operation is
+                    <methodname>canSendHeaders()</methodname> to see if this operation is
                     allowed at this point, and requests that an exception be
                     thrown.
                 </para>
@@ -174,13 +174,13 @@ $front->dispatch();
 
             <listitem>
                 <para>
-                    <code>setRedirect($url, $code = 302)</code> sets an HTTP
+                    <methodname>setRedirect($url, $code = 302)</methodname> sets an HTTP
                     Location header for a redirect. If an HTTP status code has
                     been provided, it will use that status code.
                 </para>
 
                 <para>
-                    Internally, it calls <code>setHeader()</code> with the
+                    Internally, it calls <methodname>setHeader()</methodname> with the
                     <varname>$replace</varname> flag on to ensure only one such header
                     is ever sent.
                 </para>
@@ -188,7 +188,7 @@ $front->dispatch();
 
             <listitem>
                 <para>
-                    <code>getHeaders()</code> returns an array of all headers.
+                    <methodname>getHeaders()</methodname> returns an array of all headers.
                     Each array element is an array with the keys 'name' and
                     'value'.
                 </para>
@@ -196,34 +196,34 @@ $front->dispatch();
 
             <listitem>
                 <para>
-                    <code>clearHeaders()</code> clears all registered headers.
+                    <methodname>clearHeaders()</methodname> clears all registered headers.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setRawHeader()</code> can be used to set headers that
+                    <methodname>setRawHeader()</methodname> can be used to set headers that
                     are not key/value pairs, such as an HTTP status header.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getRawHeaders()</code> returns any registered raw
+                    <methodname>getRawHeaders()</methodname> returns any registered raw
                     headers.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>clearRawHeaders()</code> clears any registered raw
+                    <methodname>clearRawHeaders()</methodname> clears any registered raw
                     headers.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>clearAllHeaders()</code> clears both regular key/value
+                    <methodname>clearAllHeaders()</methodname> clears both regular key/value
                     headers as well as raw headers.
                 </para>
             </listitem>
@@ -232,8 +232,8 @@ $front->dispatch();
         <para>
             In addition to the above methods, there are accessors for setting
             and retrieving the HTTP response code for the current request,
-            <code>setHttpResponseCode()</code> and
-            <code>getHttpResponseCode()</code>.
+            <methodname>setHttpResponseCode()</methodname> and
+            <methodname>getHttpResponseCode()</methodname>.
         </para>
     </sect2>
 
@@ -250,9 +250,9 @@ $front->dispatch();
         </para>
 
         <para>
-            As an example, you could use a <code>preDispatch()</code> hook to
+            As an example, you could use a <methodname>preDispatch()</methodname> hook to
             add a header to the response object, then have the action controller
-            add body content, and a <code>postDispatch()</code> hook add a
+            add body content, and a <methodname>postDispatch()</methodname> hook add a
             footer:
         </para>
 
@@ -290,7 +290,7 @@ class MyController extends Zend_Controller_Action
 ]]></programlisting>
 
         <para>
-            In the above example, a call to <code>/my/foo</code> will cause the
+            In the above example, a call to <filename>/my/foo</filename> will cause the
             final body content of the response object to have the following
             structure:
         </para>
@@ -315,13 +315,13 @@ array(
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>setBody()</code> and <code>appendBody()</code> both
-                    allow you to pass a second value, <varname>$name</varname>,
+                    <methodname>setBody()</methodname> and <methodname>appendBody()</methodname>
+                    both allow you to pass a second value, <varname>$name</varname>,
                     indicating a named segment. In each case, if you provide
                     this, it will overwrite that specific named segment or
                     create it if it does not exist (appending to the array by
                     default). If no named segment is passed to
-                    <code>setBody()</code>, it resets the entire body content
+                    <methodname>setBody()</methodname>, it resets the entire body content
                     array. If no named segment is passed to appendBody(), the
                     content is appended to the value in the 'default' name
                     segment.
@@ -330,7 +330,7 @@ array(
 
             <listitem>
                 <para>
-                    <code>prepend($name, $content)</code> will create a segment
+                    <methodname>prepend($name, $content)</methodname> will create a segment
                     named <varname>$name</varname> and place it at the beginning of
                     the array. If the segment exists already, it will be removed
                     prior to the operation (i.e., overwritten and replaced).
@@ -339,7 +339,7 @@ array(
 
             <listitem>
                 <para>
-                    <code>append($name, $content)</code> will create a segment
+                    <methodname>append($name, $content)</methodname> will create a segment
                     named <varname>$name</varname> and place it at the end of
                     the array. If the segment exists already, it will be removed
                     prior to the operation (i.e., overwritten and replaced).
@@ -348,8 +348,8 @@ array(
 
             <listitem>
                 <para>
-                    <code>insert($name, $content, $parent = null, $before =
-                        false)</code> will create a segment named
+                    <methodname>insert($name, $content, $parent = null, $before =
+                        false)</methodname> will create a segment named
                     <varname>$name</varname>. If provided with a <varname>$parent</varname>
                     segment, the new segment will be placed either before or
                     after that segment (based on the value of
@@ -361,7 +361,7 @@ array(
 
             <listitem>
                 <para>
-                    <code>clearBody($name = null)</code> will remove a single
+                    <methodname>clearBody($name = null)</methodname> will remove a single
                     named segment if a <varname>$name</varname> is provided (and the
                     entire array otherwise).
                 </para>
@@ -369,8 +369,8 @@ array(
 
             <listitem>
                 <para>
-                    <code>getBody($spec = false)</code> can be used to retrieve a single
-                    array segment if <varname>$spec</varname> is the name of a named
+                    <methodname>getBody($spec = false)</methodname> can be used to retrieve a
+                    single array segment if <varname>$spec</varname> is the name of a named
                     segment. If <varname>$spec</varname> is false, it returns a string
                     formed by concatenating all named segments in order. If
                     <varname>$spec</varname> is true, it returns the body content
@@ -395,28 +395,28 @@ array(
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>setException(Exception $e)</code> allows you to
+                    <methodname>setException(Exception $e)</methodname> allows you to
                     register an exception.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>isException()</code> will tell you if an exception has
+                    <methodname>isException()</methodname> will tell you if an exception has
                     been registered.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getException()</code> returns the entire
+                    <methodname>getException()</methodname> returns the entire
                     exception stack.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>hasExceptionOfType($type)</code> allows you to
+                    <methodname>hasExceptionOfType($type)</methodname> allows you to
                     determine if an exception of a particular class is in the
                     stack.
                 </para>
@@ -424,7 +424,7 @@ array(
 
             <listitem>
                 <para>
-                    <code>hasExceptionOfMessage($message)</code> allows you to
+                    <methodname>hasExceptionOfMessage($message)</methodname> allows you to
                     determine if an exception with a specific message is in the
                     stack.
                 </para>
@@ -432,7 +432,7 @@ array(
 
             <listitem>
                 <para>
-                    <code>hasExceptionOfCode($code)</code> allows you to
+                    <methodname>hasExceptionOfCode($code)</methodname> allows you to
                     determine if an exception with a specific code is in the
                     stack.
                 </para>
@@ -440,7 +440,7 @@ array(
 
             <listitem>
                 <para>
-                    <code>getExceptionByType($type)</code> allows you to
+                    <methodname>getExceptionByType($type)</methodname> allows you to
                     retrieve all exceptions of a specific class from the stack.
                     It will return false if none are found, and an array of
                     exceptions otherwise.
@@ -449,7 +449,7 @@ array(
 
             <listitem>
                 <para>
-                    <code>getExceptionByMessage($message)</code> allows you to
+                    <methodname>getExceptionByMessage($message)</methodname> allows you to
                     retrieve all exceptions with a specific message from the stack.
                     It will return false if none are found, and an array of
                     exceptions otherwise.
@@ -458,7 +458,7 @@ array(
 
             <listitem>
                 <para>
-                    <code>getExceptionByCode($code)</code> allows you to
+                    <methodname>getExceptionByCode($code)</methodname> allows you to
                     retrieve all exceptions with a specific code from the stack.
                     It will return false if none are found, and an array of
                     exceptions otherwise.
@@ -467,7 +467,7 @@ array(
 
             <listitem>
                 <para>
-                    <code>renderExceptions($flag)</code> allows you to set a
+                    <methodname>renderExceptions($flag)</methodname> allows you to set a
                     flag indicating whether or not exceptions should be emitted
                     when the response is sent.
                 </para>

@@ -31,7 +31,7 @@ $router->addRoute('archive', $route);
     <para>
         Every defined regex subpattern will be injected to the request
         object. With our above example, after successful matching
-        <code>http://domain.com/archive/2006</code>, the resulting value
+        <filename>http://domain.com/archive/2006</filename>, the resulting value
         array may look like:
     </para>
 
@@ -47,8 +47,8 @@ $values = array(
         <para>
             Leading and trailing slashes are trimmed from the URL in the Router
             prior to a match. As a result, matching the URL
-            <code>http://domain.com/foo/bar/</code>, would involve a regex of
-            <code>foo/bar</code>, and not <code>/foo/bar</code>.
+            <filename>http://domain.com/foo/bar/</filename>, would involve a regex of
+            <filename>foo/bar</filename>, and not <filename>/foo/bar</filename>.
         </para>
     </note>
 
@@ -63,7 +63,7 @@ $values = array(
 
     <note>
         <para>
-            This route class uses the <code>#</code> character for a delimiter.
+            This route class uses the '<emphasis>#</emphasis>' character for a delimiter.
             This means that you will need to escape hash characters ('#') but
             not forward slashes ('/') in your route definitions. Since the '#'
             character (named anchor) is rarely passed to the webserver, you will
@@ -186,7 +186,7 @@ $route = new Zend_Controller_Router_Route_Regex(
 
     <para>
         Which will result in mixed values available in the Request. As an
-        example, the URL <code>http://domain.com/archive/2006/page/10</code>
+        example, the URL <filename>http://domain.com/archive/2006/page/10</filename>
         will result in following values:
     </para>
 
@@ -220,9 +220,9 @@ $route = new Zend_Controller_Router_Route_Regex(
         standard route object, so where's the benefit in using the Regex route,
         you ask?  Primarily, it allows you to describe any type of URL without
         any restrictions. Imagine you have a blog and wish to create URLs like:
-        <code>http://domain.com/blog/archive/01-Using_the_Regex_Router.html</code>,
+        <filename>http://domain.com/blog/archive/01-Using_the_Regex_Router.html</filename>,
         and have it decompose the last path element,
-        <code>01-Using_the_Regex_Router.html</code>, into an article ID and
+        <filename>01-Using_the_Regex_Router.html</filename>, into an article ID and
         article title/description; this is not possible with the standard route.
         With the Regex route, you can do something like the following solution:
     </para>

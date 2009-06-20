@@ -4,13 +4,13 @@
     <title>View Rendering</title>
 
     <para>
-        When using Zend Framework's MVC layer, chances are you will be using
+        When using Zend Framework's <acronym>MVC</acronym> layer, chances are you will be using
         <classname>Zend_View</classname>. <classname>Zend_View</classname> is performs well
         compared to other view or templating engines; since view scripts
-        are written in PHP, you do not incur the overhead of compiling custom
-        markup to PHP, nor do you need to worry that the compiled PHP is
-        not optimized. However, <classname>Zend_View</classname> presents its own issues:
-        extension is done via overloading (view helpers), and a number of view
+        are written in <acronym>PHP</acronym>, you do not incur the overhead of compiling custom
+        markup to <acronym>PHP</acronym>, nor do you need to worry that the compiled
+        <acronym>PHP</acronym> is not optimized. However, <classname>Zend_View</classname> presents
+        its own issues: extension is done via overloading (view helpers), and a number of view
         helpers, while carrying out key functionality do so with a performance
         cost.
     </para>
@@ -175,7 +175,7 @@ class My_View extends Zend_View
             <para>
                 Basically, unless you are actually passing variables to the
                 partial and need the clean variable scope, or rendering a view
-                script from another MVC module, there is no reason to incur the
+                script from another <acronym>MVC</acronym> module, there is no reason to incur the
                 overhead of <methodname>partial()</methodname>; instead, use
                 <classname>Zend_View</classname>'s built-in <methodname>render()</methodname>
                 method to render the view script.
@@ -188,8 +188,8 @@ class My_View extends Zend_View
 
         <para>
             Version 1.5.0 introduced the <methodname>action()</methodname> view helper,
-            which allows you to dispatch an MVC action and capture its rendered
-            content. This provides an important step towards the DRY principle,
+            which allows you to dispatch an <acronym>MVC</acronym> action and capture its rendered
+            content. This provides an important step towards the <acronym>DRY</acronym> principle,
             and promotes code reuse. However, as those who profile their
             applications will quickly realize, it, too, is an expensive
             operation. Internally, the <methodname>action()</methodname> view helper needs
@@ -268,7 +268,7 @@ class LoginPlugin extends Zend_Controller_Plugin_Abstract
                 does not need to clone objects and reset internal state.
                 Additionally, it ensures that all pre and post dispatch plugins are
                 invoked, which may be of particular concern if you are using
-                front controller plugins for handling ACLs to particular
+                front controller plugins for handling <acronym>ACL</acronym>'s to particular
                 actions.
             </para>
         </sect3>
@@ -356,7 +356,7 @@ class My_View_Helper_BugList extends Zend_View_Helper_Abstract
             <para>
                 This has two benefits: it no longer incurs the overhead of the
                 <methodname>action()</methodname> view helper, and also presents a more
-                semantically understandable API.
+                semantically understandable <acronym>API</acronym>.
             </para>
         </sect3>
     </sect2>

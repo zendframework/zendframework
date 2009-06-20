@@ -13,7 +13,7 @@ require_once 'Zend/Filter/Word/UnderscoreToCamelCase.php';
 /**
  * Test class for Zend_Filter_Word_UnderscoreToCamelCase.
  */
-class Zend_Filter_Word_UnderscoreToCamelCaseTest extends PHPUnit_Framework_TestCase 
+class Zend_Filter_Word_UnderscoreToCamelCaseTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -21,7 +21,7 @@ class Zend_Filter_Word_UnderscoreToCamelCaseTest extends PHPUnit_Framework_TestC
      * @access public
      * @static
      */
-    public static function main() 
+    public static function main()
     {
         require_once "PHPUnit/TextUI/TestRunner.php";
 
@@ -37,6 +37,44 @@ class Zend_Filter_Word_UnderscoreToCamelCaseTest extends PHPUnit_Framework_TestC
 
         $this->assertNotEquals($string, $filtered);
         $this->assertEquals('CamelCasedWords', $filtered);
+    }
+
+    /**
+     * ZF-4097
+     */
+    public function testSomeFilterValues()
+    {
+        $filter   = new Zend_Filter_Word_UnderscoreToCamelCase();
+
+        $string   = 'zend_framework';
+        $filtered = $filter->filter($string);
+        $this->assertNotEquals($string, $filtered);
+        $this->assertEquals('ZendFramework', $filtered);
+
+        $string   = 'zend_Framework';
+        $filtered = $filter->filter($string);
+        $this->assertNotEquals($string, $filtered);
+        $this->assertEquals('ZendFramework', $filtered);
+
+        $string   = 'zendFramework';
+        $filtered = $filter->filter($string);
+        $this->assertNotEquals($string, $filtered);
+        $this->assertEquals('ZendFramework', $filtered);
+
+        $string   = 'zendframework';
+        $filtered = $filter->filter($string);
+        $this->assertNotEquals($string, $filtered);
+        $this->assertEquals('Zendframework', $filtered);
+
+        $string   = '_zendframework';
+        $filtered = $filter->filter($string);
+        $this->assertNotEquals($string, $filtered);
+        $this->assertEquals('Zendframework', $filtered);
+
+        $string   = '_zend_framework';
+        $filtered = $filter->filter($string);
+        $this->assertNotEquals($string, $filtered);
+        $this->assertEquals('ZendFramework', $filtered);
     }
 }
 

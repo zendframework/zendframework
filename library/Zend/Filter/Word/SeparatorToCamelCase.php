@@ -42,7 +42,7 @@ class Zend_Filter_Word_SeparatorToCamelCase extends Zend_Filter_Word_Separator_A
             parent::setMatchPattern(array('#('.$pregQuotedSeparator.')(\p{L}{1})#e','#(^\p{Ll}{1})#e'));
             parent::setReplacement(array("strtoupper('\\2')","strtoupper('\\1')"));
         } else {
-            parent::setMatchPattern(array('#('.$pregQuotedSeparator.')([A-Z]{1})#e','#(^[a-z]{1})#e'));
+            parent::setMatchPattern(array('#('.$pregQuotedSeparator.')([A-Za-z]{1})#e','#(^[A-Za-z]{1})#e'));
             parent::setReplacement(array("strtoupper('\\2')","strtoupper('\\1')"));
         }
 

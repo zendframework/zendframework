@@ -70,7 +70,7 @@ $currency = new Zend_Currency();
                 the short name or full name of that currency. If that currency in not recognized in
                 any locale an exception will be thrown. Currency short names are always made up of 3
                 letters, written in uppercase. Well known currency shortnames include
-                <code>USD</code> or <code>EUR</code>.
+                <acronym>USD</acronym> or <acronym>EUR</acronym>.
             </para>
         </listitem>
         <listitem>
@@ -147,14 +147,15 @@ $currency = new Zend_Currency('en_US', 'EUR');
             If you have a localized number you will have to convert it first to an normalized number
             with <link
                 linkend="zend.locale.number.normalize">Zend_Locale_Format::getNumber()</link>. It
-            may then be used with <code>toCurrency()</code> to create a currency output string.
+            may then be used with <methodname>toCurrency()</methodname> to create a currency output
+            string.
         </para>
 
         <para>
-            <code>toCurrency(array $options)</code> accepts an array with options which can be used
-            to temporarily set another format or currency representation. For details about which
-            options can be used see <link linkend="zend.currency.usage.setformat">Changing the
-                Format of a Currency</link>.
+            <methodname>toCurrency(array $options)</methodname> accepts an array with options which
+            can be used to temporarily set another format or currency representation. For details
+            about which options can be used see <link
+                linkend="zend.currency.usage.setformat">Changing the Format of a Currency</link>.
         </para>
 
         <example id="zend.currency.usage.tocurrency.example">
@@ -237,8 +238,8 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
 
         <para>
             So if you need to change the format, you should the
-            <emphasis>setFormat()</emphasis> method. It takes an array which should include every
-            option you want to change. The <code>options</code> array supports the following
+            <methodname>setFormat()</methodname> method. It takes an array which should include every
+            option you want to change. The <varname>$options</varname> array supports the following
             settings:
         </para>
 
@@ -463,8 +464,9 @@ echo $currency->toCurrency(1000);
         </itemizedlist>
 
         <para>
-            The function <code>getSymbol()</code>, <code>getShortName()</code> and
-            <code>getName()</code> accept two optional parameters. If no parameter is given the
+            The function <methodname>getSymbol()</methodname>,
+            <methodname>getShortName()</methodname> and <methodname>getName()</methodname> accept
+            two optional parameters. If no parameter is given the
             expected data will be returned from the set currency. The first parameter takes the
             shortname of a currency. Short names are always three lettered, for example EUR for euro
             or USD for US Dollar. The second parameter defines from which locale the data should be
@@ -506,7 +508,7 @@ print_r($currency->getCurrencyList('de_AT');
         <title>Settings new default values</title>
 
         <para>
-            The method <code>setLocale</code> allows to set a new locale for
+            The method <methodname>setLocale()</methodname> allows to set a new locale for
             <classname>Zend_Currency</classname>. All default values for the currency will be
             overwritten when this method is invoked. This includes currency name, abbreviation and
             symbol.
@@ -536,11 +538,11 @@ print $currency->toCurrency(1000);
         <para>
             <classname>Zend_Currency</classname>'s performance can be optimized using
             <classname>Zend_Cache</classname>. The static method
-            <classname>Zend_Currency::setCache($cache)</classname> accepts one option: a
+            <methodname>Zend_Currency::setCache($cache)</methodname> accepts one option: a
             <classname>Zend_Cache</classname> adapter. If the cache adapter is set, the localization
             data that Zend_Currency uses are cached. There are some static methods for manipulating
-            the cache: <code>getCache()</code>, <code>hasCache()</code>, <code>clearCache()</code>
-            and <code>removeCache()</code>.
+            the cache: <methodname>getCache()</methodname>, <methodname>hasCache()</methodname>,
+            <methodname>clearCache()</methodname> and <methodname>removeCache()</methodname>.
         </para>
 
         <example id="zend.currency.usage.cache.example">

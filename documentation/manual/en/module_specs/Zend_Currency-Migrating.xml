@@ -19,7 +19,7 @@
             Creating an object of <classname>Zend_Currency</classname> has become simpler.
             You no longer have to give a script or set it to null. The optional
             script parameter is now an option which can be set through the
-            <code>setFormat()</code> method.
+            <methodname>setFormat()</methodname> method.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -27,9 +27,9 @@ $currency = new Zend_Currency($currency, $locale);
 ]]></programlisting>
 
         <para>
-            The <code>setFormat()</code> method takes now an array of options. These options are set
-            permanently and override all previously set values. Also a new option 'precision' has
-            been added. The following options have been refactored:
+            The <methodname>setFormat()</methodname> method takes now an array of options. These
+            options are set permanently and override all previously set values. Also a new option
+            'precision' has been added. The following options have been refactored:
 
             <itemizedlist mark='opencircle'>
                 <listitem>
@@ -91,9 +91,9 @@ $currency->setFormat(array $options);
 ]]></programlisting>
 
         <para>
-            The <code>toCurrency()</code> method no longer supports the optional
+            The <methodname>toCurrency()</methodname> method no longer supports the optional
             'script' and 'locale' parameters. Instead it takes an options array which
-            can contain the same keys as for the <code>setFormat</code> method.
+            can contain the same keys as for the <methodname>setFormat()</methodname> method.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -101,9 +101,10 @@ $currency->toCurrency($value, array $options);
 ]]></programlisting>
 
         <para>
-            The methods <code>getSymbol()</code>, <code>getShortName()</code>,
-            <code>getName()</code>, <code>getRegionList()</code> and
-            <code>getCurrencyList()</code> are no longer static and can be called
+            The methods <methodname>getSymbol()</methodname>,
+            <methodname>getShortName()</methodname>, <methodname>getName()</methodname>,
+            <methodname>getRegionList()</methodname> and
+            <methodname>getCurrencyList()</methodname> are no longer static and can be called
             from within the object. They return the set values of the object if no
             parameter has been set.
         </para>

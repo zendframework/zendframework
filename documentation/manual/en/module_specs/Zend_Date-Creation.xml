@@ -44,10 +44,10 @@ $date = new Zend_Date();
 
             <para>
                 Sometimes it is easier to use a static method for date creation. Therefor you can
-                use the <emphasis><code>now()</code></emphasis> method. It returns a new instance of
-                <classname>Zend_Date</classname> the same way as if you would use
-                <code>new Zend_Date()</code>. But it will always return the actual date and can not
-                be changed by giving optional parameters.
+                use the <emphasis><methodname>now()</methodname></emphasis> method. It returns a
+                new instance of <classname>Zend_Date</classname> the same way as if you would use
+                <command>new Zend_Date()</command>. But it will always return the actual date and
+                can not be changed by giving optional parameters.
             </para>
 
             <programlisting language="php"><![CDATA[

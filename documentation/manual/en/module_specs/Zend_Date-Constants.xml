@@ -1133,14 +1133,14 @@ print $date->toString("'Era:GGGG='GGGG, ' Date:yy.MMMM.dd'yy.MMMM.dd");
             <classname>Zend_Date::setOptions(array('format_type' => 'php'))</classname> method to
             switch Zend_Date methods from supporting ISO format specifiers to PHP date() type
             specifiers. Afterwards, all format parameters must be given with
-            <ulink url="http://php.net/date">PHP's <code>date()</code> format specifiers</ulink>.
-            The PHP date format lacks some of the formats supported by the ISO Format, and
-            vice-versa. If you are not already comfortable with it, then use the standard ISO format
-            instead. Also, if you have legacy code using PHP's date format, then either manually
-            convert it to the ISO format using <link
+            <ulink url="http://php.net/date">PHP's <methodname>date()</methodname> format
+                specifiers</ulink>. The PHP date format lacks some of the formats supported by the
+            ISO Format, and vice-versa. If you are not already comfortable with it, then use the
+            standard ISO format instead. Also, if you have legacy code using PHP's date format,
+            then either manually convert it to the ISO format using <link
                 linkend="zend.locale.date.normalize">Zend_Locale_Format::convertPhpToIsoFormat()</link>,
-            or use <code>setOptions()</code>. The following examples illustrate the usage of
-            constants from the table below to create self-defined formats.
+            or use <methodname>setOptions()</methodname>. The following examples illustrate the
+            usage of constants from the table below to create self-defined formats.
         </para>
 
         <example id="zend.date.constants.phpformats.example-1">

@@ -28,8 +28,8 @@
 
         <para>
             Without any arguments, constructing an instance returns an object in the default locale
-            with the current, local date using PHP's <code>time()</code> function to obtain the
-            <ulink url="http://en.wikipedia.org/wiki/Unix_Time">UNIX timestamp</ulink>
+            with the current, local date using PHP's <methodname>time()</methodname> function to
+            obtain the <ulink url="http://en.wikipedia.org/wiki/Unix_Time">UNIX timestamp</ulink>
             for the object. Make sure your PHP environment has the correct
             <link linkend="zend.date.setdefaulttimezone">default timezone</link>
             .
@@ -63,8 +63,8 @@ print $date;
 
             <para>
                 The date in a <classname>Zend_Date</classname> object may be obtained as a localized
-                integer or string using the <code>get()</code> method. There are many available
-                options, which will be explained in later sections.
+                integer or string using the <methodname>get()</methodname> method. There are many
+                available options, which will be explained in later sections.
             </para>
 
             <example id="zend.date.simple.functions.get.example-1">
@@ -84,9 +84,9 @@ print $date->get();
             <title>Setting a Date</title>
 
             <para>
-                The <code>set()</code> method alters the date stored in the object, and returns the
-                final date value as a timestamp (not an object). Again, there are many options which
-                will be explored in later sections.
+                The <methodname>set()</methodname> method alters the date stored in the object, and
+                returns the final date value as a timestamp (not an object). Again, there are many
+                options which will be explored in later sections.
             </para>
 
             <example id="zend.date.simple.functions.set.example-1">
@@ -107,10 +107,11 @@ print $date->get(Zend_Date::W3C);
             <title>Adding and Subtracting Dates</title>
 
             <para>
-                Adding two dates with <code>add()</code> usually involves adding a real date in time
-                with an artificial timestramp representing a date part, such as 12 hours, as shown
-                in the example below. Both <code>add()</code> and <code>sub()</code> use the same
-                set of options as <code>set()</code>, which will be explained later.
+                Adding two dates with <methodname>add()</methodname> usually involves adding a real
+                date in time with an artificial timestramp representing a date part, such as 12
+                hours, as shown in the example below. Both <methodname>add()</methodname> and
+                <methodname>sub()</methodname> use the same set of options as
+                <methodname>set()</methodname>, which will be explained later.
             </para>
 
             <example id="zend.date.simple.functions.add.example-1">
@@ -139,7 +140,7 @@ echo "Date via toString() = ", $date, "\n";
                 contained in the objects, or can operate on date parts, such as comparing the
                 minutes value in a date to an absolute value. For example, the current minutes in
                 the current time may be compared with a specific number of minutes using
-                <code>compare()</code>, as in the example below.
+                <methodname>compare()</methodname>, as in the example below.
             </para>
 
             <example id="zend.date.simple.functions.compare.example-1">
@@ -157,7 +158,8 @@ if ($date->compare(10, Zend_Date::MINUTE) == -1) {
             </example>
 
             <para>
-                For simple equality comparisons, use <code>equals()</code>, which returns a boolean.
+                For simple equality comparisons, use <methodname>equals()</methodname>, which
+                returns a boolean.
             </para>
 
             <example id="zend.date.simple.functions.compare.example-2">

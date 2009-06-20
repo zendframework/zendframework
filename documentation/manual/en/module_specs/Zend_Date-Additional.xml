@@ -19,19 +19,19 @@
             that you can not be sure if the string is a real date. Therefor
             <classname>Zend_Date</classname> has spent an own static function to check date strings.
             <classname>Zend_Locale</classname> has an own function
-            <code>getDate($date, $locale);</code> which parses a date and returns the proper and
-            normalized date parts. A monthname for example will be recognised and returned just a
-            month number. But as <classname>Zend_Locale</classname> does not know anything about
-            dates because it is a normalizing and localizing class we have integrated an own
-            function <code>isDate($date);</code> which checks this.
+            <methodname>getDate($date, $locale)</methodname> which parses a date and returns the
+            proper and normalized date parts. A monthname for example will be recognised and
+            returned just a month number. But as <classname>Zend_Locale</classname> does not know
+            anything about dates because it is a normalizing and localizing class we have
+            integrated an own function <methodname>isDate($date)</methodname> which checks this.
         </para>
 
         <para>
-            <code>isDate($date, $format, $locale);</code> can take up to 3 parameters and needs
-            minimum one parameter. So what we need to verify a date is, of course, the date itself
-            as string. The second parameter can be the format which the date is expected to have. If
-            no format is given the standard date format from your locale is used. For details about
-            how formats should look like see the chapter about <link
+            <methodname>isDate($date, $format, $locale)</methodname> can take up to 3 parameters
+            and needs minimum one parameter. So what we need to verify a date is, of course, the
+            date itself as string. The second parameter can be the format which the date is
+            expected to have. If no format is given the standard date format from your locale is
+            used. For details about how formats should look like see the chapter about <link
                 linkend="zend.date.constants.selfdefinedformats">self defined formats</link>.
         </para>
 
@@ -43,13 +43,13 @@
         </para>
 
         <para>
-            <code>isDate();</code> of course checks if a date does exist.
+            <methodname>isDate()</methodname> of course checks if a date does exist.
             <classname>Zend_Date</classname> itself does not check a date. So it is possible to
             create a date like '31.February.2000' with <classname>Zend_Date</classname> because
             <classname>Zend_Date</classname> will automatically correct the date and return the
-            proper date. In our case '03.March.2000'. <code>isDate()</code> on the other side does
-            this check and will return false on '31.February.2000' because it knows that this date
-            is impossible.
+            proper date. In our case '03.March.2000'. <methodname>isDate()</methodname> on the
+            other side does this check and will return false on '31.February.2000' because it knows
+            that this date is impossible.
         </para>
 
         <example id="zend.date.additional.checking.example-1">
@@ -118,9 +118,9 @@ print_r (Zend_Date_Cities::getCityList());
 
         <para>
             The location itself can be received with the
-            <classname>Zend_Date_Cities::City()</classname> function. It accepts the name of the
-            city as returned by the <classname>Zend_Date_Cities::getCityList()</classname> function
-            and optional as second parameter the horizon to set.
+            <methodname>Zend_Date_Cities::City()</methodname> function. It accepts the name of the
+            city as returned by the <methodname>Zend_Date_Cities::getCityList()</methodname>
+            function and optional as second parameter the horizon to set.
         </para>
 
         <para>
@@ -192,10 +192,10 @@ $mylocation = array('latitude' => 41.5, 'longitude' => 13.2446);
             As now all needed data can be set the next is to create a
             <classname>Zend_Date</classname> object with the day where sunset or sunrise should be
             calculated. For the calculation there are 3 functions available. It is possible to
-            calculate sunset with '<code>getSunset()</code>', sunrise with
-            '<code>getSunrise()</code>' and all available informations related to the sun with
-            '<code>getSunInfo()</code>'. After the calculation the <classname>Zend_Date</classname>
-            object will be returned with the calculated time.
+            calculate sunset with '<methodname>getSunset()</methodname>', sunrise with
+            '<methodname>getSunrise()</methodname>' and all available informations related to the
+            sun with '<methodname>getSunInfo()</methodname>'. After the calculation the
+            <classname>Zend_Date</classname> object will be returned with the calculated time.
         </para>
 
         <example id="zend.date.additional.sunrise-sunset.example-3">
@@ -230,7 +230,7 @@ foreach ($info as $sun) {
             on where in the world a user lives. So working with dates also means to set the proper
             timezone. This may sound complicated but it's easier as expected. As already mentioned
             in the first chapter of <classname>Zend_Date</classname> the default timezone has to be
-            set. Either by <code>php.ini</code> or by definition within the bootstrap file.
+            set. Either by <filename>php.ini</filename> or by definition within the bootstrap file.
         </para>
 
         <para>
@@ -242,15 +242,16 @@ foreach ($info as $sun) {
         </para>
 
         <para>
-            <code>getTimezone()</code> returns the actual set timezone of within the
+            <methodname>getTimezone()</methodname> returns the actual set timezone of within the
             <classname>Zend_Date</classname> object. Remember that <classname>Zend_Date</classname>
             is not coupled with PHP internals. So the returned timezone is not the timezone of the
-            PHP script but the timezone of the object. <code>setTimezone($zone)</code> is the second
-            function and makes it possible to set new timezone for <classname>Zend_Date</classname>.
-            A given timezone is always checked. If it does not exist an exception will be thrown.
-            Additionally the actual scripts or systems timezone can be set to the date object by
-            calling  <code>setTimezone()</code> without the zone parameter. This is also done
-            automatically when the date object is created.
+            PHP script but the timezone of the object. <methodname>setTimezone($zone)</methodname>
+            is the second function and makes it possible to set new timezone for
+            <classname>Zend_Date</classname>. A given timezone is always checked. If it does not
+            exist an exception will be thrown. Additionally the actual scripts or systems timezone
+            can be set to the date object by calling  <methodname>setTimezone()</methodname>
+            without the zone parameter. This is also done automatically when the date object is
+            created.
         </para>
 
         <example id="zend.date.additional.timezones.example-1">

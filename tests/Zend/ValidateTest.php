@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -16,11 +15,10 @@
  * @category   Zend
  * @package    Zend_Validate
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-
 
 /**
  * Test helper
@@ -37,12 +35,11 @@ require_once 'Zend/Validate.php';
  */
 require_once 'Zend/Validate/Abstract.php';
 
-
 /**
  * @category   Zend
  * @package    Zend_Validate
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_ValidateTest extends PHPUnit_Framework_TestCase
@@ -62,6 +59,16 @@ class Zend_ValidateTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->_validator = new Zend_Validate();
+    }
+
+    /**
+     * Resets the default namespaces
+     *
+     * @return void
+     */
+    public function tearDown()
+    {
+        Zend_Validate::setDefaultNamespaces(array());
     }
 
     /**
@@ -160,10 +167,10 @@ class Zend_ValidateTest extends PHPUnit_Framework_TestCase
 
     /**
      * Handle file not found errors
-     * 
+     *
      * @group  ZF-2724
-     * @param  int $errnum 
-     * @param  string $errstr 
+     * @param  int $errnum
+     * @param  string $errstr
      * @return void
      */
     public function handleNotFoundError($errnum, $errstr)
@@ -171,6 +178,38 @@ class Zend_ValidateTest extends PHPUnit_Framework_TestCase
         if (strstr($errstr, 'No such file')) {
             $this->error = true;
         }
+    }
+
+    /**
+     * Testing Namespaces
+     *
+     * @return void
+     */
+    public function testNamespaces()
+    {
+        $this->assertEquals(array(), Zend_Validate::getDefaultNamespaces());
+        $this->assertFalse(Zend_Validate::hasDefaultNamespaces());
+
+        Zend_Validate::setDefaultNamespaces('TestDir');
+        $this->assertEquals(array('TestDir'), Zend_Validate::getDefaultNamespaces());
+
+        Zend_Validate::setDefaultNamespaces('OtherTestDir');
+        $this->assertEquals(array('OtherTestDir'), Zend_Validate::getDefaultNamespaces());
+
+        $this->assertTrue(Zend_Validate::hasDefaultNamespaces());
+
+        Zend_Validate::setDefaultNamespaces(array());
+
+        $this->assertEquals(array(), Zend_Validate::getDefaultNamespaces());
+        $this->assertFalse(Zend_Validate::hasDefaultNamespaces());
+
+        Zend_Validate::addDefaultNamespaces(array('One', 'Two'));
+        $this->assertEquals(array('One', 'Two'), Zend_Validate::getDefaultNamespaces());
+
+        Zend_Validate::addDefaultNamespaces('Three');
+        $this->assertEquals(array('One', 'Two', 'Three'), Zend_Validate::getDefaultNamespaces());
+
+        Zend_Validate::setDefaultNamespaces(array());
     }
 }
 

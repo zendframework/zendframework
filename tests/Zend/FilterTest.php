@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -16,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Filter
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
@@ -37,7 +36,7 @@ require_once 'Zend/Filter.php';
  * @category   Zend
  * @package    Zend_Filter
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_FilterTest extends PHPUnit_Framework_TestCase
@@ -58,6 +57,16 @@ class Zend_FilterTest extends PHPUnit_Framework_TestCase
     {
         $this->error   = null;
         $this->_filter = new Zend_Filter();
+    }
+
+    /**
+     * Resets the default namespaces
+     *
+     * @return void
+     */
+    public function tearDown()
+    {
+        Zend_Filter::setDefaultNamespaces(array());
     }
 
     /**
@@ -137,10 +146,10 @@ class Zend_FilterTest extends PHPUnit_Framework_TestCase
 
     /**
      * Handle file not found errors
-     * 
+     *
      * @group  ZF-2724
-     * @param  int $errnum 
-     * @param  string $errstr 
+     * @param  int $errnum
+     * @param  string $errstr
      * @return void
      */
     public function handleNotFoundError($errnum, $errstr)
@@ -148,6 +157,38 @@ class Zend_FilterTest extends PHPUnit_Framework_TestCase
         if (strstr($errstr, 'No such file')) {
             $this->error = true;
         }
+    }
+
+    /**
+     * Testing Namespaces
+     *
+     * @return void
+     */
+    public function testNamespaces()
+    {
+        $this->assertEquals(array(), Zend_Filter::getDefaultNamespaces());
+        $this->assertFalse(Zend_Filter::hasDefaultNamespaces());
+
+        Zend_Filter::setDefaultNamespaces('TestDir');
+        $this->assertEquals(array('TestDir'), Zend_Filter::getDefaultNamespaces());
+
+        Zend_Filter::setDefaultNamespaces('OtherTestDir');
+        $this->assertEquals(array('OtherTestDir'), Zend_Filter::getDefaultNamespaces());
+
+        $this->assertTrue(Zend_Filter::hasDefaultNamespaces());
+
+        Zend_Filter::setDefaultNamespaces(array());
+
+        $this->assertEquals(array(), Zend_Filter::getDefaultNamespaces());
+        $this->assertFalse(Zend_Filter::hasDefaultNamespaces());
+
+        Zend_Filter::addDefaultNamespaces(array('One', 'Two'));
+        $this->assertEquals(array('One', 'Two'), Zend_Filter::getDefaultNamespaces());
+
+        Zend_Filter::addDefaultNamespaces('Three');
+        $this->assertEquals(array('One', 'Two', 'Three'), Zend_Filter::getDefaultNamespaces());
+
+        Zend_Filter::setDefaultNamespaces(array());
     }
 }
 

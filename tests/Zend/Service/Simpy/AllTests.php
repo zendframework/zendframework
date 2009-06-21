@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Service_Simpy
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id: AllTests.php 12004 2008-10-18 14:29:41Z mikaelkael $
  */
@@ -44,7 +44,7 @@ require_once 'Zend/Service/Simpy/OfflineTests.php';
  * @category   Zend
  * @package    Zend_Service_Simpy
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_Simpy_AllTests

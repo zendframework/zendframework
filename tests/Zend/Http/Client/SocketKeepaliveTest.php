@@ -30,7 +30,7 @@ require_once 'SocketTest.php';
  * @package    Zend_Http_Client
  * @subpackage UnitTests
  * @version    $Id$
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Http_Client_SocketKeepaliveTest extends Zend_Http_Client_SocketTest

@@ -698,7 +698,7 @@ class Zend_Gdata_YouTubeOnlineTest extends PHPUnit_Framework_TestCase
                                           $loginCaptcha = null,
                                           $authenticationURL);
 
-        $yt = new Zend_Gdata_YouTube($httpClient, $clientId, $developerKey);
+        $yt = new Zend_Gdata_YouTube($httpClient, null, $clientId, $developerKey);
 
         $yt->setMajorProtocolVersion(2);
         $queryStringToSubscribeTo = 'zend';

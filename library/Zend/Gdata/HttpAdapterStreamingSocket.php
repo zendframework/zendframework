@@ -95,13 +95,16 @@ class Zend_Gdata_HttpAdapterStreamingSocket extends Zend_Http_Client_Adapter_Soc
 
 
         //read from $body, write to socket
-        while ($body->hasData()) {
-            if (! @fwrite($this->socket, $body->read(self::CHUNK_SIZE))) {
+        $chunk = $body->read(self::CHUNK_SIZE);
+        while ($chunk !== FALSE) {
+            if (! @fwrite($this->socket, $chunk)) {
                 require_once 'Zend/Http/Client/Adapter/Exception.php';
                 throw new Zend_Http_Client_Adapter_Exception(
                     'Error writing request to server');
             }
+            $chunk = $body->read(self::CHUNK_SIZE);
         }
+        $body->closeFileHandle();
         return 'Large upload, request is not cached.';
     }
 }

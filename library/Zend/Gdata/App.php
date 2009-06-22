@@ -513,7 +513,7 @@ class Zend_Gdata_App
             }
             if ($method == 'PUT' || $method == 'DELETE') {
                 $editLink = $data->getEditLink();
-                if ($editLink != null) {
+                if ($editLink != null && $url == null) {
                     $url = $editLink->getHref();
                 }
             }

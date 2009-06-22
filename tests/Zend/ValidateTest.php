@@ -62,16 +62,6 @@ class Zend_ValidateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Resets the default namespaces
-     *
-     * @return void
-     */
-    public function tearDown()
-    {
-        Zend_Validate::setDefaultNamespaces(array());
-    }
-
-    /**
      * Ensures expected results from empty validator chain
      *
      * @return void
@@ -178,38 +168,6 @@ class Zend_ValidateTest extends PHPUnit_Framework_TestCase
         if (strstr($errstr, 'No such file')) {
             $this->error = true;
         }
-    }
-
-    /**
-     * Testing Namespaces
-     *
-     * @return void
-     */
-    public function testNamespaces()
-    {
-        $this->assertEquals(array(), Zend_Validate::getDefaultNamespaces());
-        $this->assertFalse(Zend_Validate::hasDefaultNamespaces());
-
-        Zend_Validate::setDefaultNamespaces('TestDir');
-        $this->assertEquals(array('TestDir'), Zend_Validate::getDefaultNamespaces());
-
-        Zend_Validate::setDefaultNamespaces('OtherTestDir');
-        $this->assertEquals(array('OtherTestDir'), Zend_Validate::getDefaultNamespaces());
-
-        $this->assertTrue(Zend_Validate::hasDefaultNamespaces());
-
-        Zend_Validate::setDefaultNamespaces(array());
-
-        $this->assertEquals(array(), Zend_Validate::getDefaultNamespaces());
-        $this->assertFalse(Zend_Validate::hasDefaultNamespaces());
-
-        Zend_Validate::addDefaultNamespaces(array('One', 'Two'));
-        $this->assertEquals(array('One', 'Two'), Zend_Validate::getDefaultNamespaces());
-
-        Zend_Validate::addDefaultNamespaces('Three');
-        $this->assertEquals(array('One', 'Two', 'Three'), Zend_Validate::getDefaultNamespaces());
-
-        Zend_Validate::setDefaultNamespaces(array());
     }
 }
 

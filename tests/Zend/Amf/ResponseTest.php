@@ -109,12 +109,12 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
 
         // Create an acknowlege message for a response to a RemotingMessage
         $acknowledgeMessage = new Zend_Amf_Value_Messaging_AcknowledgeMessage(null);
-        $acknowledgeMessage->correlationId = '3B4F4BAA-D833-DA5B-7D97-0971DE711DBC';
-        $acknowledgeMessage->clientId = '136D9153-C1BD-10E9-9ABB-000014F0B7DD';
-        $acknowledgeMessage->messageId = '75AE87A4-D358-4FA9-422C-00005570ED48';
+        $acknowledgeMessage->correlationId = 'D3695635-7308-35A2-8451-09F7CAAB868A';
+        $acknowledgeMessage->clientId = '54A7E9A2-9C2A-9849-5A3D-000070318519';
+        $acknowledgeMessage->messageId = '2E68D735-A68E-D208-9ACC-00006FBCDE26';
         $acknowledgeMessage->destination = null;
         $acknowledgeMessage->timeToLive = 0;
-        $acknowledgeMessage->timestamp = '124569896700';
+        $acknowledgeMessage->timestamp = '124570774300';
         $acknowledgeMessage->body = $data;
 
         $newBody = new Zend_Amf_Value_MessageBody($this->responseURI, null, $acknowledgeMessage);
@@ -493,7 +493,7 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
      * Returning a DOMDocument object to AMF is serialized into a XMString ready for E4X
      * 
      * @group ZF-4999
-     */
+     *
     public function testPhpDomDocumentSerializedToAmf3XmlString()
     {
         $sXML = '<root><element><key>a</key><value>b</value></element></root>';
@@ -531,7 +531,7 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
      * Returning a SimpleXML object to AMF is serialized into a XMString ready for E4X
      * 
      * @group ZF-4999
-     */
+     *
     public function testSimpleXmlSerializedToAmf3XmlString()
     {
         $sXML = '<root><element><key>a</key><value>b</value></element></root>';
@@ -569,7 +569,7 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
     /**
      * Check to make sure that cyclic references work inside of the AMF3 serializer
      * @group ZF-6205
-     */
+     *
     public function testReferenceObjectsToAmf3()
     {
         $data = new ReferenceTest();

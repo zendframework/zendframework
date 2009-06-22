@@ -493,7 +493,7 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
      * Returning a DOMDocument object to AMF is serialized into a XMString ready for E4X
      * 
      * @group ZF-4999
-     *
+     */
     public function testPhpDomDocumentSerializedToAmf3XmlString()
     {
         $sXML = '<root><element><key>a</key><value>b</value></element></root>';
@@ -522,7 +522,6 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
         // Load the expected response.
         $mockResponse = file_get_contents(dirname(__FILE__) .'/Response/mock/domdocumentAmf3Response.bin');
         
-        exit;
         // Check that the response matches the expected serialized value
         $this->assertEquals($mockResponse, $testResponse);
     }
@@ -531,7 +530,7 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
      * Returning a SimpleXML object to AMF is serialized into a XMString ready for E4X
      * 
      * @group ZF-4999
-     *
+     */
     public function testSimpleXmlSerializedToAmf3XmlString()
     {
         $sXML = '<root><element><key>a</key><value>b</value></element></root>';

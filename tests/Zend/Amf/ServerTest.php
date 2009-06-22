@@ -1053,6 +1053,11 @@ class Zend_Amf_ServerTest extends PHPUnit_Framework_TestCase
         $this->_server->handle($request);
         $response = $this->_server->getResponse()->getAMFBodies();
         $this->assertTrue($response[0]->getData() instanceof Zend_Amf_Value_Messaging_ErrorMessage);
+	// test the same while ensuring Zend_Json is loaded
+	require_once 'Zend/Json.php';
+	$this->_server->handle($request);
+	$response = $this->_server->getResponse()->getAMFBodies();
+	$this->assertTrue($response[0]->getData() instanceof Zend_Amf_Value_Messaging_ErrorMessage);
     }
     
 }

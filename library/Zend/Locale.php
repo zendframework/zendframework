@@ -963,6 +963,10 @@ class Zend_Locale
         }
 
         $parts = explode('_', $locale);
+        if (!isset(self::$_localeData[$parts[0]])) {
+            return '';
+        }
+
         foreach($parts as $key => $value) {
             if ((strlen($value) < 2) || (strlen($value) > 3)) {
                 unset($parts[$key]);

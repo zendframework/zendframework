@@ -152,7 +152,7 @@ class Zend_Amf_Parse_Amf3_Deserializer extends Zend_Amf_Parse_Deserializer
             // Check if the integer should be negative
             if (($result & 0x10000000) != 0) {
                 //and extend the sign bit
-                $result |= 0xe0000000;
+                $result |= ~0xFFFFFFF;
             }
         }
         return $result;

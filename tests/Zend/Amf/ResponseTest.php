@@ -568,7 +568,7 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
     /**
      * Check to make sure that cyclic references work inside of the AMF3 serializer
      * @group ZF-6205
-     *
+     */
     public function testReferenceObjectsToAmf3()
     {
         $data = new ReferenceTest();

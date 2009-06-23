@@ -23,7 +23,7 @@
 /**
  * Zend_Gdata_Feed
  */
-require_once 'Zend/Gdata/Feed.php';
+require_once 'Zend/Gdata/App/Feed.php';
 
 /**
  * Zend_Gdata_Http_Client
@@ -827,7 +827,7 @@ class Zend_Gdata_App
      * @param  string $className The class which is used as the return type
      * @param  string $useIncludePath Whether the include_path should be searched
      * @throws Zend_Gdata_App_Exception
-     * @return Zend_Gdata_Feed
+     * @return Zend_Gdata_App_Feed
      */
     public static function importFile($filename,
             $className='Zend_Gdata_App_Feed', $useIncludePath = false)

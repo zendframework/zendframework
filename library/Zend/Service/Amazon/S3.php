@@ -453,6 +453,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
         $client = self::getHttpClient();
 
         $client->resetParameters();
+        $client->setAuth(false);
         // Work around buglet in HTTP client - it doesn't clean headers
         // Remove when ZHC is fixed
         $client->setHeaders(array('Content-MD5' => null,

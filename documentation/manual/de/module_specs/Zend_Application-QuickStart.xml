@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15814 -->
+<!-- EN-Revision: 16270 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.application.quick-start">
     <title>Zend_Application Quick Start</title>
@@ -259,7 +259,7 @@ $application->bootstrap()
             Variable "APPLICATION_ENV" sucht. Wir empfehlen diese im Web Server Environment zu
             setzen. In Apache kann man diese entweder in der vhost Definition setzen, oder in der
             <filename>.htaccess</filename> Datei. Wir empfehlen den folgenden Inhalt in der Datei
-            <filename>public/.htacces</filename>:
+            <filename>public/.htaccess</filename>:
         </para>
 
         <programlisting language="conf"><![CDATA[

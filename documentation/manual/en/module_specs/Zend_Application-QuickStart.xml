@@ -261,7 +261,7 @@ $application->bootstrap()
             this in your web server environment. In Apache, you can set this
             either in your vhost definition, or in your <filename>.htaccess</filename>
             file. We recommend the following contents for your
-            <filename>public/.htacces</filename> file:
+            <filename>public/.htaccess</filename> file:
         </para>
 
         <programlisting language="conf"><![CDATA[

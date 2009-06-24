@@ -40,7 +40,7 @@ abstract class Zend_Service_Amazon_Ec2_Abstract extends Zend_Service_Amazon_Abst
     /**
      * The HTTP query server
      */
-    protected $_ec2Endpoint = 'ec2.amazoneaws.com';
+    protected $_ec2Endpoint = 'ec2.amazonaws.com';
 
     /**
      * The API version to use

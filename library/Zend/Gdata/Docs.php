@@ -221,8 +221,7 @@ class Zend_Gdata_Docs extends Zend_Gdata
 
         // Set the mime type of the data.
         if ($mimeType === null) {
-          $slugHeader =  $fs->getSlug();
-          $filenameParts = explode('.', $slugHeader);
+          $filenameParts = explode('.', $fileLocation);
           $fileExtension = end($filenameParts);
           $mimeType = self::lookupMimeType($fileExtension);
         }

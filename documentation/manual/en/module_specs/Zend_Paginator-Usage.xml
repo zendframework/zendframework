@@ -26,19 +26,21 @@
                 <tbody>
                     <row>
                         <entry>Array</entry>
-                        <entry>Use a PHP array</entry>
+                        <entry>Use a <acronym>PHP</acronym> array</entry>
                     </row>
                     <row>
                         <entry>DbSelect</entry>
                         <entry>
-                            Use a <link linkend="zend.db.select"><classname>Zend_Db_Select</classname></link>
+                            Use a <link
+                                linkend="zend.db.select"><classname>Zend_Db_Select</classname></link>
                             instance, which will return an array
                         </entry>
                     </row>
                     <row>
                         <entry>DbTableSelect</entry>
                         <entry>
-                            Use a <link linkend="zend.db.table.fetch-all"><classname>Zend_Db_Table_Select</classname></link>
+                            Use a <link
+                                linkend="zend.db.table.fetch-all"><classname>Zend_Db_Table_Select</classname></link>
                             instance, which will return an instance of
                             <classname>Zend_Db_Table_Rowset_Abstract</classname>.
                             This provides additional information about the
@@ -48,7 +50,8 @@
                     <row>
                         <entry>Iterator</entry>
                         <entry>
-                            Use an <ulink url="http://www.php.net/~helly/php/ext/spl/interfaceIterator.html"><code>Iterator</code></ulink>
+                            Use an <ulink
+                                url="http://www.php.net/~helly/php/ext/spl/interfaceIterator.html"><classname>Iterator</classname></ulink>
                             instance
                         </entry>
                     </row>
@@ -75,7 +78,7 @@
                 Because of this, a second query is dynamically generated to
                 determine the total number of matching rows. However, it is
                 possible to directly supply a count or count query yourself.
-                See the <code>setRowCount()</code> method in the DbSelect
+                See the <methodname>setRowCount()</methodname> method in the DbSelect
                 adapter for more information.
             </para>
         </note>
@@ -85,23 +88,19 @@
             supply an adapter to the constructor:
         </para>
 
-        <para>
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $paginator = new Zend_Paginator(new Zend_Paginator_Adapter_Array($array));
 ]]></programlisting>
-        </para>
 
         <para>
             For convenience, you may take advantage of the static
-            <code>factory()</code> method for the adapters packaged with Zend
+            <methodname>factory()</methodname> method for the adapters packaged with Zend
             Framework:
         </para>
 
-        <para>
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $paginator = Zend_Paginator::factory($array);
 ]]></programlisting>
-        </para>
 
         <note>
             <para>
@@ -117,26 +116,23 @@ $paginator = Zend_Paginator::factory($array);
             paginated data.
         </para>
 
-        <para>
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $paginator->setCurrentPageNumber($page);
 ]]></programlisting>
-        </para>
 
         <para>
-            The simplest way to keep track of this value is through a URL.
+            The simplest way to keep track of this value is through a <acronym>URL</acronym>.
             Although we recommend using a
             <classname>Zend_Controller_Router_Interface</classname>-compatible
             router to handle this, it is not a requirement.
         </para>
 
         <para>
-            The following is an example route you might use in an INI
+            The following is an example route you might use in an <acronym>INI</acronym>
             configuration file:
         </para>
 
-        <para>
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 routes.example.route = articles/:articleName/:page
 routes.example.defaults.controller = articles
 routes.example.defaults.action = view
@@ -144,18 +140,15 @@ routes.example.defaults.page = 1
 routes.example.reqs.articleName = \w+
 routes.example.reqs.page = \d+
 ]]></programlisting>
-        </para>
 
         <para>
-            With the above route (and using Zend Framework MVC components),
+            With the above route (and using Zend Framework <acronym>MVC</acronym> components),
             you might set the current page number like this:
         </para>
 
-        <para>
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $paginator->setCurrentPageNumber($this->_getParam('page'));
 ]]></programlisting>
-        </para>
 
         <para>
             There are other options available; see
@@ -169,11 +162,9 @@ $paginator->setCurrentPageNumber($this->_getParam('page'));
             helper, the following will work:
         </para>
 
-        <para>
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $this->view->paginator = $paginator;
 ]]></programlisting>
-        </para>
     </sect2>
     
     <sect2 id="zend.paginator.usage.dbselect">
@@ -181,19 +172,19 @@ $this->view->paginator = $paginator;
         <para>
             The usage of most adapters is pretty straight-forward. However, the
             database adapters require a more detailed explanation. Contrary to popular
-            believe, these adapters do NOT fetch all records from the database in order to count them.
-            Instead, the adapters manipulates the original query to produce the corresponding
-            COUNT query. Paginator then executes that COUNT query to get the number of rows.
-            This does require an extra round-trip to the database, but this is many times
-            faster than fetching an entire result set and using count(). Especially with
-            large collections of data.
+            believe, these adapters do <emphasis>not</emphasis> fetch all records from the database
+            in order to count them. Instead, the adapters manipulates the original query to produce
+            the corresponding COUNT query. Paginator then executes that COUNT query to get the
+            number of rows. This does require an extra round-trip to the database, but this is many
+            times faster than fetching an entire result set and using
+            <methodname>count()</methodname>. Especially with large collections of data.
         </para>
         
         <para>
             The database adapters will try and build the most efficient query that will execute
             on pretty much all modern databases. However, depending on your database or even your
-            own schema setup, there might be more efficient ways to get a rowcount. For this scenario
-            the database adapters allow you to set a custom COUNT query. For example,
+            own schema setup, there might be more efficient ways to get a rowcount. For this
+            scenario the database adapters allow you to set a custom COUNT query. For example,
             if you keep track of the count of blog posts in a separate table, you could achieve a
             faster count query with the following setup:  
         </para>
@@ -201,8 +192,14 @@ $this->view->paginator = $paginator;
         <programlisting language="php"><![CDATA[
 $adapter = new Zend_Paginator_Adapter_DbSelect($db->select()->from('posts'));
 $adapter->setRowCount(
-    $db->select()->from('item_counts', array(Zend_Paginator_Adapter_DbSelect::ROW_COUNT_COLUMN => 'post_count')) 
-)
+    $db->select()
+       ->from(
+            'item_counts',
+            array(
+               Zend_Paginator_Adapter_DbSelect::ROW_COUNT_COLUMN => 'post_count'
+            )
+         )
+);
 
 $paginator = new Zend_Paginator($adapter);
 ]]></programlisting>
@@ -225,13 +222,13 @@ $paginator = new Zend_Paginator($adapter);
         </para>
 
         <para>
-            Because <classname>Zend_Paginator</classname> implements the SPL interface
-            <ulink url="http://www.php.net/~helly/php/ext/spl/interfaceIteratorAggregate.html"><code>IteratorAggregate</code></ulink>,
+            Because <classname>Zend_Paginator</classname> implements the <acronym>SPL</acronym>
+            interface <ulink
+                url="http://www.php.net/~helly/php/ext/spl/interfaceIteratorAggregate.html"><classname>IteratorAggregate</classname></ulink>,
             looping over your items and displaying them is simple.
         </para>
 
-        <para>
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <html>
 <body>
 <h1>Example</h1>
@@ -244,12 +241,11 @@ $paginator = new Zend_Paginator($adapter);
 <?php endif; ?>
 
 <?php echo $this->paginationControl($this->paginator,
-                             'Sliding',
-                             'my_pagination_control.phtml'); ?>
+                                    'Sliding',
+                                    'my_pagination_control.phtml'); ?>
 </body>
 </html>
 ]]></programlisting>
-        </para>
 
         <para>
             Notice the view helper call near the end. PaginationControl
@@ -336,8 +332,8 @@ $paginator = new Zend_Paginator($adapter);
         <para>
             The fourth and final parameter is reserved for an optional
             associative array of additional variables that you want available
-            in your view partial (available via <code>$this</code>). For
-            instance, these values could include extra URL parameters for
+            in your view partial (available via <varname>$this</varname>). For
+            instance, these values could include extra <acronym>URL</acronym> parameters for
             pagination links.
         </para>
 
@@ -347,26 +343,22 @@ $paginator = new Zend_Paginator($adapter);
             PaginationControl completely:
         </para>
 
-        <para>
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 Zend_Paginator::setDefaultScrollingStyle('Sliding');
 Zend_View_Helper_PaginationControl::setDefaultViewPartial(
     'my_pagination_control.phtml'
 );
 $paginator->setView($view);
 ]]></programlisting>
-        </para>
 
         <para>
             When all of these values are set, you can render the pagination
             control inside your view script with a simple echo statement:
         </para>
 
-        <para>
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php echo $this->paginator; ?>
 ]]></programlisting>
-        </para>
 
         <note>
             <para>
@@ -375,21 +367,17 @@ $paginator->setView($view);
                 might do the following:
             </para>
 
-            <para>
-                <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $smarty->assign('pages', $paginator->getPages());
 ]]></programlisting>
-            </para>
 
             <para>
                 You could then access paginator values from a template like so:
             </para>
 
-            <para>
-                <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 {$pages.pageCount}
 ]]></programlisting>
-            </para>
         </note>
 
         <sect3 id="zend.paginator.usage.rendering.example-controls">
@@ -401,9 +389,10 @@ $smarty->assign('pages', $paginator->getPages());
             </para>
 
             <para>
-                Search pagination
+                Search pagination:
+            </para>
 
-                <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <!--
 See http://developer.yahoo.com/ypatterns/pattern.php?pattern=searchpagination
 -->
@@ -441,12 +430,12 @@ See http://developer.yahoo.com/ypatterns/pattern.php?pattern=searchpagination
 </div>
 <?php endif; ?>
 ]]></programlisting>
-            </para>
 
             <para>
-                Item pagination
+                Item pagination:
+            </para>
 
-                <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <!--
 See http://developer.yahoo.com/ypatterns/pattern.php?pattern=itempagination
 -->
@@ -495,12 +484,12 @@ of <?php echo $this->totalItemCount; ?>
 </div>
 <?php endif; ?>
 ]]></programlisting>
-            </para>
 
             <para>
-                Dropdown pagination
+                Dropdown pagination:
+            </para>
 
-                <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <?php if ($this->pageCount): ?>
 <select id="paginationControl" size="1">
 <?php foreach ($this->pagesInRange as $page): ?>
@@ -522,7 +511,6 @@ $('paginationControl').observe('change', function() {
 })
 </script>
 ]]></programlisting>
-            </para>
         </sect3>
 
         <sect3 id="zend.paginator.usage.rendering.properties">

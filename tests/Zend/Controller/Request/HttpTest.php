@@ -7,7 +7,7 @@ require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 require_once 'Zend/Controller/Request/Http.php';
 
-class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase 
+class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @var Zend_Controller_Request_Http
@@ -16,7 +16,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
 
     /**
      * Original $_SERVER
-     * @var array 
+     * @var array
      */
     protected $_origServer;
 
@@ -53,7 +53,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
 
         $this->_request->setControllerKey('foo');
         $this->assertEquals('foo', $this->_request->getControllerKey());
-    } 
+    }
 
     public function testSetGetActionKey()
     {
@@ -62,7 +62,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
 
         $this->_request->setActionKey('foo');
         $this->assertEquals('foo', $this->_request->getActionKey());
-    } 
+    }
 
     public function testSetGetControllerName()
     {
@@ -72,7 +72,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
         $this->_request->setControllerName('bar');
         $this->assertEquals('bar', $this->_request->getControllerName());
     }
- 
+
     public function testSetGetActionName()
     {
         $this->_request->setActionName('foo');
@@ -160,13 +160,13 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
             // success
         }
     }
- 
+
     public function testSetGetParam()
     {
         $this->_request->setParam('foo', 'bar');
         $this->assertEquals('bar', $this->_request->getParam('foo'));
     }
- 
+
     public function testSetGetParams()
     {
         $params = array(
@@ -236,7 +236,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
         $_SERVER['REQUEST_METHOD'] = 'GET';
         $this->assertEquals('GET', $this->_request->getMethod());
     }
- 
+
     public function testIsPost()
     {
         $_SERVER['REQUEST_METHOD'] = 'POST';
@@ -295,7 +295,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
         $expected = array('var1' => 'val1', 'var2' => 'val2');
         $this->assertEquals( $expected, $this->_request->getQuery());
     }
- 
+
 
     public function testGetPost()
     {
@@ -309,12 +309,12 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $this->_request->getPost());
 
     }
- 
+
     public function testGetPathInfo()
     {
         $this->assertEquals('/news/3', $this->_request->getPathInfo(), 'Base URL: ' . var_export($this->_request->getBaseUrl(), 1));
     }
- 
+
     public function testSetPathInfo()
     {
         $this->_request->setPathInfo('/archives/past/4');
@@ -335,25 +335,25 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals('/ctrl-name/act-name', $request->getPathInfo(), "Expected $pathInfo;");
     }
- 
+
     public function testGetSetAlias()
     {
         $this->_request->setAlias('controller', 'var1');
         $this->assertEquals('var1', $this->_request->getAlias('controller'));
     }
- 
+
     public function testGetAliases()
     {
         $this->_request->setAlias('controller', 'var1');
         $this->_request->setAlias('action', 'var2');
         $this->assertSame(array('controller' => 'var1', 'action' => 'var2'), $this->_request->getAliases());
     }
- 
+
     public function testGetRequestUri()
     {
         $this->assertEquals('/news/3?var1=val1&var2=val2', $this->_request->getRequestUri());
     }
- 
+
     public function testSetRequestUri()
     {
         $this->_request->setRequestUri('/archives/past/4?set=this&unset=that');
@@ -366,7 +366,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame('', $this->_request->getBaseUrl());
     }
- 
+
     /*
      * Tests if an empty string gets returned when no basepath is set on the request.
      * This is important on windows, where before this fix '\' was returned instead of an empty string.
@@ -428,7 +428,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals('/index.php', $request->getBaseUrl());
     }
- 
+
     public function testSetBaseUrlAutoDiscoveryUsingXRewriteUrl()
     {
         unset($_SERVER['REQUEST_URI']);
@@ -465,7 +465,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
         $this->_request->setBasePath('/news');
         $this->assertEquals('/news', $this->_request->getBasePath());
     }
- 
+
     public function testBasePathAutoDiscovery()
     {
         $_SERVER['REQUEST_URI']     = '/html/index.php/news/3?var1=val1&var2=val2';
@@ -497,7 +497,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('foo', $this->_request->getCookie('BAR', 'foo'));
         $this->assertEquals($_COOKIE, $this->_request->getCookie());
     }
- 
+
     public function testGetServer()
     {
         if (isset($_SERVER['REQUEST_METHOD'])) {
@@ -506,7 +506,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('foo', $this->_request->getServer('BAR', 'foo'));
         $this->assertEquals($_SERVER, $this->_request->getServer());
     }
- 
+
     public function testGetEnv()
     {
         if (isset($_ENV['PATH'])) {
@@ -569,7 +569,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
     {
         $this->_request->setParam('controller', 'value');
         $this->_request->setAlias('var1', 'controller');
-        
+
         $this->assertEquals('value', $this->_request->getParam('controller'));
         $this->assertEquals('value', $this->_request->getParam('var1'));
     }
@@ -679,6 +679,43 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
         $request = new Zend_Controller_Request_Http();
         $test = $request->getRequestUri();
         $this->assertEquals('/foo/bar?r=https://foo.example.com:8888/bar/baz', $test);
+    }
+
+    /**
+     * @group ZF-7092
+     */
+    public function testGetClientIp()
+    {
+        $request = new Zend_Controller_Request_Http();
+
+        $_SERVER['HTTP_CLIENT_IP'] = '192.168.1.10';
+        $_SERVER['HTTP_X_FORWARDED_FOR'] = '192.168.1.11';
+        $_SERVER['REMOTE_ADDR'] = '192.168.1.12';
+
+        $this->assertEquals('192.168.1.10', $request->getClientIp());
+
+        $_SERVER['HTTP_CLIENT_IP'] = '';
+        $_SERVER['HTTP_X_FORWARDED_FOR'] = '192.168.1.11';
+        $_SERVER['REMOTE_ADDR'] = '192.168.1.12';
+
+        $this->assertEquals('192.168.1.11', $request->getClientIp());
+
+        $_SERVER['HTTP_CLIENT_IP'] = '';
+        $_SERVER['HTTP_X_FORWARDED_FOR'] = '';
+        $_SERVER['REMOTE_ADDR'] = '192.168.1.12';
+
+        $this->assertEquals('192.168.1.12', $request->getClientIp());
+//    public function getClientIp()
+//{
+//   if (!empty($this->getServer('HTTP_CLIENT_IP'))) {
+//       $ip = $this->getServer('HTTP_CLIENT_IP');
+//   } else if (!empty($this->getServer('HTTP_X_FORWARDED_FOR'))) {
+//       $ip = $this->getServer('HTTP_X_FORWARDED_FOR');
+//   } else {
+//       $ip = $this->getServer('REMOTE_ADDR');
+//   }
+//   return $ip;
+//}
     }
 }
 

@@ -994,4 +994,21 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
             return $name . ':' . $port;
         }
     }
+
+    /**
+     * Get the client's IP addres
+     *
+     * @return string
+     */
+    public function getClientIp()
+    {
+        if ($this->getServer('HTTP_CLIENT_IP') != null) {
+            $ip = $this->getServer('HTTP_CLIENT_IP');
+        } else if ($this->getServer('HTTP_X_FORWARDED_FOR') != null) {
+            $ip = $this->getServer('HTTP_X_FORWARDED_FOR');
+        } else {
+            $ip = $this->getServer('REMOTE_ADDR');
+        }
+        return $ip;
+    }
 }

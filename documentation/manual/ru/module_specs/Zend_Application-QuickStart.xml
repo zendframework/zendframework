@@ -278,7 +278,7 @@ $application->bootstrap()
             виртуального хоста, либо в своем файле
             <filename>.htaccess</filename>. Мы рекомендуем использовать
             следующее содержимое для вашего 
-            файла <filename>public/.htacces</filename>:
+            файла <filename>public/.htaccess</filename>:
         </para>
 
         <programlisting language="conf"><![CDATA[

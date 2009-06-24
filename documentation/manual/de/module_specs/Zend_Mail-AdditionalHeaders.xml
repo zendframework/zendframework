@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16051 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.additional-headers">
     <title>Zusätzliche Kopfzeilen</title>
@@ -18,6 +18,13 @@ $mail->addHeader('X-greetingsTo', 'Mom', true); // mehrer Werte
 $mail->addHeader('X-greetingsTo', 'Dad', true);
 ]]></programlisting>
     </example>
+
+    <para>
+        Um den Reply-To: Header zu setzen gibt es die Funktion
+        <code>setReplyTo($email, $name=null)</code> weil zusätzliches spezielles Escaping der
+        unterschiedlichen Teile (Email und Name) notwendig ist.
+    </para>
+
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

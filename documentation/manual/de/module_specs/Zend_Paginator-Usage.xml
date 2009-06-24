@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16153 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.paginator.usage">
     <title>Verwendung</title>
@@ -172,6 +172,46 @@ $paginator->setCurrentPageNumber($this->_getParam('page'));
             <programlisting language="php"><![CDATA[
 $this->view->paginator = $paginator;
 ]]></programlisting>
+        </para>
+    </sect2>
+
+    <sect2 id="zend.paginator.usage.dbselect">
+        <title>Die Adapter DbSelect und DbTableSelect</title>
+        <para>
+            Die Verwendung der meisten Adapter ist recht zielgerichtet. Trotzdem benötigen die
+            Datenbank Adapter detailiertere Erklärungen. Im Gegensatz zur üblichen Meinung holen
+            diese Adapter NICHT alle Einträge von der Datenbank um sie zu zählen. Stattdessen
+            manipuliert der Adapter die originale Abfrage um die entsprechende COUNT Abfrage zu
+            erzeugen. Paginator führt dann diese COUNT Abfrage aus um die Anzahl der Zeilen zu
+            erhalten. Das erfordert eine zusätzliche Beanspruchung der Datenbank, ist aber um ein
+            vielfaches schneller als das komplette Ergebnisset zu holen und count() zu verwenden.
+            Speziell bei einer großen Anzahl an Daten.
+        </para>
+
+        <para>
+            Der Datenbank Adapter versucht die effizienteste Abfrage zu erstellen die auf ziemlich
+            allen modernen Datenbanken ausgefürt wird. Trotzdem ist es möglich das, abhängig von
+            der eigenen Datenbank oder sogar dem Setup des eigenen Schemas, ein effizienterer Weg
+            existiert um die Anzahl der Zeilen zu erhalten. Für dieses Szenario erlaubt es der
+            Datenbank Adapter eine eigene COUNT Abfrage zu setzen. Wenn man zum Beispiel die
+            Anzahl der Blog Posts in einer eigenen Tabelle speichert, kann eine schnellere Abfrage
+            der Anzahl mit dem folgenden Setup erreicht werden:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$adapter = new Zend_Paginator_Adapter_DbSelect($db->select()->from('posts'));
+$adapter->setRowCount(
+    $db->select()->from('item_counts', array(Zend_Paginator_Adapter_DbSelect::ROW_COUNT_COLUMN => 'post_count'))
+)
+
+$paginator = new Zend_Paginator($adapter);
+]]></programlisting>
+
+        <para>
+            Dieser Ansatz wird jetzt wahrscheinlich keine große Performance Verbesserung bei
+            kleinen Datemengen und oder einfachen Abfragen ergeben. Aber bei komplexen Abfragen
+            und großen Datenmengen kann ein ähnlicher Weg eine signifikante Performance
+            Verbesserung ergeben.
         </para>
     </sect2>
 

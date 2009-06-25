@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15343 -->
+<!-- EN-Revision: 16281 -->
 <sect1 id="zend.tool.framework.introduction">
     <title>導入</title>
 
     <para>
-        <classname>Zend_Tool_Framework</classname> is a framework for exposing common
-        functionalities such as the creation of project scaffolds, code
-        generation, search index generation, and much more. Functionality may be
-        written and exposed via PHP classes dropped into the PHP
-        <code>include_path</code>, providing incredible flexibility of
-        implementation. The functionality may then be consumed by writing
-        implementation and/or protocol-specific clients -- such as console
-        clients, XML-RPC, SOAP, and much more.
+        <classname>Zend_Tool_Framework</classname>は、
+        プロジェクトの足場の作成やコードの生成、検索インデックス生成その他のような
+        共通機能を公開するためのフレームワークです。
+        信じられないほどの柔軟性のある実装を提供するように、
+        PHP <code>include_path</code>に置かれたPHPクラスによって機能が書かれたり、
+        公開されるかもしれません。
+        それから、コンソールクライアントやXML-RPC、SOAPその他のような特定のクライアントの実装もしくは
+        プロトコルを書くことにより機能が消費されるかもしれません。
     </para>
 
     <para>
@@ -29,39 +29,37 @@
 
         <listitem>
             <para>
-                <emphasis>Base client functionality</emphasis> and a concrete
-                console implementation that connect external tools and
-                interfaces to the <classname>Zend_Tool_Framework</classname>. The Console
-                client may be used in CLI environments such as unix shells and
-                the Windows console.
+                外部ツールとインターフェースをZend_Tool_Frameworkに接続するための
+                <emphasis>基本的なクライアント機能</emphasis>及び具体的なコンソールの実装です。
+                コンソールクライアントはCLI環境（例えばunixシェルやWindowsコンソール）
+                で使われるかもしれません。
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <emphasis>"Provider" and "Manifest" interfaces</emphasis> that
-                can be utilized by the tooling system. "Providers" represent the
-                functional aspect of the framework, and define the actions that
-                tooling clients may call. "Manifests" act as metadata registries
-                that provide additional context for the various defined
-                providers.
+                ツーリングシステムによって利用できる
+                <emphasis>「プロバイダー」及び「マニフェスト」インターフェース</emphasis>です。
+                「プロバイダー」はフレームワークの機能的な面を意味します。
+                そして、ツーリングクライアントが呼び出すかもしれないアクションを定義します。
+                「マニフェスト」は、定義された様々なプロバイダーのために追加コンテキストを提示する
+                メタデータのレジストリとして働きます。
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <emphasis>An introspective loading system</emphasis> that will
-                scan the environment for providers and determine what is
-                required to dispatch them.
+                プロバイダーで環境をスキャンし、それらをディスパッチするために何が必要か決定する
+                <emphasis>内部参照ロードシステム</emphasis>です。
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <emphasis>A standard set of system providers"</emphasis> that
-                allow the system to report what the full capabilities of the
-                system are as well as provide useful feedback. This also
-                includes a comprehensive "Help System".
+                役に立つフィードバックを提示するだけでなく、
+                システムの最大限の能力が何かをシステムが報告できるようにする
+                <emphasis>システムプロバイダーの標準的なセット</emphasis>です。
+                これも、包括的な「ヘルプシステム」を含みます。
             </para>
         </listitem>
     </itemizedlist>

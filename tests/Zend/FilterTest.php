@@ -60,6 +60,16 @@ class Zend_FilterTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Resets the default namespaces
+     *
+     * @return void
+     */
+    public function tearDown()
+    {
+        Zend_Filter::setDefaultNamespaces(array());
+    }
+
+    /**
      * Ensures expected return value from empty filter chain
      *
      * @return void
@@ -147,6 +157,38 @@ class Zend_FilterTest extends PHPUnit_Framework_TestCase
         if (strstr($errstr, 'No such file')) {
             $this->error = true;
         }
+    }
+
+    /**
+     * Testing Namespaces
+     *
+     * @return void
+     */
+    public function testNamespaces()
+    {
+        $this->assertEquals(array(), Zend_Filter::getDefaultNamespaces());
+        $this->assertFalse(Zend_Filter::hasDefaultNamespaces());
+
+        Zend_Filter::setDefaultNamespaces('TestDir');
+        $this->assertEquals(array('TestDir'), Zend_Filter::getDefaultNamespaces());
+
+        Zend_Filter::setDefaultNamespaces('OtherTestDir');
+        $this->assertEquals(array('OtherTestDir'), Zend_Filter::getDefaultNamespaces());
+
+        $this->assertTrue(Zend_Filter::hasDefaultNamespaces());
+
+        Zend_Filter::setDefaultNamespaces(array());
+
+        $this->assertEquals(array(), Zend_Filter::getDefaultNamespaces());
+        $this->assertFalse(Zend_Filter::hasDefaultNamespaces());
+
+        Zend_Filter::addDefaultNamespaces(array('One', 'Two'));
+        $this->assertEquals(array('One', 'Two'), Zend_Filter::getDefaultNamespaces());
+
+        Zend_Filter::addDefaultNamespaces('Three');
+        $this->assertEquals(array('One', 'Two', 'Three'), Zend_Filter::getDefaultNamespaces());
+
+        Zend_Filter::setDefaultNamespaces(array());
     }
 }
 

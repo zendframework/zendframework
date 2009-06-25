@@ -211,15 +211,15 @@ class Zend_CodeGenerator_Php_Method extends Zend_CodeGenerator_Php_Member_Abstra
             $output .= implode(', ', $parameterOuput);
         }
         
-        $output .= ')' . PHP_EOL . '    {' . PHP_EOL;
+        $output .= ')' . self::LINE_FEED . '    {' . self::LINE_FEED;
 
         if ($this->_body) {
             $output .= '        ' 
-                    .  str_replace(PHP_EOL, PHP_EOL . '        ', trim($this->_body)) 
-                    .  PHP_EOL;
+                    .  str_replace(self::LINE_FEED, self::LINE_FEED . '        ', trim($this->_body)) 
+                    .  self::LINE_FEED;
         }
         
-        $output .= '    }' . PHP_EOL;
+        $output .= '    }' . self::LINE_FEED;
         
         return $output;
     }

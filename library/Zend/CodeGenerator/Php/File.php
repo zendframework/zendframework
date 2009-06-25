@@ -389,7 +389,7 @@ class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
         
         // start with the body (if there), or open tag
         if (preg_match('#(?:\s*)<\?php#', $this->getBody()) == false) {
-            $output = '<?php' . PHP_EOL;
+            $output = '<?php' . self::LINE_FEED;
         }
         
         // if there are markers, put the body into the output
@@ -406,22 +406,22 @@ class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
             if (preg_match('#'.$regex.'#', $output)) {
                 $output  = preg_replace('#'.$regex.'#', $docblock->generate(), $output, 1);
             } else {
-                $output .= $docblock->generate() . PHP_EOL;
+                $output .= $docblock->generate() . self::LINE_FEED;
             }
         }
         
         // newline
-        $output .= PHP_EOL;
+        $output .= self::LINE_FEED;
         
         // process required files
         // @todo marker replacement for required files
         $requiredFiles = $this->getRequiredFiles();
         if (!empty($requiredFiles)) {
             foreach ($requiredFiles as $requiredFile) {
-                $output .= 'require_once \'' . $requiredFile . '\';' . PHP_EOL;
+                $output .= 'require_once \'' . $requiredFile . '\';' . self::LINE_FEED;
             }
             
-            $output .= PHP_EOL;
+            $output .= self::LINE_FEED;
         }
         
         // process classes
@@ -433,7 +433,7 @@ class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
                 if (preg_match('#'.$regex.'#', $output)) {
                     $output = preg_replace('#'.$regex.'#', $class->generate(), $output, 1);
                 } else {
-                    $output .= $class->generate() . PHP_EOL;
+                    $output .= $class->generate() . self::LINE_FEED;
                 }
             }
             
@@ -443,7 +443,7 @@ class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
 
             // add an extra space betwee clsses and 
             if (!empty($classes)) {
-                $output .= PHP_EOL;
+                $output .= self::LINE_FEED;
             }
         
             $output .= $body;

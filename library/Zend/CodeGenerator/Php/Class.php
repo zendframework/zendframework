@@ -463,23 +463,23 @@ class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
             $output .= ' implements ' . implode(', ', $implemented);
         }
         
-        $output .= PHP_EOL . '{' . PHP_EOL . PHP_EOL;
+        $output .= self::LINE_FEED . '{' . self::LINE_FEED . self::LINE_FEED;
         
         $properties = $this->getProperties();
         if (!empty($properties)) {
             foreach ($properties as $property) {
-                $output .= $property->generate() . PHP_EOL . PHP_EOL;
+                $output .= $property->generate() . self::LINE_FEED . self::LINE_FEED;
             }
         }
         
         $methods = $this->getMethods();
         if (!empty($methods)) {
             foreach ($methods as $method) {
-                $output .= $method->generate() . PHP_EOL;
+                $output .= $method->generate() . self::LINE_FEED;
             }
         }
         
-        $output .= PHP_EOL . '}' . PHP_EOL;
+        $output .= self::LINE_FEED . '}' . self::LINE_FEED;
         
         return $output;
     }

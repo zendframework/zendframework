@@ -172,5 +172,25 @@ EOS;
         $this->assertEquals($expectedOutput, $codeGenFileFromDisk->generate());
         
     }
+    
+    public function testFileLineEndingsAreAlwaysLineFeed()
+    {
+        $codeGenFile = new Zend_CodeGenerator_Php_File(array(
+            'requiredFiles' => array('SampleClass.php'),
+            'class' => array(
+                'abstract' => true,
+                'name' => 'SampleClass',
+                'extendedClass' => 'ExtendedClassName',
+                'implementedInterfaces' => array('Iterator', 'Traversable')            
+                )
+            ));
+            
+        // explode by newline, this would leave CF in place if it were generated
+        $lines = explode("\n", $codeGenFile);
+        
+        $targetLength = strlen('require_once \'SampleClass.php\';');
+        $this->assertEquals($targetLength, strlen($lines[2]));
+        $this->assertEquals(';', $lines[2]{$targetLength-1});
+    }
 
 }

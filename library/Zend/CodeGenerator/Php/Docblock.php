@@ -185,10 +185,10 @@ class Zend_CodeGenerator_Php_Docblock extends Zend_CodeGenerator_Php_Abstract
         
         $output  = '';
         if (null !== ($sd = $this->getShortDescription())) {
-            $output .= $sd . PHP_EOL . PHP_EOL;
+            $output .= $sd . self::LINE_FEED . self::LINE_FEED;
         }
         if (null !== ($ld = $this->getLongDescription())) {
-            $output .= $ld . PHP_EOL . PHP_EOL;
+            $output .= $ld . self::LINE_FEED . self::LINE_FEED;
         }
 
         foreach ($this->getTags() as $tag) {
@@ -207,13 +207,13 @@ class Zend_CodeGenerator_Php_Docblock extends Zend_CodeGenerator_Php_Abstract
     protected function _docCommentize($content)
     {
         $indent = $this->getIndentation();
-        $output = '/**' . PHP_EOL;
+        $output = '/**' . self::LINE_FEED;
         $content = wordwrap($content, 80, "\n");
         $lines = explode("\n", $content);
         foreach ($lines as $line) {
-            $output .= $indent . ' * ' . $line . PHP_EOL;
+            $output .= $indent . ' * ' . $line . self::LINE_FEED;
         }
-        $output .= $indent . ' */' . PHP_EOL;
+        $output .= $indent . ' */' . self::LINE_FEED;
         return $output;
     }
     

@@ -33,7 +33,13 @@ require_once 'Zend/CodeGenerator/Abstract.php';
  */
 abstract class Zend_CodeGenerator_Php_Abstract extends Zend_CodeGenerator_Abstract
 {
-   
+
+    /**
+     * Line feed to use in place of EOL
+     *
+     */
+    const LINE_FEED = "\n";
+    
     /**
      * @var bool
      */

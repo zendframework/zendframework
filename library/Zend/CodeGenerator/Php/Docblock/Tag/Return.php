@@ -91,7 +91,7 @@ class Zend_CodeGenerator_Php_Docblock_Tag_Return extends Zend_CodeGenerator_Php_
      */
     public function generate()
     {
-        $output = '@return ' . $this->_datatype . ' ' . $this->_description . PHP_EOL;
+        $output = '@return ' . $this->_datatype . ' ' . $this->_description . self::LINE_FEED;
         return $output;
     }
     

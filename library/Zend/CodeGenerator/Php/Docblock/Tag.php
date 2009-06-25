@@ -23,7 +23,7 @@
 /**
  * @see Zend_CodeGenerator_Abstract
  */
-require_once 'Zend/CodeGenerator/Abstract.php';
+require_once 'Zend/CodeGenerator/Php/Abstract.php';
 
 /**
  * @see Zend_CodeGenerator_Php_Docblock_Tag_Param
@@ -41,7 +41,7 @@ require_once 'Zend/CodeGenerator/Php/Docblock/Tag/Return.php';
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_CodeGenerator_Php_Docblock_Tag extends Zend_CodeGenerator_Abstract
+class Zend_CodeGenerator_Php_Docblock_Tag extends Zend_CodeGenerator_Php_Abstract
 {
 
     /**
@@ -178,7 +178,7 @@ class Zend_CodeGenerator_Php_Docblock_Tag extends Zend_CodeGenerator_Abstract
      */
     public function generate()
     {
-        return '@' . $this->_name . ' ' . $this->_description . PHP_EOL;
+        return '@' . $this->_name . ' ' . $this->_description . self::LINE_FEED;
     }
     
 }

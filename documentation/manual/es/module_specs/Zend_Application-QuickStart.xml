@@ -270,7 +270,7 @@ $application->bootstrap()
             Recomendamos este ajuste en el entorno de su servidor web.
             En Apache, puede también configurarlo en la definición de su vhost,
             o en su archivo <code>.htaccess</code>. Recomendamos el siguiente
-            contenido para su archivo <code>public/.htacces</code>:
+            contenido para su archivo <code>public/.htaccess</code>:
         </para>
 
         <programlisting role="conf"><![CDATA[

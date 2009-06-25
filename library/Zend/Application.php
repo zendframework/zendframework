@@ -288,8 +288,15 @@ class Zend_Application
 
         if (!class_exists($class, false)) {
             require_once $path;
+            if (!class_exists($class, false)) {
+                throw new Zend_Application_Exception('Bootstrap class not found');
+            }
         }
         $this->_bootstrap = new $class($this);
+
+        if (!$this->_bootstrap instanceof Zend_Application_Bootstrap_Bootstrapper) {
+            throw new Zend_Application_Exception('Bootstrap class does not implement Zend_Application_Bootstrap_Bootstrapper');
+        }
         
         return $this;
     }

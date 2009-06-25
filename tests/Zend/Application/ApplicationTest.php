@@ -328,6 +328,34 @@ class Zend_Application_ApplicationTest extends PHPUnit_Framework_TestCase
         $application = $this->application->bootstrap();
         $this->assertSame($application, $this->application);
     }
+
+    /**
+     * @expectedException Zend_Application_Exception
+     */
+    public function testApplicationShouldRaiseExceptionIfBootstrapFileDoesNotContainBootstrapClass()
+    {
+        $this->application->setOptions(array(
+            'bootstrap' => array(
+                'path'  => dirname(__FILE__) . '/_files/ZfAppNoBootstrap.php',
+                'class' => 'ZfAppNoBootstrap',
+            ),
+        ));
+        $bootstrap = $this->application->getBootstrap();
+    }
+
+    /**
+     * @expectedException Zend_Application_Exception
+     */
+    public function testApplicationShouldRaiseExceptionWhenBootstrapClassNotOfCorrectType()
+    {
+        $this->application->setOptions(array(
+            'bootstrap' => array(
+                'path'  => dirname(__FILE__) . '/_files/ZfAppBadBootstrap.php',
+                'class' => 'ZfAppBadBootstrap',
+            ),
+        ));
+        $bootstrap = $this->application->getBootstrap();
+    }
 }
 
 if (PHPUnit_MAIN_METHOD == 'Zend_Application_ApplicationTest::main') {

@@ -100,7 +100,7 @@ class Zend_Validate_Identical extends Zend_Validate_Abstract
      * Returns true if and only if a token has been set and the provided value
      * matches that token.
      *
-     * @param  string $value
+     * @param  mixed $value
      * @return boolean
      */
     public function isValid($value)
@@ -108,7 +108,7 @@ class Zend_Validate_Identical extends Zend_Validate_Abstract
         $this->_setValue($value);
         $token = $this->getToken();
 
-        if (empty($token)) {
+        if ($token === null) {
             $this->_error(self::MISSING_TOKEN);
             return false;
         }

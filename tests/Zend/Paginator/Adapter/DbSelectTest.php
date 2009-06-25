@@ -455,4 +455,22 @@ class Zend_Paginator_Adapter_DbSelectTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $adapter->getCountSelect()->__toString());
         $this->assertEquals(250, $adapter->count());
     }
+
+    /**
+     * @group ZF-7127
+     */
+    public function testMultipleGroupSelect()
+    {
+        $select = $this->_db->select()->from('test')
+                                      ->group('testgroup')
+                                      ->group('number')
+                                      ->where('number > 250');
+
+        $adapter = new Zend_Paginator_Adapter_DbSelect($select);
+
+        $expected = 'SELECT COUNT(1) AS "zend_paginator_row_count" FROM (SELECT "test".* FROM "test" WHERE (number > 250) GROUP BY "testgroup"' . ",\n\t" . '"number") AS "t"';
+
+        $this->assertEquals($expected, $adapter->getCountSelect()->__toString());
+        $this->assertEquals(250, $adapter->count());
+    }
 }

@@ -705,17 +705,20 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
         $_SERVER['REMOTE_ADDR'] = '192.168.1.12';
 
         $this->assertEquals('192.168.1.12', $request->getClientIp());
-//    public function getClientIp()
-//{
-//   if (!empty($this->getServer('HTTP_CLIENT_IP'))) {
-//       $ip = $this->getServer('HTTP_CLIENT_IP');
-//   } else if (!empty($this->getServer('HTTP_X_FORWARDED_FOR'))) {
-//       $ip = $this->getServer('HTTP_X_FORWARDED_FOR');
-//   } else {
-//       $ip = $this->getServer('REMOTE_ADDR');
-//   }
-//   return $ip;
-//}
+    }
+
+    /**
+     * @group ZF-7117
+     */
+    public function testGetClientIpNoProxyCheck()
+    {
+        $request = new Zend_Controller_Request_Http();
+
+        $_SERVER['HTTP_CLIENT_IP'] = '192.168.1.10';
+        $_SERVER['HTTP_X_FORWARDED_FOR'] = '192.168.1.11';
+        $_SERVER['REMOTE_ADDR'] = '192.168.1.12';
+
+        $this->assertEquals('192.168.1.12', $request->getClientIp(false));
     }
 }
 

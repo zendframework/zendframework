@@ -1000,15 +1000,16 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
      *
      * @return string
      */
-    public function getClientIp()
+    public function getClientIp($checkProxy = true)
     {
-        if ($this->getServer('HTTP_CLIENT_IP') != null) {
+        if ($checkProxy && $this->getServer('HTTP_CLIENT_IP') != null) {
             $ip = $this->getServer('HTTP_CLIENT_IP');
-        } else if ($this->getServer('HTTP_X_FORWARDED_FOR') != null) {
+        } else if ($checkProxy && $this->getServer('HTTP_X_FORWARDED_FOR') != null) {
             $ip = $this->getServer('HTTP_X_FORWARDED_FOR');
         } else {
             $ip = $this->getServer('REMOTE_ADDR');
         }
+
         return $ip;
     }
 }

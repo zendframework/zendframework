@@ -431,7 +431,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     public function statusDestroy($id)
     {
         $this->_init();
-        $path = '/statuses/destroy/' . (int) $id . '.xml';
+        $path = '/statuses/destroy/' . $id . '.xml';
 
         $response = $this->restPost($path);
         return new Zend_Rest_Client_Result($response->getBody());
@@ -757,7 +757,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     public function favoriteCreate($id)
     {
         $this->_init();
-        $path = '/favorites/create/' . (int) $id . '.xml';
+        $path = '/favorites/create/' . $id . '.xml';
 
         $response = $this->restPost($path);
         return new Zend_Rest_Client_Result($response->getBody());
@@ -772,7 +772,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
     public function favoriteDestroy($id)
     {
         $this->_init();
-        $path = '/favorites/destroy/' . (int) $id . '.xml';
+        $path = '/favorites/destroy/' . $id . '.xml';
 
         $response = $this->restPost($path);
         return new Zend_Rest_Client_Result($response->getBody());

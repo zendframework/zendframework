@@ -140,12 +140,12 @@ class Zend_Service_Twitter_Search extends Zend_Http_Client
             switch($key) {
                 case 'geocode':
                 case 'lang':
+				case 'since_id':
                     $_query[$key] = $param;
                     break;
                 case 'rpp':
                     $_query[$key] = (intval($param) > 100) ? 100 : intval($param);
                     break;
-                case 'since_id':
                 case 'page':
                     $_query[$key] = intval($param);
                     break;

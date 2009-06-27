@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 16103 -->
 <sect1 id="zend.controller.basics">
     <title>Zend_Controller の基本</title>
 
@@ -120,9 +120,9 @@
                     Controller がついたクラスをコントローラとして使用し、
                     アクションメソッドの名前は camelCasedMethods
                     形式 (最後に Action をつける) となります。たとえば
-                    <code>SomeFooController::barAction()</code>
+                    <methodname>FooController::barAction()</methodname>
                     のような場合、コントローラは
-                    <code>somefoo</code>、アクションは <code>bar</code>
+                    <code>foo</code>、アクションは <code>bar</code>
                     となります。
                 </para>
 
@@ -146,10 +146,10 @@
 
                     <para>
                         たとえば、アクションを
-                        <code>FooBarController::bazBatAction()</code>
+                        <methodname>FooBarController::bazBatAction()</methodname>
                         で定義したとすると、対応する URL は
-                        <code>/foo-bar/baz-bat</code>
-                        あるいは <code>/foo.bar/baz.bat</code> となります。
+                        <filename>/foo-bar/baz-bat</filename>
+                        あるいは <filename>/foo.bar/baz.bat</filename> となります。
                     </para>
                 </note>
             </listitem>

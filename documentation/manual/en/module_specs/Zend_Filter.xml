@@ -121,6 +121,8 @@ echo Zend_Filter::get('"', 'HtmlEntities', array(ENT_QUOTES));
 
         <sect3 id="zend.filter.introduction.static.namespaces">
 
+            <title>Namespaces</title>
+
             <para>
                 When working with self defined filters you can give a forth parameter
                 to <methodname>Zend_Filter::get()</methodname> which is the namespace

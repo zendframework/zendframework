@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15850 -->
+<!-- EN-Revision: 16164 -->
 <sect1 id="zend.controller.exceptions">
     <title>MVC での例外</title>
 
@@ -51,7 +51,7 @@
                 </itemizedlist>
 
                 <para>
-                    このプラグインは <code>postDispatch()</code>
+                    このプラグインは <methodname>postDispatch()</methodname>
                     プラグインとして動作し、ディスパッチャやアクションコントローラで
                     他の例外が発生していないかどうかを調べます。発生していた場合は、
                     エラーハンドラコントローラに処理を転送します。
@@ -111,8 +111,8 @@ try {
                     <classname>Zend_Controller_Front::returnResponse()</classname> に true を渡すと、
                     <classname>Zend_Controller_Front::dispatch()</classname> はレスポンスをレンダリングせず、
                     そのまま返します。レスポンスを受け取った後で、
-                    処理すべき例外があるかどうかを <code>isException()</code>
-                    メソッドで調べ、その内容を <code>getException()</code> メソッドで取得します。
+                    処理すべき例外があるかどうかを <methodname>isException()</methodname>
+                    メソッドで調べ、その内容を <methodname>getException()</methodname> メソッドで取得します。
                     たとえば次のようになります。
                 </para>
 
@@ -189,7 +189,7 @@ $dispatcher->setParam('useDefaultControllerAlways', true);
 
                     <listitem>
                         <para>
-                            <code>dispatch()</code> がスローする例外は
+                            <methodname>dispatch()</methodname> がスローする例外は
                             <classname>Zend_Controller_Dispatcher_Exception</classname> で、この中には
                             'Invalid controller specified' というテキストが含まれます。
                             <link linkend="zend.controller.exceptions.handling">
@@ -214,7 +214,7 @@ $dispatcher->setParam('useDefaultControllerAlways', true);
                     <listitem>
                         <para>
                             <classname>Zend_Controller_Action</classname> のサブクラスを作成し、
-                            <code>__call()</code> メソッドをオーバーライドします。
+                            <methodname>__call()</methodname> メソッドをオーバーライドします。
                             たとえば次のようになります。
                         </para>
 
@@ -242,7 +242,7 @@ class My_Controller_Action extends Zend_Controller_Action
                     <listitem>
                         <para>
                             <classname>Zend_Controller_Dispatcher</classname> のサブクラスを作成し、
-                            <code>getAction()</code> メソッドをオーバーライドして、
+                            <methodname>getAction()</methodname> メソッドをオーバーライドして、
                             アクションが存在するかどうかを調べます。
                             たとえば次のようになります。
                         </para>
@@ -295,11 +295,11 @@ class My_Controller_Dispatcher extends Zend_Controller_Dispatcher
 
                         <para>
                             <classname>Zend_Controller_Action</classname> のサブクラスを作成して
-                            <code>preDispatch()</code> を変更することで、
+                            <methodname>preDispatch()</methodname> を変更することで、
                             実際にアクションをディスパッチする前に
                             コントローラ内で別のアクションに転送したり
                             リダイレクトしたりすることが可能となります。
-                            このコードは、先ほど説明した <code>__call()</code>
+                            このコードは、先ほど説明した <methodname>__call()</methodname>
                             をオーバーライドするコードと似たものになります。
                         </para>
 

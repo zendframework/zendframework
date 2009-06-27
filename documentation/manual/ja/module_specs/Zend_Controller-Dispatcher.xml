@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16164 -->
 <sect1 id="zend.controller.dispatcher">
     <title>ディスパッチャ</title>
 
@@ -16,9 +16,9 @@
             デフォルト値を使用します。<classname>Zend_Controller_Dispatcher_Standard</classname>
             では、コントローラとアクションのデフォルトはどちらも
             <code>index</code> で、モジュールのデフォルトは <code>default</code> です。しかし、
-            <code>setDefaultController()</code> メソッドや
-            <code>setDefaultAction()</code> メソッド、そして
-            <code>setDefaultModule()</code> でこれらを変更することもできます。
+            <methodname>setDefaultController()</methodname> メソッドや
+            <methodname>setDefaultAction()</methodname> メソッド、そして
+            <methodname>setDefaultModule()</methodname> でこれらを変更することもできます。
         </para>
 
         <note>
@@ -65,8 +65,9 @@ $dispatcher->setParam('prefixDefaultModule', true);
 
         <para>
             このようなディスパッチ処理を制御する
-            アクションコントローラのメソッドが <code>_forward()</code> です。
-            このメソッドを pre/postDispatch() やアクションメソッドでコールし、
+            アクションコントローラのメソッドが <methodname>_forward()</methodname> です。
+            このメソッドを <methodname>preDispatch()</methodname>、
+            <methodname>postDispatch()</methodname> やアクションメソッドでコールし、
             コントローラやアクション、
             そして新しいアクションに送りたい追加のパラメータを指定します。
         </para>

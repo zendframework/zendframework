@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15850 -->
+<!-- EN-Revision: 16164 -->
 <sect1 id="zend.controller.front">
     <title>フロントコントローラ</title>
 
@@ -53,8 +53,8 @@
             </para>
 
             <para>
-                <code>ErrorHandler</code> を無効にするには、
-                <code>dispatch()</code> をコールする前のどこかで以下のようにします。
+                <emphasis>ErrorHandler</emphasis> を無効にするには、
+                <methodname>dispatch()</methodname> をコールする前のどこかで以下のようにします。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -63,8 +63,8 @@ $front->setParam('noErrorHandler', true);
 ]]></programlisting>
 
             <para>
-                <code>ViewRenderer</code> を無効にするには、
-                <code>dispatch()</code> をコールする前に以下を実行します。
+                <emphasis>ViewRenderer</emphasis> を無効にするには、
+                <methodname>dispatch()</methodname> をコールする前に以下を実行します。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -86,7 +86,7 @@ $front->setParam('noViewRenderer', true);
             <title>getInstance()</title>
 
             <para>
-                <code>getInstance()</code> は、フロントコントローラのインスタンスを取得します。
+                <methodname>getInstance()</methodname> は、フロントコントローラのインスタンスを取得します。
                 フロントコントローラはシングルトンパターンを実装しているので、
                 フロントコントローラのインスタンスを作成する唯一の方法はこのメソッドをコールすることとなります。
             </para>
@@ -100,7 +100,7 @@ $front = Zend_Controller_Front::getInstance();
             <title>setControllerDirectory() および addControllerDirectory</title>
 
             <para>
-                <code>setControllerDirectory()</code> は、<link
+                <methodname>setControllerDirectory()</methodname> は、<link
                     linkend="zend.controller.dispatcher">ディスパッチャ</link>
                 が <link
                     linkend="zend.controller.action">アクションコントローラ</link>
@@ -129,7 +129,7 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
 
             <note>
                 <para>
-                    <code>addControllerDirectory()</code>
+                    <methodname>addControllerDirectory()</methodname>
                     でモジュール名を省略すると、<code>default</code>
                     モジュールが指定されたものとみなします。
                     もしすでに存在する場合は、それを上書きします。
@@ -138,7 +138,7 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
 
             <para>
                 コントローラディレクトリの現在の設定を取得するには
-                <code>getControllerDirectory()</code> を使用します。
+                <methodname>getControllerDirectory()</methodname> を使用します。
                 これは、モジュールとディレクトリの組を配列で返します。
             </para>
         </sect3>
@@ -161,14 +161,14 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
             </para>
 
             <para>
-                <code>addModuleDirectory()</code>
+                <methodname>addModuleDirectory()</methodname>
                 には、ひとつあるいは複数のモジュールディレクトリの名前を渡します。
                 渡された内容を調べ、それをフロントコントローラのコントローラディレクトリに追加します。
             </para>
 
             <para>
                 その後、特定のモジュールや現在のモジュールへのパスを知りたい場合に
-                <code>getModuleDirectory()</code> をコールします。
+                <methodname>getModuleDirectory()</methodname> をコールします。
                 モジュール名を渡すと、指定したモジュールのディレクトリを取得することができます。
             </para>
         </sect3>
@@ -177,8 +177,8 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
             <title>dispatch()</title>
 
             <para>
-                <code>dispatch(Zend_Controller_Request_Abstract $request = null,
-                    Zend_Controller_Response_Abstract $response = null)</code>
+                <methodname>dispatch(Zend_Controller_Request_Abstract $request = null,
+                    Zend_Controller_Response_Abstract $response = null)</methodname>
                 は、フロントコントローラでもっとも重要な仕事を担当します。
                 オプションで <link linkend="zend.controller.request">リクエストオブジェクト</link>
                 や <link linkend="zend.controller.response">レスポンスオブジェクト</link>
@@ -187,13 +187,13 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
 
             <para>
                 リクエストオブジェクトやレスポンスオブジェクトを省略すると、
-                <code>dispatch()</code> は事前にオブジェクトが登録されているかどうかを確認します。
+                <methodname>dispatch()</methodname> は事前にオブジェクトが登録されているかどうかを確認します。
                 もし登録されていればそれを使用し、登録されていなければデフォルトのオブジェクトを作成して使用します
                 (どちらの場合についても、HTTP リクエスト/レスポンス オブジェクトをデフォルトで使用します)。
             </para>
 
             <para>
-                同様に、<code>dispatch()</code> は <link
+                同様に、<methodname>dispatch()</methodname> は <link
                     linkend="zend.controller.router">ルータ</link> や <link
                     linkend="zend.controller.dispatcher">ディスパッチャ</link>
                 オブジェクトについても登録済みのものがあるかどうかを確認します。
@@ -211,7 +211,7 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
             </itemizedlist>
 
             <para>
-                ルーティングは一度だけ発生します。これは、<code>dispatch()</code>
+                ルーティングは一度だけ発生します。これは、<methodname>dispatch()</methodname>
                 がコールされた際のリクエストオブジェクトの内容を使用して行います。
                 ディスパッチは繰り返し行われます。
                 ひとつのリクエストが複数のアクションを指定している場合や、
@@ -237,7 +237,7 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
             </para>
 
             <para>
-                <code>run()</code> は、サイト単位の設定などで
+                <methodname>run()</methodname> は、サイト単位の設定などで
                 フロントコントローラのカスタマイズが不要な場合に便利なメソッドです。
             </para>
 
@@ -261,7 +261,7 @@ Zend_Controller_Front::run('../application/controllers');
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>resetInstance()</code> は、現在の設定をすべて消去します。
+                    <methodname>resetInstance()</methodname> は、現在の設定をすべて消去します。
                     主にテスト目的で使用しますが、
                     複数のフロントコントローラを連結させたい場合などに使用することもあります。
                 </para>
@@ -269,7 +269,7 @@ Zend_Controller_Front::run('../application/controllers');
 
             <listitem>
                 <para>
-                    <code>(set|get)DefaultControllerName()</code>
+                    <methodname>(set|get)DefaultControllerName()</methodname>
                     で、デフォルトのコントローラとして使用する名前を指定したり
                     (指定しなければ 'index' となります) 現在の設定を取得したりできます。
                     これらメソッドは、<link linkend="zend.controller.dispatcher">
@@ -279,7 +279,7 @@ Zend_Controller_Front::run('../application/controllers');
 
             <listitem>
                 <para>
-                    <code>(set|get)DefaultAction()</code>
+                    <methodname>(set|get)DefaultAction()</methodname>
                     で、デフォルトのアクションとして使用する名前を指定したり
                     (指定しなければ 'index' となります) 現在の設定を取得したりできます。
                     これらのメソッドは <link linkend="zend.controller.dispatcher">
@@ -289,7 +289,7 @@ Zend_Controller_Front::run('../application/controllers');
 
             <listitem>
                 <para>
-                    <code>(set|get)Request()</code> は、ディスパッチ処理で使用する
+                    <methodname>(set|get)Request()</methodname> は、ディスパッチ処理で使用する
                     <link linkend="zend.controller.request">リクエスト</link>
                     クラスやオブジェクトを指定したり、現在のオブジェクトを取得したりします。
                     リクエストオブジェクトを指定するときに、クラス名を指定することができます。
@@ -299,7 +299,7 @@ Zend_Controller_Front::run('../application/controllers');
 
             <listitem>
                 <para>
-                    <code>(set|get)Router()</code> は、ディスパッチ処理で使用する
+                    <methodname>(set|get)Router()</methodname> は、ディスパッチ処理で使用する
                     <link linkend="zend.controller.router">ルータ</link>
                     クラスやオブジェクトを指定したり、現在のオブジェクトを取得したりします。
                     ルータオブジェクトを指定するときに、クラス名を指定することができます。
@@ -314,7 +314,7 @@ Zend_Controller_Front::run('../application/controllers');
 
             <listitem>
                 <para>
-                    <code>(set|get)BaseUrl()</code> は、リクエストのルーティング時に URL から取り除く
+                    <methodname>(set|get)BaseUrl()</methodname> は、リクエストのルーティング時に URL から取り除く
                     <link linkend="zend.controller.request.http.baseurl">基底 URL</link>
                     を指定したり、現在の値を取得したりします。
                     この値は、ルーティングの直前にリクエストオブジェクトに渡されます。
@@ -323,7 +323,7 @@ Zend_Controller_Front::run('../application/controllers');
 
             <listitem>
                 <para>
-                    <code>(set|get)Dispatcher()</code> は、ディスパッチ処理で使用する
+                    <methodname>(set|get)Dispatcher()</methodname> は、ディスパッチ処理で使用する
                     <link linkend="zend.controller.dispatcher">ディスパッチャ</link>
                     クラスやオブジェクトを指定したり、現在のオブジェクトを取得したりします。
                     ディスパッチャオブジェクトを指定するときに、クラス名を指定することができます。
@@ -338,7 +338,7 @@ Zend_Controller_Front::run('../application/controllers');
 
             <listitem>
                 <para>
-                    <code>(set|get)Response()</code> は、ディスパッチ処理で使用する
+                    <methodname>(set|get)Response()</methodname> は、ディスパッチ処理で使用する
                     <link linkend="zend.controller.response">レスポンス</link>
                     クラスやオブジェクトを指定したり、現在のオブジェクトを取得したりします。
                     レスポンスオブジェクトを指定するときに、クラス名を指定することができます。
@@ -348,7 +348,7 @@ Zend_Controller_Front::run('../application/controllers');
 
             <listitem>
                 <para>
-                    <code>registerPlugin(Zend_Controller_Plugin_Abstract $plugin, $stackIndex = null)</code>
+                    <methodname>registerPlugin(Zend_Controller_Plugin_Abstract $plugin, $stackIndex = null)</methodname>
                     は、<link linkend="zend.controller.plugins">プラグインオブジェクト</link>
                     を登録します。オプションの <varname>$stackIndex</varname>
                     を設定すると、プラグインの実行順を制御することができます。
@@ -357,7 +357,7 @@ Zend_Controller_Front::run('../application/controllers');
 
             <listitem>
                 <para>
-                    <code>unregisterPlugin($plugin)</code> は、
+                    <methodname>unregisterPlugin($plugin)</methodname> は、
                     <link linkend="zend.controller.plugins">プラグインオブジェクト</link>
                     の登録を解除します。<varname>$plugin</varname>
                     にはプラグインオブジェクトそのものか、あるいはプラグインのクラス名を表す文字列を指定します。
@@ -367,10 +367,10 @@ Zend_Controller_Front::run('../application/controllers');
 
             <listitem>
                 <para>
-                    <code>throwExceptions($flag)</code> で、ディスパッチの際に発生した例外をスローするかどうかを切り替えます。
+                    <methodname>throwExceptions($flag)</methodname> で、ディスパッチの際に発生した例外をスローするかどうかを切り替えます。
                     デフォルトでは、例外はスローされず、
                     <link linkend="zend.controller.response">レスポンスオブジェクト</link>
-                    に保存されます。<code>throwExceptions()</code>
+                    に保存されます。<methodname>throwExceptions()</methodname>
                     をオンにすると、この挙動を変更できます。
                 </para>
 
@@ -381,12 +381,12 @@ Zend_Controller_Front::run('../application/controllers');
 
             <listitem>
                 <para>
-                    <code>returnResponse($flag)</code> は、フロントコントローラが
-                    <code>dispatch()</code> からのレスポンスを返す (<constant>TRUE</constant>)
+                    <methodname>returnResponse($flag)</methodname> は、フロントコントローラが
+                    <methodname>dispatch()</methodname> からのレスポンスを返す (<constant>TRUE</constant>)
                     かレスポンスを自動的に発行する (<constant>FALSE</constant>)
                     かを切り替えます。デフォルトでは、レスポンスは
                     (<classname>Zend_Controller_Response_Abstract::sendResponse()</classname> によって)
-                    自動的に発行されます。<code>returnResponse()</code>
+                    自動的に発行されます。<methodname>returnResponse()</methodname>
                     をオンにすると、この挙動を変更できます。
                     behaviour.
                 </para>
@@ -416,7 +416,7 @@ Zend_Controller_Front::run('../application/controllers');
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>setParam($name, $value)</code> は、
+                    <methodname>setParam($name, $value)</methodname> は、
                     パラメータ <varname>$name</varname> の値を
                     <varname>$value</varname> に設定します。
                 </para>
@@ -424,28 +424,28 @@ Zend_Controller_Front::run('../application/controllers');
 
             <listitem>
                 <para>
-                    <code>setParams(array $params)</code> は、
+                    <methodname>setParams(array $params)</methodname> は、
                     連想配列を使用して複数のパラメータを一度に設定します。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getParam($name)</code> は、
+                    <methodname>getParam($name)</methodname> は、
                     <varname>$name</varname> で指定した名前のパラメータの値を取得します。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getParams()</code> は、
+                    <methodname>getParams()</methodname> は、
                     すべてのパラメータの一覧を一度に取得します。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>clearParams()</code> は、
+                    <methodname>clearParams()</methodname> は、
                     単一のパラメータ (文字列で指定した場合) か
                     複数のパラメータ (文字列の配列で指定した場合)、
                     またはすべてのパラメータ (何も指定しなかった場合)
@@ -462,7 +462,7 @@ Zend_Controller_Front::run('../application/controllers');
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>useDefaultControllerAlways</code> は、
+                    <emphasis>useDefaultControllerAlways</emphasis> は、
                     ディスパッチできない
                     (モジュール、コントローラ、アクションのいずれかが存在しない)
                     リクエストに対して、
@@ -480,7 +480,7 @@ Zend_Controller_Front::run('../application/controllers');
 
             <listitem>
                 <para>
-                    <code>disableOutputBuffering</code> は、
+                    <emphasis>disableOutputBuffering</emphasis> は、
                     アクションコントローラの出力をバッファリングしないよう
                     <link linkend="zend.controller.dispatcher">ディスパッチャ</link>
                     に指示します。デフォルトでは、
@@ -491,7 +491,7 @@ Zend_Controller_Front::run('../application/controllers');
 
             <listitem>
                 <para>
-                    <code>noViewRenderer</code> を使用して、<link
+                    <emphasis>noViewRenderer</emphasis> を使用して、<link
                         linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>
                     を無効にします。このパラメータを true に設定すると、無効となります。
                 </para>
@@ -499,7 +499,7 @@ Zend_Controller_Front::run('../application/controllers');
 
             <listitem>
                 <para>
-                    <code>noErrorHandler</code> を使用して、<link
+                    <emphasis>noErrorHandler</emphasis> を使用して、<link
                         linkend="zend.controller.plugins.standard.errorhandler">
                     エラーハンドラプラグイン</link> を無効にします。
                     このパラメータを true に設定すると、無効となります。
@@ -513,7 +513,7 @@ Zend_Controller_Front::run('../application/controllers');
 
         <para>
             フロントコントローラを継承する際には、
-            最低限 <code>getInstance()</code> メソッドをオーバーライドしなければなりません。
+            最低限 <methodname>getInstance()</methodname> メソッドをオーバーライドしなければなりません。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -531,7 +531,7 @@ class My_Controller_Front extends Zend_Controller_Front
 ]]></programlisting>
 
         <para>
-            <code>getInstance()</code> メソッドをオーバーライドすることで、それ以降の
+            <methodname>getInstance()</methodname> メソッドをオーバーライドすることで、それ以降の
             <classname>Zend_Controller_Front::getInstance()</classname> のコールが
             <classname>Zend_Controller_Front</classname> ではなく新しいサブクラスのインスタンスを返すようになります。
             これは、デフォルト以外のルータやビューヘルパーを使用する場合などに便利です。

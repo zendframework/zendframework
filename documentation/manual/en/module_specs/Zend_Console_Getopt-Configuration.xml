@@ -28,8 +28,8 @@ $opts->addRules(
 ]]></programlisting>
         </example>
         <para>
-            The example above shows adding the "<code>--verbose</code>" option
-            with an alias of "<code>-v</code>" to a set of options
+            The example above shows adding the <command>--verbose</command> option
+            with an alias of <command>-v</command> to a set of options
             defined in the call to the constructor. Notice that you can mix
             short format options and long format options in the same instance
             of <classname>Zend_Console_Getopt</classname>.
@@ -98,9 +98,9 @@ $opts->setAliases(
         </example>
         <para>
             In the example above, after declaring these aliases,
-            "<code>-a</code>", "<code>--apple</code>" and
-            "<code>--apfel</code>" are aliases for each other.
-            Also "<code>-p</code>" and "<code>--pear</code>" are aliases
+            <command>-a</command>, <command>--apple</command> and
+            <command>--apfel</command> are aliases for each other.
+            Also <command>-p</command> and <command>--pear</command> are aliases
             for each other.
         </para>
         <para>
@@ -169,7 +169,7 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
             <listitem>
                 <para>
                     <constant>Zend_Console_Getopt::CONFIG_DASHDASH</constant> ("dashDash"),
-                    if true, enables the special flag "<code>--</code>" to
+                    if true, enables the special flag <command>--</command> to
                     signify the end of flags. Command-line arguments following
                     the double-dash signifier are not interpreted as options,
                     even if the arguments start with a dash. This configuration
@@ -180,8 +180,8 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
                 <para>
                     <constant>Zend_Console_Getopt::CONFIG_IGNORECASE</constant> ("ignoreCase"),
                     if true, makes flags aliases of each other if they differ
-                    only in their case. That is, "<code>-a</code>" and
-                    "<code>-A</code>" will be considered to be synonymous flags.
+                    only in their case. That is, <command>-a</command> and
+                    <command>-A</command> will be considered to be synonymous flags.
                     This configuration option is false by default.
                 </para>
             </listitem>

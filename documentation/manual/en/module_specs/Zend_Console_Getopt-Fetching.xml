@@ -117,7 +117,7 @@ $p_parameter = $opts->p; // null if not set
             <listitem>
                 <para>
                     As a string: use the <methodname>toString()</methodname> method. The options
-                    are returned as a space-separated string of "<code>flag=value</code>"
+                    are returned as a space-separated string of <command>flag=value</command>
                     pairs. The value of an option that does not have a parameter
                     is the literal string "<constant>TRUE</constant>".
                 </para>
@@ -145,8 +145,8 @@ $p_parameter = $opts->p; // null if not set
         <para>
             In all of the above dumping methods, the flag string is the
             first string in the corresponding list of aliases. For example,
-            if the option aliases were declared like "<code>verbose|v</code>",
-            then the first string, "<code>verbose</code>", is used as the
+            if the option aliases were declared like <command>verbose|v</command>,
+            then the first string, <command>verbose</command>, is used as the
             canonical name of the option. The name of the option flag does not
             include any preceding dashes.
         </para>

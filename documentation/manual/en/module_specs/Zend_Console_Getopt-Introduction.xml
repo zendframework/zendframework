@@ -11,9 +11,9 @@
         they execute your application. These arguments have meaning to the
         application, to change the behavior in some way, or choose resources,
         or specify parameters. Many options have developed customary meaning,
-        for example "<code>--verbose</code>" enables extra output from many
+        for example <command>--verbose</command> enables extra output from many
         applications. Other options may have a meaning that is different for
-        each application. For example, "<code>-c</code>" enables different
+        each application. For example, <command>-c</command> enables different
         features in <command>grep</command>, <command>ls</command>, and
         <command>tar</command>.
     </para>
@@ -41,7 +41,7 @@
                 "flag": the first part of an option, identifies
                 the purpose of the option. A flag is preceded
                 conventionally by one or two dashes
-                ("<code>-</code>" or "<code>--</code>").
+                (<command>-</command> or <command>--</command>).
                 A single dash precedes a single-character flag
                 or a cluster of single-character flags.
                 A double-dash precedes a multi-character flag.
@@ -53,19 +53,19 @@
                 "parameter": the secondary part of an option; a data value
                 that may accompany a flag, if it is applicable to the
                 given option. For example, many commands accept a
-                "<code>--verbose</code>" option, but typically
+                <command>--verbose</command> option, but typically
                 this option has no parameter. However, an option like
-                "<code>--user</code>" almost always requires
+                <command>--user</command> almost always requires
                 a following parameter.
             </para>
             <para>
                 A parameter may be given as a separate argument following a
                 flag argument, or as part of the same argument string,
-                separated from the flag by an equals symbol ("<code>=</code>").
+                separated from the flag by an equals symbol (<command>=</command>).
                 The latter form is supported only by long flags.
                 For example,
-                <code>-u username</code>, <code>--user username</code>,
-                and <code>--user=username</code> are forms supported
+                <command>-u username</command>, <command>--user username</command>,
+                and <command>--user=username</command> are forms supported
                 by <classname>Zend_Console_Getopt</classname>.
             </para>
         </listitem>
@@ -82,12 +82,12 @@
         </listitem>
     </itemizedlist>
     <para>
-        For example, in "<code>mysql --user=root mydatabase</code>",
-        "<code>mysql</code>" is a <emphasis>command</emphasis>,
-        "<code>--user=root</code>" is an <emphasis>option</emphasis>,
-        "<code>--user</code>" is a <emphasis>flag</emphasis>,
-        "<code>root</code>" is a <emphasis>parameter</emphasis> to the option,
-        and "<code>mydatabase</code>" is an argument but not an option
+        For example, in <command>mysql --user=root mydatabase</command>,
+        <command>mysql</command> is a <emphasis>command</emphasis>,
+        <command>--user=root</command> is an <emphasis>option</emphasis>,
+        <command>--user</command> is a <emphasis>flag</emphasis>,
+        <command>root</command> is a <emphasis>parameter</emphasis> to the option,
+        and <command>mydatabase</command> is an argument but not an option
         by our definition.
     </para>
     <para>

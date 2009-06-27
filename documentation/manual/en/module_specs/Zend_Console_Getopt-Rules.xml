@@ -31,7 +31,7 @@
             This syntax supports only single-character flags. In a single
             string, you type each of the letters that correspond to flags
             supported by your application. A letter followed by a colon
-            character ("<code>:</code>") indicates a flag that requires a
+            character (<emphasis>:</emphasis>) indicates a flag that requires a
             parameter.
         </para>
         <example id="zend.console.getopt.rules.short.example">
@@ -42,8 +42,8 @@ $opts = new Zend_Console_Getopt('abp:');
         </example>
         <para>
             The example above shows using <classname>Zend_Console_Getopt</classname>
-            to declare that options may be given as "<code>-a</code>",
-            "<code>-b</code>", or "<code>-p</code>". The latter flag
+            to declare that options may be given as <command>-a</command>,
+            <command>-b</command>, or <command>-p</command>. The latter flag
             requires a parameter.
         </para>
         <para>
@@ -111,11 +111,11 @@ $opts = new Zend_Console_Getopt(
         </example>
         <para>
             In the example declaration above, there are three options.
-            "<code>--apple</code>" and "<code>-a</code>" are aliases for each
+            <command>--apple</command> and <command>-a</command> are aliases for each
             other, and the option takes no parameter.
-            "<code>--banana</code>" and "<code>-b</code>" are aliases for each
+            <command>--banana</command> and <command>-b</command> are aliases for each
             other, and the option takes a mandatory integer parameter.
-            Finally, "<code>--pear</code>" and "<code>-p</code>" are aliases
+            Finally, <command>--pear</command> and <command>-p</command> are aliases
             for each other, and the option may take an optional string parameter.
         </para>
     </sect2>

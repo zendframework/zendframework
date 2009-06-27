@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15713 -->
+<!-- EN-Revision: 16165 -->
 <sect1 id="zend.controller.modular">
     <title>モジュラーディレクトリ構造の規約の使用</title>
 
@@ -86,13 +86,14 @@ application/
             モジュールを使用するための第一歩となるのが、
             フロントコントローラでのコントローラディレクトリの設定方法を変更することです。
             基本的な MVC 版では、配列あるいは文字列を
-            <code>setControllerDirectory()</code> に渡すか、あるいはパスを <code>addControllerDirectory()</code>
+            <methodname>setControllerDirectory()</methodname> に渡すか、
+            あるいはパスを <methodname>addControllerDirectory()</methodname>
             に渡していました。モジュールを使用する場合は、
             これらのメソッドコールを少々変更する必要があります。
         </para>
 
         <para>
-            <code>setControllerDirectory()</code> では、連想配列を渡す必要があります。
+            <methodname>setControllerDirectory()</methodname> では、連想配列を渡す必要があります。
             連想配列のキーにはモジュール名、そしてその値としてディレクトリのパスを指定します。
             特別な名前 <code>default</code> をキーにすると、グローバルコントローラ
             (モジュール名前空間を必要としないもの) を指定できます。
@@ -109,7 +110,7 @@ $front->setControllerDirectory(array(
 ]]></programlisting>
 
         <para>
-            <code>addControllerDirectory()</code> では、オプションの二番目の引数を受け付けます。
+            <methodname>addControllerDirectory()</methodname> では、オプションの二番目の引数を受け付けます。
             モジュールを使用する際には、モジュール名を二番目の引数で渡します。
             指定しない場合は、そのパスは <code>default</code> 名前空間に追加されます。
             次の例のようになります。
@@ -123,7 +124,7 @@ $front->addControllerDirectory('/path/to/application/news/controllers',
         <para>
             結局のところ、モジュールのディレクトリを設定する一番お手軽な方法は、
             共通のモジュールディレクトリの配下に同じ構造でモジュールを保持しておくことです。
-            これを行うのが <code>addModuleDirectory()</code> メソッドです。
+            これを行うのが <methodname>addModuleDirectory()</methodname> メソッドです。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -150,7 +151,7 @@ $front->addModuleDirectory('/path/to/application/modules');
 
         <para>
             モジュール内のコントローラディレクトリ名を変更するには、
-            <code>setModuleControllerDirectoryName()</code> を使用します。
+            <methodname>setModuleControllerDirectoryName()</methodname> を使用します。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -171,7 +172,7 @@ $front->addModuleDirectory('/path/to/application/modules');
 
         <note><para>
             モジュール内でコントローラディレクトリを使用しない場合は、
-            <code>setModuleControllerDirectoryName()</code>
+            <methodname>setModuleControllerDirectoryName()</methodname>
             に空の文字列を指定します。
         </para></note>
     </sect2>
@@ -205,7 +206,7 @@ $front->addModuleDirectory('/path/to/application/modules');
 
         <para>
             デフォルトのルータでは、コントローラが URL で指定されなかった場合には
-            デフォルトのコントローラ (特に指定しなければ <code>IndexController</code>)
+            デフォルトのコントローラ (特に指定しなければ <emphasis>IndexController</emphasis>)
             を使用します。モジュール対応のコントローラにおいて、
             モジュールのみを指定してコントローラを指定しなかった場合は、
             ディスパッチャはまず最初にモジュールパス内のデフォルトコントローラを探します。
@@ -215,7 +216,7 @@ $front->addModuleDirectory('/path/to/application/modules');
         <para>
             デフォルトは常にグローバル名前空間のほうにしたい場合は、
             フロントコントローラでパラメータ
-            <code>useDefaultControllerAlways</code> を指定します。
+            <varname>$useDefaultControllerAlways</varname> を指定します。
         </para>
 
         <programlisting language="php"><![CDATA[

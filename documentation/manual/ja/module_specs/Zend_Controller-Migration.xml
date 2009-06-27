@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15850 -->
+<!-- EN-Revision: 16165 -->
 <sect1 id="zend.controller.migration">
     <title>以前のバージョンからの移行</title>
 
@@ -19,10 +19,11 @@
 
             <para>
                 新しい標準ルートでは翻訳セグメントが使用できるようになったため、
-                ルートのセグメントの先頭にある <code>@</code> は特殊文字と解釈されるようになりました。
+                ルートのセグメントの先頭にある '<emphasis>@</emphasis>'
+                は特殊文字と解釈されるようになりました。
                 この文字を静的セグメント内で使用するには、前にもうひとつ
-                <code>@</code> をつけてエスケープする必要があります。
-                また、<code>:</code> も同様です。
+                '<emphasis>@</emphasis>' をつけてエスケープする必要があります。
+                また、'<emphasis>:</emphasis>' も同様です。
             </para>
         </sect3>
     </sect2>
@@ -44,7 +45,7 @@
 
             <itemizedlist>
                 <listitem><para>
-                    <code>formatModuleName()</code>:
+                    <methodname>formatModuleName()</methodname>:
                 リクエストオブジェクト内に格納されたりしている生のコントローラ名を受け取り、
                 それを再フォーマットして
                 <classname>Zend_Controller_Action</classname> を継承した適切なクラス名にします。
@@ -69,17 +70,17 @@
 
             <itemizedlist>
                 <listitem><para>
-                    <code>getDefaultModule()</code>:
+                    <methodname>getDefaultModule()</methodname>:
                     デフォルトモジュールの名前を返します。
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getDefaultControllerName()</code>:
+                    <methodname>getDefaultControllerName()</methodname>:
                     デフォルトコントローラの名前を返します。
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getDefaultAction()</code>:
+                    <methodname>getDefaultAction()</methodname>:
                     デフォルトアクションの名前を返します。
                 </para></listitem>
             </itemizedlist>
@@ -221,8 +222,8 @@ $front->setParam('useCaseSensitiveActions', true);
         </para>
 
         <para>
-            <code>ErrorHandler</code> プラグインは
-            <code>postDispatch()</code> で動作するもので、
+            <emphasis>ErrorHandler</emphasis> プラグインは
+            <methodname>postDispatch()</methodname> で動作するもので、
             例外をチェックして指定したエラーハンドラコントローラに転送します。
             そのため、アプリケーション内にエラー処理用コントローラを含める必要があります。
             このプラグインを無効にするには、フロントコントローラのパラメータ
@@ -234,19 +235,19 @@ $front->setParam('noErrorHandler', true);
 ]]></programlisting>
 
         <para>
-            <code>ViewRenderer</code> アクションヘルパーは、
+            <emphasis>ViewRenderer</emphasis> アクションヘルパーは、
             アクションコントローラへのビューの注入を自動的に行います。
             また、現在のアクションにもとづいたビュースクリプトを自動的にレンダリングします。
             ビュースクリプトをレンダリングせず、かつ転送やリダイレクトも行わないアクションがあった場合、
             これは問題になるでしょう。というのも、
-            <code>ViewRenderer</code> はそんなアクションであっても
+            <emphasis>ViewRenderer</emphasis> はそんなアクションであっても
             アクション名をもとに自動的にビュースクリプトをレンダリングしようとするからです。
         </para>
 
         <para>
             もし既存のコードにそのようなものがあった場合の対応方法はいくつか考えられます。
             一番手っ取り早いのは、フロントコントローラの起動時に
-            <code>ViewRenderer</code> を無効にしてからディスパッチを行うことです。
+            <emphasis>ViewRenderer</emphasis> を無効にしてからディスパッチを行うことです。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -260,17 +261,17 @@ $front->setParam('noViewRenderer', true);
         </para>
 
         <para>
-            <code>ViewRenderer</code> の機能を把握したら、コントローラのコードを見てみましょう。
+            <emphasis>ViewRenderer</emphasis> の機能を把握したら、コントローラのコードを見てみましょう。
             まず、アクションメソッド (名前が 'Action' で終わっているメソッド)
             を探し、その中でどんな処理をしているかを確認しましょう。
             もし次に挙げるいずれの内容も行っていない場合は、コードに手を加える必要があります。
         </para>
 
         <itemizedlist>
-            <listitem><para><code>$this-&gt;render()</code> のコール</para></listitem>
-            <listitem><para><code>$this-&gt;_forward()</code> のコール</para></listitem>
-            <listitem><para><code>$this-&gt;_redirect()</code> のコール</para></listitem>
-            <listitem><para><code>Redirector</code> アクションヘルパーのコール</para></listitem>
+            <listitem><para><methodname>$this-&gt;render()</methodname> のコール</para></listitem>
+            <listitem><para><methodname>$this-&gt;_forward()</methodname> のコール</para></listitem>
+            <listitem><para><methodname>$this-&gt;_redirect()</methodname> のコール</para></listitem>
+            <listitem><para><methodname>Redirector</methodname> アクションヘルパーのコール</para></listitem>
         </itemizedlist>
 
         <para>
@@ -283,8 +284,8 @@ $this->_helper->viewRenderer->setNoRender();
 
         <para>
             レンダリング、転送あるいはリダイレクトを行っているアクションメソッドがひとつもない場合は、
-            上で示したコードを <code>preDispatch()</code>
-            メソッドあるいは <code>init()</code> メソッド内に書くといいでしょう。
+            上で示したコードを <methodname>preDispatch()</methodname>
+            メソッドあるいは <methodname>init()</methodname> メソッド内に書くといいでしょう。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -297,7 +298,7 @@ public function preDispatch()
 ]]></programlisting>
 
         <para>
-            もしメソッド内で <code>render()</code> をコールしていて、
+            もしメソッド内で <methodname>render()</methodname> をコールしていて、
             <link linkend="zend.controller.modular">規約どおりのディレクトリ構造</link>
             を使用しているのなら、自動レンダリングを使用するようにコードを書き換えましょう。
         </para>
@@ -311,16 +312,16 @@ public function preDispatch()
             </listitem>
             <listitem>
                 <para>
-                    何も引数を指定せずに <code>render()</code> をコールしている場合は、
+                    何も引数を指定せずに <methodname>render()</methodname> をコールしている場合は、
                     その行を削除します。
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    引数つきで <code>render()</code> をコールしていて、
+                    引数つきで <methodname>render()</methodname> をコールしていて、
                     その後に何か処理をしたり複数のビュースクリプトを実行したりしていない場合は、
                     その行を
-                    <code>$this-&gt;_helper-&gt;viewRenderer()</code>
+                    <methodname>$this-&gt;_helper-&gt;viewRenderer()</methodname>
                     のように変更します。
                 </para>
             </listitem>
@@ -329,7 +330,7 @@ public function preDispatch()
         <para>
             独自のディレクトリ構造を使用している場合は、
             ビューの基底パスやスクリプトのパスをメソッドで設定してから
-            <code>ViewRenderer</code> を使用します。これらのメソッドについての詳細は
+            <emphasis>ViewRenderer</emphasis> を使用します。これらのメソッドについての詳細は
             <link linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer
             のドキュメント</link> を参照ください。
         </para>
@@ -338,7 +339,7 @@ public function preDispatch()
             ビューオブジェクトをレジストリから取得していたり
             ビューオブジェクトをカスタマイズしていたり、
             あるいはデフォルトとは異なるビューを使用している場合は、
-            そのオブジェクトを <code>ViewRenderer</code>
+            そのオブジェクトを <emphasis>ViewRenderer</emphasis>
             に注入するために次のようにします。
             これはいつでも好きなときに行えます。
         </para>
@@ -369,16 +370,16 @@ $viewRenderer->setView($view);]]></programlisting>
         </itemizedlist>
 
         <para>
-            <code>ViewRenderer</code> を変更するにはさまざまな方法があります。
+            <emphasis>ViewRenderer</emphasis> を変更するにはさまざまな方法があります。
             たとえばレンダリングするビュースクリプトを別のものに変更したり
             ビュースクリプトパスの置換可能な要素（サフィックスを含む）
             を置換する内容を指定したり、使用するレスポンスセグメントを選択したりなどのことができます。
             規約どおりのディレクトリ構造以外を使用する場合は、
-            <code>ViewRenderer</code> でのパスの決定方法を変更することもできます。
+            <emphasis>ViewRenderer</emphasis> でのパスの決定方法を変更することもできます。
         </para>
 
         <para>
-            <code>ErrorHandler</code> および <code>ViewRenderer</code>
+            <emphasis>ErrorHandler</emphasis> および <emphasis>ViewRenderer</emphasis>
             は今やコア機能として組み込まれているので、
             既存のコードについてもできるだけこれに適合するようにすることをお勧めします。
         </para>
@@ -398,22 +399,22 @@ $viewRenderer->setView($view);]]></programlisting>
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>setRedirectCode()</code> の代わりに
-                    <classname>Zend_Controller_Action_Helper_Redirector::setCode()</classname>
+                    <methodname>setRedirectCode()</methodname> の代わりに
+                    <methodname>Zend_Controller_Action_Helper_Redirector::setCode()</methodname>
                     を使用します。
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>setRedirectPrependBase()</code> の代わりに
-                    <classname>Zend_Controller_Action_Helper_Redirector::setPrependBase()</classname>
+                    <methodname>setRedirectPrependBase()</methodname> の代わりに
+                    <methodname>Zend_Controller_Action_Helper_Redirector::setPrependBase()</methodname>
                     を使用します。
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>setRedirectExit()</code> の代わりに
-                    <classname>Zend_Controller_Action_Helper_Redirector::setExit()</classname>
+                    <methodname>setRedirectExit()</methodname> の代わりに
+                    <methodname>Zend_Controller_Action_Helper_Redirector::setExit()</methodname>
                     を使用します。
                 </para>
             </listitem>
@@ -548,9 +549,9 @@ $ctrl->dispatch();
             これにより、アプリケーション内で
             より柔軟な出力書式の切り替え (たとえば XHTML ではなく
             JSON や XML を使用するなど) ができるようになります。
-            デフォルトでは、<code>dispatch()</code> はレスポンスのレンダリングを行い、
+            デフォルトでは、<methodname>dispatch()</methodname> はレスポンスのレンダリングを行い、
             ヘッダとレンダリングされた内容の両方を送信します。
-            フロントコントローラから <code>returnResponse()</code>
+            フロントコントローラから <methodname>returnResponse()</methodname>
             を使用してレスポンスを返し、レスポンスのレンダリングを独自に行うこともできます。
             将来のバージョンのフロントコントローラでは、
             レスポンスオブジェクトに出力バッファリングを使用する予定です。
@@ -579,7 +580,7 @@ $ctrl->dispatch();
                 <itemizedlist>
                     <listitem>
                         <para>
-                            フロントコントローラで <code>throwExceptions()</code>
+                            フロントコントローラで <methodname>throwExceptions()</methodname>
                             を設定します。
                         </para>
                         <programlisting language="php"><![CDATA[
@@ -589,7 +590,7 @@ $front->throwExceptions(true);
 
                     <listitem>
                         <para>
-                            レスポンスオブジェクトで <code>renderExceptions()</code>
+                            レスポンスオブジェクトで <methodname>renderExceptions()</methodname>
                             を設定します。
                         </para>
                         <programlisting language="php"><![CDATA[
@@ -635,13 +636,13 @@ echo $response;
                         そしてオブジェクトの invokeArgs プロパティを指定します。
                         コンストラクタをオーバーライドすることで、
                         この挙動をお望みのように変更することができます。
-                        さらによいことに、<code>init()</code>
+                        さらによいことに、<methodname>init()</methodname>
                         メソッドを使用してインスタンスの設定を自由に行うことができます。
                         このメソッドは、コンストラクタでの処理の最後にコールされます。
                     </para></listitem>
 
                     <listitem><para>
-                        <code>run()</code> は final メソッドではなくなりました。
+                        <methodname>run()</methodname> は final メソッドではなくなりました。
                         しかし、このメソッドはもはやフロントコントローラでは使用されません。
                         これは、クラスをページコントローラとして使用する場合にのみ使用します。
                         オプションの引数
@@ -651,19 +652,19 @@ echo $response;
                     </para></listitem>
 
                     <listitem><para>
-                        <code>indexAction()</code> を定義する必要はなくなりました。
+                        <methodname>indexAction()</methodname> を定義する必要はなくなりました。
                         しかし、デフォルトのアクションとして定義しておくことを推奨します。
                         これにより、RewriteRouter とアクションコントローラで
                         デフォルトのアクションメソッドを別々に指定できるようになります。
                     </para></listitem>
 
                     <listitem><para>
-                        <code>__call()</code> をオーバーライドして、
+                        <methodname>__call()</methodname> をオーバーライドして、
                         未定義のアクションが自動的に処理されるようにする必要があります。
                     </para></listitem>
 
                     <listitem><para>
-                        <code>_redirect()</code> にはオプションで二番目、三番目の引数が追加されました。
+                        <methodname>_redirect()</methodname> にはオプションで二番目、三番目の引数が追加されました。
                         二番目の引数はリダイレクト時に返す HTTP コードです。
                         三番目の引数 <varname>$prependBase</varname>
                         を使用すると、リクエストオブジェクトに登録したベース URL
@@ -672,7 +673,7 @@ echo $response;
 
                     <listitem>
                         <para>
-                            プロパティ <code>_action</code> は設定されなくなりました。
+                            プロパティ <varname>$_action</varname> は設定されなくなりました。
                             このプロパティの内容は <classname>Zend_Controller_Dispatcher_Token</classname>
                             でしたが、これは現在のバージョンにはもう存在しません。
                             トークンの唯一の目的は、要求されたコントローラやアクション、
@@ -703,9 +704,9 @@ $foo = $this->_getParam('foo', 'default');
 
                     <listitem>
                         <para>
-                            <code>noRouteAction()</code> は削除されました。
+                            <methodname>noRouteAction()</methodname> は削除されました。
                             存在しないアクションメソッドを扱うには、
-                            <code>__call()</code> を使用してデフォルトのアクションに誘導します。
+                            <methodname>__call()</methodname> を使用してデフォルトのアクションに誘導します。
                         </para>
 
                         <programlisting language="php"><![CDATA[

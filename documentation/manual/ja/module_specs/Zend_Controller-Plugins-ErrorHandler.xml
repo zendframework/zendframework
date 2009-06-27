@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16178 -->
 <sect3 id="zend.controller.plugins.standard.errorhandler">
     <title>Zend_Controller_Plugin_ErrorHandler</title>
 
@@ -27,7 +27,7 @@
     </itemizedlist>
 
     <para>
-        言い換えると、<code>ErrorHandler</code> プラグインが想定しているのは、HTTP
+        言い換えると、<emphasis>ErrorHandler</emphasis> プラグインが想定しているのは、HTTP
         404 型のエラー (ページが存在しない) と 500 型のエラー (内部エラー)
         ということになります。
         他のプラグインやルーティング時に発生したそれ以外の例外の処理は、想定していません。
@@ -35,35 +35,35 @@
 
     <para>
         デフォルトでは、<classname>Zend_Controller_Plugin_ErrorHandler</classname>
-        はデフォルトモジュールの <code>ErrorController::errorAction()</code>
+        はデフォルトモジュールの <methodname>ErrorController::errorAction()</methodname>
         に処理を転送します。これを変更するには、以下のようなアクセス用メソッドを使用します。
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
-                <code>setErrorHandlerModule()</code> は、
+                <methodname>setErrorHandlerModule()</methodname> は、
                 使用するコントローラモジュール名を設定します。
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>setErrorHandlerController()</code> は、
+                <methodname>setErrorHandlerController()</methodname> は、
                 使用するコントローラを設定します。
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>setErrorHandlerAction()</code> は、
+                <methodname>setErrorHandlerAction()</methodname> は、
                 使用するコントローラアクションを設定します。
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>setErrorHandler()</code> は連想配列を受け取ります。
+                <methodname>setErrorHandler()</methodname> は連想配列を受け取ります。
                 この連想配列のキーには 'module'、'controller'
                 あるいは 'action' を指定することができ、
                 それぞれ対応する値を設定します。
@@ -73,13 +73,13 @@
 
     <para>
         さらに、コンストラクタの引数として連想配列を渡すこともできます。
-        この場合、その配列がそのまま <code>setErrorHandler()</code>
+        この場合、その配列がそのまま <methodname>setErrorHandler()</methodname>
         に渡されます。
     </para>
 
     <para>
         <classname>Zend_Controller_Plugin_ErrorHandler</classname> は
-        <code>postDispatch()</code> フックとして登録され、
+        <methodname>postDispatch()</methodname> フックとして登録され、
         <link linkend="zend.controller.response">レスポンスオブジェクト</link>
         に格納された例外を確認します。もし何かの例外が見つかったら、
         事前に登録されているエラーハンドラアクションに処理を転送します。
@@ -95,7 +95,7 @@
         <title>404 ハンドラとしての ErrorHandler の使用</title>
 
         <para>
-            <code>ErrorHandler</code> プラグインが捕捉するのは、
+            <emphasis>ErrorHandler</emphasis> プラグインが捕捉するのは、
             アプリケーションのエラーだけではありません。
             コントローラチェインが次のコントローラクラスやアクションメソッドを
             見つけられなかった場合に、404 ハンドラとして動作させることもできます。
@@ -121,7 +121,7 @@ class ErrorController extends Zend_Controller_Action
 
         <para>
             エラーオブジェクトを取得したら、次に
-            <code>$errors->type</code> でその型を調べます。
+            <varname>$errors->type</varname> でその型を調べます。
             これは、次のいずれかとなります。
         </para>
 
@@ -223,7 +223,7 @@ public function errorAction()
 
         <para>
             ひとつのリクエストで複数のアクションにディスパッチする場合、
-            あるいはアクション内で <code>render()</code> を複数回コールする場合などは、
+            あるいはアクション内で <methodname>render()</methodname> を複数回コールする場合などは、
             レスポンスオブジェクト内にすでに内容が格納されていることがあります。
             これをうまく処理しないと、本当に必要な内容と
             それ以外の内容が混じってしまう恐れがあります。

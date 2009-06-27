@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 16178 -->
 <sect3 id="zend.controller.plugins.standard.actionstack">
     <title>ActionStack</title>
 
     <para>
-        <code>ActionStack</code> プラグインは、リクエストをスタックで管理します。
+        <emphasis>ActionStack</emphasis> プラグインは、リクエストをスタックで管理します。
         <code>postDispatch</code> プラグインとして動作します。
         現在のリクエストオブジェクトで既に転送先が指定されている
         (別のアクションがコールされている) 場合は、何も行いません。
@@ -23,33 +23,33 @@
 
     <itemizedlist>
         <listitem><para>
-                <code>getRegistry()</code> および <code>setRegistry()</code>。
-                <code>ActionStack</code> は、内部的に
+                <methodname>getRegistry()</methodname> および <methodname>setRegistry()</methodname>。
+                <emphasis>ActionStack</emphasis> は、内部的に
                 <classname>Zend_Registry</classname> のインスタンスを使ってスタックを管理しています。
                 別のレジストリインスタンスでこれを置き換えたり、
                 インスタンスを取得したりする際にこれらのアクセサを使用します。
         </para></listitem>
 
         <listitem><para>
-                <code>getRegistryKey()</code> および <code>setRegistryKey()</code>。
+                <methodname>getRegistryKey()</methodname> および <methodname>setRegistryKey()</methodname>。
                 これらは、スタックに格納する際にレジストリのどのキーを使用するかを指定します。
                 デフォルト値は 'Zend_Controller_Plugin_ActionStack' です。
         </para></listitem>
 
         <listitem><para>
-                <code>getStack()</code> は、
+                <methodname>getStack()</methodname> は、
                 そのアクションのスタック全体を取得します。
         </para></listitem>
 
         <listitem><para>
-                <code>pushStack()</code> および <code>popStack()</code>
+                <methodname>pushStack()</methodname> および <methodname>popStack()</methodname>
                 は、それぞれスタックへの追加とスタックからの取り出しを行います。
-                <code>pushStack()</code> にはリクエストオブジェクトを渡します。
+                <methodname>pushStack()</methodname> にはリクエストオブジェクトを渡します。
         </para></listitem>
     </itemizedlist>
 
     <para>
-        さらに <code>forward()</code> メソッドが存在します。
+        さらに <methodname>forward()</methodname> メソッドが存在します。
         このメソッドにはリクエストオブジェクトを渡し、
         フロントコントローラにおける現在のリクエストオブジェクトの状態を
         ここで渡したオブジェクトの状態に設定します。

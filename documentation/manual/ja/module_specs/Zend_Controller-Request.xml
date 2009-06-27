@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15719 -->
+<!-- EN-Revision: 16178 -->
 <sect1 id="zend.controller.request">
     <title>リクエストオブジェクト</title>
     <sect2 id="zend.controller.request.introduction">
@@ -15,28 +15,28 @@
         <itemizedlist>
             <listitem><para>
                 モジュール名にアクセスするには
-                <code>getModuleName()</code> および
-                <code>setModuleName()</code> を使用します。
+                <methodname>getModuleName()</methodname> および
+                <methodname>setModuleName()</methodname> を使用します。
             </para></listitem>
 
             <listitem><para>
                 コントローラ名にアクセスするには
-                <code>getControllerName()</code> および
-                <code>setControllerName()</code> を使用します。
+                <methodname>getControllerName()</methodname> および
+                <methodname>setControllerName()</methodname> を使用します。
             </para></listitem>
 
             <listitem><para>
                 コントローラ内でコールするアクションの名前にアクセスするには
-                <code>getActionName()</code> および
-                <code>setActionName()</code> を使用します。
+                <methodname>getActionName()</methodname> および
+                <methodname>setActionName()</methodname> を使用します。
             </para></listitem>
 
             <listitem><para>
                 アクションからアクセスできるパラメータは
                 キー/値 の組み合わせの連想配列となります。これらを取得するには
-                <code>getParams()</code> を、そして設定するには
-                <code>setParams()</code> を使用します。各パラメータを個別に扱うには
-                <code>getParam()</code> および <code>setParam()</code> を使用します。
+                <methodname>getParams()</methodname> を、そして設定するには
+                <methodname>setParams()</methodname> を使用します。各パラメータを個別に扱うには
+                <methodname>getParam()</methodname> および <methodname>setParam()</methodname> を使用します。
             </para></listitem>
         </itemizedlist>
 
@@ -101,9 +101,9 @@
                 特定のスーパーグローバルにアクセスするには、
                 パブリックメソッドを使用する方法もあります。たとえば、
                 <varname>$_POST['user']</varname> の値を取得するには、リクエストオブジェクト上で
-                <code>getPost('user')</code> をコールします。同様に、
-                <varname>$_GET</varname> 要素の場合は <code>getQuery()</code>、
-                リクエストヘッダの場合は <code>getHeader()</code>
+                <methodname>getPost('user')</methodname> をコールします。同様に、
+                <varname>$_GET</varname> 要素の場合は <methodname>getQuery()</methodname>、
+                リクエストヘッダの場合は <methodname>getHeader()</methodname>
                 を使用します。
             </para>
 
@@ -122,7 +122,7 @@
 
                 <para>
                     1.5.0 以降では、生の投稿データを
-                    <code>getRawBody()</code> メソッドで取得することができます。
+                    <methodname>getRawBody()</methodname> メソッドで取得することができます。
                     このメソッドは、データが送信されていない場合は false を返します。
                     送信されている場合は、投稿内容の本文全体を返します。
                 </para>
@@ -135,8 +135,8 @@
 
             <para>
                 ユーザパラメータをリクエストオブジェクトに設定するには
-                <code>setParam()</code> を、後でそれを取得するには
-                <code>getParam()</code> を使用します。
+                <methodname>setParam()</methodname> を、後でそれを取得するには
+                <methodname>getParam()</methodname> を使用します。
                 ルータは、リクエスト URI にマッチしたパラメータを
                 リクエストオブジェクトに設定する際にこの機能を使用します。
             </para>
@@ -145,26 +145,26 @@
                 <title>getParam() でのユーザパラメータ以外の取得</title>
 
                 <para>
-                    <code>getParam()</code> は、実際にはユーザパラメータ以外のところからも情報を取得しています。
-                    優先順位の高い順に並べると、まず最初は <code>setParam()</code>
+                    <methodname>getParam()</methodname> は、実際にはユーザパラメータ以外のところからも情報を取得しています。
+                    優先順位の高い順に並べると、まず最初は <methodname>setParam()</methodname>
                     で設定したパラメータ、それから <code>GET</code> パラメータ、
                     <code>POST</code> パラメータの順になります。
                     このメソッドを使用する際には、この点に注意しましょう。
                 </para>
 
                 <para>
-                    <code>setParam()</code> で設定したパラメータからだけ取得したい場合は、
-                    <code>getUserParam()</code> を使用します。
+                    <methodname>setParam()</methodname> で設定したパラメータからだけ取得したい場合は、
+                    <methodname>getUserParam()</methodname> を使用します。
                 </para>
 
                 <para>
                     さらに、1.5.0 以降では
                     どのパラメータから検索するかを制限することができます。
-                    <code>setParamSources()</code> に空の配列あるいは
+                    <methodname>setParamSources()</methodname> に空の配列あるいは
                     値 '_GET' や '_POST' を含む配列を指定して使用します
                     (デフォルトでは両方が指定されています)。'_GET'
                     からのみに制限したい場合は
-                    <code>setParamSources(array('_GET'))</code> とします。
+                    <methodname>setParamSources(array('_GET'))</methodname> とします。
                 </para>
             </note>
 
@@ -210,14 +210,14 @@ $front->setRequest($request);
             </para>
 
             <para>
-                たとえば、<code>index.php</code> をウェブサーバのサブディレクトリ
-                <code>/projects/myapp/index.php</code> においた場合は、ベース URL
-                (rewrite base) は <code>/projects/myapp</code> にしなければなりません。
+                たとえば、<filename>index.php</filename> をウェブサーバのサブディレクトリ
+                <filename>/projects/myapp/index.php</filename> においた場合は、ベース URL
+                (rewrite base) は <filename>/projects/myapp</filename> にしなければなりません。
                 マッチするルートを見つける前に、この文字列がパスの先頭から取り除かれます。
                 これにより、すべてのルートに余計な文字を追加する必要がなくなります。
-                ルート <code>'user/:username'</code> は、
-                <code>http://localhost/projects/myapp/user/martel</code> および
-                <code>http://example.com/user/martel</code> の両方にマッチするようになります。
+                ルート <filename>'user/:username'</filename> は、
+                <filename>http://localhost/projects/myapp/user/martel</filename> および
+                <filename>http://example.com/user/martel</filename> の両方にマッチするようになります。
             </para>
 
             <note>
@@ -234,7 +234,7 @@ $front->setRequest($request);
                 ベース URL の検出に失敗する場合は、
                 <classname>Zend_Controller_Request_Http</classname> クラス、あるいは
                 <classname>Zend_Controller_Front</classname> クラスの
-                <code>setBaseUrl()</code> メソッドを使用して
+                <methodname>setBaseUrl()</methodname> メソッドを使用して
                 ベースパスを上書き指定することができます。
                 一番簡単な方法は <classname>Zend_Controller_Front</classname> で設定することです。
                 この設定はリクエストオブジェクトに引き継がれます。
@@ -259,7 +259,7 @@ $response   = $controller->dispatch();
             <title>リクエストメソッドの判定</title>
 
             <para>
-                <code>getMethod()</code> では、
+                <methodname>getMethod()</methodname> では、
                 現在のリソースへのリクエストの際に使用した
                 HTTP メソッドを判定することができます。
                 さらに、指定した型のリクエストであったかどうかを判定するための
@@ -267,12 +267,12 @@ $response   = $controller->dispatch();
             </para>
 
             <itemizedlist>
-                <listitem><para><code>isGet()</code></para></listitem>
-                <listitem><para><code>isPost()</code></para></listitem>
-                <listitem><para><code>isPut()</code></para></listitem>
-                <listitem><para><code>isDelete()</code></para></listitem>
-                <listitem><para><code>isHead()</code></para></listitem>
-                <listitem><para><code>isOptions()</code></para></listitem>
+                <listitem><para><methodname>isGet()</methodname></para></listitem>
+                <listitem><para><methodname>isPost()</methodname></para></listitem>
+                <listitem><para><methodname>isPut()</methodname></para></listitem>
+                <listitem><para><methodname>isDelete()</methodname></para></listitem>
+                <listitem><para><methodname>isHead()</methodname></para></listitem>
+                <listitem><para><methodname>isOptions()</methodname></para></listitem>
             </itemizedlist>
 
             <para>
@@ -287,7 +287,7 @@ $response   = $controller->dispatch();
             <para>
                 <classname>Zend_Controller_Request_Http</classname> には、
                 AJAX リクエストを検出するための基本的なメソッド
-                <code>isXmlHttpRequest()</code> が用意されています。
+                <methodname>isXmlHttpRequest()</methodname> が用意されています。
                 このメソッドは、HTTP リクエストヘッダ
                 <code>X-Requested-With</code> に
                 'XMLHttpRequest' という値が設定されているかどうかを調べ、
@@ -310,7 +310,7 @@ $response   = $controller->dispatch();
                 大半の AJAX ライブラリは、独自の HTTP リクエストヘッダを送信することができます。
                 ご利用のライブラリがこのヘッダを送信していない場合は、
                 自分でこのヘッダを追加することで
-                <code>isXmlHttpRequest()</code> メソッドの動作を期待通りにすることができます。
+                <methodname>isXmlHttpRequest()</methodname> メソッドの動作を期待通りにすることができます。
             </para>
         </sect3>
     </sect2>

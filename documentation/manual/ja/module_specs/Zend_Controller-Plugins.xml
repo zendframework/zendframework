@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16178 -->
 <sect1 id="zend.controller.plugins" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>プラグイン</title>
 
@@ -24,7 +24,7 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>routeStartup()</code> は、<classname>Zend_Controller_Front</classname>
+                    <methodname>routeStartup()</methodname> は、<classname>Zend_Controller_Front</classname>
                     が <link linkend="zend.controller.router">ルータ</link>
                     をコールしてルートに対するリクエストの評価を始める前にコールされます。
                 </para>
@@ -32,7 +32,7 @@
 
             <listitem>
                 <para>
-                    <code>routeShutdown()</code> は、
+                    <methodname>routeShutdown()</methodname> は、
                     <link linkend="zend.controller.router">ルータ</link>
                     がリクエストのルーティングを終了した後にコールされます。
                 </para>
@@ -40,14 +40,14 @@
 
             <listitem>
                 <para>
-                    <code>dispatchLoopStartup()</code> は、<classname>Zend_Controller_Front</classname>
+                    <methodname>dispatchLoopStartup()</methodname> は、<classname>Zend_Controller_Front</classname>
                     がディスパッチループに入る前にコールされます。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>preDispatch()</code> は、アクションが
+                    <methodname>preDispatch()</methodname> は、アクションが
                     <link linkend="zend.controller.dispatcher">ディスパッチャ</link> でディスパッチされる前にコールされます。
                     このコールバックは、プロキシやフィルタ的な動作をさせることができます。
                     リクエストの内容を変更してディスパッチフラグをリセット
@@ -58,7 +58,7 @@
 
             <listitem>
                 <para>
-                    <code>postDispatch()</code> は、アクションが <link linkend="zend.controller.dispatcher">ディスパッチャ</link>
+                    <methodname>postDispatch()</methodname> は、アクションが <link linkend="zend.controller.dispatcher">ディスパッチャ</link>
                     でディスパッチされた後にコールされます。
                     このコールバックは、プロキシやフィルタ的な動作をさせることができます。
                     リクエストの内容を変更してディスパッチフラグをリセット
@@ -69,7 +69,7 @@
 
             <listitem>
                 <para>
-                    <code>dispatchLoopShutdown()</code> は、<classname>Zend_Controller_Front</classname>
+                    <methodname>dispatchLoopShutdown()</methodname> は、<classname>Zend_Controller_Front</classname>
                     がディスパッチループを抜けた後にコールされます。
                 </para>
             </listitem>
@@ -102,8 +102,8 @@ class MyPlugin extends Zend_Controller_Plugin_Abstract
         <para>
             <classname>Zend_Controller_Plugin_Abstract</classname> では、
             リクエストオブジェクトやレスポンスオブジェクトをプラグインから操作することができます。
-            それぞれ、<code>getRequest()</code> メソッドおよび
-            <code>getResponse()</code> メソッドを使用します。
+            それぞれ、<methodname>getRequest()</methodname> メソッドおよび
+            <methodname>getResponse()</methodname> メソッドを使用します。
         </para>
     </sect2>
 
@@ -197,18 +197,18 @@ $front->dispatch();
 
         <itemizedlist>
             <listitem><para>
-                    <code>getPlugin($class)</code>
+                    <methodname>getPlugin($class)</methodname>
                     は、指定したクラス名のプラグインを取得します。
                     一致するプラグインがない場合は false を返します。
                     同じクラス名のプラグインが複数登録されている場合は、結果を配列で返します。
             </para></listitem>
 
             <listitem><para>
-                    <code>getPlugins()</code> は、プラグインスタック全体を取得します。
+                    <methodname>getPlugins()</methodname> は、プラグインスタック全体を取得します。
             </para></listitem>
 
             <listitem><para>
-                    <code>unregisterPlugin($plugin)</code>
+                    <methodname>unregisterPlugin($plugin)</methodname>
                     は、プラグインをスタックから登録解除します。
                     パラメータには、プラグインオブジェクト自体かそのクラス名を渡します。
                     クラス名を渡すと、一致するプラグインがすべて削除されます。

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16178 -->
 <sect1 id="zend.controller.quickstart">
     <title>Zend_Controller クイックスタート</title>
 
@@ -75,7 +75,7 @@ html/
             <title>rewrite ルールの作成</title>
 
             <para>
-                上のレイアウトの <code>html/.htaccess</code>
+                上のレイアウトの <filename>html/.htaccess</filename>
                 ファイルを、次のように編集します。
             </para>
 
@@ -158,8 +158,8 @@ RewriteRule ^.*$ index.php [NC,L]
 
             <para>
                 起動ファイルとはすべてのリクエストの転送先となるファイルのことで、
-                今回の例では <code>html/index.php</code> がそれにあたります。
-                <code>html/index.php</code> をお好みのエディタで開き、次の内容を追加します。
+                今回の例では <filename>html/index.php</filename> がそれにあたります。
+                <filename>html/index.php</filename> をお好みのエディタで開き、次の内容を追加します。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -180,8 +180,8 @@ Zend_Controller_Front::run('/path/to/app/controllers');
                 Zend Framework でのリクエストの処理方法について知っておきましょう。
                 デフォルトでは、URL パスの最初の部分がコントローラ、
                 そしてその次の部分がアクションに対応します。たとえば URL が
-                <code>http://framework.zend.com/roadmap/components</code>
-                である場合、パスは <code>/roadmap/components</code>
+                <filename>http://framework.zend.com/roadmap/components</filename>
+                である場合、パスは <filename>/roadmap/components</filename>
                 となり、これは <code>roadmap</code> コントローラの
                 <code>components</code> アクションに対応します。
                 アクションを省略した場合は <code>index</code> アクションであるとみなされます。
@@ -205,7 +205,7 @@ Zend_Controller_Front::run('/path/to/app/controllers');
                 <code>Action</code> を追加したものがメソッド名となります。
                 つまり、上の例では <code>components</code> アクションは
                 <code>componentsAction</code> メソッドになり、最終的に
-                <code>RoadmapController::componentsAction()</code>
+                <methodname>RoadmapController::componentsAction()</methodname>
                 がコールされることになります。
             </para>
 
@@ -214,7 +214,7 @@ Zend_Controller_Front::run('/path/to/app/controllers');
                 アクションメソッドを作ってみましょう。
                 先ほど説明したように、デフォルトのコントローラ名およびアクション名はどちらも
                 <code>index</code> となります。
-                <code>application/controllers/IndexController.php</code>
+                <filename>application/controllers/IndexController.php</filename>
                 を開き、次の内容を入力しましょう。
             </para>
 
@@ -235,18 +235,18 @@ class IndexController extends Zend_Controller_Action
                 アクションメソッドとそれに対応するビュースクリプトを用意すれば、
                 すぐにその内容をレンダリングできるというわけです。
                 デフォルトでは、MVCのビュー層として <classname>Zend_View</classname> を使用します。
-                <code>ViewRenderer</code> は、コントローラ名
+                <emphasis>ViewRenderer</emphasis> は、コントローラ名
                 (たとえば <code>index</code>) とアクション名
                 (たとえば <code>index</code>) から処理するテンプレートを決定します。
                 デフォルトでは、テンプレートの拡張子は
-                <code>.phtml</code> となります。つまり、上の例では
-                <code>index/index.phtml</code> をレンダリングします。
-                さらに <code>ViewRenderer</code> は、
+                <filename>.phtml</filename> となります。つまり、上の例では
+                <filename>index/index.phtml</filename> をレンダリングします。
+                さらに <emphasis>ViewRenderer</emphasis> は、
                 コントローラと同一階層にある <code>views</code>
                 ディレクトリを自動的にビューの基底ディレクトリとみなし、
-                <code>views/scripts/</code> ビュースクリプトがおかれるものと考えます。
+                <filename>views/scripts/</filename> ビュースクリプトがおかれるものと考えます。
                 したがって、実際にレンダリングされるテンプレートは
-                <code>application/views/scripts/index/index.phtml</code>
+                <filename>application/views/scripts/index/index.phtml</filename>
                 となります。
             </para>
         </sect3>
@@ -257,9 +257,9 @@ class IndexController extends Zend_Controller_Action
             <para>
                 <link linkend="zend.controller.quickstart.go.controller">
                 先ほど説明したように</link>、ビュースクリプトの場所は
-                <code>application/views/scripts/</code> です。
+                <filename>application/views/scripts/</filename> です。
                 デフォルトコントローラにおけるデフォルトのアクションのビュースクリプトは
-                <code>application/views/scripts/index/index.phtml</code>
+                <filename>application/views/scripts/index/index.phtml</filename>
                 となります。このファイルを作成し、何か HTML を入力してみましょう。
             </para>
 
@@ -288,7 +288,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
                 エラーハンドラプラグイン</link> が登録されています。
                 このプラグインを使用するには、エラー処理用のコントローラが必要です。
                 デフォルト設定では、デフォルトモジュールの
-                <code>ErrorController</code> に <code>errorAction</code>
+                <emphasis>ErrorController</emphasis> に <methodname>errorAction()</methodname>
                 というメソッドがあることを想定しています。
             </para>
 
@@ -303,9 +303,9 @@ class ErrorController extends Zend_Controller_Action
 
             <para>
                 先ほど説明したディレクトリ構成により、このファイルは
-                <code>application/controllers/ErrorController.php</code>
+                <filename>application/controllers/ErrorController.php</filename>
                 に配置されることになります。これとは別に、ビュースクリプト
-                <code>application/views/scripts/error/error.phtml</code>
+                <filename>application/views/scripts/error/error.phtml</filename>
                 が必要です。その中身は、たとえば次のようになるでしょう。
             </para>
 
@@ -331,14 +331,14 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 
             <para>
                 ここまでくれば、実際にブラウザでサイトを表示してみることができます。
-                あなたのドメインが <code>example.com</code> だとすると、
+                あなたのドメインが <filename>example.com</filename> だとすると、
                 以下のいずれかの URL で先ほど作成したページが表示されることでしょう。
             </para>
 
             <itemizedlist>
-                <listitem><para><code>http://example.com/</code></para></listitem>
-                <listitem><para><code>http://example.com/index</code></para></listitem>
-                <listitem><para><code>http://example.com/index/index</code></para></listitem>
+                <listitem><para><filename>http://example.com/</filename></para></listitem>
+                <listitem><para><filename>http://example.com/index</filename></para></listitem>
+                <listitem><para><filename>http://example.com/index/index</filename></para></listitem>
             </itemizedlist>
 
             <para>

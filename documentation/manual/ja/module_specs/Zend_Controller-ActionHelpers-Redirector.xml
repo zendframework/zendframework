@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15719 -->
+<!-- EN-Revision: 16162 -->
 <sect3 id="zend.controller.actionhelpers.redirector">
     <title>Redirector</title>
 
@@ -8,40 +8,40 @@
         <title>導入</title>
 
         <para>
-            <code>Redirector</code> ヘルパーは、
+            <emphasis>Redirector</emphasis> ヘルパーは、
             アプリケーション内で必要となるリダイレクト処理用のオブジェクトとして使用します。
-            <code>_redirect()</code> メソッドと比べた場合の利点としては、
+            <methodname>_redirect()</methodname> メソッドと比べた場合の利点としては、
             サイト全体で使用する設定を事前に組み込んでおけることがあります。また、
             <classname>Zend_Controller_Action::_forward()</classname>
             の場合と同様に、組み込みのインターフェイス
-            <code>gotoSimple($action, $controller, $module, $params)</code>
+            <methodname>gotoSimple($action, $controller, $module, $params)</methodname>
             が使用できることも利点となります。
         </para>
 
         <para>
-            <code>Redirector</code> では、
+            <emphasis>Redirector</emphasis> では、
             リダイレクトの設定を行うメソッドとして次のようなものが用意されています。
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>setCode()</code> を使用して、
+                    <methodname>setCode()</methodname> を使用して、
                     リダイレクトの際に使用する HTTP レスポンスコードを設定します。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setExit()</code> を使用して、
-                    リダイレクトの後で強制的に <code>exit()</code> を実行させるようにします。
+                    <methodname>setExit()</methodname> を使用して、
+                    リダイレクトの後で強制的に <methodname>exit()</methodname> を実行させるようにします。
                     デフォルトは true です。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setGotoSimple()</code> を使用して、<code>gotoSimple()</code>
+                    <methodname>setGotoSimple()</methodname> を使用して、<methodname>gotoSimple()</methodname>
                     に何も渡されなかったときのデフォルトの URL を設定します。
                     <classname>Zend_Controller_Action::_forward()</classname> の API である
                     setGotoSimple($action, $controller = null, $module = null, array
@@ -51,7 +51,7 @@
 
             <listitem>
                 <para>
-                    <code>setGotoRoute()</code> を使用して、
+                    <methodname>setGotoRoute()</methodname> を使用して、
                     登録済みのルートにもとづいた URL を設定します。
                     キー/値 のペアの配列とルート名を渡し、
                     それをもとにルートの型と定義から URL を作成します。
@@ -60,7 +60,7 @@
 
             <listitem>
                 <para>
-                    <code>setGotoUrl()</code> を使用して、<code>gotoUrl()</code>
+                    <methodname>setGotoUrl()</methodname> を使用して、<methodname>gotoUrl()</methodname>
                     に何も渡されなかったときのデフォルトの URL を設定します。
                     URL を表す文字列を受け取ります。
                 </para>
@@ -68,17 +68,17 @@
 
             <listitem>
                 <para>
-                    <code>setPrependBase()</code> を使用して、
-                    <code>setGotoUrl()</code>、<code>gotoUrl()</code>
-                    あるいは <code>gotoUrlAndExit()</code>
+                    <methodname>setPrependBase()</methodname> を使用して、
+                    <methodname>setGotoUrl()</methodname>、<methodname>gotoUrl()</methodname>
+                    あるいは <methodname>gotoUrlAndExit()</methodname>
                     で指定した URL の前にリクエストのベース URL を追加します。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setUseAbsoluteUri()</code> を使用すると、
-                    <code>Redirector</code> がリダイレクトの際に絶対
+                    <methodname>setUseAbsoluteUri()</methodname> を使用すると、
+                    <methodname>Redirector</methodname> がリダイレクトの際に絶対
                     URL を使用するようになります。
                     このオプションを設定すると、
                     <varname>$_SERVER['HTTP_HOST']</varname> や
@@ -98,15 +98,15 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>gotoSimple()</code> は、<code>setGotoSimple()</code>
-                    (<code>_forward() 風の API</code>) を用いて作成した URL
+                    <methodname>gotoSimple()</methodname> は、<methodname>setGotoSimple()</methodname>
+                    (<methodname>_forward()</methodname> 風の API) を用いて作成した URL
                     にリダイレクトします。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>gotoRoute()</code> は、<code>setGotoRoute()</code>
+                    <methodname>gotoRoute()</methodname> は、<methodname>setGotoRoute()</methodname>
                     (<code>ルートの作成</code>) を用いて作成した URL
                     にリダイレクトします。
                 </para>
@@ -114,7 +114,7 @@
 
             <listitem>
                 <para>
-                    <code>gotoUrl()</code> は <code>setGotoUrl()</code>
+                    <methodname>gotoUrl()</methodname> は <methodname>setGotoUrl()</methodname>
                     (<code>URL 文字列の指定</code>) を用いて作成した URL
                     にリダイレクトします。
                 </para>
@@ -123,7 +123,7 @@
 
         <para>
             リダイレクト先の URL を知るには
-            <code>getRedirectUrl()</code> を使用します。
+            <methodname>getRedirectUrl()</methodname> を使用します。
             これはいつでも使用できます。
         </para>
     </sect4>
@@ -183,7 +183,7 @@ class SomeController extends Zend_Controller_Action
             <para>
                 この例ではデフォルト設定を使用しています。
                 つまり、リダイレクトするとすぐに
-                <code>exit()</code> が実行されるということです。
+                <methodname>exit()</methodname> が実行されるということです。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -218,7 +218,7 @@ class AlternativeController extends Zend_Controller_Action
             <title>goto() での _forward() API の使用</title>
 
             <para>
-                <code>gotoSimple()</code> の API は、
+                <methodname>gotoSimple()</methodname> の API は、
                 <classname>Zend_Controller_Action::_forward()</classname>
                 と同じ形式です。違う点は、このメソッドは渡されたパラメータから URL
                 を作成し、デフォルトルータのデフォルトフォーマットである
@@ -266,7 +266,7 @@ class ForwardController extends Zend_Controller_Action
             <para>
                 次の例は、<link
                     linkend="zend.controller.router">ルータ</link>
-                の <code>assemble()</code> メソッドを使用して、
+                の <methodname>assemble()</methodname> メソッドを使用して、
                 パラメータで指定した連想配列に基づく URL を作成しています。
                 次のようなルートが登録されているものと仮定します。
             </para>

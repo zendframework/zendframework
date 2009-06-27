@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16087 -->
+<!-- EN-Revision: 16170 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.messages">
 
@@ -574,6 +574,45 @@
 $validator = new Zend_Validate_Alnum();
 $messages  = $validator->getMessageTemplates();
 ]]></programlisting>
+
+    <sect2 id="zend.validate.messages">
+        <title>Begrenzen der Größe einer Prüfungsmeldung</title>
+
+        <para>
+            Manchmal ist es notwendig die maximale Größe die eine Prüfungsmeldung haben kann zu
+            begrenzen. Zum Beispiel wenn die View nur eine maximale Größe von 100 Zeichen für die
+            Darstellung auf einer Zeile erlaubt. Um die Verwendung zu vereinfachen, ist
+            <classname>Zend_Validate</classname> dazu in der Lage die maximal zurückgegebene
+            Größe einer Prüfnachricht zu begrenzen.
+        </para>
+
+        <para>
+            Um die aktuell gesetzte Größe zu erhalten ist
+            <methodname>Zend_Validate::getMessageLength()</methodname> zu verwenden. Wenn diese
+            -1 ist, dann wird die zurückgegebene Nachricht nicht begrenzt. Das ist das
+            Standardverhalten.
+        </para>
+
+        <para>
+            Um die Größe der zurückgegebenen Nachrichten zu begrenzen ist
+            <methodname>Zend_Validate::setMessageLength()</methodname> zu verwenden. Man kann diese
+            auf jede benötigte Integer Größe setzen. Wenn die zurückzugebende Nachricht die
+            gesetzte Größe überschreitet, dann wird die Nachricht abgeschnitten und der String
+            '<emphasis>...</emphasis>' wird statt dem Rest der Nachricht hinzugefügt.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+Zend_Validate::setMessageLength(100);
+]]></programlisting>
+
+        <note>
+            <para>
+                Es ist zu beachten das die gesetzte Länge der Nachrichten für alle Prüfungen
+                verwendet wird, sogar für selbstdefinierte, solange Sie
+                <classname>Zend_Validate_Abstract</classname> erweitern.
+            </para>
+        </note>
+    </sect2>
 
 </sect1>
 <!--

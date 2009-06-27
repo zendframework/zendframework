@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16180 -->
 <sect3 id="zend.controller.router.routes.standard">
     <title>Zend_Controller_Router_Route</title>
 
@@ -13,7 +13,7 @@
 
     <para>
         とある架空のアプリケーションで、コンテンツの作者情報のページが必要になったとしましょう。
-        ブラウザで <code>http://domain.com/author/martel</code>
+        ブラウザで <filename>http://domain.com/author/martel</filename>
         にアクセスした際に、"martel" とかいう人についての情報を見たいわけです。
         この機能を実現するためのルートは、次のようになります。
     </para>
@@ -53,7 +53,7 @@ $router->addRoute('user', $route);
 
     <para>
         この例のルートは、ブラウザで
-        <code>'http://domain.com/author/martel'</code> を指した際にマッチします。
+        <filename>'http://domain.com/author/martel'</filename> を指した際にマッチします。
         この場合、すべての変数の値が <classname>Zend_Controller_Request</classname>
         オブジェクトに注入され、ProfileController からアクセスできるようになります。
         この例が返す変数は、以下のようなキーと値のペアを持つ配列となります。
@@ -70,7 +70,7 @@ $values = array(
     <para>
         その後、<classname>Zend_Controller_Dispatcher</classname> は
         (デフォルトモジュールの) <code>ProfileController</code> クラスにある
-        <code>userinfoAction()</code> メソッドを実行します。変数にアクセスするには、
+        <methodname>userinfoAction()</methodname> メソッドを実行します。変数にアクセスするには、
         <classname>Zend_Controller_Action::_getParam()</classname> あるいは
         <classname>Zend_Controller_Request::getParam()</classname> メソッドを使用します。
     </para>
@@ -121,8 +121,8 @@ $router->addRoute('archive', $route);
 ]]></programlisting>
 
         <para>
-            上のルートは <code>'http://domain.com/archive/2005'</code> および
-            <code>'http://example.com/archive'</code>
+            上のルートは <filename>'http://domain.com/archive/2005'</filename> および
+            <filename>'http://example.com/archive'</filename>
             のような URL にマッチします。後者の場合、変数 year にはデフォルト値である
             2006 が設定されます。
         </para>
@@ -151,7 +151,7 @@ $router->addRoute('archive', $route);
 
         <para>
             このルートは、<code>ArchiveController</code> の
-            <code>showAction()</code> を実行します。
+            <methodname>showAction()</methodname> を実行します。
         </para>
 
     </sect4>
@@ -181,8 +181,8 @@ $router->addRoute('archive', $route);
         <para>
             上の例のルートでは、year 変数の値が数値データである場合にのみ
             Rewrite ルータにマッチします。つまり
-            <code>http://domain.com/archive/2345</code> はマッチしますが
-            <code>http://example.com/archive/test</code> はマッチしません。
+            <filename>http://domain.com/archive/2345</filename> はマッチしますが
+            <filename>http://example.com/archive/test</filename> はマッチしません。
             この場合はチェイン内の次のルートに処理を移します。
         </para>
     </sect4>

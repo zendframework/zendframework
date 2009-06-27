@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15719 -->
+<!-- EN-Revision: 16180 -->
 <sect3 id="zend.controller.router.routes.hostname">
     <title>Zend_Controller_Router_Route_Hostname</title>
 
@@ -14,7 +14,7 @@
         標準のルートの例を使用して、
         ホスト名に基づいた動作がどのようなものになるのかを見ていきましょう。
         パスを利用してユーザをコールするのではなく、たとえば
-        <code>http://martel.users.example.com</code>
+        <filename>http://martel.users.example.com</filename>
         でユーザ "martel" の情報を見られるようにしたいものとします。
     </para>
 
@@ -47,7 +47,7 @@ $router->addRoute('user', $hostnameRoute->chain($plainPathRoute);
         hostname ルートを単独で使うこともできますが、決してしてはいけません。
         その理由は、hostname ルートはそれ単体だと任意のパスにマッチすることになるからです。
         hostname ルートの後には path ルートをつなげなければなりません。
-        例に示したように、<code>$hostnameRoute->chain($pathRoute);</code>
+        例に示したように、<methodname>$hostnameRoute->chain($pathRoute);</methodname>
         のようにコールすることになります。こうすると、
         <varname>$hostnameRoute</varname> には何も変更は加えられませんが、新たなルート
         (<classname>Zend_Controller_Router_Route_Chain</classname>) が返されます。

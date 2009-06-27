@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15741 -->
+<!-- EN-Revision: 16180 -->
 <sect1 id="zend.controller.response">
     <title>レスポンスオブジェクト</title>
 
@@ -25,7 +25,7 @@ $front->throwExceptions(true);
 
         <para>
             ヘッダを含むレスポンス出力を送信するには、
-            <code>sendOutput()</code> を使用します。
+            <methodname>sendResponse()</methodname> を使用します。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -35,10 +35,10 @@ $response->sendResponse();
         <note>
             <para>
                 デフォルトでは、リクエストのディスパッチに終了した時点でフロントコントローラが
-                <code>sendResponse()</code> をコールします。通常はこれをコールする必要はありません。
+                <methodname>sendResponse()</methodname> をコールします。通常はこれをコールする必要はありません。
                 しかし、テスト中などにレスポンスの内容を操作したい場合は、
                 <code>returnResponse</code> フラグを
-                <classname>Zend_Controller_Front::returnResponse(true)</classname>
+                <methodname>Zend_Controller_Front::returnResponse(true)</methodname>
                 と設定することでこの振る舞いを変更できます。
             </para>
 
@@ -83,8 +83,8 @@ $this->getResponse()
 
         <para>
             アプリケーションで例外が発生したかどうかを調べるには、
-            レスポンスオブジェクトの <code>isException()</code>
-            フラグを調べます。例外を取得するには <code>getException()</code>
+            レスポンスオブジェクトの <methodname>isException()</methodname>
+            フラグを調べます。例外を取得するには <methodname>getException()</methodname>
             を使用します。さらに、独自のレスポンスオブジェクトを作成して、
             エラーページへのリダイレクトや例外メッセージのログ出力、
             例外をわかりやすく表示する (開発用) などを行うことができます。
@@ -117,9 +117,9 @@ $response->sendResponse();
 
         <para>
             デフォルトでは、例外メッセージは表示されません。
-            この挙動をオーバーライドするには <code>renderExceptions()</code>
+            この挙動をオーバーライドするには <methodname>renderExceptions()</methodname>
             メソッドを使用するか、あるいは上で示したようにフロントコントローラで
-            throwExceptions() を有効にします。
+            <methodname>throwExceptions()</methodname> を有効にします。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -150,7 +150,7 @@ $front->dispatch();
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>canSendHeaders()</code> を使用して、
+                    <methodname>canSendHeaders()</methodname> を使用して、
                     ヘッダがすでに送信されているかどうかを調べます。
                     オプションのフラグで、ヘッダが送信済みの場合に例外をスローするかどうかを指定します。
                     この設定は、プロパティ <code>headersSentThrowsException</code>
@@ -160,7 +160,7 @@ $front->dispatch();
 
             <listitem>
                 <para>
-                    <code>setHeader($name, $value, $replace = false)</code>
+                    <methodname>setHeader($name, $value, $replace = false)</methodname>
                     を使用して、個々のヘッダを設定します。デフォルトでは、
                     同名のヘッダがすでに存在した場合に既存のヘッダを置換することはありません。
                     しかし、<varname>$replace</varname> を true に設定すると、
@@ -169,14 +169,14 @@ $front->dispatch();
 
                 <para>
                     ヘッダを設定する前に、このメソッドは
-                    <code>canSendHeaders()</code> を使用して
+                    <methodname>canSendHeaders()</methodname> を使用して
                     ヘッダが現時点で送信済みでないかどうか、例外をスローするかどうかを調べます。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setRedirect($url, $code = 302)</code> は、
+                    <methodname>setRedirect($url, $code = 302)</methodname> は、
                     リダイレクト用の HTTP Location ヘッダを設定します。
                     HTTP ステータスコードを指定した場合は、そのコードを使用します。
                 </para>
@@ -184,13 +184,13 @@ $front->dispatch();
                 <para>
                     内部的には、このメソッドは
                     <varname>$replace</varname> フラグをオンにして
-                    <code>setHeader()</code> をコールしています。
+                    <methodname>setHeader()</methodname> をコールしています。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getHeaders()</code> は、すべてのヘッダを配列で返します。
+                    <methodname>getHeaders()</methodname> は、すべてのヘッダを配列で返します。
                     個々の配列の要素は、'name' および 'value'
                     のふたつのキーを持つ配列となります。
                 </para>
@@ -198,13 +198,13 @@ $front->dispatch();
 
             <listitem>
                 <para>
-                    <code>clearHeaders()</code> は登録済みのヘッダをすべて削除します。
+                    <methodname>clearHeaders()</methodname> は登録済みのヘッダをすべて削除します。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setRawHeader()</code>
+                    <methodname>setRawHeader()</methodname>
                     を使用して、キー/値 の組になっていないヘッダを設定します。
                     たとえば HTTP status ヘッダなどがこれにあたります。
                 </para>
@@ -212,19 +212,19 @@ $front->dispatch();
 
             <listitem>
                 <para>
-                    <code>getRawHeaders()</code> は、登録済みの生のヘッダを返します。
+                    <methodname>getRawHeaders()</methodname> は、登録済みの生のヘッダを返します。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>clearRawHeaders()</code> は、登録済みの生のヘッダを消去します。
+                    <methodname>clearRawHeaders()</methodname> は、登録済みの生のヘッダを消去します。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>clearAllHeaders()</code> は、キー/値 のペアである通常のヘッダと
+                    <methodname>clearAllHeaders()</methodname> は、キー/値 のペアである通常のヘッダと
                     生のヘッダの両方を消去します。
                 </para>
             </listitem>
@@ -233,8 +233,8 @@ $front->dispatch();
         <para>
             これらのメソッドのほかに、現在のリクエストの HTTP レスポンスコードを
             設定したり取得したりするメソッドとして
-            <code>setHttpResponseCode()</code> と
-            <code>getHttpResponseCode()</code> が用意されています。
+            <methodname>setHttpResponseCode()</methodname> と
+            <methodname>getHttpResponseCode()</methodname> が用意されています。
         </para>
     </sect2>
 
@@ -250,10 +250,10 @@ $front->dispatch();
         </para>
 
         <para>
-            例として、<code>preDispatch()</code> フックメソッドで
+            例として、<methodname>preDispatch()</methodname> フックメソッドで
             レスポンスオブジェクトにヘッダを追加し、
             アクションコントローラで本文を追加して、
-            最後に <code>postDispatch()</code> フックメソッドでフッタを追加することを考えてみましょう。
+            最後に <methodname>postDispatch()</methodname> フックメソッドでフッタを追加することを考えてみましょう。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -290,7 +290,7 @@ class MyController extends Zend_Controller_Action
 ]]></programlisting>
 
         <para>
-            上の例で <code>/my/foo</code> をコールすると、
+            上の例で <filename>/my/foo</filename> をコールすると、
             レスポンスオブジェクトに最終的に格納されるコンテンツは次のようになります。
         </para>
 
@@ -313,12 +313,12 @@ array(
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>setBody()</code> および <code>appendBody()</code>
+                    <methodname>setBody()</methodname> および <methodname>appendBody()</methodname>
                     の二番目のパラメータである <varname>$name</varname>
                     に、セグメント名を渡すことができます。
                     これを指定すると、指定したセグメントの内容を上書きします
                     (存在しない場合は新たに作成し、配列に追加します)。
-                    <code>setBody()</code> にセグメント名を指定しなかった場合は、
+                    <methodname>setBody()</methodname> にセグメント名を指定しなかった場合は、
                     配列全体を初期化します。appendBody()
                     でセグメント名を省略した場合は、'default'
                     という名前のセグメントを追加します。
@@ -327,7 +327,7 @@ array(
 
             <listitem>
                 <para>
-                    <code>prepend($name, $content)</code> は、
+                    <methodname>prepend($name, $content)</methodname> は、
                     <varname>$name</varname> という名前のセグメントを作成して、
                     それを配列の先頭に追加します。同じ名前のセグメントが存在する場合は、
                     まずそれを削除してから追加します(つまり、既存のものを上書きします)。
@@ -336,7 +336,7 @@ array(
 
             <listitem>
                 <para>
-                    <code>append($name, $content)</code> は、
+                    <methodname>append($name, $content)</methodname> は、
                     <varname>$name</varname> という名前のセグメントを作成して、
                     それを配列の最後に追加します。同じ名前のセグメントが存在する場合は、
                     まずそれを削除してから追加します(つまり、既存のものを上書きします)。
@@ -345,8 +345,8 @@ array(
 
             <listitem>
                 <para>
-                    <code>insert($name, $content, $parent = null, $before =
-                        false)</code> は、<varname>$name</varname> という名前のセグメントを作成します。
+                    <methodname>insert($name, $content, $parent = null, $before =
+                        false)</methodname> は、<varname>$name</varname> という名前のセグメントを作成します。
                     <varname>$parent</varname> セグメントを指定すると、
                     新しいセグメントはそのセグメントの前か後ろ
                     (<varname>$before</varname> の値で決まります)
@@ -357,7 +357,7 @@ array(
 
             <listitem>
                 <para>
-                    <code>clearBody($name = null)</code>
+                    <methodname>clearBody($name = null)</methodname>
                     に <varname>$name</varname> を指定すると、その名前のセグメントを消去します
                     (省略した場合は、配列全体を消去します)。
                 </para>
@@ -365,7 +365,7 @@ array(
 
             <listitem>
                 <para>
-                    <code>getBody($spec = false)</code> で
+                    <methodname>getBody($spec = false)</methodname> で
                     <varname>$spec</varname> にセグメント名を指定すると、そのセグメントを取得できます。
                     <varname>$spec</varname> に false を指定すると、
                     すべてのセグメントの内容を順番に連結した結果を文字列で返します。
@@ -390,35 +390,35 @@ array(
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>setException(Exception $e)</code>
+                    <methodname>setException(Exception $e)</methodname>
                     は、例外を登録します。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>isException()</code>
+                    <methodname>isException()</methodname>
                     は、例外が登録されているかどうかを調べます。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getException()</code>
+                    <methodname>getException()</methodname>
                     は、例外スタック全体を返します。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>hasExceptionOfType($type)</code>
+                    <methodname>hasExceptionOfType($type)</methodname>
                     は、特定のクラスの例外がスタックに登録されているかどうかを調べます。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>hasExceptionOfMessage($message)</code>
+                    <methodname>hasExceptionOfMessage($message)</methodname>
                     は、指定したメッセージを含む例外が
                     スタックに登録されているかどうかを調べます。
                 </para>
@@ -426,7 +426,7 @@ array(
 
             <listitem>
                 <para>
-                    <code>hasExceptionOfCode($code)</code>
+                    <methodname>hasExceptionOfCode($code)</methodname>
                     は、指定したコードを含む例外が
                     スタックに登録されているかどうかを調べます。
                 </para>
@@ -434,7 +434,7 @@ array(
 
             <listitem>
                 <para>
-                    <code>getExceptionByType($type)</code>
+                    <methodname>getExceptionByType($type)</methodname>
                     は、指定したクラスの例外をスタックからすべて取り出します。
                     そのクラスの例外が見つからなかった場合は false を返し、
                     見つかった場合は例外の配列を返します。
@@ -443,7 +443,7 @@ array(
 
             <listitem>
                 <para>
-                    <code>getExceptionByMessage($message)</code>
+                    <methodname>getExceptionByMessage($message)</methodname>
                     は、指定したメッセージを含む例外をスタックからすべて取り出します。
                     そのクラスの例外が見つからなかった場合は false を返し、
                     見つかった場合は例外の配列を返します。
@@ -452,7 +452,7 @@ array(
 
             <listitem>
                 <para>
-                    <code>getExceptionByCode($code)</code>
+                    <methodname>getExceptionByCode($code)</methodname>
                     は、指定したコードを含む例外をスタックからすべて取り出します。
                     そのクラスの例外が見つからなかった場合は false を返し、
                     見つかった場合は例外の配列を返します。
@@ -461,7 +461,7 @@ array(
 
             <listitem>
                 <para>
-                    <code>renderExceptions($flag)</code>
+                    <methodname>renderExceptions($flag)</methodname>
                     は、例外が発生したかどうかを表すフラグを設定します。
                 </para>
             </listitem>

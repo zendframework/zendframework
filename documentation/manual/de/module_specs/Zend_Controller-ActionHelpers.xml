@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15719 -->
+<!-- EN-Revision: 16163 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.actionhelpers" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Action Helfer</title>
@@ -42,8 +42,8 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    Explizit <code>getHelper()</code> verwenden. Ihm einfach einen Namen übergeben
-                    und ein Helfer Objekt wird zurückgegeben:
+                    Explizit <methodname>getHelper()</methodname> verwenden. Ihm einfach einen
+                    Namen übergeben und ein Helfer Objekt wird zurückgegeben:
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -54,8 +54,9 @@ $flashMessenger->addMessage('Wir haben in der letzten Anfrage etwas getan');
 
             <listitem>
                 <para>
-                    Verwenden der <code>__get()</code> Funktionalität des Helfer Brokers und
-                    Empfangen des Helfers wie wenn er eine Teilnehmer Eigenschaft des Brokers wäre:
+                    Verwenden der <methodname>__get()</methodname> Funktionalität des Helfer
+                    Brokers und Empfangen des Helfers wie wenn er eine Teilnehmer Eigenschaft des
+                    Brokers wäre:
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -66,9 +67,11 @@ $flashMessenger->addMessage('Wir haben in der letzten Anfrage etwas getan');
 
             <listitem>
                 <para>
-                    Letztendlich implmentieren die meisten Aktion Helfer die <code>direct()</code>
-                    Methode welche eine spezielle, Standardmethode im Helfer aufruft. In Beispiel
-                    des <code>FlashMessenger</code>s, wird <code>addMessage()</code> aufgerufen:
+                    Letztendlich implmentieren die meisten Aktion Helfer die
+                    <methodname>direct()</methodname> Methode welche eine spezielle,
+                    Standardmethode im Helfer aufruft. In Beispiel des
+                    <emphasis>FlashMessenger</emphasis>'s, wird
+                    <methodname>addMessage()</methodname> aufgerufen:
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -99,8 +102,8 @@ $this->_helper->FlashMessenger('Wir haben in der letzten Anfrage etwas getan');
         </para>
 
         <para>
-            Um einen Helfer im Browser zu registrieren, kann <code>addHelper</code> verwendet
-            werden:
+            Um einen Helfer im Browser zu registrieren, kann <methodname>addHelper()</methodname>
+            verwendet werden:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -110,15 +113,17 @@ Zend_Controller_Action_HelperBroker::addHelper($helper);
         <para>
             Natürlich ist das Instanzieren und übergeben von Helfern an den Broker etwas Zeit- und
             Ressourcen intensiv, weswegen twei Methoden existieren um die Dinge etwas zu
-            automatisieren: <code>addPrefix()</code> und <code>addPath()</code>.
+            automatisieren: <methodname>addPrefix()</methodname> und
+            <methodname>addPath()</methodname>.
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>addPrefix()</code> nimmt einen Klassenprefix und verwendet Ihn um einen
-                    Pfad zu ermitteln wo Helferklassen definiert wurden. Er nimmt an das der Prefix
-                    den Konventionen der Benamung von Klassen im Zend Framework folgt.
+                    <methodname>addPrefix()</methodname> nimmt einen Klassenpräfix und verwendet
+                    Ihn um einen Pfad zu ermitteln wo Helferklassen definiert wurden. Er nimmt an
+                    das der Präfix den Konventionen der Benamung von Klassen im Zend Framework
+                    folgt.
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -129,9 +134,9 @@ Zend_Controller_Action_HelperBroker::addPrefix('My_Action_Helpers');
 
             <listitem>
                 <para>
-                    <code>addPath()</code> nimmt ein Verzeichnis als erstes Argument und einen
-                    Klassenprefix als zweites Argument (Standardwert ist
-                    'Zend_Controller_Action_Helper'). Das erlaubt es die eigenen Klassenprefixes mit
+                    <methodname>addPath()</methodname> nimmt ein Verzeichnis als erstes Argument
+                    und einen Klassenprefix als zweites Argument (Standardwert ist
+                    'Zend_Controller_Action_Helper'). Das erlaubt es die eigenen Klassenpräfixes mit
                     speziellen Verzeichnissen zu verbinden.
                 </para>
 
@@ -149,16 +154,17 @@ Zend_Controller_Action_HelperBroker::addPath('./Plugins/Helpers',
         </para>
 
         <para>
-            Intern verwendet der Helfer Broker <link linkend="zend.loader.pluginloader">eine Instanz
-            des PluginLoader's</link> um die Pfade zu verwalten. Man erhlt den PluginLoader indem
-            die statische Methode <code>getPluginLoader()</code> verwendet, oder alternativ, eine
-            eigene PluginLoader Instanz einfügt durch Verwenden von <code>setPluginLoader()</code>.
+            Intern verwendet der Helfer Broker <link linkend="zend.loader.pluginloader">eine
+            Instanz des PluginLoader's</link> um die Pfade zu verwalten. Man erhlt den PluginLoader
+            indem die statische Methode <methodname>getPluginLoader()</methodname> verwendet, oder
+            alternativ, eine eigene PluginLoader Instanz einfügt durch Verwenden von
+            <methodname>setPluginLoader()</methodname>.
         </para>
 
         <para>
             Um zu ermitteln ob ein Helfer im Helfer Broker existiert, kann
-            <code>hasHelper($name)</code> verwendet werden, wobei <varname>$name</varname> der
-            Kurzname des Helfers ist (ohne das Prefix):
+            <methodname>hasHelper($name)</methodname> verwendet werden, wobei
+            <varname>$name</varname> der Kurzname des Helfers ist (ohne das Präfix):
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -170,13 +176,15 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
 
         <para>
             Es gibt auch zwei statische Methoden für das bekommen von Helfern vom Helferbroker:
-            <code>getExistingHelper()</code> und <code>getStaticHelper()</code>.
-            <code>getExistingHelper()</code> empfängt einen Helfer nur dann wenn er davor durch den
-            Helferbroker ausgerufen wirde oder explizit in Ihm registriert wurde; wenn nicht wird
-            eine Ausnahme geworfen. <code>getStaticHelper()</code> macht das selbe wie
-            <code>getExistingHelper()</code>, wird aber versuchen den Helfer zu initiieren wenn
-            dieser davor noch nicht im Helferstack registriert wurde. <code>getStaticHelper()</code>
-            ist eine gute Wahl für das empfangen von Helfern welche man konfigurieren will.
+            <methodname>getExistingHelper()</methodname> und
+            <methodname>getStaticHelper()</methodname>.
+            <methodname>getExistingHelper()</methodname> empfängt einen Helfer nur dann wenn er
+            davor durch den Helferbroker ausgerufen wirde oder explizit in Ihm registriert wurde;
+            wenn nicht wird eine Ausnahme geworfen. <methodname>getStaticHelper()</methodname>
+            macht das selbe wie <methodname>getExistingHelper()</methodname>, wird aber versuchen
+            den Helfer zu initiieren wenn dieser davor noch nicht im Helferstack registriert wurde.
+            <methodname>getStaticHelper()</methodname> ist eine gute Wahl für das empfangen von
+            Helfern welche man konfigurieren will.
         </para>
 
         <para>
@@ -200,8 +208,8 @@ $redirector =
 
         <para>
             Schlußendlich, um einen registrierten Helfer vom Broker zu entfernen, kann
-            <code>removeHelper($name)</code> verwendet werden, wobei <varname>$name</varname> der
-            Kurzname des Helfers ist (ohne den Prefix):
+            <methodname>removeHelper($name)</methodname> verwendet werden, wobei
+            <varname>$name</varname> der Kurzname des Helfers ist (ohne den Prefix):
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -217,14 +225,15 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
 
         <para>
             Zend Framework enthält standardmäßig verschiedene Action Helfer:
-            <code>AutoComplete</code> für automatisierte Antworten für AJAX Autovervollständigung;
-            <code>ContextSwitch</code> und <code>AjaxContext</code> für alternative Antwort Formate
-            eigener Aktionen; einen <code>FlashMessenger</code> für die Behandlung von
-            Kurznachrichten; <code>Json</code> für das verschlüsseln und senden von JSON Antworten;
-            einen <code>Redirector</code>, um verschiedene Implementationen, für das Umleiten zu
+            <emphasis>AutoComplete</emphasis> für automatisierte Antworten für AJAX
+            Autovervollständigung; <emphasis>ContextSwitch</emphasis> und
+            <emphasis>AjaxContext</emphasis> für alternative Antwort Formate eigener Aktionen;
+            einen <emphasis>FlashMessenger</emphasis> für die Behandlung von Kurznachrichten;
+            <emphasis>Json</emphasis> für das verschlüsseln und senden von JSON Antworten; einen
+            <emphasis>Redirector</emphasis>, um verschiedene Implementationen, für das Umleiten zu
             internen und externen Seiten, für die Anwendung bereitzustellen und einen
-            <code>ViewRenderer</code> um den Prozess des Setzens eines View Objekts im Kontroller
-            und dem Rendern von Views zu automatisieren.
+            <emphasis>ViewRenderer</emphasis> um den Prozess des Setzens eines View Objekts im
+            Kontroller und dem Rendern von Views zu automatisieren.
         </para>
 
         <xi:include href="Zend_Controller-ActionHelpers-ActionStack.xml" />
@@ -248,65 +257,67 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>setActionController()</code> wird verwendet um den aktuellen Aktion
-                    Kontroller zu setzen.
+                    <methodname>setActionController()</methodname> wird verwendet um den aktuellen
+                    Aktion Kontroller zu setzen.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>init()</code>, wird vom Helfer Broker wärend der Instanzierung ausgeführt
-                    und kann verwendet werden um den Status zu resetieren wenn mehrere Kontroller
-                    den gleichen Helfer in einer verketteten Aktion verwenden.
+                    <methodname>init()</methodname>, wird vom Helfer Broker wärend der
+                    Instanzierung ausgeführt und kann verwendet werden um den Status zu resetieren
+                    wenn mehrere Kontroller den gleichen Helfer in einer verketteten Aktion
+                    verwenden.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>preDispatch()</code>, wird vor der ausführenden Aktion gestartet.
+                    <methodname>preDispatch()</methodname>, wird vor der ausführenden Aktion
+                    gestartet.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>postDispatch()</code> wird ausgeführt nachdem eine Aktion fertig ist --
-                    selbst wenn ein <code>preDispatch()</code> Plugin die Aktion abgebrochen hat.
-                    Normalerweise nützlich für das Saubermachen.
+                    <methodname>postDispatch()</methodname> wird ausgeführt nachdem eine Aktion
+                    fertig ist -- selbst wenn ein <methodname>preDispatch()</methodname> Plugin die
+                    Aktion abgebrochen hat. Normalerweise nützlich für das Saubermachen.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getRequest()</code> empfängt das aktuelle Anfrage Objekt.
+                    <methodname>getRequest()</methodname> empfängt das aktuelle Anfrage Objekt.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getResponse()</code> empfängt das aktuelle Antwort Objekt.
+                    <methodname>getResponse()</methodname> empfängt das aktuelle Antwort Objekt.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getName()</code> empfängt den Helfernamen. Sie empfängt die Portion des
-                    Klassennamens der dem letzten Unterstrich-Zeichen folgt, oder andererseits den
-                    kompletten Klassennamen. Als Beispiel, wenn die Klasse
+                    <methodname>getName()</methodname> empfängt den Helfernamen. Sie empfängt die
+                    Portion des Klassennamens der dem letzten Unterstrich-Zeichen folgt, oder
+                    andererseits den kompletten Klassennamen. Als Beispiel, wenn die Klasse
                     <classname>Zend_Controller_Action_Helper_Redirector</classname> heißt, wird
-                    <code>Redirector</code> zurückgegeben; eine Klasse die <code>FooMessage</code>
-                    heißt wird einfach sich selbst zurückgeben.
+                    <emphasis>Redirector</emphasis> zurückgegeben; eine Klasse die
+                    <code>FooMessage</code> heißt wird einfach sich selbst zurückgeben.
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
-            Optional kann eine <code>direct()</code> Methode in der eigenen Helfer Klasse inkludiert
-            werden. Wenn Sie definiert ist, erlaubt Sie den Helfer als eine Methode des Helfer
-            Brokers zu verwenden, um eine einfache rein-raus Verwendung des Helfers zu ermöglichen.
-            Als Beispiel definiert der <link
+            Optional kann eine <methodname>direct()</methodname> Methode in der eigenen Helfer
+            Klasse inkludiert werden. Wenn Sie definiert ist, erlaubt Sie den Helfer als eine
+            Methode des Helfer Brokers zu verwenden, um eine einfache rein-raus Verwendung des
+            Helfers zu ermöglichen. Als Beispiel definiert der <link
                 linkend="zend.controller.actionhelpers.redirector">Umleiter</link>
-            <code>direct()</code> als einen Alias von <code>goto()</code> und erlaubt damit die
-            Verwendung des Helfers wie folgt:
+            <methodname>direct()</methodname> als einen Alias von <methodname>goto()</methodname>
+            und erlaubt damit die Verwendung des Helfers wie folgt:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -315,9 +326,10 @@ $this->_helper->redirector('item', 'view', 'blog', array('id' => 42));
 ]]></programlisting>
 
         <para>
-            Intern schaut die <code>__call()</code> Methode des Helfer Brokers nach einem Helfer der
-            <code>redirector</code> heißt, prüft anschließend ob der Helfer eine definierte
-            <code>direct</code> Klasse besitzt und ruft diese mit den angegebenen Argumenten auf.
+            Intern schaut die <methodname>__call()</methodname> Methode des Helfer Brokers nach
+            einem Helfer der <code>redirector</code> heißt, prüft anschließend ob der Helfer eine
+            definierte <code>direct</code> Klasse besitzt und ruft diese mit den angegebenen
+            Argumenten auf.
         </para>
 
         <para>

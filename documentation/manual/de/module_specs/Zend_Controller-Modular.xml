@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15713 -->
+<!-- EN-Revision: 16165 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.modular">
     <title>Eine konventionelle modulare Verzeichnis Struktur verwenden</title>
@@ -81,18 +81,19 @@ application/
         <para>
             Der erste Schritt um Module zu verwenden ist es, die Art der Spezifizierung der
             Kontroller Verzeichnis Liste im Front Kontroller, zu Ändern. In der grundsätzlichen MVC
-            Serie, kann entweder ein Array oder ein String an <code>setControllerDirectory()</code>,
-            oder ein Pfad an <code>addControllerDirectory()</code> übergeben werden. Wenn Module
+            Serie, kann entweder ein Array oder ein String an
+            <methodname>setControllerDirectory()</methodname>, oder ein Pfad an
+            <methodname>addControllerDirectory()</methodname> übergeben werden. Wenn Module
             verwendet werden, müssen die Aufrufe dieser Methoden leicht geändert werden.
         </para>
 
         <para>
-            Mit <code>setControllerDirectory()</code>, muß ein assoziatives Array übergeben und
-            Schlüssel/Werte Paare von Modul Namen/Verzeichnis Pfaden übergeben werden. Der spezielle
-            Schlüssel <code>default</code> wird für globale Kontroller verwenden (diejenigen die
-            keinen Modul Namensraum benötigen). Alle Einträge sollten einen String Schlüssel
-            enthalten der zu einem einzelnen Pfad zeigt, und der <code>default</code> Schlüssel muß
-            vorhanden sein. Als Beispiel:
+            Mit <methodname>setControllerDirectory()</methodname>, muß ein assoziatives Array
+            übergeben und Schlüssel/Werte Paare von Modul Namen/Verzeichnis Pfaden übergeben
+            werden. Der spezielle Schlüssel <code>default</code> wird für globale Kontroller
+            verwenden (diejenigen die keinen Modul Namensraum benötigen). Alle Einträge sollten
+            einen String Schlüssel enthalten der zu einem einzelnen Pfad zeigt, und der
+            <code>default</code> Schlüssel muß vorhanden sein. Als Beispiel:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -103,10 +104,10 @@ $front->setControllerDirectory(array(
 ]]></programlisting>
 
         <para>
-            <code>addControllerDirectory()</code> nimmt ein optionales zweites Argument. Wenn Module
-            verwendet werden, kann der Modulname als zweites Argument übergeben werden; wenn nicht
-            spezifiziert, wird der Pfad zum <code>default</code> Namensraum hinzugefügt. Als
-            Beispiel:
+            <methodname>addControllerDirectory()</methodname> nimmt ein optionales zweites
+            Argument. Wenn Module verwendet werden, kann der Modulname als zweites Argument
+            übergeben werden; wenn nicht spezifiziert, wird der Pfad zum <code>default</code>
+            Namensraum hinzugefügt. Als Beispiel:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -115,10 +116,10 @@ $front->addControllerDirectory('/path/to/application/news/controllers',
 ]]></programlisting>
 
         <para>
-            Und das beste zum Schluß. Der einfachste Weg um Modul Verzeichnisse zu spezifizieren ist
-            es en masse zu machen, mit allen Modulen in einem gemeinsamen Verzeichnis und die
-            gleiche Struktur verwendend. Das kann mit <code>addModuleDirectory()</code> getan
-            werden:
+            Und das beste zum Schluß. Der einfachste Weg um Modul Verzeichnisse zu spezifizieren
+            ist es en masse zu machen, mit allen Modulen in einem gemeinsamen Verzeichnis und die
+            gleiche Struktur verwendend. Das kann mit <methodname>addModuleDirectory()</methodname>
+            getan werden:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -144,7 +145,7 @@ $front->addModuleDirectory('/path/to/application/modules');
 
         <para>
             Das Unterverzeichnis für den Kontroller kann angepasst werden um diesen in eigenen
-            Modulen mit <code>setModuleControllerDirectoryName()</code> verwenden:
+            Modulen mit <methodname>setModuleControllerDirectoryName()</methodname> verwenden:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -165,8 +166,8 @@ $front->addModuleDirectory('/path/to/application/modules');
 
         <note><para>
             Man kann angeben das kein Kontroller Unterverzeichnis für die eigenen Module verwendet
-            wird, indem ein leerer Wert an <code>setModuleControllerDirectoryName()</code> übergeben
-            wird.
+            wird, indem ein leerer Wert an
+            <methodname>setModuleControllerDirectoryName()</methodname> übergeben wird.
         </para></note>
     </sect2>
 
@@ -197,17 +198,17 @@ $front->addModuleDirectory('/path/to/application/modules');
         <title>Modul oder globaler Standard Kontroller</title>
 
         <para>
-            Im Standardrouter wird der Standardkontroller verwendet (<code>IndexController</code>,
-            solange nicht anders angefragt), wenn kein Kontroller in der URL spezifiziert wurde. Bei
-            modularen Kontrollern wird der Dispatcher zuerst für diesen Standardkontroller im
-            Modulpfad nachsehen, wenn ein Modul aber kein Kontroller spezifiziert wurde, und fällt
-            dann auf den Standardcontroller zurück, der im 'default' globalen Namensraum gefunden
-            wird.
+            Im Standardrouter wird der Standardkontroller verwendet
+            (<emphasis>IndexController</emphasis>, solange nicht anders angefragt), wenn kein
+            Kontroller in der URL spezifiziert wurde. Bei modularen Kontrollern wird der Dispatcher
+            zuerst für diesen Standardkontroller im Modulpfad nachsehen, wenn ein Modul aber kein
+            Kontroller spezifiziert wurde, und fällt dann auf den Standardcontroller zurück, der im
+            globalen 'default' Namensraum gefunden wird.
         </para>
 
         <para>
             Wenn immer auf den globalen Namensraum zurückgefallen werden soll, muß der
-            <code>useDefaultControllerAlways</code> im Front Kontroller gesetzt werden:
+            <varname>$useDefaultControllerAlways</varname> im Front Kontroller gesetzt werden:
         </para>
 
         <programlisting language="php"><![CDATA[

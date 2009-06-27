@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15850 -->
+<!-- EN-Revision: 16165 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.migration">
     <title>Migration von vorhergehenden Versionen</title>
@@ -18,10 +18,10 @@
 
             <para>
                 Da übersetzte Segmente in der neuen Standard Route eingeführt wurden, ist das
-                <code>@</code> Zeichen kein spezielles Zeichen am Begin eines Segments der Route.
-                Um es trotzdem in einem statischen Segment verwenden zu können, muß es durch das
-                Voranstellen eines zweiten <code>@</code> Zeichens escapt werden. Die selbe Regel
-                trifft für das <code>:</code> Zeichen zu:
+                '<emphasis>@</emphasis>' Zeichen kein spezielles Zeichen am Begin eines Segments
+                der Route. Um es trotzdem in einem statischen Segment verwenden zu können, muß es
+                durch das Voranstellen eines zweiten '<emphasis>@</emphasis>' Zeichens escapt
+                werden. Die selbe Regel trifft für das '<emphasis>:</emphasis>' Zeichen zu:
             </para>
         </sect3>
     </sect2>
@@ -42,10 +42,11 @@
 
             <itemizedlist>
                 <listitem><para>
-                    <code>formatModuleName()</code>: sollte verwendet werden um einen rohen
-                    Controllernamen zu nehmen, wie den einen der in einem Anfrageobjekt gepackt ist,
-                    und Ihn in einen richtigen Klassennamen zu reformatieren den eine Klasse, die
-                    <classname>Zend_Controller_Action</classname> erweitert, verwenden würde
+                    <methodname>formatModuleName()</methodname>: sollte verwendet werden um einen
+                    rohen Controllernamen zu nehmen, wie den einen der in einem Anfrageobjekt
+                    gepackt ist, und Ihn in einen richtigen Klassennamen zu reformatieren den eine
+                    Klasse, die <classname>Zend_Controller_Action</classname> erweitert, verwenden
+                    würde
                 </para></listitem>
             </itemizedlist>
         </sect3>
@@ -68,18 +69,18 @@
 
             <itemizedlist>
                 <listitem><para>
-                    <code>getDefaultModule()</code>: Sollte den Namen des Standardmoduls
-                    zurückgeben.
+                    <methodname>getDefaultModule()</methodname>: Sollte den Namen des
+                    Standardmoduls zurückgeben.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getDefaultControllerName()</code>: Sollte den Namen des
+                    <methodname>getDefaultControllerName()</methodname>: Sollte den Namen des
                     Standardcontrollers zurückgeben.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getDefaultAction()</code>: Sollte den Namen der Standardaktion
-                    zurückgeben.
+                    <methodname>getDefaultAction()</methodname>: Sollte den Namen der
+                    Standardaktion zurückgeben.
                 </para></listitem>
             </itemizedlist>
         </sect3>
@@ -215,11 +216,11 @@ $front->setParam('useCaseSensitiveActions', true);
         </para>
 
         <para>
-            Der <code>ErrorHandler</code> Plugin läuft wärend der <code>postDispatch()</code>
-            Prüfung auf Ausnahmen, und leitet zu einem spezifizierten Fehlerhandler Kontroller
-            weiter. Solch ein Kontroller sollte in der eigenen Anwendung inkludiert werden. Er kann
-            deaktiviert werden durch das setzen des Frontkontroller Parameters
-            <code>noErrorHandler</code>:
+            Der <emphasis>ErrorHandler</emphasis> Plugin läuft wärend der
+            <methodname>postDispatch()</methodname> Prüfung auf Ausnahmen, und leitet zu einem
+            spezifizierten Fehlerhandler Kontroller weiter. Solch ein Kontroller sollte in der
+            eigenen Anwendung inkludiert werden. Er kann deaktiviert werden durch das setzen des
+            Frontkontroller Parameters <code>noErrorHandler</code>:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -227,18 +228,18 @@ $front->setParam('noErrorHandler', true);
 ]]></programlisting>
 
         <para>
-            Der <code>ViewRenderer</code> Aktionhelfer automatisiert die Injizierung der View in den
-            Aktionkontroller genauso wie das autorendern von Viewskripten basierend auf die aktuelle
-            Aktion. Das primäre Problem dem man begegnen kann ist, wenn man Aktionen hat die keine
-            View Skripte rendern und weder vorwärts- noch weiterleiten, da der
-            <code>ViewRenderer</code> versucht ein View Skript zu Rendern basierend auf dem
+            Der <emphasis>ViewRenderer</emphasis> Aktionhelfer automatisiert die Injizierung der
+            View in den Aktionkontroller genauso wie das autorendern von Viewskripten basierend auf
+            die aktuelle Aktion. Das primäre Problem dem man begegnen kann ist, wenn man Aktionen
+            hat die keine View Skripte rendern und weder vorwärts- noch weiterleiten, da der
+            <emphasis>ViewRenderer</emphasis> versucht ein View Skript zu Rendern basierend auf dem
             Aktionnamen.
         </para>
 
         <para>
             Es gibt verschiedene Strategien die man anwenden kann um den eigenen Code upzudaten. In
-            kurzer Form, kann man global den <code>ViewRenderer</code> im eigenen Frontkontroller
-            Bootstrap vor dem Abarbeiten ausschalten:
+            kurzer Form, kann man global den <emphasis>ViewRenderer</emphasis> im eigenen
+            Frontkontroller Bootstrap vor dem Abarbeiten ausschalten:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -252,22 +253,30 @@ $front->setParam('noViewRenderer', true);
         </para>
 
         <para>
-            Wenn man bereit ist damit zu beginnen die <code>ViewRenderer</code> Funktionalität zu
-            verwenden, gibt es verschiedene Dinge die man im eigenen Kontrollercode beachten muß.
-            Zuerst muß auf die Aktionmethoden (die Methoden die mit 'Action' enden) geachtet werden,
-            und ausgesucht werden was eine jede machen soll. Wenn nichts vom folgenden passiert, muß
-            man Änderungen durchführen:
+            Wenn man bereit ist damit zu beginnen die <emphasis>ViewRenderer</emphasis>
+            Funktionalität zu verwenden, gibt es verschiedene Dinge die man im eigenen
+            Kontrollercode beachten muß. Zuerst muß auf die Aktionmethoden (die Methoden die mit
+            'Action' enden) geachtet werden, und ausgesucht werden was eine jede machen soll. Wenn
+            nichts vom folgenden passiert, muß man Änderungen durchführen:
         </para>
 
         <itemizedlist>
-            <listitem><para>Aufruf von <code>$this-&gt;render()</code></para></listitem>
-            <listitem><para>Aufruf von <code>$this-&gt;_forward()</code></para></listitem>
-            <listitem><para>Aufruf von <code>$this-&gt;_redirect()</code></para></listitem>
-            <listitem><para>Aufruf des <code>Redirector</code> Aktionhelfers</para></listitem>
+            <listitem>
+                <para>Aufruf von <methodname>$this-&gt;render()</methodname></para>
+            </listitem>
+            <listitem>
+                <para>Aufruf von <methodname>$this-&gt;_forward()</methodname></para>
+            </listitem>
+            <listitem>
+                <para>Aufruf von <methodname>$this-&gt;_redirect()</methodname></para>
+            </listitem>
+            <listitem>
+                <para>Aufruf des <methodname>Redirector</methodname> Aktionhelfers</para>
+            </listitem>
         </itemizedlist>
 
         <para>
-            Die einfachste Änderung ist das ausschalten des Auto-Rendering für diese Methode:
+            Die einfachste Änderung ist das Ausschalten des Auto-Rendering für diese Methode:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -277,7 +286,8 @@ $this->_helper->viewRenderer->setNoRender();
         <para>
             Wenn man herausfindet das keine der eigenen Aktionmethoden rendern, weiterleiten oder
             umleiten, wird man voraussichtlich die oben angeführte Zeile in die eigene
-            <code>preDispatch()</code> oder <code>init()</code> Methode einfügen wollen:
+            <methodname>preDispatch()</methodname> oder <methodname>init()</methodname> Methode
+            einfügen wollen:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -290,7 +300,7 @@ public function preDispatch()
 ]]></programlisting>
 
         <para>
-            Wenn <code>render()</code> aufgerufen wird, und man
+            Wenn <methodname>render()</methodname> aufgerufen wird, und man
             <link linkend="zend.controller.modular">die konventionelle Modulare Verzeichnis
                 Struktur</link> verwendet, wird man den Code ändern wollen um Autorendern zu
             Verwenden:
@@ -305,16 +315,16 @@ public function preDispatch()
             </listitem>
             <listitem>
                 <para>
-                    Wenn man einfach <code>render()</code> ohne Argumente aufruft, können diese
-                    Zeilen entfernt
-                    werden.
+                    Wenn man einfach <methodname>render()</methodname> ohne Argumente aufruft,
+                    können diese Zeilen entfernt werden.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    Wenn man <code>render()</code> mit Argumenten aufruft, und danach nicht
+                    Wenn man <methodname>render()</methodname> mit Argumenten aufruft, und danach nicht
                     irgendeine Bearbeitung durchführt oder mehrere View sktipe rendert, können diese
-                    Aufrufe zu <code>$this-&gt;_helper-&gt;viewRenderer()</code> geändert werden.
+                    Aufrufe zu <methodname>$this-&gt;_helper-&gt;viewRenderer()</methodname> geändert
+                    werden.
                 </para>
             </listitem>
         </itemizedlist>
@@ -322,22 +332,22 @@ public function preDispatch()
         <para>
             Wenn die konventionelle modulare Verzeichnisstruktur nicht verwendet wird, gibt es eine
             Vielzahl von Methoden für das Setzen des View Basispfades und der Skript
-            Pfadspezifikationen so das man den <code>ViewRenderer</code> verwenden kann. Bitte lies
-            die <link linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer
+            Pfadspezifikationen so das man den <emphasis>ViewRenderer</emphasis> verwenden kann.
+            Bitte lies die <link linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer
                 Dokumentation</link> für Informationen über diese Methoden.
         </para>
 
         <para>
             Wenn ein View Objekt von der Registry verwendet, oder das eigene View Objekt verändert,
             oder eine andere View Implementation verwendet wird wird man den
-            <code>ViewRenderer</code> in diesem Objekt injiziieren wollen. Das kann ganz einfach
-            jederzeit durchgeführt werden.
+            <emphasis>ViewRenderer</emphasis> in diesem Objekt injiziieren wollen. Das kann ganz
+            einfach jederzeit durchgeführt werden.
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    Vor dem verarbeiten einer Frontkontroller Instanz:
+                    Vor dem Verarbeiten einer Frontkontroller Instanz:
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -361,17 +371,18 @@ $viewRenderer->setView($view);
         </itemizedlist>
 
         <para>
-            Es gibt viele Wege den <code>ViewRenderer</code> zu modifizieren inklusive dem Setzen
-            eines anderen View Skripts zum Rendern, dem Spezifizieren von Veränderungen für alle
-            veränderbaren Elemente eines View Skript Pfades (inklusive der Endung), dem Auswählen
-            eines Antwort-benannten Segments zur Anpassung und mehr. Wenn die konventionelle
-            modulare Verzeichnisstruktur nicht verwendet wird, kann noch immer eine andere Pfad
-            Spezifikation mit dem <code>ViewRenderer</code> zugeordnet werden.
+            Es gibt viele Wege den <emphasis>ViewRenderer</emphasis> zu modifizieren inklusive dem
+            Setzen eines anderen View Skripts zum Rendern, dem Spezifizieren von Veränderungen für
+            alle veränderbaren Elemente eines View Skript Pfades (inklusive der Endung), dem
+            Auswählen eines Antwort-benannten Segments zur Anpassung und mehr. Wenn die
+            konventionelle modulare Verzeichnisstruktur nicht verwendet wird, kann noch immer eine
+            andere Pfad Spezifikation mit dem <emphasis>ViewRenderer</emphasis> zugeordnet werden.
         </para>
 
         <para>
-            Wir empfehlen die Adaptierung des eigenen Codes um den <code>ErrorHandler</code> und
-            <code>ViewRenderer</code> zu verwenden da diese neue Kernfunktionalitäten sind.
+            Wir empfehlen die Adaptierung des eigenen Codes um den
+            <emphasis>ErrorHandler</emphasis> und <emphasis>ViewRenderer</emphasis> zu verwenden da
+            diese neue Kernfunktionalitäten sind.
         </para>
     </sect2>
 
@@ -388,20 +399,20 @@ $viewRenderer->setView($view);
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>setRedirectCode()</code>; wurde umbenannt in
-                    <classname>Zend_Controller_Action_Helper_Redirector::setCode()</classname>.
+                    <methodname>setRedirectCode()</methodname>; wurde umbenannt in
+                    <methodname>Zend_Controller_Action_Helper_Redirector::setCode()</methodname>.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>setRedirectPrependBase()</code>; wurde umbenannt in
-                    <classname>Zend_Controller_Action_Helper_Redirector::setPrependBase()</classname>.
+                    <methodname>setRedirectPrependBase()</methodname>; wurde umbenannt in
+                    <methodname>Zend_Controller_Action_Helper_Redirector::setPrependBase()</methodname>.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>setRedirectExit()</code>; wurde umbenannt in
-                    <classname>Zend_Controller_Action_Helper_Redirector::setExit()</classname>.
+                    <methodname>setRedirectExit()</methodname>; wurde umbenannt in
+                    <methodname>Zend_Controller_Action_Helper_Redirector::setExit()</methodname>.
                 </para>
             </listitem>
         </itemizedlist>
@@ -533,11 +544,12 @@ $ctrl->dispatch();
         <para>
             Wir empfehlen die Verwendung des Response Objektes, um Inhalte und Header zu sammeln.
             Dies erlaubt den flexibleren Wechsel von Ausgabeformaten (z.B. JSON oder XML statt
-            XHTML) in deiner Applikation. Standardmäßig verarbeitet <code>dispatch()</code> die
-            Antwort, sendet Header und gibt die Inhalte aus. Man kann den Front Controller auch
-            auffordern, die Antwort durch <code>returnResponse()</code> zurückzugeben und die
-            Antwort dann auf eigene Weise ausgeben. Eine zukünftige Version des Front Controllers
-            könnte die Verwendung des Response Objektes durch Output Buffering erzwingen.
+            XHTML) in deiner Applikation. Standardmäßig verarbeitet
+            <methodname>dispatch()</methodname> die Antwort, sendet Header und gibt die Inhalte
+            aus. Man kann den Front Controller auch auffordern, die Antwort durch
+            <methodname>returnResponse()</methodname> zurückzugeben und die Antwort dann auf
+            eigene Weise ausgeben. Eine zukünftige Version des Front Controllers könnte die
+            Verwendung des Response Objektes durch Output Buffering erzwingen.
         </para>
 
         <para>
@@ -562,7 +574,8 @@ $ctrl->dispatch();
                 <itemizedlist>
                     <listitem>
                         <para>
-                            Setzen von <code>throwExceptions()</code> im Front Controller:
+                            Setzen von <methodname>throwExceptions()</methodname> im Front
+                            Controller:
                         </para>
                         <programlisting language="php"><![CDATA[
 $front->throwExceptions(true);
@@ -571,7 +584,8 @@ $front->throwExceptions(true);
 
                     <listitem>
                         <para>
-                            Setzen von <code>renderExceptions()</code> im Response objekt:
+                            Setzen von <methodname>renderExceptions()</methodname> im Response
+                            Objekt:
                         </para>
                         <programlisting language="php"><![CDATA[
 $response->renderExceptions(true);
@@ -612,43 +626,44 @@ echo $response;
                         <classname>Zend_Controller_Action::__construct()</classname> verwendet
                         diese, um die Request, Response und invokeArgs Eigenschaften für das Objekt
                         zu setzen, und beim Überschreiben des Konstrukturs sollte man dies ebenfalls
-                        tun. Besser ist es, die <code>init()</code> Methode zu verwenden, um jedwede
-                        Instanzkonfiguration durchzuführen, weil diese Methode als letzte Methode
-                        des Konstrukturs aufgerufen wird.
+                        tun. Besser ist es, die <methodname>init()</methodname> Methode zu
+                        verwenden, um jedwede Instanzkonfiguration durchzuführen, weil diese
+                        Methode als letzte Methode des Konstrukturs aufgerufen wird.
                     </para></listitem>
 
                     <listitem><para>
-                        <code>run()</code> ist nicht länger als final definiert, wird aber auch
-                        nicht länger vom Front Controller verwendet; sein einziger Zweck ist, dass
-                        die Klasse auch als Page Controller verwendet werden kann. Sie nimmt nun
-                        zwei optionale Argument an, ein
+                        <methodname>run()</methodname> ist nicht länger als final definiert, wird
+                        aber auch nicht länger vom Front Controller verwendet; sein einziger Zweck
+                        ist, dass die Klasse auch als Page Controller verwendet werden kann. Sie
+                        nimmt nun zwei optionale Argument an, ein
                         <classname>Zend_Controller_Request_Abstract $request</classname>
                         und ein <classname>Zend_Controller_Response_Abstract $response</classname>.
                     </para></listitem>
 
                     <listitem><para>
-                        <code>indexAction()</code> muss nicht mehr länger definiert werden, aber
-                        wird als Standardaktion empfohlen. Dies erlaubt dem RewriteRouter und den
-                        Action Controllern andere Standardaktionsmethoden zu definieren.
+                        <methodname>indexAction()</methodname> muss nicht mehr länger definiert
+                        werden, aber wird als Standardaktion empfohlen. Dies erlaubt dem
+                        RewriteRouter und den Action Controllern andere Standardaktionsmethoden zu
+                        definieren.
                     </para></listitem>
 
                     <listitem><para>
-                        <code>__call()</code> sollte überschrieben werden, um jede undefinierte
-                        Aktion automatisch verarbeiten zu können.
+                        <methodname>__call()</methodname> sollte überschrieben werden, um jede
+                        undefinierte Aktion automatisch verarbeiten zu können.
                     </para></listitem>
 
                     <listitem><para>
-                        <code>_redirect()</code> nimmt nun ein optionales zweites Argument entgegen,
-                        den HTTP Code, der mit dem Redirect zurückgegeben werden soll, und ein
-                        optionales drittes Argument <varname>$prependBase</varname>, das angibt,
-                        dass die im Request Objekt registrierte Basis URL der übergebenen URL voran
-                        gestellt werden soll.
+                        <methodname>_redirect()</methodname> nimmt nun ein optionales zweites
+                        Argument entgegen, den HTTP Code, der mit dem Redirect zurückgegeben werden
+                        soll, und ein optionales drittes Argument <varname>$prependBase</varname>,
+                        das angibt, dass die im Request Objekt registrierte Basis URL der
+                        übergebenen URL voran gestellt werden soll.
                     </para></listitem>
 
                     <listitem>
                         <para>
-                            Die <code>_action</code> Eigenschaft wird nicht mehr gesetzt. Diese
-                            Eigenschaft war ein
+                            Die <varname>$_action</varname> Eigenschaft wird nicht mehr gesetzt.
+                            Diese Eigenschaft war ein
                             <classname>Zend_Controller_Dispatcher_Token</classname>, der in der
                             aktuellen Inkarnation nicht mehr länger existiert. Der einzige Zweck des
                             Tokens war, Informationen über angeforderte Controller, Aktion und URL
@@ -681,10 +696,10 @@ $foo = $this->_getParam('foo', 'default');
 
                     <listitem>
                         <para>
-                            <code>noRouteAction()</code> wurde entfernt. Der geeignete Weg, um
-                            nicht vorhandene Aktionsmethoden abzufangen, wenn man sie an eine
-                            Standardaktion weiter leiten möchte, sollte die Verwendung von
-                            <code>__call()</code> sein:
+                            <methodname>noRouteAction()</methodname> wurde entfernt. Der geeignete
+                            Weg, um nicht vorhandene Aktionsmethoden abzufangen, wenn man sie an
+                            eine Standardaktion weiter leiten möchte, sollte die Verwendung von
+                            <methodname>__call()</methodname> sein:
                         </para>
 
                         <programlisting language="php"><![CDATA[

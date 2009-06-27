@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15850 -->
+<!-- EN-Revision: 16164 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.exceptions">
     <title>MVC Ausnahmen</title>
@@ -54,9 +54,9 @@
                 </itemizedlist>
 
                 <para>
-                    Es arbeitet als <code>postDispatch()</code> Plugin und prüft ob eine Dispatcher,
-                    Actioncontroller oder andere Ausnahme aufgetreten ist. Wenn das so ist, leitet
-                    es an den Error Handler Controller weiter.
+                    Es arbeitet als <methodname>postDispatch()</methodname> Plugin und prüft ob
+                    eine Dispatcher, Actioncontroller oder andere Ausnahme aufgetreten ist. Wenn
+                    das so ist, leitet es an den Error Handler Controller weiter.
                 </para>
 
                 <para>
@@ -115,10 +115,11 @@ try {
                     Durch die Übergabe eines boolschen True zu
                     <classname>Zend_Controller_Front::returnResponse()</classname>, wird
                     <classname>Zend_Controller_Front::dispatch()</classname> die Antwort nicht
-                    darstellen, aber diese stattdessen zurückgeben. Sobald man die antwort hat, kann
-                    diese getestet werden um zu sehen ob irgendwelche Ausnahmen gefangen wurden
-                    indem die <code>isException()</code> Methode verwendet, und die Ausnahme über
-                    die <code>getException()</code> Methode empfangen wird. Als Beispiel:
+                    darstellen, aber diese stattdessen zurückgeben. Sobald man die antwort hat,
+                    kann diese getestet werden um zu sehen ob irgendwelche Ausnahmen gefangen
+                    wurden indem die <methodname>isException()</methodname> Methode verwendet, und
+                    die Ausnahme über die <methodname>getException()</methodname> Methode empfangen
+                    wird. Als Beispiel:
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -193,13 +194,13 @@ $dispatcher->setParam('useDefaultControllerAlways', true);
 
                     <listitem>
                         <para>
-                            Die Ausnahme die von <code>dispatch()</code> geworfen wird, ist eine
-                            <classname>Zend_Controller_Dispatcher_Exception</classname> die den Text
-                            'Invalid controller specified' enthält. Eine der Methoden die in
-                            <link linkend="zend.controller.exceptions.handling">der vorhergehenden
-                                Sektion</link> beschrieben wurden können verwendet werden um die
-                            Ausnahme zu fangen und dann zu einer generellen Fehlerseite oder der
-                            Homepage umzuleiten.
+                            Die Ausnahme die von <methodname>dispatch()</methodname> geworfen wird,
+                            ist eine <classname>Zend_Controller_Dispatcher_Exception</classname>
+                            die den Text 'Invalid controller specified' enthält. Eine der Methoden
+                            die in <link linkend="zend.controller.exceptions.handling">der
+                                vorhergehenden Sektion</link> beschrieben wurden können verwendet
+                            werden um die Ausnahme zu fangen und dann zu einer generellen
+                            Fehlerseite oder der Homepage umzuleiten.
                         </para>
                     </listitem>
                 </itemizedlist>
@@ -218,8 +219,8 @@ $dispatcher->setParam('useDefaultControllerAlways', true);
                     <listitem>
                         <para>
                             Eine Subklasse von <classname>Zend_Controller_Action</classname>
-                            erstellen und die <code>__call()</code> Methode überschreiben. Als
-                            Beispiel:
+                            erstellen und die <methodname>__call()</methodname> Methode
+                            überschreiben. Als Beispiel:
                         </para>
 
                         <programlisting language="php"><![CDATA[
@@ -246,8 +247,8 @@ class My_Controller_Action extends Zend_Controller_Action
                     <listitem>
                         <para>
                             Eine Subklasse von <classname>Zend_Controller_Dispatcher</classname>
-                            erstellen und die <code>getAction()</code> Methode überschreiben um zu
-                            prüfen ob die Aktion existiert. Als Beispiel:
+                            erstellen und die <methodname>getAction()</methodname> Methode
+                            überschreiben um zu prüfen ob die Aktion existiert. Als Beispiel:
                         </para>
 
                         <programlisting language="php"><![CDATA[
@@ -299,11 +300,11 @@ class My_Controller_Dispatcher extends Zend_Controller_Dispatcher
                         <para>
                             Durch das Erstellen einer Subklasse von
                             <classname>Zend_Controller_Action</classname> und dem modifizieren von
-                            <code>preDispatch()</code>, können alle eigenen Kontroller geändert
-                            werden damit Sie an andere Aktionen weiterleiten oder umleiten bevor die
-                            Aktion letztendlich dargestellt wird. Der Code hierfür schaut ähnlich
-                            wie der Code für das Überschreiben von <code>__call()</code> aus, der
-                            oben schon angezeigt wurde.
+                            <methodname>preDispatch()</methodname>, können alle eigenen Kontroller
+                            geändert werden damit Sie an andere Aktionen weiterleiten oder umleiten
+                            bevor die Aktion letztendlich dargestellt wird. Der Code hierfür schaut
+                            ähnlich wie der Code für das Überschreiben von
+                            <methodname>__call()</methodname> aus, der oben schon angezeigt wurde.
                         </para>
 
                         <para>

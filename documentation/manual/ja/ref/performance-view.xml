@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16183 -->
 <sect1 id="performance.view">
     <title>ビューのレンダリング</title>
 
     <para>
-        Zend FrameworkのMVCレイヤを使うときには、
+        Zend Frameworkの<acronym>MVC</acronym>レイヤを使うときには、
         <classname>Zend_View</classname>を使うようになる機会があります。
         <classname>Zend_View</classname>は、
         他のビューやテンプレートエンジンに比べて良く機能します。
-        ビュースクリプトはPHPで記述されているので、
-        PHPにカスタムで加えたコンパイルのオーバーヘッドを招きませんし、
-        コンパイルされたPHPが最適されていないかどうか心配する必要もありません。
+        ビュースクリプトは<acronym>PHP</acronym>で記述されているので、
+        <acronym>PHP</acronym>にカスタムで加えたコンパイルのオーバーヘッドを招きませんし、
+        コンパイルされた<acronym>PHP</acronym>が最適されていないかどうか心配する必要もありません。
         しかしながら、<classname>Zend_View</classname>には特有の問題があります:
         エクステンションはオーバーロード経由で実行されます（ビューヘルパ）。
         ビューヘルパの多くは重要な機能を担っていますが、
@@ -174,7 +174,7 @@ class My_View extends Zend_View
 
             <para>
                 基本的に、あなたが実際に変数をその部分に渡して、純粋な変数の範囲を必要とするか、
-                または他のMVCモジュールからビュースクリプトをレンダリングするまで、
+                または他の<acronym>MVC</acronym>モジュールからビュースクリプトをレンダリングするまで、
                 <methodname>partial()</methodname>のオーバーヘッドを受け入れる理由がありません。;
                 その代わり、ビュースクリプトをレンダリングするために、
                 <classname>Zend_View</classname>組込みの<methodname>render()</methodname>メソッドを使ってください。
@@ -187,9 +187,9 @@ class My_View extends Zend_View
 
         <para>
             バージョン1.5.0で <methodname>action()</methodname> ビューヘルパが導入されました。
-            それによりMVCのアクションをディスパッチして、
+            それにより<action>MVC</acronym>のアクションをディスパッチして、
             レンダリングされたコンテンツを入手できるようになります。
-            これはDRY原則に向かう重要なステップで、コードの再利用を促します。
+            これは<action>DRY</acronym>原則に向かう重要なステップで、コードの再利用を促します。
             しかしながら、アプリケーションをプロファイルする人がすぐ実感するように、
             これも高くつく操作です。
             内部的に、<methodname>action()</methodname> ビューヘルパでは新しいリクエスト及びレスポンスオブジェクトを複製して、
@@ -265,7 +265,7 @@ class LoginPlugin extends Zend_Controller_Plugin_Abstract
                 <methodname>action()</methodname> ビューヘルパよりもっと安くつきます。
                 さらに、それはすべてのプレディスパッチ、
                 またはポストディスパッチのプラグインが呼び出されることを保証します。
-                それは、特別なアクションのためにACLを処理するフロントコントローラプラグインをもし使っているなら、
+                それは、特別なアクションのために<action>ACL</acronym>を処理するフロントコントローラプラグインをもし使っているなら、
                 特別に関心があることかもしれません。
             </para>
         </sect3>
@@ -352,7 +352,7 @@ class My_View_Helper_BugList extends Zend_View_Helper_Abstract
             <para>
                 これには２つの利点があります:
                 それはもはや <methodname>action()</methodname> ビューヘルパのオーバーヘッドを受けず、
-                より意味的に理解できるAPIも表現します。
+                より意味的に理解できる<action>API</acronym>も表現します。
             </para>
         </sect3>
     </sect2>

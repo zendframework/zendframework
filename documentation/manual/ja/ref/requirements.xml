@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15611 -->
+<!-- EN-Revision: 16182 -->
 <appendix id="requirements">
 
     <title>Zend Framework のシステム要件</title>
@@ -10,17 +10,17 @@
         <title>導入</title>
 
         <para>
-            Zend Framework を使用するには、PHP 5 のインタプリタおよび
-            PHP スクリプトを処理できるよう設定されたウェブサーバが必要です。
+            Zend Framework を使用するには、<acronym>PHP</acronym> 5 のインタプリタおよび
+            <acronym>PHP</acronym> スクリプトを処理できるよう設定されたウェブサーバが必要です。
             使用する機能によっては、それ以外に追加の拡張モジュールやウェブサーバの機能が必要となります。
             ほとんどの場合は特に何も追加しなくても動作しますが、
             パフォーマンスが多少落ちたり一部の機能に制限があったりすることがあります。
             たとえば、一つの例としては Apache 環境の mod_rewrite があります。
-            これは、"http://www.example.com/user/edit" のようないわゆる "pretty URL"
+            これは、"<filename>http://www.example.com/user/edit</filename>" のようないわゆる "pretty <acronym>URL</acronym>"
             を実装するために使用します。mod_rewrite が有効になっていない場合は、
-            ZF は "http://www.example.com?controller=user&amp;action=edit"
-            のような URL をサポートするように設定されます。Pretty URL
-            を使うのは URL を短縮したりサーチエンジン対策の最適化 (SEO)
+            ZF は "<filename>http://www.example.com?controller=user&amp;action=edit</filename>"
+            のような URL をサポートするように設定されます。Pretty <acronym>URL</acronym>
+            を使うのは <acronym>URL</acronym> を短縮したりサーチエンジン対策の最適化 (<acronym>SEO</acronym>)
             をしたりするためですが、これがアプリケーションの機能に直接影響することはありません。
         </para>
 
@@ -29,9 +29,9 @@
             <title>PHP のバージョン</title>
 
             <para>
-                Zend では最新版の PHP を使うことを推奨します。
+                Zend では最新版の <acronym>PHP</acronym> を使うことを推奨します。
                 重要なセキュリティ修正が行われ、パフォーマンスも改善されているためです。
-                現在、Zend Framework は PHP 5.2.4 以降のバージョンをサポートしています。
+                現在、Zend Framework は <acronym>PHP</acronym> 5.2.4 以降のバージョンをサポートしています。
             </para>
 
             <para>
@@ -46,9 +46,9 @@
             <title>PHP の拡張モジュール</title>
 
             <para>
-                以下の表は、PHP に含まれる拡張モジュールと
+                以下の表は、<acronym>PHP</acronym> に含まれる拡張モジュールと
                 それが Zend Framework でどのように用いられているかをまとめたものです。
-                あなたの環境で ZF のコンポーネントを使用するにはどんな拡張モジュールが必要なのかを
+                あなたの環境で Zend Framework のコンポーネントを使用するにはどんな拡張モジュールが必要なのかを
                 この表で確認できます。
                 ここにあげられている拡張モジュールをすべて必要とするアプリケーションは、
                 それほど多くありません。
@@ -868,7 +868,7 @@
                                 </emphasis>
                             </entry>
                             <entry>ハード</entry>
-                            <entry>すべての PDO データベースアダプタ</entry>
+                            <entry>すべての <acronym>PDO</acronym> データベースアダプタ</entry>
                         </row>
                         <row>
                             <entry>
@@ -1427,7 +1427,7 @@
 
             <para>
                 以下の表は、Zend Framework の各コンポーネントについて、
-                必要とする PHP 拡張モジュールをまとめたものです。
+                必要とする <acronym>PHP</acronym> 拡張モジュールをまとめたものです。
                 これを参考にすれば、あなたの作成するアプリケーションで
                 どの拡張モジュールが必要になるかがわかるでしょう。
                 Zend Framework が必要とする拡張モジュールのすべてが

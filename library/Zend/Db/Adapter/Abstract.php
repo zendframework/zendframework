@@ -615,6 +615,7 @@ abstract class Zend_Db_Adapter_Abstract
     public function delete($table, $where = '')
     {
         $where = $this->_whereExpr($where);
+        echo $where . ' ';
 
         /**
          * Build the DELETE statement

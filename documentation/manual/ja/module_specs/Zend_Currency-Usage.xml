@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15850 -->
+<!-- EN-Revision: 16181 -->
 <sect1 id="zend.currency.usage">
 
     <title>通貨の操作方法</title>
@@ -77,7 +77,7 @@ $currency = new Zend_Currency();
                 定義する際には、その通貨の短い名前あるいは完全な名前を使用します。
                 未知の通貨を指定した場合は例外をスローします。
                 通貨の短い名前は、アルファベット大文字で 3 文字となります。
-                たとえば <code>USD</code> (米ドル) や <code>EUR</code> (ユーロ)
+                たとえば <acronym>USD</acronym> (米ドル) や <acronym>EUR</acronym> (ユーロ)
                 などがよく知られています。
                 既知の通貨の一覧を得るメソッドが <classname>Zend_Currency</classname>
                 に用意されています。
@@ -161,11 +161,11 @@ $currency = new Zend_Currency('en_US', 'EUR');
             地域化された数字がある場合は、まずそれを
             <link linkend="zend.locale.number.normalize">Zend_Locale_Format::getNumber()</link>
             で正規化します。それから、その結果を
-            <code>toCurrency()</code> に渡して通貨形式の出力を作成します。
+            <methodname>toCurrency()</methodname> に渡して通貨形式の出力を作成します。
         </para>
 
         <para>
-            <code>toCurrency()</code> にはオプションで配列を指定することができます。
+            <methodname>toCurrency()</methodname> にはオプションで配列を指定することができます。
             この配列では、一時的なフォーマットや通貨表現を設定します。
             使用できるオプションについての詳細は
             <link linkend="zend.currency.usage.setformat">通貨の表示形式の変更</link>
@@ -250,9 +250,9 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
 
         <para>
             出力形式を変更したい場合は
-            <emphasis>setFormat()</emphasis> メソッドを使用します。
+            <methodname>setFormat()</methodname> メソッドを使用します。
             このメソッドに、変更したいすべてのオプションを含む配列を渡します。
-            <code>options</code> 配列がサポートしている設定は、次のとおりです。
+            <varname>$options</varname> 配列がサポートしている設定は、次のとおりです。
         </para>
 
         <itemizedlist mark='opencircle'>
@@ -483,8 +483,8 @@ echo $currency->toCurrency(1000);
         </itemizedlist>
 
         <para>
-            関数 <code>getSymbol()</code>、<code>getShortName()</code>
-            および <code>getName()</code> には、それぞれオプションのパラメータを
+            関数 <methodname>getSymbol()</methodname>、<methodname>getShortName()</methodname>
+            および <methodname>getName()</methodname> には、それぞれオプションのパラメータを
             2 つ指定することができます。パラメータを省略した場合は、
             現在実際に設定されている通貨に対応するデータが返されます。
             最初のパラメータには短い形式の通貨名を指定します。
@@ -527,7 +527,7 @@ print_r($currency->getCurrencyList('de_AT');
         <title>新しいデフォルト値の設定</title>
 
         <para>
-            <code>setLocale</code> メソッドは、
+            <methodname>setLocale()</methodname> メソッドは、
             <classname>Zend_Currency</classname> に新しいロケールを設定します。
             この関数をコールすると、通貨のすべてのデフォルト値が上書きされます。
             つまり、通貨名や略称、記号などが上書きされるということです。
@@ -557,12 +557,12 @@ print $currency->toCurrency(1000);
         <para>
             <classname>Zend_Currency</classname> による作業を高速化するには
             <classname>Zend_Cache</classname> を使用します。これを使用するには、
-            静的メソッド <classname>Zend_Currency::setCache($cache)</classname>
+            静的メソッド <methodname>Zend_Currency::setCache($cache)</methodname>
             に <classname>Zend_Cache</classname> アダプタを指定します。そうすると、
             Zend_Currency のメソッドで地域化したデータがキャッシュされるようになります。
             利便性を考慮して、静的メソッド
-            <code>getCache()</code>、<code>hasCache()</code>、<code>clearCache()</code> および
-            <code>removeCache()</code> も用意されています。
+            <methodname>getCache()</methodname>、<methodname>hasCache()</methodname>、<methodname>clearCache()</methodname> および
+            <methodname>removeCache()</methodname> も用意されています。
         </para>
 
         <example id="zend.currency.usage.cache.example">

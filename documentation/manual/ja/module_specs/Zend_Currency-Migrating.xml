@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15850 -->
+<!-- EN-Revision: 16181 -->
 <sect1 id="zend.currency.migration">
 
     <title>以前のバージョンからの移行</title>
@@ -21,7 +21,7 @@
             よりシンプルに作成できるようになりました。
             script パラメータを指定したり null に設定したりする必要がなくなったのです。
             script パラメータはオプションとなり、後で
-            <code>setFormat()</code> メソッドで指定できるようになりました。
+            <methodname>setFormat()</methodname> メソッドで指定できるようになりました。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -29,7 +29,7 @@ $currency = new Zend_Currency($currency, $locale);
 ]]></programlisting>
 
         <para>
-            <code>setFormat()</code> メソッドには、オプションの配列を渡せるようになりました。
+            <methodname>setFormat()</methodname> メソッドには、オプションの配列を渡せるようになりました。
             このオプションはそれ以降もずっと有効で、
             それまでに設定されていた値を上書きします。
             また、新たなオプション 'precision' が組み込まれました。
@@ -96,10 +96,10 @@ $currency->setFormat(array $options);
 ]]></programlisting>
 
         <para>
-            <code>toCurrency()</code> メソッドは、オプションのパラメータ
+            <methodname>toCurrency()</methodname> メソッドは、オプションのパラメータ
             'script' および 'locale' をサポートしなくなりました。
             その代わりにオプションの配列を受け付けるようになります。
-            この配列に含めることのできるキーは <code>setFormat</code>
+            この配列に含めることのできるキーは <methodname>setFormat()</methodname>
             メソッドと同じです。
         </para>
 
@@ -108,9 +108,9 @@ $currency->toCurrency($value, array $options);
 ]]></programlisting>
 
         <para>
-            <code>getSymbol()</code> や <code>getShortName()</code>、
-            <code>getName()</code>、<code>getRegionList()</code> そして
-            <code>getCurrencyList()</code> メソッドはスタティックではなくなりました。
+            <methodname>getSymbol()</methodname> や <methodname>getShortName()</methodname>、
+            <methodname>getName()</methodname>、<methodname>getRegionList()</methodname> そして
+            <methodname>getCurrencyList()</methodname> メソッドはスタティックではなくなりました。
             オブジェクトからコールすることができます。
             パラメータを設定しなかった場合は、
             これらのメソッドはそのオブジェクトに設定されている値を返します。

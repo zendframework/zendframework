@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16153 -->
 <sect1 id="zend.paginator.usage">
     <title>使用法</title>
 
@@ -170,6 +170,54 @@ $paginator->setCurrentPageNumber($this->_getParam('page'));
             <programlisting language="php"><![CDATA[
 $this->view->paginator = $paginator;
 ]]></programlisting>
+        </para>
+    </sect2>
+
+    <sect2 id="zend.paginator.usage.dbselect">
+        <title>DbSelect および DbTableSelect アダプタ</title>
+        <para>
+            大半のアダプタの使用法は非常にわかりやすいものです。
+            しかし、データベースアダプタについてはより詳細な説明が必要です。
+            一般的に想像されるのとは異なり、これらのアダプタは、
+            数を数える際にデータベースの全レコードを取得するわけでは
+            <emphasis>ありません</emphasis>。そのかわりに、アダプタが元のクエリを修正し、
+            それに対応する COUNT クエリを作成します。
+            Paginator は、その COUNT クエリを実行して行数を取得するのです。
+            そのぶんデータベースとの余分なやりとりが必要となりますが、結果セット全体を取得して
+            <methodname>count()</methodname> を使うよりは何倍も高速になります。
+            大量のデータを扱う場合などは特にそうです。
+        </para>
+
+        <para>
+            データベースアダプタは、すべてのモダンなデータベース上で実行できる
+            もっとも効率的なクエリを作成しようとします。
+            しかし、使用するデータベースやスキーマ設定によっては
+            行数を取得するのにもっと効率的な方法があるかもしれません。
+            そのような場合のために、データベースアダプタでは独自の COUNT
+            クエリを設定できるようにもなっています。たとえば、
+            別々のテーブルにある blog の投稿の数を調べるには、
+            次の用に設定すればより高速な count クエリが使用できるでしょう。
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$adapter = new Zend_Paginator_Adapter_DbSelect($db->select()->from('posts'));
+$adapter->setRowCount(
+    $db->select()
+       ->from(
+            'item_counts',
+            array(
+               Zend_Paginator_Adapter_DbSelect::ROW_COUNT_COLUMN => 'post_count'
+            )
+         )
+);
+
+$paginator = new Zend_Paginator($adapter);
+]]></programlisting>
+
+        <para>
+            この方法は、小規模なデータや単純な select クエリの場合にはあまり劇的な効果を得られません。
+            しかし、複雑なクエリや大規模なデータを扱う場合は
+            かなりパフォーマンスが向上することでしょう。
         </para>
     </sect2>
 

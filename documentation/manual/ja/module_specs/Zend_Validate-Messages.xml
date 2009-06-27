@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16087 -->
+<!-- EN-Revision: 16170 -->
 <sect1 id="zend.validate.messages">
 
     <title>検証メッセージ</title>
@@ -516,6 +516,45 @@
 $validator = new Zend_Validate_Alnum();
 $messages  = $validator->getMessageTemplates();
 ]]></programlisting>
+
+    <sect2 id="zend.validate.messages.limitation">
+        <title>検証メッセージのサイズの制限</title>
+
+        <para>
+            検証メッセージの最大サイズを制限しなければならないこともあるでしょう。
+            たとえば、1 行に 100 文字までしかレンダリングできないなどの制限がビューにある場合です。
+            このような場合のため、<classname>Zend_Validate</classname>
+            では自動的に検証メッセージの最大長を制限できるようになっています。
+        </para>
+
+        <para>
+            実際に設定されているサイズを取得するには
+            <methodname>Zend_Validate::getMessageLength()</methodname> を使用します。
+            この結果が -1 の場合は、返されるメッセージが切り詰められることはありません。
+            これがデフォルトの挙動です。
+        </para>
+
+        <para>
+            返されるメッセージのサイズを制限するには
+            <methodname>Zend_Validate::setMessageLength()</methodname> を使用します。
+            必要に応じて任意の整数値を設定します。
+            返されるメッセージのサイズがここで設定した長さを超えると、
+            メッセージが切り詰められて最後に文字列 '<emphasis>...</emphasis>'
+            が付加されます。
+        </para>
+
+        <programlisting language="php"><![CDATA[
+Zend_Validate::setMessageLength(100);
+]]></programlisting>
+
+        <note>
+            <para>
+                ここで設定したメッセージ長はすべてのバリデータに適用されることに注意しましょう。
+                自前で定義したバリデータに関しても、それが <classname>Zend_Validate_Abstract</classname>
+                を継承したものである限りは同じです。
+            </para>
+        </note>
+    </sect2>
 
 </sect1>
 <!--

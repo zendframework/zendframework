@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16050 -->
+<!-- EN-Revision: 16315 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.console.getopt.introduction">
     <title>Einführung</title>
@@ -12,10 +12,10 @@
         ausgeführt wird. Diese Argumente haben für die Anwendung die Bedeutung,
         das Verhalten in einem bestimmten Weg zu Ändern oder Ressourcen auszuwählen,
         oder Parameter zu definieren. Viele Optionen haben eine einheitliche Bedeutung
-        entwickelt wie zum Beispiel "<code>--verbose</code>" welches die Ausgabe von
+        entwickelt wie zum Beispiel <command>--verbose</command> welches die Ausgabe von
         zusätzlicher Ausgabe für viele Anwendungen erlaubt. Andere Optionen haben auch
         eine Bedeutung die in jeder Anwendung unterschiedlich ist. Zum Beispiel
-        erlaubt "<code>-c</code>" unterschiedliche Features in <command>grep</command>,
+        erlaubt <command>-c</command> unterschiedliche Features in <command>grep</command>,
         <command>ls</command>, und <command>tar</command>.
      </para>
     <para>
@@ -42,7 +42,7 @@
             <para>
                 "Flag": Der erste Teil einer Option, identifiziert den Zweck
                 der Option. Einem Flag werden normalerweise ein oder zwei Bindestriche
-                vorangestellt ("<code>-</code>" oder "<code>--</code>").
+                vorangestellt (<command>-</command> oder <command>--</command>).
                 Ein einzelner wird einem Einzel-Zeichen Flag vorangestellt oder einem
                 Verbund von Einzel-Zeichen Flags. Ein doppelter Bindestrich wird einem
                 Mehr-Zeichen Flag vorangestellt. Lange Flags können nicht gebündelt werden.
@@ -52,17 +52,17 @@
             <para>
                 "Parameter": Der zweite Teil einer Option; Ein Datenwert der ein Flag
                 begleitet, wenn er zu einer Option passt. Zum Beispiel kann ein Kommando
-                eine "<code>--verbose</code>" Option akzeptieren, aber typischerweise
+                eine <command>--verbose</command> Option akzeptieren, aber typischerweise
                 hat diese Option keine Parameter. Trotzdem wird eine Option wie
-                "<code>--user</code>" immer einen nachfolgenden Parameter benötigen.
+                <command>--user</command> immer einen nachfolgenden Parameter benötigen.
             </para>
             <para>
                 Ein Parameter kann als separates Argument angegeben werden der einem
                 Flag Argument folgt, oder als Teil der gleichen Zeichenkette des
                 Arguments, getrennt vom Flag durch ein Gleichheitszeichen
-                ("<code>=</code>"). Die zweite Form wird nur bei langen Flags
-                unterstützt. Zum Beispiel, <code>-u username</code>,
-                <code>--user username</code>, und <code>--user=username</code>
+                (<command>=</command>). Die zweite Form wird nur bei langen Flags
+                unterstützt. Zum Beispiel, <command>-u username</command>,
+                <command>--user username</command>, und <command>--user=username</command>
                 sind Formen welche durch <classname>Zend_Console_Getopt</classname>
                 unterstützt werden.
             </para>
@@ -80,12 +80,12 @@
         </listitem>
     </itemizedlist>
     <para>
-        Zum Beispiel "<code>mysql --user=root mydatabase</code>".
-        "<code>mysql</code>" ist ein <emphasis>Kommando</emphasis>,
-        "<code>--user=root</code>" ist eine <emphasis>Option</emphasis>,
-        "<code>--user</code>" ist ein <emphasis>Flag</emphasis>,
-        "<code>root</code>" ist ein <emphasis>Parameter</emphasis> für diese Option
-        und "<code>mydatabase</code>" ist ein Argument aber nicht eine Option laut
+        Zum Beispiel <command>mysql --user=root mydatabase</command>.
+        <command>mysql</command> ist ein <emphasis>Kommando</emphasis>,
+        <command>--user=root</command> ist eine <emphasis>Option</emphasis>,
+        <command>--user</command> ist ein <emphasis>Flag</emphasis>,
+        <command>root</command> ist ein <emphasis>Parameter</emphasis> für diese Option
+        und <command>mydatabase</command> ist ein Argument aber nicht eine Option laut
         unserer Definition.
     </para>
     <para>

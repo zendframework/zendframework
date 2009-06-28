@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16286 -->
+<!-- EN-Revision: 16318 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.introduction">
 
@@ -113,6 +113,8 @@ echo Zend_Filter::get('"', 'HtmlEntities', array(ENT_QUOTES));
         </para>
 
         <sect3 id="zend.filter.introduction.static.namespaces">
+
+            <title>Namespaces</title>
 
             <para>
                 Wenn man mit selbst definierten Filtern arbeitet, dann kann man an

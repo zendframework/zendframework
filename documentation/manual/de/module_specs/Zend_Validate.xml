@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16286 -->
+<!-- EN-Revision: 16340 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.introduction">
 
@@ -239,6 +239,8 @@ if (Zend_Validate::is($value, 'Between', array(1, 12))) {
         </para>
 
         <sect3 id="zend.validate.introduction.static.namespaces">
+
+            <title>Namespaces</title>
 
             <para>
                 Wenn man mit selbst definierten Prüfungen arbeitet, dann kann man an

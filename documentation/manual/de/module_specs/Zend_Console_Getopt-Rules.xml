@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16050 -->
+<!-- EN-Revision: 16315 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.console.getopt.rules">
     <title>Definieren von Getopt Regeln</title>
@@ -30,8 +30,8 @@
                 url="http://www.gnu.org/software/libc/manual/html_node/Getopt.html">http://www.gnu.org/software/libc/manual/html_node/Getopt.html</ulink>).
             Diese Syntax unterstützt nur Einzel-Zeichen Flags. In einer einzelnen Zeichenkette, wird
             jeder Buchstabe angegeben der einem Flag entspricht das durch die Anwendung unterstützt
-            wird. Der Buchstabe, gefolgt von einem Doppelpunkt Zeichen ("<code>:</code>") zeigt ein
-            Flag das einen Parameter benötigt.
+            wird. Der Buchstabe, gefolgt von einem Doppelpunkt Zeichen (<command>:</command>) zeigt
+            ein Flag das einen Parameter benötigt.
         </para>
         <example id="zend.console.getopt.rules.short.example">
             <title>Verwendung der kurzen Syntax</title>
@@ -41,8 +41,8 @@ $opts = new Zend_Console_Getopt('abp:');
         </example>
         <para>
             Das obige Beispiel zeigt die Verwendung von <classname>Zend_Console_Getopt</classname>
-            um die Optionen zu definieren die als "<code>-a</code>", "<code>-b</code>",
-            oder "<code>-p</code>" angegeben werden können. Das letzte Flag benötigt
+            um die Optionen zu definieren die als <command>-a</command>, <command>-b</command>,
+            oder <command>-p</command> angegeben werden können. Das letzte Flag benötigt
             einen Parameter.
         </para>
         <para>
@@ -112,11 +112,11 @@ $opts = new Zend_Console_Getopt(
         </example>
         <para>
             In der obigen Beispieldefinition, sind drei Optionen.
-            "<code>--apfel</code>" und "<code>-a</code>" sind Aliase füreinander,
+            <command>--apfel</command> und <command>-a</command> sind Aliase füreinander,
             und diese Option nimmt keinen Parameter.
-            "<code>--banane</code>" und "<code>-b</code>" sind Aliase füreinander,
+            <command>--banane</command> und <command>-b</command> sind Aliase füreinander,
             und diese Option nimmt einen notwendigen Integer Parameter.
-            Letztendlich, "<code>--pfirsich</code>" und "<code>-p</code>" sind
+            Letztendlich, <command>--pfirsich</command> und <command>-p</command> sind
             Aliase füreinander, und diese Option kann einen Optionalen
             Zeichenketten Parameter annehmen.
         </para>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15851 -->
+<!-- EN-Revision: 16186 -->
 <sect1 id="zend.date.constants">
 
     <title>日付関数全般用の定数</title>
@@ -1129,12 +1129,12 @@ print $date->toString("'Era:GGGG='GGGG, ' Date:yy.MMMM.dd'yy.MMMM.dd");
             <classname>Zend_Date::setOptions(array('format_type' => 'php'))</classname> を使用しましょう。これで、
             Zend_Date のメソッドで ISO 書式指定子ではなく PHP の date() での指定子を用いるようになります
             その後の書式パラメータは、すべて
-            <ulink url="http://php.net/date">PHP の <code>date()</code> 書式指定子</ulink>
+            <ulink url="http://php.net/date">PHP の <methodname>date()</methodname> 書式指定子</ulink>
             に従うようになります。PHP の日付書式には含まれていないけれども ISO の書式には含まれるもの、
             またその逆もあります。もしそれほど PHP の日付書式になじみがないのなら、標準の
             ISO 書式を使用しましょう。既存のコードで PHP の日付書式をしているものがある場合は
             <link linkend="zend.locale.date.normalize">Zend_Locale_Format::convertPhpToIsoFormat()</link>
-            で ISO 書式に変換するか、<code>setOptions()</code>
+            で ISO 書式に変換するか、<methodname>setOptions()</methodname>
             を使用します。次の例は、下の表の定数を用いて独自の書式を定義するものです。
         </para>
 

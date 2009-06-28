@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15851 -->
+<!-- EN-Revision: 16186 -->
 <sect1 id="zend.date.additional">
 
     <title>動作例</title>
@@ -20,18 +20,18 @@
             しかし、文字列で渡されると、それが本当に日付を表すものなのかがわかりません。
             そこで <classname>Zend_Date</classname> では、
             日付文字列を調べるために独自の静的関数を用意することにしました。
-            <classname>Zend_Locale</classname> には <code>getDate($date, $locale);</code>
+            <classname>Zend_Locale</classname> には <methodname>getDate($date, $locale);</methodname>
             という関数があり、これは日付を受け取って、適切に正規化された内容を返します。
             たとえば、月の名前が指定されていた場合もそれを適切に解釈し、
             数値に変換して返します。しかし、<classname>Zend_Locale</classname>
             は日付については何も知りません。なぜなら、
             このクラスは正規化および地域化を行うためのクラスだからです。
-            そこで、日付を確認する関数 <code>isDate($date);</code>
+            そこで、日付を確認する関数 <methodname>isDate($date);</methodname>
             と組み合わせて使用するようにします。
         </para>
 
         <para>
-            <code>isDate($date, $format, $locale);</code> は最大で三つまでのパラメータを受け取ります。
+            <methodname>isDate($date, $format, $locale);</methodname> は最大で三つまでのパラメータを受け取ります。
             そのうちのひとつは必須です。そのひとつは、当然ながら調べたい日付となります。
             この日付は文字列で渡します。二番目のパラメータは日付の書式を表します。
             これを省略した場合は、そのロケールの書式を使用します。
@@ -47,12 +47,12 @@
         </para>
 
         <para>
-            <code>isDate();</code> は、存在しない日付についての確認も行います。
+            <methodname>isDate()</methodname> は、存在しない日付についての確認も行います。
             <classname>Zend_Date</classname> 自体は日付についての確認を行いません。
             つまり、たとえば '31.February.2000' のような日付を <classname>Zend_Date</classname>
             で作成することもできます。この場合、<classname>Zend_Date</classname>
             は自動的に日付を適切な値に修正して返します。この例の場合なら
-            '03.March.2000' となります。一方 <code>isDate()</code>
+            '03.March.2000' となります。一方 <methodname>isDate()</methodname>
             は日付の確認を行い、'31.February.2000' を渡すと false を返します。
             というのもそんな日付はありえないということを知っているからです。
         </para>
@@ -121,8 +121,8 @@ print_r (Zend_Date_Cities::getCityList());
         </example>
 
         <para>
-            位置データ自体を取得するには、関数 <classname>Zend_Date_Cities::City()</classname> を使用します。
-            この関数に、<classname>Zend_Date_Cities::getCityList()</classname> が返す都市名を渡します。
+            位置データ自体を取得するには、関数 <methodname>Zend_Date_Cities::City()</methodname> を使用します。
+            この関数に、<methodname>Zend_Date_Cities::getCityList()</methodname> が返す都市名を渡します。
             また、オプションの二番目のパラメータで、水平線の種類を設定します。
         </para>
 
@@ -193,8 +193,8 @@ $mylocation = array('latitude' => 41.5, 'longitude' => 13.2446);
             これで、必要なデータがすべて設定できました。次に行うことは、
             日の出や日没に関する情報を取得したい日付を表す <classname>Zend_Date</classname>
             オブジェクトの作成です。算出用の関数は三つあります。
-            日没情報を算出するのが '<code>getSunset()</code>'、日の出の情報は '<code>getSunrise()</code>'、
-            そして太陽に関するすべての情報を取得するのが '<code>getSunInfo()</code>' です。
+            日没情報を算出するのが '<methodname>getSunset()</methodname>'、日の出の情報は '<methodname>getSunrise()</methodname>'、
+            そして太陽に関するすべての情報を取得するのが '<methodname>getSunInfo()</methodname>' です。
             算出した結果は、その時刻を保持する <classname>Zend_Date</classname>
             オブジェクトとして返されます。
         </para>
@@ -232,7 +232,7 @@ foreach ($info as $sun) {
             つまり、日付を扱う際には適切なタイムゾーンを設定しなければならないということです。
             複雑な話のように聞こえるかも知れませんが、思ったほど複雑でもありません。
             <classname>Zend_Date</classname> の最初の章で既に説明したとおり、デフォルトのタイムゾーンは
-            <code>php.ini</code> あるいは起動ファイル内で設定されています。
+            <filename>php.ini</filename> あるいは起動ファイル内で設定されています。
         </para>
 
         <para>
@@ -245,17 +245,17 @@ foreach ($info as $sun) {
         </para>
 
         <para>
-            <code>getTimezone()</code> は <classname>Zend_Date</classname>
+            <methodname>getTimezone()</methodname> は <classname>Zend_Date</classname>
             オブジェクト内で実際に設定されているタイムゾーンを返します。
             <classname>Zend_Date</classname> は、PHP の内部とは連携していないことを覚えておきましょう。
             つまり、返されるタイムゾーンは、PHP スクリプトのタイムゾーンではなく
             そのオブジェクトのタイムゾーンとなるということです。
-            <code>setTimezone($zone)</code> がもうひとつの関数で、
+            <methodname>setTimezone($zone)</methodname> がもうひとつの関数で、
             これは <classname>Zend_Date</classname> に新しいタイムゾーンを設定します。
             指定したタイムゾーンに対しては常にチェックが行われ、
             もしそのタイムゾーンが存在しない場合は例外がスローされます。
             スクリプトやシステムの実際のタイムゾーンをオブジェクトに設定するには、
-            パラメータを指定せずに <code>setTimezone()</code> をコールします。
+            パラメータを指定せずに <methodname>setTimezone()</methodname> をコールします。
             date オブジェクトを作成する際には、自動的にこれが行われます。
         </para>
 

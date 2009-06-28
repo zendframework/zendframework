@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15851 -->
+<!-- EN-Revision: 16186 -->
 <sect1 id="zend.date.creation">
 
     <title>日付の作成</title>
@@ -45,8 +45,8 @@ $date = new Zend_Date();
 
             <para>
                 静的メソッドを使用したほうが簡単に日付を作成できるという場合もあるでしょう。
-                そんな場合は <emphasis><code>now()</code></emphasis>
-                メソッドが使用できます。これは、<code>new Zend_Date()</code>
+                そんな場合は <emphasis><methodname>now()</methodname></emphasis>
+                メソッドが使用できます。これは、<command>new Zend_Date()</command>
                 とした時と同じ内容の <classname>Zend_Date</classname> オブジェクトを返します。
                 しかし、これは常にその時の日付情報を持つオブジェクトとなり、
                 オプションのパラメータで値を変更することはできません。

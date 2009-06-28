@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15851 -->
+<!-- EN-Revision: 16186 -->
 <sect1 id="zend.date.overview">
 
     <title>Zend_Date API の概要</title>
@@ -20,7 +20,7 @@
             <title>日付の書式の型の選択</title>
 
             <para>
-                いくつかのメソッドでは、PHP の <code>date()</code> 関数と似た形式の日付書式文字列を使用します。
+                いくつかのメソッドでは、PHP の <methodname>date()</methodname> 関数と似た形式の日付書式文字列を使用します。
                 PHP の日付書式指定子のほうが ISO 書式指定子よりなじみがあるという場合は、
                 <classname>Zend_Date::setOptions(array('format_type' => 'php'))</classname>
                 とすることができます。こうすると、<varname>$format</varname>
@@ -54,8 +54,9 @@
                 タイムスタンプが 1 時間少なくなるので、日付も予期したものより 1 日少なくなってしまいます。
                 これを避けるためにはオプション <code>fix_dst</code> を使用します。
                 このオプションのデフォルトは true で、この場合は夏時間が
-                "月" の計算 (<code>addMOnth()、subMonth()</code>) に影響を与えなくなります。
-                <classname>Zend_Date::setOptions(array('fix_dst' => false))</classname> とすると、
+                "月" の計算 (<methodname>addMonth()</methodname>、
+                <methodname>subMonth()</methodname>) に影響を与えなくなります。
+                <methodname>Zend_Date::setOptions(array('fix_dst' => false))</methodname> とすると、
                 夏時間にあわせた時間の加減算を "月" の計算時にも適用します。
             </para>
 
@@ -142,8 +143,8 @@
             <ulink url="http://en.wikipedia.org/wiki/Unix_Time">UNIX タイムスタンプ</ulink>を使用します。
             各地域固有の方式で日付を表示するには、まずタイムゾーンを知る必要があります。
             デフォルトのタイムゾーンは常に GMT/UTC です。オブジェクトのタイムゾーンを調べるには
-            <code>getTimeZone())</code> を使用します。オブジェクトのタイムゾーンを変更するには
-            <code>setTimeZone())</code> を使用します。
+            <methodname>getTimeZone()</methodname> を使用します。オブジェクトのタイムゾーンを変更するには
+            <methodname>setTimeZone()</methodname> を使用します。
             これらのオブジェクトに対するすべての操作は、このタイムゾーンを想定して行われます。
         </para>
 
@@ -205,7 +206,7 @@ echo $date3, "\n"; // 出力は "Mar 3, 2007 12:00:00 AM" となります
             <varname>$locale</varname> パラメータの内容をもとにして地域化した結果
             (日付書式を文字列で表したもの) を出力します。
             入力パラメータ <varname>$date</varname> に具体的な型が指定されている場合もあります
-            (たとえば <code>addHour()</code> では <varname>$hour</varname> です)。
+            (たとえば <methodname>addHour()</methodname> では <varname>$hour</varname> です)。
             このような場合でも、引数として <classname>Zend_Date</classname>
             オブジェクトを使用できることに注意しましょう。
             <varname>$locale</varname> を指定しなかった場合は、
@@ -238,10 +239,12 @@ $date = new Zend_Date('31.Feb.2007');
         <title>多くの日付要素で共通に使用できる、Zend_Date の基本操作</title>
 
         <para>
-            メソッド <code>add(), sub(), compare(), get(), and set()</code>
+            メソッド <methodname>add()</methodname>, <methodname>sub()</methodname>,
+            <methodname>compare()</methodname>, </methodname>get()</methodname> および
+            <methodname>set()</methodname>
             は、日付全般に対して使用できます。それぞれのメソッドは、
             そのインスタンスが保持する日付の値を操作します。
-            これらのメソッドのうち、<code>get()</code>
+            これらのメソッドのうち、<methodname>get()</methodname>
             以外ではすべて <varname>$date</varname> オペランドが必要となります。
             ここには <classname>Zend_Date</classname> のインスタンスか
             数値文字列、あるいは整数値を指定します。
@@ -252,7 +255,7 @@ $date = new Zend_Date('31.Feb.2007');
             たとえば "年"、"分" などが指定できます。それだけではなく、
             "December 31, 2007 23:59:59" のような長い形式の文字列も
             <varname>$date</varname> に指定できます。
-            <code>compare()</code> および <code>get()</code>
+            <methodname>compare()</methodname> および <methodname>get()</methodname>
             以外のメソッドは、処理の結果としてオブジェクト内の日付が変更されます。
         </para>
 
@@ -275,11 +278,11 @@ print $date;
             をいちいちタイプする必要がなくなります。
             好都合なことに、これらのメソッドの名前は
             プレフィックス (基本操作の名前) とサフィックス (日付要素の名前)
-            を組み合わせた形式、たとえば <code>addYear()</code>
+            を組み合わせた形式、たとえば <methodname>addYear()</methodname>
             のようになっています。以下の一覧における、すべての
             "日付要素" と "基本操作" の組み合わせが存在します。
             たとえば "add" は、各要素について
-            <code>addDay()</code> や <code>addYear()</code>
+            <methodname>addDay()</methodname> や <methodname>addYear()</methodname>
             などといったメソッドが存在します。
         </para>
 
@@ -354,8 +357,8 @@ print $date;
                              <classname>Zend_Date</classname> では、秒未満の単位を扱うために
                              二つのメソッドを用意しています。デフォルトでは、
                              <classname>Zend_Date</classname> のインスタンスはミリ秒単位の精度を使用します。
-                             これは <code>getFractionalPrecision()</code> を使用して取得します。
-                             精度を変更するには <code>setFractionalPrecision($precision)</code>
+                             これは <methodname>getFractionalPrecision()</methodname> を使用して取得します。
+                             精度を変更するには <methodname>setFractionalPrecision($precision)</methodname>
                              を使用します。しかし、精度は事実上ミリ秒までに制限されます。
                              というのも、<classname>Zend_Date</classname> は <code>
                              <ulink url="http://php.net/microtime">microtime()</ulink></code>
@@ -367,7 +370,7 @@ print $date;
                                 <ulink url="http://ja.wikipedia.org/wiki/%E6%97%A5">Day (日)</ulink>
                             </entry>
                             <entry>
-                             <classname>Zend_Date::DAY_SHORT</classname> は <varname>$date</varname>
+                             <constant>Zend_Date::DAY_SHORT</constant> は <varname>$date</varname>
                              から抽出します。これは、<varname>$date</varname> オペランドが
                              <classname>Zend_Date</classname> のインスタンスであるか、
                              あるいは数値文字列である場合に行われます。
@@ -480,13 +483,13 @@ print $date;
                                     <emphasis>get($part = null, $locale = null)</emphasis>
                                 </para>
                                 <para>
-                                    <code>get($part)</code> を使用して、このオブジェクトの日付の
+                                    <methodname>get($part)</methodname> を使用して、このオブジェクトの日付の
                                     <varname>$part</varname> の部分を取得します。
                                     結果は、<varname>$locale</varname>
                                     にもとづいて地域化された書式の文字列か整数値となります。
                                     BCMath 拡張モジュールを使用している場合は、
                                     大きな値の場合に整数ではなく数値文字列が返されるかもしれません。
-                                    <emphasis>注意:</emphasis> <code>get()</code>
+                                    <emphasis>注意:</emphasis> <methodname>get()</methodname>
                                     とは異なり、その他の get*() 系のメソッドは
                                     <classname>Zend_Date</classname> のインスタンスのみを返します。
                                     その中身は、選択された時刻/日付となります。
@@ -669,9 +672,10 @@ print $date;
                                 <emphasis>isLeapYear()</emphasis>
                             </para>
                             <para>
-                                <code>isLeapYear()</code> を使用して、
+                                <methodname>isLeapYear()</methodname> を使用して、
                                 そのオブジェクトが閏年であるかどうかを調べます。あるいは
-                                Zend_Date::checkLeapYear($year) を使用すると、$year
+                                <methodname>Zend_Date::checkLeapYear($year)</methodname> を使用すると、
+                                <varname>$year</varname>
                                 (文字列、整数値 あるいは <classname>Zend_Date</classname> のインスタンス)
                                 が閏年かどうかを知ることができます。
                             </para>
@@ -722,9 +726,9 @@ print $date;
                                 <emphasis>toString($format = null, $locale = null)</emphasis>
                             </para>
                             <para>
-                                直接実行することもできますし、マジックメソッド <code>__toString()</code>
+                                直接実行することもできますし、マジックメソッド <methodname>__toString()</methodname>
                                 から間接的にコールされることもあります。
-                                <code>toString()</code> メソッドは、自動的にオブジェクトの値の書式を設定します。
+                                <methodname>toString()</methodname> メソッドは、自動的にオブジェクトの値の書式を設定します。
                                 この書式は、オブジェクトのロケールか、あるいはオプションで指定した
                                 <varname>$locale</varname> にもとづいて決まります。
                                 サポートする書式コードの一覧は、
@@ -824,11 +828,11 @@ print $date;
                                 のような非数値要素を選択した場合は、
                                 <constant>FALSE</constant> を返します。
                                 <emphasis>注意:</emphasis> このメソッドは
-                                <link linkend="id.date.basic.operations"><code>get()</code></link>
+                                <link linkend="id.date.basic.operations"><methodname>get()</methodname></link>
                                 をコールし、結果を PHP の integer 型にキャストします。つまり、
-                                <code>get()</code> の返す結果が非常に大きな数値を表す数値表現となり、
+                                <methodname>get()</methodname> の返す結果が非常に大きな数値を表す数値表現となり、
                                 それが PHP の integer 型の制限をこえた場合には予期せぬ結果となります。
-                                そのような場合は、かわりに <code>get()</code> を使用します。
+                                そのような場合は、かわりに <methodname>get()</methodname> を使用します。
                             </para>
                         </entry>
                     </row>
@@ -856,7 +860,7 @@ print $date;
                                 <emphasis>now($locale = null)</emphasis>
                             </para>
                             <para>
-                                この関数は、<code>new Zend_Date()</code> と同等です。
+                                この関数は、<command>new Zend_Date()</command> と同等です。
                                 これは、現在の日付を表す <classname>Zend_Date</classname>
                                 オブジェクトに、ロケール <varname>$locale</varname>
                                 を指定して返します。

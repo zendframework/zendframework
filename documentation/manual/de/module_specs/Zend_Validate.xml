@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15742 -->
+<!-- EN-Revision: 16286 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.introduction">
 
@@ -238,6 +238,79 @@ if (Zend_Validate::is($value, 'Between', array(1, 12))) {
             bearbeiten. Siehe <xref linkend="zend.filter.input" />.
         </para>
 
+        <sect3 id="zend.validate.introduction.static.namespaces">
+
+            <para>
+                Wenn man mit selbst definierten Prüfungen arbeitet, dann kann man an
+                <methodname>Zend_Validate::is()</methodname> einen vierten Parameter übergeben
+                welcher der Namespace ist, an dem die eigene Prüfung gefunden werden kann.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+if (Zend_Validate::is($value, 'MyValidator', array(1, 12),
+                      array('FirstNamespace', 'SecondNamespace')) {
+    // Ja, $value ist in Ordnung
+}
+]]></programlisting>
+
+            <para>
+                <classname>Zend_Validate</classname> erlaubt es auch standardmäßige Namespaces zu
+                setzen. Das bedeutet das man Sie einmal in der Bootstrap setzt und sie nicht mehr
+                bei jedem Aufruf von <methodname>Zend_Validate::is()</methodname> angeben muß. Der
+                folgende Codeschnipsel ist identisch mit dem vorherigen.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+Zend_Validate::setDefaultNamespaces(array('FirstNamespace', 'SecondNamespace'));
+if (Zend_Validate::is($value, 'MyValidator', array(1, 12)) {
+    // Yes, $value is ok
+}
+
+if (Zend_Validate::is($value, 'OtherValidator', array(1, 12)) {
+    // Yes, $value is ok
+}
+]]></programlisting>
+
+            <para>
+                Der Bequemlichkeit halber gibt es die folgenden Methoden welche die Behandlung von
+                Namespaces erlauben:
+            </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <emphasis><methodname>Zend_Validate::getDefaultNamespaces()</methodname></emphasis>:
+                        Gibt alle standardmäßigen Namespaces als Array zurück.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <emphasis><methodname>Zend_Validate::setDefaultNamespaces()</methodname></emphasis>:
+                        Setzt neue standardmäßige Namespaces und überschreibt alle vorher
+                        gesetzten. Es wird entweder ein String für einen einzelnen Namespace
+                        akzeptiert, oder ein Array für mehrere Namespaces.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <emphasis><methodname>Zend_Validate::addDefaultNamespaces()</methodname></emphasis>:
+                        Fügt zusätzliche Namespaces zu den bereits gesetzten hinzu. Es wird
+                        entweder ein String für einen einzelnen Namespace akzeptiert, oder ein
+                        Array für mehrere Namespaces.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <emphasis><methodname>Zend_Validate::hasDefaultNamespaces()</methodname></emphasis>:
+                        Gibt true zurück wenn ein oder mehrere standardmäßige Namespaces gesetzt
+                        sind, und false wenn keine standardmäßigen Namespaces gesetzt sind.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </sect3>
     </sect2>
 
     <sect2 id="zend.validate.introduction.translation">

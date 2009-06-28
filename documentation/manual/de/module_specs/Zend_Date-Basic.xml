@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15851 -->
+<!-- EN-Revision: 16186 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.basic">
 
@@ -32,7 +32,7 @@
         <para>
             Ohne jegliche Argumente bedeutet die Erstellung einer Instanz das ein Objekt mit dem
             aktuellen Gebietsschema und dem aktuellen lokalen Datum zurückgegeben wird, durch
-            Verwendung von PHP's <code>time()</code> Funktion um den aktuellen
+            Verwendung von PHP's <methodname>time()</methodname> Funktion um den aktuellen
             <ulink url="http://en.wikipedia.org/wiki/Unix_Time">UNIX Zeitpunkt</ulink> für das
             Objekt zu erhalten. Man muß sicherstellen das die PHP Umgebung die richtige
             <link linkend="zend.date.setdefaulttimezone">Standardzeitzone</link> gesetzt hat.
@@ -67,9 +67,9 @@ print $date;
 
             <para>
                 Ein Datum in einem <classname>Zend_Date</classname> Objekt kann als Integer oder
-                lokalisierte Zeichenkette ausgegeben werden indem man die <code>get()</code> Methode
-                verwendet. Es gibt viele Optionen welche in einer späteren Sektion beschrieben
-                werden.
+                lokalisierte Zeichenkette ausgegeben werden indem man die
+                <methodname>get()</methodname> Methode verwendet. Es gibt viele Optionen welche
+                in einer späteren Sektion beschrieben werden.
             </para>
 
             <example id="zend.date.simple.functions.get.example-1">
@@ -89,9 +89,10 @@ print $date->get();
             <title>Setzen eines Datums</title>
 
             <para>
-                Die <code>set()</code> Methode verändert das Datum welches im Objekt gespeichert ist
-                und gibt das endgültige Datum als Zeitpunkt (nicht als Objekt) zurück. Auch hier
-                gibt es viele Optionen die in einer späteren Sektion beschrieben werden.
+                Die <methodname>set()</methodname> Methode verändert das Datum welches im Objekt
+                gespeichert ist und gibt das endgültige Datum als Zeitpunkt (nicht als Objekt)
+                zurück. Auch hier gibt es viele Optionen die in einer späteren Sektion beschrieben
+                werden.
             </para>
 
             <example id="zend.date.simple.functions.set.example-1">
@@ -112,11 +113,12 @@ print $date->get(Zend_Date::W3C);
             <title>Addieren und Subtrahieren von Daten</title>
 
             <para>
-                Das Addieren von zwei Daten mit <code>add()</code> bedeutet normalerweise das
-                Addieren eines echtes Datums mit einem speziellen Zeitpunkt der einen
-                Datumsabschnitt repräsentiert, wie z.B. 12 Stunden, wie im nachfolgenden Beispiel
-                gezeigt. Beide, <code>add()</code> und <code>sub()</code> verwenden die gleichen
-                Optionen wie <code>set()</code>, welche später erklärt werden.
+                Das Addieren von zwei Daten mit <methodname>add()</methodname> bedeutet
+                normalerweise das Addieren eines echtes Datums mit einem speziellen Zeitpunkt der
+                einen Datumsabschnitt repräsentiert, wie z.B. 12 Stunden, wie im nachfolgenden
+                Beispiel gezeigt. Beide, <methodname>add()</methodname> und
+                <methodname>sub()</methodname> verwenden die gleichen Optionen wie
+                <methodname>set()</methodname>, welche später erklärt werden.
             </para>
 
             <example id="zend.date.simple.functions.add.example-1">
@@ -146,8 +148,8 @@ echo "Datum über toString() = ", $date, "\n";
                 Daten, welche in einem Objekt enthalten sind, arbeiten, oder mit Datumsabschnitten,
                 wie dem Vergleich eines Minutenwertes in einem Datum mit einem absoluten Wert. Zum
                 Beispiel können die aktuellen Minuten der aktuellen Zeit mit einer speziellen Zahl
-                von Minuten verglichen werden durch Verwendung von <code>compare()</code> wie im
-                nachfolgenden Beispiel beschrieben.
+                von Minuten verglichen werden durch Verwendung von
+                <methodname>compare()</methodname> wie im nachfolgenden Beispiel beschrieben.
             </para>
 
             <example id="zend.date.simple.functions.compare.example-1">
@@ -165,8 +167,8 @@ if ($date->compare(10, Zend_Date::MINUTE) == -1) {
             </example>
 
             <para>
-                Für einen einfachen Vergleich der Gleichheit kann <code>equals()</code> verwendet
-                werden, welches ein Boolean zurückgibt.
+                Für einen einfachen Vergleich der Gleichheit kann <methodname>equals()</methodname>
+                verwendet werden, welches ein Boolean zurückgibt.
             </para>
 
             <example id="zend.date.simple.functions.compare.example-2">

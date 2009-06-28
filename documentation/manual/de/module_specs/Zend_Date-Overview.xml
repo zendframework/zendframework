@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15851 -->
+<!-- EN-Revision: 16186 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.overview">
 
@@ -21,8 +21,8 @@
 
             <para>
                 Viele Methoden benutzen Zeichenketten für Datumsformate so ähnlich wie PHP's
-                <code>date()</code>. Wenn man mit den Zeichen von PHP's Datumsformaten mehr
-                Erfahrung hat als mit den ISO Zeichen für Formate dann kann man
+                <methodname>date()</methodname>. Wenn man mit den Zeichen von PHP's Datumsformaten
+                mehr Erfahrung hat als mit den ISO Zeichen für Formate dann kann man
                 <classname>Zend_Date::setOptions(array('format_type' => 'php'))</classname>
                 benutzen. Danach können PHP's Zeichen für Datumsformate für alle Funktionen
                 verwendet werden die einen <varname>$format</varname> Parameter akzeptieren. Durch
@@ -60,10 +60,10 @@
                 erwartet. Um solche Problem zu verhindern kann die Option <code>fix_dst</code>
                 verwendet werden, welche standardmäßig wahr ist. Das führt dazu das die
                 Sommer-/Winterzeit keinen Einfluß mehr bei Datumsberechnungen zeigt
-                (<code>addMOnth(), subMonth()</code>).
-                <classname>Zend_Date::setOptions(array('fix_dst' => false))</classname> kann benutzt
-                werden um Hinzufügen oder Entfernen der Sommer-/Winterzeitanpassung zu gestatten
-                wenn Datumsberechnungen durchgeführt werden.
+                (<methodname>addMonth()</methodname>, <methodname>subMonth()</methodname>).
+                <methodname>Zend_Date::setOptions(array('fix_dst' => false))</methodname> kann
+                benutzt werden um Hinzufügen oder Entfernen der Sommer-/Winterzeitanpassung zu
+                gestatten wenn Datumsberechnungen durchgeführt werden.
             </para>
 
             <para>
@@ -155,9 +155,10 @@
                 url="http://en.wikipedia.org/wiki/Unix_Time">UNIX Zeitpunkten</ulink>. Damit ein
             Datum in einer lokalisierten Art und Weise durchsucht werden kann, muß zuerst eine
             Zeitzone bekannt sein. Die Standardzeitzone ist immer GMT/UTC. Um die Zeitzone des
-            Objektes zu inspizieren kann <code>getTimeZone())</code> verwendet werden. Um die
-            Zeitzone des Objektes zu wechseln kann <code>setTimeZone())</code> verwendet werden.
-            Alle Änderungen des Objektes sind immer relativ zu seiner Zeitzone zu sehen.
+            Objektes zu inspizieren kann <methodname>getTimeZone()</methodname> verwendet werden.
+            Um die Zeitzone des Objektes zu wechseln kann <methodname>setTimeZone()</methodname>
+            verwendet werden. Alle Änderungen des Objektes sind immer relativ zu seiner Zeitzone zu
+            sehen.
         </para>
 
         <para>
@@ -219,10 +220,10 @@ echo $date3, "\n"; // Ausgabe "Mar 3, 2007 12:00:00 AM"
             <varname>$locale</varname> Parameter das Gebietsschema für lokalisierte Ausgaben (z.B.
             das Datumsformat für eine Ausgabe als Zeichenkette). Anzumerken ist auch das der
             <varname>$date</varname> Parameter stattdessen ein Typname sein kann (z.B.
-            <varname>$hour</varname> für <code>addHour()</code>), und das verhindert auch nicht das
-            ein <classname>Zend_Date</classname> Objekt als Argument für diesen Parameter angegeben
-            werden kann. Wenn keine <varname>$locale</varname> angegeben wurde, wird das
-            Gebietsschema des aktuellen Objektes genommen um <varname>$date</varname> zu
+            <varname>$hour</varname> für <methodname>addHour()</methodname>), und das verhindert
+            auch nicht das ein <classname>Zend_Date</classname> Objekt als Argument für diesen
+            Parameter angegeben werden kann. Wenn keine <varname>$locale</varname> angegeben wurde,
+            wird das Gebietsschema des aktuellen Objektes genommen um <varname>$date</varname> zu
             interpretieren oder das lokalisierte Format für die Ausgabe auszuwählen.
         </para>
 
@@ -250,18 +251,20 @@ $date = new Zend_Date('31.Feb.2007');
         <title>Grundsätzliche Zend_Date Operationen für die meisten Teile von Daten</title>
 
         <para>
-            Die Methoden <code>add(), sub(), compare(), get(), und set()</code> arbeiten generell
-            mit Daten. In Jedem Fall wird die Operation auf dem Datum durchgeführt das in den
-            Objektinstanz vorhanden ist. Der <varname>$date</varname> Operand wird für alle dieser
-            Methoden benötigt, ausser für <code>get()</code> und kann eine
-            <classname>Zend_Date</classname> Objektinstanz, eine nummerische Zeichenkette oder ein
-            Integer sein. Diese Methoden nehmen an das <varname>$date</varname> ein Zeitpunkt ist,
-            wenn es kein Objekt ist. Trotzdem kontrolliert der <varname>$part</varname> Operand an
-            welchem logischen Teil der zwei Daten gearbeitet werden soll, was Arbeiten an Teilen von
-            Daten des Objekts erlaubt, wie Jahr oder Minute selbst wenn <varname>$date</varname>
-            eine lange form einer Datumszeichenkette enthält wie "Dezember 31, 2007 23:59:59". Das
-            Ergebnis der Operation ändert das Datum im Objekt ausser bei <code>compare()</code> und
-            <code>get()</code>.
+            Die Methoden <methodname>add()</methodname>, <methodname>sub()</methodname>,
+            <methodname>compare()</methodname>, <methodname>get()</methodname>, und
+            <methodname>set()</methodname> arbeiten generell mit Daten. In Jedem Fall wird die
+            Operation auf dem Datum durchgeführt das in den Objektinstanz vorhanden ist. Der
+            <varname>$date</varname> Operand wird für alle dieser Methoden benötigt, ausser für
+            <methodname>get()</methodname> und kann eine <classname>Zend_Date</classname>
+            Objektinstanz, eine nummerische Zeichenkette oder ein Integer sein. Diese Methoden
+            nehmen an das <varname>$date</varname> ein Zeitpunkt ist, wenn es kein Objekt ist.
+            Trotzdem kontrolliert der <varname>$part</varname> Operand an welchem logischen Teil
+            der zwei Daten gearbeitet werden soll, was Arbeiten an Teilen von Daten des Objekts
+            erlaubt, wie Jahr oder Minute selbst wenn <varname>$date</varname> eine lange Form
+            einer Datumszeichenkette enthält wie "Dezember 31, 2007 23:59:59". Das Ergebnis der
+            Operation ändert das Datum im Objekt ausser bei <methodname>compare()</methodname> und
+            <methodname>get()</methodname>.
         </para>
 
         <example id="zend.date.basic.example-1">
@@ -282,10 +285,10 @@ print $date;
                 linkend="zend.date.constants.list">Konstanten für Datumsabschnitte</link>
             ausgeschrieben werden müssen. Normalerweise sind wir benannt durch Kombination eines
             Prefixes (Name der Basisoperation) und einem Suffix (Art des Datumsabschnittes), wie
-            <code>addYear()</code>. In der Liste die anbei steht, existieren alle Kombinationen von
-            "Datumsabschnitten" und "Basisoperationen". Zum Beispiel die Operation "add" existiert
-            für jeden dieser Datumsabschnitte wie <code>addDay()</code>, <code>addYear()</code>
-            und viele mehr.
+            <methodname>addYear()</methodname>. In der Liste die anbei steht, existieren alle
+            Kombinationen von "Datumsabschnitten" und "Basisoperationen". Zum Beispiel die
+            Operation "add" existiert für jeden dieser Datumsabschnitte wie
+            <methodname>addDay()</methodname>, <methodname>addYear()</methodname> und viele mehr.
         </para>
 
         <para>
@@ -373,11 +376,11 @@ print $date;
                                 Methoden für das Arbeiten mit Zeiteinheiten die kleiner als Sekunden
                                 sind. Normalerweise verwenden <classname>Zend_Date</classname>
                                 Instanzen eine Genauigkeit welche der von Millisekunden entspricht
-                                wie man durch <code>getFractionalPrecision()</code> sehen kann. Um
-                                die Genauigkeit zu Ändern kann
-                                <code>setFractionalPrecision($precision)</code> verwendet werden.
-                                Trotzdem ist die Genauigkeit praktisch auf Millisekunden begrezt da
-                                <classname>Zend_Date</classname> <code><ulink
+                                wie man durch <methodname>getFractionalPrecision()</methodname> sehen
+                                kann. Um die Genauigkeit zu Ändern kann
+                                <methodname>setFractionalPrecision($precision)</methodname> verwendet
+                                werden. Trotzdem ist die Genauigkeit praktisch auf Millisekunden
+                                begrezt da <classname>Zend_Date</classname> <code><ulink
                                     url="http://php.net/microtime">microtime()</ulink></code> dafür
                                 benutzt.
                             </entry>
@@ -387,7 +390,7 @@ print $date;
                                 <ulink url="http://en.wikipedia.org/wiki/Day">Tag</ulink>
                             </entry>
                             <entry>
-                                <classname>Zend_Date::DAY_SHORT</classname> wird von
+                                <constant>Zend_Date::DAY_SHORT</constant> wird von
                                 <varname>$date</varname> extrahiert wenn der
                                 <varname>$date</varname> Operand eine
                                 <classname>Zend_Date</classname> Instanz oder eine nummerische
@@ -510,14 +513,15 @@ print $date;
                                     <emphasis>get($part = null, $locale = null)</emphasis>
                                 </para>
                                 <para>
-                                    <code>get($part)</code> kann benutzt werden um einen
+                                    <methodname>get($part)</methodname> kann benutzt werden um einen
                                     Datumsabschnitt <varname>$part</varname> dieses Datumsobjektes
                                     welcher in ein Gebietsschema lokalisiert oder als formatierte
                                     Zeichenkette oder Integer gewünscht ist zurück zu bekommen.
                                     Durch Verwendung der BCMath Erweiterung können nummerische
                                     Zeichenkettten statt Integer für große Werte zurückgegeben
-                                    werden. <emphasis>NOTE:</emphasis> Anders als <code>get()</code>
-                                    geben die anderen get*() bequemlichen Methoden nur Instanzen von
+                                    werden. <emphasis>NOTE:</emphasis> Anders als
+                                    <methodname>get()</methodname> geben die anderen get*()
+                                    bequemlichen Methoden nur Instanzen von
                                     <classname>Zend_Date</classname> zurück welche nur das Datum
                                     oder die Zeit repräsentieren das ausgewählt oder berechnet
                                     wurde.
@@ -709,10 +713,11 @@ print $date;
                                 <emphasis>isLeapYear()</emphasis>
                             </para>
                             <para>
-                                <code>isLeapYear()</code> kann benutzt werden ob zu prüfen ob das
-                                aktuelle Objekt ein Schaltjahr ist. Sonst kann
-                                Zend_Date::checkLeapYear($year) benutzt werden um das Jahr $year zu
-                                prüfen, welches eine Zeichenkette, ein Integer oder eine Instanz von
+                                <methodname>isLeapYear()</methodname> kann benutzt werden ob zu
+                                prüfen ob das aktuelle Objekt ein Schaltjahr ist. Sonst kann
+                                <methodname>Zend_Date::checkLeapYear($year)</methodname> benutzt
+                                werden um das Jahr <varname>$year</varname> zu prüfen, welches eine
+                                Zeichenkette, ein Integer oder eine Instanz von
                                 <classname>Zend_Date</classname> sein kann. Ist das Jahr ein
                                 Schaltjahr ?
                             </para>
@@ -766,10 +771,11 @@ print $date;
                             </para>
                             <para>
                                 Direkt aufzurufen oder über die magische Methode
-                                <code>__toString()</code>. Die <code>toString()</code> Methode
-                                formatiert automatisch den Wert des Datumsobjektes anhand der
-                                Konventionen des Gebietsschemas des Objektes, oder einem optional
-                                definierten Gebietsschema <varname>$locale</varname>. Für eine Liste von
+                                <methodname>__toString()</methodname>. Die
+                                <methodname>toString()</methodname> Methode formatiert automatisch
+                                den Wert des Datumsobjektes anhand der Konventionen des
+                                Gebietsschemas des Objektes, oder einem optional definierten
+                                Gebietsschema <varname>$locale</varname>. Für eine Liste von
                                 unterstützten Formatcodes kann hier nachgeschaut werden:
                                 <xref linkend="zend.date.constants.selfdefinedformats" />.
                             </para>
@@ -875,17 +881,18 @@ print $date;
                             </para>
                             <para>
                                 Gibt eine Integer Repräsentation des ausgewählten Datumsabschnittes
-                                <varname>$part</varname> zurück anhand der Konventionen des Gebietsschemas
-                                des Objektes. Gibt <constant>FALSE</constant> zurück wenn der Abschnitt
-                                <varname>$part</varname> ein nicht numerischer Wert ist, wie
-                                <classname>Zend_Date::MONTH_NAME_SHORT</classname>.
+                                <varname>$part</varname> zurück anhand der Konventionen des
+                                Gebietsschemas des Objektes. Gibt <constant>FALSE</constant> zurück
+                                wenn der Abschnitt <varname>$part</varname> ein nicht numerischer
+                                Wert ist, wie <classname>Zend_Date::MONTH_NAME_SHORT</classname>.
                                 <emphasis>NOTIZ:</emphasis> Diese Methode ruft <link
-                                    linkend="id.date.basic.operations"><code>get()</code></link> auf
-                                und castet das Ergebnis einen PHP Integer Wert, welcher unerwartete
-                                Ergebnisse liefern wird, wenn <code>get()</code> eine numerische
-                                Zeichenkette zurückgibt die eine Zahl enthält welche zu groß für
-                                einen PHP Integer Wert auf Ihrem System ist. Stattdessen sollte
-                                <code>get()</code> benutzt werden.
+                                    linkend="id.date.basic.operations"><methodname>get()</methodname></link>
+                                auf und castet das Ergebnis einen PHP Integer Wert, welcher
+                                unerwartete Ergebnisse liefern wird, wenn
+                                <methodname>get()</methodname> eine numerische Zeichenkette
+                                zurückgibt die eine Zahl enthält welche zu groß für einen PHP
+                                Integer Wert auf Ihrem System ist. Stattdessen sollte
+                                <methodname>get()</methodname> benutzt werden.
                             </para>
                         </entry>
                     </row>
@@ -914,7 +921,7 @@ print $date;
                             </para>
                             <para>
                                 Diese bequemliche Funktion ist identisch mit
-                                <code>new Zend_Date()</code>. Sie gibt das aktuelle Datum als
+                                <command>new Zend_Date()</command>. Sie gibt das aktuelle Datum als
                                 <classname>Zend_Date</classname> Objekt zurück, welches das
                                 Gebietsschema <varname>$locale</varname> hat.
                             </para>

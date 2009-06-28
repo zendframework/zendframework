@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16170 -->
+<!-- EN-Revision: 16184 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.messages">
 
@@ -575,7 +575,7 @@ $validator = new Zend_Validate_Alnum();
 $messages  = $validator->getMessageTemplates();
 ]]></programlisting>
 
-    <sect2 id="zend.validate.messages">
+    <sect2 id="zend.validate.messages.limitation">
         <title>Begrenzen der Größe einer Prüfungsmeldung</title>
 
         <para>

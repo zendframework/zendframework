@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15851 -->
+<!-- EN-Revision: 16186 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.additional">
 
@@ -17,25 +17,26 @@
         <title>Prüfen von Daten</title>
 
         <para>
-            Normalerweise werden die meisten Daten als Zeichenketten übergeben. Aber das Problem mit
-            Zeichenketten ist das man nicht sicher sein kann ob eine Zeichenkette ein echtes Datum
-            enthält. Hierfür gibt es in <classname>Zend_Date</classname> eine eigene statische
-            Funktion um Datums-Zeichenketten zu prüfen. <classname>Zend_Locale</classname> hat eine
-            eigene Funktion <code>getDate($date, $locale);</code> welche ein Datum analysiert und
+            Normalerweise werden die meisten Daten als Zeichenketten übergeben. Aber das Problem
+            mit Zeichenketten ist das man nicht sicher sein kann ob eine Zeichenkette ein echtes
+            Datum enthält. Hierfür gibt es in <classname>Zend_Date</classname> eine eigene
+            statische Funktion um Datums-Zeichenketten zu prüfen.
+            <classname>Zend_Locale</classname> hat eine eigene Funktion
+            <methodname>getDate($date, $locale)</methodname> welche ein Datum analysiert und
             die gültigen normalisierten Datumsabschnitte zurück gibt. Ein Monatsname wird zum
             Beispiel erkannt und anschließend nur die Nummer des Monats zurück gegeben. Aber da
             <classname>Zend_Locale</classname> nichts über Daten weiß, da es eine Klasse zum
             Normalisieren und Lokalisieren ist, haben wir eine eigene Funktion
-            <code>isDate($date);</code> integriert welche das für uns prüft.
+            <methodname>isDate($date)</methodname> integriert welche das für uns prüft.
         </para>
 
         <para>
-            <code>isDate($date, $format, $locale);</code> nimmt bis zu drei Parameter entgegen und
-            benötigt mindestens einen Parameter. Deshalb ist alles was wir für das Prüfen eines
-            Datums benötigen natürlich das Datum selbst als Zeichenkette. Der zweite Parameter kann
-            das Format sein, in welchem das Datum erwartet wird. Wenn kein Format angegeben wurde,
-            wird das Standardformat des verwendeten Gebietsschemas benutzt. Für Details darüber wie
-            Formate aussehen müssen kann im Kapitel über
+            <methodname>isDate($date, $format, $locale)</methodname> nimmt bis zu drei Parameter
+            entgegen und benötigt mindestens einen Parameter. Deshalb ist alles was wir für das
+            Prüfen eines Datums benötigen natürlich das Datum selbst als Zeichenkette. Der zweite
+            Parameter kann das Format sein, in welchem das Datum erwartet wird. Wenn kein Format
+            angegeben wurde, wird das Standardformat des verwendeten Gebietsschemas benutzt. Für
+            Details darüber wie Formate aussehen müssen kann im Kapitel über
             <link linkend="zend.date.constants.selfdefinedformats">selbst definierte Formate</link>
             nachgeschaut werden.
         </para>
@@ -49,13 +50,13 @@
         </para>
 
         <para>
-            <code>isDate();</code> prüft natürlich auch ob ein Datum existiert.
+            <methodname>isDate()</methodname> prüft natürlich auch ob ein Datum existiert.
             <classname>Zend_Date</classname> selbst prüft die Daten nicht. Deshalb ist es möglich
             ein Datum wie zum Beispiel '31.Februar.2000' mit <classname>Zend_Date</classname> zu
             erstellen weil <classname>Zend_Date</classname> das Datum automatisch korrigiert und
             ein gültiges Datum zurück gibt. In unserem Fall den '03.März.2000'. Auf der anderen
-            Seite führt <code>isDate()</code> diese Prüfung durch und gibt beim '31.Februar.2000'
-            falsch zurück, weil sie weiß das dieses Datum unmöglich ist.
+            Seite führt <methodname>isDate()</methodname> diese Prüfung durch und gibt beim
+            '31.Februar.2000' falsch zurück, weil sie weiß das dieses Datum unmöglich ist.
         </para>
 
         <example id="zend.date.additional.checking.example-1">
@@ -125,9 +126,9 @@ print_r (Zend_Date_Cities::getCityList());
 
         <para>
             Die Ortsangabe selbst erhält man mit der Funktion
-            <classname>Zend_Date_Cities::City()</classname>. Sie akzeptiert den Namen einer Stadt
-            wie durch die Funktion <classname>Zend_Date_Cities::getCityList()</classname> angegeben
-            und optional als zweiten Parameter den zu setzenden Horizont.
+            <methodname>Zend_Date_Cities::City()</methodname>. Sie akzeptiert den Namen einer Stadt
+            wie durch die Funktion <methodname>Zend_Date_Cities::getCityList()</methodname>
+            angegeben und optional als zweiten Parameter den zu setzenden Horizont.
         </para>
 
         <para>
@@ -201,10 +202,11 @@ $mylocation = array('latitude' => 41.5, 'longitude' => 13.2446);
             Erstellung eines <classname>Zend_Date</classname> Objekts mit dem Tag für welchen
             Sonnenauf- oder -untergang berechnet werden sollen. Für die Berechnung stehen 3
             Funktionen bereit. Die Berechnung des Sonnenaufganges ist mit
-            '<code>getSunset()</code>', des Sonnenuntergangs mit '<code>getSunrise()</code>' und
-            alle möglichen Informationen welche die Sonne betreffen mit '<code>getSunInfo()</code>'
-            möglich. Nach der Berechnung wird das <classname>Zend_Date</classname> Objekt mit der
-            berechneten Zeit zurückgegeben.
+            '<methodname>getSunset()</methodname>', des Sonnenuntergangs mit
+            '<methodname>getSunrise()</methodname>' und alle möglichen Informationen welche die
+            Sonne betreffen mit '<methodname>getSunInfo()</methodname>' möglich. Nach der
+            Berechnung wird das <classname>Zend_Date</classname> Objekt mit der berechneten Zeit
+            zurückgegeben.
         </para>
 
         <example id="zend.date.additional.sunrise-sunset.example-3">
@@ -241,7 +243,8 @@ foreach ($info as $sun) {
             Daten auch immer das eine gültige Zeitzone gesetzt ist. Das klingt eventuell
             kompliziert, ist aber viel einfacher als erwartet. Wie schon im ersten Kapitel von
             <classname>Zend_Date</classname> erwähnt muß immer eine Standardzeitzone ersetzt werden.
-            Entweder durch <code>php.ini</code> oder durch Definition in der Bootstrap Datei.
+            Entweder durch <filename>php.ini</filename> oder durch Definition in der Bootstrap
+            Datei.
         </para>
 
         <para>
@@ -253,16 +256,17 @@ foreach ($info as $sun) {
         </para>
 
         <para>
-            <code>getTimezone()</code> gibt die aktuell gesetzte Zeitzone des
+            <methodname>getTimezone()</methodname> gibt die aktuell gesetzte Zeitzone des
             <classname>Zend_Date</classname> Objektes zurück. Man sollte in Erinnerung behalten das
             <classname>Zend_Date</classname> nicht mit den PHP Internas gekoppelt ist. Deshalb ist
             die zurückgegebene Zeitzone nicht die des PHP Skripts sondern jene des Objektes.
-            <code>setTimezone($zone)</code> ist die zweite Funktion und ermöglicht es eine neue
-            Zeitzone für <classname>Zend_Date</classname> zu setzen. Eine angegebene Zeitzone wird
-            immer geprüft. Wenn diese nicht existiert wird eine Ausnahme geworfen. Zusätzlich kann
-            die Zeitzone des aktuellen Skripts oder des Systems für das Datumsobjekt gesetzt werden
-            indem <code>setTimezone()</code> ohne den Parameter zone aufgerufen wird. Das wird auch
-            automatisch gemacht wenn das Datumsobjekt erstellt wird.
+            <methodname>setTimezone($zone)</methodname> ist die zweite Funktion und ermöglicht es
+            eine neue Zeitzone für <classname>Zend_Date</classname> zu setzen. Eine angegebene
+            Zeitzone wird immer geprüft. Wenn diese nicht existiert wird eine Ausnahme geworfen.
+            Zusätzlich kann die Zeitzone des aktuellen Skripts oder des Systems für das
+            Datumsobjekt gesetzt werden indem <methodname>setTimezone()</methodname> ohne den
+            Parameter zone aufgerufen wird. Das wird auch automatisch gemacht wenn das Datumsobjekt
+            erstellt wird.
         </para>
 
         <example id="zend.date.additional.timezones.example-1">

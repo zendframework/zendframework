@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16183 -->
 <!-- Reviewed: no -->
 <sect1 id="performance.view">
     <title>Darstellen der View</title>
 
     <para>
-        Wenn man den MVC Layer vom Zend Framework verwendet, sind die Chancen das man
-        <classname>Zend_View</classname> verwendet recht hoch. <classname>Zend_View</classname> ist
-        performant verglichen mit anderen View oder Templating Engines; da View Skripte in PHP
-        geschrieben sind muß man weder den Overhead eines Kompilierungssystems zu PHP auf sich
-        nehmen, noch muß man darauf achten das das kompilierte PHP nicht optimiert ist. Trotzdem
+        Wenn man den <acronym>MVC</acronym> Layer vom Zend Framework verwendet, sind die Chancen
+        das man <classname>Zend_View</classname> verwendet recht hoch.
+        <classname>Zend_View</classname> ist performant verglichen mit anderen View oder Templating
+        Engines; da View Skripte in <acronym>PHP</acronym> geschrieben sind muß man weder den
+        Overhead eines Kompilierungssystems zu <acronym>PHP</acronym> auf sich nehmen, noch muß man
+        darauf achten das das kompilierte <acronym>PHP</acronym> nicht optimiert ist. Trotzdem
         zeigt <classname>Zend_View</classname> seine eigenen Probleme: Erweiterungen werden durch
         überladen (View Helfer) durchgeführt, und eine Anzahl von View Helfern, die dadurch
         Schlüsselfunktionalitäten bieten machen das auch, mit einem Verlust von Geschwindigkeit.
@@ -169,10 +170,11 @@ class My_View extends Zend_View
 
             <para>
                 Grundsätzlich, solange man nicht Variablen an das Partial übergibt und einen reinen
-                Variablenraum benötigt, oder ein Viewskript von einem anderen MVC Modul darstellt,
-                gibt es keinen Grund den Overhead von <methodname>partial()</methodname> zu
-                verwenden; stattdessen sollte man <classname>Zend_View</classname>'s eingebaute
-                <methodname>render()</methodname> Methode verwendet um das Viewskript darzustellen.
+                Variablenraum benötigt, oder ein Viewskript von einem anderen
+                <acronym>MVC</acronym> Modul darstellt, gibt es keinen Grund den Overhead von
+                <methodname>partial()</methodname> zu verwenden; stattdessen sollte man
+                <classname>Zend_View</classname>'s eingebaute <methodname>render()</methodname>
+                Methode verwendet um das Viewskript darzustellen.
             </para>
         </sect3>
     </sect2>
@@ -182,12 +184,13 @@ class My_View extends Zend_View
 
         <para>
             Version 1.5.0 führte die <methodname>action()</methodname> des View Helfers ein, welche
-            es erlaubt eine MVC Aktion abzuschicken und deren dargestellten Inhalt aufzufangen. Das
-            biete einen wichtigen Schritt in die Prinzipien von DRY, und erlaubt die
-            Wiederverwendung von Code. Trotzdem, wie jede die Ihre Anwendung profilieren schnell
-            feststellen werden, ist es auch eine sehr teure Operation. Intern muß der
-            <methodname>action()</methodname> Viewhelfer neue Anfrage und Antwort Objekte klonen,
-            den Dispatcher aufrufen, den angefragten Controller und die Aktion aufrufen, usw.
+            es erlaubt eine <acronym>MVC</acronym> Aktion abzuschicken und deren dargestellten
+            Inhalt aufzufangen. Das biete einen wichtigen Schritt in die Prinzipien von
+            <acronym>DRY</acronym>, und erlaubt die Wiederverwendung von Code. Trotzdem, wie jede
+            die Ihre Anwendung profilieren schnell feststellen werden, ist es auch eine sehr teure
+            Operation. Intern muß der <methodname>action()</methodname> Viewhelfer neue Anfrage und
+            Antwort Objekte klonen, den Dispatcher aufrufen, den angefragten Controller und die
+            Aktion aufrufen, usw.
         </para>
 
         <para>
@@ -260,7 +263,7 @@ class LoginPlugin extends Zend_Controller_Plugin_Abstract
                 da er Objekte nicht klonen und den internen Status resetieren muß. Zustzlich stellt
                 es sicher das alle Pre und Post Dispatch Plugins aufgerufen werden, was von
                 spezieller Wichtigkeit ist wenn man Frontcontroller Plugins für die Behandlung von
-                ACLs in speziellen Aktionen verwendet.
+                <acronym>ACL</acronym>'s in speziellen Aktionen verwendet.
             </para>
         </sect3>
 
@@ -342,7 +345,7 @@ class My_View_Helper_BugList extends Zend_View_Helper_Abstract
             <para>
                 Das hat zwei Vorteile: Es übernimmt nicht länger den Overhead vom
                 <methodname>action()</methodname> View Helfer, und präsentiert eine bessere und
-                semantisch verständlichere API.
+                semantisch verständlichere <acronym>API</acronym>.
             </para>
         </sect3>
     </sect2>

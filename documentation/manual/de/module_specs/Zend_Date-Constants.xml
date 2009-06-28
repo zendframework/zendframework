@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15851 -->
+<!-- EN-Revision: 16186 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.constants">
 
@@ -1141,19 +1141,19 @@ print $date->toString("'Epoche:GGGG='GGGG, ' Datum:yy.MMMM.dd'yy.MMMM.dd");
         <para>
             Wenn man mit PHP's date Formatdefinition vertrauter ist als mit den ISO
             Formatdefinitionen, dann kann man durch Verwendung der Methode
-            <classname>Zend_Date::setOptions(array('format_type' => 'php'))</classname> das Wechseln
-            von ISO Formatdefinition zu PHP date Formatdefinition welche dann für alle Zend_Date
-            Methoden verwendet werden wechseln. Danach müssen alle Format Parameter in
-            <ulink url="http://php.net/date">PHP's <code>date()</code> Formatdefintion</ulink>
-            angegeben werden. Das PHP date Format vermisst einige der Formate welche durch PHP
-            unterstützt werden und umgekehrt. Wenn keine Erfahrung damit besteht sollte auf alle
-            Fälle das ISO Format genommen werden. Und wenn Altlast-Code vorhanden ist der PHP's date
-            Format verwendet, kann dieser entweder manuell in das ISO Format konvertiert werden
-            indem <link
+            <classname>Zend_Date::setOptions(array('format_type' => 'php'))</classname> das
+            Wechseln von ISO Formatdefinition zu PHP date Formatdefinition welche dann für alle
+            Zend_Date Methoden verwendet werden wechseln. Danach müssen alle Format Parameter in
+            <ulink url="http://php.net/date">PHP's <methodname>date()</methodname>
+                Formatdefintion</ulink> angegeben werden. Das PHP date Format vermisst einige der
+            Formate welche durch PHP unterstützt werden und umgekehrt. Wenn keine Erfahrung damit
+            besteht sollte auf alle Fälle das ISO Format genommen werden. Und wenn Altlast-Code
+            vorhanden ist der PHP's date Format verwendet, kann dieser entweder manuell in das ISO
+            Format konvertiert werden indem <link
                 linkend="zend.locale.date.normalize">Zend_Locale_Format::convertPhpToIsoFormat()</link>
-            verwendet wird, oder durch Verwendung von <code>setOptions()</code>. Die folgenden
-            Beispiel zeigen die Verwendung der Konstanten anhand der unteren Tabelle für die
-            Erstellung von selbst-definierten Formaten.
+            verwendet wird, oder durch Verwendung von <methodname>setOptions()</methodname>. Die
+            folgenden Beispiel zeigen die Verwendung der Konstanten anhand der unteren Tabelle für
+            die Erstellung von selbst-definierten Formaten.
         </para>
 
         <example id="zend.date.constants.phpformats.example-1">

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15851 -->
+<!-- EN-Revision: 16186 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.creation">
 
@@ -47,11 +47,12 @@ $date = new Zend_Date();
 
             <para>
                 Machmal ist es einfacher eine statische Methode für die Erstellung eines Datums zu
-                verwenden. Hierfür kann die <emphasis><code>now()</code></emphasis> Methode
-                verwendet werden. Sie gibt eine neue Instanz von <classname>Zend_Date</classname>
-                auf die gleiche Art und Weise zurück wie wenn man <code>new Zend_Date()</code>
-                Verwenden würde. Es wird aber immer das aktuelle Datum zurückgegeben und das kann
-                auch nur durch die Angabe von optionalen Parametern geändert werden.
+                verwenden. Hierfür kann die <emphasis><methodname>now()</methodname></emphasis>
+                Methode verwendet werden. Sie gibt eine neue Instanz von
+                <classname>Zend_Date</classname> auf die gleiche Art und Weise zurück wie wenn man
+                <command>new Zend_Date()</command> Verwenden würde. Es wird aber immer das aktuelle
+                Datum zurückgegeben und das kann auch nur durch die Angabe von optionalen
+                Parametern geändert werden.
             </para>
 
             <programlisting language="php"><![CDATA[

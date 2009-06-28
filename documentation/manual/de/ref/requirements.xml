@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15611 -->
+<!-- EN-Revision: 16182 -->
 <!-- Reviewed: no -->
 <appendix id="requirements">
 
@@ -10,18 +10,21 @@
         <title>Einführung</title>
 
         <para>
-            Zend Framework benötigt einen PHP 5 Interpreter mit einem Web Server der konfiguriert
-            ist PHP Skripte korrekt handzuhaben. Einige Features benötigen zusätzliche Erweiterungen
-            oder Features des Web Servers; in den meisten Fällen kann der Framewrok ohne diese
-            verwendet werden, was aber zu geringerer Performance führen kann, oder dazu das
-            bestimmte Features nicht vollständig funktionieren. Ein Beispiel solch einer
-            Abhängigkeit ist mod_rewrite in einer Apache Umgebung, welches verwendet werden kann um
-            "hübsche URL's" wie "http://www.example.com/user/edit" zu implementieren. Wenn
-            mod_rewrite nicht aktiviert ist, kann ZF konfiguriert werden um URL's wie
-            "http://www.example.com?controller=user&amp;action=edit" zu unterstützen. Hübsche URL's
-            können verwendet werden um URL's zu verkleinern, für textuelle Darstellung oder die
-            Optimierung von Suchmaschinen (SEO), aber sie beeinflussen die Funktionalität der
-            Anwendung nicht direkt.
+            Zend Framework benötigt einen <acronym>PHP</acronym> 5 Interpreter mit einem Web Server
+            der konfiguriert ist <acronym>PHP</acronym> Skripte korrekt handzuhaben. Einige
+            Features benötigen zusätzliche Erweiterungen oder Features des Web Servers; in den
+            meisten Fällen kann der Framewrok ohne diese verwendet werden, was aber zu geringerer
+            Performance führen kann, oder dazu das bestimmte Features nicht vollständig
+            funktionieren. Ein Beispiel solch einer Abhängigkeit ist mod_rewrite in einer Apache
+            Umgebung, welches verwendet werden kann um "hübsche <acronym>URL</acronym>'s" wie
+            "<filename>http://www.example.com/user/edit</filename>" zu implementieren. Wenn
+            mod_rewrite nicht aktiviert ist, kann Zend Framework konfiguriert werden um
+            <acronym>URL</acronym>'s wie
+            "<filename>http://www.example.com?controller=user&amp;action=edit</filename>" zu
+            unterstützen. Hübsche <acronym>URL</acronym>'s können verwendet werden um
+            <acronym>URL</acronym>'s zu verkleinern, für textuelle Darstellung oder die Optimierung
+            von Suchmaschinen (<acronym>SEO</acronym>), aber sie beeinflussen die Funktionalität
+            der Anwendung nicht direkt.
         </para>
 
         <sect2 id="requirements.version">
@@ -29,8 +32,9 @@
             <title>PHP Version</title>
 
             <para>
-                Zend empfiehlt das aktuellste Release von PHP wegen kritischer Sicherheits und
-                Performance Verbesserungen, und unterstützt aktuell PHP 5.2.4 oder höher.
+                Zend empfiehlt das aktuellste Release von <acronym>PHP</acronym> wegen kritischer
+                Sicherheits und Performance Verbesserungen, und unterstützt aktuell
+                <acronym>PHP</acronym> 5.2.4 oder höher.
             </para>
 
             <para>
@@ -46,10 +50,11 @@
 
             <para>
                 Anbei finden Sie eine Tabelle die alle Erweiterungen auflistet die typischerweise
-                in PHP gefunden werden können und wie Sie im Zend Framework verwendet werden. Sie
-                sollten prüfen die Erweiterungen die die ZF Komponenten die Sie in Ihrer Anwendung
-                verwenden werden in Ihrer PHP Umgebung vorhanden sind. Viele Anwendungen benötigen
-                nicht jede der Erweiterungen die anbei gelistet sind.
+                in <acronym>PHP</acronym> gefunden werden können und wie Sie im Zend Framework
+                verwendet werden. Sie sollten prüfen die Erweiterungen die die Zend Framework
+                Komponenten die Sie in Ihrer Anwendung verwenden werden in Ihrer
+                <acronym>PHP</acronym> Umgebung vorhanden sind. Viele Anwendungen benötigen nicht
+                jede der Erweiterungen die anbei gelistet sind.
             </para>
 
             <para>
@@ -867,7 +872,7 @@
                                 </emphasis>
                             </entry>
                             <entry>Hard</entry>
-                            <entry>All PDO database adapters</entry>
+                            <entry>All <acronym>PDO</acronym> database adapters</entry>
                         </row>
                         <row>
                             <entry>
@@ -1433,10 +1438,11 @@
             <title>Zend Framework Komponenten</title>
 
             <para>
-                Anbei ist eine Tabelle die alle vorhandenen Zend Framework Komponenten auflistet und
-                welche PHP Erweiterungen diese benötigen. Das kann helfen um herauszufinden welche
-                Erweiterung in der eigenen Anwendung benötigt wird. Nicht alle Erweiterungen welche
-                vom Zend Framework verwendet werden sind für jede Anwendung notwendig.
+                Anbei ist eine Tabelle die alle vorhandenen Zend Framework Komponenten auflistet
+                und welche <acronym>PHP</acronym> Erweiterungen diese benötigen. Das kann helfen
+                um herauszufinden welche Erweiterung in der eigenen Anwendung benötigt wird. Nicht
+                alle Erweiterungen welche vom Zend Framework verwendet werden sind für jede
+                Anwendung notwendig.
             </para>
 
             <para>

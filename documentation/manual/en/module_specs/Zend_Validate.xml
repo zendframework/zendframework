@@ -285,14 +285,14 @@ if (Zend_Validate::is($value, 'OtherValidator', array(1, 12)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        <emphasis><methodname>Zend_Validator::getDefaultNamespaces()</methodname></emphasis>:
+                        <emphasis><methodname>Zend_Validate::getDefaultNamespaces()</methodname></emphasis>:
                         Returns all set default namespaces as array.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <emphasis><methodname>Zend_Validator::setDefaultNamespaces()</methodname></emphasis>:
+                        <emphasis><methodname>Zend_Validate::setDefaultNamespaces()</methodname></emphasis>:
                         Sets new default namespaces and overrides any previous set. It accepts
                         eighter a string for a single namespace of an array for multiple namespaces.
                     </para>
@@ -300,7 +300,7 @@ if (Zend_Validate::is($value, 'OtherValidator', array(1, 12)) {
 
                 <listitem>
                     <para>
-                        <emphasis><methodname>Zend_Validator::addDefaultNamespaces()</methodname></emphasis>:
+                        <emphasis><methodname>Zend_Validate::addDefaultNamespaces()</methodname></emphasis>:
                         Adds additional namespaces to already set ones. It accepts eighter a string
                         for a single namespace of an array for multiple namespaces.
                     </para>
@@ -308,7 +308,7 @@ if (Zend_Validate::is($value, 'OtherValidator', array(1, 12)) {
 
                 <listitem>
                     <para>
-                        <emphasis><methodname>Zend_Validator::hasDefaultNamespaces()</methodname></emphasis>:
+                        <emphasis><methodname>Zend_Validate::hasDefaultNamespaces()</methodname></emphasis>:
                         Returns true when one or more default namespaces are set, and false when no
                         default namespaces are set.
                     </para>

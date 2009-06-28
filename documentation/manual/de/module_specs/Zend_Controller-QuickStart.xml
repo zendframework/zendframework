@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16178 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.quickstart">
     <title>Zend_Controller Schnellstart</title>
@@ -74,8 +74,8 @@ html/
             <title>Rewrite-Regeln erstellen</title>
 
             <para>
-                In die Datei <code>html/.htaccess</code> aus der Struktur von oben gehört der
-                folgende Code:
+                In die Datei <filename>html/.htaccess</filename> aus der Struktur von oben gehört
+                der folgende Code:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -152,8 +152,8 @@ RewriteRule ^.*$ index.php [NC,L]
 
             <para>
                 Die Bootstrap-Datei ist die Datei, durch die alle Anfragen geleitet werden
-                -- <code>html/index.php</code> in unserem Fall. In die Datei
-                <code>html/index.php</code> gehört der folgende Code:
+                -- <filename>html/index.php</filename> in unserem Fall. In die Datei
+                <filename>html/index.php</filename> gehört der folgende Code:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -174,8 +174,8 @@ Zend_Controller_Front::run('/path/to/app/controllers');
                 im Zend Framework behandelt werden. Standardmäßig zeigt das erste Segment eines URL
                 auf einen Controller und das zweite Segment auf eine Aktion, die dieser Controller
                 ausführen soll. Als Beispiel sei der URL
-                <code>http://framework.zend.com/roadmap/components</code> gegeben. Der Pfad ist
-                <code>/roadmap/components</code>, was die Anfrage zum Controller
+                <filename>http://framework.zend.com/roadmap/components</filename> gegeben. Der Pfad
+                ist <filename>/roadmap/components</filename>, was die Anfrage zum Controller
                 <code>roadmap</code> und dort in die Aktion <code>components</code> leitet. Wenn
                 keine Aktion angegeben wird, wird <code>index</code> als Standard-Aktion angenommen,
                 und wenn kein Controller angegeben wird, wird auch <code>index</code> als
@@ -199,14 +199,14 @@ Zend_Controller_Front::run('/path/to/app/controllers');
                 kleingeschrieben und das Wort <code>Action</code> wird angehängt. In unserem
                 Beispiel wird also die Aktion <code>components</code> zu
                 <code>componentsAction</code>, insgesamt wird also die Methode
-                <code>RoadmapController::componentsAction()</code> aufgerufen.
+                <methodname>RoadmapController::componentsAction()</methodname> aufgerufen.
             </para>
 
             <para>
                 Also, weiter gehts. Jetzt wird ein Startseiten-Controller und eine dazugehörige
                 Standard-Aktionsmethode erstellt. Wie vorhin bereits erwähnt, heißen
                 Standard-Controller und -Aktion beide <code>index</code>. Also gehört in die Datei
-                <code>application/controllers/IndexController.php</code> folgendes:
+                <filename>application/controllers/IndexController.php</filename> folgendes:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -225,17 +225,17 @@ class IndexController extends Zend_Controller_Action
                 eingeschaltet. Das bedeutet, dass sofort, wenn eine leere Aktionsmethode und ein
                 passendes View-Script existieren, Inhalte gerendert werden. Standardmäßig wird die
                 Klasse <classname>Zend_View</classname> als View-Schicht im Zend-Framework MVC
-                verwendet. Der <code>ViewRenderer</code> zaubert ein wenig, und benutzt Controller-
-                (hier: <code>index</code>) und Aktionsname (hier: <code>index</code>), um
-                herauszufinden, welches Template er rendern soll. Ohne dass man dies ändert, haben
-                Templates die Dateiendung <code>.phtml</code>, das heißt also für unser Beispiel,
-                dass das Template <code>index/index.phtml</code> gerendert wird. Zusätzlich nimmt
-                der <code>ViewRenderer</code> automatisch an, dass das Verzeichnis
-                <code>views</code> auf der selben Ebene wie das Controller Verzeichnis das
-                View-Basisverzeichnis ist, und dass die eigentlichen View-Scripts in dessen
-                Unterverzeichnis <code>views/scripts/</code> liegen. Insgesamt hat also das
-                Template, das gerendert wird, den Pfad
-                <code>application/views/scripts/index/index.phtml</code>.
+                verwendet. Der <emphasis>ViewRenderer</emphasis> zaubert ein wenig, und benutzt
+                Controller- (hier: <code>index</code>) und Aktionsname (hier: <code>index</code>),
+                um herauszufinden, welches Template er rendern soll. Ohne dass man dies ändert,
+                haben Templates die Dateiendung <filename>.phtml</filename>, das heißt also für
+                unser Beispiel, dass das Template <filename>index/index.phtml</filename> gerendert
+                wird. Zusätzlich nimmt der <emphasis>ViewRenderer</emphasis> automatisch an, dass
+                das Verzeichnis <code>views</code> auf der selben Ebene wie das Controller
+                Verzeichnis das View-Basisverzeichnis ist, und dass die eigentlichen View-Scripts
+                in dessen Unterverzeichnis <filename>views/scripts/</filename> liegen. Insgesamt
+                hat also das Template, das gerendert wird, den Pfad
+                <filename>application/views/scripts/index/index.phtml</filename>.
             </para>
         </sect3>
 
@@ -245,10 +245,10 @@ class IndexController extends Zend_Controller_Action
             <para>
                 Wie <link linkend="zend.controller.quickstart.go.controller">oben
                     beschrieben</link>, werden View-Scripts im Verzeichnis
-                <code>application/views/scripts/</code> abgelegt; das View-Script für den
+                <filename>application/views/scripts/</filename> abgelegt; das View-Script für den
                 Starseiten-Controller und dessen Standard-Aktion hat den Pfad
-                <code>application/views/scripts/index/index.phtml</code>. Da hinein kommt das
-                folgende HTML:
+                <filename>application/views/scripts/index/index.phtml</filename>. Da hinein kommt
+                das folgende HTML:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -275,8 +275,8 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
                     linkend="zend.controller.plugins.standard.errorhandler">das
                 Error-Handler-Plugin</link> registriert. Dieses Plugin erwartet, dass ein Controller
                 existiert, der Fehler behandelt. Ohne weitere Einstellungen erwartet es einen
-                <code>ErrorController</code> im Default-Modul mit einer Methode namens
-                <code>errorAction</code>:
+                <emphasis>ErrorController</emphasis> im Default-Modul mit einer Methode namens
+                <methodname>errorAction()</methodname>:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -291,8 +291,9 @@ class ErrorController extends Zend_Controller_Action
 
             <para>
                 In der bereits angesprochenen Ordnerstruktur gehört dieser Code in die Datei
-                <code>application/controllers/ErrorController.php</code>. Außerdem muss auch ein
-                View-Script <code>application/views/scripts/error/error.phtml</code> erstellt
+                <filename>application/controllers/ErrorController.php</filename>. Außerdem muss
+                auch ein View-Script
+                <filename>application/views/scripts/error/error.phtml</filename> erstellt
                 werden; Beispielhaft könnte sein Inhalt so aussehen:
             </para>
 
@@ -319,15 +320,21 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 
             <para>
                 Jetzt, wo der erste Controller und das erste View-Script geschrieben sind, kann der
-                Browser aufgerufen und die Seite angesehen werden. Wäre <code>example.com</code> die
-                Domain der Zend Framework-Installation, dann würde jeder der folgenden URLs auf die
-                Seite zeigen, die wir gerade erstellt haben:
+                Browser aufgerufen und die Seite angesehen werden. Wäre
+                <filename>example.com</filename> die Domain der Zend Framework-Installation, dann
+                würde jeder der folgenden URLs auf die Seite zeigen, die wir gerade erstellt haben:
             </para>
 
             <itemizedlist>
-                <listitem><para><code>http://example.com/</code></para></listitem>
-                <listitem><para><code>http://example.com/index</code></para></listitem>
-                <listitem><para><code>http://example.com/index/index</code></para></listitem>
+                <listitem>
+                    <para><filename>http://example.com/</filename></para>
+                </listitem>
+                <listitem>
+                    <para><filename>http://example.com/index</filename></para>
+                </listitem>
+                <listitem>
+                    <para><filename>http://example.com/index/index</filename></para>
+                </listitem>
             </itemizedlist>
 
             <para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15719 -->
+<!-- EN-Revision: 16178 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.request">
     <title>Das Request Objekt</title>
@@ -15,23 +15,24 @@
 
         <itemizedlist>
             <listitem><para>
-                Auf den Modul Namen kann über <code>getModuleName()</code> und
-                <code>setModuleName()</code> zugegriffen werden.
+                Auf den Modul Namen kann über <methodname>getModuleName()</methodname> und
+                <methodname>setModuleName()</methodname> zugegriffen werden.
             </para></listitem>
             <listitem><para>
-                Auf den Controller Namen kann über <code>getControllerName()</code> und
-                <code>setControllerName()</code> zugegriffen werden.
+                Auf den Controller Namen kann über <methodname>getControllerName()</methodname> und
+                <methodname>setControllerName()</methodname> zugegriffen werden.
             </para></listitem>
             <listitem><para>
                 Auf den Namen der Aktion, die in diesem Controller aufgerufen wird, kann über
-                accessed by <code>getActionName()</code> und <code>setActionName()</code>
-                zugegriffen werden.
+                accessed by <methodname>getActionName()</methodname> und
+                <methodname>setActionName()</methodname> zugegriffen werden.
             </para></listitem>
             <listitem><para>
                 Parameter, die von der Aktion ansprechbar sind, bestehen aus einem assoziativen
-                Array mit Schlüssel/Wert Paaren, auf die komplett per <code>getParams()</code> und
-                <code>setParams()</code> oder einzeln per <code>getParam()</code> und
-                <code>setParam()</code> zugegriffen werden kann.
+                Array mit Schlüssel/Wert Paaren, auf die komplett per
+                <methodname>getParams()</methodname> und <methodname>setParams()</methodname> oder
+                einzeln per <methodname>getParam()</methodname> und
+                <methodname>setParam()</methodname> zugegriffen werden kann.
             </para></listitem>
         </itemizedlist>
 
@@ -88,10 +89,11 @@
             <para>
                 Auf spezifische superglobale Werte kann alternativ über eine öffentliche Methode
                 zugegriffen werden. Zum Beispiel kann auf den unverarbeitete Wert von
-                <varname>$_POST['user']</varname> durch Aufruf der <code>getPost('user')</code>
-                Methode des Request Objekts zugegriffen werden. Diese beinhalten
-                <code>getQuery()</code>, um <varname>$_GET</varname> Elemente zu erhalten und
-                <code>getHeader()</code>, um Request Header zu erhalten.
+                <varname>$_POST['user']</varname> durch Aufruf der
+                <methodname>getPost('user')</methodname> Methode des Request Objekts zugegriffen
+                werden. Diese beinhalten <methodname>getQuery()</methodname>, um
+                <varname>$_GET</varname> Elemente zu erhalten und
+                <methodname>getHeader()</methodname>, um Request Header zu erhalten.
             </para>
 
             <note>
@@ -108,9 +110,10 @@
                 <title>Empfangen der rohen POST Daten!</title>
 
                 <para>
-                    Mit 1.5.0 können auch die rohen Post Daten über die <code>getRawBody()</code>
-                    Methode empfangen werden. Diese Methode gibt false zurück wenn keine Daten auf
-                    diesem Weg übermittelt wurden, andernfalls den kompletten Inhalt von Post.
+                    Mit 1.5.0 können auch die rohen Post Daten über die
+                    <methodname>getRawBody()</methodname> Methode empfangen werden. Diese Methode
+                    gibt false zurück wenn keine Daten auf diesem Weg übermittelt wurden,
+                    andernfalls den kompletten Inhalt von Post.
                 </para>
 
                 <para>
@@ -121,34 +124,36 @@
 
             <para>
                 Es können auch Benutzerparameter im Anfrage Objekt gesetzt werden durch Verwendung
-                von <code>setParam()</code> und empfangen derselben später durch verwenden von
-                <code>getParam()</code>. Der Router verwendet diese Funktionalität um passende
-                Parameter in der Anfrage URI im Anfrage Objekt zu setzen.
+                von <methodname>setParam()</methodname> und empfangen derselben später durch
+                verwenden von <methodname>getParam()</methodname>. Der Router verwendet diese
+                Funktionalität um passende Parameter in der Anfrage URI im Anfrage Objekt zu
+                setzen.
             </para>
 
             <note>
                 <title>getParam() empfängt mehr als Benutzer Parameter</title>
 
                 <para>
-                    Um einiges Ihrer Arbeit zu tun, empfängt <code>getParam()</code> von
-                    verschiedenen Quellen. Je nach Priorität enthalten diese: Benutzer Parameter
-                    die über <code>setParam()</code> gesetzt wurden, <code>GET</code> Parameter,
-                    und letztendlich <code>POST</code> Parameter. Aufpassen vor dem Durchlaufen von
-                    Daten mit dieser Methode.
+                    Um einiges Ihrer Arbeit zu tun, empfängt <methodname>getParam()</methodname>
+                    von verschiedenen Quellen. Je nach Priorität enthalten diese: Benutzer
+                    Parameter die über <methodname>setParam()</methodname> gesetzt wurden,
+                    <code>GET</code> Parameter, und letztendlich <code>POST</code> Parameter.
+                    Aufpassen vor dem Durchlaufen von Daten mit dieser Methode.
                 </para>
 
                 <para>
-                    Wenn man nur Parameter erhalten will die vorher mit <code>setParam()</code>
-                    gesetzt wurden, muß <code>getUserParam()</code> verwendet werden.
+                    Wenn man nur Parameter erhalten will die vorher mit
+                    <methodname>setParam()</methodname> gesetzt wurden, muß
+                    <methodname>getUserParam()</methodname> verwendet werden.
                 </para>
 
                 <para>
                     Zusätzlich, sein 1.5.0, kann gesperrt werden welche Quellparameter gesucht
-                    werden. <code>setParamSources()</code> erlaubt es ein leeres Array zu
-                    spezifizieren oder ein Array mit einem oder mehreren Werten von '_GET' oder
+                    werden. <methodname>setParamSources()</methodname> erlaubt es ein leeres Array
+                    zu spezifizieren oder ein Array mit einem oder mehreren Werten von '_GET' oder
                     '_POST' um zu zeigen welche Quellparameter erlaubt sind (standardmäßig sind
                     beide erlaubt); Wenn der Zugriff nur auf '_GET' beschränkt werden soll muß
-                    <code>setParamSources(array('_GET'))</code> spezifiziert werden.
+                    <methodname>setParamSources(array('_GET'))</methodname> spezifiziert werden.
                 </para>
             </note>
 
@@ -188,14 +193,15 @@ $front->setRequest($request);
             </para>
 
             <para>
-                Wenn man zum Beispiel seine <code>index.php</code> in einem
-                Webserverunterverzeichnis mit Namen <code>/projects/myapp/index.php</code>
-                verwendet, sollte die Basis URL (die Rewrite Basis) auf <code>/projects/myapp</code>
-                gesetzt werden. Dieser String wird dann vom Anfang des Pfades entfernt, bevor irgend
-                welche Routingtreffer ermittelt werden. Dies befreit einem davon, es an den Anfang
-                jeder Route setzen zu müssen. Eine Route <code>'user/:username'</code> passt auf
-                URIs wie <code>http://localhost/projects/myapp/user/martel</code> und
-                <code>http://example.com/user/martel</code>.
+                Wenn man zum Beispiel seine <filename>index.php</filename> in einem
+                Webserverunterverzeichnis mit Namen <filename>/projects/myapp/index.php</filename>
+                verwendet, sollte die Basis URL (die Rewrite Basis) auf
+                <filename>/projects/myapp</filename> gesetzt werden. Dieser String wird dann vom
+                Anfang des Pfades entfernt, bevor irgend welche Routingtreffer ermittelt werden.
+                Dies befreit einem davon, es an den Anfang jeder Route setzen zu müssen. Eine Route
+                <filename>'user/:username'</filename> passt auf URIs wie
+                <filename>http://localhost/projects/myapp/user/martel</filename> und
+                <filename>http://example.com/user/martel</filename>.
             </para>
 
             <note>
@@ -210,7 +216,7 @@ $front->setRequest($request);
 
             <para>
                 Sollte die Basis URL falsch erkannt werden, kann man diese auch mit einem eigenen
-                Pfad mit Hilfe der <code>setBaseUrl()</code> Methode der
+                Pfad mit Hilfe der <methodname>setBaseUrl()</methodname> Methode der
                 <classname>Zend_Controller_Request_Http</classname> Klasse oder der
                 <classname>Zend_Controller_Front</classname> Klasse überschreiben. Die einfachste
                 Methode ist die von <classname>Zend_Controller_Front</classname>, welche es an das
@@ -235,19 +241,19 @@ $response   = $controller->dispatch();
             <title>Erkennen der Anfrage Methode</title>
 
             <para>
-                <code>getMethod()</code> erlaubt es die HTTP Anfrage Methode zu erkennen die
-                verwendet wurde um die aktuelle Ressource anzufragen. Zusätzlich existiert eine
-                Vielzahl von Methoden die es erlauben boolsche Antworten zu erhalten wenn gefragt
-                wird ob ein spezieller Typ von Anfrage durchgeführt wurde:
+                <methodname>getMethod()</methodname> erlaubt es die HTTP Anfrage Methode zu
+                erkennen die verwendet wurde um die aktuelle Ressource anzufragen. Zusätzlich
+                existiert eine Vielzahl von Methoden die es erlauben boolsche Antworten zu erhalten
+                wenn gefragt wird ob ein spezieller Typ von Anfrage durchgeführt wurde:
             </para>
 
             <itemizedlist>
-                <listitem><para><code>isGet()</code></para></listitem>
-                <listitem><para><code>isPost()</code></para></listitem>
-                <listitem><para><code>isPut()</code></para></listitem>
-                <listitem><para><code>isDelete()</code></para></listitem>
-                <listitem><para><code>isHead()</code></para></listitem>
-                <listitem><para><code>isOptions()</code></para></listitem>
+                <listitem><para><methodname>isGet()</methodname></para></listitem>
+                <listitem><para><methodname>isPost()</methodname></para></listitem>
+                <listitem><para><methodname>isPut()</methodname></para></listitem>
+                <listitem><para><methodname>isDelete()</methodname></para></listitem>
+                <listitem><para><methodname>isHead()</methodname></para></listitem>
+                <listitem><para><methodname>isOptions()</methodname></para></listitem>
             </itemizedlist>
 
             <para>
@@ -261,9 +267,9 @@ $response   = $controller->dispatch();
 
             <para>
                 <classname>Zend_Controller_Request_Http</classname> hat eine rudimentäre Methode für
-                die Erkennung von AJAX Anfragen: <code>isXmlHttpRequest()</code>. Diese Methode
-                sucht nach einem HTTP Anfrageheader <code>X-Requested-With</code> mit dem Wert
-                'XMLHttpRequest'; wenn er gefunden wird, gibt er true zurück.
+                die Erkennung von AJAX Anfragen: <methodname>isXmlHttpRequest()</methodname>. Diese
+                Methode sucht nach einem HTTP Anfrageheader <code>X-Requested-With</code> mit dem
+                Wert 'XMLHttpRequest'; wenn er gefunden wird, gibt er true zurück.
             </para>
 
             <para>
@@ -286,7 +292,7 @@ $response   = $controller->dispatch();
                 Die meisten AJAX Bibliotheken erlauben das Senden von eigenen HTTP Anfrageheadern;
                 wenn die eigene Bibliothek diesen Header nicht sendet, muß dieser einfach beim
                 Anfrageheader hinzugefügt werden um sicherzustellen das die
-                <code>isXmlHttpRequest()</code> Methode funktioniert.
+                <methodname>isXmlHttpRequest()</methodname> Methode funktioniert.
             </para>
         </sect3>
     </sect2>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15741 -->
+<!-- EN-Revision: 16180 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.response">
     <title>Das Response Objekt</title>
@@ -24,7 +24,7 @@ $front->throwExceptions(true);
 
         <para>
             Um die Ausgabe der Response, inklusiver der gesetzten Header, zu senden, verwendet man
-            <code>sendResponse()</code>:
+            <methodname>sendResponse()</methodname>:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -33,12 +33,12 @@ $response->sendResponse();
 
         <note>
             <para>
-                Standardmäßig ruft der Front Controller <code>sendResponse()</code> auf wenn er die
-                Anfrage fertig bearbeitet hat; typischerweise wird es nie notwendig sein Ihn
-                aufzurufen. Wenn man trotzdem die Antwort manipulieren will oder Sie beim Testen
-                verwenden will, kann dieses Verhalten durch das Setzen des
+                Standardmäßig ruft der Front Controller <methodname>sendResponse()</methodname> auf
+                wenn er die Anfrage fertig bearbeitet hat; typischerweise wird es nie notwendig
+                sein Ihn aufzurufen. Wenn man trotzdem die Antwort manipulieren will oder Sie beim
+                Testen verwenden will, kann dieses Verhalten durch das Setzen des
                 <code>returnResponse</code> Flags mit
-                <classname>Zend_Controller_Front::returnResponse(true)</classname> geändert werden:
+                <methodname>Zend_Controller_Front::returnResponse(true)</methodname> geändert werden:
             </para>
 
             <programlisting language="php"><![CDATA[$front->returnResponse(true);
@@ -79,10 +79,11 @@ $this->getResponse()
 
         <para>
             Sollte in der Anwendung eine Ausnahme auftreten, überprüft man den
-            <code>isException()</code> Schalter des Response Objektes und erhält die Ausnahme durch
-            Verwendung von <code>getException()</code>. Zusätzlich kann man ein eigenes Response
-            Objekt erstellen, dass zu einer Fehlerseite umleitet, die Nachricht der Ausnahme loggt,
-            die Nachricht der Ausnahme schön formatiert ausgibt (für Entwicklungsumgebungen), usw.
+            <methodname>isException()</methodname> Schalter des Response Objektes und erhält die
+            Ausnahme durch Verwendung von <methodname>getException()</methodname>. Zusätzlich kann
+            man ein eigenes Response Objekt erstellen, dass zu einer Fehlerseite umleitet, die
+            Nachricht der Ausnahme loggt, die Nachricht der Ausnahme schön formatiert ausgibt (für
+            Entwicklungsumgebungen), usw.
         </para>
 
         <para>
@@ -111,9 +112,9 @@ $response->sendResponse();
 
         <para>
             Standardmäßig werden Ausnahmennachrichten nicht ausgegeben. Dieses Verhalten kann durch
-            den Aufruf von <code>renderException()</code> überschrieben werden oder indem der
-            Front Controller aufgefordert wird, die Exceptions durch throwExceptions() auszuwerfen,
-            wie oben gezeigt:
+            den Aufruf von <methodname>renderException()</methodname> überschrieben werden oder
+            indem der Front Controller aufgefordert wird, die Exceptions durch
+            <methodname>throwExceptions()</methodname> auszuwerfen, wie oben gezeigt:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -143,86 +144,91 @@ $front->dispatch();
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>canSendHeaders()</code> wird verwendet um zu ermitteln ob bereits Header
-                    gesendet wurden. Sie nimmt ein zusätzliches Flag das zeigt ob eine Ausnahme
-                    geworfen werden soll oder nicht, wenn bereits Header gesendet wurden. Das kann
-                    durch das Setzen der Eigenschaft <code>headersSentThrowsException</code> zu
-                    <constant>FALSE</constant> überschrieben werden.
+                    <methodname>canSendHeaders()</methodname> wird verwendet um zu ermitteln ob
+                    bereits Header gesendet wurden. Sie nimmt ein zusätzliches Flag das zeigt ob
+                    eine Ausnahme geworfen werden soll oder nicht, wenn bereits Header gesendet
+                    wurden. Das kann durch das Setzen der Eigenschaft
+                    <code>headersSentThrowsException</code> zu <constant>FALSE</constant>
+                    überschrieben werden.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setHeader($name, $value, $replace = false)</code> wird verwendet um einen
-                    individuellen Header zu setzen. Standardmäßig, ersetzt das keinen bereits
-                    existierenden gleichnamigen Header im Objekt; Trotzdem wird das Setzen von
-                    <varname>$replace</varname> zu true es forcieren das zu tun.
+                    <methodname>setHeader($name, $value, $replace = false)</methodname> wird
+                    verwendet um einen individuellen Header zu setzen. Standardmäßig, ersetzt das
+                    keinen bereits existierenden gleichnamigen Header im Objekt; Trotzdem wird das
+                    Setzen von <varname>$replace</varname> zu true es forcieren das zu tun.
                 </para>
 
                 <para>
-                    Bevor der Header setzt wird, prüft er mit <code>canSendHeaders()</code> um zu
-                    sehen ob diese Operation zu diesem Zeitpunkt erlaubt ist, und erzwingt das eine
-                    Ausnahme geworfen wird.
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    <code>setRedirect($url, $code = 302)</code> setzt einen HTTP Location Header für
-                    eine Umleitung. Wenn ein HTTP Status Code angegeben wurde, wird dieser Status
-                    Code verwendet.
-                </para>
-
-                <para>
-                    Intern wird <code>setHeader()</code> mit dem <varname>$replace</varname> Flag
-                    aufgerufen um sicherzustellen das nur ein solcher Header jemals gesendet wird.
+                    Bevor der Header setzt wird, prüft er mit
+                    <methodname>canSendHeaders()</methodname> um zu sehen ob diese Operation zu
+                    diesem Zeitpunkt erlaubt ist, und erzwingt das eine Ausnahme geworfen wird.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getHeaders()</code> gibt ein Array aller Header zurück. Jedes Array
-                    Element ist ein Array mit den Schlüsseln 'name' und 'value'.
+                    <methodname>setRedirect($url, $code = 302)</methodname> setzt einen HTTP
+                    Location Header für eine Umleitung. Wenn ein HTTP Status Code angegeben wurde,
+                    wird dieser Status Code verwendet.
+                </para>
+
+                <para>
+                    Intern wird <methodname>setHeader()</methodname> mit dem
+                    <varname>$replace</varname> Flag aufgerufen um sicherzustellen das nur ein
+                    solcher Header jemals gesendet wird.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>clearHeaders()</code> löscht alle registrierten Headern.
+                    <methodname>getHeaders()</methodname> gibt ein Array aller Header zurück. Jedes
+                    Array Element ist ein Array mit den Schlüsseln 'name' und 'value'.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setRawHeader()</code> kann verwendet werden um Header zu setzen die keine
-                    Schlüssel/Werte Paare sind, wie einen HTTP Status Header.
+                    <methodname>clearHeaders()</methodname> löscht alle registrierten Headern.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getRawHeaders()</code> gibt jeden registrierten rohen Header zurück.
+                    <methodname>setRawHeader()</methodname> kann verwendet werden um Header zu
+                    setzen die keine Schlüssel/Werte Paare sind, wie einen HTTP Status Header.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>clearRawHeaders()</code> löscht jeden registrierten rohen Header.
+                    <methodname>getRawHeaders()</methodname> gibt jeden registrierten rohen Header
+                    zurück.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>clearAllHeaders()</code> löscht beide, reguläre Schlüssel/Werte Header
-                    genauso wie rohe Header.
+                    <methodname>clearRawHeaders()</methodname> löscht jeden registrierten rohen
+                    Header.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>clearAllHeaders()</methodname> löscht beide, reguläre
+                    Schlüssel/Werte Header genauso wie rohe Header.
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
             Zusätzlich zu den obigen Methoden, gint es Accessors für das Setzen und Empfangen der
-            HTTP Antwort Codes für die aktuellen Anfrage, <code>setHttpResponseCode()</code> und
-            <code>getHttpResponseCode()</code>.
+            HTTP Antwort Codes für die aktuellen Anfrage,
+            <methodname>setHttpResponseCode()</methodname> und
+            <methodname>getHttpResponseCode()</methodname>.
         </para>
     </sect2>
 
@@ -238,10 +244,10 @@ $front->dispatch();
         </para>
 
         <para>
-            Als Beispiel könnte ein <code>preDispatch()</code> Hook verwendet werden um dem Antwort
-            Objekt einen Header hinzuzufügen, dann den Aktion Controller einen Inhalt des Bodys
-            hinzufügen zu lassen und einen <code>postDispatch()</code> Hook einen Footer hinzufügen
-            zu lassen:
+            Als Beispiel könnte ein <methodname>preDispatch()</methodname> Hook verwendet werden um
+            dem Antwort Objekt einen Header hinzuzufügen, dann den Aktion Controller einen Inhalt
+            des Bodys hinzufügen zu lassen und einen <methodname>postDispatch()</methodname> Hook
+            einen Footer hinzufügen zu lassen:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -278,8 +284,8 @@ class MyController extends Zend_Controller_Action
 ]]></programlisting>
 
         <para>
-            Im obigen Beispiel wird ein Aufruf zu <code>/my/foo</code> den endgültigen Inhalt des
-            Bodys des Antwort Objekts mit der folgenden Struktur verursachen:
+            Im obigen Beispiel wird ein Aufruf zu <filename>/my/foo</filename> den endgültigen
+            Inhalt des Bodys des Antwort Objekts mit der folgenden Struktur verursachen:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -303,30 +309,43 @@ array(
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>setBody()</code> und <code>appendBody()</code> erlauben das ein zweiter
-                    Wert, <varname>$name</varname>, übergeben wird der ein benanntes Segment
-                    indiziert. In jedem Fall wird, wenn das übergeben wird, das spezifizierte
-                    benannte Segment überschrieben oder es wird erstellt wenn es nicht existiert
-                    (standardmäßig dem Array hinzugefügt). Wenn kein benanntes Segment an
-                    <code>setBody()</code> übergeben wird, resetiert es den kompletten Inhalt des
-                    Body Arrays. Wenn kein benanntes Segment an appendBody() übergeben wird, wird
-                    der Inhalt dem Wert im 'default' benannten Segment hinzugefügt.
+                    <methodname>setBody()</methodname> und <methodname>appendBody()</methodname>
+                    erlauben das ein zweiter Wert, <varname>$name</varname>, übergeben wird der ein
+                    benanntes Segment indiziert. In jedem Fall wird, wenn das übergeben wird, das
+                    spezifizierte benannte Segment überschrieben oder es wird erstellt wenn es
+                    nicht existiert (standardmäßig dem Array hinzugefügt). Wenn kein benanntes
+                    Segment an <methodname>setBody()</methodname> übergeben wird, resetiert es den
+                    kompletten Inhalt des Body Arrays. Wenn kein benanntes Segment an appendBody()
+                    übergeben wird, wird der Inhalt dem Wert im 'default' benannten Segment
+                    hinzugefügt.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>prepend($name, $content)</code> erstellt ein <varname>$name</varname>
-                    benanntes Segment und plaziert dieses ab Beginn des Arrays. Wenn das Segment
-                    bereits existiert, wird es vor der Operation entfernt (bzw, überschrieben und
-                    getauscht).
+                    <methodname>prepend($name, $content)</methodname> erstellt ein
+                    <varname>$name</varname> benanntes Segment und plaziert dieses ab Beginn des
+                    Arrays. Wenn das Segment bereits existiert, wird es vor der Operation entfernt
+                    (bzw, überschrieben und getauscht).
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>append($name, $content)</code> erstellt ein <varname>$name</varname>
-                    benanntes Segment und plaziert es am Ende des Arrays. Wenn das Segment bereits
+                    <methodname>append($name, $content)</methodname> erstellt ein
+                    <varname>$name</varname> benanntes Segment und plaziert es am Ende des Arrays.
+                    Wenn das Segment bereits existiert, wird es vor der Operation entfernt (bzw,
+                    überschrieben und getauscht).
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>insert($name, $content, $parent = null, $before =
+                        false)</methodname> erstellt ein <varname>$name</varname> benanntes
+                    Segment. Wenn ein <varname>$parent</varname> Segment angegeben wurde, wird das
+                    neue Segment entweder vor oder nach diesem Segment im Array plaziert (basierend
+                    auf dem Wert von <varname>$before</varname>). Wenn das Segment bereits
                     existiert, wird es vor der Operation entfernt (bzw, überschrieben und
                     getauscht).
                 </para>
@@ -334,27 +353,16 @@ array(
 
             <listitem>
                 <para>
-                    <code>insert($name, $content, $parent = null, $before = false)</code> erstellt
-                    ein <varname>$name</varname> benanntes Segment. Wenn ein
-                    <varname>$parent</varname> Segment angegeben wurde, wird das neue Segment
-                    entweder vor oder nach diesem Segment im Array plaziert (basierend auf dem Wert
-                    von <varname>$before</varname>). Wenn das Segment bereits existiert, wird es
-                    vor der Operation entfernt (bzw, überschrieben und getauscht).
+                    <methodname>clearBody($name = null)</methodname> entfernt ein einzelnes
+                    benanntes Segment wenn ein <varname>$name</varname> angegeben wurde
+                    (andernfalls das komplette Array).
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>clearBody($name = null)</code> entfernt ein einzelnes benanntes Segment
-                    wenn ein <varname>$name</varname> angegeben wurde (andernfalls das komplette
-                    Array).
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    <code>getBody($spec = false)</code> kann verwendet werden um ein einzelnes
-                    Array Segment zu erhalten wenn <varname>$spec</varname> der Name des
+                    <methodname>getBody($spec = false)</methodname> kann verwendet werden um ein
+                    einzelnes Array Segment zu erhalten wenn <varname>$spec</varname> der Name des
                     benannten Segments ist. Wenn <varname>$spec</varname> false ist, gibt es einen
                     String zurück der erstellt wird durch zusammenfügen aller benannten Segmente in
                     Ihrer Reihenfolge. Wenn <varname>$spec</varname> true ist, gibt er das Array
@@ -378,73 +386,77 @@ array(
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>setException(Exception $e)</code> erlaubt es eine Ausnahme zu
+                    <methodname>setException(Exception $e)</methodname> erlaubt es eine Ausnahme zu
                     registrieren.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>isException()</code> sagt ob eine Ausnahme bereits registriert wurde.
+                    <methodname>isException()</methodname> sagt ob eine Ausnahme bereits
+                    registriert wurde.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getException()</code> gibt den kompletten Ausnahme Stack zurück.
+                    <methodname>getException()</methodname> gibt den kompletten Ausnahme Stack
+                    zurück.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>hasExceptionOfType($type)</code> erlaub es festzustellen ob eine Ausnahme
-                    einer speziellen Klasse im Stack vorhanden ist.
+                    <methodname>hasExceptionOfType($type)</methodname> erlaub es festzustellen ob
+                    eine Ausnahme einer speziellen Klasse im Stack vorhanden ist.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>hasExceptionOfMessage($message)</code> erlaubt es festzustellen ob eine
-                    Ausnahme mit einer speziellen Nachricht im Stack vorhanden ist.
+                    <methodname>hasExceptionOfMessage($message)</methodname> erlaubt es
+                    festzustellen ob eine Ausnahme mit einer speziellen Nachricht im Stack
+                    vorhanden ist.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>hasExceptionOfCode($code)</code> erlaubt es festzustellen ob eine Ausnahme
-                    mit einem bestimmten Code im Stack vorhanden ist.
+                    <methodname>hasExceptionOfCode($code)</methodname> erlaubt es festzustellen ob
+                    eine Ausnahme mit einem bestimmten Code im Stack vorhanden ist.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getExceptionByType($type)</code> erlaubt es alle Ausnahmen einer
-                    speziellen Klasse vom Stack zu erhalten. False wird zurückgegeben wenn keine
-                    gefunden wurden, und andernfalls ein Array mit Ausnahmen.
+                    <methodname>getExceptionByType($type)</methodname> erlaubt es alle Ausnahmen
+                    einer speziellen Klasse vom Stack zu erhalten. False wird zurückgegeben wenn
+                    keine gefunden wurden, und andernfalls ein Array mit Ausnahmen.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getExceptionByMessage($message)</code> erlaubt es alle Ausnahmen mit einer
-                    speziellen Nachricht vom Stack zu erhalten. False wird zurückgegeben wenn keine
-                    gefunden wurden, und andernfalls ein Array mit Ausnahmen.
+                    <methodname>getExceptionByMessage($message)</methodname> erlaubt es alle
+                    Ausnahmen mit einer speziellen Nachricht vom Stack zu erhalten. False wird
+                    zurückgegeben wenn keine gefunden wurden, und andernfalls ein Array mit
+                    Ausnahmen.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getExceptionByCode($code)</code> erlaubt es alle Ausnahmen mit einem
-                    speziellen Code vom Stack zu erhalten. False wird zurückgegeben wenn keine
-                    gefunden wurden, und andernfalls ein Array mit Ausnahmen.
+                    <methodname>getExceptionByCode($code)</methodname> erlaubt es alle Ausnahmen
+                    mit einem speziellen Code vom Stack zu erhalten. False wird zurückgegeben wenn
+                    keine gefunden wurden, und andernfalls ein Array mit Ausnahmen.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>renderExceptions($flag)</code> erlaubt es ein Flag zu setzen das anzeigt
-                    ob die Ausnahmen ausgegeben werden sollen wenn die Antwort gesendet wurde, oder
-                    nicht.
+                    <methodname>renderExceptions($flag)</methodname> erlaubt es ein Flag zu setzen
+                    das anzeigt ob die Ausnahmen ausgegeben werden sollen wenn die Antwort gesendet
+                    wurde, oder nicht.
                 </para>
             </listitem>
         </itemizedlist>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15850 -->
+<!-- EN-Revision: 16181 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.currency.usage">
 
@@ -74,8 +74,8 @@ $currency = new Zend_Currency();
                 soll indem der Kurzname oder der komplette Name dieser Währung angegeben wird. Wenn
                 die angegebene Währung in keinem Gebietsschema erkannt wird, wird eine Ausnahme
                 geworfen. Kurznamen von Währungen bestehen immer aus 3 Buchstaben und sind groß
-                geschrieben. Bekannte Kurznamen von Währungen sind zum Beispiel <code>USD</code>
-                oder <code>EUR</code>.
+                geschrieben. Bekannte Kurznamen von Währungen sind zum Beispiel
+                <acronym>USD</acronym> oder <acronym>EUR</acronym>.
             </para>
         </listitem>
         <listitem>
@@ -157,13 +157,14 @@ $currency = new Zend_Currency('en_US', 'EUR');
             Wenn man nur eine lokalisierte Zahl hat, muß diese zuerst mit
             <link linkend="zend.locale.number.normalize">Zend_Locale_Format::getNumber()</link>
             in einen normalisierte Zahl konvertiert werden. Dann kann Sie mit
-            <code>toCurrency()</code> verwendet werden um eine Ausgabe einer Währung zu erstellen.
+            <methodname>toCurrency()</methodname> verwendet werden um eine Ausgabe einer Währung zu
+            erstellen.
         </para>
 
         <para>
-            <code>toCurrency(array $options)</code> akzeptiert ein Array mit Optionen welche gesetzt
-            werden können um temporär ein Format oder eine Darstellung einer Währung zu setzen. Für
-            Details darüber, welche Optionen gesetzt werden können, siehe
+            <methodname>toCurrency(array $options)</methodname> akzeptiert ein Array mit Optionen
+            welche gesetzt werden können um temporär ein Format oder eine Darstellung einer Währung
+            zu setzen. Für Details darüber, welche Optionen gesetzt werden können, siehe
             <link linkend="zend.currency.usage.setformat">Ändern des Formats einer Währung</link>.
         </para>
 
@@ -248,9 +249,9 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
         </itemizedlist>
 
         <para>
-            Wenn man also das Format ändern muß, kann die <emphasis>setFormat()</emphasis>
+            Wenn man also das Format ändern muß, kann die <methodname>setFormat()</methodname>
             Methode verwendet werden. Diese akzeptiert ein Array welches alle Optionen enthält die
-            geändert werden sollen. Das <code>options</code> Array unterstützt folgenden
+            geändert werden sollen. Das <varname>$options</varname> Array unterstützt folgenden
             Einstellungen:
         </para>
 
@@ -481,13 +482,14 @@ echo $currency->toCurrency(1000);
         </itemizedlist>
 
         <para>
-            Die Funktion <code>getSymbol()</code>, <code>getShortName()</code> und
-            <code>getName()</code> akzeptieren zwei optionale Parameter. Wenn kein Parameter
-            angegeben wird, werden die Daten von der aktuell gesetzten Währung zurückgegeben. Der
-            erste Parameter akzeptiert den Kurznamen der Währung. Kurznamen bestehen immer aus drei
-            Buchstaben, zum Beispiel EUR für Euro oder USD für US Dollar. Der zweite Parameter
-            definiert von welchem Gebietsschema die Daten gelesen werden sollen. Wenn kein
-            Gebietsschema angegeben wird, wird das aktuelle Gebietsschema verwendet.
+            Die Funktion <methodname>getSymbol()</methodname>,
+            <methodname>getShortName()</methodname> und <methodname>getName()</methodname>
+            akzeptieren zwei optionale Parameter. Wenn kein Parameter angegeben wird, werden die
+            Daten von der aktuell gesetzten Währung zurückgegeben. Der erste Parameter akzeptiert
+            den Kurznamen der Währung. Kurznamen bestehen immer aus drei Buchstaben, zum Beispiel
+            EUR für Euro oder USD für US Dollar. Der zweite Parameter definiert von welchem
+            Gebietsschema die Daten gelesen werden sollen. Wenn kein Gebietsschema angegeben wird,
+            wird das aktuelle Gebietsschema verwendet.
         </para>
 
         <example id="zend.currency.usage.informational.example">
@@ -525,7 +527,7 @@ print_r($currency->getCurrencyList('de_AT');
         <title>Neue Standardwerte setzen</title>
 
         <para>
-            Die Methode <code>setLocale</code> erlaubt es ein neues Gebietsschema für
+            Die Methode <methodname>setLocale()</methodname> erlaubt es ein neues Gebietsschema für
             <classname>Zend_Currency</classname> zu setzen. Alle Standardwerte werden überschrieben
             wenn diese Funktion aufgerufen wird. Das beinhaltet den Namen der Währung, die Abkürzung
             und das Symbol.
@@ -555,11 +557,12 @@ print $currency->toCurrency(1000);
         <para>
             <classname>Zend_Currency</classname>'s Geschwindigkeit kann optimiert werden indem
             <classname>Zend_Cache</classname> verwendet wird. Die statischen Methode
-            <classname>Zend_Currency::setCache($cache)</classname> akzeptiert eine Option: Einen
+            <methodname>Zend_Currency::setCache($cache)</methodname> akzeptiert eine Option: Einen
             <classname>Zend_Cache</classname> Adapter. Wenn der Cache Adapter gesetzt wird, werden
             die Lokalisierungsdaten von Zend_Currency gecached. Es gibt einige statischen Methoden
-            für die Manipulation des Caches: <classname>Zend_Currency::getCache()</classname>,
-            <code>hasCache()</code>, <code>clearCache()</code> und <code>removeCache()</code>.
+            für die Manipulation des Caches: <methodname>Zend_Currency::getCache()</methodname>,
+            <methodname>hasCache()</methodname>, <methodname>clearCache()</methodname> und
+            <methodname>removeCache()</methodname>.
         </para>
 
         <example id="zend.currency.usage.cache.example">

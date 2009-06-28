@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15850 -->
+<!-- EN-Revision: 16180 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.router" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Der Standard Router</title>
@@ -199,7 +199,7 @@ $router->addRoute('user',
 ]]></programlisting>
 
             <para>
-                Was zu folgender href führt: <code>user/martel</code>.
+                Was zu folgender href führt: <filename>user/martel</filename>.
             </para>
         </note>
 
@@ -215,9 +215,10 @@ $router->addRoute('user',
 
         <para>
             Wenn man herausfinden will welche Route gepasst hat, kann man die
-            <code>getCurrentRouteName()</code> Methode verwenden, die den Identifikator zurückgibt
-            der verwendet wurde als die Route im Router registriert wurde. Wenn man das aktuelle
-            Route Objekt benötigt, kann <code>getCurrentRoute()</code> verwendet werden.
+            <methodname>getCurrentRouteName()</methodname> Methode verwenden, die den Identifikator
+            zurückgibt der verwendet wurde als die Route im Router registriert wurde. Wenn man das
+            aktuelle Route Objekt benötigt, kann <methodname>getCurrentRoute()</methodname>
+            verwendet werden.
         </para>
 
         <note>
@@ -261,11 +262,12 @@ $router->addRoute('user',
 
         <para>
             <classname>Zend_Controller_Router_Rewrite</classname> kommt mit einer Standard Route
-            vorkonfiguriert, welche URIs im Sinn von <code>controller/action</code> entspricht.
-            Zusätzlich kann ein Modul Name als erstes Pfad Element definiert werden, welches URIs in
-            der Form von <code>module/controller/action</code> erlaubt. Letztendlich wird es auch
-            allen zusätzlichen Parametern entsprechen die der URI standardmäßig hinzugefügt wurden -
-            <code>controller/action/var1/value1/var2/value2</code>.
+            vorkonfiguriert, welche URIs im Sinn von <filename>controller/action</filename>
+            entspricht. Zusätzlich kann ein Modul Name als erstes Pfad Element definiert werden,
+            welches URIs in der Form von <filename>module/controller/action</filename> erlaubt.
+            Letztendlich wird es auch allen zusätzlichen Parametern entsprechen die der URI
+            standardmäßig hinzugefügt wurden -
+            <filename>controller/action/var1/value1/var2/value2</filename>.
         </para>
 
         <para>
@@ -328,7 +330,7 @@ $this->addRoute('default', $compat);
             Wenn diese spezielle Standard Route im eigenen Routing Schema nicht gewünscht ist, kann
             Sie durch Erstellung einer eigenen 'default' Route überschrieben werden (z.B. durch
             Speichern unter dem Namen 'default') oder dem kompletten Entfernen durch verwenden von
-            <code>removeDefaultRoutes()</code>:
+            <methodname>removeDefaultRoutes()</methodname>:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -343,16 +345,17 @@ $router->removeDefaultRoutes();
 
         <para>
             Der Rewrite Router kann in Unterverzeichnissen verwendet werden (z.B.
-            <code>http://domain.com/~user/application-root/</code>) und in diesem Fall sollte die
-            Basis URL der Anwendung (<code>/~user/application-root</code>) automatisch durch
-            <classname>Zend_Controller_Request_Http</classname> erkannt und auch verwendet werden.
+            <filename>http://domain.com/~user/application-root/</filename>) und in diesem Fall
+            sollte die Basis URL der Anwendung (<filename>/~user/application-root</filename>)
+            automatisch durch <classname>Zend_Controller_Request_Http</classname> erkannt und auch
+            verwendet werden.
         </para>
 
         <para>
             Sollte die Basis URL nicht richtig erkannt werden kann diese mit eigenen Basispfad
             überschrieben werden durch Verwendung von
             <classname>Zend_Controller_Request_Http</classname> und Auruf der
-            <code>setBaseUrl()</code> Methode (siehe
+            <methodname>setBaseUrl()</methodname> Methode (siehe
             <xref linkend="zend.controller.request.http.baseurl" />):
         </para>
 
@@ -393,7 +396,7 @@ $router->setGlobalParam('lang', 'en');
         <para>
             Manchmal ist es praktischer, eine Konfigurationsdatei mit neuen Routen zu
             aktualisieren, als den Code zu ändern. Dies ist mit Hilfe der
-            <code>addConfig()</code> Methode möglich. Im Wesentlichen kann man eine
+            <methodname>addConfig()</methodname> Methode möglich. Im Wesentlichen kann man eine
             <classname>Zend_Config</classname> kompatible Konfiguration erstellen, in seinem Code
             einlesen und an den RewriteRouter übergeben:
         </para>

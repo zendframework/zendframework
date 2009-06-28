@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16178 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.plugins" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Plugins</title>
@@ -24,7 +24,7 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>routeStartup()</code> wird aufgerufen bevor
+                    <methodname>routeStartup()</methodname> wird aufgerufen bevor
                     <classname>Zend_Controller_Front</classname> <link
                         linkend="zend.controller.router">den Router</link>
                     aufruft, um den Request anhand der registrierten Routen zu überprüfen.
@@ -33,7 +33,7 @@
 
             <listitem>
                 <para>
-                    <code>routeShutdown()</code> wird aufgerufen, nachdem <link
+                    <methodname>routeShutdown()</methodname> wird aufgerufen, nachdem <link
                         linkend="zend.controller.router">der Router</link>
                     das Routing der Anfrage beendet.
                 </para>
@@ -41,14 +41,14 @@
 
             <listitem>
                 <para>
-                    <code>dispatchLoopStartup()</code> wird aufgerufen, bevor
+                    <methodname>dispatchLoopStartup()</methodname> wird aufgerufen, bevor
                     <classname>Zend_Controller_Front</classname> den Dispatch Loop aufnimmt.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>preDispatch()</code> wird von
+                    <methodname>preDispatch()</methodname> wird von
                     <link linkend="zend.controller.dispatcher">dem Dispatcher</link>
                     aufgerufen, bevor eine Aktion verarbeitet wird. Dieser Callback erlaubt ein
                     Proxy oder Filter Verhalten. Durch Verändern des Requests und Zurücksetzen
@@ -60,7 +60,7 @@
 
             <listitem>
                 <para>
-                    <code>postDispatch()</code> wird von
+                    <methodname>postDispatch()</methodname> wird von
                     <link linkend="zend.controller.dispatcher">dem Dispatcher</link>
                     aufgerufen, nachdem eine Aktion verarbeitet wurde. Dieser Callback erlaubt ein
                     Proxy oder Filter Verhalten. Durch Verändern des Requests und Zurücksetzen
@@ -72,7 +72,7 @@
 
             <listitem>
                 <para>
-                    <code>dispatchLoopShutdown()</code> wird aufgerufen, nachdem
+                    <methodname>dispatchLoopShutdown()</methodname> wird aufgerufen, nachdem
                     <classname>Zend_Controller_Front</classname> den Dispatch Loop beendet.
                 </para>
             </listitem>
@@ -104,8 +104,9 @@ class MyPlugin extends Zend_Controller_Plugin_Abstract
 
         <para>
             <classname>Zend_Controller_Plugin_Abstract</classname> stellt den Controller Plugins
-            außerdem die Request und Response Objekte über die <code>getRequest()</code> und
-            <code>getResponse()</code> Methoden zur Verfügung.
+            außerdem die Request und Response Objekte über die
+            <methodname>getRequest()</methodname> und <methodname>getResponse()</methodname>
+            Methoden zur Verfügung.
         </para>
     </sect2>
 
@@ -200,20 +201,21 @@ $front->dispatch();
 
         <itemizedlist>
             <listitem><para>
-                    <code>getPlugin($class)</code> erlaubt es ein Plugin durch den Klassennamen zu
-                    empfangen. Wenn kein Plugin entspricht, wird false zurückgegeben. Wenn mehr als
-                    ein Plugin dieser Klasse registriert ist, wird ein Array zurückgegeben.
+                    <methodname>getPlugin($class)</methodname> erlaubt es ein Plugin durch den
+                    Klassennamen zu empfangen. Wenn kein Plugin entspricht, wird false
+                    zurückgegeben. Wenn mehr als ein Plugin dieser Klasse registriert ist, wird ein
+                    Array zurückgegeben.
             </para></listitem>
 
             <listitem><para>
-                    <code>getPlugins()</code> empfängt den kompletten Plugin Stack.
+                    <methodname>getPlugins()</methodname> empfängt den kompletten Plugin Stack.
             </para></listitem>
 
             <listitem><para>
-                    <code>unregisterPlugin($plugin)</code> erlaubt die Entfernung eines Plugins vom
-                    Stack. Es kann ein Plugin Objekt oder der Klassenname des Plugins, das entfernt
-                    werden soll, übergeben werden. Wenn der Klassenname übergeben wird, wird jedes
-                    Plugin dieser Klasse entfernt.
+                    <methodname>unregisterPlugin($plugin)</methodname> erlaubt die Entfernung eines
+                    Plugins vom Stack. Es kann ein Plugin Objekt oder der Klassenname des Plugins,
+                    das entfernt werden soll, übergeben werden. Wenn der Klassenname übergeben
+                    wird, wird jedes Plugin dieser Klasse entfernt.
             </para></listitem>
         </itemizedlist>
     </sect2>

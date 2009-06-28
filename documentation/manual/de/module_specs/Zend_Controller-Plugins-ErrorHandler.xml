@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16178 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.plugins.standard.errorhandler">
     <title>Zend_Controller_Plugin_ErrorHandler</title>
@@ -29,57 +29,58 @@
     </itemizedlist>
 
     <para>
-        Mit anderen Worten ist das <code>ErrorHandler</code> Plugin kreiert worden um HTTP 404
-        Fehler zu behandeln (fehlende Seite) und 500 Fehler (interner Fehler). Es ist nicht dazu
-        gedacht Ausnahmen zu fangen die in anderen Plugins oder durch das Routen verursacht werden.
+        Mit anderen Worten ist das <emphasis>ErrorHandler</emphasis> Plugin kreiert worden um HTTP
+        404 Fehler zu behandeln (fehlende Seite) und 500 Fehler (interner Fehler). Es ist nicht
+        dazu gedacht Ausnahmen zu fangen die in anderen Plugins oder durch das Routen verursacht
+        werden.
     </para>
 
     <para>
         Standardmäßig leitet <classname>Zend_Controller_Plugin_ErrorHandler</classname> auf
-        <code>ErrorController::errorAction()</code> im Standardmodul weiter. Es kann ein
-        alternativer Wert für dieses gesetzt werden durch Verwendung der diversen Zugriffsmethoden
-        die zu dem Pligin existieren:
+        <methodname>ErrorController::errorAction()</methodname> im Standardmodul weiter. Es kann
+        ein alternativer Wert für dieses gesetzt werden durch Verwendung der diversen
+        Zugriffsmethoden die zu dem Plugin existieren:
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
-                <code>setErrorHandlerModule()</code> setzt das Kontroller Modul das verwendet werden
-                soll.
+                <methodname>setErrorHandlerModule()</methodname> setzt das Kontroller Modul das
+                verwendet werden soll.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>setErrorHandlerController()</code> setzt den Kontroller der verwendet werden
-                soll.
+                <methodname>setErrorHandlerController()</methodname> setzt den Kontroller der
+                verwendet werden soll.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>setErrorHandlerAction()</code> setzt die Kontroller Aktion die verwendet
-                werden soll.
+                <methodname>setErrorHandlerAction()</methodname> setzt die Kontroller Aktion die
+                verwendet werden soll.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>setErrorHandler()</code> nimmt ein assoziatives Array, welches einen der
-                Schlüssel 'module', 'controller', oder 'action' enthalten kann und mit denen es die
-                gewünschten Werte setzt.
+                <methodname>setErrorHandler()</methodname> nimmt ein assoziatives Array, welches
+                einen der Schlüssel 'module', 'controller', oder 'action' enthalten kann und mit
+                denen es die gewünschten Werte setzt.
             </para>
         </listitem>
     </itemizedlist>
 
     <para>
         Zusätzlich kann ein optionales assoziatives Array an den Konstruktor übergeben werden,
-        welches dann an den <code>setErrorHandler()</code> weitergeleitet wird.
+        welches dann an den <methodname>setErrorHandler()</methodname> weitergeleitet wird.
     </para>
 
     <para>
         <classname>Zend_Controller_Plugin_ErrorHandler</classname> benötigt einen
-        <code>postDispatch()</code> Hook und prüft auf Ausnahmen die im <link
+        <methodname>postDispatch()</methodname> Hook und prüft auf Ausnahmen die im <link
             linkend="zend.controller.response">Antwort Objekt</link> registriert sind. Wenn welche
         gefunden werden, versucht es zur registrieren Fehler Handler Aktion weiterzuleiten.
     </para>
@@ -94,10 +95,10 @@
         <title>Den Fehler Handler als 404 Handler verwenden</title>
 
         <para>
-            Da das <code>ErrorHandler</code> Plugin nicht nur Anwendungsfehler erfasst, sondern auch
-            Fehler in der Kontroller Kette die durch fehlende Kontroller Klassen und/oder Aktions
-            Methoden auftreten, kann es als 404 Handler verwendet werden. Hierfür muß der eigene
-            Fehler Kontroller den Typ der Ausnahme prüfen.
+            Da das <emphasis>ErrorHandler</emphasis> Plugin nicht nur Anwendungsfehler erfasst,
+            sondern auch Fehler in der Kontroller Kette die durch fehlende Kontroller Klassen
+            und/oder Aktions Methoden auftreten, kann es als 404 Handler verwendet werden. Hierfür
+            muß der eigene Fehler Kontroller den Typ der Ausnahme prüfen.
         </para>
 
         <para>
@@ -118,7 +119,7 @@
 
         <para>
             Sobald das Fehler Objekt vorhanden ist, kann man es über den Typ mit
-            <code>$errors->type</code> erhalten. Es wird eines der folgenden sein:
+            <varname>$errors->type</varname> erhalten. Es wird eines der folgenden sein:
         </para>
 
         <itemizedlist>
@@ -219,9 +220,9 @@ public function errorAction()
 
         <para>
             Wenn mehrfache Aktionen in einer Anfrage behandelt werden, oder wenn die Aktion mehrere
-            Aufrufe zu <code>render()</code> macht, ist es möglich das das Antwort Objekt bereits
-            Inhalt in sich gespeichert hat. Das kann dazu führen das eine Mixtur vin erwartetem
-            Inhalt und Fehler Inhalt gerendert wird.
+            Aufrufe zu <methodname>render()</methodname> macht, ist es möglich das das Antwort
+            Objekt bereits Inhalt in sich gespeichert hat. Das kann dazu führen das eine Mixtur von
+            erwartetem Inhalt und Fehler Inhalt gerendert wird.
         </para>
 
         <para>

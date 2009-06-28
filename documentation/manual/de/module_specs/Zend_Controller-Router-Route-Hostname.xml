@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15719 -->
+<!-- EN-Revision: 16180 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.router.routes.hostname">
     <title>Zend_Controller_Router_Route_Hostname</title>
@@ -13,8 +13,9 @@
     <para>
         Verwenden wir also ein Beispiel von der Standardroute und schauen wir uns an wie Sie auf
         einem Hostnamen basierenden Weg aussehen würde. Statt das der Benutzer über einen Pfad
-        aufgerufen wird, wollen wir das der Benutzer <code>http://martel.users.example.com</code>
-        aufrufen kann, um die Informationen über den Benutzer "martel" zu sehen:
+        aufgerufen wird, wollen wir das der Benutzer
+        <filename>http://martel.users.example.com</filename> aufrufen kann, um die Informationen
+        über den Benutzer "martel" zu sehen:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -44,8 +45,8 @@ $router->addRoute('user', $hostnameRoute->chain($plainPathRoute);
         Hostnamerouten können verwendet werden wie sie sind, sollten es aber nie. Der Grund dahinter
         ist, das Hostnamerouten alleine jedem Pfad entsprechen würden. Was man also tun muß, ist
         eine Pfadroute an die Hostnameroute zu ketten. Das wird, wie im Beispiel, getan indem
-        <code>$hostnameRoute->chain($pathRoute);</code> aufgerufen wird. Indem das getan wird, wird
-        <varname>$hostnameRoute</varname> nicht geändert, aber eine neue Route
+        <methodname>$hostnameRoute->chain($pathRoute)</methodname> aufgerufen wird. Indem das getan
+        wird, wird <varname>$hostnameRoute</varname> nicht geändert, aber eine neue Route
         (<classname>Zend_Controller_Router_Route_Chain</classname>), welche dann dem Router
         übergeben werden kann, wird zurückgegeben.
     </para>

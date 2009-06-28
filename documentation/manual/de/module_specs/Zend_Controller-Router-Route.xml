@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16180 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.router.routes.standard">
     <title>Zend_Controller_Router_Route</title>
@@ -13,9 +13,9 @@
 
     <para>
         Angenommen unsere fiktive Anwendung benötigt eine informelle Seite über den Seitenauthor. Es
-        soll möglich sein mit dem Browser auf <code>http://domain.com/author/martel</code> zu
-        verweisen um die Informationen über diesen "martel" Typ zu sehen. Und die Route für so eine
-        Funktionalität würde so aussehen:
+        soll möglich sein mit dem Browser auf <filename>http://domain.com/author/martel</filename>
+        zu verweisen um die Informationen über diesen "martel" Typ zu sehen. Und die Route für so
+        eine Funktionalität würde so aussehen:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -31,12 +31,12 @@ $router->addRoute('user', $route);
 ]]></programlisting>
 
     <para>
-        Der ersten Parameter im Konstruktor von <code>http://domain.com/author/martel</code> ist
-        eine Routendefinition die einer URL entspricht. Routendefinitionen bestehen aus statischen
-        und dynamischen Teilen die durch einen Schrägstrich ('/') seperiert sind. Statische Teile
-        sind nur einfacher Text: <code>author</code>. Dynamische Teile, Variablen genannt, werden
-        durch einen vorangestellten Doppelpunkt, zum variablen Namen, markiert:
-        <code>:username</code>.
+        Der ersten Parameter im Konstruktor von
+        <filename>http://domain.com/author/martel</filename> ist eine Routendefinition die einer
+        URL entspricht. Routendefinitionen bestehen aus statischen und dynamischen Teilen die durch
+        einen Schrägstrich ('/') seperiert sind. Statische Teile sind nur einfacher Text:
+        <code>author</code>. Dynamische Teile, Variablen genannt, werden durch einen
+        vorangestellten Doppelpunkt, zum variablen Namen, markiert: <code>:username</code>.
     </para>
 
     <note>
@@ -52,7 +52,7 @@ $router->addRoute('user', $route);
 
     <para>
         Diese Beispielroute wird verglichen wenn der Browser auf
-        <code>http://domain.com/author/martel</code> zeigt. In diesem Fall werden alle seine
+        <filename>http://domain.com/author/martel</filename> zeigt. In diesem Fall werden alle seine
         Variablen dem <classname>Zend_Controller_Request</classname> Objekt injiziiert und es kann
         im <code>ProfileController</code> darauf zugegriffen werden. Variablen die von diesem
         Beispiel zurückgegeben werden können als Array mit den folgenden Schlüssel- und Wertepaaren
@@ -69,9 +69,9 @@ $values = array(
 
     <para>
         Später sollte <classname>Zend_Controller_Dispatcher_Standard</classname> die
-        <code>userinfoAction()</code> Methode der eigenen <code>ProfileController</code> Klasse
-        aufrufen (im Standardmodul) basierend auf diesen Werten. Dort ist es möglich alle Variablen
-        durch die <classname>Zend_Controller_Action::_getParam()</classname> oder
+        <methodname>userinfoAction()</methodname> Methode der eigenen <code>ProfileController</code>
+        Klasse aufrufen (im Standardmodul) basierend auf diesen Werten. Dort ist es möglich alle
+        Variablen durch die <classname>Zend_Controller_Action::_getParam()</classname> oder
         <classname>Zend_Controller_Request::getParam()</classname> Methoden zuzugreifen:
     </para>
 
@@ -119,9 +119,9 @@ $router->addRoute('archive', $route);
 ]]></programlisting>
 
         <para>
-            Die obige Route entspricht URLs wie <code>http://domain.com/archive/2005</code> und
-            <code>http://example.com/archive</code>. Im späteren Fall wird die Variable year einen
-            initialen Standardwert von 2006 haben.
+            Die obige Route entspricht URLs wie <filename>http://domain.com/archive/2005</filename>
+            und <filename>http://example.com/archive</filename>. Im späteren Fall wird die Variable
+            year einen initialen Standardwert von 2006 haben.
         </para>
 
         <para>
@@ -147,8 +147,8 @@ $router->addRoute('archive', $route);
 ]]></programlisting>
 
         <para>
-            Diese Route führt dazu das an die Methode <code>showAction()</code> der Klasse
-            <code>ArchiveController</code> weitergeleitet wird.
+            Diese Route führt dazu das an die Methode <methodname>showAction()</methodname> der
+            Klasse <code>ArchiveController</code> weitergeleitet wird.
         </para>
 
     </sect4>
@@ -178,9 +178,9 @@ $router->addRoute('archive', $route);
         <para>
             Mit einer Route die wie oben definiert ist, wird das Routing nur dann stattfinden wenn
             die year Variable nummerische Daten enthält, z.B.
-            <code>http://domain.com/archive/2345</code>. Eine URL wie
-            <code>http://example.com/archive/test</code> wird nicht zugeordnet und die Kontrolle
-            wird stattdessen an die nächste Route in der Kette übertragen.
+            <filename>http://domain.com/archive/2345</filename>. Eine URL wie
+            <filename>http://example.com/archive/test</filename> wird nicht zugeordnet und die
+            Kontrolle wird stattdessen an die nächste Route in der Kette übertragen.
         </para>
     </sect4>
 

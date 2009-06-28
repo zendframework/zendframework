@@ -34,6 +34,8 @@ require_once 'Zend/Tool/Project/Provider/Abstract.php';
 class Zend_Tool_Project_Provider_Project extends Zend_Tool_Project_Provider_Abstract
 {
 
+    protected $_specialties = array('Info');
+    
     /**
      * create()
      *
@@ -73,6 +75,21 @@ class Zend_Tool_Project_Provider_Project extends Zend_Tool_Project_Provider_Abst
 
         foreach ($newProfile->getIterator() as $resource) {
             $resource->create();
+        }
+    }
+    
+    public function show()
+    {
+        $this->_registry->getResponse()->appendContent('You probably meant to run "show project.info".', array('color' => 'yellow'));
+    }
+    
+    public function showInfo()
+    {
+        $profile = $this->_loadProfile(self::NO_PROFILE_RETURN_FALSE);
+        if (!$profile) {
+            $this->_registry->getResponse()->appendContent('No project found.');
+        } else {
+            $this->_registry->getResponse()->appendContent('Working with project located at: ' . $profile->getAttribute('projectDirectory'));
         }
     }
 

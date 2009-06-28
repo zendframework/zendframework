@@ -105,25 +105,43 @@ abstract class Zend_Tool_Project_Provider_Abstract extends Zend_Tool_Framework_P
      *    - if an enpoint variable has been registered in teh client registry - key=workingDirectory
      *    - if an ENV variable with the key ZFPROJECT_PATH is found
      *
-     * @
+     * @param $loadProfileFlag bool Whether or not to throw an exception when no profile is found
+     * @param $projectDirectory string The project directory to use to search
+     * @param $searchParentDirectories bool Whether or not to search upper level direcotries
      * @return Zend_Tool_Project_Profile
      */
-    protected function _loadProfile($loadProfileFlag = self::NO_PROFILE_THROW_EXCEPTION, $projectDirectory = null)
+    protected function _loadProfile($loadProfileFlag = self::NO_PROFILE_THROW_EXCEPTION, $projectDirectory = null, $searchParentDirectories = true)
     {
-
-
+        // use the cwd if no directory was provided
         if ($projectDirectory == null) {
             $projectDirectory = getcwd();
+        } elseif (realpath($projectDirectory) == false) {
+            throw new Zend_Tool_Project_Provider_Exception('The $projectDirectory supplied does not exist.');
         }
 
         $profile = new Zend_Tool_Project_Profile();
-        $profile->setAttribute('projectDirectory', $projectDirectory);
-
-        if ($profile->isLoadableFromFile()) {
-            $profile->loadFromFile();
-            $this->_loadedProfile = $profile;
+        
+        $parentDirectoriesArray = split(DIRECTORY_SEPARATOR, ltrim($projectDirectory, DIRECTORY_SEPARATOR));
+        while ($parentDirectoriesArray) {
+            $projectDirectoryAssembled = DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, $parentDirectoriesArray);
+            
+            $profile->setAttribute('projectDirectory', $projectDirectoryAssembled);
+            if ($profile->isLoadableFromFile()) {
+                chdir($projectDirectoryAssembled);
+                
+                $profile->loadFromFile();
+                $this->_loadedProfile = $profile;
+                break;
+            }
+            
+            // break after first run if we are not to check upper directories
+            if ($searchParentDirectories == false) {
+                break;
+            }
+            
+            array_pop($parentDirectoriesArray);
         }
-
+        
         if ($this->_loadedProfile == null) {
             if ($loadProfileFlag == self::NO_PROFILE_THROW_EXCEPTION) {
                 throw new Zend_Tool_Project_Provider_Exception('A project profile was not found.');

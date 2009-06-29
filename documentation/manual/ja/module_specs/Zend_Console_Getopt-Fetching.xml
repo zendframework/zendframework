@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16000 -->
+<!-- EN-Revision: 16315 -->
 <sect1 id="zend.console.getopt.fetching">
     <title>オプションおよび引数の取得</title>
     <para>
@@ -117,7 +117,7 @@ $p_parameter = $opts->p; // 設定されていない場合は null となりま�
             <listitem>
                 <para>
                     文字列で取得: <methodname>toString()</methodname> メソッドを使用します。
-                    オプションの内容が、空白で区切られた "<code>flag=value</code>"
+                    オプションの内容が、空白で区切られた <command>flag=value</command>
                     形式の文字列で返されます。パラメータを持たないオプションの場合、
                     value の部分はリテラル文字列 "<constant>TRUE</constant>" となります。
                 </para>
@@ -146,8 +146,8 @@ $p_parameter = $opts->p; // 設定されていない場合は null となりま�
         <para>
             これらのすべての出力メソッドで、フラグ文字列として使用するのは
             エイリアスリストの先頭にあるものです。たとえば
-            あるオプションのエイリアスが "<code>verbose|v</code>"
-            のように宣言されていたとすると、最初の文字列である "<code>verbose</code>"
+            あるオプションのエイリアスが <command>verbose|v</command>
+            のように宣言されていたとすると、最初の文字列である <command>verbose</command>
             をオプション名として使用します。
             オプションフラグ名には、先頭のダッシュは含みません。
         </para>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15999 -->
+<!-- EN-Revision: 16315 -->
 <sect1 id="zend.console.getopt.configuration">
     <title>Zend_Console_Getopt の設定</title>
 
@@ -29,8 +29,8 @@ $opts->addRules(
 ]]></programlisting>
         </example>
         <para>
-            上の例は、"<code>--verbose</code>" というオプションと
-            そのエイリアス "<code>-v</code>" を
+            上の例は、<command>--verbose</command> というオプションと
+            そのエイリアス <command>-v</command> を
             コンストラクタで定義したオプションに追加しています。
             <classname>Zend_Console_Getopt</classname> のインスタンスには、
             短い形式のオプションと長い形式のオプションが共存可能であることに注意しましょう。
@@ -96,9 +96,9 @@ $opts->setAliases(
         </example>
         <para>
             上の例では
-            "<code>-a</code>"、"<code>--apple</code>" および
-            "<code>--apfel</code>" をお互いエイリアス指定した後で、
-            "<code>-p</code>" と "<code>--pear</code>"
+            <command>-a</command>、<command>--apple</command> および
+            <command>--apfel</command> をお互いエイリアス指定した後で、
+            <command>-p</command> と <command>--pear</command>
             もエイリアスとしています。
         </para>
         <para>
@@ -169,7 +169,7 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
             <listitem>
                 <para>
                     <constant>Zend_Console_Getopt::CONFIG_DASHDASH</constant> ("dashDash")
-                    を true にすると、フラグの終了を表す特殊フラグ "<code>--</code>"
+                    を true にすると、フラグの終了を表す特殊フラグ <command>--</command>
                     を有効にします。ダブルダッシュの後に続くコマンドライン引数は、
                     たとえダッシュで始まっていてもオプションとはみなされません。
                     この設定オプションは、デフォルトで true となっています。
@@ -179,8 +179,8 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
                 <para>
                     <constant>Zend_Console_Getopt::CONFIG_IGNORECASE</constant> ("ignoreCase")
                     を true にすると、大文字小文字が違うだけのフラグをお互いエイリアスとして扱います。
-                    つまり、"<code>-a</code>" と
-                    "<code>-A</code>" は同じフラグとみなされます。
+                    つまり、<command>-a</command> と
+                    <command>-A</command> は同じフラグとみなされます。
                     この設定オプションは、デフォルトでは false となっています。
                 </para>
             </listitem>

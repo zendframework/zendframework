@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16050 -->
+<!-- EN-Revision: 16315 -->
 <sect1 id="zend.console.getopt.introduction">
     <title>導入</title>
     <para>
@@ -12,10 +12,10 @@
         これらの引数はアプリケーションにとって何らかの意味を持つものであり、
         何らかの振る舞いを変更したりリソースを選択したり、パラメータを設定したりします。
         多くのオプションには、慣例となっている意味があります。
-        たとえば "<code>--verbose</code>" は、多くのアプリケーションで
+        たとえば <command>--verbose</command> は、多くのアプリケーションで
         出力内容をさらに追加します。
         その他のオプションには、アプリケーションによって意味が異なるものもあります。
-        たとえば "<code>-c</code>" は、
+        たとえば <command>-c</command> は、
         <command>grep</command>、<command>ls</command> および
         <command>tar</command> でそれぞれ違う機能を表します。
     </para>
@@ -45,7 +45,7 @@
                 "フラグ (flag)": オプションの最初の部分で、
                 そのオプションの目的を表すもの。フラグの前には、
                 慣習的にひとつあるいはふたつのダッシュ
-                ("<code>-</code>" あるいは "<code>--</code>")
+                (<command>-</command> あるいは <command>--</command>)
                 をつけることになっています。
                 ひとつのダッシュをつけるのは、
                 一文字のフラグかあるいは一文字フラグのクラスタの場合です。
@@ -59,19 +59,19 @@
                 フラグとともに使用するデータの値を指定します。
                 これは、オプションがそれを受け付ける場合に限ります。
                 たとえば、多くのコマンドは
-                "<code>--verbose</code>" オプションを受け付けますが、
+                <command>--verbose</command> オプションを受け付けますが、
                 このオプションには一般的にパラメータを指定しません。
-                しかし、"<code>--user</code>" のようなオプションは、
+                しかし、<command>--user</command> のようなオプションは、
                 たいていの場合はその後にパラメータが必要です。
             </para>
             <para>
                 パラメータはフラグ引数の後で別の引数として指定することもできますし、
                 あるいは同一の引数文字列の一部として指定することもできます。
-                この場合は、フラグとパラメータを等号 ("<code>=</code>") で連結します。
+                この場合は、フラグとパラメータを等号 (<command>=</command>) で連結します。
                 後者の形式は、長いフラグでのみサポートしています。
                 たとえば、
-                <code>-u username</code>、<code>--user username</code>
-                あるいは <code>--user=username</code> といった形式を
+                <command>-u username</command>、<command>--user username</command>
+                あるいは <command>--user=username</command> といった形式を
                 <classname>Zend_Console_Getopt</classname> でサポートしています。
             </para>
         </listitem>
@@ -88,12 +88,12 @@
         </listitem>
     </itemizedlist>
     <para>
-        たとえば "<code>mysql --user=root mydatabase</code>" において、
-        "<code>mysql</code>" は <emphasis>コマンド</emphasis>、
-        "<code>--user=root</code>" は <emphasis>オプション</emphasis>、
-        "<code>--user</code>" は <emphasis>フラグ</emphasis>、
-        "<code>root</code>" はオプションに対する <emphasis>パラメータ</emphasis>
-        となります。また "<code>mydatabase</code>" は、
+        たとえば <command>mysql --user=root mydatabase</command> において、
+        <command>mysql</command> は <emphasis>コマンド</emphasis>、
+        <command>--user=root</command> は <emphasis>オプション</emphasis>、
+        <command>--user</command> は <emphasis>フラグ</emphasis>、
+        <command>root</command> はオプションに対する <emphasis>パラメータ</emphasis>
+        となります。また <command>mydatabase</command> は、
         この定義によると引数ですがオプションではありません。
     </para>
     <para>

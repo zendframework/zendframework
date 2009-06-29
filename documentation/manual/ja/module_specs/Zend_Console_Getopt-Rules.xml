@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16050 -->
+<!-- EN-Revision: 16315 -->
 <sect1 id="zend.console.getopt.rules">
     <title>Getopt の規則の宣言</title>
     <para>
@@ -34,7 +34,7 @@
             この構文は、一文字のフラグでのみ使用できます。
             アプリケーションでサポートするフラグに対応する文字を、
             ひとつの文字列にまとめてで指定します。
-            文字の後ろにコロン ("<code>:</code>") を続けると、
+            文字の後ろにコロン (<emphasis>:</emphasis>) を続けると、
             そのフラグがパラメータを要求することを表します。
         </para>
         <example id="zend.console.getopt.rules.short.example">
@@ -45,8 +45,8 @@ $opts = new Zend_Console_Getopt('abp:');
         </example>
         <para>
             上の例は、<classname>Zend_Console_Getopt</classname> を用いて、
-            使用するオプションを "<code>-a</code>" や
-            "<code>-b</code>" あるいは "<code>-p</code>" と宣言するものです。
+            使用するオプションを <command>-a</command> や
+            <command>-b</command> あるいは <command>-p</command> と宣言するものです。
             最後のフラグにはパラメータが必要となります。
         </para>
         <para>
@@ -112,11 +112,11 @@ $opts = new Zend_Console_Getopt(
         </example>
         <para>
             上の例では、三種類のオプションを宣言しています。
-            "<code>--apple</code>" および "<code>-a</code>" は同じ意味を持つエイリアスで、
+            <command>--apple</command> および <command>-a</command> は同じ意味を持つエイリアスで、
             このオプションはパラメータを受け取りません。
-            "<code>--banana</code>" および "<code>-b</code>" は同じ意味を持つエイリアスで、
+            <command>--banana</command> および <command>-b</command> は同じ意味を持つエイリアスで、
             このオプションには整数値のパラメータが必須となります。
-            最後に "<code>--pear</code>" および "<code>-p</code>" は同じ意味を持つエイリアスで、
+            最後に <command>--pear</command> および <command>-p</command> は同じ意味を持つエイリアスで、
             このオプションには任意で文字列のパラメータを指定することができます。
         </para>
     </sect2>

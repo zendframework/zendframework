@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16153 -->
+<!-- EN-Revision: 16276 -->
 <sect1 id="zend.paginator.usage">
     <title>使用法</title>
 
@@ -27,7 +27,7 @@
                 <tbody>
                     <row>
                         <entry>Array</entry>
-                        <entry>PHP の配列を使用します。</entry>
+                        <entry><acronym>PHP</acronym> の配列を使用します。</entry>
                     </row>
                     <row>
                         <entry>DbSelect</entry>
@@ -50,7 +50,7 @@
                     <row>
                         <entry>Iterator</entry>
                         <entry>
-                            <ulink url="http://www.php.net/~helly/php/ext/spl/interfaceIterator.html"><code>Iterator</code></ulink>
+                            <ulink url="http://www.php.net/~helly/php/ext/spl/interfaceIterator.html"><classname>Iterator</classname></ulink>
                             のインスタンスを使用します。
                         </entry>
                     </row>
@@ -76,7 +76,7 @@
                 そのため、マッチする行の総数を得るための別のクエリが動的に生成されます。
                 しかし、総数を直接指定したり、総数を求めるクエリを直接指定したりすることもできます。
                 詳細な情報は、DbSelect アダプタの
-                <code>setRowCount()</code> メソッドを参照ください。
+                <methodname>setRowCount()</methodname> メソッドを参照ください。
             </para>
         </note>
 
@@ -85,22 +85,18 @@
             コンストラクタでアダプタを指定しなければなりません。
         </para>
 
-        <para>
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $paginator = new Zend_Paginator(new Zend_Paginator_Adapter_Array($array));
 ]]></programlisting>
-        </para>
 
         <para>
             利便性を確保するために、Zend Framework に同梱されているアダプタ用の静的メソッド
-            <code>factory()</code> も用意されています。
+            <methodname>factory()</methodname> も用意されています。
         </para>
 
-        <para>
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $paginator = Zend_Paginator::factory($array);
 ]]></programlisting>
-        </para>
 
         <note>
             <para>
@@ -115,25 +111,22 @@ $paginator = Zend_Paginator::factory($array);
             これにより、データを読み進めていくことが可能となります。
         </para>
 
-        <para>
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $paginator->setCurrentPageNumber($page);
 ]]></programlisting>
-        </para>
 
         <para>
-            ページ番号は URL で指定するのがもっともシンプルな方法でしょう。
+            ページ番号は <acronym>URL</acronym> で指定するのがもっともシンプルな方法でしょう。
             <classname>Zend_Controller_Router_Interface</classname>
             互換のルータを使うことを推奨しますが、
             それが必須というわけではありません。
         </para>
 
         <para>
-            INI ファイルで定義するルートの例を次に示します。
+            <acronym>INI</acronym> ファイルで定義するルートの例を次に示します。
         </para>
 
-        <para>
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 routes.example.route = articles/:articleName/:page
 routes.example.defaults.controller = articles
 routes.example.defaults.action = view
@@ -141,18 +134,15 @@ routes.example.defaults.page = 1
 routes.example.reqs.articleName = \w+
 routes.example.reqs.page = \d+
 ]]></programlisting>
-        </para>
 
         <para>
-            この設定を使った (そして Zend Framework の MVC コンポーネントを使った)
+            この設定を使った (そして Zend Framework の <acronym>MVC</acronym> コンポーネントを使った)
             場合、現在のページ番号を設定するコードはこのようになります。
         </para>
 
-        <para>
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $paginator->setCurrentPageNumber($this->_getParam('page'));
 ]]></programlisting>
-        </para>
 
         <para>
             それ以外にもオプションがあります。詳細は
@@ -166,11 +156,9 @@ $paginator->setCurrentPageNumber($this->_getParam('page'));
             次のようになります。
         </para>
 
-        <para>
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $this->view->paginator = $paginator;
 ]]></programlisting>
-        </para>
     </sect2>
 
     <sect2 id="zend.paginator.usage.dbselect">
@@ -231,14 +219,13 @@ $paginator = new Zend_Paginator($adapter);
         </para>
 
         <para>
-            <classname>Zend_Paginator</classname> は SPL の
-            <ulink url="http://www.php.net/~helly/php/ext/spl/interfaceIteratorAggregate.html"><code>IteratorAggregate</code></ulink>
+            <classname>Zend_Paginator</classname> は <acronym>SPL</acronym> の
+            <ulink url="http://www.php.net/~helly/php/ext/spl/interfaceIteratorAggregate.html"><classname>IteratorAggregate</classname></ulink>
             インターフェイスを実装しているので、
             項目を順次処理したり表示したりするのは簡単です。
         </para>
 
-        <para>
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <html>
 <body>
 <h1>Example</h1>
@@ -256,7 +243,6 @@ $paginator = new Zend_Paginator($adapter);
 </body>
 </html>
 ]]></programlisting>
-        </para>
 
         <para>
             最後のほうでビューヘルパーをコールしているところに注目しましょう。
@@ -346,10 +332,10 @@ $paginator = new Zend_Paginator($adapter);
 
         <para>
             4 番目、そして最後のパラメータはオプションの連想配列です。
-            ここで、ビューパーシャルから (<code>$this</code> を用いて)
+            ここで、ビューパーシャルから (<varname>$this</varname> を用いて)
             使用したい追加変数を指定します。
             たとえば、ページ移動用のリンクに使用する追加の
-            URL パラメータなどを含めることができます。
+            <acronym>URL</acronym> パラメータなどを含めることができます。
         </para>
 
         <para>
@@ -358,15 +344,13 @@ $paginator = new Zend_Paginator($adapter);
             PaginationControl のコールを完全に除去することができます。
         </para>
 
-        <para>
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 Zend_Paginator::setDefaultScrollingStyle('Sliding');
 Zend_View_Helper_PaginationControl::setDefaultViewPartial(
     'my_pagination_control.phtml'
 );
 $paginator->setView($view);
 ]]></programlisting>
-        </para>
 
         <para>
             これらの値をすべて設定すると、
@@ -374,11 +358,9 @@ $paginator->setView($view);
             文を使用するだけでページ処理コントロールをレンダリングできるようになります。
         </para>
 
-        <para>
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php echo $this->paginator; ?>
 ]]></programlisting>
-        </para>
 
         <note>
             <para>
@@ -387,21 +369,17 @@ $paginator->setView($view);
                 たとえば、Smarty を使用する場合は次のようになります。
             </para>
 
-            <para>
-                <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $smarty->assign('pages', $paginator->getPages());
 ]]></programlisting>
-            </para>
 
             <para>
                 そして、テンプレートからは次のようにして paginator の値にアクセスします。
             </para>
 
-            <para>
-                <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 {$pages.pageCount}
 ]]></programlisting>
-            </para>
         </note>
 
         <sect3 id="zend.paginator.usage.rendering.example-controls">
@@ -414,8 +392,9 @@ $smarty->assign('pages', $paginator->getPages());
 
             <para>
                 検索のページ処理
+            </para>
 
-                <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <!--
 See http://developer.yahoo.com/ypatterns/pattern.php?pattern=searchpagination
 -->
@@ -453,12 +432,12 @@ See http://developer.yahoo.com/ypatterns/pattern.php?pattern=searchpagination
 </div>
 <?php endif; ?>
 ]]></programlisting>
-            </para>
 
             <para>
                 項目のページ処理
+            </para>
 
-                <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <!--
 See http://developer.yahoo.com/ypatterns/pattern.php?pattern=itempagination
 -->
@@ -507,12 +486,12 @@ of <?php echo $this->totalItemCount; ?>
 </div>
 <?php endif; ?>
 ]]></programlisting>
-            </para>
 
             <para>
                 ドロップダウンのページ処理
+            </para>
 
-                <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <?php if ($this->pageCount): ?>
 <select id="paginationControl" size="1">
 <?php foreach ($this->pagesInRange as $page): ?>
@@ -534,7 +513,6 @@ $('paginationControl').observe('change', function() {
 })
 </script>
 ]]></programlisting>
-            </para>
         </sect3>
 
         <sect3 id="zend.paginator.usage.rendering.properties">

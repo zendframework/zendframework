@@ -240,7 +240,7 @@ $date = new Zend_Date('31.Feb.2007');
 
         <para>
             メソッド <methodname>add()</methodname>, <methodname>sub()</methodname>,
-            <methodname>compare()</methodname>, </methodname>get()</methodname> および
+            <methodname>compare()</methodname>, <methodname>get()</methodname> および
             <methodname>set()</methodname>
             は、日付全般に対して使用できます。それぞれのメソッドは、
             そのインスタンスが保持する日付の値を操作します。

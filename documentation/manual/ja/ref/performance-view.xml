@@ -187,9 +187,9 @@ class My_View extends Zend_View
 
         <para>
             バージョン1.5.0で <methodname>action()</methodname> ビューヘルパが導入されました。
-            それにより<action>MVC</acronym>のアクションをディスパッチして、
+            それにより<acronym>MVC</acronym>のアクションをディスパッチして、
             レンダリングされたコンテンツを入手できるようになります。
-            これは<action>DRY</acronym>原則に向かう重要なステップで、コードの再利用を促します。
+            これは<acronym>DRY</acronym>原則に向かう重要なステップで、コードの再利用を促します。
             しかしながら、アプリケーションをプロファイルする人がすぐ実感するように、
             これも高くつく操作です。
             内部的に、<methodname>action()</methodname> ビューヘルパでは新しいリクエスト及びレスポンスオブジェクトを複製して、
@@ -265,7 +265,7 @@ class LoginPlugin extends Zend_Controller_Plugin_Abstract
                 <methodname>action()</methodname> ビューヘルパよりもっと安くつきます。
                 さらに、それはすべてのプレディスパッチ、
                 またはポストディスパッチのプラグインが呼び出されることを保証します。
-                それは、特別なアクションのために<action>ACL</acronym>を処理するフロントコントローラプラグインをもし使っているなら、
+                それは、特別なアクションのために<acronym>ACL</acronym>を処理するフロントコントローラプラグインをもし使っているなら、
                 特別に関心があることかもしれません。
             </para>
         </sect3>
@@ -352,7 +352,7 @@ class My_View_Helper_BugList extends Zend_View_Helper_Abstract
             <para>
                 これには２つの利点があります:
                 それはもはや <methodname>action()</methodname> ビューヘルパのオーバーヘッドを受けず、
-                より意味的に理解できる<action>API</acronym>も表現します。
+                より意味的に理解できる<acronym>API</acronym>も表現します。
             </para>
         </sect3>
     </sect2>

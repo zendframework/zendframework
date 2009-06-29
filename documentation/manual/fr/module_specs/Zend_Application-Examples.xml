@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15823 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.application.examples">
     <title>Exemples</title>
@@ -30,18 +30,18 @@ resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
 
     <para>
         Cependant, si de l'initialisation personnalisée est nécessaire, alors vous avez 2
-        choix. D'abord vous pouvez écrire des méthodes préfixées par <code>_init</code> pour
-        ajouter du code au bootstrap. De telles méthodes seront appelées par bootstrap(), et
-        peuvent être appelées comme si elles étaient publiques, par:
-        <code>bootstrap&lt;resource&gt;()</code>. Elles peuvent accepter un tableau
-        d'options.
+        choix. D'abord vous pouvez écrire des méthodes préfixées par <emphasis>_init</emphasis> pour
+        ajouter du code au bootstrap. De telles méthodes seront appelées par
+        <methodname>bootstrap()</methodname>, et peuvent être appelées comme si elles étaient
+        publiques, par&#160;: <emphasis>bootstrap&lt;resource&gt;()</emphasis>. Elles peuvent
+        accepter un tableau d'options.
     </para>
 
     <para>
         Si votre méthode de ressource retourne une valeur, elle sera stockée dans un conteneur du
         bootstrap. Ceci peut être utile quand différentes ressources ont besoin d'interagir (comme
-        une ressource s'injectant elle-même dans une autre). La méthode <code>getResource()</code>
-        peut être utilisée pour récupérer ces valeurs.
+        une ressource s'injectant elle-même dans une autre). La méthode
+        <methodname>getResource()</methodname> peut être utilisée pour récupérer ces valeurs.
     </para>
 
     <para>
@@ -75,8 +75,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 ]]></programlisting>
 
     <para>
-        Notez l'appel à <code>bootstrap()</code>; Ceci permet de s'assurer que le contrôleur
-        frontal a bien été initialisé avant d'appeler cette méthode.
+        Notez l'appel à <methodname>bootstrap()</methodname>&#160;; Ceci permet de s'assurer que le
+        contrôleur frontal a bien été initialisé avant d'appeler cette méthode.
     </para>
 
     <para>
@@ -106,7 +106,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         Les plugins de ressources implémentent
         <classname>Zend_Application_Bootstrap_Resource</classname>, qui définit simplement qu'elles
         peuvent être injectées dans l'objet les appelant, et qu'elles ont une méthode
-        <code>init()</code>. Voici un exemple d'un bootstrap de vue&#160;:
+        <methodname>init()</methodname>. Voici un exemple d'un bootstrap de vue&#160;:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -142,8 +142,8 @@ class My_Bootstrap_Resource_View
 
     <para>
         Pour dire au bootstrap d'utiliser cette classe, vous devrez fournir le nom de la
-        classe pour cette ressource, ou une combinaison prefix/chemin de chargeur de plugin (plugin
-        loader) et le nom court de la ressource ("view")&#160;:
+        classe pour cette ressource, ou une combinaison préfixe&#160;/&#160;chemin de chargeur de
+        plugin (plugin loader) et le nom court de la ressource ("view")&#160;:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -212,8 +212,8 @@ echo $service->handle();
 ]]></programlisting>
 
     <para>
-        Plutôt que d'utiliser la méthode <code>bootstrap()</code> pour appeler les méthodes
-        internes, vous pouvez surcharger&#160;:
+        Plutôt que d'utiliser la méthode <methodname>bootstrap()</methodname> pour appeler les
+        méthodes internes, vous pouvez surcharger&#160;:
     </para>
 
     <programlisting language="php"><![CDATA[

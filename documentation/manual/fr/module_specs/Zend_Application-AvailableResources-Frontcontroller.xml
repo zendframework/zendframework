@@ -50,7 +50,8 @@
         </para></listitem>
 
         <listitem><para>
-            <emphasis>defaultModule</emphasis>&#160;: nom du module par défaut (normalement "default").
+            <emphasis>defaultModule</emphasis>&#160;: nom du module par défaut (normalement
+            "default").
         </para></listitem>
 
         <listitem><para>

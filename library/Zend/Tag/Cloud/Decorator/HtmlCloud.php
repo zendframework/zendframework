@@ -50,7 +50,7 @@ class Zend_Tag_Cloud_Decorator_HtmlCloud extends Zend_Tag_Cloud_Decorator_Cloud
      *
      * @var string
      */
-    protected $_separator = '';
+    protected $_separator = ' ';
     
     /**
      * Set the HTML tags surrounding all tags

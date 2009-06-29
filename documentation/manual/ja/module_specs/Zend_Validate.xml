@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15742 -->
+<!-- EN-Revision: 16340 -->
 <sect1 id="zend.validate.introduction">
 
     <title>導入</title>
@@ -232,6 +232,78 @@ if (Zend_Validate::is($value, 'Between', array(1, 12))) {
             詳細は <xref linkend="zend.filter.input" /> を参照ください。
         </para>
 
+        <sect3 id="zend.validate.introduction.static.namespaces">
+
+            <title>名前空間</title>
+
+            <para>
+                自分で定義したバリデータを使う際に、
+                <methodname>Zend_Validate::is()</methodname> に 4 番目のパラメータを指定することができます。
+                これは、バリデータを探すための名前空間となります。
+            </para>
+
+            <programlisting language="php"><![CDATA[
+if (Zend_Validate::is($value, 'MyValidator', array(1, 12),
+                      array('FirstNamespace', 'SecondNamespace')) {
+    // $value は妥当な値です
+}
+]]></programlisting>
+
+            <para>
+                <classname>Zend_Validate</classname> には、名前空間をデフォルトで設定することもできます。
+                つまり、起動時に一度設定しておけば
+                <methodname>Zend_Validate::is()</methodname> のたびに指定する必要がなくなるということです。
+                次のコード片は、上のコードと同じ意味となります。
+            </para>
+
+            <programlisting language="php"><![CDATA[
+Zend_Validate::setDefaultNamespaces(array('FirstNamespace', 'SecondNamespace'));
+if (Zend_Validate::is($value, 'MyValidator', array(1, 12)) {
+    // $value は妥当な値です
+}
+
+if (Zend_Validate::is($value, 'OtherValidator', array(1, 12)) {
+    // $value は妥当な値です
+}
+]]></programlisting>
+
+            <para>
+                名前空間の操作のために、次のような便利なメソッド群が用意されています。
+            </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <emphasis><methodname>Zend_Validate::getDefaultNamespaces()</methodname></emphasis>:
+                        設定されているすべての名前空間を配列で返します。
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <emphasis><methodname>Zend_Validate::setDefaultNamespaces()</methodname></emphasis>:
+                        新たなデフォルト名前空間を設定し、既存の名前空間を上書きします。
+                        単一の名前空間の場合は文字列、複数の場合は配列で指定することができます。
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <emphasis><methodname>Zend_Validate::addDefaultNamespaces()</methodname></emphasis>:
+                        新たな名前空間を、既に設定されているものに追加します。
+                        単一の名前空間の場合は文字列、複数の場合は配列で指定することができます。
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <emphasis><methodname>Zend_Validate::hasDefaultNamespaces()</methodname></emphasis>:
+                        デフォルトの名前空間が設定されている場合は true、
+                        設定されていない場合は false を返します。
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </sect3>
     </sect2>
 
     <sect2 id="zend.validate.introduction.translation">

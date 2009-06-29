@@ -7,11 +7,11 @@
     <para>
         <classname>Zend_Amf</classname> fournit le support pour l'
         <ulink url="http://en.wikipedia.org/wiki/Action_Message_Format">Action Message
-        Format</ulink>(AMF) d'Adobe, permettant la communication entre le
+        Format</ulink>(<acronym>AMF</acronym>) d'Adobe, permettant la communication entre le
         <ulink url="http://en.wikipedia.org/wiki/Adobe_Flash_Player">Flash Player</ulink>d'Adobe et
-        PHP. De manière spécifique, il fournit une implémentation serveur pour gérer les requêtes
-        envoyées par le Flash Player au serveur et fait correspondre ces requêtes à des objets, à
-        des méthodes de classe et à des callbacks arbitraires.
+        <acronym>PHP</acronym>. De manière spécifique, il fournit une implémentation serveur pour
+        gérer les requêtes envoyées par le Flash Player au serveur et fait correspondre ces requêtes
+        à des objets, à des méthodes de classe et à des callbacks arbitraires.
     </para>
 
     <para>

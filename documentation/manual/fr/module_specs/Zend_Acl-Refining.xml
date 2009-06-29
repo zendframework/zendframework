@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 15101 -->
+<!-- EN-Revision: 15783 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.acl.refining">
     <title>Affiner les Contrôles d'Accès</title>
@@ -10,18 +10,18 @@
         <para>
             La liste basique définie dans le
             <link linkend="zend.acl.introduction">chapitre précédent</link>montre comment plusieurs
-            privilèges peuvent être alloués pour l'ensemble de la liste (toutes les ressources). En
-            pratique, toutefois, les contrôles d'accès ont souvent des exceptions et des degrés de
-            complexité variables. <classname>Zend_Acl</classname> permet d'atteindre ce degré de
-            finesse d'une manière directe et flexible.
+            privilèges peuvent être alloués pour l'ensemble de l'<acronym>ACL</acronym> (toutes les
+            ressources). En pratique, toutefois, les contrôles d'accès ont souvent des exceptions et
+            des degrés de complexité variables. <classname>Zend_Acl</classname> permet d'atteindre
+            ce degré de finesse d'une manière directe et flexible.
         </para>
 
         <para>
-            Pour l'exemple du CMS, nous avons déterminé que bien que le groupe "Staff" couvre
-            les besoins de la plupart des utilisateurs, un groupe "Marketing" est nécessaire. Ce
-            groupe doit avoir accès à la newsletter et aux dernières news dans le CMS. Le groupe va
-            recevoir la possibilité de publier et d'archiver à la fois des newsletters et des
-            news.
+            Pour l'exemple du <acronym>CMS</acronym>, nous avons déterminé que bien que le groupe
+            "Staff" couvre les besoins de la plupart des utilisateurs, un groupe "Marketing" est
+            nécessaire. Ce groupe doit avoir accès à la newsletter et aux dernières news dans le
+            <acronym>CMS</acronym>. Le groupe va recevoir la possibilité de publier et d'archiver à
+            la fois des newsletters et des news.
         </para>
 
         <para>
@@ -67,7 +67,7 @@ $acl->add(new Zend_Acl_Resource('announcement'), 'news');
 
         <para>
             Ensuite c'est simplement une manière de définir ces règles spécifiques sur les
-            parties cibles de l'ACL&#160;:
+            parties cibles de l'<acronym>ACL</acronym>&#160;:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -87,7 +87,8 @@ $acl->deny(null, 'annonce', 'archive');
 ]]></programlisting>
 
         <para>
-            On peut maintenant interroger les ACL sur base des dernières modifications&#160;:
+            On peut maintenant interroger les <acronym>ACL</acronym> sur base des dernières
+            modifications&#160;:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -121,11 +122,11 @@ echo $acl->isAllowed('administrator', 'announcement', 'archive') ?
         <title>Retirer les Contrôles d'Accès</title>
 
         <para>
-            Pour retirer une ou plusieurs règles des ACL, utilisez simplement la méthode
-            <code>removeAllow()</code> ou <code>removeDeny()</code>. Comme pour
-            <code>allow()</code> et <code>deny()</code>, vous pouvez utiliser une valeur
-            <code>null</code> pour indiquer que la méthode s'applique à tous les rôles, ressources
-            et/ou privilèges.
+            Pour retirer une ou plusieurs règles des <acronym>ACL</acronym>, utilisez simplement la
+            méthode <methodname>removeAllow()</methodname> ou <methodname>removeDeny()</methodname>.
+            Comme pour <methodname>allow()</methodname> et <methodname>deny()</methodname>, vous
+            pouvez utiliser une valeur <constant>NULL</constant> pour indiquer que la méthode
+            s'applique à tous les rôles, ressources et&#160;/&#160;ou privilèges.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -151,8 +152,8 @@ echo $acl->isAllowed('marketing', 'newsletter', 'archive') ?
 
         <para>
             Les privilèges peuvent être modifiés de manière incrémentielle comme indiqué au
-            dessus, mais une valeur <code>null</code> pour les privilèges écrase ces modifications
-            incrémentielles.
+            dessus, mais une valeur <constant>NULL</constant> pour les privilèges écrase ces
+            modifications incrémentielles.
         </para>
 
         <programlisting language="php"><![CDATA[

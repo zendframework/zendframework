@@ -157,7 +157,7 @@ class Zend_Rest_Server implements Zend_Server_Interface
      */
     public function returnResponse($flag = null)
     {
-        if (null == $flag) {
+        if (null === $flag) {
             return $this->_returnResponse;
         }
 

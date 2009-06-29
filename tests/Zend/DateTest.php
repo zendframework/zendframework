@@ -5278,6 +5278,26 @@ class Zend_DateTest extends PHPUnit_Framework_TestCase
         $string = $date->toString(Zend_Date::DATES);
         $this->assertTrue(Zend_Date::isDate($string, Zend_Date::DATES));
     }
+
+    /**
+     * @ZF-7154
+     */
+    public function testZF7154()
+    {
+        $locale = new Zend_Locale('de_AT');
+
+        $date = new Zend_Date(1577833200,$locale);
+        $date2 = new Zend_Date(2006, Zend_Date::YEAR);
+        $date->setTimeZone(date_default_timezone_get());
+
+        $date->setYear(2000);
+        $date->setMonth('Apr');
+        $this->assertSame('2000-04-01T04:00:00+05:00', $date->get(Zend_Date::W3C));
+
+        $date->setYear(2004);
+        $date->setMonth('Februar');
+        $this->assertSame('2004-02-01T04:00:00+05:00', $date->get(Zend_Date::W3C));
+    }
 }
 
 class Zend_Date_TestHelper extends Zend_Date

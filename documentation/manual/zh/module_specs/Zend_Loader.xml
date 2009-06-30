@@ -65,7 +65,7 @@ Zend_Loader::loadClass('Container_Tree',
         </example>
 
         <para>
-            类名将会根据下划线（作为目录分隔线）对应到相应目录下的PHP文件，并加上'.php'，比如Container_Tree会指向Container/Tree.php。
+            类名将会根据下划线（作为目录分隔线）对应到相应目录下的PHP文件，并加上'.php'，比如Container_Tree会指向Container\\Tree.php。
         </para>
 
         <para>

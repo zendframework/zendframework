@@ -218,7 +218,7 @@
         </para>
     </sect2>
 
-    <sect2 id="zend.gdata.introdduction.magicfactory">
+    <sect2 id="zend.gdata.introduction.magicfactory">
         <title>Obtaining instances of Zend_Gdata classes</title>
         <para>
             The Zend Framework naming standards require that all classes be

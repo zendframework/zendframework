@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16359 -->
 <sect1 id="zend.gdata.introduction">
     <title>導入</title>
     <para>
@@ -210,7 +210,7 @@
         </para>
     </sect2>
 
-    <sect2 id="zend.gdata.introdduction.magicfactory">
+    <sect2 id="zend.gdata.introduction.magicfactory">
         <title>Zend_Gdata クラスのインスタンスの取得</title>
         <para>
             Zend Framework の命名規約では、すべてのクラスは

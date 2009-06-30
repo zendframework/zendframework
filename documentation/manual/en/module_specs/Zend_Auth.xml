@@ -116,8 +116,8 @@ class MyAuthAdapter implements Zend_Auth_Adapter_Interface
         <itemizedlist>
             <listitem>
                 <para>
-                    <methodname>isValid()</methodname> - returns true if and only if the result
-                    represents a successful authentication attempt
+                    <methodname>isValid()</methodname> - returns <constant>TRUE</constant> if and
+                    only if the result represents a successful authentication attempt
                 </para>
             </listitem>
             <listitem>
@@ -232,7 +232,7 @@ switch ($result->getCode()) {
             <note>
                 <para>
                     If automatic persistent storage of the identity is not appropriate for a
-                    particular use case, then developers may forgo using the
+                    particular use case, then developers may forgot using the
                     <classname>Zend_Auth</classname> class altogether, instead using an adapter
                     class directly.
                 </para>

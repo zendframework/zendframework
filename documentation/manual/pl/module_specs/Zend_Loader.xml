@@ -96,7 +96,7 @@ Zend_Loader::loadClass('Container_Tree',
             Łańcuch znaków określający nazwę klasy jest konwertowany do
             relatywnej ścieżki przez zamianę podkreślników na separatory ścieżek,
             oraz przez dodanie na końcu nazwy rozszerzenia '.php'. W powyższym
-            przykładzie, nazwa 'Container_Tree' staje się 'Container/Tree.php'.
+            przykładzie, nazwa 'Container_Tree' staje się 'Container\\Tree.php'.
         </para>
 
         <para>

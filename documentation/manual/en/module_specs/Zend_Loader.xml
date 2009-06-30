@@ -91,7 +91,7 @@ Zend_Loader::loadClass('Container_Tree',
         <para>
             The string specifying the class is converted to a relative path
             by substituting underscores with directory separators for your OS, and appending
-            '.php'. In the example above, 'Container_Tree' becomes 'Container/Tree.php' on Windows.
+            '.php'. In the example above, 'Container_Tree' becomes 'Container\\Tree.php' on Windows.
         </para>
 
         <para>

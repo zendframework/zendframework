@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16382 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.cache.backends">
     <title>Les backends Zend_Cache</title>
@@ -33,26 +33,26 @@
                 </thead>
                 <tbody>
                     <row>
-                        <entry><code>cache_dir</code></entry>
-                        <entry><code>string</code></entry>
-                        <entry><code>'/tmp/'</code></entry>
+                        <entry><emphasis>cache_dir</emphasis></entry>
+                        <entry><type>String</type></entry>
+                        <entry><filename>/tmp/</filename></entry>
                         <entry>Répertoire où stocker les fichiers de cache</entry>
                     </row>
                     <row>
-                        <entry><code>file_locking</code></entry>
-                        <entry><code>boolean</code></entry>
-                        <entry><code>true</code></entry>
+                        <entry><emphasis>file_locking</emphasis></entry>
+                        <entry><type>Boolean</type></entry>
+                        <entry><constant>TRUE</constant></entry>
                         <entry>
                             Active / désactive le verrou de fichier&#160;: peut éviter la
                             corruption du cache dans de mauvaises circonstances, mais il n'aide en
                             rien sur des serveur multithreadés ou sur des systèmes de fichier
-                            NFS...
+                            <acronym>NFS</acronym>...
                         </entry>
                     </row>
                     <row>
-                        <entry><code>read_control</code></entry>
-                        <entry><code>boolean</code></entry>
-                        <entry><code>true</code></entry>
+                        <entry><emphasis>read_control</emphasis></entry>
+                        <entry><type>Boolean</type></entry>
+                        <entry><constant>TRUE</constant></entry>
                         <entry>
                             Active / désactive le contrôle de lecture&#160;: si activé, une clé
                             de contrôle est embarquée dans le fichier de cache et cette clé est
@@ -60,9 +60,9 @@
                         </entry>
                     </row>
                     <row>
-                        <entry><code>read_control_type</code></entry>
-                        <entry><code>string</code></entry>
-                        <entry><code>'crc32'</code></entry>
+                        <entry><emphasis>read_control_type</emphasis></entry>
+                        <entry><type>String</type></entry>
+                        <entry>'crc32'</entry>
                         <entry>
                             Type de contrôle de lecture (seulement si le contrôle de lecture
                             est activé). Les valeurs disponibles sont&#160;: "md5" (meilleur mais
@@ -73,9 +73,9 @@
                         </entry>
                     </row>
                     <row>
-                        <entry><code>hashed_directory_level</code></entry>
-                        <entry><code>int</code></entry>
-                        <entry><code>0</code></entry>
+                        <entry><emphasis>hashed_directory_level</emphasis></entry>
+                        <entry><type>Integer</type></entry>
+                        <entry>0</entry>
                         <entry>
                             Niveau de structure du hash du répertoire&#160;: 0 signifie "pas de
                             hashage de la structure du répertoire", 1 signifie "un niveau de
@@ -87,32 +87,32 @@
                         </entry>
                     </row>
                     <row>
-                        <entry><code>hashed_directory_umask</code></entry>
-                        <entry><code>int</code></entry>
-                        <entry><code>0700</code></entry>
+                        <entry><emphasis>hashed_directory_umask</emphasis></entry>
+                        <entry><type>Integer</type></entry>
+                        <entry>0700</entry>
                         <entry>Umask pour l'arborescence</entry>
                     </row>
                     <row>
-                        <entry><code>file_name_prefix</code></entry>
-                        <entry><code>string</code></entry>
-                        <entry><code>'zend_cache'</code></entry>
+                        <entry><emphasis>file_name_prefix</emphasis></entry>
+                        <entry><type>String</type></entry>
+                        <entry>'zend_cache'</entry>
                         <entry>
                             Préfixe pour les fichiers mis en cache&#160;; faîtes très attention
                             avec cette option, en cas de valeur trop générique dans le dossier de
-                            cache (comme /tmp), ceci peut causer des désastres lors du nettoyage du
-                            cache.
+                            cache (comme <filename>/tmp</filename>), ceci peut causer des désastres
+                            lors du nettoyage du cache.
                         </entry>
                     </row>
                     <row>
-                        <entry><code>cache_file_umask</code></entry>
-                        <entry><code>int</code></entry>
-                        <entry><code>0700</code></entry>
+                        <entry><emphasis>cache_file_umask</emphasis></entry>
+                        <entry><type>Integer</type></entry>
+                        <entry>0700</entry>
                         <entry>umask des fichiers de cache.</entry>
                     </row>
                     <row>
-                        <entry><code>metatadatas_array_max_size</code></entry>
-                        <entry><code>int</code></entry>
-                        <entry><code>100</code></entry>
+                        <entry><emphasis>metatadatas_array_max_size</emphasis></entry>
+                        <entry><type>Integer</type></entry>
+                        <entry>100</entry>
                         <entry>
                             Taille maximale interne pour les tableaux de métadonnées (ne
                             changez pas cette valeur à moins de bien savoir ce que vous
@@ -148,25 +148,28 @@
                 </thead>
                 <tbody>
                     <row>
-                        <entry><code>cache_db_complete_path (obligatoire)</code></entry>
-                        <entry><code>string</code></entry>
-                        <entry><code>null</code></entry>
+                        <entry><emphasis>cache_db_complete_path (obligatoire)</emphasis></entry>
+                        <entry><type>String</type></entry>
+                        <entry><constant>NULL</constant></entry>
                         <entry>
                             Le chemin complet (nom du fichier inclus) de la base de donnée
                             SQLite
                         </entry>
                     </row>
                     <row>
-                        <entry><code>automatic_vacuum_factor</code></entry>
-                        <entry><code>int</code></entry>
-                        <entry><code>10</code></entry>
+                        <entry><emphasis>automatic_vacuum_factor</emphasis></entry>
+                        <entry><type>Integer</type></entry>
+                        <entry>10</entry>
                         <entry>
                             Désactive / Active le processus de vidange automatique. Celui-ci
                             défragmente le fichier de base de données (et diminue sa taille) quand
-                            clean() ou delete() est appelé : 0 pour une vidange automatique ; 1
-                            pour une vidange systématique (quand clean() ou delete() est
+                            <methodname>clean()</methodname> ou <methodname>delete()</methodname>
+                            est appelé&#160;: 0 pour une vidange automatique&#160;; 1
+                            pour une vidange systématique (quand <methodname>clean()</methodname>
+                            ou <methodname>delete()</methodname> est
                             appelé)&#160;; x (entier) &gt; 1 pour une vidange automatique
-                            aléatoirement 1 fois sur x clean() ou delete().
+                            aléatoirement 1 fois sur x <methodname>clean()</methodname> ou
+                            <methodname>delete()</methodname>.
                         </entry>
                     </row>
                 </tbody>
@@ -181,13 +184,13 @@
             Ce backend (étendu) stocke les enregistrements de cache dans un serveur memcached.
             <ulink url="http://www.danga.com/memcached/">Memcached</ulink> est un système de cache
             en mémoire distribuée, de haute performance. Pour utiliser ce backend, vous devez avoir
-            un démon memcached et l'extension PECL
-            <ulink url="http://pecl.php.net/package/memcache">memcache</ulink>.
+            un démon memcached et l'extension
+            <ulink url="http://pecl.php.net/package/memcache">PECL memcache</ulink>.
         </para>
 
         <para>
-            ATTENTION : avec ce backend, les balises ("tags") ne sont pas supportées pour le
-            moment comme l'argument "<code>doNotTestCacheValidity=true</code>".
+            Attention : avec ce backend, les balises ("tags") ne sont pas supportées pour le
+            moment comme l'argument "doNotTestCacheValidity=true".
         </para>
 
         <para>Les options disponibles sont&#160;:</para>
@@ -206,13 +209,12 @@
                 </thead>
                 <tbody>
                     <row>
-                        <entry><code>servers</code></entry>
-                        <entry><code>array</code></entry>
+                        <entry><emphasis>servers</emphasis></entry>
+                        <entry><type>Array</type></entry>
                         <entry>
-                            <code>array(array('host' =&gt; 'localhost', 'port' =&gt; 11211,
-                            'persistent' =&gt; true, 'weight' =&gt; 1, 'timeout' =&gt; 5,
-                            'retry_interval' =&gt; 15, 'status' =&gt; true, 'failure_callback'
-                            =&gt; ''))</code>
+                              array(array('host' => 'localhost', 'port' => 11211, 'persistent' =>
+                                  true, 'weight' => 1, 'timeout' => 5, 'retry_interval' => 15,
+                                  'status' => true, 'failure_callback' => '' ))
                         </entry>
                         <entry>
                             Un tableau de serveurs memcached&#160;; chaque serveur memcached est
@@ -229,21 +231,21 @@
                         </entry>
                     </row>
                     <row>
-                        <entry><code>compression</code></entry>
-                        <entry><code>boolean</code></entry>
-                        <entry><code>false</code></entry>
+                        <entry><emphasis>compression</emphasis></entry>
+                        <entry><type>Boolean</type></entry>
+                        <entry><constant>FALSE</constant></entry>
                         <entry>
-                            <code>true</code>, si vous voulez utiliser la compression à la
+                            <constant>TRUE</constant>, si vous voulez utiliser la compression à la
                             volée
                         </entry>
                     </row>
                     <row>
-                        <entry><code>compatibility</code></entry>
-                        <entry><code>boolean</code></entry>
-                        <entry><code>false</code></entry>
+                        <entry><emphasis>compatibility</emphasis></entry>
+                        <entry><type>Boolean</type></entry>
+                        <entry><constant>FALSE</constant></entry>
                         <entry>
-                            <code>true</code>, si vous voulez utiliser le mode de
-                            compatibilité avec les anciens serveurs/extensions memcache
+                            <constant>TRUE</constant>, si vous voulez utiliser le mode de
+                            compatibilité avec les anciens serveurs&#160;/&#160;extensions memcache
                         </entry>
                     </row>
                 </tbody>
@@ -257,12 +259,12 @@
         <para>
             Ce backend (étendu) stocke les enregistrements de cache en mémoire partagée grâce
             à l'extension <ulink url="http://pecl.php.net/package/APC">APC</ulink>
-            (Alternative PHP Cache) qui est requise pour utiliser ce backend.
+            (Alternative <acronym>PHP</acronym> Cache) qui est requise pour utiliser ce backend.
         </para>
 
         <para>
             Attention: avec ce backend, les balises ("tags") ne sont pas supportées pour le
-            moment comme l'argument "<code>doNotTestCacheValidity=true</code>".
+            moment comme l'argument "doNotTestCacheValidity=true".
         </para>
 
         <para>Il n'y a pas d'options pour ce backend.</para>
@@ -278,8 +280,8 @@
         </para>
 
         <para>
-            ATTENTION : avec ce backend, les balises ("tags") ne sont pas supportées pour le
-            moment comme l'argument "<code>doNotTestCacheValidity=true</code>".
+            Attention : avec ce backend, les balises ("tags") ne sont pas supportées pour le
+            moment comme l'argument "doNotTestCacheValidity=true".
         </para>
 
         <para>Les options disponibles sont&#160;:</para>
@@ -298,21 +300,22 @@
                 </thead>
                 <tbody>
                     <row>
-                        <entry><code>user</code></entry>
-                        <entry><code>string</code></entry>
-                        <entry><code>null</code></entry>
+                        <entry><emphasis>user</emphasis></entry>
+                        <entry><type>String</type></entry>
+                        <entry><constant>NULL</constant></entry>
                         <entry>
-                            <code>xcache.admin.user</code>, nécessaire pour la méthode
-                            <code>clean()</code>.
+                            <filename>xcache.admin.user</filename>, nécessaire pour la
+                            méthode <methodname>clean()</methodname>.
                         </entry>
                     </row>
                     <row>
-                        <entry><code>password</code></entry>
-                        <entry><code>string</code></entry>
-                        <entry><code>null</code></entry>
+                        <entry><emphasis>password</emphasis></entry>
+                        <entry><type>String</type></entry>
+                        <entry><constant>NULL</constant></entry>
                         <entry>
-                            <code>xcache.admin.pass</code> (en texte clair non MD5),
-                            nécessaire pour la méthode <code>clean()</code>.
+                            <filename>xcache.admin.pass</filename> (en texte clair non
+                            <acronym>MD5</acronym>), nécessaire pour la méthode
+                            <methodname>clean()</methodname>.
                         </entry>
                     </row>
                 </tbody>
@@ -324,20 +327,20 @@
         <title>Zend_Cache_Backend_ZendPlatform</title>
 
         <para>
-            Ce backend utilise l'API de cache de contenu de la
+            Ce backend utilise l'<acronym>API</acronym> de cache de contenu de la
             <ulink url="http://www.zend.com/products/platform">Zend Platform</ulink>.
             Naturellement, pour utiliser ce backend, vous devez avoir installé une Zend Platorm.
         </para>
 
         <para>
             Ce backend supporte les balises ("tags") mais ne supporte pas le mode de
-            nettoyage <code>CLEANING_MODE_NOT_MATCHING_TAG</code>.
+            nettoyage <constant>CLEANING_MODE_NOT_MATCHING_TAG</constant>.
         </para>
 
         <para>
             Spécifiez ce backend en utilisant un séparateur de mot - "-", ".", " " ou "_" -
             entre les mots "Zend" et "Platform" quand vous utilisez la méthode
-            <classname>Zend_Cache::factory()</classname>&#160;:
+            <methodname>Zend_Cache::factory()</methodname>&#160;:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -378,89 +381,89 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
                 </thead>
                 <tbody>
                     <row>
-                        <entry><code>slow_backend</code></entry>
-                        <entry><code>string</code></entry>
-                        <entry><code>File</code></entry>
+                        <entry><emphasis>slow_backend</emphasis></entry>
+                        <entry><type>String</type></entry>
+                        <entry>File</entry>
                         <entry>le nom du backend "lent"</entry>
                     </row>
                     <row>
-                        <entry><code>fast_backend</code></entry>
-                        <entry><code>string</code></entry>
-                        <entry><code>Apc</code></entry>
+                        <entry><emphasis>fast_backend</emphasis></entry>
+                        <entry><type>String</type></entry>
+                        <entry>Apc</entry>
                         <entry>le nom du backend "rapide"</entry>
                     </row>
                     <row>
-                        <entry><code>slow_backend_options</code></entry>
-                        <entry><code>array</code></entry>
-                        <entry><code>array()</code></entry>
+                        <entry><emphasis>slow_backend_options</emphasis></entry>
+                        <entry><type>Array</type></entry>
+                        <entry><methodname>array()</methodname></entry>
                         <entry>les options du backend "lent"</entry>
                     </row>
                     <row>
-                        <entry><code>fast_backend_options</code></entry>
-                        <entry><code>array</code></entry>
-                        <entry><code>array()</code></entry>
+                        <entry><emphasis>fast_backend_options</emphasis></entry>
+                        <entry><type>Array</type></entry>
+                        <entry><methodname>array()</methodname></entry>
                         <entry>les options du backend "rapide"</entry>
                     </row>
                     <row>
-                        <entry><code>slow_backend_custom_naming</code></entry>
-                        <entry><code>boolean</code></entry>
-                        <entry><code>false</code></entry>
+                        <entry><emphasis>slow_backend_custom_naming</emphasis></entry>
+                        <entry><type>Boolean</type></entry>
+                        <entry><constant>FALSE</constant></entry>
                         <entry>
-                            si <code>true</code>, l'argument <code>slow_backend</code> est
-                            utilisé en tant que nom complet de classe ; si <code>false</code>,
-                            l'argument frontend est utilisé concaténé à
-                            "Zend_Cache_Backend_[...]"
+                            si <constant>TRUE</constant>, l'argument "slow_backend" est
+                            utilisé en tant que nom complet de classe&#160;; si
+                            <constant>FALSE</constant>, l'argument frontend est utilisé concaténé à
+                            "<classname>Zend_Cache_Backend_&lt;...&gt;</classname>"
                         </entry>
                     </row>
                     <row>
-                        <entry><code>fast_backend_custom_naming</code></entry>
-                        <entry><code>boolean</code></entry>
-                        <entry><code>false</code></entry>
+                        <entry><emphasis>fast_backend_custom_naming</emphasis></entry>
+                        <entry><type>Boolean</type></entry>
+                        <entry><constant>FALSE</constant></entry>
                         <entry>
-                            si <code>true</code>, l'argument <code>fast_backend</code> est
-                            utilisé en tant que nom complet de classe ; si <code>false</code>,
-                            l'argument frontend est utilisé concaténé à
-                            "Zend_Cache_Backend_[...]"
+                            si <constant>TRUE</constant>, l'argument "fast_backend" est
+                            utilisé en tant que nom complet de classe&#160;; si
+                            <constant>FALSE</constant>, l'argument frontend est utilisé concaténé à
+                            "<classname>Zend_Cache_Backend_&lt;...&gt;</classname>"
                         </entry>
                     </row>
                     <row>
-                        <entry><code>slow_backend_autoload</code></entry>
-                        <entry><code>boolean</code></entry>
-                        <entry><code>false</code></entry>
+                        <entry><emphasis>slow_backend_autoload</emphasis></entry>
+                        <entry><type>Boolean</type></entry>
+                        <entry><constant>FALSE</constant></entry>
                         <entry>
-                            si <code>true</code>, il n'y aura pas de require_once pour le
-                            <code>slow_backend</code> (utile seulement pour les backends
+                            si <constant>TRUE</constant>, il n'y aura pas de require_once pour le
+                            "slow_backend" (utile seulement pour les backends
                             personnalisés)
                         </entry>
                     </row>
                     <row>
-                        <entry><code>fast_backend_autoload</code></entry>
-                        <entry><code>boolean</code></entry>
-                        <entry><code>false</code></entry>
+                        <entry><emphasis>fast_backend_autoload</emphasis></entry>
+                        <entry><type>Boolean</type></entry>
+                        <entry><constant>FALSE</constant></entry>
                         <entry>
-                            si <code>true</code>, il n'y aura pas de require_once pour le
-                            <code>fast_backend</code> (utile seulement pour les backends
+                            si <constant>TRUE</constant>, il n'y aura pas de require_once pour le
+                            "fast_backend" (utile seulement pour les backends
                             personnalisés)
                         </entry>
                     </row>
                     <row>
-                        <entry><code>auto_refresh_fast_cache</code></entry>
-                        <entry><code>boolean</code></entry>
-                        <entry><code>true</code></entry>
+                        <entry><emphasis>auto_refresh_fast_cache</emphasis></entry>
+                        <entry><type>Boolean</type></entry>
+                        <entry><constant>TRUE</constant></entry>
                         <entry>
-                            si <code>true</code>, rafraîchissement automatique du cache
+                            si <constant>TRUE</constant>, rafraîchissement automatique du cache
                             rapide quand un enregistrement est appelé
                         </entry>
                     </row>
                     <row>
-                        <entry><code>stats_update_factor</code></entry>
-                        <entry><code>integer</code></entry>
-                        <entry><code>10</code></entry>
+                        <entry><emphasis>stats_update_factor</emphasis></entry>
+                        <entry><type>Integer</type></entry>
+                        <entry>10</entry>
                         <entry>
-                            désactive / personnalise le calcul du pourcentage de remplissage
-                            du backend rapide (lors d'une sauvegarde d'un enregistrement dans le
-                            cache, le calcul du remplissage est effectué aléatoirement 1 fois sur x
-                            écritures de cache)
+                            désactive&#160;/&#160;personnalise le calcul du pourcentage de
+                            remplissage du backend rapide (lors d'une sauvegarde d'un enregistrement
+                            dans le cache, le calcul du remplissage est effectué aléatoirement
+                            1 fois sur x écritures de cache)
                         </entry>
                     </row>
                 </tbody>
@@ -478,14 +481,14 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
         </para>
 
         <para>
-            ATTENTION : avec ces backends ne supportent pas les balises ("tags") pour le
+            Attention : avec ces backends ne supportent pas les balises ("tags") pour le
             moment de même que l'argument "doNotTestCacheValidity=true".
         </para>
 
         <para>
             Ces backends fonctionnent seulement dans l'environnement de Zend Server pour les
-            pages requêtées à travers HTTP(S) et ne fonctionnent pas pour les scripts exécutés en
-            ligne de commande.
+            pages requêtées à travers <acronym>HTTP</acronym> ou <acronym>HTTPS</acronym> et ne
+            fonctionnent pas pour les scripts exécutés en ligne de commande.
         </para>
 
         <para>Il n'y a pas d'options pour ce backend.</para>

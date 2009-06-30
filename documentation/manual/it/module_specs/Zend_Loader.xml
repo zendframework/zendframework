@@ -80,7 +80,7 @@ Zend_Loader::loadClass('Container_Tree',
 
         <para>
             La stringa che specifica la classe è convertita in un percorso relativo sostituendo i separatori di cartella ai caratteri di underscore ("_") ed appendendo l'estensione '.php'.
-            Nell'esempio precedente 'Container_Tree' diventa 'Container/Tree.php'.
+            Nell'esempio precedente 'Container_Tree' diventa 'Container\\Tree.php'.
         </para>
 
         <para>

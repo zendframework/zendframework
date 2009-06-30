@@ -166,6 +166,33 @@ if ($validator->isValid($iban)) {
         </para>
     </sect2>
 
+    <sect2 id="zend.validate.set.identical">
+        <title>Identical</title>
+        <para>
+            Returns <constant>TRUE</constant> if and only if a given token is identical
+            with <code>$value</code>. This validator can handle any given type.
+        </para>
+
+        <para>
+            The token to validate against can eighter be set as parameter at initiation,
+            or by using the <methodname>setToken()</methodname> method.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// Setting the token at initiation
+$validator = new Zend_Validate_Identical(array('one' => 'two'));
+if ($validator->isValid(array('one' => 'two'))) { // token valid
+    // do something
+}
+
+// Setting the token by using setToken()
+$validator->setToken(true);
+if ($validator->isValid(1)) { // token invalid
+    // do something
+}
+]]></programlisting>
+    </sect2>
+
     <sect2 id="zend.validate.set.in_array">
         <title>InArray</title>
         <para>

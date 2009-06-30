@@ -50,19 +50,20 @@ class Zend_Validate_Identical extends Zend_Validate_Abstract
      * @var array
      */
     protected $_messageVariables = array(
-        'token' => '_token'
+        'token' => '_tokenString'
     );
 
     /**
      * Original token against which to validate
      * @var string
      */
+    protected $_tokenString;
     protected $_token;
 
     /**
      * Sets validator options
      *
-     * @param  string $token
+     * @param  mixed $token
      * @return void
      */
     public function __construct($token = null)
@@ -75,12 +76,13 @@ class Zend_Validate_Identical extends Zend_Validate_Abstract
     /**
      * Set token against which to compare
      *
-     * @param  string $token
+     * @param  mixed $token
      * @return Zend_Validate_Identical
      */
     public function setToken($token)
     {
-        $this->_token = (string) $token;
+        $this->_tokenstring = (string) $token;
+        $this->_token       = $token;
         return $this;
     }
 
@@ -105,8 +107,8 @@ class Zend_Validate_Identical extends Zend_Validate_Abstract
      */
     public function isValid($value)
     {
-        $this->_setValue($value);
-        $token = $this->getToken();
+        $this->_setValue((string) $value);
+        $token        = $this->getToken();
 
         if ($token === null) {
             $this->_error(self::MISSING_TOKEN);

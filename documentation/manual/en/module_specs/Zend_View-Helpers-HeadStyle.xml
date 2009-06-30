@@ -14,7 +14,7 @@
         <para>
             <link linkend="zend.view.helpers.initial.headlink">HeadLink</link>
             should be used to create <code>&lt;link&gt;</code> elements for
-            including external stylesheets. <code>HeadScript</code> is used when
+            including external stylesheets. <code>HeadStyle</code> is used when
             you wish to define your stylesheets inline.
         </para>
     </note>

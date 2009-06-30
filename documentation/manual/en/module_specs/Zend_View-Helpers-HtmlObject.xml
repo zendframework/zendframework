@@ -17,25 +17,25 @@
     <itemizedlist>
         <listitem>
             <para>
-                <code>formFlash</code>
+                <code>htmlFlash</code>
                 Generates markup for embedding Flash files.
             </para>
         </listitem>
         <listitem>
             <para>
-                <code>formObject</code>
+                <code>htmlObject</code>
                 Generates markup for embedding a custom Object.
             </para>
         </listitem>
         <listitem>
             <para>
-                <code>formPage</code>
+                <code>htmlPage</code>
                 Generates markup for embedding other (X)HTML pages.
             </para>
         </listitem>
         <listitem>
             <para>
-                <code>formQuicktime</code>
+                <code>htmlQuicktime</code>
                 Generates markup for embedding QuickTime files.
             </para>
         </listitem>

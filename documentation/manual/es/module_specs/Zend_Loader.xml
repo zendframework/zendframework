@@ -93,7 +93,7 @@ Zend_Loader::loadClass('Container_Tree',
         <para>
             La cadena que especifica la clase es convertida a una ruta relativa sustituyendo las barras
             bajas (_) por el separador de carpeta de su Sistema Operativo, y añadiendo
-            '.php'. En el ejemplo de arriba, 'Container_Tree' se convierte en 'Container/Tree.php' en Windows.
+            '.php'. En el ejemplo de arriba, 'Container_Tree' se convierte en 'Container\\Tree.php' en Windows.
         </para>
 
         <para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15997 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.auth.adapter.http">
     <title>Adaptateur d'authentification HTTP</title>
@@ -9,66 +9,69 @@
 
         <para>
             <classname>Zend_Auth_Adapter_Http</classname> fournit une implémentation des
-            authentifications HTTP
+            authentifications <acronym>HTTP</acronym>
             <ulink url="http://en.wikipedia.org/wiki/Basic_authentication_scheme">Basic</ulink>et
             <ulink url="http://en.wikipedia.org/wiki/Digest_access_authentication">Digest</ulink>,
             au regard de la norme
             <ulink url="http://tools.ietf.org/html/rfc2617">RFC-2617</ulink>. Digest est une
-            méthode d'authentification HTTP basée sur Basic, mais qui augmente la sécurité en
-            fournissant un moyen d'authentification sans transmettre le mot de passe en clair, sur
-            le réseau.
+            méthode d'authentification <acronym>HTTP</acronym> basée sur Basic, mais qui augmente
+            la sécurité en fournissant un moyen d'authentification sans transmettre le mot de passe
+            en clair, sur le réseau.
         </para>
 
         <para>
             <emphasis>Caractéristiques principales&#160;:</emphasis>
-            <itemizedlist>
-                <listitem>
-                    <para>Support des méthodes Basic et Digest&#160;;</para>
-                </listitem>
-                <listitem>
-                    <para>
-                        Propose tous les des schémas de challenge, le client peut répondre avec
-                        le schéma qu'il supporte&#160;;
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>Support de l'authentification Proxy&#160;;</para>
-                </listitem>
-                <listitem>
-                    <para>
-                        Inclus le support d'authentification de type fichier, et fournit une
-                        interface pour créer son propre support, comme une base de données.
-                    </para>
-                </listitem>
-            </itemizedlist>
         </para>
 
+        <itemizedlist>
+            <listitem>
+                <para>Support des méthodes Basic et Digest&#160;;</para>
+            </listitem>
+            <listitem>
+                <para>
+                    Propose tous les des schémas de challenge, le client peut répondre avec
+                    le schéma qu'il supporte&#160;;
+                </para>
+            </listitem>
+            <listitem>
+                <para>Support de l'authentification Proxy&#160;;</para>
+            </listitem>
+            <listitem>
+                <para>
+                    Inclus le support d'authentification de type fichier, et fournit une
+                    interface pour créer son propre support, comme une base de données.
+                </para>
+            </listitem>
+        </itemizedlist>
+
         <para>
-            Il y a quelques caractéristiques de la RFC-2617 qui ne sont pas encore
-            supportées&#160;:
-            <itemizedlist>
-                <listitem>
-                    <para>
-                        Le "Nonce tracking", mécanisme qui évite les attaques par
-                        répétitions&#160;;
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>Authentification avec vérification d'intégrité ("auth-int")&#160;;</para>
-                </listitem>
-                <listitem>
-                    <para>En-tête HTTP "Authentication-Info".</para>
-                </listitem>
-            </itemizedlist>
+            Il y a quelques caractéristiques de la <acronym>RFC</acronym>-2617 qui ne sont pa
+            encore supportées&#160;:
         </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    Le "Nonce tracking", mécanisme qui évite les attaques par
+                    répétitions&#160;;
+                </para>
+            </listitem>
+            <listitem>
+                <para>Authentification avec vérification d'intégrité ("auth-int")&#160;;</para>
+            </listitem>
+            <listitem>
+                <para>En-tête <acronym>HTTP</acronym> "Authentication-Info".</para>
+            </listitem>
+        </itemizedlist>
     </sect2>
 
     <sect2 id="zend.auth.adapter.design_overview">
         <title>Fonctionnement</title>
 
         <para>
-            Cette adaptateur utilise 2 sous-composants, la classe d'authentification HTTP
-            elle-même et des "Résolveurs." La classe d'authentification HTTP encapsule la logique
+            Cette adaptateur utilise 2 sous-composants, la classe d'authentification
+            <acronym>HTTP</acronym> elle-même et des "Résolveurs." La classe d'authentification
+            <acronym>HTTP</acronym> encapsule la logique
             de commande des authentifications Basic et Digest. Elle utilise aussi un résolveur pour
             chercher les identifiants sur un disque (fichier texte par défaut), et les analyser.
             Ils sont alors comparés aux valeurs envoyées par le client pour déterminer une
@@ -83,75 +86,77 @@
             La classe <classname>Zend_Auth_Adapter_Http</classname> requière un tableau de
             configuration lors de sa construction. Il y a plusieurs options de configuration
             disponibles, dont certaines requises&#160;:
-            <table id="zend.auth.adapter.configuration_options.table">
-                <title>Liste des options de configuration</title>
-
-                <tgroup cols="3">
-                    <thead>
-                        <row>
-                            <entry>Nom</entry>
-                            <entry>Requise (?)</entry>
-                            <entry>Description</entry>
-                        </row>
-                    </thead>
-                    <tbody>
-                        <row>
-                            <entry><code>accept_schemes</code></entry>
-                            <entry>Oui</entry>
-                            <entry>
-                                Détermine les schémas d'authentification que l'adaptateur va
-                                accepter du client. Ce doit être une liste séparée par des espaces,
-                                contenant <code>'basic'</code> et/ou <code>'digest'</code>.
-                            </entry>
-                        </row>
-                        <row>
-                            <entry><code>realm</code></entry>
-                            <entry>Oui</entry>
-                            <entry>
-                                Fournit le nom de l'authentification (<code>realm</code>)&#160;;
-                                chaque nom d'utilisateur doit être unique, par nom
-                                d'authentification.
-                            </entry>
-                        </row>
-                        <row>
-                            <entry><code>digest_domains</code></entry>
-                            <entry>
-                                Oui lorsque<code> "accept_schemes"</code> contient
-                                <code>"digest"</code>
-                            </entry>
-                            <entry>
-                                Liste d'URI, séparées d'espace, pour lesquelles la même information
-                                d'authentification est valide. Elles peuvent pointer vers
-                                différents serveurs.
-                            </entry>
-                        </row>
-                        <row>
-                            <entry><code>nonce_timeout</code></entry>
-                            <entry>
-                                Oui lorsque <code>"accept_schemes"</code> contient
-                                <code>"digest"</code>
-                            </entry>
-                            <entry>
-                                Nombre de seconde pour la validité du jeton d'authentification.
-                                Voyez les notes ci-dessous.
-                            </entry>
-                        </row>
-                        <row>
-                            <entry><code>proxy_auth</code></entry>
-                            <entry>Non</entry>
-                            <entry>
-                                Désactivé par défaut. Activez le pour effectuer une
-                                authentification via un Proxy.
-                            </entry>
-                        </row>
-                    </tbody>
-                </tgroup>
-            </table>
         </para>
+
+        <table id="zend.auth.adapter.configuration_options.table">
+            <title>Liste des options de configuration</title>
+
+            <tgroup cols="3">
+                <thead>
+                    <row>
+                        <entry>Nom</entry>
+                        <entry>Requise (?)</entry>
+                        <entry>Description</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><emphasis>accept_schemes</emphasis></entry>
+                        <entry>Oui</entry>
+                        <entry>
+                            Détermine les schémas d'authentification que l'adaptateur va
+                            accepter du client. Ce doit être une liste séparée par des espaces,
+                            contenant <emphasis>'basic'</emphasis> et&#160;/&#160;ou
+                            <emphasis>'digest'</emphasis>.
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>realm</emphasis></entry>
+                        <entry>Oui</entry>
+                        <entry>
+                            Fournit le nom de l'authentification ("realm")&#160;;
+                            chaque nom d'utilisateur doit être unique, par nom
+                            d'authentification.
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>digest_domains</emphasis></entry>
+                        <entry>
+                            Oui lorsque<emphasis> "accept_schemes"</emphasis> contient
+                            <emphasis>"digest"</emphasis>
+                        </entry>
+                        <entry>
+                            Liste d'<acronym>URI</acronym>, séparées d'espace, pour lesquelles la
+                            même information d'authentification est valide. Les
+                            <acronym>URI</acronym> peuvent pointer vers différents serveurs.
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>nonce_timeout</emphasis></entry>
+                        <entry>
+                            Oui lorsque <emphasis>"accept_schemes"</emphasis> contient
+                            <emphasis>"digest"</emphasis>
+                        </entry>
+                        <entry>
+                            Nombre de seconde pour la validité du jeton d'authentification.
+                            Voyez les notes ci-dessous.
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>proxy_auth</emphasis></entry>
+                        <entry>Non</entry>
+                        <entry>
+                            Désactivé par défaut. Activez le pour effectuer une
+                            authentification via un Proxy.
+                        </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
 
         <note>
             <para>
-                L'implémentation actuelle du <code>nonce_timeout</code> a des effets
+                L'implémentation actuelle du <emphasis>nonce_timeout</emphasis> a des effets
                 intéressants. Ce paramètre doit déterminer le temps de validité d'un jeton,
                 autrement dit : le temps d'acceptation d'un client. Par exemple, une valeur de 3600
                 aura pour effet de commander à l'adaptateur le rappel des informations
@@ -166,12 +171,11 @@
 
         <para>
             Le travail du résolveur consiste à récupérer un nom d'utilisateur
-            (<code>username</code>) et un nom d'authentification (<code>realm</code>) et retourner
+            ("username") et un nom d'authentification ("realm") et retourner
             des identifiants. L'authentification Basic s'attend à recevoir une version encodée
-            Base64 du mot de passe (<code>password</code>). L'authentification Digest, elle, attend
-            un hash du <code>username</code>, du <code>realm</code>, et du <code>password</code>
-            (séparés par des deux-points). Actuellement le seul algorithme de hash supporté est
-            MD5.
+            Base64 du mot de passe ("password"). L'authentification Digest, elle, attend
+            un hash du "username", du "realm", et du "password" (séparés par des deux-points).
+            Actuellement le seul algorithme de hash supporté est <acronym>MD5</acronym>.
         </para>
 
         <para>
@@ -187,32 +191,44 @@
             <para>
                 Cette classe est très simple. Son constructeur ne prend qu'un paramètre qui
                 définit le nom du fichier cible. Un accesseur existe aussi. Sa méthode
-                <code>resolve()</code> traverse le fichier texte à la recherche de la ligne qui
-                correspond au <code>username</code> et au <code>realm</code>. La syntaxe est
-                similaire aux fichiers <code>htpasswd</code> d'Apache&#160;:
-                <programlisting><![CDATA[
+                <methodname>resolve()</methodname> traverse le fichier texte à la recherche de la
+                ligne qui correspond au "username" et au "realm". La syntaxe est
+                similaire aux fichiers htpasswd d'Apache&#160;:
+            </para>
+
+            <programlisting language="txt"><![CDATA[
     <username>:<realm>:<credentials>\n
 ]]></programlisting>
-                Chaque ligne se décompose en 3 champs - <code>username</code>, <code>realm</code>,
-                et <code>credentials</code> - séparés par des deux-points. Le résolveur ne fait que
-                retourner la valeur de "<code>credentials</code>". Ainsi, avec Basic cette valeur
+
+            <para>
+                Chaque ligne se décompose en 3 champs - "username", "realm",
+                et "credentials" - séparés par des deux-points. Le résolveur ne fait que
+                retourner la valeur de "credentials". Ainsi, avec Basic cette valeur
                 devra être le mot de passe en clair de l'utilisateur identifié par
-                <code>username</code>. En mode Digest, la valeur MD5 de toute la chaîne
-                <code>username:realm:password</code> (avec les deux-points).
+                "username". En mode Digest, la valeur <acronym>MD5</acronym> de toute la chaîne
+                "username:realm:password" (avec les deux-points).
             </para>
 
             <para>
                 Pour créer des résolveurs de fichiers séparés, utilisez&#160;:
-                <programlisting language="php"><![CDATA[
+            </para>
+
+            <programlisting language="php"><![CDATA[
 $path     = 'files/passwd.txt';
 $resolver = new Zend_Auth_Adapter_Http_Resolver_File($path);
 ]]></programlisting>
+
+            <para>
                 ou
-                <programlisting language="php"><![CDATA[
+            </para>
+
+            <programlisting language="php"><![CDATA[
 $path     = 'files/passwd.txt';
 $resolver = new Zend_Auth_Adapter_Http_Resolver_File();
 $resolver->setFile($path);
 ]]></programlisting>
+
+            <para>
                 Si le chemin donné n'est pas lisible, une exception est envoyée.
             </para>
         </sect3>
@@ -223,7 +239,9 @@ $resolver->setFile($path);
 
         <para>
             Tout d'abord, créez un tableau de configuration avec les options requises&#160;:
-            <programlisting language="php"><![CDATA[
+        </para>
+
+        <programlisting language="php"><![CDATA[
 $config = array(
     'accept_schemes' => 'basic digest',
     'realm'          => 'My Web Site',
@@ -231,24 +249,29 @@ $config = array(
     'nonce_timeout'  => 3600,
 );
 ]]></programlisting>
+
+        <para>
             Ce tableau va permettre d'accepter les modes Basic ou Digest et demandera une
-            authentification pour les zones du site situées sous <code>/members_only</code> et
-            <code>/my_account</code>. La valeur du <code>realm</code> est en général affichée par
-            le navigateur dans la boite de dialogue. Le paramètre <code>nonce_timeout</code>,
-            fonctionne comme expliqué plus haut.
+            authentification pour les zones du site situées sous <filename>/members_only</filename>
+            et <filename>/my_account</filename>. La valeur du "real" est en général affichée par
+            le navigateur dans la boite de dialogue. Le paramètre
+            <emphasis>nonce_timeout</emphasis>, fonctionne comme expliqué plus haut.
         </para>
 
         <para>
             Ensuite, créez un objet de <classname>Zend_Auth_Adapter_Http</classname>&#160;:
-            <programlisting language="php"><![CDATA[
+        </para>
+
+        <programlisting language="php"><![CDATA[
 $adapter = new Zend_Auth_Adapter_Http($config);
 ]]></programlisting>
-        </para>
 
         <para>
             Comme nous supportons les 2 modes Basic et Digest, nous avons besoin de deux
             résolveurs différents&#160;:
-            <programlisting language="php"><![CDATA[
+        </para>
+
+        <programlisting language="php"><![CDATA[
 $basicResolver = new Zend_Auth_Adapter_Http_Resolver_File();
 $basicResolver->setFile('files/basicPasswd.txt');
 
@@ -258,12 +281,13 @@ $digestResolver->setFile('files/digestPasswd.txt');
 $adapter->setBasicResolver($basicResolver);
 $adapter->setDigestResolver($digestResolver);
 ]]></programlisting>
-        </para>
 
         <para>
             Enfin, nous procédons à la demande d'authentification. L'adaptateur a besoin de
-            deux objets <code>Request</code> et <code>Response</code>&#160;:
-            <programlisting language="php"><![CDATA[
+            deux objets "Request" et "Response"&#160;:
+        </para>
+
+        <programlisting language="php"><![CDATA[
 assert($request instanceof Zend_Controller_Request_Http);
 assert($response instanceof Zend_Controller_Response_Http);
 
@@ -275,6 +299,5 @@ if (!$result->isValid()) {
     // Mauvais username/password, ou action annulée
 }
 ]]></programlisting>
-        </para>
     </sect2>
 </sect1>

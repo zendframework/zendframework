@@ -8,7 +8,7 @@
         <title>Mieux définir les Contrôles d'Accès</title>
 
         <para>
-            La liste basique définie dans le
+            L'<acronym>ACL</acronym> basique définie dans le
             <link linkend="zend.acl.introduction">chapitre précédent</link>montre comment plusieurs
             privilèges peuvent être alloués pour l'ensemble de l'<acronym>ACL</acronym> (toutes les
             ressources). En pratique, toutefois, les contrôles d'accès ont souvent des exceptions et

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15960 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.auth.adapter.openid">
     <title>Authentification OpenID</title>
@@ -17,11 +17,10 @@
         </para>
 
         <para>
-            L'identité OpenID est juste une URI qui pointe vers une page avec des
+            L'identité OpenID est juste une <acronym>URI</acronym> qui pointe vers une page avec des
             informations décrivant le serveur à utiliser et des informations sur l'utilisateur.
             Pour plus d'informations, consultez
-            <ulink url="http://www.openid.net/">le site officiel OpenID</ulink>ou une version
-            française <ulink url="http://www.openidfrance.fr">OpenIDFrance</ulink>.
+            <ulink url="http://www.openid.net/">le site officiel OpenID</ulink>.
         </para>
 
         <para>
@@ -33,8 +32,8 @@
             <para>
                 <classname>Zend_OpenId</classname> utilise
                 <ulink url="http://www.php.net/manual/fr/ref.gmp.php">l'extension GMP</ulink>, si
-                disponible. L'utilisation de cette extension est recommandée pour améliorer les
-                performances de <classname>Zend_Auth_Adapter_OpenId</classname>.
+                disponible. L'utilisation de l'extension <acronym>GMP</acronym> est recommandée pour
+                améliorer les performances de <classname>Zend_Auth_Adapter_OpenId</classname>.
             </para>
         </note>
     </sect2>
@@ -46,20 +45,21 @@
             Comme toute autre classe adaptateur de <classname>Zend_Auth</classname>,
             <classname>Zend_Auth_Adapter_OpenId</classname> implémente
             <classname>Zend_Auth_Adapter_Interface</classname>, qui définit une seule méthode :
-            <code>authenticate()</code>. Elle est utilisée pour l'authentification elle-même, une
-            fois que l'objet est prêt. La préparation d'un objet OpenID nécessite quelques options
-            à passer à <classname>Zend_OpenId</classname>.
+            <methodname>authenticate()</methodname>. Elle est utilisée pour l'authentification
+            elle-même, une fois que l'objet est prêt. La préparation d'un objet OpenID nécessite
+            quelques options à passer à <classname>Zend_OpenId</classname>.
         </para>
 
         <para>
             A la différence des autres adaptateurs <classname>Zend_Auth</classname>, l'adaptateur
-            OpenID utilise une authentification sur un serveur externe à l'application, et
-            nécessitera donc deux requêtes HTTP. Ainsi
-            <classname>Zend_Auth_Adapter_OpenId::authenticate()</classname> devra être appelée deux
-            fois : d'abord pour rediriger l'utilisateur vers le serveur OpenID (rien ne sera donc
-            retourné par la méthode), qui lui-même redirigera l'utilisateur vers l'application, où
-            un deuxième appel de méthode
-            <classname>Zend_Auth_Adapter_OpenId::authenticate()</classname> vérifiera la signature
+            <classname>Zend_Auth_Adapter_OpenId</classname> utilise une authentification sur un
+            serveur externe à l'application, et nécessitera donc deux requêtes
+            <acronym>HTTP</acronym>. Ainsi
+            <methodname>Zend_Auth_Adapter_OpenId::authenticate()</methodname> devra être appelée
+            deux fois&#160;: d'abord pour rediriger l'utilisateur vers le serveur OpenID (rien ne
+            sera donc retourné par la méthode), qui lui-même redirigera l'utilisateur vers
+            l'application, où un deuxième appel de méthode
+            <methodname>Zend_Auth_Adapter_OpenId::authenticate()</methodname> vérifiera la signature
             et complétera le processus. Un objet <classname>Zend_Auth_Result</classname> sera alors
             cette fois-ci retourné.
         </para>
@@ -67,11 +67,12 @@
         <para>
             L'exemple suivant montre l'utilisation de
             <classname>Zend_Auth_Adapter_OpenId</classname>.
-            <classname>Zend_Auth_Adapter_OpenId::authenticate()</classname> est appelée deux fois.
-            La première fois juste après avoir envoyé le formulaire, lorsque
-            <code>$_POST['openid_action']</code> vaut <code>"login"</code>, et la deuxième fois
-            après la redirection du serveur OpenID vers l'application, lorsque
-            <code>$_GET['openid_mode']</code> ou <code>$_POST['openid_mode']</code> existe.
+            <methodname>Zend_Auth_Adapter_OpenId::authenticate()</methodname> est appelée deux fois.
+            La première fois juste après avoir envoyé le formulaire <acronym>HTML</acronym>, lorsque
+            <varname>$_POST['openid_action']</varname> vaut <emphasis>"login"</emphasis>, et la
+            deuxième fois après la redirection <acronym>HTTP</acronym> du serveur OpenID vers
+            l'application, lorsque <varname>$_GET['openid_mode']</varname> ou
+            <varname>$_POST['openid_mode']</varname> existe.
         </para>
 
         <programlisting language="php"><![CDATA[

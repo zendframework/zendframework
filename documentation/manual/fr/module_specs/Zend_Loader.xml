@@ -91,7 +91,7 @@ Zend_Loader::loadClass('Container_Tree',
         <para>
             La chaîne spécifiant la classe est convertie en chemin relatif en remplaçant les
             tirets bas ("_") par le séparateur de dossier puis en ajoutant le bloc ".php". Dans
-            l'exemple ci-dessus, "Container_Tree" devient "Container/Tree.php".
+            l'exemple ci-dessus, "Container_Tree" devient "Container\\Tree.php".
         </para>
 
         <para>

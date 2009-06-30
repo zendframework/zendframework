@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15743 -->
+<!-- EN-Revision: 16364 -->
 <sect1 id="zend.loader.load">
 
     <title>ファイルやクラスの動的な読み込み</title>
@@ -92,7 +92,7 @@ Zend_Loader::loadClass('Container_Tree',
         <para>
             クラスを指定する文字列は、アンダースコアを OS のパス区切り文字に変換して最後に
             '.php' を追加したものとなります。上の例では、Windows 上で
-            'Container_Tree' は 'Container/Tree.php' となります。
+            'Container_Tree' は 'Container\\Tree.php' となります。
         </para>
 
         <para>

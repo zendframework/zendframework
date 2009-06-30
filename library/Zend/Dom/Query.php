@@ -65,9 +65,7 @@ class Zend_Dom_Query
      */
     public function __construct($document = null)
     {
-        if (null !== $document) {
-            $this->setDocument($document);
-        }
+        $this->setDocument($document);
     }
 
     /**
@@ -78,6 +76,9 @@ class Zend_Dom_Query
      */
     public function setDocument($document)
     {
+        if (0 === strlen($document)) {
+            return $this;
+        }
         if ('<?xml' == substr(trim($document), 0, 5)) {
             return $this->setDocumentXml($document);
         }

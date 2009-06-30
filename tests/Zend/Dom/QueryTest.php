@@ -78,6 +78,20 @@ class Zend_Dom_QueryTest extends PHPUnit_Framework_TestCase
         $this->assertNull($this->query->getDocument());
     }
 
+    public function testDocShouldBeNullByEmptyStringConstructor()
+    {
+        $emptyStr = "";
+        $query = new Zend_Dom_Query($emptyStr);
+        $this->assertNull($this->query->getDocument());
+    }
+
+    public function testDocShouldBeNullByEmptyStringSet()
+    {
+        $emptyStr = "";
+        $this->query->setDocument($emptyStr);
+        $this->assertNull($this->query->getDocument());
+    }
+
     public function testDocTypeShouldBeNullByDefault()
     {
         $this->assertNull($this->query->getDocumentType());

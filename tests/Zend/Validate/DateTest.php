@@ -213,6 +213,16 @@ class Zend_Validate_DateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @ZF-6374
+     */
+    public function testUsingApplicationLocale()
+    {
+        Zend_Registry::set('Zend_Locale', new Zend_Locale('de'));
+        $valid = new Zend_Validate_Date();
+        $this->assertTrue($valid->isValid('10.April.2008'));
+    }
+
+    /**
      * Ignores a raised PHP error when in effect, but throws a flag to indicate an error occurred
      *
      * @param  integer $errno

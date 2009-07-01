@@ -183,7 +183,7 @@ interface Zend_Application_Bootstrap_Bootstrapper
 
         <para>
             Кроме этого функционала есть и другие требующие внимания области,
-            с котрыми вы должны ознакомиться.
+            с которыми вы должны ознакомиться.
         </para>
 
         <sect3 id="zend.application.theory-of-operation.bootstrap.resource-methods">

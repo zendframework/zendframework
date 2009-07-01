@@ -124,7 +124,7 @@ abstract class Zend_Service_Amazon_Ec2_Abstract extends Zend_Service_Amazon_Abst
     {
         $parameters['AWSAccessKeyId']   = $this->_getAccessKey();
         $parameters['SignatureVersion'] = $this->_ec2SignatureVersion;
-        $parameters['Expires']          = gmdate('c');
+        $parameters['Timestamp']        = gmdate('Y-m-d\TH:i:s\Z');
         $parameters['Version']          = $this->_ec2ApiVersion;
         $parameters['SignatureMethod']  = $this->_ec2SignatureMethod;
         $parameters['Signature']        = $this->signParameters($parameters);

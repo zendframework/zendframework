@@ -349,7 +349,6 @@ class Zend_Amf_Server implements Zend_Server_Interface
                     $object = $info->getDeclaringClass()->newInstance();
                 } catch (Exception $e) {
                     require_once 'Zend/Amf/Server/Exception.php';
-                    file_put_contents("c:/windows/temp/a", $e->getMessage());
                     throw new Zend_Amf_Server_Exception('Error instantiating class ' . $class . ' to invoke method ' . $info->getName() . ': '.$e->getMessage(), 621);
                 }
                 $this->_checkAcl($object, $info->getName());

@@ -182,7 +182,7 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
                 If you create your own class that extends
                 <classname>Zend_Db_Adapter_Abstract_Adapter</classname>, but you do not name your
                 class with the "Zend_Db_Adapter" package prefix, you can use the
-                <code>factory()</code> method to load your adapter if you
+                <methodname>factory()</methodname> method to load your adapter if you
                 specify the leading portion of the adapter class with the
                 'adapterNamespace' key in the parameters array.
             </para>
@@ -213,7 +213,7 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
 
             <para>
                 Optionally, you may specify either argument of the
-                <code>factory()</code> method as an object of type
+                <methodname>factory()</methodname> method as an object of type
                 <link linkend="zend.config">Zend_Config</link>.
             </para>
 
@@ -224,7 +224,7 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
                 may contain a property named <code>params</code>, with
                 subproperties corresponding to adapter parameter names.
                 This is used only if the second argument of the
-                <code>factory()</code> method is absent.
+                <methodname>factory()</methodname> method is absent.
             </para>
 
             <example id="zend.db.adapter.connecting.factory.example1">
@@ -255,7 +255,7 @@ $db = Zend_Db::factory($config->database);
             </example>
 
             <para>
-                The second argument of the <code>factory()</code> method may be
+                The second argument of the <methodname>factory()</methodname> method may be
                 an associative array containing entries corresponding to
                 adapter parameters. This argument is optional. If the first
                 argument is of type <classname>Zend_Config</classname>, it is assumed to contain all
@@ -334,7 +334,7 @@ $db = Zend_Db::factory($config->database);
                         <emphasis>adapterNamespace</emphasis>:
                         names the initial part of the class name for the
                         adapter, instead of 'Zend_Db_Adapter'. Use this if
-                        you need to use the <code>factory()</code> method to
+                        you need to use the <methodname>factory()</methodname> method to
                         load a non-Zend database adapter class.
                     </para>
                 </listitem>
@@ -381,7 +381,7 @@ $db = Zend_Db::factory('Db2', $params);
                     special characters. If the value is <constant>FALSE</constant>,
                     identifiers are not delimited automatically. If you need
                     to delimit identifiers, you must do so yourself using the
-                    <code>quoteIdentifier()</code> method.
+                    <methodname>quoteIdentifier()</methodname> method.
                 </para>
                 <programlisting language="php"><![CDATA[
 $options = array(
@@ -459,11 +459,11 @@ $db = Zend_Db::factory('Pdo_Mysql', $params);
 
             <para>
                 If you need to force the Adapter to connect to the RDBMS, use
-                the <code>getConnection()</code> method. This method returns
+                the <methodname>getConnection()</methodname> method. This method returns
                 an object for the connection as represented by the respective
                 PHP database extension. For example, if you use any of the
                 Adapter classes for PDO drivers, then
-                <code>getConnection()</code> returns the PDO object, after
+                <methodname>getConnection()</methodname> returns the PDO object, after
                 initiating it as a live connection to the specific database.
             </para>
 
@@ -485,8 +485,9 @@ $db = Zend_Db::factory('Pdo_Mysql', $params);
                 to be serialized, if you don't want it, you should consider passing the
                 <classname>Zend_Db::ALLOW_SERIALIZATION=false</classname> option, see the example
                 above. To respect lazy connections principle, the adapter won't reconnect itself
-                after being unserialized. You must then call <code>getConnection()
-                </code> yourself. You can make the adapter auto-reconnect by passing the
+                after being unserialized. You must then call
+                <methodname>getConnection()</methodname>
+                yourself. You can make the adapter auto-reconnect by passing the
                 <classname>Zend_Db::AUTO_RECONNECT_ON_UNSERIALIZE=true</classname> as an adapter
                 option.
             </para>
@@ -620,7 +621,7 @@ CREATE TABLE bugs_products (
 
             <para>
                 You can run a SQL SELECT query and retrieve its results in one
-                step using the <code>fetchAll()</code> method.
+                step using the <methodname>fetchAll()</methodname> method.
             </para>
 
             <para>
@@ -632,7 +633,7 @@ CREATE TABLE bugs_products (
             </para>
 
             <para>
-                The second argument to <code>fetchAll()</code> is an array of
+                The second argument to <methodname>fetchAll()</methodname> is an array of
                 values to substitute for parameter placeholders in the SQL
                 statement.
             </para>
@@ -653,7 +654,7 @@ $result = $db->fetchAll($sql, 2);
             <title>Changing the Fetch Mode</title>
 
             <para>
-                By default, <code>fetchAll()</code> returns an array of
+                By default, <methodname>fetchAll()</methodname> returns an array of
                 rows, each of which is an associative array. The keys of the
                 associative array are the columns or column aliases named in
                 the select query.
@@ -661,7 +662,7 @@ $result = $db->fetchAll($sql, 2);
 
             <para>
                 You can specify a different style of fetching results using the
-                <code>setFetchMode()</code> method. The modes supported are
+                <methodname>setFetchMode()</methodname> method. The modes supported are
                 identified by constants:
             </para>
 

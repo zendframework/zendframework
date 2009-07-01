@@ -145,7 +145,7 @@
                     In order to do some of its work, <methodname>getParam()</methodname> actually
                     retrieves from several sources. In order of priority, these
                     include: user parameters set via <methodname>setParam()</methodname>,
-                    <code>GET</code> parameters, and finally <code>POST</code>
+                    <constant>GET</constant> parameters, and finally <constant>POST</constant>
                     parameters. Be aware of this when pulling data via this
                     method.
                 </para>

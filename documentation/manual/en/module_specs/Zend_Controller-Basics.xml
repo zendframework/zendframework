@@ -44,7 +44,7 @@
             <listitem>
                 <para>
                     <classname>Zend_Controller_Request_Abstract</classname> (often
-                    referred to as the <code>Request Object</code>) represents
+                    referred to as the <emphasis>Request Object</emphasis>) represents
                     the request environment and provides methods for setting and
                     retrieving the controller and action names and any request
                     parameters. Additionally it keeps track of whether or not
@@ -83,7 +83,7 @@
                     <classname>Zend_Controller_Request_Http</classname> and decomposes it
                     into a controller, action, and parameters based on the path
                     information in the url. As an example, the URL
-                    <code>http://localhost/foo/bar/key/value</code> would be
+                    <filename>http://localhost/foo/bar/key/value</filename> would be
                     decoded to use the <code>foo</code> controller,
                     <code>bar</code> action, and specify a parameter
                     <code>key</code> with a value of <code>value</code>.

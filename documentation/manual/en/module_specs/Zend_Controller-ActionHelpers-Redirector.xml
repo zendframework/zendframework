@@ -281,7 +281,7 @@ $router->addRoute('blogArchive', $route);
             <para>
                 Given an array with year set to 2006, month to 4, day to 24, and
                 id to 42, it would then build the URL
-                <code>/blog/2006/4/24/42</code>.
+                <filename>/blog/2006/4/24/42</filename>.
             </para>
 
             <programlisting language="php"><![CDATA[

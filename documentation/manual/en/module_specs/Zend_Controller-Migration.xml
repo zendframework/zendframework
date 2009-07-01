@@ -641,7 +641,7 @@ echo $response;
                         The constructor now accepts exactly three arguments,
                         <classname>Zend_Controller_Request_Abstract $request</classname>,
                         <classname>Zend_Controller_Response_Abstract $response</classname>,
-                        and <code>array $params (optional)</code>.
+                        and <command>array $params (optional)</command>.
                         <classname>Zend_Controller_Action::__construct()</classname> uses
                         these to set the request, response, and invokeArgs
                         properties of the object, and if overriding the

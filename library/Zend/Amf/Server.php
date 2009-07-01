@@ -61,6 +61,15 @@ class Zend_Amf_Server implements Zend_Server_Interface
      * @var array
      */
     protected $_methods = array();
+    
+    /**
+     * Array of classes that can be called without being explicitly loaded
+     * 
+     * Keys are class names.
+     *
+     * @var array
+     */
+    protected $_classAllowed = array();
 
     /**
      * Loader for classes in added directories
@@ -304,7 +313,7 @@ class Zend_Amf_Server implements Zend_Server_Interface
                 	$this->getLoader()->load($className);
                 } catch (Exception $e) {
                     require_once 'Zend/Amf/Server/Exception.php';
-                    throw new Zend_Amf_Server_Exception('Class "' . $className . '" does not exist');
+                    throw new Zend_Amf_Server_Exception('Class "' . $className . '" does not exist: '.$e->getMessage());
                 }
                 // Add the new loaded class to the server.
                 $this->setClass($className, $source);
@@ -340,7 +349,8 @@ class Zend_Amf_Server implements Zend_Server_Interface
                     $object = $info->getDeclaringClass()->newInstance();
                 } catch (Exception $e) {
                     require_once 'Zend/Amf/Server/Exception.php';
-                    throw new Zend_Amf_Server_Exception('Error instantiating class ' . $class . ' to invoke method ' . $info->getName(), 621);
+                    file_put_contents("c:/windows/temp/a", $e->getMessage());
+                    throw new Zend_Amf_Server_Exception('Error instantiating class ' . $class . ' to invoke method ' . $info->getName() . ': '.$e->getMessage(), 621);
                 }
                 $this->_checkAcl($object, $info->getName());
                 $return = $info->invokeArgs($object, $params);

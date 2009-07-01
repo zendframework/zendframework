@@ -34,11 +34,12 @@
 
     <para>
         By default, configuration data made available through <classname>Zend_Config</classname> are
-        read-only, and an assignment (e.g., $config->database->host = 'example.com')
+        read-only, and an assignment (e.g.,
+        <command>$config->database->host = 'example.com'</command>)
         results in a thrown exception. This default behavior may be overridden through the
         constructor, however, to allow modification of data values. Also, when modifications are
         allowed, <classname>Zend_Config</classname> supports unsetting of values (i.e.
-        <methodname>unset($config->database->host);</methodname>). The
+        <methodname>unset($config->database->host)</methodname>). The
         <methodname>readOnly()</methodname> method can be used to determine if modifications to a
         given <classname>Zend_Config</classname> object are allowed and the
         <methodname>setReadOnly()</methodname> method can be used to stop any further modifications
@@ -84,7 +85,7 @@
         object using the <methodname>merge()</methodname> function. For example, given
         <varname>$config</varname> and <varname>$localConfig</varname>, you can merge data from
         <varname>$localConfig</varname> to <varname>$config</varname> using
-        <methodname>$config->merge($localConfig);</methodname>. The items in
+        <methodname>$config->merge($localConfig)</methodname>. The items in
         <varname>$localConfig</varname> will override any items with the same name in
         <varname>$config</varname>.
     </para>

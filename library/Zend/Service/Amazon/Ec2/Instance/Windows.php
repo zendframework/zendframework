@@ -119,7 +119,7 @@ class Zend_Service_Amazon_Ec2_Instance_Windows extends Zend_Service_Amazon_Ec2_A
      *                                          to find information for.
      * @return array                            Information for the task that you requested
      */
-    public function describeBundle($bundleId)
+    public function describeBundle($bundleId = '')
     {
         $params = array();
         $params['Action'] = 'DescribeBundleTasks';
@@ -128,7 +128,7 @@ class Zend_Service_Amazon_Ec2_Instance_Windows extends Zend_Service_Amazon_Ec2_A
             foreach($bundleId as $k=>$name) {
                 $params['bundleId.' . ($k+1)] = $name;
             }
-        } elseif($bundleId) {
+        } elseif(!empty($bundleId)) {
             $params['bundleId.1'] = $bundleId;
         }
 

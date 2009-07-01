@@ -293,6 +293,13 @@
                             </para></entry>
                             <entry><para>No</para></entry>
                         </row>
+						<row>
+                            <entry><code>monitor</code></entry>
+                            <entry><para>
+                                 Turn on AWS CloudWatch Instance Monitoring
+                            </para></entry>
+                            <entry><para>No</para></entry>
+                        </row>
                     </tbody>
                 </tgroup>
             </table>
@@ -460,7 +467,37 @@ $return = $ec2_instance->consoleOutput('instanceId');
             <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance('aws_key',
                                                      'aws_secret_key');
-$return = $ec2_instance->terminate('productCode', 'instanceId');
+$return = $ec2_instance->confirmProduct('productCode', 'instanceId');
+]]></programlisting>
+
+        </example>
+		
+		<example id="zend.service.amazon.ec2.instance.utility.monitor">
+            <title>Turn on CloudWatch Monitoring on an Instance(s)</title>
+            <para>
+                <code>monitor</code> returns the list of instances and their
+				current state of the CloudWatch Monitoring.  If the instance
+				does not currently have Monitoring enabled it will be turned on.
+            </para>
+            <programlisting language="php"><![CDATA[
+$ec2_instance = new Zend_Service_Amazon_Ec2_Instance('aws_key',
+                                                     'aws_secret_key');
+$return = $ec2_instance->monitor('instanceId');
+]]></programlisting>
+
+        </example>
+		
+		<example id="zend.service.amazon.ec2.instance.utility.unmonitor">
+            <title>Turn off CloudWatch Monitoring on an Instance(s)</title>
+            <para>
+                <code>monitor</code> returns the list of instances and their
+				current state of the CloudWatch Monitoring.  If the instance
+				currently has Monitoring enabled it will be turned off.
+            </para>
+            <programlisting language="php"><![CDATA[
+$ec2_instance = new Zend_Service_Amazon_Ec2_Instance('aws_key',
+                                                     'aws_secret_key');
+$return = $ec2_instance->unmonitor('instanceId');
 ]]></programlisting>
 
         </example>

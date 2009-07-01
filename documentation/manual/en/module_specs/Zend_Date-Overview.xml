@@ -80,10 +80,10 @@
                 familiar with SQL will expect February 28th as the result. On the other side, people
                 familiar with Excel and OpenOffice will expect March 3rd as the result. The problem
                 only occurs, if the resulting month does not have the day, which is set in the
-                original date. For ZF developers, the desired behavior is selectable using the
-                <code>extend_month</code> option to choose either the SQL behaviour, if set to
-                false, or the spreadsheet behaviour when set to true. The default behaviour for
-                <code>extend_month</code> is false, providing behavior compatible to SQL. By
+                original date. For Zend Framework developers, the desired behavior is selectable
+                using the <code>extend_month</code> option to choose either the SQL behaviour, if
+                set to false, or the spreadsheet behaviour when set to true. The default behaviour
+                for <code>extend_month</code> is false, providing behavior compatible to SQL. By
                 default, <classname>Zend_Date</classname> computes month calculations by truncating
                 dates to the end of the month (if necessary), without wrapping into the next month
                 when the original date designates a day of the month exceeding the number of days in

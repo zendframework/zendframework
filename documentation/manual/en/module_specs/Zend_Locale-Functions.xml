@@ -74,14 +74,15 @@ if ($locale->equals($mylocale)) {
         <title>Default locales</title>
 
         <para>
-            The method <code>getDefault()</code> returns an array of relevant locales using information from the user's
-            web browser (if available), information from the environment of the host server, and ZF settings. As with
-            the constructor for <classname>Zend_Locale</classname>, the first parameter selects a preference of which information
-            to consider
-            <link linkend="zend.locale.selection">(<code>BROWSER</code>, <code>ENVIRONMENT</code>, or <code>FRAMEWORK)</code>
-            </link>
-            first. The second parameter toggles between returning all matching locales or only the first/best match.
-            Locale-aware components normally use only the first locale. A quality rating is included, when available.
+            The method <code>getDefault()</code> returns an array of relevant locales using
+            information from the user's web browser (if available), information from the
+            environment of the host server, and Zend Framework settings. As with the constructor
+            for <classname>Zend_Locale</classname>, the first parameter selects a preference of
+            which information to consider <link
+                linkend="zend.locale.selection">(<code>BROWSER</code>, <code>ENVIRONMENT</code>, or
+                <code>FRAMEWORK)</code></link> first. The second parameter toggles between
+            returning all matching locales or only the first/best match. Locale-aware components
+            normally use only the first locale. A quality rating is included, when available.
         </para>
 
         <example id="zend.locale.getdefault.example-1">
@@ -1057,7 +1058,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
         </note>
 
         <table id="zend.locale.getdata.table-3">
-            <title>Differences between ZF 1.0 and ZF 1.5</title>
+            <title>Differences between Zend Framework 1.0 and 1.5</title>
             <tgroup cols="2">
                 <thead>
                     <row>
@@ -1419,7 +1420,7 @@ if ($locale instanceof Zend_Locale) {
         </para>
 
         <example id="zend.locale.detection.example-4">
-            <title>Locale aware behaviour as with ZF 1.8</title>
+            <title>Locale aware behaviour as with Zend Framework 1.8</title>
             <programlisting language="php"><![CDATA[
 $locale = Zend_Locale::findLocale($inputstring);
 ]]></programlisting>

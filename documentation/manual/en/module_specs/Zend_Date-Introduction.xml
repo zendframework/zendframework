@@ -113,7 +113,7 @@ date_default_timezone_set('Europe/Berlin');
                         url="http://www.php.net/float">http://www.php.net/float</ulink> ].
                     Additionally, inherent limitations of float data types, and rounding error of
                     float numbers may introduce errors into calculations. To avoid these problems,
-                    the ZF I18n components use BCMath extension, if available.
+                    the Zend Framework I18n components use BCMath extension, if available.
                 </para>
             </listitem>
             <listitem>

@@ -51,17 +51,16 @@ echo $unit;
         <title>Creating measurements from strings</title>
 
         <para>
-            Many measurements received as input to ZF applications can only be passed to <classname>Zend_Measure_*</classname>
-            classes as strings, such as numbers written using
-            <ulink url="http://en.wikipedia.org/wiki/Roman_numerals">roman numerals</ulink>
-            or extremely large binary values that exceed the precision of PHP's native integer and float types. Since
-            integers can be denoted using strings, if there is any risk of losing precision due to limitations of PHP's
-            native integer and float types, using strings instead. <classname>Zend_Measure_Number</classname> uses the BCMath
-            extension to support arbitrary precision, as shown in the example below, to avoid limitations in many PHP
-            functions, such as
-            <ulink url="http://php.net/bin2dec"><code>bin2dec()</code>
-            </ulink>
-            .
+            Many measurements received as input to Zend Framework applications can only be passed
+            to <classname>Zend_Measure_*</classname> classes as strings, such as numbers written
+            using <ulink url="http://en.wikipedia.org/wiki/Roman_numerals">roman numerals</ulink>
+            or extremely large binary values that exceed the precision of PHP's native integer
+            and float types. Since integers can be denoted using strings, if there is any risk of
+            losing precision due to limitations of PHP's native integer and float types, using
+            strings instead. <classname>Zend_Measure_Number</classname> uses the BCMath extension
+            to support arbitrary precision, as shown in the example below, to avoid limitations in
+            many PHP functions, such as
+            <ulink url="http://php.net/bin2dec"><code>bin2dec()</code></ulink>.
         </para>
 
         <example id="zend.measure.creation.string.example-1">

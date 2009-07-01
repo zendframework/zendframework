@@ -55,8 +55,8 @@
         <itemizedlist mark='opencircle'>
             <listitem>
                 <para>
-                    <classname>Zend_Locale</classname> - Backend support of locales available for localization support within
-                    other ZF components.
+                    <classname>Zend_Locale</classname> - Backend support of locales available for
+                    localization support within other Zend Framework components.
                 </para>
             </listitem>
             <listitem>
@@ -169,13 +169,15 @@ $locale = new Zend_Locale('de_DE'); // German language _ Germany
         </para>
 
         <para>
-            Beware of historical changes, as ZF components do not know about or attempt to track the numerous timezone
-            changes made over many years by many regions. For example,
-            <ulink url="http://www.statoids.com/tus.html">we can see a historical list</ulink>
-            showing dozens of changes made by governments to when and if a particular region observes Daylight Savings
-            Time, and even which timezone a particular geographic area belongs. Thus, when performing date math, the
-            math performed by ZF components will not adjust for these changes, but instead will give the correct time
-            for the timezone using current, modern rules for DST and timezone assignment for geographic regions.
+            Beware of historical changes, as Zend Framework components do not know about or attempt
+            to track the numerous timezone changes made over many years by many regions. For
+            example, <ulink url="http://www.statoids.com/tus.html">we can see a historical
+                list</ulink> showing dozens of changes made by governments to when and if a
+            particular region observes Daylight Savings Time, and even which timezone a particular
+            geographic area belongs. Thus, when performing date math, the math performed by Zend
+            Framework components will not adjust for these changes, but instead will give the
+            correct time for the timezone using current, modern rules for DST and timezone
+            assignment for geographic regions.
         </para>
 
     </sect2>
@@ -378,10 +380,11 @@ $date = new Zend_Date();
         <title>ZF Locale-Aware Classes</title>
 
         <para>
-            In the ZF, locale-aware classes rely on <classname>Zend_Locale</classname> to automatically select a locale, as
-            explained above. For example, in a ZF web application, constructing a date using <classname>Zend_Date</classname>
-            without specifying a locale results in an object with a locale based on information provided by the current
-            user's web browser.
+            In the ZF, locale-aware classes rely on <classname>Zend_Locale</classname> to
+            automatically select a locale, as explained above. For example, in a Zend Framework web
+            application, constructing a date using <classname>Zend_Date</classname> without
+            specifying a locale results in an object with a locale based on information provided by
+            the current user's web browser.
         </para>
 
         <example id="zend.locale.interoperate.example-1">
@@ -392,9 +395,9 @@ $date = new Zend_Date('2006',Zend_Date::YEAR);
         </example>
 
         <para>
-            To override this default behavior, and force locale-aware ZF components to use specific locales, regardless
-            of the origin of your website visitors, explicitly specify a locale as the third argument to the
-            constructor.
+            To override this default behavior, and force locale-aware Zend Framework components to
+            use specific locales, regardless of the origin of your website visitors, explicitly
+            specify a locale as the third argument to the constructor.
         </para>
 
         <example id="zend.locale.interoperate.example-2">

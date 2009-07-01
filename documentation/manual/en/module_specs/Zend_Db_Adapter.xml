@@ -750,7 +750,7 @@ echo $result[0]->bug_description;
             <title>Fetching a Result Set as an Associative Array</title>
 
             <para>
-                The <code>fetchAssoc()</code> method returns data in an array
+                The <methodname>fetchAssoc()</methodname> method returns data in an array
                 of associative arrays, regardless of what value you have set
                 for the fetch mode.
             </para>
@@ -774,7 +774,7 @@ echo $result[0]['bug_description'];
             <title>Fetching a Single Column from a Result Set</title>
 
             <para>
-                The <code>fetchCol()</code> method returns data in an array
+                The <methodname>fetchCol()</methodname> method returns data in an array
                 of values, regardless of the value you have set for the fetch mode.
                 This only returns the first column returned by the query.
                 Any other columns returned by the query are discarded.
@@ -802,7 +802,7 @@ echo $result[0];
             <title>Fetching Key-Value Pairs from a Result Set</title>
 
             <para>
-                The <code>fetchPairs()</code> method returns data in an array
+                The <methodname>fetchPairs()</methodname> method returns data in an array
                 of key-value pairs, as an associative array with a single entry
                 per row. The key of this associative array is taken from the
                 first column returned by the SELECT query. The value is taken
@@ -834,7 +834,7 @@ echo $result[2];
             <title>Fetching a Single Row from a Result Set</title>
 
             <para>
-                The <code>fetchRow()</code> method returns data using the
+                The <methodname>fetchRow()</methodname> method returns data using the
                 current fetch mode, but it returns only the first row
                 fetched from the result set.
             </para>
@@ -857,8 +857,8 @@ echo $result->bug_description;
             <title>Fetching a Single Scalar from a Result Set</title>
 
             <para>
-                The <code>fetchOne()</code> method is like a combination
-                of <code>fetchRow()</code> with <code>fetchCol()</code>,
+                The <methodname>fetchOne()</methodname> method is like a combination
+                of <methodname>fetchRow()</methodname> with <methodname>fetchCol()</methodname>,
                 in that it returns data only for the first row fetched from
                 the result set, and it returns only the value of the first
                 column in that row. Therefore it returns only a single
@@ -894,7 +894,7 @@ echo $result;
 
             <para>
                 You can add new rows to a table in your database using the
-                <code>insert()</code> method. The first argument is a string
+                <methodname>insert()</methodname> method. The first argument is a string
                 that names the table, and the second argument is an associative
                 array, mapping column names to data values.
             </para>
@@ -960,7 +960,7 @@ $db->insert('bugs', $data);
                 Some RDBMS brands support auto-incrementing primary keys.
                 A table defined this way generates a primary key value
                 automatically during an INSERT of a new row. The return value
-                of the <code>insert()</code> method is <emphasis>not</emphasis>
+                of the <methodname>insert()</methodname> method is <emphasis>not</emphasis>
                 the last inserted ID, because the table might not have an
                 auto-incremented column. Instead, the return value is the
                 number of rows affected (usually 1).
@@ -968,7 +968,7 @@ $db->insert('bugs', $data);
 
             <para>
                 If your table is defined with an auto-incrementing primary key,
-                you can call the <code>lastInsertId()</code> method after the
+                you can call the <methodname>lastInsertId()</methodname> method after the
                 insert. This method returns the last value generated in the
                 scope of the current database connection.
             </para>
@@ -986,7 +986,7 @@ $id = $db->lastInsertId();
             <para>
                 Some RDBMS brands support a sequence object, which generates
                 unique values to serve as primary key values. To support
-                sequences, the <code>lastInsertId()</code> method accepts two
+                sequences, the <methodname>lastInsertId()</methodname> method accepts two
                 optional string arguments. These arguments name the table and
                 the column, assuming you have followed the convention that a
                 sequence is named using the table and column names for which
@@ -1012,7 +1012,7 @@ $id = $db->lastInsertId('bugs');
 
             <para>
                 If the name of your sequence object does not follow this naming
-                convention, use the <code>lastSequenceId()</code> method
+                convention, use the <methodname>lastSequenceId()</methodname> method
                 instead. This method takes a single string argument, naming
                 the sequence literally.
             </para>
@@ -1082,7 +1082,7 @@ $id = $db->lastSequenceId('bugs_id_gen');
 
             <para>
                 You can update rows in a database table using the
-                <code>update()</code> method of an Adapter. This method takes
+                <methodname>update()</methodname> method of an Adapter. This method takes
                 three arguments:  the first is the name of the table; the
                 second is an associative array mapping columns to change to new
                 values to assign to these columns.
@@ -1244,7 +1244,7 @@ echo $sql;
             <title>Using quote()</title>
 
             <para>
-                The <code>quote()</code> method accepts a single argument, a
+                The <methodname>quote()</methodname> method accepts a single argument, a
                 scalar string value. It returns the value with special
                 characters escaped in a manner appropriate for the RDBMS you
                 are using, and surrounded by string value delimiters. The
@@ -1267,7 +1267,7 @@ echo $sql;
             </example>
 
             <para>
-                Note that the return value of <code>quote()</code> includes the
+                Note that the return value of <methodname>quote()</methodname> includes the
                 quote delimiters around the string. This is different from
                 some functions that escape special characters but do not add
                 the quote delimiters, for example <ulink
@@ -1290,7 +1290,7 @@ SELECT * FROM atable WHERE intColumn = '123'
 
             <para>
                 You can use the optional second argument to the
-                <code>quote()</code> method to apply quoting selectively for
+                <methodname>quote()</methodname> method to apply quoting selectively for
                 the SQL datatype you specify.
             </para>
 
@@ -1313,9 +1313,9 @@ $sql = 'SELECT * FROM atable WHERE intColumn = '
             </para>
 
             <para>
-                <classname>Zend_Db_Table</classname> specifies SQL types to <code>quote()</code>
-                automatically when generating SQL queries that reference a
-                table's key columns.
+                <classname>Zend_Db_Table</classname> specifies SQL types to
+                <methodname>quote()</methodname> automatically when generating SQL queries that
+                reference a table's key columns.
             </para>
 
         </sect3>
@@ -1327,7 +1327,7 @@ $sql = 'SELECT * FROM atable WHERE intColumn = '
             <para>
                 The most typical usage of quoting is to interpolate a PHP
                 variable into a SQL expression or statement. You can use the
-                <code>quoteInto()</code> method to do this in one step. This
+                <methodname>quoteInto()</methodname> method to do this in one step. This
                 method takes two arguments: the first argument is a string
                 containing a placeholder symbol (<code>?</code>), and the
                 second argument is a value or PHP variable that should be
@@ -1337,7 +1337,7 @@ $sql = 'SELECT * FROM atable WHERE intColumn = '
             <para>
                 The placeholder symbol is the same symbol used by many RDBMS
                 brands for positional parameters, but the
-                <code>quoteInto()</code> method only emulates query parameters.
+                <methodname>quoteInto()</methodname> method only emulates query parameters.
                 The method simply interpolates the value into the string,
                 escapes special characters, and applies quotes around it.
                 True query parameters maintain the separation between the SQL
@@ -1357,7 +1357,7 @@ echo $sql;
 
             <para>
                 You can use the optional third parameter of
-                <code>quoteInto()</code> to specify the SQL datatype. Numeric
+                <methodname>quoteInto()</methodname> to specify the SQL datatype. Numeric
                 datatypes are not quoted, and other types are quoted.
             </para>
 
@@ -1400,14 +1400,14 @@ echo $sql;
             </para>
 
             <para>
-                The <code>quoteIdentifier()</code> method works like
-                <code>quote()</code>, but it applies the identifier delimiter
+                The <methodname>quoteIdentifier()</methodname> method works like
+                <methodname>quote()</methodname>, but it applies the identifier delimiter
                 characters to the string according to the type of Adapter you
                 use. For example, standard SQL uses double-quotes
                 (<code>"</code>) for identifier delimiters, and most RDBMS
                 brands use that symbol. MySQL uses back-quotes
                 (<code>`</code>) by default. The
-                <code>quoteIdentifier()</code> method also escapes special
+                <methodname>quoteIdentifier()</methodname> method also escapes special
                 characters within the string argument.
             </para>
 
@@ -1464,22 +1464,22 @@ echo $sql
             Alternatively, you can specify the beginning and resolution of a
             transaction, and thus control how many SQL queries are included in
             a single group that is committed (or rolled back) as a single
-            operation. Use the <code>beginTransaction()</code> method to
+            operation. Use the <methodname>beginTransaction()</methodname> method to
             initiate a transaction. Subsequent SQL statements are executed in
             the context of the same transaction until you resolve it
             explicitly.
         </para>
 
         <para>
-            To resolve the transaction, use either the <code>commit()</code> or
-            <code>rollBack()</code> methods. The <code>commit()</code> method
-            marks changes made during your transaction as committed, which
+            To resolve the transaction, use either the <methodname>commit()</methodname> or
+            <methodname>rollBack()</methodname> methods. The <methodname>commit()</methodname>
+            method marks changes made during your transaction as committed, which
             means the effects of these changes are shown in queries run in
             other transactions.
         </para>
 
         <para>
-            The <code>rollBack()</code> method does the opposite: it discards
+            The <methodname>rollBack()</methodname> method does the opposite: it discards
             the changes made during your transaction. The changes are
             effectively undone, and the state of the data returns to how it was
             before you began your transaction. However, rolling back your
@@ -1490,7 +1490,7 @@ echo $sql
         <para>
             After you resolve this transaction, <classname>Zend_Db_Adapter</classname>
             returns to auto-commit mode until you call
-            <code>beginTransaction()</code> again.
+            <methodname>beginTransaction()</methodname> again.
         </para>
 
         <example id="zend.db.adapter.transactions.example">
@@ -1527,12 +1527,12 @@ try {
         <title>Listing and Describing Tables</title>
 
         <para>
-            The <code>listTables()</code> method returns an array of strings,
+            The <methodname>listTables()</methodname> method returns an array of strings,
             naming all tables in the current database.
         </para>
 
         <para>
-            The <code>describeTable()</code> method returns an associative
+            The <methodname>describeTable()</methodname> method returns an associative
             array of metadata about a table. Specify the name of the table
             as a string in the first argument to this method. The second
             argument is optional, and names the schema in which the table
@@ -1666,7 +1666,7 @@ try {
 
         <para>
             If no table exists matching the table name and optional schema name
-            specified, then <code>describeTable()</code> returns an empty array.
+            specified, then <methodname>describeTable()</methodname> returns an empty array.
         </para>
 
     </sect2>
@@ -1686,15 +1686,15 @@ try {
             However, if you have a long-duration PHP script that initiates many
             database connections, you might need to close the connection, to avoid
             exhausting the capacity of your RDBMS server. You can use the
-            Adapter's <code>closeConnection()</code> method to explicitly close
+            Adapter's <methodname>closeConnection()</methodname> method to explicitly close
             the underlying database connection.
         </para>
 
         <para>
             Since release 1.7.2, you could check you are currently connected to the RDBMS
-            server with the method <code>isConnected()</code>. This means that a connection
-            resource has been initiated and wasn't closed. This function is not currently
-            able to test for example a server side closing of the connection. This is
+            server with the method <methodname>isConnected()</methodname>. This means that a
+            connection resource has been initiated and wasn't closed. This function is not
+            currently able to test for example a server side closing of the connection. This is
             internally use to close the connection. It allow you to close the connection
             multiple times without errors. It was already the case before 1.7.2 for PDO
             adapters but not for the others.

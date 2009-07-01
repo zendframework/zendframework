@@ -1053,11 +1053,33 @@ class Zend_Amf_ServerTest extends PHPUnit_Framework_TestCase
         $this->_server->handle($request);
         $response = $this->_server->getResponse()->getAMFBodies();
         $this->assertTrue($response[0]->getData() instanceof Zend_Amf_Value_Messaging_ErrorMessage);
-	// test the same while ensuring Zend_Json is loaded
-	require_once 'Zend/Json.php';
-	$this->_server->handle($request);
-	$response = $this->_server->getResponse()->getAMFBodies();
-	$this->assertTrue($response[0]->getData() instanceof Zend_Amf_Value_Messaging_ErrorMessage);
+		// test the same while ensuring Zend_Json is loaded
+		require_once 'Zend/Json.php';
+		$this->_server->handle($request);
+		$response = $this->_server->getResponse()->getAMFBodies();
+		$this->assertTrue($response[0]->getData() instanceof Zend_Amf_Value_Messaging_ErrorMessage);
+    }
+
+    /* See ZF-7102 */
+    public function testCtorExcection()
+    {
+		$this->_server->setClass('Zend_Amf_testException');
+		$this->_server->setProduction(false);
+        $message = new Zend_Amf_Value_Messaging_RemotingMessage();
+        $message->operation = 'hello';
+        $message->source = 'Zend_Amf_testException';
+        $message->body = array("123");
+        // create a mock message body to place th remoting message inside
+        $newBody = new Zend_Amf_Value_MessageBody(null,"/1", $message);
+        $request = new Zend_Amf_Request();
+        // at the requested service to a request
+        $request->addAmfBody($newBody);
+        $request->setObjectEncoding(0x03);
+        // let the server handle mock request
+        $this->_server->handle($request);
+        $response = $this->_server->getResponse()->getAMFBodies();
+        $this->assertTrue($response[0]->getData() instanceof Zend_Amf_Value_Messaging_ErrorMessage);
+        $this->assertContains("Oops, exception!", $response[0]->getData()->faultString);
     }
     
 }
@@ -1202,6 +1224,17 @@ class Zend_Amf_testclass
     
 }
 
+class Zend_Amf_testException
+{
+	public function __construct() {
+		throw new Exception("Oops, exception!");
+	}
+	
+	public function hello() {
+		return "hello";
+	}
+}
+
 /**
  * Class with private constructor
  */
@@ -1222,6 +1255,11 @@ class Zend_Amf_testclassPrivate
     public function test1($string = '')
     {
         return 'String: '. (string) $string;
+    }
+
+    public function hello() 
+    {
+	return "hello";
     }
 }
 

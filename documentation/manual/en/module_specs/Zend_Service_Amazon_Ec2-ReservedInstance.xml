@@ -2,71 +2,71 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.ec2.reserved.instance">
     <title>Zend_Service_Amazon_Ec2: Reserved Instances</title>
-	
-	<para>
-		With Amazon EC2 Reserved Instances, you can make a low one-time payment for
-		each instance to reserve and receive a significant discount on the hourly
-		usage charge for that instance.
-	</para>
-	<para>
-		Amazon EC2 Reserved Instances are based on instance type and location
-		(region and Availability Zone) for a specified period of time (e.g.,
-		1 year or 3 years) and are only available for Linux/UNIX instances.
-	</para>
-	
-	<sect2 id="zend.service.amazon.ec2.reserved.instance.howitworks">
-		<title>How Reserved Instances are Applied</title>
-		<para>
-			Reserved Instances are applied to instances that meet the type/location 
-			criteria during the specified period. In this example, a user is running
-			the following instances:
-		</para>
-		<itemizedlist>
+
+    <para>
+        With Amazon EC2 Reserved Instances, you can make a low one-time payment for
+        each instance to reserve and receive a significant discount on the hourly
+        usage charge for that instance.
+    </para>
+    <para>
+        Amazon EC2 Reserved Instances are based on instance type and location
+        (region and Availability Zone) for a specified period of time (e.g.,
+        1 year or 3 years) and are only available for Linux/UNIX instances.
+    </para>
+
+    <sect2 id="zend.service.amazon.ec2.reserved.instance.howitworks">
+        <title>How Reserved Instances are Applied</title>
+        <para>
+            Reserved Instances are applied to instances that meet the type/location
+            criteria during the specified period. In this example, a user is running
+            the following instances:
+        </para>
+        <itemizedlist>
             <listitem>
-            	(4) m1.small instances in Availability Zone us-east-1a
-			</listitem>
-			<listitem>
-            	(4) c1.medium instances in Availability Zone us-east-1b
-			</listitem>
-			<listitem>
-            	(2) c1.xlarge instances in Availability Zone us-east-1b
-			</listitem>
-		</itemizedlist>
-		<para>
-			The user then purchases the following Reserved Instances.
-		</para>
-		<itemizedlist>
+                (4) m1.small instances in Availability Zone us-east-1a
+            </listitem>
             <listitem>
-            	(2) m1.small instances in Availability Zone us-east-1a
-			</listitem>
-			<listitem>
-            	(2) c1.medium instances in Availability Zone us-east-1a
-			</listitem>
-			<listitem>
-            	(2) m1.xlarge instances in Availability Zone us-east-1a
-			</listitem>
-		</itemizedlist>
-		<para>
-			Amazon EC2 applies the two m1.small Reserved Instances to two of the instances
-			in Availability Zone us-east-1a. Amazon EC2 doesn't apply the two c1.medium
-			Reserved Instances because the c1.medium instances are in a different Availability
-			Zone and does not apply the m1.xlarge Reserved Instances because there are no
-			running m1.xlarge instances.
-		</para>
-	</sect2>
-	
-	<sect2 id="zend.service.amazon.ec2.reserved.instance.operations">
-		<title>Reserved Instances Usage</title>
+                (4) c1.medium instances in Availability Zone us-east-1b
+            </listitem>
+            <listitem>
+                (2) c1.xlarge instances in Availability Zone us-east-1b
+            </listitem>
+        </itemizedlist>
+        <para>
+            The user then purchases the following Reserved Instances.
+        </para>
+        <itemizedlist>
+            <listitem>
+                (2) m1.small instances in Availability Zone us-east-1a
+            </listitem>
+            <listitem>
+                (2) c1.medium instances in Availability Zone us-east-1a
+            </listitem>
+            <listitem>
+                (2) m1.xlarge instances in Availability Zone us-east-1a
+            </listitem>
+        </itemizedlist>
+        <para>
+            Amazon EC2 applies the two m1.small Reserved Instances to two of the instances
+            in Availability Zone us-east-1a. Amazon EC2 doesn't apply the two c1.medium
+            Reserved Instances because the c1.medium instances are in a different Availability
+            Zone and does not apply the m1.xlarge Reserved Instances because there are no
+            running m1.xlarge instances.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.service.amazon.ec2.reserved.instance.operations">
+        <title>Reserved Instances Usage</title>
         <example id="zend.service.amazon.ec2.reserved.instance.operations.describe">
             <title>Describes Reserved Instances that you purchased.</title>
             <para>
                 <code>describeInstances</code> will return information about a reserved
-				instance or instances that you purchased.
+                instance or instances that you purchased.
             </para>
             <para>
                 <code>describeInstances</code> returns a multi-demential array that contains
-				reservedInstancesId, instanceType, availabilityZone, duration, fixedPrice,
-				usagePrice, productDescription, instanceCount and state.
+                reservedInstancesId, instanceType, availabilityZone, duration, fixedPrice,
+                usagePrice, productDescription, instanceCount and state.
             </para>
             <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance_Reserved('aws_key',
@@ -80,15 +80,15 @@ $return = $ec2_instance->describeInstances('instanceId');
             <title>Describe current Reserved Instance Offerings aviable</title>
             <para>
                 <code>describeOfferings</code> Describes Reserved Instance offerings
-				that are available for purchase. With Amazon EC2 Reserved Instances,
-				you purchase the right to launch Amazon EC2 instances for a period of
-				time (without getting insufficient capacity errors) and pay a lower
-				usage rate for the actual time used.
+                that are available for purchase. With Amazon EC2 Reserved Instances,
+                you purchase the right to launch Amazon EC2 instances for a period of
+                time (without getting insufficient capacity errors) and pay a lower
+                usage rate for the actual time used.
             </para>
             <para>
                 <code>describeOfferings</code> returns a multi-demential array that contains
-				reservedInstancesId, instanceType, availabilityZone, duration, fixedPrice,
-				usagePrice and productDescription.
+                reservedInstancesId, instanceType, availabilityZone, duration, fixedPrice,
+                usagePrice and productDescription.
             </para>
             <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance_Reserved('aws_key',
@@ -96,18 +96,18 @@ $ec2_instance = new Zend_Service_Amazon_Ec2_Instance_Reserved('aws_key',
 $return = $ec2_instance->describeOfferings();
 ]]></programlisting>
         </example>
-		
-		<example id="zend.service.amazon.ec2.reserved.instance.offerings.purchase">
+
+        <example id="zend.service.amazon.ec2.reserved.instance.offerings.purchase">
             <title>Turn off CloudWatch Monitoring on an Instance(s)</title>
             <para>
                 <code>purchaseOffering</code> Purchases a Reserved Instance for use with your
-				account. With Amazon EC2 Reserved Instances, you purchase the right to launch
-				Amazon EC2 instances for a period of time (without getting insufficient capacity
-				errors) and pay a lower usage rate for the actual time used.
+                account. With Amazon EC2 Reserved Instances, you purchase the right to launch
+                Amazon EC2 instances for a period of time (without getting insufficient capacity
+                errors) and pay a lower usage rate for the actual time used.
             </para>
-			<para>
-				<code>purchaseOffering</code> returns the reservedInstanceId.
-			</para>
+            <para>
+                <code>purchaseOffering</code> returns the reservedInstanceId.
+            </para>
             <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance_Reserved('aws_key',
                                                      'aws_secret_key');

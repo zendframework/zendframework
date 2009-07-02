@@ -205,10 +205,10 @@ interface Zend_Tool_Framework_Manifest_Interface
 
         <para>
             Metadata objects are loaded (by a loader defined below) into the
-            Manfiest Repository (<code>Zend_Tool_Framework_Manifest_Repository</code>).
-            Manifests will be processed after all Providers have been found a
+            Manifest Repository (<code>Zend_Tool_Framework_Manifest_Repository</code>).
+            Manifests will be processed after all Providers have been found to be
             loaded into the provider repository. This shall allow Manifests to
-            created Metadata objects based on what is currently inside the
+            create Metadata objects based on what is currently inside the
             provider repository.
         </para>
 
@@ -245,7 +245,7 @@ class Zend_Tool_Framework_Metadata_Basic
             in more detail metadata that is specific to either actions or
             providers, and the reference is expected to be a reference to an
             action or a provider respectively. These classes are described in
-            the follow code snippet.
+            the following code snippet.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -279,7 +279,7 @@ class Zend_Tool_Framework_Manifest_ProviderMetadata
         <para>
             'Type' in these classes is used to describe the type of metadata the
             object is responsible for. In the cases of the
-            <code>ActionMetadat</code>a, the type would be 'Action', and
+            <code>ActionMetadata</code>, the type would be 'Action', and
             conversely in the case of the <code>ProviderMetadata</code> the type
             is 'Provider'. These metadata types will also include additional
             structured information about both the "thing" they are describing as
@@ -296,7 +296,7 @@ class Zend_Tool_Framework_Manifest_ProviderMetadata
         </para>
 
         <para>
-            Once these metadata objects are in the repository there are then two
+            Once these metadata objects are in the repository, there are then two
             different methods that can be used in order to search for them in
             the repository.
         </para>
@@ -319,7 +319,7 @@ class Zend_Tool_Framework_Manifest_Repository
      * of 'Foo', AND a key named 'name' value of 'cliActionName'
      *
      * Note: to either exclude or include name/value pairs that exist in the
-     * search critera but do not appear in the object, pass a bool value to
+     * search criteria but do not appear in the object, pass a bool value to
      * $includeNonExistentProperties
      */
     public function findMetadatas(Array $searchProperties = array(),
@@ -381,7 +381,7 @@ abstract class Zend_Tool_Framework_Client_Abstract
 
     /**
      * This method should be implemented by the client implementation to parse
-     * out and setup the request objects action, provider and parameter
+     * out and set up the request objects action, provider and parameter
      * information.
      */
     abstract protected function _preDispatch();
@@ -398,7 +398,7 @@ abstract class Zend_Tool_Framework_Client_Abstract
 ]]></programlisting>
 
         <para>
-            As you can see, there 1 method required to fulfill the needs of a
+            As you can see, there 1 method is required to fulfill the needs of a
             client (two others suggested), the initialization, prehandling and post handling. For a
             more in depth study of how the command line client works, please see
             the <ulink url="http://framework.zend.com/svn/framework/standard/branches/release-1.8/library/Zend/Tool/Framework/Client/Console.php">source code</ulink>.

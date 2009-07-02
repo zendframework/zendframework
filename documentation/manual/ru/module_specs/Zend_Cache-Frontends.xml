@@ -133,7 +133,8 @@
                               <entry><constant>FALSE</constant></entry>
                               <entry>
                                   Если установлен в true, то ядро будет
-                                  устанавливать флаг ignore_user_abort в методе
+                                  устанавливать <acronym>PHP</acronym>-флаг
+                                  ignore_user_abort в методе
                                   save() во избежание порчи кэша в некоторых
                                   случаях.
                               </entry>
@@ -265,8 +266,9 @@ if (!($cache->test($id))) {
             <para>
                 <classname>Zend_Cache_Frontend_Output</classname> является фронтэндом,
                 собирающим выходные данные. Он использует буферизацию вывода
-                (output buffering) в PHP для сохранения всего, что выводится
-                между его методами <methodname>start()</methodname> и <methodname>end()</methodname>.
+                (output buffering) в <acronym>PHP</acronym> для сохранения
+                всего, что выводится между его методами
+                <methodname>start()</methodname> и <methodname>end()</methodname>.
             </para>
         </sect3>
         <sect3 id="zend.cache.frontends.output.options">
@@ -366,7 +368,8 @@ echo 'This is never cached ('.time().').';
             <title>Примеры</title>
             <para>
                 Функция <methodname>call()</methodname> используется так же, как и
-                <methodname>call_user_func_array()</methodname> в PHP:
+                <methodname>call_user_func_array()</methodname> в
+                <acronym>PHP</acronym>:
             </para>
             <programlisting language="php"><![CDATA[
 $cache->call('veryExpensiveFunc', $params);
@@ -528,14 +531,16 @@ $result = $cache->foobar2('1', '2');
                 Можно использовать несколько ведущих файлов.
             </para>
             <para>
-                Например, у вас есть конфигурационный файл XML. Он парсится
+                Например, у вас есть конфигурационный файл
+                <acronym>XML</acronym>. Он парсится
                 функцией, которая возвращает объект конфигурации
                 (наподобие <classname>Zend_Config</classname>). С помощью
                 <classname>Zend_Cache_Frontend_File</classname> вы можете сохранять объект
                 конфигурации в кэш, чтобы избежать повторного парсинга
-                конфигурационного файла XML. Время жизни кэша будет зависеть
-                от ведущего файла - если конфигурационный
-                файл XML изменится, то кэш сразу становится недействительным.
+                конфигурационного файла <acronym>XML</acronym>. Время жизни
+                кэша будет зависеть от ведущего файла - если конфигурационный
+                файл <acronym>XML</acronym> изменится, то кэш сразу становится
+                недействительным.
             </para>
         </sect3>
         <sect3 id="zend.cache.frontends.file.options">
@@ -622,14 +627,16 @@ $result = $cache->foobar2('1', '2');
                 <varname>$_POST</varname>, <varname>$_SESSION</varname>,
                 <varname>$_COOKIE</varname>, <varname>$_FILES</varname>.
                 Кроме этого, вы используете только один метод для вызова
-                (<methodname>start()</methodname>), потому что <methodname>end()</methodname> вызывается
+                (<methodname>start()</methodname>), потому что
+                <methodname>end()</methodname> вызывается
                 автоматически, когда страница заканчивается.
             </para>
             <para>
-                На данный момент мы планируем добавить условную систему HTTP для
+                На данный момент мы планируем добавить условную систему
+                <acronym>HTTP</acronym> для
                 сохранения пропускной способности (система будет отправлять
-                HTTP 304 Not Modified, если есть попадание в кэш и броузер уже
-                имеет правильную версию страницы).
+                <acronym>HTTP</acronym> 304 Not Modified, если есть попадание
+                в кэш и броузер уже имеет правильную версию страницы).
             </para>
         </sect3>
         <sect3 id="zend.cache.frontends.page.options">
@@ -827,9 +834,11 @@ $result = $cache->foobar2('1', '2');
                               <entry><methodname>array()</methodname></entry>
                               <entry>
                                   Ассоциативный массив для установки опций
-                                  только для некоторых REQUEST_URI. Ключами
+                                  только для некоторых
+                                  <acronym>REQUEST_URI</acronym>. Ключами
                                   этого массива являются регулярные выражения
-                                  (PCRE), значениями — ассоциативные массивы со
+                                  (<acronym>PCRE</acronym>), значениями —
+                                  ассоциативные массивы со
                                   специальными опциями, которые устанавливаются,
                                   если <varname>$_SERVER['REQUEST_URI']</varname>
                                   соответствует регулярному выражению
@@ -845,7 +854,8 @@ $result = $cache->foobar2('1', '2');
                               <entry><type>Array</type></entry>
                               <entry><methodname>array()</methodname></entry>
                               <entry>
-                                   Массив строк с именами HTTP-заголовков.
+                                   Массив строк с именами
+                                   <acronym>HTTP</acronym>-заголовков.
                                    Перечисленные заголовки будут сохранены в
                                    кэше и будут замещены при попадании в кэш.
                               </entry>
@@ -930,8 +940,8 @@ $cache->start();
             <para>
                 В некоторых случаях может потребоваться отменить текущий
                 процесс кэширования - например, если используется код
-                возврата, отличный от HTTP/200. Поэтому мы добавили метод
-                <methodname>cancel()</methodname>:
+                возврата, отличный от <acronym>HTTP</acronym> 200. Поэтому
+                мы добавили метод <methodname>cancel()</methodname>:
             </para>
             <programlisting language="php"><![CDATA[
 // [...]

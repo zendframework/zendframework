@@ -4,15 +4,15 @@
     <title>Zend_Config_Xml</title>
     <para>
         <classname>Zend_Config_Xml</classname> дает разработчикам возможность
-        хранить конфигурационные данные в простом формате XML и читать их
+        хранить конфигурационные данные в простом формате <acronym>XML</acronym> и читать их
         посредством синтаксиса вложенных свойств объектов.
-        Корневой элемент в файле или строке с XML не имеет значения и ему
+        Корневой элемент в файле или строке с <acronym>XML</acronym> не имеет значения и ему
         может быть дано любое имя. Первый уровень
-        элементов XML соответствует разделам конфигурационных данных. Формат
-        XML поддерживает иерархическую организацию данных через вложенность
+        элементов <acronym>XML</acronym> соответствует разделам конфигурационных данных. Формат
+        <acronym>XML</acronym> поддерживает иерархическую организацию данных через вложенность
         элементов ниже элементов уровня разделов. Содержимое конечного элемента
         соответствует значению элемента конфигурационных данных. Наследование
-        разделов поддерживается через специальный атрибут <code>extends</code>,
+        разделов поддерживается через специальный атрибут <emphasis>extends</emphasis>,
         значение атрибута соответствует разделу, данные которого наследуются в
         раздел с этим атрибутом.
     </para>
@@ -28,7 +28,7 @@
         <title>Использование Zend_Config_Xml</title>
         <para>
             Данный пример демонстрирует основы использования <classname>Zend_Config_Xml</classname>
-            для загрузки конфигурационных данных из файла XML. В этом примере
+            для загрузки конфигурационных данных из файла <acronym>XML</acronym>. В этом примере
             используются конфигурационные данные для производственной и
             промежуточной систем. Поскольку конфигурационные данные
             промежуточной системы очень похожи на конфигурационные данные для
@@ -37,7 +37,7 @@
             произвольный, т.е. может быть и наоборот — "производственный"
             раздел наследует от "промежуточного", хотя это может не подходить в
             более сложных случаях. Допустим, конфигурационные данные
-            находятся в файле <code>/path/to/config.xml</code>:
+            находятся в файле <filename>/path/to/config.xml</filename>:
         </para>
         <programlisting language="xml"><![CDATA[
 <?xml version="1.0"?>
@@ -66,8 +66,8 @@
 ]]></programlisting>
         <para>
             Далее предположим, что разработчику приложения нужны "промежуточные"
-            конфигурационные данные из файла XML. Загрузить эти данные, указав
-            файл XML и нужный раздел, довольно просто:
+            конфигурационные данные из файла <acronym>XML</acronym>. Загрузить эти данные, указав
+            файл <acronym>XML</acronym> и нужный раздел, довольно просто:
         </para>
         <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Xml('/path/to/config.xml', 'staging');
@@ -79,11 +79,11 @@ echo $config->database->params->dbname; // выведет "dbname"
     <example id="zend.config.adapters.xml.example.attributes">
         <title>Использование тегов в <classname>Zend_Config_Xml</classname></title>
         <para>
-            Zend_Config_Xml также поддерживает два дополнительных способа
+            <classname>Zend_Config_Xml</classname> также поддерживает два дополнительных способа
             определения узлов в конфигурации. В обоих способах используются
-            атрибуты. Поскольку атрибуты <code>extends</code> и
-            <code>value</code> являются зарезервированными ключевыми словами
-            (<code>value</code> используется во втором способе
+            атрибуты. Поскольку атрибуты <emphasis>extends</emphasis> и
+            <emphasis>value</emphasis> являются зарезервированными ключевыми словами
+            (<emphasis>value</emphasis> используется во втором способе
             с применением атрибутов), то они не должны использоваться здесь.
             Первый способ с использованием атрибутов состоит в добавлении
             атрибутов в родительский узел, они потом будут преобразованы в
@@ -94,12 +94,14 @@ echo $config->database->params->dbname; // выведет "dbname"
 <configdata>
     <production webhost="www.example.com">
         <database adapter="pdo_mysql">
-            <params host="db.example.com" username="dbuser" password="secret" dbname="dbname"/>
+            <params host="db.example.com" username="dbuser" password="secret"
+                    dbname="dbname"/>
         </database>
     </production>
     <staging extends="production">
         <database>
-            <params host="dev.example.com" username="devuser" password="devsecret"/>
+            <params host="dev.example.com" username="devuser"
+                    password="devsecret"/>
         </database>
     </staging>
 </configdata>
@@ -108,7 +110,7 @@ echo $config->database->params->dbname; // выведет "dbname"
             Другой способ не делает конфигурацию заметно короче, но
             облегчает ее поддержку благодаря тому, что не нужно писать имена
             тегов дважды. Вы просто создаете пустой тег, значение которого
-            содержится в атрибуте <code>value</code>:
+            содержится в атрибуте <emphasis>value</emphasis>:
         </para>
         <programlisting language="xml"><![CDATA[
 <?xml version="1.0"?>
@@ -141,10 +143,10 @@ echo $config->database->params->dbname; // выведет "dbname"
         <title>Передача строки с XML</title>
         <para>
             <classname>Zend_Config_Xml</classname> также может загружать
-            XML непосредственно из строки, которая может быть получена,
+            <acronym>XML</acronym> непосредственно из строки, которая может быть получена,
             например, из базы данных. Строка передается конструктору в качестве
             первого параметра и должна начинаться с символов
-            <code>'&lt;?xml'</code>:
+            <emphasis>'&lt;?xml'</emphasis>:
         </para>
         <programlisting language="xml"><![CDATA[
 $string = <<<EOT

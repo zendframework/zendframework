@@ -20,7 +20,8 @@
             Обычно предполагается, что используется один из классов адаптеров, например,
             <link linkend="zend.config.adapters.ini"><classname>Zend_Config_Ini</classname></link>
             или <link linkend="zend.config.adapters.xml"><classname>Zend_Config_Xml</classname></link>.
-            Но если конфигурационные данные доступны в виде массива PHP,
+            Но если конфигурационные данные доступны в виде массива
+            <acronym>PHP</acronym>,
             то можно передавать эти данные конструктору <classname>Zend_Config</classname>,
             чтобы использовать преимущества простого объектно-ориентированного
             интерфейса.
@@ -63,7 +64,8 @@ $db = Zend_Db::factory($config->database);
     </para>
     <para>
         Кроме объектно-ориентированного доступа к значениям данных,
-        <classname>Zend_Config</classname> также предоставляет метод <code>get()</code>,
+        <classname>Zend_Config</classname> также предоставляет метод
+        <methodname>get()</methodname>,
         который будет возвращать значение по умолчанию, если элемент
         данных не существует. Например:
     </para>
@@ -74,8 +76,8 @@ $host = $config->database->get('host', 'localhost');
         <title>Использование Zend_Config с конфигурационным файлом PHP</title>
         <para>
             Часто требуется использовать конфигурационный файл,
-            основанный на "чистом" PHP. Следующий код показывает, как просто
-            этого достичь:
+            основанный на "чистом" <acronym>PHP</acronym>. Следующий код
+            показывает, как просто этого достичь:
         </para>
         <programlisting language="php"><![CDATA[
 // config.php

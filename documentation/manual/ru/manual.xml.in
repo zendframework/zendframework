@@ -1285,6 +1285,21 @@
                 <xi:include href="../en/module_specs/Zend_Service_Amazon_Ec2-Instance.xml" />
             </xi:fallback>
         </xi:include>
+        <xi:include href="module_specs/Zend_Service_Amazon_Ec2-WindowsInstance.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Service_Amazon_Ec2-WindowsInstance.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Service_Amazon_Ec2-ReservedInstance.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Service_Amazon_Ec2-ReservedInstance.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Service_Amazon_Ec2-CloudWatch.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Service_Amazon_Ec2-CloudWatch.xml" />
+            </xi:fallback>
+        </xi:include>
         <xi:include href="module_specs/Zend_Service_Amazon_Ec2-Image.xml">
             <xi:fallback>
                 <xi:include href="../en/module_specs/Zend_Service_Amazon_Ec2-Image.xml" />

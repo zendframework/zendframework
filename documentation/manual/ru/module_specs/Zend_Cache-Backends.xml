@@ -30,7 +30,7 @@
                       <row>
                           <entry><emphasis>cache_dir</emphasis></entry>
                           <entry><type>String</type></entry>
-                          <entry><filename>'/tmp/'</filename></entry>
+                          <entry>'<filename>/tmp/</filename>'</entry>
                           <entry>
                               Директория, в которой хранятся файлы кэша
                           </entry>
@@ -43,7 +43,7 @@
                             Включает/отключает блокировку файлов. Позволяет
                             избежать искажения данных кэша в плохих условиях, но
                             это не поможет при многопоточном веб-сервере или
-                            файловой системе NFS...
+                            файловой системе <acronym>NFS</acronym>...
                           </entry>
                       </row>
                       <row>
@@ -105,7 +105,8 @@
                           <entry>
                               Префикс для файлов кэша. Будьте осторожны с этой
                               опцией, поскольку слишком общее значение в
-                              системной директории для кэша (например '/tmp')
+                              системной директории для кэша (например,
+                              <filename>/tmp</filename>)
                               может привести к катастрофическим последствиям при
                               очищении кэша.
                         </entry>
@@ -168,13 +169,16 @@
                               Отклочение/настройка процесса автоматической
                               чистки. Автоматическая чистка дефрагментирует
                               файл данных (и делает его меньше) при вызове
-                              методов clean() и delete():
+                              методов <methodname>clean()</methodname>
+                              и <methodname>delete()</methodname>:
                               0 - автоматическая чистка отключена;
                               1 - систематическая чистка (при каждом вызове
-                              методов delete() или clean());
+                              методов <methodname>delete()</methodname> или
+                              <methodname>clean()</methodname>);
                               x (целое число больше 1) - автоматическая чистка
                               производится случайным образом 1 раз на x вызовов
-                              методов clean() и delete().
+                              методов <methodname>clean()</methodname>
+                              и <methodname>delete()</methodname>.
                           </entry>
                       </row>
                   </tbody>
@@ -260,8 +264,9 @@
             Этот расширенный бэкэнд хранит записи кэша в совместно используемой
             памяти через расширение
             <ulink url="http://pecl.php.net/package/APC">APC</ulink>
-            (Alternative PHP Cache — альтернативный кэш PHP), которое,
-            разумеется, необходимо установить для использования этого бэкэнда.
+            (Alternative <acronym>PHP</acronym> Cache — альтернативный
+            кэш <acronym>PHP</acronym>), которое, разумеется, необходимо
+            установить для использования этого бэкэнда.
         </para>
         <para>
             Будьте осторожны: на данный момент теги для этого бэкэнда
@@ -305,7 +310,9 @@
                           <entry><type>String</type></entry>
                           <entry><constant>NULL</constant></entry>
                           <entry>
-                              xcache.admin.user, необходима для метода clean()
+                              <filename>xcache.admin.user</filename>,
+                              необходима для метода
+                              <methodname>clean()</methodname>
                           </entry>
                       </row>
                       <row>
@@ -313,8 +320,10 @@
                           <entry><type>String</type></entry>
                           <entry><constant>NULL</constant></entry>
                           <entry>
-                              xcache.admin.pass - пароль в незашифрованном виде,
-                              необходим для метода clean()
+                              <filename>xcache.admin.pass</filename> - пароль
+                              в незашифрованном виде,
+                              необходим для метода
+                              <methodname>clean()</methodname>
                           </entry>
                       </row>
                   </tbody>
@@ -324,7 +333,7 @@
     <sect2 id="zend.cache.backends.platform">
         <title>Zend_Cache_Backend_ZendPlatform</title>
         <para>
-            Этот бэкэнд использует API
+            Этот бэкэнд использует <acronym>API</acronym>
             <ulink url="http://www.zend.com/products/platform">Zend
             Platform</ulink> для кэширования контента. Естетственно,
             использование этого бэкэнда требует наличия установленного Zend
@@ -411,10 +420,11 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
                           <entry><type>Boolean</type></entry>
                           <entry><constant>FALSE</constant></entry>
                           <entry>
-                              Если равна true, то аргумент slow_backend
+                              Если <constant>TRUE</constant>, то аргумент slow_backend
                               используется как полное имя класса, иначе
                               значение этого аргумента используется в конце
-                              имени класса "Zend_Cache_Backend_[...]".
+                              имени класса
+                              "<classname>Zend_Cache_Backend_</classname>[...]".
                           </entry>
                       </row>
                       <row>
@@ -422,10 +432,12 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
                           <entry><type>Boolean</type></entry>
                           <entry><constant>FALSE</constant></entry>
                           <entry>
-                              Если равна true, то аргумент fast_backend
-                              используется как полное имя класса, иначе
+                              Если <constant>TRUE</constant>, то аргумент fast_backend
+                              используется как полное имя класса.
+                              Если <constant>FALSE</constant>, то
                               значение этого аргумента используется в конце
-                              имени класса "Zend_Cache_Backend_[...]".
+                              имени класса
+                              "<classname>Zend_Cache_Backend_</classname>[...]".
                           </entry>
                       </row>
                       <row>
@@ -433,7 +445,7 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
                           <entry><type>Boolean</type></entry>
                           <entry><constant>FALSE</constant></entry>
                           <entry>
-                              Если равна true, то для медленного бэкэнда не
+                              Если <constant>TRUE</constant>, то для медленного бэкэнда не
                               будет производиться включение require_once
                               (полезно только при использовании собственных
                               бэкэндов).
@@ -444,7 +456,7 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
                           <entry><type>Boolean</type></entry>
                           <entry><constant>FALSE</constant></entry>
                           <entry>
-                              Если равна true, то для быстрого бэкэнда не
+                              Если <constant>TRUE</constant>, то для быстрого бэкэнда не
                               будет производиться включение require_once
                               (полезно только при использовании собственных
                               бэкэндов).
@@ -455,7 +467,7 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
                           <entry><type>Boolean</type></entry>
                           <entry><constant>TRUE</constant></entry>
                           <entry>
-                              Если равна true, то будет производиться
+                              Если <constant>TRUE</constant>, то будет производиться
                               автоматическое обновление "быстрого" кэша при
                               попадании в кэш.
                           </entry>
@@ -489,7 +501,8 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
         </para>
         <para>
             Этот бэкэнд работает только в среде Zend Server с запросами,
-            производимыми через HTTP(S), и не работает в случае скриптов,
+            производимыми через <acronym>HTTP</acronym> и
+            <acronym>HTTPS</acronym>, и не работает в случае скриптов,
             запускаемых через командную строку.
         </para>
         <para>

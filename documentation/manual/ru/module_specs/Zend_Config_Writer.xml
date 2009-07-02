@@ -9,12 +9,12 @@
         в использовании.
         По умолчанию <classname>Zend_Config_Writer</classname> поставляется с тремя
         адаптерами, которые используются одинаково. Вы инстанцируете класс для
-        записи с опциями, которыми могут быть <code>filename</code>
-        (имя файла) и <code>config</code> (конфигурационные данные).
-        Затем вы вызываете метод <code>write()</code> объекта, и он
+        записи с опциями, которыми могут быть <emphasis>filename</emphasis>
+        (имя файла) и <emphasis>config</emphasis> (конфигурационные данные).
+        Затем вы вызываете метод <methodname>write()</methodname> объекта, и он
         создает конфигурационный файл. Вы можете также передавать
         <varname>$filename</varname> и <varname>$config</varname> непосредственно
-        методу <code>write()</code>. В настоящее время вместе с
+        методу <methodname>write()</methodname>. В настоящее время вместе с
         <classname>Zend_Config_Writer</classname> поставляются следующие адаптеры:
     </para>
 
@@ -38,7 +38,7 @@
 
     <para>
         В качестве исключения <classname>Zend_Config_Writer_Ini</classname> имеет
-        еще один опциональный параметр <code>nestSeparator</code>, через
+        еще один опциональный параметр <emphasis>nestSeparator</emphasis>, через
         который указывается символ-разделитель для узлов.
         По умолчанию это точка, как и в <classname>Zend_Config_Ini</classname>.
     </para>
@@ -48,18 +48,19 @@
         следует знать следующее.
         Для того, чтобы создать или изменить значение, устанавливайте
         параметр объекта <classname>Zend_Config</classname> через аксессор
-        <code>-&gt;</code>. Для того, чтобы создать раздел в корне или
+        (<emphasis>-&gt;</emphasis>). Для того, чтобы создать раздел в корне или
         ветку, создавайте новый массив
-        (<varname>$config-&gt;branch = array();</varname>). Для того, чтобы
-        указать, от какого раздела наследует другой, вызывайте метод в корне
-        объекта <classname>Zend_Config</classname>.
+        ("<command>$config-&gt;branch = array()</command>"). Для того, чтобы
+        указать, от какого раздела наследует другой, вызывайте метод
+        <methodname>setExtend()</methodname> в корне объекта
+        <classname>Zend_Config</classname>.
     </para>
 
     <example id="zend.config.writer.example.using">
         <title>Использование Zend_Config_Writer</title>
         <para>
             Этот пример демонстрирует использование
-            <code>Zend_Config_Writer_Xml</code> для создания нового
+            <classname>Zend_Config_Writer_Xml</classname> для создания нового
             конфигурационного файла:
         </para>
         <programlisting language="php"><![CDATA[
@@ -95,9 +96,9 @@ $writer->write('config.xml', $config);
 ]]></programlisting>
         <para>
             В этом примере создается конфигурационный
-            XML-файл с "промежуточным" (staging) и "производственным"
-            (production) разделами, в котором первый раздел наследует от
-            второго.
+            <acronym>XML</acronym>-файл с "промежуточным" (staging) и
+            "производственным" (production) разделами, в котором первый
+            раздел наследует от второго.
         </para>
     </example>
 
@@ -132,7 +133,7 @@ $writer->write();
             важно загрузить все
             разделы с пропуском расширений с тем, чтобы значения не
             объединялись. Это достигается путем передачи опции
-            <code>skipExtends</code> конструктору.
+            <emphasis>skipExtends</emphasis> конструктору.
         </para>
     </note>
 </sect1>

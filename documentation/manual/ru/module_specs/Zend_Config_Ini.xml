@@ -2,51 +2,65 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.config.adapters.ini">
     <title>Zend_Config_Ini</title>
+
     <para>
-        <classname>Zend_Config_Ini</classname> дает разработчикам возможность хранить
-        конфигурационные данные в знакомом большинству формате INI и считывать
-        их в приложении с использованием синтаксиса вложенных свойств объекта.
-        Формат INI специализируется на обеспечении иерархии конфигурационных
-        данных и наследования между разделами конфигурационных данных.
+        <classname>Zend_Config_Ini</classname> дает разработчикам возможность
+        хранить конфигурационные данные в знакомом большинству
+        формате <acronym>INI</acronym> и считывать их в приложении с
+        использованием синтаксиса вложенных свойств объекта.
+        Формат <acronym>INI</acronym> специализируется на обеспечении иерархии
+        конфигурационных данных и наследования между разделами
+        конфигурационных данных.
         Иерархии конфигурационных данных поддерживаются посредством
-        разделения ключей точкой (<code>.</code>). Раздел можно расширять
-        или наследовать от другого раздела посредством указания имени раздела
-        с двоеточием (<code>:</code>) и именем раздела, от которого
-        наследуются данные, после него.
+        разделения ключей точкой ("<emphasis>.</emphasis>"). Раздел можно
+        расширять или наследовать от другого раздела посредством указания
+        имени раздела с двоеточием ("<emphasis>:</emphasis>") и именем
+        раздела, от которого наследуются данные, после него.
     </para>
+
     <note>
         <title>Синтаксический разбор INI-файла</title>
+
         <para>
-            <classname>Zend_Config_Ini</classname> использует функцию PHP
-            <ulink url="http://php.net/parse_ini_file"><code>parse_ini_file()</code></ulink>.
-            Пожалуйста, почитайте документацию, чтобы получить представление об
+            <classname>Zend_Config_Ini</classname> использует функцию
+            <acronym>PHP</acronym> <ulink
+                url="http://php.net/parse_ini_file"><methodname>parse_ini_file()</methodname></ulink>.
+            Пожалуйста, прочитайте документацию, чтобы получить представление об
             особенностях ее поведения, которые распространяются и на
             <classname>Zend_Config_Ini</classname> — например, о том, как обрабатываются
-            специальные значения <constant>TRUE</constant>, <constant>FALSE</constant>, <code>yes</code>,
-            <code>no</code> и <constant>NULL</constant>.
+            специальные значения "<constant>TRUE</constant>",
+            "<constant>FALSE</constant>", "yes",
+            "no" и "<constant>NULL</constant>".
         </para>
     </note>
-        <note>
+
+    <note>
         <title>Разделитель ключей</title>
+
         <para>
             По умолчанию разделителем ключей является символ точки
-            (<code>.</code>). Он может быть заменен на любой другой путем
-            изменения ключа <code>'nestSeparator'</code> в массиве
-            <varname>$options</varname> при создании объекта <classname>Zend_Config_Ini</classname>.
-            Например:
-            <programlisting language="php"><![CDATA[
+            ("<emphasis>.</emphasis>"). Он может быть заменен на любой другой
+            путем изменения ключа <emphasis>'nestSeparator'</emphasis> в
+            массиве <varname>$options</varname> при создании объекта
+            <classname>Zend_Config_Ini</classname>. Например:
+        </para>
+
+        <programlisting language="php"><![CDATA[
 $options['nestSeparator'] = ':';
 $config = new Zend_Config_Ini('/path/to/config.ini',
                               'staging',
                               $options);
 ]]></programlisting>
-        </para>
+
     </note>
+
     <example id="zend.config.adapters.ini.example.using">
         <title>Использование Zend_Config_Ini</title>
+
         <para>
             Данный пример демонстрирует использование <classname>Zend_Config_Ini</classname>
-            для загрузки конфигурационных данных из файла INI. В этом примере
+            для загрузки конфигурационных данных из файла
+            <acronym>INI</acronym>. В этом примере
             используются конфигурационные данные для производственной и
             промежуточной систем. Поскольку конфигурационные данные для
             промежуточной и производственной систем в основном одни и те же,
@@ -55,8 +69,9 @@ $config = new Zend_Config_Ini('/path/to/config.ini',
             произвольный, т.е. может быть и наоборот — "производственный"
             раздел наследует от "промежуточного", хотя это может не подходить в
             более сложных случаях. Допустим, конфигурационные данные
-            находятся в файле <code>/path/to/config.ini</code>:
+            находятся в файле <filename>/path/to/config.ini</filename>:
         </para>
+
         <programlisting language="ini"><![CDATA[
 ; Конфигурационные данные производственного сайта
 [production]
@@ -74,11 +89,14 @@ database.params.host     = dev.example.com
 database.params.username = devuser
 database.params.password = devsecret
 ]]></programlisting>
+
         <para>
             Далее предположим, что разработчику приложения нужны "промежуточные"
-            конфигурационные данные из файла INI. Загрузить эти данные,
-            указав файл INI и нужный раздел, довольно просто:
+            конфигурационные данные из файла <acronym>INI</acronym>. Загрузить
+            эти данные, указав файл <acronym>INI</acronym> и нужный раздел,
+            довольно просто:
         </para>
+
         <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Ini('/path/to/config.ini', 'staging');
 
@@ -86,6 +104,7 @@ echo $config->database->params->host;   // выведет "dev.example.com"
 echo $config->database->params->dbname; // выведет "dbname"
 ]]></programlisting>
     </example>
+
     <note>
     <table id="zend.config.adapters.ini.table">
         <title>Параметры конструктора Zend_Config_Ini</title>
@@ -99,14 +118,16 @@ echo $config->database->params->dbname; // выведет "dbname"
             <tbody>
                 <row>
                     <entry><varname>$filename</varname></entry>
-                    <entry>INI-файл для загрузки</entry>
+                    <entry><acronym>INI</acronym>-файл для загрузки</entry>
                 </row>
                 <row>
                     <entry><varname>$section</varname></entry>
                     <entry>
-                        Раздел в INI-файле, который должен быть загружен.
-                        Установка этого параметра в null вызовет загрузку всех
-                        разделов. Также может быть передан массив имен разделов
+                        Раздел в <acronym>INI</acronym>-файле, который должен
+                        быть загружен.
+                        Установка этого параметра в <constant>NULL</constant>
+                        вызовет загрузку всех разделов.
+                        Также может быть передан массив имен разделов
                         для загрузки нескольких разделов.
                     </entry>
                 </row>
@@ -118,9 +139,11 @@ echo $config->database->params->dbname; // выведет "dbname"
                             <listitem>
                                 <para>
                                     <emphasis>allowModifications</emphasis>:
-                                    Устанавливается в true, чтобы разрешить
+                                    Устанавливается в
+                                    <constant>TRUE</constant>, чтобы разрешить
                                     последующую модификацию загруженного файла.
-                                    По умолчанию установлен в false
+                                    По умолчанию установлен в
+                                    <constant>FALSE</constant>
                                 </para>
                             </listitem>
                             <listitem>

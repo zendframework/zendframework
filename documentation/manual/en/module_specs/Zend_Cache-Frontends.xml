@@ -549,8 +549,8 @@ $result = $cache->foobar2('1', '2');
                               <entry><type>Boolean</type></entry>
                               <entry><constant>FALSE</constant></entry>
                               <entry>
-                                  if true, missing master files are ignored silently (an exception
-                                  is raised else)
+                                  if <constant>TRUE</constant>, missing master files are ignored
+                                  silently (an exception is raised else)
                               </entry>
                          </row>
                       </tbody>
@@ -633,7 +633,7 @@ $result = $cache->foobar2('1', '2');
                                       <listitem>
                                           <para>
                                               <emphasis>(boolean, true by default) cache</emphasis>:
-                                              cache is on if true
+                                              cache is on if <constant>TRUE</constant>
                                           </para>
                                       </listitem>
                                       <listitem>
@@ -852,7 +852,8 @@ $cache->start();
             <para>
                 Because of design issues, in some cases (for example when using non
                 <acronym>HTTP</acronym> 200 return codes), you could need to cancel the current
-                cache process. So we introduce for this particular frontend, the cancel() method.
+                cache process. So we introduce for this particular frontend, the
+                <methodname>cancel()</methodname> method.
             </para>
             <programlisting language="php"><![CDATA[
 // [...] // require, configuration and factory

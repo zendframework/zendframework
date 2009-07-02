@@ -109,6 +109,6 @@ class Zend_Filter_StringTrim implements Zend_Filter_Interface
         );
 
         $pattern = '^[' . $chars . ']*|[' . $chars . ']*$';
-        return preg_replace("/$pattern/usSD", '', $value);
+        return preg_replace("/$pattern/sSD", '', $value);
     }
 }

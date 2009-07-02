@@ -104,4 +104,12 @@ class Zend_Filter_StringTrimTest extends PHPUnit_Framework_TestCase
         $this->_filter->setCharList('&');
         $this->assertEquals('a&b', $this->_filter->filter('&&a&b&&'));
     }
+
+    /**
+     * @ZF-7183
+     */
+    public function testZF7183()
+    {
+        $this->assertEquals('Зенд', $this->_filter->filter('Зенд'));
+    }
 }

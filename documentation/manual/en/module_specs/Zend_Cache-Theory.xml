@@ -9,7 +9,8 @@
         the cached resource is considered 'fresh'. The third key concept is conditional execution so
         that parts of your code can be skipped entirely, boosting performance. The main frontend
         function (eg. <methodname>Zend_Cache_Core::get()</methodname>) is always designed to return
-        false for a cache miss if that makes sense for the nature of a frontend. That enables
+        <constant>FALSE</constant> for a cache miss if that makes sense for the nature of a
+        frontend. That enables
         end-users to wrap parts of the code they would like to cache (and skip) in
         <emphasis><methodname>if()</methodname>{ ... }</emphasis> statements where the condition is
         a <classname>Zend_Cache</classname> method itself. On the end if these blocks you must save
@@ -76,9 +77,9 @@ $cache = Zend_Cache::factory($frontendName,
 $cache->save($huge_data, 'myUniqueID', array('tagA', 'tagB', 'tagC'));
 ]]></programlisting>
         <note><para>
-            note than the <methodname>save()</methodname> method accepts an optional fourth argument
-            : <varname>$specificLifetime</varname> (if != false, it sets a specific lifetime for
-            this particular cache record)
+            note than the <methodname>save()</methodname> method accepts an optional fourth
+            argument: <varname>$specificLifetime</varname> (if != <constant>FALSE</constant>,
+            it sets a specific lifetime for this particular cache record)
         </para></note>
     </sect2>
     <sect2 id="zend.cache.clean">

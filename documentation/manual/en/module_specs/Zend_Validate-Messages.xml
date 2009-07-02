@@ -118,12 +118,16 @@
                     <entry>'%value%' is an empty string</entry>
                 </row>
                 <row>
-                    <entry morerows="6" valign="middle">EmailAddress</entry>
+                    <entry morerows="7" valign="middle">EmailAddress</entry>
                     <entry>INVALID</entry>
                     <entry>
                         '%value%' is not a valid email address in the basic format
                         local-part@hostname
                     </entry>
+                </row>
+                <row>
+                    <entry>INVALID_FORMAT</entry>
+                    <entry>'%value%' is not a valid email address in the basic format local-part@hostname</entry>
                 </row>
                 <row>
                     <entry>INVALID_HOSTNAME</entry>

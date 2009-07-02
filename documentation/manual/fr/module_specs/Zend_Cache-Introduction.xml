@@ -11,27 +11,27 @@
 
     <para>
         Le cache dans Zend Framework est réalisé via les frontends alors que les caches
-        d'enregistrements sont stockés grâce à des adaptateurs de backend (<code>File</code>,
-        <code>Sqlite</code>, <code>Memcache</code>...) grâce à un système souple d'ID et de
-        balises. En les utilisant, il est simple de supprimer des types spécifiques
-        d'enregistrements par la suite (par exemple: "supprime tous les enregistrements de cache
-        marqués avec une balise donnée").
+        d'enregistrements sont stockés grâce à des adaptateurs de backend
+        (<emphasis>File</emphasis>, <emphasis>Sqlite</emphasis>, <emphasis>Memcache</emphasis>...)
+        grâce à un système souple d'ID et de balises. En les utilisant, il est simple de supprimer
+        des types spécifiques d'enregistrements par la suite (par exemple: "supprime tous les
+        enregistrements de cache marqués avec une balise donnée").
     </para>
 
     <para>
         Le coeur du module (<classname>Zend_Cache_Core</classname>) est générique, souple et
         configurable. Pour le moment, pour vos besoins spécifiques, il y a des frontends qui
-        étendent <classname>Zend_Cache_Core</classname> simplement : <code>Output</code>,
-        <code>File</code>, <code>Function</code> et <code>Class</code>.
+        étendent <classname>Zend_Cache_Core</classname> simplement : <emphasis>Output</emphasis>,
+        <emphasis>File</emphasis>, <emphasis>Function</emphasis> et <emphasis>Class</emphasis>.
     </para>
 
     <example id="zend.cache.introduction.example-1">
         <title>Créer un frontend avec Zend_Cache::factory()</title>
 
         <para>
-            <classname>Zend_Cache::factory()</classname> instancie les objets corrects et les lie
-            ensemble. Dans le premier exemple, nous allons utiliser le frontend <code>Core</code>
-            avec le backend <code>File</code>.
+            <methodname>Zend_Cache::factory()</methodname> instancie les objets corrects et les lie
+            ensemble. Dans le premier exemple, nous allons utiliser le frontend
+            <emphasis>Core</emphasis> avec le backend <emphasis>File</emphasis>.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -57,7 +57,7 @@ $cache = Zend_Cache::factory('Core',
         <title>Frontends et Backends constitués de plusieurs mots</title>
         <para>
             Certains frontends et backends sont nommés en utilisant plusieurs mots, comme
-            "<code>ZendPlatform</code>". En les spécifiant à la fabrique, séparez les en utilisant
+            "ZendPlatform". En les spécifiant à la fabrique, séparez les en utilisant
             un séparateur de mot, comme l'espace (" "), le tiret ("-") ou le point (".").
         </para>
     </note>
@@ -68,9 +68,9 @@ $cache = Zend_Cache::factory('Core',
         <para>
             Maintenant que nous avons un frontend, nous pouvons mettre en cache tout type de
             données (nous avons activé la sérialisation). Par exemple nous pouvons mettre en cache
-            le résultat d'une requête SQL coûteuse. Après qu'il soit mis en cache, il n'y a plus
-            besoin de se connecter à la base de données. Les enregistrements récupérés depuis le
-            cache sont désérialisés.
+            le résultat d'une requête de base de données coûteuse. Après qu'il soit mis en cache,
+            il n'y a plus besoin de se connecter à la base de données. Les enregistrements récupérés
+            depuis le cache sont désérialisés.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -103,15 +103,15 @@ print_r($result);
         <para>
             Nous marquons les sections dans lesquelles nous voulons un cache de sortie en
             ajoutant de la logique conditionnelle, en encapsulant la section entre les méthodes
-            <code>start()</code> et <code>end()</code> (cela ressemble au premier exemple et est le
-            coeur de la stratégie de mise en cache).
+            <methodname>start()</methodname> et <methodname>end()</methodname>
+            (cela ressemble au premier exemple et est le coeur de la stratégie de mise en cache).
         </para>
 
         <para>
             A l'intérieur, affichez vos données comme d'habitude toutes les sorties seront
-            misent en cache quand la méthode <code>end()</code> est appelée. A la prochaine
-            exécution, la section complète sera évitée, au profit de la récupération de son cache
-            (si le cache est encore valide).
+            misent en cache quand la méthode <methodname>end()</methodname> est appelée. A la
+            prochaine exécution, la section complète sera évitée, au profit de la récupération de
+            son cache (si le cache est encore valide).
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -144,11 +144,11 @@ echo "Ceci n' jamais mis en cache (" . time() . ").";
 ]]></programlisting>
 
         <para>
-            Notez que nous affichons le résultat de <code>time()</code> deux fois&#160;; c'est
-            dans un but de démonstration. Essayez de lancer la page et de la rafraîchir plusieurs
-            fois&#160;; vous allez constater que le premier nombre ne change pas alors que le second
-            change à chaque actualisation. C'est parce que le premier nombre a été mis en cache et
-            sauvegardé. Après 30 secondes ("<code>lifeTime</code>" a été mis à 30 secondes), le
+            Notez que nous affichons le résultat de <methodname>time()</methodname> deux fois&#160;;
+            c'est dans un but de démonstration. Essayez de lancer la page et de la rafraîchir
+            plusieurs fois&#160;; vous allez constater que le premier nombre ne change pas alors
+            que le second change à chaque actualisation. C'est parce que le premier nombre a été
+            mis en cache et sauvegardé. Après 30 secondes ("lifeTime" a été mis à 30 secondes), le
             premier nombre devrait de nouveau correspondre au second nombre parce que le cache a
             expiré -- seulement pour être mis en cache de nouveau. Vous devriez essayer ce code
             dans votre navigateur ou dans une console.
@@ -159,7 +159,8 @@ echo "Ceci n' jamais mis en cache (" . time() . ").";
     <note>
         <para>
             Lorsque vous utilisez <classname>Zend_Cache</classname>, faîtes attention à
-            l'identifiant du cache (passé à <code>save()</code> et <code>start()</code>). Il doit
+            l'identifiant du cache (passé à <methodname>save()</methodname> et
+            <methodname>start()</methodname>). Il doit
             être unique pour chaque ressource que vous mettez en cache, sinon il est possible que
             des caches en efface d'autres, ou encore pire, s'affiche en lieu et place d'autres.
         </para>

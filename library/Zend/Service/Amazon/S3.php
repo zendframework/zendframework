@@ -38,7 +38,7 @@ require_once 'Zend/Crypt/Hmac.php';
  * @subpackage Amazon_S3
  * @copyright  Copyright (c) 2005-2008, Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @see http://docs.amazonwebservices.com/AmazonS3/2006-03-01/
+ * @see        http://docs.amazonwebservices.com/AmazonS3/2006-03-01/
  */
 class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
 {
@@ -48,13 +48,14 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
      * @var array
      */
     protected static $_wrapperClients = array();
-	/**
-	 * Endpoint for the service
-	 *
-	 * @var Zend_Uri_Http
-	 */
-	protected $_endpoint;
-    
+
+    /**
+     * Endpoint for the service
+     *
+     * @var Zend_Uri_Http
+     */
+    protected $_endpoint;
+
     const S3_ENDPOINT = 's3.amazonaws.com';
 
     const S3_ACL_PRIVATE = 'private';
@@ -65,42 +66,53 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
     const S3_REQUESTPAY_HEADER = 'x-amz-request-payer';
     const S3_ACL_HEADER = 'x-amz-acl';
     const S3_CONTENT_TYPE_HEADER = 'Content-Type';
-    
+
     /**
      * Set S3 endpoint to use
      *
      * @param string|Zend_Uri_Http $endpoint
      * @return Zend_Service_Amazon_S3
      */
-    public function setEndpoint($endpoint) 
+    public function setEndpoint($endpoint)
     {
-    	if(!($endpoint instanceof Zend_Uri_Http)) {
-    		$endpoint = Zend_Uri::factory($endpoint);
-    	}
-    	if(!$endpoint->valid()) {
-    		require_once 'Zend/Service/Amazon/S3/Exception.php';
-    		throw new Zend_Service_Amazon_S3_Exception("Invalid endpoint supplied");
-    	}
-    	$this->_endpoint = $endpoint;
-    	return $this;
+        if (!($endpoint instanceof Zend_Uri_Http)) {
+            $endpoint = Zend_Uri::factory($endpoint);
+        }
+        if (!$endpoint->valid()) {
+            /**
+             * @see Zend_Service_Amazon_S3_Exception
+             */
+            require_once 'Zend/Service/Amazon/S3/Exception.php';
+            throw new Zend_Service_Amazon_S3_Exception('Invalid endpoint supplied');
+        }
+        $this->_endpoint = $endpoint;
+        return $this;
     }
-    
+
     /**
      * Get current S3 endpoint
      *
      * @return Zend_Uri_Http
      */
-    public function getEndpoint() 
+    public function getEndpoint()
     {
-    	return $this->_endpoint;
+        return $this->_endpoint;
     }
-    
+
+    /**
+     * Constructor
+     *
+     * @param string $accessKey
+     * @param string $secretKey
+     * @param string $region
+     */
     public function __construct($accessKey=null, $secretKey=null, $region=null)
     {
-    	parent::__construct($accessKey, $secretKey, $region);
-    	$this->setEndpoint("http://".self::S3_ENDPOINT);	
+        parent::__construct($accessKey, $secretKey, $region);
+
+        $this->setEndpoint('http://'.self::S3_ENDPOINT);
     }
-    
+
     /**
      * Verify if the bucket name is valid
      *
@@ -133,10 +145,10 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
             require_once 'Zend/Service/Amazon/S3/Exception.php';
             throw new Zend_Service_Amazon_S3_Exception("Bucket name \"$bucket\" cannot be an IP address");
         }
-    	return true;
+        return true;
     }
 
-	/**
+    /**
      * Add a new bucket
      *
      * @param  string $bucket
@@ -144,19 +156,20 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
      */
     public function createBucket($bucket, $location = null)
     {
-		$this->_validBucketName($bucket);
-		
+        $this->_validBucketName($bucket);
+
         if($location) {
-        	$data = "<CreateBucketConfiguration><LocationConstraint>$location</LocationConstraint></CreateBucketConfiguration>";
-        } else {
-        	$data = null;
+            $data = '<CreateBucketConfiguration><LocationConstraint>'.$location.'</LocationConstraint></CreateBucketConfiguration>';
+        }
+        else {
+            $data = null;
         }
         $response = $this->_makeRequest('PUT', $bucket, null, array(), $data);
 
         return ($response->getStatus() == 200);
     }
-    
-	/**
+
+    /**
      * Checks if a given bucket name is available
      *
      * @param  string $bucket
@@ -295,6 +308,12 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
         return $objects;
     }
 
+    /**
+     * Make sure the object name is valid
+     *
+     * @param  string $object
+     * @return string
+     */
     protected function _fixupObjectName($object)
     {
         $nameparts = explode('/', $object);
@@ -302,27 +321,28 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
         $this->_validBucketName($nameparts[0]);
 
         $firstpart = array_shift($nameparts);
-        if(count($nameparts) == 0) {
+        if (count($nameparts) == 0) {
             return $firstpart;
         }
 
-        return $firstpart.'/'.join("/", array_map('rawurlencode',$nameparts));
+        return $firstpart.'/'.join('/', array_map('rawurlencode', $nameparts));
     }
 
     /**
      * Get an object
      *
      * @param  string $object
-     * @param bool $paidobject This is "requestor pays" object
+     * @param  bool   $paidobject This is "requestor pays" object
      * @return string|false
      */
-    public function getObject($object, $paidobject = false)
+    public function getObject($object, $paidobject=false)
     {
         $object = $this->_fixupObjectName($object);
-        if($paidobject) {
-        	$response = $this->_makeRequest('GET', $object, null, array(self::S3_REQUESTPAY_HEADER => "requester"));
-        } else {
-        	$response = $this->_makeRequest('GET', $object);
+        if ($paidobject) {
+            $response = $this->_makeRequest('GET', $object, null, array(self::S3_REQUESTPAY_HEADER => 'requester'));
+        }
+        else {
+            $response = $this->_makeRequest('GET', $object);
         }
 
         if ($response->getStatus() != 200) {
@@ -435,21 +455,22 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
         // build the end point out
         $parts = explode('/', $path, 2);
         $endpoint = clone($this->_endpoint);
-        if($parts[0]) {
-	        // prepend bucket name to the hostname
-    	    $endpoint->setHost($parts[0].".".$endpoint->getHost());
+        if ($parts[0]) {
+            // prepend bucket name to the hostname
+            $endpoint->setHost($parts[0].'.'.$endpoint->getHost());
         }
-		if(!empty($parts[1])) {
-        	$endpoint->setPath('/'.$parts[1]);
-        } else {
-       		$endpoint->setPath('/');
-       		if($parts[0]) {
-       			$path = $parts[0]."/";
-       		}
+        if (!empty($parts[1])) {
+            $endpoint->setPath('/'.$parts[1]);
         }
-        
+        else {
+            $endpoint->setPath('/');
+            if ($parts[0]) {
+                $path = $parts[0].'/';
+            }
+        }
+
         self::addSignature($method, $path, $headers);
-        
+
         $client = self::getHttpClient();
 
         $client->resetParameters();
@@ -461,7 +482,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
                                   'Range'       => null,
                                   'x-amz-acl'   => null));
 
-		$client->setUri($endpoint);
+        $client->setUri($endpoint);
         $client->setHeaders($headers);
 
         if (is_array($params)) {

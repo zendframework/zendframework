@@ -15,7 +15,7 @@
         </para>
 
         <para>
-            <classname>Zend_Service_Twitter</classname> is implementing a REST service and  all methods return an instance of
+            <classname>Zend_Service_Twitter</classname> is implementing a REST service and all methods return an instance of
             <classname>Zend_Rest_Client_Result</classname>.
         </para>
 

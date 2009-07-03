@@ -609,7 +609,7 @@ if ($control instanceof Zend_Gdata_App_Extension_Control) {
       </para>
       <para>
         Please refer to the full documentation available in the
-        <ulink url="http://code.google.com/apis/youtube/developers_guide_php.html">PHP Developer's  Guide</ulink> on code.google.com.
+        <ulink url="http://code.google.com/apis/youtube/developers_guide_php.html">PHP Developer's Guide</ulink> on code.google.com.
       </para>
     </sect2>
 </sect1>

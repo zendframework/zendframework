@@ -186,7 +186,7 @@ $index->optimize();
             This gives good approximation for the number of segments in the index:
         </para>
         <para>
-            <emphasis>NumberOfSegments</emphasis>  &lt;= <emphasis>MaxBufferedDocs</emphasis> + <emphasis>MergeFactor</emphasis>*log
+            <emphasis>NumberOfSegments</emphasis> &lt;= <emphasis>MaxBufferedDocs</emphasis> + <emphasis>MergeFactor</emphasis>*log
             <subscript><emphasis>MergeFactor</emphasis></subscript> (<emphasis>NumberOfDocuments</emphasis>/<emphasis>MaxBufferedDocs</emphasis>)
         </para>
 

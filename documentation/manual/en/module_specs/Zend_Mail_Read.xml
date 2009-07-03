@@ -732,7 +732,7 @@ $quota = $mail->setQuota(array('size' => 10000, 'count' => 100));
 
             <para>
             To add your own quota checks use single letters as keys, and they will be preserved (but obviously not checked).
-            It's also possible to extend  <classname>Zend_Mail_Storage_Writable_Maildir</classname> to define your own quota only
+            It's also possible to extend <classname>Zend_Mail_Storage_Writable_Maildir</classname> to define your own quota only
             if the maildirsize file is missing (which can happen in Maildir++):
             </para>
 

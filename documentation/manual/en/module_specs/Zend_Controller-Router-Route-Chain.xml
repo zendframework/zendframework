@@ -14,7 +14,7 @@
     <note>
         <title>Parameter Priority</title>
         <para>
-            When chaining routes  together, the parameters of the outer route
+            When chaining routes together, the parameters of the outer route
             have a higher priority than the parameters of the inner route. Thus
             if you define a controller in the outer and in the inner route,
             the controller of the outer route will be selected.
@@ -70,7 +70,7 @@ echo $chainedRoute->assemble();
         <title>Chain Routes via Zend_Config</title>
 
         <para>
-            To chain routes together in a config file, there are  additional
+            To chain routes together in a config file, there are additional
             parameters for the configuration of those. The simpler approach is
             to use the <code>chains</code> parameters. This one is simply a list
             of routes, which will be chained with the parent route. Neither the

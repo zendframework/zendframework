@@ -229,7 +229,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
         </para>
 
         <para>
-            <code>score(q,d) = sum( tf(t in d) * idf(t) * getBoost(t.field in d) * lengthNorm(t.field in d)  ) *
+            <code>score(q,d) = sum( tf(t in d) * idf(t) * getBoost(t.field in d) * lengthNorm(t.field in d) ) *
             coord(q,d) * queryNorm(q)</code>
         </para>
 
@@ -269,7 +269,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
         </para>
 
         <para>
-            queryNorm(q) -  the normalization value for a query given the sum of the squared weights
+            queryNorm(q) - the normalization value for a query given the sum of the squared weights
             of each of the query terms. This value is then multiplied into the weight of each query
             term.
         </para>

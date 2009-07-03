@@ -476,7 +476,7 @@ $return = $ec2_instance->confirmProduct('productCode', 'instanceId');
             <title>Turn on CloudWatch Monitoring on an Instance(s)</title>
             <para>
                 <code>monitor</code> returns the list of instances and their
-                current state of the CloudWatch Monitoring.  If the instance
+                current state of the CloudWatch Monitoring. If the instance
                 does not currently have Monitoring enabled it will be turned on.
             </para>
             <programlisting language="php"><![CDATA[
@@ -491,7 +491,7 @@ $return = $ec2_instance->monitor('instanceId');
             <title>Turn off CloudWatch Monitoring on an Instance(s)</title>
             <para>
                 <code>monitor</code> returns the list of instances and their
-                current state of the CloudWatch Monitoring.  If the instance
+                current state of the CloudWatch Monitoring. If the instance
                 currently has Monitoring enabled it will be turned off.
             </para>
             <programlisting language="php"><![CDATA[

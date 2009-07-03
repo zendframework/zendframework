@@ -242,7 +242,7 @@
                             <footnote>
                                 <para>
                                     <code>'tns:' namespace</code> is defined as script URI
-                                    (<code>'http://'  .$_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']</code>).
+                                    (<code>'http://' .$_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']</code>).
                                 </para>
                             </footnote>
                             as binding name,
@@ -250,13 +250,13 @@
                 </listitem>
                 <listitem>
                     <para>
-                        script URI<footnote><para><code>'http://'  .$_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']</code></para></footnote>
+                        script URI<footnote><para><code>'http://' .$_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']</code></para></footnote>
                         as a service URI for Web Service definition using classes.
                     </para>
                 </listitem>
             </itemizedlist>
             where <code>$name</code> is a class name for the Web Service definition mode using class and
-            script name for  the Web Service definition mode using set of functions.
+            script name for the Web Service definition mode using set of functions.
         </para>
         <para>
             See <ulink url="http://www.w3.org/TR/wsdl#_services"/> for the details.

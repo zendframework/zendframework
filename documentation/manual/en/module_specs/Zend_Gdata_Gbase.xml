@@ -197,7 +197,11 @@ $service = new Zend_Gdata_Gbase();
                 You can send a structured query to retrieve items from your own customer items feed or from the public snippets feed.
             </para>
             <para>
-                When retrieving items using the Base API, specially constructed query URLs are used to describe what events should be returned. The  <classname>Zend_Gdata_Gbase_ItemQuery</classname> and <classname>Zend_Gdata_Gbase_SnippetQuery</classname> classes simplify this task by automatically constructing a query URL based on provided parameters.
+                When retrieving items using the Base API, specially constructed query URLs are used
+                to describe what events should be returned. The
+                <classname>Zend_Gdata_Gbase_ItemQuery</classname> and
+                <classname>Zend_Gdata_Gbase_SnippetQuery</classname> classes simplify this task by
+                automatically constructing a query URL based on provided parameters.
             </para>
             <sect4 id="zend.gdata.gbase.retrieve.query.customeritems">
                 <title>Query Customer Items Feed</title>

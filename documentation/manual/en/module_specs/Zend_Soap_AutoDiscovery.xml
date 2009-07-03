@@ -102,7 +102,7 @@ $autodiscover->handle();
 
             <para>
                 As the SOAP Endpoint Uri is uses the default
-                <code>'http://'  .$_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']</code>,
+                <code>'http://' .$_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']</code>,
                 but this can be changed with the <code>setUri()</code> function or the Constructor
                 parameter of <classname>Zend_Soap_AutoDiscover</classname> class. The endpoint has to provide
                 a <classname>Zend_Soap_Server</classname> that listens to requests.
@@ -149,7 +149,7 @@ $autodiscover->handle();
                 </listitem>
                 <listitem>
                     <para>
-                        <code>'http://'  .$_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']</code> is used
+                        <code>'http://' .$_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']</code> is used
                         as an URI where the WSDL is available by default but can be overwritten via <code>setUri()</code> method.
                     </para>
                     <para>

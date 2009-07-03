@@ -46,7 +46,7 @@
                         </listitem>
                         <listitem>
                             <para>
-                            <code>$value</code>: The value of the cookie  (required)
+                            <code>$value</code>: The value of the cookie (required)
                             </para>
                         </listitem>
                         <listitem>

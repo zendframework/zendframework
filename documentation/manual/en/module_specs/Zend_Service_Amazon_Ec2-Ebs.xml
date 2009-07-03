@@ -7,7 +7,7 @@
         Amazon Elastic Block Store (Amazon EBS) is a new type of storage
         designed specifically for Amazon EC2 instances. Amazon EBS allows
         you to create volumes that can be mounted as devices by Amazon EC2
-        instances. Amazon EBS  volumes behave like raw unformatted external
+        instances. Amazon EBS volumes behave like raw unformatted external
         block devices. They have user supplied device names and provide a block
         device interface. You can load a file system on top of Amazon EBS volumes,
         or use them just as you would use a block device.

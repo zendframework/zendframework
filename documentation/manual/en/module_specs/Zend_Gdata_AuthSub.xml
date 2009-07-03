@@ -17,7 +17,7 @@
     <para>
         The Google documentation says the ClientLogin mechanism is appropriate
         for "installed applications" whereas the AuthSub mechanism is
-        for "web applications."  The difference is that AuthSub requires
+        for "web applications." The difference is that AuthSub requires
         interaction from the user, and a browser interface that can react
         to redirection requests. The ClientLogin solution uses PHP code to
         supply the account credentials; the user is not required to enter her

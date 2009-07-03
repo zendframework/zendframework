@@ -23,8 +23,8 @@
         <title>Static Methods</title>
         <para>
             To make using the Ec2 class easier to use there are two static methods that can be
-            invoked from any of the Ec2 Elements.  The first static method is <code>setKeys</code>
-            which will defind you AWS Access Keys as default keys.  When you then create any new
+            invoked from any of the Ec2 Elements. The first static method is <code>setKeys</code>
+            which will defind you AWS Access Keys as default keys. When you then create any new
             object you don't need to pass in any keys to the constructor.
         </para>
         <example id="zend.service.amazon.ec2.staticmethods.setkeys">
@@ -36,7 +36,7 @@ Zend_Service_Amazon_Ec2_Ebs::setKeys('aws_key','aws_secret_key');
         <para>
             To set the region that you are working in you can call the <code>setRegion</code> to set which
             Amazon Ec2 Region you are working in. Currently there is only two region available us-east-1
-            and eu-west-1.  If an invalid value is passed it will throw an exception stating that.
+            and eu-west-1. If an invalid value is passed it will throw an exception stating that.
         </para>
         <example id="zend.service.amazon.ec2.staticmethods.setregion">
             <title>setRegion() Example</title>

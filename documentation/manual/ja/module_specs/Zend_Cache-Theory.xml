@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15974 -->
+<!-- EN-Revision: 16422 -->
 <sect1 id="zend.cache.theory">
     <title>キャッシュの仕組み</title>
     <para>
@@ -10,7 +10,7 @@
         「賞味期限」を定義するものです。三番目のポイントとなるのが条件付きの実行処理で、
         不要なコードを完全に読み飛ばすことで処理速度を向上させることになります。
         フロントエンドの主となる関数 (例えば <methodname>Zend_Cache_Core::get()</methodname>)
-        は、キャッシュがヒットしなかった場合には常に false を返すよう設計されています。
+        は、キャッシュがヒットしなかった場合には常に <constant>FALSE</constant> を返すよう設計されています。
         そのため、キャッシュしたい (そして読み飛ばしたい) 部分を
         <emphasis><methodname>if()</methodname>{ ... }</emphasis> 文で囲む際に、
         条件式として <classname>Zend_Cache</classname>
@@ -85,7 +85,7 @@ $cache->save($huge_data, 'myUniqueID', array('tagA', 'tagB', 'tagC'));
         <note><para>
             <methodname>save()</methodname> メソッドには、オプションの第四引数
             <varname>$specificLifetime</varname> を指定できることに注意しましょう
-            (false 以外を指定することで、このキャッシュレコードの有効期限を特定の値に設定できます)。
+            (<constant>FALSE</constant> 以外を指定することで、このキャッシュレコードの有効期限を特定の値に設定できます)。
         </para></note>
     </sect2>
     <sect2 id="zend.cache.clean">

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15961 -->
+<!-- EN-Revision: 16382 -->
 <sect1 id="zend.cache.backends">
     <title><classname>Zend_Cache</classname> のバックエンド</title>
     <para>
@@ -228,7 +228,7 @@
                           <entry><type>Boolean</type></entry>
                           <entry><constant>FALSE</constant></entry>
                           <entry>
-                             その場での圧縮処理を行いたい場合に true を指定します。
+                             その場での圧縮処理を行いたい場合に <constant>TRUE</constant> を指定します。
                           </entry>
                       </row>
                       <row>
@@ -237,7 +237,7 @@
                           <entry><constant>FALSE</constant></entry>
                           <entry>
                              古い memcache サーバ/拡張モジュールとの互換性モードを使用したい場合に
-                             true を指定します。
+                             <constant>TRUE</constant> を指定します。
                           </entry>
                       </row>
                   </tbody>
@@ -396,8 +396,8 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
                           <entry><type>Boolean</type></entry>
                           <entry><constant>FALSE</constant></entry>
                           <entry>
-                              true の場合は、引数 slow_backend を完全なクラス名として使用します。
-                              false の場合は、引数をクラス名 "<classname>Zend_Cache_Backend_</classname>[...]"
+                              <constant>TRUE</constant> の場合は、引数 slow_backend を完全なクラス名として使用します。
+                              <constant>FALSE</constant> の場合は、引数をクラス名 "<classname>Zend_Cache_Backend_</classname>[...]"
                               の最後の部分として使用します。
                           </entry>
                       </row>
@@ -406,8 +406,8 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
                           <entry><type>Boolean</type></entry>
                           <entry><constant>FALSE</constant></entry>
                           <entry>
-                              true の場合は、引数 fast_backend を完全なクラス名として使用します。
-                              false の場合は、引数をクラス名 "<classname>Zend_Cache_Backend_</classname>[...]"
+                              <constant>TRUE</constant> の場合は、引数 fast_backend を完全なクラス名として使用します。
+                              <constant>FALSE</constant> の場合は、引数をクラス名 "<classname>Zend_Cache_Backend_</classname>[...]"
                               の最後の部分として使用します。
                           </entry>
                       </row>
@@ -416,7 +416,7 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
                           <entry><type>Boolean</type></entry>
                           <entry><constant>FALSE</constant></entry>
                           <entry>
-                              true の場合は、低速バックエンドに対して require_once を行いません
+                              <constant>TRUE</constant> の場合は、低速バックエンドに対して require_once を行いません
                               (独自のバックエンドを使用する場合にのみ有用です)。
                           </entry>
                       </row>
@@ -425,7 +425,7 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
                           <entry><type>Boolean</type></entry>
                           <entry><constant>FALSE</constant></entry>
                           <entry>
-                              true の場合は、高速バックエンドに対して require_once を行いません
+                              <constant>TRUE</constant> の場合は、高速バックエンドに対して require_once を行いません
                               (独自のバックエンドを使用する場合にのみ有用です)。
                           </entry>
                       </row>
@@ -434,7 +434,7 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
                           <entry><type>Boolean</type></entry>
                           <entry><constant>TRUE</constant></entry>
                           <entry>
-                              true の場合は、キャッシュレコードにヒットしたときに
+                              <constant>TRUE</constant> の場合は、キャッシュレコードにヒットしたときに
                               高速キャッシュを自動的にリフレッシュします。
                           </entry>
                       </row>

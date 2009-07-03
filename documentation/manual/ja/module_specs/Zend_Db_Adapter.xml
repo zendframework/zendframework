@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16396 -->
+<!-- EN-Revision: 16397 -->
 <sect1 id="zend.db.adapter">
 
     <title>Zend_Db_Adapter</title>
@@ -731,7 +731,7 @@ echo $result[0]->bug_description;
             <title>連想配列形式での結果セットの取得</title>
 
             <para>
-                <code>fetchAssoc()</code> メソッドは、
+                <methodname>fetchAssoc()</methodname> メソッドは、
                 フェッチモードの設定にかかわらず、
                 結果のデータを連想配列の配列で返します。
             </para>
@@ -755,7 +755,7 @@ echo $result[0]['bug_description'];
             <title>結果セットの単一のカラムの取得</title>
 
             <para>
-                <code>fetchCol()</code> メソッドは、
+                <methodname>fetchCol()</methodname> メソッドは、
                 フェッチモードの設定にかかわらず、
                 結果のデータを値の配列で返します。
                 これは、クエリの最初のカラムのみを返します。
@@ -785,7 +785,7 @@ echo $result[0];
             <title>結果セットからの キー/値 のペアの取得</title>
 
             <para>
-                <code>fetchPairs()</code> メソッドは、データを キー/値
+                <methodname>fetchPairs()</methodname> メソッドは、データを キー/値
                 のペア (連想配列) の配列で返します。
                 この連想配列のキーは、SELECT クエリが返す最初のカラムの値となります。
                 また、連想配列の値は、SELECT クエリが返す二番目のカラムの値となります。
@@ -814,7 +814,7 @@ echo $result[2];
             <title>結果セットからの単一の行の取得</title>
 
             <para>
-                <code>fetchRow()</code> メソッドは、
+                <methodname>fetchRow()</methodname> メソッドは、
                 結果のデータを現在のフェッチモードで返します。
                 ただ、返すのは結果セットから取得した最初の行のみです。
             </para>
@@ -837,8 +837,8 @@ echo $result->bug_description;
             <title>結果セットからの単一のスカラー値の取得</title>
 
             <para>
-                <code>fetchOne()</code> メソッドは
-                <code>fetchRow()</code> と <code>fetchCol()</code>
+                <methodname>fetchOne()</methodname> メソッドは
+                <methodname>fetchRow()</methodname> と <methodname>fetchCol()</methodname>
                 を組み合わせたようなものです。
                 結果セットからの最初の行から、最初のカラムの値のみを返します。
                 したがって、このメソッドの返り値は配列やオブジェクトではなく単一のスカラー値となります。
@@ -874,7 +874,7 @@ echo $result;
 
             <para>
                 データベースのテーブルに新しい行を追加するには、
-                <code>insert()</code> メソッドを使用します。
+                <methodname>insert()</methodname> メソッドを使用します。
                 最初の引数はテーブル名を表す文字列で、
                 その次の引数はカラム名とデータの値を関連付けた連想配列となります。
             </para>
@@ -937,7 +937,7 @@ $db->insert('bugs', $data);
                 RDBMS によっては、主キーの自動インクリメントをサポートしているものもあります。
                 この方法で定義したテーブルに新しい行を INSERT すると、
                 主キーの値が自動的に生成されます。
-                <code>insert()</code> メソッドの返り値は、最後に追加された ID
+                <methodname>insert()</methodname> メソッドの返り値は、最後に追加された ID
                 では<emphasis>ありません</emphasis>。
                 そのテーブルには自動インクリメントのカラムがないかもしれないからです。
                 返り値は、変更された行数 (通常は 1 です) となります。
@@ -945,7 +945,7 @@ $db->insert('bugs', $data);
 
             <para>
                 そのテーブルで自動インクリメントの主キーを定義している場合は、
-                データを追加した後で <code>lastInsertId()</code>
+                データを追加した後で <methodname>lastInsertId()</methodname>
                 メソッドを使用することができます。このメソッドは、
                 現在のデータベース接続において最後に自動生成された値を返します。
             </para>
@@ -963,7 +963,7 @@ $id = $db->lastInsertId();
             <para>
                 RDBMS によっては、シーケンスをサポートしているものもあります。
                 シーケンスを使用して、主キー用の一意な値を生成することができます。
-                シーケンスをサポートするために、<code>lastInsertId()</code>
+                シーケンスをサポートするために、<methodname>lastInsertId()</methodname>
                 ではオプションの文字列引数を 2 つ受け取れるようにしています。
                 これらの引数には、それぞれテーブル名とカラム名を指定します。
                 シーケンスの名前は、このテーブル名とカラム名をつなげたものの後に
@@ -989,7 +989,7 @@ $id = $db->lastInsertId('bugs');
 
             <para>
                 もしこの命名規約とは異なる名前のシーケンスを使用している場合は、代わりに
-                <code>lastSequenceId()</code> メソッドを使用します。
+                <methodname>lastSequenceId()</methodname> メソッドを使用します。
                 このメソッドの引数には、シーケンスの名前を直接指定します。
             </para>
 
@@ -1056,7 +1056,7 @@ $id = $db->lastSequenceId('bugs_id_gen');
 
             <para>
                 データベースのテーブルの行を更新するには、アダプタの
-                <code>update()</code> メソッドを使用します。このメソッドへの引数は
+                <methodname>update()</methodname> メソッドを使用します。このメソッドへの引数は
                 3 つです。まず最初はテーブルの名前、
                 その次はカラム名と新しい値を関連づけた連想配列となります。
             </para>
@@ -1127,7 +1127,7 @@ $n = $db->update('bugs', $data, $where);
             <title>行の削除</title>
             <para>
                 データベースのテーブルから行を削除するには
-                <code>delete()</code> メソッドを使用します。このメソッドに渡す引数は 2 つで、
+                <methodname>delete()</methodname> メソッドを使用します。このメソッドに渡す引数は 2 つで、
                 最初の引数はテーブル名を表す文字列です。
             </para>
 
@@ -1211,7 +1211,7 @@ echo $sql;
             <title>quote() の使用法</title>
 
             <para>
-                <code>quote()</code> メソッドは、引数として文字列を受け取ります。
+                <methodname>quote()</methodname> メソッドは、引数として文字列を受け取ります。
                 そしてその文字列の中の特殊文字をエスケープした上で、
                 両端を区切り文字で囲んだものを返します。
                 エスケープ処理は、使用している RDBMS
@@ -1235,7 +1235,7 @@ echo $sql;
             </example>
 
             <para>
-                <code>quote()</code> の返り値には、文字列の両端に区切り文字が追加されていることに注意しましょう。
+                <methodname>quote()</methodname> の返り値には、文字列の両端に区切り文字が追加されていることに注意しましょう。
                 これは、たとえば
                 <ulink url="http://www.php.net/mysqli_real_escape_string">mysql_real_escape_string()</ulink>
                 のようなエスケープ用関数の挙動とは異なります。
@@ -1256,7 +1256,7 @@ SELECT * FROM atable WHERE intColumn = '123'
             </para>
 
             <para>
-                <code>quote()</code> メソッドでオプションの
+                <methodname>quote()</methodname> メソッドでオプションの
                 2 番目の引数を使用すると、
                 SQL のデータ型に応じてクォートするかどうかを選択することができます。
             </para>
@@ -1283,7 +1283,7 @@ $sql = 'SELECT * FROM atable WHERE intColumn = '
 
             <para>
                 <classname>Zend_Db_Table</classname> は、テーブルのキーとなるカラムを使用する際には
-                自動的に SQL データ型を <code>quote()</code> に指定します。
+                自動的に SQL データ型を <methodname>quote()</methodname> に指定します。
             </para>
 
         </sect3>
@@ -1295,7 +1295,7 @@ $sql = 'SELECT * FROM atable WHERE intColumn = '
             <para>
                 クォートを使用する場面としていちばんよくあるのが、
                 PHP の変数の値を SQL の式や文中で使用するということです。
-                <code>quoteInto()</code> メソッドを使用すると、この処理を一度でできるようになります。
+                <methodname>quoteInto()</methodname> メソッドを使用すると、この処理を一度でできるようになります。
                 このメソッドが受け取る引数はふたつです。
                 まず最初の引数としてプレースホルダ記号 (<code>?</code>)
                 を含む文字列を指定し、次の引数で PHP の変数などの値を指定します。
@@ -1305,7 +1305,7 @@ $sql = 'SELECT * FROM atable WHERE intColumn = '
             <para>
                 プレースホルダ用の記号は、多くの RDBMS
                 でパラメータとして使用している記号と同じです。しかし、
-                <code>quoteInto()</code> メソッドはあくまでパラメータをエミュレートしているだけです。
+                <methodname>quoteInto()</methodname> メソッドはあくまでパラメータをエミュレートしているだけです。
                 このメソッドは単純に文字列の中に値を放り込み、
                 特殊文字をエスケープして両端をクォートするという処理だけを行います。
                 RDBMS におけるパラメータのように、
@@ -1324,7 +1324,7 @@ echo $sql;
             </example>
 
             <para>
-                <code>quoteInto()</code> のオプションの
+                <methodname>quoteInto()</methodname> のオプションの
                 3 番目のパラメータを使用すると、SQL のデータ型を指定することができます。
                 数値型はクォートをせず、それ以外の型についてはクォートを行います。
             </para>
@@ -1367,15 +1367,15 @@ echo $sql;
             </para>
 
             <para>
-                <code>quoteIdentifier()</code> メソッドの働きは
-                <code>quote()</code> と似ていますが、
+                <methodname>quoteIdentifier()</methodname> メソッドの働きは
+                <methodname>quote()</methodname> と似ていますが、
                 このメソッドは使用しているアダプタの型に応じた識別子区切り文字を付加します。
                 たとえば、標準 SQL ではダブルクォート
                 (<code>"</code>) を区切り文字として使用します。
                 多くの RDBMS がこれにしたがっています。
                 MySQL の場合は、デフォルトではバッククォート
                 (<code>`</code>) を使用します。
-                <code>quoteIdentifier()</code> メソッドはまた、
+                <methodname>quoteIdentifier()</methodname> メソッドはまた、
                 文字列引数内の特殊文字のエスケープも行います。
             </para>
 
@@ -1435,22 +1435,22 @@ echo $sql
         <para>
             一方、トランザクションの始点と終点を自分で指定することにより、
             複数の SQL クエリをひとつのトランザクション内ですることもできます。
-            トランザクションを開始する際には <code>beginTransaction()</code>
+            トランザクションを開始する際には <methodname>beginTransaction()</methodname>
             メソッドを使用します。それ以降に実行した SQL
             文は、明示的に指定するまではすべて同じトランザクション内で動作します。
         </para>
 
         <para>
-            トランザクションを終了するには、<code>commit()</code>
-            あるいは <code>rollBack()</code> のいずれかを使用します。
-            <code>commit()</code> メソッドは、
+            トランザクションを終了するには、<methodname>commit()</methodname>
+            あるいは <methodname>rollBack()</methodname> のいずれかを使用します。
+            <methodname>commit()</methodname> メソッドは、
             そのトランザクションでの変更内容をコミットします。
             つまり、そのトランザクションで行った変更が、
             他のトランザクションからも見えるようにするということです。
         </para>
 
         <para>
-            <code>rollBack()</code> メソッドはその反対の動作をします。
+            <methodname>rollBack()</methodname> メソッドはその反対の動作をします。
             このメソッドは、そのトランザクションでの変更内容をすべて破棄します。
             変更は一切なかったことになり、トランザクションを開始する前の状態にデータを戻します。
             しかし、あるトランザクションをロールバックしたとしても、
@@ -1461,7 +1461,7 @@ echo $sql
             トランザクションを終了すると、<classname>Zend_Db_Adapter</classname>
             は再び自動コミットモードに戻ります。
             手動でのトランザクション管理を使用したい場合は、
-            <code>beginTransaction()</code> をもう一度コールします。
+            <methodname>beginTransaction()</methodname> をもう一度コールします。
         </para>
 
         <example id="zend.db.adapter.transactions.example">
@@ -1498,16 +1498,15 @@ try {
         <title>テーブルの情報の取得</title>
 
         <para>
-            <code>listTables()</code> メソッドは文字列の配列を返します。
+            <methodname>listTables()</methodname> メソッドは文字列の配列を返します。
             この配列には、データベース内のすべてのテーブルの名前が格納されています。
         </para>
 
         <para>
-            <code>describeTable()</code> メソッドは、
+            <methodname>describeTable()</methodname> メソッドは、
             テーブルのメタデータを格納した連想配列を返します。
             このメソッドの最初の引数に、テーブル名を文字列で指定します。
             二番目の引数はオプションで、そのテーブルが存在するスキーマの名前を指定します。
-            exists.
         </para>
 
         <para>
@@ -1633,7 +1632,7 @@ try {
 
         <para>
             指定したテーブル名とスキーマ名に対応するテーブルが存在しない場合は、
-            <code>describeTable()</code> は空の配列を返します。
+            <methodname>describeTable()</methodname> は空の配列を返します。
         </para>
 
     </sect2>
@@ -1656,12 +1655,12 @@ try {
             スクリプトの場合は、自分で接続を閉じる必要があるかもしれません。
             これにより、RDBMS サーバが限界に達してしまうことを防ぎます。
             データベース接続を明示的に閉じるには、アダプタの
-            <code>closeConnection()</code> メソッドを使用します。
+            <methodname>closeConnection()</methodname> メソッドを使用します。
         </para>
 
         <para>
             リリース 1.7.2 以降でしゃ、現在 RDBMS に接続しているかどうかを
-            <code>isConnected()</code> メソッドで取得することができます。
+            <methodname>isConnected()</methodname> メソッドで取得することができます。
             これは、コネクションリソースが初期化されたまままだ閉じられていないことを確認します。
             現在のところ、たとえばサーバ側で接続が切断された場合などは検出することができません。
             内部的に、接続を閉じる際にこれを使用しています。

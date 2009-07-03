@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16376 -->
 <sect3 id="zend.view.helpers.initial.object">
     <title>HTML オブジェクトヘルパー</title>
 
@@ -18,25 +18,25 @@
     <itemizedlist>
         <listitem>
             <para>
-                <code>formFlash</code>
+                <code>htmlFlash</code>
                 は、Flash ファイルの埋め込み用のマークアップを生成します。
             </para>
         </listitem>
         <listitem>
             <para>
-                <code>formObject</code>
+                <code>htmlObject</code>
                 は、カスタムオブジェクトの埋め込み用のマークアップを生成します。
             </para>
         </listitem>
         <listitem>
             <para>
-                <code>formPage</code>
+                <code>htmlPage</code>
                 は、他の (X)HTML ページの埋め込み用のマークアップを生成します。
             </para>
         </listitem>
         <listitem>
             <para>
-                <code>formQuicktime</code>
+                <code>htmlQuicktime</code>
                 は、QuickTime ファイルの埋め込み用のマークアップを生成します。
             </para>
         </listitem>

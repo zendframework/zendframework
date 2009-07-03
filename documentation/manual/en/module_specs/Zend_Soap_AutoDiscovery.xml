@@ -215,7 +215,7 @@ $autodiscover->handle();
                 </listitem>
                 <listitem>
                     <para>
-                        <code>'http://'  .$_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']</code> is used
+                        <code>'http://' .$_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']</code> is used
                         as an URI where the WSDL is available.
                     </para>
                     <para>

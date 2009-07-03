@@ -345,12 +345,12 @@ $db = Zend_Db::factory($config->database);
                 <para>
                     You can specify this option by the constant
                     <classname>Zend_Db::CASE_FOLDING</classname>.
-                    This corresponds to the <code>ATTR_CASE</code> attribute in
+                    This corresponds to the <constant>ATTR_CASE</constant> attribute in
                     PDO and IBM DB2 database drivers, adjusting the case of
                     string keys in query result sets. The option takes values
-                    <classname>Zend_Db::CASE_NATURAL</classname> (the default),
-                    <classname>Zend_Db::CASE_UPPER</classname>, and
-                    <classname>Zend_Db::CASE_LOWER</classname>.
+                    <constant>Zend_Db::CASE_NATURAL</constant> (the default),
+                    <constant>Zend_Db::CASE_UPPER</constant>, and
+                    <constant>Zend_Db::CASE_LOWER</constant>.
                 </para>
                 <programlisting language="php"><![CDATA[
 $options = array(
@@ -1129,7 +1129,7 @@ $n = $db->update('bugs', $data, 'bug_id = 2');
             <para>
                 If you provide an array of strings as the third argument, these
                 strings are joined together as terms in an expression separated
-                by <code>AND</code> operators.
+                by <constant>AND</constant> operators.
             </para>
 
             <example id="zend.db.adapter.write.update.example-array">
@@ -1157,7 +1157,7 @@ $n = $db->update('bugs', $data, $where);
             <title>Deleting Data</title>
             <para>
                 You can delete rows from a database table using the
-                <code>delete()</code> method. This method takes two arguments:
+                <methodname>delete()</methodname> method. This method takes two arguments:
                 the first is a string naming the table.
             </para>
 
@@ -1191,7 +1191,7 @@ $n = $db->delete('bugs', 'bug_id = 3');
             <para>
                 If you provide an array of strings as the second argument, these
                 strings are joined together as terms in an expression separated
-                by <code>AND</code> operators.
+                by <constant>AND</constant> operators.
             </para>
 
         </sect3>
@@ -1281,7 +1281,7 @@ echo $sql;
                 if it is compared to an integer-type column or expression.
                 In other words, the following is an error in some SQL
                 implementations, assuming <code>intColumn</code> has a SQL
-                datatype of <code>INTEGER</code>
+                datatype of <constant>INTEGER</constant>
 
                 <programlisting language="php"><![CDATA[
 SELECT * FROM atable WHERE intColumn = '123'
@@ -1643,22 +1643,22 @@ try {
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>IDENTITY</code> - DB2, MSSQL
+                        <constant>IDENTITY</constant> - DB2, MSSQL
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>AUTO_INCREMENT</code> - MySQL
+                        <constant>AUTO_INCREMENT</constant> - MySQL
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>SERIAL</code> - PostgreSQL
+                        <constant>SERIAL</constant> - PostgreSQL
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>SEQUENCE</code> - Oracle
+                        <constant>SEQUENCE</constant> - Oracle
                     </para>
                 </listitem>
             </itemizedlist>
@@ -1755,7 +1755,7 @@ $db->closeConnection();
         <para>
             Most PHP database extensions provide a method to execute SQL
             statements without preparing them. For example, in PDO, this
-            method is <code>exec()</code>. You can access the connection
+            method is <methodname>exec()</methodname>. You can access the connection
             object in the PHP extension directly using getConnection().
         </para>
 
@@ -1787,7 +1787,7 @@ $result = $db->getConnection()->exec('DROP TABLE bugs');
 
         <para>
             Since release 1.7.2, you could retrieve the server version in PHP syntax
-            style to be able to use <code>version_compare()</code>. If the information
+            style to be able to use <methodname>version_compare()</methodname>. If the information
             isn't available, you will receive <constant>NULL</constant>.
         </para>
 
@@ -1835,7 +1835,7 @@ if (!is_null($version)) {
                     <para>
                         IBM DB2 supports both sequences and auto-incrementing
                         keys. Therefore the arguments to
-                        <code>lastInsertId()</code> are optional. If you give
+                        <methodname>lastInsertId()</methodname> are optional. If you give
                         no arguments, the Adapter returns the last value
                         generated for an auto-increment key. If you give
                         arguments, the Adapter returns the last value generated
@@ -1851,7 +1851,7 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        Specify this Adapter to the <code>factory()</code>
+                        Specify this Adapter to the <methodname>factory()</methodname>
                         method with the name 'Mysqli'.
                     </para>
                 </listitem>
@@ -1863,9 +1863,9 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         MySQL does not support sequences, so
-                        <code>lastInsertId()</code> ignores its arguments and
+                        <methodname>lastInsertId()</methodname> ignores its arguments and
                         always returns the last value generated for an
-                        auto-increment key. The <code>lastSequenceId()</code>
+                        auto-increment key. The <methodname>lastSequenceId()</methodname>
                         method returns <constant>NULL</constant>.
                     </para>
                 </listitem>
@@ -1877,7 +1877,7 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        Specify this Adapter to the <code>factory()</code>
+                        Specify this Adapter to the <methodname>factory()</methodname>
                         method with the name 'Oracle'.
                     </para>
                 </listitem>
@@ -1890,8 +1890,8 @@ if (!is_null($version)) {
                     <para>
                         Oracle does not support auto-incrementing keys, so you
                         should specify the name of a sequence to
-                        <code>lastInsertId()</code> or
-                        <code>lastSequenceId()</code>.
+                        <methodname>lastInsertId()</methodname> or
+                        <methodname>lastSequenceId()</methodname>.
                     </para>
                 </listitem>
                 <listitem>
@@ -1912,7 +1912,8 @@ if (!is_null($version)) {
                         By default, LOB fields are returned as OCI-Lob objects. You could
                         retrieve them as string for all requests by using driver options
                         <code>'lob_as_string'</code> or for particular request by using
-                        <code>setLobAsString(boolean)</code> on adapter or on statement.
+                        <methodname>setLobAsString(boolean)</methodname> on adapter or on
+                        statement.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -1923,7 +1924,7 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        Specify this Adapter to the <code>factory()</code>
+                        Specify this Adapter to the <methodname>factory()</methodname>
                         method with the name 'Pdo_Ibm'.
                     </para>
                 </listitem>
@@ -1947,7 +1948,7 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        Specify this Adapter to the <code>factory()</code>
+                        Specify this Adapter to the <methodname>factory()</methodname>
                         method with the name 'Pdo_Mssql'.
                     </para>
                 </listitem>
@@ -1959,9 +1960,9 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         Microsoft SQL Server does not support sequences, so
-                        <code>lastInsertId()</code> ignores its arguments and
+                        <methodname>lastInsertId()</methodname> ignores its arguments and
                         always returns the last value generated for an
-                        auto-increment key. The <code>lastSequenceId()</code>
+                        auto-increment key. The <methodname>lastSequenceId()</methodname>
                         method returns <constant>NULL</constant>.
                     </para>
                 </listitem>
@@ -1977,8 +1978,8 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         <classname>Zend_Db_Adapter_Pdo_Mssql</classname> sets
-                        <code>QUOTED_IDENTIFIER ON</code> immediately after connecting to a SQL
-                        Server database. This makes the driver use the standard SQL identifier
+                        <constant>QUOTED_IDENTIFIER ON</constant> immediately after connecting to a
+                        SQL Server database. This makes the driver use the standard SQL identifier
                         delimiter symbol (<code>"</code>) instead of the
                         proprietary square-brackets syntax SQL Server uses for
                         delimiting identifiers.
@@ -2008,7 +2009,7 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        Specify this Adapter to the <code>factory()</code>
+                        Specify this Adapter to the <methodname>factory()</methodname>
                         method with the name 'Pdo_Mysql'.
                     </para>
                 </listitem>
@@ -2020,9 +2021,9 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         MySQL does not support sequences, so
-                        <code>lastInsertId()</code> ignores its arguments and
+                        <methodname>lastInsertId()</methodname> ignores its arguments and
                         always returns the last value generated for an
-                        auto-increment key. The <code>lastSequenceId()</code>
+                        auto-increment key. The <methodname>lastSequenceId()</methodname>
                         method returns <constant>NULL</constant>.
                     </para>
                 </listitem>
@@ -2034,7 +2035,7 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        Specify this Adapter to the <code>factory()</code>
+                        Specify this Adapter to the <methodname>factory()</methodname>
                         method with the name 'Pdo_Oci'.
                     </para>
                 </listitem>
@@ -2047,8 +2048,8 @@ if (!is_null($version)) {
                     <para>
                         Oracle does not support auto-incrementing keys, so you
                         should specify the name of a sequence to
-                        <code>lastInsertId()</code> or
-                        <code>lastSequenceId()</code>.
+                        <methodname>lastInsertId()</methodname> or
+                        <methodname>lastSequenceId()</methodname>.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -2059,7 +2060,7 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        Specify this Adapter to the <code>factory()</code>
+                        Specify this Adapter to the <methodname>factory()</methodname>
                         method with the name 'Pdo_Pgsql'.
                     </para>
                 </listitem>
@@ -2072,7 +2073,7 @@ if (!is_null($version)) {
                     <para>
                         PostgreSQL supports both sequences and auto-incrementing
                         keys. Therefore the arguments to
-                        <code>lastInsertId()</code> are optional. If you give
+                        <methodname>lastInsertId()</methodname> are optional. If you give
                         no arguments, the Adapter returns the last value
                         generated for an auto-increment key. If you give
                         arguments, the Adapter returns the last value generated
@@ -2088,7 +2089,7 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        Specify this Adapter to the <code>factory()</code>
+                        Specify this Adapter to the <methodname>factory()</methodname>
                         method with the name 'Pdo_Sqlite'.
                     </para>
                 </listitem>
@@ -2100,9 +2101,9 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         SQLite does not support sequences, so
-                        <code>lastInsertId()</code> ignores its arguments and
+                        <methodname>lastInsertId()</methodname> ignores its arguments and
                         always returns the last value generated for an
-                        auto-increment key. The <code>lastSequenceId()</code>
+                        auto-increment key. The <methodname>lastSequenceId()</methodname>
                         method returns <constant>NULL</constant>.
                     </para>
                 </listitem>
@@ -2148,8 +2149,8 @@ if (!is_null($version)) {
                     <para>
                         Firebird/interbase does not support auto-incrementing keys,
                         so you should specify the name of a sequence to
-                        <code>lastInsertId()</code> or
-                        <code>lastSequenceId()</code>.
+                        <methodname>lastInsertId()</methodname> or
+                        <methodname>lastSequenceId()</methodname>.
                     </para>
                 </listitem>
                 <listitem>

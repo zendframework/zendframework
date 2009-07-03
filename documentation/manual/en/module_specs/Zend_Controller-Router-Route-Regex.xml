@@ -218,7 +218,7 @@ $route = new Zend_Controller_Router_Route_Regex(
     <para>
         All of this is something which was already possible by the means of a
         standard route object, so where's the benefit in using the Regex route,
-        you ask?  Primarily, it allows you to describe any type of URL without
+        you ask? Primarily, it allows you to describe any type of URL without
         any restrictions. Imagine you have a blog and wish to create URLs like:
         <filename>http://domain.com/blog/archive/01-Using_the_Regex_Router.html</filename>,
         and have it decompose the last path element,

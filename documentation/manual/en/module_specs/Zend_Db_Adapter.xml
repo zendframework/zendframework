@@ -915,7 +915,7 @@ $db->insert('bugs', $data);
             <para>
                 Columns you exclude from the array of data are not specified to
                 the database. Therefore, they follow the same rules that an
-                SQL INSERT statement follows:  if the column has a DEFAULT
+                SQL INSERT statement follows: if the column has a DEFAULT
                 clause, the column takes that value in the row created,
                 otherwise the column is left in a NULL state.
             </para>
@@ -1083,7 +1083,7 @@ $id = $db->lastSequenceId('bugs_id_gen');
             <para>
                 You can update rows in a database table using the
                 <methodname>update()</methodname> method of an Adapter. This method takes
-                three arguments:  the first is the name of the table; the
+                three arguments: the first is the name of the table; the
                 second is an associative array mapping columns to change to new
                 values to assign to these columns.
             </para>

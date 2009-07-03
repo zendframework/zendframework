@@ -249,7 +249,7 @@ foreach ($info as $sun) {
             is the second function and makes it possible to set new timezone for
             <classname>Zend_Date</classname>. A given timezone is always checked. If it does not
             exist an exception will be thrown. Additionally the actual scripts or systems timezone
-            can be set to the date object by calling  <methodname>setTimezone()</methodname>
+            can be set to the date object by calling <methodname>setTimezone()</methodname>
             without the zone parameter. This is also done automatically when the date object is
             created.
         </para>

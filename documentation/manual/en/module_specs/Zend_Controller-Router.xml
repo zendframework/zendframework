@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<sect1 id="zend.controller.router"  xmlns:xi="http://www.w3.org/2001/XInclude">
+<sect1 id="zend.controller.router" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>The Standard Router</title>
     <sect2 id="zend.controller.router.introduction">
         <title>Introduction</title>

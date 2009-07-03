@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16375 -->
 <sect3 id="zend.view.helpers.initial.headstyle">
     <title>HeadStyle ヘルパー</title>
 
@@ -18,7 +18,7 @@
             <code>&lt;link&gt;</code> 要素を作成する場合は
             <link linkend="zend.view.helpers.initial.headlink">HeadLink</link>
             を使用する必要があります。スタイルシートをインラインで定義したい場合に
-            <code>HeadScript</code> を使用します。
+            <code>HeadStyle</code> を使用します。
         </para>
     </note>
 

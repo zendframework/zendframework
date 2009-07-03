@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16443 -->
 <sect1 id="zend.gdata.youtube">
     <title>YouTube Data API の使用法</title>
 
@@ -631,7 +631,7 @@ if ($control instanceof Zend_Gdata_App_Extension_Control) {
       </para>
       <para>
         完全なドキュメントは、code.google.com の
-        <ulink url="http://code.google.com/apis/youtube/developers_guide_php.html">PHP Developer's  Guide</ulink>
+        <ulink url="http://code.google.com/apis/youtube/developers_guide_php.html">PHP Developer's Guide</ulink>
         を参照ください。
       </para>
     </sect2>

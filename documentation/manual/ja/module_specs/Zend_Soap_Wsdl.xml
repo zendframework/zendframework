@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15685 -->
+<!-- EN-Revision: 16443 -->
 <sect1 id="zend.soap.wsdl">
     <title>WSDLアクセッサ</title>
 
@@ -256,7 +256,7 @@
                             <footnote>
                                 <para>
                                     <code>'tns:' namespace</code>はスクリプトのURI
-                                    (<code>'http://'  .$_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']</code>)
+                                    (<code>'http://' .$_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']</code>)
                                     として定義されます。
                                 </para>
                             </footnote>
@@ -265,7 +265,7 @@
                 <listitem>
                     <para>
                         クラスを使うウェブサービスの定義のためのサービスURIとしてスクリプトのURI
-                        <footnote><para><code>'http://'  .$_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']</code></para></footnote>
+                        <footnote><para><code>'http://' .$_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']</code></para></footnote>
                     </para>
                 </listitem>
             </itemizedlist>

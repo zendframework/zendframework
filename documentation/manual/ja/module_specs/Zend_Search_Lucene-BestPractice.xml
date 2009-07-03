@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16443 -->
 <sect1 id="zend.search.lucene.best-practice">
     <title>ベストプラクティス</title>
 
@@ -249,7 +249,7 @@ $index->optimize();
             この式で、インデックス内のセグメントの概数を求めることができます。
         </para>
         <para>
-            <emphasis>NumberOfSegments</emphasis>  &lt;= <emphasis>MaxBufferedDocs</emphasis> + <emphasis>MergeFactor</emphasis>*log
+            <emphasis>NumberOfSegments</emphasis> &lt;= <emphasis>MaxBufferedDocs</emphasis> + <emphasis>MergeFactor</emphasis>*log
             <subscript><emphasis>MergeFactor</emphasis></subscript> (<emphasis>NumberOfDocuments</emphasis>/<emphasis>MaxBufferedDocs</emphasis>)
         </para>
 

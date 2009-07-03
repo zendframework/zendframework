@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16443 -->
 <sect1 id="zend.soap.autodiscovery">
     <title>自動検出</title>
 
@@ -108,7 +108,7 @@ $autodiscover->handle();
 
             <para>
                 SOAPエンドポイントUriがデフォルト値、
-                <code>'http://'  .$_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']</code>
+                <code>'http://' .$_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']</code>
                 を使いますが、
                 しかしこれは<code>setUri()</code>関数や
                 <classname>Zend_Soap_AutoDiscover</classname>クラスのコンストラクタのパラメータで変更できます。
@@ -157,7 +157,7 @@ $autodiscover->handle();
                 </listitem>
                 <listitem>
                     <para>
-                        <code>'http://'  .$_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']</code>が
+                        <code>'http://' .$_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']</code>が
                         WSDLをデフォルトで利用できるURIとして使われます、
                         しかし、それは<code>setUri()</code>メソッドによって上書きすることができます。
                     </para>

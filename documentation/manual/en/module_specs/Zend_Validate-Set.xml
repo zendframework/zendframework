@@ -253,7 +253,7 @@ if ($validator->isValid(1)) { // token invalid
             <constant>NULL</constant>). The <code>setMin()</code> method throws an exception if the minimum
             length is set to a value greater than the set maximum length, and the
             <code>setMax()</code> method throws an exception if the maximum length is set to a
-            value less than than the set minimum length. This class supports UTF-8 and other
+            value less than the set minimum length. This class supports UTF-8 and other
             character encodings, based on the current value of <ulink
                 url="http://www.php.net/manual/en/ref.iconv.php#iconv.configuration"><code>iconv.internal_encoding</code></ulink>.
             If you need a different encoding you can set it with the accessor methods getEncoding

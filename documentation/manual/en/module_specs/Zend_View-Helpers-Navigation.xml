@@ -851,7 +851,7 @@ Products, Foo Server, FAQ
 
         <note>
             <para>
-                When looking for relations in the the page instance
+                When looking for relations in the page instance
                 (<code>$page->getRel($type)</code> or
                 <code>$page->getRev($type)</code>), the helper accepts the
                 values of type <type>String</type>, <type>Array</type>,

@@ -72,7 +72,7 @@ $validator->isValid('yesterday'); // false
 
         <para>
             Validates whether a value is valid for using as a 'priority'
-            element in a Sitemap XML document. The value should be be a
+            element in a Sitemap XML document. The value should be a
             decimal between 0.0 and 1.0. This validator accepts both numeric
             values and string values.
         </para>

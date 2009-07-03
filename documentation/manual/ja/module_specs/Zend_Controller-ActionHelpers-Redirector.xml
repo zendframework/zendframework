@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16162 -->
+<!-- EN-Revision: 16396 -->
 <sect3 id="zend.controller.actionhelpers.redirector">
     <title>Redirector</title>
 
@@ -284,7 +284,7 @@ $router->addRoute('blogArchive', $route);
             <para>
                 year を 2006、month を 4、day を 24、そして ID を 42
                 として配列を渡すと、結果の URL は
-                <code>/blog/2006/4/24/42</code> となります。
+                <filename>/blog/2006/4/24/42</filename> となります。
             </para>
 
             <programlisting language="php"><![CDATA[

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15851 -->
+<!-- EN-Revision: 16396 -->
 <sect1 id="zend.db.adapter">
 
     <title>Zend_Db_Adapter</title>
@@ -175,7 +175,7 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
             <para>
                 独自に <classname>Zend_Db_Adapter_Abstract</classname>
                 の派生クラスを作成し、そのクラス名のプレフィックスが
-                "Zend_Db_Adapter" でない場合に <code>factory()</code>
+                "Zend_Db_Adapter" でない場合に <methodname>factory()</methodname>
                 でそのアダプタを読み込むには、
                 作成したクラス名の先頭の部分をパラメータ配列のキー
                 'adapterNamespace' で指定します。
@@ -206,7 +206,7 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
             <title>Zend_Db ファクトリでの Zend_Config の使用</title>
 
             <para>
-                <code>factory()</code> メソッドの引数として、
+                <methodname>factory()</methodname> メソッドの引数として、
                 <link linkend="zend.config">Zend_Config</link>
                 のオブジェクトを渡すこともできます。
             </para>
@@ -217,7 +217,7 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
                 そこに、アダプタクラス名を表す文字列を指定します。
                 また、オプションで <code>params</code> というプロパティも指定することができ、
                 その配下のサブプロパティとしてアダプタのパラメータ名を指定します。
-                これは、<code>factory()</code> メソッドの
+                これは、<methodname>factory()</methodname> メソッドの
                 2 番目のパラメータを省略した場合にのみ読み込まれます。
             </para>
 
@@ -250,7 +250,7 @@ $db = Zend_Db::factory($config->database);
             </example>
 
             <para>
-                <code>factory()</code> メソッドの 2 番目の引数には、
+                <methodname>factory()</methodname> メソッドの 2 番目の引数には、
                 アダプタのパラメータに対応するエントリをもつ連想配列となります。
                 この引数はオプションです。最初の引数が <classname>Zend_Config</classname>
                 である場合は、そこにすべてのパラメータが含まれているものとみなし、
@@ -325,7 +325,7 @@ $db = Zend_Db::factory($config->database);
                         アダプタクラスの名前の先頭が 'Zend_Db_Adapter'
                         以外である場合に、それを指定します。これは、
                         Zend 以外が作成したアダプタクラスを
-                        <code>factory()</code> メソッドで使いたい場合に指定します。
+                        <methodname>factory()</methodname> メソッドで使いたい場合に指定します。
                     </para>
                 </listitem>
             </itemizedlist>
@@ -372,7 +372,7 @@ $db = Zend_Db::factory('Db2', $params);
                     この値が <constant>FALSE</constant> の場合は、
                     識別子の自動クォートは行いません。
                     クォートすべき文字を使用している場合は、自分で
-                    <code>quoteIdentifier()</code> メソッドをコールする必要があります。
+                    <methodname>quoteIdentifier()</methodname> メソッドをコールする必要があります。
                 </para>
                 <programlisting language="php"><![CDATA[
 $options = array(
@@ -450,10 +450,10 @@ $db = Zend_Db::factory('Pdo_Mysql', $params);
 
             <para>
                 強制的に RDBMS との接続を確立する必要がある場合は、
-                <code>getConnection()</code> メソッドを使用します。
+                <methodname>getConnection()</methodname> メソッドを使用します。
                 このメソッドは、対応する PHP 拡張モジュール用の接続オブジェクトを返します。
                 たとえば、PDO ドライバ系のアダプタクラスを使った場合は、
-                <code>getConnection()</code> は
+                <methodname>getConnection()</methodname> は
                 データベースとの接続を確立してから PDO オブジェクトを返します。
             </para>
 
@@ -475,7 +475,7 @@ $db = Zend_Db::factory('Pdo_Mysql', $params);
                 <classname>Zend_Db::ALLOW_SERIALIZATION=false</classname> オプションを渡します。
                 遅延接続の理念を尊重し、アンシリアライズされたアダプタの
                 自動再接続は行いません。つまり、自分で
-                <code>getConnection()</code> をコールしなければなりません。
+                <methodname>getConnection()</methodname> をコールしなければなりません。
                 自動再接続を有効にするには、アダプタのオプションに
                 <classname>Zend_Db::AUTO_RECONNECT_ON_UNSERIALIZE=true</classname>
                 を渡します。
@@ -606,7 +606,7 @@ CREATE TABLE bugs_products (
 
             <para>
                 SQL の SELECT クエリの実行とその結果の取得を一度に行うには
-                <code>fetchAll()</code> メソッドを使用します。
+                <methodname>fetchAll()</methodname> メソッドを使用します。
             </para>
 
             <para>
@@ -619,7 +619,7 @@ CREATE TABLE bugs_products (
             </para>
 
             <para>
-                <code>fetchAll()</code> でその次に指定する引数は、
+                <methodname>fetchAll()</methodname> でその次に指定する引数は、
                 SQL 文中のパラメータプレースホルダを置換する値の配列となります。
             </para>
 
@@ -639,7 +639,7 @@ $result = $db->fetchAll($sql, 2);
             <title>フェッチモードの変更</title>
 
             <para>
-                デフォルトでは、<code>fetchAll()</code>
+                デフォルトでは、<methodname>fetchAll()</methodname>
                 は行の配列を返します。各行のデータは連想配列となります。
                 連署配列のキーは、列名かあるいは SELECT
                 クエリで指定した列の別名となります。
@@ -647,7 +647,7 @@ $result = $db->fetchAll($sql, 2);
 
             <para>
                 返り値の形式を別のものにするには
-                <code>setFetchMode()</code> メソッドを使用します。
+                <methodname>setFetchMode()</methodname> メソッドを使用します。
                 対応しているモードは、以下の定数で表されるものです。
             </para>
 

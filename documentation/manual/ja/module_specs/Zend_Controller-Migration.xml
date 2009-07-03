@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16165 -->
+<!-- EN-Revision: 16396 -->
 <sect1 id="zend.controller.migration">
     <title>以前のバージョンからの移行</title>
 
@@ -630,7 +630,7 @@ echo $response;
                         コンストラクタが受け付ける引数は
                         <classname>Zend_Controller_Request_Abstract $request</classname>、
                         <classname>Zend_Controller_Response_Abstract $response</classname>
-                        および <code>array $params (optional)</code> の三つになりました。
+                        および <command>array $params (optional)</command> の三つになりました。
                         <classname>Zend_Controller_Action::__construct()</classname>
                         は、これらを使用してリクエストやレスポンス、
                         そしてオブジェクトの invokeArgs プロパティを指定します。

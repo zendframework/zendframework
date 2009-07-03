@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16103 -->
+<!-- EN-Revision: 16396 -->
 <sect1 id="zend.controller.basics">
     <title>Zend_Controller の基本</title>
 
@@ -46,7 +46,7 @@
                     そしてリクエストパラメータを設定したり取得したりする機能を提供します。
                     さらに、アクションが <classname>Zend_Controller_Dispatcher</classname>
                     でディスパッチされたかどうかを追跡する機能もあります。
-                    この抽象リクエストオブジェクトを拡張し、
+                    この抽象<emphasis>リクエストオブジェクト</emphasis>を拡張し、
                     リクエスト情報をカプセル化します。それによって、
                     ルータはリクエストの情報を取得して
                     コントローラとアクションを決定できるようになります。
@@ -75,7 +75,7 @@
                     <classname>Zend_Controller_Request_Http</classname> で指定された URI
                     を受け取ってそれを分解し、コントローラや
                     アクション、そして URL に含まれたパスのパラメータを取得します。
-                    たとえば、<code>http://localhost/foo/bar/key/value</code>
+                    たとえば、<filename>http://localhost/foo/bar/key/value</filename>
                     のような URL の場合は <code>foo</code> がコントローラ、
                     <code>bar</code> がアクション、そしてパラメータ
                     <code>key</code> の値として <code>value</code> を取得します。

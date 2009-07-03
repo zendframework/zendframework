@@ -75,7 +75,7 @@
                               <entry><type>Boolean</type></entry>
                               <entry><constant>FALSE</constant></entry>
                               <entry>
-                                true を指定すると、<classname>Zend_Log</classname> によるロギングが有効になります
+                                <constant>TRUE</constant> を指定すると、<classname>Zend_Log</classname> によるロギングが有効になります
                                 (しかし、処理速度は低下します)。
                               </entry>
                           </row>
@@ -120,7 +120,7 @@
                               <entry><type>Boolean</type></entry>
                               <entry><constant>FALSE</constant></entry>
                               <entry>
-                                true を指定すると、<methodname>save()</methodname> メソッド内で
+                                <constant>TRUE</constant> を指定すると、<methodname>save()</methodname> メソッド内で
                                 <acronym>PHP</acronym> の ignore_user_abort フラグを設定し、
                                 キャッシュが破壊されることを防ぎます。
                               </entry>
@@ -317,7 +317,7 @@ echo 'これはキャッシュされません ('.time().').';
                               <entry><type>Boolean</type></entry>
                               <entry><constant>TRUE</constant></entry>
                               <entry>
-                                  true の場合は、関数のコール結果がデフォルトでキャッシュされます。
+                                  <constant>TRUE</constant> の場合は、関数のコール結果がデフォルトでキャッシュされます。
                               </entry>
                          </row>
                          <row>
@@ -404,7 +404,7 @@ $cache->call('veryExpensiveFunc', $params);
                               <entry><type>Boolean</type></entry>
                               <entry><constant>TRUE</constant></entry>
                               <entry>
-                                  true を設定すると、デフォルトでキャッシュされます。
+                                  <constant>TRUE</constant> を設定すると、デフォルトでキャッシュされます。
                               </entry>
                          </row>
                          <row>
@@ -549,8 +549,8 @@ $result = $cache->foobar2('1', '2');
                               <entry><type>Boolean</type></entry>
                               <entry><constant>FALSE</constant></entry>
                               <entry>
-                                  true の場合は、マスタファイルが存在しない場合は無視します
-                                  (true でない場合は例外が発生します)。
+                                  <constant>TRUE</constant> の場合は、マスタファイルが存在しない場合は無視します
+                                  (それ以外の場合は例外が発生します)。
                               </entry>
                          </row>
                       </tbody>
@@ -620,7 +620,7 @@ $result = $cache->foobar2('1', '2');
                               <entry><type>Boolean</type></entry>
                               <entry><constant>FALSE</constant></entry>
                               <entry>
-                                  true の場合は、キャッシュされた各ページの先頭に
+                                  <constant>TRUE</constant> の場合は、キャッシュされた各ページの先頭に
                                   デバッグ用テキストが追加されます。
                               </entry>
                          </row>
@@ -634,73 +634,73 @@ $result = $cache->foobar2('1', '2');
                                       <listitem>
                                           <para>
                                               <emphasis>(boolean, デフォルトは true) cache</emphasis> :
-                                              true の場合はキャッシュが有効になります。
+                                              <constant>TRUE</constant> の場合はキャッシュが有効になります。
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
                                               <emphasis>(boolean, デフォルトは false) cache_with_get_variables</emphasis> :
-                                              true の場合は、<varname>$_GET</varname> 配列に変数が含まれていてもキャッシュがオンのままになります。
+                                              <constant>TRUE</constant> の場合は、<varname>$_GET</varname> 配列に変数が含まれていてもキャッシュがオンのままになります。
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
                                               <emphasis>(boolean, デフォルトは false) cache_with_post_variables</emphasis> :
-                                              true の場合は、<varname>$_POST</varname> 配列に変数が含まれていてもキャッシュがオンのままになります。
+                                              <constant>TRUE</constant> の場合は、<varname>$_POST</varname> 配列に変数が含まれていてもキャッシュがオンのままになります。
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
                                               <emphasis>(boolean, デフォルトは false) cache_with_session_variables</emphasis> :
-                                              true の場合は、<varname>$_SESSION</varname> 配列に変数が含まれていてもキャッシュがオンのままになります。
+                                              <constant>TRUE</constant> の場合は、<varname>$_SESSION</varname> 配列に変数が含まれていてもキャッシュがオンのままになります。
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
                                               <emphasis>(boolean, デフォルトは false) cache_with_files_variables</emphasis> :
-                                              true の場合は、<varname>$_FILES</varname> 配列に変数が含まれていてもキャッシュがオンのままになります。
+                                              <constant>TRUE</constant> の場合は、<varname>$_FILES</varname> 配列に変数が含まれていてもキャッシュがオンのままになります。
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
                                               <emphasis>(boolean, デフォルトは false) cache_with_cookie_variables</emphasis> :
-                                              true の場合は、<varname>$_COOKIE</varname> 配列に変数が含まれていてもキャッシュがオンのままになります。
+                                              <constant>TRUE</constant> の場合は、<varname>$_COOKIE</varname> 配列に変数が含まれていてもキャッシュがオンのままになります。
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
                                               <emphasis>(boolean, デフォルトは true) make_id_with_get_variables</emphasis> :
-                                              true の場合は、キャッシュ ID が <varname>$_GET</varname> 配列の内容に依存するようになります。
+                                              <constant>TRUE</constant> の場合は、キャッシュ ID が <varname>$_GET</varname> 配列の内容に依存するようになります。
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
                                               <emphasis>(boolean, デフォルトは true) make_id_with_post_variables</emphasis> :
-                                              true の場合は、キャッシュ ID が <varname>$_POST</varname> 配列の内容に依存するようになります。
+                                              <constant>TRUE</constant> の場合は、キャッシュ ID が <varname>$_POST</varname> 配列の内容に依存するようになります。
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
                                               <emphasis>(boolean, デフォルトは true) make_id_with_session_variables</emphasis> :
-                                              true の場合は、キャッシュ ID が <varname>$_SESSION</varname> 配列の内容に依存するようになります。
+                                              <constant>TRUE</constant> の場合は、キャッシュ ID が <varname>$_SESSION</varname> 配列の内容に依存するようになります。
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
                                               <emphasis>(boolean, デフォルトは true) make_id_with_files_variables</emphasis> :
-                                              true の場合は、キャッシュ ID が <varname>$_FILES</varname> 配列の内容に依存するようになります。
+                                              <constant>TRUE</constant> の場合は、キャッシュ ID が <varname>$_FILES</varname> 配列の内容に依存するようになります。
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
                                               <emphasis>(boolean, デフォルトは true) make_id_with_cookie_variables</emphasis> :
-                                              true の場合は、キャッシュ ID が <varname>$_COOKIE</varname> 配列の内容に依存するようになります。
+                                              <constant>TRUE</constant> の場合は、キャッシュ ID が <varname>$_COOKIE</varname> 配列の内容に依存するようになります。
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
                                               <emphasis>(int, デフォルトは false) specific_lifetime</emphasis> :
-                                              false でない場合は、選択した正規表現に対して指定した有効期限を使用します。
+                                              <constant>FALSE</constant> でない場合は、選択した正規表現に対して指定した有効期限を使用します。
                                           </para>
                                       </listitem>
                                       <listitem>
@@ -818,7 +818,7 @@ $cache->start();
             <para>
                 設計上の理由から、場合によっては (<acronym>HTTP</acronym> 200 以外のコードを使用する場合など)
                 現在のキャッシュ処理をキャンセルする必要が生じることもあります。
-                そこで、このフロントエンド用に cancel() メソッドを用意しました。
+                そこで、このフロントエンド用に <methodname>cancel()</methodname> メソッドを用意しました。
             </para>
             <programlisting language="php"><![CDATA[
 // [...] // require, configuration そして factory

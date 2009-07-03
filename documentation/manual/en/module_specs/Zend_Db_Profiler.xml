@@ -127,7 +127,7 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
 
         <para>
             At any point, grab the profiler using the adapter's
-            <code>getProfiler()</code> method:
+            <methodname>getProfiler()</methodname> method:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -143,40 +143,40 @@ $profiler = $db->getProfiler();
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>getTotalNumQueries()</code> returns the total number
+                    <methodname>getTotalNumQueries()</methodname> returns the total number
                     of queries that have been profiled.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>getTotalElapsedSecs()</code> returns the total
+                    <methodname>getTotalElapsedSecs()</methodname> returns the total
                     number of seconds elapsed for all profiled queries.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>getQueryProfiles()</code> returns an array of all
+                    <methodname>getQueryProfiles()</methodname> returns an array of all
                     query profiles.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>getLastQueryProfile()</code> returns the last (most
+                    <methodname>getLastQueryProfile()</methodname> returns the last (most
                     recent) query profile, regardless of whether or not the query
                     has finished (if it hasn't, the end time will be null)
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>clear()</code> clears any past query profiles
+                    <methodname>clear()</methodname> clears any past query profiles
                     from the stack.
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
-            The return value of <code>getLastQueryProfile()</code> and the
-            individual elements of <code>getQueryProfiles()</code> are
+            The return value of <methodname>getLastQueryProfile()</methodname> and the
+            individual elements of <methodname>getQueryProfiles()</methodname> are
             <classname>Zend_Db_Profiler_Query</classname> objects, which provide the
             ability to inspect the individual queries themselves:
         </para>
@@ -184,7 +184,7 @@ $profiler = $db->getProfiler();
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>getQuery()</code> returns the SQL text of the query.
+                    <methodname>getQuery()</methodname> returns the SQL text of the query.
                     The SQL text of a prepared statement with parameters is the
                     text at the time the query was prepared, so it contains
                     parameter placeholders, not the values used when the
@@ -193,17 +193,17 @@ $profiler = $db->getProfiler();
             </listitem>
             <listitem>
                 <para>
-                    <code>getQueryParams()</code> returns an array of
+                    <methodname>getQueryParams()</methodname> returns an array of
                     parameter values used when executing a prepared query.
                     This includes both bound parameters and arguments to the
-                    statement's <code>execute()</code> method. The keys of
+                    statement's <methodname>execute()</methodname> method. The keys of
                     the array are the positional (1-based) or named (string)
                     parameter indices.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>getElapsedSecs()</code> returns the number of
+                    <methodname>getElapsedSecs()</methodname> returns the number of
                     seconds the query ran.
                 </para>
             </listitem>
@@ -266,7 +266,7 @@ echo "Longest query: \n" . $longestQuery . "\n";
             <title>Filter by query elapsed time</title>
 
             <para>
-                <code>setFilterElapsedSecs()</code> allows the developer to set
+                <methodname>setFilterElapsedSecs()</methodname> allows the developer to set
                 a minimum query time before a query is profiled. To remove the
                 filter, pass the method a null value.
             </para>
@@ -284,7 +284,7 @@ $profiler->setFilterElapsedSecs(null);
             <title>Filter by query type</title>
 
             <para>
-                <code>setFilterQueryType()</code> allows the developer to set
+                <methodname>setFilterQueryType()</methodname> allows the developer to set
                 which types of queries should be profiled; to profile multiple
                 types, logical OR them. Query types are defined as the following
                 <classname>Zend_Db_Profiler</classname> constants:
@@ -337,7 +337,7 @@ $profiler->setFilterElapsedSecs(null);
             </itemizedlist>
 
             <para>
-                As with <code>setFilterElapsedSecs()</code>, you can remove any
+                As with <methodname>setFilterElapsedSecs()</methodname>, you can remove any
                 existing filters by passing <constant>NULL</constant> as the sole
                 argument.
             </para>
@@ -364,10 +364,10 @@ $profiler->setFilterQueryType(null);
             <title>Retrieve profiles by query type</title>
 
             <para>
-                Using <code>setFilterQueryType()</code> can cut down on the
+                Using <methodname>setFilterQueryType()</methodname> can cut down on the
                 profiles generated. However, sometimes it can be more useful to
                 keep all profiles, but view only those you need at a given
-                moment. Another feature of <code>getQueryProfiles()</code> is
+                moment. Another feature of <methodname>getQueryProfiles()</methodname> is
                 that it can do this filtering on-the-fly, by passing a query
                 type (or logical combination of query types) as its first
                 argument; see <xref linkend="zend.db.profiler.advanced.filtertype" />

@@ -9,7 +9,7 @@
         <title>Introduction</title>
 
         <para>
-            The <classname>Zend_Db_Select</classname> object represents a SQL <code>SELECT</code>
+            The <classname>Zend_Db_Select</classname> object represents a SQL <acronym>SELECT</acronym>
             query statement. The class has methods for adding individual parts to the query. You can
             specify some parts of the query using PHP methods and data structures, and the class
             forms the correct SQL syntax for you. After you build a query, you can execute the query
@@ -50,7 +50,8 @@
         <para>
             Using <classname>Zend_Db_Select</classname> is not mandatory. For very simple SELECT
             queries, it is usually simpler to specify the entire SQL query as a string and execute
-            it using Adapter methods like <code>query()</code> or <code>fetchAll()</code>. Using
+            it using Adapter methods like <methodname>query()</methodname> or
+            <methodname>fetchAll()</methodname>. Using
             <classname>Zend_Db_Select</classname> is helpful if you need to assemble a SELECT query
             procedurally, or based on conditional logic in your application.
         </para>
@@ -63,7 +64,7 @@
 
         <para>
             You can create an instance of a <classname>Zend_Db_Select</classname> object using the
-            <code>select()</code> method of a <classname>Zend_Db_Adapter_Abstract</classname>
+            <methodname>select()</methodname> method of a <classname>Zend_Db_Adapter_Abstract</classname>
             object.
         </para>
 
@@ -157,9 +158,10 @@ $select = $db->select()
             <title>Adding a FROM clause</title>
 
             <para>
-                Specify the table for this query using the <code>from()</code> method. You can
-                specify the table name as a simple string. <classname>Zend_Db_Select</classname>
-                applies identifier quoting around the table name, so you can use special characters.
+                Specify the table for this query using the <methodname>from()</methodname> method.
+                You can specify the table name as a simple string.
+                <classname>Zend_Db_Select</classname> applies identifier quoting around the table
+                name, so you can use special characters.
             </para>
 
             <example id="zend.db.select.building.from.example">
@@ -236,9 +238,9 @@ $select = $db->select()
             <title>Adding Columns</title>
 
             <para>
-                In the second argument of the <code>from()</code> method, you can specify the
-                columns to select from the respective table. If you specify no columns, the default
-                is "<code>*</code>", the SQL wildcard for "all columns".
+                In the second argument of the <methodname>from()</methodname> method, you can
+                specify the columns to select from the respective table. If you specify no columns,
+                the default is "<code>*</code>", the SQL wildcard for "all columns".
             </para>
 
             <para>
@@ -252,14 +254,14 @@ $select = $db->select()
                 If you give an empty array as the columns argument, no columns from the respective
                 table are included in the result set. See a
                 <link linkend="zend.db.select.building.join.example-no-columns">code example</link>
-                under the section on the <code>join()</code> method.
+                under the section on the <methodname>join()</methodname> method.
             </para>
 
             <para>
                 You can specify the column name as "<code>correlationName.columnName</code>".
                 <classname>Zend_Db_Select</classname> quotes each part individually. If you don't
                 specify a correlation name for a column, it uses the correlation name for the table
-                named in the current <code>from()</code> method.
+                named in the current <methodname>from()</methodname> method.
             </para>
 
             <example id="zend.db.select.building.columns.example">
@@ -374,18 +376,18 @@ $select = $db->select()
 
             <para>
                 If your column names are SQL keywords or contain special characters, you should use
-                the Adapter's <code>quoteIdentifier()</code> method and interpolate the result into
-                the string. The <code>quoteIdentifier()</code> method uses SQL quoting to delimit
+                the Adapter's <methodname>quoteIdentifier()</methodname> method and interpolate the result into
+                the string. The <methodname>quoteIdentifier()</methodname> method uses SQL quoting to delimit
                 the identifier, which makes it clear that it is an identifier for a table or a
                 column, and not any other part of SQL syntax.
             </para>
 
             <para>
                 Your code is more database-independent if you use the
-                <code>quoteIdentifier()</code> method instead of typing quotes literally in your
+                <methodname>quoteIdentifier()</methodname> method instead of typing quotes literally in your
                 string, because some RDBMS brands use nonstandard symbols for quoting identifiers.
-                The <code>quoteIdentifier()</code> method is designed to use the appropriate
-                quoting symbols based on the adapter type. The <code>quoteIdentifier()</code>
+                The <methodname>quoteIdentifier()</methodname> method is designed to use the appropriate
+                quoting symbols based on the adapter type. The <methodname>quoteIdentifier()</methodname>
                 method also escapes any quote characters that appear within the identifier name
                 itself.
             </para>
@@ -417,7 +419,7 @@ $select = $db->select()
 
             <para>
                 There may be cases where you wish to add columns to an existing FROM or JOIN table
-                after those methods have been called. The <code>columns()</code> method allows you
+                after those methods have been called. The <methodname>columns()</methodname> method allows you
                 to add specific columns at any point before the query is executed. You can supply
                 the columns as either a string or <classname>Zend_Db_Expr</classname> or as an array
                 of these elements. The second argument to this method can be omitted, implying that
@@ -457,10 +459,10 @@ $select = $db->select()
             <title>Adding Another Table to the Query with JOIN</title>
 
             <para>
-                Many useful queries involve using a <code>JOIN</code> to combine rows from multiple
+                Many useful queries involve using a <acronym>JOIN</acronym> to combine rows from multiple
                 tables. You can add tables to a <classname>Zend_Db_Select</classname> query using
-                the <code>join()</code> method. Using this method is similar to the
-                <code>from()</code> method, except you can also specify a join condition in most
+                the <methodname>join()</methodname> method. Using this method is similar to the
+                <methodname>from()</methodname> method, except you can also specify a join condition in most
                 cases.
             </para>
 
@@ -484,7 +486,7 @@ $select = $db->select()
             </example>
 
             <para>
-                The second argument to <code>join()</code> is a string that is the join condition.
+                The second argument to <methodname>join()</methodname> is a string that is the join condition.
                 This is an expression that declares the criteria by which rows in one table match
                 rows in the other table. You can use correlation names in this expression.
             </para>
@@ -494,21 +496,21 @@ $select = $db->select()
                 <para>
                     No quoting is applied to the expression you specify for the join condition; if
                     you have column names that need to be quoted, you must use
-                    <code>quoteIdentifier()</code> as you form the string for the join condition.
+                    <methodname>quoteIdentifier()</methodname> as you form the string for the join condition.
                 </para>
 
             </note>
 
             <para>
-                The third argument to <code>join()</code> is an array of column names, like that
-                used in the <code>from()</code> method. It defaults to "<code>*</code>", supports
+                The third argument to <methodname>join()</methodname> is an array of column names, like that
+                used in the <methodname>from()</methodname> method. It defaults to "<code>*</code>", supports
                 correlation names, expressions, and <classname>Zend_Db_Expr</classname> in the same
-                way as the array of column names in the <code>from()</code> method.
+                way as the array of column names in the <methodname>from()</methodname> method.
             </para>
 
             <para>
                 To select no columns from a table, use an empty array for the list of columns. This
-                usage works in the <code>from()</code> method too, but typically you want some
+                usage works in the <methodname>from()</methodname> method too, but typically you want some
                 columns from the primary table in your queries, whereas you might want no columns
                 from a joined table.
             </para>
@@ -532,7 +534,7 @@ $select = $db->select()
 ]]></programlisting>
 
                 <para>
-                    Note the empty <code>array()</code> in the above example in place of a list of
+                    Note the empty <methodname>array()</methodname> in the above example in place of a list of
                     columns from the joined table.
                 </para>
 
@@ -547,8 +549,8 @@ $select = $db->select()
                 <listitem>
                     <para>
                         <command>INNER JOIN</command> with the
-                        <code>join(table, join, [columns])</code> or
-                        <code>joinInner(table, join, [columns])</code> methods.
+                        <methodname>join(table, join, [columns])</methodname> or
+                        <methodname>joinInner(table, join, [columns])</methodname> methods.
                     </para>
 
                     <para>
@@ -566,7 +568,7 @@ $select = $db->select()
                 <listitem>
                     <para>
                         <command>LEFT JOIN</command> with the
-                        <code>joinLeft(table, condition, [columns])</code> method.
+                        <methodname>joinLeft(table, condition, [columns])</methodname> method.
                     </para>
 
                     <para>
@@ -583,7 +585,7 @@ $select = $db->select()
                 <listitem>
                     <para>
                         <command>RIGHT JOIN</command> with the
-                        <code>joinRight(table, condition, [columns])</code> method.
+                        <methodname>joinRight(table, condition, [columns])</methodname> method.
                     </para>
 
                     <para>
@@ -603,7 +605,7 @@ $select = $db->select()
                 <listitem>
                     <para>
                         <command>FULL JOIN</command> with the
-                        <code>joinFull(table, condition, [columns])</code> method.
+                        <methodname>joinFull(table, condition, [columns])</methodname> method.
                     </para>
 
                     <para>
@@ -621,7 +623,7 @@ $select = $db->select()
                 <listitem>
                     <para>
                         <command>CROSS JOIN</command> with the
-                        <code>joinCross(table, [columns])</code> method.
+                        <methodname>joinCross(table, [columns])</methodname> method.
                     </para>
 
                     <para>
@@ -633,7 +635,7 @@ $select = $db->select()
                     </para>
 
                     <para>
-                        The <code>joinCross()</code> method has no parameter to specify the join
+                        The <methodname>joinCross()</methodname> method has no parameter to specify the join
                         condition. Some RDBMS brands don't support this join type.
                     </para>
                 </listitem>
@@ -641,7 +643,7 @@ $select = $db->select()
                 <listitem>
                     <para>
                         <command>NATURAL JOIN</command> with the
-                        <code>joinNatural(table, [columns])</code> method.
+                        <methodname>joinNatural(table, [columns])</methodname> method.
                     </para>
 
                     <para>
@@ -653,7 +655,7 @@ $select = $db->select()
                     </para>
 
                     <para>
-                        The <code>joinNatural()</code> method has no parameter to specify the join
+                        The <methodname>joinNatural()</methodname> method has no parameter to specify the join
                         condition.
                     </para>
                 </listitem>
@@ -694,26 +696,26 @@ $select = $db->select()
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>joinUsing(table, join, [columns])</code> and
-                        <code>joinInnerUsing(table, join, [columns])</code>
+                        <methodname>joinUsing(table, join, [columns])</methodname> and
+                        <methodname>joinInnerUsing(table, join, [columns])</methodname>
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>joinLeftUsing(table, join, [columns])</code>
+                        <methodname>joinLeftUsing(table, join, [columns])</methodname>
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>joinRightUsing(table, join, [columns])</code>
+                        <methodname>joinRightUsing(table, join, [columns])</methodname>
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>joinFullUsing(table, join, [columns])</code>
+                        <methodname>joinFullUsing(table, join, [columns])</methodname>
                     </para>
                 </listitem>
             </itemizedlist>
@@ -726,8 +728,8 @@ $select = $db->select()
 
             <para>
                 You can specify criteria for restricting rows of the result set using the
-                <code>where()</code> method. The first argument of this method is a SQL expression,
-                and this expression is used in a SQL <code>WHERE</code> clause in the query.
+                <methodname>where()</methodname> method. The first argument of this method is a SQL expression,
+                and this expression is used in a SQL <acronym>WHERE</acronym> clause in the query.
             </para>
 
             <example id="zend.db.select.building.where.example">
@@ -751,16 +753,16 @@ $select = $db->select()
             <note>
 
                 <para>
-                    No quoting is applied to expressions given to the <code>where()</code> or
-                    <code>orWhere()</code> methods. If you have column names that need to be
-                    quoted, you must use <code>quoteIdentifier()</code> as you form the string for
+                    No quoting is applied to expressions given to the <methodname>where()</methodname> or
+                    <methodname>orWhere()</methodname> methods. If you have column names that need to be
+                    quoted, you must use <methodname>quoteIdentifier()</methodname> as you form the string for
                     the condition.
                 </para>
 
             </note>
 
             <para>
-                The second argument to the <code>where()</code> method is optional. It is a value
+                The second argument to the <methodname>where()</methodname> method is optional. It is a value
                 to substitute into the expression. <classname>Zend_Db_Select</classname> quotes the
                 value and substitutes it for a question-mark ("<code>?</code>") symbol in the
                 expression.
@@ -793,9 +795,9 @@ $select = $db->select()
             </example>
 
             <para>
-                You can invoke the <code>where()</code> method multiple times on the same
+                You can invoke the <methodname>where()</methodname> method multiple times on the same
                 <classname>Zend_Db_Select</classname> object. The resulting query combines the
-                multiple terms together using <code>AND</code> between them.
+                multiple terms together using <acronym>AND</acronym> between them.
             </para>
 
             <example id="zend.db.select.building.where.example-and">
@@ -822,10 +824,10 @@ $select = $db->select()
             </example>
 
             <para>
-                If you need to combine terms together using <code>OR</code>, use the
-                <code>orWhere()</code> method. This method is used in the same way as the
-                <code>where()</code> method, except that the term specified is preceded by
-                <code>OR</code>, instead of <code>AND</code>.
+                If you need to combine terms together using <acronym>OR</acronym>, use the
+                <methodname>orWhere()</methodname> method. This method is used in the same way as the
+                <methodname>where()</methodname> method, except that the term specified is preceded by
+                <acronym>OR</acronym>, instead of <acronym>AND</acronym>.
             </para>
 
             <example id="zend.db.select.building.where.example-or">
@@ -853,7 +855,7 @@ $select = $db->select()
 
             <para>
                 <classname>Zend_Db_Select</classname> automatically puts parentheses around each
-                expression you specify using the <code>where()</code> or <code>orWhere()</code>
+                expression you specify using the <methodname>where()</methodname> or <methodname>orWhere()</methodname>
                 methods. This helps to ensure that Boolean operator precedence does not cause
                 unexpected results.
             </para>
@@ -884,10 +886,10 @@ $select = $db->select()
 
             <para>
                 In the example above, the results would be quite different without the parentheses,
-                because <code>AND</code> has higher precedence than <code>OR</code>.
+                because <acronym>AND</acronym> has higher precedence than <acronym>OR</acronym>.
                 <classname>Zend_Db_Select</classname> applies the parentheses so the effect is that
-                each expression in successive calls to the <code>where()</code> bind more tightly
-                than the <code>AND</code> that combines the expressions.
+                each expression in successive calls to the <methodname>where()</methodname> bind more tightly
+                than the <acronym>AND</acronym> that combines the expressions.
             </para>
 
         </sect3>
@@ -897,16 +899,16 @@ $select = $db->select()
             <title>Adding a GROUP BY Clause</title>
 
             <para>
-                In SQL, the <code>GROUP BY</code> clause allows you to reduce the rows of a query
+                In SQL, the <command>GROUP BY</command> clause allows you to reduce the rows of a query
                 result set to one row per unique value found in the column(s) named in the
-                <code>GROUP BY</code> clause.
+                <command>GROUP BY</command> clause.
             </para>
 
             <para>
                 In <classname>Zend_Db_Select</classname>, you can specify the column(s) to use for
-                calculating the groups of rows using the <code>group()</code> method. The argument
+                calculating the groups of rows using the <methodname>group()</methodname> method. The argument
                 to this method is a column or an array of columns to use in the
-                <code>GROUP BY</code> clause.
+                <command>GROUP BY</command> clause.
             </para>
 
             <example id="zend.db.select.building.group.example">
@@ -932,7 +934,7 @@ $select = $db->select()
             </example>
 
             <para>
-                Like the columns array in the <code>from()</code> method, you can use correlation
+                Like the columns array in the <methodname>from()</methodname> method, you can use correlation
                 names in the column name strings, and the column is quoted as an identifier unless
                 the string contains parentheses or is an object of type
                 <classname>Zend_Db_Expr</classname>.

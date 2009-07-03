@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15958 -->
+<!-- EN-Revision: 16394 -->
 <sect1 id="zend.locale.functions">
 
     <title>Zend_Locale の使用法</title>
@@ -79,7 +79,7 @@ if ($locale->equals($mylocale)) {
         <para>
             <code>getDefault()</code> メソッドは、関連するロケールの配列を返します。
             これは、ユーザのウェブブラウザからの情報 (取得できる場合)、
-            ホストサーバの環境変数および ZF の設定をもとに取得します。
+            ホストサーバの環境変数および Zend Framework の設定をもとに取得します。
             <classname>Zend_Locale</classname> のコンストラクタの最初のパラメータで、
             <link linkend="zend.locale.selection">
               (<code>BROWSER</code>、<code>ENVIRONMENT</code> あるいは <code>FRAMEWORK</code> のうちの)
@@ -1384,7 +1384,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
         </note>
 
         <table id="zend.locale.getdata.table-3">
-            <title>ZF 1.0 と ZF 1.5 の違い</title>
+            <title>Zend Framework 1.0 と 1.5 の違い</title>
             <tgroup cols="2">
                 <thead>
                     <row>
@@ -1766,7 +1766,7 @@ if ($locale instanceof Zend_Locale) {
         </para>
 
         <example id="zend.locale.detection.example-4">
-            <title>ZF 1.8 以降でのロケール対応の振る舞いの実装</title>
+            <title>Zend Framework 1.8 以降でのロケール対応の振る舞いの実装</title>
             <programlisting language="php"><![CDATA[
 $locale = Zend_Locale::findLocale($inputstring);
 ]]></programlisting>

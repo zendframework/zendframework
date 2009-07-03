@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15672 -->
+<!-- EN-Revision: 16394 -->
 <sect1 id="zend.locale.introduction">
 
     <title>導入</title>
@@ -66,7 +66,7 @@
             <listitem>
                 <para>
                     <classname>Zend_Locale</classname> -
-                    他の ZF コンポーネントにおける地域化サポートで対応しているロケールのバックエンドとなります。
+                    他の Zend Framework コンポーネントにおける地域化サポートで対応しているロケールのバックエンドとなります。
                 </para>
             </listitem>
             <listitem>
@@ -193,14 +193,14 @@ $locale = new Zend_Locale('de_DE'); // ドイツ語 _ ドイツ
         </para>
 
         <para>
-            過去の歴史には注意しましょう。ZF コンポーネントは、
+            過去の歴史には注意しましょう。Zend Framework コンポーネントは、
             これまでさまざまな場所で変更されてきた過去のタイムゾーンについては対応しません。
             たとえば
             <ulink url="http://www.statoids.com/tus.html">この一覧表</ulink>
             をご覧ください。特定の地域が夏時間を採用するかどうかや、
             どのタイムゾーンに属するかなどは、時の政府によって何度も変更されています。
             したがって、日付の計算をおこなう際には、
-            ZF コンポーネントはこれらの変更には対応しません。
+            Zend Framework コンポーネントはこれらの変更には対応しません。
             その代わりに、現時点の夏時間対応、現時点のタイムゾーンに対応した正しい時刻を使用します。
         </para>
 
@@ -424,9 +424,9 @@ $date = new Zend_Date();
         <title>ZF のロケール対応のクラス</title>
 
         <para>
-            ZF では、ロケール対応のクラスは <classname>Zend_Locale</classname>
+            Zend Framework では、ロケール対応のクラスは <classname>Zend_Locale</classname>
             を使用しています。そして、上で説明したように自動的にロケールを選択します。
-            たとえば、ZF のウェブアプリケーションで <classname>Zend_Date</classname>
+            たとえば、Zend Framework のウェブアプリケーションで <classname>Zend_Date</classname>
             を使用して日付を作成すると、何もロケールを指定しなくても
             ユーザのウェブブラウザの設定からロケール情報を取得してそれを使用します。
         </para>
@@ -439,7 +439,7 @@ $date = new Zend_Date('2006',Zend_Date::YEAR);
         </example>
 
         <para>
-            このデフォルトを上書きし、ロケール対応の ZF
+            このデフォルトを上書きし、ロケール対応の Zend Framework
             コンポーネントでウェブサイトの訪問者の設定にかかわらず特定のロケールを指定するには、
             コンストラクタの三番目の引数でロケールを明示的に指定します。
         </para>

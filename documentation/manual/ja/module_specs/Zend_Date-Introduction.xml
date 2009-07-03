@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15851 -->
+<!-- EN-Revision: 16394 -->
 <sect1 id="zend.date.introduction">
 
     <title>導入</title>
@@ -124,7 +124,7 @@ date_default_timezone_set('Europe/Berlin');
                     <ulink url="http://www.php.net/float">http://www.php.net/float</ulink>
                     ]
                     さらに、float 型そのものの特性により、計算結果に丸め誤差が生じる問題があります。
-                    これを避けるため、ZF の I18n コンポーネントでは
+                    これを避けるため、Zend Framework の I18n コンポーネントでは
                     もし BCMath 拡張モジュールが使用可能ならそれを使用するようにしています。
                 </para>
             </listitem>

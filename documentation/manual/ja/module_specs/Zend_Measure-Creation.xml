@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15746 -->
+<!-- EN-Revision: 16394 -->
 <sect1 id="zend.measure.creation">
 
     <title>計測値の作成</title>
@@ -56,7 +56,7 @@ echo $unit;
         <title>文字列からの計測値の作成</title>
 
         <para>
-            ZF アプリケーションが入力として受け取って <classname>Zend_Measure_*</classname>
+            Zend Framework アプリケーションが入力として受け取って <classname>Zend_Measure_*</classname>
             クラスに渡す値の多くは、文字列としてしか渡せません。
             たとえば
             <ulink url="http://en.wikipedia.org/wiki/Roman_numerals">ローマ数字</ulink>

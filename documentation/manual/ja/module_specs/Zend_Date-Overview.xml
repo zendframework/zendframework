@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16186 -->
+<!-- EN-Revision: 16394 -->
 <sect1 id="zend.date.overview">
 
     <title>Zend_Date API の概要</title>
@@ -83,7 +83,7 @@
                 一方、Excel や OpenOffice を使っている人は、この結果が「3月3日」
                 になるものと考えるのではないでしょうか。
                 この問題は、計算結果の月の日数が元の日付の月の日数より少ない場合に起こりえます。
-                ZF の開発者向けには、どちらの方式かを選択できるようにしました。
+                Zend Framework の開発者向けには、どちらの方式かを選択できるようにしました。
                 <code>extend_month</code> オプションを false にすると
                 SQL 風の挙動になり、true にすると表計算ソフト風の挙動になります。
                 <code>extend_month</code> のデフォルトは false なので、

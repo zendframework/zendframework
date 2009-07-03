@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16318 -->
+<!-- EN-Revision: 16450 -->
 <sect1 id="zend.filter.introduction">
 
     <title>導入</title>
@@ -77,7 +77,7 @@ echo $htmlEntities->filter('"'); // &quot;
 
         <para>
             指定したフィルタクラスを読み込んでそのインスタンスを作成するというのが面倒ならば、
-            もうひとつの方法として、静的メソッド <classname>Zend_Filter::get()</classname>
+            もうひとつの方法として、静的メソッド <classname>Zend_Filter::filterStatic()</classname>
             を実行する方法もあります。このメソッドの最初の引数には、
             <code>filter()</code> メソッドに渡す入力値を指定します。
             二番目の引数は文字列で、フィルタクラスのベースネーム
@@ -86,7 +86,7 @@ echo $htmlEntities->filter('"'); // &quot;
             指定した入力に対して <code>filter()</code> メソッドを適用します。
 
             <programlisting language="php"><![CDATA[
-echo Zend_Filter::get('&', 'HtmlEntities');
+echo Zend_Filter::filterStatic('&', 'HtmlEntities');
 ]]></programlisting>
 
         </para>
@@ -96,7 +96,7 @@ echo Zend_Filter::get('&', 'HtmlEntities');
             それを配列で渡すことができます。
 
             <programlisting language="php"><![CDATA[
-echo Zend_Filter::get('"', 'HtmlEntities', array(ENT_QUOTES));
+echo Zend_Filter::filterStatic('"', 'HtmlEntities', array(ENT_QUOTES));
 ]]></programlisting>
 
         </para>
@@ -120,12 +120,13 @@ echo Zend_Filter::get('"', 'HtmlEntities', array(ENT_QUOTES));
 
             <para>
                 自分で定義したフィルタを使う際に、
-                <methodname>Zend_Filter::get()</methodname> に 4 番目のパラメータを指定することができます。
+                <methodname>Zend_Filter::filterStatic()</methodname> に
+                4 番目のパラメータを指定することができます。
                 これは、フィルタを探すための名前空間となります。
             </para>
 
             <programlisting language="php"><![CDATA[
-echo Zend_Filter::get(
+echo Zend_Filter::filterStatic(
     '"',
     'MyFilter',
     array($parameters),
@@ -136,14 +137,15 @@ echo Zend_Filter::get(
             <para>
                 <classname>Zend_Filter</classname> には、名前空間をデフォルトで設定することもできます。
                 つまり、起動時に一度設定しておけば
-                <methodname>Zend_Filter::get()</methodname> のたびに指定する必要がなくなるということです。
+                <methodname>Zend_Filter::filterStatic()</methodname>
+                のたびに指定する必要がなくなるということです。
                 次のコード片は、上のコードと同じ意味となります。
             </para>
 
             <programlisting language="php"><![CDATA[
 Zend_Filter::setDefaultNamespaces(array('FirstNamespace', 'SecondNamespace'));
-echo Zend_Filter::get('"', 'MyFilter', array($parameters));
-echo Zend_Filter::get('"', 'OtherFilter', array($parameters));
+echo Zend_Filter::filterStatic('"', 'MyFilter', array($parameters));
+echo Zend_Filter::filterStatic('"', 'OtherFilter', array($parameters));
 ]]></programlisting>
 
             <para>

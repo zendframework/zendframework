@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15743 -->
+<!-- EN-Revision: 16450 -->
 <sect1 id="zend.translate.using">
 
     <title>翻訳アダプタの使用法</title>
@@ -164,7 +164,7 @@ print $translate->_(2) . "\n";
                     単一構造のソース
                 </para>
 
-                <programlisting><![CDATA[
+                <programlisting language="txt"><![CDATA[
 /application/
 /languages/
 /languages/lang.en
@@ -182,7 +182,7 @@ print $translate->_(2) . "\n";
                     言語ごとに分けた構造
                 </para>
 
-                <programlisting><![CDATA[
+                <programlisting language="txt"><![CDATA[
 /application/
 /languages/
 /languages/en/
@@ -205,7 +205,7 @@ print $translate->_(2) . "\n";
                     アプリケーションごとに分けた構造
                 </para>
 
-                <programlisting><![CDATA[
+                <programlisting language="txt"><![CDATA[
 /application/
 /application/languages/
 /application/languages/first.en
@@ -229,7 +229,7 @@ print $translate->_(2) . "\n";
                     Gettext 形式の構造
                 </para>
 
-                <programlisting><![CDATA[
+                <programlisting language="txt"><![CDATA[
 /application/
 /languages/
 /languages/de/
@@ -258,7 +258,7 @@ print $translate->_(2) . "\n";
                    ファイル構造のソース
                 </para>
 
-                <programlisting><![CDATA[
+                <programlisting language="txt"><![CDATA[
 /application/
 /application/models/
 /application/models/MyModel.php
@@ -484,7 +484,7 @@ $translate = new Zend_Translate('tmx', 'path/to/mytranslation.tmx', 'en');
 
         <example id="zend.translate.using.source.csv.example">
             <title>CSV ファイルの例</title>
-            <programlisting><![CDATA[
+            <programlisting language="txt"><![CDATA[
 # csv ファイルの例
 message1;Nachricht1
 message2;Nachricht2
@@ -529,7 +529,7 @@ $translate->addTranslation('path/to/other.csv', 'fr');
 
         <example id="zend.translate.using.source.csv.example2">
             <title>CSV ファイルの例 その 2</title>
-            <programlisting><![CDATA[
+            <programlisting language="txt"><![CDATA[
 # csv ファイルの例
 "message,1",Nachricht1
 message2,"Nachricht,2"
@@ -562,7 +562,7 @@ $translate->addTranslation('/path/to/other.csv', 'fr');
 
         <example id="zend.translate.using.source.ini.example">
             <title>INI ファイルの例</title>
-            <programlisting><![CDATA[
+            <programlisting language="txt"><![CDATA[
 [Test]
 ;TestPage Comment
 Message_1="Nachricht 1 (de)"
@@ -1099,7 +1099,7 @@ $translate = new Zend_Translate(
                     同一ディレクトリにソースファイルがひとつだけの場合にしか使用できません。
                 </para>
 
-                <programlisting><![CDATA[
+                <programlisting language="txt"><![CDATA[
 /languages/
 /languages/en.mo
 /languages/de.mo
@@ -1118,7 +1118,7 @@ $translate = new Zend_Translate(
                     しかしこの方法にも問題があり、本来の拡張子が何であったのかがわからなくなります。
                 </para>
 
-                <programlisting><![CDATA[
+                <programlisting language="txt"><![CDATA[
 /languages/
 /languages/view.en
 /languages/view.de
@@ -1139,7 +1139,7 @@ $translate = new Zend_Translate(
                     あるいはハイフン '=' のいずれかです。
                 </para>
 
-                <programlisting><![CDATA[
+                <programlisting language="txt"><![CDATA[
 /languages/
 /languages/view_en.mo -> 英語となります
 /languages/view_de.mo -> ドイツ語となります
@@ -1151,7 +1151,7 @@ $translate = new Zend_Translate(
                     最初に見つかったものを使用します。詳細は次の例でご確認ください。
                 </para>
 
-                <programlisting><![CDATA[
+                <programlisting language="txt"><![CDATA[
 /languages/
 /languages/view_en_de.mo -> 英語となります
 /languages/view_en_es.mo -> 英語となり、最初のファイルを上書きします
@@ -1167,7 +1167,7 @@ $translate = new Zend_Translate(
                     詳細は次の例でご確認ください。
                 </para>
 
-                <programlisting><![CDATA[
+                <programlisting language="txt"><![CDATA[
 /languages/
 /languages/view_en-it.mo -> 英語となります。'_' のほうが '-' より優先されるからです
 /languages/view-en_it.mo -> イタリア語となります。'_' のほうが '-' より優先されるからです

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15851 -->
+<!-- EN-Revision: 16458 -->
 <sect1 id="zend.db.profiler" xmlns:xi="http://www.w3.org/2001/XInclude">
 
     <title>Zend_Db_Profiler</title>
@@ -132,7 +132,7 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
 
         <para>
             好きなところでアダプタの
-            <code>getProfiler()</code> メソッドを使用すれば、
+            <methodname>getProfiler()</methodname> メソッドを使用すれば、
             プロファイラを取得できます。
         </para>
 
@@ -149,25 +149,25 @@ $profiler = $db->getProfiler();
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>getTotalNumQueries()</code> は、
+                    <methodname>getTotalNumQueries()</methodname> は、
                     情報を取得したクエリの総数を返します。
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>getTotalElapsedSecs()</code> は、
+                    <methodname>getTotalElapsedSecs()</methodname> は、
                     情報を取得したクエリの実行所要時間の合計を返します。
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>getQueryProfiles()</code> は、
+                    <methodname>getQueryProfiles()</methodname> は、
                     すべてのクエリ情報を配列で返します。
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>getLastQueryProfile()</code> は、最後に
+                    <methodname>getLastQueryProfile()</methodname> は、最後に
                     (直近に) 実行されたクエリの情報を (そのクエリが
                     完了したか否かにかかわらず) 返します
                     (クエリが完了していない場合は、終了時刻が null となります)。
@@ -175,15 +175,15 @@ $profiler = $db->getProfiler();
             </listitem>
             <listitem>
                 <para>
-                    <code>clear()</code> は、スタック上に残っている
+                    <methodname>clear()</methodname> は、スタック上に残っている
                     過去のクエリ情報をすべて消去します。
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
-            <code>getLastQueryProfile()</code> の返り値、および
-            <code>getQueryProfiles()</code> の個々の要素は
+            <methodname>getLastQueryProfile()</methodname> の返り値、および
+            <methodname>getQueryProfiles()</methodname> の個々の要素は
             <classname>Zend_Db_Profiler_Query</classname> オブジェクトで、
             これを使用すると個々のクエリ自体の情報を調べられます。
         </para>
@@ -191,7 +191,7 @@ $profiler = $db->getProfiler();
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>getQuery()</code> は、クエリの SQL テキストを返します。
+                    <methodname>getQuery()</methodname> は、クエリの SQL テキストを返します。
                     パラメータつきのプリペアドステートメントの場合、
                     クエリがプリペアされた時点のテキストを返します。
                     つまり、プレースホルダを含んだままの形式ということです。
@@ -200,16 +200,16 @@ $profiler = $db->getProfiler();
             </listitem>
             <listitem>
                 <para>
-                    <code>getQueryParams()</code> は、
+                    <methodname>getQueryParams()</methodname> は、
                     プリペアドクエリを実行する際に使用する、パラメータの値の配列を返します。
                     ここには、バインドパラメータだけでなく
-                    <code>execute()</code> メソッドへの引数も含まれます。
+                    <methodname>execute()</methodname> メソッドへの引数も含まれます。
                     配列のキーは、(1 から始まる) 数値かあるいは (文字列の) パラメータ名となります。
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>getElapsedSecs()</code> は、
+                    <methodname>getElapsedSecs()</methodname> は、
                     クエリの実行所要時間を返します。
                 </para>
             </listitem>
@@ -271,7 +271,7 @@ echo "一番時間のかかっているクエリ: \n" . $longestQuery . "\n";
             <title>クエリの実行所要時間による絞り込み</title>
 
             <para>
-                <code>setFilterElapsedSecs()</code> は、クエリの情報を取得する条件として
+                <methodname>setFilterElapsedSecs()</methodname> は、クエリの情報を取得する条件として
                 実行所要時間の最小値を指定します。このフィルタを削除するには、
                 メソッドに null 値を渡します。
             </para>
@@ -289,7 +289,7 @@ $profiler->setFilterElapsedSecs(null);
             <title>クエリの形式による絞り込み</title>
 
             <para>
-                <code>setFilterQueryType()</code> は、クエリの情報を取得する条件として
+                <methodname>setFilterQueryType()</methodname> は、クエリの情報を取得する条件として
                 クエリの形式を指定します。複数の形式を扱うには、それらの論理 OR を指定します。
                 クエリの形式は、<classname>Zend_Db_Profiler</classname>
                 のクラス定数として以下のように定義されています。
@@ -344,7 +344,7 @@ $profiler->setFilterElapsedSecs(null);
 
             <para>
                 既存のフィルタを削除するには、
-                <code>setFilterElapsedSecs()</code> の引数に
+                <methodname>setFilterElapsedSecs()</methodname> の引数に
                 <constant>NULL</constant> だけを渡します。
             </para>
 
@@ -370,10 +370,11 @@ $profiler->setFilterQueryType(null);
             <title>クエリの型を指定することによる情報の取得</title>
 
             <para>
-                <code>setFilterQueryType()</code> を使用すると、生成される情報を減らすことができます。
+                <methodname>setFilterQueryType()</methodname> を使用すると、
+                生成される情報を減らすことができます。
                 すべての情報を保持しておくほうがよい場合もありますが、
                 普通はそのときに必要な情報のみが見られればよいでしょう。
-                <code>getQueryProfiles()</code> のもうひとつの機能として、
+                <methodname>getQueryProfiles()</methodname> のもうひとつの機能として、
                 最初の引数にクエリの型 (あるいは複数の型の論理和)
                 を指定することによるその場での絞り込みが可能です。
                 クエリの型を表す定数については <xref linkend="zend.db.profiler.advanced.filtertype" />

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16166 -->
+<!-- EN-Revision: 16458 -->
 <sect1 id="zend.db.select">
 
     <title>Zend_Db_Select</title>
@@ -10,7 +10,7 @@
         <title>導入</title>
 
         <para>
-            <classname>Zend_Db_Select</classname> オブジェクトは、SQL の <code>SELECT</code> 文を表すものです。
+            <classname>Zend_Db_Select</classname> オブジェクトは、SQL の <acronym>SELECT</acronym> 文を表すものです。
             このクラスには、クエリの各部分を追加するためのメソッドが用意されています。
             PHP のメソッドやデータをもとにクエリの各部分を指定すると、
             このクラスが正確な SQL 文を作成してくれます。クエリを作成したら、
@@ -53,7 +53,7 @@
         <para>
             必ず <classname>Zend_Db_Select</classname> を使わなければならないというわけではありません。
             単純な SELECT クエリを実行するのなら、SQL クエリ全体を文字列で指定し、
-            アダプタの <code>query()</code> メソッドや <code>fetchAll()</code>
+            アダプタの <methodname>query()</methodname> メソッドや <methodname>fetchAll()</methodname>
             メソッドを使用したほうがずっとシンプルになるでしょう。
             <classname>Zend_Db_Select</classname> を使うと便利なのは、
             何らかの条件にもとづいて、アプリケーション内で
@@ -69,7 +69,7 @@
         <para>
             <classname>Zend_Db_Select</classname> オブジェクトのインスタンスを作成するには、
             <classname>Zend_Db_Adapter_Abstract</classname> オブジェクトの
-            <code>select()</code> メソッドを使用します。
+            <methodname>select()</methodname> メソッドを使用します。
         </para>
 
         <example id="zend.db.select.creating.example-db">
@@ -160,7 +160,7 @@ $select = $db->select()
             <title>FROM 句の追加</title>
 
             <para>
-                このクエリのテーブルを指定するために <code>from()</code>
+                このクエリのテーブルを指定するために <methodname>from()</methodname>
                 メソッドを使用します。テーブル名は、単純に文字列で指定することができます。
                 <classname>Zend_Db_Select</classname> はテーブル名を識別子としてクォートするので、
                 特殊文字を使用することもできます。
@@ -242,7 +242,7 @@ $select = $db->select()
             <title>カラムの追加</title>
 
             <para>
-                <code>from()</code> メソッドの二番目の引数で、
+                <methodname>from()</methodname> メソッドの二番目の引数で、
                 対応するテーブルから取得するカラムを指定することができます。
                 カラムを指定しなかった場合のデフォルトは
                 "<code>*</code>" で、これは "すべてのカラム"
@@ -259,7 +259,7 @@ $select = $db->select()
             <para>
                 空の配列をカラムの引数として指定すると、
                 対応するテーブルからのカラムは結果セットに含まれなくなります。
-                <code>join()</code> メソッドの
+                <methodname>join()</methodname> メソッドの
                 <link linkend="zend.db.select.building.join.example-no-columns">コード例</link>
                 を参照ください。
             </para>
@@ -270,7 +270,7 @@ $select = $db->select()
                 の形式で指定することもできます。この場合、
                 <classname>Zend_Db_Select</classname> は各部分を個別にクォートします。
                 カラムの correlationName (相関名) を指定しなかった場合は、
-                現在の <code>from()</code> メソッドで指定したテーブルの名前を使用します。
+                現在の <methodname>from()</methodname> メソッドで指定したテーブルの名前を使用します。
             </para>
 
             <example id="zend.db.select.building.columns.example">
@@ -387,9 +387,9 @@ $select = $db->select()
 
             <para>
                 カラム名が SQL キーワードや特殊文字を含んでいる場合は、
-                アダプタの <code>quoteIdentifier()</code>
+                アダプタの <methodname>quoteIdentifier()</methodname>
                 メソッドを使用して結果を操作する必要があります。
-                <code>quoteIdentifier()</code> は、
+                <methodname>quoteIdentifier()</methodname> は、
                 識別子に対して SQL のクォート処理を行います。
                 これによりテーブルやカラムといった識別子を
                 SQL のそれ以外の部分と区別できるようになります。
@@ -397,12 +397,12 @@ $select = $db->select()
 
             <para>
                 クォート処理を直接文字列に埋め込んでしまわずに
-                <code>quoteIdentifier()</code> メソッドを使用することで、
+                <methodname>quoteIdentifier()</methodname> メソッドを使用することで、
                 あなたのコードをデータベースに依存しないものにすることができます。
                 というのも、RDBMS によってはあまり標準的ではない文字でクォートを行うものもあるからです。
-                <code>quoteIdentifier()</code> メソッドは、
+                <methodname>quoteIdentifier()</methodname> メソッドは、
                 アダプタの型に応じて適切なクォート文字を使用するように設計されています。
-                <code>quoteIdentifier()</code> メソッドはまた、
+                <methodname>quoteIdentifier()</methodname> メソッドはまた、
                 識別子の名前の中に登場するクォート文字自体もエスケープします。
             </para>
 
@@ -433,7 +433,7 @@ $select = $db->select()
             <para>
                 既存の FROM や JOIN のテーブルに対して、それらのメソッドをコールした後で
                 カラムを追加したくなることもあるかもしれません。
-                <code>columns()</code> メソッドを使用すると、
+                <methodname>columns()</methodname> メソッドを使用すると、
                 クエリを実行する前ならいつでも好きなときに特定のカラムを追加することができます。
                 カラムは、文字列あるいは <classname>Zend_Db_Expr</classname>、
                 あるいはその配列で指定します。
@@ -474,11 +474,11 @@ $select = $db->select()
             <title>JOIN による、クエリへの別のテーブルの追加</title>
 
             <para>
-                有用なクエリの多くは、<code>JOIN</code>
+                有用なクエリの多くは、<acronym>JOIN</acronym>
                 を使用して複数テーブルの行を結合しています。
                 テーブルを <classname>Zend_Db_Select</classname> クエリに追加するには、
-                <code>join()</code> メソッドを使用します。
-                このメソッドの使用法は <code>from()</code>
+                <methodname>join()</methodname> メソッドを使用します。
+                このメソッドの使用法は <methodname>from()</methodname>
                 メソッドと似ていますが、ほとんどの場合に結合条件を指定するという点が異なります。
             </para>
 
@@ -502,7 +502,7 @@ $select = $db->select()
             </example>
 
             <para>
-                <code>join()</code> の二番目の引数として、
+                <methodname>join()</methodname> の二番目の引数として、
                 結合条件を文字列で指定します。これは、
                 あるテーブルの行が別のテーブルのどの行と対応するのかを表す条件式です。
                 式の中では相関名を使用することができます。
@@ -514,23 +514,23 @@ $select = $db->select()
                     結合条件に指定した式に関しては、クォート処理は行われません。
                     クォートする必要のあるカラム名を使用する場合は、
                     結合条件の文字列を作成する際に
-                    <code>quoteIdentifier()</code> を使用しなければなりません。
+                    <methodname>quoteIdentifier()</methodname> を使用しなければなりません。
                 </para>
 
             </note>
 
             <para>
-                <code>join()</code> の三番目の引数はカラム名を表す配列です。
-                これは <code>from()</code> メソッドで使用する形式と似ています。
+                <methodname>join()</methodname> の三番目の引数はカラム名を表す配列です。
+                これは <methodname>from()</methodname> メソッドで使用する形式と似ています。
                 デフォルトは "<code>*</code>" です。
                 相関名や式、<classname>Zend_Db_Expr</classname> についての扱いは、
-                <code>from()</code> メソッドにおけるカラム名の配列と同じです。
+                <methodname>from()</methodname> メソッドにおけるカラム名の配列と同じです。
             </para>
 
             <para>
                 テーブルからカラムを取得しない場合は、
                 カラムリストに空の配列を使用します。
-                これは <code>from()</code> メソッドでも同様に動作しますが、
+                これは <methodname>from()</methodname> メソッドでも同様に動作しますが、
                 普通は最初のテーブルからは何らかのカラムを取得するでしょう。
                 一方、連結するテーブルについてはカラムを取得しないこともありえます。
             </para>
@@ -555,7 +555,7 @@ $select = $db->select()
 
                 <para>
                     上の例で、連結したテーブルのカラム一覧の場所に
-                    空の配列 <code>array()</code> を指定していることに注意しましょう。
+                    空の配列 <methodname>array()</methodname> を指定していることに注意しましょう。
                 </para>
 
             </example>
@@ -568,8 +568,8 @@ $select = $db->select()
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>join(table, join, [columns])</code> メソッドあるいは
-                        <code>joinInner(table, join, [columns])</code> メソッドによる
+                        <methodname>join(table, join, [columns])</methodname> メソッドあるいは
+                        <methodname>joinInner(table, join, [columns])</methodname> メソッドによる
                         <command>INNER JOIN</command>
                     </para>
 
@@ -587,7 +587,7 @@ $select = $db->select()
 
                 <listitem>
                     <para>
-                        <code>joinLeft(table, condition, [columns])</code> メソッドによる
+                        <methodname>joinLeft(table, condition, [columns])</methodname> メソッドによる
                         <command>LEFT JOIN</command>
                     </para>
 
@@ -606,7 +606,7 @@ $select = $db->select()
 
                 <listitem>
                     <para>
-                        <code>joinRight(table, condition, [columns])</code> メソッドによる
+                        <methodname>joinRight(table, condition, [columns])</methodname> メソッドによる
                         <command>RIGHT JOIN</command>
                     </para>
 
@@ -628,7 +628,7 @@ $select = $db->select()
 
                 <listitem>
                     <para>
-                        <code>joinFull(table, condition, [columns])</code> メソッドによる
+                        <methodname>joinFull(table, condition, [columns])</methodname> メソッドによる
                         <command>FULL JOIN</command>
                     </para>
 
@@ -646,7 +646,7 @@ $select = $db->select()
 
                 <listitem>
                     <para>
-                        <code>joinCross(table, [columns])</code> メソッドによる
+                        <methodname>joinCross(table, [columns])</methodname> メソッドによる
                         <command>CROSS JOIN</command>
                     </para>
 
@@ -663,7 +663,7 @@ $select = $db->select()
                     </para>
 
                     <para>
-                        <code>joinCross()</code> メソッドには、
+                        <methodname>joinCross()</methodname> メソッドには、
                         結合条件を指定するパラメータがありません。
                         RDBMS によっては、この結合形式に対応していないものもあります。
                     </para>
@@ -671,7 +671,7 @@ $select = $db->select()
 
                 <listitem>
                     <para>
-                        <code>joinNatural(table, [columns])</code> メソッドによる
+                        <methodname>joinNatural(table, [columns])</methodname> メソッドによる
                         <command>NATURAL JOIN</command>
                     </para>
 
@@ -683,7 +683,7 @@ $select = $db->select()
                     </para>
 
                     <para>
-                        <code>joinNatural()</code> メソッドには、
+                        <methodname>joinNatural()</methodname> メソッドには、
                         結合条件を指定するパラメータはありません。
                     </para>
                 </listitem>
@@ -723,26 +723,26 @@ $select = $db->select()
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>joinUsing(table, join, [columns])</code> および
-                        <code>joinInnerUsing(table, join, [columns])</code>
+                        <methodname>joinUsing(table, join, [columns])</methodname> および
+                        <methodname>joinInnerUsing(table, join, [columns])</methodname>
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>joinLeftUsing(table, join, [columns])</code>
+                        <methodname>joinLeftUsing(table, join, [columns])</methodname>
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>joinRightUsing(table, join, [columns])</code>
+                        <methodname>joinRightUsing(table, join, [columns])</methodname>
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>joinFullUsing(table, join, [columns])</code>
+                        <methodname>joinFullUsing(table, join, [columns])</methodname>
                     </para>
                 </listitem>
             </itemizedlist>
@@ -755,9 +755,9 @@ $select = $db->select()
 
             <para>
                 結果セットの行を制限するための条件を指定するには
-                <code>where()</code> メソッドを使用します。
+                <methodname>where()</methodname> メソッドを使用します。
                 このメソッドの最初の引数は SQL の式で、これをクエリの
-                SQL で <code>WHERE</code> 句として使用します。
+                SQL で <acronym>WHERE</acronym> 句として使用します。
             </para>
 
             <example id="zend.db.select.building.where.example">
@@ -780,17 +780,17 @@ $select = $db->select()
             <note>
 
                 <para>
-                    <code>where()</code> メソッドや <code>orWhere()</code>
+                    <methodname>where()</methodname> メソッドや <methodname>orWhere()</methodname>
                     メソッドで指定する式にはクォート処理は行われません。
                     クォートする必要のあるカラム名を使用する場合は、
                     条件の文字列を作成する際に
-                    <code>quoteIdentifier()</code> を使用しなければなりません。
+                    <methodname>quoteIdentifier()</methodname> を使用しなければなりません。
                 </para>
 
             </note>
 
             <para>
-                <code>where()</code> メソッドの二番目の引数はオプションです。
+                <methodname>where()</methodname> メソッドの二番目の引数はオプションです。
                 これは式を置き換える値となります。
                 <classname>Zend_Db_Select</classname> は値をクォートし、式の中の
                 クエスチョンマーク ("<code>?</code>") をその値で置き換えます。
@@ -823,9 +823,9 @@ $select = $db->select()
             </example>
 
             <para>
-                <classname>Zend_Db_Select</classname> オブジェクト上で、<code>where()</code>
+                <classname>Zend_Db_Select</classname> オブジェクト上で、<methodname>where()</methodname>
                 メソッドを複数回実行することもできます。その結果のクエリは、
-                指定した条件を <code>AND</code> でひとつにまとめたものとなります。
+                指定した条件を <acronym>AND</acronym> でひとつにまとめたものとなります。
             </para>
 
             <example id="zend.db.select.building.where.example-and">
@@ -852,11 +852,11 @@ $select = $db->select()
             </example>
 
             <para>
-                複数の条件を <code>OR</code> で連結したい場合は、
-                <code>orWhere()</code> メソッドを使用します。
-                このメソッドの使用法は <code>where()</code>
+                複数の条件を <acronym>OR</acronym> で連結したい場合は、
+                <methodname>orWhere()</methodname> メソッドを使用します。
+                このメソッドの使用法は <methodname>where()</methodname>
                 メソッドとほとんど同じですが、条件の前には
-                <code>AND</code> ではなく <code>OR</code>
+                <acronym>AND</acronym> ではなく <acronym>OR</acronym>
                 がつくことになります。
             </para>
 
@@ -884,8 +884,8 @@ $select = $db->select()
             </example>
 
             <para>
-                <classname>Zend_Db_Select</classname> は、<code>where()</code> メソッドや
-                <code>orWhere()</code> メソッドで指定した式の両側に
+                <classname>Zend_Db_Select</classname> は、<methodname>where()</methodname> メソッドや
+                <methodname>orWhere()</methodname> メソッドで指定した式の両側に
                 自動的に括弧をつけます。これにより、
                 論理演算子が予期せぬ結果を引き起こすことを防ぎます。
             </para>
@@ -916,10 +916,10 @@ $select = $db->select()
 
             <para>
                 上の例では、括弧がなければ結果はまったく異なるものとなります。
-                なぜなら、<code>AND</code> のほうが <code>OR</code>
+                なぜなら、<acronym>AND</acronym> のほうが <acronym>OR</acronym>
                 よりも優先順位が高いからです。<classname>Zend_Db_Select</classname>
-                は括弧をつけるので、それぞれの <code>where()</code>
-                で指定された式の結合度が <code>AND</code>
+                は括弧をつけるので、それぞれの <methodname>where()</methodname>
+                で指定された式の結合度が <acronym>AND</acronym>
                 より高くなります。
             </para>
 
@@ -930,16 +930,16 @@ $select = $db->select()
             <title>GROUP BY 句の追加</title>
 
             <para>
-                SQL で <code>GROUP BY</code> 句を使用すると、
+                SQL で <command>GROUP BY</command> 句を使用すると、
                 結果セットの行数を減らすことができます。
-                <code>GROUP BY</code> 句で指定したカラムの一意な値ごとに、
+                <command>GROUP BY</command> 句で指定したカラムの一意な値ごとに、
                 結果が一行にまとめられます。
             </para>
 
             <para>
                 <classname>Zend_Db_Select</classname> では、行のグループ化を行うためのカラムを
-                <code>group()</code> メソッドで指定します。
-                このメソッドへの引数は、<code>GROUP BY</code>
+                <methodname>group()</methodname> メソッドで指定します。
+                このメソッドへの引数は、<command>GROUP BY</command>
                 句で使用するカラムあるいは複数カラムの配列となります。
             </para>
 
@@ -966,7 +966,7 @@ $select = $db->select()
             </example>
 
             <para>
-                <code>from()</code> メソッドでのカラムの配列と同様、
+                <methodname>from()</methodname> メソッドでのカラムの配列と同様、
                 カラム名には相関名を使用することができます。また、
                 カラム名は識別子としてクォートされます。
                 ただし、文字列に括弧が含まれたり

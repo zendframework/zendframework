@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16441 -->
+<!-- EN-Revision: 16447 -->
 <sect1 id="zend.db.adapter">
 
     <title>Zend_Db_Adapter</title>
@@ -336,12 +336,12 @@ $db = Zend_Db::factory($config->database);
                     このオプションは、定数
                     <classname>Zend_Db::CASE_FOLDING</classname> で指定します。
                     これは、PDO や IBM DB2 データベースドライバにおける
-                    <code>ATTR_CASE</code> 属性に対応するもので、
+                    <constant>ATTR_CASE</constant> 属性に対応するもので、
                     結果セットの文字列キーの大文字小文字変換を指定します。
                     設定できる値は
-                    <classname>Zend_Db::CASE_NATURAL</classname> (デフォルト)、
-                    <classname>Zend_Db::CASE_UPPER</classname> および
-                    <classname>Zend_Db::CASE_LOWER</classname> のいずれかです。
+                    <constant>Zend_Db::CASE_NATURAL</constant> (デフォルト)、
+                    <constant>Zend_Db::CASE_UPPER</constant> および
+                    <constant>Zend_Db::CASE_LOWER</constant> のいずれかです。
                 </para>
                 <programlisting language="php"><![CDATA[
 $options = array(
@@ -1099,7 +1099,7 @@ $n = $db->update('bugs', $data, 'bug_id = 2');
 
             <para>
                 三番目の引数に文字列の配列を指定すると、各要素の内容を
-                <code>AND</code> 演算子で連結して使用します。
+                <constant>AND</constant> 演算子で連結して使用します。
             </para>
 
             <example id="zend.db.adapter.write.update.example-array">
@@ -1157,7 +1157,7 @@ $n = $db->delete('bugs', 'bug_id = 3');
 
             <para>
                 二番目の引数に文字列の配列を指定すると、各要素の内容を
-                <code>AND</code> 演算子で連結して使用します。
+                <constant>AND</constant> 演算子で連結して使用します。
             </para>
 
         </sect3>
@@ -1248,7 +1248,7 @@ echo $sql;
                 RDBMS もあります。つまり、次のような SQL
                 がエラーになってしまう実装があるということです。
                 ここで、<code>intColumn</code> のデータ型は
-                <code>INTEGER</code> であるものとします。
+                <constant>INTEGER</constant> であるものとします。
 
                 <programlisting language="php"><![CDATA[
 SELECT * FROM atable WHERE intColumn = '123'
@@ -1609,22 +1609,22 @@ try {
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>IDENTITY</code> - DB2, MSSQL
+                        <constant>IDENTITY</constant> - DB2, MSSQL
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>AUTO_INCREMENT</code> - MySQL
+                        <constant>AUTO_INCREMENT</constant> - MySQL
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>SERIAL</code> - PostgreSQL
+                        <constant>SERIAL</constant> - PostgreSQL
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>SEQUENCE</code> - Oracle
+                        <constant>SEQUENCE</constant> - Oracle
                     </para>
                 </listitem>
             </itemizedlist>
@@ -1728,7 +1728,7 @@ $db->closeConnection();
             たいていの拡張モジュールには、
             プリペアドステートメントではなく直接 SQL
             を実行するためのメソッドが用意されています。
-            たとえば PDO なら <code>exec()</code> がそれにあたります。
+            たとえば PDO なら <methodname>exec()</methodname> がそれにあたります。
             接続オブジェクトに直接アクセスするには、getConnection()
             を使用します。
         </para>
@@ -1762,7 +1762,7 @@ $result = $db->getConnection()->exec('DROP TABLE bugs');
 
         <para>
             リリース 1.7.2 以降では、サーバのバージョンを取得することができます。これは、
-            PHP の <code>version_compare()</code> で使用できる形式となります。
+            PHP の <methodname>version_compare()</methodname> で使用できる形式となります。
             情報が取得できない場合は <constant>NULL</constant> が返されます。
         </para>
 
@@ -1810,7 +1810,7 @@ if (!is_null($version)) {
                     <para>
                         IBM DB2 は、シーケンスも自動インクリメントのキーも
                         両方サポートしています。
-                        したがって、<code>lastInsertId()</code>
+                        したがって、<methodname>lastInsertId()</methodname>
                         への引数は指定してもしなくてもかまいません。引数を省略した場合は、
                         自動インクリメントのキーが最後に生成した値を返します。
                         引数を指定した場合は、
@@ -1826,7 +1826,7 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        このアダプタを <code>factory()</code> で指定する場合は、
+                        このアダプタを <methodname>factory()</methodname> で指定する場合は、
                         名前を 'Mysqli' とします。
                     </para>
                 </listitem>
@@ -1838,9 +1838,9 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         MySQL はシーケンスをサポートしていません。したがって、
-                        <code>lastInsertId()</code> に引数を指定してもそれは無視されます。
+                        <methodname>lastInsertId()</methodname> に引数を指定してもそれは無視されます。
                         返り値は、常に自動インクリメントのキーの最後の値となります。
-                        <code>lastSequenceId()</code> メソッドの返り値は
+                        <methodname>lastSequenceId()</methodname> メソッドの返り値は
                         <constant>NULL</constant> となります。
                     </para>
                 </listitem>
@@ -1852,7 +1852,7 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        このアダプタを <code>factory()</code> で指定する場合は、
+                        このアダプタを <methodname>factory()</methodname> で指定する場合は、
                         名前を 'Oracle' とします。
                     </para>
                 </listitem>
@@ -1864,8 +1864,8 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         Oracle は自動インクリメントのキーをサポートしていません。
-                        したがって、<code>lastInsertId()</code> や
-                        <code>lastSequenceId()</code>
+                        したがって、<methodname>lastInsertId()</methodname> や
+                        <methodname>lastSequenceId()</methodname>
                         にはシーケンス名を指定する必要があります。
                     </para>
                 </listitem>
@@ -1889,7 +1889,7 @@ if (!is_null($version)) {
                         すべてのリクエストでこれを文字列として取得したい場合は、
                         ドライバのオプション <code>'lob_as_string'</code> を使用します。
                         特定のリクエストでだけそうしたい場合は、アダプタあるいはステートメントで
-                        <code>setLobAsString(boolean)</code> を使用します。
+                        <methodname>setLobAsString(boolean)</methodname> を使用します。
                     </para>
                 </listitem>
             </itemizedlist>
@@ -1900,7 +1900,7 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        このアダプタを <code>factory()</code> で指定する場合は、
+                        このアダプタを <methodname>factory()</methodname> で指定する場合は、
                         名前を 'Pdo_Ibm' とします。
                     </para>
                 </listitem>
@@ -1924,7 +1924,7 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        このアダプタを <code>factory()</code> で指定する場合は、
+                        このアダプタを <methodname>factory()</methodname> で指定する場合は、
                         名前を 'Pdo_Mssql' とします。
                     </para>
                 </listitem>
@@ -1937,9 +1937,9 @@ if (!is_null($version)) {
                     <para>
                         Microsoft SQL Server はシーケンスをサポートしていません。
                         したがって、
-                        <code>lastInsertId()</code> に引数を指定してもそれは無視されます。
+                        <methodname>lastInsertId()</methodname> に引数を指定してもそれは無視されます。
                         返り値は、常に自動インクリメントのキーの最後の値となります。
-                        <code>lastSequenceId()</code> メソッドの返り値は
+                        <methodname>lastSequenceId()</methodname> メソッドの返り値は
                         <constant>NULL</constant> となります。
                     </para>
                 </listitem>
@@ -1956,7 +1956,7 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         <classname>Zend_Db_Adapter_Pdo_Mssql</classname> は、SQL Server
-                        に接続した直後に <code>QUOTED_IDENTIFIER ON</code>
+                        に接続した直後に <constant>QUOTED_IDENTIFIER ON</constant>
                         を設定します。これにより、SQL の識別子をクォートする際に
                         標準の区切り文字 (<code>"</code>) を使用するようになります。
                         SQL Server の独自仕様である角括弧によるクォートは使用しません。
@@ -1987,7 +1987,7 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        このアダプタを <code>factory()</code> で指定する場合は、
+                        このアダプタを <methodname>factory()</methodname> で指定する場合は、
                         名前を 'Pdo_Mysql' とします。
                     </para>
                 </listitem>
@@ -1999,9 +1999,9 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         MySQL はシーケンスをサポートしていません。したがって、
-                        <code>lastInsertId()</code> に引数を指定してもそれは無視されます。
+                        <methodname>lastInsertId()</methodname> に引数を指定してもそれは無視されます。
                         返り値は、常に自動インクリメントのキーの最後の値となります。
-                        <code>lastSequenceId()</code> メソッドの返り値は
+                        <methodname>lastSequenceId()</methodname> メソッドの返り値は
                         <constant>NULL</constant> となります。
                     </para>
                 </listitem>
@@ -2013,7 +2013,7 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        このアダプタを <code>factory()</code> で指定する場合は、
+                        このアダプタを <methodname>factory()</methodname> で指定する場合は、
                         名前を 'Pdo_Oci' とします。
                     </para>
                 </listitem>
@@ -2025,8 +2025,8 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         Oracle は自動インクリメントのキーをサポートしていません。
-                        したがって、<code>lastInsertId()</code> や
-                        <code>lastSequenceId()</code>
+                        したがって、<methodname>lastInsertId()</methodname> や
+                        <methodname>lastSequenceId()</methodname>
                         にはシーケンス名を指定する必要があります。
                     </para>
                 </listitem>
@@ -2038,7 +2038,7 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        このアダプタを <code>factory()</code> で指定する場合は、
+                        このアダプタを <methodname>factory()</methodname> で指定する場合は、
                         名前を 'Pdo_Pgsql' とします。
                     </para>
                 </listitem>
@@ -2051,7 +2051,7 @@ if (!is_null($version)) {
                     <para>
                         PostgreSQL は、シーケンスも自動インクリメントのキーも
                         両方サポートしています。
-                        したがって、<code>lastInsertId()</code>
+                        したがって、<methodname>lastInsertId()</methodname>
                         への引数は指定してもしなくてもかまいません。引数を省略した場合は、
                         自動インクリメントのキーが最後に生成した値を返します。
                         引数を指定した場合は、
@@ -2067,7 +2067,7 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        このアダプタを <code>factory()</code> で指定する場合は、
+                        このアダプタを <methodname>factory()</methodname> で指定する場合は、
                         名前を 'Pdo_Sqlite' とします。
                     </para>
                 </listitem>
@@ -2079,9 +2079,9 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         SQLite はシーケンスをサポートしていません。したがって、
-                        <code>lastInsertId()</code> に引数を指定してもそれは無視されます。
+                        <methodname>lastInsertId()</methodname> に引数を指定してもそれは無視されます。
                         返り値は、常に自動インクリメントのキーの最後の値となります。
-                        <code>lastSequenceId()</code> メソッドの返り値は
+                        <methodname>lastSequenceId()</methodname> メソッドの返り値は
                         <constant>NULL</constant> となります。
                     </para>
                 </listitem>
@@ -2126,8 +2126,8 @@ if (!is_null($version)) {
                     <para>
                         Firebird/interbase は自動インクリメントのキーをサポートしていません。
                         シーケンスの名前を
-                        <code>lastInsertId()</code> あるいは
-                        <code>lastSequenceId()</code> に指定する必要があります。
+                        <methodname>lastInsertId()</methodname> あるいは
+                        <methodname>lastSequenceId()</methodname> に指定する必要があります。
                     </para>
                 </listitem>
                 <listitem>

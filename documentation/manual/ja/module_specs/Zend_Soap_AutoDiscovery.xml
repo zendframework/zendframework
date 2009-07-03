@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16443 -->
+<!-- EN-Revision: 16447 -->
 <sect1 id="zend.soap.autodiscovery">
     <title>自動検出</title>
 
@@ -228,7 +228,7 @@ $autodiscover->handle();
                 </listitem>
                 <listitem>
                     <para>
-                        <code>'http://'  .$_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']</code>が
+                        <code>'http://' .$_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']</code>が
                         WSDLを利用できるURIとして使われます。
                     </para>
                     <para>

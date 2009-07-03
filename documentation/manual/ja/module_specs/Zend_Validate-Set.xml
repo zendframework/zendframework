@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15743 -->
+<!-- EN-Revision: 16380 -->
 <sect1 id="zend.validate.set" xmlns:xi="http://www.w3.org/2001/XInclude">
 
     <title>標準のバリデーションクラス群</title>
@@ -161,6 +161,33 @@ if ($validator->isValid($iban)) {
             国にこだわらずすべての IBAN 番号を許可したい場合は、
             ロケールを省略してシンプルに書くことができます。
         </para>
+    </sect2>
+
+    <sect2 id="zend.validate.set.identical">
+        <title>Identical</title>
+        <para>
+            指定したトークンが <code>$value</code> と一致する場合にのみ <constant>TRUE</constant>
+            を返します。このバリデータは任意の型を処理することができます。
+        </para>
+
+        <para>
+            検証したいトークンは初期化時にパラメータとして設定することもできますし、
+            <methodname>setToken()</methodname> メソッドで設定することもできます。
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// 初期化時のトークン設定
+$validator = new Zend_Validate_Identical(array('one' => 'two'));
+if ($validator->isValid(array('one' => 'two'))) { // 有効なトークンです
+    // 何かをします
+}
+
+// setToken() によるトークン設定
+$validator->setToken(true);
+if ($validator->isValid(1)) { // 有効なトークンです
+    // 何かをします
+}
+]]></programlisting>
     </sect2>
 
     <sect2 id="zend.validate.set.in_array">

@@ -1444,15 +1444,18 @@ Output:
                 Calling <code>renderSubMenu($container, $ulClass, $indent)</code>
                 is equivalent to calling <code>renderMenu($container, $options)</code>
                 with the following options:
-<code>array(
+            </para>
+
+            <programlisting language="php"><![CDATA[
+array(
     'ulClass'          => $ulClass,
     'indent'           => $indent,
     'minDepth'         => null,
     'maxDepth'         => null,
     'onlyActiveBranch' => true,
     'renderParents'    => false
-)</code>
-            </para>
+);
+]]></programlisting>
 
             <programlisting language="php"><![CDATA[
 <?php

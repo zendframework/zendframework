@@ -53,7 +53,7 @@ Hello from my provider!
 
         <para>
             The above "Hello World" example is great for simple commands, but
-            what about something more advanced?  As your scripting and tooling
+            what about something more advanced? As your scripting and tooling
             needs grow, you might find that you need the ability to accept
             variables. Much like function signatures have parameters, your
             tooling requests can also accept parameters.

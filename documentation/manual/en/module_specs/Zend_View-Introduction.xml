@@ -72,12 +72,12 @@ echo $view->render('booklist.php');
 
         <para>
             Now we need the associated view script, "booklist.php".
-            This is a PHP script like any other, with one exception:  it
+            This is a PHP script like any other, with one exception: it
             executes inside the scope of the <classname>Zend_View</classname> instance, which
             means that references to $this point to the <classname>Zend_View</classname>
             instance properties and methods. (Variables assigned to the
             instance by the controller are public properties of the
-            <classname>Zend_View</classname> instance.)  Thus, a very basic view script could
+            <classname>Zend_View</classname> instance). Thus, a very basic view script could
             look like this:
         </para>
 

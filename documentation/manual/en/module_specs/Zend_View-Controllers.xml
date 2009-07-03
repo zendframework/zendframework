@@ -34,7 +34,7 @@ $view->c = "Sea";
 
         <para>
             The assign() method lets you assign from an array or object "in
-            bulk."  The following examples have the same effect as the above
+            bulk". The following examples have the same effect as the above
             one-by-one property assignments.
         </para>
 

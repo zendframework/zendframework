@@ -80,7 +80,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 
     <para>
         During normal operation, the <code>setUp()</code> method will bootstrap
-        the application. This process first  will include cleaning up the
+        the application. This process first will include cleaning up the
         environment to a clean request state, resetting any plugins and
         helpers, resetting the front controller instance, and creating new
         request and response objects. Once this is done, it will then either

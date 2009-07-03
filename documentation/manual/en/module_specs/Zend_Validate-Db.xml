@@ -64,7 +64,7 @@ if ($validator->isValid($username)) {
 
         <para>
             <classname>Zend_Validate_Db_RecordExists</classname> and
-            <classname>Zend_Validate_Db_NoRecordExists</classname>  also provide a means
+            <classname>Zend_Validate_Db_NoRecordExists</classname> also provide a means
             to test the database, excluding a part of the table, either by
             providing a where clause as a string, or an array with the keys
             "field" and "value".

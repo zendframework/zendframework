@@ -169,7 +169,7 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
             <listitem>
                 <para>
                     <constant>Zend_Console_Getopt::CONFIG_DASHDASH</constant> ("dashDash"),
-                    if true, enables the special flag <command>--</command> to
+                    if <constant>TRUE</constant>, enables the special flag <command>--</command> to
                     signify the end of flags. Command-line arguments following
                     the double-dash signifier are not interpreted as options,
                     even if the arguments start with a dash. This configuration
@@ -179,7 +179,7 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
             <listitem>
                 <para>
                     <constant>Zend_Console_Getopt::CONFIG_IGNORECASE</constant> ("ignoreCase"),
-                    if true, makes flags aliases of each other if they differ
+                    if <constant>TRUE</constant>, makes flags aliases of each other if they differ
                     only in their case. That is, <command>-a</command> and
                     <command>-A</command> will be considered to be synonymous flags.
                     This configuration option is <constant>FALSE</constant> by default.

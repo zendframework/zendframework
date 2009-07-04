@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16473 -->
+<!-- EN-Revision: 16474 -->
 <sect1 id="zend.console.getopt.configuration">
     <title>Zend_Console_Getopt の設定</title>
 
@@ -169,7 +169,7 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
             <listitem>
                 <para>
                     <constant>Zend_Console_Getopt::CONFIG_DASHDASH</constant> ("dashDash")
-                    を true にすると、フラグの終了を表す特殊フラグ <command>--</command>
+                    を <constant>TRUE</constant> にすると、フラグの終了を表す特殊フラグ <command>--</command>
                     を有効にします。ダブルダッシュの後に続くコマンドライン引数は、
                     たとえダッシュで始まっていてもオプションとはみなされません。
                     この設定オプションは、デフォルトで <constant>TRUE</constant> となっています。
@@ -178,7 +178,8 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
             <listitem>
                 <para>
                     <constant>Zend_Console_Getopt::CONFIG_IGNORECASE</constant> ("ignoreCase")
-                    を true にすると、大文字小文字が違うだけのフラグをお互いエイリアスとして扱います。
+                    を <constant>TRUE</constant> にすると、
+                    大文字小文字が違うだけのフラグをお互いエイリアスとして扱います。
                     つまり、<command>-a</command> と
                     <command>-A</command> は同じフラグとみなされます。
                     この設定オプションは、デフォルトでは <constant>FALSE</constant> となっています。

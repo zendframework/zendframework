@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15981 -->
+<!-- EN-Revision: 16470 -->
 <sect1 id="zend.config.adapters.ini">
     <title>Zend_Config_Ini</title>
 
@@ -119,7 +119,8 @@ echo $config->database->params->dbname; // "dbname" と出力します
                     <entry><varname>$section</varname></entry>
                     <entry>
                         ini ファイルの中の、読み込む [section]。
-                        このパラメータを null にすると、すべてのセクションを読み込みます。
+                        このパラメータを <constant>NULL</constant> にすると、
+                        すべてのセクションを読み込みます。
                         また、セクション名の配列を指定すると、複数のセクションを読み込みます。
                     </entry>
                 </row>
@@ -127,7 +128,7 @@ echo $config->database->params->dbname; // "dbname" と出力します
                     <entry><varname>$options = false</varname></entry>
                     <entry>オプションの配列。以下のキーをサポートしています。
                         <itemizedlist>
-                            <listitem><para><emphasis>allowModifications</emphasis>: true を指定すると、読み込んだファイルを後で変更することができます。デフォルトは false です。</para></listitem>
+                            <listitem><para><emphasis>allowModifications</emphasis>: <constant>TRUE</constant> を指定すると、読み込んだファイルを後で変更することができます。デフォルトは <constant>FALSE</constant> です。</para></listitem>
                             <listitem><para><emphasis>nestSeparator</emphasis>: ネストの区切り文字として使用する文字を設定します。デフォルトは "." です。</para></listitem>
                         </itemizedlist>
                     </entry>

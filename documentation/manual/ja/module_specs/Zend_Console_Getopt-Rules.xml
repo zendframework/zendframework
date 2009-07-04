@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16315 -->
+<!-- EN-Revision: 16476 -->
 <sect1 id="zend.console.getopt.rules">
     <title>Getopt の規則の宣言</title>
     <para>
@@ -67,32 +67,32 @@ $opts = new Zend_Console_Getopt('abp:');
         </para>
         <para>
             連想配列の各要素のキーは、フラグの名前とエイリアスをパイプ記号
-            ("<code>|</code>") で連結した文字列となります。
+            ("<emphasis>|</emphasis>") で連結した文字列となります。
             そのオプションがパラメータを必要とする場合は、
-            フラグに続けて等号 ("<code>=</code>") を書き、
+            フラグに続けて等号 ("<emphasis>=</emphasis>") を書き、
             その後にパラメータの型を表す文字を続けます。
         </para>
         <itemizedlist>
             <listitem>
                 <para>
-                    "<code>=s</code>" は文字列パラメータを表します。
+                    "<emphasis>=s</emphasis>" は文字列パラメータを表します。
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    "<code>=w</code>" はワードパラメータ
+                    "<emphasis>=w</emphasis>" はワードパラメータ
                     (空白を含まない文字列) を表します。
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    "<code>=i</code>" は整数パラメータを表します。
+                    "<emphasis>=i</emphasis>" は整数パラメータを表します。
                 </para>
             </listitem>
         </itemizedlist>
         <para>
             そのパラメータがオプションである場合は、等号の代わりにダッシュ
-            ("<code>-</code>") を使用します。
+            ("<emphasis>-</emphasis>") を使用します。
         </para>
         <para>
             連想配列の各要素の値は、ヘルプ文字列を表します。これは、

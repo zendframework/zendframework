@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16315 -->
+<!-- EN-Revision: 16475 -->
 <sect1 id="zend.console.getopt.fetching">
     <title>オプションおよび引数の取得</title>
     <para>
@@ -25,7 +25,7 @@
             パース関数は <classname>Zend_Console_Getopt_Exception</classname>
             をスローします。この例外を、アプリケーションのコードで処理する必要があります。
             <methodname>parse()</methodname> メソッドを使用して、オブジェクトに引数をパースさせます。
-            <code>try</code> ブロック内で <methodname>parse()</methodname>
+            <emphasis>try</emphasis> ブロック内で <methodname>parse()</methodname>
             を実行できるので、便利です。
             パースに成功すると、それ以降で再度例外がスローされることはありません。
             スローされた例外オブジェクトで、独自のメソッド <methodname>getUsageMessage()</methodname>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16474 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.console.getopt.configuration">
     <title>Configurer Zend_Console_Getopt</title>
@@ -10,7 +10,8 @@
         <para>
             Vous pouvez ajouter de nouvelles règles d'option en complément de celles
             indiquées dans le constructeur de <classname>Zend_Console_Getopt</classname>, en
-            utilisant la méthode <code>addRules()</code>. L'argument d'<code>addRules()</code> est
+            utilisant la méthode <methodname>addRules()</methodname>. L'argument
+            d'<methodname>addRules()</methodname> est
             identique au premier argument du constructeur de classe. C'est soit une chaîne dans le
             format d'options de syntaxe courte, soit un tableau associatif dans le format
             d'options de syntaxe longue. Voir
@@ -32,8 +33,8 @@ $opts->addRules(
         </example>
 
         <para>
-            L'exemple au-dessus montre comment ajouter l'option "<code>--verbose</code>" avec
-            l'alias "<code>-v</code>" à un ensemble d'options définies dans l'appel au
+            L'exemple au-dessus montre comment ajouter l'option "<command>--verbose</command>" avec
+            l'alias "<command>-v</command>" à un ensemble d'options définies dans l'appel au
             constructeur. Notez que vous pouvez mélanger des options de syntaxe courte et de
             syntaxe longue dans la même instance de <classname>Zend_Console_Getopt</classname>.
         </para>
@@ -45,7 +46,8 @@ $opts->addRules(
         <para>
             En plus d'indiquer les messages d'aide en déclarant les règles d'option dans le
             long format, vous pouvez associer des messages d'aide aux règles d'option en utilisant
-            la méthode <code>setHelp()</code>. L'argument de la méthode <code>setHelp()</code> est
+            la méthode <methodname>setHelp()</methodname>. L'argument de la méthode
+            <methodname>setHelp()</methodname> est
             un tableau associatif, dans laquelle la clé est un drapeau, et la valeur est le message
             d'aide correspondant.
         </para>
@@ -71,8 +73,8 @@ $opts->setHelp(
         </para>
 
         <para>
-            La méthode <code>setHelp()</code> est la seule manière de définir des messages
-            d'aide si vous déclarez les options en utilisant la syntaxe courte.
+            La méthode <methodname>setHelp()</methodname> est la seule manière de définir des
+            messages d'aide si vous déclarez les options en utilisant la syntaxe courte.
         </para>
     </sect2>
 
@@ -81,10 +83,10 @@ $opts->setHelp(
 
         <para>
             Vous pouvez déclarer des alias pour des options en utilisant la méthode
-            <code>setAliases()</code>. L'argument est un tableau associatif, dont la clé est une
-            chaîne de drapeau déclaré auparavant, et dont la valeur est un nouvel alias pour ce
-            drapeau. Ces alias sont fusionnés avec tous les alias existants. En d'autres termes,
-            les alias que vous avez déclarés plus tôt sont toujours actifs.
+            <methodname>setAliases()</methodname>. L'argument est un tableau associatif, dont la
+            clé est une chaîne de drapeau déclaré auparavant, et dont la valeur est un nouvel alias
+            pour ce drapeau. Ces alias sont fusionnés avec tous les alias existants. En d'autres
+            termes, les alias que vous avez déclarés plus tôt sont toujours actifs.
         </para>
 
         <para>
@@ -108,15 +110,15 @@ $opts->setAliases(
         </example>
 
         <para>
-            Dans l'exemple ci-dessus, après leurs déclarations, "<code>-a</code>",
-            "<code>--apple</code>" et "<code>--apfel</code>" sont des alias les un pour les autres.
-            En outre "<code>-p</code>" et "<code>--pear</code>" sont des alias l'un pour
-            l'autre.
+            Dans l'exemple ci-dessus, après leurs déclarations, "<command>-a</command>",
+            "<command>--apple</command>" et "<command>--apfel</command>" sont des alias les un pour
+            les autres. En outre "<command>-p</command>" et "<command>--pear</command>" sont des
+            alias l'un pour l'autre.
         </para>
 
         <para>
-            La méthode <code>setAliases()</code> est la seule manière de définir des alias si
-            vous déclarez les options en utilisant la syntaxe courte.
+            La méthode <methodname>setAliases()</methodname> est la seule manière de définir des
+            alias si vous déclarez les options en utilisant la syntaxe courte.
         </para>
     </sect2>
 
@@ -125,12 +127,13 @@ $opts->setAliases(
 
         <para>
             Par défaut, <classname>Zend_Console_Getopt</classname> utilise
-            <code>$_SERVER['argv']</code> comme tableau des arguments de ligne de commande à
+            <varname>$_SERVER['argv']</varname> comme tableau des arguments de ligne de commande à
             analyser. De manière alternative, vous pouvez indiquer le tableau d'arguments comme
             deuxième argument de constructeur. En conclusion, vous pouvez ajouter de nouveaux
-            d'arguments à ceux déjà utilisés en utilisant la méthode <code>addArguments()</code>,
-            ou vous pouvez remplacer le choix courant d'arguments en utilisant la méthode
-            <code>setArguments()</code>. Dans les deux cas, le paramètre de ces méthodes est un
+            d'arguments à ceux déjà utilisés en utilisant la méthode
+            <methodname>addArguments()</methodname>, ou vous pouvez remplacer le choix courant
+            d'arguments en utilisant la méthode <methodname>setArguments()</methodname>.
+            Dans les deux cas, le paramètre de ces méthodes est un
             simple tableau de chaîne. L'ancienne méthode ajoutait le tableau aux arguments
             courants, et la nouvelle méthode substitue le tableau aux arguments courants.
         </para>
@@ -158,8 +161,8 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
             Le troisième paramètre du constructeur de <classname>Zend_Console_Getopt</classname>
             est un tableau d'options de configuration qui affectent le comportement de l'instance
             d'objet retournée. Vous pouvez également indiquer des options de configuration en
-            utilisant la méthode <code>setOptions()</code>, ou vous pouvez placer une option
-            individuelle en utilisant la méthode <code>setOption()</code>.
+            utilisant la méthode <methodname>setOptions()</methodname>, ou vous pouvez placer une
+            option individuelle en utilisant la méthode <methodname>setOption()</methodname>.
         </para>
 
         <note>
@@ -182,34 +185,36 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
         <itemizedlist>
             <listitem>
                 <para>
-                    <classname>Zend_Console_Getopt::CONFIG_DASHDASH</classname>
-                    ("<code>dashDash</code>"), si "<code>true</code>", utilise le drapeau spécial
-                    "<code>--</code>" pour signifier la fin des drapeaux. Les arguments de la ligne
-                    de commande suivant le double-tiret ne sont pas interprétées comme options,
-                    même si les arguments commencent par un tiret. Cette option de configuration
-                    vaut "<code>true</code>" par défaut.
+                    <constant>Zend_Console_Getopt::CONFIG_DASHDASH</constant>
+                    ("dashDash"), si <constant>TRUE</constant>, utilise le drapeau spécial
+                    "<command>--</command>" pour signifier la fin des drapeaux. Les arguments de
+                    la ligne de commande suivant le double-tiret ne sont pas interprétées comme
+                    options, même si les arguments commencent par un tiret. Cette option de
+                    configuration vaut <constant>TRUE</constant> par défaut.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <classname>Zend_Console_Getopt::CONFIG_IGNORECASE</classname>
-                    ("<code>ignoreCase</code>"), si "<code>true</code>", fait correspondre des
-                    alias même s'ils différent en terme de casse. C'est-à-dire,"<code>-a</code>" et
-                    "<code>-A</code>" seront considérés commes des synonymes. Cette option de
-                    configuration vaut "<code>false</code>" par défaut.
+                    <constant>Zend_Console_Getopt::CONFIG_IGNORECASE</constant>
+                    ("ignoreCase"), si <constant>TRUE</constant>, fait correspondre
+                    des alias même s'ils différent en terme de casse. C'est-à-dire,
+                    "<command>-a</command>" et "<command>-A</command>" seront considérés comme
+                    des synonymes. Cette option de
+                    configuration vaut <constant>FALSE</constant> par défaut.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <classname>Zend_Console_Getopt::CONFIG_RULEMODE</classname>
-                    ("<code>ruleMode</code>") peut avoir les valeurs
-                    <classname>Zend_Console_Getopt::MODE_ZEND</classname> ("zend") ou
-                    <classname>Zend_Console_Getopt::MODE_GNU</classname> ("<code>gnu</code>"). Il
+                    <constant>Zend_Console_Getopt::CONFIG_RULEMODE</constant>
+                    ("ruleMode") peut avoir les valeurs
+                    <constant>Zend_Console_Getopt::MODE_ZEND</constant> ("zend") ou
+                    <constant>Zend_Console_Getopt::MODE_GNU</constant> ("gnu"). Il
                     ne devrait pas être nécessaire d'employer cette option à moins que vous
                     n'étendiez la classe avec les formes additionnelles de syntaxe. Les deux modes
                     supportés dans la classe <classname>Zend_Console_Getopt</classname> de base
                     sont sans équivoque. Si le spécificateur est une chaîne de caractère, la classe
-                    passe en <code>MODE_GNU</code>, autrement elle est en <code>MODE_ZEND</code>.
+                    passe en <constant>MODE_GNU</constant>, autrement elle est en
+                    <constant>MODE_ZEND</constant>.
                     Mais si vous étendez la classe et ajoutez de nouvelles formes de syntaxe, vous
                     pouvez avoir à indiquer le mode en utilisant cette option.
                 </para>
@@ -222,8 +227,8 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
         </para>
 
         <para>
-            Les deux arguments de la méthode <code>setOption()</code> sont un nom d'option de
-            configuration et une valeur d'option.
+            Les deux arguments de la méthode <methodname>setOption()</methodname> sont un nom
+            d'option de configuration et une valeur d'option.
         </para>
 
         <example id="zend.console.getopt.configuration.config.example.setoption">
@@ -236,11 +241,12 @@ $opts->setOption('ignoreCase', true);
         </example>
 
         <para>
-            L'argument de la méthode <code>setOptions()</code> est un tableau associatif. Les
-            clés de ce tableau sont les noms d'option de configuration, et les valeurs sont des
-            valeurs de configuration. C'est également le format de tableau utilisé par le
-            constructeur de classe. Les valeurs de configuration que vous indiquez sont fusionnées
-            avec la configuration courante ; vous n'avez pas à énumérer toutes les options.
+            L'argument de la méthode <methodname>setOptions()</methodname> est un tableau
+            associatif. Les clés de ce tableau sont les noms d'option de configuration, et les
+            valeurs sont des valeurs de configuration. C'est également le format de tableau utilisé
+            par le constructeur de classe. Les valeurs de configuration que vous indiquez sont
+            fusionnées avec la configuration courante ; vous n'avez pas à énumérer toutes les
+            options.
         </para>
 
         <example id="zend.console.getopt.configuration.config.example.setoptions">

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 16315 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.console.getopt.introduction">
     <title>Introduction</title>
@@ -13,11 +13,11 @@
         Les utilisateurs peuvent spécifier des arguments en ligne de commande quand ils
         exécutent votre application. Ces arguments ont du sens dans l'application : changer son
         comportement, choisir des ressources, ou spécifier des paramètres. Beaucoup d'options ont
-        une signification usuelle, par exemple "<code>--verbose</code>" permet la production
+        une signification usuelle, par exemple "<command>--verbose</command>" permet la production
         d'informations supplémentaires dans beaucoup d'applications. D'autres options peuvent avoir
-        un sens qui est différent pour chaque application. Par exemple, "-c" prend des sens
-        différents lorsqu'il est utilisé dans <command>grep</command>, <command>ls</command>, et
-        <command>tar</command>.
+        un sens qui est différent pour chaque application. Par exemple, "<command>-c</command>"
+        prend des sens différents lorsqu'il est utilisé dans <command>grep</command>,
+        <command>ls</command>, et <command>tar</command>.
     </para>
 
     <para>
@@ -28,7 +28,7 @@
     <itemizedlist>
         <listitem>
             <para>
-                "<code>argument</code>" : une chaîne de caractères (<code>string</code>) qui
+                "argument" : une chaîne de caractères qui
                 apparaît dans la ligne de commande après le nom de la commande. Les arguments
                 peuvent être des options ou bien peut apparaître sans option, appeler des
                 ressources sur lesquelles la commande agit.
@@ -37,37 +37,38 @@
 
         <listitem>
             <para>
-                "<code>option</code>" : un argument qui signifie que la commande va changer
+                "option" : un argument qui signifie que la commande va changer
                 son comportement par défaut d'une manière quelconque.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                "<code>flag</code>" (drapeau) : la première partie d'une option, identifie le
-                but de l'option. Un drapeau est précédé conventionnellement par un ou deux tirets
-                ("<code>-</code>" or "<code>--</code>"). Un drapeau court comporte un caractère
-                unique. Un drapeau long est une chaîne de plusieurs caractères. Un tiret simple
-                précède un drapeau court ou un groupe de drapeaux courts. Un tiret double précède
-                un drapeau long. Les drapeaux longs ne peuvent pas être groupés.
+                "flag" (drapeau) : la première partie d'une option, identifie le but de l'option.
+                Un drapeau est précédé conventionnellement par un ou deux tirets
+                ("<command>-</command>" or "<command>--</command>"). Un drapeau court comporte un
+                caractère unique. Un drapeau long est une chaîne de plusieurs caractères. Un tiret
+                simple précède un drapeau court ou un groupe de drapeaux courts. Un tiret double
+                précède un drapeau long. Les drapeaux longs ne peuvent pas être groupés.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                "<code>parameter</code>" (paramètre) : la seconde partie d'une option ; une
+                "parameter" (paramètre) : la seconde partie d'une option ; une
                 donnée qui peut accompagner un drapeau, si c'est applicable à l'option donnée. Par
-                exemple, beaucoup de commandes acceptent "<code>--verbose</code>", mais typiquement
-                cette option n'a aucun paramètre. Cependant, une option comme "<code>--user</code>
-                a presque toujours besoin d'un paramètre à sa suite.
+                exemple, beaucoup de commandes acceptent "<command>--verbose</command>",
+                mais typiquement cette option n'a aucun paramètre. Cependant, une option
+                comme "<command>--user</command> a presque toujours besoin d'un paramètre
+                à sa suite.
             </para>
             <para>
                 Un paramètre peut être donné comme un argument séparé après un argument de
                 drapeau, ou comme faisant partie de la même chaîne de caractères, séparé du drapeau
-                par le symbole égal ("<code>=</code>"). La dernière forme est autorisée seulement
-                avec des drapeaux longs. Par exemple, <code>-u username</code>, <code>--user
-                username</code>, et <code>--user=username</code> sont des formats supportés par
-                <classname>Zend_Console_Getopt</classname>.
+                par le symbole égal ("<command>=</command>"). La dernière forme est autorisée
+                seulement avec des drapeaux longs. Par exemple, <command>-u username</command>,
+                <command>--user username</command>, et <command>--user=username</command> sont
+                des formats supportés par <classname>Zend_Console_Getopt</classname>.
             </para>
         </listitem>
 
@@ -84,11 +85,12 @@
     </itemizedlist>
 
     <para>
-        Par exemple, dans "<code>mysql --user=root mabase</code>", "<code>mysql</code>" est
-        la <emphasis>commande</emphasis>, "<code>--user=root</code>" est une
-        <emphasis>option</emphasis>, "<code>--user</code>" est un <emphasis>drapeau</emphasis>,
-        "<code>root</code>" est un <emphasis>paramètre</emphasis> de l'option, et
-        "<code>mabase</code>" est un argument mais pas une option dans notre définition.
+        Par exemple, dans "<command>mysql --user=root mabase</command>", "<command>mysql</command>"
+        est la <emphasis>commande</emphasis>, "<command>--user=root</command>" est une
+        <emphasis>option</emphasis>, "<command>--user</command>" est un
+        <emphasis>drapeau</emphasis>, "<command>root</command>" est un
+        <emphasis>paramètre</emphasis> de l'option, et
+        "<command>mabase</command>" est un argument mais pas une option dans notre définition.
     </para>
 
     <para>
@@ -102,14 +104,14 @@
         <title>Getopt n'est pas une application framework</title>
 
         <para>
-            <classname>Zend_Console_Getopt</classname> <emphasis>n'</emphasis>interprète
-            <emphasis>pas</emphasis> le sens des drapeaux ou des paramètres, cette classe n'exécute
+            <classname>Zend_Console_Getopt</classname> <emphasis>n'interprète
+            pas</emphasis> le sens des drapeaux ou des paramètres, cette classe n'exécute
             pas non plus de processus d'application ou n'invoque pas le code d'application. Vous
             devez implémenter ces actions dans votre propre code d'application. Vous pouvez
             utiliser la classe <classname>Zend_Console_Getopt</classname> pour analyser la ligne
             d'instruction et fournir des méthodes orientées objet pour savoir quelles options ont
             été données par un utilisateur, mais le code pour utiliser ces données pour appeler les
-            parties de votre application devra être dans une autre classe PHP.
+            parties de votre application devra être dans une autre classe <acronym>PHP</acronym>.
         </para>
     </note>
 

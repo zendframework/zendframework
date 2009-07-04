@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16475 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.console.getopt.fetching">
     <title>Extraire les options et les arguments</title>
@@ -28,12 +28,13 @@
             fonction d'analyse syntaxique lève une
             <classname>Zend_Console_Getopt_Exception</classname>. Vous devrez récupérer cette
             exception dans votre code d'application. Vous pouvez utiliser la méthode
-            <code>parse()</code> pour forcer l'objet à analyser les arguments. C'est utile
-            parce que vous pouvez invoquer <code>parse()</code> dans un bloc <code>try</code>. S'il
-            passe, vous pouvez être sûrs que l'analyse syntaxique ne lèvera pas d'exception de
-            nouveau. L'exception est lancée via une méthode personnalisée
-            <code>getUsageMessage()</code>, qui retourne comme une chaîne de caractère l'ensemble
-            formaté des messages d'utilisation pour toutes les options déclarées.
+            <methodname>parse()</methodname> pour forcer l'objet à analyser les arguments. C'est
+            utile parce que vous pouvez invoquer <methodname>parse()</methodname> dans un bloc
+            <emphasis>try</emphasis>. S'il passe, vous pouvez être sûrs que l'analyse syntaxique
+            ne lèvera pas d'exception de nouveau. L'exception est lancée via une méthode
+            personnalisée <methodname>getUsageMessage()</methodname>, qui retourne comme une
+            chaîne de caractère l'ensemble formaté des messages d'utilisation pour toutes les
+            options déclarées.
         </para>
 
         <example id="zend.console.getopt.fetching.exceptions.example">
@@ -72,11 +73,11 @@ try {
         <title>Extraire les options par nom</title>
 
         <para>
-            Vous pouvez employer la méthode <code>getOption()</code> pour connaître la valeur
-            d'une option. Si l'option avait un paramètre, cette méthode retourne la valeur du
+            Vous pouvez employer la méthode <methodname>getOption()</methodname> pour connaître la
+            valeur d'une option. Si l'option avait un paramètre, cette méthode retourne la valeur du
             paramètre. Si l'option n'avait aucun paramètre mais que l'utilisateur en indiquait sur
-            dans la ligne de commande, la méthode retournerait <code>true</code>. Sinon la méthode
-            retournerait <code>null</code>.
+            dans la ligne de commande, la méthode retournerait <constant>TRUE</constant>. Sinon la
+            méthode retournerait <constant>NULL</constant>.
         </para>
 
         <example id="zend.console.getopt.fetching.byname.example.setoption">
@@ -91,9 +92,9 @@ $p_parameter = $opts->getOption('p');
 
         <para>
             De manière alternative, vous pouvez employer la fonction magique
-            <code>__get()</code> pour rechercher la valeur d'une option comme si c'était une
-            variable de membre de classe. La méthode magique <code>__isset()</code> est également
-            implémentée.
+            <methodname>__get()</methodname> pour rechercher la valeur d'une option comme si
+            c'était une variable de membre de classe. La méthode magique
+            <methodname>__isset()</methodname> est également implémentée.
         </para>
 
         <example id="zend.console.getopt.fetching.byname.example.magic">
@@ -126,29 +127,30 @@ $p_parameter = $opts->p; // null si non fourni
             <listitem>
                 <para>
                     Comme pour une chaîne de caractères&#160;: employez la méthode
-                    <code>toString()</code>. Les options sont retournées sous la forme d'une chaîne
-                    de caractère où les paires "<code>drapeau=valeur</code>" sont séparées par des
-                    espaces. La valeur d'une option qui n'a pas de paramètre est la chaîne
-                    "<code>true</code>".
+                    <methodname>toString()</methodname>. Les options sont retournées sous la
+                    forme d'une chaîne de caractère où les paires <command>drapeau=valeur</command>
+                    sont séparées par des espaces. La valeur d'une option qui n'a pas de paramètre
+                    est la chaîne "<constant>TRUE</constant>".
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    Comme un tableau&#160;: employez la méthode <code>toArray()</code>. Les
-                    options sont retournées dans un tableau de chaînes de caractères indexé par des
-                    nombres, les chaînes de drapeau sont suivies par les chaînes de paramètres
+                    Comme un tableau&#160;: employez la méthode <methodname>toArray()</methodname>.
+                    Les options sont retournées dans un tableau de chaînes de caractères indexé par
+                    des nombres, les chaînes de drapeau sont suivies par les chaînes de paramètres
                     éventuels.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    Comme une chaîne au format JSON&#160;: employez la méthode
-                    <code>toJson()</code>.
+                    Comme une chaîne au format <acronym>JSON</acronym>&#160;: employez la méthode
+                    <methodname>toJson()</methodname>.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    Comme une chaîne au format XML&#160;: employez la méthode <code>toXml()</code>.
+                    Comme une chaîne au format <acronym>XML</acronym>&#160;: employez la méthode
+                    <methodname>toXml()</methodname>.
                 </para>
             </listitem>
         </itemizedlist>
@@ -156,9 +158,9 @@ $p_parameter = $opts->p; // null si non fourni
         <para>
             Dans toutes les méthodes de déchargement ci-dessus, la chaîne du drapeau est la
             première chaîne dans la liste des alias correspondants. Par exemple, si les noms
-            d'alias d'option étaient déclarés comme "<code>verbose|v</code>", alors la première
-            chaîne, "<code>verbose</code>", est employé comme nom de l'option. Le nom du drapeau
-            d'option n'inclut pas le tiret précédent.
+            d'alias d'option étaient déclarés comme "<command>verbose|v</command>", alors la
+            première chaîne, "<command>verbose</command>", est employé comme nom de l'option.
+            Le nom du drapeau d'option n'inclut pas le tiret précédent.
         </para>
     </sect2>
 
@@ -169,8 +171,8 @@ $p_parameter = $opts->p; // null si non fourni
             Après que les arguments d'option et ainsi que les paramètres de la ligne de
             commande ont été analysés, il peut exister des arguments additionnels restants. Vous
             pouvez interroger ces arguments en utilisant la méthode
-            <code>getRemainingArgs()</code>. Cette méthode renvoie un tableau de chaîne qui ne fait
-            partie d'aucune option.
+            <methodname>getRemainingArgs()</methodname>. Cette méthode renvoie un tableau de chaîne
+            qui ne fait partie d'aucune option.
         </para>
 
         <example id="zend.console.getopt.fetching.remainingargs.example">
@@ -184,11 +186,11 @@ $args = $opts->getRemainingArgs(); // retourne array('nomdefichier')
         </example>
 
         <para>
-            <classname>Zend_Console_Getopt</classname> supporte la convention GNU selon laquelle un
-            argument se composant d'un double-tiret signifie la fin des options. Tous les arguments
-            suivant celui-ci doivent être traités en tant qu'arguments sans options. C'est utile si
-            vous avez un argument sans options qui commence par un tiret. Par exemple : "
-            <command>rm -- -nomdefichier-avec-tiret</command>".
+            <classname>Zend_Console_Getopt</classname> supporte la convention <acronym>GNU</acronym>
+            selon laquelle un argument se composant d'un double-tiret signifie la fin des options.
+            Tous les arguments suivant celui-ci doivent être traités en tant qu'arguments sans
+            options. C'est utile si vous avez un argument sans options qui commence par
+            un tiret. Par exemple : "<command>rm -- -nomdefichier-avec-tiret</command>".
         </para>
     </sect2>
 </sect1>

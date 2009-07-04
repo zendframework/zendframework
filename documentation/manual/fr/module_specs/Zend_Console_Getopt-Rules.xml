@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16476 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.console.getopt.rules">
     <title>Déclarer les règles Getopt</title>
@@ -15,7 +15,7 @@
     <para>
         Le constructeur prend deux arguments supplémentaires, qui sont facultatifs. Le
         deuxième argument peut contenir les arguments de la ligne de commande. La valeur par défaut
-        est <code>$_SERVER['argv']</code>.
+        est <varname>$_SERVER['argv']</varname>.
     </para>
 
     <para>
@@ -30,13 +30,13 @@
 
         <para>
             <classname>Zend_Console_Getopt</classname> supporte une syntaxe compacte semblable à
-            cela employée par GNU Getopt (voir
-            <ulink url="http://www.gnu.org/software/libc/manual/html_node/Getopt.html">
-            http://www.gnu.org/software/libc/manual/html_node/Getopt.html</ulink>). Cette syntaxe
-            supporte seulement des drapeaux courts (1 seul caractère). Dans une chaîne de caractère
-            unique, vous entrez chacune des lettres qui correspondent aux drapeaux supportés par
-            votre application. Une lettre suivie d'un caractère deux points ("<code>:</code>")
-            indique un drapeau qui exige un paramètre.
+            cela employée par <acronym>GNU</acronym> Getopt (voir
+            <ulink
+                url="http://www.gnu.org/software/libc/manual/html_node/Getopt.html">http://www.gnu.org/software/libc/manual/html_node/Getopt.html</ulink>).
+            Cette syntaxe supporte seulement des drapeaux courts (1 seul caractère). Dans une
+            chaîne de caractère unique, vous entrez chacune des lettres qui correspondent aux
+            drapeaux supportés par votre application. Une lettre suivie d'un caractère deux points
+            ("<emphasis>:</emphasis>") indique un drapeau qui exige un paramètre.
         </para>
 
         <example id="zend.console.getopt.rules.short.example">
@@ -49,8 +49,9 @@ $opts = new Zend_Console_Getopt('abp:');
 
         <para>
             L'exemple ci-dessus montre l'utilisation de <classname>Zend_Console_Getopt</classname>
-            pour déclarer que des options peuvent être données en tant que "<code>-a</code>",
-            "<code>-b</code>" ou "<code>-p</code>". Le dernier drapeau exige un paramètre.
+            pour déclarer que des options peuvent être données en tant que "<command>-a</command>",
+            "<command>-b</command>" ou "<command>-p</command>". Le dernier drapeau exige un
+            paramètre.
         </para>
 
         <para>
@@ -74,29 +75,31 @@ $opts = new Zend_Console_Getopt('abp:');
 
         <para>
             La clé de chaque élément du tableau associatif est une chaîne avec un format qui
-            nomme le drapeau, avec tous ses alias, séparés par le symbole "<code>|</code>". Après
-            la série des alias, si l'option exige un paramètre, il y a un symbole égal
-            ("<code>=</code>") avec une lettre qui représente le <emphasis>type</emphasis> du
-            paramètre :
+            nomme le drapeau, avec tous ses alias, séparés par le symbole "<emphasis>|</emphasis>".
+            Après la série des alias, si l'option exige un paramètre, il y a un symbole égal
+            ("<emphasis>=</emphasis>") avec une lettre qui représente le <emphasis>type</emphasis>
+            du paramètre :
         </para>
 
         <itemizedlist>
             <listitem>
-                <para>"<code>=s</code>" pour un paramètre de type chaîne de caractère.</para>
+                <para>
+                    "<emphasis>=s</emphasis>" pour un paramètre de type chaîne de caractère.
+                </para>
             </listitem>
             <listitem>
                 <para>
-                    "<code>=w</code>" pour un paramètre de type mot (une chaîne de caractère
+                    "<emphasis>=w</emphasis>" pour un paramètre de type mot (une chaîne de caractère
                     qui ne contient pas d'espace).
                 </para>
             </listitem>
             <listitem>
-                <para>"<code>=i</code>" pour un paramètre de type entier (integer).</para>
+                <para>"<emphasis>=i</emphasis>" pour un paramètre de type entier (integer).</para>
             </listitem>
         </itemizedlist>
 
         <para>
-            Si le paramètre est optionnel, on utilise le tiret ("<code>-</code>") au lieu du
+            Si le paramètre est optionnel, on utilise le tiret ("<emphasis>-</emphasis>") au lieu du
             symbole égal.
         </para>
 
@@ -120,12 +123,12 @@ $opts = new Zend_Console_Getopt(
         </example>
 
         <para>
-            Dans l'exemple ci-dessus, il y a trois options. "<code>--abricot</code>" et
-            "<code>-a</code>" sont des alias l'un pour l'autre et l'option ne prend pas de
-            paramètres. "<code>--banane</code>" et "<code>-b</code>" sont des alias l'un pour
-            l'autre et l'option prend un paramètre obligatoire de type entier. Enfin,
-            "<code>--pear</code>" et "<code>-p</code>" sont des alias l'un pour l'autre et l'option
-            prend un paramètre optionnel de type chaîne de caractère.
+            Dans l'exemple ci-dessus, il y a trois options. "<command>--abricot</command>" et
+            "<command>-a</command>" sont des alias l'un pour l'autre et l'option ne prend pas de
+            paramètres. "<command>--banane</command>" et "<command>-b</command>" sont des alias
+            l'un pour l'autre et l'option prend un paramètre obligatoire de type entier. Enfin,
+            "<command>--pear</command>" et "<command>-p</command>" sont des alias l'un pour l'autre
+            et l'option prend un paramètre optionnel de type chaîne de caractère.
         </para>
     </sect2>
 </sect1>

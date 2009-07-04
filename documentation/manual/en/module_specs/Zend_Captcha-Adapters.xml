@@ -113,9 +113,9 @@
 
         <para>
             Options passed to the constructor will also be passed to the <link
-                linkend="zend.text.figlet">Zend_Text_Figlet</link> object. See
-                the <link linkend="zend.text.figlet">Zend_Text_Figlet</link>documentation for
-            details on what configuration options are available.
+                linkend="zend.text.figlet"><classname>Zend_Text_Figlet</classname></link> object.
+            See the <link linkend="zend.text.figlet"><classname>Zend_Text_Figlet</classname></link>
+            documentation for details on what configuration options are available.
         </para>
     </sect2>
 

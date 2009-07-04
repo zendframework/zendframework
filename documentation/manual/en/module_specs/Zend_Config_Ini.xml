@@ -111,8 +111,10 @@ echo $config->database->params->dbname; // prints "dbname"
                 <row>
                     <entry><varname>$section</varname></entry>
                     <entry>The [section] within the ini file that is to be loaded. Setting
-                        this parameter to null will load all sections. Alternatively, an
-                        array of section names may be supplied to load multiple sections.</entry>
+                        this parameter to <constant>NULL</constant> will load all sections.
+                        Alternatively, an array of section names may be supplied to load
+                        multiple sections.
+                    </entry>
                 </row>
                 <row>
                     <entry><varname>$options = false</varname></entry>
@@ -120,8 +122,10 @@ echo $config->database->params->dbname; // prints "dbname"
                         <itemizedlist>
                             <listitem>
                                 <para>
-                                    <emphasis>allowModifications</emphasis>: Set to true to allow
-                                    subsequent modification of loaded file. Defaults to false
+                                    <emphasis>allowModifications</emphasis>: Set to
+                                    <constant>TRUE</constant> to allow
+                                    subsequent modification of loaded file. Defaults to
+                                    <constant>NULL</constant>
                                 </para>
                             </listitem>
                             <listitem>

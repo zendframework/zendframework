@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15998 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.codegenerator.introduction">
     <title>Introduction</title>
 
     <para>
         <classname>Zend_CodeGenerator</classname> est un outils permettant de générer du code
-        PHP en utilisant une interface orientée objet. Il peut générer ou mettre à jour du code. Il
-        est aussi possible d'étendre ces classes afin de changer le langage de référence pour
-        générer du Javascript, des hôtes virtuels Apache ..., par exemple.
+        <acronym>PHP</acronym> en utilisant une interface orientée objet. Il peut générer ou
+        mettre à jour du code. Il est aussi possible d'étendre ces classes afin de changer le
+        langage de référence pour générer du Javascript, des hôtes virtuels Apache ..., par exemple.
     </para>
 
     <sect2 id="zend.codegenerator.introduction.theory">
@@ -17,7 +17,7 @@
         <para>
             Dans la plupart des cas, vous créerez une instance du générateur de code, et vous
             le configurez. Pour afficher le code généré, un simple echo suffira, ou l'appel à sa
-            méthode <code>generate()</code>.
+            méthode <methodname>generate()</methodname>.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -81,8 +81,8 @@ class World
 
         <para>
             Par exemple, imaginons que nous avons sauvegardé le code de l'exemple ci-dessus
-            dans un fichier "World.php" que nous avons alors inclus. Nous pourrions dès lors agir
-            comme suit&#160;:
+            dans un fichier "<filename>World.php</filename>" que nous avons alors inclus.
+            Nous pourrions dès lors agir comme suit&#160;:
         </para>
 
         <programlisting language="php"><![CDATA[

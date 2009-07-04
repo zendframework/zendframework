@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16125 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.captcha.operation">
     <title>Opération Captcha</title>
 
     <para>
-        Tous les adaptateurs CAPTCHA implémentent <classname>Zend_Captcha_Adapter</classname>, qui
-        ressemble à ceci&#160;:
+        Tous les adaptateurs <acronym>CAPTCHA</acronym> implémentent
+        <classname>Zend_Captcha_Adapter</classname>, qui ressemble à ceci&#160;:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -33,14 +33,17 @@ interface Zend_Captcha_Adapter extends Zend_Validate_Interface
 
     <para>
         Le mutateur et l'accesseur "name" sont utilisés pour spécifier et récupérer
-        l'identifiant du CAPTCHA. <code>getDecorator()</code> peut être utilisé pour spécifier un
+        l'identifiant du <acronym>CAPTCHA</acronym>. <methodname>getDecorator()</methodname> peut
+        être utilisé pour spécifier un
         décorateur <classname>Zend_Form</classname> soit par son nom ou en retournant un objet
-        décorateur. Les vraies clés sont utilisées sauf pour <code>generate()</code> et
-        <code>render()</code>. <code>generate()</code> est utilisé pour créer l'élément CAPTCHA.
+        décorateur. Les vraies clés sont utilisées sauf pour <methodname>generate()</methodname> et
+        <methodname>render()</methodname>. <methodname>generate()</methodname> est utilisé pour
+        créer l'élément <acronym>CAPTCHA</acronym>.
         Ce processus typiquement stockera l'élément en session ainsi il pourra être utilisé pour
-        comparaison dans les requêtes suivantes. <code>render()</code> est utilisé pour effectuer
-        le rendu de l'information que représente le CAPTCHA - en image, en texte Figlet, en
-        problème logique, etc.
+        comparaison dans les requêtes suivantes. <methodname>render()</methodname> est utilisé
+        pour effectuer le rendu de l'information que représente le <acronym>CAPTCHA</acronym> -
+        en image, en texte Figlet, en problème logique, ou tout autre type de
+        <acronym>CAPTCHA</acronym>.
     </para>
 
     <para>Un cas d'utilisation typique pourrait ressembler à ceci&#160;:</para>

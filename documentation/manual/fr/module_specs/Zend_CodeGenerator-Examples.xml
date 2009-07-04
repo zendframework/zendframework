@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15976 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.codegenerator.examples">
     <title>Exemples Zend_CodeGenerator</title>
@@ -256,14 +256,15 @@ class Foo
 
         <para>
             <classname>Zend_CodeGenerator_Php_File</classname> sert à générer le contenu de
-            fichiers PHP. Il est possible d'insérer du code de classes, ou du code PHP banal. Si
+            fichiers <acronym>PHP</acronym>. Il est possible d'insérer du code de classes,
+            ou n'importe quel code. Si
             vous attachez des classes, vous pouvez les passer sous forme de tableaux ou directement
             d'objets <classname>Zend_CodeGenerator_Php_Class</classname>.
         </para>
 
         <para>
-            Dans l'exemple suivant, nous supposons que vous avez défini <code>$foo</code> comme
-            étant le code d'une des classes des exemples précédents.
+            Dans l'exemple suivant, nous supposons que vous avez défini <varname>$foo</varname>
+            comme étant le code d'une des classes des exemples précédents.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -283,8 +284,8 @@ $file = new Zend_CodeGenerator_Php_File(array(
 ]]></programlisting>
 
         <para>
-            L'appel à <code>generate()</code> va générer le code, mais pas l'écrire dans un
-            fichier. Pour ce faire, il faudra d'abord capturer le contenu:
+            L'appel à <methodname>generate()</methodname> va générer le code, mais pas l'écrire
+            dans un fichier. Pour ce faire, il faudra d'abord capturer le contenu:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -351,9 +352,9 @@ define('APPLICATION_ENV', 'testing');
         <title>Ajouter du code à un fichier PHP existant en utilisant la réflexion</title>
 
         <para>
-            Vous pouvez ajouter du code à n'importe quel fichier PHP existant à condition
-            d'utiliser la réflexion sur celui-ci afin de l'analyser. La méthode
-            <code>fromReflectedFileName()</code> va vous y aider
+            Vous pouvez ajouter du code à n'importe quel fichier <acronym>PHP</acronym> existant
+            à condition d'utiliser la réflexion sur celui-ci afin de l'analyser. La méthode
+            <methodname>fromReflectedFileName()</methodname> va vous y aider
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -368,10 +369,10 @@ file_put_contents($path, $generator->generate());
         <title>Ajouter du code à une classe PHP existante en utilisant la réflexion</title>
 
         <para>
-            Vous pouvez aussi ajouter du code à une classe PHP existante. Utilisez
-            <code>fromReflection()</code> pour transformer la classe en objet Reflection. Ajoutez
-            ensuite des méthodes, des attributs, puis régénérez le code de la classe
-            modifiée&#160;:
+            Vous pouvez aussi ajouter du code à une classe existante.
+            Utilisez <methodname>fromReflection()</methodname> pour transformer la classe en objet
+            Reflection. Ajoutez ensuite des méthodes, des attributs, puis régénérez le code de la
+            classe modifiée&#160;:
         </para>
 
         <programlisting language="php"><![CDATA[

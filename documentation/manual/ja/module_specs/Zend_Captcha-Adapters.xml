@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15973 -->
+<!-- EN-Revision: 16465 -->
 <sect1 id="zend.captcha.adapters">
     <title>CAPTCHA アダプタ</title>
 
@@ -112,10 +112,10 @@
 
         <para>
             コンストラクタに渡されたオプションは、アダプタが使用する <link
-                linkend="zend.text.figlet">Zend_Text_Figlet</link>
+                linkend="zend.text.figlet"><classname>Zend_Text_Figlet</classname></link>
             オブジェクトにも渡されます。
             使用できる設定オプションについては、
-            <link linkend="zend.text.figlet">Zend_Text_Figlet</link>
+            <link linkend="zend.text.figlet"><classname>Zend_Text_Figlet</classname></link>
             のドキュメントを参照ください。
         </para>
     </sect2>

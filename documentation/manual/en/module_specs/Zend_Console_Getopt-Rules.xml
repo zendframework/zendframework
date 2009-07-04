@@ -66,31 +66,31 @@ $opts = new Zend_Console_Getopt('abp:');
         <para>
             The key of each element of the associative array is a string with
             a format that names the flag, with any aliases, separated by the
-            pipe symbol ("<code>|</code>"). Following this series of flag
+            pipe symbol ("<emphasis>|</emphasis>"). Following this series of flag
             aliases, if the option requires a parameter, is an equals symbol
-            ("<code>=</code>") with a letter that stands for the
+            ("<emphasis>=</emphasis>") with a letter that stands for the
             <emphasis>type</emphasis> of the parameter:
         </para>
         <itemizedlist>
             <listitem>
                 <para>
-                    "<code>=s</code>" for a string parameter
+                    "<emphasis>=s</emphasis>" for a string parameter
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    "<code>=w</code>" for a word parameter
+                    "<emphasis>=w</emphasis>" for a word parameter
                     (a string containing no whitespace)
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    "<code>=i</code>" for an integer parameter
+                    "<emphasis>=i</emphasis>" for an integer parameter
                 </para>
             </listitem>
         </itemizedlist>
         <para>
-            If the parameter is optional, use a dash ("<code>-</code>")
+            If the parameter is optional, use a dash ("<emphasis>-</emphasis>")
             instead of the equals symbol.
         </para>
         <para>

@@ -1,47 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16470 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.config.adapters.ini">
     <title>Zend_Config_Ini</title>
 
     <para>
         <classname>Zend_Config_Ini</classname> permet aux développeurs de stocker des données de
-        configuration dans le format familier d'un fichier INI et de les lire dans l'application en
-        employant une syntaxe de propriétés d'objet imbriquées. Le format INI est spécialisé pour
-        fournir à la fois la capacité d'avoir une hiérarchie des données de configuration et
-        permettre l'héritage entre les sections de données de configuration. La hiérarchie des
-        données de configuration est supportée grâce au fractionnement des clés à l'aide de points
-        (<code>.</code>). Une section peut être étendue ou héritée d'une autre section en suivant
-        le nom de section avec le caractère de deux points (<code>:</code>) et le nom de la section
-        de laquelle des données doivent être héritées.
+        configuration dans le format familier d'un fichier <acronym>INI</acronym> et de les lire
+        dans l'application en employant une syntaxe de propriétés d'objet imbriquées. Le format
+        <acronym>INI</acronym> est spécialisé pour fournir à la fois la capacité d'avoir une
+        hiérarchie des données de configuration et permettre l'héritage entre les sections de
+        données de configuration. La hiérarchie des données de configuration est supportée grâce
+        au fractionnement des clés à l'aide de points (<emphasis>.</emphasis>). Une section peut
+        être étendue ou héritée d'une autre section en suivant le nom de section avec le caractère
+        de deux points (<emphasis>:</emphasis>) et le nom de la section de laquelle des données
+        doivent être héritées.
     </para>
 
     <note>
         <title>Analyse d'un fichier INI</title>
         <para>
             <classname>Zend_Config_Ini</classname> utilise la fonction
-            <ulink url="http://fr.php.net/parse_ini_file"><code>parse_ini_file()</code></ulink> de
-            PHP. Veuillez prendre connaissance de la documentation pour appréhender ses
-            comportements spécifiques, qui se propagent à <classname>Zend_Config_Ini</classname>,
-            tel que la façon dont les valeurs spéciales&#160;: <code>true</code>,
-            <code>false</code>, <code>yes</code>, <code>no</code> et <code>null</code> sont
-            manipulées.
+            <ulink
+                url="http://fr.php.net/parse_ini_file"><methodname>parse_ini_file()</methodname></ulink>
+            de <acronym>PHP</acronym>. Veuillez prendre connaissance de la documentation pour
+            appréhender ses comportements spécifiques, qui se propagent à
+            <classname>Zend_Config_Ini</classname>, tel que la façon dont les valeurs
+            spéciales&#160;: <constant>TRUE</constant>, <constant>FALSE</constant>,
+            "yes", "no" et <constant>NULL</constant> sont manipulées.
         </para>
     </note>
 
     <note>
         <title>Séparateur de clé</title>
         <para>
-            Par défaut, le séparateur de clé est le caractère point (.), cependant cela peut
-            être changé en changeant la clé de <code>$options</code> en construisant l'objet
+            Par défaut, le séparateur de clé est le caractère point (<emphasis>.</emphasis>),
+            cependant cela peut être changé en changeant la clé <emphasis>nestSeparator</emphasis>
+            de <varname>$options</varname>
+            en construisant l'objet
             <classname>Zend_Config_Ini</classname>. Par exemple&#160;:
-            <programlisting language="php"><![CDATA[
+        </para>
+
+        <programlisting language="php"><![CDATA[
 $options['nestSeparator'] = ':';
 $options = new Zend_Config_Ini('/chemin/vers/config.ini',
                                'test',
                                $options);
 ]]></programlisting>
-        </para>
     </note>
 
     <example id="zend.config.adapters.ini.example.using">
@@ -49,7 +54,8 @@ $options = new Zend_Config_Ini('/chemin/vers/config.ini',
 
         <para>
             Cet exemple illustre une utilisation de base de <classname>Zend_Config_Ini</classname>
-            pour le chargement des données de configuration à partir d'un fichier INI. Dans cet
+            pour le chargement des données de configuration à partir d'un fichier
+            <acronym>INI</acronym>. Dans cet
             exemple il y a des données de configuration pour un environnement de production et pour
             un environnement de test. Puisque les données de configuration de l'environnement de
             test sont très semblables à celles de la production, la section de test hérite de la
@@ -80,8 +86,8 @@ database.params.password = devsecret
 
         <para>
             Ensuite, supposons que le développeur ait besoin des données de configuration de
-            test issues du fichier INI. Il est facile de charger ces données en indiquant le
-            fichier INI et la section de test&#160;:
+            test issues du fichier <acronym>INI</acronym>. Il est facile de charger ces données
+            en indiquant le fichier <acronym>INI</acronym> et la section de test&#160;:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -105,36 +111,37 @@ echo $config->database->params->dbname; // affiche "dbname"
                 </thead>
                 <tbody>
                     <row>
-                        <entry><code>$filename</code></entry>
-                        <entry>Le fichier INI à charger.</entry>
+                        <entry><varname>$filename</varname></entry>
+                        <entry>Le fichier <acronym>INI</acronym> à charger.</entry>
                     </row>
                     <row>
-                        <entry><code>$section</code></entry>
+                        <entry><varname>$section</varname></entry>
                         <entry>
                             La [section] dans le fichier ini qui doit être chargé.
-                            L'affectation de <code>null</code> à ce paramètre chargera toutes les
-                            sections. Alternativement, un tableau de noms de section peut être
-                            fourni pour charger des sections multiples.
+                            L'affectation de <constant>NULL</constant> à ce paramètre chargera
+                            toutes les sections. Alternativement, un tableau de noms de section
+                            peut être fourni pour charger des sections multiples.
                         </entry>
                     </row>
                     <row>
-                        <entry><code>$options = false</code></entry>
+                        <entry><varname>$options = false</varname></entry>
                         <entry>
                             Tableau d'options. Les clés suivantes sont supportées&#160;:
                             <itemizedlist>
                                 <listitem>
                                     <para><emphasis>allowModifications</emphasis> : Mettre à
-                                    <code>true</code> pour permettre la modification du fichier
-                                    chargé. Par défaut à <code>false</code>.
-                                </para>
-                            </listitem>
-                            <listitem>
-                                <para>
-                                    <emphasis>nestSeparator</emphasis> : Caractère à utiliser
-                                    en tant que séparateur d'imbrication. Par défaut ".".
-                                </para>
-                            </listitem>
-                        </itemizedlist></entry>
+                                    <constant>TRUE</constant> pour permettre la modification du
+                                    fichier chargé. Par défaut à <constant>FALSE</constant>.
+                                    </para>
+                                </listitem>
+                                <listitem>
+                                    <para>
+                                        <emphasis>nestSeparator</emphasis> : Caractère à utiliser
+                                        en tant que séparateur d'imbrication. Par défaut ".".
+                                    </para>
+                                </listitem>
+                            </itemizedlist>
+                        </entry>
                     </row>
                 </tbody>
             </tgroup>

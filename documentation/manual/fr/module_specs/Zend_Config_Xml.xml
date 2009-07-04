@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 15998 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.config.adapters.xml">
     <title>Zend_Config_Xml</title>
 
     <para>
         <classname>Zend_Config_Xml</classname> permet aux développeurs de stocker des données de
-        configuration dans un format simple XML et de les lire grâce à une syntaxe de propriétés
-        d'objets imbriquées. Le nom de l'élément racine du fichier XML n'a pas d'importance et peut
-        être nommé arbitrairement. Le premier niveau des éléments XML correspond aux sections des
-        données de configuration. Le format XML supporte l'organisation hiérarchique par
-        l'emboîtement des éléments XML à l'intérieur des éléments de niveau section. Le contenu
-        d'un élément XML de niveau le plus bas correspond aux données de configuration. L'héritage
-        des sections est supportée par un attribut spécial de XML nommé <code>extends</code>, et la
+        configuration dans un format simple <acronym>XML</acronym> et de les lire grâce à une
+        syntaxe de propriétés d'objets imbriquées. Le nom de l'élément racine du fichier
+        <acronym>XML</acronym> n'a pas d'importance et peut être nommé arbitrairement. Le premier
+        niveau des éléments <acronym>XML</acronym> correspond aux sections des
+        données de configuration. Le format <acronym>XML</acronym> supporte l'organisation
+        hiérarchique par l'emboîtement des éléments <acronym>XML</acronym> à l'intérieur des
+        éléments de niveau section. Le contenu d'un élément <acronym>XML</acronym> de niveau le
+        plus bas correspond aux données de configuration. L'héritage des sections est supportée
+        par un attribut spécial de <acronym>XML</acronym> nommé <emphasis>extends</emphasis>, et la
         valeur de cet attribut correspond à la section de laquelle des données doivent être
         héritées.
     </para>
@@ -21,7 +23,7 @@
         <title>Type retourné</title>
         <para>
             Les données de configuration lues grâce à <classname>Zend_Config_Xml</classname> sont
-            toujours des chaînes de caractères (<code>string</code>). La conversion des données à
+            toujours des chaînes de caractères. La conversion des données à
             partir des chaînes de caractères vers d'autres types de données est laissée aux
             développeurs en fonction de leurs besoins.
         </para>
@@ -32,7 +34,8 @@
 
         <para>
             Cet exemple illustre une utilisation de base de <classname>Zend_Config_Xml</classname>
-            pour le chargement des données de configuration à partir d'un fichier XML. Dans cet
+            pour le chargement des données de configuration à partir d'un fichier
+            <acronym>XML</acronym>. Dans cet
             exemple il y a des données de configuration pour un environnement de production et pour
             un environnement de test. Puisque les données de configuration de l'environnement de
             test sont très semblables à celles de la production, la section de test hérite de la
@@ -72,8 +75,8 @@
 
         <para>
             Ensuite, supposons que le développeur a besoin des données de configuration de
-            test issues du fichier XML. Il est facile de charger ces données en indiquant le
-            fichier XML et la section de test&#160;:
+            test issues du fichier <acronym>XML</acronym>. Il est facile de charger ces données
+            en indiquant le fichier <acronym>XML</acronym> et la section de test&#160;:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -90,10 +93,10 @@ echo $config->database->params->dbname; // affiche "dbname"
         <para>
             <classname>Zend_Config_Xml</classname> supporte aussi 2 autres manières de définir des
             noeuds dans la configuration. Celles-ci utilisent les attributs de balises. Puisque les
-            attributs <code>extends</code> et <code>value</code> sont des mots réservés (ce dernier
-            par la seconde manière d'utiliser les attributs), ils ne doivent pas être utilisés. La
-            première manière d'utiliser les attributs est de les ajouter au noeud parent, ils
-            seront ainsi interprétés en tant qu'enfant de ce noeud&#160;:
+            attributs <emphasis>extends</emphasis> et <emphasis>value</emphasis> sont des mots
+            réservés (ce dernier par la seconde manière d'utiliser les attributs), ils ne doivent
+            pas être utilisés. La première manière d'utiliser les attributs est de les ajouter
+            au noeud parent, ils seront ainsi interprétés en tant qu'enfant de ce noeud&#160;:
         </para>
 
         <programlisting language="xml"><![CDATA[
@@ -121,7 +124,7 @@ echo $config->database->params->dbname; // affiche "dbname"
             La seconde manière ne permet pas vraiment de raccourcir la configuration, mais la
             rend plus facile à maintenir puisque vous n'avez pas à écrire les noms de balises deux
             fois. Vous créez simplement une balise vide ayant sa valeur dans
-            <code>value</code>&#160;:
+            <emphasis>value</emphasis>&#160;:
         </para>
 
         <programlisting language="xml"><![CDATA[
@@ -156,9 +159,9 @@ echo $config->database->params->dbname; // affiche "dbname"
         <title>Chaînes de caractères XML</title>
         <para>
             <classname>Zend_Config_Xml</classname> est capable de charger une chaîne de caractères
-            XML directement, par exemple si elle est issue d'une base de données. La chaîne est
-            fournie en tant que premier paramètre du constructeur et doit commencer par les
-            caractères <code>'&lt;?xml'</code>&#160;:
+            <acronym>XML</acronym> directement, par exemple si elle est issue d'une base de données.
+            La chaîne est fournie en tant que premier paramètre du constructeur et doit commencer
+            par les caractères <emphasis>'&lt;?xml'</emphasis>&#160;:
         </para>
         <programlisting language="xml"><![CDATA[
 $string = <<<EOT

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16393 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.config.writer.introduction">
     <title>Zend_Config_Writer</title>
@@ -10,10 +10,12 @@
         fonctionne avec des adaptateurs détachés du système et est donc très simple à utiliser. Par
         défaut <classname>Zend_Config_Writer</classname> embarque trois adaptateurs, qui
         fonctionnent tous de la même façon. Vous instanciez un rédacteur ("writer") avec des
-        options spécifiques, qui peuvent être <code>filename</code> et <code>config</code>. Ensuite
-        vous pouvez appeler la méthode <code>write()</code> du rédacteur et le fichier de
-        configuration est créé. Vous pouvez aussi fournir <code>$filename</code> et
-        <code>$config</code> directement à la méthode <code>write()</code>. Actuellement les
+        options spécifiques, qui peuvent être <emphasis>filename</emphasis> et
+        <emphasis>config</emphasis>. Ensuite
+        vous pouvez appeler la méthode <methodname>write()</methodname> du rédacteur et le fichier
+        de configuration est créé. Vous pouvez aussi fournir <varname>$filename</varname> et
+        <varname>$config</varname> directement à la méthode <methodname>write()</methodname>.
+        Actuellement les
         rédacteurs suivants sont embarqués avec <classname>Zend_Config_Writer</classname>&#160;:
     </para>
 
@@ -31,8 +33,8 @@
 
     <para>
         Une exception subsiste, <classname>Zend_Config_Writer_Ini</classname> qui a un
-        paramètre optionnel additionnel <code>nestSeparator</code>, définissant le caractère
-        séparant les profondeurs d'imbrication. Par défaut il s'agit du point ("<code>.</code>"),
+        paramètre optionnel additionnel <emphasis>nestSeparator</emphasis>, définissant le caractère
+        séparant les profondeurs d'imbrication. Par défaut il s'agit du point,
         comme <classname>Zend_Config_Ini</classname> l'accepte par défaut.
     </para>
 
@@ -40,10 +42,10 @@
         Lors de la modification ou la création d'objet <classname>Zend_Config</classname>, il
         y a quelques informations à garder en mémoire. Pour créer ou modifier une valeur, vous
         appelez simplement le réglage d'un paramètre d'un objet <classname>Zend_Config</classname>
-        grâce à l'accesseur de paramètre ("<code>-&gt;</code>"). Pour créer une section à la racine
-        ou pour créer une branche, vous avez juste à créer un nouveau tableau
-        (<code>$config-&gt;branch = array();</code>). Pour définir quelle section en étend une
-        autre, vous devez appeler la méthode <code>setExtend()</code> sur l'objet
+        grâce à l'accesseur de paramètre ("<emphasis>-&gt;</emphasis>"). Pour créer une section à
+        la racine ou pour créer une branche, vous avez juste à créer un nouveau tableau
+        (<command>$config-&gt;branch = array();</command>). Pour définir quelle section en étend une
+        autre, vous devez appeler la méthode <methodname>setExtend()</methodname> sur l'objet
         <classname>Zend_Config</classname> racine.
     </para>
 
@@ -89,8 +91,8 @@ $writer->write('config.xml', $config);
 ]]></programlisting>
 
         <para>
-            Ceci créera un fichier de configuration XML avec les sections "production" et
-            "staging", où "staging" étend "production".
+            Ceci créera un fichier de configuration <acronym>XML</acronym> avec les sections 
+            "production" et "staging", où "staging" étend "production".
         </para>
     </example>
 
@@ -126,7 +128,7 @@ $writer->write();
             Lors du chargement d'un fichier de configuration existant afin de le modifier, il
             est très important de charger toutes les sections et d'éviter les sections étendues,
             évitant ainsi toute fusion de valeurs. Ceci est réalisé en fournissant l'option
-            <code>skipExtends</code> au constructeur.
+            <emphasis>skipExtends</emphasis> au constructeur.
         </para>
     </note>
 </sect1>

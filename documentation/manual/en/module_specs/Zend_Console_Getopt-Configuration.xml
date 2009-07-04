@@ -173,7 +173,7 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
                     signify the end of flags. Command-line arguments following
                     the double-dash signifier are not interpreted as options,
                     even if the arguments start with a dash. This configuration
-                    option is true by default.
+                    option is <constant>TRUE</constant> by default.
                 </para>
             </listitem>
             <listitem>
@@ -182,7 +182,7 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
                     if true, makes flags aliases of each other if they differ
                     only in their case. That is, <command>-a</command> and
                     <command>-A</command> will be considered to be synonymous flags.
-                    This configuration option is false by default.
+                    This configuration option is <constant>FALSE</constant> by default.
                 </para>
             </listitem>
             <listitem>

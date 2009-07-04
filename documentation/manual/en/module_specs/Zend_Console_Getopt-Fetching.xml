@@ -26,7 +26,7 @@
             You should catch this exception in your application code.
             You can use the <methodname>parse()</methodname> method to force the object
             to parse the arguments. This is useful because you can invoke
-            <methodname>parse()</methodname> in a <code>try</code> block. If it passes,
+            <methodname>parse()</methodname> in a <emphasis>try</emphasis> block. If it passes,
             you can be sure that the parsing won't throw an exception again.
             The exception thrown has a custom method <methodname>getUsageMessage()</methodname>,
             which returns as a string the formatted set of usage messages for

@@ -4,7 +4,7 @@
     <title>Zend_Dojo_Data: dojo.data Envelopes</title>
 
     <para>
-        Dojo provides data abstraction for data-enabled widgets via its
+        Dojo provides data abstractions for data-enabled widgets via its
         dojo.data component. This component provides the ability to attach a
         data store, provide some metadata regarding the identity field and
         optionally a label field, and an API for querying, sorting, and

@@ -60,8 +60,9 @@
 
         <note>
             <para>
-                If you perform a <methodname>_forward()</methodname>, redirect, or
-                <code>render</code> manually, autorendering will not occur, as
+                If you perform a <methodname>_forward()</methodname>,
+                <methodname>redirect()</methodname>, or
+                <methodname>render()</methodname> manually, autorendering will not occur, as
                 by performing any of these actions you are telling the
                 <emphasis>ViewRenderer</emphasis> that you are determining your own
                 output.
@@ -71,7 +72,7 @@
         <note>
             <para>
                 The <emphasis>ViewRenderer</emphasis> is enabled by default. You may
-                disable it via the front controller <code>noViewRenderer</code>
+                disable it via the front controller <emphasis>noViewRenderer</emphasis>
                 param (<methodname>$front->setParam('noViewRenderer', true)</methodname>) or
                 removing the helper from the helper broker stack
                 (<methodname>Zend_Controller_Action_HelperBroker::removeHelper('viewRenderer')</methodname>).
@@ -192,7 +193,8 @@ $this->foo(); // call Foo_View_Helper_Foo::foo()
                 <para>
                     <methodname>setNeverRender($flag = true)</methodname> can be used to
                     disable or enable autorendering globally, i.e., for all
-                    controllers. If set to true, <methodname>postDispatch()</methodname>
+                    controllers. If set to <constant>TRUE</constant>,
+                    <methodname>postDispatch()</methodname>
                     will not automatically call <methodname>render()</methodname> in the
                     current controller. <methodname>getNeverRender()</methodname> retrieves
                     the current value.
@@ -202,7 +204,7 @@ $this->foo(); // call Foo_View_Helper_Foo::foo()
             <listitem>
                 <para>
                     <methodname>setNoRender($flag = true)</methodname> can be used to
-                    disable or enable autorendering. If set to true,
+                    disable or enable autorendering. If set to <constant>TRUE</constant>,
                     <methodname>postDispatch()</methodname> will not automatically call
                     <methodname>render()</methodname> in the current controller. This
                     setting is reset each time <methodname>preDispatch()</methodname> is
@@ -238,7 +240,7 @@ $this->foo(); // call Foo_View_Helper_Foo::foo()
                     specify the action script to render. <varname>$name</varname>
                     should be the name of the script minus the file suffix (and
                     without the controller subdirectory, unless
-                    <code>noController</code> has been turned on). If not
+                    <emphasis>noController</emphasis> has been turned on). If not
                     specified, it looks for a view script named after the action
                     in the request object. <methodname>getScriptAction()</methodname>
                     retrieves the current value.
@@ -261,9 +263,9 @@ $this->foo(); // call Foo_View_Helper_Foo::foo()
                     to specify the base view path, class prefix for helper and
                     filter scripts, and <emphasis>ViewRenderer</emphasis> options. You
                     may pass any of the following flags:
-                    <code>neverRender</code>, <code>noRender</code>,
-                    <code>noController</code>, <code>scriptAction</code>, and
-                    <code>responseSegment</code>.
+                    <emphasis>neverRender</emphasis>, <emphasis>noRender</emphasis>,
+                    <emphasis>noController</emphasis>, <emphasis>scriptAction</emphasis>, and
+                    <emphasis>responseSegment</emphasis>.
                 </para>
             </listitem>
 
@@ -271,8 +273,8 @@ $this->foo(); // call Foo_View_Helper_Foo::foo()
                 <para>
                     <methodname>setRender($action = null, $name = null, $noController
                         = false)</methodname> allows you to set any of
-                    <code>scriptAction</code>, <code>responseSegment</code>, and
-                    <code>noController</code> in one pass. <methodname>direct()</methodname>
+                    <emphasis>scriptAction</emphasis>, <emphasis>responseSegment</emphasis>, and
+                    <emphasis>noController</emphasis> in one pass. <methodname>direct()</methodname>
                     is an alias to this method, allowing you to call this method
                     easily from your controller:
                 </para>
@@ -361,7 +363,7 @@ $viewRenderer =
                     <methodname>setViewBasePathSpec($spec)</methodname> allows you to change
                     the path specification used to determine the base path to
                     add to the view object. The default specification is
-                    <code>:moduleDir/views</code>. You may retrieve the current
+                    <filename>:moduleDir/views</filename>. You may retrieve the current
                     specification at any time using
                     <methodname>getViewBasePathSpec()</methodname>.
                 </para>
@@ -373,7 +375,7 @@ $viewRenderer =
                     change the path specification used to determine the path to
                     an individual view script (minus the base view script path).
                     The default specification is
-                    <code>:controller/:action.:suffix</code>. You may retrieve
+                    <filename>:controller/:action.:suffix</filename>. You may retrieve
                     the current specification at any time using
                     <methodname>getViewScriptPathSpec()</methodname>.
                 </para>
@@ -384,9 +386,9 @@ $viewRenderer =
                     <methodname>setViewScriptPathNoControllerSpec($spec)</methodname> allows
                     you to change the path specification used to determine the
                     path to an individual view script when
-                    <code>noController</code> is in effect (minus the base view
+                    <emphasis>noController</emphasis> is in effect (minus the base view
                     script path). The default specification is
-                    <code>:action.:suffix</code>. You may retrieve the current
+                    <filename>:action.:suffix</filename>. You may retrieve the current
                     specification at any time using
                     <methodname>getViewScriptPathNoControllerSpec()</methodname>.
                 </para>
@@ -422,7 +424,7 @@ $viewRenderer =
                     <methodname>setInflector($inflector, $reference)</methodname> allows you
                     to set a custom inflector for use with the
                     <emphasis>ViewRenderer</emphasis>. If <varname>$reference</varname> is
-                    true, it will set the suffix and module directory as static
+                    <constant>TRUE</constant>, it will set the suffix and module directory as static
                     references to <emphasis>ViewRenderer</emphasis> properties, as well
                     as the target.
             </para></listitem>
@@ -454,11 +456,12 @@ $viewRenderer =
 
                 <listitem>
                     <para>
-                        <emphasis>:controller</emphasis>: MixedCase and camelCasedWords are separated
-                        by dashes; underscores are converted to directory
+                        <emphasis>:controller</emphasis>: MixedCase and camelCasedWords are
+                        separated by dashes; underscores are converted to directory
                         separators, and the entire string cast to lower case.
-                        Examples: "FooBar" becomes "foo-bar"; "FooBar_Admin"
-                        becomes "foo-bar/admin".
+                        Examples: "<classname>FooBar</classname>" becomes "foo-bar";
+                        "<classname>FooBar_Admin</classname>" becomes
+                        "<filename>foo-bar/admin</filename>".
                     </para>
 
                     <para>
@@ -489,8 +492,8 @@ $viewRenderer =
         </note>
 
         <para>
-            The final items in the <emphasis>ViewRenderer</emphasis> API are the methods
-            for actually determining view script paths and rendering views.
+            The final items in the <emphasis>ViewRenderer</emphasis> <acronym>API</acronym> are the
+            methods for actually determining view script paths and rendering views.
             These include:
         </para>
 
@@ -508,14 +511,14 @@ $viewRenderer =
 
                 <note><para>
                     Once the view has been rendered to the response object, it
-                    sets the <code>noRender</code> to prevent accidentally
+                    sets the <emphasis>noRender</emphasis> to prevent accidentally
                     rendering the same view script multiple times.
                 </para></note>
 
                 <note>
                     <para>
                         By default,
-                        <classname>Zend_Controller_Action::renderScript()</classname>
+                        <methodname>Zend_Controller_Action::renderScript()</methodname>
                         proxies to the <emphasis>ViewRenderer</emphasis>'s
                         <methodname>renderScript()</methodname> method.
                     </para>
@@ -535,9 +538,9 @@ $viewRenderer =
 
                 <para>
                     <methodname>getViewScript()</methodname> will use either the
-                    <code>viewScriptPathSpec</code> or
-                    <code>viewScriptPathNoControllerSpec</code> based on the
-                    setting of the <code>noController</code> flag.
+                    <emphasis>viewScriptPathSpec</emphasis> or
+                    <emphasis>viewScriptPathNoControllerSpec</emphasis> based on the
+                    setting of the <emphasis>noController</emphasis> flag.
                 </para>
 
                 <para>
@@ -545,13 +548,13 @@ $viewRenderer =
                     names will be replaced with dashes ('-'). Thus, if you have
                     the controller name 'foo.bar' and the action 'baz:bat',
                     using the default path specification will result in a view
-                    script path of 'foo-bar/baz-bat.phtml'.
+                    script path of '<filename>foo-bar/baz-bat.phtml</filename>'.
                 </para>
 
                 <note>
                     <para>
                         By default,
-                        <classname>Zend_Controller_Action::getViewScript()</classname>
+                        <methodname>Zend_Controller_Action::getViewScript()</methodname>
                         proxies to the <emphasis>ViewRenderer</emphasis>'s
                         <methodname>getViewScript()</methodname> method.
                     </para>
@@ -572,7 +575,7 @@ $viewRenderer =
 
                 <note>
                     <para>
-                        Be aware of the side-effects of using render(): the
+                        Be aware of the side-effects of using <methodname>render()</methodname>: the
                         values you pass for the response segment name and for
                         the noController flag will persist in the object.
                         Additionally, noRender will be set after rendering is
@@ -583,7 +586,7 @@ $viewRenderer =
                 <note>
                     <para>
                         By default,
-                        <classname>Zend_Controller_Action::render()</classname> proxies to
+                        <methodname>Zend_Controller_Action::render()</methodname> proxies to
                         the <emphasis>ViewRenderer</emphasis>'s <methodname>render()</methodname>
                         method.
                     </para>
@@ -658,14 +661,14 @@ class Foo_BarController extends Zend_Controller_Action
             <para>
                 If your controller or action name is composed of several
                 words, the dispatcher requires that these are separated on
-                the URL by specific path and word delimiter characters. The
+                the <acronym>URL</acronym> by specific path and word delimiter characters. The
                 <emphasis>ViewRenderer</emphasis> replaces any path delimiter found
                 in the controller name with an actual path delimiter ('/'),
                 and any word delimiter found with a dash ('-') when creating
                 paths. Thus, a call to the action
                 <filename>/foo.bar/baz.bat</filename> would dispatch to
                 <methodname>FooBarController::bazBatAction()</methodname> in
-                FooBarController.php, which would render
+                <filename>FooBarController.php</filename>, which would render
                 <filename>foo-bar/baz-bat.phtml</filename>; a call to the action
                 <filename>/bar_baz/baz-bat</filename> would dispatch to
                 <methodname>Bar_BazController::bazBatAction()</methodname> in
@@ -677,7 +680,7 @@ class Foo_BarController extends Zend_Controller_Action
                 Note that the in the second example, the module is still the
                 default module, but that, because of the existence of a path
                 separator, the controller receives the name
-                <code>Bar_BazController</code>, in
+                <classname>Bar_BazController</classname>, in
                 <filename>Bar/BazController.php</filename>. The ViewRenderer mimics
                 the controller directory hierarchy.
             </para>
@@ -689,7 +692,8 @@ class Foo_BarController extends Zend_Controller_Action
             <para>
                 For some actions or controllers, you may want to turn off the
                 autorendering -- for instance, if you're wanting to emit a
-                different type of output (XML, JSON, etc), or if you simply want
+                different type of output (<acronym>XML</acronym>, <acronym>JSON</acronym>, etc),
+                or if you simply want
                 to emit nothing. You have two options: turn off all cases of
                 autorendering (<methodname>setNeverRender()</methodname>), or simply turn it
                 off for the current action (<methodname>setNoRender()</methodname>).
@@ -824,11 +828,12 @@ class Foo_BarController extends Zend_Controller_Action
 
             <para>
                 For purposes of this example, let's assume that the base path to
-                views should be '/opt/vendor/templates', and that you wish for
+                views should be '<filename>/opt/vendor/templates</filename>', and that you wish for
                 view scripts to be referenced by
-                ':moduleDir/:controller/:action.:suffix'; if the noController
+                '<filename>:moduleDir/:controller/:action.:suffix</filename>'; if the
+                <emphasis>noController</emphasis>
                 flag has been set, you want to render out of the top level
-                instead of in a subdirectory (':action.:suffix'). Finally, you
+                instead of in a subdirectory ('<filename>:action.:suffix</filename>'). Finally, you
                 want to use 'tpl' as the view script filename suffix.
             </para>
 

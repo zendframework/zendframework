@@ -7,7 +7,7 @@
         The CLI, or command line tool (internally known as the console tool), is
         currently the primary interface for dispatching <code>Zend_Tool</code>
         requests. With the CLI tool, developers can issue tooling requests
-        inside a the "command line windows", also commonly known as a "terminal"
+        inside the "command line windows", also commonly known as a "terminal"
         window. This environment is predominant in the *nix environment, but
         also has a common implementation in windows with the
         <code>cmd.exe</code>, console2 and also with the Cygwin project.
@@ -18,7 +18,7 @@
 
         <para>
             To issue tooling requests via the command line client, you first
-            need to setup the client so that your system can handle the "zf"
+            need to set up the client so that your system can handle the "zf"
             command. The command line client, for all intents and purposes, is
             the <code>.sh</code> or <code>.bat</code> file that is provided with
             your Zend Framework distribution. In trunk, it can be found here:
@@ -30,7 +30,7 @@
             directory: a <code>zf.php</code>, <code>zf.sh</code>, and
             <code>zf.bat</code>. The <code>zf.sh</code> and the
             <code>zf.bat</code> are the operating system specific client
-            wrappers: <code>zf.sh</code> for the *nix environment, and zf.bat
+            wrappers: <code>zf.sh</code> for the *nix environment, and <code>zf.bat</code>
             for the Win32 environment. These client wrappers are responsible
             for finding the proper <code>php.exe</code>, finding the
             <code>zf.php</code>, and passing on the client request. The

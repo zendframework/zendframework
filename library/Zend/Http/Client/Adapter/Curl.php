@@ -120,8 +120,24 @@ class Zend_Http_Client_Adapter_Curl implements Zend_Http_Client_Adapter_Interfac
             throw new Zend_Http_Client_Adapter_Exception('Http Adapter configuration expects an array, ' . gettype($config) . ' recieved.');
         }
 
+        if(isset($config['proxy_user']) && isset($config['proxy_pass'])) {
+            $this->setCurlOption(CURLOPT_PROXYUSERPWD, $config['proxy_user'].":".$config['proxy_pass']);
+            unset($config['proxy_user'], $config['proxy_pass']);
+        }
+
         foreach ($config as $k => $v) {
-            $this->_config[strtolower($k)] = $v;
+            $option = strtolower($k);
+            switch($option) {
+                case 'proxy_host':
+                    $this->setCurlOption(CURLOPT_PROXY, $v);
+                    break;
+                case 'proxy_port':
+                    $this->setCurlOption(CURLOPT_PROXYPORT, $v);
+                    break;
+                default:
+                    $this->_config[$option] = $v;
+                    break;
+            }
         }
 
         return $this;

@@ -185,6 +185,29 @@ class Zend_Http_Client_CurlTest extends Zend_Http_Client_SocketTest
         );
     }
 
+    public function testWorkWithProxyConfiguration()
+    {
+        $adapter = new Zend_Http_Client_Adapter_Curl();
+        $adapter->setConfig(array(
+            'proxy_host' => 'localhost',
+            'proxy_port' => 80,
+            'proxy_user' => 'foo',
+            'proxy_pass' => 'baz',
+        ));
+
+        $expected = array(
+            'curloptions' => array(
+                CURLOPT_PROXYUSERPWD => 'foo:baz',
+                CURLOPT_PROXY => 'localhost',
+                CURLOPT_PROXYPORT => 80,
+            ),
+        );
+
+        $this->assertEquals(
+            $expected, $this->readAttribute($adapter, '_config')
+        );
+    }
+
     /**
      * @group ZF-7040
      */

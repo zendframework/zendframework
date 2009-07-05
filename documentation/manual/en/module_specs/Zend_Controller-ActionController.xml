@@ -44,8 +44,8 @@ class FooController extends Zend_Controller_Action
 
         <para>
             The above <emphasis>FooController</emphasis> class (controller
-            <code>foo</code>) defines two actions, <code>bar</code> and
-            <code>baz</code>.
+            <emphasis>foo</emphasis>) defines two actions, <emphasis>bar</emphasis> and
+            <emphasis>baz</emphasis>.
         </para>
 
         <para>
@@ -314,7 +314,7 @@ applicationOrModule/
             <para>
                 In other words, view scripts are assumed to be in the
                 <filename>views/scripts/</filename> subdirectory, and the
-                <code>views</code> subdirectory is assumed to contain sibling
+                <filename>views/</filename> subdirectory is assumed to contain sibling
                 functionality (helpers, filters). When determining the view
                 script name and path, the <filename>views/scripts/</filename> directory
                 will be used as the base path, with directories named after the
@@ -341,10 +341,10 @@ string render(string $action = null,
                 <filename>[controller]/[action].phtml</filename> (where
                 <filename>.phtml</filename> is the value of the <varname>$viewSuffix</varname>
                 property). Passing a value for <varname>$action</varname> will render
-                that template in the <code>[controller]</code> subdirectory. To
-                override using the <code>[controller]</code> subdirectory, pass
-                a true value for <varname>$noController</varname>. Finally, templates
-                are rendered into the response object; if you wish to render to
+                that template in the <filename>[controller]/</filename> subdirectory. To
+                override using the <filename>[controller]/</filename> subdirectory, pass
+                a <constant>TRUE</constant> value for <varname>$noController</varname>. Finally,
+                templates are rendered into the response object; if you wish to render to
                 a specific <link
                     linkend="zend.controller.response.namedsegments">named
                     segment</link> in the response object, pass a value to

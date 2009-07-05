@@ -217,8 +217,8 @@ class TestController extends Zend_Controller_Action
                 dojoType, store, autoComplete, and hasDownArrow. The dojoType is
                 used to indicate that we are creating a ComboBox, and we will
                 link it to a data store (key 'store') of 'testStore' -- more on
-                that later. Specifying 'autoComplete' as false tells Dojo not to
-                automatically select the first match, but instead show a list of
+                that later. Specifying 'autoComplete' as <constant>FALSE</constant> tells
+                Dojo not to automatically select the first match, but instead show a list of
                 matches. Finally, 'hasDownArrow' creates a down arrow similar to
                 a select box so we can show and hide the matches.
             </para>

@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16003 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.actionhelpers.actionstack">
     <title>ActionStack</title>
 
     <para>
-        L'aide <code>ActionStack</code> vous permet d'empiler les requêtes dans le plugin de
+        L'aide <emphasis>ActionStack</emphasis> vous permet d'empiler les requêtes dans le plugin de
         contrôleur frontal
         <link linkend="zend.controller.plugins.standard.actionstack">ActionStack</link>, vous
         aidant effectivement à créer une liste d'actions à exécuter durant la requête. Cette aide
         vous permet d'ajouter des actions, soit en spécifiant de nouveaux objets de requêtes, soit
-        en paramétrant action/controller/module.
+        en paramétrant action&#160;/&#160;controller&#160;/&#160;module.
     </para>
 
     <note>
         <title>Invoquer l'aide ActionStack initialise le plugin ActionStack</title>
         <para>
-            L'appel de l'aide <code>ActionStack</code> enregistre implicitement le plugin
-            <code>ActionStack</code> - ce qui veut dire que vous n'avez pas besoin d'enregistrer
-            explicitement le plugin <code>ActionStack</code> pour utiliser cette
-            fonctionnalité.
+            L'appel de l'aide <emphasis>ActionStack</emphasis> enregistre implicitement le plugin
+            <emphasis>ActionStack</emphasis> - ce qui veut dire que vous n'avez pas besoin
+            d'enregistrer explicitement le plugin <emphasis>ActionStack</emphasis> pour utiliser
+            cette fonctionnalité.
         </para>
     </note>
 
@@ -29,7 +29,7 @@
         <para>
             Souvent, il est plus simple de spécifier l'action, le contrôleur et le module (et
             optionnellement des paramètres de requêtes), comme vous le feriez en appelant
-            <classname>Zend_Controller_Action::_forward()</classname>&#160;:
+            <methodname>Zend_Controller_Action::_forward()</methodname>&#160;:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -58,8 +58,8 @@ class FooController extends Zend_Controller_Action
         <title>Ajouter une tâche en utilisant un objet de requête</title>
 
         <para>
-            Parfois la nature OO d'un objet de requête a plus de sens&#160;; vous pouvez alors
-            fournir l'objet à l'aide <code>ActionStack</code>.
+            Parfois la nature <acronym>OO</acronym> d'un objet de requête a plus de sens&#160;;
+            vous pouvez alors fournir l'objet à l'aide <emphasis>ActionStack</emphasis>.
         </para>
 
         <programlisting language="php"><![CDATA[

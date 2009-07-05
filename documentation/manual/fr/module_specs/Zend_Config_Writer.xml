@@ -91,7 +91,7 @@ $writer->write('config.xml', $config);
 ]]></programlisting>
 
         <para>
-            Ceci créera un fichier de configuration <acronym>XML</acronym> avec les sections 
+            Ceci créera un fichier de configuration <acronym>XML</acronym> avec les sections
             "production" et "staging", où "staging" étend "production".
         </para>
     </example>

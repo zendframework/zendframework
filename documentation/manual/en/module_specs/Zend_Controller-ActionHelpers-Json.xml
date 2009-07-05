@@ -88,7 +88,7 @@ $this->_helper->json($data, true);
         <para>
             Optionally, you can pass an array as the second parameter. This
             array may contain a variety of options, including the
-            <code>keepLayouts</code> option:
+            <emphasis>keepLayouts</emphasis> option:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -103,7 +103,7 @@ $this->_helper->json($data, array('keepLayouts' => true);
             <methodname>Zend_Json::encode()</methodname> allows the encoding of native
             <acronym>JSON</acronym> expressions using <classname>Zend_Json_Expr</classname>
             objects. This option is disabled by default. To enable this option, pass a boolean
-            <constant>TRUE</constant> value to the <code>enableJsonExprFinder</code>
+            <constant>TRUE</constant> value to the <emphasis>enableJsonExprFinder</emphasis>
             option:
         </para>
 
@@ -114,7 +114,7 @@ $this->_helper->json($data, array('enableJsonExprFinder' => true);
         <para>
             If you desire to do this, you <emphasis>must</emphasis> pass an
             array as the second argument. This also allows you to combine other
-            options, such as the <code>keepLayouts</code> option. All such
+            options, such as the <emphasis>keepLayouts</emphasis> option. All such
             options are then passed to <methodname>Zend_Json::encode()</methodname>.
         </para>
 

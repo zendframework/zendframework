@@ -23,7 +23,7 @@
             Action Helpers (like <classname>Zend_View_Helper</classname>) may be
             loaded and called on demand, or they may be instantiated at
             request time (bootstrap) or action controller creation time
-            (init()). To understand this more fully, please see the usage
+            (<methodname>init()</methodname>). To understand this more fully, please see the usage
             section below.
         </para>
     </sect2>
@@ -91,7 +91,7 @@ $this->_helper->FlashMessenger('We did something in the last request');
             You may also instantiate helpers explicitly. You may wish to do this
             if using the helper outside of an action controller, or if you wish
             to pass a helper to the helper broker for use by any action.
-            Instantiation is as per any other PHP class.
+            Instantiation is as per any other <acronym>PHP</acronym> class.
         </para>
     </sect2>
 
@@ -138,8 +138,8 @@ Zend_Controller_Action_HelperBroker::addPrefix('My_Action_Helpers');
                 <para>
                     <methodname>addPath()</methodname> takes a directory as its first
                     argument and a class prefix as the second argument
-                    (defaulting to 'Zend_Controller_Action_Helper'). This allows
-                    you to map your own class prefixes to specific directories.
+                    (defaulting to '<classname>Zend_Controller_Action_Helper</classname>').
+                    This allows you to map your own class prefixes to specific directories.
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -229,11 +229,11 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
 
         <para>
             Zend Framework includes several action helpers by default:
-            <emphasis>AutoComplete</emphasis> for automating responses for AJAX
+            <emphasis>AutoComplete</emphasis> for automating responses for <acronym>AJAX</acronym>
             autocompletion; <emphasis>ContextSwitch</emphasis> and
             <emphasis>AjaxContext</emphasis> for serving alternate response formats for
-            your actions; a <emphasis>FlashMessenger</emphasis> for handling session
-            flash messages; <emphasis>Json</emphasis> for encoding and sending JSON
+            your actions; a <emphasis>FlashMessenger</emphasis> for handling session flash
+            messages; <emphasis>Json</emphasis> for encoding and sending <acronym>JSON</acronym>
             responses; a <emphasis>Redirector</emphasis>, to provide different
             implementations for redirecting to internal and external pages from
             your application; and a <emphasis>ViewRenderer</emphasis> to automate the
@@ -314,7 +314,7 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
                     an example, if the class is named
                     <classname>Zend_Controller_Action_Helper_Redirector</classname>, it
                     will return <emphasis>Redirector</emphasis>; a class named
-                    <code>FooMessage</code> will simply return itself.
+                    <emphasis>FooMessage</emphasis> will simply return itself.
                 </para>
             </listitem>
         </itemizedlist>
@@ -325,8 +325,8 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
             method of the helper broker, in order to allow easy, one-off usage
             of the helper. As an example, the <link
                 linkend="zend.controller.actionhelpers.redirector">redirector</link>
-            defines <methodname>direct()</methodname> as an alias of <methodname>goto()</methodname>,
-            allowing use of the helper like this:
+            defines <methodname>direct()</methodname> as an alias of
+            <methodname>goto()</methodname>, allowing use of the helper like this:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -336,8 +336,8 @@ $this->_helper->redirector('item', 'view', 'blog', array('id' => 42));
 
         <para>
             Internally, the helper broker's <methodname>__call()</methodname> method looks
-            for a helper named <code>redirector</code>, then checks to see if
-            that helper has a defined <code>direct</code> class, and calls it
+            for a helper named <emphasis>redirector</emphasis>, then checks to see if
+            that helper has a defined <methodname>direct()</methodname> method, and calls it
             with the arguments provided.
         </para>
 

@@ -163,6 +163,39 @@ class Zend_Http_Client_CurlTest extends Zend_Http_Client_SocketTest
         $adapter = new Zend_Http_Client_Adapter_Curl();
         $adapter->write("GET", "someUri");
     }
+
+    public function testSetConfigIsNotArray()
+    {
+        $this->setExpectedException("Zend_Http_Client_Adapter_Exception");
+
+        $adapter = new Zend_Http_Client_Adapter_Curl();
+        $adapter->setConfig("foo");
+    }
+
+    public function testSetCurlOptions()
+    {
+        $adapter = new Zend_Http_Client_Adapter_Curl();
+
+        $adapter->setCurlOption('foo', 'bar')
+                ->setCurlOption('bar', 'baz');
+
+        $this->assertEquals(
+            array('curloptions' => array('foo' => 'bar', 'bar' => 'baz')),
+            $this->readAttribute($adapter, '_config')
+        );
+    }
+
+    /**
+     * @group ZF-7040
+     */
+    public function testGetCurlHandle()
+    {
+        $adapter = new Zend_Http_Client_Adapter_Curl();
+        $adapter->setConfig(array('timeout' => 2, 'maxredirects' => 1));
+        $adapter->connect("http://framework.zend.com");
+
+        $this->assertTrue(is_resource($adapter->getHandle()));
+    }
 }
 
 if (PHPUnit_MAIN_METHOD == 'Zend_Http_Client_CurlTest::main') {

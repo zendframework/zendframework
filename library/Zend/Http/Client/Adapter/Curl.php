@@ -389,4 +389,14 @@ class Zend_Http_Client_Adapter_Curl implements Zend_Http_Client_Adapter_Interfac
         $this->_curl         = null;
         $this->_connected_to = array(null, null);
     }
+
+    /**
+     * Get cUrl Handle
+     *
+     * @return resource
+     */
+    public function getHandle()
+    {
+        return $this->_curl;
+    }
 }

@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16509 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.actionhelpers.autocomplete">
     <title>AutoComplete</title>
 
     <para>
-        Beaucoup de librairies javascript AJAX propose une fonctionnalité dite
-        d'auto-complétion. Une liste de résultats possibles est chargée par AJAX au fur et à mesure
-        que l'utilisateur saisit. L'aide <code>AutoComplete</code> est destinée à simplifier le
-        retour de ces valeurs vers la librairie Javascript.
+        Beaucoup de librairies javascript <acronym>AJAX</acronym> propose une fonctionnalité dite
+        d'auto-complétion. Une liste de résultats possibles est chargée au fur et à mesure que
+        l'utilisateur saisit. L'aide <emphasis>AutoComplete</emphasis> est destinée à simplifier
+        le retour de ces valeurs vers la librairie Javascript.
     </para>
 
     <para>
         Toutes les librairies JS n'implémentant pas l'auto-complétion de la même manière,
-        l'aide <code>AutoComplete</code> propose une solution abstraite, ainsi que des
+        l'aide <emphasis>AutoComplete</emphasis> propose une solution abstraite, ainsi que des
         implémentations concrètes pour certaines librairies. Les types de valeur de retour sont en
-        général des tableaux de chaînes JSON, des tableaux de tableaux JSON, ou du HTML.
+        général des tableaux de chaînes <acronym>JSON</acronym>, des tableaux de tableaux
+        <acronym>JSON</acronym> (avec chaque membre étant un tableau associatif de métadonnées
+        utilisées pour créer la liste de sélection), ou du <acronym>HTML</acronym>.
     </para>
 
     <para>L'utilisation basique ressemble à ceci :</para>
@@ -68,45 +70,46 @@ class FooController extends Zend_Controller_Action
     <itemizedlist>
         <listitem>
             <para>
-                <code>disableLayouts()</code> est utilisée pour désactiver les layouts et le
-                ViewRenderer. Cette méthode est appelées par
-                <code>prepareAutoCompletion()</code>.
+                <methodname>disableLayouts()</methodname> est utilisée pour désactiver les layouts
+                et le ViewRenderer. Cette méthode est appelées par
+                <methodname>prepareAutoCompletion()</methodname>.
             </para>
         </listitem>
         <listitem>
             <para>
-                <code>encodeJson($data, $keepLayouts = false)</code> va encoder les données
-                en JSON. Cette méthode est appelées par
-                <code>prepareAutoCompletion()</code>.
+                <methodname>encodeJson($data, $keepLayouts = false)</methodname> va encoder les
+                données en <acronym>JSON</acronym>. Cette méthode est appelées par
+                <methodname>prepareAutoCompletion()</methodname>.
             </para>
         </listitem>
         <listitem>
             <para>
-                <code>prepareAutoCompletion($data, $keepLayouts = false)</code> prépare les
-                données dans le format de réponse nécessaire à une implémentation concrète. La
-                valeur de retour va changer en fonction de l'implémentation (de la librairie AJAX
-                utilisée).
+                <methodname>prepareAutoCompletion($data, $keepLayouts = false)</methodname>
+                prépare les données dans le format de réponse nécessaire à une implémentation
+                concrète. La valeur de retour va changer en fonction de l'implémentation
+                (de la librairie utilisée).
             </para>
         </listitem>
         <listitem>
             <para>
-                <code>sendAutoCompletion($data, $keepLayouts = false)</code> Va appeler
-                <code>prepareAutoCompletion()</code>, puis envoyer la réponse.
+                <methodname>sendAutoCompletion($data, $keepLayouts = false)</methodname> Va appeler
+                <methodname>prepareAutoCompletion()</methodname>, puis envoyer la réponse.
             </para>
         </listitem>
         <listitem>
             <para>
-                <code>direct($data, $sendNow = true, $keepLayouts = false)</code> est une
-                méthode utilisée par le gestionnaire d'aides (helper broker). La valeur de
-                <code>$sendNow</code> va déterminer si c'est <code>sendAutoCompletion()</code> ou
-                <code>prepareAutoCompletion()</code>, qui doit être appelée.
+                <methodname>direct($data, $sendNow = true, $keepLayouts = false)</methodname> est
+                une méthode utilisée par le gestionnaire d'aides (helper broker). La valeur de
+                <varname>$sendNow</varname> va déterminer si c'est
+                <methodname>sendAutoCompletion()</methodname> ou
+                <methodname>prepareAutoCompletion()</methodname>, qui doit être appelée.
             </para>
         </listitem>
     </itemizedlist>
 
     <para>
-        Actuellement, <code>AutoComplete</code> supporte les librairies AJAX Dojo et
-        Scriptaculous.
+        Actuellement, <emphasis>AutoComplete</emphasis> supporte les librairies
+        <acronym>AJAX</acronym> Dojo et Scriptaculous.
     </para>
 
     <sect4 id="zend.controller.actionhelpers.autocomplete.dojo">
@@ -114,17 +117,16 @@ class FooController extends Zend_Controller_Action
 
         <para>
             Dojo n'a pas une fonctionnalité d'auto-complétion, mais deux :
-            <code>ComboBox</code> et <code>FilteringSelect</code>. Dans les deux cas, elle demande
-            une structure de données qui implémente <code>QueryReadStore</code> ; voyez la
-            documentation de
-            <ulink url="http://dojotoolkit.org/book/dojo-book-0-9/part-3-programmatic-dijit-and-dojo/data-retrieval-dojo-data-0">
-            dojo.data</ulink>
+            ComboBox et FilteringSelect. Dans les deux cas, elle demande
+            une structure de données qui implémente QueryReadStore ; voyez la
+            documentation de <ulink
+                url="http://dojotoolkit.org/book/dojo-book-0-9/part-3-programmatic-dijit-and-dojo/data-retrieval-dojo-data-0">dojo.data</ulink>
         </para>
 
         <para>
             Dans Zend Framework, vous pouvez passer un simple tableau indexé à l'aide
-            <code>AutoCompleteDojo</code>, elle retournera une réponse JSON compatible avec la
-            structure de données Dojo :
+            AutoCompleteDojo, elle retournera une réponse <acronym>JSON</acronym>
+            compatible avec la structure de données Dojo :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -136,17 +138,17 @@ $this->_helper->autoCompleteDojo($data);
             <title>AutoCompletion avec Dojo en utilisant MVC</title>
 
             <para>
-                L'auto-complétion avec Dojo via MVC requière plusieurs choses: générer un
-                objet formulaire sur le <code>ComboBox</code> sur lequel vous voulez de
+                L'auto-complétion avec Dojo via <acronym>MVC</acronym> requière plusieurs choses :
+                générer un objet formulaire sur le ComboBox sur lequel vous voulez de
                 l'auto-complétion, un contrôleur avec une action pour servir les résultats, la
-                création d'un <code>QueryReadStore</code> à connecter à l'action et la génération
+                création d'un QueryReadStore à connecter à l'action et la génération
                 du javascript à utiliser pour initialiser l'auto-complétion coté serveur.
             </para>
 
             <para>
-                Voyons le javascript nécessaire. Dojo est une librairie qui propose des
-                objets haut niveau pour l'auto-complétion (entre autres), un peu comme Zend
-                Framework pour PHP. Il est possible de créer des pseudo-namespaces en utilisant
+                Voyons le javascript nécessaire. Dojo est une librairie complète pour la création
+                de javascript <acronym>OO</acronym>, un peu comme Zend Framework pour
+                <acronym>PHP</acronym>. Il est possible de créer des pseudo-namespaces en utilisant
                 l'arborescence des répertoires. Nous allons créer un répertoire "custom" au même
                 niveau que le répertoire Dojo. A l'intérieur, nous allons créer un fichier
                 javascript, <filename>TestNameReadStore.js</filename>, avec le contenu
@@ -166,7 +168,7 @@ dojo.declare("custom.TestNameReadStore",
 ]]></programlisting>
 
             <para>
-                Cette classe est une simple extension de <code>QueryReadStore</code>, qui est
+                Cette classe est une simple extension de QueryReadStore, qui est
                 une classe abstraite. Nous définissons simplement une méthode de requête, et on lui
                 assigne notre élément "test".
             </para>
@@ -208,14 +210,14 @@ class TestController extends Zend_Controller_Action
 
             <para>
                 Ici, nous créons simplement un formulaire avec des méthodes "test" et "go".
-                La méthode "test" ajoute plusieurs attributs Dojo spéciaux : <code>dojoType</code>,
-                <code>store</code>, <code>autoComplete</code>, et <code>hasDownArrow</code>.
-                <code>dojoType</code> est utilisé pour indiquer la création d'une
-                <code>ComboBox</code>, et nous allons la relier au conteneur de données
-                ("<code>store</code>") de "<code>testStore</code>". Mettre
-                "<code>autoComplete</code>" à <code>false</code> dit à Dojo de ne pas sélectionner
+                La méthode "test" ajoute plusieurs attributs Dojo spéciaux : dojoType,
+                store, autoComplete, et hasDownArrow.
+                dojoType est utilisé pour indiquer la création d'une
+                ComboBox, et nous allons la relier au conteneur de données
+                ("store") de "testStore". Mettre
+                "autoComplete" à <constant>FALSE</constant> dit à Dojo de ne pas sélectionner
                 automatiquement la première valeur, mais de plutôt montrer une liste de valeurs
-                possibles. Enfin, "<code>hasDownArrow</code>" crée une flèche bas comme sur les
+                possibles. Enfin, "hasDownArrow" crée une flèche bas comme sur les
                 select box.
             </para>
 
@@ -260,12 +262,12 @@ class TestController extends Zend_Controller_Action
 ]]></programlisting>
 
             <para>
-                Dans <code>autocompleteAction()</code>, nous vérifions que nous avons bien
-                une requête post, et un paramètre "<code>format</code>" avec la valeur
-                "<code>ajax</code>". Ensuite, nous vérifions la présence d'un paramètre
-                "<code>test</code>", et le comparons avec nos données. (<code>getData()</code>
-                retourne des données quelconques.).Enfin, nous envoyons nos résultats à notre aide
-                <code>AutoCompletion</code>.
+                Dans <methodname>autocompleteAction()</methodname>, nous vérifions que nous avons
+                bien une requête post, et un paramètre "format" avec la valeur
+                "ajax". Ensuite, nous vérifions la présence d'un paramètre
+                "test", et le comparons avec nos données. (<methodname>getData()</methodname>
+                retourne des données quelconques). Enfin, nous envoyons nos résultats à notre aide
+                AutoCompletion.
             </para>
 
             <para>
@@ -309,8 +311,10 @@ dojo.require("custom.TestNameReadStore");
 ]]></programlisting>
 
             <para>
-                Notez les appels aux aides de vue comme <code>headStyle</code> et
-                <code>headScript</code>.
+                Notez les appels aux aides de vue comme headStyle et headScript&#160;; celles-ci
+                sont des emplacements réservés, que nous pouvons ensuite utiliser pour effectuer
+                le rendu dans la section "head" du <acronym>HTML</acronym> de votre script de
+                layout.
             </para>
 
             <para>Nous pouvons dès lors faire fonctionner l'auto-complétion Dojo.</para>
@@ -321,14 +325,15 @@ dojo.require("custom.TestNameReadStore");
         <title>AutoCompletion avec Scriptaculous</title>
 
         <para>
-            <ulink url="http://wiki.script.aculo.us/scriptaculous/show/Ajax.Autocompleter">
-            Scriptaculous</ulink>attend une réponse HTML dans un format spécifique.
+            <ulink
+                url="http://wiki.script.aculo.us/scriptaculous/show/Ajax.Autocompleter">Scriptaculous</ulink>
+            attend une réponse <acronym>HTML</acronym> dans un format spécifique.
         </para>
 
         <para>
-            Utilisez l'aide "<code>AutoCompleteScriptaculous</code>". Passez lui un tableau
-            de données et l'aide créera une réponse HTML compatible avec
-            <code>Ajax.Autocompleter</code>.
+            Utilisez l'aide "AutoCompleteScriptaculous". Passez lui un tableau
+            de données et l'aide créera une réponse <acronym>HTML</acronym> compatible avec
+            "Ajax.Autocompleter".
         </para>
     </sect4>
 </sect3>

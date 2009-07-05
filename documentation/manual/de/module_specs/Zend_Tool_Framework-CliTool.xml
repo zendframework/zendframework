@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16511 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.tool.framework.clitool">
     <title>Verwenden des CLI Tools</title>
@@ -29,7 +29,7 @@
             Wie man siehr gibt es im <code>bin/</code> Verzeichnis 3 Dateien: <code>zf.php</code>,
             <code>zf.sh</code> und <code>zf.bat</code>. <code>zf.sh</code> und <code>zf.bat</code>
             sind spezielle Client-Wrapper für das Betriebssystem: <code>zf.sh</code> für *nix
-            Umgebungen, und zf.bat für Win32 Umgebungen. Diese Client-Wrapper sind dafür zuständig
+            Umgebungen, und <code>zf.bat</code> für Win32 Umgebungen. Diese Client-Wrapper sind dafür zuständig
             die richtige <code>php.exe</code> und <code>zf.php</code> zu finden, sowie die Anfrage
             des Clients weiterzugeben. <code>zf.php</code> ist dafür zuständig die Umgebung zu
             verstehen, den richtigen include_path zu erstellen, und das an die richtigen

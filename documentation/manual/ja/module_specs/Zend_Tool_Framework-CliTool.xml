@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 16511 -->
+<sect1 id="zend.tool.framework.clitool">
+    <title>CLIツールの使用</title>
+
+    <para>
+        （内部的にコンソール・ツールとして知られる）CLIまたはコマンドライン・ツールは、
+        現在、<code>Zend_Tool</code>リクエストをディスパッチするための主要なインターフェースです。
+        CLIツールで、開発者は「コマンド・ライン・ウインドウ」内でツーリング・リクエストを出すことができます。
+        それは、「ターミナルの」ウインドウとしても一般に知られています。
+        この環境は、*nix環境で優れていますが、
+        Windowsでの<code>cmd.exe</code>やconsole2、更にはCygwinプロジェクトとも共通の実装を持ちます。
+    </para>
+
+    <sect2 id="zend.tool.framework.clitool.setup-general">
+        <title>CLIツールの設定</title>
+
+        <para>
+            コマンド・ライン・クライアントを通じてツーリング・リクエストを出すために、
+            システムで「zf」命令を取り扱えるように、
+            最初にクライアントを設定する必要があります。
+            コマンド・ライン・クライアントは、どう見ても、
+            ゼンド・フレームワーク・ディストリビューションを提供される<code>.sh</code>または<code>.bat</code>ファイルです。
+            トランクでは、それはここで見つかります:
+            <ulink url="http://framework.zend.com/svn/framework/standard/trunk/bin/">http://framework.zend.com/svn/framework/standard/trunk/bin/</ulink>
+        </para>
+
+        <para>
+            ご覧の通り、3つのファイルが、<code>bin/</code>ディレクトリにあります:
+            <code>zf.php</code>、<code>zf.sh</code>及び<code>zf.bat</code>。
+            <code>zf.sh</code>および<code>zf.bat</code>は、オペレーティングシステム固有クライアント・ラッパです:
+            *nix環境のための<code>zf.sh</code>とWin32環境のための<code>zf.bat</code>。
+            これらのクライアント・ラッパは、適切な<code>php.exe</code>を捜し出して、<code>zf.php</code>を捜し出して、
+            クライアント・リクエストに渡す役割を果たします。
+            <code>zf.php</code>は、環境を理解し、適切なinclude_pathを構築して、
+            ディスパッチするための適切なライブラリ・コンポーネントにコマンド・ラインで提供されるものを渡す
+            取扱いに対して責任あるものです。
+        </para>
+
+        <para>
+            最後に、あなたのオペレーティングシステムに関係なく、
+            あなたはすべてを働かせる2つのものを確実にすることを望みます。
+        </para>
+
+        <orderedlist>
+            <listitem>
+                <para>
+                    <code>zf.sh/zf.bat</code>は、システム・パスから到達できます。
+                    カレント作業ディレクトリが何かに関係なく、
+                    これはあなたのコマンド・ラインでどこからでも<code>zf</code>を呼ぶ能力です。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    ZendFramework/libraryは<code>include_path</code>にあります。
+                </para>
+            </listitem>
+        </orderedlist>
+
+        <para>
+            <emphasis>Note:</emphasis> while the above are the most ideal
+            requirements, you can simply download Zend Framework and expect it
+            to work as <code>./path/to/zf.php</code> some command.
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.tool.framework.clitool.setup-starnix">
+        <title>Unixのようなシステム上でCLIツールを設定</title>
+
+        <para>
+            The most common setup in the *nix environment, is to copy the
+            <code>zf.sh</code> and <code>zf.php</code> into the same directory
+            as your PHP binary. This can generally be found in one of the
+            following places:
+        </para>
+
+        <programlisting language="text"><![CDATA[
+/usr/bin
+/usr/local/bin
+/usr/local/ZendServer/bin/
+/Applications/ZendServer/bin/
+]]></programlisting>
+
+        <para>
+            To find out the location of your PHP binary, you can execute 'which
+            php' on the command line. This will return the location of the php
+            binary you will be using to run php scripts in this environment.
+        </para>
+
+        <para>
+            The next order of business is to ensure that the Zend Framework
+            library is setup correctly inside of the system PHP
+            <code>include_path</code>. To find out where your
+            <code>include_path</code> is located, you can execute 'php -i' and
+            look for the <code>include_path</code> variable, or more succinctly,
+            execute 'php -i | grep include_path'. Once you have found where
+            your <code>include_path</code> is located (this will generally be
+            something like /usr/lib/php, /usr/share/php, /usr/local/lib/php, or
+            similar), ensure that the contents of the library/ directory are put
+            inside your <code>include_path</code> specified directory.
+        </para>
+
+        <para>
+            Once you have done those two things, you should be able to issue a
+            command and get back the proper response like this:
+        </para>
+
+        <para>
+            <inlinegraphic scale="100" align="center" valign="middle"
+                fileref="figures/zend.tool.framework.cliversionunix.png" format="PNG" />
+        </para>
+
+        <para>
+            If you do not see this type of output, go back and check your setup
+            to ensure you have all of the necessary peices in the proper place.
+        </para>
+
+        <para>
+            There are a couple of alternative setups you might want to employ
+            depending on your servers configuration, your level of access, or
+            for other reasons.
+        </para>
+
+        <para>
+            <emphasis>ALTERNATIVE SETUP</emphasis> involves keeping the Zend
+            Framework download together as is, and creating a link from a PATH
+            location to the <code>zf.sh</code>. What this means is you can
+            place the contents of the ZendFramework download into a location
+            such as <code>/usr/local/share/ZendFramework</code>, or more locally
+            like <code>/home/username/lib/ZendFramework</code>, and creating a
+            symbolic link to the <code>zf.sh</code>.
+        </para>
+
+        <para>
+            Assuming you want to put the link inside <code>/usr/local/bin</code>
+            (this could also work for placing the link inside
+            <code>/home/username/bin/</code> for example) you would issue a
+            command similar to this: </para>
+
+        <programlisting language="sh"><![CDATA[
+ln -s /usr/local/share/ZendFramework/bin/zf.sh /usr/local/bin/zf
+
+# OR (for example)
+ln -s /home/username/lib/ZendFramework/bin/zf.sh /home/username/bin/zf
+]]></programlisting>
+
+        <para>
+            This will create a link which you should be able to access globally
+            on the command line.
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.tool.framework.clitool.setup-windows">
+        <title>Setting up the CLI tool on Windows</title>
+
+        <para>
+            The most common setup in the Windows Win32 environment, is to copy
+            the <code>zf.sh</code> and <code>zf.php</code> into the same
+            directory as your PHP binary. This can generally be found in one of
+            the following places:
+        </para>
+
+        <programlisting language="text"><![CDATA[
+C:\PHP
+C:\Program Files\ZendServer\bin\
+C:\WAMP\PHP\bin
+]]></programlisting>
+
+        <para>
+            You should be able to run <code>php.exe</code> on the command line.
+            If you are not able to, first check the documentation that came with
+            your PHP distribution, or ensure that the path to php.exe is in your
+            windows PATH environment variable.
+        </para>
+
+        <para>
+            The next order of business is to ensure that the Zend Framework
+            library is setup correctly inside of the system PHP
+            <code>include_path</code>. To find out where your
+            <code>include_path</code> is located, you can type 'php -i' and look
+            for the <code>include_path</code> variable, or more succinctly
+            execute 'php -i | grep include_path' if you have Cygwin setup with
+            grep available. Once you have found where your
+            <code>include_path</code> is located (this will generally be
+            something like <code>C:\PHP\pear</code>, <code>C:\PHP\share</code>,
+            <code>C:\Program Files\ZendServer\share</code> or similar), ensure
+            that the contents of the library/ directory are put inside your
+            <code>include_path</code> specified directory.
+        </para>
+
+        <para>
+            Once you have done those two things, you should be able to issue a
+            command and get back the proper response like this:
+        </para>
+
+        <para>
+            <inlinegraphic scale="100" align="center" valign="middle"
+                fileref="figures/zend.tool.framework.cliversionwin32.png" format="PNG" />
+        </para>
+
+        <para>
+            If you do not see this type of output, go back and check your setup
+            to ensure you have all of the necessary pieces in the proper place.
+        </para>
+
+        <para>
+            There are a couple of alternative setups you might want to employ
+            depending on your server's configuration, your level of access, or
+            for other reasons.
+        </para>
+
+        <para>
+            <emphasis>ALTERNATIVE SETUP</emphasis> involves keeping the Zend
+            Framework download together as is, and altering both your system
+            PATH as well as the <code>php.ini</code> file. In your user's
+            environment, make sure to add
+            <code>C:\Path\To\ZendFramework\bin</code>, so that your
+            <code>zf.bat</code> file is executable. Also, alter the
+            <code>php.ini</code> file to ensure that
+            <code>C:\Path\To\ZendFramework\library</code> is in your
+            <code>include_path</code>.
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.tool.framework.clitool.setup-othernotes">
+        <title>Other Setup Considerations</title>
+
+        <para>
+            If for some reason you do not want the Zend Framework library inside
+            your <code>include_path</code>, there is another option. There are
+            two special environment variables that <code>zf.php</code> will
+            utilize to determine the location of your Zend Framework
+            installation.
+        </para>
+
+        <para>
+            The first is <code>ZEND_TOOL_INCLUDE_PATH_PREPEND</code>, which will
+            prepend the value of this environment variable to the system
+            (<code>php.ini</code>) <code>include_path</code> before loading the
+            client.
+        </para>
+
+        <para>
+            Alternatively, you might want to use
+            <code>ZEND_TOOL_INCLUDE_PATH</code> to completely
+            <emphasis>replace</emphasis> the system <code>include_path</code>
+            for one that makes sense specifically for the <code>zf</code>
+            command line tool.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.tool.framework.clitool.continuing">
+        <title>Where To Go Next?</title>
+
+        <para>
+            At this point, your should be setup to start initiating some more
+            "interesting" commands. To get going, you can issue the <code>zf
+                --help</code> command to see what is available to you.
+        </para>
+
+        <para>
+            <inlinegraphic scale="100" align="center" valign="middle"
+                fileref="figures/zend.tool.framework.clihelp.png" format="PNG" />
+        </para>
+
+        <para>
+            Continue on to the <code>Zend_Tool_Project</code> "Create Project"
+            section to understand how to use the <code>zf</code> script for
+            project creation.
+        </para>
+    </sect2>
+</sect1>

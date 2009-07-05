@@ -9,11 +9,11 @@
         <para>
             The <emphasis>Redirector</emphasis> helper allows you to use a redirector
             object to fulfill your application's needs for redirecting to a new
-            URL. It provides numerous benefits over the
+            <acronym>URL</acronym>. It provides numerous benefits over the
             <methodname>_redirect()</methodname> method, such as being able to preconfigure
             sitewide behavior into the redirector object or using the built in
             <methodname>gotoSimple($action, $controller, $module, $params)</methodname> interface
-            similar to that of <classname>Zend_Controller_Action::_forward()</classname>.
+            similar to that of <methodname>Zend_Controller_Action::_forward()</methodname>.
         </para>
 
         <para>
@@ -24,8 +24,8 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <methodname>setCode()</methodname> can be used to set the HTTP response
-                    code to use during the redirect.
+                    <methodname>setCode()</methodname> can be used to set the
+                    <acronym>HTTP</acronym> response code to use during the redirect.
                 </para>
             </listitem>
 
@@ -39,35 +39,38 @@
 
             <listitem>
                 <para>
-                    <methodname>setGotoSimple()</methodname> can be used to set a default URL to
-                    use if none is passed to <methodname>gotoSimple()</methodname>. Uses the API
-                    of <classname>Zend_Controller_Action::_forward()</classname>:
-                    setGotoSimple($action, $controller = null, $module = null, array
-                    $params = array());
+                    <methodname>setGotoSimple()</methodname> can be used to set a default
+                    <acronym>URL</acronym> to use if none is passed to
+                    <methodname>gotoSimple()</methodname>. Uses the <acronym>API</acronym>
+                    of <methodname>Zend_Controller_Action::_forward()</methodname>:
+                    <methodname>setGotoSimple($action, $controller = null, $module = null, array
+                    $params = array())</methodname>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>setGotoRoute()</methodname> can be used to set a URL
-                    based on a registered route. Pass in an array of key/value
-                    pairs and a route name, and it will assemble the URL
-                    according to the route type and definition.
+                    <methodname>setGotoRoute()</methodname> can be used to set a
+                    <acronym>URL</acronym> based on a registered route. Pass in an array of
+                    key / value pairs and a route name, and it will assemble the
+                    <acronym>URL</acronym> according to the route type and definition.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>setGotoUrl()</methodname> can be used to set a default URL to
+                    <methodname>setGotoUrl()</methodname> can be used to set a default
+                    <acronym>URL</acronym> to
                     use if none is passed to <methodname>gotoUrl()</methodname>. Accepts a
-                    single URL string.
+                    single <acronym>URL</acronym> string.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     <methodname>setPrependBase()</methodname> can be used to prepend the
-                    request object's base URL to a URL specified with
+                    request object's base <acronym>URL</acronym> to a <acronym>URL</acronym>
+                    specified with
                     <methodname>setGotoUrl()</methodname>, <methodname>gotoUrl()</methodname>, or
                     <methodname>gotoUrlAndExit()</methodname>.
                 </para>
@@ -76,11 +79,12 @@
             <listitem>
                 <para>
                     <methodname>setUseAbsoluteUri()</methodname> can be used to force the
-                    <emphasis>Redirector</emphasis> to use absolute URIs when
+                    <emphasis>Redirector</emphasis> to use absolute <acronym>URI</acronym>s when
                     redirecting. When this option is set, it uses the value of
                     <varname>$_SERVER['HTTP_HOST']</varname>,
                     <varname>$_SERVER['SERVER_PORT']</varname>, and
-                    <varname>$_SERVER['HTTPS']</varname> to form a full URI to the URL
+                    <varname>$_SERVER['HTTPS']</varname> to form a full <acronym>URI</acronym>
+                    to the <acronym>URL</acronym>
                     specified by one of the redirect methods. This option is off
                     by default, but may be enabled by default in later releases.
                 </para>
@@ -97,8 +101,8 @@
                 <para>
                     <methodname>gotoSimple()</methodname> uses
                     <methodname>setGotoSimple()</methodname>
-                    (<methodname>_forward()</methodname>-like API) to build a URL and
-                    perform a redirect.
+                    (<methodname>_forward()</methodname>-like <acronym>API</acronym>) to build a
+                    <acronym>URL</acronym> and perform a redirect.
                 </para>
             </listitem>
 
@@ -106,7 +110,7 @@
                 <para>
                     <methodname>gotoRoute()</methodname> uses
                     <methodname>setGotoRoute()</methodname>
-                    (<code>route-assembly</code>) to build a URL and
+                    (<emphasis>route-assembly</emphasis>) to build a <acronym>URL</acronym> and
                     perform a redirect.
                 </para>
             </listitem>
@@ -114,14 +118,14 @@
             <listitem>
                 <para>
                     <methodname>gotoUrl()</methodname> uses <methodname>setGotoUrl()</methodname>
-                    (<code>URL string</code>) to build a URL and
-                    perform a redirect.
+                    (<emphasis><acronym>URL</acronym> string</emphasis>) to build a
+                    <acronym>URL</acronym> and perform a redirect.
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
-            Finally, you can determine the current redirect URL at any time
+            Finally, you can determine the current redirect <acronym>URL</acronym> at any time
             using <methodname>getRedirectUrl()</methodname>.
         </para>
     </sect4>
@@ -134,8 +138,8 @@
 
             <para>
                 This example overrides several options, including setting the
-                HTTP status code to use in the redirect ('303'), not defaulting
-                to exit on redirect, and defining a default URL to use when
+                <acronym>HTTP</acronym> status code to use in the redirect ('303'), not defaulting
+                to exit on redirect, and defining a default <acronym>URL</acronym> to use when
                 redirecting.
             </para>
 
@@ -216,10 +220,10 @@ class AlternativeController extends Zend_Controller_Action
             <title>Using goto()'s _forward() API</title>
 
             <para>
-                <methodname>gotoSimple()</methodname>'s API mimics that of
-                <classname>Zend_Controller_Action::_forward()</classname>. The primary
-                difference is that it builds a URL from the parameters passed,
-                and using the default <code>:module/:controller/:action/*</code>
+                <methodname>gotoSimple()</methodname>'s <acronym>API</acronym> mimics that of
+                <methodname>Zend_Controller_Action::_forward()</methodname>. The primary
+                difference is that it builds a <acronym>URL</acronym> from the parameters passed,
+                and using the default <filename>:module/:controller/:action/*</filename>
                 format of the default router. It then redirects instead of
                 chaining the action.
             </para>
@@ -263,8 +267,8 @@ class ForwardController extends Zend_Controller_Action
             <para>
                 The following example uses the <link
                     linkend="zend.controller.router">router's</link>
-                <methodname>assemble()</methodname> method to create a URL based on an
-                associative array of parameters passed. It assumes the following
+                <methodname>assemble()</methodname> method to create a <acronym>URL</acronym>
+                based on an associative array of parameters passed. It assumes the following
                 route has been registered:
             </para>
 
@@ -280,7 +284,7 @@ $router->addRoute('blogArchive', $route);
 
             <para>
                 Given an array with year set to 2006, month to 4, day to 24, and
-                id to 42, it would then build the URL
+                id to 42, it would then build the <acronym>URL</acronym>
                 <filename>/blog/2006/4/24/42</filename>.
             </para>
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16001 -->
+<!-- EN-Revision: 16502 -->
 <sect1 id="zend.controller.action">
     <title>アクションコントローラ</title>
 
@@ -45,8 +45,8 @@ class FooController extends Zend_Controller_Action
 ]]></programlisting>
 
         <para>
-            この <emphasis>FooController</emphasis> クラス (<code>foo</code> コントローラ)
-            では、ふたつのアクション <code>bar</code> および <code>baz</code>
+            この <emphasis>FooController</emphasis> クラス (<emphasis>foo</emphasis> コントローラ)
+            では、ふたつのアクション <emphasis>bar</emphasis> および <emphasis>baz</emphasis>
             が定義されています。
         </para>
 
@@ -325,7 +325,7 @@ applicationOrModule/
             <para>
                 言い換えると、ビュースクリプトが
                 <filename>views/scripts/</filename> ディレクトリ内にあり、かつ
-                <code>views</code> ディレクトリ内の同一階層に各機能
+                <filename>views/</filename> ディレクトリ内の同一階層に各機能
                 （ヘルパー、フィルタ）のディレクトリがあるということです。
                 ビュースクリプトの名前とパスを決定する際の基底ディレクトリとして
                 <filename>views/scripts/</filename> が用いられます。
@@ -351,10 +351,10 @@ string render(string $action = null,
                 引数を省略した場合は、<filename>[controller]/[action].phtml</filename>
                 が指定されたものとみなします（<filename>.phtml</filename>
                 は <varname>$viewSuffix</varname> プロパティの値です）。
-                <varname>$action</varname> を指定すると、<code>[controller]</code>
+                <varname>$action</varname> を指定すると、<filename>[controller]/</filename>
                 ディレクトリにあるその名前のテンプレートをレンダリングします。
-                <code>[controller]</code> ディレクトリを使用しないようにするには、
-                <varname>$noController</varname> に true を指定します。
+                <filename>[controller]/</filename> ディレクトリを使用しないようにするには、
+                <varname>$noController</varname> に <constant>TRUE</constant> を指定します。
                 テンプレートをレンダリングした結果はレスポンスオブジェクトに格納されます。
                 レスポンスオブジェクトの中の、
                 <link linkend="zend.controller.response.namedsegments">

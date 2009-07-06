@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16511 -->
+<!-- EN-Revision: 16525 -->
 <sect1 id="zend.tool.framework.clitool">
     <title>CLIツールの使用</title>
 
@@ -59,9 +59,10 @@
         </orderedlist>
 
         <para>
-            <emphasis>Note:</emphasis> while the above are the most ideal
-            requirements, you can simply download Zend Framework and expect it
-            to work as <code>./path/to/zf.php</code> some command.
+            <emphasis>注意:</emphasis>
+            上記が最も理想的な必要条件であるとはいえ、
+            単にZend Frameworkをダウンロードして、
+            <code>./path/to/zf.php</code>としていくらかのコマンドが動作することを期待できます。
         </para>
 
     </sect2>
@@ -70,10 +71,9 @@
         <title>Unixのようなシステム上でCLIツールを設定</title>
 
         <para>
-            The most common setup in the *nix environment, is to copy the
-            <code>zf.sh</code> and <code>zf.php</code> into the same directory
-            as your PHP binary. This can generally be found in one of the
-            following places:
+            *nix環境で最も一般的な準備は、
+            PHPバイナリと同じディレクトリに<code>zf.sh</code>と<code>zf.php</code>をコピーすることです。
+            これは、通常、以下の場所のうちの1つで見つけられます:
         </para>
 
         <programlisting language="text"><![CDATA[
@@ -84,27 +84,26 @@
 ]]></programlisting>
 
         <para>
-            To find out the location of your PHP binary, you can execute 'which
-            php' on the command line. This will return the location of the php
-            binary you will be using to run php scripts in this environment.
+            PHPバイナリの場所を見つけるために、
+            コマンドラインで 'which php' を実行できます。
+            これは、この環境でphpスクリプトを実行するために存在するphpバイナリの場所を返します。
         </para>
 
         <para>
-            The next order of business is to ensure that the Zend Framework
-            library is setup correctly inside of the system PHP
-            <code>include_path</code>. To find out where your
-            <code>include_path</code> is located, you can execute 'php -i' and
-            look for the <code>include_path</code> variable, or more succinctly,
-            execute 'php -i | grep include_path'. Once you have found where
-            your <code>include_path</code> is located (this will generally be
-            something like /usr/lib/php, /usr/share/php, /usr/local/lib/php, or
-            similar), ensure that the contents of the library/ directory are put
-            inside your <code>include_path</code> specified directory.
+            次の課題は、Zend Frameworkライブラリが
+            システムPHP<code>include_path</code>の中で正しく準備されることを確実にすることです。
+            <code>include_path</code>が位置するところを見つけ出すために、
+            'php -i' を実行したり、<code>include_path</code>変数を探したりできます。
+            より簡潔には、 'php -i | grep include_path' を実行します。
+            一旦<code>include_path</code>が位置するところ
+            （これは通常、/usr/lib/php や /usr/share/php、/usr/local/lib/php または同様の何かです）
+            を見つけたら、library/ ディレクトリの内容が
+            <code>include_path</code>に指定されたディレクトリに置かれることを確実にしてください。
         </para>
 
         <para>
-            Once you have done those two things, you should be able to issue a
-            command and get back the proper response like this:
+            一旦それらの2つのことをしたなら、
+            コマンドを発行して、このような固有のレスポンスを戻すことができるはずです:
         </para>
 
         <para>
@@ -113,8 +112,9 @@
         </para>
 
         <para>
-            If you do not see this type of output, go back and check your setup
-            to ensure you have all of the necessary peices in the proper place.
+            あなたがこの種の出力に遭遇しないならば、
+            戻って、必要な部分の全てを固有の場所に持つことを確実にするために
+            構成をチェックしてください。
         </para>
 
         <para>
@@ -154,13 +154,12 @@ ln -s /home/username/lib/ZendFramework/bin/zf.sh /home/username/bin/zf
     </sect2>
 
     <sect2 id="zend.tool.framework.clitool.setup-windows">
-        <title>Setting up the CLI tool on Windows</title>
+        <title>WindowsでCLIツールを設定</title>
 
         <para>
-            The most common setup in the Windows Win32 environment, is to copy
-            the <code>zf.sh</code> and <code>zf.php</code> into the same
-            directory as your PHP binary. This can generally be found in one of
-            the following places:
+            Windows Win32環境で最も一般的な準備は、
+            PHPバイナリと同じディレクトリに<code>zf.bat</code>と<code>zf.php</code>をコピーすることです。
+            これは、通常、以下の場所のうちの1つで見つけられます:
         </para>
 
         <programlisting language="text"><![CDATA[
@@ -170,15 +169,15 @@ C:\WAMP\PHP\bin
 ]]></programlisting>
 
         <para>
-            You should be able to run <code>php.exe</code> on the command line.
-            If you are not able to, first check the documentation that came with
-            your PHP distribution, or ensure that the path to php.exe is in your
-            windows PATH environment variable.
+            あなたは、コマンドラインで<code>php.exe</code>を実行できるはずです。
+            できなければ、
+            最初に、PHPディストリビューションに付属していたドキュメンテーションをチェックしてください、
+            さもなければ、php.exeへのパスがあなたのwindowsパス環境変数であることを確認してください。
         </para>
 
         <para>
             The next order of business is to ensure that the Zend Framework
-            library is setup correctly inside of the system PHP
+            library is set up correctly inside of the system PHP
             <code>include_path</code>. To find out where your
             <code>include_path</code> is located, you can type 'php -i' and look
             for the <code>include_path</code> variable, or more succinctly
@@ -192,8 +191,8 @@ C:\WAMP\PHP\bin
         </para>
 
         <para>
-            Once you have done those two things, you should be able to issue a
-            command and get back the proper response like this:
+            一旦それらの2つのことをしたなら、
+            コマンドを発行して、このような固有のレスポンスを戻すことができるはずです:
         </para>
 
         <para>
@@ -202,8 +201,9 @@ C:\WAMP\PHP\bin
         </para>
 
         <para>
-            If you do not see this type of output, go back and check your setup
-            to ensure you have all of the necessary pieces in the proper place.
+            あなたがこの種の出力に遭遇しないならば、
+            戻って、必要な部分の全てを固有の場所に持つことを確実にするために
+            構成をチェックしてください。
         </para>
 
         <para>
@@ -257,7 +257,7 @@ C:\WAMP\PHP\bin
         <title>Where To Go Next?</title>
 
         <para>
-            At this point, your should be setup to start initiating some more
+            At this point, your should be set up to start initiating some more
             "interesting" commands. To get going, you can issue the <code>zf
                 --help</code> command to see what is available to you.
         </para>

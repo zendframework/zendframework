@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16500 -->
+<!-- EN-Revision: 16501 -->
 <sect1 id="zend.http.client.adapters">
     <title>Zend_Http_Client - 接続アダプタ</title>
 
@@ -417,6 +417,7 @@ $client = new Zend_Http_Client($uri, $config);
         <para>
             デフォルトでは、cURL アダプタは
             Socket アダプタとまったく同じ挙動となるように設定されています。
+            また、Socket アダプタおよび Proxy アダプタと同じ設定パラメータを使えます。
             cURL のオプションを変更するには、アダプタのコンストラクタでキー
             'curloptions' を指定するか、あるいは
             <code>setCurlOption($name, $value)</code> をコールします。

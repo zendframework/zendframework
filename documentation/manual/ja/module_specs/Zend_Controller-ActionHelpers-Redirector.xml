@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16396 -->
+<!-- EN-Revision: 16504 -->
 <sect3 id="zend.controller.actionhelpers.redirector">
     <title>Redirector</title>
 
@@ -12,7 +12,7 @@
             アプリケーション内で必要となるリダイレクト処理用のオブジェクトとして使用します。
             <methodname>_redirect()</methodname> メソッドと比べた場合の利点としては、
             サイト全体で使用する設定を事前に組み込んでおけることがあります。また、
-            <classname>Zend_Controller_Action::_forward()</classname>
+            <methodname>Zend_Controller_Action::_forward()</methodname>
             の場合と同様に、組み込みのインターフェイス
             <methodname>gotoSimple($action, $controller, $module, $params)</methodname>
             が使用できることも利点となります。
@@ -27,7 +27,7 @@
             <listitem>
                 <para>
                     <methodname>setCode()</methodname> を使用して、
-                    リダイレクトの際に使用する HTTP レスポンスコードを設定します。
+                    リダイレクトの際に使用する <acronym>HTTP</acronym> レスポンスコードを設定します。
                 </para>
             </listitem>
 
@@ -42,27 +42,27 @@
             <listitem>
                 <para>
                     <methodname>setGotoSimple()</methodname> を使用して、<methodname>gotoSimple()</methodname>
-                    に何も渡されなかったときのデフォルトの URL を設定します。
-                    <classname>Zend_Controller_Action::_forward()</classname> の API である
-                    setGotoSimple($action, $controller = null, $module = null, array
-                    $params = array()); を使用します。
+                    に何も渡されなかったときのデフォルトの <acronym>URL</acronym> を設定します。
+                    <methodname>Zend_Controller_Action::_forward()</methodname> の <acronym>API</acronym> である
+                    <methodname>setGotoSimple($action, $controller = null, $module = null, array
+                    $params = array())</methodname> を使用します。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     <methodname>setGotoRoute()</methodname> を使用して、
-                    登録済みのルートにもとづいた URL を設定します。
+                    登録済みのルートにもとづいた <acronym>URL</acronym> を設定します。
                     キー/値 のペアの配列とルート名を渡し、
-                    それをもとにルートの型と定義から URL を作成します。
+                    それをもとにルートの型と定義から <acronym>URL</acronym> を作成します。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     <methodname>setGotoUrl()</methodname> を使用して、<methodname>gotoUrl()</methodname>
-                    に何も渡されなかったときのデフォルトの URL を設定します。
-                    URL を表す文字列を受け取ります。
+                    に何も渡されなかったときのデフォルトの <acronym>URL</acronym> を設定します。
+                    <acronym>URL</acronym> を表す文字列を受け取ります。
                 </para>
             </listitem>
 
@@ -71,7 +71,7 @@
                     <methodname>setPrependBase()</methodname> を使用して、
                     <methodname>setGotoUrl()</methodname>、<methodname>gotoUrl()</methodname>
                     あるいは <methodname>gotoUrlAndExit()</methodname>
-                    で指定した URL の前にリクエストのベース URL を追加します。
+                    で指定した <acronym>URL</acronym> の前にリクエストのベース <acronym>URL</acronym> を追加します。
                 </para>
             </listitem>
 
@@ -79,12 +79,12 @@
                 <para>
                     <methodname>setUseAbsoluteUri()</methodname> を使用すると、
                     <methodname>Redirector</methodname> がリダイレクトの際に絶対
-                    URL を使用するようになります。
+                    <acronym>URI</acronym> を使用するようになります。
                     このオプションを設定すると、
                     <varname>$_SERVER['HTTP_HOST']</varname> や
                     <varname>$_SERVER['SERVER_PORT']</varname>、そして
                     <varname>$_SERVER['HTTPS']</varname> の内容をもとにして
-                    リダイレクト用の完全な URL を作成します。
+                    リダイレクト用の完全な <acronym>URI</acronym> を作成します。
                     このオプションのデフォルト値はオフですが、
                     将来のリリースではデフォルトで有効になるかもしれません。
                 </para>
@@ -99,7 +99,7 @@
             <listitem>
                 <para>
                     <methodname>gotoSimple()</methodname> は、<methodname>setGotoSimple()</methodname>
-                    (<methodname>_forward()</methodname> 風の API) を用いて作成した URL
+                    (<methodname>_forward()</methodname> 風の <acronym>API</acronym>) を用いて作成した <acronym>URL</acronym>
                     にリダイレクトします。
                 </para>
             </listitem>
@@ -107,7 +107,7 @@
             <listitem>
                 <para>
                     <methodname>gotoRoute()</methodname> は、<methodname>setGotoRoute()</methodname>
-                    (<code>ルートの作成</code>) を用いて作成した URL
+                    (<emphasis>ルートの作成</emphasis>) を用いて作成した <acronym>URL</acronym>
                     にリダイレクトします。
                 </para>
             </listitem>
@@ -115,14 +115,14 @@
             <listitem>
                 <para>
                     <methodname>gotoUrl()</methodname> は <methodname>setGotoUrl()</methodname>
-                    (<code>URL 文字列の指定</code>) を用いて作成した URL
+                    (<emphasis><acronym>URL</acronym> 文字列の指定</emphasis>) を用いて作成した <acronym>URL</acronym>
                     にリダイレクトします。
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
-            リダイレクト先の URL を知るには
+            リダイレクト先の <acronym>URL</acronym> を知るには
             <methodname>getRedirectUrl()</methodname> を使用します。
             これはいつでも使用できます。
         </para>
@@ -136,9 +136,9 @@
 
             <para>
                 この例ではデフォルトのオプションを少し変更します。
-                HTTP ステータスコードを 303 にし、リダイレクト後に
+                <acronym>HTTP</acronym> ステータスコードを 303 にし、リダイレクト後に
                 exit() しないようにして、そしてリダイレクトの際のデフォルト
-                URL を指定しています。
+                <acronym>URL</acronym> を指定しています。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -218,11 +218,11 @@ class AlternativeController extends Zend_Controller_Action
             <title>goto() での _forward() API の使用</title>
 
             <para>
-                <methodname>gotoSimple()</methodname> の API は、
-                <classname>Zend_Controller_Action::_forward()</classname>
-                と同じ形式です。違う点は、このメソッドは渡されたパラメータから URL
+                <methodname>gotoSimple()</methodname> の <acronym>API</acronym> は、
+                <methodname>Zend_Controller_Action::_forward()</methodname>
+                と同じ形式です。違う点は、このメソッドは渡されたパラメータから <acronym>URL</acronym>
                 を作成し、デフォルトルータのデフォルトフォーマットである
-                <code>:module/:controller/:action/*</code> を使用するということです。
+                <filename>:module/:controller/:action/*</filename> を使用するということです。
                 また、アクションチェインではなくリダイレクトを行います。
             </para>
 
@@ -267,7 +267,7 @@ class ForwardController extends Zend_Controller_Action
                 次の例は、<link
                     linkend="zend.controller.router">ルータ</link>
                 の <methodname>assemble()</methodname> メソッドを使用して、
-                パラメータで指定した連想配列に基づく URL を作成しています。
+                パラメータで指定した連想配列に基づく <acronym>URL</acronym> を作成しています。
                 次のようなルートが登録されているものと仮定します。
             </para>
 
@@ -283,7 +283,7 @@ $router->addRoute('blogArchive', $route);
 
             <para>
                 year を 2006、month を 4、day を 24、そして ID を 42
-                として配列を渡すと、結果の URL は
+                として配列を渡すと、結果の <acronym>URL</acronym> は
                 <filename>/blog/2006/4/24/42</filename> となります。
             </para>
 

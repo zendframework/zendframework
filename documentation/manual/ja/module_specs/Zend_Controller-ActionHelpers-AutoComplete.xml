@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16004 -->
+<!-- EN-Revision: 16509 -->
 <sect3 id="zend.controller.actionhelpers.autocomplete">
     <title>AutoComplete</title>
 
@@ -223,7 +223,7 @@ class TestController extends Zend_Controller_Action
                 を追加します。dojoType では、これから ComboBox
                 を作成することを指定します。そして、それを 'testStore' のデータストア
                 (キー 'store') にリンクします。詳細は後ほど説明します。
-                'autoComplete' を false に設定することで、
+                'autoComplete' を <constant>FALSE</constant> に設定することで、
                 最初にマッチしたものを自動選択するのではなく
                 マッチしたものの一覧を表示するよう Dojo に指示します。
                 最後に 'hasDownArrow' でセレクトボックス風の下向き矢印を作ります。

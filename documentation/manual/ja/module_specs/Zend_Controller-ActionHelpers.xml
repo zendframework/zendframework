@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16163 -->
+<!-- EN-Revision: 16507 -->
 <sect1 id="zend.controller.actionhelpers" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>アクションヘルパー</title>
 
@@ -24,7 +24,7 @@
             と同じように、処理の仲買をするために用いることもできます。
             アクションヘルパーは (<classname>Zend_View_Helper</classname> と同様に)、
             必要になった時点で読み込むこともできますし、
-            リクエスト時 (起動時) やアクションコントローラの作成時 (init())
+            リクエスト時 (起動時) やアクションコントローラの作成時 (<methodname>init()</methodname>)
             で読み込むこともできます。詳細は、以下の使用例を参照ください。
         </para>
     </sect2>
@@ -93,7 +93,7 @@ $this->_helper->FlashMessenger('先ほどのリクエストで、あることを
             ヘルパーのインスタンスを明示的に作成したいと考えるかもしれません。
             たとえばアクションコントローラ以外からヘルパーを使用したいだとか、
             すべてのアクションのヘルパーブローカに同じヘルパーを渡したいだとかいった場合です。
-            インスタンスを作成する方法は、通常の PHP のクラスと同じです。
+            インスタンスを作成する方法は、通常の <acronym>PHP</acronym> のクラスと同じです。
         </para>
     </sect2>
 
@@ -141,7 +141,7 @@ Zend_Controller_Action_HelperBroker::addPrefix('My_Action_Helpers');
                 <para>
                     <methodname>addPath()</methodname> は、最初の引数にディレクトリ、
                     そして二番目の引数にクラスのプレフィックス
-                    (デフォルトは 'Zend_Controller_Action_Helper') を指定します。
+                    (デフォルトは '<classname>Zend_Controller_Action_Helper</classname>') を指定します。
                     これは、指定したディレクトリにある指定したプレフィックスのクラスを追加します。
                 </para>
 
@@ -235,10 +235,10 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
 
         <para>
             Zend Framework には、いくつかのアクションヘルパーがデフォルトで組み込まれています。
-            AJAX のオートコンプリート機能用のレスポンスを作成する <emphasis>AutoComplete</emphasis>、
+            <acronym>AJAX</acronym> のオートコンプリート機能用のレスポンスを作成する <emphasis>AutoComplete</emphasis>、
             アクションに応じてレスポンスの形式を変更する <emphasis>ContextSwitch</emphasis> と
             <emphasis>AjaxContext</emphasis>、セッション単位のフラッシュメッセージを扱う
-            <emphasis>FlashMessenger</emphasis>、JSON 形式へのエンコードとレスポンスの送信を行う
+            <emphasis>FlashMessenger</emphasis>、<acronym>JSON</acronym> 形式へのエンコードとレスポンスの送信を行う
             <emphasis>Json</emphasis>、
             アプリケーション内から内部あるいは外部へのリダイレクトを実装できるようにする
             <emphasis>Redirector</emphasis>、そして
@@ -322,7 +322,7 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
                     そうでない場合はクラス名全体を返します。たとえば、クラス名が
                     <classname>Zend_Controller_Action_Helper_Redirector</classname>
                     の場合は <emphasis>Redirector</emphasis> を、クラス名が
-                    <code>FooMessage</code> の場合はそのままの名前を返します。
+                    <classname>FooMessage</classname> の場合はそのままの名前を返します。
                 </para>
             </listitem>
         </itemizedlist>
@@ -345,8 +345,8 @@ $this->_helper->redirector('item', 'view', 'blog', array('id' => 42));
 
         <para>
             内部的には、まずヘルパーブローカの <methodname>__call()</methodname>
-            メソッドが <code>redirector</code> という名前のヘルパーを探し、
-            それからそのヘルパーで <code>direct</code>
+            メソッドが <emphasis>redirector</emphasis> という名前のヘルパーを探し、
+            それからそのヘルパーで <methodname>direct()</methodname>
             メソッドが定義されているかどうかを調べ、
             渡された引数でそのメソッドをコールしています。
         </para>

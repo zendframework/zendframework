@@ -1,14 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.xmlrpc.introduction">
-    <title>简介</title>
+    <title>Introduction</title>
 
     <para>
-        从 <ulink url="http://www.xmlrpc.com/">XML-RPC 主页</ulink>上的描述可以了解到，XML-PRC 是
-        “使用 HTTP 作为传输协议、XML 作为编码方式的远程过程调用。在 XML-RPC
-        被设计得尽量简单的同时，又允许传递、处理和返回复杂的数据结构。”
+        From its <ulink url="http://www.xmlrpc.com/">home page</ulink>,
+        XML-RPC is described as a "...remote procedure calling using HTTP as the
+        transport and XML as the encoding. XML-RPC is designed to be as simple
+        as possible, while allowing complex data structures to be transmitted,
+        processed and returned."
     </para>
 
     <para>
-        Zend Framework 提供了调用远程 XML-RPC 服务或创建新的 XML-RPC 服务两种功能。
+        Zend Framework provides support for both consuming remote XML-RPC
+        services and building new XML-RPC servers.
     </para>
 </sect1>
 <!--

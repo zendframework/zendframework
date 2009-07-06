@@ -1,10 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.dom.introduction">
     <title>简介</title>
 
     <para>
-        <code>Zend_Dom</code> 为使用 DOM 文档和结构提供工具。目前，我们提供
-         <code>Zend_Dom_Query</code> ，它提供统一的接口利用 XPath 和 CSS 选
-         择器来查询 DOM 文档。
+        <classname>Zend_Dom</classname> 提供了对 DOM 文档和结构进行操作的工具。
+        现在，<classname>Zend_Dom_Query</classname> 提供了利用 XPath 或 CSS 选择器的统一接口的 DOM 文档查询功能。
     </para>
 </sect1>
 <!--

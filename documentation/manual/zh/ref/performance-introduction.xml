@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="performance.introduction">
+    <title>介绍</title>
+
+    <para>
+        编写这个附录的目的，是提供一些用于提升 Zend Framework 应用的性能的具体策略。本指南按照“问和答”的方式发布，并分解成相关领域。
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

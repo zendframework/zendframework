@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.application.introduction">
+    <title>简介</title>
+
+    <para>
+        <classname>Zend_Application</classname> 提供了一个可重用资源的引导，通用和模块化的引导类和依赖检查。
+        同时默认负责设置 <acronym>PHP</acronym> 环境变量和自动加载功能。
+    </para>
+</sect1>

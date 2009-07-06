@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.tool.project.internals">
+    <title>Zend_Tool_Project 内部机制</title>
+    <sect2 id="zend.tool.project.internals.xml-structure">
+        <title>Zend_Tool_Project 内部 Xml 结构</title>
+        <para></para>
+        <!-- @todo -->
+    </sect2>
+
+    <sect2 id="zend.tool.project.internals.extending">
+        <title>Zend_Tool_Project 内部扩展</title>
+        <para></para>
+        <!-- @todo -->
+    </sect2>
+</sect1>

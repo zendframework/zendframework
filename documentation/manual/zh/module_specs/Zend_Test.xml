@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.test.introduction">
+    <title>简介</title>
+
+    <para>
+        <classname>Zend_Test</classname> 提供了对 Zend Framework 应用进行单元测试的便利工具。
+        现在，已经可以对 Zend Framework MVC 应用方便的进行测试了。
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

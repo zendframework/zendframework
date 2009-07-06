@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16500 -->
 <sect1 id="zend.http.client.adapters">
     <title>Zend_Http_Client - 接続アダプタ</title>
 
@@ -16,7 +16,7 @@
             同じインターフェイスを実装しているだけでいいのです。
         </para>
         <para>
-            現在、Zend_Http_Client クラスは三つの組み込み接続アダプタを提供しています。
+            現在、Zend_Http_Client クラスは四つの組み込み接続アダプタを提供しています。
             <itemizedlist>
                 <listitem>
                     <para>
@@ -421,7 +421,8 @@ $client = new Zend_Http_Client($uri, $config);
             'curloptions' を指定するか、あるいは
             <code>setCurlOption($name, $value)</code> をコールします。
             <code>$name</code> は、cURL 拡張モジュールの
-            CURL_* 定数に対応します。
+            CURL_* 定数に対応します。Curl ハンドルにアクセスするには
+            <code>$adapter->getHandle();</code> をコールします。
         </para>
 
         <example id="zend.http.client.adapters.curl.example-2">

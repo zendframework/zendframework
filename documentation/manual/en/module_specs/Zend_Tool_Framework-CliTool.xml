@@ -94,7 +94,7 @@
 
         <para>
             The next order of business is to ensure that the Zend Framework
-            library is setup correctly inside of the system PHP
+            library is set up correctly inside of the system PHP
             <code>include_path</code>. To find out where your
             <code>include_path</code> is located, you can execute 'php -i' and
             look for the <code>include_path</code> variable, or more succinctly,
@@ -117,7 +117,7 @@
 
         <para>
             If you do not see this type of output, go back and check your setup
-            to ensure you have all of the necessary peices in the proper place.
+            to ensure you have all of the necessary pieces in the proper place.
         </para>
 
         <para>
@@ -161,7 +161,7 @@ ln -s /home/username/lib/ZendFramework/bin/zf.sh /home/username/bin/zf
 
         <para>
             The most common setup in the Windows Win32 environment, is to copy
-            the <code>zf.sh</code> and <code>zf.php</code> into the same
+            the <code>zf.bat</code> and <code>zf.php</code> into the same
             directory as your PHP binary. This can generally be found in one of
             the following places:
         </para>
@@ -181,7 +181,7 @@ C:\WAMP\PHP\bin
 
         <para>
             The next order of business is to ensure that the Zend Framework
-            library is setup correctly inside of the system PHP
+            library is set up correctly inside of the system PHP
             <code>include_path</code>. To find out where your
             <code>include_path</code> is located, you can type 'php -i' and look
             for the <code>include_path</code> variable, or more succinctly
@@ -260,7 +260,7 @@ C:\WAMP\PHP\bin
         <title>Where To Go Next?</title>
 
         <para>
-            At this point, your should be setup to start initiating some more
+            At this point, your should be set up to start initiating some more
             "interesting" commands. To get going, you can issue the <code>zf
                 --help</code> command to see what is available to you.
         </para>

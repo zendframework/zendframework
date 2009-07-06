@@ -1,67 +1,67 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15103 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.request">
     <title>La solicitud del Objeto</title>
     <sect2 id="zend.controller.request.introduction">
         <title>Introducción</title>
-        <para>        		
-			La solicitud del objeto es un simple valor que es pasado entre
+        <para>
+            El objeto request es un objeto de valor simple que es pasado entre
             <classname>Zend_Controller_Front</classname> y el router, dispatcher, y
-            controlador de clases. Empaqueta los nombres de los módulos solicitados,
+            clases de controlador. Empaqueta los nombres del módulo solicitado,
             controlador, acción, y los parámetros opcionales, así como el resto del
-            medio de la solicitud, ya sea HTTP, el CLI, o PHP-GTK.
+            entorno de la solicitud, ya sea HTTP, el CLI, o PHP-GTK.
         </para>
 
         <itemizedlist>
             <listitem><para>
-            	El nombre del módulo es accedido por 
+                    El nombre del módulo es accedido por 
                 <code>getModuleName()</code> y
                 <code>setModuleName()</code>.
             </para></listitem>
 
             <listitem><para>
-            	El nombre del controlador es accedido por 
+                    El nombre del controlador es accedido por 
                 <code>getControllerName()</code> y
                 <code>setControllerName()</code>.
             </para></listitem>
 
             <listitem><para>
-            	El nombre de la acción a llamar dentro el controlador es 
-            	accedido por <code>getActionName()</code> y
+                    El nombre de la acción que llamar dentro del controlador es 
+                    accedido por <code>getActionName()</code> y
                 <code>setActionName()</code>.
             </para></listitem>
 
             <listitem><para>
-            	Los parámetros al ser accesibles por la acción son una asociación de pares 
-            	de array llave/valor que son recuperdos por <code>getParams()</code>
+                    Los parámetros accesibles por la acción son un array asociativo de pares clave/valor que son recuperados por <code>getParams()</code>
                 y configurados con <code>setParams()</code>, o configurados individualmente por
                 <code>getParam()</code> y <code>setParam()</code>.
             </para></listitem>
         </itemizedlist>
 
         <para>
-        	Basado en el tipo de solicitud, puede haber más métodos disponibles.
-        	La solicitud por defecto usa, <classname>Zend_Controller_Request_Http</classname>,
-            para instanciar, tiene métodos para recuperar la solicitud URI, ruta de la 
+                Basado en el tipo de solicitud, puede haber más métodos disponibles.
+                La solicitud por defecto usada, <classname>Zend_Controller_Request_Http</classname>,
+            por ejemplo, tiene métodos para recuperar la URI de la solicitud, ruta de la 
             información, parámetros <code>$_GET</code> y <code>$_POST</code>,
             etc.
         </para>
 
         <para>
-        	la solicitud objeto es pasada al controlador front, o si no es 
-        	previsto, es instanciado al principio del proceso despachador,
-        	antes de que ocurra unenrutamiento. Es pasado a través de todos los objetos
-            en la cadena del despachador.
+                El objeto request es pasado al controlador front, o si no es 
+                provisto, es instanciado al principio del proceso dispatcher,
+                antes de que ocurra el enrutamiento. Es pasado a través de todos los objetos
+            en la cadena del dispatcher.
         </para>
 
         <para>
-        	Adicionalmente, la solicitud objeto es particularmente usado en pruebas.
-        	El desarrolador puede cambiar el entorno de la solicitud, incluyendo módulos,
-        	controladores, acciones, parámetros, URI, etc, y pasar la solicitud 
-        	objeto al controlador front para probar el flujo de la aplicación. Cuando se vincula 
-        	con el <link linkend="zend.controller.response">objeto 
-        		respuesta </link>,es posible elaborar y precisar una unidad de pruebas de aplicaciones
-        	MVC.
+                Adicionalmente, la solicitud objeto es particularmente útil en pruebas.
+                El desarrolador puede cambiar el entorno de la solicitud, incluyendo módulos,
+                controladores, acciones, parámetros, URI, etc, y pasar la solicitud 
+                objeto al controlador front para probar el flujo de la aplicación. Cuando se vincula 
+                con el <link linkend="zend.controller.response">objeto 
+                        respuesta </link>, es posible elaborar y precisar una unidad de pruebas de aplicaciones
+                MVC.
         </para>
     </sect2>
 
@@ -85,7 +85,7 @@
             <note>
                 <title>Datos Superglobales</title>
                 <para>
-                	Cuando se accede a datos Superglobales a través 
+                        Cuando se accede a datos Superglobales a través 
                     <classname>Zend_Controller_Request_Http</classname> como propiedades de miembros 
                     públicos, es necesario mantener en mente que el nombre de la 
                     propiedad (supergloabl array key) corresponda a una 
@@ -95,8 +95,8 @@
             </note>
 
             <para>
-            	Las supergloables específicas pueden ser accedidas usando un método público como
-            	una alternativa. Por ejemplo, el valor original de
+                    Las supergloables específicas pueden ser accedidas usando un método público como
+                    una alternativa. Por ejemplo, el valor original de
                 <code>$_POST['user']</code> puede ser accedido llamando a 
                 <code>getPost('user')</code> en la solicitud objeto. Esto 
                 incluye <code>getQuery()</code> para recuperar elementos
@@ -107,10 +107,10 @@
             <note>
                 <title>Datos GET y POST</title>
                 <para>
-                	Sea cauteloso cuando accede a los datos de la solicitud objeto como 
-                	no es filtrado en ninguna manera. El router y dispatcher 
-                	valida y filtra datos para usar con sus tareas, pero dejan
-                	los datos intactos en la solicitud objeto.
+                        Sea cauteloso cuando accede a los datos de la solicitud objeto como 
+                        no es filtrado en ninguna manera. El router y dispatcher 
+                        valida y filtra datos para usar con sus tareas, pero dejan
+                        los datos intactos en la solicitud objeto.
                 </para>
             </note>
 
@@ -118,21 +118,21 @@
                 <title>Recuperando los datos POST sin procesar</title>
 
                 <para>
-                	Como 1.5.0, se puede recuperar los datos sin procesar a través del
-                	método <code>getRawBody()</code>. Este método retorna falso
-                	si los datos han sido enviados de esa manera, pero si no retorna el cuerpo
-                	entero del post.
+                        Como 1.5.0, se puede recuperar los datos sin procesar a través del
+                        método <code>getRawBody()</code>. Este método retorna falso
+                        si los datos han sido enviados de esa manera, pero si no retorna el cuerpo
+                        entero del post.
                 </para>
 
                 <para>
-                	Esto es primordialmente útil para aceptar el contenido cuando
-                	se desarrolla una aplicación MVC simple.
+                        Esto es primordialmente útil para aceptar el contenido cuando
+                        se desarrolla una aplicación MVC simple.
                 </para>
             </note>
 
             <para>
-            	Usted puede determinar parámetros de usuario en la solicitud objeto usando
-            	<code>setParam()</code> y recuperar los mismos despues usando
+                    Usted puede determinar parámetros de usuario en la solicitud objeto usando
+                    <code>setParam()</code> y recuperar los mismos despues usando
                 <code>getParam()</code>. El router hace uso de esta 
                 funcionalidad para determinar parámetros correspondientes en la solicitud URI 
                 a la solicitud objeto.
@@ -142,21 +142,21 @@
                 <title>getParam() Recupera mas que Parámetros de Usuario</title>
 
                 <para>
-                	En orden para hacer el mismo trabajo, <code>getParam()</code> recupera
-                	actualmente desde muchas fuentes. En orden de prioridad, estas 
-                	incluyen: parámetros de usuario determinados a través de <code>setParam()</code>,
+                        En orden para hacer el mismo trabajo, <code>getParam()</code> recupera
+                        actualmente desde muchas fuentes. En orden de prioridad, estas 
+                        incluyen: parámetros de usuario determinados a través de <code>setParam()</code>,
                     parámetros <code>GET</code>, y finalmente parámetros <code>POST</code>. 
                     Ser conciente de esto cuando se sacan datos a través de este
                     método.
                 </para>
 
                 <para>
-                	Si se desea sacar solo desde parámetros se configura a través de
+                        Si se desea sacar solo desde parámetros se configura a través de
                     <code>setParam()</code>, use <code>getUserParam()</code>.
                 </para>
 
                 <para>
-                	Además, a partir de 1.5.0, puede bloquear el parámetro que
+                        Además, a partir de 1.5.0, puede bloquear el parámetro que
                     se buscará en las fuentes. <code>setParamSources()</code>
                     le permite especificar un array vacío o un array con uno o
                     más de los valores '_GET' o '_POST', indicando que
@@ -169,7 +169,7 @@
             <note>
                 <title>Apache Quirks</title>
                 <para>
-                	Si está usando Apache 404 handler para pasar 
+                        Si está usando Apache 404 handler para pasar 
                     If you are using Apache's 404 handler to pass incoming
                     requests to the front controller, or using a PT flag with
                     rewrite rules, <code>$_SERVER['REDIRECT_URL']</code>
@@ -404,20 +404,20 @@ abstract class Zend_Controller_Request_Abstract
 ]]></programlisting>
 
         <para>
-        	La solicitud objeto es un contenedor para entorno de la solicitud. La
-			cadena del controlador sólo necesita saber cómo establecer y recuperar el
-			controlador, la acción, los parámetros opcionales, y el estado del despachador. Por
-			defecto, la solicitud buscará sus propios parámetros mediante el
-			controlador o las llaves de la acción con el fin de determinar el controlador y
-			la acción.
+                La solicitud objeto es un contenedor para entorno de la solicitud. La
+                        cadena del controlador sólo necesita saber cómo establecer y recuperar el
+                        controlador, la acción, los parámetros opcionales, y el estado del despachador. Por
+                        defecto, la solicitud buscará sus propios parámetros mediante el
+                        controlador o las llaves de la acción con el fin de determinar el controlador y
+                        la acción.
         </para>
 
         <para>
-     	 	Para ampliar esta clase, o uno de sus derivados, cuando se necesita la
-			clase solicitud que interactue con un entorno específico con el fin de
-			recuperar los datos para su uso en las tareas antes descritas. Los ejemplos incluyen <link
-				linkend = "zend.controller.request.http"> el entorno HTTP
-				</link>, un entorno CLI, o un entorno de PHP-GTK.
+                      Para ampliar esta clase, o uno de sus derivados, cuando se necesita la
+                        clase solicitud que interactue con un entorno específico con el fin de
+                        recuperar los datos para su uso en las tareas antes descritas. Los ejemplos incluyen <link
+                                linkend = "zend.controller.request.http"> el entorno HTTP
+                                </link>, un entorno CLI, o un entorno de PHP-GTK.
         </para>
     </sect2>
 </sect1>

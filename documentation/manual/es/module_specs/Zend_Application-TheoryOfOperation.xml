@@ -5,19 +5,19 @@
     <title>Teoría de Operación</title>
 
     <para>
-        Obtener una aplicación MVC configurada y lista para funcionar ha
-        requerido una cantidad de código creciente al disponer de una mayor
-        cantidad de características: estableciendo la base de datos,
-        configurar su vista y los ayudantes de vistas, configurar su diseños,
-        colocando plugins, registrando ayudantes de acción, y mucho más.
+        Obtener una aplicación MVC configurada y lista para funcionar 
+        requiere de un porcentaje cada vez mayor de código que disponga
+        de más características, tales como: Establecer la base de datos,
+        configurar la vista y los ayudantes(helpers) de vistas, configurar los layouts,
+        registro de plugins, registro de ayudantes de acción (action helpers), y mucho más.
     </para>
 
     <para>
         Además, a menudo deseará reutilizar el mismo código para arrancar sus
-        pruebas, un cronjob, o un servicio script.
+        pruebas, un cronjob, o un servicio en linea de comandos.
         Si bien es posible incluir simplemente su script bootstrap,
-        a menudo hay initializaciones que son específicas del medio ambiente,
-        puede que usted no necesite el MVC para un cronjob, o simplemente
+        a menudo hay inicializaciones que son específicas del entorno,
+        puede que  no necesite el MVC para un cronjob, o simplemente
         la capa de DB para un servicio script.
     </para>
 
@@ -34,8 +34,8 @@
     <itemizedlist>
         <listitem>
             <para>
-                <classname>Zend_Application</classname>: carga el medio
-                ambiente de PHP, incluyendo include_paths y autocarga,
+                <classname>Zend_Application</classname>: carga el entono
+				de PHP, incluyendo include_paths y autocarga,
                 e instancia la clase requerida de bootstrap.
             </para>
         </listitem>
@@ -53,7 +53,7 @@
         <listitem>
             <para>
                 <classname>Zend_Application_Resource</classname> provee una
-                interfaz para recursos standard de bootstrap que pueden ser
+                interfaz para recursos estandar de bootstrap que pueden ser
                 cargados por demanda mediante una instancia bootstrap,
                 así como implementaciones de varios recursos por defecto.
             </para>
@@ -66,14 +66,14 @@
         <classname>Zend_Application_Bootstrap_Bootstrap</classname> o
         implementando (mínimamente)
         <classname>Zend_Application_Bootstrap_Bootstrapper</classname>. El punto de entrada
-        (e.g., public/index.php) cargará <classname>Zend_Application</classname>,
-        y la instanciará pasando:
+        (por ejemplo, public/index.php) cargará <classname>Zend_Application</classname>,
+        y la instanciará pasando por:
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
-                El medio ambiente actual
+                El entorno actual
             </para>
         </listitem>
         <listitem>
@@ -84,7 +84,7 @@
     </itemizedlist>
 
     <para>
-        Las opciones de bootstrap incluyen el path hacia el archivo que
+        Las opciones de bootstrap incluyen la ruta hacia el archivo que
         contiene la clase bootstrap y opcionalmente:
     </para>
 
@@ -101,7 +101,7 @@
         </listitem>
         <listitem>
             <para>
-                Cualquier setting de php.ini a inicializar
+                Cualquier configuración de php.ini a inicializar
             </para>
         </listitem>
         <listitem>
@@ -111,7 +111,7 @@
         </listitem>
         <listitem>
             <para>
-                Pares de recursos prefijo/path a usar
+                Pares de recursos prefijo/ruta a usar
             </para>
         </listitem>
         <listitem>
@@ -121,7 +121,7 @@
         </listitem>
         <listitem>
             <para>
-                Path adicional al archivo de configuración a cargar
+                Ruta adicional al archivo de configuración a cargar
             </para>
         </listitem>
         <listitem>
@@ -133,7 +133,7 @@
 
     <para>
         Las opciones puden ser una array, un objeto
-        <classname>Zend_Config</classname>, o el path a un archivo de
+        <classname>Zend_Config</classname>, o la ruta a un archivo de
         configuración.
     </para>
 
@@ -142,8 +142,8 @@
 
         <para>
             La segunda área de responsabilidad de
-            <classname>Zend_Application</classname> es ejecutar la aplicación
-            bootstrap. Los bootstraps necesitan mínimamente implementar
+            <classname>Zend_Application</classname> es ejecutar la solicitud
+            del bootstrap. Los bootstraps necesitan mínimamente implementar
             <classname>Zend_Application_Bootstrap_Bootstrapper</classname>,
             la que define la siguiente API:
         </para>
@@ -164,8 +164,8 @@ interface Zend_Application_Bootstrap_Bootstrapper
 ]]></programlisting>
 
         <para>
-            Esta API permite aceptar al bootstrap el medio ambiente y a la
-            configuración desde el objeto aplicación, informa la
+            Esta API permite aceptar al bootstrap en el entorno y  la
+            configuración desde el objeto de la aplicación, informa la
             responsabilidad de los recursos para los recursos bootstraping,
             luego hace el bootstrap y ejecuta la aplicación.
         </para>

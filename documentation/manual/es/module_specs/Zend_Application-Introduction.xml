@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15814 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.application.introduction">
     <title>Introducción</title>
 
     <para>
-        <classname>Zend_Application</classname> 
-        ofrece un motor de arranque (Bootstrapping)
-        para aplicaciones que proporcionan recursos reutilizables,
-        -- clases de bootstrap comunes y basadas en módulos -- y comprobación de
-        dependencias. También se ocupa de establecer el entorno de PHP
+        <classname>Zend_Application</classname>
+        facilita la inicialización de nuestras aplicaciones
+        proporcionando recursos reutilizables, comunes y asociados con el módulo
+		de la clase de arranque y control de dependencias.
+		También se ocupa de establecer el entorno de <acronym>PHP</acronym>
         e introduce la autocarga (autoloading) por defecto.
     </para>
 </sect1>

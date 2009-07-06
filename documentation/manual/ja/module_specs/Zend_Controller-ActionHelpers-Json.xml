@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16016 -->
+<!-- EN-Revision: 16503 -->
 <sect3 id="zend.controller.actionhelpers.json">
     <title>JSON</title>
 
@@ -88,7 +88,7 @@ $this->_helper->json($data, true);
 
         <para>
             オプションで、2 番目の引数に配列を渡すことができます。
-            この配列には、<code>keepLayouts</code>
+            この配列には、<emphasis>keepLayouts</emphasis>
             のオプションを含むさまざまなオプションを指定することができます。
         </para>
 
@@ -104,7 +104,7 @@ $this->_helper->json($data, array('keepLayouts' => true);
             <methodname>Zend_Json::encode()</methodname> は、ネイティブ <acronym>JSON</acronym> 式を
             <classname>Zend_Json_Expr</classname> オブジェクトを使用してエンコードすることができます。
             このオプションはデフォルトでは無効になっています。
-            有効にするには、<code>enableJsonExprFinder</code>
+            有効にするには、<emphasis>enableJsonExprFinder</emphasis>
             オプションに <constant>TRUE</constant> を設定します。
         </para>
 
@@ -114,7 +114,7 @@ $this->_helper->json($data, array('enableJsonExprFinder' => true);
 
         <para>
             これを行いたい場合は、2 番目の引数に必ず配列を渡さなければなりません。
-            また、たとえば <code>keepLayouts</code> のような他のオプションと組み合わせることもできます。
+            また、たとえば <emphasis>keepLayouts</emphasis> のような他のオプションと組み合わせることもできます。
             これらすべてのオプションが <methodname>Zend_Json::encode()</methodname> に渡されます。
         </para>
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16162 -->
+<!-- EN-Revision: 16505 -->
 <sect3 id="zend.controller.actionhelpers.viewrenderer">
     <title>ViewRenderer</title>
 
@@ -60,7 +60,8 @@
 
         <note>
             <para>
-                <methodname>_forward()</methodname> やリダイレクト、あるいは手動でのレンダリングを行う場合は、
+                <methodname>_forward()</methodname> や <methodname>redirect()</methodname>、
+                あるいは手動での <methodname>render()</methodname> を行う場合は、
                 自動レンダリングは不要です。これらの処理を行う場合は、
                 出力を自前で行うことを <emphasis>ViewRenderer</emphasis>
                 に対して指示します。
@@ -71,7 +72,7 @@
             <para>
                 <emphasis>ViewRenderer</emphasis> はデフォルトで有効になっています。
                 これを無効にするには、フロントコントローラのパラメータ
-                <code>noViewRenderer</code> を指定する
+                <emphasis>noViewRenderer</emphasis> を指定する
                 (<methodname>$front->setParam('noViewRenderer', true)</methodname>) か、
                 あるいはヘルパーブローカからヘルパーを削除
                 (<methodname>Zend_Controller_Action_HelperBroker::removeHelper('viewRenderer')</methodname>)
@@ -193,7 +194,7 @@ $this->foo(); // Foo_View_Helper_Foo::foo() をコールします
                     <methodname>setNeverRender($flag = true)</methodname>
                     を使用すると、自動レンダリング機能を全体的に
                     （すべてのコントローラに対して）無効にしたり有効にしたりできます。
-                    true を指定すると、そのコントローラの <methodname>postDispatch()</methodname>
+                    <constant>TRUE</constant> を指定すると、そのコントローラの <methodname>postDispatch()</methodname>
                     では <methodname>render()</methodname> をコールしなくなります。
                     <methodname>getNeverRender()</methodname> は、現在の設定を取得します。
                 </para>
@@ -203,7 +204,7 @@ $this->foo(); // Foo_View_Helper_Foo::foo() をコールします
                 <para>
                     <methodname>setNoRender($flag = true)</methodname>
                     を使用すると、自動レンダリングを無効にしたり有効にしたりできます。
-                    true を指定すると、現在のコントローラの <methodname>postDispatch()</methodname>
+                    <constant>TRUE</constant> を指定すると、現在のコントローラの <methodname>postDispatch()</methodname>
                     では <methodname>render()</methodname> をコールしなくなります。
                     この設定は、<methodname>preDispatch()</methodname>
                     がコールされるたびにいったんリセットされます
@@ -238,7 +239,7 @@ $this->foo(); // Foo_View_Helper_Foo::foo() をコールします
                     <methodname>setScriptAction($name)</methodname>
                     を使用すると、レンダリングするアクションスクリプトを指定することができます。
                     <varname>$name</varname> は、スクリプト名から拡張子を除いたもの
-                    (そして、<code>noController</code> が指定されていない限り、
+                    (そして、<emphasis>noController</emphasis> が指定されていない限り、
                     コントローラのディレクトリ名も除いたもの) となります。
                     指定しなかった場合は、リクエストオブジェクト内のアクションに基づいた名前の
                     ビュースクリプトを探します。
@@ -263,9 +264,9 @@ $this->foo(); // Foo_View_Helper_Foo::foo() をコールします
                     また、ヘルパースクリプトとフィルタスクリプトの先頭につけるクラスプレフィックスや
                     <emphasis>ViewRenderer</emphasis> のオプションも設定します。
                     オプションには、
-                    <code>neverRender</code>、<code>noRender</code>、
-                    <code>noController</code>、<code>scriptAction</code>
-                    および <code>responseSegment</code>
+                    <emphasis>neverRender</emphasis>、<emphasis>noRender</emphasis>、
+                    <emphasis>noController</emphasis>、<emphasis>scriptAction</emphasis>
+                    および <emphasis>responseSegment</emphasis>
                     のいずれかのフラグを指定します。
                 </para>
             </listitem>
@@ -274,8 +275,8 @@ $this->foo(); // Foo_View_Helper_Foo::foo() をコールします
                 <para>
                     <methodname>setRender($action = null, $name = null, $noController
                         = false)</methodname>
-                    を使用すると、<code>scriptAction</code> や <code>responseSegment</code>
-                    そして <code>noController</code> のいずれかまたは複数を
+                    を使用すると、<emphasis>scriptAction</emphasis> や <emphasis>responseSegment</emphasis>
+                    そして <emphasis>noController</emphasis> のいずれかまたは複数を
                     一度に指定することができます。<methodname>direct()</methodname>
                     はこのメソッドのエイリアスで、コントローラ内から簡単にコールすることができます。
                 </para>
@@ -365,7 +366,7 @@ $viewRenderer =
                     <methodname>setViewBasePathSpec($spec)</methodname>
                     は、ビューオブジェクトを追加する際に使用する基底パスを
                     決める際に使用するパス指定を変更します。
-                    デフォルトの設定は <code>:moduleDir/views</code> です。
+                    デフォルトの設定は <filename>:moduleDir/views</filename> です。
                     現在の設定を取得するには
                     <methodname>getViewBasePathSpec()</methodname> を使用します。
                 </para>
@@ -377,7 +378,7 @@ $viewRenderer =
                     は、個々のビュースクリプトのパス
                     (からビュースクリプトの基底パスを除いた部分)
                     を決める際に使用するパス指定を変更します。
-                    デフォルトの設定は <code>:controller/:action.:suffix</code> です。
+                    デフォルトの設定は <filename>:controller/:action.:suffix</filename> です。
                     現在の設定を取得するには
                     <methodname>getViewScriptPathSpec()</methodname> を使用します。
                 </para>
@@ -386,11 +387,11 @@ $viewRenderer =
             <listitem>
                 <para>
                     <methodname>setViewScriptPathNoControllerSpec($spec)</methodname>
-                    は、<code>noController</code> が有効な場合に
+                    は、<emphasis>noController</emphasis> が有効な場合に
                     個々のビュースクリプトのパス
                     (からビュースクリプトの基底パスを除いた部分)
                     を決める際に使用するパス指定を変更します。
-                    デフォルトの設定は <code>:action.:suffix</code> です。
+                    デフォルトの設定は <filename>:action.:suffix</filename> です。
                     現在の設定を取得するには
                     <methodname>getViewScriptPathNoControllerSpec()</methodname> を使用します。
                 </para>
@@ -426,7 +427,7 @@ $viewRenderer =
             <listitem><para>
                     <methodname>setInflector($inflector, $reference)</methodname> は、
                     <emphasis>ViewRenderer</emphasis> で使用する独自のインフレクタを設定します。
-                    <varname>$reference</varname> が true の場合は、
+                    <varname>$reference</varname> が <constant>TRUE</constant> の場合は、
                     対象だけでなくサフィックスやモジュールディレクトリも
                     <emphasis>ViewRenderer</emphasis> のプロパティへの静的な参照とします。
             </para></listitem>
@@ -463,8 +464,8 @@ $viewRenderer =
                         MixedCase および camelCase 形式の単語がダッシュで分割され、
                         アンダースコアはディレクトリ区切り文字に変換され、
                         すべて小文字になります。たとえば
-                        "FooBar" は "foo-bar" となり、そして "FooBar_Admin"
-                        は "foo-bar/admin" となります。
+                        "<classname>FooBar</classname>" は "foo-bar" となり、そして "<classname>FooBar_Admin</classname>"
+                        は "<filename>foo-bar/admin</filename>" となります。
                     </para>
 
                     <para>
@@ -496,7 +497,7 @@ $viewRenderer =
         </note>
 
         <para>
-            <emphasis>ViewRenderer</emphasis> API の最後に紹介するのは、
+            <emphasis>ViewRenderer</emphasis> <acronym>API</acronym> の最後に紹介するのは、
             実際にビュースクリプトのパスを決定するメソッドと
             ビューのレンダリングを行うメソッドです。以下をご覧ください。
         </para>
@@ -515,14 +516,14 @@ $viewRenderer =
 
                 <note><para>
                     レスポンスオブジェクトにビューがレンダリングされると、
-                    自動的に <code>noRender</code> を設定します。
+                    自動的に <emphasis>noRender</emphasis> を設定します。
                     これにより、同じビュースクリプトを間違って複数回レンダリングしてしまうことを防ぎます。
                 </para></note>
 
                 <note>
                     <para>
                         デフォルトでは、
-                        <classname>Zend_Controller_Action::renderScript()</classname>
+                        <methodname>Zend_Controller_Action::renderScript()</methodname>
                         は <emphasis>ViewRenderer</emphasis> の
                         <methodname>renderScript()</methodname> メソッドへのプロキシとなります。
                     </para>
@@ -542,9 +543,9 @@ $viewRenderer =
 
                 <para>
                     <methodname>getViewScript()</methodname>
-                    は、<code>noController</code> フラグの内容によって
-                    <code>viewScriptPathSpec</code> あるいは
-                    <code>viewScriptPathNoControllerSpec</code> のいずれかを使用します。
+                    は、<emphasis>noController</emphasis> フラグの内容によって
+                    <emphasis>viewScriptPathSpec</emphasis> あるいは
+                    <emphasis>viewScriptPathNoControllerSpec</emphasis> のいずれかを使用します。
                 </para>
 
                 <para>
@@ -553,13 +554,13 @@ $viewRenderer =
                     したがって、たとえばコントローラ名が 'foo.bar'
                     でアクション名が 'baz:bat' だったとすると、
                     デフォルトのパス指定をもとにしたビュースクリプトのパスは
-                    'foo-bar/baz-bat.phtml' となります。
+                    '<filename>foo-bar/baz-bat.phtml</filename>' となります。
                 </para>
 
                 <note>
                     <para>
                         デフォルトでは、
-                        <classname>Zend_Controller_Action::getViewScript()</classname>
+                        <methodname>Zend_Controller_Action::getViewScript()</methodname>
                         は <emphasis>ViewRenderer</emphasis> の
                         <methodname>getViewScript()</methodname> メソッドへのプロキシとなります。
                     </para>
@@ -581,7 +582,7 @@ $viewRenderer =
 
                 <note>
                     <para>
-                        render() を使用する際には、その副作用に注意しましょう。
+                        <methodname>render()</methodname> を使用する際には、その副作用に注意しましょう。
                         レスポンスセグメント名や noController
                         フラグに指定した内容は、そのオブジェクト内で残り続けます。
                         さらに、レンダリングが完了した際に noRender
@@ -592,7 +593,7 @@ $viewRenderer =
                 <note>
                     <para>
                         デフォルトでは、
-                        <classname>Zend_Controller_Action::render()</classname> は
+                        <methodname>Zend_Controller_Action::render()</methodname> は
                         <emphasis>ViewRenderer</emphasis> の <methodname>render()</methodname>
                         メソッドへのプロキシとなります。
                     </para>
@@ -665,12 +666,12 @@ class Foo_BarController extends Zend_Controller_Action
             <para>
                 コントローラやアクションの名前が複数の単語からなるものである場合、
                 ディスパッチャには、特定のパスや区切り文字を使用して単語を区切った
-                URL を指定しなければなりません。
+                <acronym>URL</acronym> を指定しなければなりません。
                 <emphasis>ViewRenderer</emphasis> は、コントローラ名の中にあるパス区切り文字を
                 実際のパス区切り文字 ('/') に置き換え、単語区切り文字をダッシュ
                 ('-') に置き換えてパスを作成します。したがって、
                 アクション <filename>/foo.bar/baz.bat</filename> をコールすると
-                FooBarController.php の
+                <filename>FooBarController.php</filename> の
                 <methodname>FooBarController::bazBatAction()</methodname> へディスパッチされ、
                 <filename>foo-bar/baz-bat.phtml</filename> をレンダリングすることになります。
                 また、アクション <filename>/bar_baz/baz-bat</filename> をコールすると
@@ -684,7 +685,7 @@ class Foo_BarController extends Zend_Controller_Action
                 二番目の例では、モジュールはデフォルトモジュールのままであることに注意しましょう。
                 しかし、パス区切り文字があるために、
                 <filename>Bar/BazController.php</filename> にある
-                <code>Bar_BazController</code> を受け取ることになります。
+                <classname>Bar_BazController</classname> を受け取ることになります。
                 ビューレンダラはコントローラのディレクトリ階層を模倣します。
             </para>
         </note>
@@ -694,7 +695,7 @@ class Foo_BarController extends Zend_Controller_Action
 
             <para>
                 アクションやコントローラによっては、自動レンダリングを無効にしたいこともあるでしょう。
-                たとえば、HTML 以外 (XML や JSON など) を出力したい場合や
+                たとえば、HTML 以外 (<acronym>XML</acronym> や <acronym>JSON</acronym> など) を出力したい場合や
                 単に何も出力したくない場合などです。
                 そんな場合には以下のいずれかの方法を使用します。
                 つまり、すべての自動レンダリングを無効にする
@@ -831,10 +832,10 @@ class Foo_BarController extends Zend_Controller_Action
             </para>
 
             <para>
-                この例では、ビューの基底パスを '/opt/vendor/templates'
-                とし、ビュースクリプトのパスは ':moduleDir/:controller/:action.:suffix'
-                となるようにします。noController
-                フラグが設定されている場合は、サブディレクトリ (':action.:suffix')
+                この例では、ビューの基底パスを '<filename>/opt/vendor/templates</filename>'
+                とし、ビュースクリプトのパスは '<filename>:moduleDir/:controller/:action.:suffix</filename>'
+                となるようにします。<emphasis>noController</emphasis>
+                フラグが設定されている場合は、サブディレクトリ ('<filename>:action.:suffix</filename>')
                 からではなくトップディレクトリからのパスとして探すことになります。
                 最後に、ビュースクリプトのファイルの拡張子として
                 'tpl' を設定します。

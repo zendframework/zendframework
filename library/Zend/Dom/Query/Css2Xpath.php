@@ -23,8 +23,8 @@
  * 
  * @package    Zend_Dom
  * @subpackage Query
- * @copyright  Copyright (C) 2007 - Present, Zend Technologies, Inc.
- * @license    New BSD {@link http://framework.zend.com/license/new-bsd}
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
 class Zend_Dom_Query_Css2Xpath

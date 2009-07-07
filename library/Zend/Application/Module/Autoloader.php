@@ -30,7 +30,7 @@ require_once 'Zend/Loader/Autoloader/Resource.php';
  * @package    Zend_Application
  * @subpackage Module
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    New BSD {@link http://framework.zend.com/license/new-bsd}
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Application_Module_Autoloader extends Zend_Loader_Autoloader_Resource
 {

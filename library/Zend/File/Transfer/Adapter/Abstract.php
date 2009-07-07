@@ -616,7 +616,7 @@ abstract class Zend_File_Transfer_Adapter_Abstract
 
         foreach ($check as $key => $content) {
             $fileerrors  = array();
-            if (array_key_exists('validator', $content) && $content['validated']) {
+            if (array_key_exists('validators', $content) && $content['validated']) {
                 continue;
             }
 

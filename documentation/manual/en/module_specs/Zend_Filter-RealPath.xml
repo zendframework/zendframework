@@ -21,7 +21,7 @@
     <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_RealPath();
 $path   = '/www/var/path/../../mypath';
-$filtered = $filter->filter();
+$filtered = $filter->filter($path);
 
 // returns '/www/mypath'
 ]]></programlisting>
@@ -36,7 +36,7 @@ $filtered = $filter->filter();
     <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_RealPath(false);
 $path   = '/www/var/path/../../non/existing/path';
-$filtered = $filter->filter();
+$filtered = $filter->filter($path);
 
 // returns '/www/non/existing/path' even when file_exists or realpath would return false
 ]]></programlisting>

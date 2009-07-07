@@ -503,6 +503,19 @@ class Zend_Application_Bootstrap_BootstrapAbstractTest extends PHPUnit_Framework
         $resource = $bootstrap->getResource('baz');
         $this->assertEquals('Baz', $resource->baz);
     }
+    
+    public function testMagicMethodsForPluginResources()
+    {
+        require_once dirname(__FILE__) . '/../_files/ZfAppBootstrap.php';
+        $bootstrap = new ZfAppBootstrap($this->application);
+        $bootstrap->getPluginLoader()->addPrefixPath('Zend_Application_BootstrapTest_Resource', dirname(__FILE__) . '/../_files/resources');
+        $bootstrap->registerPluginResource('baz');
+        $bootstrap->bootstrap('baz');
+
+        $this->assertTrue(isset($bootstrap->baz));
+        $resource = $bootstrap->baz;
+        $this->assertEquals('Baz', $resource->baz);
+    }
 
     /**
      * @group ZF-6543

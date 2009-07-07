@@ -535,6 +535,30 @@ abstract class Zend_Application_Bootstrap_BootstrapAbstract
     }
 
     /**
+     * Implement PHP's magic to retrieve a ressource
+     * in the bootstrap
+     *
+     * @param string $prop
+     * @return null|mixed
+     */
+    public function __get($prop)
+    {
+        return $this->getResource($prop);
+    }
+
+    /**
+     * Implement PHP's magic to ask for the
+     * existence of a ressource in the bootstrap
+     * 
+     * @param string $prop
+     * @return bool
+     */
+    public function __isset($prop)
+    {
+        return $this->hasResource($prop);
+    }
+
+    /**
      * Bootstrap individual, all, or multiple resources
      *
      * Marked as final to prevent issues when subclassing and naming the

@@ -830,4 +830,12 @@ class Zend_PaginatorTest extends PHPUnit_Framework_TestCase
 
         $this->_restorePaginatorDefaults();
     }
+    /**
+     * @group ZF-7207
+     */
+    public function testItemCountPerPageByDefault()
+    {
+        $paginator = Zend_Paginator::factory(range(1,20));
+        $this->assertEquals(2, $paginator->count());
+    }
 }

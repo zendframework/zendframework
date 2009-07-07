@@ -992,7 +992,7 @@ class Zend_Paginator implements Countable, IteratorAggregate
      */
     protected function _calculatePageCount()
     {
-        return (integer) ceil($this->_adapter->count() / $this->_itemCountPerPage);
+        return (integer) ceil($this->_adapter->count() / $this->getItemCountPerPage());
     }
 
     /**

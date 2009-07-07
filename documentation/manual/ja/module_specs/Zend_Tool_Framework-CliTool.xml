@@ -90,11 +90,11 @@
         </para>
 
         <para>
-            次の課題は、Zend Frameworkライブラリが
-            システムPHP<code>include_path</code>の中で正しく準備されることを確実にすることです。
+            次の課題は、Zend FrameworkライブラリがシステムPHP<code>include_path</code>の中で
+            正しく設定されることを確実にすることです。
             <code>include_path</code>が位置するところを見つけ出すために、
-            'php -i' を実行したり、<code>include_path</code>変数を探したりできます。
-            より簡潔には、 'php -i | grep include_path' を実行します。
+            'php -i' を実行したり、<code>include_path</code>変数を探したり、
+            より簡潔に、 'php -i | grep include_path' を実行したりします。
             一旦<code>include_path</code>が位置するところ
             （これは通常、/usr/lib/php や /usr/share/php、/usr/local/lib/php または同様の何かです）
             を見つけたら、library/ ディレクトリの内容が
@@ -118,37 +118,36 @@
         </para>
 
         <para>
-            There are a couple of alternative setups you might want to employ
-            depending on your servers configuration, your level of access, or
-            for other reasons.
+            サーバー構成やアクセスレベル、
+            またはその他の理由によって使いたいかもしれない二、三の他の設定があります。
         </para>
 
         <para>
-            <emphasis>ALTERNATIVE SETUP</emphasis> involves keeping the Zend
-            Framework download together as is, and creating a link from a PATH
-            location to the <code>zf.sh</code>. What this means is you can
-            place the contents of the ZendFramework download into a location
-            such as <code>/usr/local/share/ZendFramework</code>, or more locally
-            like <code>/home/username/lib/ZendFramework</code>, and creating a
-            symbolic link to the <code>zf.sh</code>.
+            <emphasis>ALTERNATIVE SETUP</emphasis>では
+            一緒にダウンロードするZend Frameworkを現状のまま保って、
+            PATHの場所から<code>zf.sh</code>へのリンクを作成する必要があります。
+            ZendFrameworkダウンロードの内容を
+            <code>/usr/local/share/ZendFramework</code>や
+            またはよりローカルに<code>/home/username/lib/ZendFramework</code>、
+            そして<code>zf.sh</code>へのシンボリックリンクを作成した
+            場所に入れることができることを意味します。
         </para>
 
         <para>
-            Assuming you want to put the link inside <code>/usr/local/bin</code>
-            (this could also work for placing the link inside
-            <code>/home/username/bin/</code> for example) you would issue a
-            command similar to this: </para>
+            リンクを<code>/usr/local/bin</code>
+            （これは、例えばリンクを<code>/home/username/bin/</code>に入れても動作するでしょう）
+            に置きたいならば、あなたはこれに類似したコマンドを発行するでしょう:
+        </para>
 
         <programlisting language="sh"><![CDATA[
 ln -s /usr/local/share/ZendFramework/bin/zf.sh /usr/local/bin/zf
 
-# OR (for example)
+# または (例えば)
 ln -s /home/username/lib/ZendFramework/bin/zf.sh /home/username/bin/zf
 ]]></programlisting>
 
         <para>
-            This will create a link which you should be able to access globally
-            on the command line.
+            コマンドラインでグローバルにアクセスすることができるはずのリンクをこれは確立します。
         </para>
 
     </sect2>
@@ -176,18 +175,15 @@ C:\WAMP\PHP\bin
         </para>
 
         <para>
-            The next order of business is to ensure that the Zend Framework
-            library is set up correctly inside of the system PHP
-            <code>include_path</code>. To find out where your
-            <code>include_path</code> is located, you can type 'php -i' and look
-            for the <code>include_path</code> variable, or more succinctly
-            execute 'php -i | grep include_path' if you have Cygwin setup with
-            grep available. Once you have found where your
-            <code>include_path</code> is located (this will generally be
-            something like <code>C:\PHP\pear</code>, <code>C:\PHP\share</code>,
-            <code>C:\Program Files\ZendServer\share</code> or similar), ensure
-            that the contents of the library/ directory are put inside your
-            <code>include_path</code> specified directory.
+            次の課題は、Zend FrameworkライブラリがシステムPHP<code>include_path</code>の中で
+            正しく設定されることを確実にすることです。
+            <code>include_path</code>が位置するところを見つけ出すために、
+            'php -i' を入力したり、<code>include_path</code>変数を探したりできます。
+            grepが使えるCygwin構成があるなら、より簡潔に、 'php -i | grep include_path' を実行します。
+            一旦<code>include_path</code>が位置するところ
+            （これは通常、<code>C:\PHP\pear</code> や <code>C:\PHP\share</code>、<code>C:\Program Files\ZendServer\share</code> または同様の何かです）
+            を見つけたら、library/ ディレクトリの内容が
+            <code>include_path</code>に指定されたディレクトリに置かれることを確実にしてください。
         </para>
 
         <para>
@@ -207,59 +203,52 @@ C:\WAMP\PHP\bin
         </para>
 
         <para>
-            There are a couple of alternative setups you might want to employ
-            depending on your server's configuration, your level of access, or
-            for other reasons.
+            サーバー構成やアクセスレベル、
+            またはその他の理由によって使いたいかもしれない二、三の他の設定があります。
         </para>
 
         <para>
-            <emphasis>ALTERNATIVE SETUP</emphasis> involves keeping the Zend
-            Framework download together as is, and altering both your system
-            PATH as well as the <code>php.ini</code> file. In your user's
-            environment, make sure to add
-            <code>C:\Path\To\ZendFramework\bin</code>, so that your
-            <code>zf.bat</code> file is executable. Also, alter the
-            <code>php.ini</code> file to ensure that
-            <code>C:\Path\To\ZendFramework\library</code> is in your
-            <code>include_path</code>.
+            <emphasis>ALTERNATIVE SETUP</emphasis>では
+            一緒にダウンロードするZend Frameworkを現状のまま保って、
+            システムPATHと<code>php.ini</code>ファイルの両方を変更する必要があります。
+            ユーザー環境で、<code>zf.bat</code>ファイルが実行可能であるように、
+            必ず<code>C:\Path\To\ZendFramework\bin</code>を加えるようにしてください。
+            また、<code>C:\Path\To\ZendFramework\library</code>が
+            <code>include_path</code>にあることを確実にするために、
+            <code>php.ini</code>ファイルを変えてください。
         </para>
 
     </sect2>
 
     <sect2 id="zend.tool.framework.clitool.setup-othernotes">
-        <title>Other Setup Considerations</title>
+        <title>設定での他の考慮事項</title>
 
         <para>
-            If for some reason you do not want the Zend Framework library inside
-            your <code>include_path</code>, there is another option. There are
-            two special environment variables that <code>zf.php</code> will
-            utilize to determine the location of your Zend Framework
-            installation.
+            もし何らかの理由で<code>include_path</code>の中にZend Frameworkライブラリを必要としないならば、
+            もう一つの選択肢があります。
+            <code>zf.php</code>がZend Frameworkインストールの位置を決定するために利用する2つの特別な環境変数があります。
         </para>
 
         <para>
-            The first is <code>ZEND_TOOL_INCLUDE_PATH_PREPEND</code>, which will
-            prepend the value of this environment variable to the system
-            (<code>php.ini</code>) <code>include_path</code> before loading the
-            client.
+            1つ目は<code>ZEND_TOOL_INCLUDE_PATH_PREPEND</code>です。
+            クライアントをロードする前にシステム（<code>php.ini</code>）の<code>include_path</code>に
+            この環境変数の値を前に付加します。
         </para>
 
         <para>
-            Alternatively, you might want to use
-            <code>ZEND_TOOL_INCLUDE_PATH</code> to completely
-            <emphasis>replace</emphasis> the system <code>include_path</code>
-            for one that makes sense specifically for the <code>zf</code>
-            command line tool.
+            あるいは、<code>zf</code>コマンドライン・ツールのために特に辻褄が合うもののために
+            完全にシステム<code>include_path</code>を<emphasis>取り替える</emphasis>
+            <code>ZEND_TOOL_INCLUDE_PATH</code>を使いたいかもしれません。
         </para>
     </sect2>
 
     <sect2 id="zend.tool.framework.clitool.continuing">
-        <title>Where To Go Next?</title>
+        <title>次に進むべきところは？</title>
 
         <para>
-            At this point, your should be set up to start initiating some more
-            "interesting" commands. To get going, you can issue the <code>zf
-                --help</code> command to see what is available to you.
+            この時点では、よりちょっと「面白い」コマンドの奥義を伝え始めるために準備されなければなりません。
+            動き出すためには、何が利用できるか見るために、
+            <code>zf --help</code>コマンドを発行できます。
         </para>
 
         <para>
@@ -268,9 +257,8 @@ C:\WAMP\PHP\bin
         </para>
 
         <para>
-            Continue on to the <code>Zend_Tool_Project</code> "Create Project"
-            section to understand how to use the <code>zf</code> script for
-            project creation.
+            プロジェクト作成のために<code>zf</code>スクリプトを使用する方法を理解するために、
+            <code>Zend_Tool_Project</code>の「プロジェクトの作成」CreateProject節に進んでください。
         </para>
     </sect2>
 </sect1>

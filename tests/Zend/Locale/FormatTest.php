@@ -581,7 +581,6 @@ class Zend_Locale_FormatTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(2007, $value['year'] );
     }
 
-
     /**
      * test getTime
      * expected array
@@ -633,7 +632,6 @@ class Zend_Locale_FormatTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(14, $value['minute']);
         $this->assertEquals(55, $value['second']);
     }
-
 
     /**
      * test isDate
@@ -959,5 +957,65 @@ class Zend_Locale_FormatTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(Zend_Locale_Format::isNumber('-9,72', array('locale' => 'de')));
         $this->assertEquals(9.72,   Zend_Locale_Format::getFloat(9.72));
         $this->assertEquals('14,23',   Zend_Locale_Format::toNumber(14.2278, array('precision' => 2, 'locale' => 'pt_PT')));
+    }
+
+    /**
+     * Tests getDateTime
+     */
+    public function testgetDateTime()
+    {
+        try {
+            $value = Zend_Locale_Format::getDateTime('no content');
+            $this->fail("exception expected");
+        } catch (Zend_Locale_Exception $e) {
+            // success
+        }
+
+        $this->assertTrue(is_array(Zend_Locale_Format::getDateTime('10.11.2006 13:14:55', array('date_format' => 'dd.MM.yyyy HH:mm:ss'))));
+        $options = array('date_format' => 'dd.MM.yy h:mm:ss a', 'locale' => 'en');
+        $this->assertTrue(is_array(Zend_Locale_Format::getDateTime('15.10.09 11:14:55 am', $options)));
+        $this->assertTrue(is_array(Zend_Locale_Format::getDateTime('15.10.09 12:14:55 am', $options)));
+        $this->assertTrue(is_array(Zend_Locale_Format::getDateTime('15.10.09 11:14:55 pm', $options)));
+        $this->assertTrue(is_array(Zend_Locale_Format::getDateTime('15.10.09 12:14:55 pm', $options)));
+
+        try {
+            $value = Zend_Locale_Format::getDateTime('15.10.09 13:14:55', array('date_format' => 'nocontent'));
+            $this->fail("exception expected");
+        } catch (Zend_Locale_Exception $e) {
+            // success
+        }
+
+        try {
+            $value = Zend_Locale_Format::getDateTime('15.10.09 13:14:55', array('date_format' => 'ZZZZ'));
+            $this->fail("exception expected");
+        } catch (Zend_Locale_Exception $e) {
+            // success
+        }
+
+        $value = Zend_Locale_Format::getDateTime('15.10.09 13:14:55', array('date_format' => 'dd.MM.yy HH:mm:ss.x'));
+        $this->assertEquals(15, $value['day']  );
+        $this->assertEquals(10, $value['month']);
+        $this->assertEquals(2009, $value['year']);
+        $this->assertEquals(13, $value['hour']  );
+        $this->assertEquals(14, $value['minute']);
+        $this->assertEquals(55, $value['second']);
+
+        $this->assertEquals(8, count(Zend_Locale_Format::getDateTime('15.10.09 13:14:55', array('date_format' => 'dd.MM.yy HH:mm:ss'))));
+
+        $value = Zend_Locale_Format::getDateTime('15.10.09 13:14:55', array('date_format' => 'dd.MM.yy HH:mm:ss'));
+        $this->assertEquals(15, $value['day']  );
+        $this->assertEquals(10, $value['month']);
+        $this->assertEquals(2009, $value['year']);
+        $this->assertEquals(13, $value['hour']  );
+        $this->assertEquals(14, $value['minute']);
+        $this->assertEquals(55, $value['second']);
+
+        $value = Zend_Locale_Format::getDateTime('151009131455', array('date_format' => 'dd.MM.yy HH:mm:ss'));
+        $this->assertEquals(15, $value['day']  );
+        $this->assertEquals(10, $value['month']);
+        $this->assertEquals(2009, $value['year']);
+        $this->assertEquals(13, $value['hour']  );
+        $this->assertEquals(14, $value['minute']);
+        $this->assertEquals(55, $value['second']);
     }
 }

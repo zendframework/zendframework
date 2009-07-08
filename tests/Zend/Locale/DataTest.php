@@ -657,27 +657,27 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
     {
         $value = Zend_Locale_Data::getList('de_AT', 'datetime');
         $result = array(
-            'full' => '{1} {0}',
-            'long' => '{1} {0}',
-            'medium' => '{1} {0}',
-            'short' => '{1} {0}'
+            'full' => 'EEEE, dd. MMMM y HH:mm:ss zzzz',
+            'long' => 'dd. MMMM y HH:mm:ss z',
+            'medium' => 'dd.MM.yyyy HH:mm:ss',
+            'short' => 'dd.MM.yy HH:mm'
         );
         $this->assertEquals($result, $value);
 
         $value = Zend_Locale_Data::getList('de_AT', 'datetime', 'gregorian');
         $result = array(
-            'full' => '{1} {0}',
-            'long' => '{1} {0}',
-            'medium' => '{1} {0}',
-            'short' => '{1} {0}'
+            'full' => 'EEEE, dd. MMMM y HH:mm:ss zzzz',
+            'long' => 'dd. MMMM y HH:mm:ss z',
+            'medium' => 'dd.MM.yyyy HH:mm:ss',
+            'short' => 'dd.MM.yy HH:mm'
         );
         $this->assertEquals($result, $value);
 
         $value = Zend_Locale_Data::getContent('de_AT', 'datetime', 'full');
-        $this->assertEquals("{1} {0}", $value);
+        $this->assertEquals("EEEE, dd. MMMM y HH:mm:ss zzzz", $value);
 
         $value = Zend_Locale_Data::getContent('de_AT', 'datetime', array('gregorian', 'long'));
-        $this->assertEquals("{1} {0}", $value);
+        $this->assertEquals("dd. MMMM y HH:mm:ss z", $value);
     }
 
     /**

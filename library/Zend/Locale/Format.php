@@ -1171,4 +1171,42 @@ class Zend_Locale_Format
         }
         return self::_parseDate($time, $options);
     }
+
+    /**
+     * Returns the default datetime format for $locale.
+     *
+     * @param  string|Zend_Locale  $locale  OPTIONAL Locale of $number, possibly in string form (e.g. 'de_AT')
+     * @return string  format
+     */
+    public static function getDateTimeFormat($locale = null)
+    {
+        $format = Zend_Locale_Data::getContent($locale, 'datetime');
+        if (empty($format)) {
+            require_once 'Zend/Locale/Exception.php';
+            throw new Zend_Locale_Exception("failed to receive data from locale $locale");
+        }
+        return $format;
+    }
+
+    /**
+     * Returns an array with 'year', 'month', 'day', 'hour', 'minute', and 'second' elements
+     * extracted from $datetime according to the order described in $format.  For a format of 'd.M.y H:m:s',
+     * and an input of 10.05.1985 11:20:55, getDateTime() would return:
+     * array ('year' => 1985, 'month' => 5, 'day' => 10, 'hour' => 11, 'minute' => 20, 'second' => 55)
+     * The optional $locale parameter may be used to help extract times from strings
+     * containing both a time and a day or month name.
+     *
+     * @param   string  $datetime DateTime string
+     * @param   array   $options  Options: format_type, fix_date, locale, date_format. See {@link setOptions()} for details.
+     * @return  array             Possible array members: day, month, year, hour, minute, second, fixed, format
+     */
+    public static function getDateTime($datetime, array $options = array())
+    {
+        $options = self::_checkOptions($options) + self::$_options;
+        if (empty($options['date_format'])) {
+            $options['format_type'] = 'iso';
+            $options['date_format'] = self::getDateTimeFormat($options['locale']);
+        }
+        return self::_parseDate($datetime, $options);
+    }
 }

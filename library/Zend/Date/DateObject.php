@@ -664,7 +664,7 @@ abstract class Zend_Date_DateObject {
 
         // 32bit timestamp
         if (abs($timestamp) <= 0x7FFFFFFF) {
-            return @getdate($timestamp);
+            return @getdate((int) $timestamp);
         }
 
         if (isset(self::$_cache)) {

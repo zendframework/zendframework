@@ -27,7 +27,7 @@
 
             <para>
                 Zend Framework ships with a variety of translation adapters.
-                Fully half of them utilize an XML format, incurring memory and
+                Fully half of them utilize an <acronym>XML</acronym> format, incurring memory and
                 performance overhead. Fortunately, there are several adapters
                 that utilize other formats that can be parsed much more
                 quickly. In order of speed, from fastest to slowest, they are:
@@ -36,30 +36,31 @@
             <itemizedlist>
                 <listitem><para>
                     <emphasis>Array</emphasis>: this is the fastest, as it is,
-                    by definition, parsed into a native PHP format immediately
+                    by definition, parsed into a native <acronym>PHP</acronym> format immediately
                     on inclusion.
                 </para></listitem>
 
                 <listitem><para>
-                    <emphasis>CSV</emphasis>: uses <methodname>fgetcsv()</methodname> to
-                    parse a CSV file and transform it into a native PHP format.
+                    <emphasis><acronym>CSV</acronym></emphasis>: uses
+                    <methodname>fgetcsv()</methodname> to parse a CSV file and transform it into a
+                    native PHP format.
                 </para></listitem>
 
                 <listitem><para>
-                    <emphasis>INI</emphasis>: uses
-                    <methodname>parse_ini_file()</methodname> to parse an INI file and
-                    transform it into a native PHP format. This and the CSV
-                    adapter are roughly equivalent performance-wise.
+                    <emphasis><acronym>INI</acronym></emphasis>: uses
+                    <methodname>parse_ini_file()</methodname> to parse an <acronym>INI</acronym>
+                    file and transform it into a native <acronym>PHP</acronym> format. This and the
+                    <acronym>CSV</acronym> adapter are roughly equivalent performance-wise.
                 </para></listitem>
 
                 <listitem><para>
-                    <emphasis>Gettext</emphasis>: the Zend Framework gettext
-                    adapter does <emphasis>not</emphasis> use the gettext
+                    <emphasis>Gettext</emphasis>: The gettext adapter from Zend Framework
+                    does <emphasis>not</emphasis> use the gettext
                     extension as it is not thread safe and does not allow
                     specifying more than one locale per server. As a result, it
                     is slower than using the gettext extension directly, but,
                     because the gettext format is binary, it's faster to parse
-                    than XML.
+                    than <acronym>XML</acronym>.
                 </para></listitem>
             </itemizedlist>
 
@@ -74,7 +75,7 @@
         <title>How can I make translation and localization even faster?</title>
 
         <para>
-            Maybe, for business reasons, you're limited to an XML-based
+            Maybe, for business reasons, you're limited to an <acronym>XML</acronym>-based
             translation adapter. Or perhaps you'd like to speed things up even
             more. Or perhaps you want to make l10n operations faster. How can
             you do this?

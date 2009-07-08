@@ -5,7 +5,8 @@
 
     <para>
         <classname>Zend_Db</classname> is a database abstraction layer, and is intended to
-        provide a common API for SQL operations. <classname>Zend_Db_Table</classname> is a
+        provide a common <acronym>API</acronym> for <acronym>SQL</acronym> operations.
+        <classname>Zend_Db_Table</classname> is a
         Table Data Gateway, intended to abstract common table-level database
         operations. Due to their abstract nature and the "magic" they do under
         the hood to perform their operations, they can sometimes introduce
@@ -73,22 +74,23 @@
             <title>Write your own tuned SQL</title>
 
             <para>
-                The only real answer is to write your own SQL;
+                The only real answer is to write your own <acronym>SQL</acronym>;
                 <classname>Zend_Db</classname> does not require the usage of
-                <classname>Zend_Db_Select</classname>, so providing your own, tuned SQL
-                select statements is a perfectly legitimate approach,
+                <classname>Zend_Db_Select</classname>, so providing your own, tuned
+                <acronym>SQL</acronym> select statements is a perfectly legitimate approach,
             </para>
             <para>
                 Run <constant>EXPLAIN</constant> on your queries, and test a variety of
                 approaches until you can reliably hit your indices in the most
-                performant way -- and then hardcode the SQL as a class property
+                performant way -- and then hardcode the <acronym>SQL</acronym> as a class property
                 or constant.
             </para>
 
             <para>
-                If the SQL requires variable arguments, provide placeholders in
-                the SQL, and utilize a combination of <methodname>vsprintf()</methodname> and
-                <methodname>array_walk()</methodname> to inject the values into the SQL:
+                If the <acronym>SQL</acronym> requires variable arguments, provide placeholders in
+                the <acronym>SQL</acronym>, and utilize a combination of
+                <methodname>vsprintf()</methodname> and <methodname>array_walk()</methodname> to
+                inject the values into the <acronym>SQL</acronym>:
             </para>
 
             <programlisting language="php"><![CDATA[

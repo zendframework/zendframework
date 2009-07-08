@@ -1448,7 +1448,7 @@
                         <row>
                             <entry>Zend Framework Components</entry>
                             <entry>Dependency Type</entry>
-                            <entry>PHP Extension</entry>
+                            <entry><acronym>PHP</acronym> Extension</entry>
                         </row>
                     </thead>
                     <tbody>

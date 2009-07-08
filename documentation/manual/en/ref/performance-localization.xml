@@ -42,8 +42,8 @@
 
                 <listitem><para>
                     <emphasis><acronym>CSV</acronym></emphasis>: uses
-                    <methodname>fgetcsv()</methodname> to parse a CSV file and transform it into a
-                    native PHP format.
+                    <methodname>fgetcsv()</methodname> to parse a <acronym>CSV</acronym> file and
+                    transform it into a native <acronym>PHP</acronym> format.
                 </para></listitem>
 
                 <listitem><para>

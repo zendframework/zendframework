@@ -5,8 +5,8 @@
     <title>Zend_Db_Statement</title>
 
     <para>
-        In addition to convenient methods such as <code>fetchAll()</code> and
-        <code>insert()</code> documented in <xref linkend="zend.db.adapter" />,
+        In addition to convenient methods such as <methodname>fetchAll()</methodname> and
+        <methodname>insert()</methodname> documented in <xref linkend="zend.db.adapter" />,
         you can use a statement object to gain more options for running
         queries and fetching result sets. This section describes how to get an
         instance of a statement object, and how to use its methods.
@@ -23,7 +23,7 @@
 
         <para>
             Typically, a statement object is returned by the
-            <code>query()</code> method of the database Adapter class.
+            <methodname>query()</methodname> method of the database Adapter class.
             This method is a general way to prepare any SQL statement.
             The first argument is a string containing an SQL statement.
             The optional second argument is an array of values to bind
@@ -74,7 +74,7 @@ $stmt = new Zend_Db_Statement_Mysqli($db, $sql);
         <para>
             You need to execute a statement object if you create it using its
             constructor, or if you want to execute the same statement multiple
-            times. Use the <code>execute()</code> method of the statement
+            times. Use the <methodname>execute()</methodname> method of the statement
             object. The single argument is an array of value to bind to
             parameter placeholders in the statement.
         </para>
@@ -144,7 +144,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
 
             <para>
                 To retrieve one row from the result set, use the
-                <code>fetch()</code> method of the statement object.
+                <methodname>fetch()</methodname> method of the statement object.
                 All three arguments of this method are optional:
             </para>
 
@@ -164,7 +164,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
                         <emphasis>Cursor orientation</emphasis>
                         is the second argument. The default is
                         Zend_Db::FETCH_ORI_NEXT, which simply means that each
-                        call to <code>fetch()</code> returns the next row in
+                        call to <methodname>fetch()</methodname> returns the next row in
                         the result set, in the order returned by the RDBMS.
                     </para>
                 </listitem>
@@ -177,13 +177,13 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
                         to return.
                         If the cursor orientation is Zend_Db::FETCH_ORI_REL,
                         then the offset number is relative to the cursor
-                        position before <code>fetch()</code> was called.
+                        position before <methodname>fetch()</methodname> was called.
                     </para>
                 </listitem>
             </itemizedlist>
 
             <para>
-                <code>fetch()</code> returns <constant>FALSE</constant> if all rows of
+                <methodname>fetch()</methodname> returns <constant>FALSE</constant> if all rows of
                 the result set have been fetched.
             </para>
 
@@ -211,9 +211,9 @@ while ($row = $stmt->fetch()) {
 
             <para>
                 To retrieve all the rows of the result set in one step, use the
-                <code>fetchAll()</code> method. This is equivalent to calling
-                the <code>fetch()</code> method in a loop and returning all
-                the rows in an array. The <code>fetchAll()</code> method accepts
+                <methodname>fetchAll()</methodname> method. This is equivalent to calling
+                the <methodname>fetch()</methodname> method in a loop and returning all
+                the rows in an array. The <methodname>fetchAll()</methodname> method accepts
                 two arguments. The first is the fetch style, as described above,
                 and the second indicates the number of the column to return,
                 when the fetch style is Zend_Db::FETCH_COLUMN.
@@ -246,14 +246,14 @@ echo $rows[0]['bug_description'];
                 as associative arrays, mapping column names to column values.
                 You can specify a different format for the statement class to
                 return rows, just as you can in the Adapter class. You can use
-                the <code>setFetchMode()</code> method of the statement object
+                the <methodname>setFetchMode()</methodname> method of the statement object
                 to specify the fetch mode. Specify the fetch mode using
                 Zend_Db class constants FETCH_ASSOC, FETCH_NUM, FETCH_BOTH,
                 FETCH_COLUMN, and FETCH_OBJ.
                 See <xref linkend="zend.db.adapter.select.fetch-mode" />
                 for more information on these modes.
-                Subsequent calls to the statement methods <code>fetch()</code>
-                or <code>fetchAll()</code> use the fetch mode that you specify.
+                Subsequent calls to the statement methods <methodname>fetch()</methodname>
+                or <methodname>fetchAll()</methodname> use the fetch mode that you specify.
             </para>
 
             <example id="zend.db.statement.fetching.fetch-mode.example">
@@ -282,7 +282,7 @@ echo $rows[0][0];
 
             <para>
                 To return a single column from the next row of the result set,
-                use <code>fetchColumn()</code>. The optional argument is the
+                use <methodname>fetchColumn()</methodname>. The optional argument is the
                 integer index of the column, and it defaults to 0. This method
                 returns a scalar value, or <constant>FALSE</constant> if all rows of
                 the result set have been fetched.
@@ -290,10 +290,10 @@ echo $rows[0][0];
 
             <para>
                 Note this method operates differently than the
-                <code>fetchCol()</code> method of the Adapter class.
-                The <code>fetchColumn()</code> method of a statement returns a
+                <methodname>fetchCol()</methodname> method of the Adapter class.
+                The <methodname>fetchColumn()</methodname> method of a statement returns a
                 single value from one row.
-                The <code>fetchCol()</code> method of an adapter returns an
+                The <methodname>fetchCol()</methodname> method of an adapter returns an
                 array of values, taken from the first column of all rows of the
                 result set.
             </para>
@@ -320,7 +320,7 @@ $bug_status = $stmt->fetchColumn(2);
 
             <para>
                 To retrieve a row from the result set structured as an object,
-                use the <code>fetchObject()</code>. This method takes two
+                use the <methodname>fetchObject()</methodname>. This method takes two
                 optional arguments. The first argument is a string that names
                 the class name of the object to return; the default is
                 'stdClass'. The second argument is an array of values that

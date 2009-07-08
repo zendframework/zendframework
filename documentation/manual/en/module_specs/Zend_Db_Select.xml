@@ -956,13 +956,13 @@ $select = $db->select()
 
             <para>
                 In <classname>Zend_Db_Select</classname>, you can specify conditions for restricting
-                groups using the <code>having()</code> method. Its usage is similar to that of the
-                <code>where()</code> method. The first argument is a string containing a SQL
+                groups using the <methodname>having()</methodname> method. Its usage is similar to that of the
+                <methodname>where()</methodname> method. The first argument is a string containing a SQL
                 expression. The optional second argument is a value that is used to replace a
                 positional parameter placeholder in the SQL expression. Expressions given in
-                multiple invocations of the <code>having()</code> method are combined using the
+                multiple invocations of the <methodname>having()</methodname> method are combined using the
                 Boolean <code>AND</code> operator, or the <code>OR</code> operator if you use the
-                <code>orHaving()</code> method.
+                <methodname>orHaving()</methodname> method.
             </para>
 
             <example id="zend.db.select.building.having.example">
@@ -992,9 +992,9 @@ $select = $db->select()
             <note>
 
                 <para>
-                    No quoting is applied to expressions given to the <code>having()</code> or
-                    <code>orHaving()</code> methods. If you have column names that need to be
-                    quoted, you must use <code>quoteIdentifier()</code> as you form the string for
+                    No quoting is applied to expressions given to the <methodname>having()</methodname> or
+                    <methodname>orHaving()</methodname> methods. If you have column names that need to be
+                    quoted, you must use <methodname>quoteIdentifier()</methodname> as you form the string for
                     the condition.
                 </para>
 
@@ -1017,14 +1017,14 @@ $select = $db->select()
             </para>
 
             <para>
-                In <classname>Zend_Db_Select</classname>, you can use the <code>order()</code>
+                In <classname>Zend_Db_Select</classname>, you can use the <methodname>order()</methodname>
                 method to specify a column or an array of columns by which to sort. Each element of
                 the array is a string naming a column. Optionally with the <code>ASC</code>
                 <code>DESC</code> keyword following it, separated by a space.
             </para>
 
             <para>
-                Like in the <code>from()</code> and <code>group()</code> methods, column names are
+                Like in the <methodname>from()</methodname> and <methodname>group()</methodname> methods, column names are
                 quoted as identifiers, unless they contain parentheses or are an object of
                 type <classname>Zend_Db_Expr</classname>.
             </para>
@@ -1069,7 +1069,7 @@ $select = $db->select()
             </para>
 
             <para>
-                In <classname>Zend_Db_Select</classname>, you can use the <code>limit()</code>
+                In <classname>Zend_Db_Select</classname>, you can use the <methodname>limit()</methodname>
                 method to specify the count of rows and the number of rows to skip. The first
                 argument to this method is the desired count of rows. The second argument is the
                 number of rows to skip.
@@ -1105,12 +1105,12 @@ $select = $db->select()
             </note>
 
             <para>
-                Use the <code>limitPage()</code> method for an alternative way to specify row count
+                Use the <methodname>limitPage()</methodname> method for an alternative way to specify row count
                 and offset. This method allows you to limit the result set to one of a series of
                 fixed-length subsets of rows from the query's total result set. In other words, you
                 specify the length of a "page" of results, and the ordinal number of the single
                 page of results you want the query to return. The page number is the first argument
-                of the <code>limitPage()</code> method, and the page length is the second argument.
+                of the <methodname>limitPage()</methodname> method, and the page length is the second argument.
                 Both arguments are required; they have no default values.
             </para>
 
@@ -1139,7 +1139,7 @@ $select = $db->select()
             <title>Adding the DISTINCT Query Modifier</title>
 
             <para>
-                The <code>distinct()</code> method enables you to add the <code>DISTINCT</code>
+                The <methodname>distinct()</methodname> method enables you to add the <code>DISTINCT</code>
                 keyword to your SQL query.
             </para>
 
@@ -1166,7 +1166,7 @@ $select = $db->select()
             <title>Adding the FOR UPDATE Query Modifier</title>
 
             <para>
-                The <code>forUpdate()</code> method enables you to add the <code>FOR UPDATE</code>
+                The <methodname>forUpdate()</methodname> method enables you to add the <code>FOR UPDATE</code>
                 modifier to your SQL query.
             </para>
 
@@ -1205,13 +1205,13 @@ $select = $db->select()
 
             <para>
                 You can execute the query represented by the <classname>Zend_Db_Select</classname>
-                object by passing it as the first argument to the <code>query()</code> method of a
+                object by passing it as the first argument to the <methodname>query()</methodname> method of a
                 <classname>Zend_Db_Adapter_Abstract</classname> object. Use the
                 <classname>Zend_Db_Select</classname> objects instead of a string query.
             </para>
 
             <para>
-                The <code>query()</code> method returns an object of type
+                The <methodname>query()</methodname> method returns an object of type
                 <classname>Zend_Db_Statement</classname> or PDOStatement, depending on the adapter
                 type.
             </para>
@@ -1237,8 +1237,8 @@ $result = $stmt->fetchAll();
             <title>Executing Select Queries from the Object</title>
 
             <para>
-                As an alternative to using the <code>query()</code> method of the adapter object,
-                you can use the <code>query()</code> method of the
+                As an alternative to using the <methodname>query()</methodname> method of the adapter object,
+                you can use the <methodname>query()</methodname> method of the
                 <classname>Zend_Db_Select</classname> object. Both methods return an object of type
                 <classname>Zend_Db_Statement</classname> or PDOStatement, depending on the adapter
                 type.
@@ -1266,7 +1266,7 @@ $result = $stmt->fetchAll();
 
             <para>
                 If you need access to a string representation of the SQL query corresponding to the
-                <classname>Zend_Db_Select</classname> object, use the <code>__toString()</code>
+                <classname>Zend_Db_Select</classname> object, use the <methodname>__toString()</methodname>
                 method.
             </para>
 
@@ -1297,7 +1297,7 @@ echo "$sql\n";
 
         <para>
             This section describes other methods of the <classname>Zend_Db_Select</classname> class
-            that are not covered above: <code>getPart()</code> and <code>reset()</code>.
+            that are not covered above: <methodname>getPart()</methodname> and <methodname>reset()</methodname>.
         </para>
 
         <sect3 id="zend.db.select.other.get-part">
@@ -1305,7 +1305,7 @@ echo "$sql\n";
             <title>Retrieving Parts of the Select Object</title>
 
             <para>
-                The <code>getPart()</code> method returns a representation of one part of your SQL
+                The <methodname>getPart()</methodname> method returns a representation of one part of your SQL
                 query. For example, you can use this method to return the array of expressions for
                 the <code>WHERE</code> clause, or the array of columns (or column expressions) that
                 are in the <code>SELECT</code> list, or the values of the count and offset for the
@@ -1320,7 +1320,7 @@ echo "$sql\n";
             </para>
 
             <para>
-                The single argument to the <code>getPart()</code> method is a string that
+                The single argument to the <methodname>getPart()</methodname> method is a string that
                 identifies which part of the Select query to return. For example, the string
                 <code>'from'</code> identifies the part of the Select object that stores
                 information about the tables in the <code>FROM</code> clause, including joined
@@ -1428,18 +1428,18 @@ print_r( $orderData );
             <title>Resetting Parts of the Select Object</title>
 
             <para>
-                The <code>reset()</code> method enables you to clear one specified part of the SQL
+                The <methodname>reset()</methodname> method enables you to clear one specified part of the SQL
                 query, or else clear all parts of the SQL query if you omit the argument.
             </para>
 
             <para>
                 The single argument is optional. You can specify the part of the query to clear,
-                using the same strings you used in the argument to the <code>getPart()</code>
+                using the same strings you used in the argument to the <methodname>getPart()</methodname>
                 method. The part of the query you specify is reset to a default state.
             </para>
 
             <para>
-                If you omit the parameter, <code>reset()</code> changes all parts of the query to
+                If you omit the parameter, <methodname>reset()</methodname> changes all parts of the query to
                 their default state. This makes the <classname>Zend_Db_Select</classname> object
                 equivalent to a new object, as though you had just instantiated it.
             </para>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16389 -->
+<!-- EN-Revision: 16590 -->
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
     "@DOCBOOK_DTD@"
 [
@@ -426,6 +426,28 @@
         <xi:include href="module_specs/Zend_ProgressBar.xml" />
     </chapter>
 
+    <chapter id="zend.queue">
+        <title>Zend_Queue</title>
+        <xi:include href="module_specs/Zend_Queue-Introduction.xml">
+            <xi:fallback><xi:include href="../en/module_specs/Zend_Queue-Introduction.xml" /></xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Queue-Example.xml">
+            <xi:fallback><xi:include href="../en/module_specs/Zend_Queue-Example.xml" /></xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Queue-Framework.xml">
+            <xi:fallback><xi:include href="../en/module_specs/Zend_Queue-Framework.xml" /></xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Queue-Adapters.xml">
+            <xi:fallback><xi:include href="../en/module_specs/Zend_Queue-Adapters.xml" /></xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Queue-Custom.xml">
+            <xi:fallback><xi:include href="../en/module_specs/Zend_Queue-Custom.xml" /></xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Queue-Stomp.xml">
+            <xi:fallback><xi:include href="../en/module_specs/Zend_Queue-Stomp.xml" /></xi:fallback>
+        </xi:include>
+    </chapter>
+
     <chapter id="zend.reflection">
         <title>Zend_Reflection</title>
         <xi:include href="module_specs/Zend_Reflection-Introduction.xml">
@@ -511,6 +533,9 @@
         </xi:include>
         <xi:include href="module_specs/Zend_Service_Amazon_S3.xml">
             <xi:fallback><xi:include href="../en/module_specs/Zend_Service_Amazon_S3.xml" /></xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Service_Amazon_Sqs.xml">
+            <xi:fallback><xi:include href="../en/module_specs/Zend_Service_Amazon_Sqs.xml" /></xi:fallback>
         </xi:include>
         <xi:include href="module_specs/Zend_Service_Audioscrobbler.xml" />
         <xi:include href="module_specs/Zend_Service_Delicious.xml" />

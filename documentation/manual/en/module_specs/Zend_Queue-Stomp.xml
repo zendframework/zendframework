@@ -6,8 +6,9 @@
     <para>
         <classname>Zend_Queue_Stomp</classname> provides a basic client to
         communicate with <ulink url="http://stomp.codehaus.org/">Stomp</ulink>
-        compatible servers.  Some servers, such as ApacheMQ and RabbitMQ, will
-        allow you to communicate by other methods, such as HTTP, and XMPP.
+        compatible servers. Some servers, such as ApacheMQ and RabbitMQ, will
+        allow you to communicate by other methods, such as <acronym>HTTP</acronym>,
+        and <acronym>XMPP</acronym>.
     </para>
 
     <para>

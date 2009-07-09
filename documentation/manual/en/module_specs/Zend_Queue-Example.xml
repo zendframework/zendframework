@@ -4,12 +4,12 @@
     <title>Example usage</title>
 
     <para>
-        The below example of <code>Zend_Queue</code> shows a variety of
+        The below example of <classname>Zend_Queue</classname> shows a variety of
         features, including queue creation, queue retrieval, message retrieval,
         message deletion, and sending messages.
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 // For configuration options
 // @see Zend_Queue_Adapater::__construct()
 $options = array(

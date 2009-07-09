@@ -9,15 +9,15 @@
         <para>
             <classname>Zend_Queue</classname> will accept any adapter that
             implements
-            <classname>Zend_Queue_Adapter_AdapterAbstract</classname>.  You can
+            <classname>Zend_Queue_Adapter_AdapterAbstract</classname>. You can
             create your own adapter by extending one of the existing adapters,
             or the abstract class
-            <classname>Zend_Queue_Adapter_AdapterAbstract</classname>.  I
+            <classname>Zend_Queue_Adapter_AdapterAbstract</classname>. I
             suggest reviewing <classname>Zend_Queue_Adapter_Array</classname> as
             this adapter is the easist to conceptualize.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class Custom_DbForUpdate extends Zend_Queue_Adapter_Db
 {
     /**
@@ -54,7 +54,7 @@ $queue = Zend_Queue($adapter, $options);
             You can also change the adapter on the fly as well.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $adapter = new MyCustom_Adapter($options);
 $queue   = Zend_Queue($options);
 $queue->setAdapter($adapter);
@@ -63,7 +63,7 @@ echo "Adapter: ", get_class($queue->getAdapter()), "\n";
 
         <para>or</para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $options = array(
     'name'           => 'queue1',
     'namespace'      => 'Custom',
@@ -88,7 +88,7 @@ $queue = Zend_Queue('DbForUpdate', $config); // loads Custom_DbForUpdate
             Our variables start with an underscore. For example:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class Zend_Queue_Message
 {
     protected $_data = array();
@@ -106,7 +106,7 @@ class Zend_Queue_Message
 
         <para>
             <classname>Zend_Queue</classname> will also accept your own message
-            iterator class.  The message iterator class is used to return
+            iterator class. The message iterator class is used to return
             messages from
             <methodname>Zend_Queue_Adapter_Abstract::recieve()</methodname>.
             <methodname>Zend_Queue_Abstract::receive()</methodname> should aways

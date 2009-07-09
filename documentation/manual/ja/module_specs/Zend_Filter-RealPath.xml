@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15854 -->
+<!-- EN-Revision: 16550 -->
 <sect2 id="zend.filter.set.realpath">
     <title>RealPath</title>
 
@@ -23,7 +23,7 @@
     <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_RealPath();
 $path   = '/www/var/path/../../mypath';
-$filtered = $filter->filter();
+$filtered = $filter->filter($path);
 
 // '/www/mypath' を返します。
 ]]></programlisting>
@@ -39,7 +39,7 @@ $filtered = $filter->filter();
     <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_RealPath(false);
 $path   = '/www/var/path/../../non/existing/path';
-$filtered = $filter->filter();
+$filtered = $filter->filter($path);
 
 // file_exists または realpath が false を返すときでも '/www/non/existing/path' を返します。
 ]]></programlisting>

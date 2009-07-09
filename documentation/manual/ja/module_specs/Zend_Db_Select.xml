@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16458 -->
+<!-- EN-Revision: 16564 -->
 <sect1 id="zend.db.select">
 
     <title>Zend_Db_Select</title>
@@ -990,13 +990,13 @@ $select = $db->select()
 
             <para>
                 <classname>Zend_Db_Select</classname> では、グループに対する制約を指定するには
-                <code>having()</code> メソッドを使用します。
-                このメソッドの使用法は <code>where()</code> メソッドと似ています。
+                <methodname>having()</methodname> メソッドを使用します。
+                このメソッドの使用法は <methodname>where()</methodname> メソッドと似ています。
                 最初の引数が SQL の式を含む文字列です。二番目の引数はオプションで、
                 SQL 式の中のパラメータプレースホルダを置き換える値となります。
-                <code>having()</code> を複数回実行すると、それらの条件が
+                <methodname>having()</methodname> を複数回実行すると、それらの条件が
                 論理演算子 <code>AND</code> で連結されます。
-                <code>orHaving()</code> メソッドを使用した場合は、論理演算子
+                <methodname>orHaving()</methodname> メソッドを使用した場合は、論理演算子
                 <code>OR</code> で連結されます。
             </para>
 
@@ -1027,11 +1027,11 @@ $select = $db->select()
             <note>
 
                 <para>
-                    <code>having()</code> メソッドや <code>orHaving()</code>
+                    <methodname>having()</methodname> メソッドや <methodname>orHaving()</methodname>
                     メソッドで指定する式にはクォート処理は行われません。
                     クォートする必要のあるカラム名を使用する場合は、
                     条件の文字列を作成する際に
-                    <code>quoteIdentifier()</code> を使用しなければなりません。
+                    <methodname>quoteIdentifier()</methodname> を使用しなければなりません。
                 </para>
 
             </note>
@@ -1054,7 +1054,7 @@ $select = $db->select()
             </para>
 
             <para>
-                <classname>Zend_Db_Select</classname> では、<code>order()</code> メソッドを使用して
+                <classname>Zend_Db_Select</classname> では、<methodname>order()</methodname> メソッドを使用して
                 並べ替えの基準となるカラムあるいはカラムの配列を指定します。
                 配列の各要素はカラム名を表す文字列です。オプションとして、
                 スペースをはさんでキーワード
@@ -1062,7 +1062,7 @@ $select = $db->select()
             </para>
 
             <para>
-                <code>from()</code> メソッドや <code>group()</code>
+                <methodname>from()</methodname> メソッドや <methodname>group()</methodname>
                 メソッドと同様、カラム名は識別子としてクォートされます。
                 ただし、文字列に括弧が含まれたり
                 <classname>Zend_Db_Expr</classname> 型のオブジェクトを指定したりした場合は別です。
@@ -1109,7 +1109,7 @@ $select = $db->select()
             </para>
 
             <para>
-                <classname>Zend_Db_Select</classname> では、<code>limit()</code>
+                <classname>Zend_Db_Select</classname> では、<methodname>limit()</methodname>
                 メソッドを使用して結果の行数および読み飛ばしの行数を指定します。
                 このメソッドの最初の引数は取得したい行数、
                 そして二番目の引数は読み飛ばす行数となります。
@@ -1146,11 +1146,11 @@ $select = $db->select()
             </note>
 
             <para>
-                一方、<code>limitPage()</code> メソッドを用いることによっても行数とオフセットを指定できます。
+                一方、<methodname>limitPage()</methodname> メソッドを用いることによっても行数とオフセットを指定できます。
                 このメソッドは、クエリの結果セット全体から特定の箇所の連続した行のみを取得するものです。
                 つまり、結果の「ページ」を指定することで、
                 そのページに該当する部分の結果のみを取得するというわけです。
-                <code>limitPage()</code> メソッドの最初の引数にページ数、
+                <methodname>limitPage()</methodname> メソッドの最初の引数にページ数、
                 2 番目の引数にページあたりの行数を指定します。
                 どちらの引数も必須で、デフォルト値はありません。
             </para>
@@ -1180,7 +1180,7 @@ $select = $db->select()
             <title>クエリ修飾子 DISTINCT の追加</title>
 
             <para>
-                <code>distinct()</code> メソッドを使用すると、SQL クエリに
+                <methodname>distinct()</methodname> メソッドを使用すると、SQL クエリに
                 <code>DISTINCT</code> キーワードを追加することができます。
             </para>
 
@@ -1207,7 +1207,7 @@ $select = $db->select()
             <title>クエリ修飾子 FOR UPDATE の追加</title>
 
             <para>
-                <code>forUpdate()</code> メソッドを使用すると、SQL クエリに
+                <methodname>forUpdate()</methodname> メソッドを使用すると、SQL クエリに
                 <code>FOR UPDATE</code> 修飾子を追加することができます。
             </para>
 
@@ -1245,13 +1245,13 @@ $select = $db->select()
 
             <para>
                 <classname>Zend_Db_Select</classname> オブジェクトが表すクエリを実行するには、それを
-                <classname>Zend_Db_Adapter_Abstract</classname> オブジェクトの <code>query()</code>
+                <classname>Zend_Db_Adapter_Abstract</classname> オブジェクトの <methodname>query()</methodname>
                 メソッドの最初の引数として渡します。すると、
                 文字列のクエリのかわりに <classname>Zend_Db_Select</classname> オブジェクトを使用するようになります。
             </para>
 
             <para>
-                <code>query()</code> メソッドは、アダプタの型によって
+                <methodname>query()</methodname> メソッドは、アダプタの型によって
                 <classname>Zend_Db_Statement</classname> あるいは PDOStatement
                 型のオブジェクトを返します。
             </para>
@@ -1277,9 +1277,9 @@ $result = $stmt->fetchAll();
             <title>オブジェクトからの Select クエリの実行</title>
 
             <para>
-                アダプタオブジェクトの <code>query()</code>
+                アダプタオブジェクトの <methodname>query()</methodname>
                 メソッドを使用する以外の方法としては、<classname>Zend_Db_Select</classname>
-                オブジェクトの <code>query()</code>
+                オブジェクトの <methodname>query()</methodname>
                 メソッドを使用するものがあります。
                 どちらのメソッドも、アダプタの型によって
                 <classname>Zend_Db_Statement</classname> あるいは PDOStatement
@@ -1309,7 +1309,7 @@ $result = $stmt->fetchAll();
             <para>
                 <classname>Zend_Db_Select</classname> オブジェクトに対応する
                 SQL クエリ文字列にアクセスしたい場合は、
-                <code>__toString()</code> メソッドを使用します。
+                <methodname>__toString()</methodname> メソッドを使用します。
             </para>
 
             <example id="zend.db.select.execute.tostring.example">
@@ -1339,8 +1339,8 @@ echo "$sql\n";
 
         <para>
             この節では、これまでにあげてこなかった <classname>Zend_Db_Select</classname>
-            クラスのメソッドである <code>getPart()</code> および
-            <code>reset()</code> について説明します。
+            クラスのメソッドである <methodname>getPart()</methodname> および
+            <methodname>reset()</methodname> について説明します。
         </para>
 
         <sect3 id="zend.db.select.other.get-part">
@@ -1348,7 +1348,7 @@ echo "$sql\n";
             <title>Select オブジェクトの一部の取得</title>
 
             <para>
-                <code>getPart()</code> メソッドは、SQL クエリの一部を返します。
+                <methodname>getPart()</methodname> メソッドは、SQL クエリの一部を返します。
                 たとえば、このメソッドを使用すると、
                 <code>WHERE</code> 句の式を表す配列や
                 <code>SELECT</code> するカラム (あるいは式) の配列、または
@@ -1362,7 +1362,7 @@ echo "$sql\n";
             </para>
 
             <para>
-                <code>getPart()</code> メソッドの引数はひとつで、
+                <methodname>getPart()</methodname> メソッドの引数はひとつで、
                 Select クエリのどの部分を返すのかをここで指定します。
                 たとえば、文字列 <code>'from'</code> を指定すると、
                 Select オブジェクトが <code>FROM</code>
@@ -1470,20 +1470,20 @@ print_r( $orderData );
             <title>Select オブジェクトの一部のリセット</title>
 
             <para>
-                <code>reset()</code> メソッドを使用すると、
+                <methodname>reset()</methodname> メソッドを使用すると、
                 SQL クエリの指定した部分のみを消去することができます。
                 引数を省略した場合は、すべての部分を消去します。
             </para>
 
             <para>
                 引数はひとつで、これは省略可能です。
-                消去したい SQL の部分を、<code>getPart()</code>
+                消去したい SQL の部分を、<methodname>getPart()</methodname>
                 メソッドの引数と同じ文字列で指定します。
                 クエリの指定した部分が、デフォルトの状態に戻ります。
             </para>
 
             <para>
-                パラメータを省略すると、<code>reset()</code>
+                パラメータを省略すると、<methodname>reset()</methodname>
                 はクエリのすべての部分をデフォルトの状態に戻します。
                 これにより、<classname>Zend_Db_Select</classname> オブジェクトは初期状態と同等になります。
                 つまり、最初にインスタンスを作成したときと同じ状態ということです。

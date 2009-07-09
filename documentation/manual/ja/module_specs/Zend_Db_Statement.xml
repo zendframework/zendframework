@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15851 -->
+<!-- EN-Revision: 16564 -->
 <sect1 id="zend.db.statement">
 
     <title>Zend_Db_Statement</title>
 
     <para>
         <xref linkend="zend.db.adapter" /> で説明した
-        <code>fetchAll()</code> や <code>insert()</code>
+        <methodname>fetchAll()</methodname> や <methodname>insert()</methodname>
         のような便利なメソッド以外にも、
         ステートメントオブジェクトを使用することで、
         より柔軟にクエリの実効や結果の取得ができるようになります。
@@ -26,7 +26,7 @@
 
         <para>
             通常は、ステートメントオブジェクトはデータベースアダプタクラスの
-            <code>query()</code> メソッドの返り値として取得します。
+            <methodname>query()</methodname> メソッドの返り値として取得します。
             このメソッドは、任意の SQL 文を実行することができます。
             最初の引数には SQL 文を指定し、
             オプションの二番目の引数には SQL 文中のプレースホルダを置き換える
@@ -79,7 +79,7 @@ $stmt = new Zend_Db_Statement_Mysqli($db, $sql);
             ステートメントをコンストラクタから作成した場合や、
             一度実行したステートメントをもう一度実行したい場合などは、
             ステートメントオブジェクトを自分で実行する必要があります。
-            その場合は、ステートメントオブジェクトの <code>execute()</code>
+            その場合は、ステートメントオブジェクトの <methodname>execute()</methodname>
             メソッドを使用します。このメソッドに渡す引数は、
             ステートメント中のプレースホルダにバインドする変数の値の配列となります。
         </para>
@@ -149,7 +149,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
 
             <para>
                 結果セットから単一の行を取得するには、ステートメントオブジェクトの
-                <code>fetch()</code> メソッドを使用します。
+                <methodname>fetch()</methodname> メソッドを使用します。
                 このメソッドの三つの引数は、いずれも省略可能です。
             </para>
 
@@ -169,7 +169,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
                         二番目の引数で指定するのは、
                         <emphasis>カーソルの種類</emphasis>
                         です。デフォルトは Zend_Db::FETCH_ORI_NEXT
-                        で、<code>fetch()</code> をコールするたびに
+                        で、<methodname>fetch()</methodname> をコールするたびに
                         RDBMS が返す順で次の行を返すというものです。
                     </para>
                 </listitem>
@@ -180,7 +180,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
                         カーソルの種類が Zend_Db::FETCH_ORI_ABS の場合、
                         これは結果セットの中の何行目を返すのかを表します。
                         カーソルの種類が Zend_Db::FETCH_ORI_REL の場合、
-                        これは直前に <code>fetch()</code>
+                        これは直前に <methodname>fetch()</methodname>
                         をコールした際の位置からの相対位置を表します。
                     </para>
                 </listitem>
@@ -188,7 +188,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
 
             <para>
                 すでに結果セットのすべての行が取得済みである場合は
-                <code>fetch()</code> は <constant>FALSE</constant> を返します。
+                <methodname>fetch()</methodname> は <constant>FALSE</constant> を返します。
             </para>
 
             <example id="zend.db.statement.fetching.fetch.example">
@@ -215,10 +215,10 @@ while ($row = $stmt->fetch()) {
 
             <para>
                 結果セットのすべての行を一度に取得するには、
-                <code>fetchAll()</code> メソッドを使用します。
-                これは、ループ内で <code>fetch()</code>
+                <methodname>fetchAll()</methodname> メソッドを使用します。
+                これは、ループ内で <methodname>fetch()</methodname>
                 メソッドを繰り返し使用してすべての行を配列に格納するのと同じことです。
-                <code>fetchAll()</code> メソッドにはふたつの引数を指定できます。
+                <methodname>fetchAll()</methodname> メソッドにはふたつの引数を指定できます。
                 最初の引数は、先ほど説明したのと同じ取得形式です。
                 二番目の引数は、返すカラム番号を指定します。これは最初の引数が
                 Zend_Db::FETCH_COLUMN である場合に使用します。
@@ -250,13 +250,13 @@ echo $rows[0]['bug_description'];
                 デフォルトでは、ステートメントオブジェクトが結果セットの行を返す形式は連想配列で、
                 カラム名とそのカラムの値を関連付けたものとなります。
                 結果を別の形式で返すように指定する方法は、アダプタクラスの場合と同じです。
-                ステートメントオブジェクトの <code>setFetchMode()</code>
+                ステートメントオブジェクトの <methodname>setFetchMode()</methodname>
                 メソッドで、取得形式を指定します。指定できる値は、Zend_Db クラスの定数
                 FETCH_ASSOC、FETCH_NUM、FETCH_BOTH、FETCH_COLUMN そして FETCH_OBJ です。
                 これらについての詳細は
                 <xref linkend="zend.db.adapter.select.fetch-mode" /> を参照ください。
-                これを指定すると、それ以降の <code>fetch()</code> メソッドや
-                <code>fetchAll()</code> メソッドでその形式を使用するようになります。
+                これを指定すると、それ以降の <methodname>fetch()</methodname> メソッドや
+                <methodname>fetchAll()</methodname> メソッドでその形式を使用するようになります。
             </para>
 
             <example id="zend.db.statement.fetching.fetch-mode.example">
@@ -285,7 +285,7 @@ echo $rows[0][0];
 
             <para>
                 結果セットの次の行から単一のカラムの値を取得するには
-                <code>fetchColumn()</code> を使用します。
+                <methodname>fetchColumn()</methodname> を使用します。
                 取得するカラムの位置を表すインデックスを引数で指定します。
                 省略した場合のデフォルトは 0 となります。このメソッドは、
                 スカラー値を返します。もし結果セットのすべての行が既に取得済みである場合は
@@ -294,10 +294,10 @@ echo $rows[0][0];
 
             <para>
                 このメソッドの動作は、アダプタクラスの
-                <code>fetchCol()</code> メソッドとは異なることに注意しましょう。
-                ステートメントクラスの <code>fetchColumn()</code> メソッドは、
+                <methodname>fetchCol()</methodname> メソッドとは異なることに注意しましょう。
+                ステートメントクラスの <methodname>fetchColumn()</methodname> メソッドは、
                 単一の行の単一の値を返します。アダプタの
-                <code>fetchCol()</code> メソッドは、値の配列を返します。
+                <methodname>fetchCol()</methodname> メソッドは、値の配列を返します。
                 これは、結果セットのすべての行の、最初のカラムの値をまとめたものです。
             </para>
 
@@ -323,7 +323,7 @@ $bug_status = $stmt->fetchColumn(2);
 
             <para>
                 結果セットの行をオブジェクトとして取得するには
-                <code>fetchObject()</code> を使用します。このメソッドの引数は二つで、
+                <methodname>fetchObject()</methodname> を使用します。このメソッドの引数は二つで、
                 いずれも省略可能です。最初の引数には、返り値のオブジェクトのクラス名を指定します。
                 デフォルトは 'stdClass' です。二番目の引数には配列を指定します。
                 これは、最初の引数で指定したクラスのコンストラクタに渡す引数となります。

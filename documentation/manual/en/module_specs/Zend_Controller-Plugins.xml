@@ -233,6 +233,7 @@ $front->dispatch();
 
         <xi:include href="Zend_Controller-Plugins-ActionStack.xml" />
         <xi:include href="Zend_Controller-Plugins-ErrorHandler.xml" />
+        <xi:include href="Zend_Controller-Plugins-PutHandler.xml" />
     </sect2>
 </sect1>
 <!--

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect3 id="zend.controller.router.routes.rest">
+    <title>Zend_Rest_Route</title>
+
+    <para>
+        The <classname>Zend_Rest</classname> component contains a RESTful route
+        for <classname>Zend_Controller_Router_Rewrite</classname>.  This route
+        offers a standardized routing scheme that routes requests by translating
+        the HTTP method and the URI to a module, controller, and action.  The
+        table below provides an overview of how request methods and URI's are
+        routed.
+    </para>
+    
+    <table frame="all">
+        <title>Zend_Rest_Route Behavior</title>
+
+        <tgroup cols='3' align='left' colsep='1' rowsep='1'>
+            <colspec colname='method' />
+            <colspec colname='URI' />
+            <colspec colname='route' />
+            <thead>
+                <row>
+                    <entry>Method</entry>
+                    <entry>URI</entry>
+                    <entry>Module_Controller::action</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry>GET</entry>
+                    <entry>/product/ratings/</entry>
+                    <entry>Product_RatingsController::indexAction()</entry>
+                </row>
+                <row>
+                    <entry>GET</entry>
+                    <entry>/product/ratings/:id</entry>
+                    <entry>Product_RatingsController::getAction()</entry>
+                </row>
+                <row>
+                    <entry>POST</entry>
+                    <entry>/product/ratings</entry>
+                    <entry>Product_RatingsController::postAction()</entry>
+                </row>
+                <row>
+                    <entry>PUT</entry>
+                    <entry>/product/ratings/:id</entry>
+                    <entry>Product_RatingsController::putAction()</entry>
+                </row>
+                <row>
+                    <entry>DELETE</entry>
+                    <entry>/product/ratings/:id</entry>
+                    <entry>Product_RatingsController::deleteAction()</entry>
+                </row>
+                <row>
+                    <entry>POST</entry>
+                    <entry><literallayout>/product/ratings/:id?_method="PUT"</literallayout></entry>
+                    <entry>Product_RatingsController::putAction()</entry>
+                </row>
+                <row>
+                    <entry>POST</entry>
+                    <entry><literallayout>/product/ratings/:id?_method="DELETE"</literallayout></entry>
+                    <entry>Product_RatingsController::deleteAction()</entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+
+    <para>
+        To enable <classname>Zend_Rest_Route</classname> for an entire
+        application, construct it with no config params and add it as the
+        default route on the front controller:
+    </para> 
+
+    <programlisting language="php"><![CDATA[
+$front     = Zend_Controller_Front::getInstance();
+$restRoute = new Zend_Rest_Route($front);
+$front->getRouter()->addRoute('default', $restRoute);
+]]></programlisting>
+
+    <note>
+        <para>
+            If <classname>Zend_Rest_Route</classname> cannot match a valid
+            module, controller, or action, it will return false and the router
+            will attempt to match using the next route in the router.
+        </para>
+    </note>
+
+    <para>
+        To enable <classname>Zend_Rest_Route</classname> for specific modules,
+        construct it with an array of module names as the 3rd constructor
+        argument:
+    </para> 
+
+    <programlisting language="php"><![CDATA[
+$front     = Zend_Controller_Front::getInstance();
+$restRoute = new Zend_Rest_Route($front, array(), array('product'));
+$front->getRouter()->addRoute('rest', $restRoute);
+]]></programlisting>
+
+    <para>
+        To enable <classname>Zend_Rest_Route</classname> for specific
+        controllers, add an array of controller names as the value of each
+        module array element.
+    </para> 
+
+    <programlisting language="php"><![CDATA[
+$front     = Zend_Controller_Front::getInstance();
+$restRoute = new Zend_Rest_Route($front, array(), array(
+    'product' => array('ratings')
+));
+$front->getRouter()->addRoute('rest', $restRoute);
+]]></programlisting>
+
+    <sect4 id="zend.rest.controller">
+        <title>Zend_Rest_Controller</title>
+
+        <para>
+            To help guide development of Controllers for use with 
+            <classname>Zend_Rest_Route</classname>, extend your Controllers from
+            <classname>Zend_Rest_Controller</classname>.
+            <classname>Zend_Rest_Controller</classname> defines the 5 most-commonly
+            needed operations for RESTful resources in the form of abstract action
+            methods.
+        </para>
+    
+        <itemizedlist>
+            <listitem>
+                <emphasis><methodname>indexAction</methodname></emphasis> - 
+                Should retrieve an index of resources and assign it to view.
+            </listitem>
+            <listitem>
+                <emphasis><methodname>getAction</methodname></emphasis> - 
+                Should retrieve a single resource identified by URI and assign
+                it to view.
+            </listitem>
+            <listitem>
+                <emphasis><methodname>postAction</methodname></emphasis> - 
+                Should accept a new single resource and persist its state.
+            </listitem>
+            <listitem>
+                <emphasis><methodname>putAction</methodname></emphasis> - 
+                Should accept a single resource idenitifed by URI and persist
+                its state.
+            </listitem>
+            <listitem>
+                <emphasis><methodname>deleteAction</methodname></emphasis> - 
+                Should delete a single resource identified by URI.
+            </listitem>
+        </itemizedlist>
+
+    </sect4>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

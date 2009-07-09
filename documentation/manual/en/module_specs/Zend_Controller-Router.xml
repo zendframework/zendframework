@@ -393,6 +393,7 @@ $router->setGlobalParam('lang', 'en');
         <xi:include href="Zend_Controller-Router-Route-Regex.xml" />
         <xi:include href="Zend_Controller-Router-Route-Hostname.xml" />
         <xi:include href="Zend_Controller-Router-Route-Chain.xml" />
+        <xi:include href="Zend_Controller-Router-Route-Rest.xml" />
     </sect2>
 
     <sect2 id="zend.controller.router.add-config">

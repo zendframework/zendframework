@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15571 -->
+<!-- EN-Revision: 16565 -->
 <sect1 id="performance.localization">
     <title>国際化(i18n)とローカライズ(l10n)</title>
 
@@ -27,7 +27,7 @@
 
             <para>
                 Zend Frameworkはさまざまな翻訳アダプタとともに出荷されています。
-                それらのうち丸々半分はメモリやパフォーマンスのオーバーヘッドを招くXML形式を利用します。
+                それらのうち丸々半分はメモリやパフォーマンスのオーバーヘッドを招く<acronym>XML</acronym>形式を利用します。
                 幸運なことに、もっとより速くパース可能な他の形式を利用するアダプタがいくつかあります。
                 速度の順でもっとも速いものから遅いものまで見て行きましょう:
             </para>
@@ -37,18 +37,19 @@
                     <emphasis>配列</emphasis>: これはもっとも高速です。
                     <!-- TODO -->
                     by definition, on inclusion 
-                    ネィティブなPHP形式にすぐにパースされるためです。
+                    ネィティブな<acronym>PHP</acronym>形式にすぐにパースされるためです。
                 </para></listitem>
 
                 <listitem><para>
-                    <emphasis>CSV</emphasis>: CSVファイルをパースするために <methodname>fgetcsv()</methodname> を使い、
+                    <emphasis><acronym>CSV</acronym></emphasis>: CSVファイルをパースするために <methodname>fgetcsv()</methodname> を使い、
                     それをネィティブなPHP形式に変換します。
                 </para></listitem>
 
                 <listitem><para>
-                    <emphasis>INI</emphasis>: INIファイルをパースするために <methodname>parse_ini_file()</methodname> を使い、
-                    それをネィティブなPHP形式に変換します。
-                    このアダプタとCSVアダプタは性能面で概ね等価です。
+                    <emphasis><acronym>INI</acronym></emphasis>: <acronym>INI</acronym>ファイルをパースするために
+                    <methodname>parse_ini_file()</methodname> を使い、
+                    それをネィティブな<acronym>PHP</acronym>形式に変換します。
+                    このアダプタと<acronym>CSV</acronym>アダプタは性能面で概ね等価です。
                 </para></listitem>
 
                 <listitem><para>
@@ -56,7 +57,7 @@
                     使い<emphasis>ません</emphasis>。
                     それはスレッドセーフではなく、サーバでひとつのロケールだけしか指定できないからです。
                     その結果、gettextエクステンションを直接利用するよりも遅くなりますが、
-                    gettext形式はバイナリなので、XMLをパースするよりは高速です。
+                    gettext形式はバイナリなので、<acronym>XML</acronym>をパースするよりは高速です。
                 </para></listitem>
             </itemizedlist>
 
@@ -71,7 +72,7 @@
         <title>どのようにしたら翻訳やローカライズをもっと速くできますか？</title>
 
         <para>
-            もしかするとビジネス上の理由であなたはXMLベースの翻訳アダプタに制限されているかもしれません。
+            もしかするとビジネス上の理由であなたは<acronym>XML</acronym>ベースの翻訳アダプタに制限されているかもしれません。
             あるいは恐らくあなたはさらに速くしたいかもしれません。
             あるいはひょっとするとローカライズ作業を早めたいかもしれません。
             それにはどうしたら良いでしょう？

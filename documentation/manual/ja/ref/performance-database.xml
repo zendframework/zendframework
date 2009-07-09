@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16565 -->
 <sect1 id="performance.database">
     <title>Zend_Dbパフォーマンス</title>
 
     <para>
         <classname>Zend_Db</classname>はデータベースを抽象化するレイヤーで、
-        SQL操作のための共通APIを提供する意図があります。
+        <acronym>SQL</acronym>操作のための共通<acronym>API</acronym>を提供する意図があります。
         <classname>Zend_Db_Table</classname>はテーブルデータのゲートウェイで、
         テーブルレベルでの抽象的な共通のデータベース操作を提供する意図があります。
         それらの抽象的な性質とそれらの操作を行なうために隠れて行なうマジックのせいで、
@@ -73,22 +73,22 @@
             <title>自分で最適化したSQLを書く</title>
 
             <para>
-                現実的な唯一の答えは自分でSQLを書くことです;
+                現実的な唯一の答えは自分で<acronym>SQL</acronym>を書くことです;
                 自分で用意できるなら、<classname>Zend_Db</classname>で必ず
-                <classname>Zend_Db_Select</classname>を使わずに、SQLのselect文を調整する
+                <classname>Zend_Db_Select</classname>を使わずに、<acronym>SQL</acronym>のselect文を調整する
                 ことがもっとも完璧に筋の通った道です。
             </para>
             <para>
                 <constant>EXPLAIN</constant> をクエリに対して実行して、
                 最もパフォーマンスのあるインデックスを本当に当てるまで、
                 さまざまな取り組みをテストしてください。
-                それからクラスのプロパティーや定数としてSQLをハードコーディングしてください。
+                それからクラスのプロパティーや定数として<acronym>SQL</acronym>をハードコーディングしてください。
             </para>
 
             <para>
-                もしSQLが変数の引数を必要とする場合、
-                SQLにプレースホルダーを用意してください。
-                そして、SQLに値を挿入するために <methodname>vsprintf</methodname>
+                もし<acronym>SQL</acronym>が変数の引数を必要とする場合、
+                <acronym>SQL</acronym>にプレースホルダーを用意してください。
+                そして、<acronym>SQL</acronym>に値を挿入するために <methodname>vsprintf</methodname>
                 と <methodname>array_walk</methodname> の組み合わせを利用してください。
             </para>
 

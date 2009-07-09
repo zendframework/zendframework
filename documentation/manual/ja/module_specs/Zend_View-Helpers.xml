@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16579 -->
 <sect1 id="zend.view.helpers" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>ビューヘルパー</title>
 
@@ -354,9 +354,8 @@ echo $this->formCheckbox('foo',
 ]]></programlisting>
 
         <xi:include href="Zend_View-Helpers-Action.xml" />
-        <xi:include href="Zend_View-Helpers-Cycle.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Cycle.xml" /></xi:fallback>
-        </xi:include>
+        <xi:include href="Zend_View-Helpers-BaseUrl.xml" />
+        <xi:include href="Zend_View-Helpers-Cycle.xml" />
         <xi:include href="Zend_View-Helpers-Partial.xml" />
         <xi:include href="Zend_View-Helpers-Placeholder.xml" />
         <xi:include href="Zend_View-Helpers-Doctype.xml" />

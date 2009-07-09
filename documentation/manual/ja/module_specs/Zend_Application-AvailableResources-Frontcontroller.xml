@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15787 -->
+<sect2 id="zend.application.available-resources.frontcontroller">
+    <title>Zend_Application_Resource_Frontcontroller</title>
+
+    <para>
+        おそらく、あなたが<classname>Zend_Application</classname>でロードする
+        最も一般的なリソースはフロントコントローラ・リソースです。
+        そして、それは<classname>Zend_Controller_Front</classname>を構成する能力を提供します。
+        このリソースは、
+        任意のフロントコントローラ・パラメータを設定したり、初期化するプラグインを指定したり、
+        そのほかにも能力を提供します。
+    </para>
+
+    <para>
+        一旦初期化されると、
+        リソースはブートストラップの<varname>$frontController</varname>プロパティを
+        <classname>Zend_Controller_Front</classname>インスタンスに割り当てます。
+    </para>
+
+    <para>
+        利用できる構成キーは以下を含みます。大文字と小文字の区別をしません:
+    </para>
+
+    <itemizedlist>
+        <listitem><para>
+            <emphasis>controllerDirectory</emphasis>:
+            コントローラ・ディレクトリを単独で指定している文字列値か、
+            またはモジュールからコントローラ・ディレクトリへの連想配列。
+        </para></listitem>
+
+        <listitem><para>
+            <emphasis>moduleControllerDirectoryName</emphasis>:
+            コントローラを含むモジュールの配下でサブディレクトリを示す文字列値
+        </para></listitem>
+
+        <listitem><para>
+            <emphasis>moduleDirectory</emphasis>:
+            モジュールが見つかるかもしれないディレクトリ
+        </para></listitem>
+
+        <listitem><para>
+            <emphasis>defaultControllerName</emphasis>:
+            デフォルト・コントローラの基底名。（通常は "index"）
+        </para></listitem>
+
+        <listitem><para>
+            <emphasis>defaultAction</emphasis>:
+            デフォルト・アクションの基底名。（通常は "index"）
+        </para></listitem>
+
+        <listitem><para>
+            <emphasis>defaultModule</emphasis>:
+            デフォルト・モジュールの基底名。（通常は "default"）
+        </para></listitem>
+
+        <listitem><para>
+            <emphasis>baseUrl</emphasis>:
+            アプリケーションに対して明示された基底<acronym>URL</acronym>
+            （通常は自動検出）
+        </para></listitem>
+
+        <listitem><para>
+            <emphasis>plugins</emphasis>:
+            フロントコントローラのプラグイン・クラス名配列
+            このリソースは、各々のクラスを（コンストラクタ引数なしで）インスタンス化して、
+            それからフロントコントローラでインスタンスを登録します。
+        </para></listitem>
+
+        <listitem><para>
+            <emphasis>params</emphasis>:
+            フロントコントローラに登録する連想配列
+        </para></listitem>
+    </itemizedlist>
+
+    <para>
+        認識されていないキーが与えられると、
+        <methodname>setParam()</methodname>に渡すことで、
+        フロントコントローラ・パラメータとして登録されます。
+    </para>
+
+    <example id="zend.application.available-resources.frontcontroller.configExample">
+        <title>フロントコントローラ・リソース構成サンプル</title>
+
+        <para>
+            下記は、フロントコントローラ・リソースを設定する方法を示す<acronym>INI</acronym>スニペット・サンプルです。
+        </para>
+
+        <programlisting language="ini"><![CDATA[
+[production]
+resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
+resources.frontController.moduleControllerDirectoryName = "actions"
+resources.frontController.moduleDirectory = APPLICATION_PATH "/modules"
+resources.frontController.defaultControllerName = "site"
+resources.frontController.defaultAction = "home"
+resources.frontController.defaultModule = "static"
+resources.frontController.baseUrl = "/subdir"
+resources.frontController.plugins.foo = "My_Plugin_Foo"
+resources.frontController.plugins.bar = "My_Plugin_Bar"
+resources.frontController.env = APPLICATION_ENV
+]]></programlisting>
+    </example>
+
+    <example id="zend.application.available-resources.frontcontroller.propertyExample">
+        <title>ブートストラップでフロントコントローラを取得</title>
+
+        <para>
+            一旦フロントコントローラ・リソースが初期化されたら、
+            ブートストラップの<varname>$frontController</varname>プロパティを通じて
+            フロントコントローラ・インスタンスを取ってくることができます。
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$bootstrap->bootstrap('frontController');
+$front = $bootstrap->frontController;
+]]></programlisting>
+    </example>
+</sect2>

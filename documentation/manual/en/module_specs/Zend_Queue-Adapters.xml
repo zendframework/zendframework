@@ -310,7 +310,7 @@ $queue = Zend_Queue::factory('Db', $options);
                 While Apache's ActiveMQ will support multiple subscriptions, the
                 <classname>Zend_Queue</classname> does not. You must create a
                 new <classname>Zend_Queue</classname> object for each individual
-                subcription.
+                subscription.
             </para>
 
             <para>

@@ -156,7 +156,7 @@ foreach ($messages as $i => $message) {
 
             <listitem>
                 <para>
-                    <methodname>isExists()</methodname> - checks the existance of a queue
+                    <methodname>isExists()</methodname> - checks the existence of a queue
                 </para>
             </listitem>
         </itemizedlist>

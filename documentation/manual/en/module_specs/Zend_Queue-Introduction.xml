@@ -11,7 +11,7 @@
     <para>
         A message queue is a method for distributed processing. For example, a
         Job Broker application may accept multiple applications for jobs from
-        a varity of sources.
+        a variety of sources.
     </para>
 
     <para>

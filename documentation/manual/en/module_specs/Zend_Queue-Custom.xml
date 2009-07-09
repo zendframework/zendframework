@@ -14,7 +14,7 @@
             or the abstract class
             <classname>Zend_Queue_Adapter_AdapterAbstract</classname>. I
             suggest reviewing <classname>Zend_Queue_Adapter_Array</classname> as
-            this adapter is the easist to conceptualize.
+            this adapter is the easiest to conceptualize.
         </para>
 
         <programlisting language="php"><![CDATA[

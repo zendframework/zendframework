@@ -422,7 +422,7 @@ $client = new Zend_Http_Client($uri, $config);
 
         <para>
             By default the cURL adapter is configured to behave exactly like
-            the Socket Adapter and it also accepts the same configuration parameters 
+            the Socket Adapter and it also accepts the same configuration parameters
             as the Socket and Proxy adapters. You can also change the cURL options by either specifying
             the 'curloptions' key in the constructor of the adapter or by calling
             <code>setCurlOption($name, $value)</code>. The <code>$name</code> key

@@ -5,13 +5,13 @@
 
     <para>
         The <classname>Zend_Rest</classname> component contains a RESTful route
-        for <classname>Zend_Controller_Router_Rewrite</classname>. This route
+        for <classname>Zend_Controller_Router_Rewrite</classname>.  This route
         offers a standardized routing scheme that routes requests by translating
-        the <acronym>HTTP</acronym> method and the <acronym>URI</acronym>
-        to a module, controller, and action. The table below provides an overview
-        of how request methods and <acronym>URI</acronym>'s are routed.
+        the HTTP method and the URI to a module, controller, and action.  The
+        table below provides an overview of how request methods and URI's are
+        routed.
     </para>
-    
+
     <table frame="all">
         <title>Zend_Rest_Route Behavior</title>
 
@@ -22,49 +22,45 @@
             <thead>
                 <row>
                     <entry>Method</entry>
-                    <entry><acronym>URI</acronym></entry>
+                    <entry>URI</entry>
                     <entry>Module_Controller::action</entry>
                 </row>
             </thead>
             <tbody>
                 <row>
                     <entry>GET</entry>
-                    <entry><filename>/product/ratings/</filename></entry>
-                    <entry><methodname>Product_RatingsController::indexAction()</methodname></entry>
+                    <entry>/product/ratings/</entry>
+                    <entry>Product_RatingsController::indexAction()</entry>
                 </row>
                 <row>
                     <entry>GET</entry>
-                    <entry><filename>/product/ratings/:id</filename></entry>
-                    <entry><methodname>Product_RatingsController::getAction()</methodname></entry>
+                    <entry>/product/ratings/:id</entry>
+                    <entry>Product_RatingsController::getAction()</entry>
                 </row>
                 <row>
                     <entry>POST</entry>
-                    <entry><filename>/product/ratings</filename></entry>
-                    <entry><methodname>Product_RatingsController::postAction()</methodname></entry>
+                    <entry>/product/ratings</entry>
+                    <entry>Product_RatingsController::postAction()</entry>
                 </row>
                 <row>
                     <entry>PUT</entry>
-                    <entry><filename>/product/ratings/:id</filename></entry>
-                    <entry><methodname>Product_RatingsController::putAction()</methodname></entry>
+                    <entry>/product/ratings/:id</entry>
+                    <entry>Product_RatingsController::putAction()</entry>
                 </row>
                 <row>
                     <entry>DELETE</entry>
-                    <entry><filename>/product/ratings/:id</filename></entry>
-                    <entry>
-                        <methodname>Product_RatingsController::deleteAction()</methodname>
-                    </entry>
+                    <entry>/product/ratings/:id</entry>
+                    <entry>Product_RatingsController::deleteAction()</entry>
                 </row>
                 <row>
                     <entry>POST</entry>
-                    <entry><filename>/product/ratings/:id?_method="PUT"</filename></entry>
-                    <entry><methodname>Product_RatingsController::putAction()</methodname></entry>
+                    <entry><literallayout>/product/ratings/:id?_method="PUT"</literallayout></entry>
+                    <entry>Product_RatingsController::putAction()</entry>
                 </row>
                 <row>
                     <entry>POST</entry>
-                    <entry><filename>/product/ratings/:id?_method="DELETE"</filename></entry>
-                    <entry>
-                        <methodname>Product_RatingsController::deleteAction()</methodname>
-                    </entry>
+                    <entry><literallayout>/product/ratings/:id?_method="DELETE"</literallayout></entry>
+                    <entry>Product_RatingsController::deleteAction()</entry>
                 </row>
             </tbody>
         </tgroup>
@@ -74,7 +70,7 @@
         To enable <classname>Zend_Rest_Route</classname> for an entire
         application, construct it with no config params and add it as the
         default route on the front controller:
-    </para> 
+    </para>
 
     <programlisting language="php"><![CDATA[
 $front     = Zend_Controller_Front::getInstance();
@@ -94,7 +90,7 @@ $front->getRouter()->addRoute('default', $restRoute);
         To enable <classname>Zend_Rest_Route</classname> for specific modules,
         construct it with an array of module names as the 3rd constructor
         argument:
-    </para> 
+    </para>
 
     <programlisting language="php"><![CDATA[
 $front     = Zend_Controller_Front::getInstance();
@@ -106,7 +102,7 @@ $front->getRouter()->addRoute('rest', $restRoute);
         To enable <classname>Zend_Rest_Route</classname> for specific
         controllers, add an array of controller names as the value of each
         module array element.
-    </para> 
+    </para>
 
     <programlisting language="php"><![CDATA[
 $front     = Zend_Controller_Front::getInstance();
@@ -120,46 +116,36 @@ $front->getRouter()->addRoute('rest', $restRoute);
         <title>Zend_Rest_Controller</title>
 
         <para>
-            To help guide development of Controllers for use with 
+            To help guide development of Controllers for use with
             <classname>Zend_Rest_Route</classname>, extend your Controllers from
             <classname>Zend_Rest_Controller</classname>.
             <classname>Zend_Rest_Controller</classname> defines the 5 most-commonly
             needed operations for RESTful resources in the form of abstract action
             methods.
         </para>
-    
+
         <itemizedlist>
             <listitem>
-                <para>
-                    <emphasis><methodname>indexAction()</methodname></emphasis> - 
-                    Should retrieve an index of resources and assign it to view.
-                </para>
+                <emphasis><methodname>indexAction</methodname></emphasis> -
+                Should retrieve an index of resources and assign it to view.
             </listitem>
             <listitem>
-                <para>
-                    <emphasis><methodname>getAction()</methodname></emphasis> - 
-                    Should retrieve a single resource identified by <acronym>URI</acronym>
-                    and assign it to view.
-                </para>
+                <emphasis><methodname>getAction</methodname></emphasis> -
+                Should retrieve a single resource identified by URI and assign
+                it to view.
             </listitem>
             <listitem>
-                <para>
-                    <emphasis><methodname>postAction()</methodname></emphasis> - 
-                    Should accept a new single resource and persist its state.
-                </para>
+                <emphasis><methodname>postAction</methodname></emphasis> -
+                Should accept a new single resource and persist its state.
             </listitem>
             <listitem>
-                <para>
-                    <emphasis><methodname>putAction()</methodname></emphasis> - 
-                    Should accept a single resource idenitifed by <acronym>URI</acronym>
-                    and persist its state.
-                </para>
+                <emphasis><methodname>putAction</methodname></emphasis> -
+                Should accept a single resource identified by URI and persist
+                its state.
             </listitem>
             <listitem>
-                <para>
-                    <emphasis><methodname>deleteAction()</methodname></emphasis> - 
-                    Should delete a single resource identified by <acronym>URI</acronym>.
-                </para>
+                <emphasis><methodname>deleteAction</methodname></emphasis> -
+                Should delete a single resource identified by URI.
             </listitem>
         </itemizedlist>
 

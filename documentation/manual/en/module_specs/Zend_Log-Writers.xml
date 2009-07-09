@@ -97,6 +97,7 @@ $logger->info('Informational message');
 
   <xi:include href="Zend_Log-Writers-Firebug.xml" />
   <xi:include href="Zend_Log-Writers-Mail.xml" />
+  <xi:include href="Zend_Log-Writers-Syslog.xml" />
 
   <sect2 id="zend.log.writers.null">
     <title>Stubbing Out the Writer</title>

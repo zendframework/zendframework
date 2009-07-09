@@ -7,15 +7,15 @@
         <classname>Zend_Controller_Plugin_PutHandler</classname> provides a drop-in
         plugin for marshalling PUT request bodies into request parameters, just
         like POST request bodies. It will inspect the request and, if PUT, will 
-        use parse_str to to parse the raw PUT body into an array of params 
+        use parse_str to parse the raw PUT body into an array of params 
         which is then set on the request. E.g.,
     </para>
 
-    <programlisting><![CDATA[
+    <programlisting language="txt"><![CDATA[
 PUT /notes/5.xml HTTP/1.1
     
-title=Hello&body=World]]>
-    </programlisting>
+title=Hello&body=World
+]]></programlisting>
 
     <para>
         To receive the 'title' and 'body' params as regular request params, 
@@ -24,8 +24,8 @@ title=Hello&body=World]]>
     
     <programlisting language="php"><![CDATA[
 $front = Zend_Controller_Front::getInstance();
-$front->registerPlugin(new Zend_Controller_Plugin_PutHandler());]]>
-    </programlisting>
+$front->registerPlugin(new Zend_Controller_Plugin_PutHandler());
+]]></programlisting>
             
     <para>
         Then you can access the PUT body params by name from the request inside
@@ -33,13 +33,13 @@ $front->registerPlugin(new Zend_Controller_Plugin_PutHandler());]]>
     </para>
     
     <programlisting language="php"><![CDATA[
-    ...
-    public function putAction()
-    {
-        $title = $this->getRequest()->getParam('title'); // $title = "Hello"
-        $body = $this->getRequest()->getParam('body'); // $body = "World"
-    }
-    ...]]>
-    </programlisting>
+...
+public function putAction()
+{
+    $title = $this->getRequest()->getParam('title'); // $title = "Hello"
+    $body = $this->getRequest()->getParam('body'); // $body = "World"
+}
+...
+]]></programlisting>
 
 </sect3>

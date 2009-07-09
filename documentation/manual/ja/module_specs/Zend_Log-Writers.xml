@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16582 -->
 <sect1 id="zend.log.writers" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>ライター</title>
   <para>
@@ -103,6 +103,9 @@ $logger->info('通知メッセージ');
 
   <xi:include href="Zend_Log-Writers-Firebug.xml" />
   <xi:include href="Zend_Log-Writers-Mail.xml" />
+  <xi:include href="Zend_Log-Writers-Syslog.xml">
+      <xi:fallback><xi:include href="../../en/module_specs/Zend_Log-Writers-Syslog.xml" /></xi:fallback>
+  </xi:include>
 
   <sect2 id="zend.log.writers.null">
     <title>ライターのスタブ</title>

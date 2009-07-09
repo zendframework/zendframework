@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.queue.example">
+    <title>Example usage</title>
+
+    <para>
+        The below example of <code>Zend_Queue</code> shows a variety of
+        features, including queue creation, queue retrieval, message retrieval,
+        message deletion, and sending messages.
+    </para>
+
+    <programlisting role="php"><![CDATA[
+// For configuration options
+// @see Zend_Queue_Adapater::__construct()
+$options = array(
+    'name' => 'queue1',
+);
+
+// Create an array queue
+$queue = Zend_Queue('Array', $options);
+
+// Get list of queues
+foreach ($queue->getQueues() as $name) {
+    echo $name, "\n";
+}
+
+// Create a new queue
+$queue2 = $queue->create('queue2');
+
+// Get number of messages in a queue (supports Countable interface from SPL)
+echo count($queue);
+
+// Get up to 5 messages from a queue
+$messages = $queue->receive(5);
+
+foreach ($messages as $i => $message) {
+    echo $message->body, "\n";
+
+    // We have processed the message; now we remove it from the queue.
+    $queue->deleteMessage($message);
+}
+
+// Send a message to the currently active queue
+$queue->send('My Test Message');
+
+// Delete a queue we created and all of it's messages
+$queue->delete('queue2');
+]]></programlisting>
+</sect1>

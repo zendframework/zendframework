@@ -1,0 +1,426 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.queue.adapters">
+    <title>Adapters</title>
+
+    <para>
+        <classname>Zend_Queue</classname> supports all queues implementing the
+        interface <classname>Zend_Queue_Adapter_AdapterInterface</classname>.
+        The following Message Queue services are supported:
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                <ulink url="http://activemq.apache.org/">ApacheMQ</ulink>.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                A database driven queue via <classname>Zend_Db</classname>.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                A <ulink url="http://memcachedb.org/memcacheq/">MemcacheQ</ulink>
+                queue driven via <classname>Memcache</classname>.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                A local array. Useful for unit testing.
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <note id="zend.queue.adapters.limitations">
+        <title>Limitations</title>
+
+        <para>
+            Message transaction handling is not supported.
+        </para>
+    </note>
+
+    <sect2 id="zend.queue.adapters.configuration">
+        <title>Specific Adapters - Configuration settings</title>
+
+        <para>
+            If a default setting is indicated then the parameter is optional.
+            If a default setting is not specified then the parameter is
+            required.
+        </para>
+
+        <sect3 id="zend.queue.adapters.configuration.Apachemq">
+            <title>ApacheMQ - <classname>Zend_Queue_Adapter_Apachemq</classname></title>
+
+            <para>
+                Options here listed here are known requirements.  Not all
+                messaging servers require username or password.
+            </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                         <code>$options['name'] = '/temp/queue1';</code>
+                    </para>
+
+                    <para>
+                        This is the name of the queue that you wish to start
+                        using. (Required)
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <code>$options['driverOptions']['host'] = 'host.domain.tld';</code>
+                    </para>
+
+                    <para>
+                        <code>$options['driverOptions']['host'] = '127.0.0.1';</code>
+                    </para>
+
+                    <para>
+                        You may set host to an IP address or a hostname.
+                    </para>
+
+                    <para>
+                        Default setting for host is '127.0.0.1'.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <code>$options['driverOptions']['port'] = 61613;</code>
+                    </para>
+
+                    <para>Default setting for port is 61613.</para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                         <code>$options['driverOptions']['username'] = 'username';</code>
+                    </para>
+
+                    <para>
+                        Optional for some messaging servers.  Read the manual
+                        for your messaging server.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <code>$options['driverOptions']['password'] = 'password';</code>
+                    </para>
+
+                    <para>
+                        Optional for some messaging servers.  Read the manual
+                        for your messaging server.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <code>$options['driverOptions']['timeout_sec'] = 2;</code>
+                    </para>
+
+                    <para>
+                        <code>$options['driverOptions']['timeout_usec'] = 0;</code>
+                    </para>
+
+                    <para>
+                        This is the amount of time that Zend_Queue_Adapter_Activemq
+                        will wait for read activity on a socket before returning
+                        no messages.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </sect3>
+
+        <sect3 id="zend.queue.adapters.configuration.Db">
+            <title>Db - <code>Zend_Queue_Adapter_Db</code></title>
+
+            <para>
+                Driver options are checked for a few required options such
+                as <code>type</code>, <code>host</code>, <code>username</code>,
+                <code>password</code>, and <code>dbname</code>.  You may pass along
+                additional parameters for <methodname>Zend_DB::factory()</methodname> as parameters
+                in <code>$options['driverOptions']</code>.  An example of an additional
+                option not listed here, but could be passed would be <code>port</code>.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$options = array(
+    'driverOptions' => array(
+        'host'      => 'db1.domain.tld',
+        'username'  => 'my_username',
+        'password'  => 'my_password',
+        'dbname'    => 'messaging',
+        'type'      => 'pdo_mysql',
+        'port'      => 3306, // optional parameter.
+    ),
+    'options' => array(
+        // use Zend_Db_Select for update, not all databases can support this
+        // feature.
+        Zend_Db_Select::FOR_UPDATE => true
+    )
+);
+
+// Create a database queue.
+$queue = Zend_Queue::factory('Db', $options);
+]]></programlisting>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                         <code>$options['name'] = 'queue1';</code>
+                    </para>
+
+                    <para>
+                        This is the name of the queue that you wish to start using. (Required)
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <code>$options['driverOptions']['type'] = 'Pdo';</code>
+                    </para>
+
+                    <para>
+                        <code>type</code> is the adapter you wish to have
+                        <methodname>Zend_Db::factory</methodname> use. This is
+                        the first parameter for the
+                        <methodname>Zend::Db::factory()</methodname> class
+                        method call.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <code>$options['driverOptions']['host'] = 'host.domain.tld';</code>
+                    </para>
+
+                    <para>
+                        <code>$options['driverOptions']['host'] = '127.0.0.1';</code>
+                    </para>
+
+                    <para>You may set host to an IP address or a hostname.</para>
+
+                    <para>Default setting for host is '127.0.0.1'.</para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                         <code>$options['driverOptions']['username'] = 'username';</code>
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <code>$options['driverOptions']['password'] = 'password';</code>
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <code>$options['driverOptions']['dbname'] = 'dbname';</code>
+                    </para>
+
+                    <para>
+                        The database name that you have created the required tables for.
+                        See the notes section below.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </sect3>
+
+        <sect3 id="zend.queue.adapters.configuration.memcacheq">
+            <title>MemcacheQ - <classname>Zend_Queue_Adapter_Memcacheq</classname></title>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                         <code>$options['name'] = 'queue1';</code>
+                    </para>
+
+                    <para>
+                        This is the name of the queue that you wish to start using. (Required)
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                         <code>$options['driverOptions']['host'] = 'host.domain.tld';</code>
+                    </para>
+
+                    <para>
+                         <code>$options['driverOptions']['host'] = '127.0.0.1;'</code>
+                    </para>
+
+                    <para>You may set host to an IP address or a hostname.</para>
+
+                    <para>Default setting for host is '127.0.0.1'.</para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <code>$options['driverOptions']['port'] = 22201;</code>
+                    </para>
+
+                    <para>The default setting for port is 22201.</para>
+                </listitem>
+            </itemizedlist>
+        </sect3>
+
+        <sect3 id="zend.queue.adapters.configuration.array">
+            <title>Array - <classname>Zend_Queue_Adapter_Array</classname></title>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                         <code>$options['name'] = 'queue1';</code>
+                    </para>
+
+                    <para>
+                        This is the name of the queue that you wish to start using. (Required)
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </sect3>
+    </sect2>
+
+    <sect2 id="zend.queue.adapters.notes">
+        <title>Notes for Specific Adapters</title>
+
+        <para>The following adapters have notes:</para>
+
+        <sect3 id="zend.queue.adapters.notes.activemq">
+            <title>ActiveMQ</title>
+
+            <para>
+                Visibility duration for
+                <classname>Zend_Queue_Adapter_ActiveMQ</classname> is not
+                available.
+            </para>
+
+            <para>
+                While Apache's ActiveMQ will support multiple subscriptions, the
+                <classname>Zend_Queue</classname> does not.  You must create a
+                new <classname>Zend_Queue</classname> object for each individual
+                subcription.
+            </para>
+
+            <para>
+                ActiveMQ queue/topic names must begine with one of:
+            </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <code>/queue/</code>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>/topic/</code>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>/temp-queue/</code>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>/temp-topic/</code>
+                    </para>
+                </listitem>
+            </itemizedlist>
+
+            <para>
+                For example: <code>/queue/testing</code>
+            </para>
+
+            <para>
+                The following functions are not supported:
+            </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                         <code>create()</code> - create queue.
+                         Calling this function will throw an exception.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <code>delete()</code> - delete queue.
+                        Calling this function will throw an exception.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <code>getQueues()</code> - list queues.
+                        Calling this function will throw an exception.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </sect3>
+
+        <sect3 id="zend.queue.adapters.notes.zend_db">
+            <title>Zend_Db</title>
+
+            <para>
+                The database <code>CREATE TABLE ( ... )</code> SQL statement
+                can be found in <filename>Zend/Queue/Adapter/Db/queue.sql</filename>.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.queue.adapters.notes.memcacheQ">
+            <title>MemcacheQ</title>
+
+            <para>
+                Memcache can be downloaded from
+                <ulink url="http://www.danga.com/memcached/">http://www.danga.com/memcached/</ulink>.
+            </para>
+
+            <para>
+                MemcacheQ can be downloaded from
+                A <ulink url="http://memcachedb.org/memcacheq/">http://memcachedb.org/memcacheq/</ulink>.
+            </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <code>deleteMessage()</code> - Messages are deleted upon
+                        reception from the queue.  calling this function would
+                        have no effect. Calling this function will throw an
+                        error.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <code>count() or count($adapter)</code> - MemcacheQ does
+                        not support a method for counting the number of items in
+                        a queue.  Calling this function will throw an error.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </sect3>
+
+        <sect3 id="zend.queue.adapters.notes.array">
+            <title>Array (local)</title>
+
+            <para>
+                The Array queue is a PHP <code>array()</code> in local memory.
+                The <classname>Zend_Queue_Adapter_Array</classname> is good for
+                unit testing.
+            </para>
+        </sect3>
+    </sect2>
+</sect1>

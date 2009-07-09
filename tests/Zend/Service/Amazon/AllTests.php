@@ -56,6 +56,10 @@ require_once 'Zend/Service/Amazon/Ec2/AllTests.php';
  */
 require_once 'Zend/Service/Amazon/S3/AllTests.php';
 
+/**
+ * @see Zend_Service_Amazon_Sqs_AllTests
+ */
+require_once 'Zend/Service/Amazon/Sqs/AllTests.php';
 
 /**
  * @category   Zend
@@ -96,6 +100,7 @@ class Zend_Service_Amazon_AllTests
 
         $suite->addTest(Zend_Service_Amazon_Ec2_AllTests::suite());
         $suite->addTest(Zend_Service_Amazon_S3_AllTests::suite());
+        $suite->addTest(Zend_Service_Amazon_Sqs_AllTests::suite());
 
         return $suite;
     }

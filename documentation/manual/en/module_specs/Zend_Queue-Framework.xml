@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.queue.framework">
+    <title>Framework</title>
+
+    <para>
+        The <classname>Zend_Queue</classname> is a proxy that hides the details
+        of the queue services. The queue services are represented by
+        <classname>Zend_Queue_Adapter_(service)</classname>.  For example,
+        <classname>Zend_Queue_Adapter_Db</classname> is a queue that will use
+        database tables to store and retrieve messages.
+    </para>
+
+    <para>
+        Below is an example for using database tables for a queuing system:
+    </para>
+
+    <programlisting role="php"><![CDATA[
+$options = array(
+    'name'          => 'queue1',
+    'driverOptions' => array(
+        'host'      => '127.0.0.1',
+        'port'      => '3306',
+        'username'  => 'queue',
+        'password'  => 'queue',
+        'dbname'    => 'queue',
+        'type'      => 'pdo_mysql'
+    )
+);
+
+// Create a database queue.
+// Zend_Queue will prepend Zend_Queue_Adapter_ to 'Db' for the class name.
+$queue = Zend_Queue('Db', $options);
+]]></programlisting>
+
+    <para>
+        The <classname>Zend_Queue</classname> constructor will create a
+        <classname>Zend_Queue_Adapter_Db</classname> and initialize the adapter
+        with the configuration settings.
+    </para>
+
+    <para>
+        The accepted configuration settings for each adapter are provided
+        in the <xref linkend="zend.queue.adapters">adapter notes</xref>.
+    </para>
+
+    <para>
+        <classname>Zend_Queue</classname> returns messages using the class
+        <classname>Zend_Queue_Message_Iterator</classname>, which is an
+        implementation of SPL <classname>Iterator</classname> and
+        <classname>Countable</classname>.
+        <classname>Zend_Queue_Message_Iterator</classname> contains an array of
+        <classname>Zend_Queue_Message</classname> objects.
+    </para>
+
+    <programlisting role="php"><![CDATA[
+$messages = $queue->receive(5);
+foreach ($messages as $i => $message) {
+    echo "$i) Message => ", $message->body, "\n";
+}
+]]></programlisting>
+
+    <para>
+        Any exceptions thrown are of class
+        <classname>Zend_Queue_Exception</classname>.
+    </para>
+
+    <sect2 id="zend.queue.framework.basics">
+        <title>Introduction</title>
+
+        <para>
+            <classname>Zend_Queue</classname> is a proxy class that represents
+            an adapter.
+        </para>
+
+        <para>
+            The <methodname>send()</methodname>,
+            <methodname>count($queue)</methodname>, and
+            <methodname>receive()</methodname> methods are employed by each
+            adapter to interact with queues.
+        </para>
+
+        <para>
+            The <methodname>createQueue()</methodname>,
+            <methodname>deleteQueue()</methodname> methods are used to manage
+            queues.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.queue.framework.support">
+        <title>Commonality among adapters</title>
+
+        <para>
+            The queue services supported by <classname>Zend_Queue</classname> do
+            not all support the same functions.  For example,
+            <classname>Zend_Queue_Adapter_Array</classname>,
+            <classname>Zend_Queue_Adapter_Db</classname>, support all functions,
+            while <classname>Zend_Queue_Adapter_Activemq</classname> does not
+            support queue listing, queue deletion, or counting of messages.
+        </para>
+
+        <para>
+            You can determine what functions are supported by using
+            <methodname>Zend_Queue::isSupported()</methodname> or
+            <methodname>Zend_Queue::getCapabilities()</methodname>.
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>create</code> - create a queue
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>delete</code> - delete a queue
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>send</code> - send a message
+                </para>
+
+                <para>
+                    <code>send</code> is not available in all adapters; the
+                    <classname>Zend_Queue_Adapter_Null</classname> does not
+                    support <code>send</code>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>receive</code> - receive messages
+                </para>
+
+                <para>
+                    <code>receive</code> is not available in all adapters;
+                    the <classname>Zend_Queue_Adapter_Null</classname> does not
+                    support <code>receive</code>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>deleteMessage</code> - delete a message
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>count</code> - count the number of messages in a queue
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>isExists</code> - checks the existance of a queue
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            <methodname>receive()</methodname> methods are employed by each
+            adapter to interact with queues.
+        </para>
+
+        <para>
+            The <methodname>createQueue()</methodname> and
+            <methodname>deleteQueue()</methodname> methods are used to manage
+            queues.
+        </para>
+    </sect2>
+</sect1>

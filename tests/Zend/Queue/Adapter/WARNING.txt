@@ -1,0 +1,5 @@
+A note to those who are writing test cases.
+
+Besure to receive() for every send() otherwise previous failed tests will interfere with future tests.
+
+If necessary you may have to delete the queue before creating it.

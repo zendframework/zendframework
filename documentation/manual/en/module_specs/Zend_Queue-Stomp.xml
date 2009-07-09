@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.queue.stomp">
+    <title>Stomp</title>
+
+    <para>
+        <classname>Zend_Queue_Stomp</classname> provides a basic client to
+        communicate with <ulink url="http://stomp.codehaus.org/">Stomp</ulink>
+        compatible servers.  Some servers, such as ApacheMQ and RabbitMQ, will
+        allow you to communicate by other methods, such as HTTP, and XMPP.
+    </para>
+
+    <para>
+        The Stomp protocol provides <ulink
+            url="http://stomp.codehaus.org/StompConnect">StompConnect</ulink>
+        which supports any <ulink url="http://java.sun.com/products/jms/"> Java
+            Message Service (JMS)</ulink> provider.
+        Stomp is supported by
+        <ulink url="http://activemq.apache.org/">Apache ActiveMQ</ulink>,
+        <ulink url="http://www.rabbitmq.com/">RabbitMQ</ulink>,
+        <ulink url="http://stompserver.rubyforge.org/">stompserver</ulink>, and
+        <ulink url="http://www.germane-software.com/software/Java/Gozirra/">Gozirra</ulink>.
+    </para>
+
+    <sect2 id="zend.queue.adapters-configuration.stomp">
+        <title>Stomp - Supporting classes</title>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <classname>Zend_Queue_Stomp_Frame</classname>. This class
+                    provides the basic functions for manipulating a Stomp Frame.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <classname>Zend_Queue_Stomp_Client</classname>. This class
+                    provides the basic functions to
+                    <methodname>send()</methodname> and
+                    <methodname>receive()</methodname>
+                    <classname>Zend_Queue_Stomp_Frame</classname>s to and from a
+                    Stomp compatible server.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+</sect1>

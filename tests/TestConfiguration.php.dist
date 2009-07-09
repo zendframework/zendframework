@@ -446,6 +446,29 @@ define('TESTS_ZEND_MAIL_SMTP_AUTH', false);
 // AUTH can be set to false or a string of AUTH method (e.g. LOGIN, PLAIN, CRAMMD5 or DIGESTMD5)
 
 /**
+ * Zend_Queue Test Configuration constants
+ *
+ * The Zend_Queue_Adapter_Db constant should be a JSON-encoded string
+ * representing a configuration object for Zend_Db::factory(). For example:
+ * {
+ *     type: "pdo_mysql",
+ *     host: "127.0.0.1",
+ *     port: 3306,
+ *     username: "queue",
+ *     password: "queue",
+ *     dbname: "queue"
+ * }
+ *
+ * Selectively define the below in order to run tests for them.
+ */
+define('TESTS_ZEND_QUEUE_APACHEMQ_HOST', false);
+define('TESTS_ZEND_QUEUE_APACHEMQ_PORT', false);
+define('TESTS_ZEND_QUEUE_DB', false)
+define('TESTS_ZEND_QUEUE_MEMCACHEQ_SCHEME', false);
+define('TESTS_ZEND_QUEUE_MEMCACHEQ_HOST', false);
+define('TESTS_ZEND_QUEUE_MEMCACHEQ_PORT', false);
+
+/**
  * Zend_Service_Amazon online tests
  */
 define('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ENABLED', false);

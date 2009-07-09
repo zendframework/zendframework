@@ -1,45 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16579 -->
+<!-- EN-Revision: 16589 -->
 <sect3 id="zend.view.helpers.initial.baseurl">
     <title>BaseUrl ヘルパー</title>
 
     <para>
-        フレームワークによって生成された大部分のURLが自動的に基底URLを前に付加するとはいえ、
+        フレームワークによって生成された大部分の<acronym>URL</acronym>が自動的に基底
+        <acronym>URL</acronym>を前に付加するとはいえ、
         開発者はリソースへのパスを正しくするために
-        彼ら自身のURLの前に基底URLを付加する必要があります。
+        彼ら自身の<acronym>URL</acronym>の前に基底<acronym>URL</acronym>を付加する必要があります。
     </para>
 
     <para>
         BaseUrlヘルパーの使用法は非常に簡単です:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 /*
  * 下記では、page/application の基底URLが "/mypage" であると仮定します。
  */
 
 /*
- * 出力: 
+ * 出力:
  * <base href="/mypage/" />
  */
-<base href="<?php echo $this->baseUrl(); ?>" /> 
+<base href="<?php echo $this->baseUrl(); ?>" />
 
 /*
  * 出力:
  * <link rel="stylesheet" type="text/css" href="/mypage/css/base.css" />
  */
-<link rel="stylesheet" type="text/css" 
-     href="<?php echo $this->baseUrl('css/base.css'); ?>" /> 
+<link rel="stylesheet" type="text/css"
+     href="<?php echo $this->baseUrl('css/base.css'); ?>" />
 ]]></programlisting>
 
     <note>
         <para>
-            単純にする目的で、<classname>Zend_Controller</classname>に含まれた基底URLから、
-            入り口のPHPファイル（例えば、「index.php」）を剥ぎ取ります。
+            単純にする目的で、<classname>Zend_Controller</classname>に含まれた基底
+            <acronym>URL</acronym>から、
+            入り口の<acronym>PHP</acronym>ファイル
+            （例えば、「<filename>index.php</filename>」）を剥ぎ取ります。
             しかし、何かの場面では、問題を引き起こす場合があります。
             問題が起きたら、固有のBaseUrlを設定するために、
-            <code>$this->getHelper('BaseUrl')->setBaseUrl()</code>を使います。
+            <methodname>$this->getHelper('BaseUrl')->setBaseUrl()</methodname>を使います。
         </para>
     </note>
 </sect3>

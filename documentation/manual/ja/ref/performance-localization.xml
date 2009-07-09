@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16565 -->
+<!-- EN-Revision: 16566 -->
 <sect1 id="performance.localization">
     <title>国際化(i18n)とローカライズ(l10n)</title>
 
@@ -41,8 +41,9 @@
                 </para></listitem>
 
                 <listitem><para>
-                    <emphasis><acronym>CSV</acronym></emphasis>: CSVファイルをパースするために <methodname>fgetcsv()</methodname> を使い、
-                    それをネィティブなPHP形式に変換します。
+                    <emphasis><acronym>CSV</acronym></emphasis>: <acronym>CSV</acronym>ファイルをパースするために
+                    <methodname>fgetcsv()</methodname> を使い、
+                    それをネィティブな<acronym>PHP</acronym>形式に変換します。
                 </para></listitem>
 
                 <listitem><para>

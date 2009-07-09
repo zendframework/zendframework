@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16182 -->
+<!-- EN-Revision: 16566 -->
 <appendix id="requirements">
 
     <title>Zend Framework のシステム要件</title>
@@ -1451,7 +1451,7 @@
                         <row>
                             <entry>Zend Framework コンポーネント</entry>
                             <entry>依存形式</entry>
-                            <entry>PHP 拡張モジュール</entry>
+                            <entry><acronym>PHP</acronym> 拡張モジュール</entry>
                         </row>
                     </thead>
                     <tbody>

@@ -5,10 +5,10 @@
 
     <para>
         <classname>Zend_Log_Writer_Syslog</classname> writes log entries to the
-        system log (syslog). Internally, it proxies to PHP's
-        <functionname>openlog()</functionname>,
-        <functionname>closelog()</functionname>, and
-        <functionname>syslog()</functionname> functions.
+        system log (syslog). Internally, it proxies to <acronym>PHP</acronym>'s
+        <methodname>openlog()</methodname>,
+        <methodname>closelog()</methodname>, and
+        <methodname>syslog()</methodname> functions.
     </para>
 
     <para>
@@ -21,12 +21,12 @@
 
     <para>
         By default, all syslog messages generated are prefixed with the string
-        "Zend_Log".  You may specify a different "application" name by which to
+        "Zend_Log". You may specify a different "application" name by which to
         identify such log messages by either passing the application name to the
         contructor or the application accessor:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 // At instantiation, pass the "application" key in the options:
 $writer = new Zend_Log_Writer_Syslog(array('application' => 'FooBar'));
 
@@ -43,12 +43,12 @@ $writer->setApplication('BarBaz');
 
     <para>
         You may specify the log facility either in the constructor or via an
-        accessor. It should be one of the <functionname>openlog()</functionname>
+        accessor. It should be one of the <methodname>openlog()</methodname>
         constants defined on the <ulink url="http://php.net/openlog">openlog()
             manual page</ulink>.
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 // At instantiation, pass the "facility" key in the options:
 $writer = new Zend_Log_Writer_Syslog(array('facility' => LOG_AUTH));
 
@@ -59,7 +59,7 @@ $writer->setFacility(LOG_USER);
     <para>
         When logging, you may continue to use the default
         <classname>Zend_Log</classname> priority constants; internally, they are
-        mapped to the appropriate <functionname>syslog()</functionname> priority
+        mapped to the appropriate <methodname>syslog()</methodname> priority
         constants.
     </para>
 </sect2>

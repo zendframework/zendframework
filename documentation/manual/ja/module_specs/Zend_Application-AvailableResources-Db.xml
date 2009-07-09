@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15787 -->
+<sect2 id="zend.application.available-resources.db">
+    <title>Zend_Application_Resource_Db</title>
+
+    <para>
+        <classname>Zend_Application_Resource_Db</classname>は、
+        それに渡されるオプションに基づいて<classname>Zend_Db</classname>アダプタを初期化します。
+        デフォルトで、<classname>Zend_Db_Table</classname>用のデフォルト・アダプタとして、
+        アダプタを設定します。
+    </para>
+
+    <para>
+        以下の構成キーが認識されます:
+    </para>
+
+    <itemizedlist>
+        <listitem><para>
+            <emphasis>adapter</emphasis>: <classname>Zend_Db</classname>アダプタ・タイプ
+        </para></listitem>
+
+        <listitem><para>
+            <emphasis>params</emphasis>: アダプタ・インスタンスを取得するときに使う構成パラメータの連想配列です。
+        </para></listitem>
+
+        <listitem><para>
+            <emphasis>isDefaultTableAdapter</emphasis>: アダプタをデフォルト・テーブル・アダプタとして確立するべきかどうか。
+        </para></listitem>
+    </itemizedlist>
+
+    <example id="zend.application.available-resources.db.configExample">
+        <title>DBアダプタ・リソース構成サンプル</title>
+
+        <para>
+            下記は、DBリソースを初期化するために使える<acronym>INI</acronym>構成サンプルです。
+        </para>
+
+        <programlisting language="ini"><![CDATA[
+[production]
+resources.db.adapter = "pdo_mysql"
+resources.db.params.host = "localhost"
+resources.db.params.username = "webuser"
+resources.db.params.password = "XXXXXXX"
+resources.db.params.dbname = "test"
+resources.db.isDefaultTableAdapter = true
+]]></programlisting>
+    </example>
+
+    <note>
+        <title>アダプタのインスタンスを取得する</title>
+
+        <para>
+            このリソースでインスタンス化されるアダプタを
+            デフォルト・テーブル・アダプタにしないことを選ぶなら、
+            あなたはどうやってアダプタ・インスタンスを取得しますか？
+        </para>
+
+        <para>
+            どんなリソース・プラグインでも、
+            ブートストラップからDBリソース・プラグインを取ってくることができます:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$resource = $bootstrap->getPluginResource('db');
+]]></programlisting>
+
+        <para>
+            一旦リソースオブジェクトを所有するなら、
+            <methodname>getDbAdapter()</methodname>メソッドを用いてDBアダプタを取ってくることができます:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$db = $resource->getDbAdapter();
+]]></programlisting>
+    </note>
+</sect2>

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15571 -->
+<!-- EN-Revision: 16620 -->
 <sect1 id="introduction.overview">
 
     <title>概要</title>
 
     <para>
-        Zend Framework (ZF) はオープンソースのフレームワークで、
+        Zend Framework はオープンソースのフレームワークで、
         ウェブアプリケーションやウェブサービスを PHP 5 で開発するためのものです。
-        ZF は完全にオブジェクト指向なコードを用いて実装されています。
-        ZF のコンポーネントの構造は少し変わっており、
+        Zend Framework は完全にオブジェクト指向なコードを用いて実装されています。
+        Zend Framework のコンポーネントの構造は少し変わっており、
         個々のコンポーネントはできるだけ他のコンポーネントに依存しないよう設計されています。
         このように疎結合のアーキテクチャを採用することで、
         個々のコンポーネントを個別に使いやすくしているのです。
@@ -19,9 +19,9 @@
         個別に使うこともできますが、
         Zend Framework の標準ライブラリのコンポーネントを組み合わせて使用すると
         強力で拡張性の高いウェブアプリケーションフレームワークとなります。
-        ZF の提供する機能には、堅牢で高性能な MVC の実装や
+        Zend Framework の提供する機能には、堅牢で高性能な <acronym>MVC</acronym> の実装や
         シンプルで使いやすいデータベースの抽象化、
-        レンダリング・バリデーション・フィルタリングを実装した HTML
+        レンダリング・バリデーション・フィルタリングを実装した <acronym>HTML</acronym>
         フォーム用の部品などがあります。
         これらすべての機能を、オブジェクト指向のインターフェイスで簡単に使えるようになります。
         <classname>Zend_Auth</classname> や <classname>Zend_Acl</classname> を使用すると、
@@ -42,11 +42,11 @@
     </para>
     <para>
         Zend Framework がこれらの仕組みを提供できるのもすべて、
-        活発な ZF コミュニティのおかげです。コミュニティのメンバーは、
+        活発な Zend Framework コミュニティのおかげです。コミュニティのメンバーは、
         <ulink url="http://framework.zend.com/archives">メーリングリスト</ulink>や
         <ulink url="http://www.zftalk.com">
         IRC チャネル</ulink>、そしてその他の掲示板などで活動しています。
-        ZF に対して何か質問がある方は、これらのいずれかに参加してみるといいでしょう。
+        Zend Framework に対して何か質問がある方は、これらのいずれかに参加してみるといいでしょう。
     </para>
 </sect1>
 <!--

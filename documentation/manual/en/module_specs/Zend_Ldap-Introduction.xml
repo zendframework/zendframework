@@ -1,26 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.ldap.introduction">
-	<title>Introduction</title>
-	<para>
-		<code>Zend_Ldap</code> is a class for performing LDAP operations including but not limited to binding,
+    <title>Introduction</title>
+    <para>
+        <code>Zend_Ldap</code> is a class for performing LDAP operations including but not limited to binding,
         searching and modifying entries in an LDAP directory.
     </para>
-	<sect2 id="zend.ldap.introduction.theory-of-operations">
-		<title>Theory of operation</title>
-		<para>
+    <sect2 id="zend.ldap.introduction.theory-of-operations">
+        <title>Theory of operation</title>
+        <para>
             This component currently consists of the main <code>Zend_Ldap</code> class, that conceptually represents a binding to a
             single LDAP server and allows for executing operations against a LDAP server such as OpenLDAP or ActiveDirectory (AD) servers. The parameters for binding may be provided explicitly or in the form of an options array. <code>Zend_Ldap_Node</code> provides an object-oriented interface for single LDAP nodes and can be used to form a basis for an active-record-like interface for a LDAP-based domain model.
         </para>
-		<para>
+        <para>
             The component provides several helper classes to perform operations on LDAP entries (<code>Zend_Ldap_Attribute</code>) such as setting and retrieving attributes (date values, passwords, boolean values, ...), to create and modifiy LDAP filter strings (<code>Zend_Ldap_Filter</code>) and to manipulate LDAP distinguished names (DN) (<code>Zend_Ldap_Dn</code>).
         </para>
-		<para>
+        <para>
             Additionally the component abstracts LDAP schema browsing for OpenLDAP and ActiveDirectoy servers <code>Zend_Ldap_Node_Schema</code> and server information retrieval for OpenLDAP-, ActiveDirectory- and Novell eDirectory servers (<code>Zend_Ldap_Node_RootDse</code>).
         </para>
-		<para>
+        <para>
             Using the <code>Zend_Ldap</code> class depends on the type of LDAP server and is best summarized with some
             simple examples.
         </para>
-		<para>
+        <para>
             If you are using OpenLDAP, a simple example looks like the following (note that the
             <code>bindRequiresDn</code> option is important if you are <emphasis>not</emphasis> using AD):
 <example>
@@ -39,8 +41,8 @@ $acctname = $ldap->getCanonicalAccountName('abaker',
 echo "$acctname\n";
 ]]></programlisting>
 </example>
-		</para>
-		<para>
+        </para>
+        <para>
             If you are using Microsoft AD a simple example is:
 <example>
             <programlisting role="php"><![CDATA[
@@ -62,22 +64,22 @@ echo "$acctname\n";
             Note that we use the <code>getCanonicalAccountName()</code> method to retrieve the account DN here only
             because that is what exercises the most of what little code is currently present in this class.
         </para>
-		<sect3 id="zend.ldap.introduction.theory-of-operations.automatic-username-canonicalization">
-			<title>Automatic Username Canonicalization When Binding</title>
-			<para>
+        <sect3 id="zend.ldap.introduction.theory-of-operations.automatic-username-canonicalization">
+            <title>Automatic Username Canonicalization When Binding</title>
+            <para>
                 If <code>bind()</code> is called with a non-DN username but <code>bindRequiresDN</code> is
                 <code>true</code> and no username in DN form was supplied as an option, the bind will fail. However, if
                 a username in DN form is supplied in the options array, <code>Zend_Ldap</code> will first bind with
                 that username, retrieve the account DN for the username supplied to <code>bind()</code> and then re-
                 bind with that DN.
             </para>
-			<para>
+            <para>
                 This behavior is critical to <link linkend="zend.auth.adapter.ldap">
-					<code>Zend_Auth_Adapter_Ldap</code>
-				</link>, which passes the username supplied by
+                    <code>Zend_Auth_Adapter_Ldap</code>
+                </link>, which passes the username supplied by
                 the user directly to <code>bind()</code>.
             </para>
-			<para>
+            <para>
                 The following example illustrates how the non-DN username '<code>abaker</code>' can be used with
                 <code>bind()</code>:
 <example>
@@ -103,76 +105,76 @@ echo "$acctname\n";
                 '<code>abaker</code>', unbinds and then rebinds with the newly discovered
                 '<code>CN=Alice Baker,OU=Sales,DC=foo,DC=net</code>'.
             </para>
-		</sect3>
-		<sect3 id="zend.ldap.introduction.theory-of-operations.account-name-canonicalization">
-			<title>Account Name Canonicalization</title>
-			<para>
+        </sect3>
+        <sect3 id="zend.ldap.introduction.theory-of-operations.account-name-canonicalization">
+            <title>Account Name Canonicalization</title>
+            <para>
                 The <code>accountDomainName</code> and <code>accountDomainNameShort</code> options are used for two
                 purposes: (1) they facilitate multi-domain authentication and failover capability, and (2) they are
                 also used to canonicalize usernames. Specifically, names are canonicalized to the form specified by the
                 <code>accountCanonicalForm</code> option. This option may one of the following values:
 
                 <table id="zend.ldap.using.theory-of-operation.account-name-canonicalization.table">
-					<title>Options for <code>accountCanonicalForm</code>
-					</title>
-					<tgroup cols="3">
-						<thead>
-							<row>
-								<entry>Name</entry>
-								<entry>Value</entry>
-								<entry>Example</entry>
-							</row>
-						</thead>
-						<tbody>
-							<row>
-								<entry>
-									<code>ACCTNAME_FORM_DN</code>
-								</entry>
-								<entry>1</entry>
-								<entry>CN=Alice Baker,CN=Users,DC=example,DC=com</entry>
-							</row>
-							<row>
-								<entry>
-									<code>ACCTNAME_FORM_USERNAME</code>
-								</entry>
-								<entry>2</entry>
-								<entry>abaker</entry>
-							</row>
-							<row>
-								<entry>
-									<code>ACCTNAME_FORM_BACKSLASH</code>
-								</entry>
-								<entry>3</entry>
-								<entry>EXAMPLE\abaker</entry>
-							</row>
-							<row>
-								<entry>
-									<code>ACCTNAME_FORM_PRINCIPAL</code>
-								</entry>
-								<entry>4</entry>
-								<entry>abaker@example.com</entry>
-							</row>
-						</tbody>
-					</tgroup>
-				</table>
-			</para>
-			<para>
+                    <title>Options for <code>accountCanonicalForm</code>
+                    </title>
+                    <tgroup cols="3">
+                        <thead>
+                            <row>
+                                <entry>Name</entry>
+                                <entry>Value</entry>
+                                <entry>Example</entry>
+                            </row>
+                        </thead>
+                        <tbody>
+                            <row>
+                                <entry>
+                                    <code>ACCTNAME_FORM_DN</code>
+                                </entry>
+                                <entry>1</entry>
+                                <entry>CN=Alice Baker,CN=Users,DC=example,DC=com</entry>
+                            </row>
+                            <row>
+                                <entry>
+                                    <code>ACCTNAME_FORM_USERNAME</code>
+                                </entry>
+                                <entry>2</entry>
+                                <entry>abaker</entry>
+                            </row>
+                            <row>
+                                <entry>
+                                    <code>ACCTNAME_FORM_BACKSLASH</code>
+                                </entry>
+                                <entry>3</entry>
+                                <entry>EXAMPLE\abaker</entry>
+                            </row>
+                            <row>
+                                <entry>
+                                    <code>ACCTNAME_FORM_PRINCIPAL</code>
+                                </entry>
+                                <entry>4</entry>
+                                <entry>abaker@example.com</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+            </para>
+            <para>
                 The default canonicalization depends on what account domain name options were supplied. If
                 <code>accountDomainNameShort</code> was supplied, the default <code>accountCanonicalForm</code> value
                 is <code>ACCTNAME_FORM_BACKSLASH</code>. Otherwise, if <code>accountDomainName</code> was supplied, the
                 default is <code>ACCTNAME_FORM_PRINCIPAL</code>.
             </para>
-			<para>
+            <para>
                 Account name canonicalization ensures that the string used to identify an account is consistent
                 regardless of what was supplied to <code>bind()</code>. For example, if the user supplies an account
                 name of <emphasis>abaker@example.com</emphasis> or just <emphasis>abaker</emphasis> and the
                 <code>accountCanonicalForm</code> is set to 3, the resulting canonicalized name would be
                 <emphasis>EXAMPLE\abaker</emphasis>.
             </para>
-		</sect3>
-		<sect3 id="zend.ldap.introduction.theory-of-operations.multi-domain-failover">
-			<title>Multi-domain Authentication and Failover</title>
-			<para>
+        </sect3>
+        <sect3 id="zend.ldap.introduction.theory-of-operations.multi-domain-failover">
+            <title>Multi-domain Authentication and Failover</title>
+            <para>
                 The <code>Zend_Ldap</code> component by itself makes no attempt to authenticate with multiple servers.
                 However, <code>Zend_Ldap</code> is specifically designed to handle this scenario gracefully. The
                 required technique is to simply iterate over an array of arrays of server options and attempt to bind
@@ -181,7 +183,7 @@ echo "$acctname\n";
                 <code>cdavis</code> - the <code>bind()</code> method will only succeed if the credentials were
                 successfully used in the bind.
             </para>
-			<para>
+            <para>
                 Consider the following example that illustrates the technique required to implement multi-domain
                 authentication and failover:
 <example>
@@ -235,13 +237,13 @@ foreach ($multiOptions as $name => $options) {
 </example>
                 If the bind fails for any reason, the next set of server options is tried.
             </para>
-			<para>
+            <para>
                 The <code>getCanonicalAccountName</code> call gets the canonical account name that the application
                 would presumably use to associate data with such as preferences. The
                 <code>accountCanonicalForm = 4</code> in all server options ensures that the canonical form is
                 consistent regardless of which server was ultimately used.
             </para>
-			<para>
+            <para>
                 The special <code>LDAP_X_DOMAIN_MISMATCH</code> exception occurs when an account name with a domain
                 component was supplied (e.g., <code>abaker@foo.net</code> or <code>FOO\abaker</code> and not just
                 <code>abaker</code>) but the domain component did not match either domain in the currently selected
@@ -252,14 +254,14 @@ foreach ($multiOptions as $name => $options) {
                 <code>LDAP_X_DOMAIN_MISMATCH</code> as well as <code>LDAP_NO_SUCH_OBJECT</code> and
                 <code>LDAP_INVALID_CREDENTIALS</code>.
             </para>
-			<para>
+            <para>
                 The above code is very similar to code used within
                 <link linkend="zend.auth.adapter.ldap">
-					<code>Zend_Auth_Adapter_Ldap</code>
-				</link>. In fact, we
+                    <code>Zend_Auth_Adapter_Ldap</code>
+                </link>. In fact, we
                 recommend that you simply use that authentication adapter for multi-domain + failover LDAP based
                 authentication (or copy the code).
             </para>
-		</sect3>
-	</sect2>
+        </sect3>
+    </sect2>
 </sect1>

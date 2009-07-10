@@ -72,6 +72,9 @@ class Zend_CodeGenerator_Php_MethodTest extends PHPUnit_Framework_TestCase
         $codeGen->setParameters(array(
             array('name' => 'one')
             ));
+        $params = $codeGen->getParameters();
+        $param = array_shift($params);
+        $this->assertTrue($param instanceof Zend_CodeGenerator_Php_Parameter, 'Failed because $param was not instance of Zend_CodeGenerator_Php_Property');
     }
     
     public function testBodyGetterAndSetter()
@@ -108,6 +111,71 @@ class Zend_CodeGenerator_Php_MethodTest extends PHPUnit_Framework_TestCase
 
 EOS;
         $this->assertEquals($target, (string) $codeGenMethod);
+    }
+    
+    /**
+     * @group ZF-6444
+     */
+    public function testStaticModifierIsEmitted()
+    {
+        $codeGen = new Zend_CodeGenerator_Php_Method();
+        $codeGen->setName('foo');
+        $codeGen->setParameters(array(
+            array('name' => 'one')
+            ));
+        $codeGen->setStatic(true);
+        
+        $expected = <<<EOS
+    public static function foo(\$one)
+    {
+    }
+
+EOS;
+            
+        $this->assertEquals($expected, $codeGen->generate());
+    }
+    
+    /**
+     * @group ZF-6444
+     */
+    public function testFinalModifierIsEmitted()
+    {
+        $codeGen = new Zend_CodeGenerator_Php_Method();
+        $codeGen->setName('foo');
+        $codeGen->setParameters(array(
+            array('name' => 'one')
+            ));
+        $codeGen->setFinal(true);
+        
+        $expected = <<<EOS
+    final public function foo(\$one)
+    {
+    }
+
+EOS;
+        $this->assertEquals($expected, $codeGen->generate());
+    }
+    
+    /**
+     * @group ZF-6444
+     */
+    public function testFinalModifierIsNotEmittedWhenMethodIsAbstract()
+    {
+        $codeGen = new Zend_CodeGenerator_Php_Method();
+        $codeGen->setName('foo');
+        $codeGen->setParameters(array(
+            array('name' => 'one')
+            ));
+        $codeGen->setFinal(true);
+        $codeGen->setAbstract(true);
+        
+        $expected = <<<EOS
+    abstract public function foo(\$one)
+    {
+    }
+
+EOS;
+        $this->assertEquals($expected, $codeGen->generate());
     }
     
 }

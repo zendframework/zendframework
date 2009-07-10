@@ -49,6 +49,11 @@ abstract class Zend_CodeGenerator_Php_Member_Abstract extends Zend_CodeGenerator
     /**
      * @var bool
      */
+    protected $_isFinal    = false;
+    
+    /**
+     * @var bool
+     */
     protected $_isStatic   = false;
     
     /**
@@ -117,6 +122,28 @@ abstract class Zend_CodeGenerator_Php_Member_Abstract extends Zend_CodeGenerator
     }
     
     /**
+     * setFinal()
+     *
+     * @param bool $isFinal
+     * @return Zend_CodeGenerator_Php_Member_Abstract
+     */
+    public function setFinal($isFinal)
+    {
+        $this->_isFinal = ($isFinal) ? true : false;
+        return $this;
+    }
+    
+    /**
+     * isFinal()
+     *
+     * @return bool
+     */
+    public function isFinal()
+    {
+        return $this->_isFinal;
+    }
+    
+    /**
      * setStatic()
      *
      * @param bool $isStatic
@@ -136,7 +163,7 @@ abstract class Zend_CodeGenerator_Php_Member_Abstract extends Zend_CodeGenerator
     public function isStatic()
     {
         return $this->_isStatic;
-    }    
+    }
     
     /**
      * setVisitibility()

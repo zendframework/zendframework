@@ -327,6 +327,17 @@ class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
     }
     
     /**
+     * hasProperty()
+     *
+     * @param string $propertyName
+     * @return bool
+     */
+    public function hasProperty($propertyName)
+    {
+        return isset($this->_properties[$propertyName]);
+    }
+    
+    /**
      * setMethods()
      *
      * @param array $methods

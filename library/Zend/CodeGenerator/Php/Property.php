@@ -159,8 +159,10 @@ class Zend_CodeGenerator_Php_Property extends Zend_CodeGenerator_Php_Member_Abst
             $string = $this->_indentation . 'const ' . $name . ' = ' 
                 . (($defaultValue !== null) ? $defaultValue->generate() : 'null;');
         } else {
-            $string = $this->_indentation . $this->getVisibility() 
-                . (($this->isStatic()) ? ' static' : '') . ' $' . $name . ' = '
+            $string = $this->_indentation
+                . $this->getVisibility() 
+                . (($this->isStatic()) ? ' static' : '') 
+                . ' $' . $name . ' = '
                 . (($defaultValue !== null) ? $defaultValue->generate() : 'null;');
         }
         return $string; 

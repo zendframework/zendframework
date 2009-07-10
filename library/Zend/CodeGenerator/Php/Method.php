@@ -198,9 +198,13 @@ class Zend_CodeGenerator_Php_Method extends Zend_CodeGenerator_Php_Member_Abstra
         
         if ($this->isAbstract()) {
             $output .= 'abstract ';
+        } else {
+            $output .= (($this->isFinal()) ? 'final ' : '');
         }
                 
-        $output .= $this->getVisibility() . ' function ' . $this->getName() . '(';
+        $output .= $this->getVisibility()
+            . (($this->isStatic()) ? ' static' : '')
+            . ' function ' . $this->getName() . '(';
 
         $parameters = $this->getParameters();
         if (!empty($parameters)) {

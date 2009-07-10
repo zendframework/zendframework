@@ -97,7 +97,6 @@ EOS;
     
     /**
      * @group ZF-6444
-     *
      */
     public function testPropertyWillLoadFromReflection()
     {
@@ -124,5 +123,18 @@ EOS;
         $this->assertEquals('private', $cgProp->getVisibility());
     }
 
+    /**
+     * @group ZF-6444
+     */
+    public function testPropertyWillEmitStaticModifier()
+    {
+        $codeGenProperty = new Zend_CodeGenerator_Php_Property(array(
+            'name' => 'someVal',
+            'static' => true,
+            'visibility' => 'protected',
+            'defaultValue' => 'some string value'
+            ));
+        $this->assertEquals('    protected static $someVal = \'some string value\';', $codeGenProperty->generate());
+    }
     
 }

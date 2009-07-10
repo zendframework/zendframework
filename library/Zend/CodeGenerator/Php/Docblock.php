@@ -207,7 +207,7 @@ class Zend_CodeGenerator_Php_Docblock extends Zend_CodeGenerator_Php_Abstract
     protected function _docCommentize($content)
     {
         $indent = $this->getIndentation();
-        $output = '/**' . self::LINE_FEED;
+        $output = $indent . '/**' . self::LINE_FEED;
         $content = wordwrap($content, 80, "\n");
         $lines = explode("\n", $content);
         foreach ($lines as $line) {

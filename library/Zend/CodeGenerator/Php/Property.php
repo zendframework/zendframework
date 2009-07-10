@@ -150,22 +150,30 @@ class Zend_CodeGenerator_Php_Property extends Zend_CodeGenerator_Php_Member_Abst
     {
         $name         = $this->getName();
         $defaultValue = $this->getDefaultValue();
+        
+        $output = '';
+        
+        if (($docblock = $this->getDocblock()) !== null) {
+            $docblock->setIndentation('    ');
+            $output .= $docblock->generate();
+        }
+        
         if ($this->isConst()) {
             if ($defaultValue != null && !$defaultValue->isValidConstantType()) {
                 require_once 'Zend/CodeGenerator/Php/Exception.php';
                 throw new Zend_CodeGenerator_Php_Exception('The property ' . $this->_name . ' is said to be '
                     . 'constant but does not have a valid constant value.');
             }
-            $string = $this->_indentation . 'const ' . $name . ' = ' 
+            $output .= $this->_indentation . 'const ' . $name . ' = ' 
                 . (($defaultValue !== null) ? $defaultValue->generate() : 'null;');
         } else {
-            $string = $this->_indentation
+            $output .= $this->_indentation
                 . $this->getVisibility() 
                 . (($this->isStatic()) ? ' static' : '') 
                 . ' $' . $name . ' = '
                 . (($defaultValue !== null) ? $defaultValue->generate() : 'null;');
         }
-        return $string; 
+        return $output; 
     }
     
 }

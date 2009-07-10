@@ -137,4 +137,26 @@ EOS;
         $this->assertEquals('    protected static $someVal = \'some string value\';', $codeGenProperty->generate());
     }
     
+    /**
+     * @group ZF-7205
+     */
+    public function testPropertyCanHaveDocblock()
+    {
+        $codeGenProperty = new Zend_CodeGenerator_Php_Property(array(
+            'name' => 'someVal',
+            'static' => true,
+            'visibility' => 'protected',
+            'defaultValue' => 'some string value',
+            'docblock' => '@var string $someVal This is some val'
+            ));
+            
+        $expected = <<<EOS
+    /**
+     * @var string \$someVal This is some val
+     */
+    protected static \$someVal = 'some string value';
+EOS;
+        $this->assertEquals($expected, $codeGenProperty->generate());
+    }
+    
 }

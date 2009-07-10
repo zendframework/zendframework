@@ -188,13 +188,16 @@ class Zend_CodeGenerator_Php_Method extends Zend_CodeGenerator_Php_Member_Abstra
      */
     public function generate()
     {
-        $output = '    ';
+        $output = '';
         
-        if (null !== ($docblock = $this->getDocblock())) {
-            $docblock->setIndentation('    ');
+        $indent = $this->getIndentation();
+        
+        if (($docblock = $this->getDocblock()) !== null) {
+            $docblock->setIndentation($indent);
             $output .= $docblock->generate();
-            $output .= '    ';
         }
+        
+        $output .= $indent;
         
         if ($this->isAbstract()) {
             $output .= 'abstract ';
@@ -215,15 +218,15 @@ class Zend_CodeGenerator_Php_Method extends Zend_CodeGenerator_Php_Member_Abstra
             $output .= implode(', ', $parameterOuput);
         }
         
-        $output .= ')' . self::LINE_FEED . '    {' . self::LINE_FEED;
+        $output .= ')' . self::LINE_FEED . $indent . '{' . self::LINE_FEED;
 
         if ($this->_body) {
             $output .= '        ' 
-                    .  str_replace(self::LINE_FEED, self::LINE_FEED . '        ', trim($this->_body)) 
+                    .  str_replace(self::LINE_FEED, self::LINE_FEED . $indent . $indent, trim($this->_body)) 
                     .  self::LINE_FEED;
         }
         
-        $output .= '    }' . self::LINE_FEED;
+        $output .= $indent . '}' . self::LINE_FEED;
         
         return $output;
     }

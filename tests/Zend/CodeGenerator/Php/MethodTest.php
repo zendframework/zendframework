@@ -60,13 +60,13 @@ class Zend_CodeGenerator_Php_MethodTest extends PHPUnit_Framework_TestCase
         $this->_method = null;
     }
     
-    public function testConstructor()
+    public function testMethodConstructor()
     {
         $codeGenMethod = new Zend_CodeGenerator_Php_Method();
         $this->isInstanceOf($codeGenMethod, 'Zend_CodeGenerator_Php_Method');
     }
     
-    public function testParameterAccessors()
+    public function testMethodParameterAccessors()
     {
         $codeGen = new Zend_CodeGenerator_Php_Method();
         $codeGen->setParameters(array(
@@ -77,7 +77,7 @@ class Zend_CodeGenerator_Php_MethodTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($param instanceof Zend_CodeGenerator_Php_Parameter, 'Failed because $param was not instance of Zend_CodeGenerator_Php_Property');
     }
     
-    public function testBodyGetterAndSetter()
+    public function testMethodBodyGetterAndSetter()
     {
         $this->_method->setBody('Foo');
         $this->assertEquals('Foo', $this->_method->getBody());
@@ -92,7 +92,7 @@ class Zend_CodeGenerator_Php_MethodTest extends PHPUnit_Framework_TestCase
     }
     
     
-    public function testFromReflection()
+    public function testMethodFromReflection()
     {
         $ref = new Zend_Reflection_Method('Zend_Reflection_TestSampleSingleClass', 'someMethod');
         
@@ -116,7 +116,7 @@ EOS;
     /**
      * @group ZF-6444
      */
-    public function testStaticModifierIsEmitted()
+    public function testMethodWithStaticModifierIsEmitted()
     {
         $codeGen = new Zend_CodeGenerator_Php_Method();
         $codeGen->setName('foo');
@@ -138,7 +138,7 @@ EOS;
     /**
      * @group ZF-6444
      */
-    public function testFinalModifierIsEmitted()
+    public function testMethodWithFinalModifierIsEmitted()
     {
         $codeGen = new Zend_CodeGenerator_Php_Method();
         $codeGen->setName('foo');
@@ -159,7 +159,7 @@ EOS;
     /**
      * @group ZF-6444
      */
-    public function testFinalModifierIsNotEmittedWhenMethodIsAbstract()
+    public function testMethodWithFinalModifierIsNotEmittedWhenMethodIsAbstract()
     {
         $codeGen = new Zend_CodeGenerator_Php_Method();
         $codeGen->setName('foo');
@@ -176,6 +176,30 @@ EOS;
 
 EOS;
         $this->assertEquals($expected, $codeGen->generate());
+    }
+    
+    /**
+     * @group ZF-7205
+     */
+    public function testMethodCanHaveDocblock()
+    {
+        $codeGenProperty = new Zend_CodeGenerator_Php_Method(array(
+            'name' => 'someFoo',
+            'static' => true,
+            'visibility' => 'protected',
+            'docblock' => '@var string $someVal This is some val'
+            ));
+            
+        $expected = <<<EOS
+    /**
+     * @var string \$someVal This is some val
+     */
+    protected static function someFoo()
+    {
+    }
+
+EOS;
+        $this->assertEquals($expected, $codeGenProperty->generate());
     }
     
 }

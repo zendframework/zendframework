@@ -1,0 +1,50 @@
+<sect1 id="zend.ldap.server">
+	<title>Getting information from the LDAP server</title>
+	<sect2 id="zend.ldap.server.rootdse">
+		<title>RootDSE</title>
+		<para>See the following documents for more information on the attributes contained within the RootDSE for a given LDAP server.</para>
+		<itemizedlist> 
+  <listitem> 
+    <para><ulink url="http://www.zytrax.com/books/ldap/ch3/#operational">OpenLDAP</ulink></para> 
+  </listitem> 
+  <listitem> 
+    <para><ulink url="http://msdn.microsoft.com/en-us/library/ms684291(VS.85).aspx">Microsoft ActiveDirectory</ulink></para> 
+  </listitem> 
+  <listitem> 
+    <para><ulink url="http://www.novell.com/documentation/edir88/edir88/index.html?page=/documentation/edir88/edir88/data/ah59jqq.html">Novell eDirectory</ulink></para> 
+  </listitem> 
+</itemizedlist> 
+	<example id="zend.ldap.server.rootdse.getting">
+		<title>Getting hands on the RootDSE</title>
+	<programlisting role="php"><![CDATA[
+$options = array(/* ... */); 
+$ldap = new Zend_Ldap($options); 
+$rootdse = $ldap->getRootDse();
+$serverType = $rootdse->getServerType();
+]]></programlisting>	
+	</example>
+	</sect2>
+	<sect2 id="zend.ldap.server.schema">
+		<title>Schema Browsing</title>
+		<example id="zend.ldap.server.schema.getting">
+			<title>Getting hands on the server schema</title>
+			<programlisting role="php"><![CDATA[
+$options = array(/* ... */); 
+$ldap = new Zend_Ldap($options); 
+$schema = $ldap->getSchema();
+$classes = $schema->getObjectClasses();
+]]></programlisting>	
+		</example>
+		<sect3 id="zend.ldap.server.schema.openldap">
+			<title>OpenLDAP</title>
+			<para/>
+		</sect3>
+		<sect3 id="zend.ldap.server.schema.activedirectory">
+			<title>ActiveDirectory</title>
+			<note>
+				<title>Schema browsing on ActiveDirectory servers</title>
+				<para>Due to restrictions on Microsoft ActiveDirectory servers regarding the number of entries returned by generic search routines and due to the structure of the ActiveDirectory schema repository, schema browsing is currently <emphasis>not</emphasis> available for Microsoft ActiveDirectory servers.</para>
+				</note>
+		</sect3>
+	</sect2>
+</sect1>

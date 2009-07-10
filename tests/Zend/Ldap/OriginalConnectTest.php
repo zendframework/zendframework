@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
@@ -40,10 +40,10 @@ require_once 'Zend/Ldap.php';
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Ldap_ConnectTest extends PHPUnit_Framework_TestCase
+class Zend_Ldap_OriginalConnectTest extends PHPUnit_Framework_TestCase
 {
     protected $_options = null;
 
@@ -173,24 +173,6 @@ class Zend_Ldap_ConnectTest extends PHPUnit_Framework_TestCase
             } catch (Zend_Ldap_Exception $zle) {
                 $this->assertContains('Invalid credentials', $zle->getMessage());
             }
-        }
-    }
-
-    public function testGetErrorCode()
-    {
-        $ldap = new Zend_Ldap($this->_options);
-        try {
-            // Connect doesn't actually try to connect until bind is called
-            // but if we get 'Invalid credentials' then we know the connect
-            // succeeded.
-            $ldap->connect()->bind('CN=ignored,DC=example,DC=com', 'ignored');
-            $this->fail('Expected exception for invalid username');
-        } catch (Zend_Ldap_Exception $zle) {
-            $this->assertContains('Invalid credentials', $zle->getMessage());
-
-            $this->assertEquals(0x31, $zle->getCode());
-            $this->assertEquals(0x0, Zend_Ldap_Exception::getLdapCode($ldap));
-            $this->assertEquals(0x0, Zend_Ldap_Exception::getLdapCode(null));
         }
     }
 }

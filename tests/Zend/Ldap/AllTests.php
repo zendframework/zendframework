@@ -29,13 +29,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Ldap_AllTests::main');
 }
 
-PHPUnit_Util_Filter::addFileToFilter(__FILE__);
-
-/**
- * @see Zend_Ldap_OfflineTest
- */
-require_once 'Zend/Ldap/OfflineTest.php';
-
 /**
  * @category   Zend
  * @package    Zend_Ldap
@@ -54,7 +47,41 @@ class Zend_Ldap_AllTests
     {
         $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Ldap');
 
+        /**
+         * @see Zend_Ldap_OfflineTest
+         */
+        require_once 'Zend/Ldap/OfflineTest.php';
         $suite->addTestSuite('Zend_Ldap_OfflineTest');
+        /**
+         * @see Zend_Ldap_AttributeTest
+         */
+        require_once 'Zend/Ldap/AttributeTest.php';
+        $suite->addTestSuite('Zend_Ldap_AttributeTest');
+        /**
+         * @see Zend_Ldap_ConverterTest
+         */
+        require_once 'Zend/Ldap/ConverterTest.php';
+        $suite->addTestSuite('Zend_Ldap_ConverterTest');
+        /**
+         * @see Zend_Ldap_Dn_AllTests
+         */
+        require_once 'Zend/Ldap/Dn/AllTests.php';
+        $suite->addTest(Zend_Ldap_Dn_AllTests::suite());
+        /**
+         * @see Zend_Ldap_FilterTest
+         */
+        require_once 'Zend/Ldap/FilterTest.php';
+        $suite->addTestSuite('Zend_Ldap_FilterTest');
+        /**
+         * @see Zend_Ldap_Node_AllTests
+         */
+        require_once 'Zend/Ldap/Node/AllTests.php';
+        $suite->addTest(Zend_Ldap_Node_AllTests::suite());
+        /**
+         * @see Zend_Ldap_Ldif_AllTests
+         */
+        require_once 'Zend/Ldap/Ldif/AllTests.php';
+        $suite->addTest(Zend_Ldap_Ldif_AllTests::suite());
 
         if (defined('TESTS_ZEND_LDAP_ONLINE_ENABLED')
             && constant('TESTS_ZEND_LDAP_ONLINE_ENABLED')) {
@@ -73,6 +100,22 @@ class Zend_Ldap_AllTests
              */
             require_once 'Zend/Ldap/CanonTest.php';
             $suite->addTestSuite('Zend_Ldap_CanonTest');
+            /**
+             * @see Zend_Ldap_SearchTest
+             */
+            require_once 'Zend/Ldap/SearchTest.php';
+            $suite->addTestSuite('Zend_Ldap_SearchTest');
+            /**
+             * @see Zend_Ldap_CrudTest
+             */
+            require_once 'Zend/Ldap/CrudTest.php';
+            $suite->addTestSuite('Zend_Ldap_CrudTest');
+            /**
+             * @see Zend_Ldap_CopyRenameTest
+             */
+            require_once 'Zend/Ldap/CopyRenameTest.php';
+            $suite->addTestSuite('Zend_Ldap_CopyRenameTest');
+
         } else {
             $suite->addTest(new Zend_Ldap_SkipOnlineTests());
         }

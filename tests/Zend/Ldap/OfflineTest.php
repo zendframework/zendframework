@@ -31,6 +31,10 @@ require_once dirname(__FILE__) . '/../../TestHelper.php';
  * @see Zend_Ldap
  */
 require_once 'Zend/Ldap.php';
+/**
+ * @see Zend_Ldap_Exception
+ */
+require_once 'Zend/Ldap/Exception.php';
 
 
 /**
@@ -64,16 +68,6 @@ class Zend_Ldap_OfflineTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testFilterEscapeBasicOperation()
-    {
-        $input = 'a*b(b)d\e/f';
-        $expected = 'a\2ab\28b\29d\5ce\2ff';
-        $this->assertEquals($expected, Zend_Ldap::filterEscape($input));
-    }
-
-    /**
-     * @return void
-     */
     public function testInvalidOptionResultsInException()
     {
         $optionName = 'invalid';
@@ -85,36 +79,76 @@ class Zend_Ldap_OfflineTest extends PHPUnit_Framework_TestCase
         }
     }
 
-    /**
-     * @return void
-     */
-    public function testExplodeDnOperation()
+    public function testException()
     {
-		$inputs = array(
-			'CN=Alice Baker,CN=Users,DC=example,DC=com' => true,
-			'CN=Baker\\, Alice,CN=Users,DC=example,DC=com' => true,
-			'OU=Sales,DC=local' => true,
-			'OU=Sales;DC=local' => true,
-			'OU=Sales ,DC=local' => true,
-			'OU=Sales, dC=local' => true,
-			'ou=Sales , DC=local' => true,
-			'OU=Sales ; dc=local' => true,
-			'DC=local' => true,
-			' DC=local' => true,
-			'DC= local  ' => true,
-			'username' => false,
-			'username@example.com' => false,
-			'EXAMPLE\\username' => false,
-			'CN=,Alice Baker,CN=Users,DC=example,DC=com' => false,
-			'CN=Users,DC==example,DC=com' => false,
-			'O=ACME' => true,
-			'' => false,
-			'	' => false,
-		);
+        $e = new Zend_Ldap_Exception(null, '', 0);
+        $this->assertEquals('no exception message', $e->getMessage());
+        $this->assertEquals(0, $e->getCode());
+        $this->assertEquals(0, $e->getErrorCode());
 
-		foreach ($inputs as $dn => $expected) {
-			$ret = Zend_Ldap::explodeDn($dn);
-			$this->assertTrue($ret === $expected);
-		}
-	}
+        $e = new Zend_Ldap_Exception(null, '', 15);
+        $this->assertEquals('0xf: no exception message', $e->getMessage());
+        $this->assertEquals(15, $e->getCode());
+        $this->assertEquals(15, $e->getErrorCode());
+    }
+
+    public function testOptionsGetter()
+    {
+        $options = array(
+            'host' => TESTS_ZEND_LDAP_HOST,
+            'username' => TESTS_ZEND_LDAP_USERNAME,
+            'password' => TESTS_ZEND_LDAP_PASSWORD,
+            'baseDn' => TESTS_ZEND_LDAP_BASE_DN,
+        );
+        $ldap = new Zend_Ldap($options);
+        $this->assertEquals(array(
+            'host'                   => TESTS_ZEND_LDAP_HOST,
+            'port'                   => 0,
+            'useSsl'                 => false,
+            'username'               => TESTS_ZEND_LDAP_USERNAME,
+            'password'               => TESTS_ZEND_LDAP_PASSWORD,
+            'bindRequiresDn'         => false,
+            'baseDn'                 => TESTS_ZEND_LDAP_BASE_DN,
+            'accountCanonicalForm'   => null,
+            'accountDomainName'      => null,
+            'accountDomainNameShort' => null,
+            'accountFilterFormat'    => null,
+            'allowEmptyPassword'     => false,
+            'useStartTls'            => false,
+            'optReferrals'           => false,
+            'tryUsernameSplit'       => true
+        ), $ldap->getOptions());
+    }
+
+    public function testConfigObject()
+    {
+        /**
+         * @see Zend_Config
+         */
+        require_once 'Zend/Config.php';
+        $config = new Zend_Config(array(
+            'host' => TESTS_ZEND_LDAP_HOST,
+            'username' => TESTS_ZEND_LDAP_USERNAME,
+            'password' => TESTS_ZEND_LDAP_PASSWORD,
+            'baseDn' => TESTS_ZEND_LDAP_BASE_DN,
+        ));
+        $ldap = new Zend_Ldap($config);
+        $this->assertEquals(array(
+            'host'                   => TESTS_ZEND_LDAP_HOST,
+            'port'                   => 0,
+            'useSsl'                 => false,
+            'username'               => TESTS_ZEND_LDAP_USERNAME,
+            'password'               => TESTS_ZEND_LDAP_PASSWORD,
+            'bindRequiresDn'         => false,
+            'baseDn'                 => TESTS_ZEND_LDAP_BASE_DN,
+            'accountCanonicalForm'   => null,
+            'accountDomainName'      => null,
+            'accountDomainNameShort' => null,
+            'accountFilterFormat'    => null,
+            'allowEmptyPassword'     => false,
+            'useStartTls'            => false,
+            'optReferrals'           => false,
+            'tryUsernameSplit'       => true
+        ), $ldap->getOptions());
+    }
 }

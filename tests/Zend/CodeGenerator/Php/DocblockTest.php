@@ -78,7 +78,7 @@ class Zend_CodeGenerator_Php_DocblockTest extends PHPUnit_Framework_TestCase
         $target = <<<EOS
 /**
  * @blah 
- * @param string  
+ * @param string
  * @return int
  */
 

@@ -192,7 +192,7 @@ class Zend_CodeGenerator_Php_Docblock extends Zend_CodeGenerator_Php_Abstract
         }
 
         foreach ($this->getTags() as $tag) {
-            $output .= $tag->generate();
+            $output .= $tag->generate() . self::LINE_FEED;
         }
         
         return $this->_docCommentize(trim($output));
@@ -208,8 +208,8 @@ class Zend_CodeGenerator_Php_Docblock extends Zend_CodeGenerator_Php_Abstract
     {
         $indent = $this->getIndentation();
         $output = $indent . '/**' . self::LINE_FEED;
-        $content = wordwrap($content, 80, "\n");
-        $lines = explode("\n", $content);
+        $content = wordwrap($content, 80, self::LINE_FEED);
+        $lines = explode(self::LINE_FEED, $content);
         foreach ($lines as $line) {
             $output .= $indent . ' * ' . $line . self::LINE_FEED;
         }

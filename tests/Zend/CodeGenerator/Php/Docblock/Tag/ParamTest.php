@@ -43,7 +43,7 @@ class Zend_CodeGenerator_Php_Docblock_Tag_ParamTest extends PHPUnit_Framework_Te
 {
     
     /**
-     * @var Zend_CodeGenerator_Php_Docblock_Tag
+     * @var Zend_CodeGenerator_Php_Docblock_Tag_Param
      */
     protected $_tag = null;
     
@@ -67,6 +67,14 @@ class Zend_CodeGenerator_Php_Docblock_Tag_ParamTest extends PHPUnit_Framework_Te
     {
         $this->_tag->setParamName('Foo');
         $this->assertEquals('Foo', $this->_tag->getParamName());
+    }
+    
+    public function testParamProducesCorrectDocBlockLine()
+    {
+        $this->_tag->setParamName('foo');
+        $this->_tag->setDatatype('string');
+        $this->_tag->setDescription('bar bar bar');
+        $this->assertEquals('@param string $foo bar bar bar', $this->_tag->generate());
     }
     
 }

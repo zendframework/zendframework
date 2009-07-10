@@ -5,24 +5,24 @@
     <title>Overview</title>
 
     <para>
-        Zend Framework (ZF) is an open source framework for developing web
-        applications and services with PHP 5. ZF is implemented using 100% object-oriented
-        code. The component structure of ZF is somewhat unique; each component is designed
+        Zend Framework is an open source framework for developing web applications and services
+        with PHP 5. Zend Framework is implemented using 100% object-oriented code. The component
+        structure of Zend Framework is somewhat unique; each component is designed
         with few dependencies on other components. This loosely coupled architecture allows
         developers to use components individually. We often call this a "use-at-will" design.
     </para>
     <para>
-        While they can be used separately, Zend Framework components in the standard library
-        form a powerful and extensible web application framework when combined. ZF offers a
-        robust, high performance MVC implementation, a database abstraction that is simple to
-        use, and a forms component that implements HTML form rendering, validation, and filtering
-        so that developers can consolidate all of these operations using one easy-to-use, object
-        oriented interface. Other components, such as <classname>Zend_Auth</classname> and
-        <classname>Zend_Acl</classname>, provide user authentication and authorization against
-        all common credential stores. Still others implement client libraries to simply access
-        to the most popular web services available. Whatever your application needs are, you're
-        likely to find a Zend Framework component that can be used to dramatically reduce
-        development time with a thoroughly tested foundation.
+        While they can be used separately, Zend Framework components in the standard library form a
+        powerful and extensible web application framework when combined. Zend Framework offers a
+        robust, high performance <acronym>MVC</acronym> implementation, a database abstraction that
+        is simple to use, and a forms component that implements <acronym>HTML</acronym> form
+        rendering, validation, and filtering so that developers can consolidate all of these
+        operations using one easy-to-use, object oriented interface. Other components, such as
+        <classname>Zend_Auth</classname> and <classname>Zend_Acl</classname>, provide user
+        authentication and authorization against all common credential stores. Still others
+        implement client libraries to simply access to the most popular web services available.
+        Whatever your application needs are, you're likely to find a Zend Framework component that
+        can be used to dramatically reduce development time with a thoroughly tested foundation.
     </para>
     <para>
         The principal sponsor of the Zend Framework project is <ulink url="http://www.zend.com">
@@ -33,10 +33,11 @@
     </para>
     <para>
         Zend Framework could not deliver and support all of these features without the help of the
-        vibrant ZF community. Community members, including contributors, make themselves available
-        on <ulink url="http://framework.zend.com/archives">mailing lists</ulink>,
-        <ulink url="http://www.zftalk.com">IRC channels</ulink>, and other forums. Whatever
-        question you have about ZF, the community is always available to address it.
+        vibrant Zend Framework community. Community members, including contributors, make
+        themselves available on <ulink url="http://framework.zend.com/archives">mailing
+            lists</ulink>, <ulink url="http://www.zftalk.com">IRC channels</ulink>, and other
+        forums. Whatever question you have about Zend Framework, the community is always available
+        to address it.
     </para>
 </sect1>
 <!--

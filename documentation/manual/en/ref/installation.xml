@@ -37,10 +37,11 @@
         </listitem>
         <listitem>
             <para>
-                Using a <ulink url="http://subversion.tigris.org">Subversion</ulink> (SVN)
-                client. Zend Framework is open source software, and the Subversion repository
-                used for its development is publicly available. Consider using SVN to get Zend
-                Framework if you already use SVN for your application development, want to
+                Using a <ulink url="http://subversion.tigris.org">Subversion</ulink>
+                (<acronym>SVN</acronym>) client. Zend Framework is open source software, and the
+                Subversion repository used for its development is publicly available. Consider
+                using <acronym>SVN</acronym> to get Zend Framework if you already use
+                <acronym>SVN</acronym> for your application development, want to
                 contribute back to the framework, or need to upgrade your framework version
                 more often than releases occur.
             </para>
@@ -54,7 +55,7 @@
                 Check out a working copy</ulink> if you want contribute to Zend Framework, a
                 working copy can be updated any time with
                 <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.update.html">
-                svn update</ulink> and changes can be commited to our SVN
+                svn update</ulink> and changes can be commited to our <acronym>SVN</acronym>
                 repository with the
                 <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.commit.html">
                 svn commit</ulink> command.
@@ -63,10 +64,10 @@
                 An
                 <ulink url="http://svnbook.red-bean.com/nightly/en/svn.advanced.externals.html">
                 externals definition</ulink> is quite convenient for developers already using
-                SVN to manage their application's working copies.
+                <acronym>SVN</acronym> to manage their application's working copies.
             </para>
             <para>
-                The URL for the trunk of the Zend Framework SVN repository is:
+                The URL for the trunk of Zend Framework's <acronym>SVN</acronym> repository is:
                 <ulink url="http://framework.zend.com/svn/framework/standard/trunk">
                 http://framework.zend.com/svn/framework/standard/trunk</ulink>
             </para>
@@ -77,9 +78,9 @@
         Once you have a copy of Zend Framework available, your application needs to be able to
         access the framework classes. Though there are
         <ulink url="http://www.php.net/manual/en/configuration.changes.php">
-        several ways to achieve this</ulink>, your PHP
+        several ways to achieve this</ulink>, your <acronym>PHP</acronym>
         <ulink url="http://www.php.net/manual/en/ini.core.php#ini.include-path">include_path</ulink>
-        needs to contain the path to the Zend Framework library.
+        needs to contain the path to Zend Framework's library.
     </para>
 
     <para>

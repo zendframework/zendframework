@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16619 -->
 <sect1 id="performance.classloading">
     <title>クラスの読み込み</title>
 
@@ -9,7 +9,7 @@
         Zend Frameworkではクラスの読み込みが比較的高くつくことにすぐ気がつくでしょう。
         多くのコンポーネントのために読み込まれる必要があるクラスファイルの本当の数、
         クラス名とファイルシステムとの間に１対１の関係が成立しないプラグインの利用、
-        <methodname>include_once</methodname> や <methodname>require_once</methodname> などの呼び出し、
+        <methodname>include_once()</methodname> や <methodname>require_once()</methodname> などの呼び出し、
         これらの間には検討の余地があり得ます。
         この章ではこれらの問題に対して確立したいくつかの解決方法を提示するつもりです。
     </para>
@@ -32,15 +32,16 @@
 
             <para>
                 これは些細な最適化に見えますが、
-                実は、やらなければPHPのrealpathキャッシュの恩恵がほとんど受けられません。
+                実は、やらなければ<acronym>PHP</acronym>のrealpathキャッシュの恩恵がほとんど受けられません。
                 結果として、あなたが期待するようにはopcodeキャッシュもほとんど動作しません。
             </para>
 
             <para>
                 このことを確かめる易しい方法が２つあります。
-                ひとつはパスをphp.iniやhttpd.conf、
-                もしくは .htaccessでハードコーディングすることです。
-                もうひとつはPHPの <methodname>realpath()</methodname> 関数を使ってinclude_pathを設定することです:
+                ひとつはパスを<filename>php.ini</filename>や<filename>httpd.conf</filename>、
+                もしくは <filename>.htaccess</filename>でハードコーディングすることです。
+                もうひとつは<acronym>PHP</acronym>の <methodname>realpath()</methodname>
+                関数を使ってinclude_pathを設定することです:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -87,9 +88,9 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
 
             <para>
                 他の最適化にはパスの合併があります。
-                例えば、Zend FrameworkはPEARの命名規則に従っています。
-                そのため、もしPEARのライブラリを使うなら、
-                （またはPEARの命名規則に従うほかのフレームワークやライブラリを使うなら）
+                例えば、Zend Frameworkは<acronym>PEAR</acronym>の命名規則に従っています。
+                そのため、もし<acronym>PEARの</acronym>ライブラリを使うなら、
+                （または<acronym>PEARの</acronym>命名規則に従うほかのフレームワークやライブラリを使うなら）
                 それらすべてのライブラリを同じinclude_pathに入れてみてください。
                 １つ以上のライブラリを共通のディレクトリにsymlinkでまとめるのと同じくらい簡単に、
                 しばしば目標に達することができます。
@@ -127,15 +128,17 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
 
             <para>
                 それではこれらすべての提案を一緒に実施してみましょう。
-                仮にZend Frameworkと一緒にひとつ以上のPEARライブラリを使っていると仮定します。
-                ひっとするとPHPUnitやArchive_Tarライブラリかもしれませんし、
+                仮にZend Frameworkと一緒にひとつ以上の<acronym>PEAR</acronym>
+                ライブラリを使っていると仮定します。
+                ひっとするとPHPUnitや<classname>Archive_Tar</classname>ライブラリかもしれませんし、
                 場合によっては現行のファイルに関連してincludeする必要のあるファイルかもしれません。
             </para>
 
             <para>
                 初めに、プロジェクト内にライブラリのディレクトリを作成します。
-                ディレクトリの中にはZend Frameworkの <filename>library/Zend</filename> ディレクトリをsymlinkで設定し、
-                同様にインストールしたPEARから必要なディレクトリを設定します。
+                ディレクトリの中にはZend Frameworkの <filename>library/Zend</filename>
+                ディレクトリをsymlinkで設定し、
+                同様にインストールした<acronym>PEAR</acronym>から必要なディレクトリを設定します。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -187,27 +190,27 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
             つまり、クラスのオブジェクトのインスタンス化、
             静的なクラスメソッドの呼び出し、
             あるいはクラスの定数や静的プロパティを参照するときです。
-            これはPHPではオートローディングを通じてサポートされます。
+            これは<acronym>PHP</acronym>ではオートローディングを通じてサポートされます。
             それにより、
             クラス名をファイルに紐付けるために実行するひとつ以上のcallback関数を定義できます。
         </para>
 
         <para>
             しかしながら、
-            ライブラリのコードがまだrequire_once呼び出しを行なっているなら、
+            ライブラリのコードがまだ<methodname>require_once()</methodname>呼び出しを行なっているなら、
             オートローディングから受け取るであろう利益のほとんどは失われます。
             Zend Frameworkの場合もまさにその通りです。
             そこで質問があります:
             オートローダーの性能を最大化するために、
-            それらのrequire_once呼び出しをどのようにしたら除去できるでしょう？
+            それらの<methodname>require_once()</methodname>呼び出しをどのようにしたら除去できるでしょう？
         </para>
 
         <sect3 id="performance.classloading.striprequires.sed">
             <title>findおよびsedコマンドを使ってrequire_onceの呼び出しを取り去る</title>
 
             <para>
-                require_once呼び出しを除去する簡単な方法は、
-                UNIXのユーティリテイーのfindとsedコマンドを組み合わせて、
+                <methodname>require_once()</methodname>呼び出しを除去する簡単な方法は、
+                <acronym>UNIX</acronym>のユーティリテイーのfindとsedコマンドを組み合わせて、
                 各呼び出し箇所をコメントアウトすることです。
                 下記の命令を試しに実行してみてください。
                 ('%'記号はシェルプロンプトを示します):
@@ -221,7 +224,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
 
             <para>
                 (読みやすくするために２行に分けていますが)
-                この一行コマンドは各PHPファイルを繰り返し処理しながら、
+                この一行コマンドは各<acronym>PHP</acronym>ファイルを繰り返し処理しながら、
                 'require_once' を '// require_once' で置換し、
                 効果的にその命令をコメントアウトします。
             </para>
@@ -319,9 +322,9 @@ Zend_Loader_Autoloader::getInstance();
             <para>
                 Zend Frameworkの1.7.0でプラグインローダーにincludeファイルキャッシュが
                 追加されました。
-                この機能は"include_once"呼び出しをファイルに書き出します。
+                この機能は"<methodname>include_once()</methodname>"呼び出しをファイルに書き出します。
                 そのファイルはブートストラップでincludeできます。
-                これは追加のinclude_once呼び出しをコードに導入しますが、
+                これは追加の<methodname>include_once()</methodname>呼び出しをコードに導入しますが、
                 またそのことはプラグインローダーができるだけ早く結果を戻すことを保証します。
             </para>
 

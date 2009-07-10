@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15745 -->
+<!-- EN-Revision: 16626 -->
 <appendix id="coding-standard">
   <title>Zend Framework PHP 標準コーディング規約</title>
     <sect1 id="coding-standard.overview">
@@ -25,25 +25,25 @@
             </para>
             <para>
                 ZF コーディング規約では、次のような内容を扱います。
-
-                <itemizedlist>
-                    <listitem>
-                        <para>PHP ファイルの書式</para>
-                    </listitem>
-
-                    <listitem>
-                        <para>命名規約</para>
-                    </listitem>
-
-                    <listitem>
-                        <para>コーディングスタイル</para>
-                    </listitem>
-
-                    <listitem>
-                        <para>インラインドキュメント</para>
-                    </listitem>
-                </itemizedlist>
             </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para><acronym>PHP</acronym> ファイルの書式</para>
+                </listitem>
+
+                <listitem>
+                    <para>命名規約</para>
+                </listitem>
+
+                <listitem>
+                    <para>コーディングスタイル</para>
+                </listitem>
+
+                <listitem>
+                    <para>インラインドキュメント</para>
+                </listitem>
+            </itemizedlist>
         </sect2>
 
         <sect2 id="coding-standard.overview.goals">
@@ -65,16 +65,20 @@
             <title>全般</title>
 
             <para>
-                PHP コードのみからなるファイルでは、終了タグ ("?>")
+                <acronym>PHP</acronym> コードのみからなるファイルでは、終了タグ ("?>")
                 は決して含めてはいけません。これは必須なものではなく、
                 終了タグを省略することで、ファイルの最後にある空白文字が出力に影響することを防ぎます。
             </para>
 
-            <para>
-                <emphasis>重要:</emphasis> Zend Framework の PHP ファイルやそこから派生したものの中では、
-                <code>__HALT_COMPILER()</code> を使用して任意のバイナリデータを含めることを禁じます。
-                この機能は、インストールスクリプトなどの特別な場合にのみ使用します。
-            </para>
+            <note>
+                <para>
+                    <emphasis>重要:</emphasis> Zend Framework の <acronym>PHP</acronym>
+                    ファイルやそこから派生したものの中では、
+                    <methodname>__HALT_COMPILER()</methodname>
+                    を使用して任意のバイナリデータを含めることを禁じます。
+                    この機能は、インストールスクリプトなどの特別な場合にのみ使用します。
+                </para>
+            </note>
         </sect2>
 
         <sect2 id="coding-standard.php-file-formatting.indentation">
@@ -90,7 +94,7 @@
                 1 行の長さを 80 文字までにすることを目指しましょう。すなわち、
                 コードの長さを現実的な範囲で 80 文字までにおさめるよう努力すべきです。
                 しかしながら、場合によっては少々長くなってしまってもかまいません。
-                PHP コードの行の長さは、最大 120 文字までにするようにしましょう。
+                <acronym>PHP</acronym> コードの行の長さは、最大 120 文字までにするようにしましょう。
             </para>
         </sect2>
 
@@ -127,8 +131,8 @@
             <para>
                 クラス名には英数字のみが使用できます。クラス名に数字を使用することは可能ですが、
                 ほとんどの場合はお勧めしません。アンダースコアはパス区切り文字としてのみ使用可能です。
-                ファイル名が "Zend/Db/Table.php" の場合、クラス名を
-                "Zend_Db_Table" としなければなりません。
+                ファイル名が "<filename>Zend/Db/Table.php</filename>" の場合、クラス名を
+                "<classname>Zend_Db_Table</classname>" としなければなりません。
             </para>
 
             <para>
@@ -136,23 +140,27 @@
                 それぞれの単語の最初の文字を大文字にしなければなりません。
                 大文字を連続して使用することはできません。例えば
                 "Zend_PDF" というクラス名は許可されません。代わりに
-                "Zend_Pdf" を使用します。
+                "<classname>Zend_Pdf</classname>" を使用します。
             </para>
 
             <para>
                 これらの規約によって、Zend Framework 上で擬似名前空間を定義しています。
-                PHP に名前空間機能が追加されるようになったら、Zend Framework もそれに対応させます。
+                <acronym>PHP</acronym> に名前空間機能が追加されるようになったら、Zend Framework もそれに対応させます。
                 それにより、開発者は自分のアプリケーションで名前空間を使用できるようになります。
             </para>
 
             <para>
                 標準ライブラリや追加ライブラリのクラス名を見れば、クラス名の命名規約のよい例となるでしょう。
-
-                <emphasis>重要:</emphasis> ZF ライブラリとともに配布するが、
-                標準ライブラリや拡張ライブラリではないもの
-                (たとえば、アプリケーションのコードや Zend 以外が作成したライブラリなど)
-                については、"Zend_" や "ZendX_" で始まる名前は使用できません。
             </para>
+
+            <note>
+                <para>
+                    <emphasis>重要:</emphasis> ZF ライブラリとともに配布するが、
+                    標準ライブラリや拡張ライブラリではないもの
+                    (たとえば、アプリケーションのコードや Zend 以外が作成したライブラリなど)
+                    については、"Zend_" や "ZendX_" で始まる名前は使用できません。
+                </para>
+            </note>
         </sect2>
 
         <sect2 id="coding-standard.naming-conventions.filenames">
@@ -164,11 +172,13 @@
             </para>
 
             <para>
-                PHP コードを含むすべてのファイルの拡張子は ".php" でなければなりません。
+                <acronym>PHP</acronym> コードを含むすべてのファイルの拡張子は
+                "<filename>.php</filename>" でなければなりません。
                 ただしビュースクリプトは例外です。次の例は、Zend Framework
                 のクラスに使用できるファイル名を示すものです。
+            </para>
 
-                <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend/Db.php
 
 Zend/Controller/Front.php
@@ -176,6 +186,7 @@ Zend/Controller/Front.php
 Zend/View/Helper/FormRadio.php
 ]]></programlisting>
 
+            <para>
                 ファイル名は、上で説明したとおりの方式でクラス名と対応していなければなりません。
             </para>
         </sect2>
@@ -205,6 +216,7 @@ Zend/View/Helper/FormRadio.php
 
             <para>
                 条件を満たす関数名の例を示します。
+            </para>
 
                 <programlisting language="php"><![CDATA[
 filterInput()
@@ -213,7 +225,6 @@ getElementById()
 
 widgetFactory()
 ]]></programlisting>
-            </para>
 
             <para>
                 オブジェクト指向のプログラミングでは、
@@ -283,8 +294,8 @@ widgetFactory()
 
             <para>
                 定数名の単語の間はアンダースコアで区切らなければなりません。
-                例えば <code>EMBED_SUPPRESS_EMBED_EXCEPTION</code> は許されますが、
-                <code>EMBED_SUPPRESSEMBEDEXCEPTION</code> は許されません。
+                例えば <constant>EMBED_SUPPRESS_EMBED_EXCEPTION</constant> は許されますが、
+                <constant>EMBED_SUPPRESSEMBEDEXCEPTION</constant> は許されません。
             </para>
 
             <para>
@@ -302,18 +313,19 @@ widgetFactory()
             <title>PHP コードの境界</title>
 
             <para>
-                PHP のコードの区切りには、標準 PHP タグを常に使用しなければなりません。
+                <acronym>PHP</acronym> のコードの区切りには、
+                標準 <acronym>PHP</acronym> タグを常に使用しなければなりません。
+            </para>
 
-                <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <?php
 
 ?>
 ]]></programlisting>
-            </para>
 
             <para>
                 短いタグは決して使用してはいけません。
-                PHP コードのみからなるファイルでは、終了タグ ("?>")
+                <acronym>PHP</acronym> コードのみからなるファイルでは、終了タグ ("?>")
                 は決して含めてはいけません
                 (<xref linkend="coding-standard.php-file-formatting.general" /> を参照ください)。
             </para>
@@ -329,11 +341,11 @@ widgetFactory()
                     文字列がリテラルである (変数の展開などが含まれない)
                     場合は、アポストロフィあるいは「シングルクォート」
                     で文字列を囲まなければなりません。
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $a = '文字列の例';
 ]]></programlisting>
-                </para>
             </sect3>
 
             <sect3 id="coding-standard.coding-style.strings.literals-containing-apostrophes">
@@ -342,13 +354,15 @@ $a = '文字列の例';
                 <para>
                     リテラル文字列自体にアポストロフィが含まれている場合は、
                     引用符あるいは「ダブルクォート」で文字列を囲んでもかまいません。
-                    特に SQL 文などでこのような場合がよくあるでしょう。
+                    特に <acronym>SQL</acronym> 文などでこのような場合がよくあるでしょう。
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $sql = "SELECT `id`, `name` from `people` "
      . "WHERE `name`='Fred' OR `name`='Susan'";
 ]]></programlisting>
 
+                <para>
                     アポストロフィをエスケープするよりも、上の構文のほうが読みやすくなるのでお勧めです。
                 </para>
             </sect3>
@@ -358,21 +372,21 @@ $sql = "SELECT `id`, `name` from `people` "
 
                 <para>
                     変数の展開を行うには、次のような方法を使用します。
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $greeting = "こんにちは $name さん。ようこそ!";
 
 $greeting = "こんにちは {$name} さん。ようこそ!";
 ]]></programlisting>
-                </para>
 
                 <para>
                     一貫性を保つため、以下の形式は許可されません。
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $greeting = "こんにちは ${name} さん。ようこそ!";
 ]]></programlisting>
-                </para>
             </sect3>
 
             <sect3 id="coding-standard.coding-style.strings.string-concatenation">
@@ -381,24 +395,24 @@ $greeting = "こんにちは ${name} さん。ようこそ!";
                 <para>
                     文字列の連結には "." 演算子を使用しなければなりません。コードを読みやすくするため、
                     "." 演算子の前後には常にスペースを入れなければなりません。
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $company = 'Zend' . ' ' . 'Technologies';
 ]]></programlisting>
-                </para>
 
                 <para>
                     文字列を "." 演算子で連結する際には、コードを読みやすくするために
                     ひとつの文を複数行に分けることもできます。そのような場合は、
                     2 行目以降の行頭にスペースを入れ、各行の "." 演算子が最初の行の
                     "=" 演算子と同じ位置にくるようにしなければなりません。
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $sql = "SELECT `id`, `name` FROM `people` "
      . "WHERE `name` = 'Susan' "
      . "ORDER BY `name` ASC ";
 ]]></programlisting>
-                </para>
             </sect3>
         </sect2>
 
@@ -419,23 +433,23 @@ $sql = "SELECT `id`, `name` FROM `people` "
                     <type>Array</type> を使用して数値添字の配列を宣言する場合は、
                     コードを読みやすくするため、
                     要素を区切るカンマの後にスペースを入れなければなりません。
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $sampleArray = array(1, 2, 3, 'Zend', 'Studio');
 ]]></programlisting>
-                </para>
 
                 <para>
                     "array" を使用して、複数行にまたがる配列を宣言することも可能です。
                     その場合は、2 行目以降の行頭にスペースを入れ、
                     各行の開始位置が以下のようになるようにしなければなりません。
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $sampleArray = array(1, 2, 3, 'Zend', 'Studio',
                      $a, $b, $c,
                      56.44, $d, 500);
 ]]></programlisting>
-                </para>
             </sect3>
 
             <sect3 id="coding-standard.coding-style.arrays.associative">
@@ -446,12 +460,12 @@ $sampleArray = array(1, 2, 3, 'Zend', 'Studio',
                     適宜改行をいれて複数行で宣言するようにしましょう。その場合は、
                     2 行目以降の行頭などにスペースを入れ、
                     キーと値の位置がそれぞれ揃うようにしなければなりません。
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $sampleArray = array('firstKey'  => 'firstValue',
                      'secondKey' => 'secondValue');
 ]]></programlisting>
-                </para>
             </sect3>
         </sect2>
 
@@ -463,22 +477,35 @@ $sampleArray = array('firstKey'  => 'firstValue',
 
                 <para>
                     クラス宣言は、以下の Zend Framework 命名規約に従わなければなりません。
-                </para><para>
+                </para>
+
+                <para>
                     開始波括弧は常にクラス名の下に書かなければなりません。
-                </para><para>
+                </para>
+
+                <para>
                     PHPDocumentor の標準形式のドキュメントブロックがなければなりません。
-                </para><para>
+                </para>
+
+                <para>
                     クラス内のコードは、すべて空白 4 文字で字下げします。
-                </para><para>
-                    ひとつの PHP ファイルにはクラス定義をひとつだけ含めるようにします。
-                </para><para>
+                </para>
+
+                <para>
+                    ひとつの <acronym>PHP</acronym> ファイルにはクラス定義をひとつだけ含めるようにします。
+                </para>
+
+                <para>
                     クラスファイルの中にクラス以外のコードを追加することもできますが、
                     お勧めしません。このような場合には、クラス定義とその他のコードの間に
                     空行を 2 行挿入しなければなりません。
-                </para><para>
-                    これらの条件を満たすクラス宣言の例です。
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <para>
+                    これらの条件を満たすクラス宣言の例です。
+                </para>
+
+                <programlisting language="php"><![CDATA[
 /**
  * これがドキュメントブロックです
  */
@@ -488,7 +515,6 @@ class SampleClass
     // 空白 4 文字の字下げを使用します。
 }
 ]]></programlisting>
-                </para>
             </sect3>
 
             <sect3 id="coding-standard.coding-style.classes.member-variables">
@@ -497,16 +523,18 @@ class SampleClass
                 <para>
                     メンバ変数は、以下の Zend Framework 変数命名規約に従わなければなりません。
                 </para>
+
                 <para>
                     クラスの内部で使用する変数は、クラスの先頭 (あらゆるメソッド宣言より前)
                     で宣言する必要があります。
                 </para>
+
                 <para>
                     <code>var</code> 構文を使ってはいけません。メンバ変数を宣言する際には
                     <code>private</code>、<code>protected</code> あるいは <code>public</code>
                     のいずれかの修飾子を用いてアクセス範囲を指定します。
                     メンバ変数を public 宣言して外部からアクセスさせることもできますが、
-                    それよりはアクセサメソッド (set/get) を使用する方式のほうを推奨します。
+                    それよりはアクセサメソッド (set &amp; get) を使用する方式のほうを推奨します。
                 </para>
             </sect3>
         </sect2>
@@ -520,6 +548,7 @@ class SampleClass
                 <para>
                     関数は、以下の Zend Framework 関数命名規約に従わなければなりません。
                 </para>
+
                 <para>
                     クラス内でメソッドを宣言する際には、常に
                     <code>private</code>、<code>protected</code> あるいは
@@ -554,10 +583,14 @@ class Foo
 ]]></programlisting>
                 </para>
 
-                <para>
-                    <emphasis>注意:</emphasis> 値の参照渡しは、メソッドの宣言時にパラメータを渡す部分においてのみ可能です。
+                <note>
+                    <para>
+                        <emphasis>注意:</emphasis> 値の参照渡しは、
+                        メソッドの宣言時にパラメータを渡す部分においてのみ可能です。
+                    </para>
+                </note>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 /**
  * これがドキュメントブロックです
  */
@@ -570,7 +603,6 @@ class Foo
     {}
 }
 ]]></programlisting>
-                </para>
 
                 <para>
                     実行時の参照渡しは禁止されています。
@@ -579,8 +611,9 @@ class Foo
                 <para>
                     返り値は括弧で囲んではいけません。これは可読性を下げますし、
                     将来そのメソッドが参照を返すようになった場合にコードが壊れてしまいます。
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 /**
  * これがドキュメントブロックです
  */
@@ -603,8 +636,6 @@ class Foo
     }
 }
 ]]></programlisting>
-                </para>
-
             </sect3>
 
             <sect3 id="coding-standard.coding-style.functions-and-methods.usage">
@@ -614,30 +645,31 @@ class Foo
                     関数の引数を指定する際は、引数を区切るカンマの後に空白をひとつ入れます。
                     例えば 3 つの引数を受け取る関数をコールする場合の例は、
                     以下のようになります。
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 threeArguments(1, 2, 3);
 ]]></programlisting>
-                </para>
 
                 <para>
                     コール時に引数を参照渡しすることは禁じます。
                     関数への引数を参照渡しにする方法は、
                     関数宣言についての節を参照ください。
                 </para>
+
                 <para>
                     引数として配列を受け取る関数については、関数コールの中に
                     "array" 構文を含め、それを複数行に分けることもできます。
                     そのような場合の記述法は、以下のようになります。
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 threeArguments(array(1, 2, 3), 2, 3);
 
 threeArguments(array(1, 2, 3, 'Zend', 'Studio',
                      $a, $b, $c,
                      56.44, $d, 500), 2, 3);
 ]]></programlisting>
-                </para>
             </sect3>
         </sect2>
 
@@ -663,19 +695,20 @@ threeArguments(array(1, 2, 3, 'Zend', 'Studio',
                     開始波括弧は、条件文と同じ行に記述します。
                     終了波括弧は、常に改行してそれのみで記述します。
                     波括弧の中では、空白 4 文字の字下げを使用します。
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 if ($a != 2) {
     $a = 2;
 }
 ]]></programlisting>
-                </para>
 
                 <para>
                     "elseif" あるいは "else" を含む "if" 文の場合の決まりは、通常の "if" と同じです。
                     次の例は、"if" 文に "else" や "elseif" が含まれる場合のものです。
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 if ($a != 2) {
     $a = 2;
 } else {
@@ -690,7 +723,9 @@ if ($a != 2) {
     $a = 7;
 }
 ]]></programlisting>
-                    場合によっては、これらの文で波括弧が必要ない場合もあります。
+
+                <para>
+                    場合によっては、これらの文で波括弧が必要ないこともあります。
                     しかし、このコーディング規約では、このような例外を認めません。
                     "if"、"elseif" あるいは "else" 文では、常に波括弧を使用しなければなりません。
                 </para>
@@ -733,15 +768,17 @@ switch ($numPeople) {
                     決して省略してはいけません。
                 </para>
 
-                <para>
-                    <emphasis>注意:</emphasis> 各 <code>case</code> の最後に
-                    <code>break</code> や <code>return</code> を記述せず、意図的に
-                    次の <code>case</code> に処理を流すという書き方をする場合もあるでしょう。
-                    これらの場合を単なる記述漏れと区別するために、<code>case</code> 文で
-                    <code>break</code> あるいは <code>return</code> を指定しなかった場合は
-                    "// break intentionally omitted" (訳注:「意図的に break を省略しました」)
-                    というコメントを含めるようにします。
-                </para>
+                <note>
+                    <para>
+                        <emphasis>注意:</emphasis> 各 <code>case</code> の最後に
+                        <code>break</code> や <code>return</code> を記述せず、意図的に
+                        次の <code>case</code> に処理を流すという書き方をする場合もあるでしょう。
+                        これらの場合を単なる記述漏れと区別するために、<code>case</code> 文で
+                        <code>break</code> あるいは <code>return</code> を指定しなかった場合は
+                        "// break intentionally omitted" (訳注:「意図的に break を省略しました」)
+                        というコメントを含めるようにします。
+                    </para>
+                </note>
             </sect3>
         </sect2>
 
@@ -771,11 +808,12 @@ switch ($numPeople) {
                 <title>ファイル</title>
 
                 <para>
-                    PHP コードを含むすべてのファイルは、最低限これらの
+                    <acronym>PHP</acronym> コードを含むすべてのファイルは、最低限これらの
                     phpDocumentor タグを含むドキュメントブロックを、
                     ファイルの先頭に記述しなければなりません。
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 /**
  * ファイルについての短い説明
  *
@@ -790,7 +828,6 @@ switch ($numPeople) {
  * @since      File available since Release 1.5.0
 */
 ]]></programlisting>
-                </para>
             </sect3>
 
             <sect3 id="coding-standards.inline-documentation.classes">
@@ -799,8 +836,9 @@ switch ($numPeople) {
                 <para>
                     各クラスには、最低限これらの phpDocumentor タグを含む
                     docblock が必要です。
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 /**
  * クラスについての短い説明
  *
@@ -814,22 +852,21 @@ switch ($numPeople) {
  * @deprecated Class deprecated in Release 2.0.0
  */
 ]]></programlisting>
-                </para>
             </sect3>
 
             <sect3 id="coding-standards.inline-documentation.functions">
                 <title>関数</title>
 
                 <para>
-                オブジェクトのメソッドを含めたすべての関数には、
-                最低限以下の内容を含む docblock が必要です。
-
-                    <itemizedlist>
-                        <listitem><para>関数についての説明</para></listitem>
-                        <listitem><para>すべての引数</para></listitem>
-                        <listitem><para>返り値</para></listitem>
-                    </itemizedlist>
+                    オブジェクトのメソッドを含めたすべての関数には、
+                    最低限以下の内容を含む docblock が必要です。
                 </para>
+
+                <itemizedlist>
+                    <listitem><para>関数についての説明</para></listitem>
+                    <listitem><para>すべての引数</para></listitem>
+                    <listitem><para>返り値</para></listitem>
+                </itemizedlist>
 
                 <para>
                     "@access" タグは必要ありません。なぜなら、
@@ -838,12 +875,13 @@ switch ($numPeople) {
                 </para>
 
                 <para>
-                    関数/メソッドが例外をスローする場合には、すべての既知の例外クラスに対して @throws を使用します。
+                    関数/メソッドが例外をスローする場合には、すべての既知の例外クラスに対して
+                    @throws を使用します。
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 @throws exceptionclass [description]
 ]]></programlisting>
-                </para>
             </sect3>
         </sect2>
     </sect1>

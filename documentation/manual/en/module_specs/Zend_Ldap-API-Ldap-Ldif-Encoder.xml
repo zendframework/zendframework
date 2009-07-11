@@ -32,7 +32,7 @@
                     <entry>
                         Encode <code>$value</code> into a <acronym>LDIF</acronym> representation.
                         <code>$options</code> is an array that may contain the following
-                        keys: 
+                        keys:
                         <variablelist>
                             <varlistentry>
                                 <term><code>'sort'</code></term>

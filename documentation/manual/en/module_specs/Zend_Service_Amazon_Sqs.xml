@@ -20,7 +20,7 @@
         </para>
 
         <para>
-            Amazon SQS works by exposing Amazon’s web-scale messaging
+            Amazon SQS works by exposing Amazon's web-scale messaging
             infrastructure as a web service. Any computer on the Internet can
             add or read messages without any installed software or special
             firewall configurations. Components of applications using Amazon SQS

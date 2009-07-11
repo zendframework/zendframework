@@ -280,7 +280,7 @@
                     <entry><code>integer getType()</code></entry>
                     <entry>
                         Returns the objectClass type. The method returns one of the
-                        following values: 
+                        following values:
                         <variablelist>
                             <varlistentry>
                                 <term>
@@ -477,7 +477,7 @@
                 <tbody>
                     <row>
                         <entry>
-                            
+
                             <code>Zend_Ldap_Node_Schema_AttributeType_ActiveDirectory</code>
                             does not provide any additional methods.
                         </entry>
@@ -494,7 +494,7 @@
                 <tbody>
                     <row>
                         <entry>
-                            
+
                             <code>Zend_Ldap_Node_Schema_ObjectClass_ActiveDirectory</code>
                             does not provide any additional methods.
                         </entry>

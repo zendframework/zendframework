@@ -180,13 +180,13 @@
             <para>Method names in <emphasis>italics</emphasis> are static methods.</para>
         </note>
 
-	<xi:include href="Zend_Ldap-API-Ldap.xml" />
-	<xi:include href="Zend_Ldap-API-Ldap-Attribute.xml" />
-	<xi:include href="Zend_Ldap-API-Ldap-Dn.xml" />
-	<xi:include href="Zend_Ldap-API-Ldap-Filter.xml" />
-	<xi:include href="Zend_Ldap-API-Ldap-Node.xml" />
-	<xi:include href="Zend_Ldap-API-Ldap-Node-RootDse.xml" />
-	<xi:include href="Zend_Ldap-API-Ldap-Node-Schema.xml" />
-	<xi:include href="Zend_Ldap-API-Ldap-Ldif-Encoder.xml" />
+    <xi:include href="Zend_Ldap-API-Ldap.xml" />
+    <xi:include href="Zend_Ldap-API-Ldap-Attribute.xml" />
+    <xi:include href="Zend_Ldap-API-Ldap-Dn.xml" />
+    <xi:include href="Zend_Ldap-API-Ldap-Filter.xml" />
+    <xi:include href="Zend_Ldap-API-Ldap-Node.xml" />
+    <xi:include href="Zend_Ldap-API-Ldap-Node-RootDse.xml" />
+    <xi:include href="Zend_Ldap-API-Ldap-Node-Schema.xml" />
+    <xi:include href="Zend_Ldap-API-Ldap-Ldif-Encoder.xml" />
     </sect2>
 </sect1>

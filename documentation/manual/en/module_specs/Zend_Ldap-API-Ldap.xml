@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect3 id="zend.ldap.api.reference.zend-ldap">
     <title>Zend_Ldap</title>
 
@@ -83,7 +85,7 @@
                     <entry>
                         Sets the <acronym>LDAP</acronym> connection and binding parameters.
                         <code>$options</code> can be an array or an instance of
-                        <classname>Zend_Config</classname>. The allowed options are specified in 
+                        <classname>Zend_Config</classname>. The allowed options are specified in
                         <link
                             linkend="zend.ldap.using.theory-of-operation.options.table">Zend_Ldap Options</link>
                     </entry>
@@ -157,7 +159,7 @@
                     </entry>
                     <entry>
                         Searches the <acronym>LDAP</acronym> tree with the given <code>$filter</code>
-                        and the given search parameters. 
+                        and the given search parameters.
                         <variablelist>
                             <varlistentry>
                                 <term><code>string|Zend_Ldap_Filter_Abstract
@@ -368,7 +370,7 @@
                         <code>ldap_rename()</code> should be used if available. This can
                         only work for leaf entries and for servers and for ext/ldap
                         supporting this function. Set to <code>true</code> to always use an
-                        emulated rename operation. 
+                        emulated rename operation.
                         <note>
                             <para>All move-operations are carried out by copying and then
                             deleting the corresponding entries in the <acronym>LDAP</acronym> tree. These
@@ -470,7 +472,6 @@
                 </row>
             </tbody>
         </tgroup>
-
     </table>
 
     <sect4 id="zend.ldap.api.reference.zend-ldap.zend-ldap-collection">
@@ -487,7 +488,7 @@
         <table id="zend.ldap.api.reference.zend-collection.table">
             <title>Zend_Ldap_Collection API</title>
 
-            <tgroup cols="2">zend.ldap.api.reference.zend-ldap.zend-ldap-collection 
+            <tgroup cols="2">zend.ldap.api.reference.zend-ldap.zend-ldap-collection
             <thead>
                 <row>
                     <entry>Method</entry>
@@ -527,11 +528,6 @@
                     </entry>
                 </row>
             </tbody></tgroup>
-
         </table>
-
     </sect4>
-
 </sect3>
-
-

@@ -237,7 +237,7 @@
                         Explodes the DN <code>$dn</code> into an array containing
                         all parts of the given DN. <code>$keys</code> optinally receive DN
                         keys (e.g. CN, OU, DC, ...). <code>$vals</code> optionally receive
-                        DN values. The resulting array will be of type 
+                        DN values. The resulting array will be of type
                     <programlisting language="php"><![CDATA[
 array(
 array("cn" => "name1", "uid" => "user"),
@@ -282,7 +282,7 @@ array("dc" => "org")
                         <code>Zend_Ldap_Dn::explodeDn()</code> to a DN string.
                         <code>$separator</code> defaults to <code>','</code> but some LDAP
                         servers also understand <code>';'</code>. <code>$dnArray</code>
-                        must of type 
+                        must of type
                     <programlisting language="php"><![CDATA[
 array(
 array("cn" => "name1", "uid" => "user"),

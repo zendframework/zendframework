@@ -55,12 +55,12 @@ $schema = $ldap->getSchema();
 $classes = $schema->getObjectClasses();
 ]]></programlisting>
         </example>
-        
+
         <sect3 id="zend.ldap.server.schema.openldap">
             <title>OpenLDAP</title>
             <para/>
         </sect3>
-        
+
         <sect3 id="zend.ldap.server.schema.activedirectory">
             <title>ActiveDirectory</title>
             <note>

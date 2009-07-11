@@ -210,7 +210,7 @@
                 <row>
                     <entry><code>integer getServerType()</code></entry>
                     <entry>
-                        Gets the server type. Returns 
+                        Gets the server type. Returns
                         <variablelist>
                             <varlistentry>
                                 <term>
@@ -258,7 +258,7 @@
 
         <note>
             <para>
-                Refer to 
+                Refer to
                 <ulink url="http://www.zytrax.com/books/ldap/ch3/#operational">LDAP
                 Operational Attributes and Objects</ulink>for information on the attributes
                 of OpenLDAP RootDSE.
@@ -327,7 +327,7 @@
 
         <note>
             <para>
-                Refer to 
+                Refer to
                 <ulink url="http://msdn.microsoft.com/en-us/library/ms684291(VS.85).aspx">
                 RootDSE</ulink>for information on the attributes of Microsoft
                 ActiveDirectory RootDSE.
@@ -475,7 +475,7 @@
 
         <note>
             <para>
-                Refer to 
+                Refer to
                 <ulink url="http://www.novell.com/documentation/edir88/edir88/index.html?page=/documentation/edir88/edir88/data/ah59jqq.html">
                 Getting Information about the <acronym>LDAP</acronym> Server</ulink>for information on the
                 attributes of Novell eDirectory RootDSE.

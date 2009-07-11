@@ -130,7 +130,7 @@
                     <entry>
                         Creates a filter from a string mask. All <code>$value</code>
                         parameters will be escaped and substituted into <code>$mask</code>
-                        by using 
+                        by using
                         <ulink url="http://php.net/sprintf">
                         <code>sprintf()</code></ulink>
                     </entry>

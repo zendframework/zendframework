@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect3 id="zend.ldap.api.reference.zend-ldap-node-schema">
+    <title>Zend_Ldap_Node_Schema</title>
+
+    <para>The following methods are available on all vendor-specific subclasses.</para>
+
+    <para>
+        <code>Zend_Ldap_Node_Schema</code> includes the magic propery accessors
+        <code>__get()</code> and <code>__isset()</code> to access the attributes by their
+        name. They proxy to <code>Zend_Ldap_Node_Schema::getAttribute()</code> and
+        <code>Zend_Ldap_Node_Schema::existsAttribute()</code> respectively.
+        <code>__set()</code> and <code>__unset()</code> are also implemented but they throw
+        a <code>BadMethodCallException</code> as modifications are not allowed on RootDSE
+        nodes. Furthermore the class implements <code>ArrayAccess</code> for
+        array-style-access to the attributes. <code>offsetSet()</code> and
+        <code>offsetUnset()</code> also throw a <code>BadMethodCallException</code> due ro
+        obvious reasons.
+    </para>
+
+    <table id="zend.ldap.api.reference.zend-ldap-node-schema.table">
+        <title>Zend_Ldap_Node_Schema API</title>
+
+        <tgroup cols="2">
+            <thead>
+                <row>
+                    <entry>Method</entry>
+                    <entry>Description</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry><code>Zend_Ldap_Dn getDn()</code></entry>
+                    <entry>Gets the DN of the current node as a Zend_Ldap_Dn.</entry>
+                </row>
+                <row>
+                    <entry><code>string getDnString(string $caseFold)</code></entry>
+                    <entry>Gets the DN of the current node as a string.</entry>
+                </row>
+                <row>
+                    <entry><code>array getDnArray(string $caseFold)</code></entry>
+                    <entry>Gets the DN of the current node as an array.</entry>
+                </row>
+                <row>
+                    <entry><code>string getRdnString(string $caseFold)</code></entry>
+                    <entry>Gets the <acronym>RDN</acronym> of the current node as a string.</entry>
+                </row>
+                <row>
+                    <entry><code>array getRdnArray(string $caseFold)</code></entry>
+                    <entry>Gets the <acronym>RDN</acronym> of the current node as an array.</entry>
+                </row>
+                <row>
+                    <entry><code>array getObjectClass()</code></entry>
+                    <entry>Returns the objectClass of the node.</entry>
+                </row>
+                <row>
+                    <entry><code>string toString()</code></entry>
+                    <entry>
+                        Returns the DN of the current node - proxies to
+                        <code>Zend_Ldap_Dn::getDnString()</code>.
+                    </entry>
+                </row>
+                <row>
+                    <entry><code>string __toString()</code></entry>
+                    <entry>
+                        Casts to string representation - proxies to
+                        <code>Zend_Ldap_Dn::toString()</code>.
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <code>array toArray(boolean
+                        $includeSystemAttributes)</code>
+                    </entry>
+                    <entry>
+                        Returns an array representation of the current node. If
+                        <code>$includeSystemAttributes</code> is <code>false</code>
+                        (defaults to <code>true</code>) the system specific attributes are
+                        stripped from the array. Unlike
+                        <code>Zend_Ldap_Node_Schema::getAttributes()</code> the resulting
+                        array contains the DN with key <code>'dn'</code>.
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <code>string toJson(boolean
+                        $includeSystemAttributes)</code>
+                    </entry>
+                    <entry>
+                        Returns a <acronym>JSON</acronym> representation of the current node using
+                        <code>Zend_Ldap_Node_Schema::toArray()</code>.
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <code>array getData(boolean
+                        $includeSystemAttributes)</code>
+                    </entry>
+                    <entry>
+                        Returns the node's attributes. The array contains all
+                        attributes in its internal format (no conversion).
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <code>boolean existsAttribute(string $name, boolean
+                        $emptyExists)</code>
+                    </entry>
+                    <entry>
+                        Checks whether a given attribute exists. If
+                        <code>$emptyExists</code> is <code>false</code> empty attributes
+                        (containing only array()) are treated as non-existent returning
+                        <code>false</code>. If <code>$emptyExists</code> is true empty
+                        attributes are treated as existent returning <code>true</code>. In
+                        this case teh method returns <code>false</code> only if the
+                        attribute name is missing in the key-collection.
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <code>boolean attributeHasValue(string $name, mixed|array
+                        $value)</code>
+                    </entry>
+                    <entry>
+                        Checks if the given value(s) exist in the attribute. The
+                        method returns <code>true</code> only if all values in
+                        <code>$value</code> are present in the attribute. Comparison is
+                        done strictly (respecting the data type).
+                    </entry>
+                </row>
+                <row>
+                    <entry><code>integer count()</code></entry>
+                    <entry>
+                        Returns the number of attributes in the node. Implements
+                        Countable.
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <code>mixed getAttribute(string $name, integer|null
+                        $index)</code>
+                    </entry>
+                    <entry>
+                        Gets a <acronym>LDAP</acronym> attribute. Data conversion is applied using
+                        <code>Zend_Ldap_Attribute::getAttribute()</code>.
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <code>array getAttributes(boolean
+                        $includeSystemAttributes)</code>
+                    </entry>
+                    <entry>
+                        Gets all attributes of node. If
+                        <code>$includeSystemAttributes</code> is <code>false</code>
+                        (defaults to <code>true</code>) the system specific attributes are
+                        stripped from the array.
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <code>array|integer getDateTimeAttribute(string $name,
+                        integer|null $index)</code>
+                    </entry>
+                    <entry>
+                        Gets a <acronym>LDAP</acronym> date/time attribute. Data conversion is applied
+                        using
+                        <code>Zend_Ldap_Attribute::getDateTimeAttribute()</code>.
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <code>Zend_Ldap_Node_Schema reload(Zend_Ldap
+                        $ldap)</code>
+                    </entry>
+                    <entry>
+                        Reloads the current node's attributes from the given LDAP
+                        server.
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <emphasis><code>Zend_Ldap_Node_Schema create(Zend_Ldap
+                        $ldap)</code> </emphasis>
+                    </entry>
+                    <entry>Factory method to create the Schema node.</entry>
+                </row>
+                <row>
+                    <entry><code>array getAttributeTypes()</code></entry>
+                    <entry>Gets the attribute types as an array of <code/>.</entry>
+                </row>
+                <row>
+                    <entry><code>array getObjectClasses()</code></entry>
+                    <entry>
+                        Gets the object classes as an array of
+                        <code>Zend_Ldap_Node_Schema_ObjectClass_Interface</code>.
+                    </entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+
+    <table id="zend.ldap.api.reference.zend-ldap-node-schema.attributetype-interface.table">
+        <title>Zend_Ldap_Node_Schema_AttributeType_Interface API</title>
+
+        <tgroup cols="2">
+            <thead>
+                <row>
+                    <entry>Method</entry>
+                    <entry>Description</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry><code>string getName()</code></entry>
+                    <entry>Gets the attribute name.</entry>
+                </row>
+                <row>
+                    <entry><code>string getOid()</code></entry>
+                    <entry>Gets the attribute OID.</entry>
+                </row>
+                <row>
+                    <entry><code>string getSyntax()</code></entry>
+                    <entry>Gets the attribute syntax.</entry>
+                </row>
+                <row>
+                    <entry><code>int|null getMaxLength()</code></entry>
+                    <entry>Gets the attribute maximum length.</entry>
+                </row>
+                <row>
+                    <entry><code>boolean isSingleValued()</code></entry>
+                    <entry>Returns if the attribute is single-valued.</entry>
+                </row>
+                <row>
+                    <entry><code>string getDescription()</code></entry>
+                    <entry>Gets the attribute description</entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+
+    <table id="zend.ldap.api.reference.zend-ldap-node-schema.objectclass-interface.table">
+        <title>Zend_Ldap_Node_Schema_ObjectClass_Interface API</title>
+
+        <tgroup cols="2">
+            <thead>
+                <row>
+                    <entry>Method</entry>
+                    <entry>Description</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry><code>string getName()</code></entry>
+                    <entry>Returns the objectClass name.</entry>
+                </row>
+                <row>
+                    <entry><code>string getOid()</code></entry>
+                    <entry>Returns the objectClass OID.</entry>
+                </row>
+                <row>
+                    <entry><code>array getMustContain()</code></entry>
+                    <entry>
+                        Returns the attributes that this objectClass must
+                        contain.
+                    </entry>
+                </row>
+                <row>
+                    <entry><code>array getMayContain()</code></entry>
+                    <entry>
+                        Returns the attributes that this objectClass may
+                        contain.
+                    </entry>
+                </row>
+                <row>
+                    <entry><code>string getDescription()</code></entry>
+                    <entry>Returns the attribute description</entry>
+                </row>
+                <row>
+                    <entry><code>integer getType()</code></entry>
+                    <entry>
+                        Returns the objectClass type. The method returns one of the
+                        following values: 
+                        <variablelist>
+                            <varlistentry>
+                                <term>
+                                <code>Zend_Ldap_Node_Schema::OBJECTCLASS_TYPE_UNKNOWN</code></term>
+                                <listitem>for unknown class types</listitem>
+                            </varlistentry>
+
+                            <varlistentry>
+                                <term>
+                                <code>Zend_Ldap_Node_Schema::OBJECTCLASS_TYPE_STRUCTURAL</code></term>
+                                <listitem>for structural classes</listitem>
+                            </varlistentry>
+
+                            <varlistentry>
+                                <term>
+                                <code>Zend_Ldap_Node_Schema::OBJECTCLASS_TYPE_ABSTRACT</code></term>
+                                <listitem>for abstract classes</listitem>
+                            </varlistentry>
+
+                            <varlistentry>
+                                <term>
+                                <code>Zend_Ldap_Node_Schema::OBJECTCLASS_TYPE_AUXILIARY</code></term>
+                                <listitem>for auxiliary classes</listitem>
+                            </varlistentry>
+                        </variablelist>
+                    </entry>
+                </row>
+                <row>
+                    <entry><code>array getParentClasses()</code></entry>
+                    <entry>
+                        Returns the parent objectClasses of this class. This
+                        includes structural, abstract and auxiliary objectClasses.
+                    </entry>
+                </row>
+            </tbody>
+
+        </tgroup>
+
+    </table>
+
+    <para>
+        Classes representing attribute types and object classes extend
+        <code>Zend_Ldap_Node_Schema_Item</code> which provides some core methods to access
+        arbitrary attributes on the underlying <acronym>LDAP</acronym> node.
+        <code>Zend_Ldap_Node_Schema_Item</code> includes the magic propery accessors
+        <code>__get()</code> and <code>__isset()</code> to access the attributes by their
+        name. Furthermore the class implements <code>ArrayAccess</code> for
+        array-style-access to the attributes. <code>offsetSet()</code> and
+        <code>offsetUnset()</code> throw a <code>BadMethodCallException</code> as
+        modifications are not allowed on schema information nodes.
+    </para>
+
+    <table id="zend.ldap.api.reference.zend-ldap-node-schema.schema-item.table">
+        <title>Zend_Ldap_Node_Schema_Item API</title>
+
+        <tgroup cols="2">
+            <thead>
+                <row>
+                    <entry>Method</entry>
+                    <entry>Description</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry><code>array getData()</code></entry>
+                    <entry>
+                        Gets all the underlying data from the schema information
+                        node.
+                    </entry>
+                </row>
+                <row>
+                    <entry><code>integer count()</code></entry>
+                    <entry>
+                        Returns the number of attributes in this schema information
+                        node. Implements Countable.
+                    </entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+
+    <sect4 id="zend.ldap.api.reference.zend-ldap-node-schema.openldap">
+        <title>OpenLDAP</title>
+
+        <para>
+            Additionally the common methods above apply to instances of
+            <code>Zend_Ldap_Node_Schema_OpenLDAP</code>.
+        </para>
+
+        <table id="zend.ldap.api.reference.zend-ldap-node-schema.openldap.table">
+            <title>Zend_Ldap_Node_Schema_OpenLDAP API</title>
+
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Method</entry>
+                        <entry>Description</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><code>array getLdapSyntaxes()</code></entry>
+                        <entry>Gets the <acronym>LDAP</acronym> syntaxes.</entry>
+                    </row>
+                    <row>
+                        <entry><code>array getMatchingRules()</code></entry>
+                        <entry>Gets the matching rules.</entry>
+                    </row>
+                    <row>
+                        <entry><code>array getMatchingRuleUse()</code></entry>
+                        <entry>Gets the matching rule use.</entry>
+                    </row>
+                </tbody>
+
+            </tgroup>
+
+        </table>
+
+        <table
+            id="zend.ldap.api.reference.zend-ldap-node-schema.openldap.attributetype-interface.table">
+            <title>Zend_Ldap_Node_Schema_AttributeType_OpenLDAP API</title>
+
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Method</entry>
+                        <entry>Description</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>
+                            <code>Zend_Ldap_Node_Schema_AttributeType_OpenLdap|null
+                            getParent()</code>
+                        </entry>
+                        <entry>
+                            Returns the parent attribute type in the inhertitance
+                            tree if one exists.
+                        </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+        <table
+            id="zend.ldap.api.reference.zend-ldap-node-schema.openldap.objectclass-interface.table">
+            <title>Zend_Ldap_Node_Schema_ObjectClass_OpenLDAP API</title>
+
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Method</entry>
+                        <entry>Description</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><code>array getParents()</code></entry>
+                        <entry>
+                            Returns the parent object classes in the inhertitance
+                            tree if one exists. The returned array is an array of
+                            <code>Zend_Ldap_Node_Schema_ObjectClass_OpenLdap</code>.
+                        </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+    </sect4>
+
+    <sect4 id="zend.ldap.api.reference.zend-ldap-node-schema.activedirectory">
+        <title>ActiveDirectory</title>
+
+        <note>
+            <title>Schema browsing on ActiveDirectory servers</title>
+            <para>
+                Due to restrictions on Microsoft ActiveDirectory servers regarding
+                the number of entries returned by generic search routines and due to the
+                structure of the ActiveDirectory schema repository, schema browsing is
+                currently <emphasis>not</emphasis> available for Microsoft ActiveDirectory
+                servers.
+            </para>
+        </note>
+
+        <para>
+            <code>Zend_Ldap_Node_Schema_ActiveDirectory</code> does not provide any
+            additional methods.
+        </para>
+
+        <table
+            id="zend.ldap.api.reference.zend-ldap-node-schema.activedirectory.attributetype-interface.table">
+            <title>Zend_Ldap_Node_Schema_AttributeType_ActiveDirectory API</title>
+
+            <tgroup cols="1">
+                <tbody>
+                    <row>
+                        <entry>
+                            
+                            <code>Zend_Ldap_Node_Schema_AttributeType_ActiveDirectory</code>
+                            does not provide any additional methods.
+                        </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+        <table
+            id="zend.ldap.api.reference.zend-ldap-node-schema.activedirectory.objectclass-interface.table">
+            <title>Zend_Ldap_Node_Schema_ObjectClass_ActiveDirectory API</title>
+
+            <tgroup cols="1">
+                <tbody>
+                    <row>
+                        <entry>
+                            
+                            <code>Zend_Ldap_Node_Schema_ObjectClass_ActiveDirectory</code>
+                            does not provide any additional methods.
+                        </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+    </sect4>
+</sect3>
+

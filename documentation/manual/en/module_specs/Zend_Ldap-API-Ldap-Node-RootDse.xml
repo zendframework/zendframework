@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect3 id="zend.ldap.api.reference.zend-ldap-node-rootdse">
+    <title>Zend_Ldap_Node_RootDse</title>
+
+    <para>The following methods are available on all vendor-specific subclasses.</para>
+
+    <para>
+        <code>Zend_Ldap_Node_RootDse</code> includes the magic propery accessors
+        <code>__get()</code> and <code>__isset()</code> to access the attributes by their
+        name. They proxy to <code>Zend_Ldap_Node_RootDse::getAttribute()</code> and
+        <code>Zend_Ldap_Node_RootDse::existsAttribute()</code> respectively.
+        <code>__set()</code> and <code>__unset()</code> are also implemented but they throw
+        a <code>BadMethodCallException</code> as modifications are not allowed on RootDSE
+        nodes. Furthermore the class implements <code>ArrayAccess</code> for
+        array-style-access to the attributes. <code>offsetSet()</code> and
+        <code>offsetUnset()</code> also throw a <code>BadMethodCallException</code> due ro
+        obvious reasons.
+    </para>
+
+    <table id="zend.ldap.api.reference.zend-ldap-node-rootdse.table">
+        <title>Zend_Ldap_Node_RootDse API</title>
+
+        <tgroup cols="2">
+            <thead>
+                <row>
+                    <entry>Method</entry>
+                    <entry>Description</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry><code>Zend_Ldap_Dn getDn()</code></entry>
+                    <entry>Gets the DN of the current node as a Zend_Ldap_Dn.</entry>
+                </row>
+                <row>
+                    <entry><code>string getDnString(string $caseFold)</code></entry>
+                    <entry>Gets the DN of the current node as a string.</entry>
+                </row>
+                <row>
+                    <entry><code>array getDnArray(string $caseFold)</code></entry>
+                    <entry>Gets the DN of the current node as an array.</entry>
+                </row>
+                <row>
+                    <entry><code>string getRdnString(string $caseFold)</code></entry>
+                    <entry>Gets the <acronym>RDN</acronym> of the current node as a string.</entry>
+                </row>
+                <row>
+                    <entry><code>array getRdnArray(string $caseFold)</code></entry>
+                    <entry>Gets the <acronym>RDN</acronym> of the current node as an array.</entry>
+                </row>
+                <row>
+                    <entry><code>array getObjectClass()</code></entry>
+                    <entry>Returns the objectClass of the node.</entry>
+                </row>
+                <row>
+                    <entry><code>string toString()</code></entry>
+                    <entry>
+                        Returns the DN of the current node - proxies to
+                        <code>Zend_Ldap_Dn::getDnString()</code>.
+                    </entry>
+                </row>
+                <row>
+                    <entry><code>string __toString()</code></entry>
+                    <entry>
+                        Casts to string representation - proxies to
+                        <code>Zend_Ldap_Dn::toString()</code>.
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <code>array toArray(boolean
+                        $includeSystemAttributes)</code>
+                    </entry>
+                    <entry>
+                        Returns an array representation of the current node. If
+                        <code>$includeSystemAttributes</code> is <code>false</code>
+                        (defaults to <code>true</code>) the system specific attributes are
+                        stripped from the array. Unlike
+                        <code>Zend_Ldap_Node_RootDse::getAttributes()</code> the resulting
+                        array contains the DN with key <code>'dn'</code>.
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <code>string toJson(boolean
+                        $includeSystemAttributes)</code>
+                    </entry>
+                    <entry>
+                        Returns a <acronym>JSON</acronym> representation of the current node using
+                        <code>Zend_Ldap_Node_RootDse::toArray()</code>.
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <code>array getData(boolean
+                        $includeSystemAttributes)</code>
+                    </entry>
+                    <entry>
+                        Returns the node's attributes. The array contains all
+                        attributes in its internal format (no conversion).
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <code>boolean existsAttribute(string $name, boolean
+                        $emptyExists)</code>
+                    </entry>
+                    <entry>
+                        Checks whether a given attribute exists. If
+                        <code>$emptyExists</code> is <code>false</code> empty attributes
+                        (containing only array()) are treated as non-existent returning
+                        <code>false</code>. If <code>$emptyExists</code> is true empty
+                        attributes are treated as existent returning <code>true</code>. In
+                        this case teh method returns <code>false</code> only if the
+                        attribute name is missing in the key-collection.
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <code>boolean attributeHasValue(string $name, mixed|array
+                        $value)</code>
+                    </entry>
+                    <entry>
+                        Checks if the given value(s) exist in the attribute. The
+                        method returns <code>true</code> only if all values in
+                        <code>$value</code> are present in the attribute. Comparison is
+                        done strictly (respecting the data type).
+                    </entry>
+                </row>
+                <row>
+                    <entry><code>integer count()</code></entry>
+                    <entry>
+                        Returns the number of attributes in the node. Implements
+                        Countable.
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <code>mixed getAttribute(string $name, integer|null
+                        $index)</code>
+                    </entry>
+                    <entry>
+                        Gets a <acronym>LDAP</acronym> attribute. Data conversion is applied using
+                        <code>Zend_Ldap_Attribute::getAttribute()</code>.
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <code>array getAttributes(boolean
+                        $includeSystemAttributes)</code>
+                    </entry>
+                    <entry>
+                        Gets all attributes of node. If
+                        <code>$includeSystemAttributes</code> is <code>false</code>
+                        (defaults to <code>true</code>) the system specific attributes are
+                        stripped from the array.
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <code>array|integer getDateTimeAttribute(string $name,
+                        integer|null $index)</code>
+                    </entry>
+                    <entry>
+                        Gets a <acronym>LDAP</acronym> date/time attribute. Data conversion is applied
+                        using
+                        <code>Zend_Ldap_Attribute::getDateTimeAttribute()</code>.
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <code>Zend_Ldap_Node_RootDse reload(Zend_Ldap
+                        $ldap)</code>
+                    </entry>
+                    <entry>
+                        Reloads the current node's attributes from the given LDAP
+                        server.
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <emphasis><code>Zend_Ldap_Node_RootDse create(Zend_Ldap
+                        $ldap)</code> </emphasis>
+                    </entry>
+                    <entry>Factory method to create the RootDSE.</entry>
+                </row>
+                <row>
+                    <entry><code>array getNamingContexts()</code></entry>
+                    <entry>Gets the namingContexts.</entry>
+                </row>
+                <row>
+                    <entry><code>string|null getSubschemaSubentry()</code></entry>
+                    <entry>Gets the subschemaSubentry.</entry>
+                </row>
+                <row>
+                    <entry>
+                        <code>boolean supportsVersion(string|int|array
+                        $versions)</code>
+                    </entry>
+                    <entry>Determines if the <acronym>LDAP</acronym> version is supported.</entry>
+                </row>
+                <row>
+                    <entry>
+                        <code>boolean supportsSaslMechanism(string|array
+                        $mechlist)</code>
+                    </entry>
+                    <entry>Determines if the sasl mechanism is supported.</entry>
+                </row>
+                <row>
+                    <entry><code>integer getServerType()</code></entry>
+                    <entry>
+                        Gets the server type. Returns 
+                        <variablelist>
+                            <varlistentry>
+                                <term>
+                                <code>Zend_Ldap_Node_RootDse::SERVER_TYPE_GENERIC</code></term>
+                                <listitem>for unknown <acronym>LDAP</acronym> servers</listitem>
+                            </varlistentry>
+
+                            <varlistentry>
+                                <term>
+                                <code>Zend_Ldap_Node_RootDse::SERVER_TYPE_OPENLDAP</code></term>
+                                <listitem>for OpenLDAP servers</listitem>
+                            </varlistentry>
+
+                            <varlistentry>
+                                <term>
+                                <code>Zend_Ldap_Node_RootDse::SERVER_TYPE_ACTIVEDIRECTORY</code></term>
+                                <listitem>for Microsoft ActiveDirectory servers</listitem>
+                            </varlistentry>
+
+                            <varlistentry>
+                                <term>
+                                <code>Zend_Ldap_Node_RootDse::SERVER_TYPE_EDIRECTORY</code></term>
+                                <listitem>For Novell eDirectory servers</listitem>
+                            </varlistentry>
+                        </variablelist>
+                    </entry>
+                </row>
+                <row>
+                    <entry><code>Zend_Ldap_Dn getSchemaDn()</code></entry>
+                    <entry>Returns the schema DN.</entry>
+                </row>
+            </tbody>
+
+        </tgroup>
+
+    </table>
+
+    <sect4 id="zend.ldap.api.reference.zend-ldap-node-rootdse.openldap">
+        <title>OpenLDAP</title>
+
+        <para>
+            Additionally the common methods above apply to instances of
+            <code>Zend_Ldap_Node_RootDse_OpenLdap</code>.
+        </para>
+
+        <note>
+            <para>
+                Refer to 
+                <ulink url="http://www.zytrax.com/books/ldap/ch3/#operational">LDAP
+                Operational Attributes and Objects</ulink>for information on the attributes
+                of OpenLDAP RootDSE.
+            </para>
+        </note>
+
+        <table id="zend.ldap.api.reference.zend-ldap-node-rootdse.openldap.table">
+            <title>Zend_Ldap_Node_RootDse_OpenLdap API</title>
+
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Method</entry>
+                        <entry>Description</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><code>integer getServerType()</code></entry>
+                        <entry>
+                            Gets the server type. Returns
+                            <code>Zend_Ldap_Node_RootDse::SERVER_TYPE_OPENLDAP</code>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><code>string|null getConfigContext()</code></entry>
+                        <entry>Gets the configContext.</entry>
+                    </row>
+                    <row>
+                        <entry><code>string|null getMonitorContext()</code></entry>
+                        <entry>Gets the monitorContext.</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <code>boolean supportsControl(string|array
+                            $oids)</code>
+                        </entry>
+                        <entry>Determines if the control is supported.</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <code>boolean supportsExtension(string|array
+                            $oids)</code>
+                        </entry>
+                        <entry>Determines if the extension is supported.</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <code>boolean supportsFeature(string|array
+                            $oids)</code>
+                        </entry>
+                        <entry>Determines if the feature is supported.</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+    </sect4>
+
+    <sect4 id="zend.ldap.api.reference.zend-ldap-node-rootdse.activedirectory">
+        <title>ActiveDirectory</title>
+
+        <para>
+            Additionally the common methods above apply to instances of
+            <code>Zend_Ldap_Node_RootDse_ActiveDirectory</code>.
+        </para>
+
+        <note>
+            <para>
+                Refer to 
+                <ulink url="http://msdn.microsoft.com/en-us/library/ms684291(VS.85).aspx">
+                RootDSE</ulink>for information on the attributes of Microsoft
+                ActiveDirectory RootDSE.
+            </para>
+        </note>
+
+        <table id="zend.ldap.api.reference.zend-ldap-node-rootdse.activedirectory.table">
+            <title>Zend_Ldap_Node_RootDse_ActiveDirectory API</title>
+
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Method</entry>
+                        <entry>Description</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><code>integer getServerType()</code></entry>
+                        <entry>
+                            Gets the server type. Returns
+                            <code>Zend_Ldap_Node_RootDse::SERVER_TYPE_ACTIVEDIRECTORY</code>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <code>string|null
+                            getConfigurationNamingContext()</code>
+                        </entry>
+                        <entry>Gets the configurationNamingContext.</entry>
+                    </row>
+                    <row>
+                        <entry><code>string|null getCurrentTime()</code></entry>
+                        <entry>Gets the currentTime.</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <code>string|null
+                            getDefaultNamingContext()</code>
+                        </entry>
+                        <entry>Gets the defaultNamingContext.</entry>
+                    </row>
+                    <row>
+                        <entry><code>string|null getDnsHostName()</code></entry>
+                        <entry>Gets the dnsHostName.</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <code>string|null
+                            getDomainControllerFunctionality()</code>
+                        </entry>
+                        <entry>Gets the domainControllerFunctionality.</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <code>string|null
+                            getDomainFunctionality()</code>
+                        </entry>
+                        <entry>Gets the domainFunctionality.</entry>
+                    </row>
+                    <row>
+                        <entry><code>string|null getDsServiceName()</code></entry>
+                        <entry>Gets the dsServiceName.</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <code>string|null
+                            getForestFunctionality()</code>
+                        </entry>
+                        <entry>Gets the forestFunctionality.</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <code>string|null
+                            getHighestCommittedUSN()</code>
+                        </entry>
+                        <entry>Gets the highestCommittedUSN.</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <code>string|null
+                            getIsGlobalCatalogReady()</code>
+                        </entry>
+                        <entry>Gets the isGlobalCatalogReady.</entry>
+                    </row>
+                    <row>
+                        <entry><code>string|null getIsSynchronized()</code></entry>
+                        <entry>Gets the isSynchronized.</entry>
+                    </row>
+                    <row>
+                        <entry><code>string|null getLdapServiceName()</code></entry>
+                        <entry>Gets the ldapServiceName.</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <code>string|null
+                            getRootDomainNamingContext()</code>
+                        </entry>
+                        <entry>Gets the rootDomainNamingContext.</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <code>string|null
+                            getSchemaNamingContext()</code>
+                        </entry>
+                        <entry>Gets the schemaNamingContext.</entry>
+                    </row>
+                    <row>
+                        <entry><code>string|null getServerName()</code></entry>
+                        <entry>Gets the serverName.</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <code>boolean supportsCapability(string|array
+                            $oids)</code>
+                        </entry>
+                        <entry>Determines if the capability is supported.</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <code>boolean supportsControl(string|array
+                            $oids)</code>
+                        </entry>
+                        <entry>Determines if the control is supported.</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <code>boolean supportsPolicy(string|array
+                            $policies)</code>
+                        </entry>
+                        <entry>Determines if the version is supported.</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+    </sect4>
+
+    <sect4 id="zend.ldap.api.reference.zend-ldap-node-rootdse.edirectory">
+        <title>eDirectory</title>
+
+        <para>
+            Additionally the common methods above apply to instances of
+            <code>Zend_Ldap_Node_RootDse_eDirectory</code>.
+        </para>
+
+        <note>
+            <para>
+                Refer to 
+                <ulink url="http://www.novell.com/documentation/edir88/edir88/index.html?page=/documentation/edir88/edir88/data/ah59jqq.html">
+                Getting Information about the <acronym>LDAP</acronym> Server</ulink>for information on the
+                attributes of Novell eDirectory RootDSE.
+            </para>
+        </note>
+
+        <table id="zend.ldap.api.reference.zend-ldap-node-rootdse.edirectory.table">
+            <title>Zend_Ldap_Node_RootDse_eDirectory API</title>
+
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Method</entry>
+                        <entry>Description</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><code>integer getServerType()</code></entry>
+                        <entry>
+                            Gets the server type. Returns
+                            <code>Zend_Ldap_Node_RootDse::SERVER_TYPE_EDIRECTORY</code>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <code>boolean supportsExtension(string|array
+                            $oids)</code>
+                        </entry>
+                        <entry>Determines if the extension is supported.</entry>
+                    </row>
+                    <row>
+                        <entry><code>string|null getVendorName()</code></entry>
+                        <entry>Gets the vendorName.</entry>
+                    </row>
+                    <row>
+                        <entry><code>string|null getVendorVersion()</code></entry>
+                        <entry>Gets the vendorVersion.</entry>
+                    </row>
+                    <row>
+                        <entry><code>string|null getDsaName()</code></entry>
+                        <entry>Gets the dsaName.</entry>
+                    </row>
+                    <row>
+                        <entry><code>string|null getStatisticsErrors()</code></entry>
+                        <entry>Gets the server statistics "errors".</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <code>string|null
+                            getStatisticsSecurityErrors()</code>
+                        </entry>
+                        <entry>Gets the server statistics "securityErrors".</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <code>string|null
+                            getStatisticsChainings()</code>
+                        </entry>
+                        <entry>Gets the server statistics "chainings".</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <code>string|null
+                            getStatisticsReferralsReturned()</code>
+                        </entry>
+                        <entry>Gets the server statistics "referralsReturned".</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <code>string|null
+                            getStatisticsExtendedOps()</code>
+                        </entry>
+                        <entry>Gets the server statistics "extendedOps".</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <code>string|null
+                            getStatisticsAbandonOps()</code>
+                        </entry>
+                        <entry>Gets the server statistics "abandonOps".</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <code>string|null
+                            getStatisticsWholeSubtreeSearchOps()</code>
+                        </entry>
+                        <entry>
+                            Gets the server statistics
+                            "wholeSubtreeSearchOps".
+                        </entry>
+                    </row>
+                </tbody>
+
+            </tgroup>
+
+        </table>
+
+    </sect4>
+
+</sect3>
+

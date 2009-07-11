@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect3 id="zend.ldap.api.reference.zend-ldap-attribute">
+    <title>Zend_Ldap_Attribute</title>
+
+    <para>
+        <code>Zend_Ldap_Attribute</code> is a helper class providing only static
+        methods to manipulate arrays suitable to the structure used in
+        <classname>Zend_Ldap</classname> data modification methods and to the data format required by
+        the <acronym>LDAP</acronym> server. PHP data types are converted the following way:
+    </para>
+
+    <variablelist>
+        <varlistentry>
+            <term><code>string</code></term>
+            <listitem>No conversion will be done.</listitem>
+        </varlistentry>
+
+        <varlistentry>
+            <term><code>integer</code> and <code>float</code></term>
+            <listitem>The value will be converted to a string.</listitem>
+        </varlistentry>
+
+        <varlistentry>
+            <term><code>boolean</code></term>
+            <listitem><code>true</code> will be converted to <code>'TRUE'</code> and
+            <code>false</code> to <code>'FALSE'</code></listitem>
+        </varlistentry>
+
+        <varlistentry>
+            <term><code>object</code> and <code>array</code></term>
+            <listitem>The value will be converted to a string by using
+            <code>serialize()</code>.</listitem>
+        </varlistentry>
+
+        <varlistentry>
+            <term><code>resource</code></term>
+            <listitem>If a <code>stream</code> resource is given, the data will be
+            fetched by calling <code>stream_get_contents()</code>.</listitem>
+        </varlistentry>
+
+        <varlistentry>
+            <term>others</term>
+            <listitem>All other data types (namely non-stream resources) will be
+            ommitted.</listitem>
+        </varlistentry>
+
+    </variablelist>
+
+    <para>On reading attribute values the following conversion will take place:</para>
+
+    <variablelist>
+        <varlistentry>
+            <term><code>'TRUE'</code></term>
+            <listitem>Converted to <code>true</code>.</listitem>
+        </varlistentry>
+
+        <varlistentry>
+            <term><code>'FALSE'</code></term>
+            <listitem>Converted to <code>false</code>.</listitem>
+        </varlistentry>
+
+        <varlistentry>
+            <term>others</term>
+            <listitem>All other strings won't be automatically converted and are passed
+            as they are.</listitem>
+        </varlistentry>
+
+    </variablelist>
+
+    <table id="zend.ldap.api.reference.zend-ldap-attribute">
+        <title>Zend_Ldap_Attribute API</title>
+
+        <tgroup cols="2">
+            <thead>
+                <row>
+                    <entry>Method</entry>
+                    <entry>Description</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry>
+                        <emphasis><code>void setAttribute(array &amp;$data, string
+                        $attribName, mixed $value, boolean $append)</code>
+                        </emphasis>
+                    </entry>
+                    <entry>
+                        Sets the attribute <code>$attribName</code> in
+                        <code>$data</code> to the value <code>$value</code>. If
+                        <code>$append</code> is <code>true</code> (<code>false</code> by
+                        default) <code>$value</code> will be appended to the attribute.
+                        <code>$value</code> can be a scalar value or an array of scalar
+                        values. Conversion will take place.
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <emphasis><code>array|mixed getAttribute(array $data,
+                        string $attribName, integer|null $index)</code> </emphasis>
+                    </entry>
+                    <entry>
+                        Returns the attribute <code>$attribName</code> from
+                        <code>$data</code>. If <code>$index</code> is <code>null</code>
+                        (default) an array will be returned containing all the values for
+                        the given attribute. An empty array will be returned if the
+                        attribute does not exist in the given array. If an integer index is
+                        specified the corresponding value at the given index will be
+                        returned. If the index is out of bounds, <code>null</code> will be
+                        returned. Conversion will take place.
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <emphasis><code>boolean attributeHasValue(array &amp;$data,
+                        string $attribName, mixed|array $value)</code> </emphasis>
+                    </entry>
+                    <entry>
+                        Checks if the attribute <code>$attribName</code> in
+                        <code>$data</code> has the value(s) given in <code>$value</code>.
+                        The method returns <code>true</code> only if all values in
+                        <code>$value</code> are present in the attribute. Comparison is
+                        done strictly (respecting the data type).
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <emphasis><code>void removeDuplicatesFromAttribute(array
+                        &amp;$data, string $attribName)</code> </emphasis>
+                    </entry>
+                    <entry>
+                        Removes all duplicates from the attribute
+                        <code>$attribName</code> in <code>$data</code>.
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <emphasis><code>void removeFromAttribute(array &amp;$data,
+                        string $attribName, mixed|array $value)</code> </emphasis>
+                    </entry>
+                    <entry>
+                        Removes the value(s) given in <code>$value</code> from
+                        the attribute <code>$attribName</code> in
+                        <code>$data</code>.
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <emphasis><code>string|null convertToLdapValue(mixed
+                        $value)</code> </emphasis>
+                    </entry>
+                    <entry>
+                        Converts a PHP data type into its <acronym>LDAP</acronym> representation. See
+                        introduction for details.
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <emphasis><code>mixed convertFromLdapValue(string
+                        $value)</code> </emphasis>
+                    </entry>
+                    <entry>
+                        Converts an <acronym>LDAP</acronym> value into its PHP data type. See
+                        introduction for details.
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <emphasis><code>string|null
+                        convertToLdapDateTimeValue(integer $value, boolean $utc)</code>
+                        </emphasis>
+                    </entry>
+                    <entry>
+                        Converts a timestamp into its <acronym>LDAP</acronym> date/time representation.
+                        If <code>$utc</code> is <code>true</code> (<code>false</code> by
+                        default) the resulting <acronym>LDAP</acronym> date/time string will be in UTC,
+                        otherwise a local date/time string will be returned.
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <emphasis><code>integer|null
+                        convertFromLdapDateTimeValue(string $value)</code>
+                        </emphasis>
+                    </entry>
+                    <entry>
+                        Converts <acronym>LDAP</acronym> date/time representation into a timestamp. The
+                        method returns <code>null</code> if <code>$value</code> can not be
+                        converted back into a PHP timestamp.
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <emphasis><code>void setPassword(array &amp;$data, string
+                        $password, string $hashType, string $attribName)</code>
+                        </emphasis>
+                    </entry>
+                    <entry>
+                        Sets a <acronym>LDAP</acronym> password for the attribute
+                        <code>$attribName</code> in <code>$data</code>.
+                        <code>$attribName</code> defaults to <code>'userPassword'</code>
+                        which is the standard password attribute. The password hash can be
+                        specified with <code>$hashType</code>. The default value here is
+                        <code>Zend_Ldap_Attribute::PASSWORD_HASH_MD5</code> with
+                        <code>Zend_Ldap_Attribute::PASSWORD_HASH_SHA</code> as the other
+                        possibilty.
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <emphasis><code>string createPassword(string $password,
+                        string $hashType)</code> </emphasis>
+                    </entry>
+                    <entry>
+                        Creates a <acronym>LDAP</acronym> password. The password hash can be specified
+                        with <code>$hashType</code>. The default value here is
+                        <code>Zend_Ldap_Attribute::PASSWORD_HASH_MD5</code> with
+                        <code>Zend_Ldap_Attribute::PASSWORD_HASH_SHA</code> as the other
+                        possibilty.
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <emphasis><code>void setDateTimeAttribute(array &amp;$data,
+                        string $attribName, integer|array $value, boolean $utc, boolean
+                        $append)</code> </emphasis>
+                    </entry>
+                    <entry>
+                        Sets the attribute <code>$attribName</code> in
+                        <code>$data</code> to the date/time value <code>$value</code>. If
+                        <code>$append</code> is <code>true</code> (<code>false</code> by
+                        default) <code>$value</code> will be appended to the attribute.
+                        <code>$value</code> can be an integer value or an array of
+                        integers. Date-time-conversion according to
+                        <code>Zend_Ldap_Attribute::convertToLdapDateTimeValue()</code> will
+                        take place.
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <emphasis><code>array|integer getDateTimeAttribute(array
+                        $data, string $attribName, integer|null $index)</code>
+                        </emphasis>
+                    </entry>
+                    <entry>
+                        Returns the date/time attribute <code>$attribName</code>
+                        from <code>$data</code>. If <code>$index</code> is
+                        <code>null</code> (default) an array will be returned containing
+                        all the date/time values for the given attribute. An empty array
+                        will be returned if the attribute does not exist in the given
+                        array. If an integer index is specified the corresponding date/time
+                        value at the given index will be returned. If the index is out of
+                        bounds, <code>null</code> will be returned. Date-time-conversion
+                        according to
+                        <code>Zend_Ldap_Attribute::convertFromLdapDateTimeValue()</code>
+                        will take place.
+                    </entry>
+                </row>
+            </tbody>
+
+        </tgroup>
+
+    </table>
+
+</sect3>
+

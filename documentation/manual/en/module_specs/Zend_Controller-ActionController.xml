@@ -313,10 +313,10 @@ applicationOrModule/
 
             <para>
                 In other words, view scripts are assumed to be in the
-                <filename>views/scripts/</filename> subdirectory, and the
-                <filename>views/</filename> subdirectory is assumed to contain sibling
+                <filename>/views/scripts/</filename> subdirectory, and the
+                <filename>/views/</filename> subdirectory is assumed to contain sibling
                 functionality (helpers, filters). When determining the view
-                script name and path, the <filename>views/scripts/</filename> directory
+                script name and path, the <filename>/views/scripts/</filename> directory
                 will be used as the base path, with directories named after the
                 individual controllers providing a hierarchy of view scripts.
             </para>
@@ -341,8 +341,8 @@ string render(string $action = null,
                 <filename>[controller]/[action].phtml</filename> (where
                 <filename>.phtml</filename> is the value of the <varname>$viewSuffix</varname>
                 property). Passing a value for <varname>$action</varname> will render
-                that template in the <filename>[controller]/</filename> subdirectory. To
-                override using the <filename>[controller]/</filename> subdirectory, pass
+                that template in the <filename>/[controller]/</filename> subdirectory. To
+                override using the <filename>/[controller]/</filename> subdirectory, pass
                 a <constant>TRUE</constant> value for <varname>$noController</varname>. Finally,
                 templates are rendered into the response object; if you wish to render to
                 a specific <link

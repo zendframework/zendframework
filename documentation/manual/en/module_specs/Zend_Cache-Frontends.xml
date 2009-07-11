@@ -755,7 +755,7 @@ $result = $cache->foobar2('1', '2');
                               <entry><methodname>array()</methodname></entry>
                               <entry>
                                   an associative array to set options only for some
-                                  <acronym>REQUEST_URI</acronym>, keys are
+                                  <constant>REQUEST_URI</constant>, keys are
                                   (<acronym>PCRE</acronym>) regexps, values are associative arrays
                                   with specific options to set if the regexp matchs on
                                   <varname>$_SERVER['REQUEST_URI']</varname> (see default_options

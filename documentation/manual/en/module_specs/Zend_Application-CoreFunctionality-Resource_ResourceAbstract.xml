@@ -191,7 +191,7 @@ class My_Resource_View extends Zend_Application_Resource_ResourceAbstract
 
         <para>
             We can then bootstrap that resource or retrieve it by the name
-            "My_View":
+            "<classname>My_View</classname>":
         </para>
 
         <programlisting language="php"><![CDATA[

@@ -387,8 +387,8 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
                           <entry><constant>FALSE</constant></entry>
                           <entry>
                               if <constant>TRUE</constant>, the slow_backend argument is used as a
-                              complete class name ;
-                              if <constant>FALSE</constant>, the frontend argument is used as the end of
+                              complete class name; if <constant>FALSE</constant>,
+                              the frontend argument is used as the end of
                               "<classname>Zend_Cache_Backend_</classname>[...]" class name
                           </entry>
                       </row>
@@ -398,8 +398,8 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
                           <entry><constant>FALSE</constant></entry>
                           <entry>
                               if <constant>TRUE</constant>, the fast_backend argument is used as a
-                              complete class name ;
-                              if <constant>FALSE</constant>, the frontend argument is used as the end of
+                              complete class name; if <constant>FALSE</constant>,
+                              the frontend argument is used as the end of
                               "<classname>Zend_Cache_Backend_</classname>[...]" class name
                           </entry>
                       </row>

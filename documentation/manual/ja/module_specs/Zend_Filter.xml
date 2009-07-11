@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16458 -->
+<!-- EN-Revision: 16641 -->
 <sect1 id="zend.filter.introduction">
 
     <title>導入</title>
@@ -186,8 +186,6 @@ echo Zend_Filter::get('"', 'OtherFilter', array($parameters));
             </itemizedlist>
         </sect3>
     </sect2>
-
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

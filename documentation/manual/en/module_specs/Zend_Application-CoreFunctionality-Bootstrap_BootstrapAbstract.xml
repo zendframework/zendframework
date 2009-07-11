@@ -61,10 +61,10 @@
                     </para>
                     <para>
                         Two additional, special options keys may also be used.
-                        <emphasis>pluginPaths</emphasis> may be used to specify prefix
+                        <property>pluginPaths</property> may be used to specify prefix
                         paths to plugin resources; it should be an array of
                         class prefix to filesystem path pairs.
-                        <emphasis>resources</emphasis> may be used to specify plugin
+                        <property>resources</property> may be used to specify plugin
                         resources to use, and should consist of plugin
                         resource to instantiation options pairs.
                     </para>

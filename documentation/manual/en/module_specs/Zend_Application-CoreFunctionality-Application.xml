@@ -28,7 +28,7 @@
             </thead>
             <tbody>
                 <row>
-                    <entry><emphasis>phpSettings</emphasis></entry>
+                    <entry><property>phpSettings</property></entry>
                     <entry><para>
                         Array of <filename>php.ini</filename> settings to use. Keys should be the
                         <filename>php.ini</filename> keys.
@@ -36,7 +36,7 @@
                 </row>
 
                 <row>
-                    <entry><emphasis>includePaths</emphasis></entry>
+                    <entry><property>includePaths</property></entry>
                     <entry><para>
                         Additional paths to prepend to the
                         <emphasis>include_path</emphasis>. Should be an array of paths.
@@ -44,7 +44,7 @@
                 </row>
 
                 <row>
-                    <entry><emphasis>autoloaderNamespaces</emphasis></entry>
+                    <entry><property>autoloaderNamespaces</property></entry>
                     <entry><para>
                         Array of additional namespaces to register with the
                         <classname>Zend_Loader_Autoloader</classname> instance.
@@ -52,7 +52,7 @@
                 </row>
 
                 <row>
-                    <entry><emphasis>bootstrap</emphasis></entry>
+                    <entry><property>bootstrap</property></entry>
                     <entry><para>
                         Either the string path to the bootstrap class, or an array
                         with elements for the 'path' and 'class' for the application

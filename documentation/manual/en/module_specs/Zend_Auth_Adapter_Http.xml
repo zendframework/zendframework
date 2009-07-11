@@ -113,7 +113,7 @@
                 </thead>
                 <tbody>
                     <row>
-                        <entry><emphasis>accept_schemes</emphasis></entry>
+                        <entry><property>accept_schemes</property></entry>
                         <entry>Yes</entry>
                         <entry>
                             Determines which authentication schemes the adapter will accept from
@@ -122,7 +122,7 @@
                         </entry>
                     </row>
                     <row>
-                        <entry><emphasis>realm</emphasis></entry>
+                        <entry><property>realm</property></entry>
                         <entry>Yes</entry>
                         <entry>
                             Sets the authentication realm; usernames should be unique within a
@@ -130,9 +130,9 @@
                         </entry>
                     </row>
                     <row>
-                        <entry><emphasis>digest_domains</emphasis></entry>
+                        <entry><property>digest_domains</property></entry>
                         <entry>
-                            Yes, when <emphasis>'accept_schemes'</emphasis> contains
+                            Yes, when <property>'accept_schemes'</property> contains
                             <emphasis>'digest'</emphasis>
                         </entry>
                         <entry>
@@ -142,9 +142,9 @@
                         </entry>
                     </row>
                     <row>
-                        <entry><emphasis>nonce_timeout</emphasis></entry>
+                        <entry><property>nonce_timeout</property></entry>
                         <entry>
-                            Yes, when <emphasis>'accept_schemes'</emphasis> contains
+                            Yes, when <property>'accept_schemes'</property> contains
                             <emphasis>'digest'</emphasis>
                         </entry>
                         <entry>
@@ -153,7 +153,7 @@
                         </entry>
                     </row>
                     <row>
-                        <entry><emphasis>proxy_auth</emphasis></entry>
+                        <entry><property>proxy_auth</property></entry>
                         <entry>No</entry>
                         <entry>
                             Disabled by default. Enable to perform Proxy authentication, instead
@@ -166,7 +166,7 @@
 
         <note>
             <para>
-                The current implementation of the <emphasis>nonce_timeout</emphasis> has some
+                The current implementation of the <property>nonce_timeout</property> has some
                 interesting side effects. This setting is supposed to determine the valid lifetime
                 of a given nonce, or effectively how long a client's authentication information is
                 accepted. Currently, if it's set to 3600 (for example), it will cause the adapter
@@ -271,7 +271,7 @@ $config = array(
             will require authenticated access to all the areas of the site under
             <filename>/members_only</filename> and <filename>/my_account</filename>. The realm
             value is usually displayed by the browser in the password dialog box. The
-            <emphasis>nonce_timeout</emphasis>, of course, behaves as described above.
+            <property>nonce_timeout</property>, of course, behaves as described above.
         </para>
 
         <para>

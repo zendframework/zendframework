@@ -7,7 +7,7 @@
         There are two paths to getting started with
         <classname>Zend_Application</classname>, and they depend on how you start your
         project. In each case, you always start with creating a
-        <emphasis>Bootstrap</emphasis> class, and a related configuration file.
+        <classname>Bootstrap</classname> class, and a related configuration file.
     </para>
 
     <para>
@@ -23,7 +23,7 @@
         <para>
             The quickest way to start using <classname>Zend_Application</classname> is to use
             <classname>Zend_Tool</classname> to generate your project. This will also create
-            your <emphasis>Bootstrap</emphasis> class and file.
+            your <classname>Bootstrap</classname> class and file.
         </para>
 
         <para>
@@ -164,7 +164,7 @@ $application->bootstrap()
         <itemizedlist>
             <listitem><para>
                 Create an <filename>application/Bootstrap.php</filename> file, with the
-                class <emphasis>Bootstrap</emphasis>.
+                class <classname>Bootstrap</classname>.
             </para></listitem>
 
             <listitem><para>
@@ -180,7 +180,7 @@ $application->bootstrap()
         </itemizedlist>
 
         <para>
-            First, create your <emphasis>Bootstrap</emphasis> class. Create a file,
+            First, create your <classname>Bootstrap</classname> class. Create a file,
             <filename>application/Bootstrap.php</filename>, with the following contents:
         </para>
 
@@ -374,7 +374,7 @@ phpSettings.display_errors = 1
             Now, we'll add a custom view resource. When initializing the view,
             we'll want to set the <acronym>HTML</acronym> DocType and a default value for the title
             to use in the <acronym>HTML</acronym> head. This can be accomplished by editing your
-            <emphasis>Bootstrap</emphasis> class to add a method:
+            <classname>Bootstrap</classname> class to add a method:
         </para>
 
         <programlisting language="php"><![CDATA[

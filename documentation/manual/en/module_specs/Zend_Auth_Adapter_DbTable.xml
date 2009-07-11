@@ -21,7 +21,7 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>tableName</emphasis>: This is the name of the database
+                    <property>tableName</property>: This is the name of the database
                     table that contains the authentication credentials,
                     and against which the database authentication query is
                     performed.
@@ -29,7 +29,7 @@
             </listitem>
             <listitem>
                 <para>
-                    <emphasis>identityColumn</emphasis>: This is the name of the
+                    <property>identityColumn</property>: This is the name of the
                     database table column used to represent the identity.
                     The identity column must contain unique values, such as
                     a username or e-mail address.
@@ -37,17 +37,17 @@
             </listitem>
             <listitem>
                 <para>
-                    <emphasis>credentialColumn</emphasis>: This is the name of the
+                    <property>credentialColumn</property>: This is the name of the
                     database table column used to represent the credential.
                     Under a simple identity and password authentication
                     scheme, the credential value corresponds to the
-                    password. See also the <emphasis>credentialTreatment</emphasis>
+                    password. See also the <property>credentialTreatment</property>
                     option.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis>credentialTreatment</emphasis>: In many cases,
+                    <property>credentialTreatment</property>: In many cases,
                     passwords and other sensitive data are encrypted,
                     hashed, encoded, obscured, salted or otherwise treated
                     through some function or algorithm. By specifying a

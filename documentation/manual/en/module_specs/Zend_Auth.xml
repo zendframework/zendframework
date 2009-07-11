@@ -465,7 +465,7 @@ Zend_Auth::getInstance()->clearIdentity();
             configuring and preparing an adapter object and then calling its
             <methodname>authenticate()</methodname> method. Adapter-specific details are discussed
             in the documentation for each adapter. The following example directly utilizes
-            <emphasis>MyAuthAdapter</emphasis>:
+            <classname>MyAuthAdapter</classname>:
         </para>
 
         <programlisting language="php"><![CDATA[

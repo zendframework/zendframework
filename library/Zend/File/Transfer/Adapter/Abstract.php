@@ -1211,19 +1211,26 @@ abstract class Zend_File_Transfer_Adapter_Abstract
                 throw new Zend_File_Transfer_Exception("File '{$value['name']}' does not exist");
             }
 
-            if (class_exists('finfo', false) && ((!empty($value['options']['magicFile'])) or (defined('MAGIC')))) {
+            if (class_exists('finfo', false)) {
                 if (!empty($value['options']['magicFile'])) {
                     $mime = new finfo(FILEINFO_MIME, $value['options']['magicFile']);
                 } else {
                     $mime = new finfo(FILEINFO_MIME);
                 }
 
-                $result[$key] = $mime->file($file);
+                if ($mime !== false) {
+                    $result[$key] = $mime->file($file);
+                }
+
                 unset($mime);
-            } elseif (function_exists('mime_content_type') && ini_get('mime_magic.magicfile')) {
-                $result[$key] = mime_content_type($file);
-            } else {
-                $result[$key] = $value['type'];
+            }
+
+            if (empty($result[$key])) {
+                if (function_exists('mime_content_type') && ini_get('mime_magic.magicfile')) {
+                    $result[$key] = mime_content_type($file);
+                } else {
+                    $result[$key] = $value['type'];
+                }
             }
 
             if (empty($result[$key])) {

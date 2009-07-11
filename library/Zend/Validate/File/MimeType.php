@@ -228,19 +228,26 @@ class Zend_Validate_File_MimeType extends Zend_Validate_Abstract
 
         if ($file !== null) {
             $mimefile = $this->getMagicFile();
-            if (class_exists('finfo', false) && ((!empty($mimefile)) or (defined('MAGIC')))) {
+            if (class_exists('finfo', false)) {
                 if (!empty($mimefile)) {
                     $mime = new finfo(FILEINFO_MIME, $mimefile);
                 } else {
                     $mime = new finfo(FILEINFO_MIME);
                 }
 
-                $this->_type = $mime->file($value);
+                if ($mime !== false) {
+                    $this->_type = $mime->file($value);
+                }
+
                 unset($mime);
-            } elseif (function_exists('mime_content_type') && ini_get('mime_magic.magicfile')) {
-                $this->_type = mime_content_type($value);
-            } else {
-                $this->_type = $file['type'];
+            }
+
+            if (empty($this->_type)) {
+                if (function_exists('mime_content_type') && ini_get('mime_magic.magicfile')) {
+                    $this->_type = mime_content_type($value);
+                } else {
+                    $this->_type = $file['type'];
+                }
             }
         }
 

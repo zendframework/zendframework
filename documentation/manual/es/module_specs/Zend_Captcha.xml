@@ -22,7 +22,7 @@
         preguntas lógicas, caracteres trastocados o presentar múltiples imágenes y preguntar
         cómo se relacionan. <classname>Zend_Form</classname> intenta proveer una amalgama de backends
         que pueden ser utilizados por separado o en conjunción con
-        <code>Zend_Form</code>
+        <methodname>Zend_Form</methodname>
         .
     </para>
 </sect1>

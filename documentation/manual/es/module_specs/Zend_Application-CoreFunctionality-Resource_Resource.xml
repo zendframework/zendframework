@@ -26,11 +26,11 @@
             </thead>
             <tbody>
                 <row>
-                    <entry><code>__construct($options = null)</code></entry>
-                    <entry><code>void</code></entry>
+                    <entry><methodname>__construct($options = null)</methodname></entry>
+                    <entry><methodname>void</methodname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$options</code>: <emphasis>opcional</emphasis>.
+                            <methodname>$options</methodname>: <emphasis>opcional</emphasis>.
                             Opciones con las cuales establecer el estado de los recursos.
                         </para></listitem>
                     </itemizedlist></entry>
@@ -41,11 +41,11 @@
                 </row>
 
                 <row>
-                    <entry><code>setBootstrap(Zend_Application_Bootstrap_Bootstrapper $bootstrap)</code></entry>
+                    <entry><methodname>setBootstrap(Zend_Application_Bootstrap_Bootstrapper $bootstrap)</methodname></entry>
                     <entry><classname>Zend_Application_Resource_Resource</classname></entry>
                     <entry><itemizedlist>
                             <listitem><para>
-                                <code>$bootstrap</code>: <emphasis>requerido</emphasis>.
+                                <methodname>$bootstrap</methodname>: <emphasis>requerido</emphasis>.
                                 Padre del bootstrap inicializando este recurso.
                             </para></listitem>
                     </itemizedlist></entry>
@@ -55,7 +55,7 @@
                 </row>
 
                 <row>
-                    <entry><code>getBootstrap()</code></entry>
+                    <entry><methodname>getBootstrap()</methodname></entry>
                     <entry><classname>Zend_Application_Bootstrap_Bootstrapper</classname></entry>
                     <entry>N/A</entry>
                     <entry><para>
@@ -64,11 +64,11 @@
                 </row>
 
                 <row>
-                    <entry><code>setOptions(array $options)</code></entry>
+                    <entry><methodname>setOptions(array $options)</methodname></entry>
                     <entry><classname>Zend_Application_Resource_Resource</classname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$options</code>: <emphasis>requerido</emphasis>.
+                            <methodname>$options</methodname>: <emphasis>requerido</emphasis>.
                             Opciones con las cuales establecer el estado.
                         </para></listitem>
                     </itemizedlist></entry>
@@ -78,8 +78,8 @@
                 </row>
 
                 <row>
-                    <entry><code>getOptions()</code></entry>
-                    <entry><code>array</code></entry>
+                    <entry><methodname>getOptions()</methodname></entry>
+                    <entry><methodname>array</methodname></entry>
                     <entry>N/A</entry>
                     <entry><para>
                         Recuperar opciones registradas.
@@ -87,8 +87,8 @@
                 </row>
 
                 <row>
-                    <entry><code>init()</code></entry>
-                    <entry><code>mixed</code></entry>
+                    <entry><methodname>init()</methodname></entry>
+                    <entry><methodname>mixed</methodname></entry>
                     <entry>N/A</entry>
                     <entry><para>
                         Patrón de estrategia: ejecute inicialización de los recursos.

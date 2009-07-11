@@ -32,18 +32,18 @@
             </thead>
             <tbody>
                 <row>
-                    <entry><code>registerPluginResource($resource, $options =
-                            null)</code></entry>
+                    <entry><methodname>registerPluginResource($resource, $options =
+                            null)</methodname></entry>
                     <entry><classname>Zend_Application_Bootstrap_ResourceBootstrapper</classname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$resource</code>: <emphasis>requerido</emphasis>.
+                            <methodname>$resource</methodname>: <emphasis>requerido</emphasis>.
                             Un nombre de recurso o un objeto
                             <classname>Zend_Application_Resource_Resource</classname>.
                         </para></listitem>
 
                         <listitem><para>
-                            <code>$options</code>: <emphasis>opcional</emphasis>.
+                            <methodname>$options</methodname>: <emphasis>opcional</emphasis>.
                             Un array o un objeto <classname>Zend_Config</classname>
                             para pasar al recurso en instanciación.
                         </para></listitem>
@@ -55,11 +55,11 @@
                 </row>
 
                 <row>
-                    <entry><code>unregisterPluginResource($resource)</code></entry>
+                    <entry><methodname>unregisterPluginResource($resource)</methodname></entry>
                     <entry><classname>Zend_Application_Bootstrap_ResourceBootstrapper</classname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$resource</code>: <emphasis>requerido</emphasis>.
+                            <methodname>$resource</methodname>: <emphasis>requerido</emphasis>.
                             Nombre de un recurso para des-registrar desde la clase.
                         </para></listitem>
                     </itemizedlist></entry>
@@ -69,11 +69,11 @@
                 </row>
 
                 <row>
-                    <entry><code>hasPluginResource($resource)</code></entry>
-                    <entry><code>boolean</code></entry>
+                    <entry><methodname>hasPluginResource($resource)</methodname></entry>
+                    <entry><methodname>boolean</methodname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$resource</code>: <emphasis>requerido</emphasis>.
+                            <methodname>$resource</methodname>: <emphasis>requerido</emphasis>.
                             Nombre del recurso.
                         </para></listitem>
                     </itemizedlist></entry>
@@ -84,11 +84,11 @@
                 </row>
 
                 <row>
-                    <entry><code>getPluginResource($resource)</code></entry>
+                    <entry><methodname>getPluginResource($resource)</methodname></entry>
                     <entry><classname>Zend_Application_Resource_Resource</classname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$resource</code>: <emphasis>requerido</emphasis>.
+                            <methodname>$resource</methodname>: <emphasis>requerido</emphasis>.
                             Nombre de un recurso a recuperar (string).
                         </para></listitem>
                     </itemizedlist></entry>
@@ -98,8 +98,8 @@
                 </row>
 
                 <row>
-                    <entry><code>getPluginResourceNames()</code></entry>
-                    <entry><code>array</code></entry>
+                    <entry><methodname>getPluginResourceNames()</methodname></entry>
+                    <entry><methodname>array</methodname></entry>
                     <entry>N/A</entry>
                     <entry><para>
                         Recuperar una lista de todos los nombres de recursos de
@@ -108,12 +108,12 @@
                 </row>
 
                 <row>
-                    <entry><code>setPluginLoader(Zend_Loader_PluginLoader_Interface
-                            $loader)</code></entry>
+                    <entry><methodname>setPluginLoader(Zend_Loader_PluginLoader_Interface
+                            $loader)</methodname></entry>
                     <entry><classname>Zend_Application_Bootstrap_ResourceBootstrapper</classname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$loader</code>: <emphasis>requerido</emphasis>.
+                            <methodname>$loader</methodname>: <emphasis>requerido</emphasis>.
                             Instancia del cargador de plugin para utilizar
                             cuando se resuelven nombres de plugin a las clases.
                         </para></listitem>
@@ -125,7 +125,7 @@
                 </row>
 
                 <row>
-                    <entry><code>getPluginLoader()</code></entry>
+                    <entry><methodname>getPluginLoader()</methodname></entry>
                     <entry><classname>Zend_Loader_PluginLoader_Interface</classname></entry>
                     <entry>N/A</entry>
                     <entry><para>

@@ -69,22 +69,22 @@
 
         <itemizedlist>
             <listitem><para>
-                <code>setPluginLoader($loader, $type)</code>:
-                <code>$loader</code> es el propio objeto cargador, mientras
-                <code>$type</code> es uno de los tipos arriba mencionados. Esto
+                <methodname>setPluginLoader($loader, $type)</methodname>:
+                <methodname>$loader</methodname> es el propio objeto cargador, mientras
+                <methodname>$type</methodname> es uno de los tipos arriba mencionados. Esto
                 establece el cargador de plugin para el tipo dado en el objeto
                 cargador recién especificado.
             </para></listitem>
 
             <listitem><para>
-                <code>getPluginLoader($type)</code>: obtiene el cargador de
-                plugin asociado con <code>$type</code>.
+                <methodname>getPluginLoader($type)</methodname>: obtiene el cargador de
+                plugin asociado con <methodname>$type</methodname>.
             </para></listitem>
 
             <listitem><para>
-                <code>addPrefixPath($prefix, $path, $type = null)</code>: agrega
+                <methodname>addPrefixPath($prefix, $path, $type = null)</methodname>: agrega
                 una asociación prefijo/ruta para el cargador especificado por
-                <code>$type</code>. Si <code>$type</code> es null, se intentará
+                <methodname>$type</methodname>. Si <methodname>$type</methodname> es null, se intentará
                 agregar la ruta a todos los cargadores, añadiendo el prefijo a
                 cada "_Validate", "_Filter" y "_Decorator"; y agregandole
                 "Validate/", "Filter/" y "Decorator/" a la ruta. Si tiene todas
@@ -94,7 +94,7 @@
             </para></listitem>
 
             <listitem><para>
-                <code>addPrefixPaths(array $spec)</code>: le permite añadir
+                <methodname>addPrefixPaths(array $spec)</methodname>: le permite añadir
                 varias rutas de una sola vez a uno o más cargadores de plugin.
                 Se espera cada elemento de la matriz sea un array con claves
                 'path', 'prefix', y 'type'.
@@ -125,7 +125,7 @@
                 archivo "My/Decorator/Label.php".
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 
 class My_Decorator_Label extends Zend_Form_Decorator_Abstract
 {
@@ -172,7 +172,7 @@ class My_Decorator_Label extends Zend_Form_Decorator_Abstract
                 decoradores:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 
 $element->addPrefixPath('My_Decorator', 'My/Decorator/', 'decorator');
 ]]></programlisting>
@@ -182,7 +182,7 @@ $element->addPrefixPath('My_Decorator', 'My/Decorator/', 'decorator');
                 que todos los decoradores usen esta ruta:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 
 $form->addElementPrefixPath('My_Decorator', 'My/Decorator/', 'decorator');
 ]]></programlisting>
@@ -207,14 +207,14 @@ $form->addElementPrefixPath('My_Decorator', 'My/Decorator/', 'decorator');
             asegurarse que el envío es válido. O puede eliminar los espacios en
             blanco al inicio o fin de la entrada para asegurarse de que un validador
             StringLenth (longitud de la cadena) no regrese un positivo falso. Estas
-            operaciones pueden realizarse usando <code>Zend_Filter</code>, y
+            operaciones pueden realizarse usando <methodname>Zend_Filter</methodname>, y
             <classname>Zend_Form_Element</classname> que soportan cadenas de filtros,
             permitiéndole especificar múltiples filtros secuenciales a utilizar.
             El filtrado sucede tanto en la validación como cuando recupera el
-            valor del elemento vía <code>getValue()</code>:
+            valor del elemento vía <methodname>getValue()</methodname>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 
 $filtered = $element->getValue();
 
@@ -239,7 +239,7 @@ $filtered = $element->getValue();
             Veamos algunos ejemplos:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 
 // Instancia específica del filtro
 $element->addFilter(new Zend_Filter_Alnum());
@@ -265,12 +265,12 @@ $element->addFilter('alnum');
             <para>
                 Si tiene su propio conjunto de clases de filtro, puede
                 informarle de ellas a <classname>Zend_Form_Element</classname> usando
-                <code>addPrefixPath()</code>. Por ejemplo, si tiene filtros
+                <methodname>addPrefixPath()</methodname>. Por ejemplo, si tiene filtros
                 con el prefijo 'My_Filter', puede indicárselo a
                 <classname>Zend_Form_Element</classname> de la siguiente manera:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 
 $element->addPrefixPath('My_Filter', 'My/Filter/', 'filter');
 ]]></programlisting>
@@ -283,10 +283,10 @@ $element->addPrefixPath('My_Filter', 'My/Filter/', 'filter');
 
         <para>
             Si en algún momento necesita un valor no filtrado, use el método
-            <code>getUnfilteredValue()</code>:
+            <methodname>getUnfilteredValue()</methodname>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 
 $unfiltered = $element->getUnfilteredValue();
 ]]></programlisting>
@@ -302,34 +302,34 @@ $unfiltered = $element->getUnfilteredValue();
 
         <itemizedlist>
             <listitem><para>
-                <code>addFilter($nameOfFilter, array $options = null)</code>
+                <methodname>addFilter($nameOfFilter, array $options = null)</methodname>
             </para></listitem>
 
             <listitem><para>
-                <code>addFilters(array $filters)</code>
+                <methodname>addFilters(array $filters)</methodname>
             </para></listitem>
 
             <listitem><para>
-                <code>setFilters(array $filters)</code> (sobreescribe todos los
+                <methodname>setFilters(array $filters)</methodname> (sobreescribe todos los
                 filtros)
             </para></listitem>
 
             <listitem><para>
-                <code>getFilter($name)</code> (recupera un objeto filtro por su
+                <methodname>getFilter($name)</methodname> (recupera un objeto filtro por su
                 nombre)
             </para></listitem>
 
             <listitem><para>
-                <code>getFilters()</code> (recupera todos los filtros)
+                <methodname>getFilters()</methodname> (recupera todos los filtros)
             </para></listitem>
 
             <listitem><para>
-                <code>removeFilter($name)</code> (elimina un filtro por su
+                <methodname>removeFilter($name)</methodname> (elimina un filtro por su
                 nombre)
             </para></listitem>
 
             <listitem><para>
-                <code>clearFilters()</code> (elimina todos los filtros)
+                <methodname>clearFilters()</methodname> (elimina todos los filtros)
             </para></listitem>
         </itemizedlist>
     </sect2>
@@ -342,7 +342,7 @@ $unfiltered = $element->getUnfilteredValue();
             salida" querrá validar ("filtrar la entrada") los datos de los
             formularios. En <classname>Zend_Form</classname> cada elemento contiene su
             propia cadena de validadores, consistente en validadores
-            <code>Zend_Validate_*</code>.
+            <methodname>Zend_Validate_*</methodname>.
         </para>
 
         <para>
@@ -364,7 +364,7 @@ $unfiltered = $element->getUnfilteredValue();
             Veamos algunos ejemplos:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 
 // Instancia específica del validador:
 $element->addValidator(new Zend_Validate_Alnum());
@@ -390,12 +390,12 @@ $element->addValidator('alnum');
             <para>
                 Si tiene su propio conjunto de clases de validación, puede
                 informarle de ellas a <classname>Zend_Form_Element</classname> usando
-                <code>addPrefixPath()</code>. Por ejemplo, si tiene validadores
+                <methodname>addPrefixPath()</methodname>. Por ejemplo, si tiene validadores
                 con el prefijo 'My_Validator', puede indicárselo a
                 <classname>Zend_Form_Element</classname> de la siguiente manera:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 
 $element->addPrefixPath('My_Validator', 'My/Validator/', 'validate');
 ]]></programlisting>
@@ -408,10 +408,10 @@ $element->addPrefixPath('My_Validator', 'My/Validator/', 'validate');
 
         <para>
             Si el fallo de un validador debe evitar validaciones posteriores,
-            pase el boleano <code>true</code> como segundo parámetro:
+            pase el boleano <methodname>true</methodname> como segundo parámetro:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 
 $element->addValidator('alnum', true);
 ]]></programlisting>
@@ -419,11 +419,11 @@ $element->addValidator('alnum', true);
         <para>
             Si está usando la cadena nombre para añadir el validador, y la clase
             del validador acepta argumentos para su constructor, puede pasarlos
-            a el tercer parámetro de <code>addValidator()</code> como un
+            a el tercer parámetro de <methodname>addValidator()</methodname> como un
             array:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 
 $element->addValidator('StringLength', false, array(6, 20));
 ]]></programlisting>
@@ -432,10 +432,10 @@ $element->addValidator('StringLength', false, array(6, 20));
             Los argumentos pasados de esta manera deben estar en el orden en el
             cual son definidos en el constructor. El ejemplo de arriba
             instanciará la clase <classname>Zend_Validate_StringLenth</classname> con los
-            parámetros <code>$min</code> y <code>$max</code>:
+            parámetros <methodname>$min</methodname> y <methodname>$max</methodname>:
         </para>
         
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 
 $validator = new Zend_Validate_StringLength(6, 20);
 ]]></programlisting>
@@ -446,7 +446,7 @@ $validator = new Zend_Validate_StringLength(6, 20);
             <para>
                 Algunos desarrolladores querrán estipular mensajes de error
                 personalizados para un validador. El argumento
-                <code>$options</code> de
+                <methodname>$options</methodname> de
                 <classname>Zend_Form_Element::addValidator()</classname> le permite
                 hacerlo proporcionando la clave 'messages' y estableciendolos en
                 un array de pares clave/valor para especificar las plantillas
@@ -466,12 +466,12 @@ $validator = new Zend_Validate_StringLength(6, 20);
 
         <para>
             Puede también establecer varios validadores a la vez, usando
-            <code>addValidators()</code>. Su uso básico es pasar una matriz de
+            <methodname>addValidators()</methodname>. Su uso básico es pasar una matriz de
             arrays, donde cada array contenga de 1 a 3 valores,
-            correspondientes al constructor de <code>addValidator()</code>:
+            correspondientes al constructor de <methodname>addValidator()</methodname>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 
 $element->addValidators(array(
     array('NotEmpty', true),
@@ -485,7 +485,7 @@ $element->addValidators(array(
             'validator', 'breakChainOnFailure', y 'options' en el array:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 
 $element->addValidators(array(
     array(
@@ -503,7 +503,7 @@ $element->addValidators(array(
             en un archivo de configuración:
         </para>
 
-        <programlisting role="ini"><![CDATA[
+        <programlisting language="ini"><![CDATA[
 
 element.validators.notempty.validator = "NotEmpty"
 element.validators.notempty.breakChainOnFailure = true
@@ -523,10 +523,10 @@ element.validators.strlen.options.max = 20
 
         <para>
             Para validar un elemento, pase el valor a
-            <code>isValid()</code>:
+            <methodname>isValid()</methodname>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 
 if ($element->isValid($value)) {
     // válido
@@ -551,9 +551,9 @@ if ($element->isValid($value)) {
 
             <para>
                 <classname>Zend_Form_Element::isValid()</classname>> soporta un argumento
-                adicional, <code>$context</code>.
+                adicional, <methodname>$context</methodname>.
                 <classname>Zend_Form::isValid()</classname> pasa todo el conjunto de datos
-                procesados a <code>$context</code> cuando valida un formulario,
+                procesados a <methodname>$context</methodname> cuando valida un formulario,
                 y <classname>Zend_Form_Element::isValid()</classname>>, a su vez, lo pasa a
                 cada validador. Esto significa que puede escribir validadores
                 que son conscientes de los datos pasados a otros elementos del
@@ -564,7 +564,7 @@ if ($element->isValid($value)) {
                 siguiente:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 
 class My_Validate_PasswordConfirmation extends Zend_Validate_Abstract
 {
@@ -599,7 +599,7 @@ class My_Validate_PasswordConfirmation extends Zend_Validate_Abstract
         <para>
             Los validadores son procesados en orden. Cada validador es
             procesado, a menos que un validador creado con un valor true para
-            <code>breakChainOnFailure</code> falle su validación. Asegúrese de
+            <methodname>breakChainOnFailure</methodname> falle su validación. Asegúrese de
             especificar sus validadores en un orden razonable.
         </para>
 
@@ -608,7 +608,7 @@ class My_Validate_PasswordConfirmation extends Zend_Validate_Abstract
             mensajes de error de la cadena del validador:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 
 $errors   = $element->getErrors();
 $messages = $element->getMessages();
@@ -621,9 +621,9 @@ $messages = $element->getMessages();
 
         <para>
             En adición a los validadores, puede especificar que un elemento es
-            necesario, usando <code>setRequired(true)</code>. Por defecto, esta
+            necesario, usando <methodname>setRequired(true)</methodname>. Por defecto, esta
             bandera es false, lo que significa que pasará su cadena de 
-            validadores si ningún valor es pasado a <code>isValid()</code>.
+            validadores si ningún valor es pasado a <methodname>isValid()</methodname>.
             Puede modificar este comportamiento en un número de maneras:
         </para>
 
@@ -632,10 +632,10 @@ $messages = $element->getMessages();
                 <para>
                     Por defecto, cuando un elemento es requerido, una bandera,
                     'allowEmpty', también es true. Esto quiere decir que si un
-                    valor empty es evaluado pasándolo a <code>isValid()</code>,
+                    valor empty es evaluado pasándolo a <methodname>isValid()</methodname>,
                     los validadores serán saltados. Puede intercalar esta
                     bandera usando el método de acceso
-                    <code>setAllowEmpty($flag)</code>; cuando la bandera es
+                    <methodname>setAllowEmpty($flag)</methodname>; cuando la bandera es
                     false, si un valor es pasado, los validadores seguirán
                     ejecutándose.
                 </para>
@@ -644,9 +644,9 @@ $messages = $element->getMessages();
             <listitem>
                 <para>
                     Por defecto, si un elemento es requerido, pero no contiene
-                    un validador 'NotEmpty', <code>isValid()</code> añadirá uno
+                    un validador 'NotEmpty', <methodname>isValid()</methodname> añadirá uno
                     en la cima de la pila, con la bandera
-                    <code>breakChainOnFailure</code> establecido. Esto hace que
+                    <methodname>breakChainOnFailure</methodname> establecido. Esto hace que
                     la bandera requerida tenga un significado semántico: si
                     ningún valor es pasado, inmediatamente invalidamos el envío
                     y se le notifica al usuario, e impedimos que otros
@@ -657,8 +657,8 @@ $messages = $element->getMessages();
                 <para>
                     Si no quiere este comportamiento, puede desactivarlo pasando
                     un valor false a
-                    <code>setAutoInsertNotEmptyValidator($flag)</code>; esto
-                    prevendrá a <code>isValid()</code> de colocar un validador
+                    <methodname>setAutoInsertNotEmptyValidator($flag)</methodname>; esto
+                    prevendrá a <methodname>isValid()</methodname> de colocar un validador
                     'NotEmpty' en la cadena de validaciones.
                 </para>
             </listitem>
@@ -686,17 +686,17 @@ $messages = $element->getMessages();
 
         <itemizedlist>
             <listitem><para>
-                    <code>setRequired($flag)</code> y
-                    <code>isRequired()</code> permiten establecer y recuperar el
+                    <methodname>setRequired($flag)</methodname> y
+                    <methodname>isRequired()</methodname> permiten establecer y recuperar el
                     estado de la bandera 'required'. Cuando se le asigna un
-                    booleano <code>true</code>, esta bandera requiere que el
+                    booleano <methodname>true</methodname>, esta bandera requiere que el
                     elemento esté presente en la información procesada por
                     <classname>Zend_Form</classname>.
             </para></listitem>
 
             <listitem><para>
-                    <code>setAllowEmpty($flag)</code> y
-                    <code>getAllowEmpty()</code> permiten modificar el
+                    <methodname>setAllowEmpty($flag)</methodname> y
+                    <methodname>getAllowEmpty()</methodname> permiten modificar el
                     comportamiento de elementos opcionales (p.e., elementos
                     donde la bandera required es false). Cuando la bandera 
                     'allow empty' es true, valores vacíos no pasarán la cadena
@@ -704,38 +704,38 @@ $messages = $element->getMessages();
             </para></listitem>
 
             <listitem><para>
-                    <code>setAutoInsertNotEmptyValidator($flag)</code> permite
+                    <methodname>setAutoInsertNotEmptyValidator($flag)</methodname> permite
                     especificar si realmente un validador 'NotEmpty' será
                     añadido el inicio de la cadena de validaciones cuando un
                     elemento es requerido. Por defecto, esta bandera es true.
             </para></listitem>
 
             <listitem><para>
-                <code>addValidator($nameOrValidator, $breakChainOnFailure = false, array $options = null)</code>
+                <methodname>addValidator($nameOrValidator, $breakChainOnFailure = false, array $options = null)</methodname>
             </para></listitem>
 
             <listitem><para>
-                <code>addValidators(array $validators)</code>
+                <methodname>addValidators(array $validators)</methodname>
             </para></listitem>
 
             <listitem><para>
-                <code>setValidators(array $validators)</code> (sobreescribe todos los validadores)
+                <methodname>setValidators(array $validators)</methodname> (sobreescribe todos los validadores)
             </para></listitem>
 
             <listitem><para>
-                <code>getValidator($name)</code> (recupera un objeto validador por nombre)
+                <methodname>getValidator($name)</methodname> (recupera un objeto validador por nombre)
             </para></listitem>
 
             <listitem><para>
-                <code>getValidators()</code> (recupera todos los validadores)
+                <methodname>getValidators()</methodname> (recupera todos los validadores)
             </para></listitem>
 
             <listitem><para>
-                <code>removeValidator($name)</code> (elimina un validador por nombre)
+                <methodname>removeValidator($name)</methodname> (elimina un validador por nombre)
             </para></listitem>
 
             <listitem><para>
-                <code>clearValidators()</code> (elimina todos los validadores)
+                <methodname>clearValidators()</methodname> (elimina todos los validadores)
             </para></listitem>
         </itemizedlist>
 
@@ -753,59 +753,59 @@ $messages = $element->getMessages();
 
             <itemizedlist>
                 <listitem><para>
-                    <code>addErrorMessage($message)</code>: añade un mensaje de
+                    <methodname>addErrorMessage($message)</methodname>: añade un mensaje de
                     error para mostrarlos en forma de errores de validación. Puede
                     llamarlo más de una vez, y los nuevos mensajes nuevos son
                     añadidos a la pila.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>addErrorMessages(array $messages)</code>: añade
+                    <methodname>addErrorMessages(array $messages)</methodname>: añade
                     múltiples mensajes de error para mostrarlos en forma de errores de
                     validación.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>setErrorMessages(array $messages)</code>: añade
+                    <methodname>setErrorMessages(array $messages)</methodname>: añade
                     múltiples mensajes de error para mostrarlos en forma de errores de
                     validación, sobreescribiendo todos los mensajes de error
                     previamente establecidos.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getErrorMessages()</code>: recupera la lista de
+                    <methodname>getErrorMessages()</methodname>: recupera la lista de
                     mensajes de error personalizados que fueron definidos.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>clearErrorMessages()</code>: remueve todos los
+                    <methodname>clearErrorMessages()</methodname>: remueve todos los
                     mensajes de error personalizados que hayan sido definidos.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>markAsError()</code>: marca al elemento como que falló
+                    <methodname>markAsError()</methodname>: marca al elemento como que falló
                     la validación.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>hasErrors()</code>: determina si el elemento ha
+                    <methodname>hasErrors()</methodname>: determina si el elemento ha
                     fallado la validación o ha sido marcado como inválido.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>addError($message)</code>: añade un mensaje a la pila
+                    <methodname>addError($message)</methodname>: añade un mensaje a la pila
                     de mensaje de error personalizados y marca al elemento como
                     inválido.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>addErrors(array $messages)</code>: añade varios
+                    <methodname>addErrors(array $messages)</methodname>: añade varios
                     mensajes a la pila de mensajes de error personalizados y
                     marca al elemento como inválido.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>setErrors(array $messages)</code>: sobreescribe el
+                    <methodname>setErrors(array $messages)</methodname>: sobreescribe el
                     mensaje de error personalizado en la pila con los mensajes
                     previstos y marca al elemento como inválido.
                 </para></listitem>
@@ -859,7 +859,7 @@ $messages = $element->getMessages();
 
             <listitem><para>
                 <emphasis>Errors</emphasis>: añade mensajes de error al elemento
-                usando <code>Zend_View_Helper_FormErrors</code>. Si no está
+                usando <methodname>Zend_View_Helper_FormErrors</methodname>. Si no está
                 presente, no se añade nada.
             </para></listitem>
 
@@ -877,7 +877,7 @@ $messages = $element->getMessages();
 
             <listitem><para>
                 <emphasis>Label</emphasis>: añade al comienzo una etiqueta al
-                elemento usando <code>Zend_View_Helper_FormLabel</code>, y
+                elemento usando <methodname>Zend_View_Helper_FormLabel</methodname>, y
                 envolviéndola en una etiqueta &lt;dt&gt;. Si ninguna etiqueta es
                 provista, solo la etiqueta de la definición es generada.
             </para></listitem>
@@ -892,7 +892,7 @@ $messages = $element->getMessages();
                 opción 'disableLoadDefaultDecorators' al constructor:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 
 $element = new Zend_Form_Element('foo',
                                  array('disableLoadDefaultDecorators' =>
@@ -903,7 +903,7 @@ $element = new Zend_Form_Element('foo',
             <para>
                 Esta opción puede ser combinada junto con cualquier otra opción que
                 pase, ya sea como un array de opciones o en un objeto
-                <code>Zend_Config</code>.
+                <methodname>Zend_Config</methodname>.
             </para>
         </note>
 
@@ -916,7 +916,7 @@ $element = new Zend_Form_Element('foo',
             por defecto:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 
 $this->addDecorators(array(
     array('ViewHelper'),
@@ -943,7 +943,7 @@ $this->addDecorators(array(
             básicamente se ve así:
         </para>
 
-        <programlisting role="html"><![CDATA[
+        <programlisting language="html"><![CDATA[
 
 <dt><label for="foo" class="optional">Foo</label></dt>
 <dd>
@@ -975,12 +975,12 @@ $this->addDecorators(array(
             <para>
                 Para evitar esto, puede usar <emphasis>alias</emphasis>. En
                 lugar de pasar un decorador o nombre de decorador como primer
-                argumento a <code>addDecorator()</code>, pase una matriz con un
+                argumento a <methodname>addDecorator()</methodname>, pase una matriz con un
                 solo elemento, con el alias apuntando al nombre o objeto
                 decorador:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 
 // Alias a 'FooBar':
 $element->addDecorator(array('FooBar' => 'HtmlTag'),
@@ -991,12 +991,12 @@ $decorator = $element->getDecorator('FooBar');
 ]]></programlisting>
 
             <para>
-                En los métodos <code>addDecorators()</code> y
-                <code>setDecorators()</code>, necesitará pasar la opción
+                En los métodos <methodname>addDecorators()</methodname> y
+                <methodname>setDecorators()</methodname>, necesitará pasar la opción
                 'decorator' en la matriz representando el decorador:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 
 // Y dos decoradores 'HtmlTag', 'FooBar' como alias:
 $element->addDecorators(
@@ -1019,49 +1019,49 @@ $fooBar  = $element->getDecorator('FooBar');
 
         <itemizedlist>
             <listitem><para>
-                <code>addDecorator($nameOrDecorator, array $options = null)</code>
+                <methodname>addDecorator($nameOrDecorator, array $options = null)</methodname>
             </para></listitem>
 
             <listitem><para>
-                <code>addDecorators(array $decorators)</code>
+                <methodname>addDecorators(array $decorators)</methodname>
             </para></listitem>
 
             <listitem><para>
-                <code>setDecorators(array $decorators)</code> (sobreescribe
+                <methodname>setDecorators(array $decorators)</methodname> (sobreescribe
                 todos los decoradores)
             </para></listitem>
 
             <listitem><para>
-                <code>getDecorator($name)</code> (recupera un objeto decorador
+                <methodname>getDecorator($name)</methodname> (recupera un objeto decorador
                 por su nombre)
             </para></listitem>
 
             <listitem><para>
-                <code>getDecorators()</code> (recupera todos los decoradores)
+                <methodname>getDecorators()</methodname> (recupera todos los decoradores)
             </para></listitem>
 
             <listitem><para>
-                <code>removeDecorator($name)</code> (elimina un decorador por su
+                <methodname>removeDecorator($name)</methodname> (elimina un decorador por su
                 nombre)
             </para></listitem>
 
             <listitem><para>
-                <code>clearDecorators()</code> (elimina todos los decoradores)
+                <methodname>clearDecorators()</methodname> (elimina todos los decoradores)
             </para></listitem>
         </itemizedlist>
 
         <para>
             <classname>Zend_Form_Element</classname> también utiliza la sobrecarga para
-            permitir generar decoradores específicos. <code>__call()</code>
+            permitir generar decoradores específicos. <methodname>__call()</methodname>
             interceptará métodos que comiencen con el texto 'render' y utilizará
             el resto del nombre del método para buscar un decorador; si se
             encuentra, entonces será generado <emphasis>sólo ese</emphasis>
             decorador. Cualquier argumento pasado al llamado del método será
-            usado como contenido para pasar  al método <code>render()</code> del
+            usado como contenido para pasar  al método <methodname>render()</methodname> del
             decorador. Como ejemplo:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 
 // Genera solo el decorador ViewHelper:
 echo $element->renderViewHelper();
@@ -1086,39 +1086,39 @@ echo $element->renderHtmlTag("This is the html tag content");
         <itemizedlist>
             <listitem><para>
                 <emphasis>name</emphasis>: el nombre del elemento. Emplea los
-                métodos de acceso <code>setName()</code> y <code>getName()</code>.
+                métodos de acceso <methodname>setName()</methodname> y <methodname>getName()</methodname>.
             </para></listitem>
 
             <listitem><para>
                 <emphasis>label</emphasis>: la etiqueta del elemento. Emplea los
-                métodos de acceso <code>setLabel()</code> y <code>getLabel()</code>.
+                métodos de acceso <methodname>setLabel()</methodname> y <methodname>getLabel()</methodname>.
             </para></listitem>
 
             <listitem><para>
                 <emphasis>order</emphasis>: el índice en el cual los elementos
                 deben ir mostrándose en el formulario. Emplea los métodos de
-                acceso <code>setOrder()</code> y <code>getOrder()</code>.
+                acceso <methodname>setOrder()</methodname> y <methodname>getOrder()</methodname>.
             </para></listitem>
 
             <listitem><para>
                 <emphasis>value</emphasis>: El valor del elemento actual. Emplea
-                los métodos de acceso <code>setValue()</code> y
-                <code>getValue()</code>.
+                los métodos de acceso <methodname>setValue()</methodname> y
+                <methodname>getValue()</methodname>.
             </para></listitem>
 
             <listitem><para>
                 <emphasis>description</emphasis>: una descripción del elemento;
                 a menudo utilizada para proveer un tooltip o ayuda contextual
                 con javascript describiendo el propósito del elemento. Emplea
-                los métodos de acceso <code>setDescription()</code> y
-                <code>getDescription()</code>.
+                los métodos de acceso <methodname>setDescription()</methodname> y
+                <methodname>getDescription()</methodname>.
             </para></listitem>
 
             <listitem><para>
                 <emphasis>required</emphasis>: bandera que indica si un elemento
                 es requerido o no cuando se efectúa la validación del
                 formulario. Emplea los métodos de acceso
-                <code>setRequired()</code> y <code>getRequired()</code>. Esta
+                <methodname>setRequired()</methodname> y <methodname>getRequired()</methodname>. Esta
                 bandera es false por defecto.
             </para></listitem>
 
@@ -1128,7 +1128,7 @@ echo $element->renderHtmlTag("This is the html tag content");
                 valores vacíos. Cuando es true, y la bandera required es false,
                 valores vacíos no pasarán la cadena de validación, y se supone
                 verdadero. Emplea los métodos de acceso
-                <code>setAllowEmpty()</code> y <code>getAllowEmpty()</code>.
+                <methodname>setAllowEmpty()</methodname> y <methodname>getAllowEmpty()</methodname>.
                 Esta bandera es true por defecto.
             </para></listitem>
 
@@ -1137,8 +1137,8 @@ echo $element->renderHtmlTag("This is the html tag content");
                 indicando insertar o no un validador 'NotEmpty' cuando un
                 elemento es requerido. Por defecto, esta bandera es true.
                 Establezca la bandera con
-                <code>setAutoInsertNotEmptyValidator($flag)</code> y determine
-                el valor con <code>autoInsertNotEmptyValidator()</code>.
+                <methodname>setAutoInsertNotEmptyValidator($flag)</methodname> y determine
+                el valor con <methodname>autoInsertNotEmptyValidator()</methodname>.
             </para></listitem>
         </itemizedlist>
 
@@ -1176,7 +1176,7 @@ echo $element->renderHtmlTag("This is the html tag content");
             utiliza la sobrecarga para facilitar el acceso a ellos:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 
 // Equivalente a $element->setAttrib('class', 'text'):
 $element->class = 'text;
@@ -1210,97 +1210,97 @@ $element->class = 'text;
         <itemizedlist>
             <listitem><para>Configuración:</para>
                 <itemizedlist>
-                    <listitem><para><code>setOptions(array $options)</code></para></listitem>
-                    <listitem><para><code>setConfig(Zend_Config $config)</code></para></listitem>
+                    <listitem><para><methodname>setOptions(array $options)</methodname></para></listitem>
+                    <listitem><para><methodname>setConfig(Zend_Config $config)</methodname></para></listitem>
                 </itemizedlist>
             </listitem>
 
             <listitem><para>I18n:</para>
                 <itemizedlist>
-                    <listitem><para><code>setTranslator(Zend_Translate_Adapter $translator = null)</code></para></listitem>
-                    <listitem><para><code>getTranslator()</code></para></listitem>
-                    <listitem><para><code>setDisableTranslator($flag)</code></para></listitem>
-                    <listitem><para><code>translatorIsDisabled()</code></para></listitem>
+                    <listitem><para><methodname>setTranslator(Zend_Translate_Adapter $translator = null)</methodname></para></listitem>
+                    <listitem><para><methodname>getTranslator()</methodname></para></listitem>
+                    <listitem><para><methodname>setDisableTranslator($flag)</methodname></para></listitem>
+                    <listitem><para><methodname>translatorIsDisabled()</methodname></para></listitem>
                 </itemizedlist>
             </listitem>
 
             <listitem><para>Propiedades:</para>
                 <itemizedlist>
-                    <listitem><para><code>setName($name)</code></para></listitem>
-                    <listitem><para><code>getName()</code></para></listitem>
-                    <listitem><para><code>setValue($value)</code></para></listitem>
-                    <listitem><para><code>getValue()</code></para></listitem>
-                    <listitem><para><code>getUnfilteredValue()</code></para></listitem>
-                    <listitem><para><code>setLabel($label)</code></para></listitem>
-                    <listitem><para><code>getLabel()</code></para></listitem>
-                    <listitem><para><code>setDescription($description)</code></para></listitem>
-                    <listitem><para><code>getDescription()</code></para></listitem>
-                    <listitem><para><code>setOrder($order)</code></para></listitem>
-                    <listitem><para><code>getOrder()</code></para></listitem>
-                    <listitem><para><code>setRequired($flag)</code></para></listitem>
-                    <listitem><para><code>getRequired()</code></para></listitem>
-                    <listitem><para><code>setAllowEmpty($flag)</code></para></listitem>
-                    <listitem><para><code>getAllowEmpty()</code></para></listitem>
-                    <listitem><para><code>setAutoInsertNotEmptyValidator($flag)</code></para></listitem>
-                    <listitem><para><code>autoInsertNotEmptyValidator()</code></para></listitem>
-                    <listitem><para><code>setIgnore($flag)</code></para></listitem>
-                    <listitem><para><code>getIgnore()</code></para></listitem>
-                    <listitem><para><code>getType()</code></para></listitem>
-                    <listitem><para><code>setAttrib($name, $value)</code></para></listitem>
-                    <listitem><para><code>setAttribs(array $attribs)</code></para></listitem>
-                    <listitem><para><code>getAttrib($name)</code></para></listitem>
-                    <listitem><para><code>getAttribs()</code></para></listitem>
+                    <listitem><para><methodname>setName($name)</methodname></para></listitem>
+                    <listitem><para><methodname>getName()</methodname></para></listitem>
+                    <listitem><para><methodname>setValue($value)</methodname></para></listitem>
+                    <listitem><para><methodname>getValue()</methodname></para></listitem>
+                    <listitem><para><methodname>getUnfilteredValue()</methodname></para></listitem>
+                    <listitem><para><methodname>setLabel($label)</methodname></para></listitem>
+                    <listitem><para><methodname>getLabel()</methodname></para></listitem>
+                    <listitem><para><methodname>setDescription($description)</methodname></para></listitem>
+                    <listitem><para><methodname>getDescription()</methodname></para></listitem>
+                    <listitem><para><methodname>setOrder($order)</methodname></para></listitem>
+                    <listitem><para><methodname>getOrder()</methodname></para></listitem>
+                    <listitem><para><methodname>setRequired($flag)</methodname></para></listitem>
+                    <listitem><para><methodname>getRequired()</methodname></para></listitem>
+                    <listitem><para><methodname>setAllowEmpty($flag)</methodname></para></listitem>
+                    <listitem><para><methodname>getAllowEmpty()</methodname></para></listitem>
+                    <listitem><para><methodname>setAutoInsertNotEmptyValidator($flag)</methodname></para></listitem>
+                    <listitem><para><methodname>autoInsertNotEmptyValidator()</methodname></para></listitem>
+                    <listitem><para><methodname>setIgnore($flag)</methodname></para></listitem>
+                    <listitem><para><methodname>getIgnore()</methodname></para></listitem>
+                    <listitem><para><methodname>getType()</methodname></para></listitem>
+                    <listitem><para><methodname>setAttrib($name, $value)</methodname></para></listitem>
+                    <listitem><para><methodname>setAttribs(array $attribs)</methodname></para></listitem>
+                    <listitem><para><methodname>getAttrib($name)</methodname></para></listitem>
+                    <listitem><para><methodname>getAttribs()</methodname></para></listitem>
                 </itemizedlist>
             </listitem>
 
             <listitem><para>Cargadores y rutas de plugin:</para>
                 <itemizedlist>
-                    <listitem><para><code>setPluginLoader(Zend_Loader_PluginLoader_Interface $loader, $type)</code></para></listitem>
-                    <listitem><para><code>getPluginLoader($type)</code></para></listitem>
-                    <listitem><para><code>addPrefixPath($prefix, $path, $type = null)</code></para></listitem>
-                    <listitem><para><code>addPrefixPaths(array $spec)</code></para></listitem>
+                    <listitem><para><methodname>setPluginLoader(Zend_Loader_PluginLoader_Interface $loader, $type)</methodname></para></listitem>
+                    <listitem><para><methodname>getPluginLoader($type)</methodname></para></listitem>
+                    <listitem><para><methodname>addPrefixPath($prefix, $path, $type = null)</methodname></para></listitem>
+                    <listitem><para><methodname>addPrefixPaths(array $spec)</methodname></para></listitem>
                 </itemizedlist>
             </listitem>
 
             <listitem><para>Validación:</para>
                 <itemizedlist>
-                    <listitem><para><code>addValidator($validator, $breakChainOnFailure = false, $options = array())</code></para></listitem>
-                    <listitem><para><code>addValidators(array $validators)</code></para></listitem>
-                    <listitem><para><code>setValidators(array $validators)</code></para></listitem>
-                    <listitem><para><code>getValidator($name)</code></para></listitem>
-                    <listitem><para><code>getValidators()</code></para></listitem>
-                    <listitem><para><code>removeValidator($name)</code></para></listitem>
-                    <listitem><para><code>clearValidators()</code></para></listitem>
-                    <listitem><para><code>isValid($value, $context = null)</code></para></listitem>
-                    <listitem><para><code>getErrors()</code></para></listitem>
-                    <listitem><para><code>getMessages()</code></para></listitem>
+                    <listitem><para><methodname>addValidator($validator, $breakChainOnFailure = false, $options = array())</methodname></para></listitem>
+                    <listitem><para><methodname>addValidators(array $validators)</methodname></para></listitem>
+                    <listitem><para><methodname>setValidators(array $validators)</methodname></para></listitem>
+                    <listitem><para><methodname>getValidator($name)</methodname></para></listitem>
+                    <listitem><para><methodname>getValidators()</methodname></para></listitem>
+                    <listitem><para><methodname>removeValidator($name)</methodname></para></listitem>
+                    <listitem><para><methodname>clearValidators()</methodname></para></listitem>
+                    <listitem><para><methodname>isValid($value, $context = null)</methodname></para></listitem>
+                    <listitem><para><methodname>getErrors()</methodname></para></listitem>
+                    <listitem><para><methodname>getMessages()</methodname></para></listitem>
                 </itemizedlist>
             </listitem>
 
             <listitem><para>Filtros:</para>
                 <itemizedlist>
-                    <listitem><para><code>addFilter($filter, $options = array())</code></para></listitem>
-                    <listitem><para><code>addFilters(array $filters)</code></para></listitem>
-                    <listitem><para><code>setFilters(array $filters)</code></para></listitem>
-                    <listitem><para><code>getFilter($name)</code></para></listitem>
-                    <listitem><para><code>getFilters()</code></para></listitem>
-                    <listitem><para><code>removeFilter($name)</code></para></listitem>
-                    <listitem><para><code>clearFilters()</code></para></listitem>
+                    <listitem><para><methodname>addFilter($filter, $options = array())</methodname></para></listitem>
+                    <listitem><para><methodname>addFilters(array $filters)</methodname></para></listitem>
+                    <listitem><para><methodname>setFilters(array $filters)</methodname></para></listitem>
+                    <listitem><para><methodname>getFilter($name)</methodname></para></listitem>
+                    <listitem><para><methodname>getFilters()</methodname></para></listitem>
+                    <listitem><para><methodname>removeFilter($name)</methodname></para></listitem>
+                    <listitem><para><methodname>clearFilters()</methodname></para></listitem>
                 </itemizedlist>
             </listitem>
 
             <listitem><para>Generación:</para>
                 <itemizedlist>
-                    <listitem><para><code>setView(Zend_View_Interface $view = null)</code></para></listitem>
-                    <listitem><para><code>getView()</code></para></listitem>
-                    <listitem><para><code>addDecorator($decorator, $options = null)</code></para></listitem>
-                    <listitem><para><code>addDecorators(array $decorators)</code></para></listitem>
-                    <listitem><para><code>setDecorators(array $decorators)</code></para></listitem>
-                    <listitem><para><code>getDecorator($name)</code></para></listitem>
-                    <listitem><para><code>getDecorators()</code></para></listitem>
-                    <listitem><para><code>removeDecorator($name)</code></para></listitem>
-                    <listitem><para><code>clearDecorators()</code></para></listitem>
-                    <listitem><para><code>render(Zend_View_Interface $view = null)</code></para></listitem>
+                    <listitem><para><methodname>setView(Zend_View_Interface $view = null)</methodname></para></listitem>
+                    <listitem><para><methodname>getView()</methodname></para></listitem>
+                    <listitem><para><methodname>addDecorator($decorator, $options = null)</methodname></para></listitem>
+                    <listitem><para><methodname>addDecorators(array $decorators)</methodname></para></listitem>
+                    <listitem><para><methodname>setDecorators(array $decorators)</methodname></para></listitem>
+                    <listitem><para><methodname>getDecorator($name)</methodname></para></listitem>
+                    <listitem><para><methodname>getDecorators()</methodname></para></listitem>
+                    <listitem><para><methodname>removeDecorator($name)</methodname></para></listitem>
+                    <listitem><para><methodname>clearDecorators()</methodname></para></listitem>
+                    <listitem><para><methodname>render(Zend_View_Interface $view = null)</methodname></para></listitem>
                 </itemizedlist>
             </listitem>
         </itemizedlist>
@@ -1311,9 +1311,9 @@ $element->class = 'text;
 
         <para>
             El constructor de <classname>Zend_Form_Element</classname> acepta tanto una
-            matriz de opciones como un objeto <code>Zend_Config</code>
+            matriz de opciones como un objeto <methodname>Zend_Config</methodname>
             conteniendo opciones, y esto puede configurarse usando
-            <code>setOptions()</code> o <code>setConfig()</code>. Hablando de
+            <methodname>setOptions()</methodname> o <methodname>setConfig()</methodname>. Hablando de
             manera general, las claves son nombradas de la siguiente manera:
         </para>
 
@@ -1335,8 +1335,8 @@ $element->class = 'text;
 
         <itemizedlist>
             <listitem><para>
-                <code>prefixPath</code> será pasado a
-                <code>addPrefixPaths()</code>
+                <methodname>prefixPath</methodname> será pasado a
+                <methodname>addPrefixPaths()</methodname>
             </para></listitem>
 
             <listitem>
@@ -1346,19 +1346,19 @@ $element->class = 'text;
 
                 <itemizedlist>
                     <listitem><para>
-                            <code>setAttrib</code> (aunque
-                            <code>setAttribs</code> <emphasis>funcionará</emphasis>
+                            <methodname>setAttrib</methodname> (aunque
+                            <methodname>setAttribs</methodname> <emphasis>funcionará</emphasis>
                     </para></listitem>
 
-                    <listitem><para><code>setConfig</code></para></listitem>
+                    <listitem><para><methodname>setConfig</methodname></para></listitem>
 
-                    <listitem><para><code>setOptions</code></para></listitem>
+                    <listitem><para><methodname>setOptions</methodname></para></listitem>
 
-                    <listitem><para><code>setPluginLoader</code></para></listitem>
+                    <listitem><para><methodname>setPluginLoader</methodname></para></listitem>
 
-                    <listitem><para><code>setTranslator</code></para></listitem>
+                    <listitem><para><methodname>setTranslator</methodname></para></listitem>
 
-                    <listitem><para><code>setView</code></para></listitem>
+                    <listitem><para><methodname>setView</methodname></para></listitem>
                 </itemizedlist>
             </listitem>
         </itemizedlist>
@@ -1368,7 +1368,7 @@ $element->class = 'text;
             cada tipo de dato configurable:
         </para>
 
-        <programlisting role="ini"><![CDATA[
+        <programlisting language="ini"><![CDATA[
 
 [element]
 name = "foo"
@@ -1420,9 +1420,9 @@ decorators.label.decorator = "Label"
 
         <para>
             Hay dos métodos típicamente usados para extender un elemento:
-            <code>init()</code>, el cual puede usarse para añadir una lógica de
+            <methodname>init()</methodname>, el cual puede usarse para añadir una lógica de
             inicialización personalizada a su elemento, y
-            <code>loadDefaultDecorators()</code>, el cual puede usarse para
+            <methodname>loadDefaultDecorators()</methodname>, el cual puede usarse para
             establecer una lista de decoradores usados por su elemento de manera
             predeterminada.
         </para>
@@ -1430,14 +1430,14 @@ decorators.label.decorator = "Label"
         <para>
             Como un ejemplo, digamos que todos los elementos de tipo texto en un
             formulario que está creando, necesitan ser filtrados con
-            <code>StringTrim</code>, validados con una expresión regular, y que
+            <methodname>StringTrim</methodname>, validados con una expresión regular, y que
             quiere usar un decorador personalizado que ha creado para
             mostrarlos, 'My_Decorator_TextItem'; adicionalmente, tiene un número
             de atributos estándars, incluyendo 'size', 'maxLength', y 'class'
             que quisiera especificar. Puede definir un elemento tal como sigue:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 
 class My_Element_Text extends Zend_Form_Element
 {
@@ -1459,27 +1459,27 @@ class My_Element_Text extends Zend_Form_Element
             ruta para elementos de ese tipo, y comenzar creando elementos:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 
 $form->addPrefixPath('My_Element', 'My/Element/', 'element')
      ->addElement('foo', 'text');
 ]]></programlisting>
 
         <para>
-            El elemento 'foo' será ahora del tipo <code>My_Element_Text</code>,
+            El elemento 'foo' será ahora del tipo <methodname>My_Element_Text</methodname>,
             y mostrará el comportamiento que ha especificado.
         </para>
 
         <para>
             Otro método que puede querer sobreescribir cuando extienda
             <classname>Zend_Form_Element</classname> es el método
-            <code>loadDefaultDecorators()</code>. Este método carga
+            <methodname>loadDefaultDecorators()</methodname>. Este método carga
             condicionalmente un grupo de decoradores predefinidos para su
             elemento; puede querer sustituir su propio decorador en su clase
             extendida:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 
 class My_Element_Text extends Zend_Form_Element
 {

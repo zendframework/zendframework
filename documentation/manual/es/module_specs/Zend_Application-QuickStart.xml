@@ -197,8 +197,9 @@ $application->bootstrap()
         <programlisting language="php"><![CDATA[
 
 <?php
-class Bootstrap extends Zend_Application_Bootstrap_BootstrapAbstract
-{}
+class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
+{
+}
 ]]></programlisting>
 
         <para>

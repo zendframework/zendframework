@@ -27,8 +27,8 @@
 
         <para>
             Se puede deshabilitar la traducción para cualquier formulario, elemento, grupo de visualización o
-            subformulario llamando al método <code>setDisableTranslator($flag)</code>
-            o pasando la opción <code>disableTranslator</code> al
+            subformulario llamando al método <methodname>setDisableTranslator($flag)</methodname>
+            o pasando la opción <methodname>disableTranslator</methodname> al
             objeto. Puede ser de mucha ayuda cuando se quiere deshabilitar selectivamente
             la traducción para elementos individuales o grupo de elementos.
         </para>
@@ -54,7 +54,7 @@
                     y lo usará para ejecutar la traducción y/o la localización:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 // use la clave 'Zend_Translate'; $translate es un objeto Zend_Translate:
 Zend_Registry::set('Zend_Translate', $translate);
 ]]></programlisting>
@@ -73,7 +73,7 @@ Zend_Registry::set('Zend_Translate', $translate);
                     <classname>Zend_Validate_Abstract</classname>:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 // Decir a todas las clases de validación que se use un adaptador especifico de traducción
 Zend_Validate_Abstract::setDefaultTranslator($translate);
 ]]></programlisting>
@@ -86,7 +86,7 @@ Zend_Validate_Abstract::setDefaultTranslator($translate);
                     mensajes de error de validación.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 // Decir a todas las clases del formulario usar un adaptador especifico, así como también
 // use este adaptador para traducir mensajes de error de validación
 Zend_Form::setDefaultTranslator($translate);
@@ -97,10 +97,10 @@ Zend_Form::setDefaultTranslator($translate);
                 <para>
                     Finalmente, se puede adjuntar un traductor a una instancia especifica de un
                     formulario o a elementos especificar usando sus métodos
-                    <code>setTranslator()</code>:
+                    <methodname>setTranslator()</methodname>:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 // Decir a *esta* instancia del formulario que use un adaptador especifico de traducción;
 // será usado para traducir mensajes de error de validación para todos los
 // elementos:

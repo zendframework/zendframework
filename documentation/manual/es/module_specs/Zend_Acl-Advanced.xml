@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15814 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.acl.advanced">
 
@@ -12,26 +12,26 @@
         <para>
             <classname>Zend_Acl</classname> fue diseñado de tal manera que no requiere ninguna
             tecnología particular como bases de datos o un servidor de
-            cache para el almacenamiento de datos ACL. Al poseer una
-            implementación completamente construida en PHP, es posible
+            cache para el almacenamiento de datos <acronym>ACL</acronym>. Al poseer una
+            implementación completamente construida en <acronym>PHP</acronym>, es posible
             construir herramientas de administración personalizadas sobre
             <classname>Zend_Acl</classname> con relativa facilidad y flexibilidad. En muchas
             situaciones se requiere alguna forma de mantenimiento
-            interactivo de una ACL, y <classname>Zend_Acl</classname> provee métodos para
+            interactivo de una <acronym>ACL</acronym>, y <classname>Zend_Acl</classname> provee métodos para
             configurar, y consultar, los controles de acceso de una
             aplicación.
         </para>
 
         <para>
-            El almacenamiento de los datos ACL es una tarea que se
+            El almacenamiento de los datos <acronym>ACL</acronym> es una tarea que se
             delega al desarrollador, puesto que la utilización variará
             extensamente en distintas situaciones. Dado que <classname>Zend_Acl</classname> es
-            serializable, los objetos ACL pueden serializarse con la
+            serializable, los objetos <acronym>ACL</acronym> pueden serializarse con la
             función
             <ulink url="http://php.net/serialize">
-                <code>serialize()</code>
+                <methodname>serialize()</methodname>
             </ulink>
-            de PHP, y los resultados pueden ser almacenados donde sea
+            de <acronym>PHP</acronym>, y los resultados pueden ser almacenados donde sea
             que el desarrollador lo desee, en un archivo, base de datos,
             o mecanismo de cache
         </para>
@@ -57,14 +57,14 @@
 
     <para>
         <classname>Zend_Acl</classname> provee soporte para reglas condicionales con
-        <code>Zend_Acl_Assert_Interface</code>
+        <methodname>Zend_Acl_Assert_Interface</methodname>
         . Con el fin de utilizar la regla de aserción de la interfaz,
         un desarrollador escribe una clase que implemente el método
-        <code>assert()</code>
+        <methodname>assert()</methodname>
         de la interfaz:
     </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 class CleanIPAssertion implements Zend_Acl_Assert_Interface
 {
     public function assert(Zend_Acl $acl,
@@ -86,10 +86,10 @@ class CleanIPAssertion implements Zend_Acl_Assert_Interface
             Una vez la clase de aserción esta disponible, el desarrollador puede
             suministrar una instancia de la clase de aserción cuando asigna reglas
             condicionales. Una regla que es creada con una aserción
-            sólo se aplica cuando el método de la aserción devuelve true.
+            sólo se aplica cuando el método de la aserción devuelve  <constant>TRUE</constant>.
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $acl = new Zend_Acl();
 $acl->allow(null, null, null, new CleanIPAssertion());
 ]]></programlisting>
@@ -111,10 +111,10 @@ $acl->allow(null, null, null, new CleanIPAssertion());
 
         <para>
             El método
-            <code>assert()</code>
-            de un objeto aserción es pasado a la ACL, regla,  recurso, y privilegio
+             <methodname>assert()</methodname>
+            de un objeto aserción es pasado a la <acronym>ACL</acronym>, regla,  recurso, y privilegio
       para el cual una consulta de autorización (por ejemplo,
-            <code>isAllowed()</code>
+            <methodname>isAllowed()</methodname>
             ) se aplica, con el fin de proporcionar un contexto para que la clase de
       aserción determine sus condiciones cuando fuera necesario.
         </para>

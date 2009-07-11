@@ -20,14 +20,14 @@
 				Como los segmentos traducidos fueron presentados en la nueva
 				standard
 				route, El caracter
-				<code>@</code>
+				<methodname>@</methodname>
 				es ahora un carácter especial al principio de
 				un segmento del route. Para poder utilizarlo en un segmento estático,
 				tiene que escaparlo usando un segundo caracater
-				<code>@</code>
+				<methodname>@</methodname>
 				como prefijo. La misma regla se aplica ahora para el
 				caracter
-				<code>:</code>
+				<methodname>:</methodname>
 				.
 			</para>
 		</sect3>
@@ -51,7 +51,7 @@
 
             <itemizedlist>
             	<listitem><para>
-                    <code>formatModuleName()</code>: debe utilizarse para tomar un nuevo
+                    <methodname>formatModuleName()</methodname>: debe utilizarse para tomar un nuevo
                 nombre de controlador, tal como uno que debería estar basado dentro de una petición
                 objeto, y cambiarlo a un nombre de clase apropiado que la clase extendida
                 <classname>Zend_Controller_Action</classname> debería usar
@@ -78,17 +78,17 @@
 
             <itemizedlist>
                 <listitem><para>
-                    <code>getDefaultModule()</code>: debe retornar el nombre del
+                    <methodname>getDefaultModule()</methodname>: debe retornar el nombre del
                     módulo por defecto.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getDefaultControllerName()</code>: debe retornar el
+                    <methodname>getDefaultControllerName()</methodname>: debe retornar el
                     nombre del controlador por defecto.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getDefaultAction()</code>: debe retornar el
+                    <methodname>getDefaultAction()</methodname>: debe retornar el
                     nombre de la acción por defecto.
                 </para></listitem>
             </itemizedlist>
@@ -163,7 +163,7 @@
                     las palabras de una acción con un guión:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 $viewRenderer =
     Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
 $inflector = $viewRenderer->getInflector();
@@ -197,7 +197,7 @@ $inflector->setFilterRule(':action', array(
                     bandera, 'useCaseSensitiveActions':
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 $front->setParam('useCaseSensitiveActions', true);
 ]]></programlisting>
 
@@ -234,34 +234,34 @@ $front->setParam('useCaseSensitiveActions', true);
         </para>
 
         <para>
-        	El plugin <code>ErrorHandler</code> corre durante
-            <code>postDispatch ()</code> para el control de excepciones, y enviarlo
+        	El plugin <methodname>ErrorHandler</methodname> corre durante
+            <methodname>postDispatch ()</methodname> para el control de excepciones, y enviarlo
             a un especifico controlador de errores. Usted debe incluir tal
             controlador en su aplicación. Usted puede desactivarlo determinando el
-            parámetro del controlador <code> noErrorHandler </code>:
+            parámetro del controlador <methodname> noErrorHandler </methodname>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $front->setParam('noErrorHandler', true);
 ]]></programlisting>
 
         <para>
-			La acción de ayuda <code>ViewRenderer</code> automatiza inyección de vistas
+			La acción de ayuda <methodname>ViewRenderer</methodname> automatiza inyección de vistas
             en controladores de acción así como los autogeneradores de scripts de vistas
             basados en la acción actual. El principal problema que se puede encontrar es
             si se tiene acciones que no generan scripts de vista y tampoco llevan
-            o redireccionan, como <code>ViewRenderer</code> intentará generar
+            o redireccionan, como <methodname>ViewRenderer</methodname> intentará generar
             un scrip de vista basado en el nombre de la acción.
         </para>
 
         <para>
         	Existen varias estrategias que se puede tomar para actualizar su código. En
             el corto plazo, se puede deshabilitar globalmente 
-            <code> ViewRenderer </code> en su controlador frontal bootstrap antes del
+            <methodname> ViewRenderer </methodname> en su controlador frontal bootstrap antes del
             despache:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 // Asumiendo que $front es una instacia de Zend_Controller_Front
 $front->setParam('noViewRenderer', true);
 ]]></programlisting>
@@ -273,35 +273,35 @@ $front->setParam('noViewRenderer', true);
 
         <para>
         	Cuando se esta listo para empezar a usar la funcionalidad
-        	<code>ViewRenderer</code>, existen demasiadas cosas que ver en el
+        	<methodname>ViewRenderer</methodname>, existen demasiadas cosas que ver en el
         	código del controlador. Primero, ver las acciones método (los métodos
         	terminados en 'Action'), y determinar lo que cada uno esta haciendo. Si ninguno
         	de los siguientes esta pasando, usted necesitará hacer cambios:        	
         </para>
 
         <itemizedlist>
-            <listitem><para>Llamar a <code>$this-&gt;render()</code></para></listitem>
-            <listitem><para>Llamar a <code>$this-&gt;_forward()</code></para></listitem>
-            <listitem><para>Llamar a <code>$this-&gt;_redirect()</code></para></listitem>
-            <listitem><para>Llamar a el <code>Redirector</code> action helper</para></listitem>
+            <listitem><para>Llamar a <methodname>$this-&gt;render()</methodname></para></listitem>
+            <listitem><para>Llamar a <methodname>$this-&gt;_forward()</methodname></para></listitem>
+            <listitem><para>Llamar a <methodname>$this-&gt;_redirect()</methodname></para></listitem>
+            <listitem><para>Llamar a el <methodname>Redirector</methodname> action helper</para></listitem>
         </itemizedlist>
 
         <para>
         	La forma mas fácil de cambiar es deshabilitar auto-rendering para ese método:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $this->_helper->viewRenderer->setNoRender();
 ]]></programlisting>
 
         <para>
         	Si se encuentra que ninguno de sus acciones método se estan enviando,
             transmitiendo, o redireccionando, lo más probable es que se quiera poner encima de la
-            línea en su <code> preDispatch () </code> o <code> de init() </code>
+            línea en su <methodname> preDispatch () </methodname> o <methodname> de init() </methodname>
             métodos:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 public function preDispatch()
 {
     // disable view script autorendering
@@ -311,7 +311,7 @@ public function preDispatch()
 ]]></programlisting>
 
         <para>
-        	Si se está llamando a <code>render()</code>, y si está usando <link
+        	Si se está llamando a <methodname>render()</methodname>, y si está usando <link
                 linkend="zend.controller.modular"> la Convención Modular
                 de estructura de directorios</link>, usted preferirá cambiar su código a 
             hacer uso del auto envio:
@@ -326,7 +326,7 @@ public function preDispatch()
             </listitem>
             <listitem>
                 <para>
-                	Si se está simplemente llamando <code>render()</code> sin ningún
+                	Si se está simplemente llamando <methodname>render()</methodname> sin ningún
                 	argumento, se puede remover tales líneas.
                 </para>
             </listitem>
@@ -335,7 +335,7 @@ public function preDispatch()
                 	Si se está llamando con argumentos, y
                 	no se esta haciendo ningún proceso después or enviando 
                 	scrips de vistas multiples, se puede cambiar estas llamadas a leer
-                    <code>$this-&gt;_helper-&gt;viewRenderer()</code>.
+                    <methodname>$this-&gt;_helper-&gt;viewRenderer()</methodname>.
                 </para>
             </listitem>
         </itemizedlist>
@@ -344,7 +344,7 @@ public function preDispatch()
         	Si no se esta usando la convención modular de estructura de directorios,
         	existen variedad de métodos para definir la dirección de la vista base y
         	scripts de especificaciones de dirección así se puede hacer uso de 
-            <code>ViewRenderer</code>. Pro favor leer la docuemntación de<link
+            <methodname>ViewRenderer</methodname>. Pro favor leer la docuemntación de<link
                 linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer
                 </link> para información de esos métodos.
         </para>
@@ -352,7 +352,7 @@ public function preDispatch()
         <para>
         	Si se esta usando un objeto vista desde el registro o personalizando su 
         	objeto vista o usando una diferente implementación de vista, se deseará
-        	introducir <code>ViewRenderer</code> con este objeto. Esto puede ser
+        	introducir <methodname>ViewRenderer</methodname> con este objeto. Esto puede ser
         	terminado facilmente en cualquier momento.
         </para>
 
@@ -362,7 +362,7 @@ public function preDispatch()
                 	Antes de despachar una instancia del controlador frontal:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 // Asumiendo que $view ha sido definido
 $viewRenderer = new Zend_Controller_Action_Helper_ViewRenderer($view);
 Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
@@ -374,7 +374,7 @@ Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
                 	Cualquier momento el processo bootstrap:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 $viewRenderer =
     Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
 $viewRenderer->setView($view);
@@ -383,18 +383,18 @@ $viewRenderer->setView($view);
         </itemizedlist>
 
         <para>
-        	Existen muchas vias para modificar <code>ViewRenderer</code>,
+        	Existen muchas vias para modificar <methodname>ViewRenderer</methodname>,
         	incluyendo la definición de diferentes scripts de vista a enviar, especificando 
         	reemplazantes para todos los elementos reemplazables de la dirección del script vista
         	(incluyendo el sufijo), eligiendo una respuesta nombrada segmento para 
         	utilizar y mas. Si no esta usando la convención modular de 
         	estructura de directorios, se puede asociar diferentes especificaciones 
-        	de direcciones con <code>ViewRenderer</code>.
+        	de direcciones con <methodname>ViewRenderer</methodname>.
         </para>
 
         <para>
 			Le animamos a adaptar el código para utilizar el
-            <code>ErrorHandler</code> y <code>ViewRenderer</code>, ya que son
+            <methodname>ErrorHandler</methodname> y <methodname>ViewRenderer</methodname>, ya que son
             ahora funcionalidad básica.
         </para>
     </sect2>
@@ -414,19 +414,19 @@ $viewRenderer->setView($view);
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>setRedirectCode()</code>; usa
+                    <methodname>setRedirectCode()</methodname>; usa
                     <classname>Zend_Controller_Action_Helper_Redirector::setCode()</classname>.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>setRedirectPrependBase()</code>; usa
+                    <methodname>setRedirectPrependBase()</methodname>; usa
                     <classname>Zend_Controller_Action_Helper_Redirector::setPrependBase()</classname>.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>setRedirectExit()</code>; usa
+                    <methodname>setRedirectExit()</methodname>; usa
                     <classname>Zend_Controller_Action_Helper_Redirector::setExit()</classname>.
                 </para>
             </listitem>
@@ -450,7 +450,7 @@ $viewRenderer->setView($view);
             sigue siendo el mismo:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 Zend_Controller_Front::run('/path/to/controllers');
 ]]></programlisting>
 
@@ -509,7 +509,7 @@ Zend_Controller_Front::run('/path/to/controllers');
                     han cambiado. la firma es ahora:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 final protected function _forward($action,
                                   $controller = null,
                                   $module = null,
@@ -517,11 +517,11 @@ final protected function _forward($action,
 ]]></programlisting>
 
                 <para>
-                	<code>$accion</code> es siempre necesaria; si ningún controlador es
+                	<methodname>$accion</methodname> es siempre necesaria; si ningún controlador es
                 	especificado, es asumida una acción en el actual controlador.
-                    <code>$module</code> es siempre ignorado a menos que
-                    <code>$controller</code> sea especificado. Por último, cualquier
-                    <code>$params</code> previsto será adjuntado a la
+                    <methodname>$module</methodname> es siempre ignorado a menos que
+                    <methodname>$controller</methodname> sea especificado. Por último, cualquier
+                    <methodname>$params</methodname> previsto será adjuntado a la
                     solicitud del objeto. Si no necesita el controlador o el
                     módulo, pero aún tienen que pasar los parámetros, basta con especificar
                     null para esos valores.
@@ -538,11 +538,11 @@ final protected function _forward($action,
         	seguir utilizando a cada uno en la siguiente manera:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 Zend_Controller_Front::run('/path/to/controllers');
 ]]></programlisting>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 /* -- crear una ruta -- */
 $router = new Zend_Controller_RewriteRouter();
 $router->addRoute('user',
@@ -563,9 +563,9 @@ $ctrl->dispatch();
 			Alentamos el uso del objeto Response para agregar contenido y
             cabeceras. Esto permitirá una mayor flexibilidad en el formato de salida intercambiando
             (por instancias, JSON o XML en lugar de XHTML) en sus aplicaciones.
-            Por defecto, el envío <code> distpach() </code> enviará la respuesta, enviando ambas
+            Por defecto, el envío <methodname> distpach() </methodname> enviará la respuesta, enviando ambas
             cabeceras y enviando cuanlquier contenido. También se puede tener el controlador front 
-            retorne la respuesta usando <code>returnResponse()</code>,
+            retorne la respuesta usando <methodname>returnResponse()</methodname>,
             y luego enviar la respuesta a través de su propia lógica. Una versión futura
             del controlador front puede hacer valer el uso de la respuesta a través de objetos mediante
             la salida de buffers.
@@ -593,20 +593,20 @@ $ctrl->dispatch();
                 <itemizedlist>
                     <listitem>
                         <para>
-                            Configurar <code>throwExceptions()</code> en el controlador
+                            Configurar <methodname>throwExceptions()</methodname> en el controlador
                             front:
                         </para>
-                        <programlisting role="php"><![CDATA[
+                         <programlisting language="php"><![CDATA[
 $front->throwExceptions(true);
 ]]></programlisting>
                     </listitem>
 
                     <listitem>
                         <para>
-                            Configurar <code>renderExceptions()</code> en la respuesta del 
+                            Configurar <methodname>renderExceptions()</methodname> en la respuesta del 
                             objeto:
                         </para>
-                        <programlisting role="php"><![CDATA[
+                         <programlisting language="php"><![CDATA[
 $response->renderExceptions(true);
 $front->setResponse($response);
 $front->dispatch();
@@ -641,18 +641,18 @@ echo $response;
                     	El constructor acepta ahora exactamente tres argumentos,
                         <classname> Zend_Controller_Request_Abstract $request</classname>
                         <classname> Zend_Controller_Response_Abstract $response</classname>
-                        y <code> array $ params (opcional) </code>.
+                        y <methodname> array $ params (opcional) </methodname>.
                         <classname> Zend_Controller_Action::__construct()</classname> usa
                         los argumentos para para configurar la petición, la respuesta, y propiedades
                         invokeArgs del objeto, y si se sobrecarga el
                         constructor se debe hacer lo mismo. Mejor aún, use
-                        el método <code>init()</code> para hacer cualquier configuración
+                        el método <methodname>init()</methodname> para hacer cualquier configuración
                         a la instancia, ya que este método es llamado como la acción 
                         final del constructor.
                     </para></listitem>
 
                     <listitem><para>
-                    	<code>run()</code>, ya no se define como definitivo, pero es
+                    	<methodname>run()</methodname>, ya no se define como definitivo, pero es
                         también no utilizado por el controlador front; su único
                         objetivo es para el uso de la clase como un controlador de página. Ello
                         ahora tiene dos argumentos opcionales, uno
@@ -661,28 +661,28 @@ echo $response;
                     </para></listitem>
 
                     <listitem><para>
-                    	<code>indexAction()</code>ya no necesita ser
+                    	<methodname>indexAction()</methodname>ya no necesita ser
                          definido, pero se recomienda como acción por defecto. Esto
                          permite utilizar RewriteRouter y la acción controladores para 
                          especificar los diferentes métodos de acción.
                     </para></listitem>
 
                     <listitem><para>
-                        <code>__call()</code> debería ser sobrecargado para manejar las
+                        <methodname>__call()</methodname> debería ser sobrecargado para manejar las
                         indefinidas acciones automaticamente.
                     </para></listitem>
 
                     <listitem><para>                    	
-						<code>_redirect ()</code> ahora toma un segundo opcional
+						<methodname>_redirect ()</methodname> ahora toma un segundo opcional
                         argumento, el código HTTP a retornar con la redirección, y
-                        un opcional tercer argumento, <code>$prependBase</code>,
+                        un opcional tercer argumento, <methodname>$prependBase</methodname>,
                         que puede indicar que la URL base registrada en la
                         solicitud del objeto debería ser añadido a la URL especificada.
                     </para></listitem>
 
                     <listitem>
                         <para>                        		
-							La propiedad <code>_action</code> ya no está configurada.
+							La propiedad <methodname>_action</methodname> ya no está configurada.
                             Esta propiedad fue un <classname> Zend_Controller_Dispatcher_Token </classname>,
                             el cual ya no existe en la actual encarnación.
                             El único propósito de la muestra era proporcionar
@@ -692,7 +692,7 @@ echo $response;
                             como sigue:
                         </para>
 
-                        <programlisting role="php"><![CDATA[
+                         <programlisting language="php"><![CDATA[
 // Recuperar las solicitud del nombre del controlador
 // El acceso ha sido a través: $this->_action->getControllerName().
 // El ejemplo siguiente usa getRequest(), aunque se pueda acceder
@@ -715,13 +715,13 @@ $foo = $this->_getParam('foo', 'default');
 
                     <listitem>
                         <para>
-                        	<code>noRouteAction()</code> ha sido eliminado. La
+                        	<methodname>noRouteAction()</methodname> ha sido eliminado. La
                             manera adecuada de manejar inexistentes métodos 
                             de acciones se desearia enrutarlos a una 
-                            acción por defecto utilizando <code>__call()</code>:
+                            acción por defecto utilizando <methodname>__call()</methodname>:
                         </para>
 
-                        <programlisting role="php"><![CDATA[
+                         <programlisting language="php"><![CDATA[
 public function __call($method, $args)
 {
     // If an unmatched 'Action' method was requested, pass on to the

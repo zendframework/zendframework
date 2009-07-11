@@ -8,13 +8,13 @@
         Muchas bibliotecas de Javascript con AJAX ofrecen funcionalidad para
         proporcionar autocompletado según la cual un selectlist de resultados
         potencialmente concordantes se visualiza a medida que el usuario tipea.
-        El ayudante <code>AutoComplete</code> pretende simplificar el retorno
+        El ayudante <methodname>AutoComplete</methodname> pretende simplificar el retorno
         de respuestas aceptables a esos métodos.
     </para>
 
     <para>
         Dado que no todas la bibliotecas JS implementan el autocompletado de
-        la misma manera, el ayudante <code>AutoComplete</code> ofrece algunas
+        la misma manera, el ayudante <methodname>AutoComplete</methodname> ofrece algunas
         funcionalidades abstractas de base necesarias para muchas bibliotecas,
         e implementaciones concretas para distintas bibliotecas.
         Los tipos de datos de retorno son generalmente o bien arrays de strings
@@ -26,7 +26,7 @@
         El uso básico para cada aplicación es el mismo:
     </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function barAction()
@@ -76,20 +76,20 @@ class FooController extends Zend_Controller_Action
 
     <itemizedlist>
         <listitem><para>
-                <code>disableLayouts()</code> puede ser utilizada para
+                <methodname>disableLayouts()</methodname> puede ser utilizada para
                 desactivar esquemas y a ViewRenderer. Típicamente, esto se
-                llama dentro de <code>prepareAutoCompletion()</code>.
+                llama dentro de <methodname>prepareAutoCompletion()</methodname>.
         </para></listitem>
 
         <listitem><para>
-                <code>encodeJson($data, $keepLayouts = false)</code>
+                <methodname>encodeJson($data, $keepLayouts = false)</methodname>
                 codificará datos a JSON, y opcionalmente habilitando o
                 deshabilitando esquemas. Típicamente, esto se llama dentro de
-                <code>prepareAutoCompletion()</code>.
+                <methodname>prepareAutoCompletion()</methodname>.
         </para></listitem>
 
         <listitem><para>
-                <code>prepareAutoCompletion($data, $keepLayouts = false)</code>
+                <methodname>prepareAutoCompletion($data, $keepLayouts = false)</methodname>
                 se utiliza para preparar datos en el formato necesario de la
                 respuesta para la aplicación concreta, opcionalmente los
                 esquemas pueden habilitarse o deshabilitarse.
@@ -97,25 +97,25 @@ class FooController extends Zend_Controller_Action
         </para></listitem>
 
         <listitem><para>
-                <code>sendAutoCompletion($data, $keepLayouts = false)</code>
+                <methodname>sendAutoCompletion($data, $keepLayouts = false)</methodname>
                 se utiliza para preparar datos en el formato necesario de la
                 respuesta para la aplicación concreta. Esta llama a
-                <code>prepareAutoCompletion()</code>, y entonces envía la
+                <methodname>prepareAutoCompletion()</methodname>, y entonces envía la
                 respuesta.
         </para></listitem>
 
         <listitem><para>
-                <code>direct($data, $sendNow = true, $keepLayouts =
-                    false)</code> se utiliza cuando se llama al ayudante como
+                <methodname>direct($data, $sendNow = true, $keepLayouts =
+                    false)</methodname> se utiliza cuando se llama al ayudante como
                     un método del ayudante intermediario. El flag
-                    <code>$sendNow</code> se utiliza para determinar si se debe
-                    llamar a <code>sendAutoCompletion()</code> o a
-                    <code>prepareAutoCompletion()</code>, respectivamente.
+                    <methodname>$sendNow</methodname> se utiliza para determinar si se debe
+                    llamar a <methodname>sendAutoCompletion()</methodname> o a
+                    <methodname>prepareAutoCompletion()</methodname>, respectivamente.
         </para></listitem>
     </itemizedlist>
 
     <para>
-        Actualmente, <code>AutoComplete</code> soporta las bibliotecas AJAX de
+        Actualmente, <methodname>AutoComplete</methodname> soporta las bibliotecas AJAX de
         Dojo y Scriptaculous.
     </para>
 
@@ -137,7 +137,7 @@ class FooController extends Zend_Controller_Action
             para su uso como almacenamiento:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 // dentro del controlador de acción:
 $this->_helper->autoCompleteDojo($data);
 ]]></programlisting>
@@ -166,7 +166,7 @@ $this->_helper->autoCompleteDojo($data);
                 TestNameReadStore.js, con el siguiente contenido:
             </para>
 
-            <programlisting role="javascript"><![CDATA[
+            <programlisting language="javascript"><![CDATA[
 dojo.provide("custom.TestNameReadStore");
 dojo.declare("custom.TestNameReadStore", dojox.data.QueryReadStore, {
     fetch:function (request) {
@@ -188,7 +188,7 @@ dojo.declare("custom.TestNameReadStore", dojox.data.QueryReadStore, {
                 queremos AutoCompletion:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 class TestController extends Zend_Controller_Action
 {
     protected $_form;
@@ -239,7 +239,7 @@ class TestController extends Zend_Controller_Action
                 punto final para el procesamiento de AutoCompletion:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 class TestController extends Zend_Controller_Action
 {
     // ...
@@ -275,14 +275,14 @@ class TestController extends Zend_Controller_Action
 ]]></programlisting>
 
             <para>
-                En nuestro <code>autocompleteAction()</code> hacemos una serie
+                En nuestro <methodname>autocompleteAction()</methodname> hacemos una serie
                 de cosas. En primer lugar, esperamos a asegurarnos de que
                 tengamos una petición post, y que existe un parámetro 'form'
                 establecido al valor 'ajax'; esto es simplemente para ayudar a
                 reducir preguntas espúreas a la acción.
                 A continuación, vamos a comprobar el parámetro 'test', y
                 compararlo contra nuestros datos. (Yo deliberadamente dejé de
-                lado la implementación de <code>getData()</code> aquí --
+                lado la implementación de <methodname>getData()</methodname> aquí --
                 podría ser cualquier tipo de fuente de datos). Por último,
                 enviamos nuestros aciertos a nuestro ayudante AutoCompletion.
             </para>
@@ -298,7 +298,7 @@ class TestController extends Zend_Controller_Action
                 Veamos el script de vista, el cual comenta los pasos:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 <?php // establecemos nuestro data store: ?>
 <div dojoType="custom.TestNameReadStore" jsId="testStore"
     url="<?php echo $this->baseUrl() ?>/unit-test/autocomplete/format/ajax"

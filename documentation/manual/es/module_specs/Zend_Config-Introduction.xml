@@ -43,7 +43,7 @@
             <classname>Zend_Config</classname>
             para utilizar una interfaz simple orientada a objetos:
         </para>
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 // Dado un array de datos de configuración
 $configArray = array(
     'webhost'  => 'www.example.com',
@@ -83,11 +83,11 @@ $db = Zend_Db::factory($config->database);
         Junto al acceso a valores de datos orientado a objetos,
         <classname>Zend_Config</classname>
         también tiene el método
-        <code>get()</code>
+        <methodname>get()</methodname>
         que devolverá el valor por defecto suministrado si el elemento
         de datos no existe. Por ejemplo:
     </para>
-    <programlisting role="php"><![CDATA[
+     <programlisting language="php"><![CDATA[
 $host = $config->database->get('host', 'localhost');
 ]]></programlisting>
     <example id="zend.config.introduction.example.file.php">
@@ -97,7 +97,7 @@ $host = $config->database->get('host', 'localhost');
             puramente PHP. El código siguiente ilustra cómo podemos conseguir
             esto fácilmente:
         </para>
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 // config.php
 return array(
     'webhost'  => 'www.example.com',
@@ -112,7 +112,7 @@ return array(
     )
 );
 ]]></programlisting>
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 // Lectura de la configuración
 $config = new Zend_Config(require 'config.php');
 

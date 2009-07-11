@@ -5,7 +5,7 @@
     <title>ActionStack</title>
 
     <para>
-        El ayudante <code>ActionStack</code> le permite empujar requerimientos al
+        El ayudante <methodname>ActionStack</methodname> le permite empujar requerimientos al
         <link linkend="zend.controller.plugins.standard.actionstack">ActionStack</link>
         plugin del front controller, el cual le ayuda efectivamente a crear
         una cola de acciones a ejecutar durante la solicitud.
@@ -17,8 +17,8 @@
         <title>Invocando al Ayudante ActionStack Inicializa el Plugin de ActionStack</title>
 
         <para>
-            Invocando al ayuudante <code>ActionStack</code> implicitamente
-            registra el plugin de <code>ActionStack</code> -- lo que significa
+            Invocando al ayuudante <methodname>ActionStack</methodname> implicitamente
+            registra el plugin de <methodname>ActionStack</methodname> -- lo que significa
             que no necesita registrar explícitamente el plugin de ActionStack
             para utilizar esta funcionalidad.
         </para>
@@ -34,7 +34,7 @@
             <classname>Zend_Controller_Action::_forward()</classname>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function barAction()
@@ -61,10 +61,10 @@ class FooController extends Zend_Controller_Action
 
         <para>
             A veces la naturaleza OOP de un objeto solicitud tiene más sentido;
-            puede pasar también tal objeto al ayudante <code>ActionStack</code>.
+            puede pasar también tal objeto al ayudante <methodname>ActionStack</methodname>.
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function barAction()

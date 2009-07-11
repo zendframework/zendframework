@@ -21,7 +21,7 @@
 
     <para>
         La propia distribución de Dojo puede encontrarse en el directorio 
-        <code>externals/dojo/</code> de la distribución de Zend Framework. 
+        <methodname>externals/dojo/</methodname> de la distribución de Zend Framework. 
         Esta es una distribución fuente, que incluye completamente los fuentes 
         javascript de Dojo, unidades de pruebas, y constructores de herramientas. 
         Puede hacer un symlink a su directorio javascript, copiarlo, o 

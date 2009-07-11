@@ -14,33 +14,33 @@
 
     <example id="zend.debug.dumping.example">
         <title>Ejemplo del método dump()</title>
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 
 Zend_Debug::dump($var, $label=null, $echo=true);
 ]]></programlisting>
     </example>
 
     <para>
-        El argumento <code>$var</code> especifica la expresión o variable sobre
+        El argumento <methodname>$var</methodname> especifica la expresión o variable sobre
         la cual el método <classname>Zend_Debug::dump()</classname> generará información.
     </para>
 
     <para>
-        El argumento boleano <code>$echo</code> especifica si la salida de
+        El argumento boleano <methodname>$echo</methodname> especifica si la salida de
         <classname>Zend_Debug::dump()</classname> es o no mostrada. Si es
-        <code>verdadera</code>, la salida es mostrada. A pesar del valor del
-        argumento <code>$echo</code>, el retorno de este método contiene la
+        <methodname>verdadera</methodname>, la salida es mostrada. A pesar del valor del
+        argumento <methodname>$echo</methodname>, el retorno de este método contiene la
         salida.
     </para>
 
     <para>
         Puede ser útil comprender que el método <classname>Zend_Debug::dump()</classname>
         envuelve la función de PHP
-        <ulink url="http://php.net/var_dump"><code>var_dump()</code></ulink>.
+        <ulink url="http://php.net/var_dump"><methodname>var_dump()</methodname></ulink>.
         Si el flujo de salida es detectado como una presentación de la web, la
-        salida de <code>var_dump()</code> es escapada usando
-        <ulink url="http://php.net/htmlspecialchars"><code>htmlspecialchars()</code></ulink>
-        y envuelta con el tag (X)HTML <code>pre</code>.
+        salida de <methodname>var_dump()</methodname> es escapada usando
+        <ulink url="http://php.net/htmlspecialchars"><methodname>htmlspecialchars()</methodname></ulink>
+        y envuelta con el tag (X)HTML <methodname>pre</methodname>.
     </para>
 
     <tip>
@@ -54,7 +54,7 @@ Zend_Debug::dump($var, $label=null, $echo=true);
             También considere el componente <link linkend="zend.log.overview">
             Zend_Log</link> escribiendo el código de depuración más
             permanente. Por ejemplo, puede utilizar el nivel de log de
-            <code>DEPURACIÓN</code> y el Stream log writer, para mostrar la
+            <methodname>DEPURACIÓN</methodname> y el Stream log writer, para mostrar la
             cadena de salida de <classname>Zend_Debug::dump()</classname>.
         </para>
     </tip>

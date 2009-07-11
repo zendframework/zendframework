@@ -11,11 +11,11 @@
         El almacenamiento en caché en Zend Framework se opera por
         interfaces, mientras que los registros de caché son almacenados
         a través de adapatadores del backend (
-        <code>Archivo</code>
+        <methodname>Archivo</methodname>
         ,
-        <code>Sqlite</code>
+        <methodname>Sqlite</methodname>
         ,
-        <code>Memcache</code>
+        <methodname>Memcache</methodname>
         ...) mediante un sistema flexible de documentos de identidad y
         etiquetas. Utilizando éstas, es fácil en el futuro eliminar
         determinados tipos de registro.(Ejemplo: "eliminar todos los
@@ -28,13 +28,13 @@
         específicas existen frontends de caché que extienden
         <classname>Zend_Cache_Core</classname>
         a conveniencia:
-        <code>Output</code>
+        <methodname>Output</methodname>
         ,
-        <code>File</code>
+        <methodname>File</methodname>
         ,
-        <code>Function</code>
+        <methodname>Function</methodname>
         y
-        <code>Class</code>
+        <methodname>Class</methodname>
         .
 
     </para>
@@ -47,13 +47,13 @@
             <classname>Zend_Cache::factory()</classname>
             ejemplifica objetos correctos y los une. En este primer
             ejemplo, usaremos el frontend
-            <code>Core</code>
+            <methodname>Core</methodname>
             junto con el backend
-            <code>File</code>
+            <methodname>File</methodname>
             .
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $frontendOptions = array(
    'lifetime' => 7200, // tiempo de vida de caché de 2 horas
    'automatic_serialization' => true
@@ -96,7 +96,7 @@ $cache = Zend_Cache::factory('Core',
             serializada.
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 // $cache initializada en el ejemplo anterior
 
 // Verificar si la cahce existe:
@@ -131,9 +131,9 @@ print_r($result);
             ‘Resaltamos’ las secciones en las que deseamos almacenar en
             caché la salida, mediante la adición de algunas condiciones lógicas,
             encapsulamos la sección dentro de los métodos
-            <code>start()</code>
+            <methodname>start()</methodname>
             y
-            <code>end()</code>
+            <methodname>end()</methodname>
             (esto se parece al primer ejemplo y es la estrategia
             fundamental para el almacenamiento en caché).
         </para>
@@ -141,12 +141,12 @@ print_r($result);
             Dentro, los datos de salida, como siempre – todas las salidas
             serán almacenadas en caché cuando se ordene la ejecución del
             método
-            <code>end()</code>
+            <methodname>end()</methodname>
             . En la siguiente ejecución, toda la sección se saltará a
             favor de la búsqueda de datos del caché (tanto tiempo como
             el registro del caché sea válido).
         </para>
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $frontendOptions = array(
    'lifetime' => 30,                   // tiempo de vida de caché de 30 segundos
    'automatic_serialization' => false  // éste es el valor por defecto
@@ -173,7 +173,7 @@ echo 'Esto no estará en caché nunca ('.time().').';
 ]]></programlisting>
         <para>
             Note que delineamos el resultado de
-            <code>time()</code>
+            <methodname>time()</methodname>
             dos veces; esto es algo dinámico para los propósitos de la
             demostración. Trate de ejecutarlo y entonces regenérelo
             muchas veces; notará que el primer número no cambia mientras
@@ -191,9 +191,9 @@ echo 'Esto no estará en caché nunca ('.time().').';
         <para>
             Cuando usamos <classname>Zend_Cache</classname>, ponemos atención a la importación
             del identificador caché (pasado a
-            <code>save()</code>
+            <methodname>save()</methodname>
             y
-            <code>start()</code>
+            <methodname>start()</methodname>
             ). Éste deberá ser único para cada recurso que se almacene
             en caché, de otra manera los registros almacenados en caché
             que no se vinculan podrían borrarse unos a otros, o peor

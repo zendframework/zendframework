@@ -12,7 +12,7 @@
         La respuesta a esta situación es utilizar rutas estáticas:
     </para>
 
-    <programlisting role="php"><![CDATA[
+     <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route_Static(
     'login',
     array('controller' => 'auth', 'action' => 'login')
@@ -21,8 +21,8 @@ $router->addRoute('login', $route);
 ]]></programlisting>
 
     <para>
-        La ruta anterior se comparará con una URL de <code>http://domain.com/login</code>,
-        y hará un dispatch a <code>AuthController::loginAction()</code>.
+        La ruta anterior se comparará con una URL de <methodname>http://domain.com/login</methodname>,
+        y hará un dispatch a <methodname>AuthController::loginAction()</methodname>.
     </para>
 
     <note id="zend.controller.router.routes.static.warning">
@@ -55,7 +55,7 @@ $router->addRoute('login', $route);
             bootstrapping:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $front->setParam('useDefaultControllerAlways', true);
 ]]></programlisting>
 

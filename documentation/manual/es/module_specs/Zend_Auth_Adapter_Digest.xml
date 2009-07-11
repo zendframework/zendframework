@@ -22,12 +22,12 @@
             <itemizedlist>
                 <listitem>
                     <para>
-                        apellido, tal como "<code>joe.user</code>"
+                        apellido, tal como "<methodname>joe.user</methodname>"
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        dominio, tal como "<code>Administrative Area</code>"
+                        dominio, tal como "<methodname>Administrative Area</methodname>"
                     </para>
                 </listitem>
                 <listitem>
@@ -37,7 +37,7 @@
                 </listitem>
             </itemizedlist>
             Los elementos anteriores están separados por dos puntos, como en el ejemplo siguiente (en el que 
-            la contraseña es "<code>somePassword</code>"):
+            la contraseña es "<methodname>somePassword</methodname>"):
         </para>
 
         <programlisting><![CDATA[
@@ -75,7 +75,7 @@ someUser:Some Realm:fde17b91c3a510ecbaf7dbd37f59d4f8
                     </para>
                 </listitem>
             </itemizedlist>
-            Estos parámetros deben ser establecidos antes de llamar a <code>authenticate()</code>.
+            Estos parámetros deben ser establecidos antes de llamar a <methodname>authenticate()</methodname>.
         </para>
 
     </sect2>
@@ -86,11 +86,11 @@ someUser:Some Realm:fde17b91c3a510ecbaf7dbd37f59d4f8
 
         <para>
             El adaptador de autenticación "Digest" devuelve un objeto <classname>Zend_Auth_Result</classname>, que ha sido rellenado
-            con la identidad como un array que tenga claves <code>realm</code> y <code>username</code>. Los respectivos valores del 
-            array asociados con esas claves correspondes con los valores fijados andes de llamar a <code>authenticate()</code>.
+            con la identidad como un array que tenga claves <methodname>realm</methodname> y <methodname>username</methodname>. Los respectivos valores del 
+            array asociados con esas claves correspondes con los valores fijados andes de llamar a <methodname>authenticate()</methodname>.
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $adapter = new Zend_Auth_Adapter_Digest($filename,
                                         $realm,
                                         $username,

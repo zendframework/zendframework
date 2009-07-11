@@ -22,10 +22,10 @@
             generación de código y podrá pasarle tanto la configuración adecuada 
             o configurarla después de la instanciación. Para generar el código, 
             simplemente haga "echo" del objeto o llame a su método 
-            <code>generate()</code>.
+            <methodname>generate()</methodname>.
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 
 // Pasando la configuración al constructor:
 $file = new Zend_CodeGenerator_Php_File(array(
@@ -65,7 +65,7 @@ file_put_contents('World.php', $file->generate());
             Ambos ejemplos anteriores mostrarán el mismo resultado:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 
 <?php
 
@@ -97,7 +97,7 @@ class World
             siguiente:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 
 $class = Zend_CodeGenerator_Php_Class::fromReflection(
     new Zend_Reflection_Class('World')
@@ -122,7 +122,7 @@ file_put_contents('World.php', $file->generate());
             El archivo de la clase resultante se vería así:       
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 
 <?php
 

@@ -11,7 +11,7 @@
 
         Su principal característica es que registra el <link
         linkend="zend.application.available-resources.frontcontroller">recurso
-        Front Controller</link>, y que el método <code>run()</code> primero
+        Front Controller</link>, y que el método <methodname>run()</methodname> primero
         comprueba esté definido un módulo por defecto y luego despacha el
         front controller.
     </para>

@@ -23,20 +23,20 @@
         <para>
             Para utilizar los ayudantes de vista de Dojo, necesitará decirle a 
             un objeto vista dónde encontrarlos. Puede hacerlo llamando a 
-            <code>addHelperPath()</code>:
+            <methodname>addHelperPath()</methodname>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
 ]]></programlisting>
 
         <para>
             Alternativamente, puede usar el método de 
-            <classname>Zend_Dojo</classname> <code>enableView()</code> 
+            <classname>Zend_Dojo</classname> <methodname>enableView()</methodname> 
             para que haga el trabajo por usted:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 Zend_Dojo::enableView($view);
 ]]></programlisting>
     </example>

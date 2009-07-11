@@ -103,38 +103,38 @@
                     </thead>
                     <tbody>
                         <row>
-                            <entry><code>accept_schemes</code></entry>
+                            <entry><methodname>accept_schemes</methodname></entry>
                             <entry>Si</entry>
                             <entry>
                                 Determina que tareas de autenticación acepta el adaptador del cliente. 
-                                Debe ser una lista separada por espacios que contengo <code>'basic'</code> y/o <code>'digest'</code>.
+                                Debe ser una lista separada por espacios que contengo <methodname>'basic'</methodname> y/o <methodname>'digest'</methodname>.
                             </entry>
                         </row>
                         <row>
-                            <entry><code>realm</code></entry>
+                            <entry><methodname>realm</methodname></entry>
                             <entry>Si</entry>
                             <entry>
                                 Establece el realm de autenticación; usernames debe ser único dentro de un determinado realm.
                             </entry>
                         </row>
                         <row>
-                            <entry><code>digest_domains</code></entry>
-                            <entry>Si, cuando <code>'accept_schemes'</code> contiene <code>'digest'</code></entry>
+                            <entry><methodname>digest_domains</methodname></entry>
+                            <entry>Si, cuando <methodname>'accept_schemes'</methodname> contiene <methodname>'digest'</methodname></entry>
                             <entry>
                                 Lista de URIs separadas por espacios para las cuales la misma información de autenticación es válida.
                                 No es necesario que todas las URIs apunten al mismo oservidor.
                             </entry>
                         </row>
                         <row>
-                            <entry><code>nonce_timeout</code></entry>
-                            <entry>Si, cuando <code>'accept_schemes'</code> contiene <code>'digest'</code></entry>
+                            <entry><methodname>nonce_timeout</methodname></entry>
+                            <entry>Si, cuando <methodname>'accept_schemes'</methodname> contiene <methodname>'digest'</methodname></entry>
                             <entry>
                                 Establece el número de segundos para los cuales el "nonce" es válido.
                                 Ver notas de abajo.
                             </entry>
                         </row>
                         <row>
-                            <entry><code>proxy_auth</code></entry>
+                            <entry><methodname>proxy_auth</methodname></entry>
                             <entry>No</entry>
                             <entry>
                                 Deshabilitado por defecto. Permite llevar a cabo la autenticación del Proxy, en lugar 
@@ -148,7 +148,7 @@
 
         <note>
             <para>
-                La implementación actual del <code>nonce_timeout</code> tiene algunos efectos colaterales interesantes. Este 
+                La implementación actual del <methodname>nonce_timeout</methodname> tiene algunos efectos colaterales interesantes. Este 
                 ajuste es supuesto para determinar la vida util válida para un determinado "nonce", o de manera efectiva el tiempo 
                 que una información de autenticación del cliente es aceptada. Actualmente, si se establece en 3600 (por ejemplo), 
                 hará que el adaptador indique al cliente las nuevas credenciales cada hora, a la hora en punto.
@@ -181,7 +181,7 @@
 
             <para>
                 El archivo "resolver" es una clase muy simple. Tiene una única propiedad que especifique un nombre de archivo, 
-                que también puede ser pasado al constructor. Su método <code>resolve()</code> recorre el archivo de texto,
+                que también puede ser pasado al constructor. Su método <methodname>resolve()</methodname> recorre el archivo de texto,
                 buscando una linea con el correspondiente username y realm. El formato del archivo de texto es similar a los 
                 archivos htpasswd de Apache:
                 <programlisting><![CDATA[
@@ -196,12 +196,12 @@
 
             <para>
                 Hay dos formas igualmente fácil de crear un archivo de "resolver":
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 $path     = 'files/passwd.txt';
 $resolver = new Zend_Auth_Adapter_Http_Resolver_File($path);
 ]]></programlisting>
                 o
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 $path     = 'files/passwd.txt';
 $resolver = new Zend_Auth_Adapter_Http_Resolver_File();
 $resolver->setFile($path);
@@ -219,7 +219,7 @@ $resolver->setFile($path);
 
         <para>
             En primer lugar, establecemos un array con los valores de configuración obligatorios:
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 $config = array(
     'accept_schemes' => 'basic digest',
     'realm'          => 'My Web Site',
@@ -228,14 +228,14 @@ $config = array(
 );
 ]]></programlisting>
 			Este array hará que el adaptador acepte la autenticación básica o "Digest", y requerirá un acceso autenticado 
-			a todas las áreas del sitio en <code>/members_only</code> y <code>/my_account</code>. El valor realm es normalmente 
-			mostrado por el navegador en el cuadro de dialogo contraseña. El <code>nonce_timeout</code>, por supuesto, se 
+			a todas las áreas del sitio en <methodname>/members_only</methodname> y <methodname>/my_account</methodname>. El valor realm es normalmente 
+			mostrado por el navegador en el cuadro de dialogo contraseña. El <methodname>nonce_timeout</methodname>, por supuesto, se 
 			comporta como se ha descrito anteriormente.
         </para>
 
         <para>
             A continuación, creamos el objeto Zend_Auth_Adapter_Http:
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 $adapter = new Zend_Auth_Adapter_Http($config);
 ]]></programlisting>
         </para>
@@ -243,7 +243,7 @@ $adapter = new Zend_Auth_Adapter_Http($config);
         <para>
             Ya que estamos soportando tanto la autenticación básica como la "Digest", necesitamos dos objetos diferentes 
             resolver. Tenga en cuenta que esto podría ser facilmente dos clases diferentes:
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 $basicResolver = new Zend_Auth_Adapter_Http_Resolver_File();
 $basicResolver->setFile('files/basicPasswd.txt');
 
@@ -258,7 +258,7 @@ $adapter->setDigestResolver($digestResolver);
         <para>
             Por último, realizamos la autenticación. El adaptador necesita una referencia a ambos objetos solicitud y 
             respuesta para hacer su trabajo:
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 assert($request instanceof Zend_Controller_Request_Http);
 assert($response instanceof Zend_Controller_Response_Http);
 

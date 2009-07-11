@@ -15,7 +15,7 @@
 
     <para>
         Una vez inicializado, el recurso asigna la propiedad del
-        <code>frontController</code> del bootstrap a la instancia
+        <methodname>frontController</methodname> del bootstrap a la instancia
         <classname>Zend_Controller_Front</classname>.
     </para>
 
@@ -26,57 +26,57 @@
 
     <itemizedlist>
         <listitem><para>
-            <code>controllerDirectory</code>: ya sea un valor de string
+            <methodname>controllerDirectory</methodname>: ya sea un valor de string
             especificando un único directorio controlador, o un array de
             pares de directorio módulo/controlador.
         </para></listitem>
 
         <listitem><para>
-            <code>moduleControllerDirectoryName</code>: un valor de string
+            <methodname>moduleControllerDirectoryName</methodname>: un valor de string
             indicando el subdirectorio bajo el cual un módulo contiene controladores.
         </para></listitem>
 
         <listitem><para>
-            <code>moduleDirectory</code>: directorio bajo el cual pueden
+            <methodname>moduleDirectory</methodname>: directorio bajo el cual pueden
             encontrarse los módulos.
         </para></listitem>
 
         <listitem><para>
-            <code>defaultControllerName</code>: Nombre base del controlador por
+            <methodname>defaultControllerName</methodname>: Nombre base del controlador por
             defecto (normalmente, "índex").
         </para></listitem>
 
         <listitem><para>
-            <code>defaultAction</code>: nombre base de la acción por defecto
+            <methodname>defaultAction</methodname>: nombre base de la acción por defecto
             (normalmente, "índex").
         </para></listitem>
 
         <listitem><para>
-            <code>defaultModule</code>: nombre base del módulo por defecto
+            <methodname>defaultModule</methodname>: nombre base del módulo por defecto
             (normalmente, "default").
         </para></listitem>
 
         <listitem><para>
-            <code>baseUrl</code>: base explícita a la URL de la aplicación
+            <methodname>baseUrl</methodname>: base explícita a la URL de la aplicación
             (normalmente auto-detect).
         </para></listitem>
 
         <listitem><para>
-            <code>plugins</code>: array con los nombres de los plugins de las
+            <methodname>plugins</methodname>: array con los nombres de los plugins de las
             clases de los Front Controllers.
             El recurso instanciará a cada clase (sin argumentos al constructor)
             y luego registra la instancia con el Front Controller.
         </para></listitem>
 
         <listitem><para>
-            <code>params</code>: array de pares clave/valor para registrarse con
+            <methodname>params</methodname>: array de pares clave/valor para registrarse con
             el front controller.
         </para></listitem>
     </itemizedlist>
 
     <para>
         Si se ingresa una clave no reconocida, ésta será registrada como un
-        parámetro de Front Controller pasándolo a <code>setParam()</code>.
+        parámetro de Front Controller pasándolo a <methodname>setParam()</methodname>.
     </para>
 
    
@@ -88,7 +88,7 @@
             el recurso Front Controller.
         </para>
 
-        <programlisting role="ini"><![CDATA[
+        <programlisting language="ini"><![CDATA[
 
 [production]
 resources.frontController.controllerDirectory = APPLICATION_PATH . "/controllers"
@@ -108,10 +108,10 @@ resources.frontController.env = APPLICATION_ENV
         <para>
             Una vez que el recurso de su Front Controller ha sido inicializado,
             se puede recuperar la instancia de Front Controller a través de la
-            propiedad <code>frontController</code> de su bootstrap.
+            propiedad <methodname>frontController</methodname> de su bootstrap.
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 
 $bootstrap->bootstrap('frontController');
 $front = $bootstrap->frontController;

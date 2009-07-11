@@ -16,26 +16,26 @@
         <itemizedlist>
             <listitem><para>
                     El nombre del módulo es accedido por 
-                <code>getModuleName()</code> y
-                <code>setModuleName()</code>.
+                <methodname>getModuleName()</methodname> y
+                <methodname>setModuleName()</methodname>.
             </para></listitem>
 
             <listitem><para>
                     El nombre del controlador es accedido por 
-                <code>getControllerName()</code> y
-                <code>setControllerName()</code>.
+                <methodname>getControllerName()</methodname> y
+                <methodname>setControllerName()</methodname>.
             </para></listitem>
 
             <listitem><para>
                     El nombre de la acción que llamar dentro del controlador es 
-                    accedido por <code>getActionName()</code> y
-                <code>setActionName()</code>.
+                    accedido por <methodname>getActionName()</methodname> y
+                <methodname>setActionName()</methodname>.
             </para></listitem>
 
             <listitem><para>
-                    Los parámetros accesibles por la acción son un array asociativo de pares clave/valor que son recuperados por <code>getParams()</code>
-                y configurados con <code>setParams()</code>, o configurados individualmente por
-                <code>getParam()</code> y <code>setParam()</code>.
+                    Los parámetros accesibles por la acción son un array asociativo de pares clave/valor que son recuperados por <methodname>getParams()</methodname>
+                y configurados con <methodname>setParams()</methodname>, o configurados individualmente por
+                <methodname>getParam()</methodname> y <methodname>setParam()</methodname>.
             </para></listitem>
         </itemizedlist>
 
@@ -43,7 +43,7 @@
                 Basado en el tipo de solicitud, puede haber más métodos disponibles.
                 La solicitud por defecto usada, <classname>Zend_Controller_Request_Http</classname>,
             por ejemplo, tiene métodos para recuperar la URI de la solicitud, ruta de la 
-            información, parámetros <code>$_GET</code> y <code>$_POST</code>,
+            información, parámetros <methodname>$_GET</methodname> y <methodname>$_POST</methodname>,
             etc.
         </para>
 
@@ -97,10 +97,10 @@
             <para>
                     Las supergloables específicas pueden ser accedidas usando un método público como
                     una alternativa. Por ejemplo, el valor original de
-                <code>$_POST['user']</code> puede ser accedido llamando a 
-                <code>getPost('user')</code> en la solicitud objeto. Esto 
-                incluye <code>getQuery()</code> para recuperar elementos
-                <code>$_GET</code>, y <code>getHeader()</code> para
+                <methodname>$_POST['user']</methodname> puede ser accedido llamando a 
+                <methodname>getPost('user')</methodname> en la solicitud objeto. Esto 
+                incluye <methodname>getQuery()</methodname> para recuperar elementos
+                <methodname>$_GET</methodname>, y <methodname>getHeader()</methodname> para
                 recuperar la solicitud de los encabezadores (headers).
             </para>
 
@@ -119,7 +119,7 @@
 
                 <para>
                         Como 1.5.0, se puede recuperar los datos sin procesar a través del
-                        método <code>getRawBody()</code>. Este método retorna falso
+                        método <methodname>getRawBody()</methodname>. Este método retorna falso
                         si los datos han sido enviados de esa manera, pero si no retorna el cuerpo
                         entero del post.
                 </para>
@@ -132,8 +132,8 @@
 
             <para>
                     Usted puede determinar parámetros de usuario en la solicitud objeto usando
-                    <code>setParam()</code> y recuperar los mismos despues usando
-                <code>getParam()</code>. El router hace uso de esta 
+                    <methodname>setParam()</methodname> y recuperar los mismos despues usando
+                <methodname>getParam()</methodname>. El router hace uso de esta 
                 funcionalidad para determinar parámetros correspondientes en la solicitud URI 
                 a la solicitud objeto.
             </para>
@@ -142,27 +142,27 @@
                 <title>getParam() Recupera mas que Parámetros de Usuario</title>
 
                 <para>
-                        En orden para hacer el mismo trabajo, <code>getParam()</code> recupera
+                        En orden para hacer el mismo trabajo, <methodname>getParam()</methodname> recupera
                         actualmente desde muchas fuentes. En orden de prioridad, estas 
-                        incluyen: parámetros de usuario determinados a través de <code>setParam()</code>,
-                    parámetros <code>GET</code>, y finalmente parámetros <code>POST</code>. 
+                        incluyen: parámetros de usuario determinados a través de <methodname>setParam()</methodname>,
+                    parámetros <methodname>GET</methodname>, y finalmente parámetros <methodname>POST</methodname>. 
                     Ser conciente de esto cuando se sacan datos a través de este
                     método.
                 </para>
 
                 <para>
                         Si se desea sacar solo desde parámetros se configura a través de
-                    <code>setParam()</code>, use <code>getUserParam()</code>.
+                    <methodname>setParam()</methodname>, use <methodname>getUserParam()</methodname>.
                 </para>
 
                 <para>
                         Además, a partir de 1.5.0, puede bloquear el parámetro que
-                    se buscará en las fuentes. <code>setParamSources()</code>
+                    se buscará en las fuentes. <methodname>setParamSources()</methodname>
                     le permite especificar un array vacío o un array con uno o
                     más de los valores '_GET' o '_POST', indicando que
                     fuente de parámetro se permite (por defecto, ambos son
                     permitidos); si se desea restringir el acceso a solamente '_GET'
-                    especificar <code>setParamSources (array('_GET'))</code>.
+                    especificar <methodname>setParamSources (array('_GET'))</methodname>.
                 </para>
             </note>
 
@@ -172,15 +172,15 @@
                         Si está usando Apache 404 handler para pasar 
                     If you are using Apache's 404 handler to pass incoming
                     requests to the front controller, or using a PT flag with
-                    rewrite rules, <code>$_SERVER['REDIRECT_URL']</code>
+                    rewrite rules, <methodname>$_SERVER['REDIRECT_URL']</methodname>
                     contains the URI you need, not
-                    <code>$_SERVER['REQUEST_URI']</code>. If you are using such
+                    <methodname>$_SERVER['REQUEST_URI']</methodname>. If you are using such
                     a setup and getting invalid routing, you should use the
                     <classname>Zend_Controller_Request_Apache404</classname> class instead
                     of the default Http class for your request object:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 $request = new Zend_Controller_Request_Apache404();
 $front->setRequest($request);
 ]]></programlisting>
@@ -205,16 +205,16 @@ $front->setRequest($request);
             </para>
 
             <para>
-                For example, if you keep your <code>index.php</code> in a
+                For example, if you keep your <methodname>index.php</methodname> in a
                 webserver subdirectory named
-                <code>/projects/myapp/index.php</code>, base URL (rewrite base)
-                should be set to <code>/projects/myapp</code>. This string will
+                <methodname>/projects/myapp/index.php</methodname>, base URL (rewrite base)
+                should be set to <methodname>/projects/myapp</methodname>. This string will
                 then be stripped from the beginning of the path before
                 calculating any route matches. This frees one from the necessity
                 of prepending it to any of your routes. A route of
-                <code>'user/:username'</code> will match URIs like
-                <code>http://localhost/projects/myapp/user/martel</code> and
-                <code>http://example.com/user/martel</code>.
+                <methodname>'user/:username'</methodname> will match URIs like
+                <methodname>http://localhost/projects/myapp/user/martel</methodname> and
+                <methodname>http://example.com/user/martel</methodname>.
             </para>
 
             <note>
@@ -229,7 +229,7 @@ $front->setRequest($request);
             <para>
                 Should base URL be detected incorrectly you can override it
                 with your own base path with the help of the
-                <code>setBaseUrl()</code> method of either the
+                <methodname>setBaseUrl()</methodname> method of either the
                 <classname>Zend_Controller_Request_Http</classname> class, or the
                 <classname>Zend_Controller_Front</classname> class. The easiest
                 method is to set it in <classname>Zend_Controller_Front</classname>,
@@ -237,7 +237,7 @@ $front->setRequest($request);
                 set a custom base URL:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 /**
  * Dispatch Request with custom base URL with Zend_Controller_Front.
  */
@@ -255,7 +255,7 @@ $response   = $controller->dispatch();
             <title>Determining the Request Method</title>
 
             <para>
-                <code>getMethod()</code> allows you to determine the HTTP
+                <methodname>getMethod()</methodname> allows you to determine the HTTP
                 request method used to request the current resource.
                 Additionally, a variety of methods exist that allow you to get
                 boolean responses when asking if a specific type of request has
@@ -263,12 +263,12 @@ $response   = $controller->dispatch();
             </para>
 
             <itemizedlist>
-                <listitem><para><code>isGet()</code></para></listitem>
-                <listitem><para><code>isPost()</code></para></listitem>
-                <listitem><para><code>isPut()</code></para></listitem>
-                <listitem><para><code>isDelete()</code></para></listitem>
-                <listitem><para><code>isHead()</code></para></listitem>
-                <listitem><para><code>isOptions()</code></para></listitem>
+                <listitem><para><methodname>isGet()</methodname></para></listitem>
+                <listitem><para><methodname>isPost()</methodname></para></listitem>
+                <listitem><para><methodname>isPut()</methodname></para></listitem>
+                <listitem><para><methodname>isDelete()</methodname></para></listitem>
+                <listitem><para><methodname>isHead()</methodname></para></listitem>
+                <listitem><para><methodname>isOptions()</methodname></para></listitem>
             </itemizedlist>
 
             <para>
@@ -283,8 +283,8 @@ $response   = $controller->dispatch();
             <para>
                 <classname>Zend_Controller_Request_Http</classname> has a rudimentary
                 method for detecting AJAX requests:
-                <code>isXmlHttpRequest()</code>. This method looks for an
-                HTTP request header <code>X-Requested-With</code> with the value
+                <methodname>isXmlHttpRequest()</methodname>. This method looks for an
+                HTTP request header <methodname>X-Requested-With</methodname> with the value
                 'XMLHttpRequest'; if found, it returns true.
             </para>
 
@@ -305,7 +305,7 @@ $response   = $controller->dispatch();
                 Most AJAX libraries allow you to send custom HTTP request
                 headers; if your library does not send this header, simply add
                 it as a request header to ensure the
-                <code>isXmlHttpRequest()</code> method works for you.
+                <methodname>isXmlHttpRequest()</methodname> method works for you.
             </para>
         </sect3>
     </sect2>
@@ -319,7 +319,7 @@ $response   = $controller->dispatch();
             basic, it defines the following methods:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 abstract class Zend_Controller_Request_Abstract
 {
     /**

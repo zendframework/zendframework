@@ -23,7 +23,7 @@
         atributos XML. 
         La llamada a esta función se hace como se muestra a continuación:
     </para>
-    <programlisting role="php"><![CDATA[
+     <programlisting language="php"><![CDATA[
 // la función fromXml simplemente toma un string conteniendo XML 
 // como entrada.
 $jsonContents = Zend_Json::fromXml($xmlStringContents, true);
@@ -59,7 +59,7 @@ $jsonContents = Zend_Json::fromXml($xmlStringContents, true);
         <classname>Zend_Json::fromXml()</classname>:
     </para>
 
-    <programlisting role="php"><![CDATA[
+     <programlisting language="php"><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
 <books>
     <book id="1">
@@ -87,7 +87,7 @@ $jsonContents = Zend_Json::fromXml($xmlStringContents, true);
         <classname>Zend_Json::fromXml()</classname>:
     </para>
 
-    <programlisting role="php"><![CDATA[
+     <programlisting language="php"><![CDATA[
 {
    "books" : {
       "book" : [ {

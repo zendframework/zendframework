@@ -21,16 +21,16 @@
 
     <para>
         El estado del objeto es determinado a través de las opciones de configuración pasadas al constructor
-        o el método decorador <code>setOptions()</code>. Cuando se crean
-        decoradores mediante funciones <code>addDecorator()</code> o métodos relacionados,
+        o el método decorador <methodname>setOptions()</methodname>. Cuando se crean
+        decoradores mediante funciones <methodname>addDecorator()</methodname> o métodos relacionados,
         las opciones pueden ser pasadas como argumentos al método. Esto puese ser usado para
         una ubicación especifica, un separador se usa entre el contenido pasado y el
         nuevo contenido generado y cualquier opción que el decorador soporte.
     </para>
 
     <para>
-        Antes de que el <code>render()</code> de cada decorador sea llamado, el
-        item actual es determinado en el decorador usando <code>setElement()</code>,
+        Antes de que el <methodname>render()</methodname> de cada decorador sea llamado, el
+        item actual es determinado en el decorador usando <methodname>setElement()</methodname>,
         dando al decorador conocimiento del item representado. Esto permite
         crear decoradores que sólo representan porciones especificas del item
         -- tal como etiquetas, el valor, mensajes de error, etc. Encadenando
@@ -44,8 +44,8 @@
         <para>
             Para configurar un decorador, pase un array de opciones o un
             objeto <classname>Zend_Config</classname> a este constructor, a un array
-            <code>setOptions()</code>, o a un objeto <classname>Zend_Config</classname>
-            <code>setConfig()</code>.
+            <methodname>setOptions()</methodname>, o a un objeto <classname>Zend_Config</classname>
+            <methodname>setConfig()</methodname>.
         </para>
 
         <para>
@@ -54,22 +54,22 @@
 
         <itemizedlist>
             <listitem><para>
-                    <code>placement</code>: La ubicación puede ser cualquiera de los dos 'append' o
+                    <methodname>placement</methodname>: La ubicación puede ser cualquiera de los dos 'append' o
                     'prepend' (caso insensitivo) e indica cualquier contenido
-                    pasado a <code>render()</code> será postpuesto o
+                    pasado a <methodname>render()</methodname> será postpuesto o
                     antepuesto respectivamente. En el caso de que el decorador
                     reemplace el contenido, esta configuración es ignorada. La configuración
                     por defecto es adjuntada.
             </para></listitem>
 
             <listitem><para>
-                    <code>separator</code>: El separator es usado entre el
-                    contenido pasado a <code>render()</code> y el nuevo contenido
+                    <methodname>separator</methodname>: El separator es usado entre el
+                    contenido pasado a <methodname>render()</methodname> y el nuevo contenido
                     generado por el decorador, o entre items generados por el
                     decorador (ejemplo FormElements usa el separador entre cada
                     item generado). En el caso que un decorador reemplace el
                     contenido, esta configuración puede ser ignorada. El valor por defecto
-                    es <code>PHP_EOL</code>.
+                    es <methodname>PHP_EOL</methodname>.
             </para></listitem>
         </itemizedlist>
 
@@ -80,39 +80,39 @@
 
         <itemizedlist>
             <listitem><para>
-                    <code>setOption($key, $value)</code>: determina una sola opción.
+                    <methodname>setOption($key, $value)</methodname>: determina una sola opción.
             </para></listitem>
 
             <listitem><para>
-                    <code>getOption($key)</code>: recuperar un solo valor de opción.
+                    <methodname>getOption($key)</methodname>: recuperar un solo valor de opción.
             </para></listitem>
 
             <listitem><para>
-                    <code>getOptions()</code>: recuperar todas las opciones.
+                    <methodname>getOptions()</methodname>: recuperar todas las opciones.
             </para></listitem>
 
             <listitem><para>
-                    <code>removeOption($key)</code>: eliminar una sola opción.
+                    <methodname>removeOption($key)</methodname>: eliminar una sola opción.
             </para></listitem>
 
             <listitem><para>
-                    <code>clearOptions()</code>: eliminar todas las opciones.
+                    <methodname>clearOptions()</methodname>: eliminar todas las opciones.
             </para></listitem>
         </itemizedlist>
 
         <para>
             Decoradores son diseñados para interactuar con varios
             tipos de clases <classname>Zend_Form</classname>: <classname>Zend_Form</classname>,
-            <classname>Zend_Form_Element</classname>, <code>Zend_Form_DisplayGroup</code>,
+            <classname>Zend_Form_Element</classname>, <methodname>Zend_Form_DisplayGroup</methodname>,
             y todas las clases derivan de ellas. El método
-            <code>setElement()</code> permite determinar el objeto del
-            decorador que esta actualmente trabajando con, y <code>getElement()</code>
+            <methodname>setElement()</methodname> permite determinar el objeto del
+            decorador que esta actualmente trabajando con, y <methodname>getElement()</methodname>
             es usado para recuperarlo.
         </para>
 
         <para>
-            Cada método decorador <code>render()</code> acepta una cadena
-            <code>$content</code>. Cuando el primer decorador es llamado, esta
+            Cada método decorador <methodname>render()</methodname> acepta una cadena
+            <methodname>$content</methodname>. Cuando el primer decorador es llamado, esta
             cadena esta tipicamente vacía, mientras las subsecuentes llamadas serán
             puestas. Basados en el tipo de decorador y en las opciones pasadas,
             el decorador ya sea reemplazará la cadena, antenpodrá la cadena
@@ -145,7 +145,7 @@
             siguiente:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 interface Zend_Decorator_Interface
 {
     public function __construct($options = null);
@@ -165,18 +165,18 @@ interface Zend_Decorator_Interface
         <para>
             Para hacerlo mas simple, simplemente puede extender
             <classname>Zend_Form_Decorator_Abstract</classname>, el cual implementa todos los métodos
-            excepto <code>render()</code>.
+            excepto <methodname>render()</methodname>.
         </para>
 
         <para>
             Como ejemplo, digamos que quiere reducir el número de
             decoradores que utiliza, y construir un decorador compuesto que se
             encargó de renderizar la etiqueta generadora, el elemento, cualquier
-            mensaje de error, y descripción en un <code>div</code> HTML.
+            mensaje de error, y descripción en un <methodname>div</methodname> HTML.
             Puede construir como un decorador compuesto como sigue:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 class My_Decorator_Composite extends Zend_Form_Decorator_Abstract
 {
     public function buildLabel()
@@ -266,7 +266,7 @@ class My_Decorator_Composite extends Zend_Form_Decorator_Abstract
             Puede entonces ubicarlo en el directorio del decorador:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 // para un elemento:
 $element->addPrefixPath('My_Decorator',
                         'My/Decorator/',
@@ -283,7 +283,7 @@ $form->addElementPrefixPath('My_Decorator',
             un elemento:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 // Sobreescribe los decoradores existentes con este otro:
 $element->setDecorators(array('Composite'));
 ]]></programlisting>
@@ -305,7 +305,7 @@ $element->setDecorators(array('Composite'));
             decorador 'Errores':
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 class My_Decorator_Errors
 {
     public function render($content = '')
@@ -350,12 +350,12 @@ class My_Decorator_Errors
         </para>
 
         <para>
-            Para hacer eso, simplemente <code>render[DecoratorName]()</code>, cuando
+            Para hacer eso, simplemente <methodname>render[DecoratorName]()</methodname>, cuando
             "[DecoratorName]" es el "nombre corto" de su decorador; opcionalmente,
             puede pasar en el contenido lo que usted quiera. Por ejemplo:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 // genera el elemento decorador label:
 echo $element->renderLabel();
 

@@ -17,16 +17,16 @@
 
     <itemizedlist>
         <listitem><para>
-            <code>adapter</code>: tipo de adaptador <classname>Zend_Db</classname>.
+            <methodname>adapter</methodname>: tipo de adaptador <classname>Zend_Db</classname>.
         </para></listitem>
 
         <listitem><para>
-            <code>params</code>: array asociativo de parámetros de
+            <methodname>params</methodname>: array asociativo de parámetros de
             configuración para utilizar al recuperar la instancia del adaptador.
         </para></listitem>
 
         <listitem><para>
-            <code>isDefaultTableAdapter</code>: Indica si establecer o no este
+            <methodname>isDefaultTableAdapter</methodname>: Indica si establecer o no este
             adaptador como el adaptador de tablas por defecto.
         </para></listitem>
     </itemizedlist>
@@ -38,7 +38,7 @@
             utilizada para iniciar el recurso DB.
         </para>
 
-        <programlisting role="ini"><![CDATA[
+        <programlisting language="ini"><![CDATA[
 
 [production]
 resources.db.adapter = "pdo_mysql"
@@ -64,17 +64,17 @@ resources.db.isDefaultTableAdapter = true
             recurso de plugin de DB desde su archivo de arranque:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 
 $resource = $bootstrap->getPluginResource('db');
 ]]></programlisting>
 
         <para>
             Una vez que tiene el recurso objeto, puede recuperar el
-            adaptador de DB usando el método <code>getDbAdapter()</code>:
+            adaptador de DB usando el método <methodname>getDbAdapter()</methodname>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 
 $db = $resource->getDbAdapter();
 ]]></programlisting>

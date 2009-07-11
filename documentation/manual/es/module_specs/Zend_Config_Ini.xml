@@ -14,10 +14,10 @@
         secciones de datos de configuración. Las jerarquías de datos de
         configuración son provistas separando las claves mediante el
         carácter punto (
-        <code>.</code>
+        <methodname>.</methodname>
         ). Una sección puede extender o heredar de otra sección
         indicando el nombre de la sección seguido de dos puntos (
-        <code>:</code>
+        <methodname>:</methodname>
         ) y el nombre de la sección desde la cual se quieren heredar los
         datos.
     </para>
@@ -27,21 +27,21 @@
             <classname>Zend_Config_Ini</classname>
             utiliza la función
             <ulink url="http://php.net/parse_ini_file">
-                <code>parse_ini_file()</code>
+                <methodname>parse_ini_file()</methodname>
             </ulink>
             de PHP. Por favor, revise esta documentación para observar
             sus comportamientos específicos, que se propagan a
             <classname>Zend_Config_Ini</classname>
             , tales como la forma en que los valores especiales:
-            <code>true</code>
+            <methodname>true</methodname>
             ,
-            <code>false</code>
+            <methodname>false</methodname>
             ,
-            <code>yes</code>
+            <methodname>yes</methodname>
             ,
-            <code>no</code>
+            <methodname>no</methodname>
             , y
-            <code>null</code>
+            <constant>NULL</constant>
             son manejados.
         </para>
     </note>
@@ -49,15 +49,15 @@
         <title>Separador de clave</title>
         <para>
             Por defecto, el carácter separador de clave es el punto (
-            <code>.</code>
+            <methodname>.</methodname>
             ). Puede ser reemplazado, no obstante,cambiando la clave de
-            <code>$options</code>
+            <methodname>$options</methodname>
             llamada
-            <code>'nestSeparator'</code>
+            <methodname>'nestSeparator'</methodname>
             al construir el objeto
             <classname>Zend_Config_Ini</classname>
             . Por ejemplo:
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 $options['nestSeparator'] = ':';
 $config = new Zend_Config_Ini('/path/to/config.ini',
                               'pruebas',
@@ -81,10 +81,10 @@ $config = new Zend_Config_Ini('/path/to/config.ini',
             sección de pruebas, a pesar de que éste no sería el caso
             para situaciones más complejas. Supongamos, entonces, que
             los siguientes datos de configuración están contenidos en
-            <code>/path/to/config.ini</code>
+            <methodname>/path/to/config.ini</methodname>
             :
         </para>
-        <programlisting role="ini"><![CDATA[
+        <programlisting language="ini"><![CDATA[
 ; Datos de configuración de la web de producción
 [produccion]
 webhost                  = www.example.com
@@ -107,7 +107,7 @@ database.params.password = devsecret
             archivo INI. Resulta fácil cargar estos datos especificando
             el archivo INI en la sección de la etapa de pruebas:
         </para>
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Ini('/path/to/config.ini', 'pruebas');
 
 echo $config->database->params->host;   // muestra "dev.example.com"
@@ -127,7 +127,7 @@ echo $config->database->params->dbname; // muestra "dbname"
                 <tbody>
                     <row>
                         <entry>
-                            <code>$filename</code>
+                            <methodname>$filename</methodname>
                         </entry>
                         <entry>
                             El archivo INI que se va a cargar.
@@ -135,7 +135,7 @@ echo $config->database->params->dbname; // muestra "dbname"
                     </row>
                     <row>
                         <entry>
-                            <code>$section</code>
+                            <methodname>$section</methodname>
                         </entry>
                         <entry>
                             La [sección] contenida en el archivo ini que
@@ -148,7 +148,7 @@ echo $config->database->params->dbname; // muestra "dbname"
                     </row>
                     <row>
                         <entry>
-                            <code>$options = false</code>
+                            <methodname>$options = false</methodname>
                         </entry>
                         <entry>
                             Array de opciones. Las siguientes claves

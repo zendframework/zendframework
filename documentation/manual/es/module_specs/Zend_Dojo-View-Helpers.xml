@@ -31,27 +31,27 @@
 
             <itemizedlist>
                 <listitem><para>
-                        <code>$id</code>: el nombre del contenedor o el DOM ID.
+                        <methodname>$id</methodname>: el nombre del contenedor o el DOM ID.
                 </para></listitem>
 
                 <listitem><para>
-                        <code>$content</code>: el contenido a envolver en el 
+                        <methodname>$content</methodname>: el contenido a envolver en el 
                         contenedor esquematizado.
                 </para></listitem>
 
                 <listitem><para>
-                        <code>$params</code> (opcional): parámetros específicos 
+                        <methodname>$params</methodname> (opcional): parámetros específicos 
                         de dijit. Básicamente, cualquier atributo no HTML que 
                         pueda utilizarse para configurar el esquema del 
                         contenedor dijit.
                 </para></listitem>
 
                 <listitem><para>
-                        <code>$attribs</code> (optional): cualquier de los otros  
+                        <methodname>$attribs</methodname> (optional): cualquier de los otros  
                         atributos HTML que deberían utilizarse para mostrar el 
                         contenedor div. Si se pasa la clave 'id' en este 
                         array, será utilizada para el elemento DOM id del form, 
-                        y <code>$id</code> será utilizado por su nombre.
+                        y <methodname>$id</methodname> será utilizado por su nombre.
                 </para></listitem>
             </itemizedlist>
 
@@ -78,17 +78,17 @@
 
             <itemizedlist>
                 <listitem><para>
-                        <code>$id</code>: el nombre del contenedor o el DOM ID.
+                        <methodname>$id</methodname>: el nombre del contenedor o el DOM ID.
                 </para></listitem>
 
                 <listitem><para>
-                        <code>$attribs</code> (opcional): cualquier otro de los 
+                        <methodname>$attribs</methodname> (opcional): cualquier otro de los 
                         atributos HTML que deberían ser utilizados para mostrar 
                         el div del contenedor.
                 </para></listitem>
 
                 <listitem><para>
-                        <code>$content</code> (opcional): el contenido a envolver 
+                        <methodname>$content</methodname> (opcional): el contenido a envolver 
                         en el form. Si no se pasa ninguno, se utilizará un string 
                         vacío.
                 </para></listitem>
@@ -96,7 +96,7 @@
 
             <para>
                 El orden de los argumentos varía de los demás dijits a fin de 
-                mantener la compatibilidad con el standard <code>form()</code> 
+                mantener la compatibilidad con el standard <methodname>form()</methodname> 
                 del ayudante de vista.
             </para>
         </listitem>
@@ -112,26 +112,26 @@
 
             <itemizedlist>
                 <listitem><para>
-                        <code>$id</code>: el nombre del elemento o el DOM ID.
+                        <methodname>$id</methodname>: el nombre del elemento o el DOM ID.
                 </para></listitem>
 
                 <listitem><para>
-                        <code>$value</code> (opcional): el valor actual de ese 
+                        <methodname>$value</methodname> (opcional): el valor actual de ese 
                         elemento.
                 </para></listitem>
 
                 <listitem><para>
-                        <code>$params</code> (opcional): parámetros específicos 
+                        <methodname>$params</methodname> (opcional): parámetros específicos 
                         de dijit. Básicamente, cualquier atributo no HTML que 
                         pueda utilizarse para configurar un dijit.
                 </para></listitem>
 
                 <listitem><para>
-                        <code>$attribs</code> (opcional): cualquiera de los otros 
+                        <methodname>$attribs</methodname> (opcional): cualquiera de los otros 
                         atributos adicionales HTML que deberían ser utilizados 
                         para mostrar el dijit. Si se pasa la clave 'id' en este  
                         array, será utilizado por el elemento DOM id del form, 
-                        y <code>$id</code> será utilizado por su nombre.
+                        y <methodname>$id</methodname> será utilizado por su nombre.
                 </para></listitem>
             </itemizedlist>
 
@@ -150,7 +150,7 @@
     <example id="zend.dojo.view.dijit.prefixpath">
         <title>Registrando el Prefijo del Path al Ayudante de Vista de Dojo</title>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
 ]]></programlisting>
     </example>
@@ -168,11 +168,11 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
 
         <para>
             Todos los elementos de los esquemas dijit tienen la firma 
-            <code>string ($id = null, $content = '', array $params =
-                array(), array $attribs = array())</code>. En todos los casos, 
+            <methodname>string ($id = null, $content = '', array $params =
+                array(), array $attribs = array())</methodname>. En todos los casos, 
             si no pasa argumentos, será devuelto el mismo objeto ayudante. 
-            Esto le da acceso a los métodos <code>captureStart()</code> y
-            <code>captureEnd()</code>, que permiten capturar contenido en 
+            Esto le da acceso a los métodos <methodname>captureStart()</methodname> y
+            <methodname>captureEnd()</methodname>, que permiten capturar contenido en 
             lugar de pasarlo al esquema del contenedor.
         </para>
 
@@ -185,7 +185,7 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
                     un cuadro, se expandirá y mostrará ese cuadro en particular.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 <?php echo $view->accordionContainer(
     'foo',
     $content,
@@ -205,7 +205,7 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
                     Para su uso en AccordionContainer.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 <?php echo $view->accordionPane(
     'foo',
     $content,
@@ -227,7 +227,7 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
                     ver en una aplicación tradicional.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 <?php echo $view->borderContainer(
     'foo',
     $content,
@@ -247,7 +247,7 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
                     Usarlo dentro de cualquier contenedor excepto AccordionContainer.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 <?php echo $view->contentPane(
     'foo',
     $content,
@@ -270,7 +270,7 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
                     BorderContainer.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 <?php echo $view->splitContainer(
     'foo',
     $content,
@@ -294,7 +294,7 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
                     o funcionalidades a ser revelados uno a uno.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 <?php echo $view->stackContainer(
     'foo',
     $content,
@@ -314,7 +314,7 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
                     a un lado para cambiar entre ellos.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 <?php echo $view->tabContainer(
     'foo',
     $content,
@@ -335,10 +335,10 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>captureStart($id, array $params = array(), array $attribs = array())</code>:
+                    <methodname>captureStart($id, array $params = array(), array $attribs = array())</methodname>:
                     inicia la captura del contenido a incluir en un contenedor.
-                    <code>$params</code> hace referencia a dijit params para 
-                    utilizar con el contenedor, mientras que <code>$attribs</code> 
+                    <methodname>$params</methodname> hace referencia a dijit params para 
+                    utilizar con el contenedor, mientras que <methodname>$attribs</methodname> 
                     se refiere a cualquier atributo general HTML a utilizar.
                 </para>
 
@@ -350,10 +350,10 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
 
             <listitem>
                 <para>
-                    <code>captureEnd($id)</code>:
+                    <methodname>captureEnd($id)</methodname>:
                     finalizar la captura del contenido a incluir en un contenedor.
-                    <code>$id</code> debe referirse a un id anteriormente 
-                    utilizado con la llamada <code>captureStart()</code>. 
+                    <methodname>$id</methodname> debe referirse a un id anteriormente 
+                    utilizado con la llamada <methodname>captureStart()</methodname>. 
                     Regresa el string representando al contenedor y su contenido, 
                     como si simplemente pasara el contenido al ayudante mismo.
                 </para>
@@ -369,7 +369,7 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
                 lograr efectos complejos de diseño.
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 $view->borderContainer()->captureStart('masterLayout',
                                        array('design' => 'headline'));
 
@@ -420,8 +420,8 @@ echo $view->borderContainer()->captureEnd('masterLayout');
         <para>
             Los siguientes elementos de dijit form están disponibles en Zend 
             Framework. Excepto cuando se señaló que todos tienen la firma
-            <code>string ($id,$value = '', array $params = array(), 
-            array $attribs = array())</code>.
+            <methodname>string ($id,$value = '', array $params = array(), 
+            array $attribs = array())</methodname>.
         </para>
 
         <itemizedlist>
@@ -431,7 +431,7 @@ echo $view->borderContainer()->captureEnd('masterLayout');
                     botón de form.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 <?php echo $view->button(
     'foo',
     'Show Me!',
@@ -444,7 +444,7 @@ echo $view->borderContainer()->captureEnd('masterLayout');
                 <para>
                     <emphasis>CheckBox</emphasis>: dijit.form.CheckBox. 
                     Muestra un checkbox. Acepta opcionalmente un quinto 
-                    argumento, el array <code>$checkedOptions</code>, que puede 
+                    argumento, el array <methodname>$checkedOptions</methodname>, que puede 
                     contener:
                 </para>
 
@@ -461,11 +461,11 @@ echo $view->borderContainer()->captureEnd('masterLayout');
                 </itemizedlist>
 
                 <para>
-                    Si <code>$checkedOptions</code> no fueron suministradas, se
+                    Si <methodname>$checkedOptions</methodname> no fueron suministradas, se
                     asume 1 y 0.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 <?php echo $view->checkBox(
     'foo',
     'bar',
@@ -484,10 +484,10 @@ echo $view->borderContainer()->captureEnd('masterLayout');
                     La diferencia fundamental es que puede escribir una opción 
                     que no está en la lista de las opciones disponibles, y que 
                     todavía considera válido el input. Opcionalmente acepta un quinto 
-                    argumento, un array asociativo <code>$options</code>; si lo 
-                    hay, ComboBox será presentado como un <code>select</code>. 
+                    argumento, un array asociativo <methodname>$options</methodname>; si lo 
+                    hay, ComboBox será presentado como un <methodname>select</methodname>. 
                     Note también que la <emphasis>label values</emphasis> del 
-                    array <code>$options</code> será devuelto al form -- y no 
+                    array <methodname>$options</methodname> será devuelto al form -- y no 
                     los valores en si mismos.
                 </para>
 
@@ -495,12 +495,12 @@ echo $view->borderContainer()->captureEnd('masterLayout');
                     Alternativamente, puede pasar información sobre un datastrore 
                     dojo.data para utilizar con el elemento. 
                     Si la hay, el ComboBox será presentado como un texto 
-                    <code>input</code>, y traerá sus opciones vía ese datastore.
+                    <methodname>input</methodname>, y traerá sus opciones vía ese datastore.
                 </para>
 
                 <para>
                     Para especificar un datastore, proporcionar una de las 
-                    siguientes <code>$params</code> combinaciones de claves:
+                    siguientes <methodname>$params</methodname> combinaciones de claves:
                 </para>
 
                 <itemizedlist>
@@ -557,7 +557,7 @@ echo $view->borderContainer()->captureEnd('masterLayout');
                     </listitem>
                 </itemizedlist>
 
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 // Como un elemento select:
 echo $view->comboBox(
     'foo',
@@ -598,7 +598,7 @@ echo $view->comboBox(
                     parámetros dijit válidos para ValidationTextBox y TextBox.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 echo $view->currencyTextBox(
     'foo',
     '$25.00',
@@ -621,7 +621,7 @@ echo $view->currencyTextBox(
                         que puede hacerlo llamando a:
                     </para>
 
-                    <programlisting role="php"><![CDATA[
+                     <programlisting language="php"><![CDATA[
 $view->headMeta()->appendHttpEquiv('Content-Type',
                                    'text/html; charset=utf-8');
 ]]></programlisting>
@@ -629,7 +629,7 @@ $view->headMeta()->appendHttpEquiv('Content-Type',
                     <para>
                         Por supuesto, esto significa que necesitará para 
                         garantizar que el marcador de posición 
-                        <code>headMeta()</code> esté dentro de una sentencia 
+                        <methodname>headMeta()</methodname> esté dentro de una sentencia 
                         "echo" de PHP en su script.
                     </para>
                 </note>
@@ -645,7 +645,7 @@ $view->headMeta()->appendHttpEquiv('Content-Type',
                     disponibles para ValidationTextBox o TextBox.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 echo $view->dateTextBox(
     'foo',
     '2008-07-11',
@@ -658,14 +658,14 @@ echo $view->dateTextBox(
                 <para>
                     <emphasis>Editor</emphasis>: dijit.Editor. Proporciona un 
                     editor WYSIWYG mediante el cual los usuarios pueden crear o 
-                    editar el contenido. <code>dijit.Editor</code> es un 
+                    editar el contenido. <methodname>dijit.Editor</methodname> es un 
                     editor pluggable y extensible, con una variedad de parámetros 
                     que puede utilizar para personalización; para más detalles vea 
                     <ulink url="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/advanced-editing-and-display/editor-rich-text">la 
                     documentación de dijit.Editor</ulink>.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 echo $view->editor('foo');
 ]]></programlisting>
             </listitem>
@@ -789,12 +789,12 @@ echo $view->editor('foo');
                     <listitem><para>
                         <emphasis>attribs</emphasis> (opcional): atributos HTML 
                         para utilizar con las reglas/etiquetas. Esto debería 
-                        seguir el formato de opción <code>params</code> y ser 
+                        seguir el formato de opción <methodname>params</methodname> y ser 
                         un array asociativo con las claves 'container' y 'labels'.
                     </para></listitem>
                 </itemizedlist>
 
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 echo $view->horizontalSlider(
     'foo',
     1,
@@ -861,7 +861,7 @@ echo $view->horizontalSlider(
                     decrementará el número giratorio.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 echo $view->numberSpinner(
     'foo',
     5,
@@ -886,7 +886,7 @@ echo $view->numberSpinner(
                     en contra de las restricciones dadas. 
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 echo $view->numberTextBox(
     'foo',
     5,
@@ -910,7 +910,7 @@ echo $view->numberTextBox(
                     permitir la validación del lado del cliente. 
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 echo $view->passwordTextBox(
     'foo',
     '',
@@ -935,13 +935,13 @@ echo $view->passwordTextBox(
 
                 <para>
                     RadioButton acepta un cuarto argumento como opción,
-                    <code>$options</code>, un array asociativo de pares 
+                    <methodname>$options</methodname>, un array asociativo de pares 
                     valor/etiqueta utilizado como opciones de radio. 
-                    También puede pasar estos como la clave <code>options</code> 
-                    de <code>$attribs</code>. 
+                    También puede pasar estos como la clave <methodname>options</methodname> 
+                    de <methodname>$attribs</methodname>. 
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 echo $view->radioButton(
     'foo',
     'bar',
@@ -962,11 +962,11 @@ echo $view->radioButton(
                     Estos actuarán como textareas normales, pero se estilizan  
                     usando el tema actual de dijit. No necesita especificar los 
                     atributos ya sea de las filas o de las columnas; 
-                    use <code>ems</code> o porcentajes del ancho y del alto en 
+                    use <methodname>ems</methodname> o porcentajes del ancho y del alto en 
                     su lugar.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 echo $view->simpleTextarea(
     'foo',
     'Start writing here...',
@@ -994,7 +994,7 @@ echo $view->simpleTextarea(
                     regla de estilo.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 echo $view->textarea(
     'foo',
     'Start writing here...',
@@ -1023,7 +1023,7 @@ echo $view->textarea(
                     los parámetros 'size' y 'maxLength'.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 echo $view->textBox(
     'foo',
     'some text',
@@ -1050,7 +1050,7 @@ echo $view->textBox(
                     visible de veces en disponibilidad.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 echo $view->timeTextBox(
     'foo',
     '',
@@ -1103,7 +1103,7 @@ echo $view->timeTextBox(
                     </para></listitem>
                 </itemizedlist>
 
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 echo $view->validationTextBox(
     'foo',
     '',
@@ -1131,11 +1131,11 @@ echo $view->validationTextBox(
             personalizados, o utilizando dijits experimentales de Dojox. 
             Si bien Zend Framework no puede apoyar a todos los dijit directamente, 
             si proporciona algún apoyo rudimentario para tipos dijit 
-            arbitrarios vía el ayudante de vista <code>CustomDijit</code>.
+            arbitrarios vía el ayudante de vista <methodname>CustomDijit</methodname>.
         </para>
 
         <para>
-            La API del ayudante de vista <code>CustomDijit</code> es exactamente 
+            La API del ayudante de vista <methodname>CustomDijit</methodname> es exactamente 
             lo que cualquier otro dijit es, con una diferencia importante: 
             el tercer argumento de "params" <emphasis>debe</emphasis> contener 
             el atributo "dojotype". El valor de este atributo debe ser la clase 
@@ -1143,11 +1143,11 @@ echo $view->validationTextBox(
         </para>
 
         <para>
-            <code>CustomDijit</code> extiende la base del ayudante de vista 
-            <code>DijitContainer</code>, que también le permite capturar el 
+            <methodname>CustomDijit</methodname> extiende la base del ayudante de vista 
+            <methodname>DijitContainer</methodname>, que también le permite capturar el 
             contenido (utilizando el par de métodos 
-            <code>captureStart()</code>/<code>captureEnd()</code>). 
-            <code>captureStart()</code> también espera que pase el atributo 
+            <methodname>captureStart()</methodname>/<methodname>captureEnd()</methodname>). 
+            <methodname>captureStart()</methodname> también espera que pase el atributo 
             "dojoType" a su argumento "params".
         </para>
 
@@ -1155,19 +1155,19 @@ echo $view->validationTextBox(
             <title>Usando CustomDijit para mostrar un dojox.layout.ContentPane</title>
 
             <para>
-                <code>dojox.layout.ContentPane</code> es la siguiente generación 
-                de iteración de <code>dijit.layout.ContentPane</code>, y proporciona 
+                <methodname>dojox.layout.ContentPane</methodname> es la siguiente generación 
+                de iteración de <methodname>dijit.layout.ContentPane</methodname>, y proporciona 
                 un superconjunto de capacidades de esa clase. 
                 Hasta que la funcionalidad se estabilice, seguirá viviendo en Dojox. 
                 Sin embargo, si quiere utilizarlo hoy en Zend Framework, puede 
-                hacerlo, utilizando el ayudante de vista <code>CustomDijit</code>.
+                hacerlo, utilizando el ayudante de vista <methodname>CustomDijit</methodname>.
             </para>
 
             <para>
                 Para lo más básico, puede hacer lo siguiente:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 <?php echo $this->customDijit(
     'foo',
     $content,
@@ -1181,11 +1181,11 @@ echo $view->validationTextBox(
 
             <para>
                 Si quiere capturar el contenido en su lugar, simplemente use el 
-                método <code>captureStart()</code>, y pase el "DojoType" al 
+                método <methodname>captureStart()</methodname>, y pase el "DojoType" al 
                 argumento de "params":
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 <?php $this->customDijit()->captureStart(
     'foo',
     array(
@@ -1199,14 +1199,14 @@ This is the content of the pane
 ]]></programlisting>
 
             <para>
-                Fácilmente puede extender también <code>CustomDijit</code> para 
+                Fácilmente puede extender también <methodname>CustomDijit</methodname> para 
                 crear apoyo para sus propios dijits personalizados. 
-                Como ejemplo, si extiende <code>dijit.layout.ContentPane</code> 
-                para crear su propia clase <code>foo.ContentPane</code>, puede 
+                Como ejemplo, si extiende <methodname>dijit.layout.ContentPane</methodname> 
+                para crear su propia clase <methodname>foo.ContentPane</methodname>, puede 
                 crear el siguiente ayudante de apoyo:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 class My_View_Helper_FooContentPane
     extends Zend_Dojo_View_Helper_CustomDijit
 {
@@ -1223,7 +1223,7 @@ class My_View_Helper_FooContentPane
 
             <para>
                 Mientras que su dijit personalizado siga la misma base API que 
-                los dijits oficiales, utilizar o extender <code>CustomDijit</code> 
+                los dijits oficiales, utilizar o extender <methodname>CustomDijit</methodname> 
                 debería funcionar correctamente.
             </para>
         </example>

@@ -13,7 +13,7 @@
         través del anidamiento de elementos XML bajo los elementos a nivel de
         sección. El contenido de un elemento XML a nivel de hoja corresponde al
         valor de un dato de configuración. La herencia de sección está permitida
-        por un atributo XML especial llamado <code>extends</code>, y el valor de
+        por un atributo XML especial llamado <methodname>extends</methodname>, y el valor de
         este atributo se corresponde con la sección de la cual los datos son
         heredados por la sección extendida..
     </para>
@@ -39,9 +39,9 @@
          producción heredando de la sección de pruebas, a pesar de que éste no
          sería el caso para situaciones más complejas. Suponga, pues, que los
          datos de configuración siguientes están contenidos
-            en <code>/ruta/de/config.xml</code>:
+            en <methodname>/ruta/de/config.xml</methodname>:
         </para>
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <?xml version="1.0"?>
 <configdata>
     <production>
@@ -73,7 +73,7 @@
             sencilla cargar estos datos, especificando el archivo XML y la
             sección de pruebas:
         </para>
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Xml('/ruta/de/config.xml', 'pruebas');
 
 echo $config->database->params->host;   // muestra "dev.example.com"
@@ -85,13 +85,13 @@ echo $config->database->params->dbname; // muestra "dbname"
         <para>
             Zend_Config_Xml también soporta dos formas adicionales de definir
             nodos en la configuración.  Ambas hacen uso de atributos. Dado que
-            los atributos <code>extends</code> y <code>value</code> son palabras
+            los atributos <methodname>extends</methodname> y <methodname>value</methodname> son palabras
             reservadas (la última por la segunda manera de usar atributos),
             pueden no ser utilizadas.
                   La primera manera de utilizar atributos es añadir atributos en un
             nodo padre, el cual será interpretado como hijo de ese nodo:
         </para>
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <?xml version="1.0"?>
 <configdata>
     <production webhost="www.example.com">
@@ -110,9 +110,9 @@ echo $config->database->params->dbname; // muestra "dbname"
         La otra forma no reduce la configuración, sino que permite mantenerla de
         forma más fácil dado que no es necesario escribir el nombre de la
         etiqueta dos veces. Simplemente, cree una etiqueta vacía con el valor en
-        el atributo <code>value</code>:
+        el atributo <methodname>value</methodname>:
         </para>
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <?xml version="1.0"?>
 <configdata>
     <production>
@@ -145,9 +145,9 @@ echo $config->database->params->dbname; // muestra "dbname"
             <classname>Zend_Config_Xml</classname> is able to load an XML string directly,
             such as that retrieved from a database. The string is passed
             as the first parameter to the constructor and must start with the
-            characters <code>'&lt;?xml'</code>:
+            characters <methodname>'&lt;?xml'</methodname>:
         </para>
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 $string = <<<EOT
 <?xml version="1.0"?>
 <config>

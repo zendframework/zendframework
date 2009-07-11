@@ -18,12 +18,12 @@
             mostrar el contenido. Las llamadas de retorno deben especificarse a través
             de la opción 'callback' pasada en la configuración del decorador, y pueden
             ser de cualquier valor de llamada de retorno PHP. Los Callbacks deben
-            aceptar tres argumentos: <code>$content</code> (el contenido original
-            enviado al decorador), <code>$element</code> (el objeto que se está decorando),
-            y un array de <code>$options</code>. Un callback de ejemplo sería:
+            aceptar tres argumentos: <methodname>$content</methodname> (el contenido original
+            enviado al decorador), <methodname>$element</methodname> (el objeto que se está decorando),
+            y un array de <methodname>$options</methodname>. Un callback de ejemplo sería:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 class Util
 {
     public static function label($content, $element, array $options)
@@ -34,8 +34,8 @@ class Util
 ]]></programlisting>
 
         <para>
-            Esta llamada de retorno se especificaría como <code>array('Util',
-                'label')</code>, y generaría un (mal) código HTML para
+            Esta llamada de retorno se especificaría como <methodname>array('Util',
+                'label')</methodname>, y generaría un (mal) código HTML para
             la etiqueta. El decorador Callback reemplazará, antepondrá o postpondrá
             el contenido original con el que devuelva.
         </para>
@@ -54,7 +54,7 @@ class Util
         <para>
             El decorador Captcha se usa junto con el <link
                 linkend="zend.form.standardElements.captcha">elemento de formulario Captcha</link>. Utiliza el método
-            <code>render()</code> del adaptador del captcha para generar la salida.
+            <methodname>render()</methodname> del adaptador del captcha para generar la salida.
         </para>
 
         <para>
@@ -71,26 +71,26 @@ class Util
 
         <para>
             El decorador Description puede ser usado para mostrar un conjunto de descripciones
-            de un elemento <classname>Zend_Form</classname>, <code>Zend_Form_Element</code>, o
+            de un elemento <classname>Zend_Form</classname>, <methodname>Zend_Form_Element</methodname>, o
            <classname>Zend_Form_DisplayGroup</classname>; toma la descripción usando el método
-            <code>getDescription()</code> del objeto.
+            <methodname>getDescription()</methodname> del objeto.
         </para>
 
         <para>
             Por defecto, si no se encuentra la descripción, no se genera ninguna salida.
             Si la descripción está presente, entonces se envolverá en una etiqueta
-            <code>p</code> HTML por defecto, aunque tiene la posibilidad de especificar
-            una etiqueta pasando una opción <code>tag</code> al crear el decorador, o
-            llamando a <code>setTag()</code>. También puede especificar una clase
-            para el tag usando la opción <code>class</code> o llamando a
-            <code>setClass()</code>; por defecto, se usa la clase 'hint'.
+            <methodname>p</methodname> HTML por defecto, aunque tiene la posibilidad de especificar
+            una etiqueta pasando una opción <methodname>tag</methodname> al crear el decorador, o
+            llamando a <methodname>setTag()</methodname>. También puede especificar una clase
+            para el tag usando la opción <methodname>class</methodname> o llamando a
+            <methodname>setClass()</methodname>; por defecto, se usa la clase 'hint'.
         </para>
 
         <para>
             La descripción es escapada utilizando los mecanismos de escapado por defecto
             del objeto de vista. Puede desactivar esto pasando un valor
-            <code>false</code> a la opción 'escape' del decorador o el método
-            <code>setEscape()</code>.
+            <methodname>false</methodname> a la opción 'escape' del decorador o el método
+            <methodname>setEscape()</methodname>.
         </para>
     </sect2>
 
@@ -99,17 +99,17 @@ class Util
 
         <para>
             Los decoradores por defecto utilizan listas de definición
-            (<code>&lt;dl&gt;</code>) para generar elementos de formulario (form).
+            (<methodname>&lt;dl&gt;</methodname>) para generar elementos de formulario (form).
             Dato que los elementos de formulario pueden aparecer en cualquier orden,
             grupos de visualización y subformularios pueden ser encapsulados dentro de
             otros elementos de formulario. Para mantener estos tipos de elemento particulares
             dentro de la lista de definición, DtDdWrapper crea una nuevo término de definición
-            vacío (definition term)(<code>&lt;dt&gt;</code>) y encapsula su contenido
-            en un nuevo dato de definición (<code>&lt;dd&gt;</code>).
+            vacío (definition term)(<methodname>&lt;dt&gt;</methodname>) y encapsula su contenido
+            en un nuevo dato de definición (<methodname>&lt;dd&gt;</methodname>).
             La salida queda como sigue:
         </para>
 
-        <programlisting role="html"><![CDATA[
+        <programlisting language="html"><![CDATA[
 <dt></dt>
 <dd><fieldset id="subform">
     <legend>Información de Usuario</legend>
@@ -119,7 +119,7 @@ class Util
 
         <para>
             Este decorador reemplaza el contenido que se le provee
-            envolviéndolo dentro del elemento <code>&lt;dd&gt;</code>.
+            envolviéndolo dentro del elemento <methodname>&lt;dd&gt;</methodname>.
         </para>
     </sect2>
 
@@ -130,8 +130,8 @@ class Util
             Los errores de elemento obtienen su propio decorador con el decorador
             de errores. Este decorador sustituye al view helper FormErrors,
             que genera mensajes de error en una lista no ordenada
-            (<code>&lt;ul&gt;</code>) como elementos de lista (li). El elemento
-            <code>&lt;ul&gt;</code> recibe una clase de "errores".
+            (<methodname>&lt;ul&gt;</methodname>) como elementos de lista (li). El elemento
+            <methodname>&lt;ul&gt;</methodname> recibe una clase de "errores".
         </para>
 
         <para>
@@ -146,7 +146,7 @@ class Util
         <para>
             Por defecto, los grupos de visualización y subformularios generan sus contenidos dentro
             de fieldsets, EL decorador Fieldset busca la opción
-            'legend' o bien el método <code>getLegend()</code> en el elemento
+            'legend' o bien el método <methodname>getLegend()</methodname> en el elemento
             registrado, y lo usa como campo "legend" si no es vacío. Cualquier
             contenido pasado es envuelto en el fieldset HTML, reemplazando
             al contenido original. Cualquier atributo pasado al elemento decorado
@@ -184,7 +184,7 @@ class Util
             Los formularios(forms), grupos de visualización y subformularios
             son colecciones de elementos. Para poder generar estos elementos,
             utilizan el decorador FormElements, el cual itera sobre todos los elementos,
-            llamando a <code>render()</code> en cada uno de ellos y uniéndolos
+            llamando a <methodname>render()</methodname> en cada uno de ellos y uniéndolos
             con el separador indicado. Puede anteponer o postponer al contenido que
             se le envía.
         </para>
@@ -203,7 +203,7 @@ class Util
             Por defecto, la lista de errores generada tiene el siguiente marcado:
         </para>
 
-        <programlisting role="html"><![CDATA[
+        <programlisting language="html"><![CDATA[
 <ul class="form-errors">
     <li><b>[etiqueta de elemento o nombre]</b><ul>
             <li>[mensaje de error]</li>
@@ -226,32 +226,32 @@ class Util
 
         <itemizedlist>
             <listitem><para>
-                <code>ignoreSubForms</code>: se desactiva o no la recursividad
+                <methodname>ignoreSubForms</methodname>: se desactiva o no la recursividad
                 en los subformularios. Por defecto: false (i.e., permitir recursividad).
             </para></listitem>
 
             <listitem><para>
-                <code>markupElementLabelEnd</code>: Marcado para postponer las etiquetas de elementos. Por defecto: '&lt;/b&gt;'
+                <methodname>markupElementLabelEnd</methodname>: Marcado para postponer las etiquetas de elementos. Por defecto: '&lt;/b&gt;'
             </para></listitem>
 
             <listitem><para>
-                <code>markupElementLabelStart</code>: Marcado para anteponer las etiquetas de elementos. Por defecto'&lt;b&gt;'
+                <methodname>markupElementLabelStart</methodname>: Marcado para anteponer las etiquetas de elementos. Por defecto'&lt;b&gt;'
             </para></listitem>
 
             <listitem><para>
-                <code>markupListEnd</code>: Marcado para postponer listas de mensajes de error.  Por defecto: '&lt;/ul&gt;'.
+                <methodname>markupListEnd</methodname>: Marcado para postponer listas de mensajes de error.  Por defecto: '&lt;/ul&gt;'.
             </para></listitem>
 
             <listitem><para>
-                <code>markupListItemEnd</code>: Marcado para postponer mensajes de error individuales.  Por defecto: '&lt;/li&gt;'
+                <methodname>markupListItemEnd</methodname>: Marcado para postponer mensajes de error individuales.  Por defecto: '&lt;/li&gt;'
             </para></listitem>
 
             <listitem><para>
-                <code>markupListItemStart</code>: Marcado para anteponer mensajes de error individuales.  Por defecto: '&lt;li&gt;'
+                <methodname>markupListItemStart</methodname>: Marcado para anteponer mensajes de error individuales.  Por defecto: '&lt;li&gt;'
             </para></listitem>
 
             <listitem><para>
-                <code>markupListStart</code>: Marcado para anteponer listas de mensajes de error.  Por defecto: '&lt;ul class="form-errors"&gt;'
+                <methodname>markupListStart</methodname>: Marcado para anteponer listas de mensajes de error.  Por defecto: '&lt;ul class="form-errors"&gt;'
             </para></listitem>
         </itemizedlist>
 
@@ -279,23 +279,23 @@ class Util
 
         <para>
             El decorador Image le permite crear un input HTML de tipo image
-            (<code>&lt;input type="image" ... /&gt;</code>), y opcionalmente
+            (<methodname>&lt;input type="image" ... /&gt;</methodname>), y opcionalmente
             mostrarlo dentro de otro tag HTML.
         </para>
 
         <para>
             Por defecto, el decorador usa la propiedad src del elemento,
-            que puede fijarse con el método <code>setImage()</code>, como la ruta
+            que puede fijarse con el método <methodname>setImage()</methodname>, como la ruta
             de la imagen ('src'). Adicionalmente, la etiqueta del elemento será usada
-            como la etiqueta 'alt', y <code>imageValue</code> (manipulado con los
-            métodos <code>setImageValue()</code> y
-            <code>getImageValue()</code>) será usada como el campo 'value'.
+            como la etiqueta 'alt', y <methodname>imageValue</methodname> (manipulado con los
+            métodos <methodname>setImageValue()</methodname> y
+            <methodname>getImageValue()</methodname>) será usada como el campo 'value'.
         </para>
 
         <para>
             Para especificar una etiqueta HTML que utilizar con el elemento, pase la opción
             'tag' al decorador, o llame explícitamente a
-            <code>setTag()</code>.
+            <methodname>setTag()</methodname>.
         </para>
     </sect2>
 
@@ -307,7 +307,7 @@ class Util
             usa el decorador Label para generar esas etiquetas.
             Utiliza la ayuda del view helper FormLabel,
             y toma la etiqueta del elemento mediante el método
-            <code>getLabel()</code> de ese elemento. Si no se encuentra
+            <methodname>getLabel()</methodname> de ese elemento. Si no se encuentra
             la etiqueta, no se genera. Por defecto, las etiquetas se
             traducen cuando existe un adaptador de traducciones y existe una
             traducción para la etiqueta.
@@ -318,7 +318,7 @@ class Util
             la etiqueta en la etiqueta HTML en cuestión. Si la opción está presenta
             pero no hay etiqueta, la etiqueta será generada sin contenido.
             Puede especificar la clase que usar con la etiqueta mediante la opción
-            'class' o llamando a <code>setClass()</code>.
+            'class' o llamando a <methodname>setClass()</methodname>.
         </para>
 
         <para>
@@ -331,31 +331,31 @@ class Util
 
         <itemizedlist>
             <listitem><para>
-                    <code>optionalPrefix</code>: fija el texto antepuesto a la etiqueta
+                    <methodname>optionalPrefix</methodname>: fija el texto antepuesto a la etiqueta
                     cuando el elemento es opcional. Utilice los accesores
-                    <code>setOptionalPrefix()</code> y
-                    <code>getOptionalPrefix()</code> para manipularlo.
+                    <methodname>setOptionalPrefix()</methodname> y
+                    <methodname>getOptionalPrefix()</methodname> para manipularlo.
             </para></listitem>
 
             <listitem><para>
-                    <code>optionalSuffix</code>: fija el texto pospuesto a la etiqueta
+                    <methodname>optionalSuffix</methodname>: fija el texto pospuesto a la etiqueta
                     cuando el elemento es opcional. Utilice los accesores
-                    <code>setOptionalSuffix()</code> y
-                    <code>getOptionalSuffix()</code> para manipularlo.
+                    <methodname>setOptionalSuffix()</methodname> y
+                    <methodname>getOptionalSuffix()</methodname> para manipularlo.
             </para></listitem>
 
             <listitem><para>
-                    <code>requiredPrefix</code>: fija el texto antepuesto a la etiqueta
+                    <methodname>requiredPrefix</methodname>: fija el texto antepuesto a la etiqueta
                     cuando el elemento es requerido. Utilice los accesores
-                    <code>setRequiredPrefix()</code> y
-                    <code>getRequiredPrefix()</code> para manipularlo.
+                    <methodname>setRequiredPrefix()</methodname> y
+                    <methodname>getRequiredPrefix()</methodname> para manipularlo.
             </para></listitem>
 
             <listitem><para>
-                    <code>requiredSuffix</code>: fija el texto antepuesto a la etiqueta
+                    <methodname>requiredSuffix</methodname>: fija el texto antepuesto a la etiqueta
                     cuando el elemento es requerido. Utilice los accesores
-                    <code>setRequiredSuffix()</code> y
-                    <code>getRequiredSuffix()</code> para manipularlo.
+                    <methodname>setRequiredSuffix()</methodname> y
+                    <methodname>getRequiredSuffix()</methodname> para manipularlo.
             </para></listitem>
         </itemizedlist>
 
@@ -381,7 +381,7 @@ class Util
             decorador en al lista.
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $form->setDecorators(array(
     'PrepareElements',
     array('ViewScript', array('viewScript' => 'form.phtml')),
@@ -434,20 +434,20 @@ $form->setDecorators(array(
 
         <itemizedlist>
             <listitem><para>
-                    <code>element</code>: el elemento decorado
+                    <methodname>element</methodname>: el elemento decorado
             </para></listitem>
 
             <listitem><para>
-                    <code>content</code>: el contenido pasado al decorador
+                    <methodname>content</methodname>: el contenido pasado al decorador
             </para></listitem>
 
             <listitem><para>
-                    <code>decorator</code>: el propio objeto decorador
+                    <methodname>decorator</methodname>: el propio objeto decorador
             </para></listitem>
 
             <listitem><para>
                     Del mismo modo, todas las opciones pasadas al decorador a través de
-                    <code>setOptions()</code> que no son usadas internamente (tales
+                    <methodname>setOptions()</methodname> que no son usadas internamente (tales
                     como placement, separator, etc.) son pasadas como
                     variables de vista.
             </para></listitem>
@@ -457,7 +457,7 @@ $form->setDecorators(array(
             Como ejemplo, se pueden tener el siguiente elemento:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 // Fija un decorador ViewScript a un único elemento ,
 // especificando como opción el script de vista (obligatorio) y algunas opciones extra
 $element->setDecorators(array(array('ViewScript', array(
@@ -475,7 +475,7 @@ $element->setDecorators(array(array('ViewScript',
             Un view script puede tener el siguiente aspecto:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 <div class="<?php echo  $this->class ?>">
     <?php echo  $this->formLabel($this->element->getName(),
                          $this->element->getLabel()) ?>
@@ -499,7 +499,7 @@ $element->setDecorators(array(array('ViewScript',
                 opción 'placement' del decorador:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 // En la creación del decorador:
 $element->addDecorator('ViewScript', array('placement' => false));
 

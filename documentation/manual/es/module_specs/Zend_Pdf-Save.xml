@@ -24,7 +24,7 @@
 
     <example id="zend.pdf.save.example-1">
         <title>Guardando Documentos PDF</title>
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 ...
 // Cargar el documento PDF
 $pdf = Zend_Pdf::load($fileName);

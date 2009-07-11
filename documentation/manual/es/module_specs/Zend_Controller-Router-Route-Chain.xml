@@ -26,16 +26,16 @@
         Cuando el encadenamiento se realiza prográmaticamente, hay dos maneras 
         de archivarlo. La primera consiste en crear una nueva instancia 
         <classname>Zend_Controller_Router_Route_Chain</classname> y entones 
-        llamar al método <code>chain</code> varias veces con todas las rutas 
+        llamar al método <methodname>chain</methodname> varias veces con todas las rutas 
         que deberían encadenarse juntas. La otra forma es tomar la primera 
         ruta, por ejemplo, la  ruta del nombre del host, y llamar al método 
-        <code>chain</code> con la ruta que debería ser anexada a ella. 
+        <methodname>chain</methodname> con la ruta que debería ser anexada a ella. 
         Esto no modificará la ruta del nombre del host, pero devolverá una nueva 
         instancia de <classname>Zend_Controller_Router_Route_Chain</classname>, 
         teniendo entonces a ambas rutas encadenadas juntas:
     </para>
 
-    <programlisting role="php"><![CDATA[
+     <programlisting language="php"><![CDATA[
 // Crear dos rutas
 $hostnameRoute = new Zend_Controller_Router_Route_Hostname(...);
 $pathRoute     = new Zend_Controller_Router_Route(...);
@@ -55,7 +55,7 @@ $chainedRoute = $hostnameRoute->chain($pathRoute);
         diferente:
     </para>
 
-    <programlisting role="php"><![CDATA[
+     <programlisting language="php"><![CDATA[
 // Crear dos rutas
 $firstRoute  = new Zend_Controller_Router_Route('foo');
 $secondRoute = new Zend_Controller_Router_Route('bar');
@@ -73,7 +73,7 @@ echo $chainedRoute->assemble();
         <para>
             Para encadenar juntas a las rutas en un archivo de configuración, 
             hay parámetros adicionales para la configuración de aquellos. 
-            El enfoque más sencillo es utilizar los parámetros <code>chains</code>. 
+            El enfoque más sencillo es utilizar los parámetros <methodname>chains</methodname>. 
             Este es simplemente una lista de las rutas, que será encadenada con  
             la ruta padre. Ni la ruta padre ni la ruta hijo serán añadidos 
             directamente al router sino que sólo lo hará la ruta del 
@@ -83,7 +83,7 @@ echo $chainedRoute->assemble();
             hijo. Un simple config en XML se vería así:
         </para>
 
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <routes>
     <www type="Zend_Controller_Router_Route_Hostname">
         <route>www.example.com</route>
@@ -120,20 +120,20 @@ echo $chainedRoute->assemble();
 ]]></programlisting>
 
         <para>
-            Esto se traducirá en las tres rutas <code>www-language-index</code>,
-            <code>www-language-imprint</code> y
-            <code>users-language-profile</code> que sólo concordarán basados 
-            en el nombre y la ruta <code>misc</code>, que se comparará con 
+            Esto se traducirá en las tres rutas <methodname>www-language-index</methodname>,
+            <methodname>www-language-imprint</methodname> y
+            <methodname>users-language-profile</methodname> que sólo concordarán basados 
+            en el nombre y la ruta <methodname>misc</methodname>, que se comparará con 
             cualquier nombre de host.
         </para>
 
         <para>
             La manera alternativa de crear una ruta encadenada es a través del 
-            parámetro <code>chain</code>, que sólo puede utilizarse 
+            parámetro <methodname>chain</methodname>, que sólo puede utilizarse 
             directamente con el tipo cadena-ruta, y también trabaja en el nivel raíz:
         </para>
 
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <routes>
     <www type="Zend_Controller_Router_Route_Chain">
         <route>www.example.com</route>
@@ -161,11 +161,11 @@ echo $chainedRoute->assemble();
 ]]></programlisting>
 
         <para>
-            También puede darle el parámetro a <code>chain</code> como un array 
+            También puede darle el parámetro a <methodname>chain</methodname> como un array 
             en vez de separ las rutas con comas:
         </para>
 
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <routes>
     <www-index type="Zend_Controller_Router_Route_Chain">
         <chain>www</chain>

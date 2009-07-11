@@ -16,12 +16,12 @@
             Si no se encuentra algún módulo, controlador o acción, se usarán
             los valores por defecto para ellos.
             <classname>Zend_Controller_Dispatcher_Standard</classname>
-            especifica <code>index</code> para cada uno de los controladores y
-            acciones por defecto y <code>default</code> para el valor por
+            especifica <methodname>index</methodname> para cada uno de los controladores y
+            acciones por defecto y <methodname>default</methodname> para el valor por
             defecto del módulo, pero permite al desarrollador cambiar los
             valores por defecto para cada uno usando los métodos
-            <code>setDefaultController()</code>,
-            <code>setDefaultAction()</code>, y <code>setDefaultModule()</code>
+            <methodname>setDefaultController()</methodname>,
+            <methodname>setDefaultAction()</methodname>, y <methodname>setDefaultModule()</methodname>
             respectivamente.
         </para>
 
@@ -34,11 +34,11 @@
                 configuración por defecto es que el módulo por defecto es
                 <emphasis>no</emphasis> namespaced).
                 Como de 1.5.0, ahora puede hacerlo especificando el
-                <code>prefixDefaultModule</code> como verdadero tanto en el
+                <methodname>prefixDefaultModule</methodname> como verdadero tanto en el
                 front controller como es su despachador:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 // En su front controller:
 $front->setParam('prefixDefaultModule', true);
 
@@ -73,13 +73,13 @@ $dispatcher->setParam('prefixDefaultModule', true);
 
         <para>
             El método del controlador de acción que controla ese despacho es
-            <code>_forward()</code>; llamar a este método para cualquiera de los
+            <methodname>_forward()</methodname>; llamar a este método para cualquiera de los
             pre/postDispatch() o métodos de acción, proporcionando un
             controlador de acciónes, módulo y, opcionalmente cualquier parámetro
             adicional que desee enviar a la nueva acción:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 public function fooAction()
 {
     // adelantar a otra acción en el controlador y módulo actuales:
@@ -128,7 +128,7 @@ public function bazAction()
             implementación de un despachador:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 interface Zend_Controller_Dispatcher_Interface
 {
     /**

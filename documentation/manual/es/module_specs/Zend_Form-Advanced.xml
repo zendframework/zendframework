@@ -22,7 +22,7 @@
             por ejemplo:
         </para>
 
-        <programlisting role="html"><![CDATA[
+        <programlisting language="html"><![CDATA[
 <form>
     <fieldset>
         <legend>Shipping Address</legend>
@@ -80,7 +80,7 @@
             resolver esta solución usando una notación de array:
         </para>
 
-        <programlisting role="html"><![CDATA[
+        <programlisting language="html"><![CDATA[
 <form>
     <fieldset>
         <legend>Shipping Address</legend>
@@ -173,28 +173,28 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>Zend_Form::setIsArray($flag)</code>: Definiendo la
+                    <methodname>Zend_Form::setIsArray($flag)</methodname>: Definiendo la
                     bandera a verdadero, se puede indicar que un formulario entero debería ser
                     tratado como un array. Por defecto, el nombre del formulario será
                     usado como el nombre del array, a no ser que
-                    <code>setElementsBelongTo()</code> haya sido llamado. Si el
+                    <methodname>setElementsBelongTo()</methodname> haya sido llamado. Si el
                     formulario no tiene un nombre específico, o si
-                    <code>setElementsBelongTo()</code> no ha sido definido, esta bandera
+                    <methodname>setElementsBelongTo()</methodname> no ha sido definido, esta bandera
                     será ignorada (como cuando no hay nombre del array al cual
                     los elementos puedan pertenecer).
                 </para>
 
                 <para>
                     Se deberá determinar si un formulario está siendo tratado como un array
-                    usando el accesor <code>isArray()</code>.
+                    usando el accesor <methodname>isArray()</methodname>.
                 </para>
             </listitem>
 
             <listitem><para>
-                    <code>Zend_Form::setElementsBelongTo($array)</code>:
+                    <methodname>Zend_Form::setElementsBelongTo($array)</methodname>:
                     Usando este método, se puede especificar el nombre de un array al
                     cual todos los elementos del formulario pertenecen. Se puede determinar el
-                    nombre usando el accesor <code>getElementsBelongTo()</code>.
+                    nombre usando el accesor <methodname>getElementsBelongTo()</methodname>.
             </para></listitem>
         </itemizedlist>
 
@@ -204,7 +204,7 @@
             el método <classname>Zend_Form_Element::setBelongsTo()</classname>.
             Para descubrir el valor que tiene -- sea o no sea definido explícitamente o
             implícitamente a través del formulario -- se puede usar el
-            accesor <code>getBelongsTo()</code>.
+            accesor <methodname>getBelongsTo()</methodname>.
         </para>
     </sect2>
 
@@ -239,7 +239,7 @@
                 dentro del mismo:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 class My_Form_Registration extends Zend_Form
 {
     public function init()
@@ -350,7 +350,7 @@ class My_Form_Registration extends Zend_Form
                 algunos andamios a nuestras clases para proveer esa información:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 class My_Form_Registration extends Zend_Form
 {
     // ...
@@ -444,7 +444,7 @@ class My_Form_Registration extends Zend_Form
                 formulario instanciado:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 class RegistrationController extends Zend_Controller_Action
 {
     protected $_form;
@@ -469,7 +469,7 @@ class RegistrationController extends Zend_Controller_Action
                 representando cada subformulario.
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 class RegistrationController extends Zend_Controller_Action
 {
     // ...
@@ -563,20 +563,20 @@ class RegistrationController extends Zend_Controller_Action
 ]]></programlisting>
 
             <para>
-                El método de arriba nos permite usar notaciones tal como "<code>$subForm =
-                    $this-&gt;getCurrentSubForm();</code>" recuperar el actual
-                subformulario para la validación, o "<code>$next =
-                    $this-&gt;getNextSubForm();</code>" obtener el siguiente para
+                El método de arriba nos permite usar notaciones tal como "<methodname>$subForm =
+                    $this-&gt;getCurrentSubForm();</methodname>" recuperar el actual
+                subformulario para la validación, o "<methodname>$next =
+                    $this-&gt;getNextSubForm();</methodname>" obtener el siguiente para
                 mostrar.
             </para>
 
             <para>
                 Ahora, vamos a encontrar la manera para procesar y mostrar varios
-                subformularios. Podemos usar <code>getCurrentSubForm()</code> para determinar
+                subformularios. Podemos usar <methodname>getCurrentSubForm()</methodname> para determinar
                 si algún subformulario ha sido sometido (los valores de retorno falso indican que
                 ninguno ha sido desplegado o sometido), y
-                <code>getNextSubForm()</code> recupera el formulario que mostrar. Podemos
-                entonces usar el método del formulario <code>prepareSubForm()</code> para asegurar
+                <methodname>getNextSubForm()</methodname> recupera el formulario que mostrar. Podemos
+                entonces usar el método del formulario <methodname>prepareSubForm()</methodname> para asegurar
                 que el formulario está listo para mostrar.
             </para>
 
@@ -589,7 +589,7 @@ class RegistrationController extends Zend_Controller_Action
                 la sesión:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 class RegistrationController extends Zend_Controller_Action
 {
     // ...
@@ -636,7 +636,7 @@ class RegistrationController extends Zend_Controller_Action
                 para el formulario, y luego una acción 'process' para procesar el formulario.
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 class RegistrationController extends Zend_Controller_Action
 {
     // ...
@@ -692,7 +692,7 @@ class RegistrationController extends Zend_Controller_Action
                 Los scripts de vista son muy simples:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 <? // registration/index.phtml ?>
 <h2>registro</h2>
 <?php echo  $this->form ?>

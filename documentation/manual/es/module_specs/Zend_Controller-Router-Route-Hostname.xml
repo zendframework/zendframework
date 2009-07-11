@@ -14,11 +14,11 @@
         Vamos a usar el ejemplo de la standard route y ver cómo se vería con un 
         nombre basado en host. En lugar de llamar al usuario mediante un path, 
         quisiéramos que un usuario pueda llamar a
-        <code>http://martel.users.example.com</code> para ver la información 
+        <methodname>http://martel.users.example.com</methodname> para ver la información 
         acerca del usuario "martel".
     </para>
 
-    <programlisting role="php"><![CDATA[
+     <programlisting language="php"><![CDATA[
 $hostnameRoute = new Zend_Controller_Router_Route_Hostname(
     ':username.users.example.com',
     array(
@@ -39,8 +39,8 @@ $router->addRoute('user', $hostnameRoute->chain($plainPathRoute);
         Las definiciones de ruta consisten en partes estáticas y dinámicas 
         separadas por el carácter punto ('.'). 
         Las partes dinámicas, llamadas variables, se marcan anteponiendo 
-        dos puntos (':') al nombre de la variable: <code>:username</code>. 
-        Las partes estáticas son simplemente texto: <code>user</code>.
+        dos puntos (':') al nombre de la variable: <methodname>:username</methodname>. 
+        Las partes estáticas son simplemente texto: <methodname>user</methodname>.
     </para>
 
     <para>
@@ -49,8 +49,8 @@ $router->addRoute('user', $hostnameRoute->chain($plainPathRoute);
         concordaría con cualquier path. Entonces, lo que tiene que hacer 
         es encadenar una ruta del path a la ruta del nombre del host. 
         Esto se hace como en el ejemplo llamando a 
-        <code>$hostnameRoute->chain($pathRoute);</code>. Haciendo esto, 
-        <code>$hostnameRoute</code> no se modifica, pero devuelve una nueva ruta 
+        <methodname>$hostnameRoute->chain($pathRoute);</methodname>. Haciendo esto, 
+        <methodname>$hostnameRoute</methodname> no se modifica, pero devuelve una nueva ruta 
         (<classname>Zend_Controller_Router_Route_Chain</classname>), que luego 
         puede ser entregada al router.
     </para>

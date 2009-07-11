@@ -16,7 +16,7 @@
 
     <para>
         Las clases
-        <code>Adapters</code>
+        <methodname>Adapters</methodname>
         de <classname>Zend_Db</classname> crean un puente entre las extensiones de base de
         datos de PHP hacia una interfaz común, para ayudarle a escribir
         aplicaciones PHP una sola vez y poder desplegar múltiples
@@ -153,7 +153,7 @@
 
             <example id="zend.db.adapter.connecting.constructor.example">
                 <title>Usando el Constructor de un Adaptador</title>
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 $db = new Zend_Db_Adapter_Pdo_Mysql(array(
     'host'     => '127.0.0.1',
     'username' => 'webuser',
@@ -173,7 +173,7 @@ $db = new Zend_Db_Adapter_Pdo_Mysql(array(
                 Como alternativa a la utilización directa del
                 constructor de un adaptador, se puede crear una
                 instancia del adaptador que use el método estático
-                <code>Zend_Db::factory()</code>
+                <methodname>Zend_Db::factory()</methodname>
                 . Este método carga dinámicamente el archivo de clase
                 Adaptador bajo demanda, usando
                 <link linkend="zend.loader.load.class">
@@ -197,7 +197,7 @@ $db = new Zend_Db_Adapter_Pdo_Mysql(array(
 
             <example id="zend.db.adapter.connecting.factory.example">
                 <title>Usando el Adaptador del método factory</title>
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 // No necesitamos la siguiente declaración, porque
 // el archivo Zend_Db_Adapter_Pdo_Mysql será cargado para nosotros por el método
 // factory de Zend_Db.
@@ -219,7 +219,7 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
             Si crea su propia clase que extiende a
             Zend_Db_Adapter_Abstract, pero no nombra su clase con el prefijo
             de paquete "<classname>Zend_Db_Adapter</classname>", se puede utilizar el método
-            <code>factory()</code>
+            <methodname>factory()</methodname>
             para cargar su adaptador si se especifica la parte principal
             de la clase del adaptador con la clave "adapterNamespace" en
             el conjunto de parámetros
@@ -230,7 +230,7 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
                     Usando el método factory para una clase Adaptador
                     personalizada
                 </title>
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 // No tenemos que cargar el archivo de clase Adaptador
 // porque será cargado para nosotros por el método factory de Zend_Db.
 
@@ -256,7 +256,7 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
             <para>
                 Opcionalmente, se puede especificar cualquier
                 argumento del método
-                <code>factory()</code>
+                <methodname>factory()</methodname>
                 como un objeto de tipo
                 <link linkend="zend.config">Zend_Config</link>
                 .
@@ -265,14 +265,14 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
             <para>
                 Si el primer argumento es un objeto de configuración, se
                 espera que contenga una propiedad llamada
-                <code>adapter</code>
+                <methodname>adapter</methodname>
                 , conteniendo la cadena que da nombre al nombre base de la
                 clase de adaptador. Opcionalmente, el objeto puede
                 contener una propiedad llamada
-                <code>params</code>
+                <methodname>params</methodname>
                 , con subpropiedades correspondientes a nombres de parámetros
                 del adaptador. Esto es usado sólo si el segundo
-                argumento del método <code>factory()</code> se ha omitido.
+                argumento del método <methodname>factory()</methodname> se ha omitido.
             </para>
 
             <example id="zend.db.adapter.connecting.factory.example1">
@@ -292,7 +292,7 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
                     </link>
                     .
                 </para>
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 $config = new Zend_Config(
     array(
         'database' => array(
@@ -312,7 +312,7 @@ $db = Zend_Db::factory($config->database);
 
             <para>
                 El segundo argumento del método
-                <code>factory()</code>
+                <methodname>factory()</methodname>
                 puede ser un array asociativo con entradas
                 correspondientes a los parámetros del adaptador. Este argumento es
                 opcional. Si el primer argumento es de tipo Zend_Config,
@@ -397,7 +397,7 @@ $db = Zend_Db::factory($config->database);
                         : nombre de la parte inicial del nombre de las clase para el
             adaptador, en lugar de '<classname>Zend_Db_Adapter</classname>'. Utilice
                         esto si usted necesita usar el método
-                        <code>factory()</code>
+                        <methodname>factory()</methodname>
                         para cargar un adaptador de clase de base de datos que no sea
             de Zend.
                     </para>
@@ -410,20 +410,20 @@ $db = Zend_Db::factory($config->database);
                 </title>
                 <para>
                     Usted puede pasar esta opción específica por la constante
-                    <code>Zend_Db::CASE_FOLDING</code>
+                    <methodname>Zend_Db::CASE_FOLDING</methodname>
                     . Este corresponde al atributo
-                    <code>ATTR_CASE</code>
+                    <methodname>ATTR_CASE</methodname>
                     en los drivers de base de datos PDO e IBM DB2,
                     ajustando la sensibilidad de las claves tipo cadena en los resultados
           de consultas. La opción toma los valores
-                    <code>Zend_Db::CASE_NATURAL</code>
+                    <methodname>Zend_Db::CASE_NATURAL</methodname>
                     (el predeterminado),
-                    <code>Zend_Db::CASE_UPPER</code>
+                    <methodname>Zend_Db::CASE_UPPER</methodname>
                     , y
-                    <code>Zend_Db::CASE_LOWER</code>
+                    <methodname>Zend_Db::CASE_LOWER</methodname>
                     .
                 </para>
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 $options = array(
     Zend_Db::CASE_FOLDING => Zend_Db::CASE_UPPER
 );
@@ -446,22 +446,22 @@ $db = Zend_Db::factory('Db2', $params);
                 </title>
                 <para>
                     Usted puede especificar esta opción por la constante
-                    <code>Zend_Db::AUTO_QUOTE_IDENTIFIERS</code>
+                    <methodname>Zend_Db::AUTO_QUOTE_IDENTIFIERS</methodname>
                     . Si el valor es
-                    <code>true</code>
+                    <methodname>true</methodname>
                     (el predeterminado), los identificadores como nombres de tabla,
           nombres de columna, e incluso los alias son delimitados en la
           sintaxis SQL generada por el Adatador del objeto.
           Esto hace que sea sencillo utilizar identificadores que contengan
           palabras reservadas de SQL, o caracteres especiales. Si el valor es
-                    <code>false</code>
+                    <methodname>false</methodname>
                     , los identificadores no son delimitados automáticamente. Si
                     usted necesita delimitar identificadores, debe hacer usted mismo
           utilizando el método
-                    <code>quoteIdentifier()</code>
+                    <methodname>quoteIdentifier()</methodname>
                     .
                 </para>
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 $options = array(
     Zend_Db::AUTO_QUOTE_IDENTIFIERS => false
 );
@@ -480,7 +480,7 @@ $db = Zend_Db::factory('Pdo_Mysql', $params);
 
             <example id="zend.db.adapter.connecting.parameters.example3">
                 <title>Passing PDO driver options to the factory</title>
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 $pdoParams = array(
     PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true
 );
@@ -502,7 +502,7 @@ echo $db->getConnection()
 
             <example id="zend.db.adapter.connecting.parameters.example4">
                 <title>Passing Serialization Options to the Factory</title>
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 $options = array(
     Zend_Db::ALLOW_SERIALIZATION => false
 );
@@ -539,12 +539,12 @@ $db = Zend_Db::factory('Pdo_Mysql', $params);
             <para>
                 If you need to force the Adapter to connect to the
                 RDBMS, use the
-                <code>getConnection()</code>
+                <methodname>getConnection()</methodname>
                 method. This method returns an object for the connection
                 as represented by the respective PHP database extension.
                 For example, if you use any of the Adapter classes for
                 PDO drivers, then
-                <code>getConnection()</code>
+                <methodname>getConnection()</methodname>
                 returns the PDO object, after initiating it as a live
                 connection to the specific database.
             </para>
@@ -568,15 +568,15 @@ $db = Zend_Db::factory('Pdo_Mysql', $params);
                 to be serialized, if you don't want it, you should consider passing the
                 <classname>Zend_Db::ALLOW_SERIALIZATION=false</classname> option, see the example above.
                 To respect lazy connections principle, the adapter won't reconnect itself
-                after being unserialized. You must then call <code>getConnection()
-                </code> yourself. You can make the adapter auto-reconnect by passing the
+                after being unserialized. You must then call <methodname>getConnection()
+                </methodname> yourself. You can make the adapter auto-reconnect by passing the
                 <classname>Zend_Db::AUTO_RECONNECT_ON_UNSERIALIZE=true</classname> as an adapter
                 option.
             </para>
 
             <example id="zend.db.adapter.connecting.getconnection.example">
                 <title>Handling connection exceptions</title>
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 try {
     $db = Zend_Db::factory('Pdo_Mysql', $parameters);
     $db->getConnection();
@@ -648,7 +648,7 @@ try {
             los tests unitarios automatizados de <classname>Zend_Db</classname>.
         </para>
 
-        <programlisting role="sql"><![CDATA[
+        <programlisting language="sql"><![CDATA[
 CREATE TABLE accounts (
   account_name      VARCHAR(100) NOT NULL PRIMARY KEY
 );
@@ -676,10 +676,10 @@ CREATE TABLE bugs_products (
 
 
         <para>
-            Also notice that the <code>bugs</code> table contains multiple
-            foreign key references to the <code>accounts</code> table.
+            Also notice that the <methodname>bugs</methodname> table contains multiple
+            foreign key references to the <methodname>accounts</methodname> table.
             Each of these foreign keys may reference a different row in the
-            <code>accounts</code> table for a given bug.
+            <methodname>accounts</methodname> table for a given bug.
         </para>
 
         <para>
@@ -709,7 +709,7 @@ CREATE TABLE bugs_products (
 
             <para>
                 You can run a SQL SELECT query and retrieve its results in one
-                step using the <code>fetchAll()</code> method.
+                step using the <methodname>fetchAll()</methodname> method.
             </para>
 
             <para>
@@ -721,14 +721,14 @@ CREATE TABLE bugs_products (
             </para>
 
             <para>
-                The second argument to <code>fetchAll()</code> is an array of
+                The second argument to <methodname>fetchAll()</methodname> is an array of
                 values to substitute for parameter placeholders in the SQL
                 statement.
             </para>
 
             <example id="zend.db.adapter.select.fetchall.example">
                 <title>Using fetchAll()</title>
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 $sql = 'SELECT * FROM bugs WHERE bug_id = ?';
 
 $result = $db->fetchAll($sql, 2);
@@ -742,7 +742,7 @@ $result = $db->fetchAll($sql, 2);
             <title>Changing the Fetch Mode</title>
 
             <para>
-                By default, <code>fetchAll()</code> returns an array of
+                By default, <methodname>fetchAll()</methodname> returns an array of
                 rows, each of which is an associative array. The keys of the
                 associative array are the columns or column aliases named in
                 the select query.
@@ -750,7 +750,7 @@ $result = $db->fetchAll($sql, 2);
 
             <para>
                 You can specify a different style of fetching results using the
-                <code>setFetchMode()</code> method. The modes supported are
+                <methodname>setFetchMode()</methodname> method. The modes supported are
                 identified by constants:
             </para>
 
@@ -821,7 +821,7 @@ $result = $db->fetchAll($sql, 2);
 
             <example id="zend.db.adapter.select.fetch-mode.example">
                 <title>Using setFetchMode()</title>
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 $db->setFetchMode(Zend_Db::FETCH_OBJ);
 
 $result = $db->fetchAll('SELECT * FROM bugs WHERE bug_id = ?', 2);
@@ -838,14 +838,14 @@ echo $result[0]->bug_description;
             <title>Fetching a Result Set as an Associative Array</title>
 
             <para>
-                The <code>fetchAssoc()</code> method returns data in an array
+                The <methodname>fetchAssoc()</methodname> method returns data in an array
                 of associative arrays, regardless of what value you have set
                 for the fetch mode.
             </para>
 
             <example id="zend.db.adapter.select.fetchassoc.example">
                 <title>Using fetchAssoc()</title>
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 $db->setFetchMode(Zend_Db::FETCH_OBJ);
 
 $result = $db->fetchAssoc('SELECT * FROM bugs WHERE bug_id = ?', 2);
@@ -862,7 +862,7 @@ echo $result[0]['bug_description'];
             <title>Fetching a Single Column from a Result Set</title>
 
             <para>
-                The <code>fetchCol()</code> method returns data in an array
+                The <methodname>fetchCol()</methodname> method returns data in an array
                 of values, regardless of the value you have set for the fetch mode.
                 This only returns the first column returned by the query.
                 Any other columns returned by the query are discarded.
@@ -871,7 +871,7 @@ echo $result[0]['bug_description'];
 
             <example id="zend.db.adapter.select.fetchcol.example">
                 <title>Using fetchCol()</title>
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 $db->setFetchMode(Zend_Db::FETCH_OBJ);
 
 $result = $db->fetchCol(
@@ -889,7 +889,7 @@ echo $result[0];
             <title>Fetching Key-Value Pairs from a Result Set</title>
 
             <para>
-                The <code>fetchPairs()</code> method returns data in an array
+                The <methodname>fetchPairs()</methodname> method returns data in an array
                 of key-value pairs, as an associative array with a single entry
                 per row. The key of this associative array is taken from the
                 first column returned by the SELECT query. The value is taken
@@ -906,7 +906,7 @@ echo $result[0];
 
             <example id="zend.db.adapter.select.fetchpairs.example">
                 <title>Using fetchPairs()</title>
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 $db->setFetchMode(Zend_Db::FETCH_OBJ);
 
 $result = $db->fetchPairs('SELECT bug_id, bug_status FROM bugs');
@@ -921,14 +921,14 @@ echo $result[2];
             <title>Fetching a Single Row from a Result Set</title>
 
             <para>
-                The <code>fetchRow()</code> method returns data using the
+                The <methodname>fetchRow()</methodname> method returns data using the
                 current fetch mode, but it returns only the first row
                 fetched from the result set.
             </para>
 
             <example id="zend.db.adapter.select.fetchrow.example">
                 <title>Using fetchRow()</title>
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 $db->setFetchMode(Zend_Db::FETCH_OBJ);
 
 $result = $db->fetchRow('SELECT * FROM bugs WHERE bug_id = 2');
@@ -944,8 +944,8 @@ echo $result->bug_description;
             <title>Fetching a Single Scalar from a Result Set</title>
 
             <para>
-                The <code>fetchOne()</code> method is like a combination
-                of <code>fetchRow()</code> with <code>fetchCol()</code>,
+                The <methodname>fetchOne()</methodname> method is like a combination
+                of <methodname>fetchRow()</methodname> with <methodname>fetchCol()</methodname>,
                 in that it returns data only for the first row fetched from
                 the result set, and it returns only the value of the first
                 column in that row. Therefore it returns only a single
@@ -954,7 +954,7 @@ echo $result->bug_description;
 
             <example id="zend.db.adapter.select.fetchone.example">
                 <title>Using fetchOne()</title>
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 $result = $db->fetchOne('SELECT bug_status FROM bugs WHERE bug_id = 2');
 
 // this is a single string value
@@ -981,14 +981,14 @@ echo $result;
 
             <para>
                 You can add new rows to a table in your database using the
-                <code>insert()</code> method. The first argument is a string
+                <methodname>insert()</methodname> method. The first argument is a string
                 that names the table, and the second argument is an associative
                 array, mapping column names to data values.
             </para>
 
             <example id="zend.db.adapter.write.insert.example">
                 <title>Inserting in a Table</title>
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 $data = array(
     'created_on'      => '2007-03-22',
     'bug_description' => 'Something wrong',
@@ -1026,7 +1026,7 @@ $db->insert('bugs', $data);
 
             <example id="zend.db.adapter.write.insert.example2">
                 <title>Inserting Expressions in a Table</title>
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 $data = array(
     'created_on'      => new Zend_Db_Expr('CURDATE()'),
     'bug_description' => 'Something wrong',
@@ -1047,7 +1047,7 @@ $db->insert('bugs', $data);
                 Some RDBMS brands support auto-incrementing primary keys.
                 A table defined this way generates a primary key value
                 automatically during an INSERT of a new row. The return value
-                of the <code>insert()</code> method is <emphasis>not</emphasis>
+                of the <methodname>insert()</methodname> method is <emphasis>not</emphasis>
                 the last inserted ID, because the table might not have an
                 auto-incremented column. Instead, the return value is the
                 number of rows affected (usually 1).
@@ -1055,14 +1055,14 @@ $db->insert('bugs', $data);
 
             <para>
                 If your table is defined with an auto-incrementing primary key,
-                you can call the <code>lastInsertId()</code> method after the
+                you can call the <methodname>lastInsertId()</methodname> method after the
                 insert. This method returns the last value generated in the
                 scope of the current database connection.
             </para>
 
             <example id="zend.db.adapter.write.lastinsertid.example-1">
                 <title>Using lastInsertId() for an Auto-Increment Key</title>
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 $db->insert('bugs', $data);
 
 // return the last value generated by an auto-increment column
@@ -1073,7 +1073,7 @@ $id = $db->lastInsertId();
             <para>
                 Some RDBMS brands support a sequence object, which generates
                 unique values to serve as primary key values. To support
-                sequences, the <code>lastInsertId()</code> method accepts two
+                sequences, the <methodname>lastInsertId()</methodname> method accepts two
                 optional string arguments. These arguments name the table and
                 the column, assuming you have followed the convention that a
                 sequence is named using the table and column names for which
@@ -1086,7 +1086,7 @@ $id = $db->lastInsertId();
 
             <example id="zend.db.adapter.write.lastinsertid.example-2">
                 <title>Using lastInsertId() for a Sequence</title>
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 $db->insert('bugs', $data);
 
 // return the last value generated by sequence 'bugs_bug_id_seq'.
@@ -1099,14 +1099,14 @@ $id = $db->lastInsertId('bugs');
 
             <para>
                 If the name of your sequence object does not follow this naming
-                convention, use the <code>lastSequenceId()</code> method
+                convention, use the <methodname>lastSequenceId()</methodname> method
                 instead. This method takes a single string argument, naming
                 the sequence literally.
             </para>
 
             <example id="zend.db.adapter.write.lastinsertid.example-3">
                 <title>Using lastSequenceId()</title>
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 $db->insert('bugs', $data);
 
 // return the last value generated by sequence 'bugs_id_gen'.
@@ -1120,7 +1120,7 @@ $id = $db->lastSequenceId('bugs_id_gen');
                 lastInsertId() method are ignored, and the value returned is the
                 most recent value generated for any table by INSERT operations
                 during the current connection. For these RDBMS brands, the
-                lastSequenceId() method always returns <code>null</code>.
+                lastSequenceId() method always returns <constant>NULL</constant>.
             </para>
 
             <note>
@@ -1169,7 +1169,7 @@ $id = $db->lastSequenceId('bugs_id_gen');
 
             <para>
                 You can update rows in a database table using the
-                <code>update()</code> method of an Adapter. This method takes
+                <methodname>update()</methodname> method of an Adapter. This method takes
                 three arguments:  the first is the name of the table; the
                 second is an associative array mapping columns to change to new
                 values to assign to these columns.
@@ -1198,7 +1198,7 @@ $id = $db->lastSequenceId('bugs_id_gen');
 
             <example id="zend.db.adapter.write.update.example">
                 <title>Updating Rows</title>
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 $data = array(
     'updated_on'      => '2007-03-23',
     'bug_status'      => 'FIXED'
@@ -1216,12 +1216,12 @@ $n = $db->update('bugs', $data, 'bug_id = 2');
             <para>
                 If you provide an array of strings as the third argument, these
                 strings are joined together as terms in an expression separated
-                by <code>AND</code> operators.
+                by <methodname>AND</methodname> operators.
             </para>
 
             <example id="zend.db.adapter.write.update.example-array">
                 <title>Updating Rows Using an Array of Expressions</title>
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 $data = array(
     'updated_on'      => '2007-03-23',
     'bug_status'      => 'FIXED'
@@ -1244,7 +1244,7 @@ $n = $db->update('bugs', $data, $where);
             <title>Deleting Data</title>
             <para>
                 You can delete rows from a database table using the
-                <code>delete()</code> method. This method takes two arguments:
+                <methodname>delete()</methodname> method. This method takes two arguments:
                 the first is a string naming the table.
             </para>
 
@@ -1265,7 +1265,7 @@ $n = $db->update('bugs', $data, $where);
 
             <example id="zend.db.adapter.write.delete.example">
                 <title>Deleting Rows</title>
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 $n = $db->delete('bugs', 'bug_id = 3');
 ]]></programlisting>
             </example>
@@ -1278,7 +1278,7 @@ $n = $db->delete('bugs', 'bug_id = 3');
             <para>
                 If you provide an array of strings as the second argument, these
                 strings are joined together as terms in an expression separated
-                by <code>AND</code> operators.
+                by <methodname>AND</methodname> operators.
             </para>
 
         </sect3>
@@ -1296,7 +1296,7 @@ $n = $db->delete('bugs', 'bug_id = 3');
             symbols, such as the quote symbol, it could result in invalid SQL.
             For example, notice the imbalanced quote characters in the
             following query:
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 $name = "O'Reilly";
 $sql = "SELECT * FROM bugs WHERE reported_by = '$name'";
 
@@ -1331,17 +1331,17 @@ echo $sql;
             <title>Using quote()</title>
 
             <para>
-                The <code>quote()</code> method accepts a single argument, a
+                The <methodname>quote()</methodname> method accepts a single argument, a
                 scalar string value. It returns the value with special
                 characters escaped in a manner appropriate for the RDBMS you
                 are using, and surrounded by string value delimiters. The
                 standard SQL string value delimiter is the single-quote
-                (<code>'</code>).
+                (<methodname>'</methodname>).
             </para>
 
             <example id="zend.db.adapter.quoting.quote.example">
                 <title>Using quote()</title>
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 $name = $db->quote("O'Reilly");
 echo $name;
 // 'O\'Reilly'
@@ -1354,7 +1354,7 @@ echo $sql;
             </example>
 
             <para>
-                Note that the return value of <code>quote()</code> includes the
+                Note that the return value of <methodname>quote()</methodname> includes the
                 quote delimiters around the string. This is different from
                 some functions that escape special characters but do not add
                 the quote delimiters, for example
@@ -1367,23 +1367,23 @@ echo $sql;
                 RDBMS brands, an integer value must not be quoted as a string
                 if it is compared to an integer-type column or expression.
                 In other words, the following is an error in some SQL
-                implementations, assuming <code>intColumn</code> has a SQL
-                datatype of <code>INTEGER</code>
+                implementations, assuming <methodname>intColumn</methodname> has a SQL
+                datatype of <methodname>INTEGER</methodname>
 
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 SELECT * FROM atable WHERE intColumn = '123'
 ]]></programlisting>
             </para>
 
             <para>
                 You can use the optional second argument to the
-                <code>quote()</code> method to apply quoting selectively for
+                <methodname>quote()</methodname> method to apply quoting selectively for
                 the SQL datatype you specify.
             </para>
 
             <example id="zend.db.adapter.quoting.quote.example-2">
                 <title>Using quote() with a SQL Type</title>
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 $value = '1234';
 $sql = 'SELECT * FROM atable WHERE intColumn = '
      . $db->quote($value, 'INTEGER');
@@ -1400,7 +1400,7 @@ $sql = 'SELECT * FROM atable WHERE intColumn = '
             </para>
 
             <para>
-                <classname>Zend_Db_Table</classname> specifies SQL types to <code>quote()</code>
+                <classname>Zend_Db_Table</classname> specifies SQL types to <methodname>quote()</methodname>
                 automatically when generating SQL queries that reference a
                 table's key columns.
             </para>
@@ -1414,9 +1414,9 @@ $sql = 'SELECT * FROM atable WHERE intColumn = '
             <para>
                 The most typical usage of quoting is to interpolate a PHP
                 variable into a SQL expression or statement. You can use the
-                <code>quoteInto()</code> method to do this in one step. This
+                <methodname>quoteInto()</methodname> method to do this in one step. This
                 method takes two arguments: the first argument is a string
-                containing a placeholder symbol (<code>?</code>), and the
+                containing a placeholder symbol (<methodname>?</methodname>), and the
                 second argument is a value or PHP variable that should be
                 substituted for that placeholder.
             </para>
@@ -1424,7 +1424,7 @@ $sql = 'SELECT * FROM atable WHERE intColumn = '
             <para>
                 The placeholder symbol is the same symbol used by many RDBMS
                 brands for positional parameters, but the
-                <code>quoteInto()</code> method only emulates query parameters.
+                <methodname>quoteInto()</methodname> method only emulates query parameters.
                 The method simply interpolates the value into the string,
                 escapes special characters, and applies quotes around it.
                 True query parameters maintain the separation between the SQL
@@ -1434,7 +1434,7 @@ $sql = 'SELECT * FROM atable WHERE intColumn = '
 
             <example id="zend.db.adapter.quoting.quote-into.example">
                 <title>Using quoteInto()</title>
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 $sql = $db->quoteInto("SELECT * FROM bugs WHERE reported_by = ?", "O'Reilly");
 
 echo $sql;
@@ -1444,13 +1444,13 @@ echo $sql;
 
             <para>
                 You can use the optional third parameter of
-                <code>quoteInto()</code> to specify the SQL datatype. Numeric
+                <methodname>quoteInto()</methodname> to specify the SQL datatype. Numeric
                 datatypes are not quoted, and other types are quoted.
             </para>
 
             <example id="zend.db.adapter.quoting.quote-into.example-2">
                 <title>Using quoteInto() with a SQL Type</title>
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 $sql = $db
     ->quoteInto("SELECT * FROM bugs WHERE bug_id = ?", '1234', 'INTEGER');
 
@@ -1487,20 +1487,20 @@ echo $sql;
             </para>
 
             <para>
-                The <code>quoteIdentifier()</code> method works like
-                <code>quote()</code>, but it applies the identifier delimiter
+                The <methodname>quoteIdentifier()</methodname> method works like
+                <methodname>quote()</methodname>, but it applies the identifier delimiter
                 characters to the string according to the type of Adapter you
                 use. For example, standard SQL uses double-quotes
-                (<code>"</code>) for identifier delimiters, and most RDBMS
+                (<methodname>"</methodname>) for identifier delimiters, and most RDBMS
                 brands use that symbol. MySQL uses back-quotes
-                (<code>`</code>) by default. The
-                <code>quoteIdentifier()</code> method also escapes special
+                (<methodname>`</methodname>) by default. The
+                <methodname>quoteIdentifier()</methodname> method also escapes special
                 characters within the string argument.
             </para>
 
             <example id="zend.db.adapter.quoting.quote-identifier.example">
                 <title>Using quoteIdentifier()</title>
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 // we might have a table name that is an SQL reserved word
 $tableName = $db->quoteIdentifier("order");
 
@@ -1551,22 +1551,22 @@ echo $sql
             Alternatively, you can specify the beginning and resolution of a
             transaction, and thus control how many SQL queries are included in
             a single group that is committed (or rolled back) as a single
-            operation. Use the <code>beginTransaction()</code> method to
+            operation. Use the <methodname>beginTransaction()</methodname> method to
             initiate a transaction. Subsequent SQL statements are executed in
             the context of the same transaction until you resolve it
             explicitly.
         </para>
 
         <para>
-            To resolve the transaction, use either the <code>commit()</code> or
-            <code>rollBack()</code> methods. The <code>commit()</code> method
+            To resolve the transaction, use either the <methodname>commit()</methodname> or
+            <methodname>rollBack()</methodname> methods. The <methodname>commit()</methodname> method
             marks changes made during your transaction as committed, which
             means the effects of these changes are shown in queries run in
             other transactions.
         </para>
 
         <para>
-            The <code>rollBack()</code> method does the opposite: it discards
+            The <methodname>rollBack()</methodname> method does the opposite: it discards
             the changes made during your transaction. The changes are
             effectively undone, and the state of the data returns to how it was
             before you began your transaction. However, rolling back your
@@ -1577,12 +1577,12 @@ echo $sql
         <para>
             After you resolve this transaction, <classname>Zend_Db_Adapter</classname>
             returns to auto-commit mode until you call
-            <code>beginTransaction()</code> again.
+            <methodname>beginTransaction()</methodname> again.
         </para>
 
         <example id="zend.db.adapter.transactions.example">
             <title>Managing a Transaction to Ensure Consistency</title>
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 // Start a transaction explicitly.
 $db->beginTransaction();
 
@@ -1614,12 +1614,12 @@ try {
         <title>Listing and Describing Tables</title>
 
         <para>
-            The <code>listTables()</code> method returns an array of strings,
+            The <methodname>listTables()</methodname> method returns an array of strings,
             naming all tables in the current database.
         </para>
 
         <para>
-            The <code>describeTable()</code> method returns an associative
+            The <methodname>describeTable()</methodname> method returns an associative
             array of metadata about a table. Specify the name of the table
             as a string in the first argument to this method. The second
             argument is optional, and names the schema in which the table
@@ -1727,22 +1727,22 @@ try {
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>IDENTITY</code> - DB2, MSSQL
+                        <methodname>IDENTITY</methodname> - DB2, MSSQL
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>AUTO_INCREMENT</code> - MySQL
+                        <methodname>AUTO_INCREMENT</methodname> - MySQL
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>SERIAL</code> - PostgreSQL
+                        <methodname>SERIAL</methodname> - PostgreSQL
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>SEQUENCE</code> - Oracle
+                        <methodname>SEQUENCE</methodname> - Oracle
                     </para>
                 </listitem>
             </itemizedlist>
@@ -1750,7 +1750,7 @@ try {
 
         <para>
             If no table exists matching the table name and optional schema name
-            specified, then <code>describeTable()</code> returns an empty array.
+            specified, then <methodname>describeTable()</methodname> returns an empty array.
         </para>
 
     </sect2>
@@ -1770,13 +1770,13 @@ try {
             However, if you have a long-duration PHP script that initiates many
             database connections, you might need to close the connection, to avoid
             exhausting the capacity of your RDBMS server. You can use the
-            Adapter's <code>closeConnection()</code> method to explicitly close
+            Adapter's <methodname>closeConnection()</methodname> method to explicitly close
             the underlying database connection.
         </para>
 
         <para>
             Since release 1.7.2, you could check you are currently connected to the RDBMS
-            server with the method <code>isConnected()</code>. This means that a connection
+            server with the method <methodname>isConnected()</methodname>. This means that a connection
             resource has been initiated and wasn't closed. This function is not currently
             able to test for example a server side closing of the connection. This is
             internally use to close the connection. It allow you to close the connection
@@ -1786,7 +1786,7 @@ try {
 
         <example id="zend.db.adapter.closing.example">
             <title>Closing a Database Connection</title>
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 $db->closeConnection();
 ]]></programlisting>
         </example>
@@ -1839,13 +1839,13 @@ $db->closeConnection();
         <para>
             Most PHP database extensions provide a method to execute SQL
             statements without preparing them. For example, in PDO, this
-            method is <code>exec()</code>. You can access the connection
+            method is <methodname>exec()</methodname>. You can access the connection
             object in the PHP extension directly using getConnection().
         </para>
 
         <example id="zend.db.adapter.other-statements.example">
             <title>Running a Non-Prepared Statement in a PDO Adapter</title>
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 $result = $db->getConnection()->exec('DROP TABLE bugs');
 ]]></programlisting>
         </example>
@@ -1871,13 +1871,13 @@ $result = $db->getConnection()->exec('DROP TABLE bugs');
 
         <para>
             Since release 1.7.2, you could retrieve the server version in PHP syntax
-            style to be able to use <code>version_compare()</code>. If the information
-            isn't available, you will receive <code>null</code>.
+            style to be able to use <methodname>version_compare()</methodname>. If the information
+            isn't available, you will receive <constant>NULL</constant>.
         </para>
 
         <example id="zend.db.adapter.server-version.example">
             <title>Verifying server version before running a query</title>
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 $version = $db->getServerVersion();
 if (!is_null($version)) {
     if (version_compare($version, '5.0.0', '>=')) {
@@ -1919,7 +1919,7 @@ if (!is_null($version)) {
                     <para>
                         IBM DB2 supports both sequences and auto-incrementing
                         keys. Therefore the arguments to
-                        <code>lastInsertId()</code> are optional. If you give
+                        <methodname>lastInsertId()</methodname> are optional. If you give
                         no arguments, the Adapter returns the last value
                         generated for an auto-increment key. If you give
                         arguments, the Adapter returns the last value generated
@@ -1935,7 +1935,7 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        Specify this Adapter to the <code>factory()</code>
+                        Specify this Adapter to the <methodname>factory()</methodname>
                         method with the name 'Mysqli'.
                     </para>
                 </listitem>
@@ -1947,10 +1947,10 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         MySQL does not support sequences, so
-                        <code>lastInsertId()</code> ignores its arguments and
+                        <methodname>lastInsertId()</methodname> ignores its arguments and
                         always returns the last value generated for an
-                        auto-increment key. The <code>lastSequenceId()</code>
-                        method returns <code>null</code>.
+                        auto-increment key. The <methodname>lastSequenceId()</methodname>
+                        method returns <constant>NULL</constant>.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -1961,7 +1961,7 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        Specify this Adapter to the <code>factory()</code>
+                        Specify this Adapter to the <methodname>factory()</methodname>
                         method with the name 'Oracle'.
                     </para>
                 </listitem>
@@ -1974,8 +1974,8 @@ if (!is_null($version)) {
                     <para>
                         Oracle does not support auto-incrementing keys, so you
                         should specify the name of a sequence to
-                        <code>lastInsertId()</code> or
-                        <code>lastSequenceId()</code>.
+                        <methodname>lastInsertId()</methodname> or
+                        <methodname>lastSequenceId()</methodname>.
                     </para>
                 </listitem>
                 <listitem>
@@ -1995,8 +1995,8 @@ if (!is_null($version)) {
                     <para>
                         By default, LOB fields are returned as OCI-Lob objects. You could
                         retrieve them as string for all requests by using driver options
-                        <code>'lob_as_string'</code> or for particular request by using
-                        <code>setLobAsString(boolean)</code> on adapter or on statement.
+                        <methodname>'lob_as_string'</methodname> or for particular request by using
+                        <methodname>setLobAsString(boolean)</methodname> on adapter or on statement.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -2007,7 +2007,7 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        Specify this Adapter to the <code>factory()</code>
+                        Specify this Adapter to the <methodname>factory()</methodname>
                         method with the name 'Pdo_Ibm'.
                     </para>
                 </listitem>
@@ -2031,7 +2031,7 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        Specify this Adapter to the <code>factory()</code>
+                        Specify this Adapter to the <methodname>factory()</methodname>
                         method with the name 'Pdo_Mssql'.
                     </para>
                 </listitem>
@@ -2043,10 +2043,10 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         Microsoft SQL Server does not support sequences, so
-                        <code>lastInsertId()</code> ignores its arguments and
+                        <methodname>lastInsertId()</methodname> ignores its arguments and
                         always returns the last value generated for an
-                        auto-increment key. The <code>lastSequenceId()</code>
-                        method returns <code>null</code>.
+                        auto-increment key. The <methodname>lastSequenceId()</methodname>
+                        method returns <constant>NULL</constant>.
                     </para>
                 </listitem>
                 <listitem>
@@ -2060,17 +2060,17 @@ if (!is_null($version)) {
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_Db_Adapter_Pdo_Mssql</classname> sets <code>QUOTED_IDENTIFIER ON</code>
+                        <classname>Zend_Db_Adapter_Pdo_Mssql</classname> sets <methodname>QUOTED_IDENTIFIER ON</methodname>
                         immediately after connecting to a SQL Server database.
                         This makes the driver use the standard SQL identifier
-                        delimiter symbol (<code>"</code>) instead of the
+                        delimiter symbol (<methodname>"</methodname>) instead of the
                         proprietary square-brackets syntax SQL Server uses for
                         delimiting identifiers.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        You can specify <code>pdoType</code> as a key in the
+                        You can specify <methodname>pdoType</methodname> as a key in the
                         options array. The value can be "mssql" (the default),
                         "dblib", "freetds", or "sybase". This option affects
                         the DSN prefix the adapter uses when constructing the
@@ -2092,7 +2092,7 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        Specify this Adapter to the <code>factory()</code>
+                        Specify this Adapter to the <methodname>factory()</methodname>
                         method with the name 'Pdo_Mysql'.
                     </para>
                 </listitem>
@@ -2104,10 +2104,10 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         MySQL does not support sequences, so
-                        <code>lastInsertId()</code> ignores its arguments and
+                        <methodname>lastInsertId()</methodname> ignores its arguments and
                         always returns the last value generated for an
-                        auto-increment key. The <code>lastSequenceId()</code>
-                        method returns <code>null</code>.
+                        auto-increment key. The <methodname>lastSequenceId()</methodname>
+                        method returns <constant>NULL</constant>.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -2118,7 +2118,7 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        Specify this Adapter to the <code>factory()</code>
+                        Specify this Adapter to the <methodname>factory()</methodname>
                         method with the name 'Pdo_Oci'.
                     </para>
                 </listitem>
@@ -2131,8 +2131,8 @@ if (!is_null($version)) {
                     <para>
                         Oracle does not support auto-incrementing keys, so you
                         should specify the name of a sequence to
-                        <code>lastInsertId()</code> or
-                        <code>lastSequenceId()</code>.
+                        <methodname>lastInsertId()</methodname> or
+                        <methodname>lastSequenceId()</methodname>.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -2143,7 +2143,7 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        Specify this Adapter to the <code>factory()</code>
+                        Specify this Adapter to the <methodname>factory()</methodname>
                         method with the name 'Pdo_Pgsql'.
                     </para>
                 </listitem>
@@ -2156,7 +2156,7 @@ if (!is_null($version)) {
                     <para>
                         PostgreSQL supports both sequences and auto-incrementing
                         keys. Therefore the arguments to
-                        <code>lastInsertId()</code> are optional. If you give
+                        <methodname>lastInsertId()</methodname> are optional. If you give
                         no arguments, the Adapter returns the last value
                         generated for an auto-increment key. If you give
                         arguments, the Adapter returns the last value generated
@@ -2172,7 +2172,7 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        Specify this Adapter to the <code>factory()</code>
+                        Specify this Adapter to the <methodname>factory()</methodname>
                         method with the name 'Pdo_Sqlite'.
                     </para>
                 </listitem>
@@ -2184,16 +2184,16 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         SQLite does not support sequences, so
-                        <code>lastInsertId()</code> ignores its arguments and
+                        <methodname>lastInsertId()</methodname> ignores its arguments and
                         always returns the last value generated for an
-                        auto-increment key. The <code>lastSequenceId()</code>
-                        method returns <code>null</code>.
+                        auto-increment key. The <methodname>lastSequenceId()</methodname>
+                        method returns <constant>NULL</constant>.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         To connect to an SQLite2 database, specify
-                        <code>'sqlite2'=>true</code> in the array of
+                        <methodname>'sqlite2'=>true</methodname> in the array of
                         parameters when creating an instance of the
                         Pdo_Sqlite Adapter.
                     </para>
@@ -2201,7 +2201,7 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         To connect to an in-memory SQLite database,
-                        specify <code>'dbname'=>':memory:'</code> in the
+                        specify <methodname>'dbname'=>':memory:'</methodname> in the
                         array of parameters when creating an instance of
                         the Pdo_Sqlite Adapter.
                     </para>
@@ -2232,8 +2232,8 @@ if (!is_null($version)) {
                     <para>
                         Firebird/interbase does not support auto-incrementing keys,
                         so you should specify the name of a sequence to
-                        <code>lastInsertId()</code> or
-                        <code>lastSequenceId()</code>.
+                        <methodname>lastInsertId()</methodname> or
+                        <methodname>lastSequenceId()</methodname>.
                     </para>
                 </listitem>
                 <listitem>

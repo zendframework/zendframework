@@ -19,7 +19,7 @@
         definido, sólo que esta vez usaremos la ruta Regex:
     </para>
 
-    <programlisting role="php"><![CDATA[
+     <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route_Regex(
     'archive/(\d+)',
     array(
@@ -33,11 +33,11 @@ $router->addRoute('archive', $route);
     <para>
         Cada sub-patrón regex definido será inyectado al objeto solicitud. 
         Con nuestro ejemplo anterior, después de un matching exitoso
-        <code>http://domain.com/archive/2006</code>, el valor resultante del 
+        <methodname>http://domain.com/archive/2006</methodname>, el valor resultante del 
         array puede verse como:
     </para>
 
-    <programlisting role="php"><![CDATA[
+     <programlisting language="php"><![CDATA[
 $values = array(
     1            => '2006',
     'controller' => 'archive',
@@ -49,8 +49,8 @@ $values = array(
         <para>
             Las barras de comienzo y final están recortadas de la URL en el 
             Router antes de una concordancia. Como resultado, coincidendo con 
-            la URL <code>http://domain.com/foo/bar/</code>, involucraría al 
-            regex de <code>foo/bar</code>, y no a <code>/foo/bar</code>.
+            la URL <methodname>http://domain.com/foo/bar/</methodname>, involucraría al 
+            regex de <methodname>foo/bar</methodname>, y no a <methodname>/foo/bar</methodname>.
         </para>
     </note>
 
@@ -65,7 +65,7 @@ $values = array(
 
     <note>
         <para>
-            Esta clase de ruta usa el carácter <code>#</code> como un delimitador. 
+            Esta clase de ruta usa el carácter <methodname>#</methodname> como un delimitador. 
             Esto significa que necesitará caracteres hash ('#') para escapar    
             pero no barras ('/') en sus definiciones de ruta. 
             Dado que el carácter '#' (llamado ancla) es raramente pasado al 
@@ -78,7 +78,7 @@ $values = array(
         Puede obtener el contenido de los sub-patrones definidos por la forma habitual:
     </para>
 
-    <programlisting role="php"><![CDATA[
+     <programlisting language="php"><![CDATA[
 public function showAction()
 {
     $request = $this->getRequest();
@@ -102,7 +102,7 @@ public function showAction()
         barra pero capturar solo la parte numérica:
     </para>
 
-    <programlisting role="php"><![CDATA[
+     <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route_Regex(
     'archive(?:/(\d+))?',
     array(
@@ -124,7 +124,7 @@ $router->addRoute('archive', $route);
         en nuestro ejemplo más fácil:
     </para>
 
-    <programlisting role="php"><![CDATA[
+     <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route_Regex(
     'archive/(\d+)',
     array(
@@ -142,7 +142,7 @@ $router->addRoute('archive', $route);
         Esto resultaraá en los siguientes valores inyectados a la solicitud:
     </para>
 
-    <programlisting role="php"><![CDATA[
+     <programlisting language="php"><![CDATA[
 $values = array(
     'year'       => '2006',
     'controller' => 'archive',
@@ -157,7 +157,7 @@ $values = array(
     </para>
 
 
-    <programlisting role="php"><![CDATA[
+     <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route_Regex(
     'archive/(\d+)',
     array( ... ),
@@ -185,7 +185,7 @@ $route = new Zend_Controller_Router_Route_Regex(
         Por supuesto que puede mezclar variables nombradas y numéricas si lo desea:
     </para>
 
-    <programlisting role="php"><![CDATA[
+     <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route_Regex(
     'archive/(\d+)/page/(\d+)',
     array( ... ),
@@ -195,11 +195,11 @@ $route = new Zend_Controller_Router_Route_Regex(
 
     <para>
         Lo que resultará en una mezcla de valores disponibles en la solicitud. 
-        Como ejemplo, la URL <code>http://domain.com/archive/2006/page/10</code>  
+        Como ejemplo, la URL <methodname>http://domain.com/archive/2006/page/10</methodname>  
         resultará con los siguientes valores:
     </para>
 
-    <programlisting role="php"><![CDATA[
+     <programlisting language="php"><![CDATA[
 $values = array(
     'year'       => '2006',
     2            => 10,
@@ -216,7 +216,7 @@ $values = array(
         parámetro del constructor:
     </para>
 
-    <programlisting role="php"><![CDATA[
+     <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route_Regex(
     'archive/(\d+)',
     array( ... ),
@@ -231,15 +231,15 @@ $route = new Zend_Controller_Router_Route_Regex(
         de utilizar la ruta Regex?. 
         Principalmente, le permite describir cualquier tipo de URL sin 
         restricción alguna. Imagínese que tiene un blog y desea crear URLs 
-        como: <code>http://domain.com/blog/archive/01-Using_the_Regex_Router.html</code>, 
+        como: <methodname>http://domain.com/blog/archive/01-Using_the_Regex_Router.html</methodname>, 
         y que tiene que descomponer el último elemento del path 
-        <code>01-Using_the_Regex_Router.html</code>, en un ID de artículo y 
+        <methodname>01-Using_the_Regex_Router.html</methodname>, en un ID de artículo y 
         en el título/descripción del artículo; esto no es posible con el 
         standard route. Con la ruta Regex, puede hacer algo como la siguiente 
         solución:
     </para>
 
-    <programlisting role="php"><![CDATA[
+     <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route_Regex(
     'blog/archive/(\d+)-(.+)\.html',
     array(

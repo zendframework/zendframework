@@ -148,7 +148,7 @@
             la que define la siguiente API:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 
 interface Zend_Application_Bootstrap_Bootstrapper
 {
@@ -190,15 +190,15 @@ interface Zend_Application_Bootstrap_Bootstrapper
                 <classname>Zend_Application_Bootstrap_BootstrapAbstract</classname>
                 proporciona una simple convención para definir métodos de
                 recursos de clase. Cualquier método protegido cuyo nombre
-                comience con un prefijo <code>_init</code> será considerado
+                comience con un prefijo <methodname>_init</methodname> será considerado
                 un método de recurso.
             </para>
 
             <para>
                 Para arrancar un único método de recurso, utilizar el método
-                <code>bootstrap()</code>, y pasarle el nombre del recurso.
+                <methodname>bootstrap()</methodname>, y pasarle el nombre del recurso.
                 El nombre será el nombre de método menos el prefijo
-                <code>_init</code>.
+                <methodname>_init</methodname>.
             </para>
 
             <para>
@@ -211,7 +211,7 @@ interface Zend_Application_Bootstrap_Bootstrapper
                 Tome las siguientes clases bootstrap:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
@@ -233,31 +233,31 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 ]]></programlisting>
 
             <para>
-                Para arrancar solo el método <code>_initFoo()</code>, haga lo
+                Para arrancar solo el método <methodname>_initFoo()</methodname>, haga lo
                 siguiente:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 
 $bootstrap->bootstrap('foo');
 ]]></programlisting>
 
             <para>
-                Para arrancar los métodos <code>_initFoo()</code> y
-                <code>_initBar()</code> , haga lo siguiente:
+                Para arrancar los métodos <methodname>_initFoo()</methodname> y
+                <methodname>_initBar()</methodname> , haga lo siguiente:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 
 $bootstrap->bootstrap(array('foo', 'bar));
 ]]></programlisting>
 
             <para>
                 Para arrancar todos los métodos de recursos, llame a
-                <code>code>bootstrap()</code> sin argumentos:
+                <methodname>code>bootstrap()</methodname> sin argumentos:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 
 $bootstrap->bootstrap();
 ]]></programlisting>
@@ -285,7 +285,7 @@ $bootstrap->bootstrap();
                 y cargar recursos de plugins:
             </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 
 interface Zend_Application_Bootstrap_ResourceBootstrapper
 {
@@ -329,7 +329,7 @@ interface Zend_Application_Bootstrap_ResourceBootstrapper
                 Como por ejemplo,
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 
 $application = new Zend_Application(APPLICATION_ENV, array(
     'resources' => array(
@@ -357,13 +357,13 @@ $application = new Zend_Application(APPLICATION_ENV, array(
 
             <para>
                 Supongamos por ejemplo, que usted tiene recursos de plugins
-                personalizados en <code>APPLICATION_PATH/resources/</code> y que
-                ellos comparten el prefijo de clase común <code>My_Resource</code>.
+                personalizados en <methodname>APPLICATION_PATH/resources/</methodname> y que
+                ellos comparten el prefijo de clase común <methodname>My_Resource</methodname>.
                 Entonces, debería pasar esa información al objeto aplicación
                 de la siguiente manera:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 
 $application = new Zend_Application(APPLICATION_ENV, array(
     'pluginPaths' => array(
@@ -390,7 +390,7 @@ $application = new Zend_Application(APPLICATION_ENV, array(
                 Además, los puede combinar para ejecutar métodos de recursos.
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 
 // Ejecute uno:
 $bootstrap->bootstrap('FrontController');
@@ -427,11 +427,11 @@ $bootstrap->bootstrap();
                 Por defecto, una instancia de
                 <classname>Zend_Registry</classname> es utilizada, pero
                 también puede especificar cualquier otro objeto que desee.
-                Los métodos <code>setContainer()</code> y <code>getContainer()</code>
+                Los métodos <methodname>setContainer()</methodname> y <methodname>getContainer()</methodname>
                 pueden ser utilizados para manipular el contenedor en si mismo.
-                <code>getResource($resource)</code> puede ser utilizado para
+                <methodname>getResource($resource)</methodname> puede ser utilizado para
                 recuperar un recurso determinado del contenedor, y
-                <code>hasResource($resource)</code> para verificar si el
+                <methodname>hasResource($resource)</methodname> para verificar si el
                 recurso ha sido efectivamente registrado.
             </para>
 
@@ -439,7 +439,7 @@ $bootstrap->bootstrap();
                 Como ejemplo, considere una visión básica del recurso:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
@@ -457,7 +457,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                 A continuación, puede comprobarlos y/o traerlos así:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 
 // Usando el par has/getResource():
 if ($bootstrap->hasResource('view')) {
@@ -476,7 +476,7 @@ if (isset($container->view)) {
                 Esto significa que usted necesita acceso al bootstrap a fin de
                 recuperar recursos. <classname>Zend_Application_Bootstrap_Bootstrap</classname>
                 proporciona cierta comodidad para ello: durante las ejecución de
-                <code>run()</code> se registra a sí mismo como el "Front
+                <methodname>run()</methodname> se registra a sí mismo como el "Front
                 Controller" en el parámetro del "bootstrap", que permite
                 buscarlo desde el router, despachador, plugins, y los
                 contoladores de acción.
@@ -488,7 +488,7 @@ if (isset($container->view)) {
                 hacer lo siguiente:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 
 class FooController extends Zend_Controller_Action
 {
@@ -524,14 +524,14 @@ class FooController extends Zend_Controller_Action
             <para>
                 Como se señaló anteriormente, todos los recursos --
                 ya sean métodos o plugins -- son arrancados llamando a
-                <code>bootstrap($resource)</code>, dende <code>$resource</code>
+                <methodname>bootstrap($resource)</methodname>, dende <methodname>$resource</methodname>
                 es el nombre de un recurso, un array de recursos,
                 o si se dejó vacío, indica que deberían ejecutarse todos los recursos.
             </para>
 
             <para>
                 Si un recurso depende de otro recurso, debe llamar a
-                <code>bootstrap()</code> dentro de su código para garantizar
+                <methodname>bootstrap()</methodname> dentro de su código para garantizar
                 que ese recurso ha sido ejecutado.
                 Las llamadas subsiguientes a él, serán ignoradas.
             </para>
@@ -540,7 +540,7 @@ class FooController extends Zend_Controller_Action
                 En un método de recursos, esa llamada sería parecida a lo siguiente:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
@@ -586,7 +586,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             La interfaz básica es simplemente esto:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 
 interface Zend_Application_Resource_Resource
 {
@@ -615,7 +615,7 @@ interface Zend_Application_Resource_Resource
             título via configuración. Un recurso tal podría ser como este:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 
 class My_Resource_View extends Zend_Application_Resource_ResourceAbstract
 {

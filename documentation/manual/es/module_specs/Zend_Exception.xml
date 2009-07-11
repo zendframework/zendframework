@@ -15,7 +15,7 @@
         <para>
             The following code listing demonstrates how to catch an exception thrown in a Zend Framework class:
         </para>
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 try {
     // Calling Zend_Loader::loadClass() with a non-existant class will cause
     // an exception to be thrown in Zend_Loader

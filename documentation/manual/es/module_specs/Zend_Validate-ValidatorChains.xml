@@ -12,7 +12,7 @@
         <link linkend="zend.validate.introduction">introducción</link>, donde el
         nombre de usuario debe tener entre 6 y 12 caracteres alfanuméricos.
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 // Crea una cadena de validadores y le agrega validadores
 $validatorChain = new Zend_Validate();
 $validatorChain->addValidator(new Zend_Validate_StringLength(6, 12))
@@ -29,13 +29,13 @@ if ($validatorChain->isValid($username)) {
 }
 ]]></programlisting>
 
-        Los validadores se ejecutan en el orden en que se agregaron a <code>Zend_Validate</code>.
+        Los validadores se ejecutan en el orden en que se agregaron a <methodname>Zend_Validate</methodname>.
         En el ejemplo anterior, el nombre de usuario, primero se comprueba que
         su longitud esté entre 6 y 12 caracteres y luego se controla para garantizar
         que sólo contiene caracteres alfanuméricos.
         La segunda validación; de caracteres alfanuméricos; se realiza independientemente
         de que la primera validación; de longitud entre 6 y 12 caracteres; tenga éxito.
-        Esto significa que si ambas validaciones fallan, <code>getMessages()</code>
+        Esto significa que si ambas validaciones fallan, <methodname>getMessages()</methodname>
         devolverá mensajes de fracaso desde ambos validadores.
     </para>
 
@@ -43,8 +43,8 @@ if ($validatorChain->isValid($username)) {
         En algunos casos tiene sentido detener la cadena de validación si falla
         alguno de los procesos de validación.
         <classname>Zend_Validate</classname> acepta tales casos pasando como segundo
-        parámetro el método <code>addValidator()</code>.
-        Poniendo <code>$breakChainOnFailure</code> a <code>true</code>,
+        parámetro el método <methodname>addValidator()</methodname>.
+        Poniendo <methodname>$breakChainOnFailure</methodname> a <methodname>true</methodname>,
         el validador agregado quebrará la cadena de ejecución por el fracaso,
         que evita correr cualquier otra validación que se decida que es
         innecesaria o inapropiada para la situación.
@@ -52,7 +52,7 @@ if ($validatorChain->isValid($username)) {
         de validación alfanumérica no se ejecutará si falla la longitud del
         string de validación:
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $validatorChain->addValidator(new Zend_Validate_StringLength(6, 12), true)
         ->addValidator(new Zend_Validate_Alnum());
 ]]></programlisting>

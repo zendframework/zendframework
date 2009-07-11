@@ -56,7 +56,7 @@
 
         <para>
             Las páginas del documento se almacenados en el atributo público 
-            <code>$pages</code> de la clase <classname>Zend_Pdf</classname>. 
+            <methodname>$pages</methodname> de la clase <classname>Zend_Pdf</classname>. 
             El atributo posee un array de objetos <classname>Zend_Pdf_Page</classname> 
             y define completamente las instancias y el orden de las páginas. 
             Este array puede manipularse como cualquie otro array PHP:
@@ -64,7 +64,7 @@
 
         <example id="zend.pdf.pages.example-1">
             <title>Administración de Páginas de un Documento PDF.</title>
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 ...
 // Invertir el orden de las páginas.
 $pdf->pages = array_reverse($pdf->pages);
@@ -92,7 +92,7 @@ unset($pdf->pages[$id]);
 
         <example id="zend.pdf.pages.example-2">
             <title>Clonando una Página Existente.</title>
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 ...
 // Almacenar la página plantilla en una variable
 $template = $pdf->pages[$templatePageIndex];

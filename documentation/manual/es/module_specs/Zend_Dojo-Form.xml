@@ -73,14 +73,14 @@
         </para>
 
         <para>
-            Un segundo enfoque es llamar al método <code>init()</code> dentro 
+            Un segundo enfoque es llamar al método <methodname>init()</methodname> dentro 
             de sus forms personalizados 
             <classname>Zend_Dojo::enableForm()</classname>. Cuando la definición 
             del formulario está completa, mediante un loop habilite todos los 
             SubForms de Dojo:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 class My_Form_Custom extends Zend_Form
 {
     public function init()

@@ -19,14 +19,14 @@
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>tableName</code>: Nombre de tabla de la base de datos que
+                        <methodname>tableName</methodname>: Nombre de tabla de la base de datos que
                         contiene las credenciales de autenticación, y contra la cual
                         se realiza la búsqueda de autenticación en la base de datos.
                         </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>identityColumn</code>: Nombre de la columna de la tabla
+                        <methodname>identityColumn</methodname>: Nombre de la columna de la tabla
                         de la base de datos utilizada para representar la identidad. La 
                         columna identidad debe contar con valores únicos, tales como un
                         apellido ó una dirección de e-mail.
@@ -34,22 +34,22 @@
                 </listitem>
                 <listitem>
                     <para>
-                        <code>credentialColumn</code>: Nombre de la columna de la tabla 
+                        <methodname>credentialColumn</methodname>: Nombre de la columna de la tabla 
                         de la base de datos utilizada para representar la credencial.
                         Conforme a un sistema de identidad simple y autenticación de 
                         contraseña, el valor de la credencial corresponde con la 
-                        contraseña. Véase también la opción <code>credentialTreatment
-                        </code>.
+                        contraseña. Véase también la opción <methodname>credentialTreatment
+                        </methodname>.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>credentialTreatment</code>: En muchos casos, contraseñas
+                        <methodname>credentialTreatment</methodname>: En muchos casos, contraseñas
                         y otros datos son encriptados, mezclados, codificados,
                         ocultados, desplazados o tratados de otra manera a través de 
                         alguna función o algoritmo. Al especificar una cadena de 
                         tratamiento parametrizada con este método, tal como 
-                        <code>'MD5(?)'</code> o <code>'PASSWORD(?)'</code>, un 
+                        <methodname>'MD5(?)'</methodname> o <methodname>'PASSWORD(?)'</methodname>, un 
                         desarrollador podría aplicar sentencias arbitrarias SQL 
                         sobre los datos credenciales de entrada. Ya que estas funciones 
                         son específicas de los RDBMS, debemos consultar el manual de la 
@@ -75,7 +75,7 @@
                 pueda realizar una consulta de autenticación posterior. Este ejemplo 
                 requiere que la extensión DOP SQLite esté disponible.
             </para>
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 // Crear una conexión en memoria de la bade de datos SQLite
 $dbAdapter = new Zend_Db_Adapter_Pdo_Sqlite(array('dbname' =>
                                                   ':memory:'));
@@ -104,7 +104,7 @@ $dbAdapter->query($sqlInsert);
                 de configuración pueden ser pasados al constructor o pasados como 
                 parámetros a los métodos setter después de ser instanciados.
                 </para>
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 // Configurar la instancia con los parámetros del constructor...
 $authAdapter = new Zend_Auth_Adapter_DbTable(
     $dbAdapter,
@@ -127,9 +127,9 @@ $authAdapter
                 para aceptar consultas de autenticación. Con el fin de elaborar una 
                 consulta de autenticación, los valores de entrada de la credencial son 
                 pasados por el adaptador ates de llamar al método 
-                <code>authenticate()</code>:
+                <methodname>authenticate()</methodname>:
             </para>
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 // Seleccionamos los valores de entrada de la credencial (e.g., de un formulario de acceso)
 $authAdapter
     ->setIdentity('my_username')
@@ -139,12 +139,12 @@ $authAdapter
 // Ejecutamos la consulta de autenticación, salvando los resultados
 ]]></programlisting>
             <para>
-            	Además de la disponibilidad del método <code>getIdentity()</code> 
+            	Además de la disponibilidad del método <methodname>getIdentity()</methodname> 
             	sobre el objeto resultante de la autenticación, 
             	<classname>Zend_Auth_Adapter_DbTable</classname> también ayuda a 
             	recuperar la fila de al tabla sobre la autenticación realizada.
                 </para>
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 // Imprimir la identidad
 echo $result->getIdentity() . "\n\n";
 
@@ -176,11 +176,11 @@ Array
         	realizada. Otro de los casos de uso, donde los desarrolladores desean 
         	guardar para mantener el mecanismo de almacenamiento de un objeto identidad 
         	<classname>Zend_Auth</classname> que contiene información útil, se 
-        	resuelve usando el método <code>getResultRowObject()</code> para devolver 
-        	un objeto <code>stdClass</code>. El siguiente fragmento de código muestra 
+        	resuelve usando el método <methodname>getResultRowObject()</methodname> para devolver 
+        	un objeto <methodname>stdClass</methodname>. El siguiente fragmento de código muestra 
         	su uso:
         </para>
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 // Autenticar con Zend_Auth_Adapter_DbTable
 $result = $this->_auth->authenticate($adapter);
 
@@ -229,7 +229,7 @@ if ($result->isValid()) {
             autenticación a la vez que se resuelven algunos problemas comunes de los 
             usuarios.
         </para>
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 // El valor del campo status de una cuenta no es igual a "compromised"
 $adapter = new Zend_Auth_Adapter_DbTable(
     $db,
@@ -258,7 +258,7 @@ $adapter = new Zend_Auth_Adapter_DbTable(
             Por lo tanto, tenemos que modificar nuestra tabla para almacenar nuestra 
             cadena mezclada:
         </para>
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $sqlAlter = "ALTER TABLE [users] "
           . "ADD COLUMN [password_salt] "
           . "AFTER [password]";
@@ -267,14 +267,14 @@ $sqlAlter = "ALTER TABLE [users] "
             Aquí hay una forma sencilla de generar una cadena mezclada por cada 
             usuario en el momento del registro:
         </para>
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 for ($i = 0; $i < 50; $i++) {
     $dynamicSalt .= chr(rand(33, 126));
 ]]></programlisting>
         <para>
             Y ahora vamos a construir el adaptador:
         </para>
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $adapter = new Zend_Auth_Adapter_DbTable(
     $db,
     'users',
@@ -295,7 +295,7 @@ $adapter = new Zend_Auth_Adapter_DbTable(
             </para>
         </note>
         <para>
-            Otra alternativa es utilizar el método <code>getDbSelect()</code> de 
+            Otra alternativa es utilizar el método <methodname>getDbSelect()</methodname> de 
             Zend_Auth_Adapter_DbTable después de que el adaptador se ha construido. 
             Este método devolverá la instancia del objeto Zend_Db_Select que se va a 
             utilizar para completar la rutina de authenticate(). Es importante señalar 
@@ -310,7 +310,7 @@ $adapter = new Zend_Auth_Adapter_DbTable(
             método getDbSelect() sería comprobar el estado de un usuario, en otras 
             palabras, ver si la cuenta del usuario está habilitada.
         </para>
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 // Continuando con el ejemplo de arriba
 $adapter = new Zend_Auth_Adapter_DbTable(
     $db,

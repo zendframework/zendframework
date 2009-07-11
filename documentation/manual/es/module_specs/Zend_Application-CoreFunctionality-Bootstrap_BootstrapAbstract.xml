@@ -27,11 +27,11 @@
             </thead>
             <tbody>
                 <row>
-                    <entry><code>__construct($application)</code></entry>
-                    <entry><code>void</code></entry>
+                    <entry><methodname>__construct($application)</methodname></entry>
+                    <entry><methodname>void</methodname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$application</code>: <emphasis>requerido</emphasis>.
+                            <methodname>$application</methodname>: <emphasis>requerido</emphasis>.
                             Acepta tanto a <classname>Zend_Application</classname> o al
                             objeto <classname>Zend_Application_Bootstrap_Bootstrapper</classname>
                             como único argumento.
@@ -45,11 +45,11 @@
                 </row>
 
                 <row>
-                    <entry><code>setOptions(array $options)</code></entry>
+                    <entry><methodname>setOptions(array $options)</methodname></entry>
                     <entry><classname>Zend_Application_Bootstrap_Bootstrapper</classname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$options</code>: <emphasis>requerido</emphasis>.
+                            <methodname>$options</methodname>: <emphasis>requerido</emphasis>.
                             Array de opciones a establecer.
                         </para></listitem>
                     </itemizedlist></entry>
@@ -59,15 +59,15 @@
                         ese setter; de lo contrario, la opción será simplemente
                         almacenada para su recuperación posterior.
                         Como ejemplo, si su clase extendida definió
-                        un método  <code>setFoo()</code>, la opción 'foo'
+                        un método  <methodname>setFoo()</methodname>, la opción 'foo'
                         pasaría el valor a ese método.
                     </para>
                     <para>
                         También pueden usarse dos opciones especiales clave.
-                        <code>pluginPaths</code> puede ser utilizada para
+                        <methodname>pluginPaths</methodname> puede ser utilizada para
                         especificar prefijos de paths para los recursos plugin;
                         debería ser un array de la clase pares prefijo/path.
-                        <code>resources</code> puede ser utilizada para
+                        <methodname>resources</methodname> puede ser utilizada para
                         especificar los recursos plugin a utilizar,
                         y debería estar constituído por pares de opciones plugin
                         recurso/instanciación.
@@ -76,21 +76,21 @@
                 </row>
 
                 <row>
-                    <entry><code>getOption()</code></entry>
-                    <entry><code>array</code></entry>
+                    <entry><methodname>getOption()</methodname></entry>
+                    <entry><methodname>array</methodname></entry>
                     <entry>N/A</entry>
                     <entry><para>
                         Devuelve todas las opciones registradas via
-                        <code>setOptions()</code>.
+                        <methodname>setOptions()</methodname>.
                     </para></entry>
                 </row>
 
                 <row>
-                    <entry><code>hasOption($key)</code></entry>
-                    <entry><code>boolean</code></entry>
+                    <entry><methodname>hasOption($key)</methodname></entry>
+                    <entry><methodname>boolean</methodname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$key</code>: <emphasis>requerido</emphasis>.
+                            <methodname>$key</methodname>: <emphasis>requerido</emphasis>.
                             Clave de opción a probar.
                         </para></listitem>
                     </itemizedlist></entry>
@@ -98,11 +98,11 @@
                 </row>
 
                 <row>
-                    <entry><code>getOption($key)</code></entry>
-                    <entry><code>mixed</code></entry>
+                    <entry><methodname>getOption($key)</methodname></entry>
+                    <entry><methodname>mixed</methodname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$key</code>: <emphasis>requerido</emphasis>.
+                            <methodname>$key</methodname>: <emphasis>requerido</emphasis>.
                             Clave de opción para recuperar.
                         </para></listitem>
                     </itemizedlist></entry>
@@ -114,12 +114,12 @@
                 </row>
 
                 <row>
-                    <entry><code>setApplication(Zend_Application |
-                            Zend_Application_Bootstrap_Bootstrapper $application)</code></entry>
+                    <entry><methodname>setApplication(Zend_Application |
+                            Zend_Application_Bootstrap_Bootstrapper $application)</methodname></entry>
                     <entry><classname>Zend_Application_Bootstrap_BootstrapAbstract</classname></entry>
                     <entry><itemizedlist>
                             <listitem><para>
-                                <code>$application</code>: <emphasis>requerido</emphasis>.
+                                <methodname>$application</methodname>: <emphasis>requerido</emphasis>.
                             </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
@@ -128,7 +128,7 @@
                 </row>
 
                 <row>
-                    <entry><code>getApplication()</code></entry>
+                    <entry><methodname>getApplication()</methodname></entry>
                     <entry><classname>Zend_Application |
                             Zend_Application_Bootstrap_Bootstrapper</classname></entry>
                     <entry>N/A</entry>
@@ -139,8 +139,8 @@
                 </row>
 
                 <row>
-                    <entry><code>getEnvironment()</code></entry>
-                    <entry><code>string</code></entry>
+                    <entry><methodname>getEnvironment()</methodname></entry>
+                    <entry><methodname>string</methodname></entry>
                     <entry>N/A</entry>
                     <entry><para>
                         Recuperar el string del medio ambiente registrado
@@ -149,8 +149,8 @@
                 </row>
 
                 <row>
-                    <entry><code>getClassResources()</code></entry>
-                    <entry><code>array</code></entry>
+                    <entry><methodname>getClassResources()</methodname></entry>
+                    <entry><methodname>array</methodname></entry>
                     <entry>N/A</entry>
                     <entry><para>
                         Recuperar una lista de los recursos inicializadores de
@@ -160,8 +160,8 @@
                 </row>
 
                 <row>
-                    <entry><code>getContainer()</code></entry>
-                    <entry><code>object</code></entry>
+                    <entry><methodname>getContainer()</methodname></entry>
+                    <entry><methodname>object</methodname></entry>
                     <entry>N/A</entry>
                     <entry><para>
                         Recupera el contenedor que almacena recursos.
@@ -173,11 +173,11 @@
                 </row>
 
                 <row>
-                    <entry><code>setContainer($container)</code></entry>
+                    <entry><methodname>setContainer($container)</methodname></entry>
                     <entry><classname>Zend_Application_Bootstrap_BootstrapAbstract</classname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$container</code>, <emphasis>requerido</emphasis>.
+                            <methodname>$container</methodname>, <emphasis>requerido</emphasis>.
                             Un objeto en el cual almacenar recursos.
                         </para></listitem>
                     </itemizedlist></entry>
@@ -190,52 +190,52 @@
                 </row>
 
                 <row>
-                    <entry><code>hasResource($name)</code></entry>
-                    <entry><code>boolean</code></entry>
+                    <entry><methodname>hasResource($name)</methodname></entry>
+                    <entry><methodname>boolean</methodname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$name</code>, <emphasis>requerido</emphasis>.
+                            <methodname>$name</methodname>, <emphasis>requerido</emphasis>.
                             Nombre del recurso a comprobar.
                         </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
                         Cuando un método de recurso o plugin devuelve un valor,
                         será almacenado en el contenedor de recursos (ver
-                        <code>getContainer()</code> y
-                        <code>setContainer()</code>. Este método indicará si
+                        <methodname>getContainer()</methodname> y
+                        <methodname>setContainer()</methodname>. Este método indicará si
                         se ha establecido o no un valor para ese recurso.
                     </para></entry>
                 </row>
 
                 <row>
-                    <entry><code>getResource($name)</code></entry>
-                    <entry><code>mixed</code></entry>
+                    <entry><methodname>getResource($name)</methodname></entry>
+                    <entry><methodname>mixed</methodname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$name</code>, <emphasis>requerido</emphasis>.
+                            <methodname>$name</methodname>, <emphasis>requerido</emphasis>.
                             Nombre del recurso a recuperar.
                         </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
                         Cuando un método de recurso o plugin devuelve un valor,
                         será almacenado en el contenedor de recursos (ver
-                        <code>getContainer()</code> y
-                        <code>setContainer()</code>. Este método recuperará
+                        <methodname>getContainer()</methodname> y
+                        <methodname>setContainer()</methodname>. Este método recuperará
                         recursos del contenedor.
                     </para></entry>
                 </row>
 
                 <row>
-                    <entry><code>bootstrap($resource = null)</code></entry>
-                    <entry><code>mixed</code></entry>
+                    <entry><methodname>bootstrap($resource = null)</methodname></entry>
+                    <entry><methodname>mixed</methodname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$resource</code>: <emphasis>opcional</emphasis>.
+                            <methodname>$resource</methodname>: <emphasis>opcional</emphasis>.
                         </para></listitem>
                     </itemizedlist></entry>
                     <entry>
                     <para>
-                        Si <code>$resource</code> está vacío, ejecutar todos
+                        Si <methodname>$resource</methodname> está vacío, ejecutar todos
                         los recursos del bootstrap.
                         Si es un string, ejecutar ese único recurso;
                         si es un array, ejecutar cada recurso del array.
@@ -253,8 +253,8 @@
                 </row>
 
                 <row>
-                    <entry><code>run()</code></entry>
-                    <entry><code>void</code></entry>
+                    <entry><methodname>run()</methodname></entry>
+                    <entry><methodname>void</methodname></entry>
                     <entry>N/A</entry>
                     <entry><para>
                         Define qué lógica de aplicación ejecutar luego del
@@ -263,16 +263,16 @@
                 </row>
 
                 <row>
-                    <entry><code>__call($method, $args)</code></entry>
-                    <entry><code>mixed</code></entry>
+                    <entry><methodname>__call($method, $args)</methodname></entry>
+                    <entry><methodname>mixed</methodname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$method</code>: <emphasis>requerido</emphasis>.
+                            <methodname>$method</methodname>: <emphasis>requerido</emphasis>.
                             El nombre del método a llamar.
                         </para></listitem>
 
                         <listitem><para>
-                            <code>$args</code>: <emphasis>requerido</emphasis>.
+                            <methodname>$args</methodname>: <emphasis>requerido</emphasis>.
                             Array de argumentos para usar en el método de llamada.
                         </para></listitem>
                     </itemizedlist></entry>
@@ -280,7 +280,7 @@
                         Ofrece comodidad para bootstrapping de recursos
                         individuales permitiéndole llamar
                         'bootstrap&lt;ResourceName&gt;()' en vez de usar el
-                        método <code>bootstrap()</code>.
+                        método <methodname>bootstrap()</methodname>.
                     </para></entry>
                 </row>
             </tbody>

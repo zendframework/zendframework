@@ -7,7 +7,7 @@
 
     <para>
         Además de algunos métodos convenientes tales como
-        <code>fetchAll()</code> e <code>insert()</code> documentados en
+        <methodname>fetchAll()</methodname> e <methodname>insert()</methodname> documentados en
         <xref linkend="zend.db.adapter" />, puede usarse un objeto de declaración
         para obtener más opciones al ejecutar consultas y devolver conjuntos de
         resultados. Esta sección describe cómo obtener una instancia de un
@@ -25,7 +25,7 @@
 
         <para>
             Típicamente, un objeto de declaración statement es devuelto por el
-            método <code>query()</code> de la clase de Adaptador de la base de
+            método <methodname>query()</methodname> de la clase de Adaptador de la base de
             datos.
             Este método es un modo general de preparar una declaración SQL.
             El primer parámetro es un string conteniendo la declaración SQL.
@@ -35,7 +35,7 @@
 
         <example id="zend.db.statement.creating.example1">
             <title>Crear un objeto de declaración SQL con query()</title>
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 $stmt = $db->query(
             'SELECT * FROM bugs WHERE reported_by = ? AND bug_status = ?',
             array('goofy', 'FIXED')
@@ -63,7 +63,7 @@ $stmt = $db->query(
 
         <example id="zend.db.statement.creating.example2">
             <title>Usando un constructor de declaración SQL</title>
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 $sql = 'SELECT * FROM bugs WHERE reported_by = ? AND bug_status = ?';
 
 $stmt = new Zend_Db_Statement_Mysqli($db, $sql);
@@ -79,20 +79,20 @@ $stmt = new Zend_Db_Statement_Mysqli($db, $sql);
         <para>
             Necesita ejecutar un objeto de declaración si lo crea con el
             constructor, o si desea ejecutar la misma declaración varias veces.
-            Use el método <code>execute()</code> del mismo objeto de
+            Use el método <methodname>execute()</methodname> del mismo objeto de
             declaración. El único parámetro es un array de valores a vincular a
             posiciones de parámetros en la declaración.
         </para>
 
         <para>
             Si usa <emphasis>parámetros posicionales</emphasis>, o los que
-            están marcados por un signo de interrogación (<code>?</code>), pase
+            están marcados por un signo de interrogación (<methodname>?</methodname>), pase
             los valores de vinculación en un array plano.
         </para>
 
         <example id="zend.db.statement.executing.example1">
             <title>Ejecutar una declaración con parámetros posicionales</title>
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 $sql = 'SELECT * FROM bugs WHERE reported_by = ? AND bug_status = ?';
 
 $stmt = new Zend_Db_Statement_Mysqli($db, $sql);
@@ -104,14 +104,14 @@ $stmt->execute(array('goofy', 'FIXED'));
         <para>
             Si usa <emphasis>parámetros nombrados</emphasis>, o los que son
             indicados por un string identificador precedido por un caracter de
-            dos puntos (<code>:</code>), pase el valor en un array asociativo.
+            dos puntos (<methodname>:</methodname>), pase el valor en un array asociativo.
             Las claves de este array deben coincidir con el nombre de los
             parámetros.
         </para>
 
         <example id="zend.db.statement.executing.example2">
             <title>Ejecutando una declaración con parámetros nombrados</title>
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 $sql = 'SELECT * FROM bugs WHERE ' .
        'reported_by = :reporter AND bug_status = :status';
 
@@ -132,7 +132,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
 
     <sect2 id="zend.db.statement.fetching">
 
-        <title>Extrayendo Resultados de una declaración <code>SELECT</code></title>
+        <title>Extrayendo Resultados de una declaración <methodname>SELECT</methodname></title>
 
         <para>
             Puede llamar a métodos del objeto de declaración para obtener filas
@@ -154,7 +154,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
 
             <para>
                 Para extraer una fila desde el conjunto de resultados,
-                use el método <code>fetch()</code> del objeto de declaración.
+                use el método <methodname>fetch()</methodname> del objeto de declaración.
                 Los tres parámetros de este método son opcionales:
             </para>
 
@@ -174,7 +174,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
                         <emphasis>Orientación del Cursor</emphasis>
                         es el segundo parámetro. Por omisión es
                         Zend_Db::FETCH_ORI_NEXT, lo cual simplemente significa
-                        que cada llamada a <code>fetch()</code> devuelve la
+                        que cada llamada a <methodname>fetch()</methodname> devuelve la
                         siguiente fila del resultado, en el orden devuelto por
                         el RDBMS.
                     </para>
@@ -188,19 +188,19 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
                         de las filas que devolver.
                         Si la orientación del cursor es Zend_Db::FETCH_ORI_REL,
                         entonces el offset es relativo a la posición del
-                        cursor antes de que <code>fetch()</code> fuera llamado.
+                        cursor antes de que <methodname>fetch()</methodname> fuera llamado.
                     </para>
                 </listitem>
             </itemizedlist>
 
             <para>
-                <code>fetch()</code> devuelve <code>false</code> si todas las filas
+                <methodname>fetch()</methodname> devuelve <methodname>false</methodname> si todas las filas
                 del conjunto de resultados han sido extraídas.
             </para>
 
             <example id="zend.db.statement.fetching.fetch.example">
                 <title>Usando fetch() en un bucle</title>
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 $stmt = $db->query('SELECT * FROM bugs');
 
 while ($row = $stmt->fetch()) {
@@ -221,9 +221,9 @@ while ($row = $stmt->fetch()) {
 
             <para>
                 Para extraer todas las filas de un resultado en un solo paso,
-                use el método <code>fetchAll()</code>. Esto es equivalente a
-                llamar al método <code>fetch()</code> en un bucle devolviendo
-                todas las filas en una array. El método <code>fetchAll()</code>
+                use el método <methodname>fetchAll()</methodname>. Esto es equivalente a
+                llamar al método <methodname>fetch()</methodname> en un bucle devolviendo
+                todas las filas en una array. El método <methodname>fetchAll()</methodname>
                 acepta 2 parámetros.  El primero es el estilo de extracción,
                 descrito anteriormente, y el segundo indica el número de la
                 columa que devolver, cuando el estilo de extracción es
@@ -232,7 +232,7 @@ while ($row = $stmt->fetch()) {
 
             <example id="zend.db.statement.fetching.fetchall.example">
                 <title>Usando fetchAll()</title>
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 $stmt = $db->query('SELECT * FROM bugs');
 
 $rows = $stmt->fetchAll();
@@ -257,7 +257,7 @@ echo $rows[0]['bug_description'];
                 nombres de columnas a los valores de la columna.
                 Se puede especificar un formato diferente para que la clase de
                 declaración devuelva las filas, tal como se puede con la clase
-                Adaptadora. Puede usar él método <code>setFetchMode()</code>
+                Adaptadora. Puede usar él método <methodname>setFetchMode()</methodname>
                 para establecer el modo de extracción. Especifique el modo de
                 extracción usando las constantes de la clase
                 Zend_Db: FETCH_ASSOC, FETCH_NUM, FETCH_BOTH,
@@ -265,13 +265,13 @@ echo $rows[0]['bug_description'];
                 Vea <xref linkend="zend.db.adapter.select.fetch-mode" />
                 para más información de estos modos.
                 Llamadas subsiguientes a los métodos de la declaración
-                <code>fetch()</code> o <code>fetchAll()</code> usan el modo de
+                <methodname>fetch()</methodname> o <methodname>fetchAll()</methodname> usan el modo de
                 extracción especificado.
             </para>
 
             <example id="zend.db.statement.fetching.fetch-mode.example">
                 <title>Configurando un modo de extracción</title>
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 $stmt = $db->query('SELECT * FROM bugs');
 
 $stmt->setFetchMode(Zend_Db::FETCH_NUM);
@@ -294,26 +294,26 @@ echo $rows[0][0];
 
             <para>
                 Para devolver una única columna de la siguiente fila del
-                conjunto de resultados, use <code>fetchColumn()</code>. El
+                conjunto de resultados, use <methodname>fetchColumn()</methodname>. El
                 parámetro opcional es el índice de la columna (integer), y por
                 defecto es 0. Este método devuelve un valor escalar, o
-                <code>false</code> si todas las filas del conjunto de resultados
+                <methodname>false</methodname> si todas las filas del conjunto de resultados
                 han sido extraídas.
             </para>
 
             <para>
                 Note que este método opera diferente que el método
-                <code>fetchCol()</code> de la clase Adaptadora.
-                El método <code>fetchColumn()</code> de una declaración devuelve
+                <methodname>fetchCol()</methodname> de la clase Adaptadora.
+                El método <methodname>fetchColumn()</methodname> de una declaración devuelve
                 un único valor desde una fila.
-                El método <code>fetchCol()</code> de un adaptador devuelve un
+                El método <methodname>fetchCol()</methodname> de un adaptador devuelve un
                 array de valores, tomados desde la primera columa de todas las
                 del conjunto de resultados.
             </para>
 
             <example id="zend.db.statement.fetching.fetchcolumn.example">
                 <title>Usando fetchColumn()</title>
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 $stmt = $db->query('SELECT bug_id, bug_description, bug_status FROM bugs');
 
 $bug_status = $stmt->fetchColumn(2);
@@ -333,7 +333,7 @@ $bug_status = $stmt->fetchColumn(2);
             <para>
                 Para extraer una fila desde un conjunto de resultados
                 estructurado como un Objeto, use el método
-                <code>fetchObject()</code>.  Este método tiene 2 parámetros
+                <methodname>fetchObject()</methodname>.  Este método tiene 2 parámetros
                 opcionales. El primer parámetro es un string con el nombre de
                 la clase del objeto que devolver; por defecto será 'stdClass'. El segundo
                 parámetro es un array de valores que será pasado al
@@ -342,7 +342,7 @@ $bug_status = $stmt->fetchColumn(2);
 
             <example id="zend.db.statement.fetching.fetchobject.example">
                 <title>Usando fetchObject()</title>
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 $stmt = $db->query('SELECT bug_id, bug_description, bug_status FROM bugs');
 
 $obj = $stmt->fetchObject();
@@ -371,7 +371,7 @@ echo $obj->bug_description;
 
         <example id="zend.db.statement.binding-param.example">
             <title>Binding parameters from PHP variables</title>
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 <?php
 ]]></programlisting>
         </example>
@@ -394,7 +394,7 @@ echo $obj->bug_description;
 
         <example id="zend.db.statement.binding-column.example">
             <title>Binding results to PHP variables</title>
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 <?php
 ]]></programlisting>
         </example>

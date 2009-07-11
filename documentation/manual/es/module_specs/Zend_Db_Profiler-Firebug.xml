@@ -46,7 +46,7 @@ mozilla .org/en-US/firefox/addon/1843</ulink>.
     <example id="zend.db.profiler.profilers.firebug.example.with_front_controller">
         <title>Perfilando DB con Zend_Controller_Front</title>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 // En tu archivo bootstrap
 
 $profiler = new Zend_Db_Profiler_Firebug('All DB Queries');
@@ -65,7 +65,7 @@ $db->setProfiler($profiler)
     <example id="zend.db.profiler.profilers.firebug.example.without_front_controller">
         <title>Perfilar DB sin <classname>Zend_Controller_Front</classname></title>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $profiler = new Zend_Db_Profiler_Firebug('All DB Queries');
 $profiler->setEnabled(true);
 

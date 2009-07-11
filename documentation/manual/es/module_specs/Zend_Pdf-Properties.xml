@@ -12,8 +12,8 @@
         Históricamente, esta información se almacena usando una estructura especial 
         de Información. Esta estructura está disponible para lectura y la 
         escritura como una array asociativo utilizando propiedades públicas 
-        <code>properties</code> de objetos <classname>Zend_Pdf</classname>:
-            <programlisting role="php"><![CDATA[
+        <methodname>properties</methodname> de objetos <classname>Zend_Pdf</classname>:
+             <programlisting language="php"><![CDATA[
 $pdf = Zend_Pdf::load($pdfPath);
 
 echo $pdf->properties['Title'] . "\n";
@@ -190,7 +190,7 @@ $pdf->save($pdfPath);
         Este documento XML se pueden recuperar y adjuntar al PDF con los métodos  
         <classname>Zend_Pdf::getMetadata()</classname> y
         <classname>Zend_Pdf::setMetadata($metadata)</classname>:
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 $pdf = Zend_Pdf::load($pdfPath);
 $metadata = $pdf->getMetadata();
 $metadataDOM = new DOMDocument();

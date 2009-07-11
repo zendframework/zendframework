@@ -17,7 +17,7 @@
             <classname>Zend_Form</classname>
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $form = new Zend_Form;
 ]]></programlisting>
 
@@ -31,10 +31,10 @@ $form = new Zend_Form;
         <para>
             Si desea especificar el action y method del formulario (siempre
             buenas ideas), puede hacer uso de los accesos
-            <code>setAction()</code> y <code>setMethod()</code>:
+            <methodname>setAction()</methodname> y <methodname>setMethod()</methodname>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $form->setAction('/resource/process')
      ->setMethod('post');
 ]]></programlisting>
@@ -47,12 +47,12 @@ $form->setAction('/resource/process')
 
         <para>
             Usted puede establecer atributos HTML adicionales para la etiqueta
-            <code>&lt;form&gt;</code> mediante el uso de los métodos
+            <methodname>&lt;form&gt;</methodname> mediante el uso de los métodos
             setAttrib() o setAttribs(). Por ejemplo, si desea especificar el id
             establezca el atributo "id":
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $form->setAttrib('id', 'login');
 ]]></programlisting>
     </sect2>
@@ -124,7 +124,7 @@ $form->setAttrib('id', 'login');
             Algunos ejemplos:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 // Instanciando un elemento y pasandolo al objeto form:
 $form->addElement(new Zend_Form_Element_Text('username'));
 
@@ -148,7 +148,7 @@ $form->addElement('text', 'username');
             <classname>Zend_Validate_*</classname> o el nombre de un validador para utilizar:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $username = new Zend_Form_Element_Text('username');
 
 // Pasando un objeto Zend_Validate_*:
@@ -164,7 +164,7 @@ $username->addValidator('alnum');
             como tercer parámetro:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 // Pasando un patrón
 $username->addValidator('regex', false, array('/^[a-z]/i'));
 ]]></programlisting>
@@ -181,7 +181,7 @@ $username->addValidator('regex', false, array('/^[a-z]/i'));
             crear el elemento. En el primer caso:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 // Hace este elemento requerido:
 $username->setRequired(true);
 ]]></programlisting>
@@ -198,7 +198,7 @@ $username->setRequired(true);
             para poner en minúsculas el valor final:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $username->addFilter('StringtoLower');
 ]]></programlisting>
 
@@ -206,7 +206,7 @@ $username->addFilter('StringtoLower');
             Entonces, la configuración final de nuestro elemento queda así:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $username->addValidator('alnum')
          ->addValidator('regex', false, array('/^[a-z]/'))
          ->setRequired(true)
@@ -231,7 +231,7 @@ $username->addValidators(array('alnum',
             lo anterior implícitamente, intente lo siguiente:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $form->addElement('text', 'username', array(
     'validators' => array(
         'alnum',
@@ -261,7 +261,7 @@ $form->addElement('text', 'username', array(
             del formulario, o simplemente mostrarlo con echo.
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 // Llamando a render()  explicitamente, y pasando un objeto vista opcional:
 echo $form->render($view);
 
@@ -272,13 +272,13 @@ echo $form;
         <para>
             De manera predeterminada, <classname>Zend_Form</classname> y
             <classname>Zend_Form_Element</classname> intentarán utilizar el objeto vista
-            inicializado en el <code>ViewRenderer</code>, lo que significa que
+            inicializado en el <methodname>ViewRenderer</methodname>, lo que significa que
             no tendrá que establecer la vista manualmente cuando use el MVC de
             Zend Framework. Generar un formulario en un script vista es tan
             simple como:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 <?php echo $this->form
 ]]></programlisting>
 
@@ -293,7 +293,7 @@ echo $form;
             sería como sigue:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $element->addDecorators(array(
     'ViewHelper',
     'Errors',
@@ -311,7 +311,7 @@ $element->addDecorators(array(
             Lo anterior crea una salida como la siguiente:
         </para>
 
-        <programlisting role="html"><![CDATA[
+        <programlisting language="html"><![CDATA[
 <dt><label for="username" class="required">Username</dt>
 <dd>
     <input type="text" name="username" value="123-abc" />
@@ -336,8 +336,8 @@ $element->addDecorators(array(
             El propio formulario simplemente itera sobre los elementos y
             los cubre en un &lt;form&gt; HTML. El action y method que
             proporcionó cuando definió el formulario se pasan a la etiqueta
-            <code>&lt;form&gt;</code>, como cualquier atributo que establezca
-            vía <code>setAttribs()</code> y familia.
+            <methodname>&lt;form&gt;</methodname>, como cualquier atributo que establezca
+            vía <methodname>setAttribs()</methodname> y familia.
         </para>
 
         <para>
@@ -346,7 +346,7 @@ $element->addDecorators(array(
             utilizado. Usted puede fijar el orden de un elemento usando:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $element->setOrder(10);
 ]]></programlisting>
 
@@ -354,7 +354,7 @@ $element->setOrder(10);
             O, cuando crea un elemento, pasándolo como una opción:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $form->addElement('text', 'username', array('order' => 10));
 ]]></programlisting>
     </sect2>
@@ -370,12 +370,12 @@ $form->addElement('text', 'username', array('order' => 10));
         </para>
 
         <para>
-            ¿De dónde provienen los datos?. Puede usar <code>$_POST</code> o
-            <code>$_GET</code>, o cualquier otra fuente de datos que tenga a
+            ¿De dónde provienen los datos?. Puede usar <methodname>$_POST</methodname> o
+            <methodname>$_GET</methodname>, o cualquier otra fuente de datos que tenga a
             mano (solicitud de un servicio web, por ejemplo):
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 if ($form->isValid($_POST)) {
     // ¡Correcto!
 } else {
@@ -386,13 +386,13 @@ if ($form->isValid($_POST)) {
         <para>
             Con solicitudes AJAX, a veces puede ignorar la validación de un solo
             elemento, o grupo de elementos.
-            <code>isValidPartial()</code> validará parcialmente el formulario.
-            A diferencia de <code>isValid()</code>, que como sea, si alguna
+            <methodname>isValidPartial()</methodname> validará parcialmente el formulario.
+            A diferencia de <methodname>isValid()</methodname>, que como sea, si alguna
             clave no esta presente, no ejecutará las validaciones para ese
             elemento en particular.
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 if ($form->isValidPartial($_POST)) {
     // de los elementos presentes, todos pasaron las validaciones
 } else {
@@ -401,9 +401,9 @@ if ($form->isValidPartial($_POST)) {
 ]]></programlisting>
 
         <para>
-            Un método adicional, <code>processAjax()</code>, puede también ser
+            Un método adicional, <methodname>processAjax()</methodname>, puede también ser
             usado para validar formularios parciales. A diferencia de
-            <code>isValidPartial()</code>, regresa una cadena en formato JSON
+            <methodname>isValidPartial()</methodname>, regresa una cadena en formato JSON
             conteniendo mensajes de error en caso de fallo.
         </para>
 
@@ -412,7 +412,7 @@ if ($form->isValidPartial($_POST)) {
             valores filtrados:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $values = $form->getValues();
 ]]></programlisting>
 
@@ -420,7 +420,7 @@ $values = $form->getValues();
             Si necesita los valores sin filtrar en algún punto, utilice:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $unfiltered = $form->getUnfilteredValues();
 ]]></programlisting>
     </sect2>
@@ -434,7 +434,7 @@ $unfiltered = $form->getUnfilteredValues();
             mostrarán cuando se usen los decoradores predeterminados:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 if (!$form->isValid($_POST)) {
     echo $form;
 
@@ -446,9 +446,9 @@ if (!$form->isValid($_POST)) {
 
         <para>
             Si quiere inspeccionar los errores, tiene dos métodos.
-            <code>getErrors()</code> regresa una matriz asociativa de nombres /
+            <methodname>getErrors()</methodname> regresa una matriz asociativa de nombres /
             códigos de elementos (donde códigos es una matriz de códigos de
-            error). <code>getMessages()</code> regresa una matriz asociativa
+            error). <methodname>getMessages()</methodname> regresa una matriz asociativa
             de nombres / mensajes de elementos (donde mensajes es una matriz
             asociativa de pares código de error / mensaje de error). Si un
             elemento no tiene ningún error, no será incluido en la matriz.
@@ -484,7 +484,7 @@ if (!$form->isValid($_POST)) {
             <classname>Zend_Form</classname> para crear el formulario:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $form = new Zend_Form();
 $form->setAction('/user/login')
      ->setMethod('post');
@@ -513,7 +513,7 @@ $form->addElement($username)
             A continuación, vamos a crear un controlador para manejar esto:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 class UserController extends Zend_Controller_Action
 {
     public function getForm()
@@ -551,7 +551,7 @@ class UserController extends Zend_Controller_Action
             Y un script para la vista que muestra el formulario:
         </para>
 
-<programlisting role="php"><![CDATA[
+ <programlisting language="php"><![CDATA[
 <h2>Please login:</h2>
 <?php echo $this->form
 ]]></programlisting>
@@ -559,7 +559,7 @@ class UserController extends Zend_Controller_Action
         <para>
             Como notará en el código del controlador, hay más trabajo por hacer:
             mientras la información enviada sea válida, necesitará todavía
-            realizar la autenticación usando <code>Zend_Auth</code>, por
+            realizar la autenticación usando <methodname>Zend_Auth</methodname>, por
             ejemplo.
         </para>
     </sect2>
@@ -570,7 +570,7 @@ class UserController extends Zend_Controller_Action
         <para>
             Todas las clases <classname>Zend_Form</classname> son configurables mediante
             <classname>Zend_Config</classname>; puede incluso pasar un objeto al
-            constructor o pasarlo a través de <code>setConfig()</code>. Veamos
+            constructor o pasarlo a través de <methodname>setConfig()</methodname>. Veamos
             cómo podemos crear el formulario anterior usando un archivo INI.
             Primero, vamos a seguir las recomendaciones, y colocaremos nuestras
             configuraciones dentro de secciones reflejando su objetivo y
@@ -579,7 +579,7 @@ class UserController extends Zend_Controller_Action
             ('user'), y una clave para el formulario ('login'):
         </para>
 
-        <programlisting role="ini"><![CDATA[
+        <programlisting language="ini"><![CDATA[
 [development]
 ; metainformación general del formulario
 user.login.action = "/user/login"
@@ -610,7 +610,7 @@ user.login.elements.submit.type = "submit"
             Entonces puede pasarlo al constructor del formulario:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Ini($configFile, 'development');
 $form   = new Zend_Form($config->user->login);
 ]]></programlisting>

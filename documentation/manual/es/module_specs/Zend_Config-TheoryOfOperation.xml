@@ -21,22 +21,22 @@
         que una jerarquía de datos de configuración puede ser creada con cualquier número de niveles.
     </para>
     <para>
-        <classname>Zend_Config</classname> implementa las interfaces <code>Countable</code> e <code>Iterator</code>
+        <classname>Zend_Config</classname> implementa las interfaces <methodname>Countable</methodname> e <methodname>Iterator</methodname>
         para facilitar el aceso sencillo a los datos de configuración.
-        Así, uno puede usar la función <ulink url="http://php.net/count"><code>count()</code></ulink>
+        Así, uno puede usar la función <ulink url="http://php.net/count"><methodname>count()</methodname></ulink>
         y constructores PHP como
-        <ulink url="http://php.net/foreach"><code>foreach</code></ulink> sobre objetos
+        <ulink url="http://php.net/foreach"><methodname>foreach</methodname></ulink> sobre objetos
         <classname>Zend_Config</classname>.
     </para>
     <para>
         Por defecto, los datos de configuración permitidos a través de <classname>Zend_Config</classname>
         son de sólo lectura, y una asignación (e.g.,
-        <code>$config-&gt;database-&gt;host = 'example.com'</code>)
+        <methodname>$config-&gt;database-&gt;host = 'example.com'</methodname>)
         provoca que se lance una excepción. Este comportamiento por defecto puede ser sobrescrito a través
         del constructor, sin embargo, para permitir la modificación de valores de datos. Además, cuando
-        las modificaciones están permitidas, <classname>Zend_Config</classname> soporta el borrado de elementos (unset) (i.e. <code>unset($config-&gt;database-&gt;host);</code>). El método
-        <code>readOnly()</code> puede ser usado para determinar si las modificaciones a un objeto <classname>Zend_Config</classname>
-        están permitidas y el método <code>setReadOnly()</code> puede ser usado para evitar cualquier modificación
+        las modificaciones están permitidas, <classname>Zend_Config</classname> soporta el borrado de elementos (unset) (i.e. <methodname>unset($config-&gt;database-&gt;host);</methodname>). El método
+        <methodname>readOnly()</methodname> puede ser usado para determinar si las modificaciones a un objeto <classname>Zend_Config</classname>
+        están permitidas y el método <methodname>setReadOnly()</methodname> puede ser usado para evitar cualquier modificación
         posterior a un objeto <classname>Zend_Config</classname> que fue creado con permiso de modificaciones.
         <note>
             <para>
@@ -68,15 +68,15 @@
     </para>
     <para>
         Si tiene dos objetos <classname>Zend_Config</classname>, puede combinarlos en un único
-        objeto usando la función <code>merge()</code>. Por ejemplo, dados <code>$config</code> y
-        <code>$localConfig</code>, puede fusionar datos de <code>$localConfig</code> a <code>$config</code> usando
-        <code>$config-&gt;merge($localConfig);</code>. Los ítemes en <code>$localConfig</code> sobrescribirán
-        cualquier item con el mismo nombre en <code>$config</code>.
+        objeto usando la función <methodname>merge()</methodname>. Por ejemplo, dados <methodname>$config</methodname> y
+        <methodname>$localConfig</methodname>, puede fusionar datos de <methodname>$localConfig</methodname> a <methodname>$config</methodname> usando
+        <methodname>$config-&gt;merge($localConfig);</methodname>. Los ítemes en <methodname>$localConfig</methodname> sobrescribirán
+        cualquier item con el mismo nombre en <methodname>$config</methodname>.
         <note>
             <para>
                 El objeto <classname>Zend_Config</classname> que está ejecutando el merge debe haber sido construido
-                para permitir modificaciones, pasando <code>true</code> como el segundo parámetro del constructor.
-                El método <code>setReadOnly()</code> puede entonces ser usado para evitar cualquier
+                para permitir modificaciones, pasando <methodname>true</methodname> como el segundo parámetro del constructor.
+                El método <methodname>setReadOnly()</methodname> puede entonces ser usado para evitar cualquier
                 modificación posterior después de que el merge se haya completado.
             </para>
         </note>

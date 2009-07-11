@@ -12,19 +12,19 @@
 
     <para>
         Para establecer un manejador de sesiones, simplemente pasar al recurso
-        la clave opcional <code>saveHandler</code> (case insensible). El valor
+        la clave opcional <methodname>saveHandler</methodname> (case insensible). El valor
         de esta opción puede ser uno de los siguientes:
     </para>
 
     <itemizedlist>
         <listitem><para>
-            <code>string</code>: un string indicando una clase implementando
+            <methodname>string</methodname>: un string indicando una clase implementando
             <classname>Zend_Session_SaveHandler_Interface</classname> que
             debería ser instanciada.
         </para></listitem>
 
         <listitem><para>
-            <code>array</code>: un array con las claves "class" y,
+            <methodname>array</methodname>: un array con las claves "class" y,
             opcionalmente, "options", indicando la clase que implementa
             <classname>Zend_Session_SaveHandler_Interface</classname> que
             debería ser instanciada y una variedad de opciones para proporcionar
@@ -53,7 +53,7 @@
             instancia <classname>Zend_Session_SaveHandler_Db</classname>.
         </para>
 
-        <programlisting role="ini"><![CDATA[
+        <programlisting language="ini"><![CDATA[
 
 resources.session.save_path = APPLICATION_PATH "/../data/session"
 resources.session.use_only_cookies = true

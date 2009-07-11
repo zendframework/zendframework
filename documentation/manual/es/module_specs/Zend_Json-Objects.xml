@@ -32,13 +32,13 @@
             JSON como arrays asociativos. Sin embargo, si desea retornar un 
             objeto, puede especificar esto:
         </para>
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 // Decodifica objetos JSON como objetos PHP
 $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
 ]]></programlisting>
         <para>
             Por lo tanto, cualquiera de los objetos decodificados son devueltos 
-            como objetos <code>StdClass</code> con propiedades correspondientea 
+            como objetos <methodname>StdClass</methodname> con propiedades correspondientea 
             a pares clave/valor en la notación JSON.
         </para>
         <para>
@@ -56,7 +56,7 @@ $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
         <para>
             Si se codifican objetos PHP por defecto, el mecanismo de codificación 
             sólo tiene acceso a las propiedades públicas de estos objetos. 
-            Cuando se implementa un método <code>toJson()</code> en un objeto a 
+            Cuando se implementa un método <methodname>toJson()</methodname> en un objeto a 
             codificar, <classname>Zend_Json</classname> llama a este método y 
             espera que el objeto devuelva una representación JSON de su estado  
             interno.
@@ -69,8 +69,8 @@ $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
         <para>
             Zend_Json tiene dos modos diferentes dependiendo de si ext/json está 
             habilitada o no en su instalación PHP. Si ext/json está instalado 
-            por defecto, las funciones <code>json_encode()</code> y 
-            <code>json_decode()</code> se utilizan para la codificación y 
+            por defecto, las funciones <methodname>json_encode()</methodname> y 
+            <methodname>json_decode()</methodname> se utilizan para la codificación y 
             decodificación JSON. Si ext/json no está instalado, una implementación 
             de Zend Framework en código PHP es utilizada para la 
             codificación/decodificación. Esto es considerablemente más lento que 
@@ -83,7 +83,7 @@ $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
             llamando a:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 Zend_Json::$useBuiltinEncoderDecoder = true:
 ]]></programlisting>
     </sect2>
@@ -98,7 +98,7 @@ Zend_Json::$useBuiltinEncoderDecoder = true:
             es lo que hace naturalmente <classname>Zend_Json</classname>. 
             Con la Expression de apoyo para Zend_Json este apoyo puede codificar  
             objetos JSON con callbacks validos de javascript. 
-            Esto funciona tanto con <code>json_encode()</code> como con el 
+            Esto funciona tanto con <methodname>json_encode()</methodname> como con el 
             codificador interno.
         </para>
 
@@ -109,13 +109,13 @@ Zend_Json::$useBuiltinEncoderDecoder = true:
             javascript como el primer argumento del constructor. 
             Por defecto <classname>Zend_Json::encode</classname> no codifica 
             callbacks javascript, usted tiene que pasar la opción 
-            <code>'enableJsonExprFinder' = true</code> dentro de la función 
-            <code>encode</code>. Si se habilita, la expresión de apoyo trabaja 
+            <methodname>'enableJsonExprFinder' = true</methodname> dentro de la función 
+            <methodname>encode</methodname>. Si se habilita, la expresión de apoyo trabaja 
             para todas las expresiones anidadas en grandes estructuras de objetos. 
             Un ejemplo de uso se vería así:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $data = array(
     'onClick' => new Zend_Json_Expr('function() {'
               . 'alert("Yo soy un callback válido de javascript '

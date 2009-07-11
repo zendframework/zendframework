@@ -28,7 +28,7 @@
             con solo una regla mod_rewrite de Apache (one of):
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 RewriteEngine on
 RewriteRule !\.(js|ico|gif|jpg|png|css|html)$ index.php
 ]]></programlisting>
@@ -37,7 +37,7 @@ RewriteRule !\.(js|ico|gif|jpg|png|css|html)$ index.php
             o (preferido):
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} -s [OR]
 RewriteCond %{REQUEST_FILENAME} -l [OR]
@@ -53,18 +53,18 @@ RewriteRule ^.*$ index.php [NC,L]
                 regla de reescribir:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.php [I]
 ]]></programlisting>
 
         <note>
             <title>IIS Isapi_Rewrite</title>
             <para>
-                Cuando se usa IIS, <code>$_SERVER['REQUEST_URI']</code> puede 
+                Cuando se usa IIS, <methodname>$_SERVER['REQUEST_URI']</methodname> puede 
                 no existir, o establecerlo como un string vacío. En este caso,
                 <classname>Zend_Controller_Request_Http</classname> 
                 intentará usar el valor de 
-                <code>$_SERVER['HTTP_X_REWRITE_URL']</code> 
+                <methodname>$_SERVER['HTTP_X_REWRITE_URL']</methodname> 
                 establecido por la extensión Isapi_Rewrite.
             </para>
         </note>
@@ -74,7 +74,7 @@ RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.
             configurado como sigue:
         </para>
 
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
      <system.webServer>
@@ -105,7 +105,7 @@ RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.
             Si está usando Lighttpd, la siguiente regla de reescritura es válida:
         </para>
 
-        <programlisting role="lighttpd"><![CDATA[
+        <programlisting language="lighttpd"><![CDATA[
 url.rewrite-once = (
     ".*\?(.*)$" => "/index.php?$1",
     ".*\.(js|ico|gif|jpg|png|css|html)$" => "$0",
@@ -124,7 +124,7 @@ url.rewrite-once = (
             procedimiento:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 // Crear un router
 
 $router = $ctrl->getRouter(); // returns a rewrite router by default
@@ -148,7 +148,7 @@ $router->addRoute(
             <classname>Zend_Controller_Router_Route_Interface</classname>. Eg.:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $router->addRoute('user',
                   new Zend_Controller_Router_Route('user/:username'));
 ]]></programlisting>
@@ -189,13 +189,13 @@ $router->addRoute('user',
                 ayudante de url <classname>Zend_View</classname>:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 <a href=
 "<?php echo $this->url(array('username' => 'martel'), 'user') ?>">Martel</a>
 ]]></programlisting>
 
             <para>
-                Que resultaría en la href: <code>user/martel</code>.
+                Que resultaría en la href: <methodname>user/martel</methodname>.
             </para>
         </note>
 
@@ -212,10 +212,10 @@ $router->addRoute('user',
 
         <para>
             Si necesita determinar en qué ruta se encontró una concordancia, 
-            puede usar el método <code>getCurrentRouteName()</code>, que devolverá 
+            puede usar el método <methodname>getCurrentRouteName()</methodname>, que devolverá 
             el identificador usado cuando registró la ruta con el router. 
             Si quiere el objeto de la ruta actual, puede usar 
-            <code>getCurrentRoute()</code>.
+            <methodname>getCurrentRoute()</methodname>.
         </para>
 
         <note>
@@ -251,7 +251,7 @@ $router->addRoute('user',
                 si elige alterar los valores por defecto en
                 <classname>Zend_Controller_Request_Http</classname> mediante los 
                 métodos 
-                <code>setControllerKey</code> y <code>setActionKey</code>.
+                <methodname>setControllerKey</methodname> y <methodname>setActionKey</methodname>.
             </para>
         </note>
 
@@ -263,19 +263,19 @@ $router->addRoute('user',
         <para>
             <classname>Zend_Controller_Router_Rewrite</classname> viene 
             preconfigurado con una ruta por defecto, que se comparará con URIs 
-            en la forma de <code>controller/action</code>. 
+            en la forma de <methodname>controller/action</methodname>. 
             Además, se puede especificar un nombre de módulo como primer 
             elemento del path, permitiendo URIs de la forma            
-            <code>module/controller/action</code>. Por último, también coincidrá  
+            <methodname>module/controller/action</methodname>. Por último, también coincidrá  
             con cualquier parámetro adicional agregado a la URI por defecto -
-            <code>controller/action/var1/value1/var2/value2</code>.
+            <methodname>controller/action/var1/value1/var2/value2</methodname>.
         </para>
 
         <para>
             Algunos ejemplos de cómo están equiparadas las rutas:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 // Asumiendo lo siguiente:
 $ctrl->setControllerDirectory(
     array(
@@ -320,7 +320,7 @@ http://example/blog/archive/list/sort/alpha/date/desc
             Está generado más o menos así:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $compat = new Zend_Controller_Router_Route_Module(array(),
                                                   $dispatcher,
                                                   $request);
@@ -331,10 +331,10 @@ $this->addRoute('default', $compat);
             Si no quiere esta ruta en particular en su esquema por defecto de
             routing, podrá anularla creando su propia ruta por 'defecto'  
             (es decir, almacenar bajo el nombre de 'default') o eliminarla por 
-            completo usando <code>removeDefaultRoutes()</code>:
+            completo usando <methodname>removeDefaultRoutes()</methodname>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 // Eliminar cualquier ruta por defecto
 $router->removeDefaultRoutes();
 ]]></programlisting>
@@ -346,9 +346,9 @@ $router->removeDefaultRoutes();
 
         <para>
             El router rewrite puede ser utilizado en subdirectorios (por 
-            ejemplo <code>http://domain.com/~user/application-root/</code>) 
+            ejemplo <methodname>http://domain.com/~user/application-root/</methodname>) 
             en cuyo caso la URL base de la aplicación 
-            (<code>/~user/application-root</code>) debe ser detectada 
+            (<methodname>/~user/application-root</methodname>) debe ser detectada 
             automáticamente por <classname>Zend_Controller_Request_Http</classname> 
             y usada en consecuencia.
         </para>
@@ -357,11 +357,11 @@ $router->removeDefaultRoutes();
             Si la URL base se detecta incorrectamente se la puede anular con su 
             propio path de base usando
             <classname>Zend_Controller_Request_Http</classname> y llamando al 
-            método <code>setBaseUrl()</code> (ver <xref
+            método <methodname>setBaseUrl()</methodname> (ver <xref
                 linkend="zend.controller.request.http.baseurl" />):
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $request->setBaseUrl('/~user/application-root/');
 ]]></programlisting>
 
@@ -373,13 +373,13 @@ $request->setBaseUrl('/~user/application-root/');
         <para>
             Puede establecer los parámetros globales en un router que se 
             proporcionan automáticamente a una ruta cuando se ensamblasn mediante  
-            <code>setGlobalParam</code>. Si se establece un parámetro global 
+            <methodname>setGlobalParam</methodname>. Si se establece un parámetro global 
             pero también se lo entrega directamente al método de ensamblaje, 
             el parámetro del usuario sobreescribe al parámetro global. 
             Puede establecer un parámetro global esta forma:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $router->setGlobalParam('lang', 'en');
 ]]></programlisting>
     </sect2>
@@ -399,7 +399,7 @@ $router->setGlobalParam('lang', 'en');
         <para>
             A veces es más conveniente para actualizar un archivo de 
             configuración con nuevas rutas que modificar el código. 
-            Esto es posible a través del método <code>addConfig()</code>.
+            Esto es posible a través del método <methodname>addConfig()</methodname>.
             Básicamente, se crea una configuración compatible con 
             <classname>Zend_Config</classname>. 
             Y en su código lo lee y lo pasa a RewriteRouter.
@@ -409,7 +409,7 @@ $router->setGlobalParam('lang', 'en');
             Como ejemplo, considere el siguiente archivo INI:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 [production]
 routes.archive.route = "archive/:year/*"
 routes.archive.defaults.controller = archive
@@ -435,7 +435,7 @@ routes.archive.map.1 = "year"
             <classname>Zend_Config</classname> como sigue:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Ini('/path/to/config.ini', 'production');
 $router = new Zend_Controller_Router_Rewrite();
 $router->addConfig($config, 'routes');
@@ -479,7 +479,7 @@ $router->addConfig($config, 'routes');
             un único método.
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 interface Zend_Controller_Router_Interface
 {
   /**

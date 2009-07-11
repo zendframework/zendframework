@@ -7,7 +7,7 @@
     <sect2 id="zend.controller.quickstart.introduction">
         <title>Introducción</title>
         <para>
-            <code>Zend_Controller</code>
+            <methodname>Zend_Controller</methodname>
             es el corazón del sistema de MVC de Zend Framework MVC. MVC
             son las siglas de
             <ulink url="http://en.wikipedia.org/wiki/Model-view-controller">
@@ -15,7 +15,7 @@
             </ulink>
             y es un patrón de diseño con el objetivo de separar la
             lógica de la aplicación de la lógica de visualización.
-            <code>Zend_Controller_Front</code>
+            <methodname>Zend_Controller_Front</methodname>
             implementa el patrón
             <ulink url="http://www.martinfowler.com/eaaCatalog/frontController.html">
                 Front Controller (Controlador Frontal)
@@ -28,7 +28,7 @@
         </para>
         <para>
             El sistema
-            <code>Zend_Controller</code>
+            <methodname>Zend_Controller</methodname>
             fue construido con la extensibilidad en mente, ya sea
             heredando las clases existentes, escribiendo nuevas clases
             que implementan varias interfaces o clases abstractas que
@@ -55,7 +55,7 @@
                 estructura típica es la siguiente:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 application/
     controllers/
         IndexController.php
@@ -79,7 +79,7 @@ html/
             <para>
                 Apunte su document root en su servidor web hacia el
                 directorio
-                <code>html</code>
+                <methodname>html</methodname>
                 de la estructura de archivos de arriba.
             </para>
         </sect3>
@@ -89,11 +89,11 @@ html/
 
             <para>
                 Edite el archivo
-                <code>html/.htaccess</code>
+                <methodname>html/.htaccess</methodname>
                 que aparece arriba de la siguiente forma:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} -s [OR]
 RewriteCond %{REQUEST_FILENAME} -l [OR]
@@ -126,13 +126,13 @@ RewriteRule ^.*$ index.php [NC,L]
             <para>
                 El archivo bootstrap es la página a la que todas las peticiones
                 son redirigidas a través de --
-                <code>html/index.php</code>
+                <methodname>html/index.php</methodname>
                 en este caso. Abra el archivo
-                <code>html/index.php</code>
+                <methodname>html/index.php</methodname>
                 en el editor de su elección y añada lo siguiente:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 Zend_Controller_Front::run('/path/to/app/controllers');
 ]]></programlisting>
 
@@ -151,34 +151,34 @@ Zend_Controller_Front::run('/path/to/app/controllers');
                 Por defecto, el primero segmento de una ruta URL apunta
                 a un controlador, y el segundo a una acción. Por ejemplo,
                 dada la URL
-                <code>
+                <methodname>
                     http://framework.zend.com/roadmap/components
-                </code>
+                </methodname>
                 , la ruta es
-                <code>/roadmap/components</code>
+                <methodname>/roadmap/components</methodname>
                 , que apuntará al controlador
-                <code>roadmap</code>
+                <methodname>roadmap</methodname>
                 y la acción
-                <code>components</code>
+                <methodname>components</methodname>
                 . Si no se suministra una acción, se asume la acción
-                <code>index</code>
+                <methodname>index</methodname>
                 , y si no se suministra un controlador, se asume el controlador
-                <code>index</code>
+                <methodname>index</methodname>
                 (siguiendo la convención de Apache de apuntar a
-                <code>DirectoryIndex</code>
+                <methodname>DirectoryIndex</methodname>
                 automáticamente).
             </para>
 
             <para>
-                El dispatcher de <code>Zend_Controller</code>
+                El dispatcher de <methodname>Zend_Controller</methodname>
                 toma entonces el valor del controlador y lo apunta
                 a una clase. Por defecto, pone en mayúsculas la primera letra
                 del nombre de controlador y agrega la palabra
-                <code>Controller</code>
+                <methodname>Controller</methodname>
                 . De esta forma, en nuestro ejemplo de arriba, el controlador
-                <code>roadmap</code>
+                <methodname>roadmap</methodname>
                 es dirigido a la clase
-                <code>RoadmapController</code>
+                <methodname>RoadmapController</methodname>
                 .
             </para>
 
@@ -186,13 +186,13 @@ Zend_Controller_Front::run('/path/to/app/controllers');
                 De la misma forma, el valor de action es dirigido
                 a un método de la clase controladora. Por defecto, el valor se
                 pasa a minúsculas, y la palabra
-                <code>Action</code>
+                <methodname>Action</methodname>
                 es añadida. De esta forma, en nuestro ejemplo de arriba, la acción
-                <code>components</code>
+                <methodname>components</methodname>
                 se convierte en
-                <code>componentsAction</code>
+                <methodname>componentsAction</methodname>
                 , y el método final llamado es
-                <code>RoadmapController::componentsAction()</code>
+                <methodname>RoadmapController::componentsAction()</methodname>
                 .
             </para>
 
@@ -200,13 +200,13 @@ Zend_Controller_Front::run('/path/to/app/controllers');
                 Continuando, creemos ahora un action controller
                 y un método de acción por defecto. Como se ha dicho antes,
                 el controlador por defecto y la acción llamada son ambos
-                <code>index</code>
+                <methodname>index</methodname>
                 . Abra el archivo
-                <code>application/controllers/IndexController.php</code>
+                <methodname>application/controllers/IndexController.php</methodname>
                 , e introduzca lo siguiente:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 /** Zend_Controller_Action */
 class IndexController extends Zend_Controller_Action
 {
@@ -225,29 +225,29 @@ class IndexController extends Zend_Controller_Action
                 definiendo un action method y un view script correspondiente,
                 tendrá su contenido generado inmediatamente.
                 Por defecto,
-                <code>Zend_View</code>
+                <methodname>Zend_View</methodname>
                 es usado como la capa Vista en el patrón MVC. El
-                <code>ViewRenderer</code>
+                <methodname>ViewRenderer</methodname>
                 hace algo de magia, y usa el nombre de controlador (e.g.,
-                <code>index</code>
+                <methodname>index</methodname>
                 ) y el nombre de acción actual (e.g.,
-                <code>index</code>
+                <methodname>index</methodname>
                 ) para determinar qué plantilla traer. Por defecto,
                 las plantillas terminan con la extensión
-                <code>.phtml</code>
+                <methodname>.phtml</methodname>
                 , lo que significa que en el ejemplo de arriba, la
                 plantilla
-                <code>index/index.phtml</code>
+                <methodname>index/index.phtml</methodname>
                 será generada. Adicionalmente, el
-                <code>ViewRenderer</code>
+                <methodname>ViewRenderer</methodname>
                 asume automáticamente que la carpeta
-                <code>views</code>
+                <methodname>views</methodname>
                 al mismo nivel que la carpeta controller será
                 la carpeta raíz de la vista, y que el script de vista actual
                 estará en la subcarpeta
-                <code>views/scripts/</code>.
+                <methodname>views/scripts/</methodname>.
                 De esta forma, la plantilla generada será encontrada en
-                <code>application/views/scripts/index/index.phtml</code>
+                <methodname>application/views/scripts/index/index.phtml</methodname>
                 .
             </para>
         </sect3>
@@ -261,14 +261,14 @@ class IndexController extends Zend_Controller_Action
                     en la sección anterior
                 </link>
                 , los scripts de vista se encuentran en
-                <code>application/views/scripts/</code>
+                <methodname>application/views/scripts/</methodname>
                 ; el view script para el controlador y la acción por defecto
                 está en
-                <code>application/views/scripts/index/index.phtml</code>
+                <methodname>application/views/scripts/index/index.phtml</methodname>
                 . Cree este archivo, y escriba un poco de HTML:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 <!DOCTYPE html
 PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -294,13 +294,13 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
                 </link>. Este plugin espera que exista
                 un controlador para manejar los errores.
                 Por defecto, asume un
-                <code>ErrorController</code>
+                <methodname>ErrorController</methodname>
                 en el módulo default con un método
-                <code>errorAction</code>
+                <methodname>errorAction</methodname>
                 :
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 class ErrorController extends Zend_Controller_Action
 {
     public function errorAction()
@@ -312,13 +312,13 @@ class ErrorController extends Zend_Controller_Action
             <para>
                 Asumiendo el sistema de carpetas discutido anteriormente,
                 este archivo irá en
-                <code>application/controllers/ErrorController.php</code>
+                <methodname>application/controllers/ErrorController.php</methodname>
                 . También necesitará crear un view script en
-                <code>application/views/scripts/error/error.phtml</code>
+                <methodname>application/views/scripts/error/error.phtml</methodname>
                 ; el contenido de ejemplo será parecido a:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 <!DOCTYPE html
 PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -341,7 +341,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
             <para>
                 Con su primer controlador y vista, ya puede arrancar su navegador y acceder a su sitio.
                 Asumiendo que
-                <code>example.com</code>
+                <methodname>example.com</methodname>
                 es su dominio, cualquiera de las siguientes URLs le llevará a
                 la página que acaba de crear:
             </para>
@@ -349,17 +349,17 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>http://example.com/</code>
+                        <methodname>http://example.com/</methodname>
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>http://example.com/index</code>
+                        <methodname>http://example.com/index</methodname>
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>http://example.com/index/index</code>
+                        <methodname>http://example.com/index/index</methodname>
                     </para>
                 </listitem>
             </itemizedlist>

@@ -47,7 +47,7 @@
             <listitem>
                 <para>
                     <classname>Zend_Controller_Request_Abstract</classname> (a
-                    menudo denominado <code>Request Object</code>) representa
+                    menudo denominado <methodname>Request Object</methodname>) representa
                     el entorno de la solicitud y ofrece métodos para
                     establecer y recuperar el controlador, los nombres de las
                     acciones y cualquier parámetro de solicitud. Además realiza un seguimiento
@@ -91,10 +91,10 @@
                     y la descompone en un controlador, una acción y parámetros,
                     basándose en la información de la ruta del url.
                     Como ejemplo, la URL
-                    <code>http://localhost/foo/bar/key/value</code> se
-                    decodificará para usar el controlador <code>foo</code>,
-                    la acción <code>bar</code> y especificar un parámetro
-                    <code>key</code> con el valor de <code>value</code>.
+                    <methodname>http://localhost/foo/bar/key/value</methodname> se
+                    decodificará para usar el controlador <methodname>foo</methodname>,
+                    la acción <methodname>bar</methodname> y especificar un parámetro
+                    <methodname>key</methodname> con el valor de <methodname>value</methodname>.
                 </para>
 
                 <para>
@@ -136,9 +136,9 @@
                     Se definen como controladores MixedCasedClasses cuando
                     terminan en la palabra Controller, y los métodos de acción
                     como camelCasedMethods cuando terminan en la palabra Action:
-                    <code>FooController::barAction()</code>. En este caso,
-                    el controlador será referido como <code>foo</code> y a la
-                    acción como <code>bar</code>.
+                    <methodname>FooController::barAction()</methodname>. En este caso,
+                    el controlador será referido como <methodname>foo</methodname> y a la
+                    acción como <methodname>bar</methodname>.
                 </para>
 
                 <note>
@@ -164,10 +164,10 @@
 
                     <para>
                         Como ejemplo, si se va a la acción en
-                        <code>FooBarController::bazBatAction()</code>,
+                        <methodname>FooBarController::bazBatAction()</methodname>,
                         se referirá a ella en la URL como
-                        <code>/foo-bar/baz-bat</code>
-                        o <code>/foo.bar/baz.bat</code>.
+                        <methodname>/foo-bar/baz-bat</methodname>
+                        o <methodname>/foo.bar/baz.bat</methodname>.
                     </para>
                 </note>
             </listitem>

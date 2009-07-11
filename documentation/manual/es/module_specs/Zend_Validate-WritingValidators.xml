@@ -39,16 +39,16 @@
         A fin de incluir esta funcionalidad al crear una clase de validación,
         simplemente extienda <classname>Zend_Validate_Abstract</classname>.
         En la extensión de la clase deberá aplicar la lógica del método
-        <code>isValid()</code> y definir las variables y plantillas de mensajes
+        <methodname>isValid()</methodname> y definir las variables y plantillas de mensajes
         que correspondan a los tipos de fallos de validación que puedan suceder.
-        Si falla un valor en su test de validación, entonces <code>isValid()</code>
-        deberá devolver <code>false</code>.
-        Si el valor pasa su test de validación, entonces <code>isValid()</code>
-        deberá devolver <code>true</code>.
+        Si falla un valor en su test de validación, entonces <methodname>isValid()</methodname>
+        deberá devolver <methodname>false</methodname>.
+        Si el valor pasa su test de validación, entonces <methodname>isValid()</methodname>
+        deberá devolver <methodname>true</methodname>.
     </para>
 
     <para>
-        En general, el método <code>isValid()</code> no debería arrojar
+        En general, el método <methodname>isValid()</methodname> no debería arrojar
         excepciones, salvo que sea imposible determinar si el valor de entrada
         es válido o no.
         Algunos ejemplos de casos razonables para lanzar una excepción podría ser
@@ -68,7 +68,7 @@
             En este caso las reglas de validación son simplemente que el valor
             de entrada debe ser de punto flotante.
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 class MyValid_Float extends Zend_Validate_Abstract
 {
     const FLOAT = 'float';
@@ -92,14 +92,14 @@ class MyValid_Float extends Zend_Validate_Abstract
 ]]></programlisting>
 
             La clase define una plantilla para su único mensaje de fallo de
-            validación, que incluye el mágico parámetro <code>%value%</code>.
-            La llamada a <code>_setValue()</code> prepara al objeto para insertar
+            validación, que incluye el mágico parámetro <methodname>%value%</methodname>.
+            La llamada a <methodname>_setValue()</methodname> prepara al objeto para insertar
             automáticamente en el mensaje de fallo al valor probado, si éste
             falla en la validación.
-            La llamada a <code>_error()</code> sigue las pistas para establecer
+            La llamada a <methodname>_error()</methodname> sigue las pistas para establecer
             una razón por el fracaso de la validación.
             Dado que esta clase sólo define un mensaje de fallo, no es necesario
-            darle a <code>_error()</code> el nombre de la plantilla del mensaje
+            darle a <methodname>_error()</methodname> el nombre de la plantilla del mensaje
             de fallo.
         </para>
 
@@ -131,7 +131,7 @@ class MyValid_Float extends Zend_Validate_Abstract
         <para>
             Estas razones en el fallo de validación, son traducidas a las definiciones en la clase:
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 class MyValid_NumericBetween extends Zend_Validate_Abstract
 {
     const MSG_NUMERIC = 'msgNumeric';
@@ -176,20 +176,20 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
 }
 ]]></programlisting>
 
-            Las propiedades públicas <code>$minimum</code> y <code>$maximum</code>
+            Las propiedades públicas <methodname>$minimum</methodname> y <methodname>$maximum</methodname>
             se han establecido para proporcionar los límites mínimo y máximo,
             respectivamente, de un valor a validar.
             La clase también define dos variables de mensajes que corresponden a
-            las propiedades públicas y permiten usar <code>min</code> y <code>max</code>
+            las propiedades públicas y permiten usar <methodname>min</methodname> y <methodname>max</methodname>
             en plantillas de mensajes como parámetros mágicos, al igual que con
-            <code>value</code>.
+            <methodname>value</methodname>.
         </para>
 
         <para>
 
             Tenga en cuenta que si cualquiera de las comprobaciones de validación
-            falla en <code>isValid()</code>, ya está preparado un mensaje apropiado,
-            y el método inmediatamente devuelve <code>false</code>.
+            falla en <methodname>isValid()</methodname>, ya está preparado un mensaje apropiado,
+            y el método inmediatamente devuelve <methodname>false</methodname>.
             Estas reglas de validación son por lo tanto secuencialmente dependientes.
             Es decir, si uno de los tests falla, no hay necesidad de poner a
             prueba las posteriores reglas de validación.
@@ -231,7 +231,7 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
         <para>
             La siguiente clase implementa estos criterios de validación:
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 class MyValid_PasswordStrength extends Zend_Validate_Abstract
 {
     const LENGTH = 'length';
@@ -277,15 +277,15 @@ class MyValid_PasswordStrength extends Zend_Validate_Abstract
 }
 ]]></programlisting>
 
-            Las cuatro pruebas de criterio en <code>isValid()</code> no devuelven
-            inmediatamente <code>false</code>.
+            Las cuatro pruebas de criterio en <methodname>isValid()</methodname> no devuelven
+            inmediatamente <methodname>false</methodname>.
             Esto permite a la clase de validación a proporcionar <emphasis role="bold">todas</emphasis>
             las razones por las que la contraseña de entrada no cumplió los requisitos
             de validación.
-            Si, por ejemplo, un usuario ingresara el string "<code>#$%</code>"
-            como contraseña, <code>isValid()</code> causaría que los cuatro
+            Si, por ejemplo, un usuario ingresara el string "<methodname>#$%</methodname>"
+            como contraseña, <methodname>isValid()</methodname> causaría que los cuatro
             mensajes de fracaso de validación sean devueltos por un llamado posterior
-            a <code>getMessages()</code>.
+            a <methodname>getMessages()</methodname>.
         </para>
 
     </example>

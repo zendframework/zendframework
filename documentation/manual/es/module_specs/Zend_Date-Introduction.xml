@@ -56,7 +56,7 @@
             aplicación tiene una zona horaria correcta por defecto,
             configurando la variable de entorno TZ, usando el
             parametro del php.ini
-            <code>date.timezone</code>
+            <methodname>date.timezone</methodname>
             , o usando
             <ulink url="http://php.net/date_default_timezone_set">
                 date_default_timezone_set()
@@ -72,7 +72,7 @@
             .
             <example id="zend.date.setdefaulttimezone.example-1">
                 <title>Configurando una Zona Horaria por Defecto</title>
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
                 // zona horaria para un estadounidense en California
 date_default_timezone_set('America/Los_Angeles');
 // zona horaria para un alemán en Alemania
@@ -130,7 +130,7 @@ date_default_timezone_set('Europe/Berlin');
                     A pesar de que la documentación de PHP 5.2 indice: "El intervalo de valores admitidos de timestamps es
                     desde el 13 Dec 1901 20:45:54 GMT al 19 Ene 2038 03:14:07 GMT," <classname>Zend_Date</classname> admite un rango
                     casi ilimitado, con la ayuda de la extensión BCMath. Si BCMath no está disponible, Zend_Date tendrá una
-                    funcionalidad de timestamps reducida al rango del tipo <code>float</code> soportado por su servidor.
+                    funcionalidad de timestamps reducida al rango del tipo <methodname>float</methodname> soportado por su servidor.
                     El tamaño de un float es dependiente de la plataforma, aunque un máximo de ~1.8e308 con una precisión
                     de cerca de 14 dígitos decimales es un valor habitual (formato 64 bit IEEE)." [
                     <ulink url="http://www.php.net/float">http://www.php.net/float</ulink>

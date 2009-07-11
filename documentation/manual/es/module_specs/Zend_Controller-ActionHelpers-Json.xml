@@ -28,7 +28,7 @@
                 codificación utilizando <classname>Zend_Json_Expr</classname>.
              </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 $this->_helper->json($data, array('enableJsonExprFinder' => true));
 ]]></programlisting>
         </listitem>
@@ -49,11 +49,11 @@ $this->_helper->json($data, array('enableJsonExprFinder' => true));
 
     <para>
         El uso es simple: o bien llamarlo como un método del ayudante,
-        o llamar a uno de los métodos <code>encodeJson()</code> o
-        <code>sendJson()</code>:
+        o llamar a uno de los métodos <methodname>encodeJson()</methodname> o
+        <methodname>sendJson()</methodname>:
     </para>
 
-    <programlisting role="php"><![CDATA[
+     <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function barAction()
@@ -79,21 +79,21 @@ class FooController extends Zend_Controller_Action
             quizás para envolver la respuesta de JSON en algún tipo de
             contexto -- cada método en el ayudante JSON acepta un segundo
             argumento opcional: un flag para activar o desactivar layouts.
-            Pasando un valor booleano <code>true</code> conservará los layouts
+            Pasando un valor booleano <methodname>true</methodname> conservará los layouts
             habilitados:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $this->_helper->json($data, true);
 ]]></programlisting>
 
         <para>
             Opcionalmente, puede pasar un array como el segundo parámetro.
             Este array puede contener una variedad de opciones, incluida la
-            opción <code>keepLayouts</code>:
+            opción <methodname>keepLayouts</methodname>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $this->_helper->json($data, array('keepLayouts' => true);
 ]]></programlisting>
     </note>
@@ -104,23 +104,23 @@ $this->_helper->json($data, array('keepLayouts' => true);
         <para>
             <classname>Zend_Json::encode()</classname> permite la codificación
             de expresiones nativas de JSON utilizando objetos
-            <code>Zend_Json_Expr</code>. Esta opción está desactivada por
+            <methodname>Zend_Json_Expr</methodname>. Esta opción está desactivada por
             defecto. Para activar esta opción, pase un valor booleano
-            <code>true</code> a la opción <code>enableJsonExprFinder</code>:
+            <methodname>true</methodname> a la opción <methodname>enableJsonExprFinder</methodname>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $this->_helper->json($data, array('enableJsonExprFinder' => true);
 ]]></programlisting>
 
         <para>
             Si desea hacer esto, <emphasis>debe</emphasis> pasar un array
             como segundo argumento. Esto también le permite combinar otras
-            opciones, como la opción <code>keepLayouts</code>. Todas esas
+            opciones, como la opción <methodname>keepLayouts</methodname>. Todas esas
             opciones se pasan luego a <classname>Zend_Json::encode()</classname>.
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $this->_helper->json($data, array(
     'enableJsonExprFinder' => true,
     'keepLayouts'          => true,

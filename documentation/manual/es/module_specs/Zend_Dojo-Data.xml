@@ -21,7 +21,7 @@
         siguiente formato JSON:
     </para>
 
-    <programlisting role="javascript"><![CDATA[
+    <programlisting language="javascript"><![CDATA[
 {
     identifier: '<name>',
     <label: '<label>',>
@@ -50,7 +50,7 @@
         <example id="zend.dojo.data.usage.constructor">
             <title>Inicialización de Zend_Dojo_Data via constructor</title>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 $data = new Zend_Dojo_Data('id', $items);
 ]]></programlisting>
         </example>
@@ -58,7 +58,7 @@ $data = new Zend_Dojo_Data('id', $items);
         <example id="zend.dojo.data.usage.mutators">
             <title>Inicialización de Zend_Dojo_Data via mutators</title>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 $data = new Zend_Dojo_Data();
 $data->setIdentifier('id')
      ->addItems($items);
@@ -67,13 +67,13 @@ $data->setIdentifier('id')
 
         <para>
             También puede añadir un solo item a la vez, o agregar items utilizando 
-            <code>addItem()</code> y <code>addItems()</code>.
+            <methodname>addItem()</methodname> y <methodname>addItems()</methodname>.
         </para>
 
         <example id="zend.dojo.data.usage.append">
             <title>Agregando datos a <classname>Zend_Dojo_Data</classname></title>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 $data = new Zend_Dojo_Data($identifier, $items);
 $data->addItem($someItem);
 
@@ -103,7 +103,7 @@ $data->addItems($someMoreItems);
             </para></listitem>
 
             <listitem><para>
-                Objectos implementando un método <code>toArray()</code>
+                Objectos implementando un método <methodname>toArray()</methodname>
             </para></listitem>
 
             <listitem><para>
@@ -113,7 +113,7 @@ $data->addItems($someMoreItems);
 
         <para>
             Puede adjuntar colecciones de los items anteriores via 
-            <code>addItems()</code> o <code>setItems()</code> 
+            <methodname>addItems()</methodname> o <methodname>setItems()</methodname> 
             (sobreescribe todos los items previamente establecidos); cuando lo 
             haga, puede pasar un solo argumento:
         </para>
@@ -124,22 +124,22 @@ $data->addItems($someMoreItems);
             </para></listitem>
 
             <listitem><para>
-                Objectos implementando la interfaz <code>Traversable</code>, 
-                que incluye las interfaces <code>Iterator</code> y
-                <code>ArrayAccess</code>.
+                Objectos implementando la interfaz <methodname>Traversable</methodname>, 
+                que incluye las interfaces <methodname>Iterator</methodname> y
+                <methodname>ArrayAccess</methodname>.
             </para></listitem>
         </itemizedlist>
 
         <para>
             Si quiere especificar un campo que actuará como una etiqueta para 
-            el item, llame a <code>setLabel()</code>:
+            el item, llame a <methodname>setLabel()</methodname>:
         </para>
 
         <example id="zend.dojo.data.usage.label">
             <title>Especificando la etiqueta de un campo en 
             <classname>Zend_Dojo_Data</classname></title>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 $data->setLabel('name');
 ]]></programlisting>
         </example>
@@ -148,13 +148,13 @@ $data->setLabel('name');
             Por último, también puede cargar un item 
             <classname>Zend_Dojo_Data</classname> 
             de un array JSON dojo.data, utilizando el método 
-            <code>fromJson()</code>.
+            <methodname>fromJson()</methodname>.
         </para>
 
         <example id="zend.dojo.data.usage.populate">
             <title>Alimentando <classname>Zend_Dojo_Data</classname> desde JSON</title>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 $data->fromJson($json);
 ]]></programlisting>
         </example>
@@ -166,10 +166,10 @@ $data->fromJson($json);
         <para>
             Algunos componentes de Dojo requieren metadatos adicionales junto 
             al conjunto de datos de dojo.data. 
-            Como ejemplo, <code>dojox.grid.Grid</code> puede tirar datos 
-            dinámicamente desde un <code>dojox.data.QueryReadStore</code>. 
+            Como ejemplo, <methodname>dojox.grid.Grid</methodname> puede tirar datos 
+            dinámicamente desde un <methodname>dojox.data.QueryReadStore</methodname>. 
             Para que la paginación funcione correctamente, cada conjunto de datos 
-            de regreso debería contener una clave <code>numRows</code> con el 
+            de regreso debería contener una clave <methodname>numRows</methodname> con el 
             número total de filas que podrían ser devueltas por la consulta. 
             Con estos datos, la plantilla sabe cuando seguir haciendo pequeños  
             pedidos de subconjuntos de datos al servidor y cuando dejar de 
@@ -183,7 +183,7 @@ $data->fromJson($json);
             a los metadatos como al objeto. Lo siguiente ilustra su uso:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 // Establece el "numRows" a 100
 $data->setMetadata('numRows', 100);
 
@@ -218,8 +218,8 @@ $data->clearMetadata();
 
         <para>
             <classname>Zend_Dojo_Data</classname> implementa las interfaces
-            <code>ArrayAccess</code>, <code>Iterator</code>, y
-            <code>Countable</code>. Por lo tanto, puede usar la recopilación de 
+            <methodname>ArrayAccess</methodname>, <methodname>Iterator</methodname>, y
+            <methodname>Countable</methodname>. Por lo tanto, puede usar la recopilación de 
             datos casi como si fuera un array.
         </para>
 
@@ -227,11 +227,11 @@ $data->clearMetadata();
             Todos los items son referenciados por el identificador de campo. 
             Dado que los identificadores deben ser únicos, puede usar los 
             valores de este campo para sacar los registros individuales. 
-            Hay dos maneras de hacer esto: con el método <code>getItem()</code>, 
+            Hay dos maneras de hacer esto: con el método <methodname>getItem()</methodname>, 
             o via notación de array.
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 // Usando getItem():
 $item = $data->getItem('foo');
 
@@ -244,7 +244,7 @@ $item = $data['foo'];
             actualizarlo, borrarlo, crearlo, o probarlo:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 // Actualizar o crear un item:
 $data['foo'] = array('title' => 'Foo', 'email' => 'foo@foo.com');
 
@@ -261,7 +261,7 @@ if (isset($data[foo])) {
             Internamente, todos los items se almacenan como arrays.
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 foreach ($data as $item) {
     echo $item['title'] . ': ' . $item['description'] . "\n";
 }
@@ -271,17 +271,17 @@ foreach ($data as $item) {
             O inclusive contar para ver cuántos ítems tiene:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 echo count($data), " items encontrados!";
 ]]></programlisting>
 
         <para>
-            Por último, como la clase implementa <code>__toString()</code>, 
+            Por último, como la clase implementa <methodname>__toString()</methodname>, 
             también puede convertirlo a JSON simplemente con "echo" de PHP o 
             convertirlo a string:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 echo $data; // echo como un string JSON
 
 $json = (string) $data; // conversión a string == conversión a JSON
@@ -297,98 +297,98 @@ $json = (string) $data; // conversión a string == conversión a JSON
 
             <itemizedlist>
                 <listitem><para>
-                    <code>setItems($items)</code>: establece varios items a la 
+                    <methodname>setItems($items)</methodname>: establece varios items a la 
                     vez, sobrescribiendo cualquier item que figurase anteriormente 
-                    en el objeto. <code>$items</code> debe ser un array o un 
-                    objeto <code>Traversable</code>.
+                    en el objeto. <methodname>$items</methodname> debe ser un array o un 
+                    objeto <methodname>Traversable</methodname>.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>setItem($item, $id = null)</code>: establece un 
+                    <methodname>setItem($item, $id = null)</methodname>: establece un 
                     item individual, opcionalmente puede pasar un identificador 
                     explícito. Sobreescribe el item si ya existe en la colección. 
                     Los items válidos incluyen a arrays asociativos, objetos 
-                    implementando <code>toArray()</code>, o cualquier objeto 
+                    implementando <methodname>toArray()</methodname>, o cualquier objeto 
                     con propiedades públicas.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>addItem($item, $id = null)</code>: añade un item 
+                    <methodname>addItem($item, $id = null)</methodname>: añade un item 
                     individual, opcionalmente puede pasar un identificador 
                     explícito. 
                     Generará una excepción si el item ya existe en la colección. 
                     Los items válidos incluyen a arrays asociativos, objetos 
-                    implementando <code>toArray()</code>, o cualquier objeto 
+                    implementando <methodname>toArray()</methodname>, o cualquier objeto 
                     con propiedades públicas.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>addItems($items)</code>: agrega múltiples items a la 
+                    <methodname>addItems($items)</methodname>: agrega múltiples items a la 
                     vez, añadiendolos a cualquiera de los items actuales. 
                     Generará una excepción si alguno de los nuevos items tiene 
                     un identificador concordante a un identificador ya existente 
-                    en la colección. <code>$items</code> debe ser un array o un 
-                    objeto <code>Traversable</code>.
+                    en la colección. <methodname>$items</methodname> debe ser un array o un 
+                    objeto <methodname>Traversable</methodname>.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getItems()</code>: recupera todos los items como un 
+                    <methodname>getItems()</methodname>: recupera todos los items como un 
                     array de arrays.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>hasItem($id)</code>: determina si un item con el 
+                    <methodname>hasItem($id)</methodname>: determina si un item con el 
                     identificador dado existe en la colección.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getItem($id)</code>: recupera un item con el 
+                    <methodname>getItem($id)</methodname>: recupera un item con el 
                     identificador dado de la colección; el item retornado será 
                     un array asociativo. Si ningún item coincide, se devolverá 
                     un valor null.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>removeItem($id)</code>: elimina de la colección un 
+                    <methodname>removeItem($id)</methodname>: elimina de la colección un 
                     item con el identificador dado.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>clearItems()</code>: elimina todos los items de la 
+                    <methodname>clearItems()</methodname>: elimina todos los items de la 
                     colección.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>setIdentifier($identifier)</code>: establece el 
+                    <methodname>setIdentifier($identifier)</methodname>: establece el 
                     nombre del campo que representa el identificador único para 
                     cada item en la colección.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getIdentifier()</code>: recupera el nombre del campo 
+                    <methodname>getIdentifier()</methodname>: recupera el nombre del campo 
                     identificador.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>setLabel($label)</code>: establece el nombre de un 
+                    <methodname>setLabel($label)</methodname>: establece el nombre de un 
                     campo para ser utilizado como la etiqueta a mostrar para 
                     un item.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getLabel()</code>: recupera la etiqueta del nombre 
+                    <methodname>getLabel()</methodname>: recupera la etiqueta del nombre 
                     del campo.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>toArray()</code>: enviar el objeto a un array. 
+                    <methodname>toArray()</methodname>: enviar el objeto a un array. 
                     Como mínimo, el array contendrá las claves 'identifier', 
                     'items', y 'label' si una etiqueta de campo ha sido 
                     establecida en el objeto.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>toJson()</code>: enviar el objeto a una representación JSON.
+                    <methodname>toJson()</methodname>: enviar el objeto a una representación JSON.
                 </para></listitem>
             </itemizedlist>
         </sect3>

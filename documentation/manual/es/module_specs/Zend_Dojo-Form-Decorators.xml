@@ -15,8 +15,8 @@
     </para>
 
     <para>
-        Todos los decoradores dijit buscan la propiedad <code>dijitParams</code> 
-        del elemento que va a ser decorado, y mandarlos como un array <code>$params</code> 
+        Todos los decoradores dijit buscan la propiedad <methodname>dijitParams</methodname> 
+        del elemento que va a ser decorado, y mandarlos como un array <methodname>$params</methodname> 
         al ayudante de vista dijit que se está usando. Luego, éstos son separados de 
         cualquiera de las otras propiedades para evitar la duplicación de 
         información.
@@ -28,20 +28,20 @@
         <para>
             Al igual que <link linkend="zend.form.standardDecorators.viewHelper"> 
             el decorador ViewHelper</link>, DijitElement espera una propiedad  
-            del <code>helper</code> en el elemento que luego usará como el 
+            del <methodname>helper</methodname> en el elemento que luego usará como el 
             ayudante de vista cuando lo renderice. 
             Los parámetros Dijit suelen ser arrastrados directamente desde el 
             elemento, pero también pueden ser pasados como opciones vía 
-            la clave <code>dijitParams</code> (el valor de esa clave debe ser 
+            la clave <methodname>dijitParams</methodname> (el valor de esa clave debe ser 
             un array asociativo de opciones).
         </para>
 
         <para>
             Es importante que cada elemento tenga un único ID (como traído desde 
-            el método <code>getId()</code> del elemento). 
-            Si se detectan duplicados dentro del ayudante de vista <code>dojo()</code>, 
+            el método <methodname>getId()</methodname> del elemento). 
+            Si se detectan duplicados dentro del ayudante de vista <methodname>dojo()</methodname>, 
             el decorador accionará un aviso, pero luego creará un único ID 
-            añadiéndole lo que devuelve <code>uniqid()</code> al identificador.
+            añadiéndole lo que devuelve <methodname>uniqid()</methodname> al identificador.
         </para>
 
         <para>
@@ -52,7 +52,7 @@
         <example id="zend.dojo.form.decorators.dijitElement.usage">
             <title>Uso del Decorador DijitElement</title>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 $element->setDecorators(array(
     'DijitElement',
     'Errors',
@@ -88,7 +88,7 @@ $element->setDecorators(array(
         <title>Decoradores basados en DijitContainer</title>
 
         <para>
-            El decorador <code>DijitContainer</code> es en realidad una clase 
+            El decorador <methodname>DijitContainer</methodname> es en realidad una clase 
             abstracta desde la cual derivan una variedad de otros decoradores. 
             Ofrece la misma funcionalidad de <link
                 linkend="zend.dojo.form.decorators.dijitElement">DijitElement</link>,
@@ -103,7 +103,7 @@ $element->setDecorators(array(
 
         <para>
             La siguiente es una lista de decoradores que heredan de  
-            <code>DijitContainer</code>:
+            <methodname>DijitContainer</methodname>:
         </para>
 
         <itemizedlist>
@@ -119,7 +119,7 @@ $element->setDecorators(array(
         <example id="zend.dojo.form.decorators.dijitContainer.usage">
             <title>Uso del Decorador DijitContainer</title>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 // Use un TabContainer para su form:
 $form->setDecorators(array(
     'FormElements',

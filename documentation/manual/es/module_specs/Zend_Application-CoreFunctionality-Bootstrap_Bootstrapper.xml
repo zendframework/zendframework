@@ -29,11 +29,11 @@
             </thead>
             <tbody>
                 <row>
-                    <entry><code>__construct($application)</code></entry>
-                    <entry><code>void</code></entry>
+                    <entry><methodname>__construct($application)</methodname></entry>
+                    <entry><methodname>void</methodname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$application</code>: <emphasis>requerido</emphasis>.
+                            <methodname>$application</methodname>: <emphasis>requerido</emphasis>.
                             Debe aceptar un objeto <classname>Zend_Application</classname> o
                             <classname>Zend_Application_Bootstrap_Bootstrapper</classname>
                             como único argumento.
@@ -48,11 +48,11 @@
                 </row>
 
                 <row>
-                    <entry><code>setOptions(array $options)</code></entry>
+                    <entry><methodname>setOptions(array $options)</methodname></entry>
                     <entry><classname>Zend_Application_Bootstrap_Bootstrapper</classname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$options</code>: <emphasis>requerido</emphasis>.
+                            <methodname>$options</methodname>: <emphasis>requerido</emphasis>.
                             Array de opciones a establecer.
                         </para></listitem>
                     </itemizedlist></entry>
@@ -65,7 +65,7 @@
                 </row>
 
                 <row>
-                    <entry><code>getApplication()</code></entry>
+                    <entry><methodname>getApplication()</methodname></entry>
                     <entry><classname>Zend_Application | Zend_Application_Bootstrap_Bootstrapper</classname></entry>
                     <entry>N/A</entry>
                     <entry><para>
@@ -75,8 +75,8 @@
                 </row>
 
                 <row>
-                    <entry><code>getEnvironment()</code></entry>
-                    <entry><code>string</code></entry>
+                    <entry><methodname>getEnvironment()</methodname></entry>
+                    <entry><methodname>string</methodname></entry>
                     <entry>N/A</entry>
                     <entry><para>
                         Recuperar el string del medio ambiente registrado
@@ -85,8 +85,8 @@
                 </row>
 
                 <row>
-                    <entry><code>getClassResources()</code></entry>
-                    <entry><code>array</code></entry>
+                    <entry><methodname>getClassResources()</methodname></entry>
+                    <entry><methodname>array</methodname></entry>
                     <entry>N/A</entry>
                     <entry><para>
                         Recuperar una lista de los recursos inicializadores de
@@ -96,15 +96,15 @@
                 </row>
 
                 <row>
-                    <entry><code>bootstrap($resource = null)</code></entry>
-                    <entry><code>mixed</code></entry>
+                    <entry><methodname>bootstrap($resource = null)</methodname></entry>
+                    <entry><methodname>mixed</methodname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <code>$resource</code>: <emphasis>optional</emphasis>.
+                            <methodname>$resource</methodname>: <emphasis>optional</emphasis>.
                         </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
-                        Si <code>$resource</code> está vacío, ejecutar todos
+                        Si <methodname>$resource</methodname> está vacío, ejecutar todos
                         los recursos del bootstrap.
                         Si es un string, ejecutar ese único recurso;
                         si es un array, ejecutar cada recurso del array.
@@ -112,8 +112,8 @@
                 </row>
 
                 <row>
-                    <entry><code>run()</code></entry>
-                    <entry><code>void</code></entry>
+                    <entry><methodname>run()</methodname></entry>
+                    <entry><methodname>void</methodname></entry>
                     <entry>N/A</entry>
                     <entry><para>
                         Define qué lógica de aplicación ejecutar luego del

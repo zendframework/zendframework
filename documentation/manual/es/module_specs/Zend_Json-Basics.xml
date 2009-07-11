@@ -8,7 +8,7 @@
         <classname>Zend_Json::encode()</classname> y
         <classname>Zend_Json::decode()</classname>.
     </para>
-    <programlisting role="php"><![CDATA[
+     <programlisting language="php"><![CDATA[
 // Recuperar un valor:
 $phpNative = Zend_Json::decode($encodedValue);
 

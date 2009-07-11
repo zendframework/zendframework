@@ -14,7 +14,7 @@
     <sect2 id="zend.validate.set.alnum">
         <title>Alnum</title>
         <para>
-            Devuelve <code>true</code> si y sólo si <code>$valor</code> contiene
+            Devuelve <methodname>true</methodname> si y sólo si <methodname>$valor</methodname> contiene
             caracteres alfanuméricos únicamente.
             Este validador incluye una opción para considerar también al espacio
             en blanco como caracter válido.
@@ -33,7 +33,7 @@
     <sect2 id="zend.validate.set.alpha">
         <title>Alpha</title>
         <para>
-            Devuelve <code>true</code> si y sólo si <code>$valor</code> sólo
+            Devuelve <methodname>true</methodname> si y sólo si <methodname>$valor</methodname> sólo
             contiene caracteres alfabéticos.
             Este validador incluye una opción para considerar también al espacio
             en blanco como caracter válido.
@@ -45,9 +45,9 @@
         <para>
             Este validador es instanciado con un tipo de código de barras contra
             el valor del código de barras que quiere validar.
-            En la actualidad acepta los tipos de código de barras "<code>UPC-A</code>"
-            (Universal Product Code) y "<code>EAN-13</code>" (European Article Number),
-            además el método <code>isValid()</code> devuelve verdadero si y solo si
+            En la actualidad acepta los tipos de código de barras "<methodname>UPC-A</methodname>"
+            (Universal Product Code) y "<methodname>EAN-13</methodname>" (European Article Number),
+            además el método <methodname>isValid()</methodname> devuelve verdadero si y solo si
             la entrada valida satisfactoriamente contra el algoritmo de validación
             del código de barras.
             Antes de enviar los datos de entrada al validador, debe asegurarse
@@ -58,11 +58,11 @@
     <sect2 id="zend.validate.set.between">
         <title>Between</title>
         <para>
-            Devuelve <code>true</code> si y sólo si <code>$valor</code> está entre
+            Devuelve <methodname>true</methodname> si y sólo si <methodname>$valor</methodname> está entre
             los valores límites mínimo y máximo.
-            La comparación es inclusiva por defecto (<code>$valor</code> puede ser
+            La comparación es inclusiva por defecto (<methodname>$valor</methodname> puede ser
             igual a una valor límite), aunque esto puede ser anulado a fin de
-            hacer una comparación estricta, donde <code>$valor</code> debe ser
+            hacer una comparación estricta, donde <methodname>$valor</methodname> debe ser
             estrictamente mayor al mínimo y estrictamente menor al máximo.
         </para>
     </sect2>
@@ -70,7 +70,7 @@
     <sect2 id="zend.validate.set.ccnum">
         <title>Ccnum</title>
         <para>
-            Devuelve <code>true</code> si y sólo si <code>$valor</code> sigue el
+            Devuelve <methodname>true</methodname> si y sólo si <methodname>$valor</methodname> sigue el
             algoritmo Luhn (mod-10 checksum) para tarjetas de crédito.
         </para>
     </sect2>
@@ -78,11 +78,11 @@
     <sect2 id="zend.validate.set.date">
         <title>Date</title>
         <para>
-            Devuelve <code>true</code> si y sólo si <code>$valor</code> es una
-            fecha válida en el formato <code>YYYY-MM-DD</code> (AAAA-MM-DD).
-            Si se usa la opción <code>locale</code> entonces la fecha
+            Devuelve <methodname>true</methodname> si y sólo si <methodname>$valor</methodname> es una
+            fecha válida en el formato <methodname>YYYY-MM-DD</methodname> (AAAA-MM-DD).
+            Si se usa la opción <methodname>locale</methodname> entonces la fecha
             será validada de acuerdo a lo establecido para ese lugar.
-            El formato <code>format</code> es una opción que establece este
+            El formato <methodname>format</methodname> es una opción que establece este
             formato a ser utilizado para la validación.
             Para los detalles acerca de los parámetros opcionales ver en:
             <link linkend="zend.date.others.comparison.table">Zend_Date::isDate()</link>.
@@ -95,7 +95,7 @@
     <sect2 id="zend.validate.set.digits">
         <title>Digits</title>
         <para>
-            Devuelve <code>true</code> si y sólo si <code>$valor</code> contiene
+            Devuelve <methodname>true</methodname> si y sólo si <methodname>$valor</methodname> contiene
             solamente dígitos.
         </para>
     </sect2>
@@ -106,7 +106,7 @@
     <sect2 id="zend.validate.set.float">
         <title>Float</title>
         <para>
-            Returns <code>true</code> if and only if <code>$value</code> is a floating-point value.
+            Returns <methodname>true</methodname> if and only if <methodname>$value</methodname> is a floating-point value.
             Since Zend Framework 1.8 this validator takes into account the actual locale from browser,
             environment or application wide set locale. You can of course use the get/setLocale accessors
             to change the used locale or give it while creating a instance of this validator.
@@ -117,7 +117,7 @@
     <sect2 id="zend.validate.set.greater_than">
         <title>GreaterThan</title>
         <para>
-            Devuelve <code>true</code> si y sólo si <code>$valor</code> es mayor
+            Devuelve <methodname>true</methodname> si y sólo si <methodname>$valor</methodname> es mayor
             al límite mínimo.
         </para>
     </sect2>
@@ -125,7 +125,7 @@
     <sect2 id="zend.validate.set.hex">
         <title>Hex</title>
         <para>
-            Devuelve <code>true</code> si y sólo si <code>$valor</code> contiene
+            Devuelve <methodname>true</methodname> si y sólo si <methodname>$valor</methodname> contiene
             caracteres hexadecimales (0-9 y A-F).
         </para>
     </sect2>
@@ -136,7 +136,7 @@
     <sect2 id="zend.validate.set.iban">
         <title>Iban</title>
         <para>
-            Returns <code>true</code> if and only if <code>$value</code> contains a valid IBAN
+            Returns <methodname>true</methodname> if and only if <methodname>$value</methodname> contains a valid IBAN
             (International Bank Account Number). IBAN numbers are validated against the country where they are
             used and by a checksum.
         </para>
@@ -144,7 +144,7 @@
             There are two ways to validate IBAN numbers. As first way you can give a locale which represents
             a country. Any given IBAN number will then be validated against this country.
         </para>
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Iban('de_AT');
 $iban = 'AT611904300234573201';
 if ($validator->isValid($iban)) {
@@ -160,7 +160,7 @@ if ($validator->isValid($iban)) {
             This should be done when you want to validate IBAN numbers for a single countries. The simpler way
             of validation is not to give a locale like shown in the next example.
         </para>
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Iban();
 $iban = 'AT611904300234573201';
 if ($validator->isValid($iban)) {
@@ -182,9 +182,9 @@ if ($validator->isValid($iban)) {
     <sect2 id="zend.validate.set.in_array">
         <title>InArray</title>
         <para>
-            Devuelve <code>true</code> si y sólo si <code>$valor</code> se encuentra
+            Devuelve <methodname>true</methodname> si y sólo si <methodname>$valor</methodname> se encuentra
             en un array, y si la opción es estricta entonces también verificará
-            el tipo de dato de <code>$valor</code>.
+            el tipo de dato de <methodname>$valor</methodname>.
         </para>
     </sect2>
 
@@ -192,7 +192,7 @@ if ($validator->isValid($iban)) {
     <sect2 id="zend.validate.set.int">
         <title>Int</title>
         <para>
-            Returns <code>true</code> if and only if <code>$value</code> is a valid integer.
+            Returns <methodname>true</methodname> if and only if <methodname>$value</methodname> is a valid integer.
             Since Zend Framework 1.8 this validator takes into account the actual locale from browser,
             environment or application wide set locale. You can of course use the get/setLocale accessors
             to change the used locale or give it while creating a instance of this validator.
@@ -202,14 +202,14 @@ if ($validator->isValid($iban)) {
        <sect2 id="zend.validate.set.ip">
         <title>Ip</title>
         <para>
-            Devuelve <code>true</code> si y sólo si <code>$valor</code> es una dirección IP válida.
+            Devuelve <methodname>true</methodname> si y sólo si <methodname>$valor</methodname> es una dirección IP válida.
         </para>
     </sect2>
 
     <sect2 id="zend.validate.set.less_than">
         <title>LessThan</title>
         <para>
-            Devuelve <code>true</code> si y sólo si <code>$valor</code> es menor
+            Devuelve <methodname>true</methodname> si y sólo si <methodname>$valor</methodname> es menor
             al límite máximo.
         </para>
     </sect2>
@@ -217,14 +217,14 @@ if ($validator->isValid($iban)) {
     <sect2 id="zend.validate.set.not_empty">
         <title>NotEmpty</title>
         <para>
-            Devuelve <code>true</code> si y sólo si <code>$valor</code> no es vacío.
+            Devuelve <methodname>true</methodname> si y sólo si <methodname>$valor</methodname> no es vacío.
         </para>
     </sect2>
 
     <sect2 id="zend.validate.set.regex">
         <title>Regex</title>
         <para>
-            Devuelve <code>true</code> si y sólo si <code>$valor</code> coincide
+            Devuelve <methodname>true</methodname> si y sólo si <methodname>$valor</methodname> coincide
             con el patrón de una expresión regular.
         </para>
     </sect2>
@@ -236,16 +236,16 @@ if ($validator->isValid($iban)) {
     <sect2 id="zend.validate.set.string_length">
         <title>StringLength</title>
         <para>
-            Devuelve <code>true</code> si y sólo si la longitud del string <code>$valor</code>
+            Devuelve <methodname>true</methodname> si y sólo si la longitud del string <methodname>$valor</methodname>
             es por lo menos un mínimo y no mayor a un máximo
-            (cuando la opción max no es <code>null</code>).
-            Desde la versión 1.5.0, el método <code>setMin()</code> lanza una
+            (cuando la opción max no es <constant>NULL</constant>).
+            Desde la versión 1.5.0, el método <methodname>setMin()</methodname> lanza una
             excepción si la longitud mínima tiene un valor mayor que la longitud
-            máxima establecida, y el método <code>setMax()</code> lanza una excepción si la
+            máxima establecida, y el método <methodname>setMax()</methodname> lanza una excepción si la
             longitud máxima se fija a un valor inferior que la longitud
             mínima establecida. Desde la versión 1.0.2, esta clase soporta UTF-8 y a otras
             codificaciones, basado en el valor actual de:
-            <ulink url="http://www.php.net/manual/en/ref.iconv.php#iconv.configuration"><code>iconv.internal_encoding</code></ulink>.
+            <ulink url="http://www.php.net/manual/en/ref.iconv.php#iconv.configuration"><methodname>iconv.internal_encoding</methodname></ulink>.
         </para>
     </sect2>
 

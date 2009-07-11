@@ -7,8 +7,8 @@
     <para>
         <classname>Zend_Application_Resource_Modules</classname> se utiliza
         para inicializar sus módulos de aplicación. Si su módulo tiene un
-        archivo <code>Bootstrap.php</code> en su raíz, y contiene una clase
-        llamada <code>Module_Bootstrap</code> (donde "Module" es el nombre del
+        archivo <methodname>Bootstrap.php</methodname> en su raíz, y contiene una clase
+        llamada <methodname>Module_Bootstrap</methodname> (donde "Module" es el nombre del
         módulo), entonces usará esa clase para arrancar el módulo.
     </para>
 
@@ -49,7 +49,7 @@
             configuración de recursos en ese módulo.
         </para>
 
-        <programlisting role="ini"><![CDATA[
+        <programlisting language="ini"><![CDATA[
 
 [production]
 news.resources.db.adapter = "pdo_mysql"
@@ -60,7 +60,7 @@ news.resources.db.params.dbname = "news"
 news.resources.layout.layout = "news.phtml"
 ]]></programlisting>
 
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 
 <?xml version="1.0"?>
 <config>
@@ -92,10 +92,10 @@ news.resources.layout.layout = "news.phtml"
             de un módulo específico -- tal vez para ejecutar discretos
             métodos bootstrap ,o a recoger el cargador automático con el fin de
             configurarlo. Esto puede hacerse utilizando el método
-            <code>getExecutedBootstraps()</code> de los recursos de Módulo. 
+            <methodname>getExecutedBootstraps()</methodname> de los recursos de Módulo. 
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 
 $resource = $bootstrap->getPluginResource('modules');
 $moduleBootstraps = $resource->getExecutedBootstraps();

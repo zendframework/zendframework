@@ -24,7 +24,7 @@
 
     <example id="zend.pdf.create.example-1">
         <title>Crear un nuevo documento PDF o cargar uno ya esistente.</title>
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 ...
 // Crear un nuevo documento PDF
 $pdf1 = new Zend_Pdf();
@@ -61,7 +61,7 @@ $pdf3 = Zend_Pdf::parse($pdfString);
 
     <example id="zend.pdf.create.example-2">
         <title>Requiriendo Revisiones Específicas de un documento PDF</title>
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 ...
 // Cargar la revisión anterior del documento PDF
 $pdf1 = Zend_Pdf::load($fileName, 1);

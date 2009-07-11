@@ -19,7 +19,7 @@
     <para>
         Un ejemplo básico de uso se ve a continuación:
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_EmailAddress();
 if ($validator->isValid($email)) {
     // El email parece ser válido
@@ -31,8 +31,8 @@ if ($validator->isValid($email)) {
 }
 ]]></programlisting>
 
-        Esto coincide con el correo electrónico <code>$email</code> y si fracasa,
-        alimenta <code>$validator->getMessages()</code> con mensajes de error útiles.
+        Esto coincide con el correo electrónico <methodname>$email</methodname> y si fracasa,
+        alimenta <methodname>$validator->getMessages()</methodname> con mensajes de error útiles.
     </para>
 
     <para>
@@ -42,9 +42,9 @@ if ($validator->isValid($email)) {
     <para>
         <classname>Zend_Validate_EmailAddress</classname> se comparará con cualquier
         dirección de correo válida de acuardo a RFC2822.
-        Por ejemplo, correos electrónicos válidos incluyen <code>bob@domain.com</code> ,
-        <code>bob+jones@domain.us</code> , <code>"bob@jones"@domain.com</code> y
-        <code>"bob jones"@domain.com</code>
+        Por ejemplo, correos electrónicos válidos incluyen <methodname>bob@domain.com</methodname> ,
+        <methodname>bob+jones@domain.us</methodname> , <methodname>"bob@jones"@domain.com</methodname> y
+        <methodname>"bob jones"@domain.com</methodname>
     </para>
 
     <para>
@@ -61,7 +61,7 @@ if ($validator->isValid($email)) {
         La parte nombre de host de una dirección de correo es validado contra
         <link linkend="zend.validate.set.hostname"><classname>Zend_Validate_Hostname</classname></link>.
         Por defecto sólo son aceptados nombres de host DNS de la forma
-        <code>domain.com</code>, aunque si lo desea también puede aceptar
+        <methodname>domain.com</methodname>, aunque si lo desea también puede aceptar
         direcciones IP y nombres de host locales.
     </para>
 
@@ -72,7 +72,7 @@ if ($validator->isValid($email)) {
         aunque abajo hay un ejemplo de cómo aceptar tanto nombres de host DNS y
         locales:
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_EmailAddress(
                     Zend_Validate_Hostname::ALLOW_DNS |
                     Zend_Validate_Hostname::ALLOW_LOCAL);
@@ -107,12 +107,12 @@ if ($validator->isValid($email)) {
         Para habilitar el control MX puede pasar un segundo parámetro al
         constructor <classname>Zend_Validate_EmailAddress</classname>.
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_EmailAddress(Zend_Validate_Hostname::ALLOW_DNS,
                                             true);
 ]]></programlisting>
         Alternativamente, para activar o desactivar la validación MX puede pasar
-        <code>true</code> o <code>false</code> a <code>$validator->setValidateMx()</code>.
+        <methodname>true</methodname> o <methodname>false</methodname> a <methodname>$validator->setValidateMx()</methodname>.
     </para>
 
     <para>
@@ -134,10 +134,10 @@ $validator = new Zend_Validate_EmailAddress(Zend_Validate_Hostname::ALLOW_DNS,
         cambiando el ajuste a través del objeto <classname>Zend_Validate_Hostname</classname>
         que existe en <classname>Zend_Validate_EmailAddress</classname>.
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $validator->hostnameValidator->setValidateIdn(false);
 ]]></programlisting>
-        Sobre el uso de <code>setValidateIdn()</code> encontrará más información
+        Sobre el uso de <methodname>setValidateIdn()</methodname> encontrará más información
         en la documentación de <classname>Zend_Validate_Hostname</classname>.
     </para>
 
@@ -156,10 +156,10 @@ $validator->hostnameValidator->setValidateIdn(false);
         ajuste a través del objeto interno <classname>Zend_Validate_Hostname</classname>
         que existe en <classname>Zend_Validate_EmailAddress</classname>.
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $validator->hostnameValidator->setValidateTld(false);
 ]]></programlisting>
-        Encontrará más información sobre el uso de <code>setValidateTld()</code>
+        Encontrará más información sobre el uso de <methodname>setValidateTld()</methodname>
         en la documentación de <classname>Zend_Validate_Hostname</classname>.
     </para>
 

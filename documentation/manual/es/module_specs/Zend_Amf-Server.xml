@@ -16,12 +16,12 @@
         <title>Servidor AMF básico</title>
 
         <para>
-            Asumamos que ha creado la clase <code>Foo</code> con una
+            Asumamos que ha creado la clase <methodname>Foo</methodname> con una
             variedad de métodos públicos. Usando el siguiente código, puede
             crear un servidor AMF:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $servidor = new Zend_Amf_Server();
 $servidor->setClass('Foo');
 $respuesta = $servidor->handle();
@@ -33,7 +33,7 @@ echo $respuesta;
             llamada de retorno:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $servidor = new Zend_Amf_Server();
 $servidor->addFunction('myUberCoolFunction');
 $respuesta = $servidor->handle();
@@ -44,11 +44,11 @@ echo $respuesta;
             También puede combinar y examinar la identidad de varias clases y funciones.
             Al hacerlo, sugerimos darle un espacio de nombres a cada una para
             garantizar que no ocurran colisiones entre nombres de métodos;
-            puede hacerse simplemente pasando una segunda cadena de argumentos para cualquier <code>addFunction()</code> o
-            <code>setClass()</code>:
+            puede hacerse simplemente pasando una segunda cadena de argumentos para cualquier <methodname>addFunction()</methodname> o
+            <methodname>setClass()</methodname>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $servidor = new Zend_Amf_Server();
 $servidor->addFunction('myUberCoolFunction', 'my')
        ->setClass('Foo', 'foo')
@@ -64,10 +64,10 @@ echo $respuesta;
         El orden en que se añadan los directorios al servidor será el orden en que
         se realizarán las búsquedas LIFO en los directorios para coincidir
         con la clase.
-        El método <code>addDirectory()</code> realiza la acción de añadir directorios.
+        El método <methodname>addDirectory()</methodname> realiza la acción de añadir directorios.
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $servidor->addDirectory(dirname(__FILE__) .'/../services/');
 $servidor->addDirectory(dirname(__FILE__) .'/../package/');
 ]]></programlisting>
@@ -78,9 +78,9 @@ $servidor->addDirectory(dirname(__FILE__) .'/../package/');
         Cuando se utilize un guión bajo (_) tanto en PEAR como en Zend Framework,
         se respetarán los nombres de clases de acuerdo a las convenciones de nomenclatura.
         Esto significa que si usted llama al servicio com_Foo_Bar el servidor
-        buscará el archivo Bar.php en cada una de las rutas incluidas en <code>com/Foo/Bar.php</code>.
-        Si se usa la notación punto para su servicio remoto como <code>com.Foo.Bar</code>
-        cada ruta incluida deberá tener <code>com/Foo/Bar.php</code> agregado al final
+        buscará el archivo Bar.php en cada una de las rutas incluidas en <methodname>com/Foo/Bar.php</methodname>.
+        Si se usa la notación punto para su servicio remoto como <methodname>com.Foo.Bar</methodname>
+        cada ruta incluida deberá tener <methodname>com/Foo/Bar.php</methodname> agregado al final
         para autocargar Bar.php.
         </para>
 
@@ -100,7 +100,7 @@ $servidor->addDirectory(dirname(__FILE__) .'/../package/');
             así como para el valor de retorno. Como ejemplos:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 // Función que agregar:
 
 /**
@@ -114,7 +114,7 @@ function holaMundo($ombre, $saludo = 'Hola')
 }
 ]]></programlisting>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 // Clase agregada
 
 class Mundo
@@ -147,8 +147,8 @@ class Mundo
 
         <para>
             Por ejemplo, digamos que usted ya ha creado su servidor y lo ha
-            puesto en el fichero <code>server.php</code> en el directorio raíz (root)
-            de su aplicación, por lo tanto la URI es <code>http://example.com/server.php</code>.
+            puesto en el fichero <methodname>server.php</methodname> en el directorio raíz (root)
+            de su aplicación, por lo tanto la URI es <methodname>http://example.com/server.php</methodname>.
             En este caso, usted debería modificar su fichero services-config.xml
             poniendo este valor como atributo al punto final del canal uri.
        </para>
@@ -191,7 +191,7 @@ class Mundo
             Asegúrese también de guardar el fichero.
         </para>
 
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
 <services-config>
     <services>
@@ -224,7 +224,7 @@ class Mundo
             y especificamos el punto final como la URL a nuestro <classname>Zend_Amf_Server</classname>:
         </para>
 
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <channel-definition id="zend-endpoint"
     <endpoint uri="http://example.com/server.php"
         class="flex.messaging.endpoints.AMFEndpoint"/>
@@ -242,7 +242,7 @@ class Mundo
             En MXML, esto podría hacerse así:
         </para>
 
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <mx:RemoteObject id="myservice"
     fault="faultHandler(event)"
     showBusyCursor="true"
@@ -252,12 +252,12 @@ class Mundo
         <para>
             Aquí, hemos definido un nuevo objeto remoto identificado por "myservice"
             vinculado destino de servicio "zend" que hemos definido en el fichero
-            <code>services-config.xml</code>. Entonces invocamos sus métodos en
+            <methodname>services-config.xml</methodname>. Entonces invocamos sus métodos en
             nuestro ActionScript simplemente llamando a "myservice.&lt;method&gt;".
             . A modo de ejemplo:
         </para>
 
-        <programlisting role="ActionScript"><![CDATA[
+        <programlisting language="ActionScript"><![CDATA[
 myservice.hello("Wade");
 ]]></programlisting>
 
@@ -266,7 +266,7 @@ myservice.hello("Wade");
             "myservice.&lt;namespace&gt;.&lt;method&gt;":
         </para>
 
-        <programlisting role="ActionScript"><![CDATA[
+        <programlisting language="ActionScript"><![CDATA[
 myservice.world.hello("Wade");
 ]]></programlisting>
 
@@ -300,7 +300,7 @@ myservice.world.hello("Wade");
             Para desactivar el modo de producción, haga lo siguiente:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $server->setProduction(false);
 ]]></programlisting>
 
@@ -308,7 +308,7 @@ $server->setProduction(false);
             Para habilitarlo nuevamente, pase el valor true en su lugar.
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $server->setProduction(true);
 ]]></programlisting>
 
@@ -329,12 +329,12 @@ $server->setProduction(true);
         <para>
             Un área en la que se debe tener especialmente mucho cuidado son los
             errores propios de PHP.
-            Cuando la directiva INI <code>display_errors</code> está habilitada,
+            Cuando la directiva INI <methodname>display_errors</methodname> está habilitada,
             los errores de PHP de cualquier nivel del reporte actual serán
             pasados directamente a la salida, y potencialmente se podrían hacer
             estragos con las respuestas de AMF.
             Para prevenir estos problemas, sugerimos deshabilitar la directiva
-            <code>display_errors</code> cuando se está en modo de producción.
+            <methodname>display_errors</methodname> cuando se está en modo de producción.
         </para>
     </sect2>
 
@@ -345,7 +345,7 @@ $server->setProduction(true);
             En ocasiones es posible que quiera manipular ligeramente el objeto
             respuesta, es bastante usual querer devolver algunas cebeceras
             de mensajes adicionales. Puede hacerlo mediante el método del servidor
-            <code>handle()</code> que devuelve el objeto respuesta.
+            <methodname>handle()</methodname> que devuelve el objeto respuesta.
         </para>
 
         <example id="zend.amf.server.response.messageHeaderExample">
@@ -356,7 +356,7 @@ $server->setProduction(true);
                 "foo" con el valor 'bar' a la respuesta antes de devolverla.
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 $respuesta = $servidor->handle();
 $respuesta->addAmfHeader(new Zend_Amf_Value_MessageHeader('foo', true, 'bar'))
 echo $respuesta;
@@ -373,7 +373,7 @@ echo $respuesta;
         </para>
 
         <para>
-            <code>Zend_Amf</code> ofrece tres métodos para mapear ActionScript
+            <methodname>Zend_Amf</methodname> ofrece tres métodos para mapear ActionScript
              y objetos PHP.
         </para>
 
@@ -381,12 +381,12 @@ echo $respuesta;
             <listitem>
                 <para>
                     Primero, usted puede crear uniones explícitas a nivel del servidor,
-                    utilizando el método <code>setClassMap()</code>.
+                    utilizando el método <methodname>setClassMap()</methodname>.
                     El primer argumento es el nombre de la clase de ActionScript,
                     el segundo es el nombre de la clase PHP que lo mapea:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 // Mapea la clase ActionScript 'ContactVO' a la clase PHP 'Contact':
 $servidor->setClassMap('ContactVO', 'Contact');
 ]]></programlisting>
@@ -395,11 +395,11 @@ $servidor->setClassMap('ContactVO', 'Contact');
             <listitem>
                 <para>
                     Segundo, en su clase PHP puede ajustar la propiedad como pública
-                    mediante <code>$_explicitType</code>, con el valor
+                    mediante <methodname>$_explicitType</methodname>, con el valor
                     representativo de la clase ActionScript que mapear:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 class Contact
 {
     public $_explicitType = 'ContactVO';
@@ -410,11 +410,11 @@ class Contact
             <listitem>
                 <para>
                     Tercero, en un sentido similar, puede definir como público el método
-                    <code>getASClassName()</code> dentro de su clase.
+                    <methodname>getASClassName()</methodname> dentro de su clase.
                     Este método debe devolver la clase ActionScript apropiada:
                  </para>
 
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 class Contact
 {
     public function getASClassName()
@@ -436,7 +436,7 @@ class Contact
             Nombre el fichero como ContactVO y pulse 'finish' (finalizar) para verlo.
             Copie el siguiente código en el fichero para terminar de crear la clase.
         </para>
-        <programlisting role="as"><![CDATA[
+        <programlisting language="as"><![CDATA[
 package
 {
     [Bindable]
@@ -460,11 +460,11 @@ package
             dos meta tags AS3 únicos en esta clase.
             El primero es vinculable y dispara un evento cuando es actualizada.
             El segundo es el tag RemoteClass y define que esta clase puede tener
-            mapeado un objeto remoto con un nombre de alias, en este caso <code>ContactVO</code>
+            mapeado un objeto remoto con un nombre de alias, en este caso <methodname>ContactVO</methodname>
             Es obligatorio que en esta etiqueta(tag), el valor que se estableció es la clase PHP
             sea estrictamente equivalente.
         </para>
-        <programlisting role="as"><![CDATA[
+        <programlisting language="as"><![CDATA[
 [Bindable]
 private var myContact:ContactVO;
 
@@ -510,7 +510,7 @@ private function getContactHandler(event:ResultEvent):void {
             Copie el código siguiente en su fichero Main.as y luego vamos a recorrer
             el código para describir cuál es el papel de cada elemento.
         </para>
-        <programlisting role="as"><![CDATA[
+        <programlisting language="as"><![CDATA[
 package {
   import flash.display.MovieClip;
   import flash.events.*;
@@ -552,7 +552,7 @@ package {
             La segunda es un objeto Responder que maneja los valores de retorno desde
             el servidor, y que están relacionados con el éxito o el fracaso de la llamada.
        </para>
-        <programlisting role="as"><![CDATA[
+        <programlisting language="as"><![CDATA[
 import flash.net.NetConnection;
 import flash.net.Responder;
 ]]></programlisting>
@@ -560,7 +560,7 @@ import flash.net.Responder;
             En la clase necesitaremos tres variables para representar a NetConnection,
             Responder, y la URL del gateway a nuestra instalación <classname>Zend_Amf_Server</classname>.
         </para>
-        <programlisting role="as"><![CDATA[
+        <programlisting language="as"><![CDATA[
 private var gateway:String = "http://example.com/server.php";
 private var connection:NetConnection;
 private var responder:Responder;
@@ -571,7 +571,7 @@ private var responder:Responder;
             diferentes métodos para manejar la respuesta desde el servidor.
             Por simplicidad los hemos llamado onResult y onFault.
         </para>
-        <programlisting role="as"><![CDATA[
+        <programlisting language="as"><![CDATA[
 responder = new Responder(onResult, onFault);
 connection = new NetConnection;
 connection.connect(gateway);
@@ -582,7 +582,7 @@ connection.connect(gateway);
             Necesitamos añadir una línea más que hace una llamada a la función
             <classname>Zend_Amf_Server</classname> Mundo->hola.
         </para>
-        <programlisting role="as"><![CDATA[
+        <programlisting language="as"><![CDATA[
 connection.call("Mundo.hola", responder, params);
 ]]></programlisting>
         <para>
@@ -592,7 +592,7 @@ connection.call("Mundo.hola", responder, params);
             Cada vez que se ejecuta apropiadamente el manejo de conexión con el
             servidor, el manejador de eventos llama esta función.
         </para>
-        <programlisting role="as"><![CDATA[
+        <programlisting language="as"><![CDATA[
 private function onResult(result:Object):void {
     // Muestra los datos devueltos
     trace(String(result));
@@ -604,7 +604,7 @@ private function onResult(result:Object):void {
             el servicio remoto o método no existe o cualquier otra cuestión
             relacionada con la conexión.
         </para>
-        <programlisting role="as"><![CDATA[
+        <programlisting language="as"><![CDATA[
 private function onFault(fault:Object):void {
     trace(String(fault.description));
 }

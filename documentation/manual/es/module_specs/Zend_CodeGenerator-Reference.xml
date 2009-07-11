@@ -16,7 +16,7 @@
                 Su API es la siguiente:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 abstract class Zend_CodeGenerator_Abstract
 {
     final public function __construct(Array $options = array())
@@ -31,29 +31,29 @@ abstract class Zend_CodeGenerator_Abstract
 ]]></programlisting>
 
             <para>
-                El constructor primero llama a <code>_init()</code>
+                El constructor primero llama a <methodname>_init()</methodname>
                 (que se deja vacía para implementar extenciones a clases
-                concretas), se pasa entonces el parámetro <code>$options</code>
-                a <code>setOptions()</code>, y finalmente se llama a
-                <code>_prepare()</code> (nuevamente, a ser implementada por
+                concretas), se pasa entonces el parámetro <methodname>$options</methodname>
+                a <methodname>setOptions()</methodname>, y finalmente se llama a
+                <methodname>_prepare()</methodname> (nuevamente, a ser implementada por
                 extensión de una clase)
             </para>
 
             <para>
                 Al igual que la mayoría de las clases en Zend Framework,
-                <code>setOptions()</code> compara una opción clave con setters
+                <methodname>setOptions()</methodname> compara una opción clave con setters
                 existentes en la clase, y pasa el valor de ese método
                 si lo encuentra.
             </para>
 
             <para>
-                <code>__toString()</code> es marcado como final, y proxies a
-                <code>generate()</code>.
+                <methodname>__toString()</methodname> es marcado como final, y proxies a
+                <methodname>generate()</methodname>.
             </para>
 
             <para>
-                <code>setSourceContent()</code> y
-                <code>getSourceContent()</code> están destinados ya sea para
+                <methodname>setSourceContent()</methodname> y
+                <methodname>getSourceContent()</methodname> están destinados ya sea para
                 fijar el valor por defecto del contenido para el código a ser
                 generado, o para sustituir dicho contenido una vez que se
                 completen todas las tareas de generación.
@@ -71,7 +71,7 @@ abstract class Zend_CodeGenerator_Abstract
                 antes del contenido generado. Su API es la siguiente:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 abstract class Zend_CodeGenerator_Php_Abstract
     extends Zend_CodeGenerator_Abstract
 {
@@ -95,7 +95,7 @@ abstract class Zend_CodeGenerator_Php_Abstract
                 Su API es la siguiente:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 abstract class Zend_CodeGenerator_Php_Member_Abstract
     extends Zend_CodeGenerator_Php_Abstract
 {
@@ -123,14 +123,14 @@ abstract class Zend_CodeGenerator_Php_Member_Abstract
                 para generar código procedural arbitrario para incluir dentro
                 de un archivo. Como tal, usted simplemente establece contenidos
                 para el objeto, y éste devolverá el contenido cuando usted
-                invoque a <code>generate()</code>.
+                invoque a <methodname>generate()</methodname>.
             </para>
 
             <para>
                 La API de la clase es la siguiente:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Body extends Zend_CodeGenerator_Php_Abstract
 {
     public function setContent($content)
@@ -157,7 +157,7 @@ class Zend_CodeGenerator_Php_Body extends Zend_CodeGenerator_Php_Abstract
                 La API de la clase es la siguiente:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
 {
     public static function fromReflection(
@@ -188,19 +188,19 @@ class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
 ]]></programlisting>
 
             <para>
-                El método <code>setProperty()</code> acepta un array de
+                El método <methodname>setProperty()</methodname> acepta un array de
                 información que puede ser utilizada para generar una instancia
                 <classname>Zend_CodeGenerator_Php_Property</classname> -- o
                 simplemente una instancia de
                 <classname>Zend_CodeGenerator_Php_Property</classname>.
-                Análogamente, <code>setMethod()</code> acepta o un array de
+                Análogamente, <methodname>setMethod()</methodname> acepta o un array de
                 información para generar una instancia de
                 <classname>Zend_CodeGenerator_Php_Method</classname> o una
                 instancia concreta de esa clase.
             </para>
 
             <para>
-                Se debe observar que <code>setDocBlock()</code> espera una
+                Se debe observar que <methodname>setDocBlock()</methodname> espera una
                 instancia de
                 <classname>Zend_CodeGenerator_Php_DocBlock</classname>.
             </para>
@@ -218,7 +218,7 @@ class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
 
             <para>
                 Los tags de anotación pueden establecerse utilizando los métodos
-                <code>setTag()</code> y <code>setTags()</code>; cada una de
+                <methodname>setTag()</methodname> y <methodname>setTags()</methodname>; cada una de
                 estas toman o un array describiendo el tag que puede ser pasado
                 al constructor
                 <classname>Zend_CodeGenerator_Php_Docblock_Tag</classname>, o
@@ -229,7 +229,7 @@ class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
                 La API de la clase es la siguiente:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Docblock extends Zend_CodeGenerator_Php_Abstract
 {
     public static function fromReflection(
@@ -264,7 +264,7 @@ class Zend_CodeGenerator_Php_Docblock extends Zend_CodeGenerator_Php_Abstract
                 La API de la clase es la siguiente:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Docblock_Tag
     extends Zend_CodeGenerator_Php_Abstract
 {
@@ -298,7 +298,7 @@ class Zend_CodeGenerator_Php_Docblock_Tag
                 La API de la clase es la siguiente:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Docblock_Tag_Param
     extends Zend_CodeGenerator_Php_Docblock_Tag
 {
@@ -330,7 +330,7 @@ class Zend_CodeGenerator_Php_Docblock_Tag_Param
                 La API de la clase es la siguiente:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Docblock_Tag_Param
     extends Zend_CodeGenerator_Php_Docblock_Tag
 {
@@ -371,7 +371,7 @@ class Zend_CodeGenerator_Php_Docblock_Tag_Param
             </para>
 
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
 {
     public static function fromReflectedFilePath(
@@ -414,7 +414,7 @@ class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
                 La API de la clase es la siguiente:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Member_Container extends ArrayObject
 {
     public function __construct($type = self::TYPE_PROPERTY)
@@ -437,7 +437,7 @@ class Zend_CodeGenerator_Php_Member_Container extends ArrayObject
 
             <para>
                 Pueden establecerse los parámetros usando
-                <code>setParameter()</code> o <code>setParameters()</code>.
+                <methodname>setParameter()</methodname> o <methodname>setParameters()</methodname>.
                 En cada caso, un parámetro debe ser un array de información
                 para pasar al constructor
                 <classname>Zend_CodeGenerator_Php_Parameter</classname> o una
@@ -448,7 +448,7 @@ class Zend_CodeGenerator_Php_Member_Container extends ArrayObject
                 La API de la clase es la siguiente:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Method
     extends Zend_CodeGenerator_Php_Member_Abstract
 {
@@ -484,7 +484,7 @@ class Zend_CodeGenerator_Php_Method
                 La API de la clase es la siguiente:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
 {
     public static function fromReflection(
@@ -520,7 +520,7 @@ class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
                 La API de la clase es la siguiente:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Property
     extends Zend_CodeGenerator_Php_Member_Abstract
 {

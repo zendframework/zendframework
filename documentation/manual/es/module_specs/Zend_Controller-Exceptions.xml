@@ -51,7 +51,7 @@
                 </itemizedlist>
 
                 <para>
-                    Operan como un plugin de <code>postDispatch()</code>,
+                    Operan como un plugin de <methodname>postDispatch()</methodname>,
                     y comprueban para ver si un despachador, controlador de
                     acción, o de otra excepción ha ocurrido.
                     Si así fuera, lo remite a un controlador de manejo de
@@ -76,7 +76,7 @@
                     Como ejemplo:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 $front->throwExceptions(true);
 try {
     $front->dispatch();
@@ -120,12 +120,12 @@ try {
                     no renderizará la respuesta, sino que la devolverá.
                     Una vez que tiene la respuesta, entonces puede probar ver
                     si todas las excepciones fueron atrapadas usando su método
-                    <code>isException()</code>, y recuperando las excepciones
-                    a través del método <code>getException()</code>.
+                    <methodname>isException()</methodname>, y recuperando las excepciones
+                    a través del método <methodname>getException()</methodname>.
                     Como ejemplo:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 $front->returnResponse(true);
 $response = $front->dispatch();
 if ($response->isException()) {
@@ -175,7 +175,7 @@ if ($response->isException()) {
                 <itemizedlist>
                     <listitem>
                         <para>Establecer el parámetro
-                             <code>useDefaultControllerAlways</code>.
+                             <methodname>useDefaultControllerAlways</methodname>.
                         </para>
 
                         <para>
@@ -183,7 +183,7 @@ if ($response->isException()) {
                             añada la siguiente directiva:
                         </para>
 
-                        <programlisting role="php"><![CDATA[
+                         <programlisting language="php"><![CDATA[
 $front->setParam('useDefaultControllerAlways', true);
 
 // o
@@ -205,7 +205,7 @@ $dispatcher->setParam('useDefaultControllerAlways', true);
 
                     <listitem>
                         <para>
-                            La excepción arrojada por <code>dispatch()</code> es
+                            La excepción arrojada por <methodname>dispatch()</methodname> es
                             una <classname>Zend_Controller_Dispatcher_Exception</classname>
                             conteniendo el texto 'Invalid controller specified'.
                             Use uno de los métodos descriptos de <link
@@ -233,11 +233,11 @@ $dispatcher->setParam('useDefaultControllerAlways', true);
                     <listitem>
                         <para>
                             Subclasear <classname>Zend_Controller_Action</classname> y
-                            anular el método <code>__call()</code>.
+                            anular el método <methodname>__call()</methodname>.
                             Como ejemplo:
                         </para>
 
-                        <programlisting role="php"><![CDATA[
+                         <programlisting language="php"><![CDATA[
 class My_Controller_Action extends Zend_Controller_Action
 {
     public function __call($method, $args)
@@ -262,12 +262,12 @@ class My_Controller_Action extends Zend_Controller_Action
                     <listitem>
                         <para>
                             Subclasea a <classname>Zend_Controller_Dispatcher</classname>
-                            y anula el método <code>getAction()</code>
+                            y anula el método <methodname>getAction()</methodname>
                             para verificar si la acción existe.
                             Como ejemplo:
                         </para>
 
-                        <programlisting role="php"><![CDATA[
+                         <programlisting language="php"><![CDATA[
 class My_Controller_Dispatcher extends Zend_Controller_Dispatcher
 {
     public function getAction($request)
@@ -320,12 +320,12 @@ class My_Controller_Dispatcher extends Zend_Controller_Dispatcher
 
                         <para>
                             Subclaseando <classname>Zend_Controller_Action</classname>
-                            y modificando <code>preDispatch()</code>,
+                            y modificando <methodname>preDispatch()</methodname>,
                             puede modificar todos sus controladores que
                             transmitan a otra acción o redireccionar antes de
                             despachar la acción. El código para hacer esto se
                             verá parecido al código de sustitución de arriba
-                            <code>__call()</code>.
+                            <methodname>__call()</methodname>.
                         </para>
 
                         <para>
@@ -342,7 +342,7 @@ class My_Controller_Dispatcher extends Zend_Controller_Dispatcher
                             Como ejemplo:
                         </para>
 
-                        <programlisting role="php"><![CDATA[
+                         <programlisting language="php"><![CDATA[
 class My_Controller_PreDispatchPlugin extends Zend_Controller_Plugin_Abstract
 {
     public function preDispatch(Zend_Controller_Request_Abstract $request)

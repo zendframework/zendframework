@@ -16,12 +16,12 @@
         Imaginemos que nuestra aplicación ficticia necesitará algunas páginas 
         informativas sobre los autores del contenido. 
         Queremos ser capaces de apuntar nuestro navegador web a 
-        <code>http://domain.com/author/martel</code> para ver la información 
+        <methodname>http://domain.com/author/martel</methodname> para ver la información 
         sobre este muchacho "martel". La ruta para esa funcionalidad podría 
         parecerse a:
     </para>
 
-    <programlisting role="php"><![CDATA[
+     <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route(
     'author/:username',
     array(
@@ -39,9 +39,9 @@ $router->addRoute('user', $route);
         es una definición de ruta que será acompañada de una URL. 
         Las definiciones de ruta consisten en partes estáticas y dinámicas 
         separadas por el caracter barra ('/'). Las partes estáticas son simples 
-        textos: <code>author</code>. Las partes dinámicas, llamadas variables, 
+        textos: <methodname>author</methodname>. Las partes dinámicas, llamadas variables, 
         se marcan anteponiendo dos puntos (:) al nombre de la variable  
-        <code>:username</code>.
+        <methodname>:username</methodname>.
     </para>
 
     <note>
@@ -58,14 +58,14 @@ $router->addRoute('user', $route);
 
     <para>
         Este ejemplo de ruta debería ser coincidente cuando apunta su navegador a
-        <code>http://domain.com/author/martel</code>, en cuyo caso todas sus 
+        <methodname>http://domain.com/author/martel</methodname>, en cuyo caso todas sus 
         variables se inyectan al objeto <classname>Zend_Controller_Request</classname> 
-        y quedando accesibles en <code>ProfileController</code>. 
+        y quedando accesibles en <methodname>ProfileController</methodname>. 
         Las variables devueltas por este ejemplo pueden ser representadas como 
         el siguiente array de pares clave/valor:
     </para>
 
-    <programlisting role="php"><![CDATA[
+     <programlisting language="php"><![CDATA[
 $values = array(
     'username'   => 'martel',
     'controller' => 'profile',
@@ -75,14 +75,14 @@ $values = array(
 
     <para>
         Después, <classname>Zend_Controller_Dispatcher_Standard</classname> 
-        debe invocar al método <code>userinfoAction()</code> de su clase 
-        <code>ProfileController</code> (en el módulo por defecto) basado en
+        debe invocar al método <methodname>userinfoAction()</methodname> de su clase 
+        <methodname>ProfileController</methodname> (en el módulo por defecto) basado en
         estos valores. Allí se podrán acceder a todas las variables mediante  
         los métodos <classname>Zend_Controller_Action::_getParam()</classname> 
         o <classname>Zend_Controller_Request::getParam()</classname>:
     </para>
 
-    <programlisting role="php"><![CDATA[
+     <programlisting language="php"><![CDATA[
 public function userinfoAction()
 {
     $request = $this->getRequest();
@@ -101,7 +101,7 @@ public function userinfoAction()
         Módulo:
     </para>
 
-    <programlisting role="php"><![CDATA[
+     <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route(
     ':module/:controller/:action/*',
     array('module' => 'default')
@@ -120,7 +120,7 @@ $router->addRoute('default', $route);
             variables y con valores como los deseados por defecto:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route(
     'archive/:year',
     array('year' => 2006)
@@ -130,8 +130,8 @@ $router->addRoute('archive', $route);
 
         <para>
             La ruta de arriba comparará URLs como
-            <code>http://domain.com/archive/2005</code> y
-            <code>http://example.com/archive</code>. En este último caso la 
+            <methodname>http://domain.com/archive/2005</methodname> y
+            <methodname>http://example.com/archive</methodname>. En este último caso la 
             variable year(año) tendrá un valor inicial predeterminado de 2006.
         </para>
 
@@ -146,7 +146,7 @@ $router->addRoute('archive', $route);
             válido y una acción válida como la ruta por defecto:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route(
     'archive/:year',
     array(
@@ -160,8 +160,8 @@ $router->addRoute('archive', $route);
 
         <para>
             Entonces, esta ruta resultará en el dispatch al método 
-            <code>showAction()</code> de la clase 
-            <code>ArchiveController</code>.
+            <methodname>showAction()</methodname> de la clase 
+            <methodname>ArchiveController</methodname>.
         </para>
 
     </sect4>
@@ -176,7 +176,7 @@ $router->addRoute('archive', $route);
             Estas son definidas como partes de una expresión regular:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route(
     'archive/:year',
     array(
@@ -192,8 +192,8 @@ $router->addRoute('archive', $route);
         <para>
             Con una ruta definida como la de arriba, el router comparará solo 
             cuando la variable año contenga datos numéricos, eg. 
-            <code>http://domain.com/archive/2345</code>. Una URL como 
-            <code>http://example.com/archive/test</code> no se comparará y en su 
+            <methodname>http://domain.com/archive/2345</methodname>. Una URL como 
+            <methodname>http://example.com/archive/test</methodname> no se comparará y en su 
             lugar el control se pasará a la próxima ruta en la cadena.
         </para>
     </sect4>
@@ -255,7 +255,7 @@ $router->addRoute('archive', $route);
             </listitem>
             <listitem>
                 <para>
-                    Pasarlo como parámetro <code>@locale</code> al método de 
+                    Pasarlo como parámetro <methodname>@locale</methodname> al método de 
                     ensamblaje.
                 </para>
             </listitem>
@@ -264,9 +264,9 @@ $router->addRoute('archive', $route);
         <para>
             Los segmentos traducidos se dividen en dos partes. 
             Los segmentos fijos están precedidos por un único signo 
-            <code>@</code>, y serán traducidos al "locale" actual para el 
+            <methodname>@</methodname>, y serán traducidos al "locale" actual para el 
             ensamblaje y se revierten al ID del mensaje cuando se acepte 
-            nuevamente. Los segmentos dinámicos tienen el prefijo <code>:@</code>.
+            nuevamente. Los segmentos dinámicos tienen el prefijo <methodname>:@</methodname>.
             Para el ensamblaje, el parámetro dado será traducido y se insertará 
             en la posición del parámetro. 
             Cuando se acepte, el parámetro traducido de la URL volverá al ID
@@ -289,7 +289,7 @@ $router->addRoute('archive', $route);
             normal para el uso de la traducción del segmento:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 // Prepare el traductor
 $translator = new Zend_Translate('array', array(), 'en');
 $translator->addTranslation(array('archive' => 'archiv',
@@ -309,7 +309,7 @@ Zend_Controller_Router_Route::setDefaultTranslator($translator);
             Este ejemplo demuestra el uso de segmentos estáticos:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 // Crear la ruta
 $route = new Zend_Controller_Router_Route(
     '@archive',
@@ -332,7 +332,7 @@ $route->assemble(array());
             del tipo módulo-ruta:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 // Crear la ruta
 $route = new Zend_Controller_Router_Route(
     ':@controller/:@action/*',
@@ -354,7 +354,7 @@ $route->assemble(array('controller' => 'archive', 'foo' => 'bar'));
             También puede mezclar segmentos estáticos y dinámicos:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 // Crear la ruta
 $route = new Zend_Controller_Router_Route(
     '@archive/:@mode/:value',

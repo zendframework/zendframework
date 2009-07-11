@@ -8,7 +8,7 @@
         <title>Introducción</title>
 
         <para>
-            El ayudante <code>ViewRenderer</code> está diseñado para satisfacer
+            El ayudante <methodname>ViewRenderer</methodname> está diseñado para satisfacer
             los siguientes objetivos:
         </para>
 
@@ -62,26 +62,26 @@
 
         <note>
             <para>
-                Si realiza un <code>_forward()</code>, redirecciona, o
-                <code>render</code> manualmente, el autorendering no se llevará
+                Si realiza un <methodname>_forward()</methodname>, redirecciona, o
+                <methodname>render</methodname> manualmente, el autorendering no se llevará
                 a cabo, como está realizando cualquiera de estas acciones le
-                está diciendo al <code>ViewRenderer</code> que usted está
+                está diciendo al <methodname>ViewRenderer</methodname> que usted está
                 determinando su propia salida.
             </para>
         </note>
 
         <note>
             <para>
-                El <code>ViewRenderer</code> está habilitado por defecto.
+                El <methodname>ViewRenderer</methodname> está habilitado por defecto.
                 Puede desactivarlo vía parámetro del front controller
-                <code>noViewRenderer</code>
-                (<code>$front->setParam('noViewRenderer', true)</code>) o
+                <methodname>noViewRenderer</methodname>
+                (<methodname>$front->setParam('noViewRenderer', true)</methodname>) o
                 eliminando al ayudante del stack de ayudantes
                 (<classname>Zend_Controller_Action_HelperBroker::removeHelper('viewRenderer')</classname>).
             </para>
 
             <para>
-                Si desea modificar los settings del <code>ViewRenderer</code>
+                Si desea modificar los settings del <methodname>ViewRenderer</methodname>
                 antes de despachar el front controller, puede hacerlo en una
                 de las dos maneras:
             </para>
@@ -90,10 +90,10 @@
                 <listitem>
                     <para>
                         Instanciar y registrar su propio objeto
-                        <code>ViewRenderer</code> y pasarlo al ayudante:
+                        <methodname>ViewRenderer</methodname> y pasarlo al ayudante:
                     </para>
 
-                    <programlisting role="php"><![CDATA[
+                     <programlisting language="php"><![CDATA[
 $viewRenderer = new Zend_Controller_Action_Helper_ViewRenderer();
 $viewRenderer->setView($view)
              ->setViewSuffix('php');
@@ -104,10 +104,10 @@ Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
                 <listitem>
                     <para>
                         Inicializar y/o recuperar un objeto
-                        <code>ViewRenderer</code> por demanda via el ayudante:
+                        <methodname>ViewRenderer</methodname> por demanda via el ayudante:
                     </para>
 
-                    <programlisting role="php"><![CDATA[
+                     <programlisting language="php"><![CDATA[
 $viewRenderer =
     Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
 $viewRenderer->setView($view)
@@ -123,37 +123,37 @@ $viewRenderer->setView($view)
 
         <para>
             En su uso más básico, simplemente instancie a
-            <code>ViewRenderer</code> y páselo al ayudante de acciones.
+            <methodname>ViewRenderer</methodname> y páselo al ayudante de acciones.
             La forma más fácil para instanciar y registrar de una sola vez es
-            utilizando el método del ayudante <code>getStaticHelper()</code>:
+            utilizando el método del ayudante <methodname>getStaticHelper()</methodname>:
           </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
 ]]></programlisting>
 
         <para>
             La primera vez que se instancia un controlador de acción, se
-            disparará <code>ViewRenderer</code> para instanciar al objeto
+            disparará <methodname>ViewRenderer</methodname> para instanciar al objeto
             vista. Cada vez que el controlador es instanciado, se llama al
-            método <code>init()</code> de <code>ViewRenderer</code>, que lo
+            método <methodname>init()</methodname> de <methodname>ViewRenderer</methodname>, que lo
             llevará a establecer la propiedad del controlador de acción, y
-            llama a <code>addScriptPath()</code> con un path relativo al
+            llama a <methodname>addScriptPath()</methodname> con un path relativo al
             módulo actual; este será llamado con un prefijo de clase nombrada
             después del módulo actual, haciendo efectivamente el namespacing de
             todas las clases de ayudantes y filtros que define para el módulo.
         </para>
 
         <para>
-            Cad vez que llama a <code>postDispatch()</code>, este llamará a
-            <code>render()</code> para la acción actual.
+            Cad vez que llama a <methodname>postDispatch()</methodname>, este llamará a
+            <methodname>render()</methodname> para la acción actual.
         </para>
 
         <para>
             Como ejemplo, considere la siguiente clase:
         </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 // Una clase controlador, módulo foo:
 class Foo_BarController extends Zend_Controller_Action
 {
@@ -178,112 +178,112 @@ $this->foo(); // llama a Foo_View_Helper_Foo::foo()
 ]]></programlisting>
 
         <para>
-            El <code>ViewRenderer</code> también define una serie de accededores
+            El <methodname>ViewRenderer</methodname> también define una serie de accededores
             para permitir establecer y recuperar opciones de vista:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>setView($view)</code> le permite establecer el objeto
-                    vista para <code>ViewRenderer</code>. Se vuelve como una
-                    propiedad de clase pública <code>$view</code>.
+                    <methodname>setView($view)</methodname> le permite establecer el objeto
+                    vista para <methodname>ViewRenderer</methodname>. Se vuelve como una
+                    propiedad de clase pública <methodname>$view</methodname>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setNeverRender($flag = true)</code> puede ser
+                    <methodname>setNeverRender($flag = true)</methodname> puede ser
                     utilizado para activar o desactivar globalmente el
                     autorendering, es decir, para todos los controladores.
-                    Si es verdadero, <code>postDispatch()</code> no llamará
-                    automáticamente a <code>render()</code> en el controlador
-                    actual. <code>getNeverRender()</code> recupera el valor
+                    Si es verdadero, <methodname>postDispatch()</methodname> no llamará
+                    automáticamente a <methodname>render()</methodname> en el controlador
+                    actual. <methodname>getNeverRender()</methodname> recupera el valor
                     actual.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setNoRender($flag = true)</code> puede ser utilizado
+                    <methodname>setNoRender($flag = true)</methodname> puede ser utilizado
                     para activar o desactivar el autorendering.
-                    Si es verdadero, <code>postDispatch()</code> no llamará
-                    automáticamente a <code>render()</code> en el controlador
+                    Si es verdadero, <methodname>postDispatch()</methodname> no llamará
+                    automáticamente a <methodname>render()</methodname> en el controlador
                     actual. Este ajuste se reseteará cada vez que se llame a
-                    <code>preDispatch()</code> (es decir, usted necesita
+                    <methodname>preDispatch()</methodname> (es decir, usted necesita
                     establecer este flag para cada controlador para el cual
                     no quiera que el autorenderering se ejecute).
-                    <code>getNoRender()</code> recupera el valor actual.
+                    <methodname>getNoRender()</methodname> recupera el valor actual.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setNoController($flag = true)</code> pude ser usado
-                    para decirle a <code>render()</code> que no busque el
+                    <methodname>setNoController($flag = true)</methodname> pude ser usado
+                    para decirle a <methodname>render()</methodname> que no busque el
                     script de acción en un subdirectorio nombrado después de
                     que el controlador (que es el comportamiento por defecto)
-                    <code>getNoController()</code> recupere el valor actual.
+                    <methodname>getNoController()</methodname> recupere el valor actual.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setNeverController($flag = true)</code> es análogo
-                    a <code>setNoController()</code>, pero trabaja a un nivel
+                    <methodname>setNeverController($flag = true)</methodname> es análogo
+                    a <methodname>setNoController()</methodname>, pero trabaja a un nivel
                     global -- es decir, que no se reseteará por cada acción
-                    ejecutada. <code>getNeverController()</code> recupera el
+                    ejecutada. <methodname>getNeverController()</methodname> recupera el
                     valor actual.
                    </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setScriptAction($name)</code> puede ser utilizado para
+                    <methodname>setScriptAction($name)</methodname> puede ser utilizado para
                     especificar el script de acción a renderizar.
-                    <code>$name</code> debe ser el nombre del script menos el
+                    <methodname>$name</methodname> debe ser el nombre del script menos el
                     sufijo del archivo (y sin el subdirectorio del controlador,
-                    a menos que <code>noController</code> se haya activado).
+                    a menos que <methodname>noController</methodname> se haya activado).
                     Si no se ha especificado, busca un script de vista nombrado
                     después de la acción en el objeto solicitud.
-                    <code>getScriptAction()</code> recupera el valor actual.
+                    <methodname>getScriptAction()</methodname> recupera el valor actual.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setResponseSegment($name)</code> puede ser utilizado
+                    <methodname>setResponseSegment($name)</methodname> puede ser utilizado
                     para especificar qué segmento del objeto respuesta nombrado
                     renderizar. Si no se especifica, se hace en el segmento por
-                    defecto. <code>getResponseSegment()</code> recupera el
+                    defecto. <methodname>getResponseSegment()</methodname> recupera el
                     valor actual.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>initView($path, $prefix, $options)</code> puede ser
+                    <methodname>initView($path, $prefix, $options)</methodname> puede ser
                     llamado para especificar el path base de las vistas,
                     prefijos de clase para scripts de ayudantes y filtros, y
-                    las opciones de <code>ViewRenderer</code>.
+                    las opciones de <methodname>ViewRenderer</methodname>.
                     Puede pasar cualquiera de los siguientes flags:
-                    <code>neverRender</code>, <code>noRender</code>,
-                    <code>noController</code>, <code>scriptAction</code>, y
-                    <code>responseSegment</code>.
+                    <methodname>neverRender</methodname>, <methodname>noRender</methodname>,
+                    <methodname>noController</methodname>, <methodname>scriptAction</methodname>, y
+                    <methodname>responseSegment</methodname>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setRender($action = null, $name = null, $noController
-                        = false)</code> le permite establecer cualquier
-                    <code>scriptAction</code>, <code>responseSegment</code>, y
-                    <code>noController</code> en un pase. <code>direct()</code>
+                    <methodname>setRender($action = null, $name = null, $noController
+                        = false)</methodname> le permite establecer cualquier
+                    <methodname>scriptAction</methodname>, <methodname>responseSegment</methodname>, y
+                    <methodname>noController</methodname> en un pase. <methodname>direct()</methodname>
                     es un alias a este método, permitiéndole llamar a este
                     método fácilmente dede su controlador:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                 <programlisting language="php"><![CDATA[
 // Render 'foo' en lugar del script de acción actual
 $this->_helper->viewRenderer('foo');
 
@@ -293,10 +293,10 @@ $this->_helper->viewRenderer('form', 'html', true);
 ]]></programlisting>
 
                 <note><para>
-                        <code>setRender()</code> y <code>direct()</code>
+                        <methodname>setRender()</methodname> y <methodname>direct()</methodname>
                         realmente no renderiza el script de vista, sino que
-                        establece indicaciones que <code>postDispatch()</code>
-                        y <code>render()</code> utlizarán para renderizar la
+                        establece indicaciones que <methodname>postDispatch()</methodname>
+                        y <methodname>render()</methodname> utlizarán para renderizar la
                         vista.
                  </para></note>
             </listitem>
@@ -304,11 +304,11 @@ $this->_helper->viewRenderer('form', 'html', true);
 
         <para>
             El constructor le permite opcionalmente pasar el objeto vista y las
-            opciones de <code>ViewRenderer</code>; acepta los mismos flags que
-            <code>initView()</code>:
+            opciones de <methodname>ViewRenderer</methodname>; acepta los mismos flags que
+            <methodname>initView()</methodname>:
          </para>
 
-        <programlisting role="php"><![CDATA[
+         <programlisting language="php"><![CDATA[
 $view    = new Zend_View(array('encoding' => 'UTF-8'));
 $options = array('noController' => true, 'neverRender' => true);
 $viewRenderer =
@@ -327,7 +327,7 @@ $viewRenderer =
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>:moduleDir</code> hace referencia a la actual
+                    <methodname>:moduleDir</methodname> hace referencia a la actual
                     directorio base del módulo(por convención, el directorio
                     padre del directorio del módulo controlador).
                 </para>
@@ -335,30 +335,30 @@ $viewRenderer =
 
             <listitem>
                 <para>
-                    <code>:module</code> hace referencia al nombre del módulo
+                    <methodname>:module</methodname> hace referencia al nombre del módulo
                     actual.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>:controller</code> hace referencia al nombre del
+                    <methodname>:controller</methodname> hace referencia al nombre del
                     controlador actual.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>:action</code> hace referencia al nombre de la
+                    <methodname>:action</methodname> hace referencia al nombre de la
                     acción actual.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>:suffix</code> hace referencia al sufijo del script
+                    <methodname>:suffix</methodname> hace referencia al sufijo del script
                     de vista (que puede ser definido via
-                    <code>setViewSuffix()</code>).
+                    <methodname>setViewSuffix()</methodname>).
                 </para>
             </listitem>
         </itemizedlist>
@@ -370,39 +370,39 @@ $viewRenderer =
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>setViewBasePathSpec($spec)</code> le permite cambiar
+                    <methodname>setViewBasePathSpec($spec)</methodname> le permite cambiar
                     la especificación del path utilizada para determinar el
                     path base para añadir al objeto vista.
-                    La especificación por defecto es <code>:moduleDir/views</code>.
+                    La especificación por defecto es <methodname>:moduleDir/views</methodname>.
                     Puede recuperar la especificación actual en cualquier
-                    momento usando <code>getViewBasePathSpec()</code>.
+                    momento usando <methodname>getViewBasePathSpec()</methodname>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setViewScriptPathSpec($spec)</code> le permite
+                    <methodname>setViewScriptPathSpec($spec)</methodname> le permite
                     cambiar el path de la especificación utilizada para
                     determinar el path a un script de vista individual
                     (menos el path de la base del script de vista).
                     La especificación por defecto es
-                    <code>:controller/:action.:suffix</code>.
+                    <methodname>:controller/:action.:suffix</methodname>.
                     Puede recuperar la especificación actual en cualquier
                     momento usando
-                    <code>getViewScriptPathSpec()</code>.
+                    <methodname>getViewScriptPathSpec()</methodname>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setViewScriptPathNoControllerSpec($spec)</code>
+                    <methodname>setViewScriptPathNoControllerSpec($spec)</methodname>
                     le permite cambiar el path de la especificación utilizado
                     para determinar el path a un script de vista individual
-                    cuando <code>noController</code> está activado
+                    cuando <methodname>noController</methodname> está activado
                     (menos el path base del script de vista). La especificación
-                    por defecto es <code>:action.:suffix</code>. Puede
+                    por defecto es <methodname>:action.:suffix</methodname>. Puede
                     recuperar la especificación actual en cualquier momento
-                    usando <code>getViewScriptPathNoControllerSpec()</code>.
+                    usando <methodname>getViewScriptPathNoControllerSpec()</methodname>.
                 </para>
             </listitem>
         </itemizedlist>
@@ -411,7 +411,7 @@ $viewRenderer =
             Para un control más refinado sobre el path de especificaciones,
             puede usar
             <link linkend="zend.filter.inflector">Zend_Filter_Inflector</link>.
-            Bajo el capó, <code>ViewRenderer</code> ya usa un inflector para
+            Bajo el capó, <methodname>ViewRenderer</methodname> ya usa un inflector para
             realizar mapeos del path. Para interactuar con el inflector
             -- ya sea para establecerlo para uso propio, o para modificar el
             inflector por defecto, se pueden utilizar los siguientes
@@ -421,8 +421,8 @@ $viewRenderer =
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>getInflector()</code> recupera el inflector.
-                    Si no existe todavía en <code>ViewRenderer</code>, se crea
+                    <methodname>getInflector()</methodname> recupera el inflector.
+                    Si no existe todavía en <methodname>ViewRenderer</methodname>, se crea
                     uno utilizando las reglas predeterminadas.
                 </para>
 
@@ -430,18 +430,18 @@ $viewRenderer =
                     Por defecto, utiliza reglas de referencias estáticas para el
                     sufijo y directorio de módulos, así como una meta estática;
                     esto permite que diversas propiedades de
-                    <code>ViewRenderer</code> tengan la capacidad de
+                    <methodname>ViewRenderer</methodname> tengan la capacidad de
                     modificar dinámicamente al inflector.
                 </para>
             </listitem>
 
             <listitem><para>
-                    <code>setInflector($inflector, $reference)</code> permite
+                    <methodname>setInflector($inflector, $reference)</methodname> permite
                     establecer un inflector personalizado para usar con
-                    <code>ViewRenderer</code>. Si <code>$reference</code> es
+                    <methodname>ViewRenderer</methodname>. Si <methodname>$reference</methodname> es
                     verdadero, establecerá el sufijo y directorio de módulos
                     como referencias estáticas a las propiedades de
-                    <code>ViewRenderer</code>, así como al objetivo.
+                    <methodname>ViewRenderer</methodname>, así como al objetivo.
             </para></listitem>
         </itemizedlist>
 
@@ -449,7 +449,7 @@ $viewRenderer =
             <title>Convenciones por Defecto para Lookup</title>
 
             <para>
-                El <code>ViewRenderer</code> hace algún tipo de normalización
+                El <methodname>ViewRenderer</methodname> hace algún tipo de normalización
                 del path para facilitar la búsqueda de los scripts de vista.
                 Las reglas predeterminadas son los siguientes:
             </para>
@@ -457,7 +457,7 @@ $viewRenderer =
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>:module</code>: MixedCase y camelCasedWords
+                        <methodname>:module</methodname>: MixedCase y camelCasedWords
                         están separados por guiones, y el string completo se
                         convierte a minúsculas.
                         Por ejemplo: "FooBarBaz" pasa a ser "foo-bar-baz".
@@ -472,7 +472,7 @@ $viewRenderer =
 
                 <listitem>
                     <para>
-                        <code>:controller</code>: MixedCase y camelCasedWords
+                        <methodname>:controller</methodname>: MixedCase y camelCasedWords
                         están separados por guiones; los subrayados se
                         convierten en separadores de directorio , y el string
                         emitido a minúsculas.
@@ -490,7 +490,7 @@ $viewRenderer =
 
                 <listitem>
                     <para>
-                        <code>:action</code>: MixedCase y camelCasedWords
+                        <methodname>:action</methodname>: MixedCase y camelCasedWords
                         están separados por guiones; los caracteres
                         no alfanuméricos son traducidos a guiones,
                         y el string emitido a minúsculas.
@@ -509,7 +509,7 @@ $viewRenderer =
         </note>
 
         <para>
-            Los últimos temas en la API de <code>ViewRenderer</code> son los
+            Los últimos temas en la API de <methodname>ViewRenderer</methodname> son los
             métodos para determinar realmente los paths de los scripts de vista
             y el rendering de las vistas.
             Estos incluyen:
@@ -518,18 +518,18 @@ $viewRenderer =
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>renderScript($script, $name)</code> permite renderizar
+                    <methodname>renderScript($script, $name)</methodname> permite renderizar
                     un script con una ruta que especifique, opcionalmente a
                     un segmento nombrado del path. Cuando se utiliza este
-                    método, <code>ViewRenderer</code> no autodetermina el
+                    método, <methodname>ViewRenderer</methodname> no autodetermina el
                     nombre del script, en cambio pasa directamente a
-                    <code>$script</code> el argumento directamente al método
-                    del objeto vista <code>render()</code>.
+                    <methodname>$script</methodname> el argumento directamente al método
+                    del objeto vista <methodname>render()</methodname>.
                 </para>
 
                 <note><para>
                     Una vez que la vista ha sido renderizada al objeto respuesta,
-                    se establece <code>noRender</code> para evitar
+                    se establece <methodname>noRender</methodname> para evitar
                     accidentalmente renderizar el mismo script de vista varias
                     veces.
                 </para></note>
@@ -538,17 +538,17 @@ $viewRenderer =
                     <para>
                         Por defecto,
                         <classname>Zend_Controller_Action::renderScript()</classname>
-                        le delega a <code>ViewRenderer</code> el método
-                        <code>renderScript()</code>.
+                        le delega a <methodname>ViewRenderer</methodname> el método
+                        <methodname>renderScript()</methodname>.
                     </para>
                 </note>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getViewScript($action, $vars)</code> crea el path a
+                    <methodname>getViewScript($action, $vars)</methodname> crea el path a
                     un script de vista basado en la acción pasada y/o cualquier
-                    variables pasadas en <code>$vars</code>.
+                    variables pasadas en <methodname>$vars</methodname>.
                     Las claves para este array pueden incluir cualquiera de las
                     claves de especificación de paths ('moduleDir',
                     'module', 'controller', 'action', y 'suffix').
@@ -558,10 +558,10 @@ $viewRenderer =
                 </para>
 
                 <para>
-                    <code>getViewScript()</code> utilizará tanto a
-                    <code>viewScriptPathSpec</code> o
-                    <code>viewScriptPathNoControllerSpec</code> sobre la base
-                    establecida del flag <code>noController</code>.
+                    <methodname>getViewScript()</methodname> utilizará tanto a
+                    <methodname>viewScriptPathSpec</methodname> o
+                    <methodname>viewScriptPathNoControllerSpec</methodname> sobre la base
+                    establecida del flag <methodname>noController</methodname>.
                 </para>
 
                 <para>
@@ -577,23 +577,23 @@ $viewRenderer =
                     <para>
                         Por defecto,
                         <classname>Zend_Controller_Action::getViewScript()</classname>
-                        delega el método <code>getViewScript()</code> de
-                        <code>ViewRenderer</code>.
+                        delega el método <methodname>getViewScript()</methodname> de
+                        <methodname>ViewRenderer</methodname>.
                     </para>
                 </note>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>render($action, $name, $noController)</code>
-                    comprueba primero para ver si bien <code>$name</code> o
-                    <code>$noController</code> se han pasado, y si es así,
+                    <methodname>render($action, $name, $noController)</methodname>
+                    comprueba primero para ver si bien <methodname>$name</methodname> o
+                    <methodname>$noController</methodname> se han pasado, y si es así,
                     establece los flags apropiados (responseSegment y
                     noController, respectivamente) en ViewRenderer.
-                    A continuación, pasa el argumento <code>$action</code>,
-                    si hay alguno, a <code>getViewScript()</code>.
+                    A continuación, pasa el argumento <methodname>$action</methodname>,
+                    si hay alguno, a <methodname>getViewScript()</methodname>.
                     Por último, pasa el path calculado del script de vista a
-                    <code>renderScript()</code>.
+                    <methodname>renderScript()</methodname>.
                 </para>
 
                 <note>
@@ -610,21 +610,21 @@ $viewRenderer =
                     <para>
                         Por defecto,
                         <classname>Zend_Controller_Action::render()</classname>
-                        delega a <code>ViewRenderer</code> el método
-                        <code>render()</code>.
+                        delega a <methodname>ViewRenderer</methodname> el método
+                        <methodname>render()</methodname>.
                     </para>
                 </note>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>renderBySpec($action, $vars, $name)</code>
+                    <methodname>renderBySpec($action, $vars, $name)</methodname>
                     permite pasar variables de especificación del path a fin de
                     determinar el path para la creación del script de vista.
-                    Este pasa <code>$action</code> y <code>$vars</code> a
-                    <code>getScriptPath()</code>, y luego pasa el path del
-                    script resultante y <code>$name</code> a
-                    <code>renderScript()</code>.
+                    Este pasa <methodname>$action</methodname> y <methodname>$vars</methodname> a
+                    <methodname>getScriptPath()</methodname>, y luego pasa el path del
+                    script resultante y <methodname>$name</methodname> a
+                    <methodname>renderScript()</methodname>.
                 </para>
             </listitem>
         </itemizedlist>
@@ -638,12 +638,12 @@ $viewRenderer =
 
             <para>
                 En lo más básico, usted simplemente inicializa y registra el
-                ayudante <code>ViewRenderer</code> con el ayudante broker
+                ayudante <methodname>ViewRenderer</methodname> con el ayudante broker
                 en su bootstrap, y luego establecer las variables en sus
                 métodos de acción.
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 // En su bootstrap:
 Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
 
@@ -686,27 +686,27 @@ class Foo_BarController extends Zend_Controller_Action
                 Si su controlador o nombre de acción está compuesto por varias
                 palabras, el despachador exige que estos sean separados de la URL
                 por un path específico y caracteres delimitadores de palabras.
-                El <code>ViewRenderer</code> reemplaza cualquier delimitador
+                El <methodname>ViewRenderer</methodname> reemplaza cualquier delimitador
                 de paths encontrado en el nombre del controlador con el
                 delimitador actual ('/'), y cualquier delimitador de palabra
                 encontrado con un guión ('-') cuando crea paths.
                 Así, una llamada a la acción
-                <code>/foo.bar/baz.bat</code> despachará a
-                <code>FooBarController::bazBatAction()</code> en
+                <methodname>/foo.bar/baz.bat</methodname> despachará a
+                <methodname>FooBarController::bazBatAction()</methodname> en
                 FooBarController.php, el cual renderizaría a
-                <code>foo-bar/baz-bat.phtml</code>; una llamada a la acción
-                <code>/bar_baz/baz-bat</code> despachará a
-                <code>Bar_BazController::bazBatAction()</code> en
-                <code>Bar/BazController.php</code> (note la separación del path)
-                y renderiza <code>bar/baz/baz-bat.phtml</code>.
+                <methodname>foo-bar/baz-bat.phtml</methodname>; una llamada a la acción
+                <methodname>/bar_baz/baz-bat</methodname> despachará a
+                <methodname>Bar_BazController::bazBatAction()</methodname> en
+                <methodname>Bar/BazController.php</methodname> (note la separación del path)
+                y renderiza <methodname>bar/baz/baz-bat.phtml</methodname>.
             </para>
 
             <para>
                 Tener en cuenta que el en el segundo ejemplo, el módulo es
                 todavía el módulo por defecto, pero que, debido a la
                 existencia de un separador de paths, el controlador recibe el
-                nombre <code>Bar_BazController</code>, en
-                <code>Bar/BazController.php</code>.
+                nombre <methodname>Bar_BazController</methodname>, en
+                <methodname>Bar/BazController.php</methodname>.
                 El ViewRenderer imita la jerarquía del directorio del
                 controlador.
             </para>
@@ -721,11 +721,11 @@ class Foo_BarController extends Zend_Controller_Action
                 diferente de salida (XML, JSON, etc), o si simplemente no desea
                 emitir nada.
                 Tiene dos opciones: apagar todos los casos de autorendering
-                (<code>setNeverRender()</code>), o simplemente desactivarlo
-                para la acción actual (<code>setNoRender()</code>).
+                (<methodname>setNeverRender()</methodname>), o simplemente desactivarlo
+                para la acción actual (<methodname>setNoRender()</methodname>).
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 // Baz clase del controlador, bar módulo:
 class Bar_BazController extends Zend_Controller_Action
 {
@@ -751,8 +751,8 @@ class Bar_BatController extends Zend_Controller_Action
         <note>
             <para>
                 En muchos casos, no tiene sentido desactivar el autorendering
-                globalmente (ala <code>setNeverRender()</code>), y la única
-                cosa que puede ganar de <code>ViewRenderer</code> es el
+                globalmente (ala <methodname>setNeverRender()</methodname>), y la única
+                cosa que puede ganar de <methodname>ViewRenderer</methodname> es el
                 autosetup del objeto de vista.
             </para>
         </note>
@@ -767,12 +767,12 @@ class Bar_BatController extends Zend_Controller_Action
                 ambos pueden mostrar la misma vista 'form', aunque con diferentes
                 valores establecidos. Puede cambiar fácilmente el nombre
                 del script usado tanto con
-                <code>setScriptAction()</code>, <code>setRender()</code>, o
+                <methodname>setScriptAction()</methodname>, <methodname>setRender()</methodname>, o
                 llamando al ayudante como un método, que invocará a
-                <code>setRender()</code>.
+                <methodname>setRender()</methodname>.
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 // Bar clase controlador, foo módulo:
 class Foo_BarController extends Zend_Controller_Action
 {
@@ -812,10 +812,10 @@ class Foo_BarController extends Zend_Controller_Action
                 por ejemplo, cambiar el ayudante de paths, o la codificación?.
                 Puede hacerlo ya sea por modificar el objeto vista establecido
                 en su controlador, o arrebatándole el objeto vista a
-                <code>ViewRenderer</code>; ambas son referencias al mismo objeto.
+                <methodname>ViewRenderer</methodname>; ambas son referencias al mismo objeto.
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 // Bar clase controlador, foo módulo:
 class Foo_BarController extends Zend_Controller_Action
 {
@@ -867,7 +867,7 @@ class Foo_BarController extends Zend_Controller_Action
                 como el sufijo del nombre de archivo del script de vista.
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 /**
  * En su bootstrap:
  */
@@ -890,10 +890,10 @@ Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
             <para>
                 A veces, puede que necesite renderizar múltiples scripts de
                 vista desde una sola acción. Esto es muy sencillo --
-                simplemente hacer múltiples llamadas a <code>render()</code>:
+                simplemente hacer múltiples llamadas a <methodname>render()</methodname>:
             </para>
 
-            <programlisting role="php"><![CDATA[
+             <programlisting language="php"><![CDATA[
 class SearchController extends Zend_Controller_Action
 {
     public function resultsAction()

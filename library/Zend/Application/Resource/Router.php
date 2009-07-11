@@ -27,7 +27,6 @@
  * @category   Zend
  * @package    Zend_Application
  * @subpackage Resource
- * @author     Dolf Schimmel
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -59,14 +58,19 @@ class Zend_Application_Resource_Router
         if (null === $this->_router) {
             $bootstrap = $this->getBootstrap();
             $bootstrap->bootstrap('FrontController');
-            $front = $bootstrap->getContainer()->frontcontroller;
+            $this->_router = $bootstrap->getContainer()->frontcontroller->getRouter();
 
             $options = $this->getOptions();
-            if(!isset($options['routes'])) {
+            if (!isset($options['routes'])) {
                 $options['routes'] = array();
             }
+            
 
-            $this->_router = $front->getRouter();
+            if (isset($options['chainNameSeparator'])) {
+                $this->_router->setChainNameSeparator($options['chainNameSeparator']);
+            }
+            
+
             $this->_router->addConfig(new Zend_Config($options['routes']));
         }
         return $this->_router;

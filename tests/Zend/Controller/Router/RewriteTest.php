@@ -652,6 +652,35 @@ class Zend_Controller_Router_RewriteTest extends PHPUnit_Framework_TestCase
         
         $this->assertEquals('/en/articles/1', $url);
     }
+    
+    public function testChainNameSeparatorIsSetCorrectly() {
+        $separators = array('_','unitTestSeparator','-');
+        $results = array();
+
+        foreach($separators as $separator) {
+            $this->_router->setChainNameSeparator($separator);
+            $results[] = $this->_router->getChainNameSeparator();	
+        }
+
+        $this->assertEquals($separators, $results);
+    }
+    
+    public function testChainNameSeparatorisUsedCorrectly() {
+        $config = new Zend_Config(array('chains' => array(
+            'type'=>'Zend_Controller_Router_Route_Static',
+            'route'=>'foo',
+            'chains'=> array('bar'=>
+                array('type'=>'Zend_Controller_Router_Route_Static',
+                    'route'=>'bar',
+                    'defaults'=>array(
+                    'module'=>'module',
+                    'controller'=>'controller',
+                    'action'=>'action'))))));
+        $this->_router->setChainNameSeparator('_separator_')
+                      ->addConfig($config);
+        $url = $this->_router->assemble(array(),'chains_separator_bar');
+        $this->assertEquals('/foo/bar',$url);
+    }
 }
 
 

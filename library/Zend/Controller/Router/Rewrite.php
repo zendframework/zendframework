@@ -67,6 +67,13 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
     protected $_globalParams = array();
     
     /**
+     * Separator to use with chain names
+     * 
+     * @var string
+     */
+    protected $_chainNameSeparator = '-';
+    
+    /**
      * Add default routes which are used to mimic basic router behaviour
      * 
      * @return Zend_Controller_Router_Rewrite
@@ -236,7 +243,7 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
                 $chainRoute = $route->chain($childRoute);
             }
             
-            $chainName = $name . '-' . $childRouteName;
+            $chainName = $name . $this->_chainNameSeparator . $childRouteName;
             
             if (isset($childRouteInfo->chains)) {
                 $this->_addChainRoutesFromConfig($chainName, $chainRoute, $childRouteInfo->chains);
@@ -452,5 +459,26 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
         $this->_globalParams[$name] = $value;
     
         return $this;
+    }
+    
+    /**
+     * Set the separator to use with chain names
+     * 
+     * @param  string $separator The separator to use
+     * @return Zend_Controller_Router_Rewrite
+     */
+    public function setChainNameSeparator($separator) {
+    	$this->_chainNameSeparator = $separator;
+    	
+    	return $this;
+    }
+    
+    /**
+     * Get the separator to use for chain names
+     * 
+     * @return string
+     */
+    public function getChainNameSeparator() {
+        return $this->_chainNameSeparator;
     }
 }

@@ -49,7 +49,7 @@ $chainedRoute = $hostnameRoute->chain($pathRoute);
 ]]></programlisting>
 
     <para>
-        When chaining routes together, their default separator is a slash
+        When chaining routes together, their separator is a slash
         by default. There may be cases when you want to have a different
         separator:
     </para>
@@ -77,7 +77,7 @@ echo $chainedRoute->assemble();
             parent- nor the child-route will be added directly to the router but
             only the resulting chained route. The name of the chained route in
             the router will be the parent route name and the child route name
-            concatenated with a dash (-). A simple config in XML would look
+            concatenated with a dash (-) by default. A simple config in XML would look
             like this:
         </para>
 
@@ -176,6 +176,42 @@ echo $chainedRoute->assemble();
         <chain>imprint</chain>
     </www-imprint>
 </routes>
+]]></programlisting>
+        <para>
+            When you configure chain routes with <classname>Zend_Config</classname> and
+            want the chain name separator to be different from a dash, you
+            need to specify this separator separately:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$config = new Zend_Config(array(
+    'chainName' => array(
+        'type'   => 'Zend_Controller_Router_Route_Static',
+        'route'  => 'foo',
+        'chains' => array(
+            'subRouteName' => array(
+                'type'     => 'Zend_Controller_Router_Route_Static',
+                'route'    => 'bar',
+                'defaults' => array(
+                    'module'      => 'module',
+                     'controller' => 'controller',
+                     'action'     => 'action'
+                )
+            )
+        )
+    )
+));
+
+// Set separator before adding config
+$router->setChainNameSeparator('_separator_')
+
+// Add config
+$outer->addConfig($config);
+
+// The name of our route now is: chainName_separator_subRouteName
+echo $this->_router->assemble(array(), 'chainName_separator_subRouteName');
+
+// The proof: it echoes /foo/bar
 ]]></programlisting>
     </sect4>
 </sect3>

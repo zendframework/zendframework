@@ -61,9 +61,7 @@ class Zend_Application_Resource_RouterTest extends PHPUnit_Framework_TestCase
 
         Zend_Loader_Autoloader::resetInstance();
         $this->autoloader = Zend_Loader_Autoloader::getInstance();
-
         $this->application = new Zend_Application('testing');
-
         $this->bootstrap = new Zend_Application_Bootstrap_Bootstrap($this->application);
 
         Zend_Controller_Front::getInstance()->resetInstance();
@@ -99,6 +97,14 @@ class Zend_Application_Resource_RouterTest extends PHPUnit_Framework_TestCase
         $resource->setBootstrap($this->bootstrap);
         $test = $resource->init();
         $this->assertTrue($test instanceof Zend_Controller_Router_Rewrite);
+    }
+    
+    public function testChainNameSeparatorIsParsedOnToRouter()
+    {
+        $resource = new Zend_Application_Resource_Router(array('chainNameSeparator' => '_unitTestSep_'));
+        $resource->setBootstrap($this->bootstrap);
+        $router = $resource->init();
+        $this->assertEquals('_unitTestSep_', $router->getChainNameSeparator());
     }
 
     public function testOptionsPassedToResourceAreUsedToCreateRoutes()

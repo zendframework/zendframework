@@ -14,7 +14,7 @@
         <title>Basic AMF Server</title>
 
         <para>
-            Let's assume that you have created a class <emphasis>Foo</emphasis> with a
+            Let's assume that you have created a class <classname>Foo</classname> with a
             variety of public methods. You may create an <acronym>AMF</acronym> server using the
             following code:
         </para>
@@ -297,7 +297,7 @@ $server->setProduction(false);
 ]]></programlisting>
 
         <para>
-            To re-enable it, pass a true boolean value instead:
+            To re-enable it, pass a <constant>TRUE</constant> boolean value instead:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -318,10 +318,10 @@ $server->setProduction(true);
 
         <para>
             One area to be especially careful with is <acronym>PHP</acronym> errors themselves.
-            When the <emphasis>display_errors</emphasis> <acronym>INI</acronym> directive is
+            When the <property>display_errors</property> <acronym>INI</acronym> directive is
             enabled, any <acronym>PHP</acronym> errors for the current error reporting level are
             rendered directly in the output -- potentially disrupting the <acronym>AMF</acronym>
-            response payload. We suggest turning off the <emphasis>display_errors</emphasis>
+            response payload. We suggest turning off the <property>display_errors</property>
             directive in production to prevent such problems
         </para>
     </sect2>
@@ -716,7 +716,7 @@ private function onFault(fault:Object):void {
 
         <para>
             The identity returned by the adapter should be an object containing property
-            <emphasis>role</emphasis> for the <acronym>ACL</acronym> access control to work.
+            <property>role</property> for the <acronym>ACL</acronym> access control to work.
         </para>
 
         <para>
@@ -753,7 +753,8 @@ $server->setAcl($acl);
 
         <para>
             After <acronym>ACL</acronym> have been set up, the server will check if access is
-            allowed with role set by the authentication, resource being the class name (or null for
+            allowed with role set by the authentication, resource being the class name (or
+            <constant>NULL</constant> for
             function calls) and privilege being the function name. If no authentication was
             provided, then if the <emphasis>anonymous</emphasis> role was defined, it will be used,
             otherwise the access will be denied.

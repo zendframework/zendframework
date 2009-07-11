@@ -10,7 +10,7 @@
     </para>
 
     <para>
-        To set a session save handler, simply pass the <emphasis>saveHandler</emphasis>
+        To set a session save handler, simply pass the <property>saveHandler</property>
         (case insensitive) option key to the resource. The value of this option
         may be one of the following:
     </para>

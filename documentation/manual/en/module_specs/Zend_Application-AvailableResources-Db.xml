@@ -16,16 +16,16 @@
 
     <itemizedlist>
         <listitem><para>
-            <emphasis>adapter</emphasis>: <classname>Zend_Db</classname> adapter type.
+            <property>adapter</property>: <classname>Zend_Db</classname> adapter type.
         </para></listitem>
 
         <listitem><para>
-            <emphasis>params</emphasis>: associative array of configuration
+            <property>params</property>: associative array of configuration
             parameters to use when retrieving the adapter instance.
         </para></listitem>
 
         <listitem><para>
-            <emphasis>isDefaultTableAdapter</emphasis>: whether or not to establish this
+            <property>isDefaultTableAdapter</property>: whether or not to establish this
             adapter as the default table adapter.
         </para></listitem>
     </itemizedlist>

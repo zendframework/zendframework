@@ -25,50 +25,50 @@
 
     <itemizedlist>
         <listitem><para>
-            <emphasis>controllerDirectory</emphasis>: either a string value
+            <property>controllerDirectory</property>: either a string value
             specifying a single controller directory, or an array of
             module to controller directory pairs.
         </para></listitem>
 
         <listitem><para>
-            <emphasis>moduleControllerDirectoryName</emphasis>: a string value
+            <property>moduleControllerDirectoryName</property>: a string value
             indicating the subdirectory under a module that contains
             controllers.
         </para></listitem>
 
         <listitem><para>
-            <emphasis>moduleDirectory</emphasis>: directory under which modules may be
+            <property>moduleDirectory</property>: directory under which modules may be
             found.
         </para></listitem>
 
         <listitem><para>
-            <emphasis>defaultControllerName</emphasis>: base name of the default
+            <property>defaultControllerName</property>: base name of the default
             controller (normally "index").
         </para></listitem>
 
         <listitem><para>
-            <emphasis>defaultAction</emphasis>: base name of the default action
+            <property>defaultAction</property>: base name of the default action
             (normally "index").
         </para></listitem>
 
         <listitem><para>
-            <emphasis>defaultModule</emphasis>: base name of the default module
+            <property>defaultModule</property>: base name of the default module
             (normally "default").
         </para></listitem>
 
         <listitem><para>
-            <emphasis>baseUrl</emphasis>: explicit base <acronym>URL</acronym> to the application
+            <property>baseUrl</property>: explicit base <acronym>URL</acronym> to the application
             (normally auto-detected).
         </para></listitem>
 
         <listitem><para>
-            <emphasis>plugins</emphasis>: array of front controller plugin class names.
+            <property>plugins</property>: array of front controller plugin class names.
             The resource will instantiate each class (with no constructor
             arguments) and then register the instance with the front controller.
         </para></listitem>
 
         <listitem><para>
-            <emphasis>params</emphasis>: array of key to value pairs to register with the
+            <property>params</property>: array of key to value pairs to register with the
             front controller.
         </para></listitem>
     </itemizedlist>

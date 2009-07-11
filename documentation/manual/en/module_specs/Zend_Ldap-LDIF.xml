@@ -4,11 +4,14 @@
     <title>Serializing LDAP data to and from LDIF</title>
     <sect2 id="zend.ldap.ldif.encode">
         <title>Serialize a LDAP entry to LDIF</title>
-        <para>
-<programlisting role="php"><![CDATA[
+
+        <programlisting language="php"><![CDATA[
 $data = array(
     'dn'                         => 'uid=rogasawara,ou=営業部,o=Airius',
-    'objectclass'                => array('top', 'person', 'organizationalPerson', 'inetOrgPerson'),
+    'objectclass'                => array('top',
+                                          'person',
+                                          'organizationalPerson',
+                                          'inetOrgPerson'),
     'uid'                        => array('rogasawara'),
     'mail'                       => array('rogasawara@airius.co.jp'),
     'givenname;lang-ja'          => array('ロドニー'),
@@ -29,7 +32,8 @@ $data = array(
     'cn;lang-en'                 => array('Rodney Ogasawara'),
     'title;lang-en'              => array('Sales, Director'),
 );
-$ldif = Zend_Ldap_Ldif_Encoder::encode($data, array('sort' => false, 'version' => null));
+$ldif = Zend_Ldap_Ldif_Encoder::encode($data, array('sort' => false,
+                                                    'version' => null));
 /*
 $ldif contains:
 dn:: dWlkPXJvZ2FzYXdhcmEsb3U95Za25qWt6YOoLG89QWlyaXVz
@@ -58,12 +62,13 @@ cn;lang-en: Rodney Ogasawara
 title;lang-en: Sales, Director
 */
 ]]></programlisting>
-        </para>
+
     </sect2>
+
     <sect2 id="zend.ldap.ldif.encode">
         <title>Deserialize a LDIF string into a LDAP entry</title>
-        <para>
-<programlisting role="php"><![CDATA[
+
+        <programlisting language="php"><![CDATA[
 $ldif = "dn:: dWlkPXJvZ2FzYXdhcmEsb3U95Za25qWt6YOoLG89QWlyaXVz
 objectclass: top
 objectclass: person
@@ -92,7 +97,10 @@ $data = Zend_Ldap_Ldif_Encoder::decode($ldif);
 /*
 $data = array(
     'dn'                         => 'uid=rogasawara,ou=営業部,o=Airius',
-    'objectclass'                => array('top', 'person', 'organizationalPerson', 'inetOrgPerson'),
+    'objectclass'                => array('top',
+                                          'person',
+                                          'organizationalPerson',
+                                          'inetOrgPerson'),
     'uid'                        => array('rogasawara'),
     'mail'                       => array('rogasawara@airius.co.jp'),
     'givenname;lang-ja'          => array('ロドニー'),
@@ -115,7 +123,7 @@ $data = array(
 );
 */
 ]]></programlisting>
-        </para>
+
     </sect2>
 </sect1>
 

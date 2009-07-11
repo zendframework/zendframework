@@ -40,11 +40,12 @@
 
             <example>
             <title>Traverse LDAP tree recursively</title>
-<programlisting role="php"><![CDATA[
+<programlisting language="php"><![CDATA[
 $options = array(/* ... */);
 $ldap = new Zend_Ldap($options);
 $ldap->bind();
-$ri = new RecursiveIteratorIterator($ldap->getBaseNode(), RecursiveIteratorIterator::SELF_FIRST);
+$ri = new RecursiveIteratorIterator($ldap->getBaseNode(),
+                                    RecursiveIteratorIterator::SELF_FIRST);
 foreach ($ri as $rdn => $n) {
     var_dump($n);
 }

@@ -2,15 +2,18 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.ldap.tools">
     <title>Tools</title>
+
     <sect2 id="zend.ldap.tools.dn">
         <title>Creation and modification of DN strings</title>
         <para/>
     </sect2>
+
     <sect2 id="zend.ldap.tools.filter">
         <title>Using the filter API to create search filters</title>
+
         <example>
-        <title>Create simple LDAP filters</title>
-<programlisting role="php"><![CDATA[
+            <title>Create simple LDAP filters</title>
+            <programlisting language="php"><![CDATA[
 $f1  = Zend_Ldap_Filter::equals('name', 'value');         // (name=value)
 $f2  = Zend_Ldap_Filter::begins('name', 'value');         // (name=value*)
 $f3  = Zend_Ldap_Filter::ends('name', 'value');           // (name=*value)
@@ -23,20 +26,26 @@ $f9  = Zend_Ldap_Filter::approx('name', 'value');         // (name~=value)
 $f10 = Zend_Ldap_Filter::any('name');                     // (name=*)
 ]]></programlisting>
         </example>
+
         <example>
-        <title>Create more complex LDAP filters</title>
-<programlisting role="php"><![CDATA[
+            <title>Create more complex LDAP filters</title>
+            <programlisting language="php"><![CDATA[
 $f1 = Zend_Ldap_Filter::ends('name', 'value')->negate(); // (!(name=*value))
 
 $f2 = Zend_Ldap_Filter::equals('name', 'value');
 $f3 = Zend_Ldap_Filter::begins('name', 'value');
 $f4 = Zend_Ldap_Filter::ends('name', 'value');
-$f5 = Zend_Ldap_Filter::andFilter($f2, $f3, $f4);        // (&(name=value)(name=value*)(name=*value))
-$f6 = Zend_Ldap_Filter::orFilter($f2, $f3, $f4);         // (|(name=value)(name=value*)(name=*value))
+
+// (&(name=value)(name=value*)(name=*value))
+$f5 = Zend_Ldap_Filter::andFilter($f2, $f3, $f4);
+
+// (|(name=value)(name=value*)(name=*value))
+$f6 = Zend_Ldap_Filter::orFilter($f2, $f3, $f4);
 ]]></programlisting>
 
         </example>
     </sect2>
+
     <sect2 id="zend.ldap.tools.attribute">
         <title>Modify LDAP entries using the Attribute API</title>
         <para/>

@@ -7,11 +7,11 @@
         <classname>Zend_Tool_Framework</classname> is a framework for exposing common
         functionalities such as the creation of project scaffolds, code
         generation, search index generation, and much more. Functionality may be
-        written and exposed via PHP classes dropped into the PHP
-        <code>include_path</code>, providing incredible flexibility of
-        implementation. The functionality may then be consumed by writing
+        written and exposed via <acronym>PHP</acronym> classes dropped into the
+        <acronym>PHP</acronym> <property>include_path</property>, providing incredible
+        flexibility of implementation. The functionality may then be consumed by writing
         implementation and/or protocol-specific clients -- such as console
-        clients, XML-RPC, SOAP, and much more.
+        clients, <acronym>XML-RPC</acronym>, <acronym>SOAP</acronym>, and much more.
     </para>
 
     <para>
@@ -21,7 +21,7 @@
     <itemizedlist>
         <listitem>
             <para>
-                <code>Common interfaces and abstracts</code> that allow
+                <emphasis>Common interfaces and abstracts</emphasis> that allow
                 developers to create functionality and capabilities that are
                 dispatchable by tooling clients.
             </para>
@@ -32,7 +32,7 @@
                 <emphasis>Base client functionality</emphasis> and a concrete
                 console implementation that connect external tools and
                 interfaces to the <classname>Zend_Tool_Framework</classname>. The Console
-                client may be used in CLI environments such as unix shells and
+                client may be used in <acronym>CLI</acronym> environments such as unix shells and
                 the Windows console.
             </para>
         </listitem>
@@ -90,7 +90,7 @@
 
         <listitem><para>
             <emphasis>Console Client / Command Line Interface /
-            zf.php</emphasis> - The tooling client for the command line.
+            <filename>zf.php</filename></emphasis> - The tooling client for the command line.
         </para></listitem>
 
         <listitem><para>

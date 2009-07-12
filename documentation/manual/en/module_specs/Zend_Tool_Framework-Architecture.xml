@@ -8,7 +8,7 @@
 
         <para>
             Because providers and manifests may come from anywhere in the
-            <code>include_path</code>, a registry is provided to simplify access
+            <property>include_path</property>, a registry is provided to simplify access
             to the various pieces of the toolchain. This registry is injected
             into registry-aware components, which may then pull dependencies
             from them as necessary. Most dependencies registered with the
@@ -78,7 +78,7 @@ interface Zend_Tool_Framework_Registry_EnabledInterface
             functionality that can be called and used inside the
             <classname>Zend_Tool_Framework</classname> toolchain. The simplistic nature of
             implementing this provider interface allows the developer a
-            "one-stop-shop" of adding functionality/capabilities to
+            "one-stop-shop" of adding functionality or capabilities to
             <classname>Zend_Tool_Framework</classname>.
         </para>
 
@@ -118,9 +118,9 @@ abstract class Zend_Tool_Framework_Provider_Abstract
         <para>
             The purpose of a Loader is to find Providers and Manifest files that
             contain classes which implement either
-            <code>Zend_Tool_Framework_Provider_Interface</code> or
-            <code>Zend_Tool_Framework_Manifest_Interface</code>. Once these files are found
-            by a loader, providers are loaded into the Provider Repository and
+            <classname>Zend_Tool_Framework_Provider_Interface</classname> or
+            <classname>Zend_Tool_Framework_Manifest_Interface</classname>. Once these files are
+            found by a loader, providers are loaded into the Provider Repository and
             manifest metadata is loaded into the Manifest Repository.
         </para>
 
@@ -142,17 +142,17 @@ abstract class Zend_Tool_Framework_Loader_Abstract
 ]]></programlisting>
 
         <para>
-            The <code>_getFiles()</code> method should return an array of files (absolute
-            paths). The built-in loader supplied with ZF is called the
+            The <methodname>_getFiles()</methodname> method should return an array of files
+            (absolute paths). The built-in loader supplied with Zend Framework is called the
             IncludePath loader. By default, the Tooling framework will use an
             include_path based loader to find files that might include Providers
             or Manifest Metadata objects.
-            <code>Zend_Tool_Framework_Loader_IncludePathLoader</code>, without
+            <classname>Zend_Tool_Framework_Loader_IncludePathLoader</classname>, without
             any other options, will search for files inside the include path
-            that end in <code>Mainfest.php</code>, <code>Tool.php</code> or
-            <code>Provider.php</code>. Once found, they will be tested (by the
-            <code>load()</code> method of the
-            <code>Zend_Tool_Framework_Loader_Abstract</code>) to determine if
+            that end in <filename>Mainfest.php</filename>, <filename>Tool.php</filename> or
+            <filename>Provider.php</filename>. Once found, they will be tested (by the
+            <methodname>load()</methodname> method of the
+            <classname>Zend_Tool_Framework_Loader_Abstract</classname>) to determine if
             they implement any of the supported interfaces. If they do, an
             instance of the found class is instantiated, and it is appended to
             the proper repository.
@@ -175,8 +175,8 @@ class Zend_Tool_Framework_Loader_IncludePathLoader
 
         <para>
             As you can see, the IncludePath loader will search all include_paths
-            for the files that match the <code>$_filterAcceptFilePattern</code>
-            and NOT match the <code>$_filterDenyDirectoryPattern</code>.
+            for the files that match the <varname>$_filterAcceptFilePattern</varname>
+            and <emphasis>not</emphasis> match the <varname>$_filterDenyDirectoryPattern</varname>.
         </para>
     </sect2>
 
@@ -191,9 +191,9 @@ class Zend_Tool_Framework_Loader_IncludePathLoader
 
         <para>
             To introduce metadata into the manifest repository, all one must do
-            is implement the empty <code>Zend_Tool_Framework_Manifest_Interface</code>, and
-            provide a <code>getMetadata()</code> method which shall return an array of
-            objects that implement <code>Zend_Tool_Framework_Manifest_Metadata</code>.
+            is implement the empty <classname>Zend_Tool_Framework_Manifest_Interface</classname>,
+            and provide a <methodname>getMetadata()</methodname> method which shall return an array
+            of objects that implement <classname>Zend_Tool_Framework_Manifest_Metadata</classname>.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -205,7 +205,7 @@ interface Zend_Tool_Framework_Manifest_Interface
 
         <para>
             Metadata objects are loaded (by a loader defined below) into the
-            Manifest Repository (<code>Zend_Tool_Framework_Manifest_Repository</code>).
+            Manifest Repository (<classname>Zend_Tool_Framework_Manifest_Repository</classname>).
             Manifests will be processed after all Providers have been found to be
             loaded into the provider repository. This shall allow Manifests to
             create Metadata objects based on what is currently inside the
@@ -215,7 +215,7 @@ interface Zend_Tool_Framework_Manifest_Interface
         <para>
             There are a few different metadata classes that can be used to
             describe metadata. The
-            <code>Zend_Tool_Framework_Manifest_Metadata</code> is the base
+            <classname>Zend_Tool_Framework_Manifest_Metadata</classname> is the base
             metadata object. As you can see by the following code
             snippet, the base metadata class is fairly lightweight and
             abstract in nature:
@@ -240,8 +240,8 @@ class Zend_Tool_Framework_Metadata_Basic
 
         <para>
             There are other built in metadata classes as well for describing
-            more specialized metadata: <code>ActionMetadata</code> and
-            <code>ProviderMetadata</code>. These classes will help you describe
+            more specialized metadata: <classname>ActionMetadata</classname> and
+            <classname>ProviderMetadata</classname>. These classes will help you describe
             in more detail metadata that is specific to either actions or
             providers, and the reference is expected to be a reference to an
             action or a provider respectively. These classes are described in
@@ -279,19 +279,19 @@ class Zend_Tool_Framework_Manifest_ProviderMetadata
         <para>
             'Type' in these classes is used to describe the type of metadata the
             object is responsible for. In the cases of the
-            <code>ActionMetadata</code>, the type would be 'Action', and
-            conversely in the case of the <code>ProviderMetadata</code> the type
+            <classname>ActionMetadata</classname>, the type would be 'Action', and
+            conversely in the case of the <classname>ProviderMetadata</classname> the type
             is 'Provider'. These metadata types will also include additional
             structured information about both the "thing" they are describing as
-            well as the object (the <code>->getReference()</code>) they are
+            well as the object (the <methodname>getReference()</methodname>) they are
             referencing with this new metadata.
         </para>
 
         <para>
             In order to create your own metadata type, all one must do is extend
-            the base <code>Zend_Tool_Framework_Manifest_Metadata</code> class
+            the base <classname>Zend_Tool_Framework_Manifest_Metadata</classname> class
             and return these new metadata objects via a local Manifest
-            class/object. These user based classes will live in the Manifest
+            class or object. These user based classes will live in the Manifest
             Repository
         </para>
 
@@ -345,7 +345,7 @@ class Zend_Tool_Framework_Manifest_Repository
             extremely flexible searching. In order to find a metadata object,
             simply pass in an array of matching constraints via an array. If
             the data is accessible through the Property accessor (the
-            <code>getSomething()</code> methods implemented on the metadata
+            <methodname>getSomething()</methodname> methods implemented on the metadata
             object), then it will be passed back to the user as a "found"
             metadata object.
         </para>
@@ -356,11 +356,11 @@ class Zend_Tool_Framework_Manifest_Repository
 
         <para>
             Clients are the interface which bridges a user or external tool into
-            the <code>Zend_Tool_Framework</code> system. Clients can come in all
-            shapes and sizes: RPC endpoints, Command Line Interface, or
-            even a web interface. Zend_Tool has implemented the command
+            the <classname>Zend_Tool_Framework</classname> system. Clients can come in all
+            shapes and sizes: <acronym>RPC</acronym> endpoints, Command Line Interface, or
+            even a web interface. <classname>Zend_Tool</classname> has implemented the command
             line interface as the default interface for interacting with
-            the <code>Zend_Tool_Framework</code> system.
+            the <classname>Zend_Tool_Framework</classname> system.
         </para>
 
         <para>
@@ -401,7 +401,9 @@ abstract class Zend_Tool_Framework_Client_Abstract
             As you can see, there 1 method is required to fulfill the needs of a
             client (two others suggested), the initialization, prehandling and post handling. For a
             more in depth study of how the command line client works, please see
-            the <ulink url="http://framework.zend.com/svn/framework/standard/branches/release-1.8/library/Zend/Tool/Framework/Client/Console.php">source code</ulink>.
+            the <ulink
+                url="http://framework.zend.com/svn/framework/standard/branches/release-1.8/library/Zend/Tool/Framework/Client/Console.php">source
+                code</ulink>.
         </para>
 
     </sect2>

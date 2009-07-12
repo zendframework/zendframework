@@ -5,9 +5,9 @@
 
     <para>
         In addition to the more useful project based providers that come shipped
-        with <code>Zend_Tool_Project</code>, there are also some more basic, but
+        with <classname>Zend_Tool_Project</classname>, there are also some more basic, but
         interesting providers that come built into
-        <code>Zend_Tool_Framework</code>. Some of these exist for the purpose
+        <classname>Zend_Tool_Framework</classname>. Some of these exist for the purpose
         of providing a means via the command line to extract information, such
         as the version, while others are intended to aid the developer when
         creating additional providers.
@@ -18,12 +18,12 @@
 
         <para>
             The Version provider is included so that you may determine which
-            version of the framework that the <code>zf</code> or
-            <code>Zend_Tool</code> is currently set to work with.
+            version of the framework that the <command>zf</command> or
+            <classname>Zend_Tool</classname> is currently set to work with.
         </para>
 
         <para>
-            Through the command line, simply run <code>zf show version</code>.
+            Through the command line, simply run <command>zf show version</command>.
         </para>
 
     </sect2>
@@ -34,8 +34,8 @@
         <para>
             The Manifest provider is included so that you may determine what
             kind of "manifest" information is available during the
-            <code>Zend_Tool</code> runtime. Manifest data is information that
-            is attached to specific objects during <code>Zend_Tool</code>'s
+            <classname>Zend_Tool</classname> runtime. Manifest data is information that
+            is attached to specific objects during <classname>Zend_Tool</classname>'s
             runtime. Inside the manifest you will find the console specific
             namings that you are expected to use when calling certain commands.
             Data found in the manifest can be used by any provider or client on
@@ -43,7 +43,7 @@
         </para>
 
         <para>
-            Through the command line, simply run <code>zf show manifest</code>.
+            Through the command line, simply run <command>zf show manifest</command>.
         </para>
     </sect2>
 </sect1>

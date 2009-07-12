@@ -7,7 +7,7 @@
         In general, a provider, on its own, is nothing more than the shell for a
         developer to bundle up some capabilities they wish to dispatch with the
         command line (or other) clients. It is an analogue to what a
-        "controller" is inside of your MVC application.
+        "controller" is inside of your <acronym>MVC</acronym> application.
     </para>
 
     <sect2 id="zend.tool.framework.writing-providers.basic">
@@ -17,10 +17,10 @@
             As an example, if a developer wants to add the capability of showing
             the version of a datafile that his 3rd party component is working
             from, there is only one class the developer would need to implement.
-            Assuming the component is called <code>My_Component</code>, he would
-            create a class named <code>My_Component_HelloProvider</code> in a
-            file named <code>HelloProvider.php</code> somewhere on the
-            <code>include_path</code>. This class would implement
+            Assuming the component is called <classname>My_Component</classname>, he would
+            create a class named <classname>My_Component_HelloProvider</classname> in a
+            file named <filename>HelloProvider.php</filename> somewhere on the
+            <property>include_path</property>. This class would implement
             <classname>Zend_Tool_Framework_Provider_Interface</classname>, and the body of
             this file would only have to look like the following:
         </para>
@@ -81,11 +81,11 @@ class My_Component_HelloProvider
 ]]></programlisting>
 
         <para>
-            The above example can then be called via the command line <code>zf
-                say hello Joe</code>. "Joe" will be supplied to the provider as
+            The above example can then be called via the command line
+            <command>zf say hello Joe</command>. "Joe" will be supplied to the provider as
             a parameter of the method call. Also note, as you see that the
             parameter is optional, that means it is also optional on the command
-            line, so that <code>zf say hello</code> will still work, and default
+            line, so that <command>zf say hello</command> will still work, and default
             to the name "Ralph".
         </para>
 

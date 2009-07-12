@@ -126,7 +126,7 @@
         <para>
             <emphasis>ALTERNATIVE SETUP</emphasis>では
             一緒にダウンロードするZend Frameworkを現状のまま保って、
-            <constructing>PATH</constant>の場所から<filename>zf.sh</filename>へのリンクを作成する必要があります。
+            <constant>PATH</constant>の場所から<filename>zf.sh</filename>へのリンクを作成する必要があります。
             ZendFrameworkダウンロードの内容を
             <filename>/usr/local/share/ZendFramework</filename>や
             またはよりローカルに<filename>/home/username/lib/ZendFramework</filename>、
@@ -172,7 +172,7 @@ C:\WAMP\PHP\bin
             あなたは、コマンドラインで<filename>php.exe</filename>を実行できるはずです。
             できなければ、
             最初に、<acronym>PHP</acronym>ディストリビューションに付属していたドキュメンテーションをチェックしてください、
-            さもなければ、<filename>php.exe</filename>へのパスがあなたのWindows<constructing>PATH</constant>環境変数であることを確認してください。
+            さもなければ、<filename>php.exe</filename>へのパスがあなたのWindows <constant>PATH</constant>環境変数であることを確認してください。
         </para>
 
         <para>
@@ -211,7 +211,7 @@ C:\WAMP\PHP\bin
         <para>
             <emphasis>ALTERNATIVE SETUP</emphasis>では
             一緒にダウンロードするZend Frameworkを現状のまま保って、
-            システム<constructing>PATH</constant>と<filename>php.ini</filename>ファイルの両方を変更する必要があります。
+            システム<constant>PATH</constant>と<filename>php.ini</filename>ファイルの両方を変更する必要があります。
             ユーザー環境で、<filename>zf.bat</filename>ファイルが実行可能であるように、
             必ず<filename>C:\Path\To\ZendFramework\bin</filename>を加えるようにしてください。
             また、<filename>C:\Path\To\ZendFramework\library</filename>が

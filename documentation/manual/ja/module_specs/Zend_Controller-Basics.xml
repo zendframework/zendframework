@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16396 -->
+<!-- EN-Revision: 16658 -->
 <sect1 id="zend.controller.basics">
     <title>Zend_Controller の基本</title>
 
@@ -54,7 +54,7 @@
 
                 <para>
                     デフォルトでは <classname>Zend_Controller_Request_Http</classname>
-                    が用いられます。これは、HTTP リクエスト環境全体へのアクセス機能を提供します。
+                    が用いられます。これは、<acronym>HTTP</acronym> リクエスト環境全体へのアクセス機能を提供します。
                 </para>
             </listitem>
 
@@ -72,13 +72,13 @@
 
                 <para>
                     デフォルトのルータである <classname>Zend_Controller_Router_Rewrite</classname> は、
-                    <classname>Zend_Controller_Request_Http</classname> で指定された URI
+                    <classname>Zend_Controller_Request_Http</classname> で指定された <acronym>URI</acronym>
                     を受け取ってそれを分解し、コントローラや
-                    アクション、そして URL に含まれたパスのパラメータを取得します。
+                    アクション、そして <acronym>URL</acronym> に含まれたパスのパラメータを取得します。
                     たとえば、<filename>http://localhost/foo/bar/key/value</filename>
-                    のような URL の場合は <code>foo</code> がコントローラ、
-                    <code>bar</code> がアクション、そしてパラメータ
-                    <code>key</code> の値として <code>value</code> を取得します。
+                    のような URL の場合は <emphasis>foo</emphasis> がコントローラ、
+                    <emphasis>bar</emphasis> がアクション、そしてパラメータ
+                    <emphasis>key</emphasis> の値として <emphasis>value</emphasis> を取得します。
                 </para>
 
                 <para>
@@ -109,7 +109,7 @@
                     それとは異なりディスパッチは繰り返し発生します。
                     リクエストオブジェクトのディスパッチ状態がリセットされるとループが再開され、
                     現在リクエストオブジェクトに設定されているアクションがコールされます。
-                    リクエストオブジェクトのディスパッチ状態が (true に)
+                    リクエストオブジェクトのディスパッチ状態が (<consumed>TRUE</constant> に)
                     設定された状態でループが終了すると、処理が終了します。
                 </para>
 
@@ -122,7 +122,7 @@
                     形式 (最後に Action をつける) となります。たとえば
                     <methodname>FooController::barAction()</methodname>
                     のような場合、コントローラは
-                    <code>foo</code>、アクションは <code>bar</code>
+                    <emphasis>foo</emphasis>、アクションは <emphasis>bar</emphasis>
                     となります。
                 </para>
 
@@ -172,7 +172,7 @@
                 <para>
                     デフォルトのレスポンスクラスは
                     <classname>Zend_Controller_Response_Http</classname> で、
-                    これは HTTP 環境での使用に適しています。
+                    これは <acronym>HTTP</acronym> 環境での使用に適しています。
                 </para>
             </listitem>
         </itemizedlist>
@@ -182,7 +182,7 @@
         <classname>Zend_Controller_Front</classname> がリクエストを受け取り、
         <classname>Zend_Controller_Router_Rewrite</classname> をコールして、
         配送先となるコントローラ (そしてコントローラ内のアクション)
-        を決定します。<classname>Zend_Controller_Router_Rewrite</classname> は URI
+        を決定します。<classname>Zend_Controller_Router_Rewrite</classname> は <acronym>URI</acronym>
         を分解し、リクエストからコントローラ名とアクション名を取得します。
         その後、<classname>Zend_Controller_Front</classname> はディスパッチループに突入します。
         まず <classname>Zend_Controller_Dispatcher_Standard</classname> をコールしてそこにリクエストを渡し、

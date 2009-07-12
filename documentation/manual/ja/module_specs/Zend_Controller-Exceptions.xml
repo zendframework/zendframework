@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16164 -->
+<!-- EN-Revision: 16658 -->
 <sect1 id="zend.controller.exceptions">
     <title>MVC での例外</title>
 
@@ -8,7 +8,7 @@
         <title>導入</title>
 
         <para>
-            Zend Framework の MVC コンポーネントは、
+            Zend Framework の <acronym>MVC</acronym> コンポーネントは、
             フロントコントローラを使用しています。
             つまり、あるサイトに対するすべてのリクエストを
             ひとつのエントリポイントで処理するということです。その結果、
@@ -19,7 +19,7 @@
         <para>
             しかし、例外のメッセージやバックトレースの中には、
             システムの重要な情報が含まれていることがあります。
-            たとえば SQL 文の内容やファイルの位置といった情報です。
+            たとえば <acronym>SQL</acronym> 文の内容やファイルの位置といった情報です。
             あなたのサイトを守るため、デフォルトでは
             <classname>Zend_Controller_Front</classname> がすべての例外を捕捉し、
             それをレスポンスオブジェクトに登録するようになっています。
@@ -32,7 +32,7 @@
         <title>例外の処理</title>
 
         <para>
-            MVC コンポーネント内で例外を処理するための仕組みが組み込まれています。
+            <acronym>MVC</acronym> コンポーネント内で例外を処理するための仕組みが組み込まれています。
         </para>
 
         <itemizedlist>
@@ -64,7 +64,7 @@
             </listitem>
 
             <listitem>
-                <para><classname>Zend_Controller_Front::throwExceptions()</classname></para>
+                <para><methodname>Zend_Controller_Front::throwExceptions()</methodname></para>
 
                 <para>
                     このメソッドに true を渡すと、
@@ -90,7 +90,7 @@ try {
             </listitem>
 
             <listitem>
-                <para><classname>Zend_Controller_Response_Abstract::renderExceptions()</classname></para>
+                <para><methodname>Zend_Controller_Response_Abstract::renderExceptions()</methodname></para>
 
                 <para>
                     このメソッドに true を渡すと、
@@ -103,13 +103,13 @@ try {
 
             <listitem>
                 <para>
-                    <classname>Zend_Controller_Front::returnResponse()</classname> および
-                    <classname>Zend_Controller_Response_Abstract::isException()</classname>
+                    <methodname>Zend_Controller_Front::returnResponse()</methodname> および
+                    <methodname>Zend_Controller_Response_Abstract::isException()</methodname>
                 </para>
 
                 <para>
-                    <classname>Zend_Controller_Front::returnResponse()</classname> に true を渡すと、
-                    <classname>Zend_Controller_Front::dispatch()</classname> はレスポンスをレンダリングせず、
+                    <methodname>Zend_Controller_Front::returnResponse()</methodname> に true を渡すと、
+                    <methodname>Zend_Controller_Front::dispatch()</methodname> はレスポンスをレンダリングせず、
                     そのまま返します。レスポンスを受け取った後で、
                     処理すべき例外があるかどうかを <methodname>isException()</methodname>
                     メソッドで調べ、その内容を <methodname>getException()</methodname> メソッドで取得します。
@@ -129,7 +129,7 @@ if ($response->isException()) {
 ]]></programlisting>
 
                 <para>
-                    <classname>Zend_Controller_Front::throwExceptions()</classname>
+                    <methodname>Zend_Controller_Front::throwExceptions()</methodname>
                     に比べてこの方法が優れている点は、例外を処理した後で、
                     それをレンダリングするかどうかを判断できるところです。
                     エラーハンドラプラグインとは異なり、
@@ -143,7 +143,7 @@ if ($response->isException()) {
         <title>MVC で遭遇するであろう例外</title>
 
         <para>
-            各 MVC コンポーネント群 -- リクエスト、ルータ、ディスパッチャ、
+            各 <acronym>MVC</acronym> コンポーネント群 -- リクエスト、ルータ、ディスパッチャ、
             アクションコントローラそしてレスポンスオブジェクト --
             はそれぞれ例外をスローします。
             条件によっては上書きされる例外もありますし、
@@ -162,7 +162,7 @@ if ($response->isException()) {
 
                 <itemizedlist>
                     <listitem>
-                        <para>パラメータ <code>useDefaultControllerAlways</code> を設定します。</para>
+                        <para>パラメータ <property>useDefaultControllerAlways</property> を設定します。</para>
 
                         <para>
                             フロントコントローラかディスパッチャのいずれかで、
@@ -203,7 +203,7 @@ $dispatcher->setParam('useDefaultControllerAlways', true);
 
             <listitem>
                 <para>
-                    <classname>Zend_Controller_Action::__call()</classname> は、存在しないアクションを
+                    <methodname>Zend_Controller_Action::__call()</methodname> は、存在しないアクションを
                     メソッドにディスパッチできなかった場合に
                     <classname>Zend_Controller_Action_Exception</classname> をスローします。
                     このような場合は、何らかのデフォルトアクションを
@@ -281,15 +281,15 @@ class My_Controller_Dispatcher extends Zend_Controller_Dispatcher
                         <para>
                             この方式の利点は、最終的にディスパッチが行われる前に
                             透過的にアクションを変更できるとうことです。しかしこれは、
-                            URL を打ち間違えた際にも正しくディスパッチされてしまうということでもあります。
+                            <acronym>URL</acronym> を打ち間違えた際にも正しくディスパッチされてしまうということでもあります。
                             これは、サーチエンジン最適化のためにはあまりよくありません。
                         </para>
                     </listitem>
 
                     <listitem>
                         <para>
-                            <classname>Zend_Controller_Action::preDispatch()</classname> あるいは
-                            <classname>Zend_Controller_Plugin_Abstract::preDispatch()</classname>
+                            <methodname>Zend_Controller_Action::preDispatch()</methodname> あるいは
+                            <methodname>Zend_Controller_Plugin_Abstract::preDispatch()</methodname>
                             を使用して、無効なアクションを判別します。
                         </para>
 

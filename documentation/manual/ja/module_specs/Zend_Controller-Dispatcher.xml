@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16164 -->
+<!-- EN-Revision: 16658 -->
 <sect1 id="zend.controller.dispatcher">
     <title>ディスパッチャ</title>
 
@@ -15,7 +15,7 @@
             モジュールやコントローラ、アクションが見つからない場合は、
             デフォルト値を使用します。<classname>Zend_Controller_Dispatcher_Standard</classname>
             では、コントローラとアクションのデフォルトはどちらも
-            <code>index</code> で、モジュールのデフォルトは <code>default</code> です。しかし、
+            <emphasis>index</emphasis> で、モジュールのデフォルトは <emphasis>default</emphasis> です。しかし、
             <methodname>setDefaultController()</methodname> メソッドや
             <methodname>setDefaultAction()</methodname> メソッド、そして
             <methodname>setDefaultModule()</methodname> でこれらを変更することもできます。
@@ -30,7 +30,7 @@
                 (デフォルトの設定では、デフォルトモジュールには名前空間が
                 <emphasis>ありません</emphasis>)。1.5.0 以降では、
                 フロントコントローラあるいはディスパッチャで
-                <code>prefixDefaultModule</code> に true
+                <property>prefixDefaultModule</property> に <constant>TRUE</constant>
                 を設定すればこれが実現できるようになりました。
             </para>
 
@@ -110,7 +110,7 @@ public function bazAction()
             たとえば、コントローラ名やアクション名を決定する方法、
             コントローラクラスを探す場所、モジュール名が有効かどうか、
             その他、リクエストの内容をディスパッチするために必要な情報を取得する
-            API が必要となります。
+            <acronym>API</acronym> が必要となります。
         </para>
 
         <para>

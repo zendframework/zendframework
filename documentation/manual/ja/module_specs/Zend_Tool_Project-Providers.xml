@@ -1,116 +1,114 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 16653 -->
 <sect1 id="zend.tool.project.providers">
     <title>Zend Toolプロジェクトプロバイダー</title>
 
     <para>
-        下記はZend Toolプロジェクトとともに出荷されたプロバイダーすべての一覧です。
-
-        <table id="zend.tool.project.project-provider">
-            <title>プロジェクトプロバイダーオプション</title>
-            <tgroup cols="4">
-                <thead>
-                    <row>
-                        <entry>プロバイダー名</entry>
-                        <entry>可能なアクション</entry>
-                        <entry>パラメータ</entry>
-                        <entry>CLI 使用法</entry>
-                    </row>
-                </thead>
-                <tbody>
-                    <row>
-                        <entry>
-                            Controller
-                        </entry>
-                        <entry>
-                            作成
-                        </entry>
-                        <entry>
-                            create - [name, indexActionIncluded=true]
-                        </entry>
-                        <entry>
-                            zf create controller foo
-                        </entry>
-                    </row>
-                    <row>
-                        <entry>
-                            Action
-                        </entry>
-                        <entry>
-                            作成
-                        </entry>
-                        <entry>
-                            create - [name, controllerName=index, viewIncluded=true]
-                        </entry>
-                        <entry>
-                            zf create action bar foo
-                            (または zf create action --name bar --controlller-name=foo)
-                        </entry>
-                    </row>
-                    <row>
-                        <entry>
-                            Controller
-                        </entry>
-                        <entry>
-                            作成
-                        </entry>
-                        <entry>
-                            create - [name, indexActionIncluded=true]
-                        </entry>
-                        <entry>
-                            zf create controller foo
-                        </entry>
-                    </row>
-                    <row>
-                        <entry>
-                            Profile
-                        </entry>
-                        <entry>
-                            表示
-                        </entry>
-                        <entry>
-                            show - []
-                        </entry>
-                        <entry>
-                            zf show profile
-                        </entry>
-                    </row>
-                    <row>
-                        <entry>
-                            View
-                        </entry>
-                        <entry>
-                            作成
-                        </entry>
-                        <entry>
-                            create - [controllerName,actionNameOrSimpleName]
-                        </entry>
-                        <entry>
-                            zf create view foo bar
-                            (または zf create view -c foo -a bar)
-                        </entry>
-                    </row>
-                    <row>
-                        <entry>
-                            Test
-                        </entry>
-                        <entry>
-                            作成
-                            有効化
-                            無効化
-                        </entry>
-                        <entry>
-                            create - [libraryClassName]
-                        </entry>
-                        <entry>
-                            zf create test My_Foo_Baz
-                            zf disable test
-                            zf enable test
-                        </entry>
-                    </row>
-                </tbody>
-            </tgroup>
-        </table>
+        下記は<classname>Zend_Tool_Project</classname>とともに出荷されたプロバイダーすべての一覧です。
     </para>
+
+    <table id="zend.tool.project.project-provider">
+        <title>プロジェクトプロバイダーオプション</title>
+        <tgroup cols="4">
+            <thead>
+                <row>
+                    <entry>プロバイダー名</entry>
+                    <entry>可能なアクション</entry>
+                    <entry>パラメータ</entry>
+                    <entry><acronym>CLI</acronym> 使用法</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry>
+                        Controller
+                    </entry>
+                    <entry>
+                        Create
+                    </entry>
+                    <entry>
+                        create - [name, indexActionIncluded=true]
+                    </entry>
+                    <entry>
+                        <command>zf create controller foo</command>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        Action
+                    </entry>
+                    <entry>
+                        Create
+                    </entry>
+                    <entry>
+                        create - [name, controllerName=index, viewIncluded=true]
+                    </entry>
+                    <entry>
+                        <command>zf create action bar foo</command>
+                        (または <command>zf create action --name bar --controlller-name=foo</command>)
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        Controller
+                    </entry>
+                    <entry>
+                        Create
+                    </entry>
+                    <entry>
+                        create - [name, indexActionIncluded=true]
+                    </entry>
+                    <entry>
+                        <command>zf create controller foo</command>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        Profile
+                    </entry>
+                    <entry>
+                        Show
+                    </entry>
+                    <entry>
+                        show - []
+                    </entry>
+                    <entry>
+                        <command>zf show profile</command>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        View
+                    </entry>
+                    <entry>
+                        Create
+                    </entry>
+                    <entry>
+                        create - [controllerName,actionNameOrSimpleName]
+                    </entry>
+                    <entry>
+                        <command>zf create view foo bar</command>
+                        (または <command>zf create view -c foo -a bar</command>)
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        Test
+                    </entry>
+                    <entry>
+                        Create / Enable / Disable
+                    </entry>
+                    <entry>
+                        create - [libraryClassName]
+                    </entry>
+                    <entry>
+                        <command>zf create test My_Foo_Baz</command> /
+                        <command>zf disable test</command> /
+                        <command>zf enable test</command>
+                    </entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
 </sect1>

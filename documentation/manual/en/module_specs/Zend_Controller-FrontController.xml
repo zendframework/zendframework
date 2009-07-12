@@ -108,7 +108,7 @@ $front = Zend_Controller_Front::getInstance();
                 where to look for <link
                     linkend="zend.controller.action">action controller</link>
                 class files. It accepts either a single path or an associative
-                array of module/path pairs.
+                array of module and path pairs.
             </para>
 
             <para>
@@ -134,7 +134,7 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
                 <para>
                     If you use <methodname>addControllerDirectory()</methodname> without a
                     module name, it will set the directory for the
-                    <code>default</code> module -- overwriting it if it already
+                    <emphasis>default</emphasis> module -- overwriting it if it already
                     exists.
                 </para>
             </note>
@@ -142,7 +142,7 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
             <para>
                 You can get the current settings for the controller directory
                 using <methodname>getControllerDirectory()</methodname>; this will return an
-                array of module/directory pairs.
+                array of module and directory pairs.
             </para>
         </sect3>
 
@@ -159,8 +159,8 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
             <para>
                 Each module should be in its own directory and mirror the
                 directory structure of the default module -- i.e., it should
-                have a "controllers" subdirectory at the minimum, and typically
-                a "views" subdirectory and other application subdirectories.
+                have a <filename>/controllers/</filename> subdirectory at the minimum, and typically
+                a <filename>/views/</filename> subdirectory and other application subdirectories.
             </para>
 
             <para>
@@ -195,7 +195,7 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
                 If no request or response object are passed in,
                 <methodname>dispatch()</methodname> will check for previously registered
                 objects and use those or instantiate default versions to use in
-                its process (in both cases, the HTTP flavor will be used as the
+                its process (in both cases, the <acronym>HTTP</acronym> flavor will be used as the
                 default).
             </para>
 
@@ -232,7 +232,7 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
             <title>run()</title>
 
             <para>
-                <classname>Zend_Controller_Front::run($path)</classname> is a static
+                <methodname>Zend_Controller_Front::run($path)</methodname> is a static
                 method taking simply a path to a directory containing
                 controllers. It fetches a front controller instance (via
                 <link
@@ -282,9 +282,7 @@ Zend_Controller_Front::run('../application/controllers');
                     <methodname>(set|get)DefaultControllerName()</methodname> let you
                     specify a different name to use for the default controller
                     ('index' is used otherwise) and retrieve the current value.
-                    They proxy to <link
-                        linkend="zend.controller.dispatcher">the
-                        dispatcher</link>.
+                    They proxy to <link linkend="zend.controller.dispatcher">the dispatcher</link>.
                 </para>
             </listitem>
 
@@ -293,8 +291,7 @@ Zend_Controller_Front::run('../application/controllers');
                     <methodname>(set|get)DefaultAction()</methodname> let you specify a
                     different name to use for the default action ('index' is
                     used otherwise) and retrieve the current value. They proxy
-                    to <link linkend="zend.controller.dispatcher">the
-                        dispatcher</link>.
+                    to <link linkend="zend.controller.dispatcher">the dispatcher</link>.
                 </para>
             </listitem>
 
@@ -367,8 +364,8 @@ Zend_Controller_Front::run('../application/controllers');
 
             <listitem>
                 <para>
-                    <methodname>registerPlugin(Zend_Controller_Plugin_Abstract $plugin, $stackIndex =
-                        null)</methodname> allows you to register <link
+                    <methodname>registerPlugin(Zend_Controller_Plugin_Abstract $plugin,
+                        $stackIndex = null)</methodname> allows you to register <link
                         linkend="zend.controller.plugins">plugin objects</link>.
                     By setting the optional <varname>$stackIndex</varname>, you can
                     control the order in which plugins will execute.
@@ -396,8 +393,8 @@ Zend_Controller_Front::run('../application/controllers');
                 </para>
 
                 <para>
-                    For more information, read <xref
-                        linkend="zend.controller.exceptions" />.
+                    For more information, read <link linkend="zend.controller.exceptions">MVC
+                        Exceptions</link>.
                 </para>
             </listitem>
 
@@ -409,7 +406,7 @@ Zend_Controller_Front::run('../application/controllers');
                     response should be automatically emitted
                     (<constant>FALSE</constant>). By default, the response is
                     automatically emitted (by calling
-                    <classname>Zend_Controller_Response_Abstract::sendResponse()</classname>);
+                    <methodname>Zend_Controller_Response_Abstract::sendResponse()</methodname>);
                     turning on <methodname>returnResponse()</methodname> will override this
                     behaviour.
                 </para>
@@ -494,7 +491,8 @@ Zend_Controller_Front::run('../application/controllers');
                 </para>
 
                 <para>
-                    See <xref linkend="zend.controller.exceptions.internal" />
+                    See <link linkend="zend.controller.exceptions.internal">MVC Exceptions
+                        You May Encounter</link>
                     for more detailed information on using this setting.
                 </para>
             </listitem>
@@ -554,7 +552,7 @@ class My_Controller_Front extends Zend_Controller_Front
         <para>
             Overriding the <methodname>getInstance()</methodname> method ensures that
             subsequent calls to
-            <classname>Zend_Controller_Front::getInstance()</classname> will return an
+            <methodname>Zend_Controller_Front::getInstance()</methodname> will return an
             instance of your new subclass instead of a
             <classname>Zend_Controller_Front</classname> instance -- this is particularly
             useful for some of the alternate routers and view helpers.

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 16502 -->
+<!-- EN-Revision: 16649 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.action">
     <title>Contrôleurs d'action</title>
@@ -299,10 +299,10 @@ applicationOrModule/
 
             <para>
                 En d'autres termes, les scripts de vues sont supposés être dans le
-                sous-répertoire <filename>views/scripts/</filename>, et le sous-répertoire
-                <filename>views/</filename> est censé contenir les fonctionnalités soeurs
+                sous-répertoire <filename>/views/scripts/</filename>, et le sous-répertoire
+                <filename>/views/</filename> est censé contenir les fonctionnalités soeurs
                 (aides [helpers], filtres [filters]). En déterminant le script de vue et son
-                chemin, le répertoire <filename>views/scripts/</filename> est utilisé comme
+                chemin, le répertoire <filename>/views/scripts/</filename> est utilisé comme
                 chemin de base, avec des dossiers nommés par le nom de contrôleur fournissant
                 ainsi la hiérarchie des scripts de vues.
             </para>
@@ -326,8 +326,8 @@ string render(string $action = null,
                 <filename>[controller]/[action].phtml</filename> (où <filename>.phtml</filename>
                 est la valeur de la propriété <varname>$viewSuffix</varname>). Fournir une valeur
                 pour <varname>$action</varname> va effectuer le rendu du script dans le sous-dossier
-                <filename>[controller]/</filename>. Pour surcharger l'utilisation du sous-dossier
-                <filename>[controller]/</filename>, fournissez la valeur <constant>TRUE</constant>
+                <filename>/[controller]/</filename>. Pour surcharger l'utilisation du sous-dossier
+                <filename>/[controller]/</filename>, fournissez la valeur <constant>TRUE</constant>
                 à <varname>$noController</varname>. Enfin, les scripts sont rendus dans l'objet
                 réponse&#160;; si vous souhaitez effectuer le rendu dans un
                 <link linkend="zend.controller.response.namedsegments">segment

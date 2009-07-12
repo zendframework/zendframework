@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 16419 -->
+<!-- EN-Revision: 16649 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.cache.frontends">
     <title>Les frontends Zend_Cache</title>
@@ -820,7 +820,7 @@ $res = $cache->foobar2('1', '2');
                             <entry><methodname>array()</methodname></entry>
                             <entry>
                                 un tableau associatif pour définir les options, uniquement
-                                pour certaines <acronym>REQUEST_URI</acronym>, les clés sont des
+                                pour certaines <constant>REQUEST_URI</constant>, les clés sont des
                                 expressions régulières <acronym>PCRE</acronym>, les valeurs sont
                                 des tableaux associatifs avec des options spécifiques pour définir
                                 si les expressions régulières correspondent dans

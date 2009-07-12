@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 16050 -->
+<!-- EN-Revision: 16652 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.auth.adapter.dbtable">
     <title>Authentification avec une table de base de données</title>
@@ -23,14 +23,15 @@
 
         <itemizedlist>
             <listitem>
-                <para><emphasis>tableName</emphasis>&#160;: il s'agit du nom de la table dans la
-                base de données qui contient les crédits d'authentification, et envers laquelle la
-                requête d'authentification sera réalisée.
-            </para>
+                <para>
+                    <property>tableName</property>&#160;: il s'agit du nom de la table dans la
+                    base de données qui contient les crédits d'authentification, et envers laquelle la
+                    requête d'authentification sera réalisée.
+                </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis>identityColumn</emphasis>&#160;: il s'agit du nom de la colonne dans
+                    <property>identityColumn</property>&#160;: il s'agit du nom de la colonne dans
                     la table utilisée pour représenter l'identité. La colonne d'identité doit
                     contenir une valeur unique, comme un "username" ou une adresse
                     émail.
@@ -38,16 +39,16 @@
             </listitem>
             <listitem>
                 <para>
-                    <emphasis>credentialColumn</emphasis>&#160;: il s'agit du nom de la colonne
+                    <property>credentialColumn</property>&#160;: il s'agit du nom de la colonne
                     dans la table utilisée pour représenter le crédit. Dans le cas d'une simple
                     authentification par identité / mot de passe, la valeur de crédit
                     correspond au mot de passe. Voir aussi l'option
-                    <emphasis>credentialTreatment</emphasis>.
+                    <property>credentialTreatment</property>.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis>credentialTreatment</emphasis>&#160;: dans la plupart des cas, les
+                    <property>credentialTreatment</property>&#160;: dans la plupart des cas, les
                     mots de passe et autres données sensibles sont cryptés, hachés, encodés,
                     masqués, ou sinon traités à travers une fonction ou un algorithme. En
                     spécifiant un traitement paramétrable de chaîne avec cette méthode, comme

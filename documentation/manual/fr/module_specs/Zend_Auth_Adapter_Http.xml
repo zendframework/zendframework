@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 15997 -->
+<!-- EN-Revision: 16652 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.auth.adapter.http">
     <title>Adaptateur d'authentification HTTP</title>
@@ -101,7 +101,7 @@
                 </thead>
                 <tbody>
                     <row>
-                        <entry><emphasis>accept_schemes</emphasis></entry>
+                        <entry><property>accept_schemes</property></entry>
                         <entry>Oui</entry>
                         <entry>
                             Détermine les schémas d'authentification que l'adaptateur va
@@ -111,7 +111,7 @@
                         </entry>
                     </row>
                     <row>
-                        <entry><emphasis>realm</emphasis></entry>
+                        <entry><property>realm</property></entry>
                         <entry>Oui</entry>
                         <entry>
                             Fournit le nom de l'authentification ("realm")&#160;;
@@ -120,9 +120,9 @@
                         </entry>
                     </row>
                     <row>
-                        <entry><emphasis>digest_domains</emphasis></entry>
+                        <entry><property>digest_domains</property></entry>
                         <entry>
-                            Oui lorsque<emphasis> "accept_schemes"</emphasis> contient
+                            Oui lorsque <property>accept_schemes</property> contient
                             <emphasis>"digest"</emphasis>
                         </entry>
                         <entry>
@@ -132,9 +132,9 @@
                         </entry>
                     </row>
                     <row>
-                        <entry><emphasis>nonce_timeout</emphasis></entry>
+                        <entry><property>nonce_timeout</property></entry>
                         <entry>
-                            Oui lorsque <emphasis>"accept_schemes"</emphasis> contient
+                            Oui lorsque <property>accept_schemes</property> contient
                             <emphasis>"digest"</emphasis>
                         </entry>
                         <entry>
@@ -143,7 +143,7 @@
                         </entry>
                     </row>
                     <row>
-                        <entry><emphasis>proxy_auth</emphasis></entry>
+                        <entry><property>proxy_auth</property></entry>
                         <entry>Non</entry>
                         <entry>
                             Désactivé par défaut. Activez le pour effectuer une
@@ -156,7 +156,7 @@
 
         <note>
             <para>
-                L'implémentation actuelle du <emphasis>nonce_timeout</emphasis> a des effets
+                L'implémentation actuelle du <property>nonce_timeout</property> a des effets
                 intéressants. Ce paramètre doit déterminer le temps de validité d'un jeton,
                 autrement dit : le temps d'acceptation d'un client. Par exemple, une valeur de 3600
                 aura pour effet de commander à l'adaptateur le rappel des informations
@@ -255,7 +255,7 @@ $config = array(
             authentification pour les zones du site situées sous <filename>/members_only</filename>
             et <filename>/my_account</filename>. La valeur du "real" est en général affichée par
             le navigateur dans la boite de dialogue. Le paramètre
-            <emphasis>nonce_timeout</emphasis>, fonctionne comme expliqué plus haut.
+            <property>nonce_timeout</property>, fonctionne comme expliqué plus haut.
         </para>
 
         <para>

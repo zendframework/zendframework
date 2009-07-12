@@ -7,7 +7,7 @@
         <title>Introduction</title>
 
         <para>
-            The MVC components in Zend Framework utilize a Front Controller,
+            The <acronym>MVC</acronym> components in Zend Framework utilize a Front Controller,
             which means that all requests to a given site will go through a
             single entry point. As a result, all exceptions bubble up to the
             Front Controller eventually, allowing the developer to handle them
@@ -16,7 +16,7 @@
 
         <para>
             However, exception messages and backtrace information often contain
-            sensitive system information, such as SQL statements, file
+            sensitive system information, such as <acronym>SQL</acronym> statements, file
             locations, and more. To help protect your site, by default
             <classname>Zend_Controller_Front</classname> catches all exceptions and
             registers them with the response object; in turn, by default, the
@@ -28,7 +28,7 @@
         <title>Handling Exceptions</title>
 
         <para>
-            Several mechanisms are built in to the MVC components already to
+            Several mechanisms are built in to the <acronym>MVC</acronym> components already to
             allow you to handle exceptions.
         </para>
 
@@ -61,7 +61,7 @@
             </listitem>
 
             <listitem>
-                <para><classname>Zend_Controller_Front::throwExceptions()</classname></para>
+                <para><methodname>Zend_Controller_Front::throwExceptions()</methodname></para>
 
                 <para>
                     By passing a boolean true value to this method, you can tell
@@ -88,7 +88,7 @@ try {
 
             <listitem>
                 <para>
-                    <classname>Zend_Controller_Response_Abstract::renderExceptions()</classname>
+                    <methodname>Zend_Controller_Response_Abstract::renderExceptions()</methodname>
                 </para>
 
                 <para>
@@ -102,14 +102,14 @@ try {
 
             <listitem>
                 <para>
-                    <classname>Zend_Controller_Front::returnResponse()</classname> and
-                    <classname>Zend_Controller_Response_Abstract::isException()</classname>.
+                    <methodname>Zend_Controller_Front::returnResponse()</methodname> and
+                    <methodname>Zend_Controller_Response_Abstract::isException()</methodname>.
                 </para>
 
                 <para>
                     By passing a boolean true to
-                    <classname>Zend_Controller_Front::returnResponse()</classname>,
-                    <classname>Zend_Controller_Front::dispatch()</classname> will not render the
+                    <methodname>Zend_Controller_Front::returnResponse()</methodname>,
+                    <methodname>Zend_Controller_Front::dispatch()</methodname> will not render the
                     response, but instead return it. Once you have the response,
                     you may then test to see if any exceptions were trapped using
                     its <methodname>isException()</methodname> method, and retrieving the
@@ -131,7 +131,7 @@ if ($response->isException()) {
 
                 <para>
                     The primary advantage this method offers over
-                    <classname>Zend_Controller_Front::throwExceptions()</classname> is to
+                    <methodname>Zend_Controller_Front::throwExceptions()</methodname> is to
                     allow you to conditionally render the response after
                     handling the exception. This will catch any exception in the
                     controller chain, unlike the error handler plugin.
@@ -144,7 +144,7 @@ if ($response->isException()) {
         <title>MVC Exceptions You May Encounter</title>
 
         <para>
-            The various MVC components -- request, router, dispatcher, action
+            The various <acronym>MVC</acronym> components -- request, router, dispatcher, action
             controller, and response objects -- may each throw exceptions on
             occasion. Some exceptions may be conditionally overridden, and
             others are used to indicate the developer may need to consider
@@ -156,7 +156,7 @@ if ($response->isException()) {
         <itemizedlist>
             <listitem>
                 <para>
-                    <classname>Zend_Controller_Dispatcher::dispatch()</classname> will,
+                    <methodname>Zend_Controller_Dispatcher::dispatch()</methodname> will,
                     by default, throw an exception if an invalid controller is
                     requested. There are two recommended ways to deal with
                     this.
@@ -164,7 +164,9 @@ if ($response->isException()) {
 
                 <itemizedlist>
                     <listitem>
-                        <para>Set the <code>useDefaultControllerAlways</code> parameter.</para>
+                        <para>
+                            Set the <property>useDefaultControllerAlways</property> parameter.
+                        </para>
 
                         <para>
                             In your front controller, or your dispatcher, add
@@ -206,7 +208,7 @@ $dispatcher->setParam('useDefaultControllerAlways', true);
 
             <listitem>
                 <para>
-                    <classname>Zend_Controller_Action::__call()</classname> will throw a
+                    <methodname>Zend_Controller_Action::__call()</methodname> will throw a
                     <classname>Zend_Controller_Action_Exception</classname> if it cannot
                     dispatch a non-existent action to a method. Most likely,
                     you will want to use some default action in the controller
@@ -284,7 +286,7 @@ class My_Controller_Dispatcher extends Zend_Controller_Dispatcher
                         <para>
                             This method is nice because you can transparently
                             alter the action prior to final dispatch. However,
-                            it also means that typos in the URL may still
+                            it also means that typos in the <acronym>URL</acronym> may still
                             dispatch correctly, which is not great for search
                             engine optimization.
                         </para>
@@ -293,9 +295,9 @@ class My_Controller_Dispatcher extends Zend_Controller_Dispatcher
                     <listitem>
                         <para>
                             Use
-                            <classname>Zend_Controller_Action::preDispatch()</classname>
+                            <methodname>Zend_Controller_Action::preDispatch()</methodname>
                             or
-                            <classname>Zend_Controller_Plugin_Abstract::preDispatch()</classname>
+                            <methodname>Zend_Controller_Plugin_Abstract::preDispatch()</methodname>
                             to identify invalid actions.
                         </para>
 

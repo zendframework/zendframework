@@ -58,7 +58,7 @@
 
                 <para>
                     By default, <classname>Zend_Controller_Request_Http</classname> is
-                    used, which provides access to the entire HTTP request
+                    used, which provides access to the entire <acronym>HTTP</acronym> request
                     environment.
                 </para>
             </listitem>
@@ -78,22 +78,22 @@
 
                 <para>
                     The default router,
-                    <classname>Zend_Controller_Router_Rewrite</classname>, takes a URI
-                    endpoint as specified in
+                    <classname>Zend_Controller_Router_Rewrite</classname>, takes a
+                    <acronym>URI</acronym> endpoint as specified in
                     <classname>Zend_Controller_Request_Http</classname> and decomposes it
                     into a controller, action, and parameters based on the path
-                    information in the url. As an example, the URL
+                    information in the url. As an example, the <acronym>URL</acronym>
                     <filename>http://localhost/foo/bar/key/value</filename> would be
-                    decoded to use the <code>foo</code> controller,
-                    <code>bar</code> action, and specify a parameter
-                    <code>key</code> with a value of <code>value</code>.
+                    decoded to use the <emphasis>foo</emphasis> controller,
+                    <emphasis>bar</emphasis> action, and specify a parameter
+                    <emphasis>key</emphasis> with a value of <emphasis>value</emphasis>.
                 </para>
 
                 <para>
                     <classname>Zend_Controller_Router_Rewrite</classname> can also be used
                     to match arbitrary paths; see <link
-                        linkend="zend.controller.router">the router
-                        documentation</link> for more information.
+                        linkend="zend.controller.router">the router documentation</link>
+                    for more information.
                 </para>
             </listitem>
 
@@ -102,7 +102,7 @@
                     <classname>Zend_Controller_Dispatcher_Interface</classname> is used to
                     define dispatchers. Dispatching is the process of pulling
                     the controller and action from the request object and
-                    mapping them to a controller file/class and action method in
+                    mapping them to a controller file (or class) and action method in
                     the controller class. If the controller or action do not
                     exist, it handles determining default controllers and
                     actions to dispatch.
@@ -116,8 +116,8 @@
                     is reset at any point, the loop will be repeated, calling
                     whatever action is currently set in the request object. The
                     first time the loop finishes with the request object's
-                    dispatched status set (boolean true), it will finish
-                    processing.
+                    dispatched status set (<type>Boolean</type> <constant>TRUE</constant>),
+                    it will finish processing.
                 </para>
 
                 <para>
@@ -127,8 +127,8 @@
                     Controller, and action methods as camelCasedMethods ending
                     in the word Action:
                     <methodname>FooController::barAction()</methodname>. In this case, the
-                    controller would be referred to as <code>foo</code> and
-                    the action as <code>bar</code>.
+                    controller would be referred to as <emphasis>foo</emphasis> and
+                    the action as <emphasis>bar</emphasis>.
                 </para>
 
                 <note>
@@ -164,7 +164,7 @@
                 <para>
                     <classname>Zend_Controller_Action</classname> is the base action
                     controller component. Each controller is a single class
-                    that extends the <classname>Zend_Controller_Action class</classname>
+                    that extends the <classname>Zend_Controller_Action</classname> class
                     and should contain one or more action methods.
                 </para>
             </listitem>
@@ -180,7 +180,7 @@
                 <para>
                     The default response class is
                     <classname>Zend_Controller_Response_Http</classname>, which is
-                    suitable for use in an HTTP environment.
+                    suitable for use in an <acronym>HTTP</acronym> environment.
                 </para>
             </listitem>
         </itemizedlist>
@@ -190,8 +190,8 @@
         request is received by <classname>Zend_Controller_Front</classname>, which in turn
         calls <classname>Zend_Controller_Router_Rewrite</classname> to determine which
         controller (and action in that controller) to dispatch.
-        <classname>Zend_Controller_Router_Rewrite</classname> decomposes the URI in order
-        to set the controller and action names in the request.
+        <classname>Zend_Controller_Router_Rewrite</classname> decomposes the <acronym>URI</acronym>
+        in order to set the controller and action names in the request.
         <classname>Zend_Controller_Front</classname> then enters a dispatch loop. It
         calls <classname>Zend_Controller_Dispatcher_Standard</classname>, passing it the
         request, to dispatch to the controller and action specified in the

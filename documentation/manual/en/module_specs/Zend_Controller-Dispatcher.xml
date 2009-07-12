@@ -14,8 +14,8 @@
             action of that controller. If any of the module, controller, or
             action are not found, it will use default values for them.
             <classname>Zend_Controller_Dispatcher_Standard</classname> specifies
-            <code>index</code> for each of the controller and action defaults
-            and <code>default</code> for the module default value, but allows
+            <emphasis>index</emphasis> for each of the controller and action defaults
+            and <emphasis>default</emphasis> for the module default value, but allows
             the developer to change the default values for each using the
             <methodname>setDefaultController()</methodname>,
             <methodname>setDefaultAction()</methodname>, and
@@ -30,8 +30,8 @@
                 your default module namespaced as well (the default
                 configuration is that the default module is
                 <emphasis>not</emphasis> namespaced). As of 1.5.0, you can now
-                do so by specifying the <code>prefixDefaultModule</code> as true
-                in either the front controller or your dispatcher:
+                do so by specifying the <property>prefixDefaultModule</property> as
+                <constant>TRUE</constant> in either the front controller or your dispatcher:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -58,7 +58,7 @@ $dispatcher->setParam('prefixDefaultModule', true);
         <para>
             At the beginning of each iteration, it sets a flag in the request
             object indicating that the action has been dispatched. If an action
-            or pre/postDispatch plugin resets that flag, the dispatch loop will
+            or pre or postDispatch plugin resets that flag, the dispatch loop will
             continue and attempt to dispatch the new request. By changing the
             controller and/or action in the request and resetting the dispatched
             flag, the developer may define a chain of requests to perform.
@@ -110,7 +110,7 @@ public function bazAction()
             The dispatcher needs a variety of data in order to do its work - it
             needs to know how to format controller and action names, where to
             look for controller class files, whether or not a provided module
-            name is valid, and an API for determining if a given request is even
+            name is valid, and an <acronym>API</acronym> for determining if a given request is even
             dispatchable based on the other information available.
         </para>
 

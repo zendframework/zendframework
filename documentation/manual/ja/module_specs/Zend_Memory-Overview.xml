@@ -89,7 +89,7 @@ $loadedFiles[$index3]->value[$charIndex] = '_';
 
         <sect3 id="zend.memory.theory-of-operation.manager">
 
-            <title>メモリマネージャr</title>
+            <title>メモリマネージャ</title>
 
             <para>
                 メモリマネージャは、アプリケーションからの要求に応じて

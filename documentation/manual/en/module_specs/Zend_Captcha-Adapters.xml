@@ -152,7 +152,7 @@
             <listitem><para>
                 <methodname>setGcFreq($gcFreq)</methodname> and <methodname>getGcFreg()</methodname>
                 allow you to specify how frequently garbage collection should
-                run. Garbage collection will run every <emphasis>1/$gcFreq</emphasis>
+                run. Garbage collection will run every <command>1/$gcFreq</command>
                 calls. The default is 100.
             </para></listitem>
 

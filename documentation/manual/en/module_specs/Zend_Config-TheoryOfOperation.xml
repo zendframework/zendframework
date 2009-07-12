@@ -35,7 +35,7 @@
     <para>
         By default, configuration data made available through <classname>Zend_Config</classname> are
         read-only, and an assignment (e.g.,
-        <command>$config->database->host = 'example.com'</command>)
+        <command>$config->database->host = 'example.com';</command>)
         results in a thrown exception. This default behavior may be overridden through the
         constructor, however, to allow modification of data values. Also, when modifications are
         allowed, <classname>Zend_Config</classname> supports unsetting of values (i.e.
@@ -85,7 +85,7 @@
         object using the <methodname>merge()</methodname> function. For example, given
         <varname>$config</varname> and <varname>$localConfig</varname>, you can merge data from
         <varname>$localConfig</varname> to <varname>$config</varname> using
-        <methodname>$config->merge($localConfig)</methodname>. The items in
+        <command>$config->merge($localConfig);</command>. The items in
         <varname>$localConfig</varname> will override any items with the same name in
         <varname>$config</varname>.
     </para>

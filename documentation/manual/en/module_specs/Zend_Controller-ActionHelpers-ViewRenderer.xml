@@ -73,7 +73,7 @@
             <para>
                 The <emphasis>ViewRenderer</emphasis> is enabled by default. You may
                 disable it via the front controller <emphasis>noViewRenderer</emphasis>
-                param (<methodname>$front->setParam('noViewRenderer', true)</methodname>) or
+                param (<command>$front->setParam('noViewRenderer', true);</command>) or
                 removing the helper from the helper broker stack
                 (<methodname>Zend_Controller_Action_HelperBroker::removeHelper('viewRenderer')</methodname>).
             </para>

@@ -47,7 +47,7 @@
         the parameter of the <classname>Zend_Config</classname> object via the parameter
         accessor (<emphasis>-&gt;</emphasis>). To create a section in the root or to
         create a branch, you just create a new array
-        ("<command>$config-&gt;branch = array()</command>"). To define which section
+        ("<command>$config-&gt;branch = array();</command>"). To define which section
         extends another one, you call the <methodname>setExtend()</methodname> method
         on the root <classname>Zend_Config</classname> object.
     </para>

@@ -277,13 +277,13 @@ $front->setParam('noViewRenderer', true);
 
         <itemizedlist>
             <listitem>
-                <para>Calls to <methodname>$this->render()</methodname></para>
+                <para>Calls to <command>$this->render();</command></para>
             </listitem>
             <listitem>
-                <para>Calls to <methodname>$this->_forward()</methodname></para>
+                <para>Calls to <command>$this->_forward();</command></para>
             </listitem>
             <listitem>
-                <para>Calls to <methodname>$this->_redirect()</methodname></para>
+                <para>Calls to <command>$this->_redirect();</command></para>
             </listitem>
             <listitem>
                 <para>Calls to the <classname>Redirector</classname> action helper</para>
@@ -339,7 +339,7 @@ public function preDispatch()
                     If you're calling <methodname>render()</methodname> with arguments, and
                     not doing any processing afterwards or rendering multiple
                     view scripts, you can change these calls to read
-                    <methodname>$this->_helper->viewRenderer()</methodname>.
+                    <command>$this->_helper->viewRenderer();</command>.
                 </para>
             </listitem>
         </itemizedlist>

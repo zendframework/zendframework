@@ -33,7 +33,7 @@
         <para>
             By default, the key separator character is the period character
             ("<emphasis>.</emphasis>"). This can be changed, however, by changing the
-            <varname>$options</varname> key <emphasis>'nestSeparator'</emphasis> when constructing
+            <varname>$options</varname> key <property>nestSeparator</property> when constructing
             the <classname>Zend_Config_Ini</classname> object. For example:
         </para>
 
@@ -117,12 +117,12 @@ echo $config->database->params->dbname; // prints "dbname"
                     </entry>
                 </row>
                 <row>
-                    <entry><varname>$options = false</varname></entry>
+                    <entry><varname>$options</varname> (default <constant>FALSE</constant>)</entry>
                     <entry>Options array. The following keys are supported:
                         <itemizedlist>
                             <listitem>
                                 <para>
-                                    <emphasis>allowModifications</emphasis>: Set to
+                                    <property>allowModifications</property>: Set to
                                     <constant>TRUE</constant> to allow
                                     subsequent modification of loaded file. Defaults to
                                     <constant>NULL</constant>
@@ -130,7 +130,7 @@ echo $config->database->params->dbname; // prints "dbname"
                             </listitem>
                             <listitem>
                                 <para>
-                                    <emphasis>nestSeparator</emphasis>: Set to the character to be
+                                    <property>nestSeparator</property>: Set to the character to be
                                     used as the nest separator. Defaults to "."
                                 </para>
                             </listitem>

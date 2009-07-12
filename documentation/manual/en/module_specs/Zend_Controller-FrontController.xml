@@ -279,7 +279,8 @@ Zend_Controller_Front::run('../application/controllers');
 
             <listitem>
                 <para>
-                    <methodname>(set|get)DefaultControllerName()</methodname> let you
+                    <methodname>setDefaultControllerName()</methodname> and
+                    <methodname>getDefaultControllerName()</methodname> let you
                     specify a different name to use for the default controller
                     ('index' is used otherwise) and retrieve the current value.
                     They proxy to <link linkend="zend.controller.dispatcher">the dispatcher</link>.
@@ -288,7 +289,8 @@ Zend_Controller_Front::run('../application/controllers');
 
             <listitem>
                 <para>
-                    <methodname>(set|get)DefaultAction()</methodname> let you specify a
+                    <methodname>setDefaultAction()</methodname> and
+                    <methodname>getDefaultAction()</methodname> let you specify a
                     different name to use for the default action ('index' is
                     used otherwise) and retrieve the current value. They proxy
                     to <link linkend="zend.controller.dispatcher">the dispatcher</link>.
@@ -297,7 +299,8 @@ Zend_Controller_Front::run('../application/controllers');
 
             <listitem>
                 <para>
-                    <methodname>(set|get)Request()</methodname> let you specify <link
+                    <methodname>setRequest()</methodname> and
+                    <methodname>getRequest()</methodname> let you specify <link
                         linkend="zend.controller.request">the request</link>
                     class or object to use during the dispatch process and to
                     retrieve the current object. When setting the request
@@ -308,7 +311,8 @@ Zend_Controller_Front::run('../application/controllers');
 
             <listitem>
                 <para>
-                    <methodname>(set|get)Router()</methodname> let you specify <link
+                    <methodname>setRouter()</methodname>
+                    <methodname>getRouter()</methodname> let you specify <link
                         linkend="zend.controller.router">the router</link>
                     class or object to use during the dispatch process and to
                     retrieve the current object. When setting the router
@@ -325,7 +329,8 @@ Zend_Controller_Front::run('../application/controllers');
 
             <listitem>
                 <para>
-                    <methodname>(set|get)BaseUrl()</methodname> let you specify <link
+                    <methodname>setBaseUrl()</methodname> and
+                    <methodname>getBaseUrl()</methodname> let you specify <link
                         linkend="zend.controller.request.http.baseurl">the base
                         URL</link> to strip when routing requests and to
                     retrieve the current value. The value is provided to the
@@ -335,7 +340,8 @@ Zend_Controller_Front::run('../application/controllers');
 
             <listitem>
                 <para>
-                    <methodname>(set|get)Dispatcher()</methodname> let you specify <link
+                    <methodname>setDispatcher()</methodname> and
+                    <methodname>getDispatcher()</methodname> let you specify <link
                         linkend="zend.controller.dispatcher">the
                         dispatcher</link> class or object to use during the
                     dispatch process and retrieve the current object. When
@@ -353,7 +359,8 @@ Zend_Controller_Front::run('../application/controllers');
 
             <listitem>
                 <para>
-                    <methodname>(set|get)Response()</methodname> let you specify <link
+                    <methodname>setResponse()</methodname> and
+                    <methodname>getResponse()</methodname> let you specify <link
                         linkend="zend.controller.response">the response</link>
                     class or object to use during the dispatch process and to
                     retrieve the current object. When setting the response

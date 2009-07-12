@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16373 -->
+<!-- EN-Revision: 16552 -->
 <sect1 id="zend.auth.introduction">
 
     <title>導入</title>
@@ -456,7 +456,7 @@ Zend_Auth::getInstance()->clearIdentity();
             アダプタクラスを直接使用するとは、アダプタオブジェクトの設定と準備を行い、
             その <methodname>authenticate()</methodname> メソッドをコールするということです。
             アダプタ固有の詳細情報については、各アダプタのドキュメントで説明します。
-            以下の例は、<emphasis>MyAuthAdapter</emphasis> を直接使用するものです。
+            以下の例は、<classname>MyAuthAdapter</classname> を直接使用するものです。
         </para>
 
         <programlisting language="php"><![CDATA[

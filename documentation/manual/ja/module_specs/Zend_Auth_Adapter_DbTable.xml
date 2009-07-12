@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16050 -->
+<!-- EN-Revision: 16652 -->
 <sect1 id="zend.auth.adapter.dbtable">
     <title>データベースのテーブルでの認証</title>
     <sect2 id="zend.auth.adapter.dbtable.introduction">
@@ -22,29 +22,29 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>tableName</emphasis>:
+                    <property>tableName</property>:
                     これはデータベースのテーブル名です。証明情報が含まれ、
                     認証クエリの問い合わせ先となるテーブル名を指定します。
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis>identityColumn</emphasis>:
+                    <property>identityColumn</property>:
                     これは、ID を表すデータベーステーブルのカラム名です。
                     このカラムには、ユーザ名やメールアドレスのような一意な値が含まれている必要があります。
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis>credentialColumn</emphasis>:
+                    <property>credentialColumn</property>:
                     これは、証明情報を表すデータベーステーブルのカラム名です。
                     単純な ID およびパスワードによる認証方式では、この値がパスワードに対応します。
-                    <emphasis>credentialTreatment</emphasis> オプションも参照ください。
+                    <property>credentialTreatment</property> オプションも参照ください。
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis>credentialTreatment</emphasis>:
+                    <property>credentialTreatment</property>:
                     多くの場合、パスワードやその他機密情報は、何らかの関数やアルゴリズムで
                     暗号化、ハッシュ化、符号化、ぼかしなどの処理が行われています。
                     これらの処理を表すパラメータつきの文字列、たとえば

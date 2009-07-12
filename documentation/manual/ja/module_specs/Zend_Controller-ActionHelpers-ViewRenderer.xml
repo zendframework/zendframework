@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16505 -->
+<!-- EN-Revision: 16674 -->
 <sect3 id="zend.controller.actionhelpers.viewrenderer">
     <title>ViewRenderer</title>
 
@@ -73,7 +73,7 @@
                 <emphasis>ViewRenderer</emphasis> はデフォルトで有効になっています。
                 これを無効にするには、フロントコントローラのパラメータ
                 <emphasis>noViewRenderer</emphasis> を指定する
-                (<methodname>$front->setParam('noViewRenderer', true)</methodname>) か、
+                (<command>$front->setParam('noViewRenderer', true);</command>) か、
                 あるいはヘルパーブローカからヘルパーを削除
                 (<methodname>Zend_Controller_Action_HelperBroker::removeHelper('viewRenderer')</methodname>)
                 します。

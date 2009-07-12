@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16470 -->
+<!-- EN-Revision: 16674 -->
 <sect1 id="zend.config.adapters.ini">
     <title>Zend_Config_Ini</title>
 
@@ -39,7 +39,7 @@
             しかし、これは変更することもできます。変更するには、
             <classname>Zend_Config_Ini</classname> オブジェクトの作成時に
             <varname>$options</varname> のキー
-            <emphasis>'nestSeparator'</emphasis> を設定します。たとえばこのようになります。
+            <property>nestSeparator</property> を設定します。たとえばこのようになります。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -125,11 +125,11 @@ echo $config->database->params->dbname; // "dbname" と出力します
                     </entry>
                 </row>
                 <row>
-                    <entry><varname>$options = false</varname></entry>
+                    <entry><varname>$options</varname> (デフォルトは <constant>FALSE</constant>)</entry>
                     <entry>オプションの配列。以下のキーをサポートしています。
                         <itemizedlist>
-                            <listitem><para><emphasis>allowModifications</emphasis>: <constant>TRUE</constant> を指定すると、読み込んだファイルを後で変更することができます。デフォルトは <constant>FALSE</constant> です。</para></listitem>
-                            <listitem><para><emphasis>nestSeparator</emphasis>: ネストの区切り文字として使用する文字を設定します。デフォルトは "." です。</para></listitem>
+                            <listitem><para><property>allowModifications</property>: <constant>TRUE</constant> を指定すると、読み込んだファイルを後で変更することができます。デフォルトは <constant>FALSE</constant> です。</para></listitem>
+                            <listitem><para><property>nestSeparator</property>: ネストの区切り文字として使用する文字を設定します。デフォルトは "." です。</para></listitem>
                         </itemizedlist>
                     </entry>
                 </row>

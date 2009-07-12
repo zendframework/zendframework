@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16393 -->
+<!-- EN-Revision: 16674 -->
 <sect1 id="zend.config.theory_of_operation">
     <title>動作原理</title>
 
@@ -41,7 +41,7 @@
     <para>
         デフォルトでは、<classname>Zend_Config</classname>
         で利用できる設定データは読み込み専用です。代入
-        (<command>$config->database->host = 'example.com'</command> など)
+        (<command>$config->database->host = 'example.com';</command> など)
         を行おうとすると例外がスローされます。しかし、
         コンストラクタでこの振る舞いを変更し、データの変更を許可することも可能です。
         また、変更を許可した場合には、<classname>Zend_Config</classname>
@@ -95,7 +95,7 @@
         <methodname>merge()</methodname> 関数でそれをひとつにまとめることができます。
         たとえば、<varname>$config</varname> と <varname>$localConfig</varname>
         がある場合に <varname>$localConfig</varname> のデータを <varname>$config</varname>
-        に統合するには <methodname>$config->merge($localConfig)</methodname> とします。
+        に統合するには <command>$config->merge($localConfig);</command> とします。
         <varname>$localConfig</varname> の中に <varname>$config</varname>
         と同名の項目がある場合は、もとの値は上書きされます。
     </para>

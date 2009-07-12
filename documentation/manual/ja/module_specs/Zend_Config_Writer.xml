@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16393 -->
+<!-- EN-Revision: 16674 -->
 <sect1 id="zend.config.writer.introduction">
     <title>Zend_Config_Writer</title>
     <para>
@@ -49,7 +49,7 @@
         パラメータのアクセサ (<emphasis>-&gt;</emphasis>) で <classname>Zend_Config</classname>
         オブジェクトのパラメータを設定します。
         ルート内のセクションやブランチを作成するには、新規配列を作成します
-        ("<command>$config-&gt;branch = array()</command>")。
+        ("<command>$config-&gt;branch = array();</command>")。
         セクションの継承関係を定義するには、ルート
         <classname>Zend_Config</classname> オブジェクトの
         <methodname>setExtend()</methodname> メソッドをコールします。

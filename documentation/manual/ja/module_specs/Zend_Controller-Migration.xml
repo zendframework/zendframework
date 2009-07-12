@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16664 -->
+<!-- EN-Revision: 16674 -->
 <sect1 id="zend.controller.migration">
     <title>以前のバージョンからの移行</title>
 
@@ -268,9 +268,9 @@ $front->setParam('noViewRenderer', true);
         </para>
 
         <itemizedlist>
-            <listitem><para><methodname>$this->render()</methodname> のコール</para></listitem>
-            <listitem><para><methodname>$this->_forward()</methodname> のコール</para></listitem>
-            <listitem><para><methodname>$this->_redirect()</methodname> のコール</para></listitem>
+            <listitem><para><command>$this->render();</command> のコール</para></listitem>
+            <listitem><para><command>$this->_forward();</command> のコール</para></listitem>
+            <listitem><para><command>$this->_redirect();</command> のコール</para></listitem>
             <listitem><para><classname>Redirector</classname> アクションヘルパーのコール</para></listitem>
         </itemizedlist>
 
@@ -321,7 +321,7 @@ public function preDispatch()
                     引数つきで <methodname>render()</methodname> をコールしていて、
                     その後に何か処理をしたり複数のビュースクリプトを実行したりしていない場合は、
                     その行を
-                    <methodname>$this->_helper->viewRenderer()</methodname>
+                    <command>$this->_helper->viewRenderer();</command>
                     のように変更します。
                 </para>
             </listitem>

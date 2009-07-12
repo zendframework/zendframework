@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16664 -->
+<!-- EN-Revision: 16674 -->
 <sect1 id="zend.controller.front">
     <title>フロントコントローラ</title>
 
@@ -269,7 +269,8 @@ Zend_Controller_Front::run('../application/controllers');
 
             <listitem>
                 <para>
-                    <methodname>(set|get)DefaultControllerName()</methodname>
+                    <methodname>setDefaultControllerName()</methodname> および
+                    <methodname>getDefaultControllerName()</methodname>
                     で、デフォルトのコントローラとして使用する名前を指定したり
                     (指定しなければ 'index' となります) 現在の設定を取得したりできます。
                     これらメソッドは、<link linkend="zend.controller.dispatcher">
@@ -279,7 +280,8 @@ Zend_Controller_Front::run('../application/controllers');
 
             <listitem>
                 <para>
-                    <methodname>(set|get)DefaultAction()</methodname>
+                    <methodname>setDefaultAction()</methodname> および
+                    <methodname>getDefaultAction()</methodname>
                     で、デフォルトのアクションとして使用する名前を指定したり
                     (指定しなければ 'index' となります) 現在の設定を取得したりできます。
                     これらのメソッドは <link linkend="zend.controller.dispatcher">
@@ -289,7 +291,8 @@ Zend_Controller_Front::run('../application/controllers');
 
             <listitem>
                 <para>
-                    <methodname>(set|get)Request()</methodname> は、ディスパッチ処理で使用する
+                    <methodname>setRequest()</methodname> および
+                    <methodname>getRequest()</methodname> は、ディスパッチ処理で使用する
                     <link linkend="zend.controller.request">リクエスト</link>
                     クラスやオブジェクトを指定したり、現在のオブジェクトを取得したりします。
                     リクエストオブジェクトを指定するときに、クラス名を指定することができます。
@@ -299,7 +302,8 @@ Zend_Controller_Front::run('../application/controllers');
 
             <listitem>
                 <para>
-                    <methodname>(set|get)Router()</methodname> は、ディスパッチ処理で使用する
+                    <methodname>setRouter()</methodname> および
+                    <methodname>getRouter()</methodname> は、ディスパッチ処理で使用する
                     <link linkend="zend.controller.router">ルータ</link>
                     クラスやオブジェクトを指定したり、現在のオブジェクトを取得したりします。
                     ルータオブジェクトを指定するときに、クラス名を指定することができます。
@@ -314,7 +318,8 @@ Zend_Controller_Front::run('../application/controllers');
 
             <listitem>
                 <para>
-                    <methodname>(set|get)BaseUrl()</methodname> は、リクエストのルーティング時に URL から取り除く
+                    <methodname>setBaseUrl()</methodname> および
+                    <methodname>getBaseUrl()</methodname> は、リクエストのルーティング時に URL から取り除く
                     <link linkend="zend.controller.request.http.baseurl">基底 URL</link>
                     を指定したり、現在の値を取得したりします。
                     この値は、ルーティングの直前にリクエストオブジェクトに渡されます。
@@ -323,7 +328,8 @@ Zend_Controller_Front::run('../application/controllers');
 
             <listitem>
                 <para>
-                    <methodname>(set|get)Dispatcher()</methodname> は、ディスパッチ処理で使用する
+                    <methodname>setDispatcher()</methodname> および
+                    <methodname>getDispatcher()</methodname> は、ディスパッチ処理で使用する
                     <link linkend="zend.controller.dispatcher">ディスパッチャ</link>
                     クラスやオブジェクトを指定したり、現在のオブジェクトを取得したりします。
                     ディスパッチャオブジェクトを指定するときに、クラス名を指定することができます。
@@ -338,7 +344,8 @@ Zend_Controller_Front::run('../application/controllers');
 
             <listitem>
                 <para>
-                    <methodname>(set|get)Response()</methodname> は、ディスパッチ処理で使用する
+                    <methodname>setResponse()</methodname> および
+                    <methodname>getResponse()</methodname> は、ディスパッチ処理で使用する
                     <link linkend="zend.controller.response">レスポンス</link>
                     クラスやオブジェクトを指定したり、現在のオブジェクトを取得したりします。
                     レスポンスオブジェクトを指定するときに、クラス名を指定することができます。

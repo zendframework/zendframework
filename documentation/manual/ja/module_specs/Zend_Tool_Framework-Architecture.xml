@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16408 -->
+<!-- EN-Revision: 16656 -->
 <sect1 id="zend.tool.framework.architecture">
     <title>アーキテクチャ</title>
 
@@ -8,7 +8,7 @@
         <title>レジストリ</title>
 
         <para>
-            <code>include_path</code>のどこからでもプロバイダとマニフェストが由来するかもしれないので、
+            <property>include_path</property>のどこからでもプロバイダとマニフェストが由来するかもしれないので、
             ツール・チェーンのいろいろな部分へのアクセスを単純化するためにレジストリが提供されます。
             このレジストリはレジストリを認識するコンポーネントに注入されます。
             そして、それから必要に応じてそれは彼らから依存性を引き出すかもしれません。
@@ -113,8 +113,8 @@ abstract class Zend_Tool_Framework_Provider_Abstract
         <title>ローダ</title>
 
         <para>
-            ローダの目的は、<code>Zend_Tool_Framework_Provider_Interface</code>か
-            <code>Zend_Tool_Framework_Manifest_Interface</code>を実装するクラスを含む
+            ローダの目的は、<classname>Zend_Tool_Framework_Provider_Interface</classname>か
+            <classname>Zend_Tool_Framework_Manifest_Interface</classname>を実装するクラスを含む
             プロバイダとマニフェスト・ファイルを見つけることです。
             一旦これらのファイルがローダによって見つかると、
             プロバイダはプロバイダ・リポジトリにロードされ、
@@ -139,16 +139,16 @@ abstract class Zend_Tool_Framework_Loader_Abstract
 ]]></programlisting>
 
         <para>
-            <code>_getFiles()</code>メソッドは、ファイル（絶対パス）の配列を返さなければなりません。
-            ZFで供給されるビルトイン・ローダは、インクルードパス・ローダと呼ばれます。
+            <methodname>_getFiles()</methodname>メソッドは、ファイル（絶対パス）の配列を返さなければなりません。
+            Zend Frameworkで供給されるビルトイン・ローダは、インクルードパス・ローダと呼ばれます。
             デフォルトで、ツーリング・フレームワークは、
             プロバイダまたはマニフェスト・メタデータ・オブジェクトを含むかもしれないファイルを見つけるために、
             include_pathベースのローダを使います。
             他のオプションが全く無くても、
-            <code>Zend_Tool_Framework_Loader_IncludePathLoader</code>はインクルードパスの中で
-            <code>Mainfest.php</code>、<code>Tool.php</code>または<code>Provider.php</code>で
+            <classname>Zend_Tool_Framework_Loader_IncludePathLoader</classname>はインクルードパスの中で
+            <filename>Mainfest.php</filename>、<filename>Tool.php</filename>または<filename>Provider.php</filename>で
             終わるファイルを探します
-            <code>Zend_Tool_Framework_Loader_Abstract</code>の<code>load()</code>メソッドによって一旦見つかると、
+            <classname>Zend_Tool_Framework_Loader_Abstract</classname>の<methodname>load()</methodname>メソッドによって一旦見つかると、
             それらがサポートされたインターフェースのいずれかを実装するかどうか判定するためにそれらはテストされます。
             もし実装していれば、見つかったクラスのインスタンスがインスタンス化されます、
             そして、それは固有のリポジトリを付加されています。
@@ -170,8 +170,8 @@ class Zend_Tool_Framework_Loader_IncludePathLoader
 ]]></programlisting>
 
         <para>
-            ご覧の通り、インクルードパス・ローダは、<code>$_filterAcceptFilePattern</code>にマッチし、
-            <code>$_filterDenyDirectoryPattern</code>にマッチしないファイルを求めて、
+            ご覧の通り、インクルードパス・ローダは、<varname>$_filterAcceptFilePattern</varname>にマッチし、
+            <varname>$_filterDenyDirectoryPattern</varname>にマッチしないファイルを求めて、
             すべてのinclude_pathsを検索します。
         </para>
     </sect2>
@@ -185,9 +185,9 @@ class Zend_Tool_Framework_Loader_IncludePathLoader
         </para>
 
         <para>
-            空の<code>Zend_Tool_Framework_Manifest_Interface</code>を実装して、
-            <code>Zend_Tool_Framework_Manifest_Metadata</code>を実装する
-            オブジェクトの配列を返す<code>getMetadata()</code>メソッドを提供しさえすれば、
+            空の<classname>Zend_Tool_Framework_Manifest_Interface</classname>を実装して、
+            <classname>Zend_Tool_Framework_Manifest_Metadata</classname>を実装する
+            オブジェクトの配列を返す<methodname>getMetadata()</methodname>メソッドを提供しさえすれば、
             メタデータをマニフェスト・リポジトリにもたらすことができます。
         </para>
 
@@ -200,7 +200,7 @@ interface Zend_Tool_Framework_Manifest_Interface
 
         <para>
             下記で定義されたローダによって、
-            メタデータ・オブジェクトはマニフェスト・リポジトリ(<code>Zend_Tool_Framework_Manifest_Repository</code>)にロードされます。
+            メタデータ・オブジェクトはマニフェスト・リポジトリ(<classname>Zend_Tool_Framework_Manifest_Repository</classname>)にロードされます。
             すべてのプロバイダがプロバイダ・リポジトリにロードされるとわかったあと、マニフェストは処理されます。
             これによって、何が現在プロバイダ・リポジトリ内部にあるかに基づくメタデータ・オブジェクトをマニフェストは作成することができます。
         </para>
@@ -208,7 +208,7 @@ interface Zend_Tool_Framework_Manifest_Interface
         <para>
             メタデータを記述するために用いることができる
             多少の異なるメタデータ・クラスがあります。
-            <code>Zend_Tool_Framework_Manifest_Metadata</code>は、
+            <classname>Zend_Tool_Framework_Manifest_Metadata</classname>は、
             基底メタデータ・オブジェクトです。
             以下のコード・スニペットによってわかるように、
             基底メタデータ・クラスは事実上かなり軽量で抽象的です:
@@ -233,7 +233,7 @@ class Zend_Tool_Framework_Metadata_Basic
 
         <para>
             より分化したメタデータを記述するために同様に他のビルトイン・メタデータ・クラスがあります:
-            <code>ActionMetadata</code>及び<code>ProviderMetadata</code>。
+            <classname>ActionMetadata</classname>及び<classname>ProviderMetadata</classname>。
             これらのクラスは、アクションまたはプロバイダのいずれかに特有なメタデータをより詳細に記述する助けになります。
             そして、参照はそれぞれアクションまたはプロバイダへの参照であることが期待されます。
             これらのクラスは、以下のコード・スニペットで記述されます。
@@ -270,15 +270,15 @@ class Zend_Tool_Framework_Manifest_ProviderMetadata
         <para>
             これらのクラスでの'Type'は、
             オブジェクトが責を負うべきメタデータのタイプを記述するのに用いられます。
-            <code>ActionMetadata</code>のケースでは、タイプは'Action'です。
-            そして逆に、<code>ProviderMetadata</code>の場合は、タイプは'Provider'です。
+            <classname>ActionMetadata</classname>のケースでは、タイプは'Action'です。
+            そして逆に、<classname>ProviderMetadata</classname>の場合は、タイプは'Provider'です。
             これらのメタデータ・タイプは、
-            それらがこの新しいメタデータで参照しているオブジェクト(<code>->getReference()</code>)だけでなく、
+            それらがこの新しいメタデータで参照しているオブジェクト(<methodname>getReference()</methodname>)だけでなく、
             それらが記述している「もの」についても、さらなる構造化情報を含みます。
         </para>
 
         <para>
-            基底<code>Zend_Tool_Framework_Manifest_Metadata</code>クラスを拡張して、
+            基底<classname>Zend_Tool_Framework_Manifest_Metadata</classname>クラスを拡張して、
             クラス/オブジェクト・ローカル・マニフェストを通してこれらの新しいメタデータ・オブジェクトを返しさえすれば、
             あなた自身のメタデータ・タイプを構築することができます。
             これらのユーザー・ベースのクラスは、マニフェスト・リポジトリの中に残ります
@@ -333,7 +333,7 @@ class Zend_Tool_Framework_Manifest_Repository
             メタデータ・オブジェクトを見つけるために、
             制約にマッチする配列を単に配列によって渡してください。
             データがプロパティ・アクセッサ
-            （オブジェクト・メタデータの上で実装される<code>getSomething()</code>メソッド）
+            （オブジェクト・メタデータの上で実装される<methodname>getSomething()</methodname>メソッド）
             によってアクセスできるならば、
             それは「見つかった」オブジェクト・メタデータとしてユーザーへ渡されます。
         </para>
@@ -343,11 +343,11 @@ class Zend_Tool_Framework_Manifest_Repository
         <title>クライアント</title>
 
         <para>
-            クライアントは、<code>Zend_Tool_Framework</code>システムと
+            クライアントは、<classname>Zend_Tool_Framework</classname>システムと
             ユーザーまたは外部ツールとの橋渡しをするインターフェースです。
             クライアントは、すべての形とサイズに伝わることができます:
-            RPCエンドポイント、コマンド・ライン・インタフェースまたはウェブ・インターフェースさえ。
-            Zend_Toolは、<code>Zend_Tool_Framework</code>システムと相互に作用するための
+            <acronym>RPC</acronym>エンドポイント、コマンド・ライン・インタフェースまたはウェブ・インターフェースさえ。
+            Zend_Toolは、<classname>Zend_Tool_Framework</classname>システムと相互に作用するための
             デフォルト・インターフェースとして、コマンド・ライン・インタフェースを実装しました。
         </para>
 

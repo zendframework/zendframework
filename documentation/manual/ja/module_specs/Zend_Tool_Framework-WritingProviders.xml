@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16444 -->
+<!-- EN-Revision: 16656 -->
 <sect1 id="zend.tool.framework.writing-providers">
     <title>Zend_Tool_Frameworkを利用してプロバイダを作成する</title>
 
@@ -8,7 +8,7 @@
         一般的に、プロバイダそれ自体は、
         コマンドラインでクライアント（またはそれ以外）をディスパッチすることを求めるいくらかの能力をバンドルするための、
         開発者のためのシェル以外の何物でもありません。
-        MVCアプリケーションの中での「コントローラ」と似ています。
+        <acronym>MVC</acronym>アプリケーションの中での「コントローラ」と似ています。
     </para>
 
     <sect2 id="zend.tool.framework.writing-providers.basic">
@@ -18,9 +18,9 @@
             例えば、サード・パーティのコンポーネントが働かせる
             データファイルのバージョンを示す能力を開発者が加えたければ、
             開発者が実装する必要があるクラスが１つだけあります。
-            もしコンポーネントが<code>My_Component</code>と呼ばれるなら、
-            <code>include_path</code>上のどこかに<code>HelloProvider.php</code>という名前のファイルで
-            <code>My_Component_HelloProvider</code>という名のクラスを作成するでしょう。
+            もしコンポーネントが<classname>My_Component</classname>と呼ばれるなら、
+            <property>include_path</property>上のどこかに<filename>HelloProvider.php</filename>という名前のファイルで
+            <classname>My_Component_HelloProvider</classname>という名のクラスを作成するでしょう。
             このクラスは<classname>Zend_Tool_Framework_Provider_Interface</classname>を実装します、
             そして、このファイルの本体は以下のように見えなければならないだけです:
         </para>
@@ -82,11 +82,11 @@ class My_Component_HelloProvider
 ]]></programlisting>
 
         <para>
-            それから上記の例は、コマンドライン<code>zf say hello Joe</code>によって呼ぶことができます。
+            それから上記の例は、コマンドライン<command>zf say hello Joe</command>によって呼ぶことができます。
             "Joe" は、メソッド呼び出しのパラメータとして、プロバイダに供給されます。
             また注意すべきこととして、
             パラメータが任意だとあなたがわかるように、
-            <code>zf say hello</code>がさらに機能して、名前 "Ralph" にデフォルト設定するように、
+            <command>zf say hello</command>がさらに機能して、名前 "Ralph" にデフォルト設定するように、
             コマンドライン上で選択できることを意味します。
         </para>
 

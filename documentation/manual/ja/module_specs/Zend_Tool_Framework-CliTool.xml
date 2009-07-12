@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16545 -->
+<!-- EN-Revision: 16656 -->
 <sect1 id="zend.tool.framework.clitool">
     <title>CLIツールの使用</title>
 
     <para>
-        （内部的にコンソール・ツールとして知られる）CLIまたはコマンドライン・ツールは、
-        現在、<code>Zend_Tool</code>リクエストをディスパッチするための主要なインターフェースです。
-        CLIツールで、開発者は「コマンド・ライン・ウインドウ」内でツーリング・リクエストを出すことができます。
+        （内部的にコンソール・ツールとして知られる）<acronym>CLI</acronym>またはコマンドライン・ツールは、
+        現在、<classname>Zend_Tool</classname>リクエストをディスパッチするための主要なインターフェースです。
+        <acronym>CLI</acronym>ツールで、開発者は「コマンド・ライン・ウインドウ」内でツーリング・リクエストを出すことができます。
         それは、「ターミナルの」ウインドウとしても一般に知られています。
         この環境は、*nix環境で優れていますが、
-        Windowsでの<code>cmd.exe</code>やconsole2、更にはCygwinプロジェクトとも共通の実装を持ちます。
+        Windowsでの<filename>cmd.exe</filename>やconsole2、更にはCygwinプロジェクトとも共通の実装を持ちます。
     </para>
 
     <sect2 id="zend.tool.framework.clitool.setup-general">
@@ -21,19 +21,19 @@
             システムで「zf」命令を取り扱えるように、
             最初にクライアントを設定する必要があります。
             コマンド・ライン・クライアントは、どう見ても、
-            ゼンド・フレームワーク・ディストリビューションを提供される<code>.sh</code>または<code>.bat</code>ファイルです。
+            ゼンド・フレームワーク・ディストリビューションを提供される<filename>.sh</filename>または<filename>.bat</filename>ファイルです。
             トランクでは、それはここで見つかります:
             <ulink url="http://framework.zend.com/svn/framework/standard/trunk/bin/">http://framework.zend.com/svn/framework/standard/trunk/bin/</ulink>
         </para>
 
         <para>
-            ご覧の通り、3つのファイルが、<code>bin/</code>ディレクトリにあります:
-            <code>zf.php</code>、<code>zf.sh</code>及び<code>zf.bat</code>。
-            <code>zf.sh</code>および<code>zf.bat</code>は、オペレーティングシステム固有クライアント・ラッパです:
-            *nix環境のための<code>zf.sh</code>とWin32環境のための<code>zf.bat</code>。
-            これらのクライアント・ラッパは、適切な<code>php.exe</code>を捜し出して、<code>zf.php</code>を捜し出して、
+            ご覧の通り、3つのファイルが、<filename>bin/</filename>ディレクトリにあります:
+            <filename>zf.php</filename>、<filename>zf.sh</filename>及び<filename>zf.bat</filename>。
+            <filename>zf.sh</filename>および<filename>zf.bat</filename>は、オペレーティングシステム固有クライアント・ラッパです:
+            *nix環境のための<filename>zf.sh</filename>とWin32環境のための<filename>zf.bat</filename>。
+            これらのクライアント・ラッパは、適切な<filename>php.exe</filename>を捜し出して、<filename>zf.php</filename>を捜し出して、
             クライアント・リクエストに渡す役割を果たします。
-            <code>zf.php</code>は、環境を理解し、適切なinclude_pathを構築して、
+            <filename>zf.php</filename>は、環境を理解し、適切なinclude_pathを構築して、
             ディスパッチするための適切なライブラリ・コンポーネントにコマンド・ラインで提供されるものを渡す
             取扱いに対して責任あるものです。
         </para>
@@ -46,24 +46,25 @@
         <orderedlist>
             <listitem>
                 <para>
-                    <code>zf.sh/zf.bat</code>は、システム・パスから到達できます。
+                    <filename>zf.sh/zf.bat</filename>は、システム・パスから到達できます。
                     カレント作業ディレクトリが何かに関係なく、
-                    これはあなたのコマンド・ラインでどこからでも<code>zf</code>を呼ぶ能力です。
+                    これはあなたのコマンド・ラインでどこからでも<filename>zf</filename>を呼ぶ能力です。
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    ZendFramework/libraryは<code>include_path</code>にあります。
+                    <filename>ZendFramework/library</filename>は<property>include_path</property>にあります。
                 </para>
             </listitem>
         </orderedlist>
 
-        <para>
-            <emphasis>注意:</emphasis>
-            上記が最も理想的な必要条件であるとはいえ、
-            単にZend Frameworkをダウンロードして、
-            <code>./path/to/zf.php</code>としていくらかのコマンドが動作することを期待できます。
-        </para>
+        <note>
+            <para>
+                上記が最も理想的な必要条件であるとはいえ、
+                単にZend Frameworkをダウンロードして、
+                <filename>./path/to/zf.php</filename>としていくらかのコマンドが動作することを期待できます。
+            </para>
+        </note>
 
     </sect2>
 
@@ -72,7 +73,7 @@
 
         <para>
             *nix環境で最も一般的な準備は、
-            PHPバイナリと同じディレクトリに<code>zf.sh</code>と<code>zf.php</code>をコピーすることです。
+            <acronym>PHP</acronym>バイナリと同じディレクトリに<filename>zf.sh</filename>と<filename>zf.php</filename>をコピーすることです。
             これは、通常、以下の場所のうちの1つで見つけられます:
         </para>
 
@@ -84,21 +85,21 @@
 ]]></programlisting>
 
         <para>
-            PHPバイナリの場所を見つけるために、
+            <acronym>PHP</acronym>バイナリの場所を見つけるために、
             コマンドラインで 'which php' を実行できます。
-            これは、この環境でphpスクリプトを実行するために存在するphpバイナリの場所を返します。
+            これは、この環境で<acronym>PHP</acronym>スクリプトを実行するために存在する<acronym>PHP</acronym>バイナリの場所を返します。
         </para>
 
         <para>
-            次の課題は、Zend FrameworkライブラリがシステムPHP<code>include_path</code>の中で
+            次の課題は、Zend Frameworkライブラリがシステム<acronym>PHP</acronym> <property>include_path</property>の中で
             正しく設定されることを確実にすることです。
             <code>include_path</code>が位置するところを見つけ出すために、
-            'php -i' を実行したり、<code>include_path</code>変数を探したり、
-            より簡潔に、 'php -i | grep include_path' を実行したりします。
-            一旦<code>include_path</code>が位置するところ
-            （これは通常、/usr/lib/php や /usr/share/php、/usr/local/lib/php または同様の何かです）
-            を見つけたら、library/ ディレクトリの内容が
-            <code>include_path</code>に指定されたディレクトリに置かれることを確実にしてください。
+            <command>php -i</command> を実行したり、<property>include_path</property>変数を探したり、
+            より簡潔に、 <command>php -i | grep include_path</command> を実行したりします。
+            一旦<property>include_path</property>が位置するところ
+            （これは通常、<filename>/usr/lib/php</filename> や <filename>/usr/share/php</filename>、<filename>/usr/local/lib/php</filename> または同様の何かです）
+            を見つけたら、<filename>/library/</filename> ディレクトリの内容が
+            <property>include_path</property>に指定されたディレクトリに置かれることを確実にしてください。
         </para>
 
         <para>
@@ -125,17 +126,17 @@
         <para>
             <emphasis>ALTERNATIVE SETUP</emphasis>では
             一緒にダウンロードするZend Frameworkを現状のまま保って、
-            PATHの場所から<code>zf.sh</code>へのリンクを作成する必要があります。
+            <constructing>PATH</constant>の場所から<filename>zf.sh</filename>へのリンクを作成する必要があります。
             ZendFrameworkダウンロードの内容を
-            <code>/usr/local/share/ZendFramework</code>や
-            またはよりローカルに<code>/home/username/lib/ZendFramework</code>、
-            そして<code>zf.sh</code>へのシンボリックリンクを作成した
+            <filename>/usr/local/share/ZendFramework</filename>や
+            またはよりローカルに<filename>/home/username/lib/ZendFramework</filename>、
+            そして<filename>zf.sh</filename>へのシンボリックリンクを作成した
             場所に入れることができることを意味します。
         </para>
 
         <para>
-            リンクを<code>/usr/local/bin</code>
-            （これは、例えばリンクを<code>/home/username/bin/</code>に入れても動作するでしょう）
+            リンクを<filename>/usr/local/bin</filename>
+            （これは、例えばリンクを<filename>/home/username/bin/</filename>に入れても動作するでしょう）
             に置きたいならば、あなたはこれに類似したコマンドを発行するでしょう:
         </para>
 
@@ -157,7 +158,7 @@ ln -s /home/username/lib/ZendFramework/bin/zf.sh /home/username/bin/zf
 
         <para>
             Windows Win32環境で最も一般的な準備は、
-            PHPバイナリと同じディレクトリに<code>zf.bat</code>と<code>zf.php</code>をコピーすることです。
+            <acronym>PHP</acronym>バイナリと同じディレクトリに<filename>zf.bat</filename>と<filename>zf.php</filename>をコピーすることです。
             これは、通常、以下の場所のうちの1つで見つけられます:
         </para>
 
@@ -168,22 +169,22 @@ C:\WAMP\PHP\bin
 ]]></programlisting>
 
         <para>
-            あなたは、コマンドラインで<code>php.exe</code>を実行できるはずです。
+            あなたは、コマンドラインで<filename>php.exe</filename>を実行できるはずです。
             できなければ、
-            最初に、PHPディストリビューションに付属していたドキュメンテーションをチェックしてください、
-            さもなければ、php.exeへのパスがあなたのwindowsパス環境変数であることを確認してください。
+            最初に、<acronym>PHP</acronym>ディストリビューションに付属していたドキュメンテーションをチェックしてください、
+            さもなければ、<filename>php.exe</filename>へのパスがあなたのWindows<constructing>PATH</constant>環境変数であることを確認してください。
         </para>
 
         <para>
-            次の課題は、Zend FrameworkライブラリがシステムPHP<code>include_path</code>の中で
+            次の課題は、Zend Frameworkライブラリがシステム<acronym>PHP</acronym> <property>include_path</property>の中で
             正しく設定されることを確実にすることです。
-            <code>include_path</code>が位置するところを見つけ出すために、
-            'php -i' を入力したり、<code>include_path</code>変数を探したりできます。
-            grepが使えるCygwin構成があるなら、より簡潔に、 'php -i | grep include_path' を実行します。
-            一旦<code>include_path</code>が位置するところ
-            （これは通常、<code>C:\PHP\pear</code> や <code>C:\PHP\share</code>、<code>C:\Program Files\ZendServer\share</code> または同様の何かです）
+            <property>include_path</property>が位置するところを見つけ出すために、
+            <command>php -i</command> を入力したり、<property>include_path</property>変数を探したりできます。
+            grepが使えるCygwin構成があるなら、より簡潔に、 <command>php -i | grep include_path</command> を実行します。
+            一旦<property>include_path</property>が位置するところ
+            （これは通常、<filename>C:\PHP\pear</filename> や <filename>C:\PHP\share</filename>、<filename>C:\Program Files\ZendServer\share</filename> または同様の何かです）
             を見つけたら、library/ ディレクトリの内容が
-            <code>include_path</code>に指定されたディレクトリに置かれることを確実にしてください。
+            <property>include_path</property>に指定されたディレクトリに置かれることを確実にしてください。
         </para>
 
         <para>
@@ -210,12 +211,12 @@ C:\WAMP\PHP\bin
         <para>
             <emphasis>ALTERNATIVE SETUP</emphasis>では
             一緒にダウンロードするZend Frameworkを現状のまま保って、
-            システムPATHと<code>php.ini</code>ファイルの両方を変更する必要があります。
-            ユーザー環境で、<code>zf.bat</code>ファイルが実行可能であるように、
-            必ず<code>C:\Path\To\ZendFramework\bin</code>を加えるようにしてください。
-            また、<code>C:\Path\To\ZendFramework\library</code>が
-            <code>include_path</code>にあることを確実にするために、
-            <code>php.ini</code>ファイルを変えてください。
+            システム<constructing>PATH</constant>と<filename>php.ini</filename>ファイルの両方を変更する必要があります。
+            ユーザー環境で、<filename>zf.bat</filename>ファイルが実行可能であるように、
+            必ず<filename>C:\Path\To\ZendFramework\bin</filename>を加えるようにしてください。
+            また、<filename>C:\Path\To\ZendFramework\library</filename>が
+            <property>include_path</property>にあることを確実にするために、
+            <filename>php.ini</filename>ファイルを変えてください。
         </para>
 
     </sect2>
@@ -224,21 +225,21 @@ C:\WAMP\PHP\bin
         <title>設定での他の考慮事項</title>
 
         <para>
-            もし何らかの理由で<code>include_path</code>の中にZend Frameworkライブラリを必要としないならば、
+            もし何らかの理由で<property>include_path</property>の中にZend Frameworkライブラリを必要としないならば、
             もう一つの選択肢があります。
-            <code>zf.php</code>がZend Frameworkインストールの位置を決定するために利用する2つの特別な環境変数があります。
+            <filename>zf.php</filename>がZend Frameworkインストールの位置を決定するために利用する2つの特別な環境変数があります。
         </para>
 
         <para>
-            1つ目は<code>ZEND_TOOL_INCLUDE_PATH_PREPEND</code>です。
-            クライアントをロードする前にシステム（<code>php.ini</code>）の<code>include_path</code>に
+            1つ目は<constant>ZEND_TOOL_INCLUDE_PATH_PREPEND</constant>です。
+            クライアントをロードする前にシステム（<filename>php.ini</filename>）の<property>include_path</property>に
             この環境変数の値を前に付加します。
         </para>
 
         <para>
-            あるいは、<code>zf</code>コマンドライン・ツールのために特に辻褄が合うもののために
-            完全にシステム<code>include_path</code>を<emphasis>取り替える</emphasis>
-            <code>ZEND_TOOL_INCLUDE_PATH</code>を使いたいかもしれません。
+            あるいは、<command>zf</command>コマンドライン・ツールのために特に辻褄が合うもののために
+            完全にシステム<property>include_path</property>を<emphasis>取り替える</emphasis>
+            <constant>ZEND_TOOL_INCLUDE_PATH</constant>を使いたいかもしれません。
         </para>
     </sect2>
 
@@ -248,7 +249,7 @@ C:\WAMP\PHP\bin
         <para>
             この時点では、よりちょっと「面白い」コマンドの奥義を伝え始めるために準備されなければなりません。
             動き出すためには、何が利用できるか見るために、
-            <code>zf --help</code>コマンドを発行できます。
+            <command>zf --help</command>コマンドを発行できます。
         </para>
 
         <para>
@@ -257,8 +258,8 @@ C:\WAMP\PHP\bin
         </para>
 
         <para>
-            プロジェクト作成のために<code>zf</code>スクリプトを使用する方法を理解するために、
-            <code>Zend_Tool_Project</code>の「プロジェクトの作成」CreateProject節に進んでください。
+            プロジェクト作成のために<command>zf</command>スクリプトを使用する方法を理解するために、
+            <classname>Zend_Tool_Project</classname>の「プロジェクトの作成」CreateProject節に進んでください。
         </para>
     </sect2>
 </sect1>

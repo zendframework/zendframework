@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16281 -->
+<!-- EN-Revision: 16656 -->
 <sect1 id="zend.tool.framework.introduction">
     <title>導入</title>
 
@@ -9,9 +9,9 @@
         プロジェクトの足場の作成やコードの生成、検索インデックス生成その他のような
         共通機能を公開するためのフレームワークです。
         信じられないほどの柔軟性のある実装を提供するように、
-        PHP <code>include_path</code>に置かれたPHPクラスによって機能が書かれたり、
+        <acronym>PHP</acronym> <property>include_path</property>に置かれた<acronym>PHP</acronym>クラスによって機能が書かれたり、
         公開されるかもしれません。
-        それから、コンソールクライアントやXML-RPC、SOAPその他のような特定のクライアントの実装もしくは
+        それから、コンソールクライアントや<acronym>XML-RPC</acronym>、<acronym>SOAP</acronym>その他のような特定のクライアントの実装もしくは
         プロトコルを書くことにより機能が消費されるかもしれません。
     </para>
 
@@ -23,7 +23,7 @@
         <listitem>
             <para>
                 ツーリングクライアントでディスパッチ可能な機能と拡張性を開発者が生成できる
-                <code>共通の interface 及び abstract</code>です。
+                <emphasis>共通の interface 及び abstract</emphasis>です。
             </para>
         </listitem>
 
@@ -31,7 +31,7 @@
             <para>
                 外部ツールとインターフェースをZend_Tool_Frameworkに接続するための
                 <emphasis>基本的なクライアント機能</emphasis>及び具体的なコンソールの実装です。
-                コンソールクライアントはCLI環境（例えばunixシェルやWindowsコンソール）
+                コンソールクライアントは<acronym>CLI</acronym>環境（例えばunixシェルやWindowsコンソール）
                 で使われるかもしれません。
             </para>
         </listitem>
@@ -88,7 +88,7 @@
 
         <listitem><para>
             <emphasis>コンソールクライアント／コマンドラインインターフェース／
-            zf.php</emphasis> - コマンドラインのためのツーリングクライアント。
+            <filename>zf.php</filename></emphasis> - コマンドラインのためのツーリングクライアント。
         </para></listitem>
 
         <listitem><para>

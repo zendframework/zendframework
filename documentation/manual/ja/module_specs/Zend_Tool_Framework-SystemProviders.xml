@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15343 -->
+<!-- EN-Revision: 16656 -->
 <sect1 id="zend.tool.framework.system-providers">
     <title>出荷されたシステムプロバイダー</title>
 
     <para>
-        <code>Zend_Tool_Project</code>とともに出荷された、
+        <classname>Zend_Tool_Project</classname>とともに出荷された、
         より役に立つプロジェクトベースのプロバイダーに加えて、
-        <code>Zend_Tool_Framework</code>に組み込まれた、
+        <classname>Zend_Tool_Framework</classname>に組み込まれた、
         より若干基本的であるものの、面白いプロバイダーもあります。
         これらのいくつかはバージョンのような情報を得るために
         コマンドライン経由の手段を提供する目的で存在します。
@@ -19,12 +19,12 @@
         <title>バージョンプロバイダー</title>
 
         <para>
-            <code>zf</code>または<code>Zend_Tool</code>が動作するために現行設定されている
+            <command>zf</command>または<classname>Zend_Tool</classname>が動作するために現行設定されている
             フレームワークのバージョンがどれか決定できるようにバージョンプロバイダーが含まれます。
         </para>
 
         <para>
-            コマンドラインで、<code>zf show version</code>とだけ実行してください。
+            コマンドラインで、<command>zf show version</command>とだけ実行してください。
         </para>
 
     </sect2>
@@ -33,9 +33,9 @@
         <title>マニフェストプロバイダー</title>
 
         <para>
-            <code>Zend_Tool</code>実行中にどのような "manifest" 情報を利用できるか決定するかもしれないように、
+            <classname>Zend_Tool</classname>実行中にどのような "manifest" 情報を利用できるか決定するかもしれないように、
             マニフェストプロバイダーが含まれます。
-            マニフェストデータは、<code>Zend_Tool</code>の実行中に、ある特定のオブジェクトに関連つけられる情報です。
+            マニフェストデータは、<classname>Zend_Tool</classname>の実行中に、ある特定のオブジェクトに関連つけられる情報です。
             マニフェストの中に、
             正確なコマンドを呼び出すときに使うことを期待される、
             特定の名前をつけられたコンソールを見つけるでしょう。
@@ -44,7 +44,7 @@
         </para>
 
         <para>
-            コマンド・ラインで、<code>zf show manifest</code>とだけ実行してください。
+            コマンド・ラインで、<command>zf show manifest</command>とだけ実行してください。
         </para>
     </sect2>
 </sect1>

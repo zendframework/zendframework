@@ -174,8 +174,7 @@ echo $acl->isAllowed('marketing', 'newsletter', 'archive') ?
             privilegios anula tales cambios incrementales:
         </para>
 
-         <programlisting language="php"
-            <![CDATA[
+        <programlisting language="php"><![CDATA[
 //Permitir al grupo de "marketing" todos los permisos a las últimas noticias
 $acl->allow('marketing', 'latest');
 

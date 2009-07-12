@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16382 -->
+<!-- EN-Revision: 16649 -->
 <sect1 id="zend.cache.backends">
     <title><classname>Zend_Cache</classname> のバックエンド</title>
     <para>

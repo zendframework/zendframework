@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16419 -->
+<!-- EN-Revision: 16649 -->
 <sect1 id="zend.cache.frontends">
     <title><classname>Zend_Cache</classname> のフロントエンド</title>
 
@@ -723,7 +723,7 @@ $result = $cache->foobar2('1', '2');
                               <entry><type>Array</type></entry>
                               <entry><methodname>array()</methodname></entry>
                               <entry>
-                                  特定の <acronym>REQUEST_URI</acronym> に対してのみ適用するオプションを設定する連想配列です。
+                                  特定の <constant>REQUEST_URI</constant> に対してのみ適用するオプションを設定する連想配列です。
                                   キーが (<acronym>PCRE</acronym> の) 正規表現、対応する値は連想配列となります。
                                   この連想配列には、正規表現が <varname>$_SERVER['REQUEST_URI']</varname>
                                   にマッチした場合に設定されるオプションを設定します

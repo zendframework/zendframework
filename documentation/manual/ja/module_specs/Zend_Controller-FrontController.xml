@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16164 -->
+<!-- EN-Revision: 16664 -->
 <sect1 id="zend.controller.front">
     <title>フロントコントローラ</title>
 
@@ -130,7 +130,7 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
             <note>
                 <para>
                     <methodname>addControllerDirectory()</methodname>
-                    でモジュール名を省略すると、<code>default</code>
+                    でモジュール名を省略すると、<emphasis>default</emphasis>
                     モジュールが指定されたものとみなします。
                     もしすでに存在する場合は、それを上書きします。
                 </para>
@@ -156,8 +156,8 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
             <para>
                 書くモジュールは個別のディレクトリになければならず、
                 またデフォルトモジュールと同じディレクトリ構成でなければなりません。
-                すなわち、すくなくともサブディレクトリ "controllers" がなければならず、
-                またたいていは "views" などの他のサブディレクトリもあるということです。
+                すなわち、すくなくともサブディレクトリ <filename>/controllers/</filename> がなければならず、
+                またたいていは <filename>/views/</filename> などの他のサブディレクトリもあるということです。
             </para>
 
             <para>
@@ -189,7 +189,7 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
                 リクエストオブジェクトやレスポンスオブジェクトを省略すると、
                 <methodname>dispatch()</methodname> は事前にオブジェクトが登録されているかどうかを確認します。
                 もし登録されていればそれを使用し、登録されていなければデフォルトのオブジェクトを作成して使用します
-                (どちらの場合についても、HTTP リクエスト/レスポンス オブジェクトをデフォルトで使用します)。
+                (どちらの場合についても、<acronym>HTTP</acronym> リクエスト/レスポンス オブジェクトをデフォルトで使用します)。
             </para>
 
             <para>
@@ -225,7 +225,7 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
             <title>run()</title>
 
             <para>
-                <classname>Zend_Controller_Front::run($path)</classname>
+                <methodname>Zend_Controller_Front::run($path)</methodname>
                 は静的メソッドで、コントローラを含むディレクトリへのパスを指定します。
                 このメソッドは
                 <link linkend="zend.controller.front.methods.primary.getinstance">getInstance()</link>
@@ -375,7 +375,8 @@ Zend_Controller_Front::run('../application/controllers');
                 </para>
 
                 <para>
-                    詳細は <xref linkend="zend.controller.exceptions" /> を参照ください。
+                    詳細は <link linkend="zend.controller.exceptions">MVC
+                    例外</link> を参照ください。
                 </para>
             </listitem>
 
@@ -385,7 +386,7 @@ Zend_Controller_Front::run('../application/controllers');
                     <methodname>dispatch()</methodname> からのレスポンスを返す (<constant>TRUE</constant>)
                     かレスポンスを自動的に発行する (<constant>FALSE</constant>)
                     かを切り替えます。デフォルトでは、レスポンスは
-                    (<classname>Zend_Controller_Response_Abstract::sendResponse()</classname> によって)
+                    (<methodname>Zend_Controller_Response_Abstract::sendResponse()</methodname> によって)
                     自動的に発行されます。<methodname>returnResponse()</methodname>
                     をオンにすると、この挙動を変更できます。
                     behaviour.
@@ -473,7 +474,8 @@ Zend_Controller_Front::run('../application/controllers');
 
                 <para>
                     この設定の使用法についての詳細は
-                    <xref linkend="zend.controller.exceptions.internal" />
+                    <link linkend="zend.controller.exceptions.internal">
+                    遭遇するであろう MVC 例外</link>
                     を参照ください。
                 </para>
             </listitem>
@@ -532,7 +534,7 @@ class My_Controller_Front extends Zend_Controller_Front
 
         <para>
             <methodname>getInstance()</methodname> メソッドをオーバーライドすることで、それ以降の
-            <classname>Zend_Controller_Front::getInstance()</classname> のコールが
+            <methodname>Zend_Controller_Front::getInstance()</methodname> のコールが
             <classname>Zend_Controller_Front</classname> ではなく新しいサブクラスのインスタンスを返すようになります。
             これは、デフォルト以外のルータやビューヘルパーを使用する場合などに便利です。
         </para>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15997 -->
+<!-- EN-Revision: 16650 -->
 <sect1 id="zend.amf.server">
     <title>Zend_Amf_Server</title>
 
@@ -15,7 +15,7 @@
         <title>基本的な AMF サーバ</title>
 
         <para>
-            さまざまな public メソッドを持つクラス <emphasis>Foo</emphasis>
+            さまざまな public メソッドを持つクラス <classname>Foo</classname>
             を作ったものとしましょう。<acronym>AMF</acronym> サーバを作成するためのコードは次のようになります。
         </para>
 
@@ -300,7 +300,7 @@ $server->setProduction(false);
 ]]></programlisting>
 
         <para>
-            再度有効にするには、true を渡します。
+            再度有効にするには、<constant>TRUE</constant> を渡します。
         </para>
 
         <programlisting language="php"><![CDATA[

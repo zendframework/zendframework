@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15787 -->
+<!-- EN-Revision: 16650 -->
 <sect2 id="zend.application.available-resources.frontcontroller">
     <title>Zend_Application_Resource_Frontcontroller</title>
 
@@ -25,51 +25,51 @@
 
     <itemizedlist>
         <listitem><para>
-            <emphasis>controllerDirectory</emphasis>:
+            <property>controllerDirectory</property>:
             コントローラ・ディレクトリを単独で指定している文字列値か、
             またはモジュールからコントローラ・ディレクトリへの連想配列。
         </para></listitem>
 
         <listitem><para>
-            <emphasis>moduleControllerDirectoryName</emphasis>:
+            <property>moduleControllerDirectoryName</property>:
             コントローラを含むモジュールの配下でサブディレクトリを示す文字列値
         </para></listitem>
 
         <listitem><para>
-            <emphasis>moduleDirectory</emphasis>:
+            <property>moduleDirectory</property>:
             モジュールが見つかるかもしれないディレクトリ
         </para></listitem>
 
         <listitem><para>
-            <emphasis>defaultControllerName</emphasis>:
+            <property>defaultControllerName</property>:
             デフォルト・コントローラの基底名。（通常は "index"）
         </para></listitem>
 
         <listitem><para>
-            <emphasis>defaultAction</emphasis>:
+            <property>defaultAction</property>:
             デフォルト・アクションの基底名。（通常は "index"）
         </para></listitem>
 
         <listitem><para>
-            <emphasis>defaultModule</emphasis>:
+            <property>defaultModule</property>:
             デフォルト・モジュールの基底名。（通常は "default"）
         </para></listitem>
 
         <listitem><para>
-            <emphasis>baseUrl</emphasis>:
+            <property>baseUrl</property>:
             アプリケーションに対して明示された基底<acronym>URL</acronym>
             （通常は自動検出）
         </para></listitem>
 
         <listitem><para>
-            <emphasis>plugins</emphasis>:
+            <property>plugins</property>:
             フロントコントローラのプラグイン・クラス名配列
             このリソースは、各々のクラスを（コンストラクタ引数なしで）インスタンス化して、
             それからフロントコントローラでインスタンスを登録します。
         </para></listitem>
 
         <listitem><para>
-            <emphasis>params</emphasis>:
+            <property>params</property>:
             フロントコントローラに登録する連想配列
         </para></listitem>
     </itemizedlist>

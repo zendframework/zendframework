@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15997 -->
+<!-- EN-Revision: 16650 -->
 <sect2 id="zend.application.available-resources.session">
     <title>Zend_Application_Resource_Session</title>
 
@@ -12,7 +12,7 @@
 
     <para>
         セッション保存ハンドラを配置するためには、
-        単にリソースの<emphasis>saveHandler</emphasis>オプション・キーを渡してください。
+        単にリソースの<property>saveHandler</property>オプション・キーを渡してください。
         （大文字と小文字の区別をしません）
         このオプションの値は、以下のうちの1つでしょう:
     </para>

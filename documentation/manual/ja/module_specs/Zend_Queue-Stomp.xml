@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 16599 -->
+<sect1 id="zend.queue.stomp">
+    <title>Stomp</title>
+    <para>
+        <classname>Zend_Queue_Stomp</classname>は、
+        <ulink url="http://stomp.codehaus.org/">Stomp</ulink>互換の一部のサーバと通信するために、
+        基本的なクライアントを提供します。
+        一部のサーバ（例えばApacheMQとRabbitMQ）では、
+        <acronym>HTTP</acronym>や<acronym>XMPP</acronym>のような
+        他のメソッドで情報を交換できます。
+    </para>
+
+    <para>
+        Stompプロトコルは、どんな<ulink url="http://java.sun.com/products/jms/">Javaメッセージサービス(JMS)</ulink>
+        でもサポートするStompConnectを提供します。
+        Stompは、
+        <ulink url="http://activemq.apache.org/">Apache ActiveMQ</ulink>や
+        <ulink url="http://www.rabbitmq.com/">RabbitMQ</ulink>、
+        <ulink url="http://stompserver.rubyforge.org/">stompserver</ulink>、そして
+        <ulink url="http://www.germane-software.com/software/Java/Gozirra/">Gozirra</ulink>で
+        サポートされます。
+    </para>
+
+    <sect2 id="zend.queue.adapters-configuration.stomp">
+        <title>Stomp - サポートするクラス</title>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <classname>Zend_Queue_Stomp_Frame</classname>。
+                    このクラスは、Stompフレームを操作するための基底関数を提供します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <classname>Zend_Queue_Stomp_Client</classname>.
+                    このクラスは
+                    <!-- TODO -->
+                    provides 基本関数 to
+                    <methodname>send()</methodname> and
+                    <methodname>receive()</methodname>
+                    <classname>Zend_Queue_Stomp_Frame</classname>s to and from a
+                    Stomp互換サーバ
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+</sect1>

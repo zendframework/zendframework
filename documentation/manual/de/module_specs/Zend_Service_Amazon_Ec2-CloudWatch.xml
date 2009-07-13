@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 16389 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.service.amazon.ec2.cloudwatch">
+    <title>Zend_Service_Amazon_Ec2: CloudWatch Monitoring</title>
+    <para>
+        Amazon CloudWatch is an easy-to-use web service that provides
+        comprehensive monitoring for Amazon Elastic Compute Cloud (Amazon
+        <acronym>EC2</acronym>) and Elastic Load Balancing. For more details information
+        check cout the <ulink
+            url="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide/index.html?SvcIntro.html">
+            Amazon CloudWatch Developers Guide</ulink>
+    </para>
+
+    <sect2 id="zend.service.amazon.ec2.cloudwatch.usage">
+        <title>CloudWatch Usage</title>
+
+        <example id="zend.service.amazon.ec2.cloudwatch.usage.list">
+            <title>Listing Aviable Metrics</title>
+            <para>
+                <methodname>listMetrics()</methodname> returns a list of up to 500 valid metrics for
+                which there is recorded data available to a you and a NextToken string
+                that can be used to query for the next set of results.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$ec2_ebs = new Zend_Service_Amazon_Ec2_CloudWatch('aws_key','aws_secret_key');
+$return = $ec2_ebs->listMetrics();
+]]></programlisting>
+        </example>
+
+        <example id="zend.service.amazon.ec2.cloudwatch.usage.getmetricstatistics">
+            <title>Return Statistics for a given metric</title>
+            <para>
+                <methodname>getMetricStatistics()</methodname> Returns data for one or more
+                statistics of given a metric.
+            </para>
+            <para>
+                <note>
+                    <para>
+                        The maximum number of datapoints that the Amazon CloudWatch service will
+                        return in a single GetMetricStatistics request is 1,440. If a request is
+                        made that would generate more datapoints than this amount, Amazon CloudWatch
+                        will return an error. You can alter your request by narrowing the time range
+                        (StartTime, EndTime) or increasing the Period in your single request. You
+                        may also get all of the data at the granularity you originally asked for
+                        by making multiple requests with adjacent time ranges.
+                    </para>
+                </note>
+            </para>
+            <para>
+                <methodname>getMetricStatistics()</methodname> only requires two parameters but it
+                also has four additional parameters that are optional.
+            </para>
+            <itemizedlist>
+                <listitem>
+                    <para><emphasis>Required:</emphasis></para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis>MeasureName</emphasis> The measure name that corresponds to
+                        the measure for the gathered metric. Valid <acronym>EC2</acronym> Values are
+                        CPUUtilization, NetworkIn, NetworkOut, DiskWriteOps
+                        DiskReadBytes, DiskReadOps, DiskWriteBytes. Valid Elastic
+                        Load Balancing Metrics are Latency, RequestCount, HealthyHostCount
+                        UnHealthyHostCount. <ulink
+                            url="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide/arch-AmazonCloudWatch-metricscollected.html">
+                            For more information click here</ulink>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis>Statistics</emphasis> The statistics to be returned for the given
+                        metric. Valid values are Average, Maximum, Minimum, Samples, Sum. You can
+                        specify this as a string or as an array of values. If you don't specify one
+                        it will default to Average instead of failing out. If you specify an
+                        incorrect option it will just skip it. <ulink
+                            url="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide/arch-Amazon-CloudWatch-statistics.html">
+                            For more information click here</ulink>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para><emphasis>Optional:</emphasis></para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis>Dimensions</emphasis> Amazon CloudWatch allows you to specify one
+                        Dimension to further filter metric data on. If you don't specify a
+                        dimension, the service returns the aggregate of all the measures with the
+                        given measure name and time range.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis>Unit</emphasis> The standard unit of Measurement for a given
+                        Measure. Valid Values: Seconds, Percent, Bytes, Bits, Count, Bytes/Second,
+                        Bits/Second, Count/Second, and None. Constraints: When using count/second
+                        as the unit, you should use Sum as the statistic instead of Average.
+                        Otherwise, the sample returns as equal to the number of requests
+                        instead of the number of 60-second intervals. This will cause the Average
+                        to always equals one when the unit is count/second.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis>StartTime</emphasis> The timestamp of the first datapoint to
+                        return, inclusive. For example, 2008-02-26T19:00:00+00:00. We round your
+                        value down to the nearest minute. You can set your start time for more than
+                        two weeks in the past. However, you will only get data for the past two
+                        weeks. (in ISO 8601 format). Constraints: Must be before EndTime.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis>EndTime</emphasis> The timestamp to use for determining the last
+                        datapoint to return. This is the last datapoint to fetch, exclusive. For
+                        example, 2008-02-26T20:00:00+00:00 (in ISO 8601 format).
+                    </para>
+                </listitem>
+            </itemizedlist>
+
+            <programlisting language="php"><![CDATA[
+$ec2_ebs = new Zend_Service_Amazon_Ec2_CloudWatch('aws_key','aws_secret_key');
+$return = $ec2_ebs->getMetricStatistics(
+                                     array('MeasureName' => 'NetworkIn',
+                                           'Statistics' => array('Average')));
+]]></programlisting>
+        </example>
+    </sect2>
+</sect1>

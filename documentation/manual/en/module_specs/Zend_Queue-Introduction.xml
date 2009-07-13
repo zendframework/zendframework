@@ -46,7 +46,7 @@
     </para>
 
     <para>
-        There many messaging patterns that can be applied to queues to abstract
+        There are many messaging patterns that can be applied to queues to abstract
         the flow of control from the code and provide metrics, transformations,
         and monitoring of messages queues. A good book on messaging patterns is
         <ulink

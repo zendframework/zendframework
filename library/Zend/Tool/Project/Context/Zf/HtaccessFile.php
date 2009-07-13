@@ -64,10 +64,6 @@ class Zend_Tool_Project_Context_Zf_HtaccessFile extends Zend_Tool_Project_Contex
         $output = <<<EOS
 SetEnv APPLICATION_ENV development
 
-<IfModule mod_php5.c>
-    php_flag short_open_tags on
-</IfModule>
-
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} -s [OR]
 RewriteCond %{REQUEST_FILENAME} -l [OR]

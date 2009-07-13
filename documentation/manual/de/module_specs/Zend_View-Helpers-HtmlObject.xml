@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16376 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.object">
     <title>HTML Objekt Helfer</title>
@@ -17,25 +17,25 @@
     <itemizedlist>
         <listitem>
             <para>
-                <code>formFlash</code>
+                <code>htmlFlash</code>
                 Erzeugt Markup für die Einbettung von Flash Dateien.
             </para>
         </listitem>
         <listitem>
             <para>
-                <code>formObject</code>
+                <code>htmlObject</code>
                 Erzeugt Markup für die Einbettung von eigenen Objekten.
             </para>
         </listitem>
         <listitem>
             <para>
-                <code>formPage</code>
+                <code>htmlPage</code>
                 Erzeugt Markup für die Einbettung anderer (X)HTML Seiten.
             </para>
         </listitem>
         <listitem>
             <para>
-                <code>formQuicktime</code>
+                <code>htmlQuicktime</code>
                 Erzeugt Markup für die Einbettung von QuickTime Dateien.
             </para>
         </listitem>

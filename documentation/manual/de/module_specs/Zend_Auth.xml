@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15861 -->
+<!-- EN-Revision: 16373 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.auth.introduction">
 
@@ -123,8 +123,9 @@ class MyAuthAdapter implements Zend_Auth_Adapter_Interface
         <itemizedlist>
             <listitem>
                 <para>
-                    <methodname>isValid()</methodname> - Gibt true zurück wenn und nur wenn das
-                    Ergebnis einen erfolgreichen Authentifizierungs-Versuch repräsentiert
+                    <methodname>isValid()</methodname> - Gibt <constant>TRUE</constant> zurück wenn
+                    und nur wenn das Ergebnis einen erfolgreichen Authentifizierungs-Versuch
+                    repräsentiert
                 </para>
             </listitem>
             <listitem>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15743 -->
+<!-- EN-Revision: 16380 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.set" xmlns:xi="http://www.w3.org/2001/XInclude">
 
@@ -169,6 +169,34 @@ if ($validator->isValid($iban)) {
             akzeptieren will unabhängig von irgendeinem Land kann der Einfachheit halber das
             Gebietsschema unterdrückt werden.
         </para>
+    </sect2>
+
+    <sect2 id="zend.validate.set.identical">
+        <title>Identical</title>
+        <para>
+            Gibt nur dann <constant>TRUE</constant> zurück wenn der angegebene Token mit
+            <code>$value</code> identisch ist. Diese Prüfung kann jeden beliebigen Typ handhaben.
+        </para>
+
+        <para>
+            Der Token gegen den geprüft werden soll kann entweder als Parameter bei der
+            Instanziierung gesetzt werden, oder durch die Verwendung der
+            <methodname>setToken()</methodname> Methode.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// Setzen des Token bei der Instanziierung
+$validator = new Zend_Validate_Identical(array('one' => 'two'));
+if ($validator->isValid(array('one' => 'two'))) { // Token gültig
+    // Irgendwas machen
+}
+
+// Setzen des Tokens durch Verwendung von setToken()
+$validator->setToken(true);
+if ($validator->isValid(1)) { // Token gültig
+    // Irgendwas machen
+}
+]]></programlisting>
     </sect2>
 
     <sect2 id="zend.validate.set.in_array">

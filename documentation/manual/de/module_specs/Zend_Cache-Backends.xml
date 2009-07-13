@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15961 -->
+<!-- EN-Revision: 16382 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.cache.backends">
     <title>Zend_Cache Backends</title>
@@ -225,7 +225,8 @@
                           <entry><type>Boolean</type></entry>
                           <entry><constant>FALSE</constant></entry>
                           <entry>
-                             true wenn on-the-fly Kompression verwendet werden soll
+                             <constant>TRUE</constant> wenn on-the-fly Kompression verwendet werden
+                             soll
                           </entry>
                       </row>
                       <row>
@@ -233,8 +234,8 @@
                           <entry><type>Boolean</type></entry>
                           <entry><constant>FALSE</constant></entry>
                           <entry>
-                             true wenn man den Compatibility Modus mit alten Memcache
-                             Servern oder Erweiterungen verwenden will
+                             <constant>TRUE</constant> wenn man den Compatibility Modus mit alten
+                             Memcache Servern oder Erweiterungen verwenden will
                           </entry>
                       </row>
                   </tbody>
@@ -394,8 +395,9 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
                           <entry><type>Boolean</type></entry>
                           <entry><constant>FALSE</constant></entry>
                           <entry>
-                              Wenn true, wird das slow_backend Argument als kompletter Klassenname
-                              verwendet; wenn false, wird das frontend Argument als Ende des
+                              Wenn <constant>TRUE</constant>, wird das slow_backend Argument als
+                              kompletter Klassenname verwendet; wenn <constant>FALSE</constant>,
+                              wird das frontend Argument als Ende des
                               "<classname>Zend_Cache_Backend_</classname>[...]" Klassennamens
                               verwendet
                           </entry>
@@ -405,8 +407,9 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
                           <entry><type>Boolean</type></entry>
                           <entry><constant>FALSE</constant></entry>
                           <entry>
-                              Wenn true, wird das fast_backend Argument als kompletter Klassenname
-                              verwendet; wenn false, wird das frontend Argument als Ende des
+                              Wenn <constant>TRUE</constant>, wird das fast_backend Argument als
+                              kompletter Klassenname verwendet; wenn <constant>false</constant>,
+                              wird das frontend Argument als Ende des
                               "<classname>Zend_Cache_Backend_</classname>[...]" Klassennamens
                               verwendet
                           </entry>
@@ -416,8 +419,8 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
                           <entry><type>Boolean</type></entry>
                           <entry><constant>FALSE</constant></entry>
                           <entry>
-                              Wenn true, wird kein require_once für das langsame Backend verwendet
-                              (nur für eigene Backends nützlich)
+                              Wenn <constant>TRUE</constant>, wird kein require_once für das
+                              langsame Backend verwendet (nur für eigene Backends nützlich)
                           </entry>
                       </row>
                       <row>
@@ -425,8 +428,8 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
                           <entry><type>Boolean</type></entry>
                           <entry><constant>FALSE</constant></entry>
                           <entry>
-                              Wenn true, wird kein require_once für das schnelle Backend verwendet
-                              (nur für eigene Backends nützlich)
+                              Wenn <constant>TRUE</constant>, wird kein require_once für das
+                              schnelle Backend verwendet (nur für eigene Backends nützlich)
                           </entry>
                       </row>
                       <row>
@@ -434,8 +437,8 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
                           <entry><type>Boolean</type></entry>
                           <entry><constant>TRUE</constant></entry>
                           <entry>
-                              Wenn true, wird der schnelle Cache automatisch refresht wenn ein Cache
-                              Eintrag getroffen wird
+                              Wenn <constant>TRUE</constant>, wird der schnelle Cache automatisch
+                              refresht wenn ein Cache Eintrag getroffen wird
                           </entry>
                       </row>
                       <row>

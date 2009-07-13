@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 16641 -->
+<sect1 id="zend.queue.adapters">
+    <title>アダプタ</title>
+
+    <para>
+        <classname>Zend_Queue</classname>は、
+        インターフェース<classname>Zend_Queue_Adapter_AdapterInterface</classname>を実装する
+        すべての待ち行列をサポートします。
+        以下のメッセージ待ち行列サービスがサポートされます:
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                <ulink url="http://activemq.apache.org/">ApacheMQ</ulink>.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <classname>Zend_Db</classname>を経たデータベースによる待ち行列
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <classname>Memcache</classname>による
+                <ulink url="http://memcachedb.org/memcacheq/">MemcacheQ</ulink>待ち行列
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                内部配列。ユニットテストに役立ちます。
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <note id="zend.queue.adapters.limitations">
+        <title>限定事項</title>
+
+        <para>
+            メッセージ・トランザクション処理は、サポートされません。
+        </para>
+    </note>
+
+    <sect2 id="zend.queue.adapters.configuration">
+        <title>固有のアダプタ - 設定の構成</title>
+
+        <para>
+            デフォルトの設定が示される場合は、パラメータは任意です。
+            デフォルトの設定が指定されない場合は、パラメータが必要です。
+        </para>
+
+        <sect3 id="zend.queue.adapters.configuration.Apachemq">
+            <title>ApacheMQ - Zend_Queue_Adapter_Apachemq</title>
+
+            <para>
+                ここでリストされたオプションは、既知の必須条件です。
+                すべてのメッセージ発信サーバが、
+                ユーザー名またはパスワードを必要とするというわけではありません。
+            </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                         <emphasis>$options['name'] = '/temp/queue1';</emphasis>
+                    </para>
+
+                    <para>
+                        これは、使い始めたい待ち行列の名前です。（必須）
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <emphasis>$options['driverOptions']['host'] = 'host.domain.tld';</emphasis>
+                    </para>
+
+                    <para>
+                        <emphasis>$options['driverOptions']['host'] = '127.0.0.1';</emphasis>
+                    </para>
+
+                    <para>
+                        ホストをIPアドレスまたはホスト名にセットするかもしれません。
+                    </para>
+
+                    <para>
+                        ホストのデフォルトの設定は '127.0.0.1' です。
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <emphasis>$options['driverOptions']['port'] = 61613;</emphasis>
+                    </para>
+
+                    <para>ポートのデフォルトの設定は 61613 です。</para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                         <emphasis>$options['driverOptions']['username'] = 'username';</emphasis>
+                    </para>
+
+                    <para>
+                        一部のメッセージ発信サーバのために選択できます。
+                        メッセージ発信サーバのためのマニュアルを読んでください。
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <emphasis>$options['driverOptions']['password'] = 'password';</emphasis>
+                    </para>
+
+                    <para>
+                        一部のメッセージ発信サーバのために選択できます。
+                        メッセージ発信サーバのためのマニュアルを読んでください。
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <emphasis>$options['driverOptions']['timeout_sec'] = 2;</emphasis>
+                    </para>
+
+                    <para>
+                        <emphasis>$options['driverOptions']['timeout_usec'] = 0;</emphasis>
+                    </para>
+
+                    <para>
+                        これは、<classname>Zend_Queue_Adapter_Activemq</classname>がメッセージを返さない前に
+                        ソケットで読み取り活動を待つ時間です。
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </sect3>
+
+        <sect3 id="zend.queue.adapters.configuration.Db">
+            <title>Db - Zend_Queue_Adapter_Db</title>
+
+            <para>
+                ドライバオプションは、多少の必須のオプションのためにチェックされます。
+                （例えば<emphasis>type</emphasis>、<emphasis>host</emphasis>、<emphasis>username</emphasis>、
+                <emphasis>password</emphasis>と<emphasis>dbname</emphasis>）
+                <varname>$options['driverOptions']</varname>でパラメータとして、
+                <methodname>Zend_DB::factory()</methodname>のために付加パラメータに沿って渡すかもしれません。
+                ここでは一覧に示されていませんが、
+                渡すことができる付加的なオプションは<emphasis>port</emphasis>でしょう。
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$options = array(
+    'driverOptions' => array(
+        'host'      => 'db1.domain.tld',
+        'username'  => 'my_username',
+        'password'  => 'my_password',
+        'dbname'    => 'messaging',
+        'type'      => 'pdo_mysql',
+        'port'      => 3306, // optional parameter.
+    ),
+    'options' => array(
+        // 更新のためにZend_Db_Selectを使います。
+        // 全てのデータベースがこのフィーチャをサポートできるわけではありません。
+        Zend_Db_Select::FOR_UPDATE => true
+    )
+);
+
+// データベース待ち行列を作成
+$queue = Zend_Queue::factory('Db', $options);
+]]></programlisting>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                         <emphasis>$options['name'] = 'queue1';</emphasis>
+                    </para>
+
+                    <para>
+                        これは、使い始めたい待ち行列の名前です。（必須）
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <emphasis>$options['driverOptions']['type'] = 'Pdo';</emphasis>
+                    </para>
+
+                    <para>
+                        <emphasis>type</emphasis>は、
+                        <methodname>Zend_Db::factory()</methodname>を
+                        使ってもらいたいアダプタです。
+                        これは、<methodname>Zend_Db::factory()</methodname>
+                        クラス・メソッド呼び出しの最初のパラメータです。
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <emphasis>$options['driverOptions']['host'] = 'host.domain.tld';</emphasis>
+                    </para>
+
+                    <para>
+                        <emphasis>$options['driverOptions']['host'] = '127.0.0.1';</emphasis>
+                    </para>
+
+                    <para>ホストをIPアドレスまたはホスト名にセットするかもしれません。</para>
+
+                    <para>ホストのデフォルトの設定は '127.0.0.1' です。</para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                         <emphasis>$options['driverOptions']['username'] = 'username';</emphasis>
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <emphasis>$options['driverOptions']['password'] = 'password';</emphasis>
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <emphasis>$options['driverOptions']['dbname'] = 'dbname';</emphasis>
+                    </para>
+
+                    <para>
+                        必須のテーブルを作成したデータベース名。
+                        下記の注意部分を見てください。
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </sect3>
+
+        <sect3 id="zend.queue.adapters.configuration.memcacheq">
+            <title>MemcacheQ - Zend_Queue_Adapter_Memcacheq</title>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                         <emphasis>$options['name'] = 'queue1';</emphasis>
+                    </para>
+
+                    <para>
+                        これは、使い始めたい待ち行列の名前です。（必須）
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                         <emphasis>$options['driverOptions']['host'] = 'host.domain.tld';</emphasis>
+                    </para>
+
+                    <para>
+                         <emphasis>$options['driverOptions']['host'] = '127.0.0.1;'</emphasis>
+                    </para>
+
+                    <para>ホストをIPアドレスまたはホスト名にセットするかもしれません。</para>
+
+                    <para>ホストのデフォルトの設定は '127.0.0.1' です。</para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <emphasis>$options['driverOptions']['port'] = 22201;</emphasis>
+                    </para>
+
+                    <para>ポートのデフォルトの設定は 22201 です。</para>
+                </listitem>
+            </itemizedlist>
+        </sect3>
+
+        <sect3 id="zend.queue.adapters.configuration.array">
+            <title>配列 - Zend_Queue_Adapter_Array</title>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                         <emphasis>$options['name'] = 'queue1';</emphasis>
+                    </para>
+
+                    <para>
+                        これは、使い始めたい待ち行列の名前です。（必須）
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </sect3>
+    </sect2>
+
+    <sect2 id="zend.queue.adapters.notes">
+        <title>アダプタ固有の注意</title>
+
+        <para>下記のアダプタには注意があります:</para>
+
+        <sect3 id="zend.queue.adapters.notes.activemq">
+            <title>ActiveMQ</title>
+
+            <para>
+                <classname>Zend_Queue_Adapter_ActiveMQ</classname>のための可視性期間は利用できません。
+            </para>
+
+            <para>
+                ApacheのActiveMQが複数のサブスクリプションをサポートするのに対して、
+                <classname>Zend_Queue</classname>はそうしません。
+                それぞれのサブスクリプションのために
+                新しい<classname>Zend_Queue</classname>オブジェクトを作成しなければなりません。
+            </para>
+
+            <para>
+                ActiveMQの待ち行列または項目の名前は下記のうちの一つで始めなくてはいけません:
+            </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <filename>/queue/</filename>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <filename>/topic/</filename>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <filename>/temp-queue/</filename>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <filename>/temp-topic/</filename>
+                    </para>
+                </listitem>
+            </itemizedlist>
+
+            <para>
+                例えば: <filename>/queue/testing</filename>
+            </para>
+
+            <para>
+                下記の関数はサポートされません:
+            </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                         <methodname>create()</methodname> - 待ち行列の作成。
+                         この関数を呼ぶと例外を発生します。
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>delete()</methodname> - 待ち行列の削除。
+                         この関数を呼ぶと例外を発生します。
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>getQueues()</methodname> - 待ち行列の一覧。
+                         この関数を呼ぶと例外を発生します。
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </sect3>
+
+        <sect3 id="zend.queue.adapters.notes.zend_db">
+            <title>Zend_Db</title>
+
+            <para>
+                データベース<emphasis>CREATE TABLE ( ... )</emphasis> <acronym>SQL</acronym>
+                文が<filename>Zend/Queue/Adapter/Db/queue.sql</filename>にあります。
+            </para>
+        </sect3>
+
+        <sect3 id="zend.queue.adapters.notes.memcacheQ">
+            <title>MemcacheQ</title>
+
+            <para>
+                Memcacheは<ulink
+                    url="http://www.danga.com/memcached/">http://www.danga.com/memcached/</ulink>
+                からダウンロードできます。
+            </para>
+
+            <para>
+                MemcacheQは<ulink
+                    url="http://memcachedb.org/memcacheq/">http://memcachedb.org/memcacheq/</ulink>
+                からダウンロードできます。
+            </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <methodname>deleteMessage()</methodname> - 
+                        メッセージは、待ち行列から受信と同時に削除されます。
+                        この関数を呼んでも効果がありません。
+                        この関数を呼ぶとエラーを発生します。
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>count()</methodname>または<methodname>count($adapter)</methodname>
+                        - MemcacheQは、待ち行列で件数を数えるためのメソッドをサポートしません。
+                        この関数を呼ぶとエラーを発生します。
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </sect3>
+
+        <sect3 id="zend.queue.adapters.notes.array">
+            <title>配列 (内部)</title>
+
+            <para>
+                配列待ち行列はローカルメモリ上の<acronym>PHP</acronym> <methodname>array()</methodname>です。
+                <classname>Zend_Queue_Adapter_Array</classname>はユニットテスト用に適しています。
+            </para>
+        </sect3>
+    </sect2>
+</sect1>

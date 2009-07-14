@@ -109,7 +109,7 @@ class Zend_Queue_Message
             iterator class. The message iterator class is used to return
             messages from
             <methodname>Zend_Queue_Adapter_Abstract::recieve()</methodname>.
-            <methodname>Zend_Queue_Abstract::receive()</methodname> should aways
+            <methodname>Zend_Queue_Abstract::receive()</methodname> should always
             return a container class like
             <classname>Zend_Queue_Message_Iterator</classname>, even if there is
             only one message.

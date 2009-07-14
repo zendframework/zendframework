@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 16603 -->
+<sect3 id="zend.controller.plugins.standard.puthandler">
+    <title>Zend_Controller_Plugin_PutHandler</title>
+
+    <para>
+        <classname>Zend_Controller_Plugin_PutHandler</classname>は、
+        まるでPOSTリクエスト・ボディのようなリクエスト・パラメータにPUTリクエスト・ボディを配置するために、
+        ドロップイン・プラグインを提供します。
+        それはリクエストを調べます、そして、PUTならば、
+        生のPUTボディを解析してリクエストに配置されるパラメータの配列にするためにparse_strを使います。
+        例えば、
+    </para>
+
+    <programlisting language="txt"><![CDATA[
+PUT /notes/5.xml HTTP/1.1
+
+title=Hello&body=World
+]]></programlisting>
+
+    <para>
+        'title' 及び 'body' パラメータを通常のリクエスト・パラメータとして受け取るために、
+        プラグインを登録します:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+$front = Zend_Controller_Front::getInstance();
+$front->registerPlugin(new Zend_Controller_Plugin_PutHandler());
+]]></programlisting>
+
+    <para>
+        そして、コントローラ内でリクエストからPUTボディー・パラメータに名前によるアクセスができます:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+...
+public function putAction()
+{
+    $title = $this->getRequest()->getParam('title'); // $title = "Hello"
+    $body = $this->getRequest()->getParam('body'); // $body = "World"
+}
+...
+]]></programlisting>
+
+</sect3>

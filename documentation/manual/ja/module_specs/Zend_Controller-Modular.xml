@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16165 -->
+<!-- EN-Revision: 16705 -->
 <sect1 id="zend.controller.modular">
     <title>モジュラーディレクトリ構造の規約の使用</title>
 
@@ -8,7 +8,7 @@
         <title>導入</title>
         <para>
             モジュラーディレクトリ構造の規約 (The Conventional Modular directory structure)
-            により、さまざまな MVC アプリケーションを自己完結した単位にまとめることができます。
+            により、さまざまな <acronym>MVC</acronym> アプリケーションを自己完結した単位にまとめることができます。
             また、それをさまざまなフロントコントローラで再利用できるようになります。
             このディレクトリ構造は、次のようになります。
         </para>
@@ -54,9 +54,9 @@ application/
             この考え方では、モジュール名が、
             その中に含まれるコントローラのプレフィックスとなります。
             上の例には、三つのモジュールコントローラ
-            'Blog_IndexController'、'News_IndexController' および
-            'News_ListController' が含まれます。また、グローバルコントローラも
-            'IndexController' と 'FooController' の二つが定義されています。
+            '<classname>Blog_IndexController</classname>'、'<classname>News_IndexController</classname>' および
+            '<classname>News_ListController</classname>' が含まれます。また、グローバルコントローラも
+            '<classname>IndexController</classname>' と '<classname>FooController</classname>' の二つが定義されています。
             これらは名前空間に属しません。この章のサンプルでは、
             ここで示したディレクトリ構造を使用します。
         </para>
@@ -68,13 +68,14 @@ application/
                 名前空間プレフィックスを必要としないことに注意しましょう。
                 したがって、上の例ではデフォルトモジュールのコントローラには
                 'Default_' は不要です。そのベースコントローラ名である
-                'IndexController' および 'FooController' にもとづいて単純にディスパッチされます。
+                '<classname>IndexController</classname>' および
+                '<classname>FooController</classname>' にもとづいて単純にディスパッチされます。
                 しかし、それ以外のモジュールでは名前空間プレフィックスを使用します。
             </para>
         </note>
 
         <para>
-            それでは、Zend Framework の MVC コンポーネントを使用して
+            それでは、Zend Framework の <acronym>MVC</acronym> コンポーネントを使用して
             これらのディレクトリ配置を実装するにはどうすればいいのでしょうか?
         </para>
     </sect2>
@@ -85,7 +86,7 @@ application/
         <para>
             モジュールを使用するための第一歩となるのが、
             フロントコントローラでのコントローラディレクトリの設定方法を変更することです。
-            基本的な MVC 版では、配列あるいは文字列を
+            基本的な <acronym>MVC</acronym> 版では、配列あるいは文字列を
             <methodname>setControllerDirectory()</methodname> に渡すか、
             あるいはパスを <methodname>addControllerDirectory()</methodname>
             に渡していました。モジュールを使用する場合は、
@@ -95,10 +96,10 @@ application/
         <para>
             <methodname>setControllerDirectory()</methodname> では、連想配列を渡す必要があります。
             連想配列のキーにはモジュール名、そしてその値としてディレクトリのパスを指定します。
-            特別な名前 <code>default</code> をキーにすると、グローバルコントローラ
+            特別な名前 <property>default</property> をキーにすると、グローバルコントローラ
             (モジュール名前空間を必要としないもの) を指定できます。
             すべてのエントリは、ひとつのパスをさす文字列のキーを含まなければなりません。
-            また、<code>default</code> というキーが必ず存在しなければなりません。
+            また、<property>default</property> というキーが必ず存在しなければなりません。
             次の例のようになります。
         </para>
 
@@ -112,7 +113,7 @@ $front->setControllerDirectory(array(
         <para>
             <methodname>addControllerDirectory()</methodname> では、オプションの二番目の引数を受け付けます。
             モジュールを使用する際には、モジュール名を二番目の引数で渡します。
-            指定しない場合は、そのパスは <code>default</code> 名前空間に追加されます。
+            指定しない場合は、そのパスは <emphasis>default</emphasis> 名前空間に追加されます。
             次の例のようになります。
         </para>
 
@@ -143,9 +144,9 @@ $front->addModuleDirectory('/path/to/application/modules');
 ]]></programlisting>
 
         <para>
-            上の例は <code>default</code>、
-            <code>foo</code> および <code>bar</code> というモジュールを定義しており、
-            それぞれのモジュール内に <code>controllers</code>
+            上の例は <emphasis>default</emphasis>、
+            <emphasis>foo</emphasis> および <emphasis>bar</emphasis> というモジュールを定義しており、
+            それぞれのモジュール内に <filename>controllers/</filename>
             ディレクトリを保持しています。
         </para>
 
@@ -205,8 +206,8 @@ $front->addModuleDirectory('/path/to/application/modules');
         <title>モジュールあるいはグローバルのデフォルトコントローラ</title>
 
         <para>
-            デフォルトのルータでは、コントローラが URL で指定されなかった場合には
-            デフォルトのコントローラ (特に指定しなければ <emphasis>IndexController</emphasis>)
+            デフォルトのルータでは、コントローラが <acronym>URL</acronym> で指定されなかった場合には
+            デフォルトのコントローラ (特に指定しなければ <classname>IndexController</classname>)
             を使用します。モジュール対応のコントローラにおいて、
             モジュールのみを指定してコントローラを指定しなかった場合は、
             ディスパッチャはまず最初にモジュールパス内のデフォルトコントローラを探します。

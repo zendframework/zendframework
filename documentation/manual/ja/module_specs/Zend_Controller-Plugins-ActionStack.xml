@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16178 -->
+<!-- EN-Revision: 16705 -->
 <sect3 id="zend.controller.plugins.standard.actionstack">
     <title>ActionStack</title>
 
     <para>
         <emphasis>ActionStack</emphasis> プラグインは、リクエストをスタックで管理します。
-        <code>postDispatch</code> プラグインとして動作します。
+        <emphasis>postDispatch</emphasis> プラグインとして動作します。
         現在のリクエストオブジェクトで既に転送先が指定されている
         (別のアクションがコールされている) 場合は、何も行いません。
         転送されていない場合はスタックの最上位の要素を取り出し、
         そのリクエストが指すアクションに転送します。
-        スタックの処理は LIFO (後入れ先出し) 方式で行います。
+        スタックの処理は <acronym>LIFO</acronym> (後入れ先出し) 方式で行います。
     </para>
 
     <para>
         このプラグインをフロントコントローラから取得するには、
-        <classname>Zend_Controller_Front::getPlugin('Zend_Controller_Plugin_ActionStack')</classname>
+        <methodname>Zend_Controller_Front::getPlugin('Zend_Controller_Plugin_ActionStack')</methodname>
         とします。プラグインオブジェクトを取得したら、
         さまざまな仕組みを利用できるようになります。
     </para>
@@ -33,7 +33,7 @@
         <listitem><para>
                 <methodname>getRegistryKey()</methodname> および <methodname>setRegistryKey()</methodname>。
                 これらは、スタックに格納する際にレジストリのどのキーを使用するかを指定します。
-                デフォルト値は 'Zend_Controller_Plugin_ActionStack' です。
+                デフォルト値は '<classname>Zend_Controller_Plugin_ActionStack</classname>' です。
         </para></listitem>
 
         <listitem><para>

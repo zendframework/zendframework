@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16178 -->
+<!-- EN-Revision: 16705 -->
 <sect1 id="zend.controller.quickstart">
     <title>Zend_Controller クイックスタート</title>
 
     <sect2 id="zend.controller.quickstart.introduction">
         <title>導入</title>
         <para>
-            <classname>Zend_Controller</classname> は、Zend Framework の MVC
-            システムの中心となるものです。MVC は <ulink
+            <classname>Zend_Controller</classname> は、Zend Framework の <acronym>MVC</acronym>
+            システムの中心となるものです。<acronym>MVC</acronym> は <ulink
                 url="http://en.wikipedia.org/wiki/Model-view-controller">モデル-ビュー-コントローラ</ulink>
             の頭文字をとったもので、アプリケーションのロジックと表示ロジックを分離させる設計手法です。
             <classname>Zend_Controller_Front</classname> は
@@ -16,7 +16,7 @@
                 url="http://www.martinfowler.com/eaaCatalog/frontController.html">
                 フロントコントローラ</ulink> パターンを実装しており、
             すべてのリクエストをいったんフロントコントローラで受け取った上でその
-            URL にもとづいたアクションコントローラに配送します。
+            <acronym>URL</acronym> にもとづいたアクションコントローラに配送します。
         </para>
         <para>
             <classname>Zend_Controller</classname> は、拡張性を考慮して作成されています。
@@ -67,7 +67,7 @@ html/
 
             <para>
                 ウェブサーバのドキュメントルートを、先ほどのレイアウト中の
-                <code>html</code> ディレクトリに設定します。
+                <filename>html/</filename> ディレクトリに設定します。
             </para>
         </sect3>
 
@@ -105,7 +105,7 @@ RewriteRule ^.*$ index.php [NC,L]
             </note>
 
             <para>
-                IIS 7.0 をお使いの場合は、次のような rewrite 設定を使用します。
+                <acronym>IIS</acronym> 7.0 をお使いの場合は、次のような rewrite 設定を使用します。
             </para>
 
             <programlisting language="xml"><![CDATA[
@@ -178,15 +178,15 @@ Zend_Controller_Front::run('/path/to/app/controllers');
             <para>
                 アクションコントローラについて説明する前に、まず
                 Zend Framework でのリクエストの処理方法について知っておきましょう。
-                デフォルトでは、URL パスの最初の部分がコントローラ、
-                そしてその次の部分がアクションに対応します。たとえば URL が
+                デフォルトでは、<acronym>URL</acronym> パスの最初の部分がコントローラ、
+                そしてその次の部分がアクションに対応します。たとえば <acronym>URL</acronym> が
                 <filename>http://framework.zend.com/roadmap/components</filename>
                 である場合、パスは <filename>/roadmap/components</filename>
-                となり、これは <code>roadmap</code> コントローラの
-                <code>components</code> アクションに対応します。
-                アクションを省略した場合は <code>index</code> アクションであるとみなされます。
-                またコントローラを省略した場合は <code>index</code> コントローラであるとみなされます
-                (Apache が自動的に <code>DirectoryIndex</code>
+                となり、これは <emphasis>roadmap</emphasis> コントローラの
+                <emphasis>components</emphasis> アクションに対応します。
+                アクションを省略した場合は <emphasis>index</emphasis> アクションであるとみなされます。
+                またコントローラを省略した場合は <emphasis>index</emphasis> コントローラであるとみなされます
+                (Apache が自動的に <emphasis>DirectoryIndex</emphasis>
                 に対応させるという規約に従っています)。
             </para>
 
@@ -194,17 +194,17 @@ Zend_Controller_Front::run('/path/to/app/controllers');
                 <classname>Zend_Controller</classname> のディスパッチャは、
                 コントローラを対応するクラスに関連付けます。
                 デフォルトでは、コントローラ名の先頭を大文字にしたものに
-                <code>Controller</code> をつなげたものがクラス名となります。
-                つまり、上の例では <code>roadmap</code> コントローラが
-                <code>RoadmapController</code> クラスに対応することになります。
+                <emphasis>Controller</emphasis> をつなげたものがクラス名となります。
+                つまり、上の例では <emphasis>roadmap</emphasis> コントローラが
+                <emphasis>RoadmapController</emphasis> クラスに対応することになります。
             </para>
 
             <para>
                 同様に、アクションもコントローラクラスのメソッドに関連付けます。
                 デフォルトでは、アクション名を小文字に変換して
-                <code>Action</code> を追加したものがメソッド名となります。
-                つまり、上の例では <code>components</code> アクションは
-                <code>componentsAction</code> メソッドになり、最終的に
+                <emphasis>Action</emphasis> を追加したものがメソッド名となります。
+                つまり、上の例では <emphasis>components</emphasis> アクションは
+                <methodname>componentsAction()</methodname> メソッドになり、最終的に
                 <methodname>RoadmapController::componentsAction()</methodname>
                 がコールされることになります。
             </para>
@@ -213,7 +213,7 @@ Zend_Controller_Front::run('/path/to/app/controllers');
                 続いて、デフォルトのアクションコントローラと
                 アクションメソッドを作ってみましょう。
                 先ほど説明したように、デフォルトのコントローラ名およびアクション名はどちらも
-                <code>index</code> となります。
+                <emphasis>index</emphasis> となります。
                 <filename>application/controllers/IndexController.php</filename>
                 を開き、次の内容を入力しましょう。
             </para>
@@ -234,15 +234,15 @@ class IndexController extends Zend_Controller_Action
                 アクションヘルパーが有効になります。つまり、
                 アクションメソッドとそれに対応するビュースクリプトを用意すれば、
                 すぐにその内容をレンダリングできるというわけです。
-                デフォルトでは、MVCのビュー層として <classname>Zend_View</classname> を使用します。
+                デフォルトでは、<acronym>MVC</acronym> のビュー層として <classname>Zend_View</classname> を使用します。
                 <emphasis>ViewRenderer</emphasis> は、コントローラ名
-                (たとえば <code>index</code>) とアクション名
-                (たとえば <code>index</code>) から処理するテンプレートを決定します。
+                (たとえば <emphasis>index</emphasis>) とアクション名
+                (たとえば <emphasis>index</emphasis>) から処理するテンプレートを決定します。
                 デフォルトでは、テンプレートの拡張子は
                 <filename>.phtml</filename> となります。つまり、上の例では
                 <filename>index/index.phtml</filename> をレンダリングします。
                 さらに <emphasis>ViewRenderer</emphasis> は、
-                コントローラと同一階層にある <code>views</code>
+                コントローラと同一階層にある <filename>views/</filename>
                 ディレクトリを自動的にビューの基底ディレクトリとみなし、
                 <filename>views/scripts/</filename> ビュースクリプトがおかれるものと考えます。
                 したがって、実際にレンダリングされるテンプレートは
@@ -260,7 +260,7 @@ class IndexController extends Zend_Controller_Action
                 <filename>application/views/scripts/</filename> です。
                 デフォルトコントローラにおけるデフォルトのアクションのビュースクリプトは
                 <filename>application/views/scripts/index/index.phtml</filename>
-                となります。このファイルを作成し、何か HTML を入力してみましょう。
+                となります。このファイルを作成し、何か <acronym>HTML</acronym> を入力してみましょう。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -332,7 +332,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
             <para>
                 ここまでくれば、実際にブラウザでサイトを表示してみることができます。
                 あなたのドメインが <filename>example.com</filename> だとすると、
-                以下のいずれかの URL で先ほど作成したページが表示されることでしょう。
+                以下のいずれかの <acronym>URL</acronym> で先ほど作成したページが表示されることでしょう。
             </para>
 
             <itemizedlist>

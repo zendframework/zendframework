@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16178 -->
+<!-- EN-Revision: 16705 -->
 <sect3 id="zend.controller.plugins.standard.errorhandler">
     <title>Zend_Controller_Plugin_ErrorHandler</title>
 
@@ -105,7 +105,7 @@
         <para>
             捕捉した例外は、リクエストで登録したオブジェクトの中に記録されます。
             これを取得するには、
-            <classname>Zend_Controller_Action::_getParam('error_handler')</classname>
+            <methodname>Zend_Controller_Action::_getParam('error_handler')</methodname>
             を使用します。
         </para>
 
@@ -121,28 +121,28 @@ class ErrorController extends Zend_Controller_Action
 
         <para>
             エラーオブジェクトを取得したら、次に
-            <varname>$errors->type</varname> でその型を調べます。
+            <command>$errors->type</command> でその型を調べます。
             これは、次のいずれかとなります。
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <classname>Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER</classname>
+                    <constant>Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER</constant>
                     は、コントローラが見つからなかったことを表します。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <classname>Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION</classname>
+                    <constant>Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION</constant>
                     は、アクションが見つからなかったことを表します。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <classname>Zend_Controller_Plugin_ErrorHandler::EXCEPTION_OTHER</classname>
+                    <constant>Zend_Controller_Plugin_ErrorHandler::EXCEPTION_OTHER</constant>
                     は、その他の例外を表します。
                 </para>
             </listitem>
@@ -179,8 +179,8 @@ class ErrorController extends Zend_Controller_Action
 
         <para>
             エラーハンドラで発生した礼儀を取得するには、
-            <code>error_handler</code> オブジェクトのプロパティ
-            <code>exception</code> を使用します。
+            <emphasis>error_handler</emphasis> オブジェクトのプロパティ
+            <property>exception</property> を使用します。
         </para>
 
         <programlisting language="php"><![CDATA[

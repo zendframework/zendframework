@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16590 -->
+<!-- EN-Revision: 16714 -->
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
     "@DOCBOOK_DTD@"
 [
@@ -191,6 +191,9 @@
         </xi:include>
         <xi:include href="module_specs/Zend_Dojo-Form.xml" parse="xml">
             <xi:fallback><xi:include href="../en/module_specs/Zend_Dojo-Form.xml" /></xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Dojo-BuildLayers.xml">
+            <xi:fallback><xi:include href="../en/module_specs/Zend_Dojo-BuildLayers.xml" /></xi:fallback>
         </xi:include>
     </chapter>
 

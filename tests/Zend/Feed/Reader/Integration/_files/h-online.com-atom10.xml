@@ -1,0 +1,584 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<feed xmlns="http://www.w3.org/2005/Atom">
+<title>The H - news feed</title>
+<subtitle>Technology news</subtitle>
+<link href="http://www.h-online.com" />
+<link rel="self" href="http://www.h-online.com/news/atom.xml" />
+<updated>2009-07-04T20:31:10+02:00</updated>
+<author>
+<name>The H</name>
+</author>
+<id>http://www.h-online.com/security/McAfee-update-brings-systems-down-again--/news/113689/from/rss</id>
+
+<entry>
+    <title>McAfee update brings systems down again</title>
+    <link href="http://www.h-online.com/security/McAfee-update-brings-systems-down-again--/news/113689/from/rss" />
+    <summary>A McAfee signature update is currently causing system failures and a lot of overtime for administrators</summary>
+    <id>http://www.h-online.com/security/McAfee-update-brings-systems-down-again--/news/113689/from/rss</id>
+    <updated>2009-07-04T20:31:10+02:00</updated>
+
+</entry>
+
+
+<entry>
+    <title>The H Week</title>
+    <link href="http://www.h-online.com/news/The-H-Week--/113687/from/rss" />
+    <summary>This week, The H reported on several new major releases, including Firefox 3.5, Python 3.1, NetBeans 6.7, PHP 5.3.0, VirtualBox 3.0 and PostgreSQL 8.4, and covered the result of Stallman's open letter criticising Debian's use of Mono</summary>
+    <id>http://www.h-online.com/news/The-H-Week--/113687/from/rss</id>
+    <updated>2009-07-04T09:34:53+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>GNOME and KDE developer conference begins on Gran Canaria</title>
+    <link href="http://www.h-online.com/open/GNOME-and-KDE-developer-conference-begins-on-Gran-Canaria--/news/113688/from/rss" />
+    <summary>The Gran Canaria Desktop Summit 2009 is the first time that the KDE and GNOME communities are co-locating their annual GUADEC and Akademy conferences</summary>
+    <id>http://www.h-online.com/open/GNOME-and-KDE-developer-conference-begins-on-Gran-Canaria--/news/113688/from/rss</id>
+    <updated>2009-07-03T17:08:07+02:00</updated>
+
+</entry>
+
+
+<entry>
+    <title>XHTML 2 to be discontinued</title>
+    <link href="http://www.h-online.com/open/XHTML-2-to-be-discontinued--/news/113686/from/rss" />
+    <summary>The W3C announced yesterday that it will discontinue its work on XHTML 2 and will instead focus exclusively on (X)HTML 5 as a successor of current web standards</summary>
+    <id>http://www.h-online.com/open/XHTML-2-to-be-discontinued--/news/113686/from/rss</id>
+    <updated>2009-07-03T15:14:56+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>No mandatory audio and video codecs in HTML 5</title>
+    <link href="http://www.h-online.com/open/No-mandatory-audio-and-video-codecs-in-HTML-5--/news/113685/from/rss" />
+    <summary>Some members of the WHATWG reject Ogg Theora, and H.264 is subject to licence fees, so Ian Hickson has decided to eliminate all reference to mandatory audio/video codecs from the HTML 5 specification</summary>
+    <id>http://www.h-online.com/open/No-mandatory-audio-and-video-codecs-in-HTML-5--/news/113685/from/rss</id>
+    <updated>2009-07-03T13:01:43+02:00</updated>
+
+</entry>
+
+
+<entry>
+    <title>"Luxembourg attacks" on AES encryption</title>
+    <link href="http://www.h-online.com/security/Luxembourg-attacks-on-AES-encryption--/news/113684/from/rss" />
+    <summary>Although the attacks don't affect the practical security of AES, they represent substantial cryptological progress</summary>
+    <id>http://www.h-online.com/security/Luxembourg-attacks-on-AES-encryption--/news/113684/from/rss</id>
+    <updated>2009-07-03T17:17:04+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Fluendo releases DVD player for Linux</title>
+    <link href="http://www.h-online.com/open/Fluendo-releases-DVD-player-for-Linux--/news/113683/from/rss" />
+    <summary>Fluendo has released its own DVD player for Linux built on the open source GStreamer multimedia framework</summary>
+    <id>http://www.h-online.com/open/Fluendo-releases-DVD-player-for-Linux--/news/113683/from/rss</id>
+    <updated>2009-07-03T11:40:42+02:00</updated>
+
+</entry>
+
+
+<entry>
+    <title>No more updates for Python 3.0</title>
+    <link href="http://www.h-online.com/open/No-more-updates-for-Python-3-0--/news/113682/from/rss" />
+    <summary>The Python developers have announced that there will be no additional maintenance or security update releases for version 3.0 of the Python scripting language</summary>
+    <id>http://www.h-online.com/open/No-more-updates-for-Python-3-0--/news/113682/from/rss</id>
+    <updated>2009-07-03T10:30:33+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>GNOME 2.26.3 released</title>
+    <link href="http://www.h-online.com/open/GNOME-2-26-3-released--/news/113679/from/rss" />
+    <summary>The GNOME release team have announced the availability of the final update to GNOME 2.26</summary>
+    <id>http://www.h-online.com/open/GNOME-2-26-3-released--/news/113679/from/rss</id>
+    <updated>2009-07-03T16:13:50+02:00</updated>
+
+</entry>
+
+
+<entry>
+    <title>Alledged critical security vulnerability in iPhone SMS application</title>
+    <link href="http://www.h-online.com/security/Alledged-critical-security-vulnerability-in-iPhone-SMS-application--/news/113680/from/rss" />
+    <summary>According to US media reports, Apple is working on an update for the iPhone to fix a critical vulnerability in its texting application</summary>
+    <id>http://www.h-online.com/security/Alledged-critical-security-vulnerability-in-iPhone-SMS-application--/news/113680/from/rss</id>
+    <updated>2009-07-03T14:29:51+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Hard times for NeoOffice</title>
+    <link href="http://www.h-online.com/open/Hard-times-for-NeoOffice--/news/113678/from/rss" />
+    <summary>The developers of the free open source NeoOffice office suite for Mac OS X have announced that, due to very low donation levels this year, they will be forced to make severe cutbacks</summary>
+    <id>http://www.h-online.com/open/Hard-times-for-NeoOffice--/news/113678/from/rss</id>
+    <updated>2009-07-02T17:42:53+02:00</updated>
+
+</entry>
+
+
+<entry>
+    <title>Study shows rise in spam botnets</title>
+    <link href="http://www.h-online.com/security/Study-shows-rise-in-spam-botnets--/news/113677/from/rss" />
+    <summary>According to MessageLabs, June 2009 saw a worldwide increase in spam being sent via botnets to 83.2 per cent, up from only 57.6 per cent in May</summary>
+    <id>http://www.h-online.com/security/Study-shows-rise-in-spam-botnets--/news/113677/from/rss</id>
+    <updated>2009-07-03T17:05:01+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>MD6 hash algorithm withdrawn from SHA-3 competition</title>
+    <link href="http://www.h-online.com/security/MD6-hash-algorithm-withdrawn-from-SHA-3-competition--/news/113676/from/rss" />
+    <summary>MD6 was, despite its relative slowness, one of the favourites. The reasons given for the withdrawal by lead developer Ron Rivest surprised even those in the know</summary>
+    <id>http://www.h-online.com/security/MD6-hash-algorithm-withdrawn-from-SHA-3-competition--/news/113676/from/rss</id>
+    <updated>2009-07-02T17:03:50+02:00</updated>
+
+</entry>
+
+
+<entry>
+    <title>Ubuntu to continue using Mono</title>
+    <link href="http://www.h-online.com/open/Ubuntu-to-continue-using-Mono--/news/113674/from/rss" />
+    <summary>The Ubuntu Technical Board has clarified that the use of the Mono stack implementation is not considered to be a problem and that it, and applications based on it, will continue to be included with the default Ubuntu installation set</summary>
+    <id>http://www.h-online.com/open/Ubuntu-to-continue-using-Mono--/news/113674/from/rss</id>
+    <updated>2009-07-02T17:01:17+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>WordPress themes must be GPL</title>
+    <link href="http://www.h-online.com/open/WordPress-themes-must-be-GPL--/news/113675/from/rss" />
+    <summary>WordPress themes are derivative works and should be licensed under the GPL say WordPress developers after consulting the Software Freedom Law Center</summary>
+    <id>http://www.h-online.com/open/WordPress-themes-must-be-GPL--/news/113675/from/rss</id>
+    <updated>2009-07-02T15:37:30+02:00</updated>
+
+</entry>
+
+
+<entry>
+    <title>Google Update no longer runs continuously</title>
+    <link href="http://www.h-online.com/open/Google-Update-no-longer-runs-continuously--/news/113673/from/rss" />
+    <summary>To address concerns from users, the Google Update open source software installer and auto-updater for Windows now uses the Windows Task Scheduler to only run at periodic intervals</summary>
+    <id>http://www.h-online.com/open/Google-Update-no-longer-runs-continuously--/news/113673/from/rss</id>
+    <updated>2009-07-02T14:20:03+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Kernel Log - Coming in 2.6.31 - Part 1: New Wi-Fi drivers and other network-related changes</title>
+    <link href="http://www.h-online.com/open/Kernel-Log-Coming-in-2-6-31-Part-1-New-Wi-Fi-drivers-and-other-network-related-changes--/news/113670/from/rss" />
+    <summary>Linux 2.6.31 will include a new Wi-Fi driver for Intel chips and will be WPAN-capable in accordance with IEEE 802.15.4. The developers have also improved support for Ralink Wi-Fi components and for newer power saving technologies</summary>
+    <id>http://www.h-online.com/open/Kernel-Log-Coming-in-2-6-31-Part-1-New-Wi-Fi-drivers-and-other-network-related-changes--/news/113670/from/rss</id>
+    <updated>2009-07-02T17:40:56+02:00</updated>
+
+</entry>
+
+
+<entry>
+    <title>AACS LA reduces copy protection charges for Blu-ray Discs</title>
+    <link href="http://www.h-online.com/security/AACS-LA-reduces-copy-protection-charges-for-Blu-ray-Discs--/news/113672/from/rss" />
+    <summary>The reduced charges are primarily intended to benefit small studios and pressing companies that have yet to release any Blu-ray versions of their films due to the high cost</summary>
+    <id>http://www.h-online.com/security/AACS-LA-reduces-copy-protection-charges-for-Blu-ray-Discs--/news/113672/from/rss</id>
+    <updated>2009-07-02T17:02:44+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>SourceForge.net: four billion served</title>
+    <link href="http://www.h-online.com/open/SourceForge-net-four-billion-served--/news/113668/from/rss" />
+    <summary>SourceForge Inc. has announced that its SourceForge.net software site has served its four billionth download.  The four billionth application was downloaded on the 8th of June from PortableApps.com</summary>
+    <id>http://www.h-online.com/open/SourceForge-net-four-billion-served--/news/113668/from/rss</id>
+    <updated>2009-07-03T09:05:26+02:00</updated>
+
+</entry>
+
+
+<entry>
+    <title>Apple's iDisk sealed</title>
+    <link href="http://www.h-online.com/security/Apple-s-iDisk-sealed--/news/113669/from/rss" />
+    <summary>A hole has been closed in Apple's iDisk storage system after a vulnerability allowing unauthorised access was discovered</summary>
+    <id>http://www.h-online.com/security/Apple-s-iDisk-sealed--/news/113669/from/rss</id>
+    <updated>2009-07-02T11:02:56+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Red Hat Enterprise Linux 5.4 beta with KVM</title>
+    <link href="http://www.h-online.com/open/Red-Hat-Enterprise-Linux-5-4-beta-with-KVM--/news/113667/from/rss" />
+    <summary>Apart from offering a range of new features and new and improved drivers, the beta is the first version of RHEL 5.4 to support KVM (Kernel-based Virtual Machine) virtualisation</summary>
+    <id>http://www.h-online.com/open/Red-Hat-Enterprise-Linux-5-4-beta-with-KVM--/news/113667/from/rss</id>
+    <updated>2009-07-02T10:34:57+02:00</updated>
+
+</entry>
+
+
+<entry>
+    <title>Mercurial 1.3 released</title>
+    <link href="http://www.h-online.com/open/Mercurial-1-3-released--/news/113666/from/rss" />
+    <summary>The distributed version control system is updated and adds experimental support for subrepositories and better local sharing</summary>
+    <id>http://www.h-online.com/open/Mercurial-1-3-released--/news/113666/from/rss</id>
+    <updated>2009-07-03T09:05:48+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>CMS Made Simple 1.6 released</title>
+    <link href="http://www.h-online.com/open/CMS-Made-Simple-1-6-released--/news/113665/from/rss" />
+    <summary>CMS Made Simple, an open source Content Management System, has been updated to version 1.6.  The primary focus of the release was the complete re-working of the content permissions system</summary>
+    <id>http://www.h-online.com/open/CMS-Made-Simple-1-6-released--/news/113665/from/rss</id>
+    <updated>2009-07-01T16:09:52+02:00</updated>
+
+</entry>
+
+
+<entry>
+    <title>KDE 4.3.0 release candidate available</title>
+    <link href="http://www.h-online.com/open/KDE-4-3-0-release-candidate-available--/news/113663/from/rss" />
+    <summary>The KDE developers have announced the availability of the first release candidate of KDE 4.3.0</summary>
+    <id>http://www.h-online.com/open/KDE-4-3-0-release-candidate-available--/news/113663/from/rss</id>
+    <updated>2009-07-01T15:22:54+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>JavaScript Tested</title>
+    <link href="http://www.h-online.com/open/JavaScript-Tested--/news/113664/from/rss" />
+    <summary>Two sets of JavaScript unit tests have been released, one by Microsoft and one by Google, to help developers who are implementing the language</summary>
+    <id>http://www.h-online.com/open/JavaScript-Tested--/news/113664/from/rss</id>
+    <updated>2009-07-01T15:14:12+02:00</updated>
+
+</entry>
+
+
+<entry>
+    <title>Firefox 3.5 already downloaded more than 4 million times</title>
+    <link href="http://www.h-online.com/open/Firefox-3-5-already-downloaded-more-than-4-million-times--/news/113661/from/rss" />
+    <summary>Less than 24 hours since it was released, Firefox 3.5 has already been downloaded more than four million times and is currently being downloaded approximately 77 times every second</summary>
+    <id>http://www.h-online.com/open/Firefox-3-5-already-downloaded-more-than-4-million-times--/news/113661/from/rss</id>
+    <updated>2009-07-01T14:34:01+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>PostgreSQL 8.4 now available</title>
+    <link href="http://www.h-online.com/open/PostgreSQL-8-4-now-available--/news/113662/from/rss" />
+    <summary>16 months of development brings faster database restoration, new SQL functionality and conformance and more</summary>
+    <id>http://www.h-online.com/open/PostgreSQL-8-4-now-available--/news/113662/from/rss</id>
+    <updated>2009-07-01T14:31:39+02:00</updated>
+
+</entry>
+
+
+<entry>
+    <title>Debian - Mono is not in our default installation</title>
+    <link href="http://www.h-online.com/open/Debian-Mono-is-not-in-our-default-installation--/news/113660/from/rss" />
+    <summary>Debian have responded to Richard Stallman's claim that the project is including Mono in the default installation of the GNU/Linux distribution</summary>
+    <id>http://www.h-online.com/open/Debian-Mono-is-not-in-our-default-installation--/news/113660/from/rss</id>
+    <updated>2009-07-01T12:47:28+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Kaspersky tightens up anti-virus engine</title>
+    <link href="http://www.h-online.com/security/Kaspersky-tightens-up-anti-virus-engine--/news/113656/from/rss" />
+    <summary>Kaspersky has fixed its malware detection problem in its 2010 products via an automatic update.  The cause of the detection problems that allowed malware to be overlooked seems to have been even more severe than was initially apparent</summary>
+    <id>http://www.h-online.com/security/Kaspersky-tightens-up-anti-virus-engine--/news/113656/from/rss</id>
+    <updated>2009-07-01T12:02:04+02:00</updated>
+
+</entry>
+
+
+<entry>
+    <title>Security updates for VMWare-ESX</title>
+    <link href="http://www.h-online.com/security/Security-updates-for-VMWare-ESX--/news/113659/from/rss" />
+    <summary>VMWare updates ESX Server to close a vulnerability in its Kerberos implementation</summary>
+    <id>http://www.h-online.com/security/Security-updates-for-VMWare-ESX--/news/113659/from/rss</id>
+    <updated>2009-07-01T11:29:20+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>The new Maven 2.2.0 requires Java 5</title>
+    <link href="http://www.h-online.com/open/The-new-Maven-2-2-0-requires-Java-5--/news/113658/from/rss" />
+    <summary>The new version of the free Java build tool should bring greater stability and fixes a number of less critical bugs</summary>
+    <id>http://www.h-online.com/open/The-new-Maven-2-2-0-requires-Java-5--/news/113658/from/rss</id>
+    <updated>2009-07-01T11:23:20+02:00</updated>
+
+</entry>
+
+
+<entry>
+    <title>Cash machine cracking presentation cancelled</title>
+    <link href="http://www.h-online.com/security/Cash-machine-cracking-presentation-cancelled--/news/113657/from/rss" />
+    <summary>Juniper Networks has withdrawn a presentation at the Black Hat conference entitled "Jackpotting Automated Teller Machines" after a cash machine manufacturer intervened</summary>
+    <id>http://www.h-online.com/security/Cash-machine-cracking-presentation-cancelled--/news/113657/from/rss</id>
+    <updated>2009-07-01T11:14:34+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>PCLinuxOS 2009.2 released</title>
+    <link href="http://www.h-online.com/open/PCLinuxOS-2009-2-released--/news/113655/from/rss" />
+    <summary>The PCLinuxOS developers have released version 2009.2 of the free PCLinuxOS and PCLinuxOS GNOME distributions</summary>
+    <id>http://www.h-online.com/open/PCLinuxOS-2009-2-released--/news/113655/from/rss</id>
+    <updated>2009-07-01T10:19:52+02:00</updated>
+
+</entry>
+
+
+<entry>
+    <title>UK presents cyber-security strategy</title>
+    <link href="http://www.h-online.com/security/UK-presents-cyber-security-strategy--/news/113654/from/rss" />
+    <summary>According to Gordon Brown, the internet today is as important to the UK as the seas were in the 19th century and the air was in the 20th</summary>
+    <id>http://www.h-online.com/security/UK-presents-cyber-security-strategy--/news/113654/from/rss</id>
+    <updated>2009-06-30T18:05:50+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Firefox 3.5 now available</title>
+    <link href="http://www.h-online.com/open/Firefox-3-5-now-available--/news/113653/from/rss" />
+    <summary>Mozilla has released version 3.5 of their open source Firefox web browser, code named "Shiretoko", which includes the new Trace Monkey JavaScript engine and is based on version 1.91 of the Gecko layout engine</summary>
+    <id>http://www.h-online.com/open/Firefox-3-5-now-available--/news/113653/from/rss</id>
+    <updated>2009-06-30T18:49:21+02:00</updated>
+
+</entry>
+
+
+<entry>
+    <title>Swatting phreaker swatted and heading to jail</title>
+    <link href="http://www.h-online.com/security/Swatting-phreaker-swatted-and-heading-to-jail--/news/113652/from/rss" />
+    <summary>A 19-year-old American has been sentenced to eleven years in prison for placing faked phone calls that dispatched special police units to the homes of unwitting families</summary>
+    <id>http://www.h-online.com/security/Swatting-phreaker-swatted-and-heading-to-jail--/news/113652/from/rss</id>
+    <updated>2009-06-30T17:03:08+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>VirtualBox 3.0 released</title>
+    <link href="http://www.h-online.com/open/VirtualBox-3-0-released--/news/113651/from/rss" />
+    <summary>Sun Microsystems has announced the released of version 3.0 of its open source VirtualBox desktop virtualisation application for x86 hardware which now includes experimental support for Direct3D 8 &amp; 9 in applications for Windows guests</summary>
+    <id>http://www.h-online.com/open/VirtualBox-3-0-released--/news/113651/from/rss</id>
+    <updated>2009-06-30T16:35:07+02:00</updated>
+
+</entry>
+
+
+<entry>
+    <title>MilePost Compiler: AI optimises machine code</title>
+    <link href="http://www.h-online.com/open/MilePost-Compiler-AI-optimises-machine-code--/news/113650/from/rss" />
+    <summary>A GCC-based compiler developed by the MilePost project automatically learns how to translate source code into efficient binary code</summary>
+    <id>http://www.h-online.com/open/MilePost-Compiler-AI-optimises-machine-code--/news/113650/from/rss</id>
+    <updated>2009-06-30T16:27:51+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>PHP 5.3.0 released</title>
+    <link href="http://www.h-online.com/open/PHP-5-3-0-released--/news/113649/from/rss" />
+    <summary>The PHP development team have announced the release version 5.3.0 of PHP. The new version includes several fundamental new extensions, as well as a number of other new features</summary>
+    <id>http://www.h-online.com/open/PHP-5-3-0-released--/news/113649/from/rss</id>
+    <updated>2009-06-30T15:59:07+02:00</updated>
+
+</entry>
+
+
+<entry>
+    <title>Yellow Dog Linux 6.2 released</title>
+    <link href="http://www.h-online.com/open/Yellow-Dog-Linux-6-2-released--/news/113648/from/rss" />
+    <summary>With 6.2, the developers have mainly focused on fine-tuning the existing functionality of the Linux distribution designed particularly for PowerPCs and PS3s. Xfce has been added as a further desktop environment choice</summary>
+    <id>http://www.h-online.com/open/Yellow-Dog-Linux-6-2-released--/news/113648/from/rss</id>
+    <updated>2009-06-30T13:55:55+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Once again HP has to close a hole in OpenView Network Node Manager</title>
+    <link href="http://www.h-online.com/security/Once-again-HP-has-to-close-a-hole-in-OpenView-Network-Node-Manager--/news/113647/from/rss" />
+    <summary>HP has released updates for the OpenView Network Node Manager (NNM) to close a remotely exploitable hole in rping</summary>
+    <id>http://www.h-online.com/security/Once-again-HP-has-to-close-a-hole-in-OpenView-Network-Node-Manager--/news/113647/from/rss</id>
+    <updated>2009-06-30T12:49:56+02:00</updated>
+
+</entry>
+
+
+<entry>
+    <title>Palm Pre 1.0.4 update fixes security issues</title>
+    <link href="http://www.h-online.com/security/Palm-Pre-1-0-4-update-fixes-security-issues--/news/113645/from/rss" />
+    <summary>Palm has released version 1.0.4 of its Pre mobile phone software to address several security issues with the Palm webOS</summary>
+    <id>http://www.h-online.com/security/Palm-Pre-1-0-4-update-fixes-security-issues--/news/113645/from/rss</id>
+    <updated>2009-06-30T12:27:25+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Mono 2.4.2 with ASP.NET MVC support</title>
+    <link href="http://www.h-online.com/open/Mono-2-4-2-with-ASP-NET-MVC-support--/news/113644/from/rss" />
+    <summary>The latest maintenance release of the cross platform, open source .NET development framework is the first to incorporate Microsoft's ASP.NET MVC framework</summary>
+    <id>http://www.h-online.com/open/Mono-2-4-2-with-ASP-NET-MVC-support--/news/113644/from/rss</id>
+    <updated>2009-06-30T11:56:58+02:00</updated>
+
+</entry>
+
+
+<entry>
+    <title>openSUSE 11.2 Milestone 3 released</title>
+    <link href="http://www.h-online.com/open/openSUSE-11-2-Milestone-3-released--/news/113643/from/rss" />
+    <summary>The third milestone release includes the latest Linux kernel and several updates to the included applications</summary>
+    <id>http://www.h-online.com/open/openSUSE-11-2-Milestone-3-released--/news/113643/from/rss</id>
+    <updated>2009-06-30T10:49:51+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Tiny Core Linux 2.1 arrives</title>
+    <link href="http://www.h-online.com/open/Tiny-Core-Linux-2-1-arrives--/news/113642/from/rss" />
+    <summary>Tiny Core founder Robert Shingledecker has announced the release of version 2.1 of Tiny Core Linux and Micro Core Linux</summary>
+    <id>http://www.h-online.com/open/Tiny-Core-Linux-2-1-arrives--/news/113642/from/rss</id>
+    <updated>2009-06-30T10:00:45+02:00</updated>
+
+</entry>
+
+
+<entry>
+    <title>NetBeans 6.7 released - focuses on Maven and Kenai integration</title>
+    <link href="http://www.h-online.com/open/NetBeans-6-7-released-focuses-on-Maven-and-Kenai-integration--/news/113640/from/rss" />
+    <summary>NetBeans 6.7 has now been released by Sun Microsystems. The H looks at what's new in the latest version</summary>
+    <id>http://www.h-online.com/open/NetBeans-6-7-released-focuses-on-Maven-and-Kenai-integration--/news/113640/from/rss</id>
+    <updated>2009-06-29T16:30:16+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Linux developers want to circumvent VFATs patent problem</title>
+    <link href="http://www.h-online.com/open/Linux-developers-want-to-circumvent-VFATs-patent-problem--/news/113641/from/rss" />
+    <summary>Linux developer Andrew Tridgell has presented the second of two patches designed to work around Microsoft's FAT file naming patents</summary>
+    <id>http://www.h-online.com/open/Linux-developers-want-to-circumvent-VFATs-patent-problem--/news/113641/from/rss</id>
+    <updated>2009-06-29T15:57:56+02:00</updated>
+
+</entry>
+
+
+<entry>
+    <title>15 years of FreeDOS</title>
+    <link href="http://www.h-online.com/open/15-years-of-FreeDOS--/news/113639/from/rss" />
+    <summary>Originally released on the 28th of June 1994, FreeDOS, a free open source DOS clone, is now 15 years old</summary>
+    <id>http://www.h-online.com/open/15-years-of-FreeDOS--/news/113639/from/rss</id>
+    <updated>2009-06-29T15:02:42+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Lost+Found: Bug reports, eBay, anti-debugging and asterisks</title>
+    <link href="http://www.h-online.com/security/Lost-Found-Bug-reports-eBay-anti-debugging-and-asterisks--/news/113638/from/rss" />
+    <summary>Too short for news, too good to lose; lost+found is a round up of useful security information. Today, Bug reports, eBay, anti-debugging and asterisks</summary>
+    <id>http://www.h-online.com/security/Lost-Found-Bug-reports-eBay-anti-debugging-and-asterisks--/news/113638/from/rss</id>
+    <updated>2009-06-29T12:54:25+02:00</updated>
+
+</entry>
+
+
+<entry>
+    <title>Fennec updates for Windows Mobile &amp; Maemo released</title>
+    <link href="http://www.h-online.com/open/Fennec-updates-for-Windows-Mobile-Maemo-released--/news/113637/from/rss" />
+    <summary>The Mozilla developers have released a second beta for Nokia's N810 Internet Tablets and a second alpha for the Windows Mobile 6 platform, of their Fennec mobile web browser, focusing on performance and user experience improvements</summary>
+    <id>http://www.h-online.com/open/Fennec-updates-for-Windows-Mobile-Maemo-released--/news/113637/from/rss</id>
+    <updated>2009-06-29T14:26:11+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>New version of Tor fixes two security issues</title>
+    <link href="http://www.h-online.com/security/New-version-of-Tor-fixes-two-security-issues--/news/113636/from/rss" />
+    <summary>The developers of the anonymity service have released version 0.2.0.35 and the first release candidate of 0.2.1.16, fixing DoS vulnerabilities and a DNS spoofing hole</summary>
+    <id>http://www.h-online.com/security/New-version-of-Tor-fixes-two-security-issues--/news/113636/from/rss</id>
+    <updated>2009-06-29T13:36:04+02:00</updated>
+
+</entry>
+
+
+<entry>
+    <title>Roadmap for Ruby 1.9.2</title>
+    <link href="http://www.h-online.com/open/Roadmap-for-Ruby-1-9-2--/news/113635/from/rss" />
+    <summary>While Ruby 1.9.2 isn't due until the end of this year, details from a Japanese Ruby conference reveal what to expect in this next version of the dynamic scripting language</summary>
+    <id>http://www.h-online.com/open/Roadmap-for-Ruby-1-9-2--/news/113635/from/rss</id>
+    <updated>2009-06-29T11:16:00+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Second update for Debian 5.0 "Lenny" released</title>
+    <link href="http://www.h-online.com/open/Second-update-for-Debian-5-0-Lenny-released--/news/113634/from/rss" />
+    <summary>The Debian project developers have announced the release of the second update to Debian 5.0, which includes a new version of the debian-installer and addresses several bugs and security issues</summary>
+    <id>http://www.h-online.com/open/Second-update-for-Debian-5-0-Lenny-released--/news/113634/from/rss</id>
+    <updated>2009-06-29T10:59:33+02:00</updated>
+
+</entry>
+
+
+<entry>
+    <title>Python 3.1 released</title>
+    <link href="http://www.h-online.com/open/Python-3-1-released--/news/113633/from/rss" />
+    <summary>The renovation of the Python language continues with the production release of Python 3.1</summary>
+    <id>http://www.h-online.com/open/Python-3-1-released--/news/113633/from/rss</id>
+    <updated>2009-06-29T14:26:41+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Stallman says "Don't depend on Mono"</title>
+    <link href="http://www.h-online.com/open/Stallman-says-Don-t-depend-on-Mono--/news/113631/from/rss" />
+    <summary>Richard Stallman has added to the protests about Mono, saying free software such as GNU/Linux should not depend on the Microsoft designed framework</summary>
+    <id>http://www.h-online.com/open/Stallman-says-Don-t-depend-on-Mono--/news/113631/from/rss</id>
+    <updated>2009-06-29T09:42:56+02:00</updated>
+
+</entry>
+
+
+<entry>
+    <title>The H Week</title>
+    <link href="http://www.h-online.com/news/The-H-Week--/113632/from/rss" />
+    <summary>LinuxTag and 2 Kernel Logs, SCO still not dead, open-source and public institutions, Mozilla 3.5 'real soon', new open source benchmarks, TLD redirections criticised, another Twitter hack and the increasing importance of security updates</summary>
+    <id>http://www.h-online.com/news/The-H-Week--/113632/from/rss</id>
+    <updated>2009-06-29T09:18:02+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>LiMux: Munich Linux (R)evolution has its Imitators</title>
+    <link href="http://www.h-online.com/open/LiMux-Munich-Linux-R-evolution-has-its-Imitators--/news/113629/from/rss" />
+    <summary>Munich city council's switch to Linux and other open-source software is proceeding with great enthusiasm. Although other local authorities have now followed suit, Microsoft won't leave the field without a fight</summary>
+    <id>http://www.h-online.com/open/LiMux-Munich-Linux-R-evolution-has-its-Imitators--/news/113629/from/rss</id>
+    <updated>2009-06-27T19:02:10+02:00</updated>
+
+</entry>
+
+
+<entry>
+    <title>Fedora 12 to be named Constantine</title>
+    <link href="http://www.h-online.com/open/Fedora-12-to-be-named-Constantine--/news/113630/from/rss" />
+    <summary>The next version of the Fedora Project's Linux distribution, Fedora 12, will be named "Constantine"</summary>
+    <id>http://www.h-online.com/open/Fedora-12-to-be-named-Constantine--/news/113630/from/rss</id>
+    <updated>2009-06-27T17:21:12+02:00</updated>
+</entry>
+
+
+<entry>
+    <title>Free extension for secure browsing</title>
+    <link href="http://www.h-online.com/security/Free-extension-for-secure-browsing--/news/113627/from/rss" />
+    <summary>A free browser extension for Internet Explorer and Firefox from anti-virus manufacturer Finjan, called SecureBrowsing, alerts users of dangerous URLs in Google Search and other popular sites</summary>
+    <id>http://www.h-online.com/security/Free-extension-for-secure-browsing--/news/113627/from/rss</id>
+    <updated>2009-06-26T15:08:58+02:00</updated>
+
+</entry>
+
+
+<entry>
+    <title>Hole in VLC Media Player</title>
+    <link href="http://www.h-online.com/security/Hole-in-VLC-Media-Player--/news/113628/from/rss" />
+    <summary>Secunia says a hole in the Windows binary version of VLC media player is "highly critical"</summary>
+    <id>http://www.h-online.com/security/Hole-in-VLC-Media-Player--/news/113628/from/rss</id>
+    <updated>2009-06-26T14:39:30+02:00</updated>
+</entry>
+
+</feed>

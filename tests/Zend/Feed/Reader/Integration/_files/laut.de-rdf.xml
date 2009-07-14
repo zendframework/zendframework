@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><rdf:RDF
+xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+xmlns="http://purl.org/rss/1.0/"
+xmlns:dc="http://purl.org/dc/elements/1.1/"
+xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+xmlns:content="http://purl.org/rss/1.0/modules/content/">
+
+<!--
+* Diese Inhalte dürfen unter Beachtung folgender Konditionen
+* verwendet werden:
+*
+* Es muss bei der Verwendung klar erkennbar sein, dass die Artikel von
+* LAUT zur Verfügung gestellt werden, mindestens durch die Nutzung des
+* LAUT-Logos (URL im XML-Quellcode weiter unten) oder durch die direkte
+* Angabe von: "Quelle: laut.de". Die einzelnen Schlagzeilen muessen auf die
+* hinterlegten News verlinkt werden. LAUT uebernimmt keinen Support,
+* zudem wird keine Verfügbarkeit dieser XML-Datei gewährleistet.
+* Die Nutzung dieser Inhalte kann jederzeit von LAUT untersagt werden.
+//-->
+
+<channel rdf:about="http://www.laut.de/partner/allgemein/news.rdf">
+<title>laut.de - news</title>
+<link>http://www.laut.de</link>
+<image rdf:resource="http://www.laut.de/partner/allgemein/logo.gif" />
+<description>laut.de: aktuelle News</description>
+<dc:publisher>laut.de</dc:publisher>
+<dc:rights>Copyright &#169; 2004 laut.de</dc:rights>
+
+<dc:date>2009-07-04T21:01:02+01:00</dc:date>
+<sy:updatePeriod>hourly</sy:updatePeriod>
+<sy:updateFrequency>6</sy:updateFrequency>
+<sy:updateBase>2004-02-10T17:10:15+01:00</sy:updateBase>
+<items>
+<rdf:Seq>
+
+<rdf:li resource="http://www.laut.de/vorlaut/news/2009/07/04/22426/index.htm" />
+
+<rdf:li resource="http://www.laut.de/vorlaut/news/2009/07/03/22424/index.htm" />
+
+<rdf:li resource="http://www.laut.de/vorlaut/news/2009/07/03/22423/index.htm" />
+
+<rdf:li resource="http://www.laut.de/vorlaut/news/2009/07/03/22414/index.htm" />
+
+<rdf:li resource="http://www.laut.de/vorlaut/news/2009/07/03/22409/index.htm" />
+
+<rdf:li resource="http://www.laut.de/vorlaut/news/2009/07/03/22408/index.htm" />
+
+<rdf:li resource="http://www.laut.de/vorlaut/news/2009/07/02/22410/index.htm" />
+
+<rdf:li resource="http://www.laut.de/vorlaut/news/2009/07/02/22405/index.htm" />
+
+<rdf:li resource="http://www.laut.de/vorlaut/news/2009/07/02/22404/index.htm" />
+
+<rdf:li resource="http://www.laut.de/vorlaut/news/2009/07/02/22413/index.htm" />
+
+<rdf:li resource="http://www.laut.de/vorlaut/news/2009/07/01/22384/index.htm" />
+
+<rdf:li resource="http://www.laut.de/vorlaut/news/2009/07/01/22400/index.htm" />
+
+<rdf:li resource="http://www.laut.de/vorlaut/news/2009/07/01/22392/index.htm" />
+
+<rdf:li resource="http://www.laut.de/vorlaut/news/2009/07/01/22385/index.htm" />
+
+<rdf:li resource="http://www.laut.de/vorlaut/news/2009/07/01/22386/index.htm" />
+
+<rdf:li resource="http://www.laut.de/vorlaut/news/2009/06/30/22372/index.htm" />
+
+<rdf:li resource="http://www.laut.de/vorlaut/news/2009/06/30/22368/index.htm" />
+
+<rdf:li resource="http://www.laut.de/vorlaut/news/2009/06/29/22361/index.htm" />
+
+<rdf:li resource="http://www.laut.de/vorlaut/news/2009/06/29/22360/index.htm" />
+
+<rdf:li resource="http://www.laut.de/vorlaut/news/2009/06/29/22359/index.htm" />
+
+</rdf:Seq>
+</items>
+</channel>
+
+<image rdf:about="http://www.laut.de/partner/allgemein/logo.gif">
+<title>laut.de</title>
+<link>http://www.laut.de</link>
+<url>http://www.laut.de/partner/allgemein/logo.gif</url>
+</image>
+
+
+<item rdf:about="http://www.laut.de/vorlaut/news/2009/07/04/22426/index.htm">
+	<dc:identifier>http://www.laut.de/vorlaut/news/2009/07/04/22426/index.htm</dc:identifier>
+
+	<dc:date>2009-07-04T13:28:09+01:00</dc:date>
+	<dc:format>text/html</dc:format>
+	<dc:language>de</dc:language>
+	<dc:publisher>laut.de</dc:publisher>
+	<dc:rights>laut.de. Alle Rechte vorbehalten.</dc:rights>
+	<title>Angelika Express: MySpace-Aus wegen Sido-Werbung</title>
+
+	<keyword>Angelika Express</keyword>
+	<headline>MySpace-Aus wegen Sido-Werbung</headline>
+	<link>http://www.laut.de/vorlaut/news/2009/07/04/22426/index.htm</link>
+	<description>Schon länger haderten die Kölner mit der Plattform des &quot;fiesen Rupert Murdoch&quot;. Das Fass zum Überlaufen brachte aber ein Werbebanner von Deutschrapper Sido.</description>
+</item>
+
+
+<item rdf:about="http://www.laut.de/vorlaut/news/2009/07/03/22424/index.htm">
+	<dc:identifier>http://www.laut.de/vorlaut/news/2009/07/03/22424/index.htm</dc:identifier>
+	<dc:date>2009-07-03T14:50:08+01:00</dc:date>
+	<dc:format>text/html</dc:format>
+	<dc:language>de</dc:language>
+	<dc:publisher>laut.de</dc:publisher>
+	<dc:rights>laut.de. Alle Rechte vorbehalten.</dc:rights>
+
+	<title>Michael Jackson: Video der letzten Probe veröffentlicht</title>
+	<keyword>Michael Jackson</keyword>
+	<headline>Video der letzten Probe veröffentlicht</headline>
+	<link>http://www.laut.de/vorlaut/news/2009/07/03/22424/index.htm</link>
+	<description>Konzertveranstalter AEG Live veröffentlicht ein Video, das Michael Jackson kurz vor seinem Tod beim Proben zeigt. Exfrau Debbie Rowe will unterdessen um das Sorgerecht ihrer Kinder kämpfen.</description>
+</item>
+
+<item rdf:about="http://www.laut.de/vorlaut/news/2009/07/03/22423/index.htm">
+	<dc:identifier>http://www.laut.de/vorlaut/news/2009/07/03/22423/index.htm</dc:identifier>
+	<dc:date>2009-07-03T11:46:40+01:00</dc:date>
+	<dc:format>text/html</dc:format>
+	<dc:language>de</dc:language>
+	<dc:publisher>laut.de</dc:publisher>
+
+	<dc:rights>laut.de. Alle Rechte vorbehalten.</dc:rights>
+	<title>Lady Gaga: &quot;Bin wie Andy Warhol&quot;</title>
+	<keyword>Lady Gaga</keyword>
+	<headline>&quot;Bin wie Andy Warhol&quot;</headline>
+	<link>http://www.laut.de/vorlaut/news/2009/07/03/22423/index.htm</link>
+	<description>Im Interview zieht Trash-Popperin Gaga Parallelen zwischen sich und Pop Art-Ikone Andy Warhol und erklärt: &quot;Ich mache seelenlosen Elektropop.&quot;</description>
+
+</item>
+
+
+<item rdf:about="http://www.laut.de/vorlaut/news/2009/07/03/22414/index.htm">
+	<dc:identifier>http://www.laut.de/vorlaut/news/2009/07/03/22414/index.htm</dc:identifier>
+	<dc:date>2009-07-03T15:28:47+01:00</dc:date>
+	<dc:format>text/html</dc:format>
+	<dc:language>de</dc:language>
+	<dc:publisher>laut.de</dc:publisher>
+
+	<dc:rights>laut.de. Alle Rechte vorbehalten.</dc:rights>
+	<title>Tom Waits: Sänger lässt den Teufel raus</title>
+	<keyword>Tom Waits</keyword>
+	<headline>Sänger lässt den Teufel raus</headline>
+	<link>http://www.laut.de/vorlaut/news/2009/07/03/22414/index.htm</link>
+	<description>Tom Waits übernimmt im neuen Terry Gilliam-Film die Rolle des Teufels. Ein veröffentlichtes Statement offenbart Details über die Zusammenarbeit.</description>
+
+</item>
+
+
+<item rdf:about="http://www.laut.de/vorlaut/news/2009/07/03/22409/index.htm">
+	<dc:identifier>http://www.laut.de/vorlaut/news/2009/07/03/22409/index.htm</dc:identifier>
+	<dc:date>2009-07-03T11:46:40+01:00</dc:date>
+	<dc:format>text/html</dc:format>
+	<dc:language>de</dc:language>
+	<dc:publisher>laut.de</dc:publisher>
+
+	<dc:rights>laut.de. Alle Rechte vorbehalten.</dc:rights>
+	<title>Tonspion KW26: Free-Mp3s der Woche</title>
+	<keyword>Tonspion KW26</keyword>
+	<headline>Free-Mp3s der Woche</headline>
+	<link>http://www.laut.de/vorlaut/news/2009/07/03/22409/index.htm</link>
+	<description>In Kooperation mit Tonspion scannen wir für euch jede Woche die spannendsten Mp3-Downloads. Alles für lau, alles ziemlich super.</description>
+
+</item>
+
+
+<item rdf:about="http://www.laut.de/vorlaut/news/2009/07/03/22408/index.htm">
+	<dc:identifier>http://www.laut.de/vorlaut/news/2009/07/03/22408/index.htm</dc:identifier>
+	<dc:date>2009-07-03T11:46:40+01:00</dc:date>
+	<dc:format>text/html</dc:format>
+	<dc:language>de</dc:language>
+	<dc:publisher>laut.de</dc:publisher>
+
+	<dc:rights>laut.de. Alle Rechte vorbehalten.</dc:rights>
+	<title>Festivalsommer: Die Highlights der Saison (4)</title>
+	<keyword>Festivalsommer</keyword>
+	<headline>Die Highlights der Saison (4)</headline>
+	<link>http://www.laut.de/vorlaut/news/2009/07/03/22408/index.htm</link>
+	<description>Wir lenken eure Aufmerksamkeit regelmäßig auf spektakuläre Line-Ups, die schönsten Locations und coolsten Open-Airs des Sommers. Diesmal empfehlen wir einen Ausflug in die schwäbische Provinz (Obstwiesenfestival) und eine Reise ans Mittelmeer (Benicàssim Festival).</description>
+
+</item>
+
+
+<item rdf:about="http://www.laut.de/vorlaut/news/2009/07/02/22410/index.htm">
+	<dc:identifier>http://www.laut.de/vorlaut/news/2009/07/02/22410/index.htm</dc:identifier>
+	<dc:date>2009-07-03T11:46:40+01:00</dc:date>
+	<dc:format>text/html</dc:format>
+	<dc:language>de</dc:language>
+	<dc:publisher>laut.de</dc:publisher>
+
+	<dc:rights>laut.de. Alle Rechte vorbehalten.</dc:rights>
+	<title>Three Strikes Out: Neuer Gesetzentwurf spaltet Frankreich</title>
+	<keyword>Three Strikes Out</keyword>
+	<headline>Neuer Gesetzentwurf spaltet Frankreich</headline>
+	<link>http://www.laut.de/vorlaut/news/2009/07/02/22410/index.htm</link>
+	<description>Sarkozys Plan, Musik-Piraten automatisiert vom Internet auszuschließen, schmetterte das Verfassungsgericht ab. Nun legt die Regierung nach, und Verfassungsschützer melden erneut Bedenken an.</description>
+
+</item>
+
+
+<item rdf:about="http://www.laut.de/vorlaut/news/2009/07/02/22405/index.htm">
+	<dc:identifier>http://www.laut.de/vorlaut/news/2009/07/02/22405/index.htm</dc:identifier>
+	<dc:date>2009-07-03T11:46:40+01:00</dc:date>
+	<dc:format>text/html</dc:format>
+	<dc:language>de</dc:language>
+	<dc:publisher>laut.de</dc:publisher>
+
+	<dc:rights>laut.de. Alle Rechte vorbehalten.</dc:rights>
+	<title>Michael Jackson: Abschiedskonzert ersetzt Aufbahrung</title>
+	<keyword>Michael Jackson</keyword>
+	<headline>Abschiedskonzert ersetzt Aufbahrung</headline>
+	<link>http://www.laut.de/vorlaut/news/2009/07/02/22405/index.htm</link>
+	<description>In seinem Testament regelt Michael Jackson u.a. das Sorgerecht für die Kinder. An Stelle der Aufbahrung seines Leichnams in Neverland soll nun in Los Angeles ein Abschiedskonzert stattfinden.</description>
+
+</item>
+
+
+<item rdf:about="http://www.laut.de/vorlaut/news/2009/07/02/22404/index.htm">
+	<dc:identifier>http://www.laut.de/vorlaut/news/2009/07/02/22404/index.htm</dc:identifier>
+	<dc:date>2009-07-03T11:46:40+01:00</dc:date>
+	<dc:format>text/html</dc:format>
+	<dc:language>de</dc:language>
+	<dc:publisher>laut.de</dc:publisher>
+
+	<dc:rights>laut.de. Alle Rechte vorbehalten.</dc:rights>
+	<title>Ausgehbefehl: Rifforkane und Jazzmoves</title>
+	<keyword>Ausgehbefehl</keyword>
+	<headline>Rifforkane und Jazzmoves</headline>
+	<link>http://www.laut.de/vorlaut/news/2009/07/02/22404/index.htm</link>
+	<description>Da wackelt das Skelett: The Dillinger Escape Plan brechen einen Orkan vom Zaun, Guru's Jazzmatazz und Roy Ayers bringens gemeinsam, und die Cold War Kids arbeiten gegen den Indie-Mainstream.</description>
+
+</item>
+
+
+<item rdf:about="http://www.laut.de/vorlaut/news/2009/07/02/22413/index.htm">
+	<dc:identifier>http://www.laut.de/vorlaut/news/2009/07/02/22413/index.htm</dc:identifier>
+	<dc:date>2009-07-03T11:46:40+01:00</dc:date>
+	<dc:format>text/html</dc:format>
+	<dc:language>de</dc:language>
+	<dc:publisher>laut.de</dc:publisher>
+
+	<dc:rights>laut.de. Alle Rechte vorbehalten.</dc:rights>
+	<title>Björn Kleinhenz: Album für krankes Kaninchen</title>
+	<keyword>Björn Kleinhenz</keyword>
+	<headline>Album für krankes Kaninchen</headline>
+	<link>http://www.laut.de/vorlaut/news/2009/07/02/22413/index.htm</link>
+	<description>Hängende Löffel im Hause Kleinhenz: Der Hase ist malade und benötigt eine kostenintensive OP. Zu diesem Zweck spendet Kleinhenz den kompletten Erlös aus dem Online-Verkauf seines neuen Albums seinem Kaninchen Humle.</description>
+
+</item>
+
+
+<item rdf:about="http://www.laut.de/vorlaut/news/2009/07/01/22384/index.htm">
+	<dc:identifier>http://www.laut.de/vorlaut/news/2009/07/01/22384/index.htm</dc:identifier>
+	<dc:date>2009-07-01T12:56:34+01:00</dc:date>
+	<dc:format>text/html</dc:format>
+	<dc:language>de</dc:language>
+	<dc:publisher>laut.de</dc:publisher>
+
+	<dc:rights>laut.de. Alle Rechte vorbehalten.</dc:rights>
+	<title>Kraftwerk: Twitter erinnert Hütter an die Stasi</title>
+	<keyword>Kraftwerk</keyword>
+	<headline>Twitter erinnert Hütter an die Stasi</headline>
+	<link>http://www.laut.de/vorlaut/news/2009/07/01/22384/index.htm</link>
+	<description>In zwei seiner raren Interviews sprach Kraftwerk-Gründer Ralf Hütter über den Ausstieg von Florian Schneider und die Entwicklung der neuen Medien.</description>
+
+</item>
+
+
+<item rdf:about="http://www.laut.de/vorlaut/news/2009/07/01/22400/index.htm">
+	<dc:identifier>http://www.laut.de/vorlaut/news/2009/07/01/22400/index.htm</dc:identifier>
+	<dc:date>2009-07-02T15:37:45+01:00</dc:date>
+	<dc:format>text/html</dc:format>
+	<dc:language>de</dc:language>
+	<dc:publisher>laut.de</dc:publisher>
+
+	<dc:rights>laut.de. Alle Rechte vorbehalten.</dc:rights>
+	<title>U2: Zwei Jacko-Songs zum Tourstart</title>
+	<keyword>U2</keyword>
+	<headline>Zwei Jacko-Songs zum Tourstart</headline>
+	<link>http://www.laut.de/vorlaut/news/2009/07/01/22400/index.htm</link>
+	<description>90.000 Zuschauer wurden gestern Abend Zeuge des U2-Auftaktkonzerts in Barcelona. Als besondere Überraschung würdigte die Band den verstorbenen Michael Jackson.</description>
+
+</item>
+
+
+<item rdf:about="http://www.laut.de/vorlaut/news/2009/07/01/22392/index.htm">
+	<dc:identifier>http://www.laut.de/vorlaut/news/2009/07/01/22392/index.htm</dc:identifier>
+	<dc:date>2009-07-02T15:36:13+01:00</dc:date>
+	<dc:format>text/html</dc:format>
+	<dc:language>de</dc:language>
+	<dc:publisher>laut.de</dc:publisher>
+
+	<dc:rights>laut.de. Alle Rechte vorbehalten.</dc:rights>
+	<title>D. Matthews Band: laut.de verlost exklusive Tickets</title>
+	<keyword>D. Matthews Band</keyword>
+	<headline>laut.de verlost exklusive Tickets</headline>
+	<link>http://www.laut.de/vorlaut/news/2009/07/01/22392/index.htm</link>
+	<description>Für das Akustik-Set von Dave Matthews und seinem Gitarrist Tim Reynolds in Hamburg gibt es keinen offiziellen Ticket-Verkauf. Ihr könnt trotzdem dabei sein!</description>
+
+</item>
+
+
+<item rdf:about="http://www.laut.de/vorlaut/news/2009/07/01/22385/index.htm">
+	<dc:identifier>http://www.laut.de/vorlaut/news/2009/07/01/22385/index.htm</dc:identifier>
+	<dc:date>2009-07-01T14:29:34+01:00</dc:date>
+	<dc:format>text/html</dc:format>
+	<dc:language>de</dc:language>
+	<dc:publisher>laut.de</dc:publisher>
+
+	<dc:rights>laut.de. Alle Rechte vorbehalten.</dc:rights>
+	<title>Michael Jackson: Aufbahrung auf Neverland-Ranch</title>
+	<keyword>Michael Jackson</keyword>
+	<headline>Aufbahrung auf Neverland-Ranch</headline>
+	<link>http://www.laut.de/vorlaut/news/2009/07/01/22385/index.htm</link>
+	<description>Am Freitag sollen die sterblichen Überreste von Michael Jackson aufgebahrt werden, damit seine Fans Abschied von ihm nehmen können.</description>
+
+</item>
+
+
+<item rdf:about="http://www.laut.de/vorlaut/news/2009/07/01/22386/index.htm">
+	<dc:identifier>http://www.laut.de/vorlaut/news/2009/07/01/22386/index.htm</dc:identifier>
+	<dc:date>2009-07-02T14:42:03+01:00</dc:date>
+	<dc:format>text/html</dc:format>
+	<dc:language>de</dc:language>
+	<dc:publisher>laut.de</dc:publisher>
+
+	<dc:rights>laut.de. Alle Rechte vorbehalten.</dc:rights>
+	<title>Pirate Bay-Verkauf: Piraten wollen nicht mehr rauben</title>
+	<keyword>Pirate Bay-Verkauf</keyword>
+	<headline>Piraten wollen nicht mehr rauben</headline>
+	<link>http://www.laut.de/vorlaut/news/2009/07/01/22386/index.htm</link>
+	<description>Bis August soll der Verkauf von Pirate Bay unter Dach und Fach sein. Quo Vadis? Angeblich in Richtung Legalität und einer verstärkten Konzentration auf politische Aktivitäten.</description>
+
+</item>
+
+
+<item rdf:about="http://www.laut.de/vorlaut/news/2009/06/30/22372/index.htm">
+	<dc:identifier>http://www.laut.de/vorlaut/news/2009/06/30/22372/index.htm</dc:identifier>
+	<dc:date>2009-07-01T12:56:34+01:00</dc:date>
+	<dc:format>text/html</dc:format>
+	<dc:language>de</dc:language>
+	<dc:publisher>laut.de</dc:publisher>
+
+	<dc:rights>laut.de. Alle Rechte vorbehalten.</dc:rights>
+	<title>Michael Jackson: Die Geier kreisen schon</title>
+	<keyword>Michael Jackson</keyword>
+	<headline>Die Geier kreisen schon</headline>
+	<link>http://www.laut.de/vorlaut/news/2009/06/30/22372/index.htm</link>
+	<description>Michael Jacksons Tod ruft nicht nur trauernde Fans, sondern auch eine Menge Geschäftsleute auf den Plan, die die neu erlangte Popularität des Stars nutzen wollen.</description>
+
+</item>
+
+
+<item rdf:about="http://www.laut.de/vorlaut/news/2009/06/30/22368/index.htm">
+	<dc:identifier>http://www.laut.de/vorlaut/news/2009/06/30/22368/index.htm</dc:identifier>
+	<dc:date>2009-06-30T13:44:11+01:00</dc:date>
+	<dc:format>text/html</dc:format>
+	<dc:language>de</dc:language>
+	<dc:publisher>laut.de</dc:publisher>
+
+	<dc:rights>laut.de. Alle Rechte vorbehalten.</dc:rights>
+	<title>Rammstein: Zusatzkonzerte nach Ticket-Ansturm</title>
+	<keyword>Rammstein</keyword>
+	<headline>Zusatzkonzerte nach Ticket-Ansturm</headline>
+	<link>http://www.laut.de/vorlaut/news/2009/06/30/22368/index.htm</link>
+	<description>Rammsteins Versuch, den Second Hand-Markt für Konzerttickets auszutrocknen, ist offenbar gescheitert.</description>
+
+</item>
+
+
+<item rdf:about="http://www.laut.de/vorlaut/news/2009/06/29/22361/index.htm">
+	<dc:identifier>http://www.laut.de/vorlaut/news/2009/06/29/22361/index.htm</dc:identifier>
+	<dc:date>2009-06-30T12:08:22+01:00</dc:date>
+	<dc:format>text/html</dc:format>
+	<dc:language>de</dc:language>
+	<dc:publisher>laut.de</dc:publisher>
+
+	<dc:rights>laut.de. Alle Rechte vorbehalten.</dc:rights>
+	<title>Michael Jackson: Familie ordnet zweite Autopsie an</title>
+	<keyword>Michael Jackson</keyword>
+	<headline>Familie ordnet zweite Autopsie an</headline>
+	<link>http://www.laut.de/vorlaut/news/2009/06/29/22361/index.htm</link>
+	<description>Auch vier Tage nach Michael Jacksons Tod ist die Todesursache völlig unklar. Eine zweite Autopsie soll Klarheit schaffen.</description>
+
+</item>
+
+
+<item rdf:about="http://www.laut.de/vorlaut/news/2009/06/29/22360/index.htm">
+	<dc:identifier>http://www.laut.de/vorlaut/news/2009/06/29/22360/index.htm</dc:identifier>
+	<dc:date>2009-07-01T11:47:35+01:00</dc:date>
+	<dc:format>text/html</dc:format>
+	<dc:language>de</dc:language>
+	<dc:publisher>laut.de</dc:publisher>
+
+	<dc:rights>laut.de. Alle Rechte vorbehalten.</dc:rights>
+	<title>Glastonbury: Blur, Springsteen und die Schweinegrippe</title>
+	<keyword>Glastonbury</keyword>
+	<headline>Blur, Springsteen und die Schweinegrippe</headline>
+	<link>http://www.laut.de/vorlaut/news/2009/06/29/22360/index.htm</link>
+	<description>Neben Blur, Bruce Springsteen und Neil Young fand sich am Wochenende ein ungebetener Gast in Glastonbury ein: der Schweinegrippe-Erreger H1N1.</description>
+
+</item>
+
+
+<item rdf:about="http://www.laut.de/vorlaut/news/2009/06/29/22359/index.htm">
+	<dc:identifier>http://www.laut.de/vorlaut/news/2009/06/29/22359/index.htm</dc:identifier>
+	<dc:date>2009-06-30T12:08:22+01:00</dc:date>
+	<dc:format>text/html</dc:format>
+	<dc:language>de</dc:language>
+	<dc:publisher>laut.de</dc:publisher>
+
+	<dc:rights>laut.de. Alle Rechte vorbehalten.</dc:rights>
+	<title>Vorchecking: Neue Platten auf einen Blick</title>
+	<keyword>Vorchecking</keyword>
+	<headline>Neue Platten auf einen Blick</headline>
+	<link>http://www.laut.de/vorlaut/news/2009/06/29/22359/index.htm</link>
+	<description>Frisch aus der Redaktionssitzung: Was geht, was nicht? Die Neuerscheinungen für den kommenden Freitag im Überblick.</description>
+
+</item>
+
+
+
+</rdf:RDF>

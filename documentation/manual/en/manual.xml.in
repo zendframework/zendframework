@@ -193,6 +193,7 @@
         <xi:include href="module_specs/Zend_Feed-ConsumingAtomSingle.xml" />
         <xi:include href="module_specs/Zend_Feed-ModifyingFeed.xml" />
         <xi:include href="module_specs/Zend_Feed-CustomFeed.xml" />
+        <xi:include href="module_specs/Zend_Feed_Reader.xml" />
     </chapter>
 
     <chapter id="zend.file">

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+    <entry>
+        <author>
+            <name>Joe Bloggs</name>
+            <uri>http://www.example.com</uri>
+            <email>joe@example.com</email>
+        </author>
+        <author>
+            <name>Joe Bloggs</name>
+            <uri>http://www.example.com</uri>
+            <email></email>
+        </author>
+        <author>
+            <name>Joe Bloggs</name>
+            <uri></uri>
+            <email></email>
+        </author>
+        <author>
+            <name></name>
+            <uri>http://www.example.com</uri>
+            <email>joe@example.com</email>
+        </author>
+        <author>
+            <name></name>
+            <uri>http://www.example.com</uri>
+            <email></email>
+        </author>
+        <author>
+            <name></name>
+            <uri></uri>
+            <email>joe@example.com</email>
+        </author>
+        <author>
+            <name></name>
+            <uri></uri>
+            <email></email>
+        </author>
+        <contributor>
+            <name>Jane Bloggs</name>
+            <uri>http://www.example.com</uri>
+            <email>jane@example.com</email>
+        </contributor>
+    </entry>
+</feed>

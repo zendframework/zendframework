@@ -5,16 +5,16 @@
 
     <para>
         The <emphasis>ActionStack</emphasis> plugin allows you to manage a stack of
-        requests, and operates as a <code>postDispatch</code> plugin. If a
+        requests, and operates as a <emphasis>postDispatch</emphasis> plugin. If a
         forward (i.e., a call to another action) is already detected in the
         current request object, it does nothing. However, if not, it checks its
         stack and pulls the topmost item off it and forwards to the action
-        specified in that request. The stack is processed in LIFO order.
+        specified in that request. The stack is processed in <acronym>LIFO</acronym> order.
     </para>
 
     <para>
         You can retrieve the plugin from the front controller at any time using
-        <classname>Zend_Controller_Front::getPlugin('Zend_Controller_Plugin_ActionStack')</classname>.
+        <methodname>Zend_Controller_Front::getPlugin('Zend_Controller_Plugin_ActionStack')</methodname>.
         Once you have the plugin object, there are a variety of mechanisms you
         can use to manipulate it.
     </para>
@@ -33,7 +33,7 @@
                 <methodname>setRegistryKey()</methodname>.
                 These can be used to indicate which registry key to use when
                 pulling the stack. Default value is
-                'Zend_Controller_Plugin_ActionStack'.
+                '<classname>Zend_Controller_Plugin_ActionStack</classname>'.
         </para></listitem>
 
         <listitem><para>

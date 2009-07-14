@@ -17,8 +17,7 @@
 
     <itemizedlist>
         <listitem>
-            <para>Intercept exceptions raised due to missing controllers or
-                action methods</para>
+            <para>Intercept exceptions raised due to missing controllers or action methods</para>
         </listitem>
 
         <listitem>
@@ -104,7 +103,7 @@
         <para>
             Exceptions captured are logged in an object registered in the
             request. To retrieve it, use
-            <classname>Zend_Controller_Action::_getParam('error_handler')</classname>:
+            <methodname>Zend_Controller_Action::_getParam('error_handler')</methodname>:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -119,27 +118,27 @@ class ErrorController extends Zend_Controller_Action
 
         <para>
             Once you have the error object, you can get the type via
-            <varname>$errors->type</varname>. It will be one of the following:
+            <command>$errors->type;</command>. It will be one of the following:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <classname>Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER</classname>,
+                    <constant>Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER</constant>,
                     indicating the controller was not found.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <classname>Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION</classname>,
+                    <constant>Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION</constant>,
                     indicating the requested action was not found.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <classname>Zend_Controller_Plugin_ErrorHandler::EXCEPTION_OTHER</classname>,
+                    <constant>Zend_Controller_Plugin_ErrorHandler::EXCEPTION_OTHER</constant>,
                     indicating other exceptions.
                 </para>
             </listitem>
@@ -177,8 +176,8 @@ class ErrorController extends Zend_Controller_Action
 
         <para>
             Finally, you can retrieve the exception that triggered the error
-            handler by grabbing the <code>exception</code> property of the
-            <code>error_handler</code> object:
+            handler by grabbing the <property>exception</property> property of the
+            <emphasis>error_handler</emphasis> object:
         </para>
 
         <programlisting language="php"><![CDATA[

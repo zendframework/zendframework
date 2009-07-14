@@ -7,7 +7,7 @@
         <title>Introduction</title>
         <para>
             The Conventional Modular directory structure allows you to separate
-            different MVC applications into self-contained units, and re-use
+            different <acronym>MVC</acronym> applications into self-contained units, and re-use
             them with different front controllers. To illustrate such a
             directory structure:
         </para>
@@ -52,9 +52,11 @@ application/
         <para>
             In this paradigm, the module name serves as a prefix to the
             controllers it contains. The above example contains three
-            module controllers, 'Blog_IndexController', 'News_IndexController', and
-            'News_ListController'. Two global controllers, 'IndexController' and
-            'FooController' are also defined; neither of these will be
+            module controllers, '<classname>Blog_IndexController</classname>',
+            '<classname>News_IndexController</classname>', and
+            '<classname>News_ListController</classname>'.
+            Two global controllers, '<classname>IndexController</classname>' and
+            '<classname>FooController</classname>' are also defined; neither of these will be
             namespaced. This directory structure will be used for examples in
             this chapter.
         </para>
@@ -66,14 +68,15 @@ application/
                 namespace prefix. Thus, in the example above, the controllers in
                 the default module do not need a prefix of 'Default_' -- they
                 are simply dispatched according to their base controller name:
-                'IndexController' and 'FooController'. A namespace prefix is
+                '<classname>IndexController</classname>' and
+                '<classname>FooController</classname>'. A namespace prefix is
                 used in all other modules, however.
             </para>
         </note>
 
         <para>
             So, how do you implement such a directory layout using the Zend
-            Framework MVC components?
+            Framework <acronym>MVC</acronym> components?
         </para>
     </sect2>
 
@@ -83,7 +86,7 @@ application/
         <para>
             The first step to making use of modules is to modify how you specify
             the controller directory list in the front controller. In the basic
-            MVC series, you pass either an array or a string to
+            <acronym>MVC</acronym> series, you pass either an array or a string to
             <methodname>setControllerDirectory()</methodname>, or a path to
             <methodname>addControllerDirectory()</methodname>. When using modules, you need
             to alter your calls to these methods slightly.
@@ -91,11 +94,11 @@ application/
 
         <para>
             With <methodname>setControllerDirectory()</methodname>, you will need to pass an
-            associative array and specify key/value pairs of module
-            name/directory paths. The special key <code>default</code> will be
+            associative array and specify key and value pairs of module
+            name and directory paths. The special key <property>default</property> will be
             used for global controllers (those not needing a module namespace).
             All entries should contain a string key pointing to a single path,
-            and the <code>default</code> key must be present. As an example:
+            and the <property>default</property> key must be present. As an example:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -109,7 +112,7 @@ $front->setControllerDirectory(array(
             <methodname>addControllerDirectory()</methodname> will take an optional second
             argument. When using modules, pass the module name as the second
             argument; if not specified, the path will be added to the
-            <code>default</code> namespace. As an example:
+            <emphasis>default</emphasis> namespace. As an example:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -140,9 +143,9 @@ $front->addModuleDirectory('/path/to/application/modules');
 ]]></programlisting>
 
         <para>
-            The above example will define the <code>default</code>,
-            <code>foo</code>, and <code>bar</code> modules, each pointing to the
-            <code>controllers</code> subdirectory of their respective module.
+            The above example will define the <emphasis>default</emphasis>,
+            <emphasis>foo</emphasis>, and <emphasis>bar</emphasis> modules, each pointing to the
+            <filename>controllers/</filename> subdirectory of their respective module.
         </para>
 
         <para>
@@ -183,8 +186,8 @@ $front->addModuleDirectory('/path/to/application/modules');
         </para>
 
         <itemizedlist>
-            <listitem><para><code>:module/:controller/:action/*</code></para></listitem>
-            <listitem><para><code>:controller/:action/*</code></para></listitem>
+            <listitem><para><filename>:module/:controller/:action/*</filename></para></listitem>
+            <listitem><para><filename>:controller/:action/*</filename></para></listitem>
         </itemizedlist>
 
         <para>
@@ -200,8 +203,8 @@ $front->addModuleDirectory('/path/to/application/modules');
         <title>Module or Global Default Controller</title>
 
         <para>
-            In the default router, if a controller was not specified in the URL,
-            a default controller is used (<emphasis>IndexController</emphasis>, unless
+            In the default router, if a controller was not specified in the <acronym>URL</acronym>,
+            a default controller is used (<classname>IndexController</classname>, unless
             otherwise requested). With modular controllers, if a module has been
             specified but no controller, the dispatcher first looks for this
             default controller in the module path, and then falls back on the

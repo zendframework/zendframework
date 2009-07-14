@@ -6,8 +6,8 @@
     <sect2 id="zend.controller.quickstart.introduction">
         <title>Introduction</title>
         <para>
-            <classname>Zend_Controller</classname> is the heart of Zend Framework's MVC
-            system. MVC stands for <ulink
+            <classname>Zend_Controller</classname> is the heart of Zend Framework's
+            <acronym>MVC</acronym> system. <acronym>MVC</acronym> stands for <ulink
                 url="http://en.wikipedia.org/wiki/Model-view-controller">Model-View-Controller</ulink>
             and is a design pattern targeted at separating application logic
             from display logic. <classname>Zend_Controller_Front</classname> implements a
@@ -15,7 +15,7 @@
                 url="http://www.martinfowler.com/eaaCatalog/frontController.html">Front
                 Controller</ulink> pattern, in which all requests are
             intercepted by the front controller and dispatched to individual
-            Action Controllers based on the URL requested.
+            Action Controllers based on the <acronym>URL</acronym> requested.
         </para>
         <para>
             The <classname>Zend_Controller</classname> system was built with extensibility
@@ -66,7 +66,7 @@ html/
 
             <para>
                 In your web server, point your document root to the
-                <code>html</code> directory of the above file system layout.
+                <filename>html/</filename> directory of the above file system layout.
             </para>
         </sect3>
 
@@ -102,7 +102,7 @@ RewriteRule ^.*$ index.php [NC,L]
             </note>
 
             <para>
-                If using IIS 7.0, use the following as your rewrite
+                If using <acronym>IIS</acronym> 7.0, use the following as your rewrite
                 configuration:
             </para>
 
@@ -176,15 +176,15 @@ Zend_Controller_Front::run('/path/to/app/controllers');
             <para>
                 Before discussing action controllers, you should first
                 understand how requests are routed in Zend Framework. By
-                default, the first segment of a URL path maps to a controller,
-                and the second to an action. For example, given the URL
+                default, the first segment of a <acronym>URL</acronym> path maps to a controller,
+                and the second to an action. For example, given the <acronym>URL</acronym>
                 <filename>http://framework.zend.com/roadmap/components</filename>, the
                 path is <filename>/roadmap/components</filename>, which will map to the
-                controller <code>roadmap</code> and the action
-                <code>components</code>. If no action is provided, the action
-                <code>index</code> is assumed, and if no controller is provided,
-                the controller <code>index</code> is assumed (following the
-                Apache convention that maps a <code>DirectoryIndex</code>
+                controller <emphasis>roadmap</emphasis> and the action
+                <emphasis>components</emphasis>. If no action is provided, the action
+                <emphasis>index</emphasis> is assumed, and if no controller is provided,
+                the controller <emphasis>index</emphasis> is assumed (following the
+                Apache convention that maps a <emphasis>DirectoryIndex</emphasis>
                 automatically).
             </para>
 
@@ -192,24 +192,24 @@ Zend_Controller_Front::run('/path/to/app/controllers');
                 <classname>Zend_Controller</classname>'s dispatcher then takes the
                 controller value and maps it to a class. By default, it
                 Title-cases the controller name and appends the word
-                <code>Controller</code>. Thus, in our example above, the
-                controller <code>roadmap</code> is mapped to the class
-                <code>RoadmapController</code>.
+                <emphasis>Controller</emphasis>. Thus, in our example above, the
+                controller <emphasis>roadmap</emphasis> is mapped to the class
+                <classname>RoadmapController</classname>.
             </para>
 
             <para>
                 Similarly, the action value is mapped to a method of the
                 controller class. By default, the value is lower-cased, and the
-                word <code>Action</code> is appended. Thus, in our example
-                above, the action <code>components</code> becomes
-                <code>componentsAction</code>, and the final method called is
+                word <emphasis>Action</emphasis> is appended. Thus, in our example
+                above, the action <emphasis>components</emphasis> becomes
+                <methodname>componentsAction()</methodname>, and the final method called is
                 <methodname>RoadmapController::componentsAction()</methodname>.
             </para>
 
             <para>
                 So, moving on, let's now create a default action controller and
                 action method. As noted earlier, the default controller and
-                action called are both <code>index</code>. Open the file
+                action called are both <emphasis>index</emphasis>. Open the file
                 <filename>application/controllers/IndexController.php</filename>, and
                 enter the following:
             </para>
@@ -230,15 +230,16 @@ class IndexController extends Zend_Controller_Action
                 action helper is enabled. What this means is that by simply
                 defining an action method and a corresponding view script, you
                 will immediately get content rendered. By default,
-                <classname>Zend_View</classname> is used as the View layer in the MVC. The
+                <classname>Zend_View</classname> is used as the View layer in the
+                <acronym>MVC</acronym>. The
                 <emphasis>ViewRenderer</emphasis> does some magic, and uses the
-                controller name (e.g., <code>index</code>) and the current
-                action name (e.g., <code>index</code>) to determine what
+                controller name (e.g., <emphasis>index</emphasis>) and the current
+                action name (e.g., <emphasis>index</emphasis>) to determine what
                 template to pull. By default, templates end in the
                 <filename>.phtml</filename> extension, so this means that, in the above
                 example, the template <filename>index/index.phtml</filename> will be
                 rendered. Additionally, the <emphasis>ViewRenderer</emphasis>
-                automatically assumes that the directory <code>views</code> at
+                automatically assumes that the directory <filename>views/</filename> at
                 the same level as the controller directory will be the base view
                 directory, and that the actual view scripts will be in the
                 <filename>views/scripts/</filename> subdirectory. Thus, the template
@@ -257,7 +258,7 @@ class IndexController extends Zend_Controller_Action
                 <filename>application/views/scripts/</filename>; the view script for the
                 default controller and action is in
                 <filename>application/views/scripts/index/index.phtml</filename>. Create
-                this file, and type in some HTML:
+                this file, and type in some <acronym>HTML</acronym>:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -329,7 +330,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
                 With your first controller and view under your belt, you can now
                 fire up your browser and browse to the site. Assuming
                 <filename>example.com</filename> is your domain, any of the following
-                URLs will get to the page we've just created:
+                <acronym>URL</acronym>s will get to the page we've just created:
             </para>
 
             <itemizedlist>

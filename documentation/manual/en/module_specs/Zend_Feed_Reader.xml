@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.feed.reader">
     <title>Zend_Feed_Reader</title>
 
@@ -7,11 +8,13 @@
 
         <para>
             <classname>Zend_Feed_Reader</classname> is a component used to
-            consume RSS and Atom feeds of any version, including RDF/RSS 1.0,
-            RSS 2.0 and Atom 0.3/1.0. The API for retrieving feed data is
+            consume <acronym>RSS</acronym> and Atom feeds of any version, including
+            <acronym>RDF</acronym>/<acronym>RSS</acronym> 1.0,
+            <acronym>RSS</acronym> 2.0 and Atom 0.3/1.0. The <acronym>API</acronym> for
+            retrieving feed data is
             deliberately simple since <classname>Zend_Feed_Reader</classname> is
             capable of searching any feed of any type for the information
-            requested through the API. If the typical elements containing this
+            requested through the <acronym>API</acronym>. If the typical elements containing this
             information are not present, it will adapt and fall back on a
             variety of alternative elements instead. This ability to choose from
             alternatives removes the need for users to create their own
@@ -22,31 +25,33 @@
 
         <para>
             Internally, <classname>Zend_Feed_Reader</classname> works almost
-            entirely on the basis of making XPath queries against the feed XML's
-            Document Object Model. The DOM is not exposed though a chained
-            property API like <classname>Zend_Feed</classname> though the
+            entirely on the basis of making XPath queries against the feed <acronym>XML</acronym>'s
+            Document Object Model. The <acronym>DOM</acronym> is not exposed though a chained
+            property <acronym>API</acronym> like <classname>Zend_Feed</classname> though the
             underlying <classname>DOMDocument</classname>,
             <classname>DOMElement</classname> and
             <classname>DOMXPath</classname> objects are exposed for external
             manipulation. This singular approach to parsing is consistent and
             the component offers a plugin system to add to the Feed and Entry
-            level API by writing Extensions on a similar basis.
+            level <acronym>API</acronym> by writing Extensions on a similar basis.
         </para>
 
         <para>
             Performance is assisted in three ways. First of all,
             <classname>Zend_Feed_Reader</classname> supports caching using
             <classname>Zend_Cache</classname> to maintain a copy of the original
-            feed XML. This allows you to skip network requests for a feed URI if
-            the cache is valid. Second, the Feed and Entry level API is backed
-            by an internal cache (non-persistant) so repeat API calls for the
-            same feed will avoid additional DOM/XPath use. Thirdly, importing
-            feeds from a URI can take advantage of HTTP Conditional GET requests
+            feed <acronym>XML</acronym>. This allows you to skip network requests for a feed
+            <acronym>URI</acronym> if
+            the cache is valid. Second, the Feed and Entry level <acronym>API</acronym> is backed
+            by an internal cache (non-persistant) so repeat <acronym>API</acronym> calls for the
+            same feed will avoid additional <acronym>DOM</acronym>/XPath use. Thirdly, importing
+            feeds from a <acronym>URI</acronym> can take advantage of
+            <acronym>HTTP</acronym> Conditional GET requests
             which allow servers to issue an empty 304 response when the
             requested feed has not changed since the last time you requested it.
             In the final case, an instance of <classname>Zend_Cache</classname>
             will hold the last received feed along with the ETag and
-            Last-Modified header values sent in the HTTP response.
+            Last-Modified header values sent in the <acronym>HTTP</acronym> response.
         </para>
 
         <para>
@@ -68,9 +73,9 @@
         <para>
             Importing a feed with <classname>Zend_Feed_Reader</classname> is not
             that much different to <classname>Zend_Feed</classname>. Feeds can
-            be imported from a string, file, URI or an instance of type
-            <classname>Zend_Feed_Abstract</classname>. Importing from a URI can
-            additionally utilise a HTTP Conditional GET request. If importing
+            be imported from a string, file, <acronym>URI</acronym> or an instance of type
+            <classname>Zend_Feed_Abstract</classname>. Importing from a <acronym>URI</acronym> can
+            additionally utilise a <acronym>HTTP</acronym> Conditional GET request. If importing
             fails, an exception will be raised. The end result will be an object
             of type <classname>Zend_Feed_Reader_FeedInterface</classname>, the
             core implementations of which are
@@ -82,12 +87,12 @@
         </para>
 
         <para>
-            In the following example, we import an RDF/RSS 1.0 feed and extract
-            some basic information that can be saved to a database or
+            In the following example, we import an <acronym>RDF</acronym>/<acronym>RSS</acronym> 1.0
+            feed and extract some basic information that can be saved to a database or
             elsewhere.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $feed = Zend_Feed_Reader::import('http://www.planet-php.net/rdf/');
 $data = array(
     'title'        => $feed->getTitle(),
@@ -113,18 +118,18 @@ foreach ($feed as $entry) {
 
         <para>
             The example above demonstrates
-            <classname>Zend_Feed_Reader</classname>'s API, and it also
-            demonstrates some of it's internal operation. In reality, the RDF
+            <classname>Zend_Feed_Reader</classname>'s <acronym>API</acronym>, and it also
+            demonstrates some of it's internal operation. In reality, the <acronym>RDF</acronym>
             feed selected does not have any native date or author elements,
             however it does utilise the Dublin Core 1.1 module which offers
             namespaced creator and date elements.
             <classname>Zend_Feed_Reader</classname> falls back on these and
             similar options if no relevant native elements exist. If it
-            absolutely cannot find an alternative it will return null,
+            absolutely cannot find an alternative it will return <constant>NULL</constant>,
             indicating the information could not be found in the feed. You
             should note that classes implementing
             <classname>Zend_Feed_Reader_FeedInterface</classname> also implement
-            the SPL <classname>Iterator</classname> and
+            the <acronym>SPL</acronym> <classname>Iterator</classname> and
             <classname>Countable</classname> interfaces.
         </para>
 
@@ -133,7 +138,7 @@ foreach ($feed as $entry) {
             type <classname>Zend_Feed_Abstract</classname>.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // from a URI
 $feed = Zend_Feed_Reader::import('http://www.planet-php.net/rdf/');
 
@@ -158,7 +163,7 @@ $feed  = Zend_Feed_Reader::importFeed($zfeed);
             <classname>Zend_Feed_Reader</classname>, you can extract the base
             <classname>DOMDocument</classname> or
             <classname>DOMElement</classname> objects from any class, or even an
-            XML string containing these. Also provided are methods to extract
+            <acronym>XML</acronym> string containing these. Also provided are methods to extract
             the current <classname>DOMXPath</classname> object (with all core
             and Extension namespaces registered) and the correct prefix used in
             all XPath queries for the current Feed or Entry. The basic methods
@@ -174,7 +179,7 @@ $feed  = Zend_Feed_Reader::importFeed($zfeed);
         <itemizedlist>
             <listitem>
                 <para>
-                    <methodname>saveXml()</methodname> returns an XML string
+                    <methodname>saveXml()</methodname> returns an <acronym>XML</acronym> string
                     containing only the element representing the current object.
                 </para>
             </listitem>
@@ -191,7 +196,7 @@ $feed  = Zend_Feed_Reader::importFeed($zfeed);
                 <para>
                     <methodname>getElement()</methodname> returns the
                     <classname>DOMElement</classname> of the current object
-                    (i.e.  the Feed or current Entry).
+                    (i.e. the Feed or current Entry).
                 </para>
             </listitem>
 
@@ -216,7 +221,7 @@ $feed  = Zend_Feed_Reader::importFeed($zfeed);
         </itemizedlist>
 
         <para>
-            Here's an example where a feed might include an RSS Extension not
+            Here's an example where a feed might include an <acronym>RSS</acronym> Extension not
             supported by <classname>Zend_Feed_Reader</classname> out of the box.
             Notably, you could write and register an Extension (covered later)
             to do this, but that's not always warranted for a quick check. You
@@ -226,12 +231,14 @@ $feed  = Zend_Feed_Reader::importFeed($zfeed);
             Extension beforehand.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $feed        = Zend_Feed_Reader::import('http://www.planet-php.net/rdf/');
 $xpathPrefix = $feed->getXpathPrefix();
 $xpath       = $feed->getXpath();
 $xpath->registerNamespace('admin', 'http://webns.net/mvcb/');
-$reportErrorsTo = $xpath->evaluate('string(' . $xpathPrefix . '/admin:errorReportsTo)');
+$reportErrorsTo = $xpath->evaluate('string('
+                                 . $xpathPrefix
+                                 . '/admin:errorReportsTo)');
 ]]></programlisting>
 
         <warning>
@@ -253,15 +260,15 @@ $reportErrorsTo = $xpath->evaluate('string(' . $xpathPrefix . '/admin:errorRepor
             <para>
                 <classname>Zend_Feed_Reader</classname> supports using an
                 instance of <classname>Zend_Cache</classname> to cache feeds (as
-                XML) to avoid unnecessary network requests. Adding a cache is as
+                <acronym>XML</acronym>) to avoid unnecessary network requests. Adding a cache is as
                 simple here as it is for other Zend Framework components, create
                 and configure your cache and then tell
                 <classname>Zend_Feed_Reader</classname> to use it! The cache key
-                used is "Zend_Feed_Reader_" followed by the MD5 hash of the
-                feed's URI.
+                used is "<classname>Zend_Feed_Reader_</classname>" followed by the
+                <acronym>MD5</acronym> hash of the feed's <acronym>URI</acronym>.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $frontendOptions = array(
    'lifetime' => 7200,
    'automatic_serialization' => true
@@ -290,12 +297,12 @@ Zend_Feed_Reader::setCache($cache);
 
             <para>
                 The big question often asked when importing a feed frequently, is
-                if it has even changed. With a cache enabled, you can add HTTP
+                if it has even changed. With a cache enabled, you can add <acronym>HTTP</acronym>
                 Conditional GET support to your arsenal to answer that question.
             </para>
 
             <para>
-                Using this method, you can request feeds from URIs and include
+                Using this method, you can request feeds from <acronym>URI</acronym>s and include
                 their last known ETag and Last-Modified response header values
                 with the request (using the If-None-Match and If-Modified-Since
                 headers). If the feed on the server remains unchanged, you
@@ -310,13 +317,13 @@ Zend_Feed_Reader::setCache($cache);
 
             <para>
                 These "conditional" requests are not guaranteed to be supported
-                by the server you request a URI of, but can be attempted
+                by the server you request a <acronym>URI</acronym> of, but can be attempted
                 regardless. Most common feed sources like blogs should however
                 have this supported. To enable conditional requests, you will
                 need to provide a cache to <classname>Zend_Feed_Reader</classname>.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $frontendOptions = array(
    'lifetime' => 86400,
    'automatic_serialization' => true
@@ -333,21 +340,21 @@ $feed = Zend_Feed_Reader::import('http://www.planet-php.net/rdf/');
 ]]></programlisting>
 
             <para>
-                In the example above, with HTTP Conditional GET requests enabled,
+                In the example above, with <acronym>HTTP</acronym> Conditional GET requests enabled,
                 the response header values for ETag and Last-Modified will be cached
                 along with the feed. For the next 24hrs (the cache lifetime), feeds will
                 only be updated on the cache if a non-304 response is received
-                containing a valid RSS or Atom XML document.
+                containing a valid <acronym>RSS</acronym> or Atom <acronym>XML</acronym> document.
             </para>
 
             <para>
                 If you intend on managing request headers from outside
                 <classname>Zend_Feed_Reader</classname>, you can set the
                 relevant If-None-Matches and If-Modified-Since request headers
-                via the URI import method.
+                via the <acronym>URI</acronym> import method.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $lastEtagReceived = '5e6cefe7df5a7e95c8b1ba1a2ccaff3d';
 $lastModifiedDateReceived = 'Wed, 08 Jul 2009 13:37:22 GMT';
 $feed = Zend_Feed_Reader::import(
@@ -361,25 +368,26 @@ $feed = Zend_Feed_Reader::import(
         <title>Locating Feed URIs from Websites</title>
 
         <para>
-            These days, many websites are aware that the location of their XML
-            feeds is not always obvious. A small RDF, RSS or Atom graphic helps
-            when the user is reading the page, but what about when a machine
+            These days, many websites are aware that the location of their <acronym>XML</acronym>
+            feeds is not always obvious. A small <acronym>RDF</acronym>, <acronym>RSS</acronym> or
+            Atom graphic helps when the user is reading the page, but what about when a machine
             visits trying to identify where your feeds are located? To assist in
             this, websites may point to their feeds using &lt;link&gt; tags in
-            the &lt;head&gt; section of their HTML. To take advantage of this,
+            the &lt;head&gt; section of their <acronym>HTML</acronym>. To take advantage of this,
             you can use <classname>Zend_Feed_Reader</classname> to locate these
             feeds using the static <methodname>findFeedLinks()</methodname>
             method.
         </para>
 
         <para>
-            This method calls any URI and searches for the location of RSS, RDF
-            and Atom feeds assuming the wlebsite's HTML contains the relevant links.
-            It then returns a value object where you can check for the existence of a
-            RSS, RDF or Atom feed URI.
+            This method calls any <acronym>URI</acronym> and searches for the location of
+            <acronym>RSS</acronym>, <acronym>RDF</acronym>
+            and Atom feeds assuming the wlebsite's <acronym>HTML</acronym> contains the relevant
+            links. It then returns a value object where you can check for the existence of a
+            <acronym>RSS</acronym>, <acronym>RDF</acronym> or Atom feed <acronym>URI</acronym>.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $links = Zend_Feed_Reader::findFeedLinks('http://www.planet-php.net');
 
 if(isset($links->rdf)) {
@@ -405,38 +413,39 @@ if(isset($links->atom)) {
         <para>
             Retrieving information from a feed (we'll cover entries/items in the
             next section though they follow identical principals) uses a clearly
-            defined API which is exactly the same regardless of whether the feed
-            in question is RSS/RDF/Atom. The same goes for sub-versions of these
-            standards and we've tested every single RSS and Atom version. While
-            the underlying feed XML can differ substantially in terms of the
+            defined <acronym>API</acronym> which is exactly the same regardless of whether the feed
+            in question is <acronym>RSS</acronym>/<acronym>RDF</acronym>/Atom. The same goes for
+            sub-versions of these standards and we've tested every single
+            <acronym>RSS</acronym> and Atom version. While
+            the underlying feed <acronym>XML</acronym> can differ substantially in terms of the
             tags and elements they present, they nonetheless are all trying to
             convey similar information and to reflect this all the differences
             and wrangling over alternative tags are handled internally by
             <classname>Zend_Feed_Reader</classname> presenting you with an
             identical interface for each. Ideally, you should not have to care
-            whether a feed is RSS or Atom so long as you can extract the
+            whether a feed is <acronym>RSS</acronym> or Atom so long as you can extract the
             information you want.
         </para>
 
         <para>
             Of course, we don't live in an ideal world so there may be times the
-            API just does not cover what you're looking for. To assist you,
+            <acronym>API</acronym> just does not cover what you're looking for. To assist you,
             <classname>Zend_Feed_Reader</classname> offers a plugin system which
-            allows you to write Extensions to expand the core API and cover any
+            allows you to write Extensions to expand the core <acronym>API</acronym> and cover any
             additional data you are trying to extract from feeds. If writing
             another Extension is too much trouble, you can simply grab the
-            underlying DOM or XPath objects and do it by hand in your
+            underlying <acronym>DOM</acronym> or XPath objects and do it by hand in your
             application. Of course, we really do encourage writing an Extension
             simply to make it more portable and reusable.
         </para>
 
         <para>
-            Here's a summary of the Core API for Feeds. You should note it
-            comprises not only the basic RSS and Atom standards, but also
+            Here's a summary of the Core <acronym>API</acronym> for Feeds. You should note it
+            comprises not only the basic <acronym>RSS</acronym> and Atom standards, but also
             accounts for a number of included Extensions bundled with
             <classname>Zend_Feed_Reader</classname>. The naming of these
             Extension sourced methods remain fairly generic - all Extension
-            methods operate at the same level as the Core API though we do allow
+            methods operate at the same level as the Core <acronym>API</acronym> though we do allow
             you to retrieve any specific Extension object separately if
             required.
         </para>
@@ -468,10 +477,11 @@ if(isset($links->atom)) {
                         <entry><methodname>getLink()</methodname></entry>
 
                         <entry>
-                            Returns a URI to the HTML website containing the same or
+                            Returns a <acronym>URI</acronym> to the <acronym>HTML</acronym> website
+                            containing the same or
                             similar information as this feed (i.e. if the feed is from a blog,
-                            it should provide the blog's URI where the HTML version of the
-                            entries can be read).
+                            it should provide the blog's <acronym>URI</acronym> where the
+                            <acronym>HTML</acronym> version of the entries can be read).
                         </entry>
                     </row>
 
@@ -479,8 +489,8 @@ if(isset($links->atom)) {
                         <entry><methodname>getFeedLink()</methodname></entry>
 
                         <entry>
-                            Returns the URI of this feed, which should be the same as
-                            the URI used to import the feed
+                            Returns the <acronym>URI</acronym> of this feed, which should be the
+                            same as the <acronym>URI</acronym> used to import the feed
                         </entry>
                     </row>
 
@@ -498,7 +508,7 @@ if(isset($links->atom)) {
 
                         <entry>
                             Returns either the first author known, or with the
-                            optional <code>$index</code> parameter any specific
+                            optional <varname>$index</varname> parameter any specific
                             index on the array of Authors (returning null if an
                             invalid index).
                         </entry>
@@ -527,7 +537,7 @@ if(isset($links->atom)) {
 
                         <entry>
                             Returns the language of the feed (if defined) or simply the
-                            language noted in the XML document
+                            language noted in the <acronym>XML</acronym> document
                         </entry>
                     </row>
 
@@ -536,8 +546,8 @@ if(isset($links->atom)) {
 
                         <entry>
                             Returns the generator of the feed, e.g. the software which
-                            generated it. This may differ between RSS and Atom since Atom
-                            defines a different notation.
+                            generated it. This may differ between <acronym>RSS</acronym> and Atom
+                            since Atom defines a different notation.
                         </entry>
                     </row>
 
@@ -554,18 +564,18 @@ if(isset($links->atom)) {
 
         <para>
             Given the variety of feeds in the wild, some of these methods will
-            undoubtedly return NULL indicating the relevant information couldn't
-            be located. Where possible, <classname>Zend_Feed_Reader</classname>
+            undoubtedly return <constant>NULL</constant> indicating the relevant information
+            couldn't be located. Where possible, <classname>Zend_Feed_Reader</classname>
             will fall back on alternative elements during its search. For
-            example, searching an RSS feed for a modification date is more
-            complicated than it looks. RSS 2.0 feeds should include a
+            example, searching an <acronym>RSS</acronym> feed for a modification date is more
+            complicated than it looks. <acronym>RSS</acronym> 2.0 feeds should include a
             <code>&lt;lastBuildDate&gt;</code> tag and/or a
             <code>&lt;pubDate&gt;</code> element. But what if it doesn't, maybe
-            this is an RSS 1.0 feed? Perhaps it instead has an
+            this is an <acronym>RSS</acronym> 1.0 feed? Perhaps it instead has an
             <code>&lt;atom:updated&gt;</code> element with identical information
-            (Atom may be used to supplement RSS's syntax)? Failing that, we
+            (Atom may be used to supplement <acronym>RSS</acronym>'s syntax)? Failing that, we
             could simply look at the entries, pick the most recent, and use its
-            <code>&lt;pubDate&gt;</code> element.  Assuming it exists... Many
+            <code>&lt;pubDate&gt;</code> element. Assuming it exists... Many
             feeds also use Dublin Core 1.0/1.1 <code>&lt;dc:date&gt;</code>
             elements for feeds/entries. Or we could find Atom lurking again.
         </para>
@@ -574,15 +584,15 @@ if(isset($links->atom)) {
             The point is, <classname>Zend_Feed_Reader</classname> was designed
             to know this. When you ask for the modification date (or anything
             else), it will run off and search for all these alternatives until
-            it either gives up and returns <code>NULL</code>, or finds an
+            it either gives up and returns <constant>NULL</constant>, or finds an
             alternative that should have the right answer.
         </para>
 
         <para>
             In addition to the above methods, all Feed objects implement methods
-            for retrieving the DOM and XPath objects for the current feeds as
-            described earlier. Feed objects also implement the SPL Iterator and
-            Countable interfaces. The extended API is summarised below.
+            for retrieving the <acronym>DOM</acronym> and XPath objects for the current feeds as
+            described earlier. Feed objects also implement the <acronym>SPL</acronym> Iterator and
+            Countable interfaces. The extended <acronym>API</acronym> is summarised below.
         </para>
 
         <table>
@@ -596,7 +606,7 @@ if(isset($links->atom)) {
                         <entry>
                             Returns the parent
                             <classname>DOMDocument</classname> object for the
-                            entire source XML document
+                            entire source <acronym>XML</acronym> document
                         </entry>
                     </row>
 
@@ -613,7 +623,7 @@ if(isset($links->atom)) {
                         <entry><methodname>saveXml()</methodname></entry>
 
                         <entry>
-                            Returns a string containing an XML document of the
+                            Returns a string containing an <acronym>XML</acronym> document of the
                             entire feed element (this is not the original
                             document but a rebuilt version)
                         </entry>
@@ -635,8 +645,8 @@ if(isset($links->atom)) {
                         <entry><methodname>getXpathPrefix()</methodname></entry>
 
                         <entry>
-                            Returns the valid DOM path prefix prepended to all XPath
-                            queries matching the feed being queried
+                            Returns the valid <acronym>DOM</acronym> path prefix prepended
+                            to all XPath queries matching the feed being queried
                         </entry>
                     </row>
 
@@ -644,7 +654,7 @@ if(isset($links->atom)) {
                         <entry><methodname>getEncoding()</methodname></entry>
 
                         <entry>
-                            Returns the encoding of the source XML document
+                            Returns the encoding of the source <acronym>XML</acronym> document
                             (note: this cannot account for errors such as the
                             server sending documents in a different encoding)
                         </entry>
@@ -655,7 +665,8 @@ if(isset($links->atom)) {
 
                         <entry>
                             Returns a count of the entries or items this feed contains
-                            (implements SPL <classname>Countable</classname> interface)
+                            (implements <acronym>SPL</acronym> <classname>Countable</classname>
+                            interface)
                         </entry>
                     </row>
 
@@ -711,7 +722,7 @@ if(isset($links->atom)) {
 
                         <entry>
                             Returns a static class constant (e.g.
-                            <varname>Zend_Feed_Reader::TYPE_ATOM_03</varname>,
+                            <constant>Zend_Feed_Reader::TYPE_ATOM_03</constant>,
                             i.e. Atom 0.3) indicating exactly what kind of feed
                             is being consumed.
                         </entry>
@@ -726,9 +737,9 @@ if(isset($links->atom)) {
 
         <para>
             Retrieving information for specific entries or items (depending on
-            whether you speak Atom or RSS) is identical to feed level data.
+            whether you speak Atom or <acronym>RSS</acronym>) is identical to feed level data.
             Accessing entries is simply a matter of iterating over a Feed object
-            or using the SPL <classname>Iterator</classname> interface Feed
+            or using the <acronym>SPL</acronym> <classname>Iterator</classname> interface Feed
             objects implement and calling the appropriate method on each.
         </para>
 
@@ -759,8 +770,8 @@ if(isset($links->atom)) {
                         <entry><methodname>getLink()</methodname></entry>
 
                         <entry>
-                            Returns a URI to the HTML version of the current
-                            entry
+                            Returns a <acronym>URI</acronym> to the <acronym>HTML</acronym> version
+                            of the current entry
                         </entry>
                     </row>
 
@@ -786,7 +797,7 @@ if(isset($links->atom)) {
 
                         <entry>
                             Returns either the first author known, or with the
-                            optional <code>$index</code> parameter any specific
+                            optional <varname>$index</varname> parameter any specific
                             index on the array of Authors (returning null if an
                             invalid index).
                         </entry>
@@ -797,7 +808,7 @@ if(isset($links->atom)) {
 
                         <entry>
                             Returns the date on which the current entry was
-                            created.  Generally only applicable to Atom where it
+                            created. Generally only applicable to Atom where it
                             represents the date the resource described by an
                             Atom 1.0 document was created.
                         </entry>
@@ -817,9 +828,9 @@ if(isset($links->atom)) {
 
                         <entry>
                             Returns the content of the current entry (this has any
-                            entities reversed if possible assuming the content type is HTML).
-                            The description is returned if a separate content element does not
-                            exist.
+                            entities reversed if possible assuming the content type is
+                            <acronym>HTML</acronym>). The description is returned if a
+                            separate content element does not exist.
                         </entry>
                     </row>
 
@@ -836,8 +847,8 @@ if(isset($links->atom)) {
                         <entry><methodname>getCommentLink()</methodname></entry>
 
                         <entry>
-                            Returns a URI pointing to the HTML page where comments can
-                            be made on this entry
+                            Returns a <acronym>URI</acronym> pointing to the <acronym>HTML</acronym>
+                            page where comments can be made on this entry
                         </entry>
                     </row>
 
@@ -847,16 +858,18 @@ if(isset($links->atom)) {
                                 'atom'|'rss')</methodname>
                         </entry>
 
-            <entry>Returns a URI pointing to a feed of the provided type
-            containing all comments for this entry (type defaults to Atom/RSS
-            depending on current feed type).</entry>
-          </row>
-        </tbody>
-      </tgroup>
-    </table>
+                        <entry>
+                            Returns a <acronym>URI</acronym> pointing to a feed of the provided type
+                            containing all comments for this entry (type defaults to
+                            Atom/<acronym>RSS</acronym> depending on current feed type).
+                        </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
 
         <para>
-            The extended API for entries is identical to that for feeds with the
+            The extended <acronym>API</acronym> for entries is identical to that for feeds with the
             exception of the Iterator methods which are not needed here.
         </para>
 
@@ -864,22 +877,25 @@ if(isset($links->atom)) {
             <para>
                 There is often confusion over the concepts of modified and
                 created dates. In Atom, these are two clearly defined concepts
-                (so knock yourself out) but in RSS they are vague. RSS 2.0
+                (so knock yourself out) but in <acronym>RSS</acronym> they are vague.
+                <acronym>RSS</acronym> 2.0
                 defines a single <emphasis>&lt;pubDate&gt;</emphasis> element
                 which typically refers to the date this entry was published,
                 i.e. a creation date of sorts. This is not always the case, and
                 it may change with updates or not. As a result, if you really
                 want to check whether an entry has changed, don't rely on the
                 results of <methodname>getDateModified()</methodname>. Instead,
-                consider tracking the MD5 hash of three other elements
+                consider tracking the <acronym>MD5</acronym> hash of three other elements
                 concatenated, e.g. using <methodname>getTitle()</methodname>,
                 <methodname>getDescription()</methodname> and
                 <methodname>getContent()</methodname>. If the entry was trully
                 updated, this hash computation will give a different result than
                 previously saved hashes for the same entry. Further muddying the
                 waters, dates in feeds may follow different standards. Atom and
-                Dublin Core dates should follow ISO 8601, and RSS dates should
-                follow RFC 822 or RFC 2822 which is also common. Date methods
+                Dublin Core dates should follow <acronym>ISO</acronym> 8601,
+                and <acronym>RSS</acronym> dates should
+                follow <acronym>RFC</acronym> 822 or <acronym>RFC</acronym> 2822
+                which is also common. Date methods
                 will throw an exception if <classname>Zend_Date</classname>
                 cannot load the date string using one of the above standards.
             </para>
@@ -889,7 +905,7 @@ if(isset($links->atom)) {
             <para>
                 The values returned from these methods are not validated. This
                 means users must perform validation on all retrieved data
-                including the filtering of any HTML such as from
+                including the filtering of any <acronym>HTML</acronym> such as from
                 <methodname>getContent()</methodname> before it is output from
                 your application. Remember that most feeds come from external
                 sources, and therefore the default assumption should be that
@@ -937,8 +953,8 @@ if(isset($links->atom)) {
                         <entry><methodname>getXpathPrefix()</methodname></entry>
 
                         <entry>
-                            Returns the valid DOM path prefix prepended to all XPath
-                            queries matching the entry being queried
+                            Returns the valid <acronym>DOM</acronym> path prefix prepended
+                            to all XPath queries matching the entry being queried
                         </entry>
                     </row>
 
@@ -946,9 +962,9 @@ if(isset($links->atom)) {
                         <entry><methodname>getEncoding()</methodname></entry>
 
                         <entry>
-                            Returns the encoding of the source XML document (note: this
-                            cannot account for errors such as the server sending documents in
-                            a different encoding)
+                            Returns the encoding of the source <acronym>XML</acronym> document
+                            (note: this cannot account for errors such as the server sending
+                            documents in a different encoding)
                         </entry>
                     </row>
 
@@ -968,7 +984,7 @@ if(isset($links->atom)) {
 
                         <entry>
                             Returns a static class constant (e.g.
-                            <varname>Zend_Feed_Reader::TYPE_ATOM_03</varname>,
+                            <constant>Zend_Feed_Reader::TYPE_ATOM_03</constant>,
                             i.e. Atom 0.3) indicating exactly what kind
                             of feed is being consumed.
                         </entry>
@@ -985,7 +1001,8 @@ if(isset($links->atom)) {
             Extending <classname>Zend_Feed_Reader</classname> allows you to add
             methods at both the feed and entry level which cover the retrieval
             of information not already supported by
-            <classname>Zend_Feed_Reader</classname>. Given the number of RSS and
+            <classname>Zend_Feed_Reader</classname>. Given the number of
+            <acronym>RSS</acronym> and
             Atom extensions that exist, this is a good thing since
             <classname>Zend_Feed_Reader</classname> couldn't possibly add
             everything.
@@ -994,13 +1011,14 @@ if(isset($links->atom)) {
         <para>
             There are two types of Extensions possible, those which retrieve
             information from elements which are immediate children of the root
-            element (e.g. <code>&lt;channel&gt;</code> for RSS or
+            element (e.g. <code>&lt;channel&gt;</code> for <acronym>RSS</acronym> or
             <code>&lt;feed&gt;</code> for Atom) and those who retrieve
             information from child elements of an entry (e.g.
-            <code>&lt;item&gt;</code> for RSS or <code>&lt;entry&gt;</code> for
+            <code>&lt;item&gt;</code> for <acronym>RSS</acronym> or <code>&lt;entry&gt;</code> for
             Atom). On the filesystem these are grouped as classes within
             a namespace based on the extension standard's name. For
-            example, internally we have <classname>Zend_Feed_Reader_Extension_DublinCore_Feed</classname>
+            example, internally we have
+            <classname>Zend_Feed_Reader_Extension_DublinCore_Feed</classname>
             and <classname>Zend_Feed_Reader_Extension_DublinCore_Entry</classname>
             classes which are two Extensions implementing Dublin Core
             1.0/1.1 support.
@@ -1008,8 +1026,8 @@ if(isset($links->atom)) {
 
         <para>
             Extensions are loaded into <classname>Zend_Feed_Reader</classname>
-            using Zend_Loader_PluginLoader, so their operation will be familiar
-            from other Zend Framework components.
+            using <classname>Zend_Loader_PluginLoader</classname>, so their operation
+            will be familiar from other Zend Framework components.
             <classname>Zend_Feed_Reader</classname> already bundles a number of
             these Extensions, however those which are not used internally and
             registered by default (so called Core Extensions) must be registered
@@ -1059,8 +1077,9 @@ if(isset($links->atom)) {
             The Core Extensions are somewhat special since they are extremely
             common and multi-faceted. For example, we have a Core Extension for Atom.
             Atom is implemented as an Extension (not just a base class) because it
-            doubles as a valid RSS Extension - you can insert Atom elements into RSS
-            feeds. I've even seen RDF feeds which use a lot of Atom in place of more
+            doubles as a valid <acronym>RSS</acronym> Extension - you can insert
+            Atom elements into <acronym>RSS</acronym> feeds. I've even seen
+            <acronym>RDF</acronym> feeds which use a lot of Atom in place of more
             common Extensions like Dublin Core.
         </para>
 
@@ -1086,16 +1105,16 @@ if(isset($links->atom)) {
 
         <para>
             Registering an Extension with
-            <classname>Zend_Feed_Reader</classname>, so it is loaded and its API
+            <classname>Zend_Feed_Reader</classname>, so it is loaded and its <acronym>API</acronym>
             is available to Feed and Entry objects, is a simple affair using the
             <classname>Zend_Loader_PluginLoader</classname>. Here we register
             the optional Slash Extension, and discover that it can be directly
-            called from the Entry level API without any effort. Note that
+            called from the Entry level <acronym>API</acronym> without any effort. Note that
             Extension names are case sensitive and use camel casing for multiple
             terms.
         </para>
 
-        <programlisting><![CDATA[
+        <programlisting language="php"><![CDATA[
 Zend_Feed_Reader::registerExtension('Slash');
 $feed = Zend_Feed_Reader::import('http://rss.slashdot.org/Slashdot/slashdot');
 $commentsForLastEntry = $feed->current()->getCommentCount();
@@ -1105,18 +1124,18 @@ $commentsForLastEntry = $feed->current()->getCommentCount();
             In the simple example above, we checked how many comments were made
             on an entry using the <methodname>getCommentCount()</methodname>
             method. Since it's not part of
-            <classname>Zend_Feed_Reader</classname>'s core API, it could only be
+            <classname>Zend_Feed_Reader</classname>'s core <acronym>API</acronym>, it could only be
             a method supported by the newly registered Slash Extension (indeed
-            Slash was invented at Slashdot as an RDF Site Summary module and is
+            Slash was invented at Slashdot as an <acronym>RDF</acronym> Site Summary module and is
             now fairly popular).
         </para>
 
         <sect3 id="zend.feed.reader.extending.feed">
-            <title>Writing <classname>Zend_Feed_Reader</classname> Extensions</title>
+            <title>Writing Zend_Feed_Reader Extensions</title>
 
             <para>
                 Inevitably, there will be times when the
-                <classname>Zend_Feed_Reader</classname> API is just not capable
+                <classname>Zend_Feed_Reader</classname> <acronym>API</acronym> is just not capable
                 of getting something you need from a feed or entry. You can use
                 the underlying source objects, like
                 <classname>DOMDocument</classname>, to get these by hand however
@@ -1128,59 +1147,60 @@ $commentsForLastEntry = $feed->current()->getCommentCount();
                 As an example, let's take the case of a purely fictitious
                 corporation named Jungle Books. Jungle Books have been
                 publishing a lot of reviews on books they sell (from external
-                sources and customers), which are distributed as an RSS 2.0
+                sources and customers), which are distributed as an <acronym>RSS</acronym> 2.0
                 feed. Their marketing department realises that web applications
                 using this feed cannot currently figure out exactly what book is
                 being reviewed. To make life easier for everyone, they determine
-                that the geek department needs to extend RSS 2.0 to include a
-                new element per entry supplying the ISBN-10 or ISBN-13 number of
+                that the geek department needs to extend <acronym>RSS</acronym> 2.0 to include a
+                new element per entry supplying the <acronym>ISBN</acronym>-10 or
+                <acronym>ISBN</acronym>-13 number of
                 the publication the entry concerns. They define the new
                 <code>&lt;isbn&gt;</code> element quite simply with a standard
-                name and namespace URI:
+                name and namespace <acronym>URI</acronym>:
             </para>
 
-            <literallayout>
+            <programlisting language="php"><![CDATA[
 JungleBooks 1.0:
 http://example.com/junglebooks/rss/module/1.0/
-            </literallayout>
+]]></programlisting>
 
             <para>
-                A snippet of RSS containing this extension in practice could be
+                A snippet of <acronym>RSS</acronym> containing this extension in practice could be
                 something similar to:
             </para>
 
-            <literallayout>
-&lt;?xml version="1.0" encoding="utf-8" ?&gt;
-&lt;rss version="2.0"
+            <programlisting language="php"><![CDATA[
+<?xml version="1.0" encoding="utf-8" ?>
+<rss version="2.0"
    xmlns:content="http://purl.org/rss/1.0/modules/content/"
-   xmlns:jungle="http://example.com/junglebooks/rss/module/1.0/"&gt;
-&lt;channel&gt;
-    &lt;title&gt;Jungle Books Customer Reviews&lt;/title&gt;
-    &lt;link&gt;http://example.com/junglebooks&lt;/link&gt;
-    &lt;description&gt;Many book reviews!&lt;/description&gt;
-    &lt;pubDate&gt;Fri, 26 Jun 2009 19:15:10 GMT&lt;/pubDate&gt;
-    &lt;jungle:dayPopular&gt;http://example.com/junglebooks/book/938&lt;/jungle:dayPopular&gt;
-    &lt;item&gt;
-        &lt;title&gt;Review Of Flatland: A Romance of Many Dimensions&lt;/title&gt;
-        &lt;link&gt;http://example.com/junglebooks/review/987&lt;/link&gt;
-        &lt;author&gt;Confused Physics Student&lt;/author&gt;
-        &lt;content:encoded&gt;
+   xmlns:jungle="http://example.com/junglebooks/rss/module/1.0/">
+<channel>
+    <title>Jungle Books Customer Reviews</title>
+    <link>http://example.com/junglebooks</link>
+    <description>Many book reviews!</description>
+    <pubDate>Fri, 26 Jun 2009 19:15:10 GMT</pubDate>
+    <jungle:dayPopular>http://example.com/junglebooks/book/938</jungle:dayPopular>
+    <item>
+        <title>Review Of Flatland: A Romance of Many Dimensions</title>
+        <link>http://example.com/junglebooks/review/987</link>
+        <author>Confused Physics Student</author>
+        <content:encoded>
         A romantic square?!
-        &lt;/content:encoded&gt;
-        &lt;pubDate&gt;Thu, 25 Jun 2009 20:03:28 -0700&lt;/pubDate&gt;
-        &lt;jungle:isbn&gt;048627263X&lt;/jungle:isbn&gt;
-    &lt;/item&gt;
-&lt;/channel&gt;
-&lt;/rss&gt;
-            </literallayout>
+        </content:encoded>
+        <pubDate>Thu, 25 Jun 2009 20:03:28 -0700</pubDate>
+        <jungle:isbn>048627263X</jungle:isbn>
+    </item>
+</channel>
+</rss>
+]]></programlisting>
 
             <para>
-                Implementing this new ISBN element as a simple entry level
+                Implementing this new <acronym>ISBN</acronym> element as a simple entry level
                 extension would require the following class (using your own class
                 namespace outside of Zend).
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class My_FeedReader_Extension_JungleBooks_Entry
     extends Zend_Feed_Reader_Extension_EntryAbstract
 {
@@ -1211,18 +1231,18 @@ class My_FeedReader_Extension_JungleBooks_Entry
             <para>
                 This extension is easy enough to follow. It creates a new method
                 <methodname>getIsbn()</methodname> which runs an XPath query on
-                the current entry to extract the ISBN number enclosed by the
+                the current entry to extract the <acronym>ISBN</acronym> number enclosed by the
                 <code>&lt;jungle:isbn&gt;</code> element. It can optionally
                 store this to the internal non-persistent cache (no need to keep
-                querying the DOM if it's called again on the same entry). The
+                querying the <acronym>DOM</acronym> if it's called again on the same entry). The
                 value is returned to the caller. At the end we have a protected
                 method (it's abstract so it must exist) which registers the
-                Jungle Books namespace for their custom RSS module. While we
-                call this an RSS module, there's nothing to prevent the same
+                Jungle Books namespace for their custom <acronym>RSS</acronym> module. While we
+                call this an <acronym>RSS</acronym> module, there's nothing to prevent the same
                 element being used in Atom feeds - and all Extensions which use
                 the prefix provided by <methodname>getXpathPrefix()</methodname>
-                are actually neutral and work on RSS or Atom feeds with no extra
-                code.
+                are actually neutral and work on <acronym>RSS</acronym> or Atom feeds with no
+                extra code.
             </para>
 
             <para>
@@ -1233,7 +1253,7 @@ class My_FeedReader_Extension_JungleBooks_Entry
                 if it's not already loaded, and using it in practice.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 if(!Zend_Feed_Reader::isRegistered('JungleBooks')) {
     Zend_Feed_Reader::addPrefixPath(
         '/path/to/My/FeedReader/Extension', 'My_FeedReader_Extension'
@@ -1251,13 +1271,13 @@ $firstIsbn = $feed->current()->getIsbn();
                 example feed from earlier included an unmentioned
                 <code>&lt;jungle:dayPopular&gt;</code> element which Jungle
                 Books have added to their standard to include a link to the
-                day's most popular book (in terms of visitor traffic).  Here's
+                day's most popular book (in terms of visitor traffic). Here's
                 an Extension which adds a
                 <methodname>getDaysPopularBookLink()</methodname> method to the
-                feel level API.
+                feel level <acronym>API</acronym>.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class My_FeedReader_Extension_JungleBooks_Feed
     extends Zend_Feed_Reader_Extension_FeedAbstract
 {
@@ -1289,7 +1309,7 @@ class My_FeedReader_Extension_JungleBooks_Feed
                 method being used.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 if(!Zend_Feed_Reader::isRegistered('JungleBooks')) {
     Zend_Feed_Reader::addPrefixPath(
         '/path/to/My/FeedReader/Extension', 'My_FeedReader_Extension'

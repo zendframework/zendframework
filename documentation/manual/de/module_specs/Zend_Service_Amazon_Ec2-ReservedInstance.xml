@@ -79,18 +79,19 @@ $return = $ec2_instance->describeInstances('instanceId');
         </example>
 
         <example id="zend.service.amazon.ec2.reserved.instance.offerings.describe">
-            <title>Describe current Reserved Instance Offerings available</title>
+            <title>Beschreiben der aktuell vorhandenen Reservierten Instanz Angebote</title>
             <para>
-                <methodname>describeOfferings()</methodname> Describes Reserved Instance offerings
-                that are available for purchase. With Amazon <acronym>EC2</acronym> Reserved
-                Instances, you purchase the right to launch Amazon <acronym>EC2</acronym> instances
-                for a period of time (without getting insufficient capacity errors) and pay a lower
-                usage rate for the actual time used.
+                <methodname>describeOfferings()</methodname> beschreibt Angebote für Reservierte
+                Instanzen die für einen Kauf vorhanden sind. Mit Amazon <acronym>EC2</acronym>
+                Reservierten Instanzen kauft man das Recht amazon <acronym>EC2</acronym> Instanzen
+                für eine bestimmte Zeitdauer zu starten (ohne Fehler wegen unzureichender Kapazität
+                zu erhalten) und einen geringeren Preis für die Verwendung der wirklich verwendeten
+                Zeit zu erhalten.
             </para>
             <para>
-                <methodname>describeOfferings()</methodname> returns a multi-demential array that
-                contains reservedInstancesId, instanceType, availabilityZone, duration, fixedPrice,
-                usagePrice and productDescription.
+                <methodname>describeOfferings()</methodname> gibt ein mehrdimensionales Array
+                zurück das die folgenden Daten enthält: reservedInstancesId, instanceType,
+                availabilityZone, duration, fixedPrice, usagePrice und productDescription.
             </para>
             <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance_Reserved('aws_key',
@@ -100,16 +101,17 @@ $return = $ec2_instance->describeOfferings();
         </example>
 
         <example id="zend.service.amazon.ec2.reserved.instance.offerings.purchase">
-            <title>Turn off CloudWatch Monitoring on an Instance(s)</title>
+            <title>Das CloudWatch Monitoring bei Instanzen ausschalten</title>
             <para>
-                <methodname>purchaseOffering()</methodname> Purchases a Reserved Instance for use
-                with your account. With Amazon <acronym>EC2</acronym> Reserved Instances, you
-                purchase the right to launch Amazon <acronym>EC2</acronym> instances for a period
-                of time (without getting insufficient capacity errors) and pay a lower usage rate
-                for the actual time used.
+                <methodname>purchaseOffering()</methodname> erwirbt eine Reservierte Instanz für
+                die Verwendung mit dem eigenen Account. Mit Amazon <acronym>EC2</acronym>
+                Reservierten Instanzen kauft man das Recht amazon <acronym>EC2</acronym> Instanzen
+                für eine bestimmte Zeitdauer zu starten (ohne Fehler wegen unzureichender Kapazität
+                zu erhalten) und einen geringeren Preis für die Verwendung der wirklich verwendeten
+                Zeit zu erhalten.
             </para>
             <para>
-                <methodname>purchaseOffering()</methodname> returns the reservedInstanceId.
+                <methodname>purchaseOffering()</methodname> gibt die reservedInstanceId zurück.
             </para>
             <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance_Reserved('aws_key',

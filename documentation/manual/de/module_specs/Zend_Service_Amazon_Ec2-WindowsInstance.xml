@@ -2,32 +2,32 @@
 <!-- EN-Revision: 16389 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.ec2.windows.instance">
-    <title>Zend_Service_Amazon_Ec2: Windows Instances</title>
+    <title>Zend_Service_Amazon_Ec2: Windows Instanzen</title>
 
     <para>
-        Using Amazon EC2 instances running Windows is similar to using instances
-        running Linux and UNIX. The following are the major differences between
-        instances that use Linux or UNIX and Windows:
+        Die Verwendung von Amazon EC2 Instanzen auf denen Windows läuft ist ähnlich wie die
+        Verwendung von Instanzen die Linux oder UNIX und Windows verwenden:
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
-                Remote Desktop—To access Windows instances, you use Remote
-                Desktop instead of SSH.
+                Remote Desktop—Um auf Windows Instanzen zuzugreifen muß Remote Desktop statt SSH
+                verwendet werden.
             </para>
         </listitem>
         <listitem>
             <para>
-                Administrative Password—To access Windows instances the first time,
-                you must obtain the administrative password using the ec2-get-password
-                command.
+                Administratives Passwort—Um auf Windows Instanzen das erste Mal zugreifen zu
+                können muß man das administrative Passwort holen indem der ec2-get-password
+                Befehl verwendet wird.
             </para>
         </listitem>
         <listitem>
             <para>
-                Simplified Bundling—To bundle a Windows instance, you use a single command
-                that shuts down the instance, saves it as an AMI, and restarts it.
+                Vereinfachtes Bündeln- Um eine Windows Instanz zu bündeln muß ein einzelnes
+                Kommando verwendet werden, der die Instanz beendet, diese als AMI speichert, und
+                Sie wieder startet.
             </para>
         </listitem>
     </itemizedlist>

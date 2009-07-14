@@ -97,20 +97,6 @@ class Zend_Dojo_BuildLayerTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($path, $build->getLayerScriptPath());
     }
 
-    public function testProfilePathIsNullByDefault()
-    {
-        $build = new Zend_Dojo_BuildLayer();
-        $this->assertNull($build->getProfilePath());
-    }
-
-    public function testProfilePathShouldBeMutable()
-    {
-        $build = new Zend_Dojo_BuildLayer();
-        $path  = __FILE__;
-        $build->setProfilePath($path);
-        $this->assertEquals($path, $build->getProfilePath());
-    }
-
     public function testShouldNotConsumeJavascriptByDefault()
     {
         $build = new Zend_Dojo_BuildLayer();

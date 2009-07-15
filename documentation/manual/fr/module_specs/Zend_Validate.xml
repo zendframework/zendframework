@@ -219,6 +219,8 @@ if (Zend_Validate::is($value, 'Between', array(1, 12))) {
 
         <sect3 id="zend.validate.introduction.static.namespaces">
 
+            <title>Espaces de noms</title>
+
             <para>
                 When working with self defined validators you can give a forth parameter
                 to <methodname>Zend_Validate::is()</methodname> which is the namespace

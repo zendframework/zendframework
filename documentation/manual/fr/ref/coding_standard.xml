@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15343 -->
+<!-- EN-Revision: 16734 -->
 <!-- Reviewed: no -->
 <appendix id="coding-standard">
     <title>Convention de codage PHP de Zend Framework</title>
@@ -157,6 +157,58 @@
                 écrit par un utilisateur et pas Zend ou une des entreprises partenaires, ne doivent
                 jamais commencer par "Zend_".
             </para>
+        </sect2>
+
+        <sect2 id="coding-standard.naming-conventions.abstracts">
+            <title>Abstract Classes</title>
+
+            <para>
+                In general, abstract classes follow the same conventions as <link 
+                    linkend="coding-standard.naming-conventions.classes">classes</link>,
+                with one additional rule: abstract class names must end in the term, "Abstract", 
+                and that term must not be preceded by an underscore. As an example,
+                <classname>Zend_Controller_Plugin_Abstract</classname> is considered an 
+                invalid name, but <classname>Zend_Controller_PluginAbstract</classname> or
+                <classname>Zend_Controller_Plugin_PluginAbstract</classname> would be valid 
+                names.
+            </para>
+
+            <note>
+                <para>
+                    This naming convention is new with version 1.9.0 of Zend Framework. Classes 
+                    that pre-date that version may not follow this rule, but will be renamed in 
+                    the future in order to comply.
+                </para>
+            </note>
+        </sect2>
+
+        <sect2 id="coding-standard.naming-conventions.interfaces">
+            <title>Interfaces</title>
+
+            <para>
+                In general, interfaces follow the same conventions as <link 
+                    linkend="coding-standard.naming-conventions.classes">classes</link>,
+                with one additional rule: interface names may optionally end in the term, 
+                "Interface", but that term must not be preceded by an underscore. As an example,
+                <classname>Zend_Controller_Plugin_Interface</classname> is considered an 
+                invalid name, but <classname>Zend_Controller_PluginInterface</classname> or
+                <classname>Zend_Controller_Plugin_PluginInterface</classname> would be valid 
+                names.
+            </para>
+
+            <para>
+                While this rule is not required, it is strongly recommended, as it provides a 
+                good visual cue to developers as to which files contain interfaces rather than 
+                classes.
+            </para>
+
+            <note>
+                <para>
+                    This naming convention is new with version 1.9.0 of Zend Framework. Classes 
+                    that pre-date that version may not follow this rule, but will be renamed in 
+                    the future in order to comply.
+                </para>
+            </note>
         </sect2>
 
         <sect2 id="coding-standard.naming-conventions.filenames">
@@ -424,6 +476,29 @@ $sampleArray = array(1, 2, 3, 'Zend', 'Studio',
                      56.44, $d, 500);
 ]]></programlisting>
                 </para>
+
+                <para>
+                    Alternately, the initial array item may begin on the following line. If so, 
+                    it should be padded at one indentation level greater than the line containing 
+                    the array declaration, and all successive lines should have the same
+                    indentation; the closing paren should be on a line by itself at the same 
+                    indentation level as the line containing the array declaration:
+                </para>
+
+                <programlisting language="php"><![CDATA[
+$sampleArray = array(
+    1, 2, 3, 'Zend', 'Studio',
+    $a, $b, $c,
+    56.44, $d, 500,
+);
+]]></programlisting>
+
+                <para>
+                    When using this latter declaration, we encourage using a trailing comma for 
+                    the last item in the array; this minimizes the impact of adding new items on 
+                    successive lines, and helps to ensure no parse errors occur due to a missing 
+                    comma.
+                </para>
             </sect3>
 
             <sect3 id="coding-standard.coding-style.arrays.associative">
@@ -438,6 +513,30 @@ $sampleArray = array(1, 2, 3, 'Zend', 'Studio',
 $sampleArray = array('firstKey'  => 'firstValue',
                      'secondKey' => 'secondValue');
 ]]></programlisting>
+                </para>
+
+                <para>
+                    Alternately, the initial array item may begin on the following line. If so, 
+                    it should be padded at one indentation level greater than the line containing 
+                    the array declaration, and all successive lines should have the same
+                    indentation; the closing paren should be on a line by itself at the same 
+                    indentation level as the line containing the array declaration. For 
+                    readability, the various "=>" assignment operators should be padded such that 
+                    they align.
+                </para>
+
+                <programlisting language="php"><![CDATA[
+$sampleArray = array(
+    'firstKey'  => 'firstValue',
+    'secondKey' => 'secondValue',
+);
+]]></programlisting>
+
+                <para>
+                    When using this latter declaration, we encourage using a trailing comma for 
+                    the last item in the array; this minimizes the impact of adding new items on 
+                    successive lines, and helps to ensure no parse errors occur due to a missing 
+                    comma.
                 </para>
             </sect3>
         </sect2>
@@ -486,6 +585,46 @@ class SampleClass
 }
 ]]></programlisting>
                 </para>
+
+                <para>
+                    Classes that extend other classes or which implement interfaces should 
+                    declare their dependencies on the same line when possible.
+                </para>
+
+                <programlisting language="php"><![CDATA[
+class SampleClass extends FooAbstract implements BarInterface
+{
+}
+]]></programlisting>
+
+                <para>
+                    If as a result of such declarations, the line length exceeds the <link
+                        linkend="coding-standard.php-file-formatting.max-line-length">maximum line 
+                        length</link>, break the line before the "extends" and/or "implements" 
+                    keywords, and pad those lines by one indentation level.
+                </para>
+
+                <programlisting language="php"><![CDATA[
+class SampleClass 
+    extends FooAbstract
+    implements BarInterface
+{
+}
+]]></programlisting>
+
+                <para>
+                    If the class implements multiple interfaces and the declaration exceeds the 
+                    maximum line length, break after each comma separating the interfaces, and 
+                    indent the interface names such that they align.
+                </para>
+
+                <programlisting language="php"><![CDATA[
+class SampleClass 
+    implements BarInterface,
+               BazInterface
+{
+}
+]]></programlisting>
             </sect3>
 
             <sect3 id="coding-standard.coding-style.classes.member-variables">
@@ -552,6 +691,36 @@ class Foo
     {
         // contenu de la fonction
         // qui doit être indenté avec 4 espaces
+    }
+}
+]]></programlisting>
+                </para>
+
+                <para>
+                    In cases where the argument list exceeds the <link 
+                        linkend="coding-standard.php-file-formatting.max-line-length">maximum line 
+                        length</link>, you may introduce line breaks. Additional arguments to the 
+                    function or method must be indented one additional level beyond the function 
+                    or method declaration.  A line break should then occur before the closing 
+                    argument paren, which should then be placed on the same line as the opening 
+                    brace of the function or method with one space separating the two, and at the 
+                    same indentation level as the function or method declaration. The following is 
+                    an example of one such situation:
+
+                    <programlisting language="php"><![CDATA[
+/**
+ * Documentation Block Here
+ */
+class Foo
+{
+    /**
+     * Documentation Block Here
+     */
+    public function bar($arg1, $arg2, $arg3,
+        $arg4, $arg5, $arg6
+    ) {
+        // all contents of function
+        // must be indented four spaces
     }
 }
 ]]></programlisting>
@@ -632,6 +801,12 @@ threeArguments(array(1, 2, 3), 2, 3);
 threeArguments(array(1, 2, 3, 'Zend', 'Studio',
                      $a, $b, $c,
                      56.44, $d, 500), 2, 3);
+
+threeArguments(array(
+    1, 2, 3, 'Zend', 'Studio',
+    $a, $b, $c,
+    56.44, $d, 500
+), 2, 3);
 ]]></programlisting>
                 </para>
             </sect3>
@@ -668,6 +843,31 @@ if ($a != 2) {
                 </para>
 
                 <para>
+                    If the conditional statement causes the line length to exceed the <link
+                        linkend="coding-standard.php-file-formatting.max-line-length">maximum line 
+                        length</link> and has several clauses, you may break the conditional into 
+                    multiple lines. In such a case, break the line prior to a logic operator, and 
+                    pad the line such that it aligns under the first character of the conditional 
+                    clause. The closing paren in the conditional will then be placed on a line with 
+                    the opening brace, with one space separating the two, at an indentation level 
+                    equivalent to the opening control statement.
+                </para>
+
+                <programlisting language="php"><![CDATA[
+if (($a == $b) 
+    && ($b == $c)
+    || (Foo::CONST == $d)
+) {
+    $a = $d;
+}
+]]></programlisting>
+                
+                <para>
+                    The intention of this latter declaration format is to prevent issues when 
+                    adding or removing clauses from the conditional during later revisions.
+                </para>
+
+                <para>
                     Pour les instruction "if" qui incluent "elseif" ou "else", les conventions
                     de formatage sont similaires à celles de la construction "if". Les exemples
                     suivants montrent le formatage approprié pour les structures "if" avec "else"
@@ -685,16 +885,24 @@ if ($a != 2) {
 } else {
     $a = 7;
 }
+
+if (($a == $b) 
+    && ($b == $c)
+    || (Foo::CONST == $d)
+) {
+    $a = $d;
+} elseif (($a != $b)
+          || ($b != $c)
+) {
+    $a = $c;
+} else {
+    $a = $b;
+}
 ]]></programlisting>
                     PHP permet que ces instructions soient écrites sans accolades dans
                     certaines circonstances. La convention de codage ne fait pas de différentiation
                     et toutes les instructions "if", "elseif" et "else" doivent utiliser des
                     accolades.
-                </para>
-
-                <para>
-                    L'utilisation de la construction "elseif" est permise mais fortement
-                    déconseillée au profit de la combinaison "else if".
                 </para>
             </sect3>
 

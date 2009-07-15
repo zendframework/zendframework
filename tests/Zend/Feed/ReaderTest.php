@@ -13,7 +13,7 @@ class Zend_Feed_ReaderTest extends PHPUnit_Framework_TestCase
         $this->_feedSamplePath = dirname(__FILE__) . '/Reader/_files';
     }
 
-    public function teadDown()
+    public function tearDown()
     {
         Zend_Feed_Reader::reset();
     }

@@ -198,8 +198,8 @@ class Zend_Feed_Reader
 
     /**
      * Set the flag indicating whether or not to use HTTP conditional GET
-     * 
-     * @param  bool $bool 
+     *
+     * @param  bool $bool
      * @return void
      */
     public static function useHttpConditionalGet($bool = true)
@@ -546,22 +546,22 @@ class Zend_Feed_Reader
 
     /**
      * Add prefix path for loading Extensions
-     * 
-     * @param  string $prefix 
-     * @param  string $path 
+     *
+     * @param  string $prefix
+     * @param  string $path
      * @return void
      */
     public static function addPrefixPath($prefix, $path)
     {
         $prefix = rtrim($prefix, '_');
         $path   = rtrim($path, DIRECTORY_SEPARATOR);
-        self::$_pluginLoader->addPrefixPath($prefix, $path);
+        self::getPluginLoader()->addPrefixPath($prefix, $path);
     }
 
     /**
      * Add multiple Extension prefix paths at once
-     * 
-     * @param  array $spec 
+     *
+     * @param  array $spec
      * @return void
      */
     public static function addPrefixPaths(array $spec)
@@ -578,8 +578,8 @@ class Zend_Feed_Reader
 
     /**
      * Register an Extension by name
-     * 
-     * @param  string $name 
+     *
+     * @param  string $name
      * @return void
      * @throws Zend_Feed_Exception if unable to resolve Extension class
      */
@@ -614,8 +614,8 @@ class Zend_Feed_Reader
 
     /**
      * Is a given named Extension registered?
-     * 
-     * @param  string $extensionName 
+     *
+     * @param  string $extensionName
      * @return boolean
      */
     public static function isRegistered($extensionName)
@@ -632,7 +632,7 @@ class Zend_Feed_Reader
 
     /**
      * Get a list of extensions
-     * 
+     *
      * @return array
      */
     public static function getExtensions()
@@ -642,7 +642,7 @@ class Zend_Feed_Reader
 
     /**
      * Reset class state to defaults
-     * 
+     *
      * @return void
      */
     public static function reset()
@@ -675,7 +675,7 @@ class Zend_Feed_Reader
 
     /**
      * Register core (default) extensions
-     * 
+     *
      * @return void
      */
     protected static function _registerCoreExtensions()

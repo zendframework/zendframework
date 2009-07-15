@@ -25,10 +25,10 @@
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Framework_Client_Console_ResponseDecorator_Colorizer 
-    implements Zend_Tool_Framework_Client_Response_ContentDecorator_Interface 
+class Zend_Tool_Framework_Client_Console_ResponseDecorator_Colorizer
+    implements Zend_Tool_Framework_Client_Response_ContentDecorator_Interface
 {
-    
+
     protected $_colorOptions = array(
         // blacks
         'black'     => '30m',
@@ -36,7 +36,7 @@ class Zend_Tool_Framework_Client_Console_ResponseDecorator_Colorizer
         'bgBlack'   => '40m',
         // reds
         'red'       => '31m',
-        'hiRed'     => '1:31m',
+        'hiRed'     => '1;31m',
         'bgRed'     => '41m',
         // greens
         'green'     => '32m',
@@ -63,30 +63,30 @@ class Zend_Tool_Framework_Client_Console_ResponseDecorator_Colorizer
         'hiWhite'   => '1;37m',
         'bgWhite'   => '47m'
         );
-    
+
     public function getName()
     {
         return 'color';
     }
-    
+
     public function decorate($content, $color)
     {
         if (is_string($color)) {
             $color = array($color);
         }
-        
+
         $newContent = '';
-        
+
         foreach ($color as $c) {
             if (array_key_exists($c, $this->_colorOptions)) {
                 $newContent .= "\033[" . $this->_colorOptions[$c];
             }
         }
-        
+
         $newContent .= $content . "\033[m";
-        
+
         return $newContent;
     }
-    
-    
+
+
 }

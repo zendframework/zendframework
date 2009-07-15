@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16376 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.object">
     <title>L'aide de vue HTML Object</title>
@@ -15,28 +15,28 @@
     <itemizedlist>
         <listitem>
             <para>
-                <code>formFlash</code> : génère le balisage pour l'inclusion de fichiers
+                <code>htmlFlash</code> : génère le balisage pour l'inclusion de fichiers
                 Flash.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>formObject</code> : génère le balisage pour l'inclusion d'objets
+                <code>htmlObject</code> : génère le balisage pour l'inclusion d'objets
                 personnalisés.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>formPage</code> : génère le balisage pour l'inclusion d'autres pages
+                <code>htmlPage</code> : génère le balisage pour l'inclusion d'autres pages
                 (X)HTML.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>formQuicktime</code> : génère le balisage pour l'inclusion de fichiers
+                <code>htmlQuicktime</code> : génère le balisage pour l'inclusion de fichiers
                 QuickTime.
             </para>
         </listitem>

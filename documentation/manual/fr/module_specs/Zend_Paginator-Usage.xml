@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16153 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.paginator.usage">
     <title>Utilisation</title>
@@ -167,6 +167,45 @@ $paginator->setCurrentPageNumber($this->_getParam('page'));
             <programlisting language="php"><![CDATA[
 $this->view->paginator = $paginator;
 ]]></programlisting></para>
+        </sect2>
+
+        <sect2 id="zend.paginator.usage.dbselect">
+            <title>The DbSelect and DbTableSelect adapter</title>
+            <para>
+                The usage of most adapters is pretty straight-forward. However, the
+                database adapters require a more detailed explanation. Contrary to popular
+                believe, these adapters do NOT fetch all records from the database in order to count them.
+                Instead, the adapters manipulates the original query to produce the corresponding
+                COUNT query. Paginator then executes that COUNT query to get the number of rows.
+                This does require an extra round-trip to the database, but this is many times
+                faster than fetching an entire result set and using count(). Especially with
+                large collections of data.
+            </para>
+            
+            <para>
+                The database adapters will try and build the most efficient query that will execute
+                on pretty much all modern databases. However, depending on your database or even your
+                own schema setup, there might be more efficient ways to get a rowcount. For this scenario
+                the database adapters allow you to set a custom COUNT query. For example,
+                if you keep track of the count of blog posts in a separate table, you could achieve a
+                faster count query with the following setup:  
+            </para>
+            
+            <programlisting language="php"><![CDATA[
+$adapter = new Zend_Paginator_Adapter_DbSelect($db->select()->from('posts'));
+$adapter->setRowCount(
+    $db->select()->from('item_counts', array(Zend_Paginator_Adapter_DbSelect::ROW_COUNT_COLUMN => 'post_count')) 
+)
+ 
+$paginator = new Zend_Paginator($adapter);
+]]></programlisting>
+    
+            <para>
+                This approach will probably not give you a huge performance gain on
+                small collections and/or simple select queries. However, with complex
+                queries and large collections, a similar approach could give you a 
+                significant performance boost.
+            </para>
         </sect2>
 
         <sect2 id="zend.paginator.rendering">

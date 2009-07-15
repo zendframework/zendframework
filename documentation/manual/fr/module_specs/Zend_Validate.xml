@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16286 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.introduction">
     <title>Introduction</title>
@@ -216,6 +216,78 @@ if (Zend_Validate::is($value, 'Between', array(1, 12))) {
             demande pour traiter l'ensemble de données saisies. Voir <xref
             linkend="zend.filter.input" />.
         </para>
+
+        <sect3 id="zend.validate.introduction.static.namespaces">
+
+            <para>
+                When working with self defined validators you can give a forth parameter
+                to <methodname>Zend_Validate::is()</methodname> which is the namespace
+                where your validator can be found.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+if (Zend_Validate::is($value, 'MyValidator', array(1, 12),
+                      array('FirstNamespace', 'SecondNamespace')) {
+    // Yes, $value is ok
+}
+]]></programlisting>
+
+            <para>
+                <classname>Zend_Validate</classname> allows also to set namespaces as default.
+                This means that you can set them once in your bootstrap and have not to give
+                them again for each call of <methodname>Zend_Validate::is()</methodname>. The
+                following code snippet is identical to the above one.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+Zend_Validate::setDefaultNamespaces(array('FirstNamespace', 'SecondNamespace'));
+if (Zend_Validate::is($value, 'MyValidator', array(1, 12)) {
+    // Yes, $value is ok
+}
+
+if (Zend_Validate::is($value, 'OtherValidator', array(1, 12)) {
+    // Yes, $value is ok
+}
+]]></programlisting>
+
+            <para>
+                For your convinience there are following methods which allow the handling of
+                namespaces:
+            </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <emphasis><methodname>Zend_Validator::getDefaultNamespaces()</methodname></emphasis>:
+                        Returns all set default namespaces as array.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <emphasis><methodname>Zend_Validator::setDefaultNamespaces()</methodname></emphasis>:
+                        Sets new default namespaces and overrides any previous set. It accepts
+                        eighter a string for a single namespace of an array for multiple namespaces.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <emphasis><methodname>Zend_Validator::addDefaultNamespaces()</methodname></emphasis>:
+                        Adds additional namespaces to already set ones. It accepts eighter a string
+                        for a single namespace of an array for multiple namespaces.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <emphasis><methodname>Zend_Validator::hasDefaultNamespaces()</methodname></emphasis>:
+                        Returns true when one or more default namespaces are set, and false when no
+                        default namespaces are set.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </sect3>
     </sect2>
 
     <sect2 id="zend.validate.introduction.translation">

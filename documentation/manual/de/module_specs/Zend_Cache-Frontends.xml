@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16414 -->
+<!-- EN-Revision: 16419 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.cache.frontends">
     <title>Zend_Cache Frontends</title>
@@ -653,7 +653,8 @@ $res = $cache->foobar2('1', '2');
                                       <listitem>
                                           <para>
                                               <emphasis>(boolean, true per Default)
-                                                  cache</emphasis>: Cache ist aktiviert wenn true
+                                                  cache</emphasis>: Cache ist aktiviert wenn
+                                              <constant>TRUE</constant>
                                           </para>
                                       </listitem>
                                       <listitem>
@@ -879,7 +880,7 @@ $cache->start();
                 Aus Designgründen, kann es in einigen Fällen (zum Beispiel bei Verwendung von nicht
                 <acronym>HTTP</acronym> 200 Return Codes), notwendig sein den aktuellen
                 Cacheprozess zu unterbrechen. Deshalb zeigen wir für dieses spezielle Frontend die
-                cancel() Methode.
+                <methodname>cancel()</methodname> Methode.
             </para>
             <programlisting language="php"><![CDATA[
 // [...] // Benötigt, Konfiguration und Factory

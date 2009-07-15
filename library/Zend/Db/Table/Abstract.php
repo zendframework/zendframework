@@ -48,6 +48,8 @@ abstract class Zend_Db_Table_Abstract
 {
 
     const ADAPTER          = 'db';
+    const DEFINITION        = 'definition';
+    const DEFINITION_CONFIG_NAME = 'definitionConfigName';
     const SCHEMA           = 'schema';
     const NAME             = 'name';
     const PRIMARY          = 'primary';
@@ -85,6 +87,20 @@ abstract class Zend_Db_Table_Abstract
      */
     protected static $_defaultDb;
 
+    /**
+     * Optional Zend_Db_Table_Definition object
+     *
+     * @var unknown_type
+     */
+    protected $_definition = null;
+    
+    /**
+     * Optional definition config name used in concrete implementation
+     *
+     * @var string
+     */
+    protected $_definitionConfigName = null;
+    
     /**
      * Default cache for information provided by the adapter's describeTable() method.
      *
@@ -245,10 +261,32 @@ abstract class Zend_Db_Table_Abstract
             $config = array(self::ADAPTER => $config);
         }
 
-        foreach ($config as $key => $value) {
+        if ($config) {
+            $this->setOptions($config);
+        }
+
+        $this->_setup();
+        $this->init();
+    }
+
+    /**
+     * setOptions()
+     *
+     * @param array $options
+     * @return Zend_Db_Table_Abstract
+     */
+    public function setOptions(Array $options)
+    {
+        foreach ($options as $key => $value) {
             switch ($key) {
                 case self::ADAPTER:
                     $this->_setAdapter($value);
+                    break;
+                case self::DEFINITION:
+                    $this->setDefinition($value);
+                    break;
+                case self::DEFINITION_CONFIG_NAME:
+                    $this->setDefinitionConfigName($value);
                     break;
                 case self::SCHEMA:
                     $this->_schema = (string) $value;
@@ -286,8 +324,51 @@ abstract class Zend_Db_Table_Abstract
             }
         }
 
-        $this->_setup();
-        $this->init();
+        return $this;
+    }
+    
+    /**
+     * setDefinition()
+     *
+     * @param Zend_Db_Table_Definition $definition
+     * @return Zend_Db_Table_Abstract
+     */
+    public function setDefinition(Zend_Db_Table_Definition $definition)
+    {
+        $this->_definition = $definition;
+        return $this;
+    }
+    
+    /**
+     * getDefinition()
+     *
+     * @return Zend_Db_Table_Definition|null
+     */
+    public function getDefinition()
+    {
+        return $this->_definition;
+    }
+    
+    /**
+     * setDefinitionConfigName()
+     *
+     * @param string $definition
+     * @return Zend_Db_Table_Abstract
+     */
+    public function setDefinitionConfigName($definitionConfigName)
+    {
+        $this->_definitionConfigName = $definitionConfigName;
+        return $this;
+    }
+    
+    /**
+     * getDefinitionConfigName()
+     *
+     * @return string
+     */
+    public function getDefinitionConfigName()
+    {
+        return $this->_definitionConfigName;
     }
 
     /**
@@ -379,6 +460,9 @@ abstract class Zend_Db_Table_Abstract
     public function getReference($tableClassname, $ruleKey = null)
     {
         $thisClass = get_class($this);
+        if ($thisClass === 'Zend_Db_Table') {
+            $thisClass = $this->_definitionConfigName;
+        }
         $refMap = $this->_getReferenceMapNormalized();
         if ($ruleKey !== null) {
             if (!isset($refMap[$ruleKey])) {

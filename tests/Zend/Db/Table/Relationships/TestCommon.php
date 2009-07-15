@@ -1100,6 +1100,35 @@ abstract class Zend_Db_Table_Relationships_TestCommon extends Zend_Db_Table_Test
         $this->assertEquals(1, $destRows->count());
     }
     
+    /**
+     * @group ZF-3486
+     */
+    public function testTableRelationshipCanFindParentViaConcreteInstantiation()
+    {
+        Zend_Db_Table::setDefaultAdapter($this->_db);
+        $definition = array(
+            'Bugs' => array(
+                'name' => 'zfbugs',
+                'referenceMap' => array(
+                    'Engineer' => array(
+                        'columns'           => 'assigned_to',
+                        'refTableClass'     => 'Accounts',
+                        'refColumns'        => 'account_name'
+                        )
+                    )        
+                ),
+            'Accounts' => array(
+                'name' => 'zfaccounts'
+                )
+
+            );
+        $bugsTable = new Zend_Db_Table('Bugs', $definition);
+        $rowset = $bugsTable->find(1);
+        $row = $rowset->current();
+        $parent = $row->findParentRow('Accounts', 'Engineer');
+        $this->assertEquals('mmouse', $parent->account_name);
+        Zend_Db_Table::setDefaultAdapter();
+    }
     
     
     /**

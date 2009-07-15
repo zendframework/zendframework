@@ -32,6 +32,10 @@ require_once 'Zend/Db/Table/TestSetup.php';
  */
 require_once 'Zend/Registry.php';
 
+/**
+ * @see Zend_Db_Table
+ */
+require_once 'Zend/Db/Table.php';
 
 PHPUnit_Util_Filter::addFileToFilter(__FILE__);
 
@@ -1497,6 +1501,30 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
     }
 
     /**
+     * @group ZF-3486
+     */
+    public function testTableConcreteInstantiation()
+    {
+        Zend_Db_Table::setDefaultAdapter($this->_db);
+        
+        $table = new Zend_Db_Table('zfbugs');
+        $rowset = $table->find(1);
+        $this->assertEquals(1, count($rowset));
+        
+        Zend_Db_Table::setDefaultAdapter();
+        
+        $table = new Zend_Db_Table(array(
+            'name' => 'zfbugs',
+            'db' => $this->_db
+            ));
+        $rowset = $table->find(1);
+        $this->assertEquals(1, count($rowset));
+    }
+    
+    
+    
+    
+    /**
      * Returns a clean Zend_Cache_Core with File backend
      *
      * @return Zend_Cache_Core
@@ -1560,5 +1588,7 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
 
         return $cacheFrontend;
     }
+    
+    
 
 }

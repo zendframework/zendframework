@@ -237,7 +237,7 @@ defined('APPLICATION_ENV')
                                          : 'production'));
 
 // Typically, you will also want to add your library/ directory
-// to the include_path, particularly if it contains your ZF install
+// to the include_path, particularly if it contains your ZF installed
 set_include_path(implode(PATH_SEPARATOR, array(
     dirname(dirname(__FILE__)) . '/library',
     get_include_path(),
@@ -300,13 +300,13 @@ RewriteRule ^.*$ index.php [NC,L]
         <para>
             If you followed the directions above, then your bootstrap class
             will be utilizing a front controller, and when it is run, it will
-            dispatch the front controller. However, in all liklihood, you'll
+            dispatch the front controller. However, in all likelihood, you'll
             need a little more configuration than this.
         </para>
 
         <para>
             In this section, we'll look at adding two resources to your
-            application. First, we'll setup your layouts, and then we'll
+            application. First, we'll set up your layouts, and then we'll
             customize your view object.
         </para>
 
@@ -401,7 +401,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         <para>
             This method will be automatically executed when you bootstrap the
-            application, and will ensure your view is intialized according to
+            application, and will ensure your view is initialized according to
             your application needs.
         </para>
     </sect2>

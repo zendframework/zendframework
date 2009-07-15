@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16186 -->
+<!-- EN-Revision: 16394 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.overview">
 
@@ -88,15 +88,15 @@
                 Februar als Ergebnis erwarten. Auf der anderen Seite werden Personen welche mit
                 Excel und OpenOffice vertraut sind werden den 3tten März als Ergebnis erwarten. Das
                 Problem besteht nur wen das Ergebnismonat den Tag der im Originaldatum gesetzt war,
-                nicht hat. Für ZF Entwickler können das gewünschte Verhalten ausgewählen indem die
-                Option <code>extend_month</code> genutzt wird um entweder das SQL Verhalten, wenn
-                die Option wahr ist, oder das Tabellenverhalten, wenn die Option falsch ist,
-                auszuwählen. Das Standardverhalten für <code>extend_month</code> ist falsch, um SQL
-                kompatibles Verhalten zu erlauben. <classname>Zend_Date</classname> führt
-                Monatsberechnungen standardmäßig in der Art durch das Daten auf das Monatsende hin
-                abgeschnitten werden (wenn notwendig), ohne das in den nächsten Monat umgebrochen
-                wird wenn das Originaldatum einen Monatstag bestimmt der die Anzahl der Tag des
-                Ergebnismonats überschreitet.
+                nicht hat. Für Zend Framework Entwickler können das gewünschte Verhalten
+                ausgewählen indem die Option <code>extend_month</code> genutzt wird um entweder das
+                SQL Verhalten, wenn die Option wahr ist, oder das Tabellenverhalten, wenn die
+                Option falsch ist, auszuwählen. Das Standardverhalten für <code>extend_month</code>
+                ist falsch, um SQL kompatibles Verhalten zu erlauben.
+                <classname>Zend_Date</classname> führt Monatsberechnungen standardmäßig in der Art
+                durch das Daten auf das Monatsende hin abgeschnitten werden (wenn notwendig), ohne
+                das in den nächsten Monat umgebrochen wird wenn das Originaldatum einen Monatstag
+                bestimmt der die Anzahl der Tag des Ergebnismonats überschreitet.
                 <classname>Zend_Date::setOptions(array('extend_month' => true));</classname> kann
                 benutzt werden um Monatsberechnungen wie in populären Tabellenkalkulationen
                 durchzuführen.

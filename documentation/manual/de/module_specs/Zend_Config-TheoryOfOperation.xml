@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15978 -->
+<!-- EN-Revision: 16393 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.config.theory_of_operation">
     <title>Theory of Operation</title>
@@ -35,11 +35,12 @@
 
     <para>
         Standardmäßig gewährt <classname>Zend_Config</classname> nur Lesezugriff auf die Daten und
-        der Versuch einer Wertzuweisung (wie z. B. $config->database->host =
-        'example.com';) löst eine Ausnahme aus. Dieses Standard-Verhalten kann mit Hilfe des
-        Konstruktors aber so überschrieben werden, dass die Veränderung von Daten erlaubt ist. Wenn
-        auch Änderungen erlaubt sind, unterstützt <classname>Zend_Config</classname> das entfernen
-        von Werten (z.B. <methodname>unset($config->database->host);</methodname>). Die
+        der Versuch einer Wertzuweisung (wie z. B.
+        <command>$config->database->host = 'example.com';</command>) löst eine Ausnahme aus. Dieses
+        Standard-Verhalten kann mit Hilfe des Konstruktors aber so überschrieben werden, dass die
+        Veränderung von Daten erlaubt ist. Wenn auch Änderungen erlaubt sind, unterstützt
+        <classname>Zend_Config</classname> das entfernen von Werten (z.B.
+        <methodname>unset($config->database->host)</methodname>). Die
         <methodname>readOnly()</methodname> Methode kann verwendet werden um festzustellen ob
         Änderungen an einem gegebenen <classname>Zend_Config</classname> Objekt erlaubt sind und
         die <methodname>setReadOnly()</methodname> kann verwendet werden um weitere Änderungen an
@@ -88,7 +89,7 @@
         verwendet wird. Angenommen es gibt <varname>$config</varname> und
         <varname>$localConfig</varname>, kann <varname>$localConfig</varname> in
         <varname>$config</varname> zusammengeführt werden indem
-        <methodname>$config->merge($localConfig);</methodname> aufgerufen wird. Die Elemente in
+        <methodname>$config->merge($localConfig)</methodname> aufgerufen wird. Die Elemente in
         <varname>$localConfig</varname> überschreiben gleichnamige Elemente in
         <varname>$config</varname>.
         <note>

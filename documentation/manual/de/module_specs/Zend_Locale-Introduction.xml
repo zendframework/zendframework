@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15672 -->
+<!-- EN-Revision: 16394 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.introduction">
 
@@ -61,7 +61,8 @@
             <listitem>
                 <para>
                     <classname>Zend_Locale</classname> - Unterstützung für Gebietsschemata welche
-                    Unterstützung für Lokalisierungen von anderen ZF Komponenten bieten.
+                    Unterstützung für Lokalisierungen von anderen Zend Framework Komponenten
+                    bieten.
                 </para>
             </listitem>
             <listitem>
@@ -188,16 +189,17 @@ $locale = new Zend_Locale('de_DE'); // deutsche Sprache _ Deutschland
 
         <para>
             Achtung vor historischen Änderungen oder dem Versuch die verschiedenen Änderungen der
-            Zeitzonen die im Laufe der langen Zeit in den vielen Regionen gemacht wurden, da ZF
-            Komponenten darüber nichts wissen. Zum Beispiel kann <ulink
+            Zeitzonen die im Laufe der langen Zeit in den vielen Regionen gemacht wurden, da Zend
+            Framework Komponenten darüber nichts wissen. Zum Beispiel kann <ulink
                 url="http://www.statoids.com/tus.html">hier eine historische Liste</ulink> mit
             dutzenden Änderungen von Regierungen angesehen werden und ob eine Region
-            Sommer-/Winterzeit unterstützt und sogar in welche Zeitzone eine bestimmte geographische
-            Region gehört. Das bedeutet, wenn Datumsberechnungen gemacht werden, wird die Berechnung
-            welche durch die ZF Komponenten durchgeführt wird, nicht an diese Änderungen angepasst.
-            Stattdessen wird die korrekte Uhrzeit benutzt, welche für die aktuell benutzte Zeitzone
-            angegeben wurde, wobei moderne Regeln für Sommer-/Winterzeit und Zeitzonen Zuordnung
-            anhand von geographischen Regionen verwendet werden.
+            Sommer-/Winterzeit unterstützt und sogar in welche Zeitzone eine bestimmte
+            geographische Region gehört. Das bedeutet, wenn Datumsberechnungen gemacht werden, wird
+            die Berechnung welche durch die Zend Framework Komponenten durchgeführt wird, nicht an
+            diese Änderungen angepasst. Stattdessen wird die korrekte Uhrzeit benutzt, welche für
+            die aktuell benutzte Zeitzone angegeben wurde, wobei moderne Regeln für
+            Sommer-/Winterzeit und Zeitzonen Zuordnung anhand von geographischen Regionen verwendet
+            werden.
         </para>
 
     </sect2>
@@ -419,12 +421,12 @@ $date = new Zend_Date();
         <title>ZF lokalisierbare Klassen</title>
 
         <para>
-            Im ZF sind lokalisierbare Klassen von <classname>Zend_Locale</classname> abhängig um ein
-            Gebietsschema automatisch auszuwählen, wie im oberen Abschnitt geschrieben. Das
-            Erstellen eines Datums durch Verwendung von <classname>Zend_Date</classname> ohne die
-            Angabe eines Gebietsschemas führt als Ergebnis zu einem Objekt mit einem Gebietsschema,
-            basierend auf den Informationen welche durch den Webbrowser des Benutzers zur Verfügung
-            gestellt werden.
+            Im Zend Framework sind lokalisierbare Klassen von <classname>Zend_Locale</classname>
+            abhängig um ein Gebietsschema automatisch auszuwählen, wie im oberen Abschnitt
+            geschrieben. Das Erstellen eines Datums durch Verwendung von
+            <classname>Zend_Date</classname> ohne die Angabe eines Gebietsschemas führt als
+            Ergebnis zu einem Objekt mit einem Gebietsschema, basierend auf den Informationen
+            welche durch den Webbrowser des Benutzers zur Verfügung gestellt werden.
         </para>
 
         <example id="zend.locale.interoperate.example-1">
@@ -435,10 +437,10 @@ $date = new Zend_Date('2006',Zend_Date::YEAR);
         </example>
 
         <para>
-            Um dieses Standardverhalten zu übergehen, und die eine lokalisierbare ZF Komponente dazu
-            zu bringen ein spezielles Gebietsschema zu benutzen welches unabhängig vom Gebietsschema
-            des Besucher der Webseite ist, muß als dritter Parameter im Konstruktor das
-            Gebietsschema angegeben werden.
+            Um dieses Standardverhalten zu übergehen, und die eine lokalisierbare Zend Framework
+            Komponente dazu zu bringen ein spezielles Gebietsschema zu benutzen welches unabhängig
+            vom Gebietsschema des Besucher der Webseite ist, muß als dritter Parameter im
+            Konstruktor das Gebietsschema angegeben werden.
         </para>
 
         <example id="zend.locale.interoperate.example-2">

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15998 -->
+<!-- EN-Revision: 16393 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.config.writer.introduction">
     <title>Zend_Config_Writer</title>
@@ -46,10 +46,10 @@
         einige Dinge wissen. Um einen Wert zu erstellen oder zu ändern muß einfach der Parameter
         des <classname>Zend_Config</classname> Objektes über den Zugriffsaccessor
         (<emphasis>-&gt;</emphasis>) gesetzt werden. Um eine Sektion im Root oder im Branch zu
-        erstellen muß einfach ein neues Aray erstellt werden ("$config-&gt;branch = array();"). Um
-        zu definieren welche Sektion eine andere erweitert, muß die
-        <methodname>setExtend()</methodname> Methode am Root <classname>Zend_Config</classname>
-        Objekt aufgerufen werden.
+        erstellen muß einfach ein neues Aray erstellt werden
+        ("<command>$config-&gt;branch = array()</command>"). Um zu definieren welche Sektion eine
+        andere erweitert, muß die <methodname>setExtend()</methodname> Methode am Root
+        <classname>Zend_Config</classname> Objekt aufgerufen werden.
     </para>
 
     <example id="zend.config.writer.example.using">

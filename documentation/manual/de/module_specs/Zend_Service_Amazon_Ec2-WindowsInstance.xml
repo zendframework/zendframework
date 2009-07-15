@@ -33,106 +33,106 @@
     </itemizedlist>
 
     <para>
-        As part of this service, Amazon EC2 instances can now run Microsoft Windows Server
-        2003. Our base Windows image provides you with most of the common functionality associated
-        with Windows. However, if you require more than two concurrent Windows users or need to
-        leverage applications that require LDAP, Kerberos, RADIUS, or other credential services,
-        you must use Windows with Authentication Services. For example, Microsoft Exchange Server
-        and Microsoft SharePoint Server require Windows with Authentication Services.
+        Als Teil dieses Services können Amazon EC2 Instanzen jetzt Microsoft Windows Server 2003
+        ausführen. Die Basis Windows Images bieten die meisten mit Windows verbundenen
+        Funktionalitäten. Wenn man trotzdem mehr als zwei gleichzeitige Windows Benutzer benötigt,
+        oder Anwendungen hat die LDAP, Kerberos, RADIUS oder andere Benutzerservices verwenden muß
+        man Windows mit Authentifizierungs Services verwenden. Zum Beispiel benötigen Microsoft
+        Exchange Server und Microsoft Sharepoint Server Windows mit Authentifizierungs Services.
     </para>
     <note>
         <para>
-            To get started using Windows instances, we recommend using the AWS Management Console.
-            There are differences in pricing between Windows and Windows with Authentication
-            Services instances. For information on pricing, go to the Amazon EC2 Product Page.
+            Um damit zu beginnen Windows Instanzen zu verwenden ist es empfohlen die AWS Management
+            Konsole zu verwenden. Es gibt Unterschiede in den Preisen zwischen Windows und Windows
+            mit Authenzifizierungs Services Instanzen. Für Informationen über Preise sehen Sie
+            bitte auf die Amazon EC2 Produkt Seite.
         </para>
     </note>
 
     <para>
-        Amazon EC2 currently provides the following Windows AMIs:
+        Amazon EC2 bietet aktuell die folgenden Windows AMIs:
     </para>
 
     <itemizedlist>
         <listitem>
-            <para>Windows Authenticated (32-bit)</para>
+            <para>Windows Authentifiziert (32-bit)</para>
         </listitem>
         <listitem>
-            <para>Windows Authenticated (64-bit)</para>
+            <para>Windows Authentifiziert (64-bit)</para>
         </listitem>
         <listitem>
-            <para>Windows Anonymous (32-bit)</para>
+            <para>Windows Anonym (32-bit)</para>
         </listitem>
         <listitem>
-            <para>Windows Anonymous (64-bit)</para>
+            <para>Windows Anonym (64-bit)</para>
         </listitem>
     </itemizedlist>
 
     <para>
-        The Windows public AMIs that Amazon provides are unmodified
-        versions of Windows with the following two exceptions: we added
-        drivers to improve the networking and disk I/O performance and
-        we created the Amazon EC2 configuration service. The Amazon EC2
-        configuration service performs the following functions:
+        Die öffentlichen Windows AMIs die Amazon anbietet sind unmodifizierte Versionen von Windows
+        mit den folgenden zwei Ausnahmen: Es sind Treiber hinzugefügt welche die Geschwindigkeit
+        von Netzwerk und Disk I/O verbessern und es wurde ein Amazon EC2 Konfigurations Service
+        erstellt. Der Amazon EC2 Konfigurations Service bietet die folgenden Funktionen:
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
-                Randomly sets the Administrator password on initial launch,
-                encrypts the password with the user's SSH key, and reports
-                it to the console. This operation happens upon initial AMI
-                launch. If you change the password, AMIs that are created
-                from this instance use the new password.
+                Setzt das Administrator Passwort zufällig bei ersten Starten, verschlüsselt das
+                Passwort mit dem SSH Schlüssel des Benutzers, und gibt Ihn an die Konsole zurück.
+                Diese Operation passiert wärend dem ersten Start von AMI. Wenn das Passwort
+                geändert wird, dann werden AMIs die von dieser Instanz erstellt wurden das neue
+                Passwort verwenden.
             </para>
         </listitem>
         <listitem>
             <para>
-                Configures the computer name to the internal DNS name. To
-                determine the internal DNS name, see Using Instance Addressing.
+                Konfiguriert den Computernamen auf den internen DNS Namen. Um den internen DNS
+                Namen zu ermitteln, siehe Verwendung von Instanz Adressierung.
             </para>
         </listitem>
         <listitem>
             <para>
-                Sends the last three system and application errors from the
-                event log to the console. This helps developers to identify
-                problems that caused an instance to crash or network connectivity
-                to be lost.
+                Sendet die letzten drei System- und Anwendungsfehler vom Eventlog an die Konsole.
+                Das hilft entwickler Probleme zu identifizieren welche den Crash einer Instanz
+                verursacht oder die Netzwerkverbindung unterbrochen haben.
             </para>
         </listitem>
     </itemizedlist>
 
     <sect2 id="zend.service.amazon.ec2.windows.instance.operations">
-        <title>Windows Instances Usage</title>
+        <title>Verwendung von Windows Instanzen</title>
 
         <example id="zend.service.amazon.ec2.windows.instance.operations.bundle">
-            <title>Bundles an Amazon EC2 instance running Windows</title>
+            <title>Bündelt eine Amazon EC2 Instanz auf der Windows läuft</title>
             <para>
-                <methodname>bundle()</methodname> has three require paramters and one optional
+                <methodname>bundle()</methodname> hat drei benötigte Parameter und einen optionalen
             </para>
             <itemizedlist>
                 <listitem>
-                     <para><emphasis>instanceId</emphasis> The instance you want to bundle</para>
+                     <para><emphasis>instanceId</emphasis> Die Instanz die man bündeln will</para>
                 </listitem>
                 <listitem>
-                     <para><emphasis>s3Bucket</emphasis> Where you want the ami to live on S3</para>
+                     <para><emphasis>s3Bucket</emphasis> Wo man will das die AMI auf S3 lebt</para>
                 </listitem>
                 <listitem>
                      <para>
-                        <emphasis>s3Prefix</emphasis> The prefix you want to assign to the AMI on S3
+                        <emphasis>s3Prefix</emphasis> Der Präfix den man dem AMI auf S3 zuordnen
+                        will
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis>uploadExpiration</emphasis> The expiration of the upload policy.
-                        Amazon recommends 12 hours or longer. This is based in nubmer of
-                        minutes. Default is 1440 minutes (24 hours)
+                        <emphasis>uploadExpiration</emphasis> Der Ablauf der Upload Policy. Amazon
+                        empfiehlt 12 Stunden oder länger. Das basiert auf der Anzahl an Minuten.
+                        Der Standardwert ist 1440 Minuten (24 Stunden)
                     </para>
                 </listitem>
             </itemizedlist>
             <para>
-                <methodname>bundle()</methodname> returns a multi-demential array that contains
-                instanceId, bundleId, state, startTime, updateTime, progress
-                s3Bucket and s3Prefix.
+                <methodname>bundle()</methodname> gibt ein multidimensionales Array zurück welches
+                die folgenden Werte enthält: instanceId, bundleId, state, startTime, updateTime,
+                progress, s3Bucket und s3Prefix.
             </para>
             <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance_Windows('aws_key',
@@ -143,14 +143,14 @@ $return = $ec2_instance->bundle('instanceId', 's3Bucket', 's3Prefix');
         </example>
 
         <example id="zend.service.amazon.ec2.windows.instance.operations.describe">
-            <title>Describes current bundling tasks</title>
+            <title>Beschreibt die aktuellen Bündelungstasks</title>
             <para>
-                <methodname>describeBundle()</methodname> Describes current bundling tasks
+                <methodname>describeBundle()</methodname> Beschreibt die aktuellen Bündelungstasks
             </para>
             <para>
-                <methodname>describeBundle()</methodname> returns a multi-demential array that
-                contains instanceId, bundleId, state, startTime, updateTime, progress
-                s3Bucket and s3Prefix.
+                <methodname>describeBundle()</methodname> gibt ein multidimensionales Array zurück
+                welches die folgenden Werte enthält: instanceId, bundleId, state, startTime,
+                updateTime, progress, s3Bucket und s3Prefix.
             </para>
             <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance_Windows('aws_key',
@@ -160,14 +160,14 @@ $return = $ec2_instance->describeBundle('bundleId');
         </example>
 
         <example id="zend.service.amazon.ec2.windows.instance.operations.cancel">
-            <title>Cancels an Amazon EC2 bundling operation</title>
+            <title>Beendet eine Amazon EC2 Bündel-Operation</title>
             <para>
-                <methodname>cancelBundle()</methodname> Cancels an Amazon EC2 bundling operation
+                <methodname>cancelBundle()</methodname> Beendet eine Amazon EC2 Bündel-Operation
             </para>
             <para>
-                <methodname>cancelBundle()</methodname> returns a multi-demential array that
-                contains instanceId, bundleId, state, startTime, updateTime, progress
-                s3Bucket and s3Prefix.
+                <methodname>cancelBundle()</methodname> gibt ein multidimensionales Array zurück
+                welches die folgenden Werte enthält: instanceId, bundleId, state, startTime,
+                updateTime, progress, s3Bucket und s3Prefix.
             </para>
             <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance_Windows('aws_key',

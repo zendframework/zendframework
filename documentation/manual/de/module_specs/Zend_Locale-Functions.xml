@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15958 -->
+<!-- EN-Revision: 16394 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.functions">
 
@@ -79,15 +79,15 @@ if ($locale->equals($mylocale)) {
 
         <para>
             Die Methode <code>getDefault()</code> gibt ein Array mit relevanten Gebietsschemata
-            zurück wobei Informationen vom Web Browser des Benutzers (wenn vorhanden), Informationen
-            vom Betriebsystem des Host Servers und ZF Einstellungen benutzt werden. Wie beim
-            Konstruktor von <classname>Zend_Locale</classname> wählt der erste Parameter die
-            bevorzugte Umgebung von der die Informationen zuerst geholt werden sollen <link
-                linkend="zend.locale.selection">(<code>BROWSER</code>, <code>ENVIRONMENT</code>, or
-                <code>FRAMEWORK)</code></link>. Der zweite Parameter wechselt zwischen der Rückgabe
-            aller gefundenen Gebietsschemata oder nur dem ersten/besten Gebietsschema.
-            Lokalisierbare Komponenten benutzen normalerweise nur das erste Gebietsschema. Wenn
-            vorhanden, wird eine Bewertung der Qualität mit angegeben.
+            zurück wobei Informationen vom Web Browser des Benutzers (wenn vorhanden),
+            Informationen vom Betriebsystem des Host Servers und Zend Framework Einstellungen
+            benutzt werden. Wie beim Konstruktor von <classname>Zend_Locale</classname> wählt der
+            erste Parameter die bevorzugte Umgebung von der die Informationen zuerst geholt werden
+            sollen <link linkend="zend.locale.selection">(<code>BROWSER</code>,
+                <code>ENVIRONMENT</code>, or <code>FRAMEWORK)</code></link>. Der zweite Parameter
+            wechselt zwischen der Rückgabe aller gefundenen Gebietsschemata oder nur dem
+            ersten/besten Gebietsschema. Lokalisierbare Komponenten benutzen normalerweise nur das
+            erste Gebietsschema. Wenn vorhanden, wird eine Bewertung der Qualität mit angegeben.
         </para>
 
         <example id="zend.locale.getdefault.example-1">
@@ -1413,7 +1413,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
         </note>
 
         <table id="zend.locale.getdata.table-3">
-            <title>Unterschiede zwischen ZF 1.0 und ZF 1.5</title>
+            <title>Unterschiede zwischen Zend Framework 1.0 und 1.5</title>
             <tgroup cols="2">
                 <thead>
                     <row>
@@ -1779,7 +1779,7 @@ if ($locale instanceof Zend_Locale) {
         </para>
 
         <example id="zend.locale.detection.example-4">
-            <title>Gebietsschema bezogenes Verhalten mit ZF 1.8</title>
+            <title>Gebietsschema bezogenes Verhalten mit Zend Framework 1.8</title>
             <programlisting language="php"><![CDATA[
 $locale = Zend_Locale::findLocale($inputstring);
 ]]></programlisting>

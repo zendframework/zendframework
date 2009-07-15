@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15851 -->
+<!-- EN-Revision: 16394 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.introduction">
 
@@ -121,7 +121,8 @@ date_default_timezone_set('Europe/Berlin');
                         url="http://www.php.net/float">http://www.php.net/float</ulink>]. Zusätzlich
                     können inhärente Beschränkungen der Float-Datentypen sowie Rundungsfehler von
                     Fließkommazahlen Berechnungsfehler verursachen. Um diese Probleme zu vermeiden,
-                    verwenden die ZF I18n Komponenten die BCMatch Extension, wenn verfügbar.
+                    verwenden die Zend Framework I18n Komponenten die BCMatch Extension, wenn
+                    verfügbar.
                 </para>
             </listitem>
             <listitem>

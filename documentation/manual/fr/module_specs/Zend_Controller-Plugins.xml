@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16705 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.plugins" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Plugins</title>
@@ -8,11 +8,11 @@
         <title>Introduction</title>
 
         <para>
-            L'architecture MVC de Zend Framework propose l'injection de plugins de code, qui
-            vont intervenir à différents niveaux dans le processus complet. Le contrôleur frontal
-            enregistre des plugins, et utilise un gestionnaire de plugins ("plugin broker"), qui va
-            se charger de faire intervenir chaque plugin, à chacun des instants clés à votre
-            disposition.
+            L'architecture <acronym>MVC</acronym> de Zend Framework propose l'injection de plugins
+            de code, qui vont intervenir à différents niveaux dans le processus complet. Le
+            contrôleur frontal enregistre des plugins, et utilise un gestionnaire de plugins
+            ("plugin broker"), qui va se charger de faire intervenir chaque plugin, à chacun des
+            instants clés à votre disposition.
         </para>
 
         <para>
@@ -24,7 +24,7 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>routeStartup()</code> est appelée avant que
+                    <methodname>routeStartup()</methodname> est appelée avant que
                     <classname>Zend_Controller_Front</classname> n'appelle
                     <link linkend="zend.controller.router">le routeur</link> pour évaluer ses
                     routes et remplir la requête.
@@ -33,7 +33,7 @@
 
             <listitem>
                 <para>
-                    <code>routeShutdown()</code> est appelée après que
+                    <methodname>routeShutdown()</methodname> est appelée après que
                     <link linkend="zend.controller.router">le routeur</link> aie fini de router la
                     requête.
                 </para>
@@ -41,7 +41,7 @@
 
             <listitem>
                 <para>
-                    <code>dispatchLoopStartup()</code> est appelée juste avant que
+                    <methodname>dispatchLoopStartup()</methodname> est appelée juste avant que
                     <classname>Zend_Controller_Front</classname> n'entre en boucle de
                     distribution.
                 </para>
@@ -49,31 +49,31 @@
 
             <listitem>
                 <para>
-                    <code>preDispatch()</code> est appelée avant qu'une action ne soit
+                    <methodname>preDispatch()</methodname> est appelée avant qu'une action ne soit
                     distribuée par
                     <link linkend="zend.controller.dispatcher">le distributeur</link>. Cette
                     méthode permet un filtrage ou un proxy. En jouant sur la requête à ce niveau
                     là, vous êtes capable de changer le processus, et en vous aidant de
-                    <classname>Zend_Controller_Request_Abstract::setDispatched(true)</classname>),
+                    <methodname>Zend_Controller_Request_Abstract::setDispatched(true)</methodname>),
                     vous supprimez l'ordre de distribution de celle-ci.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>postDispatch()</code> est appelée après qu'une action n'ait été
-                    distribuée par
+                    <methodname>postDispatch()</methodname> est appelée après qu'une action
+                    n'ait été distribuée par
                     <link linkend="zend.controller.dispatcher">le distributeur</link>. Cette
                     méthode permet un filtrage ou un proxy. En jouant sur la requête à ce niveau
                     là, vous êtes capable de changer le processus, et en vous aidant de
-                    <classname>Zend_Controller_Request_Abstract::setDispatched(false)</classname>),
+                    <methodname>Zend_Controller_Request_Abstract::setDispatched(false)</methodname>),
                     vous ordonnez une redistribution de celle-ci.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>dispatchLoopShutdown()</code> est appelée par
+                    <methodname>dispatchLoopShutdown()</methodname> est appelée par
                     <classname>Zend_Controller_Front</classname> lorsque celui-ci sort de la boucle
                     de distribution.
                 </para>
@@ -104,11 +104,11 @@ class MyPlugin extends Zend_Controller_Plugin_Abstract
         </para>
 
         <para>
-            <classname>Zend_Controller_Plugin_Abstract</classname> vous donne aussi accès aux
-            objets de réponse et de requête, dans vos plugins.<code>getRequest()</code> et
-            <code>getResponse()</code> sont là pour ça. Cependant, l'objet de requête est de toute
-            façon passé en paramètre à vos méthodes. Veillez à le récupérer dans la définition de
-            vos méthodes sinon une erreur E_STRICT sera levée.
+            <classname>Zend_Controller_Plugin_Abstract</classname> vous donne aussi accès aux objets
+            de réponse et de requête, dans vos plugins.<methodname>getRequest()</methodname> et
+            <methodname>getResponse()</methodname> sont là pour ça. Cependant, l'objet de requête
+            est de toute façon passé en paramètre à vos méthodes. Veillez à le récupérer dans la
+            définition de vos méthodes sinon une erreur <constant>E_STRICT</constant> sera levée.
         </para>
     </sect2>
 
@@ -117,7 +117,7 @@ class MyPlugin extends Zend_Controller_Plugin_Abstract
 
         <para>
             Les plugins sont enregistrés avec
-            <classname>Zend_Controller_Front::registerPlugin()</classname>, et peuvent l'être
+            <methodname>Zend_Controller_Front::registerPlugin()</methodname>, et peuvent l'être
             n'importe quand. Voici un exemple&#160;:
         </para>
 
@@ -212,22 +212,24 @@ $front->dispatch();
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>getPlugin($class)</code> vous retourne l'objet de plugin
+                    <methodname>getPlugin($class)</methodname> vous retourne l'objet de plugin
                     correspondant à la chaîne passée en paramètre. Si il n'y a pas de
-                    correspondance, <code>false</code> est retourné. Un tableau est retourné si il
-                    y a plusieurs plugins de cette classe.
+                    correspondance, <constant>FALSE</constant> est retourné. Un tableau est
+                    retourné s'il y a plusieurs plugins de cette classe.
                 </para>
             </listitem>
 
             <listitem>
-                <para><code>getPlugins()</code> retourne toute la pile de plugins.</para>
+                <para>
+                    <methodname>getPlugins()</methodname> retourne toute la pile de plugins.
+                </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>unregisterPlugin($plugin)</code> supprime un plugin du processus.
-                    Passez un nom de classe, et tous les plugins de cette classe seront alors
-                    enlevés de la pile. Vous pouvez aussi passer un objet.
+                    <methodname>unregisterPlugin($plugin)</methodname> supprime un plugin du
+                    processus. Passez un nom de classe, et tous les plugins de cette classe
+                    seront alors enlevés de la pile. Vous pouvez aussi passer un objet.
                 </para>
             </listitem>
         </itemizedlist>
@@ -240,5 +242,6 @@ $front->dispatch();
 
         <xi:include href="Zend_Controller-Plugins-ActionStack.xml" />
         <xi:include href="Zend_Controller-Plugins-ErrorHandler.xml" />
+        <xi:include href="Zend_Controller-Plugins-PutHandler.xml" />
     </sect2>
 </sect1>

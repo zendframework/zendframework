@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15422 -->
+<!-- EN-Revision: 15637 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.table">
     <title>Zend_Db_Table</title>
@@ -965,8 +965,10 @@ $rows = $table->fetchAll($select);
                     <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
-$select = $table->select();
-$select->where('bug_status = ?', 'NEW')
+// Récupération avec la partie from déjà spécifié, important lors des jointures
+$select = $table->select(Zend_Db_Table::SELECT_WITH_FROM_PART); 
+$select->setIntegrityCheck(false)
+       ->where('bug_status = ?', 'NEW')
        ->join('accounts', 'accounts.account_name = bugs.reported_by')
        ->where('accounts.account_name = ?', 'Bob');
 
@@ -997,7 +999,8 @@ $rows = $table->fetchAll($select);
                 <programlisting><![CDATA[
 $table = new Bugs();
 
-$select = $table->select()->setIntegrityCheck(false);
+$select = $table->select(Zend_Db_Table::SELECT_WITH_FROM_PART)
+                ->setIntegrityCheck(false);
 $select->where('bug_status = ?', 'NEW')
        ->join('accounts',
               'accounts.account_name = bugs.reported_by',

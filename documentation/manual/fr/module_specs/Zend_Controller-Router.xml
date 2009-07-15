@@ -377,6 +377,11 @@ $router->setGlobalParam('lang', 'en');
                 <xi:include href="../../en/module_specs/Zend_Controller-Router-Route-Chain.xml" />
             </xi:fallback>
         </xi:include>
+        <xi:include href="Zend_Controller-Router-Route-Rest.xml">
+            <xi:fallback>
+                <xi:include href="../../en/module_specs/Zend_Controller-Router-Route-Rest.xml" />
+            </xi:fallback>
+        </xi:include>
     </sect2>
 
     <sect2 id="zend.controller.router.add-config">

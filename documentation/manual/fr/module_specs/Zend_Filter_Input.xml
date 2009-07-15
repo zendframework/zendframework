@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15346 -->
+<!-- EN-Revision: 15628 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.input">
     <title>Zend_Filter_Input</title>
@@ -811,6 +811,28 @@ $validators = array(
                 savoir s'il retourne plusieurs messages d'erreur, les clés de ces messages et les
                 jetons utilisables dans les modèles de message.
             </para>
+
+            <para>
+                Si vous n'avez qu'un seul validateur dans vos règles de validation ou que
+                tous les validateurs ont le même message de paramétrer, alors ils peuvent
+                être référencés la construction additionnelle de type tableau&#160;:
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$validators = array(
+    'month' => array(
+        new Zend_Validate_Between(1, 12),
+        'messages' => array(
+                        Zend_Validate_Between::NOT_BETWEEN =>
+                            'La valeur %value% du mois doit être comprise'
+                          . ' entre %min% et %max%',
+                        Zend_Validate_Between::NOT_BETWEEN_STRICT =>
+                            'La valeur %value% du mois doit être comprise'
+                          . ' strictement entre %min% et %max%'
+        )
+    )
+);
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.filter.input.metacommands.global">

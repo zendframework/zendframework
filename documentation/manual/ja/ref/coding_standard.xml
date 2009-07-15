@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16626 -->
+<!-- EN-Revision: 16734 -->
 <appendix id="coding-standard">
   <title>Zend Framework PHP 標準コーディング規約</title>
     <sect1 id="coding-standard.overview">
@@ -159,6 +159,58 @@
                     標準ライブラリや拡張ライブラリではないもの
                     (たとえば、アプリケーションのコードや Zend 以外が作成したライブラリなど)
                     については、"Zend_" や "ZendX_" で始まる名前は使用できません。
+                </para>
+            </note>
+        </sect2>
+
+        <sect2 id="coding-standard.naming-conventions.abstracts">
+            <title>抽象クラス</title>
+
+            <para>
+                一般に、抽象クラスの規約は通常の <link 
+                    linkend="coding-standard.naming-conventions.classes">クラス</link>
+                と同じものとなります。追加の規則として、抽象クラスの名前は最後が "Abstract"
+                (そしてその前にはアンダースコアはつけない) でなければなりません。
+                たとえば <classname>Zend_Controller_Plugin_Abstract</classname>
+                は規約にそった名前ではありません。規約に従った名前は
+                <classname>Zend_Controller_PluginAbstract</classname> あるいは
+                <classname>Zend_Controller_Plugin_PluginAbstract</classname> となります。
+            </para>
+
+            <note>
+                <para>
+                    この命名規約が適用されるのは、Zend Framework 1.9.0 以降です。
+                    それより前のバージョンではこの規約に従っていないものもあるかもしれませんが、
+                    将来のバージョンでは規約に従うよう名前が変わる予定です。
+                </para>
+            </note>
+        </sect2>
+
+        <sect2 id="coding-standard.naming-conventions.interfaces">
+            <title>インターフェイス</title>
+
+            <para>
+                一般に、インターフェイスの規約は通常の <link 
+                    linkend="coding-standard.naming-conventions.classes">クラス</link>
+                と同じものとなります。追加の規則として、インターフェイスの名前の最後は
+                "Interface" (そしてその前にはアンダースコアはつけない) にすることもできます。
+                たとえば <classname>Zend_Controller_Plugin_Interface</classname>
+                は規約にそった名前ではありません。規約に従った名前は
+                <classname>Zend_Controller_PluginInterface</classname> あるいは
+                <classname>Zend_Controller_Plugin_PluginInterface</classname> となります。
+            </para>
+
+            <para>
+                この規約は必須ではありませんが、強く推奨します。
+                そのファイルがクラスではなくインターフェイスを含むものであることが
+                開発者にわかりやすくなるからです。
+            </para>
+
+            <note>
+                <para>
+                    この命名規約が適用されるのは、Zend Framework 1.9.0 以降です。
+                    それより前のバージョンではこの規約に従っていないものもあるかもしれませんが、
+                    将来のバージョンでは規約に従うよう名前が変わる予定です。
                 </para>
             </note>
         </sect2>
@@ -450,6 +502,27 @@ $sampleArray = array(1, 2, 3, 'Zend', 'Studio',
                      $a, $b, $c,
                      56.44, $d, 500);
 ]]></programlisting>
+
+                <para>
+                    一方、配列の最初の要素を次の行から始めることもできます。
+                    その場合は、配列を宣言した位置からさらに一段インデントした位置で要素をそろえ、
+                    それ以降のすべての要素を同じインデントで記述するようにします。
+                    閉じ括弧はそれ単体でひとつの行に記述し、インデント量は配列の宣言と同じ位置になります。
+                </para>
+
+                <programlisting language="php"><![CDATA[
+$sampleArray = array(
+    1, 2, 3, 'Zend', 'Studio',
+    $a, $b, $c,
+    56.44, $d, 500,
+);
+]]></programlisting>
+
+                <para>
+                    この宣言を使用する際は、配列の最後の要素の後にもカンマをつけておくようにしましょう。
+                    そうすることで、配列に新たな要素を追加したときにパースエラーが発生する危険性を
+                    少なくすることができます。
+                </para>
             </sect3>
 
             <sect3 id="coding-standard.coding-style.arrays.associative">
@@ -466,6 +539,27 @@ $sampleArray = array(1, 2, 3, 'Zend', 'Studio',
 $sampleArray = array('firstKey'  => 'firstValue',
                      'secondKey' => 'secondValue');
 ]]></programlisting>
+
+                <para>
+                    一方、配列の最初の要素を次の行から始めることもできます。
+                    その場合は、配列を宣言した位置からさらに一段インデントした位置で要素をそろえ、
+                    それ以降のすべての要素を同じインデントで記述するようにします。
+                    閉じ括弧はそれ単体でひとつの行に記述し、インデント量は配列の宣言と同じ位置になります。
+                    可読性を高めるため、代入演算子 "=>" の位置はそろえておかなければなりません。
+                </para>
+
+                <programlisting language="php"><![CDATA[
+$sampleArray = array(
+    'firstKey'  => 'firstValue',
+    'secondKey' => 'secondValue',
+);
+]]></programlisting>
+
+                <para>
+                    この宣言を使用する際は、配列の最後の要素の後にもカンマをつけておくようにしましょう。
+                    そうすることで、配列に新たな要素を追加したときにパースエラーが発生する危険性を
+                    少なくすることができます。
+                </para>
             </sect3>
         </sect2>
 
@@ -515,7 +609,48 @@ class SampleClass
     // 空白 4 文字の字下げを使用します。
 }
 ]]></programlisting>
+
+                <para>
+                    他のクラスを継承したりインターフェイスを実装したりしているクラスの宣言は、
+                    可能な限りその依存関係も同じ行に含めるようにしなければなりません。
+                </para>
+
+                <programlisting language="php"><![CDATA[
+class SampleClass extends FooAbstract implements BarInterface
+{
+}
+]]></programlisting>
+
+                <para>
+                    このように宣言しようとした結果、もし行の長さが <link
+                        linkend="coding-standard.php-file-formatting.max-line-length">最大文字数
+                        </link> を超えてしまう場合は、キーワード "extends" や "implements"
+                    の前で改行してインデント量を一段増やします。
+                </para>
+
+                <programlisting language="php"><![CDATA[
+class SampleClass 
+    extends FooAbstract
+    implements BarInterface
+{
+}
+]]></programlisting>
+
+                <para>
+                    複数のインターフェイスを実装していて宣言が行の最大長を超える場合は、
+                    インターフェイスを区切るカンマの後で改行して
+                    インターフェイス名の位置がそろうようにインデントします。
+                </para>
+
+                <programlisting language="php"><![CDATA[
+class SampleClass 
+    implements BarInterface,
+               BazInterface
+{
+}
+]]></programlisting>
             </sect3>
+
 
             <sect3 id="coding-standard.coding-style.classes.member-variables">
                 <title>クラスのメンバ変数</title>
@@ -554,14 +689,17 @@ class SampleClass
                     <code>private</code>、<code>protected</code> あるいは
                     <code>public</code> のいずれかの修飾子を用いてアクセス範囲を指定しなければなりません。
                 </para>
+
                 <para>
                     クラスと同様、波括弧は関数名の次の行に書かなければなりません。
 
                     関数名と引数定義用の開始括弧の間にはスペースを入れてはいけません。
                 </para>
+
                 <para>
                     グローバルスコープの関数は、できるだけ使わないようにしましょう。
                 </para>
+
                 <para>
                     クラス内の関数宣言の例として適切なものを次に示します。
 
@@ -576,6 +714,36 @@ class Foo
      */
     public function bar()
     {
+        // 関数のすべての内容は、
+        // 空白 4 文字の字下げを使用します。
+    }
+}
+]]></programlisting>
+                </para>
+
+                <para>
+                    引数リストが <link 
+                        linkend="coding-standard.php-file-formatting.max-line-length">行の最大文字数
+                        </link> を超える場合は改行することができます。
+                    関数やメソッドの引数を改行して続ける場合は、
+                    その宣言部よりさらに一段インデントしなければなりません。
+                    そして、閉じ括弧の前にさらに改行を入れます。
+                    宣言部の閉じ括弧と本体の開始波括弧はスペースをひとつはさんで同じ行に記述し、
+                    そのインデント量は関数やメソッドの宣言位置と同じになります。
+                    そんな場合の例を次に示します。
+
+                    <programlisting language="php"><![CDATA[
+/**
+ * これがドキュメントブロックです
+ */
+class Foo
+{
+    /**
+     * これがドキュメントブロックです
+     */
+    public function bar($arg1, $arg2, $arg3,
+        $arg4, $arg5, $arg6
+    ) {
         // 関数のすべての内容は、
         // 空白 4 文字の字下げを使用します。
     }
@@ -669,6 +837,12 @@ threeArguments(array(1, 2, 3), 2, 3);
 threeArguments(array(1, 2, 3, 'Zend', 'Studio',
                      $a, $b, $c,
                      56.44, $d, 500), 2, 3);
+
+threeArguments(array(
+    1, 2, 3, 'Zend', 'Studio',
+    $a, $b, $c,
+    56.44, $d, 500
+), 2, 3);
 ]]></programlisting>
             </sect3>
         </sect2>
@@ -704,6 +878,30 @@ if ($a != 2) {
 ]]></programlisting>
 
                 <para>
+                    条件文が <link
+                        linkend="coding-standard.php-file-formatting.max-line-length">行の最大文字数
+                        </link> を超え、さらに複数の条件がある場合は、
+                    それらを複数行にわけて記述することができます。その場合は論理演算子の前で改行し、
+                    条件句の最初の文字がそろうように位置を合わせます。
+                    条件部の閉じ括弧と本体の開始波括弧はスペースをひとつはさんで同じ行に記述し、
+                    そのインデント量は制御構文の開始位置と同じになります。
+                </para>
+
+                <programlisting language="php"><![CDATA[
+if (($a == $b) 
+    && ($b == $c)
+    || (Foo::CONST == $d)
+) {
+    $a = $d;
+}
+]]></programlisting>
+                
+                <para>
+                    後者の記法の意図は、
+                    後から条件句を追加したり削除したりしたときに問題が起こりにくくすることにあります。
+                </para>
+
+                <para>
                     "elseif" あるいは "else" を含む "if" 文の場合の決まりは、通常の "if" と同じです。
                     次の例は、"if" 文に "else" や "elseif" が含まれる場合のものです。
                 </para>
@@ -722,17 +920,25 @@ if ($a != 2) {
 } else {
     $a = 7;
 }
+
+if (($a == $b) 
+    && ($b == $c)
+    || (Foo::CONST == $d)
+) {
+    $a = $d;
+} elseif (($a != $b)
+          || ($b != $c)
+) {
+    $a = $c;
+} else {
+    $a = $b;
+}
 ]]></programlisting>
 
                 <para>
                     場合によっては、これらの文で波括弧が必要ないこともあります。
                     しかし、このコーディング規約では、このような例外を認めません。
                     "if"、"elseif" あるいは "else" 文では、常に波括弧を使用しなければなりません。
-                </para>
-
-                <para>
-                    "elseif" を使用することは可能ですが、推奨されません。代わりに
-                    "else if" を使用してください。
                 </para>
             </sect3>
 

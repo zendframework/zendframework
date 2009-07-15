@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16184 -->
+<!-- EN-Revision: 16412 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.messages">
 
@@ -119,8 +119,15 @@
                     <entry>'%value%' is an empty string</entry>
                 </row>
                 <row>
-                    <entry morerows="6" valign="middle">EmailAddress</entry>
+                    <entry morerows="7" valign="middle">EmailAddress</entry>
                     <entry>INVALID</entry>
+                    <entry>
+                        '%value%' is not a valid email address in the basic format
+                        local-part@hostname
+                    </entry>
+                </row>
+                <row>
+                    <entry>INVALID_FORMAT</entry>
                     <entry>
                         '%value%' is not a valid email address in the basic format
                         local-part@hostname

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15965 -->
+<!-- EN-Revision: 16414 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.cache.frontends">
     <title>Zend_Cache Frontends</title>
@@ -76,7 +76,7 @@
                               <entry><type>Boolean</type></entry>
                               <entry><constant>FALSE</constant></entry>
                               <entry>
-                                Wenn auf true gesetzt, wird das Logging durch
+                                Wenn auf <constant>TRUE</constant> gesetzt, wird das Logging durch
                                 <classname>Zend_Log</classname> aktiviert (aber das System wird
                                 langsamer)
                               </entry>
@@ -120,9 +120,10 @@
                               <entry><type>Boolean</type></entry>
                               <entry><constant>FALSE</constant></entry>
                               <entry>
-                                Auf true gesetzt, wird der Kern das <acronym>PHP</acronym> Flag
-                                ignore_user_abort innerhalb der <methodname>save()</methodname>
-                                Methode setzen um Cache Korruption in einigen Fällen zu verhindern
+                                Auf <constant>TRUE</constant> gesetzt, wird der Kern das
+                                <acronym>PHP</acronym> Flag ignore_user_abort innerhalb der
+                                <methodname>save()</methodname> Methode setzen um Cache Korruption
+                                in einigen Fällen zu verhindern
                               </entry>
                           </row>
                       </tbody>
@@ -324,7 +325,8 @@ echo 'Hier wird nie gecached ('.time().').';
                               <entry><type>Boolean</type></entry>
                               <entry><constant>TRUE</constant></entry>
                               <entry>
-                                  Wenn true, wird der Funktionsaufruf standardmäßig gecached
+                                  Wenn <constant>TRUE</constant>, wird der Funktionsaufruf
+                                  standardmäßig gecached
                               </entry>
                          </row>
                          <row>
@@ -416,7 +418,8 @@ $cache->call('veryExpensiveFunc', $params);
                               <entry><type>Boolean</type></entry>
                               <entry><constant>TRUE</constant></entry>
                               <entry>
-                                  Wenn true, wird der Aufruf standardmäßig gecached
+                                  Wenn <constant>TRUE</constant>, wird der Aufruf standardmäßig
+                                  gecached
                               </entry>
                          </row>
                          <row>
@@ -564,8 +567,8 @@ $res = $cache->foobar2('1', '2');
                               <entry><type>Boolean</type></entry>
                               <entry><constant>FALSE</constant></entry>
                               <entry>
-                                  bei true werden fehlende Masterdateien leise ignoriert
-                                  (andernfalls wird eine Exception geworfen)
+                                  bei <constant>TRUE</constant> werden fehlende Masterdateien leise
+                                  ignoriert (andernfalls wird eine Exception geworfen)
                               </entry>
                           </row>
                       </tbody>
@@ -636,8 +639,8 @@ $res = $cache->foobar2('1', '2');
                               <entry><type>Boolean</type></entry>
                               <entry><constant>FALSE</constant></entry>
                               <entry>
-                                    Wenn true, wird eine Debugging Text for jeder gecacheten Seite
-                                    hinzugefügt
+                                    Wenn <constant>TRUE</constant>, wird ein Debugging Text vor
+                                    jeder gecacheten Seite hinzugefügt
                               </entry>
                          </row>
                          <row>
@@ -645,117 +648,122 @@ $res = $cache->foobar2('1', '2');
                               <entry><type>Array</type></entry>
                               <entry><methodname>array(...siehe unten...)</methodname></entry>
                               <entry>
-                                  Ein assoziatives Array mit Default Optionen:
+                                  Ein assoziatives Array mit Standard Optionen:
                                   <itemizedlist>
                                       <listitem>
                                           <para>
                                               <emphasis>(boolean, true per Default)
-                                                  cache</emphasis> : Cache ist aktiviert wenn true
+                                                  cache</emphasis>: Cache ist aktiviert wenn true
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
                                               <emphasis>(boolean, false per Default)
-                                                  cache_with_get_variables</emphasis> : wenn true,
-                                              ist der Cache weiterhin aktiviert, selbst wenn es
-                                              einige Variablen im <varname>$_GET</varname> Array
-                                              gibt
+                                                  cache_with_get_variables</emphasis>: wenn
+                                              <constant>TRUE</constant>, ist der Cache weiterhin
+                                              aktiviert, selbst wenn es einige Variablen im
+                                              <varname>$_GET</varname> Array gibt
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
                                               <emphasis>(boolean, false per Default)
-                                                  cache_with_post_variables</emphasis> : wenn true,
-                                              ist der Cache weiterhin aktiviert, selbst wenn es
-                                              einige Variablen im <varname>$_POST</varname> Array
-                                              gibt
+                                                  cache_with_post_variables</emphasis>: wenn
+                                              <constant>TRUE</constant>, ist der Cache weiterhin
+                                              aktiviert, selbst wenn es einige Variablen im
+                                              <varname>$_POST</varname> Array gibt
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
                                               <emphasis>(boolean, false per Default)
-                                                  cache_with_session_variables</emphasis> : wenn
-                                              true, ist der Cache weiterhin aktiviert, selbst wenn
-                                              es einige Variablen im <varname>$_SESSION</varname>
-                                              Array gibt
+                                                  cache_with_session_variables</emphasis>: wenn
+                                              <constant>TRUE</constant>, ist der Cache weiterhin
+                                              aktiviert, selbst wenn es einige Variablen im
+                                              <varname>$_SESSION</varname> Array gibt
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
                                               <emphasis>(boolean, false per Default)
-                                                  cache_with_files_variables</emphasis> : wenn
-                                              true, ist der Cache weiterhin aktiviert, selbst wenn
-                                              es einige Variablen im <varname>$_FILES</varname>
-                                              Array gibt
+                                                  cache_with_files_variables</emphasis>: wenn
+                                              <constant>TRUE</constant>, ist der Cache weiterhin
+                                              aktiviert, selbst wenn es einige Variablen im
+                                              <varname>$_FILES</varname> Array gibt
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
                                               <emphasis>(boolean, false per Default)
-                                                  cache_with_cookie_variables</emphasis> : wenn
-                                              true, ist der Cache weiterhin aktiviert, selbst wenn
-                                              es einige Variablen im <varname>$_COOKIE</varname>
-                                              Array gibt
+                                                  cache_with_cookie_variables</emphasis>: wenn
+                                              <constant>TRUE</constant>, ist der Cache weiterhin
+                                              aktiviert, selbst wenn es einige Variablen im
+                                              <varname>$_COOKIE</varname> Array gibt
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
                                               <emphasis>(boolean, true per Default)
-                                                  make_id_with_get_variables</emphasis> : wenn
-                                              true, wird die Cache ID vom Inhalt des
-                                              <varname>$_GET</varname> Arrays abhängig sein
+                                                  make_id_with_get_variables</emphasis>: wenn
+                                              <constant>TRUE</constant>, wird die Cache ID vom
+                                              Inhalt des <varname>$_GET</varname> Arrays abhängig
+                                              sein
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
                                               <emphasis>(boolean, true per Default)
-                                                  make_id_with_post_variables</emphasis> : wenn
-                                              true, wird die Cache ID vom Inhalt des
-                                              <varname>$_POST</varname> Arrays abhängig sein
+                                                  make_id_with_post_variables</emphasis>: wenn
+                                              <constant>TRUE</constant>, wird die Cache ID vom
+                                              Inhalt des <varname>$_POST</varname> Arrays abhängig
+                                              sein
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
                                               <emphasis>(boolean, true per Default)
-                                                  make_id_with_session_variables</emphasis> : wenn
-                                              true, wird die Cache ID vom Inhalt des
-                                              <varname>$_SESSION</varname> Arrays abhängig sein
+                                                  make_id_with_session_variables</emphasis>: wenn
+                                              <constant>TRUE</constant>, wird die Cache ID vom
+                                              Inhalt des <varname>$_SESSION</varname> Arrays
+                                              abhängig sein
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
                                               <emphasis>(boolean, true per Default)
-                                                  make_id_with_files_variables</emphasis> : wenn
-                                              true, wird die Cache ID vom Inhalt des
-                                              <varname>$_FILES</varname> Arrays abhängig sein
+                                                  make_id_with_files_variables</emphasis>: wenn
+                                              <constant>TRUE</constant>, wird die Cache ID vom
+                                              Inhalt des <varname>$_FILES</varname> Arrays abhängig
+                                              sein
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
                                               <emphasis>(boolean, true per Default)
-                                                  make_id_with_cookie_variables</emphasis> : wenn
-                                              true, wird die Cache ID vom Inhalt des
-                                              <varname>$_COOKIE</varname> Arrays abhängig sein
+                                                  make_id_with_cookie_variables</emphasis>: wenn
+                                              <constant>TRUE</constant>, wird die Cache ID vom
+                                              Inhalt des <varname>$_COOKIE</varname> Arrays
+                                              abhängig sein
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
                                               <emphasis>(int, false by default)
-                                                  specific_lifetime</emphasis> : wenn nicht false,
-                                              wird die angegebene Lifetime für das ausgewählte
-                                              Regex verwendet
+                                                  specific_lifetime</emphasis>: wenn nicht
+                                              <constant>FALSE</constant>, wird die angegebene
+                                              Lifetime für das ausgewählte Regex verwendet
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
-                                              <emphasis>(array, array() by default) tags</emphasis>
-                                              : Tags für den Cache Eintrag
+                                              <emphasis>(array, array() by default)
+                                                  tags</emphasis>: Tags für den Cache Eintrag
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
-                                              <emphasis>(int, null by default) priority</emphasis>
-                                              : Priorität (wenn das Backend das unterstützt)
+                                              <emphasis>(int, null by default) priority</emphasis>:
+                                              Priorität (wenn das Backend das unterstützt)
                                           </para>
                                       </listitem>
                                   </itemizedlist>

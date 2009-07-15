@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16165 -->
+<!-- EN-Revision: 16396 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.migration">
     <title>Migration von vorhergehenden Versionen</title>
@@ -622,7 +622,7 @@ echo $response;
                         Der Konstruktur akzeptiert nun genau drei Argumente,
                         <classname>Zend_Controller_Request_Abstract $request</classname>,
                         <classname>Zend_Controller_Response_Abstract $response</classname>, und
-                        <code>array $params (optional)</code>.
+                        <command>array $params (optional)</command>.
                         <classname>Zend_Controller_Action::__construct()</classname> verwendet
                         diese, um die Request, Response und invokeArgs Eigenschaften für das Objekt
                         zu setzen, und beim Überschreiben des Konstrukturs sollte man dies ebenfalls

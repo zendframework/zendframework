@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15851 -->
+<!-- EN-Revision: 16397 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.adapter">
 
@@ -181,10 +181,10 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
 
             <para>
                 Wenn eine eigene Klasse geschrieben wird, die
-                <classname>Zend_Db_Adapter_Abstract_Adapter</classname> erweitert aber nicht mit dem
-                Präfix "Zend_Db_Adapter" beginnt, kann die <code>factory()</code> Methode verwendet
-                werden um den Adapter zu Laden wenn der führende Teil der Adapter Klasse mit dem
-                'adapterNamespace' Schlüssel im Parameter Array spezifiziert wird.
+                <classname>Zend_Db_Adapter_Abstract_Adapter</classname> erweitert aber nicht mit
+                dem Präfix "Zend_Db_Adapter" beginnt, kann die <methodname>factory()</methodname>
+                Methode verwendet werden um den Adapter zu Laden wenn der führende Teil der Adapter
+                Klasse mit dem 'adapterNamespace' Schlüssel im Parameter Array spezifiziert wird.
             </para>
 
             <example id="zend.db.adapter.connecting.factory.example2">
@@ -212,8 +212,8 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
             <title>Zend_Config mit Zend_Db_Factory verwenden</title>
 
             <para>
-                Optional kann jedes Argument der <code>factory()</code> Methode als Objekt des Typs
-                <link linkend="zend.config">Zend_Config</link> spezifiziert werden.
+                Optional kann jedes Argument der <methodname>factory()</methodname> Methode als
+                Objekt des Typs <link linkend="zend.config">Zend_Config</link> spezifiziert werden.
             </para>
 
             <para>
@@ -222,7 +222,7 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
                 Basis Klassen Namen benannt ist. Optional kann das Objekt eine Eigenschaft genannt
                 <code>params</code> enthalten, mit Subeigenschaften korrespondierend zu den
                 Parameter Namen des Adapters. Das wird nur verwendet wenn das zweite Argument für
-                die <code>factory()</code> Methode nicht angegeben wird.
+                die <methodname>factory()</methodname> Methode nicht angegeben wird.
             </para>
 
             <example id="zend.db.adapter.connecting.factory.example1">
@@ -256,9 +256,9 @@ $db = Zend_Db::factory($config->database);
             </example>
 
             <para>
-                Das zweite Argument der <code>factory()</code> Methode kann ein assoziatives Array
-                sein das Einträge enthält die den Parameters des Adapters entsprechen. Dieses
-                Argument ist optional. Wenn das erste Argument vom Typ
+                Das zweite Argument der <methodname>factory()</methodname> Methode kann ein
+                assoziatives Array sein das Einträge enthält die den Parameters des Adapters
+                entsprechen. Dieses Argument ist optional. Wenn das erste Argument vom Typ
                 <classname>Zend_Config</classname> ist, wird angenommen das es alle Parameter
                 enthält, und das zweite Argument wird ignoriert.
             </para>
@@ -329,8 +329,8 @@ $db = Zend_Db::factory($config->database);
                         <emphasis>adapterNamespace</emphasis>:
                         Benennt den führenden Teil des Klassen Namens für den Adapter statt
                         'Zend_Db_Adapter'. Dies kann verwendet werden wenn man die
-                        <code>factory()</code>Methode verwenden muß um eine nicht von Zend kommende
-                        Datenbank Adapter Klasse zu laden.
+                        <methodname>factory()</methodname>Methode verwenden muß um eine nicht von
+                        Zend kommende Datenbank Adapter Klasse zu laden.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -374,7 +374,7 @@ $db = Zend_Db::factory('Db2', $params);
                     die SQL Schlüsselwörter oder spezielle Zeichen enthalten. Wenn der Wert
                     <constant>FALSE</constant> ist, werden Bezeichner nicht automatisch begrenzt. Wenn
                     Bezeichner begrenzt werden müssen, so kann dies über die
-                    <code>quoteIdentifier()</code> Methode von Hand getan werden.
+                    <methodname>quoteIdentifier()</methodname> Methode von Hand getan werden.
                 </para>
                 <programlisting language="php"><![CDATA[
 $options = array(
@@ -450,11 +450,12 @@ $db = Zend_Db::factory('Pdo_Mysql', $params);
 
             <para>
                 Wenn der Adapter zwingend eine Verbindung zum RDBMS herstellen soll, kann die
-                <code>getConnection()</code> Methode verwendet werden. Diese liefert ein Objekt der
-                Verbindung, welches eine Verbindung entsprechend der verwendeten PHP Erweiterung
-                repräsentiert. Wenn zum Beispiel irgendeine der PDO Adapterklassen verwendet wird,
-                dann liefert <code>getConnection()</code> das PDO Object, nachdem es als eine live
-                Verbindung zu der entsprechenden Datenbank initialisiert wurde.
+                <methodname>getConnection()</methodname> Methode verwendet werden. Diese liefert
+                ein Objekt der Verbindung, welches eine Verbindung entsprechend der verwendeten PHP
+                Erweiterung repräsentiert. Wenn zum Beispiel irgendeine der PDO Adapterklassen
+                verwendet wird, dann liefert <methodname>getConnection()</methodname> das PDO
+                Object, nachdem es als eine live Verbindung zu der entsprechenden Datenbank
+                initialisiert wurde.
             </para>
 
             <para>
@@ -475,8 +476,8 @@ $db = Zend_Db::factory('Pdo_Mysql', $params);
                 <classname>Zend_Db::ALLOW_SERIALIZATION=false</classname> Option übergeben, wie im
                 Beispiel anbei gezeigt. Um das Prinzip von Lazy Connections zu erlauben, wird der
                 Adapter sich selbst nicht wiederverbinden wenn er deserialisiert wird. Man muß
-                <code>getConnection()</code> selbst aufrufen. Mann kann den Adapter dazu bringen
-                sich automatisch wieder zu verbinden indem
+                <methodname>getConnection()</methodname> selbst aufrufen. Mann kann den Adapter
+                dazu bringen sich automatisch wieder zu verbinden indem
                 <classname>Zend_Db::AUTO_RECONNECT_ON_UNSERIALIZE=true</classname> als Option zum
                 Adapter übergeben wird.
             </para>
@@ -607,7 +608,7 @@ CREATE TABLE bugs_products (
 
             <para>
                 Man kann eine SQL SELECT Anfrage ausführen und alle Ergebnisse auf einmal mit der
-                <code>fetchAll()</code> Methode abrufen.
+                <methodname>fetchAll()</methodname> Methode abrufen.
             </para>
 
             <para>
@@ -619,8 +620,8 @@ CREATE TABLE bugs_products (
             </para>
 
             <para>
-                Das zweite Argument von <code>fetchAll()</code> ist ein Array von Werten die
-                Parameterplatzhalter in der SQL Anweisung ersetzen.
+                Das zweite Argument von <methodname>fetchAll()</methodname> ist ein Array von
+                Werten die Parameterplatzhalter in der SQL Anweisung ersetzen.
             </para>
 
             <example id="zend.db.adapter.select.fetchall.example">
@@ -639,15 +640,16 @@ $result = $db->fetchAll($sql, 2);
             <title>Ändern des Fetch Modus</title>
 
             <para>
-                Standardmäßig gibt <code>fetchAll()</code> ein Array von Zeilen, jede als
-                assoziatives Array, zurück. Die Schlüssel von diesem assoziativem Array entsprechen
-                den Spalten oder Spaltenaliasen wie sie in der SELECT Anfrage benannt sind.
+                Standardmäßig gibt <methodname>fetchAll()</methodname> ein Array von Zeilen, jede
+                als assoziatives Array, zurück. Die Schlüssel von diesem assoziativem Array
+                entsprechen den Spalten oder Spaltenaliasen wie sie in der SELECT Anfrage benannt
+                sind.
             </para>
 
             <para>
                 Man kann einen anderen Stil für das Holen der Ergebnisse mit der
-                <code>setFetchMode()</code> Methode angeben. Die unterstützten Modi werden mit
-                folgenden Konstanten identifiziert:
+                <methodname>setFetchMode()</methodname> Methode angeben. Die unterstützten Modi
+                werden mit folgenden Konstanten identifiziert:
             </para>
 
             <itemizedlist>
@@ -728,9 +730,9 @@ echo $result[0]->bug_description;
 
             <title>Holen eines Ergbnisssatzes als assoziatives Array</title>
 
-            <para>
-                Die <code>fetchAssoc()</code> Methode gibt Daten in einem Array von assoziativen
-                Array zurück, egal welcher Wert für den fetch-Modus gesetzt wurde.
+methodname            <para>
+                Die <methodname>fetchAssoc()</methodname> Methode gibt Daten in einem Array von
+                assoziativen Array zurück, egal welcher Wert für den fetch-Modus gesetzt wurde.
             </para>
 
             <example id="zend.db.adapter.select.fetchassoc.example">
@@ -752,10 +754,10 @@ echo $result[0]['bug_description'];
             <title>Holen einer einzelnen Spalte eines Ergebnisssatzes</title>
 
             <para>
-                Die <code>fetchCol()</code> Methode gibt Daten in einem Array von Werten zurück,
-                egal welcher Wert für den fetch-Modus gesetzt wurde. Sie gibt nur die erste Spalte
-                der Anfrage zurück. Alle weiteren Spalten der Anfrage werden verworfen. Wenn eine
-                andere Spalte als die Erste benötigt wird sollte
+                Die <methodname>fetchCol()</methodname> Methode gibt Daten in einem Array von
+                Werten zurück, egal welcher Wert für den fetch-Modus gesetzt wurde. Sie gibt nur
+                die erste Spalte der Anfrage zurück. Alle weiteren Spalten der Anfrage werden
+                verworfen. Wenn eine andere Spalte als die Erste benötigt wird sollte
                 <xref linkend="zend.db.statement.fetching.fetchcolumn" /> beachtet werden.
             </para>
 
@@ -779,11 +781,11 @@ echo $result[0];
             <title>Holen von Schlüssel-Wert Paaren eines Ergebnisssatzes</title>
 
             <para>
-                Die <code>fetchPairs()</code> Methode gibt Daten in einem Array von Schlüssel-Wert
-                Paaren zurück, einem assoziativen Array mit einem einzelnen Eintrag pro Zeile. Der
-                Schlüssel dieses assoziativen Arrays wird von der ersten Spalte des SELECT
-                Ergebnisses genommen. Der Wert wird aus der zweiten Spalte des SELECT Ergebnisses
-                genommen. Alle weiteren Spalten des Ergebnisses werden verworfen.
+                Die <methodname>fetchPairs()</methodname> Methode gibt Daten in einem Array von
+                Schlüssel-Wert Paaren zurück, einem assoziativen Array mit einem einzelnen Eintrag
+                pro Zeile. Der Schlüssel dieses assoziativen Arrays wird von der ersten Spalte des
+                SELECT Ergebnisses genommen. Der Wert wird aus der zweiten Spalte des SELECT
+                Ergebnisses genommen. Alle weiteren Spalten des Ergebnisses werden verworfen.
             </para>
 
             <para>
@@ -810,8 +812,8 @@ echo $result[2];
             <title>Holen einer einzelnen Zeile eines Ergebnisssatzes</title>
 
             <para>
-                Die <code>fetchRow()</code> Methode gibt Daten entsprechend dem fetch-Modus zurück,
-                jedoch nur die erste Zeile des Ergebnisssatzes.
+                Die <methodname>fetchRow()</methodname> Methode gibt Daten entsprechend dem
+                fetch-Modus zurück, jedoch nur die erste Zeile des Ergebnisssatzes.
             </para>
 
             <example id="zend.db.adapter.select.fetchrow.example">
@@ -833,10 +835,11 @@ echo $result->bug_description;
             <title>Holen eines einzelnen Scalars aus einem Ergebnisssatz</title>
 
             <para>
-                Die <code>fetchOne()</code> Methode ist wie eine Kombination von
-                <code>fetchRow()</code> mit <code>fetchCol()</code>, gibt also nur die erste Zeile
-                des Ergebnisssatze zurück, und von dieser auch nur den Wert der ersten Spalte. Daher
-                wird nur ein einziger scalarer Wert zurückgegeben, kein Array und auch kein Objekt.
+                Die <methodname>fetchOne()</methodname> Methode ist wie eine Kombination von
+                <methodname>fetchRow()</methodname> mit <methodname>fetchCol()</methodname>, gibt
+                also nur die erste Zeile des Ergebnisssatze zurück, und von dieser auch nur den
+                Wert der ersten Spalte. Daher wird nur ein einziger scalarer Wert zurückgegeben,
+                kein Array und auch kein Objekt.
             </para>
 
             <example id="zend.db.adapter.select.fetchone.example">
@@ -867,9 +870,10 @@ echo $result;
             <title>Einfügen von Daten</title>
 
             <para>
-                Neue Zeilen können in die Datenbank mit der <code>insert()</code> Methode eingefügt
-                werden. Das erste Argument ist ein String der die Tabelle benennt, und das zweite
-                Argument ist ein assoziatives Array das den Spaltennamen Datenwerte zuordnet.
+                Neue Zeilen können in die Datenbank mit der <methodname>insert()</methodname>
+                Methode eingefügt werden. Das erste Argument ist ein String der die Tabelle
+                benennt, und das zweite Argument ist ein assoziatives Array das den Spaltennamen
+                Datenwerte zuordnet.
             </para>
 
             <example id="zend.db.adapter.write.insert.example">
@@ -928,17 +932,18 @@ $db->insert('bugs', $data);
 
             <para>
                 Einige RDBMS Marken unterstützen Auto-Incrementierung von Primärschlüsseln. Eine
-                Tabelle die so definiert ist generiert automatisch einen Primärschlüsselwert während
-                des INSERTs einer neuen Zeile. Der Rückgabewert der <code>insert()</code> Methode
-                ist <emphasis>nicht</emphasis> die letzte eingefügte ID, weil die Tabelle keine
-                Auto-Increment Spalte haben könnte. Statt dessen ist der Rückgabewert die Anzahl der
-                betroffenen Zeilen (normalerweise 1).
+                Tabelle die so definiert ist generiert automatisch einen Primärschlüsselwert
+                während des INSERTs einer neuen Zeile. Der Rückgabewert der
+                <methodname>insert()</methodname> Methode ist <emphasis>nicht</emphasis> die letzte
+                eingefügte ID, weil die Tabelle keine Auto-Increment Spalte haben könnte. Statt
+                dessen ist der Rückgabewert die Anzahl der betroffenen Zeilen (normalerweise 1).
             </para>
 
             <para>
                 Wenn die Tabelle mit einem Auto-Increment Primärschlüssel definiert ist, kann die
-                <code>lastInsertId()</code> Methode nach dem INSERT aufgerufen werden. Diese Methode
-                gibt den letzten generierten Wertim Rahmen der aktuellen Datenbankverbindung zurück.
+                <methodname>lastInsertId()</methodname> Methode nach dem INSERT aufgerufen werden.
+                Diese Methode gibt den letzten generierten Wertim Rahmen der aktuellen
+                Datenbankverbindung zurück.
             </para>
 
             <example id="zend.db.adapter.write.lastinsertid.example-1">
@@ -954,13 +959,13 @@ $id = $db->lastInsertId();
             <para>
                 Einige RDBMS Marken unterstützen ein Sequenz-Objekt, welches eindeutige Werte
                 generiert, die als Primärschlüsselwerte dienen. Um Sequenzen zu unterstützen,
-                akzeptiert die <code>lastInsertId()</code> Method zwei optionale String Argumente.
-                Diese Argumente benennen die Tabelle und die Spalte, in der Annahme das die
-                Konvention beachtet wurde, dass eine Sequenz mit der Tabelle und der Spalte benannt
-                wurde, für die sie Werte generiert plus dem Anhang "_seq". Dies basiert auf der
-                Konvention die von PostgreSQL verwendet wird, wenn Sequenzen für SERIAL Spalten
-                benannt werden. Zum Beispiel würde eine Tabelle "bugs" mit der Primärschlüsselspalte
-                "bug_id" eine Sequenz als "bugs_bug_id_seq" benennen.
+                akzeptiert die <methodname>lastInsertId()</methodname> Method zwei optionale String
+                Argumente. Diese Argumente benennen die Tabelle und die Spalte, in der Annahme das
+                die Konvention beachtet wurde, dass eine Sequenz mit der Tabelle und der Spalte
+                benannt wurde, für die sie Werte generiert plus dem Anhang "_seq". Dies basiert auf
+                der Konvention die von PostgreSQL verwendet wird, wenn Sequenzen für SERIAL Spalten
+                benannt werden. Zum Beispiel würde eine Tabelle "bugs" mit der
+                Primärschlüsselspalte "bug_id" eine Sequenz als "bugs_bug_id_seq" benennen.
             </para>
 
             <example id="zend.db.adapter.write.lastinsertid.example-2">
@@ -979,8 +984,8 @@ $id = $db->lastInsertId('bugs');
 
             <para>
                 Wenn der Name des Squenz-Objekts nicht dieser Konvention folgt muss die
-                <code>lastSequenceId()</code> Methode an Stelle verwendet werden. Diese Methode
-                benötigt ein String Argument, welches die Sequenz wörtlich benennt.
+                <methodname>lastSequenceId()</methodname> Methode an Stelle verwendet werden. Diese
+                Methode benötigt ein String Argument, welches die Sequenz wörtlich benennt.
             </para>
 
             <example id="zend.db.adapter.write.lastinsertid.example-3">
@@ -994,12 +999,13 @@ $id = $db->lastSequenceId('bugs_id_gen');
             </example>
 
             <para>
-                Bei RDBMS Marken die keine Sequenzen unterstützen, dazu gehören MySQL, Microsoft SQL
-                Server und SQLite, werden die Argumente an die <code>lastInsertId()</code> Methode
-                ignoriert, und der zurück gegebene Wert ist der zuletzt für eirgendeine Tabelle
-                während einer INSERT Operation generierte Wert innerhalb der aktuellen Verbindung.
-                Für diese RDBMS Marken gibt die <code>lastSequenceId()</code> Methode immer
-                <constant>NULL</constant> zurück.
+                Bei RDBMS Marken die keine Sequenzen unterstützen, dazu gehören MySQL, Microsoft
+                SQL Server und SQLite, werden die Argumente an die
+                <methodname>lastInsertId()</methodname> Methode ignoriert, und der zurück gegebene
+                Wert ist der zuletzt für eirgendeine Tabelle während einer INSERT Operation
+                generierte Wert innerhalb der aktuellen Verbindung. Für diese RDBMS Marken gibt die
+                <methodname>lastSequenceId()</methodname> Methode immer <constant>NULL</constant>
+                zurück.
             </para>
 
             <note>
@@ -1043,10 +1049,10 @@ $id = $db->lastSequenceId('bugs_id_gen');
             <title>Aktualisieren von Daten</title>
 
             <para>
-                Zeilen in der Datenbank können mit der <code>update()</code> Methode eines Adapters
-                aktualisiert werden. Diese Methode benötigt drei Argumente: Das Erste ist der Name
-                der Tabelle und das Zweite ist ein assoziatives Array das den zu Ändernden Spalten
-                neue Werte zuordnet.
+                Zeilen in der Datenbank können mit der <methodname>update()</methodname> Methode
+                eines Adapters aktualisiert werden. Diese Methode benötigt drei Argumente: Das
+                Erste ist der Name der Tabelle und das Zweite ist ein assoziatives Array das den zu
+                Ändernden Spalten neue Werte zuordnet.
             </para>
 
             <para>
@@ -1115,9 +1121,9 @@ $n = $db->update('bugs', $data, $where);
         <sect3 id="zend.db.adapter.write.delete">
             <title>Löschen von Daten</title>
             <para>
-                Daten können aus einer Datenbanktabelle mit der <code>delete()</code> Methode
-                gelöscht werden. Diese Methode benötigt zwei Argumente: Das erste ist ein String der
-                die Tabelle benennt.
+                Daten können aus einer Datenbanktabelle mit der <methodname>delete()</methodname>
+                Methode gelöscht werden. Diese Methode benötigt zwei Argumente: Das erste ist ein
+                String der die Tabelle benennt.
             </para>
 
             <para>
@@ -1197,9 +1203,9 @@ echo $sql;
             <title>Nutzung von quote()</title>
 
             <para>
-                Die <code>quote()</code> Methode benötigt ein Argument, einen scalaren String Wert.
-                Sie gibt den Wert mit ersetzten speziellen Zeichen, passend zu dem eingesetzten
-                RDBMS, und umgeben von Stringwertbegrenzern zurück. Der Standard SQL
+                Die <methodname>quote()</methodname> Methode benötigt ein Argument, einen skalaren
+                String Wert. Sie gibt den Wert mit ersetzten speziellen Zeichen, passend zu dem
+                eingesetzten RDBMS, und umgeben von Stringwertbegrenzern zurück. Der Standard SQL
                 Stringwertbegrenzer ist das einfache Anführungszeichen (<code>'</code>).
             </para>
 
@@ -1218,7 +1224,7 @@ echo $sql;
             </example>
 
             <para>
-                Zu beachten ist, dass der Rückgabewert von <code>quote()</code> die
+                Zu beachten ist, dass der Rückgabewert von <methodname>quote()</methodname> die
                 Stringwertbegrenzer enthält. Dies ist ein Unterschied zu anderen Methoden die
                 spezielle Zeichen ersetzen, aber keine Stringwertbegrenzer hinzufügen, wie z.B.
                 <ulink url="http://www.php.net/mysqli_real_escape_string">mysql_real_escape_string()</ulink>.
@@ -1239,9 +1245,9 @@ SELECT * FROM atable WHERE intColumn = '123'
             </para>
 
             <para>
-                Es kann das optionale zweite Argument der <code>quote()</code> Methode verwendet
-                werden um die Verwendung von Anführungszeichen selektiv für den spezifizierten SQL
-                Datentyp auszuwählen.
+                Es kann das optionale zweite Argument der <methodname>quote()</methodname> Methode
+                verwendet werden um die Verwendung von Anführungszeichen selektiv für den
+                spezifizierten SQL Datentyp auszuwählen.
             </para>
 
             <example id="zend.db.adapter.quoting.quote.example-2">
@@ -1263,9 +1269,9 @@ $sql = 'SELECT * FROM atable WHERE intColumn = '
             </para>
 
             <para>
-                <classname>Zend_Db_Table</classname> definiert SQL Typen zu <code>quote()</code>
-                automatisch wenn SQL Abfragen erstellt werden die einer Tabellen Schlüssel Spalte
-                entsprechen.
+                <classname>Zend_Db_Table</classname> definiert SQL Typen zu
+                <methodname>quote()</methodname> automatisch wenn SQL Abfragen erstellt werden die
+                einer Tabellen Schlüssel Spalte entsprechen.
             </para>
 
         </sect3>
@@ -1276,20 +1282,21 @@ $sql = 'SELECT * FROM atable WHERE intColumn = '
 
             <para>
                 Die typischste Anwendung von Quotierung ist das Einfügen von PHP Variablen in eine
-                SQL Expression oder Anweisung. Die <code>quoteInto()</code> Methode kann verwendet
-                werden um dies in einem Schritt zu erledigen. Die Methode benötigt zwei Argumente:
-                Das erste Argument ist ein String der ein Platzhaltersymbol (<code>?</code>)
-                enthält, und das zweite Argument ist ein Wert oder eine PHP Variable die den
-                Platzhalter ersetzen soll.
+                SQL Expression oder Anweisung. Die <methodname>quoteInto()</methodname> Methode
+                kann verwendet werden um dies in einem Schritt zu erledigen. Die Methode benötigt
+                zwei Argumente: Das erste Argument ist ein String der ein Platzhaltersymbol
+                (<code>?</code>) enthält, und das zweite Argument ist ein Wert oder eine PHP
+                Variable die den Platzhalter ersetzen soll.
             </para>
 
             <para>
-                Das Platzhaltersymbol ist das gleiche Symbol wie es von vielen RDBMS Marken für Lage
-                betreffende Parameter verwendet wird, aber die <code>quoteInto()</code> Methode
-                bildet nur Abfrageparameter nach. Die Methode fügt den Wert des Strings in den SQL
-                String ein, ersetzt dabei spezielle Zeichen und fügt Stringwertbegrenzer ein. Echte
-                Abfrageparameter sorgen für eine Trennung von SQL String und Parametern wenn die
-                Anweisung vom RDBMS Server verarbeitet wird.
+                Das Platzhaltersymbol ist das gleiche Symbol wie es von vielen RDBMS Marken für
+                Lage betreffende Parameter verwendet wird, aber die
+                <methodname>quoteInto()</methodname> Methode bildet nur Abfrageparameter nach. Die
+                Methode fügt den Wert des Strings in den SQL String ein, ersetzt dabei spezielle
+                Zeichen und fügt Stringwertbegrenzer ein. Echte Abfrageparameter sorgen für eine
+                Trennung von SQL String und Parametern wenn die Anweisung vom RDBMS Server
+                verarbeitet wird.
             </para>
 
             <example id="zend.db.adapter.quoting.quote-into.example">
@@ -1303,9 +1310,9 @@ echo $sql;
             </example>
 
             <para>
-                Man kann den optionalen dritten Parameter von <code>quoteInto()</code> verwenden um
-                den SQL Datentyp zu spezifizieren. Nummerische Datentypen werden nicht in
-                Anführungszeichen gesetzt und andere Typen werden in Anführungszeichen gesetzt.
+                Man kann den optionalen dritten Parameter von <methodname>quoteInto()</methodname>
+                verwenden um den SQL Datentyp zu spezifizieren. Nummerische Datentypen werden nicht
+                in Anführungszeichen gesetzt und andere Typen werden in Anführungszeichen gesetzt.
             </para>
 
             <example id="zend.db.adapter.quoting.quote-into.example-2">
@@ -1347,13 +1354,14 @@ echo $sql;
             </para>
 
             <para>
-                Die <code>quoteIdentifier()</code> Methode funktioniert wie <code>quote()</code>,
-                aber sie wendet die Bezeichner Begrenzungszeichen entsprechend dem verwendeten
-                Adapter an. Zum Beispiel nutzt Standard-SQL doppelte Anführungszeichen
-                (<code>"</code>) zum begrenzen von Bezeichnern und die meisten der RDBMS Marken
-                nutzen ebendfalls dieses Symbol. MySQL hingegen benutzt back-quotes (<code>`</code>)
-                als Standardzeichen. Die <code>quoteIdentifier()</code> Methode ersetzt außerdem
-                spezielle Zeichen im String Argument.
+                Die <methodname>quoteIdentifier()</methodname> Methode funktioniert wie
+                <methodname>quote()</methodname>, aber sie wendet die Bezeichner Begrenzungszeichen
+                entsprechend dem verwendeten Adapter an. Zum Beispiel nutzt Standard-SQL doppelte
+                Anführungszeichen (<code>"</code>) zum begrenzen von Bezeichnern und die meisten
+                der RDBMS Marken nutzen ebendfalls dieses Symbol. MySQL hingegen benutzt
+                back-quotes (<code>`</code>) als Standardzeichen. Die
+                <methodname>quoteIdentifier()</methodname> Methode ersetzt außerdem spezielle
+                Zeichen im String Argument.
             </para>
 
             <example id="zend.db.adapter.quoting.quote-identifier.example">
@@ -1404,33 +1412,36 @@ echo $sql
         </para>
 
         <para>
-            Alternativ kann der Begin und das Ergebnis einer Transaktion selbst spezifiziert werden,
-            und damit kann kontrolliert werden wieviele SQL Anfragen in einer Gruppe enthalten sind,
-            die entweder übergeben oder rückgängig gemacht wird, als eine einzelne Operation. Um
-            eine Transaktion zu initiieren wird die <code>beginTransaction()</code> Methode
-            verwendet. Anschließend folgende SQL Anweisungen werden im Kontext der selben
-            Transaktion ausgeführt bis sie explizit aufgelöst wird.
+            Alternativ kann der Begin und das Ergebnis einer Transaktion selbst spezifiziert
+            werden, und damit kann kontrolliert werden wieviele SQL Anfragen in einer Gruppe
+            enthalten sind, die entweder übergeben oder rückgängig gemacht wird, als eine
+            einzelne Operation. Um eine Transaktion zu initiieren wird die
+            <methodname>beginTransaction()</methodname> Methode verwendet. Anschließend folgende
+            SQL Anweisungen werden im Kontext der selben Transaktion ausgeführt bis sie explizit
+            aufgelöst wird.
         </para>
 
         <para>
-            Um eine Transaktion aufzulösen wird entweder die <code>commit()</code> oder die
-            <code>rollBack()</code> Methode verwendet. Die <code>commit()</code> Methode markiert
-            die Änderungen die während der Transaktionen durchgeführt wurden als übergeben, was
-            bedeutet das die Effekte dieser Änderungen in anderen Transaktionen angezeigt werden.
+            Um eine Transaktion aufzulösen wird entweder die <methodname>commit()</methodname> oder
+            die <methodname>rollBack()</methodname> Methode verwendet. Die
+            <methodname>commit()</methodname> Methode markiert die Änderungen die während der
+            Transaktionen durchgeführt wurden als übergeben, was bedeutet das die Effekte dieser
+            Änderungen in anderen Transaktionen angezeigt werden.
         </para>
 
         <para>
-            Die <code>rollBack()</code> Methode tut das Gegenteil: sie verwirft die Änderungen die
-            während der Transaktionen durchgeführt wurden. Die Änderungen werden gewissermaßen
-            ungeschehen gemacht, der Status der Daten ändert sich zurück auf jenen wie sie vor
-            Beginn der Transaktion waren. Allerdings hat das rückgängig machen keinen Einfluss auf
-            Änderungen die von anderen, gleichzeitig laufenden Transaktionen verursacht wurden.
+            Die <methodname>rollBack()</methodname> Methode tut das Gegenteil: sie verwirft die
+            Änderungen die während der Transaktionen durchgeführt wurden. Die Änderungen werden
+            gewissermaßen ungeschehen gemacht, der Status der Daten ändert sich zurück auf jenen
+            wie sie vor Beginn der Transaktion waren. Allerdings hat das rückgängig machen keinen
+            Einfluss auf Änderungen die von anderen, gleichzeitig laufenden Transaktionen
+            verursacht wurden.
         </para>
 
         <para>
             Nach dem Auflösen der Transaktion befindet sich der
             <classname>Zend_Db_Adapter</classname> wieder im auto-commit Modus, bis
-            <code>beginTransaction()</code> wieder aufgerufen wird.
+            <methodname>beginTransaction()</methodname> wieder aufgerufen wird.
         </para>
 
         <example id="zend.db.adapter.transactions.example">
@@ -1467,15 +1478,15 @@ try {
         <title>Auflistung und Beschreibung von Tabellen</title>
 
         <para>
-            Die <code>listTables()</code> Methode gibt ein Array von Strings zurück, mit den Namen
-            aller Tabellen in der aktuellen Datenbank.
+            Die <methodname>listTables()</methodname> Methode gibt ein Array von Strings zurück,
+            mit den Namen aller Tabellen in der aktuellen Datenbank.
         </para>
 
         <para>
-            Die <code>describeTable()</code> Methode gibt ein assoziatives Array von MetaDaten über
-            die Tabelle zurück. Das erste Argument dieser Methode ist ein String der den Namen der
-            Tabelle enthält. Das zweite Argument ist optional und benennt das Schema in dem die
-            Tabelle besteht.
+            Die <methodname>describeTable()</methodname> Methode gibt ein assoziatives Array von
+            MetaDaten über die Tabelle zurück. Das erste Argument dieser Methode ist ein String der
+            den Namen der Tabelle enthält. Das zweite Argument ist optional und benennt das Schema
+            in dem die Tabelle besteht.
         </para>
 
         <para>
@@ -1615,7 +1626,7 @@ try {
 
         <para>
             Wenn keine Tabelle mit dem Tabellennamen und dem optional angegebenen Schemanamen
-            existiert, gibt <code>describeTable()</code> ein leeres Array zurück.
+            existiert, gibt <methodname>describeTable()</methodname> ein leeres Array zurück.
         </para>
 
     </sect2>
@@ -1634,19 +1645,20 @@ try {
         <para>
             Trotzdem könnte es sinnvoll sein, wenn ein lang andauerndes PHP Script verwendet wird,
             das viele Datenbankverbindungen hat, diese zu schließen um zu vermeiden das die
-            Kapazität des RDBMS Servers überschritten wird. Die <code>closeConnection()</code>
-            Methode der Adapterklasse kann verwendet werden um die zugrundeliegende
-            Datenbankverbindung explizit zu schließen.
+            Kapazität des RDBMS Servers überschritten wird. Die
+            <methodname>closeConnection()</methodname> Methode der Adapterklasse kann verwendet
+            werden um die zugrundeliegende Datenbankverbindung explizit zu schließen.
         </para>
 
         <para>
-            Seit Release 1.7.2, kann man prüfen ob man mit der <code>isConnected()</code> prüfen ob
-            man aktuell mit dem RDBMS Server verbunden ist. Das bedeutet das eine Verbindungs
-            Ressource initialisiert und nicht geschlossen wurde. Diese Funktion ist aktuell nicht in
-            der Lage zu prüfen ob zum Beispiel die Server Seite die Verbindung geschlossen hat. Das
-            wird intern verwendet um die Verbindung zu schließen. Das erlaubt es die Verbindung ohne
-            Fehler mehrere Male zu schließen. Das war bereits vor 1.7.2 der Fall für PDO Adapter,
-            aber nicht für die anderen.
+            Seit Release 1.7.2, kann man prüfen ob man mit der
+            <methodname>isConnected()</methodname> prüfen ob man aktuell mit dem RDBMS Server
+            verbunden ist. Das bedeutet das eine Verbindungs Ressource initialisiert und nicht
+            geschlossen wurde. Diese Funktion ist aktuell nicht in der Lage zu prüfen ob zum
+            Beispiel die Server Seite die Verbindung geschlossen hat. Das wird intern verwendet um
+            die Verbindung zu schließen. Das erlaubt es die Verbindung ohne Fehler mehrere Male zu
+            schließen. Das war bereits vor 1.7.2 der Fall für PDO Adapter, aber nicht für die
+            anderen.
         </para>
 
         <example id="zend.db.adapter.closing.example">
@@ -1702,9 +1714,9 @@ $db->closeConnection();
 
         <para>
             Die meisten PHP Datenbankerweiterungen bieten eine Methode um SQL Anweisung auszuführen
-            ohne diese vorzubereiten. Zum Beispiel bietet PDO die Methode <code>exec()</code>. Das
-            Verbindungsobjekt der PHP Erweiterung kann kann mit der Methode
-            <code>getConnection()</code> direkt verwendet werden.
+            ohne diese vorzubereiten. Zum Beispiel bietet PDO die Methode
+            <methodname>exec()</methodname>. Das Verbindungsobjekt der PHP Erweiterung kann kann
+            mit der Methode <methodname>getConnection()</methodname> direkt verwendet werden.
         </para>
 
         <example id="zend.db.adapter.other-statements.example">
@@ -1735,8 +1747,8 @@ $result = $db->getConnection()->exec('DROP TABLE bugs');
 
         <para>
             Seit Release 1.7.2 kann man die Version des Servers in einem PHP artigen Stil erhalten
-            damit man es mit <code>version_compare()</code> verwenden kann. Wenn die Information
-            nicht vorhanden ist erhält man <constant>NULL</constant> zurück.
+            damit man es mit <methodname>version_compare()</methodname> verwenden kann. Wenn die
+            Information nicht vorhanden ist erhält man <constant>NULL</constant> zurück.
         </para>
 
         <example id="zend.db.adapter.server-version.example">
@@ -1770,8 +1782,8 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        Dieser Adapter wird in der <code>factory()</code> Methode mit dem Namen
-                        'Db2' angegeben.
+                        Dieser Adapter wird in der <methodname>factory()</methodname> Methode mit
+                        dem Namen 'Db2' angegeben.
                     </para>
                 </listitem>
                 <listitem>
@@ -1782,12 +1794,13 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         IBM DB2 unterstützt sowohl Sequenzen als auch auto-increment Schlüssel.
-                        Daher sind die Argumente für <code>lastInsertId()</code> optional. Werden
-                        keine Argumente angegeben, gibt der Adapter den letzten Wert der für den
-                        auto-increment Key generiert wurde zurück. Werden Argumente angegeben, gibt
-                        der Adapter den letzten Wert der für die Sequenz mit dem Namen, entsprechend
-                        der Konvention, '<emphasis>table</emphasis>_<emphasis>column</emphasis>_seq'
-                        generiert wurde zurück.
+                        Daher sind die Argumente für <methodname>lastInsertId()</methodname>
+                        optional. Werden keine Argumente angegeben, gibt der Adapter den letzten
+                        Wert der für den auto-increment Key generiert wurde zurück. Werden
+                        Argumente angegeben, gibt der Adapter den letzten Wert der für die Sequenz
+                        mit dem Namen, entsprechend der Konvention,
+                        '<emphasis>table</emphasis>_<emphasis>column</emphasis>_seq' generiert
+                        wurde zurück.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -1798,8 +1811,8 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        Dieser Adapter wird in der <code>factory()</code> Methode mit dem Namen
-                        'Mysqli' angegeben.
+                        Dieser Adapter wird in der <methodname>factory()</methodname> Methode mit
+                        dem Namen 'Mysqli' angegeben.
                     </para>
                 </listitem>
                 <listitem>
@@ -1810,9 +1823,10 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         MySQL unterstützt keine Sequenzen, daher ignoriert
-                        <code>lastInsertId()</code> Argumente und gibt immer den letzten Wert der
-                        für den auto-increment Schlüssel generiert wurde zurück. Die
-                        <code>lastSequenceId()</code> Methode gibt <constant>NULL</constant> zurück.
+                        <methodname>lastInsertId()</methodname> Argumente und gibt immer den
+                        letzten Wert der für den auto-increment Schlüssel generiert wurde zurück.
+                        Die <methodname>lastSequenceId()</methodname> Methode gibt
+                        <constant>NULL</constant> zurück.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -1823,8 +1837,8 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        Dieser Adapter wird in der <code>factory()</code> Methode mit dem Namen
-                        'Oracle' angegeben.
+                        Dieser Adapter wird in der <methodname>factory()</methodname> Methode mit
+                        dem Namen 'Oracle' angegeben.
                     </para>
                 </listitem>
                 <listitem>
@@ -1835,8 +1849,8 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         Oracle unterstützt keine auto-increment Schlüssel, daher sollte der Name
-                        einer Sequenz an <code>lastInsertId()</code> oder
-                        <code>lastSequenceId()</code> übergeben werden.
+                        einer Sequenz an <methodname>lastInsertId()</methodname> oder
+                        <methodname>lastSequenceId()</methodname> übergeben werden.
                     </para>
                 </listitem>
                 <listitem>
@@ -1869,8 +1883,8 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        Dieser Adapter wird in der <code>factory()</code> Methode mit dem Namen
-                        'Pdo_Mssql' angegeben.
+                        Dieser Adapter wird in der <methodname>factory()</methodname> Methode mit
+                        dem Namen 'Pdo_Mssql' angegeben.
                     </para>
                 </listitem>
                 <listitem>
@@ -1881,9 +1895,10 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         Microsoft SQL Server unterstützt keine Sequenzen, daher ignoriert
-                        <code>lastInsertId()</code> Argumente und gibt immer den letzten Wert der
-                        für den auto-increment Schlüssel generiert wurde zurück. Die
-                        <code>lastSequenceId()</code> Methode gibt <constant>NULL</constant> zurück.
+                        <methodname>lastInsertId()</methodname> Argumente und gibt immer den
+                        letzten Wert der für den auto-increment Schlüssel generiert wurde zurück.
+                        Die <methodname>lastSequenceId()</methodname> Methode gibt
+                        <constant>NULL</constant> zurück.
                     </para>
                 </listitem>
                 <listitem>
@@ -1927,8 +1942,8 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        Dieser Adapter wird in der <code>factory()</code> Methode mit dem Namen
-                        'Pdo_Ibm' spezifiziert.
+                        Dieser Adapter wird in der <methodname>factory()</methodname> Methode mit
+                        dem Namen 'Pdo_Ibm' spezifiziert.
                     </para>
                 </listitem>
                 <listitem>
@@ -1951,8 +1966,8 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        Dieser Adapter wird in der <code>factory()</code> Methode mit dem Namen
-                        'Pdo_Mysql' angegeben.
+                        Dieser Adapter wird in der <methodname>factory()</methodname> Methode mit
+                        dem Namen 'Pdo_Mysql' angegeben.
                     </para>
                 </listitem>
                 <listitem>
@@ -1963,9 +1978,10 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         MySQL unterstützt keine Sequenzen, daher ignoriert
-                        <code>lastInsertId()</code> Argumente und gibt immer den letzten Wert der
-                        für den auto-increment Schlüssel generiert wurde zurück. Die
-                        <code>lastSequenceId()</code> Methode gibt <constant>NULL</constant> zurück.
+                        <methodname>lastInsertId()</methodname> Argumente und gibt immer den
+                        letzten Wert der für den auto-increment Schlüssel generiert wurde zurück.
+                        Die <methodname>lastSequenceId()</methodname> Methode gibt
+                        <constant>NULL</constant> zurück.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -1976,8 +1992,8 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        Dieser Adapter wird in der <code>factory()</code> Methode mit dem Namen
-                        'Pdo_Oci' angegeben.
+                        Dieser Adapter wird in der <methodname>factory()</methodname> Methode mit
+                        dem Namen 'Pdo_Oci' angegeben.
                     </para>
                 </listitem>
                 <listitem>
@@ -1988,8 +2004,8 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         Oracle unterstützt keine auto-increment Schlüssel, daher sollte der Name
-                        einer Sequenz an <code>lastInsertId()</code> oder
-                        <code>lastSequenceId()</code> übergeben werden.
+                        einer Sequenz an <methodname>lastInsertId()</methodname> oder
+                        <methodname>lastSequenceId()</methodname> übergeben werden.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -2000,8 +2016,8 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        Dieser Adapter wird in der <code>factory()</code> Methode mit dem Namen
-                        'Pdo_Pgsql' angegeben.
+                        Dieser Adapter wird in der <methodname>factory()</methodname> Methode mit
+                        dem Namen 'Pdo_Pgsql' angegeben.
                     </para>
                 </listitem>
                 <listitem>
@@ -2012,12 +2028,13 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         PostgreSQL unterstützt sowohl Sequenzen als auch auto-increment Schlüssel.
-                        Daher sind die Argumente für <code>lastInsertId()</code> optional. Werden
-                        keine Argumente angegeben, gibt der Adapter den letzten Wert der für den
-                        auto-increment Key generiert wurde zurück. Werden Argumente angegeben, gibt
-                        der Adapter den letzten Wert der für die Sequenz mit dem Namen, entsprechend
-                        der Konvention, '<emphasis>table</emphasis>_<emphasis>column</emphasis>_seq'
-                        generiert wurde zurück.
+                        Daher sind die Argumente für <methodname>lastInsertId()</methodname>
+                        optional. Werden keine Argumente angegeben, gibt der Adapter den letzten
+                        Wert der für den auto-increment Key generiert wurde zurück. Werden
+                        Argumente angegeben, gibt der Adapter den letzten Wert der für die Sequenz
+                        mit dem Namen, entsprechend der Konvention,
+                        '<emphasis>table</emphasis>_<emphasis>column</emphasis>_seq' generiert
+                        wurde zurück.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -2028,8 +2045,8 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        Dieser Adapter wird in der <code>factory()</code> Methode mit dem Namen
-                        'Pdo_Sqlite' angegeben.
+                        Dieser Adapter wird in der <methodname>factory()</methodname> Methode mit
+                        dem Namen 'Pdo_Sqlite' angegeben.
                     </para>
                 </listitem>
                 <listitem>
@@ -2040,9 +2057,10 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         SQLite unterstützt keine Sequenzen, daher ignoriert
-                        <code>lastInsertId()</code> Argumente und gibt immer den letzten Wert der
-                        für den auto-increment Schlüssel generiert wurde zurück. Die
-                        <code>lastSequenceId()</code> Methode gibt <constant>NULL</constant> zurück.
+                        <methodname>lastInsertId()</methodname> Argumente und gibt immer den
+                        letzten Wert der für den auto-increment Schlüssel generiert wurde zurück.
+                        Die <methodname>lastSequenceId()</methodname> Methode gibt
+                        <constant>NULL</constant> zurück.
                     </para>
                 </listitem>
                 <listitem>
@@ -2082,8 +2100,8 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         Firebird/interbase unterstützt keine auto-increment Schlüssel, deswegen
-                        sollte der Name einer Sequenz bei <code>lastInsertId()</code> oder
-                        <code>lastSequenceId()</code> spezifiziert werden.
+                        sollte der Name einer Sequenz bei <methodname>lastInsertId()</methodname>
+                        oder <methodname>lastSequenceId()</methodname> spezifiziert werden.
                     </para>
                 </listitem>
                 <listitem>

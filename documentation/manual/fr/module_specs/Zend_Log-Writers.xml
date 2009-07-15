@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16582 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.log.writers" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Rédacteurs (Writers)</title>
@@ -95,6 +95,11 @@ $logger->info("Message d'information");
     <xi:include href="Zend_Log-Writers-Mail.xml">
         <xi:fallback>
             <xi:include href="../../en/module_specs/Zend_Log-Writers-Mail.xml" />
+        </xi:fallback>
+    </xi:include>
+    <xi:include href="Zend_Log-Writers-Syslog.xml">
+        <xi:fallback>
+            <xi:include href="../../en/module_specs/Zend_Log-Writers-Syslog.xml" />
         </xi:fallback>
     </xi:include>
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16319 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.response">
     <title>Zend_Http_Response</title>
@@ -199,7 +199,10 @@ if ($response->isError()) {
                     <para>
                         <code>string asString($br = "\n")</code> : récupère la réponse
                         complète sous la forme d'une chaîne. Les lignes sont coupées avec le
-                        paramètre <code>$br</code> (par ex. "&lt;br /&gt;")
+                        paramètre <code>$br</code> (par ex. "&lt;br /&gt;"). Vous pouvez aussi
+                        utiliser la méthode magique <methodname>__toString()</methodname> lors du
+                        cast de l'objet en chaîne de caractère. Ce sera alors proxié vers
+                        <methodname>asString()</methodname>.
                     </para>
                 </listitem>
             </itemizedlist> <example id="zend.http.response.acessors.example-1">

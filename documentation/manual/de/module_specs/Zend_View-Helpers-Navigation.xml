@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16439 -->
+<!-- EN-Revision: 16444 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.navigation">
     <title>Navigations Helfer</title>
@@ -1400,15 +1400,18 @@ Output:
                 Der Aufruf von <code>renderSubMenu($container, $ulClass, $indent)</code> ist
                 identisch mit dem Aufruf von <code>renderMenu($container, $options)</code> mit
                 den folgenden Optionen:
-<code>array(
+            </para>
+
+            <programlisting language="php"><![CDATA[
+array(
     'ulClass'          => $ulClass,
     'indent'           => $indent,
     'minDepth'         => null,
     'maxDepth'         => null,
     'onlyActiveBranch' => true,
     'renderParents'    => false
-)</code>
-            </para>
+);
+]]></programlisting>
 
             <programlisting language="php"><![CDATA[
 <?php

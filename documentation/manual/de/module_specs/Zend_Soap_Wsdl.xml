@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15685 -->
+<!-- EN-Revision: 16443 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.soap.wsdl">
     <title>WSDL Zugriffsmethoden</title>
@@ -277,7 +277,7 @@
                             <footnote>
                                 <para>
                                     <code>'tns:' namespace</code> wird als Skript URI definiert
-                                    (<code>'http://'  .$_SERVER['HTTP_HOST'] .
+                                    (<code>'http://' .$_SERVER['HTTP_HOST'] .
                                     $_SERVER['SCRIPT_NAME']</code>).
                                 </para>
                             </footnote>
@@ -286,7 +286,7 @@
                 </listitem>
                 <listitem>
                     <para>
-                        Die Skript URI<footnote><para><code>'http://'  .$_SERVER['HTTP_HOST'] .
+                        Die Skript URI<footnote><para><code>'http://' .$_SERVER['HTTP_HOST'] .
                         $_SERVER['SCRIPT_NAME']</code></para></footnote> als eine Service URI für
                         die Web Service Definition bei Verwendung von Klassen.
                     </para>

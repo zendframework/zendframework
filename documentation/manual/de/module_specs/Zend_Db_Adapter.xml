@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16441 -->
+<!-- EN-Revision: 16447 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.adapter">
 
@@ -340,11 +340,12 @@ $db = Zend_Db::factory($config->database);
                 <para>
                     Diese Option kann über die Konstante
                     <classname>Zend_Db::CASE_FOLDING</classname> angegeben werden. Sie entspricht
-                    dem <code>ATTR_CASE</code> Attribut in PDO and IBM DB2 Datenbanktreibern und
-                    stelllt die Schreibweise von String Schlüsseln in Abfrageergebnissen ein. Die
-                    Option kann den Wert <classname>Zend_Db::CASE_NATURAL</classname>
-                    (der Standard), <classname>Zend_Db::CASE_UPPER</classname> oder
-                    <classname>Zend_Db::CASE_LOWER</classname> annehmen.
+                    dem <constant>ATTR_CASE</constant> Attribut in PDO and IBM DB2
+                    Datenbanktreibern und stellt die Schreibweise von String Schlüsseln in
+                    Abfrageergebnissen ein. Die Option kann den Wert
+                    <constant>Zend_Db::CASE_NATURAL</constant> (der Standard),
+                    <constant>Zend_Db::CASE_UPPER</constant> oder
+                    <constant>Zend_Db::CASE_LOWER</constant> annehmen.
                 </para>
                 <programlisting language="php"><![CDATA[
 $options = array(
@@ -1093,8 +1094,9 @@ $n = $db->update('bugs', $data, 'bug_id = 2');
             </para>
 
             <para>
-                Wenn ein Array mit Strings als drittes Argument übergeben wird, werden diese Strings
-                als eine Expression von Ausdrücken, getrennt von AND Operatoren, zusammengefügt.
+                Wenn ein Array mit Strings als drittes Argument übergeben wird, werden diese
+                Strings als eine Expression von Ausdrücken, getrennt von <constant>AND</constant>
+                Operatoren, zusammengefügt.
             </para>
 
             <example id="zend.db.adapter.write.update.example-array">
@@ -1151,8 +1153,9 @@ $n = $db->delete('bugs', 'bug_id = 3');
             </para>
 
             <para>
-                Wenn ein Array mit Strings als zweites Argument übergeben wird, werden diese Strings
-                als eine Expression von Ausdrücken, getrennt von AND Operatoren, zusammengefügt.
+                Wenn ein Array mit Strings als zweites Argument übergeben wird, werden diese
+                Strings als eine Expression von Ausdrücken, getrennt von <constant>AND</constant>
+                Operatoren, zusammengefügt.
             </para>
 
         </sect3>
@@ -1237,7 +1240,7 @@ echo $sql;
                 gesetzt werden, wenn dieser mit einer Integer-Typ Spalte oder einem Ausdruck
                 verglichen wird. Anders gesagt ist das folgende in einigen SQL Implementationen ein
                 Fehler, wenn angenommen wird das <code>intColumn</code> einen SQL Datentyp von
-                <code>INTEGER</code> besitzt
+                <constant>INTEGER</constant> besitzt
 
                 <programlisting language="php"><![CDATA[
 SELECT * FROM atable WHERE intColumn = '123'
@@ -1603,22 +1606,22 @@ try {
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>IDENTITY</code> - DB2, MSSQL
+                        <constant>IDENTITY</constant> - DB2, MSSQL
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>AUTO_INCREMENT</code> - MySQL
+                        <constant>AUTO_INCREMENT</constant> - MySQL
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>SERIAL</code> - PostgreSQL
+                        <constant>SERIAL</constant> - PostgreSQL
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>SEQUENCE</code> - Oracle
+                        <constant>SEQUENCE</constant> - Oracle
                     </para>
                 </listitem>
             </itemizedlist>
@@ -1871,8 +1874,8 @@ if (!is_null($version)) {
                         Standardmäßig werden LOB Felder als OCI-Log Objekte zurückgegeben. Man kann
                         Sie für alle Anfragen als String empfangen indem die Treiberoption
                         <code>'lob_as_string'</code> verwendet wird, oder für spezielle Anfragen
-                        durch Verwendung von <code>setLobAsString(boolean)</code> auf dem Adapter
-                        oder dem Statement.
+                        durch Verwendung von <methodname>setLobAsString(boolean)</methodname> auf
+                        dem Adapter oder dem Statement.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -1914,10 +1917,10 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         <classname>Zend_Db_Adapter_Pdo_Mssql</classname> setzt
-                        <code>QUOTED_IDENTIFIER ON</code> direkt nach dem Verbinden zu einer SQL
-                        Server Datenbank. Dadurch verwendet der Treiber das Standard SQL Bezeichner
-                        Begrenzungssymbol (<code>"</code>) an Stelle der proprietären Eckige-Klammer
-                        Syntax die der SQL Server standradmäßig nutzt.
+                        <constant>QUOTED_IDENTIFIER ON</constant> direkt nach dem Verbinden zu
+                        einer SQL Server Datenbank. Dadurch verwendet der Treiber das Standard SQL
+                        Bezeichner Begrenzungssymbol (<code>"</code>) an Stelle der proprietären
+                        Eckige-Klammer Syntax die der SQL Server standradmäßig nutzt.
                     </para>
                 </listitem>
                 <listitem>

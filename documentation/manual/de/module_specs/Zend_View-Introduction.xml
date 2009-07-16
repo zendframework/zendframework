@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16444 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.view.introduction">
     <title>Einführung</title>
@@ -77,7 +77,7 @@ echo $view->render('booklist.php');
             <classname>Zend_View</classname> Instanz ausgeführt, was bedeutet, dass Referenzen auf
             $this auf die Eigenschaften und Methoden der <classname>Zend_View</classname> Instanz
             weisen. (Variablen, die vom Controller an die Instanz übergeben wurden, sind öffentliche
-            (public) Eigenschaften der <classname>Zend_View</classname> Instanz.) Dadurch kann ein
+            (public) Eigenschaften der <classname>Zend_View</classname> Instanz). Dadurch kann ein
             sehr einfaches View Skript wie folgt aussehen:
         </para>
 

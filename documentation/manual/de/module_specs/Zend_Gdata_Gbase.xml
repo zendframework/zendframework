@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15742 -->
+<!-- EN-Revision: 16443 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.gbase">
     <title>Google Base verwenden</title>
@@ -215,7 +215,8 @@ $service = new Zend_Gdata_Gbase(getAuthSubHttpClient());
                 Verwendung mit Feed Fetzen:
             </para>
             <programlisting language="php"><![CDATA[
-// Erstellt eine Instanz des Base Services und verwendet einen nicht authentifizierten HTTP Client
+// Erstellt eine Instanz des Base Services und verwendet einen nicht
+// authentifizierten HTTP Client
 $service = new Zend_Gdata_Gbase();
 ]]></programlisting>
         </sect3>

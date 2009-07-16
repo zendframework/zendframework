@@ -14,14 +14,19 @@
                 Framework have also found these coding standards useful because their code's style
                 remains consistent with all Zend Framework code. It is also worth noting that it
                 requires significant effort to fully specify coding standards.
-
-                Note: Sometimes developers consider the establishment of a standard more important
-                than what that standard actually suggests at the most detailed level of design. The
-                guidelines in the Zend Framework coding standards capture practices that have worked
-                well on the ZF project. You may modify these standards or use them as is in
-                accordance with the terms of our
-                <ulink url="http://framework.zend.com/license">license</ulink>
             </para>
+
+            <note>
+                <para>
+                    Note: Sometimes developers consider the establishment of a standard more 
+                    important than what that standard actually suggests at the most detailed level 
+                    of design. The guidelines in the Zend Framework coding standards capture 
+                    practices that have worked well on the ZF project. You may modify these 
+                    standards or use them as is in accordance with the terms of our <ulink 
+                        url="http://framework.zend.com/license">license</ulink>.
+                </para>
+            </note>
+
             <para>
                 Topics covered in the ZF coding standards include:
             </para>

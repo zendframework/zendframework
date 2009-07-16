@@ -14,7 +14,7 @@
 
     <para>
         You can instantiate and configure <classname>Zend_Tag_Cloud</classname> either
-        programatically or completly via an array or an instance of
+        programatically or completely via an array or an instance of
         <classname>Zend_Config</classname>. The available options are:
     </para>
 

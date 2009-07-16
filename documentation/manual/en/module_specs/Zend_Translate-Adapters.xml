@@ -209,7 +209,7 @@
                 of already translated and pre translated source strings. When you
                 use this adapter you have to be sure that all your needed source
                 string are translated.
-                TBX is a XML file based format and a completly new format.
+                TBX is a XML file based format and a completely new format.
                 XML files are human-readable, but the parsing is not as fast
                 as with gettext files.
             </para>

@@ -277,7 +277,13 @@
 
     <chapter id="zend.ldap">
         <title>Zend_Ldap</title>
-        <xi:include href="module_specs/Zend_Ldap.xml" />
+        <xi:include href="module_specs/Zend_Ldap-Introduction.xml" />
+        <xi:include href="module_specs/Zend_Ldap-API.xml" />
+        <xi:include href="module_specs/Zend_Ldap-Usage.xml" />
+        <xi:include href="module_specs/Zend_Ldap-Tools.xml" />
+        <xi:include href="module_specs/Zend_Ldap-Node.xml" />
+        <xi:include href="module_specs/Zend_Ldap-Server.xml" />
+        <xi:include href="module_specs/Zend_Ldap-LDIF.xml" />
     </chapter>
 
     <chapter id="zend.loader">

@@ -577,6 +577,7 @@
     <xi:include href="ref/requirements.xml" />
     <xi:include href="ref/coding_standard.xml" />
     <xi:include href="ref/documentation-standard.xml" />
+    <xi:include href="ref/project-structure.xml" />
     <appendix id="performance">
         <title>Zend Framework Performance Guide</title>
         <xi:include href="ref/performance-introduction.xml" />

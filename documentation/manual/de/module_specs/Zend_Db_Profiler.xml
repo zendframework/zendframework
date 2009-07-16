@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15851 -->
+<!-- EN-Revision: 16458 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.profiler" xmlns:xi="http://www.w3.org/2001/XInclude">
 
@@ -129,8 +129,8 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
         <title>Den Profiler verwenden</title>
 
         <para>
-            Der Profiler kann jederzeit über die Adapter Methode <code>getProfiler()</code> geholt
-            werden:
+            Der Profiler kann jederzeit über die Adapter Methode
+            <methodname>getProfiler()</methodname> geholt werden:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -146,64 +146,67 @@ $profiler = $db->getProfiler();
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>getTotalNumQueries()</code> gibt die Gesamtzeit aller aufgezeichneten
-                    Abfragen zurück.
+                    <methodname>getTotalNumQueries()</methodname> gibt die Gesamtzeit aller
+                    aufgezeichneten Abfragen zurück.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>getTotalElapsedSecs()</code> gibt die gesamte Anzahl an Sekunden
-                    für alle aufgezeichneten Abfragen zurück.
+                    <methodname>getTotalElapsedSecs()</methodname> gibt die gesamte Anzahl an
+                    Sekunden für alle aufgezeichneten Abfragen zurück.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>getQueryProfiles()</code> gibt ein Array mit allen aufgezeichneten
-                    Abfragen zurück.
+                    <methodname>getQueryProfiles()</methodname> gibt ein Array mit allen
+                    aufgezeichneten Abfragen zurück.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>getLastQueryProfile()</code> gibt das Profil der letzten (neuesten)
-                    Abfrage zurück, gleichgültig ob die Abfrage beendet werden konnte oder nicht
-                    (wenn nicht, wird die Endzeit null sein)
+                    <methodname>getLastQueryProfile()</methodname> gibt das Profil der letzten
+                    (neuesten) Abfrage zurück, gleichgültig ob die Abfrage beendet werden konnte
+                    oder nicht (wenn nicht, wird die Endzeit null sein)
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>clear()</code> löscht jedes vorherige Abfrageprofile vom Stapel.
+                    <methodname>clear()</methodname> löscht jedes vorherige Abfrageprofile vom
+                    Stapel.
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
-            Der Rückgabewert von <code>getLastQueryProfile()</code> und die einzelnen Elemente von
-            <code>getQueryProfiles()</code> sind <classname>Zend_Db_Profiler_Query</classname>
-            Objekte, welche die Möglichkeit bieten, die individuellen Abfragen zu untersuchen:
+            Der Rückgabewert von <methodname>getLastQueryProfile()</methodname> und die einzelnen
+            Elemente von <methodname>getQueryProfiles()</methodname> sind
+            <classname>Zend_Db_Profiler_Query</classname> Objekte, welche die Möglichkeit bieten,
+            die individuellen Abfragen zu untersuchen:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>getQuery()</code> gibt den SQL Text der Abfrage zurück. Der SQL Text des
-                    vorbereiteten Statements mit Parametern ist der Text, zu der Zeit als die
-                    Abfrage vorbereitet wurde, er enthält also Platzhalter für Parameter, nicht die
-                    Werte die verwendet werden wenn das Statement ausgeführt wird.
+                    <methodname>getQuery()</methodname> gibt den SQL Text der Abfrage zurück. Der
+                    SQL Text des vorbereiteten Statements mit Parametern ist der Text, zu der Zeit
+                    als die Abfrage vorbereitet wurde, er enthält also Platzhalter für Parameter,
+                    nicht die Werte die verwendet werden wenn das Statement ausgeführt wird.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>getQueryParams()</code> gibt ein Array von Parameter Werten zurück die
-                    verwendet werden wenn eine vorbereitete Abfrage ausgeführt wird. Das beinhaltet
-                    beide, gebundene Parameter und Argumente für die <code>execute()</code> Methode
-                    des Statements. Die Schlüssel des Arrays sind die Positionierten (1-basierend)
-                    oder benannten (Zeichenkette) Parameter Indezes.
+                    <methodname>getQueryParams()</methodname> gibt ein Array von Parameter Werten
+                    zurück die verwendet werden wenn eine vorbereitete Abfrage ausgeführt wird. Das
+                    beinhaltet beide, gebundene Parameter und Argumente für die
+                    <methodname>execute()</methodname> Methode des Statements. Die Schlüssel des
+                    Arrays sind die Positionierten (1-basierend) oder benannten (Zeichenkette)
+                    Parameter Indezes.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>getElapsedSecs()</code> gibt die Anzahl der Sekunden zurück, wie lange
-                    die Abfrage gelaufen ist.
+                    <methodname>getElapsedSecs()</methodname> gibt die Anzahl der Sekunden zurück,
+                    wie lange die Abfrage gelaufen ist.
                 </para>
             </listitem>
         </itemizedlist>
@@ -265,9 +268,9 @@ echo "Longest query: \n" . $longestQuery . "\n";
             <title>Filtern anhand der Laufzeit der Abfragen</title>
 
             <para>
-                <code>setFilterElapsedSecs()</code> ermöglicht dem Entwickler, einen minimale
-                Laufzeit anzugeben, bevor eine Abfrage aufzeichnet werden soll. Um den Filter zu
-                entfernen, muss nur der Wert null an die Methode übergeben werden.
+                <methodname>setFilterElapsedSecs()</methodname> ermöglicht dem Entwickler, eine
+                minimale Laufzeit anzugeben, bevor eine Abfrage aufzeichnet werden soll. Um den
+                Filter zu entfernen, muss nur der Wert null an die Methode übergeben werden.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -283,9 +286,9 @@ $profiler->setFilterElapsedSecs(null);
             <title>Filtern anhand des Abfragetyp</title>
 
             <para>
-                <code>setFilterQueryType()</code> ermöglicht dem Entwickler anzugeben, welche
-                Abfragetypen aufgezeichnet werden sollen; um mehrere Typen aufzuzeichnen, verwende
-                das logische OR. Abfragetypen sind mit den folgenden
+                <methodname>setFilterQueryType()</methodname> ermöglicht dem Entwickler anzugeben,
+                welche Abfragetypen aufgezeichnet werden sollen; um mehrere Typen aufzuzeichnen,
+                verwende das logische OR. Abfragetypen sind mit den folgenden
                 <classname>Zend_Db_Profiler</classname> Konstanten definiert:
             </para>
 
@@ -336,8 +339,9 @@ $profiler->setFilterElapsedSecs(null);
             </itemizedlist>
 
             <para>
-                Mit <code>setFilterElapsedSecs()</code> kannst du jeden vorhandenen Filtern
-                entfernen, indem du <constant>NULL</constant> als einziges Argument übergibst.
+                Mit <methodname>setFilterElapsedSecs()</methodname> kannst du jeden vorhandenen
+                Filtern entfernen, indem du <constant>NULL</constant> als einziges Argument
+                übergibst.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -362,12 +366,12 @@ $profiler->setFilterQueryType(null);
             <title>Hole Profil nach Abfragetyp zurück</title>
 
             <para>
-                Die Verwendung von <code>setFilterQueryType()</code> kann die Anzahl der
-                aufgezeichneten Abfragen reduzieren. Allerdings kann es sinnvoller sein, alle
+                Die Verwendung von <methodname>setFilterQueryType()</methodname> kann die Anzahl
+                der aufgezeichneten Abfragen reduzieren. Allerdings kann es sinnvoller sein, alle
                 Abfragen auzuzeichnen, baer nur diese anzuschauen, die im Moment gebraucht werden.
-                Ein weiteres Feature von <code>getQueryProfiles()</code> ist das Filtern der
-                Abfragen "on-the-fly" durch Übergabe eines Abfragetyps (oder eine logischen
-                Kombination von Abfragetypen) als erstes Argument; beachte
+                Ein weiteres Feature von <methodname>getQueryProfiles()</methodname> ist das
+                Filtern der Abfragen "on-the-fly" durch Übergabe eines Abfragetyps (oder eine
+                logischen Kombination von Abfragetypen) als erstes Argument; beachte
                 <xref linkend="zend.db.profiler.advanced.filtertype" /> für eine Liste der
                 Konstanten für Abfragetypen.
             </para>

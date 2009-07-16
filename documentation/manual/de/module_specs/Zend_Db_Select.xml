@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16166 -->
+<!-- EN-Revision: 16458 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.select">
 
@@ -11,11 +11,11 @@
 
         <para>
             Das <classname>Zend_Db_Select</classname> Objekt repräsentiert ein SQL
-            <code>SELECT</code> Anfrage Statement. Die Klasse bietet Methoden um einzelne Teile der
-            Anfrage hinzuzufügen. Einzelne Teile der Anfrage können mit Hilfe von PHP Methoden und
-            Datenstrukturen angegeben werden, und die Klasse erzeugt korrekte SQL Syntax. Nachdem
-            die Anfrage formuliert wurde kann sie ausgeführt werden als wäre sie mit einem normalen
-            String geschrieben worden.
+            <acronym>SELECT</acronym> Anfrage Statement. Die Klasse bietet Methoden um einzelne
+            Teile der Anfrage hinzuzufügen. Einzelne Teile der Anfrage können mit Hilfe von PHP
+            Methoden und Datenstrukturen angegeben werden, und die Klasse erzeugt korrekte SQL
+            Syntax. Nachdem die Anfrage formuliert wurde kann sie ausgeführt werden als wäre sie
+            mit einem normalen String geschrieben worden.
         </para>
 
         <para>
@@ -52,11 +52,12 @@
 
         <para>
             Nutzung von <classname>Zend_Db_Select</classname> ist nicht zwingend erforderlich. Für
-            einfache SELECT Anfragen ist es normalerweise einfacher die gesamte SQL Anfrage in einem
-            String zu formulieren und mit Hilfe der Methoden der Adapterklasse, wie
-            <code>fetch()</code> oder <code>fetchAll()</code>, auszuführen. Die Nutzung von
-            <classname>Zend_Db_Select</classname> ist hilfreich wenn eine SELECT Anfrage prozedural
-            oder basierend auf der konditionellen Logik der Anwendung zusammengesetzt wird.
+            einfache SELECT Anfragen ist es normalerweise einfacher die gesamte SQL Anfrage in
+            einem String zu formulieren und mit Hilfe der Methoden der Adapterklasse, wie
+            <methodname>query()</methodname> oder <methodname>fetchAll()</methodname>, auszuführen.
+            Die Nutzung von <classname>Zend_Db_Select</classname> ist hilfreich wenn eine SELECT
+            Anfrage prozedural oder basierend auf der konditionellen Logik der Anwendung
+            zusammengesetzt wird.
         </para>
 
     </sect2>
@@ -67,8 +68,8 @@
 
         <para>
             Die Instanz eines <classname>Zend_Db_Select</classname> Objekts kann mit Hilfe der
-            <code>select()</code> Methode des <classname>Zend_Db_Adapter_Abstract</classname>
-            Objekts erzeugt werden.
+            <methodname>select()</methodname> Methode des
+            <classname>Zend_Db_Adapter_Abstract</classname> Objekts erzeugt werden.
         </para>
 
         <example id="zend.db.select.creating.example-db">
@@ -162,8 +163,8 @@ $select = $db->select()
             <title>Hinzufügen eines FROM Abschnitts</title>
 
             <para>
-                Um die Tabelle für die Anfrage an zu geben wird die <code>from()</code> Methode
-                verwendet. Der Tabellenname kann als einfacher String übergeben werden.
+                Um die Tabelle für die Anfrage an zu geben wird die <methodname>from()</methodname>
+                Methode verwendet. Der Tabellenname kann als einfacher String übergeben werden.
                 <classname>Zend_Db_Select</classname> wendet Bezeichner Quotierung an, es können
                 also auch spezielle Zeichen verwendet werden.
             </para>
@@ -243,14 +244,15 @@ $select = $db->select()
             <title>Hinzufügen von Spalten</title>
 
             <para>
-                Im zweiten Argument der <code>from()</code> Methode kann angegeben werden, welche
-                Spalten der Tabelle ausgelesen werden sollen. Werden keine Spalten angegeben, so
-                gilt der Standardwert <code>*</code>, der SQL Platzhalter für alle Spalten.
+                Im zweiten Argument der <methodname>from()</methodname> Methode kann angegeben
+                werden, welche Spalten der Tabelle ausgelesen werden sollen. Werden keine
+                Spalten angegeben, so gilt der Standardwert <code>*</code>, der SQL Platzhalter
+                für alle Spalten.
             </para>
 
             <para>
                 Die Spalten können in einem einfachen Array von Strings oder einem assoziativen
-                Array, in dem Aliasnamen a Spaltennamen zugewiesen werden, angegeben werden. Soll
+                Array, in dem Aliasnamen den Spaltennamen zugewiesen werden, angegeben werden. Soll
                 nur eine einzelne Spalte ohne Aliasnamen ausgelesen werden, so kann auch ein
                 einfacher String übergeben werden.
             </para>
@@ -259,14 +261,14 @@ $select = $db->select()
                 Wird ein leeres Array übergeben, so werden auch keine Spalten der Tabelle in den
                 Ergebnissatz aufgenommen. Ein Codebeispiel gibt es unter
                 <link linkend="zend.db.select.building.join.example-no-columns">code example</link>
-                bei der <code>join()</code> Methode.
+                bei der <methodname>join()</methodname> Methode.
             </para>
 
             <para>
                 Der Spaltenname kann mit "<code>beziehungsName.spaltenName</code>" angegeben
                 werden. <classname>Zend_Db_Select</classname> Quotiert die einzelnen Teile für sich.
                 Wird kein Beziehungsname für die Spalte angegeben, dann wird der Beziehungsname der
-                Tabelle der aktuellen <code>from()</code> Methode verwendet.
+                Tabelle der aktuellen <methodname>from()</methodname> Methode verwendet.
             </para>
 
             <example id="zend.db.select.building.columns.example">
@@ -380,20 +382,22 @@ $select = $db->select()
 
             <para>
                 Wenn die Spaltennamen aus SQL Schlüsselwörtern besteht oder spezielle Zeichen
-                enthält sollte die <code>quoteIdentifier()</code> Methode verwendet werden und der
-                Rückgabewert in den String eingefügt werden. Die <code>quoteIdentifier()</code>
-                Methode verwendet SQL Quotierung um Bezeichner abzugrenzen, wodurch klar wird, das
-                es sich um einen Bezeichner für eine Tabelle oder Spalte handelt, und nicht um
-                einem anderen Teil der SQL Syntax.
+                enthält sollte die <methodname>quoteIdentifier()</methodname> Methode verwendet
+                werden und der Rückgabewert in den String eingefügt werden. Die
+                <methodname>quoteIdentifier()</methodname> Methode verwendet SQL Quotierung um
+                Bezeichner abzugrenzen, wodurch klar wird, das es sich um einen Bezeichner für eine
+                Tabelle oder Spalte handelt, und nicht um einem anderen Teil der SQL Syntax.
             </para>
 
             <para>
-                Der Code wird Datenbank unabhängiger wenn die <code>quoteIdentifier()</code>
-                Methode anstelle von direkter Eingabe der Quotierungszeichen verwendet wird, da
-                einige RDBMS Marken nicht-Standard Symbole für die Quotierung von Bezeichnern
-                verwenden. Die <code>quoteIdentifier()</code> Methode wählt die passenden
-                Quotierungssymbole für den Adaptertyp aus. Die <code>quoteIdentifier()</code>
-                Methode ersetzt außerdem alle Quotierungszeichen innerhalb des Bezeichners.
+                Der Code wird Datenbank unabhängiger wenn die
+                <methodname>quoteIdentifier()</methodname> Methode anstelle von direkter Eingabe
+                der Quotierungszeichen verwendet wird, da einige RDBMS Marken nicht-Standard
+                Symbole für die Quotierung von Bezeichnern verwenden. Die
+                <methodname>quoteIdentifier()</methodname> Methode wählt die passenden
+                Quotierungssymbole für den Adaptertyp aus. Die
+                <methodname>quoteIdentifier()</methodname> Methode ersetzt außerdem alle
+                Quotierungszeichen innerhalb des Bezeichners.
             </para>
 
             <example id="zend.db.select.building.columns-quoteid.example">
@@ -424,12 +428,12 @@ $select = $db->select()
             <para>
                 Es kann Fälle geben wo es gewünscht ist Spalten zu einer bestehenden FROM oder JOIN
                 Tabelle hinzuzufügen nachdem diese Methoden aufgerufen wurde. Die
-                <code>columns()</code> Methode erlaubt es spezifische Spalten an jedem Punkt
-                hinzuzufügen bevor die Abfrage aufgeführt wird. Die Spalte kann entweder als String
-                oder <classname>Zend_Db_Expr</classname> oder als Array dieser Elemente angegeben
-                werden. Das zweite Argument dieser Methode kann unterdrückt werden, was impliziert
-                das die Spalten zu der FROM Tabelle hinzugefügt werden sollen, andernfall muß ein
-                bestehender Korrelationsname verwendet werden.
+                <methodname>columns()</methodname> Methode erlaubt es spezifische Spalten an jedem
+                Punkt hinzuzufügen bevor die Abfrage aufgeführt wird. Die Spalte kann entweder als
+                String oder <classname>Zend_Db_Expr</classname> oder als Array dieser Elemente
+                angegeben werden. Das zweite Argument dieser Methode kann unterdrückt werden, was
+                impliziert das die Spalten zu der FROM Tabelle hinzugefügt werden sollen,
+                andernfall muß ein bestehender Korrelationsname verwendet werden.
             </para>
 
             <example id="zend.db.select.building.columns-atomic.example">
@@ -464,12 +468,12 @@ $select = $db->select()
             <title>Hinzufügen einer weiteren Tabelle zu der Anfrage mit JOIN</title>
 
             <para>
-                Viele nützliche Anfragen benötigen ein <code>JOIN</code> um mehrere Spalten
+                Viele nützliche Anfragen benötigen ein <acronym>JOIN</acronym> um mehrere Spalten
                 verschiedener Tabellen miteinander zu kombinieren. Tabellen können zu einer
-                <classname>Zend_Db_Select</classname> Anfrage mit der <code>join()</code> Methode
-                hinzugefügt werden. Die Nutzung dieser Methode ist ähnlich der <code>from()</code>
-                Methode, außer das in den meisten Fällen zusätzlich eine Join Bedingung angegeben
-                werden kann.
+                <classname>Zend_Db_Select</classname> Anfrage mit der
+                <methodname>join()</methodname> Methode hinzugefügt werden. Die Nutzung dieser
+                Methode ist ähnlich der <methodname>from()</methodname> Methode, außer das in den
+                meisten Fällen zusätzlich eine Join Bedingung angegeben werden kann.
             </para>
 
             <example id="zend.db.select.building.join.example">
@@ -492,9 +496,9 @@ $select = $db->select()
             </example>
 
             <para>
-                Das zweite Argument der <code>join()</code> Methode ist ein String mit der Join
-                Bedingung. Dies ist eine Exspression die Kriterien angibt, welche Zeilen in der
-                einen Tabelle mit Zeilen einer anderen Tabelle verknüpft werden. Es können
+                Das zweite Argument der <methodname>join()</methodname> Methode ist ein String mit
+                der Join Bedingung. Dies ist eine Exspression die Kriterien angibt, welche Zeilen
+                in der einen Tabelle mit Zeilen einer anderen Tabelle verknüpft werden. Es können
                 Beziehungsnamen in dieser Expression verwendet werden.
             </para>
 
@@ -503,26 +507,26 @@ $select = $db->select()
                 <para>
                     Es wird keine Quotierung auf die Expression für die Join Bedingung angewendet.
                     Werden Spaltennamen verwendet, welche Quotierung benötigen, so muss
-                    <code>quoteIdentifier()</code> verwendet werden wenn der String für die Join
-                    Bedingung formuliert wird.
+                    <methodname>quoteIdentifier()</methodname> verwendet werden wenn der String für
+                    die Join Bedingung formuliert wird.
                 </para>
 
             </note>
 
             <para>
-                Das dritte Argument für <code>join()</code> ist ein Array von Spaltennahmen,
-                entsprechend des Arrays der <code>from()</code> Methode. Der Standard ist ebenfalls
-                "<code>*</code>" und unterstützt Beziehungsnamen, Expressions und
-                <classname>Zend_Db_Expr</classname> in der gleichen Weise wie dem Array von
-                Spaltennamen der <code>from()</code> Methode.
+                Das dritte Argument für <methodname>join()</methodname> ist ein Array von
+                Spaltennahmen, entsprechend des Arrays der <methodname>from()</methodname> Methode.
+                Der Standard ist ebenfalls "<code>*</code>" und unterstützt Beziehungsnamen,
+                Expressions und <classname>Zend_Db_Expr</classname> in der gleichen Weise wie dem
+                Array von Spaltennamen der <methodname>from()</methodname> Methode.
             </para>
 
             <para>
                 Wenn keine Spalten einer Tabelle ausgewählt werden soll muss ein leeres Array für
                 die Liste der Spaltennamen übergeben werden. Diese Nutzung funktioniert ebenfalls
-                in der <code>from()</code> Methode, aber normalerweise werden einige Spalten der
-                primären Tabelle in den Anfragen benötigt, während möglicherweise keine Spalten der
-                verbundenen Tabelle ausgewählt werden sollen.
+                in der <methodname>from()</methodname> Methode, aber normalerweise werden einige
+                Spalten der primären Tabelle in den Anfragen benötigt, während möglicherweise keine
+                Spalten der verbundenen Tabelle ausgewählt werden sollen.
             </para>
 
             <example id="zend.db.select.building.join.example-no-columns">
@@ -544,8 +548,8 @@ $select = $db->select()
 ]]></programlisting>
 
                 <para>
-                    Zu beachten ist das leere <code>array()</code> in dem oben stehenden Beispiel,
-                    am Stelle einer Liste von Spalten der verbundenen Tabelle.
+                    Zu beachten ist das leere <methodname>array()</methodname> in dem oben
+                    stehenden Beispiel, am Stelle einer Liste von Spalten der verbundenen Tabelle.
                 </para>
 
             </example>
@@ -560,8 +564,8 @@ $select = $db->select()
                 <listitem>
                     <para>
                         <command>INNER JOIN</command> mit den
-                        <code>join(tabelle, join, [spalten])</code> oder
-                        <code>joinInner(tabelle, join, [spalten])</code> Methoden.
+                        <methodname>join(tabelle, join, [spalten])</methodname> oder
+                        <methodname>joinInner(tabelle, join, [spalten])</methodname> Methoden.
                     </para>
 
                     <para>
@@ -579,7 +583,7 @@ $select = $db->select()
                 <listitem>
                     <para>
                         <command>LEFT JOIN</command> mit der
-                        <code>joinLeft(tabelle, bedingung, [spalten])</code> Methode.
+                        <methodname>joinLeft(tabelle, bedingung, [spalten])</methodname> Methode.
                     </para>
 
                     <para>
@@ -597,7 +601,7 @@ $select = $db->select()
                 <listitem>
                     <para>
                         <command>RIGHT JOIN</command> mit der
-                        <code>joinRight(tabelle, bedingung, [spalten])</code> Methode.
+                        <methodname>joinRight(tabelle, bedingung, [spalten])</methodname> Methode.
                     </para>
 
                     <para>
@@ -618,7 +622,7 @@ $select = $db->select()
                 <listitem>
                     <para>
                         <command>FULL JOIN</command> mit der
-                        <code>joinFull(tabelle, bedingung, [spalten])</code> Methode.
+                        <methodname>joinFull(tabelle, bedingung, [spalten])</methodname> Methode.
                     </para>
 
                     <para>
@@ -637,7 +641,7 @@ $select = $db->select()
                 <listitem>
                     <para>
                         <command>CROSS JOIN</command> mit der
-                        <code>joinCross(tabelle, [spalten])</code> Methode.
+                        <methodname>joinCross(tabelle, [spalten])</methodname> Methode.
                     </para>
 
                     <para>
@@ -649,15 +653,15 @@ $select = $db->select()
                     </para>
 
                     <para>
-                        Die <code>joinCross()</code> Methode hat keinen Parameter für die Join
-                        Bedingung. Einige RDBMS Marken unterstützen diesen Join Typ nicht.
+                        Die <methodname>joinCross()</methodname> Methode hat keinen Parameter für
+                        die Join Bedingung. Einige RDBMS Marken unterstützen diesen Join Typ nicht.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
                         <command>NATURAL JOIN</command> mit der
-                        <code>joinNatural(tabelle, [spalten])</code> Methode.
+                        <methodname>joinNatural(tabelle, [spalten])</methodname> Methode.
                     </para>
 
                     <para>
@@ -669,8 +673,8 @@ $select = $db->select()
                     </para>
 
                     <para>
-                        Die <code>joinNatural()</code> Methode hat keinen Parameter für die Join
-                        Bedingung.
+                        Die <methodname>joinNatural()</methodname> Methode hat keinen Parameter für
+                        die Join Bedingung.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -711,26 +715,26 @@ $select = $db->select()
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>joinUsing(table, join, [columns])</code> und
-                        <code>joinInnerUsing(table, join, [columns])</code>
+                        <methodname>joinUsing(table, join, [columns])</methodname> und
+                        <methodname>joinInnerUsing(table, join, [columns])</methodname>
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>joinLeftUsing(table, join, [columns])</code>
+                        <methodname>joinLeftUsing(table, join, [columns])</methodname>
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>joinRightUsing(table, join, [columns])</code>
+                        <methodname>joinRightUsing(table, join, [columns])</methodname>
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>joinFullUsing(table, join, [columns])</code>
+                        <methodname>joinFullUsing(table, join, [columns])</methodname>
                     </para>
                 </listitem>
             </itemizedlist>
@@ -742,9 +746,10 @@ $select = $db->select()
             <title>Hinzufügen eines WHERE Abschnitts</title>
 
             <para>
-                Es können Kriterien die den Ergebnissatz einschränken mit der <code>where()</code>
-                Methode angegeben werden. Das erste Argument dieser Methode ist eine SQL
-                Expression, welche im <code>WHERE</code> Abschnitt der Anfrage steht.
+                Es können Kriterien die den Ergebnissatz einschränken mit der
+                <methodname>where()</methodname> Methode angegeben werden. Das erste Argument
+                dieser Methode ist eine SQL Expression, welche im <acronym>WHERE</acronym>
+                Abschnitt der Anfrage steht.
             </para>
 
             <example id="zend.db.select.building.where.example">
@@ -768,20 +773,20 @@ $select = $db->select()
             <note>
 
                 <para>
-                    Auf Expressions die an <code>where()</code> oder <code>orWhere()</code>
-                    Methoden übergeben werden, wird keine Quotierung angewendet. Werden
-                    Spaltennamen verwendet die Quotiert werden müssen, so muss
-                    <code>quoteIdentifier()</code> verwendet werden wenn der String für die
-                    Bedingung formuliert wird.
+                    Auf Expressions die an <methodname>where()</methodname> oder
+                    <methodname>orWhere()</methodname> Methoden übergeben werden, wird keine
+                    Quotierung angewendet. Werden Spaltennamen verwendet die Quotiert werden
+                    müssen, so muss <methodname>quoteIdentifier()</methodname> verwendet werden
+                    wenn der String für die Bedingung formuliert wird.
                 </para>
 
             </note>
 
             <para>
-                Das zweite Argument der <code>where()</code> Methode ist optional. Es ist ein Wert
-                der in die Expression eingesetzt wird. <classname>Zend_Db_Select</classname>
-                Quotiert den Wert und ersetzt ihn für ein Fragezeichen ("<code>?</code>") in der
-                Expression.
+                Das zweite Argument der <methodname>where()</methodname> Methode ist optional. Es
+                ist ein Wert der in die Expression eingesetzt wird.
+                <classname>Zend_Db_Select</classname> Quotiert den Wert und ersetzt ihn für ein
+                Fragezeichen ("<code>?</code>") in der Expression.
             </para>
 
             <para>
@@ -810,10 +815,10 @@ $select = $db->select()
             </example>
 
             <para>
-                Die <code>where()</code> Methode kann mehrere Male in dem selben
+                Die <methodname>where()</methodname> Methode kann mehrere Male in dem selben
                 <classname>Zend_Db_Select</classname> Objekt aufgerufen werden. Die daraus folgenden
                 Anfrage kombiniert die unterschiedlichen Ausdrücke unter Benutzung von
-                <code>AND</code> zwischen ihnen.
+                <acronym>AND</acronym> zwischen ihnen.
             </para>
 
             <example id="zend.db.select.building.where.example-and">
@@ -840,10 +845,11 @@ $select = $db->select()
             </example>
 
             <para>
-                Wenn mehrere Ausdrücke mit <code>OR</code> verknüpft werden sollen kann die
-                <code>orWhere()</code> Methode verwendet werden. Sie wird genauso benutzt wie
-                die <code>where()</code> Methode, außer das dem angegebene Ausdruck ein
-                <code>OR</code> vorangestellt wird, anstelle eines <code>AND</code>.
+                Wenn mehrere Ausdrücke mit <acronym>OR</acronym> verknüpft werden sollen kann die
+                <methodname>orWhere()</methodname> Methode verwendet werden. Sie wird genauso
+                benutzt wie die <methodname>where()</methodname> Methode, außer das dem angegebene
+                Ausdruck ein <acronym>OR</acronym> vorangestellt wird, anstelle eines
+                <acronym>AND</acronym>.
             </para>
 
             <example id="zend.db.select.building.where.example-or">
@@ -871,9 +877,10 @@ $select = $db->select()
 
             <para>
                 <classname>Zend_Db_Select</classname> klammert Expressions automatisch mit runden
-                Klammern ein wenn sie mit der <code>where()</code> oder <code>orWhere()</code>
-                Methode angegeben wurden. Dies hilft sicher zu stellen dass das voranstellen von
-                Boolean Operatoren keine unerwarteten Ergebnisse nach sich zieht.
+                Klammern ein wenn sie mit der <methodname>where()</methodname> oder
+                <methodname>orWhere()</methodname> Methode angegeben wurden. Dies hilft sicher zu
+                stellen dass das voranstellen von Boolean Operatoren keine unerwarteten Ergebnisse
+                nach sich zieht.
             </para>
 
             <example id="zend.db.select.building.where.example-parens">
@@ -902,10 +909,11 @@ $select = $db->select()
 
             <para>
                 In dem oben stehenden Beispiel währen die Ergebnisse ohne den Klammern ziemlich
-                anders, weil <code>AND</code> eine höhere Priorität als <code>OR</code> hat.
-                <classname>Zend_Db_Select</classname> erzeugt runde Klammern wodurch jede Expression
-                von aufeinander folgenden Aufrufen der <code>where()</code> Methode fester binden
-                als das <code>AND</code> welches die Expressions kombiniert.
+                anders, weil <acronym>AND</acronym> eine höhere Priorität als <acronym>OR</acronym>
+                hat. <classname>Zend_Db_Select</classname> erzeugt runde Klammern wodurch jede
+                Expression von aufeinander folgenden Aufrufen der <methodname>where()</methodname>
+                Methode fester binden als das <acronym>AND</acronym> welches die Expressions
+                kombiniert.
             </para>
 
         </sect3>
@@ -915,16 +923,16 @@ $select = $db->select()
             <title>Hinzufügen eines GROUP BY Abschnitts</title>
 
             <para>
-                In SQL ermöglicht der <code>GROUP BY</code> Abschnitt die Zeilenzahl des
+                In SQL ermöglicht der <command>GROUP BY</command> Abschnitt die Zeilenzahl des
                 Ergebnissatzes auf eine Zeile pro eindeutigem Wert der Spalte(n), welche in dem
-                <code>GROUP BY</code> Abschnitt benannt sind, einzuschränken.
+                <command>GROUP BY</command> Abschnitt benannt sind, einzuschränken.
             </para>
 
             <para>
                 In <classname>Zend_Db_Select</classname> können diese Spalte(n) mit der
-                <code>group()</code> Methode angegeben werden. Das Argument der Methode ist ein
-                Spaltenname oder ein Array von Spaltennamen, welche im <code>GROUP BY</code>
-                Abschnitt stehen sollen.
+                <methodname>group()</methodname> Methode angegeben werden. Das Argument der Methode
+                ist ein Spaltenname oder ein Array von Spaltennamen, welche im
+                <command>GROUP BY</command> Abschnitt stehen sollen.
             </para>
 
             <example id="zend.db.select.building.group.example">
@@ -950,10 +958,10 @@ $select = $db->select()
             </example>
 
             <para>
-                Wie in dem Array von Spaltennamen der <code>from()</code> Methode, so können auch
-                hier Beziehungsnamen in den Strings der Spaltennamen verwendet werden, und der
-                Spaltenname wird als Bezeichner Quotiert, wenn er nicht in runden Klammern steht
-                oder ein Objekt des Typs <classname>Zend_Db_Expr</classname> ist.
+                Wie in dem Array von Spaltennamen der <methodname>from()</methodname> Methode, so
+                können auch hier Beziehungsnamen in den Strings der Spaltennamen verwendet werden,
+                und der Spaltenname wird als Bezeichner Quotiert, wenn er nicht in runden Klammern
+                steht oder ein Objekt des Typs <classname>Zend_Db_Expr</classname> ist.
             </para>
 
         </sect3>

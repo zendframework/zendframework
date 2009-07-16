@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16458 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.translate.using">
 
@@ -163,7 +163,7 @@ print $translate->_(2) . "\n";
                     Einzeln strukturierte Quellen
                 </para>
 
-                <programlisting><![CDATA[
+                <programlisting language="txt"><![CDATA[
 /application/
 /languages/
 /languages/lang.en
@@ -181,7 +181,7 @@ print $translate->_(2) . "\n";
                     Sprachlich stukturierte Quellen
                 </para>
 
-                <programlisting><![CDATA[
+                <programlisting language="txt"><![CDATA[
 /application/
 /languages/
 /languages/en/
@@ -205,7 +205,7 @@ print $translate->_(2) . "\n";
                     Applikations strukturierte Quellen
                 </para>
 
-                <programlisting><![CDATA[
+                <programlisting language="txt"><![CDATA[
 /application/
 /application/languages/
 /application/languages/first.en
@@ -230,7 +230,7 @@ print $translate->_(2) . "\n";
                     Gettext strukturierte Quellen
                 </para>
 
-                <programlisting><![CDATA[
+                <programlisting language="txt"><![CDATA[
 /application/
 /languages/
 /languages/de/
@@ -259,7 +259,7 @@ print $translate->_(2) . "\n";
                     Datei strukturierte Quellen
                 </para>
 
-                <programlisting><![CDATA[
+                <programlisting language="txt"><![CDATA[
 /application/
 /application/models/
 /application/models/MyModel.php
@@ -475,7 +475,7 @@ $translate = new Zend_Translate('tmx', 'path/to/mytranslation.tmx', 'en');
 
         <example id="zend.translate.using.source.csv.example">
             <title>Beispiel CSV Datei</title>
-            <programlisting><![CDATA[
+            <programlisting language="txt"><![CDATA[
 ﻿#Example csv file
 message1;Nachricht1
 message2;Nachricht2
@@ -514,7 +514,7 @@ $translate->addTranslation('/path/to/other.csv', 'fr');
 
         <example id="zend.translate.using.source.csv.example2">
             <title>Zweites Beispiel für CSV Dateien</title>
-            <programlisting><![CDATA[
+            <programlisting language="txt"><![CDATA[
 ﻿# Example CSV file
 "message,1",Nachricht1
 message2,"Nachricht,2"
@@ -546,7 +546,7 @@ $translate->addTranslation('/path/to/other.csv', 'fr');
 
         <example id="zend.translate.using.source.ini.example">
             <title>Beispiel einer INI Datei</title>
-            <programlisting><![CDATA[
+            <programlisting language="txt"><![CDATA[
 [Test]
 ;TestPage Comment
 Message_1="Nachricht 1 (de)"
@@ -564,10 +564,11 @@ $translate->addTranslation('/path/to/other.ini', 'it');
             INI Dateien haben diverse Einschränkungen. Wenn ein Wert in einer INI Datei irgendein
             nicht alphanummerisches Zeichen enthält, muß er in doppelte Anführungszeichen
             (<code>"</code>) eingeklammert werden. Es gibt auch reservierte Wörter welche nicht als
-            Schlüssel für INI Dateien verwendet werden dürfen. Diese enthalten: <constant>NULL</constant>,
-            <code>yes</code>, <code>no</code>, <constant>TRUE</constant> und <constant>FALSE</constant>. Die Werte
-            <constant>NULL</constant>, <code>no</code> und <constant>FALSE</constant> führen zu <code>""</code>,
-            <code>yes</code> und <constant>TRUE</constant> resultieren in <code>1</code>. Die Zeichen
+            Schlüssel für INI Dateien verwendet werden dürfen. Diese enthalten:
+            <constant>NULL</constant>, <code>yes</code>, <code>no</code>, <constant>TRUE</constant>
+            und <constant>FALSE</constant>. Die Werte <constant>NULL</constant>, <code>no</code>
+            und <constant>FALSE</constant> führen zu <code>""</code>, <code>yes</code> und
+            <constant>TRUE</constant> resultieren in <code>1</code>. Die Zeichen
             <code>{}|&amp;~![()"</code> dürfen nirgendwo im Schlüssel verwendet werden und haben im
             Wert eine spezielle Bedeutung. Diese sollten nicht verwendet werden da Sie zu
             unerwartetem Verhalten führen.
@@ -785,8 +786,8 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
 
         <para>
             Die <code>isAvailable()</code> Methode prüft ob eine angegebene Sprache bereits
-            vorhanden ist. Es wird <constant>TRUE</constant> zurückgegeben wenn Daten für die angegebene
-            Sprache existieren.
+            vorhanden ist. Es wird <constant>TRUE</constant> zurückgegeben wenn Daten für die
+            angegebene Sprache existieren.
         </para>
 
         <para>
@@ -1085,7 +1086,7 @@ $translate = new Zend_Translate(
                     nur praktikabel wenn man nur eine Datei pro Verzeichnis verwendet.
                 </para>
 
-                <programlisting><![CDATA[
+                <programlisting language="txt"><![CDATA[
 /languages/
 /languages/en.mo
 /languages/de.mo
@@ -1104,7 +1105,7 @@ $translate = new Zend_Translate(
                     welche Erweiterung die Datei ursprünglich hatte.
                 </para>
 
-                <programlisting><![CDATA[
+                <programlisting language="txt"><![CDATA[
 /languages/
 /languages/view.en
 /languages/view.de
@@ -1125,7 +1126,7 @@ $translate = new Zend_Translate(
                     Bindestrich '-'.
                 </para>
 
-                <programlisting><![CDATA[
+                <programlisting language="txt"><![CDATA[
 /languages/
 /languages/view_en.mo -> erkennt englisch
 /languages/view_de.mo -> erkennt deutsch
@@ -1138,7 +1139,7 @@ $translate = new Zend_Translate(
                     Beispiel für Details.
                 </para>
 
-                <programlisting><![CDATA[
+                <programlisting language="txt"><![CDATA[
 /languages/
 /languages/view_en_de.mo -> erkennt englisch
 /languages/view_en_es.mo -> erkennt englisch und überschreibt die erste Datei
@@ -1152,7 +1153,7 @@ $translate = new Zend_Translate(
                     Siehe das folgende Beispiel für Details.
                 </para>
 
-                <programlisting><![CDATA[
+                <programlisting language="txt"><![CDATA[
 /languages/
 /languages/view_en-it.mo -> erkennt englisch weil '_' vor '-' verwendet wird
 /languages/view-en_it.mo -> erkennt italienisch weil '_' vor '-' verwendet wird

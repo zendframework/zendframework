@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16771 -->
+<!-- EN-Revision: 16772 -->
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
     "@DOCBOOK_DTD@"
 [
@@ -175,6 +175,9 @@
         <xi:include href="module_specs/Zend_Db_Table_Row.xml" />
         <xi:include href="module_specs/Zend_Db_Table_Rowset.xml" />
         <xi:include href="module_specs/Zend_Db_Table-Relationships.xml" />
+        <xi:include href="module_specs/Zend_Db_Table_Definition.xml">
+            <xi:fallback><xi:include href="../en/module_specs/Zend_Db_Table_Definition.xml" /></xi:fallback>
+        </xi:include>
     </chapter>
 
     <chapter id="zend.debug">

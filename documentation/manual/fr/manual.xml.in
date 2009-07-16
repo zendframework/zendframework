@@ -465,6 +465,11 @@
                 <xi:include href="../en/module_specs/Zend_Dojo-Form.xml" parse="xml" />
             </xi:fallback>
         </xi:include>
+        <xi:include href="module_specs/Zend_Dojo-BuildLayers.xml" parse="xml" >
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Dojo-BuildLayers.xml" parse="xml" />
+            </xi:fallback>
+        </xi:include>
     </chapter>
 
     <chapter id="zend.dom">
@@ -530,6 +535,11 @@
         <xi:include href="module_specs/Zend_Feed-CustomFeed.xml">
             <xi:fallback>
                 <xi:include href="../en/module_specs/Zend_Feed-CustomFeed.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Feed_Reader.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Feed_Reader.xml" />
             </xi:fallback>
         </xi:include>
     </chapter>
@@ -1143,6 +1153,40 @@
         </xi:include>
     </chapter>
 
+    <chapter id="zend.queue">
+        <title>Zend_Queue</title>
+        <xi:include href="module_specs/Zend_Queue-Introduction.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Queue-Introduction.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Queue-Example.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Queue-Example.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Queue-Framework.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Queue-Framework.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Queue-Adapters.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Queue-Adapters.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Queue-Custom.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Queue-Custom.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Queue-Stomp.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Queue-Stomp.xml" />
+            </xi:fallback>
+        </xi:include>
+    </chapter>
+
     <chapter id="zend.reflection">
         <title>Zend_Reflection</title>
         <xi:include href="module_specs/Zend_Reflection-Introduction.xml">
@@ -1285,6 +1329,21 @@
                 <xi:include href="../en/module_specs/Zend_Service_Amazon_Ec2-Instance.xml" />
             </xi:fallback>
         </xi:include>
+        <xi:include href="module_specs/Zend_Service_Amazon_Ec2-WindowsInstance.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Service_Amazon_Ec2-WindowsInstance.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Service_Amazon_Ec2-ReservedInstance.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Service_Amazon_Ec2-ReservedInstance.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Service_Amazon_Ec2-CloudWatch.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Service_Amazon_Ec2-CloudWatch.xml" />
+            </xi:fallback>
+        </xi:include>
         <xi:include href="module_specs/Zend_Service_Amazon_Ec2-Image.xml">
             <xi:fallback>
                 <xi:include href="../en/module_specs/Zend_Service_Amazon_Ec2-Image.xml" />
@@ -1318,6 +1377,11 @@
         <xi:include href="module_specs/Zend_Service_Amazon_S3.xml">
             <xi:fallback>
                 <xi:include href="../en/module_specs/Zend_Service_Amazon_S3.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Service_Amazon_Sqs.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Service_Amazon_Sqs.xml" />
             </xi:fallback>
         </xi:include>
         <xi:include href="module_specs/Zend_Service_Audioscrobbler.xml">

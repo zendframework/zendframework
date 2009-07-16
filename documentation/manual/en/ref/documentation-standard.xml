@@ -22,12 +22,12 @@
             </para>
 
             <para>
-                You may adopt and/or modify these standards in accordance with the terms of our 
+                You may adopt and/or modify these standards in accordance with the terms of our
                 <ulink url="http://framework.zend.com/license">license</ulink>.
             </para>
 
             <para>
-                Topics covered in the ZF documentation standards include documentation file 
+                Topics covered in the ZF documentation standards include documentation file
                 formatting and recommendations for documentation quality.
             </para>
         </sect2>
@@ -40,22 +40,23 @@
             <title>XML Tags</title>
 
             <para>
-                Each manual file must include the following XML declarations at the top of the file:
+                Each manual file must include the following <acronym>XML</acronym> declarations at
+                the top of the file:
             </para>
 
             <programlisting language="xml"><![CDATA[
-<?xml version="1.0" encoding="UTF-8"?> 
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 ]]></programlisting>
 
             <para>
-                XML files from translated languages must also include a revision tag containing 
-                the revision of the corresponding English-language file the translation was based 
-                on.
+                <acronym>XML</acronym> files from translated languages must also include a revision
+                tag containing the revision of the corresponding English-language file the
+                translation was based on.
             </para>
 
             <programlisting language="xml"><![CDATA[
-<?xml version="1.0" encoding="UTF-8"?> 
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- EN-Revision: 14978 -->
 <!-- Reviewed: no -->
 ]]></programlisting>
@@ -65,8 +66,8 @@
             <title>Maximum Line Length</title>
 
             <para>
-                The maximum line length, including tags, attributes, and indentation, is not to 
-                exceed 100 characters. There is only one exception to this rule: attribute/value 
+                The maximum line length, including tags, attributes, and indentation, is not to
+                exceed 100 characters. There is only one exception to this rule: attribute/value
                 pairs are allowed to exceed the 100 chars as they are not allowed to be seperated.
             </para>
         </sect2>
@@ -99,7 +100,7 @@
 ]]></programlisting>
 
             <para>
-                Multiple block tags within the same line are not allowed; multiple inline tags are 
+                Multiple block tags within the same line are not allowed; multiple inline tags are
                 allowed, however.
             </para>
 
@@ -125,9 +126,9 @@
             </para>
 
             <para>
-                Note: Do not use carriage returns (CR) as is the convention in Apple OS's (0x0D) or
-                the carriage return - linefeed combination (CRLF) as is standard for the Windows
-                OS (0x0D, 0x0A).
+                Note: Do not use carriage returns (<acronym>CR</acronym>) as is the convention in
+                Apple OS's (0x0D) or the carriage return - linefeed combination
+                (<acronym>CRLF</acronym>) as is standard for the Windows OS (0x0D, 0x0A).
             </para>
         </sect2>
 
@@ -156,7 +157,7 @@
                 <title>Whitespace within tags</title>
 
                 <para>
-                    Opening block tags should have no whitespace immediately following them other 
+                    Opening block tags should have no whitespace immediately following them other
                     than line breaks (and indentation on the following line).
                 </para>
 
@@ -179,7 +180,7 @@ This is the class <classname>Zend_Class</classname>.
 ]]></programlisting>
 
                 <para>
-                    Closing block tags may be preceded by whitespace equivalent to the current 
+                    Closing block tags may be preceded by whitespace equivalent to the current
                     indentation level, but no more than that amount.
                 </para>
 
@@ -242,7 +243,7 @@ This is the class <classname>Zend_Class</classname>
                 <title>Separation between tags</title>
 
                 <para>
-                    Tags at the same level must be separated by an empty line to improve 
+                    Tags at the same level must be separated by an empty line to improve
                     readability.
                 </para>
 
@@ -266,7 +267,7 @@ This is the class <classname>Zend_Class</classname>
 ]]></programlisting>
 
                 <para>
-                    The first child tag should open directly below its parent, with no empty line 
+                    The first child tag should open directly below its parent, with no empty line
                     between them; the last child tag should close directly before the closing tag of
                     its parent.
                 </para>
@@ -305,8 +306,9 @@ This is the class <classname>Zend_Class</classname>
             <title>Program Listings</title>
 
             <para>
-                The opening <code>&lt;programlisting&gt;</code> tag must indicate the appropriate
-                "language" attribute and be indented at the same level as its sibling blocks.
+                The opening <emphasis>&lt;programlisting&gt;</emphasis> tag must indicate the
+                appropriate "language" attribute and be indented at the same level as its sibling
+                blocks.
             </para>
 
             <programlisting language="xml"><![CDATA[
@@ -316,13 +318,13 @@ This is the class <classname>Zend_Class</classname>
 ]]></programlisting>
 
             <para>
-                CDATA should be used around all program listings.
+                <acronym>CDATA</acronym> should be used around all program listings.
             </para>
-            
+
             <para>
-                <code>&lt;programlisting&gt;</code> sections must not add linebreaks or whitespace 
-                at the beginning or end of the section, as these are then represented in the final 
-                output.
+                <emphasis>&lt;programlisting&gt;</emphasis> sections must not add linebreaks or
+                whitespace at the beginning or end of the section, as these are then represented in
+                the final output.
             </para>
 
             <programlisting language="xml"><![CDATA[
@@ -340,8 +342,8 @@ $render = "xxx";
 ]]></programlisting>
 
             <para>
-                Ending CDATA and <code>&lt;programlisting&gt;</code> tags should be on the same 
-                line, without any indentation.
+                Ending <acronym>CDATA</acronym> and <emphasis>&lt;programlisting&gt;</emphasis>
+                tags should be on the same line, without any indentation.
             </para>
 
             <programlisting language="xml"><![CDATA[
@@ -363,27 +365,27 @@ $render = "xxx";
 ]]></programlisting>
 
             <para>
-                The <code>&lt;programlisting&gt;</code> tag should contain the "language" attribute
-                with a value appropriate to the contents of the program listing. Typical values 
-                include "css", "html", "ini", "javascript", "php", "text", and "xml", 
+                The <emphasis>&lt;programlisting&gt;</emphasis> tag should contain the "language"
+                attribute with a value appropriate to the contents of the program listing. Typical
+                values include "css", "html", "ini", "javascript", "php", "text", and "xml".
             </para>
 
             <programlisting language="xml"><![CDATA[
 <!-- PHP -->
-<programlisting role="php">]]>&lt;<![CDATA[![CDATA[
+<programlisting language="php">]]>&lt;<![CDATA[![CDATA[
 
 <!-- Javascript -->
-<programlisting role="javascript">]]>&lt;<![CDATA[![CDATA[
+<programlisting language="javascript">]]>&lt;<![CDATA[![CDATA[
 
 <!-- XML -->
-<programlisting role="xml">]]>&lt;<![CDATA[![CDATA[
+<programlisting language="xml">]]>&lt;<![CDATA[![CDATA[
 ]]></programlisting>
 
             <para>
-                For program listings containing only PHP code, PHP tags (e.g., "&lt;?php", 
-                "?&gt;") are not required, and should not be used. They simply clutter the 
-                narrative, and are implied by the use of the <code>&lt;programlisting&gt;</code> 
-                tag.
+                For program listings containing only <acronym>PHP</acronym> code,
+                <acronym>PHP</acronym> tags (e.g., "&lt;?php", "?&gt;") are not required, and
+                should not be used. They simply clutter the narrative, and are implied by the use
+                of the <emphasis>&lt;programlisting&gt;</emphasis> tag.
             </para>
 
             <programlisting language="xml"><![CDATA[
@@ -401,24 +403,24 @@ $render = "xxx";
 
             <para>
                 Line lengths within program listings should follow the <link
-                    linkend="coding-standard.php-file-formatting.max-line-length">coding standards 
+                    linkend="coding-standard.php-file-formatting.max-line-length">coding standards
                 recommendations</link>.
             </para>
 
             <para>
-                Refrain from using <methodname>require_once()</methodname>, 
-                <methodname>require()</methodname>, <methodname>include_once()</methodname>, and 
-                <methodname>include()</methodname> calls within PHP listings. They simply clutter 
-                the narrative, and are largely obviated when using an autoloader. Use them only when
-                they are essential to the example.
+                Refrain from using <methodname>require_once()</methodname>,
+                <methodname>require()</methodname>, <methodname>include_once()</methodname>, and
+                <methodname>include()</methodname> calls within <acronym>PHP</acronym> listings.
+                They simply clutter the narrative, and are largely obviated when using an
+                autoloader. Use them only when they are essential to the example.
             </para>
 
             <note>
                 <title>Never use short tags</title>
 
                 <para>
-                    Short tags (e.g., "&lt;?", "&lt;?=") should never be used within 
-                    <code>programlisting</code> or the narrative of a document.
+                    Short tags (e.g., "&lt;?", "&lt;?=") should never be used within
+                    <emphasis>programlisting</emphasis> or the narrative of a document.
                 </para>
             </note>
         </sect2>
@@ -430,8 +432,8 @@ $render = "xxx";
                 <title>classname</title>
 
                 <para>
-                    The tag <code>&lt;classname&gt;</code> must be used each time a class name is 
-                    represented by itself; it should not be used when combined with a method name, 
+                    The tag <emphasis>&lt;classname&gt;</emphasis> must be used each time a class name is
+                    represented by itself; it should not be used when combined with a method name,
                     variable name, or constant, and no other content is allowed within the tag.
                 </para>
 
@@ -446,9 +448,9 @@ $render = "xxx";
                 <title>varname</title>
 
                 <para>
-                    Variables must be wrapped in the <code>&lt;varname&gt;</code> tag.  Variables 
-                    must be written using the "$" sigil. No other content is allowed within this 
-                    tag, unless a class name is used, which indicates a class variable.
+                    Variables must be wrapped in the <emphasis>&lt;varname&gt;</emphasis> tag.
+                    Variables must be written using the "$" sigil. No other content is allowed
+                    within this tag, unless a class name is used, which indicates a class variable.
                 </para>
 
                 <programlisting language="xml"><![CDATA[
@@ -463,10 +465,10 @@ $render = "xxx";
                 <title>methodname</title>
 
                 <para>
-                    Methods must be wrapped in the <code>&lt;methodname&gt;</code> tag. Methods must
-                    either include the full method signature or at the least a pair of closing 
-                    parentheses (e.g., "()"). No other content is allowed within this tag, unless a 
-                    class name is used, which indicates a class method.
+                    Methods must be wrapped in the <emphasis>&lt;methodname&gt;</emphasis> tag.
+                    Methods must either include the full method signature or at the least a pair of
+                    closing parentheses (e.g., "()"). No other content is allowed within this tag,
+                    unless a class name is used, which indicates a class method.
                 </para>
 
                 <programlisting language="xml"><![CDATA[
@@ -482,15 +484,16 @@ $render = "xxx";
                 <title>constant</title>
 
                 <para>
-                    Use the <code>&lt;constant&gt;</code> tag when denoting constants. Constants 
-                    must be written in UPPERCASE. No other content is allowed within this tag, 
-                    unless a class name is used, which indicates a class constant.
+                    Use the <emphasis>&lt;constant&gt;</emphasis> tag when denoting constants.
+                    Constants must be written in <acronym>UPPERCASE</acronym>. No other content is
+                    allowed within this tag, unless a class name is used, which indicates a class
+                    constant.
                 </para>
 
                 <programlisting language="xml"><![CDATA[
 <para>
     The constant <constant>FOO</constant> and the class constant
-    <constant>Zend_Class::FOO</constant>. 
+    <constant>Zend_Class::FOO</constant>.
 </para>
 ]]></programlisting>
             </sect3>
@@ -499,8 +502,9 @@ $render = "xxx";
                 <title>filename</title>
 
                 <para>
-                    Filenames and paths must be wrapped in the <code>&lt;filename&gt;</code> tag. 
-                    No other content is allowed in this tag.
+                    Filenames and paths must be wrapped in the
+                    <emphasis>&lt;filename&gt;</emphasis> tag. No other content is allowed in this
+                    tag.
                 </para>
 
                 <programlisting language="xml"><![CDATA[
@@ -514,9 +518,9 @@ $render = "xxx";
                 <title>command</title>
 
                 <para>
-                    Commands, shell scripts, and program calls must be wrapped in the 
-                    <code>&lt;command&gt;</code> tag. If the command includes arguments, these 
-                    should also be included within the tag.
+                    Commands, shell scripts, and program calls must be wrapped in the
+                    <emphasis>&lt;command&gt;</emphasis> tag. If the command includes arguments,
+                    these should also be included within the tag.
                 </para>
 
                 <programlisting language="xml"><![CDATA[
@@ -530,8 +534,8 @@ $render = "xxx";
                 <title>code</title>
 
                 <para>
-                    Usage of the <code>&lt;code&gt;</code> tag is discouraged, in favor of the other
-                    inline tasks discussed previously.
+                    Usage of the <emphasis>&lt;code&gt;</emphasis> tag is discouraged, in favor of
+                    the other inline tasks discussed previously.
                 </para>
             </sect3>
         </sect2>
@@ -543,7 +547,7 @@ $render = "xxx";
                 <title>title</title>
 
                 <para>
-                    The <code>&lt;title&gt;</code> tag is not allowed to hold other tags.
+                    The <emphasis>&lt;title&gt;</emphasis> tag is not allowed to hold other tags.
                 </para>
 
                 <programlisting language="xml"><![CDATA[
@@ -564,15 +568,16 @@ $render = "xxx";
             <title>Use editors without autoformatting</title>
 
             <para>
-                For editing the documentation, typically you should not use formal XML editors.  
-                Such editors normally autoformat existing documents to fit their own standards 
-                and/or do not strictly follow the docbook standard. As examples, we have seen them
-                erase the CDATA tags, change 4 space seperation to tabs or 2 spaces, etc.
+                For editing the documentation, typically you should not use formal
+                <acronym>XML</acronym> editors. Such editors normally autoformat existing documents
+                to fit their own standards and/or do not strictly follow the docbook standard. As
+                examples, we have seen them erase the <acronym>CDATA</acronym> tags, change 4 space
+                seperation to tabs or 2 spaces, etc.
             </para>
 
             <para>
                 The style guidelines were written in large part to assist translators in recognizing
-                the lines that have changed using normal <command>diff</command> tools. 
+                the lines that have changed using normal <command>diff</command> tools.
                 Autoformatting makes this process more difficult.
             </para>
         </sect2>
@@ -581,9 +586,9 @@ $render = "xxx";
             <title>Use Images</title>
 
             <para>
-                Good images and diagrams can improve readability and comprehension. Use them 
-                whenever they will assist in these goals. Images should be placed in the 
-                <filename>documentation/manual/en/figures/</filename> directory, and be named after 
+                Good images and diagrams can improve readability and comprehension. Use them
+                whenever they will assist in these goals. Images should be placed in the
+                <filename>documentation/manual/en/figures/</filename> directory, and be named after
                 the section identifier in which they occur.
             </para>
         </sect2>
@@ -592,8 +597,8 @@ $render = "xxx";
             <title>Use Case Examples</title>
 
             <para>
-                Look for good use cases submitted by the community, especially those posted in 
-                proposal comments or on one of the mailing lists. Examples often illustrate usage 
+                Look for good use cases submitted by the community, especially those posted in
+                proposal comments or on one of the mailing lists. Examples often illustrate usage
                 far better than the narrative does.
             </para>
 
@@ -607,10 +612,10 @@ $render = "xxx";
             <title>Avoid Replicating phpdoc Contents</title>
 
             <para>
-                The manual is intended to be a reference guide for end-user usage. Replicating 
-                the phpdoc documentation for internal-use components and classes is not wanted, and 
-                the narrative should be focussed on usage, not the internal workings. In any case, 
-                at this time, we would like the documentation teams to focus on translating the 
+                The manual is intended to be a reference guide for end-user usage. Replicating
+                the phpdoc documentation for internal-use components and classes is not wanted, and
+                the narrative should be focussed on usage, not the internal workings. In any case,
+                at this time, we would like the documentation teams to focus on translating the
                 English manual, not the phpdoc comments.
             </para>
         </sect2>
@@ -624,14 +629,15 @@ $render = "xxx";
             </para>
 
             <para>
-                Linking to other sections of the manual may be done using either the 
-                <code>&lt;xref&gt;</code> tag (which will substitute the section title for the link 
-                text) or the <code>&lt;link&gt;</code> tag (to which you must provide link text).
+                Linking to other sections of the manual may be done using either the
+                <emphasis>&lt;xref&gt;</emphasis> tag (which will substitute the section title for
+                the link text) or the <emphasis>&lt;link&gt;</emphasis> tag (to which you must
+                provide link text).
             </para>
 
-            <programlisting role="xml"><![CDATA[
+            <programlisting language="xml"><![CDATA[
 <para>
-    "Xref" links to a section: <xref 
+    "Xref" links to a section: <xref
         linkend="doc-standard.recommendations.links" />.
 </para>
 
@@ -641,12 +647,12 @@ $render = "xxx";
         links</link>.
 </para>
 ]]></programlisting>
-            
+
             <para>
-                To link to an external resource, use <code>&lt;ulink&gt;</code>:
+                To link to an external resource, use <emphasis>&lt;ulink&gt;</emphasis>:
             </para>
 
-            <programlisting role="xml"><![CDATA[
+            <programlisting language="xml"><![CDATA[
 <para>
     The <ulink url="http://framework.zend.com/">Zend Framework site</ulink>.
 </para>

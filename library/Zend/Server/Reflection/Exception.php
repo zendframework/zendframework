@@ -19,9 +19,9 @@
  */
 
 /**
- * Zend_Exception
+ * @see Zend_Server_Exception
  */
-require_once 'Zend/Exception.php';
+require_once 'Zend/Server/Exception.php';
 
 /**
  * Zend_Server_Reflection exceptions
@@ -33,6 +33,6 @@ require_once 'Zend/Exception.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version $Id$
  */
-class Zend_Server_Reflection_Exception extends Zend_Exception
+class Zend_Server_Reflection_Exception extends Zend_Server_Exception
 {
 }

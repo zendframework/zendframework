@@ -527,7 +527,7 @@ class Zend_Queue implements Countable
              * @see Zend_Queue_Exception
              */
             require_once 'Zend/Queue/Exception.php';
-            throw new Zend_Queue_Exception('$name is not a string');
+            throw new Zend_Queue_Exception("$name is not a string");
         }
 
         if ($this->getAdapter()->isSupported('create')) {

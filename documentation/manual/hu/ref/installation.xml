@@ -1,71 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="introduction.installation">
+
     <title>Telepítés</title>
+
     <para>
-        A Zend Framework objektumorientált PHP 5-tel épült, és 5.1.4-es vagy újabb PHP-t követel. Részletesebb információkért kérjük tekintsd át a
-        <link linkend="requirements">rendszer követelmények függeléket</link>.
+        Lásd a <link linkend="requirements">követelmények függeléket</link> a
+        Zend Framework követelményeinek részletes áttekintéséért.
     </para>
+
     <para>
-        Miután egy megfelelő PHP környezet rendelkezésre áll, a következő lépés a Zend Framework egy példányának beszerzése, mely hivatalos forrásból beszerezhető a következő módok bármelyikén:
-        <itemizedlist>
-            <listitem>
-                <para>
-                    <ulink url="http://framework.zend.com/download/stable">Töltsd le az utolsó stabil kiadást.</ulink>
-                    Ez a mind
-                    <code>.zip</code>,
-                    mind
-                    <code>.tar.gz</code>
-                    formátumban elérhető kiadás jó választás azoknak, akik újak a Zend Frameworkben.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <ulink url="http://framework.zend.com/download/snapshot">Töltsd le az utolsó éjjeli pillanatképet.</ulink>
-                    Azoknak, akik elég bátrak az élen járni, az éjjeli pillanatképek jelenítik meg a Zend Framework fejlesztésének legutóbbi fázisát. A pillanatképek elérhetők mind kizárólag angol, mind pedig az összes elérhető nyelvű dokumentációval együtt csomagolva. Ha mindenképp a legfrissebb Zend Framework fejlesztésekkel akarsz dolgozni, akkor vedd fontolóra egy Subversion (SVN) ügyfél használatát.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    Egy
-                    <ulink url="http://subversion.tigris.org">Subversion</ulink>
-                    (SVN) ügyfél használata. A Zend Framework nyílt forrású szoftver, és a fejlesztéséhez használt Subversion raktára nyílvánosan hozzáférhető. Vedd fontolóra egy SVN ügyfél használatát a Zend Framework beszerzéséhez, ha már most is SVN-t használsz az alkalmazásaid fejlesztéséhez, részt akarsz venni a keretrendszer fejlesztésében, vagy sokkal sűrűbben kell frissítened a keretrendszer-verziód, mint ahogy a kiadások megjelennek.
-                </para>
-                <para>
-                    <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.export.html">Az exportálás</ulink>
-                    akkor hasznos, ha egy adott átdolgozást akarsz leszedni a munkapéldányokban létrejövő
-                    <code>.svn</code>
-                    könyvtárak nélkül.
-                </para>
-                <para>
-                    <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.checkout.html">Egy munkapéldány áttekintése</ulink>
-                    akkor jó, ha részt veszel a Zend Framework fejlesztésében, és így bármikor tudsz
-                    <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.update.html">frissíteni SVN-nel</ulink>.
-                </para>
-                <para>
-                    <ulink url="http://svnbook.red-bean.com/nightly/en/svn.advanced.externals.html">Egy külső meghatározás</ulink>
-                    rendkívül kényelmes azon fejlesztők számára, akik már használnak SVN-t az alkalmazásaik munkapéldányainak kezeléséhez.
-                </para>
-                <para>
-                    Az URL a Zend Framework SVN raktárának törzséhez:
-                    <ulink url="http://framework.zend.com/svn/framework/trunk">http://framework.zend.com/svn/framework/trunk</ulink>.
-                </para>
-            </listitem>
-        </itemizedlist>
+        A telepítés rendkívül egyszerű. A keretrendszer letöltését és
+        kicsomagolását követően <filename>library/</filename> mappát hozzá kell
+        adni az include path elejéhez. Célszerű lehet még más – esetleg
+        megosztott – helyre mozgatni az állományrendszerben.
     </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                <ulink url="http://framework.zend.com/download/latest">Az utolsó
+                stabil kiadás letöltése.</ulink> Ez a mind
+                <filename>.zip</filename>, mind <filename>.tar.gz</filename>
+                alakban elérhető változat jó választás az új felhasználóknak.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <ulink url="http://framework.zend.com/download/snapshot">A
+                legutóbbi éjjeli pillanatkép letöltése.</ulink> Azok számára,
+                akik elég bátrak az élen járni, az éjjeli pillanatképek
+                reprezentálják a Zend Framework fejlesztésének legutóbbi
+                lépéseit. A pillanatképek elérhetők mind kizárólag angol,
+                mind pedig az összes elérhető nyelvű dokumentációval együtt
+                csomagolva. Aki mindenképp a legfrissebb fejlesztésekkel kíván
+                dolgozni, annak érdemes fontolóra vennie egy Subversion (SVN)
+                ügyfél használatát.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <ulink url="http://subversion.tigris.org">Subversion</ulink>
+                (<acronym>SVN</acronym>) ügyfél használata. A Zend Framework
+                nyílt forrású szoftver, és a fejlesztéséhez használt
+                Subversion tárolója nyílvánosan hozzáférhető. Egy
+                <acronym>SVN</acronym> ügyfél használata megfontolandó
+                azoknak, akik már most is <acronym>SVN</acronym>-t
+                használnak alkalmazásaik fejlesztéséhez, részt akarnak venni
+                a keretrendszer fejlesztésében, vagy sokkal sűrűbben kell
+                frissíteniük a keretrendszer-verziójukat, mint ahogy a
+                kiadások megjelennek.
+            </para>
+            <para>
+                <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.export.html">
+                Az exportálás</ulink> egy adott átirat letöltése a
+                munkapéldányokban létrejövő <filename>.svn</filename> könyvtárak
+                nélkül.
+            </para>
+            <para>
+                <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.checkout.html">
+                Egy munkapéldány letöltése</ulink> szükséges a közreműködéshez.
+                A munkapéldányok bármikor naprakészre hozhatók az
+                <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.update.html">
+                svn update</ulink>, a változtatások pedig felküldhetők az
+                <acronym>SVN</acronym> tárolónkba az
+                <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.commit.html">
+                svn commit</ulink> paranccsal.
+            </para>
+            <para>
+                <ulink url="http://svnbook.red-bean.com/nightly/en/svn.advanced.externals.html">
+                Egy külső meghatározás</ulink> igen kényelmes azon fejlesztők
+                számára, akik már használnak SVN-t alkalmazásaik
+                munkapéldányainak kezeléséhez.
+            </para>
+                <para>
+                    Az URL a Zend Framework SVN tárolójának törzséhez:
+                    <ulink url="http://framework.zend.com/svn/framework/trunk">
+                    http://framework.zend.com/svn/framework/trunk</ulink>.
+                </para>
+        </listitem>
+    </itemizedlist>
+
     <para>
-        Ha rendelkezésedre áll a Zend Framework egy példánya, az alkalmazásodnak hozzá kell tudni férni a keretrendszer osztályaihoz.
-        <ulink url="http://www.php.net/manual/hu/configuration.changes.php">Noha ez sok módon megoldható</ulink>,
-        a
-        <ulink url="http://www.php.net/manual/hu/ini.core.php#ini.include-path"><code>PHP include_path</code></ulink>-odnak
-        tartalmaznia kell a Zend Framework osztálykönyvtárát.
+        Ha rendelkezésre áll a Zend Framework egy példánya, az alkalmazásnak
+        hozzá kell férnie a keretrendszer osztályaihoz.
+        <ulink url="http://www.php.net/manual/hu/configuration.changes.php">Noha
+        ez sokféleképp megoldható</ulink>,
+        a <acronym>PHP</acronym>
+        <ulink url="http://www.php.net/manual/hu/ini.core.php#ini.include-path">
+        include_path</ulink>-nak tartalmaznia kell a Zend Framework
+        osztálykönyvtárát.
     </para>
-    <para>A Zend Framework egyik leghasznosabb jellegzetessége az
-        <ulink url="http://www.martinfowler.com/eaaCatalog/frontController.html">Elülső Vezérlő</ulink>
-        és a
-        <ulink url="http://hu.wikipedia.org/wiki/Modell-nézet-vezérlő">Modell-Nézet-Vezérlő</ulink>
-         (MNV) minták megvalósítása.
-        <link linkend="zend.controller.quickstart">Kezdj a Zend Framework MNV-vel!</link>
-    </para>
+
     <para>
-        Mivel a Zend Framework összetevői elég lazán kapcsolódnak egymáshoz, a különböző összetevők szükség szerint kiválaszthatók önálló használatra. A most következő fejezetek mindegyike egy adott összetevő használatát dokumentálja.
+        A Zend egy <ulink url="http://framework.zend.com/docs/quickstart">
+        gyorstalpalót</ulink> kínál a minél gyorsabb indulás érdekében. Ez egy
+        kiváló útja elkezdeni tanulni a keretrendszert valós vilégbéli példákra
+        építve.
     </para>
+
+    <para>
+        Mivel a Zend Framework összetevői lazán kapcsolódnak egymáshoz, minden
+        alkalmazás némiképp egyedi összeállításukat használhatja. Az elkövetkező
+        fejezetek a Zend Keretrendszert összetevőnként tárgyaló, átfogó
+        kézikönyvet alkotnak.
+    </para>
+
 </sect1>

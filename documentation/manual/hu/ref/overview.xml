@@ -17,7 +17,7 @@
     <para>
         Míg egymástól függetlenül is használhatók, a szabványos könyvtárban lévő
         összetevői együtt hatékony és bővíthető keretrendszert alkotnak.
-        Robusztus, nagyteljesítményű <acronym>MNV</acronym> megvalósítást,
+        Robusztus, nagyteljesítményű <acronym>MVC</acronym> megvalósítást,
         egyszerűen használható adatbázis-elvonatkoztató réteget és egy HTML
         űrlap megjelenítést, ellenőrzést és szűrést megvalósító – tehát a
         fejlesztők számára ezen teendőket egyetlen egyszerűen használható,

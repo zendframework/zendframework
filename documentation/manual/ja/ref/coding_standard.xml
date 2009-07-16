@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16734 -->
+<!-- EN-Revision: 16783 -->
 <appendix id="coding-standard">
   <title>Zend Framework PHP 標準コーディング規約</title>
     <sect1 id="coding-standard.overview">
@@ -15,14 +15,19 @@
                 Zend Framework を用いて開発をする人たちにとってもこのコーディング規約は有用でしょう。
                 これに従えば、Zend Framework のコードとの一貫性が保てるからです。
                 そのためには、ここで完全なコーディング規約を示す必要があります。
-
-                注意: 詳細なレベルまでの設計指針を示すこと以上に、
-                それを標準規格として確立することが大切だと考えています。
-                Zend Framework コーディング規約の指針は、
-                これまで ZF プロジェクトでうまく回っていた方針をまとめたものです。
-                この<ulink url="http://framework.zend.com/license">ライセンス</ulink>のもとで、
-                そのまま使用するなり多少変更して使用するなりすることができます。
             </para>
+
+            <note>
+                <para>
+                    注意: 詳細なレベルまでの設計指針を示すこと以上に、
+                    それを標準規格として確立することが大切だと考えています。
+                    Zend Framework コーディング規約の指針は、
+                    これまで ZF プロジェクトでうまく回っていた方針をまとめたものです。
+                    この<ulink url="http://framework.zend.com/license">ライセンス</ulink>のもとで、
+                    そのまま使用するなり多少変更して使用するなりすることができます。
+                </para>
+            </note>
+
             <para>
                 ZF コーディング規約では、次のような内容を扱います。
             </para>

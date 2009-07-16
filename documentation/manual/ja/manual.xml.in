@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16772 -->
+<!-- EN-Revision: 16783 -->
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
     "@DOCBOOK_DTD@"
 [
@@ -711,6 +711,9 @@
     </chapter>
     <xi:include href="ref/requirements.xml" />
     <xi:include href="ref/coding_standard.xml" />
+    <xi:include href="ref/documentation-standard.xml">
+        <xi:fallback><xi:include href="../en/ref/documentation-standard.xml" /></xi:fallback>
+    </xi:include>
     <appendix id="performance">
         <title>Zend Framework パフォーマンスガイド</title>
         <xi:include href="ref/performance-introduction.xml" />

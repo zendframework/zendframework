@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16001 -->
+<!-- EN-Revision: 16502 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.action">
     <title>Action Controller</title>
@@ -44,8 +44,9 @@ class FooController extends Zend_Controller_Action
 ]]></programlisting>
 
         <para>
-            Die obige <emphasis>FooController</emphasis> Klasse (Kontroller <code>foo</code>)
-            definiert zwei Aktionen, <code>bar</code> und <code>baz</code>.
+            Die obige <emphasis>FooController</emphasis> Klasse (Kontroller
+            <emphasis>foo</emphasis>)´definiert zwei Aktionen, <emphasis>bar</emphasis> und
+            <emphasis>baz</emphasis>.
         </para>
 
         <para>
@@ -314,11 +315,11 @@ applicationOrModule/
             <para>
                 In anderen Worten, wird angenommen das View Skripte im
                 <filename>views/scripts/</filename> Unterverzeichnis sind, und das
-                <code>views</code> Unterverzeichnis weitere Funktionalitäten enthält (helpers,
-                filters). Wenn der Name und der Pfad des View Skripts ermittelt wird, wird das
-                <filename>views/scripts/</filename> Verzeichnis als Basispfad verwendet, mit einem
-                Verzeichnis das nach dem individuellen Kontroller benannt ist und eine Hierarchie
-                von View Skripten bietet.
+                <filename>views/</filename> Unterverzeichnis weitere Funktionalitäten enthält
+                (helpers, filters). Wenn der Name und der Pfad des View Skripts ermittelt wird,
+                wird das <filename>views/scripts/</filename> Verzeichnis als Basispfad verwendet,
+                mit einem Verzeichnis das nach dem individuellen Kontroller benannt ist und eine
+                Hierarchie von View Skripten bietet.
             </para>
         </sect3>
 
@@ -341,9 +342,10 @@ string render(string $action = null,
                 <filename>[controller]/[action].phtml</filename> ist (wobei
                 <filename>.phtml</filename> der Wert der <varname>$viewSuffix</varname> Eigenschaft
                 ist). Wenn ein Wert für <varname>$action</varname> angegeben wird, wird das
-                Template im <code>[controller]</code> Unterverzeichnis gerendert. Um die Verwendung
-                des <code>[controller]</code> Unterverzeichnisses zu überschreiben kann ein true
-                Wert für <varname>$noController</varname> übergeben werden. Zuletzt werden
+                Template im <filename>[controller]/</filename> Unterverzeichnis gerendert. Um die
+                Verwendung des <filename>[controller]/</filename> Unterverzeichnisses zu
+                überschreiben kann ein <constant>TRUE</constant> Wert für
+                <varname>$noController</varname> übergeben werden. Zuletzt werden
                 templates in das Antwort Objekt gerendert; wenn zu einem spezifischen
                 <link linkend="zend.controller.response.namedsegments">benannten Segment</link> im
                 Antwort Objekt dargestellt werden soll, kann ein Wert an <varname>$name</varname>

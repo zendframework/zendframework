@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16315 -->
+<!-- EN-Revision: 16474 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.console.getopt.configuration">
     <title>Konfigurieren von Zend_Console_Getopt</title>
@@ -170,21 +170,21 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
             <listitem>
                 <para>
                     <constant>Zend_Console_Getopt::CONFIG_DASHDASH</constant> ("dashDash"),
-                    wenn aktiviert, ermöglicht dieses spezielle Flag <command>--</command>
-                    das Ende von Flags zu signieren. Kommendozeilen Argumente welche
-                    dem Doppel-Bindestrich Zeichen folgen werden nicht als Option
-                    interpretiert selbst wenn das Argument mit einem Bindestrich
-                    beginnt. Diese Konfigurationsoption ist standardmäßig aktiviert.
+                    wenn es <constant>TRUE</constant> ist, ermöglicht dieses spezielle Flag
+                    <command>--</command> das Ende von Flags zu signieren. Kommendozeilen Argumente
+                    welche dem Doppel-Bindestrich Zeichen folgen werden nicht als Option
+                    interpretiert selbst wenn das Argument mit einem Bindestrich beginnt.
+                    Diese Konfigurationsoption ist standardmäßig <constant>TRUE</constant>.
                 </para>
             </listitem>
             <listitem>
                 <para>
                     <constant>Zend_Console_Getopt::CONFIG_IGNORECASE</constant> ("ignoreCase"),
-                    wenn aktiviert, werden Flags als Aliase voneinander betrachtet
-                    wenn Sie sich nur in der Groß-/Kleinschreibung unterscheiden.
+                    wenn es <constant>TRUE</constant> ist, werden Flags als Aliase voneinander
+                    betrachtet wenn Sie sich nur in der Groß-/Kleinschreibung unterscheiden.
                     Das bedeutet das <command>-a</command> und <command>-A</command> als
                     gleiche Flags angesehen werden. Diese Konfigurationsoption ist
-                    standardmäßig deaktiviert.
+                    standardmäßig <constant>FALSE</constant>.
                 </para>
             </listitem>
             <listitem>

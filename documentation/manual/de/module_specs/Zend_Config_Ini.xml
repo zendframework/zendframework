@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15981 -->
+<!-- EN-Revision: 16470 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.config.adapters.ini">
     <title>Zend_Config_Ini</title>
@@ -114,9 +114,12 @@ echo $config->database->params->dbname; // Ausgabe "dbname"
                 </row>
                 <row>
                     <entry><varname>$section</varname></entry>
-                    <entry>Die [section] innerhalb der ini Datei die geladen wird. Das Setzen dieses
-                    Parameters auf null lädt alle Sektionen. Alternativ, kann ein Array von
-                    Sektionsnamen übergeben werden um mehrere Sektionen zu laden.</entry>
+                    <entry>
+                        Die [section] innerhalb der ini Datei die geladen wird. Das Setzen dieses
+                        Parameters auf <constant>NULL</constant> lädt alle Sektionen. Alternativ,
+                        kann ein Array von Sektionsnamen übergeben werden um mehrere Sektionen zu
+                        laden.
+                    </entry>
                 </row>
                 <row>
                     <entry><varname>$options = false</varname></entry>
@@ -124,9 +127,10 @@ echo $config->database->params->dbname; // Ausgabe "dbname"
                         <itemizedlist>
                             <listitem>
                                 <para>
-                                    <emphasis>allowModifications</emphasis>: Auf true gesetzt
-                                    erlaubt es weiterführende Modifikationen der geladenen Datei.
-                                    Standardmäßig auf false gestellt
+                                    <emphasis>allowModifications</emphasis>: Auf
+                                    <constant>TRUE</constant> gesetzt erlaubt es weiterführende
+                                    Modifikationen der geladenen Datei. Standardmäßig auf
+                                    <constant>NULL</constant> gestellt
                                 </para>
                             </listitem>
                             <listitem>

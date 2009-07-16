@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16396 -->
+<!-- EN-Revision: 16504 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.actionhelpers.redirector">
     <title>Redirector</title>
@@ -9,12 +9,12 @@
 
         <para>
             Der <emphasis>Redirector</emphasis> Helfer erlaubt die Verwendung eines Redirector
-            Objektes um die Notwendigkeiten der Anwendung für das Umleiten zu einer neuen URL zu
-            erfüllen. Er bietet vielfache Vorteile gegenüber der
+            Objektes um die Notwendigkeiten der Anwendung für das Umleiten zu einer neuen
+            <acronym>URL</acronym> zu erfüllen. Er bietet vielfache Vorteile gegenüber der
             <methodname>_redirect()</methodname> Methode. Er ist zum Beispiel fähig seitenweises
             Verhalten im Redirector Objekt vorzudefinieren oder bietet ein eingebautes
             <methodname>gotoSimple($action, $controller, $module, $params)</methodname> Interface
-            ähnlich dem von <classname>Zend_Controller_Action::_forward()</classname>.
+            ähnlich dem von <methodname>Zend_Controller_Action::_forward()</methodname>.
         </para>
 
         <para>
@@ -25,8 +25,9 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <methodname>setCode()</methodname> kann verwendet werden um den HTTP Antwort
-                    Code zu setzen der wärend des Umleitens verwendet werden soll.
+                    <methodname>setCode()</methodname> kann verwendet werden um den
+                    <acronym>HTTP</acronym> Antwort Code zu setzen der wärend des Umleitens
+                    verwendet werden soll.
                 </para>
             </listitem>
 
@@ -41,29 +42,31 @@
             <listitem>
                 <para>
                     <methodname>setGotoSimple()</methodname> kann verwendet werden um eine Standard
-                    URL zu setzen die verwendet wird wenn keine an
-                    <methodname>gotoSimple()</methodname> übergeben wird. Verwendet die API von
-                    <classname>Zend_Controller_Action::_forward()</classname>:
-                    setGotoSimple($action, $controller = null, $module = null, array $params =
-                    array());
+                    <acronym>URL</acronym> zu setzen die verwendet wird wenn keine an
+                    <methodname>gotoSimple()</methodname> übergeben wird. Verwendet die
+                    <acronym>API</acronym> von
+                    <methodname>Zend_Controller_Action::_forward()</methodname>:
+                    <methodname>setGotoSimple($action, $controller = null, $module = null, array $params =
+                    array())</methodname>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>setGotoRoute()</methodname> kann verwendet werden um eine URL
-                    basierend auf einer registrierten Route zu setzen. Übergeben in einem Array von
-                    Schlüssel/Werte Paaren und einem Routernamen, wird die URL anhand des
-                    Routertyps und der Definition zusammengebaut.
+                    <methodname>setGotoRoute()</methodname> kann verwendet werden um eine
+                    <acronym>URL</acronym> basierend auf einer registrierten Route zu setzen.
+                    Übergeben in einem Array von Schlüssel/Werte Paaren und einem Routernamen, wird
+                    die <acronym>URL</acronym> anhand des Routertyps und der Definition
+                    zusammengebaut.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     <methodname>setGotoUrl()</methodname> kann verwendet werden um eine Standard
-                    URL zu setzen die verwendet wird wenn keine an
+                    <acronym>URL</acronym> zu setzen die verwendet wird wenn keine an
                     <methodname>gotoUrl()</methodname> übergeben wird. Akzeptiert einen einzelnen
-                    URL String.
+                    <acronym>URL</acronym> String.
                 </para>
             </listitem>
 
@@ -72,21 +75,23 @@
                     <methodname>setPrependBase()</methodname> kann verwendet werden um die BasisURL
                     des Anfrage Objektes einer mit <methodname>setGotoUrl()</methodname>,
                     <methodname>gotoUrl()</methodname> oder
-                    <methodname>gotoUrlAndExit()</methodname> definierten URL, voranzustellen.
+                    <methodname>gotoUrlAndExit()</methodname> definierten <acronym>URL</acronym>,
+                    voranzustellen.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     <methodname>setUseAbsoluteUri()</methodname> kann verwendet werden um den
-                    <emphasis>Redirector</emphasis> dazu zu zwingen absolute URIs zu verwenden wenn
-                    umgeleitet wird. Wenn diese Option gesetzt ist, verwendet Sie den Wert von
+                    <emphasis>Redirector</emphasis> dazu zu zwingen absolute
+                    <acronym>URI</acronym>s zu verwenden wenn umgeleitet wird. Wenn diese Option
+                    gesetzt ist, verwendet Sie den Wert von
                     <varname>$_SERVER['HTTP_HOST']</varname>,
                     <varname>$_SERVER['SERVER_PORT']</varname>, und
-                    <varname>$_SERVER['HTTPS']</varname> um eine komplete URI zur, durch eine der
-                    Umleitungsmethoden, spezifizierten URL zu erstellen. Diese Option ist
-                    standardmäßig ausgeschaltet, kann aber in späteren Releases standardmäßig
-                    eingeschaltet sein.
+                    <varname>$_SERVER['HTTPS']</varname> um eine komplete <acronym>URI</acronym>
+                    zur, durch eine der Umleitungsmethoden, spezifizierten <acronym>URL</acronym>
+                    zu erstellen. Diese Option ist standardmäßig ausgeschaltet, kann aber in
+                    späteren Releases standardmäßig eingeschaltet sein.
                 </para>
             </listitem>
         </itemizedlist>
@@ -101,31 +106,32 @@
                 <para>
                     <methodname>gotoSimple()</methodname> verwendet
                     <methodname>setGotoSimple()</methodname>
-                    (<methodname>_forward()</methodname>-ähnliche API) um eine URL zu erstellen und
-                    eine Umleitung durchzuführen.
+                    (<methodname>_forward()</methodname>-ähnliche <acronym>API</acronym>) um eine
+                    <acronym>URL</acronym> zu erstellen und eine Umleitung durchzuführen.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     <methodname>gotoRoute()</methodname> verwendet
-                    <methodname>setGotoRoute()</methodname> (<code>route-assembly</code>) um eine
-                    URL zu erstellen und eine Umleitung durchzuführen.
+                    <methodname>setGotoRoute()</methodname> (<emphasis>route-assembly</emphasis>)
+                    um eine <acronym>URL</acronym> zu erstellen und eine Umleitung durchzuführen.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     <methodname>gotoUrl()</methodname> verwendet
-                    <methodname>setGotoUrl()</methodname> (<code>URL string</code>) um
-                    eine URL zu erstellen und eine Umleitung durchzuführen.
+                    <methodname>setGotoUrl()</methodname>
+                    (<emphasis><acronym>URL</acronym> string</emphasis>) um eine
+                    <acronym>URL</acronym> zu erstellen und eine Umleitung durchzuführen.
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
-            Letztendlich kann die aktuelle Umleitungs URL jederzeit festgestellt werden durch
-            Verwendung von <methodname>getRedirectUrl()</methodname>.
+            Letztendlich kann die aktuelle Umleitungs <acronym>URL</acronym> jederzeit
+            festgestellt werden durch Verwendung von <methodname>getRedirectUrl()</methodname>.
         </para>
     </sect4>
 
@@ -136,9 +142,10 @@
             <title>Optionen setzen</title>
 
             <para>
-                Dieses Beispiel überschreibt diverse Optionen, inklusive dem Setzen des HTTP
-                Statuscodes und dessen Verwendung in der Umleitung ('303'), nicht abbrechen der
-                Umleitung und definieren einer Standard URL die beim Umleiten verwendet wird.
+                Dieses Beispiel überschreibt diverse Optionen, inklusive dem Setzen des
+                <acronym>HTTP</acronym> Statuscodes und dessen Verwendung in der Umleitung ('303'),
+                nicht abbrechen der Umleitung und definieren einer Standard <acronym>URL</acronym>
+                die beim Umleiten verwendet wird.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -217,11 +224,11 @@ class AlternativeController extends Zend_Controller_Action
             <title>Verwenden von goto()'s _forward() API</title>
 
             <para>
-                <methodname>gotoSimple()</methodname>'s API entspricht der von
-                <classname>Zend_Controller_Action::_forward()</classname>. Der primäre Unterschied
-                ist das Sie eine URL von den übergebenen Parametern erstellt und das Standardformat
-                <code>:module/:controller/:action/*</code> des Standardrouters verwendet. Dann
-                leitet es um statt die Aktion zu verketten.
+                <methodname>gotoSimple()</methodname>'s <acronym>API</acronym> entspricht der von
+                <methodname>Zend_Controller_Action::_forward()</methodname>. Der primäre
+                Unterschied ist das Sie eine <acronym>URL</acronym> von den übergebenen Parametern
+                erstellt und das Standardformat <filename>:module/:controller/:action/*</filename>
+                des Standardrouters verwendet. Dann leitet es um statt die Aktion zu verketten.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -262,9 +269,9 @@ class ForwardController extends Zend_Controller_Action
 
             <para>
                 Das folgende Beispiel verwendet die <methodname>assemble()</methodname> Methode des
-                <link linkend="zend.controller.router">Router's</link> um eine URL zu erstellen die
-                auf einem assoziativen Array von Parametern basiert das übergeben wurde. Es nimmt
-                an das die folgende Route registriert wurde:
+                <link linkend="zend.controller.router">Router's</link> um eine
+                <acronym>URL</acronym> zu erstellen die auf einem assoziativen Array von Parametern
+                basiert das übergeben wurde. Es nimmt an das die folgende Route registriert wurde:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -279,7 +286,7 @@ $router->addRoute('blogArchive', $route);
 
             <para>
                 Angenommen ein Array hat year auf 206 gesetzt, month auf 4, day auf 24, und id auf
-                42, dann würde dieses eine URL wie die folgende erstellen:
+                42, dann würde dieses eine <acronym>URL</acronym> wie die folgende erstellen:
                 <filename>/blog/2006/4/24/42</filename>.
             </para>
 

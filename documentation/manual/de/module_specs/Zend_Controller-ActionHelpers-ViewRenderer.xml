@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16162 -->
+<!-- EN-Revision: 16505 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.actionhelpers.viewrenderer">
     <title>ViewRenderer</title>
@@ -59,20 +59,20 @@
 
         <note>
             <para>
-                Wenn man ein <methodname>_forward()</methodname>, eine Umleitung, oder ein
-                <code>render</code> manuell durchführt, wird kein automatisches rendern erfolgen,
-                da man beim Ausführen von jeder dieser Aktionen dem
-                <emphasis>ViewRenderer</emphasis> mitteilt das man seine eigene Ausgabe durchführen
-                will.
+                Wenn man ein <methodname>_forward()</methodname>,
+                <methodname>redirect()</methodname> oder <methodname>render()</methodname> manuell
+                durchführt, wird kein automatisches rendern erfolgen, da man beim Ausführen von
+                jeder dieser Aktionen dem <emphasis>ViewRenderer</emphasis> mitteilt das man seine
+                eigene Ausgabe durchführen will.
             </para>
         </note>
 
         <note>
             <para>
                 Der <emphasis>ViewRenderer</emphasis> ist standardmäßig aktiviert. Man kann Ihn
-                über den Parameter <code>noViewRenderer</code> des Frontkontrollers deaktivieren
-                (<methodname>$front->setParam('noViewRenderer', true)</methodname>) oder den Helfer
-                vom Helfer Broker Stack entfernen
+                über den Parameter <emphasis>noViewRenderer</emphasis> des Frontkontrollers
+                deaktivieren (<methodname>$front->setParam('noViewRenderer', true)</methodname>)
+                oder den Helfer vom Helfer Broker Stack entfernen
                 (<methodname>Zend_Controller_Action_HelperBroker::removeHelper('viewRenderer')</methodname>).
             </para>
 
@@ -190,7 +190,7 @@ $this->foo(); // Foo_View_Helper_Foo::foo() aufrufen
                 <para>
                     <methodname>setNeverRender($flag = true)</methodname> kann verwendet werden um
                     das automatische rendern global ein- oder auszuschalten, z.B. für alle
-                    Kontroller. Wenn er auf true gesetzt wird, ruft
+                    Kontroller. Wenn er auf <constant>TRUE</constant> gesetzt wird, ruft
                     <methodname>postDispatch()</methodname> nicht automatisch
                     <methodname>render()</methodname> im aktuellen Kontroller auf.
                     <methodname>getNeverRender()</methodname> empfängt den aktuellen Wert.
@@ -200,8 +200,9 @@ $this->foo(); // Foo_View_Helper_Foo::foo() aufrufen
             <listitem>
                 <para>
                     <methodname>setNoRender($flag = true)</methodname> kann verwendet werden um das
-                    automatische rendern ein- oder auszuschalten. Wenn er auf true gesetzt wird,
-                    wird <methodname>postDispatch()</methodname> <methodname>render()</methodname>
+                    automatische rendern ein- oder auszuschalten. Wenn er auf
+                    <constant>TRUE</constant> gesetzt wird, wird
+                    <methodname>postDispatch()</methodname> <methodname>render()</methodname>
                     im aktuellen Kontroller nicht automatisch aufrufen. Diese Einstellung wird
                     jedesmal zurückgesetzt wenn <methodname>preDispatch()</methodname> aufgerufen
                     wird (z.B. muß dieses Flag für jeden Kontroller gesetzt werden für den das
@@ -235,9 +236,10 @@ $this->foo(); // Foo_View_Helper_Foo::foo() aufrufen
                     Aktion Skript zu spezifizieren das gerendert werden soll.
                     <varname>$name</varname> sollte der Name des Skripts sein, ohne den Datei
                     Suffix (und ohne das Kontroller Unterverzeichnis, ausser wenn
-                    <code>noController</code> eingeschaltet wurde). Wenn nicht spezifiziert, wird
-                    nach einem View Skript gesucht das nach der Aktion in Anfrage Objekt benannt
-                    ist. <methodname>getScriptAction()</methodname> empfängt den aktuellen Wert.
+                    <emphasis>noController</emphasis> eingeschaltet wurde). Wenn nicht
+                    spezifiziert, wird nach einem View Skript gesucht das nach der Aktion in
+                    Anfrage Objekt benannt ist. <methodname>getScriptAction()</methodname> empfängt
+                    den aktuellen Wert.
                 </para>
             </listitem>
 
@@ -256,20 +258,20 @@ $this->foo(); // Foo_View_Helper_Foo::foo() aufrufen
                     <methodname>initView($path, $prefix, $options)</methodname> kann aufgerufen
                     werden um den Basis View Pfad, den Klassenprefix für Helfer, Filter Skripts und
                     <emphasis>ViewRenderer</emphasis> Optionen zu spezifizieren. Es kann eines der
-                    folgenden Flags übergeben werden: <code>neverRender</code>,
-                    <code>noRender</code>, <code>noController</code>, <code>scriptAction</code>,
-                    und <code>responseSegment</code>.
+                    folgenden Flags übergeben werden: <emphasis>neverRender</emphasis>,
+                    <emphasis>noRender</emphasis>, <emphasis>noController</emphasis>,
+                    <emphasis>scriptAction</emphasis>, und <emphasis>responseSegment</emphasis>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     <methodname>setRender($action = null, $name = null, $noController =
-                        false)</methodname> erlaubt es <code>scriptAction</code>,
-                    <code>responseSegment</code>, oder <code>noController</code> in einem Schritt
-                    zu übergeben. <methodname>direct()</methodname> ist ein Alias für diese
-                    Methode, und erlaubt es diese Methode einfach vom eigenen Kontroller aus
-                    aufzurufen:
+                        false)</methodname> erlaubt es <emphasis>scriptAction</emphasis>,
+                    <emphasis>responseSegment</emphasis>, oder <emphasis>noController</emphasis>
+                    in einem Schritt zu übergeben. <methodname>direct()</methodname> ist ein
+                    Alias für diese Methode, und erlaubt es diese Methode einfach vom eigenen
+                    Kontroller aus aufzurufen:
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -357,9 +359,9 @@ $viewRenderer =
                     <methodname>setViewBasePathSpec($spec)</methodname> erlaubt die Änderung der
                     Pfad Spezifikation die verwendet wird um den Basispfad herauszufinden zu dem
                     das View Objekt hinzugefügt werden soll. Die Standardspezifikation ist
-                    <code>:moduleDir/views</code>. Die aktuelle Spezifikation kann jederzeit
-                    durch Verwenden von <methodname>getViewBasePathSpec()</methodname> erhalten
-                    werden.
+                    <filename>:moduleDir/views</filename>. Die aktuelle Spezifikation kann
+                    jederzeit durch Verwenden von <methodname>getViewBasePathSpec()</methodname>
+                    erhalten werden.
                 </para>
             </listitem>
 
@@ -368,8 +370,8 @@ $viewRenderer =
                     <methodname>setViewScriptPathSpec($spec)</methodname> erlaubt die Änderung der
                     Pfad Spezifikation die verwendet wird um den Pfad zu einem individuellen View
                     Skript herauszufinden (ohne den Basis View Skript Pfad). Die Standard
-                    Spezifikation ist <code>:controller/:action.:suffix</code>. Die aktuelle
-                    Spezifikation kann jederzeit durch Verwenden von
+                    Spezifikation ist <filename>:controller/:action.:suffix</filename>. Die
+                    aktuelle Spezifikation kann jederzeit durch Verwenden von
                     <methodname>getViewScriptPathSpec()</methodname> erhalten werden.
                 </para>
             </listitem>
@@ -378,11 +380,11 @@ $viewRenderer =
                 <para>
                     <methodname>setViewScriptPathNoControllerSpec($spec)</methodname> erlaubt die
                     Änderung der Pfad Spezifkiation die verwendet wird um den Pfad zu einem
-                    individuellen View Skript herauszufinden wenn <code>noController</code> aktiv
-                    ist (ohne den Basis View Skript Pfad). Die Standard Spezifikation ist
-                    <code>:action.:suffix</code>. Die aktuelle Spezikifation kann jederzeit durch
-                    Verwenden von <methodname>getViewScriptPathNoControllerSpec()</methodname>
-                    erhalten werden.
+                    individuellen View Skript herauszufinden wenn <emphasis>noController</emphasis>
+                    aktiv ist (ohne den Basis View Skript Pfad). Die Standard Spezifikation ist
+                    <filename>:action.:suffix</filename>. Die aktuelle Spezikifation kann jederzeit
+                    durch Verwenden von
+                    <methodname>getViewScriptPathNoControllerSpec()</methodname> erhalten werden.
                 </para>
             </listitem>
         </itemizedlist>
@@ -416,9 +418,10 @@ $viewRenderer =
                 <para>
                     <methodname>setInflector($inflector, $reference)</methodname> erlaubt das
                     Setzen eines eigenen Inflectors für die Verwendung mit dem
-                    <emphasis>ViewRenderer</emphasis>. Wenn <varname>$reference</varname> true ist,
-                    setzt dieser das Suffix und Modulverzeichnis als statische Referenz zu
-                    <emphasis>ViewRenderer</emphasis> Eigenschaften, genauso wie das Ziel.
+                    <emphasis>ViewRenderer</emphasis>. Wenn <varname>$reference</varname>
+                    <constant>TRUE</constant> ist, setzt dieser das Suffix und Modulverzeichnis
+                    als statische Referenz zu <emphasis>ViewRenderer</emphasis> Eigenschaften,
+                    genauso wie das Ziel.
                 </para>
             </listitem>
         </itemizedlist>
@@ -452,8 +455,9 @@ $viewRenderer =
                         <emphasis>:controller</emphasis>: MixedCase und camelCaseWörter werden
                         durch Bindestriche getrennt; Unterstriche werden in
                         Verzeichnistrennzeichen konvertiert, und der komplette String wird auf
-                        Kleinschreibung geändert. Beispiele: "FooBar" wird "foo-bar";
-                        "FooBar_Admin" wird "foo-bar/admin".
+                        Kleinschreibung geändert. Beispiele: "<classname>FooBar</classname>" wird
+                        "foo-bar"; "<classname>FooBar_Admin</classname>" wird
+                        "<filename>foo-bar/admin</filename>".
                     </para>
 
                     <para>
@@ -484,9 +488,9 @@ $viewRenderer =
         </note>
 
         <para>
-            Die letzten Teile in der <emphasis>ViewRenderer</emphasis> API sind die Methoden für
-            das aktuelle herausfinden von View Skript Pfaden und Rendern von Views. Diese
-            enthalten:
+            Die letzten Teile in der <emphasis>ViewRenderer</emphasis> <acronym>API</acronym> sind
+            die Methoden für das aktuelle herausfinden von View Skript Pfaden und Rendern von
+            Views. Diese enthalten:
         </para>
 
         <itemizedlist>
@@ -502,15 +506,15 @@ $viewRenderer =
 
                 <note><para>
                     Sobald die View zum Antwort Objekt gerendert wurde, setzt diese
-                    <code>noRender</code> um irrtümliches mehrfaches rendern zum selben View Skript
-                    zu verhindern.
+                    <emphasis>noRender</emphasis> um irrtümliches mehrfaches rendern zum selben
+                    View Skript zu verhindern.
                 </para></note>
 
                 <note>
                     <para>
                         Standardmäßig handelt
-                        <classname>Zend_Controller_Action::renderScript()</classname> in Vertretung
-                        zur <methodname>renderScript()</methodname> Methode des
+                        <methodname>Zend_Controller_Action::renderScript()</methodname> in
+                        Vertretung zur <methodname>renderScript()</methodname> Methode des
                         <emphasis>ViewRenderer</emphasis>'s.
                     </para>
                 </note>
@@ -529,23 +533,24 @@ $viewRenderer =
 
                 <para>
                     <methodname>getViewScript()</methodname> verwendet entweder
-                    <code>viewScriptPathSpec</code> oder
-                    <code>viewScriptPathNoControllerSpec</code> basierend auf den Einstellungen
-                    des <code>noController</code> Flags.
+                    <emphasis>viewScriptPathSpec</emphasis> oder
+                    <emphasis>viewScriptPathNoControllerSpec</emphasis> basierend auf den
+                    Einstellungen des <emphasis>noController</emphasis> Flags.
                 </para>
 
                 <para>
                     Wortbegrenzer die in Modul-, Kontroller- oder Aktionsnamen vorkommen werden mit
                     Bindestrichen ('-') ersetzt. Deshalb resultiert, wenn der Kontrollername
                     'foo.bar' und die Aktion 'baz:bat' ist, die Verwendung der standard Pfad
-                    Spezifikation einen View Skript Pfad von 'foo-bar/baz-bat.phtml'.
+                    Spezifikation einen View Skript Pfad von
+                    '<filename>foo-bar/baz-bat.phtml</filename>'.
                 </para>
 
                 <note>
                     <para>
                         Standardmäßig handelt
-                        <classname>Zend_Controller_Action::getViewScript()</classname> in Vertretung
-                        zur <methodname>getViewScript()</methodname> Methode des
+                        <methodname>Zend_Controller_Action::getViewScript()</methodname> in
+                        Vertretung zur <methodname>getViewScript()</methodname> Methode des
                         <emphasis>ViewRenderer</emphasis>'s.
                     </para>
                 </note>
@@ -648,14 +653,14 @@ class Foo_BarController extends Zend_Controller_Action
             <title>Benamungs Konventionen: Wort Begrenzer in Kontroller- und Aktionnamen</title>
             <para>
                 Wenn der Kontroller- oder Aktionsname aus mehreren Wörtern aufgebaut ist, müssen
-                diese, da der Dispatcher das benötigt, seperiert sein durch die URL nach
-                spezifischem Pfad und Wort Begrenzer Zeichen. Der <emphasis>ViewRenderer</emphasis>
-                ersetzt jeden Pfad Begrenzer den er im Kontrollernamen findet mit einem aktuellen
-                Pfad Begrenzer ('/'), und jeden Wort Begrenzer der gefunden wird mit einem
-                Bindestrich ('-') wenn Pfade erstellt werden. Deshalb würde ein Aufruf der Aktion
-                <filename>/foo.bar/baz.bat</filename> zu
+                diese, da der Dispatcher das benötigt, seperiert sein durch die
+                <acronym>URL</acronym> nach spezifischem Pfad und Wort Begrenzer Zeichen. Der
+                <emphasis>ViewRenderer</emphasis> ersetzt jeden Pfad Begrenzer den er im
+                Kontrollernamen findet mit einem aktuellen Pfad Begrenzer ('/'), und jeden Wort
+                Begrenzer der gefunden wird mit einem Bindestrich ('-') wenn Pfade erstellt werden.
+                Deshalb würde ein Aufruf der Aktion <filename>/foo.bar/baz.bat</filename> zu
                 <methodname>FooBarController::bazBatAction()</methodname> in
-                FooBarControll.php weiterleiten was wiederum
+                <filename>FooBarControll.php</filename> weiterleiten was wiederum
                 <filename>foo-bar/baz-bat.phtml</filename> darstellen würde; ein Aufruf der Aktion
                 <filename>/bar_baz/baz-bat</filename> für dazu das
                 <methodname>Bar_BazController::bazBatAction()</methodname> in
@@ -667,8 +672,9 @@ class Foo_BarController extends Zend_Controller_Action
             <para>
                 Es ist zu beachten das im zweiten Beispiel, das Modul noch immer das Standardmodul
                 ist, aber das der Kontroller, wegen der Existenz eines Pfad Separators, den Namen
-                <code>Bar_BazController</code> in <filename>Bar/BazController.php</filename>
-                empfängt. Der ViewRenderer emuliert die Kontroller Verzeichnis Hierarchie.
+                <classname>Bar_BazController</classname> in
+                <filename>Bar/BazController.php</filename> empfängt. Der ViewRenderer emuliert die
+                Kontroller Verzeichnis Hierarchie.
             </para>
         </note>
 
@@ -677,7 +683,8 @@ class Foo_BarController extends Zend_Controller_Action
 
             <para>
                 Für einige Aktionen oder Kontroller, kann es gewünscht sein das automatische Rendern
-                auszuschalten -- zum Beispiel, wenn eine andere Art von Ausgabe (XML, JSON, etc)
+                auszuschalten -- zum Beispiel, wenn eine andere Art von Ausgabe
+                (<acronym>XML</acronym>, <acronym>JSON</acronym>, etc)
                 ausgegeben werden soll, oder wenn man einfach nichts ausgeben will. Es gibt zwei
                 Optionen: Alle Fälle von automatischem Rendern ausschalten
                 (<methodname>setNeverRender()</methodname>), oder dieses einfach für die aktuelle
@@ -814,11 +821,12 @@ class Foo_BarController extends Zend_Controller_Action
 
             <para>
                 Für die Zwecke dieses Beispiels, nehmen wir an das der Basispfad zur View
-                '/opt/vendor/templates' sein soll, und das die View Skripte durch
-                ':moduleDir/:controller/:action.:suffix' referenziert werden sollen; wenn das
-                noController Flag gesetzt wurde, soll aus dem Top Level statt aus einem
-                Unterverzeichnis gerendert werden (':action.:suffix'). Zuletzt soll 'tpl' als View
-                Skript Suffix für Dateinamen verwendet werden.
+                '<filename>/opt/vendor/templates</filename>' sein soll, und das die View Skripte
+                durch '<filename>:moduleDir/:controller/:action.:suffix</filename>' referenziert
+                werden sollen; wenn das <emphasis>noController</emphasis> Flag gesetzt wurde, soll
+                aus dem Top Level statt aus einem Unterverzeichnis gerendert werden
+                ('<filename>:action.:suffix</filename>'). Zuletzt soll 'tpl' als View Skript Suffix
+                für Dateinamen verwendet werden.
             </para>
 
             <programlisting language="php"><![CDATA[

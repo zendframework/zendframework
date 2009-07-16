@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16315 -->
+<!-- EN-Revision: 16475 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.console.getopt.fetching">
     <title>Holen von Optionen und Argumenten</title>
@@ -29,7 +29,7 @@
             Code der Anwendung abgefangen werden. Die <methodname>parse()</methodname> Methode
             kann verwendet werden um das Objekt dazu zu zwingen die Argumente zu
             analysieren. Das ist deswegen nützlich weil <methodname>parse()</methodname> in
-            einen <code>try</code> Block eingebettet werden kann. Wenn es erfolgreich
+            einen <emphasis>try</emphasis> Block eingebettet werden kann. Wenn es erfolgreich
             ist, kann man sicher sein das die Analyse keine weiteren Ausnahmen werfen
             wird. Die geworfene Ausnahme hat eine eigene Methode
             <methodname>getUsageMessage()</methodname>, welche die formatierten Hinweise für die

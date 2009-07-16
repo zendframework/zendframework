@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16315 -->
+<!-- EN-Revision: 16476 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.console.getopt.rules">
     <title>Definieren von Getopt Regeln</title>
@@ -66,31 +66,31 @@ $opts = new Zend_Console_Getopt('abp:');
         <para>
             Der Schlüssel jeden Elements des assoziativen Array ist eine
             Zeichenkette mit einem Format das das Flag benennt, mit jedem Alias,
-            getrennt durch ein Pipe Symbol ("<code>|</code>"). Dieser Serie von
+            getrennt durch ein Pipe Symbol ("<emphasis>|</emphasis>"). Dieser Serie von
             Flag Aliasen folgende, wenn die Option einen Parameter benötigt, ist
-            ein Gleichheitszeichen ("<code>=</code>") mit einem Buchstaben der
+            ein Gleichheitszeichen ("<emphasis>=</emphasis>") mit einem Buchstaben der
             für den <emphasis>Typ</emphasis> dieses Parameters steht:
         </para>
         <itemizedlist>
             <listitem>
                 <para>
-                    "<code>=s</code>" für einen Zeichenketten Parameter
+                    "<emphasis>=s</emphasis>" für einen Zeichenketten Parameter
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    "<code>=w</code>" für einen Wort Parameter
+                    "<emphasis>=w</emphasis>" für einen Wort Parameter
                     (eine Zeichenkette die keine Leerzeichen enthält)
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    "<code>=i</code>" für einen Integer Parameter
+                    "<emphasis>=i</emphasis>" für einen Integer Parameter
                 </para>
             </listitem>
         </itemizedlist>
         <para>
-            Wenn der Parameter optional ist, kann ein Bindestrich ("<code>-</code>")
+            Wenn der Parameter optional ist, kann ein Bindestrich ("<emphasis>-</emphasis>")
             statt des Gleichheitszeichens verwendet werden.
         </para>
         <para>

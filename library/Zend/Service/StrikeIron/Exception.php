@@ -20,8 +20,10 @@
  * @version    $Id$
  */
 
-/** Zend_Exception */
-require_once 'Zend/Exception.php';
+/**
+ * @see Zend_Service_Exception
+ */
+require_once 'Zend/Service/Exception.php';
 
 /**
  * @category   Zend

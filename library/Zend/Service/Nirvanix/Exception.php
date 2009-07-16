@@ -21,9 +21,9 @@
  */
 
 /**
- * @see Zend_Exception
+ * @see Zend_Service_Exception
  */
-require_once 'Zend/Exception.php';
+require_once 'Zend/Service/Exception.php';
 
 /**
  * @category   Zend

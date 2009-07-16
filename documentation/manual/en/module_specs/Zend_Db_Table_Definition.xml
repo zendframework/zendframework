@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.db.table.row">
+
+    <title>Zend_Db_Table_Definition</title>
+
+    <sect2 id="zend.db.table.definition.introduction">
+
+        <title>Introduction</title>
+
+        <para>
+            <classname>Zend_Db_Table_Definition</classname> is a class that can be used to 
+            describe the relationships and configuration options that should be used when
+            <classname>Zend_Db_Table</classname> is used via concrete instantiation.
+        </para>
+
+    </sect2>
+    
+    <sect2 id="zend.db.table.definition.usage">
+
+        <title>Basic Usage</title>
+
+        <para>
+            For all of the same options that are available when configuring an extended
+            Zend_Db_Table_Abstract class, those options are also available when describing
+            a definition file.  This definition file should be passed to the class at
+            instantiation time so that it can know the full definition of all tables
+            in said definition.
+        </para>
+
+        <para>
+            Below is a definition that will describe the table names and relationships
+            between table objects.  Note: if 'name' is left out of the definition, it
+            will be take as the key of the defined table (an example of this is in the
+            'genre' section in the example below.)
+        </para>
+
+        <example id="zend.db.table.definition.example1">
+
+            <title>Describing the Definition of a Database Data Model</title>
+
+            <programlisting language="php"><![CDATA[
+$definition = new Zend_Db_Table_Definition(array(
+    'author' => array(
+        'name' => 'author',
+        'dependentTables' => array('book')
+        ),
+    'book' => array(
+        'name' => 'book',
+        'referenceMap' => array(
+            'author' => array(
+                'columns' => 'author_id',
+                'refTableClass' => 'author',
+                'refColumns' => 'id'
+                )
+            )
+        ),
+    'genre' => null,
+    'book_to_genre' => array(
+        'referenceMap' => array(
+            'book' => array(
+                'columns' => 'book_id',
+                'refTableClass' => 'book',
+                'refColumns' => 'id'
+                ),
+            'genre' => array(
+                'columns' => 'genre_id',
+                'refTableClass' => 'genre',
+                'refColumns' => 'id'
+                )
+            )
+        )
+    ));
+]]></programlisting>
+
+        </example>
+
+        <para>
+            As you can see, the same options you'd generally see inside of an
+            extended Zend_Db_Table_Abstract class are documented in this
+            array as well.  When passed into Zend_Db_Table constructor, this
+            definition is <strong>persisted</strong> to any tables it will need
+            to create in order to return the proper rows.
+        </para>
+
+        <para>
+            Below is an example of the primary table instantiation as well as
+            the findDependentRowset() and findManyToManyRowset() calls that will
+            correspond to the data model described above:
+        </para>
+
+
+        <example id="zend.db.table.definition.example2">
+        
+            <title>Interacting with the described definition</title>
+        
+            <programlisting language="php"><![CDATA[
+$authorTable = new Zend_Db_Table('author', $definition);
+$authors = $authorTable->fetchAll();
+
+foreach ($authors as $author) {
+    echo $author->id . ': ' . $author->first_name . ' ' . $author->last_name . PHP_EOL;
+    $books = $author->findDependentRowset('book');
+    foreach ($books as $book) {
+        echo '    Book: ' . $book->title . PHP_EOL;
+        $genreOutputArray = array();
+        foreach ($book->findManyToManyRowset('genre', 'book_to_genre') as $genreRow) {
+            $genreOutputArray[] = $genreRow->name;
+        }
+        echo '        Genre: ' . implode(', ', $genreOutputArray) . PHP_EOL;
+    }
+}
+]]></programlisting>
+
+        </example>
+
+
+    </sect2>
+
+    <sect2 id="zend.db.table.definition.advanced-usage">
+    
+        <title>Advanced Usage</title>
+        
+        <para>
+            Sometimes you want to use both paradigms for defining and using the 
+            table gateway: both by extension and concrete instantiation.  To do this
+            simply leave out any table configurations out of the definition.  This will
+            allow Zend_Db_Table to look for the actual refered class instead of the
+            definition key.
+        </para>
+    
+        <para>
+            Building on the example above, we will allow for one of the table configurations
+            to be a Zend_Db_Table_Abstract extended class, while keeping the rest of the tables
+            as part of the definition.  We will also show how one would interact with this 
+            new definition.
+        </para>
+    
+        <example id="zend.db.table.definition.example3">
+        
+            <title>Interacting A Mixed Use Zend_Db_Table Definition</title>
+        
+            <programlisting language="php"><![CDATA[
+class MyBook extends Zend_Db_Table_Abstract
+{
+    protected $_name = 'book';
+    protected $_referenceMap = array(
+        'author' => array(
+            'columns' => 'author_id',
+            'refTableClass' => 'author',
+            'refColumns' => 'id'
+            )
+        );
+}
+
+$definition = new Zend_Db_Table_Definition(array(
+    'author' => array(
+        'name' => 'author',
+        'dependentTables' => array('MyBook')
+        ),
+    'genre' => null,
+    'book_to_genre' => array(
+        'referenceMap' => array(
+            'book' => array(
+                'columns' => 'book_id',
+                'refTableClass' => 'MyBook',
+                'refColumns' => 'id'
+                ),
+            'genre' => array(
+                'columns' => 'genre_id',
+                'refTableClass' => 'genre',
+                'refColumns' => 'id'
+                )
+            )
+        )
+    ));
+
+$authorTable = new Zend_Db_Table('author', $definition);
+$authors = $authorTable->fetchAll();
+
+foreach ($authors as $author) {
+    echo $author->id . ': ' . $author->first_name . ' ' . $author->last_name . PHP_EOL;
+    $books = $author->findDependentRowset(new MyBook());
+    foreach ($books as $book) {
+        echo '    Book: ' . $book->title . PHP_EOL;
+        $genreOutputArray = array();
+        foreach ($book->findManyToManyRowset('genre', 'book_to_genre') as $genreRow) {
+            $genreOutputArray[] = $genreRow->name;
+        }
+        echo '        Genre: ' . implode(', ', $genreOutputArray) . PHP_EOL;
+    }
+}
+
+]]></programlisting>    
+    
+        </example>
+    
+    </sect2>
+
+</sect1>

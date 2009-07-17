@@ -46,7 +46,7 @@ require_once 'Zend/Feed/Reader/Feed/Interface.php';
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Feed_Reader_Feed_Abstract implements Zend_Feed_Reader_Feed_Interface
+abstract class Zend_Feed_Reader_Feed_FeedAbstract implements Zend_Feed_Reader_Feed_Interface
 {
 	/**
      * Parsed feed data

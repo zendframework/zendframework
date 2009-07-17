@@ -30,9 +30,9 @@ require_once 'Zend/Feed/Reader.php';
 require_once 'Zend/Feed/Reader/Entry/Interface.php';
 
 /**
- * @see Zend_Feed_Reader_Entry_Abstract
+ * @see Zend_Feed_Reader_Entry_EntryAbstract
  */
-require_once 'Zend/Feed/Reader/Entry/Abstract.php';
+require_once 'Zend/Feed/Reader/Entry/EntryAbstract.php';
 
 /**
  * @see Zend_Feed_Reader_Extension_DublinCore_Entry
@@ -75,7 +75,7 @@ require_once 'Zend/Date.php';
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Reader_Entry_Rss extends Zend_Feed_Reader_Entry_Abstract implements Zend_Feed_Reader_Entry_Interface
+class Zend_Feed_Reader_Entry_Rss extends Zend_Feed_Reader_Entry_EntryAbstract implements Zend_Feed_Reader_Entry_Interface
 {
     /**
      * Dublin Core object

@@ -20,9 +20,9 @@
  */
 
 /**
- * @see Zend_Feed_Reader_Feed_Abstract
+ * @see Zend_Feed_Reader_Feed_FeedAbstract
  */
-require_once 'Zend/Feed/Reader/Feed/Abstract.php';
+require_once 'Zend/Feed/Reader/Feed/FeedAbstract.php';
 
 /**
  * @see Zend_Feed_Reader_Extension_Atom_Feed
@@ -35,7 +35,7 @@ require_once 'Zend/Feed/Reader/Extension/Atom/Feed.php';
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Reader_Feed_Atom extends Zend_Feed_Reader_Feed_Abstract
+class Zend_Feed_Reader_Feed_Atom extends Zend_Feed_Reader_Feed_FeedAbstract
 {
 
     /**

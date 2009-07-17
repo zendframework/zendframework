@@ -25,7 +25,7 @@
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Feed_Reader_Entry_Abstract
+abstract class Zend_Feed_Reader_Entry_EntryAbstract
 {
     /**
      * Feed entry data
@@ -145,7 +145,7 @@ abstract class Zend_Feed_Reader_Entry_Abstract
      * Set the XPath query
      *
      * @param  DOMXPath $xpath
-     * @return Zend_Feed_Reader_Entry_Abstract
+     * @return Zend_Feed_Reader_Entry_EntryAbstract
      */
     public function setXpath(DOMXPath $xpath)
     {

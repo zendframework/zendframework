@@ -25,7 +25,7 @@
 require_once 'Zend/Feed/Reader.php';
 
 /**
- * @see Zend_Feed_Reader_Entry_Abstract
+ * @see Zend_Feed_Reader_Entry_EntryAbstract
  */
 require_once 'Zend/Feed/Reader/Extension/EntryAbstract.php';
 

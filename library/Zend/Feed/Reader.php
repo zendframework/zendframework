@@ -686,5 +686,6 @@ class Zend_Feed_Reader
         self::registerExtension('Slash');
         self::registerExtension('WellFormedWeb');
         self::registerExtension('Thread');
+        self::registerExtension('Podcast');
     }
 }

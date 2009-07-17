@@ -28,16 +28,6 @@
 interface Zend_Feed_Reader_Entry_Interface
 {
     /**
-     * Constructor
-     *
-     * @param  Zend_Feed_Entry_Abstract $entry
-     * @param  int $entryKey
-     * @param  string $type
-     * @return void
-     */
-    public function __construct(DOMElement $entry, $entryKey, $type = null);
-
-    /**
      * Get the specified author
      *
      * @param  int $index
@@ -79,6 +69,13 @@ interface Zend_Feed_Reader_Entry_Interface
      * @return string
      */
     public function getDescription();
+
+    /**
+     * Get the entry enclosure
+     *
+     * @return stdClass
+     */
+    public function getEnclosure();
 
     /**
      * Get the entry ID

@@ -198,6 +198,24 @@ class Zend_Feed_Reader_Entry_Atom extends Zend_Feed_Reader_Entry_Abstract implem
     }
 
     /**
+     * Get the entry enclosure
+     *
+     * @return string
+     */
+    public function getEnclosure()
+    {
+        if (array_key_exists('enclosure', $this->_data)) {
+            return $this->_data['enclosure'];
+        }
+
+        $enclosure = $this->_atom->getEnclosure();
+
+        $this->_data['enclosure'] = $enclosure;
+
+        return $this->_data['enclosure'];
+    }
+
+    /**
      * Get the entry ID
      *
      * @return string

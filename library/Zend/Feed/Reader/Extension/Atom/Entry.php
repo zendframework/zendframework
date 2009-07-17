@@ -40,7 +40,7 @@ require_once 'Zend/Date.php';
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Reader_Extension_Atom_Entry 
+class Zend_Feed_Reader_Extension_Atom_Entry
     extends Zend_Feed_Reader_Extension_EntryAbstract
 {
 	/**
@@ -207,6 +207,33 @@ class Zend_Feed_Reader_Extension_Atom_Entry
         $this->_data['description'] = $description;
 
         return $this->_data['description'];
+    }
+
+    /**
+     * Get the entry enclosure
+     *
+     * @return string
+     */
+    public function getEnclosure()
+    {
+        if (array_key_exists('enclosure', $this->_data)) {
+            return $this->_data['enclosure'];
+        }
+
+        $enclosure = null;
+
+        $nodeList = $this->_xpath->query($this->getXpathPrefix() . '/atom:link[@rel="enclosure"]');
+
+        if ($nodeList->length > 0) {
+            $enclosure = new stdClass();
+            $enclosure->url    = $nodeList->item(0)->getAttribute('href');
+            $enclosure->length = $nodeList->item(0)->getAttribute('length');
+            $enclosure->type   = $nodeList->item(0)->getAttribute('type');
+        }
+
+        $this->_data['enclosure'] = $enclosure;
+
+        return $this->_data['enclosure'];
     }
 
     /**
@@ -442,7 +469,7 @@ class Zend_Feed_Reader_Extension_Atom_Entry
      */
     protected function _registerNamespaces()
     {
-        if ($this->getType() == Zend_Feed_Reader::TYPE_ATOM_10 
+        if ($this->getType() == Zend_Feed_Reader::TYPE_ATOM_10
             || $this->getType() == Zend_Feed_Reader::TYPE_ATOM_03
         ) {
             return; // pre-registered at Feed level

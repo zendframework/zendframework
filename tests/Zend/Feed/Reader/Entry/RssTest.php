@@ -1385,6 +1385,33 @@ class Zend_Feed_Reader_Entry_RssTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Get enclosure
+     */
+    public function testGetsEnclosureFromRss20()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/enclosure/plain/rss20.xml')
+        );
+        $entry = $feed->current();
+
+        $expected = new stdClass();
+        $expected->url    = 'http://www.scripting.com/mp3s/weatherReportSuite.mp3';
+        $expected->length = '12216320';
+        $expected->type   = 'audio/mpeg';
+
+        $this->assertEquals($expected, $entry->getEnclosure());
+    }
+
+    public function testGetsEnclosureFromRss10()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/enclosure/plain/rss10.xml')
+        );
+        $entry = $feed->current();
+        $this->assertEquals(null, $entry->getEnclosure());
+    }
+
+    /**
      * Get Content (Unencoded Text)
      */
     public function testGetsContentFromRss20()

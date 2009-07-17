@@ -183,6 +183,39 @@ class Zend_Feed_Reader_Entry_AtomTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Get enclosure
+     */
+    public function testGetsEnclosureFromAtom03()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/enclosure/plain/atom03.xml')
+        );
+        $entry = $feed->current();
+
+        $expected = new stdClass();
+        $expected->url    = 'http://www.example.org/myaudiofile.mp3';
+        $expected->length = '1234';
+        $expected->type   = 'audio/mpeg';
+
+        $this->assertEquals($expected, $entry->getEnclosure());
+    }
+
+    public function testGetsEnclosureFromAtom10()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/enclosure/plain/atom10.xml')
+        );
+        $entry = $feed->current();
+
+        $expected = new stdClass();
+        $expected->url    = 'http://www.example.org/myaudiofile.mp3';
+        $expected->length = '1234';
+        $expected->type   = 'audio/mpeg';
+
+        $this->assertEquals($expected, $entry->getEnclosure());
+    }
+
+    /**
      * Get Content (Unencoded Text)
      */
     public function testGetsContentFromAtom03()

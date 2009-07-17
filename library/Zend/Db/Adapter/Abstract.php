@@ -471,7 +471,7 @@ abstract class Zend_Db_Adapter_Abstract
     /**
      * Leave autocommit mode and begin a transaction.
      *
-     * @return bool True
+     * @return Zend_Db_Adapter_Abstract
      */
     public function beginTransaction()
     {
@@ -479,13 +479,13 @@ abstract class Zend_Db_Adapter_Abstract
         $q = $this->_profiler->queryStart('begin', Zend_Db_Profiler::TRANSACTION);
         $this->_beginTransaction();
         $this->_profiler->queryEnd($q);
-        return true;
+        return $this;
     }
 
     /**
      * Commit a transaction and return to autocommit mode.
      *
-     * @return bool True
+     * @return Zend_Db_Adapter_Abstract
      */
     public function commit()
     {
@@ -493,13 +493,13 @@ abstract class Zend_Db_Adapter_Abstract
         $q = $this->_profiler->queryStart('commit', Zend_Db_Profiler::TRANSACTION);
         $this->_commit();
         $this->_profiler->queryEnd($q);
-        return true;
+        return $this;
     }
 
     /**
      * Roll back a transaction and return to autocommit mode.
      *
-     * @return bool True
+     * @return Zend_Db_Adapter_Abstract
      */
     public function rollBack()
     {
@@ -507,7 +507,7 @@ abstract class Zend_Db_Adapter_Abstract
         $q = $this->_profiler->queryStart('rollback', Zend_Db_Profiler::TRANSACTION);
         $this->_rollBack();
         $this->_profiler->queryEnd($q);
-        return true;
+        return $this;
     }
 
     /**

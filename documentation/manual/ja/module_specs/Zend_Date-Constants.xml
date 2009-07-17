@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16561 -->
+<!-- EN-Revision: 16810 -->
 <sect1 id="zend.date.constants">
 
     <title>日付関数全般用の定数</title>
@@ -686,14 +686,14 @@
                     </row>
                     <row>
                         <entry>Zend_Date::DATETIME_MEDIUM</entry>
-                        <entry>通常の日付 (地域化された文字列、通常の形式)</entry>
+                        <entry>通常の日付・時刻 (地域化された文字列、通常の形式)</entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>13.02.2009 14:53:27</emphasis>
                         </entry>
                     </row>
                     <row>
                         <entry>Zend_Date::DATETIME_SHORT</entry>
-                        <entry>省略形の日付 (地域化された文字列、短縮形式)</entry>
+                        <entry>省略形の日付・時刻 (地域化された文字列、短縮形式)</entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>13.02.09 14:53</emphasis>
                         </entry>

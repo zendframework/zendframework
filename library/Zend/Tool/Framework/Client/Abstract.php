@@ -60,6 +60,23 @@ abstract class Zend_Tool_Framework_Client_Abstract implements Zend_Tool_Framewor
      */
     protected $_debugLogger = null;
     
+    public function __construct($options = array())
+    {
+        if ($options) {
+            $this->setOptions($options);
+        }
+    }
+    
+    public function setOptions(Array $options)
+    {
+        foreach ($options as $optionName => $optionValue) {
+            $setMethodName = 'set' . $optionName;
+            if (method_exists($this, $setMethodName)) {
+                $this->{$setMethodName}($optionValue);
+            }
+        }
+    }
+    
     /**
      * getName() - Return the client name which can be used to 
      * query the manifest if need be.

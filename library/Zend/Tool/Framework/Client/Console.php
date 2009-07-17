@@ -65,6 +65,11 @@ class Zend_Tool_Framework_Client_Console
 {
 
     /**
+     * @var string
+     */
+    protected $_configOptions = null;
+    
+    /**
      * @var Zend_Filter_Word_CamelCaseToDash
      */
     protected $_filterToClientNaming = null;
@@ -79,13 +84,19 @@ class Zend_Tool_Framework_Client_Console
      * self contained main() function.
      *
      */
-    public static function main()
+    public static function main($options = array())
     {
         ini_set('display_errors', true);
-        $cliClient = new self();
+        $cliClient = new self($options);
         $cliClient->dispatch();
     }
 
+    public function setConfigOptions($configOptions)
+    {
+        $this->_configOptions = $configOptions;
+        return $this;
+    }
+    
     /**
      * getName() - return the name of the client, in this case 'console'
      *
@@ -102,6 +113,12 @@ class Zend_Tool_Framework_Client_Console
      */
     protected function _preInit()
     {
+        $config = $this->_registry->getConfig();
+
+        if ($this->_configOptions != null) {
+            $config->setOptions($this->_configOptions);
+        }
+        
         // support the changing of the current working directory, necessary for some providers
         if (isset($_ENV['ZEND_TOOL_CURRENT_WORKING_DIRECTORY'])) {
             chdir($_ENV['ZEND_TOOL_CURRENT_WORKING_DIRECTORY']);

@@ -44,6 +44,11 @@ class Zend_Tool_Framework_Registry implements Zend_Tool_Framework_Registry_Inter
     protected $_client = null;
     
     /**
+     * @var Zend_Tool_Framework_Client_Config
+     */
+    protected $_config = null;
+    
+    /**
      * @var Zend_Tool_Framework_Action_Repository
      */
     protected $_actionRepository = null;
@@ -110,6 +115,33 @@ class Zend_Tool_Framework_Registry implements Zend_Tool_Framework_Registry_Inter
     public function getClient()
     {
         return $this->_client;
+    }
+    
+    /**
+     * setConfig() 
+     *
+     * @param Zend_Tool_Framework_Client_Config $config
+     * @return Zend_Tool_Framework_Registry
+     */
+    public function setConfig(Zend_Tool_Framework_Client_Config $config)
+    {
+        $this->_config = $config;
+        return $this;
+    }
+    
+    /**
+     * getConfig()
+     *
+     * @return Zend_Tool_Framework_Client_Config
+     */
+    public function getConfig()
+    {
+        if ($this->_config === null) {
+            require_once 'Zend/Tool/Framework/Client/Config.php';
+            $this->setConfig(new Zend_Tool_Framework_Client_Config());
+        }
+        
+        return $this->_config;
     }
     
     /**

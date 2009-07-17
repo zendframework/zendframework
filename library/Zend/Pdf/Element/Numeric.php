@@ -51,6 +51,7 @@ class Zend_Pdf_Element_Numeric extends Zend_Pdf_Element
     public function __construct($val)
     {
         if ( !is_numeric($val) ) {
+        	require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('Argument must be numeric');
         }
 

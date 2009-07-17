@@ -18,6 +18,11 @@ require_once 'PHPUnit/Framework/TestCase.php';
  */
 class Zend_Pdf_ProcessingTest extends PHPUnit_Framework_TestCase
 {
+	public function setUp()
+	{
+		date_default_timezone_set('GMT');
+	}
+
     public function testCreate()
     {
         $pdf = new Zend_Pdf();

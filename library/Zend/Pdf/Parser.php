@@ -100,6 +100,13 @@ class Zend_Pdf_Parser
      */
     private $_trailer;
 
+    /**
+     * PDF version specified in the file header
+     *
+     * @var string
+     */
+    private $_pdfVersion;
+
 
     /**
      * Get length of source PDF
@@ -119,6 +126,16 @@ class Zend_Pdf_Parser
     public function getPDFString()
     {
         return $this->_stringParser->data;
+    }
+
+    /**
+     * PDF version specified in the file header
+     *
+     * @return string
+     */
+    public function getPDFVersion()
+    {
+    	return $this->_pdfVersion;
     }
 
     /**
@@ -400,8 +417,10 @@ class Zend_Pdf_Parser
             throw new Zend_Pdf_Exception('File is not a PDF.');
         }
 
-        $pdfVersion = (float)substr($pdfVersionComment, 5);
-        if ($pdfVersion < 0.9 || $pdfVersion >= 1.61) {
+        $pdfVersion = substr($pdfVersionComment, 5);
+        if (version_compare($pdfVersion, '0.9',  '<')  ||
+            version_compare($pdfVersion, '1.61', '>=')
+           ) {
             /**
              * @todo
              * To support PDF versions 1.5 (Acrobat 6) and PDF version 1.7 (Acrobat 7)
@@ -410,6 +429,7 @@ class Zend_Pdf_Parser
              */
             throw new Zend_Pdf_Exception(sprintf('Unsupported PDF version. Zend_Pdf supports PDF 1.0-1.4. Current version - \'%f\'', $pdfVersion));
         }
+        $this->_pdfVersion = $pdfVersion;
 
         $this->_stringParser->offset = strrpos($this->_stringParser->data, '%%EOF');
         if ($this->_stringParser->offset === false ||

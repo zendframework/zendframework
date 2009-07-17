@@ -122,9 +122,9 @@ class Zend_Pdf_Page
 
 
     /**
-     * Reference to the object with page dictionary.
+     * Page dictionary (refers to an inderect Zend_Pdf_Element_Dictionary object).
      *
-     * @var Zend_Pdf_Element_Reference
+     * @var Zend_Pdf_Element_Reference|Zend_Pdf_Element_Object
      */
     protected $_pageDictionary;
 
@@ -414,6 +414,7 @@ class Zend_Pdf_Page
     /**
      * Retrive PDF file reference to the page
      *
+     * @internal
      * @return Zend_Pdf_Element_Dictionary
      */
     public function getPageDictionary()

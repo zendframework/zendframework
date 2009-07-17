@@ -125,7 +125,7 @@ abstract class Zend_Db_Table_Abstract
     /**
      * The table name.
      *
-     * @var array
+     * @var string
      */
     protected $_name = null;
 

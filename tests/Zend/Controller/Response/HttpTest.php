@@ -196,7 +196,11 @@ class Zend_Controller_Response_HttpTest extends PHPUnit_Framework_TestCase
     public function test__toString()
     {
 
-        //$skipHeadersTest = headers_sent();
+        $skipHeadersTest = headers_sent();
+        if ($skipHeadersTest) {
+            $this->markTestSkipped('Unable to run Zend_Controller_Response_Http::__toString() test as headers have already been sent');
+            return;
+        }
 
         $this->_response->setHeader('Content-Type', 'text/plain');
         $this->_response->setBody('Content');

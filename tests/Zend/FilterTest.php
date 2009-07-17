@@ -112,13 +112,13 @@ class Zend_FilterTest extends PHPUnit_Framework_TestCase
     public function testStaticFactoryWithConstructorArguments()
     {
         // Test HtmlEntities with one ctor argument.
-        $filteredValue = Zend_Filter::get('"O\'Reilly"', 'HtmlEntities', array(ENT_COMPAT));
+        $filteredValue = Zend_Filter::get('"O\'Reilly"', 'HtmlEntities', array(array('quotestyle' => ENT_COMPAT)));
         $this->assertEquals('&quot;O\'Reilly&quot;', $filteredValue);
 
         // Test HtmlEntities with a different ctor argument,
         // and make sure it gives the correct response
         // so we know it passed the arg to the ctor.
-        $filteredValue = Zend_Filter::get('"O\'Reilly"', 'HtmlEntities', array(ENT_QUOTES));
+        $filteredValue = Zend_Filter::get('"O\'Reilly"', 'HtmlEntities', array(array('quotestyle' => ENT_QUOTES)));
         $this->assertEquals('&quot;O&#039;Reilly&quot;', $filteredValue);
     }
 

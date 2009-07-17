@@ -63,6 +63,7 @@ class Zend_DateTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        $this->originalTimezone = date_default_timezone_get();
         date_default_timezone_set('Indian/Maldives');
         require_once 'Zend/Cache.php';
         $this->_cache = Zend_Cache::factory('Core', 'File',
@@ -76,6 +77,7 @@ class Zend_DateTest extends PHPUnit_Framework_TestCase
     public function tearDown()
     {
         $this->_cache->clean(Zend_Cache::CLEANING_MODE_ALL);
+        date_default_timezone_set($this->originalTimezone);
     }
 
     /**

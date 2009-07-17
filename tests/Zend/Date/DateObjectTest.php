@@ -42,12 +42,18 @@ class Zend_Date_DateObjectTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        $this->originalTimezone = date_default_timezone_get();
         date_default_timezone_set('Europe/Paris');
         require_once 'Zend/Cache.php';
         $cache = Zend_Cache::factory('Core', 'File',
                  array('lifetime' => 120, 'automatic_serialization' => true),
                  array('cache_dir' => dirname(__FILE__) . '/../_files/'));
         Zend_Date_DateObjectTestHelper::setOptions(array('cache' => $cache));
+    }
+
+    public function tearDown()
+    {
+        date_default_timezone_set($this->originalTimezone);
     }
 
     /**

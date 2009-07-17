@@ -24,11 +24,6 @@
  */
 require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
-/**
- * Start output buffering to prevent problems using session
- */
-ob_start();
-
 
 /**
  * @see Zend_Auth

@@ -104,6 +104,7 @@ class Zend_Amf_AuthTest extends PHPUnit_Framework_TestCase
 	
 	public function testUnauthenticated()
 	{
+        Zend_Session::$_unitTestEnabled = true;
 		$this->_server->setAuth(new WrongPassword());
 		$this->_server->setAcl($this->_acl);
 		$data = $this->_callService();
@@ -113,6 +114,7 @@ class Zend_Amf_AuthTest extends PHPUnit_Framework_TestCase
 
 	public function testAnonymousDenied()
 	{
+        Zend_Session::$_unitTestEnabled = true;
 		$this->_server->setAuth(new WrongPassword());
 		$this->_acl->addRole(new Zend_Acl_Role(Zend_Amf_Constants::GUEST_ROLE));
 		$this->_server->setAcl($this->_acl);
@@ -123,6 +125,7 @@ class Zend_Amf_AuthTest extends PHPUnit_Framework_TestCase
 
 	public function testAnonymousOK()
 	{
+        Zend_Session::$_unitTestEnabled = true;
 		$this->_server->setAuth(new WrongPassword());
 		$this->_acl->addRole(new Zend_Acl_Role(Zend_Amf_Constants::GUEST_ROLE));
 		$this->_acl->allow(Zend_Amf_Constants::GUEST_ROLE, null, null);
@@ -153,6 +156,7 @@ class Zend_Amf_AuthTest extends PHPUnit_Framework_TestCase
 
 	public function testRightPassword()
 	{
+        Zend_Session::$_unitTestEnabled = true;
 		$this->_server->setAuth(new RightPassword("testuser", "testrole"));
 		$this->_acl->addRole(new Zend_Acl_Role("testrole"));
 		$this->_acl->allow("testrole", null, null);
@@ -189,6 +193,7 @@ class Zend_Amf_AuthTest extends PHPUnit_Framework_TestCase
 	// Class-defined ACL
 	public function testClassAclAllowed()
 	{
+        Zend_Session::$_unitTestEnabled = true;
 		$this->_server->setAuth(new RightPassword("testuser", "testrole"));
 		$this->_acl->addRole(new Zend_Acl_Role("testrole"));
 		$this->_acl->addRole(new Zend_Acl_Role("testrole2"));
@@ -215,6 +220,7 @@ class Zend_Amf_AuthTest extends PHPUnit_Framework_TestCase
 	// Class-defined ACL
 	public function testClassAclAllowed2()
 	{
+        Zend_Session::$_unitTestEnabled = true;
 		$this->_server->setAuth(new RightPassword("testuser", "testrole2"));
 		$this->_acl->addRole(new Zend_Acl_Role("testrole"));
 		$this->_acl->addRole(new Zend_Acl_Role("testrole2"));
@@ -226,6 +232,7 @@ class Zend_Amf_AuthTest extends PHPUnit_Framework_TestCase
 
 	public function testLogout()
 	{
+        Zend_Session::$_unitTestEnabled = true;
 		$this->_server->setAuth(new RightPassword("testuser", "testrole"));
 		$this->_acl->addRole(new Zend_Acl_Role("testrole"));
 		$this->_acl->allow("testrole", null, null);

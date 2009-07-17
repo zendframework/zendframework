@@ -10,6 +10,10 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
 
     public function setup()
     {
+        if (Zend_Registry::isRegistered('Zend_Locale')) {
+            $registry = Zend_Registry::getInstance();
+            unset($registry['Zend_Locale']);
+        }
         $this->_feedSamplePath = dirname(__FILE__) . '/_files/Rss';
     }
 

@@ -948,6 +948,7 @@ class Zend_Amf_ServerTest extends PHPUnit_Framework_TestCase
      */
     public function testSessionAmf3()
     {
+        Zend_Session::$_unitTestEnabled = true;
         Zend_Session::start(); 
         $this->_server->setClass('Zend_Amf_testSession');
         $this->_server->setSession();

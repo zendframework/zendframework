@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16004 -->
+<!-- EN-Revision: 16509 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.actionhelpers.autocomplete">
     <title>AutoComplete</title>
@@ -219,10 +219,11 @@ class TestController extends Zend_Controller_Action
                 store, autoComplete, und hasDownArrow. Der dojoType wird verwendet um anzuzeigen
                 das wir eine ComboBox erstellen, und wir Sie zum Datenspeicher von 'testStore'
                 verbinden wollen (Schlüssel 'store') -- mehr dazu später. Die Spezifizierung von
-                'autoComplete' mit false sagt Dojo das der erste passende Eintrag nicht automatisch
-                ausgewählt wird, aber stattdessen eine Liste von Entsprechnungen angezeigt wird.
-                Letztendlich, erstellt 'hasDownArrow' einen Abwärtspfeil ähnlich einer Selectbox
-                sodas Wir die Entsprechnungen zeigen und verstecken können.
+                'autoComplete' mit <constant>FALSE</constant> sagt Dojo das der erste passende
+                Eintrag nicht automatisch ausgewählt wird, aber stattdessen eine Liste von
+                Entsprechnungen angezeigt wird. Letztendlich, erstellt 'hasDownArrow' einen
+                Abwärtspfeil ähnlich einer Selectbox sodas Wir die Entsprechnungen zeigen und
+                verstecken können.
             </para>
 
             <para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16182 -->
+<!-- EN-Revision: 16566 -->
 <!-- Reviewed: no -->
 <appendix id="requirements">
 
@@ -1464,7 +1464,7 @@
                         <row>
                             <entry>Zend Framework Komponenten</entry>
                             <entry>Abhängigkeit</entry>
-                            <entry>PHP Erweiterung</entry>
+                            <entry><acronym>PHP</acronym> Erweiterung</entry>
                         </row>
                     </thead>
                     <tbody>

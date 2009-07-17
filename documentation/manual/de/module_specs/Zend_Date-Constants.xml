@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16186 -->
+<!-- EN-Revision: 16561 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.constants">
 
@@ -673,6 +673,42 @@
                         <entry>Abgekürzte Zeit (Zeichenkette, Lokalisiert, Abgekürzt)</entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>14:53</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>Zend_Date::DATETIME</emphasis>
+                        </entry>
+                        <entry>Standard Datum mit Zeit (String, Lokalisiert, Standardwert)</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
+                        <entry><emphasis>13.02.2009 14:53:27</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::DATETIME_FULL</entry>
+                        <entry>Vollständiges Datum mit Zeit (String, Lokalisiert, Vollständig)</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
+                        <entry><emphasis>Friday, 13. February 2009 14:53 Uhr CET</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::DATETIME_LONG</entry>
+                        <entry>Langes Datum mit Zeit (String, Lokalisiert, Lang)</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
+                        <entry><emphasis>13. February 2009 14:53:27 CET</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::DATETIME_MEDIUM</entry>
+                        <entry>Normales Datum mit Zeit (String, Lokalisiert, Normal)</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
+                        <entry><emphasis>13.02.2009 14:53:27</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::DATETIME_SHORT</entry>
+                        <entry>Abgekürztes Datum mit Zeit (String, Lokalisiert, Abgekürzt)</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
+                        <entry><emphasis>13.02.09 14:53</emphasis>
                         </entry>
                     </row>
                 </tbody>

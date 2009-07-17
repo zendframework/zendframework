@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16163 -->
+<!-- EN-Revision: 16507 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.actionhelpers" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Action Helfer</title>
@@ -19,9 +19,9 @@
                 linkend="zend.view.helpers">Zend_View_Helper</link>, und denen von <link
                 linkend="zend.controller.plugins">Zend_Controller_Plugin</link>. Aktion Helfer
             <classname>Zend_View_Helper</classname>) können bei Bedarf geladen und aufgerufen
-            werden, oder Sie können wärend der Anfragezeit (Bootstrap) instanziert werden oder wären
-            der Erstellungszeit des Aktion Kontrollers (init()). Um Sie näher zu verstehen,
-            betrachten wir Ihre Verwendung in der folgenden Sektion.
+            werden, oder Sie können wärend der Anfragezeit (Bootstrap) instanziert werden oder
+            wären der Erstellungszeit des Aktion Kontrollers (<methodname>init()</methodname>). Um
+            Sie näher zu verstehen, betrachten wir Ihre Verwendung in der folgenden Sektion.
         </para>
     </sect2>
 
@@ -88,7 +88,7 @@ $this->_helper->FlashMessenger('Wir haben in der letzten Anfrage etwas getan');
             Man kann Helfer auch explizit instanzieren. Das kann gewollt sein wenn der Helfer
             ausserhalb eines Aktion Kontrollers verwendet werden soll, oder wenn ein Helfer an einen
             Helfer Broker übergeben wird um Ihn durch irgendeine Aktion zu verwenden. Instanziert
-            wird er wie jede andere PHP Klasse.
+            wird er wie jede andere <acronym>PHP</acronym> Klasse.
         </para>
     </sect2>
 
@@ -136,8 +136,8 @@ Zend_Controller_Action_HelperBroker::addPrefix('My_Action_Helpers');
                 <para>
                     <methodname>addPath()</methodname> nimmt ein Verzeichnis als erstes Argument
                     und einen Klassenprefix als zweites Argument (Standardwert ist
-                    'Zend_Controller_Action_Helper'). Das erlaubt es die eigenen Klassenpräfixes mit
-                    speziellen Verzeichnissen zu verbinden.
+                    '<classname>Zend_Controller_Action_Helper</classname>'). Das erlaubt es die
+                    eigenen Klassenpräfixes mit speziellen Verzeichnissen zu verbinden.
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -225,15 +225,15 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
 
         <para>
             Zend Framework enthält standardmäßig verschiedene Action Helfer:
-            <emphasis>AutoComplete</emphasis> für automatisierte Antworten für AJAX
-            Autovervollständigung; <emphasis>ContextSwitch</emphasis> und
+            <emphasis>AutoComplete</emphasis> für automatisierte Antworten für
+            <acronym>AJAX</acronym> Autovervollständigung; <emphasis>ContextSwitch</emphasis> und
             <emphasis>AjaxContext</emphasis> für alternative Antwort Formate eigener Aktionen;
             einen <emphasis>FlashMessenger</emphasis> für die Behandlung von Kurznachrichten;
-            <emphasis>Json</emphasis> für das verschlüsseln und senden von JSON Antworten; einen
-            <emphasis>Redirector</emphasis>, um verschiedene Implementationen, für das Umleiten zu
-            internen und externen Seiten, für die Anwendung bereitzustellen und einen
-            <emphasis>ViewRenderer</emphasis> um den Prozess des Setzens eines View Objekts im
-            Kontroller und dem Rendern von Views zu automatisieren.
+            <emphasis>Json</emphasis> für das verschlüsseln und senden von <acronym>JSON</acronym>
+            Antworten; einen <emphasis>Redirector</emphasis>, um verschiedene Implementationen, für
+            das Umleiten zu internen und externen Seiten, für die Anwendung bereitzustellen und
+            einen <emphasis>ViewRenderer</emphasis> um den Prozess des Setzens eines View Objekts
+            im Kontroller und dem Rendern von Views zu automatisieren.
         </para>
 
         <xi:include href="Zend_Controller-ActionHelpers-ActionStack.xml" />
@@ -305,7 +305,7 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
                     andererseits den kompletten Klassennamen. Als Beispiel, wenn die Klasse
                     <classname>Zend_Controller_Action_Helper_Redirector</classname> heißt, wird
                     <emphasis>Redirector</emphasis> zurückgegeben; eine Klasse die
-                    <code>FooMessage</code> heißt wird einfach sich selbst zurückgeben.
+                    <emphasis>FooMessage</emphasis> heißt wird einfach sich selbst zurückgeben.
                 </para>
             </listitem>
         </itemizedlist>
@@ -327,9 +327,9 @@ $this->_helper->redirector('item', 'view', 'blog', array('id' => 42));
 
         <para>
             Intern schaut die <methodname>__call()</methodname> Methode des Helfer Brokers nach
-            einem Helfer der <code>redirector</code> heißt, prüft anschließend ob der Helfer eine
-            definierte <code>direct</code> Klasse besitzt und ruft diese mit den angegebenen
-            Argumenten auf.
+            einem Helfer der <emphasis>redirector</emphasis> heißt, prüft anschließend ob der
+            Helfer eine definierte <methodname>direct()</methodname> Methode besitzt und ruft diese
+            mit den angegebenen Argumenten auf.
         </para>
 
         <para>

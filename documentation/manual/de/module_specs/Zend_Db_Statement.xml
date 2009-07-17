@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15851 -->
+<!-- EN-Revision: 16564 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.statement">
 
     <title>Zend_Db_Statement</title>
 
     <para>
-        Zusätzlich zu den herkömmlichen Methoden wie <code>fetchAll()</code> und
-        <code>insert()</code>, beschrieben in <xref linkend="zend.db.adapter" />, kann auch ein
-        Statement-Objekt verwendet werden, um zusätzliche Möglichkeiten beim Ausführen von Abfragen
-        und holen von Ergebnissätzen zu erhalten. Dieser Abschnitt beschreibt wie eine Instanz eines
-        Statement-Objekts erzeugt wird, und wie dessen Methoden verwendet werden.
+        Zusätzlich zu den herkömmlichen Methoden wie <methodname>fetchAll()</methodname> und
+        <methodname>insert()</methodname>, beschrieben in <xref linkend="zend.db.adapter" />, kann
+        auch ein Statement-Objekt verwendet werden, um zusätzliche Möglichkeiten beim Ausführen von
+        Abfragen und holen von Ergebnissätzen zu erhalten. Dieser Abschnitt beschreibt wie eine
+        Instanz eines Statement-Objekts erzeugt wird, und wie dessen Methoden verwendet werden.
     </para>
 
     <para>
@@ -23,11 +23,11 @@
         <title>Erzeugung von Statement Objekten</title>
 
         <para>
-            Normalerweise wird ein Statement Objekt von der <code>query()</code> Methode der
-            Datenbank Adapterklasse zurück gegeben. Diese Methode ist der grundsätzliche Weg um ein
-            beliebiges SQL Statement vor zu bereiten. Das erste Argument ist ein String, der das SQL
-            Statement enthält. Das optionale zweite Argument ist ein Array von Werten, verknüpft mit
-            Parameterplatzhaltern im SQL String.
+            Normalerweise wird ein Statement Objekt von der <methodname>query()</methodname>
+            Methode der Datenbank Adapterklasse zurück gegeben. Diese Methode ist der
+            grundsätzliche Weg um ein beliebiges SQL Statement vor zu bereiten. Das erste Argument
+            ist ein String, der das SQL Statement enthält. Das optionale zweite Argument ist ein
+            Array von Werten, verknüpft mit Parameterplatzhaltern im SQL String.
         </para>
 
         <example id="zend.db.statement.creating.example1">
@@ -74,8 +74,9 @@ $stmt = new Zend_Db_Statement_Mysqli($db, $sql);
         <para>
             Ein Statement Objekt muss ausgeführt werden wenn es über den Konstruktor erzeugt wurde,
             oder kann, wenn es mehrere Male hintereinander ausgeführt werden soll. Dazu wird die
-            <code>execute()</code> Methode des Statement Objekts verwendet. Das einzige Argument ist
-            ein Array von Werten, welche mit Parameterplatzhaltern im Statement verknüpft werden.
+            <methodname>execute()</methodname> Methode des Statement Objekts verwendet. Das einzige
+            Argument ist ein Array von Werten, welche mit Parameterplatzhaltern im Statement
+            verknüpft werden.
         </para>
 
         <para>
@@ -140,9 +141,9 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
             <title>Holen einer einzelnen Zeile eines Ergebnissatzes</title>
 
             <para>
-                Um eine einzelne Zeile eines Ergebnissatzes aubzurufen kann die <code>fetch()</code>
-                Methode des Statement Objekts verwendet werden. Alle drei Argumente dieser Methode
-                sind optional:
+                Um eine einzelne Zeile eines Ergebnissatzes aubzurufen kann die
+                <methodname>fetch()</methodname> Methode des Statement Objekts verwendet werden.
+                Alle drei Argumente dieser Methode sind optional:
             </para>
 
             <itemizedlist>
@@ -158,8 +159,8 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
                     <para>
                         <emphasis>Cursor Ausrichtung</emphasis> ist das zweite Argument. Standard
                         ist Zend_Db::FETCH_ORI_NEXT, was einfach bedeutet das für jeden Aufruf von
-                        <code>fetch()</code> die nächste Zeile des Ergebnissatzes, in der
-                        Reihenfolge des RDBMS, zurück gegeben wird.
+                        <methodname>fetch()</methodname> die nächste Zeile des Ergebnissatzes, in
+                        der Reihenfolge des RDBMS, zurück gegeben wird.
                     </para>
                 </listitem>
                 <listitem>
@@ -168,15 +169,15 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
                         Wenn die Cursor Ausrichtung Zend_Db::FETCH_ORI_ABS ist, dann ist die
                         Offset-Nummer die ordinale Nummer der Zeile die zurück gegeben wird.
                         Wenn die Cursor Ausrichtung Zend_Db::FETCH_ORI_REL, dann ist die
-                        Offset-Nummer relativ zu der Cursorposition bevor <code>fetch()</code>
-                        aufgerufen wurde.
+                        Offset-Nummer relativ zu der Cursorposition bevor
+                        <methodname>fetch()</methodname> aufgerufen wurde.
                     </para>
                 </listitem>
             </itemizedlist>
 
             <para>
-                <code>fetch()</code> gibt <constant>FALSE</constant> zurück wenn alle Zeilen des
-                Ergbnissatzes geholt wurden.
+                <methodname>fetch()</methodname> gibt <constant>FALSE</constant> zurück wenn alle
+                Zeilen des Ergbnissatzes geholt wurden.
             </para>
 
             <example id="zend.db.statement.fetching.fetch.example">
@@ -203,12 +204,12 @@ while ($row = $stmt->fetch()) {
 
             <para>
                 Um alle Zeilen eines Ergebnissatzes in einem Schritt abzurufen wird die
-                <code>fetchAll()</code> Methode verwendet. Dies ist gleichbedeutend mit dem Aufruf
-                der <code>fetch()</code> Methode in einer Schleife und dem Speichern der
-                Rückgabewerte in einem Array. Die <code>fetchAll()</code> Methode akzeptiert zwei
-                Argumente. Das Erste ist der Fetch Style, wie oben beschrieben, und das Zweite gibt
-                die Nummer der zurück zu gebenden Spalte an, wenn der Fetch Style
-                Zend_Db::FETCH_COLUMN ist.
+                <methodname>fetchAll()</methodname> Methode verwendet. Dies ist gleichbedeutend mit
+                dem Aufruf der <methodname>fetch()</methodname> Methode in einer Schleife und dem
+                Speichern der Rückgabewerte in einem Array. Die <methodname>fetchAll()</methodname>
+                Methode akzeptiert zwei Argumente. Das Erste ist der Fetch Style, wie oben
+                beschrieben, und das Zweite gibt die Nummer der zurück zu gebenden Spalte an, wenn
+                der Fetch Style Zend_Db::FETCH_COLUMN ist.
             </para>
 
             <example id="zend.db.statement.fetching.fetchall.example">
@@ -237,13 +238,13 @@ echo $rows[0]['bug_description'];
                 Standardmäßig gibt das Statement Objekt Zeilen des Ergebnissatzes als assoziatives
                 Array, mapping column names to column values, zurück. Ein anderes Format für die
                 Datenrückgabe der Statementklasse kann genau wie bei der Adapterklasse angegeben
-                werden. Die <code>setFetchMode()</code> Methode des Statement Objekts wird verwendet
-                um den Fetch-Modus anzugeben. Dazu werden die Zend_Db Klassen Konstanten
-                FETCH_ASSOC, FETCH_NUM, FETCH_BOTH, FETCH_COLUMN und FETCH_OBJ verwendet. Weiter
-                Informationenüber diese Modi gibt es unter
+                werden. Die <methodname>setFetchMode()</methodname> Methode des Statement Objekts
+                wird verwendet um den Fetch-Modus anzugeben. Dazu werden die Zend_Db Klassen
+                Konstanten FETCH_ASSOC, FETCH_NUM, FETCH_BOTH, FETCH_COLUMN und FETCH_OBJ
+                verwendet. Weiter Informationenüber diese Modi gibt es unter
                 <xref linkend="zend.db.adapter.select.fetch-mode" />. Nachfolgende Aufrufe der
-                Statement Methoden <code>fetch()</code> und <code>fetchAll()</code> benutzen den neu
-                gesetzten Fetch-Modus.
+                Statement Methoden <methodname>fetch()</methodname> und
+                <methodname>fetchAll()</methodname> benutzen den neu gesetzten Fetch-Modus.
             </para>
 
             <example id="zend.db.statement.fetching.fetch-mode.example">
@@ -271,7 +272,7 @@ echo $rows[0][0];
             <title>Holen einer einzelnen Spalte eines Ergebnissatzes</title>
 
             <para>
-                <code>fetchColumn()</code> wird verwendet mm eine einzelne Spalte eines
+                <methodname>fetchColumn()</methodname> wird verwendet mm eine einzelne Spalte eines
                 Ergebnissatzes zurück zu geben. Das optionale Argument ist der Integer Index der
                 Spalte die zurück gegeben werden soll. Der Standardwert ist 0. Diese Methode gibt
                 einen scalaren Wert zurück, oder <constant>FALSE</constant> wenn alle Zeilen des
@@ -279,11 +280,12 @@ echo $rows[0][0];
             </para>
 
             <para>
-                Zu beachten ist, dass diese Methode anders als die <code>fetchCol()</code> Methode
-                der Adapterklasse arbeitet. Die <code>fetchColumn()</code> Methode der
-                Statementklasse gibt einen einzelnen Wert einer Zeile zurück. Die
-                <code>fetchCol()</code> Methode der Adapterklasse hingegen gibt ein Array von Werten
-                der ersten Spalte aller Zeilen eines Ergebnissatzes zurück.
+                Zu beachten ist, dass diese Methode anders als die
+                <methodname>fetchCol()</methodname> Methode der Adapterklasse arbeitet. Die
+                <methodname>fetchColumn()</methodname> Methode der Statementklasse gibt einen
+                einzelnen Wert einer Zeile zurück. Die <methodname>fetchCol()</methodname> Methode
+                der Adapterklasse hingegen gibt ein Array von Werten der ersten Spalte aller Zeilen
+                eines Ergebnissatzes zurück.
             </para>
 
             <example id="zend.db.statement.fetching.fetchcolumn.example">
@@ -308,10 +310,11 @@ $bug_status = $stmt->fetchColumn(2);
 
             <para>
                 Um eine Zeile eines Ergebnissatzes zu holen, die wie ein Objekt strukturiert ist,
-                wird die <code>fetchObject()</code> Methode verwendet. Diese Methode nimmt zwei
-                optionale Argumente entgegen. Das erste Argument ist ein String der den Klassenname
-                des zurück zu gebenden Objekts enthält, standard ist 'stdClass'. Das zweite Argument
-                ist ein Array von Werten, die an den Konstruktor des Objekts übergeben werden.
+                wird die <methodname>fetchObject()</methodname> Methode verwendet. Diese Methode
+                nimmt zwei optionale Argumente entgegen. Das erste Argument ist ein String der den
+                Klassenname des zurück zu gebenden Objekts enthält, standard ist 'stdClass'. Das
+                zweite Argument ist ein Array von Werten, die an den Konstruktor des Objekts
+                übergeben werden.
             </para>
 
             <example id="zend.db.statement.fetching.fetchobject.example">

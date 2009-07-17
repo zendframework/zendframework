@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16565 -->
 <!-- Reviewed: no -->
 <sect1 id="performance.database">
     <title>Zend_Db Performance</title>
 
     <para>
-        <classname>Zend_Db</classname> ist ein Datenbank Abstraktion Layer und ist dazu gedacht eine
-        gemeinsame API für SQL Operationen zu bieten. <classname>Zend_Db_Table</classname> ist ein
-        Table Data Bateway, dazu gedacht übliche Tabellen-artige Datenbank Operationen zu
-        abstrahieren. Wegen Ihrer abstrakten Natur und der "Magie" die Sie versteckt haben um Ihre
-        Operationen durchführen zu können, können Sie manchmal auch zu Geschwindigkeitsnachteilen
-        führen.
+        <classname>Zend_Db</classname> ist ein Datenbank Abstraktion Layer und ist dazu gedacht
+        eine gemeinsame <acronym>API</acronym> für <acronym>SQL</acronym> Operationen zu bieten.
+        <classname>Zend_Db_Table</classname> ist ein Table Data Bateway, dazu gedacht übliche
+        Tabellen-artige Datenbank Operationen zu abstrahieren. Wegen Ihrer abstrakten Natur und der
+        "Magie" die Sie versteckt haben um Ihre Operationen durchführen zu können, können Sie
+        manchmal auch zu Geschwindigkeitsnachteilen führen.
     </para>
 
     <sect2 id="performance.database.tableMetadata">
@@ -79,23 +79,23 @@
             <title>Selbst getuntes SQL schreiben</title>
 
             <para>
-                Die einzige echte Antwort ist es eigenes SQL zu schreiben;
+                Die einzige echte Antwort ist es eigenes <acronym>SQL</acronym> zu schreiben;
                 <classname>Zend_Db</classname> erfordert nicht die Verwendung von
                 <classname>Zend_Db_Select</classname>, als ist die Verwendung von eigenen, getunten
-                SQL Select Statements, eine perfekte und legitime Anwendung.
+                <acronym>SQL</acronym> Select Statements, eine perfekte und legitime Anwendung.
             </para>
             <para>
                 Lasse <constant>EXPLAIN</constant> auf den Abfragen laufen, und teste eine Vielzahl
                 von Möglichkeiten bis man die eigenen Indezes auf dem besten und performantesten
-                Weg trifft -- und dann sollte dieses SQL als Klasseneigenschaft oder Konstante fix
-                kodiert werden.
+                Weg trifft -- und dann sollte dieses <acronym>SQL</acronym> als Klasseneigenschaft
+                oder Konstante fix kodiert werden.
             </para>
 
             <para>
-                Wenn das SQL variable Argumente benötigt, können Platzhalter im SQL verwendet
-                werden und in einer Kombination von <methodname>vsprintf()</methodname> und
-                <methodname>array_walk()</methodname> verwendet werden um Werte in das SQL zu
-                injizieren:
+                Wenn das <acronym>SQL</acronym> variable Argumente benötigt, können Platzhalter im
+                <acronym>SQL</acronym> verwendet werden und in einer Kombination von
+                <methodname>vsprintf()</methodname> und <methodname>array_walk()</methodname>
+                verwendet werden um Werte in das <acronym>SQL</acronym> zu injizieren:
             </para>
 
             <programlisting language="php"><![CDATA[

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15571 -->
+<!-- EN-Revision: 16566 -->
 <!-- Reviewed: no -->
 <sect1 id="performance.localization">
     <title>Internationalisierung (I18n) und Lokalisierung (L10n)</title>
@@ -27,28 +27,32 @@
 
             <para>
                 Zend Framework wird mit einer Vielzahl von Übersetzungsadaptern ausgeliefert. Die
-                Hälfte von Ihnen verwenden ein XML Format, welches viel Speicher benötigt und eine
-                Geschwindkeitseinbuße bedeutet. Glücklicherweise gibt es verschiedene Adapter die
-                andere Formate verwenden, die viel schneller geparst werden können. In der
-                Reihenfolge Ihrer Geschwindigkeit, vom Schnellsten zum Langsamsten, sind das:
+                Hälfte von Ihnen verwenden ein <acronym>XML</acronym> Format, welches viel Speicher
+                benötigt und eine Geschwindkeitseinbuße bedeutet. Glücklicherweise gibt es
+                verschiedene Adapter die andere Formate verwenden, die viel schneller geparst
+                werden können. In der Reihenfolge Ihrer Geschwindigkeit, vom Schnellsten zum
+                Langsamsten, sind das:
             </para>
 
             <itemizedlist>
                 <listitem><para>
                     <emphasis>Array</emphasis>: Das ist der Schnellste, weil er, von seiner
-                    Definition her, sofort in ein natives PHP Format geparst und sofort eingefügt
-                    wird.
+                    Definition her, sofort in ein natives <acronym>PHP</acronym> Format geparst und
+                    sofort eingefügt wird.
                 </para></listitem>
 
                 <listitem><para>
-                    <emphasis>CSV</emphasis>: Verwendet <methodname>fgetcsv()</methodname> um eine
-                    CSV Datei zu parsen und transformiert es in ein natives PHP Format.
+                    <emphasis><acronym>CSV</acronym></emphasis>: Verwendet
+                    <methodname>fgetcsv()</methodname> um eine <acronym>CSV</acronym> Datei zu
+                    parsen und transformiert es in ein natives <acronym>PHP</acronym> Format.
                 </para></listitem>
 
                 <listitem><para>
-                    <emphasis>INI</emphasis>: Verwendet <methodname>parse_ini_file()</methodname>
-                    um eine INI Datei zu lesen und Sie in ein natives PHP Format zu transformieren.
-                    Dieser und der CSV Adapter sind in Ihrer Geschwindigkeit ziemlich identisch.
+                    <emphasis><acronym>INI</acronym></emphasis>: Verwendet
+                    <methodname>parse_ini_file()</methodname> um eine <acronym>INI</acronym> Datei
+                    zu lesen und Sie in ein natives <acronym>PHP</acronym> Format zu
+                    transformieren. Dieser und der <acronym>CSV</acronym> Adapter sind in Ihrer
+                    Geschwindigkeit ziemlich identisch.
                 </para></listitem>
 
                 <listitem><para>
@@ -56,7 +60,8 @@
                     <emphasis>nicht</emphasis> die Gettext Erweiterung da diese nicht Threadsicher
                     ist und es nicht erlaubt mehr als ein Gebietsschema pro Server zu definieren.
                     Als Ergebnis, ist ist er langsamer als die Gettext Erweiterung direkt, aber,
-                    weil das Gettext Format binär ist, ist es schneller geparst als XML.
+                    weil das Gettext Format binär ist, ist es schneller geparst als
+                    <acronym>XML</acronym>.
                 </para></listitem>
             </itemizedlist>
 
@@ -71,10 +76,10 @@
         <title>Wie kann ich Übersetzungen und Lokalisierungen sogar noch schneller machen?</title>
 
         <para>
-            Aus Geschäftsgründen kann es möglich sein, das man auf einen XML-basierenden
-            Übersetzungsadapter limitiert ist. Oder vielleicht will man die Dinge sogar noch
-            schneller machen. Oder vielleicht will man L10n Operationen schneller machen. Wie kann
-            man das tun?
+            Aus Geschäftsgründen kann es möglich sein, das man auf einen
+            <acronym>XML</acronym>-basierenden Übersetzungsadapter limitiert ist. Oder vielleicht
+            will man die Dinge sogar noch schneller machen. Oder vielleicht will man L10n
+            Operationen schneller machen. Wie kann man das tun?
         </para>
 
         <sect3 id="performance.localization.cache.usage">

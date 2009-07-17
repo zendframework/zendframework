@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16458 -->
+<!-- EN-Revision: 16564 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.select">
 
@@ -981,14 +981,14 @@ $select = $db->select()
 
             <para>
                 In <classname>Zend_Db_Select</classname> können Bedingungen für die Einschränkung
-                von Gruppen mit der <code>having()</code> Methode angegeben werden. Die Nutzung ist
-                ähnlich wie die der <code>where()</code> Methode. Das erste Argument ist ein String,
-                welcher eine SQL Expression enthält. Das zweite Argument ist optional und wird
-                verwendet um einen positionierten Parameter Platzhalter in der SQL Expression zu
-                ersetzen. Expressions die durch mehrfaches Aufrufen der <code>having()</code>
-                Methode erzeugt wurden werden mit dem Boolean <code>AND</code> Operator verknüpft,
-                oder mit dem <code>OR</code> Operator wenn die <code>orHaving()</code> Methode
-                verwendet wird.
+                von Gruppen mit der <methodname>having()</methodname> Methode angegeben werden. Die
+                Nutzung ist ähnlich wie die der <methodname>where()</methodname> Methode. Das erste
+                Argument ist ein String, welcher eine SQL Expression enthält. Das zweite Argument
+                ist optional und wird verwendet um einen positionierten Parameter Platzhalter in
+                der SQL Expression zu ersetzen. Expressions die durch mehrfaches Aufrufen der
+                <methodname>having()</methodname> Methode erzeugt wurden werden mit dem Boolean
+                <code>AND</code> Operator verknüpft, oder mit dem <code>OR</code> Operator wenn die
+                <methodname>orHaving()</methodname> Methode verwendet wird.
             </para>
 
             <example id="zend.db.select.building.having.example">
@@ -1019,10 +1019,10 @@ $select = $db->select()
 
                 <para>
                     Es wird keine Quotierung bei den Expressions welche an die
-                    <code>having()</code> oder <code>orHaving()</code> Methoden übergeben werden.
-                    Werden Spaltennamen verwendet die Quotiert werden müssen, so muss
-                    <code>quoteIdentifier()</code> verwendet werden wenn der String für die
-                    Bedingung formuliert wird.
+                    <methodname>having()</methodname> oder <methodname>orHaving()</methodname>
+                    Methoden übergeben werden. Werden Spaltennamen verwendet die Quotiert werden
+                    müssen, so muss <methodname>quoteIdentifier()</methodname> verwendet werden
+                    wenn der String für die Bedingung formuliert wird.
                 </para>
 
             </note>
@@ -1044,17 +1044,18 @@ $select = $db->select()
             </para>
 
             <para>
-                In <classname>Zend_Db_Select</classname> kann die <code>order()</code> Methode
-                verwendet werden um Spalten, oder Arrays von Spalten, anzugeben, nach denen sortiert
-                werden soll. Jedes Element des Arrays ist ein String, welcher die Spalte benennt.
-                Optional kann auf den Namen eines der Schlüsselwörter <code>ASC</code>
+                In <classname>Zend_Db_Select</classname> kann die <methodname>order()</methodname>
+                Methode verwendet werden um Spalten, oder Arrays von Spalten, anzugeben, nach denen
+                sortiert werden soll. Jedes Element des Arrays ist ein String, welcher die Spalte
+                benennt. Optional kann auf den Namen eines der Schlüsselwörter <code>ASC</code>
                 <code>DESC</code> folgen, abgetrennt durch ein Leerzeichen.
             </para>
 
             <para>
-                Wie in den <code>from()</code> und <code>group()</code> Methoden, werden Spalten
-                als Bezeichner Quotiert, wenn sie nicht von runden Klammern eingeschlossen oder vom
-                Objekttyp <classname>Zend_Db_Expr</classname> sind.
+                Wie in den <methodname>from()</methodname> und <methodname>group()</methodname>
+                Methoden, werden Spalten als Bezeichner Quotiert, wenn sie nicht von runden
+                Klammern eingeschlossen oder vom Objekttyp <classname>Zend_Db_Expr</classname>
+                sind.
             </para>
 
             <example id="zend.db.select.building.order.example">
@@ -1098,10 +1099,10 @@ $select = $db->select()
             </para>
 
             <para>
-                In <classname>Zend_Db_Select</classname> kann die <code>limit()</code> Methode
-                verwendet werden um die Anzahl von Zeilen und die Anzahl der auszulassenden Spalten
-                anzugeben. Das erste Argument ist die gewünschte Anzahl von Zeilen. Das zweite
-                Argument gibt die Anzahl der auszulassenden Zeilen an.
+                In <classname>Zend_Db_Select</classname> kann die <methodname>limit()</methodname>
+                Methode verwendet werden um die Anzahl von Zeilen und die Anzahl der auszulassenden
+                Spalten anzugeben. Das erste Argument ist die gewünschte Anzahl von Zeilen. Das
+                zweite Argument gibt die Anzahl der auszulassenden Zeilen an.
             </para>
 
             <example id="zend.db.select.building.limit.example">
@@ -1134,15 +1135,15 @@ $select = $db->select()
             </note>
 
             <para>
-                Die <code>limitPage()</code> Methode kann als alternativer Weg verwendet werden um
-                Zeilenanzahl und Offset zu spezifizieren. Diese Methode erlaubt den Ergebnissatz
-                auf einen Subset, aus einer Serie von Subsets mit Reihen einer fixe Länge, auf dem
-                totalen Ergebnissatz der Abfrage, zu limitieren. In anderen Worten, spezifiziert
-                man die Länge einer Seite ("page") von Ergebnissen, und die ordinale Anzahl an
-                Ergebnissen einer einzelnen Seite, die als von der Abfrage zurück gegeben werden
-                sollen. Die Seitennummer ist das erste Argument der <code>limitPage()</code>
-                Methode, nud die Seitenlänge ist das zweite Argument. Beide Argumente werden
-                benötigt; sie haben keinen Standardwert.
+                Die <methodname>limitPage()</methodname> Methode kann als alternativer Weg
+                verwendet werden um Zeilenanzahl und Offset zu spezifizieren. Diese Methode erlaubt
+                den Ergebnissatz auf einen Subset, aus einer Serie von Subsets mit Reihen einer
+                fixe Länge, auf dem totalen Ergebnissatz der Abfrage, zu limitieren. In anderen
+                Worten, spezifiziert man die Länge einer Seite ("page") von Ergebnissen, und die
+                ordinale Anzahl an Ergebnissen einer einzelnen Seite, die als von der Abfrage
+                zurück gegeben werden sollen. Die Seitennummer ist das erste Argument der
+                <methodname>limitPage()</methodname> Methode, und die Seitenlänge ist das zweite
+                Argument. Beide Argumente werden benötigt; sie haben keinen Standardwert.
             </para>
 
             <example id="zend.db.select.building.limit.example2">
@@ -1169,7 +1170,7 @@ $select = $db->select()
             <title>Hinzufügen des DISTINCT Anfragewandlers</title>
 
             <para>
-                Die <code>distinct()</code> Methode ermöglicht es <code>DISTINCT</code>
+                Die <methodname>distinct()</methodname> Methode ermöglicht es <code>DISTINCT</code>
                 Schlüsselworte in die SQL Syntax einzufügen.
             </para>
 
@@ -1196,8 +1197,8 @@ $select = $db->select()
             <title>Hinzufügen des FOR UPDATE Anfragewandlers</title>
 
             <para>
-                Die <code>forUpdate()</code> Methode ermöglicht es <code>FOR UPDATE</code>
-                Schlüsselworte in die SQL Syntax einzufügen.
+                Die <methodname>forUpdate()</methodname> Methode ermöglicht es
+                <code>FOR UPDATE</code> Schlüsselworte in die SQL Syntax einzufügen.
             </para>
 
             <example id="zend.db.select.building.for-update.example">
@@ -1236,13 +1237,13 @@ $select = $db->select()
             <para>
                 Die Anfrage, die durch das <classname>Zend_Db_Select</classname> Objekt
                 repräsentiert wird kann ausgeführt werden, indem sie als erstes Argument an die
-                <code>query()</code> Methode des <classname>Zend_Db_Adapter_Abstract</classname>
-                Objekts übergeben wird. Dabei wird das <classname>Zend_Db_Select</classname>
-                anstelle eines Strings verwendet.
+                <methodname>query()</methodname> Methode des
+                <classname>Zend_Db_Adapter_Abstract</classname> Objekts übergeben wird. Dabei wird
+                das <classname>Zend_Db_Select</classname> anstelle eines Strings verwendet.
             </para>
 
             <para>
-                Die <code>query()</code> Methode gibt ein Objekt vom Typ
+                Die <methodname>query()</methodname> Methode gibt ein Objekt vom Typ
                 <classname>Zend_Db_Statement</classname> oder PDOStatement zurück, je nachdem
                 welcher Adaptertyp verwendet wird.
             </para>
@@ -1268,11 +1269,11 @@ $result = $stmt->fetchAll();
             <title>Ausführen von Select Anfragen mit dem objekt</title>
 
             <para>
-                Als Alternative zur Nutzung der <code>query()</code> Methode des Adapterobjekts
-                kann auch die <code>query()</code> Methode des <classname>Zend_Db_Select</classname>
-                Objekts verwendet werden. Beide Methoden geben ein Objekt vom Typ
-                <classname>Zend_Db_Statement</classname> oder PDOStatement zurück, je nachdem
-                welcher Adaptertyp verwendet wird.
+                Als Alternative zur Nutzung der <methodname>query()</methodname> Methode des
+                Adapterobjekts kann auch die <methodname>query()</methodname> Methode des
+                <classname>Zend_Db_Select</classname> Objekts verwendet werden. Beide Methoden
+                geben ein Objekt vom Typ <classname>Zend_Db_Statement</classname> oder
+                PDOStatement zurück, je nachdem welcher Adaptertyp verwendet wird.
             </para>
 
             <example id="zend.db.select.execute.query-select.example">
@@ -1298,7 +1299,7 @@ $result = $stmt->fetchAll();
             <para>
                 Wenn Zugriff zu auf eine String Repräsentante der SQL Anfrage, entsprechend dem
                 <classname>Zend_Db_Select</classname>, benötigt wird, kann die
-                <code>__toString()</code> Methode verwendet werden.
+                <methodname>__toString()</methodname> Methode verwendet werden.
             </para>
 
             <example id="zend.db.select.execute.tostring.example">
@@ -1328,8 +1329,8 @@ echo "$sql\n";
 
         <para>
             Dieser Abschnitt beschreibt andere Methoden der <classname>Zend_Db_Select</classname>
-            Klasse, welche bisher nicht beschrieben wurden: <code>getPart()</code> und
-            <code>reset()</code>.
+            Klasse, welche bisher nicht beschrieben wurden: <methodname>getPart()</methodname> und
+            <methodname>reset()</methodname>.
         </para>
 
         <sect3 id="zend.db.select.other.get-part">
@@ -1337,11 +1338,11 @@ echo "$sql\n";
             <title>Abfragen von Teilen des Select Objekts</title>
 
             <para>
-                Die <code>getPart()</code> Methode gibt eine Repräsentante eines Teils der SQL
-                Anfrage zurück. Zum Beispiel kann diese Methode verwendet werden um, ein Array von
-                Expressions des <code>WHERE</code> Abschnitts, ein Array von Spalten (oder Spalten
-                Expressions) von <code>SELECT</code> oder die Werte der Spaltenzahl und
-                Auslassungen des <code>LIMIT</code> Abschnitts, zu erhalten.
+                Die <methodname>getPart()</methodname> Methode gibt eine Repräsentante eines Teils
+                der SQL Anfrage zurück. Zum Beispiel kann diese Methode verwendet werden um, ein
+                Array von Expressions des <code>WHERE</code> Abschnitts, ein Array von Spalten
+                (oder Spalten Expressions) von <code>SELECT</code> oder die Werte der Spaltenzahl
+                und Auslassungen des <code>LIMIT</code> Abschnitts, zu erhalten.
             </para>
 
             <para>
@@ -1352,10 +1353,10 @@ echo "$sql\n";
             </para>
 
             <para>
-                Das einzige Argument der <code>getPart()</code> Methode ist ein String der den
-                zurück zu gebenden Teil der Anfrage bezeichnet. Zum Beispiel bezeichnet der String
-                <code>'from'</code> den Teil des Select Objekts, welcher Informationen über den
-                <code>FROM</code> Abschnitt, einschließlich verbundener Tabellen enthält.
+                Das einzige Argument der <methodname>getPart()</methodname> Methode ist ein String
+                der den zurück zu gebenden Teil der Anfrage bezeichnet. Zum Beispiel bezeichnet der
+                String <code>'from'</code> den Teil des Select Objekts, welcher Informationen über
+                den <code>FROM</code> Abschnitt, einschließlich verbundener Tabellen enthält.
             </para>
 
             <para>
@@ -1459,20 +1460,21 @@ print_r( $orderData );
             <title>Zurücksetzen von Teilen des Select Objekts</title>
 
             <para>
-                Die <code>reset()</code> Methode ermöglicht es einen angegebenen Teil der SQL
-                Anfrage zu löschen oder, wenn der Parameter ausgelassen ist, alle Teile zu löschen.
+                Die <methodname>reset()</methodname> Methode ermöglicht es einen angegebenen Teil
+                der SQL Anfrage zu löschen oder, wenn der Parameter ausgelassen ist, alle Teile zu
+                löschen.
             </para>
 
             <para>
                 Das einzige Argument ist optional. Es kann der Teil der Anfrage angegeben werden,
                 der gelöscht werden soll, unter Nutzung des gleichen Strings wie er als Argument
-                der <code>getPart()</code> Methode verwendet wird. Der angegebene Teil wird auf ein
-                Standardwert zurück gesetzt.
+                der <methodname>getPart()</methodname> Methode verwendet wird. Der angegebene Teil
+                wird auf ein Standardwert zurück gesetzt.
             </para>
 
             <para>
-                Wenn der Parameter ausgelassen wird, setzt <code>reset()</code> alle geänderten
-                Teile auf einen Standardwert zurück. Dadurch ist das
+                Wenn der Parameter ausgelassen wird, setzt <methodname>reset()</methodname> alle
+                geänderten Teile auf einen Standardwert zurück. Dadurch ist das
                 <classname>Zend_Db_Select</classname> Objekt gleichwertig mit einem neuen Objekt,
                 wie wenn es gerade Instanziiert wurde.
             </para>

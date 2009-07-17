@@ -695,14 +695,14 @@
                     </row>
                     <row>
                         <entry>Zend_Date::DATETIME_MEDIUM</entry>
-                        <entry>Normal date (string, localized, normal)</entry>
+                        <entry>Normal date with time (string, localized, normal)</entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>13.02.2009 14:53:27</emphasis>
                         </entry>
                     </row>
                     <row>
                         <entry>Zend_Date::DATETIME_SHORT</entry>
-                        <entry>Abbreviated Date (string, localized, abbreviated)</entry>
+                        <entry>Abbreviated Date with time (string, localized, abbreviated)</entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>13.02.09 14:53</emphasis>
                         </entry>

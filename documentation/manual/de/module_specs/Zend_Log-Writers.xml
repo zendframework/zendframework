@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16582 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.log.writers" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Writer</title>
@@ -100,6 +100,7 @@ $logger->info('Informative Nachricht');
 
   <xi:include href="Zend_Log-Writers-Firebug.xml" />
   <xi:include href="Zend_Log-Writers-Mail.xml" />
+  <xi:include href="Zend_Log-Writers-Syslog.xml" />
 
   <sect2 id="zend.log.writers.null">
     <title>Einen Writer abstumpfen</title>

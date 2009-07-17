@@ -185,7 +185,7 @@ class Zend_Db_Table_Select extends Zend_Db_Select
      * Performs a validation on the select query before passing back to the parent class.
      * Ensures that only columns from the primary Zend_Db_Table are returned in the result.
      *
-     * @return string This object as a SELECT string.
+     * @return string|null This object as a SELECT string (or null if a string cannot be produced)
      */
     public function assemble()
     {

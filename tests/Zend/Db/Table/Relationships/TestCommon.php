@@ -1106,37 +1106,120 @@ abstract class Zend_Db_Table_Relationships_TestCommon extends Zend_Db_Table_Test
     public function testTableRelationshipCanFindParentViaConcreteInstantiation()
     {
         Zend_Db_Table::setDefaultAdapter($this->_db);
-        $definition = array(
-            'Bugs' => array(
-                'name' => 'zfbugs',
-                'referenceMap' => array(
-                    'Engineer' => array(
-                        'columns'           => 'assigned_to',
-                        'refTableClass'     => 'Accounts',
-                        'refColumns'        => 'account_name'
-                        )
-                    )        
-                ),
-            'Accounts' => array(
-                'name' => 'zfaccounts'
-                )
 
-            );
+        $definition = $this->_getTableDefinition();
+        
         $bugsTable = new Zend_Db_Table('Bugs', $definition);
         $rowset = $bugsTable->find(1);
         $row = $rowset->current();
         $parent = $row->findParentRow('Accounts', 'Engineer');
         $this->assertEquals('mmouse', $parent->account_name);
+        
         Zend_Db_Table::setDefaultAdapter();
     }
     
+    /**
+     * @group ZF-3486
+     */
+    public function testTableRelationshipCanFindDependentRowsetViaConcreteInstantiation()
+    {
+        Zend_Db_Table::setDefaultAdapter($this->_db);
+
+        $definition = $this->_getTableDefinition();
+        
+        $productsTable = new Zend_Db_Table('Products', $definition);
+        $productsRowset = $productsTable->find(1);
+        $productRow = $productsRowset->current();
+        
+        $this->assertEquals('Windows', $productRow->product_name);
+        
+        $this->assertEquals(1, count($productRow->findDependentRowset('BugsProducts', 'Product')));
+        
+        $bugsProductRow = $productRow->findDependentRowset('BugsProducts', 'Product')->current();
+        $this->assertEquals(1, $bugsProductRow->product_id);
+        $this->assertEquals(1, $bugsProductRow->bug_id);
+        
+        Zend_Db_Table::setDefaultAdapter();
+    }
+    
+    /**
+     * @group ZF-3486
+     */
+    public function testTableRelationshipCanFindManyToManyRowsetViaConcreteInstantiation()
+    {
+        Zend_Db_Table::setDefaultAdapter($this->_db);
+
+        $definition = $this->_getTableDefinition();
+
+        $bugsTable = new Zend_Db_Table('Bugs', $definition);
+        $bugsRowset = $bugsTable->find(1);
+        $bugRow = $bugsRowset->current();
+
+        $m2mRowset = $bugRow->findManyToManyRowset('Products', 'BugsProducts');
+        
+        $this->assertEquals(3, $m2mRowset->count());
+    }
     
     /**
      * Utility Methods Below
      * 
      */
     
-    
+    /**
+     * _getTableDefinition()
+     *
+     * @return Zend_Db_Table_Definition
+     */
+    protected function _getTableDefinition()
+    {
+        $definition = array(
+            'Bugs' => array(
+                'name' => 'zfbugs',
+                'referenceMap' => array(
+                    'Reporter' => array(
+                        'columns'           => 'reported_by',
+                        'refTableClass'     => 'Accounts',
+                        'refColumns'        => 'account_name'
+                        ),
+                    'Engineer' => array(
+                        'columns'           => 'assigned_to',
+                        'refTableClass'     => 'Accounts',
+                        'refColumns'        => 'account_name'
+                        ),
+                    'Verifier' => array(
+                        'columns'           => 'verified_by',
+                        'refTableClass'     => 'Accounts',
+                        'refColumns'        => 'account_name'
+                        )
+                    )
+                ),
+            'Accounts' => array(
+                'name' => 'zfaccounts'
+                ),
+            'BugsProducts' => array(
+                'name' => 'zfbugs_products',
+                'referenceMap' => array(
+                    'Bug' => array(
+                        'columns'           => 'bug_id', // Deliberate non-array value
+                        'refTableClass'     => 'Bugs',
+                        'refColumns'        => 'bug_id'
+                        ),
+                    'Product' => array(
+                        'columns'           => 'product_id',
+                        'refTableClass'     => 'Products',
+                        'refColumns'        => 'product_id',
+                        'onDelete'          => Zend_Db_Table::CASCADE,
+                        'onUpdate'          => Zend_Db_Table::CASCADE
+                        )
+                    )
+                ),
+            'Products' => array(
+                'name' => 'zfproducts'
+                )
+            );
+            
+        return new Zend_Db_Table_Definition($definition);
+    }
     
     /**
      * Create database table based on BUGS_PRODUCTS bug with alternative

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16441 -->
+<!-- EN-Revision: 16595 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.router" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Der Standard Router</title>
@@ -388,6 +388,7 @@ $router->setGlobalParam('lang', 'en');
         <xi:include href="Zend_Controller-Router-Route-Regex.xml" />
         <xi:include href="Zend_Controller-Router-Route-Hostname.xml" />
         <xi:include href="Zend_Controller-Router-Route-Chain.xml" />
+        <xi:include href="Zend_Controller-Router-Route-Rest.xml" />
     </sect2>
 
     <sect2 id="zend.controller.router.add-config">

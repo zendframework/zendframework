@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16389 -->
+<!-- EN-Revision: 16590 -->
 <!-- Reviewed: no -->
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
     "@DOCBOOK_DTD@"
@@ -384,6 +384,16 @@
         <xi:include href="module_specs/Zend_ProgressBar.xml" />
     </chapter>
 
+    <chapter id="zend.queue">
+        <title>Zend_Queue</title>
+        <xi:include href="module_specs/Zend_Queue-Introduction.xml" />
+        <xi:include href="module_specs/Zend_Queue-Example.xml" />
+        <xi:include href="module_specs/Zend_Queue-Framework.xml" />
+        <xi:include href="module_specs/Zend_Queue-Adapters.xml" />
+        <xi:include href="module_specs/Zend_Queue-Custom.xml" />
+        <xi:include href="module_specs/Zend_Queue-Stomp.xml" />
+    </chapter>
+
     <chapter id="zend.reflection">
         <title>Zend_Reflection</title>
         <xi:include href="module_specs/Zend_Reflection-Introduction.xml" />
@@ -440,6 +450,7 @@
         <xi:include href="module_specs/Zend_Service_Amazon_Ec2-RegionsAndAvalibilityZones.xml" />
         <xi:include href="module_specs/Zend_Service_Amazon_Ec2-Securitygroups.xml" />
         <xi:include href="module_specs/Zend_Service_Amazon_S3.xml" />
+        <xi:include href="module_specs/Zend_Service_Amazon_Sqs.xml" />
         <xi:include href="module_specs/Zend_Service_Audioscrobbler.xml" />
         <xi:include href="module_specs/Zend_Service_Delicious.xml" />
         <xi:include href="module_specs/Zend_Service_Flickr.xml" />

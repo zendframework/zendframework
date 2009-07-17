@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 16590 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.service.amazon.sqs">
+    <title>Zend_Service_Amazon_Sqs</title>
+
+    <sect2 id="zend.service.amazon.sqs.introduction">
+        <title>Introduction</title>
+
+        <para>
+            <ulink url="http://aws.amazon.com/sqs/">Amazon Simple Queue Service
+                (Amazon SQS)</ulink> offers a reliable, highly scalable, hosted
+            queue for storing messages as they travel between computers. By
+            using Amazon SQS, developers can simply move data between
+            distributed components of their applications that perform different
+            tasks, without losing messages or requiring each component to be
+            always available. Amazon SQS makes it easy to build an automated
+            workflow, working in close conjunction with the Amazon Elastic
+            Compute Cloud (Amazon EC2) and the other AWS infrastructure web
+            services.
+        </para>
+
+        <para>
+            Amazon SQS works by exposing Amazon's web-scale messaging
+            infrastructure as a web service. Any computer on the Internet can
+            add or read messages without any installed software or special
+            firewall configurations. Components of applications using Amazon SQS
+            can run independently, and do not need to be on the same network,
+            developed with the same technologies, or running at the same time.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.service.amazon.sqs.registering">
+        <title>Registering with Amazon SQS</title>
+
+        <para>
+            Before you can get started with
+            <classname>Zend_Service_Amazon_Sqs</classname>, you must first
+            register for an account. Please see the <ulink
+                url="http://aws.amazon.com/sqs/faqs/">SQS FAQ</ulink> page on
+            the Amazon website for more information.
+        </para>
+
+        <para>
+            After registering, you will receive an application key and a secret key.
+            You will need both to access the SQS service.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.service.amazon.sqs.apiDocumentation">
+        <title>API Documentation</title>
+
+        <para>
+            The <classname>Zend_Service_Amazon_Sqs</classname> class provides
+            the PHP wrapper to the Amazon SQS REST interface. Please consult the
+            <ulink
+                url="http://developer.amazonwebservices.com/connect/kbcategory.jspa?categoryID=31">Amazon
+                SQS documentation</ulink> for detailed description of the
+            service. You will need to be familiar with basic concepts in order
+            to use this service.
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.service.amazon.sqs.features">
+        <title>Features</title>
+
+        <para>
+            <classname>Zend_Service_Amazon_Sqs</classname> provides the
+            following functionality:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    A single point for configuring your amazon.sqs
+                    authentication credentials that can be used across the
+                    amazon.sqs namespaces.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    A proxy object that is more convenient to use than an HTTP
+                    client alone, mostly removing the need to manually construct
+                    HTTP POST requests to access the REST service.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    A response wrapper that parses each response body and throws
+                    an exception if an error occurred, alleviating the need to
+                    repeatedly check the success of many commands.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Additional convenience methods for some of the more common
+                    operations.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.service.amazon.sqs.storing-your-first">
+        <title>Getting Started</title>
+
+        <para>
+            Once you have registered with Amazon SQS, you're ready to create
+            your queue and store some messages on SQS. Each queue can contain
+            unlimited amount of messages, identified by name.
+        </para>
+
+        <para>
+            The following example demonstrates creating a queue, storing and
+            retrieving messages.
+        </para>
+
+        <example id="zend.service.amazon.sqs.storing-your-first.example">
+            <title>Zend_Service_Amazon_Sqs Usage Example</title>
+
+            <programlisting language="php"><![CDATA[
+$sqs = new Zend_Service_Amazon_Sqs($my_aws_key, $my_aws_secret_key);
+
+$queue_url = $sqs->create('test');
+
+$message = 'this is a test';
+$message_id = $sqs->send($queue_url, $message);
+
+foreach ($sqs->receive($queue_url) as $message) {
+    echo $message['body'].'<br/>';
+}
+]]></programlisting>
+        </example>
+
+        <para>
+            Since the <classname>Zend_Service_Amazon_Sqs</classname> service
+            requires authentication, you should pass your credentials (AWS key
+            and secret key) to the constructor.  If you only use one account,
+            you can set default credentials for the service:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+Zend_Service_Amazon_Sqs::setKeys($my_aws_key, $my_aws_secret_key);
+$sqs = new Zend_Service_Amazon_Sqs();
+]]></programlisting>
+    </sect2>
+
+    <sect2 id="zend.service.amazon.sqs.queues">
+        <title>Queue operations</title>
+
+        <para>
+            All messages SQS are stored in queues. A queue has to be created
+            before any message operations. Queue names must be unique under your
+            access key and secret key.
+        </para>
+
+        <para>
+            Queue names can contain lowercase letters, digits, periods (.),
+            underscores (_), and dashes (-).  No other symbols allowed. Queue
+            names can be a maximum of 80 characters.
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <methodname>create()</methodname> creates a new queue.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>delete()</methodname> removes all messages in
+                    the queue.
+                </para>
+
+                <example id="zend.service.amazon.sqs.queues.removalExample">
+                    <title>Zend_Service_Amazon_Sqs Queue Removal Example</title>
+
+                    <programlisting language="php"><![CDATA[
+$sqs = new Zend_Service_Amazon_Sqs($my_aws_key, $my_aws_secret_key);
+$queue_url = $sqs->create('test_1');
+$sqs->delete($queue_url);
+]]></programlisting>
+                </example>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>count()</methodname> gets the approximate number
+                    of messages in the queue.
+                </para>
+
+                <example id="zend.service.amazon.sqs.queues.countExample">
+                    <title>Zend_Service_Amazon_Sqs Queue Count Example</title>
+
+                    <programlisting language="php"><![CDATA[
+$sqs = new Zend_Service_Amazon_Sqs($my_aws_key, $my_aws_secret_key);
+$queue_url = $sqs->create('test_1');
+$sqs->send($queue_url, 'this is a test');
+$count = $sqs->count($queue_url); // Returns '1'
+]]></programlisting>
+                </example>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>getQueues()</methodname> returns the list of the
+                    names of all queues belonging to the user.
+                </para>
+
+                <example id="zend.service.amazon.sqs.queues.listExample">
+                    <title>Zend_Service_Amazon_Sqs Queue Listing Example</title>
+
+                    <programlisting language="php"><![CDATA[
+$sqs = new Zend_Service_Amazon_Sqs($my_aws_key, $my_aws_secret_key);
+$list = $sqs->getQueues();
+foreach($list as $queue) {
+   echo "I have queue $queue\n";
+}
+]]></programlisting>
+                </example>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.service.amazon.sqs.messages">
+        <title>Message operations</title>
+
+        <para>
+            After a queue is created, simple messages can be sent into the queue
+            then received at a later point in time. Messages can be up to 8KB in
+            length.  If longer messages are needed please see <ulink
+                url="http://framework.zend.com/manual/en/zend.service.amazon.s3.html">S3</ulink>.
+            There is no limit to the number of messages a queue can contain.
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <methodname>sent($queue_url, $message)</methodname> send the
+                    <code>$message</code> to the <code>$queue_url</code> SQS
+                    queue URL.
+                </para>
+
+                <example id="zend.service.amazon.sqs.messages.sendExample">
+                    <title>Zend_Service_Amazon_Sqs Message Send Example</title>
+
+                    <programlisting language="php"><![CDATA[
+$sqs = new Zend_Service_Amazon_Sqs($my_aws_key, $my_aws_secret_key);
+$queue_url = $sqs->create('test_queue');
+$sqs->send($queue_url, 'this is a test message');
+]]></programlisting>
+                </example>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>receive($queue_url)</methodname> retrieves
+                    messages from the queue.
+                </para>
+
+                <example id="zend.service.amazon.sqs.messages.receiveExample">
+                    <title>Zend_Service_Amazon_Sqs Message Receive Example</title>
+
+                    <programlisting language="php"><![CDATA[
+$sqs = new Zend_Service_Amazon_Sqs($my_aws_key, $my_aws_secret_key);
+$queue_url = $sqs->create('test_queue');
+$sqs->send($queue_url, 'this is a test message');
+foreach ($sqs->receive($queue_url) as $message) {
+    echo "got message ".$message['body'].'<br/>';
+}
+]]></programlisting>
+                </example>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>deleteMessage($queue_url, $handle)</methodname>
+                    deletes a message from a queue.  A message must first be
+                    received using the <methodname>receive()</methodname> method
+                    before it can be deleted.
+                </para>
+
+                <example id="zend.service.amazon.sqs.messages.deleteExample">
+                    <title>Zend_Service_Amazon_Sqs Message Delete Example</title>
+
+                    <programlisting language="php"><![CDATA[
+$sqs = new Zend_Service_Amazon_Sqs($my_aws_key, $my_aws_secret_key);
+$queue_url = $sqs->create('test_queue');
+$sqs->send($queue_url, 'this is a test message');
+foreach ($sqs->receive($queue_url) as $message) {
+    echo "got message ".$message['body'].'<br/>';
+
+    if ($sqs->deleteMessage($queue_url, $message['handle'])) {
+        echo "Message deleted";
+    }
+    else {
+        echo "Message not deleted";
+    }
+}
+]]></programlisting>
+                </example>
+            </listitem>
+       </itemizedlist>
+    </sect2>
+</sect1>

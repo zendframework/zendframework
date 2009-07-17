@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 16595 -->
+<!-- Reviewed: no -->
+<sect3 id="zend.controller.plugins.standard.puthandler">
+    <title>Zend_Controller_Plugin_PutHandler</title>
+
+    <para>
+        <classname>Zend_Controller_Plugin_PutHandler</classname> bietet ein Drop-In Plugin für die
+        Verwendung von PUT Request Bodies in Anfrage Parametern, so wie POST Anfrage Parameter. Er
+        betrachtet die Anfrage und, wenn diese PUT ist, wird parse_str verwendet um den rohen PUT
+        Body in ein Array von Parametern zu parsen welches dann bei der Anfrage gesetzt wird. z.B.,
+    </para>
+
+    <programlisting language="txt"><![CDATA[
+PUT /notes/5.xml HTTP/1.1
+
+title=Hallo&body=Welt
+]]></programlisting>
+
+    <para>
+        Um die 'title' und 'body' Parameter als reguläre Anfrage Parameter zu erhalten muss das
+        Plugin registriert werden:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+$front = Zend_Controller_Front::getInstance();
+$front->registerPlugin(new Zend_Controller_Plugin_PutHandler());
+]]></programlisting>
+
+    <para>
+        Anschließend kann man auf die Parameter des PUT Bodies durch Ihren Namen zugreifen, von der
+        Anfrage im eigenen Controller aus:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+...
+public function putAction()
+{
+    $title = $this->getRequest()->getParam('title'); // $title = "Hallo"
+    $body = $this->getRequest()->getParam('body'); // $body = "Welt"
+}
+...
+]]></programlisting>
+
+</sect3>

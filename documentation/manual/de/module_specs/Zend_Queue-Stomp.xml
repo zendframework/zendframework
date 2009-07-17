@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 16590 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.queue.stomp">
+    <title>Stomp</title>
+
+    <para>
+        <classname>Zend_Queue_Stomp</classname> bietet einen Basis Client um mit
+        <ulink url="http://stomp.codehaus.org/">Stomp</ulink> kompatiblen Servern zu kommunizieren.
+        Einige Server, so wie ApacheMQ oder RabbitMQ erlauben es mithilfe von anderen Methoden zu
+        kommunizieren, wie <acronym>HTTP</acronym> und <acronym>XMPP</acronym>.
+    </para>
+
+    <para>
+        Das Stomp Protokoll bietet <ulink
+            url="http://stomp.codehaus.org/StompConnect">StompConnect</ulink> an welches jeden
+        <ulink url="http://java.sun.com/products/jms/">Java Message Service (JMS)</ulink> Provider
+        unterstützt. Stomp wird von
+        <ulink url="http://activemq.apache.org/">Apache ActiveMQ</ulink>,
+        <ulink url="http://www.rabbitmq.com/">RabbitMQ</ulink>,
+        <ulink url="http://stompserver.rubyforge.org/">stompserver</ulink>, und
+        <ulink url="http://www.germane-software.com/software/Java/Gozirra/">Gozirra</ulink>
+        unterstützt.
+    </para>
+
+    <sect2 id="zend.queue.adapters-configuration.stomp">
+        <title>Stomp - Unterstützende Klassen</title>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <classname>Zend_Queue_Stomp_Frame</classname>. Diese Klasse bietet die
+                    grundsätzlichen Funktionalitäten für die Manipulation eines Stomp Frames.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <classname>Zend_Queue_Stomp_Client</classname>. Diese Klasse bietet die
+                    grundsätzlichen Funktionen um <classname>Zend_Queue_Stomp_Frame</classname>s
+                    von und zu einem Stomp kompatiblen Server zu senden
+                    (<methodname>send()</methodname>) und zu empfangen
+                    (<methodname>receive()</methodname>).
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+</sect1>

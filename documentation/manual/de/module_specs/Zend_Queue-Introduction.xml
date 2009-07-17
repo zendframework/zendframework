@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 16590 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.queue.introduction">
+    <title>Einführung</title>
+
+    <para>
+        <classname>Zend_Queue</classname> bietet Factory Funktionen ob spezielle Queue Client
+        Objekte zu erstellen.
+    </para>
+
+    <para>
+        Eine Message Queue ist eine Methode für entferntes Bearbeiten. Zum Beispiel könnte eine Job
+        Broker Anwendung mehrere Anwendungen für Jobs akzeptieren und das von einer Vielzahl von
+        Quellen.
+    </para>
+
+    <para>
+        You could create a queue "<filename>/queue/applications</filename>" that
+        would have a sender and a receiver. The sender would be any available
+        source that could connect to your message service or indirectly to an
+        application (web) that could connect to the message service.
+    </para>
+
+    <para>
+        The sender sends a message to the queue:
+    </para>
+
+    <programlisting language="xml"><![CDATA[
+<resume>
+    <name>John Smith</name>
+    <location>
+        <city>San Francisco</city>
+        <state>California</state>
+        <zip>00001</zip>
+    </location>
+    <skills>
+        <programming>PHP</programming>
+        <programming>Perl</programming>
+    </skills>
+</resume>
+]]></programlisting>
+
+    <para>
+        The recipient or consumer of the queue would pick up the message and
+        process the resume.
+    </para>
+
+    <para>
+        There are many messaging patterns that can be applied to queues to abstract
+        the flow of control from the code and provide metrics, transformations,
+        and monitoring of messages queues. A good book on messaging patterns is
+        <ulink
+            url="http://www.amazon.com/Enterprise-Integration-Patterns-Designing-Addison-Wesley/dp/0321200683">Enterprise
+            Integration Patterns: Designing, Building, and Deploying Messaging Solutions
+            (Addison-Wesley Signature Series)</ulink>
+        (ISBN-10 0321127420; ISBN-13 978-0321127426).
+    </para>
+</sect1>

@@ -20,28 +20,156 @@
  * @version    $Id$
  */
 
-$_zf['original'] = get_include_path();
+zf_main();
 
-// if ZF is not in the include_path, but relative to this file, put it in the include_path
-if (($_zf['prepend'] = getenv('ZEND_TOOL_INCLUDE_PATH_PREPEND')) || ($_zf['whole'] = getenv('ZEND_TOOL_INCLUDE_PATH'))) {
-    if (isset($_zf['prepend']) && ($_zf['prepend'] !== false) && (($_zf['prependRealpath'] = realpath($_zf['prepend'])) !== false)) {
-        set_include_path($_zf['prependRealpath'] . PATH_SEPARATOR . $_zf['original']);
-    } elseif (isset($_zf['whole']) && ($_zf['whole'] !== false) && (($_zf['wholeRealpath'] = realpath($_zf['whole'])) !== false)) {
-        set_include_path($_zf['wholeRealpath']);
+/**
+ * zf_main() - The main() function to run
+ */
+function zf_main() {
+    global $_zf;
+    $_zf = array();
+    zf_setup_home_directory();
+    zf_setup_storage_directory();
+    zf_setup_config_file();
+    zf_setup_php_runtime();
+    zf_setup_tool_runtime();
+    zf_run($_zf);
+}
+
+function zf_setup_home_directory() {
+    global $_zf;
+    
+    // check for explicity set ENV var ZF_HOME
+    if (($zfHome = getenv('ZF_HOME')) && file_exists($zfHome)) {
+        $_zf['HOME'] = $_ENV['ZF_HOME'];
+    } elseif (($home = getenv('HOME'))) {
+        $_zf['HOME'] = $home;
+    } elseif (($home = getenv('HOMEPATH'))) {
+        $_zf['HOME'] = $home;
     }
-} 
+    
+    $homeRealpath = realpath($_zf['HOME']);
+    
+    if ($homeRealpath) {
+        $_zf['HOME'] = $homeRealpath;
+    } else {
+        unset($_zf['HOME']);
+    }
+    
+}
 
-// assume the include_path is good, and load the client/console
-if ((@include_once 'Zend/Tool/Framework/Client/Console.php') === false) {
-    // last chance, perhaps we can find zf relative to THIS file, if so, lets run
-    $_zf['relativePath'] = dirname(__FILE__) . '/../library/';
-    if (file_exists($_zf['relativePath'] . 'Zend/Tool/Framework/Client/Console.php')) {
-        set_include_path(realpath($_zf['relativePath']) . PATH_SEPARATOR . get_include_path());
-        include_once 'Zend/Tool/Framework/Client/Console.php';
+function zf_setup_storage_directory() {
+    global $_zf;
+    
+    if (($zfStorage = getenv('ZF_STORAGE_DIR')) && file_exists($zfStorage)) {
+        $_zf['STORAGE_DIR'] = $zfStorage;
+    } elseif (isset($_zf['HOME']) && file_exists($_zf['HOME'] . '/.zf/')) {
+        $_zf['STORAGE_DIR'] = $_ENV['HOME'] . '/.zf/';
+    }
+    
+    $storageRealpath = realpath($_zf['STORAGE_DIR']);
+    
+    if ($storageRealpath) {
+        $_zf['STORAGE_DIR'] = $storageRealpath;
+    } else {
+        unset($_zf['STORAGE_DIR']);
+    }
+    
+}
+
+function zf_setup_config_file() {
+    global $_zf;
+    
+    if (isset($_ENV['ZF_CONFIG_FILE']) && file_exists($_ENV['ZF_CONFIG_FILE'])) {
+        $_zf['CONFIG_FILE'] = $_ENV['ZF_CONFIG_FILE'];
+    } elseif (isset($_zf['HOME'])) {
+        if (file_exists($_zf['HOME'] . '/.zf.ini')) {
+            $_zf['CONFIG_FILE'] = $_zf['HOME'] . '/.zf.ini';    
+        } elseif (file_exists($_zf['HOME'] . '/zf.ini')) {
+            $_zf['CONFIG_FILE'] = $_zf['HOME'] . '/zf.ini';
+        }
+    }
+
+    if (isset($_zf['CONFIG_FILE']) && ($zrealpath = realpath($_zf['CONFIG_FILE']))) {
+
+        $_zf['CONFIG_FILE'] = $zrealpath;
+        
+        $zsuffix = substr($_zf['CONFIG_FILE'], -4);
+        
+        if ($zsuffix === '.ini') {
+            $_zf['CONFIG_TYPE'] = 'ini';
+        } else {
+            unset($_zf['CONFIG_FILE']);
+        }
+
+    }
+    
+}
+
+
+
+function zf_setup_php_runtime() {
+    global $_zf;
+    if (!isset($_zf['CONFIG_TYPE']) || $_zf['CONFIG_TYPE'] !== 'ini') {
+        return;
+    }
+    $zfini_settings = parse_ini_file($_zf['CONFIG_FILE']);
+    $phpini_settings = ini_get_all();
+    foreach ($zfini_settings as $zfini_key => $zfini_value) {
+        if (substr($zfini_key, 0, 4) === 'php.') {
+            $phpini_key = substr($zfini_key, 4); 
+            if (array_key_exists($phpini_key, $phpini_settings)) {
+                ini_set($phpini_key, $zfini_value);
+            }
+        }
     }
 }
 
-if (!class_exists('Zend_Tool_Framework_Client_Console')) {
+function zf_setup_tool_runtime() {
+    //global $_zf;
+
+    // last ditch efforts
+    if (zf_try_client_load()) {
+        return;
+    }
+    
+    $zfIncludePath['original'] = get_include_path();
+    
+    // if ZF is not in the include_path, but relative to this file, put it in the include_path
+    if (($zfIncludePath['prepend'] = getenv('ZEND_TOOL_INCLUDE_PATH_PREPEND')) || ($zfIncludePath['whole'] = getenv('ZEND_TOOL_INCLUDE_PATH'))) {
+        if (isset($zfIncludePath['prepend']) && ($zfIncludePath['prepend'] !== false) && (($zfIncludePath['prependRealpath'] = realpath($$zfIncludePath['prepend'])) !== false)) {
+            set_include_path($zfIncludePath['prependRealpath'] . PATH_SEPARATOR . $zfIncludePath['original']);
+        } elseif (isset($zfIncludePath['whole']) && ($zfIncludePath['whole'] !== false) && (($zfIncludePath['wholeRealpath'] = realpath($zfIncludePath['whole'])) !== false)) {
+            set_include_path($zfIncludePath['wholeRealpath']);
+        }
+    }
+    
+    if (zf_try_client_load()) {
+        return;
+    }
+    
+    $zfIncludePath['relativePath'] = dirname(__FILE__) . '/../library/';
+    if (file_exists($zfIncludePath['relativePath'] . 'Zend/Tool/Framework/Client/Console.php')) {
+        set_include_path(realpath($zfIncludePath['relativePath']) . PATH_SEPARATOR . get_include_path());
+    }
+
+    if (!zf_try_client_load()) {
+        zf_display_error();
+        exit(1);
+    }
+    
+}
+
+function zf_try_client_load() {
+    $loaded = @include_once 'Zend/Tool/Framework/Client/Console.php';
+    return $loaded;
+}
+
+/**
+ * zf_display_error()
+ */
+function zf_display_error() {
+    
     echo <<<EOS
     
 ***************************** ZF ERROR ********************************
@@ -64,15 +192,25 @@ Information:
 
 EOS;
 
-    echo '    original include_path: ' . $_zf['original'] . PHP_EOL;
     echo '    attempted include_path: ' . get_include_path() . PHP_EOL;
     echo '    script location: ' . $_SERVER['SCRIPT_NAME'] . PHP_EOL;
-    exit(1);    
+
 }
 
-// cleanup the global space
-unset($_zf);
+function zf_run($zfConfig) {
+    global $_zf;
+    unset($_zf);
+    
+    $configOptions = array();
+    if (isset($zfConfig['CONFIG_FILE'])) {
+        $configOptions['configFilepath'] = $zfConfig['CONFIG_FILE'];
+    }
+    if (isset($zfConfig['CONFIG_FILE'])) {
+        $configOptions['storageDirectory'] = $zfConfig['STORAGE_DIR']; 
+    }
 
-// run tool
-Zend_Tool_Framework_Client_Console::main();
-exit(0);
+    Zend_Tool_Framework_Client_Console::main($configOptions);    
+}
+
+
+

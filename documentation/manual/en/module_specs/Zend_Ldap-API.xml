@@ -160,7 +160,7 @@
                         <entry>
                             If set to <constant>FALSE</constant>, this option indicates that the
                             given username should not be split at the first <emphasis>@</emphasis>
-                            or <emphasis>\</emphasis> character to seperate the username from
+                            or <emphasis>\</emphasis> character to separate the username from
                             the domain during the binding-procedure. This allows the user to
                             use usernames that contain an <emphasis>@</emphasis> or
                             <emphasis>\</emphasis> character that do not

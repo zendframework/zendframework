@@ -731,7 +731,7 @@ echo $result[0]->bug_description;
 
             <title>Holen eines Ergbnisssatzes als assoziatives Array</title>
 
-methodname            <para>
+            <para>
                 Die <methodname>fetchAssoc()</methodname> Methode gibt Daten in einem Array von
                 assoziativen Array zurück, egal welcher Wert für den fetch-Modus gesetzt wurde.
             </para>

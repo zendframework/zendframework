@@ -215,25 +215,25 @@
                             <varlistentry>
                                 <term>
                                 <code>Zend_Ldap_Node_RootDse::SERVER_TYPE_GENERIC</code></term>
-                                <listitem>for unknown <acronym>LDAP</acronym> servers</listitem>
+                                <listitem><para>for unknown <acronym>LDAP</acronym> servers</para></listitem>
                             </varlistentry>
 
                             <varlistentry>
                                 <term>
                                 <code>Zend_Ldap_Node_RootDse::SERVER_TYPE_OPENLDAP</code></term>
-                                <listitem>for OpenLDAP servers</listitem>
+                                <listitem><para>for OpenLDAP servers</para></listitem>
                             </varlistentry>
 
                             <varlistentry>
                                 <term>
                                 <code>Zend_Ldap_Node_RootDse::SERVER_TYPE_ACTIVEDIRECTORY</code></term>
-                                <listitem>for Microsoft ActiveDirectory servers</listitem>
+                                <listitem><para>for Microsoft ActiveDirectory servers</para></listitem>
                             </varlistentry>
 
                             <varlistentry>
                                 <term>
                                 <code>Zend_Ldap_Node_RootDse::SERVER_TYPE_EDIRECTORY</code></term>
-                                <listitem>For Novell eDirectory servers</listitem>
+                                <listitem><para>For Novell eDirectory servers</para></listitem>
                             </varlistentry>
                         </variablelist>
                     </entry>

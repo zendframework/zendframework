@@ -13,36 +13,36 @@
     <variablelist>
         <varlistentry>
             <term><code>string</code></term>
-            <listitem>No conversion will be done.</listitem>
+            <listitem><para>No conversion will be done.</para></listitem>
         </varlistentry>
 
         <varlistentry>
             <term><code>integer</code> and <code>float</code></term>
-            <listitem>The value will be converted to a string.</listitem>
+            <listitem><para>The value will be converted to a string.</para></listitem>
         </varlistentry>
 
         <varlistentry>
             <term><code>boolean</code></term>
-            <listitem><code>true</code> will be converted to <code>'TRUE'</code> and
-            <code>false</code> to <code>'FALSE'</code></listitem>
+            <listitem><para><code>true</code> will be converted to <code>'TRUE'</code> and
+            <code>false</code> to <code>'FALSE'</code></para></listitem>
         </varlistentry>
 
         <varlistentry>
             <term><code>object</code> and <code>array</code></term>
-            <listitem>The value will be converted to a string by using
-            <code>serialize()</code>.</listitem>
+            <listitem><para>The value will be converted to a string by using
+            <code>serialize()</code>.</para></listitem>
         </varlistentry>
 
         <varlistentry>
             <term><code>resource</code></term>
-            <listitem>If a <code>stream</code> resource is given, the data will be
-            fetched by calling <code>stream_get_contents()</code>.</listitem>
+            <listitem><para>If a <code>stream</code> resource is given, the data will be
+            fetched by calling <code>stream_get_contents()</code>.</para></listitem>
         </varlistentry>
 
         <varlistentry>
             <term>others</term>
-            <listitem>All other data types (namely non-stream resources) will be
-            ommitted.</listitem>
+            <listitem><para>All other data types (namely non-stream resources) will be
+            ommitted.</para></listitem>
         </varlistentry>
 
     </variablelist>
@@ -52,23 +52,23 @@
     <variablelist>
         <varlistentry>
             <term><code>'TRUE'</code></term>
-            <listitem>Converted to <code>true</code>.</listitem>
+            <listitem><para>Converted to <code>true</code>.</para></listitem>
         </varlistentry>
 
         <varlistentry>
             <term><code>'FALSE'</code></term>
-            <listitem>Converted to <code>false</code>.</listitem>
+            <listitem><para>Converted to <code>false</code>.</para></listitem>
         </varlistentry>
 
         <varlistentry>
             <term>others</term>
-            <listitem>All other strings won't be automatically converted and are passed
-            as they are.</listitem>
+            <listitem><para>All other strings won't be automatically converted and are passed
+            as they are.</para></listitem>
         </varlistentry>
 
     </variablelist>
 
-    <table id="zend.ldap.api.reference.zend-ldap-attribute">
+    <table id="zend.ldap.api.reference.zend-ldap-attribute.table">
         <title>Zend_Ldap_Attribute API</title>
 
         <tgroup cols="2">
@@ -257,10 +257,6 @@
                     </entry>
                 </row>
             </tbody>
-
         </tgroup>
-
     </table>
-
 </sect3>
-

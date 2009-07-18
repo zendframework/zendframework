@@ -65,7 +65,7 @@ title;lang-en: Sales, Director
 
     </sect2>
 
-    <sect2 id="zend.ldap.ldif.encode">
+    <sect2 id="zend.ldap.ldif.decode">
         <title>Deserialize a LDIF string into a LDAP entry</title>
 
         <programlisting language="php"><![CDATA[

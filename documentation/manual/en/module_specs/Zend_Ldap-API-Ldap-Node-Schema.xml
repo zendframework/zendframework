@@ -285,25 +285,25 @@
                             <varlistentry>
                                 <term>
                                 <code>Zend_Ldap_Node_Schema::OBJECTCLASS_TYPE_UNKNOWN</code></term>
-                                <listitem>for unknown class types</listitem>
+                                <listitem><para>for unknown class types</para></listitem>
                             </varlistentry>
 
                             <varlistentry>
                                 <term>
                                 <code>Zend_Ldap_Node_Schema::OBJECTCLASS_TYPE_STRUCTURAL</code></term>
-                                <listitem>for structural classes</listitem>
+                                <listitem><para>for structural classes</para></listitem>
                             </varlistentry>
 
                             <varlistentry>
                                 <term>
                                 <code>Zend_Ldap_Node_Schema::OBJECTCLASS_TYPE_ABSTRACT</code></term>
-                                <listitem>for abstract classes</listitem>
+                                <listitem><para>for abstract classes</para></listitem>
                             </varlistentry>
 
                             <varlistentry>
                                 <term>
                                 <code>Zend_Ldap_Node_Schema::OBJECTCLASS_TYPE_AUXILIARY</code></term>
-                                <listitem>for auxiliary classes</listitem>
+                                <listitem><para>for auxiliary classes</para></listitem>
                             </varlistentry>
                         </variablelist>
                     </entry>
@@ -477,7 +477,6 @@
                 <tbody>
                     <row>
                         <entry>
-
                             <code>Zend_Ldap_Node_Schema_AttributeType_ActiveDirectory</code>
                             does not provide any additional methods.
                         </entry>
@@ -494,7 +493,6 @@
                 <tbody>
                     <row>
                         <entry>
-
                             <code>Zend_Ldap_Node_Schema_ObjectClass_ActiveDirectory</code>
                             does not provide any additional methods.
                         </entry>

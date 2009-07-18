@@ -52,7 +52,7 @@
                         parameters must be passed to the instance using
                         <code>Zend_Ldap::setOptions()</code>. The allowed options are
                         specified in <link
-                            linkend="zend.ldap.using.theory-of-operation.options.table">Zend_Ldap
+                            linkend="zend.ldap.api.configuration.table">Zend_Ldap
                             Options</link>
                     </entry>
                 </row>
@@ -87,7 +87,7 @@
                         <code>$options</code> can be an array or an instance of
                         <classname>Zend_Config</classname>. The allowed options are specified in
                         <link
-                            linkend="zend.ldap.using.theory-of-operation.options.table">Zend_Ldap Options</link>
+                            linkend="zend.ldap.api.configuration.table">Zend_Ldap Options</link>
                     </entry>
                 </row>
                 <row>
@@ -165,65 +165,89 @@
                                 <term><code>string|Zend_Ldap_Filter_Abstract
                                 $filter</code></term>
 
-                                <listitem>The filter string to be used in the search, e.g.
-                                <code>(objectClass=posixAccount)</code>.</listitem>
+                                <listitem>
+                                    <para>
+                                        The filter string to be used in the search, e.g.
+                                        <code>(objectClass=posixAccount)</code>.
+                                    </para>
+                                </listitem>
                             </varlistentry>
 
                             <varlistentry>
                                 <term><code>string|Zend_Ldap_Dn $basedn</code></term>
 
-                                <listitem>The search base for the search. If omitted or
-                                <code>null</code>, the <code>baseDn</code> from the
-                                connection and binding parameters is used.</listitem>
+                                <listitem>
+                                    <para>
+                                        The search base for the search. If omitted or
+                                        <code>null</code>, the <code>baseDn</code> from the
+                                        connection and binding parameters is used.
+                                    </para>
+                                </listitem>
                             </varlistentry>
 
                             <varlistentry>
                                 <term><code>integer $scope</code></term>
 
-                                <listitem>The search scope.
-                                <code>Zend_Ldap::SEARCH_SCOPE_SUB</code> searches the
-                                complete subtree including the <code>$baseDn</code> node.
-                                <code>Zend_Ldap::SEARCH_SCOPE_ONE</code> restricts search
-                                to one level below <code>$baseDn</code>.
-                                <code>Zend_Ldap::SEARCH_SCOPE_BASE</code> restricts search
-                                to the <code>$baseDn</code> itself; this can be used to
-                                efficiently retrieve a single entry by its DN. The default
-                                value is
-                                <code>Zend_Ldap::SEARCH_SCOPE_SUB</code>.</listitem>
+                                <listitem>
+                                    <para>
+                                        The search scope.
+                                        <code>Zend_Ldap::SEARCH_SCOPE_SUB</code> searches the
+                                        complete subtree including the <code>$baseDn</code> node.
+                                        <code>Zend_Ldap::SEARCH_SCOPE_ONE</code> restricts search
+                                        to one level below <code>$baseDn</code>.
+                                        <code>Zend_Ldap::SEARCH_SCOPE_BASE</code> restricts search
+                                        to the <code>$baseDn</code> itself; this can be used to
+                                        efficiently retrieve a single entry by its DN. The default
+                                        value is
+                                        <code>Zend_Ldap::SEARCH_SCOPE_SUB</code>.
+                                    </para>
+                                </listitem>
                             </varlistentry>
 
                             <varlistentry>
                                 <term><code>array $attributes</code></term>
 
-                                <listitem>Specifies the attributes contained in the
-                                returned entries. To include all possible attributes (ACL
-                                restrictions can disallow certain attribute to be retrieved
-                                by a given user) pass either an empty array
-                                <code>array()</code> or <code>array('*')</code> to the
-                                method. On some <acronym>LDAP</acronym> servers you can retrieve special
-                                internal attributes by passing <code>array('*', '+')</code>
-                                to the method.</listitem>
+                                <listitem>
+                                    <para>
+                                        Specifies the attributes contained in the
+                                        returned entries. To include all possible attributes (ACL
+                                        restrictions can disallow certain attribute to be retrieved
+                                        by a given user) pass either an empty array
+                                        <code>array()</code> or <code>array('*')</code> to the
+                                        method. On some <acronym>LDAP</acronym> servers you can retrieve special
+                                        internal attributes by passing <code>array('*', '+')</code>
+                                        to the method.
+                                    </para>
+                                </listitem>
                             </varlistentry>
 
                             <varlistentry>
                                 <term><code>string $sort</code></term>
 
-                                <listitem>If given the result collection will be sorted
-                                after the attribute <code>$sort</code>. Results can only be
-                                sorted after one single attribute as this parameter uses
-                                the ext/ldap function <code>ldap_sort()</code>.</listitem>
+                                <listitem>
+                                    <para>
+                                        If given the result collection will be sorted
+                                        after the attribute <code>$sort</code>. Results can only be
+                                        sorted after one single attribute as this parameter uses
+                                        the ext/ldap function <code>ldap_sort()</code>.
+                                    </para>
+                                </listitem>
                             </varlistentry>
 
                             <varlistentry>
                                 <term><code>string $collectionClass</code></term>
 
-                                <listitem>If given the result will be wrapped in an object
-                                of type <code>$collectionClass</code>. By default an object
-                                of type <code>Zend_Ldap_Collection</code> will be returned.
-                                The custom class must extend
-                                <code>Zend_Ldap_Collection</code> and will be passed a
-                                <code>Zend_Ldap_Collection_Iterator_Default</code> on
-                                instantiation.</listitem>
+                                <listitem>
+                                    <para>
+                                        If given the result will be wrapped in an object
+                                        of type <code>$collectionClass</code>. By default an object
+                                        of type <code>Zend_Ldap_Collection</code> will be returned.
+                                        The custom class must extend
+                                        <code>Zend_Ldap_Collection</code> and will be passed a
+                                        <code>Zend_Ldap_Collection_Iterator_Default</code> on
+                                        instantiation.
+                                    </para>
+                                </listitem>
                             </varlistentry>
                         </variablelist>
                     </entry>
@@ -485,10 +509,10 @@
             point for developers needing custom result objects.
         </para>
 
-        <table id="zend.ldap.api.reference.zend-collection.table">
+        <table id="zend.ldap.api.reference.zend-ldap.zend-ldap-collection.table">
             <title>Zend_Ldap_Collection API</title>
 
-            <tgroup cols="2">zend.ldap.api.reference.zend-ldap.zend-ldap-collection
+            <tgroup cols="2">
             <thead>
                 <row>
                     <entry>Method</entry>

@@ -36,22 +36,34 @@
                         <variablelist>
                             <varlistentry>
                                 <term><code>'sort'</code></term>
-                                <listitem>Sort the given attributes with <code>dn</code>
-                                following <code>objectClass</code> and following all other
-                                attributes sorted alphabetically. <code>true</code> by
-                                default.</listitem>
+                                <listitem>
+                                    <para>
+                                        Sort the given attributes with <code>dn</code>
+                                        following <code>objectClass</code> and following all other
+                                        attributes sorted alphabetically. <code>true</code> by
+                                        default.
+                                    </para>
+                                </listitem>
                             </varlistentry>
 
                             <varlistentry>
                                 <term><code>'version'</code></term>
-                                <listitem>The <acronym>LDIF</acronym> format version. <code>1</code> by
-                                default.</listitem>
+                                <listitem>
+                                    <para>
+                                        The <acronym>LDIF</acronym> format version. <code>1</code> by
+                                        default.
+                                    </para>
+                                </listitem>
                             </varlistentry>
 
                             <varlistentry>
                                 <term><code>'wrap'</code></term>
-                                <listitem>The line-length. <code>78</code> by default to
-                                conform to the <acronym>LDIF</acronym> specification.</listitem>
+                                <listitem>
+                                <para>
+                                    The line-length. <code>78</code> by default to
+                                    conform to the <acronym>LDIF</acronym> specification.
+                                </para>
+                                </listitem>
                             </varlistentry>
                         </variablelist>
                     </entry>

@@ -13,17 +13,17 @@
     <variablelist>
         <varlistentry>
             <term><code>Zend_Ldap_Dn::ATTR_CASEFOLD_NONE</code></term>
-            <listitem>No case-folding will be done.</listitem>
+            <listitem><para>No case-folding will be done.</para></listitem>
         </varlistentry>
 
         <varlistentry>
             <term><code>Zend_Ldap_Dn::ATTR_CASEFOLD_UPPER</code></term>
-            <listitem>All attributes will be converted to upper-case.</listitem>
+            <listitem><para>All attributes will be converted to upper-case.</para></listitem>
         </varlistentry>
 
         <varlistentry>
             <term><code>Zend_Ldap_Dn::ATTR_CASEFOLD_LOWER</code></term>
-            <listitem>All attributes will be converted to lower-case.</listitem>
+            <listitem><para>All attributes will be converted to lower-case.</para></listitem>
         </varlistentry>
     </variablelist>
 
@@ -45,7 +45,7 @@
         is within the bounds.
     </para>
 
-    <table id="zend.ldap.api.reference.zend-ldap-dn">
+    <table id="zend.ldap.api.reference.zend-ldap-dn.table">
         <title>Zend_Ldap_Dn API</title>
 
         <tgroup cols="2">

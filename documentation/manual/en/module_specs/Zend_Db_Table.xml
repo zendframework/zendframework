@@ -26,32 +26,32 @@
 
     <sect2 id="zend.db.table.concrete">
         <title>Using Zend_Db_Table as a concrete class</title>
-        
+
         <para>
             As of ZF 1.9, you can instantiate Zend_Db_Table.  This added benefit is that
             you do not have to extend a base class and configure it to do simple operations
             such as selecting, inserting, updating and deleteing on a single table.  Below
             is an example of the simplest of use cases.
         </para>
-        
+
         <example id="zend.db.table.defining.concrete-instantiation.example1">
 
             <title>Declaring a table class with just the string name</title>
-        
+
                 <programlisting language="php"><![CDATA[
 Zend_Db_Table::setDefaultAdapter($dbAdapter);
 $bugTable = new Zend_Db_Table('bug');
 ]]></programlisting>
 
         </example>
-        
+
         <para>
             The above example represents the simplest of use cases.  Make not of all the
             options describe below for configuring Zend_Db_Table tables.  If you want to be
             able to use the concrete usage case, in addition to the more complex relationhip
             features, see the Zend_Db_Table_Definition documentation.
         </para>
-        
+
     </sect2>
 
     <sect2 id="zend.db.table.defining">
@@ -878,7 +878,7 @@ $rows = $table->fetchAll(
 
 // Fetching a single row
 $row = $table->fetchRow(
-    'bug_status = "NEW"', 
+    'bug_status = "NEW"',
     'bug_id ASC'
     );
 $row = $table->fetchRow(

@@ -432,6 +432,11 @@
                 <xi:include href="../en/module_specs/Zend_Db_Table-Relationships.xml" />
             </xi:fallback>
         </xi:include>
+        <xi:include href="module_specs/Zend_Db_Table_Definition.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Db_Table_Definition.xml" />
+            </xi:fallback>
+        </xi:include>
     </chapter>
 
     <chapter id="zend.debug">
@@ -813,9 +818,39 @@
 
     <chapter id="zend.ldap">
         <title>Zend_Ldap</title>
-        <xi:include href="module_specs/Zend_Ldap.xml">
+        <xi:include href="module_specs/Zend_Ldap-Introduction.xml">
             <xi:fallback>
-                <xi:include href="../en/module_specs/Zend_Ldap.xml" />
+                <xi:include href="../en/module_specs/Zend_Ldap-Introduction.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Ldap-API.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Ldap-API.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Ldap-Usage.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Ldap-Usage.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Ldap-Tools.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Ldap-Tools.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Ldap-Node.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Ldap-Node.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Ldap-Server.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Ldap-Server.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Ldap-LDIF.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Ldap-LDIF.xml" />
             </xi:fallback>
         </xi:include>
     </chapter>
@@ -1755,6 +1790,18 @@
     <xi:include href="ref/coding_standard.xml">
         <xi:fallback>
                 <xi:include href="../en/ref/coding_standard.xml" />
+            </xi:fallback>
+    </xi:include>
+
+    <xi:include href="ref/documentation-standard.xml">
+        <xi:fallback>
+                <xi:include href="../en/ref/documentation-standard.xml" />
+            </xi:fallback>
+    </xi:include>
+
+    <xi:include href="ref/project-structure.xml">
+        <xi:fallback>
+                <xi:include href="../en/ref/project-structure.xml" />
             </xi:fallback>
     </xi:include>
 

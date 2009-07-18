@@ -227,7 +227,8 @@ This is the class <classname>Zend_Class</classname>
     Another paragraph.
 </para>
 
-<<para>
+<!-- OK -->
+<para>
     Some text...
     ... and more text
 </para>
@@ -235,7 +236,6 @@ This is the class <classname>Zend_Class</classname>
 <para>
     Another paragraph.
 </para>
-!-- OK -->
 ]]></programlisting>
             </sect3>
 
@@ -509,7 +509,7 @@ $render = "xxx";
 
                 <programlisting language="xml"><![CDATA[
 <para>
-    The filename <constant>application/Bootstrap.php</constant>.
+    The filename <filename>application/Bootstrap.php</filename>.
 </para>
 ]]></programlisting>
             </sect3>

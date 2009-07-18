@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16619 -->
 <!-- Reviewed: no -->
 <sect1 id="performance.classloading">
     <title>Laden von Klassen</title>
@@ -9,8 +9,8 @@
         feststellen das das Laden von Klassen relativ teuer ist im Zend Framework. Zwischen der
         reinen Anzahl von Klassendateien die für viele Komponenten geladen werden müssen, und der
         Verwendung von Plugins die keine 1:1 Verknüpfung zwischen Ihrem Klassennamen und dem
-        Dateisystem haben, können die Aufrufe zu <methodname>include_once</methodname> und
-        <methodname>require_once</methodname> problematisch sein. Diese Kapitel versucht einige
+        Dateisystem haben, können die Aufrufe zu <methodname>include_once()</methodname> und
+        <methodname>require_once()</methodname> problematisch sein. Diese Kapitel versucht einige
         konkrete Lösungen für diese Probleme zu geben.
     </para>
 
@@ -31,15 +31,17 @@
 
             <para>
                 Auch wenn das wie eine Mikro-Optimierung aussieht, ist es Fakt das wenn man es
-                nicht durchführt, die Vorteile von PHP's RealPath Cache sehr klein sind, und als
-                Ergebnis, das OpCode Caching nicht so schnell sein wird wie man erwarten könnte.
+                nicht durchführt, die Vorteile von <acronym>PHP</acronym>'s RealPath Cache sehr
+                klein sind, und als Ergebnis, das OpCode Caching nicht so schnell sein wird wie man
+                erwarten könnte.
             </para>
 
             <para>
                 Es gibt zwei einfache Wege um das Sicherzustellen. Erstens, kann man die Pfade in
-                der php.ini, httpd.conf, oder .htaccess Hardcoded hineinschreiben. Zweitens, kann
-                man PHP's <methodname>realpath()</methodname> Funktion verwendet wenn man den
-                include_path setzt:
+                der <filename>php.ini</filename>, <filename>httpd.conf</filename>, oder
+                <filename>.htaccess</filename> Hardcoded hineinschreiben. Zweitens, kann man
+                <acronym>PHP</acronym>'s <methodname>realpath()</methodname> Funktion verwendet
+                wenn man den include_path setzt:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -86,12 +88,12 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
 
             <para>
                 Eine weitere Optimierung ist es Pfade zu kombinieren. Zum Beispiel folgt Zend
-                Framework der Namenskonvention von PEAR; deswegen kann man, wenn man PEAR
-                Bibliotheken verwendet (oder Bibliotheken von anderen Frameworks oder
-                Komponentenbibliotheken die dem PEAR CS folgen), versuchen alle diese Bibliotheken
-                in den gleichen include_path zu geben. Das kann oft durchgeführt werden indem etwas
-                einfaches wie ein SymLink auf eine oder mehrere Bibliotheken in ein generelles
-                Verzeichnis gelegt wird.
+                Framework der Namenskonvention von <acronym>PEAR</acronym>; deswegen kann man, wenn
+                man <acronym>PEAR</acronym> Bibliotheken verwendet (oder Bibliotheken von anderen
+                Frameworks oder Komponentenbibliotheken die dem <acronym>PEAR</acronym> CS folgen),
+                versuchen alle diese Bibliotheken in den gleichen include_path zu geben. Das kann
+                oft durchgeführt werden indem etwas einfaches wie ein SymLink auf eine oder mehrere
+                Bibliotheken in ein generelles Verzeichnis gelegt wird.
             </para>
         </sect3>
 
@@ -126,17 +128,17 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
 
                 <para>
                     Fügen wir also alle diese Vorschläge zusammen. Unsere Annahme wird sein, das
-                    man ein oder mehrere PEAR Bibliotheken in Verbindung mit dem Zend Framework
-                    verwendet -- möglicherweise die PHPUnit und Archive_Tar Bibliotheken -- und
-                    das man offensichtlicherweise die Dateien relativ zur aktuellen Datei einfügen
-                    muß.
+                    man ein oder mehrere <acronym>PEAR</acronym> Bibliotheken in Verbindung mit dem
+                    Zend Framework verwendet -- möglicherweise die PHPUnit und
+                    <classname>Archive_Tar</classname> Bibliotheken -- und das man
+                    offensichtlicherweise die Dateien relativ zur aktuellen Datei einfügen muß.
                 </para>
 
                 <para>
                     Zuerst, erstellen wir ein Bibliotheksverzeichnis in unserem Projekt. Innerhalb
                     dieses Verzeichnisses, erstellen wir einen Symlink zu unserer Zend Framework
                     <filename>library/Zend</filename> Verzeichnis, wie auch dem notwendigen
-                    Verzeichnis von unserer PEAR Installation:
+                    Verzeichnis von unserer <acronym>PEAR</acronym> Installation:
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -188,25 +190,27 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
             des Ladens einer Klassendatei bis zum Letztmöglichen Moment zu verzögern -- bzw., wenn
             ein Objekt dieser Klasse instanziiert wird, wenn eine statische Klassenmethode
             aufgerufen wird, oder wenn auf eine Klassenkonstante oder statische Eigenschaft
-            referenziert wird. PHP unterstützt das durch Autoloading, welches es erlaubt ein oder
-            mehrere Callbacks zu definieren die in Reihenfolge aufgerufen werden um einen
-            Klassennamen mit einer Datei zu verbinden.
+            referenziert wird. <acronym>PHP</acronym> unterstützt das durch Autoloading, welches es
+            erlaubt ein oder mehrere Callbacks zu definieren die in Reihenfolge aufgerufen werden
+            um einen Klassennamen mit einer Datei zu verbinden.
         </para>
 
         <para>
             Trotzdem sind die meisten Vorteile man Autoloading erwarten könnte, hinfällig wenn der
-            Bibliothekscode weiterhin require_once Aufrufe durchführt -- was präzise der Fall ist
-            beim Zend Framework. Die Frage ist also: Wie kann man diese require_once Aufrufe
-            entfernen um die Geschwindigkeit vom Autoloader zu maximieren?
+            Bibliothekscode weiterhin <methodname>require_once()</methodname> Aufrufe durchführt --
+            was präzise der Fall ist beim Zend Framework. Die Frage ist also: Wie kann man diese
+            <methodname>require_once()</methodname> Aufrufe entfernen um die Geschwindigkeit vom
+            Autoloader zu maximieren?
         </para>
 
         <sect3 id="performance.classloading.striprequires.sed">
             <title>Aufrufe von require_once mit find und sed entfernen</title>
 
             <para>
-                Ein einfacher Weg um require_once Aufrufe zu entfernen ist die Verwendung der UNIX
-                Utilities 'find' und 'set' in Verbindung um jeden Aufruf auszukommentieren. Führe
-                die folgenden Anweisungen aus (wobei '%' der Shell Prompt ist):
+                Ein einfacher Weg um <methodname>require_once()</methodname> Aufrufe zu entfernen
+                ist die Verwendung der <acronym>UNIX</acronym> Utilities 'find' und 'set' in
+                Verbindung um jeden Aufruf auszukommentieren. Führe die folgenden Anweisungen aus
+                (wobei '%' der Shell Prompt ist):
             </para>
 
             <programlisting language="shell"><![CDATA[
@@ -217,8 +221,9 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
 
             <para>
                 Dieser Ein-Zeiler (wegen der Lesbarkeit in zwei Zeilen gebrochen) geht durch jede
-                PHP Datei und sagt Ihr das jede Instanz von 'require_once' mit '// require_once'
-                ersetzt werden soll, was jede dieser Anweisungen effektiv auskommentiert.
+                <acronym>PHP</acronym> Datei und sagt Ihr das jede Instanz von 'require_once' mit
+                '// require_once' ersetzt werden soll, was jede dieser Anweisungen effektiv
+                auskommentiert.
             </para>
 
             <para>
@@ -307,10 +312,10 @@ Zend_Loader_Autoloader::getInstance();
 
             <para>
                 Zend Framework 1.7.0 fügt einen Include-File Cache zum PluginLoader hinzu. Diese
-                Funktionalität schreibt "include_once" Aufrufe in eine Datei, welche man dann in
-                der Bootstrap Datei einfügen (include) kann. Wärend das einen extra include_once
-                Aufruf im Code bedeutet, stellt es auch sicher das der PluginLoader so früh wie
-                möglich zurückkehrt.
+                Funktionalität schreibt "<methodname>include_once()</methodname>" Aufrufe in eine
+                Datei, welche man dann in der Bootstrap Datei einfügen (include) kann. Wärend das
+                einen extra <methodname>include_once()</methodname> Aufruf im Code bedeutet, stellt
+                es auch sicher das der PluginLoader so früh wie möglich zurückkehrt.
             </para>
 
             <para>

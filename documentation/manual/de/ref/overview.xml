@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15571 -->
+<!-- EN-Revision: 16620 -->
 <!-- Reviewed: no -->
 <sect1 id="introduction.overview">
 
     <title>Übersicht</title>
 
     <para>
-        Zend Framework (ZF) ist ein Open Source Framework für die Entwicklung von Web Anwendungen
-        und Services mit PHP 5. ZF wurde durch Verwendung von 100% Objektorientiertem Code
-        implementiert. Die Komponenten Struktur von ZF ist einzigartig; jede Komponente wurde
-        entworfen mit wenig Anhängigkeiten zu anderen Komponenten. Diese lose gekoppelte
-        Architektur erlaubt es Entwicklern die Komponenten individuell zu verwenden. Wir nennen das
-        oft auch ein "use-at-will" Design.
+        Zend Framework ist ein Open Source Framework für die Entwicklung von Web Anwendungen
+        und Services mit PHP 5. Zend Framework wurde durch Verwendung von 100%
+        Objektorientiertem Code implementiert. Die Komponenten Struktur vom Zend Framework ist
+        einzigartig; jede Komponente wurde entworfen mit wenig Anhängigkeiten zu anderen
+        Komponenten. Diese lose gekoppelte Architektur erlaubt es Entwicklern die Komponenten
+        individuell zu verwenden. Wir nennen das oft auch ein "use-at-will" Design.
     </para>
     <para>
         Obwohl Sie separat verwendet werden können, formen die Zend Framework Komponenten in der
         Standard Bibliothek einen mächtigen und erweiterbaren Framework für Web Anwendungen wenn
-        Sie kombiniert werden. ZF bietet eine robuste, hoch performante MVC Implementation, eine
-        Datenbank Abstraktion die einfach zu verwenden ist, und eine Form Komponente die HTML Form
-        Darstellung, Prüfung und Filterung implementiert, damit Entwickler alle diese Operationen
-        konsolidieren können durch Verwendung eines einfach zu verwendenden, objekt-orientierten
-        Interfaces. Andere Komponenten wie <classname>Zend_Auth</classname> und
-        <classname>Zend_Acl</classname>, bieten Benutzer Authentifizierung und Authorisierung
-        gegenüber allen üblichen Arten von Zugangspunkten. Andere implementieren Client
-        Bibliotheken um einfach Zugang zu den am meisten üblichen Web Services verfügbar zu machen.
-        Was auch immer die eigene Anwendung benötigt, man findet eine Zend Framework Komponente mit
-        einer durchgehend getesteten Basis, die verwendet werden kann um die Entwicklungszeit
-        drastisch zu reduzieren.
+        Sie kombiniert werden. Zend Framework bietet eine robuste, hoch performante
+        <acronym>MVC</acronym> Implementation, eine Datenbank Abstraktion die einfach zu verwenden
+        ist, und eine Form Komponente die <acronym>HTML</acronym> Form Darstellung, Prüfung und
+        Filterung implementiert, damit Entwickler alle diese Operationen konsolidieren können durch
+        Verwendung eines einfach zu verwendenden, objekt-orientierten Interfaces. Andere
+        Komponenten wie <classname>Zend_Auth</classname> und <classname>Zend_Acl</classname>,
+        bieten Benutzer Authentifizierung und Authorisierung gegenüber allen üblichen Arten von
+        Zugangspunkten. Andere implementieren Client Bibliotheken um einfach Zugang zu den am
+        meisten üblichen Web Services verfügbar zu machen. Was auch immer die eigene Anwendung
+        benötigt, man findet eine Zend Framework Komponente mit einer durchgehend getesteten Basis,
+        die verwendet werden kann um die Entwicklungszeit drastisch zu reduzieren.
     </para>
     <para>
         Der prinzipielle Sponsor des Zend Framework Projektes ist
@@ -38,10 +38,11 @@
     </para>
     <para>
         Zend Framework könnte alle diese Features nicht ausliefern und supporten ohne die Hilfe
-        der lebhaften ZF Community. Community Mitglieder, einschließlich Entwicklern, sind selbst
-        erreichbar über <ulink url="http://framework.zend.com/archives">Mailing Listen</ulink>,
-        <ulink url="http://www.zftalk.com">IRC Kanälen</ulink>, und anderen Foren. Welche Frage
-        man auch immer über ZF hat, die Community ist immer da um diese zu beantworten.
+        der lebhaften Zend Framework Community. Community Mitglieder, einschließlich Entwicklern,
+        sind selbst erreichbar über <ulink
+            url="http://framework.zend.com/archives">Mailing Listen</ulink>, <ulink
+            url="http://www.zftalk.com">IRC Kanälen</ulink>, und anderen Foren. Welche Frage
+        man auch immer über Zend Framework hat, die Community ist immer da um diese zu beantworten.
     </para>
 </sect1>
 <!--

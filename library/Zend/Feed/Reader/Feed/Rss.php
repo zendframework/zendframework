@@ -233,7 +233,6 @@ class Zend_Feed_Reader_Feed_Rss extends Zend_Feed_Reader_Feed_FeedAbstract
                             );
                         }
                     }
-                    }
                 }
             }
         }

@@ -16,14 +16,14 @@
     </para>
 
     <para>
-        You could create a queue "<filename>/queue/applications</filename>" that
-        would have a sender and a receiver. The sender would be any available
-        source that could connect to your message service or indirectly to an
-        application (web) that could connect to the message service.
+        Man könnte eine Queue "<filename>/queue/applications</filename>" erstellen die einen Sender
+        und einen Empfänger hat. Der Sender würde jede vorhandene Quelle sein die sich zum
+        Nachrichten Service verbinden kann oder indirekt zu einer Anwendung (Web) die sich zum
+        Nachrichten Service verbinden kann.
     </para>
 
     <para>
-        The sender sends a message to the queue:
+        Der Sender sendet eine Nachricht an die Queue:
     </para>
 
     <programlisting language="xml"><![CDATA[
@@ -42,15 +42,14 @@
 ]]></programlisting>
 
     <para>
-        The recipient or consumer of the queue would pick up the message and
-        process the resume.
+        Der Empfänger oder Konsument der Queue würde die Nachricht entgegennehmen und den Prozess
+        weiterbearbeiten.
     </para>
 
     <para>
-        There are many messaging patterns that can be applied to queues to abstract
-        the flow of control from the code and provide metrics, transformations,
-        and monitoring of messages queues. A good book on messaging patterns is
-        <ulink
+        Es gibt viele Nachrichten-Pattern die Queues angehängt werden können um den kontrollierten
+        Ablauf des Codes zu abstrahieren um Metriken, Transformationen, und Monitoring für
+        Nachrichten-Queues anzubieten. Ein gutes Buch für Nachrichten-Pattern ist <ulink
             url="http://www.amazon.com/Enterprise-Integration-Patterns-Designing-Addison-Wesley/dp/0321200683">Enterprise
             Integration Patterns: Designing, Building, and Deploying Messaging Solutions
             (Addison-Wesley Signature Series)</ulink>

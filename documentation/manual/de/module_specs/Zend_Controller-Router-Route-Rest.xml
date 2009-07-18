@@ -5,16 +5,16 @@
     <title>Zend_Rest_Route</title>
 
     <para>
-        The <classname>Zend_Rest</classname> component contains a RESTful route
-        for <classname>Zend_Controller_Router_Rewrite</classname>. This route
-        offers a standardized routing scheme that routes requests by translating
-        the <acronym>HTTP</acronym> method and the <acronym>URI</acronym>
-        to a module, controller, and action. The table below provides an overview
-        of how request methods and <acronym>URI</acronym>'s are routed.
+        Die Komponente <classname>Zend_Rest</classname> enthält eine RESTvolle Route für
+        <classname>Zend_Controller_Router_Rewrite</classname>. Diese Route bietet ein
+        standartisiertes Routing Schema das Routinganfragen durch Übersetzung der
+        <acronym>HTTP</acronym> Methode und der <acronym>URI</acronym> zu einem Modul,
+        Controller und einer Action. Die unten stehende Tabelle bietet eine Übersicht darüber
+        wie Anfragemethoden und <acronym>URI</acronym>'s geroutet werden.
     </para>
 
     <table frame="all">
-        <title>Zend_Rest_Route Behavior</title>
+        <title>Verhalten von Zend_Rest_Route</title>
 
         <tgroup cols='3' align='left' colsep='1' rowsep='1'>
             <colspec colname='method' />
@@ -22,7 +22,7 @@
             <colspec colname='route' />
             <thead>
                 <row>
-                    <entry>Method</entry>
+                    <entry>Methode</entry>
                     <entry><acronym>URI</acronym></entry>
                     <entry>Module_Controller::action</entry>
                 </row>
@@ -72,9 +72,9 @@
     </table>
 
     <para>
-        To enable <classname>Zend_Rest_Route</classname> for an entire
-        application, construct it with no config params and add it as the
-        default route on the front controller:
+        Um <classname>Zend_Rest_Route</classname> für eine komplette Anwendung einzuschalten muss
+        diese ohne Konfigurationsparameter erstellt und als Standardroute dem
+        Frontcontroller hinzugefügt werden:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -85,16 +85,15 @@ $front->getRouter()->addRoute('default', $restRoute);
 
     <note>
         <para>
-            If <classname>Zend_Rest_Route</classname> cannot match a valid
-            module, controller, or action, it will return false and the router
-            will attempt to match using the next route in the router.
+            Wenn <classname>Zend_Rest_Route</classname> keinem gültigen Modul, Controller oder
+            keiner Action entspricht gibt diese false zurück und der Router versucht eine
+            Entsprechung zu finden indem die nächste Route im Router verwendet wird.
         </para>
     </note>
 
     <para>
-        To enable <classname>Zend_Rest_Route</classname> for specific modules,
-        construct it with an array of module names as the 3rd constructor
-        argument:
+        Um <classname>Zend_Rest_Route</classname> für spezielle Module einzuschalten muss diese
+        mit einem Array von Modulnamen als 3tes Argument des Constructors erstellt werden:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -104,9 +103,8 @@ $front->getRouter()->addRoute('rest', $restRoute);
 ]]></programlisting>
 
     <para>
-        To enable <classname>Zend_Rest_Route</classname> for specific
-        controllers, add an array of controller names as the value of each
-        module array element.
+        Um <classname>Zend_Rest_Route</classname> für spezielle Controller einzuschalten muss ein
+        Array von Controllernamen als Wert für jedes Modul (Arrayelement) hinzugefügt werden.
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -121,45 +119,47 @@ $front->getRouter()->addRoute('rest', $restRoute);
         <title>Zend_Rest_Controller</title>
 
         <para>
-            To help guide development of Controllers for use with
-            <classname>Zend_Rest_Route</classname>, extend your Controllers from
-            <classname>Zend_Rest_Controller</classname>.
-            <classname>Zend_Rest_Controller</classname> defines the 5 most-commonly
-            needed operations for RESTful resources in the form of abstract action
-            methods.
+            Um bei der Entwicklung von Controllern zu Hilfe zu sein die mit
+            <classname>Zend_Rest_Route</classname> verwendet werden, müssen die Controller von
+            <classname>Zend_Rest_Controller</classname> erweitert werden.
+            <classname>Zend_Rest_Controller</classname> definiert die 5 am meisten benötigten
+            Operationen für RESTvolle Ressourcen in der Form von abstrakten Actionmethoden.
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
                     <emphasis><methodname>indexAction()</methodname></emphasis> -
-                    Should retrieve an index of resources and assign it to view.
+                    Sollte einen Index von Ressourcen empfangen und diese mit der View
+                    verknüpfen.
                 </para>
             </listitem>
             <listitem>
                 <para>
                     <emphasis><methodname>getAction()</methodname></emphasis> -
-                    Should retrieve a single resource identified by <acronym>URI</acronym>
-                    and assign it to view.
+                    Sollte eine einzelne  Ressource empfangen die von einer <acronym>URI</acronym>
+                    identifiziert wird und diese mit der Vew verknüpfen.
                 </para>
             </listitem>
             <listitem>
                 <para>
                     <emphasis><methodname>postAction()</methodname></emphasis> -
-                    Should accept a new single resource and persist its state.
+                    Sollte eine einzelne neue Ressource akzeptieren und dessen Status persistent
+                    machen.
                 </para>
             </listitem>
             <listitem>
                 <para>
                     <emphasis><methodname>putAction()</methodname></emphasis> -
-                    Should accept a single resource idenitifed by <acronym>URI</acronym>
-                    and persist its state.
+                    Sollte eine einzelne Ressource akzeptieren die von einer <acronym>URI</acronym>
+                    identifiziert wird und dessen Status persistent machen.
                 </para>
             </listitem>
             <listitem>
                 <para>
                     <emphasis><methodname>deleteAction()</methodname></emphasis> -
-                    Should delete a single resource identified by <acronym>URI</acronym>.
+                    Sollte eine einzelne Ressource löschen die von einer <acronym>URI</acronym>
+                    identifiziert wird.
                 </para>
             </listitem>
         </itemizedlist>

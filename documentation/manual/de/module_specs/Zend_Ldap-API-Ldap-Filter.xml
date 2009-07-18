@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 16639 -->
+<!-- Reviewed: no -->
+<sect3 id="zend.ldap.api.reference.zend-ldap-filter">
+    <title>Zend_Ldap_Filter</title>
+
+    <table id="zend.ldap.api.reference.zend-filter.table">
+        <title>Zend_Ldap_Filter API</title>
+
+        <tgroup cols="2">
+            <thead>
+                <row>
+                    <entry>Method</entry>
+                    <entry>Description</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry>
+                        <emphasis><code>Zend_Ldap_Filter equals(string $attr,
+                        string $value)</code> </emphasis>
+                    </entry>
+                    <entry>
+                        Creates an 'equals' filter:
+                        <code>(attr=value)</code>.
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <emphasis><code>Zend_Ldap_Filter begins(string $attr,
+                        string $value)</code> </emphasis>
+                    </entry>
+                    <entry>
+                        Creates an 'begins with' filter:
+                        <code>(attr=value*)</code>.
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <emphasis><code>Zend_Ldap_Filter ends(string $attr, string
+                        $value)</code> </emphasis>
+                    </entry>
+                    <entry>
+                        Creates an 'ends with' filter:
+                        <code>(attr=*value)</code>.
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <emphasis><code>Zend_Ldap_Filter contains(string $attr,
+                        string $value)</code> </emphasis>
+                    </entry>
+                    <entry>
+                        Creates an 'contains' filter:
+                        <code>(attr=*value*)</code>.
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <emphasis><code>Zend_Ldap_Filter greater(string $attr,
+                        string $value)</code> </emphasis>
+                    </entry>
+                    <entry>
+                        Creates an 'greater' filter:
+                        <code>(attr&gt;value)</code>.
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <emphasis><code>Zend_Ldap_Filter greaterOrEqual(string
+                        $attr, string $value)</code> </emphasis>
+                    </entry>
+                    <entry>
+                        Creates an 'greater or equal' filter:
+                        <code>(attr&gt;=value)</code>.
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <emphasis><code>Zend_Ldap_Filter less(string $attr, string
+                        $value)</code> </emphasis>
+                    </entry>
+                    <entry>
+                        Creates an 'less' filter:
+                        <code>(attr&lt;value)</code>.
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <emphasis><code>Zend_Ldap_Filter lessOrEqual(string $attr,
+                        string $value)</code> </emphasis>
+                    </entry>
+                    <entry>
+                        Creates an 'less or equal' filter:
+                        <code>(attr&lt;=value)</code>.
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <emphasis><code>Zend_Ldap_Filter approx(string $attr,
+                        string $value)</code> </emphasis>
+                    </entry>
+                    <entry>
+                        Creates an 'approx' filter:
+                        <code>(attr~=value)</code>.
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <emphasis><code>Zend_Ldap_Filter any(string $attr)</code>
+                        </emphasis>
+                    </entry>
+                    <entry>Creates an 'any' filter: <code>(attr=*)</code>.</entry>
+                </row>
+                <row>
+                    <entry>
+                        <emphasis><code>Zend_Ldap_Filter string(string
+                        $filter)</code> </emphasis>
+                    </entry>
+                    <entry>
+                        Creates a simple custom string filter. The user is
+                        responsible for all value-escaping as the filter is used as
+                        is.
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <emphasis><code>Zend_Ldap_Filter mask(string $mask, string
+                        $value,...)</code> </emphasis>
+                    </entry>
+                    <entry>
+                        Creates a filter from a string mask. All <code>$value</code>
+                        parameters will be escaped and substituted into <code>$mask</code>
+                        by using
+                        <ulink url="http://php.net/sprintf">
+                        <code>sprintf()</code></ulink>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <emphasis><code>Zend_Ldap_Filter
+                        andFilter(Zend_Ldap_Filter_Abstract $filter,...)</code>
+                        </emphasis>
+                    </entry>
+                    <entry>Creates an 'and' filter from all arguments given.</entry>
+                </row>
+                <row>
+                    <entry>
+                        <emphasis><code>Zend_Ldap_Filter
+                        orFilter(Zend_Ldap_Filter_Abstract $filter,...)</code>
+                        </emphasis>
+                    </entry>
+                    <entry>Creates an 'or' filter from all arguments given.</entry>
+                </row>
+                <row>
+                    <entry>
+                        <code>__construct(string $attr, string $value, string
+                        $filtertype, string|null $prepend, string|null
+                        $append)</code>
+                    </entry>
+                    <entry>
+                        Constructor. Creates an arbitrary filter according to the
+                        parameters supplied. The resulting filter will be a concatenation
+                        <code>$attr . $filtertype . $prepend . $value . $append</code>.
+                        Normally this constructor is not needed as all filters can be
+                        created by using the apprpriate factory methods.
+                    </entry>
+                </row>
+                <row>
+                    <entry><code>string toString()</code></entry>
+                    <entry>Returns a string representation of the filter.</entry>
+                </row>
+                <row>
+                    <entry><code>string __toString()</code></entry>
+                    <entry>
+                        Returns a string representation of the filter. Proxies to
+                        <code>Zend_Ldap_Filter::toString()</code>.
+                    </entry>
+                </row>
+                <row>
+                    <entry><code>Zend_Ldap_Filter_Abstract negate()</code></entry>
+                    <entry>Negates the current filter.</entry>
+                </row>
+                <row>
+                    <entry>
+                        <code>Zend_Ldap_Filter_Abstract
+                        addAnd(Zend_Ldap_Filter_Abstract $filter,...)</code>
+                    </entry>
+                    <entry>
+                        Creates an 'and' filter from the current filter and all
+                        filters passed in as the arguments.
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <code>Zend_Ldap_Filter_Abstract
+                        addOr(Zend_Ldap_Filter_Abstract $filter,...)</code>
+                    </entry>
+                    <entry>
+                        Creates an 'or' filter from the current filter and all
+                        filters passed in as the arguments.
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <emphasis><code>string|array escapeValue(string|array
+                        $values)</code> </emphasis>
+                    </entry>
+                    <entry>
+                        Escapes the given <code>$values</code> according to RFC 2254
+                        so that they can be safely used in <acronym>LDAP</acronym> filters. If a single string
+                        is given, a string is returned - otherwise an array is returned.
+                        Any control characters with an ACII code &lt; 32 as well as the
+                        characters with special meaning in <acronym>LDAP</acronym> filters "*", "(", ")", and
+                        "\" (the backslash) are converted into the representation of a
+                        backslash followed by two hex digits representing the hexadecimal
+                        value of the character.
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <emphasis><code>string|array unescapeValue(string|array
+                        $values)</code> </emphasis>
+                    </entry>
+                    <entry>
+                        Undoes the conversion done by
+                        <code>Zend_Ldap_Filter::escapeValue()</code>. Converts any
+                        sequences of a backslash followed by two hex digits into the
+                        corresponding character.
+                    </entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+</sect3>

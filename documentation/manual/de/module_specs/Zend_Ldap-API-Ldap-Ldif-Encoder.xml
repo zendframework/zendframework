@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 16639 -->
+<!-- Reviewed: no -->
+<sect3 id="zend.ldap.api.reference.zend-ldap-ldif-encoder">
+    <title>Zend_Ldif_Encoder</title>
+
+    <table id="zend.ldap.api.reference.zend-ldap-ldif-encoder.table">
+        <title>Zend_Ldif_Encoder API</title>
+
+        <tgroup cols="2">
+            <thead>
+                <row>
+                    <entry>Method</entry>
+                    <entry>Description</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry>
+                        <emphasis><code>array decode(string $string)</code>
+                        </emphasis>
+                    </entry>
+                    <entry>
+                        Decodes the string <code>$string</code> into an array of
+                        <acronym>LDIF</acronym> items.
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <emphasis><code>string encode(scalar|array|Zend_Ldap_Node
+                        $value, array $options)</code> </emphasis>
+                    </entry>
+                    <entry>
+                        Encode <code>$value</code> into a <acronym>LDIF</acronym> representation.
+                        <code>$options</code> is an array that may contain the following
+                        keys:
+                        <variablelist>
+                            <varlistentry>
+                                <term><code>'sort'</code></term>
+                                <listitem>
+                                    <para>
+                                        Sort the given attributes with <code>dn</code>
+                                        following <code>objectClass</code> and following all other
+                                        attributes sorted alphabetically. <code>true</code> by
+                                        default.
+                                    </para>
+                                </listitem>
+                            </varlistentry>
+
+                            <varlistentry>
+                                <term><code>'version'</code></term>
+                                <listitem>
+                                    <para>
+                                        The <acronym>LDIF</acronym> format version. <code>1</code> by
+                                        default.
+                                    </para>
+                                </listitem>
+                            </varlistentry>
+
+                            <varlistentry>
+                                <term><code>'wrap'</code></term>
+                                <listitem>
+                                <para>
+                                    The line-length. <code>78</code> by default to
+                                    conform to the <acronym>LDIF</acronym> specification.
+                                </para>
+                                </listitem>
+                            </varlistentry>
+                        </variablelist>
+                    </entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+</sect3>
+

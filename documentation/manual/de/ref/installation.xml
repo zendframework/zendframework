@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15614 -->
+<!-- EN-Revision: 16626 -->
 <!-- Reviewed: no -->
 <sect1 id="introduction.installation">
 
@@ -35,18 +35,19 @@
                 Entwicklung des Zend Frameworks. Schnappschüße sind gebündelt mit
                 Dokumentation, entweder in Englisch oder in allen vorhandenen Sprachen. Wenn
                 davon abgesehen wird mit den letzten Zend Framework Entwicklungen zu arbeiten,
-                sollte die Verwendung eine Subversion (SVN) Clients erwogen werden.
+                sollte die Verwendung eine Subversion (<acronym>SVN</acronym>) Clients erwogen
+                werden.
             </para>
         </listitem>
         <listitem>
             <para>
                 Verwenden eines <ulink url="http://subversion.tigris.org">Subversion</ulink>
-                (SVN) Clients. Zend Framework ist eine Open Source Software, und das für dessen
-                Entwicklung verwendete Subversion Repository ist öffentlich erreichbar. Es
-                sollte überlegt werden SVN zu verwenden um den Zend Framework zu erhalten, wenn
-                bereits SVN für die eigene Anwendungsentwicklung verwendet wird, oder wenn es
-                notwendig ist die Framework Version öfter zu aktualisieren als Releases
-                erscheinen.
+                (<acronym>SVN</acronym>) Clients. Zend Framework ist eine Open Source Software, und
+                das für dessen Entwicklung verwendete Subversion Repository ist öffentlich
+                erreichbar. Es sollte überlegt werden <acronym>SVN</acronym> zu verwenden um den
+                Zend Framework zu erhalten, wenn bereits <acronym>SVN</acronym> für die eigene
+                Anwendungsentwicklung verwendet wird, oder wenn es notwendig ist die Framework
+                Version öfter zu aktualisieren als Releases erscheinen.
             </para>
             <para>
                 <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.export.html">
@@ -62,17 +63,18 @@
                 url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.update.html">
                 svn update</ulink> upgedated werden und Änderungen können mit dem
                 <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.commit.html">
-                svn commit</ulink> Kommando in unser SVN Repository übertragen
+                svn commit</ulink> Kommando in unser <acronym>SVN</acronym> Repository übertragen
                 werden.
             </para>
             <para>
                 Eine <ulink
                 url="http://svnbook.red-bean.com/nightly/en/svn.advanced.externals.html">
-                externe Definition</ulink> ist recht bequem für Entwickler die bereits SVN
-                benutzen um Ihre eigenen Arbeitskopien ihrer Anwendungen zu Verwalten.
+                externe Definition</ulink> ist recht bequem für Entwickler die bereits
+                <acronym>SVN</acronym> benutzen um Ihre eigenen Arbeitskopien ihrer Anwendungen
+                zu Verwalten.
             </para>
             <para>
-                Die URL für den Stamm des Zend Framework SVN Repositories ist:
+                Die URL für den Stamm des Zend Framework <acronym>SVN</acronym> Repositories ist:
                 <ulink url="http://framework.zend.com/svn/framework/standard/trunk">
                 http://framework.zend.com/svn/framework/standard/trunk</ulink>
             </para>
@@ -83,7 +85,7 @@
         Sobald eine Kopie des Zend Framework vorhanden ist, muß die eigene Anwendung fähig sein
         die Zend Framework Klassen aufzurufen. Obwohl es <ulink
         url="http://www.php.net/manual/de/configuration.changes.php"> verschiedene Wege gibt das zu
-        erreichen</ulink>, muß PHP's <ulink
+        erreichen</ulink>, muß <acronym>PHP</acronym>'s <ulink
         url="http://www.php.net/manual/de/ini.core.php#ini.include-path">include_path</ulink> den
         Pfad zur Zend Framework Bibliothek enthalten.
     </para>

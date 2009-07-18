@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15745 -->
+<!-- EN-Revision: 16626 -->
 <!-- Reviewed: no -->
 <appendix id="coding-standard">
   <title>Zend Framework Coding Standard für PHP</title>
@@ -27,32 +27,32 @@
 
             <para>
                 Die Bereiche die im ZF Coding Standard abgedeckt werden enthalten:
-
-                <itemizedlist>
-                    <listitem>
-                        <para>PHP Dateiformatierung</para>
-                    </listitem>
-
-                    <listitem>
-                        <para>Namens Konventionen</para>
-                    </listitem>
-
-                    <listitem>
-                        <para>Code Stil</para>
-                    </listitem>
-
-                    <listitem>
-                        <para>Inline Dokumentation</para>
-                    </listitem>
-                </itemizedlist>
             </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para><acronym>PHP</acronym> Dateiformatierung</para>
+                </listitem>
+
+                <listitem>
+                    <para>Namens Konventionen</para>
+                </listitem>
+
+                <listitem>
+                    <para>Code Stil</para>
+                </listitem>
+
+                <listitem>
+                    <para>Inline Dokumentation</para>
+                </listitem>
+            </itemizedlist>
         </sect2>
 
         <sect2 id="coding-standard.overview.goals">
             <title>Ziele</title>
 
             <para>
-                Coding Standards sind in jedem Entwicklungs Projekt wichtig, aber sie sid speziell
+                Coding Standards sind in jedem Entwicklungs Projekt wichtig, aber sie sind speziell
                 dann wichtig wenn viele Entwickler an dem gleichen Projekt arbeiten. Coding
                 Standards helfen sicherzustellen das der Code von hoher Qualität ist, weniger
                 Fehler hat, und einfach zu warten ist.
@@ -67,17 +67,20 @@
             <title>Allgemein</title>
 
             <para>
-                Für Dateien, welche nur PHP Code beinhalten ist der schliessende Tag ("?>") nicht
-                zugelassen. Er wird von PHP nicht benötigt, und das Weglassen verhindert das
-                versehentlich Leerzeilen in die Antwort eingefügt werden.
+                Für Dateien, welche nur <acronym>PHP</acronym> Code beinhalten ist der schliessende
+                Tag ("?>") nicht zugelassen. Er wird von <acronym>PHP</acronym> nicht benötigt, und
+                das Weglassen verhindert das versehentlich Leerzeilen in die Antwort eingefügt
+                werden.
             </para>
 
-            <para>
-                <emphasis>WICHTIG:</emphasis> Einbeziehen von beliebigen binärischen Daten durch
-                <code>__HALT_COMPILER()</code> ist in den PHP Dateien im Zend Framework oder
-                abgeleiteten Datei verboten. Das Benutzen ist nur für einige Installationsskirpte
-                erlaubt.
-            </para>
+            <note>
+                <para>
+                    <emphasis>Wichtig</emphasis>: Einbeziehen von beliebigen binärischen Daten
+                    durch <methodname>__HALT_COMPILER()</methodname> ist in den
+                    <acronym>PHP</acronym> Dateien im Zend Framework oder abgeleiteten Datei
+                    verboten. Das Benutzen ist nur für einige Installationsskirpte erlaubt.
+                </para>
+            </note>
         </sect2>
 
         <sect2 id="coding-standard.php-file-formatting.indentation">
@@ -93,8 +96,8 @@
             <para>
                 Die Zielzeilenlänge ist 80 Zeichen. Entwickler sollten jede Zeile Ihres Codes unter
                 80 Zeichen halten, soweit dies möglich und praktikabel ist. Trotzdem sind längere
-                Zeilen in einigen Fällen erlaubt. Die maximale Länge einer Zeile beträgt 120
-                Zeichen.
+                Zeilen in einigen Fällen erlaubt. Die maximale Länge einer <acronym>PHP</acronym>
+                Codezeile beträgt 120 Zeichen.
             </para>
         </sect2>
 
@@ -134,32 +137,37 @@
                 Klassennamen dürfen nur alphanumerische Zeichen enthalten. Nummern sind in
                 Klassennamen gestattet es wird aber von Ihnen in den meisten Fällen abgeraten.
                 Unterstriche sind nur gestattet im Platz des Pfadseparators -- der Dateiname
-                "Zend/Db/Table.php" muß übereinstimmen mit dem Klassennamen "Zend_Db_Table".
+                "<filename>Zend/Db/Table.php</filename>" muß übereinstimmen mit dem Klassennamen
+                "<classname>Zend_Db_Table</classname>".
             </para>
 
             <para>
                 Wenn ein Klassenname aus mehr als einem Wort besteht, muß der erste Buchstabe von
                 jedem neuen Wort großgeschrieben werden. Durchgehende Großbuchstaben sind nicht
-                erlaubt, z.B. eine Klasse "Zend_PDF" ist nicht erlaubt, aber "Zend_Pdf" ist
-                akzeptierbar.
+                erlaubt, z.B. eine Klasse "Zend_PDF" ist nicht erlaubt, aber
+                "<classname>Zend_Pdf</classname>" ist akzeptierbar.
             </para>
 
             <para>
                 Diese Konventionen definieren einen Pseudo-Namespace Mechanismus für Zend
-                Framework. Zend Framework wird das PHP Namespace Feature einbauen sobald es
-                verfügbar ist und es für unsere Entwickler in deren Anwendungen ohne Bedenken
-                verwendbar ist.
+                Framework. Zend Framework wird das <acronym>PHP</acronym> Namespace Feature
+                einbauen sobald es verfügbar ist und es für unsere Entwickler in deren Anwendungen
+                ohne Bedenken verwendbar ist.
             </para>
 
             <para>
                 Siehe die Klassennamen in der Standard und Extra Bibliothek für Beispiel dieser
                 Klassennamen Konvention.
-
-                <emphasis>WICHTIG:</emphasis> Code welcher mit dem Framework ausgeliefert werden
-                muß, aber nicht Teil der Standard oder Extras Bibliothek ist (z.B. Anwendungscode
-                oder Bibliotheken die nicht von Zend ausgeliefert werden), dürfen nie mit "Zend_"
-                oder "ZendX_" beginnen.
             </para>
+
+            <note>
+                <para>
+                    <emphasis>Wichtig</emphasis>: Code welcher mit dem Framework ausgeliefert
+                    werden muß, aber nicht Teil der Standard oder Extras Bibliothek ist (z.B.
+                    Anwendungscode oder Bibliotheken die nicht von Zend ausgeliefert werden),
+                    dürfen nie mit "Zend_" oder "ZendX_" beginnen.
+                </para>
+            </note>
         </sect2>
 
         <sect2 id="coding-standard.naming-conventions.filenames">
@@ -171,11 +179,12 @@
             </para>
 
             <para>
-                Jede Datei die irgendeinen PHP Code enthält sollte mit der Endung ".php" enden, mit
-                Ausnahme der View Skripte. Die folgenden Beispiele zeigen akzeptierbare Dateinamen
-                für Zend Framework Klassen:
+                Jede Datei die irgendeinen <acronym>PHP</acronym> Code enthält sollte mit der
+                Endung "<filename>.php</filename>" enden, mit Ausnahme der View Skripte. Die
+                folgenden Beispiele zeigen akzeptierbare Dateinamen für Zend Framework Klassen:
+            </para>
 
-                <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend/Db.php
 
 Zend/Controller/Front.php
@@ -183,6 +192,7 @@ Zend/Controller/Front.php
 Zend/View/Helper/FormRadio.php
 ]]></programlisting>
 
+            <para>
                 Dateinamen müssen den Klassennamen wie oben beschrieben entsprechen.
             </para>
         </sect2>
@@ -209,15 +219,15 @@ Zend/View/Helper/FormRadio.php
 
             <para>
                 Das sind Beispiele akzeptierbarer Namen für Funktionen:
+            </para>
 
-                <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 filterInput()
 
 getElementById()
 
 widgetFactory()
 ]]></programlisting>
-            </para>
 
             <para>
                 Für objekt-orientiertes Programmieren, sollten Zugriffspunkte für Instanzen oder
@@ -287,8 +297,8 @@ widgetFactory()
             </para>
 
             <para>
-                Zum Beispiel ist <code>EMBED_SUPPRESS_EMBED_EXCEPTION</code> gestattet aber
-                <code>EMBED_SUPPRESSEMBEDEXCEPTION</code> nicht.
+                Zum Beispiel ist <constant>EMBED_SUPPRESS_EMBED_EXCEPTION</constant> gestattet aber
+                <constant>EMBED_SUPPRESSEMBEDEXCEPTION</constant> nicht.
             </para>
 
             <para>
@@ -306,18 +316,19 @@ widgetFactory()
             <title>PHP Code Abgrenzung</title>
 
             <para>
-                PHP Code muß immer mit der kompletten Form des Standard-PHP Tags abgegrenzt sein:
+                <acronym>PHP</acronym> Code muß immer mit der kompletten Form des
+                Standard-<acronym>PHP</acronym> Tags abgegrenzt sein:
+            </para>
 
-                <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <?php
 
 ?>
 ]]></programlisting>
-            </para>
 
             <para>
-                Kurze Tags sind nie erlaubt. Für Dateien die nur PHP Code enthalten, darf
-                das schließende Tag nie angegeben werden (Siehe
+                Kurze Tags sind nie erlaubt. Für Dateien die nur <acronym>PHP</acronym> Code
+                enthalten, darf das schließende Tag nie angegeben werden (Siehe
                 <xref linkend="coding-standard.php-file-formatting.general"/>).
             </para>
         </sect2>
@@ -332,11 +343,11 @@ widgetFactory()
                     Wenn ein String ein Literal ist (er also keine Variablenvertreter enthält),
                     sollte immer das Apostroph oder "einzelne Anführungszeichen" verwendet werden um
                     den String abzugrenzen:
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $a = 'Beispiel String';
 ]]></programlisting>
-                </para>
             </sect3>
 
             <sect3 id="coding-standard.coding-style.strings.literals-containing-apostrophes">
@@ -345,13 +356,15 @@ $a = 'Beispiel String';
                 <para>
                     Wenn ein literaler String selbst Apostrophe enthält, ist es gestattet den String
                     mit Anführungszeichen oder "doppeltes Anführungszeichen" abzugrenzen. Das ist
-                    speziell für SQL Anweisungen nützlich:
+                    speziell für <acronym>SQL</acronym> Anweisungen nützlich:
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $sql = "SELECT `id`, `name` from `people` "
      . "WHERE `name`='Fred' OR `name`='Susan'";
 ]]></programlisting>
 
+                <para>
                     Diese Syntax ist zu bevorzugen, im Gegensatz zum Ausbruch von Apostrophs, da Sie
                     viel einfacher lesbar ist.
                 </para>
@@ -362,21 +375,21 @@ $sql = "SELECT `id`, `name` from `people` "
 
                 <para>
                     Variabler Austausch ist gestatten bei Verwendung einer der Formen:
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $greeting = "Halle $name, willkommen zurück!";
 
 $greeting = "Hallo {$name}, willkommen zurück!";
 ]]></programlisting>
-                </para>
 
                 <para>
                     Aus Gründen der Konstistenz ist folgende Form nicht gestattet:
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $greeting = "Hallo ${name}, willkommen zurück!";
 ]]></programlisting>
-                </para>
             </sect3>
 
             <sect3 id="coding-standard.coding-style.strings.string-concatenation">
@@ -386,24 +399,24 @@ $greeting = "Hallo ${name}, willkommen zurück!";
                     Strings müssen verbunden werden indem man den "." Operator verwendet. Ein
                     Leerzeichen muß immer vor und nach dem "." Operator hinzugefügt werden um die
                     Lesbarkeit zu erhöhen:
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $company = 'Zend' . ' ' . 'Technologies';
 ]]></programlisting>
-                </para>
 
                 <para>
                     Wenn Strings mit dem "." Operator verbunden werden, ist es empfohlen die
                     Anweisung in mehrere Zeilen umzubrechen um die Lesbarkeit zu erhöhen. In diesen
                     Fällen sollte jede folgende Zeile mit Leerraum aufgefüllt werden so das der "."
                     Operator genau unterhalb des "=" Operators ist:
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $sql = "SELECT `id`, `name` FROM `people` "
      . "WHERE `name` = 'Susan' "
      . "ORDER BY `name` ASC ";
 ]]></programlisting>
-                </para>
             </sect3>
         </sect2>
 
@@ -424,23 +437,23 @@ $sql = "SELECT `id`, `name` FROM `people` "
                     Wenn indizierte Arrays mit dem <type>Array</type> Funktion deklariert werden,
                     muß ein folgendes Leerzeichen nach jeder Kommabegrenzung hinzugefügt werden um
                     die Lesbarkeit zu erhöhen:
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $sampleArray = array(1, 2, 3, 'Zend', 'Studio');
 ]]></programlisting>
-                </para>
 
                 <para>
                     Es ist gestattet mehrzeilige indizierte Arrays zu definieren bei Verwendung des
                     "array" Konstrukts. In diesem Fall, muß jede folgende Zeile mit Leerzeichen
                     aufgefüllt werden so das der Beginn jeder Zeile ausgerichtet ist:
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $sampleArray = array(1, 2, 3, 'Zend', 'Studio',
                      $a, $b, $c,
                      56.44, $d, 500);
 ]]></programlisting>
-                </para>
             </sect3>
 
             <sect3 id="coding-standard.coding-style.arrays.associative">
@@ -451,12 +464,12 @@ $sampleArray = array(1, 2, 3, 'Zend', 'Studio',
                     ist das Umbrechen der Anweisung in mehrere Zeilen gestattet. In diesem Fall muß
                     jede folgende Linie mit Leerraum aufgefüllt werden so das beide, der Schlüssel
                     und der Wert untereinander stehen:
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $sampleArray = array('firstKey'  => 'firstValue',
                      'secondKey' => 'secondValue');
 ]]></programlisting>
-                 </para>
             </sect3>
         </sect2>
 
@@ -468,23 +481,36 @@ $sampleArray = array('firstKey'  => 'firstValue',
 
                 <para>
                     Klassen müssen entsprechend der Zend Framework Namenskonvention benannt werden.
-                </para><para>
+                </para>
+
+                <para>
                     Die Klammer sollte immer in der Zeile unter dem Klassennamen geschrieben werden.
-                </para><para>
+                </para>
+
+                <para>
                     Jede Klasse muß einen Dokumentationsblock haben der dem PHPDocumentor Standard
                     entspricht.
-                </para><para>
+                </para>
+
+                <para>
                     Jeder Code in der Klasse muß mit vier Leerzeichen eingerückt sein.
-                </para><para>
-                    Nur eine Klasse ist in jeder PHP Datei gestattet.
-                </para><para>
+                </para>
+
+                <para>
+                    Nur eine Klasse ist in jeder <acronym>PHP</acronym> Datei gestattet.
+                </para>
+
+                <para>
                     Das Platzieren von zusätzlichem Code in Klassendateien ist gestattet aber es
                     wird davon abgeraten. In solchen Dateien müssen zwei leere Zeilen die Klasse von
-                    jedem zusätzlichen PHP Code in der Datei seperieren.
-                </para><para>
-                    Das folgende ist ein Beispiel einer akzeptierbaren Klassendeklaration:
+                    jedem zusätzlichen <acronym>PHP</acronym> Code in der Datei seperieren.
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <para>
+                    Das folgende ist ein Beispiel einer akzeptierbaren Klassendeklaration:
+                </para>
+
+                <programlisting language="php"><![CDATA[
 /**
  * Dokumentations Block hier
  */
@@ -494,7 +520,6 @@ class SampleClass
     // muss mit vier Leerzeichen eingerückt sein
 }
 ]]></programlisting>
-                </para>
             </sect3>
 
             <sect3 id="coding-standard.coding-style.classes.member-variables">
@@ -504,17 +529,19 @@ class SampleClass
                     Klassenvariablen müssen entsprechend den Variablen-Benennungs-Konventionen des
                     Zend Frameworks benannt werden.
                 </para>
+
                 <para>
                     Jede Variable die in der Klasse deklariert wird muß am Beginn der Klasse
                     ausgelistet werden, vor der Deklaration von allen Methoden.
                 </para>
+
                 <para>
                     Das <code>var</code> Konstrukt ist nicht gestattet. Klassenvariablen definieren
                     Ihre Sichtbarkeit durch die Verwendung des <code>private</code>,
                     <code>protected</code>, oder <code>public</code> Modifikatoren. Das gestatten
                     von direktem Zugriff auf Klassenvariablen durch deren Deklaration als public ist
                     gestattet aber es wird davon abgeraten da hierfür Zugriffsmethoden verwendet
-                    werden sollten (set/get).
+                    werden sollten (set &amp; get).
                 </para>
             </sect3>
         </sect2>
@@ -529,11 +556,13 @@ class SampleClass
                     Funktionen müssen nach der Funktions-Namenskonvention des Zend Frameworks
                     benannt werden.
                 </para>
+
                 <para>
                     Methoden innerhalb von Klassen müssen immer Ihre Sichtbarkeit durch Verwendung
                     einer der <code>private</code>, <code>protected</code>, oder <code>public</code>
                     Modifikatoren definieren.
                 </para>
+
                 <para>
                     Wie bei Klassen, sollte die Klammer immer in der Zeile unterhalb des
                     Funktionsnamens geschrieben werden.
@@ -541,14 +570,17 @@ class SampleClass
                     Leerzeichen zwischen dem Funktionsnamen und der öffnenden Klammer für die
                     Argumente sind nicht erlaubt.
                 </para>
+
                 <para>
                     Von Funktionen im globalen Raum wird komplett abgeraten.
                 </para>
+
                 <para>
                     Das folgende ist ein Beispiel einer akzeptierbaren Funktionsdeklaration in einer
                     Klasse:
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 /**
  * Dokumentations Block hier
  */
@@ -564,13 +596,16 @@ class Foo
     }
 }
 ]]></programlisting>
-                </para>
 
-                <para>
-                    <emphasis>NOTIZ:</emphasis> Die Übergabe per Referenz ist die einzige erlaubt
-                    Mechanismus für die Übergabe von Parametern in der Deklaration einer Funktion:
+                <note>
+                    <para>
+                        <emphasis>Notiz</emphasis>: Die Übergabe per Referenz ist die einzige
+                        erlaubt Mechanismus für die Übergabe von Parametern in der Deklaration
+                        einer Funktion:
+                    </para>
+                </note>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 /**
  * Dokumentations Block hier
  */
@@ -583,7 +618,6 @@ class Foo
     {}
 }
 ]]></programlisting>
-                </para>
 
                 <para>
                     Der Aufruf durch Referenz ist nicht gestattet.
@@ -593,8 +627,9 @@ class Foo
                     Der Rückgabewert darf nicht in Klammern stehen. Das kann die Lesbarkeit
                     behindern und zusätzlich den Code unterbrechen wenn eine Methode später auf
                     Rückgabe durch Referenz geändert wird.
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 /**
  * Dokumentations Block hier
  */
@@ -617,8 +652,6 @@ class Foo
     }
 }
 ]]></programlisting>
-                </para>
-
             </sect3>
 
             <sect3 id="coding-standard.coding-style.functions-and-methods.usage">
@@ -628,31 +661,32 @@ class Foo
                     Funktionsargumente sollten durch ein einzelnes trennendes Leerzeichen nach dem
                     Komma Trennzeichen getrennt werden. Das folgende ist ein Beispiel für einen
                     akzeptierbaren Aufruf einer Funktion die drei Argumente benötigt:
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 threeArguments(1, 2, 3);
 ]]></programlisting>
-                </para>
 
                 <para>
                     Übergabe von Referenzen zur Laufzeit ist strengstens verboten. Siehe die Sektion
                     für Funktions Deklarationen für den richtigen Weg um Funktionsargumente per
                     Referenz zu übergeben.
                 </para>
+
                 <para>
                     Durch die Übergabe von Arrays als Argument für eine Funktion, kann der
                     Funktionsaufruf den "array" Hinweis enthalten und kann in mehrere Zeilen geteilt
                     werden um die Lesbarkeit zu erhöhen. In solchen Fällen sind die normalen
                     Richtlinien für das Schreiben von Arrays trotzdem noch anzuwenden:
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 threeArguments(array(1, 2, 3), 2, 3);
 
 threeArguments(array(1, 2, 3, 'Zend', 'Studio',
                      $a, $b, $c,
                      56.44, $d, 500), 2, 3);
 ]]></programlisting>
-                </para>
             </sect3>
         </sect2>
 
@@ -681,20 +715,21 @@ threeArguments(array(1, 2, 3, 'Zend', 'Studio',
                     Bedingungsanweisung. Die schließende Klammer wird immer in einer eigenen Zeile
                     geschrieben. Jeder Inhalt innerhalb der Klammer muß durch Verwendung von vier
                     Leerzeichen eingerückt werden.
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 if ($a != 2) {
     $a = 2;
 }
 ]]></programlisting>
-                </para>
 
                 <para>
                     Für "if" Anweisungen die "elseif" oder "else" beinhalten, sind die Konventionen
                     der Formatierung ähnlich dem "if" Konstrukt. Das folgende Beispiel zeigt gültige
                     Formatierungen für "if" Anweisungen mit "else" und/oder "elseif" Konstrukten:
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 if ($a != 2) {
     $a = 2;
 } else {
@@ -709,9 +744,12 @@ if ($a != 2) {
     $a = 7;
 }
 ]]></programlisting>
-                    PHP erlaubt das Anweisungen in einigen Fällen auch ohne Klammern zu schreiben.
-                    Dieser Coding Standard macht keine Unterscheidungen und es müssen alle "if",
-                    "elseif" oder "else" Anweisungen in Klammern geschrieben werden.
+
+                <para>
+                    <acronym>PHP</acronym> erlaubt das Anweisungen in einigen Fällen auch ohne
+                    Klammern zu schreiben. Dieser Coding Standard macht keine Unterscheidungen und
+                    es müssen alle "if", "elseif" oder "else" Anweisungen in Klammern geschrieben
+                    werden.
                 </para>
 
                 <para>
@@ -753,15 +791,17 @@ switch ($numPeople) {
                     Anweisung vergessen werden.
                 </para>
 
-                <para>
-                    <emphasis>NOTIZ:</emphasis> Es ist machmal nützlich eine <code>case</code>
-                    Anweisung zu schreiben, die durch das nächste case fällt indem innerhalb solcher
-                    Fälle kein <code>break</code> oder <code>return</code> angegeben wird. Um diese
-                    Fälle von Fehlern zu unterscheiden, sollte jede <code>case</code> Anweisung in
-                    der <code>break</code> oder <code>return</code> unterlassen werden einen
-                    Kommentar enthalten der anzeigt das das break gewünschtermaßen unterdrückt
-                    wurde.
-                </para>
+                <note>
+                    <para>
+                        <emphasis>Notiz</emphasis>: Es ist machmal nützlich eine <code>case</code>
+                        Anweisung zu schreiben, die durch das nächste case fällt indem innerhalb
+                        solcher Fälle kein <code>break</code> oder <code>return</code> angegeben
+                        wird. Um diese Fälle von Fehlern zu unterscheiden, sollte jede
+                        <code>case</code> Anweisung in der <code>break</code> oder
+                        <code>return</code> unterlassen werden einen Kommentar enthalten der
+                        anzeigt das das break gewünschtermaßen unterdrückt wurde.
+                    </para>
+                </note>
             </sect3>
         </sect2>
 
@@ -789,10 +829,11 @@ switch ($numPeople) {
                 <title>Dateien</title>
 
                 <para>
-                    Jede Datei die PHP Code enthält muß einen Docblock am Beginn der Datei besitzen
-                    welcher mindestens diese phpDocumentor Tags enthält:
+                    Jede Datei die <acronym>PHP</acronym> Code enthält muß einen Docblock am Beginn
+                    der Datei besitzen welcher mindestens diese phpDocumentor Tags enthält:
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 /**
  * Kurze Beschreibung der Datei
  *
@@ -807,7 +848,6 @@ switch ($numPeople) {
  * @since      Datei vorhanden seit Release 1.2.0
 */
 ]]></programlisting>
-                </para>
             </sect3>
 
             <sect3 id="coding-standards.inline-documentation.classes">
@@ -816,8 +856,9 @@ switch ($numPeople) {
                 <para>
                     Jede Klasse muß einen Docblock haben welche mindestens diese phpDocumentor Tags
                     enthält:
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 /**
  * Kurze Beschreibung für die Klasse
  *
@@ -831,22 +872,21 @@ switch ($numPeople) {
  * @deprecated Klasse abgeraten ab Release 2.0.0
  */
 ]]></programlisting>
-                </para>
             </sect3>
 
             <sect3 id="coding-standards.inline-documentation.functions">
                 <title>Funktionen</title>
 
                 <para>
-                Jede Funktion, auch Objekt Methoden, müssen einen Docblock haben welcher mindestens
-                folgendes enthält:
-
-                    <itemizedlist>
-                        <listitem><para>Eine Beschreibung der Funktion</para></listitem>
-                        <listitem><para>Alle Argumente</para></listitem>
-                        <listitem><para>Alle möglichen Rückgabewerte</para></listitem>
-                    </itemizedlist>
+                    Jede Funktion, auch Objekt Methoden, müssen einen Docblock haben welcher
+                    mindestens folgendes enthält:
                 </para>
+
+                <itemizedlist>
+                    <listitem><para>Eine Beschreibung der Funktion</para></listitem>
+                    <listitem><para>Alle Argumente</para></listitem>
+                    <listitem><para>Alle möglichen Rückgabewerte</para></listitem>
+                </itemizedlist>
 
                 <para>
                     Es ist nicht notwendig das "@access" Tag zu verwenden, weil das Accesslevel
@@ -855,13 +895,13 @@ switch ($numPeople) {
                 </para>
 
                 <para>
-                    Wenn eine Funktion/Methode eine Ausnahme werfen könnte, muß @throws für alle
-                    bekannten Exception Klassen verwendet werden:
+                    Wenn eine Funktion oder Methode eine Ausnahme werfen könnte, muß @throws für
+                    alle bekannten Exception Klassen verwendet werden:
+                </para>
 
-                    <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 @throws exceptionclass [Beschreibung]
 ]]></programlisting>
-                </para>
             </sect3>
         </sect2>
     </sect1>

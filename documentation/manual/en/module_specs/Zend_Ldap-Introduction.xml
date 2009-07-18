@@ -27,7 +27,7 @@
             The component provides several helper classes to perform operations on
             <acronym>LDAP</acronym> entries (<classname>Zend_Ldap_Attribute</classname>) such as
             setting and retrieving attributes (date values, passwords, boolean values, ...), to
-            create and modifiy <acronym>LDAP</acronym> filter strings
+            create and modify <acronym>LDAP</acronym> filter strings
             (<classname>Zend_Ldap_Filter</classname>) and to manipulate <acronym>LDAP</acronym>
             distinguished names (DN) (<classname>Zend_Ldap_Dn</classname>).
         </para>

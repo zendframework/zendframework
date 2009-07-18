@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16633 -->
+<!-- EN-Revision: 16641 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.ldap.server">
     <title>Getting information from the LDAP server</title>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16443 -->
+<!-- EN-Revision: 16444 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.router.routes.chain">
     <title>Zend_Controller_Router_Route_Chain</title>
@@ -47,7 +47,7 @@ $chainedRoute = $hostnameRoute->chain($pathRoute);
 ]]></programlisting>
 
     <para>
-        Wenn Routen miteinander verkettet werden, ist Ihr standardmäßiges Trennzeichen ein
+        Wenn Routen miteinander verkettet werden, ist Ihr Trennzeichen ein
         Schrägstrich. Es kann Fälle geben in denen man ein anderes Trennzeichen verwenden will:
     </para>
 
@@ -72,9 +72,9 @@ echo $chainedRoute->assemble();
             <code>chains</code> Parameters. Dieser ist einfach eine Liste von Routen, die mit der
             Eltern-Route verkettet werden. Weder die Eltern-, noch die Kind-Routen werden dem
             Router direkt hinzugefügt sondern nur die resultierende verkettete Route. Der Name der
-            verketteten Route im Router ist der Name der Eltern-Route und der Name der Kind-Route
-            verbunden mit einem Bindestrich (-). Eine einfache Konfiguration würde in XML wie folgt
-            aussehen:
+            verketteten Route im Router ist standardmäßig der Name der Eltern-Route und der Name
+            der Kind-Route verbunden mit einem Bindestrich (-). Eine einfache Konfiguration würde
+            in XML wie folgt aussehen:
         </para>
 
         <programlisting language="xml"><![CDATA[
@@ -171,6 +171,43 @@ echo $chainedRoute->assemble();
         <chain>imprint</chain>
     </www-imprint>
 </routes>
+]]></programlisting>
+
+        <para>
+            Wenn man Chain-Routen mit <classname>Zend_Config</classname> konfiguriert und will das
+            das Trennzeichen ein anderes als ein Unterstrich ist, dann muss man dises Trennzeichen
+            separat spezifizieren:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$config = new Zend_Config(array(
+    'chainName' => array(
+        'type'   => 'Zend_Controller_Router_Route_Static',
+        'route'  => 'foo',
+        'chains' => array(
+            'subRouteName' => array(
+                'type'     => 'Zend_Controller_Router_Route_Static',
+                'route'    => 'bar',
+                'defaults' => array(
+                    'module'      => 'module',
+                     'controller' => 'controller',
+                     'action'     => 'action'
+                )
+            )
+        )
+    )
+));
+
+// Das Trennzeichen vor dem hinzufügen der Config setzen
+$router->setChainNameSeparator('_separator_')
+
+// Config hinzufügen
+$outer->addConfig($config);
+
+// Der Name unserer Route ist jetzt: chainName_separator_subRouteName
+echo $this->_router->assemble(array(), 'chainName_separator_subRouteName');
+
+// Die Prüfung: Ausgegeben wird /foo/bar
 ]]></programlisting>
     </sect4>
 </sect3>

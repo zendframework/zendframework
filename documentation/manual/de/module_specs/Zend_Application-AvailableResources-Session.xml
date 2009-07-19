@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15997 -->
+<!-- EN-Revision: 16650 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.available-resources.session">
     <title>Zend_Application_Resource_Session</title>
@@ -12,7 +12,7 @@
 
     <para>
         Um einen Session Save Handler zu setzen, muß einfach der Optionsschlüssel
-        <emphasis>saveHandler</emphasis> (Groß-/Kleinschreibung beachten) an die Ressource
+        <property>saveHandler</property> (Groß-/Kleinschreibung beachten) an die Ressource
         übergeben werden. Der Wert dieser Option kann einer der folgenden sein:
     </para>
 

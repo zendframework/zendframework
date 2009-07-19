@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15787 -->
+<!-- EN-Revision: 16650 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.available-resources.frontcontroller">
     <title>Zend_Application_Resource_Frontcontroller</title>
@@ -25,49 +25,50 @@
 
     <itemizedlist>
         <listitem><para>
-            <emphasis>controllerDirectory</emphasis>: Entweder ein Stringwert der ein einzelnes
-            Controller Verzeichnis spezifiziert, oder ein Array von Modul/Controller Verzeichnis
-            Paaren.
+            <emphasis><property>controllerDirectory</property></emphasis>: Entweder ein Stringwert
+            der ein einzelnes Controller Verzeichnis spezifiziert, oder ein Array von
+            Modul/Controller Verzeichnis Paaren.
         </para></listitem>
 
         <listitem><para>
-            <emphasis>moduleControllerDirectoryName</emphasis>: Ein Stringwert der auf ein
-            Unterverzeichnis unter einem Modul zeigt, das Controller enthält.
+            <emphasis><property>moduleControllerDirectoryName</property></emphasis>: Ein Stringwert
+            der auf ein Unterverzeichnis unter einem Modul zeigt, das Controller enthält.
         </para></listitem>
 
         <listitem><para>
-            <emphasis>moduleDirectory</emphasis>: Verzeichnis in dem Module gefunden werden können.
+            <emphasis><property>moduleDirectory</property></emphasis>: Verzeichnis in dem Module
+            gefunden werden können.
         </para></listitem>
 
         <listitem><para>
-            <emphasis>defaultControllerName</emphasis>: Basisname des Standard Controllers
+            <emphasis><property>defaultControllerName</property></emphasis>: Basisname des Standard
+            Controllers (normalerweise "index").
+        </para></listitem>
+
+        <listitem><para>
+            <emphasis><property>defaultAction</property></emphasis>: Basisname der Standard Aktion
             (normalerweise "index").
         </para></listitem>
 
         <listitem><para>
-            <emphasis>defaultAction</emphasis>: Basisname der Standard Aktion (normalerweise
-            "index").
+            <emphasis><property>defaultModule</property></emphasis>: Basisname des Standard Moduls
+            (normalerweise "default").
         </para></listitem>
 
         <listitem><para>
-            <emphasis>defaultModule</emphasis>: Basisname des Standard Moduls (normalerweise
-            "default").
+            <emphasis><property>baseUrl</property></emphasis>: Explizite Basis
+            <acronym>URL</acronym> zur Anwendung (normalerweise automatisch erkannt).
         </para></listitem>
 
         <listitem><para>
-            <emphasis>baseUrl</emphasis>: Explizite Basis <acronym>URL</acronym> zur Anwendung
-            (normalerweise automatisch erkannt).
+            <emphasis><property>plugins</property></emphasis>: Array von Front Controller Plugin
+            Klassennamen. Die Ressource wird jede Klasse instanziieren (ohne Contructor Argumente)
+            und die Instanz dann mit dem Front Controller registrieren.
         </para></listitem>
 
         <listitem><para>
-            <emphasis>plugins</emphasis>: Array von Front Controller Plugin Klassennamen. Die
-            Ressource wird jede Klasse instanziieren (ohne Contructor Argumente) und die Instanz
-            dann mit dem Front Controller registrieren.
-        </para></listitem>
-
-        <listitem><para>
-            <emphasis>params</emphasis>: Array von Schlüssel/Wert Paaren die mit dem Front
-            Controller registriert werden sollen.
+            <emphasis><property>params</property></emphasis>: Array von Schlüssel/Wert Paaren die
+            mit dem Front Controller registriert werden sollen.
         </para></listitem>
     </itemizedlist>
 

@@ -240,7 +240,7 @@ class Mundo
 
         <para>
             Dentro de nuestros ficheros Flex <acronym>MXML</acronym>, necesitamos vincular un RemoteObject al servicio.
-            En acronym>MXML</acronym>, esto podría hacerse así:
+            En <acronym>MXML</acronym>, esto podría hacerse así:
         </para>
 
         <programlisting language="xml"><![CDATA[

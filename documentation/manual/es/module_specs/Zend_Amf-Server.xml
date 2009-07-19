@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 16650 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.amf.server">
     <title>Zend_Amf_Server</title>
 
     <para>
-        <classname>Zend_Amf_Server</classname> proporciona un servidor al estilo RPC para
-        tramitar solicitudes hechas desde Adobe Flash Player utilizando el protocolo AMF.
-        Al igual que todas las clases de servidor, Zend Framework sigue la API de
+        <classname>Zend_Amf_Server</classname> proporciona un servidor al estilo <acronym>RPC</acronym> para
+        tramitar solicitudes hechas desde Adobe Flash Player utilizando el protocolo <acronym>AMF</acronym>.
+        Al igual que todas las clases de servidor, Zend Framework sigue la <acronym>API</acronym> de
         SoapServer, proporcionando una interfaz para crear servidores fácil de recordar.
 
     </para>
@@ -16,9 +16,9 @@
         <title>Servidor AMF básico</title>
 
         <para>
-            Asumamos que ha creado la clase <methodname>Foo</methodname> con una
+            Asumamos que ha creado la clase <classname>Foo</classname> con una
             variedad de métodos públicos. Usando el siguiente código, puede
-            crear un servidor AMF:
+            crear un servidor <acronym>AMF</acronym>:
         </para>
 
          <programlisting language="php"><![CDATA[
@@ -62,7 +62,7 @@ echo $respuesta;
         dinámicamente, en función de una ruta de directorio ya suministrada.
         Puede añadir al servidor tantos directorios como desee.
         El orden en que se añadan los directorios al servidor será el orden en que
-        se realizarán las búsquedas LIFO en los directorios para coincidir
+        se realizarán las búsquedas <acronym>LIFO</acronym> en los directorios para coincidir
         con la clase.
         El método <methodname>addDirectory()</methodname> realiza la acción de añadir directorios.
         </para>
@@ -74,19 +74,20 @@ $servidor->addDirectory(dirname(__FILE__) .'/../package/');
 
         <para>
         Cuando se llama a servicios remotos, los nombres de los directorios que
-        contengan las fuentes pueden tener los delimitadores guión bajo (_) y el punto (.).
-        Cuando se utilize un guión bajo (_) tanto en PEAR como en Zend Framework,
+        contengan las fuentes pueden tener los delimitadores guión bajo ("_") y el punto (".").
+        Cuando se utilize un guión bajo ("_") tanto en <acronym>PEAR</acronym> como en Zend Framework,
         se respetarán los nombres de clases de acuerdo a las convenciones de nomenclatura.
-        Esto significa que si usted llama al servicio com_Foo_Bar el servidor
-        buscará el archivo Bar.php en cada una de las rutas incluidas en <methodname>com/Foo/Bar.php</methodname>.
-        Si se usa la notación punto para su servicio remoto como <methodname>com.Foo.Bar</methodname>
-        cada ruta incluida deberá tener <methodname>com/Foo/Bar.php</methodname> agregado al final
-        para autocargar Bar.php.
+        Esto significa que si usted llama al servicio <classname>com_Foo_Bar</classname> el servidor
+        buscará el archivo <filename>Bar.php</filename> en cada una de las rutas incluidas en  
+		<filename>com/Foo/Bar.php</filename>.
+        Si se usa la notación punto para su servicio remoto como <filename>com.Foo.Bar</filename>
+        cada ruta incluida deberá tener <filename>com/Foo/Bar.php</filename> agregado al final
+        para autocargar <filename>Bar.php</filename>
         </para>
 
         <para>
-            Todos las solicitudes AMF enviadas al script serán manejadas
-            por el servidor, y este devolverá una respuesta AMF.
+            Todos las solicitudes <acronym>AMF</acronym> enviadas al script serán manejadas
+            por el servidor, y este devolverá una respuesta <acronym>AMF</acronym>.
         </para>
     </example>
 
@@ -95,7 +96,7 @@ $servidor->addDirectory(dirname(__FILE__) .'/../package/');
 
         <para>
             Como todos los demás componentes del servidor en Zend Framework,
-            debe documentar los métodos de su clase usando PHP docblocks.
+            debe documentar los métodos de su clase usando  <acronym>PHP</acronym> docblocks.
             Como mínimo, necesita proporcionar anotaciones para cada argumento
             así como para el valor de retorno. Como ejemplos:
         </para>
@@ -141,52 +142,52 @@ class Mundo
 
         <para>
             Conectarse a <classname>Zend_Amf_Server</classname> desde su proyecto Flex
-            es bastante simple; solo necesita apuntar el final del URI
+            es bastante simple; solo necesita apuntar el final del <acronym>URI</acronym>
             a su script <classname>Zend_Amf_Server</classname>.
         </para>
 
         <para>
-            Por ejemplo, digamos que usted ya ha creado su servidor y lo ha
-            puesto en el fichero <methodname>server.php</methodname> en el directorio raíz (root)
-            de su aplicación, por lo tanto la URI es <methodname>http://example.com/server.php</methodname>.
-            En este caso, usted debería modificar su fichero services-config.xml
+            Por ejemplo, digamos que ya ha creado su servidor y lo ha
+            puesto en el fichero <filename>server.php</filename> en el directorio raíz (root)
+            de su aplicación, por lo tanto la <acronym>URI</acronym> es <filename>http://example.com/server.php</filename>.
+            En este caso, usted debería modificar su fichero <filename>service-config.xml</filename>
             poniendo este valor como atributo al punto final del canal uri.
        </para>
         <para>
-             Si nunca ha creado un fichero services-config.xml puede hacerlo
+             Si nunca ha creado un fichero <filename>service-config.xml</filename> puede hacerlo
              abriendo su proyecto en la ventana del navegador.
              Haga clic derecho sobre el nombre del proyecto y seleccione 'properties' (propiedades).
              En el cuadro de diálogo 'properties' del proyecto ir al menú ‘Flex Build Path' (Crear ruta Flex),
              luego en la pestaña ‘Library path’ (ruta de biblioteca) asegúrese
-             de que el fichero 'rpc.swc' sea añadido a su ruta de proyectos
+             de que el fichero '<filename>rpc.swc</filename>' sea añadido a su ruta de proyectos
              y pulse Ok (Aceptar) para cerrar la ventana.
         </para>
         <para>
             También necesitará indicarle al compilador que debe usar
-            services-config.xml para encontrar el punto final de RemoteObject.
+             <filename>service-config.xml</filename> para encontrar el punto final de RemoteObject.
             Para hacerlo, abra de nuevo el panel de propiedades de su proyecto
             haciendo clic en el botón derecho sobre el proyecto en la carpeta del
             navegador y seleccione 'properties' (propiedades).
             Ahora seleccione ‘Flex Compiler' (Compilador Flex) y añada la cadena:
-            -services “services-config.xml".
+           <command>-services "services-config.xml"</command>.
             Presione 'Apply' (Aplicar) y luego en OK para volver a actualizar la opción.
             Lo que acaba de hacer es decirle al compilador Flex que busque en el fichero
-            services-config.xml aquellas variables que se usarán en tiempo de
+            <filename>services-config.xml</filename> aquellas variables que se usarán en tiempo de
             ejecución por la clase RemotingObject.
         </para>
         <para>
             Ahora, para conectarnos a nuestros métodos remotos debemos indicarle a Flex
             qué fichero de configuración de servicios utilizar.
-            Por esta razón creamos un nuevo fichero 'services-config.xml'
+            Por esta razón creamos un nuevo fichero  '<filename>services-config.xml</filename>'
             en la carpeta src del proyecto Flex.
             Con click derecho sobre el proyecto y seleccionando 'new'(nuevo)
             'File' (fichero), se abrirá una nueva ventana.
             Seleccione la carpeta del proyecto y luego nombre el archivo
-            'services-config.xml' y presione 'finish' (finalizar).
+             '<filename>services-config.xml</filename>' y presione 'finish' (finalizar).
         </para>
         <para>
-            Flex ha creado y abierto el nuevo fichero services-config.xml.
-            Utilice el siguiente texto de ejemplo para su fichero services-config.xml.
+            Flex ha creado y abierto el nuevo fichero <filename>services-config.xml</filename>.
+            Utilice el siguiente texto de ejemplo para su fichero <filename>services-config.xml</filename>.
             Asegúrese de actualizar su punto final para que concuerde con el servidor.
             Asegúrese también de guardar el fichero.
         </para>
@@ -220,7 +221,7 @@ class Mundo
 
         <para>
             Hay dos puntos clave en el ejemplo.
-            En primer lugar, pero último en el listado, creamos un canal AMF,
+            En primer lugar, pero último en el listado, creamos un canal <acronym>AMF</acronym>,
             y especificamos el punto final como la URL a nuestro <classname>Zend_Amf_Server</classname>:
         </para>
 
@@ -238,8 +239,8 @@ class Mundo
         </para>
 
         <para>
-            Dentro de nuestros ficheros Flex MXML, necesitamos vincular un RemoteObject al servicio.
-            En MXML, esto podría hacerse así:
+            Dentro de nuestros ficheros Flex <acronym>MXML</acronym>, necesitamos vincular un RemoteObject al servicio.
+            En acronym>MXML</acronym>, esto podría hacerse así:
         </para>
 
         <programlisting language="xml"><![CDATA[
@@ -252,7 +253,7 @@ class Mundo
         <para>
             Aquí, hemos definido un nuevo objeto remoto identificado por "myservice"
             vinculado destino de servicio "zend" que hemos definido en el fichero
-            <methodname>services-config.xml</methodname>. Entonces invocamos sus métodos en
+             <filename>services-config.xml</filename>. Entonces invocamos sus métodos en
             nuestro ActionScript simplemente llamando a "myservice.&lt;method&gt;".
             . A modo de ejemplo:
         </para>
@@ -283,7 +284,7 @@ myservice.world.hello("Wade");
         <para>
             Por defecto, todas las excepciones producidas en sus
             clases o funciones adjuntas serán capturados y devueltas como
-            mensajes de error de AMF (AMF ErrorMessages).
+            mensajes de error de <acronym>AMF</acronym> (AMF ErrorMessages).
             Sin embargo, el contenido de estos objetos de mensajes de error
             variará dependiendo de si el servidor está o no en modo "producción"
             (el estado por defecto).
@@ -305,7 +306,7 @@ $server->setProduction(false);
 ]]></programlisting>
 
         <para>
-            Para habilitarlo nuevamente, pase el valor true en su lugar.
+            Para habilitarlo nuevamente, pase el valor <constant>TRUE</constant> en su lugar.
         </para>
 
          <programlisting language="php"><![CDATA[
@@ -321,20 +322,20 @@ $server->setProduction(true);
                 Los mensajes de excepción y los backtraces puede contener información
                 sensible del sistema, y no desea que se pueda acceder a ellas
                 desde el exterior.
-                Aunque AMF es un formato binario, ahora al ser abierta la especificación,
+                Aunque <acronym>AMF</acronym> es un formato binario, ahora al ser abierta la especificación,
                 cualquiera puede potencialmente deserializar los datos.
             </para>
         </note>
 
         <para>
             Un área en la que se debe tener especialmente mucho cuidado son los
-            errores propios de PHP.
-            Cuando la directiva INI <methodname>display_errors</methodname> está habilitada,
-            los errores de PHP de cualquier nivel del reporte actual serán
+            errores propios de <acronym>PHP</acronym>.
+            Cuando la directiva <acronym>INI</acronym> <property>display_errors</property> está habilitada,
+            los errores de <acronym>PHP</acronym> de cualquier nivel del reporte actual serán
             pasados directamente a la salida, y potencialmente se podrían hacer
-            estragos con las respuestas de AMF.
+            estragos con las respuestas de <acronym>AMF</acronym>.
             Para prevenir estos problemas, sugerimos deshabilitar la directiva
-            <methodname>display_errors</methodname> cuando se está en modo de producción.
+            <property>display_errors</property> cuando se está en modo de producción.
         </para>
     </sect2>
 
@@ -368,7 +369,7 @@ echo $respuesta;
         <title>Objetos tipados</title>
 
         <para>
-            Similarmente a SOAP, AMF permite pasar objetos entre cliente y servidor.
+            Similarmente a <acronym>SOAP</acronym>, <acronym>AMF</acronym> permite pasar objetos entre cliente y servidor.
             Esto le da una gran flexibilidad y coherencia a ambos entornos.
         </para>
 
@@ -383,7 +384,7 @@ echo $respuesta;
                     Primero, usted puede crear uniones explícitas a nivel del servidor,
                     utilizando el método <methodname>setClassMap()</methodname>.
                     El primer argumento es el nombre de la clase de ActionScript,
-                    el segundo es el nombre de la clase PHP que lo mapea:
+                    el segundo es el nombre de la clase <acronym>PHP</acronym> que lo mapea:
                 </para>
 
                  <programlisting language="php"><![CDATA[
@@ -394,7 +395,7 @@ $servidor->setClassMap('ContactVO', 'Contact');
 
             <listitem>
                 <para>
-                    Segundo, en su clase PHP puede ajustar la propiedad como pública
+                    Segundo, en su clase <acronym>PHP</acronym> puede ajustar la propiedad como pública
                     mediante <methodname>$_explicitType</methodname>, con el valor
                     representativo de la clase ActionScript que mapear:
                 </para>
@@ -427,8 +428,8 @@ class Contact
         </itemizedlist>
 
         <para>
-            Aunque hemos creado ContactVO en el servidor,
-            ahora tenemos que hacer su clase correspondiente en AS3
+            Aunque hemos creado <emphasis>ContactVO</emphasis> en el servidor,
+            ahora tenemos que hacer su clase correspondiente en <acronym>AS3</acronym>
             para que el servidor pueda mapear el objeto.
         </para>
         <para>
@@ -454,13 +455,13 @@ package
 }
 ]]></programlisting>
         <para>
-            La clase es sintácticamente equivalente a la de PHP del mismo nombre.
+            La clase es sintácticamente equivalente a la de <acronym>PHP</acronym> del mismo nombre.
             Los nombres de variables son exactamente los mismos y necesitan estar
             en el mismo contenedor para trabajar correctamente. Hay
-            dos meta tags AS3 únicos en esta clase.
+            dos meta tags <acronym>AS3</acronym> únicos en esta clase.
             El primero es vinculable y dispara un evento cuando es actualizada.
             El segundo es el tag RemoteClass y define que esta clase puede tener
-            mapeado un objeto remoto con un nombre de alias, en este caso <methodname>ContactVO</methodname>
+            mapeado un objeto remoto con un nombre de alias, en este caso <emphasis>ContactVO</emphasis>
             Es obligatorio que en esta etiqueta(tag), el valor que se estableció es la clase PHP
             sea estrictamente equivalente.
         </para>
@@ -474,12 +475,81 @@ private function getContactHandler(event:ResultEvent):void {
 ]]></programlisting>
         <para>
             El siguiente resultado del evento debido a la llamada de servicio,
-            se incorporó instantáneamente a ContactVO de Flex.
+            se incorporó instantáneamente a <emphasis>ContactVO</emphasis> de Flex.
             Cualquier cosa que esté ligada a myContact será actualizada con los
-            datos retornados por ContactVO.
+            datos retornados por <emphasis>ContactVO</emphasis>.
         </para>
     </sect2>
 
+	 <sect2 id="zend.amf.server.resources">
+        <title>Recursos</title>
+
+		<para>
+            <classname>Zend_Amf</classname> provides tools for mapping resource types
+            returned by service classes into data consumable by ActionScript.
+        </para>
+		
+        <para>
+            In order to handle specific resource type, the user needs to create a plugin class named
+            after the resource name, with words capitalized and spaces removed (so, resource
+            type "mysql result" becomes MysqlResult), with some prefix, e.g.
+            <classname>My_MysqlResult</classname>. This class should implement one method,
+            <methodname>parse()</methodname>, receiving one argument - the resource - and returning
+            the value that should be sent to ActionScript. The class should be located in the file
+            named after the last component of the name, e.g. <filename>MysqlResult.php</filename>.
+        </para>
+
+        <para>
+            The directory containing the resource handling plugins should be registered with
+            <classname>Zend_Amf</classname> type loader:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+Zend_Amf_Parse_TypeLoader::addResourceDirectory(
+    "My",
+    "application/library/resources/My"
+));
+]]></programlisting>
+
+        <para>
+            For detailed discussion of loading plugins, please see
+            the <link linkend="zend.loader.pluginloader">plugin loader</link> section.
+        </para>
+
+        <para>
+            Default directory for <classname>Zend_Amf</classname> resources is registered
+            automatically and currently contains handlers for "mysql result" and "stream"
+            resources.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// Example class implementing handling resources of type mysql result
+class Zend_Amf_Parse_Resource_MysqlResult
+{
+    /**
+     * Parse resource into array
+     *
+     * @param resource $resource
+     * @return array
+     */
+    public function parse($resource) {
+        $result = array();
+        while($row = mysql_fetch_assoc($resource)) {
+            $result[] = $row;
+        }
+        return $result;
+    }
+}
+]]></programlisting>
+
+        <para>
+            Trying to return unknown resource type (i.e., one for which no handler plugin exists)
+            will result in an exception.
+        </para>
+
+    </sect2>
+
+	
     <sect2 id="zend.amf.server.flash">
         <title>Conectándose al Servidor desde Flash</title>
 
@@ -488,26 +558,26 @@ private function getContactHandler(event:ResultEvent):void {
             es ligeramente distinta a la de Flex. Sin embargo una vez que la conexión
             con Flash funcione con <classname>Zend_Amf_Server</classname> lo hará igual
             modo que con Flex. El siguiente ejemplo también puede ser utilizado
-            desde un fichero Flex AS3. Para nuestra conexión vamos a reutilizar
+            desde un fichero Flex <acronym>AS3</acronym>. Para nuestra conexión vamos a reutilizar
             la misma configuracion <classname>Zend_Amf_Server</classname> junto a la clase Mundo.
         </para>
         <para>
             Abra Flash CS y cree un nuevo fichero Flash (ActionScript 3).
-            Nombre al documento como ZendExample.fla y guárdelo en una carpeta
-            que utilizará para este ejemplo. Cree una nuevo fichero AS3 en el mismo
-            directorio y llámelo Main.as. Abra ambos ficheros con su editor.
+            Nombre al documento como <filename>ZendExample.fla</filename> y guárdelo en una carpeta
+            que utilizará para este ejemplo. Cree una nuevo fichero <acronym>AS3</acronym> en el mismo
+            directorio y llámelo <filename>Main.as</filename>. Abra ambos ficheros con su editor.
             Ahora vamos a conectar las dos ficheros a través de la clase documento.
             Seleccione ZendExample y haga clic en el escenario.
             Desde el panel del escenario cambie la propiedad de la clase Document a Main.
-            Esto vincula al fichero Main.as con la interfaz de usuario en ZendExample.fla.
+            Esto vincula al fichero Main.as con la interfaz de usuario en<filename>ZendExample.fla</filename>
             Cuando ejecute el fichero ZendExample de Flash se ejecutará ahora
-            la clase Main.as.
-            El paso siguiente será añadir ActionScript para hacer una lamada AMF.
+            la clase <filename>Main.as</filename>
+            El paso siguiente será añadir ActionScript para hacer una lamada <acronym>AMF</acronym>.
         </para>
         <para>
             Ahora vamos a hacer una clase Main(principal) para que podamos enviar
             los datos al servidor y mostrar el resultado.
-            Copie el código siguiente en su fichero Main.as y luego vamos a recorrer
+            Copie el código siguiente en su fichero <filename>Main.as</filename> y luego vamos a recorrer
             el código para describir cuál es el papel de cada elemento.
         </para>
         <programlisting language="as"><![CDATA[
@@ -600,7 +670,7 @@ private function onResult(result:Object):void {
 ]]></programlisting>
         <para>
             La función onFault, se llama si hubo una respuesta nula desde el servidor.
-            Esto ocurre cuando hay un error en el servidor, la URL al servidor es inválida,
+            Esto ocurre cuando hay un error en el servidor, la <acronym>URL</acronym> al servidor es inválida,
             el servicio remoto o método no existe o cualquier otra cuestión
             relacionada con la conexión.
         </para>
@@ -615,8 +685,91 @@ private function onFault(fault:Object):void {
             En resumen, se han añadido las variables requeridas para abrir una conexión
             con el servidor remoto, se han definido qué métodos se deben utilizar cuando su aplicación
             recibe una respuesta desde el servidor, y finalmente se han mostrado los datos de salida
-            devueltos a través de trace().
+            devueltos a través de <methodname>trace()</methodname>.
         </para>
+
+    </sect2>
+	
+<sect2 id="zend.amf.server.auth">
+        <title>Authentication</title>
+
+        <para>
+            <classname>Zend_Amf_Server</classname> allows you to specify authentication and
+            authorization hooks to control access to the services. It is using the infrastructure
+            provided by <link linkend="zend.auth"><classname>Zend_Auth</classname></link> and
+            <link linkend="zend.acl"><classname>Zend_Acl</classname></link> components.
+        </para>
+
+        <para>
+            In order to define authentication, the user provides authentication adapter extening
+            <classname>Zend_Amf_Auth_Abstract</classname> abstract class. The adapter should
+            implement the <methodname>authenticate()</methodname> method just like regular
+            <link linkend="zend.auth.introduction.adapters">authentication adapter</link>.
+        </para>
+
+        <para>
+            The adapter should use properties <emphasis>_username</emphasis> and
+            <emphasis>_password</emphasis> from the parent
+            <classname>Zend_Amf_Auth_Abstract</classname> class in order to authenticate. These
+            values are set by the server using <methodname>setCredentials()</methodname> method
+            before call to <methodname>authenticate()</methodname> if the credentials are received
+            in the <acronym>AMF</acronym> request headers.
+        </para>
+
+        <para>
+            The identity returned by the adapter should be an object containing property
+            <property>role</property> for the <acronym>ACL</acronym> access control to work.
+        </para>
+
+        <para>
+            If the authentication result is not successful, the request is not proceseed further
+            and failure message is returned with the reasons for failure taken from the result.
+        </para>
+
+        <para>
+            The adapter is connected to the server using <methodname>setAuth()</methodname> method:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$server->setAuth(new My_Amf_Auth());
+]]></programlisting>
+
+        <para>
+            Access control is performed by using <classname>Zend_Acl</classname> object set by
+            <methodname>setAcl()</methodname> method:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$acl = new Zend_Acl();
+createPermissions($acl); // create permission structure
+$server->setAcl($acl);
+]]></programlisting>
+
+        <para>
+            If the <acronym>ACL</acronym> object is set, and the class being called defines
+            <methodname>initAcl()</methodname> method, this method will be called with the
+            <acronym>ACL</acronym> object as an argument. The class then can create additional
+            <acronym>ACL</acronym> rules and return <constant>TRUE</constant>, or return
+            <constant>FALSE</constant> if no access control is required for this class.
+        </para>
+
+        <para>
+            After <acronym>ACL</acronym> have been set up, the server will check if access is
+            allowed with role set by the authentication, resource being the class name (or
+            <constant>NULL</constant> for
+            function calls) and privilege being the function name. If no authentication was
+            provided, then if the <emphasis>anonymous</emphasis> role was defined, it will be used,
+            otherwise the access will be denied.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+if($this->_acl->isAllowed($role, $class, $function)) {
+    return true;
+} else {
+    require_once 'Zend/Amf/Server/Exception.php';
+    throw new Zend_Amf_Server_Exception("Access not allowed");
+}
+]]></programlisting>
 
     </sect2>
 

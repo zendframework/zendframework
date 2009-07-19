@@ -5,59 +5,55 @@
     <title>Zend_Service_Amazon_Sqs</title>
 
     <sect2 id="zend.service.amazon.sqs.introduction">
-        <title>Introduction</title>
+        <title>Einführung</title>
 
         <para>
-            <ulink url="http://aws.amazon.com/sqs/">Amazon Simple Queue Service
-                (Amazon SQS)</ulink> offers a reliable, highly scalable, hosted
-            queue for storing messages as they travel between computers. By
-            using Amazon SQS, developers can simply move data between
-            distributed components of their applications that perform different
-            tasks, without losing messages or requiring each component to be
-            always available. Amazon SQS makes it easy to build an automated
-            workflow, working in close conjunction with the Amazon Elastic
-            Compute Cloud (Amazon EC2) and the other AWS infrastructure web
-            services.
+            <ulink url="http://aws.amazon.com/sqs/">Amazon Simple Queue Service (Amazon
+                SQS)</ulink> bietet eine einfache, hoch skalierbare, gehostete Queue für das
+            Speichern von Nachrichten die zwischen Computern verschickt werden. Durch die
+            Verwendung von Amazon SQS können Entwickler Daten einfach zwischen entfernten
+            Komponenten Ihrer Anwendung verschieben, welche unterschiedliche Arbeiten durchführen,
+            ohne das Nachrichten verloren gehen und auch ohne der Notwendigkeit das jede Komponente
+            immer verfügbar sein muß. Amazon SQS macht es einfach einen automatischen Arbeitsablauf
+            zu erstellen, und in enger Verknüpfung mit Amazon Elastic Compute Cloud (Amazon EC2)
+            und auch den anderen AWS Infrastruktur Web Services zu arbeiten.
         </para>
 
         <para>
-            Amazon SQS works by exposing Amazon's web-scale messaging
-            infrastructure as a web service. Any computer on the Internet can
-            add or read messages without any installed software or special
-            firewall configurations. Components of applications using Amazon SQS
-            can run independently, and do not need to be on the same network,
-            developed with the same technologies, or running at the same time.
+            Amazon SQS arbeitet durch die Bereitstellung von Amazon's Web-Scale Nachrichten
+            Infrastruktur als Web Service. Jeder Computer im Internet kann Nachrichten hinzufügen
+            und lesen ohne das Software installiert werden muß oder die Firewall Konfiguration zu
+            ändern ist. Componenten von Anwendungen die Amazon SQS verwenden können unabhängig
+            laufen und müssen nicht im gleichen Netzwerk sein, mit der gleichen Technologie
+            entwickelt worden sein, oder zur gleichen Zeit laufen.
         </para>
     </sect2>
 
     <sect2 id="zend.service.amazon.sqs.registering">
-        <title>Registering with Amazon SQS</title>
+        <title>Bei Amazon SQS registrieren</title>
 
         <para>
-            Before you can get started with
-            <classname>Zend_Service_Amazon_Sqs</classname>, you must first
-            register for an account. Please see the <ulink
-                url="http://aws.amazon.com/sqs/faqs/">SQS FAQ</ulink> page on
-            the Amazon website for more information.
+            Bevor man mit <classname>Zend_Service_Amazon_Sqs</classname> beginnt muß man einen
+            Account registrieren. Sehen Sie bitte in die <ulink
+                url="http://aws.amazon.com/sqs/faqs/">SQS FAQ</ulink> Seite auf der Amazon Website
+            für weitere Informationen.
         </para>
 
         <para>
-            After registering, you will receive an application key and a secret key.
-            You will need both to access the SQS service.
+            Nach der Registrierung, bekommt man einen Anwendungsschlüssel und einen geheimen
+            Schlüssel. Man benötigt beide um auf den SQS Service zugreifen zu können.
         </para>
     </sect2>
 
     <sect2 id="zend.service.amazon.sqs.apiDocumentation">
-        <title>API Documentation</title>
+        <title>API Dokumentation</title>
 
         <para>
-            The <classname>Zend_Service_Amazon_Sqs</classname> class provides
-            the PHP wrapper to the Amazon SQS REST interface. Please consult the
-            <ulink
+            Die <classname>Zend_Service_Amazon_Sqs</classname> Klasse bietet den PHP Wrapper zum
+            Amazon SQS REST Interface. Bitte konsultieren Sie die <ulink
                 url="http://developer.amazonwebservices.com/connect/kbcategory.jspa?categoryID=31">Amazon
-                SQS documentation</ulink> for detailed description of the
-            service. You will need to be familiar with basic concepts in order
-            to use this service.
+                SQS Dokumentation</ulink> für eine detailierte Beschreibung des Services. Man muß
+            mit dem grundsätzlichen Konzept vertraut sein um dieses Service verwenden zu können.
         </para>
 
     </sect2>
@@ -66,60 +62,58 @@
         <title>Features</title>
 
         <para>
-            <classname>Zend_Service_Amazon_Sqs</classname> provides the
-            following functionality:
+            <classname>Zend_Service_Amazon_Sqs</classname> bietet die folgende Funktionalität:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    A single point for configuring your amazon.sqs
-                    authentication credentials that can be used across the
-                    amazon.sqs namespaces.
+                    Einen einzelnen Punkt für die Konfiguration des Authentifizierungsdaten von
+                    amazon.sqs die über den kompletten amazon.sqs Namespace verwendet werden
+                    können.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    A proxy object that is more convenient to use than an HTTP
-                    client alone, mostly removing the need to manually construct
-                    HTTP POST requests to access the REST service.
+                    Ein Proxy Objekt das viel bequemer zu verwenden ist als ein HTTP Client
+                    alleine, indem er hauptsächlich die Notwendigkeit entfernt die HTTP POST
+                    Anfrage manuell zu erstellen und auf den REST Service zuzugreifen.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    A response wrapper that parses each response body and throws
-                    an exception if an error occurred, alleviating the need to
-                    repeatedly check the success of many commands.
+                    Ein Antwort Wrapper der jeden Antwort Body durchsucht und eine Exception wirft
+                    wenn ein Fehler auftritt, und es unnötig macht die vielen Kommandos wiederholt
+                    auf Erfolg zu prüfen.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    Additional convenience methods for some of the more common
-                    operations.
+                    Zusätzliche bequeme Methoden für einige der üblicheren Operationen.
                 </para>
             </listitem>
         </itemizedlist>
     </sect2>
 
     <sect2 id="zend.service.amazon.sqs.storing-your-first">
-        <title>Getting Started</title>
+        <title>Beginnen</title>
 
         <para>
-            Once you have registered with Amazon SQS, you're ready to create
-            your queue and store some messages on SQS. Each queue can contain
-            unlimited amount of messages, identified by name.
+            Sobald man sich bei Amazon SQS registriert hat ist man bereit seine eigene Queue zu
+            erstellen und einige Nachrichten auf SQS zu speichern. Jede Queue kann eine unbegrenzte
+            Anzahl an Nachrichten enthalten, die durch Ihren Namen identifiziert werden.
         </para>
 
         <para>
-            The following example demonstrates creating a queue, storing and
-            retrieving messages.
+            Das folgende Beispiel demonstriert die Erstellung einer Queue, und das speichern sowie
+            empfangen von Nachrichten.
         </para>
 
         <example id="zend.service.amazon.sqs.storing-your-first.example">
-            <title>Zend_Service_Amazon_Sqs Usage Example</title>
+            <title>Beispiel der Verwendung von Zend_Service_Amazon_Sqs</title>
 
             <programlisting language="php"><![CDATA[
 $sqs = new Zend_Service_Amazon_Sqs($my_aws_key, $my_aws_secret_key);
@@ -136,10 +130,10 @@ foreach ($sqs->receive($queue_url) as $message) {
         </example>
 
         <para>
-            Since the <classname>Zend_Service_Amazon_Sqs</classname> service
-            requires authentication, you should pass your credentials (AWS key
-            and secret key) to the constructor.  If you only use one account,
-            you can set default credentials for the service:
+            Das der <classname>Zend_Service_Amazon_Sqs</classname> Service eine Authentifizierung
+            benötigt, kann man seine Zugangsdaten (AWS Schlüssel und geheimer Schlüssel) im
+            Constructor angeben. Wenn man nur einen Account verwendet kann man standardmäßige
+            Zugangsdaten für den Service setzen:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -149,7 +143,7 @@ $sqs = new Zend_Service_Amazon_Sqs();
     </sect2>
 
     <sect2 id="zend.service.amazon.sqs.queues">
-        <title>Queue operations</title>
+        <title>Operationen der Queue</title>
 
         <para>
             All messages SQS are stored in queues. A queue has to be created

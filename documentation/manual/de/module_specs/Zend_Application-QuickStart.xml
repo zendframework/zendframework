@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16270 -->
+<!-- EN-Revision: 16652 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.application.quick-start">
     <title>Zend_Application Quick Start</title>
@@ -7,7 +7,7 @@
     <para>
         Es gibt zwei Wege um mit <classname>Zend_Application</classname> anzufangen, und diese
         hängen davon ab wie man das Projekt beginnt. In jedem Fall beginnt man immer mit der
-        Erstellung einer <emphasis>Bootstrap</emphasis> Klasse und einer diesbezüglichen
+        Erstellung einer <classname>Bootstrap</classname> Klasse und einer diesbezüglichen
         Konfigurationsdatei.
     </para>
 
@@ -24,7 +24,7 @@
         <para>
             Der schnellste Weg um mit <classname>Zend_Application</classname> zu beginnen ist die
             Verwendung von <classname>Zend_Tool</classname> um das Projekt zu erstellen. Das
-            erstellt auch die <emphasis>Bootstrap</emphasis> Klasse und die Datei.
+            erstellt auch die <classname>Bootstrap</classname> Klasse und die Datei.
         </para>
 
         <para>
@@ -164,7 +164,7 @@ $application->bootstrap()
         <itemizedlist>
             <listitem><para>
                 Eine <filename>application/Bootstrap.php</filename> Datei mit der Klasse
-                <emphasis>Bootstrap</emphasis> erstellen.
+                <classname>Bootstrap</classname> erstellen.
             </para></listitem>
 
             <listitem><para>
@@ -179,7 +179,7 @@ $application->bootstrap()
         </itemizedlist>
 
         <para>
-            Zuerst die eigene <emphasis>Bootstrap</emphasis> Klasse erstellen. Erzeuge eine Datei
+            Zuerst die eigene <classname>Bootstrap</classname> Klasse erstellen. Erzeuge eine Datei
             <filename>application/Bootstrap.php</filename> mit dem folgenden Inhalt:
         </para>
 
@@ -371,7 +371,7 @@ phpSettings.display_errors = 1
             Jetzt fügen wir eine eigene View Ressource hinzu. Wenn die View initialisiert wird,
             will man den <acronym>HTML</acronym> DocType und einen Standardwert für den im
             <acronym>HTML</acronym> Kopf zu verwendenden Titel setzen. Das kann durch die Änderung
-            der <emphasis>Bootstrap</emphasis> Klasse und dem Hinzufügen einer Methode gemacht
+            der <classname>Bootstrap</classname> Klasse und dem Hinzufügen einer Methode gemacht
             werden:
         </para>
 

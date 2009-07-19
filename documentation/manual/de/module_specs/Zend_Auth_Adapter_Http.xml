@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15997 -->
+<!-- EN-Revision: 16652 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.auth.adapter.http">
 
@@ -115,7 +115,7 @@
                 </thead>
                 <tbody>
                     <row>
-                        <entry><emphasis>accept_schemes</emphasis></entry>
+                        <entry><emphasis><property>accept_schemes</property></emphasis></entry>
                         <entry>Ja</entry>
                         <entry>
                             Ermittelt welches Authentifizierungs Schema der Adapter vom
@@ -125,7 +125,7 @@
                         </entry>
                     </row>
                     <row>
-                        <entry><emphasis>realm</emphasis></entry>
+                        <entry><emphasis><property>realm</property></emphasis></entry>
                         <entry>Ja</entry>
                         <entry>
                             Setzt das Authentifizierungs-Bereich; Benutzernamen sollten im
@@ -133,9 +133,9 @@
                         </entry>
                     </row>
                     <row>
-                        <entry><emphasis>digest_domains</emphasis></entry>
+                        <entry><emphasis><property>digest_domains</property></emphasis></entry>
                         <entry>
-                            Ja, wenn <emphasis>'accept_schemes'</emphasis>
+                            Ja, wenn <property>'accept_schemes'</property>
                             <emphasis>'digest'</emphasis> enthält
                         </entry>
                         <entry>
@@ -146,9 +146,9 @@
                         </entry>
                     </row>
                     <row>
-                        <entry><emphasis>nonce_timeout</emphasis></entry>
+                        <entry><emphasis><property>nonce_timeout</property></emphasis></entry>
                         <entry>
-                            Ja, wenn <emphasis>'accept_schemes'</emphasis>
+                            Ja, wenn <property>'accept_schemes'</property>
                             <emphasis>'digest'</emphasis> enthält
                         </entry>
                         <entry>
@@ -157,7 +157,7 @@
                         </entry>
                     </row>
                     <row>
-                        <entry><emphasis>proxy_auth</emphasis></entry>
+                        <entry><emphasis><property>proxy_auth</property></emphasis></entry>
                         <entry>Nein</entry>
                         <entry>
                             Standardmäßig ausgeschaltet. Einschalten um Proxi Authentifizierung
@@ -170,7 +170,7 @@
 
         <note>
             <para>
-                Die aktuelle Implementation von <emphasis>nonce_timeout</emphasis> hat einige
+                Die aktuelle Implementation von <property>nonce_timeout</property> hat einige
                 interessante Nebeneffekte. Diese Einstellung soll die gültige Lebenszeit einer
                 gegebenen Verfolgung ermitteln, oder effektiv, wie lange die Authentifizierungs
                 Information eines Klienten akzeptiert wird. Aktuell ist es auf 3600 (zum Beispiel)
@@ -275,7 +275,7 @@ $config = array(
             akzeptieren, und benötigt einen authentifizierten Zugriff auf alle Areale der Site
             unter <filename>/members_only</filename> und <filename>/my_account</filename>. Der
             Bereichs Wert wird normalerweise durch den Browser in der Passwort Dialog Box
-            angezeigt. <emphasis>nonce_timeout</emphasis> verhält sich natürlich so wie oben
+            angezeigt. <property>nonce_timeout</property> verhält sich natürlich so wie oben
             beschrieben.
         </para>
 

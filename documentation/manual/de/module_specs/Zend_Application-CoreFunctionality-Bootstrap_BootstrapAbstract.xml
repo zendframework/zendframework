@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15733 -->
+<!-- EN-Revision: 16652 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.core-functionality.bootstrap-bootstrapabstract">
     <title>Zend_Application_Bootstrap_BootstrapAbstract</title>
@@ -62,10 +62,10 @@
                     </para>
                     <para>
                         Zwei zusätzliche, spezielle Options Schnüssel können auch verwendet werden.
-                        <emphasis>pluginPaths</emphasis> kann verwendet werden um einen Präfix Pfad
+                        <property>pluginPaths</property> kann verwendet werden um einen Präfix Pfad
                         zu Plugin Ressourcen zu spezifizieren; er solte ein Array von
                         Klassenpräfix zu Instanziierungs Options Paaren sein.
-                        <emphasis>resources</emphasis> kann verwendet werden um eine Plugin
+                        <property>resources</property> kann verwendet werden um eine Plugin
                         Ressource zu spezifizieren die verwendet werden soll, und sollte aus Paaren
                         von Plugin Ressource zu Instanziierungs Optionen bestehen.
                     </para>

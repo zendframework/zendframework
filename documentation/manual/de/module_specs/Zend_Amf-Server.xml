@@ -305,7 +305,7 @@ $server->setProduction(false);
 
         <para>
             Um Ihn wieder einzuschalten, muß stattdessen einfach ein boolscher
-            <constant>true</constant> Wert übergeben werden:
+            <constant>TRUE</constant> Wert übergeben werden:
         </para>
 
         <programlisting language="php"><![CDATA[

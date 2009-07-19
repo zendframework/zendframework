@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15997 -->
+<!-- EN-Revision: 16652 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.auth.adapter.ldap">
 
@@ -199,7 +199,7 @@ Array
         <para>
             Die oben angebotene Information in jedem Set von Optionen ist hauptsächlich deswegen
             unterschiedlich weil AD keinen Benutzernamen wärend des Bindesn in der DN Form benötigt
-            (siehe die <emphasis>bindRequiresDn</emphasis> Option des
+            (siehe die <property>bindRequiresDn</property> Option des
             <emphasis>Server Optionen</emphasis> Kapitels weiter unten), was bedeutet das die
             Anzahl der, mit dem Empfangen der DN, für einen Benutzernamen der Authentifiziert
             werden soll, assoziierten Optionen, unterdrückt werden kann.
@@ -298,24 +298,24 @@ Array
                 </thead>
                 <tbody>
                     <row>
-                        <entry><emphasis>host</emphasis></entry>
+                        <entry><emphasis><property>host</property></emphasis></entry>
                         <entry>
                             Der Hostname des LDAP Servers der diese Optionen repräsentiert. Diese
                             Option wird benötigt.
                         </entry>
                     </row>
                     <row>
-                        <entry><emphasis>port</emphasis></entry>
+                        <entry><emphasis><property>port</property></emphasis></entry>
                         <entry>
                             Der Port auf den der LDAP Server schaut. Wenn
                             <emphasis>useSsl</emphasis> <constant>TRUE</constant> ist, ist der
-                            Standardwert von <emphasis>port</emphasis> 636. Wenn
-                            <emphasis>useSsl</emphasis> <constant>FALSE</constant> ist, ist der
-                            Standardwert von <emphasis>port</emphasis> 389.
+                            Standardwert von <property>port</property> 636. Wenn
+                            <property>useSsl</property> <constant>FALSE</constant> ist, ist der
+                            Standardwert von <property>port</property> 389.
                         </entry>
                     </row>
                     <row>
-                        <entry>useStartTls</entry>
+                        <entry><emphasis><property>useStartTls</property></emphasis></entry>
                         <entry>
                             Ob der LDAP Client einen TSL (aka SSLv2) verschlüsselten Transport
                             verwenden soll oder nicht. Der Wert <constant>TRUE</constant> wird in
@@ -323,41 +323,41 @@ Array
                             Passwörter im Klartext übertragen werden. Der Standardwert ist
                             <constant>FALSE</constant>, da Server typischerweise nach deren
                             Installation erwarten das ein Zertifikat installiert wird. Die
-                            <emphasis>useSsl</emphasis> und <emphasis>useStartTls</emphasis>
+                            <property>useSsl</property> und <property>useStartTls</property>
                             Optionen schließen sich gegenseitig aus. Die
-                            <emphasis>useStartTls</emphasis> Option sollte über
-                            <emphasis>useSsl</emphasis> favorisiert werden, aber nicht alle Server
+                            <property>useStartTls</property> Option sollte über
+                            <property>useSsl</property> favorisiert werden, aber nicht alle Server
                             unterstützen diesen neueren Mechanismus.
                         </entry>
                     </row>
                     <row>
-                        <entry>useSsl</entry>
+                        <entry><emphasis><property>useSsl</property></emphasis></entry>
                         <entry>
                             Ob der LDAP Client einen SSL verschlüsselten Transport verwenden soll.
-                            Die <emphasis>useSsl</emphasis> und <emphasis>useStartTls</emphasis>
+                            Die <property>useSsl</property> und <property>useStartTls</property>
                             Optionen schließen sich gegenseitig aus, aber
-                            <emphasis>useStartTls</emphasis> sollte favorisiert werden wenn der
+                            <property>useStartTls</property> sollte favorisiert werden wenn der
                             Server und die LDAP Bibliothek des Clients diese unterstützen. Dieser
-                            Wert ändert auch den Standardwert von <emphasis>port</emphasis> (siehe
-                            die <emphasis>port</emphasis> Beschreibung weiter oben).
+                            Wert ändert auch den Standardwert von <property>port</property> (siehe
+                            die <property>port</property> Beschreibung weiter oben).
                         </entry>
                     </row>
                     <row>
-                        <entry><emphasis>username</emphasis></entry>
+                        <entry><emphasis><property>username</property></emphasis></entry>
                         <entry>
                             Der DN des Accounts der verwendet wird um DN Account Loopups
-                            durchzuführen. LDAP Server die den Benutzernamen in in DN Form benötigen
-                            wenn "bind" durchgeführt wird, benötigen diese Option. Wenn
-                            <emphasis>bindRequiresDn</emphasis> <constant>TRUE</constant> ist,
+                            durchzuführen. LDAP Server die den Benutzernamen in in DN Form
+                            benötigen wenn "bind" durchgeführt wird, benötigen diese Option. Wenn
+                            <property>bindRequiresDn</property> <constant>TRUE</constant> ist,
                             wird diese Option benötigt. Dieser Account muß kein privilegierter
                             Account sein - ein Account mit nur-lese Zugriff zu Objekten unter
-                            <emphasis>baseDn</emphasis> ist alles was notwendig ist
+                            <property>baseDn</property> ist alles was notwendig ist
                             (und bevorzugt unter dem <emphasis>Prinzip des geringsten
                             Privilegs</emphasis>).
                         </entry>
                     </row>
                     <row>
-                        <entry><emphasis>password</emphasis></entry>
+                        <entry><emphasis><property>password</property></emphasis></entry>
                         <entry>
                             Das Passwort des Accounts der verwendet wird um DN Lookups
                             durchzuführen. Wenn diese Option nicht unterstützt wird, versucht der
@@ -365,7 +365,7 @@ Array
                         </entry>
                     </row>
                     <row>
-                        <entry><emphasis>bindRequiresDn</emphasis></entry>
+                        <entry><emphasis><property>bindRequiresDn</property></emphasis></entry>
                         <entry>
                             Einige LDAP Server benötigen den zum Binden verwendeten Benutzernamen in
                             der DN Form wie
@@ -383,28 +383,28 @@ Array
                             des DN eine extra Anfrage zum Server benötigt). Andernfalls muß diese
                             Option auf <constant>TRUE</constant> gesetzt werden (z.B. für OpenLDAP).
                             Diese Option kontrolliert das Standard
-                            <emphasis>acountFilterFormat</emphasis> das verwendet wird wenn nach
+                            <property>acountFilterFormat</property> das verwendet wird wenn nach
                             Accounts gesucht wird. Siehe auch die
-                            <emphasis>accountFilterFormat</emphasis> Option.
+                            <property>accountFilterFormat</property> Option.
                         </entry>
                     </row>
                     <row>
-                        <entry><emphasis>baseDn</emphasis></entry>
+                        <entry><emphasis><property>baseDn</property></emphasis></entry>
                         <entry>
                             Der Ort vom DN unter dem alle Accounts die authentifiziert werden. Diese
                             Option wird benötigt. Wenn man sich unsicher über den richtigen
-                            <emphasis>baseDn</emphasis> ist, sollte es genug sein Ihn von
+                            <property>baseDn</property> ist, sollte es genug sein Ihn von
                             der DNS Domain des Benutzers der die <emphasis>DC=</emphasis>
                             Komponenten verwedet abzuleiten. Wenn der Hauptname eines Benutzers
                             <emphasis>alice@foo.net</emphasis> ist, sollte ein
-                            <emphasis>baseDn</emphasis> von <emphasis>DC=foo,DC=net</emphasis>
+                            <property>baseDn</property> von <emphasis>DC=foo,DC=net</emphasis>
                             funktionieren. Eine präzisere Ortsangabe
                             (z.B. <emphasis>OU=Sales,DC=foo,DC=net</emphasis>) ist trotzdem
                             effizienter.
                         </entry>
                     </row>
                     <row>
-                        <entry><emphasis>accountCanonicalForm</emphasis></entry>
+                        <entry><emphasis><property>accountCanonicalForm</property></emphasis></entry>
                         <entry>
                             Ein Wert von 2, 3 oder 4 zeigt die Form zu der Account Namen
                             authorisiert werden sollten nachdem die Authentifizierung erfolgreich
@@ -425,7 +425,7 @@ Array
                             in der <classname>Zend_Ldap</classname> Dokumentation für Details. Bei
                             der Verwendung von mehreren Sets von Serveroptionen ist es
                             empfehlenswert, aber nicht notwendig, das die selbe
-                            <emphasis>accountCanonicalForm</emphasis> in allen
+                            <property>accountCanonicalForm</property> in allen
                             Serveroptionen verwendet wird, sodas die sich ergebenden Benutzernamen
                             immer auf die selbe Art und Weise kanonisiert werden (z.b. wenn man auf
                             <emphasis>EXAMPLE\username</emphasis> mit einem AD Server kanonisiert,
@@ -434,7 +434,7 @@ Array
                         </entry>
                     </row>
                     <row>
-                        <entry><emphasis>accountDomainName</emphasis></entry>
+                        <entry><emphasis><property>accountDomainName</property></emphasis></entry>
                         <entry>
                             Der <acronym>FQDN</acronym> Domainname für welchen der Ziel LDAP Server
                             eine Authorität ist (z.B., <filename>example.com</filename>). Diese
@@ -442,7 +442,7 @@ Array
                             der vom Benutzer angeboten wird, wie es für das Binden notwendig ist,
                             konvertiert werden kann. Er wird auch verwendet um festzustellen ob der
                             Server eine Authorität für den angegebenen Benutzernamen ist (z.B.,
-                            wenn <emphasis>accountDomainName</emphasis>
+                            wenn <property>accountDomainName</property>
                             <emphasis>foo.net</emphasis> ist und der angegebene Benutzer
                             <emphasis>bob@bar.net</emphasis>, wird der Server nicht abgefragt, und
                             das Ergebnis wird ein Fehler sein). Diese Option wird nicht benötigt,
@@ -454,24 +454,24 @@ Array
                         </entry>
                     </row>
                     <row>
-                        <entry><emphasis>accountDomainNameShort</emphasis></entry>
+                        <entry><emphasis><property>accountDomainNameShort</property></emphasis></entry>
                         <entry>
                             Die 'short' Domain für die der Ziel <acronym>LDAP</acronym> Server eine
                             Authorität ist (z.B., <acronym>FOO</acronym>). Es ist z ubeachten das
-                            es ein 1:1 Mapping zwischen <emphasis>accountDomainName</emphasis> und
-                            <emphasis>accountDomainNameShort</emphasis> existiert. Diese
+                            es ein 1:1 Mapping zwischen <property>accountDomainName</property> und
+                            <property>accountDomainNameShort</property> existiert. Diese
                             Option sollte verwendet werden um den NetBIOS Domainnamen für Windows
                             Netzwerke zu spezifizieren, kann aber auch von nicht-AD Servern
                             verwendet werden (z.B., für Konsistenz bei mehreren Sets von
                             Serveroptionen bei dem Schrägstrich Stil
-                            <emphasis>accountCanonicalForm</emphasis>). Diese Option wird nicht
+                            <property>accountCanonicalForm</property>). Diese Option wird nicht
                             benötigt, aber wenn Sie nicht angegeben wird, werden Benutzernamen im
                             Schrägstrich Stil (z.B. <filename>FOO\alice</filename>) nicht
                             unterstützt.
                         </entry>
                     </row>
                     <row>
-                        <entry><emphasis>accountFilterFormat</emphasis></entry>
+                        <entry><emphasis><property>accountFilterFormat</property></emphasis></entry>
                         <entry>
                             Der LDAP Suchfilter der für die Suche nach Accounts verwendet wird.
                             Dieser String ist ein <ulink
@@ -479,7 +479,7 @@ Array
                             Ausdruck der ein '<emphasis>%s</emphasis>' enthalten muß um den
                             Benutzernamen unterzubringen. Der Standardwert ist
                             '<emphasis>(&amp;(objectClass=user)(sAMAccountName=%s))</emphasis>',
-                            ausgenommen <emphasis>bindRequiresDn</emphasis> wird auf
+                            ausgenommen <property>bindRequiresDn</property> wird auf
                             <constant>TRUE</constant> gesetzt. In diesem Fall ist der Standardwert
                             '<emphasis>(&amp;(objectClass=posixAccount)(uid=%s))</emphasis>'. Wenn,
                             zum Beispiel, aus irgendeinem Grund
@@ -490,7 +490,7 @@ Array
                         </entry>
                     </row>
                     <row>
-                        <entry><emphasis>optReferrals</emphasis></entry>
+                        <entry><emphasis><property>optReferrals</property></emphasis></entry>
                         <entry>
                             Wenn sie auf <constant>TRUE</constant> gesetzt wird, zeigt diese Option
                             dem LDAP Client an, das Referenzen gefolgt werden soll. Der Standardwert
@@ -602,27 +602,27 @@ Array
                     </thead>
                     <tbody>
                         <row>
-                            <entry><emphasis>host</emphasis></entry>
+                            <entry><emphasis><property>host</property></emphasis></entry>
                             <entry>
                                 Wie bei allen Servern, wird diese Option benötigt.
                             </entry>
                         </row>
                         <row>
-                            <entry><emphasis>useStartTls</emphasis></entry>
+                            <entry><emphasis><property>useStartTls</property></emphasis></entry>
                             <entry>
                                 Zum Zwecke der Sicherheit, sollte das <constant>TRUE</constant> sein
                                 wenn der Server das notwendige Zertifikat installiert hat.
                             </entry>
                         </row>
                         <row>
-                            <entry><emphasis>useSsl</emphasis></entry>
+                            <entry><emphasis><property>useSsl</property></emphasis></entry>
                             <entry>
                                 Möglicherweise als Alternative zu <emphasis>useStartTls</emphasis>
                                 zu verwenden (siehe davor).
                             </entry>
                         </row>
                         <row>
-                            <entry><emphasis>baseDn</emphasis></entry>
+                            <entry><emphasis><property>baseDn</property></emphasis></entry>
                             <entry>
                                 Wie bei allen Servern, wird diese Option benötigt. Standardmäßig
                                 platziert AD alle Benutzer Accounts unter dem
@@ -634,7 +634,7 @@ Array
                             </entry>
                         </row>
                         <row>
-                            <entry><emphasis>accountCanonicalForm</emphasis></entry>
+                            <entry><emphasis><property>accountCanonicalForm</property></emphasis></entry>
                             <entry>
                                 Das wird man normalerweise für Schrägstrich-Stil Namen auf 3 stellen
                                 (z.B., <emphasis>FOO\alice</emphasis>), was für Windows Benutzer am
@@ -648,19 +648,19 @@ Array
                             </entry>
                         </row>
                         <row>
-                            <entry><emphasis>accountDomainName</emphasis></entry>
+                            <entry><emphasis><property>accountDomainName</property></emphasis></entry>
                             <entry>
                                 Das wird mit AD benötigt, ausser
-                                <emphasis>accountCanonicalForm</emphasis> 2 wird
+                                <property>accountCanonicalForm</property> 2 wird
                                 verwendet, was wiederum nicht eingesetzt werden sollte.
                             </entry>
                         </row>
                         <row>
-                            <entry><emphasis>accountDomainNameShort</emphasis></entry>
+                            <entry><emphasis><property>accountDomainNameShort</property></emphasis></entry>
                             <entry>
                                 Der NetBIOS Name der Domain in der die Benutzer sind und für den der
                                 AD Server die Authorität ist. Das wird benötigt wenn der
-                                Schrägstrich-Stil <emphasis>accountCanonicalForm</emphasis>
+                                Schrägstrich-Stil <property>accountCanonicalForm</property>
                                 verwendet wird.
                             </entry>
                         </row>
@@ -704,27 +704,27 @@ Array
                     </thead>
                     <tbody>
                         <row>
-                            <entry><emphasis>host</emphasis></entry>
+                            <entry><emphasis><property>host</property></emphasis></entry>
                             <entry>
                                 Wie bei allen Servern, wird diese Option benötigt.
                             </entry>
                         </row>
                         <row>
-                            <entry><emphasis>useStartTls</emphasis></entry>
+                            <entry><emphasis><property>useStartTls</property></emphasis></entry>
                             <entry>
                                 Zum Zwecke der Sicherheit, sollte das <constant>TRUE</constant> sein
                                 wenn der Server das notwendige Zertifikat installiert hat.
                             </entry>
                         </row>
                         <row>
-                            <entry><emphasis>useSsl</emphasis></entry>
+                            <entry><emphasis><property>useSsl</property></emphasis></entry>
                             <entry>
-                                Möglicherweise als Alternative zu <emphasis>useStartTls</emphasis>
+                                Möglicherweise als Alternative zu <property>useStartTls</property>
                                 zu verwenden (siehe davor).
                             </entry>
                         </row>
                         <row>
-                            <entry><emphasis>username</emphasis></entry>
+                            <entry><emphasis><property>username</property></emphasis></entry>
                             <entry>
                                 Benötigt und muß ein DN sein, da OpenLDAP den Benutzernamen in DN
                                 Form benötigt wenn ein Binden durchgeführt wird. Es sollte versucht
@@ -732,7 +732,7 @@ Array
                             </entry>
                         </row>
                         <row>
-                            <entry><emphasis>password</emphasis></entry>
+                            <entry><emphasis><property>password</property></emphasis></entry>
                             <entry>
                                 Das Passwort das zum Benutzernamen von oben gehört. Es kann aber
                                 unterdrückt werden wenn der LDAP Server anonymes Binden bei Abfragen
@@ -740,21 +740,21 @@ Array
                             </entry>
                         </row>
                         <row>
-                            <entry><emphasis>bindRequiresDn</emphasis></entry>
+                            <entry><emphasis><property>bindRequiresDn</property></emphasis></entry>
                             <entry>
                                 Benötigt und muß <constant>TRUE</constant> sein, da OpenLDAP den
                                 Benutzernamen in DN Form benötigt wenn ein Binden durchgeführt wird.
                             </entry>
                         </row>
                         <row>
-                            <entry><emphasis>baseDn</emphasis></entry>
+                            <entry><emphasis><property>baseDn</property></emphasis></entry>
                             <entry>
                                 Wie bei allen Servern, wird diese Option benötigt und zeigt den DN
                                 in dem alle Accounts die authentifiziert werden enthalten sind.
                             </entry>
                         </row>
                         <row>
-                            <entry><emphasis>accountCanonicalForm</emphasis></entry>
+                            <entry><emphasis><property>accountCanonicalForm</property></emphasis></entry>
                             <entry>
                                 Optional, aber der Standardwert ist 4 (prinzipielle-Stil Namen wie
                                 <emphasis>alice@foo.net</emphasis>) und könnte für die Benutzer
@@ -764,36 +764,33 @@ Array
                             </entry>
                         </row>
                         <row>
-                            <entry><emphasis>accountDomainName</emphasis></entry>
+                            <entry><emphasis><property>accountDomainName</property></emphasis></entry>
                             <entry>
                                 Benötigt es sei denn man verwendet
-                                <emphasis>accountCanonicalForm</emphasis> 2, was nicht
+                                <property>accountCanonicalForm</property> 2, was nicht
                                 zu empfehlen ist.
                             </entry>
                         </row>
                         <row>
-                            <entry><emphasis>accountDomainNameShort</emphasis></entry>
+                            <entry><emphasis><property>accountDomainNameShort</property></emphasis></entry>
                             <entry>
                                 Wenn AD auch nicht verwendet wird, wird dieser Wert nicht benötigt.
                                 Andernfalls, wenn
-                                <emphasis>accountCanonicalForm</emphasis> 3 verwendet
+                                <property>accountCanonicalForm</property> 3 verwendet
                                 wird, wird diese Option benötigt und sollte ein Kurzname sein der
-                                adäquat zu <emphasis>accountDomainName</emphasis>
+                                adäquat zu <property>accountDomainName</property>
                                 korrespondiert (z.B., wenn
-                                <emphasis>accountDomainName</emphasis>
+                                <property>accountDomainName</property>
                                 <emphasis>foo.net</emphasis> ist, wäre ein guter
-                                <emphasis>accountDomainNameShort</emphasis> Wert
+                                <property>accountDomainNameShort</property> Wert
                                 <acronym>FOO</acronym>).
                             </entry>
                         </row>
                     </tbody>
                 </tgroup>
             </table>
-
         </sect3>
-
     </sect2>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

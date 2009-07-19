@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16050 -->
+<!-- EN-Revision: 16652 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.auth.adapter.dbtable">
 
@@ -26,34 +26,34 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>tableName</emphasis>: Das ist der Name der Datenbanktabelle
-                    welche die Authentifikations Zeugnisse enthält, und gegen die die
-                    Datenbank Authentifikations Abfrage durchgeführt wird.
+                    <emphasis><property>tableName</property></emphasis>: Das ist der Name der
+                    Datenbanktabelle welche die Authentifikations Zeugnisse enthält, und gegen die
+                    die Datenbank Authentifikations Abfrage durchgeführt wird.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis>identityColumn</emphasis>: Ist der Name der Spalte der
-                    Datenbanktabelle die die Identität repräsentiert. Die Spalte der Identität
-                    muß eindeutige und einmalige Werte enthalten, wie einen Benutzernamen oder
-                    eine Email Adresse.
+                    <emphasis><property>identityColumn</property></emphasis>: Ist der Name der
+                    Spalte der Datenbanktabelle die die Identität repräsentiert. Die Spalte der
+                    Identität muß eindeutige und einmalige Werte enthalten, wie einen Benutzernamen
+                    oder eine Email Adresse.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis>credentialColumn</emphasis>: Das ist der Name der Spalte der
-                    Datenbanktabelle die verwendet wird um die Zeugnisse zu repräsentieren. Bei
-                    einem einfachen Identitäts und Passwort-Authentifizierungs Schema
-                    korrespondieren die Zeugnisse mit dem Passwort. Siehe auch die
-                    <emphasis>credentialTreatment</emphasis> Option.
+                    <emphasis><property>credentialColumn</property></emphasis>: Das ist der Name
+                    der Spalte der Datenbanktabelle die verwendet wird um die Zeugnisse zu
+                    repräsentieren. Bei einem einfachen Identitäts und Passwort-Authentifizierungs
+                    Schema korrespondieren die Zeugnisse mit dem Passwort. Siehe auch die
+                    <property>credentialTreatment</property> Option.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis>credentialTreatment</emphasis>: In vielen Fällen sind Passwörter
-                    und andere sensitive Daten verschlüsselt, gehasht, kodiert, gesalted,
-                    verschleiert oder auf andere Weise durch irgendeine Funktion oder einen
-                    Algorithmus behandelt. Durch die Spezifikation eines parametrisierbaren
+                    <emphasis><property>credentialTreatment</property></emphasis>: In vielen Fällen
+                    sind Passwörter und andere sensitive Daten verschlüsselt, gehasht, kodiert,
+                    gesalted, verschleiert oder auf andere Weise durch irgendeine Funktion oder
+                    einen Algorithmus behandelt. Durch die Spezifikation eines parametrisierbaren
                     Behandlungsstrings mit dieser Methode, wie 'MD5(?)' oder
                     'PASSWORD(?)', könnte ein Entwickler beliebiges SQL an den
                     Eingabe- Zeugnis-Daten anwenden. Da diese Funktionen der darunter liegenden

@@ -313,6 +313,12 @@ $db = Zend_Db::factory($config->database);
                         on the RDBMS server.
                     </para>
                 </listitem>
+				<listitem>
+                    <para>
+                        <emphasis>charset</emphasis>:
+						specify the charset used for the connection.
+                    </para>
+                </listitem>
                 <listitem>
                     <para>
                         <emphasis>options</emphasis>:

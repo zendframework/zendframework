@@ -3,7 +3,6 @@
 require_once realpath(dirname(__FILE__) . '/../../../') . '/TestHelper.php';
 
 require_once 'Zend/Http/Client.php';
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * This Testsuite includes all Zend_Http_Client tests that do not rely
@@ -20,352 +19,357 @@ require_once 'PHPUnit/Framework/TestCase.php';
  */
 class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
 {
-	/**
-	 * Common HTTP client
-	 *
-	 * @var Zend_Http_Client
-	 */
-	protected $client = null;
+    /**
+     * Common HTTP client
+     *
+     * @var Zend_Http_Client
+     */
+    protected $_client = null;
 
-	/**
-	 * Set up the test suite before each test
-	 *
-	 */
-	public function setUp()
-	{
-		$this->client = new Zend_Http_Client('http://www.example.com');
-	}
+    /**
+     * Set up the test suite before each test
+     *
+     */
+    public function setUp()
+    {
+        $this->_client = new Zend_Http_Client('http://www.example.com');
+    }
 
-	/**
-	 * URI Tests
-	 */
+    /**
+     * Clean up after running a test
+     * 
+     */
+    public function tearDown()
+    {
+        $this->_client = null;
+    }
+    
+    /**
+     * URI Tests
+     */
 
-	/**
-	 * Test we can SET and GET a URI as string
-	 *
-	 */
-	public function testSetGetUriString()
-	{
-		$uristr = 'http://www.zend.com:80/';
+    /**
+     * Test we can SET and GET a URI as string
+     *
+     */
+    public function testSetGetUriString()
+    {
+        $uristr = 'http://www.zend.com:80/';
 
-		$this->client->setUri($uristr);
+        $this->_client->setUri($uristr);
 
-		$uri = $this->client->getUri();
-		$this->assertTrue($uri instanceof Zend_Uri_Http, 'Returned value is not a Uri object as expected');
-		$this->assertEquals($uri->__toString(), $uristr, 'Returned Uri object does not hold the expected URI');
+        $uri = $this->_client->getUri();
+        $this->assertTrue($uri instanceof Zend_Uri_Http, 'Returned value is not a Uri object as expected');
+        $this->assertEquals($uri->__toString(), $uristr, 'Returned Uri object does not hold the expected URI');
 
-		$uri = $this->client->getUri(true);
-		$this->assertTrue(is_string($uri), 'Returned value expected to be a string, ' . gettype($uri) . ' returned');
-		$this->assertEquals($uri, $uristr, 'Returned string is not the expected URI');
-	}
+        $uri = $this->_client->getUri(true);
+        $this->assertTrue(is_string($uri), 'Returned value expected to be a string, ' . gettype($uri) . ' returned');
+        $this->assertEquals($uri, $uristr, 'Returned string is not the expected URI');
+    }
 
-	/**
-	 * Test we can SET and GET a URI as object
-	 *
-	 */
-	public function testSetGetUriObject()
-	{
-		$uriobj = Zend_Uri::factory('http://www.zend.com:80/');
+    /**
+     * Test we can SET and GET a URI as object
+     *
+     */
+    public function testSetGetUriObject()
+    {
+        $uriobj = Zend_Uri::factory('http://www.zend.com:80/');
 
-		$this->client->setUri($uriobj);
+        $this->_client->setUri($uriobj);
 
-		$uri = $this->client->getUri();
-		$this->assertTrue($uri instanceof Zend_Uri_Http, 'Returned value is not a Uri object as expected');
-		$this->assertEquals($uri, $uriobj, 'Returned object is not the excepted Uri object');
-	}
+        $uri = $this->_client->getUri();
+        $this->assertTrue($uri instanceof Zend_Uri_Http, 'Returned value is not a Uri object as expected');
+        $this->assertEquals($uri, $uriobj, 'Returned object is not the excepted Uri object');
+    }
 
-	/**
-	 * Test that passing an invalid URI string throws an exception
-	 *
-	 */
-	public function testInvalidUriStringException()
-	{
-		try {
-			$this->client->setUri('httpp://__invalid__.com');
-			$this->fail('Excepted invalid URI string exception was not thrown');
-		} catch (Zend_Uri_Exception $e) {
-			// We're good
-		}
-	}
+    /**
+     * Test that passing an invalid URI string throws an exception
+     *
+     * @expectedException Zend_Uri_Exception
+     */
+    public function testInvalidUriStringException()
+    {
+        $this->_client->setUri('httpp://__invalid__.com');
+    }
 
-	/**
-	 * Test that passing an invalid URI object throws an exception
-	 *
-	 */
-	public function testInvalidUriObjectException()
-	{
-            try {
-                $uri = Zend_Uri::factory('mailto:nobody@example.com');
-                $this->client->setUri($uri);
-                $this->fail('Excepted invalid URI object exception was not thrown');
-            } catch (Zend_Http_Client_Exception $e) {
-                // We're good
-            } catch (Zend_Uri_Exception $e) {
-                // URI is currently unimplemented
-                $this->markTestIncomplete('Zend_Uri_Mailto is not implemented yet');
-            }
+    /**
+     * Test that passing an invalid URI object throws an exception
+     *
+     */
+    public function testInvalidUriObjectException()
+    {
+        try {
+            $uri = Zend_Uri::factory('mailto:nobody@example.com');
+            $this->_client->setUri($uri);
+            $this->fail('Excepted invalid URI object exception was not thrown');
+        } catch (Zend_Http_Client_Exception $e) {
+            // We're good
+        } catch (Zend_Uri_Exception $e) {
+            // URI is currently unimplemented
+            $this->markTestIncomplete('Zend_Uri_Mailto is not implemented yet');
+        }
+    }
 
-	}
+    /**
+     * Header Tests
+     */
 
-	/**
-	 * Header Tests
-	 */
+    /**
+     * Make sure an exception is thrown if an invalid header name is used
+     *
+     * @expectedException Zend_Http_Client_Exception
+     */
+    public function testInvalidHeaderExcept()
+    {
+        $this->_client->setHeaders('Ina_lid* Hea%der', 'is not good');
+    }
 
-	/**
-	 * Make sure an exception is thrown if an invalid header name is used
-	 *
-	 */
-	public function testInvalidHeaderExcept()
-	{
-		try {
-			$this->client->setHeaders('Ina_lid* Hea%der', 'is not good');
-			$this->fail('Expected invalid header name exception was not thrown');
-		} catch (Zend_Http_Client_Exception $e) {
-			// We're good
-		}
-	}
+    /**
+     * Make sure non-strict mode disables header name validation
+     *
+     */
+    public function testInvalidHeaderNonStrictMode()
+    {
+        // Disable strict validation
+        $this->_client->setConfig(array('strict' => false));
 
-	/**
-	 * Make sure non-strict mode disables header name validation
-	 *
-	 */
-	public function testInvalidHeaderNonStrictMode()
-	{
-	    // Disable strict validation
-	    $this->client->setConfig(array('strict' => false));
+        try {
+            $this->_client->setHeaders('Ina_lid* Hea%der', 'is not good');
+        } catch (Zend_Http_Client_Exception $e) {
+            $this->fail('Invalid header names should be allowed in non-strict mode');
+        }
+    }
 
-		try {
-			$this->client->setHeaders('Ina_lid* Hea%der', 'is not good');
-		} catch (Zend_Http_Client_Exception $e) {
-			$this->fail('Invalid header names should be allowed in non-strict mode');
-		}
-	}
+    /**
+     * Test we can get already set headers
+     *
+     */
+    public function testGetHeader()
+    {
+        $this->_client->setHeaders(array(
+            'Accept-encoding' => 'gzip,deflate',
+            'Accept-language' => 'en,de,*',
+        ));
 
-	/**
-	 * Test we can get already set headers
-	 *
-	 */
-	public function testGetHeader()
-	{
-		$this->client->setHeaders(array(
-			'Accept-encoding' => 'gzip,deflate',
-			'Accept-language' => 'en,de,*',
-		));
+        $this->assertEquals($this->_client->getHeader('Accept-encoding'), 'gzip,deflate', 'Returned value of header is not as expected');
+        $this->assertEquals($this->_client->getHeader('X-Fake-Header'), null, 'Non-existing header should not return a value');
+    }
 
-		$this->assertEquals($this->client->getHeader('Accept-encoding'), 'gzip,deflate', 'Returned value of header is not as expected');
-		$this->assertEquals($this->client->getHeader('X-Fake-Header'), null, 'Non-existing header should not return a value');
-	}
+    public function testUnsetHeader()
+    {
+        $this->_client->setHeaders('Accept-Encoding', 'gzip,deflate');
+        $this->_client->setHeaders('Accept-Encoding', null);
+        $this->assertNull($this->_client->getHeader('Accept-encoding'), 'Returned value of header is expected to be null');
+    }
 
-	public function testUnsetHeader()
-	{
-		$this->client->setHeaders('Accept-Encoding', 'gzip,deflate');
-		$this->client->setHeaders('Accept-Encoding', null);
-		$this->assertNull($this->client->getHeader('Accept-encoding'), 'Returned value of header is expected to be null');
-	}
+    /**
+     * Authentication tests
+     */
 
-	/**
-	 * Authentication tests
-	 */
+    /**
+     * Test setAuth (dynamic method) fails when trying to use an unsupported
+     * authentication scheme
+     *
+     * @expectedException Zend_Http_Client_Exception
+     */
+    public function testExceptUnsupportedAuthDynamic()
+    {
+        $this->_client->setAuth('shahar', '1234', 'SuperStrongAlgo');
+    }
 
-	/**
-	 * Test setAuth (dynamic method) fails when trying to use an unsupported
-	 * authentication scheme
-	 *
-	 */
-	public function testExceptUnsupportedAuthDynamic()
-	{
-		try {
-			$this->client->setAuth('shahar', '1234', 'SuperStrongAlgo');
-			$this->fail('Trying to use unknown authentication method, setAuth should throw an exception but it didn\'t');
-		} catch (Zend_Http_Client_Exception $e) {
-			// We're good!
-		}
-	}
+    /**
+     * Test encodeAuthHeader (static method) fails when trying to use an
+     * unsupported authentication scheme
+     *
+     * @expectedException Zend_Http_Client_Exception
+     */
+    public function testExceptUnsupportedAuthStatic()
+    {
+        Zend_Http_Client::encodeAuthHeader('shahar', '1234', 'SuperStrongAlgo');
+    }
 
-	/**
-	 * Test encodeAuthHeader (static method) fails when trying to use an
-	 * unsupported authentication scheme
-	 *
-	 */
-	public function testExceptUnsupportedAuthStatic()
-	{
-		try {
-			Zend_Http_Client::encodeAuthHeader('shahar', '1234', 'SuperStrongAlgo');
-			$this->fail('Trying to use unknown authentication method, encodeAuthHeader should throw an exception but it didn\'t');
-		} catch (Zend_Http_Client_Exception $e) {
-			// We're good!
-		}
-	}
+    /**
+     * Cookie and Cookie Jar tests
+     */
 
-	/**
-	 * Cookie and Cookie Jar tests
-	 */
+    /**
+     * Test we can properly set a new cookie jar
+     *
+     */
+    public function testSetNewCookieJar()
+    {
+        $this->_client->setCookieJar();
+        $this->_client->setCookie('cookie', 'value');
+        $this->_client->setCookie('chocolate', 'chips');
+        $jar = $this->_client->getCookieJar();
 
-	/**
-	 * Test we can properly set a new cookie jar
-	 *
-	 */
-	public function testSetNewCookieJar()
-	{
-		$this->client->setCookieJar();
-		$this->client->setCookie('cookie', 'value');
-		$this->client->setCookie('chocolate', 'chips');
-		$jar = $this->client->getCookieJar();
+        // Check we got the right cookiejar
+        $this->assertTrue($jar instanceof Zend_Http_CookieJar, '$jar is not an instance of Zend_Http_CookieJar as expected');
+        $this->assertEquals(count($jar->getAllCookies()), 2, '$jar does not contain 2 cookies as expected');
+    }
 
-		// Check we got the right cookiejar
-		$this->assertTrue($jar instanceof Zend_Http_CookieJar, '$jar is not an instance of Zend_Http_CookieJar as expected');
-		$this->assertEquals(count($jar->getAllCookies()), 2, '$jar does not contain 2 cookies as expected');
-	}
+    /**
+     * Test we can properly set an existing cookie jar
+     *
+     */
+    public function testSetReadyCookieJar()
+    {
+        $jar = new Zend_Http_CookieJar();
+        $jar->addCookie('cookie=value', 'http://www.example.com');
+        $jar->addCookie('chocolate=chips; path=/foo', 'http://www.example.com');
 
-	/**
-	 * Test we can properly set an existing cookie jar
-	 *
-	 */
-	public function testSetReadyCookieJar()
-	{
-		$jar = new Zend_Http_CookieJar();
-		$jar->addCookie('cookie=value', 'http://www.example.com');
-		$jar->addCookie('chocolate=chips; path=/foo', 'http://www.example.com');
+        $this->_client->setCookieJar($jar);
 
-		$this->client->setCookieJar($jar);
+        // Check we got the right cookiejar
+        $this->assertEquals($jar, $this->_client->getCookieJar(), '$jar is not the client\'s cookie jar as expected');
+    }
 
-		// Check we got the right cookiejar
-		$this->assertEquals($jar, $this->client->getCookieJar(), '$jar is not the client\'s cookie jar as expected');
-	}
+    /**
+     * Test we can unset a cookie jar
+     *
+     */
+    public function testUnsetCookieJar()
+    {
+        // Set the cookie jar just like in testSetNewCookieJar
+        $this->_client->setCookieJar();
+        $this->_client->setCookie('cookie', 'value');
+        $this->_client->setCookie('chocolate', 'chips');
+        $jar = $this->_client->getCookieJar();
 
-	/**
-	 * Test we can unset a cookie jar
-	 *
-	 */
-	public function testUnsetCookieJar()
-	{
-		// Set the cookie jar just like in testSetNewCookieJar
-		$this->client->setCookieJar();
-		$this->client->setCookie('cookie', 'value');
-		$this->client->setCookie('chocolate', 'chips');
-		$jar = $this->client->getCookieJar();
+        // Try unsetting the cookiejar
+        $this->_client->setCookieJar(null);
 
-		// Try unsetting the cookiejar
-		$this->client->setCookieJar(null);
+        $this->assertNull($this->_client->getCookieJar(), 'Cookie jar is expected to be null but it is not');
+    }
 
-		$this->assertNull($this->client->getCookieJar(), 'Cookie jar is expected to be null but it is not');
-	}
+    /**
+     * Make sure using an invalid cookie jar object throws an exception
+     *
+     * @expectedException Zend_Http_Client_Exception
+     */
+    public function testSetInvalidCookieJar()
+    {
+        $this->_client->setCookieJar('cookiejar');
+    }
 
-	/**
-	 * Make sure using an invalid cookie jar object throws an exception
-	 *
-	 */
-	public function testSetInvalidCookieJar()
-	{
-		try {
-			$this->client->setCookieJar('cookiejar');
-			$this->fail('Invalid cookiejar exception was not thrown');
-		} catch (Exception $e) {
-			// We're good
-		}
-	}
+    /**
+     * Other Tests
+     */
 
-	/**
-	 * Other Tests
-	 */
+    /**
+     * Check we get an exception when trying to send a POST request with an
+     * invalid content-type header
+     * 
+     * @expectedException Zend_Http_Client_Exception
+     */
+    public function testInvalidPostContentType()
+    {
+        $this->_client->setEncType('x-foo/something-fake');
+        $this->_client->setParameterPost('parameter', 'value');
 
-	/**
-	 * Check we get an exception when trying to send a POST request with an
-	 * invalid content-type header
-	 */
-	public function testInvalidPostContentType()
-	{
-		$this->client->setEncType('x-foo/something-fake');
-		$this->client->setParameterPost('parameter', 'value');
+        // This should throw an exception
+        $this->_client->request('POST');
+    }
 
-		try {
-			$this->client->request('POST');
-			$this->fail('Building the body with an unknown content-type for POST values should have failed, it didn\'t');
-		} catch (Zend_Http_Client_Exception $e) {
-			// We are ok!
-		}
-	}
+    /**
+     * Check we get an exception if there's an error in the socket
+     *
+     * @expectedException Zend_Http_Client_Adapter_Exception
+     */
+    public function testSocketErrorException() 
+    {
+        // Try to connect to an invalid host
+        $this->_client->setUri('http://255.255.255.255');
+        
+        // Reduce timeout to 3 seconds to avoid waiting
+        $this->_client->setConfig(array('timeout' => 3));
 
-	/**
-	 * Check we get an exception if there's an error in the socket
-	 *
-	 */
-	public function testSocketErrorException() {
-		// Try to connect to an invalid host
-		$this->client->setUri('http://255.255.255.255');
-		// Reduce timeout to 3 seconds to avoid waiting
-		$this->client->setConfig(array('timeout' => 3));
+        // This call should cause an exception
+        $this->_client->request();
+    }
 
-		try {
-			$this->client->request();
-			$this->fail('Expected connection error exception was not thrown');
-		} catch (Zend_Http_Client_Adapter_Exception $e) {
-			// We're good!
-		}
-	}
+    /**
+     * Check that we can set methods which are not documented in the RFC.
+     * 
+     * @dataProvider validMethodProvider
+     */
+    public function testSettingExtendedMethod($method)
+    {
+        try {
+            $this->_client->setMethod($method);
+        } catch (Exception $e) {
+            $this->fail("An unexpected exception was thrown when setting request method to '{$method}'");
+        }
+    }
 
-	/**
-	 * Check that we can set methods which are not documented in the RFC.
-	 * Also, check that an exception is thrown if non-word characters are
-	 * used in the request method.
-	 *
-	 */
-	public function testSettingExtendedMethod()
-	{
-		$goodMethods = array(
-			'OPTIONS',
-			'POST',
-			'DOSOMETHING',
-			'PROPFIND',
-			'Some_Characters',
-			'X-MS-ENUMATTS'
-		);
+    /**
+     * Check that an exception is thrown if non-word characters are used in 
+     * the request method.
+     *
+     * @dataProvider invalidMethodProvider
+     * @expectedException Zend_Http_Client_Exception
+     */
+    public function testSettingInvalidMethodThrowsException($method)
+    {
+        $this->_client->setMethod($method);
+    }
 
-		foreach ($goodMethods as $method) {
-			try {
-				$this->client->setMethod($method);
-			} catch (Exception $e) {
-				$this->fail("An unexpected exception was thrown when setting request method to '{$method}'");
-			}
-		}
+    /**
+     * Test that configuration options are passed to the adapter after the
+     * adapter is instantiated
+     *
+     * @link http://framework.zend.com/issues/browse/ZF-4557
+     */
+    public function testConfigPassToAdapterZF4557()
+    {
+        require_once 'Zend/Http/Client/Adapter/Test.php';
+        $adapter = new Zend_Http_Client_Adapter_Test();
 
-		$badMethods = array(
-			'N@5TYM3T#0D',
-			'TWO WORDS',
-			'GET http://foo.com/?',
-			"Injected\nnewline"
-		);
+        // test that config passes when we set the adapter
+        $this->_client->setConfig(array('param' => 'value1'));
+        $this->_client->setAdapter($adapter);
+        $adapterCfg = $this->getObjectAttribute($adapter, 'config');
+        $this->assertEquals('value1', $adapterCfg['param']);
 
-		foreach ($badMethods as $method) {
-			try {
-				$this->client->setMethod($method);
-				$this->fail("A Zend_Http_Client_Exception was expected but was not thrown when setting request method to '{$method}'");
-			} catch (Zend_Http_Client_Exception $e) {
-				// We're ok!
-			}
-		}
-	}
+        // test that adapter config value changes when we set client config
+        $this->_client->setConfig(array('param' => 'value2'));
+        $adapterCfg = $this->getObjectAttribute($adapter, 'config');
+        $this->assertEquals('value2', $adapterCfg['param']);
+    }
 
-	/**
-	 * Test that configuration options are passed to the adapter after the
-	 * adapter is instantiated
-	 *
-	 * @link http://framework.zend.com/issues/browse/ZF-4557
-	 */
-	public function testConfigPassToAdapterZF4557()
-	{
-	    require_once 'Zend/Http/Client/Adapter/Test.php';
-	    $adapter = new Zend_Http_Client_Adapter_Test();
-
-	    // test that config passes when we set the adapter
-	    $this->client->setConfig(array('param' => 'value1'));
-	    $this->client->setAdapter($adapter);
-	    $adapterCfg = $this->getObjectAttribute($adapter, 'config');
-	    $this->assertEquals('value1', $adapterCfg['param']);
-
-	    // test that adapter config value changes when we set client config
-	    $this->client->setConfig(array('param' => 'value2'));
-	    $adapterCfg = $this->getObjectAttribute($adapter, 'config');
-	    $this->assertEquals('value2', $adapterCfg['param']);
-	}
+    /**
+     * Data providers 
+     */
+    
+    /**
+     * Data provider of valid non-standard HTTP methods 
+     * 
+     * @return array
+     */
+    static public function validMethodProvider()
+    {
+        return array(
+            array('OPTIONS'),
+            array('POST'),
+            array('DOSOMETHING'),
+            array('PROPFIND'),
+            array('Some_Characters'),
+            array('X-MS-ENUMATTS')
+        );
+    }
+    
+    /**
+     * Data provider of invalid HTTP methods
+     * 
+     * @return array
+     */
+    static public function invalidMethodProvider()
+    {
+        return array(
+            array('N@5TYM3T#0D'),
+            array('TWO WORDS'),
+            array('GET http://foo.com/?'),
+            array("Injected\nnewline")
+        );
+    }
 }

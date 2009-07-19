@@ -96,6 +96,7 @@ class Zend_Service_Twitter_Search extends Zend_Http_Client
     public function setResponseType($responseType = 'json')
     {
         if(!in_array($responseType, $this->_responseTypes, TRUE)) {
+            require_once 'Zend/Service/Twitter/Exception.php';
             throw new Zend_Service_Twitter_Exception('Invalid Response Type');
         }
         $this->_responseType = $responseType;

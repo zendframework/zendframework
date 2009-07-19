@@ -39,8 +39,8 @@ class Zend_Validate_NotEmpty extends Zend_Validate_Abstract
      * @var array
      */
     protected $_messageTemplates = array(
+        self::IS_EMPTY => "Value is required and can't be empty",
         self::INVALID  => "Invalid type given, value should be float, string, or integer",
-        self::IS_EMPTY => "Value is required and can't be empty"
     );
 
     /**

@@ -100,3 +100,6 @@ class Zend_Service_Technorati_AllTests
     }
 }
 
+if (defined('PHPUnit_MAIN_METHOD') && (PHPUnit_MAIN_METHOD == 'Zend_Service_Technorati_AllTests::main')) {
+    Zend_Service_Technorati_AllTests::main();
+}

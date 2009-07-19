@@ -21,6 +21,10 @@
  * @version    $Id$
  */
 
+// Call Zend_Validate_MessageTest::main() if this source file is executed directly.
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Validate_MessageTest::main');
+}
 
 /**
  * Test helper
@@ -48,6 +52,12 @@ class Zend_Validate_MessageTest extends PHPUnit_Framework_TestCase
      * @var Zend_Validate_StringLength
      */
     protected $_validator;
+
+    public static function main()
+    {
+        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
+        $result = PHPUnit_TextUI_TestRunner::run($suite);
+    }
 
     /**
      * Creates a new Zend_Validate_StringLength object for each test method
@@ -93,7 +103,7 @@ class Zend_Validate_MessageTest extends PHPUnit_Framework_TestCase
     public function testSetMessageDefaultKey()
     {
         $this->_validator->setMessage(
-            'Your value is too short'
+            'Your value is too short', Zend_Validate_StringLength::TOO_SHORT
         );
 
         $this->assertFalse($this->_validator->isValid('abc'));
@@ -296,11 +306,16 @@ class Zend_Validate_MessageTest extends PHPUnit_Framework_TestCase
         foreach ($vars as $var) {
             $message .= "%$var% ";
         }
-        $this->_validator->setMessage($message);
+        $this->_validator->setMessage($message, Zend_Validate_StringLength::TOO_SHORT);
 
         $this->assertFalse($this->_validator->isValid('abc'));
         $messages = $this->_validator->getMessages();
         $this->assertEquals('variables: %notvar% 4 8 ', current($messages));
     }
 
+}
+
+// Call Zend_Validate_MessageTest::main() if this source file is executed directly.
+if (PHPUnit_MAIN_METHOD == 'Zend_Validate_MessageTest::main') {
+    Zend_Validate_MessageTest::main();
 }

@@ -19,6 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_LocaleTest::main');
+}
+
 require_once dirname(__FILE__) . '/../TestHelper.php';
 
 // define('TESTS_ZEND_LOCALE_BCMATH_ENABLED', false); // uncomment to disable use of bcmath extension by Zend_Date
@@ -71,6 +75,15 @@ class Zend_LocaleTest extends PHPUnit_Framework_TestCase
     public function tearDown()
     {
         $this->_cache->clean(Zend_Cache::CLEANING_MODE_ALL);
+        if (is_string($this->_locale) && strpos($this->_locale, ';')) {
+            $locales = array();
+            foreach (explode(';', $this->_locale) as $l) {
+                $tmp = explode('=', $l);
+                $locales[$tmp[0]] = $tmp[1];
+            }
+            setlocale(LC_ALL, $locales);
+            return;
+        }
         setlocale(LC_ALL, $this->_locale);
     }
 

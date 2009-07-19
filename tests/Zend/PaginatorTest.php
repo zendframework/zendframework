@@ -20,6 +20,11 @@
  * @version    $Id$
  */
 
+// Call Zend_PaginatorTest::main() if this source file is executed directly.
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_PaginatorTest::main');
+}
+
 /**
  * Test helper
  */
@@ -90,6 +95,17 @@ require_once 'Zend/Filter/Callback.php';
 class Zend_PaginatorTest extends PHPUnit_Framework_TestCase
 {
     /**
+     * Runs the test methods of this class.
+     *
+     * @return void
+     */
+    public static function main()
+    {
+        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
+        $result = PHPUnit_TextUI_TestRunner::run($suite);
+    }
+
+    /**
      * Paginator instance
      *
      * @var Zend_Paginator
@@ -126,7 +142,7 @@ class Zend_PaginatorTest extends PHPUnit_Framework_TestCase
         Zend_Controller_Action_HelperBroker::resetHelpers();
 
         $fO = array('lifetime' => 3600, 'automatic_serialization' => true);
-        $bO = array('cache_dir'=>dirname(__FILE__) .'/Paginator/_files/cachedata');
+        $bO = array('cache_dir'=> $this->_getTmpDir());
 
         $this->_cache = Zend_Cache::factory('Core', 'File', $fO, $bO);
 
@@ -140,6 +156,33 @@ class Zend_PaginatorTest extends PHPUnit_Framework_TestCase
         $this->_dbConn = null;
         $this->_testCollection = null;
         $this->_paginator = null;
+    }
+
+    protected function _getTmpDir()
+    {
+        $tmpDir = sys_get_temp_dir() . '/zend_paginator';
+        if (file_exists($tmpDir)) {
+            $this->_rmDirRecursive($tmpDir);
+        }
+        mkdir($tmpDir);
+        $this->cacheDir = $tmpDir;
+        return $tmpDir;
+    }
+
+    protected function _rmDirRecursive($path)
+    {
+        $dir = new DirectoryIterator($path);
+        foreach ($dir as $file) {
+            if (!$file->isDir()) {
+                unlink($file->getPathname());
+            } elseif (!in_array($file->getFilename(), array('.', '..'))) {
+                $this->_rmDirRecursive($file->getPathname());
+            }
+        }
+        if (!rmdir($path)) {
+            throw new Exception('Unable to remove temporary directory ' . $path
+                                . '; perhaps it has a nested structure?');
+        }
     }
 
     protected function _restorePaginatorDefaults()
@@ -840,4 +883,9 @@ class Zend_PaginatorTest extends PHPUnit_Framework_TestCase
         $paginator = Zend_Paginator::factory(range(1,20));
         $this->assertEquals(2, $paginator->count());
     }
+}
+
+// Call Zend_PaginatorTest::main() if this source file is executed directly.
+if (PHPUnit_MAIN_METHOD === 'Zend_PaginatorTest::main') {
+    Zend_PaginatorTest::main();
 }

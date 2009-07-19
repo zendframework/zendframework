@@ -88,12 +88,16 @@ class Zend_LoaderTest extends PHPUnit_Framework_TestCase
 
         // Restore original autoloaders
         $loaders = spl_autoload_functions();
-        foreach ($loaders as $loader) {
-            spl_autoload_unregister($loader);
+        if (is_array($loaders)) {
+            foreach ($loaders as $loader) {
+                spl_autoload_unregister($loader);
+            }
         }
 
-        foreach ($this->loaders as $loader) {
-            spl_autoload_register($loader);
+        if (is_array($this->loaders)) {
+            foreach ($this->loaders as $loader) {
+                spl_autoload_register($loader);
+            }
         }
 
         // Retore original include_path

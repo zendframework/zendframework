@@ -34,6 +34,15 @@
  */
 
 /**
+ * GENERAL SETTINGS
+ *
+ * OB_ENABLED should be enabled for some tests to check if all functionality
+ * works as expected. Such tests include those for Zend_Soap and Zend_Session,
+ * which require that headers not be sent in order to work.
+ */
+define('TESTS_ZEND_OB_ENABLED', false);
+
+/**
  * Zend_Auth_Adapter_DbTable tests
  */
 define('TESTS_ZEND_AUTH_ADAPTER_DBTABLE_PDO_SQLITE_ENABLED', false);
@@ -147,24 +156,12 @@ define('TESTS_ZEND_DB_ADAPTER_DB2_PASSWORD', null);
 define('TESTS_ZEND_DB_ADAPTER_DB2_DATABASE', 'sample');
 
 /**
- * Zend_Http_Client tests
+ * Zend_Feed_Reader tests
  *
- * To enable the dynamic Zend_Http_Client tests, you will need to symbolically
- * link or copy the files in tests/Zend/Http/Client/_files to a directory
- * under your web server(s) document root and set this constant to point to the
- * URL of this directory.
+ * If the ONLINE_ENABLED property is false, only tests that can be executed
+ * without network connectivity are run; when enabled, all tests will run.
  */
-define('TESTS_ZEND_HTTP_CLIENT_BASEURI', false);
-
-/**
- * Zend_Http_Client_Proxy tests
- *
- * HTTP proxy to be used for testing the Proxy adapter. Set to a string of
- * the form 'host:port'. Set to null to skip HTTP proxy tests.
- */
-define('TESTS_ZEND_HTTP_CLIENT_HTTP_PROXY', false);
-define('TESTS_ZEND_HTTP_CLIENT_HTTP_PROXY_USER', '');
-define('TESTS_ZEND_HTTP_CLIENT_HTTP_PROXY_PASS', '');
+define('TESTS_ZEND_FEED_READER_ONLINE_ENABLED', false);
 
 /**
  * Zend_Gdata tests
@@ -287,19 +284,24 @@ define('TESTS_ZEND_GDATA_PHOTOS_ONLINE_ENABLED', false);
 define('TESTS_ZEND_GDATA_HEALTH_ONLINE_ENABLED', false);
 
 /**
- * Zend_Date tests
+ * Zend_Http_Client tests
  *
- * If the BCMATH_ENABLED property below is false, all arithmetic
- * operations will use ordinary PHP math operators and functions.
- * Otherwise, the bcmath functions will be used for unlimited precision.
- *
- * If the EXTENDED_COVERAGE property below is false, most of the I18N
- * unit tests will not be computed... this speeds tests up to 80 minutes
- * when doing reports. *
- * Edit TestConfiguration.php, not TestConfiguration.php.dist.
+ * To enable the dynamic Zend_Http_Client tests, you will need to symbolically
+ * link or copy the files in tests/Zend/Http/Client/_files to a directory
+ * under your web server(s) document root and set this constant to point to the
+ * URL of this directory.
  */
-define('TESTS_ZEND_LOCALE_BCMATH_ENABLED', true);
-define('TESTS_ZEND_I18N_EXTENDED_COVERAGE', true);
+define('TESTS_ZEND_HTTP_CLIENT_BASEURI', false);
+
+/**
+ * Zend_Http_Client_Proxy tests
+ *
+ * HTTP proxy to be used for testing the Proxy adapter. Set to a string of
+ * the form 'host:port'. Set to null to skip HTTP proxy tests.
+ */
+define('TESTS_ZEND_HTTP_CLIENT_HTTP_PROXY', false);
+define('TESTS_ZEND_HTTP_CLIENT_HTTP_PROXY_USER', '');
+define('TESTS_ZEND_HTTP_CLIENT_HTTP_PROXY_PASS', '');
 
 /**
  * Zend_Ldap online tests
@@ -368,6 +370,21 @@ define('TESTS_ZEND_LDAP_ALT_PASSWORD', null);
 //define('TESTS_ZEND_LOCALE_FORMAT_SETLOCALE', 'fr');
 //define('TESTS_ZEND_LOCALE_FORMAT_SETLOCALE', 'fr_FR@euro');
 define('TESTS_ZEND_LOCALE_FORMAT_SETLOCALE', false);
+
+/**
+ * Zend_Date tests
+ *
+ * If the BCMATH_ENABLED property below is false, all arithmetic
+ * operations will use ordinary PHP math operators and functions.
+ * Otherwise, the bcmath functions will be used for unlimited precision.
+ *
+ * If the EXTENDED_COVERAGE property below is false, most of the I18N
+ * unit tests will not be computed... this speeds tests up to 80 minutes
+ * when doing reports. *
+ * Edit TestConfiguration.php, not TestConfiguration.php.dist.
+ */
+define('TESTS_ZEND_LOCALE_BCMATH_ENABLED', true);
+define('TESTS_ZEND_I18N_EXTENDED_COVERAGE', true);
 
 /**
  * Zend_Mail_Storage tests
@@ -512,6 +529,20 @@ define('TESTS_ZEND_SERVICE_SLIDESHARE_TAG', 'zend');
 define('TESTS_ZEND_SERVICE_SLIDESHARE_GROUP', '');
 
 /**
+ * Zend_Service_Twitter tests
+ *
+ * ONLINE_ENABLED indicates whether or not to run tests requiring a network
+ * connection.
+ *
+ * TWITTER_USER and TWITTER_PASS are valid Twitter credentials you wish to use
+ * when testing.
+ */
+define('TESTS_ZEND_SERVICE_TWITTER_ONLINE_ENABLED', false);
+define('TESTS_ZEND_SERVICE_TWITTER_USER', 'zftestuser');
+define('TESTS_ZEND_SERVICE_TWITTER_PASS', 'zftestuser');
+
+
+/**
  * Zend_Service_Yahoo online tests
  */
 define('TESTS_ZEND_SERVICE_YAHOO_ONLINE_ENABLED', false);
@@ -539,6 +570,14 @@ define('TESTS_ZEND_SERVICE_RECAPTCHA_MAILHIDE_PRIVATE_KEY', 'private mailhide ke
  * when having more than one version installed and include paths are changing.
  */
 define('TESTS_ZEND_SOAP_AUTODISCOVER_ONLINE_SERVER_BASEURI', false);
+
+/**
+ * Zend_Validate tests
+ *
+ * Set ONLINE_ENABLED if you wish to run validators that require network 
+ * connectivity.
+ */
+define('TESTS_ZEND_VALIDATE_ONLINE_ENABLED', false);
 
 /**
  * PHPUnit Code Coverage / Test Report

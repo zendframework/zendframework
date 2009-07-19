@@ -512,6 +512,11 @@ class Zend_Soap_ServerTest extends PHPUnit_Framework_TestCase
 
     public function testGetLastRequest()
     {
+        if (headers_sent()) {
+            $this->markTestSkipped('Cannot run testGetLastRequest() when headers have already been sent; enable output buffering to run this test');
+            return;
+        }
+
     	$server = new Zend_Soap_Server();
         $server->setOptions(array('location'=>'test://', 'uri'=>'http://framework.zend.com'));
         $server->setReturnResponse(true);
@@ -563,6 +568,11 @@ class Zend_Soap_ServerTest extends PHPUnit_Framework_TestCase
 
     public function testGetLastResponse()
     {
+        if (headers_sent()) {
+            $this->markTestSkipped('Cannot run testGetLastResponse() when headers have already been sent; enable output buffering to run this test');
+            return;
+        }
+
     	$server = new Zend_Soap_Server();
         $server->setOptions(array('location'=>'test://', 'uri'=>'http://framework.zend.com'));
         $server->setReturnResponse(true);
@@ -606,6 +616,11 @@ class Zend_Soap_ServerTest extends PHPUnit_Framework_TestCase
 
     public function testHandle()
     {
+        if (headers_sent()) {
+            $this->markTestSkipped('Cannot run testHandle() when headers have already been sent; enable output buffering to run this test');
+            return;
+        }
+
     	$server = new Zend_Soap_Server();
         $server->setOptions(array('location'=>'test://', 'uri'=>'http://framework.zend.com'));
 
@@ -783,6 +798,11 @@ class Zend_Soap_ServerTest extends PHPUnit_Framework_TestCase
 
     public function testErrorHandlingOfSoapServerChangesToThrowingSoapFaultWhenInHandleMode()
     {
+        if (headers_sent()) {
+            $this->markTestSkipped('Cannot run ' . __METHOD__ . '() when headers have already been sent; enable output buffering to run this test');
+            return;
+        }
+
         $server = new Zend_Soap_Server();
         $server->setOptions(array('location'=>'test://', 'uri'=>'http://framework.zend.com'));
         $server->setReturnResponse(true);

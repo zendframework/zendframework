@@ -18,6 +18,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Soap_ClientTest::main');
+}
+
 require_once dirname(__FILE__)."/../../TestHelper.php";
 
 /** PHPUnit Test Case */
@@ -40,6 +44,17 @@ require_once 'Zend/Config.php';
  */
 class Zend_Soap_ClientTest extends PHPUnit_Framework_TestCase
 {
+    /**
+     * Runs this test suite
+     *
+     * @return void
+     */
+    public static function main()
+    {
+        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
+        $result = PHPUnit_TextUI_TestRunner::run($suite);
+    }
+
     public function setUp()
     {
         if (!extension_loaded('soap')) {
@@ -180,6 +195,11 @@ class Zend_Soap_ClientTest extends PHPUnit_Framework_TestCase
 
     public function testGetLastRequest()
     {
+        if (headers_sent()) {
+            $this->markTestSkipped('Cannot run testGetLastRequest() when headers have already been sent; enable output buffering to run this test');
+            return;
+        }
+
     	$server = new Zend_Soap_Server(dirname(__FILE__) . '/_files/wsdl_example.wsdl');
         $server->setClass('Zend_Soap_Client_TestClass');
 
@@ -205,6 +225,11 @@ class Zend_Soap_ClientTest extends PHPUnit_Framework_TestCase
 
     public function testGetLastResponse()
     {
+        if (headers_sent()) {
+            $this->markTestSkipped('Cannot run testGetLastResponse() when headers have already been sent; enable output buffering to run this test');
+            return;
+        }
+
     	$server = new Zend_Soap_Server(dirname(__FILE__) . '/_files/wsdl_example.wsdl');
         $server->setClass('Zend_Soap_Client_TestClass');
 
@@ -231,6 +256,11 @@ class Zend_Soap_ClientTest extends PHPUnit_Framework_TestCase
 
     public function testCallInvoke()
     {
+        if (headers_sent()) {
+            $this->markTestSkipped('Cannot run testCallInvoke() when headers have already been sent; enable output buffering to run this test');
+            return;
+        }
+
     	$server = new Zend_Soap_Server(dirname(__FILE__) . '/_files/wsdl_example.wsdl');
         $server->setClass('Zend_Soap_Client_TestClass');
 
@@ -277,6 +307,11 @@ class Zend_Soap_ClientTest extends PHPUnit_Framework_TestCase
 
     public function testSetInputHeaders()
     {
+        if (headers_sent()) {
+            $this->markTestSkipped('Cannot run testSetInputHeaders() when headers have already been sent; enable output buffering to run this test');
+            return;
+        }
+
         $server = new Zend_Soap_Server(dirname(__FILE__) . '/_files/wsdl_example.wsdl');
         $server->setClass('Zend_Soap_Client_TestClass');
 
@@ -536,3 +571,6 @@ function Zend_Soap_Client_TestFunc6()
     return "string";
 }
 
+if (PHPUnit_MAIN_METHOD == 'Zend_Soap_ClientTest::main') {
+    Zend_Soap_ClientTest::main();
+}

@@ -20,11 +20,6 @@
  */
 
 /*
- * Start output buffering
- */
-ob_start();
-
-/*
  * Include PHPUnit dependencies
  */
 require_once 'PHPUnit/Framework.php';
@@ -76,6 +71,13 @@ if (is_readable($zfCoreTests . DIRECTORY_SEPARATOR . 'TestConfiguration.php')) {
     require_once $zfCoreTests . DIRECTORY_SEPARATOR . 'TestConfiguration.php';
 } else {
     require_once $zfCoreTests . DIRECTORY_SEPARATOR . 'TestConfiguration.php.dist';
+}
+
+/**
+ * Start output buffering, if enabled
+ */
+if (defined('TESTS_ZEND_OB_ENABLED') && constant('TESTS_ZEND_OB_ENABLED')) {
+    ob_start();
 }
 
 /*

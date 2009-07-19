@@ -773,8 +773,8 @@ class Zend_Form_ElementTest extends PHPUnit_Framework_TestCase
         $this->_checkZf2794();
 
         $message = 'My custom empty message';
-        $this->element->setRequired(true)
-                      ->addValidator('notEmpty', false, array('messages' => $message));
+        $this->element->addValidator('notEmpty', false, array('messages' => $message))
+                      ->setRequired(true);
 
         $this->element->isValid('');
         $messages = $this->element->getMessages();
@@ -1178,7 +1178,7 @@ class Zend_Form_ElementTest extends PHPUnit_Framework_TestCase
 
     public function testShouldUseFilterConstructorOptionsAsPassedToAddFilter()
     {
-        $this->element->addFilter('HtmlEntities', array('quoteStyle' => ENT_QUOTES, 'charSet' => 'UTF-8'));
+        $this->element->addFilter('HtmlEntities', array(array('quotestyle' => ENT_QUOTES, 'charset' => 'UTF-8')));
         $filter = $this->element->getFilter('HtmlEntities');
         $this->assertTrue($filter instanceof Zend_Filter_HtmlEntities);
         $this->assertEquals(ENT_QUOTES, $filter->getQuoteStyle());

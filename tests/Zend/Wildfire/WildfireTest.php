@@ -20,6 +20,10 @@
  * @version    $Id$
  */
 
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Wildfire_WildfireTest::main');
+}
+
 require_once dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
 /** Zend_Wildfire_Channel_HttpHeaders */
@@ -71,8 +75,6 @@ class Zend_Wildfire_WildfireTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        require_once "PHPUnit/TextUI/TestRunner.php";
-
         $suite  = new PHPUnit_Framework_TestSuite("Zend_Wildfire_WildfireTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
@@ -1030,4 +1032,8 @@ class Zend_Wildfire_WildfireTest_Response extends Zend_Controller_Response_Http
         return true;
     }
 
+}
+
+if (PHPUnit_MAIN_METHOD == 'Zend_Wildfire_WildfireTest::main') {
+    Zend_Wildfire_WildfireTest::main();
 }

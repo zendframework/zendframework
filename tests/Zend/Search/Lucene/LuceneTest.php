@@ -5,17 +5,19 @@
  * @subpackage UnitTests
  */
 
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Search_Lucene_LuceneTest::main');
+}
+
+/**
+ * Test helper
+ */
+require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 /**
  * Zend_Search_Lucene
  */
 require_once 'Zend/Search/Lucene.php';
-
-/**
- * PHPUnit test case
- */
-require_once 'PHPUnit/Framework/TestCase.php';
-
 
 /**
  * @category   Zend
@@ -24,8 +26,18 @@ require_once 'PHPUnit/Framework/TestCase.php';
  */
 class Zend_Search_Lucene_LuceneTest extends PHPUnit_Framework_TestCase
 {
+    public static function main()
+    {
+        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
+        $result = PHPUnit_TextUI_TestRunner::run($suite);
+    }
+
 	private function _clearDirectory($dirName)
 	{
+        if (!file_exists($dirName) || !is_dir($dirName))  {
+            return;
+        }
+
         // remove files from temporary direcytory
         $dir = opendir($dirName);
         while (($file = readdir($dir)) !== false) {
@@ -221,6 +233,9 @@ class Zend_Search_Lucene_LuceneTest extends PHPUnit_Framework_TestCase
         // Copy index sample into _files directory
     	$sampleIndexDir = dirname(__FILE__) . '/_indexSample/_files';
         $tempIndexDir = dirname(__FILE__) . '/_files';
+        if (!is_dir($tempIndexDir)) {
+            mkdir($tempIndexDir);
+        }
 
     	$this->_clearDirectory($tempIndexDir);
 
@@ -484,4 +499,8 @@ class Zend_Search_Lucene_LuceneTest extends PHPUnit_Framework_TestCase
 
         $this->_clearDirectory(dirname(__FILE__) . '/_index/_files');
     }
+}
+
+if (PHPUnit_MAIN_METHOD == 'Zend_Search_Lucene_LuceneTest::main') {
+    Zend_Search_Lucene_LuceneTest::main();
 }

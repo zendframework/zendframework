@@ -80,7 +80,7 @@ class Zend_Validate_AbstractTest extends PHPUnit_Framework_TestCase
     {
         $this->clearRegistry();
         Zend_Validate_Abstract::setDefaultTranslator(null);
-        Zend_Validate::setMessageLength(-1);
+        Zend_Validate_Abstract::setMessageLength(-1);
     }
 
     public function testTranslatorNullByDefault()
@@ -263,7 +263,7 @@ class Zend_Validate_AbstractTest extends PHPUnit_Framework_TestCase
     {
         require_once 'Zend/Validate.php';
         $this->assertEquals(-1, Zend_Validate::getMessageLength());
-        Zend_Validate::setMessageLength(10);
+        Zend_Validate_Abstract::setMessageLength(10);
         $this->assertEquals(10, Zend_Validate::getMessageLength());
 
         $translator = new Zend_Translate(

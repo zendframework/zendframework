@@ -659,6 +659,7 @@ class Zend_ViewTest extends PHPUnit_Framework_TestCase
         ob_start();
         echo $view->render('testZf995.phtml');
         $content = ob_get_flush();
+        ob_end_clean();
         $this->assertTrue(empty($content));
     }
 

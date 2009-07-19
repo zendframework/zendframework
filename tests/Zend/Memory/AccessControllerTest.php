@@ -20,6 +20,10 @@
  * @version    $Id$
  */
 
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Memory_AccessControllerTest::main');
+}
+
 /**
  * Test helper
  */
@@ -44,6 +48,33 @@ class Zend_Memory_Container_AccessControllerTest extends PHPUnit_Framework_TestC
      */
     private $_memoryManager = null;
 
+    public static function main()
+    {
+        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
+        $result = PHPUnit_TextUI_TestRunner::run($suite);
+    }
+
+    public function setUp()
+    {
+        $tmpDir = sys_get_temp_dir() . '/zend_memory';
+        if (file_exists($tmpDir)) {
+            if (!rmdir($tmpDir)) {
+                $dir = new DirectoryIterator($tmpDir);
+                foreach ($dir as $file) {
+                    if (!$file->isDir()) {
+                        unlink($file->getPathname());
+                    }
+                }
+                if (!rmdir($tmpDir)) {
+                    throw new Exception('Unable to remove temporary directory ' . $tmpDir
+                                      . '; perhaps it has a nested structure?');
+                }
+            }
+        }
+        mkdir($tmpDir);
+        $this->cacheDir = $tmpDir;
+    }
+
     /**
      * Retrieve memory manager
      *
@@ -51,7 +82,7 @@ class Zend_Memory_Container_AccessControllerTest extends PHPUnit_Framework_TestC
     private function _getMemoryManager()
     {
         if ($this->_memoryManager === null) {
-            $backendOptions = array('cache_dir' => dirname(__FILE__) . '/_files/'); // Directory where to put the cache files
+            $backendOptions = array('cache_dir' => $this->cacheDir); // Directory where to put the cache files
             $this->_memoryManager = Zend_Memory::factory('File', $backendOptions);
         }
 
@@ -120,4 +151,8 @@ class Zend_Memory_Container_AccessControllerTest extends PHPUnit_Framework_TestC
         $memObject->unlock();
         $this->assertFalse((boolean)$memObject->isLocked());
     }
+}
+
+if (PHPUnit_MAIN_METHOD == 'Zend_Memory_AccessControllerTest::main') {
+    Zend_Memory_AccessControllerTest::main();
 }

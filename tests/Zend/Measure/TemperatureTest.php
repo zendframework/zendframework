@@ -21,6 +21,14 @@
  * @version    $Id$
  */
 
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Measure_TemperatureTest::main');
+}
+
+/**
+ * Test helper
+ */
+require_once dirname(__FILE__) . '/../../TestHelper.php';
 
 /**
  * Zend_Measure_Temperature
@@ -28,10 +36,9 @@
 require_once 'Zend/Measure/Temperature.php';
 
 /**
- * PHPUnit test case
+ * Zend_Registry
  */
-require_once 'PHPUnit/Framework/TestCase.php';
-
+require_once 'Zend/Registry.php';
 
 /**
  * @package    Zend_Measure
@@ -39,6 +46,38 @@ require_once 'PHPUnit/Framework/TestCase.php';
  */
 class Zend_Measure_TemperatureTest extends PHPUnit_Framework_TestCase
 {
+    public static function main()
+    {
+        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
+        $result = PHPUnit_TextUI_TestRunner::run($suite);
+    }
+
+    public function setup()
+    {
+        if (Zend_Registry::isRegistered('Zend_Locale')) {
+            $registry = Zend_Registry::getInstance();
+            unset($registry['Zend_Locale']);
+        }
+        Zend_Locale_Data::removeCache();
+
+        $this->_locale = setlocale(LC_ALL, 0);
+        setlocale(LC_ALL, 'de');
+    }
+
+    public function tearDown()
+    {
+        if (is_string($this->_locale) && strpos($this->_locale, ';')) {
+            $locales = array();
+            foreach (explode(';', $this->_locale) as $l) {
+                $tmp = explode('=', $l);
+                $locales[$tmp[0]] = $tmp[1];
+            }
+            setlocale(LC_ALL, $locales);
+            return;
+        }
+        setlocale(LC_ALL, $this->_locale);
+    }
+
     /**
      * test for Temperature initialisation
      * expected instance
@@ -398,9 +437,13 @@ class Zend_Measure_TemperatureTest extends PHPUnit_Framework_TestCase
     public function testDetailConversion()
     {
         $unit= new Zend_Measure_Temperature(100, Zend_Measure_Temperature::KELVIN, 'de');
-        $this->assertSame('-280,0 °F', $unit->convertTo(Zend_Measure_Temperature::FAHRENHEIT));
+        $this->assertSame('-280 °F', $unit->convertTo(Zend_Measure_Temperature::FAHRENHEIT, 0));
 
         $unit= new Zend_Measure_Temperature(100, Zend_Measure_Temperature::FAHRENHEIT, 'de');
-        $this->assertSame('311,0 °K', $unit->convertTo(Zend_Measure_Temperature::KELVIN));
+        $this->assertSame('311 °K', $unit->convertTo(Zend_Measure_Temperature::KELVIN, 0));
     }
+}
+
+if (PHPUnit_MAIN_METHOD == 'Zend_Measure_TemperatureTest::main') {
+    Zend_Measure_TemperatureTest::main();
 }

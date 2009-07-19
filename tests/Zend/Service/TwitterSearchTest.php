@@ -19,9 +19,14 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Service_TwitterSearchTest::main');
+}
 
-require_once "PHPUnit/Framework/TestCase.php";
-require_once "PHPUnit/Framework/TestSuite.php";
+/**
+ * Test helper
+ */
+require_once dirname(__FILE__) . '/../../TestHelper.php';
 
 /** Zend_Service_Twitter_Search */
 require_once 'Zend/Service/Twitter/Search.php';
@@ -39,7 +44,7 @@ require_once 'Zend/Http/Client/Adapter/Test.php';
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Twitter_SearchTest extends PHPUnit_Framework_TestCase
+class Zend_Service_TwitterSearchTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -48,9 +53,7 @@ class Zend_Service_Twitter_SearchTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        require_once "PHPUnit/TextUI/TestRunner.php";
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Service_Twitter_SearchTest");
+        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -62,17 +65,15 @@ class Zend_Service_Twitter_SearchTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
+        if (!defined('TESTS_ZEND_SERVICE_TWITTER_ONLINE_ENABLED')
+            || !constant('TESTS_ZEND_SERVICE_TWITTER_ONLINE_ENABLED')
+        ) {
+            $this->markTestSkipped('Twitter tests are not enabled');
+            return;
+        }
+
         $this->twitter = new Zend_Service_Twitter_Search();
     }
-
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    protected function tearDown()
-    {}
 
     public function testSetResponseTypeToJSON()
     {
@@ -174,4 +175,8 @@ class Zend_Service_Twitter_SearchTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($response instanceof Zend_Feed_Atom);
 
     }
+}
+
+if (PHPUnit_MAIN_METHOD == 'Zend_Service_TwitterSearchTest::main') {
+    Zend_Service_TwitterSearchTest::main();
 }

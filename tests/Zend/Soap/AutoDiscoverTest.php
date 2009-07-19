@@ -59,6 +59,7 @@ class Zend_Soap_AutoDiscoverTest extends PHPUnit_Framework_TestCase
         ob_start();
         $server->handle();
         $dom->loadXML(ob_get_clean());
+        ob_end_clean();
 
         $wsdl = '<?xml version="1.0"?>'
               . '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
@@ -150,6 +151,7 @@ class Zend_Soap_AutoDiscoverTest extends PHPUnit_Framework_TestCase
         ob_start();
         $server->handle();
         $dom->loadXML(ob_get_clean());
+        ob_end_clean();
 
         $wsdl = '<?xml version="1.0"?>'
               . '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
@@ -308,6 +310,7 @@ class Zend_Soap_AutoDiscoverTest extends PHPUnit_Framework_TestCase
         ob_start();
         $server->handle();
         $dom->loadXML(ob_get_clean());
+        ob_end_clean();
 
         $dom->save(dirname(__FILE__).'/_files/setclass.wsdl');
         $this->assertContains('<message name="testFunc1Out"><part name="return"', $this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML()));

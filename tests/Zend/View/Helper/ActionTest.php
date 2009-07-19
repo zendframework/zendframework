@@ -295,11 +295,8 @@ class Zend_View_Helper_ActionTest extends PHPUnit_Framework_TestCase
     public function testActionCalledWithinActionResetsResponseState()
     {
         $value = $this->helper->action('bar-one', 'baz', 'foo');
-        $this->assertEquals('Baz-Three-View-Script|Baz-Two-View-Script|Baz-One-View-Script', $value);
+        $this->assertRegexp('/Baz-Three-View-Script\s+Baz-Two-View-Script\s+Baz-One-View-Script/s', $value);
     }
-    
-    
-    
 }
 
 // Call Zend_View_Helper_ActionTest::main() if this source file is executed directly.

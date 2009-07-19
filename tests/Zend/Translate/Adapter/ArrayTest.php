@@ -5,15 +5,16 @@
  * @subpackage UnitTests
  */
 
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Translate_Adapter_ArrayTest::main');
+}
+
+require_once dirname(__FILE__) . '/../../../TestHelper.php';
+
 /**
  * Zend_Translate_Adapter_Array
  */
 require_once 'Zend/Translate/Adapter/Array.php';
-
-/**
- * PHPUnit test case
- */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend
@@ -96,7 +97,7 @@ class Zend_Translate_Adapter_ArrayTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($adapter->isTranslated('Message 1', false, 'es'));
         $this->assertFalse($adapter->isTranslated('Message 1', 'es'));
         $this->assertFalse($adapter->isTranslated('Message 1', 'xx_XX'));
-        $this->assertFalse($adapter->isTranslated('Message 1', 'en_XX'));
+        $this->assertTrue($adapter->isTranslated('Message 1', 'en_XX'));
     }
 
     public function testLoadTranslationData()

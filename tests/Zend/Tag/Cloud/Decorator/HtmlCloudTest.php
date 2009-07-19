@@ -51,7 +51,7 @@ class Zend_Tag_Cloud_Decorator_HtmlCloudTest extends PHPUnit_Framework_TestCase
     {
         $decorator = new Zend_Tag_Cloud_Decorator_HtmlCloud();
         
-        $this->assertEquals('<ul class="Zend_Tag_Cloud">foobar</ul>', $decorator->render(array('foo', 'bar')));
+        $this->assertEquals('<ul class="Zend_Tag_Cloud">foo bar</ul>', $decorator->render(array('foo', 'bar')));
     }
     
     public function testNestedTags()
@@ -59,7 +59,7 @@ class Zend_Tag_Cloud_Decorator_HtmlCloudTest extends PHPUnit_Framework_TestCase
         $decorator = new Zend_Tag_Cloud_Decorator_HtmlCloud();
         $decorator->setHtmlTags(array('span', 'div' => array('id' => 'tag-cloud')));
         
-        $this->assertEquals('<div id="tag-cloud"><span>foobar</span></div>', $decorator->render(array('foo', 'bar')));
+        $this->assertEquals('<div id="tag-cloud"><span>foo bar</span></div>', $decorator->render(array('foo', 'bar')));
     }
     
     public function testSeparator()
@@ -102,3 +102,6 @@ class Zend_Tag_Cloud_Decorator_HtmlCloudTest extends PHPUnit_Framework_TestCase
 if (PHPUnit_MAIN_METHOD == 'Zend_Tag_Cloud_Decorator_HtmlCloudTest::main') {
     Zend_Tag_Cloud_Decorator_HtmlCloudTest::main();
 }
+/**
+ *  
+ */

@@ -66,7 +66,7 @@ class Zend_Tag_Cloud_CloudTest extends PHPUnit_Framework_TestCase
         
         $cloud->setCloudDecorator(array('decorator' => 'CloudDummy', 'options' => array('foo' => 'bar')));
         $this->assertTrue($cloud->getCloudDecorator() instanceof Zend_Tag_Cloud_Decorator_Dummy_CloudDummy);
-        $this->assertEquals($cloud->getCloudDecorator()->getFoo(), 'bar');
+        $this->assertEquals('bar', $cloud->getCloudDecorator()->getFoo());
     }
     
     public function testGetAndSetCloudDecorator()
@@ -86,7 +86,7 @@ class Zend_Tag_Cloud_CloudTest extends PHPUnit_Framework_TestCase
             $cloud->setCloudDecorator(new stdClass());
             $this->fail('An expected Zend_Tag_Cloud_Exception was not raised');
         } catch (Zend_Tag_Cloud_Exception $e) {
-            $this->assertEquals($e->getMessage(), 'Decorator is no instance of Zend_Tag_Cloud_Decorator_Cloud');
+            $this->assertEquals('Decorator is no instance of Zend_Tag_Cloud_Decorator_Cloud', $e->getMessage());
         }
     }
    
@@ -96,7 +96,7 @@ class Zend_Tag_Cloud_CloudTest extends PHPUnit_Framework_TestCase
         
         $cloud->setTagDecorator(array('decorator' => 'TagDummy', 'options' => array('foo' => 'bar')));
         $this->assertTrue($cloud->getTagDecorator() instanceof Zend_Tag_Cloud_Decorator_Dummy_TagDummy);
-        $this->assertEquals($cloud->getTagDecorator()->getFoo(), 'bar');
+        $this->assertEquals('bar', $cloud->getTagDecorator()->getFoo());
     }
     
     public function testGetAndSetTagDecorator()
@@ -116,7 +116,7 @@ class Zend_Tag_Cloud_CloudTest extends PHPUnit_Framework_TestCase
             $cloud->setTagDecorator(new stdClass());
             $this->fail('An expected Zend_Tag_Cloud_Exception was not raised');
         } catch (Zend_Tag_Cloud_Exception $e) {
-            $this->assertEquals($e->getMessage(), 'Decorator is no instance of Zend_Tag_Cloud_Decorator_Tag');
+            $this->assertEquals('Decorator is no instance of Zend_Tag_Cloud_Decorator_Tag', $e->getMessage());
         }
     }
     
@@ -136,7 +136,7 @@ class Zend_Tag_Cloud_CloudTest extends PHPUnit_Framework_TestCase
         ), false);
 
         $this->assertTrue($cloud->getCloudDecorator() instanceof Zend_Tag_Cloud_Decorator_Dummy_CloudDummy1);
-        $this->assertEquals($cloud->getCloudDecorator()->getFoo(), 'bar');
+        $this->assertEquals('bar', $cloud->getCloudDecorator()->getFoo());
     }
     
     public function testSetPrefixPathsViaOptions()
@@ -157,7 +157,7 @@ class Zend_Tag_Cloud_CloudTest extends PHPUnit_Framework_TestCase
         ), false);
 
         $this->assertTrue($cloud->getCloudDecorator() instanceof Zend_Tag_Cloud_Decorator_Dummy_CloudDummy2);
-        $this->assertEquals($cloud->getCloudDecorator()->getFoo(), 'bar');
+        $this->assertEquals('bar', $cloud->getCloudDecorator()->getFoo());
     }
     
     public function testSetPrefixPathsSkip()
@@ -170,7 +170,7 @@ class Zend_Tag_Cloud_CloudTest extends PHPUnit_Framework_TestCase
             ),
         ), false);
         
-        $this->assertEquals(count($cloud->getPluginLoader()->getPaths()), 1);
+        $this->assertEquals(1, count($cloud->getPluginLoader()->getPaths()));
     }
     
     public function testSetPluginLoader()
@@ -180,7 +180,7 @@ class Zend_Tag_Cloud_CloudTest extends PHPUnit_Framework_TestCase
         $cloud->setPluginLoader($loader);
         $paths  = $cloud->getPluginLoader()->getPaths();
         
-        $this->assertEquals($paths['foo_'][0], 'bar/');
+        $this->assertEquals('bar/', $paths['foo_'][0]);
     }
     
     public function testSetPluginLoaderViaOptions()
@@ -189,7 +189,7 @@ class Zend_Tag_Cloud_CloudTest extends PHPUnit_Framework_TestCase
         $cloud  = $this->_getCloud(array('pluginLoader' => $loader), null);
         $paths  = $cloud->getPluginLoader()->getPaths();
         
-        $this->assertEquals($paths['foo_'][0], 'bar/');
+        $this->assertEquals('bar/', $paths['foo_'][0]);
     }
     
     public function testAppendTagAsArray()
@@ -199,7 +199,7 @@ class Zend_Tag_Cloud_CloudTest extends PHPUnit_Framework_TestCase
         
         $cloud->appendTag(array('title' => 'foo', 'weight' => 1));
         
-        $this->assertEquals($list[0]->getTitle(), 'foo');
+        $this->assertEquals('foo', $list[0]->getTitle());
     }
     
     public function testAppendTagAsItem()
@@ -209,7 +209,7 @@ class Zend_Tag_Cloud_CloudTest extends PHPUnit_Framework_TestCase
         
         $cloud->appendTag(new Zend_Tag_Item(array('title' => 'foo', 'weight' => 1)));
         
-        $this->assertEquals($list[0]->getTitle(), 'foo');
+        $this->assertEquals('foo', $list[0]->getTitle());
     }
     
     public function testAppendInvalidTag()
@@ -220,7 +220,7 @@ class Zend_Tag_Cloud_CloudTest extends PHPUnit_Framework_TestCase
             $cloud->appendTag('foo');
             $this->fail('An expected Zend_Tag_Cloud_Exception was not raised');
         } catch (Zend_Tag_Cloud_Exception $e) {
-            $this->assertEquals($e->getMessage(), 'Tag must be an instance of Zend_Tag_Taggable or an array');
+            $this->assertEquals('Tag must be an instance of Zend_Tag_Taggable or an array', $e->getMessage());
         }
     }
     
@@ -232,8 +232,8 @@ class Zend_Tag_Cloud_CloudTest extends PHPUnit_Framework_TestCase
         $cloud->setTags(array(array('title' => 'foo', 'weight' => 1),
                               array('title' => 'bar', 'weight' => 2)));
         
-        $this->assertEquals($list[0]->getTitle(), 'foo');
-        $this->assertEquals($list[1]->getTitle(), 'bar');
+        $this->assertEquals('foo', $list[0]->getTitle());
+        $this->assertEquals('bar', $list[1]->getTitle());
     }
     
     public function testSetTagsAsItem()
@@ -244,8 +244,8 @@ class Zend_Tag_Cloud_CloudTest extends PHPUnit_Framework_TestCase
         $cloud->setTags(array(new Zend_Tag_Item(array('title' => 'foo', 'weight' => 1)),
                               new Zend_Tag_Item(array('title' => 'bar', 'weight' => 2))));
         
-        $this->assertEquals($list[0]->getTitle(), 'foo');
-        $this->assertEquals($list[1]->getTitle(), 'bar');
+        $this->assertEquals('foo', $list[0]->getTitle());
+        $this->assertEquals('bar', $list[1]->getTitle());
     }
     
     public function testSetTagsMixed()
@@ -256,8 +256,8 @@ class Zend_Tag_Cloud_CloudTest extends PHPUnit_Framework_TestCase
         $cloud->setTags(array(array('title' => 'foo', 'weight' => 1),
                               new Zend_Tag_Item(array('title' => 'bar', 'weight' => 2))));
         
-        $this->assertEquals($list[0]->getTitle(), 'foo');
-        $this->assertEquals($list[1]->getTitle(), 'bar');
+        $this->assertEquals('foo', $list[0]->getTitle());
+        $this->assertEquals('bar', $list[1]->getTitle());
     }
     
     public function testSetInvalidTags()
@@ -268,7 +268,7 @@ class Zend_Tag_Cloud_CloudTest extends PHPUnit_Framework_TestCase
             $cloud->setTags(array('foo'));
             $this->fail('An expected Zend_Tag_Cloud_Exception was not raised');
         } catch (Zend_Tag_Cloud_Exception $e) {
-            $this->assertEquals($e->getMessage(), 'Tag must be an instance of Zend_Tag_Taggable or an array');
+            $this->assertEquals('Tag must be an instance of Zend_Tag_Taggable or an array', $e->getMessage());
         }
     }
     
@@ -277,7 +277,7 @@ class Zend_Tag_Cloud_CloudTest extends PHPUnit_Framework_TestCase
         $cloud = $this->_getCloud(array('tags' => array(array('title' => 'foo', 'weight' => 1))));
         $list  = $cloud->getItemList();
         
-        $this->assertEquals($list[0]->getTitle(), 'foo');
+        $this->assertEquals('foo', $list[0]->getTitle());
     }
     
     public function testConstructorWithConfig()
@@ -285,7 +285,7 @@ class Zend_Tag_Cloud_CloudTest extends PHPUnit_Framework_TestCase
         $cloud = $this->_getCloud(new Zend_Config(array('tags' => array(array('title' => 'foo', 'weight' => 1)))));
         $list  = $cloud->getItemList();
         
-        $this->assertEquals($list[0]->getTitle(), 'foo');
+        $this->assertEquals('foo', $list[0]->getTitle());
     }
     
     public function testSetOptions()
@@ -294,7 +294,7 @@ class Zend_Tag_Cloud_CloudTest extends PHPUnit_Framework_TestCase
         $cloud->setOptions(array('tags' => array(array('title' => 'foo', 'weight' => 1))));
         $list  = $cloud->getItemList();
         
-        $this->assertEquals($list[0]->getTitle(), 'foo');
+        $this->assertEquals('foo', $list[0]->getTitle());
     }
     
     public function testSkipOptions()
@@ -305,26 +305,28 @@ class Zend_Tag_Cloud_CloudTest extends PHPUnit_Framework_TestCase
     
     public function testRender()
     {
-        $cloud = $this->_getCloud(array('tags' => array(array('title' => 'foo', 'weight' => 1), array('title' => 'bar', 'weight' => 3))));
-        $this->assertEquals($cloud->render(), '<ul class="Zend_Tag_Cloud">'
-                                              . '<li><a href="" style="font-size: 10px;">foo</a></li>'
-                                              . '<li><a href="" style="font-size: 20px;">bar</a></li>'
-                                              . '</ul>');
+        $cloud    = $this->_getCloud(array('tags' => array(array('title' => 'foo', 'weight' => 1), array('title' => 'bar', 'weight' => 3))));
+        $expected = '<ul class="Zend_Tag_Cloud">'
+                  . '<li><a href="" style="font-size: 10px;">foo</a></li> '
+                  . '<li><a href="" style="font-size: 20px;">bar</a></li>'
+                  . '</ul>';
+        $this->assertEquals($expected, $cloud->render());
     }
     
     public function testRenderEmptyCloud()
     {
         $cloud = $this->_getCloud();
-        $this->assertEquals($cloud->render(), '');
+        $this->assertEquals('', $cloud->render());
     }
     
     public function testRenderViaToString()
     {
         $cloud = $this->_getCloud(array('tags' => array(array('title' => 'foo', 'weight' => 1), array('title' => 'bar', 'weight' => 3))));
-        $this->assertEquals((string) $cloud, '<ul class="Zend_Tag_Cloud">'
-                                             . '<li><a href="" style="font-size: 10px;">foo</a></li>'
-                                             . '<li><a href="" style="font-size: 20px;">bar</a></li>'
-                                             . '</ul>');
+        $expected = '<ul class="Zend_Tag_Cloud">'
+                  . '<li><a href="" style="font-size: 10px;">foo</a></li> '
+                  . '<li><a href="" style="font-size: 20px;">bar</a></li>'
+                  . '</ul>';
+        $this->assertEquals($expected, (string) $cloud);
     }
     
     protected function _getCloud($options = null, $setPluginLoader = true)

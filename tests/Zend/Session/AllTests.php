@@ -33,13 +33,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 require_once dirname(__FILE__) . '/../../TestHelper.php';
 
 
-/**
- * Zend_Session tests need to be output buffered because they depend on headers_sent() === false
- *
- * @see http://framework.zend.com/issues/browse/ZF-700
- */
-ob_start();
-
 require_once 'SessionTest.php';
 
 /** Zend_Session_SaveHandler_AllTests */

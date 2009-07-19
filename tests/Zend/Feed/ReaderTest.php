@@ -113,6 +113,13 @@ class Zend_Feed_ReaderTest extends PHPUnit_Framework_TestCase
 
     public function testImportsUri()
     {
+        if (!defined('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')
+            || !constant('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')
+        ) {
+            $this->markTestSkipped('testImportsUri() requires a network connection');
+            return;
+        }
+
         try {
             $feed = Zend_Feed_Reader::import('http://www.planet-php.net/rdf/');
         } catch(Exception $e) {
@@ -122,6 +129,13 @@ class Zend_Feed_ReaderTest extends PHPUnit_Framework_TestCase
 
     public function testGetsFeedLinksAsValueObject()
     {
+        if (!defined('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')
+            || !constant('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')
+        ) {
+            $this->markTestSkipped('testGetsFeedLinksAsValueObject() requires a network connection');
+            return;
+        }
+
         try {
             $links = Zend_Feed_Reader::findFeedLinks('http://www.planet-php.net');
         } catch(Exception $e) {

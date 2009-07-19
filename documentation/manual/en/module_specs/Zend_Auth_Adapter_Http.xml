@@ -113,7 +113,7 @@
                 </thead>
                 <tbody>
                     <row>
-                        <entry><property>accept_schemes</property></entry>
+                        <entry><emphasis><property>accept_schemes</property></emphasis></entry>
                         <entry>Yes</entry>
                         <entry>
                             Determines which authentication schemes the adapter will accept from
@@ -122,7 +122,7 @@
                         </entry>
                     </row>
                     <row>
-                        <entry><property>realm</property></entry>
+                        <entry><emphasis><property>realm</property></emphasis></entry>
                         <entry>Yes</entry>
                         <entry>
                             Sets the authentication realm; usernames should be unique within a
@@ -130,7 +130,7 @@
                         </entry>
                     </row>
                     <row>
-                        <entry><property>digest_domains</property></entry>
+                        <entry><emphasis><property>digest_domains</property></emphasis></entry>
                         <entry>
                             Yes, when <property>'accept_schemes'</property> contains
                             <emphasis>'digest'</emphasis>
@@ -142,7 +142,7 @@
                         </entry>
                     </row>
                     <row>
-                        <entry><property>nonce_timeout</property></entry>
+                        <entry><emphasis><property>nonce_timeout</property></emphasis></entry>
                         <entry>
                             Yes, when <property>'accept_schemes'</property> contains
                             <emphasis>'digest'</emphasis>
@@ -153,7 +153,7 @@
                         </entry>
                     </row>
                     <row>
-                        <entry><property>proxy_auth</property></entry>
+                        <entry><emphasis><property>proxy_auth</property></emphasis></entry>
                         <entry>No</entry>
                         <entry>
                             Disabled by default. Enable to perform Proxy authentication, instead

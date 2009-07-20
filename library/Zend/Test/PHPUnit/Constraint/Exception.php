@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_XX
+ * @package    Zend_Test
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -23,8 +23,8 @@
 require_once 'PHPUnit/Framework/ExpectationFailedException.php';
 
 /**
- * Zend_Test_PHPUnit_Constraint_Exception 
- * 
+ * Zend_Test_PHPUnit_Constraint_Exception
+ *
  * @uses       PHPUnit_Framework_ExpectationFailedException
  * @package    Zend_Test
  * @subpackage PHPUnit

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect2 id="zend.application.available-resources.modules">
+    <title>Zend_Application_Resource_Modules</title>
+
+    <para>
+        <classname>Zend_Application_Resource_Modules</classname> est utilisé pour initialiser
+        les modules de votre application. Si votre module possède un fichier
+        <filename>Bootstrap.php</filename> à sa racine, et que celui-ci contient une classe nommée
+        <classname>Module_Bootstrap</classname> (où "Module" est le nom du module),
+        alors celle-ci sera utiliser pour lancer votre module.
+    </para>
+
+    <para>
+        Par défaut, une instance de
+        <classname>Zend_Application_Module_Autoloader</classname> sera créee pour le module en question
+        , utilisant le nom du module et son dossier pour s'initialiser.
+    </para>
+
+    <note>
+        <title>Dépendance envers le contrôleur frontal</title>
+
+        <para>
+            La ressource Modules possède une dépendance envers <link
+                linkend="zend.application.available-resources.frontcontroller">la ressource Front
+            Controller</link>. Vous pouvez bien sûr proposer votre propre implémentation de la ressource
+            du contrôleur frontal, si tant est que sa classe se termine par "Frontcontroller", ou, si vous
+            choisissez d'utiliser une méthode d'initialisation, celle-ci doit être "_initFrontController".
+        </para>
+    </note>
+
+    <example id="zend.application.available-resources.modules.configExample">
+        <title>Configurer les Modules</title>
+        <para>
+            Vous pouvez passer de la configuration en utilisant le nom du module commme préfixe de section
+            dans le fichier de configuration.
+        </para>
+
+        <para>
+            Par exemple, supposons que vous possédiez un module appelé "news". Voici des exemples
+            <acronym>INI</acronym> et <acronym>XML</acronym> de fichiers de configuration pour ce module.
+        </para>
+
+        <programlisting language="ini"><![CDATA[
+[production]
+news.resources.db.adapter = "pdo_mysql"
+news.resources.db.params.host = "localhost"
+news.resources.db.params.username = "webuser"
+news.resources.db.params.password = "XXXXXXX"
+news.resources.db.params.dbname = "news"
+news.resources.layout.layout = "news"
+]]></programlisting>
+
+        <programlisting language="xml"><![CDATA[
+<?xml version="1.0"?>
+<config>
+    <production>
+        <news>
+            <resources>
+                <db>
+                    <adapter>pdo_mysql</adapter>
+                    <params>
+                        <host>localhost</host>
+                        <username>webuser</username>
+                        <password>XXXXXXX</password>
+                        <dbname>news</dbname>
+                    </params>
+                    <isDefaultAdapter>true</isDefaultAdapter>
+                </db>
+            </resources>
+        </news>
+    </production>
+</config>
+]]></programlisting>
+    </example>
+
+    <example id="zend.application.available-resources.modules.retrieveBootstrapExample">
+        <title>Récupérer un bootstrap de module</title>
+
+        <para>
+            Il peut être utilise de pouvoir récupérer l'objet bootstrap de votre module, pour en exécuter
+            par exemple des méthodes spécifiques, ou encore pour en récupérer l'autoloader. La méthode
+            <methodname>getExecutedBootstraps()</methodname> peut être utilisée dans ce cas là, elle s'applique
+            sur un objet ressource de Modules.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$resource = $bootstrap->getPluginResource('modules');
+$moduleBootstraps = $resource->getExecutedBootstraps();
+$newsBootstrap = $moduleBootstraps['news'];
+]]></programlisting>
+    </example>
+</sect2>

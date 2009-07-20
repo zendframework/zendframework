@@ -21,7 +21,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+/**
+ * @see Zend_Uri_Http
+ */
 require_once 'Zend/Uri/Http.php';
+/**
+ * @see Zend_Http_Client_Adapter_Interface
+ */
 require_once 'Zend/Http/Client/Adapter/Interface.php';
 
 /**

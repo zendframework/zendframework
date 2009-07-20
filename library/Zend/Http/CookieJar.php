@@ -20,8 +20,17 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+/**
+ * @see Zend_Uri
+ */
 require_once "Zend/Uri.php";
+/**
+ * @see Zend_Http_Cookie
+ */
 require_once "Zend/Http/Cookie.php";
+/**
+ * @see Zend_Http_Response
+ */
 require_once "Zend/Http/Response.php";
 
 /**

@@ -21,6 +21,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+/**
+ * @see Zend_Http_Client_Adapter_Socket
+ */
 require_once 'Zend/Http/Client/Adapter/Socket.php';
 
 /**

@@ -21,6 +21,9 @@
  * @version    $Id$
  */
 
+/**
+ * @see Zend_Gdata
+ */
 require_once 'Zend/Gdata.php';
 
 /**

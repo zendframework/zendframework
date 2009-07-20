@@ -1,28 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15343 -->
+<!-- EN-Revision: 16653 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.tool.project.create-a-project">
 
     <title>Ein Projekt erstellen</title>
 
+    <note>
+        <para>
+            Das folgende Beispiel nimmt an das man ein Kommandozeilen Interface von
+            <classname>Zend_Tool_Framework</classname> hat.
+        </para>
+    </note>
+
+    <note>
+        <para>
+            Um irgendeinen der Kommandos von <classname>Zend_Tool_Project</classname> mit
+            <acronym>CLI</acronym> auszuführen muss man im Verzeichnis sein in dem das Projekt
+            ursprünglich erstellt wurde.
+        </para>
+    </note>
+
     <para>
-        Beachte: Das folgende Beispiel nimmt an das man ein Kommandozeilen Interface von
-        Zend_Tool_Framework hat.
+        Um mit <classname>Zend_Tool_Project</classname> zu starten, muss man einfach ein Projekt
+        erstelltn. Die Erstellung eines Projektes ist sehr einfach: Gehe zu einem Ort im
+        Dateisystem, erstelle ein Verzeichnis, wechsele in dieses Verzeichnis, und dann führe die
+        folgenden Kommandos aus:
     </para>
 
     <para>
-        Beachte: Um irgendeinen der Kommandos von Zend_Tool_Project mit CLI auszuführen muss
-        man im Verzeichnis sein in dem das Projekt ursprünglich erstellt wurde.
-    </para>
-
-    <para>
-        Um mit Zend_Tool_Project zu starten, muss man einfach ein Projekt erstelltn. Die Erstellung
-        eines Projektes ist sehr einfach: Gehe zu einem Ort im Dateisystem, erstelle ein
-        Verzeichnis, wechsele in dieses Verzeichnis, und dann führe die folgenden Kommandos aus:
-    </para>
-
-    <para>
-        <code>/tmp/project$ zf create project</code>
+        <command>/tmp/project$ zf create project</command>
     </para>
 
     <para>
@@ -30,7 +36,7 @@
     </para>
 
     <para>
-        <code>$ zf create project /path/to/non-existent-dir</code>
+        <command>$ zf create project /path/to/non-existent-dir</command>
     </para>
 
     <para>
@@ -38,38 +44,36 @@
         in der Tabelle sieht, gibt es einen "Project" Provider. Der Project Provider hat eine
         Vielzahl von assoziierten Aktionen, und mit diesen Aktionen auch eine Anzahl an Optionen
         die verwendet werden können um das Verhalten von Aktionen und Providern zu verändern.
-
-        <table id="zend.tool.project.project-provider-table">
-            <title>Optionen des Project Providers</title>
-            <tgroup cols="4">
-                <thead>
-                    <row>
-                        <entry>Provider Name</entry>
-                        <entry>Vorhandene Aktionen</entry>
-                        <entry>Parameter</entry>
-                        <entry>CLI Verwendung</entry>
-                    </row>
-                </thead>
-                <tbody>
-                    <row>
-                        <entry>
-                            Project
-                        </entry>
-                        <entry>
-                            Create
-                            Show
-                        </entry>
-                        <entry>
-                            create - [path=null, profile='default']
-                        </entry>
-                        <entry>
-                            zf create project some/path
-                        </entry>
-                    </row>
-                </tbody>
-            </tgroup>
-
-        </table>
-
     </para>
+
+    <table id="zend.tool.project.project-provider-table">
+        <title>Optionen des Project Providers</title>
+        <tgroup cols="4">
+            <thead>
+                <row>
+                    <entry>Provider Name</entry>
+                    <entry>Vorhandene Aktionen</entry>
+                    <entry>Parameter</entry>
+                    <entry><acronym>CLI</acronym> Verwendung</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry>
+                        Project
+                    </entry>
+                    <entry>
+                        Create
+                        Show
+                    </entry>
+                    <entry>
+                        create - [path=null, profile='default']
+                    </entry>
+                    <entry>
+                        <command>zf create project some/path</command>
+                    </entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
 </sect1>

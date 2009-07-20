@@ -823,7 +823,7 @@ class Zend_Ldap
                     }
                 } else {
                     $username = $this->getCanonicalAccountName($username,
-                        Zend_Ldap::ACCTNAME_FORM_PRINCIPAL);
+                        $this->_getAccountCanonicalForm());
                 }
             }
         }
@@ -856,7 +856,7 @@ class Zend_Ldap
                      */
                     $message = $this->_connectString;
             }
-    
+
             $zle = new Zend_Ldap_Exception($this, $message);
         }
         $this->disconnect();

@@ -1027,6 +1027,9 @@ switch ($numPeople) {
  *
  * LICENSE: Some license information
  *
+ * @category   Zend
+ * @package    Zend_Magic
+ * @subpackage Wand
  * @copyright  2008 Zend Technologies
  * @license    http://framework.zend.com/license   BSD License
  * @version    $Id:$
@@ -1034,6 +1037,23 @@ switch ($numPeople) {
  * @since      File available since Release 1.5.0
 */
 ]]></programlisting>
+
+                <para>
+                    The <property>@category</property> annotation must have a value of "Zend". 
+                </para>
+                    
+                <para>
+                    The <property>@package</property> annotation must be assigned, and should be 
+                    equivalent to the component name of the class contained in the file; typically,
+                    this will only have two segments, the "Zend" prefix, and the component name.
+                </para>
+
+                <para>
+                    The <property>@subpackage</property> annotation is optional.  If provided, it
+                    should be the subcomponent name, minus the class prefix. In the example above,
+                    the assumption is that the class in the file is either "Zend_Magic_Wand", or 
+                    uses that classname as part of its prefix.
+                </para>
             </sect3>
 
             <sect3 id="coding-standards.inline-documentation.classes">
@@ -1050,6 +1070,9 @@ switch ($numPeople) {
  *
  * Long description for class (if any)...
  *
+ * @category   Zend
+ * @package    Zend_Magic
+ * @subpackage Wand
  * @copyright  2008 Zend Technologies
  * @license    http://framework.zend.com/license   BSD License
  * @version    Release: @package_version@
@@ -1058,6 +1081,23 @@ switch ($numPeople) {
  * @deprecated Class deprecated in Release 2.0.0
  */
 ]]></programlisting>
+
+                <para>
+                    The <property>@category</property> annotation must have a value of "Zend". 
+                </para>
+                    
+                <para>
+                    The <property>@package</property> annotation must be assigned, and should be 
+                    equivalent to the component to which the class belongs; typically, this will 
+                    only have two segments, the "Zend" prefix, and the component name.
+                </para>
+
+                <para>
+                    The <property>@subpackage</property> annotation is optional.  If provided, it
+                    should be the subcomponent name, minus the class prefix. In the example above,
+                    the assumption is that the class described is either "Zend_Magic_Wand", or uses
+                    that classname as part of its prefix.
+                </para>
             </sect3>
 
             <sect3 id="coding-standards.inline-documentation.functions">

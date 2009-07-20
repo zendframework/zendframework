@@ -59,9 +59,9 @@ class Zend_Amf_Parse_Resource_MysqlResult
             }
         }
 
-        while($row = mysql_fetch_assoc($resource)) {
+        while($row = mysql_fetch_object($resource)) {
             foreach($fields_transform as $fieldname => $fieldtype) {
-               settype($row[$fieldname], $fieldtype);
+               settype($row->$fieldname, $fieldtype);
             }
             $result[] = $row;
         }

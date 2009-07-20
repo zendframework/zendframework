@@ -20,6 +20,9 @@
  * @version    $Id$
  */
 
+/**
+ * @see Zend_Dojo_Exception
+ */
 require_once 'Zend/Dojo/Exception.php';
 
 /**

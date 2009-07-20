@@ -19,6 +19,9 @@
  * @version   $Id: $
  */
 
+/**
+ * @see Zend_File_Transfer_Adapter_Abstract
+ */
 require_once 'Zend/File/Transfer/Adapter/Abstract.php';
 
 /**

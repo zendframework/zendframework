@@ -21,7 +21,7 @@
  */
 
 /**
- * Zend_InfoCard_Exception
+ * @see Zend_InfoCard_Exception
  */
 require_once 'Zend/InfoCard/Exception.php';
 

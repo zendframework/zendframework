@@ -64,8 +64,9 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
     /**
      * Constructor
      *
-     * @param array $defaults Defaults for map variables with keys as variable names
      * @param Zend_Controller_Front $front Front Controller object
+     * @param array $defaults Defaults for map variables with keys as variable names
+     * @param array $responders Modules or controllers to receive RESTful routes
      */ 
     public function __construct(Zend_Controller_Front $front, 
         array $defaults = array(),  
@@ -197,6 +198,7 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
      *
      * @param array $data An array of variable and value pairs used as parameters
      * @param bool $reset Weither to reset the current params
+     * @param bool $encode Weither to return urlencoded string
      * @return string Route path with user submitted parameters
      */  
     public function assemble($data = array(), $reset = false, $encode = true)  

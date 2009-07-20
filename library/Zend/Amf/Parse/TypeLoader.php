@@ -20,10 +20,25 @@
  * @version    $Id$
  */
 
+/**
+ * @see Zend_Amf_Value_Messaging_AcknowledgeMessage
+ */
 require_once 'Zend/Amf/Value/Messaging/AcknowledgeMessage.php';
+/**
+ * @see Zend_Amf_Value_Messaging_AsyncMessage
+ */
 require_once 'Zend/Amf/Value/Messaging/AsyncMessage.php';
+/**
+ * @see Zend_Amf_Value_Messaging_CommandMessage
+ */
 require_once 'Zend/Amf/Value/Messaging/CommandMessage.php';
+/**
+ * @see Zend_Amf_Value_Messaging_ErrorMessage
+ */
 require_once 'Zend/Amf/Value/Messaging/ErrorMessage.php';
+/**
+ * @see Zend_Amf_Value_Messaging_RemotingMessage
+ */
 require_once 'Zend/Amf/Value/Messaging/RemotingMessage.php';
 
 /**

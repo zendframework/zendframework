@@ -57,7 +57,6 @@ class Zend_Amf_Parse_Amf0_Deserializer extends Zend_Amf_Parse_Deserializer
      *
      * @param  integer $typeMarker
      * @return mixed whatever the data type is of the marker in php
-     * @return mixed
      * @throws Zend_Amf_Exception for invalid type
      */
     public function readTypeMarker($typeMarker = null)

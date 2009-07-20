@@ -778,11 +778,35 @@ class Zend_Http_Client_SocketTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test that one can upload multiple files with the same form name, as an 
+     * array
+     *
+     * @link http://framework.zend.com/issues/browse/ZF-5744
+     */
+    public function testMutipleFilesWithSameFormNameZF5744()
+    {
+        $rawData = 'Some test raw data here...';
+        
+        $this->client->setUri($this->baseuri . 'testUploads.php');
+        
+        $files = array('file1.txt', 'file2.txt', 'someotherfile.foo');
+        
+        $expectedBody = '';
+        foreach($files as $filename) {
+            $this->client->setFileUpload($filename, 'uploadfile[]', $rawData, 'text/plain');
+            $expectedBody .= "uploadfile $filename text/plain " . strlen($rawData) . "\n";
+        }
+        
+        $res = $this->client->request('POST');
+
+        $this->assertEquals($expectedBody, $res->getBody(), 'Response body does not include expected upload parameters');
+    }
+    
+    /**
      * Test that lines that might be evaluated as boolean false do not break
      * the reading prematurely.
      *
      * @see http://framework.zend.com/issues/browse/ZF-4238
-     *
      */
     public function testZF4238FalseLinesInResponse()
     {

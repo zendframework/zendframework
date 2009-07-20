@@ -691,7 +691,12 @@ class Zend_Http_Client
         // Force enctype to multipart/form-data
         $this->setEncType(self::ENC_FORMDATA);
 
-        $this->files[$formname] = array(basename($filename), $ctype, $data);
+        $this->files[] = array(
+            'formname' => $formname, 
+            'filename' => basename($filename), 
+            'ctype'    => $ctype, 
+            'data'     => $data
+        );
 
         return $this;
     }
@@ -1058,9 +1063,9 @@ class Zend_Http_Client
                     }
 
                     // Encode files
-                    foreach ($this->files as $name => $file) {
-                        $fhead = array(self::CONTENT_TYPE => $file[1]);
-                        $body .= self::encodeFormData($boundary, $name, $file[2], $file[0], $fhead);
+                    foreach ($this->files as $file) {
+                        $fhead = array(self::CONTENT_TYPE => $file['ctype']);
+                        $body .= self::encodeFormData($boundary, $file['formname'], $file['data'], $file['filename'], $fhead);
                     }
 
                     $body .= "--{$boundary}--\r\n";

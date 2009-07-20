@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.http.client.migration">
+
+    <title>Migrating from previous versions</title>
+
+    <para>
+        While the external API of <classname>Zend_Http_Client</classname> has remained 
+        consistent throughout the 1.x brach of Zend Framework, some changes were introduced
+        to the internal structure of <classname>Zend_Http_Client</classname> and its related
+        classes. 
+    </para>
+    
+    <para>
+        These changes should have no affect on code using <classname>Zend_Http_Client</classname>
+        - but may have an effect on PHP classes overloading or extending it. If your application
+        subclasses <classname>Zend_Http_Client</classname>, it is highly recommended to review
+        the following changes before upgrading Zend Framework.   
+    </para>
+
+    <sect2 id="zend.http.client.migration.tozf19">
+        <title>Migrating from 1.8 or older to 1.9 or newer</title>
+        <sect3 id="zend.http.client.migration.tozf19.fileuploadsarray">
+            <title>Changes to internal uploaded file information storage</title>
+
+            <para>
+                In version 1.9 of Zend Framework, there has been a change in the way
+                <classname>Zend_Http_Client</classname> internally stores information about
+                files to be uploaded, set using the <classname>Zend_Http_Client::setFileUpload()</classname> 
+                method.
+            </para>
+            
+            <para>
+                This change was introduced in order to allow multiple files to be uploaded
+                with the same form name, as an array of files. More information about this issue
+                can be found in <ulink url="http://framework.zend.com/issues/browse/ZF-5744">this bug report</ulink>.
+            </para>
+
+            <example id="zend.http.client.migration.tozf19.fileuploadsarray.example">
+                <title>Internal storage of uploaded file information</title>
+                
+                <programlisting language="php"><![CDATA[
+// Upload two files with the same form element name, as an array
+$client = new Zend_Http_Client();
+$client->setFileUpload('file1.txt', 'userfile[]', 'some raw data', 'text/plain');
+$client->setFileUpload('file2.txt', 'userfile[]', 'some other data', 'application/octet-stream');
+
+// In Zend Framework 1.8 or older, the value of the protected member $client->files is:
+// $client->files = array(
+//     'userfile[]' => array('file2.txt', 'application/octet-stream', 'some other data')
+// );
+
+// In Zend Framework 1.9 or newer, the value of $client->files is:
+// $client->files = array(
+//     array(
+//         'formname' => 'userfile[]',
+//         'filename' => 'file1.txt,
+//         'ctype'    => 'text/plain',
+//         'data'     => 'some raw data'
+//     ),
+//     array(
+//         'formname' => 'userfile[]',
+//         'filename' => 'file2.txt',
+//         'formname' => 'application/octet-stream',
+//         'formname' => 'some other data'
+//     )
+// );
+]]></programlisting>
+            </example>
+            
+            <para>
+                As you can see this change permits the usage of the same form element name with
+                more than one file - however, it introduces a subtle backwards-compatibility change
+                and as such should be noted. 
+            </para>
+        </sect3>
+    </sect2>
+</sect1>

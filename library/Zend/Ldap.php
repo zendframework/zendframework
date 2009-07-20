@@ -543,10 +543,6 @@ class Zend_Ldap
                 Zend_Ldap_Exception::LDAP_X_DOMAIN_MISMATCH);
         }
 
-        if ($form === Zend_Ldap::ACCTNAME_FORM_DN) {
-            return $this->_getAccountDn($acctname);
-        }
-
         if (!$uname) {
             /**
              * @see Zend_Ldap_Exception
@@ -562,6 +558,8 @@ class Zend_Ldap
         }
 
         switch ($form) {
+            case Zend_Ldap::ACCTNAME_FORM_DN:
+                return $this->_getAccountDn($acctname);
             case Zend_Ldap::ACCTNAME_FORM_USERNAME:
                 return $uname;
             case Zend_Ldap::ACCTNAME_FORM_BACKSLASH:

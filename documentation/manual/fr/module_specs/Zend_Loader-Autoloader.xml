@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16166 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.loader.autoloader">
     <title>L'autoloader</title>
@@ -55,7 +55,7 @@ $autoloader = Zend_Loader_Autoloader::getInstance();
 ]]></programlisting>
 
         <para>
-            Par défaut, l'autoloader est configurer pour capturer les espaces de noms "Zend_"
+            Par défaut, l'autoloader est configuré pour capturer les espaces de noms "Zend_"
             et "ZendX_". Si votre propre librairie de code utilise un espace de noms différent, vous
             devez alors enregistrer celui-ci avec la méthode <code>registerNamespace()</code>. Par
             exemple, si votre librairie possède l'espace de noms "My_", vous devriez agir comme
@@ -286,14 +286,14 @@ $autoloader->pushAutoloader($foo, 'Foo_');
 
                     <row>
                         <entry><code>getAutoloaders()</code></entry>
-                        <entry><code>array</code></entry>
+                        <entry><type>Array</type></entry>
                         <entry>N/A</entry>
                         <entry><para>Récupère la pile d'autoloaders interne.</para></entry>
                     </row>
 
                     <row>
                         <entry><code>getNamespaceAutoloaders($namespace)</code></entry>
-                        <entry><code>array</code></entry>
+                        <entry><type>Array</type></entry>
                         <entry>
                             <itemizedlist>
                                 <listitem>
@@ -360,7 +360,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
 
                     <row>
                         <entry><code>getRegisteredNamespace()</code></entry>
-                        <entry><code>array</code></entry>
+                        <entry><type>Array</type></entry>
                         <entry>N/A</entry>
                         <entry>
                             <para>
@@ -412,7 +412,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
 
                     <row>
                         <entry><code>isFallbackAutoloader()</code></entry>
-                        <entry><code>boolean</code></entry>
+                        <entry><type>Boolean</type></entry>
                         <entry>N/A</entry>
                         <entry>
                             <para>
@@ -425,7 +425,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
 
                     <row>
                         <entry><code>getClassAutoloaders($class)</code></entry>
-                        <entry><code>array</code></entry>
+                        <entry><type>Array</type></entry>
                         <entry>
                             <itemizedlist>
                                 <listitem>

@@ -26,6 +26,11 @@
 require_once 'Zend/Locale.php';
 
 /**
+ * @see Zend_Translate_Plural
+ */
+require_once 'Zend/Translate/Plural.php';
+
+/**
  * Basic adapter class for each translation source adapter
  *
  * @category   Zend
@@ -244,7 +249,7 @@ abstract class Zend_Translate_Adapter {
         }
 
         if ($locale !== null) {
-            $this->setLocale($option);
+            $this->setLocale($locale);
         }
 
         if (isset(self::$_cache) and ($change == true)) {
@@ -452,7 +457,7 @@ abstract class Zend_Translate_Adapter {
 
         $read = true;
         if (isset(self::$_cache)) {
-            $id = 'Zend_Translate_' . preg_replace('/[^a-zA-Z0-9_]/', '_', $data) . '_' . $this->toString();
+            $id = 'Zend_Translate_' . md5(serialize($data)) . '_' . $this->toString();
             $result = self::$_cache->load($id);
             if ($result) {
                 $temp = unserialize($result);
@@ -474,7 +479,7 @@ abstract class Zend_Translate_Adapter {
                 $this->_translate[$key] = array();
             }
 
-            $this->_translate[$key] = $this->_translate[$key] + $temp[$key];
+            $this->_translate[$key] = array_merge($this->_translate[$key], $temp[$key]);
         }
 
         if ($this->_automatic === true) {
@@ -490,7 +495,7 @@ abstract class Zend_Translate_Adapter {
         }
 
         if (($read) and (isset(self::$_cache))) {
-            $id = 'Zend_Translate_' . preg_replace('/[^a-zA-Z0-9_]/', '_', $data) . '_' . $this->toString();
+            $id = 'Zend_Translate_' . md5(serialize($data)) . '_' . $this->toString();
             self::$_cache->save( serialize($temp), $id, array('Zend_Translate'));
         }
 
@@ -502,7 +507,7 @@ abstract class Zend_Translate_Adapter {
      * returns the translation
      *
      * @see Zend_Locale
-     * @param  string             $messageId Translation string
+     * @param  string|array       $messageId Translation string, or Array for plural translations
      * @param  string|Zend_Locale $locale    (optional) Locale/Language to use, identical with
      *                                       locale identifier, @see Zend_Locale for more information
      * @return string
@@ -513,38 +518,99 @@ abstract class Zend_Translate_Adapter {
             $locale = $this->_options['locale'];
         }
 
+        $plural = null;
+        if (is_array($messageId)) {
+            if (count($messageId) > 2) {
+                $number    = array_pop($messageId);
+                if (!is_numeric($number)) {
+                    $plocale = $number;
+                    $number       = array_pop($messageId);
+                } else {
+                    $plocale = 'en';
+                }
+
+                $plural    = $messageId;
+                $messageId = $messageId[0];
+            } else {
+                $messageId = $messageId[0];
+            }
+        }
+
         if (!Zend_Locale::isLocale($locale, true, false)) {
             if (!Zend_Locale::isLocale($locale, false, false)) {
                 // language does not exist, return original string
                 $this->_log($messageId, $locale);
-                return $messageId;
+                if ($plural === null) {
+                    return $messageId;
+                }
+
+                $rule = Zend_Translate_Plural::getPlural($number, $plocale);
+                if (!isset($plural[$rule])) {
+                    $rule = 0;
+                }
+
+                return $plural[$rule];
             }
 
             $locale = new Zend_Locale($locale);
         }
 
         $locale = (string) $locale;
-        if ((is_string($messageId) || is_numeric($messageId))
-            && isset($this->_translate[$locale]) 
-            && is_array($this->_translate[$locale]) 
-            && isset($this->_translate[$locale][$messageId])
-        ) {
+        if (isset($this->_translate[$locale][$messageId])) {
             // return original translation
-            return $this->_translate[$locale][$messageId];
+            if ($plural === null) {
+                return $this->_translate[$locale][$messageId];
+            }
+
+            $rule = Zend_Translate_Plural::getPlural($number, $locale);
+            if (isset($this->_translate[$locale][$plural[0]][$rule])) {
+                return $this->_translate[$locale][$plural[0]][$rule];
+            }
         } else if (strlen($locale) != 2) {
             // faster than creating a new locale and separate the leading part
             $locale = substr($locale, 0, -strlen(strrchr($locale, '_')));
 
-            if ((is_string($messageId) || is_numeric($messageId))
-                && isset($this->_translate[$locale][$messageId])
-            ) {
+            if (isset($this->_translate[$locale][$messageId])) {
                 // return regionless translation (en_US -> en)
-                return $this->_translate[$locale][$messageId];
+                if ($plural === null) {
+                    return $this->_translate[$locale][$messageId];
+                }
+
+                $rule = Zend_Translate_Plural::getPlural($number, $locale);
+                if (isset($this->_translate[$locale][$plural[0]][$rule])) {
+                    return $this->_translate[$locale][$plural[0]][$rule];
+                }
             }
         }
 
         $this->_log($messageId, $locale);
-        return $messageId;
+        if ($plural === null) {
+            return $messageId;
+        }
+
+        $rule = Zend_Translate_Plural::getPlural($number, $plocale);
+        if (!isset($plural[$rule])) {
+            $rule = 0;
+        }
+
+        return $plural[$rule];
+    }
+
+    /**
+     * Translates the given string using plural notations
+     * Returns the translated string
+     *
+     * @see Zend_Locale
+     * @param  string             $singular Singular translation string
+     * @param  string             $plural   Plural translation string
+     * @param  integer            $number   Number for detecting the correct plural
+     * @param  string|Zend_Locale $locale   (Optional) Locale/Language to use, identical with
+     *                                      locale identifier, @see Zend_Locale for more information
+     * @return string
+     */
+    public function plural($singular, $plural, $number, $locale = null)
+    {
+        return $this->translate(array($singular, $plural, $number), $locale);
     }
 
     /**
@@ -609,7 +675,7 @@ abstract class Zend_Translate_Adapter {
                 return false;
             }
 
-            $locale = new Zend_Locale();
+            $locale = new Zend_Locale($locale);
         }
 
         $locale = (string) $locale;

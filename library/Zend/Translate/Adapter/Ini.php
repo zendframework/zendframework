@@ -66,7 +66,7 @@ class Zend_Translate_Adapter_Ini extends Zend_Translate_Adapter
             throw new Zend_Translate_Exception("Ini file '".$data."' not found");
         }
 
-        $inidata                   = parse_ini_file($data, false);
+        $inidata = parse_ini_file($data, false);
         if (!isset($this->_data[$locale])) {
             $this->_data[$locale] = array();
         }

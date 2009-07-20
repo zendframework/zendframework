@@ -538,6 +538,9 @@
         <xi:include href="module_specs/Zend_Translate-Introduction.xml" />
         <xi:include href="module_specs/Zend_Translate-Adapters.xml" />
         <xi:include href="module_specs/Zend_Translate-Using.xml" />
+        <xi:include href="module_specs/Zend_Translate-SourceCreation.xml" />
+        <xi:include href="module_specs/Zend_Translate-Additional.xml" />
+        <xi:include href="module_specs/Zend_Translate-Plurals.xml" />
         <xi:include href="module_specs/Zend_Translate-Migration.xml" />
     </chapter>
     <chapter id="zend.uri">

@@ -384,6 +384,182 @@ class Zend_TranslateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Tests if cached options are read from the cache for a new instance
+     */
+    public function testGetOptionsFromCache()
+    {
+        require_once 'Zend/Cache.php';
+        $cache = Zend_Cache::factory('Core', 'File',
+            array('lifetime' => 120, 'automatic_serialization' => true),
+            array('cache_dir' => dirname(__FILE__) . '/_files/'));
+        Zend_Translate::setCache($cache);
+
+        $lang = new Zend_Translate(Zend_Translate::AN_CSV, dirname(__FILE__) . '/Translate/Adapter/_files', 'en', array('delimiter' => ','));
+        $lang->setOptions(array('logMessage' => 'test'));
+        $this->assertEquals('test', $lang->getOptions('logMessage'));
+        unset($lang);
+
+        $lang2 = new Zend_Translate(Zend_Translate::AN_CSV, dirname(__FILE__) . '/Translate/Adapter/_files', 'en', array('delimiter' => ','));
+        $this->assertEquals('test', $lang2->getOptions('logMessage'));
+    }
+
+    /**
+     * Tests if setting locale as options sets locale
+     */
+    public function testSetLocaleAsOption()
+    {
+        $lang = new Zend_Translate(Zend_Translate::AN_ARRAY, array('msg1' => 'Message 1'), 'en');
+        $lang->addTranslation(array('msg1' => 'Message 1 (ru)'), 'ru');
+        $lang->setOptions(array('locale' => 'ru'));
+        $this->assertEquals('ru', $lang->getLocale());
+        $lang->setOptions(array('locale' => 'en'));
+        $this->assertEquals('en', $lang->getLocale());
+    }
+
+    /**
+     * Tests getting null returns all options
+     */
+    public function testGettingAllOptions()
+    {
+        $lang = new Zend_Translate(Zend_Translate::AN_ARRAY, array('msg1' => 'Message 1'), 'en');
+        $this->assertTrue(is_array($lang->getOptions()));
+    }
+
+    /**
+     * Tests if setting locale as options sets locale
+     */
+    public function testGettingUnknownOption()
+    {
+        $lang = new Zend_Translate(Zend_Translate::AN_ARRAY, array('msg1' => 'Message 1'), 'en');
+        $this->assertEquals(null, $lang->getOptions('unknown'));
+    }
+
+    /**
+     * Tests getting of all message ids works
+     */
+    public function testGettingAllMessageIds()
+    {
+        $lang = new Zend_Translate(Zend_Translate::AN_ARRAY, array('msg1' => 'Message 1', 'msg2' => 'Message 2'), 'en');
+        $lang->addTranslation(array('msg1' => 'Message 1 (ru)'), 'ru');
+        $this->assertEquals(array('msg1'), $lang->getMessageIds());
+        $this->assertEquals(array('msg1', 'msg2'), $lang->getMessageIds('en'));
+    }
+
+    /**
+     * Tests getting of all messages
+     */
+    public function testGettingAllMessages()
+    {
+        $lang = new Zend_Translate(Zend_Translate::AN_ARRAY, array('msg1' => 'Message 1', 'msg2' => 'Message 2'), 'en');
+        $lang->addTranslation(array('msg1' => 'Message 1 (ru)'), 'ru');
+        $this->assertEquals(array('msg1' => 'Message 1 (ru)'), $lang->getMessages());
+        $this->assertEquals(
+            array('msg1' => 'Message 1', 'msg2' => 'Message 2'),
+            $lang->getMessages('en'));
+        $this->assertEquals(
+            array(
+                'en' => array('msg1' => 'Message 1', 'msg2' => 'Message 2'),
+                'ru' => array('msg1' => 'Message 1 (ru)')),
+            $lang->getMessages('all'));
+    }
+
+    /**
+     * Tests getting default plurals
+     */
+    public function testGettingPlurals()
+    {
+        $lang = new Zend_Translate(
+            Zend_Translate::AN_ARRAY,
+            array('singular' =>
+                array('plural_0 (en)',
+                    'plural_1 (en)',
+                    'plural_2 (en)',
+                    'plural_3 (en)'),
+                'plural' => ''), 'en'
+        );
+
+        $this->assertEquals('plural_0 (en)', $lang->translate(array('singular', 'plural', 1)));
+        $this->assertEquals('plural_1 (en)', $lang->translate(array('singular', 'plural', 2)));
+
+        $this->assertEquals('plural_0 (en)', $lang->plural('singular', 'plural', 1));
+        $this->assertEquals('plural_1 (en)', $lang->plural('singular', 'plural', 2));
+    }
+
+    /**
+     * Tests getting plurals from lowered locale
+     */
+    public function testGettingPluralsFromLoweredLocale()
+    {
+        $lang = new Zend_Translate(
+            Zend_Translate::AN_ARRAY,
+            array('singular' =>
+                array('plural_0 (en)',
+                    'plural_1 (en)',
+                    'plural_2 (en)',
+                    'plural_3 (en)'),
+                'plural' => ''), 'en'
+        );
+        $lang->addTranslation(array('msg1' => 'Message 1 (ru)'), 'en_US');
+        $lang->setLocale('en_US');
+
+        $this->assertEquals('plural_0 (en)', $lang->translate(array('singular', 'plural', 1)));
+        $this->assertEquals('plural_0 (en)', $lang->plural('singular', 'plural', 1));
+    }
+
+    /**
+     * Tests getting plurals from lowered locale
+     */
+    public function testGettingPluralsFromUnknownLocale()
+    {
+        $lang = new Zend_Translate(
+            Zend_Translate::AN_ARRAY,
+            array('singular' =>
+                array('plural_0 (en)',
+                    'plural_1 (en)',
+                    'plural_2 (en)',
+                    'plural_3 (en)'),
+                'plural' => ''), 'en'
+        );
+
+        $this->assertEquals('singular', $lang->translate(array('singular', 'plural', 1), 'ru'));
+        $this->assertEquals('singular', $lang->plural('singular', 'plural', 1, 'ru'));
+        $this->assertEquals('plural', $lang->translate(array('singular', 'plural', 'plural2', 2, 'en'), 'ru'));
+        $this->assertEquals('plural', $lang->plural('singular', 'plural', 2, 'ru'));
+    }
+
+    public function testPluralsWithGettext()
+    {
+        $lang = new Zend_Translate(Zend_Translate::AN_GETTEXT , dirname(__FILE__) . '/Translate/Adapter/_files/translation_en.mo', 'en');
+
+        $this->assertEquals('Message 5 (en) Plural 0', $lang->translate(array('Message 5', 'Message 5 Plural', 1)));
+        $this->assertEquals('Message 5 (en) Plural 0', $lang->plural('Message 5', 'Message 5 Plural', 1));
+        $this->assertEquals('Message 5 (en) Plural 1', $lang->translate(array('Message 5', 'Message 5 Plural', 2)));
+        $this->assertEquals('Message 5 (en) Plural 1', $lang->plural('Message 5', 'Message 5 Plural', 2));
+    }
+
+    public function testPluralsWithCsv()
+    {
+        $lang = new Zend_Translate(Zend_Translate::AN_CSV , dirname(__FILE__) . '/Translate/Adapter/_files/translation_en.csv', 'en');
+
+        $this->assertEquals('Message 6 (en) Plural 0', $lang->translate(array('Message 6', 'Message 6 Plural1', 1)));
+        $this->assertEquals('Message 6 (en) Plural 0', $lang->plural('Message 6', 'Message 6 Plural1', 1));
+        $this->assertEquals('Message 6 (en) Plural 1', $lang->translate(array('Message 6', 'Message 6 Plural1', 2)));
+        $this->assertEquals('Message 6 (en) Plural 1', $lang->plural('Message 6', 'Message 6 Plural1', 2));
+    }
+
+    /**
+     * ZF-6671
+     */
+    public function testAddTranslationAfterwards()
+    {
+        $lang = new Zend_Translate(Zend_Translate::AN_ARRAY, array('msg1' => 'Message 1'), 'en');
+        $this->assertEquals('Message 1', $lang->_('msg1'));
+
+        $lang->addTranslation(array('msg1' => 'Message 1 (en)'), 'en');
+        $this->assertEquals('Message 1 (en)', $lang->_('msg1'));
+    }
+
+    /**
      * Ignores a raised PHP error when in effect, but throws a flag to indicate an error occurred
      *
      * @param  integer $errno

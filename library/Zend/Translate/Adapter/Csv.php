@@ -77,11 +77,16 @@ class Zend_Translate_Adapter_Csv extends Zend_Translate_Adapter
                 continue;
             }
 
-            if (isset($data[1]) !== true) {
+            if (!isset($data[1])) {
                 continue;
             }
 
-            $this->_data[$locale][$data[0]] = $data[1];
+            if (count($data) == 2) {
+                $this->_data[$locale][$data[0]] = $data[1];
+            } else {
+                $singular = array_shift($data);
+                $this->_data[$locale][$singular] = $data;
+            }
         }
 
         return $this->_data;

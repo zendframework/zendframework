@@ -61,9 +61,7 @@ abstract class Zend_Cache_Backend_ZendServer extends Zend_Cache_Backend implemen
     /**
      * Fetch data
      *
-     * @var mixed  $data        Object to store
      * @var string $id          Cache id
-     * @var int    $timeToLive  Time to live in seconds
      * @throws Zend_Cache_Exception
      */
     abstract protected function _fetch($id);

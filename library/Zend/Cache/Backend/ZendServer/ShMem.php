@@ -72,9 +72,7 @@ class Zend_Cache_Backend_ZendServer_ShMem extends Zend_Cache_Backend_ZendServer 
     /**
      * Fetch data
      *
-     * @var mixed  $data        Object to store
      * @var string $id          Cache id
-     * @var int    $timeToLive  Time to live in seconds
      */
     protected function _fetch($id)
     {

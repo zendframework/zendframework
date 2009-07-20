@@ -72,9 +72,7 @@ class Zend_Cache_Backend_ZendServer_Disk extends Zend_Cache_Backend_ZendServer i
     /**
      * Fetch data
      *
-     * @var mixed  $data        Object to store
      * @var string $id          Cache id
-     * @var int    $timeToLive  Time to live in seconds
      */
     protected function _fetch($id)
     {

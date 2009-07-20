@@ -366,4 +366,36 @@ class Zend_Ldap_CanonTest extends PHPUnit_Framework_TestCase
             Zend_Ldap::ACCTNAME_FORM_USERNAME));
 
     }
+
+    /**
+     * ZF-4495
+     */
+    public function testSpecialCharacterInUsername()
+    {
+        $options = $this->_options;
+        $options['accountDomainName'] = 'example.com';
+        $options['accountDomainNameShort'] = 'EXAMPLE';
+        $ldap = new Zend_Ldap($options);
+
+        $this->assertEquals('schäfer', $ldap->getCanonicalAccountName('SCHÄFER@example.com',
+            Zend_Ldap::ACCTNAME_FORM_USERNAME));
+        $this->assertEquals('schäfer', $ldap->getCanonicalAccountName('EXAMPLE\SCHÄFER',
+            Zend_Ldap::ACCTNAME_FORM_USERNAME));
+        $this->assertEquals('schäfer', $ldap->getCanonicalAccountName('SCHÄFER',
+            Zend_Ldap::ACCTNAME_FORM_USERNAME));
+
+        $this->assertEquals('schäfer@example.com', $ldap->getCanonicalAccountName('SCHÄFER@example.com',
+            Zend_Ldap::ACCTNAME_FORM_PRINCIPAL));
+        $this->assertEquals('schäfer@example.com', $ldap->getCanonicalAccountName('EXAMPLE\SCHÄFER',
+            Zend_Ldap::ACCTNAME_FORM_PRINCIPAL));
+        $this->assertEquals('schäfer@example.com', $ldap->getCanonicalAccountName('SCHÄFER',
+            Zend_Ldap::ACCTNAME_FORM_PRINCIPAL));
+
+        $this->assertEquals('EXAMPLE\schäfer', $ldap->getCanonicalAccountName('SCHÄFER@example.com',
+            Zend_Ldap::ACCTNAME_FORM_BACKSLASH));
+        $this->assertEquals('EXAMPLE\schäfer', $ldap->getCanonicalAccountName('EXAMPLE\SCHÄFER',
+            Zend_Ldap::ACCTNAME_FORM_BACKSLASH));
+        $this->assertEquals('EXAMPLE\schäfer', $ldap->getCanonicalAccountName('SCHÄFER',
+            Zend_Ldap::ACCTNAME_FORM_BACKSLASH));
+    }
 }

@@ -551,7 +551,11 @@ class Zend_Ldap
             throw new Zend_Ldap_Exception(null, "Invalid account name syntax: $acctname");
         }
 
-        $uname = strtolower($uname);
+        if (function_exists('mb_strtolower')) {
+            $uname = mb_strtolower($uname, 'UTF-8');
+        } else {
+            $uname = strtolower($uname);
+        }
 
         if ($form === 0) {
             $form = $this->_getAccountCanonicalForm();

@@ -341,4 +341,14 @@ class Zend_Validate_HostnameTest extends PHPUnit_Framework_TestCase
     {
         $this->assertFalse($this->_validator->isValid(array(1 => 1)));
     }
+
+    /**
+     * @ZF-7323
+     */
+    public function testLatinSpecialChars()
+    {
+        $this->assertFalse($this->_validator->isValid('place@yah&oo.com'));
+        $this->assertFalse($this->_validator->isValid('place@y*ahoo.com'));
+        $this->assertFalse($this->_validator->isValid('ya#hoo'));
+    }
 }

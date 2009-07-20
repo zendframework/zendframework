@@ -77,8 +77,8 @@ class Zend_Db_Table_Definition
     }
     
     /**
-     * @var string $tableName
-     * @var array  $tableConfig
+     * @param string $tableName
+     * @param array  $tableConfig
      * @return Zend_Db_Table_Definition
      */
     public function setTableConfig($tableName, array $tableConfig)

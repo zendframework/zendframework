@@ -74,5 +74,26 @@ $client->setFileUpload('file2.txt', 'userfile[]', 'some other data', 'applicatio
                 and as such should be noted. 
             </para>
         </sect3>
+        
+        <sect3 id="zend.http.client.migration.tozf19.getparamsrecursize">
+            <title>Deprecation of Zend_Http_Client::_getParametersRecursive()</title>
+
+            <para>
+                Starting from version 1.9, the protected method <classname>_getParametersRecursive()</classname>
+                is no longer used by <classname>Zend_Http_Client</classname> and is deprecated. 
+                Using it will cause an E_NOTICE message to be emitted by PHP. 
+            </para>
+            
+            <para>
+                If you subclass <classname>Zend_Http_Client</classname> and call this method, you
+                should look into using the <classname>Zend_Http_Client::_flattenParametersArray()</classname>
+                static method instead. 
+            </para>
+            
+            <para>
+                Again, since this <classname>_getParametersRecursive</classname> is a protected method,
+                this change will only affect users who subclass <classname>Zend_Http_Client</classname>. 
+            </para>
+        </sect3>
     </sect2>
 </sect1>

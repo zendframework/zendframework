@@ -336,6 +336,46 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
         $adapterCfg = $this->getObjectAttribute($adapter, 'config');
         $this->assertEquals('value2', $adapterCfg['param']);
     }
+    
+    /**
+     * Test that POST data with mutli-dimentional array is properly encoded as 
+     * multipart/form-data
+     * 
+     */
+    public function testFormDataEncodingWithMultiArrayZF7038()
+    {
+        require_once 'Zend/Http/Client/Adapter/Test.php';
+        $adapter = new Zend_Http_Client_Adapter_Test();
+        
+        $this->_client->setAdapter($adapter);
+        $this->_client->setUri('http://example.com');
+        $this->_client->setEncType(Zend_Http_Client::ENC_FORMDATA);
+        
+        $this->_client->setParameterPost('test', array(
+            'v0.1',
+            'v0.2',
+            'k1' => 'v1.0',
+            'k2' => array(
+                'v2.1',
+                'k2.1' => 'v2.1.0'
+            )
+        ));
+        
+        $this->_client->request('POST');
+        
+        $expectedLines = file(dirname(__FILE__) . '/_files/ZF7038-multipartarrayrequest.txt');
+        $gotLines = explode("\n", $this->_client->getLastRequest());
+        
+        $this->assertEquals(count($expectedLines), count($gotLines));
+        
+        while (($expected = array_shift($expectedLines)) && 
+               ($got = array_shift($gotLines))) {
+
+            $expected = trim($expected);
+            $got = trim($got);
+            $this->assertRegExp("/^$expected$/", $got);
+        }
+    }
 
     /**
      * Data providers 

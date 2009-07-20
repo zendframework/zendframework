@@ -70,13 +70,28 @@ class Zend_Http_Client_SocketTest extends PHPUnit_Framework_TestCase
 
             $this->baseuri = TESTS_ZEND_HTTP_CLIENT_BASEURI;
             if (substr($this->baseuri, -1) != '/') $this->baseuri .= '/';
-            $uri = $this->baseuri . $this->getName() . '.php';
+            
+            $name = $this->getName();
+            if (($pos = strpos($name, ' ')) !== false) {
+                $name = substr($name, 0, $pos);
+            }
+            
+            $uri = $this->baseuri . $name . '.php'; 
             $this->client = new Zend_Http_Client($uri, $this->config);
 
         } else {
             // Skip tests
-                        $this->markTestSkipped("Zend_Http_Client dynamic tests are not enabled in TestConfiguration.php");
+            $this->markTestSkipped("Zend_Http_Client dynamic tests are not enabled in TestConfiguration.php");
         }
+    }
+    
+    /**
+     * Clean up the test environment
+     * 
+     */
+    protected function tearDown()
+    {
+        $this->client = null;
     }
 
     /**
@@ -180,24 +195,19 @@ class Zend_Http_Client_SocketTest extends PHPUnit_Framework_TestCase
         $qstr = 'foo=bar&foo=baz';
         $this->client->setUri($this->baseuri . 'testGetData.php?' . $qstr);
         $res = $this->client->request('GET');
-        $this->assertContains($qstr, $this->client->getLastRequest(), 'Request is expected to contain the entire query string');
+        $this->assertContains($qstr, $this->client->getLastRequest(), 
+            'Request is expected to contain the entire query string');
     }
 
     /**
      * Test we can properly send POST parameters with
      * application/x-www-form-urlencoded content type
      *
+     * @dataProvider parameterArrayProvider
      */
-    public function testPostDataUrlEncoded()
+    public function testPostDataUrlEncoded($params)
     {
         $this->client->setUri($this->baseuri . 'testPostData.php');
-        $params = array(
-            'quest' => 'To seek the holy grail',
-            'YourMother' => 'Was a hamster',
-            'specialChars' => '<>$+ &?=[]^%',
-            'array' => array('firstItem', 'secondItem', '3rdItem')
-        );
-
         $this->client->setEncType(Zend_Http_Client::ENC_URLENCODED);
         $this->client->setParameterPost($params);
         $res = $this->client->request('POST');
@@ -208,17 +218,11 @@ class Zend_Http_Client_SocketTest extends PHPUnit_Framework_TestCase
      * Test we can properly send POST parameters with
      * multipart/form-data content type
      *
+     * @dataProvider parameterArrayProvider
      */
-    public function testPostDataMultipart()
+    public function testPostDataMultipart($params)
     {
         $this->client->setUri($this->baseuri . 'testPostData.php');
-        $params = array(
-            'quest' => 'To seek the holy grail',
-            'YourMother' => 'Was a hamster',
-            'specialChars' => '<>$+ &?=[]^%',
-            'array' => array('firstItem', 'secondItem', '3rdItem')
-        );
-
         $this->client->setEncType(Zend_Http_Client::ENC_FORMDATA);
         $this->client->setParameterPost($params);
         $res = $this->client->request('POST');
@@ -827,5 +831,46 @@ class Zend_Http_Client_SocketTest extends PHPUnit_Framework_TestCase
     {
         return file_get_contents(dirname(realpath(__FILE__)) . DIRECTORY_SEPARATOR .
            '_files' . DIRECTORY_SEPARATOR . $file);
+    }
+
+    /**
+     * Data provider for complex, nesting parameter arrays
+     * 
+     * @return array
+     */
+    static public function parameterArrayProvider()
+    {
+        return array(
+            array(
+                array(
+                    'quest' => 'To seek the holy grail',
+                    'YourMother' => 'Was a hamster',
+                    'specialChars' => '<>$+ &?=[]^%',
+                    'array' => array('firstItem', 'secondItem', '3rdItem')
+                )
+            ),
+            
+            array(
+                array(
+                    'someData' => array(
+                        "1", 
+                        "2", 
+                        'key' => 'value',
+                        'nesting' => array(
+                            'a' => 'AAA',
+                            'b' => 'BBB'
+                        )
+                    ),
+                    'someOtherData' => array('foo', 'bar')
+                )
+            ),
+            
+            array(
+                array(
+                    'foo1' => 'bar',
+                    'foo2' => array('baz', 'w00t')
+                ) 
+            )
+        );
     }
 }

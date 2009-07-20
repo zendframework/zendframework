@@ -1057,7 +1057,7 @@ class Zend_Http_Client
                     $this->setHeaders(self::CONTENT_TYPE, self::ENC_FORMDATA . "; boundary={$boundary}");
 
                     // Get POST parameters and encode them
-                    $params = $this->_getParametersRecursive($this->paramsPost);
+                    $params = self::_flattenParametersArray($this->paramsPost);
                     foreach ($params as $pp) {
                         $body .= self::encodeFormData($boundary, $pp[0], $pp[1]);
                     }
@@ -1102,12 +1102,21 @@ class Zend_Http_Client
      * necessarily unique. If one of the parameters in as array, it will also
      * add a [] suffix to the key.
      *
-     * @param array $parray The parameters array
-     * @param bool $urlencode Whether to urlencode the name and value
+     * This method is deprecated since Zend Framework 1.9 in favour of 
+     * self::_flattenParametersArray() and will be dropped in 2.0
+     * 
+     * @deprecated since 1.9
+     * 
+     * @param  array $parray    The parameters array
+     * @param  bool  $urlencode Whether to urlencode the name and value
      * @return array
      */
     protected function _getParametersRecursive($parray, $urlencode = false)
     {
+        // Issue a deprecated notice
+        trigger_error("The " .  __METHOD__ . " method is deprecated and will be dropped in 2.0.", 
+            E_USER_NOTICE);
+            
         if (! is_array($parray)) {
             return $parray;
         }
@@ -1248,4 +1257,51 @@ class Zend_Http_Client
 
         return $authHeader;
     }
+
+    /**
+     * Convert an array of parameters into a flat array of (key, value) pairs
+     * 
+     * Will flatten a potentially multi-dimentional array of parameters (such 
+     * as POST parameters) into a flat array of (key, value) paris. In case 
+     * of multi-dimentional arrays, square brackets ([]) will be added to the
+     * key to indicate an array. 
+     * 
+     * @since  1.9
+     * 
+     * @param  array  $parray
+     * @param  string $prefix
+     * @return array
+     */
+    static protected function _flattenParametersArray($parray, $prefix = null)
+    {
+        if (! is_array($parray)) {
+            return $parray;
+        }
+        
+        $parameters = array();
+        
+        foreach($parray as $name => $value) {
+            
+            // Calculate array key
+            if ($prefix) {
+                if (is_int($name)) {
+                    $key = $prefix . '[]';
+                } else {
+                    $key = $prefix . "[$name]";
+                }
+            } else {
+                $key = $name;
+            }
+            
+            if (is_array($value)) {
+                $parameters = array_merge($parameters, self::_flattenParametersArray($value, $key));
+                
+            } else {
+                $parameters[] = array($key, $value);
+            }
+        }
+        
+        return $parameters;
+    }
+    
 }

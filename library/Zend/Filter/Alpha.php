@@ -40,7 +40,7 @@ class Zend_Filter_Alpha implements Zend_Filter_Interface
      * Whether to allow white space characters; off by default
      *
      * @var boolean
-     * @depreciated
+     * @deprecated
      */
     public $allowWhiteSpace;
 

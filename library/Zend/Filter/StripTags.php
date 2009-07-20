@@ -46,7 +46,7 @@ class Zend_Filter_StripTags implements Zend_Filter_Interface
      * If false (the default), then comments are removed from the input string.
      *
      * @var boolean
-     * @depreciated
+     * @deprecated
      */
     public $commentsAllowed;
 

@@ -53,9 +53,9 @@ class Zend_Cache_Backend_ZendServer_Disk extends Zend_Cache_Backend_ZendServer i
 	/**
      * Store data
      *
-     * @var mixed  $data        Object to store
-     * @var string $id          Cache id
-     * @var int    $timeToLive  Time to live in seconds
+     * @param mixed  $data        Object to store
+     * @param string $id          Cache id
+     * @param int    $timeToLive  Time to live in seconds
      * @return boolean true if no problem
      */
     protected function _store($data, $id, $timeToLive)
@@ -72,7 +72,7 @@ class Zend_Cache_Backend_ZendServer_Disk extends Zend_Cache_Backend_ZendServer i
     /**
      * Fetch data
      *
-     * @var string $id          Cache id
+     * @param string $id          Cache id
      */
     protected function _fetch($id)
     {
@@ -82,7 +82,7 @@ class Zend_Cache_Backend_ZendServer_Disk extends Zend_Cache_Backend_ZendServer i
     /**
      * Unset data
      *
-     * @var string $id          Cache id
+     * @param string $id          Cache id
      * @return boolean true if no problem
      */
     protected function _unset($id)

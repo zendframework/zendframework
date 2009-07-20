@@ -51,9 +51,9 @@ abstract class Zend_Cache_Backend_ZendServer extends Zend_Cache_Backend implemen
     /**
      * Store data
      *
-     * @var mixed  $data        Object to store
-     * @var string $id          Cache id
-     * @var int    $timeToLive  Time to live in seconds
+     * @param mixed  $data        Object to store
+     * @param string $id          Cache id
+     * @param int    $timeToLive  Time to live in seconds
      * @throws Zend_Cache_Exception
      */
     abstract protected function _store($data, $id, $timeToLive);
@@ -61,7 +61,7 @@ abstract class Zend_Cache_Backend_ZendServer extends Zend_Cache_Backend implemen
     /**
      * Fetch data
      *
-     * @var string $id          Cache id
+     * @param string $id          Cache id
      * @throws Zend_Cache_Exception
      */
     abstract protected function _fetch($id);
@@ -69,7 +69,7 @@ abstract class Zend_Cache_Backend_ZendServer extends Zend_Cache_Backend implemen
     /**
      * Unset data
      *
-     * @var string $id          Cache id
+     * @param string $id          Cache id
      */
     abstract protected function _unset($id);
 

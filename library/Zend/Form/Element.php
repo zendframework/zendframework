@@ -1860,7 +1860,7 @@ class Zend_Form_Element implements Zend_Validate_Interface
      * Remove a single decorator
      *
      * @param  string $name
-     * @return bool
+     * @return Zend_Form_Element
      */
     public function removeDecorator($name)
     {

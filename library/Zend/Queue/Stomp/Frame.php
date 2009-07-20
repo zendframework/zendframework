@@ -14,24 +14,26 @@
  *
  * @category   Zend
  * @package    Zend_Queue
- * @subpackage Adapter
+ * @subpackage Stomp
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id: Stomp.php 14504 2009-03-27 05:32:18Z danlo $
  */
 
 /**
+ * @see Zend_Queue_Stomp_FrameInterface
+ */
+require_once 'Zend/Queue/Stomp/FrameInterface.php';
+
+/**
  * This class represents a Stomp Frame
  *
  * @category   Zend
  * @package    Zend_Queue
- * @subpackage Adapter
+ * @subpackage Stomp
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
-require_once 'Zend/Queue/Stomp/FrameInterface.php';
-
 class Zend_Queue_Stomp_Frame
     implements Zend_Queue_Stomp_FrameInterface
 {

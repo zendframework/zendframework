@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Queue
- * @subpackage Adapter
+ * @subpackage Stomp
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id: Stomp.php 14504 2009-03-27 05:32:18Z danlo $
@@ -30,7 +30,7 @@ require_once 'Zend/Queue/Stomp/Client/ConnectionInterface.php';
  *
  * @category   Zend
  * @package    Zend_Queue
- * @subpackage Adapter
+ * @subpackage Stomp
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -101,8 +101,8 @@ class Zend_Queue_Stomp_Client_Connection
 
     /**
      * Close connection
-     * 
-     * @param  boolean $destructor 
+     *
+     * @param  boolean $destructor
      * @return void
      */
     public function close($destructor = false)
@@ -138,8 +138,7 @@ class Zend_Queue_Stomp_Client_Connection
 
     /**
      * Write a frame to the stomp server
-     *
-     * @example $response = $client->write($frame)->read();
+     * $response = $client->write($frame)->read();
      *
      * @param Zend_Queue_Stom_FrameInterface $frame
      * @return $this
@@ -170,10 +169,10 @@ class Zend_Queue_Stomp_Client_Connection
         $except = null;
 
         return stream_select(
-            $read, 
-            $write, 
-            $except, 
-            $this->_options['timeout_sec'], 
+            $read,
+            $write,
+            $except,
+            $this->_options['timeout_sec'],
             $this->_options['timeout_usec']
         ) == 1;
         // see http://us.php.net/manual/en/function.stream-select.php

@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Queue
- * @subpackage Adapter
+ * @subpackage Stomp
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id: Stomp.php 14504 2009-03-27 05:32:18Z danlo $
@@ -46,12 +46,12 @@ class Zend_Queue_Stomp_Client
      * @param integer port
      */
     public function __construct(
-        $scheme = null, $host = null, $port = null, 
-        $connectionClass = 'Zend_Queue_Stomp_Client_Connection', 
+        $scheme = null, $host = null, $port = null,
+        $connectionClass = 'Zend_Queue_Stomp_Client_Connection',
         $frameClass = 'Zend_Queue_Stomp_Frame'
     ) {
-        if (($scheme !== null) 
-            && ($host !== null) 
+        if (($scheme !== null)
+            && ($host !== null)
             && ($port !== null)
         ) {
             $this->addConnection($scheme, $host, $port, $connectionClass);
@@ -61,7 +61,7 @@ class Zend_Queue_Stomp_Client
 
     /**
      * Shutdown
-     * 
+     *
      * @return void
      */
     public function __destruct()
@@ -74,7 +74,7 @@ class Zend_Queue_Stomp_Client
     /**
      * Add a connection to this client.
      *
-     * Attempts to add this class to the client.  Returns a boolean value 
+     * Attempts to add this class to the client.  Returns a boolean value
      * indicating success of operation.
      *
      * You cannot add more than 1 connection to the client at this time.
@@ -105,8 +105,8 @@ class Zend_Queue_Stomp_Client
 
     /**
      * Set client connection
-     * 
-     * @param Zend_Queue_Stomp_Client_ConnectionInterface $connection 
+     *
+     * @param Zend_Queue_Stomp_Client_ConnectionInterface $connection
      * @return void
      */
     public function setConnection(Zend_Queue_Stomp_Client_ConnectionInterface $connection)
@@ -117,7 +117,7 @@ class Zend_Queue_Stomp_Client
 
     /**
      * Get client connection
-     * 
+     *
      * @return Zend_Queue_Stomp_Client_ConnectionInterface|null
      */
     public function getConnection()

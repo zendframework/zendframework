@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Queue
- * @subpackage Adapter
+ * @subpackage Stomp
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id: Stomp.php 14504 2009-03-27 05:32:18Z danlo $
@@ -25,7 +25,7 @@
  *
  * @category   Zend
  * @package    Zend_Queue
- * @subpackage Adapter
+ * @subpackage Stomp
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -41,7 +41,7 @@ interface Zend_Queue_Stomp_Client_ConnectionInterface
     public function open($scheme, $host, $port);
 
     /**
-     * @param  boolean $destructor 
+     * @param  boolean $destructor
      * @return void
      */
     public function close($destructor = false);
@@ -56,8 +56,7 @@ interface Zend_Queue_Stomp_Client_ConnectionInterface
 
     /**
      * write a frame to the stomp server
-     *
-     * @example $response = $client->write($frame)->read();
+     * $response = $client->write($frame)->read();
      *
      * @param  Zend_Queue_Stomp_FrameInterface $frame
      * @return $this

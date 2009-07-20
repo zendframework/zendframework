@@ -326,8 +326,7 @@ class Zend_Queue_Adapter_Array extends Zend_Queue_Adapter_AdapterAbstract
 
     /**
      * returns underlying _data array
-     *
-     * @example $queue->getAdapter()->getData();
+     * $queue->getAdapter()->getData();
      *
      * @return $this;
      */
@@ -338,8 +337,7 @@ class Zend_Queue_Adapter_Array extends Zend_Queue_Adapter_AdapterAbstract
 
     /**
      * sets the underlying _data array
-     *
-     * @example $queue->getAdapter()->setData($data);
+     * $queue->getAdapter()->setData($data);
      *
      * @param $data array
      * @return $this;

@@ -209,6 +209,10 @@ abstract class Zend_Db_Adapter_Abstract
         if (!isset($config['charset'])) {
             $config['charset'] = null;
         }
+        
+        if (!isset($config['persistent'])) {
+            $config['persistent'] = false;
+        }
 
         $this->_config = array_merge($this->_config, $config);
         $this->_config['options'] = $options;

@@ -1716,14 +1716,30 @@ $db->closeConnection();
         <note>
             <title>Does Zend_Db Support Persistent Connections?</title>
             <para>
-                The usage of persistent connections is not supported
-                or encouraged in <classname>Zend_Db</classname>.
+                Yes, persistence is supported through the addition of
+                the <code>persistent</code> flag set to true in the
+                configuration (not driver_configuration) of an adapter
+                in <classname>Zend_Db</classname>.
             </para>
+            
+            <example id="zend.db.adapter.connecting.persistence.example">
+                <title>Using the Persitence Flag with the Oracle Adapter</title>
+                <programlisting language="php"><![CDATA[
+$db = Zend_Db::factory('Oracle', array(
+    'host'       => '127.0.0.1',
+    'username'   => 'webuser',
+    'password'   => 'xxxxxxxx',
+    'dbname'     => 'test',
+    'persistent' => true
+));
+]]></programlisting>
+            </example>
+            
             <para>
-                Using persistent connections can cause an excess of idle
-                connections on the RDBMS server, which causes more problems
-                than any performance gain you might achieve by reducing the
-                overhead of making connections.
+                Please note that using persistent connections can cause an 
+                excess of idle connections on the RDBMS server, which causes 
+                more problems than any performance gain you might achieve by 
+                reducing the overhead of making connections.
             </para>
             <para>
                 Database connections have state. That is, some objects in the
@@ -1733,6 +1749,10 @@ $db->closeConnection();
                 generated id value. If you use persistent connections, your
                 application could access invalid or privileged data that were
                 created in a previous PHP request.
+            </para>
+            <para>
+                Currently, only Oracle, DB2, and the PDO adapters (where
+                specified by PHP) support persistence in Zend_Db.
             </para>
         </note>
 

@@ -62,11 +62,12 @@ abstract class Zend_Db_Adapter_Pdo_Abstract extends Zend_Db_Adapter_Abstract
         // baseline of DSN parts
         $dsn = $this->_config;
 
-        // don't pass the username, password, and driver_options in the DSN
+        // don't pass the username, password, charset, persistent and driver_options in the DSN
         unset($dsn['username']);
         unset($dsn['password']);
         unset($dsn['options']);
         unset($dsn['charset']);
+        unset($dsn['persistent']);
         unset($dsn['driver_options']);
 
         // use all remaining parts in the DSN
@@ -114,6 +115,11 @@ abstract class Zend_Db_Adapter_Pdo_Abstract extends Zend_Db_Adapter_Abstract
         // create PDO connection
         $q = $this->_profiler->queryStart('connect', Zend_Db_Profiler::CONNECT);
 
+        // add the persistence flag if we find it in our config array
+        if (isset($this->_config['persistent']) && ($this->_config['persistent'] == true)) {
+            $this->_config['driver_options'][PDO::ATTR_PERSISTENT] = true;
+        }
+        
         try {
             $this->_connection = new PDO(
                 $dsn,

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16633 -->
+<!-- EN-Revision: 16831 -->
 <sect1 id="zend.ldap.ldif">
     <title>LDIFへ、または、からのLDAPデータシリアライズ</title>
     <sect2 id="zend.ldap.ldif.encode">
@@ -66,7 +66,7 @@ title;lang-en: Sales, Director
 
     </sect2>
 
-    <sect2 id="zend.ldap.ldif.encode">
+    <sect2 id="zend.ldap.ldif.decode">
         <title>LDIF文字列をLDAP項目に非シリアライズ化</title>
 
         <programlisting language="php"><![CDATA[

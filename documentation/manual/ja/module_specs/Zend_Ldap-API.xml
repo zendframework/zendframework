@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16825 -->
+<!-- EN-Revision: 16831 -->
 <sect1 id="zend.ldap.api" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>API概要</title>
 
@@ -185,13 +185,29 @@
             <para><emphasis>斜体</emphasis>のメソッド名は static メソッドです。</para>
         </note>
 
-    <xi:include href="Zend_Ldap-API-Ldap.xml" />
-    <xi:include href="Zend_Ldap-API-Ldap-Attribute.xml" />
-    <xi:include href="Zend_Ldap-API-Ldap-Dn.xml" />
-    <xi:include href="Zend_Ldap-API-Ldap-Filter.xml" />
-    <xi:include href="Zend_Ldap-API-Ldap-Node.xml" />
-    <xi:include href="Zend_Ldap-API-Ldap-Node-RootDse.xml" />
-    <xi:include href="Zend_Ldap-API-Ldap-Node-Schema.xml" />
-    <xi:include href="Zend_Ldap-API-Ldap-Ldif-Encoder.xml" />
+        <xi:include href="Zend_Ldap-API-Ldap.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_Ldap-API-Ldap.xml" /></xi:fallback>
+        </xi:include>
+        <xi:include href="Zend_Ldap-API-Ldap-Attribute.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_Ldap-API-Ldap-Attribute.xml" /></xi:fallback>
+        </xi:include>
+        <xi:include href="Zend_Ldap-API-Ldap-Dn.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_Ldap-API-Ldap-Dn.xml" /></xi:fallback>
+        </xi:include>
+        <xi:include href="Zend_Ldap-API-Ldap-Filter.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_Ldap-API-Ldap-Filter.xml" /></xi:fallback>
+        </xi:include>
+        <xi:include href="Zend_Ldap-API-Ldap-Node.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_Ldap-API-Ldap-Node.xml" /></xi:fallback>
+        </xi:include>
+        <xi:include href="Zend_Ldap-API-Ldap-Node-RootDse.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_Ldap-API-Ldap-Node-RootDse.xml" /></xi:fallback>
+        </xi:include>
+        <xi:include href="Zend_Ldap-API-Ldap-Node-Schema.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_Ldap-API-Ldap-Node-Schema.xml" /></xi:fallback>
+        </xi:include>
+        <xi:include href="Zend_Ldap-API-Ldap-Ldif-Encoder.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_Ldap-API-Ldap-Ldif-Encoder.xml" /></xi:fallback>
+        </xi:include>
     </sect2>
 </sect1>

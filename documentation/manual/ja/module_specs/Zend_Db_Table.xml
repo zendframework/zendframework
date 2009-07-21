@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16772 -->
+<!-- EN-Revision: 16831 -->
 <sect1 id="zend.db.table">
 
     <title>Zend_Db_Table</title>
@@ -28,32 +28,32 @@
 
     <sect2 id="zend.db.table.concrete">
         <title>Zend_Db_Table を具象クラスとして使用する方法</title>
-        
+
         <para>
             ZF 1.9 以降では、Zend_Db_Table のインスタンスを作成することができます。
             つまり、一つのテーブルに対して select、insert、update、delete
             などといった単純な操作を行うためだけにわざわざ基底クラスを継承して設定する必要がなくなるということです。
             以下に、もっとも単純な使用例を示します。
         </para>
-        
+
         <example id="zend.db.table.defining.concrete-instantiation.example1">
 
             <title>文字列で名前を指定するだけのテーブルクラスの宣言</title>
-        
+
                 <programlisting language="php"><![CDATA[
 Zend_Db_Table::setDefaultAdapter($dbAdapter);
 $bugTable = new Zend_Db_Table('bug');
 ]]></programlisting>
 
         </example>
-        
+
         <para>
             これが、もっとも単純な使用例です。
             以下で説明する Zend_Db_Table のオプションはまったく設定していません。
             具象クラスの使用例に加えてより複雑なリレーション機能を使いたくなったときは
             Zend_Db_Table_Definition のドキュメントを参照ください。
         </para>
-        
+
     </sect2>
 
     <sect2 id="zend.db.table.defining">
@@ -907,7 +907,7 @@ $rows = $table->fetchAll(
 
 // 単一の行を取得します
 $row = $table->fetchRow(
-    'bug_status = "NEW"', 
+    'bug_status = "NEW"',
     'bug_id ASC'
     );
 $row = $table->fetchRow(

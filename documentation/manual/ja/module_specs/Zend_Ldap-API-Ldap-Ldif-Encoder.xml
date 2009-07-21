@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16641 -->
+<!-- EN-Revision: 16831 -->
 <sect3 id="zend.ldap.api.reference.zend-ldap-ldif-encoder">
     <title>Zend_Ldif_Encoder</title>
 
@@ -36,22 +36,33 @@
                             <varlistentry>
                                 <term><code>'sort'</code></term>
                                 <listitem>
-                                <code>objectClass</code>に続く<code>dn</code>で、
-                                そして、アルファベット順に分類された他の属性全てに続けて
-                                与えられた属性を分類してください。
-                                デフォルトは <code>true</code> です。</listitem>
+                                    <para>
+                                        <code>objectClass</code>に続く<code>dn</code>で、
+                                        そして、アルファベット順に分類された他の属性全てに続けて
+                                        与えられた属性を分類してください。
+                                        デフォルトは <code>true</code> です。
+                                    </para>
+                                </listitem>
                             </varlistentry>
 
                             <varlistentry>
                                 <term><code>'version'</code></term>
-                                <listitem><acronym>LDIF</acronym> 形式バージョン。
-                                デフォルトは <code>1</code> です。</listitem>
+                                <listitem>
+                                    <para>
+                                        <acronym>LDIF</acronym> 形式バージョン。
+                                        デフォルトは <code>1</code> です。
+                                    </para>
+                                </listitem>
                             </varlistentry>
 
                             <varlistentry>
                                 <term><code>'wrap'</code></term>
-                                <listitem>行の長さ。<acronym>LDIF</acronym>仕様に従って、
-                                デフォルトは <code>78</code> です。</listitem>
+                                <listitem>
+                                <para>
+                                    行の長さ。<acronym>LDIF</acronym>仕様に従って、
+                                    デフォルトは <code>78</code> です。
+                                </para>
+                                </listitem>
                             </varlistentry>
                         </variablelist>
                     </entry>

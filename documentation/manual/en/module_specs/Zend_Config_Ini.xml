@@ -122,16 +122,16 @@ echo $config->database->params->dbname; // prints "dbname"
                         <itemizedlist>
                             <listitem>
                                 <para>
-                                    <property>allowModifications</property>: Set to
-                                    <constant>TRUE</constant> to allow
+                                    <emphasis><property>allowModifications</property></emphasis>:
+                                    Set to <constant>TRUE</constant> to allow
                                     subsequent modification of loaded file. Defaults to
                                     <constant>NULL</constant>
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    <property>nestSeparator</property>: Set to the character to be
-                                    used as the nest separator. Defaults to "."
+                                    <emphasis><property>nestSeparator</property></emphasis>: Set to
+                                    the character to be used as the nest separator. Defaults to "."
                                 </para>
                             </listitem>
                         </itemizedlist>

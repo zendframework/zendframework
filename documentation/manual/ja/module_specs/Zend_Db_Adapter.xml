@@ -304,7 +304,6 @@ $db = Zend_Db::factory($config->database);
                         これは RDBMS サーバの設定にあわせなければなりません。
                     </para>
                 </listitem>
-                </listitem>
                 <listitem>
                     <para>
                         <emphasis>charset</emphasis>:

@@ -265,14 +265,18 @@ class Zend_Wildfire_Channel_HttpHeaders extends Zend_Controller_Plugin_Abstract 
     {
         if (!$forceCheckRequest
             && !$this->_request
-            && !$this->_response) {
-        
+            && !$this->_response
+        ) {
             return true;
         }
 
-        return ($this->getResponse()->canSendHeaders() &&
-                preg_match_all('/\s?FirePHP\/([\.|\d]*)\s?/si',
-                               $this->getRequest()->getHeader('User-Agent'),$m));
+        return ($this->getResponse()->canSendHeaders() 
+                && preg_match_all(
+                    '/\s?FirePHP\/([\.|\d]*)\s?/si',
+                    $this->getRequest()->getHeader('User-Agent'),
+                    $m
+                )
+        );
     }
 
 

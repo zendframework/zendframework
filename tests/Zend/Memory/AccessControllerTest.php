@@ -57,22 +57,29 @@ class Zend_Memory_Container_AccessControllerTest extends PHPUnit_Framework_TestC
     public function setUp()
     {
         $tmpDir = sys_get_temp_dir() . '/zend_memory';
-        if (file_exists($tmpDir)) {
-            if (!rmdir($tmpDir)) {
-                $dir = new DirectoryIterator($tmpDir);
-                foreach ($dir as $file) {
-                    if (!$file->isDir()) {
-                        unlink($file->getPathname());
-                    }
-                }
-                if (!rmdir($tmpDir)) {
-                    throw new Exception('Unable to remove temporary directory ' . $tmpDir
-                                      . '; perhaps it has a nested structure?');
-                }
-            }
-        }
+        $this->_removeCacheDir($tmpDir);
         mkdir($tmpDir);
         $this->cacheDir = $tmpDir;
+    }
+
+    protected function _removeCacheDir($dir) 
+    {
+        if (!file_exists($dir)) {
+            return true;
+        }
+
+        if (!is_dir($dir) || is_link($dir)) {
+            return unlink($dir);
+        }
+
+        foreach (scandir($dir) as $item) {
+            if ($item == '.' || $item == '..') {
+                continue;
+            }
+            $this->_removeCacheDir($dir . '/' . $item);
+        }
+
+        return rmdir($dir);
     }
 
     /**

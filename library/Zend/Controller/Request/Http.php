@@ -499,7 +499,8 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
                 return $this;
             }
 
-            if (!strpos($requestUri, basename($baseUrl))) {
+            $basename = basename($baseUrl);
+            if (empty($basename) || !strpos($requestUri, $basename)) {
                 // no match whatsoever; set it blank
                 $this->_baseUrl = '';
                 return $this;
@@ -543,7 +544,9 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
     public function setBasePath($basePath = null)
     {
         if ($basePath === null) {
-            $filename = basename($_SERVER['SCRIPT_FILENAME']);
+            $filename = (isset($_SERVER['SCRIPT_FILENAME']))
+                      ? basename($_SERVER['SCRIPT_FILENAME'])
+                      : '';
 
             $baseUrl = $this->getBaseUrl();
             if (empty($baseUrl)) {

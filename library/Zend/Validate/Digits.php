@@ -35,9 +35,9 @@ require_once 'Zend/Validate/Abstract.php';
  */
 class Zend_Validate_Digits extends Zend_Validate_Abstract
 {
-    const INVALID      = 'digitsInvalid';
     const NOT_DIGITS   = 'notDigits';
     const STRING_EMPTY = 'stringEmpty';
+    const INVALID      = 'digitsInvalid';
 
     /**
      * Digits filter used for validation
@@ -52,9 +52,9 @@ class Zend_Validate_Digits extends Zend_Validate_Abstract
      * @var array
      */
     protected $_messageTemplates = array(
-        self::INVALID      => "Invalid type given, value should be string, integer or float",
         self::NOT_DIGITS   => "'%value%' contains not only digit characters",
-        self::STRING_EMPTY => "'%value%' is an empty string"
+        self::STRING_EMPTY => "'%value%' is an empty string",
+        self::INVALID      => "Invalid type given, value should be string, integer or float",
     );
 
     /**

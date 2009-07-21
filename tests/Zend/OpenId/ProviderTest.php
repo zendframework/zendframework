@@ -50,8 +50,9 @@ class Zend_OpenId_ProviderTest extends PHPUnit_Framework_TestCase
 
     private $_user;
 
-    public function __construct()
+    public function __construct($name = NULL, array $data = array(), $dataName = '')
     {
+        parent::__construct($name, $data, $dataName);
         $this->_user = new Zend_OpenId_Provider_User_Session();
     }
 

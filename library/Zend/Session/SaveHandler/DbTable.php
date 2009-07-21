@@ -49,7 +49,9 @@ require_once 'Zend/Config.php';
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Session_SaveHandler_DbTable extends Zend_Db_Table_Abstract implements Zend_Session_SaveHandler_Interface
+class Zend_Session_SaveHandler_DbTable 
+    extends Zend_Db_Table_Abstract 
+    implements Zend_Session_SaveHandler_Interface
 {
     const PRIMARY_ASSIGNMENT                   = 'primaryAssignment';
     const PRIMARY_ASSIGNMENT_SESSION_SAVE_PATH = 'sessionSavePath';

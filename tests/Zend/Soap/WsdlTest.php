@@ -464,8 +464,7 @@ class Zend_Soap_WsdlTest extends PHPUnit_Framework_TestCase
 
         ob_start();
         $wsdl->dump();
-        $wsdlDump = ob_get_contents();
-        ob_end_clean();
+        $wsdlDump = ob_get_clean();
 
         $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdlDump),
                             '<?xml version="1.0"?>'  .

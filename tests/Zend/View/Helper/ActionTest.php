@@ -45,10 +45,16 @@ class Zend_View_Helper_ActionTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
+        $this->_origServer = $_SERVER;
+        $_SERVER = array(
+            'SCRIPT_FILENAME' => __FILE__,
+            'PHP_SELF'        => __FILE__,
+        );
+
         $front = Zend_Controller_Front::getInstance();
         $front->resetInstance();
 
-        $this->request  = new Zend_Controller_Request_Http('http://framework.zend.com/foo');
+        $this->request  = new Zend_Controller_Request_Http('http://framework.zend.com/action-foo');
         $this->response = new Zend_Controller_Response_Http();
         $this->response->headersSentThrowsException = false;
         $front->setRequest($this->request)
@@ -69,6 +75,7 @@ class Zend_View_Helper_ActionTest extends PHPUnit_Framework_TestCase
     public function tearDown()
     {
         unset($this->request, $this->response, $this->helper);
+        $_SERVER = $this->_origServer;
     }
 
     /**
@@ -102,7 +109,7 @@ class Zend_View_Helper_ActionTest extends PHPUnit_Framework_TestCase
      */
     public function testResetObjectsClearsRequestVars()
     {
-        $this->helper->request->setParam('foo', 'bar');
+        $this->helper->request->setParam('foo', 'action-bar');
         $this->helper->resetObjects();
         $this->assertNull($this->helper->request->getParam('foo'));
     }
@@ -137,7 +144,7 @@ class Zend_View_Helper_ActionTest extends PHPUnit_Framework_TestCase
      */
     public function testActionReturnsContentFromDefaultModule()
     {
-        $value = $this->helper->action('bar', 'foo');
+        $value = $this->helper->action('bar', 'action-foo');
         $this->assertContains('In default module, FooController::barAction()', $value);
     }
 
@@ -155,7 +162,7 @@ class Zend_View_Helper_ActionTest extends PHPUnit_Framework_TestCase
      */
     public function testActionReturnsContentReflectingPassedParams()
     {
-        $value = $this->helper->action('baz', 'foo', null, array('bat' => 'This is my message'));
+        $value = $this->helper->action('baz', 'action-foo', null, array('bat' => 'This is my message'));
         $this->assertNotContains('BOGUS', $value, var_export($this->helper->request->getUserParams(), 1));
         $this->assertContains('This is my message', $value);
     }
@@ -165,7 +172,7 @@ class Zend_View_Helper_ActionTest extends PHPUnit_Framework_TestCase
      */
     public function testActionReturnsEmptyStringWhenForwardDetected()
     {
-        $value = $this->helper->action('forward', 'foo');
+        $value = $this->helper->action('forward', 'action-foo');
         $this->assertEquals('', $value);
     }
 
@@ -174,7 +181,7 @@ class Zend_View_Helper_ActionTest extends PHPUnit_Framework_TestCase
      */
     public function testActionReturnsEmptyStringWhenRedirectDetected()
     {
-        $value = $this->helper->action('redirect', 'foo');
+        $value = $this->helper->action('redirect', 'action-foo');
         $this->assertEquals('', $value);
     }
 
@@ -277,7 +284,7 @@ class Zend_View_Helper_ActionTest extends PHPUnit_Framework_TestCase
         // make sure noRender is false
         $this->assertFalse($viewRenderer->getNoRender());
         
-        $value = $this->helper->action('bar', 'foo');
+        $value = $this->helper->action('bar', 'action-foo');
         
         $viewRendererPostAction = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
         

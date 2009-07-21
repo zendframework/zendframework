@@ -56,6 +56,7 @@ class Zend_View_Helper_HeadMetaTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
+        $this->error = false;
         foreach (array(Zend_View_Helper_Placeholder_Registry::REGISTRY_KEY, 'Zend_View_Helper_Doctype') as $key) {
             if (Zend_Registry::isRegistered($key)) {
                 $registry = Zend_Registry::getInstance();
@@ -78,6 +79,11 @@ class Zend_View_Helper_HeadMetaTest extends PHPUnit_Framework_TestCase
     public function tearDown()
     {
         unset($this->helper);
+    }
+
+    public function handleErrors($errno, $errstr)
+    {
+        $this->error = $errstr;
     }
 
     public function testNamespaceRegisteredInPlaceholderRegistryAfterInstantiation()
@@ -283,10 +289,10 @@ class Zend_View_Helper_HeadMetaTest extends PHPUnit_Framework_TestCase
     public function testToStringWhenInvalidKeyProvidedShouldConvertThrownException()
     {
         $this->helper->headMeta('some-content', 'tag value', 'not allowed key');
+        set_error_handler(array($this, 'handleErrors'));
         $string = @$this->helper->toString();
         $this->assertEquals('', $string);
-        $errors = error_get_last();
-        $this->assertNotEquals(0, count($errors));
+        $this->assertTrue(is_string($this->error));
     }
 
     public function testHeadMetaHelperCreatesItemEntry()

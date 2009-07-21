@@ -37,6 +37,10 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
         $this->_origServer = $_SERVER;
         $_GET  = array();
         $_POST = array();
+        $_SERVER = array(
+            'SCRIPT_FILENAME' => __FILE__,
+            'PHP_SELF'        => __FILE__,
+        );
         $this->_request = new Zend_Controller_Request_Http('http://framework.zend.com/news/3?var1=val1&var2=val2#anchor');
     }
 
@@ -94,6 +98,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
                 break;
             }
         }
+        $_SERVER['REQUEST_TIME'] = date('Y-m-d H:i:s');
 
         $this->assertEquals('bar', $this->_request->foo);
         $this->assertEquals('val1', $this->_request->var1);
@@ -134,6 +139,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
                 break;
             }
         }
+        $_SERVER['REQUEST_TIME'] = date('Y-m-d H:i:s');
 
         $this->assertTrue(isset($this->_request->foo));
         $this->assertTrue(isset($this->_request->var1));

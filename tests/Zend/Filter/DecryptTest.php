@@ -146,12 +146,15 @@ d/fxzPfuO/bLpADozTAnYT9Hu3wPrQVLeAfCp0ojqH7DYg==
         $filter = new Zend_Filter_Decrypt(array('adapter' => 'Mcrypt', 'key' => 'testkey'));
         $filter->setVector('testvect');
         $this->assertEquals(
-            array('key' => 'testkey',
-                  'algorithm' => MCRYPT_BLOWFISH,
-                  'algorithm_directory' => '',
-                  'mode' => MCRYPT_MODE_CBC,
-                  'mode_directory' => '',
-                  'vector' => 'testvect'),
+            array(
+                'key'                 => 'testkey',
+                'algorithm'           => MCRYPT_BLOWFISH,
+                'algorithm_directory' => '',
+                'mode'                => MCRYPT_MODE_CBC,
+                'mode_directory'      => '',
+                'vector'              => 'testvect',
+                'salt'                => '',
+            ),
             $filter->getEncryption()
         );
     }
@@ -173,12 +176,15 @@ d/fxzPfuO/bLpADozTAnYT9Hu3wPrQVLeAfCp0ojqH7DYg==
             array('mode' => MCRYPT_MODE_ECB,
                   'algorithm' => MCRYPT_3DES));
         $this->assertEquals(
-            array('key' => 'testkey',
-                  'algorithm' => MCRYPT_3DES,
-                  'algorithm_directory' => '',
-                  'mode' => MCRYPT_MODE_ECB,
-                  'mode_directory' => '',
-                  'vector' => 'testvect'),
+            array(
+                'mode'                => MCRYPT_MODE_ECB,
+                'algorithm'           => MCRYPT_3DES,
+                'key'                 => 'testkey',
+                'algorithm_directory' => '',
+                'mode_directory'      => '',
+                'vector'              => 'testvect',
+                'salt'                => '',
+            ),
             $filter->getEncryption()
         );
     }

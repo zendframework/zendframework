@@ -333,7 +333,7 @@ class Zend_View_Helper_HeadMeta extends Zend_View_Helper_Placeholder_Container_S
         $this->getContainer()->ksort();
         try {
             foreach ($this as $item) {
-            $items[] = $this->itemToString($item);
+                $items[] = $this->itemToString($item);
             }
         } catch (Zend_View_Exception $e) {
             trigger_error($e->getMessage(), E_USER_WARNING);

@@ -111,13 +111,54 @@ class Zend_AllTests
 {
     public static function main()
     {
+        // Run buffered tests as a separate suite first
+        ob_start();
+        PHPUnit_TextUI_TestRunner::run(self::suiteBuffered());
+        if (ob_get_level()) {
+            ob_end_flush();
+        }
+
         PHPUnit_TextUI_TestRunner::run(self::suite());
     }
 
+    /**
+     * Buffered test suites
+     *
+     * These tests require no output be sent prior to running as they rely
+     * on internal PHP functions.
+     * 
+     * @return PHPUnit_Framework_TestSuite
+     */
+    public static function suiteBuffered()
+    {
+        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend - Buffered Test Suites');
+
+        // These tests require no output be sent prior to running as they rely 
+        // on internal PHP functions
+        $suite->addTestSuite('Zend_OpenIdTest');
+        $suite->addTest(Zend_OpenId_AllTests::suite());
+        $suite->addTest(Zend_Session_AllTests::suite());
+        $suite->addTest(Zend_Soap_AllTests::suite());
+
+        return $suite;
+    }
+
+    /**
+     * Regular suite
+     *
+     * All tests except those that require output buffering.
+     * 
+     * @return PHPUnit_Framework_TestSuite
+     */
     public static function suite()
     {
         $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend');
 
+        // Running this early to ensure that the test suite hasn't used too 
+        // much memory by the time it gets to this test.
+        $suite->addTest(Zend_Memory_AllTests::suite());
+
+        // Start remaining tests...
         $suite->addTestSuite('Zend_AclTest');
         $suite->addTest(Zend_Amf_AllTests::suite());
         $suite->addTest(Zend_Application_AllTests::suite());
@@ -154,11 +195,8 @@ class Zend_AllTests
         $suite->addTest(Zend_Log_AllTests::suite());
         $suite->addTestSuite('Zend_MailTest');
         $suite->addTest(Zend_Measure_AllTests::suite());
-        $suite->addTest(Zend_Memory_AllTests::suite());
         $suite->addTestSuite('Zend_MimeTest');
         $suite->addTest(Zend_Mime_AllTests::suite());
-        $suite->addTestSuite('Zend_OpenIdTest');
-        $suite->addTest(Zend_OpenId_AllTests::suite());
         $suite->addTest(Zend_Paginator_AllTests::suite());
         $suite->addTest(Zend_Pdf_AllTests::suite());
         $suite->addTestSuite('Zend_RegistryTest');
@@ -167,11 +205,6 @@ class Zend_AllTests
         $suite->addTest(Zend_Search_Lucene_AllTests::suite());
         $suite->addTest(Zend_Server_AllTests::suite());
         $suite->addTest(Zend_Service_AllTests::suite());
-// Commenting out temporarily; Zend_Session tests fail unless output buffering is enabled, 
-// but ob masks other issues, leads to large memory usage, and gives no 
-// feedback when segfaults happen.
-//        $suite->addTest(Zend_Session_AllTests::suite());
-        $suite->addTest(Zend_Soap_AllTests::suite());
         $suite->addTest(Zend_Tag_AllTests::suite());
         $suite->addTest(Zend_Test_AllTests::suite());
         $suite->addTest(Zend_Text_AllTests::suite());

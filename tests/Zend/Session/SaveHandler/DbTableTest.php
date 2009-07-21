@@ -117,8 +117,6 @@ class Zend_Session_SaveHandler_DbTableTest extends PHPUnit_Framework_TestCase
 
     public function testTableNameSchema()
     {
-        //this is thrown AFTER what we want to test...
-        $this->setExpectedException('Zend_Db_Statement_Exception');
         $config = $this->_saveHandlerTableConfig;
         $config['name'] = 'schema.session';
         $this->_usedSaveHandlers[] =

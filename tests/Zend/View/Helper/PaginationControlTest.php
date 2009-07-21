@@ -43,8 +43,8 @@ class Zend_View_Helper_PaginationControlTest extends PHPUnit_Framework_TestCase
     {
         $view = new Zend_View();
         $view->addBasePath(dirname(__FILE__) . '/_files');
-        $view->addHelperPath('Zend/View/Helper/', 'Zend_View_Helper');
         
+        Zend_View_Helper_PaginationControl::setDefaultViewPartial(null);
         $this->_viewHelper = new Zend_View_Helper_PaginationControl();
         $this->_viewHelper->setView($view);
         $this->_paginator = Zend_Paginator::factory(range(1, 101));

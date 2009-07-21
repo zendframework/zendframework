@@ -2,7 +2,7 @@
 /** Zend_Controller_Action */
 require_once 'Zend/Controller/Action.php';
 
-class FooController extends Zend_Controller_Action
+class ActionFooController extends Zend_Controller_Action
 {
     public function barAction()
     {

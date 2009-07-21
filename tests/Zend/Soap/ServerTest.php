@@ -905,8 +905,7 @@ class Zend_Soap_Server_TestLocalSoapClient extends SoapClient {
     function __doRequest($request, $location, $action, $version) {
         ob_start();
         $this->server->handle($request);
-        $response = ob_get_contents();
-        ob_end_clean();
+        $response = ob_get_clean();
 
         return $response;
     }

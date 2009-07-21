@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16281 -->
+<!-- EN-Revision: 16656 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.tool.framework.introduction">
     <title>Einführung</title>
@@ -7,11 +7,12 @@
     <para>
         <classname>Zend_Tool_Framework</classname> ist ein Framework für die Durchführung von
         üblichen Funktionalitäten wie die Erstellung von Projekt Scaffolds, Code Erzeugung, Index
-        Erzeugung für die Suche, und vielem mehr. Funktionalität kann über PHP Klassen geschrieben
-        und ausgeführt werden die über den <code>include_path</code> von PHP eingeworfen werden, und
-        bieten daher eine aussergewöhnliche Flexibilität der Implementation. Die Funktionalität
-        kann durch das Schreiben einer Implementation und/oder einers protokoll-spezifischen
-        Clients aufgerufen werden -- wir einen Consolen Client, XML-RPC, SOAP und viele mehr.
+        Erzeugung für die Suche, und vielem mehr. Funktionalität kann über <acronym>PHP</acronym>
+        Klassen geschrieben und ausgeführt werden die über den <property>include_path</property>
+        von <acronym>PHP</acronym> eingeworfen werden, und bieten daher eine aussergewöhnliche
+        Flexibilität der Implementation. Die Funktionalität kann durch das Schreiben einer
+        Implementation und/oder einers protokoll-spezifischen Clients aufgerufen werden -- wir
+        einen Consolen Client, <acronym>XML-RPC</acronym>, <acronym>SOAP</acronym> und viele mehr.
     </para>
 
     <para>
@@ -21,8 +22,8 @@
     <itemizedlist>
         <listitem>
             <para>
-                <code>Übliche Interfaces und Abstraktes</code> welche es Entwicklern erlauben
-                Funktionalitäten und Möglichkeiten zu erstellen die von Tool-Clients
+                <emphasis>Übliche Interfaces und Abstraktes</emphasis> welche es Entwicklern
+                erlauben Funktionalitäten und Möglichkeiten zu erstellen die von Tool-Clients
                 ausgeführt werden können.
             </para>
         </listitem>
@@ -32,7 +33,8 @@
                 <emphasis>Basis Client Funktionalität</emphasis> und eine konkrete Consolen
                 Implementation die externe Tools und Interfaces zu
                 <classname>Zend_Tool_Framework</classname> verbindet. Der Consolen Client kann in
-                CLI Umgebungen wie Unix Shells und der Windows Console verwendet werden.
+                <acronym>CLI</acronym> Umgebungen wie Unix Shells und der Windows Console verwendet
+                werden.
             </para>
         </listitem>
 
@@ -86,8 +88,8 @@
         </para></listitem>
 
         <listitem><para>
-            <emphasis>Console Client / Command Line Interface / zf.php</emphasis> - Der Tooling
-            Client für die Komandozeile.
+            <emphasis>Console Client / Command Line Interface /
+            <filename>zf.php</filename></emphasis> - Der Tooling Client für die Komandozeile.
         </para></listitem>
 
         <listitem><para>

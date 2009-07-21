@@ -120,7 +120,7 @@ $sqs = new Zend_Service_Amazon_Sqs($my_aws_key, $my_aws_secret_key);
 
 $queue_url = $sqs->create('test');
 
-$message = 'this is a test';
+$message = 'Das ist ein Test';
 $message_id = $sqs->send($queue_url, $message);
 
 foreach ($sqs->receive($queue_url) as $message) {
@@ -146,32 +146,34 @@ $sqs = new Zend_Service_Amazon_Sqs();
         <title>Operationen der Queue</title>
 
         <para>
-            All messages SQS are stored in queues. A queue has to be created
-            before any message operations. Queue names must be unique under your
-            access key and secret key.
+            Alle SQS Nachrichten werden in Queues gespeichert. Eine Queue muß erstellt werden bevor
+            irgendwelche Operationen mit Nachrichten durchgeführt werden. Die Namen der Queues
+            müssen in Verbindung mit dem Zugriffsschlüssel und den geheimen Schlüssel einmalig
+            sein.
         </para>
 
         <para>
-            Queue names can contain lowercase letters, digits, periods (.),
-            underscores (_), and dashes (-).  No other symbols allowed. Queue
-            names can be a maximum of 80 characters.
+            Namen von Queues können kleingeschriebene Buchstaben, Ziffern, Punkte (.), Unterstriche
+            (_) und Bindestriche (-) enthalten. Es sind keine anderen Symbole erlaubt. Die Namen
+            von Queues dürfen eine maximal Länge von 80 Zeichen haben.
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <methodname>create()</methodname> creates a new queue.
+                    <methodname>create()</methodname> erstellt eine neue Queue.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>delete()</methodname> removes all messages in
-                    the queue.
+                    <methodname>delete()</methodname> entfernt alle Nachrichten in der Queue.
                 </para>
 
                 <example id="zend.service.amazon.sqs.queues.removalExample">
-                    <title>Zend_Service_Amazon_Sqs Queue Removal Example</title>
+                    <title>
+                        Beispiel für das Entfernen von Queues aus Zend_Service_Amazon_Sqs
+                    </title>
 
                     <programlisting language="php"><![CDATA[
 $sqs = new Zend_Service_Amazon_Sqs($my_aws_key, $my_aws_secret_key);
@@ -183,36 +185,36 @@ $sqs->delete($queue_url);
 
             <listitem>
                 <para>
-                    <methodname>count()</methodname> gets the approximate number
-                    of messages in the queue.
+                    <methodname>count()</methodname> gibt die erwartete Anzahl von Nachrichten in
+                    der Queue zurück.
                 </para>
 
                 <example id="zend.service.amazon.sqs.queues.countExample">
-                    <title>Zend_Service_Amazon_Sqs Queue Count Example</title>
+                    <title>Beispiel für das Zählen von Queues in Zend_Service_Amazon_Sqs</title>
 
                     <programlisting language="php"><![CDATA[
 $sqs = new Zend_Service_Amazon_Sqs($my_aws_key, $my_aws_secret_key);
 $queue_url = $sqs->create('test_1');
-$sqs->send($queue_url, 'this is a test');
-$count = $sqs->count($queue_url); // Returns '1'
+$sqs->send($queue_url, 'Das ist ein Test');
+$count = $sqs->count($queue_url); // Gibt '1' zurück
 ]]></programlisting>
                 </example>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>getQueues()</methodname> returns the list of the
-                    names of all queues belonging to the user.
+                    <methodname>getQueues()</methodname> gibt eine Liste der Namen aller Queues
+                    zurück die dem Benutzer gehören.
                 </para>
 
                 <example id="zend.service.amazon.sqs.queues.listExample">
-                    <title>Zend_Service_Amazon_Sqs Queue Listing Example</title>
+                    <title>Beispiel für das Auflisten von Queues in Zend_Service_Amazon_Sqs</title>
 
                     <programlisting language="php"><![CDATA[
 $sqs = new Zend_Service_Amazon_Sqs($my_aws_key, $my_aws_secret_key);
 $list = $sqs->getQueues();
 foreach($list as $queue) {
-   echo "I have queue $queue\n";
+   echo "Ich habe $queue Queues\n";
 }
 ]]></programlisting>
                 </example>
@@ -221,50 +223,54 @@ foreach($list as $queue) {
     </sect2>
 
     <sect2 id="zend.service.amazon.sqs.messages">
-        <title>Message operations</title>
+        <title>Operationen für Nachrichten</title>
 
         <para>
-            After a queue is created, simple messages can be sent into the queue
-            then received at a later point in time. Messages can be up to 8KB in
-            length.  If longer messages are needed please see <ulink
-                url="http://framework.zend.com/manual/en/zend.service.amazon.s3.html">S3</ulink>.
-            There is no limit to the number of messages a queue can contain.
-        </para>
+            Nachdem eine Queue erstellt wurde, können Nachrichten einfach in die Queue gesendet
+            und zu einem späteren Zeitpunkt von Ihr empfangen werden. Nachrichten können eine Länge
+            von bis zu 8kB haben. Wenn längere Nachrichten benötigt werden sollte in das Kapitel
+            <ulink url="http://framework.zend.com/manual/en/zend.service.amazon.s3.html">S3</ulink>
+            gesehen werden. Es gibt keine Begrenzung in der Anzahl der Nachrichten die eine Queue
+            enthalten kann.
+       </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <methodname>sent($queue_url, $message)</methodname> send the
-                    <code>$message</code> to the <code>$queue_url</code> SQS
-                    queue URL.
+                    <methodname>sent($queue_url, $message)</methodname> sendet die Nachricht
+                    <code>$message</code> an die URL <code>$queue_url</code> der SQS Queue.
                 </para>
 
                 <example id="zend.service.amazon.sqs.messages.sendExample">
-                    <title>Zend_Service_Amazon_Sqs Message Send Example</title>
+                    <title>
+                        Beispiel für das Senden von Nachrichten an Zend_Service_Amazon_Sqs
+                    </title>
 
                     <programlisting language="php"><![CDATA[
 $sqs = new Zend_Service_Amazon_Sqs($my_aws_key, $my_aws_secret_key);
 $queue_url = $sqs->create('test_queue');
-$sqs->send($queue_url, 'this is a test message');
+$sqs->send($queue_url, 'Das ist eine Test Nachricht');
 ]]></programlisting>
                 </example>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>receive($queue_url)</methodname> retrieves
-                    messages from the queue.
+                    <methodname>receive($queue_url)</methodname> empfängt Nachrichten von der
+                    Queue.
                 </para>
 
                 <example id="zend.service.amazon.sqs.messages.receiveExample">
-                    <title>Zend_Service_Amazon_Sqs Message Receive Example</title>
+                    <title>
+                        Beispiel für das Empfangen von Nachrichten von Zend_Service_Amazon_Sqs
+                    </title>
 
                     <programlisting language="php"><![CDATA[
 $sqs = new Zend_Service_Amazon_Sqs($my_aws_key, $my_aws_secret_key);
 $queue_url = $sqs->create('test_queue');
-$sqs->send($queue_url, 'this is a test message');
+$sqs->send($queue_url, 'Das ist eine Test Nachricht');
 foreach ($sqs->receive($queue_url) as $message) {
-    echo "got message ".$message['body'].'<br/>';
+    echo "Nachricht ".$message['body'].' empfangen<br/>';
 }
 ]]></programlisting>
                 </example>
@@ -272,27 +278,29 @@ foreach ($sqs->receive($queue_url) as $message) {
 
             <listitem>
                 <para>
-                    <methodname>deleteMessage($queue_url, $handle)</methodname>
-                    deletes a message from a queue.  A message must first be
-                    received using the <methodname>receive()</methodname> method
-                    before it can be deleted.
+                    <methodname>deleteMessage($queue_url, $handle)</methodname> löscht eine
+                    Nachricht von einer Queue. Die Nachricht muß zuerst durch Verwendung der
+                    <methodname>receive()</methodname> Methode empfangen werden bevor Sie gelöscht
+                    werden kann.
                 </para>
 
                 <example id="zend.service.amazon.sqs.messages.deleteExample">
-                    <title>Zend_Service_Amazon_Sqs Message Delete Example</title>
+                    <title>
+                        Beispiel für das Löschen von Nachrichten aus Zend_Service_Amazon_Sqs
+                    </title>
 
                     <programlisting language="php"><![CDATA[
 $sqs = new Zend_Service_Amazon_Sqs($my_aws_key, $my_aws_secret_key);
 $queue_url = $sqs->create('test_queue');
-$sqs->send($queue_url, 'this is a test message');
+$sqs->send($queue_url, 'Das ist eine Test Nachricht');
 foreach ($sqs->receive($queue_url) as $message) {
-    echo "got message ".$message['body'].'<br/>';
+    echo "Nachricht ".$message['body'].' empfangen<br/>';
 
     if ($sqs->deleteMessage($queue_url, $message['handle'])) {
-        echo "Message deleted";
+        echo "Nachricht gelöscht";
     }
     else {
-        echo "Message not deleted";
+        echo "Nachricht nicht gelöscht";
     }
 }
 ]]></programlisting>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16164 -->
+<!-- EN-Revision: 16658 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.exceptions">
     <title>MVC Ausnahmen</title>
@@ -8,16 +8,16 @@
         <title>Einführung</title>
 
         <para>
-            Die MVC Komponenten im Zend Framework verwenden einen Front Controller, was bedeutet das
-            alle Anfragen zu einer bestimmten Site über einen einzelnen Eintrittspunkt laufen. Als
-            Ergebnis treten alle Ausnahmen eventuell am Front Controllerauf, was es Entwicklern
-            erlaubt diese an einem einzelnen Ort zu behandeln.
+            Die <acronym>MVC</acronym> Komponenten im Zend Framework verwenden einen Front
+            Controller, was bedeutet das alle Anfragen zu einer bestimmten Site über einen
+            einzelnen Eintrittspunkt laufen. Als Ergebnis treten alle Ausnahmen eventuell am Front
+            Controllerauf, was es Entwicklern erlaubt diese an einem einzelnen Ort zu behandeln.
         </para>
 
         <para>
             Trotzdem enthalten Ausnahmemeldungen und Backtrace Informationen oft sensitive
-            Systeminformationen, wie SQL Anweisungen, Dateiorte, und andere. Um zu helfen die eigene
-            Site zu schützen, werden standardmäßig alle Ausnahmen von
+            Systeminformationen, wie <acronym>SQL</acronym> Anweisungen, Dateiorte, und andere. Um
+            zu helfen die eigene Site zu schützen, werden standardmäßig alle Ausnahmen von
             <classname>Zend_Controller_Front</classname> gefangen und im Antwortobjekt registriert;
             zusätzlich zeigt das Antwortobjekt die Ausnahmemeldungen standardmäßig nicht an.
         </para>
@@ -27,8 +27,8 @@
         <title>Behandeln von Ausnahmen</title>
 
         <para>
-            Verschiedene Mechanismen sind bereits in die MVC Komponenten eingebaut um die Behandlung
-            von Ausnahmen zu erlauben.
+            Verschiedene Mechanismen sind bereits in die <acronym>MVC</acronym> Komponenten
+            eingebaut um die Behandlung von Ausnahmen zu erlauben.
         </para>
 
         <itemizedlist>
@@ -66,7 +66,7 @@
             </listitem>
 
             <listitem>
-                <para><classname>Zend_Controller_Front::throwExceptions()</classname></para>
+                <para><methodname>Zend_Controller_Front::throwExceptions()</methodname></para>
 
                 <para>
                     Durch die Übergabe eines boolschen True Wertes an diese Methode, kann dem Front
@@ -93,7 +93,7 @@ try {
 
             <listitem>
                 <para>
-                    <classname>Zend_Controller_Response_Abstract::renderExceptions()</classname>
+                    <methodname>Zend_Controller_Response_Abstract::renderExceptions()</methodname>
                 </para>
 
                 <para>
@@ -107,14 +107,14 @@ try {
 
             <listitem>
                 <para>
-                    <classname>Zend_Controller_Front::returnResponse()</classname> und
-                    <classname>Zend_Controller_Response_Abstract::isException()</classname>.
+                    <methodname>Zend_Controller_Front::returnResponse()</methodname> und
+                    <methodname>Zend_Controller_Response_Abstract::isException()</methodname>.
                 </para>
 
                 <para>
-                    Durch die Übergabe eines boolschen True zu
-                    <classname>Zend_Controller_Front::returnResponse()</classname>, wird
-                    <classname>Zend_Controller_Front::dispatch()</classname> die Antwort nicht
+                    Durch die Übergabe eines boolschen True an
+                    <methodname>Zend_Controller_Front::returnResponse()</methodname>, wird
+                    <methodname>Zend_Controller_Front::dispatch()</methodname> die Antwort nicht
                     darstellen, aber diese stattdessen zurückgeben. Sobald man die antwort hat,
                     kann diese getestet werden um zu sehen ob irgendwelche Ausnahmen gefangen
                     wurden indem die <methodname>isException()</methodname> Methode verwendet, und
@@ -136,10 +136,10 @@ if ($response->isException()) {
 
                 <para>
                     Der primäre Vorteil die diese Methode über
-                    <classname>Zend_Controller_Front::throwExceptions()</classname> bietet ist, das
-                    Sie es erlaubt die Antwort wahlweise darzustellen nachdem die Ausnahme behandelt
-                    wurde. Das fängt jede Ausnahme in der Kontrollerkette, im Gegensatz zum Error
-                    Handler Plugin.
+                    <methodname>Zend_Controller_Front::throwExceptions()</methodname> bietet ist,
+                    das Sie es erlaubt die Antwort wahlweise darzustellen nachdem die Ausnahme
+                    behandelt wurde. Das fängt jede Ausnahme in der Kontrollerkette, im Gegensatz
+                    zum Error Handler Plugin.
                 </para>
             </listitem>
         </itemizedlist>
@@ -149,10 +149,11 @@ if ($response->isException()) {
         <title>MVC Ausnahme die auftreten können</title>
 
         <para>
-            Die verschiedenen MVC Komponenten -- Anfragen, Router, Dispatcher, Actioncontroller, und
-            Antwortobjekte -- können alle gelegentlich Ausnahmen werfen. Einige Ausnahmen können
-            wahlweise überschrieben werden und andere werden Verwendet um dem Entwickler anzuzeigen
-            das die eigene Struktur der Anwendung überdacht werden sollte.
+            Die verschiedenen <acronym>MVC</acronym> Komponenten -- Anfragen, Router, Dispatcher,
+            Actioncontroller, und Antwortobjekte -- können alle gelegentlich Ausnahmen werfen.
+            Einige Ausnahmen können wahlweise überschrieben werden und andere werden Verwendet um
+            dem Entwickler anzuzeigen das die eigene Struktur der Anwendung überdacht werden
+            sollte.
         </para>
 
         <para>Einige Beispiele:</para>
@@ -160,14 +161,16 @@ if ($response->isException()) {
         <itemizedlist>
             <listitem>
                 <para>
-                    <classname>Zend_Controller_Dispatcher::dispatch()</classname> wird standardmäßig
-                    eine Ausnahme werfen wenn ein ungültiger Controller angefragt wird. Es gibt zwei
-                    empfohlene Wege um damit umzugehen.
+                    <methodname>Zend_Controller_Dispatcher::dispatch()</methodname> wird
+                    standardmäßig eine Ausnahme werfen wenn ein ungültiger Controller angefragt
+                    wird. Es gibt zwei empfohlene Wege um damit umzugehen.
                 </para>
 
                 <itemizedlist>
                     <listitem>
-                        <para>Den <code>useDefaultControllerAlways</code> Parameter setzen.</para>
+                        <para>
+                            Den <property>useDefaultControllerAlways</property> Parameter setzen.
+                        </para>
 
                         <para>
                             Im eigenen Frontcontroller, oder dem eigenen Dispatcher, die folgende
@@ -208,7 +211,7 @@ $dispatcher->setParam('useDefaultControllerAlways', true);
 
             <listitem>
                 <para>
-                    <classname>Zend_Controller_Action::__call()</classname> wird eine
+                    <methodname>Zend_Controller_Action::__call()</methodname> wird eine
                     <classname>Zend_Controller_Action_Exception</classname> geworfen wenn eine nicht
                     existierende Aktion einer Methode nicht dargestellt werden kann. Normalerweise
                     wird es gewünscht sein in Fällen wie diesen eine Standardaktion im Controller zu
@@ -284,17 +287,17 @@ class My_Controller_Dispatcher extends Zend_Controller_Dispatcher
                         <para>
                             Diese Methode ist nützlich, weil Sie die Aktion transparent ändert bevor
                             diese letztendlich dargestellt wird. Trotzdem bedeutet es auch, das
-                            Schreibfehler in der URL trotzdem richtig dargestellt werden, was für
-                            die Optimierung von Suchmaschinen nicht gut ist.
+                            Schreibfehler in der <acronym>URL</acronym> trotzdem richtig dargestellt
+                            werden, was für die Optimierung von Suchmaschinen nicht gut ist.
                         </para>
                     </listitem>
 
                     <listitem>
                         <para>
                             Verwenden von
-                            <classname>Zend_Controller_Action::preDispatch()</classname> oder
-                            <classname>Zend_Controller_Plugin_Abstract::preDispatch()</classname> um
-                            eine ungültige Aktion zu identifizieren.
+                            <methodname>Zend_Controller_Action::preDispatch()</methodname> oder
+                            <methodname>Zend_Controller_Plugin_Abstract::preDispatch()</methodname>
+                            um eine ungültige Aktion zu identifizieren.
                         </para>
 
                         <para>

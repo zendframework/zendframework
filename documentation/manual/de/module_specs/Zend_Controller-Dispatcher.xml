@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16164 -->
+<!-- EN-Revision: 16658 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.dispatcher">
     <title>Der Dispatcher</title>
@@ -14,10 +14,10 @@
             extrahieren und dann den Controller zu instanzieren und die Aktion dieses Controllers
             aufzurufen. Wenn kein Modul, kein Controller oder keine Aktion gefunden wurde, werden
             dafür Standardwerte verwendet.
-            <classname>Zend_Controller_Dispatcher_Standard</classname> legt <code>index</code> für
-            jede der Controller und Action Standardwerte fest und <code>default</code> für den
-            Standardwert des Moduls, erlaubt dem Entwickler aber auch, diese durch Verwendung der
-            <methodname>setDefaultController()</methodname>,
+            <classname>Zend_Controller_Dispatcher_Standard</classname> legt
+            <emphasis>index</emphasis> für jede der Controller und Action Standardwerte fest und
+            <emphasis>default</emphasis> für den Standardwert des Moduls, erlaubt dem Entwickler
+            aber auch, diese durch Verwendung der <methodname>setDefaultController()</methodname>,
             <methodname>setDefaultAction()</methodname> und
             <methodname>setDefaultModule()</methodname> Methoden zu verändern.
         </para>
@@ -29,8 +29,9 @@
                 Bei der Erstellung von modularen Anwendungen kann es sein das man auch einen
                 Namespace für eigene Standard Module haben will (die Standardkonfiguration ist, das
                 das Standardmodul <emphasis>keinen</emphasis> Namensraum hat). Ab 1.5.0, kann das
-                durch Spezifizierung von <code>prefixDefaultModule</code> auf true, entweder im
-                Front Kontroller oder im Dispatcher, getan werden:
+                durch Spezifizierung von <property>prefixDefaultModule</property> auf
+                <constant>TRUE</constant>, entweder im Front Controller oder im Dispatcher, getan
+                werden:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -56,11 +57,11 @@ $dispatcher->setParam('prefixDefaultModule', true);
 
         <para>
             Zu Beginn jeden Durchlaufes setzt er im Request Objekt einen Schalter, der angibt, dass
-            die Aktion verarbeitet worden ist. Wenn eine Aktion oder ein pre/postDispatch Plugin
-            diesen Schalter zurücksetzt, wird die Dispatch Schleife fortgesetzt und versucht, die
-            neue Anfrage zu verarbeiten. Durch Ändern des Controllers und / oder der Aktion im
-            Request Objekt und Zuürcksetzen des Verarbeitungsstatus, kann der Entwickler eine zu
-            durchlaufende Anfragekette definieren.
+            die Aktion verarbeitet worden ist. Wenn eine Aktion oder ein pre- oder postDispatch
+            Plugin diesen Schalter zurücksetzt, wird die Dispatch Schleife fortgesetzt und
+            versucht, die neue Anfrage zu verarbeiten. Durch Ändern des Controllers und / oder der
+            Aktion im Request Objekt und Zuürcksetzen des Verarbeitungsstatus, kann der Entwickler
+            eine zu durchlaufende Anfragekette definieren.
         </para>
 
         <para>
@@ -107,8 +108,8 @@ public function bazAction()
             Der Dispatcher benötigt eine Vielzahl von Daten um seine Arbeit zu erledigen - er muß
             wissen wie die Namen von Controller und Aktionen formatiert werden sollen, wo nach
             Dateien der Controller Klassen gesucht wird, ob ein übergebener Modulname gültig ist
-            oder nicht, und eine API um festzustellen ob eine gegebene Anfrage, basierend auf den
-            anderen vorhandenen Informationen, bearbeitbar ist.
+            oder nicht, und eine <acronym>API</acronym> um festzustellen ob eine gegebene Anfrage,
+            basierend auf den anderen vorhandenen Informationen, bearbeitbar ist.
         </para>
 
         <para>

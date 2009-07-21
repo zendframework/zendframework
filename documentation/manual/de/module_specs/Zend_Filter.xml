@@ -107,7 +107,7 @@ echo Zend_Filter::get('"', 'HtmlEntities', array(ENT_QUOTES));
         </para>
 
         <para>
-            Die Zend_Filter_Imput Klasse erlaubt es also, mehrere Filter zu instanzieren und
+            Die Zend_Filter_Input Klasse erlaubt es also, mehrere Filter zu instanzieren und
             auszurufen, und wenn benötigt, den Prüfklassen diese Sets von Eingabedaten zu
             verarbeiten. Siehe <xref linkend="zend.filter.input" />.
         </para>

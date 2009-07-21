@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15343 -->
+<!-- EN-Revision: 16656 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.tool.framework.system-providers">
     <title>Mitgelieferte System Provider</title>
 
     <para>
         Zusätzlich zu den nützlicheren Projekt basierten Providern die mit
-        <code>Zend_Tool_Project</code> ausgeliefert werden, gibt es auch einige grundsätzlichere,
-        aber interessante Provider die in <code>Zend_Tool_Framework</code> eingebaut sind.
-        Einige von Ihnen existieren für den Zweck, über die Kommandozeile Informationen zu
-        extrahieren, wie die Version, wärend andere dazu gedacht sind den Entwickler zu
-        unterstützen, wärend er zusätzliche Provider erstellt.
+        <classname>Zend_Tool_Project</classname> ausgeliefert werden, gibt es auch einige
+        grundsätzlichere, aber interessante Provider die in
+        <classname>Zend_Tool_Framework</classname> eingebaut sind. Einige von Ihnen existieren für
+        den Zweck, über die Kommandozeile Informationen zu extrahieren, wie die Version, wärend
+        andere dazu gedacht sind den Entwickler zu unterstützen, wärend er zusätzliche Provider
+        erstellt.
     </para>
 
     <sect2 id="zend.tool.framework.system-providers.version">
@@ -18,11 +19,11 @@
 
         <para>
             Der Version Provider ist enthalten, sodas man feststellen kann mit welcher Version vom
-            Framework <code>zf</code> oder <code>Zend_Tool</code> aktuell arbeitet.
+            Framework <command>zf</command> oder <classname>Zend_Tool</classname> aktuell arbeitet.
         </para>
 
         <para>
-            Über die Kommandozeile, einfach <code>zf show version</code> ausführen.
+            Über die Kommandozeile, einfach <command>zf show version</command> ausführen.
         </para>
 
     </sect2>
@@ -32,16 +33,16 @@
 
         <para>
             Der Manifest Provider ist enthalten, sodas man feststellen kann welche Art von
-            "manifest" Information wärend der Laufzeit von <code>Zend_Tool</code> vorhanden ist.
-            Manifest Daten sind Informationen die speziellen Objekten wärend der Laufzeit von
-            <code>Zend_Tool</code> angehängt werden. Im Manifest findet man Konsolen-spezifische
-            Benennungen die man verwendet wenn bestimmte Kommandos aufgerufen werden. Die Daten
-            die im Manifest gefunden werden können von jedem Provider oder Client bei Bedarf
-            verwendet werden.
+            "manifest" Information wärend der Laufzeit von <classname>Zend_Tool</classname>
+            vorhanden ist. Manifest Daten sind Informationen die speziellen Objekten wärend der
+            Laufzeit von <classname>Zend_Tool</classname> angehängt werden. Im Manifest findet man
+            Konsolen-spezifische Benennungen die man verwendet wenn bestimmte Kommandos aufgerufen
+            werden. Die Daten die im Manifest gefunden werden können von jedem Provider oder Client
+            bei Bedarf verwendet werden.
         </para>
 
         <para>
-            Über die Kommandozeile, einfach <code>zf show manifest</code> ausführen.
+            Über die Kommandozeile, einfach <command>zf show manifest</command> ausführen.
         </para>
     </sect2>
 </sect1>

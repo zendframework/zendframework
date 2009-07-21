@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16545 -->
+<!-- EN-Revision: 16656 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.tool.framework.clitool">
     <title>Verwenden des CLI Tools</title>
 
     <para>
-        Das CLI, oder Kommandozeilen Tool (Intern als Consolen Tool bekannt), ist aktuell das
-        primäre Interface für die  Bearbeitung von <code>Zend_Tool</code> Anfragen. Mit dem CLI
-        Tool können Entwickler werkmäßige Anfragen in einem "Kommandozeilen Fenster", allgemein
-        bekannt als "Terminal", erstellen. Diese Umgebung ist in einer *nix Umgebung vorherrschend,
-        hat aber auch eine bekannte Implementation in Windows, mit <code>cmd.exe</code>, Console2
-        und auch dem Cygwin Projekt.
+        Das <acronym>CLI</acronym>, oder Kommandozeilen Tool (Intern als Consolen Tool bekannt),
+        ist aktuell das primäre Interface für die  Bearbeitung von <classname>Zend_Tool</classname>
+        Anfragen. Mit dem <acronym>CLI</acronym> Tool können Entwickler werkmäßige Anfragen in
+        einem "Kommandozeilen Fenster", allgemein bekannt als "Terminal", erstellen. Diese Umgebung
+        ist in einer *nix Umgebung vorherrschend, hat aber auch eine bekannte Implementation in
+        Windows, mit <filename>cmd.exe</filename>, Console2 und auch dem Cygwin Projekt.
     </para>
 
     <sect2 id="zend.tool.framework.clitool.setup-general">
@@ -18,23 +18,25 @@
 
         <para>
             Um werkmäßige Anfragen über den Kommandozeilen Client zu erstellen, muß man zuerst den
-            Client einrichten, damit das System das "zf" Kommando behandeln kann. Der Kommandozeilen
-            Client für alle Wünsche und Zwecke, ust die <code>.sh</code> oder <code>.bat</code>
-            Datei die mit der Distribution von Zend Framework ausgeliefert wurde. Im Trunk kann sie
-            hier gefunden werden:
-            <ulink url="http://framework.zend.com/svn/framework/standard/trunk/bin/">http://framework.zend.com/svn/framework/standard/trunk/bin/</ulink>
+            Client einrichten, damit das System das "zf" Kommando behandeln kann. Der
+            Kommandozeilen Client für alle Wünsche und Zwecke, ust die <filename>.sh</filename>
+            oder <filename>.bat</filename> Datei die mit der Distribution von Zend Framework
+            ausgeliefert wurde. Im Trunk kann sie hier gefunden werden: <ulink
+                url="http://framework.zend.com/svn/framework/standard/trunk/bin/">http://framework.zend.com/svn/framework/standard/trunk/bin/</ulink>.
         </para>
 
         <para>
-            Wie man siehr gibt es im <code>bin/</code> Verzeichnis 3 Dateien: <code>zf.php</code>,
-            <code>zf.sh</code> und <code>zf.bat</code>. <code>zf.sh</code> und <code>zf.bat</code>
-            sind spezielle Client-Wrapper für das Betriebssystem: <code>zf.sh</code> für *nix
-            Umgebungen, und <code>zf.bat</code> für Win32 Umgebungen. Diese Client-Wrapper sind
-            dafür zuständig die richtige <code>php.exe</code> und <code>zf.php</code> zu finden,
-            sowie die Anfrage des Clients weiterzugeben. <code>zf.php</code> ist dafür zuständig
-            die Umgebung zu verstehen, den richtigen include_path zu erstellen, und das an die
-            richtigen Komponenten der Bibliothek für die Verarbeitung zu übergeben was über die
-            Kommandozeile übergeben wurde.
+            Wie man siehr gibt es im <filename>/bin/</filename> Verzeichnis 3 Dateien:
+            <filename>zf.php</filename>, <filename>zf.sh</filename> und
+            <filename>zf.bat</filename>. <filename>zf.sh</filename> und <filename>zf.bat</filename>
+            sind spezielle Client-Wrapper für das Betriebssystem: <filename>zf.sh</filename> für
+            *nix Umgebungen, und <filename>zf.bat</filename> für Win32 Umgebungen. Diese
+            Client-Wrapper sind dafür zuständig die richtige <filename>php.exe</filename> und
+            <filename>zf.php</filename> zu finden, sowie die Anfrage des Clients weiterzugeben.
+            <filename>zf.php</filename> ist dafür zuständig die Umgebung zu verstehen, den
+            richtigen include_path zu erstellen, und das an die richtigen Komponenten der
+            Bibliothek für die Verarbeitung zu übergeben was über die Kommandozeile übergeben
+            wurde.
         </para>
 
         <para>
@@ -45,23 +47,26 @@
         <orderedlist>
             <listitem>
                 <para>
-                    <code>zf.sh/zf.bat</code> ist vom Systempfad aus erreichbar. Das ist die
-                    Möglichkeit <code>zf</code> überall von der Kommandozeile aus aufzurufen,
-                    unabhängig davon welches das aktuelle Arbeitsverzeichnis ist.
+                    <filename>zf.sh/zf.bat</filename> ist vom Systempfad aus erreichbar. Das ist
+                    die Möglichkeit <command>zf</command> überall von der Kommandozeile aus
+                    aufzurufen, unabhängig davon welches das aktuelle Arbeitsverzeichnis ist.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    ZendFramework/library ist im eigenen <code>include_path</code>.
+                    <filename>ZendFramework/library</filename> ist im eigenen
+                    <property>include_path</property>.
                 </para>
             </listitem>
         </orderedlist>
 
-        <para>
-            <emphasis>Beachte:</emphasis> wärend das oben stehende die idealsten Voraussetzungen
-            sind, kann man einfach Zend Framework herunterladen und erwarten das es mit
-            <code>./path/to/zf.php</code> funktioniert.
-        </para>
+        <note>
+            <para>
+                Beachte: wärend das oben stehende die idealsten Voraussetzungen
+                sind, kann man einfach Zend Framework herunterladen und erwarten das es mit
+                <filename>./path/to/zf.php</filename> funktioniert.
+            </para>
+        </note>
 
     </sect2>
 
@@ -69,9 +74,10 @@
         <title>Das CLI Tool in Unix-artigen Systemen vorbereiten</title>
 
         <para>
-            Das übliche Setup in einer *nix Umgebung, besteht darin <code>zf.sh</code> und
-            <code>zf.php</code> in das gleiche Verzeichnis wie die PHP Binaries zu kopieren. Diese
-            können normalerweise an einem der folgenden Plätze gefunden werden:
+            Das übliche Setup in einer *nix Umgebung, besteht darin <filename>zf.sh</filename> und
+            <filename>zf.php</filename> in das gleiche Verzeichnis wie die <acronym>PHP</acronym>
+            Binaries zu kopieren. Diese können normalerweise an einem der folgenden Plätze gefunden
+            werden:
         </para>
 
         <programlisting language="text"><![CDATA[
@@ -82,21 +88,24 @@
 ]]></programlisting>
 
         <para>
-            Um den Ort der PHP Binaries herauszufinden, kann man 'which php' auf der Kommandozeile
-            ausführen. Das gibt den Ort der PHP Binaries zurück, die verwendet werden wenn php
-            Skripte in der eigenen Umgebung ausgeführt werden.
+            Um den Ort der <acronym>PHP</acronym> Binaries herauszufinden, kann man 'which php' auf
+            der Kommandozeile ausführen. Das gibt den Ort der <acronym>PHP</acronym> Binaries
+            zurück, die verwendet werden wenn <acronym>PHP</acronym> Skripte in der eigenen
+            Umgebung ausgeführt werden.
         </para>
 
         <para>
             Der nächste Arbeitsschritt besteht darin, sicherzustellen das die Zend Framework
-            Bibliothek richtig im <code>include_path</code> vom PHP System steht. Um herauszufinden
-            wo der <code>include_path</code> ist, kann man 'php -i' ausführen und nach der
-            <code>include_path</code> Variable sehen, oder kompakter einfach
-            'php -i | grep include_path' ausführen. Sobald man herausgefunden hat wo die
-            <code>include_path</code> Variable steht (das ist normalerweise etwas wie
-            /usr/lib/php, /usr/share/php, /usr/local/lib/php, oder ähnliches), muß man
-            sicherstellen das der Inhalt des library/ Verzeichnisses im spezifizierten Verzeichnis
-            des <code>include_path</code>'s abgelegt sind.
+            Bibliothek richtig im <property>include_path</property> vom <acronym>PHP</acronym>
+            System steht. Um herauszufinden wo der <property>include_path</property> ist, kann man
+            <command>php -i</command> ausführen und nach der <property>include_path</property>
+            Variable sehen, oder kompakter einfach <command>php -i | grep include_path</command>
+            ausführen. Sobald man herausgefunden hat wo die <property>include_path</property>
+            Variable steht (das ist normalerweise etwas wie <filename>/usr/lib/php</filename>,
+            <filename>/usr/share/php</filename>, <filename>/usr/local/lib/php</filename>, oder
+            ähnliches), muß man sicherstellen das der Inhalt des <filename>/library/</filename>
+            Verzeichnisses im spezifizierten Verzeichnis des <property>include_path</property>'s
+            abgelegt sind.
         </para>
 
         <para>
@@ -120,18 +129,19 @@
         </para>
 
         <para>
-            <emphasis>ALTERNATIVE SETUP</emphasis> bedeutet das der Zend Framework Download so wie
-            er ist zusammenbleibt, und ein Link von einem PATH Ort zur Datei <code>zf.sh</code>
-            erstellt wird. Das bedeutet das man den Inhalt des ZendFramework Downloads an einem
-            Ort wie <code>/usr/local/share/ZendFramework</code>, oder noch lokaler wie
-            <code>/home/username/lib/ZendFramework</code> platzieren kann, und einen Symbolischen
-            Link zu <code>zf.sh</code> erstellt.
+            <emphasis>Alternative Setup</emphasis> bedeutet das der Zend Framework Download so wie
+            er ist zusammenbleibt, und ein Link von einem <constant>PATH</constant> Ort zur Datei
+            <filename>zf.sh</filename> erstellt wird. Das bedeutet das man den Inhalt des
+            ZendFramework Downloads an einem Ort wie
+            <filename>/usr/local/share/ZendFramework</filename>, oder noch lokaler wie
+            <filename>/home/username/lib/ZendFramework</filename> platzieren kann, und einen
+            Symbolischen Link zu <filename>zf.sh</filename> erstellt.
         </para>
 
         <para>
-            Angenommen man will den Link nach <code>/usr/local/bin</code> geben (das könnte auch
-            funktionieren wenn der Link in <code>/home/username/bin/</code> platziert werden soll),
-            dann könnte man ein Kommando ähnlich dem folgenden ausführen:
+            Angenommen man will den Link nach <filename>/usr/local/bin</filename> geben (das könnte
+            auch funktionieren wenn der Link in <filename>/home/username/bin/</filename> platziert
+            werden soll), dann könnte man ein Kommando ähnlich dem folgenden ausführen:
         </para>
 
         <programlisting language="sh"><![CDATA[
@@ -152,9 +162,10 @@ ln -s /home/username/lib/ZendFramework/bin/zf.sh /home/username/bin/zf
         <title>Das CLI Tool in Windows vorbereiten</title>
 
         <para>
-            Das üblichste Setup in einer Windows Win32 Umgebung besteht darin, <code>zf.bat</code>
-            und <code>zf.php</code> in das gleiche Verzeichnis wie die PHP Binaries zu kopieren.
-            Diese können generell an einem der folgenden Plätze gefunden werden:
+            Das üblichste Setup in einer Windows Win32 Umgebung besteht darin,
+            <filename>zf.bat</filename> und <filename>zf.php</filename> in das gleiche Verzeichnis
+            wie die <acronym>PHP</acronym> Binaries zu kopieren. Diese können generell an einem der
+            folgenden Plätze gefunden werden:
         </para>
 
         <programlisting language="text"><![CDATA[
@@ -164,23 +175,25 @@ C:\WAMP\PHP\bin
 ]]></programlisting>
 
         <para>
-            Man sollte in der Lage sein <code>php.exe</code> auf der Kommandozeile auszuführen.
-            Wenn man das nicht kann, muß man zuerst die Dokumentation prüfen die mit der PHP
-            Distribution gekommen ist, oder sicherstellen das der Pfad zu php.exe in der
-            Windows Umgebungsvariable PATH vorhanden ist.
+            Man sollte in der Lage sein <filename>php.exe</filename> auf der Kommandozeile
+            auszuführen. Wenn man das nicht kann, muß man zuerst die Dokumentation prüfen die mit
+            der <acronym>PHP</acronym> Distribution gekommen ist, oder sicherstellen das der Pfad
+            zu <filename>php.exe</filename> in der Windows Umgebungsvariable
+            <constant>PATH</constant> vorhanden ist.
         </para>
 
         <para>
             Der nächste Arbeitsschritt besteht darin, sicherzustellen das die Zend Framework
-            Bibliothek richtig im <code>include_path</code> vom PHP System steht. Um herauszufinden
-            wo der <code>include_path</code> ist, kann man 'php -i' ausführen und nach der
-            <code>include_path</code> Variable sehen, oder kompakter einfach
-            'php -i | grep include_path' ausführen wenn Cygwin mit grep zur Verfügung steht.
-            Sobald man herausgefunden hat wo die <code>include_path</code> Variable steht (das ist
-            normalerweise etwas wie <code>C:\PHP\pear</code>, <code>C:\PHP\share</code>,
-            <code>C:\Program Files\ZendServer\share</code> oder ähnliches), muß man
+            Bibliothek richtig im <property>include_path</property> vom <acronym>PHP</acronym>
+            System steht. Um herauszufinden wo der <property>include_path</property> ist, kann man
+            <command>php -i</command> ausführen und nach der <property>include_path</property>
+            Variable sehen, oder kompakter einfach <command>php -i | grep include_path</command>
+            ausführen wenn Cygwin mit grep zur Verfügung steht. Sobald man herausgefunden hat wo
+            die <property>include_path</property> Variable steht (das ist normalerweise etwas wie
+            <filename>C:\PHP\pear</filename>, <filename>C:\PHP\share</filename>,
+            <filename>C:\Program%20Files\ZendServer\share</filename> oder ähnliches), muß man
             sicherstellen das der Inhalt des library/ Verzeichnisses im spezifizierten Verzeichnis
-            des <code>include_path</code>'s abgelegt sind.
+            des <property>include_path</property>'s abgelegt sind.
         </para>
 
         <para>
@@ -204,13 +217,14 @@ C:\WAMP\PHP\bin
         </para>
 
         <para>
-            <emphasis>ALTERNATIVE SETUP</emphasis> bedeutet das der Zend Framework Download so wie
-            er ist zusammenbleibt, und sowohl die Systemvariable PATH als auch die
-            <code>php.ini</code> Datei geändert werden muss. In der Umgebung des Benutzers muss man
-            sicherstellen das <code>C:\Path\To\ZendFramework\bin</code> hinzugefügt ist, damit die
-            Datei <code>zf.bat</code> ausgeführt werden kann. Auch die Datei <code>php.ini</code>
-            ist zu änder um sicherzustellen das <code>C:\Path\To\ZendFramework\library</code> im
-            <code>include_path</code> ist.
+            <emphasis>Alternative Setup</emphasis> bedeutet das der Zend Framework Download so wie
+            er ist zusammenbleibt, und sowohl die Systemvariable <constant>PATH</constant> als auch
+            die <filename>php.ini</filename> Datei geändert werden muss. In der Umgebung des
+            Benutzers muss man sicherstellen das <filename>C:\Path\To\ZendFramework\bin</filename>
+            hinzugefügt ist, damit die Datei <filename>zf.bat</filename> ausgeführt werden kann.
+            Auch die Datei <filename>php.ini</filename> ist zu Ändern um sicherzustellen das
+            <filename>C:\Path\To\ZendFramework\library</filename> im
+            <property>include_path</property> ist.
         </para>
 
     </sect2>
@@ -219,22 +233,23 @@ C:\WAMP\PHP\bin
         <title>Andere Überlegungen für ein Setup</title>
 
         <para>
-            Wenn man aus bestimmten Gründen die Zend Framework  Bibliothek nicht im
-            <code>include_path</code> haben will, gibt es auch eine andere Option. Es gibt auch
-            zwei spezielle Umgebungsvariablen die <code>zf.php</code> verwendet um den Ort der
-            Installation vom Zend Framework zu erkennen.
+            Wenn man aus bestimmten Gründen die Zend Framework Bibliothek nicht im
+            <property>include_path</property> haben will, gibt es auch eine andere Option. Es gibt
+            auch zwei spezielle Umgebungsvariablen die <filename>zf.php</filename> verwendet um den
+            Ort der Installation vom Zend Framework zu erkennen.
         </para>
 
         <para>
-            Der erste ist <code>ZEND_TOOL_INCLUDE_PATH_PREPEND</code>, welcher den Wert dieser
-            Umgebungsvariablen dem <code>include_path</code> des Systems (<code>php.ini</code>)
-            voranstellt, bevor der Client geladen wird.
+            Der erste ist <constant>ZEND_TOOL_INCLUDE_PATH_PREPEND</constant>, welcher den Wert
+            dieser Umgebungsvariablen dem <property>include_path</property> des Systems
+            (<filename>php.ini</filename>) voranstellt, bevor der Client geladen wird.
         </para>
 
         <para>
-            Alternativ kann es gewünscht sein <code>ZEND_TOOL_INCLUDE_PATH</code> zu verwenden,
-            um den <code>include_path</code> des System komplett zu <emphasis>ersetzen</emphasis>,
-            wenn das speziell für das <code>zf</code> Kommandozeilen Tool Sinn macht.
+            Alternativ kann es gewünscht sein <constant>ZEND_TOOL_INCLUDE_PATH</constant> zu
+            verwenden, um den <property>include_path</property> des System komplett zu
+            <emphasis>ersetzen</emphasis>, wenn das speziell für das <command>zf</command>
+            Kommandozeilen Tool Sinn macht.
         </para>
     </sect2>
 
@@ -243,7 +258,7 @@ C:\WAMP\PHP\bin
 
         <para>
             An diesem Punkt sollte man dafür gerüstet sein einige "interessantere" Kommandos
-            zu initialisieren. Um weiterzumachen kann man das Kommando <code>zf --help</code>
+            zu initialisieren. Um weiterzumachen kann man das Kommando <command>zf --help</command>
             ausführen um zu sehen was vorhanden ist.
         </para>
 
@@ -253,9 +268,9 @@ C:\WAMP\PHP\bin
         </para>
 
         <para>
-            Lesen Sie bei <code>Zend_Tool_Project</code> im Kapitel "Create Project" weiter um
-            zu verstehen wie das <code>zf</code> Skript für die Projekterstellung verwendet werden
-            kann.
+            Lesen Sie bei <classname>Zend_Tool_Project</classname> im Kapitel "Create Project"
+            weiter um zu verstehen wie das <command>zf</command> Skript für die Projekterstellung
+            verwendet werden kann.
         </para>
     </sect2>
 </sect1>

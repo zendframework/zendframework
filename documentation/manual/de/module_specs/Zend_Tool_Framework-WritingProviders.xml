@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16444 -->
+<!-- EN-Revision: 16656 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.tool.framework.writing-providers">
     <title>Erstellen von Providern für die Verwendung mit Zend_Tool_Framework</title>
@@ -7,8 +7,8 @@
     <para>
         Generell ist ein Provider für sich selbst nichts mehr als die Shell für einen Entwickler
         um einige Fähigkeiten zu bündeln die man mit dem Kommandozeilen (oder einem anderen)
-        Client ausliefern will. Das ist analog zu dem was ein "Controller" in einer MVC Anwendung
-        ist.
+        Client ausliefern will. Das ist analog zu dem was ein "Controller" in einer
+        <acronym>MVC</acronym> Anwendung ist.
     </para>
 
     <sect2 id="zend.tool.framework.writing-providers.basic">
@@ -18,11 +18,12 @@
             Wenn, als Beispiel, ein Entwickler die Fähigkeit hinzufügen will, die Version einer
             Datendatei anzuzeigen, mit der seine 3rd Party Komponente arbeitet, gibt es nur eine
             Klasse die der Entwickler implementieren muss. Angenommen die Komponente heisst
-            <code>My_Component</code>, dann würde er eine Klasse erstellen die
-            <code>My_Component_HelloProvider</code> heisst und in einer Datei ist die
-            <code>HelloProvider.php</code> heisst und irgendwo im <code>include_path</code> ist.
-            Diese Klasse würde <classname>Zend_Tool_Framework_Provider_Interface</classname>
-            implementieren, und der Body dieser Datei würde nur wie folgt auszusehen haben:
+            <classname>My_Component</classname>, dann würde er eine Klasse erstellen die
+            <classname>My_Component_HelloProvider</classname> heisst und in einer Datei ist die
+            <filename>HelloProvider.php</filename> heisst und irgendwo im
+            <property>include_path</property> ist. Diese Klasse würde
+            <classname>Zend_Tool_Framework_Provider_Interface</classname> implementieren, und der
+            Body dieser Datei würde nur wie folgt auszusehen haben:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -78,10 +79,11 @@ class My_Component_HelloProvider
 
         <para>
             Das obige Beispiel kann pber di Kommandozeile wie folgt aufgerufen werden:
-            <code>zf say hello Joe</code>. "Joe" wird dem Provider als Parameter des
+            <command>zf say hello Joe</command>. "Joe" wird dem Provider als Parameter des
             Methodenaufrufs zur Verfügung gestellt. Es ist auch zu beachten das der Parameter
             optional ist, was bedeutet das er auch auf der Kommandozeile optional ist, so das
-            <code>zf say hello</code> weiterhin funktioniert, und der Standardname "Ralph" ist.
+            <command>zf say hello</command> weiterhin funktioniert, und der Standardname "Ralph"
+            ist.
         </para>
 
         <para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16164 -->
+<!-- EN-Revision: 16664 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.front">
     <title>Der Front Controller</title>
@@ -111,7 +111,7 @@ $front = Zend_Controller_Front::getInstance();
                 zu sagen, wo er nach <link
                     linkend="zend.controller.action">Action-Controller</link>-Klassendateien suchen
                 soll. Sie akzeptiert sowohl einen einzelnen Pfad als auch ein Array aus
-                Modul/Pfad-Paaren.
+                Modul und Pfad-Paaren.
             </para>
 
             <para>
@@ -136,15 +136,15 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
             <note>
                 <para>
                     Wenn <methodname>addControllerDirectory()</methodname> ohne einen Modulnamen
-                    verwendet wird, setzt sie den Ordner für das Modul <code>default</code> -- und
-                    überschreibt einen Pfad, der vorher gesetzt wurde.
+                    verwendet wird, setzt sie den Ordner für das Modul <emphasis>default</emphasis>
+                    -- und überschreibt einen Pfad, der vorher gesetzt wurde.
                 </para>
             </note>
 
             <para>
                 Die aktuellen Einstellungen für den/die Controller-Ordner können mit
                 <methodname>getControllerDirectory()</methodname> abgerufen werden; das gibt ein
-                Array mit Modul/Verzeichnis-Paaren zurück.
+                Array mit Modul und Verzeichnis-Paaren zurück.
             </para>
         </sect3>
 
@@ -160,9 +160,9 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
 
             <para>
                 Jedes Modul sollte in seinem eigenen Verzeichnis sein und die Verzeichnisstruktur
-                des Standardmoduls spiegeln -- z.B., sollte es mindestens ein "controllers"
-                Unterzeichnis haben und typischerweise ein "views" Unterverzeichnis und andere
-                Anwendungsverzeichnisse.
+                des Standardmoduls spiegeln -- z.B., sollte es mindestens ein
+                <filename>/controllers/</filename> Unterzeichnis haben und typischerweise ein
+                <filename>/views/</filename> Unterverzeichnis und andere Anwendungsverzeichnisse.
             </para>
 
             <para>
@@ -197,7 +197,7 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
                 Wenn kein Anfrage- oder Antwort-Objekt angegeben werden, wird
                 <methodname>dispatch()</methodname> nach vorher registrierten Objekten suchen und
                 diese benutzen oder Standard-Versionen für seinen Prozess instanzieren (in beiden
-                Fällen wird der HTTP-Dialekt als Standard benutzt).
+                Fällen wird der <acronym>HTTP</acronym> Dialekt als Standard benutzt).
             </para>
 
             <para>
@@ -232,9 +232,10 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
             <title>run()</title>
 
             <para>
-                <classname>Zend_Controller_Front::run($path)</classname> ist eine statische Methode,
-                die einfach einen Pfad zu einem Verzeichnis, das Action-Controller enthält, als
-                Parameter akzeptiert. Sie holt sich eine Front-Controller-Instanz (mit <link
+                <methodname>Zend_Controller_Front::run($path)</methodname> ist eine statische
+                Methode, die einfach einen Pfad zu einem Verzeichnis, das Action-Controller
+                enthält, als Parameter akzeptiert. Sie holt sich eine Front-Controller-Instanz (mit
+                <link
                     linkend="zend.controller.front.methods.primary.getinstance">getInstance()</link>,
                 registriert den angegebenen Pfad mit <link
                     linkend="zend.controller.front.methods.primary.setcontrollerdirectory">setControllerDirectory()</link>,
@@ -386,8 +387,8 @@ Zend_Controller_Front::run('../application/controllers');
                 </para>
 
                 <para>
-                    Mehr Informationen gibt es hier: <xref
-                        linkend="zend.controller.exceptions" />.
+                    Mehr Informationen gibt es hier: <link
+                        linkend="zend.controller.exceptions">MVC Exceptions</link>.
                 </para>
             </listitem>
 
@@ -398,8 +399,8 @@ Zend_Controller_Front::run('../application/controllers');
                     soll (<constant>TRUE</constant>) oder ob er sie automatisch ausgibt
                     (<constant>FALSE</constant>). In der Standardeinstellung wird die Antwort
                     automatisch ausgegeben (durch Aufruf von
-                    <classname>Zend_Controller_Response_Abstract::sendResponse()</classname>); das
-                    Einschalten von <methodname>returnResponse()</methodname> ändert das.
+                    <methodname>Zend_Controller_Response_Abstract::sendResponse()</methodname>);
+                    das Einschalten von <methodname>returnResponse()</methodname> ändert das.
                 </para>
 
                 <para>
@@ -480,8 +481,9 @@ Zend_Controller_Front::run('../application/controllers');
                 </para>
 
                 <para>
-                    Siehe <xref linkend="zend.controller.exceptions.internal" />
-                    für detailliertere Informationen über die Benutzung dieser Einstellung.
+                    Siehe das Kapitel <link linkend="zend.controller.exceptions.internal">MVC
+                        Exceptions denen man begegnen kann</link> für detailliertere Informationen
+                    über die Benutzung dieser Einstellung.
                 </para>
             </listitem>
 
@@ -537,7 +539,7 @@ class My_Controller_Front extends Zend_Controller_Front
 
         <para>
             Das Überschreiben der <methodname>getInstance()</methodname>-Methode sorgt dafür, dass
-            folgende Aufrufe von <classname>Zend_Controller_Front::getInstance()</classname> eine
+            folgende Aufrufe von <methodname>Zend_Controller_Front::getInstance()</methodname> eine
             Instanz der neuen Subklasse zurückgeben anstatt einer
             <classname>Zend_Controller_Front</classname>-Instanz -- das ist speziell für einige der
             alternativen Router und View-Helfer nützlich.

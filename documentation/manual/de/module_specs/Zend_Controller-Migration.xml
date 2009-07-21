@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16396 -->
+<!-- EN-Revision: 16664 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.migration">
     <title>Migration von vorhergehenden Versionen</title>
 
     <para>
-        Die API der MVC Komponenten hat sich mit der Zeit verändert. Wer Zend Framework bereits
-        in einer früheren Version verwendet hat, folgt dem Leitfaden unten, damit dieSkripte die
-        neue Archtitekur verwenden.
+        Die <acronym>API</acronym> der <acronym>MVC</acronym> Komponenten hat sich mit der Zeit
+        verändert. Wer Zend Framework bereits in einer früheren Version verwendet hat, folgt dem
+        Leitfaden unten, damit die Skripte die neue Archtitekur verwenden.
     </para>
 
     <sect2 id="zend.controller.migration.fromoneseventooneeight">
@@ -41,13 +41,15 @@
             </para>
 
             <itemizedlist>
-                <listitem><para>
-                    <methodname>formatModuleName()</methodname>: sollte verwendet werden um einen
-                    rohen Controllernamen zu nehmen, wie den einen der in einem Anfrageobjekt
-                    gepackt ist, und Ihn in einen richtigen Klassennamen zu reformatieren den eine
-                    Klasse, die <classname>Zend_Controller_Action</classname> erweitert, verwenden
-                    würde
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>formatModuleName()</methodname>: sollte verwendet werden um
+                        einen rohen Controllernamen zu nehmen, wie den einen der in einem
+                        Anfrageobjekt gepackt ist, und Ihn in einen richtigen Klassennamen zu
+                        reformatieren den eine Klasse, die
+                        <classname>Zend_Controller_Action</classname> erweitert, verwenden würde
+                    </para>
+                </listitem>
             </itemizedlist>
         </sect3>
     </sect2>
@@ -96,16 +98,17 @@
         </para>
 
         <para>
-            Wenn URLs geschrieben werden besteht der dokumentierte Weg darin die Aktionsnamen
-            camelCased mit einem Trennzeichen zu schreiben; diese sind normalerweise '.' oder '-',
-            können aber im Dispatcher konfiguriert werden. Der Dispatcher ändert den Aktionsnamen
-            intern auf Kleinschreibung und verwendet diese Trennzeichen um die Aktionsmethode
-            wieder zu bauen indem er sie camelCase schreibt. Trotzdem, weil PHP Funktionen nicht
-            unabhängig von der Schreibweise sind, <emphasis>könnte</emphasis> man URLs mit
-            camelCase schreiben und der Dispatcher würde diese auf den gleichen Platz auflösen.
-            Zum Beispiel, 'camel-cased' würde durch den Dispatcher zu 'camelCasedAction' werden;
-            trotzdem, durch den Fall der unabhängigen Schreibweise in PHP, würden beide die selbe
-            Methode ausführen.
+            Wenn <acronym>URL</acronym>s geschrieben werden besteht der dokumentierte Weg darin die
+            Aktionsnamen camelCased mit einem Trennzeichen zu schreiben; diese sind normalerweise
+            '.' oder '-', können aber im Dispatcher konfiguriert werden. Der Dispatcher ändert den
+            Aktionsnamen intern auf Kleinschreibung und verwendet diese Trennzeichen um die
+            Aktionsmethode wieder zu bauen indem er sie camelCase schreibt. Trotzdem, weil
+            <acronym>PHP</acronym> Funktionen nicht unabhängig von der Schreibweise sind,
+            <emphasis>könnte</emphasis> man <acronym>URL</acronym>s mit camelCase schreiben und der
+            Dispatcher würde diese auf den gleichen Platz auflösen. Zum Beispiel, 'camel-cased'
+            würde durch den Dispatcher zu 'camelCasedAction' werden; trotzdem, durch den Fall der
+            unabhängigen Schreibweise in <acronym>PHP</acronym>, würden beide die selbe Methode
+            ausführen.
         </para>
 
         <para>
@@ -115,7 +118,8 @@
             Bindung zwischen Aktionen und View Skripten, und die Normalisierung stellt sicher
             das die Skripte gefunden werden. Trotzdem, wenn die Aktion 'camelCased' aufgerufen und
             aufgelöst wird, ist das Trennzeichen nicht mehr vorhanden, und der ViewRenderer
-            versucht einen anderen Ort aufzulösen -- 'camelcased.phtml' statt 'camel-cased.phtml'.
+            versucht einen anderen Ort aufzulösen -- <filename>camelcased.phtml</filename> statt
+            <filename>camel-cased.phtml</filename>.
         </para>
 
         <para>
@@ -135,11 +139,13 @@
         </para>
 
         <itemizedlist>
-            <listitem><para>
+            <listitem>
+                <para>
                     Beste Option: Die View Skripte umbenennen. Vorteile: zukünftige Kompatibilität.
                     Nachteile: Wenn man viele View Skripte hat die auf dem vorigen aufbauen führt
                     das, unerwarteter Weise, zu vielen Umbenennungen die durchgeführt werden müssen.
-            </para></listitem>
+                </para>
+            </listitem>
 
             <listitem>
                 <para>
@@ -179,7 +185,7 @@ $inflector->setFilterRule(':action', array(
                 <para>
                     Die am wenigsten zu empfehlende Option: Man kann den Dispatcher dazu zwingen
                     camelCase Aktionsnamen mit einem neuen Front Kontroller Flag
-                    'useCaseSensitiveActions' zu bearbeiten:
+                    <property>useCaseSensitiveActions</property> zu bearbeiten:
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -216,11 +222,11 @@ $front->setParam('useCaseSensitiveActions', true);
         </para>
 
         <para>
-            Der <emphasis>ErrorHandler</emphasis> Plugin läuft wärend der
+            Der <classname>ErrorHandler</classname> Plugin läuft wärend der
             <methodname>postDispatch()</methodname> Prüfung auf Ausnahmen, und leitet zu einem
             spezifizierten Fehlerhandler Kontroller weiter. Solch ein Kontroller sollte in der
             eigenen Anwendung inkludiert werden. Er kann deaktiviert werden durch das setzen des
-            Frontkontroller Parameters <code>noErrorHandler</code>:
+            Frontkontroller Parameters <property>noErrorHandler</property>:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -228,17 +234,17 @@ $front->setParam('noErrorHandler', true);
 ]]></programlisting>
 
         <para>
-            Der <emphasis>ViewRenderer</emphasis> Aktionhelfer automatisiert die Injizierung der
+            Der <classname>ViewRenderer</classname> Aktionhelfer automatisiert die Injizierung der
             View in den Aktionkontroller genauso wie das autorendern von Viewskripten basierend auf
             die aktuelle Aktion. Das primäre Problem dem man begegnen kann ist, wenn man Aktionen
             hat die keine View Skripte rendern und weder vorwärts- noch weiterleiten, da der
-            <emphasis>ViewRenderer</emphasis> versucht ein View Skript zu Rendern basierend auf dem
-            Aktionnamen.
+            <classname>ViewRenderer</classname> versucht ein View Skript zu Rendern basierend auf
+            dem Aktionnamen.
         </para>
 
         <para>
             Es gibt verschiedene Strategien die man anwenden kann um den eigenen Code upzudaten. In
-            kurzer Form, kann man global den <emphasis>ViewRenderer</emphasis> im eigenen
+            kurzer Form, kann man global den <classname>ViewRenderer</classname> im eigenen
             Frontkontroller Bootstrap vor dem Abarbeiten ausschalten:
         </para>
 
@@ -253,7 +259,7 @@ $front->setParam('noViewRenderer', true);
         </para>
 
         <para>
-            Wenn man bereit ist damit zu beginnen die <emphasis>ViewRenderer</emphasis>
+            Wenn man bereit ist damit zu beginnen die <classname>ViewRenderer</classname>
             Funktionalität zu verwenden, gibt es verschiedene Dinge die man im eigenen
             Kontrollercode beachten muß. Zuerst muß auf die Aktionmethoden (die Methoden die mit
             'Action' enden) geachtet werden, und ausgesucht werden was eine jede machen soll. Wenn
@@ -262,16 +268,16 @@ $front->setParam('noViewRenderer', true);
 
         <itemizedlist>
             <listitem>
-                <para>Aufruf von <methodname>$this-&gt;render()</methodname></para>
+                <para>Aufruf von <methodname>$this->render()</methodname></para>
             </listitem>
             <listitem>
-                <para>Aufruf von <methodname>$this-&gt;_forward()</methodname></para>
+                <para>Aufruf von <methodname>$this->_forward()</methodname></para>
             </listitem>
             <listitem>
-                <para>Aufruf von <methodname>$this-&gt;_redirect()</methodname></para>
+                <para>Aufruf von <methodname>$this->_redirect()</methodname></para>
             </listitem>
             <listitem>
-                <para>Aufruf des <methodname>Redirector</methodname> Aktionhelfers</para>
+                <para>Aufruf des <classname>Redirector</classname> Aktionhelfers</para>
             </listitem>
         </itemizedlist>
 
@@ -323,7 +329,7 @@ public function preDispatch()
                 <para>
                     Wenn man <methodname>render()</methodname> mit Argumenten aufruft, und danach nicht
                     irgendeine Bearbeitung durchführt oder mehrere View sktipe rendert, können diese
-                    Aufrufe zu <methodname>$this-&gt;_helper-&gt;viewRenderer()</methodname> geändert
+                    Aufrufe zu <methodname>$this->_helper->viewRenderer()</methodname> geändert
                     werden.
                 </para>
             </listitem>
@@ -332,7 +338,7 @@ public function preDispatch()
         <para>
             Wenn die konventionelle modulare Verzeichnisstruktur nicht verwendet wird, gibt es eine
             Vielzahl von Methoden für das Setzen des View Basispfades und der Skript
-            Pfadspezifikationen so das man den <emphasis>ViewRenderer</emphasis> verwenden kann.
+            Pfadspezifikationen so das man den <classname>ViewRenderer</classname> verwenden kann.
             Bitte lies die <link linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer
                 Dokumentation</link> für Informationen über diese Methoden.
         </para>
@@ -340,14 +346,14 @@ public function preDispatch()
         <para>
             Wenn ein View Objekt von der Registry verwendet, oder das eigene View Objekt verändert,
             oder eine andere View Implementation verwendet wird wird man den
-            <emphasis>ViewRenderer</emphasis> in diesem Objekt injiziieren wollen. Das kann ganz
+            <classname>ViewRenderer</classname> in diesem Objekt injiziieren wollen. Das kann ganz
             einfach jederzeit durchgeführt werden.
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    Vor dem Verarbeiten einer Frontkontroller Instanz:
+                    Vor dem Verarbeiten einer Frontcontroller Instanz:
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -430,7 +436,8 @@ $viewRenderer->setView($view);
         <title>Migration von 0.6.0 nach 0.8.0 oder neuer</title>
 
         <para>
-            Durch bisherige Änderungen bleibt die wesentliche Verwendung der MVC Komponenten gleich:
+            Durch bisherige Änderungen bleibt die wesentliche Verwendung der <acronym>MVC</acronym>
+            Komponenten gleich:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -465,9 +472,9 @@ Zend_Controller_Front::run('/path/to/controllers');
                 <para>
                     Eine neue Route Klasse für die Verwendung mit dem Rewrite Router wurde
                     eingeführt: <classname>Zend_Controller_Router_Route_Module</classname>; sie
-                    deckt die Standardrouten ab, die vom MVC verwendet werden und bietet die
-                    Unterstützung für <link linkend="zend.controller.modular">Controller
-                        Module</link>.
+                    deckt die Standardrouten ab, die vom <acronym>MVC</acronym> verwendet werden
+                    und bietet die Unterstützung für <link
+                        linkend="zend.controller.modular">Controller Module</link>.
                 </para>
             </listitem>
 
@@ -487,7 +494,7 @@ Zend_Controller_Front::run('/path/to/controllers');
 
             <listitem>
                 <para>
-                    <classname>Zend_Controller_Action::_forward()</classname>'s Argumente wurden
+                    <methodname>Zend_Controller_Action::_forward()</methodname>'s Argumente wurden
                     geändert. Die Signatur ist nun:
                 </para>
 
@@ -515,8 +522,8 @@ final protected function _forward($action,
         <title>Migration von 0.2.0 oder früher nach 0.6.0</title>
 
         <para>
-            Die grundlegende Verwendung der MVC Komponenten hat sich nicht verändert; man kann immer
-            noch das folgende machen:
+            Die grundlegende Verwendung der <acronym>MVC</acronym> Komponenten hat sich nicht
+            verändert; man kann immer noch das folgende machen:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -543,18 +550,18 @@ $ctrl->dispatch();
 
         <para>
             Wir empfehlen die Verwendung des Response Objektes, um Inhalte und Header zu sammeln.
-            Dies erlaubt den flexibleren Wechsel von Ausgabeformaten (z.B. JSON oder XML statt
-            XHTML) in deiner Applikation. Standardmäßig verarbeitet
-            <methodname>dispatch()</methodname> die Antwort, sendet Header und gibt die Inhalte
-            aus. Man kann den Front Controller auch auffordern, die Antwort durch
-            <methodname>returnResponse()</methodname> zurückzugeben und die Antwort dann auf
-            eigene Weise ausgeben. Eine zukünftige Version des Front Controllers könnte die
-            Verwendung des Response Objektes durch Output Buffering erzwingen.
+            Dies erlaubt den flexibleren Wechsel von Ausgabeformaten (z.B. <acronym>JSON</acronym>
+            oder <acronym>XML</acronym> statt <acronym>XHTML</acronym>) in deiner Applikation.
+            Standardmäßig verarbeitet <methodname>dispatch()</methodname> die Antwort, sendet
+            Header und gibt die Inhalte aus. Man kann den Front Controller auch auffordern, die
+            Antwort durch <methodname>returnResponse()</methodname> zurückzugeben und die Antwort
+            dann auf eigene Weise ausgeben. Eine zukünftige Version des Front Controllers könnte
+            die Verwendung des Response Objektes durch Output Buffering erzwingen.
         </para>
 
         <para>
-            Es gibt viele weitere zusätzliche Funktionalitäten, welche die vorherige API erweitern.
-            Diese sind in der Dokumentation aufgeführt.
+            Es gibt viele weitere zusätzliche Funktionalitäten, welche die vorherige
+            <acronym>API</acronym> erweitern. Diese sind in der Dokumentation aufgeführt.
         </para>
 
         <para>
@@ -565,9 +572,9 @@ $ctrl->dispatch();
         <itemizedlist>
             <listitem>
                 <para>
-                    <classname>Zend_Controller_Front::dispatch()</classname> fängt standardmäßig die
-                    Ausnahmen im Response Objekt ab und gibt sie nicht aus, um sicherzugehen, dass
-                    keine sensitiven Systeminformationen ausgegeben werden. Man kann dies auf
+                    <methodname>Zend_Controller_Front::dispatch()</methodname> fängt standardmäßig
+                    die Ausnahmen im Response Objekt ab und gibt sie nicht aus, um sicherzugehen,
+                    dass keine sensitiven Systeminformationen ausgegeben werden. Man kann dies auf
                     mehrere Arten überschreiben:
                 </para>
 
@@ -602,73 +609,96 @@ echo $response;
                 </itemizedlist>
             </listitem>
 
-            <listitem><para>
-                <classname>Zend_Controller_Dispatcher_Interface::dispatch()</classname>
-                akzeptiert und gibt nun ein <xref linkend="zend.controller.request" />
-                Objekt anstelle eines Dispatcher Token zurück.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>Zend_Controller_Dispatcher_Interface::dispatch()</methodname>
+                    akzeptiert und gibt nun ein <link
+                        linkend="zend.controller.request">Anfrage Objekt</link> anstelle eines
+                    Dispatcher Token zurück.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <classname>Zend_Controller_Router_Interface::route()</classname>
-                akzeptiert und gibt nun ein <xref linkend="zend.controller.request" />
-                Objekt anstelle eines Dispatcher Token zurück.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>Zend_Controller_Router_Interface::route()</methodname>
+                    akzeptiert und gibt nun ein <link
+                        linkend="zend.controller.request">Anfrage Objekt</link> anstelle eines
+                    eines Dispatcher Token zurück.
+                </para>
+            </listitem>
 
             <listitem>
                 <para><classname>Zend_Controller_Action</classname> Änderungen beinhalten:</para>
 
                 <itemizedlist>
-                    <listitem><para>
-                        Der Konstruktur akzeptiert nun genau drei Argumente,
-                        <classname>Zend_Controller_Request_Abstract $request</classname>,
-                        <classname>Zend_Controller_Response_Abstract $response</classname>, und
-                        <command>array $params (optional)</command>.
-                        <classname>Zend_Controller_Action::__construct()</classname> verwendet
-                        diese, um die Request, Response und invokeArgs Eigenschaften für das Objekt
-                        zu setzen, und beim Überschreiben des Konstrukturs sollte man dies ebenfalls
-                        tun. Besser ist es, die <methodname>init()</methodname> Methode zu
-                        verwenden, um jedwede Instanzkonfiguration durchzuführen, weil diese
-                        Methode als letzte Methode des Konstrukturs aufgerufen wird.
-                    </para></listitem>
+                    <listitem>
+                        <para>
+                            Der Konstruktur akzeptiert nun genau drei Argumente,
+                            <classname>Zend_Controller_Request_Abstract</classname>
+                            <varname>$request</varname>,
+                            <classname>Zend_Controller_Response_Abstract</classname>
+                            <varname>$response</varname>, und
+                            <type>Array</type> <varname>$params</varname> (Optional).
+                            <methodname>Zend_Controller_Action::__construct()</methodname>
+                            verwendet diese, um die Request, Response und invokeArgs Eigenschaften
+                            für das Objekt zu setzen, und beim Überschreiben des Konstrukturs
+                            sollte man dies ebenfalls tun. Besser ist es, die
+                            <methodname>init()</methodname> Methode zu verwenden, um jedwede
+                            Instanzkonfiguration durchzuführen, weil diese Methode als letzte
+                            Methode des Konstrukturs aufgerufen wird.
+                        </para>
+                    </listitem>
 
-                    <listitem><para>
-                        <methodname>run()</methodname> ist nicht länger als final definiert, wird
-                        aber auch nicht länger vom Front Controller verwendet; sein einziger Zweck
-                        ist, dass die Klasse auch als Page Controller verwendet werden kann. Sie
-                        nimmt nun zwei optionale Argument an, ein
-                        <classname>Zend_Controller_Request_Abstract $request</classname>
-                        und ein <classname>Zend_Controller_Response_Abstract $response</classname>.
-                    </para></listitem>
+                    <listitem>
+                        <para>
+                            <methodname>run()</methodname> ist nicht länger als final definiert,
+                            wird aber auch nicht länger vom Front Controller verwendet; sein
+                            einziger Zweck ist, dass die Klasse auch als Page Controller verwendet
+                            werden kann. Sie nimmt nun zwei optionale Argument an, ein
+                            <classname>Zend_Controller_Request_Abstract</classname>
+                            <varname>$request</varname> und ein
+                            <classname>Zend_Controller_Response_Abstract</classname>
+                            <varname>$response</varname>.
+                        </para>
+                    </listitem>
 
-                    <listitem><para>
-                        <methodname>indexAction()</methodname> muss nicht mehr länger definiert
-                        werden, aber wird als Standardaktion empfohlen. Dies erlaubt dem
-                        RewriteRouter und den Action Controllern andere Standardaktionsmethoden zu
-                        definieren.
-                    </para></listitem>
+                    <listitem>
+                        <para>
+                            <methodname>indexAction()</methodname> muss nicht mehr länger definiert
+                            werden, aber wird als Standardaktion empfohlen. Dies erlaubt dem
+                            RewriteRouter und den Action Controllern andere Standardaktionsmethoden
+                            zu definieren.
+                        </para>
+                    </listitem>
 
-                    <listitem><para>
-                        <methodname>__call()</methodname> sollte überschrieben werden, um jede
-                        undefinierte Aktion automatisch verarbeiten zu können.
-                    </para></listitem>
+                    <listitem>
+                        <para>
+                            <methodname>__call()</methodname> sollte überschrieben werden, um jede
+                            undefinierte Aktion automatisch verarbeiten zu können.
+                        </para>
+                    </listitem>
 
-                    <listitem><para>
-                        <methodname>_redirect()</methodname> nimmt nun ein optionales zweites
-                        Argument entgegen, den HTTP Code, der mit dem Redirect zurückgegeben werden
-                        soll, und ein optionales drittes Argument <varname>$prependBase</varname>,
-                        das angibt, dass die im Request Objekt registrierte Basis URL der
-                        übergebenen URL voran gestellt werden soll.
-                    </para></listitem>
+                    <listitem>
+                        <para>
+                            <methodname>_redirect()</methodname> nimmt nun ein optionales zweites
+                            Argument entgegen, den <acronym>HTTP</acronym> Code, der mit dem
+                            Redirect zurückgegeben werden soll, und ein optionales drittes Argument
+                            <varname>$prependBase</varname>, das angibt, dass die im Request Objekt
+                            registrierte Basis URL der übergebenen <acronym>URL</acronym> voran
+                            gestellt werden soll.
+                        </para>
+                    </listitem>
 
                     <listitem>
                         <para>
                             Die <varname>$_action</varname> Eigenschaft wird nicht mehr gesetzt.
                             Diese Eigenschaft war ein
                             <classname>Zend_Controller_Dispatcher_Token</classname>, der in der
-                            aktuellen Inkarnation nicht mehr länger existiert. Der einzige Zweck des
-                            Tokens war, Informationen über angeforderte Controller, Aktion und URL
-                            Parameter bereit zu stellen. Diese Infrmationen ist nun im Request
-                            Objekt verfügbar und kann wie folgt abgerufen werden:
+                            aktuellen Inkarnation nicht mehr länger existiert. Der einzige Zweck
+                            des Tokens war, Informationen über angeforderte Controller, Aktion und
+                            <acronym>URL</acronym> Parameter bereit zu stellen. Diese Infrmationen
+                            ist nun im Request Objekt verfügbar und kann wie folgt abgerufen
+                            werden:
                         </para>
 
                         <programlisting language="php"><![CDATA[
@@ -718,20 +748,24 @@ public function __call($method, $args)
                 </itemizedlist>
             </listitem>
 
-            <listitem><para>
-                <classname>Zend_Controller_RewriteRouter::setRewriteBase()</classname> wurde
-                entfernt. Stattdessen soll
-                <classname>Zend_Controller_Front::setBaseUrl()</classname> verwendet werden (oder
-                <classname>Zend_Controller_Request_Http::setBaseUrl()</classname>, wenn die Request
-                Klasse verwendet wird).
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>Zend_Controller_RewriteRouter::setRewriteBase()</methodname> wurde
+                    entfernt. Stattdessen soll
+                    <methodname>Zend_Controller_Front::setBaseUrl()</methodname> verwendet werden
+                    (oder <methodname>Zend_Controller_Request_Http::setBaseUrl()</methodname>, wenn
+                    die Request Klasse verwendet wird).
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <classname>Zend_Controller_Plugin_Interface</classname> wurde durch
-                by <classname>Zend_Controller_Plugin_Abstract</classname> ersetzt. Alle Methoden
-                nehmen nun ein <xref linkend="zend.controller.request" /> Objekt statt eines
-                Dispatcher Tokens entgegen bzw. geben es zurück.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <classname>Zend_Controller_Plugin_Interface</classname> wurde durch
+                    <classname>Zend_Controller_Plugin_Abstract</classname> ersetzt. Alle Methoden
+                    nehmen nun ein <link linkend="zend.controller.request" />Request Objekt</link>
+                    statt eines Dispatcher Tokens entgegen bzw. geben es zurück.
+                </para>
+            </listitem>
         </itemizedlist>
     </sect2>
 </sect1>

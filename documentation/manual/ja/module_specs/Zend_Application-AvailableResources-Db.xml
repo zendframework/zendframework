@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16650 -->
+<!-- EN-Revision: 16845 -->
 <sect2 id="zend.application.available-resources.db">
     <title>Zend_Application_Resource_Db</title>
 
@@ -17,15 +17,15 @@
 
     <itemizedlist>
         <listitem><para>
-            <property>adapter</property>: <classname>Zend_Db</classname>アダプタ・タイプ
+            <emphasis><property>adapter</property></emphasis>: <classname>Zend_Db</classname>アダプタ・タイプ
         </para></listitem>
 
         <listitem><para>
-            <property>params</property>: アダプタ・インスタンスを取得するときに使う構成パラメータの連想配列です。
+            <emphasis><property>params</property></emphasis>: アダプタ・インスタンスを取得するときに使う構成パラメータの連想配列です。
         </para></listitem>
 
         <listitem><para>
-            <property>isDefaultTableAdapter</property>: アダプタをデフォルト・テーブル・アダプタとして確立するべきかどうか。
+            <emphasis><property>isDefaultTableAdapter</property></emphasis>: アダプタをデフォルト・テーブル・アダプタとして確立するべきかどうか。
         </para></listitem>
     </itemizedlist>
 

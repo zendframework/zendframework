@@ -237,6 +237,64 @@ class Zend_Config_XmlTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('live', $config->db->name);
         $this->assertEquals('multi', $config->one->two->three);
     }
+    
+    public function testConstants()
+    {
+        if (!defined('ZEND_CONFIG_XML_TEST_CONSTANT')) {
+            define('ZEND_CONFIG_XML_TEST_CONSTANT', 'test');
+        }
+        
+        $string = <<<EOT
+<?xml version="1.0"?>
+<config xmlns:zf="http://framework.zend.com/xml/zend-config-xml/1.0/">
+    <all>
+        <foo>foo-<zf:const zf:name="ZEND_CONFIG_XML_TEST_CONSTANT"/>-bar-<zf:const zf:name="ZEND_CONFIG_XML_TEST_CONSTANT"/></foo>
+        <bar><const name="ZEND_CONFIG_XML_TEST_CONSTANT"/></bar>
+    </all>
+</config>
+EOT;
+        
+        $config = new Zend_Config_Xml($string, 'all');
+        
+        $this->assertEquals('foo-test-bar-test', $config->foo);
+        $this->assertEquals('ZEND_CONFIG_XML_TEST_CONSTANT', $config->bar->const->name);
+    }
+    
+    public function testNonExistentConstant()
+    {
+        $string = <<<EOT
+<?xml version="1.0"?>
+<config xmlns:zf="http://framework.zend.com/xml/zend-config-xml/1.0/">
+    <all>
+        <foo>foo-<zf:const zf:name="ZEND_CONFIG_XML_TEST_NON_EXISTENT_CONSTANT"/></foo>
+    </all>
+</config>
+EOT;
+        
+        try {
+            $config = new Zend_Config_Xml($string, 'all');
+            $this->fail('An expected Zend_Config_Exception was not raised');
+        } catch (Zend_Config_Exception $e) {
+            $this->assertEquals("Constant with name 'ZEND_CONFIG_XML_TEST_NON_EXISTENT_CONSTANT' was not defined", $e->getMessage());
+        }
+    }
+    
+    public function testNamespacedExtends()
+    {
+        $string = <<<EOT
+<?xml version="1.0"?>
+<config xmlns:zf="http://framework.zend.com/xml/zend-config-xml/1.0/">
+    <all>
+        <foo>bar</foo>
+    </all>
+    <staging zf:extends="all"/>
+</config>
+EOT;
+        
+        $config = new Zend_Config_Xml($string);
+
+        $this->assertEquals('bar', $config->staging->foo);
+    }
 
     /*
      * @group 3702

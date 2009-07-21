@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16465 -->
+<!-- EN-Revision: 16674 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.captcha.adapters">
     <title>CAPTCHA Adapter</title>
@@ -156,7 +156,7 @@
                 <methodname>setGcFreq($gcFreq)</methodname> und
                 <methodname>getGcFreg()</methodname> erlauben es zu Spezifizieren wie oft die
                 Garbage Collection laufen soll. Die Garbage Collection wird alle
-                <emphasis>1/$gcFreq</emphasis> Aufrufe ausgeführt. Standard ist 100.
+                <command>1/$gcFreq</command> Aufrufe ausgeführt. Standard ist 100.
             </para></listitem>
 
             <listitem><para>

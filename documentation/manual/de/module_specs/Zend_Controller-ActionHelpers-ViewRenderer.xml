@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16505 -->
+<!-- EN-Revision: 16674 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.actionhelpers.viewrenderer">
     <title>ViewRenderer</title>
@@ -71,7 +71,7 @@
             <para>
                 Der <emphasis>ViewRenderer</emphasis> ist standardmäßig aktiviert. Man kann Ihn
                 über den Parameter <emphasis>noViewRenderer</emphasis> des Frontkontrollers
-                deaktivieren (<methodname>$front->setParam('noViewRenderer', true)</methodname>)
+                deaktivieren (<command>$front->setParam('noViewRenderer', true);</command>)
                 oder den Helfer vom Helfer Broker Stack entfernen
                 (<methodname>Zend_Controller_Action_HelperBroker::removeHelper('viewRenderer')</methodname>).
             </para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16470 -->
+<!-- EN-Revision: 16674 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.config.adapters.ini">
     <title>Zend_Config_Ini</title>
@@ -35,7 +35,7 @@
         <para>
             Standardmäßig ist das Schlüssel Trennzeichen der Punkt (<emphasis>.</emphasis>). Dies
             kann geändert werden, indem der <varname>$options</varname> Schlüssel
-            <emphasis>'nestSeparator'</emphasis> geändert wird, wenn das
+            <property>nestSeparator</property> geändert wird, wenn das
             <classname>Zend_Config_Ini</classname> Objekt instanziert wird.
             Zum Beispiel:
         </para>
@@ -122,22 +122,22 @@ echo $config->database->params->dbname; // Ausgabe "dbname"
                     </entry>
                 </row>
                 <row>
-                    <entry><varname>$options = false</varname></entry>
+                    <entry><varname>$options</varname> (Default <constant>FALSE</constant>)</entry>
                     <entry>Options Array. Die folgenden Schlüssel werden unterstützt:
                         <itemizedlist>
                             <listitem>
                                 <para>
-                                    <emphasis>allowModifications</emphasis>: Auf
-                                    <constant>TRUE</constant> gesetzt erlaubt es weiterführende
+                                    <emphasis><property>allowModifications</property></emphasis>:
+                                    Auf <constant>TRUE</constant> gesetzt erlaubt es weiterführende
                                     Modifikationen der geladenen Datei. Standardmäßig auf
                                     <constant>NULL</constant> gestellt
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    <emphasis>nestSeparator</emphasis>: Auf das Zeichen zu setzen
-                                    das als Abschnitts Separator verwendet wird. Standardmäßig auf
-                                    "." gestellt
+                                    <emphasis><property>nestSeparator</property></emphasis>: Auf
+                                    das Zeichen zu setzen das als Abschnitts Separator verwendet
+                                    wird. Standardmäßig auf "." gestellt
                                 </para>
                             </listitem>
                         </itemizedlist>

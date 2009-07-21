@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16393 -->
+<!-- EN-Revision: 16674 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.config.writer.introduction">
     <title>Zend_Config_Writer</title>
@@ -47,7 +47,7 @@
         des <classname>Zend_Config</classname> Objektes über den Zugriffsaccessor
         (<emphasis>-&gt;</emphasis>) gesetzt werden. Um eine Sektion im Root oder im Branch zu
         erstellen muß einfach ein neues Aray erstellt werden
-        ("<command>$config-&gt;branch = array()</command>"). Um zu definieren welche Sektion eine
+        ("<command>$config-&gt;branch = array();</command>"). Um zu definieren welche Sektion eine
         andere erweitert, muß die <methodname>setExtend()</methodname> Methode am Root
         <classname>Zend_Config</classname> Objekt aufgerufen werden.
     </para>

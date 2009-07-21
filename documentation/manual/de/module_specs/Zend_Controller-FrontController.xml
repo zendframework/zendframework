@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16664 -->
+<!-- EN-Revision: 16674 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.front">
     <title>Der Front Controller</title>
@@ -279,7 +279,8 @@ Zend_Controller_Front::run('../application/controllers');
 
             <listitem>
                 <para>
-                    <methodname>(set|get)DefaultControllerName()</methodname> erlaubt es, dem
+                    <methodname>setDefaultControllerName()</methodname> und
+                    <methodname>getDefaultControllerName()</methodname> erlauben es, dem
                     Front-Controller einen anderen Namen für den Standard-Action-Controller
                     mitzugeben (ansonsten wird 'index' benutzt), bzw. den aktuellen Wert
                     herauszufinden. Diese Funktionen leiten die Anfragen an den <link
@@ -289,7 +290,8 @@ Zend_Controller_Front::run('../application/controllers');
 
             <listitem>
                 <para>
-                    <methodname>(set|get)DefaultAction()</methodname> erlaubt analog, den
+                    <methodname>setDefaultAction()</methodname> und
+                    <methodname>getDefaultAction()</methodname> erlauben analog, den
                     Standard-Aktionsnamen zu setzen - ohne Einstellung wird 'index' verwendet - und
                     den aktuellen Wert auszulesen. Auch diese beiden leiten an den <link
                         linkend="zend.controller.dispatcher">Dispatcher</link> weiter.
@@ -298,7 +300,8 @@ Zend_Controller_Front::run('../application/controllers');
 
             <listitem>
                 <para>
-                    Mit <methodname>(set|get)Request()</methodname> kann
+                    Mit <methodname>setRequest()</methodname> und
+                    <methodname>setRequest()</methodname> kann
                     <link linkend="zend.controller.request">die Request</link> Klasse oder das
                     Objekt, das während des Dispatch-Prozesses verwendet wird und um das aktuelle
                     Objekt zu erhalten. Wenn das Requestobjekt gesetzt wird, kann ein
@@ -309,7 +312,8 @@ Zend_Controller_Front::run('../application/controllers');
 
             <listitem>
                 <para>
-                    Mit <methodname>(set|get)Router()</methodname> kann auf die gleiche Art der
+                    Mit <methodname>setRouter()</methodname> sowie
+                    <methodname>setRouter()</methodname> kann auf die gleiche Art der
                     Klassenname bzw. das Objekt übergeben bzw. zurückgegeben werden, das beim
                     dispatchen als <link linkend="zend.controller.router">Router</link> verwendet
                     wird.
@@ -324,7 +328,8 @@ Zend_Controller_Front::run('../application/controllers');
 
             <listitem>
                 <para>
-                    <methodname>(set|get)BaseUrl()</methodname> erlaubt es, die <link
+                    <methodname>setBaseUrl()</methodname> und
+                    <methodname>setBaseUrl()</methodname> erlauben es, die <link
                         linkend="zend.controller.request.http.baseurl">Basis-URL</link> zu setzen,
                     die beim Routen der Anfrage außen vor gelassen wird, sowie den aktuellen
                     Wert dieser Einstellung zu erhalten. Diese URL wird dem Request-Objekt erst
@@ -334,8 +339,9 @@ Zend_Controller_Front::run('../application/controllers');
 
             <listitem>
                 <para>
-                    <methodname>(set|get)Dispatcher()</methodname> kann die <link
-                        linkend="zend.controller.dispatcher">Dispatcher</link>-Klasse/das
+                    <methodname>setDispatcher()</methodname> und
+                    <methodname>setDispatcher()</methodname> kann die <link
+                        linkend="zend.controller.dispatcher">Dispatcher</link>-Klasse oder das
                     Dispatcher-Objekt setzen, das den Dispatch-Prozess übernimmt. Wie oben, so kann
                     auch hier ein Klassenname oder ein Objekt übergeben werden; die get-Methode gibt
                     in jedem Fall ein Objekt zurück.
@@ -350,7 +356,8 @@ Zend_Controller_Front::run('../application/controllers');
 
             <listitem>
                 <para>
-                    Über <methodname>(set|get)Response()</methodname> kann das <link
+                    Über <methodname>setResponse()</methodname> und
+                    <methodname>setResponse()</methodname> kann das <link
                     linkend="zend.controller.response">Antwort-Objekt</link> gesetzt bzw. erhalten
                     werden. Auch hier kann wieder ein Klassenname oder ein Objekt übergeben werden.
                 </para>

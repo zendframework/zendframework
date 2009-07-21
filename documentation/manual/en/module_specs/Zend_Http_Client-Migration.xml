@@ -5,17 +5,17 @@
     <title>Migrating from previous versions</title>
 
     <para>
-        While the external API of <classname>Zend_Http_Client</classname> has remained 
+        While the external API of <classname>Zend_Http_Client</classname> has remained
         consistent throughout the 1.x brach of Zend Framework, some changes were introduced
         to the internal structure of <classname>Zend_Http_Client</classname> and its related
-        classes. 
+        classes.
     </para>
-    
+
     <para>
         These changes should have no affect on code using <classname>Zend_Http_Client</classname>
         - but may have an effect on PHP classes overloading or extending it. If your application
         subclasses <classname>Zend_Http_Client</classname>, it is highly recommended to review
-        the following changes before upgrading Zend Framework.   
+        the following changes before upgrading Zend Framework.
     </para>
 
     <sect2 id="zend.http.client.migration.tozf19">
@@ -26,10 +26,10 @@
             <para>
                 In version 1.9 of Zend Framework, there has been a change in the way
                 <classname>Zend_Http_Client</classname> internally stores information about
-                files to be uploaded, set using the <classname>Zend_Http_Client::setFileUpload()</classname> 
+                files to be uploaded, set using the <classname>Zend_Http_Client::setFileUpload()</classname>
                 method.
             </para>
-            
+
             <para>
                 This change was introduced in order to allow multiple files to be uploaded
                 with the same form name, as an array of files. More information about this issue
@@ -38,7 +38,7 @@
 
             <example id="zend.http.client.migration.tozf19.fileuploadsarray.example">
                 <title>Internal storage of uploaded file information</title>
-                
+
                 <programlisting language="php"><![CDATA[
 // Upload two files with the same form element name, as an array
 $client = new Zend_Http_Client();
@@ -67,32 +67,32 @@ $client->setFileUpload('file2.txt', 'userfile[]', 'some other data', 'applicatio
 // );
 ]]></programlisting>
             </example>
-            
+
             <para>
                 As you can see this change permits the usage of the same form element name with
                 more than one file - however, it introduces a subtle backwards-compatibility change
-                and as such should be noted. 
+                and as such should be noted.
             </para>
         </sect3>
-        
+
         <sect3 id="zend.http.client.migration.tozf19.getparamsrecursize">
             <title>Deprecation of Zend_Http_Client::_getParametersRecursive()</title>
 
             <para>
                 Starting from version 1.9, the protected method <classname>_getParametersRecursive()</classname>
-                is no longer used by <classname>Zend_Http_Client</classname> and is deprecated. 
-                Using it will cause an E_NOTICE message to be emitted by PHP. 
+                is no longer used by <classname>Zend_Http_Client</classname> and is deprecated.
+                Using it will cause an E_NOTICE message to be emitted by PHP.
             </para>
-            
+
             <para>
                 If you subclass <classname>Zend_Http_Client</classname> and call this method, you
                 should look into using the <classname>Zend_Http_Client::_flattenParametersArray()</classname>
-                static method instead. 
+                static method instead.
             </para>
-            
+
             <para>
                 Again, since this <classname>_getParametersRecursive</classname> is a protected method,
-                this change will only affect users who subclass <classname>Zend_Http_Client</classname>. 
+                this change will only affect users who subclass <classname>Zend_Http_Client</classname>.
             </para>
         </sect3>
     </sect2>

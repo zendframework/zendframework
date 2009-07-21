@@ -1039,11 +1039,11 @@ switch ($numPeople) {
 ]]></programlisting>
 
                 <para>
-                    The <property>@category</property> annotation must have a value of "Zend". 
+                    The <property>@category</property> annotation must have a value of "Zend".
                 </para>
-                    
+
                 <para>
-                    The <property>@package</property> annotation must be assigned, and should be 
+                    The <property>@package</property> annotation must be assigned, and should be
                     equivalent to the component name of the class contained in the file; typically,
                     this will only have two segments, the "Zend" prefix, and the component name.
                 </para>
@@ -1051,7 +1051,7 @@ switch ($numPeople) {
                 <para>
                     The <property>@subpackage</property> annotation is optional.  If provided, it
                     should be the subcomponent name, minus the class prefix. In the example above,
-                    the assumption is that the class in the file is either "Zend_Magic_Wand", or 
+                    the assumption is that the class in the file is either "Zend_Magic_Wand", or
                     uses that classname as part of its prefix.
                 </para>
             </sect3>
@@ -1083,12 +1083,12 @@ switch ($numPeople) {
 ]]></programlisting>
 
                 <para>
-                    The <property>@category</property> annotation must have a value of "Zend". 
+                    The <property>@category</property> annotation must have a value of "Zend".
                 </para>
-                    
+
                 <para>
-                    The <property>@package</property> annotation must be assigned, and should be 
-                    equivalent to the component to which the class belongs; typically, this will 
+                    The <property>@package</property> annotation must be assigned, and should be
+                    equivalent to the component to which the class belongs; typically, this will
                     only have two segments, the "Zend" prefix, and the component name.
                 </para>
 

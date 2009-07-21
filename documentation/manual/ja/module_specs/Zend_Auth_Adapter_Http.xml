@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16652 -->
+<!-- EN-Revision: 16855 -->
 <sect1 id="zend.auth.adapter.http">
 
     <title>HTTP 認証アダプタ</title>
@@ -110,7 +110,7 @@
                 </thead>
                 <tbody>
                     <row>
-                        <entry><property>accept_schemes</property></entry>
+                        <entry><emphasis><property>accept_schemes</property></emphasis></entry>
                         <entry>Yes</entry>
                         <entry>
                             そのアダプタがクライアントからどの認証スキームを受け取るのかを設定します。
@@ -119,14 +119,14 @@
                         </entry>
                     </row>
                     <row>
-                        <entry><property>realm</property></entry>
+                        <entry><emphasis><property>realm</property></emphasis></entry>
                         <entry>Yes</entry>
                         <entry>
                             認証レルムを設定します。ユーザ名は、指定したレルム内で一意でなければなりません。
                         </entry>
                     </row>
                     <row>
-                        <entry><property>digest_domains</property></entry>
+                        <entry><emphasis><property>digest_domains</property></emphasis></entry>
                         <entry>
                             <property>'accept_schemes'</property> が <emphasis>'digest'</emphasis> を含む場合は Yes
                         </entry>
@@ -137,7 +137,7 @@
                         </entry>
                     </row>
                     <row>
-                        <entry><property>nonce_timeout</property></entry>
+                        <entry><emphasis><property>nonce_timeout</property></emphasis></entry>
                         <entry>
                             <property>'accept_schemes'</property> が <emphasis>'digest'</emphasis> を含む場合は Yes
                         </entry>
@@ -146,7 +146,7 @@
                         </entry>
                     </row>
                     <row>
-                        <entry><property>proxy_auth</property></entry>
+                        <entry><emphasis><property>proxy_auth</property></emphasis></entry>
                         <entry>No</entry>
                         <entry>
                             デフォルトでは無効です。有効にすると、

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16652 -->
+<!-- EN-Revision: 16855 -->
 <sect1 id="zend.auth.adapter.ldap">
 
     <title>LDAP 認証</title>
@@ -293,13 +293,13 @@ Array
                 </thead>
                 <tbody>
                     <row>
-                        <entry><property>host</property></entry>
+                        <entry><emphasis><property>host</property></emphasis></entry>
                         <entry>
                             このオプションが表す <acronym>LDAP</acronym> サーバのホスト名。必須です。
                         </entry>
                     </row>
                     <row>
-                        <entry><property>port</property></entry>
+                        <entry><emphasis><property>port</property></emphasis></entry>
                         <entry>
                             <acronym>LDAP</acronym> サーバが待ち受けるポート。<property>useSsl</property> が
                             <constant>TRUE</constant> の場合、デフォルトの <property>port</property>
@@ -308,7 +308,7 @@ Array
                         </entry>
                     </row>
                     <row>
-                        <entry><property>useStartTls</property></entry>
+                        <entry><emphasis><property>useStartTls</property></emphasis></entry>
                         <entry>
                             <acronym>LDAP</acronym> クライアントが <acronym>TLS</acronym> (SSLv2)
                             で暗号化されたトランスポートを用いるかどうか。
@@ -322,7 +322,7 @@ Array
                         </entry>
                     </row>
                     <row>
-                        <entry><property>useSsl</property></entry>
+                        <entry><emphasis><property>useSsl</property></emphasis></entry>
                         <entry>
                             <acronym>LDAP</acronym> クライアントが
                             <acronym>SSL</acronym> で暗号化されたトランスポートを用いるかどうか。
@@ -334,7 +334,7 @@ Array
                         </entry>
                     </row>
                     <row>
-                        <entry><property>username</property></entry>
+                        <entry><emphasis><property>username</property></emphasis></entry>
                         <entry>
                             アカウントの DN を探す際に使用するアカウントの DN。
                             バインド時のユーザ名が DN 形式であることを要求する
@@ -348,7 +348,7 @@ Array
                         </entry>
                     </row>
                     <row>
-                        <entry><property>password</property></entry>
+                        <entry><emphasis><property>password</property></emphasis></entry>
                         <entry>
                             アカウントの DN を探す際に使用するアカウントのパスワード。
                             このオプションを省略した場合は、<acronym>LDAP</acronym> クライアントがアカウントの DN
@@ -356,7 +356,7 @@ Array
                         </entry>
                     </row>
                     <row>
-                        <entry><property>bindRequiresDn</property></entry>
+                        <entry><emphasis><property>bindRequiresDn</property></emphasis></entry>
                         <entry>
                             <acronym>LDAP</acronym> サーバによっては、バインド時に使用するユーザ名が
                             <emphasis>CN=Alice Baker,OU=Sales,DC=foo,DC=net</emphasis>
@@ -382,7 +382,7 @@ Array
                         </entry>
                     </row>
                     <row>
-                        <entry><property>baseDn</property></entry>
+                        <entry><emphasis><property>baseDn</property></emphasis></entry>
                         <entry>
                             認証対象となるアカウントが配置されている場所の DN。このオプションは必須です。
                             正しい <property>baseDn</property> の値がよくわからない場合は、
@@ -396,7 +396,7 @@ Array
                         </entry>
                     </row>
                     <row>
-                        <entry><property>accountCanonicalForm</property></entry>
+                        <entry><emphasis><property>accountCanonicalForm</property></emphasis></entry>
                         <entry>
                             2、3 あるいは 4 を指定し、認証に成功した後のアカウント名の正規化方式を指定します。
                             それぞれの値の意味は次のとおりです。2 は伝統的なユーザ名 (例:
@@ -424,7 +424,7 @@ Array
                         </entry>
                     </row>
                     <row>
-                        <entry><property>accountDomainName</property></entry>
+                        <entry><emphasis><property>accountDomainName</property></emphasis></entry>
                         <entry>
                             対象となる <acronym>LDAP</acronym> サーバの <acronym>FQDN</acronym> ドメイン
                             (例 <filename>example.com</filename>)。
@@ -441,7 +441,7 @@ Array
                         </entry>
                     </row>
                     <row>
-                        <entry><property>accountDomainNameShort</property></entry>
+                        <entry><emphasis><property>accountDomainNameShort</property></emphasis></entry>
                         <entry>
                             対象となる <acronym>LDAP</acronym> サーバの '短い' ドメイン
                             (例 <acronym>FOO</acronym>)。
@@ -458,7 +458,7 @@ Array
                         </entry>
                     </row>
                     <row>
-                        <entry><property>accountFilterFormat</property></entry>
+                        <entry><emphasis><property>accountFilterFormat</property></emphasis></entry>
                         <entry>
                             アカウントを検索する際に使用する <acronym>LDAP</acronym> 検索フィルタ。
                             この文字列は
@@ -476,7 +476,7 @@ Array
                         </entry>
                     </row>
                     <row>
-                        <entry><property>optReferrals</property></entry>
+                        <entry><emphasis><property>optReferrals</property></emphasis></entry>
                         <entry>
                             <constant>TRUE</constant> に設定すると、
                             参照先を追跡するよう <acronym>LDAP</acronym> クライアントに指示します。
@@ -584,26 +584,26 @@ Array
                     </thead>
                     <tbody>
                         <row>
-                            <entry><property>host</property></entry>
+                            <entry><emphasis><property>host</property></emphasis></entry>
                             <entry>
                                 すべてのサーバでこのオプションは必須です。
                             </entry>
                         </row>
                         <row>
-                            <entry><property>useStartTls</property></entry>
+                            <entry><emphasis><property>useStartTls</property></emphasis></entry>
                             <entry>
                                 セキュリティの観点からは、これは <constant>TRUE</constant> にしておくべきです。
                                 この場合、サーバに証明書をインストールしておく必要があります。
                             </entry>
                         </row>
                         <row>
-                            <entry><property>useSsl</property></entry>
+                            <entry><emphasis><property>useSsl</property></emphasis></entry>
                             <entry>
                                 <emphasis>useStartTls</emphasis> の代替として用いられます (上を参照ください)。
                             </entry>
                         </row>
                         <row>
-                            <entry><property>baseDn</property></entry>
+                            <entry><emphasis><property>baseDn</property></emphasis></entry>
                             <entry>
                                 すべてのサーバでこのオプションは必須です。デフォルトの AD では
                                 すべてのユーザアカウントが <emphasis>Users</emphasis> コンテナ
@@ -614,7 +614,7 @@ Array
                             </entry>
                         </row>
                         <row>
-                            <entry><property>accountCanonicalForm</property></entry>
+                            <entry><emphasis><property>accountCanonicalForm</property></emphasis></entry>
                             <entry>
                                 ほとんどの場合は 3 を指定してバックスラッシュ形式の名前 (例
                                 <emphasis>FOO\alice</emphasis>) を使用することになるでしょう。
@@ -627,14 +627,14 @@ Array
                             </entry>
                         </row>
                         <row>
-                            <entry><property>accountDomainName</property></entry>
+                            <entry><emphasis><property>accountDomainName</property></emphasis></entry>
                             <entry>
                                 これは AD には必須です。<property>accountCanonicalForm</property>
                                 が 2 の場合は不要ですが、何度も言うようにこれはおすすめしません。
                             </entry>
                         </row>
                         <row>
-                            <entry><property>accountDomainNameShort</property></entry>
+                            <entry><emphasis><property>accountDomainNameShort</property></emphasis></entry>
                             <entry>
                                 ユーザが属するドメインの NetBIOS 名で、AD サーバの認証対象となります。
                                 これは、バックスラッシュ形式の
@@ -681,26 +681,26 @@ Array
                     </thead>
                     <tbody>
                         <row>
-                            <entry><property>host</property></entry>
+                            <entry><emphasis><property>host</property></emphasis></entry>
                             <entry>
                                 すべてのサーバでこのオプションは必須です。
                             </entry>
                         </row>
                         <row>
-                            <entry><property>useStartTls</property></entry>
+                            <entry><emphasis><property>useStartTls</property></emphasis></entry>
                             <entry>
                                 セキュリティの観点からは、これは <constant>TRUE</constant> にしておくべきです。
                                 この場合、サーバに証明書をインストールしておく必要があります。
                             </entry>
                         </row>
                         <row>
-                            <entry><property>useSsl</property></entry>
+                            <entry><emphasis><property>useSsl</property></emphasis></entry>
                             <entry>
                                 <property>useStartTls</property> の代替として用いられます (上を参照ください)。
                             </entry>
                         </row>
                         <row>
-                            <entry><property>username</property></entry>
+                            <entry><emphasis><property>username</property></emphasis></entry>
                             <entry>
                                 必須、かつ DN である必要があります。OpenLDAP のバインド時には、
                                 ユーザ名が DN 形式であることが必須だからです。
@@ -708,7 +708,7 @@ Array
                             </entry>
                         </row>
                         <row>
-                            <entry><property>password</property></entry>
+                            <entry><emphasis><property>password</property></emphasis></entry>
                             <entry>
                                 上のユーザ名に対応するパスワード。しかし、
                                 匿名バインドによるユーザ検索を
@@ -716,21 +716,21 @@ Array
                             </entry>
                         </row>
                         <row>
-                            <entry><property>bindRequiresDn</property></entry>
+                            <entry><emphasis><property>bindRequiresDn</property></emphasis></entry>
                             <entry>
                                 必須、かつ <constant>TRUE</constant> である必要があります。
                                 OpenLDAP のバインド時には、ユーザ名が DN 形式であることが必須だからです。
                             </entry>
                         </row>
                         <row>
-                            <entry><property>baseDn</property></entry>
+                            <entry><emphasis><property>baseDn</property></emphasis></entry>
                             <entry>
                                 すべてのサーバでこのオプションは必須です。
                                 認証対象となるアカウントが位置する DN を指すようにします。
                             </entry>
                         </row>
                         <row>
-                            <entry><property>accountCanonicalForm</property></entry>
+                            <entry><emphasis><property>accountCanonicalForm</property></emphasis></entry>
                             <entry>
                                 オプションで、デフォルト値は 4 (<filename>alice@foo.net</filename>
                                 のようなプリンシパル形式) です。これは、ユーザがバックスラッシュ形式の名前
@@ -740,14 +740,14 @@ Array
                             </entry>
                         </row>
                         <row>
-                            <entry><property>accountDomainName</property></entry>
+                            <entry><emphasis><property>accountDomainName</property></emphasis></entry>
                             <entry>
                                 必須です。<property>accountCanonicalForm</property>
                                 が 2 の場合は不要ですが、これはおすすめしません。
                             </entry>
                         </row>
                         <row>
-                            <entry><property>accountDomainNameShort</property></entry>
+                            <entry><emphasis><property>accountDomainNameShort</property></emphasis></entry>
                             <entry>
                                 AD とともに使用するのでなければこれは必須ではありません。
                                 それ以外の場合、もし

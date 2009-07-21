@@ -418,7 +418,7 @@ function showEditMenu() {
       if ($editLink == $_POST['edit']) {
         $baseAttributeArr = $feed_entry->getGbaseAttribute('cooking_time');
         if (isset($baseAttributeArr[0]) && is_object($baseAttributeArr[0])) {
-          $splitCookingTime = split(' ', $baseAttributeArr[0]->text);
+          $splitCookingTime = explode(' ', $baseAttributeArr[0]->text);
         }
         
         $baseAttributeArr = $feed_entry->getGbaseAttribute('cuisine');

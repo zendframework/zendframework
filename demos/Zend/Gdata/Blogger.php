@@ -109,7 +109,7 @@ class SimpleCRUD
         $input = getInput("\nSelection");
 
         //id text is of the form: tag:blogger.com,1999:user-blogID.blogs
-        $idText = split('-', $feed->entries[$input]->id->text);
+        $idText = explode('-', $feed->entries[$input]->id->text);
         $this->blogID = $idText[2];
     }
     
@@ -145,7 +145,7 @@ class SimpleCRUD
 
         $createdPost = $this->gdClient->insertEntry($entry, $uri);
         //format of id text: tag:blogger.com,1999:blog-blogID.post-postID 
-        $idText = split('-', $createdPost->id->text);
+        $idText = explode('-', $createdPost->id->text);
         $postID = $idText[2];
 
         return $postID; 
@@ -234,7 +234,7 @@ class SimpleCRUD
         
         echo 'Added new comment: ' . $createdComment->content->text . "\n";
         // Edit link follows format: /feeds/blogID/postID/comments/default/commentID 
-        $editLink = split('/', $createdComment->getEditLink()->href);
+        $editLink = explode('/', $createdComment->getEditLink()->href);
         $commentID = $editLink[8];      
  
         return $commentID; 
@@ -357,7 +357,7 @@ $pass = null;
 
 // process command line options
 foreach ($argv as $argument) {
-    $argParts = split('=', $argument);
+    $argParts = explode('=', $argument);
     if ($argParts[0] == '--user') {
         $user = $argParts[1];
     } else if ($argParts[0] == '--pass') {

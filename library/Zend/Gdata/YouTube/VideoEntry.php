@@ -836,7 +836,7 @@ class Zend_Gdata_YouTube_VideoEntry extends Zend_Gdata_YouTube_MediaEntry
             $keywords = $this->getMediaGroup()->getKeywords();
             $keywordsString = $keywords->getText();
             if (strlen(trim($keywordsString)) > 0) {
-                return split('(, *)|,', $keywordsString);
+                return preg_split('/(, *)|,/', $keywordsString);
             }
         }
         return array();

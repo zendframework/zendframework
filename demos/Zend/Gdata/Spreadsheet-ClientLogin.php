@@ -96,7 +96,7 @@ class SimpleCRUD
         print "== Available Spreadsheets ==\n";
         $this->printFeed($feed);
         $input = getInput("\nSelection");
-        $currKey = split('/', $feed->entries[$input]->id->text);
+        $currKey = explode('/', $feed->entries[$input]->id->text);
         $this->currKey = $currKey[5];
     }
 
@@ -113,7 +113,7 @@ class SimpleCRUD
         print "== Available Worksheets ==\n";
         $this->printFeed($feed);
         $input = getInput("\nSelection");
-        $currWkshtId = split('/', $feed->entries[$input]->id->text);
+        $currWkshtId = explode('/', $feed->entries[$input]->id->text);
         $this->currWkshtId = $currWkshtId[8];
 
     }
@@ -128,7 +128,7 @@ class SimpleCRUD
         echo "Pick a command:\n";
         echo "\ndump -- dump cell information\nupdate {row} {col} {input_value} -- update cell information\n";
         $input = getInput('Command');
-        $command = split(' ', $input);
+        $command = explode(' ', $input);
         if ($command[0] == 'dump') {
             $this->cellsGetAction();
         } else if (($command[0] == 'update') && (count($command) > 2)) {
@@ -196,7 +196,7 @@ class SimpleCRUD
               "delete {row_index} -- delete a row\n\n";
         
         $input = getInput('Command');
-        $command = split(' ', $input);
+        $command = explode(' ', $input);
         if ($command[0] == 'dump') {
             $this->listGetAction();
         } else if ($command[0] == 'insert') {
@@ -328,7 +328,7 @@ class SimpleCRUD
     {
         $arr = array();
         foreach ($rowData as $row) {
-            $temp = split('=', $row);
+            $temp = explode('=', $row);
             $arr[$temp[0]] = $temp[1];
         }
         return $arr;
@@ -437,7 +437,7 @@ $pass = null;
 
 // process command line options
 foreach ($argv as $argument) {
-    $argParts = split('=', $argument);
+    $argParts = explode('=', $argument);
     if ($argParts[0] == '--email') {
         $email = $argParts[1];
     } else if ($argParts[0] == '--pass') {

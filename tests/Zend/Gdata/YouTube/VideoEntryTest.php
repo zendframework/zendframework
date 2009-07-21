@@ -540,7 +540,7 @@ class Zend_Gdata_YouTube_VideoEntryTest extends PHPUnit_Framework_TestCase
         $keywordsString = (string) $keywords;
 
         if (strlen(trim($keywordsString)) > 0) {
-            $keywordArray = split('(, *)|,', $keywordsString);
+            $keywordArray = preg_split('/(, *)|,/', $keywordsString);
         }
 
         $tagArray = $videoEntry->getVideoTags();
@@ -565,7 +565,7 @@ class Zend_Gdata_YouTube_VideoEntryTest extends PHPUnit_Framework_TestCase
         $videoEntry->setVideoTags($newKeywordsString);
 
         if (strlen(trim($newKeywordsString)) > 0) {
-            $keywordArray = split('(, *)|,', $newKeywordsString);
+            $keywordArray = preg_split('/(, *)|,/', $newKeywordsString);
         }
 
         $tagArray = $videoEntry->getVideoTags();

@@ -207,7 +207,7 @@ $pass = null;
 
 // process command line options
 foreach ($argv as $argument) {
-    $argParts = split('=', $argument);
+    $argParts = explode('=', $argument);
     if ($argParts[0] == '--email') {
         $email = $argParts[1];
     } else if ($argParts[0] == '--pass') {

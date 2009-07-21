@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect2 id="zend.filter.set.decrypt">
+    <title>Decrypt</title>
+    <para>
+        Ce filtre va décrypter toute chaine grâce aux paramètres utilisés. Des adaptateurs sont utilisés.
+        Actuellement des aptateurs existent pour les extensions <code>Mcrypt</code> et <code>OpenSSL</code>
+        de php.
+    </para>
+
+    <para>
+        Pour plus de détails sur l'encryptage de contenu, voyez le filtre <code>Encrypt</code>. La 
+        documentation de celui-ci couvre les bases en matière de cryptage, nous n'aborderons ici que
+        les méthodes utilisées pour le décryptage.
+    </para>
+
+    <sect3 id="zend.filter.set.decrypt.mcrypt">
+        <title>Décryptage avec Mcrypt</title>
+        <para>
+            Pour décrypter une données cryptées avec <code>Mcrypt</code>, vous avez besoin des paramètres
+            utilisés pour encrypter, ainsi que du vecteur.
+        </para>
+
+        <para>
+            Si vous n'aviez pas passé de vecteur spécifique à l'encryptage, alors vous devriez récupérer
+            le vecteur utilisé grâce à la méthode <code>getVector()</code>. Sans ce vecteur, aucun décryptage
+            de la données originale n'est possible.
+        </para>
+
+        <para>
+            Le décryptage s'effectue aussi simplement que l'encryptage.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// Utilisation des paramètres blowfish par défaut
+$filter = new Zend_Filter_Decrypt('myencryptionkey');
+
+// Utilisation du vecteur utilisé lors de l'encryptage
+$filter->setVector('myvector');
+
+$decrypted = $filter->filter('texte_encodé_non_lisible');
+print $decrypted;
+]]></programlisting>
+
+        <note>
+            <para>
+                Si l'extension mcrypt n'est pas présente dans votre environement, une exception sera levée.
+            </para>
+        </note>
+
+        <note>
+            <para>
+                Vos paramètres sont vérifiés à la création de l'instance ou à l'appel de setEncryption().
+                Si mcrypt détecte des problèmes avec ces paramètres, une exception sera levée.
+            </para>
+        </note>
+    </sect3>
+
+    <sect3 id="zend.filter.set.decrypt.openssl">
+        <title>Decryptage avec OpenSSL</title>
+        <para>
+            Le décryptage avec <code>OpenSSL</code> est aussi simple que l'encryptage. Mais vous aurez besoin de toutes 
+            les données concernant la personne ayant crypté la donnée de référence.
+        </para>
+
+        <para>
+            Pour décrypter avec <code>OpenSSL</code> vous devez posséder:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>private</emphasis>: Votre clé privée. Ce peut être un nom de fichier
+                    ou juste le contenu de ce fichier : la clé.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>envelope</emphasis>: La clé enveloppe cryptée de l'utilisateur qui
+                    a crypté le document. Un chemin de fichier ou une chaine peuvent être utilisés.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <programlisting language="php"><![CDATA[
+// Utilise OpenSSL avec une clé spécifiée
+$filter = new Zend_Filter_Decrypt(array(
+    'adapter' => 'openssl',
+    'private' => '/path/to/mykey/private.pem'
+));
+
+// Passage des clés enveloppe
+$filter->setEnvelopeKey(array(
+    '/key/from/encoder/first.pem',
+    '/key/from/encoder/second.pem'
+));
+]]></programlisting>
+
+        <note>
+            <para>
+                L'adaptateur <code>OpenSSL</code> ne fonctionnera pas avec des clés non valides.
+            </para>
+        </note>
+
+        <para>
+            Optionnellement il peut être nécessaire de passer la passphrase pour décrypter les clés
+            elles-mêmes. Utilisez alors <code>setPassphrase()</code>.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// Utilise OpenSSL avec une clé spécifiée
+$filter = new Zend_Filter_Decrypt(array(
+    'adapter' => 'openssl',
+    'private' => '/path/to/mykey/private.pem'
+));
+
+// Passage des clés enveloppe
+$filter->setEnvelopeKey(array(
+    '/key/from/encoder/first.pem',
+    '/key/from/encoder/second.pem'
+));
+$filter->setPassphrase('mypassphrase');
+]]></programlisting>
+
+        <para>
+            Enfin, décryptez le contenu. Voici l'exemple complet:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// Utilise OpenSSL avec une clé spécifiée
+$filter = new Zend_Filter_Decrypt(array(
+    'adapter' => 'openssl',
+    'private' => '/path/to/mykey/private.pem'
+));
+
+// Passage des clés enveloppe
+$filter->setEnvelopeKey(array(
+    '/key/from/encoder/first.pem',
+    '/key/from/encoder/second.pem'
+));
+$filter->setPassphrase('mypassphrase');
+
+$decrypted = $filter->filter('texte_encodé_illisible');
+print $decrypted;
+]]></programlisting>
+    </sect3>
+</sect2>
+<!--
+vim:se ts=4 sw=4 et:
+-->

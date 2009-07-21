@@ -118,7 +118,11 @@ class Zend_Memory_ValueTest extends PHPUnit_Framework_TestCase
         $valueObject[2] = '_';
         $this->assertEquals((string)$valueObject, '01_3456789');
 
+
+        $error_level = error_reporting();
+        error_reporting($error_level & ~E_NOTICE);
         $valueObject[10] = '_';
         $this->assertEquals((string)$valueObject, '01_3456789_');
+        error_reporting($error_level);
     }
 }

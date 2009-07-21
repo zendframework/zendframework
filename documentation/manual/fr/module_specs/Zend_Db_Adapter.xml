@@ -309,6 +309,12 @@ $db = Zend_Db::factory($config->database);
 
                 <listitem>
                     <para>
+                        <emphasis>charset</emphasis>&#160;: encodage utilisé pour la connexion.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
                         <emphasis>options</emphasis>&#160;: Ce paramètre est un tableau associatif
                         d'options génériques à toutes les classes
                         <classname>Zend_Db_Adapter</classname>.

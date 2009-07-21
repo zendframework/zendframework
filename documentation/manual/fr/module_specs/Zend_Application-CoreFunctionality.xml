@@ -11,7 +11,11 @@
     <xi:include href="Zend_Application-CoreFunctionality-Application.xml" />
     <xi:include href="Zend_Application-CoreFunctionality-Bootstrap_Bootstrapper.xml" />
     <xi:include href="Zend_Application-CoreFunctionality-Bootstrap_ResourceBootstrapper.xml" />
-    <xi:include href="Zend_Application-CoreFunctionality-Bootstrap_BootstrapAbstract.xml" />
+    <xi:include href="Zend_Application-CoreFunctionality-Bootstrap_BootstrapAbstract.xml">
+        <xi:fallback>
+            <xi:include href="../../en/module_specs/Zend_Application-CoreFunctionality-Bootstrap_BootstrapAbstract.xml" />
+        </xi:fallback>
+    </xi:include>
     <xi:include href="Zend_Application-CoreFunctionality-Bootstrap_Bootstrap.xml" />
     <xi:include href="Zend_Application-CoreFunctionality-Resource_Resource.xml" />
     <xi:include href="Zend_Application-CoreFunctionality-Resource_ResourceAbstract.xml" />

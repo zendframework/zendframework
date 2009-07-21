@@ -125,7 +125,9 @@ class Zend_Db_Statement_Mysqli extends Zend_Db_Statement
     {
         if ($stmt = $this->_stmt) {
             $mysqli = $this->_adapter->getConnection();
-            while ($mysqli->next_result()) {}
+            while ($mysqli->more_results()) {
+                $mysqli->next_result();
+            }
             $this->_stmt->free_result();
             return $this->_stmt->reset();
         }
@@ -199,10 +201,14 @@ class Zend_Db_Statement_Mysqli extends Zend_Db_Statement
         // send $params as input parameters to the statement
         if ($params) {
             array_unshift($params, str_repeat('s', count($params)));
+            $stmtParams = array();
+            foreach ($params as $k => &$value) {
+                $stmtParams[$k] = &$value;
+            }
             call_user_func_array(
                 array($this->_stmt, 'bind_param'),
-                $params
-            );
+                $stmtParams
+                );
         }
 
         // execute the statement

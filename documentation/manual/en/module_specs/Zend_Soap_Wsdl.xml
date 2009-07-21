@@ -370,9 +370,9 @@ $soapMyClassType = $wsdl->getType('MyClass');
                 </listitem>
                 <listitem>
                     <para>Class <classname>Zend_Soap_Wsdl_Strategy_ArrayOfTypeSequence</classname>: This strategy allows
-                    to specify return parameters of the type: <code>int[]</code> or <code>string[]</code>. It can only
-                    handle simple PHP types such as int, string, boolean, float and so on, but allows to specify
-                    nested arrays of arrays of type.</para>
+                    to specify return parameters of the type: <code>int[]</code> or <code>string[]</code>. As of
+                    Zend Framework version 1.9 it can handle both simple PHP types such as int, string, boolean, float
+                    aswell as objects and arrays of objects.</para>
                 </listitem>
                 <listitem>
                     <para>Class <classname>Zend_Soap_Wsdl_Strategy_ArrayOfTypeComplex</classname>: This strategy allows

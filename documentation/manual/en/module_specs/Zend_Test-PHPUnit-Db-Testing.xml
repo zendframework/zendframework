@@ -101,15 +101,15 @@
             testing extension.
         </para>
 
+        <para>
+            The next table lists only the new methods compared to the
+            <classname>PHPUnit_Extensions_Database_TestCase</classname>, whose <ulink
+                url="http://www.phpunit.de/manual/current/en/database.html">API is documented in
+            the PHPUnit Documentation</ulink>.
+        </para>
+
         <table id="zend.test.phpunit.db.testing.testcase.api-methods">
             <title>Zend_Test_PHPUnit_DatabaseTestCase API Methods</title>
-
-            <para>
-                This lists only the new methods compared to the
-                <classname>PHPUnit_Extensions_Database_TestCase</classname>, whose <ulink
-                    url="http://www.phpunit.de/manual/current/en/database.html">API is documented in
-                the PHPUnit Documentation</ulink>.
-            </para>
 
             <tgroup cols="2">
                 <thead>
@@ -201,6 +201,8 @@
         </para>
 
         <example id="zend.test.phpunit.db.testing.controllerintegration.example">
+            <title>Database integration example</title>
+
             <para>
                 This example extends the User Controller Test from the
                 <classname>Zend_Test_PHPUnit_ControllerTestCase</classname> documentation to include

@@ -20,17 +20,7 @@
  * @version    $Id$
  */
 
-/**
- * Test helper
- */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
-
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Test_PHPUnit_AllTests::main');
-}
-
-require_once 'Zend/Test/PHPUnit/ControllerTestCaseTest.php';
-require_once 'Zend/Test/PHPUnit/Db/AllTests.php';
+require_once "Zend/Test/PHPUnit/Db/Connection.php";
 
 /**
  * @category   Zend
@@ -39,24 +29,27 @@ require_once 'Zend/Test/PHPUnit/Db/AllTests.php';
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Test_PHPUnit_AllTests
+abstract class Zend_Test_PHPUnit_Db_DataSet_DataSetTestCase extends PHPUnit_Framework_TestCase
 {
-    public static function main()
+    /**
+     * @var PHPUnit_Extensions_Database_DB_IDatabaseConnection
+     */
+    protected $connectionMock = null;
+
+    public function setUp()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        $this->connectionMock = $this->getMock('Zend_Test_PHPUnit_Db_Connection', array(), array(), '', false);
     }
 
-    public static function suite()
+    public function decorateConnectionMockWithZendAdapter()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Test- Zend_Test_PHPUnit');
-
-        $suite->addTestSuite('Zend_Test_PHPUnit_ControllerTestCaseTest');
-        $suite->addTest(Zend_Test_PHPUnit_Db_AllTests::suite());
-
-        return $suite;
+        $this->decorateConnectionGetConnectionWith(new Zend_Test_DbAdapter());
     }
-}
 
-if (PHPUnit_MAIN_METHOD == 'Zend_Test_PHPUnit_AllTests::main') {
-    Zend_Test_PHPUnit_AllTests::main();
+    public function decorateConnectionGetConnectionWith($returnValue)
+    {
+        $this->connectionMock->expects($this->any())
+                             ->method('getConnection')
+                             ->will($this->returnValue($returnValue));
+    }
 }

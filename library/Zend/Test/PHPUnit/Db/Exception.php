@@ -14,49 +14,28 @@
  *
  * @category   Zend
  * @package    Zend_Test
- * @subpackage UnitTests
+ * @subpackage PHPUnit
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
 
 /**
- * Test helper
+ * @see Zend_Exception
  */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
-
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Test_PHPUnit_AllTests::main');
-}
-
-require_once 'Zend/Test/PHPUnit/ControllerTestCaseTest.php';
-require_once 'Zend/Test/PHPUnit/Db/AllTests.php';
+require_once "Zend/Exception.php";
 
 /**
+ * Exception for Zend_Test_PHPUnit_Database package
+ *
+ * @uses       Zend_Exception
  * @category   Zend
  * @package    Zend_Test
- * @subpackage UnitTests
+ * @subpackage PHPUnit
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Test_PHPUnit_AllTests
+class Zend_Test_PHPUnit_Db_Exception extends Zend_Exception
 {
-    public static function main()
-    {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
-    }
-
-    public static function suite()
-    {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Test- Zend_Test_PHPUnit');
-
-        $suite->addTestSuite('Zend_Test_PHPUnit_ControllerTestCaseTest');
-        $suite->addTest(Zend_Test_PHPUnit_Db_AllTests::suite());
-
-        return $suite;
-    }
-}
-
-if (PHPUnit_MAIN_METHOD == 'Zend_Test_PHPUnit_AllTests::main') {
-    Zend_Test_PHPUnit_AllTests::main();
+    
 }

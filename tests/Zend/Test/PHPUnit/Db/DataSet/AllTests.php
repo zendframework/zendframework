@@ -20,17 +20,13 @@
  * @version    $Id$
  */
 
-/**
- * Test helper
- */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
+require_once dirname(__FILE__)."/../../../../../TestHelper.php";
 
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Test_PHPUnit_AllTests::main');
-}
-
-require_once 'Zend/Test/PHPUnit/ControllerTestCaseTest.php';
-require_once 'Zend/Test/PHPUnit/Db/AllTests.php';
+require_once "DbRowsetTest.php";
+require_once "QueryDataSetTest.php";
+require_once "QueryTableTest.php";
+require_once "DbTableTest.php";
+require_once "DbTableDataSetTest.php";
 
 /**
  * @category   Zend
@@ -39,24 +35,17 @@ require_once 'Zend/Test/PHPUnit/Db/AllTests.php';
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Test_PHPUnit_AllTests
+class Zend_Test_PHPUnit_Db_DataSet_AllTests
 {
-    public static function main()
-    {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
-    }
-
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Test- Zend_Test_PHPUnit');
-
-        $suite->addTestSuite('Zend_Test_PHPUnit_ControllerTestCaseTest');
-        $suite->addTest(Zend_Test_PHPUnit_Db_AllTests::suite());
+        $suite = new PHPUnit_Framework_TestSuite('Zend Test PHPUnit Database DataSets');
+        $suite->addTestSuite('Zend_Test_PHPUnit_Db_DataSet_DbRowsetTest');
+        $suite->addTestSuite('Zend_Test_PHPUnit_Db_DataSet_QueryDataSetTest');
+        $suite->addTestSuite('Zend_Test_PHPUnit_Db_DataSet_QueryTableTest');
+        $suite->addTestSuite('Zend_Test_PHPUnit_Db_DataSet_DbTableTest');
+        $suite->addTestSuite('Zend_Test_PHPUnit_Db_DataSet_DbTableDataSetTest');
 
         return $suite;
     }
-}
-
-if (PHPUnit_MAIN_METHOD == 'Zend_Test_PHPUnit_AllTests::main') {
-    Zend_Test_PHPUnit_AllTests::main();
 }

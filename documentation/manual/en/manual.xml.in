@@ -502,6 +502,7 @@
         <title>Zend_Test</title>
         <xi:include href="module_specs/Zend_Test.xml" />
         <xi:include href="module_specs/Zend_Test-PHPUnit.xml" parse="xml" />
+        <xi:include href="module_specs/Zend_Test-PHPUnit-Db.xml" parse="xml" />
     </chapter>
 
     <chapter id="zend.text">

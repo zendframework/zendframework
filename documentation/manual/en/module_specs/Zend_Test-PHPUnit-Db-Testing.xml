@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect2 id="zend.test.phpunit.db.testing">
+    <title>Usage, API and Extensions Points</title>
+
+    <para>
+        The Quickstart already gave a good introduction on how database testing can be done using 
+        PHPUnit and the Zend Framework. This section gives an overview over the API that the 
+        <classname>Zend_Test_PHPUnit_Db</classname> component comes with and how it works 
+        internally.
+    </para>
+
+    <note>
+        <title>Some Remarks on Database Testing</title>
+
+        <para>
+            Just as the Controller TestCase is testing an application at an integration level, the 
+            Database TestCase is an integration testing method. Its using several different 
+            application layers for testing purposes and therefore should be consumed with caution.
+        </para>
+
+        <para>
+            It should be noted that testing domain and business logic with integration tests such
+            as Zend Framework's Controller and Database TestCases is a bad practice. The purpose of 
+            an Integration test is to check that several parts of an application work smoothly when
+            wired together. These integration tests do not replace the need for a set of unit tests
+            that test the domain and business logic at a much smaller level, the isolated class.
+        </para>
+    </note>
+
+    <sect3 id="zend.test.phpunit.db.testing.testcase">
+        <title>The Zend_Test_PHPUnit_DatabaseTestCase class</title>
+
+        <para>
+            The <classname>Zend_Test_PHPUnit_DatabaseTestCase</classname> class derives from the 
+            <classname>PHPUnit_Extensions_Database_TestCase</classname> which allows to setup tests 
+            with a fresh database fixture on each run easily. The Zend implementation offers some 
+            additional convenience features over the PHPUnit Database extension when it comes to 
+            using <classname>Zend_Db</classname> resources inside your tests. The workflow of a 
+            database test-case can be described as follows.
+        </para>
+
+        <orderedlist>
+            <listitem>
+                <para>
+                    For each test PHPUnit creates a new instance of the TestCase and calls the 
+                    <methodname>setUp()</methodname> method.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    The Database TestCase creates an instance of a Database Tester which handles the
+                    setting up and tearing down of the database.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    The database tester collects the information on the database connection and 
+                    initial dataset from <methodname>getConnection()</methodname> and 
+                    <methodname>getDataSet()</methodname> which are both abstract methods and have 
+                    to be implemented by any Database Testcase.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    By default the database tester truncates the tables specified in the given 
+                    dataset, and then inserts the data given as initial fixture.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    When the database tester has finished setting up the database, PHPUnit runs the 
+                    test.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    After running the test, <methodname>tearDown()</methodname> is called. Because 
+                    the database is wiped in <methodname>setUp()</methodname> before inserting the 
+                    required initial fixture, no actions are executed by the database tester at this
+                    stage.
+                </para>
+            </listitem>
+        </orderedlist>
+
+        <note>
+            <para>
+                The Database TestCase expects the database schema and tables to be setup correctly
+                to run the tests. There is no mechanism to create and tear down database tables.
+            </para>
+        </note>
+
+        <para>
+            The <classname>Zend_Test_PHPUnit_DatabaseTestCase</classname> class has some convenience
+            functions that can help writing tests that interact with the database and the database 
+            testing extension.
+        </para>
+
+        <table id="zend.test.phpunit.db.testing.testcase.api-methods">
+            <title>Zend_Test_PHPUnit_DatabaseTestCase API Methods</title>
+
+            <para>
+                This lists only the new methods compared to the 
+                <classname>PHPUnit_Extensions_Database_TestCase</classname>, whose <ulink 
+                    url="http://www.phpunit.de/manual/current/en/database.html">API is documented in
+                the PHPUnit Documentation</ulink>.
+            </para>
+
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Method</entry>
+                        <entry>Description</entry>
+                    </row>
+                </thead>
+
+                <tbody>
+                    <row>
+                        <entry>
+                            <methodname>createZendDbConnection(Zend_Db_Adapter_Abstract $connection,
+                                $schema)</methodname>
+                        </entry>
+                        
+                        <entry>
+                            Create a PHPUnit Database Extension compatible Connection instance from 
+                            a <classname>Zend_Db_Adapter_Abstract</classname> instance.  This method
+                            should be used in for testcase setup when implementing the abstract 
+                            <methodname>getConnection()</methodname> method of the database testcase.
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>getAdapter()</methodname></entry>
+
+                        <entry>
+                            Convenience method to access the underlying 
+                            <classname>Zend_Db_Adapter_Abstract</classname> instance which is nested
+                            inside the PHPUnit database connection created with
+                            <methodname>getConnection()</methodname>.
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry>
+                            <methodname>createDbRowset(Zend_Db_Table_Rowset_Abstract $rowset, 
+                                $tableName = null)</methodname>
+                        </entry>
+
+                        <entry>
+                            Create a DataTable Object that is filled with the data from a given 
+                            <classname>Zend_Db_Table_Rowset_Abstract</classname> instance. The table
+                            the rowset is connected to is chosen when <code>$tableName</code> is 
+                            null.
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry>
+                            <methodname>createDbTable(Zend_Db_Table_Abstract $table, $where = null, 
+                                $order = null, $count = null, $offset = null)</methodname>
+                        </entry>
+
+                        <entry>
+                            Create a DataTable object that represents the data contained in a 
+                            <classname>Zend_Db_Table_Abstract</classname> instance. For retrieving 
+                            the data <methodname>fetchAll()</methodname> is used, where the optional
+                            parameters can be used to restrict the data table to a certain subset.
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry>
+                            <methodname>createDbTableDataSet(array $tables=array())</methodname>
+                        </entry>
+
+                        <entry>
+                            Create a DataSet containing the given <code>$tables</code>, an array of
+                            <classname>Zend_Db_Table_Abstract</classname> instances.
+                        </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+    </sect3>
+
+    <sect3 id="zend.test.phpunit.db.testing.controllerintegration">
+        <title>Integrating Database Testing with the ControllerTestCase</title>
+
+        <para>
+            Because PHP does not support multiple inheritance it is not possible to use the 
+            Controller and Database testcases in conjunction. However you can use the 
+            <classname>Zend_Test_PHPUnit_Db_SimpleTester</classname> database tester in your 
+            controller test-case to setup a database enviroment fixture for each new controller 
+            test. The Database TestCase in general is only a set of convenience functions which can
+            also be accessed and used without the test case.
+        </para>
+
+        <example id="zend.test.phpunit.db.testing.controllerintegration.example">
+            <para>
+                This example extends the User Controller Test from the 
+                <classname>Zend_Test_PHPUnit_ControllerTestCase</classname> documentation to include
+                a database setup.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
+{
+    public function setUp()
+    {
+        $this->setupDatabase();
+        $this->bootstrap = array($this, 'appBootstrap');
+        parent::setUp();
+    }
+
+    public function setupDatabase()
+    {
+        $db = Zend_Db::factory(...);
+        $connection = Zend_Test_PHPUnit_Db_Connection($db, 'database_schema_name');
+        $databaseTester = new Zend_Test_PHPUnit_Db_SimpleTester($connection);
+
+        $databaseFixture = new PHPUnit_Extensions_Database_DataSet_FlatXmlDataSet(
+            dirname(__FILE__) . '/_files/initialUserFixture.xml'
+        );
+
+        $databaseTester->setupDatabase($databaseFixture);
+    }
+}
+]]></programlisting>
+
+            <para>
+                Now the Flat XML dataset "initialUserFixture.xml" is used to set the database into 
+                an initial state before each test, exactly as the DatabaseTestCase works internally.
+            </para>
+        </example>
+    </sect3>
+</sect2>

@@ -20,17 +20,9 @@
  * @version    $Id$
  */
 
-/**
- * Test helper
- */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
+require_once dirname(__FILE__)."/../../../../../TestHelper.php";
 
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Test_PHPUnit_AllTests::main');
-}
-
-require_once 'Zend/Test/PHPUnit/ControllerTestCaseTest.php';
-require_once 'Zend/Test/PHPUnit/Db/AllTests.php';
+require_once "AbstractTestCase.php";
 
 /**
  * @category   Zend
@@ -39,24 +31,24 @@ require_once 'Zend/Test/PHPUnit/Db/AllTests.php';
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Test_PHPUnit_AllTests
+class Zend_Test_PHPUnit_Db_Integration_SqLiteIntegrationTest extends Zend_Test_PHPUnit_Db_Integration_AbstractTestCase
 {
-    public static function main()
+    public function setUp()
     {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
+        if (!extension_loaded('pdo')) {
+            $this->markTestSkipped('PDO is required for this test.');
+        }
+
+        if(!in_array('sqlite', PDO::getAvailableDrivers())) {
+            $this->markTestSkipped('SqLite is not included in PDO in this PHP installation.');
+        }
+
+        $this->dbAdapter = Zend_Db::factory('pdo_sqlite', array('dbname' => ':memory:'));
+        $this->dbAdapter->query(
+            'CREATE TABLE "foo" (id INTEGER PRIMARY KEY AUTOINCREMENT, foo VARCHAR, bar VARCHAR, baz VARCHAR)'
+        );
+        $this->dbAdapter->query(
+            'CREATE TABLE "bar" (id INTEGER PRIMARY KEY AUTOINCREMENT, foo VARCHAR, bar VARCHAR, baz VARCHAR)'
+        );
     }
-
-    public static function suite()
-    {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Test- Zend_Test_PHPUnit');
-
-        $suite->addTestSuite('Zend_Test_PHPUnit_ControllerTestCaseTest');
-        $suite->addTest(Zend_Test_PHPUnit_Db_AllTests::suite());
-
-        return $suite;
-    }
-}
-
-if (PHPUnit_MAIN_METHOD == 'Zend_Test_PHPUnit_AllTests::main') {
-    Zend_Test_PHPUnit_AllTests::main();
 }

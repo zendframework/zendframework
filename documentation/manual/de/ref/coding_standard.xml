@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16626 -->
+<!-- EN-Revision: 16734 -->
 <!-- Reviewed: no -->
 <appendix id="coding-standard">
   <title>Zend Framework Coding Standard für PHP</title>
@@ -166,6 +166,56 @@
                     werden muß, aber nicht Teil der Standard oder Extras Bibliothek ist (z.B.
                     Anwendungscode oder Bibliotheken die nicht von Zend ausgeliefert werden),
                     dürfen nie mit "Zend_" oder "ZendX_" beginnen.
+                </para>
+            </note>
+        </sect2>
+
+        <sect2 id="coding-standard.naming-conventions.abstracts">
+            <title>Abstrakte Klassen</title>
+
+            <para>
+                Generell folgen abstrakte Klassen der gleichen Konvention wie <link
+                    linkend="coding-standard.naming-conventions.classes">Klasses</link>, mit einer
+                zusätzlichen Regel: Die Namen von abstrakten Klassen müssen mit derm Term
+                "Abstract" enden, und dem Term darf kein Unterstrich vorangestellt sein. Als
+                Beispiel wird <classname>Zend_Controller_Plugin_Abstract</classname> als ungültig
+                angenommen, aber <classname>Zend_Controller_PluginAbstract</classname> oder
+                <classname>Zend_Controller_Plugin_PluginAbstract</classname> wären gültige Namen.
+            </para>
+
+            <note>
+                <para>
+                    Diese Namens Konvention ist neu mit Version 1.9.0 des Zend Frameworks. Bei
+                    Klassen vor dieser Version kann es sein das sie dieser Regel nicht folgen, aber
+                    Sie werden in Zukunft umbenannt um zu entsprechen.
+                </para>
+            </note>
+        </sect2>
+
+        <sect2 id="coding-standard.naming-conventions.interfaces">
+            <title>Interfaces</title>
+
+            <para>
+                Generell folgen Interfaces der gleichen Konvention wie <link
+                    linkend="coding-standard.naming-conventions.classes">Klasses</link>, mit einer
+                zusätzlichen Regel: Die Namen von Interfaces können optional mit dem Term
+                "Interface" enden, aber dem Term darf kein Unterstrich vorangestellt sein. Als
+                Beispiel wird <classname>Zend_Controller_Plugin_Interface</classname> als ungültig
+                angenommen, aber <classname>Zend_Controller_PluginInterface</classname> oder
+                <classname>Zend_Controller_Plugin_PluginInterface</classname> wären gültige Namen.
+            </para>
+
+            <para>
+                Wärend diese Regel nicht benötigt wird, wird Sie stark empfohlen, da Sie
+                Entwicklern einen guten visuellen Hinweis gibt welche Dateien ein Interface
+                enthalten und welche Klassen.
+            </para>
+
+            <note>
+                <para>
+                    Diese Namens Konvention ist neu mit Version 1.9.0 des Zend Frameworks. Bei
+                    Klassen vor dieser Version kann es sein das sie dieser Regel nicht folgen, aber
+                    Sie werden in Zukunft umbenannt um zu entsprechen.
                 </para>
             </note>
         </sect2>
@@ -454,6 +504,30 @@ $sampleArray = array(1, 2, 3, 'Zend', 'Studio',
                      $a, $b, $c,
                      56.44, $d, 500);
 ]]></programlisting>
+
+                <para>
+                    Alternativ kann das beginnende Array Element in der folgenden Zeile beginnen.
+                    Wenn das so ist, sollte es um ein Einrückungslevel tiefer stehen als die
+                    Zeile welche die Array Deklaration enthält und alle folgenden Zeilen sollten
+                    die gleiche Einrückung haben; der schließende Teil sollte in einer eigenen
+                    Zeile stehen und das gleiche Einrückungslevel haben wie die Zeile welche die
+                    Array Deklaration enthält:
+                </para>
+
+                <programlisting language="php"><![CDATA[
+$sampleArray = array(
+    1, 2, 3, 'Zend', 'Studio',
+    $a, $b, $c,
+    56.44, $d, 500,
+);
+]]></programlisting>
+
+                <para>
+                    Wenn die letztere Deklaration verwendet wird, empfehlen wir ein endendes Komma
+                    für das letzte Element im Array zu verwenden; das minimiert das Problem beim
+                    Hinzufügen von neuen Elements bei zusätzlichen Zeilen, und hilft
+                    sicherzustellen das durch ein fehlendes Komma keine Parsing Fehler auftreten.
+                </para>
             </sect3>
 
             <sect3 id="coding-standard.coding-style.arrays.associative">
@@ -470,6 +544,30 @@ $sampleArray = array(1, 2, 3, 'Zend', 'Studio',
 $sampleArray = array('firstKey'  => 'firstValue',
                      'secondKey' => 'secondValue');
 ]]></programlisting>
+
+                <para>
+                    Alternativ kann das beginnende Array Element in der folgenden Zeile beginnen.
+                    Wenn das so ist, sollte es um ein Einrückungslevel tiefer stehen als die
+                    Zeile welche die Array Deklaration enthält und alle folgenden Zeilen sollten
+                    die gleiche Einrückung haben; der schließende Teil sollte in einer eigenen
+                    Zeile stehen und das gleiche Einrückungslevel haben wie die Zeile welche die
+                    Array Deklaration enthält. Wegen der Lesbarkeit sollten die verschiedenen
+                    "=>" Operatoren so eingerückt werden das Sie untereinander stehen.
+                </para>
+
+                <programlisting language="php"><![CDATA[
+$sampleArray = array(
+    'firstKey'  => 'firstValue',
+    'secondKey' => 'secondValue',
+);
+]]></programlisting>
+
+                <para>
+                    Wenn die letztere Deklaration verwendet wird, empfehlen wir ein endendes Komma
+                    für das letzte Element im Array zu verwenden; das minimiert das Problem beim
+                    Hinzufügen von neuen Elements bei zusätzlichen Zeilen, und hilft
+                    sicherzustellen das durch ein fehlendes Komma keine Parsing Fehler auftreten.
+                </para>
             </sect3>
         </sect2>
 
@@ -518,6 +616,49 @@ class SampleClass
 {
     // gesamter Inhalt der Klasse
     // muss mit vier Leerzeichen eingerückt sein
+}
+]]></programlisting>
+
+                <para>
+                    Klassen die andere Klassen erweitern oder welche Interfaces implementieren
+                    sollen Ihre Abhängigkeit auf der gleichen Zeile deklarieren wenn das möglich
+                    ist.
+                </para>
+
+                <programlisting language="php"><![CDATA[
+class SampleClass extends FooAbstract implements BarInterface
+{
+}
+]]></programlisting>
+
+                <para>
+                    Wenn als Ergebnis so einer Deklaration, die Länge der Zeile die <link
+                        linkend="coding-standard.php-file-formatting.max-line-length">Maximale
+                        Zeilenlänge</link> überschreitet, ist die Zeile vor dem "extends" und
+                    oder "implements" Schlüsselwort umzubrechen und diese Zeilen um ein
+                    Einrückungslevel einzurücken.
+                </para>
+
+                <programlisting language="php"><![CDATA[
+class SampleClass
+    extends FooAbstract
+    implements BarInterface
+{
+}
+]]></programlisting>
+
+                <para>
+                    Wenn die Klasse mehrere Interfaces implementiert und die Deklaration die
+                    maximale Zeilenlänge übersteigt, ist nach jedem Komma umzubrechen und die
+                    Interfaces zu separieren, und die Namen des Interfaces so einzurücken das Sie
+                    untereinander stehen.
+                </para>
+
+                <programlisting language="php"><![CDATA[
+class SampleClass
+    implements BarInterface,
+               BazInterface
+{
 }
 ]]></programlisting>
             </sect3>
@@ -596,6 +737,37 @@ class Foo
     }
 }
 ]]></programlisting>
+
+                <para>
+                    In den Fällen wo die Liste der Argumente die <link
+                        linkend="coding-standard.php-file-formatting.max-line-length">maximale
+                        Zeilenlänge</link> überschreitet, sollten Zeilenumbrüche eingeführt werden.
+                    Zusätzliche Argumente der Funktion oder Methode müssen durch einen zusätzlichen
+                    Einrückungslevel nach der Funktion oder Methodendeklaration eingerückt werden.
+                    Ein Zeilenumbruch sollte dann vor dem schließenden Argument stattfinden,
+                    welcher in der gleichen Zeile platziert werden sollte wie die öffnende Klammer
+                    der Funktion oder Methode mit einem einzelnen Leerzeichen das die zwei trennt,
+                    und mit dem gleichen Einrückungslevel wie die Deklaration der Funktion oder
+                    Methode. Das folgende ist ein Beispiel so einer Situation:
+
+                    <programlisting language="php"><![CDATA[
+/**
+ * Dokumentations Block Hier
+ */
+class Foo
+{
+    /**
+     * Dokumentations Block Hier
+     */
+    public function bar($arg1, $arg2, $arg3,
+        $arg4, $arg5, $arg6
+    ) {
+        // gesamter Inhalt der Funktion
+        // muss durch view Leerzeichen eingerückt sein
+    }
+}
+]]></programlisting>
+                </para>
 
                 <note>
                     <para>
@@ -686,6 +858,12 @@ threeArguments(array(1, 2, 3), 2, 3);
 threeArguments(array(1, 2, 3, 'Zend', 'Studio',
                      $a, $b, $c,
                      56.44, $d, 500), 2, 3);
+
+threeArguments(array(
+    1, 2, 3, 'Zend', 'Studio',
+    $a, $b, $c,
+    56.44, $d, 500
+), 2, 3);
 ]]></programlisting>
             </sect3>
         </sect2>
@@ -724,6 +902,33 @@ if ($a != 2) {
 ]]></programlisting>
 
                 <para>
+                    Wenn die Kontrollanweisung die Ursache für eine Überschreitung der <link
+                        linkend="coding-standard.php-file-formatting.max-line-length">maximalen
+                        Zeilenlänge</link> ist, und sie mehrere Anweisungen hat, kann die
+                    Kontrollanweisung in mehrere Zeilen gebrochen werden. In solchen Fällen, ist
+                    die Zeile vor dem logischen Operator zu brechen und die Zeile so einzurücken
+                    das Sie unter dem ersten Zeichen der Kontrollanweisung steht. Der schließende
+                    Teil der Kontrollanweisung ist mit der öffnenden Klammer in einer eigenen Zeile
+                    zu platzieren, wobei ein einzelnes Leerzeichen die zwei trennen muß, und der
+                    Einrückungslevel identisch mit der öffenden Kontrollanweisung sein ist.
+                </para>
+
+                <programlisting language="php"><![CDATA[
+if (($a == $b)
+    && ($b == $c)
+    || (Foo::CONST == $d)
+) {
+    $a = $d;
+}
+]]></programlisting>
+
+                <para>
+                    Die Einrückung des späteren Deklarationsformats dient der Vorbeugung von
+                    Problemen beim Hinzufügen oder entfernen von Klauseln von der Kontrollanweisung
+                    bei späteren Revisionen.
+                </para>
+
+                <para>
                     Für "if" Anweisungen die "elseif" oder "else" beinhalten, sind die Konventionen
                     der Formatierung ähnlich dem "if" Konstrukt. Das folgende Beispiel zeigt gültige
                     Formatierungen für "if" Anweisungen mit "else" und/oder "elseif" Konstrukten:
@@ -743,6 +948,19 @@ if ($a != 2) {
 } else {
     $a = 7;
 }
+
+if (($a == $b)
+    && ($b == $c)
+    || (Foo::CONST == $d)
+) {
+    $a = $d;
+} elseif (($a != $b)
+          || ($b != $c)
+) {
+    $a = $c;
+} else {
+    $a = $b;
+}
 ]]></programlisting>
 
                 <para>
@@ -750,11 +968,6 @@ if ($a != 2) {
                     Klammern zu schreiben. Dieser Coding Standard macht keine Unterscheidungen und
                     es müssen alle "if", "elseif" oder "else" Anweisungen in Klammern geschrieben
                     werden.
-                </para>
-
-                <para>
-                    Die Verwendung des "elseif" Konstruktes ist erlaubt es wird aber strengstens
-                    davon abgeraten und es ist die "else if" Kombination zu bevorzugen.
                 </para>
             </sect3>
 

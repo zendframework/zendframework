@@ -61,7 +61,7 @@ html/index.html: $(MANUAL_XML) $(HTML_XSL)
 	$(XMLLINT) --xinclude --output _temp_manual.xml $(MANUAL_XML)
 	$(XSLTPROC) --xinclude --output html/index.html $(HTML_XSL) _temp_manual.xml
 	@echo "Copying manual figures (recursively)..."
-	-[ -d figures ] && cp -r figures html/figures
+	-[ -d figures ] && cp -r figures html/
 
 $(MANUAL_XML): $(MANUAL_XML).in
 	sed -e 's!@DOCBOOK_DTD@!$(DOCBOOK_DTD)!' $< > $@

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16650 -->
+<!-- EN-Revision: 16847 -->
 <sect2 id="zend.application.available-resources.frontcontroller">
     <title>Zend_Application_Resource_Frontcontroller</title>
 
@@ -25,51 +25,51 @@
 
     <itemizedlist>
         <listitem><para>
-            <property>controllerDirectory</property>:
+            <emphasis><property>controllerDirectory</property></emphasis>:
             コントローラ・ディレクトリを単独で指定している文字列値か、
             またはモジュールからコントローラ・ディレクトリへの連想配列。
         </para></listitem>
 
         <listitem><para>
-            <property>moduleControllerDirectoryName</property>:
+            <emphasis><property>moduleControllerDirectoryName</property></emphasis>:
             コントローラを含むモジュールの配下でサブディレクトリを示す文字列値
         </para></listitem>
 
         <listitem><para>
-            <property>moduleDirectory</property>:
+            <emphasis><property>moduleDirectory</property></emphasis>:
             モジュールが見つかるかもしれないディレクトリ
         </para></listitem>
 
         <listitem><para>
-            <property>defaultControllerName</property>:
+            <emphasis><property>defaultControllerName</property></emphasis>:
             デフォルト・コントローラの基底名。（通常は "index"）
         </para></listitem>
 
         <listitem><para>
-            <property>defaultAction</property>:
+            <emphasis><property>defaultAction</property></emphasis>:
             デフォルト・アクションの基底名。（通常は "index"）
         </para></listitem>
 
         <listitem><para>
-            <property>defaultModule</property>:
+            <emphasis><property>defaultModule</property></emphasis>:
             デフォルト・モジュールの基底名。（通常は "default"）
         </para></listitem>
 
         <listitem><para>
-            <property>baseUrl</property>:
+            <emphasis><property>baseUrl</property></emphasis>:
             アプリケーションに対して明示された基底<acronym>URL</acronym>
             （通常は自動検出）
         </para></listitem>
 
         <listitem><para>
-            <property>plugins</property>:
+            <emphasis><property>plugins</property></emphasis>:
             フロントコントローラのプラグイン・クラス名配列
             このリソースは、各々のクラスを（コンストラクタ引数なしで）インスタンス化して、
             それからフロントコントローラでインスタンスを登録します。
         </para></listitem>
 
         <listitem><para>
-            <property>params</property>:
+            <emphasis><property>params</property></emphasis>:
             フロントコントローラに登録する連想配列
         </para></listitem>
     </itemizedlist>

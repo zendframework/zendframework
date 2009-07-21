@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16447 -->
+<!-- EN-Revision: 16846 -->
 <sect1 id="zend.db.adapter">
 
     <title>Zend_Db_Adapter</title>
@@ -302,6 +302,13 @@ $db = Zend_Db::factory($config->database);
                         このパラメータを使用すると、PHP
                         アプリケーションが接続時に使用するポート番号を指定できます。
                         これは RDBMS サーバの設定にあわせなければなりません。
+                    </para>
+                </listitem>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis>charset</emphasis>:
+                        接続に使用する文字セットを指定します。
                     </para>
                 </listitem>
                 <listitem>

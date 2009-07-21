@@ -8,20 +8,20 @@
         <title>Einführung</title>
         <para>
             <classname>Zend_Controller_Action</classname> ist eine abstrakte Klasse die verwendet
-            werden kann um Aktion Kontroller zu implementieren die mit dem Front Kontroller
+            werden kann um Aktion Controller zu implementieren die mit dem Front Controller
             verwendet werden können um eine WebSeite zu erstellen die auf dem Model-View-Controller
             (<acronym>MVC</acronym>) Pattern basiert.
         </para>
 
         <para>
             Um <classname>Zend_Controller_Action</classname> zu verwenden, muß von dieser in der
-            eigenen aktuellen Aktions Kontroller Klasse ererbt werden (oder von dieser erben um eine
-            eigene Basisklasse für Aktion Kontroller zu erstellen). Die grundsätzlichste Operation
+            eigenen aktuellen Aktions Controller Klasse ererbt werden (oder von dieser erben um eine
+            eigene Basisklasse für Aktion Controller zu erstellen). Die grundsätzlichste Operation
             ist es von Ihr zu erben und Aktions Methoden zu erstellen die den verschiedenen Aktionen
-            entsprechen die der Kontroller der eigenen Seite handhaben soll. Das Handhaben von
+            entsprechen die der Controller der eigenen Seite handhaben soll. Das Handhaben von
             Routen und Dispatchen des <classname>Zend_Controller</classname>'s wird automatisch
             jegliche Methode die in der eigenen Klasse auf 'Action' endet, als potentielle
-            Kontroller Aktion herausfinden.
+            Controller Aktion herausfinden.
         </para>
 
         <para>
@@ -44,7 +44,7 @@ class FooController extends Zend_Controller_Action
 ]]></programlisting>
 
         <para>
-            Die obige <emphasis>FooController</emphasis> Klasse (Kontroller
+            Die obige <emphasis>FooController</emphasis> Klasse (Controller
             <emphasis>foo</emphasis>)´definiert zwei Aktionen, <emphasis>bar</emphasis> und
             <emphasis>baz</emphasis>.
         </para>
@@ -53,7 +53,7 @@ class FooController extends Zend_Controller_Action
             Da gibt es viel mehr das damit getan werden kann als das, wie eigene Initialisierungs
             Aktionen, Standardaktionen die aufgerufen werden wenn keine Aktion (oder eine ungültige
             Aktion) spezifiziert wird, pre- und post Dispatch Hooks, und eine Vielzahl von Helfer
-            Methoden. Dieses Kapitel arbeitet als eine Übersicht der Aktion Kontroller
+            Methoden. Dieses Kapitel arbeitet als eine Übersicht der Aktion Controller
             Funktionalitäten.
         </para>
 
@@ -62,10 +62,10 @@ class FooController extends Zend_Controller_Action
 
             <para>
                 Standardmäßig aktiviert der <link linkend="zend.controller.front">Front
-                Kontroller</link> den Aktion Helfer des <link
+                Controller</link> den Aktion Helfer des <link
                     linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>'s.
-                Dieser Helfer übernimmt das Einfügen des View Objekts in den Kontroller, sowie das
-                automatische Darstellen der View. Er kann innerhalb des Aktion Kontrollers mit einer
+                Dieser Helfer übernimmt das Einfügen des View Objekts in den Controller, sowie das
+                automatische Darstellen der View. Er kann innerhalb des Aktion Controllers mit einer
                 der folgenden Methoden ausgeschaltet werden:
             </para>
 
@@ -74,7 +74,7 @@ class FooController extends Zend_Controller_Action
 {
     public function init()
     {
-        // Lokal nur bei diesem Kontroller; beeinflußt alle Aktionen die mit
+        // Lokal nur bei diesem Controller; beeinflußt alle Aktionen die mit
         // init geladen wurden:
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -82,7 +82,7 @@ class FooController extends Zend_Controller_Action
         $this->_helper->removeHelper('viewRenderer');
 
         // Auch global, muß aber in Verbindung mit der Lokalen Version sein um
-        // für diesen Kontroller zu gelten:
+        // für diesen Controller zu gelten:
         Zend_Controller_Front::getInstance()
             ->setParam('noViewRenderer', true);
     }
@@ -117,11 +117,11 @@ class FooController extends Zend_Controller_Action
             <para>
                 Der primäre Grund um den <emphasis>ViewRenderer</emphasis> auszuschalten ist, wenn
                 einfach kein View Objekt benötigt wird, oder wenn nicht über ein View Skript
-                gerendert werden soll (zum Beispiel wenn ein Aktion Kontroller verwendet wird um
+                gerendert werden soll (zum Beispiel wenn ein Aktion Controller verwendet wird um
                 Web Service Protokolle wie <acronym>SOAP</acronym>, <acronym>XML-RPC</acronym> oder
                 <acronym>REST</acronym> anzubieten. In den meisten Fällen wird man den
                 <emphasis>ViewRenderer</emphasis> nie global ausschalten müssen, nur selektiv
-                innerhalb einzelner Kontroller oder Aktionen.
+                innerhalb einzelner Controller oder Aktionen.
             </para>
         </note>
     </sect2>
@@ -130,10 +130,10 @@ class FooController extends Zend_Controller_Action
         <title>Objekt Initialisierung</title>
 
         <para>
-            Wärend man immer den Konstruktor des Aktion Kontroller's überschreiben kann ist das
+            Wärend man immer den Konstruktor des Aktion Controller's überschreiben kann ist das
             nicht notwendig. <methodname>Zend_Controller_Action::__construct()</methodname> führt
             einige wichtige Aufgabe aus, wie das registrieren der Anfrage und Antwort Objekte, sowie
-            alle eigene einleitenden Argumente die von Front Kontroller übergeben wurden. Wenn der
+            alle eigene einleitenden Argumente die von Front Controller übergeben wurden. Wenn der
             Konstruktor überschrieben werden muß, muß sichergestellt sein das
             <methodname>parent::__construct($request, $response, $invokeArgs)</methodname>
             aufgerufen wird.
@@ -207,8 +207,8 @@ $this->getResponse()->appendBody($content);
 
             <listitem>
                 <para>
-                    <emphasis>Aufgerufene Argumente</emphasis>: Der Front Kontroller kann Parameter
-                    in den Router, Dispatcher und Aktion Kontroller einfügen. Um diese zu erhalten
+                    <emphasis>Aufgerufene Argumente</emphasis>: Der Front Controller kann Parameter
+                    in den Router, Dispatcher und Aktion Controller einfügen. Um diese zu erhalten
                     kann <methodname>getInvokeArg($key)</methodname> verwendet werden; alternativ
                     kann man die komplette Liste mit <methodname>getInvokeArgs()</methodname>
                     erhalten.
@@ -318,7 +318,7 @@ applicationOrModule/
                 <filename>/views/</filename> Unterverzeichnis weitere Funktionalitäten enthält
                 (helpers, filters). Wenn der Name und der Pfad des View Skripts ermittelt wird,
                 wird das <filename>/views/scripts/</filename> Verzeichnis als Basispfad verwendet,
-                mit einem Verzeichnis das nach dem individuellen Kontroller benannt ist und eine
+                mit einem Verzeichnis das nach dem individuellen Controller benannt ist und eine
                 Hierarchie von View Skripten bietet.
             </para>
         </sect3>
@@ -353,7 +353,7 @@ string render(string $action = null,
             </para>
 
             <note><para>
-                    Da Kontroller- und Aktionsnamen Wort Begrenzer Zeichen enthalten können wie
+                    Da Controller- und Aktionsnamen Wort Begrenzer Zeichen enthalten können wie
                     z.B. '_', '.' und '-', normalisiert <methodname>render()</methodname> diese
                     zu '-' wenn der Skript Name eruiert wird. Intern werden die Wort- und
                     Pfadbegrenzer vom Dispatcher verwendet um die Normalisierung durchzuführen.
@@ -443,7 +443,7 @@ class MyController extends Zend_Controller_Action
                         </para>
 
                         <para>
-                            Diese Option kann global im Kontroller gesetzt werden indem der
+                            Diese Option kann global im Controller gesetzt werden indem der
                             <methodname>setRedirectExit()</methodname> Zugriff verwendet wird.
                         </para>
                     </listitem>
@@ -456,7 +456,7 @@ class MyController extends Zend_Controller_Action
                         </para>
 
                         <para>
-                            Diese Option kann gobal im Kontroller gesetzt werden indem der
+                            Diese Option kann gobal im Controller gesetzt werden indem der
                             <methodname>setRedirectPrependBase()</methodname> Zugriff verwendet
                             wird.
                         </para>
@@ -471,7 +471,7 @@ class MyController extends Zend_Controller_Action
                         </para>
 
                         <para>
-                            Diese Option kann global im Kontroller gesetzt werden indem der
+                            Diese Option kann global im Controller gesetzt werden indem der
                             <methodname>setRedirectCode()</methodname> Zugriff verwendet wird.
                         </para>
                     </listitem>
@@ -481,19 +481,19 @@ class MyController extends Zend_Controller_Action
     </sect2>
 
     <sect2 id="zend.controller.action.subclassing">
-        <title>Erweitern des Aktion Kontrollers</title>
+        <title>Erweitern des Aktion Controllers</title>
 
         <para>
             Vom Design her muß <classname>Zend_Controller_Action</classname> erweitert werden um
-            einen Aktion Kontroller zu erstellen. Als Minimum, muß eine Aktions Methode definiert
-            werden die der Kontroller aufrufen kann.
+            einen Aktion Controller zu erstellen. Als Minimum, muß eine Aktions Methode definiert
+            werden die der Controller aufrufen kann.
         </para>
 
         <para>
             Neben dem erstellen von nützlichen Funktionalitäten für Web Anwendungen, wird auch die
             Notwendigkeit bestehen das vom gleichen Setup oder von den nützlichen Funktionen vieles
-            in verschiedenen Kontrollern wiederholt wird; wenn dem so ist, löst die Erstellung einer
-            gemeinsamen Basis Kontroller Klasse die <classname>Zend_Controller_Action</classname>
+            in verschiedenen Controllern wiederholt wird; wenn dem so ist, löst die Erstellung einer
+            gemeinsamen Basis Controller Klasse die <classname>Zend_Controller_Action</classname>
             erweitert zu einer Lösung dieser Redundanz.
         </para>
 
@@ -501,7 +501,7 @@ class MyController extends Zend_Controller_Action
             <title>Behandeln nicht-vorhandener Aktionen</title>
 
             <para>
-                Wenn eine Anfrage an einen Kontroller durchgeführt wird die eine undefinierte
+                Wenn eine Anfrage an einen Controller durchgeführt wird die eine undefinierte
                 Aktions Methode enthält, kommt
                 <methodname>Zend_Controller_Action::__call()</methodname> zum Einsatz.
                 <methodname>__call()</methodname> ist natürlich <acronym>PHP</acronym>'s magische
@@ -511,7 +511,7 @@ class MyController extends Zend_Controller_Action
             <para>
                 Standardmäßig wirft diese Methode eine
                 <classname>Zend_Controller_Action_Exception</classname> die anzeigt das die
-                angefragte Aktion nicht im Kontroller gefunden werden konnte. Wenn die angefragte
+                angefragte Aktion nicht im Controller gefunden werden konnte. Wenn die angefragte
                 Methode mit 'Action' endet, wird angenommen das eine Aktion angefragt wurde die
                 nicht existiert; solch ein Fehler resultiert in einer Ausnahme mit dem Code 404.
                 Alle anderen Methoden resultieren in einer Ausnahme mit dem Code 500. Das erlaubt
@@ -546,7 +546,7 @@ class MyController extends Zend_Controller_Action
 ]]></programlisting>
 
             <para>
-                Eine andere Möglichkeit ist, dass man zu einer standardmäßigen Kontroller Seiten
+                Eine andere Möglichkeit ist, dass man zu einer standardmäßigen Controller Seiten
                 weiterleiten will:
             </para>
 
@@ -579,7 +579,7 @@ class MyController extends Zend_Controller_Action
         <para>
             Neben dem überschreiben von <methodname>__call()</methodname>, kann jede der
             Initialisierungs-, Utility-, Zugriffs-, View- und Dispatch-Hook Methoden die vorher in
-            diesem Kapitel beschrieben wurden, überschrieben werden um eigene Kontroller
+            diesem Kapitel beschrieben wurden, überschrieben werden um eigene Controller
             anzupassen. Wenn man, als Beispiel, die View Objekte in der Registry speichert, kann es
             gewünscht sein die <methodname>initView()</methodname> Methode mit Code zu Ändern der
             das folgende zusammensetzt:

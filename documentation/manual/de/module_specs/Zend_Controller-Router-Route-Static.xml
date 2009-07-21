@@ -46,7 +46,7 @@ $router->addRoute('login', $route);
         </itemizedlist>
 
         <para>
-            Optional kann auch der "useDefaultControllerAlways" Parameter an den Frontkontroller
+            Optional kann auch der "useDefaultControllerAlways" Parameter an den Frontcontroller
             wärend des Bootstrappings übergeben werden:
         </para>
 

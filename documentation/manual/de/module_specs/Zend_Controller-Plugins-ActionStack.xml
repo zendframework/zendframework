@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16178 -->
+<!-- EN-Revision: 16705 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.plugins.standard.actionstack">
     <title>ActionStack</title>
 
     <para>
         Das <emphasis>ActionStack</emphasis> Plugin erlaubt es einen Stack von Anfragen zu
-        verwalten, und operiert als <code>postDispatch</code> Plugin. Wenn eine Weiterleitung (z.B.
-        ein Aufruf zu einer anderen Aktion) bereits im aktuellen Anfrage Objekt gefunden wurde,
-        führt es nicht durch. Trotzdem, wenn nicht, prüft es seinen Stack und entfernt den obersten
-        Teil von Ihm und leitet diesen zu der Aktion weiter die in dieser Anfrage spezifiziert ist.
-        Der Stack wird in der LIFO Reihenfolge bearbeitet.
+        verwalten, und operiert als <emphasis>postDispatch</emphasis> Plugin. Wenn eine
+        Weiterleitung (z.B. ein Aufruf zu einer anderen Aktion) bereits im aktuellen Anfrage Objekt
+        gefunden wurde, führt es nicht durch. Trotzdem, wenn nicht, prüft es seinen Stack und
+        entfernt den obersten Teil von Ihm und leitet diesen zu der Aktion weiter die in dieser
+        Anfrage spezifiziert ist. Der Stack wird in der <acronym>LIFO</acronym> Reihenfolge
+        bearbeitet.
     </para>
 
     <para>
-        Das Plugin kann jederzeit vom Front Kontroller empfangen werden indem
-        <classname>Zend_Controller_Front::getPlugin('Zend_Controller_Plugin_ActionStack')</classname>
+        Das Plugin kann jederzeit vom Front Controller empfangen werden indem
+        <methodname>Zend_Controller_Front::getPlugin('Zend_Controller_Plugin_ActionStack')</methodname>
         verwendet wird. Sobald das Plugin Objekt vorliegt, gibt es eine Anzahl von Mechanisman die
         verwendet werden können, um es zu manipulieren.
     </para>
@@ -36,7 +37,7 @@
                 <methodname>getRegistryKey()</methodname> und
                 <methodname>setRegistryKey()</methodname>. Diese können verwendet werden um
                 anzuzeigen welcher Registryschlüssel verwendet wird wenn der Stack herausgenommen
-                wird. Der Standardwert ist 'Zend_Controller_Plugin_ActionStack'.
+                wird. Der Standardwert ist '<classname>Zend_Controller_Plugin_ActionStack</classname>'.
             </para>
         </listitem>
 
@@ -58,7 +59,7 @@
 
     <para>
         Eine zusätzliche Methode, <methodname>forward()</methodname>, erwartet ein Anfrageobjekt,
-        und setzt den Status des aktellen Anfrageobjektes im Front Kontroller auf den Status des
+        und setzt den Status des aktellen Anfrageobjektes im Front Controller auf den Status des
         angegebenen Anfrageobjekts, und markiert dieses als unerledigt (das forciert einen weiteren
         Durchlauf der Dispatch Schleife).
     </para>

@@ -89,8 +89,8 @@
 
         <para>
             <classname>Zend_Controller</classname> bietet ein reiches Set von Funktionalitäten für
-            Erweiterung mit seinen <link linkend="zend.controller.plugins">Front Kontroller
-                Plugins</link> und <link linkend="zend.controller.actionhelpers">Action Kontroller
+            Erweiterung mit seinen <link linkend="zend.controller.plugins">Front Controller
+                Plugins</link> und <link linkend="zend.controller.actionhelpers">Action Controller
                 Helfern</link>. <classname>Zend_View</classname> hat auch <link
                 linkend="zend.view.helpers">Helfer</link>. <classname>Zend_Layout</classname> nimmt
             Vorteile wahr von diesen verschiedenen Erweiterungspunkten wenn es mit den MVC
@@ -100,10 +100,10 @@
         <para>
             <classname>Zend_Layout::startMvc()</classname> erstellt eine Instanz von
             <classname>Zend_Layout</classname> mit jeder optionalen Konfiguration die angegeben
-            wird. Anschließend wird ein Front Kontroller Plugin registriert das das Layout mit jedem
+            wird. Anschließend wird ein Front Controller Plugin registriert das das Layout mit jedem
             Anwendungsinhalt darstellt sobald die Dispatch Schleife fertiggestellt ist, und
             registriert einen Action Helfer der den Zugriff auf das Layout Objekt vom Action
-            Kontroller aus gestattet. Zusätzlich kann jederzeit die Layout Instanz vom View Skript
+            Controller aus gestattet. Zusätzlich kann jederzeit die Layout Instanz vom View Skript
             geholt werden indem der <code>layout</code> View Helfer verwendet wird.
         </para>
 

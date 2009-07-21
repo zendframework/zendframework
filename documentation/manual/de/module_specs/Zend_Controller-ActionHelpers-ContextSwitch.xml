@@ -13,7 +13,7 @@
     </para>
 
     <para>
-        Um einen von Ihnen zu aktivieren, muß der Kontroller darauf hingewiesen werden welche
+        Um einen von Ihnen zu aktivieren, muß der Controller darauf hingewiesen werden welche
         Aktion zu welchem Kontext antworten kann. Wenn eine hereinkommende Anfrage einen gültigen
         Kontext für eine gegebene Aktion indiziert, dann wird der Helfer:
     </para>
@@ -39,7 +39,7 @@
     </itemizedlist>
 
     <para>
-        Als Beispiel wird der folgende Kontroller angenommen:
+        Als Beispiel wird der folgende Controller angenommen:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -295,7 +295,7 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
 
         <para>
             Es gibt zwei Mechanismen für das Setzen vorhandener Kontexte. Es kann entweder manuell
-            ein Array im Kontroller erstellt werden, oder es können verschiedene Methoden in
+            ein Array im Controller erstellt werden, oder es können verschiedene Methoden in
             <emphasis>ContextSwitch</emphasis> verwendet werden um Sie zu bauen.
         </para>
 
@@ -689,7 +689,7 @@ $contextSwitch->initContext();
         </para>
 
         <para>
-            Zuerst, verwendet es eine andere Action Kontroller Eigenschaft
+            Zuerst, verwendet es eine andere Action Controller Eigenschaft
             <varname>$ajaxable</varname> um Kontexte festzustellen. Damit kann man verschiedene
             Kontexte verwenden für <acronym>AJAX</acronym> gegenüber normalen
             <acronym>HTTP</acronym> Anfragen. Die verschiedenen

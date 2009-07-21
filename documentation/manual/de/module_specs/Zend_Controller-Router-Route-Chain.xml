@@ -16,8 +16,8 @@
         <para>
             Wenn Routen wie die Hostnameroute und die Pfadroute zusammengekettet werden, haben die
             Parameter der Hostnameroute eine höhere Priorität als die Parameter der Pfadroute.
-            Deshalb wird, wenn man im Hostnamen und in der Pfadroute einen Kontroller definiert,
-            der Kontroller der Hostnameroute ausgewählt.
+            Deshalb wird, wenn man im Hostnamen und in der Pfadroute einen Controller definiert,
+            der Controller der Hostnameroute ausgewählt.
         </para>
     </note>
 

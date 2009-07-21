@@ -35,7 +35,7 @@
             erlaubt unsere Umgebung geziehlt zu spezifizieren, und es uns ausserdem erlaubt die
             Anwendung in einer einzigen Zeile zu starten. Unser spezielles Beispiel nimmt auch an
             das das Setup automatisch lädt sodas wir uns nicht um das laden der betreffenden Klassen
-            kümmern müssen (wie die richtigen Kontroller, Plugins, usw).
+            kümmern müssen (wie die richtigen Controller, Plugins, usw).
         </para>
 
         <programlisting language="php"><![CDATA[

@@ -145,7 +145,7 @@ $this->_helper->autoCompleteDojo($data);
             <para>
                 AutoCompletion mit Dojo, über Zend <acronym>MVC</acronym>, benötigt verschiedene
                 Dinge: Erstellung eines Form Objekts für die Kombobox bei der man AutoCompletion
-                will, eine Kontroller Action für das anbieten der AutoCompletion Ergebnisse,
+                will, eine Controller Action für das anbieten der AutoCompletion Ergebnisse,
                 Erstellung eines eigenen QueryReadSote um die AutoCompletion Aktion damit zu
                 verbinden, und Erstellung des Javascripts das zur Initialisierung der
                 AutoCompletion auf der Serverseite zu verwenden ist.

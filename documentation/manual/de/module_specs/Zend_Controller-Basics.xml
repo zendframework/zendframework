@@ -131,13 +131,13 @@
                     <para>
                         Da Menschen grundsätzlich inkonsistent sind im Behandeln und der
                         Gründlichkeit beim Tippen von Links, normalisiert Zend Framework die Pfad
-                        Informationen zur Kleinschreibung. Das beeinflut natürlich wie Kontroller
+                        Informationen zur Kleinschreibung. Das beeinflut natürlich wie Controller
                         und Aktionen benannt werden ... oder wie auf diese in Links referiert werden
                         kann.
                     </para>
 
                     <para>
-                        Wenn es gewünscht ist das die eigene Kontrollerklasse oder
+                        Wenn es gewünscht ist das die eigene Controllerklasse oder
                         Aktionsmethodenname mehrfache MixedCasedWörter oder camelCasedWörter
                         enthält, dann müssen diese zu getrennten Wörtern in der URL seperiert
                         werden, entweder mit einem '-' oder '.' (das zu verwendende Zeichen kann

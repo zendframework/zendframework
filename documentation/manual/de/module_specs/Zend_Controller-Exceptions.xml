@@ -138,7 +138,7 @@ if ($response->isException()) {
                     Der primäre Vorteil die diese Methode über
                     <methodname>Zend_Controller_Front::throwExceptions()</methodname> bietet ist,
                     das Sie es erlaubt die Antwort wahlweise darzustellen nachdem die Ausnahme
-                    behandelt wurde. Das fängt jede Ausnahme in der Kontrollerkette, im Gegensatz
+                    behandelt wurde. Das fängt jede Ausnahme in der Controllerkette, im Gegensatz
                     zum Error Handler Plugin.
                 </para>
             </listitem>
@@ -303,7 +303,7 @@ class My_Controller_Dispatcher extends Zend_Controller_Dispatcher
                         <para>
                             Durch das Erstellen einer Subklasse von
                             <classname>Zend_Controller_Action</classname> und dem modifizieren von
-                            <methodname>preDispatch()</methodname>, können alle eigenen Kontroller
+                            <methodname>preDispatch()</methodname>, können alle eigenen Controller
                             geändert werden damit Sie an andere Aktionen weiterleiten oder umleiten
                             bevor die Aktion letztendlich dargestellt wird. Der Code hierfür schaut
                             ähnlich wie der Code für das Überschreiben von

@@ -15,8 +15,8 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    Entfernen der Notwendigkeit View Objekte innerhalb der Kontroller zu
-                    instanzieren; View Objekte werden automatisch mit dem Kontroller registriert.
+                    Entfernen der Notwendigkeit View Objekte innerhalb der Controller zu
+                    instanzieren; View Objekte werden automatisch mit dem Controller registriert.
                 </para>
             </listitem>
 
@@ -30,14 +30,14 @@
 
             <listitem>
                 <para>
-                    Ein global vorhandenes View Objekt für alle bearbeitenden Kontroller und
+                    Ein global vorhandenes View Objekt für alle bearbeitenden Controller und
                     Aktionen erstellen.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    Dem Entwickler erlauben das Standard View Rendering Optionen für alle Kontroller
+                    Dem Entwickler erlauben das Standard View Rendering Optionen für alle Controller
                     gesetzt werden.
                 </para>
             </listitem>
@@ -70,7 +70,7 @@
         <note>
             <para>
                 Der <emphasis>ViewRenderer</emphasis> ist standardmäßig aktiviert. Man kann Ihn
-                über den Parameter <emphasis>noViewRenderer</emphasis> des Frontkontrollers
+                über den Parameter <emphasis>noViewRenderer</emphasis> des Frontcontrollers
                 deaktivieren (<command>$front->setParam('noViewRenderer', true);</command>)
                 oder den Helfer vom Helfer Broker Stack entfernen
                 (<methodname>Zend_Controller_Action_HelperBroker::removeHelper('viewRenderer')</methodname>).
@@ -78,7 +78,7 @@
 
             <para>
                 Wenn man Einstellungen vom <code>ViewRenderer</code> vor der Ausführung des Front
-                Kontrollers ändern will, kann das auf zwei Wegen getan werden:
+                Controllers ändern will, kann das auf zwei Wegen getan werden:
             </para>
 
             <itemizedlist>
@@ -129,11 +129,11 @@ Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
 ]]></programlisting>
 
         <para>
-            Das erste Mal wenn ein Aktion Kontroller instanziert wird, triggert er den
+            Das erste Mal wenn ein Aktion Controller instanziert wird, triggert er den
             <emphasis>ViewRenderer</emphasis> ein View Objekt zu instanzieren. Jedes Mal wenn ein
-            Kontroller Instanziert wird, wird die <methodname>init()</methodname> Methode des
+            Controller Instanziert wird, wird die <methodname>init()</methodname> Methode des
             <emphasis>ViewRenderer</emphasis>'s aufgerufen, was dazu führt das er die view
-            Eigenschaft des Aktion Kontrollers setzt, und <methodname>addScriptPath()</methodname>,
+            Eigenschaft des Aktion Controllers setzt, und <methodname>addScriptPath()</methodname>,
             mit einem Pfad relativ zum aktuellen Modul, aufruft; das wird mit einem Klassenprefix
             aufgerufen der nach dem aktuellen Modul benannt ist, was effektiv für alle Helfer und
             Filterklassen die im Modul definiert werden den Namensraum setzt.
@@ -149,7 +149,7 @@ Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
         </para>
 
         <programlisting language="php"><![CDATA[
-// Eine Kontroller Klasse, foo Modul:
+// Eine Controller Klasse, foo Modul:
 class Foo_BarController extends Zend_Controller_Action
 {
     // Rendert standardmäßig bar/index.phtml; keine Aktion benötigt
@@ -190,9 +190,9 @@ $this->foo(); // Foo_View_Helper_Foo::foo() aufrufen
                 <para>
                     <methodname>setNeverRender($flag = true)</methodname> kann verwendet werden um
                     das automatische rendern global ein- oder auszuschalten, z.B. für alle
-                    Kontroller. Wenn er auf <constant>TRUE</constant> gesetzt wird, ruft
+                    Controller. Wenn er auf <constant>TRUE</constant> gesetzt wird, ruft
                     <methodname>postDispatch()</methodname> nicht automatisch
-                    <methodname>render()</methodname> im aktuellen Kontroller auf.
+                    <methodname>render()</methodname> im aktuellen Controller auf.
                     <methodname>getNeverRender()</methodname> empfängt den aktuellen Wert.
                 </para>
             </listitem>
@@ -203,9 +203,9 @@ $this->foo(); // Foo_View_Helper_Foo::foo() aufrufen
                     automatische rendern ein- oder auszuschalten. Wenn er auf
                     <constant>TRUE</constant> gesetzt wird, wird
                     <methodname>postDispatch()</methodname> <methodname>render()</methodname>
-                    im aktuellen Kontroller nicht automatisch aufrufen. Diese Einstellung wird
+                    im aktuellen Controller nicht automatisch aufrufen. Diese Einstellung wird
                     jedesmal zurückgesetzt wenn <methodname>preDispatch()</methodname> aufgerufen
-                    wird (z.B. muß dieses Flag für jeden Kontroller gesetzt werden für den das
+                    wird (z.B. muß dieses Flag für jeden Controller gesetzt werden für den das
                     automatische rendern nicht automatisch stattfinden soll).
                     <methodname>getNoRender()</methodname> empfängt den aktuellen Wert.
                 </para>
@@ -215,7 +215,7 @@ $this->foo(); // Foo_View_Helper_Foo::foo() aufrufen
                 <para>
                     <methodname>setNoController($flag = true)</methodname> kann verwendet werden um
                     <methodname>render()</methodname> zu sagen das für Aktion Skripts nicht in
-                    einem Unterverzeichnis gesucht werden soll das nach dem Kontroller benannt ist
+                    einem Unterverzeichnis gesucht werden soll das nach dem Controller benannt ist
                     (was das Standardverhalten ist). <methodname>getNoController()</methodname>
                     empfängt den aktuellen Wert.
                 </para>
@@ -235,7 +235,7 @@ $this->foo(); // Foo_View_Helper_Foo::foo() aufrufen
                     <methodname>setScriptAction($name)</methodname> kann verwendet werden um das
                     Aktion Skript zu spezifizieren das gerendert werden soll.
                     <varname>$name</varname> sollte der Name des Skripts sein, ohne den Datei
-                    Suffix (und ohne das Kontroller Unterverzeichnis, ausser wenn
+                    Suffix (und ohne das Controller Unterverzeichnis, ausser wenn
                     <emphasis>noController</emphasis> eingeschaltet wurde). Wenn nicht
                     spezifiziert, wird nach einem View Skript gesucht das nach der Aktion in
                     Anfrage Objekt benannt ist. <methodname>getScriptAction()</methodname> empfängt
@@ -271,14 +271,14 @@ $this->foo(); // Foo_View_Helper_Foo::foo() aufrufen
                     <emphasis>responseSegment</emphasis>, oder <emphasis>noController</emphasis>
                     in einem Schritt zu übergeben. <methodname>direct()</methodname> ist ein
                     Alias für diese Methode, und erlaubt es diese Methode einfach vom eigenen
-                    Kontroller aus aufzurufen:
+                    Controller aus aufzurufen:
                 </para>
 
                 <programlisting language="php"><![CDATA[
 // Rendert 'foo' statt dem aktuellen Aktion Skript
 $this->_helper->viewRenderer('foo');
 
-// Rendert form.phtml zum 'html' Antwort Segment, ohne einen Kontroller aus dem
+// Rendert form.phtml zum 'html' Antwort Segment, ohne einen Controller aus dem
 // Unterverzeichnis des View Skripts zu verwenden:
 $this->_helper->viewRenderer('form', 'html', true);
 ]]></programlisting>
@@ -318,7 +318,7 @@ $viewRenderer =
             <listitem>
                 <para>
                     <emphasis>:moduleDir</emphasis> zeigt auf das aktuelle Modul Basisverzeichnis
-                    (von der Konvention her das Elternverzeicnis des Kontroller Verzeichnisses des
+                    (von der Konvention her das Elternverzeicnis des Controller Verzeichnisses des
                     Moduls).
                 </para>
             </listitem>
@@ -331,7 +331,7 @@ $viewRenderer =
 
             <listitem>
                 <para>
-                    <emphasis>:controller</emphasis> zeigt auf den aktuellen Kontrollernamen.
+                    <emphasis>:controller</emphasis> zeigt auf den aktuellen Controllernamen.
                 </para>
             </listitem>
 
@@ -539,8 +539,8 @@ $viewRenderer =
                 </para>
 
                 <para>
-                    Wortbegrenzer die in Modul-, Kontroller- oder Aktionsnamen vorkommen werden mit
-                    Bindestrichen ('-') ersetzt. Deshalb resultiert, wenn der Kontrollername
+                    Wortbegrenzer die in Modul-, Controller- oder Aktionsnamen vorkommen werden mit
+                    Bindestrichen ('-') ersetzt. Deshalb resultiert, wenn der Controllername
                     'foo.bar' und die Aktion 'baz:bat' ist, die Verwendung der standard Pfad
                     Spezifikation einen View Skript Pfad von
                     '<filename>foo-bar/baz-bat.phtml</filename>'.
@@ -617,7 +617,7 @@ Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
 
 ...
 
-// 'foo' Modul, 'bar' Kontroller:
+// 'foo' Modul, 'bar' Controller:
 class Foo_BarController extends Zend_Controller_Action
 {
     // Rendert standardmäßig bar/index.phtml; keine Aktion benötigt
@@ -650,13 +650,13 @@ class Foo_BarController extends Zend_Controller_Action
         </example>
 
         <note>
-            <title>Benamungs Konventionen: Wort Begrenzer in Kontroller- und Aktionnamen</title>
+            <title>Benamungs Konventionen: Wort Begrenzer in Controller- und Aktionnamen</title>
             <para>
-                Wenn der Kontroller- oder Aktionsname aus mehreren Wörtern aufgebaut ist, müssen
+                Wenn der Controller- oder Aktionsname aus mehreren Wörtern aufgebaut ist, müssen
                 diese, da der Dispatcher das benötigt, seperiert sein durch die
                 <acronym>URL</acronym> nach spezifischem Pfad und Wort Begrenzer Zeichen. Der
                 <emphasis>ViewRenderer</emphasis> ersetzt jeden Pfad Begrenzer den er im
-                Kontrollernamen findet mit einem aktuellen Pfad Begrenzer ('/'), und jeden Wort
+                Controllernamen findet mit einem aktuellen Pfad Begrenzer ('/'), und jeden Wort
                 Begrenzer der gefunden wird mit einem Bindestrich ('-') wenn Pfade erstellt werden.
                 Deshalb würde ein Aufruf der Aktion <filename>/foo.bar/baz.bat</filename> zu
                 <methodname>FooBarController::bazBatAction()</methodname> in
@@ -671,10 +671,10 @@ class Foo_BarController extends Zend_Controller_Action
 
             <para>
                 Es ist zu beachten das im zweiten Beispiel, das Modul noch immer das Standardmodul
-                ist, aber das der Kontroller, wegen der Existenz eines Pfad Separators, den Namen
+                ist, aber das der Controller, wegen der Existenz eines Pfad Separators, den Namen
                 <classname>Bar_BazController</classname> in
                 <filename>Bar/BazController.php</filename> empfängt. Der ViewRenderer emuliert die
-                Kontroller Verzeichnis Hierarchie.
+                Controller Verzeichnis Hierarchie.
             </para>
         </note>
 
@@ -682,7 +682,7 @@ class Foo_BarController extends Zend_Controller_Action
             <title>Automatisches rendern ausschalten</title>
 
             <para>
-                Für einige Aktionen oder Kontroller, kann es gewünscht sein das automatische Rendern
+                Für einige Aktionen oder Controller, kann es gewünscht sein das automatische Rendern
                 auszuschalten -- zum Beispiel, wenn eine andere Art von Ausgabe
                 (<acronym>XML</acronym>, <acronym>JSON</acronym>, etc)
                 ausgegeben werden soll, oder wenn man einfach nichts ausgeben will. Es gibt zwei
@@ -692,7 +692,7 @@ class Foo_BarController extends Zend_Controller_Action
             </para>
 
             <programlisting language="php"><![CDATA[
-// Baz Kontroller Klasse, bar Modul:
+// Baz Controller Klasse, bar Modul:
 class Bar_BazController extends Zend_Controller_Action
 {
     public function fooAction()
@@ -702,12 +702,12 @@ class Bar_BazController extends Zend_Controller_Action
     }
 }
 
-// Bat Kontroller Klasse, Bar Modul:
+// Bat Controller Klasse, Bar Modul:
 class Bar_BatController extends Zend_Controller_Action
 {
     public function preDispatch()
     {
-        // Die Aktionen dieses Kontroller nie automatisch Rendern
+        // Die Aktionen dieses Controller nie automatisch Rendern
         $this->_helper->viewRenderer->setNoRender();
     }
 }
@@ -728,7 +728,7 @@ class Bar_BatController extends Zend_Controller_Action
 
             <para>
                 Einige Situationen erfordern das ein anderes Skript, als das nach der Aktion
-                benannte, ausgeführt wird. Zum Beispiel, wenn man einen Kontroller hat der Aktionen
+                benannte, ausgeführt wird. Zum Beispiel, wenn man einen Controller hat der Aktionen
                 sowohl hinzufügen als auch bearbeiten kann, und beide mit der selben 'form' View
                 angezeigt werden, aber mit unterschiedlichen Werten gesetzt werden. Der Skript Name
                 kann ganz einfach geändert werden. Entweder mit
@@ -738,7 +738,7 @@ class Bar_BatController extends Zend_Controller_Action
             </para>
 
             <programlisting language="php"><![CDATA[
-// Bar Kontroller Klasse, foo Modul:
+// Bar Controller Klasse, foo Modul:
 class Foo_BarController extends Zend_Controller_Action
 {
     public function addAction()
@@ -775,13 +775,13 @@ class Foo_BarController extends Zend_Controller_Action
             <para>
                 Was wenn ein View Objekt modifiziert werden soll -- zum Beispiel, die Helfer Pfade
                 ändern, oder die Kodierung? Das kann durch Modifikation des View Objekts, das im
-                Kontroller gesetzt ist, gemacht werden, oder durch herausnehmen des View Objekts
+                Controller gesetzt ist, gemacht werden, oder durch herausnehmen des View Objekts
                 aus dem <emphasis>ViewRenderer</emphasis>; beide referenzieren auf das gleiche
                 Objekt.
             </para>
 
             <programlisting language="php"><![CDATA[
-// Bar Kontroller Klasse, foo Modul:
+// Bar Controller Klasse, foo Modul:
 class Foo_BarController extends Zend_Controller_Action
 {
     public function preDispatch()

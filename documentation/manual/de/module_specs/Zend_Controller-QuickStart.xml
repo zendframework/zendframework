@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16178 -->
+<!-- EN-Revision: 16705 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.quickstart">
     <title>Zend_Controller Schnellstart</title>
@@ -7,14 +7,15 @@
     <sect2 id="zend.controller.quickstart.introduction">
         <title>Einführung</title>
         <para>
-            <classname>Zend_Controller</classname> ist das Herz des MVC-Systems des Zend Framework.
-            MVC bedeutet <ulink
+            <classname>Zend_Controller</classname> ist das Herz des <acronym>MVC</acronym> Systems
+            des Zend Frameworks. <acronym>MVC</acronym> bedeutet <ulink
                 url="http://de.wikipedia.org/wiki/Model_View_Controller">Model-View-Controller</ulink>
             und ist ein Entwurfsmuster, das darauf abzielt, Anwendungslogik von Anzeigelogik zu trennen.
             <classname>Zend_Controller_Front</classname> implementiert ein <ulink
                 url="http://www.martinfowler.com/eaaCatalog/frontController.html">Front-Controller</ulink>-Entwurfsmuster,
             das vorschreibt, dass alle Anfragen vom Front-Controller abgefangen und abhängig von der
-            angeforderten URL an individuelle Action-Controller weitergeleitet werden.
+            angeforderten <acronym>URL</acronym> an individuelle Action-Controller weitergeleitet
+            werden.
         </para>
         <para>
             Das <classname>Zend_Controller</classname> System wurde im Sinne der
@@ -66,7 +67,8 @@ html/
 
             <para>
                 Der Webserver ist so zu konfigurieren, dass das Wurzelverzeichnis (Document Root)
-                des Webservers im <code>html</code>-Verzeichnis der obigen Ordnerstruktur liegt.
+                des Webservers im <filename>html/</filename>-Verzeichnis der obigen Ordnerstruktur
+                liegt.
             </para>
         </sect3>
 
@@ -101,7 +103,8 @@ RewriteRule ^.*$ index.php [NC,L]
             </note>
 
             <para>
-                Wenn man IIS 7.0 verwendet, sollte man die folgende Rewrite Konfiguration verwenden:
+                Wenn man <acronym>IIS</acronym> 7.0 verwendet, sollte man die folgende Rewrite
+                Konfiguration verwenden:
             </para>
 
             <programlisting language="xml"><![CDATA[
@@ -171,16 +174,17 @@ Zend_Controller_Front::run('/path/to/app/controllers');
 
             <para>
                 Bevor wir von Action-Controllern reden, sollte erst verstanden werden, wie Anfragen
-                im Zend Framework behandelt werden. Standardmäßig zeigt das erste Segment eines URL
-                auf einen Controller und das zweite Segment auf eine Aktion, die dieser Controller
-                ausführen soll. Als Beispiel sei der URL
+                im Zend Framework behandelt werden. Standardmäßig zeigt das erste Segment eines
+                <acronym>URL</acronym> auf einen Controller und das zweite Segment auf eine Aktion,
+                die dieser Controller ausführen soll. Als Beispiel sei der <acronym>URL</acronym>
                 <filename>http://framework.zend.com/roadmap/components</filename> gegeben. Der Pfad
                 ist <filename>/roadmap/components</filename>, was die Anfrage zum Controller
-                <code>roadmap</code> und dort in die Aktion <code>components</code> leitet. Wenn
-                keine Aktion angegeben wird, wird <code>index</code> als Standard-Aktion angenommen,
-                und wenn kein Controller angegeben wird, wird auch <code>index</code> als
-                Standard-Controller angenommen. (Das folgt der Apache-Konvention, die einen
-                <code>DirectoryIndex</code> automatisch findet).
+                <emphasis>roadmap</emphasis> und dort in die Aktion <emphasis>components</emphasis>
+                leitet. Wenn keine Aktion angegeben wird, wird <emphasis>index</emphasis> als
+                Standard-Aktion angenommen, und wenn kein Controller angegeben wird, wird auch
+                <emphasis>index</emphasis> als Standard-Controller angenommen. (Das folgt der
+                Apache-Konvention, die einen <emphasis>DirectoryIndex</emphasis> automatisch
+                findet).
             </para>
 
             <para>
@@ -188,25 +192,26 @@ Zend_Controller_Front::run('/path/to/app/controllers');
                 als Controller angegeben ist, und schließt daraus auf eine passende Klasse. In der
                 normalen Einstellung des Dispatchers wird der erste Buchstabe jedes Wortes im
                 Controller-Namen groß geschrieben (Title-case), und dann das Wort
-                <code>Controller</code> angehängt. Das bedeutet für unser Beispiel, dass die Anfrage
-                nach dem Controller <code>roadmap</code> an die Klasse
-                <code>RoadmapController</code> weitergeleitet wird.
+                <emphasis>Controller</emphasis> angehängt. Das bedeutet für unser Beispiel, dass
+                die Anfrage nach dem Controller <emphasis>roadmap</emphasis> an die Klasse
+                <classname>RoadmapController</classname> weitergeleitet wird.
             </para>
 
             <para>
                 Auf ähnliche Art wird die Methode für die Aktion bestimmt, die der Controller
                 ausführen soll. In der Grundeinstellung wird die angefragte Aktion komplett
-                kleingeschrieben und das Wort <code>Action</code> wird angehängt. In unserem
-                Beispiel wird also die Aktion <code>components</code> zu
-                <code>componentsAction</code>, insgesamt wird also die Methode
+                kleingeschrieben und das Wort <emphasis>Action</emphasis> wird angehängt. In
+                unserem Beispiel wird also die Aktion <emphasis>components</emphasis> zu
+                <methodname>componentsAction()</methodname>, insgesamt wird also die Methode
                 <methodname>RoadmapController::componentsAction()</methodname> aufgerufen.
             </para>
 
             <para>
                 Also, weiter gehts. Jetzt wird ein Startseiten-Controller und eine dazugehörige
                 Standard-Aktionsmethode erstellt. Wie vorhin bereits erwähnt, heißen
-                Standard-Controller und -Aktion beide <code>index</code>. Also gehört in die Datei
-                <filename>application/controllers/IndexController.php</filename> folgendes:
+                Standard-Controller und -Aktion beide <emphasis>index</emphasis>. Also gehört in
+                die Datei <filename>application/controllers/IndexController.php</filename>
+                folgendes:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -224,17 +229,18 @@ class IndexController extends Zend_Controller_Action
                     linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>
                 eingeschaltet. Das bedeutet, dass sofort, wenn eine leere Aktionsmethode und ein
                 passendes View-Script existieren, Inhalte gerendert werden. Standardmäßig wird die
-                Klasse <classname>Zend_View</classname> als View-Schicht im Zend-Framework MVC
-                verwendet. Der <emphasis>ViewRenderer</emphasis> zaubert ein wenig, und benutzt
-                Controller- (hier: <code>index</code>) und Aktionsname (hier: <code>index</code>),
-                um herauszufinden, welches Template er rendern soll. Ohne dass man dies ändert,
-                haben Templates die Dateiendung <filename>.phtml</filename>, das heißt also für
-                unser Beispiel, dass das Template <filename>index/index.phtml</filename> gerendert
-                wird. Zusätzlich nimmt der <emphasis>ViewRenderer</emphasis> automatisch an, dass
-                das Verzeichnis <code>views</code> auf der selben Ebene wie das Controller
-                Verzeichnis das View-Basisverzeichnis ist, und dass die eigentlichen View-Scripts
-                in dessen Unterverzeichnis <filename>views/scripts/</filename> liegen. Insgesamt
-                hat also das Template, das gerendert wird, den Pfad
+                Klasse <classname>Zend_View</classname> als View-Schicht im Zend-Framework
+                <acronym>MVC</acronym> verwendet. Der <emphasis>ViewRenderer</emphasis> zaubert ein
+                wenig, und benutzt Controller- (hier: <emphasis>index</emphasis>) und Aktionsname
+                (hier: <emphasis>index</emphasis>), um herauszufinden, welches Template er rendern
+                soll. Ohne dass man dies ändert, haben Templates die Dateiendung
+                <filename>.phtml</filename>, das heißt also für unser Beispiel, dass das Template
+                <filename>index/index.phtml</filename> gerendert wird. Zusätzlich nimmt der
+                <emphasis>ViewRenderer</emphasis> automatisch an, dass das Verzeichnis
+                <filename>views/</filename> auf der selben Ebene wie das Controller Verzeichnis das
+                View-Basisverzeichnis ist, und dass die eigentlichen View-Scripts in dessen
+                Unterverzeichnis <filename>views/scripts/</filename> liegen. Insgesamt hat also das
+                Template, das gerendert wird, den Pfad
                 <filename>application/views/scripts/index/index.phtml</filename>.
             </para>
         </sect3>
@@ -248,7 +254,7 @@ class IndexController extends Zend_Controller_Action
                 <filename>application/views/scripts/</filename> abgelegt; das View-Script für den
                 Starseiten-Controller und dessen Standard-Aktion hat den Pfad
                 <filename>application/views/scripts/index/index.phtml</filename>. Da hinein kommt
-                das folgende HTML:
+                das folgende <acronym>HTML</acronym>:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -322,7 +328,8 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
                 Jetzt, wo der erste Controller und das erste View-Script geschrieben sind, kann der
                 Browser aufgerufen und die Seite angesehen werden. Wäre
                 <filename>example.com</filename> die Domain der Zend Framework-Installation, dann
-                würde jeder der folgenden URLs auf die Seite zeigen, die wir gerade erstellt haben:
+                würde jeder der folgenden <acronym>URL</acronym>s auf die Seite zeigen, die wir
+                gerade erstellt haben:
             </para>
 
             <itemizedlist>

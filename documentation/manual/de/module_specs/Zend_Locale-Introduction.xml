@@ -377,7 +377,7 @@ try {
     $locale = new Zend_Locale('de');
 }
 
-// Im Modell/Kontroller
+// Im Modell/Controller
 $date = new Zend_Date($locale);
 ]]></programlisting>
         </example>
@@ -403,7 +403,7 @@ $date = new Zend_Date($locale);
 // In der Bootstrap Datei
 Zend_Locale::setDefault('de');
 
-// Im Modell/Kontroller
+// Im Modell/Controller
 $date = new Zend_Date();
 ]]></programlisting>
         </example>

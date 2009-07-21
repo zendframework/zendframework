@@ -20,8 +20,8 @@
 
     <para>
         Zuerst kann diese Eigenschaft so gesetzt werden das Sie auf eine Datei zeigt. Wenn das getan
-        wurde sollte diese Datei <emphasis>nicht</emphasis> den Front Kontroller ausführen, aber
-        stattdessen den Front Kontroller konfigurieren und alles was die Anwendung an speziellen
+        wurde sollte diese Datei <emphasis>nicht</emphasis> den Front Controller ausführen, aber
+        stattdessen den Front Controller konfigurieren und alles was die Anwendung an speziellen
         Dingen benötigt.
     </para>
 

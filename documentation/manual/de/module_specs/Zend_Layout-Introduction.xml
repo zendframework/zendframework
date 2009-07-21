@@ -41,7 +41,7 @@
         <listitem>
             <para>
                 Erlaubt das Ausschalten von Layouts, die Änderung von Layout Skripts, und andere
-                Stati; erlaubt diese Aktionen von innerhalb des Aktions Kontrollers und von View
+                Stati; erlaubt diese Aktionen von innerhalb des Aktions Controllers und von View
                 Skripten.
             </para>
         </listitem>

@@ -225,21 +225,21 @@ $s->setExpirationSeconds(60);
 
     <sect2 id="zend.session.advanced_usage.controllers">
 
-        <title>Kapseln von Sessions und Kontroller</title>
+        <title>Kapseln von Sessions und Controller</title>
 
         <para>
-            Namensräume können auch verwendet werden um den Zugriff auf Sessions durch Kontroller
+            Namensräume können auch verwendet werden um den Zugriff auf Sessions durch Controller
             zu seperieren um Variablen vor Kontaminierung zu schützen. Zum Beispiel könnte ein
-            Authentifizierungs Kontroller seine Session Daten von allen anderen Kontrollern separat
+            Authentifizierungs Controller seine Session Daten von allen anderen Controllern separat
             halten um notwendigen Sicherheiten zu entsprechen.
         </para>
 
         <example id="zend.session.advanced_usage.controllers.example">
 
-            <title>Session Namensräume für Kontroller mit automatischem Verfall</title>
+            <title>Session Namensräume für Controller mit automatischem Verfall</title>
 
             <para>
-                Der folgende Code ist Teil eines Kontrollers der die Test Frage anzeigt und eine
+                Der folgende Code ist Teil eines Controllers der die Test Frage anzeigt und eine
                 boolsche Variable initialisiert die anzeigt ob eine geschickte Antwort zur Test
                 Frage akzeptiert werden sollte oder nicht. In diesem Fall wird dem Benutzer der
                 Anwendung 300 Sekunden Zeit gegeben die angezeigte Frage zu beantworten.
@@ -247,7 +247,7 @@ $s->setExpirationSeconds(60);
 
             <programlisting language="php"><![CDATA[
 // ...
-// Im Frage-View Kontroller
+// Im Frage-View Controller
 $testSpace = new Zend_Session_Namespace('testSpace');
 $testSpace->setExpirationSeconds(300, 'accept_answer');
 // Nur diese Variable ablaufen lassen
@@ -256,14 +256,14 @@ $testSpace->accept_answer = true;
 ]]></programlisting>
 
             <para>
-                Danach bestimmt der Kontroller der die Antworten für die Test Fragen bearbeitet ob
+                Danach bestimmt der Controller der die Antworten für die Test Fragen bearbeitet ob
                 eine Antwort akzeptiert wird oder nach basierend darauf ob der Benutzer die Antwort
                 in der erlaubten Zeit übermittelt hat:
             </para>
 
             <programlisting language="php"><![CDATA[
 // ...
-// Im Frage-Prozess Kontroller
+// Im Frage-Prozess Controller
  $testSpace = new Zend_Session_Namespace('testSpace');
  if ($testSpace->accept_answer === true) {
      // innerhalb der Zeit

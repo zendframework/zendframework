@@ -2,7 +2,7 @@
 <!-- EN-Revision: 15617 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.test.phpunit.testing">
-    <title>Testen eigener Kontroller und MVC Anwendungen</title>
+    <title>Testen eigener Controller und MVC Anwendungen</title>
 
     <para>
         Sobald man sein Bootstrap hat, kann man mit dem Testen beginnen. Testen funktioniert

@@ -184,7 +184,7 @@ $inflector->setFilterRule(':action', array(
             <listitem>
                 <para>
                     Die am wenigsten zu empfehlende Option: Man kann den Dispatcher dazu zwingen
-                    camelCase Aktionsnamen mit einem neuen Front Kontroller Flag
+                    camelCase Aktionsnamen mit einem neuen Front Controller Flag
                     <property>useCaseSensitiveActions</property> zu bearbeiten:
                 </para>
 
@@ -224,9 +224,9 @@ $front->setParam('useCaseSensitiveActions', true);
         <para>
             Der <classname>ErrorHandler</classname> Plugin läuft wärend der
             <methodname>postDispatch()</methodname> Prüfung auf Ausnahmen, und leitet zu einem
-            spezifizierten Fehlerhandler Kontroller weiter. Solch ein Kontroller sollte in der
+            spezifizierten Fehlerhandler Controller weiter. Solch ein Controller sollte in der
             eigenen Anwendung inkludiert werden. Er kann deaktiviert werden durch das setzen des
-            Frontkontroller Parameters <property>noErrorHandler</property>:
+            Frontcontroller Parameters <property>noErrorHandler</property>:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -235,7 +235,7 @@ $front->setParam('noErrorHandler', true);
 
         <para>
             Der <classname>ViewRenderer</classname> Aktionhelfer automatisiert die Injizierung der
-            View in den Aktionkontroller genauso wie das autorendern von Viewskripten basierend auf
+            View in den Aktioncontroller genauso wie das autorendern von Viewskripten basierend auf
             die aktuelle Aktion. Das primäre Problem dem man begegnen kann ist, wenn man Aktionen
             hat die keine View Skripte rendern und weder vorwärts- noch weiterleiten, da der
             <classname>ViewRenderer</classname> versucht ein View Skript zu Rendern basierend auf
@@ -245,7 +245,7 @@ $front->setParam('noErrorHandler', true);
         <para>
             Es gibt verschiedene Strategien die man anwenden kann um den eigenen Code upzudaten. In
             kurzer Form, kann man global den <classname>ViewRenderer</classname> im eigenen
-            Frontkontroller Bootstrap vor dem Abarbeiten ausschalten:
+            Frontcontroller Bootstrap vor dem Abarbeiten ausschalten:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -261,7 +261,7 @@ $front->setParam('noViewRenderer', true);
         <para>
             Wenn man bereit ist damit zu beginnen die <classname>ViewRenderer</classname>
             Funktionalität zu verwenden, gibt es verschiedene Dinge die man im eigenen
-            Kontrollercode beachten muß. Zuerst muß auf die Aktionmethoden (die Methoden die mit
+            Controllercode beachten muß. Zuerst muß auf die Aktionmethoden (die Methoden die mit
             'Action' enden) geachtet werden, und ausgesucht werden was eine jede machen soll. Wenn
             nichts vom folgenden passiert, muß man Änderungen durchführen:
         </para>

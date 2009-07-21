@@ -5,7 +5,7 @@
     <title>Action View Helfer</title>
 
     <para>
-        Der <code>Action</code> View Helfer ermöglicht es View Skripten eine gegebene Kontroller
+        Der <code>Action</code> View Helfer ermöglicht es View Skripten eine gegebene Controller
         Aktion auszuführen; das Ergebnis des Antwortsobjektes das der Ausführung folgt wird dann
         zurückgegeben. Dieses kann verwendet werden wenn eine bestimmte Aktion wiederverwendbare
         Inhalte oder "helfende" Inhalte erstellt.
@@ -18,7 +18,7 @@
 
     <para>
         Die API für den <code>Action</code> View Helfer folgt dem der meisten MVC Komponenten die
-        Kontroller Aktionen aufrufen:
+        Controller Aktionen aufrufen:
         <code>action($action, $controller, $module = null, array $params = array())</code>.
         <code>$action</code> und <code>$controller</code> werden benötigt; wenn kein Modul angegeben
         wird, dann wird das Standardmodul angenommen.

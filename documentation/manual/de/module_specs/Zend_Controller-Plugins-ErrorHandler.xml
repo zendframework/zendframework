@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16178 -->
+<!-- EN-Revision: 16705 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.plugins.standard.errorhandler">
     <title>Zend_Controller_Plugin_ErrorHandler</title>
@@ -7,7 +7,7 @@
     <para>
         <classname>Zend_Controller_Plugin_ErrorHandler</classname> bietet ein Plugin für die
         Handhabung von Ausnahmen die von der Anwendung geworfen werden, inklusive denen die aus
-        fehlenden Kontrollern oder Aktionen resultieren; das ist eine Alternative zu den Methoden
+        fehlenden Controllern oder Aktionen resultieren; das ist eine Alternative zu den Methoden
         die in der <link linkend="zend.controller.exceptions">Sektion MVC Ausnahmen</link>
         aufgeführt sind.
     </para>
@@ -19,12 +19,12 @@
     <itemizedlist>
         <listitem>
             <para>
-                Abfangen von Ausnahmen die durch fehlende Kontroller oder Aktionsmethoden auftreten
+                Abfangen von Ausnahmen die durch fehlende Controller oder Aktionsmethoden auftreten
             </para>
         </listitem>
 
         <listitem>
-            <para>Abfangen von Ausnahmen die innerhalb von Kontrollern aufrufen</para>
+            <para>Abfangen von Ausnahmen die innerhalb von Controllern aufrufen</para>
         </listitem>
     </itemizedlist>
 
@@ -45,21 +45,21 @@
     <itemizedlist>
         <listitem>
             <para>
-                <methodname>setErrorHandlerModule()</methodname> setzt das Kontroller Modul das
+                <methodname>setErrorHandlerModule()</methodname> setzt das Controller Modul das
                 verwendet werden soll.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <methodname>setErrorHandlerController()</methodname> setzt den Kontroller der
+                <methodname>setErrorHandlerController()</methodname> setzt den Controller der
                 verwendet werden soll.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <methodname>setErrorHandlerAction()</methodname> setzt die Kontroller Aktion die
+                <methodname>setErrorHandlerAction()</methodname> setzt die Controller Aktion die
                 verwendet werden soll.
             </para>
         </listitem>
@@ -87,7 +87,7 @@
 
     <para>
         Wenn eine Ausnahme wärend der Abarbeitung des Error Handlers auftritt, teilt das Plugin dem
-        Front Kontroller mit das eine Ausnahme geworfen werden muß, und die letzte registrierte
+        Front Controller mit das eine Ausnahme geworfen werden muß, und die letzte registrierte
         Ausnahme im Antwort Objekt wird nocheinmal geworfen.
     </para>
 
@@ -96,15 +96,15 @@
 
         <para>
             Da das <emphasis>ErrorHandler</emphasis> Plugin nicht nur Anwendungsfehler erfasst,
-            sondern auch Fehler in der Kontroller Kette die durch fehlende Kontroller Klassen
+            sondern auch Fehler in der Controller Kette die durch fehlende Controller Klassen
             und/oder Aktions Methoden auftreten, kann es als 404 Handler verwendet werden. Hierfür
-            muß der eigene Fehler Kontroller den Typ der Ausnahme prüfen.
+            muß der eigene Fehler Controller den Typ der Ausnahme prüfen.
         </para>
 
         <para>
             Aufgefangene Ausnahmen werden in einem in der Anfrage registrierten Objekt geloggt. Um
             dieses zu empfangen kann
-            <classname>Zend_Controller_Action::_getParam('error_handler')</classname> verwendet
+            <methodname>Zend_Controller_Action::_getParam('error_handler')</methodname> verwendet
             werden:
         </para>
 
@@ -119,27 +119,27 @@
 
         <para>
             Sobald das Fehler Objekt vorhanden ist, kann man es über den Typ mit
-            <varname>$errors->type</varname> erhalten. Es wird eines der folgenden sein:
+            <command>$errors->type;</command> erhalten. Es wird eines der folgenden sein:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <classname>Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER</classname>,
-                    zeigt das der Kontroller nicht gefunden wurde.
+                    <constant>Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER</constant>,
+                    zeigt das der Controller nicht gefunden wurde.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <classname>Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION</classname>,
+                    <constant>Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION</constant>,
                     zeigt das die angefragte Aktion nicht gefunden wurde.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <classname>Zend_Controller_Plugin_ErrorHandler::EXCEPTION_OTHER</classname>,
+                    <constant>Zend_Controller_Plugin_ErrorHandler::EXCEPTION_OTHER</constant>,
                     zeigt andere Ausnahmen.
                 </para>
             </listitem>
@@ -159,7 +159,7 @@ class ErrorController extends Zend_Controller_Action
         switch ($errors->type) {
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
-                // 404 Fehler -- Kontroller oder Aktion nicht gefunden
+                // 404 Fehler -- Controller oder Aktion nicht gefunden
                 $this->getResponse()
                      ->setRawHeader('HTTP/1.1 404 Not Found');
 
@@ -176,8 +176,8 @@ class ErrorController extends Zend_Controller_Action
 
         <para>
             Letztendlich kann die Anwendung die den Fehler Handler verursacht hat, empfangen werden
-            indem die <code>exception</code> Eigenschaft des <code>error_handler</code> Objektes
-            genommen wird:
+            indem die <property>exception</property> Eigenschaft des
+            <emphasis>error_handler</emphasis> Objektes genommen wird:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -188,7 +188,7 @@ public function errorAction()
         switch ($errors->type) {
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
-                // 404 Fehler -- Kontroller oder Aktion nicht gefunden
+                // 404 Fehler -- Controller oder Aktion nicht gefunden
                 $this->getResponse()
                      ->setRawHeader('HTTP/1.1 404 Not Found');
 
@@ -274,10 +274,10 @@ $front->registerPlugin($plugin);
     </sect4>
 
     <sect4 id="zend.controller.plugins.standard.errorhandler.controllerexamples">
-        <title>Beispiel für den Fehler Kontroller</title>
+        <title>Beispiel für den Fehler Controller</title>
 
         <para>
-            Um das Fehler Handler Plugin zu verwenden, benötigt man einen Fehler Kontroller.
+            Um das Fehler Handler Plugin zu verwenden, benötigt man einen Fehler Controller.
             Nachfolgend ist ein einfaches Beispiel.
         </para>
 
@@ -291,7 +291,7 @@ class ErrorController extends Zend_Controller_Action
         switch ($errors->type) {
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
-                // 404 Fehler -- Kontroller oder Aktion nicht gefunden
+                // 404 Fehler -- Controller oder Aktion nicht gefunden
                 $this->getResponse()->setRawHeader('HTTP/1.1 404 Not Found');
 
                 $content =<<<EOH

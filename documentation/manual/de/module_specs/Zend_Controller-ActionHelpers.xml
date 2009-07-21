@@ -8,9 +8,9 @@
         <title>Einführung</title>
         <para>
             Aktion Helfer erlauben Entwicklern Runtime und/oder On-Demand Funktionalität in jeden
-            Aktion Kontroller zu inizieren der <classname>Zend_Controller_Action</classname>
-            erweitert. Aktion Kontroller versuchen den Notwendigkeit zu minimieren, den abstrakten
-            Aktion Kontroller zu erweitern um damit normale Aktion Kontroller Funktionen inizieren.
+            Aktion Controller zu inizieren der <classname>Zend_Controller_Action</classname>
+            erweitert. Aktion Controller versuchen den Notwendigkeit zu minimieren, den abstrakten
+            Aktion Controller zu erweitern um damit normale Aktion Controller Funktionen inizieren.
         </para>
 
         <para>
@@ -20,7 +20,7 @@
                 linkend="zend.controller.plugins">Zend_Controller_Plugin</link>. Aktion Helfer
             <classname>Zend_View_Helper</classname>) können bei Bedarf geladen und aufgerufen
             werden, oder Sie können wärend der Anfragezeit (Bootstrap) instanziert werden oder
-            wären der Erstellungszeit des Aktion Kontrollers (<methodname>init()</methodname>). Um
+            wären der Erstellungszeit des Aktion Controllers (<methodname>init()</methodname>). Um
             Sie näher zu verstehen, betrachten wir Ihre Verwendung in der folgenden Sektion.
         </para>
     </sect2>
@@ -86,7 +86,7 @@ $this->_helper->FlashMessenger('Wir haben in der letzten Anfrage etwas getan');
 
         <para>
             Man kann Helfer auch explizit instanzieren. Das kann gewollt sein wenn der Helfer
-            ausserhalb eines Aktion Kontrollers verwendet werden soll, oder wenn ein Helfer an einen
+            ausserhalb eines Aktion Controllers verwendet werden soll, oder wenn ein Helfer an einen
             Helfer Broker übergeben wird um Ihn durch irgendeine Aktion zu verwenden. Instanziert
             wird er wie jede andere <acronym>PHP</acronym> Klasse.
         </para>
@@ -149,7 +149,7 @@ Zend_Controller_Action_HelperBroker::addPath('./Plugins/Helpers',
         </itemizedlist>
 
         <para>
-            Da diese Methoden statisch sind, können Sie zu jeder Zeit in der Kontrollerkette
+            Da diese Methoden statisch sind, können Sie zu jeder Zeit in der Controllerkette
             aufgerufen werden um Helfer dynamisch hinzuzufügen wenn es notwendig wird.
         </para>
 
@@ -233,7 +233,7 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
             Antworten; einen <emphasis>Redirector</emphasis>, um verschiedene Implementationen, für
             das Umleiten zu internen und externen Seiten, für die Anwendung bereitzustellen und
             einen <emphasis>ViewRenderer</emphasis> um den Prozess des Setzens eines View Objekts
-            im Kontroller und dem Rendern von Views zu automatisieren.
+            im Controller und dem Rendern von Views zu automatisieren.
         </para>
 
         <xi:include href="Zend_Controller-ActionHelpers-ActionStack.xml" />
@@ -258,7 +258,7 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
             <listitem>
                 <para>
                     <methodname>setActionController()</methodname> wird verwendet um den aktuellen
-                    Aktion Kontroller zu setzen.
+                    Aktion Controller zu setzen.
                 </para>
             </listitem>
 
@@ -266,7 +266,7 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
                 <para>
                     <methodname>init()</methodname>, wird vom Helfer Broker wärend der
                     Instanzierung ausgeführt und kann verwendet werden um den Status zu resetieren
-                    wenn mehrere Kontroller den gleichen Helfer in einer verketteten Aktion
+                    wenn mehrere Controller den gleichen Helfer in einer verketteten Aktion
                     verwenden.
                 </para>
             </listitem>

@@ -27,12 +27,12 @@
 
         <para>
             Es kann jederzeit ein Titel Tag spezifiziert werden. Die typische Verwendung besteht
-            darin das Titel Segment bei jedem Level an Tiefe in der Anwendung: Site, Kontroller,
+            darin das Titel Segment bei jedem Level an Tiefe in der Anwendung: Site, Controller,
             Aktion und potentiell Ressourcen.
         </para>
 
         <programlisting language="php"><![CDATA[
-// Setzen des Kontroller und Aktion Namens als Titel Segment:
+// Setzen des Controller und Aktion Namens als Titel Segment:
 $request = Zend_Controller_Front::getInstance()->getRequest();
 $this->headTitle($request->getActionName())
      ->headTitle($request->getControllerName());

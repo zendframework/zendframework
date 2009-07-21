@@ -242,7 +242,7 @@ $router->addRoute('user',
         <para>
             Es gibt drei spezielle Variablen welche in den Routen verwendet werden können -
             'module', 'controller' und 'action'. Diese speziellen Variablen werden durch
-            <classname>Zend_Controller_Dispatcher</classname> verwendet um einen Kontroller und die
+            <classname>Zend_Controller_Dispatcher</classname> verwendet um einen Controller und die
             Aktion zu funden zu der verwiesen wird.
         </para>
 

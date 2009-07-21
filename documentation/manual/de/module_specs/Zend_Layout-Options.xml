@@ -75,7 +75,7 @@
 
         <listitem>
             <para>
-                <emphasis>pluginClass</emphasis>: Das Front Kontroller Plugin das verwendet wird
+                <emphasis>pluginClass</emphasis>: Das Front Controller Plugin das verwendet wird
                 wenn <classname>Zend_Layout</classname> mit den MVC Komponenten verwendet wird.
                 Standardmäßig ist das <classname>Zend_Layout_Controller_Plugin_Layout</classname>.
                 Zugriffsmethoden sind <code>setPluginClass()</code> und

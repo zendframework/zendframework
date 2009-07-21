@@ -126,11 +126,11 @@ $router->addRoute('archive', $route);
 
         <para>
             Dieses Beispiel resultiert darin das eine year Variable in das Anfrage Objekt injiziiert
-            wird. Da keine Routinginformation vorhanden ist (es sind keine Kontroller und
-            Aktionsparameter definiert), wird die Anwendung zum Standardkontroller und der
+            wird. Da keine Routinginformation vorhanden ist (es sind keine Controller und
+            Aktionsparameter definiert), wird die Anwendung zum Standardcontroller und der
             Aktionsmethode (welche beide in
             <classname>Zend_Controller_Dispatcher_Abstract</classname> definiert sind)
-            weitergeleitet. Um es verwendbarer zu machen muß ein gültiger Kontroller und eine
+            weitergeleitet. Um es verwendbarer zu machen muß ein gültiger Controller und eine
             gültige aktion als Standard für die Route angegeben werden:
         </para>
 

@@ -22,7 +22,7 @@
         <itemizedlist>
             <listitem><para>
                 Wenn ein Benutzer nicht authentifiziert ist, wird er immer zur Login Seite des
-                Kontrollers umgeleitet, unabhängig von der spezifizierten Aktion.
+                Controllers umgeleitet, unabhängig von der spezifizierten Aktion.
             </para></listitem>
 
             <listitem><para>

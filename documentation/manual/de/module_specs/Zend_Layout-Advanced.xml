@@ -25,8 +25,8 @@
 
         <listitem>
             <para>
-                <emphasis>Eigene Front Kontroller Plugins.</emphasis>
-                <classname>Zend_Layout</classname> wird mit einem Standard Front Kontroller Plugin
+                <emphasis>Eigene Front Controller Plugins.</emphasis>
+                <classname>Zend_Layout</classname> wird mit einem Standard Front Controller Plugin
                 ausgeliefert der das Layout automatisch darstellt bevor die Antwort zurückgegeben
                 wird. Es kann ein eigenes Plugin verwendet werden.
             </para>
@@ -110,7 +110,7 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')->getArrayCopy();
 
         <para>
             Wenn <classname>Zend_Layout</classname> mit den MVC Komponenten verwendet wird,
-            registriert es ein Front Kontroller Plugin das das Layout als letzte Aktion darstellt
+            registriert es ein Front Controller Plugin das das Layout als letzte Aktion darstellt
             bevor die Bearbeitungsschleife beendet wird. In den meisten Fällen, wird das
             Standardplugin ausreichen, aber sollte es gewünscht sein ein eigenes zu schreiben, kann
             der Name der Pluginklasse die geladen werden soll durch die übergabe der

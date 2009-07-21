@@ -8,7 +8,7 @@
         Ausnahmen sind der Herz vom Unit Testen; Sie können verwendet werden um zu prüfen das die
         Ergebnisse das sind was man erwartet. Zu diesem Zweck bietet
         <classname>Zend_Test_PHPUnit_ControllerTestCase</classname> eine Anzahl an Ausnahmen um das
-        Testen eigene MVC Anwendungen und Kontroller einfacher zu machen.
+        Testen eigene MVC Anwendungen und Controller einfacher zu machen.
     </para>
 
     <sect3 id="zend.test.phpunit.assertions.query">
@@ -222,7 +222,7 @@
         <title>Anfrage Ausnahmen</title>
 
         <para>
-            Es ist oft sinnvoll gegen die letzte Aktion, den Kontroller und das Modul zu prüfen;
+            Es ist oft sinnvoll gegen die letzte Aktion, den Controller und das Modul zu prüfen;
             zusätzlich ist es möglich die genommene Route die prüfen. Die folgenden Ausnahmen können
             in diesen Fällen helfen:
         </para>
@@ -234,7 +234,7 @@
             </para></listitem>
             <listitem><para>
                 <code>assertController($controller, $message = '')</code>: Nimmt an das der
-                angegebene Kontroller in der letzten ausgeführten Aktion ausgewählt wurde.
+                angegebene Controller in der letzten ausgeführten Aktion ausgewählt wurde.
             </para></listitem>
             <listitem><para>
                 <code>assertAction($action, $message = '')</code>: Nimmt an das die angegebene

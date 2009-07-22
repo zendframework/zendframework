@@ -23,6 +23,9 @@
 /** Zend_Pdf_ElementFactory */
 require_once 'Zend/Pdf/ElementFactory.php';
 
+/** Zend_Pdf_Target */
+require_once 'Zend/Pdf/Target.php';
+
 
 /**
  * Abstract PDF action representation class
@@ -32,7 +35,7 @@ require_once 'Zend/Pdf/ElementFactory.php';
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Pdf_Action
+abstract class Zend_Pdf_Action extends Zend_Pdf_Target
 {
 	/**
 	 * Action dictionary
@@ -109,13 +112,10 @@ abstract class Zend_Pdf_Action
 	 * @return Zend_Pdf_Action
 	 * @throws Zend_Pdf_Exception
 	 */
-	public static function load(Zend_Pdf_Element $dictionary, $parentAction = null, $processedActions = null)
+	public static function load(Zend_Pdf_Element $dictionary, $parentAction = null, SplObjectStorage $processedActions = null)
 	{
         if ($processedActions === null) {
             $processedActions = new SplObjectStorage();
-        } else if (!$processedActions instanceof SplObjectStorage) {
-            require_once 'Zend/Pdf/Exception.php';
-            throw new Zend_Pdf_Exception('$processedActions parameter must be a SplObjectStorage object or null.');
         }
 
         if ($dictionary->getType() != Zend_Pdf_Element::TYPE_DICTIONARY) {
@@ -390,12 +390,12 @@ abstract class Zend_Pdf_Action
     }
 
     /**
-     * Get Action dictionary
+     * Get resource
      *
      * @internal
-     * @return Zend_Pdf_Element_Dictionary|Zend_Pdf_Element_Object|Zend_Pdf_Element_Reference
+     * @return Zend_Pdf_Element
      */
-    public function getDictionary()
+    public function getResource()
     {
     	return $this->_actionDictionary;
     }

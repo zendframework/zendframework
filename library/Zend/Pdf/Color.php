@@ -42,5 +42,12 @@ abstract class Zend_Pdf_Color
      * @return string
      */
     abstract public function instructions($stroking);
+
+    /**
+     * Get color components (color space dependent)
+     *
+     * @return array
+     */
+    abstract public function getComponents();
 }
 

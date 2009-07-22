@@ -75,6 +75,16 @@ class Zend_Pdf_Color_Html extends Zend_Pdf_Color
     }
 
     /**
+     * Get color components (color space dependent)
+     *
+     * @return array
+     */
+    public function getComponents()
+    {
+        return $this->_color->getComponents();
+    }
+
+    /**
      * Creates a Zend_Pdf_Color object from the HTML representation.
      *
      * @param string $color May either be a hexidecimal number of the form

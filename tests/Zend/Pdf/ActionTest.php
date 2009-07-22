@@ -274,7 +274,7 @@ class Zend_Pdf_ActionTest extends PHPUnit_Framework_TestCase
         $root->rebuildSubtree();
 
         $this->assertEquals(
-            $root->getDictionary()->toString(),
+            $root->getResource()->toString(),
             '<</Type /Action /S /GoToR '
             . "/Next [<</Type /Action /S /GoToE >> <</Type /Action /S /Launch >> <</Type /Action /S /URI >> <</Type /Action /S /Sound >> <</Type /Action /S /Movie >> \n"
             .        "<</Type /Action /S /Hide >> <</Type /Action /S /Named >> <</Type /Action /S /SubmitForm >> <</Type /Action /S /ResetForm >> <</Type /Action /S /ImportData >> \n"
@@ -316,7 +316,7 @@ class Zend_Pdf_ActionTest extends PHPUnit_Framework_TestCase
         $action1->rebuildSubtree();
 
         $this->assertEquals(
-            $action1->getDictionary()->toString(),
+            $action1->getResource()->toString(),
             '<</Type /Action /S /GoTo /D (Destination 1) '
             . '/Next <</Type /Action /S /Thread /D (Destination 2) '
             .         '/Next [<</Type /Action /S /GoTo /D (Destination 3) >> <</Type /Action /S /GoToR >> ] >> >>');
@@ -331,7 +331,7 @@ class Zend_Pdf_ActionTest extends PHPUnit_Framework_TestCase
 
     	$action1->rebuildSubtree();
 
-    	$this->assertEquals($action1->getDictionary()->toString(),
+    	$this->assertEquals($action1->getResource()->toString(),
     	                    '<</Type /Action /S /GoTo /D (SomeNamedDestination) /Next <</Type /Action /S /GoTo /D (AnotherNamedDestination) >> >>');
 
     	$action1->clean();
@@ -349,7 +349,7 @@ class Zend_Pdf_ActionTest extends PHPUnit_Framework_TestCase
         $action = Zend_Pdf_Action_GoTo::create($destination);
         $action->rebuildSubtree();
 
-        $this->assertEquals($action->getDictionary()->toString(),
+        $this->assertEquals($action->getResource()->toString(),
                             '<</Type /Action /S /GoTo /D [4 0 R /Fit ] >>');
 
         $action->clean();

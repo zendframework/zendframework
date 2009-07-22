@@ -77,7 +77,7 @@ class Zend_Pdf_Element_Object extends Zend_Pdf_Element
     public function __construct(Zend_Pdf_Element $val, $objNum, $genNum, Zend_Pdf_ElementFactory $factory)
     {
         if ($val instanceof self) {
-            throw new Zend_Pdf_Exception('Object number must not be instance of Zend_Pdf_Element_Object.');
+            throw new Zend_Pdf_Exception('Object number must not be an instance of Zend_Pdf_Element_Object.');
         }
 
         if ( !(is_integer($objNum) && $objNum > 0) ) {
@@ -93,7 +93,9 @@ class Zend_Pdf_Element_Object extends Zend_Pdf_Element
         $this->_genNum  = $genNum;
         $this->_factory = $factory;
 
-        $factory->registerObject($this);
+        $this->setParentObject($this);
+
+        $factory->registerObject($this, $objNum . ' ' . $genNum);
     }
 
 
@@ -206,20 +208,7 @@ class Zend_Pdf_Element_Object extends Zend_Pdf_Element
      */
     public function __call($method, $args)
     {
-        switch (count($args)) {
-            case 0:
-                return $this->_value->$method();
-            case 1:
-                return $this->_value->$method($args[0]);
-            case 2:
-                return $this->_value->$method($args[0], $args[1]);
-            case 3:
-                return $this->_value->$method($args[0], $args[1], $args[2]);
-            case 4:
-                return $this->_value->$method($args[0], $args[1], $args[2], $args[3]);
-            default:
-                throw new Zend_Pdf_Exception('Unsupported number of arguments');
-        }
+    	return call_user_func_array(array($this->_value, $method), $args);
     }
 
 

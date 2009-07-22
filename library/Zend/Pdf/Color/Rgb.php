@@ -98,5 +98,15 @@ class Zend_Pdf_Color_Rgb extends Zend_Pdf_Color
              . $this->_g->toString() . ' '
              . $this->_b->toString() .     ($stroking? " RG\n" : " rg\n");
     }
+
+    /**
+     * Get color components (color space dependent)
+     *
+     * @return array
+     */
+    public function getComponents()
+    {
+        return array($this->_r->value, $this->_g->value, $this->_b->value);
+    }
 }
 

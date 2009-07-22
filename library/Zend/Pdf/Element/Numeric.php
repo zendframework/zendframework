@@ -55,7 +55,7 @@ class Zend_Pdf_Element_Numeric extends Zend_Pdf_Element
             throw new Zend_Pdf_Exception('Argument must be numeric');
         }
 
-        $this->value   = $val;
+        $this->value = $val;
     }
 
 

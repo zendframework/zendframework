@@ -26,6 +26,9 @@ require_once 'Zend/Pdf/ElementFactory.php';
 /** Zend_Pdf_Page */
 require_once 'Zend/Pdf/Page.php';
 
+/** Zend_Pdf_Target */
+require_once 'Zend/Pdf/Target.php';
+
 
 /**
  * Abstract PDF explicit destination representation class
@@ -35,7 +38,7 @@ require_once 'Zend/Pdf/Page.php';
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Pdf_Destination
+abstract class Zend_Pdf_Destination extends Zend_Pdf_Target
 {
 	/**
 	 * Destination description array
@@ -171,25 +174,22 @@ abstract class Zend_Pdf_Destination
      * Returns page number for remote destinations and
      * page dictionary object reference otherwise
      *
+     * @internal
      * @return integer|Zend_Pdf_Element_Dictionary
      */
     public function getTarget()
     {
-    	if ($this->isRemote()) {
-            return $this->_destinationArray->items[0]->value;
-    	} else {
-    		return $this->_destinationArray->items[0];
-    	}
+        return $this->_destinationArray->items[0];
     }
 
     /**
-     * Get destination array object
+     * Get resource
      *
      * @internal
-     * @return Zend_Pdf_Element_Array|Zend_Pdf_Element_Object|Zend_Pdf_Element_Reference
+     * @return Zend_Pdf_Element
      */
-    public function getDestinationArray()
+    public function getResource()
     {
-    	return $this->_destinationArray;
+        return $this->_destinationArray;
     }
 }

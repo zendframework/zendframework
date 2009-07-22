@@ -37,7 +37,7 @@ class Zend_Pdf_Element_ObjectTest extends PHPUnit_Framework_TestCase
         try {
             $obj2 = new Zend_Pdf_Element_Object($obj1, 1, 0, new Zend_Pdf_ElementFactory(1));
         } catch (Zend_Pdf_Exception $e) {
-            $this->assertRegExp('/must not be instance of Zend_Pdf_Element_Object/i', $e->getMessage());
+            $this->assertRegExp('/must not be an instance of Zend_Pdf_Element_Object/i', $e->getMessage());
             return;
         }
         $this->fail('Expected Zend_Pdf_Exception to be thrown');

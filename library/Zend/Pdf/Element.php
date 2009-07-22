@@ -74,9 +74,9 @@ abstract class Zend_Pdf_Element
      *
      * @param Zend_Pdf_Element_Object $parent
      */
-    public function setParentObject(Zend_Pdf_Element_Object &$parent)
+    public function setParentObject(Zend_Pdf_Element_Object $parent)
     {
-        $this->_parentObject = &$parent;
+        $this->_parentObject = $parent;
     }
 
 

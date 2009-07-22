@@ -71,7 +71,7 @@ class Zend_Pdf_Action_GoTo extends Zend_Pdf_Action
     		// DestinationArray
             $dictionary->D = $destination;
     	} else if ($destination instanceof Zend_Pdf_Destination) {
-    		$dictionary->D = $destination->getDestinationArray();
+    		$dictionary->D = $destination->getResource();
     	} else {
     		require_once 'Zend/Pdf/Exception.php';
     		throw new Zend_Pdf_Exception('Wrong $destination parameter type');

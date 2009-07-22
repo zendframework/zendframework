@@ -413,12 +413,28 @@ class Zend_Pdf_ElementFactory implements Zend_Pdf_ElementFactory_Interface
      *
      * It's used to clear "parent object" referencies when factory is closed and clean up resources
      *
+     * @param string $refString
      * @param Zend_Pdf_Element_Object $obj
      */
-    public function registerObject($obj)
+    public function registerObject(Zend_Pdf_Element_Object $obj, $refString)
     {
-        $this->_registeredObjects[] = $obj;
+        $this->_registeredObjects[$refString] = $obj;
     }
+
+    /**
+     * Fetch object specified by reference
+     *
+     * @param string $refString
+     * @return Zend_Pdf_Element_Object|null
+     */
+    public function fetchObject($refString)
+    {
+    	if (!isset($this->_registeredObjects[$refString])) {
+    		return null;
+    	}
+        return $this->_registeredObjects[$refString];
+    }
+
 
     /**
      * Check if PDF file was modified

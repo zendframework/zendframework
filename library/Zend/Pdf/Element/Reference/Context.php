@@ -69,7 +69,7 @@ class Zend_Pdf_Element_Reference_Context
     /**
      * Context parser
      *
-     * @return Zend_Pdf_Parser
+     * @return Zend_Pdf_StringParser
      */
     public function getParser()
     {

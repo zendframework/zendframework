@@ -341,6 +341,34 @@ class Zend_View_Helper_Navigation_MenuTest
         $this->assertEquals($expected, $actual);
     }
 
+    private function _setActive($label)
+    {
+        $container = $this->_helper->getContainer();
+
+        foreach ($container->findAllByActive(true) as $page) {
+            $page->setActive(false);
+        }
+
+        if ($p = $container->findOneByLabel($label)) {
+            $p->setActive(true);
+        }
+    }
+
+    public function testOnlyActiveBranchNoParentsActiveOneBelowMinDepth()
+    {
+        $this->_setActive('Page 2');
+
+        $this->_helper->setOnlyActiveBranch()
+                      ->setMinDepth(1)
+                      ->setMaxDepth(1)
+                      ->setRenderParents(false);
+
+        $expected = $this->_getExpected('menu/onlyactivebranch_np_bd2.html');
+        $actual = $this->_helper->renderMenu();
+
+        $this->assertEquals($expected, $actual);
+    }
+
     public function testRenderSubMenuShouldOverrideOptions()
     {
         $this->_helper->setOnlyActiveBranch(false)
@@ -353,23 +381,6 @@ class Zend_View_Helper_Navigation_MenuTest
 
         $this->assertEquals($expected, $actual);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     public function testOptionMaxDepth()
     {

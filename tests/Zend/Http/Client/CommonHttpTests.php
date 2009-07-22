@@ -126,7 +126,7 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
         ));
 
         $res = $this->client->request(Zend_Http_Client::TRACE);
-        if ($res->getStatus() == 405) {
+        if ($res->getStatus() == 405 || $res->getStatus() == 501) {
             $this->markTestSkipped("Server does not allow the TRACE method");
         }
 
@@ -275,7 +275,7 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
         $this->client->setHeaders($acceptHeader);
 
         $res = $this->client->request('TRACE');
-        if ($res->getStatus() == 405) {
+        if ($res->getStatus() == 405 || $res->getStatus() == 501) {
             $this->markTestSkipped("Server does not allow the TRACE method");
         }
         
@@ -305,7 +305,7 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
         $this->client->setHeaders($headers);
 
         $res = $this->client->request('TRACE');
-        if ($res->getStatus() == 405) {
+        if ($res->getStatus() == 405 || $res->getStatus() == 501) {
             $this->markTestSkipped("Server does not allow the TRACE method");
         }
         
@@ -343,7 +343,7 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
 
         $this->client->setHeaders($headers);
         $res = $this->client->request('TRACE');
-        if ($res->getStatus() == 405) {
+        if ($res->getStatus() == 405 || $res->getStatus() == 501) {
             $this->markTestSkipped("Server does not allow the TRACE method");
         }
         $body = strtolower($res->getBody());

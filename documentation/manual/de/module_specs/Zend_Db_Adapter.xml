@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16447 -->
+<!-- EN-Revision: 16846 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.adapter">
 
@@ -307,6 +307,12 @@ $db = Zend_Db::factory($config->database);
                         spezifizierten Ports akzeptieren. Der Port-Parameter gibt die Möglichkeit
                         die Portnummer anzugeben, an welche die PHP Anwendung verbindet um der
                         Port-Konfiguration des RDBMS Servers zu entsprechen.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis>charset</emphasis>: Spezifiziert das Zeichenset das für diese
+                        Verbindung verwendet werden soll.
                     </para>
                 </listitem>
                 <listitem>

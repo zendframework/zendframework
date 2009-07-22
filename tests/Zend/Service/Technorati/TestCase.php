@@ -72,13 +72,8 @@ class Zend_Service_Technorati_TestCase extends PHPUnit_Framework_TestCase
             return;
         }
 
-        $reflection = new ReflectionClass($className);
-        try {
-            $object = $reflection->newInstanceArgs(array('foo'));
-            $this->fail('Expected Zend_Service_Technorati_Exception not thrown');
-        } catch (Exception $e) {
-            $this->assertContains($match, $e->getMessage());
-        }
+        // This test is unnecessary. PHP type hinting is well tested, and will throw 
+        // catchable fatal errors on invalid argument types. Do nothing here.
     }
 
     protected function _testResultSetItemsInstanceOfResult($resultSetClassName, $args, $resultClassName)

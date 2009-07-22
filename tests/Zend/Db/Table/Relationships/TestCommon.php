@@ -156,6 +156,9 @@ abstract class Zend_Db_Table_Relationships_TestCommon extends Zend_Db_Table_Test
         }
     }
 
+    /**
+     * @expectedException PHPUnit_Framework_Error
+     */
     public function testTableRelationshipFindParentRowException()
     {
         $bug_id = $this->_db->quoteIdentifier('bug_id', true);
@@ -184,6 +187,9 @@ abstract class Zend_Db_Table_Relationships_TestCommon extends Zend_Db_Table_Test
         }
     }
 
+    /**
+     * @expectedException PHPUnit_Framework_Error
+     */
     public function testTableRelationshipFindManyToManyRowset()
     {
         $table = $this->_table['bugs'];
@@ -198,6 +204,9 @@ abstract class Zend_Db_Table_Relationships_TestCommon extends Zend_Db_Table_Test
         $this->assertEquals(3, $destRows->count());
     }
 
+    /**
+     * @expectedException PHPUnit_Framework_Error
+     */
     public function testTableRelationshipFindManyToManyRowsetSelect()
     {
         $product_name = $this->_db->foldCase('product_name');

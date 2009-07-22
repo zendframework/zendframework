@@ -238,7 +238,8 @@ class Zend_Queue_Adapter_Memcacheq extends Zend_Queue_Adapter_AdapterAbstract
             throw new Zend_Queue_Exception('Queue does not exist:' . $queue->getName());
         }
 
-        $data = array(
+        $message = (string) $message;
+        $data    = array(
             'message_id' => md5(uniqid(rand(), true)),
             'handle'     => null,
             'body'       => $message,

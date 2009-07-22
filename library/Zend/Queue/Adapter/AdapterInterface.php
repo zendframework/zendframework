@@ -116,7 +116,7 @@ interface Zend_Queue_Adapter_AdapterInterface
     /**
      * Send a message to the queue
      *
-     * @param  string $message Message to send to the active queue
+     * @param  mixed $message Message to send to the active queue
      * @param  Zend_Queue|null $queue
      * @return Zend_Queue_Message
      */

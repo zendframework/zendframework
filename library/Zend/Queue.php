@@ -246,7 +246,10 @@ class Zend_Queue implements Countable
         $this->_adapter = $adapter;
 
         $this->_adapter->setQueue($this);
-        $this->_setName($this->getOption(self::NAME));
+
+        if (null !== ($name = $this->getOption(self::NAME))) {
+            $this->_setName($name);
+        }
 
         return $this;
     }
@@ -404,17 +407,12 @@ class Zend_Queue implements Countable
     /**
      * Send a message to the queue
      *
-     * @param  string             $message message
+     * @param  mixed $message message
      * @return Zend_Queue_Message
      * @throws Zend_Queue_Exception
      */
     public function send($message)
     {
-        if (!is_string($message)) {
-            require_once 'Zend/Queue/Exception.php';
-            throw new Zend_Queue_Exception('$message is not a string');
-        }
-
         return $this->getAdapter()->send($message);
     }
 

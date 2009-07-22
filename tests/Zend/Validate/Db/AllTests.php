@@ -29,5 +29,5 @@ class Zend_Validate_Db_AllTests
 }
 
 if (PHPUnit_MAIN_METHOD == 'Zend_Validate_Db_AllTests::main') {
-    Zend_Validate_File_AllTests::main();
+    Zend_Validate_Db_AllTests::main();
 }

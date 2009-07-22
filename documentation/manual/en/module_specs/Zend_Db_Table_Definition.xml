@@ -31,7 +31,7 @@
         <para>
             Below is a definition that will describe the table names and relationships
             between table objects.  Note: if 'name' is left out of the definition, it
-            will be take as the key of the defined table (an example of this is in the
+            will be taken as the key of the defined table (an example of this is in the
             'genre' section in the example below.)
         </para>
 

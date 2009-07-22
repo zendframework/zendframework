@@ -174,9 +174,11 @@ class Zend_Layout
     {
         if (null === self::$_mvcInstance) {
             self::$_mvcInstance = new self($options, true);
-        } elseif (is_string($options)) {
+        }
+        
+        if (is_string($options)) {
             self::$_mvcInstance->setLayoutPath($options);
-        } else {
+        } elseif (is_array($options) || $options instanceof Zend_Config) {
             self::$_mvcInstance->setOptions($options);
         }
 
@@ -222,7 +224,7 @@ class Zend_Layout
     /**
      * Set options en masse
      * 
-     * @param  array $options 
+     * @param  array|Zend_Config $options 
      * @return void
      */
     public function setOptions($options)

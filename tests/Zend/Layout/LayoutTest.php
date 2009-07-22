@@ -62,6 +62,7 @@ class Zend_Layout_LayoutTest extends PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
+        Zend_Layout::resetMvcInstance();
     }
 
     public function testDefaultLayoutStatusAtInitialization()

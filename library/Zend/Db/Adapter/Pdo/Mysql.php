@@ -90,7 +90,7 @@ class Zend_Db_Adapter_Pdo_Mysql extends Zend_Db_Adapter_Pdo_Abstract
 
         if (!empty($this->_config['charset'])) {
             $initCommand = "SET NAMES '" . $this->_config['charset'] . "'";
-            $this->_config['driver_options'][PDO::MYSQL_ATTR_INIT_COMMAND] = $initCommand;
+            $this->_config['driver_options'][1002] = $initCommand; // 1002 = PDO::MYSQL_ATTR_INIT_COMMAND
         }
 
         parent::_connect();

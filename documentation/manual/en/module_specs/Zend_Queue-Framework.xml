@@ -108,19 +108,19 @@ foreach ($messages as $i => $message) {
         <itemizedlist>
             <listitem>
                 <para>
-                    <methodname>create()</methodname> - create a queue
+                    <emphasis><methodname>create()</methodname></emphasis> - create a queue
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>delete()</methodname> - delete a queue
+                    <emphasis><methodname>delete()</methodname></emphasis> - delete a queue
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>send()</methodname> - send a message
+                    <emphasis><methodname>send()</methodname></emphasis> - send a message
                 </para>
 
                 <para>
@@ -132,7 +132,7 @@ foreach ($messages as $i => $message) {
 
             <listitem>
                 <para>
-                    <methodname>receive()</methodname> - receive messages
+                    <emphasis><methodname>receive()</methodname></emphasis> - receive messages
                 </para>
 
                 <para>
@@ -144,19 +144,22 @@ foreach ($messages as $i => $message) {
 
             <listitem>
                 <para>
-                    <methodname>deleteMessage()</methodname> - delete a message
+                    <emphasis><methodname>deleteMessage()</methodname></emphasis> - delete a
+                    message
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>count()</methodname> - count the number of messages in a queue
+                    <emphasis><methodname>count()</methodname></emphasis> - count the number of
+                    messages in a queue
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>isExists()</methodname> - checks the existence of a queue
+                    <emphasis><methodname>isExists()</methodname></emphasis> - checks the existence
+                    of a queue
                 </para>
             </listitem>
         </itemizedlist>

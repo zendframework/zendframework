@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16846 -->
+<!-- EN-Revision: 16920 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.adapter">
 
@@ -1680,15 +1680,31 @@ $db->closeConnection();
         <note>
             <title>Unterstützt Zend_Db persistente Verbindungen?</title>
             <para>
-                Die Nutzung von persistenten Verbindungen wird weder von
-                <classname>Zend_Db</classname> unterstützt, noch gewünscht.
+                Ja, Persistenz wird durch das Hinzufügen des <code>persistent</code> Flags in der
+                Konfiguration (nicht driver_configuration) und dessen Setzen auf true bei einem
+                Adapter in <classname>Zend_Db</classname> unterstützt.
             </para>
+
+            <example id="zend.db.adapter.connecting.persistence.example">
+                <title>Verwendung des Persistence Flags mit dem Oracle Adapter</title>
+                <programlisting language="php"><![CDATA[
+$db = Zend_Db::factory('Oracle', array(
+    'host'       => '127.0.0.1',
+    'username'   => 'webuser',
+    'password'   => 'xxxxxxxx',
+    'dbname'     => 'test',
+    'persistent' => true
+));
+]]></programlisting>
+            </example>
+
             <para>
-                Die Benutzung von persistenten Verbindungen kann überschüssige und untätige
-                Verbindungen auf dem RDBMS Server verursachen, welche mehr Probleme bringen als
-                Performancegewin, welcher möglicherweise angestrebt wird, durch das reduzieren des
-                Overheads beim Starten von Verbindungen.
+                Es ist zu beachten das die Verwendung von persistenten Verbindungen einen Exzess
+                an Idle Verbindungen auf dem RDBMS Server verursachen kann, was mehr Probleme macht
+                als jeder Performance Gewinn den man durch die Verminderung des Overheads eines
+                Verbindungsaufbaues erhalten kann.
             </para>
+
             <para>
                 Datenbankverbindungen haben einen Status. Natürlich existieren einige Objekte auf
                 dem Server im Gültigkeitsbereich einer Session. Beispiele dafür sind locks, user
@@ -1696,6 +1712,11 @@ $db->closeConnection();
                 sowie betroffene Zeilen und zuletzt generierte ID Werte. Wenn persistente
                 Verbindungen genutzt werden könnte die Anwendung Zugriff auf ungültige oder
                 privilegierte Daten erlangen, die in einem vorigen PHP Request erzeugt wurden.
+            </para>
+
+            <para>
+                Aktuell unterstützen nur die Oracle, DB2 und PDO Adapter (wo es von PHP
+                spezifiziert ist) Persistenz in Zend_Db.
             </para>
         </note>
 

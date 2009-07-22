@@ -1271,7 +1271,7 @@ class My_FeedReader_Extension_JungleBooks_Entry
         if (!$isbn) {
             $isbn = null;
         }
-        $this->_data['isbn'] = $title;
+        $this->_data['isbn'] = $isbn;
         return $this->_data['isbn'];
     }
 

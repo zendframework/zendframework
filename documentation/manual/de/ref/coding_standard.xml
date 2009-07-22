@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16831 -->
+<!-- EN-Revision: 16885 -->
 <!-- Reviewed: no -->
 <appendix id="coding-standard">
   <title>Zend Framework Coding Standard für PHP</title>
@@ -1058,6 +1058,9 @@ switch ($numPeople) {
  *
  * LICENSE: Einige Lizenz Informationen
  *
+ * @category   Zend
+ * @package    Zend_Magic
+ * @subpackage Wand
  * @copyright  2008 Zend Technologies
  * @license    http://framework.zend.com/license   BSD License
  * @version    $Id:$
@@ -1065,6 +1068,24 @@ switch ($numPeople) {
  * @since      Datei vorhanden seit Release 1.2.0
 */
 ]]></programlisting>
+
+                <para>
+                    Das <property>@category</property> Tag muß den Wert "Zend" haben.
+                </para>
+
+                <para>
+                    Das <property>@package</property> Tag muß hinzugefügt sein, und sollte mit
+                    dem Namen der Komponente identisch sein dessen Klasse in der Datei enthalten
+                    ist; typischerweise wird dieser zwei Segmente haben, den Präfix "Zend", und
+                    den Namen der Komponente.
+                </para>
+
+                <para>
+                    Das <property>@subpackage</property> Tag ist optional. Wenn es angegeben wird,
+                    sollte es der Name der Subkomponente sein, ohne den Präfix der Klasse. Im
+                    obigen Beispiel ist die Annahme das die Klasse in der Datei entweder
+                    "Zend_Magic_Wand" ist oder den Klassennamen als Teil seines Präfixes verwendet.
+                </para>
             </sect3>
 
             <sect3 id="coding-standards.inline-documentation.classes">
@@ -1081,6 +1102,9 @@ switch ($numPeople) {
  *
  * Lange Beschreibung für die Klasse (wenn vorhanden)...
  *
+ * @category   Zend
+ * @package    Zend_Magic
+ * @subpackage Wand
  * @copyright  2008 Zend Technologies
  * @license    http://framework.zend.com/license   BSD License
  * @version    Release: @package_version@
@@ -1089,6 +1113,23 @@ switch ($numPeople) {
  * @deprecated Klasse abgeraten ab Release 2.0.0
  */
 ]]></programlisting>
+
+                <para>
+                    Das <property>@category</property> Tag muß den Wert "Zend" haben.
+                </para>
+
+                <para>
+                    Das <property>@package</property> Tag muß hinzugefügt sein, und sollte mit
+                    der Komponente identisch sein der die Klasse gehört; typischerweise wird
+                    dieser zwei Segmente haben, den Präfix "Zend", und den Namen der Komponente.
+                </para>
+
+                <para>
+                    Das <property>@subpackage</property> Tag ist optional. Wenn es angegeben wird,
+                    sollte es der Name der Subkomponente sein, ohne den Präfix der Klasse. Im
+                    obigen Beispiel ist die Annahme das die Klasse in der Datei entweder
+                    "Zend_Magic_Wand" ist oder den Klassennamen als Teil seines Präfixes verwendet.
+                </para>
             </sect3>
 
             <sect3 id="coding-standards.inline-documentation.functions">

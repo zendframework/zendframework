@@ -3,32 +3,32 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.translate.sourcecreation">
 
-    <title>Creating source files</title>
+    <title>Erstellen von Quelldateien</title>
 
     <para>
-        Below you will find a description of the different source formats
-        which can be used with <classname>Zend_Translate</classname>.
+        Anbei ist eine Beschreibung der unterschiedlichen Quellformate welche mit
+        <classname>Zend_Translate</classname> verwendet werden können.
     </para>
 
     <note>
         <para>
-            Note that most of the described formats should be created by using
-            a tool or a generation process. These Tools and processes are not part
-            of Zend Framework and for most of the described formats free tools
-            are available.
+            Es ist zu beachten das die meisten der beschriebenen Formate durch Verwendung eines
+            Tools oder eines Erstellungs Prozesses erstellt werden sollten. Diese Tools und
+            Prozesse sind nicht Teil vom Zend Framework und für die meisten der beschriebenen
+            Formate gibt es kostenlose Tools.
         </para>
     </note>
 
     <sect2 id="zend.translate.sourcecreation.array">
 
-        <title>Creating Array source files</title>
+        <title>Erstellung von Array Quelldateien</title>
 
         <para>
-            Array source files are plain arrays. But you have to define them
-            manually since there is no tool to aid this.
-            But because they are so simple, it's the fastest way to look up
-            messages if your code works as expected. It's generally the best
-            adapter to get started with translation business.
+            Array Quelldateien sind reine Arrays. Sie müssen aber manuell definiert werden, da
+            es hierfür keine Tools gibt die helfen könnten. Weil Sie so einfach zu handhaben sind,
+            ist Ihre Verwendung auch der schnellste Weg um zu testen ob Nachrichten innerhalb des
+            Codes wie erwartet arbeiten. Er ist generell der beste Adapter um mit Mehrsprachigkeit
+            zu beginnen wenn man keine diesbezüglichen Kenntnisse hat.
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -47,9 +47,10 @@ $translate->addTranslation($deutsch, 'de');
 ]]></programlisting>
 
         <para>
-            Since release 1.5 it is also supported to have arrays included within an external file.
-            You just have to provide the filename and <classname>Zend_Translate</classname> will automatically
-            include it and look for the array. See the following example for details:
+            Seit Release 1.5 wird es auch unterstützt, Arrays die in externen Dateien vorhanden
+            sind einzubauen. Es ist der Dateiname anzugeben und
+            <classname>Zend_Translate</classname> wird diesen automatisch inkludieren und nach dem
+            Array schauen. Siehe das folgende Beispiel für Details:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -65,74 +66,67 @@ $translate = new Zend_Translate('array', '/path/to/myarray.php', 'de');
 
         <note>
             <para>
-                Files which do not return an array will fail to be included.
-                Also any output within this file will be ignored and suppressed.
+                Bei Dateien die kein Array zurückgeben wird das inkludieren fehlschlagen. Auch
+                jegliche Ausgabe innerhalb dieser Dateien wird ignoriert und unterdrückt.
             </para>
-
         </note>
-
     </sect2>
 
     <sect2 id="zend.translate.sourcecreation.gettext">
 
-        <title>Creating Gettext source files</title>
+        <title>Erstellung von Gettext Quellen</title>
 
         <para>
-            Gettext source files are created by GNU's gettext library.
-            There are several free tools available that can parse your
-            code files and create the needed gettext source files.
-            These have the extension <emphasis>*.mo</emphasis>
-            and they are binary files.
-            An open source tool for creating the files is
-            <ulink url="http://sourceforge.net/projects/poedit/">poEdit</ulink>.
-            This tool also supports you during the translation process itself.
+            Gettext Quellen werden durch GNU's Gettext Bibliothek erstellt. Es gibt einige
+            kostenlose Tools welche den Code parsen können und hierbei die gewünschten Gettext
+            Quellen erstellen. Diese haben die Endung <emphasis>*.mo</emphasis> und
+            sind binäre Dateien. Ein Open Source Tool für die Erstellung der Quellen ist
+            <ulink url="http://sourceforge.net/projects/poedit/">poEdit</ulink>. Dieses Tool
+            unterstützt auch beim Übersetzungs-Prozesses selbst.
         </para>
 
         <programlisting role="php"><![CDATA[
-// We accume that we have created the mo files and translated them
+// Wir nehmen an das die mo Datien erstellt und übersetzt wurden
 $translate = new Zend_Translate('gettext', '/path/to/english.mo', 'en');
 $translate->addTranslation('/path/to/german.mo', 'de');
 ]]></programlisting>
 
         <para>
-            As you can see the adapters are used exactly the same way,
-            with one small difference:
-            change <emphasis>array</emphasis> to <emphasis>gettext</emphasis>. All other usages are exactly
-            the same as with all other adapters.
-            With the gettext adapter you no longer have to be aware of
-            gettext's standard directory structure,
-            bindtextdomain and textdomain.
-            Just give the path and filename to the adapter.
+            Wie man sieht wird dieser Adapter auf exakt die gleiche Art und Weise verwendet mit
+            einer kleinen Änderung: dem Wechsel von <emphasis>array</emphasis> zu
+            <emphasis>gettext</emphasis>. Alle anderen Punkte werden in jedem anderen
+            Adapter auf exakt die gleiche Weise verwendet. Mit diesem Gettext Adapter muß nicht
+            mehr auf die geforderte Standard Verzeichnis Struktur von Gettext geachtet werden. Auch
+            nicht auf bindtextdomain und textdomain. Nur der Pfad und der Dateiname muß dem Adapter
+            übergeben werden.
         </para>
 
         <note>
             <para>
-                 You should always use UTF-8 as source encoding.
-                 Otherwise you will have problems when using two
-                 different source encodings.
-                 E.g. one of your source files is encoded
-                 with ISO-8815-11 and another one with CP815.
-                 You can set only one encoding for your source file,
-                 so one of your languages probably will not display correctly.
+                 Man sollte immer UTF-8 als Quell Encoding verwenden. Man könnte sonst Probleme
+                 bekommen wenn man zwei verschiedene Encodings verwendet. Wenn z.B. eine Quelldatei
+                 mit ISO-8815-11 und eine andere mit CP815 encoded ist. Man kann immer nur ein
+                 Encoding für alle Quell Dateien verwenden, und hierbei würde eine der gewünschten
+                 Sprachen nicht korrekt angezeigt werden.
             </para>
             <para>
-                 UTF-8 is a portable format which supports all languages.
-                 When using UTF-8 for all languages, you will eliminate
-                 the problem of incompatible encodings.
+                 UTF-8 ist ein portables Format welches alle Sprachen unterstützt. Wenn UTF-8 für
+                 alle Sprachen verwendet wird, eliminiert man die Probleme mit inkompatiblen
+                 Encodings.
             </para>
         </note>
 
         <para>
-            Many gettext editors add adapter informations as empty translation string.
-            This is the reason why empty strings are not translated when using the
-            gettext adapter. Instead they are erased from the translation table and
-            provided by the <code>getAdapterInfo()</code> method. It will return
-            the adapter informations for all added gettext files as array using the
-            filename as key.
+            Viele Gettext Editoren fügen Informationen über den Adapter als Übersetzung eines
+            leeren Strings hinzu. Das ist der Grund warum leere Strings nicht übersetzt werden wenn
+            der Gettext Adapter verwendet wird. Stattdessen wird er von der Übersetzungstabelle
+            gelöscht und von der <code>getAdapterInfo()</code> Methode angeboten. Sie gibt die
+            Adapterinformationen für alle hinzugefügten Gettextdateien als Array zurück wobei der
+            Dateiname als Schlüssel verwendet wird.
         </para>
 
         <programlisting role="php"><![CDATA[
-// Getting the adapter informations
+// Informationen des Adapters bekommen
 $translate = new Zend_Translate('gettext', '/path/to/english.mo', 'en');
 print_r($translate->getAdapterInfo());
 ]]></programlisting>
@@ -141,19 +135,18 @@ print_r($translate->getAdapterInfo());
 
     <sect2 id="zend.translate.sourcecreation.tmx">
 
-        <title>Creating TMX source files</title>
+        <title>Erstellung von TMX Quellen</title>
 
         <para>
-            TMX source files are a new industry standard.
-            They have the advantage of being XML files and so they are
-            readable by every editor and of course by humans.
-            You can either create TMX files manually with a text editor,
-            or you can use a special tool. But most tools currently available for
-            creating TMX source files are not freely available.
+            TMX Quellen sind der neue Industrie Standard. Sie haben den Vorteil das sie XML Dateien
+            sind und deswegen mit jedem Texteditor lesbar und natürlich auch von Menschen. Man kann
+            TMX Dateien entweder per Hand erstellen oder man verwendet spezielle Tools dafür.
+            Allerdings sind die meisten erhältlichen Tools die Erstellung von TMX Quellen nicht
+            frei erhältlich.
         </para>
 
         <example id="zend.translate.sourcecreation.tmx.example">
-            <title>Example TMX file</title>
+            <title>Beispiel einer TMX Datei</title>
             <programlisting role="xml"><![CDATA[
 <?xml version="1.0" ?>
 <!DOCTYPE tmx SYSTEM "tmx14.dtd">
@@ -179,32 +172,30 @@ $translate = new Zend_Translate('tmx', 'path/to/mytranslation.tmx', 'en');
         </example>
 
         <para>
-            TMX files can have several languages within the same file.
-            All other included languages are added automatically,
-            so you do not have to call <code>addLanguage()</code>.
+            TMX Dateien können mehrere Sprachen in der selben Datei enthalten. Alle anderen in der
+            Quelle enthaltenen Sprachen werden automatisch hinzugefügt und müssen nicht durch einen
+            extra Aufruf von <code>addLanguage()</code> ergänzt werden.
         </para>
 
         <para>
-            If you want to have only specified languages from the source translated
-            you can set the option '<code>defined_language</code>' to <constant>TRUE</constant>.
-            With this option you can add the wished languages explicitly with
-            <code>addLanguage()</code>. The default value for this option is to add all
-            languages.
+            Wenn man nur spezielle Sprache aus der Quelle übersetzen will, kann die Option
+            '<code>defined_language</code>' auf <constant>TRUE</constant> gesetzt werden. Mit dieser
+            Option können gewünschte Sprachen explizit mit <code>addLanguage()</code>
+            hinzugefügt werden. Der Standardwert für diese Option fügt alle Sprachen hinzu.
         </para>
     </sect2>
 
     <sect2 id="zend.translate.sourcecreation.csv">
 
-        <title>Creating CSV source files</title>
+        <title>Erstellung von CSV Quellen</title>
 
         <para>
-            CSV source files are small and human readable.
-            If your customers want to translate their own,
-            you will probably use the CSV adapter.
+            CSV Quellen sind sehr klein und von Menschen lesbar. Wenn ein Kunde selbst übersetzen
+            will, ist die Verwendung des CSV Adapters warscheinlich die beste Wahl.
         </para>
 
         <example id="zend.translate.sourcecreation.csv.example">
-            <title>Example CSV file</title>
+            <title>Beispiel CSV Datei</title>
             <programlisting language="txt"><![CDATA[
 ﻿#Example csv file
 message1;Nachricht1
@@ -218,31 +209,32 @@ $translate->addTranslation('path/to/other.csv', 'fr');
         </example>
 
         <para>
-            There are three different options for the CSV adapter.
-            You can set '<code>delimiter</code>', '<code>limit</code>' and
-            '<code>enclosure</code>'.
+            Es gibt drei verschiedene Optionen für den CSV Adapter. Es können
+            '<code>delimiter</code>', '<code>limit</code>' und '<code>enclosure</code>' gesetzt
+            werden.
         </para>
 
         <para>
-            The default delimiter for CSV string is '<code>;</code>', but
-            with the option '<code>delimiter</code>'
-            you can decide to use another one.
+            Das Standard Trennzeichen für CSV Strings ist '<code>;</code>, aber es muß nicht dieses
+            Zeichen sein. Mit der Option '<code>delimiter</code>' kann ein anderes verwendet
+            werden.
         </para>
 
         <para>
-            The default limit for a line within a CSV file is '<code>0</code>'. This means
-            that the end of a CSV line is searched automatically. If you set
-            '<code>limit</code>' to any value, then the CSV file will be
-            read faster, but any line exceeding this limit will be truncated.
+            Das Standardlimit für eine Zeile in einer CSV Datei ist '<code>0</code>'. Das bedeutet
+            dass das Ende der CSV Zeile automatisch gesucht wird. Wenn '<code>limit</code>' auf
+            irgendeinen Wert gesetzt wird, dann wird die CSV Datei schneller gelesen, aber jede
+            Zeile die dieses Limit überschreitet wird abgeschnitten.
         </para>
 
         <para>
-            The default enclosure to use for CSV files is '<code>"</code>'. You can
-            set a different one using the option '<code>enclosure</code>'.
+            Das standardmäßige Anführungszeichen für die Verwendung mit CSV Dateien ist
+            '<code>"</code>'. Man kann ein anderes Setzen indem die Option '<code>enclosure</code>'
+            verwendet wird.
         </para>
 
         <example id="zend.translate.sourcecreation.csv.example2">
-            <title>Second CSV file example</title>
+            <title>Zweites Beispiel für CSV Dateien</title>
             <programlisting language="txt"><![CDATA[
 ﻿# Example CSV file
 "message,1",Nachricht1
@@ -264,9 +256,9 @@ $translate->addTranslation('/path/to/other.csv', 'fr');
         <note>
 
             <para>
-                When you are using non-ASCII characters within your CSV file, like umlauts or UTF-8
-                chars, then you should always use enclosure. Omitting the enclosure can lead to
-                missing characters in your translation.
+                Wenn nicht-ASCII Zeichen in der CSV Datei verwendet werden, wie z.B. Umlaute oder
+                UTF-8 Zeichen, dann sollte man immer Hochkommas verwenden. Das Weglassen der
+                Hochkommas kann zu fehlenden Zeichen in der Übersetzung führen.
             </para>
 
         </note>
@@ -275,16 +267,16 @@ $translate->addTranslation('/path/to/other.csv', 'fr');
 
     <sect2 id="zend.translate.sourcecreation.ini">
 
-        <title>Creating INI source files</title>
+        <title>Erstellung von INI Quelldateien</title>
 
         <para>
-            INI source files are human readable but normally not very small as they also
-            include other data beside translations. If you have data which shall be
-            editable by your customers you can use the INI adapter.
+            INI Quelldateien sind menschlich lesbar aber normalerweise nicht sehr klein da Sie
+            neben der Übersetzung auch andere Daten enthalten. Wenn Sie Daten haben die von
+            Ihrem Kunden zu bearbeitet sind, verwenden Sie den INI Adapter.
         </para>
 
         <example id="zend.translate.sourcecreation.ini.example">
-            <title>Example INI file</title>
+            <title>Beispiel einer INI Datei</title>
             <programlisting language="txt"><![CDATA[
 [Test]
 ;TestPage Comment
@@ -300,14 +292,17 @@ $translate->addTranslation('/path/to/other.ini', 'it');
         </example>
 
         <para>
-            INI files have several restrictions. If a value in the ini file contains any
-            non-alphanumeric characters it needs to be enclosed in double-quotes (<code>"</code>).
-            There are also reserved words which must not be used as keys for ini files.
-            These include: <constant>NULL</constant>, <code>yes</code>, <code>no</code>, <constant>TRUE</constant>,
-            and <constant>FALSE</constant>. Values <constant>NULL</constant>, <code>no</code> and <constant>FALSE</constant> results
-            in <code>""</code>, <code>yes</code> and <constant>TRUE</constant> results in <code>1</code>. Characters <code>{}|&amp;~![()"</code> must not be used anywhere
-            in the key and have a special meaning in the value. Do not use them as it will
-            produce unexpected behaviour.
+            INI Dateien haben diverse Einschränkungen. Wenn ein Wert in einer INI Datei irgendein
+            nicht alphanummerisches Zeichen enthält, muß er in doppelte Anführungszeichen
+            (<code>"</code>) eingeklammert werden. Es gibt auch reservierte Wörter welche nicht als
+            Schlüssel für INI Dateien verwendet werden dürfen. Diese enthalten:
+            <constant>NULL</constant>, <code>yes</code>, <code>no</code>, <constant>TRUE</constant>
+            und <constant>FALSE</constant>. Die Werte <constant>NULL</constant>, <code>no</code>
+            und <constant>FALSE</constant> führen zu <code>""</code>, <code>yes</code> und
+            <constant>TRUE</constant> resultieren in <code>1</code>. Die Zeichen
+            <code>{}|&amp;~![()"</code> dürfen nirgendwo im Schlüssel verwendet werden und haben im
+            Wert eine spezielle Bedeutung. Diese sollten nicht verwendet werden da Sie zu
+            unerwartetem Verhalten führen.
         </para>
 
     </sect2>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16790 -->
+<!-- EN-Revision: 16883 -->
 <!-- Reviewed: no -->
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
     "@DOCBOOK_DTD@"
@@ -253,6 +253,7 @@
         <xi:include href="module_specs/Zend_Http_Client-Adapters.xml" />
         <xi:include href="module_specs/Zend_Http_Cookie-Handling.xml" />
         <xi:include href="module_specs/Zend_Http_Response.xml" />
+        <xi:include href="module_specs/Zend_Http_Client-Migration.xml" />
     </chapter>
 
     <chapter id="zend.infocard">
@@ -538,6 +539,9 @@
         <xi:include href="module_specs/Zend_Translate-Introduction.xml" />
         <xi:include href="module_specs/Zend_Translate-Adapters.xml" />
         <xi:include href="module_specs/Zend_Translate-Using.xml" />
+        <xi:include href="module_specs/Zend_Translate-SourceCreation.xml" />
+        <xi:include href="module_specs/Zend_Translate-Additional.xml" />
+        <xi:include href="module_specs/Zend_Translate-Plurals.xml" />
         <xi:include href="module_specs/Zend_Translate-Migration.xml" />
     </chapter>
 

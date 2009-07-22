@@ -1,17 +1,6 @@
 <?php
 
-// Read local configuration
-if (! defined('TESTS_ZEND_HTTP_CLIENT_BASEURI') &&
-    is_readable('TestConfiguration.php')) {
-
-    require_once 'TestConfiguration.php';
-}
-
-require_once realpath(dirname(__FILE__) . '/../../../') . '/TestHelper.php';
-
-require_once 'Zend/Http/Client.php';
-require_once 'PHPUnit/Framework/TestCase.php';
-require_once 'SocketTest.php';
+require_once dirname(__FILE__) . '/SocketTest.php';
 
 /**
  * Zend_Http_Client_Adapter_Proxy test suite.
@@ -78,10 +67,13 @@ class Zend_Http_Client_ProxyAdapterTest extends Zend_Http_Client_SocketTest
                         $this->markTestSkipped("Zend_Http_Client proxy server tests are not enabled in TestConfiguration.php");
 		}
 	}
-
+	
 	public function testGetLastRequest()
 	{
-		// Overriding, this one will not work and is not required for the
-		// proxy test
+	    /**
+	     * This test will never work for the proxy adapter (and shouldn't!) 
+	     * because the proxy server modifies the request which is sent back in
+	     * the TRACE response
+	     */
 	}
 }

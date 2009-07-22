@@ -1,17 +1,6 @@
 <?php
 
-// Read local configuration
-if (! defined('TESTS_ZEND_HTTP_CLIENT_BASEURI') &&
-    is_readable('TestConfiguration.php')) {
-
-    require_once 'TestConfiguration.php';
-}
-
-require_once realpath(dirname(__FILE__) . '/../../../') . '/TestHelper.php';
-
-require_once 'Zend/Http/Client.php';
-require_once 'PHPUnit/Framework/TestCase.php';
-require_once 'SocketTest.php';
+require_once dirname(__FILE__) . '/SocketTest.php';
 
 /**
  * This Testsuite includes all Zend_Http_Client that require a working web

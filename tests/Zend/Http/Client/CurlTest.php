@@ -1,13 +1,10 @@
 <?php
+
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Http_Client_CurlTest::main');
 }
 
-require_once dirname(__FILE__)."/../../../TestHelper.php";
-
-require_once 'Zend/Http/Client.php';
-require_once 'PHPUnit/Framework/TestCase.php';
-require_once 'SocketTest.php';
+require_once dirname(__FILE__) . '/CommonHttpTests.php';
 
 /**
  * This Testsuite includes all Zend_Http_Client that require a working web
@@ -29,7 +26,7 @@ require_once 'SocketTest.php';
  * @copyright
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Http_Client_CurlTest extends Zend_Http_Client_SocketTest
+class Zend_Http_Client_CurlTest extends Zend_Http_Client_CommonHttpTests
 {
     /**
      * Configuration array
@@ -46,7 +43,7 @@ class Zend_Http_Client_CurlTest extends Zend_Http_Client_SocketTest
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
-    public function setUp()
+    protected function setUp()
     {
         if (!extension_loaded('curl')) {
             $this->markTestSkipped('cURL is not installed, marking all Http Client Curl Adapter tests skipped.');

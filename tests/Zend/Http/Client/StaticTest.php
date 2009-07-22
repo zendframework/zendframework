@@ -4,6 +4,8 @@ require_once realpath(dirname(__FILE__) . '/../../../') . '/TestHelper.php';
 
 require_once 'Zend/Http/Client.php';
 
+require_once 'Zend/Http/Client/Adapter/Test.php';
+
 /**
  * This Testsuite includes all Zend_Http_Client tests that do not rely
  * on performing actual requests to an HTTP server. These tests can be
@@ -43,7 +45,7 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
     {
         $this->_client = null;
     }
-    
+   
     /**
      * URI Tests
      */
@@ -110,6 +112,23 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
         }
     }
 
+    /**
+     * Test that setting the same parameter twice in the query string does not
+     * get reduced to a single value only.
+     *
+     */
+    public function testDoubleGetParameter()
+    {
+        $qstr = 'foo=bar&foo=baz';
+        
+        $this->_client->setUri('http://example.com/test/?' . $qstr);
+        $this->_client->setAdapter('Zend_Http_Client_Adapter_Test');
+        
+        $res = $this->_client->request('GET');
+        $this->assertContains($qstr, $this->_client->getLastRequest(), 
+            'Request is expected to contain the entire query string');
+    }
+    
     /**
      * Header Tests
      */
@@ -257,6 +276,42 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
      */
 
     /**
+     * Test the getLastResponse() method actually returns the last response
+     *
+     */
+    public function testGetLastResponse()
+    {
+        // First, make sure we get null before the request
+        $this->assertEquals(null, $this->_client->getLastResponse(), 
+            'getLastResponse() is still expected to return null');
+
+        // Now, test we get a proper response after the request
+        $this->_client->setUri('http://example.com/foo/bar');
+        $this->_client->setAdapter('Zend_Http_Client_Adapter_Test');
+        
+        $response = $this->_client->request();
+        $this->assertTrue(($response === $this->_client->getLastResponse()), 
+            'Response is expected to be identical to the result of getLastResponse()');
+    }
+    
+    /**
+     * Test that getLastResponse returns null when not storing
+     *
+     */
+    public function testGetLastResponseWhenNotStoring()
+    {
+        // Now, test we get a proper response after the request
+        $this->_client->setUri('http://example.com/foo/bar');
+        $this->_client->setAdapter('Zend_Http_Client_Adapter_Test');
+        $this->_client->setConfig(array('storeresponse' => false));
+        
+        $response = $this->_client->request();
+
+        $this->assertNull($this->_client->getLastResponse(), 
+            'getLastResponse is expected to be null when not storing');
+    }
+    
+    /**
      * Check we get an exception when trying to send a POST request with an
      * invalid content-type header
      * 
@@ -322,7 +377,6 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
      */
     public function testConfigPassToAdapterZF4557()
     {
-        require_once 'Zend/Http/Client/Adapter/Test.php';
         $adapter = new Zend_Http_Client_Adapter_Test();
 
         // test that config passes when we set the adapter
@@ -344,10 +398,7 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
      */
     public function testFormDataEncodingWithMultiArrayZF7038()
     {
-        require_once 'Zend/Http/Client/Adapter/Test.php';
-        $adapter = new Zend_Http_Client_Adapter_Test();
-        
-        $this->_client->setAdapter($adapter);
+        $this->_client->setAdapter('Zend_Http_Client_Adapter_Test');
         $this->_client->setUri('http://example.com');
         $this->_client->setEncType(Zend_Http_Client::ENC_FORMDATA);
         

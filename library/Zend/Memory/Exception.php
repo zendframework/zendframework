@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Memory
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
- * @version    $Id: Exception.php 1972 2006-11-30 18:28:34Z matthew $
+ * @version    $Id$
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 

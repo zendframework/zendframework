@@ -35,7 +35,7 @@ require_once 'Zend/Validate/Abstract.php';
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: $
+ * @version    $Id$
  */
 abstract class Zend_Captcha_Base extends Zend_Validate_Abstract implements Zend_Captcha_Adapter 
 {

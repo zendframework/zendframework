@@ -187,6 +187,20 @@ abstract class Zend_Feed_Reader_EntryAbstract
     }
 
     /**
+     * Return an Extension object with the matching name (postfixed with _Entry)
+     *
+     * @param string $name
+     * @return Zend_Feed_Reader_Extension_EntryAbstract
+     */
+    public function getExtension($name)
+    {
+        if (array_key_exists($name . '_Entry', $this->_extensions)) {
+            return $this->_extensions[$name . '_Entry'];
+        }
+        return null;
+    }
+
+    /**
      * Method overloading: call given method on first extension implementing it
      *
      * @param  string $method
@@ -220,7 +234,7 @@ abstract class Zend_Feed_Reader_EntryAbstract
                 continue;
             }
             $className = Zend_Feed_Reader::getPluginLoader()->getClassName($extension);
-            $this->_extensions[$className] = new $className(
+            $this->_extensions[$extension] = new $className(
                 $this->getElement(), $this->_entryKey, $this->_data['type']
             );
         }

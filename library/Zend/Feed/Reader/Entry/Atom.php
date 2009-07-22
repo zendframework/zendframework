@@ -55,20 +55,6 @@ class Zend_Feed_Reader_Entry_Atom extends Zend_Feed_Reader_EntryAbstract impleme
     protected $_xpathQuery = '';
 
     /**
-     * Atom Extension object
-     *
-     * @var Zend_Feed_Reader_Extension_Atom_Entry
-     */
-    protected $_atom = null;
-
-    /**
-     * Thread Extension object
-     *
-     * @var Zend_Feed_Reader_Extension_Thread_Entry
-     */
-    protected $_thread = null;
-
-    /**
      * Constructor
      *
      * @param  DOMElement $entry
@@ -82,12 +68,12 @@ class Zend_Feed_Reader_Entry_Atom extends Zend_Feed_Reader_EntryAbstract impleme
 
         // Everyone by now should know XPath indices start from 1 not 0
         $this->_xpathQuery = '//atom:entry[' . ($this->_entryKey + 1) . ']';
-        $atomClass = Zend_Feed_Reader::getPluginLoader()->getClassName('Atom_Entry');
 
-        $this->_atom = new $atomClass($entry, $entryKey, $type);
+        $atomClass = Zend_Feed_Reader::getPluginLoader()->getClassName('Atom_Entry');
+        $this->_extensions['Atom_Entry'] = new $atomClass($entry, $entryKey, $type);
 
         $threadClass = Zend_Feed_Reader::getPluginLoader()->getClassName('Thread_Entry');
-        $this->_thread = new $threadClass($entry, $entryKey, $type);
+        $this->_extensions['Thread_Entry'] = new $threadClass($entry, $entryKey, $type);
     }
 
 	/**
@@ -118,7 +104,7 @@ class Zend_Feed_Reader_Entry_Atom extends Zend_Feed_Reader_EntryAbstract impleme
             return $this->_data['authors'];
         }
 
-        $people = $this->_atom->getAuthors();
+        $people = $this->getExtension('Atom')->getAuthors();
 
         $this->_data['authors'] = $people;
 
@@ -136,7 +122,7 @@ class Zend_Feed_Reader_Entry_Atom extends Zend_Feed_Reader_EntryAbstract impleme
             return $this->_data['content'];
         }
 
-        $content = $this->_atom->getContent();
+        $content = $this->getExtension('Atom')->getContent();
 
         $this->_data['content'] = $content;
 
@@ -154,7 +140,7 @@ class Zend_Feed_Reader_Entry_Atom extends Zend_Feed_Reader_EntryAbstract impleme
             return $this->_data['datecreated'];
         }
 
-        $dateCreated = $this->_atom->getDateCreated();
+        $dateCreated = $this->getExtension('Atom')->getDateCreated();
 
         $this->_data['datecreated'] = $dateCreated;
 
@@ -172,7 +158,7 @@ class Zend_Feed_Reader_Entry_Atom extends Zend_Feed_Reader_EntryAbstract impleme
             return $this->_data['datemodified'];
         }
 
-        $dateModified = $this->_atom->getDateModified();
+        $dateModified = $this->getExtension('Atom')->getDateModified();
 
         $this->_data['datemodified'] = $dateModified;
 
@@ -190,7 +176,7 @@ class Zend_Feed_Reader_Entry_Atom extends Zend_Feed_Reader_EntryAbstract impleme
             return $this->_data['description'];
         }
 
-        $description = $this->_atom->getDescription();
+        $description = $this->getExtension('Atom')->getDescription();
 
         $this->_data['description'] = $description;
 
@@ -208,7 +194,7 @@ class Zend_Feed_Reader_Entry_Atom extends Zend_Feed_Reader_EntryAbstract impleme
             return $this->_data['enclosure'];
         }
 
-        $enclosure = $this->_atom->getEnclosure();
+        $enclosure = $this->getExtension('Atom')->getEnclosure();
 
         $this->_data['enclosure'] = $enclosure;
 
@@ -226,7 +212,7 @@ class Zend_Feed_Reader_Entry_Atom extends Zend_Feed_Reader_EntryAbstract impleme
             return $this->_data['id'];
         }
 
-        $id = $this->_atom->getId();
+        $id = $this->getExtension('Atom')->getId();
 
         $this->_data['id'] = $id;
 
@@ -263,7 +249,7 @@ class Zend_Feed_Reader_Entry_Atom extends Zend_Feed_Reader_EntryAbstract impleme
             return $this->_data['links'];
         }
 
-        $links = $this->_atom->getLinks();
+        $links = $this->getExtension('Atom')->getLinks();
 
         $this->_data['links'] = $links;
 
@@ -291,7 +277,7 @@ class Zend_Feed_Reader_Entry_Atom extends Zend_Feed_Reader_EntryAbstract impleme
             return $this->_data['title'];
         }
 
-        $title = $this->_atom->getTitle();
+        $title = $this->getExtension('Atom')->getTitle();
 
         $this->_data['title'] = $title;
 
@@ -309,10 +295,10 @@ class Zend_Feed_Reader_Entry_Atom extends Zend_Feed_Reader_EntryAbstract impleme
             return $this->_data['commentcount'];
         }
 
-        $commentcount = $this->_thread->getCommentCount();
+        $commentcount = $this->getExtension('Thread')>getCommentCount();
 
         if (!$commentcount) {
-            $commentcount = $this->_atom->getCommentCount();
+            $commentcount = $this->getExtension('Atom')->getCommentCount();
         }
 
         $this->_data['commentcount'] = $commentcount;
@@ -331,7 +317,7 @@ class Zend_Feed_Reader_Entry_Atom extends Zend_Feed_Reader_EntryAbstract impleme
             return $this->_data['commentlink'];
         }
 
-        $commentlink = $this->_atom->getCommentLink();
+        $commentlink = $this->getExtension('Atom')->getCommentLink();
 
         $this->_data['commentlink'] = $commentlink;
 
@@ -349,7 +335,7 @@ class Zend_Feed_Reader_Entry_Atom extends Zend_Feed_Reader_EntryAbstract impleme
             return $this->_data['commentfeedlink'];
         }
 
-        $commentfeedlink = $this->_atom->getCommentFeedLink();
+        $commentfeedlink = $this->getExtension('Atom')->getCommentFeedLink();
 
         $this->_data['commentfeedlink'] = $commentfeedlink;
 
@@ -364,8 +350,6 @@ class Zend_Feed_Reader_Entry_Atom extends Zend_Feed_Reader_EntryAbstract impleme
     public function setXpath(DOMXPath $xpath)
     {
         parent::setXpath($xpath);
-        $this->_atom->setXpath($this->_xpath);
-        $this->_thread->setXpath($this->_xpath);
         foreach ($this->_extensions as $extension) {
             $extension->setXpath($this->_xpath);
         }

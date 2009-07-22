@@ -261,6 +261,12 @@ abstract class Zend_Feed_Reader_FeedAbstract implements Zend_Feed_Reader_FeedInt
         . 'does not exist and could not be located on a registered Extension');
     }
 
+    /**
+     * Return an Extension object with the matching name (postfixed with _Feed)
+     *
+     * @param string $name
+     * @return Zend_Feed_Reader_Extension_FeedAbstract
+     */
     public function getExtension($name)
     {
         if (array_key_exists($name . '_Feed', $this->_extensions)) {

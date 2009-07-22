@@ -65,5 +65,23 @@ class Zend_Feed_Reader_Entry_CommonTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($entry->saveXml(), file_get_contents($this->_feedSamplePath.'/atom_rewrittenbydom.xml'));
     }
 
+    public function testGetsNamedExtension()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/atom.xml')
+        );
+        $entry = $feed->current();
+        $this->assertTrue($entry->getExtension('Atom') instanceof Zend_Feed_Reader_Extension_Atom_Entry);
+    }
+
+    public function testReturnsNullIfExtensionDoesNotExist()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/atom.xml')
+        );
+        $entry = $feed->current();
+        $this->assertEquals(null, $entry->getExtension('Foo'));
+    }
+
 
 }

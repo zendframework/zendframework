@@ -159,7 +159,7 @@ abstract class Zend_Db_Table_Relationships_TestCommon extends Zend_Db_Table_Test
     /**
      * @expectedException PHPUnit_Framework_Error
      */
-    public function testTableRelationshipFindParentRowException()
+    public function testTableRelationshipFindParentRowErrorOnBadString()
     {
         $bug_id = $this->_db->quoteIdentifier('bug_id', true);
 
@@ -168,28 +168,24 @@ abstract class Zend_Db_Table_Relationships_TestCommon extends Zend_Db_Table_Test
         $childRows = $table->fetchAll("$bug_id = 1");
         $childRow1 = $childRows->current();
 
-        try {
-            $parentRow = $childRow1->findParentRow('nonexistant_class');
-            $this->fail('Expected to catch Zend_Db_Table_Row_Exception for nonexistent table class');
-        } catch (Zend_Exception $e) {
-            $this->assertType('Zend_Db_Table_Row_Exception', $e,
-                'Expecting object of type Zend_Db_Table_Row_Exception got '.get_class($e));
-            $this->assertEquals('File "nonexistant' . DIRECTORY_SEPARATOR . 'class.php" does not exist or class "nonexistant_class" was not found in the file', $e->getMessage());
-        }
+        $parentRow = $childRow1->findParentRow('nonexistant_class');
+    }
+    
+    /**
+     * @expectedException Zend_Db_Table_Exception
+     */
+    public function testTableRelationshipFindParentRowExceptionOnBadClass()
+    {
+        $bug_id = $this->_db->quoteIdentifier('bug_id', true);
 
-        try {
-            $parentRow = $childRow1->findParentRow(new stdClass());
-            $this->fail('Expected to catch Zend_Db_Table_Row_Exception for wrong table class');
-        } catch (Zend_Exception $e) {
-            $this->assertType('Zend_Db_Table_Exception', $e,
-                'Expecting object of type Zend_Db_Table_Exception got '.get_class($e));
-            $this->assertEquals('Parent table must be a Zend_Db_Table_Abstract, but it is stdClass', $e->getMessage());
-        }
+        $table = $this->_table['bugs'];
+
+        $childRows = $table->fetchAll("$bug_id = 1");
+        $childRow1 = $childRows->current();
+
+        $parentRow = $childRow1->findParentRow(new stdClass());
     }
 
-    /**
-     * @expectedException PHPUnit_Framework_Error
-     */
     public function testTableRelationshipFindManyToManyRowset()
     {
         $table = $this->_table['bugs'];
@@ -204,9 +200,6 @@ abstract class Zend_Db_Table_Relationships_TestCommon extends Zend_Db_Table_Test
         $this->assertEquals(3, $destRows->count());
     }
 
-    /**
-     * @expectedException PHPUnit_Framework_Error
-     */
     public function testTableRelationshipFindManyToManyRowsetSelect()
     {
         $product_name = $this->_db->foldCase('product_name');
@@ -270,7 +263,10 @@ abstract class Zend_Db_Table_Relationships_TestCommon extends Zend_Db_Table_Test
         $this->assertEquals('Linux', $childRow->$product_name);
     }
 
-    public function testTableRelationshipFindManyToManyRowsetException()
+    /**
+     * @expectedException PHPUnit_Framework_Error
+     */
+    public function testTableRelationshipFindManyToManyRowsetErrorOnBadClassNameAsString()
     {
         $table = $this->_table['bugs'];
 
@@ -278,44 +274,53 @@ abstract class Zend_Db_Table_Relationships_TestCommon extends Zend_Db_Table_Test
         $originRow1 = $originRows->current();
 
         // Use nonexistant class for destination table
-        try {
-            $destRows = $originRow1->findManyToManyRowset('nonexistant_class', 'My_ZendDbTable_TableBugsProducts');
-            $this->fail('Expected to catch Zend_Db_Table_Row_Exception for nonexistent table class');
-        } catch (Zend_Exception $e) {
-            $this->assertType('Zend_Db_Table_Exception', $e,
-                'Expecting object of type Zend_Db_Table_Exception got '.get_class($e));
-            $this->assertEquals('File "nonexistant' . DIRECTORY_SEPARATOR . 'class.php" does not exist or class "nonexistant_class" was not found in the file', $e->getMessage());
-        }
+        $destRows = $originRow1->findManyToManyRowset('nonexistant_class', 'My_ZendDbTable_TableBugsProducts');
 
-        // Use stdClass instead of table class for destination table
-        try {
-            $destRows = $originRow1->findManyToManyRowset(new stdClass(), 'My_ZendDbTable_TableBugsProducts');
-            $this->fail('Expected to catch Zend_Db_Table_Row_Exception for nonexistent table class');
-        } catch (Zend_Exception $e) {
-            $this->assertType('Zend_Db_Table_Exception', $e,
-                'Expecting object of type Zend_Db_Table_Exception got '.get_class($e));
-            $this->assertEquals('Match table must be a Zend_Db_Table_Abstract, but it is stdClass', $e->getMessage());
-        }
+    }
+    
+    /**
+     * @expectedException PHPUnit_Framework_Error
+     */
+    public function testTableRelationshipFindManyToManyRowsetErrorOnBadClassNameAsStringForIntersection()
+    {
+        $table = $this->_table['bugs'];
 
+        $originRows = $table->find(1);
+        $originRow1 = $originRows->current();
+        
         // Use nonexistant class for intersection table
-        try {
-            $destRows = $originRow1->findManyToManyRowset('My_ZendDbTable_TableProducts', 'nonexistant_class');
-            $this->fail('Expected to catch Zend_Db_Table_Row_Exception for nonexistent table class');
-        } catch (Zend_Exception $e) {
-            $this->assertType('Zend_Db_Table_Exception', $e,
-                'Expecting object of type Zend_Db_Table_Exception got '.get_class($e));
-            $this->assertEquals('File "nonexistant' . DIRECTORY_SEPARATOR . 'class.php" does not exist or class "nonexistant_class" was not found in the file', $e->getMessage());
-        }
+        $destRows = $originRow1->findManyToManyRowset('My_ZendDbTable_TableProducts', 'nonexistant_class');
+    }
 
+    /**
+     * @expectedException Zend_Db_Table_Exception
+     */
+    public function testTableRelationshipFindManyToManyRowsetExceptionOnBadClassAsString()
+    {
+        
+        $table = $this->_table['bugs'];
+
+        $originRows = $table->find(1);
+        $originRow1 = $originRows->current();
+        
+        // Use stdClass instead of table class for destination table
+        $destRows = $originRow1->findManyToManyRowset(new stdClass(), 'My_ZendDbTable_TableBugsProducts');
+
+    }
+        
+    
+    /**
+     * @expectedException Zend_Db_Table_Exception
+     */
+    public function testTableRelationshipFindManyToManyRowsetExceptionOnBadClassAsStringForIntersection()
+    {
+        $table = $this->_table['bugs'];
+
+        $originRows = $table->find(1);
+        $originRow1 = $originRows->current();
+        
         // Use stdClass instead of table class for intersection table
-        try {
-            $destRows = $originRow1->findManyToManyRowset('My_ZendDbTable_TableProducts', new stdClass());
-            $this->fail('Expected to catch Zend_Db_Table_Row_Exception for nonexistent table class');
-        } catch (Zend_Exception $e) {
-            $this->assertType('Zend_Db_Table_Exception', $e,
-                'Expecting object of type Zend_Db_Table_Exception got '.get_class($e));
-            $this->assertEquals('Intersection table must be a Zend_Db_Table_Abstract, but it is stdClass', $e->getMessage());
-        }
+        $destRows = $originRow1->findManyToManyRowset('My_ZendDbTable_TableProducts', new stdClass());
 
     }
 
@@ -418,30 +423,17 @@ abstract class Zend_Db_Table_Relationships_TestCommon extends Zend_Db_Table_Test
         $this->assertEquals(3, $childRow1->$product_id);
     }
 
-    public function testTableRelationshipFindDependentRowsetException()
+    /**
+     * @expectedException PHPUnit_Framework_Error
+     */
+    public function testTableRelationshipFindDependentRowsetPhpError()
     {
         $table = $this->_table['bugs'];
 
         $parentRows = $table->find(1);
         $parentRow1 = $parentRows->current();
 
-        try {
-            $childRows = $parentRow1->findDependentRowset('nonexistant_class');
-            $this->fail('Expected to catch Zend_Db_Table_Row_Exception for nonexistent table class');
-        } catch (Zend_Exception $e) {
-            $this->assertType('Zend_Db_Table_Exception', $e,
-                'Expecting object of type Zend_Db_Table_Exception got '.get_class($e));
-            $this->assertEquals('File "nonexistant' . DIRECTORY_SEPARATOR . 'class.php" does not exist or class "nonexistant_class" was not found in the file', $e->getMessage());
-        }
-
-        try {
-            $childRows = $parentRow1->findDependentRowset(new stdClass());
-            $this->fail('Expected to catch Zend_Db_Table_Row_Exception for wrong table class');
-        } catch (Zend_Exception $e) {
-            $this->assertType('Zend_Db_Table_Row_Exception', $e,
-                'Expecting object of type Zend_Db_Table_Row_Exception got '.get_class($e));
-            $this->assertEquals('Dependent table must be a Zend_Db_Table_Abstract, but it is stdClass', $e->getMessage());
-        }
+        $childRows = $parentRow1->findDependentRowset('nonexistant_class');
     }
 
     /**

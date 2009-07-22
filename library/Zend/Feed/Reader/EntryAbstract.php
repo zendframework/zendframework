@@ -103,9 +103,9 @@ abstract class Zend_Feed_Reader_EntryAbstract
     /**
      * Get the entry element
      *
-     * @return Zend_Feed_Entry_Interface
+     * @return DOMElement
      */
-    public function getEntryElement()
+    public function getElement()
     {
         return $this->_entry;
     }
@@ -119,6 +119,18 @@ abstract class Zend_Feed_Reader_EntryAbstract
     {
         $assumed = $this->getDomDocument()->encoding;
         return $assumed;
+    }
+
+    /**
+     * Get entry as xml
+     *
+     * @return string
+     */
+    public function saveXml()
+    {
+        $dom = new DOMDocument();
+        $dom->importNode($this->getElement(), true);
+        return $dom->saveXml();
     }
 
 	/**

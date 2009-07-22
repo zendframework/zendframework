@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 16855 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.core-functionality.application">
     <title>Zend_Application</title>
 
     <para>
         <classname>Zend_Application</classname> est la classe de base du composant
-        et le point d'entrée de votre application Zend Framework. Ses buts sont multiples
-        : configurer l'environnement <acronym>PHP</acronym> environment (incluant l'autoloading)
+        et le point d'entrée de votre application Zend Framework. Ses buts sont multiples&#160;:
+        configurer l'environnement <acronym>PHP</acronym> (incluant l'autoloading)
         et exécuter le bootstrap de votre application.
     </para>
 
     <para>
         Typiquement, vous allez passer toute la configuration au constructeur de
-        <classname>Zend_Application</classname>, mais vous pouvez aussi configurer l'objet via ses méthodes
-        . Ce chapitre illustrera les deux aspects.
+        <classname>Zend_Application</classname>, mais vous pouvez aussi configurer l'objet
+        via ses méthodes. Ce chapitre illustrera les deux aspects.
     </para>
 
     <table id="zend.application.core-functionality.application.api.options">
@@ -27,24 +28,25 @@
             </thead>
             <tbody>
                 <row>
-                    <entry><property>phpSettings</property></entry>
+                    <entry><emphasis><property>phpSettings</property></emphasis></entry>
                     <entry><para>
-                        Tableau de paramètres <filename>php.ini</filename> à utiliser. Les clés doivent être
-                        des clés reconnues dans <filename>php.ini</filename>.
+                        Tableau de paramètres <filename>php.ini</filename> à utiliser.
+                        Les clés doivent être des clés reconnues dans
+                        <filename>php.ini</filename>.
                     </para></entry>
                 </row>
 
                 <row>
-                    <entry><property>includePaths</property></entry>
+                    <entry><emphasis><property>includePaths</property></emphasis></entry>
                     <entry><para>
-                        Chemins additionnels à ajouter à
-                        <emphasis>include_path</emphasis>. Ces chemins sont ajoutés avant l'include_path.
+                        Chemins additionnels à ajouter à <emphasis>include_path</emphasis>.
+                        Ces chemins sont ajoutés avant l'include_path.
                         L'option doit être un tableau de chemins.
                     </para></entry>
                 </row>
 
                 <row>
-                    <entry><property>autoloaderNamespaces</property></entry>
+                    <entry><emphasis><property>autoloaderNamespaces</property></emphasis></entry>
                     <entry><para>
                         Tableau d'espaces de noms à enregistrer dans
                         <classname>Zend_Loader_Autoloader</classname>.
@@ -52,10 +54,10 @@
                 </row>
 
                 <row>
-                    <entry><property>bootstrap</property></entry>
+                    <entry><emphasis><property>bootstrap</property></emphasis></entry>
                     <entry><para>
-                        Soit une chaine vers le fichier contenant la classe de bootstrap, soit un tableau
-                        avec les clés 'path' et 'class' menant vers le bootstrap.
+                        Soit une chaîne vers le fichier contenant la classe de bootstrap, soit un
+                        tableau avec les clés 'path' et 'class' menant vers le bootstrap.
                     </para></entry>
                 </row>
             </tbody>
@@ -75,7 +77,7 @@
         <tgroup cols="4">
             <thead>
                 <row>
-                    <entry>Methode</entry>
+                    <entry>Méthode</entry>
                     <entry>Valeur de retour</entry>
                     <entry>Paramètres</entry>
                     <entry>Description</entry>
@@ -89,41 +91,42 @@
                     <entry><type>Void</type></entry>
                     <entry><itemizedlist>
                             <listitem><para>
-                                <varname>$environment</varname>: <emphasis>requis</emphasis>,.
-                                Chaine représentant l'environnement actuel dans lequel tourne l'application
-                                Par exemple "development", "testing", "qa", ou "production".
-                                Les significations de ces chaines sont à définir par la suite.
+                                <varname>$environment</varname>&#160;: <emphasis>requis</emphasis>,
+                                Chaîne représentant l'environnement actuel dans lequel tourne
+                                l'application. Par exemple "development", "testing", "qa", ou
+                                "production". Les significations de ces chaînes sont à définir
+                                par la suite.
                             </para></listitem>
 
                             <listitem>
                             <para>
-                                <varname>$options</varname>: <emphasis>optionnel</emphasis>.
+                                <varname>$options</varname>&#160;: <emphasis>optionnel</emphasis>.
                             </para>
                             <itemizedlist>
                                 <listitem><para>
-                                    <emphasis><type>String</type></emphasis>: chemin vers un fichier
-                                    <classname>Zend_Config</classname> à charger pour la configuration de
-                                    votre application.
-                                    <varname>$environment</varname> sera utilisé pour determiner la section de
-                                    configuration à charger depuis le fichier.
+                                    <emphasis><type>String</type></emphasis>&#160;: chemin vers
+                                    un fichier <classname>Zend_Config</classname> à charger pour
+                                    la configuration de votre application.
+                                    <varname>$environment</varname> sera utilisé pour déterminer
+                                    la section de configuration à charger depuis le fichier.
                                 </para></listitem>
 
                                 <listitem><para>
-                                    <emphasis><type>Array</type></emphasis>: tableau associatif de données de configuration
-                                    pour votre application.
+                                    <emphasis><type>Array</type></emphasis>&#160;: tableau
+                                    associatif de données de configuration pour votre application.
                                 </para></listitem>
 
                                 <listitem><para>
-                                    <emphasis><classname>Zend_Config</classname></emphasis>:
-                                    Instance de Zend_Config.
+                                    <emphasis><classname>Zend_Config</classname></emphasis>&#160;:
+                                    un instance d'objet de configuration.
                                 </para></listitem>
                             </itemizedlist>
                         </listitem>
                     </itemizedlist></entry>
                     <entry><para>
-                        Une instance de
-                        <classname>Zend_Loader_Autoloader</classname> est enregistrée lors de l'instanciation.
-                        Les options passées au constructeur sont passées à <methodname>setOptions()</methodname>.
+                        Une instance de <classname>Zend_Loader_Autoloader</classname> est
+                        enregistrée lors de l'instanciation. Les options passées au
+                        constructeur sont passées à <methodname>setOptions()</methodname>.
                     </para></entry>
                 </row>
 
@@ -151,15 +154,16 @@
                     <entry><classname>Zend_Application</classname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <varname>$options</varname>: <emphasis>requis</emphasis>.
+                            <varname>$options</varname>&#160;: <emphasis>requis</emphasis>.
                             Un tableau d'options pour l'application.
                         </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
-                        Toutes les options sont stockées en interne, et appeler plusieurs fois la même
-                        méthode fusionnera les options qu'elle définit. Les options qui correspondent aux diverses
-                        méthodes setter seront passées à ces méthodes. Par exemple, l'option "phpSettings"
-                        sera passée à <methodname>setPhpSettings()</methodname>.
+                        Toutes les options sont stockées en interne, et appeler plusieurs fois
+                        la même méthode fusionnera les options qu'elle définit. Les options qui
+                        correspondent aux diverses méthodes setter seront passées à ces méthodes.
+                        Par exemple, l'option "phpSettings" sera passée à
+                        <methodname>setPhpSettings()</methodname>.
                     </para></entry>
                 </row>
 
@@ -169,8 +173,8 @@
                     <entry>N/A</entry>
                     <entry><para>
                         Récupère toutes les options utilisées pour initialiser l'objet.
-                        Pourrait être utilisé pour mettre en cache les options <classname>Zend_Config</classname>
-                        entre chaque requête, par exemple.
+                        Pourrait être utilisé pour mettre en cache les options
+                        <classname>Zend_Config</classname> entre chaque requête, par exemple.
                     </para></entry>
                 </row>
 
@@ -180,13 +184,13 @@
                     <entry>
                     <itemizedlist>
                         <listitem><para>
-                            <varname>$key</varname>: La clé de l'option à chercher
+                            <varname>$key</varname>&#160;: La clé de l'option à chercher
                         </para></listitem>
                     </itemizedlist>
                     </entry>
                     <entry><para>
-                        Indique si une option correspondant à une clé précise a été utilisée ou pas.
-                        Les clés sont insensibles à la casse.
+                        Indique si une option correspondant à une clé précise a été utilisée
+                        ou pas. Les clés sont insensibles à la casse.
                     </para></entry>
                 </row>
 
@@ -197,11 +201,12 @@
                     </entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <varname>$key</varname>: La clé de l'option à récupérer
+                            <varname>$key</varname>&#160;: La clé de l'option à récupérer
                         </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
-                        Récupère l'option correspondant à la clé passée, null si celle-ci n'existe pas.
+                        Récupère l'option correspondant à la clé passée, null si celle-ci
+                        n'existe pas.
                     </para></entry>
                 </row>
 
@@ -212,21 +217,24 @@
                     <entry><classname>Zend_Application</classname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <varname>$settings</varname>: <emphasis>requis</emphasis>.
-                            Tableau associatif de paramètres <acronym>PHP</acronym> <acronym>INI</acronym>
+                            <varname>$settings</varname>&#160;: <emphasis>requis</emphasis>.
+                            Tableau associatif de paramètres <acronym>PHP</acronym>
+                            <acronym>INI</acronym>
                         </para></listitem>
 
                         <listitem><para>
-                            <varname>$prefix</varname>: <emphasis>optionnel</emphasis>.
-                            Préfixe pour construire la chaine des clés d'options.
-                            Utilisée en interne pour les tableau à plusieurs niveaux concernant
-                            <filename>php.ini</filename> keys. En temps normal, cet argument ne devrait
-                            jamais être utilisé par l'utilisateur.
+                            <varname>$prefix</varname>&#160;: <emphasis>optionnel</emphasis>.
+                            Préfixe pour construire la chaîne des clés d'options.
+                            Utilisée en interne pour faire correspondre les clés
+                            <filename>php.ini</filename> séparés par des points (".") avec des
+                            tableaux à plusieurs niveaux. En temps normal, cet argument
+                            ne devrait jamais être utilisé par l'utilisateur.
                         </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
-                        Affecte à la volée des paramètres de <filename>php.ini</filename>. Les paramètres séparés
-                        par des points peuvent être nichés hiérarchiquement (comme dans le cas des paramètre
+                        Affecte à la volée des paramètres de <filename>php.ini</filename>.
+                        Les paramètres séparés par des points peuvent être imbriqués
+                        hiérarchiquement (comme dans le cas des paramètres
                         <acronym>INI</acronym> de <classname>Zend_Config</classname>).
                     </para></entry>
                 </row>
@@ -238,13 +246,14 @@
                     <entry><classname>Zend_Application</classname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <varname>$namespaces</varname>: <emphasis>requis</emphasis>.
-                            Tableau de chaines représentant les espaces de noms à enregistrer dans
+                            <varname>$namespaces</varname>&#160;: <emphasis>requis</emphasis>.
+                            Tableau de chaînes représentant les espaces de noms à enregistrer dans
                             <classname>Zend_Loader_Autoloader</classname>.
                         </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
-                        Enregistre des espaces de noms dans <classname>Zend_Loader_Autoloader</classname>.
+                        Enregistre des espaces de noms dans
+                        <classname>Zend_Loader_Autoloader</classname>.
                     </para></entry>
                 </row>
 
@@ -253,18 +262,19 @@
                     <entry><classname>Zend_Application</classname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <varname>$path</varname>: <emphasis>requis</emphasis>. Peut être soit un objet de
-                            <classname>Zend_Application_Bootstrap_Bootstrapper</classname>
-                            , soit une chaine représentant le chemib vers la classe de bootstrap, soit un tableau associatif
-                            nom de classe =&gt; chemin de fichier, ou encore un tableau associatif avec les clés
-                            'class' et 'path'.
+                            <varname>$path</varname>&#160;: <emphasis>requis</emphasis>. Peut
+                            être soit un objet de
+                            <classname>Zend_Application_Bootstrap_Bootstrapper</classname>,
+                            soit une chaîne représentant le chemin vers la classe de bootstrap,
+                            soit un tableau associatif nom de classe =&gt; chemin de fichier,
+                            ou encore un tableau associatif avec les clés "class" et "path".
                         </para></listitem>
 
                         <listitem><para>
-                            <varname>$class</varname>: <emphasis>optionnel</emphasis>.
-                            Si <varname>$path</varname> est une chaine,
-                            <varname>$class</varname> doit être indiqué et doit être une chaine
-                            représentant le nom d'une classe contenue dans le fichier représenté par $path.
+                            <varname>$class</varname>&#160;: <emphasis>optionnel</emphasis>.
+                            Si <varname>$path</varname> est une chaîne, <varname>$class</varname>
+                            doit être indiqué et doit être une chaîne représentant le nom d'une
+                            classe contenue dans le fichier représenté par le chemin.
                         </para></listitem>
                     </itemizedlist></entry>
                 </row>

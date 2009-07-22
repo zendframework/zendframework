@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 16179 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.available-resources.modules">
     <title>Zend_Application_Resource_Modules</title>
@@ -13,8 +14,8 @@
 
     <para>
         Par défaut, une instance de
-        <classname>Zend_Application_Module_Autoloader</classname> sera créee pour le module en question
-        , utilisant le nom du module et son dossier pour s'initialiser.
+        <classname>Zend_Application_Module_Autoloader</classname> sera créée pour le module en
+        question, utilisant le nom du module et son dossier pour s'initialiser.
     </para>
 
     <note>
@@ -23,22 +24,24 @@
         <para>
             La ressource Modules possède une dépendance envers <link
                 linkend="zend.application.available-resources.frontcontroller">la ressource Front
-            Controller</link>. Vous pouvez bien sûr proposer votre propre implémentation de la ressource
-            du contrôleur frontal, si tant est que sa classe se termine par "Frontcontroller", ou, si vous
-            choisissez d'utiliser une méthode d'initialisation, celle-ci doit être "_initFrontController".
+            Controller</link>. Vous pouvez bien sûr proposer votre propre implémentation de la
+            ressource du contrôleur frontal, si tant est que sa classe se termine par
+            "Frontcontroller", ou, si vous choisissez d'utiliser une méthode d'initialisation,
+            celle-ci doit être "_initFrontController".
         </para>
     </note>
 
     <example id="zend.application.available-resources.modules.configExample">
-        <title>Configurer les Modules</title>
+        <title>Configurer les modules</title>
         <para>
-            Vous pouvez passer de la configuration en utilisant le nom du module commme préfixe de section
-            dans le fichier de configuration.
+            Vous pouvez spécifier la configuration en utilisant le nom du module comme préfixe
+            de section dans le fichier de configuration.
         </para>
 
         <para>
             Par exemple, supposons que vous possédiez un module appelé "news". Voici des exemples
-            <acronym>INI</acronym> et <acronym>XML</acronym> de fichiers de configuration pour ce module.
+            <acronym>INI</acronym> et <acronym>XML</acronym> de fichiers de configuration pour ce
+            module.
         </para>
 
         <programlisting language="ini"><![CDATA[
@@ -78,10 +81,10 @@ news.resources.layout.layout = "news"
         <title>Récupérer un bootstrap de module</title>
 
         <para>
-            Il peut être utilise de pouvoir récupérer l'objet bootstrap de votre module, pour en exécuter
-            par exemple des méthodes spécifiques, ou encore pour en récupérer l'autoloader. La méthode
-            <methodname>getExecutedBootstraps()</methodname> peut être utilisée dans ce cas là, elle s'applique
-            sur un objet ressource de Modules.
+            Il peut être utile de pouvoir récupérer l'objet bootstrap de votre module, pour en
+            exécuter par exemple des méthodes spécifiques, ou encore pour en récupérer
+            l'autoloader. La méthode <methodname>getExecutedBootstraps()</methodname> peut être
+            utilisée dans ce cas là, elle s'applique sur un objet ressource de modules.
         </para>
 
         <programlisting language="php"><![CDATA[

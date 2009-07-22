@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16734 -->
+<!-- EN-Revision: 16783 -->
 <!-- Reviewed: no -->
 <appendix id="coding-standard">
   <title>Zend Framework Coding Standard für PHP</title>
@@ -16,14 +16,18 @@
                 Ihr Code Stil mit jedem Zend Framework Code konsistent bleibt. Es ist auch
                 anzumerken das es signifikant viel Arbeit erfordert einen kompletten Coding
                 Standard zu definieren.
-
-                Beachte: Manchmal entscheiden Entwickler das die Verfügbarkeit eines Standards
-                wichtiger ist als was der Standard aktuell im höchsten Level des Designs empfiehlt.
-                Diese Richtlinien im Zend Framework Coding Standard beschreiben die Praxis die im
-                ZF Projekt sehr gut funktionieren. Diese Standard können geändert oder so wie sie
-                sind verwendet werden solange Sie sich an unsere
-                <ulink url="http://framework.zend.com/license">Lizenz</ulink> halten.
             </para>
+
+            <note>
+                <para>
+                    Manchmal entscheiden Entwickler das die Verfügbarkeit eines Standards wichtiger
+                    ist als was der Standard aktuell im höchsten Level des Designs empfiehlt. Diese
+                    Richtlinien im Zend Framework Coding Standard beschreiben die Praxis die im
+                    ZF Projekt sehr gut funktionieren. Diese Standard können geändert oder so wie
+                    sie sind verwendet werden solange Sie sich an unsere
+                    <ulink url="http://framework.zend.com/license">Lizenz</ulink> halten.
+                </para>
+            </note>
 
             <para>
                 Die Bereiche die im ZF Coding Standard abgedeckt werden enthalten:

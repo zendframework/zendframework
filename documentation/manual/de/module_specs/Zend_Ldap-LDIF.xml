@@ -2,9 +2,9 @@
 <!-- EN-Revision: 16633 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.ldap.ldif">
-    <title>Serializing LDAP data to and from LDIF</title>
+    <title>Serialisieren von LDAP Daten von und zu LDIF</title>
     <sect2 id="zend.ldap.ldif.encode">
-        <title>Serialize a LDAP entry to LDIF</title>
+        <title>Einen LDAP Eintrag zu LDIF serialisieren</title>
 
         <programlisting language="php"><![CDATA[
 $data = array(
@@ -36,7 +36,7 @@ $data = array(
 $ldif = Zend_Ldap_Ldif_Encoder::encode($data, array('sort' => false,
                                                     'version' => null));
 /*
-$ldif contains:
+$ldif enthält:
 dn:: dWlkPXJvZ2FzYXdhcmEsb3U95Za25qWt6YOoLG89QWlyaXVz
 objectclass: top
 objectclass: person
@@ -67,7 +67,7 @@ title;lang-en: Sales, Director
     </sect2>
 
     <sect2 id="zend.ldap.ldif.decode">
-        <title>Deserialize a LDIF string into a LDAP entry</title>
+        <title>Einen LDIF Strin in einen LDAP Eintrag deserialisieren</title>
 
         <programlisting language="php"><![CDATA[
 $ldif = "dn:: dWlkPXJvZ2FzYXdhcmEsb3U95Za25qWt6YOoLG89QWlyaXVz

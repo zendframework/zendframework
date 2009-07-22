@@ -5,15 +5,15 @@
     <title>Framework</title>
 
     <para>
-        The <classname>Zend_Queue</classname> is a proxy that hides the details
-        of the queue services. The queue services are represented by
-        <classname>Zend_Queue_Adapter_&lt;service&gt;</classname>. For example,
-        <classname>Zend_Queue_Adapter_Db</classname> is a queue that will use
-        database tables to store and retrieve messages.
+        <classname>Zend_Queue</classname> ist ein Proxy der die Details des Queue Services
+        versteckt. Die Queue Services werden durch
+        <classname>Zend_Queue_Adapter_&lt;service&gt;</classname> repräsentiert. Zum Beispiel ist
+        <classname>Zend_Queue_Adapter_Db</classname> eine Queue die Datenbanktabellen verwendet
+        um Nachrichten zu speichern und zu empfangen.
     </para>
 
     <para>
-        Below is an example for using database tables for a queuing system:
+        Anbei ist ein Beispiel für die Verwendung von Datenbanktabellen für ein Queueing System:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -29,148 +29,149 @@ $options = array(
     )
 );
 
-// Create a database queue.
-// Zend_Queue will prepend Zend_Queue_Adapter_ to 'Db' for the class name.
+// Erstellt eine Datenbank Queue.
+// Zend_Queue fügt vorne Zend_Queue_Adapter_ an 'Db' für den Klassennamen an.
 $queue = Zend_Queue('Db', $options);
 ]]></programlisting>
 
     <para>
-        The <classname>Zend_Queue</classname> constructor will create a
-        <classname>Zend_Queue_Adapter_Db</classname> and initialize the adapter
-        with the configuration settings.
+        Der Constructor von <classname>Zend_Queue</classname> erstellt eine
+        <classname>Zend_Queue_Adapter_Db</classname> und initialisiert den Adapter mit den
+        Konfigurationseinstellungen.
     </para>
 
     <para>
-        The accepted configuration settings for each adapter are provided
-        in the <ulink url="zend.queue.adapters">adapter notes</ulink>.
+        Die akzeptierten Konfigurationseinstellungen für jeden Adapter sind in den
+        <ulink url="zend.queue.adapters">Adapter Notizen</ulink> beschrieben.
     </para>
 
     <para>
-        <classname>Zend_Queue</classname> returns messages using the class
-        <classname>Zend_Queue_Message_Iterator</classname>, which is an
-        implementation of <acronym>SPL</acronym> <classname>Iterator</classname> and
-        <classname>Countable</classname>.
-        <classname>Zend_Queue_Message_Iterator</classname> contains an array of
-        <classname>Zend_Queue_Message</classname> objects.
+        <classname>Zend_Queue</classname> gibt Nachrichten zurück indem es die
+        <classname>Zend_Queue_Message_Iterator</classname> Klasse verwendet, welche eine
+        Implementation vom <acronym>SPL</acronym> <classname>Iterator</classname> und von
+        <classname>Countable</classname> ist.
+        <classname>Zend_Queue_Message_Iterator</classname> enthält ein Array von
+        <classname>Zend_Queue_Message</classname> Objekten.
     </para>
 
     <programlisting language="php"><![CDATA[
 $messages = $queue->receive(5);
 foreach ($messages as $i => $message) {
-    echo "$i) Message => ", $message->body, "\n";
+    echo "$i) Nachricht => ", $message->body, "\n";
 }
 ]]></programlisting>
 
     <para>
-        Any exceptions thrown are of class
+        Alle Exceptions die geworfen werden sind von der Klasse
         <classname>Zend_Queue_Exception</classname>.
     </para>
 
     <sect2 id="zend.queue.framework.basics">
-        <title>Introduction</title>
+        <title>Einführung</title>
 
         <para>
-            <classname>Zend_Queue</classname> is a proxy class that represents
-            an adapter.
+            <classname>Zend_Queue</classname> ist eine Proxy Klasse die einen Adapter
+            repräsentiert.
         </para>
 
         <para>
-            The <methodname>send()</methodname>,
-            <methodname>count($queue)</methodname>, and
-            <methodname>receive()</methodname> methods are employed by each
-            adapter to interact with queues.
+            Die Methoden <methodname>send()</methodname>, <methodname>count($queue)</methodname>,
+            und <methodname>receive()</methodname> werden von jedem Adapter verwendet um mit den
+            Queues zu interagieren.
         </para>
 
         <para>
-            The <methodname>createQueue()</methodname>,
-            <methodname>deleteQueue()</methodname> methods are used to manage
-            queues.
+            Die Methoden <methodname>createQueue()</methodname>,
+            <methodname>deleteQueue()</methodname> werden verwendet um Queues zu managen.
         </para>
     </sect2>
 
     <sect2 id="zend.queue.framework.support">
-        <title>Commonality among adapters</title>
+        <title>Gemeinsamkeiten für alle Adapter</title>
 
         <para>
-            The queue services supported by <classname>Zend_Queue</classname> do
-            not all support the same functions. For example,
-            <classname>Zend_Queue_Adapter_Array</classname>,
-            <classname>Zend_Queue_Adapter_Db</classname>, support all functions,
-            while <classname>Zend_Queue_Adapter_Activemq</classname> does not
-            support queue listing, queue deletion, or counting of messages.
+            Die Queue Services die von <classname>Zend_Queue</classname> unterstützt werden
+            unterstützen nicht alle die gleichen Funktionalitäten. Zum Beispiel unterstützen
+            <classname>Zend_Queue_Adapter_Array</classname> und
+            <classname>Zend_Queue_Adapter_Db</classname> alle Funktionen, wärend
+            <classname>Zend_Queue_Adapter_Activemq</classname> das Auflisten und Löschen von Queues
+            der das Zählen von Nachrichten nicht unterstützt.
         </para>
 
         <para>
-            You can determine what functions are supported by using
-            <methodname>Zend_Queue::isSupported()</methodname> or
-            <methodname>Zend_Queue::getCapabilities()</methodname>.
+            Man kann erkennen welche Funktionen unterstützt werden indem
+            <methodname>Zend_Queue::isSupported()</methodname> oder
+            <methodname>Zend_Queue::getCapabilities()</methodname> verwendet wird.
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <methodname>create()</methodname> - create a queue
+                    <emphasis><methodname>create()</methodname></emphasis> - Erstellt eine Queue
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>delete()</methodname> - delete a queue
+                    <emphasis><methodname>delete()</methodname></emphasis> - Löscht eine Queue
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>send()</methodname> - send a message
+                    <emphasis><methodname>send()</methodname></emphasis> - Sendet eine Nachricht
                 </para>
 
                 <para>
-                    <methodname>send()</methodname> is not available in all adapters; the
-                    <classname>Zend_Queue_Adapter_Null</classname> does not
-                    support <methodname>send()</methodname>.
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    <methodname>receive()</methodname> - receive messages
-                </para>
-
-                <para>
-                    <methodname>receive()</methodname> is not available in all adapters;
-                    the <classname>Zend_Queue_Adapter_Null</classname> does not
-                    support <methodname>receive()</methodname>.
+                    <methodname>send()</methodname> ist nicht in allen Adaptern vorhanden;
+                    <classname>Zend_Queue_Adapter_Null</classname> unterstützt
+                    <methodname>send()</methodname> nicht.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>deleteMessage()</methodname> - delete a message
+                    <emphasis><methodname>receive()</methodname></emphasis> - Empfängt eine
+                    Nachricht
+                </para>
+
+                <para>
+                    <methodname>receive()</methodname> ist nicht in allen Adaptern vorhanden;
+                    <classname>Zend_Queue_Adapter_Null</classname> unterstützt
+                    <methodname>receive()</methodname> nicht.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>count()</methodname> - count the number of messages in a queue
+                    <emphasis><methodname>deleteMessage()</methodname></emphasis> - Löscht eine
+                    Nachricht
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>isExists()</methodname> - checks the existence of a queue
+                    <emphasis><methodname>count()</methodname></emphasis> - Zählt die Anzahl an
+                    Nachrichten in einer Queue
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis><methodname>isExists()</methodname></emphasis> - Prüft auf die
+                    Existenz einer Queue
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
-            <methodname>receive()</methodname> methods are employed by each
-            adapter to interact with queues.
+            <methodname>receive()</methodname> Methoden werden von jedem Adapter zur Verfügung
+            gestellt um mit Queues zu interagieren.
         </para>
 
         <para>
-            The <methodname>createQueue()</methodname> and
-            <methodname>deleteQueue()</methodname> methods are used to manage
-            queues.
+            Die Methoden <methodname>createQueue()</methodname> und
+            <methodname>deleteQueue()</methodname> werden verwendet um Queues zu managen.
         </para>
     </sect2>
 </sect1>

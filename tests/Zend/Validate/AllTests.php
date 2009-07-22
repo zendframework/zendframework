@@ -193,8 +193,7 @@ class Zend_Validate_AllTests
         $suite->addTestSuite('Zend_Validate_BetweenTest');
         $suite->addTestSuite('Zend_Validate_CcnumTest');
         $suite->addTestSuite('Zend_Validate_DateTest');
-// Commenting out temporarily; when run with entire test suite, we get fatal errors
-//        $suite->addTest(Zend_Validate_Db_AllTests::suite());
+        $suite->addTest(Zend_Validate_Db_AllTests::suite());
         $suite->addTestSuite('Zend_Validate_DigitsTest');
         $suite->addTestSuite('Zend_Validate_EmailAddressTest');
         $suite->addTest(Zend_Validate_File_AllTests::suite());

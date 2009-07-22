@@ -64,8 +64,8 @@ class Zend_Validate_Db_RecordExistsTest extends PHPUnit_Framework_TestCase
         }
 
         $this->_db = new Zend_Db_Adapter_Pdo_Sqlite(
-            array('dbname' => 'test')
-            );
+            array('dbname' => ':memory:')
+        );
 
         Zend_Db_Table_Abstract::setDefaultAdapter($this->_db);
 

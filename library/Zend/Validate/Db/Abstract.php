@@ -103,8 +103,12 @@ abstract class Zend_Validate_Db_Abstract extends Zend_Validate_Abstract
         /**
          * Check for an adapter being defined. if not, fetch the default adapter.
          */ 
-        if($this->_adapter === null) {
+        if ($this->_adapter === null) {
             $this->_adapter = Zend_Db_Table_Abstract::getDefaultAdapter();
+            if (null === $this->_adapter) {
+                require_once 'Zend/Validate/Exception.php';
+                throw new Zend_Validate_Exception('No database adapter present');
+            }
         }
 
         /**

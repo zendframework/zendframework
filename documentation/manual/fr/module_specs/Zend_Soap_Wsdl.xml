@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15341 -->
+<!-- EN-Revision: 16935 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.soap.wsdl">
     <title>WSDL</title>
@@ -20,7 +20,7 @@
     </note>
 
     <sect2 id="zend.soap.wsdl.constructor">
-        <title>Constructeur <classname>Zend_Soap_Wsdl</classname></title>
+        <title>Constructeur Zend_Soap_Wsdl</title>
 
         <para>
             Le constructeur de <classname>Zend_Soap_Wsdl</classname> prend 3 paramètres :
@@ -48,7 +48,7 @@
     </sect2>
 
     <sect2 id="zend.soap.wsdl.addmessage">
-        <title><code>addMessage()</code></title>
+        <title>addMessage()</title>
 
         <para>
             <code>addMessage($name, $parts)</code> ajoute un message de description au
@@ -477,9 +477,9 @@ $soapMyClassType = $wsdl->getType('MyClass');
                         la classe
                         <classname>Zend_Soap_Wsdl_Strategy_ArrayOfTypeSequence</classname> : cette
                         stratégie permet de spécifier les paramètres de retour de type :
-                        <code>int[]</code> ou <code>string[]</code>. Il peut seulement gérer les
-                        types PHP simples comme int, string, boolean, float et ainsi de suite, mais
-                        permet de spécifier des tableaux imbriqués de tableaux de type.
+                        <code>int[]</code> ou <code>string[]</code>. A partir de Zend Framework 1.9,
+                        il peut gérer des types PHP simples comme int, string, boolean, float ainsi
+                        que des objets ou des tableaux d'objets.
                     </para>
                 </listitem>
 

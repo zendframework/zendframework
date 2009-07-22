@@ -1651,14 +1651,28 @@ $db->closeConnection();
             <title>Zend_Db supporte-t-il les connexions persistantes&#160;?</title>
 
             <para>
-                L'utilisation de connexions persistantes n'est pas supporté, ni conseillé, par
-                le composant <classname>Zend_Db</classname>.
+                Oui, la persistance est supportée grace à l'addition de l'option
+                <code>persistent</code> quand il est à une valeur true dans la configuration
+                (pas celle du driver) d'un adaptateur de <classname>Zend_Db</classname>.
             </para>
+            
+            <example id="zend.db.adapter.connecting.persistence.example">
+                <title>Utiliser l'option de persistance avec l'adaptateur Oracle</title>
+                <programlisting language="php"><![CDATA[
+$db = Zend_Db::factory('Oracle', array(
+    'host'       => '127.0.0.1',
+    'username'   => 'webuser',
+    'password'   => 'xxxxxxxx',
+    'dbname'     => 'test',
+    'persistent' => true
+));
+]]></programlisting>
+            </example>
 
             <para>
-                Utiliser des connexions persistantes peut mener à un trop grand nombre de
-                connexions en attente (idle), ce qui causera plus de problème que cela n'est sensé
-                en résoudre.
+                Notez cependant qu'utiliser des connexions persistantes peut mener à un trop grand
+                nombre de connexions en attente (idle), ce qui causera plus de problème que cela
+                n'est sensé en résoudre.
             </para>
 
             <para>
@@ -1669,6 +1683,11 @@ $db->closeConnection();
                 des connexions persistantes, il se peut que vous accédiez à des données ne faisant
                 pas partie de votre session de travail avec le SGBD, ce qui peut s'avérer
                 dangereux.
+            </para>
+
+            <para>
+                Actuellement, seuls les adpatateurs Oracle, DB2 et PDO (si spécifiés par PHP)
+                supportent la persistance avec Zend_Db.
             </para>
         </note>
     </sect2>

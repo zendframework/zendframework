@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15733 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.core-functionality.bootstrap-bootstrapper">
     <title>Zend_Application_Bootstrap_Bootstrapper</title>
@@ -31,15 +32,14 @@
                     <entry><type>Void</type></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <varname>$application</varname>: <emphasis>requis</emphasis>.
+                            <varname>$application</varname>&#160;: <emphasis>requis</emphasis>.
                             Accepte un argument instance de <classname>Zend_Application</classname>
                             ou de <classname>Zend_Application_Bootstrap_Bootstrapper</classname>
                         </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
-                        Constructeur. Accepte un argument instance de 
-                        <classname>Zend_Application</classname>ou de
-                        <classname>Zend_Application_Bootstrap_Bootstrapper</classname>
+                        Constructeur. Accepte un argument qui peut être une instance de
+                        <classname>Zend_Application</classname> ou un autre objet bootstrap.
                     </para></entry>
                 </row>
 
@@ -48,7 +48,7 @@
                     <entry><classname>Zend_Application_Bootstrap_Bootstrapper</classname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <varname>$options</varname>: <emphasis>requis</emphasis>.
+                            <varname>$options</varname>&#160;: <emphasis>requis</emphasis>.
                             Tableaux d'options à configurer.
                         </para></listitem>
                     </itemizedlist></entry>
@@ -66,7 +66,7 @@
                     </entry>
                     <entry>N/A</entry>
                     <entry><para>
-                        Récupère l'objet d'application passé au contructeur.
+                        Récupère l'objet d'application passé au constructeur.
                     </para></entry>
                 </row>
 
@@ -75,7 +75,7 @@
                     <entry><type>String</type></entry>
                     <entry>N/A</entry>
                     <entry><para>
-                        Récupère la chaine d'environnement enregistrée dans l'objet
+                        Récupère la chaîne d'environnement enregistrée dans l'objet
                         d'application.
                     </para></entry>
                 </row>
@@ -96,14 +96,14 @@
                     </entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <varname>$resource</varname>: <emphasis>optionnel</emphasis>.
+                            <varname>$resource</varname>&#160;: <emphasis>optionnel</emphasis>.
                         </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
                         Si <varname>$resource</varname> est vide, exécute toutes les ressources.
-                        Si une chaine est passée, exécute uniquement la ressource considérée.
-                        Enfin, si un tableau de chaines est passé, toutes les ressources
-                        représentées par ses chaines sont exécutées.
+                        Si une chaîne est passée, exécute uniquement la ressource considérée.
+                        Enfin, si un tableau de chaînes est passé, toutes les ressources
+                        représentées par ses chaînes sont exécutées.
                     </para></entry>
                 </row>
 
@@ -112,7 +112,7 @@
                     <entry><type>Void</type></entry>
                     <entry>N/A</entry>
                     <entry><para>
-                        Définies la logique à lancer après avoir lancé le bootstrap.
+                        Définit la logique à lancer après avoir lancé le bootstrap.
                     </para></entry>
                 </row>
             </tbody>

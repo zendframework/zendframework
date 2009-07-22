@@ -1,28 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 16943 -->
 <!-- Reviewed: no -->
-<sect1 id="zend.db.table.row">
-
+<sect1 id="zend.db.table.definition">
     <title>Zend_Db_Table_Definition</title>
 
     <sect2 id="zend.db.table.definition.introduction">
-
         <title>Introduction</title>
 
         <para>
-            <classname>Zend_Db_Table_Definition</classname> est une classe qui peut être utilisée pour
-            décrire les relations et les options de configuration qui devraient être utilisées lorsque
-            <classname>Zend_Db_Table</classname> est manipulée par instantiation concrête.
+            <classname>Zend_Db_Table_Definition</classname> est une classe qui peut être
+            utilisée pour décrire les relations et les options de configuration qui devraient
+            être utilisées lorsque <classname>Zend_Db_Table</classname> est manipulée par
+            instantiation concrête.
         </para>
-
     </sect2>
-    
-    <sect2 id="zend.db.table.definition.usage">
 
+    <sect2 id="zend.db.table.definition.usage">
         <title>Utilisation de base</title>
 
         <para>
             Les options décrites dans un objet de définition sont les mêmes que celles
-            qu'utilisent les classes étendant Zend_Db_Table_Asbtract. Votre objet de définition
+            qu'utilisent les classes étendant Zend_Db_Table_Abstract. Votre objet de définition
             peut alors être passé à la classe à l'instanciation, celle-ci connaitra alors la
             définition de toutes les tables concernées.
         </para>
@@ -30,12 +28,11 @@
         <para>
             Voici un exemple d'objet de définition qui va décrire les noms des tables
             et les relations entre les objets supports de ces tables.
-            Note: Si 'name' n'est pas précisé, la clé servira alors de nom à la table, c'est
-            le cas dans notre exemple avec 'genre'.
+            Note: Si 'name' n'est pas précisé, la clé servira alors de nom à la table,
+            c'est le cas dans notre exemple avec 'genre'.
         </para>
 
         <example id="zend.db.table.definition.example1">
-
             <title>Décrire un modèle de base de données</title>
 
             <programlisting language="php"><![CDATA[
@@ -71,13 +68,12 @@ $definition = new Zend_Db_Table_Definition(array(
         )
     ));
 ]]></programlisting>
-
         </example>
 
         <para>
             Comme vous le voyez, les mêmes options que vous utilisez en général en étendant
             Zend_Db_Table_Abstract sont présentes dans ce tableau. Cette définition va
-            <strong>persister</strong> vers toutes les tables qui seront créees par votre
+            <emphasis>persister</emphasis> vers toutes les tables qui seront créees par votre
             objet, ceci assure une isolation et un bon fonctionnement.
         </para>
 
@@ -87,11 +83,9 @@ $definition = new Zend_Db_Table_Definition(array(
             de données:
         </para>
 
-
         <example id="zend.db.table.definition.example2">
-        
             <title>Intéragir avec la définition utilisée</title>
-        
+
             <programlisting language="php"><![CDATA[
 $authorTable = new Zend_Db_Table('author', $definition);
 $authors = $authorTable->fetchAll();
@@ -109,33 +103,28 @@ foreach ($authors as $author) {
     }
 }
 ]]></programlisting>
-
         </example>
-
-
     </sect2>
 
     <sect2 id="zend.db.table.definition.advanced-usage">
-    
         <title>Utilisation avancée</title>
-        
+
         <para>
             Quelques fois vous voudriez mixer les utilisations, via la définition et
             une extension concrête de Zend_Db_Table_Abstract. Pour ce faire, omettez
-            de spécifier une définition concernant la classe concrête. 
+            de spécifier une définition concernant la classe concrête.
             Zend_Db_Table utiisera alors l'instance que vous lui passerez.
         </para>
-    
+
         <para>
-            Dans l'exemple d'après, nous allons placer une des tables sous forme de classe concrête,
-            et laisser les autres sous forme de définitions. Nous allons voir alors comment les faire
-            intéragir.
+            Dans l'exemple d'après, nous allons placer une des tables sous forme de classe
+            concrête, et laisser les autres sous forme de définitions. Nous allons voir
+            alors comment les faire intéragir.
         </para>
-    
+
         <example id="zend.db.table.definition.example3">
-        
             <title>Mixer la définition et l'extension concrête</title>
-        
+
             <programlisting language="php"><![CDATA[
 class MyBook extends Zend_Db_Table_Abstract
 {
@@ -187,10 +176,7 @@ foreach ($authors as $author) {
     }
 }
 
-]]></programlisting>    
-    
+]]></programlisting>
         </example>
-    
     </sect2>
-
 </sect1>

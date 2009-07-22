@@ -20,9 +20,9 @@
  */
 
 /**
- * @see Zend_Feed_Reader_Feed_FeedAbstract
+ * @see Zend_Feed_Reader_FeedAbstract
  */
-require_once 'Zend/Feed/Reader/Feed/FeedAbstract.php';
+require_once 'Zend/Feed/Reader/FeedAbstract.php';
 
 /**
  * @see Zend_feed_Reader_Extension_Atom_Feed
@@ -45,7 +45,7 @@ require_once 'Zend/Date.php';
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Reader_Feed_Rss extends Zend_Feed_Reader_Feed_FeedAbstract
+class Zend_Feed_Reader_Feed_Rss extends Zend_Feed_Reader_FeedAbstract
 {
     /**
      * Atom feed

@@ -41,7 +41,7 @@ class Zend_Tool_Project_Provider_Project extends Zend_Tool_Project_Provider_Abst
      *
      * @param string $path
      */
-    public function create($path)
+    public function create($path, $nameOfProfile = null, $fileOfProfile = null)
     {
         if ($path == null) {
             $path = getcwd();
@@ -64,9 +64,24 @@ class Zend_Tool_Project_Provider_Project extends Zend_Tool_Project_Provider_Abst
             throw new Zend_Tool_Framework_Client_Exception('A project already exists here');
         }
 
+        $profileData = null;
+        
+        if ($fileOfProfile != null && file_exists($fileOfProfile)) {
+            $profileData = file_get_contents($fileOfProfile);
+        }
+        
+        $storage = $this->_registry->getStorage();
+        if ($profileData == '' && $nameOfProfile != null && $storage->isEnabled()) {
+            $profileData = $storage->get('project/profiles/' . $nameOfProfile . '.xml');
+        }
+        
+        if ($profileData == '') {
+            $profileData = $this->_getDefaultProfile();
+        }
+        
         $newProfile = new Zend_Tool_Project_Profile(array(
             'projectDirectory' => $path,
-            'profileData' => $this->_getDefaultProfile()
+            'profileData' => $profileData
             ));
 
         $newProfile->loadFromData();

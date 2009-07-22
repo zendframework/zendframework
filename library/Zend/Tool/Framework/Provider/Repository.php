@@ -256,6 +256,9 @@ class Zend_Tool_Framework_Provider_Repository
     {
         $className = get_class($provider);
         $providerName = substr($className, strrpos($className, '_')+1);
+        if (substr($providerName, -8) == 'Provider') {
+            $providerName = substr($providerName, 0, strlen($providerName)-8);
+        }
         return $providerName;
     }
 

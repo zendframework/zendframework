@@ -65,9 +65,14 @@ class Zend_Tool_Framework_Client_Console
 {
 
     /**
-     * @var string
+     * @var array
      */
     protected $_configOptions = null;
+    
+    /**
+     * @var array
+     */
+    protected $_storageOptions = null;
     
     /**
      * @var Zend_Filter_Word_CamelCaseToDash
@@ -97,6 +102,12 @@ class Zend_Tool_Framework_Client_Console
         return $this;
     }
     
+    public function setStorageOptions($storageOptions)
+    {
+        $this->_storageOptions = $storageOptions;
+        return $this;
+    }
+    
     /**
      * getName() - return the name of the client, in this case 'console'
      *
@@ -114,9 +125,18 @@ class Zend_Tool_Framework_Client_Console
     protected function _preInit()
     {
         $config = $this->_registry->getConfig();
-
+        
         if ($this->_configOptions != null) {
             $config->setOptions($this->_configOptions);
+        }
+        
+        $storage = $this->_registry->getStorage();
+        
+        if ($this->_storageOptions != null && isset($this->_storageOptions['directory'])) {
+            require_once 'Zend/Tool/Framework/Client/Storage/Directory.php';
+            $storage->setAdapter(
+                new Zend_Tool_Framework_Client_Storage_Directory($this->_storageOptions['directory'])
+                );
         }
         
         // support the changing of the current working directory, necessary for some providers

@@ -49,6 +49,11 @@ class Zend_Tool_Framework_Registry implements Zend_Tool_Framework_Registry_Inter
     protected $_config = null;
     
     /**
+     * @var Zend_Tool_Framework_Client_Storage
+     */
+    protected $_storage = null;
+    
+    /**
      * @var Zend_Tool_Framework_Action_Repository
      */
     protected $_actionRepository = null;
@@ -142,6 +147,33 @@ class Zend_Tool_Framework_Registry implements Zend_Tool_Framework_Registry_Inter
         }
         
         return $this->_config;
+    }
+    
+    /**
+     * setStorage() 
+     *
+     * @param Zend_Tool_Framework_Client_Storage $storage
+     * @return Zend_Tool_Framework_Registry
+     */
+    public function setStorage(Zend_Tool_Framework_Client_Storage $storage)
+    {
+        $this->_storage = $storage;
+        return $this;
+    }
+    
+    /**
+     * getConfig()
+     *
+     * @return Zend_Tool_Framework_Client_Storage
+     */
+    public function getStorage()
+    {
+        if ($this->_storage === null) {
+            require_once 'Zend/Tool/Framework/Client/Storage.php';
+            $this->setStorage(new Zend_Tool_Framework_Client_Storage());
+        }
+        
+        return $this->_storage;
     }
     
     /**

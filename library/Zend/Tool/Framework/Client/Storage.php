@@ -46,8 +46,13 @@ class Zend_Tool_Framework_Client_Storage
         }
     }
     
-    public function setAdapter(Zend_Tool_Framework_Client_Storage_AdapterInterface $adapter)
+    public function setAdapter($adapter)
     {
+        if (is_string($adapter)) {
+            $storageAdapterClass = 'Zend_Tool_Framework_Client_Storage_' . ucfirst($adapter);
+            Zend_Loader::loadClass($storageAdapterClass);
+            $adapter = new $storageAdapterClass();
+        }
         $this->_adapter = $adapter;
     }
     
@@ -101,4 +106,12 @@ class Zend_Tool_Framework_Client_Storage
         return $this;
     }
     
+    public function getStreamUri($name)
+    {
+        if (!$this->_adapter) {
+            return false;
+        }
+        
+        return $this->_adapter->getStreamUri($name);
+    }
 }

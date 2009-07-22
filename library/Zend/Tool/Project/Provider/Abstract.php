@@ -201,6 +201,21 @@ abstract class Zend_Tool_Project_Provider_Abstract extends Zend_Tool_Framework_P
         $projectProfileFile->getContext()->save();
     }
 
+    protected function _getContentForContext(Zend_Tool_Project_Context_Interface $context, $methodName, $parameters)
+    {
+        $storage = $this->_registry->getStorage(); 
+        if (!$storage->isEnabled()) {
+            return false;
+        }
+        
+        if (!class_exists('Zend_Tool_Project_Context_Content_Engine')) {
+            require_once 'Zend/Tool/Project/Context/Content/Engine.php';
+        }
+
+        $engine = new Zend_Tool_Project_Context_Content_Engine($storage);
+        return $engine->getContent($context, $methodName, $parameters);
+    }
+    
     /**
      * _loadContextClassesIntoRegistry() - This is called by the constructor
      * so that child providers can provide a list of contexts to load into the

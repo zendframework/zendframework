@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16443 -->
+<!-- EN-Revision: 16935 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.soap.wsdl">
     <title>WSDL Zugriffsmethoden</title>
@@ -424,11 +424,14 @@ $soapMyClassType = $wsdl->getType('MyClass');
                     </para>
                 </listitem>
                 <listitem>
-                    <para>Klasse <classname>Zend_Soap_Wsdl_Strategy_ArrayOfTypeSequence</classname>:
-                    Diese Strategie erlaubt es die Rückgabeparameter mit diesen Typen zu
-                    spezifizieren: <code>int[]</code> oder <code>string[]</code>. Er kann einfache
-                    PHP Typen wie Int, String, Boolean, Float und so weiter behandeln, erlaubt aber
-                    die Spezifikation von verschachtelten Arrays oder Typen von Arrays.</para>
+                    <para>
+                        Klasse <classname>Zend_Soap_Wsdl_Strategy_ArrayOfTypeSequence</classname>:
+                        Diese Strategie erlaubt es die Rückgabeparameter mit diesen Typen zu
+                        spezifizieren: <code>int[]</code> oder <code>string[]</code>. Ab dem Zend
+                        Framework Version 1.9 können beide, sowohl einfache PHP Typen wie Int,
+                        String, Boolean, Float sowie Objekte und Arrays von Objekten behandelt
+                        werden.
+                    </para>
                 </listitem>
                 <listitem>
                     <para>Klasse <classname>Zend_Soap_Wsdl_Strategy_ArrayOfTypeComplex</classname>:

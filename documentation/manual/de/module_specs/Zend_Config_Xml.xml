@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15998 -->
+<!-- EN-Revision: 16924 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.config.adapters.xml">
     <title>Zend_Config_Xml</title>
@@ -168,6 +168,51 @@ $string = <<<EOT
 EOT;
 
 $config = new Zend_Config_Xml($string, 'staging');
+]]></programlisting>
+    </note>
+
+    <note>
+        <title>Zend_Config XML Namespace</title>
+        <para>
+            Zend_Config kommt mit seinem eigenen XML Namespace, welcher zusätzliche Funktionalität
+            beim Parsing Prozess hinzufügt. Um diese Vorteile zu verwenden, muß ein Namespace mit
+            der Namespace URI <code>http://framework.zend.com/xml/zend-config-xml/1.0/</code> im
+            Root Node der Konfiguration definiert werden.
+        </para>
+
+        <para>
+            Wenn der Namespace aktiviert ist, können PHP Konstanten in den Konfigurationsdateien
+            verwendet werden. Zusätzlich ist das <code>extends</code> Attribut in den neuen
+            Namespace gewandert und in im NULL Namespace nicht mehr erlaubt. Es wird mit ZF 2.0
+            komplett entfernt.
+        </para>
+        <programlisting language="xml"><![CDATA[
+$string = <<<EOT
+<?xml version="1.0"?>
+<config xmlns:zf="http://framework.zend.com/xml/zend-config-xml/1.0/">
+    <production>
+        <includePath><zf:const zf:name="APPLICATION_PATH"/>/library</includePath>
+        <db>
+            <adapter value="pdo_mysql"/>
+            <params>
+                <host value="db.example.com"/>
+            </params>
+        </db>
+    </production>
+    <staging zf:extends="production">
+        <db>
+            <params>
+                <host value="dev.example.com"/>
+            </params>
+        </db>
+    </staging>
+</config>
+EOT;
+
+define('APPLICATION_PATH', dirname(__FILE__));
+$config = new Zend_Config_Xml($string, 'staging');
+
+echo $config->includePath; // Ausgabe "/var/www/something/library"
 ]]></programlisting>
     </note>
 </sect1>

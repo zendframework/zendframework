@@ -47,19 +47,6 @@ require_once 'Zend/Date.php';
  */
 class Zend_Feed_Reader_Feed_Rss extends Zend_Feed_Reader_FeedAbstract
 {
-    /**
-     * Atom feed
-     *
-     * @var Zend_Feed_Reader_Feed_Atom
-     */
-    protected $_atom = null;
-
-    /**
-     * DC feed
-     *
-     * @var Zend_Feed_Reader_Extension_DublinCore_Feed
-     */
-    protected $_dc = null;
 
     /**
      * Constructor
@@ -73,17 +60,15 @@ class Zend_Feed_Reader_Feed_Rss extends Zend_Feed_Reader_FeedAbstract
         parent::__construct($dom, $type);
 
         $dublinCoreClass = Zend_Feed_Reader::getPluginLoader()->getClassName('DublinCore_Feed');
-        $this->_dc = new $dublinCoreClass($dom, $this->_data['type'], $this->_xpath);
+        $this->_extensions['DublinCore_Feed'] = new $dublinCoreClass($dom, $this->_data['type'], $this->_xpath);
         $atomClass = Zend_Feed_Reader::getPluginLoader()->getClassName('Atom_Feed');
-        $this->_atom = new $atomClass($dom, $this->_data['type'], $this->_xpath);
+        $this->_extensions['Atom_Feed'] = new $atomClass($dom, $this->_data['type'], $this->_xpath);
 
         if ($this->getType() !== Zend_Feed_Reader::TYPE_RSS_10 && $this->getType() !== Zend_Feed_Reader::TYPE_RSS_090) {
             $xpathPrefix = '/rss/channel';
         } else {
             $xpathPrefix = '/rdf:RDF/rss:channel';
         }
-        $this->_dc->setXpathPrefix($xpathPrefix);
-        $this->_atom->setXpathPrefix($xpathPrefix);
         foreach ($this->_extensions as $extension) {
             $extension->setXpathPrefix($xpathPrefix);
         }
@@ -120,7 +105,7 @@ class Zend_Feed_Reader_Feed_Rss extends Zend_Feed_Reader_FeedAbstract
         $authors = array();
 
         if (empty($authors)) {
-            $authors = $this->_dc->getAuthors();
+            $authors = $this->getExtension('DublinCore')->getAuthors();
         }
 
         if (empty($authors)) {
@@ -136,7 +121,7 @@ class Zend_Feed_Reader_Feed_Rss extends Zend_Feed_Reader_FeedAbstract
         }
 
         if (empty($authors)) {
-            $authors = $this->_atom->getAuthors();
+            $authors = $this->getExtension('Atom')->getAuthors();
         }
 
         if (empty($authors)) {
@@ -168,12 +153,12 @@ class Zend_Feed_Reader_Feed_Rss extends Zend_Feed_Reader_FeedAbstract
             $copyright = $this->_xpath->evaluate('string(/rss/channel/copyright)');
         }
 
-        if (!$copyright && !is_null($this->_dc)) {
-            $copyright = $this->_dc->getCopyright();
+        if (!$copyright && !is_null($this->getExtension('DublinCore'))) {
+            $copyright = $this->getExtension('DublinCore')->getCopyright();
         }
 
         if (empty($copyright)) {
-            $copyright = $this->_atom->getCopyright();
+            $copyright = $this->getExtension('Atom')->getCopyright();
         }
 
         if (!$copyright) {
@@ -238,11 +223,11 @@ class Zend_Feed_Reader_Feed_Rss extends Zend_Feed_Reader_FeedAbstract
         }
 
         if (!$date) {
-            $date = $this->_dc->getDate();
+            $date = $this->getExtension('DublinCore')->getDate();
         }
 
         if (!$date) {
-            $date = $this->_atom->getDateModified();
+            $date = $this->getExtension('Atom')->getDateModified();
         }
 
         if (!$date) {
@@ -274,12 +259,12 @@ class Zend_Feed_Reader_Feed_Rss extends Zend_Feed_Reader_FeedAbstract
             $description = $this->_xpath->evaluate('string(/rdf:RDF/rss:channel/rss:description)');
         }
 
-        if (!$description && !is_null($this->_dc)) {
-            $description = $this->_dc->getDescription();
+        if (!$description && !is_null($this->getExtension('DublinCore'))) {
+            $description = $this->getExtension('DublinCore')->getDescription();
         }
 
         if (empty($description)) {
-            $description = $this->_atom->getDescription();
+            $description = $this->getExtension('Atom')->getDescription();
         }
 
         if (!$description) {
@@ -309,12 +294,12 @@ class Zend_Feed_Reader_Feed_Rss extends Zend_Feed_Reader_FeedAbstract
             $id = $this->_xpath->evaluate('string(/rss/channel/guid)');
         }
 
-        if (!$id && !is_null($this->_dc)) {
-            $id = $this->_dc->getId();
+        if (!$id && !is_null($this->getExtension('DublinCore'))) {
+            $id = $this->getExtension('DublinCore')->getId();
         }
 
         if (empty($id)) {
-            $id = $this->_atom->getId();
+            $id = $this->getExtension('Atom')->getId();
         }
 
         if (!$id) {
@@ -350,12 +335,12 @@ class Zend_Feed_Reader_Feed_Rss extends Zend_Feed_Reader_FeedAbstract
             $language = $this->_xpath->evaluate('string(/rss/channel/language)');
         }
 
-        if (!$language && !is_null($this->_dc)) {
-            $language = $this->_dc->getLanguage();
+        if (!$language && !is_null($this->getExtension('DublinCore'))) {
+            $language = $this->getExtension('DublinCore')->getLanguage();
         }
 
         if (empty($language)) {
-            $language = $this->_atom->getLanguage();
+            $language = $this->getExtension('Atom')->getLanguage();
         }
 
         if (!$language) {
@@ -392,7 +377,7 @@ class Zend_Feed_Reader_Feed_Rss extends Zend_Feed_Reader_FeedAbstract
         }
 
         if (empty($link)) {
-            $link = $this->_atom->getLink();
+            $link = $this->getExtension('Atom')->getLink();
         }
 
         if (!$link) {
@@ -417,7 +402,7 @@ class Zend_Feed_Reader_Feed_Rss extends Zend_Feed_Reader_FeedAbstract
 
         $link = null;
 
-        $link = $this->_atom->getFeedLink();
+        $link = $this->getExtension('Atom')->getFeedLink();
 
         if (!$link) {
             $link = null;
@@ -459,7 +444,7 @@ class Zend_Feed_Reader_Feed_Rss extends Zend_Feed_Reader_FeedAbstract
         }
 
         if (empty($generator)) {
-            $generator = $this->_atom->getGenerator();
+            $generator = $this->getExtension('Atom')->getGenerator();
         }
 
         if (!$generator) {
@@ -491,12 +476,12 @@ class Zend_Feed_Reader_Feed_Rss extends Zend_Feed_Reader_FeedAbstract
             $title = $this->_xpath->evaluate('string(/rdf:RDF/rss:channel/rss:title)');
         }
 
-        if (!$title && !is_null($this->_dc)) {
-            $title = $this->_dc->getTitle();
+        if (!$title && !is_null($this->getExtension('DublinCore'))) {
+            $title = $this->getExtension('DublinCore')->getTitle();
         }
 
         if (!$title) {
-            $title = $this->_atom->getTitle();
+            $title = $this->getExtension('Atom')->getTitle();
         }
 
         if (!$title) {

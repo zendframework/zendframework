@@ -261,6 +261,14 @@ abstract class Zend_Feed_Reader_FeedAbstract implements Zend_Feed_Reader_FeedInt
         . 'does not exist and could not be located on a registered Extension');
     }
 
+    public function getExtension($name)
+    {
+        if (array_key_exists($name . '_Feed', $this->_extensions)) {
+            return $this->_extensions[$name . '_Feed'];
+        }
+        return null;
+    }
+
     protected function _loadExtensions()
     {
         $all = Zend_Feed_Reader::getExtensions();
@@ -270,7 +278,7 @@ abstract class Zend_Feed_Reader_FeedAbstract implements Zend_Feed_Reader_FeedInt
                 continue;
             }
             $className = Zend_Feed_Reader::getPluginLoader()->getClassName($extension);
-            $this->_extensions[$className] = new $className(
+            $this->_extensions[$extension] = new $className(
                 $this->getDomDocument(), $this->_data['type'], $this->_xpath
             );
         }

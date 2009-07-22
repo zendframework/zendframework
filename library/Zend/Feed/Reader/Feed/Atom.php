@@ -39,13 +39,6 @@ class Zend_Feed_Reader_Feed_Atom extends Zend_Feed_Reader_FeedAbstract
 {
 
     /**
-     * Atom feed
-     *
-     * @var Zend_Feed_Reader_Feed_Atom
-     */
-    protected $_atom = null;
-
-    /**
      * Constructor
      *
      * @param  Zend_Feed_Abstract $feed
@@ -56,8 +49,7 @@ class Zend_Feed_Reader_Feed_Atom extends Zend_Feed_Reader_FeedAbstract
     {
         parent::__construct($dom, $type);
         $atomClass = Zend_Feed_Reader::getPluginLoader()->getClassName('Atom_Feed');
-        $this->_atom = new $atomClass($dom, $this->_data['type'], $this->_xpath);
-        $this->_atom->setXpathPrefix('/atom:feed');
+        $this->_extensions['Atom_Feed'] = new $atomClass($dom, $this->_data['type'], $this->_xpath);
         foreach ($this->_extensions as $extension) {
             $extension->setXpathPrefix('/atom:feed');
         }
@@ -91,7 +83,7 @@ class Zend_Feed_Reader_Feed_Atom extends Zend_Feed_Reader_FeedAbstract
             return $this->_data['authors'];
         }
 
-        $people = $this->_atom->getAuthors();
+        $people = $this->getExtension('Atom')->getAuthors();
 
         $this->_data['authors'] = $people;
 
@@ -109,7 +101,7 @@ class Zend_Feed_Reader_Feed_Atom extends Zend_Feed_Reader_FeedAbstract
             return $this->_data['copyright'];
         }
 
-        $copyright = $this->_atom->getCopyright();
+        $copyright = $this->getExtension('Atom')->getCopyright();
 
         if (!$copyright) {
             $copyright = null;
@@ -131,7 +123,7 @@ class Zend_Feed_Reader_Feed_Atom extends Zend_Feed_Reader_FeedAbstract
             return $this->_data['datecreated'];
         }
 
-        $dateCreated = $this->_atom->getDateCreated();
+        $dateCreated = $this->getExtension('Atom')->getDateCreated();
 
         if (!$dateCreated) {
             $dateCreated = null;
@@ -153,7 +145,7 @@ class Zend_Feed_Reader_Feed_Atom extends Zend_Feed_Reader_FeedAbstract
             return $this->_data['datemodified'];
         }
 
-        $dateModified = $this->_atom->getDateModified();
+        $dateModified = $this->getExtension('Atom')->getDateModified();
 
         if (!$dateModified) {
             $dateModified = null;
@@ -175,7 +167,7 @@ class Zend_Feed_Reader_Feed_Atom extends Zend_Feed_Reader_FeedAbstract
             return $this->_data['description'];
         }
 
-        $description = $this->_atom->getDescription();
+        $description = $this->getExtension('Atom')->getDescription();
 
         if (!$description) {
             $description = null;
@@ -197,7 +189,7 @@ class Zend_Feed_Reader_Feed_Atom extends Zend_Feed_Reader_FeedAbstract
             return $this->_data['generator'];
         }
 
-        $generator = $this->_atom->getGenerator();
+        $generator = $this->getExtension('Atom')->getGenerator();
 
         $this->_data['generator'] = $generator;
 
@@ -215,7 +207,7 @@ class Zend_Feed_Reader_Feed_Atom extends Zend_Feed_Reader_FeedAbstract
             return $this->_data['id'];
         }
 
-        $id = $this->_atom->getId();
+        $id = $this->getExtension('Atom')->getId();
 
         $this->_data['id'] = $id;
 
@@ -233,7 +225,7 @@ class Zend_Feed_Reader_Feed_Atom extends Zend_Feed_Reader_FeedAbstract
             return $this->_data['language'];
         }
 
-        $language = $this->_atom->getLanguage();
+        $language = $this->getExtension('Atom')->getLanguage();
 
         if (!$language) {
             $language = $this->_xpath->evaluate('string(//@xml:lang[1])');
@@ -259,7 +251,7 @@ class Zend_Feed_Reader_Feed_Atom extends Zend_Feed_Reader_FeedAbstract
             return $this->_data['link'];
         }
 
-        $link = $this->_atom->getLink();
+        $link = $this->getExtension('Atom')->getLink();
 
         $this->_data['link'] = $link;
 
@@ -277,7 +269,7 @@ class Zend_Feed_Reader_Feed_Atom extends Zend_Feed_Reader_FeedAbstract
             return $this->_data['feedlink'];
         }
 
-        $link = $this->_atom->getFeedLink();
+        $link = $this->getExtension('Atom')->getFeedLink();
 
         $this->_data['feedlink'] = $link;
 
@@ -295,7 +287,7 @@ class Zend_Feed_Reader_Feed_Atom extends Zend_Feed_Reader_FeedAbstract
             return $this->_data['title'];
         }
 
-        $title = $this->_atom->getTitle();
+        $title = $this->getExtension('Atom')->getTitle();
 
         $this->_data['title'] = $title;
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16721 -->
+<!-- EN-Revision: 16968 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.reader">
     <title>Zend_Feed_Reader</title>
@@ -712,9 +712,21 @@ if(isset($links->atom)) {
                         <entry><methodname>getExtensions()</methodname></entry>
 
                         <entry>
-                            Returns an array of non-Core Extension objects loaded for
+                            Returns an array of all Extension objects loaded for
                             the current feed (note: both feed-level and entry-level Extensions
                             exist, and only feed-level Extensions are returned here).
+                            The array keys are of the form {ExtensionName}_Feed.
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>getExtension(string $name)</methodname></entry>
+
+                        <entry>
+                            Returns an Extension object for the feed registered under the
+                            provided name. This allows more fine-grained access to
+                            Extensions which may otherwise be hidden within the implementation
+                            of the standard API methods.
                         </entry>
                     </row>
 
@@ -973,10 +985,21 @@ if(isset($links->atom)) {
                         <entry><methodname>getExtensions()</methodname></entry>
 
                         <entry>
-                            Returns an array of non-Core Extension objects loaded for
+                            Returns an array of all Extension objects loaded for
                             the current entry (note: both feed-level and entry-level
                             Extensions exist, and only entry-level Extensions are returned
-                            here).
+                            here). The array keys are in the form {ExtensionName}_Entry.
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>getExtension(string $name)</methodname></entry>
+
+                        <entry>
+                            Returns an Extension object for the entry registered under the
+                            provided name. This allows more fine-grained access to
+                            Extensions which may otherwise be hidden within the implementation
+                            of the standard API methods.
                         </entry>
                     </row>
 
@@ -1044,7 +1067,8 @@ if(isset($links->atom)) {
                     <row>
                         <entry>DublinCore (Feed and Entry)</entry>
 
-                        <entry>Implements support for both Dublin Core 1.0 and 1.1</entry>
+                        <entry>Implements support for Dublin Core Metadata Element Set 1.0
+                        and 1.1 </entry>
                     </row>
 
                     <row>
@@ -1062,13 +1086,26 @@ if(isset($links->atom)) {
                     <row>
                         <entry>Slash</entry>
 
-                        <entry>todo</entry>
+                        <entry>Implements support for the Slash RSS 1.0 module</entry>
                     </row>
 
                     <row>
                         <entry>WellFormedWeb</entry>
 
-                        <entry>todo</entry>
+                        <entry>Implements support for the Well Formed Web CommentAPI 1.0</entry>
+                    </row>
+
+                    <row>
+                        <entry>Thread</entry>
+
+                        <entry>Implements support for Atom Threading Extensions as described
+                        in RFC 4685</entry>
+                    </row>
+
+                    <row>
+                        <entry>Podcast</entry>
+
+                        <entry>Implements support for the Podcast 1.0 DTD from Apple</entry>
                     </row>
                 </tbody>
             </tgroup>
@@ -1078,7 +1115,7 @@ if(isset($links->atom)) {
             The Core Extensions are somewhat special since they are extremely
             common and multi-faceted. For example, we have a Core Extension for Atom.
             Atom is implemented as an Extension (not just a base class) because it
-            doubles as a valid <acronym>RSS</acronym> Extension - you can insert
+            doubles as a valid <acronym>RSS</acronym> module - you can insert
             Atom elements into <acronym>RSS</acronym> feeds. I've even seen
             <acronym>RDF</acronym> feeds which use a lot of Atom in place of more
             common Extensions like Dublin Core.
@@ -1087,10 +1124,17 @@ if(isset($links->atom)) {
         <table>
             <title>Non-Core Extensions (must register manually)</title>
 
-            <tgroup cols="1">
+            <tgroup cols="2">
                 <tbody>
                     <row>
-                        <entry>At present, no non-Core Extensions are distributed.</entry>
+                        <entry>Syndication</entry>
+                        <entry>Implements Syndication 1.0 support for RSS feeds</entry>
+                    </row>
+                    <row>
+                        <entry>CreativeCommons</entry>
+                        <entry>A RSS module that adds an element at the &lt;channel&gt;
+                        or &lt;item&gt; level that specifies which Creative Commons license
+                        applies.</entry>
                     </row>
                 </tbody>
             </tgroup>
@@ -1101,7 +1145,8 @@ if(isset($links->atom)) {
             <classname>Zend_Feed_Reader</classname> by default. If you want to
             use them, you'll need to tell
             <classname>Zend_Feed_Reader</classname> to load them in advance of
-            importing a feed.
+            importing a feed. Additional non-Core Extensions will be included
+            in future iterations of the component.
         </para>
 
         <para>
@@ -1116,20 +1161,31 @@ if(isset($links->atom)) {
         </para>
 
         <programlisting language="php"><![CDATA[
-Zend_Feed_Reader::registerExtension('Slash');
+Zend_Feed_Reader::registerExtension('Syndication');
 $feed = Zend_Feed_Reader::import('http://rss.slashdot.org/Slashdot/slashdot');
-$commentsForLastEntry = $feed->current()->getCommentCount();
+$updatePeriod = $feed->current()->getUpdatePeriod();
 ]]></programlisting>
 
         <para>
-            In the simple example above, we checked how many comments were made
-            on an entry using the <methodname>getCommentCount()</methodname>
+            In the simple example above, we checked how frequently a feed is being updated
+            using the <methodname>getUpdatePeriod()</methodname>
             method. Since it's not part of
             <classname>Zend_Feed_Reader</classname>'s core <acronym>API</acronym>, it could only be
-            a method supported by the newly registered Slash Extension (indeed
-            Slash was invented at Slashdot as an <acronym>RDF</acronym> Site Summary module and is
-            now fairly popular).
+            a method supported by the newly registered Syndication Extension.
         </para>
+
+        <para>
+            As you can also notice, the new methods from Extensions are accessible from the main
+            <acronym>API</acronym> using PHP's magic methods. As an alternative, you can also
+            directly access any Extension object for a similar result as seen below.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+Zend_Feed_Reader::registerExtension('Syndication');
+$feed = Zend_Feed_Reader::import('http://rss.slashdot.org/Slashdot/slashdot');
+$syndication = $feed->getExtension('Syndication');
+$updatePeriod = $syndication->getUpdatePeriod();
+]]></programlisting>
 
         <sect3 id="zend.feed.reader.extending.feed">
             <title>Writing Zend_Feed_Reader Extensions</title>
@@ -1216,7 +1272,7 @@ class My_FeedReader_Extension_JungleBooks_Entry
         if (!$isbn) {
             $isbn = null;
         }
-        $this->_data['isbn'] = $title;
+        $this->_data['isbn'] = $isbn;
         return $this->_data['isbn'];
     }
 

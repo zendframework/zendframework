@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16883 -->
+<!-- EN-Revision: 16952 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.translate.additional">
 
@@ -33,7 +33,7 @@
 
         <example id="zend.translate..additional.options.example">
             <title>Benutzen von Übersetzungsoptionen</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Definiere ':' als Trenner für die Quelldatei der Übersetzung
 $options = array('delimiter' => ':');
 $translate = new Zend_Translate(
@@ -75,7 +75,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                             Das kann statt dem Erstellen einer neuen Instanz verwendet werden wenn
                             neue Übersetzungsdaten gelesen werden
                         </entry>
-                        <entry><emphasis role="strong">false</emphasis></entry>
+                        <entry><emphasis>false</emphasis></entry>
                     </row>
                     <row>
                         <entry>disableNotices</entry>
@@ -85,7 +85,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                             vorhandenen Übersetzungen ausgeschaltet. Man sollte diese Option in
                             einer Produktionsumgebung auf true setzen
                         </entry>
-                        <entry><emphasis role="strong">false</emphasis></entry>
+                        <entry><emphasis>false</emphasis></entry>
                     </row>
                     <row>
                         <entry>ignore</entry>
@@ -99,7 +99,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                             Dateien wie z.B. <code>'tmpImages'</code> und <code>'tmpFiles'</code>,
                             sowie alle darunter liegenden Verzeichnisse, werden ignoriert.
                         </entry>
-                        <entry><emphasis role="strong">.</emphasis></entry>
+                        <entry><emphasis>.</emphasis></entry>
                     </row>
                     <row>
                         <entry>log</entry>
@@ -108,7 +108,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                             Eine Instanz von <classname>Zend_Log</classname> wohin nicht
                             übersetzbare Meldungen und Notizen geschrieben werden
                         </entry>
-                        <entry><emphasis role="strong">null</emphasis></entry>
+                        <entry><emphasis>null</emphasis></entry>
                     </row>
                     <row>
                         <entry>logMessage</entry>
@@ -116,7 +116,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                         <entry>
                             Die Nachricht die in das Log geschrieben werden soll
                         </entry>
-                        <entry><emphasis role="strong">Untranslated message within '%locale%': %message%</emphasis></entry>
+                        <entry><emphasis>Untranslated message within '%locale%': %message%</emphasis></entry>
                     </row>
                     <row>
                         <entry>logUntranslated</entry>
@@ -125,7 +125,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                             Wenn diese Option auf true gesetzt wird, werden alle Nachrichten Id's
                             die nicht übersetzt werden können in das angehängte Log geschrieben
                         </entry>
-                        <entry><emphasis role="strong">false</emphasis></entry>
+                        <entry><emphasis>false</emphasis></entry>
                     </row>
                     <row>
                         <entry>scan</entry>
@@ -138,7 +138,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                             wird das Gebietsschema im Dateinamen gesucht. Siehe
                             <xref linkend="zend.translate.using.detection" /> für Details
                         </entry>
-                        <entry><emphasis role="strong">null</emphasis></entry>
+                        <entry><emphasis>null</emphasis></entry>
                     </row>
                     <row>
                         <entry>delimiter</entry>
@@ -147,7 +147,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                             Definiert welches Zeichen als Trenner für Quelle und Übersetzung
                             verwendet wird
                         </entry>
-                        <entry><emphasis role="strong">;</emphasis></entry>
+                        <entry><emphasis>;</emphasis></entry>
                     </row>
                     <row>
                         <entry>enclosure</entry>
@@ -156,7 +156,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                             Definiert die maximale Länge einer CSV Zeile. Auf 0 gesetzt wird sie
                             automatisch erkannt
                         </entry>
-                        <entry><emphasis role="strong">"</emphasis></entry>
+                        <entry><emphasis>"</emphasis></entry>
                     </row>
                     <row>
                         <entry>length</entry>
@@ -165,7 +165,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                             Definiert das zu verwendende Einschließungszeichen. Standard ist das
                             doppelte Hochkomma
                         </entry>
-                        <entry><emphasis role="strong">0</emphasis></entry>
+                        <entry><emphasis>0</emphasis></entry>
                     </row>
                 </tbody>
             </tgroup>
@@ -229,7 +229,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
 
         <example id="zend.translate.additional.languages.example">
             <title>Handhabung von Sprachen mit Adaptern</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // gibt die aktuell gesetzte Sprache zurück
 $actual = $translate->getLocale();
 
@@ -272,7 +272,7 @@ if ($translate->isAvailable("fr")) {
 
             <example id="zend.translate.additional.languages.automatic.example">
                 <title>Automatische Erkennen der Sprache</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Angenommen der Browser gibt folgende Spracheneinstellungen zurück:
 // HTTP_ACCEPT_LANGUAGE = "de_AT=1;fr=1;en_US=0.8";
 
@@ -335,7 +335,7 @@ $translate->setLocale('it_IT');
                 verwenden will.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // In der Bootstrap Datei
 $locale = new Zend_Locale();
 Zend_Registry::set('Zend_Locale', $locale);
@@ -383,7 +383,7 @@ $translate->getLocale();
 
         <example id="zend.translate.additional.languages.directory.example">
             <title>Scannen nach Quellen in einer Verzeichnisstruktur</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Angenommen wir haben die folgende Struktur
 //  /language/
 //  /language/login/login.tmx
@@ -440,7 +440,7 @@ $translate = new Zend_Translate('tmx', '/language');
 
             <example id="zend.translate.additional.detection.directory.example">
                 <title>Verzeichnisse nach Sprachen durchsuchen</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Angenommen wir haben die folgende Struktur
 //  /language/
 //  /language/de/login/login.mo
@@ -493,7 +493,7 @@ $translate = new Zend_Translate(
 
             <example id="zend.translate.additional.detection.filename.example">
                 <title>Suchen nach Sprachen im Dateinamen</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Angenommen wir haben die folgende Struktur
 //  /language/
 //  /language/login/login_en.mo
@@ -622,7 +622,7 @@ $translate = new Zend_Translate(
 
         <example id="zend.translate.additional.istranslated.example">
             <title>Prüfen ob ein Text übersetzbar ist</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $english = array(
     'message1' => 'Nachricht 1',
     'message2' => 'Nachricht 2',
@@ -666,7 +666,7 @@ if ($translate->isTranslated('message1', false, 'de')) {
 
         <example id="zend.translate.additional.logging.example">
             <title>Übersetzungen loggen</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate('gettext', $path, 'de');
 
 // Eine Log Instanz erstellen
@@ -714,7 +714,7 @@ $translate->translate('unbekannter String');
 
         <example id="zend.translate.additional.logging.example2">
             <title>Selbstdefinierte Logmeldungen</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate('gettext', $path, 'de');
 
 // Eine Loginstanz erstellen
@@ -779,7 +779,7 @@ $translate->translate('unknown string');
 
         <example id="zend.translate.additional.sourcedata.example">
             <title>Handhabung von Quelldaten</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // gibt alle bekannten Übersetzungs Ids zurück
 $messageIds = $translate->getMessageIds();
 print_r($messageIds);

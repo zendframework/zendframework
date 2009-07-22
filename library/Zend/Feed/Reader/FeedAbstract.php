@@ -157,6 +157,36 @@ abstract class Zend_Feed_Reader_FeedAbstract implements Zend_Feed_Reader_FeedInt
     }
 
     /**
+     * Get feed as xml
+     *
+     * @return string
+     */
+    public function saveXml()
+    {
+          return $this->getDomDocument()->saveXml();
+    }
+
+    /**
+     * Get the DOMElement representing the items/feed element
+     *
+     * @return DOMElement
+     */
+    public function getElement()
+    {
+          return $this->getDomDocument()->documentElement;
+    }
+
+    /**
+     * Get the DOMXPath object for this feed
+     *
+     * @return DOMXPath
+     */
+    public function getXpath()
+    {
+          return $this->_xpath;
+    }
+
+    /**
      * Get the feed type
      *
      * @return string

@@ -128,8 +128,9 @@ abstract class Zend_Feed_Reader_EntryAbstract
      */
     public function saveXml()
     {
-        $dom = new DOMDocument();
-        $dom->importNode($this->getElement(), true);
+        $dom = new DOMDocument('1.0', $this->getEncoding());
+        $entry = $dom->importNode($this->getElement(), true);
+        $dom->appendChild($entry);
         return $dom->saveXml();
     }
 
@@ -220,7 +221,7 @@ abstract class Zend_Feed_Reader_EntryAbstract
             }
             $className = Zend_Feed_Reader::getPluginLoader()->getClassName($extension);
             $this->_extensions[$className] = new $className(
-                $this->getEntryElement(), $this->_entryKey, $this->_data['type']
+                $this->getElement(), $this->_entryKey, $this->_data['type']
             );
         }
     }

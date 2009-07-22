@@ -314,7 +314,7 @@ class Zend_Cache_Frontend_Page extends Zend_Cache_Core
         $headersList = headers_list();
         foreach($this->_specificOptions['memorize_headers'] as $key=>$headerName) {
             foreach ($headersList as $headerSent) {
-                $tmp = split(':', $headerSent);
+                $tmp = explode(':', $headerSent);
                 $headerSentName = trim(array_shift($tmp));
                 if (strtolower($headerName) == strtolower($headerSentName)) {
                     $headerSentValue = trim(implode(':', $tmp));

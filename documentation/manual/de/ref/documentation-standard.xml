@@ -2,13 +2,13 @@
 <!-- EN-Revision: 16834 -->
 <!-- Reviewed: no -->
 <appendix id="doc-standard">
-    <title>Zend Framework Documentation Standard</title>
+    <title>Zend Framework Dokumentations Standard</title>
 
     <sect1 id="doc-standard.overview">
-        <title>Overview</title>
+        <title>Übersicht</title>
 
         <sect2 id="doc-standard.overview.scope">
-            <title>Scope</title>
+            <title>Ziele</title>
 
             <para>
                 This document provides guidelines for creation of the end-user

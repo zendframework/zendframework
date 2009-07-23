@@ -294,16 +294,23 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
         // Handle 100 and 101 responses internally by restarting the read again
         if ($statusCode == 100 || $statusCode == 101) return $this->read();
 
+        // Check headers to see what kind of connection / transfer encoding we have
+        $headers = Zend_Http_Response::extractHeaders($response);
+        
         /**
          * Responses to HEAD requests and 204 or 304 responses are not expected
          * to have a body - stop reading here
          */
         if ($statusCode == 304 || $statusCode == 204 ||
-            $this->method == Zend_Http_Client::HEAD) return $response;
+            $this->method == Zend_Http_Client::HEAD) {
 
-        // Check headers to see what kind of connection / transfer encoding we have
-        $headers = Zend_Http_Response::extractHeaders($response);
-
+            // Close the connection if requested to do so by the server
+            if (isset($headers['connection']) && $headers['connection'] == 'close') {
+                $this->close();
+            }    
+            return $response;
+        }
+        
         // If we got a 'transfer-encoding: chunked' header
         if (isset($headers['transfer-encoding'])) {
             if ($headers['transfer-encoding'] == 'chunked') {
@@ -344,6 +351,7 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
                 } while ($chunksize > 0);
 
             } else {
+                $this->close();
                 throw new Zend_Http_Client_Adapter_Exception('Cannot handle "' .
                     $headers['transfer-encoding'] . '" transfer encoding');
             }

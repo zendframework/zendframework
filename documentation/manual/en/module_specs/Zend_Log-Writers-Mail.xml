@@ -91,7 +91,7 @@ $layout = new Zend_Layout();
 
 // Create a formatter that wraps the entry in a listitem tag.
 $layoutFormatter = new Zend_Log_Formatter_Simple(
-    '<li>' . Zend_Layout::DEFAULT_FORMAT . '</li>'
+    '<li>' . Zend_Log_Formatter_Simple::DEFAULT_FORMAT . '</li>'
 );
 
 $writer = new Zend_Log_Writer_Mail($mail, $layout);

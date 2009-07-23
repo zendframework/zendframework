@@ -105,7 +105,7 @@ class Zend_Http_Client_Adapter_Proxy extends Zend_Http_Client_Adapter_Socket
                 $this->close();
                 require_once 'Zend/Http/Client/Adapter/Exception.php';
                 throw new Zend_Http_Client_Adapter_Exception(
-                    'Unable to Connect to proxy server ' . $host . ':' . $port . '. Error #' . $errno . ': ' . $errstr);
+                    "Unable to Connect to proxy server $host:$port. Error #$errno: $errstr");
             }
 
             // Set the stream timeout

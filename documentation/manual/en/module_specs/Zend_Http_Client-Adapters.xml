@@ -31,12 +31,12 @@
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_Http_Client_Adapter_Test</classname>
+                        <classname>Zend_Http_Client_Adapter_Curl</classname>
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_Http_Client_Adapter_Curl</classname>
+                        <classname>Zend_Http_Client_Adapter_Test</classname>
                     </para>
                 </listitem>
             </itemizedlist>
@@ -48,7 +48,7 @@
             a string containing the adapter's name (eg. 'Zend_Http_Client_Adapter_Socket')
             or to a variable holding an adapter object (eg. <code>
             new Zend_Http_Client_Adapter_Test</code>). You can also set the
-            adapter later, using the Zend_Http_Client->setConfig() method.
+            adapter later, using the <classname>Zend_Http_Client->setConfig()</classname> method.
         </para>
     </sect2>
 
@@ -168,6 +168,93 @@ $response = $client->request();
         <para>
             <code>fsockopen('tls://www.example.com', 443)</code>
         </para>
+        
+        <sect3 id="zend.http.client.adapters.socket.streamcontext">
+            <title>Customizing and accessing the Socket adapter stream context</title>
+            <para>
+                Starting from Zend Framework 1.9, <classname>Zend_Http_Client_Adapter_Socket</classname> 
+                provides direct access to the underlying <ulink url="http://php.net/manual/en/stream.contexts.php">stream context</ulink>
+                used to connect to the remote server. This allows the user to pass 
+                specific options and parameters to the TCP stream, and to the SSL wrapper in
+                case of HTTPS connections.
+            </para>
+                        
+            <para>
+                You can access the stream context using the following methods of <classname>Zend_Http_Client_Adapter_Socket</classname>:
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            <firstterm><classname>setStreamContext($context)</classname></firstterm>
+	                        Sets the stream context to be used by the adapter. Can accept either
+	                        a stream context resource created using the 
+	                        <ulink url="http://php.net/manual/en/function.stream-context-create.php"><classname>stream_context_create()</classname></ulink>
+	                        PHP function, or an array of stream context options, in the same format provided to this function. 
+	                        Providing an array will create a new stream context using these options, and set it.
+	                    </para>
+	                </listitem>
+	                <listitem>
+	                    <para>
+	                        <firstterm><classname>getStreamContext()</classname></firstterm>
+	                        Get the stream context of the adapter. If no stream context was set, 
+	                        will create a default stream context and return it. You can then set
+	                        or get the value of different context options using regular PHP stream
+	                        context functions.
+	                    </para>
+	                </listitem>
+	            </itemizedlist>    
+            </para>
+            <example id="zend.http.client.adapters.socket.streamcontext.example-1">
+            <title>Setting stream context options for the Socket adapter</title>
+            <programlisting language="php"><![CDATA[
+// Array of options
+$options = array(
+    'socket' => array(  
+        // Bind local socket side to a specific interface
+        'bindto' => '10.1.2.3:50505'
+    ),
+    'ssl' => array(
+        // Verify server side certificate, 
+        // do not accept invalid or self-signed SSL certificates
+        'verify_peer' => true,
+        'allow_self_signed' => false,
+        
+        // Capture the peer's certificate
+        'capture_peer_cert' => true
+    )
+);
+
+// Create an adapter object and attach it to the HTTP client
+$adapter = new Zend_Http_Client_Adapter_Socket();
+$client = new Zend_Http_Client();
+$client->setAdapter($adapter);
+
+// Method 1: pass the options array to setStreamContext()
+$adapter->setStreamContext($options);
+
+// Method 2: create a stream context and pass it to setStreamContext()
+$context = stream_context_create($options);
+$adapter->setStreamContext($context);
+
+// Method 3: get the default stream context and set the options on it
+$context = $adapter->getStreamContext();
+stream_context_set_option($context, $options);
+
+// Now, preform the request
+$response = $client->request();
+
+// If everything went well, you can now access the context again 
+$opts = stream_context_get_options($adapter->getStreamContext());
+echo $opts['ssl']['peer_certificate'];
+]]></programlisting>
+        </example>
+            <note>
+                Note that you must set any stream context options before using the adapter
+                to preform actual requests. If no context is set before preforming HTTP requests
+                with the Socket adapter, a default stream context will be created. This context
+                resource could be accessed after preforming any requests using the 
+                <classname>getStreamContext()</classname> method. 
+            </note>
+        </sect3>
     </sect2>
 
     <sect2 id="zend.http.client.adapters.proxy">
@@ -271,6 +358,69 @@ $client = new Zend_Http_Client('http://www.example.com', $config);
             allows you to easily write your application in a way that allows a
             proxy to be used optionally, according to a configuration parameter.
         </para>
+        
+        <note>
+            Since the proxy adapter inherits from <classname>Zend_Http_Client_Adapter_Socket</classname>,
+            you can use the stream context access method (see <xref linkend="zend.http.client.adapters.socket.streamcontext" />)
+            to set stream context options on Proxy connections as demonstrated above.
+        </note>
+    </sect2>
+
+    <sect2 id="zend.http.client.adapters.curl">
+        <title>The cURL Adapter</title>
+        <para>
+            cURL is a standard HTTP client library that is distributed with many
+            operating systems and can be used in PHP via the cURL extension. It
+            offers functionality for many special cases which can occur for a HTTP
+            client and make it a perfect choice for a HTTP adapter. It supports
+            secure connections, proxy, all sorts of authentication mechanisms
+            and shines in applications that move large files around between servers.
+        </para>
+
+        <example id="zend.http.client.adapters.curl.example-1">
+            <title>Setting cURL options</title>
+            <programlisting language="php"><![CDATA[
+$config = array(
+    'adapter'   => 'Zend_Http_Client_Adapter_Curl',
+    'curloptions' => array(CURLOPT_FOLLOWLOCATION => true),
+);
+$client = new Zend_Http_Client($uri, $config);
+]]></programlisting>
+        </example>
+
+        <para>
+            By default the cURL adapter is configured to behave exactly like
+            the Socket Adapter and it also accepts the same configuration parameters
+            as the Socket and Proxy adapters. You can also change the cURL options by either specifying
+            the 'curloptions' key in the constructor of the adapter or by calling
+            <code>setCurlOption($name, $value)</code>. The <code>$name</code> key
+            corresponds to the CURL_* constants of the cURL extension. You can
+            get access to the Curl handle by calling <code>$adapter->getHandle();</code>
+        </para>
+
+        <example id="zend.http.client.adapters.curl.example-2">
+            <title>Transfering Files by Handle</title>
+
+            <para>
+                You can use cURL to transfer very large files over HTTP by filehandle.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$putFileSize   = filesize("filepath");
+$putFileHandle = fopen("filepath", "r");
+
+$adapter = new Zend_Http_Client_Adapter_Curl();
+$client = new Zend_Http_Client();
+$client->setAdapter($adapter);
+$adapter->setConfig(array(
+    'curloptions' => array(
+        CURLOPT_INFILE => $putFileHandle,
+        CURLOPT_INFILESIZE => $putFileSize
+    )
+));
+$client->request("PUT");
+]]></programlisting>
+        </example>
     </sect2>
 
     <sect2 id="zend.http.client.adapters.test">
@@ -396,63 +546,6 @@ $adapter->addResponse(
             the HTTP client containing the adapter into your object under test
             and test its behavior.
         </para>
-    </sect2>
-
-<sect2 id="zend.http.client.adapters.curl">
-        <title>The cURL Adapter</title>
-        <para>
-            cURL is a standard HTTP client library that is distributed with many
-            operating systems and can be used in PHP via the cURL extension. It
-            offers functionality for many special cases which can occur for a HTTP
-            client and make it a perfect choice for a HTTP adapter. It supports
-            secure connections, proxy, all sorts of authentication mechanisms
-            and shines in applications that move large files around between servers.
-        </para>
-
-        <example id="zend.http.client.adapters.curl.example-1">
-            <title>Setting cURL options</title>
-            <programlisting language="php"><![CDATA[
-$config = array(
-    'adapter'   => 'Zend_Http_Client_Adapter_Curl',
-    'curloptions' => array(CURLOPT_FOLLOWLOCATION => true),
-);
-$client = new Zend_Http_Client($uri, $config);
-]]></programlisting>
-        </example>
-
-        <para>
-            By default the cURL adapter is configured to behave exactly like
-            the Socket Adapter and it also accepts the same configuration parameters
-            as the Socket and Proxy adapters. You can also change the cURL options by either specifying
-            the 'curloptions' key in the constructor of the adapter or by calling
-            <code>setCurlOption($name, $value)</code>. The <code>$name</code> key
-            corresponds to the CURL_* constants of the cURL extension. You can
-            get access to the Curl handle by calling <code>$adapter->getHandle();</code>
-        </para>
-
-        <example id="zend.http.client.adapters.curl.example-2">
-            <title>Transfering Files by Handle</title>
-
-            <para>
-                You can use cURL to transfer very large files over HTTP by filehandle.
-            </para>
-
-            <programlisting language="php"><![CDATA[
-$putFileSize   = filesize("filepath");
-$putFileHandle = fopen("filepath", "r");
-
-$adapter = new Zend_Http_Client_Adapter_Curl();
-$client = new Zend_Http_Client();
-$client->setAdapter($adapter);
-$adapter->setConfig(array(
-    'curloptions' => array(
-        CURLOPT_INFILE => $putFileHandle,
-        CURLOPT_INFILESIZE => $putFileSize
-    )
-));
-$client->request("PUT");
-]]></programlisting>
-        </example>
     </sect2>
 
     <sect2 id="zend.http.client.adapters.extending">

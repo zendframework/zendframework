@@ -2,6 +2,8 @@
 
 require_once dirname(__FILE__) . '/SocketTest.php';
 
+require_once 'Zend/Http/Client/Adapter/Proxy.php';
+
 /**
  * Zend_Http_Client_Adapter_Proxy test suite.
  *
@@ -64,7 +66,7 @@ class Zend_Http_Client_ProxyAdapterTest extends Zend_Http_Client_SocketTest
 		    parent::setUp();
 
 		} else {
-                        $this->markTestSkipped("Zend_Http_Client proxy server tests are not enabled in TestConfiguration.php");
+            $this->markTestSkipped("Zend_Http_Client proxy server tests are not enabled in TestConfiguration.php");
 		}
 	}
 	

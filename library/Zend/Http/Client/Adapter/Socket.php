@@ -76,6 +76,13 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
     protected $method = null;
 
     /**
+     * Stream context
+     * 
+     * @var resource
+     */
+    protected $_context = null;
+    
+    /**
      * Adapter constructor, currently empty. Config is set using setConfig()
      *
      */
@@ -100,6 +107,54 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
             $this->config[strtolower($k)] = $v;
         }
     }
+    
+    /**
+     * Set the stream context for the TCP connection to the server
+     * 
+     * Can accept either a pre-existing stream context resource, or an array
+     * of stream options, similar to the options array passed to the 
+     * stream_context_create() PHP function. In such case a new stream context
+     * will be created using the passed options.
+     * 
+     * @since  Zend Framework 1.9
+     * 
+     * @param  mixed $context Stream context or array of context options
+     * @return Zend_Http_Client_Adapter_Socket
+     */
+    public function setStreamContext($context)
+    {
+        if (is_resource($context) && get_resource_type($context) == 'stream-context') {
+            $this->_context = $context;
+            
+        } elseif (is_array($context)) {
+            $this->_context = stream_context_create($context);
+            
+        } else {
+            // Invalid parameter
+            require_once 'Zend/Http/Client/Adapter/Exception.php';
+            throw new Zend_Http_Client_Adapter_Exception(
+                "Expecting either a stream context resource or array, got " . gettype($context)
+            );
+        }
+        
+        return $this;
+    }
+    
+    /**
+     * Get the stream context for the TCP connection to the server. 
+     * 
+     * If no stream context is set, will create a default one. 
+     * 
+     * @return resource
+     */
+    public function getStreamContext()
+    {
+        if (! $this->_context) {
+            $this->_context = stream_context_create();
+        }
+        
+        return $this->_context;
+    }
 
     /**
      * Connect to the remote server
@@ -121,7 +176,7 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
 
         // Now, if we are not connected, connect
         if (! is_resource($this->socket) || ! $this->config['keepalive']) {
-            $context = stream_context_create();
+            $context = $this->getStreamContext();
             if ($secure) {
                 if ($this->config['sslcert'] !== null) {
                     if (! stream_context_set_option($context, 'ssl', 'local_cert',
@@ -148,6 +203,7 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
                                                   (int) $this->config['timeout'],
                                                   $flags,
                                                   $context);
+                                                  
             if (! $this->socket) {
                 $this->close();
                 require_once 'Zend/Http/Client/Adapter/Exception.php';

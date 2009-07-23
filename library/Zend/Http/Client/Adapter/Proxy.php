@@ -87,36 +87,16 @@ class Zend_Http_Client_Adapter_Proxy extends Zend_Http_Client_Adapter_Socket
     public function connect($host, $port = 80, $secure = false)
     {
         // If no proxy is set, fall back to Socket adapter
-        if (! $this->config['proxy_host']) return parent::connect($host, $port, $secure);
+        if (! $this->config['proxy_host']) {
+            return parent::connect($host, $port, $secure);
+        } 
 
-        // Go through a proxy - the connection is actually to the proxy server
-        $host = $this->config['proxy_host'];
-        $port = $this->config['proxy_port'];
-
-        // If we are connected to the wrong proxy, disconnect first
-        if (($this->connected_to[0] != $host || $this->connected_to[1] != $port)) {
-            if (is_resource($this->socket)) $this->close();
-        }
-
-        // Now, if we are not connected, connect
-        if (! is_resource($this->socket) || ! $this->config['keepalive']) {
-            $this->socket = @fsockopen($host, $port, $errno, $errstr, (int) $this->config['timeout']);
-            if (! $this->socket) {
-                $this->close();
-                require_once 'Zend/Http/Client/Adapter/Exception.php';
-                throw new Zend_Http_Client_Adapter_Exception(
-                    "Unable to Connect to proxy server $host:$port. Error #$errno: $errstr");
-            }
-
-            // Set the stream timeout
-            if (!stream_set_timeout($this->socket, (int) $this->config['timeout'])) {
-                require_once 'Zend/Http/Client/Adapter/Exception.php';
-                throw new Zend_Http_Client_Adapter_Exception('Unable to set the connection timeout');
-            }
-
-            // Update connected_to
-            $this->connected_to = array($host, $port);
-        }
+        // Connect (a non-secure connection) to the proxy server
+        return parent::connect(
+            $this->config['proxy_host'], 
+            $this->config['proxy_port'], 
+            false
+        );
     }
 
     /**
@@ -143,7 +123,7 @@ class Zend_Http_Client_Adapter_Proxy extends Zend_Http_Client_Adapter_Socket
         $host = $this->config['proxy_host'];
         $port = $this->config['proxy_port'];
 
-        if ($this->connected_to[0] != $host || $this->connected_to[1] != $port) {
+        if ($this->connected_to[0] != "tcp://$host" || $this->connected_to[1] != $port) {
             require_once 'Zend/Http/Client/Adapter/Exception.php';
             throw new Zend_Http_Client_Adapter_Exception("Trying to write but we are connected to the wrong proxy server");
         }

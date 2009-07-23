@@ -882,7 +882,8 @@ class Zend_Soap_ServerTest extends PHPUnit_Framework_TestCase
 if (extension_loaded('soap')) {
 
 /** Local SOAP client */
-class Zend_Soap_Server_TestLocalSoapClient extends SoapClient {
+class Zend_Soap_Server_TestLocalSoapClient extends SoapClient 
+{
 	/**
 	 * Server object
 	 *
@@ -897,12 +898,14 @@ class Zend_Soap_Server_TestLocalSoapClient extends SoapClient {
 	 * @param string $wsdl
 	 * @param array $options
 	 */
-    function __construct(Zend_Soap_Server $server, $wsdl, $options) {
+    function __construct(Zend_Soap_Server $server, $wsdl, $options) 
+    {
         $this->server = $server;
     	parent::__construct($wsdl, $options);
     }
 
-    function __doRequest($request, $location, $action, $version) {
+    function __doRequest($request, $location, $action, $version, $one_way = 0) 
+    {
         ob_start();
         $this->server->handle($request);
         $response = ob_get_clean();

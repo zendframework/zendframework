@@ -33,7 +33,7 @@ class Zend_Amf_ServerTest extends PHPUnit_Framework_TestCase
         Zend_Amf_Parse_TypeLoader::resetMap();
     }
 
-    public function testDown()
+    public function tearDown()
     {
         unset($this->_server);
         //Zend_Amf_Parse_TypeLoader::resetMap();
@@ -993,7 +993,8 @@ class Zend_Amf_ServerTest extends PHPUnit_Framework_TestCase
     {
     	$this->_server->addDirectory(dirname(__FILE__)."/_files/services");
     	// should take it from the path above, not include path
-    	set_include_path(get_include_path().PATH_SEPARATOR.dirname(__FILE__));
+        $origPath = get_include_path();
+    	set_include_path($origPath.PATH_SEPARATOR.dirname(__FILE__));
     	// create a mock remoting message
         $message = new Zend_Amf_Value_Messaging_RemotingMessage();
         $message->operation = 'getMenu';
@@ -1007,6 +1008,7 @@ class Zend_Amf_ServerTest extends PHPUnit_Framework_TestCase
         $request->setObjectEncoding(0x03);
         // let the server handle mock request
         $this->_server->handle($request);
+        set_include_path($origPath);
         $response = $this->_server->getResponse()->getAMFBodies();
         $this->assertTrue($response[0]->getData() instanceof Zend_Amf_Value_Messaging_AcknowledgeMessage);
         $this->assertEquals("Service: MenuC", $response[0]->getData()->body);

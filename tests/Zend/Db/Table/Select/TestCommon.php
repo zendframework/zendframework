@@ -61,9 +61,25 @@ abstract class Zend_Db_Table_Select_TestCommon extends Zend_Db_Select_TestCommon
         if (is_array($options) && !isset($options['db'])) {
             $options['db'] = $this->_db;
         }
-        @Zend_Loader::loadClass($tableClass);
+        if (!class_exists($tableClass)) {
+            $this->_useMyIncludePath();
+            Zend_Loader::loadClass($tableClass);
+            $this->_restoreIncludePath();
+        }
         $table = new $tableClass($options);
         return $table;
+    }
+
+    protected function _useMyIncludePath()
+    {
+        $this->_runtimeIncludePath = get_include_path();
+        set_include_path(dirname(__FILE__) . '/../_files/' . PATH_SEPARATOR . $this->_runtimeIncludePath);
+    }
+    
+    protected function _restoreIncludePath()
+    {
+        set_include_path($this->_runtimeIncludePath);
+        $this->_runtimeIncludePath = null;
     }
 
     /**

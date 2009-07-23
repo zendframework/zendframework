@@ -211,8 +211,7 @@ abstract class Zend_Db_Table_Select_TestCommon extends Zend_Db_Select_TestCommon
     {
         $table = $this->_getSelectTable('products');
         $select = $table->select();
-
-        $this->assertType('My_ZendDbTable_TableProducts', $select->getTable());
+        $this->assertSame($table, $select->getTable());
     }
     
     /**

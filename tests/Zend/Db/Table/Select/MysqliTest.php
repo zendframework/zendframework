@@ -32,11 +32,14 @@ class Zend_Db_Table_Select_MysqliTest extends Zend_Db_Table_Select_TestCommon
     }
 
     /**
+     * Mysqli does not support named binds
      * ZF-2017: Test bind use of the Zend_Db_Select class.
      * @group ZF-2017
+     * @expectedException Zend_Db_Statement_Exception
      */
     public function testSelectQueryWithBinds()
     {
-        $this->markTestSkipped($this->getDriver() . ' does not support named parameters');
+        parent::testSelectQueryWithBinds();
     }
+    
 }

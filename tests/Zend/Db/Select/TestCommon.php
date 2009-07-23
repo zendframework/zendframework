@@ -87,10 +87,13 @@ abstract class Zend_Db_Select_TestCommon extends Zend_Db_TestSetup
 
     /**
      * ZF-2017: Test bind use of the Zend_Db_Select class.
+     * @group ZF-2017
      */
     public function testSelectQueryWithBinds()
     {
-        $select = $this->_select()->where('product_id = :product_id')
+        $product_id = $this->_db->quoteIdentifier('product_id');
+
+        $select = $this->_select()->where("$product_id = :product_id")
                                   ->bind(array(':product_id' => 1));
 
         $this->assertType('Zend_Db_Select', $select,

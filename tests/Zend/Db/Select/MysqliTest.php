@@ -31,4 +31,12 @@ class Zend_Db_Select_MysqliTest extends Zend_Db_Select_TestCommon
         return 'Mysqli';
     }
 
+    /**
+     * ZF-2017: Test bind use of the Zend_Db_Select class.
+     * @group ZF-2017
+     */
+    public function testSelectQueryWithBinds()
+    {
+        $this->markTestSkipped($this->getDriver() . ' does not support named parameters');
+    }
 }

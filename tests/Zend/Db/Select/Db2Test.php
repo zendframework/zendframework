@@ -43,7 +43,16 @@ class Zend_Db_Select_Db2Test extends Zend_Db_Select_TestCommon
                             ->where($product_name . ' = ?', "as'as:x");
         return $select;
     }
-    
+
+    /**
+     * ZF-2017: Test bind use of the Zend_Db_Select class.
+     * @group ZF-2017
+     */
+    public function testSelectQueryWithBinds()
+    {
+        $this->markTestSkipped($this->getDriver() . ' does not support named parameters');
+    }
+
     public function getDriver()
     {
         return 'Db2';

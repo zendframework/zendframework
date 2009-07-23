@@ -136,7 +136,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                             wird das Gebietsschema im Verzeichnis gesucht. Wenn
                             <classname>Zend_Translate::LOCALE_FILENAME</classname> gesetzt wird,
                             wird das Gebietsschema im Dateinamen gesucht. Siehe
-                            <xref linkend="zend.translate.using.detection" /> für Details
+                            <xref linkend="zend.translate.additional.detection" /> für Details
                         </entry>
                         <entry><emphasis>null</emphasis></entry>
                     </row>

@@ -1494,8 +1494,9 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
      */
     public function testTableFetchallCanHandleWhereWithParameritizationCharacters()
     {
+        $product_name = $this->_db->quoteIdentifier('product_name');
         $table = $this->_table['products'];
-        $where = $table->getAdapter()->quoteInto('product_name = ?', "some?product's");
+        $where = $table->getAdapter()->quoteInto("$product_name = ?", "some?product's");
         $rows = $table->fetchAll($where);
         $this->assertEquals(0, count($rows));
     }

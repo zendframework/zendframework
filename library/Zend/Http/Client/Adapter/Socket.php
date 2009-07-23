@@ -393,7 +393,7 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
         if (isset($headers['connection']) && $headers['connection'] == 'close') {
             $this->close();
         }
-
+        
         return $response;
     }
 

@@ -145,7 +145,15 @@ class Zend_Http_Client_Adapter_Proxy extends Zend_Http_Client_Adapter_Socket
         $this->method = $method;
 
         // Build request headers
-        $request = "{$method} {$uri->__toString()} HTTP/{$http_ver}\r\n";
+        if ($this->negotiated) {
+            $path = $uri->getPath();
+            if ($uri->getQuery()) { 
+                $path .= '?' . $uri->getQuery();
+            }
+            $request = "$method $path HTTP/$http_ver\r\n";
+        } else {
+            $request = "$method $uri HTTP/$http_ver\r\n";
+        }
 
         // Add all headers to the request string
         foreach ($headers as $k => $v) {

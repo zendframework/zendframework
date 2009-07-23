@@ -39,13 +39,13 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
 
     /**
      * Clean up after running a test
-     * 
+     *
      */
     public function tearDown()
     {
         $this->_client = null;
     }
-   
+
     /**
      * URI Tests
      */
@@ -120,15 +120,15 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
     public function testDoubleGetParameter()
     {
         $qstr = 'foo=bar&foo=baz';
-        
+
         $this->_client->setUri('http://example.com/test/?' . $qstr);
         $this->_client->setAdapter('Zend_Http_Client_Adapter_Test');
-        
+
         $res = $this->_client->request('GET');
-        $this->assertContains($qstr, $this->_client->getLastRequest(), 
+        $this->assertContains($qstr, $this->_client->getLastRequest(),
             'Request is expected to contain the entire query string');
     }
-    
+
     /**
      * Header Tests
      */
@@ -282,18 +282,18 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
     public function testGetLastResponse()
     {
         // First, make sure we get null before the request
-        $this->assertEquals(null, $this->_client->getLastResponse(), 
+        $this->assertEquals(null, $this->_client->getLastResponse(),
             'getLastResponse() is still expected to return null');
 
         // Now, test we get a proper response after the request
         $this->_client->setUri('http://example.com/foo/bar');
         $this->_client->setAdapter('Zend_Http_Client_Adapter_Test');
-        
+
         $response = $this->_client->request();
-        $this->assertTrue(($response === $this->_client->getLastResponse()), 
+        $this->assertTrue(($response === $this->_client->getLastResponse()),
             'Response is expected to be identical to the result of getLastResponse()');
     }
-    
+
     /**
      * Test that getLastResponse returns null when not storing
      *
@@ -304,17 +304,17 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
         $this->_client->setUri('http://example.com/foo/bar');
         $this->_client->setAdapter('Zend_Http_Client_Adapter_Test');
         $this->_client->setConfig(array('storeresponse' => false));
-        
+
         $response = $this->_client->request();
 
-        $this->assertNull($this->_client->getLastResponse(), 
+        $this->assertNull($this->_client->getLastResponse(),
             'getLastResponse is expected to be null when not storing');
     }
-    
+
     /**
      * Check we get an exception when trying to send a POST request with an
      * invalid content-type header
-     * 
+     *
      * @expectedException Zend_Http_Client_Exception
      */
     public function testInvalidPostContentType()
@@ -331,11 +331,11 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
      *
      * @expectedException Zend_Http_Client_Adapter_Exception
      */
-    public function testSocketErrorException() 
+    public function testSocketErrorException()
     {
         // Try to connect to an invalid host
         $this->_client->setUri('http://255.255.255.255');
-        
+
         // Reduce timeout to 3 seconds to avoid waiting
         $this->_client->setConfig(array('timeout' => 3));
 
@@ -345,7 +345,7 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
 
     /**
      * Check that we can set methods which are not documented in the RFC.
-     * 
+     *
      * @dataProvider validMethodProvider
      */
     public function testSettingExtendedMethod($method)
@@ -358,7 +358,7 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Check that an exception is thrown if non-word characters are used in 
+     * Check that an exception is thrown if non-word characters are used in
      * the request method.
      *
      * @dataProvider invalidMethodProvider
@@ -390,18 +390,18 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
         $adapterCfg = $this->getObjectAttribute($adapter, 'config');
         $this->assertEquals('value2', $adapterCfg['param']);
     }
-    
+
     /**
-     * Test that POST data with mutli-dimentional array is properly encoded as 
+     * Test that POST data with mutli-dimentional array is properly encoded as
      * multipart/form-data
-     * 
+     *
      */
     public function testFormDataEncodingWithMultiArrayZF7038()
     {
         $this->_client->setAdapter('Zend_Http_Client_Adapter_Test');
         $this->_client->setUri('http://example.com');
         $this->_client->setEncType(Zend_Http_Client::ENC_FORMDATA);
-        
+
         $this->_client->setParameterPost('test', array(
             'v0.1',
             'v0.2',
@@ -411,15 +411,15 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
                 'k2.1' => 'v2.1.0'
             )
         ));
-        
+
         $this->_client->request('POST');
-        
+
         $expectedLines = file(dirname(__FILE__) . '/_files/ZF7038-multipartarrayrequest.txt');
         $gotLines = explode("\n", $this->_client->getLastRequest());
-        
+
         $this->assertEquals(count($expectedLines), count($gotLines));
-        
-        while (($expected = array_shift($expectedLines)) && 
+
+        while (($expected = array_shift($expectedLines)) &&
                ($got = array_shift($gotLines))) {
 
             $expected = trim($expected);
@@ -429,12 +429,12 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Data providers 
+     * Data providers
      */
-    
+
     /**
-     * Data provider of valid non-standard HTTP methods 
-     * 
+     * Data provider of valid non-standard HTTP methods
+     *
      * @return array
      */
     static public function validMethodProvider()
@@ -448,10 +448,10 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
             array('X-MS-ENUMATTS')
         );
     }
-    
+
     /**
      * Data provider of invalid HTTP methods
-     * 
+     *
      * @return array
      */
     static public function invalidMethodProvider()

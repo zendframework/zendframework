@@ -26,7 +26,7 @@ $gpass = isset($_GET['pass']) ? $_GET['pass'] : null;
 $method = isset($_GET['method']) ? $_GET['method'] : 'Basic';
 
 if (! $user || ! $pass || $user != $guser || $pass != $gpass) {
-	header('WWW-Authenticate: ' . $method . ' realm="ZendTest"');
+    header('WWW-Authenticate: ' . $method . ' realm="ZendTest"');
     header('HTTP/1.0 401 Unauthorized');
 }
 

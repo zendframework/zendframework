@@ -1,2 +1,2 @@
 <?php
-	echo serialize($_POST);
+    echo serialize($_POST);

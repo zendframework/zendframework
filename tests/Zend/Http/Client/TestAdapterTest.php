@@ -16,31 +16,31 @@ require_once 'PHPUnit/Framework/TestCase.php';
  */
 class Zend_Http_Client_TestAdapterTest extends PHPUnit_Framework_TestCase
 {
-	/**
-	 * Test adapter
-	 * 
-	 * @var Zend_Http_Client_Adapter_Test
-	 */
-	protected $adapter;
-	
-	/**
-	 * Set up the test adapter before running the test
+    /**
+     * Test adapter
      *
-	 */
-	public function setUp()
-	{
-        $this->adapter = new Zend_Http_Client_Adapter_Test();
-	}
+     * @var Zend_Http_Client_Adapter_Test
+     */
+    protected $adapter;
 
-	/**
-	 * Tear down the test adapter after running the test
+    /**
+     * Set up the test adapter before running the test
      *
-	 */
-	public function tearDown()
-	{
-		$this->adapter = null;	
-	}
-	
+     */
+    public function setUp()
+    {
+        $this->adapter = new Zend_Http_Client_Adapter_Test();
+    }
+
+    /**
+     * Tear down the test adapter after running the test
+     *
+     */
+    public function tearDown()
+    {
+        $this->adapter = null;
+    }
+
     public function testSetConfigThrowsOnInvalidConfig()
     {
         try {
@@ -93,32 +93,32 @@ class Zend_Http_Client_TestAdapterTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected[1], $this->adapter->read());
         $this->assertEquals($expected[0], $this->adapter->read());
     }
-    
+
     /**
      * Test that responses could be added as strings
-     * 
+     *
      * @dataProvider validHttpResponseProvider
      */
     public function testAddResponseAsString($testResponse)
     {
-    	$this->adapter->read(); // pop out first response
-    	
-    	$this->adapter->addResponse($testResponse);
-    	$this->assertEquals($testResponse, $this->adapter->read());
+        $this->adapter->read(); // pop out first response
+
+        $this->adapter->addResponse($testResponse);
+        $this->assertEquals($testResponse, $this->adapter->read());
     }
-    
+
     /**
      * Test that responses could be added as objects (ZF-7009)
-     * 
+     *
      * @link http://framework.zend.com/issues/browse/ZF-7009
      * @dataProvider validHttpResponseProvider
      */
     public function testAddResponseAsObject($testResponse)
     {
         $this->adapter->read(); // pop out first response
-        
+
         $respObj = Zend_Http_Response::fromString($testResponse);
-        
+
         $this->adapter->addResponse($respObj);
         $this->assertEquals($testResponse, $this->adapter->read());
     }
@@ -164,36 +164,36 @@ class Zend_Http_Client_TestAdapterTest extends PHPUnit_Framework_TestCase
             }
         }
     }
-    
+
     /**
      * Data Providers
      */
-    
+
     /**
      * Provide valid HTTP responses as string
-     * 
+     *
      * @return array
      */
     static public function validHttpResponseProvider()
     {
-    	return array(
-    	   array("HTTP/1.1 200 OK\r\n\r\n"),
-    	   array("HTTP/1.1 302 Moved Temporarily\r\nLocation: http://example.com/baz\r\n\r\n"),
-    	   array("HTTP/1.1 404 Not Found\r\n" . 
-    	         "Date: Sun, 14 Jun 2009 10:40:06 GMT\r\n" . 
-    	         "Server: Apache/2.2.3 (CentOS)\r\n" . 
-    	         "Content-length: 281\r\n" . 
-    	         "Connection: close\r\n" . 
-    	         "Content-type: text/html; charset=iso-8859-1\r\n\r\n" .
-    	         "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n" .
-    	         "<html><head>\n" . 
-    	         "<title>404 Not Found</title>\n" . 
-    	         "</head><body>\n" . 
-    	         "<h1>Not Found</h1>\n" . 
-    	         "<p>The requested URL /foo/bar was not found on this server.</p>\n" . 
-    	         "<hr>\n" . 
-    	         "<address>Apache/2.2.3 (CentOS) Server at example.com Port 80</address>\n" . 
-    	         "</body></html>") 
-    	);
+        return array(
+           array("HTTP/1.1 200 OK\r\n\r\n"),
+           array("HTTP/1.1 302 Moved Temporarily\r\nLocation: http://example.com/baz\r\n\r\n"),
+           array("HTTP/1.1 404 Not Found\r\n" .
+                 "Date: Sun, 14 Jun 2009 10:40:06 GMT\r\n" .
+                 "Server: Apache/2.2.3 (CentOS)\r\n" .
+                 "Content-length: 281\r\n" .
+                 "Connection: close\r\n" .
+                 "Content-type: text/html; charset=iso-8859-1\r\n\r\n" .
+                 "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n" .
+                 "<html><head>\n" .
+                 "<title>404 Not Found</title>\n" .
+                 "</head><body>\n" .
+                 "<h1>Not Found</h1>\n" .
+                 "<p>The requested URL /foo/bar was not found on this server.</p>\n" .
+                 "<hr>\n" .
+                 "<address>Apache/2.2.3 (CentOS) Server at example.com Port 80</address>\n" .
+                 "</body></html>")
+        );
     }
 }

@@ -24,13 +24,13 @@ require_once dirname(__FILE__) . '/SocketTest.php';
  */
 class Zend_Http_Client_SocketKeepaliveTest extends Zend_Http_Client_SocketTest
 {
-	/**
-	 * Configuration array
-	 *
-	 * @var array
-	 */
-	protected $config = array(
-		'adapter'     => 'Zend_Http_Client_Adapter_Socket',
-		'keepalive'   => true
-	);
+    /**
+     * Configuration array
+     *
+     * @var array
+     */
+    protected $config = array(
+        'adapter'     => 'Zend_Http_Client_Adapter_Socket',
+        'keepalive'   => true
+    );
 }

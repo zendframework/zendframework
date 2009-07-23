@@ -77,11 +77,11 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
 
     /**
      * Stream context
-     * 
+     *
      * @var resource
      */
     protected $_context = null;
-    
+
     /**
      * Adapter constructor, currently empty. Config is set using setConfig()
      *
@@ -107,17 +107,17 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
             $this->config[strtolower($k)] = $v;
         }
     }
-    
+
     /**
      * Set the stream context for the TCP connection to the server
-     * 
+     *
      * Can accept either a pre-existing stream context resource, or an array
-     * of stream options, similar to the options array passed to the 
+     * of stream options, similar to the options array passed to the
      * stream_context_create() PHP function. In such case a new stream context
      * will be created using the passed options.
-     * 
+     *
      * @since  Zend Framework 1.9
-     * 
+     *
      * @param  mixed $context Stream context or array of context options
      * @return Zend_Http_Client_Adapter_Socket
      */
@@ -125,10 +125,10 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
     {
         if (is_resource($context) && get_resource_type($context) == 'stream-context') {
             $this->_context = $context;
-            
+
         } elseif (is_array($context)) {
             $this->_context = stream_context_create($context);
-            
+
         } else {
             // Invalid parameter
             require_once 'Zend/Http/Client/Adapter/Exception.php';
@@ -136,15 +136,15 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
                 "Expecting either a stream context resource or array, got " . gettype($context)
             );
         }
-        
+
         return $this;
     }
-    
+
     /**
-     * Get the stream context for the TCP connection to the server. 
-     * 
-     * If no stream context is set, will create a default one. 
-     * 
+     * Get the stream context for the TCP connection to the server.
+     *
+     * If no stream context is set, will create a default one.
+     *
      * @return resource
      */
     public function getStreamContext()
@@ -152,7 +152,7 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
         if (! $this->_context) {
             $this->_context = stream_context_create();
         }
-        
+
         return $this->_context;
     }
 
@@ -203,7 +203,7 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
                                                   (int) $this->config['timeout'],
                                                   $flags,
                                                   $context);
-                                                  
+
             if (! $this->socket) {
                 $this->close();
                 require_once 'Zend/Http/Client/Adapter/Exception.php';
@@ -368,15 +368,15 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
 
         // Fallback: just read the response until EOF
         } else {
-        	do {
-        		$buff = @fread($this->socket, 8192);
-        		if ($buff === false || strlen($buff) === 0)
-        		{
-        			break;
-        		} else {
+            do {
+                $buff = @fread($this->socket, 8192);
+                if ($buff === false || strlen($buff) === 0)
+                {
+                    break;
+                } else {
                     $response .= $buff;
-        		}
-        	} while (feof($this->socket) === false);
+                }
+            } while (feof($this->socket) === false);
 
             $this->close();
         }

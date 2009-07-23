@@ -62,7 +62,7 @@ class Zend_Http_Client_Adapter_Curl implements Zend_Http_Client_Adapter_Interfac
 
     /**
      * List of cURL options that should never be overwritten
-     * 
+     *
      * @var array
      */
     protected $_invalidOverwritableCurlOptions = array(
@@ -145,7 +145,7 @@ class Zend_Http_Client_Adapter_Curl implements Zend_Http_Client_Adapter_Interfac
 
     /**
      * Direct setter for cURL adapter related options.
-     * 
+     *
      * @param  string|int $option
      * @param  mixed $value
      * @return Zend_Http_Adapter_Curl
@@ -176,9 +176,9 @@ class Zend_Http_Client_Adapter_Curl implements Zend_Http_Client_Adapter_Interfac
         }
 
         // If we are connected to a different server or port, disconnect first
-        if ($this->_curl 
-            && is_array($this->_connected_to) 
-            && ($this->_connected_to[0] != $host 
+        if ($this->_curl
+            && is_array($this->_connected_to)
+            && ($this->_connected_to[0] != $host
             || $this->_connected_to[1] != $port)
         ) {
             $this->close();

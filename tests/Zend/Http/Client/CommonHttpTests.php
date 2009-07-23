@@ -71,13 +71,13 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
 
             $this->baseuri = TESTS_ZEND_HTTP_CLIENT_BASEURI;
             if (substr($this->baseuri, -1) != '/') $this->baseuri .= '/';
-            
+
             $name = $this->getName();
             if (($pos = strpos($name, ' ')) !== false) {
                 $name = substr($name, 0, $pos);
             }
-            
-            $uri = $this->baseuri . $name . '.php'; 
+
+            $uri = $this->baseuri . $name . '.php';
             $this->client = new Zend_Http_Client($uri, $this->config);
 
         } else {
@@ -85,10 +85,10 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
             $this->markTestSkipped("Zend_Http_Client dynamic tests are not enabled in TestConfiguration.php");
         }
     }
-    
+
     /**
      * Clean up the test environment
-     * 
+     *
      */
     protected function tearDown()
     {
@@ -278,7 +278,7 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
         if ($res->getStatus() == 405 || $res->getStatus() == 501) {
             $this->markTestSkipped("Server does not allow the TRACE method");
         }
-        
+
         $body = strtolower($res->getBody());
 
         foreach ($headers as $key => $val)
@@ -308,7 +308,7 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
         if ($res->getStatus() == 405 || $res->getStatus() == 501) {
             $this->markTestSkipped("Server does not allow the TRACE method");
         }
-        
+
         $body = strtolower($res->getBody());
 
         foreach ($headers as $key => $val) {
@@ -733,7 +733,7 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
     }
 
     /**
-     * Test that one can upload multiple files with the same form name, as an 
+     * Test that one can upload multiple files with the same form name, as an
      * array
      *
      * @link http://framework.zend.com/issues/browse/ZF-5744
@@ -741,22 +741,22 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
     public function testMutipleFilesWithSameFormNameZF5744()
     {
         $rawData = 'Some test raw data here...';
-        
+
         $this->client->setUri($this->baseuri . 'testUploads.php');
-        
+
         $files = array('file1.txt', 'file2.txt', 'someotherfile.foo');
-        
+
         $expectedBody = '';
         foreach($files as $filename) {
             $this->client->setFileUpload($filename, 'uploadfile[]', $rawData, 'text/plain');
             $expectedBody .= "uploadfile $filename text/plain " . strlen($rawData) . "\n";
         }
-        
+
         $res = $this->client->request('POST');
 
         $this->assertEquals($expectedBody, $res->getBody(), 'Response body does not include expected upload parameters');
     }
-    
+
     /**
      * Test that lines that might be evaluated as boolean false do not break
      * the reading prematurely.
@@ -786,7 +786,7 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
 
     /**
      * Data provider for complex, nesting parameter arrays
-     * 
+     *
      * @return array
      */
     static public function parameterArrayProvider()
@@ -800,12 +800,12 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
                     'array' => array('firstItem', 'secondItem', '3rdItem')
                 )
             ),
-            
+
             array(
                 array(
                     'someData' => array(
-                        "1", 
-                        "2", 
+                        "1",
+                        "2",
                         'key' => 'value',
                         'nesting' => array(
                             'a' => 'AAA',
@@ -815,12 +815,12 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
                     'someOtherData' => array('foo', 'bar')
                 )
             ),
-            
+
             array(
                 array(
                     'foo1' => 'bar',
                     'foo2' => array('baz', 'w00t')
-                ) 
+                )
             )
         );
     }

@@ -605,4 +605,14 @@ class Zend_CurrencyTest extends PHPUnit_Framework_TestCase
         $currency = new Zend_Currency(null, 'en_US');
         $this->assertEquals('-$74.9500', $currency->toCurrency(-74.95, array('currency' => 'USD', 'precision' => 4)));
     }
+
+    /**
+     * @see ZF-7359
+     */
+    public function testPHPsScientificBug()
+    {
+        $currency = new Zend_Currency("USD", "en_US");
+        $this->assertEquals('$0.00', $currency->toCurrency(1.0E-4));
+        $this->assertEquals('$0.00', $currency->toCurrency(1.0E-5));
+    }
 }

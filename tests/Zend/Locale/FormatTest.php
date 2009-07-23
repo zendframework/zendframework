@@ -1018,4 +1018,18 @@ class Zend_Locale_FormatTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(14, $value['minute']);
         $this->assertEquals(55, $value['second']);
     }
+
+    /**
+     * Tests conversion from scientific numbers to decimal notation
+     */
+    public function testScientificNumbers()
+    {
+        $this->assertEquals(   '0,0', Zend_Locale_Format::toNumber(  1E-2, array('precision' => 1, 'locale' => 'de_AT')));
+        $this->assertEquals(   '0,0100', Zend_Locale_Format::toNumber(  1E-2, array('precision' => 4, 'locale' => 'de_AT')));
+        $this->assertEquals(   '100,0', Zend_Locale_Format::toNumber(  1E+2, array('precision' => 1, 'locale' => 'de_AT')));
+        $this->assertEquals(   '100,0000', Zend_Locale_Format::toNumber(  1E+2, array('precision' => 4, 'locale' => 'de_AT')));
+        $this->assertEquals(   '0', Zend_Locale_Format::toNumber(  1E-5, array('precision' => 0, 'locale' => 'de_AT')));
+        $this->assertEquals(   '0,00001', Zend_Locale_Format::toNumber(  1.3E-5, array('precision' => 5, 'locale' => 'de_AT')));
+        $this->assertEquals(   '0,000013', Zend_Locale_Format::toNumber(  1.3E-5, array('precision' => 6, 'locale' => 'de_AT')));
+    }
 }

@@ -138,7 +138,7 @@ class Zend_Currency
         // Format the number
         $format = $options['format'];
         $locale = $this->_locale;
-        if (empty($format) === true) {
+        if (empty($format)) {
             $format = Zend_Locale_Data::getContent($this->_locale, 'currencynumber');
         } else if (Zend_Locale::isLocale($format, true, false)) {
             $locale = $format;

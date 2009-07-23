@@ -123,9 +123,6 @@ abstract class Zend_Queue_Adapter_AdapterTest extends PHPUnit_Framework_TestCase
     {
         if (is_array($name)) {
             $config = $name;
-            if (! is_string($config['name'])) {
-                throw new Exception("You must set a name in the config");
-            }
         }
 
         if ($config === null) {

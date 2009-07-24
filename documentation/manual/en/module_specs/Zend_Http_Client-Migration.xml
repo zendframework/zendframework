@@ -6,7 +6,7 @@
 
     <para>
         While the external API of <classname>Zend_Http_Client</classname> has remained
-        consistent throughout the 1.x brach of Zend Framework, some changes were introduced
+        consistent throughout the 1.x branch of Zend Framework, some changes were introduced
         to the internal structure of <classname>Zend_Http_Client</classname> and its related
         classes.
     </para>
@@ -69,7 +69,7 @@ $client->setFileUpload('file2.txt', 'userfile[]', 'some other data', 'applicatio
             </example>
 
             <para>
-                As you can see this change permits the usage of the same form element name with
+                As you can see, this change permits the usage of the same form element name with
                 more than one file - however, it introduces a subtle backwards-compatibility change
                 and as such should be noted.
             </para>

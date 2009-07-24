@@ -110,6 +110,32 @@ class Zend_Http_Client_SocketTest extends Zend_Http_Client_CommonHttpTests
     }
 
     /**
+     * Test that we get the right exception after a socket timeout
+     * 
+     * @link http://framework.zend.com/issues/browse/ZF-7309
+     */
+    public function testExceptionOnReadTimeout()
+    {
+        // Set 1 second timeout
+        $this->client->setConfig(array('timeout' => 1));
+        
+        $start = microtime(true);
+        
+        try {
+            $this->client->request();
+            $this->fail("Expected a timeout Zend_Http_Client_Adapter_Exception");
+        } catch (Zend_Http_Client_Adapter_Exception $e) {
+            $this->assertEquals(Zend_Http_Client_Adapter_Exception::READ_TIMEOUT, $e->getCode());
+        }
+        
+        $time = (microtime(true) - $start);
+        
+        // We should be very close to 1 second
+        $this->assertLessThan(2, $time);
+    }
+
+    
+    /**
      * Data Providers
      */
 

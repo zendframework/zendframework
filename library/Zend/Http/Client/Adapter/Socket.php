@@ -281,6 +281,7 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
         // First, read headers only
         $response = '';
         $gotStatus = false;
+
         while (($line = @fgets($this->socket)) !== false) {
             $gotStatus = $gotStatus || (strpos($line, 'HTTP') !== false);
             if ($gotStatus) {
@@ -288,6 +289,8 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
                 if (rtrim($line) === '') break;
             }
         }
+
+        $this->_checkSocketReadTimeout();
 
         $statusCode = Zend_Http_Response::extractCode($response);
 
@@ -313,9 +316,13 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
         
         // If we got a 'transfer-encoding: chunked' header
         if (isset($headers['transfer-encoding'])) {
+
             if (strtolower($headers['transfer-encoding']) == 'chunked') {
+
                 do {
                     $line  = @fgets($this->socket);
+                    $this->_checkSocketReadTimeout();
+
                     $chunk = $line;
 
                     // Figure out the next chunk size
@@ -334,8 +341,8 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
                     $left_to_read = $chunksize;
                     while ($left_to_read > 0) {
                         $line = @fread($this->socket, $left_to_read);
-                        if ($line === false || strlen($line) === 0)
-                        {
+                        if ($line === false || strlen($line) === 0) {
+                            $this->_checkSocketReadTimeout();
                             break;
                         } else {
                             $chunk .= $line;
@@ -347,6 +354,8 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
                     }
 
                     $chunk .= @fgets($this->socket);
+                    $this->_checkSocketReadTimeout();
+
                     $response .= $chunk;
                 } while ($chunksize > 0);
 
@@ -358,12 +367,14 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
 
         // Else, if we got the content-length header, read this number of bytes
         } elseif (isset($headers['content-length'])) {
+
             $left_to_read = $headers['content-length'];
             $chunk = '';
             while ($left_to_read > 0) {
                 $chunk = @fread($this->socket, $left_to_read);
-                if ($chunk === false || strlen($chunk) === 0)
-                {
+                $this->_checkSocketReadTimeout();
+
+                if ($chunk === false || strlen($chunk) === 0) {
                     break;
                 } else {
                     $left_to_read -= strlen($chunk);
@@ -376,14 +387,16 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
 
         // Fallback: just read the response until EOF
         } else {
+
             do {
                 $buff = @fread($this->socket, 8192);
-                if ($buff === false || strlen($buff) === 0)
-                {
+                if ($buff === false || strlen($buff) === 0) {
+                    $this->_checkSocketReadTimeout();
                     break;
                 } else {
                     $response .= $buff;
                 }
+
             } while (feof($this->socket) === false);
 
             $this->close();
@@ -406,6 +419,28 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
         if (is_resource($this->socket)) @fclose($this->socket);
         $this->socket = null;
         $this->connected_to = array(null, null);
+    }
+
+    /**
+     * Check if the socket has timed out - if so close connection and throw 
+     * an exception
+     *
+     * @throws Zend_Http_Client_Adapter_Exception with READ_TIMEOUT code
+     */
+    protected function _checkSocketReadTimeout()
+    {
+        if ($this->socket) {
+            $info = stream_get_meta_data($this->socket);
+            $timedout = $info['timed_out'];
+            if ($timedout) {
+                $this->close();
+                require_once 'Zend/Http/Client/Adapter/Exception.php';
+                throw new Zend_Http_Client_Adapter_Exception(
+                    "Read timed out after {$this->config['timeout']} seconds",
+                    Zend_Http_Client_Adapter_Exception::READ_TIMEOUT
+                );
+            }
+        }
     }
 
     /**

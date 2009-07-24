@@ -954,9 +954,6 @@ class Zend_Cache_Backend_File extends Zend_Cache_Backend implements Zend_Cache_B
             if ($this->_options['file_locking']) @flock($f, LOCK_UN);
             @fclose($f);
         }
-        if (function_exists('set_magic_quotes_runtime')) {
-            @set_magic_quotes_runtime($mqr);
-        }
         return $result;
     }
 

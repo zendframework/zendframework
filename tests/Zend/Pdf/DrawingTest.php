@@ -186,11 +186,14 @@ class Zend_Pdf_DrawingTest extends PHPUnit_Framework_TestCase
              ->drawImage($stampImagePNG, 275, 450, 375, 550)
              ->restoreGS();
 
+        $jpegSupported = false;
         if (function_exists('gd_info')) {
             $info = gd_info();
-            $jpegSupported = $info['JPG Support'];
-        } else {
-            $jpegSupported = false;
+            if (isset($info['JPG Support'])) {
+                $jpegSupported = $info['JPG Support'];
+            } elseif (isset($info['JPEG Support'])) {
+                $jpegSupported = $info['JPEG Support'];
+            }
         }
         if ($jpegSupported) {
             $stampImageJPG = Zend_Pdf_Image::imageWithPath(dirname(__FILE__) . '/_files/stamp.jpg');

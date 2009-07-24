@@ -98,12 +98,19 @@ class Zend_LocaleTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(new Zend_LocaleTestHelper() instanceof Zend_Locale);
         $this->assertTrue(new Zend_LocaleTestHelper('root') instanceof Zend_Locale);
         try {
-            $this->assertTrue(new Zend_LocaleTestHelper(Zend_Locale::ENVIRONMENT) instanceof Zend_Locale);
+            $locale = new Zend_LocaleTestHelper(Zend_Locale::ENVIRONMENT);
+            $this->assertTrue($locale instanceof Zend_Locale);
         } catch (Zend_Locale_Exception $e) {
             // ignore environments where the locale can not be detected
             $this->assertContains('Autodetection', $e->getMessage());
         }
-        $this->assertTrue(new Zend_LocaleTestHelper(Zend_Locale::BROWSER) instanceof Zend_Locale);
+
+        try {
+            $this->assertTrue(new Zend_LocaleTestHelper(Zend_Locale::BROWSER) instanceof Zend_Locale);
+        } catch (Zend_Locale_Exception $e) {
+            // ignore environments where the locale can not be detected
+            $this->assertContains('Autodetection', $e->getMessage());
+        }
 
         $locale = new Zend_LocaleTestHelper('de');
         $this->assertTrue(new Zend_LocaleTestHelper($locale) instanceof Zend_Locale);
@@ -235,8 +242,13 @@ class Zend_LocaleTest extends PHPUnit_Framework_TestCase
         $value->setLocale('auto');
         $this->assertTrue(is_string($value->toString()));
 
-        $value->setLocale('browser');
-        $this->assertTrue(is_string($value->toString()));
+        try {
+            $value->setLocale('browser');
+            $this->assertTrue(is_string($value->toString()));
+        } catch (Zend_Locale_Exception $e) {
+            // ignore environments where the locale can not be detected
+            $this->assertContains('Autodetection', $e->getMessage());
+        }
 
         try {
             $value->setLocale('environment');
@@ -557,7 +569,13 @@ class Zend_LocaleTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('ja', $list['yes']);
 
         $this->assertTrue(is_array(Zend_LocaleTestHelper::getQuestion('auto')));
-        $this->assertTrue(is_array(Zend_LocaleTestHelper::getQuestion('browser')));
+
+        try {
+            $this->assertTrue(is_array(Zend_LocaleTestHelper::getQuestion('browser')));
+        } catch (Zend_Locale_Exception $e) {
+            $this->assertContains('Autodetection', $e->getMessage());
+        }
+
         try {
             $this->assertTrue(is_array(Zend_LocaleTestHelper::getQuestion('environment')));
         } catch (Zend_Locale_Exception $e) {

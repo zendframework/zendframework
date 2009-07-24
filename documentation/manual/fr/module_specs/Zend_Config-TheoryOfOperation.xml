@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 16393 -->
+<!-- EN-Revision: 16674 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.config.theory_of_operation">
     <title>Aspect théorique</title>
@@ -38,7 +38,7 @@
     <para>
         Par défaut, les données de configuration fournies par <classname>Zend_Config</classname> ne
         sont pas modifiables (lecture seule), et une affectation (par exemple,
-        <command>$config-&gt;database-&gt;host = 'example.com'</command>) lèvera une exception. Ce
+        <command>$config->database->host = 'example.com';</command>) lèvera une exception. Ce
         comportement par défaut peut cependant être surchargé par le constructeur pour permettre la
         modification des valeurs de données. De plus, quand les modifications sont autorisées,
         <classname>Zend_Config</classname> supporte l'effacement de valeurs (c'est-à-dire
@@ -90,7 +90,7 @@
         un objet unique en utilisant la fonction <methodname>merge()</methodname>. Par exemple,
         prenons <varname>$config</varname> et <varname>$localConfig</varname>, vous pouvez fusionner
         <varname>$localConfig</varname> dans <varname>$config</varname> en utilisant
-        <methodname>$config->merge($localConfig)</methodname>. Les éléments de
+        <command>$config->merge($localConfig);</command>. Les éléments de
         <varname>$localConfig</varname> surchargeront les éléments nommés de la même manière dans
         <varname>$config</varname>.
     </para>

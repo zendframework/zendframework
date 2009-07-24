@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16650 -->
+<!-- EN-Revision: 16845 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.available-resources.db">
     <title>Zend_Application_Resource_Db</title>
@@ -17,18 +17,19 @@
 
     <itemizedlist>
         <listitem><para>
-            <property>adapter</property>&#160;: le type de l'adaptateur
+            <emphasis><property>adapter</property></emphasis>&#160;: le type de l'adaptateur
             <classname>Zend_Db</classname>.
         </para></listitem>
 
         <listitem><para>
-            <property>params</property>&#160;: un tableau associatif des paramètres de configuration
-            à utiliser pour la récupération de l'instance de l'adaptateur.
+            <emphasis><property>params</property></emphasis>&#160;: un tableau associatif des
+            paramètres de configuration à utiliser pour la récupération de l'instance de
+            l'adaptateur.
         </para></listitem>
 
         <listitem><para>
-            <property>isDefaultTableAdapter</property>&#160;: spécifie si l'adaptateur est celui par
-            défaut des tables.
+            <emphasis><property>isDefaultTableAdapter</property></emphasis>&#160;: spécifie
+            si l'adaptateur est celui par défaut des tables.
         </para></listitem>
     </itemizedlist>
 

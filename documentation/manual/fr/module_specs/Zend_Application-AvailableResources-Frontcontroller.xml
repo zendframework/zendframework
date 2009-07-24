@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16650 -->
+<!-- EN-Revision: 16847 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.available-resources.frontcontroller">
     <title>Zend_Application_Resource_Frontcontroller</title>
@@ -24,50 +24,51 @@
 
     <itemizedlist>
         <listitem><para>
-            <property>controllerDirectory</property>&#160;: une chaîne de caractères spécifiant un
-            seul dossier de contrôleurs, ou un tableau associant un nom de module et un dossier de
+            <emphasis><property>controllerDirectory</property></emphasis>&#160;: une chaîne de
+            caractères spécifiant un seul dossier de contrôleurs, ou un tableau associant un
+            nom de module et un dossier de contrôleurs.
+        </para></listitem>
+
+        <listitem><para>
+            <emphasis><property>moduleControllerDirectoryName</property></emphasis>&#160;: une
+            chaîne de caractères indiquant un sous-dossier dans ce module qui contient les
             contrôleurs.
         </para></listitem>
 
         <listitem><para>
-            <property>moduleControllerDirectoryName</property>&#160;: une chaîne de caractères
-            indiquant un sous-dossier dans ce module qui contient les contrôleurs.
+            <emphasis><property>moduleDirectory</property></emphasis>&#160;: un dossier dans
+            lequel tous les modules peuvent être trouvés.
         </para></listitem>
 
         <listitem><para>
-            <property>moduleDirectory</property>&#160;: un dossier dans lequel tous les modules
-            peuvent être trouvés.
+            <emphasis><property>defaultControllerName</property></emphasis>&#160;: nom du
+            contrôleur par défaut (normalement "index").
         </para></listitem>
 
         <listitem><para>
-            <property>defaultControllerName</property>&#160;: nom du contrôleur par défaut
-            (normalement "index").
+            <emphasis><property>defaultAction</property></emphasis>&#160;: nom de l'action par
+            défaut (normalement "index").
         </para></listitem>
 
         <listitem><para>
-            <property>defaultAction</property>&#160;: nom de l'action par défaut (normalement
-            "index").
+            <emphasis><property>defaultModule</property></emphasis>&#160;: nom du module par
+            défaut (normalement "default").
         </para></listitem>
 
         <listitem><para>
-            <property>defaultModule</property>&#160;: nom du module par défaut (normalement
-            "default").
+            <emphasis><property>baseUrl</property></emphasis>&#160;: <acronym>URL</acronym>
+            de base explicite vers l'application (normalement auto-détecté).
         </para></listitem>
 
         <listitem><para>
-            <property>baseUrl</property>&#160;: <acronym>URL</acronym> de base explicite vers
-            l'application (normalement auto-détecté).
+            <emphasis><property>plugins</property></emphasis>&#160;: tableau de nom de classe
+            de plugins de contrôleurs. La ressource instanciera chaque classe (sans arguments
+            de contructeur) et les enregistrera dans le contrôleur frontal.
         </para></listitem>
 
         <listitem><para>
-            <property>plugins</property>&#160;: tableau de nom de classe de plugins de contrôleurs.
-            La ressource instanciera chaque classe (sans arguments de contructeur) et les
-            enregistrera dans le contrôleur frontal.
-        </para></listitem>
-
-        <listitem><para>
-            <property>params</property>&#160;: tableau de paires clés / valeurs à enregistrer dans
-            le contrôleur frontal.
+            <emphasis><property>params</property></emphasis>&#160;: tableau de paires
+            clés&#160;/&#160;valeurs à enregistrer dans le contrôleur frontal.
         </para></listitem>
     </itemizedlist>
 

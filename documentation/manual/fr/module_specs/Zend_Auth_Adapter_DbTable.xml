@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 16652 -->
+<!-- EN-Revision: 16855 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.auth.adapter.dbtable">
     <title>Authentification avec une table de base de données</title>
@@ -24,35 +24,36 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <property>tableName</property>&#160;: il s'agit du nom de la table dans la
-                    base de données qui contient les crédits d'authentification, et envers laquelle la
-                    requête d'authentification sera réalisée.
+                    <emphasis><property>tableName</property></emphasis>&#160;: il s'agit du nom de
+                    la table dans la base de données qui contient les crédits d'authentification,
+                    et envers laquelle la requête d'authentification sera réalisée.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <property>identityColumn</property>&#160;: il s'agit du nom de la colonne dans
-                    la table utilisée pour représenter l'identité. La colonne d'identité doit
-                    contenir une valeur unique, comme un "username" ou une adresse
-                    émail.
+                    <emphasis><property>identityColumn</property></emphasis>&#160;: il s'agit du
+                    nom de la colonne dans la table utilisée pour représenter l'identité. La
+                    colonne d'identité doit contenir une valeur unique, comme un "username" ou
+                    une adresse émail.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <property>credentialColumn</property>&#160;: il s'agit du nom de la colonne
-                    dans la table utilisée pour représenter le crédit. Dans le cas d'une simple
-                    authentification par identité / mot de passe, la valeur de crédit
-                    correspond au mot de passe. Voir aussi l'option
+                    <emphasis><property>credentialColumn</property></emphasis>&#160;: il s'agit
+                    du nom de la colonne dans la table utilisée pour représenter le crédit. Dans
+                    le cas d'une simple authentification par identité / mot de passe, la valeur
+                    de crédit correspond au mot de passe. Voir aussi l'option
                     <property>credentialTreatment</property>.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <property>credentialTreatment</property>&#160;: dans la plupart des cas, les
-                    mots de passe et autres données sensibles sont cryptés, hachés, encodés,
-                    masqués, ou sinon traités à travers une fonction ou un algorithme. En
-                    spécifiant un traitement paramétrable de chaîne avec cette méthode, comme
-                    <methodname>MD5(?)</methodname> ou <methodname>PASSWORD(?)</methodname>, un
+                    <emphasis><property>credentialTreatment</property></emphasis>&#160;: dans la
+                    plupart des cas, les mots de passe et autres données sensibles sont cryptés,
+                    hachés, encodés, masqués, ou sinon traités à travers une fonction ou un
+                    algorithme. En spécifiant un traitement paramétrable de chaîne avec cette
+                    méthode, comme <methodname>MD5(?)</methodname> ou
+                    <methodname>PASSWORD(?)</methodname>, un
                     développeur peut appliquer un code <acronym>SQL</acronym> arbitraire sur les
                     données de crédit fournies. Comme ces fonctions sont spécifiques à chaque
                     gestionnaire de base de données (<acronym>SGBD</acronym>), vérifiez le manuel

@@ -253,7 +253,7 @@ class Zend_Http_Response
         $body = '';
 
         // Decode the body if it was transfer-encoded
-        switch ($this->getHeader('transfer-encoding')) {
+        switch (strtolower($this->getHeader('transfer-encoding'))) {
 
             // Handle chunked body
             case 'chunked':

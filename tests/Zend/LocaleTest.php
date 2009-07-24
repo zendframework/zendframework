@@ -592,6 +592,9 @@ class Zend_LocaleTest extends PHPUnit_Framework_TestCase
         Zend_LocaleTestHelper::resetObject();
         $value = new Zend_LocaleTestHelper();
         $list = $value->getBrowser();
+        if (empty($list)) {
+            $this->markTestSkipped('Browser autodetection not possible in current environment');
+        }
         $this->assertTrue(isset($list['de']));
         $this->assertEquals(array('de' => 1, 'en_UK' => 0.5, 'en_US' => 0.5,
                                   'en' => 0.5, 'fr_FR' => 0.2, 'fr' => 0.2), $list);
@@ -823,10 +826,6 @@ class Zend_LocaleTest extends PHPUnit_Framework_TestCase
 
 class Zend_LocaleTestHelper extends Zend_Locale
 {
-    public static $_auto;
-    public static $_environment;
-    public static $_browser;
-
     public static function resetObject()
     {
         self::$_auto        = null;

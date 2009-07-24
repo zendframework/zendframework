@@ -1,4 +1,3 @@
-<!-- EN-Revision: 7499 -->
 <!-- $Id: $ -->
 <!ELEMENT xi:include (xi:fallback?) >
 <!ATTLIST xi:include
@@ -12,6 +11,9 @@
     xmlns:xi   CDATA   #FIXED   "http://www.w3.org/2001/XInclude" >
 
 <!ATTLIST sect1
+    xmlns:xi   CDATA   #FIXED   "http://www.w3.org/2001/XInclude" >
+
+<!ATTLIST appendix
     xmlns:xi   CDATA   #FIXED   "http://www.w3.org/2001/XInclude" >
 
 <!-- inside chapter or section elements -->

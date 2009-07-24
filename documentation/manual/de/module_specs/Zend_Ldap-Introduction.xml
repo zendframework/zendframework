@@ -2,26 +2,27 @@
 <!-- EN-Revision: 16828 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.ldap.introduction">
-    <title>Introduction</title>
+    <title>Einführung</title>
 
     <para>
-        <classname>Zend_Ldap</classname> is a class for performing <acronym>LDAP</acronym>
-        operations including but not limited to binding, searching and modifying entries
-        in an <acronym>LDAP</acronym> directory.
+        <classname>Zend_Ldap</classname> ist eine Klasse, mit der <acronym>LDAP</acronym>
+        Operationen, wie das Durchsuchen, das Bearbeiten oder die Bindung an Einträge im
+        <acronym>LDAP</acronym> Verzeichnis, durchgeführt werden können.
     </para>
 
     <sect2 id="zend.ldap.introduction.theory-of-operations">
-        <title>Theory of operation</title>
+        <title>Theorie der Verwendung</title>
 
         <para>
-            This component currently consists of the main <classname>Zend_Ldap</classname> class,
-            that conceptually represents a binding to a single <acronym>LDAP</acronym> server
-            and allows for executing operations against a <acronym>LDAP</acronym> server such
-            as OpenLDAP or ActiveDirectory (AD) servers. The parameters for binding may be
-            provided explicitly or in the form of an options array.
-            <classname>Zend_Ldap_Node</classname> provides an object-oriented interface
-            for single <acronym>LDAP</acronym> nodes and can be used to form a basis for an
-            active-record-like interface for a <acronym>LDAP</acronym>-based domain model.
+            Diese Komponente besteht aus der Hauptklasse <classname>Zend_Ldap</classname> welche
+            konzeptionell eine Bindung an einen einzelnen <acronym>LDAP</acronym> Server
+            repräsentiert und die Ausführung von Operationen an diesem <acronym>LDAP</acronym>
+            Server erlaubt, wie zum Beispiel OpenLDAP oder ActiveDirectory (AD) Server. Die
+            Parameter für das Binden können explizit oder in der Form eines Options Arrays
+            angegeben werden. <classname>Zend_Ldap_Node</classname> bietet ein Objektorientiertes
+            Interface für einen einzelnen <acronym>LDAP</acronym> Node und kann verwendet werden
+            um eine Basis für ein Active-Record artiges Interface für ein <acronym>LDAP</acronym>
+            basiertes Domain-Modell zu bieten.
         </para>
 
         <para>

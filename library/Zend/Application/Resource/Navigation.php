@@ -102,7 +102,7 @@ class Zend_Application_Resource_Navigation
     protected function _storeHelper()
     {
         $this->getBootstrap()->bootstrap('view');
-        $view = $this->getBootstrap()->getPluginResource('view')->getView();
+        $view = $this->getBootstrap()->view;
         $view->getHelper('navigation')->navigation($this->getContainer());
     }
 

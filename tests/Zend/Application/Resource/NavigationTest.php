@@ -139,6 +139,20 @@ class Zend_Application_Resource_NavigationTest extends PHPUnit_Framework_TestCas
         $this->assertEquals($number,1);
 		$this->bootstrap->unregisterPluginResource('view');
     }
+    
+    /**
+	 * @group ZF-6747
+	 */
+    public function testViewMethodIsUsedWhenAvailableInsteadOfResourcePlugin()
+    {
+        require_once '_files/ZfAppBootstrapCustomView.php';
+    
+    	$bootstrap = new ZfAppBootstrapCustomView($this->application);
+    	$bootstrap->registerPluginResource('view');
+ 		$view = $bootstrap->bootstrap('view')->view;
+ 		
+ 		$this->assertEquals($view->setInMethodByTest,true);
+    }
 }
 
 if (PHPUnit_MAIN_METHOD == 'Zend_Application_Resource_LocaleTest::main') {

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 14978 -->
+<sect1 id="zend.navigation.introduction">
+    <title>導入</title>
+
+    <para>
+        <classname>Zend_Navigation</classname>は、
+        ウェブ・ページへのポインターのツリーを管理するためのコンポーネントです。
+        簡単に言うと、
+        それはメニュー、パンくず、リンク及びサイトマップを作成するために使われたり、
+        他のナビゲーション関連の目的のひな型の役目を果たすことができます。
+    </para>
+
+    <sect2 id="zend.navigation.introduction.concepts">
+        <title>ページとコンテナ</title>
+
+        <para>
+            <classname>Zend_Navigation</classname>には2つの主要な概念があります:
+        </para>
+
+        <sect3 id="zend.navigation.introduction.pages">
+            <title>ページ</title>
+            <para>
+                <classname>Zend_Navigation</classname>におけるページ (<classname>Zend_Navigation_Page</classname>) は、
+                - その最も基本的な形式で -
+                ポインターをウェブ・ページに保持するオブジェクトです。
+                ポインターそのものに加えて、ページオブジェクトはナビゲーションのために
+                一般的に関連するいくつかのその他の性能、
+                例えば <code>label</code>や<code>title</code>他を含みます。
+            </para>
+
+            <para>
+                ページについて詳しくは
+                <link linkend="zend.navigation.pages">ページ</link>
+                節をさらにお読みください。
+            </para>
+        </sect3>
+
+        <sect3 id="zend.navigation.introduction.containers">
+            <title>コンテナ</title>
+            <para>
+                ナビゲーション・コンテナ (<classname>Zend_Navigation_Container</classname>) は、
+                ページのためのコンテナ・クラスです。
+                ページを追加したり、取得したり、削除したり、反復したりするためのメソッドがあります。
+                それは<ulink url="http://php.net/spl">SPL</ulink>
+                インターフェース <classname>RecursiveIterator</classname> 及び <classname>Countable</classname> を実装して、
+                そのため、<classname>RecursiveIteratorIterator</classname> のようなSPLイテレータで反復できます。
+            </para>
+
+            <para>
+                コンテナについて詳しくは
+                <link linkend="zend.navigation.containers">コンテナ</link>
+                節をさらにお読みください。
+            </para>
+
+            <note>
+                <para>
+                    <classname>Zend_Navigation_Page</classname>は
+                    <classname>Zend_Navigation_Container</classname>
+                    を拡張します。それはページがサブページを持てることを意味します。
+                </para>
+            </note>
+        </sect3>
+    </sect2>
+
+    <sect2 id="zend.navigation.introduction.separation">
+        <title>データ（モデル）とレンダリング（ビュー）の分離</title>
+
+        <para>
+            <classname>Zend_Navigation</classname> 名前空間のクラスは、
+            ナビゲーション用の要素のレンダリングを処理しません。
+            レンダリングは、ナビゲーション用のビューヘルパーで行なわれます。
+            しかしながら、ページは
+            サイトマップその他のための、ラベルやCSSクラス、タイトル、
+            そして <code>lastmod</code> 及び <code>priority</code> プロパティーのようなものを
+            レンダリングするときに、
+            ビューヘルパーによって使われる情報を含みます
+        </para>
+
+        <para>
+            <link linkend="zend.view.helpers.initial.navigation">ナビゲーション・ヘルパー</link>の
+            マニュアル部分でナビゲーション用の要素のレンダリングについてさらにお読みください。
+        </para>
+    </sect2>
+</sect1>

@@ -121,19 +121,30 @@ class Zend_Gdata_App_FeedTest extends PHPUnit_Framework_TestCase
         // Set new service instance and test for propagation
         $s = new Zend_Gdata_App();
         $this->feed->setService($s);
+
+        $service = $this->feed->getService();
+        if (!is_object($service)) {
+            $this->fail('No feed service received');
+        }
         $this->assertEquals('Zend_Gdata_App',
-                            get_class($this->feed->getService()));
+                            get_class($service));
+
         foreach ($entries as $entry) {
+            $service = $entry->getService();
+            if (!is_object($service)) {
+                $this->fail('No entry service received');
+            }
             $this->assertEquals('Zend_Gdata_App',
-                                get_class($entry->getService()));
+                                get_class($service));
         }
         
         // Set null service instance and test for propagation
         $s = null;
         $this->feed->setService($s);
-        $this->assertEquals(null, get_class($this->feed->getService()));
+        $this->assertFalse(is_object($this->feed->getService()));
         foreach ($entries as $entry) {
-            $this->assertEquals(null, get_class($entry->getService()));
+            $service = $entry->getService();
+            $this->assertFalse(is_object($service));
         }
     }
     

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- EN-Revision: 16908 -->
 <!-- Reviewed: no -->
-<appendix id="requirements">
+<appendix id="requirements" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Configuration système requise par Zend Framework</title>
 
     <sect1 id="requirements.introduction">

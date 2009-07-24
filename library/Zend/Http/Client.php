@@ -295,20 +295,24 @@ class Zend_Http_Client
     /**
      * Set configuration parameters for this HTTP client
      *
-     * @param array $config
+     * @param  Zend_Config | array $config
      * @return Zend_Http_Client
      * @throws Zend_Http_Client_Exception
      */
     public function setConfig($config = array())
     {
-        if (! is_array($config)) {
+        if ($config instanceof Zend_Config) {
+            $config = $config->toArray();
+
+        } elseif (! is_array($config)) {
             /** @see Zend_Http_Client_Exception */
             require_once 'Zend/Http/Client/Exception.php';
-            throw new Zend_Http_Client_Exception('Expected array parameter, given ' . gettype($config));
+            throw new Zend_Http_Client_Exception('Array or Zend_Config object expected, got ' . gettype($config));
         }
 
-        foreach ($config as $k => $v)
+        foreach ($config as $k => $v) {
             $this->config[strtolower($k)] = $v;
+        }
 
         // Pass configuration options to the adapter if it exists
         if ($this->adapter instanceof Zend_Http_Client_Adapter_Interface) {

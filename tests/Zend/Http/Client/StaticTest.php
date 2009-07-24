@@ -272,6 +272,85 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Configuration Handling
+     */
+
+    /**
+     * Test that we can set a valid configuration array with some options
+     *
+     */
+    public function testConfigSetAsArray()
+    {
+        $config = array(
+            'timeout'    => 500,
+            'someoption' => 'hasvalue'
+        );
+
+        $this->_client->setConfig($config);
+
+        $hasConfig = $this->getObjectAttribute($this->_client, 'config');
+        foreach($config as $k => $v) {
+            $this->assertEquals($v, $hasConfig[$k]);
+        }
+    }
+
+    /**
+     * Test that a Zend_Config object can be used to set configuration
+     *
+     * @link http://framework.zend.com/issues/browse/ZF-5577
+     */
+    public function testConfigSetAsZendConfig()
+    {
+        require_once 'Zend/Config.php';
+
+        $config = new Zend_Config(array(
+            'timeout'  => 400,
+            'nested'   => array(
+                'item' => 'value',
+            )
+        ));
+
+        $this->_client->setConfig($config);
+
+        $hasConfig = $this->getObjectAttribute($this->_client, 'config');
+        $this->assertEquals($config->timeout, $hasConfig['timeout']);
+        $this->assertEquals($config->nested->item, $hasConfig['nested']['item']);
+    }
+
+    /**
+     * Test that passing invalid variables to setConfig() causes an exception
+     *
+     * @dataProvider      invalidConfigProvider
+     * @expectedException Zend_Http_Client_Exception
+     */
+    public function testConfigSetInvalid($config)
+    {
+        $this->_client->setConfig($config);
+    }
+
+    /**
+     * Test that configuration options are passed to the adapter after the
+     * adapter is instantiated
+     *
+     * @link http://framework.zend.com/issues/browse/ZF-4557
+     */
+    public function testConfigPassToAdapterZF4557()
+    {
+        $adapter = new Zend_Http_Client_Adapter_Test();
+
+        // test that config passes when we set the adapter
+        $this->_client->setConfig(array('param' => 'value1'));
+        $this->_client->setAdapter($adapter);
+        $adapterCfg = $this->getObjectAttribute($adapter, 'config');
+        $this->assertEquals('value1', $adapterCfg['param']);
+
+        // test that adapter config value changes when we set client config
+        $this->_client->setConfig(array('param' => 'value2'));
+        $adapterCfg = $this->getObjectAttribute($adapter, 'config');
+        $this->assertEquals('value2', $adapterCfg['param']);
+    }
+
+    /**
      * Other Tests
      */
 
@@ -370,28 +449,6 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test that configuration options are passed to the adapter after the
-     * adapter is instantiated
-     *
-     * @link http://framework.zend.com/issues/browse/ZF-4557
-     */
-    public function testConfigPassToAdapterZF4557()
-    {
-        $adapter = new Zend_Http_Client_Adapter_Test();
-
-        // test that config passes when we set the adapter
-        $this->_client->setConfig(array('param' => 'value1'));
-        $this->_client->setAdapter($adapter);
-        $adapterCfg = $this->getObjectAttribute($adapter, 'config');
-        $this->assertEquals('value1', $adapterCfg['param']);
-
-        // test that adapter config value changes when we set client config
-        $this->_client->setConfig(array('param' => 'value2'));
-        $adapterCfg = $this->getObjectAttribute($adapter, 'config');
-        $this->assertEquals('value2', $adapterCfg['param']);
-    }
-
-    /**
      * Test that POST data with mutli-dimentional array is properly encoded as
      * multipart/form-data
      *
@@ -461,6 +518,22 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
             array('TWO WORDS'),
             array('GET http://foo.com/?'),
             array("Injected\nnewline")
+        );
+    }
+
+    /**
+     * Data provider for invalid configuration containers
+     *
+     * @return array
+     */
+    static public function invalidConfigProvider()
+    {
+        return array(
+            array(false),
+            array('foo => bar'),
+            array(null),
+            array(new stdClass),
+            array(55)
         );
     }
 }

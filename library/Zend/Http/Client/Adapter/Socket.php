@@ -299,7 +299,7 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
 
         // Check headers to see what kind of connection / transfer encoding we have
         $headers = Zend_Http_Response::extractHeaders($response);
-        
+
         /**
          * Responses to HEAD requests and 204 or 304 responses are not expected
          * to have a body - stop reading here
@@ -310,10 +310,10 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
             // Close the connection if requested to do so by the server
             if (isset($headers['connection']) && $headers['connection'] == 'close') {
                 $this->close();
-            }    
+            }
             return $response;
         }
-        
+
         // If we got a 'transfer-encoding: chunked' header
         if (isset($headers['transfer-encoding'])) {
 
@@ -406,7 +406,7 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
         if (isset($headers['connection']) && $headers['connection'] == 'close') {
             $this->close();
         }
-        
+
         return $response;
     }
 
@@ -422,7 +422,7 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
     }
 
     /**
-     * Check if the socket has timed out - if so close connection and throw 
+     * Check if the socket has timed out - if so close connection and throw
      * an exception
      *
      * @throws Zend_Http_Client_Adapter_Exception with READ_TIMEOUT code

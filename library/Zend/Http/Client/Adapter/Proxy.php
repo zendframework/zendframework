@@ -89,12 +89,12 @@ class Zend_Http_Client_Adapter_Proxy extends Zend_Http_Client_Adapter_Socket
         // If no proxy is set, fall back to Socket adapter
         if (! $this->config['proxy_host']) {
             return parent::connect($host, $port, $secure);
-        } 
+        }
 
         // Connect (a non-secure connection) to the proxy server
         return parent::connect(
-            $this->config['proxy_host'], 
-            $this->config['proxy_port'], 
+            $this->config['proxy_host'],
+            $this->config['proxy_port'],
             false
         );
     }
@@ -147,7 +147,7 @@ class Zend_Http_Client_Adapter_Proxy extends Zend_Http_Client_Adapter_Socket
         // Build request headers
         if ($this->negotiated) {
             $path = $uri->getPath();
-            if ($uri->getQuery()) { 
+            if ($uri->getQuery()) {
                 $path .= '?' . $uri->getQuery();
             }
             $request = "$method $path HTTP/$http_ver\r\n";

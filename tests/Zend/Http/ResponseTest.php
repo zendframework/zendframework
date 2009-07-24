@@ -70,7 +70,7 @@ class Zend_Http_ResponseTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('0b13cb193de9450aa70a6403e2c9902f', md5($res->getBody()));
         $this->assertEquals('c0cc9d44790fa2a58078059bab1902a9', md5($res->getRawBody()));
     }
-    
+
     public function testChunkedResponseCaseInsensitiveZF5438()
     {
         $response_text = file_get_contents(dirname(__FILE__) . '/_files/response_chunked_case');
@@ -81,7 +81,7 @@ class Zend_Http_ResponseTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('0b13cb193de9450aa70a6403e2c9902f', md5($res->getBody()));
         $this->assertEquals('c0cc9d44790fa2a58078059bab1902a9', md5($res->getRawBody()));
     }
-    
+
 
     public function testLineBreaksCompatibility()
     {

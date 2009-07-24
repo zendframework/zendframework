@@ -15,8 +15,8 @@
         <title>Using Zend_Http_Client</title>
         <para>
             The class constructor optionally accepts a URL as its first parameter
-            (can be either a string or a Zend_Uri_Http object), and an optional
-            array of configuration parameters. Both can be left out,
+            (can be either a string or a Zend_Uri_Http object), and an array or 
+            Zend_Config object containing configuration options. Both can be left out,
             and set later using the setUri() and setConfig() methods.
             <example id="zend.http.client.introduction.example-1">
                 <title>Instantiating a Zend_Http_Client Object</title>
@@ -31,6 +31,10 @@ $client->setUri('http://example.org');
 $client->setConfig(array(
     'maxredirects' => 0,
     'timeout'      => 30));
+    
+// You can also use a Zend_Config object to set the client's configuration
+$config = new Zend_Config_Ini('httpclient.ini, 'secure');
+$client->setConfig($config);
 ]]></programlisting>
             </example>
 
@@ -49,8 +53,8 @@ $client->setConfig(array(
         <title>Configuration Parameters</title>
         <para>
             The constructor and setConfig() method accept an associative array
-            of configuration parameters. Setting these parameters is optional,
-            as they all have default values.
+            of configuration parameters, or a Zend_Config object. Setting these 
+            parameters is optional, as they all have default values.
             <table id="zend.http.client.configuration.table">
                 <title>Zend_Http_Client configuration parameters</title>
                 <tgroup cols="4">

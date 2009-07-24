@@ -36,6 +36,63 @@ class Zend_Http_Client_SocketTest extends Zend_Http_Client_CommonHttpTests
     );
 
     /**
+     * Off-line common adapter tests
+     */
+
+    /**
+     * Test that we can set a valid configuration array with some options
+     *
+     */
+    public function testConfigSetAsArray()
+    {
+        $config = array(
+            'timeout'    => 500,
+            'someoption' => 'hasvalue'
+        );
+
+        $this->_adapter->setConfig($config);
+
+        $hasConfig = $this->getObjectAttribute($this->_adapter, 'config');
+        foreach($config as $k => $v) {
+            $this->assertEquals($v, $hasConfig[$k]);
+        }
+    }
+
+    /**
+     * Test that a Zend_Config object can be used to set configuration
+     *
+     * @link http://framework.zend.com/issues/browse/ZF-5577
+     */
+    public function testConfigSetAsZendConfig()
+    {
+        require_once 'Zend/Config.php';
+
+        $config = new Zend_Config(array(
+            'timeout'  => 400,
+            'nested'   => array(
+                'item' => 'value',
+            )
+        ));
+
+        $this->_adapter->setConfig($config);
+
+        $hasConfig = $this->getObjectAttribute($this->_adapter, 'config');
+        $this->assertEquals($config->timeout, $hasConfig['timeout']);
+        $this->assertEquals($config->nested->item, $hasConfig['nested']['item']);
+    }
+
+    /**
+     * Check that an exception is thrown when trying to set invalid config
+     *
+     * @expectedException Zend_Http_Client_Adapter_Exception
+     * @dataProvider invalidConfigProvider
+     */
+    public function testSetConfigInvalidConfig($config)
+    {
+        $this->_adapter->setConfig($config);
+    }
+
+    /**
      * Stream context related tests
      */
 

@@ -52,6 +52,13 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
     protected $client = null;
 
     /**
+     * Common HTTP client adapter
+     *
+     * @var Zend_Http_Client_Adapter_Interface
+     */
+    protected $_adapter = null;
+
+    /**
      * Configuration array
      *
      * @var array
@@ -78,7 +85,10 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
             }
 
             $uri = $this->baseuri . $name . '.php';
+
+            $this->_adapter = new $this->config['adapter'];
             $this->client = new Zend_Http_Client($uri, $this->config);
+            $this->client->setAdapter($this->_adapter);
 
         } else {
             // Skip tests
@@ -93,6 +103,7 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
     protected function tearDown()
     {
         $this->client = null;
+        $this->_adapter = null;
     }
 
     /**
@@ -822,6 +833,22 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
                     'foo2' => array('baz', 'w00t')
                 )
             )
+        );
+    }
+
+    /**
+     * Data provider for invalid configuration containers
+     *
+     * @return array
+     */
+    static public function invalidConfigProvider()
+    {
+        return array(
+            array(false),
+            array('foo => bar'),
+            array(null),
+            array(new stdClass),
+            array(55)
         );
     }
 }

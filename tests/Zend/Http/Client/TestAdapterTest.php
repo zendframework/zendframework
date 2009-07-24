@@ -41,15 +41,14 @@ class Zend_Http_Client_TestAdapterTest extends PHPUnit_Framework_TestCase
         $this->adapter = null;
     }
 
+    /**
+     * Make sure an exception is thrown on invalid cofiguration
+     *
+     * @expectedException Zend_Http_Client_Adapter_Exception
+     */
     public function testSetConfigThrowsOnInvalidConfig()
     {
-        try {
-            $this->adapter->setConfig('foo');
-        } catch (Exception $e) {
-            $class = 'Zend_Http_Client_Adapter_Exception';
-            $this->assertType($class, $e);
-            $this->assertRegexp('/expects an array/i', $e->getMessage());
-        }
+        $this->adapter->setConfig('foo');
     }
 
     public function testSetConfigReturnsQuietly()

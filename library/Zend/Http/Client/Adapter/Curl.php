@@ -110,14 +110,19 @@ class Zend_Http_Client_Adapter_Curl implements Zend_Http_Client_Adapter_Interfac
      * Set the configuration array for the adapter
      *
      * @throws Zend_Http_Client_Adapter_Exception
-     * @param array $config
+     * @param  Zend_Config | array $config
      * @return Zend_Http_Client_Adapter_Curl
      */
     public function setConfig($config = array())
     {
-        if (!is_array($config)) {
+        if ($config instanceof Zend_Config) {
+            $config = $config->toArray();
+
+        } elseif (! is_array($config)) {
             require_once 'Zend/Http/Client/Adapter/Exception.php';
-            throw new Zend_Http_Client_Adapter_Exception('Http Adapter configuration expects an array, ' . gettype($config) . ' recieved.');
+            throw new Zend_Http_Client_Adapter_Exception(
+                'Array or Zend_Config object expected, got ' . gettype($config)
+            );
         }
 
         if(isset($config['proxy_user']) && isset($config['proxy_pass'])) {

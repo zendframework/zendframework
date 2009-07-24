@@ -93,14 +93,18 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
     /**
      * Set the configuration array for the adapter
      *
-     * @param array $config
+     * @param Zend_Config | array $config
      */
     public function setConfig($config = array())
     {
-        if (! is_array($config)) {
+        if ($config instanceof Zend_Config) {
+            $config = $config->toArray();
+
+        } elseif (! is_array($config)) {
             require_once 'Zend/Http/Client/Adapter/Exception.php';
             throw new Zend_Http_Client_Adapter_Exception(
-                '$concig expects an array, ' . gettype($config) . ' recieved.');
+                'Array or Zend_Config object expected, got ' . gettype($config)
+            );
         }
 
         foreach ($config as $k => $v) {

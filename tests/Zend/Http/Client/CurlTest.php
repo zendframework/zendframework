@@ -6,6 +6,8 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 
 require_once dirname(__FILE__) . '/CommonHttpTests.php';
 
+require_once 'Zend/Http/Client/Adapter/Curl.php';
+
 /**
  * This Testsuite includes all Zend_Http_Client that require a working web
  * server to perform. It was designed to be extendable, so that several
@@ -49,6 +51,63 @@ class Zend_Http_Client_CurlTest extends Zend_Http_Client_CommonHttpTests
             $this->markTestSkipped('cURL is not installed, marking all Http Client Curl Adapter tests skipped.');
         }
         parent::setUp();
+    }
+
+    /**
+     * Off-line common adapter tests
+     */
+
+    /**
+     * Test that we can set a valid configuration array with some options
+     *
+     */
+    public function testConfigSetAsArray()
+    {
+        $config = array(
+            'timeout'    => 500,
+            'someoption' => 'hasvalue'
+        );
+
+        $this->_adapter->setConfig($config);
+
+        $hasConfig = $this->getObjectAttribute($this->_adapter, '_config');
+        foreach($config as $k => $v) {
+            $this->assertEquals($v, $hasConfig[$k]);
+        }
+    }
+
+    /**
+     * Test that a Zend_Config object can be used to set configuration
+     *
+     * @link http://framework.zend.com/issues/browse/ZF-5577
+     */
+    public function testConfigSetAsZendConfig()
+    {
+        require_once 'Zend/Config.php';
+
+        $config = new Zend_Config(array(
+            'timeout'  => 400,
+            'nested'   => array(
+                'item' => 'value',
+            )
+        ));
+
+        $this->_adapter->setConfig($config);
+
+        $hasConfig = $this->getObjectAttribute($this->_adapter, '_config');
+        $this->assertEquals($config->timeout, $hasConfig['timeout']);
+        $this->assertEquals($config->nested->item, $hasConfig['nested']['item']);
+    }
+
+    /**
+     * Check that an exception is thrown when trying to set invalid config
+     *
+     * @expectedException Zend_Http_Client_Adapter_Exception
+     * @dataProvider invalidConfigProvider
+     */
+    public function testSetConfigInvalidConfig($config)
+    {
+        $this->_adapter->setConfig($config);
     }
 
     /**

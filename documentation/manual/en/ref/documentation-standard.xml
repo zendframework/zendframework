@@ -27,8 +27,8 @@
             </para>
 
             <para>
-                Topics covered in the ZF documentation standards include documentation file
-                formatting and recommendations for documentation quality.
+                Topics covered in the Zend Framework documentation standards include documentation
+                file formatting and recommendations for documentation quality.
             </para>
         </sect2>
     </sect1>
@@ -432,9 +432,10 @@ $render = "xxx";
                 <title>classname</title>
 
                 <para>
-                    The tag <emphasis>&lt;classname&gt;</emphasis> must be used each time a class name is
-                    represented by itself; it should not be used when combined with a method name,
-                    variable name, or constant, and no other content is allowed within the tag.
+                    The tag <emphasis>&lt;classname&gt;</emphasis> must be used each time a class
+                    name is represented by itself; it should not be used when combined with a
+                    method name, variable name, or constant, and no other content is allowed within
+                    the tag.
                 </para>
 
                 <programlisting language="xml"><![CDATA[

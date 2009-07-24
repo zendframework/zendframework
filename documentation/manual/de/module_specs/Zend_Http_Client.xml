@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17027 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.client">
     <title>Einführung</title>
@@ -18,9 +18,9 @@
         <title>Zend_Http_Client verwenden</title>
         <para>
             Der Klassenkonstruktor akzeptiert optional eine URL als seinen ersten Parameter (kann
-            entweder ein String oder ein Zend_Uri_Http Objekt sein) und ein optionales Array mit
-            Konfigurationsparametern. Beides kann ausgelassen und später durch Verwendung der
-            setUri() and setConfig() Methoden gesetzt werden.
+            entweder ein String oder ein Zend_Uri_Http Objekt sein) und ein Array oder Zend_Config
+            Objekt welches Konfigurationsparameter enthält. Beides kann ausgelassen und später
+            durch Verwendung der setUri() and setConfig() Methoden gesetzt werden.
             <example id="zend.http.client.introduction.example-1">
                 <title>Ein Zend_Http_Client Objekt instanzieren</title>
                 <programlisting language="php"><![CDATA[
@@ -34,6 +34,11 @@ $client->setUri('http://example.org');
 $client->setConfig(array(
     'maxredirects' => 0,
     'timeout'      => 30));
+
+// Man kann auch ein Zend_Config Objekt verwenden um die Konfiguration
+// des Clients zu setzen
+$config = new Zend_Config_Ini('httpclient.ini, 'secure');
+$client->setConfig($config);
 ]]></programlisting>
             </example>
 
@@ -52,8 +57,8 @@ $client->setConfig(array(
         <title>Konfigurationsparameter</title>
         <para>
             Der Konstruktor und die setConfig() Methode akzeptieren ein assoziatives Array mit
-            Konfigurationsparametern. Das Setzen dieser Parameter ist optional, da alle einen
-            Standardwert haben.
+            Konfigurationsparametern oder ein Zend_Config Objekt. Das Setzen dieser Parameter ist
+            optional, da alle einen Standardwert haben.
             <table id="zend.http.client.configuration.table">
                 <title>Zend_Http_Client Konfigurationsparameter</title>
                 <tgroup cols="4">

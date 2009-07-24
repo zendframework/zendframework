@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16603 -->
+<!-- EN-Revision: 17023 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.client.adapters">
     <title>Zend_Http_Client - Verbindungsadapter</title>
@@ -30,12 +30,12 @@
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_Http_Client_Adapter_Test</classname>
+                        <classname>Zend_Http_Client_Adapter_Curl</classname>
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_Http_Client_Adapter_Curl</classname>
+                        <classname>Zend_Http_Client_Adapter_Test</classname>
                     </para>
                 </listitem>
             </itemizedlist>
@@ -46,8 +46,8 @@
             die 'adapter' Konfigurationsoption setzen mit einem String, der den Adapternamen (z.B.
             'Zend_Http_Client_Adapter_Socket') enthält, oder mit eine Variable, die ein
             Adapterobjekt (z.B. <code>new Zend_Http_Client_Adapter_Test</code>) enthält. Man kann
-            den Adapter auch danach setzen, indem man die Zend_Http_Client->setConfig() Methode
-            verwendet.
+            den Adapter auch danach setzen, indem man die
+            <classname>Zend_Http_Client->setConfig()</classname> Methode verwendet.
         </para>
     </sect2>
 
@@ -167,6 +167,103 @@ $response = $client->request();
         <para>
             <code>fsockopen('tls://www.example.com', 443)</code>
         </para>
+
+        <sect3 id="zend.http.client.adapters.socket.streamcontext">
+            <title>Anpassen und Zugreifen auf den Socket Adapter Stream Kontext</title>
+            <para>
+                Beginnend mit Zend Framework 1.9 bietet
+                <classname>Zend_Http_Client_Adapter_Socket</classname> direkten Zugriff auf den
+                darunterliegenden <ulink
+                    url="http://php.net/manual/de/stream.contexts.php">Stream Kontext</ulink> der
+                für die Verbindung zum entfernten Server verwendet wird. Das erlaubt es
+                Benutzern spezielle Optionen und Parameter an den TCP Stream zu übergeben und
+                an den SSL Wrapper im Falle einer HTTPS Verbindung.
+            </para>
+
+            <para>
+                Man kann auf den Stream Kontext zugreifen indem die folgenden Methoden von
+                <classname>Zend_Http_Client_Adapter_Socket</classname> verwendet werden:
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            <firstterm><classname>setStreamContext($context)</classname></firstterm>
+                            Setzt den Stream Kontext der vom Adapter verwendet werden soll.
+                            Akzeptiert entweder eine Stream Kontext Ressource von durch die
+                            Verwendung der PHP Funktion <ulink
+                                url="http://php.net/manual/de/function.stream-context-create.php"><classname>stream_context_create()</classname></ulink>
+                            erstellt wurde, oder ein Array von Stream Kontext Optionen im
+                            gleichen Format wie es an diese Funktion übergeben wird. Wenn ein
+                            Array übergeben wird, dann wird ein neuer Stream Kontext mit Hilfe
+                            dieser Optionen erstellt, und gesetzt.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <firstterm><classname>getStreamContext()</classname></firstterm>
+                            Empfängt den Stream Kontext des Adapters. Wenn kein Stream Kontext
+                            gesetzt ist, wird ein standardmäßiger Stream Kontext erstellt und
+                            zurückgegeben. Man kann anschließend den Wert verschiedener Kontext
+                            Optionen setzen oder empfangen indem die regulären PHP Stream
+                            Kontext Funktionen verwendet werden.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <example id="zend.http.client.adapters.socket.streamcontext.example-1">
+                <title>Setzen von Stream Kontext Optionen für den Socket Adapter</title>
+                <programlisting language="php"><![CDATA[
+// Array von Optionen
+$options = array(
+    'socket' => array(
+        // Bindet die lokale Socket Seite an ein spezifisches Interface
+        'bindto' => '10.1.2.3:50505'
+    ),
+    'ssl' => array(
+        // Prüft das Server Side Zertifikat, akzeptiert keine
+        // ungültigen oder selbst-signierten SSL Zertifikate
+        'verify_peer' => true,
+        'allow_self_signed' => false,
+
+        // Holt das Peer Zertifikat
+        'capture_peer_cert' => true
+    )
+);
+
+// Erstellt ein Adapter Objekt und hängt es an den HTTP Client
+$adapter = new Zend_Http_Client_Adapter_Socket();
+$client = new Zend_Http_Client();
+$client->setAdapter($adapter);
+
+// Methode 1: Ein Options Array an setStreamContext() übergeben
+$adapter->setStreamContext($options);
+
+// Methode 2: Einen Stream Kontext erstellen und an setStreamContext() übergeben
+$context = stream_context_create($options);
+$adapter->setStreamContext($context);
+
+// Methode 3: Den Standardmäßigen Stream Kontext holen und Optionen auf Ihm setzen
+$context = $adapter->getStreamContext();
+stream_context_set_option($context, $options);
+
+// Jetzt die Anfrage durchführen
+$response = $client->request();
+
+// Wenn alles gut ging, kann auf den Kontext jetzt zugegriffen werden
+$opts = stream_context_get_options($adapter->getStreamContext());
+echo $opts['ssl']['peer_certificate'];
+]]></programlisting>
+            </example>
+            <note>
+                <para>
+                    Es ist zu beachten das alle Stream Kontext Optionen gesetzt sein müssen bevor
+                    der Adapter Anfragen durchführt. Wenn kein Kontext gesetzt ist bevor HTTP
+                    Anfragen mit dem Socket Adapter durchgeführt werden, wird ein standardmäßiger
+                    Stream Kontext erstellt. Auf diese Kontext Ressource kann zugegriffen werden
+                    nachdem Anfragen durchgeführt werden indem die
+                    <classname>getStreamContext()</classname> Methode verwendet wird.
+                </para>
+            </note>
+        </sect3>
     </sect2>
 
     <sect2 id="zend.http.client.adapters.proxy">
@@ -271,6 +368,75 @@ $client = new Zend_Http_Client('http://www.example.com', $config);
                         die optionale Nutzung eines Proxy-Servers, abhängig von dem proxy_host
                         Parameter.
         </para>
+
+        <note>
+            <para>
+                Da der Proxy Adapter von <classname>Zend_Http_Client_Adapter_Socket</classname>
+                abgeleitet ist, kann die Stream Kontext Zugriffsmethode verwendet werden
+                (siehe <xref linkend="zend.http.client.adapters.socket.streamcontext" />) um
+                Stream Kontext Optionen auf Proxy Verbindungen zu setzen wie es oben demonstriert
+                wurde.
+            </para>
+        </note>
+    </sect2>
+
+    <sect2 id="zend.http.client.adapters.curl">
+        <title>Der cURL Adapter</title>
+        <para>
+            cURL ist eine Standard HTTP Client Bibliothek die mit vielen Betriebssystemen
+            ausgeliefert wird, und kann in PHP über die cURL Erweiterung verwendet werden.
+            Sie bietet Funktionalitäten für viele spezielle Fälle die für einen HTTP Client
+            auftreten können und machen sie zu einer perfekten Wahl für einen HTTP Adapter.
+            Sie unterstützt sichere Verbindungen, Proxies, alle Arten von Authentifizierungs-
+            mechanismen und glänzt in Anwendungen die große Dateien zwischen Servern bewegen
+            müssen.
+        </para>
+
+        <example id="zend.http.client.adapters.curl.example-1">
+            <title>Setzen von cURL Optionen</title>
+            <programlisting language="php"><![CDATA[
+$config = array(
+    'adapter'   => 'Zend_Http_Client_Adapter_Curl',
+    'curloptions' => array(CURLOPT_FOLLOWLOCATION => true),
+);
+$client = new Zend_Http_Client($uri, $config);
+]]></programlisting>
+        </example>
+
+        <para>
+            Standardmäßig ist der cURL Adapter so konfiguriert das er sich genauso wie der
+            Socket Adapter verhält und er akzeptiert auch die gleichen Konfigurationsparameter wie
+            die Socket und Proxy Adapter. Man kann die cURL Optionen entweder durch den
+            'curloptions' Schlüssel im Konstruktor des Adapters, oder durch den Aufruf von
+            <code>setCurlOption($name, $value)</code>, verändern. Der <code>$name</code>
+            Schlüssel entspricht den CURL_* Konstanten der cURL Erweiterung. Man kann auf den
+            CURL Handler durch den Aufruf von <code>$adapter->getHandle();</code> Zugriff erhalten.
+        </para>
+
+        <example id="zend.http.client.adapters.curl.example-2">
+            <title>Dateien von Hand übertragen</title>
+
+            <para>
+                Man kan cURL verwenden um große Dateien über HTTP durch einen Dateihandle zu
+                übertragen.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$putFileSize   = filesize("filepath");
+$putFileHandle = fopen("filepath", "r");
+
+$adapter = new Zend_Http_Client_Adapter_Curl();
+$client = new Zend_Http_Client();
+$client->setAdapter($adapter);
+$adapter->setConfig(array(
+    'curloptions' => array(
+        CURLOPT_INFILE => $putFileHandle,
+        CURLOPT_INFILESIZE => $putFileSize
+    )
+));
+$client->request("PUT");
+]]></programlisting>
+        </example>
     </sect2>
 
     <sect2 id="zend.http.client.adapters.test">
@@ -379,65 +545,6 @@ $adapter->addResponse(
             Abhängig von Ihrer Anwendung, kann es gewollt oder nicht gewollt sein,
             dass dem Redirect gefolgt wird.
         </para>
-    </sect2>
-
-    <sect2 id="zend.http.client.adapters.curl">
-        <title>Der cURL Adapter</title>
-        <para>
-            cURL ist eine Standard HTTP Client Bibliothek die mit vielen Betriebssystemen
-            ausgeliefert wird, und kann in PHP über die cURL Erweiterung verwendet werden.
-            Sie bietet Funktionalitäten für viele spezielle Fälle die für einen HTTP Client
-            auftreten können und machen sie zu einer perfekten Wahl für einen HTTP Adapter.
-            Sie unterstützt sichere Verbindungen, Proxies, alle Arten von Authentifizierungs-
-            mechanismen und glänzt in Anwendungen die große Dateien zwischen Servern bewegen
-            müssen.
-        </para>
-
-        <example id="zend.http.client.adapters.curl.example-1">
-            <title>Setzen von cURL Optionen</title>
-            <programlisting language="php"><![CDATA[
-$config = array(
-    'adapter'   => 'Zend_Http_Client_Adapter_Curl',
-    'curloptions' => array(CURLOPT_FOLLOWLOCATION => true),
-);
-$client = new Zend_Http_Client($uri, $config);
-]]></programlisting>
-        </example>
-
-        <para>
-            Standardmäßig ist der cURL Adapter so konfiguriert das er sich genauso wie der
-            Socket Adapter verhält und er akzeptiert auch die gleichen Konfigurationsparameter wie
-            die Socket und Proxy Adapter. Man kann die cURL Optionen entweder durch den
-            'curloptions' Schlüssel im Konstruktor des Adapters, oder durch den Aufruf von
-            <code>setCurlOption($name, $value)</code>, verändern. Der <code>$name</code>
-            Schlüssel entspricht den CURL_* Konstanten der cURL Erweiterung. Man kann auf den
-            CURL Handler durch den Aufruf von <code>$adapter->getHandle();</code> Zugriff erhalten.
-        </para>
-
-        <example id="zend.http.client.adapters.curl.example-2">
-            <title>Dateien von Hand übertragen</title>
-
-            <para>
-                Man kan cURL verwenden um große Dateien über HTTP durch einen Dateihandle zu
-                übertragen.
-            </para>
-
-            <programlisting language="php"><![CDATA[
-$putFileSize   = filesize("filepath");
-$putFileHandle = fopen("filepath", "r");
-
-$adapter = new Zend_Http_Client_Adapter_Curl();
-$client = new Zend_Http_Client();
-$client->setAdapter($adapter);
-$adapter->setConfig(array(
-    'curloptions' => array(
-        CURLOPT_INFILE => $putFileHandle,
-        CURLOPT_INFILESIZE => $putFileSize
-    )
-));
-$client->request("PUT");
-]]></programlisting>
-        </example>
     </sect2>
 
     <sect2 id="zend.http.client.adapters.extending">

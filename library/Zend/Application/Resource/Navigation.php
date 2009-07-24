@@ -82,10 +82,16 @@ class Zend_Application_Resource_Navigation
     protected function _storeRegistry()
     {
         $options = $this->getOptions();
-        $key = !is_numeric($options['storage']['registry']['key'])
-             ?  $options['storage']['registry']['key']
-             : self::DEFAULT_REGISTRY_KEY;
-        Zend_Registry::set($key,$this->getContainer());
+        if(isset($options['storage']) &&
+           isset($options['storage']['registry']) &&
+           isset($options['storage']['registry']['key']))
+        {
+           $key = $options['storage']['registry']['key'];
+        } else {
+		    $key = self::DEFAULT_REGISTRY_KEY;
+        }
+        
+		Zend_Registry::set($key,$this->getContainer());
     }
 
     /**

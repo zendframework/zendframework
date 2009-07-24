@@ -1721,7 +1721,7 @@ $db->closeConnection();
                 configuration (not driver_configuration) of an adapter
                 in <classname>Zend_Db</classname>.
             </para>
-            
+
             <example id="zend.db.adapter.connecting.persistence.example">
                 <title>Using the Persitence Flag with the Oracle Adapter</title>
                 <programlisting language="php"><![CDATA[
@@ -1734,11 +1734,11 @@ $db = Zend_Db::factory('Oracle', array(
 ));
 ]]></programlisting>
             </example>
-            
+
             <para>
-                Please note that using persistent connections can cause an 
-                excess of idle connections on the RDBMS server, which causes 
-                more problems than any performance gain you might achieve by 
+                Please note that using persistent connections can cause an
+                excess of idle connections on the RDBMS server, which causes
+                more problems than any performance gain you might achieve by
                 reducing the overhead of making connections.
             </para>
             <para>

@@ -11,22 +11,22 @@
 
     <sect2 id="zend.view.navigation.zf7341">
         <title>Migrating from versions prior to 1.9</title>
-        
+
         <para>
-            Prior to the 1.9 release, the menu helper 
+            Prior to the 1.9 release, the menu helper
             (<classname>Zend_View_Helper_Navigation_Menu</classname>) did not
             render sub menus correctly. When the <code>onlyActiveBranch</code>
             was <code>true</code> and the option <code>renderParents</code>
             <code>false</code>, nothing would be rendered if the deepest active
-            page was at a depth lower than the <code>minDepth</code> option. 
+            page was at a depth lower than the <code>minDepth</code> option.
         </para>
-        
+
         <para>
             In simpler words; if <code>minDepth</code> was set to <code>1</code>
             and the active page was at one of the first level pages, nothing
             would be rendered, as the following example shows.
         </para>
-        
+
         <para>
             Consider the following container setup:
         </para>
@@ -76,12 +76,12 @@ $container = new Zend_Navigation(array(
         </para>
 
         <para>
-            Since release 1.9, the <code>_renderDeepestMenu()</code> method in 
+            Since release 1.9, the <code>_renderDeepestMenu()</code> method in
             <classname>Zend_View_Helper_Navigation_Menu</classname> will accept
-            active pages at one level below <code>minDepth</code>, as long as 
-            the page has children. 
+            active pages at one level below <code>minDepth</code>, as long as
+            the page has children.
         </para>
-        
+
         <para>
             The same code snippet will now output the following:
         </para>

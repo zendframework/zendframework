@@ -26,30 +26,32 @@
         </para>
 
         <para>
-            The component provides several helper classes to perform operations on
-            <acronym>LDAP</acronym> entries (<classname>Zend_Ldap_Attribute</classname>) such as
-            setting and retrieving attributes (date values, passwords, boolean values, ...), to
-            create and modify <acronym>LDAP</acronym> filter strings
-            (<classname>Zend_Ldap_Filter</classname>) and to manipulate <acronym>LDAP</acronym>
-            distinguished names (DN) (<classname>Zend_Ldap_Dn</classname>).
+            Die Komponente bietet verschiedene Helfer Klassen um Operationen auf
+            <acronym>LDAP</acronym> Einträgen (<classname>Zend_Ldap_Attribute</classname>)
+            durchzuführen, wie das Setzen und Empfangen von Attributen (Datumswerte, Passwörter,
+            Boolsche Werte, ...), um <acronym>LDAP</acronym> Filter Strings
+            (<classname>Zend_Ldap_Filter</classname>) zu Erstellen und zu Ändern, und um
+            <acronym>LDAP</acronym> Distinguished Names (DN) (<classname>Zend_Ldap_Dn</classname>)
+            zu manipulieren.
         </para>
 
         <para>
-            Additionally the component abstracts <acronym>LDAP</acronym> schema browsing
-            for OpenLDAP and ActiveDirectoy servers <classname>Zend_Ldap_Node_Schema</classname>
-            and server information retrieval for OpenLDAP-, ActiveDirectory- and Novell
-            eDirectory servers (<classname>Zend_Ldap_Node_RootDse</classname>).
+            Zusätzlich abstrahiert die Komponente das Suchen im <acronym>LDAP</acronym> Schema
+            für OpenLDAP und ActiveDirectory Server <classname>Zend_Ldap_Node_Schema</classname>
+            und das empfangen von Server Informationen für OpenLDAP-, ActiveDirectory- und Novell
+            eDirectory Server (<classname>Zend_Ldap_Node_RootDse</classname>).
         </para>
 
         <para>
-            Using the <classname>Zend_Ldap</classname> class depends on the type of
-            <acronym>LDAP</acronym> server and is best summarized with some simple examples.
+            Die Verwendung der <classname>Zend_Ldap</classname> Klasse hängt vom Typ des
+            <acronym>LDAP</acronym> Servers ab und wird am besten mit einigen einfachen Beispielen
+            gezeigt.
         </para>
 
         <para>
-            If you are using OpenLDAP, a simple example looks like the following
-            (note that the <emphasis>bindRequiresDn</emphasis> option is important if you are
-            <emphasis>not</emphasis> using AD):
+            Wenn man OpenLDAP Verwendet sieht ein einfaches Beispiel wie folgt aus
+            (es ist zu beachten das die <emphasis>bindRequiresDn</emphasis> Option wichtig ist wenn
+            man <emphasis>nicht</emphasis> AD verwendet):
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -68,7 +70,7 @@ echo "$acctname\n";
 ]]></programlisting>
 
         <para>
-            If you are using Microsoft AD a simple example is:
+            Wenn man Microsoft AD verwendet ist ein einfaches Beispiel:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -88,33 +90,35 @@ echo "$acctname\n";
 ]]></programlisting>
 
         <para>
-            Note that we use the <methodname>getCanonicalAccountName()</methodname> method
-            to retrieve the account DN here only because that is what exercises the
-            most of what little code is currently present in this class.
+            Es ist zu beachten das die <methodname>getCanonicalAccountName()</methodname> Methode
+            verwendet wird um den DN Account zu empfangen da jenes das einige ist was das meiste
+            in diesem kleinen Code zeigt der aktuell in dieser Klasse vorhanden ist.
         </para>
 
         <sect3 id="zend.ldap.introduction.theory-of-operations.automatic-username-canonicalization">
-            <title>Automatic Username Canonicalization When Binding</title>
+            <title>Automatische Kanonisierung des Benutzernamens beim Binden</title>
 
             <para>
-                If <methodname>bind()</methodname> is called with a non-DN username but
-                <emphasis>bindRequiresDN</emphasis> is <constant>TRUE</constant> and no username in
-                DN form was supplied as an option, the bind will fail. However, if a username in DN
-                form is supplied in the options array, <classname>Zend_Ldap</classname> will
-                first bind with that username, retrieve the account DN for the username
-                supplied to <methodname>bind()</methodname> and then re-bind with that DN.
+                Wenn <code>bind()</code> mit einem nicht-DN Benutzernamen aufgerufen wird
+                aber <code>bindRequiresDN</code> <constant>TRUE</constant> ist und kein
+                Benutzername in DN-Form als Option angegeben wurde, dann wird die Server-Bindung
+                fehlschlagen. Wenn allerdings ein Benutzername in DN-Form im Optionen-Array
+                übergeben wurde, wird <classname>Zend_Ldap</classname> sich zuerst mit diesem
+                Benutzernamen an den Server binden, den Account DN für den Benutzernamen empfangen
+                der bei <code>bind()</code> angegeben wurde und dann mit diesem zum DN verbinden.
             </para>
 
             <para>
-                This behavior is critical to <link
+                Dieses Verhalten ist kritisch für <link
                     linkend="zend.auth.adapter.ldap"><classname>Zend_Auth_Adapter_Ldap</classname></link>,
-                which passes the username supplied by the user directly to
-                <methodname>bind()</methodname>.
+                welches den vom Benutzer angegebenen Benutzernamen direkt an
+                <methodname>bind()</methodname> übergibt.
             </para>
 
             <para>
-                The following example illustrates how the non-DN username
-                '<emphasis>abaker</emphasis>' can be used with <methodname>bind()</methodname>:
+                Das folgende Beispiel zeigt wie der nicht-DN Benutzername
+                '<emphasis>abaker</emphasis>' mit <methodname>bind()</methodname> verwendet werden
+                kann:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -134,37 +138,36 @@ echo "$acctname\n";
 ]]></programlisting>
 
             <para>
-                The <methodname>bind()</methodname> call in this example sees that
-                the username '<emphasis>abaker</emphasis>' is not in DN form, finds
-                <emphasis>bindRequiresDn</emphasis> is <constant>TRUE</constant>, uses
-                '<command>CN=user1,DC=foo,DC=net</command>' and '<emphasis>pass1</emphasis>' to
-                bind, retrieves the DN for '<emphasis>abaker</emphasis>', unbinds and then rebinds
-                with the newly discovered
+                Der Aufruf von <methodname>bind()</methodname> in diesem Beispiel sieht das der
+                Benutzer '<emphasis>abaker</emphasis>' nicht in DN Form ist, findet das
+                <emphasis>bindRequiresDn</emphasis> <constant>TRUE</constant> ist, verwendet
+                '<command>CN=user1,DC=foo,DC=net</command>' und '<emphasis>pass1</emphasis>' um zu
+                Binden, empfängt den DN für '<emphasis>abaker</emphasis>', entbindet und Bindet
+                dann nochmals mit dem neu erkannten
                 '<command>CN=Alice Baker,OU=Sales,DC=foo,DC=net</command>'.
             </para>
         </sect3>
 
         <sect3 id="zend.ldap.introduction.theory-of-operations.account-name-canonicalization">
-            <title>Account Name Canonicalization</title>
+            <title>Kanonisierung des Account Namens</title>
 
             <para>
-                The <emphasis>accountDomainName</emphasis> and
-                <emphasis>accountDomainNameShort</emphasis>
-                options are used for two purposes: (1) they facilitate multi-domain
-                authentication and failover capability, and (2) they are also used to
-                canonicalize usernames. Specifically, names are canonicalized to the
-                form specified by the <emphasis>accountCanonicalForm</emphasis> option.
-                This option may one of the following values:
+                Die Optionen <emphasis>accountDomainName</emphasis> und
+                <emphasis>accountDomainNameShort</emphasis> werden für zwei Zwecke verwendet:
+                (1) bieten Sie multi-Domain Authentifizierung und Failover Möglichkeiten, und
+                (2) werden Sie auch verwendet um Benutzernamen zu kanonisieren. Speziell Namen
+                werden in die Form kanonisiert die in der <emphasis>accountCanonicalForm</emphasis>
+                Option spezifiziert ist. Diese Option kann einen der folgenden Werte enthalten:
             </para>
 
             <table id="zend.ldap.using.theory-of-operation.account-name-canonicalization.table">
-                <title>Options for accountCanonicalForm</title>
+                <title>Optionen für accountCanonicalForm</title>
                 <tgroup cols="3">
                     <thead>
                         <row>
                             <entry>Name</entry>
-                            <entry>Value</entry>
-                            <entry>Example</entry>
+                            <entry>Wert</entry>
+                            <entry>Beispiel</entry>
                         </row>
                     </thead>
                     <tbody>
@@ -201,22 +204,22 @@ echo "$acctname\n";
             </table>
 
             <para>
-                The default canonicalization depends on what account domain name options
-                were supplied. If <emphasis>accountDomainNameShort</emphasis> was supplied, the
-                default <emphasis>accountCanonicalForm</emphasis> value is
-                <constant>ACCTNAME_FORM_BACKSLASH</constant>. Otherwise, if
-                <emphasis>accountDomainName</emphasis> was supplied, the
-                default is <constant>ACCTNAME_FORM_PRINCIPAL</constant>.
+                Die Standardmäßige Kanonisierung hängt davon ab welche Optionen für Account Domain
+                Namen angegeben wurden. Wenn <emphasis>accountDomainNameShort</emphasis> angegeben
+                wurde, ist der Standardwert von <emphasis>accountCanonicalForm</emphasis>
+                <constant>ACCTNAME_FORM_BACKSLASH</constant>. Andernfall, wenn
+                <emphasis>accountDomainName</emphasis> angegeben wurde, ist der Standardwert
+                <constant>ACCTNAME_FORM_PRINCIPAL</constant>.
             </para>
 
             <para>
-                Account name canonicalization ensures that the string used to identify
-                an account is consistent regardless of what was supplied to
-                <methodname>bind()</methodname>. For example, if the user supplies an account
-                name of <filename>abaker@example.com</filename> or just
-                <emphasis>abaker</emphasis> and the <emphasis>accountCanonicalForm</emphasis>
-                is set to 3, the resulting canonicalized name would be
-                <emphasis>EXAMPLE\abaker</emphasis>.
+                Die Kanonisierung des Account Namens stellt sicher das der String der zur
+                Identifikation des Accounts verwendet wird konsistent ist, unabhängig davon was an
+                <methodname>bind()</methodname> übergeben wurde. Wenn der Benutzer, zum Beispiel,
+                den Account Namen <filename>abaker@example.com</filename> oder nur
+                <emphasis>abaker</emphasis> angibt, und <emphasis>accountCanonicalForm</emphasis>
+                auf 3 gesetzt ist, wird der resultierende kanonisierte Name
+                <emphasis>EXAMPLE\abaker</emphasis> sein.
             </para>
         </sect3>
 

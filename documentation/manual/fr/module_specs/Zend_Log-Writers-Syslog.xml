@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 16589 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.log.writers.syslog">
     <title>Ecrire dans lee journal du système</title>
 
     <para>
-        <classname>Zend_Log_Writer_Syslog</classname> écrits les rapports de log dans le
+        <classname>Zend_Log_Writer_Syslog</classname> écrit les rapports de log dans le
         journal système (syslog). En interne, il utilise les fonctions <acronym>PHP</acronym>
         <methodname>openlog()</methodname>,
         <methodname>closelog()</methodname>, et
@@ -13,14 +14,14 @@
 
     <para>
         Un cas d'utilisation intéressant de <classname>Zend_Log_Writer_Syslog</classname>
-        est le cluster de machines. La fonctionnalité d ejournal système permet de
+        est le cluster de machines. La fonctionnalité de journal système permet de
         faire en sorte que chaque machine enregistre dans un fichier de journal centralisé,
         ce qui simplifie l'administration.
     </para>
 
     <para>
         Par défaut, tous les messages gérés sont préfixés par "Zend_Log". Si vous souhaitez
-        changer ce nom, utilisez le contructeur ou l'accesseur:
+        changer ce nom, utilisez le constructeur ou l'accesseur:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -54,8 +55,8 @@ $writer->setFacility(LOG_USER);
 ]]></programlisting>
 
     <para>
-        En utilisant l'objet de log, continuez d'utiliser les contantes de
-        <classname>Zend_Log</classname>, elles vont être convertie en leurs valeurs
+        En utilisant l'objet de log, continuez d'utiliser les constantes de
+        <classname>Zend_Log</classname>, elles vont être converties en leurs valeurs
         par <methodname>syslog()</methodname>.
     </para>
 </sect2>

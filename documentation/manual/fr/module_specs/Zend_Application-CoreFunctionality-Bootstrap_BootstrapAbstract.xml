@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 16652 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.core-functionality.bootstrap-bootstrapabstract">
     <title>Zend_Application_Bootstrap_BootstrapAbstract</title>
 
     <para>
-        <classname>Zend_Application_Bootstrap_BootstrapAbstract</classname> est une classe abstraite qui
-        propose les fonctionnalités de base d'un bootstrap classique. Elle implémente
-        both <link linkend="zend.application.core-functionality.bootstrap-bootstrapper">
-            Zend_Application_Bootstrap_Bootstrapper</link> et <link
-            linkend="zend.application.core-functionality.bootstrap-resourcebootstrapper">
-            Zend_Application_Bootstrap_ResourceBootstrapper</link>.
+        <classname>Zend_Application_Bootstrap_BootstrapAbstract</classname> est une classe
+        abstraite qui propose les fonctionnalités de base d'un bootstrap classique. Elle
+        implémente à la fois <link
+            linkend="zend.application.core-functionality.bootstrap-bootstrapper">Zend_Application_Bootstrap_Bootstrapper</link>
+        et <link
+            linkend="zend.application.core-functionality.bootstrap-resourcebootstrapper">Zend_Application_Bootstrap_ResourceBootstrapper</link>.
     </para>
 
     <table id="zend.application.core-functionality.bootstrap-bootstrapabstract.api.table">
-        <title>Zend_Application_Bootstrap_BootstrapAbstract Methods</title>
+        <title>Méthodes de Zend_Application_Bootstrap_BootstrapAbstract</title>
         <tgroup cols="4">
             <thead>
                 <row>
@@ -29,7 +30,7 @@
                     <entry><type>Void</type></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <varname>$application</varname>: <emphasis>requis</emphasis>.
+                            <varname>$application</varname>&#160;: <emphasis>requis</emphasis>.
                             Accepte un objet <classname>Zend_Application</classname> ou
                             <classname>Zend_Application_Bootstrap_Bootstrapper</classname>
                         </para></listitem>
@@ -45,7 +46,7 @@
                     <entry><classname>Zend_Application_Bootstrap_Bootstrapper</classname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <varname>$options</varname>: <emphasis>requis</emphasis>.
+                            <varname>$options</varname>&#160;: <emphasis>requis</emphasis>.
                             Tableau d'options à configurer.
                         </para></listitem>
                     </itemizedlist></entry>
@@ -59,7 +60,7 @@
                     <para>
                         Deux options supplémentaires spéciales peuvent aussi être utilisée.
                         <property>pluginPaths</property> spécifie des préfixes de chemin vers
-                        les plugins; on attend ici un tableau de paires prefixes, chemins.
+                        les plugins&#160;; on attend ici un tableau de paires préfixes, chemins.
                         <property>resources</property> permet de spécifier un plugin
                         à utiliser.
                     </para>
@@ -81,7 +82,7 @@
                     <entry><type>Boolean</type></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <varname>$key</varname>: <emphasis>requis</emphasis>.
+                            <varname>$key</varname>&#160;: <emphasis>requis</emphasis>.
                             Option dont on veut tester la présence.
                         </para></listitem>
                     </itemizedlist></entry>
@@ -112,7 +113,7 @@
                     </entry>
                     <entry><itemizedlist>
                             <listitem><para>
-                                <varname>$application</varname>: <emphasis>requis</emphasis>.
+                                <varname>$application</varname>&#160;: <emphasis>requis</emphasis>.
                             </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
@@ -137,8 +138,8 @@
                     <entry><type>String</type></entry>
                     <entry>N/A</entry>
                     <entry><para>
-                        Récupère l'environnement (chaine) enregistré dans l'objet parent, application
-                        ou bootstrap.
+                        Récupère l'environnement (chaîne) enregistré dans l'objet parent,
+                        application ou bootstrap.
                     </para></entry>
                 </row>
 
@@ -157,9 +158,9 @@
                     <entry><type>Object</type></entry>
                     <entry>N/A</entry>
                     <entry><para>
-                        Récupère le conteneur stockant les ressources. Si aucun conteneur n'est spécifié,
-                        un objet<link linkend="zend.registry">Zend_Registry</link> sera crée pour cet usage,
-                        puis retourné.
+                        Récupère le conteneur stockant les ressources. Si aucun conteneur n'est
+                        spécifié, un objet <link linkend="zend.registry">Zend_Registry</link>
+                        sera crée pour cet usage, puis retourné.
                     </para></entry>
                 </row>
 
@@ -171,13 +172,13 @@
                     <entry><itemizedlist>
                         <listitem><para>
                             <varname>$container</varname>, <emphasis>requis</emphasis>.
-                            Un objet dans lequel stocker les resources.
+                            Un objet dans lequel stocker les ressources.
                         </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
                         Définit un conteneur mémorisant les ressources. Lorsqu'une ressource est
-                        demandée, elle est chargée puis stocker dans ce conteneur pour être retournée
-                        lors des prochains appels.
+                        demandée, elle est chargée puis stocker dans ce conteneur pour être
+                        retournée lors des prochains appels.
                     </para></entry>
                 </row>
 
@@ -228,7 +229,7 @@
                     <entry>
                     <para>
                         Si <varname>$resource</varname> est vide, charge toutes les ressources
-                        (bootstrap). Si une chaine est passée, charge uniquement la ressource
+                        (bootstrap). Si une chaîne est passée, charge uniquement la ressource
                         demandée. Enfin si un tableau est passé, charge les ressources nommées
                         dans ce tableau.
                     </para>
@@ -237,8 +238,8 @@
                         Cette méthode peut être utilisée pour déclencher le chargement d'une 
                         ressource, définit sous forme de méthode ou de plugin (c'est égal).
                         Attention si vous spécifiez à la fois une méthode et un plugin pour une
-                        même ressource, alors la méthode sera préférée comme bootstrap, le plugin sera
-                        ignoré.
+                        même ressource, alors la méthode sera préférée comme bootstrap, le plugin
+                        sera ignoré.
                     </para>
                     </entry>
                 </row>
@@ -248,7 +249,8 @@
                     <entry><type>Void</type></entry>
                     <entry>N/A</entry>
                     <entry><para>
-                        Définis la logique applicative à lancer après le bootstrap (la configuration)
+                        Définit la logique applicative à lancer après le bootstrap
+                        (la configuration)
                     </para></entry>
                 </row>
 
@@ -257,12 +259,12 @@
                     <entry><type>Mixed</type></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <varname>$method</varname>: <emphasis>requis</emphasis>.
+                            <varname>$method</varname>&#160;: <emphasis>requis</emphasis>.
                             Nom de la méthode appelée
                         </para></listitem>
 
                         <listitem><para>
-                            <varname>$args</varname>: <emphasis>requis</emphasis>.
+                            <varname>$args</varname>&#160;: <emphasis>requis</emphasis>.
                             Tableau d'arguments d'invocation pour la méthode.
                         </para></listitem>
                     </itemizedlist></entry>

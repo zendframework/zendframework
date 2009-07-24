@@ -295,7 +295,7 @@ class Zend_LoaderTest extends PHPUnit_Framework_TestCase
         $found       = false;
         foreach($autoloaders as $function) {
             if (is_array($function)) {
-                $class = array_shift($function);
+                $class = $function[0];
                 if ($class == 'Zend_Loader_Autoloader') {
                     $found = true;
                     spl_autoload_unregister($function);
@@ -344,7 +344,7 @@ class Zend_LoaderTest extends PHPUnit_Framework_TestCase
         $found       = false;
         foreach ($autoloaders as $function) {
             if (is_array($function)) {
-                $class = array_shift($function);
+                $class = $function[0];
                 if ($class == 'Zend_Loader_Autoloader') {
                     $found = true;
                     break;
@@ -421,7 +421,7 @@ class Zend_LoaderTest extends PHPUnit_Framework_TestCase
 
         foreach (spl_autoload_functions() as $function) {
             if (is_array($function)) {
-                $class = array_shift($function);
+                $class = $function[0];
                 if ($class == 'Zend_Loader_Autoloader') {
                     spl_autoload_unregister($function);
                     break;
@@ -448,7 +448,7 @@ class Zend_LoaderTest extends PHPUnit_Framework_TestCase
 
         foreach (spl_autoload_functions() as $function) {
             if (is_array($function)) {
-                $class = array_shift($function);
+                $class = $function[0];
                 if ($class == 'Zend_Loader_Autoloader') {
                     spl_autoload_unregister($function);
                     break;

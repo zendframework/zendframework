@@ -273,6 +273,21 @@ class Zend_Http_ResponseTest extends PHPUnit_Framework_TestCase
         $body = Zend_Http_Response::extractBody($this->readResponse('response_leadingws'));
         $this->assertEquals($body, "\r\n\t  \n\r\tx", 'Extracted body is not identical to expected body');
     }
+    
+    /**
+     * Test that parsing a multibyte-encoded chunked response works.
+     * 
+     * This can potentially fail on different PHP environments - for example 
+     * when mbstring.func_overload is set to overload strlen().
+     * 
+     */
+    public function testMultibyteChunkedResponse()
+    {
+        $md5 = 'ab952f1617d0e28724932401f2d3c6ae';
+
+        $response = Zend_Http_Response::fromString($this->readResponse('response_multibyte_body'));
+        $this->assertEquals($md5, md5($response->getBody()));
+    }
 
     /**
      * Helper function: read test response from file

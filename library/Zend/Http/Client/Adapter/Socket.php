@@ -340,22 +340,23 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
 
                     // Convert the hexadecimal value to plain integer
                     $chunksize = hexdec($chunksize);
-
-                    // Read chunk
-                    $left_to_read = $chunksize;
-                    while ($left_to_read > 0) {
-                        $line = @fread($this->socket, $left_to_read);
+                    
+                    // Read next chunk
+                    $read_to = ftell($this->socket) + $chunksize;
+                    
+                    do {
+                        $current_pos = ftell($this->socket);
+                        if ($current_pos >= $read_to) break;
+                        
+                        $line = @fread($this->socket, $read_to - $current_pos);
                         if ($line === false || strlen($line) === 0) {
                             $this->_checkSocketReadTimeout();
                             break;
                         } else {
                             $chunk .= $line;
-                            $left_to_read -= strlen($line);
                         }
 
-                        // Break if the connection ended prematurely
-                        if (feof($this->socket)) break;
-                    }
+                    } while (! feof($this->socket));
 
                     $chunk .= @fgets($this->socket);
                     $this->_checkSocketReadTimeout();
@@ -372,18 +373,20 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
         // Else, if we got the content-length header, read this number of bytes
         } elseif (isset($headers['content-length'])) {
 
-            $left_to_read = $headers['content-length'];
+            $current_pos = ftell($this->socket);
             $chunk = '';
-            while ($left_to_read > 0) {
-                $chunk = @fread($this->socket, $left_to_read);
-                $this->_checkSocketReadTimeout();
-
+            
+            for ($read_to = $current_pos + $headers['content-length'];
+                 $read_to > $current_pos;
+                 $current_pos = ftell($this->socket)) {
+                     
+                $chunk = @fread($this->socket, $read_to - $current_pos);
                 if ($chunk === false || strlen($chunk) === 0) {
+                    $this->_checkSocketReadTimeout();
                     break;
-                } else {
-                    $left_to_read -= strlen($chunk);
-                    $response .= $chunk;
-                }
+                } 
+                
+                $response .= $chunk;
 
                 // Break if the connection ended prematurely
                 if (feof($this->socket)) break;

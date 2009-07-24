@@ -191,6 +191,22 @@ class Zend_Http_Client_SocketTest extends Zend_Http_Client_CommonHttpTests
         $this->assertLessThan(2, $time);
     }
 
+    /**
+     * Test that a chunked response with multibyte characters is properly read
+     * 
+     * This can fail in various PHP environments - for example, when mbstring 
+     * overloads substr() and strlen(), and mbstring's internal encoding is 
+     * not a single-byte encoding. 
+     *
+     * @link http://framework.zend.com/issues/browse/ZF-6218
+     */
+    public function testMultibyteChunkedResponseZF6218()
+    {
+        $md5 = '7667818873302f9995be3798d503d8d3';
+        
+        $response = $this->client->request();
+        $this->assertEquals($md5, md5($response->getBody()));
+    }
 
     /**
      * Data Providers

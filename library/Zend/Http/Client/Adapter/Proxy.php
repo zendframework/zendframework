@@ -58,6 +58,8 @@ class Zend_Http_Client_Adapter_Proxy extends Zend_Http_Client_Adapter_Socket
      */
     protected $config = array(
         'ssltransport'  => 'ssl',
+        'sslcert'       => null,
+        'sslpassphrase' => null,
         'proxy_host'    => '',
         'proxy_port'    => 8080,
         'proxy_user'    => '',

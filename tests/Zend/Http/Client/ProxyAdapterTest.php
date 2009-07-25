@@ -69,6 +69,25 @@ class Zend_Http_Client_ProxyAdapterTest extends Zend_Http_Client_SocketTest
             $this->markTestSkipped("Zend_Http_Client proxy server tests are not enabled in TestConfiguration.php");
         }
     }
+    
+    /**
+     * Test that when no proxy is set the adapter falls back to direct connection
+     * 
+     */
+    public function testFallbackToSocket()
+    {
+        $this->_adapter->setConfig(array(
+            'proxy_host' => null,
+        ));
+        
+        $this->client->setUri($this->baseuri . 'testGetLastRequest.php');
+        $res = $this->client->request(Zend_Http_Client::TRACE);
+        if ($res->getStatus() == 405 || $res->getStatus() == 501) {
+            $this->markTestSkipped("Server does not allow the TRACE method");
+        }
+
+        $this->assertEquals($this->client->getLastRequest(), $res->getBody(), 'Response body should be exactly like the last request');
+    }
 
     public function testGetLastRequest()
     {

@@ -32,7 +32,7 @@
                 nightly snapshots represent the latest progress of Zend Framework development.
                 Snapshots are bundled with documentation either in English only or in all
                 available languages. If you anticipate working with the latest Zend Framework
-                developments, consider using a Subversion (SVN) client.
+                developments, consider using a Subversion (<acronym>SVN</acronym>) client.
             </para>
         </listitem>
         <listitem>
@@ -67,9 +67,10 @@
                 <acronym>SVN</acronym> to manage their application's working copies.
             </para>
             <para>
-                The URL for the trunk of Zend Framework's <acronym>SVN</acronym> repository is:
-                <ulink url="http://framework.zend.com/svn/framework/standard/trunk">
-                http://framework.zend.com/svn/framework/standard/trunk</ulink>
+                The <acronym>URL</acronym> for the trunk of Zend Framework's <acronym>SVN</acronym>
+                repository is: <ulink
+                    url="http://framework.zend.com/svn/framework/standard/trunk">
+                    http://framework.zend.com/svn/framework/standard/trunk</ulink>
             </para>
         </listitem>
     </itemizedlist>

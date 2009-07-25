@@ -17,7 +17,7 @@
             which can be used to implement "pretty <acronym>URL</acronym>'s" like
             "<filename>http://www.example.com/user/edit</filename>". If mod_rewrite is not enabled,
             Zand Framework can be configured to support <acronym>URL</acronym>'s such as
-            "<filename>http://www.example.com?controller=user&amp;action=edit</filename>". Pretty
+            "<command>http://www.example.com?controller=user&amp;action=edit</command>". Pretty
             <acronym>URL</acronym>'s may be used to shorten <acronym>URL</acronym>'s for textual
             representation or search engine optimization (<acronym>SEO</acronym>), but they do not
             directly affect the functionality of the application.

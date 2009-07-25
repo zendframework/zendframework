@@ -256,24 +256,15 @@ class Zend_Validate_File_MimeType extends Zend_Validate_Abstract
         }
 
         $mimetype = $this->getMimeType(true);
-        foreach ($mimetype as $type) {
-            if (0 === strpos($type, $this->_type)) {
-                return true;
-            }
-        }
-        /*
         if (in_array($this->_type, $mimetype)) {
             return true;
         }
-         */
 
         $types = explode('/', $this->_type);
         $types = array_merge($types, explode('-', $this->_type));
-        foreach ($mimetype as $mime) {
-            foreach ($types as $type) {
-                if (0 === strpos($type, $mime)) {
-                    return true;
-                }
+        foreach($mimetype as $mime) {
+            if (in_array($mime, $types)) {
+                return true;
             }
         }
 

@@ -379,7 +379,7 @@ class Zend_Form_Element_FileTest extends PHPUnit_Framework_TestCase
         $adapter = new Zend_Form_Element_FileTest_MockAdapter();
         $element->setTransferAdapter($adapter);
 
-        $this->assertRegexp('#^text/plain#', $element->getMimeType('baz.text'));
+        $this->assertEquals('text/plain', $element->getMimeType('baz.text'));
     }
 
     public function testAddedErrorsAreDisplayed()

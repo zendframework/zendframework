@@ -59,6 +59,26 @@ class Zend_Http_ResponseTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('0b13cb193de9450aa70a6403e2c9902f', md5($res->getBody()));
         $this->assertEquals('ad62c21c3aa77b6a6f39600f6dd553b8', md5($res->getRawBody()));
     }
+    
+    /**
+     * Make sure wer can handle non-RFC complient "deflate" responses. 
+     * 
+     * Unlike stanrdard 'deflate' response, those do not contain the zlib header
+     * and trailer. Unfortunately some buggy servers (read: IIS) send those and 
+     * we need to support them.
+     * 
+     * @link http://framework.zend.com/issues/browse/ZF-6040
+     */
+    public function testNonStandardDeflateResponseZF6040()
+    {
+        $response_text = file_get_contents(dirname(__FILE__) . '/_files/response_deflate_iis');
+
+        $res = Zend_Http_Response::fromString($response_text);
+
+        $this->assertEquals('deflate', $res->getHeader('Content-encoding'));
+        $this->assertEquals('d82c87e3d5888db0193a3fb12396e616', md5($res->getBody()));
+        $this->assertEquals('c830dd74bb502443cf12514c185ff174', md5($res->getRawBody()));
+    }
 
     public function testChunkedResponse ()
     {

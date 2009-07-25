@@ -601,8 +601,9 @@ class Zend_Http_Response
     {
         if (! function_exists('gzinflate')) {
             require_once 'Zend/Http/Exception.php';
-            throw new Zend_Http_Exception('Unable to decode gzipped response ' .
-                'body: perhaps the zlib extension is not loaded?');
+            throw new Zend_Http_Exception(
+                'zlib extension is required in order to decode "gzip" encoding'
+            );
         }
 
         return gzinflate(substr($body, 10));
@@ -620,11 +621,28 @@ class Zend_Http_Response
     {
         if (! function_exists('gzuncompress')) {
             require_once 'Zend/Http/Exception.php';
-            throw new Zend_Http_Exception('Unable to decode deflated response ' .
-                'body: perhaps the zlib extension is not loaded?');
+            throw new Zend_Http_Exception(
+                'zlib extension is required in order to decode "deflate" encoding'
+            );
         }
 
-        return gzuncompress($body);
+        /**
+         * Some servers (IIS ?) send a broken deflate response, without the 
+         * RFC-required zlib header. 
+         * 
+         * We try to detect the zlib header, and if it does not exsit we 
+         * teat the body is plain DEFLATE content.
+         * 
+         * This method was adapted from PEAR HTTP_Request2 by (c) Alexey Borzov
+         * 
+         * @link http://framework.zend.com/issues/browse/ZF-6040
+         */
+        $zlibHeader = unpack('n', substr($body, 0, 2));
+        if ($zlibHeader[1] % 31 == 0) {
+            return gzuncompress($body);
+        } else {
+            return gzinflate($body); 
+        }
     }
 
     /**

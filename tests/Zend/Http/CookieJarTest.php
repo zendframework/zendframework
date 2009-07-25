@@ -88,23 +88,26 @@ class Zend_Http_CookieJarTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($cookie_str, $jar->getAllCookies(Zend_Http_CookieJar::COOKIE_STRING_CONCAT));
     }
 
-    public function testExceptAddCookiesInvalidResponse()
+    /**
+     * Test we get an exception in case of invalid response objects
+     * 
+     * @dataProvider invalidResponseProvider
+     * @expectedException Zend_Http_Exception
+     */
+    public function testExceptAddCookiesInvalidResponse($resp)
     {
         $jar = new Zend_Http_Cookiejar();
-
-        try {
-            $jar->addCookiesFromResponse('somestring', 'http://www.example.com');
-            $this->fail('Excepted exception was not thrown');
-        } catch (Zend_Http_Exception $e) {
-            // We are ok
-        }
-
-        try {
-            $jar->addCookiesFromResponse(new stdClass(), 'http://www.example.com');
-            $this->fail('Excepted exception was not thrown');
-        } catch (Zend_Http_Exception $e) {
-            // We are ok
-        }
+        $jar->addCookiesFromResponse($resp, 'http://www.example.com');
+    }
+    
+    static public function invalidResponseProvider()
+    {
+        return array(
+            array(new stdClass),
+            array(null),
+            array(12),
+            array('hi')
+        );
     }
 
     /**
@@ -128,7 +131,7 @@ class Zend_Http_CookieJarTest extends PHPUnit_Framework_TestCase
         $cobjects = $jar->getAllCookies();
 
         foreach ($cobjects as $id => $cookie) {
-            $this->assertContains($cookie->__toString(), $cookies[$id]);
+            $this->assertContains((string) $cookie, $cookies[$id]);
         }
     }
 
@@ -254,30 +257,39 @@ class Zend_Http_CookieJarTest extends PHPUnit_Framework_TestCase
 
     /**
      * Test we can get all matching cookies for a request, with session cookies
+     * 
+     * @dataProvider cookieMatchTestProvider
      */
-    public function testGetMatchingCookies()
+    public function testGetMatchingCookies($url, $expected)
     {
         $jar = new Zend_Http_CookieJar();
         $cookies = array(
             Zend_Http_Cookie::fromString('foo1=bar1; domain=.foo.com; path=/path; expires=' . date(DATE_COOKIE, time() + 3600)),
-            Zend_Http_Cookie::fromString('foo2=bar2; domain=.foo.com; path=/; expires=' . date(DATE_COOKIE, time() + 3600)),
+            Zend_Http_Cookie::fromString('foo2=bar2; domain=foo.com; path=/; expires=' . date(DATE_COOKIE, time() + 3600)),
             Zend_Http_Cookie::fromString('foo3=bar3; domain=.foo.com; path=/; expires=' . date(DATE_COOKIE, time() - 3600)),
             Zend_Http_Cookie::fromString('foo4=bar4; domain=.foo.com; path=/;'),
             Zend_Http_Cookie::fromString('foo5=bar5; domain=.foo.com; path=/; secure; expires=' . date(DATE_COOKIE, time() + 3600)),
             Zend_Http_Cookie::fromString('foo6=bar6; domain=.foo.com; path=/otherpath; expires=' . date(DATE_COOKIE, time() + 3600)),
             Zend_Http_Cookie::fromString('foo7=bar7; domain=www.foo.com; path=/path; expires=' . date(DATE_COOKIE, time() + 3600)),
+            Zend_Http_Cookie::fromString('foo7=bar7; domain=newwww.foo.com; path=/;'),
             Zend_Http_Cookie::fromString('foo8=bar8; domain=subdomain.foo.com; path=/path; expires=' . date(DATE_COOKIE, time() + 3600)),
         );
 
         foreach ($cookies as $cookie) $jar->addCookie($cookie);
-
-        $this->assertEquals(8, count($jar->getAllCookies()), 'Cookie count is expected to be 8');
-
-        $cookies = $jar->getMatchingCookies('http://www.foo.com/path/file.txt');
-        $this->assertEquals(4, count($cookies), 'Cookie count is expected to be 4');
-
-        $cookies = $jar->getMatchingCookies('https://www.foo.com/path/file.txt');
-        $this->assertEquals(5, count($cookies), 'Cookie count is expected to be 5');
+        $cookies = $jar->getMatchingCookies($url);
+        $this->assertEquals($expected, count($cookies), $jar->getMatchingCookies($url, true, Zend_Http_CookieJar::COOKIE_STRING_CONCAT));
+    }
+    
+    static public function cookieMatchTestProvider()
+    {
+        return array(
+            array('http://www.foo.com/path/file.txt', 4),
+            array('http://foo.com/path/file.txt', 3),
+            array('https://www.foo.com/path/file.txt', 5),
+            array('http://subdomain.foo.com/path', 4),
+            array('http://subdomain.foo.com/otherpath', 3),
+            array('http://blog.foo.com/news', 2)
+        );
     }
 
     /**

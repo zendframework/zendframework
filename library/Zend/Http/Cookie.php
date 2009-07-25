@@ -236,12 +236,15 @@ class Zend_Http_Cookie
         if ($this->isExpired($now)) return false;
         if ($this->isSessionCookie() && ! $matchSessionCookies) return false;
 
-        // Validate domain and path
-        // Domain is validated using tail match, while path is validated using head match
-        $domain_preg = preg_quote($this->getDomain(), "/");
-        if (! preg_match("/{$domain_preg}$/", $uri->getHost())) return false;
-        $path_preg = preg_quote($this->getPath(), "/");
-        if (! preg_match("/^{$path_preg}/", $uri->getPath())) return false;
+        // Check if the domain matches
+        if (! self::matchCookieDomain($this->getDomain(), $uri->getHost())) {
+            return false;
+        }
+        
+        // Check that path matches using prefix match
+        if (! self::matchCookiePath($this->getPath(), $uri->getPath())) {
+            return false;
+        }
 
         // If we didn't die until now, return true.
         return true;
@@ -343,5 +346,63 @@ class Zend_Http_Cookie
         } else {
             return false;
         }
+    }
+
+    /**
+     * Check if a cookie's domain matches a host name.
+     * 
+     * Used by Zend_Http_Cookie and Zend_Http_CookieJar for cookie matching
+     * 
+     * @param  string $cookieDomain
+     * @param  string $host
+     * 
+     * @return boolean
+     */
+    public static function matchCookieDomain($cookieDomain, $host)
+    {
+        if (! $cookieDomain) {
+            require_once 'Zend/Http/Exception.php';
+            throw new Zend_Http_Exception("\$cookieDomain is expected to be a cookie domain");
+        }
+        
+        if (! $host) {
+            require_once 'Zend/Http/Exception.php';
+            throw new Zend_Http_Exception("\$host is expected to be a host name");
+        }
+        
+        $cookieDomain = strtolower($cookieDomain);
+        $host = strtolower($host);
+        
+        if ($cookieDomain[0] == '.') {
+            $cookieDomain = substr($cookieDomain, 1);
+        }
+        
+        // Check for either exact match or suffix match
+        return ($cookieDomain == $host || 
+                preg_match("/\.$cookieDomain$/", $host));
+    }
+
+    /**
+     * Check if a cookie's path matches a URL path
+     * 
+     * Used by Zend_Http_Cookie and Zend_Http_CookieJar for cookie matching
+     * 
+     * @param  string $cookiePath
+     * @param  string $path
+     * @return boolean
+     */
+    public static function matchCookiePath($cookiePath, $path)
+    {
+        if (! $cookiePath) {
+            require_once 'Zend/Http/Exception.php';
+            throw new Zend_Http_Exception("\$cookiePath is expected to be a cookie path");
+        }
+        
+        if (! $path) {
+            require_once 'Zend/Http/Exception.php';
+            throw new Zend_Http_Exception("\$path is expected to be a host name");
+        }
+        
+        return (strpos($path, $cookiePath) === 0);        
     }
 }

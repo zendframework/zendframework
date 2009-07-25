@@ -550,11 +550,19 @@ abstract class Zend_File_Transfer_Adapter_Abstract
         if (is_array($options)) {
             foreach ($options as $name => $value) {
                 foreach ($file as $key => $content) {
-                    if (array_key_exists($name, $this->_options)) {
-                        $this->_files[$key]['options'][$name] = (boolean) $value;
-                    } else {
-                        require_once 'Zend/File/Transfer/Exception.php';
-                        throw new Zend_File_Transfer_Exception("Unknown option: $name = $value");
+                    switch ($name) {
+                        case 'magicFile' :
+                            $this->_files[$key]['options'][$name] = (string) $value;
+                            break;
+
+                        case 'ignoreNoFile' :
+                        case 'useByteString' :
+                            $this->_files[$key]['options'][$name] = (boolean) $value;
+                            break;
+
+                        default:
+                            require_once 'Zend/File/Transfer/Exception.php';
+                            throw new Zend_File_Transfer_Exception("Unknown option: $name = $value");
                     }
                 }
             }

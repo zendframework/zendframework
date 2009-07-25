@@ -740,6 +740,18 @@ class Zend_File_Transfer_Adapter_AbstractTest extends PHPUnit_Framework_TestCase
             $this->assertContains('not found', $e->getMessage());
         }
     }
+
+    /**
+     * @ZF-7376
+     */
+    public function testSettingMagicFile()
+    {
+        $this->adapter->setOptions(array('magicFile' => 'test/file'));
+        $this->assertEquals(
+            array(
+                'bar' => array('magicFile' => 'test/file', 'ignoreNoFile' => false, 'useByteString' => true),
+            ), $this->adapter->getOptions('bar'));
+    }
 }
 
 class Zend_File_Transfer_Adapter_AbstractTest_MockAdapter extends Zend_File_Transfer_Adapter_Abstract

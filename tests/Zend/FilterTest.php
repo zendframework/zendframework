@@ -101,7 +101,7 @@ class Zend_FilterTest extends PHPUnit_Framework_TestCase
      */
     public function testStaticFactory()
     {
-        $filteredValue = Zend_Filter::get('1a2b3c4d', 'Digits');
+        $filteredValue = Zend_Filter::filterStatic('1a2b3c4d', 'Digits');
         $this->assertEquals('1234', $filteredValue);
     }
 
@@ -112,13 +112,13 @@ class Zend_FilterTest extends PHPUnit_Framework_TestCase
     public function testStaticFactoryWithConstructorArguments()
     {
         // Test HtmlEntities with one ctor argument.
-        $filteredValue = Zend_Filter::get('"O\'Reilly"', 'HtmlEntities', array(array('quotestyle' => ENT_COMPAT)));
+        $filteredValue = Zend_Filter::filterStatic('"O\'Reilly"', 'HtmlEntities', array(array('quotestyle' => ENT_COMPAT)));
         $this->assertEquals('&quot;O\'Reilly&quot;', $filteredValue);
 
         // Test HtmlEntities with a different ctor argument,
         // and make sure it gives the correct response
         // so we know it passed the arg to the ctor.
-        $filteredValue = Zend_Filter::get('"O\'Reilly"', 'HtmlEntities', array(array('quotestyle' => ENT_QUOTES)));
+        $filteredValue = Zend_Filter::filterStatic('"O\'Reilly"', 'HtmlEntities', array(array('quotestyle' => ENT_QUOTES)));
         $this->assertEquals('&quot;O&#039;Reilly&quot;', $filteredValue);
     }
 
@@ -135,7 +135,7 @@ class Zend_FilterTest extends PHPUnit_Framework_TestCase
     {
         set_error_handler(array($this, 'handleNotFoundError'), E_WARNING);
         try {
-            Zend_Filter::get('1234', 'UnknownFilter');
+            Zend_Filter::filterStatic('1234', 'UnknownFilter');
         } catch (Zend_Filter_Exception $e) {
         }
         restore_error_handler();
@@ -189,6 +189,32 @@ class Zend_FilterTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(array('One', 'Two', 'Three'), Zend_Filter::getDefaultNamespaces());
 
         Zend_Filter::setDefaultNamespaces(array());
+    }
+
+    /**
+     * ZF-2105
+     */
+    public function testUsageOfOldStaticFactory()
+    {
+        set_error_handler(array($this, 'errorHandlerIgnore'));
+        $filteredValue = Zend_Filter::get('1a2b3c4d', 'Digits');
+        $this->assertEquals('1234', $filteredValue);
+        restore_error_handler();
+    }
+
+    /**
+     * Ignores a raised PHP error when in effect, but throws a flag to indicate an error occurred
+     *
+     * @param  integer $errno
+     * @param  string  $errstr
+     * @param  string  $errfile
+     * @param  integer $errline
+     * @param  array   $errcontext
+     * @return void
+     */
+    public function errorHandlerIgnore($errno, $errstr, $errfile, $errline, array $errcontext)
+    {
+        $this->_errorOccurred = true;
     }
 }
 

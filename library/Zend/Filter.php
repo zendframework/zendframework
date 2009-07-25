@@ -126,6 +126,27 @@ class Zend_Filter implements Zend_Filter_Interface
     }
 
     /**
+     * @deprecated
+     * @see Zend_Filter::filterStatic()
+     *
+     * @param  mixed        $value
+     * @param  string       $classBaseName
+     * @param  array        $args          OPTIONAL
+     * @param  array|string $namespaces    OPTIONAL
+     * @return mixed
+     * @throws Zend_Filter_Exception
+     */
+    public static function get($value, $classBaseName, array $args = array(), $namespaces = array())
+    {
+        trigger_error(
+            'Zend_Filter::get() is deprecated as of 1.9.0; please update your code to utilize Zend_Filter::filterStatic()',
+            E_USER_NOTICE
+        );
+
+        return self::filterStatic($value, $classBaseName, $args, $namespaces);
+    }
+
+    /**
      * Returns a value filtered through a specified filter class, without requiring separate
      * instantiation of the filter object.
      *
@@ -142,7 +163,7 @@ class Zend_Filter implements Zend_Filter_Interface
      * @return mixed
      * @throws Zend_Filter_Exception
      */
-    public static function get($value, $classBaseName, array $args = array(), $namespaces = array())
+    public static function filterStatic($value, $classBaseName, array $args = array(), $namespaces = array())
     {
         require_once 'Zend/Loader.php';
         $namespaces = array_merge((array) $namespaces, self::$_defaultNamespaces, array('Zend_Filter'));
@@ -150,7 +171,6 @@ class Zend_Filter implements Zend_Filter_Interface
             $className = $namespace . '_' . ucfirst($classBaseName);
             if (!class_exists($className)) {
                 try {
-                    require_once 'Zend/Loader.php';
                     Zend_Loader::loadClass($className);
                 } catch (Zend_Exception $ze) {
                     continue;

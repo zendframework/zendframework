@@ -63,7 +63,7 @@ class Zend_Translate_Adapter_IniTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Message 1 (en)', $adapter->_('Message_1'));
         $this->assertEquals('Message_6', $adapter->translate('Message_6'));
         $this->assertEquals('Küchen Möbel (en)', $adapter->translate('Cooking_furniture'));
-        $this->assertEquals('Cooking furniture (en)', $adapter->translate('Küchen_Möbel'));
+        $this->assertEquals('Cooking furniture (en)', $adapter->translate('Küchen_Möbel'), var_export($adapter->getMessages('en'), 1));
     }
 
     public function testIsTranslated()

@@ -5,15 +5,15 @@
     <title>Tools</title>
 
     <sect2 id="zend.ldap.tools.dn">
-        <title>Creation and modification of DN strings</title>
+        <title>Erstellung und Modifizierung von DN Strings</title>
         <para/>
     </sect2>
 
     <sect2 id="zend.ldap.tools.filter">
-        <title>Using the filter API to create search filters</title>
+        <title>Verwendung der Filter API um Suchfilter zu erstellen</title>
 
         <example>
-            <title>Create simple LDAP filters</title>
+            <title>Einfache LDAP Filter erstellen</title>
             <programlisting language="php"><![CDATA[
 $f1  = Zend_Ldap_Filter::equals('name', 'value');         // (name=value)
 $f2  = Zend_Ldap_Filter::begins('name', 'value');         // (name=value*)
@@ -29,7 +29,7 @@ $f10 = Zend_Ldap_Filter::any('name');                     // (name=*)
         </example>
 
         <example>
-            <title>Create more complex LDAP filters</title>
+            <title>Komplexere LDAP Filter erstellen</title>
             <programlisting language="php"><![CDATA[
 $f1 = Zend_Ldap_Filter::ends('name', 'value')->negate(); // (!(name=*value))
 
@@ -48,7 +48,7 @@ $f6 = Zend_Ldap_Filter::orFilter($f2, $f3, $f4);
     </sect2>
 
     <sect2 id="zend.ldap.tools.attribute">
-        <title>Modify LDAP entries using the Attribute API</title>
+        <title>LDAP Einträge modifizieren und die Attribut API verwenden</title>
         <para/>
     </sect2>
 </sect1>

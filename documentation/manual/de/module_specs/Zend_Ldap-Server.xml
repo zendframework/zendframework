@@ -2,13 +2,13 @@
 <!-- EN-Revision: 16641 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.ldap.server">
-    <title>Getting information from the LDAP server</title>
+    <title>Informationen vom LDAP Server erhalten</title>
     <sect2 id="zend.ldap.server.rootdse">
         <title>RootDSE</title>
 
         <para>
-            See the following documents for more information on the attributes contained within
-            the RootDSE for a given <acronym>LDAP</acronym> server.
+            Siehe die folgenden Dokumente für weitere Informationen über die Attribute die im
+            RootDSE für einen gegebenen <acronym>LDAP</acronym> Server enthalten sind.
         </para>
 
         <itemizedlist>
@@ -34,7 +34,7 @@
         </itemizedlist>
 
         <example id="zend.ldap.server.rootdse.getting">
-            <title>Getting hands on the RootDSE</title>
+            <title>Mit dem RootDSE arbeiten</title>
             <programlisting language="php"><![CDATA[
 $options = array(/* ... */);
 $ldap = new Zend_Ldap($options);
@@ -45,10 +45,10 @@ $serverType = $rootdse->getServerType();
     </sect2>
 
     <sect2 id="zend.ldap.server.schema">
-        <title>Schema Browsing</title>
+        <title>Schema Browsen</title>
 
         <example id="zend.ldap.server.schema.getting">
-            <title>Getting hands on the server schema</title>
+            <title>Mit dem Schema Server arbeiten</title>
             <programlisting language="php"><![CDATA[
 $options = array(/* ... */);
 $ldap = new Zend_Ldap($options);
@@ -65,13 +65,13 @@ $classes = $schema->getObjectClasses();
         <sect3 id="zend.ldap.server.schema.activedirectory">
             <title>ActiveDirectory</title>
             <note>
-                <title>Schema browsing on ActiveDirectory servers</title>
+                <title>Schema browsen bei ActiveDirectory Servern</title>
                 <para>
-                    Due to restrictions on Microsoft ActiveDirectory servers regarding
-                    the number of entries returned by generic search routines and due to
-                    the structure of the ActiveDirectory schema repository, schema browsing
-                    is currently <emphasis>not</emphasis> available for Microsoft
-                    ActiveDirectory servers.
+                    Wegen der Restriktionen bei Microsoft ActiveDirectory Servern bei der
+                    Anzahl an Einträgen die von generischen Suchroutinen zurückgegeben werden
+                    und durch die Struktur des ActiveDirectory Schema Repositories, ist das
+                    Schema Browsen aktuell <emphasis>nicht</emphasis> für Microsoft ActiveDirectory
+                    Server möglich.
                 </para>
             </note>
         </sect3>

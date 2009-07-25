@@ -43,7 +43,7 @@ class Zend_Controller_Action_Helper_JsonTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        Zend_Controller_Action_Helper_JsonTest_Layout::$_mvcInstance = null;
+        Zend_Controller_Action_Helper_JsonTest_Layout::resetMvcInstance();
 
         $this->response = new Zend_Controller_Response_Http();
         $this->response->headersSentThrowsException = false;
@@ -156,7 +156,10 @@ class Zend_Controller_Action_Helper_JsonTest extends PHPUnit_Framework_TestCase
  */
 class Zend_Controller_Action_Helper_JsonTest_Layout extends Zend_Layout
 {
-    public static $_mvcInstance;
+    public static function resetMvcInstance()
+    {
+        self::$_mvcInstance = null;
+    }
 }
 
 // Call Zend_Controller_Action_Helper_JsonTest::main() if this source file is executed directly.

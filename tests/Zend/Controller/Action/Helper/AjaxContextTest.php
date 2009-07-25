@@ -50,7 +50,7 @@ class Zend_Controller_Action_Helper_AjaxContextTest extends PHPUnit_Framework_Te
             unset($_SERVER['HTTP_X_REQUESTED_WITH']);
         }
 
-        Zend_Controller_Action_Helper_AjaxContextTest_LayoutOverride::$_mvcInstance = null;
+        Zend_Controller_Action_Helper_AjaxContextTest_LayoutOverride::resetMvcInstance();
         Zend_Controller_Action_HelperBroker::resetHelpers();
 
         $this->front = Zend_Controller_Front::getInstance();
@@ -184,7 +184,10 @@ class Zend_Controller_Action_Helper_AjaxContextTestController extends Zend_Contr
 
 class Zend_Controller_Action_Helper_AjaxContextTest_LayoutOverride extends Zend_Layout
 {
-    public static $_mvcInstance;
+    public static function resetMvcInstance()
+    {
+        self::$_mvcInstance = null;
+    }
 }
 
 // Call Zend_Controller_Action_Helper_AjaxContextTest::main() if this source file is executed directly.

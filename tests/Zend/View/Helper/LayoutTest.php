@@ -47,7 +47,7 @@ class Zend_View_Helper_LayoutTest extends PHPUnit_Framework_TestCase
             Zend_Controller_Action_HelperBroker::removeHelper('viewRenderer');
         }
 
-        Zend_View_Helper_LayoutTest_Layout::$_mvcInstance = null;
+        Zend_View_Helper_LayoutTest_Layout::resetMvcInstance();
     }
 
     /**
@@ -102,7 +102,10 @@ class Zend_View_Helper_LayoutTest extends PHPUnit_Framework_TestCase
  */
 class Zend_View_Helper_LayoutTest_Layout extends Zend_Layout
 {
-    public static $_mvcInstance;
+    public static function resetMvcInstance()
+    {
+        self::$_mvcInstance = null;
+    }
 }
 
 // Call Zend_View_Helper_LayoutTest::main() if this source file is executed directly.

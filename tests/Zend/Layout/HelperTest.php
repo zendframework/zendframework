@@ -39,7 +39,7 @@ class Zend_Layout_HelperTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        Zend_Layout_HelperTest_Layout::$_mvcInstance = null;
+        Zend_Layout_HelperTest_Layout::resetMvcInstance();
         Zend_Controller_Front::getInstance()->resetInstance();
         if (Zend_Controller_Action_HelperBroker::hasHelper('Layout')) {
             Zend_Controller_Action_HelperBroker::removeHelper('Layout');
@@ -123,7 +123,10 @@ class Zend_Layout_HelperTest extends PHPUnit_Framework_TestCase
  */
 class Zend_Layout_HelperTest_Layout extends Zend_Layout
 {
-    public static $_mvcInstance;
+    public static function resetMvcInstance()
+    {
+        self::$_mvcInstance = null;
+    }
 }
 
 // Call Zend_Layout_HelperTest::main() if this source file is executed directly.

@@ -46,7 +46,7 @@ class Zend_Controller_Action_Helper_AutoCompleteTest extends PHPUnit_Framework_T
      */
     public function setUp()
     {
-        Zend_Controller_Action_Helper_AutoCompleteTest_LayoutOverride::$_mvcInstance = null;
+        Zend_Controller_Action_Helper_AutoCompleteTest_LayoutOverride::resetMvcInstance();
         Zend_Controller_Action_HelperBroker::resetHelpers();
         Zend_Controller_Action_HelperBroker::setPluginLoader(null);
 
@@ -218,7 +218,10 @@ class Zend_Controller_Action_Helper_AutoCompleteTest extends PHPUnit_Framework_T
 
 class Zend_Controller_Action_Helper_AutoCompleteTest_LayoutOverride extends Zend_Layout
 {
-    public static $_mvcInstance;
+    public static function resetMvcInstance()
+    {
+        self::$_mvcInstance = null;
+    }
 }
 
 // Call Zend_Controller_Action_Helper_AutoCompleteTest::main() if this source file is executed directly.

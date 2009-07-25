@@ -48,7 +48,7 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends PHPUnit_Framework_
      */
     public function setUp()
     {
-        Zend_Controller_Action_Helper_ContextSwitchTest_LayoutOverride::$_mvcInstance = null;
+        Zend_Controller_Action_Helper_ContextSwitchTest_LayoutOverride::resetMvcInstance();
         Zend_Controller_Action_HelperBroker::resetHelpers();
 
         $this->front = Zend_Controller_Front::getInstance();
@@ -932,7 +932,10 @@ class Zend_Controller_Action_Helper_ContextSwitchTestController extends Zend_Con
 
 class Zend_Controller_Action_Helper_ContextSwitchTest_LayoutOverride extends Zend_Layout
 {
-    public static $_mvcInstance;
+    public static function resetMvcInstance()
+    {
+        self::$_mvcInstance = null;
+    }
 }
 
 class Zend_Controller_Action_Helper_ContextSwitchText_CustomView implements Zend_View_Interface

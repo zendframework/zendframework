@@ -43,7 +43,7 @@ class Zend_Layout_LayoutTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        Zend_Layout_LayoutTest_Override::$_mvcInstance = null;
+        Zend_Layout_LayoutTest_Override::resetMvcInstance();
 
         Zend_Controller_Front::getInstance()->resetInstance();
         if (Zend_Controller_Action_HelperBroker::hasHelper('Layout')) {
@@ -526,7 +526,10 @@ class Zend_Layout_LayoutTest extends PHPUnit_Framework_TestCase
  */
 class Zend_Layout_LayoutTest_Override extends Zend_Layout
 {
-    public static $_mvcInstance;
+    public static function resetMvcInstance()
+    {
+        self::$_mvcInstance = null;
+    }
 }
 
 class Zend_Layout_LayoutTest_Controller_Plugin_Layout extends Zend_Layout_Controller_Plugin_Layout

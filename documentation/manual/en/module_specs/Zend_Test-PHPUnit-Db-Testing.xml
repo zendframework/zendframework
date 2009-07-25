@@ -222,12 +222,14 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
     public function setupDatabase()
     {
         $db = Zend_Db::factory(...);
-        $connection = Zend_Test_PHPUnit_Db_Connection($db, 'database_schema_name');
+        $connection = Zend_Test_PHPUnit_Db_Connection($db,
+                                                      'database_schema_name');
         $databaseTester = new Zend_Test_PHPUnit_Db_SimpleTester($connection);
 
-        $databaseFixture = new PHPUnit_Extensions_Database_DataSet_FlatXmlDataSet(
-            dirname(__FILE__) . '/_files/initialUserFixture.xml'
-        );
+        $databaseFixture =
+                    new PHPUnit_Extensions_Database_DataSet_FlatXmlDataSet(
+                        dirname(__FILE__) . '/_files/initialUserFixture.xml'
+                    );
 
         $databaseTester->setupDatabase($databaseFixture);
     }

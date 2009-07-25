@@ -18,7 +18,8 @@
         </para>
 
         <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_InArray(array('key' => 'value', 'otherkey' => 'othervalue'));
+$validator = new Zend_Validate_InArray(array('key' => 'value',
+                                             'otherkey' => 'othervalue'));
 if ($validator->isValid('value')) {
     // value found
 } else {
@@ -119,8 +120,10 @@ if ($validator->isValid('value')) {
 $validator = new Zend_Validate_InArray(
     array(
         'haystack' => array(
-            'firstDimension' => array('key' => 'value', 'otherkey' => 'othervalue'),
-            'secondDimension' => array('some' => 'real', 'different' => 'key')),
+            'firstDimension' => array('key' => 'value',
+                                      'otherkey' => 'othervalue'),
+            'secondDimension' => array('some' => 'real',
+                                       'different' => 'key')),
         'recursive' => true
     )
 );

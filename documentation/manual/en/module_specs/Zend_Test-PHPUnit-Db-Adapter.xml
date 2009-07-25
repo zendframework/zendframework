@@ -50,9 +50,15 @@ $rs = $adapter->query('SELECT ...'); // Returns Statement 1
 
     <programlisting language="php"><![CDATA[
 $adapter = new Zend_Test_DbAdapter();
-$adapter->appendStatementToStack(Zend_Test_DbStatement::createInsertStatement(1));
-$adapter->appendStatementToStack(Zend_Test_DbStatement::createUpdateStatement(2));
-$adapter->appendStatementToStack(Zend_Test_DbStatement::createDeleteStatement(10));
+$adapter->appendStatementToStack(
+    Zend_Test_DbStatement::createInsertStatement(1)
+);
+$adapter->appendStatementToStack(
+    Zend_Test_DbStatement::createUpdateStatement(2)
+);
+$adapter->appendStatementToStack(
+    Zend_Test_DbStatement::createDeleteStatement(10
+));
 ]]></programlisting>
 
     <para>

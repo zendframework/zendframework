@@ -1163,7 +1163,8 @@ $rows = $table->fetchAll($select);
                 <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
-$select = $table->select(Zend_Db_Table::SELECT_WITH_FROM_PART)->setIntegrityCheck(false);
+$select = $table->select(Zend_Db_Table::SELECT_WITH_FROM_PART)
+                ->setIntegrityCheck(false);
 $select->where('bug_status = ?', 'NEW')
        ->join('accounts',
               'accounts.account_name = bugs.reported_by',

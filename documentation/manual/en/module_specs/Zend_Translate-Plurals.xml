@@ -115,7 +115,11 @@ $translate->translate(array('Car', 'Cars', $number));
 
             <programlisting role="php"><![CDATA[
 $translate = new Zend_Translate('gettext', '/path/to/german.mo', 'de');
-$translate->translate(array('Car', 'Cars first plural', 'Cars second plural', $number, 'ru'));
+$translate->translate(array('Car',
+                            'Cars first plural',
+                            'Cars second plural',
+                            $number,
+                            'ru'));
 ]]></programlisting>
 
         </example>

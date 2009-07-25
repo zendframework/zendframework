@@ -38,7 +38,8 @@ $filter = new Zend_Filter_RealPath(false);
 $path   = '/www/var/path/../../non/existing/path';
 $filtered = $filter->filter($path);
 
-// returns '/www/non/existing/path' even when file_exists or realpath would return false
+// returns '/www/non/existing/path'
+// even when file_exists or realpath would return false
 ]]></programlisting>
 
 </sect2>

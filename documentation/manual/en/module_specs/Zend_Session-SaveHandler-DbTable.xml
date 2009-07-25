@@ -3,12 +3,13 @@
 <sect1 id="zend.session.savehandler.dbtable">
     <title>Zend_Session_SaveHandler_DbTable</title>
     <para>
-        The basic setup for Zend_Session_SaveHandler_DbTable must at least
-        have four columns, denoted in the config array/Zend_Config object:
+        The basic setup for <classname>Zend_Session_SaveHandler_DbTable</classname> must at least
+        have four columns, denoted in the config array or <classname>Zend_Config</classname> object:
         primary, which is the primary key and defaults to just the session
         id which by default is a string of length 32;
         modified, which is the unix timestamp of the last modified date;
-        lifetime, which is the lifetime of the session (modified + lifetime > time());
+        lifetime, which is the lifetime of the session
+        (<command>modified + lifetime > time();</command>);
         and data, which is the serialized data stored in the session
     </para>
     <example id="zend.session.savehandler.dbtable.basic">
@@ -54,7 +55,7 @@ Zend_Session::start();
     </example>
     <para>
         You can also use Multiple Columns in your primary key for
-        Zend_Session_SaveHandler_DbTable.
+        <classname>Zend_Session_SaveHandler_DbTable</classname>.
     </para>
     <example id="zend.session.savehandler.dbtable.multi-column-key">
         <title>Using a Multi-Column Primary Key</title>

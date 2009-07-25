@@ -53,7 +53,7 @@ foreach ($list as $item) {
 }
 ]]></programlisting>
         <para>
-            This will output the three items Code, Zend Framework and PHP with
+            This will output the three items Code, Zend Framework and <acronym>PHP</acronym> with
             the absolute values 10, 1 and 2.
         </para>
     </example>

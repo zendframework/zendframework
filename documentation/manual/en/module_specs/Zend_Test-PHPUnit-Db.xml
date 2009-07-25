@@ -21,7 +21,7 @@
         abstract object graph can then be compared using assertions. A common use-case in database
         testing is setting up some tables with seed data, then performing some operations, and
         finally asserting that the operated on database-state is equal to some predefined expected
-        state.  <classname>Zend_Test_PHPUnit_Db</classname> simplifies this task by allowing to
+        state. <classname>Zend_Test_PHPUnit_Db</classname> simplifies this task by allowing to
         generate DataSets and DataTables from existing <classname>Zend_Db_Table_Abstract</classname>
         or <classname>Zend_Db_Table_Rowset_Abstract</classname> instances.
     </para>
@@ -29,10 +29,10 @@
     <para>
         Furthermore this component allows to integrate any
         <classname>Zend_Db_Adapter_Abstract</classname> for testing wheras the original extension
-        only works with <classname>PDO</classname>. A Test Adapter implementation for
-        <classname>Zend_Db_Adapter_Abstract</classname> is also included in this component.  It
-        allows to instantiate a Db Adapter that requires no database at all and acts as an SQL and
-        result stack which is used by the API methods.
+        only works with <acronym>PDO</acronym>. A Test Adapter implementation for
+        <classname>Zend_Db_Adapter_Abstract</classname> is also included in this component. It
+        allows to instantiate a Db Adapter that requires no database at all and acts as an
+        <acronym>SQL</acronym> and result stack which is used by the <acronym>API</acronym> methods.
     </para>
 
     <xi:include href="Zend_Test-PHPUnit-Db-Quickstart.xml" />

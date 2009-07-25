@@ -70,7 +70,34 @@
                     </tbody>
                 </tgroup>
             </table>
+        </sect3>
+    </sect2>
 
+    <sect2 id="zend.locale.migration.fromoneseventooneeight">
+        <title>Migrating from 1.7 to 1.8 or newer</title>
+        <sect3 id="zend.locale.migration.fromoneseventooneeight.defaultcaching">
+            <title>Default caching</title>
+
+            <para>
+                As with Zend Framework 1.8 a default caching was added. The reason behind this
+                change was, that most users had performance problems but did not add caching at
+                all. As the I18n core is a bottleneck when no caching is used we decided to add
+                a default caching when no cache has been set to Zend_Locale.
+            </para>
+
+            <para>
+                Sometimes it is still wanted to prevent caching at all even if this decreases
+                performance. To do so you can simply disable caching by using the
+                <methodname>disableCache()</methodname> method.
+            </para>
+
+            <example id="zend.locale.migration.fromonesixtooneseven.example">
+                <title>Disabling default caching</title>
+
+                <programlisting language="php"><![CDATA[
+Zend_Locale::disableCache(true);
+]]></programlisting>
+            </example>
         </sect3>
     </sect2>
 

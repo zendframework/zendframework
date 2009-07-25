@@ -224,24 +224,24 @@ echo "$acctname\n";
         </sect3>
 
         <sect3 id="zend.ldap.introduction.theory-of-operations.multi-domain-failover">
-            <title>Multi-domain Authentication and Failover</title>
+            <title>Multi-Domain Authentifizierung und Failover</title>
 
             <para>
-                The <classname>Zend_Ldap</classname> component by itself makes no attempt
-                to authenticate with multiple servers. However, <classname>Zend_Ldap</classname>
-                is specifically designed to handle this scenario gracefully. The
-                required technique is to simply iterate over an array of arrays of serve
-                 options and attempt to bind with each server. As described above
-                 <methodname>bind()</methodname> will automatically canonicalize each name, so
-                it does not matter if the user passes <filename>abaker@foo.net</filename> or
-                <emphasis>W\bcarter</emphasis> or <emphasis>cdavis</emphasis> - the
-                <methodname>bind()</methodname> method will only succeed if the credentials were
-                successfully used in the bind.
+                Die Komponente <classname>Zend_Ldap</classname> macht von sich aus keinen Versuch
+                sich bei mehreren Servern zu authentifizieren. Trotzdem wurde
+                <classname>Zend_Ldap</classname> speziell dafür designt um einfach durch ein Array
+                von Array von angebotenen Optionen zu iterieren und sich mit jedem Server zu
+                binden. Wie oben beschrieben wird <methodname>bind()</methodname> automatisch jeden
+                Namen kanonisieren, damit es egal ist ob der Benutzer
+                <filename>abaker@foo.net</filename> oder <emphasis>W\bcarter</emphasis> oder
+                <emphasis>cdavis</emphasis> übergibt - die <methodname>bind()</methodname> Methode
+                ist nur dann erfolgreich wenn die Benutzerdaten erfolgreich beim Binden verwendet
+                wurden.
             </para>
 
             <para>
-                Consider the following example that illustrates the technique required to
-                implement multi-domain authentication and failover:
+                Nehmen wir das folgende Beispiel an das die benötigten Techniken zeigt um eine
+                Multi-Domain Authentifizierung und Failover zu implementieren:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -275,13 +275,13 @@ $ldap = new Zend_Ldap();
 
 foreach ($multiOptions as $name => $options) {
 
-    echo "Trying to bind using server options for '$name'\n";
+    echo "Versuch zu binden un die Serveroptionen für '$name' zu verwenden\n";
 
     $ldap->setOptions($options);
     try {
         $ldap->bind($acctname, $password);
         $acctname = $ldap->getCanonicalAccountName($acctname);
-        echo "SUCCESS: authenticated $acctname\n";
+        echo "Erfolgreich: $acctname authentifiziert\n";
         return;
     } catch (Zend_Ldap_Exception $zle) {
         echo '  ' . $zle->getMessage() . "\n";
@@ -293,39 +293,40 @@ foreach ($multiOptions as $name => $options) {
 ]]></programlisting>
 
             <para>
-                If the bind fails for any reason, the next set of server options is tried.
+                Wenn das Binden aus irgendeinem Grund fehlschlägt, werden die nächsten
+                Serveroptionen probiert.
             </para>
 
             <para>
-                The <methodname>getCanonicalAccountName()</methodname> call gets the canonical
-                account name that the application would presumably use to associate data with such
-                as preferences. The <emphasis>accountCanonicalForm = 4</emphasis> in all server
-                options ensures that the canonical form is consistent regardless of which
-                server was ultimately used.
+                Der Aufruf von <methodname>getCanonicalAccountName()</methodname> erhält den
+                kanonisierten Accountnamen welcher der Anwendung voraussichtlich verwendet um
+                zugehörige Daten bevorzugt zu assoziieren.
+                <emphasis>accountCanonicalForm = 4</emphasis> in allen Serveroptionen stellt
+                sicher das die kanonisierte Form angenommen wird, egal welcher Server letztendlich
+                verwendet wird.
             </para>
 
             <para>
-                The special <constant>LDAP_X_DOMAIN_MISMATCH</constant> exception occurs when an
-                account name with a domain component was supplied (e.g.,
-                <filename>abaker@foo.net</filename> or <emphasis>FOO\abaker</emphasis> and not just
-                <emphasis>abaker</emphasis>) but the domain component did not match either domain
-                in the currently selected server options. This exception indicates
-                that the server is not an authority for the account. In this
-                case, the bind will not be performed, thereby eliminating unnecessary
-                communication with the server. Note that the <emphasis>continue</emphasis>
-                instruction has no effect in this example, but in practice for error handling and
-                debugging purposes, you will probably want to check for
-                <constant>LDAP_X_DOMAIN_MISMATCH</constant> as well as
-                <constant>LDAP_NO_SUCH_OBJECT</constant> and
-                <constant>LDAP_INVALID_CREDENTIALS</constant>.
+                Die spezielle Exception <constant>LDAP_X_DOMAIN_MISMATCH</constant> tritt auf wenn
+                ein Account Name bei einer Domain Komponente übergeben wurde (z.B.
+                <filename>abaker@foo.net</filename> oder <emphasis>FOO\abaker</emphasis> und nicht
+                nur <emphasis>abaker</emphasis>) aber die Domain Komponente keiner der Domains in
+                den aktuell ausgewählten Server Optionen entspricht. Diese Exception zeigt das der
+                Server keine Autorität für den Account ist. In diesem Fall wird das Binden nicht
+                durchgeführt, und damit unnötige Kommunikation mit dem Server verhindert. Es ist zu
+                beachten das die <emphasis>continue</emphasis> Anweisung in diesem Beispiel keinen
+                Effekt hat, aber in der Praxis für Fehlerbehandlung und Debugging Zwecke verwendet
+                wird, da man warscheinlich auf <constant>LDAP_X_DOMAIN_MISMATCH</constant> sowie
+                <constant>LDAP_NO_SUCH_OBJECT</constant> und
+                <constant>LDAP_INVALID_CREDENTIALS</constant> prüfen will.
             </para>
 
             <para>
-                The above code is very similar to code used within <link
-                    linkend="zend.auth.adapter.ldap"><classname>Zend_Auth_Adapter_Ldap</classname></link>.
-                In fact, we recommend that you simply use that authentication adapter for
-                multi-domain + failover <acronym>LDAP</acronym> based authentication
-                (or copy the code).
+                Der obige Code ist dem Code der in <link
+                    linkend="zend.auth.adapter.ldap"><classname>Zend_Auth_Adapter_Ldap</classname></link>
+                verwendet wurde sehr ähnlich. Fakt ist, das wir einfach empfehlen den
+                Authentifizierungs Adapter für Multi-Domain und Failover basierte
+                <acronym>LDAP</acronym> Authentifizierung zu verwenden (oder den Code zu kopieren).
             </para>
         </sect3>
     </sect2>

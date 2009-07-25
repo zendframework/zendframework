@@ -981,7 +981,7 @@ print $date->toString("'Era:GGGG='GGGG, ' Date:yy.MMMM.dd'yy.MMMM.dd");
                     <row>
                         <entry>e</entry>
                         <entry>Number of the day, one digit</entry>
-                        <entry>Zend_Date::WEEKDAY_NARROW</entry>
+                        <entry>Zend_Date::WEEKDAY_DIGIT</entry>
                         <entry><emphasis>4</emphasis>
                         </entry>
                     </row>

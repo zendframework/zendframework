@@ -710,7 +710,7 @@ class Zend_File_Transfer_Adapter_AbstractTest extends PHPUnit_Framework_TestCase
 
     public function testMimeTypeByTmpName()
     {
-        $this->assertEquals('text/plain', $this->adapter->getMimeType('baz.text'));
+        $this->assertRegexp('#^text/plain#', $this->adapter->getMimeType('baz.text'));
     }
 
     public function testSetOwnErrorMessage()

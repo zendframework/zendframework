@@ -166,7 +166,6 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
      * @param string  $host
      * @param int     $port
      * @param boolean $secure
-     * @param int     $timeout
      */
     public function connect($host, $port = 80, $secure = false)
     {

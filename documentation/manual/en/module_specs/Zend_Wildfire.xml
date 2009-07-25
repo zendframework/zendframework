@@ -6,14 +6,14 @@
 
   <para>
     <classname>Zend_Wildfire</classname> is a component that facilitates communication
-    between PHP code and
+    between <acronym>PHP</acronym> code and
     <ulink url="http://www.wildfirehq.org/">Wildfire</ulink> client components.
   </para>
   <para>
     The purpose of the Wildfire Project is to develop standardized communication
     channels between a large variety of components and a dynamic and scriptable
     plugin architecture. At this time the primary
-    focus is to provide a system to allow server-side PHP code to inject logging
+    focus is to provide a system to allow server-side <acronym>PHP</acronym> code to inject logging
     messages into the <ulink url="http://www.getfirebug.com/">Firebug</ulink>
     <ulink url="http://getfirebug.com/logging.html">Console</ulink>.
   </para>
@@ -21,10 +21,11 @@
     For the purpose of logging to Firebug the
     <link linkend="zend.log.writers.firebug"><classname>Zend_Log_Writer_Firebug</classname></link>
     component is provided and a communication protocol has been developed
-    that uses HTTP request and response headers to send data between the server and
-    client components. It is great for logging intelligence data, generated during script
+    that uses <acronym>HTTP</acronym> request and response headers to send data between the server
+    and client components. It is great for logging intelligence data, generated during script
     execution, to the browser without interfering with the page content. Debugging
-    AJAX requests that require clean JSON and XML responses is possible with this approach.
+    <acronym>AJAX</acronym> requests that require clean <acronym>JSON</acronym> and
+    <acronym>XML</acronym> responses is possible with this approach.
   </para>
   <para>
     There is also a <link linkend="zend.db.profiler.profilers.firebug">

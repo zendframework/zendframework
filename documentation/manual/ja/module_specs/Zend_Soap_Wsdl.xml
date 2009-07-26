@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16443 -->
+<!-- EN-Revision: 16935 -->
 <sect1 id="zend.soap.wsdl">
     <title>WSDLアクセッサ</title>
 
@@ -391,8 +391,9 @@ $soapMyClassType = $wsdl->getType('MyClass');
                     <para>クラス<classname>Zend_Soap_Wsdl_Strategy_ArrayOfTypeSequence</classname>:
                     このストラテジーにより、以下のようにタイプの戻りパラメータを指定できます:
                     <code>int[]</code>または<code>string[]</code>.
+                    Zend Framework バージョン 1.9 以降、
                     それは単純なPHP型（例えばint）、文字列、ブール値、floatなどを取り扱えるばかりではなく、
-                    タイプの配列の入れ子の配列も指定できます。</para>
+                    オブジェクトおよびオブジェクトの配列も指定できます。</para>
                 </listitem>
                 <listitem>
                     <para>クラス<classname>Zend_Soap_Wsdl_Strategy_ArrayOfTypeComplex</classname>:

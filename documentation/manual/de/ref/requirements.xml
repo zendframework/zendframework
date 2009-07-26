@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16908 -->
+<!-- EN-Revision: 17057 -->
 <!-- Reviewed: no -->
 <appendix id="requirements" xmlns:xi="http://www.w3.org/2001/XInclude">
 
@@ -20,7 +20,7 @@
             "<filename>http://www.example.com/user/edit</filename>" zu implementieren. Wenn
             mod_rewrite nicht aktiviert ist, kann Zend Framework konfiguriert werden um
             <acronym>URL</acronym>'s wie
-            "<filename>http://www.example.com?controller=user&amp;action=edit</filename>" zu
+            "<command>http://www.example.com?controller=user&amp;action=edit</command>" zu
             unterstützen. Hübsche <acronym>URL</acronym>'s können verwendet werden um
             <acronym>URL</acronym>'s zu verkleinern, für textuelle Darstellung oder die Optimierung
             von Suchmaschinen (<acronym>SEO</acronym>), aber sie beeinflussen die Funktionalität

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16603 -->
+<!-- EN-Revision: 16949 -->
 <sect1 id="zend.queue.framework">
     <title>フレームワーク</title>
 
@@ -105,19 +105,19 @@ foreach ($messages as $i => $message) {
         <itemizedlist>
             <listitem>
                 <para>
-                    <methodname>create()</methodname> - 待ち行列を作成
+                    <emphasis><methodname>create()</methodname></emphasis> - 待ち行列を作成
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>delete()</methodname> - 待ち行列を削除
+                    <emphasis><methodname>delete()</methodname></emphasis> - 待ち行列を削除
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>send()</methodname> - メッセージを送信
+                    <emphasis><methodname>send()</methodname></emphasis> - メッセージを送信
                 </para>
 
                 <para>
@@ -128,7 +128,7 @@ foreach ($messages as $i => $message) {
 
             <listitem>
                 <para>
-                    <methodname>receive()</methodname> - メッセージを受信
+                    <emphasis><methodname>receive()</methodname></emphasis> - メッセージを受信
                 </para>
 
                 <para>
@@ -139,19 +139,19 @@ foreach ($messages as $i => $message) {
 
             <listitem>
                 <para>
-                    <methodname>deleteMessage()</methodname> - メッセージを削除
+                    <emphasis><methodname>deleteMessage()</methodname></emphasis> - メッセージを削除
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>count()</methodname> - 待ち行列内のメッセージ数をカウント
+                    <emphasis><methodname>count()</methodname></emphasis> - 待ち行列内のメッセージ数をカウント
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>isExists()</methodname> - 待ち行列が存在するかチェック
+                    <emphasis><methodname>isExists()</methodname></emphasis> - 待ち行列が存在するかチェック
                 </para>
             </listitem>
         </itemizedlist>

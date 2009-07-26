@@ -650,7 +650,6 @@ class SampleClass
 ]]></programlisting>
             </sect3>
 
-
             <sect3 id="coding-standard.coding-style.classes.member-variables">
                 <title>Class Member Variables</title>
 

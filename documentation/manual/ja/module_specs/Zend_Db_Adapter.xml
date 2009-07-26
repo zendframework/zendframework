@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16920 -->
+<!-- EN-Revision: 17023 -->
 <sect1 id="zend.db.adapter">
 
     <title>Zend_Db_Adapter</title>
@@ -1690,7 +1690,7 @@ $db->closeConnection();
             </para>
 
             <example id="zend.db.adapter.connecting.persistence.example">
-                <title>Using the Persitence Flag with the Oracle Adapter</title>
+                <title>Oracle アダプタでの持続的接続の使用</title>
                 <programlisting language="php"><![CDATA[
 $db = Zend_Db::factory('Oracle', array(
     'host'       => '127.0.0.1',

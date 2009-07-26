@@ -901,95 +901,93 @@ Products, Foo Server, FAQ
             below</link> for more information.
         </para>
 
-        <para>
-            <itemizedlist>
-                <listitem>
-                    <para>
-                        <constant>Zend_View_Helper_Navigation_Link::RENDER_ALTERNATE</constant>
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <constant>Zend_View_Helper_Navigation_Link::RENDER_STYLESHEET</constant>
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <constant>Zend_View_Helper_Navigation_Link::RENDER_START</constant>
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <constant>Zend_View_Helper_Navigation_Link::RENDER_NEXT</constant>
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <constant>Zend_View_Helper_Navigation_Link::RENDER_PREV</constant>
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <constant>Zend_View_Helper_Navigation_Link::RENDER_CONTENTS</constant>
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <constant>Zend_View_Helper_Navigation_Link::RENDER_INDEX</constant>
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <constant>Zend_View_Helper_Navigation_Link::RENDER_GLOSSARY</constant>
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <constant>Zend_View_Helper_Navigation_Link::RENDER_COPYRIGHT</constant>
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <constant>Zend_View_Helper_Navigation_Link::RENDER_CHAPTER</constant>
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <constant>Zend_View_Helper_Navigation_Link::RENDER_SECTION</constant>
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <constant>Zend_View_Helper_Navigation_Link::RENDER_SUBSECTION</constant>
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <constant>Zend_View_Helper_Navigation_Link::RENDER_APPENDIX</constant>
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <constant>Zend_View_Helper_Navigation_Link::RENDER_HELP</constant>
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <constant>Zend_View_Helper_Navigation_Link::RENDER_BOOKMARK</constant>
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <constant>Zend_View_Helper_Navigation_Link::RENDER_CUSTOM</constant>
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <constant>Zend_View_Helper_Navigation_Link::RENDER_ALL</constant>
-                    </para>
-                </listitem>
-            </itemizedlist>
-        </para>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <constant>Zend_View_Helper_Navigation_Link::RENDER_ALTERNATE</constant>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <constant>Zend_View_Helper_Navigation_Link::RENDER_STYLESHEET</constant>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <constant>Zend_View_Helper_Navigation_Link::RENDER_START</constant>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <constant>Zend_View_Helper_Navigation_Link::RENDER_NEXT</constant>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <constant>Zend_View_Helper_Navigation_Link::RENDER_PREV</constant>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <constant>Zend_View_Helper_Navigation_Link::RENDER_CONTENTS</constant>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <constant>Zend_View_Helper_Navigation_Link::RENDER_INDEX</constant>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <constant>Zend_View_Helper_Navigation_Link::RENDER_GLOSSARY</constant>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <constant>Zend_View_Helper_Navigation_Link::RENDER_COPYRIGHT</constant>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <constant>Zend_View_Helper_Navigation_Link::RENDER_CHAPTER</constant>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <constant>Zend_View_Helper_Navigation_Link::RENDER_SECTION</constant>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <constant>Zend_View_Helper_Navigation_Link::RENDER_SUBSECTION</constant>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <constant>Zend_View_Helper_Navigation_Link::RENDER_APPENDIX</constant>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <constant>Zend_View_Helper_Navigation_Link::RENDER_HELP</constant>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <constant>Zend_View_Helper_Navigation_Link::RENDER_BOOKMARK</constant>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <constant>Zend_View_Helper_Navigation_Link::RENDER_CUSTOM</constant>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <constant>Zend_View_Helper_Navigation_Link::RENDER_ALL</constant>
+                </para>
+            </listitem>
+        </itemizedlist>
 
         <para>
             The constants from <constant>RENDER_ALTERNATE</constant> to
@@ -1004,47 +1002,47 @@ Products, Foo Server, FAQ
         </para>
 
         <itemizedlist>
-           <listitem>
-               <para>
-                   <code>{get|set}RenderFlag()</code> gets/sets the render
-                   flag. Default is <constant>RENDER_ALL</constant>. See examples
-                   below on how to set the render flag.
-               </para>
-           </listitem>
-           <listitem>
-               <para>
-                   <methodname>findAllRelations()</methodname> finds all relations of
-                   all types for a given page.
-               </para>
-           </listitem>
-           <listitem>
-               <para>
-                   <methodname>findRelation()</methodname> finds all relations of a given
-                   type from a given page.
-               </para>
-           </listitem>
-           <listitem>
-               <para>
-                   <code>searchRel{Start|Next|Prev|Chapter|Section|Subsection}()</code>
-                   traverses a container to find forward relations to
-                   the start page, the next page, the previous page,
-                   chapters, sections, and subsections.
-               </para>
-           </listitem>
-           <listitem>
-               <para>
-                   <code>searchRev{Section|Subsection}()</code> traverses
-                   a container to find reverse relations to sections or
-                   subsections.
-               </para>
-           </listitem>
-           <listitem>
-               <para>
-                   <methodname>renderLink()</methodname> renders a single <code>link</code>
-                   element.
-               </para>
-           </listitem>
-       </itemizedlist>
+            <listitem>
+                <para>
+                    <code>{get|set}RenderFlag()</code> gets/sets the render
+                    flag. Default is <constant>RENDER_ALL</constant>. See examples
+                    below on how to set the render flag.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <methodname>findAllRelations()</methodname> finds all relations of
+                    all types for a given page.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <methodname>findRelation()</methodname> finds all relations of a given
+                    type from a given page.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>searchRel{Start|Next|Prev|Chapter|Section|Subsection}()</code>
+                    traverses a container to find forward relations to
+                    the start page, the next page, the previous page,
+                    chapters, sections, and subsections.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>searchRev{Section|Subsection}()</code> traverses
+                    a container to find reverse relations to sections or
+                    subsections.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <methodname>renderLink()</methodname> renders a single <code>link</code>
+                    element.
+                </para>
+            </listitem>
+        </itemizedlist>
 
         <example id="zend.view.helpers.initial.navigation.links.example1">
             <title>Specify relations in pages</title>
@@ -1251,51 +1249,53 @@ Output:
                 </para>
                 <para>
                     Recognized options:
-                    <itemizedlist>
-                        <listitem>
-                            <para>
-                                <code>indent</code>; indentation. Expects a
-                                <type>String</type> or an <code>int</code>
-                                value.
-                            </para>
-                        </listitem>
-                        <listitem>
-                            <para>
-                                <code>minDepth</code>; minimum depth. Expcects
-                                an <code>int</code> or <constant>NULL</constant> (no
-                                minimum depth).
-                            </para>
-                        </listitem>
-                        <listitem>
-                            <para>
-                                <code>maxDepth</code>; maximum depth. Expcects
-                                an <code>int</code> or <constant>NULL</constant> (no
-                                maximum depth).
-                            </para>
-                        </listitem>
-                        <listitem>
-                            <para>
-                                <code>ulClass</code>; CSS class for
-                                <code>ul</code> element. Expects a
-                                <type>String</type>.
-                            </para>
-                        </listitem>
-                        <listitem>
-                            <para>
-                                <code>onlyActiveBranch</code>; whether only
-                                active branch should be rendered. Expects
-                                a <type>Boolean</type> value.
-                            </para>
-                        </listitem>
-                        <listitem>
-                            <para>
-                                <code>renderParents</code>; whether parents
-                                should be rendered if only rendering active
-                                branch. Expects a <type>Boolean</type> value.
-                            </para>
-                        </listitem>
-                    </itemizedlist>
                 </para>
+
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            <code>indent</code>; indentation. Expects a
+                            <type>String</type> or an <code>int</code>
+                            value.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <code>minDepth</code>; minimum depth. Expcects
+                            an <code>int</code> or <constant>NULL</constant> (no
+                            minimum depth).
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <code>maxDepth</code>; maximum depth. Expcects
+                            an <code>int</code> or <constant>NULL</constant> (no
+                            maximum depth).
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <code>ulClass</code>; CSS class for
+                            <code>ul</code> element. Expects a
+                            <type>String</type>.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <code>onlyActiveBranch</code>; whether only
+                            active branch should be rendered. Expects
+                            a <type>Boolean</type> value.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <code>renderParents</code>; whether parents
+                            should be rendered if only rendering active
+                            branch. Expects a <type>Boolean</type> value.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+
                 <para>
                     If an option is not given, the value set in the helper
                     will be used.
@@ -1781,14 +1781,14 @@ foreach ($this->container as $page) {
             <link linkend="zend.validate.sitemap">sitemap validators</link>
             to validate each element that is rendered. This can be disabled by
             calling <code>$helper->setUseSitemapValidators(false)</code>.
-
-            <note>
-                <para>
-                    If you disable sitemap validators, the custom properties (see table)
-                    are not validated at all.
-                </para>
-            </note>
         </para>
+
+        <note>
+            <para>
+                If you disable sitemap validators, the custom properties (see table)
+                are not validated at all.
+            </para>
+        </note>
 
         <para>
             The sitemap helper also supports <ulink
@@ -1843,16 +1843,18 @@ foreach ($this->container as $page) {
                                 search engines and may not correlate exactly
                                 to how often they crawl the page. Valid
                                 values are:
-                                <itemizedlist>
-                                    <listitem><para>always</para></listitem>
-                                    <listitem><para>hourly</para></listitem>
-                                    <listitem><para>daily</para></listitem>
-                                    <listitem><para>weekly</para></listitem>
-                                    <listitem><para>monthly</para></listitem>
-                                    <listitem><para>yearly</para></listitem>
-                                    <listitem><para>never</para></listitem>
-                                </itemizedlist>
                             </para>
+
+                            <itemizedlist>
+                                <listitem><para>always</para></listitem>
+                                <listitem><para>hourly</para></listitem>
+                                <listitem><para>daily</para></listitem>
+                                <listitem><para>weekly</para></listitem>
+                                <listitem><para>monthly</para></listitem>
+                                <listitem><para>yearly</para></listitem>
+                                <listitem><para>never</para></listitem>
+                            </itemizedlist>
+
                             <para>
                                 The helper will try to retrieve the
                                 <code>changefreq</code> value from the page's

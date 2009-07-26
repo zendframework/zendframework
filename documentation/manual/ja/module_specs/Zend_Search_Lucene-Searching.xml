@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17054 -->
+<!-- EN-Revision: 17132 -->
 <sect1 id="zend.search.lucene.searching">
     <title>インデックスの検索</title>
 
@@ -438,7 +438,7 @@ $highlightedHTML = $query->highlightMatches($sourceHTML);
         </para>
         <para>
             オプションの 3 番目のパラメータは、
-            <code>Zend_Search_Lucene_Search_Highlighter_Interface</code>
+            <classname>Zend_Search_Lucene_Search_Highlighter_Interface</classname>
             インターフェイスを実装したオブジェクトです。
             <programlisting language="php"><![CDATA[
 interface Zend_Search_Lucene_Search_Highlighter_Interface

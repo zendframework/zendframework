@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15741 -->
+<!-- EN-Revision: 17132 -->
 <sect1 id="zend.reflection.reference">
     <title>Zend_Reflectionリファレンス</title>
 
     <para>
-        <code>Zend_Reflection</code>の様々なクラスは、
+        <classname>Zend_Reflection</classname>の様々なクラスは、
         PHPの<ulink url="http://php.net/reflection">Reflection API</ulink>のAPIに良く似ています。
         しかし、一つ重要な違いがあります。
         PHPのReflection APIはdocblock注釈タグの内部、パラメータ変数の型も返す型も、
@@ -13,7 +13,7 @@
     </para>
 
     <para>
-        <code>Zend_Reflection</code>は、
+        <classname>Zend_Reflection</classname>は、
         パラメーター変数の型や返す型を判断するために、
         メソッドのdocblock注釈を解析します。
         特に<code>@param</code>及び<code>@return</code>注釈が使われます。
@@ -22,14 +22,14 @@
     </para>
 
     <para>
-        <code>Zend_Reflection</code>のそれぞれのReflectionオブジェクトは、
-        <code>Zend_Reflection_Docblock</code>のインスタンスを返すように、
+        <classname>Zend_Reflection</classname>のそれぞれのReflectionオブジェクトは、
+        <classname>Zend_Reflection_Docblock</classname>のインスタンスを返すように、
         <code>getDocblock()</code>を上書きします。
         このクラスはdocblock及び注釈タグを参照できるようにします。
     </para>
 
     <para>
-        <code>Zend_Reflection_File</code>はPHPファイルの内部を参照できる新しいReflectionクラスです。
+        <classname>Zend_Reflection_File</classname>はPHPファイルの内部を参照できる新しいReflectionクラスです。
         それを使って、PHPファイルに含まれるクラスや関数、グローバルなPHPコードを取得できます。
     </para>
 
@@ -43,8 +43,8 @@
         <title>Zend_Reflection_Docblock</title>
 
         <para>
-            <code>Zend_Reflection_Docblock</code>は
-            PHPのReflection API以上に<code>Zend_Reflection</code>に価値を付与する心臓部です。
+            <classname>Zend_Reflection_Docblock</classname>は
+            PHPのReflection API以上に<classname>Zend_Reflection</classname>に価値を付与する心臓部です。
             それには下記のメソッドがあります:
         </para>
 
@@ -85,7 +85,7 @@
             <listitem><para>
                 <code>getTags($filter)</code>: 全てのタグ、
                 または与えられた<code>$filter</code>文字列に一致する全てのタグを取得します。
-                タグは<code>Zend_Reflection_Docblock_Tag</code>オブジェクトの配列として返されます。
+                タグは<classname>Zend_Reflection_Docblock_Tag</classname>オブジェクトの配列として返されます。
             </para></listitem>
         </itemizedlist>
     </sect2>
@@ -94,7 +94,7 @@
         <title>Zend_Reflection_Docblock_Tag</title>
 
         <para>
-            <code>Zend_Reflection_Docblock_Tag</code>は個別の注釈タグのためのReflectionを提供します。
+            <classname>Zend_Reflection_Docblock_Tag</classname>は個別の注釈タグのためのReflectionを提供します。
             ほとんどのタグは名前と説明から構成されています。
             いくつかの特別なタグの場合には、
             適切なクラスのインスタンスを取得するための、
@@ -102,7 +102,7 @@
         </para>
 
         <para>
-            下記のメソッドは<code>Zend_Reflection_Docblock_Tag</code>のために定義されています:
+            下記のメソッドは<classname>Zend_Reflection_Docblock_Tag</classname>のために定義されています:
         </para>
 
         <itemizedlist>
@@ -124,10 +124,10 @@
         <title>Zend_Reflection_Docblock_Tag_Param</title>
 
         <para>
-            <code>Zend_Reflection_Docblock_Tag_Param</code>は
-            <code>Zend_Reflection_Docblock_Tag</code>の特化したバージョンです。
+            <classname>Zend_Reflection_Docblock_Tag_Param</classname>は
+            <classname>Zend_Reflection_Docblock_Tag</classname>の特化したバージョンです。
             <code>@param</code>注釈タグの説明はパラメータの型及び変数名、変数の説明から構成されています。
-            このクラスにより下記のメソッドが<code>Zend_Reflection_Docblock_Tag</code>に追加されます:
+            このクラスにより下記のメソッドが<classname>Zend_Reflection_Docblock_Tag</classname>に追加されます:
         </para>
 
         <itemizedlist>
@@ -145,11 +145,11 @@
         <title>Zend_Reflection_Docblock_Tag_Return</title>
 
         <para>
-            <code>Zend_Reflection_Docblock_Tag_Param</code>のように、
-            <code>Zend_Reflection_Docblock_Tag_Return</code>は
-            <code>Zend_Reflection_Docblock_Tag</code>の特化したバージョンです。
+            <classname>Zend_Reflection_Docblock_Tag_Param</classname>のように、
+            <classname>Zend_Reflection_Docblock_Tag_Return</classname>は
+            <classname>Zend_Reflection_Docblock_Tag</classname>の特化したバージョンです。
             <code>@return</code>注釈タグの説明は返す型及び変数の説明から構成されています。
-            このクラスにより下記のメソッドが<code>Zend_Reflection_Docblock_Tag</code>に追加されます:
+            このクラスにより下記のメソッドが<classname>Zend_Reflection_Docblock_Tag</classname>に追加されます:
         </para>
 
         <itemizedlist>
@@ -163,7 +163,7 @@
         <title>Zend_Reflection_File</title>
 
         <para>
-            <code>Zend_Reflection_File</code>によりPHPファイル内部を参照できます。
+            <classname>Zend_Reflection_File</classname>によりPHPファイル内部を参照できます。
             それを使って、ファイルで定義されたクラスや関数、生のPHPコードを参照することができます。
             下記の関数が定義されています:
         </para>
@@ -213,10 +213,10 @@
         <title>Zend_Reflection_Class</title>
 
         <para>
-            <code>Zend_Reflection_Class</code>は<code>ReflectionClass</code>を拡張して、
+            <classname>Zend_Reflection_Class</classname>は<classname>ReflectionClass</classname>を拡張して、
             そのAPIに追随します。
             ひとつ追加のメソッド、<code>getDeclaringFile()</code>を追加します。
-            それは定義されたファイルでの<code>Zend_Reflection_File</code> Reflectionオブジェクトを
+            それは定義されたファイルでの<classname>Zend_Reflection_File</classname> Reflectionオブジェクトを
             取得するために使われるでしょう。
         </para>
 
@@ -267,7 +267,7 @@
         <title>Zend_Reflection_Extension</title>
 
         <para>
-            <code>Zend_Reflection_Extension</code>は<code>ReflectionExtension</code>を拡張して、
+            <classname>Zend_Reflection_Extension</classname>は<classname>ReflectionExtension</classname>を拡張して、
             そのAPIに追随します。
             それはReflectionオブジェクトを取り出すときに使う
             Reflectionクラスを指定する際に追加の変数を加えて、
@@ -293,7 +293,7 @@
         <title>Zend_Reflection_Function</title>
 
         <para>
-            <code>Zend_Reflection_Function</code>は、
+            <classname>Zend_Reflection_Function</classname>は、
             返されたReflectionを使ってReflectionクラスを指定できるように、
             いくつかのメソッドを上書きするばかりではなく、
             関数の返り値を取得するメソッドを追加します。
@@ -322,7 +322,7 @@
         <title>Zend_Reflection_Method</title>
 
         <para>
-            <code>Zend_Reflection_Method</code>は<code>Zend_Reflection_Function</code>を継承して、
+            <classname>Zend_Reflection_Method</classname>は<classname>Zend_Reflection_Function</classname>を継承して、
             追加のメソッドを１つだけ上書きします:
         </para>
 
@@ -338,7 +338,7 @@
         <title>Zend_Reflection_Parameter</title>
 
         <para>
-            <code>Zend_Reflection_Parameter</code>は
+            <classname>Zend_Reflection_Parameter</classname>は
             戻されたReflectionオブジェクトで
             Reflectionを使えるようにする上書きメソッドばかりではなく、
             パラメータの型を取得するメソッドを追加します。
@@ -373,7 +373,7 @@
         <title>Zend_Reflection_Property</title>
 
         <para>
-            <code>Zend_Reflection_Property</code>は、
+            <classname>Zend_Reflection_Property</classname>は、
             戻されたReflectionオブジェクトクラスを指定するための、
             メソッドを１つ上書きします。:
         </para>

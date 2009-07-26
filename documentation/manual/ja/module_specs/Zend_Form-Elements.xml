@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15854 -->
+<!-- EN-Revision: 17132 -->
 <sect1 id="zend.form.elements">
     <title>Zend_Form_Element を用いたフォーム要素の作成</title>
 
@@ -1414,7 +1414,7 @@ $form->addPrefixPath('My_Element', 'My/Element/', 'element')
 ]]></programlisting>
 
         <para>
-            'foo' 要素はこれで <code>My_Element_Text</code>
+            'foo' 要素はこれで <classname>My_Element_Text</classname>
             型となりました。先ほど説明したような機能を持つテキストボックスです。
         </para>
 

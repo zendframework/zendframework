@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16911 -->
+<!-- EN-Revision: 16981 -->
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
     "@DOCBOOK_DTD@"
 [
@@ -408,14 +408,13 @@
 
     <chapter id="zend.navigation">
         <title>Zend_Navigation</title>
-        <xi:include href="module_specs/Zend_Navigation-Introduction.xml">
-            <xi:fallback><xi:include href="../en/module_specs/Zend_Navigation-Introduction.xml" /></xi:fallback>
-        </xi:include>
-        <xi:include href="module_specs/Zend_Navigation-Pages.xml">
-            <xi:fallback><xi:include href="../en/module_specs/Zend_Navigation-Pages.xml" /></xi:fallback>
-        </xi:include>
+        <xi:include href="module_specs/Zend_Navigation-Introduction.xml" />
+        <xi:include href="module_specs/Zend_Navigation-Pages.xml" />
         <xi:include href="module_specs/Zend_Navigation-Containers.xml">
             <xi:fallback><xi:include href="../en/module_specs/Zend_Navigation-Containers.xml" /></xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Navigation-Migration.xml">
+            <xi:fallback><xi:include href="../en/module_specs/Zend_Navigation-Migration.xml" /></xi:fallback>
         </xi:include>
     </chapter>
 

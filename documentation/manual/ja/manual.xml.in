@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16883 -->
+<!-- EN-Revision: 16911 -->
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
     "@DOCBOOK_DTD@"
 [
@@ -619,6 +619,9 @@
         <title>Zend_Test</title>
         <xi:include href="module_specs/Zend_Test.xml" />
         <xi:include href="module_specs/Zend_Test-PHPUnit.xml" parse="xml" />
+        <xi:include href="module_specs/Zend_Test-PHPUnit-Db.xml" parse="xml">
+            <xi:fallback><xi:include href="../en/module_specs/Zend_Test-PHPUnit-Db.xml" /></xi:fallback>
+        </xi:include>
     </chapter>
 
     <chapter id="zend.text">

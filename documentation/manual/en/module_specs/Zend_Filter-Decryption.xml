@@ -24,8 +24,8 @@
         <para>
             There is one emminent difference for you. When you did not provide a vector at
             encryption you need to get it after you encrypted the content by using the
-            <methodname>getVector()</methodname> method on the encryption filter. Without the correct vector you
-            will not be able to decrypt the content.
+            <methodname>getVector()</methodname> method on the encryption filter. Without the
+            correct vector you will not be able to decrypt the content.
         </para>
 
         <para>

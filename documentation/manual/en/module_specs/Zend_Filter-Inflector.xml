@@ -341,8 +341,8 @@ $inflector->setFilterRule('script', array(
             <para>
                 Typically, it's easier to set many rules at once than to
                 configure a single variable and its inflection rules at a time.
-                <classname>Zend_Filter_Inflector</classname>'s <methodname>addRules()</methodname> and
-                <methodname>setRules()</methodname> method allow this.
+                <classname>Zend_Filter_Inflector</classname>'s <methodname>addRules()</methodname>
+                and <methodname>setRules()</methodname> method allow this.
             </para>
 
             <para>

@@ -124,10 +124,9 @@ $validators = array(
 ]]></programlisting>
 
         <para>
-            Each key in the <varname>$filters</varname> array above is the name of a rule for applying a
-            filter to a specific data field. By default, the name of the rule
-            is also the name of the input data field to which to apply the
-            rule.
+            Each key in the <varname>$filters</varname> array above is the name of a rule for
+            applying a filter to a specific data field. By default, the name of the rule
+            is also the name of the input data field to which to apply the rule.
         </para>
 
         <para>
@@ -990,9 +989,9 @@ $input = new Zend_Filter_Input($filters, $validators, $data, $options);
 ]]></programlisting>
 
         <para>
-            Alternatively, you can use the <methodname>addValidatorPrefixPath($prefix, $path)</methodname>
-            or <methodname>addFilterPrefixPath($prefix, $path)</methodname> methods, which directly
-            proxy to the plugin loader that is used by Zend_Filter_Input:
+            Alternatively, you can use the <methodname>addValidatorPrefixPath($prefix,
+                $path)</methodname> or <methodname>addFilterPrefixPath($prefix, $path)</methodname>
+            methods, which directly proxy to the plugin loader that is used by Zend_Filter_Input:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -1018,21 +1017,22 @@ $input->addFilterPrefixPath('Foo_Namespace', 'Foo/Namespace');
 
         <note>
             <para>
-                As of version 1.5 the function <methodname>addNamespace($namespace)</methodname> was deprecated
-                and exchanged with the plugin loader and the <code>addFilterPrefixPath</code> and
-                <code>addValidatorPrefixPath</code> were added. Also the constant
-                <classname>Zend_Filter_Input::INPUT_NAMESPACE</classname> is now deprecated. The
-                constants <classname>Zend_Filter_Input::VALIDATOR_NAMESPACE</classname> and
-                <classname>Zend_Filter_Input::FILTER_NAMESPACE</classname> are available in releases
+                As of version 1.5 the function <methodname>addNamespace($namespace)</methodname>
+                was deprecated and exchanged with the plugin loader and the
+                <code>addFilterPrefixPath</code> and <code>addValidatorPrefixPath</code> were
+                added. Also the constant <classname>Zend_Filter_Input::INPUT_NAMESPACE</classname>
+                is now deprecated. The constants
+                <constant>Zend_Filter_Input::VALIDATOR_NAMESPACE</constant> and
+                <constant>Zend_Filter_Input::FILTER_NAMESPACE</constant> are available in releases
                 after 1.7.0.
             </para>
         </note>
 
         <note>
             <para>
-                As of version 1.0.4, <classname>Zend_Filter_Input::NAMESPACE</classname>, having
+                As of version 1.0.4, <constant>Zend_Filter_Input::NAMESPACE</constant>, having
                 value <code>namespace</code>, was changed to
-                <classname>Zend_Filter_Input::INPUT_NAMESPACE</classname>, having value
+                <constant>Zend_Filter_Input::INPUT_NAMESPACE</constant>, having value
                 <code>inputNamespace</code>, in order to comply with the PHP 5.3 reservation of the
                 keyword <code>namespace</code>.
             </para>

@@ -28,8 +28,8 @@
     <sect2 id="zend.filter.set.alpha">
         <title>Alpha</title>
         <para>
-            Returns the string <varname>$value</varname>, removing all but alphabetic characters. This
-            filter includes an option to also allow white space characters.
+            Returns the string <varname>$value</varname>, removing all but alphabetic characters.
+            This filter includes an option to also allow white space characters.
         </para>
     </sect2>
 
@@ -63,8 +63,8 @@
     <sect2 id="zend.filter.set.htmlentities">
         <title>HtmlEntities</title>
         <para>
-            Returns the string <varname>$value</varname>, converting characters to their corresponding
-            HTML entity equivalents where they exist.
+            Returns the string <varname>$value</varname>, converting characters to their
+            corresponding <acronym>HTML</acronym> entity equivalents where they exist.
         </para>
     </sect2>
 
@@ -90,24 +90,24 @@
     <sect2 id="zend.filter.set.stringtolower">
         <title>StringToLower</title>
         <para>
-            Returns the string <varname>$value</varname>, converting alphabetic characters to lowercase as
-            necessary.
+            Returns the string <varname>$value</varname>, converting alphabetic characters to
+            lowercase as necessary.
         </para>
     </sect2>
 
     <sect2 id="zend.filter.set.stringtoupper">
         <title>StringToUpper</title>
         <para>
-            Returns the string <varname>$value</varname>, converting alphabetic characters to uppercase as
-            necessary.
+            Returns the string <varname>$value</varname>, converting alphabetic characters to
+            uppercase as necessary.
         </para>
     </sect2>
 
     <sect2 id="zend.filter.set.stringtrim">
         <title>StringTrim</title>
         <para>
-            Returns the string <varname>$value</varname> with characters stripped from the beginning and
-            end.
+            Returns the string <varname>$value</varname> with characters stripped from the
+            beginning and end.
         </para>
     </sect2>
 

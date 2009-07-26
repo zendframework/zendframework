@@ -37,8 +37,8 @@ print $filter->filter('Hello!');
 ]]></programlisting>
 
     <para>
-        To get the actual set callback use <methodname>getCallback()</methodname> and to set another callback
-        use <methodname>setCallback()</methodname>.
+        To get the actual set callback use <methodname>getCallback()</methodname> and to set
+        another callback use <methodname>setCallback()</methodname>.
     </para>
 
     <para>

@@ -107,7 +107,8 @@ $filter->setAdapter('openssl');
 
         <para>
             You can get/set the encryption values also afterwards with the
-            <methodname>getEncryption()</methodname> and <methodname>setEncryption()</methodname> methods.
+            <methodname>getEncryption()</methodname> and <methodname>setEncryption()</methodname>
+            methods.
         </para>
 
         <note>
@@ -126,9 +127,9 @@ $filter->setAdapter('openssl');
         </note>
 
         <para>
-            You can get/set the encryption vector by calling <methodname>getVector()</methodname> and
-            <methodname>setVector()</methodname>. A given string will be truncated or padded to the needed
-            vector size of the used algorithm.
+            You can get/set the encryption vector by calling <methodname>getVector()</methodname>
+            and <methodname>setVector()</methodname>. A given string will be truncated or padded to
+            the needed vector size of the used algorithm.
         </para>
 
         <note>
@@ -181,9 +182,11 @@ print $encrypted;
         </itemizedlist>
 
         <para>
-            You can get/set the public keys also afterwards with the <methodname>getPublicKey()</methodname>
-            and <methodname>setPublicKey()</methodname> methods. The private key can also be get and set with
-            the related <methodname>getPrivateKey()</methodname> and <methodname>setPrivateKey()</methodname> methods.
+            You can get/set the public keys also afterwards with the
+            <methodname>getPublicKey()</methodname> and <methodname>setPublicKey()</methodname>
+            methods. The private key can also be get and set with the related
+            <methodname>getPrivateKey()</methodname> and <methodname>setPrivateKey()</methodname>
+            methods.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -209,9 +212,9 @@ $filter->setPublicKey(array(
 
         <para>
             When you want to encode also the keys, then you have to provide a passphrase with the
-            <methodname>setPassphrase()</methodname> method. When you want to decode content which was encoded
-            with a passphrase you will not only need the public key, but also the passphrase to
-            decode the encrypted key.
+            <methodname>setPassphrase()</methodname> method. When you want to decode content which
+            was encoded with a passphrase you will not only need the public key, but also the
+            passphrase to decode the encrypted key.
         </para>
 
         <programlisting language="php"><![CDATA[

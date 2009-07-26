@@ -72,6 +72,9 @@ class Zend_Validate_File_MimeTypeTest extends PHPUnit_Framework_TestCase
             array(array('image/vasa', 'image/jpg', 'image/jpeg'), true),
             array(array('image/jpg', 'image/jpeg', 'gif'), true),
             array(array('image/gif', 'gif'), false),
+            array('image/jp', false),
+            array('image/jpg2000', false),
+            array('image/jpeg2000', false),
         );
 
         $filetest = dirname(__FILE__) . '/_files/picture.jpg';

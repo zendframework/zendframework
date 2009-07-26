@@ -255,6 +255,12 @@ class Zend_Validate_File_MimeType extends Zend_Validate_Abstract
             return $this->_throw($file, self::NOT_DETECTED);
         }
 
+        // delete additional info
+        $pos = strpos($this->_type, ';');
+        if ($pos !== false) {
+            $this->_type = substr($this->_type, 0, $pos);
+        }
+
         $mimetype = $this->getMimeType(true);
         if (in_array($this->_type, $mimetype)) {
             return true;

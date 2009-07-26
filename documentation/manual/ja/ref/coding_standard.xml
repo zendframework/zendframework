@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16914 -->
+<!-- EN-Revision: 17111 -->
 <appendix id="coding-standard">
   <title>Zend Framework PHP 標準コーディング規約</title>
     <sect1 id="coding-standard.overview">
@@ -655,7 +655,6 @@ class SampleClass
 }
 ]]></programlisting>
             </sect3>
-
 
             <sect3 id="coding-standard.coding-style.classes.member-variables">
                 <title>クラスのメンバ変数</title>

@@ -594,7 +594,7 @@ $translate = new Zend_Translate(
             locale for which you want to do the check. The optional second parameter declares
             whether translation is fixed to the declared language or a lower set of translations
             can be used. If you have a text which can be returned for 'en' but not for 'en_US' you
-            will normally get the translation returned, but by setting <code>$original</code> to
+            will normally get the translation returned, but by setting <varname>$original</varname> to
             true, <methodname>isTranslated()</methodname> will return false.
         </para>
 
@@ -728,7 +728,7 @@ $translate->translate('unknown string');
         </para>
 
         <para>
-            Both methods accept an optional parameter <code>$locale</code> which, if set, returns
+            Both methods accept an optional parameter <varname>$locale</varname> which, if set, returns
             the translation data for the specified language. If this parameter is not given, the
             actual set language will be used. Keep in mind that normally all translations should be
             available in all languages. Which means that in a normal situation you will not have to

@@ -418,7 +418,7 @@ $inflector->addRules(array(
                     <methodname>getRule($spec, $index)</methodname> fetches a single rule
                     for a given variable; this can be useful for fetching a
                     specific filter rule for a variable that has a filter chain.
-                    <code>$index</code> must be passed.
+                    <varname>$index</varname> must be passed.
             </para></listitem>
 
             <listitem><para>

@@ -143,21 +143,21 @@
                 <listitem>
                     <para>
                         <methodname>userGetPreviousWeeklyArtistChart($fromDate, $toDate)</methodname>: Returns a SimpleXML object
-                        containing the Weekly Artist Chart from <code>$fromDate</code> to <code>$toDate</code> for the
+                        containing the Weekly Artist Chart from <varname>$fromDate</varname> to <varname>$toDate</varname> for the
                         current user.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <methodname>userGetPreviousWeeklyAlbumChart($fromDate, $toDate)</methodname>: Returns a SimpleXML object
-                        containing the Weekly Album Chart from <code>$fromDate</code> to <code>$toDate</code> for the
+                        containing the Weekly Album Chart from <varname>$fromDate</varname> to <varname>$toDate</varname> for the
                         current user.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <methodname>userGetPreviousWeeklyTrackChart($fromDate, $toDate)</methodname>: Returns a SimpleXML object
-                        containing the Weekly Track Chart from <code>$fromDate</code> to <code>$toDate</code> for the
+                        containing the Weekly Track Chart from <varname>$fromDate</varname> to <varname>$toDate</varname> for the
                         current user.
                     </para>
                 </listitem>

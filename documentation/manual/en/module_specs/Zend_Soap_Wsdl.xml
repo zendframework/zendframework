@@ -20,18 +20,18 @@
             <classname>Zend_Soap_Wsdl</classname> constructor takes three parameters:
             <orderedlist>
                 <listitem>
-                    <simpara><code>$name</code> - name of the Web Service being described.</simpara>
+                    <simpara><varname>$name</varname> - name of the Web Service being described.</simpara>
                 </listitem>
                 <listitem>
                     <simpara>
-                        <code>$uri</code> - URI where the WSDL will be available
+                        <varname>$uri</varname> - URI where the WSDL will be available
                         (could also be a reference to the file in the filesystem.)
                     </simpara>
                 </listitem>
                 <listitem>
                     <simpara>
-                        <code>$strategy</code> - optional flag used to identify the strategy for complex types (objects)
-                        detection. This was a boolean <code>$extractComplexTypes</code> before version 1.7 and can
+                        <varname>$strategy</varname> - optional flag used to identify the strategy for complex types (objects)
+                        detection. This was a boolean <varname>$extractComplexTypes</varname> before version 1.7 and can
                         still be set as a boolean for backwards compatibility. By default the 1.6 detection behaviour
                         is set. To read more on complex type detection strategies go to the section:
                         <xref linkend="zend.soap.wsdl.types.add_complex" />.
@@ -52,10 +52,10 @@
             <classname>Zend_Soap_Client</classname> functionality.
         </para>
         <para>
-           <code>$name</code> parameter represents message name.
+           <varname>$name</varname> parameter represents message name.
         </para>
         <para>
-           <code>$parts</code> parameter is an array of message parts which describe SOAP call parameters.
+           <varname>$parts</varname> parameter is an array of message parts which describe SOAP call parameters.
            It's an associative array: 'part name' (SOAP call parameter name) =&gt; 'part type'.
         </para>
         <para>
@@ -112,7 +112,7 @@
         </para>
         <para>
             It also adds corresponding port operation messages depending on specified
-            <code>$input</code>, <code>$output</code> and <code>$fault</code> parameters.
+            <varname>$input</varname>, <varname>$output</varname> and <varname>$fault</varname> parameters.
 
             <note>
                 <para>
@@ -164,7 +164,7 @@
         </para>
         <para>
             It takes <code>XML_Tree_Node</code> object returned by <methodname>addBinding()</methodname> as an input
-            (<code>$binding</code> parameter) to add 'operation' element with input/output/false entries depending on
+            (<varname>$binding</varname> parameter) to add 'operation' element with input/output/false entries depending on
             specified parameters
         </para>
         <para>
@@ -255,7 +255,7 @@
                     </para>
                 </listitem>
             </itemizedlist>
-            where <code>$name</code> is a class name for the Web Service definition mode using class and
+            where <varname>$name</varname> is a class name for the Web Service definition mode using class and
             script name for the Web Service definition mode using set of functions.
         </para>
         <para>
@@ -295,7 +295,7 @@
                                 By default <classname>Zend_Soap_Wsdl</classname> will be created with the <classname>Zend_Soap_Wsdl_Strategy_DefaultComplexType</classname>
                                 class as detection algorithm for complex types. The first parameter of the AutoDiscover constructor takes
                                 any complex type strategy implementing <classname>Zend_Soap_Wsdl_Strategy_Interface</classname> or a string with the name
-                                of the class. For backwards compatibility with <code>$extractComplexType</code> boolean variables are parsed
+                                of the class. For backwards compatibility with <varname>$extractComplexType</varname> boolean variables are parsed
                                 the following way: If true, <classname>Zend_Soap_Wsdl_Strategy_DefaultComplexType</classname>, if false
                                 <classname>Zend_Soap_Wsdl_Strategy_AnyType</classname>.
                             </para>
@@ -384,7 +384,7 @@ $soapMyClassType = $wsdl->getType('MyClass');
                     <para>Class <classname>Zend_Soap_Wsdl_Strategy_Composite</classname>: This strategy can
                     combine all strategies by connecting PHP Complex types (Classnames) to the desired strategy
                     via the <methodname>connectTypeToStrategy($type, $strategy)</methodname> method. A complete typemap can be
-                    given to the constructor as an array with <code>$type</code> -> <code>$strategy</code> pairs.
+                    given to the constructor as an array with <varname>$type</varname> -> <varname>$strategy</varname> pairs.
                     The second parameter specifies the default strategy that will be used if an unknown type is
                     requested for adding. This parameter defaults to the <classname>Zend_Soap_Wsdl_Strategy_DefaultComplexType</classname>
                     strategy.</para>

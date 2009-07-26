@@ -38,12 +38,12 @@ protected function _run()
 
     <para>
         As such, the view scripts have access to the current object
-        (<code>$this</code>), <emphasis>and any methods or members of that
+        (<varname>$this</varname>), <emphasis>and any methods or members of that
             object</emphasis>. Since many operations depend on members with
         limited visibility, this poses a problem: the view scripts could
         potentially make calls to such methods or modify critical properties
-        directly. Imagine a script overwriting <code>$_path</code> or
-        <code>$_file</code> inadvertently -- any further calls to
+        directly. Imagine a script overwriting <varname>$_path</varname> or
+        <varname>$_file</varname> inadvertently -- any further calls to
         <methodname>render()</methodname> or view helpers would break!
     </para>
 

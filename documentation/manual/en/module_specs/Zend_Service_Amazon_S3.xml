@@ -228,10 +228,10 @@ foreach($list as $bucket) {
         <itemizedlist>
             <listitem>
                 <para>
-                    <methodname>putObject($object, $data, $meta)</methodname> created an object with name <code>$object</code>
-                    (should contain the bucket name as prefix!) having <code>$data</code> as its content.
+                    <methodname>putObject($object, $data, $meta)</methodname> created an object with name <varname>$object</varname>
+                    (should contain the bucket name as prefix!) having <varname>$data</varname> as its content.
                 </para>
-                <para>Optional <code>$meta</code> parameter is the array of metadata, which currently supports the
+                <para>Optional <varname>$meta</varname> parameter is the array of metadata, which currently supports the
                 following parameters as keys:
                 </para>
                 <variablelist>
@@ -362,11 +362,11 @@ foreach($list as $name) {
             </listitem>
             <listitem>
                 <para>
-                    <methodname>putFile($path, $object, $meta)</methodname> puts the content of the file in <code>$path</code>
-                    into the object named <code>$object</code>.
+                    <methodname>putFile($path, $object, $meta)</methodname> puts the content of the file in <varname>$path</varname>
+                    into the object named <varname>$object</varname>.
                 </para>
                 <para>
-                The optional <code>$meta</code> argument is the same as for <code>putObject</code>. If the
+                The optional <varname>$meta</varname> argument is the same as for <code>putObject</code>. If the
                 content type is omitted, it will be guessed basing on the source file name.
                 </para>
             </listitem>

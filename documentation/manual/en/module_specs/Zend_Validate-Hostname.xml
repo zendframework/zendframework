@@ -30,7 +30,7 @@ if ($validator->isValid($hostname)) {
 }
 ]]></programlisting>
 
-        This will match the hostname <code>$hostname</code> and on failure populate
+        This will match the hostname <varname>$hostname</varname> and on failure populate
         <code>$validator->getMessages()</code> with useful error messages.
 
     </para>

@@ -363,8 +363,8 @@ $form->addElement('text', 'username', array('order' => 10));
         </para>
 
         <para>
-            Where does the data come from? You can use <code>$_POST</code> or
-            <code>$_GET</code>, or any other data source you might have at hand
+            Where does the data come from? You can use <varname>$_POST</varname> or
+            <varname>$_GET</varname>, or any other data source you might have at hand
             (web service requests, for instance):
         </para>
 

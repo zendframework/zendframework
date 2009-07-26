@@ -193,7 +193,7 @@ $hits  = $index->find($query);
         </para>
 
         <para>
-            The <code>$signs</code> array contains information about the term type:
+            The <varname>$signs</varname> array contains information about the term type:
             <itemizedlist>
                 <listitem>
                     <para>
@@ -323,7 +323,7 @@ $hits  = $index->find($query);
         </para>
 
         <para>
-            The <code>$signs</code> array contains information about the subquery type:
+            The <varname>$signs</varname> array contains information about the subquery type:
             <itemizedlist>
                 <listitem>
                     <para>
@@ -514,17 +514,17 @@ Zend_Search_Lucene_Search_Query_Phrase(
 ]]></programlisting>
 
         <para>
-            The <code>$terms</code> parameter is an array of strings that contains a set of phrase terms.
+            The <varname>$terms</varname> parameter is an array of strings that contains a set of phrase terms.
             If it's omitted or equal to null, then an empty query is constructed.
         </para>
 
         <para>
-            The <code>$offsets</code> parameter is an array of integers that contains offsets of terms in a phrase.
+            The <varname>$offsets</varname> parameter is an array of integers that contains offsets of terms in a phrase.
             If it's omitted or equal to null, then the terms' positions are assumed to be sequential with no gaps.
         </para>
 
         <para>
-            The <code>$field</code> parameter is a string that indicates the document field to search.
+            The <varname>$field</varname> parameter is a string that indicates the document field to search.
             If it's omitted or equal to null, then the default field is searched.
         </para>
 
@@ -570,11 +570,11 @@ Zend_Search_Lucene_Search_Query_Phrase::addTerm(
 ]]></programlisting>
 
         <para>
-            The <code>$term</code> parameter describes the next term in the phrase. It must indicate the same field as previous terms, or an exception will be thrown.
+            The <varname>$term</varname> parameter describes the next term in the phrase. It must indicate the same field as previous terms, or an exception will be thrown.
         </para>
 
         <para>
-            The <code>$position</code> parameter indicates the term position in the phrase.
+            The <varname>$position</varname> parameter indicates the term position in the phrase.
         </para>
 
         <para>

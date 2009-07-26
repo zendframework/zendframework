@@ -58,7 +58,7 @@
                     <code>addFilter($filter, $options = null, $files =
                     null)</code>: Adds the given filter to the filter
                     stack (optionally only to the file(s) specified).
-                    <code>$filter</code> may be either an actual filter
+                    <varname>$filter</varname> may be either an actual filter
                     instance, or a short name specifying the filter type
                     (e.g., 'Rename').
                 </para>
@@ -101,7 +101,7 @@
             <listitem>
                 <para>
                     <methodname>getFilters($files = null)</methodname>: Returns
-                    registered filters; if <code>$files</code> is passed,
+                    registered filters; if <varname>$files</varname> is passed,
                     returns filters for that particular file or set of
                     files.
                 </para>
@@ -144,7 +144,7 @@ $upload->addFilter('Rename',
             <para>
                 <methodname>addFilter()</methodname>, <methodname>addFilters()</methodname>, and
                 <methodname>setFilters()</methodname> each accept a final
-                <code>$files</code> argument. This argument can be used to
+                <varname>$files</varname> argument. This argument can be used to
                 specify a particular file or array of files on which to set the
                 given filter.
             </para>

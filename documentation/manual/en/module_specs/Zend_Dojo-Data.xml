@@ -288,7 +288,7 @@ $json = (string) $data; // cast to string == cast to JSON
                 <listitem><para>
                     <methodname>setItems($items)</methodname>: set multiple items at once,
                     overwriting any items that were previously set in the
-                    object. <code>$items</code> should be an array or a
+                    object. <varname>$items</varname> should be an array or a
                     <code>Traversable</code> object.
                 </para></listitem>
 
@@ -314,7 +314,7 @@ $json = (string) $data; // cast to string == cast to JSON
                     <methodname>addItems($items)</methodname>: add multiple items at once,
                     appending them to any current items. Will raise an exception
                     if any of the new items have an identifier matching an
-                    identifier already in the collection. <code>$items</code>
+                    identifier already in the collection. <varname>$items</varname>
                     should be an array or a <code>Traversable</code> object.
                 </para></listitem>
 

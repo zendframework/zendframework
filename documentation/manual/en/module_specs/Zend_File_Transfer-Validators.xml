@@ -167,7 +167,7 @@
             <listitem>
                 <para>
                     <methodname>isValid($files = null)</methodname>: Checks the specified files using all
-                    validators. <code>$files</code> may be either a real filename, the element's
+                    validators. <varname>$files</varname> may be either a real filename, the element's
                     name or the name of the temporary file.
                 </para>
             </listitem>
@@ -177,7 +177,7 @@
                     <code>addValidator($validator, $breakChainOnFailure, $options = null, $files =
                     null)</code>: Adds the specified validator to the validator
                     stack (optionally only to the file(s) specified).
-                    <code>$validator</code> may be either an actual validator
+                    <varname>$validator</varname> may be either an actual validator
                     instance or a short name specifying the validator type (e.g., 'Count').
                 </para>
             </listitem>
@@ -219,7 +219,7 @@
             <listitem>
                 <para>
                     <methodname>getValidators($files = null)</methodname>: Returns
-                    registered validators. If <code>$files</code> is specified,
+                    registered validators. If <varname>$files</varname> is specified,
                     returns validators for that particular file or set of
                     files.
                 </para>
@@ -267,7 +267,7 @@ $upload->setValidators(array(
             <para>
                 <methodname>addValidator()</methodname>, <methodname>addValidators()</methodname>, and
                 <methodname>setValidators()</methodname> each accept a final
-                <code>$files</code> argument. This argument can be used to
+                <varname>$files</varname> argument. This argument can be used to
                 specify a particular file or array of files on which to set the
                 given validator.
             </para>
@@ -500,7 +500,7 @@ $upload->addValidator('Crc32', false, array('3b3652f', 'e612b69'));
 
         <para>
             In some cases it is useful to match in a case-sensitive fashion. So the constructor
-            allows a second parameter called <code>$case</code> which, if set to true, validates the
+            allows a second parameter called <varname>$case</varname> which, if set to true, validates the
             extension by comparing it with the specified values in a case-sensitive fashion.
         </para>
 
@@ -681,7 +681,7 @@ $upload->addValidator('Exists',
 
         <para>
             In some cases it is useful to test in a case-sensitive fashion. Therefore the
-            constructor takes a second parameter <code>$case</code>, which, if set to true, will
+            constructor takes a second parameter <varname>$case</varname>, which, if set to true, will
             validate the extension in a case-sensitive fashion.
         </para>
 

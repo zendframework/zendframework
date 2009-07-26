@@ -268,7 +268,7 @@ $server->handle();
 
             <itemizedlist>
                 <listitem><para><methodname>setOptions(array $options)</methodname>: Specify
-                        object configuration. <code>$options</code> may contain
+                        object configuration. <varname>$options</varname> may contain
                         keys matching any 'set' method:
                         <methodname>setParams()</methodname>, <methodname>setMethod()</methodname>,
                         <methodname>setId()</methodname>, and
@@ -592,7 +592,7 @@ $server->handle();
                     several parameters at once; each param should be an assoc
                     array containing minimally the key 'type' describing the
                     parameter type, and optionally the key 'order'; any other
-                    keys will be passed as <code>$options</code> to
+                    keys will be passed as <varname>$options</varname> to
                     <methodname>addOption()</methodname>.</para></listitem>
                 <listitem><para><methodname>setParams(array $params)</methodname>: Set many
                     parameters at once, overwriting any existing

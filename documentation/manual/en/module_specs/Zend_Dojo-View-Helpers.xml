@@ -28,26 +28,26 @@
 
             <itemizedlist>
                 <listitem><para>
-                        <code>$id</code>: the container name or DOM ID.
+                        <varname>$id</varname>: the container name or DOM ID.
                 </para></listitem>
 
                 <listitem><para>
-                        <code>$content</code>: the content to wrap in the
+                        <varname>$content</varname>: the content to wrap in the
                         layout container.
                 </para></listitem>
 
                 <listitem><para>
-                        <code>$params</code> (optional): dijit-specific
+                        <varname>$params</varname> (optional): dijit-specific
                         parameters. Basically, any non-HTML attribute that can
                         be used to configure the dijit layout container.
                 </para></listitem>
 
                 <listitem><para>
-                        <code>$attribs</code> (optional): any additional HTML
+                        <varname>$attribs</varname> (optional): any additional HTML
                         attributes that should be used to render the container
                         div. If the key 'id' is passed in this array, it will
                         be used for the form element DOM id, and
-                        <code>$id</code> will be used for its name.
+                        <varname>$id</varname> will be used for its name.
                 </para></listitem>
             </itemizedlist>
 
@@ -72,17 +72,17 @@
 
             <itemizedlist>
                 <listitem><para>
-                        <code>$id</code>: the container name or DOM ID.
+                        <varname>$id</varname>: the container name or DOM ID.
                 </para></listitem>
 
                 <listitem><para>
-                        <code>$attribs</code> (optional): any additional HTML
+                        <varname>$attribs</varname> (optional): any additional HTML
                         attributes that should be used to render the container
                         div.
                 </para></listitem>
 
                 <listitem><para>
-                        <code>$content</code> (optional): the content to wrap
+                        <varname>$content</varname> (optional): the content to wrap
                         in the form. If none is passed, an empty string will be
                         used.
                 </para></listitem>
@@ -105,25 +105,25 @@
 
             <itemizedlist>
                 <listitem><para>
-                        <code>$id</code>: the element name or DOM ID.
+                        <varname>$id</varname>: the element name or DOM ID.
                 </para></listitem>
 
                 <listitem><para>
-                        <code>$value</code> (optional): the current value of
+                        <varname>$value</varname> (optional): the current value of
                         the element.
                 </para></listitem>
 
                 <listitem><para>
-                        <code>$params</code> (optional): dijit-specific
+                        <varname>$params</varname> (optional): dijit-specific
                         parameters. Basically, any non-HTML attribute that can
                         be used to configure a dijit.
                 </para></listitem>
 
                 <listitem><para>
-                        <code>$attribs</code> (optional): any additional HTML
+                        <varname>$attribs</varname> (optional): any additional HTML
                         attributes that should be used to render the dijit. If
                         the key 'id' is passed in this array, it will be used
-                        for the form element DOM id, and <code>$id</code> will
+                        for the form element DOM id, and <varname>$id</varname> will
                         be used for its name.
                 </para></listitem>
             </itemizedlist>
@@ -329,8 +329,8 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
                 <para>
                     <code>captureStart($id, array $params = array(), array $attribs =
                         array())</code>: begin capturing content to include in a container.
-                    <code>$params</code> refers to the dijit params to use with
-                    the container, while <code>$attribs</code> refer to any
+                    <varname>$params</varname> refers to the dijit params to use with
+                    the container, while <varname>$attribs</varname> refer to any
                     general HTML attributes to use.
                 </para>
 
@@ -344,7 +344,7 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
                 <para>
                     <methodname>captureEnd($id)</methodname>:
                     finish capturing content to include in a container.
-                    <code>$id</code> should refer to an id previously used with
+                    <varname>$id</varname> should refer to an id previously used with
                     a <methodname>captureStart()</methodname> call. Returns a string
                     representing the container and its contents, just as if
                     you'd simply passed content to the helper itself.
@@ -437,7 +437,7 @@ echo $view->borderContainer()->captureEnd('masterLayout');
                     <emphasis>CheckBox</emphasis>:
                     dijit.form.CheckBox. Display a checkbox. Accepts an
                     optional fifth argument, the array
-                    <code>$checkedOptions</code>, which may contain either:
+                    <varname>$checkedOptions</varname>, which may contain either:
                 </para>
 
                 <itemizedlist>
@@ -453,7 +453,7 @@ echo $view->borderContainer()->captureEnd('masterLayout');
                 </itemizedlist>
 
                 <para>
-                    If <code>$checkedOptions</code> is not provided, 1 and 0
+                    If <varname>$checkedOptions</varname> is not provided, 1 and 0
                     are assumed.
                 </para>
 
@@ -476,10 +476,10 @@ echo $view->borderContainer()->captureEnd('masterLayout');
                     difference is that you may type an option that is not in
                     the list of available options, and it will still consider
                     it valid input. It accepts an optional fifth argument, an
-                    associative array <code>$options</code>; if provided,
+                    associative array <varname>$options</varname>; if provided,
                     ComboBox will be rendered as a <code>select</code>. Note
                     also that the <emphasis>label values</emphasis> of the
-                    <code>$options</code> array will be returned in the form --
+                    <varname>$options</varname> array will be returned in the form --
                     not the values themselves.
                 </para>
 
@@ -492,7 +492,7 @@ echo $view->borderContainer()->captureEnd('masterLayout');
 
                 <para>
                     To specify a datastore, provide one of the following
-                    <code>$params</code> key combinations:
+                    <varname>$params</varname> key combinations:
                 </para>
 
                 <itemizedlist>
@@ -917,9 +917,9 @@ echo $view->passwordTextBox(
 
                 <para>
                     RadioButton accepts an optional fifth argument,
-                    <code>$options</code>, an associative array of value/label
+                    <varname>$options</varname>, an associative array of value/label
                     pairs used as the radio options. You may also pass these as
-                    the <code>$attribs</code> key <code>options</code>.
+                    the <varname>$attribs</varname> key <code>options</code>.
                 </para>
 
                 <programlisting language="php"><![CDATA[

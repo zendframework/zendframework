@@ -251,7 +251,7 @@ $upload->receive();
 
         <para>
             By default file names will be returned with the complete path. If you only need the file
-            name without path, you can set the second parameter, <code>$path</code>, which will
+            name without path, you can set the second parameter, <varname>$path</varname>, which will
             truncate the file path when set to false.
         </para>
 

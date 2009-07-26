@@ -14,7 +14,7 @@
     <para>
         All dijit decorators look for the <code>dijitParams</code> property of
         the given element being decorated, and push them as the
-        <code>$params</code> array to the dijit view helper being used; these
+        <varname>$params</varname> array to the dijit view helper being used; these
         are then separated from any other properties so that no duplication of
         information occurs.
     </para>

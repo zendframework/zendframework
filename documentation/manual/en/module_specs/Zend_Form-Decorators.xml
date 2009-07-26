@@ -112,7 +112,7 @@
 
         <para>
             Each decorator's <methodname>render()</methodname> method accepts a string,
-            <code>$content</code>. When the first decorator is called, this
+            <varname>$content</varname>. When the first decorator is called, this
             string is typically empty, while on subsequent calls it will be
             populated. Based on the type of decorator and the options passed in,
             the decorator will either replace this string, prepend the string,

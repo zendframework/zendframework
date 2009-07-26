@@ -68,21 +68,21 @@
         <itemizedlist>
             <listitem><para>
                 <methodname>setPluginLoader($loader, $type)</methodname>:
-                <code>$loader</code> is the plugin loader object itself, while
-                <code>$type</code> is one of the types specified above. This
+                <varname>$loader</varname> is the plugin loader object itself, while
+                <varname>$type</varname> is one of the types specified above. This
                 sets the plugin loader for the given type to the newly
                 specified loader object.
             </para></listitem>
 
             <listitem><para>
                 <methodname>getPluginLoader($type)</methodname>: retrieves the plugin
-                loader associated with <code>$type</code>.
+                loader associated with <varname>$type</varname>.
             </para></listitem>
 
             <listitem><para>
                 <methodname>addPrefixPath($prefix, $path, $type = null)</methodname>: adds
                 a prefix/path association to the loader specified by
-                <code>$type</code>. If <code>$type</code> is null, it will
+                <varname>$type</varname>. If <varname>$type</varname> is null, it will
                 attempt to add the path to all loaders, by appending the prefix
                 with each of "_Validate", "_Filter", and "_Decorator"; and
                 appending the path with "Validate/", "Filter/", and
@@ -409,7 +409,7 @@ $element->addValidator('StringLength', false, array(6, 20));
             Arguments passed in this way should be in the order in which they
             are defined in the constructor. The above example will instantiate
             the <classname>Zend_Validate_StringLenth</classname> class with its
-            <code>$min</code> and <code>$max</code> parameters:
+            <varname>$min</varname> and <varname>$max</varname> parameters:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -421,7 +421,7 @@ $validator = new Zend_Validate_StringLength(6, 20);
 
             <para>
                 Some developers may wish to provide custom error messages for a
-                validator. The <code>$options</code> argument of the
+                validator. The <varname>$options</varname> argument of the
                 <classname>Zend_Form_Element::addValidator()</classname> method allows you to do so
                 by providing the key 'messages' and mapping it to an array of key/value pairs
                 for setting the message templates. You will need to know the
@@ -520,9 +520,9 @@ if ($element->isValid($value)) {
 
             <para>
                 <classname>Zend_Form_Element::isValid()</classname> supports an
-                additional argument, <code>$context</code>.
+                additional argument, <varname>$context</varname>.
                 <classname>Zend_Form::isValid()</classname> passes the entire array of
-                data being processed to <code>$context</code> when validating a
+                data being processed to <varname>$context</varname> when validating a
                 form, and <classname>Zend_Form_Element::isValid()</classname>, in turn,
                 passes it to each validator. This means you can write
                 validators that are aware of data passed to other form

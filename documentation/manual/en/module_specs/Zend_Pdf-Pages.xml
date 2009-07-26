@@ -47,7 +47,7 @@
         </para>
 
         <para>
-            Document pages are stored in the <code>$pages</code> public attribute of the <classname>Zend_Pdf</classname> class.
+            Document pages are stored in the <varname>$pages</varname> public attribute of the <classname>Zend_Pdf</classname> class.
             The attribute holds an array of <classname>Zend_Pdf_Page</classname> objects and completely defines the instances and order of pages.
             This array can be manipulated like any other PHP array:
         </para>

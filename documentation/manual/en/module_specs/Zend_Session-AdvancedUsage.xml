@@ -297,8 +297,8 @@ try {
             The second parameter in the constructor above tells <classname>Zend_Session_Namespace</classname> that any future
             instances with the "<classname>Zend_Auth</classname>" namespace are not allowed. Attempting to create such an instance
             causes an exception to be thrown by the constructor. The developer therefore becomes responsible for storing
-            a reference to an instance object (<code>$authSpaceAccessor1</code>, <code>$authSpaceAccessor2</code>, or
-            <code>$authSpaceAccessor3</code> in the example above) somewhere, if access to the session namespace is
+            a reference to an instance object (<varname>$authSpaceAccessor1</varname>, <varname>$authSpaceAccessor2</varname>, or
+            <varname>$authSpaceAccessor3</varname> in the example above) somewhere, if access to the session namespace is
             needed at a later time during the same request. For example, a developer may store the reference in a static
             variable, add the reference to a
             <ulink url="http://www.martinfowler.com/eaaCatalog/registry.html">registry</ulink> (see
@@ -446,7 +446,7 @@ echo $myNamespace->someArray['foo']; // prints "bar"
             <code>tests/Zend/Session</code>, which make use of PHP's <methodname>exec()</methodname> to launch a separate process.
             The new process more accurately simulates a second, successive request from a browser. The separate process
             begins with a "clean" session, just like any PHP script execution for a web request. Also, any changes to
-            <code>$_SESSION</code> made in the calling process become available to the child process, provided the
+            <varname>$_SESSION</varname> made in the calling process become available to the child process, provided the
             parent closed the session before using <methodname>exec()</methodname>.
         </para>
 

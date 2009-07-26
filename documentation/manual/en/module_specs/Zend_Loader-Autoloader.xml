@@ -207,7 +207,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><code>string|false</code></entry>
                         <entry><itemizedlist>
                             <listitem><para>
-                                <code>$class</code>, <emphasis>required</emphasis>.
+                                <varname>$class</varname>, <emphasis>required</emphasis>.
                                 A string class name to load.
                             </para></listitem>
                         </itemizedlist></entry>
@@ -222,7 +222,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><classname>Zend_Loader_Autoloader</classname></entry>
                         <entry><itemizedlist>
                             <listitem><para>
-                                <code>$callback</code>, <emphasis>required</emphasis>.
+                                <varname>$callback</varname>, <emphasis>required</emphasis>.
                             </para></listitem>
                         </itemizedlist></entry>
                         <entry><para>
@@ -247,7 +247,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><classname>Zend_Loader_Autoloader</classname></entry>
                         <entry><itemizedlist>
                             <listitem><para>
-                                <code>$autoloaders</code>, <emphasis>required</emphasis>.
+                                <varname>$autoloaders</varname>, <emphasis>required</emphasis>.
                             </para></listitem>
                         </itemizedlist></entry>
                         <entry><para>
@@ -271,7 +271,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><type>Array</type></entry>
                         <entry><itemizedlist>
                             <listitem><para>
-                                <code>$namespace</code>, <emphasis>required</emphasis>
+                                <varname>$namespace</varname>, <emphasis>required</emphasis>
                             </para></listitem>
                         </itemizedlist></entry>
                         <entry><para>
@@ -285,12 +285,12 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><classname>Zend_Loader_Autoloader</classname></entry>
                         <entry><itemizedlist>
                             <listitem><para>
-                                <code>$namespace</code>, <emphasis>required</emphasis>.
+                                <varname>$namespace</varname>, <emphasis>required</emphasis>.
                             </para></listitem>
                         </itemizedlist></entry>
                         <entry><para>
                             Register one or more namespaces with the default
-                            autoloader. If <code>$namespace</code> is a string,
+                            autoloader. If <varname>$namespace</varname> is a string,
                             it registers that namespace; if it's an array of
                             strings, registers each as a namespace.
                         </para></entry>
@@ -301,12 +301,12 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><classname>Zend_Loader_Autoloader</classname></entry>
                         <entry><itemizedlist>
                             <listitem><para>
-                                <code>$namespace</code>, <emphasis>required</emphasis>.
+                                <varname>$namespace</varname>, <emphasis>required</emphasis>.
                             </para></listitem>
                         </itemizedlist></entry>
                         <entry><para>
                             Unregister one or more namespaces from the default
-                            autoloader. If <code>$namespace</code> is a string,
+                            autoloader. If <varname>$namespace</varname> is a string,
                             it unregisters that namespace; if it's an array of
                             strings, unregisters each as a namespace.
                         </para></entry>
@@ -327,7 +327,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><code>boolean|Zend_Loader_Autoloader</code></entry>
                         <entry><itemizedlist>
                             <listitem><para>
-                                <code>$flag</code>, <emphasis>optional</emphasis>.
+                                <varname>$flag</varname>, <emphasis>optional</emphasis>.
                             </para></listitem>
                         </itemizedlist></entry>
                         <entry><para>
@@ -347,7 +347,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><classname>Zend_Loader_Autoloader</classname></entry>
                         <entry><itemizedlist>
                             <listitem><para>
-                                <code>$flag</code>, <emphasis>required</emphasis>.
+                                <varname>$flag</varname>, <emphasis>required</emphasis>.
                             </para></listitem>
                         </itemizedlist></entry>
                         <entry><para>
@@ -374,7 +374,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><type>Array</type></entry>
                         <entry><itemizedlist>
                             <listitem><para>
-                                <code>$class</code>, <emphasis>required</emphasis>.
+                                <varname>$class</varname>, <emphasis>required</emphasis>.
                             </para></listitem>
                         </itemizedlist></entry>
                         <entry><para>
@@ -390,12 +390,12 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><classname>Zend_Loader_Autoloader</classname></entry>
                         <entry><itemizedlist>
                             <listitem><para>
-                                <code>$callback</code>, <emphasis>required</emphasis>.
+                                <varname>$callback</varname>, <emphasis>required</emphasis>.
                                 A valid PHP callback
                             </para></listitem>
 
                             <listitem><para>
-                                <code>$namespace</code>, <emphasis>optional</emphasis>.
+                                <varname>$namespace</varname>, <emphasis>optional</emphasis>.
                                 A string representing a class prefix namespace.
                             </para></listitem>
                         </itemizedlist></entry>
@@ -413,12 +413,12 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><classname>Zend_Loader_Autoloader</classname></entry>
                         <entry><itemizedlist>
                             <listitem><para>
-                                <code>$callback</code>, <emphasis>required</emphasis>.
+                                <varname>$callback</varname>, <emphasis>required</emphasis>.
                                 A valid PHP callback
                             </para></listitem>
 
                             <listitem><para>
-                                <code>$namespace</code>, <emphasis>optional</emphasis>.
+                                <varname>$namespace</varname>, <emphasis>optional</emphasis>.
                                 A string representing a class prefix namespace.
                             </para></listitem>
                         </itemizedlist></entry>
@@ -436,12 +436,12 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><classname>Zend_Loader_Autoloader</classname></entry>
                         <entry><itemizedlist>
                             <listitem><para>
-                                <code>$callback</code>, <emphasis>required</emphasis>.
+                                <varname>$callback</varname>, <emphasis>required</emphasis>.
                                 A valid PHP callback
                             </para></listitem>
 
                             <listitem><para>
-                                <code>$namespace</code>, <emphasis>optional</emphasis>.
+                                <varname>$namespace</varname>, <emphasis>optional</emphasis>.
                                 A string representing a class prefix namespace,
                                 or an array of namespace strings.
                             </para></listitem>

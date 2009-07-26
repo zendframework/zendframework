@@ -278,7 +278,7 @@ foreach ($feed->entries as $entry) {
             A customer/owner can access his own Customer Items feed to insert, update, or delete their items. These operations do not apply to the public snippets feed.
         </para>
         <para>
-            You can test a feed operation before it is actually executed by setting the dry-run flag (<code>$dryRun</code>) to <constant>TRUE</constant>. Once you are sure that you want to submit the data, set it to <constant>FALSE</constant> to execute the operation.
+            You can test a feed operation before it is actually executed by setting the dry-run flag (<varname>$dryRun</varname>) to <constant>TRUE</constant>. Once you are sure that you want to submit the data, set it to <constant>FALSE</constant> to execute the operation.
         </para>
         <sect3 id="zend.gdata.gbase.crud.insert">
             <title>Insert an Item</title>

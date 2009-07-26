@@ -155,7 +155,7 @@
                     container. If depths are not given, the method will use
                     the values retrieved from <methodname>getMinDepth()</methodname> and
                     <methodname>getMaxDepth()</methodname>. The deepest active page must
-                    be between <code>$minDepth</code> and <code>$axnDepth</code>
+                    be between <varname>$minDepth</varname> and <varname>$axnDepth</varname>
                     inclusively. Returns an array containing a reference to the
                     found page instance and the depth at which the page was
                     found.
@@ -764,9 +764,9 @@ Products, Foo Server, FAQ
         <para>
             There are two types of relations; forward and reverse, indicated
             by the keyords <code>'rel'</code> and <code>'rev'</code>. Most
-            methods in the helper will take a <code>$rel</code> param, which
+            methods in the helper will take a <varname>$rel</varname> param, which
             must be either <code>'rel'</code> or <code>'rev'</code>. Most
-            methods also take a <code>$type</code> param, which is used
+            methods also take a <varname>$type</varname> param, which is used
             for specifying the link type (e.g. alternate, start, next, prev,
             chapter, etc).
         </para>
@@ -775,16 +775,16 @@ Products, Foo Server, FAQ
             Relationships can be added to page objects manually, or found
             by traversing the container registered in the helper. The method
             <methodname>findRelation($page, $rel, $type)</methodname> will first try
-            to find the given <code>$rel</code> of <code>$type</code> from
-            the <code>$page</code> by calling <code>$page->findRel($type)</code>
-            or <code>$page->findRel($type)</code>. If the <code>$page</code>
+            to find the given <varname>$rel</varname> of <varname>$type</varname> from
+            the <varname>$page</varname> by calling <code>$page->findRel($type)</code>
+            or <code>$page->findRel($type)</code>. If the <varname>$page</varname>
             has a relation that can be converted to a page instance, that
-            relation will be used. If the <code>$page</code> instance doesn't
-            have the specified <code>$type</code>, the helper will look for
+            relation will be used. If the <varname>$page</varname> instance doesn't
+            have the specified <varname>$type</varname>, the helper will look for
             a method in the helper named <code>search$rel$type</code> (e.g.
             <methodname>searchRelNext()</methodname> or <methodname>searchRevAlternate()</methodname>).
             If such a method exists, it will be used for determining the
-            <code>$page</code>'s relation by traversing the container.
+            <varname>$page</varname>'s relation by traversing the container.
         </para>
 
         <para>
@@ -1235,11 +1235,11 @@ Output:
                     a HTML <code>UL</code> list.
                 </para>
                 <para>
-                    If <code>$container</code> is not given, the container
+                    If <varname>$container</varname> is not given, the container
                     registered in the helper will be rendered.
                 </para>
                 <para>
-                    <code>$options</code> is used for overriding options
+                    <varname>$options</varname> is used for overriding options
                     specified temporarily without rsetting the values in the
                     helper instance. It is an associative array where each key
                     corresponds to an option in the helper.

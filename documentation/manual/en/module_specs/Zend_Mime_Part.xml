@@ -54,50 +54,50 @@ public $language;
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>$charset</code>
+                    <varname>$charset</varname>
                     has to be set to the actual charset of the content if it is a text type (Text or HTML).
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>$id</code>
+                    <varname>$id</varname>
                     may be set to identify a content-id for inline images in a HTML mail.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>$filename</code>
+                    <varname>$filename</varname>
                     contains the name the file will get when downloading it.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>$disposition</code>
+                    <varname>$disposition</varname>
                     defines if the file should be treated as an attachment or if it is used inside
                     the (HTML-) mail (inline).
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>$description</code>
+                    <varname>$description</varname>
                     is only used for informational purposes.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>$boundary</code>
+                    <varname>$boundary</varname>
                     defines string as boundary.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>$location</code>
+                    <varname>$location</varname>
                     can be used as resource URI that has relation to the content.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>$language</code>
+                    <varname>$language</varname>
                     defines languages in the content.
                 </para>
             </listitem>

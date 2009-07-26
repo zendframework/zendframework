@@ -97,8 +97,8 @@
         <title>Examples</title>
 
         <para>
-            The following examples assume the following <code>$options</code>
-            array and <code>$config</code> object:
+            The following examples assume the following <varname>$options</varname>
+            array and <varname>$config</varname> object:
         </para>
 
         <programlisting language="php"><![CDATA[

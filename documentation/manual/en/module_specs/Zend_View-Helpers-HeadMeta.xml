@@ -36,9 +36,9 @@
     </itemizedlist>
 
     <para>
-        The <code>$keyValue</code> item is used to define a value for the 'name'
-        or 'http-equiv' key; <code>$content</code> is the value for the
-        'content' key, and <code>$modifiers</code> is an optional associative
+        The <varname>$keyValue</varname> item is used to define a value for the 'name'
+        or 'http-equiv' key; <varname>$content</varname> is the value for the
+        'content' key, and <varname>$modifiers</varname> is an optional associative
         array that can contain keys for 'lang' and/or 'scheme'.
     </para>
 
@@ -46,9 +46,9 @@
         You may also set meta tags using the <methodname>headMeta()</methodname> helper
         method, which has the following signature: <code>headMeta($content,
             $keyValue, $keyType = 'name', $modifiers = array(), $placement =
-            'APPEND')</code>. <code>$keyValue</code> is the content for the key
-        specified in <code>$keyType</code>, which should be either 'name' or
-        'http-equiv'. <code>$placement</code> can be either 'SET' (overwrites
+            'APPEND')</code>. <varname>$keyValue</varname> is the content for the key
+        specified in <varname>$keyType</varname>, which should be either 'name' or
+        'http-equiv'. <varname>$placement</varname> can be either 'SET' (overwrites
         all previously stored values), 'APPEND' (added to end of stack), or
         'PREPEND' (added to top of stack).
     </para>

@@ -199,7 +199,7 @@ echo $rateInfo->GST;
         In the example above, the <methodname>getService()</methodname> method is used
         to return a client to the
         <link linkend="zend.service.strikeiron.bundled-services.sales-use-tax-basic">Sales &amp; Use Tax Basic</link> service.
-        The client object is stored in <code>$taxBasic</code>.
+        The client object is stored in <varname>$taxBasic</varname>.
       </para>
 
       <para>
@@ -210,7 +210,7 @@ echo $rateInfo->GST;
 
       <para>
         The result from <methodname>getTaxRateCanada()</methodname> is stored in
-        <code>$rateInfo</code> and has properties like <code>province</code>
+        <varname>$rateInfo</varname> and has properties like <code>province</code>
         and <code>GST</code>.
       </para>
 
@@ -263,12 +263,12 @@ Zend_Service_StrikeIron_Decorator Object
       </para>
 
       <para>
-        In the output above, we see that the decorator (<code>$rateInfo</code>) wraps an object
+        In the output above, we see that the decorator (<varname>$rateInfo</varname>) wraps an object
         named <code>GetTaxRateCanadaResult</code>, the result of the call to <methodname>getTaxRateCanada()</methodname>.
       </para>
 
       <para>
-        This means that <code>$rateInfo</code> has public properties like <code>abbreviation</code>,
+        This means that <varname>$rateInfo</varname> has public properties like <code>abbreviation</code>,
         <code>province</code>, and <code>GST</code>. These are accessed like <code>$rateInfo->province</code>.
       </para>
 

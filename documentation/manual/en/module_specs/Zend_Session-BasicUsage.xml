@@ -8,14 +8,14 @@
         <classname>Zend_Session_Namespace</classname> instances provide the primary API for manipulating session data in the Zend
         Framework. Namespaces are used to segregate all session data, although a default namespace exists for those who
         only want one namespace for all their session data. <classname>Zend_Session</classname> utilizes ext/session and its
-        special <code>$_SESSION</code> superglobal as the storage mechanism for session state data. While
-        <code>$_SESSION</code> is still available in PHP's global namespace, developers should refrain from directly
+        special <varname>$_SESSION</varname> superglobal as the storage mechanism for session state data. While
+        <varname>$_SESSION</varname> is still available in PHP's global namespace, developers should refrain from directly
         accessing it, so that <classname>Zend_Session</classname> and <classname>Zend_Session_Namespace</classname> can most effectively and
         securely provide its suite of session related functionality.
     </para>
 
     <para>
-        Each instance of <classname>Zend_Session_Namespace</classname> corresponds to an entry of the <code>$_SESSION</code>
+        Each instance of <classname>Zend_Session_Namespace</classname> corresponds to an entry of the <varname>$_SESSION</varname>
         superglobal array, where the namespace is used as the key.
 
         <programlisting language="php"><![CDATA[
@@ -24,8 +24,8 @@ $myNamespace = new Zend_Session_Namespace('myNamespace');
 // $myNamespace corresponds to $_SESSION['myNamespace']
 ]]></programlisting>
 
-        It is possible to use Zend_Session in conjunction with other code that uses <code>$_SESSION</code> directly. To
-        avoid problems, however, it is highly recommended that such code only uses parts of <code>$_SESSION</code> that
+        It is possible to use Zend_Session in conjunction with other code that uses <varname>$_SESSION</varname> directly. To
+        avoid problems, however, it is highly recommended that such code only uses parts of <varname>$_SESSION</varname> that
         do not correspond to instances of <classname>Zend_Session_Namespace</classname>.
     </para>
 
@@ -64,7 +64,7 @@ echo "Page requests this session: ",
         <para>
             When multiple modules use instances of <classname>Zend_Session_Namespace</classname> having different namespaces, each
             module obtains data encapsulation for its session data. The <classname>Zend_Session_Namespace</classname> constructor
-            can be passed an optional <code>$namespace</code> argument, which allows developers to partition session
+            can be passed an optional <varname>$namespace</varname> argument, which allows developers to partition session
             data into separate namespaces. Namespacing provides an effective and popular way to secure session state
             data against changes due to accidental naming collisions.
         </para>

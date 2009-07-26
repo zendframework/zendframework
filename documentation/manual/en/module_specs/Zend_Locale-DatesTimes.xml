@@ -187,12 +187,12 @@ Array
         </example>
 
         <para>
-            Since <methodname>getDate()</methodname> is "locale-aware", specifying the <code>$locale</code> is sufficient for date
+            Since <methodname>getDate()</methodname> is "locale-aware", specifying the <varname>$locale</varname> is sufficient for date
             strings adhering to that locale's format. The option '<code>fix_date</code>' uses simple tests to
             determine if the day or month is not valid, and then applies heuristics to try and correct any detected
             problems. Note the use of '<classname>Zend_Locale_Format::STANDARD</classname>' as the value for
             '<code>date_format</code>' to prevent the use of a class-wide default date format set using
-            <methodname>setOptions()</methodname>. This forces getDate to use the default date format for <code>$locale</code>.
+            <methodname>setOptions()</methodname>. This forces getDate to use the default date format for <varname>$locale</varname>.
         </para>
 
         <example id="zend.locale.date.normalize.example-2">
@@ -228,9 +228,9 @@ print_r ($date);
         </example>
 
         <para>
-            If a specific format is desired, specify the <code>$format</code> argument, without giving a
-            <code>$locale</code>. Only single-letter codes (H, m, s, y, M, d), and MMMM and EEEE are supported in the
-            <code>$format</code>.
+            If a specific format is desired, specify the <varname>$format</varname> argument, without giving a
+            <varname>$locale</varname>. Only single-letter codes (H, m, s, y, M, d), and MMMM and EEEE are supported in the
+            <varname>$format</varname>.
         </para>
 
         <example id="zend.locale.date.normalize.example-4">

@@ -162,7 +162,7 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
 }
 ]]></programlisting>
 
-            The public properties <code>$minimum</code> and <code>$maximum</code> have been
+            The public properties <varname>$minimum</varname> and <varname>$maximum</varname> have been
             established to provide the minimum and maximum boundaries, respectively, for a value to
             successfully validate. The class also defines two message variables that correspond to
             the public properties and allow <code>min</code> and <code>max</code> to be used in

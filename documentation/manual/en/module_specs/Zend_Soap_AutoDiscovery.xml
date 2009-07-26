@@ -287,7 +287,7 @@ $autodiscover->handle();
                                 <classname>Zend_Soap_AutoDiscover</classname> will be created with the <classname>Zend_Soap_Wsdl_Strategy_DefaultComplexType</classname>
                                 class as detection algorithm for complex types. The first parameter of the AutoDiscover constructor takes
                                 any complex type strategy implementing <classname>Zend_Soap_Wsdl_Strategy_Interface</classname> or a string with the name
-                                of the class. For backwards compatibility with <code>$extractComplexType</code> boolean variables are parsed
+                                of the class. For backwards compatibility with <varname>$extractComplexType</varname> boolean variables are parsed
                                 exactly like in <classname>Zend_Soap_Wsdl</classname>. See the <link linkend="zend.soap.wsdl.types.add_complex"><classname>Zend_Soap_Wsdl</classname> manual
                                 on adding complex</link> types for more information.
                             </para>

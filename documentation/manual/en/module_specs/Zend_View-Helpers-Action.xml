@@ -19,7 +19,7 @@
         The API for the <code>Action</code> view helper follows that of most MVC
         components that invoke controller actions: <code>action($action,
             $controller, $module = null, array $params = array())</code>.
-        <code>$action</code> and <code>$controller</code> are required; if no
+        <varname>$action</varname> and <varname>$controller</varname> are required; if no
         module is specified, the default module is assumed.
     </para>
 

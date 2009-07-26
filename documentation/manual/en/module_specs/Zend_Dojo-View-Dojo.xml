@@ -304,7 +304,7 @@ $view->dojo()->addLayer('/js/foo/foo.js');
             <listitem><para><methodname>getLayers()</methodname>: get a list of all
                     registered layer paths (custom builds).</para></listitem>
             <listitem><para><methodname>removeLayer($path)</methodname>: remove the layer
-                    that matches <code>$path</code> from the list of registered
+                    that matches <varname>$path</varname> from the list of registered
                     layers (custom builds).</para></listitem>
             <listitem><para><methodname>setCdnBase($url)</methodname>: set the base URL for
                     a CDN; typically, one of the

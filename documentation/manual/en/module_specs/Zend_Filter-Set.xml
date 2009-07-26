@@ -11,7 +11,7 @@
     <sect2 id="zend.filter.set.alnum">
         <title>Alnum</title>
         <para>
-            Returns the string <code>$value</code>, removing all but alphabetic and digit
+            Returns the string <varname>$value</varname>, removing all but alphabetic and digit
             characters. This filter includes an option to also allow white space characters.
         </para>
 
@@ -28,7 +28,7 @@
     <sect2 id="zend.filter.set.alpha">
         <title>Alpha</title>
         <para>
-            Returns the string <code>$value</code>, removing all but alphabetic characters. This
+            Returns the string <varname>$value</varname>, removing all but alphabetic characters. This
             filter includes an option to also allow white space characters.
         </para>
     </sect2>
@@ -47,7 +47,7 @@
     <sect2 id="zend.filter.set.digits">
         <title>Digits</title>
         <para>
-            Returns the string <code>$value</code>, removing all but digit characters.
+            Returns the string <varname>$value</varname>, removing all but digit characters.
         </para>
     </sect2>
 
@@ -63,7 +63,7 @@
     <sect2 id="zend.filter.set.htmlentities">
         <title>HtmlEntities</title>
         <para>
-            Returns the string <code>$value</code>, converting characters to their corresponding
+            Returns the string <varname>$value</varname>, converting characters to their corresponding
             HTML entity equivalents where they exist.
         </para>
     </sect2>
@@ -71,7 +71,7 @@
     <sect2 id="zend.filter.set.int">
         <title>Int</title>
         <para>
-            Returns (int) <code>$value</code>
+            Returns (int) <varname>$value</varname>
         </para>
     </sect2>
 
@@ -81,7 +81,7 @@
     <sect2 id="zend.filter.set.stripnewlines">
         <title>StripNewlines</title>
         <para>
-            Returns the string <code>$value</code> without any newline control characters.
+            Returns the string <varname>$value</varname> without any newline control characters.
         </para>
     </sect2>
 
@@ -90,7 +90,7 @@
     <sect2 id="zend.filter.set.stringtolower">
         <title>StringToLower</title>
         <para>
-            Returns the string <code>$value</code>, converting alphabetic characters to lowercase as
+            Returns the string <varname>$value</varname>, converting alphabetic characters to lowercase as
             necessary.
         </para>
     </sect2>
@@ -98,7 +98,7 @@
     <sect2 id="zend.filter.set.stringtoupper">
         <title>StringToUpper</title>
         <para>
-            Returns the string <code>$value</code>, converting alphabetic characters to uppercase as
+            Returns the string <varname>$value</varname>, converting alphabetic characters to uppercase as
             necessary.
         </para>
     </sect2>
@@ -106,7 +106,7 @@
     <sect2 id="zend.filter.set.stringtrim">
         <title>StringTrim</title>
         <para>
-            Returns the string <code>$value</code> with characters stripped from the beginning and
+            Returns the string <varname>$value</varname> with characters stripped from the beginning and
             end.
         </para>
     </sect2>

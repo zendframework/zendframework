@@ -128,8 +128,8 @@
                         $value,...)</code> </emphasis>
                     </entry>
                     <entry>
-                        Creates a filter from a string mask. All <code>$value</code>
-                        parameters will be escaped and substituted into <code>$mask</code>
+                        Creates a filter from a string mask. All <varname>$value</varname>
+                        parameters will be escaped and substituted into <varname>$mask</varname>
                         by using
                         <ulink url="http://php.net/sprintf">
                         <methodname>sprintf()</methodname></ulink>
@@ -206,7 +206,7 @@
                         $values)</code> </emphasis>
                     </entry>
                     <entry>
-                        Escapes the given <code>$values</code> according to RFC 2254
+                        Escapes the given <varname>$values</varname> according to RFC 2254
                         so that they can be safely used in <acronym>LDAP</acronym> filters. If a single string
                         is given, a string is returned - otherwise an array is returned.
                         Any control characters with an ACII code &lt; 32 as well as the

@@ -29,12 +29,12 @@
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>$wsdl</code> - the URI of a WSDL file.
+                        <varname>$wsdl</varname> - the URI of a WSDL file.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>$options</code> - options to create SOAP client object.
+                        <varname>$options</varname> - options to create SOAP client object.
                     </para>
                 </listitem>
             </itemizedlist>

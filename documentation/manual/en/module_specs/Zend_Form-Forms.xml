@@ -133,12 +133,12 @@ $form = new Zend_Form($config);
             <listitem><para>
                 <methodname>addElementPrefixPath($prefix, $path, $type = null)</methodname>:
                 Just like <methodname>addPrefixPath()</methodname>, you must specify a class
-                prefix and a path. <code>$type</code>, when specified, must be
+                prefix and a path. <varname>$type</varname>, when specified, must be
                 one of the plugin loader types specified by
                 <classname>Zend_Form_Element</classname>; see the <link
                     linkend="zend.form.elements.loaders">element plugins
                     section</link> for more information on valid
-                <code>$type</code> values. If no <code>$type</code> is
+                <varname>$type</varname> values. If no <varname>$type</varname> is
                 specified, the method will assume it is a general prefix for all
                 types.
             </para></listitem>
@@ -147,7 +147,7 @@ $form = new Zend_Form($config);
                 <methodname>addDisplayGroupPrefixPath($prefix, $path)</methodname>:
                 Just like <methodname>addPrefixPath()</methodname>, you must specify a class
                 prefix and a path; however, since display groups only support
-                decorators as plugins, no <code>$type</code> is necessary.
+                decorators as plugins, no <varname>$type</varname> is necessary.
             </para></listitem>
         </itemizedlist>
 

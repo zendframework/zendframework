@@ -255,7 +255,7 @@ Zend_Session::setOptions($config->toArray());
             identifiers. The cookie's value is the unique identifier of your browser's session. PHP's ext/session
             uses this identifier to maintain a unique one-to-one relationship between website visitors, and
             persistent session data storage unique to each visitor. Zend_Session* wraps this storage mechanism
-            (<code>$_SESSION</code>) with an object-oriented interface. Unfortunately, if an attacker gains access
+            (<varname>$_SESSION</varname>) with an object-oriented interface. Unfortunately, if an attacker gains access
             to the value of the cookie (the session id), an attacker might be able to hijack a visitor's session.
             This problem is not unique to PHP, or Zend Framework. The <methodname>regenerateId()</methodname> method allows
             an application to change the session id (stored in the visitor's cookie) to a new, random, unpredictable
@@ -418,7 +418,7 @@ if (!isset($defaultNamespace->initialized)) {
             session. However, no variables in PHP are affected, so your namespaced sessions (instances of
             <classname>Zend_Session_Namespace</classname>) remain readable. To complete a "logout", set the optional parameter to
             <constant>TRUE</constant> (the default) to also delete the user agent's session id cookie. The optional
-            <code>$readonly</code> parameter removes the ability to create new <classname>Zend_Session_Namespace</classname>
+            <varname>$readonly</varname> parameter removes the ability to create new <classname>Zend_Session_Namespace</classname>
             instances and for <classname>Zend_Session</classname> methods to write to the session data store.
         </para>
 
@@ -434,7 +434,7 @@ if (!isset($defaultNamespace->initialized)) {
         <note>
             <title>Throws</title>
             <para>
-                By default, <code>$readonly</code> is enabled and further actions involving writing to the session data
+                By default, <varname>$readonly</varname> is enabled and further actions involving writing to the session data
                 store will throw an exception.
             </para>
         </note>
@@ -461,8 +461,8 @@ if (!isset($defaultNamespace->initialized)) {
         <title>writeClose($readonly = true)</title>
 
         <para>
-            Shutdown the session, close writing and detach <code>$_SESSION</code> from the back-end storage mechanism.
-            This will complete the internal data transformation on this request. The optional <code>$readonly</code>
+            Shutdown the session, close writing and detach <varname>$_SESSION</varname> from the back-end storage mechanism.
+            This will complete the internal data transformation on this request. The optional <varname>$readonly</varname>
             boolean parameter can remove write access by throwing an exception upon any attempt to write to the session
             via <classname>Zend_Session</classname> or <classname>Zend_Session_Namespace</classname>.
         </para>
@@ -470,10 +470,10 @@ if (!isset($defaultNamespace->initialized)) {
         <note>
             <title>Throws</title>
             <para>
-                By default, <code>$readonly</code> is enabled and further actions involving writing to the session data
-                store will throw an exception. However, some legacy application might expect <code>$_SESSION</code> to
+                By default, <varname>$readonly</varname> is enabled and further actions involving writing to the session data
+                store will throw an exception. However, some legacy application might expect <varname>$_SESSION</varname> to
                 remain writable after ending the session via <methodname>session_write_close()</methodname>. Although not considered
-                "best practice", the <code>$readonly</code> option is available for those who need it.
+                "best practice", the <varname>$readonly</varname> option is available for those who need it.
             </para>
         </note>
 
@@ -550,7 +550,7 @@ if (!isset($defaultNamespace->initialized)) {
 
         <para>
             DEPRECATED: Use <methodname>getIterator()</methodname> in <classname>Zend_Session_Namespace</classname>. This method returns an
-            array of the contents of <code>$namespace</code>. If you have logical reasons to keep this method publicly
+            array of the contents of <varname>$namespace</varname>. If you have logical reasons to keep this method publicly
             accessible, please provide feedback to the
             <ulink url="mailto:fw-auth@lists.zend.com">fw-auth@lists.zend.com</ulink> mail list. Actually, all
             participation on any relevant topic is welcome :)

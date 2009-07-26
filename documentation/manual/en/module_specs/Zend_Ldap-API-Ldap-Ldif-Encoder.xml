@@ -20,7 +20,7 @@
                         </emphasis>
                     </entry>
                     <entry>
-                        Decodes the string <code>$string</code> into an array of
+                        Decodes the string <varname>$string</varname> into an array of
                         <acronym>LDIF</acronym> items.
                     </entry>
                 </row>
@@ -30,8 +30,8 @@
                         $value, array $options)</code> </emphasis>
                     </entry>
                     <entry>
-                        Encode <code>$value</code> into a <acronym>LDIF</acronym> representation.
-                        <code>$options</code> is an array that may contain the following
+                        Encode <varname>$value</varname> into a <acronym>LDIF</acronym> representation.
+                        <varname>$options</varname> is an array that may contain the following
                         keys:
                         <variablelist>
                             <varlistentry>

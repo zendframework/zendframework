@@ -36,8 +36,8 @@
     </itemizedlist>
 
     <para>
-        In all cases, <code>$content</code> is the actual CSS declarations.
-        <code>$attributes</code> are any additional attributes you wish to provide to the
+        In all cases, <varname>$content</varname> is the actual CSS declarations.
+        <varname>$attributes</varname> are any additional attributes you wish to provide to the
         <code>style</code> tag: lang, title, media, or dir are all permissible.
     </para>
 
@@ -47,7 +47,7 @@
         <para>
             <code>HeadStyle</code> allows you to wrap the style tag in conditional comments,
             which allows you to hide it from specific browsers. To add the conditional
-            tags, pass the conditional value as part of the <code>$attributes</code> parameter in
+            tags, pass the conditional value as part of the <varname>$attributes</varname> parameter in
             the method calls.
         </para>
 
@@ -71,7 +71,7 @@ $this->headStyle()->appendStyle($styles, array('conditional' => 'lt IE 7');
         Finally, you can also use the <methodname>headStyle()</methodname> method to
         quickly add declarations elements; the signature for this is
         <methodname>headStyle($content$placement = 'APPEND', $attributes = array())</methodname>.
-        <code>$placement</code> should be either 'APPEND', 'PREPEND', or 'SET'.
+        <varname>$placement</varname> should be either 'APPEND', 'PREPEND', or 'SET'.
     </para>
 
     <para>

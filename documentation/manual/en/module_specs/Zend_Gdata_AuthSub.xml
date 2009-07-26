@@ -135,7 +135,7 @@ if (isset($_GET['logout'])) {
     <note>
         <title>Security notes</title>
         <para>
-            The treatment of the <code>$php_self</code> variable in the
+            The treatment of the <varname>$php_self</varname> variable in the
             example above is a general security guideline, it is not
             specific to <classname>Zend_Gdata</classname>. You should always filter content you
             output to http headers.

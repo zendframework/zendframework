@@ -33,7 +33,7 @@ if ($validator->isValid($emailaddress)) {
         <para>
             The above will test that a given email address is in the database
             table. If no record is found containing the value of
-            <code>$emailaddress</code> in the specified column, then an error
+            <varname>$emailaddress</varname> in the specified column, then an error
             message is displayed.
         </para>
 
@@ -54,7 +54,7 @@ if ($validator->isValid($username)) {
         <para>
             The above will test that a given username is not in the database
             table. If a record is found containing the value of
-            <code>$username</code> in the specified column, then an error
+            <varname>$username</varname> in the specified column, then an error
             message is displayed.
         </para>
     </sect3>
@@ -134,7 +134,7 @@ if ($validator->isValid($username)) {
         <para>
             The above example will check the <code>posts_categories</code> table
             to ensure that a record with the <code>post_id</code> has a value
-            matching <code>$category_id</code>
+            matching <varname>$category_id</varname>
         </para>
     </sect3>
 

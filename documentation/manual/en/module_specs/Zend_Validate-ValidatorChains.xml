@@ -40,7 +40,7 @@ if ($validatorChain->isValid($username)) {
         In some cases it makes sense to have a validator break the chain if its validation process
         fails. <classname>Zend_Validate</classname> supports such use cases with the second
         parameter to the <methodname>addValidator()</methodname> method. By setting
-        <code>$breakChainOnFailure</code> to <constant>TRUE</constant>, the added validator will break the
+        <varname>$breakChainOnFailure</varname> to <constant>TRUE</constant>, the added validator will break the
         chain execution upon failure, which avoids running any other validations that are determined
         to be unnecessary or inappropriate for the situation. If the above example were written as
         follows, then the alphanumeric validation would not occur if the string length validation

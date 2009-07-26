@@ -35,10 +35,10 @@
     </itemizedlist>
 
     <para>
-        In the case of the <code>*File()</code> methods, <code>$src</code> is
+        In the case of the <code>*File()</code> methods, <varname>$src</varname> is
         the remote location of the script to load; this is usually in the form
         of a URL or a path. For the <code>*Script()</code> methods,
-        <code>$script</code> is the client-side scripting directives you wish to
+        <varname>$script</varname> is the client-side scripting directives you wish to
         use in the element.
     </para>
 
@@ -48,7 +48,7 @@
         <para>
             <code>HeadScript</code> allows you to wrap the script tag in conditional comments,
             which allows you to hide it from specific browsers. To add the conditional
-            tags, pass the conditional value as part of the <code>$attrs</code> parameter in
+            tags, pass the conditional value as part of the <varname>$attrs</varname> parameter in
             the method calls.
         </para>
 
@@ -76,10 +76,10 @@ $this->headScript()->appendFile(
         Finally, you can also use the <methodname>headScript()</methodname> method to
         quickly add script elements; the signature for this is
         <methodname>headScript($mode = 'FILE', $spec, $placement = 'APPEND')</methodname>.
-        The <code>$mode</code> is either 'FILE' or 'SCRIPT', depending on if
-        you're linking a script or defining one. <code>$spec</code> is either
+        The <varname>$mode</varname> is either 'FILE' or 'SCRIPT', depending on if
+        you're linking a script or defining one. <varname>$spec</varname> is either
         the script file to link or the script source itself.
-        <code>$placement</code> should be either 'APPEND', 'PREPEND', or 'SET'.
+        <varname>$placement</varname> should be either 'APPEND', 'PREPEND', or 'SET'.
     </para>
 
     <para>

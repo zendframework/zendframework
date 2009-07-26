@@ -15,12 +15,12 @@
         </para>
 
         <para>
-            The first argument <code>$backendName</code> is a string that
+            The first argument <varname>$backendName</varname> is a string that
             names one of the backend implementations supported by <classname>Zend_Cache</classname>.
         </para>
 
         <para>
-            The second argument <code>$backendOptions</code> is an optional
+            The second argument <varname>$backendOptions</varname> is an optional
             backend options array.
         </para>
 
@@ -82,8 +82,8 @@ $memObject = $memoryManager->create($data);
             </para>
 
             <para>
-                The <code>$data</code> argument is optional and used to
-                initialize the object value. If the <code>$data</code>
+                The <varname>$data</varname> argument is optional and used to
+                initialize the object value. If the <varname>$data</varname>
                 argument is omitted, the value is an empty string.
             </para>
 
@@ -102,8 +102,8 @@ $memObject = $memoryManager->createLocked($data);
             </para>
 
             <para>
-                The <code>$data</code> argument is optional and used to
-                initialize the object value. If the <code>$data</code>
+                The <varname>$data</varname> argument is optional and used to
+                initialize the object value. If the <varname>$data</varname>
                 argument is omitted, the value is an empty string.
             </para>
 

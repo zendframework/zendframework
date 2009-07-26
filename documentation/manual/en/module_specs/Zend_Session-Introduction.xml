@@ -17,7 +17,7 @@
         client side and are only shared with the client when server-side source code voluntarily makes the data
         available in response to a client request. For the purposes of this component and documentation, the term
         "session data" refers to the server-side data stored in
-        <ulink url="http://www.php.net/manual/en/reserved.variables.php#reserved.variables.session"><code>$_SESSION</code></ulink>,
+        <ulink url="http://www.php.net/manual/en/reserved.variables.php#reserved.variables.session"><varname>$_SESSION</varname></ulink>,
         managed by <classname>Zend_Session</classname>, and individually manipulated by <classname>Zend_Session_Namespace</classname>
         accessor objects. <emphasis>Session namespaces</emphasis> provide access to session data using
         classic <ulink url="http://en.wikipedia.org/wiki/Namespace_%28computer_science%29">namespaces</ulink>
@@ -26,7 +26,7 @@
 
     <para>
         <classname>Zend_Session_Namespace</classname> instances are accessor objects for namespaced slices of
-        <code>$_SESSION</code>. The <classname>Zend_Session</classname> component wraps the existing PHP ext/session with an
+        <varname>$_SESSION</varname>. The <classname>Zend_Session</classname> component wraps the existing PHP ext/session with an
         administration and management interface, as well as providing an API for <classname>Zend_Session_Namespace</classname> to
         persist session namespaces. <classname>Zend_Session_Namespace</classname> provides a standardized, object-oriented
         interface for working with namespaces persisted inside PHP's standard session mechanism. Support exists for

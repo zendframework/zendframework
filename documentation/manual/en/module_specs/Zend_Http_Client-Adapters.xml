@@ -398,7 +398,7 @@ $client = new Zend_Http_Client($uri, $config);
             the Socket Adapter and it also accepts the same configuration parameters
             as the Socket and Proxy adapters. You can also change the cURL options by either specifying
             the 'curloptions' key in the constructor of the adapter or by calling
-            <methodname>setCurlOption($name, $value)</methodname>. The <code>$name</code> key
+            <methodname>setCurlOption($name, $value)</methodname>. The <varname>$name</varname> key
             corresponds to the CURL_* constants of the cURL extension. You can
             get access to the Curl handle by calling <code>$adapter->getHandle();</code>
         </para>

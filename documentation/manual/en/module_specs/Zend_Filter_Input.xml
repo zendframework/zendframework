@@ -124,7 +124,7 @@ $validators = array(
 ]]></programlisting>
 
         <para>
-            Each key in the <code>$filters</code> array above is the name of a rule for applying a
+            Each key in the <varname>$filters</varname> array above is the name of a rule for applying a
             filter to a specific data field. By default, the name of the rule
             is also the name of the input data field to which to apply the
             rule.
@@ -224,8 +224,8 @@ $input = new Zend_Filter_Input($filters, $validators);
         <para>
             You can specify input data as the third constructor argument. The
             data structure is an associative array. The keys are field names,
-            and the values are data values. The standard <code>$_GET</code>
-            and <code>$_POST</code> superglobal variables in PHP are examples
+            and the values are data values. The standard <varname>$_GET</varname>
+            and <varname>$_POST</varname> superglobal variables in PHP are examples
             of this format. You can use either of these variables as input
             data for Zend_Filter_Input.
         </para>
@@ -476,7 +476,7 @@ $input->setDefaultEscapeFilter(new Zend_Filter_StringTrim());
                 be harder to provide both escaped and unescaped versions of the
                 data. So it is recommended to declare filters to escape output
                 using <methodname>setDefaultEscapeFilter()</methodname>, not in the
-                <code>$filters</code> array.
+                <varname>$filters</varname> array.
             </para>
 
             <para>
@@ -932,7 +932,7 @@ $validators = array(
             <para>
                 The default value for 'allowEmpty', 'breakChainOnFailure', and
                 'presence' metacommands can be set for all rules using the
-                <code>$options</code> argument to the constructor of
+                <varname>$options</varname> argument to the constructor of
                 Zend_Filter_Input. This allows you to set the default value
                 for all rules, without requiring you to set the metacommand for
                 every rule.

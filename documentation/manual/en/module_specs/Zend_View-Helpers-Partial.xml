@@ -200,7 +200,7 @@ $model = array(
             Sometime a partial will exist in a different module. If you know the
             name of the module, you can pass it as the second argument to either
             <methodname>partial()</methodname> or <methodname>partialLoop()</methodname>, moving the
-            <code>$model</code> argument to third position.
+            <varname>$model</varname> argument to third position.
         </para>
 
         <para>

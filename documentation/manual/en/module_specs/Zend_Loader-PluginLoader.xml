@@ -146,23 +146,23 @@ $loader = new Zend_Loader_PluginLoader(array(), 'foobar');
         <itemizedlist>
             <listitem><para>
                     <methodname>getPaths($prefix = null)</methodname> returns all paths as
-                    prefix / path pairs if no <code>$prefix</code> is provided,
+                    prefix / path pairs if no <varname>$prefix</varname> is provided,
                     or just the paths registered for a given prefix if a
-                    <code>$prefix</code> is present.
+                    <varname>$prefix</varname> is present.
             </para></listitem>
 
             <listitem><para>
                     <methodname>clearPaths($prefix = null)</methodname> will clear all
                     registered paths by default, or only those associated with a
-                    given prefix, if the <code>$prefix</code> is provided and
+                    given prefix, if the <varname>$prefix</varname> is provided and
                     present in the stack.
             </para></listitem>
 
             <listitem><para>
                     <methodname>removePrefixPath($prefix, $path = null)</methodname> allows
                     you to selectively remove a specific path associated with a
-                    given prefix. If no <code>$path</code> is provided, all
-                    paths for that prefix are removed. If a <code>$path</code>
+                    given prefix. If no <varname>$path</varname> is provided, all
+                    paths for that prefix are removed. If a <varname>$path</varname>
                     is provided and exists for that prefix, only that path will
                     be removed.
             </para></listitem>

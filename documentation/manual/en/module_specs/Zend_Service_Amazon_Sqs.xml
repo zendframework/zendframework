@@ -240,7 +240,7 @@ foreach($list as $queue) {
             <listitem>
                 <para>
                     <methodname>sent($queue_url, $message)</methodname> send the
-                    <code>$message</code> to the <code>$queue_url</code> SQS
+                    <varname>$message</varname> to the <varname>$queue_url</varname> SQS
                     queue URL.
                 </para>
 

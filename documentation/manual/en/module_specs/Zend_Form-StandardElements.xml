@@ -179,7 +179,7 @@ $element = new Zend_Form_Element_Captcha('foo', array(
 
         <para>
             By default, it uses the <code>Http</code> transfer adapter, which
-            introspects the <code>$_FILES</code> array and allows you to attach
+            introspects the <varname>$_FILES</varname> array and allows you to attach
             validators and filters. Validators and filters attached to the form
             element are in turn attached to the transfer adapter.
         </para>

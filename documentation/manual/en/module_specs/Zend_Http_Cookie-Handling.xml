@@ -41,33 +41,33 @@
                     <itemizedlist>
                         <listitem>
                             <para>
-                            <code>$name</code>: The name of the cookie (eg. 'PHPSESSID') (required)
+                            <varname>$name</varname>: The name of the cookie (eg. 'PHPSESSID') (required)
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                            <code>$value</code>: The value of the cookie (required)
+                            <varname>$value</varname>: The value of the cookie (required)
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                            <code>$domain</code>: The cookie's domain (eg. '.example.com') (required)
+                            <varname>$domain</varname>: The cookie's domain (eg. '.example.com') (required)
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                            <code>$expires</code>: Cookie expiration time, as UNIX time stamp (optional, defaults to null).
+                            <varname>$expires</varname>: Cookie expiration time, as UNIX time stamp (optional, defaults to null).
                             If not set, cookie will be treated as a 'session cookie' with no expiration time.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                            <code>$path</code>: Cookie path, eg. '/foo/bar/' (optional, defaults to '/')
+                            <varname>$path</varname>: Cookie path, eg. '/foo/bar/' (optional, defaults to '/')
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                            <code>$secure</code>: Boolean, Whether the cookie is to be sent over secure (HTTPS)
+                            <varname>$secure</varname>: Boolean, Whether the cookie is to be sent over secure (HTTPS)
                             connections only (optional, defaults to boolean FALSE)
                             </para>
                         </listitem>
@@ -438,26 +438,26 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
                     <itemizedlist>
                         <listitem>
                             <para>
-                            <code>$uri</code> is either a Zend_Uri_Http object or a string specifying the
+                            <varname>$uri</varname> is either a Zend_Uri_Http object or a string specifying the
                             connection type (secure or non-secure), domain and path to match against.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                            <code>$matchSessionCookies</code> is a boolean telling whether to match session
+                            <varname>$matchSessionCookies</varname> is a boolean telling whether to match session
                             cookies or not. Session cookies are cookies that have no specified expiration
                             time. Defaults to true.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                            <code>$ret_as</code> specifies the return type as described above. If not
+                            <varname>$ret_as</varname> specifies the return type as described above. If not
                             specified, defaults to COOKIE_OBJECT.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                            <code>$now</code> is an integer representing the UNIX time stamp to consider
+                            <varname>$now</varname> is an integer representing the UNIX time stamp to consider
                             as "now" - that is any cookies who are set to expire before this time will
                             not be matched. If not specified, defaults to the current time.
                             </para>

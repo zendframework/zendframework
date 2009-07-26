@@ -513,7 +513,7 @@ $container->removePages();      // removes all pages
             null if it cannot be found. The second method will return
             all pages with a property matching the given value. The third
             method will call one of the two former methods depending on the
-            <code>$all</code> flag.
+            <varname>$all</varname> flag.
         </para>
 
         <para>

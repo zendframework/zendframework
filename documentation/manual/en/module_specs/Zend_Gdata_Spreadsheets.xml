@@ -135,7 +135,7 @@ $listFeed = $spreadsheetService->getListFeed($query);
 
             <para>
                 The resulting <classname>Zend_Gdata_Spreadsheets_ListFeed</classname>
-                object <code>$listfeed</code> represents a response from the
+                object <varname>$listfeed</varname> represents a response from the
                 server. Among other things, this feed contains an array of
                 <classname>Zend_Gdata_Spreadsheets_ListEntry</classname> objects
                 (<code>$listFeed->entries</code>), each of which represents
@@ -232,7 +232,7 @@ $insertedListEntry = $spreadsheetService->insertRow($rowData,
 ]]></programlisting>
 
             <para>
-                The <code>$rowData</code> parameter contains an array of column
+                The <varname>$rowData</varname> parameter contains an array of column
                 keys to data values. The method returns a
                 <classname>Zend_Gdata_Spreadsheets_SpreadsheetsEntry</classname> object
                 which represents the inserted row.
@@ -260,8 +260,8 @@ $updatedListEntry = $spreadsheetService->updateRow($oldListEntry,
 ]]></programlisting>
 
             <para>
-                The <code>$oldListEntry</code> parameter contains the list entry
-                to be updated. <code>$newRowData</code> contains an array of
+                The <varname>$oldListEntry</varname> parameter contains the list entry
+                to be updated. <varname>$newRowData</varname> contains an array of
                 column keys to data values, to be used as the new row data.
                 The method returns a
                 <classname>Zend_Gdata_Spreadsheets_SpreadsheetsEntry</classname> object
@@ -322,7 +322,7 @@ $cellFeed = $spreadsheetService->getCellFeed($query);
 
             <para>
                 The resulting <classname>Zend_Gdata_Spreadsheets_CellFeed</classname>
-                object <code>$cellFeed</code> represents a response from the
+                object <varname>$cellFeed</varname> represents a response from the
                 server. Among other things, this feed contains an array of
                 <classname>Zend_Gdata_Spreadsheets_CellEntry</classname> objects
                 (<code>$cellFeed>entries</code>), each of which represents

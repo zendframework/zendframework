@@ -45,27 +45,27 @@ $response = Zend_Http_Response::factory($str);
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>$code</code>: The HTTP response code (eg. 200, 404, etc.)
+                    <varname>$code</varname>: The HTTP response code (eg. 200, 404, etc.)
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>$headers</code>: An associative array of HTTP response headers (eg. 'Host' => 'example.com')
+                    <varname>$headers</varname>: An associative array of HTTP response headers (eg. 'Host' => 'example.com')
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>$body</code>: The response body as a string
+                    <varname>$body</varname>: The response body as a string
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>$version</code>: The HTTP response version (usually 1.0 or 1.1)
+                    <varname>$version</varname>: The HTTP response version (usually 1.0 or 1.1)
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>$message</code>: The HTTP response message (eg 'OK', 'Internal Server Error').
+                    <varname>$message</varname>: The HTTP response message (eg 'OK', 'Internal Server Error').
                     If not specified, the message will be set according to the response code
                 </para>
             </listitem>

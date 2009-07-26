@@ -86,11 +86,11 @@
                         </emphasis>
                     </entry>
                     <entry>
-                        Sets the attribute <code>$attribName</code> in
-                        <code>$data</code> to the value <code>$value</code>. If
-                        <code>$append</code> is <code>true</code> (<code>false</code> by
-                        default) <code>$value</code> will be appended to the attribute.
-                        <code>$value</code> can be a scalar value or an array of scalar
+                        Sets the attribute <varname>$attribName</varname> in
+                        <varname>$data</varname> to the value <varname>$value</varname>. If
+                        <varname>$append</varname> is <code>true</code> (<code>false</code> by
+                        default) <varname>$value</varname> will be appended to the attribute.
+                        <varname>$value</varname> can be a scalar value or an array of scalar
                         values. Conversion will take place.
                     </entry>
                 </row>
@@ -100,8 +100,8 @@
                         string $attribName, integer|null $index)</code> </emphasis>
                     </entry>
                     <entry>
-                        Returns the attribute <code>$attribName</code> from
-                        <code>$data</code>. If <code>$index</code> is <code>null</code>
+                        Returns the attribute <varname>$attribName</varname> from
+                        <varname>$data</varname>. If <varname>$index</varname> is <code>null</code>
                         (default) an array will be returned containing all the values for
                         the given attribute. An empty array will be returned if the
                         attribute does not exist in the given array. If an integer index is
@@ -116,10 +116,10 @@
                         string $attribName, mixed|array $value)</code> </emphasis>
                     </entry>
                     <entry>
-                        Checks if the attribute <code>$attribName</code> in
-                        <code>$data</code> has the value(s) given in <code>$value</code>.
+                        Checks if the attribute <varname>$attribName</varname> in
+                        <varname>$data</varname> has the value(s) given in <varname>$value</varname>.
                         The method returns <code>true</code> only if all values in
-                        <code>$value</code> are present in the attribute. Comparison is
+                        <varname>$value</varname> are present in the attribute. Comparison is
                         done strictly (respecting the data type).
                     </entry>
                 </row>
@@ -130,7 +130,7 @@
                     </entry>
                     <entry>
                         Removes all duplicates from the attribute
-                        <code>$attribName</code> in <code>$data</code>.
+                        <varname>$attribName</varname> in <varname>$data</varname>.
                     </entry>
                 </row>
                 <row>
@@ -139,9 +139,9 @@
                         string $attribName, mixed|array $value)</code> </emphasis>
                     </entry>
                     <entry>
-                        Removes the value(s) given in <code>$value</code> from
-                        the attribute <code>$attribName</code> in
-                        <code>$data</code>.
+                        Removes the value(s) given in <varname>$value</varname> from
+                        the attribute <varname>$attribName</varname> in
+                        <varname>$data</varname>.
                     </entry>
                 </row>
                 <row>
@@ -172,7 +172,7 @@
                     </entry>
                     <entry>
                         Converts a timestamp into its <acronym>LDAP</acronym> date/time representation.
-                        If <code>$utc</code> is <code>true</code> (<code>false</code> by
+                        If <varname>$utc</varname> is <code>true</code> (<code>false</code> by
                         default) the resulting <acronym>LDAP</acronym> date/time string will be in UTC,
                         otherwise a local date/time string will be returned.
                     </entry>
@@ -185,7 +185,7 @@
                     </entry>
                     <entry>
                         Converts <acronym>LDAP</acronym> date/time representation into a timestamp. The
-                        method returns <code>null</code> if <code>$value</code> can not be
+                        method returns <code>null</code> if <varname>$value</varname> can not be
                         converted back into a PHP timestamp.
                     </entry>
                 </row>
@@ -197,10 +197,10 @@
                     </entry>
                     <entry>
                         Sets a <acronym>LDAP</acronym> password for the attribute
-                        <code>$attribName</code> in <code>$data</code>.
-                        <code>$attribName</code> defaults to <code>'userPassword'</code>
+                        <varname>$attribName</varname> in <varname>$data</varname>.
+                        <varname>$attribName</varname> defaults to <code>'userPassword'</code>
                         which is the standard password attribute. The password hash can be
-                        specified with <code>$hashType</code>. The default value here is
+                        specified with <varname>$hashType</varname>. The default value here is
                         <code>Zend_Ldap_Attribute::PASSWORD_HASH_MD5</code> with
                         <code>Zend_Ldap_Attribute::PASSWORD_HASH_SHA</code> as the other
                         possibilty.
@@ -213,7 +213,7 @@
                     </entry>
                     <entry>
                         Creates a <acronym>LDAP</acronym> password. The password hash can be specified
-                        with <code>$hashType</code>. The default value here is
+                        with <varname>$hashType</varname>. The default value here is
                         <code>Zend_Ldap_Attribute::PASSWORD_HASH_MD5</code> with
                         <code>Zend_Ldap_Attribute::PASSWORD_HASH_SHA</code> as the other
                         possibilty.
@@ -226,11 +226,11 @@
                         $append)</code> </emphasis>
                     </entry>
                     <entry>
-                        Sets the attribute <code>$attribName</code> in
-                        <code>$data</code> to the date/time value <code>$value</code>. If
-                        <code>$append</code> is <code>true</code> (<code>false</code> by
-                        default) <code>$value</code> will be appended to the attribute.
-                        <code>$value</code> can be an integer value or an array of
+                        Sets the attribute <varname>$attribName</varname> in
+                        <varname>$data</varname> to the date/time value <varname>$value</varname>. If
+                        <varname>$append</varname> is <code>true</code> (<code>false</code> by
+                        default) <varname>$value</varname> will be appended to the attribute.
+                        <varname>$value</varname> can be an integer value or an array of
                         integers. Date-time-conversion according to
                         <methodname>Zend_Ldap_Attribute::convertToLdapDateTimeValue()</methodname> will
                         take place.
@@ -243,8 +243,8 @@
                         </emphasis>
                     </entry>
                     <entry>
-                        Returns the date/time attribute <code>$attribName</code>
-                        from <code>$data</code>. If <code>$index</code> is
+                        Returns the date/time attribute <varname>$attribName</varname>
+                        from <varname>$data</varname>. If <varname>$index</varname> is
                         <code>null</code> (default) an array will be returned containing
                         all the date/time values for the given attribute. An empty array
                         will be returned if the attribute does not exist in the given

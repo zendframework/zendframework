@@ -5,7 +5,7 @@
 
     <para>
         <classname>Zend_Ldap_Dn</classname> provides an object-oriented interface to
-        manipulating <acronym>LDAP</acronym> distinguished names (DN). The parameter <code>$caseFold</code>
+        manipulating <acronym>LDAP</acronym> distinguished names (DN). The parameter <varname>$caseFold</varname>
         that is used in several methods determines the way DN attributes are handled
         regarding their case. Allowed values for this paraneter are:
     </para>
@@ -31,7 +31,7 @@
         The default case-folding is <code>Zend_Ldap_Dn::ATTR_CASEFOLD_NONE</code> and
         can be set with <methodname>Zend_Ldap_Dn::setDefaultCaseFold()</methodname>. Each instance of
         <classname>Zend_Ldap_Dn</classname> can have its own case-folding-setting. If the
-        <code>$caseFold</code> parameter is ommitted in method-calls it defaults to the
+        <varname>$caseFold</varname> parameter is ommitted in method-calls it defaults to the
         instance's case-folding setting.
     </para>
 
@@ -113,7 +113,7 @@
                     </entry>
                     <entry>
                         Gets the DN of the current DN's ancestor
-                        <code>$levelUp</code> levels up the tree. <code>$levelUp</code>
+                        <varname>$levelUp</varname> levels up the tree. <varname>$levelUp</varname>
                         defaults to <code>1</code>.
                     </entry>
                 </row>
@@ -124,7 +124,7 @@
                     </entry>
                     <entry>
                         Returns a slice of the current DN determined by
-                        <code>$index</code> and <code>$length</code>. <code>$index</code>
+                        <varname>$index</varname> and <varname>$length</varname>. <varname>$index</varname>
                         starts with <code>0</code> on the DN part from the left.
                     </entry>
                 </row>
@@ -145,7 +145,7 @@
                     </entry>
                     <entry>
                         Removes a DN part from the current DN. This operation
-                        manipulates the current instance. <code>$length</code> defaults to
+                        manipulates the current instance. <varname>$length</varname> defaults to
                         <code>1</code>
                     </entry>
                 </row>
@@ -169,7 +169,7 @@
                         $value)</code>
                     </entry>
                     <entry>
-                        Inserts a DN part after the index <code>$index</code> to the
+                        Inserts a DN part after the index <varname>$index</varname> to the
                         current DN. This operation manipulates the current
                         instance.
                     </entry>
@@ -178,7 +178,7 @@
                     <entry><code>void setCaseFold(string|null $caseFold)</code></entry>
                     <entry>
                         Sets the case-folding option to the current DN instance. If
-                        <code>$caseFold</code> is null the default case-folding setting
+                        <varname>$caseFold</varname> is null the default case-folding setting
                         (<code>Zend_Ldap_Dn::ATTR_CASEFOLD_NONE</code> by default or set
                         via <methodname>Zend_Ldap_Dn::setDefaultCaseFold()</methodname> will be set for
                         the current instance.
@@ -234,9 +234,9 @@
                         </emphasis>
                     </entry>
                     <entry>
-                        Explodes the DN <code>$dn</code> into an array containing
-                        all parts of the given DN. <code>$keys</code> optinally receive DN
-                        keys (e.g. CN, OU, DC, ...). <code>$vals</code> optionally receive
+                        Explodes the DN <varname>$dn</varname> into an array containing
+                        all parts of the given DN. <varname>$keys</varname> optinally receive DN
+                        keys (e.g. CN, OU, DC, ...). <varname>$vals</varname> optionally receive
                         DN values. The resulting array will be of type
                     <programlisting language="php"><![CDATA[
 array(
@@ -255,8 +255,8 @@ array("dc" => "org")
                         </emphasis>
                     </entry>
                     <entry>
-                        Checks if a given DN <code>$dn</code> is malformed. If
-                        <code>$keys</code> or <code>$keys</code> and <code>$vals</code> are
+                        Checks if a given DN <varname>$dn</varname> is malformed. If
+                        <varname>$keys</varname> or <varname>$keys</varname> and <varname>$vals</varname> are
                         given, these arrays will be filled with the appropriate DN keys and
                         values.
                     </entry>
@@ -280,8 +280,8 @@ array("dc" => "org")
                     <entry>
                         Implodes an array in the form delivered by
                         <methodname>Zend_Ldap_Dn::explodeDn()</methodname> to a DN string.
-                        <code>$separator</code> defaults to <code>','</code> but some LDAP
-                        servers also understand <code>';'</code>. <code>$dnArray</code>
+                        <varname>$separator</varname> defaults to <code>','</code> but some LDAP
+                        servers also understand <code>';'</code>. <varname>$dnArray</varname>
                         must of type
                     <programlisting language="php"><![CDATA[
 array(
@@ -299,8 +299,8 @@ array("dc" => "org")
                         $childDn, string|Zend_Ldap_Dn $parentDn)</code> </emphasis>
                     </entry>
                     <entry>
-                        Checks if given <code>$childDn</code> is beneath
-                        <code>$parentDn</code> subtree.
+                        Checks if given <varname>$childDn</varname> is beneath
+                        <varname>$parentDn</varname> subtree.
                     </entry>
                 </row>
             </tbody>

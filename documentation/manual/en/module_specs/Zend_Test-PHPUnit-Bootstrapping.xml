@@ -16,7 +16,7 @@
     <para>
         In order to test your MVC application, you will need to bootstrap it.
         There are several ways to do this, all of which hinge on the public
-        <code>$bootstrap</code> property.
+        <varname>$bootstrap</varname> property.
     </para>
 
     <para>
@@ -84,7 +84,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         environment to a clean request state, resetting any plugins and
         helpers, resetting the front controller instance, and creating new
         request and response objects. Once this is done, it will then either
-        <code>include</code> the file specified in <code>$bootstrap</code>, or
+        <code>include</code> the file specified in <varname>$bootstrap</varname>, or
         call the callback specified.
     </para>
 

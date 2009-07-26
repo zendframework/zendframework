@@ -133,18 +133,18 @@ echo $foo['bar'];
                 </para>
 
                 <para>
-                    <code>$type</code> should be one of the
+                    <varname>$type</varname> should be one of the
                     <code>Placeholder</code> constants <code>APPEND</code> or
                     <code>SET</code>. If <code>APPEND</code>, captured content
                     is appended to the list of current content in the
                     placeholder; if <code>SET</code>, captured content is used
                     as the sole value of the placeholder (potentially replacing
-                    any previous content). By default, <code>$type</code> is
+                    any previous content). By default, <varname>$type</varname> is
                     <code>APPEND</code>.
                 </para>
 
                 <para>
-                    <code>$key</code> can be used to specify a specific key in
+                    <varname>$key</varname> can be used to specify a specific key in
                     the placeholder container to which you want content
                     captured.
                 </para>

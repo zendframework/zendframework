@@ -77,18 +77,18 @@
 
             <listitem><para>
                 <code>fieldset($name, $content, $attribs):</code> Creates an
-                XHTML fieldset. If <code>$attribs</code> contains a 'legend'
+                XHTML fieldset. If <varname>$attribs</varname> contains a 'legend'
                 key, that value will be used for the fieldset legend. The
-                fieldset will surround the <code>$content</code> as provided to
+                fieldset will surround the <varname>$content</varname> as provided to
                 the helper.
             </para></listitem>
 
             <listitem><para>
                 <code>form($name, $attribs, $content):</code> Generates an XHTML
-                form. All <code>$attribs</code> are escaped and rendered as
-                XHTML attributes of the form tag. If <code>$content</code> is
+                form. All <varname>$attribs</varname> are escaped and rendered as
+                XHTML attributes of the form tag. If <varname>$content</varname> is
                 present and not a boolean false, then that content is rendered
-                within the start and close form tags; if <code>$content</code>
+                within the start and close form tags; if <varname>$content</varname>
                 is a boolean false (the default), only the opening form tag is
                 generated.
             </para></listitem>
@@ -179,9 +179,9 @@ echo $this->formCheckbox('foo',
             <listitem>
                 <para>
                     <code>formErrors($errors, $options):</code> Generates an
-                    XHTML unordered list to show errors. <code>$errors</code>
+                    XHTML unordered list to show errors. <varname>$errors</varname>
                     should be a string or an array of strings;
-                    <code>$options</code> should be any attributes you want
+                    <varname>$options</varname> should be any attributes you want
                     placed in the opening list tag.
                 </para>
 
@@ -196,7 +196,7 @@ echo $this->formCheckbox('foo',
                             <methodname>setElementStart($string)</methodname>; default is
                             '&lt;ul class="errors"%s"&gt;&lt;li&gt;', where %s
                             is replaced with the attributes as specified in
-                            <code>$options</code>.
+                            <varname>$options</varname>.
                     </para></listitem>
 
                     <listitem><para>
@@ -224,18 +224,18 @@ echo $this->formCheckbox('foo',
             <listitem><para>
                 <code>formLabel($name, $value, $attribs):</code> Creates a
                 &lt;label&gt; element, setting the <code>for</code> attribute to
-                <code>$name</code>, and the actual label text to
-                <code>$value</code>. If <code>disable</code> is passed in
+                <varname>$name</varname>, and the actual label text to
+                <varname>$value</varname>. If <code>disable</code> is passed in
                 <code>attribs</code>, nothing will be returned.
             </para></listitem>
 
             <listitem><para>
                 <code>formMultiCheckbox($name, $value, $attribs, $options,
                     $listsep):</code> Creates a list of checkboxes.
-                <code>$options</code> should be an associative array, and may be
-                arbitrarily deep. <code>$value</code> may be a single value or
+                <varname>$options</varname> should be an associative array, and may be
+                arbitrarily deep. <varname>$value</varname> may be a single value or
                 an array of selected values that match the keys in the
-                <code>$options</code> array. <code>$listsep</code> is an HTML
+                <varname>$options</varname> array. <varname>$listsep</varname> is an HTML
                 break ("&lt;br /&gt;") by default. By default, this element is
                 treated as an array; all checkboxes share the same name, and are
                 submitted as an array.
@@ -285,16 +285,16 @@ echo $this->formCheckbox('foo',
 
             <listitem><para>
                 <code>url($urlOptions, $name, $reset):</code> Creates a URL
-                string based on a named route. <code>$urlOptions</code> should
+                string based on a named route. <varname>$urlOptions</varname> should
                 be an associative array of key/value pairs used by the
                 particular route.
             </para></listitem>
 
             <listitem><para>
                 <code>htmlList($items, $ordered, $attribs, $escape):</code> generates
-                unordered and ordered lists based on the <code>$items</code>
-                passed to it. If <code>$items</code> is a multidimensional
-                array, a nested list will be built. If the <code>$escape</code>
+                unordered and ordered lists based on the <varname>$items</varname>
+                passed to it. If <varname>$items</varname> is a multidimensional
+                array, a nested list will be built. If the <varname>$escape</varname>
                 flag is true (default), individual items will be escaped using
                 the view objects registered escaping mechanisms; pass a false
                 value if you want to allow markup in your lists.

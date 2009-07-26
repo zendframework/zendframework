@@ -428,8 +428,8 @@ if (Zend_Locale_Format::isInteger('13.445', array('locale' => $locale)) {
             Most software and PHP functions expect input using Arabic numerals. Fortunately, converting this input
             to its equivalent Latin numerals "100" requires little effort using
             <methodname>convertNumerals($inputNumeralString, $sourceNumeralSystem, $destNumeralSystem)</methodname>
-            , which returns the <code>$input</code> with numerals in the script <code>$sourceNumeralSystem</code>
-            converted to the script <code>$destNumeralSystem</code>.
+            , which returns the <varname>$input</varname> with numerals in the script <varname>$sourceNumeralSystem</varname>
+            converted to the script <varname>$destNumeralSystem</varname>.
         </para>
 
         <example id="zend.locale.numbersystems.example-1">

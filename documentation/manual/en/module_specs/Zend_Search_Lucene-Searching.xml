@@ -290,18 +290,18 @@ $index->find($query [, $sortField [, $sortType [, $sortOrder]]]
         </para>
 
         <para>
-             A name of stored field by which to sort result should be passed as the <code>$sortField</code> parameter.
+             A name of stored field by which to sort result should be passed as the <varname>$sortField</varname> parameter.
         </para>
 
         <para>
-            <code>$sortType</code> may be omitted or take the following enumerated values:
+            <varname>$sortType</varname> may be omitted or take the following enumerated values:
             <code>SORT_REGULAR</code> (compare items normally- default value),
             <code>SORT_NUMERIC</code> (compare items numerically),
             <code>SORT_STRING</code> (compare items as strings).
         </para>
 
         <para>
-            <code>$sortOrder</code> may be omitted or take the following enumerated values:
+            <varname>$sortOrder</varname> may be omitted or take the following enumerated values:
             <code>SORT_ASC</code> (sort in ascending order- default value),
             <code>SORT_DESC</code> (sort in descending order).
         </para>
@@ -448,7 +448,7 @@ interface Zend_Search_Lucene_Search_Highlighter_Interface
             provided to the <classname>Zend_Search_Lucene_Search_Query->highlightMatches()</classname> method.
         </para>
         <para>
-            If <code>$highlighter</code> parameter is omitted, then <classname>Zend_Search_Lucene_Search_Highlighter_Default</classname>
+            If <varname>$highlighter</varname> parameter is omitted, then <classname>Zend_Search_Lucene_Search_Highlighter_Default</classname>
             object is instantiated and used.
         </para>
         <para>

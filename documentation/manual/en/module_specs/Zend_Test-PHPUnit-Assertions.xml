@@ -37,7 +37,7 @@
             <listitem><para>
                 <methodname>assertQuery($path, $message = '')</methodname>: assert that
                 one or more DOM elements matching the given CSS selector are
-                present. If a <code>$message</code> is present, it will be
+                present. If a <varname>$message</varname> is present, it will be
                 prepended to any failed assertion message.
             </para></listitem>
 
@@ -45,8 +45,8 @@
                 <code>assertQueryContentContains($path, $match, $message =
                     '')</code>: assert that one or more DOM elements matching
                 the given CSS selector are present, and that at least one
-                contains the content provided in <code>$match</code>. If a
-                <code>$message</code> is present, it will be prepended to any
+                contains the content provided in <varname>$match</varname>. If a
+                <varname>$message</varname> is present, it will be prepended to any
                 failed assertion message.
             </para></listitem>
 
@@ -55,37 +55,37 @@
                     '')</code>: assert that one or more DOM elements matching
                 the given CSS selector are present, and that at least one
                 matches the regular expression provided in
-                <code>$pattern</code>. If a <code>$message</code> is present,
+                <varname>$pattern</varname>. If a <varname>$message</varname> is present,
                 it will be prepended to any failed assertion message.
             </para></listitem>
 
             <listitem><para>
                 <code>assertQueryCount($path, $count, $message =
                     '')</code>: assert that there are exactly
-                <code>$count</code> DOM elements matching the given CSS
-                selector present. If a <code>$message</code> is present, it
+                <varname>$count</varname> DOM elements matching the given CSS
+                selector present. If a <varname>$message</varname> is present, it
                 will be prepended to any failed assertion message.
             </para></listitem>
 
             <listitem><para>
                 <code>assertQueryCountMin($path, $count, $message =
                     '')</code>: assert that there are at least
-                <code>$count</code> DOM elements matching the given CSS
-                selector present. If a <code>$message</code> is present, it
+                <varname>$count</varname> DOM elements matching the given CSS
+                selector present. If a <varname>$message</varname> is present, it
                 will be prepended to any failed assertion message.
                 <emphasis>Note:</emphasis> specifying a value of 1 for
-                <code>$count</code> is the same as simply using
+                <varname>$count</varname> is the same as simply using
                 <methodname>assertQuery()</methodname>.
             </para></listitem>
 
             <listitem><para>
                 <code>assertQueryCountMax($path, $count, $message =
                     '')</code>: assert that there are no more than
-                <code>$count</code> DOM elements matching the given CSS
-                selector present. If a <code>$message</code> is present, it
+                <varname>$count</varname> DOM elements matching the given CSS
+                selector present. If a <varname>$message</varname> is present, it
                 will be prepended to any failed assertion message.
                 <emphasis>Note:</emphasis> specifying a value of 1 for
-                <code>$count</code> is the same as simply using
+                <varname>$count</varname> is the same as simply using
                 <methodname>assertQuery()</methodname>.
             </para></listitem>
         </itemizedlist>
@@ -168,27 +168,27 @@
             <listitem><para>
                 <methodname>assertRedirectTo($url, $message = '')</methodname>: assert that
                 a redirect has occurred, and that the value of the Location
-                header is the <code>$url</code> provided.
+                header is the <varname>$url</varname> provided.
             </para></listitem>
 
             <listitem><para>
                 <methodname>assertNotRedirectTo($url, $message = '')</methodname>: assert that
                 a redirect has either NOT occurred, or that the value of the Location
-                header is NOT the <code>$url</code> provided.
+                header is NOT the <varname>$url</varname> provided.
             </para></listitem>
 
             <listitem><para>
                 <methodname>assertRedirectRegex($pattern, $message = '')</methodname>:
                 assert that a redirect has occurred, and that the value of the
                 Location header matches the regular expression provided by
-                <code>$pattern</code>.
+                <varname>$pattern</varname>.
             </para></listitem>
 
             <listitem><para>
                 <methodname>assertNotRedirectRegex($pattern, $message = '')</methodname>:
                 assert that a redirect has either NOT occurred, or that the value of the
                 Location header does NOT match the regular expression provided by
-                <code>$pattern</code>.
+                <varname>$pattern</varname>.
             </para></listitem>
         </itemizedlist>
     </sect3>

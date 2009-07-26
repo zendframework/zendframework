@@ -41,23 +41,23 @@ Zend_Loader::loadFile($filename, $dirs=null, $once=false);
     </example>
 
         <para>
-            The <code>$filename</code> argument specifies the filename to load,
+            The <varname>$filename</varname> argument specifies the filename to load,
             which must not contain any path information.
-            A security check is performed on <code>$filename</code>.
-            The <code>$filename</code> may only contain alphanumeric characters,
+            A security check is performed on <varname>$filename</varname>.
+            The <varname>$filename</varname> may only contain alphanumeric characters,
             dashes ("-"), underscores ("_"), or periods (".").
-            No such restriction is placed on the <code>$dirs</code> argument.
+            No such restriction is placed on the <varname>$dirs</varname> argument.
         </para>
 
         <para>
-            The <code>$dirs</code> argument specifies which directories to search for
+            The <varname>$dirs</varname> argument specifies which directories to search for
             the file in. If the value is <constant>NULL</constant>, only the <code>include_path</code>
             is searched; if the value is a string or an array, the directory or directories
             specified will be searched, followed by the <code>include_path</code>.
         </para>
 
         <para>
-            The <code>$once</code> argument is a boolean. If <constant>TRUE</constant>,
+            The <varname>$once</varname> argument is a boolean. If <constant>TRUE</constant>,
             <classname>Zend_Loader::loadFile()</classname> uses the PHP function
             <ulink url="http://php.net/include"><methodname>include_once()</methodname></ulink>
             for loading the file, otherwise the PHP function
@@ -95,10 +95,10 @@ Zend_Loader::loadClass('Container_Tree',
         </para>
 
         <para>
-            If <code>$dirs</code> is a string or an array,
+            If <varname>$dirs</varname> is a string or an array,
             <classname>Zend_Loader::loadClass()</classname> searches the directories in
             the order supplied. The first matching file is loaded. If the file
-            does not exist in the specified <code>$dirs</code>, then the
+            does not exist in the specified <varname>$dirs</varname>, then the
             <code>include_path</code> for the PHP environment is searched.
         </para>
 
@@ -135,7 +135,7 @@ if (Zend_Loader::isReadable($filename)) {
         </example>
 
         <para>
-            The <code>$filename</code> argument specifies the filename to
+            The <varname>$filename</varname> argument specifies the filename to
             check. This may contain path information.
             This method is a wrapper for the PHP function
             <ulink url="http://php.net/is_readable"><methodname>is_readable()</methodname></ulink>.

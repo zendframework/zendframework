@@ -39,7 +39,7 @@
                 <orderedlist>
                     <listitem>
                         <para>
-                            <code>$wsdl</code>, which is an URI of a WSDL file<footnote>
+                            <varname>$wsdl</varname>, which is an URI of a WSDL file<footnote>
                                                                                   <para>
                                                                                       May be set later using <methodname>setWsdl($wsdl)</methodname> method.
                                                                                   </para>
@@ -48,7 +48,7 @@
                     </listitem>
                     <listitem>
                         <para>
-                            <code>$options</code> - options to create SOAP server object<footnote>
+                            <varname>$options</varname> - options to create SOAP server object<footnote>
                                                                                             <para>
                                                                                                 Options may be set later using
                                                                                                 <methodname>setOptions($options)</methodname> method.
@@ -104,7 +104,7 @@
             </para>
 
             <para>
-                The second constructor parameter (<code>$options</code>) is an array with options to create
+                The second constructor parameter (<varname>$options</varname>) is an array with options to create
                 SOAP server object<footnote>
                                       <para>
                                           Options may be set later using <methodname>setOptions($options)</methodname> method.

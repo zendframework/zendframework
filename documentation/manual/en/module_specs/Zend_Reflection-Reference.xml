@@ -86,7 +86,7 @@
 
             <listitem><para>
                 <methodname>getTags($filter)</methodname>: Retrieve all tags, or all tags
-                matching the given <code>$filter</code> string. The tags
+                matching the given <varname>$filter</varname> string. The tags
                 returned will be an array of
                 <classname>Zend_Reflection_Docblock_Tag</classname> objects.
             </para></listitem>

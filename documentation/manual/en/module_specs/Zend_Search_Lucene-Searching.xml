@@ -417,7 +417,7 @@ $highlightedHTML = $query->highlightMatches($sourceHTML);
         </para>
         <para>
             Optional third parameter is a highlighter object which has to implement
-            <code>Zend_Search_Lucene_Search_Highlighter_Interface</code> interface:
+            <classname>Zend_Search_Lucene_Search_Highlighter_Interface</classname> interface:
             <programlisting language="php"><![CDATA[
 interface Zend_Search_Lucene_Search_Highlighter_Interface
 {

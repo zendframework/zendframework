@@ -241,10 +241,10 @@
                                     <para>
                                         If given the result will be wrapped in an object
                                         of type <code>$collectionClass</code>. By default an object
-                                        of type <code>Zend_Ldap_Collection</code> will be returned.
+                                        of type <classname>Zend_Ldap_Collection</classname> will be returned.
                                         The custom class must extend
-                                        <code>Zend_Ldap_Collection</code> and will be passed a
-                                        <code>Zend_Ldap_Collection_Iterator_Default</code> on
+                                        <classname>Zend_Ldap_Collection</classname> and will be passed a
+                                        <classname>Zend_Ldap_Collection_Iterator_Default</classname> on
                                         instantiation.
                                     </para>
                                 </listitem>
@@ -308,7 +308,7 @@
                         <code>$throwOnNotFound</code> is <code>false</code> by default, so
                         the method will return <code>null</code> if the specified entry
                         cannot be found. If set to <code>true</code>, a
-                        <code>Zend_Ldap_Exception</code> will be thrown instead.
+                        <classname>Zend_Ldap_Exception</classname> will be thrown instead.
                     </entry>
                 </row>
                 <row>
@@ -331,7 +331,7 @@
                     <entry>
                         Adds the entry identified by <code>$dn</code> with its
                         attributes <code>$entry</code> to the <acronym>LDAP</acronym> tree. Throws a
-                        <code>Zend_Ldap_Exception</code> if the entry could not be
+                        <classname>Zend_Ldap_Exception</classname> if the entry could not be
                         added.
                     </entry>
                 </row>
@@ -343,7 +343,7 @@
                     <entry>
                         Updates the entry identified by <code>$dn</code> with its
                         attributes <code>$entry</code> to the <acronym>LDAP</acronym> tree. Throws a
-                        <code>Zend_Ldap_Exception</code> if the entry could not be
+                        <classname>Zend_Ldap_Exception</classname> if the entry could not be
                         modified.
                     </entry>
                 </row>
@@ -355,7 +355,7 @@
                     <entry>
                         Saves the entry identified by <code>$dn</code> with its
                         attributes <code>$entry</code> to the <acronym>LDAP</acronym> tree. Throws a
-                        <code>Zend_Ldap_Exception</code> if the entry could not be saved.
+                        <classname>Zend_Ldap_Exception</classname> if the entry could not be saved.
                         This method decides by querying the <acronym>LDAP</acronym> tree if the entry will be
                         added or updated.
                     </entry>
@@ -367,7 +367,7 @@
                     </entry>
                     <entry>
                         Deletes the entry identified by <code>$dn</code> from the
-                        <acronym>LDAP</acronym> tree. Throws a <code>Zend_Ldap_Exception</code> if the entry
+                        <acronym>LDAP</acronym> tree. Throws a <classname>Zend_Ldap_Exception</classname> if the entry
                         could not be deleted. <code>$recursively</code> is
                         <code>false</code> by default. If set to <code>true</code> the
                         deletion will be carried out recursively and will effectively
@@ -476,14 +476,14 @@
                     </entry>
                     <entry>
                         Returns the entry <code>$dn</code> wrapped in a
-                        <code>Zend_Ldap_Node</code>.
+                        <classname>Zend_Ldap_Node</classname>.
                     </entry>
                 </row>
                 <row>
                     <entry><code>Zend_Ldap_Node getBaseNode()</code></entry>
                     <entry>
                         Returns the entry for the base DN <code>$baseDn</code>
-                        wrapped in a <code>Zend_Ldap_Node</code>.
+                        wrapped in a <classname>Zend_Ldap_Node</classname>.
                     </entry>
                 </row>
                 <row>
@@ -502,7 +502,7 @@
         <title>Zend_Ldap_Collection</title>
 
         <para>
-            <code>Zend_Ldap_Collection</code> implements <code>Iterator</code> to
+            <classname>Zend_Ldap_Collection</classname> implements <code>Iterator</code> to
             allow for item traversal using <code>foreach()</code> and
             <code>Countable</code> to be able to respond to <code>count()</code>. With its
             protected <code>_createEntry()</code> method it provides a simple extension
@@ -527,9 +527,9 @@
                     </entry>
                     <entry>
                         Constructor. The constrcutor must be provided by a
-                        <code>Zend_Ldap_Collection_Iterator_Interface</code> which does the
+                        <classname>Zend_Ldap_Collection_Iterator_Interface</classname> which does the
                         real result iteration.
-                        <code>Zend_Ldap_Collection_Iterator_Default</code> is the default
+                        <classname>Zend_Ldap_Collection_Iterator_Default</classname> is the default
                         implementation for iterating ext/ldap results.
                     </entry>
                 </row>

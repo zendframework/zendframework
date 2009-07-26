@@ -4,7 +4,7 @@
     <title>Zend_Reflection Reference</title>
 
     <para>
-        The various classes in <code>Zend_Reflection</code> mimic the API of
+        The various classes in <classname>Zend_Reflection</classname> mimic the API of
         PHP's <ulink url="http://php.net/reflection">Reflection API</ulink> -
         with one important difference. PHP's Reflection API does not provide
         introspection into docblock annotation tags, nor into parameter variable
@@ -12,7 +12,7 @@
     </para>
 
     <para>
-        <code>Zend_Reflection</code> analyzes method docblock annotations to
+        <classname>Zend_Reflection</classname> analyzes method docblock annotations to
         determine parameter variable types and the return type. Specifically,
         the <code>@param</code> and <code>@return</code> annotations are used.
         However, you can also check for any other annotation tags, as well as
@@ -20,14 +20,14 @@
     </para>
 
     <para>
-        Each reflection object in <code>Zend_Reflection</code> overrides the
+        Each reflection object in <classname>Zend_Reflection</classname> overrides the
         <code>getDocblock()</code> method to return an instance of
-        <code>Zend_Reflection_Docblock</code>. This class provides introspection
+        <classname>Zend_Reflection_Docblock</classname>. This class provides introspection
         into the docblocks and annotation tags.
     </para>
 
     <para>
-        <code>Zend_Reflection_File</code> is a new reflection class that allows
+        <classname>Zend_Reflection_File</classname> is a new reflection class that allows
         introspection of PHP files. With it, you can retrieve the classes,
         functions, and global PHP code contained in the file.
     </para>
@@ -42,8 +42,8 @@
         <title>Zend_Reflection_Docblock</title>
 
         <para>
-            <code>Zend_Reflection_Docblock</code> is the heart of
-            <code>Zend_Reflection</code>'s value-add over PHP's Reflection API.
+            <classname>Zend_Reflection_Docblock</classname> is the heart of
+            <classname>Zend_Reflection</classname>'s value-add over PHP's Reflection API.
             It provides the following methods:
         </para>
 
@@ -88,7 +88,7 @@
                 <code>getTags($filter)</code>: Retrieve all tags, or all tags
                 matching the given <code>$filter</code> string. The tags
                 returned will be an array of
-                <code>Zend_Reflection_Docblock_Tag</code> objects.
+                <classname>Zend_Reflection_Docblock_Tag</classname> objects.
             </para></listitem>
         </itemizedlist>
     </sect2>
@@ -97,7 +97,7 @@
         <title>Zend_Reflection_Docblock_Tag</title>
 
         <para>
-            <code>Zend_Reflection_Docblock_Tag</code> provides reflection for
+            <classname>Zend_Reflection_Docblock_Tag</classname> provides reflection for
             individual annotation tags. Most tags consist of only a name and a
             description. In the case of some special tags, the class provides a
             factory method for retrieving an instance of the appropriate class.
@@ -105,7 +105,7 @@
 
         <para>
             The following methods are defined for
-            <code>Zend_Reflection_Docblock_Tag</code>:
+            <classname>Zend_Reflection_Docblock_Tag</classname>:
         </para>
 
         <itemizedlist>
@@ -129,11 +129,11 @@
         <title>Zend_Reflection_Docblock_Tag_Param</title>
 
         <para>
-            <code>Zend_Reflection_Docblock_Tag_Param</code> is a specialized
-            version of <code>Zend_Reflection_Docblock_Tag</code>. The
+            <classname>Zend_Reflection_Docblock_Tag_Param</classname> is a specialized
+            version of <classname>Zend_Reflection_Docblock_Tag</classname>. The
             <code>@param</code> annotation tag description consists of the
             parameter type, variable name, and variable description. It adds the
-            following methods to <code>Zend_Reflection_Docblock_Tag</code>:
+            following methods to <classname>Zend_Reflection_Docblock_Tag</classname>:
         </para>
 
         <itemizedlist>
@@ -152,12 +152,12 @@
         <title>Zend_Reflection_Docblock_Tag_Return</title>
 
         <para>
-            Like <code>Zend_Reflection_Docblock_Tag_Param</code>,
-            <code>Zend_Reflection_Docblock_Tag_Return</code> is a specialized
-            version of <code>Zend_Reflection_Docblock_Tag</code>. The
+            Like <classname>Zend_Reflection_Docblock_Tag_Param</classname>,
+            <classname>Zend_Reflection_Docblock_Tag_Return</classname> is a specialized
+            version of <classname>Zend_Reflection_Docblock_Tag</classname>. The
             <code>@return</code> annotation tag description consists of the
             return type and variable description. It adds the following method
-            to <code>Zend_Reflection_Docblock_Tag</code>:
+            to <classname>Zend_Reflection_Docblock_Tag</classname>:
         </para>
 
         <itemizedlist>
@@ -171,7 +171,7 @@
         <title>Zend_Reflection_File</title>
 
         <para>
-            <code>Zend_Reflection_File</code> provides introspection into PHP
+            <classname>Zend_Reflection_File</classname> provides introspection into PHP
             files. With it, you can introspect the classes, functions, and bare
             PHP code defined in a file. It defines the following methods:
         </para>
@@ -227,10 +227,10 @@
         <title>Zend_Reflection_Class</title>
 
         <para>
-            <code>Zend_Reflection_Class</code> extends
+            <classname>Zend_Reflection_Class</classname> extends
             <code>ReflectionClass</code>, and follows its API. It adds one
             additional method, <code>getDeclaringFile()</code>, which may be
-            used to retrieve the <code>Zend_Reflection_File</code> reflection
+            used to retrieve the <classname>Zend_Reflection_File</classname> reflection
             object for the defining file.
         </para>
 
@@ -282,7 +282,7 @@
         <title>Zend_Reflection_Extension</title>
 
         <para>
-            <code>Zend_Reflection_Extension</code> extends
+            <classname>Zend_Reflection_Extension</classname> extends
             <code>ReflectionExtension</code>, and follows its API. It overrides
             the following methods to add an additional argument for specifying
             the reflection class to use when fetching a reflection object:
@@ -309,7 +309,7 @@
         <title>Zend_Reflection_Function</title>
 
         <para>
-            <code>Zend_Reflection_Function</code> adds a method for retrieving
+            <classname>Zend_Reflection_Function</classname> adds a method for retrieving
             the function return type, as well as overrides several methods to
             allow specifying the reflection class to use for returned reflection
             objects.
@@ -339,8 +339,8 @@
         <title>Zend_Reflection_Method</title>
 
         <para>
-            <code>Zend_Reflection_Method</code> mirrors
-            <code>Zend_Reflection_Function</code>, and only overrides one
+            <classname>Zend_Reflection_Method</classname> mirrors
+            <classname>Zend_Reflection_Function</classname>, and only overrides one
             additional method:
         </para>
 
@@ -357,7 +357,7 @@
         <title>Zend_Reflection_Parameter</title>
 
         <para>
-            <code>Zend_Reflection_Parameter</code> adds a method for retrieving
+            <classname>Zend_Reflection_Parameter</classname> adds a method for retrieving
             the parameter type, as well as overrides methods to allow specifying
             the reflection class to use on returned reflection objects.
         </para>
@@ -391,7 +391,7 @@
         <title>Zend_Reflection_Property</title>
 
         <para>
-            <code>Zend_Reflection_Property</code> overrides a single method in
+            <classname>Zend_Reflection_Property</classname> overrides a single method in
             order to allow specifying the returned reflection object class:
         </para>
 

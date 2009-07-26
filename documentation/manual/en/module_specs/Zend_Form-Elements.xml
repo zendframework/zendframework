@@ -1429,7 +1429,7 @@ $form->addPrefixPath('My_Element', 'My/Element/', 'element')
 ]]></programlisting>
 
         <para>
-            The 'foo' element will now be of type <code>My_Element_Text</code>,
+            The 'foo' element will now be of type <classname>My_Element_Text</classname>,
             and exhibit the behaviour you've outlined.
         </para>
 

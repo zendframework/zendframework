@@ -4,7 +4,7 @@
     <title>Zend_Ldap_Attribute</title>
 
     <para>
-        <code>Zend_Ldap_Attribute</code> is a helper class providing only static
+        <classname>Zend_Ldap_Attribute</classname> is a helper class providing only static
         methods to manipulate arrays suitable to the structure used in
         <classname>Zend_Ldap</classname> data modification methods and to the data format required by
         the <acronym>LDAP</acronym> server. PHP data types are converted the following way:

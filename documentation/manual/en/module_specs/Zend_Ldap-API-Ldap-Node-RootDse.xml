@@ -6,7 +6,7 @@
     <para>The following methods are available on all vendor-specific subclasses.</para>
 
     <para>
-        <code>Zend_Ldap_Node_RootDse</code> includes the magic propery accessors
+        <classname>Zend_Ldap_Node_RootDse</classname> includes the magic propery accessors
         <code>__get()</code> and <code>__isset()</code> to access the attributes by their
         name. They proxy to <code>Zend_Ldap_Node_RootDse::getAttribute()</code> and
         <code>Zend_Ldap_Node_RootDse::existsAttribute()</code> respectively.
@@ -253,7 +253,7 @@
 
         <para>
             Additionally the common methods above apply to instances of
-            <code>Zend_Ldap_Node_RootDse_OpenLdap</code>.
+            <classname>Zend_Ldap_Node_RootDse_OpenLdap</classname>.
         </para>
 
         <note>
@@ -322,7 +322,7 @@
 
         <para>
             Additionally the common methods above apply to instances of
-            <code>Zend_Ldap_Node_RootDse_ActiveDirectory</code>.
+            <classname>Zend_Ldap_Node_RootDse_ActiveDirectory</classname>.
         </para>
 
         <note>

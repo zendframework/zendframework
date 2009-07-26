@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16626 -->
+<!-- EN-Revision: 17057 -->
 <sect1 id="introduction.installation">
 
     <title>インストール</title>
@@ -33,7 +33,7 @@
                 Zend Framework の最新の開発版のスナップショットを毎日更新しています。
                 スナップショットには、英語ドキュメントのみが含まれているものと
                 全言語のドキュメントが含まれているものの二種類があります。
-                最新の Zend Framework の開発版を試してみたい方は、Subversion (SVN)
+                最新の Zend Framework の開発版を試してみたい方は、Subversion (<acronym>SVN</acronym>)
                 クライアントの使用をご検討ください。
             </para>
         </listitem>
@@ -69,7 +69,7 @@
                 が非常に便利です。
             </para>
             <para>
-                Zend Framework の <acronym>SVN</acronym> リポジトリの最先端の URL は
+                Zend Framework の <acronym>SVN</acronym> リポジトリの最先端の <acronym>URL</acronym> は
                 <ulink url="http://framework.zend.com/svn/framework/standard/trunk">http://framework.zend.com/svn/framework/standard/trunk</ulink>
                 です。
             </para>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16908 -->
+<!-- EN-Revision: 17057 -->
 <appendix id="requirements" xmlns:xi="http://www.w3.org/2001/XInclude">
 
     <title>Zend Framework のシステム要件</title>
@@ -18,7 +18,7 @@
             たとえば、一つの例としては Apache 環境の mod_rewrite があります。
             これは、"<filename>http://www.example.com/user/edit</filename>" のようないわゆる "pretty <acronym>URL</acronym>"
             を実装するために使用します。mod_rewrite が有効になっていない場合は、
-            ZF は "<filename>http://www.example.com?controller=user&amp;action=edit</filename>"
+            ZF は "<command>http://www.example.com?controller=user&amp;action=edit</command>"
             のような URL をサポートするように設定されます。Pretty <acronym>URL</acronym>
             を使うのは <acronym>URL</acronym> を短縮したりサーチエンジン対策の最適化 (<acronym>SEO</acronym>)
             をしたりするためですが、これがアプリケーションの機能に直接影響することはありません。

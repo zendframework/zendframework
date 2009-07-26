@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17008 -->
 <sect2 id="zend.log.writers.mail">
     <title>Email への書き込み</title>
 
@@ -94,7 +94,7 @@ $layout = new Zend_Layout();
 
 // エントリを li タグで囲むフォーマッタを作成します
 $layoutFormatter = new Zend_Log_Formatter_Simple(
-    '<li>' . Zend_Layout::DEFAULT_FORMAT . '</li>'
+    '<li>' . Zend_Log_Formatter_Simple::DEFAULT_FORMAT . '</li>'
 );
 
 $writer = new Zend_Log_Writer_Mail($mail, $layout);

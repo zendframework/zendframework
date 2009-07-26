@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16764 -->
+<!-- EN-Revision: 17067 -->
 <sect1 id="zend.translate.adapter">
 
     <title>Zend_Translate のアダプタ</title>
@@ -199,6 +199,21 @@
                 顧客が自分で翻訳を行いたいという場合だけにしましょう。
                 汎用的な翻訳ソースとしては使用しないようにしましょう。
             </para>
+
+            <warning>
+                <title>PHP 5.3 でのリグレッション</title>
+
+                <para>
+                    PHP 5.3 より前のバージョンでは、<function>parse_ini_file()</function> および
+                    <function>parse_ini_string()</function> で
+                    INI オプションのキーに非 ASCII 文字を問題なく使用できました。
+                    しかし PHP 5.3 以降では、
+                    非 ASCII 文字のキーはどちらの関数の返す配列からも黙って抜け落ちてしまいます。
+                    UTF-8 や Latin-1 の文字をキーに使用している場合は、
+                    INI アダプタを使うと翻訳が正しく機能しなくなってしまいました。
+                    そのような場合は別のアダプタを使用することを推奨します。
+                </para>
+            </warning>
         </sect3>
 
         <sect3 id="zend.translate.adapter.tbx">

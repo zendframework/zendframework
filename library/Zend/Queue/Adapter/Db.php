@@ -165,7 +165,6 @@ class Zend_Queue_Adapter_Db extends Zend_Queue_Adapter_AdapterAbstract
     public function create($name, $timeout = null)
     {
         if ($this->isExists($name)) {
-            $this->getLogger()->warn('Create queue failed. Queue already exists: ' . $name);
             return false;
         }
 
@@ -175,14 +174,9 @@ class Zend_Queue_Adapter_Db extends Zend_Queue_Adapter_AdapterAbstract
 
         try {
             if ($id = $queue->save()) {
-                $this->getLogger()->info('Queue created: ' . $name);
                 return true;
             }
         } catch (Exception $e) {
-            $this->getLogger()->err($e->getMessage() . ' code ' . $e->getCode());
-            /**
-             * @see Zend_Queue_Exception
-             */
             require_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception($e->getMessage(), $e->getCode());
         }

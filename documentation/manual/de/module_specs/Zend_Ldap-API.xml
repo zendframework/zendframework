@@ -2,171 +2,175 @@
 <!-- EN-Revision: 16831 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.ldap.api" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>API overview</title>
+    <title>API Übersicht</title>
 
     <sect2 id="zend.ldap.api.configuration">
-        <title>Configuration / options</title>
+        <title>Konfiguration und Optionen</title>
 
         <para>
-            The <classname>Zend_Ldap</classname> component accepts an array of options either
-            supplied to the constructor or through the <methodname>setOptions()</methodname>
-            method. The permitted options are as follows:
+            Die <classname>Zend_Ldap</classname> Komponente akzeptiert ein Array von Optionen die
+            entweder im Constructor übergeben werden oder durch die
+            <methodname>setOptions()</methodname> Methode. Die erlaubten Optionen sind folgende:
         </para>
 
         <table id="zend.ldap.api.configuration.table">
-            <title>Zend_Ldap Options</title>
+            <title>Zend_Ldap Optionen</title>
 
             <tgroup cols="2">
                 <thead>
                     <row>
                         <entry>Name</entry>
-                        <entry>Description</entry>
+                        <entry>Beschreibung</entry>
                     </row>
                 </thead>
                 <tbody>
                     <row>
-                        <entry>host</entry>
+                        <entry><property>host</property></entry>
                         <entry>
-                            The default hostname of <acronym>LDAP</acronym> server if not
-                            supplied to <methodname>connect()</methodname> (also may be used
-                            when trying to canonicalize usernames in
-                            <methodname>bind()</methodname>).
+                            Der Standard Hostname des <acronym>LDAP</acronym> Servers wenn bei
+                            <methodname>connect()</methodname> keiner angegeben wurde (kann auch
+                            verwendet werden wenn versucht wird Benutzernamen in
+                            <methodname>bind()</methodname> zu kanonisieren).
                         </entry>
                     </row>
                     <row>
-                        <entry>port</entry>
+                        <entry><property>port</property></entry>
                         <entry>
-                            Default port of <acronym>LDAP</acronym> server if not supplied to
-                            <methodname>connect()</methodname>.
+                            Standard Port des <acronym>LDAP</acronym> Servers wenn bei
+                            <methodname>connect()</methodname> keiner angegeben wurde.
                         </entry>
                     </row>
                     <row>
-                        <entry>useStartTls</entry>
+                        <entry><property>useStartTls</property></entry>
                         <entry>
-                            Whether or not the <acronym>LDAP</acronym> client should use
-                            <acronym>TLS</acronym> (aka <acronym>SSLv2</acronym>) encrypted
-                            transport. A value of <constant>TRUE</constant> is strongly favored
-                            in production environments to prevent passwords from be transmitted in
-                            clear text. The default value is <constant>FALSE</constant>, as servers
-                            frequently require that a certificate be installed separately after
-                            installation. The <emphasis>useSsl</emphasis> and
-                            <emphasis>useStartTls</emphasis> options are mutually exclusive.
-                            The <emphasis>useStartTls</emphasis> option should be favored
-                            over <emphasis>useSsl</emphasis> but not all servers support
-                            this newer mechanism.
+                            Ob der <acronym>LDAP</acronym> Client <acronym>TLS</acronym> (auch als
+                            <acronym>SSLv2</acronym> bekannt) verschlüsselten Transport verwenden
+                            soll oder nicht. Der Wert <constant>TRUE</constant> wird in
+                            Produktionsumgebungen stärkstens empfohlen um zu verhindern das
+                            Passwörter im Klartext übermittelt werden. Der Standardwert ist
+                            <constant>FALSE</constant>, da Server oft ein separat installiertes
+                            Zertifikat nach der Installation benötigen. Die Optionen
+                            <emphasis>useSsl</emphasis> und <emphasis>useStartTls</emphasis> sind
+                            gegenseitig exklusiv. Die Option <emphasis>useStartTls</emphasis>
+                            sollte gegenüber <emphasis>useSsl</emphasis> bevorzugt verwendet werden
+                            aber nicht alle Server unterstützen diesen neueren Mechanismus.
                         </entry>
                     </row>
                     <row>
-                        <entry>useSsl</entry>
+                        <entry><property>useSsl</property></entry>
                         <entry>
-                            Whether or not the <acronym>LDAP</acronym> client should use
-                            <acronym>SSL</acronym> encrypted transport. The
-                            <emphasis>useSsl</emphasis> and <emphasis>useStartTls</emphasis>
-                            options are mutually exclusive.
+                            Ob der <acronym>LDAP</acronym> Client einen <acronym>SSL</acronym>
+                            verschlüsselten Transport verwenden soll. Die Optionen
+                            <emphasis>useSsl</emphasis> und <emphasis>useStartTls</emphasis>
+                            sind gegenseitig exklusiv.
                         </entry>
                     </row>
                     <row>
-                        <entry>username</entry>
+                        <entry><property>username</property></entry>
                         <entry>
-                            The default credentials username. Some servers require that this
-                            be in DN form. This must be given in DN form if the
-                            <acronym>LDAP</acronym> server requires a DN to bind and binding
-                            should be possible with simple usernames.
+                            Der Standard Benutzername des Accounts. Einige Server erwarten Ihn
+                            in DN Form. Er muß in DN Form angegeben werden wenn der
+                            <acronym>LDAP</acronym> Server einen DN für das Binden benötigt und
+                            das Binden mit einem einfachen Benutzernamen möglich sein soll.
                         </entry>
                     </row>
                     <row>
-                        <entry>password</entry>
+                        <entry><property>password</property></entry>
                         <entry>
-                            The default credentials password (used only with username
-                            above).
+                            Das Standard Passwort des Accounts (nur mit dem obigen Benutzernamen
+                            verwendet).
                         </entry>
                     </row>
                     <row>
-                        <entry>bindRequiresDn</entry>
+                        <entry><property>bindRequiresDn</property></entry>
                         <entry>
-                            If <constant>TRUE</constant>, this instructs
-                            <classname>Zend_Ldap</classname> to retrieve the DN for the
-                            account used to bind if the username is not
-                            already in DN form. The default value is <constant>FALSE</constant>.
+                            Ist er <constant>TRUE</constant>, dann instruiert er
+                            <classname>Zend_Ldap</classname> den DN für den Account zu empfangen
+                            der für das Binden des Benutzernamens verwendet wird wenn dieser nicht
+                            bereits in DN Form ist. Der Standardwert ist
+                            <constant>FALSE</constant>.
                         </entry>
                     </row>
                     <row>
-                        <entry>baseDn</entry>
+                        <entry><property>baseDn</property></entry>
                         <entry>
-                            The default base DN used for searching (e.g., for accounts).
-                            This option is required for most account related operations and should
-                            indicate the DN under which accounts are located.
+                            Der Standard Basis DN der für das Suchen (z.B. nach Accounts) verwendet
+                            wird. Diese Option wird fr die meisten Account bezogenen Operationen
+                            verwendet und sollte den DN anzeigen unter dem Accounts zu finden sind.
                         </entry>
                     </row>
                     <row>
-                        <entry>accountCanonicalForm</entry>
+                        <entry><property>accountCanonicalForm</property></entry>
                         <entry>
-                            A small integer indicating the form to which account names
-                            should be canonicalized. See the <link
-                                linkend="zend.ldap.introduction.theory-of-operations.account-name-canonicalization"><emphasis>Account
-                                Name Canonicalization</emphasis></link>
-                            section below.
+                            Ein kleiner Integerwert der die Form anzeigt zu der Accountnamen
+                            kanonisiert werden sollen. Siehe auch das Kapitel <link
+                                linkend="zend.ldap.introduction.theory-of-operations.account-name-canonicalization"><emphasis>Kanonisierung
+                                von Account Namen</emphasis></link> weiter unten.
                         </entry>
                     </row>
                     <row>
-                        <entry>accountDomainName</entry>
+                        <entry><property>accountDomainName</property></entry>
                         <entry>
-                            The FQDN domain for which the target <acronym>LDAP</acronym> server
-                            is an authority (e.g., example.com).
+                            Die FQDN Domain für die der <acronym>LDAP</acronym> Zielserver die
+                            Authorität ist (z.B., example.com).
                         </entry>
                     </row>
                     <row>
-                        <entry>accountDomainNameShort</entry>
+                        <entry><property>accountDomainNameShort</property></entry>
                         <entry>
-                            The 'short' domain for which the target <acronym>LDAP</acronym> server
-                            is an authority. This is usually used to specify the NetBIOS
-                            domain name for Windows networks but may also be used by non-AD servers.
+                            Die 'short' Domain für die der <acronym>LDAP</acronym> Zielserver die
+                            Authorität ist. Das wird normalerweise verwendet um den NetBIOS
+                            Domainnamen für Windows Netzwerke zu spezifizieren, kann aber auch von
+                            nicht-AD Servern verwendet werden.
                         </entry>
                     </row>
                     <row>
-                        <entry>accountFilterFormat</entry>
+                        <entry><property>accountFilterFormat</property></entry>
                         <entry>
-                            The <acronym>LDAP</acronym> search filter used to search for accounts.
-                            This string is a <ulink
-                                url="http://php.net/sprintf"><code>sprintf()</code></ulink>
-                            style expression that must contain one '<emphasis>%s</emphasis>' to
-                            accommodate the username. The default value is
+                            Der Suchfilter für <acronym>LDAP</acronym> der für das Suchen von
+                            Accounts verwendet wird. Der String ist ein Ausdruck im Stil von
+                            <ulink url="http://php.net/sprintf"><code>sprintf()</code></ulink>
+                            der ein '<emphasis>%s</emphasis>' enthalten muss um den Benutzernamen
+                            zu notieren. Der Standardwert ist
                             '<emphasis>(&amp;(objectClass=user)(sAMAccountName=%s))</emphasis>'
-                            unless <emphasis>bindRequiresDn</emphasis> is set to
-                            <constant>TRUE</constant>, in which case the default is
+                            solange <emphasis>bindRequiresDn</emphasis> nicht auf
+                            <constant>TRUE</constant> gesetzt ist. In dem Fall ist der Standardwert
                             '<emphasis>(&amp;(objectClass=posixAccount)(uid=%s))</emphasis>'.
-                            Users of custom schemas may need to change this option.
+                            Benutzer eines eigenen Schemas können die Notwendigkeit haben diese
+                            Option zu ändern.
                         </entry>
                     </row>
                     <row>
-                        <entry>allowEmptyPassword</entry>
+                        <entry><property>allowEmptyPassword</property></entry>
                         <entry>
-                            Some <acronym>LDAP</acronym> servers can be configured to accept an
-                            empty string password as an anonymous bind. This behavior is almost
-                            always undesirable. For this reason, empty passwords are explicitly
-                            disallowed. Set this value to <constant>TRUE</constant> to allow an
-                            empty string password to be submitted during the bind.
+                            Einige <acronym>LDAP</acronym> Server können konfiguriert werden um
+                            ein leeres Passwort als anonymen Bind zu akzeptieren. Dieses Verhalten
+                            ist meistens immer unerwünscht. Aus diesem Grund sind leere Passwörter
+                            explizit unerwünscht. Dieser Wert muß auf <constant>TRUE</constant>
+                            gesetzt werden um zu akzeptieren das ein leeres Passwort wärend des
+                            Bindens übergeben werden kann.
                         </entry>
                     </row>
                     <row>
-                        <entry>optReferrals</entry>
+                        <entry><property>optReferrals</property></entry>
                         <entry>
-                            If set to <constant>TRUE</constant>, this option indicates to the
-                            <acronym>LDAP</acronym> client that referrals should be followed.
-                            The default value is <constant>FALSE</constant>.
+                            Wenn Sie auf <constant>TRUE</constant> gesetzt wird zeigt diese Option
+                            an das dem <acronym>LDAP</acronym> Client der referiert, gefolgt werden
+                            soll. Der Standardwert ist <constant>FALSE</constant>.
                         </entry>
                     </row>
                     <row>
-                        <entry>tryUsernameSplit</entry>
+                        <entry><property>tryUsernameSplit</property></entry>
                         <entry>
-                            If set to <constant>FALSE</constant>, this option indicates that the
-                            given username should not be split at the first <emphasis>@</emphasis>
-                            or <emphasis>\</emphasis> character to separate the username from
-                            the domain during the binding-procedure. This allows the user to
-                            use usernames that contain an <emphasis>@</emphasis> or
-                            <emphasis>\</emphasis> character that do not
-                            inherit some domain-information, e.g. using email-addresses for
-                            binding. The default value is <constant>TRUE</constant>.
+                            Wenn Sie auf <constant>FALSE</constant> gesetzt wird zeigt diese Option
+                            an das der angegebene Benutzername nicht mit dem ersten
+                            <emphasis>@</emphasis> oder <emphasis>\</emphasis> Zeichen geteilt
+                            werden soll um den Benutzernamen wärend der Bindungs-Prozedur von der
+                            Domain zu trennen. Das erlaubt es dem Benutzer, Benutzernamen zu
+                            verwenden die ein <emphasis>@</emphasis> oder <emphasis>\</emphasis>
+                            Zeichen enthalten, welche keine Domain-Information enthalten, z.B.
+                            die Verwendung von Email Adressen für das Binden. Der Standardwert ist
+                            <constant>TRUE</constant>.
                         </entry>
                     </row>
                 </tbody>
@@ -175,10 +179,10 @@
     </sect2>
 
     <sect2 id="zend.ldap.api.reference">
-        <title>API Reference</title>
+        <title>API Referenz</title>
 
         <note>
-            <para>Method names in <emphasis>italics</emphasis> are static methods.</para>
+            <para>Methodennamen in <emphasis>italic</emphasis> sind statische Methoden.</para>
         </note>
 
         <xi:include href="Zend_Ldap-API-Ldap.xml" />

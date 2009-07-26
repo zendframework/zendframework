@@ -55,7 +55,16 @@ class Zend_Validate_HostnameTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
+        $this->_origEncoding = iconv_get_encoding('internal_encoding');
         $this->_validator = new Zend_Validate_Hostname();
+    }
+
+    /**
+     * Reset iconv
+     */
+    public function tearDown()
+    {
+        iconv_set_encoding('internal_encoding', $this->_origEncoding);
     }
 
     /**
@@ -350,5 +359,25 @@ class Zend_Validate_HostnameTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($this->_validator->isValid('place@yah&oo.com'));
         $this->assertFalse($this->_validator->isValid('place@y*ahoo.com'));
         $this->assertFalse($this->_validator->isValid('ya#hoo'));
+    }
+
+    /**
+     * @see ZF-7277
+     */
+    public function testDifferentIconvEncoding()
+    {
+        iconv_set_encoding('internal_encoding', 'ISO8859-1');
+        $validator = new Zend_Validate_Hostname();
+
+        $valuesExpected = array(
+            array(true, array('bürger.com', 'hãllo.com', 'hållo.com')),
+            array(true, array('bÜrger.com', 'hÃllo.com', 'hÅllo.com')),
+            array(false, array('hãllo.lt', 'bürger.lt', 'hãllo.lt'))
+            );
+        foreach ($valuesExpected as $element) {
+            foreach ($element[1] as $input) {
+                $this->assertEquals($element[0], $validator->isValid($input), implode("\n", $validator->getMessages()) . $input);
+            }
+        }
     }
 }

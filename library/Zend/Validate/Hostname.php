@@ -419,12 +419,12 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
         $this->_setValue($value);
 
         // Check input against IP address schema
-        if (preg_match('/^[0-9.a-e:.]*$/i', $value, $nothing) &&
+        if (preg_match('/^[0-9.a-e:.]*$/i', $value) &&
             $this->_ipValidator->setTranslator($this->getTranslator())->isValid($value)) {
             if (!($this->_allow & self::ALLOW_IP)) {
                 $this->_error(self::IP_ADDRESS_NOT_ALLOWED);
                 return false;
-            } else{
+            } else {
                 return true;
             }
         }
@@ -434,8 +434,11 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
         if ((count($domainParts) > 1) && (strlen($value) >= 4) && (strlen($value) <= 254)) {
             $status = false;
 
+            $origenc = iconv_get_encoding('internal_encoding');
+            iconv_set_encoding('internal_encoding', 'UTF-8');
             do {
                 // First check TLD
+                $matches = array();
                 if (preg_match('/([^.]{2,10})$/i', end($domainParts), $matches) ||
                     (end($domainParts) == 'ایران') || (end($domainParts) == '中国') ||
                     (end($domainParts) == '公司') || (end($domainParts) == '网络')) {
@@ -497,6 +500,7 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
                         foreach($regexChars as $regexKey => $regexChar) {
                             $status = @preg_match($regexChar, $domainPart);
                             if ($status === false) {
+                                iconv_set_encoding('internal_encoding', $origenc);
                                 require_once 'Zend/Validate/Exception.php';
                                 throw new Zend_Validate_Exception('Internal error: DNS validation failed');
                             } elseif ($status !== 0) {
@@ -533,6 +537,7 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
                 }
             } while (false);
 
+            iconv_set_encoding('internal_encoding', $origenc);
             // If the input passes as an Internet domain name, and domain names are allowed, then the hostname
             // passes validation
             if ($status && ($this->_allow & self::ALLOW_DNS)) {
@@ -583,9 +588,8 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
      */
     protected function decodePunycode($encoded)
     {
-        $matches = array();
-        $found   = preg_match('/([^a-z0-9\x2d]{1,10})$/i', $encoded);
-        if (empty($encoded) || (count($matches) > 0)) {
+        $found = preg_match('/([^a-z0-9\x2d]{1,10})$/i', $encoded);
+        if (empty($encoded) || ($found > 0)) {
             // no punycode encoded string, return as is
             $this->_error(self::CANNOT_DECODE_PUNYCODE);
             return false;

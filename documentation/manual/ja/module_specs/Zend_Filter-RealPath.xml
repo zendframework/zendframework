@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16550 -->
+<!-- EN-Revision: 17054 -->
 <sect2 id="zend.filter.set.realpath">
     <title>RealPath</title>
 
@@ -41,7 +41,8 @@ $filter = new Zend_Filter_RealPath(false);
 $path   = '/www/var/path/../../non/existing/path';
 $filtered = $filter->filter($path);
 
-// file_exists または realpath が false を返すときでも '/www/non/existing/path' を返します。
+// file_exists または realpath が false を返すときでも
+// '/www/non/existing/path' を返します。
 ]]></programlisting>
 
 </sect2>

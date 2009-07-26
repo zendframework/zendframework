@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17018 -->
+<!-- EN-Revision: 17054 -->
 <sect1 id="zend.http.client.migration">
 
     <title>前バージョンからの移行</title>
@@ -45,12 +45,21 @@
                 <programlisting language="php"><![CDATA[
 // ファイル２つを同じフォーム要素名でファイルの配列としてアップロード
 $client = new Zend_Http_Client();
-$client->setFileUpload('file1.txt', 'userfile[]', 'some raw data', 'text/plain');
-$client->setFileUpload('file2.txt', 'userfile[]', 'some other data', 'application/octet-stream');
+$client->setFileUpload('file1.txt',
+                       'userfile[]',
+                       'some raw data',
+                       'text/plain');
+$client->setFileUpload('file2.txt',
+                       'userfile[]',
+                       'some other data',
+                       'application/octet-stream');
 
-// Zend Framework の 1.8 以前では、protected メンバー $client->files の値はこうです:
+// Zend Framework の 1.8 以前では、
+// protected メンバー $client->files の値はこうです:
 // $client->files = array(
-//     'userfile[]' => array('file2.txt', 'application/octet-stream', 'some other data')
+//     'userfile[]' => array('file2.txt',
+                             'application/octet-stream',
+                             'some other data')
 // );
 
 // Zend Framework の 1.9 以降では、$client->files の値はこうです:

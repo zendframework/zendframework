@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16831 -->
+<!-- EN-Revision: 17054 -->
 <sect1 id="zend.db.table">
 
     <title>Zend_Db_Table</title>
@@ -1198,7 +1198,8 @@ $rows = $table->fetchAll($select);
                 <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
-$select = $table->select(Zend_Db_Table::SELECT_WITH_FROM_PART)->setIntegrityCheck(false);
+$select = $table->select(Zend_Db_Table::SELECT_WITH_FROM_PART)
+                ->setIntegrityCheck(false);
 $select->where('bug_status = ?', 'NEW')
        ->join('accounts',
               'accounts.account_name = bugs.reported_by',

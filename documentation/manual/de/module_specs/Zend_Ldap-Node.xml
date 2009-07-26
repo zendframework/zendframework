@@ -2,45 +2,45 @@
 <!-- EN-Revision: 16633 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.ldap.node">
-    <title>Object oriented access to the LDAP tree using Zend_Ldap_Node</title>
+    <title>Objektorientierter Zugriff auf den LDAP Baum durch Verwendung von Zend_Ldap_Node</title>
     <sect2 id="zend.ldap.node.basic">
-        <title>Basic CRUD operations</title>
+        <title>Grundsätzliche CRUD Operationen</title>
         <sect3 id="zend.ldap.node.basic.retrieve">
-            <title>Retrieving data from the LDAP</title>
+            <title>Daten von LDAP holen</title>
             <sect4 id="zend.ldap.node.basic.retrieve.dn">
-                <title>Getting a node by its DN</title>
+                <title>Einen Node durch seinen DN erhalten</title>
                 <para/>
             </sect4>
             <sect4 id="zend.ldap.node.basic.retrieve.search">
-                <title>Searching a node's subtree</title>
+                <title>Den Subbaum eines Nodes durchsuchen</title>
                 <para/>
             </sect4>
         </sect3>
         <sect3 id="zend.ldap.node.basic.add">
-            <title>Adding a new node to the LDAP</title>
+            <title>Einen neuen Node in LDAP hinzufügen</title>
             <para/>
         </sect3>
         <sect3 id="zend.ldap.node.basic.delete">
-            <title>Deleting a node from the LDAP</title>
+            <title>Einen Node von LDAP löschen</title>
             <para/>
         </sect3>
         <sect3 id="zend.ldap.node.basic.update">
-            <title>Updating a node on the LDAP</title>
+            <title>Einen Node in LDAP aktualisieren</title>
             <para/>
         </sect3>
     </sect2>
     <sect2 id="zend.ldap.node.extended">
-        <title>Extended operations</title>
+        <title>Erweiterte Operationen</title>
         <sect3 id="zend.ldap.node.extended.copy-and-move">
-            <title>Copy and move nodes in the LDAP</title>
+            <title>Nodes in LDAP kopieren und verschieben</title>
             <para/>
         </sect3>
     </sect2>
     <sect2 id="zend.ldap.node.traversal">
-        <title>Tree traversal</title>
+        <title>Baum Durchlaufen</title>
 
             <example>
-            <title>Traverse LDAP tree recursively</title>
+            <title>Einen LDAP Baum rekursiv durchlaufen</title>
 <programlisting language="php"><![CDATA[
 $options = array(/* ... */);
 $ldap = new Zend_Ldap($options);

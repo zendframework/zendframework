@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15746 -->
+<!-- EN-Revision: 17062 -->
 <sect1 id="zend.xmlrpc.client">
     <title>Zend_XmlRpc_Client</title>
 
@@ -9,9 +9,9 @@
 
         <para>
             Zend Framework では、クライアントとしてリモートの
-            XML-RPC サービスを使用することもサポートしています。そのためには
+            <acronym>XML-RPC</acronym> サービスを使用することもサポートしています。そのためには
             <classname>Zend_XmlRpc_Client</classname> パッケージを使用します。
-            主な機能には、PHP と XML-RPC の間の型変換やサーバのプロキシオブジェクト、
+            主な機能には、<acronym>PHP</acronym> と <acronym>XML-RPC</acronym> の間の型変換やサーバのプロキシオブジェクト、
             そしてサーバが提供する機能を調べることなどがあります。
         </para>
 
@@ -22,16 +22,16 @@
 
         <para>
             <classname>Zend_XmlRpc_Client</classname> のコンストラクタは、
-            リモート XML-RPC サーバの URL を最初の引数として受け取ります。
+            リモート <acronym>XML-RPC</acronym> サーバの <acronym>URL</acronym> を最初の引数として受け取ります。
             返されたインスタンスを使用して、
             その場所からさまざまなリモートメソッドを実行します。
         </para>
 
         <para>
-            リモートメソッドを XML-RPC クライアントからコールするには、
+            リモートメソッドを <acronym>XML-RPC</acronym> クライアントからコールするには、
             インスタンスを作成した後で <code>call()</code> メソッドをコールします。
             以下の例では Zend Framework のウェブサイト上にあるデモ用の
-            XML-RPC サーバを使用します。<classname>Zend_XmlRpc</classname>
+            <acronym>XML-RPC</acronym> サーバを使用します。<classname>Zend_XmlRpc</classname>
             のテストや調査のために、このサーバを使用することができます。
         </para>
 
@@ -47,9 +47,9 @@ echo $client->call('test.sayHello');
         </example>
 
         <para>
-            リモートメソッドのコールによって返される XML-RPC の値は、
-            自動的に PHP のネイティブ型に変換されます。
-            上の例では PHP の <type>String</type> が返されるので、
+            リモートメソッドのコールによって返される <acronym>XML-RPC</acronym> の値は、
+            自動的に <acronym>PHP</acronym> のネイティブ型に変換されます。
+            上の例では <acronym>PHP</acronym> の <type>String</type> が返されるので、
             それをそのまま使用することができます。
         </para>
 
@@ -79,13 +79,13 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
             リモートメソッドがパラメータを要求していない場合は、
             このパラメータには何も指定しません。あるいは空の <code>array()</code>
             を渡します。リモートメソッドに渡すパラメータの配列には、
-            ネイティブの PHP 型と <classname>Zend_XmlRpc_Value</classname>
+            ネイティブの <acronym>PHP</acronym> 型と <classname>Zend_XmlRpc_Value</classname>
             オブジェクトの両方を使用できます。それらを混用することも可能です。
         </para>
 
         <para>
-            <code>call()</code> メソッドは自動的に XML-RPC のレスポンスを変換し、
-            同等な PHP ネイティブ型にして返します。返り値を
+            <code>call()</code> メソッドは自動的に <acronym>XML-RPC</acronym> のレスポンスを変換し、
+            同等な <acronym>PHP</acronym> ネイティブ型にして返します。返り値を
             <classname>Zend_XmlRpc_Response</classname> オブジェクトとして取得するには、
             このメソッドの後で <code>getLastResponse()</code> をコールします。
         </para>
@@ -97,22 +97,22 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
             リモートメソッドの中にはパラメータが必要なものがあります。
             必要なパラメータは、<classname>Zend_XmlRpc_Client</classname> の
             <code>call()</code> メソッドの二番目のパラメータとして配列で指定します。
-            パラメータを渡す方法は 2 通りあります。PHP のネイティブ型
+            パラメータを渡す方法は 2 通りあります。<acronym>PHP</acronym> のネイティブ型
             (これは自動的に変換されます) で渡すか、
-            対応する XML-RPC 型 (<classname>Zend_XmlRpc_Value</classname>
+            対応する <acronym>XML-RPC</acronym> 型 (<classname>Zend_XmlRpc_Value</classname>
             オブジェクトのひとつ) で渡すかのいずれかです。
         </para>
 
         <sect3 id="zend.xmlrpc.value.parameters.php-native">
             <title>PHP ネイティブ変数をパラメータとして渡す</title>
             <para>
-                <code>call()</code> のパラメータをネイティブの PHP
+                <code>call()</code> のパラメータをネイティブの <acronym>PHP</acronym>
                 型で渡します。つまり <type>String</type>、
                 <code>integer</code>、<code>float</code>、
                 <type>Boolean</type>、<type>Array</type> あるいは
                 <code>object</code> で渡すということです。
-                このとき、PHP のネイティブ型は自動的に検出され、
-                以下の表にしたがって XML-RPC 型に変換されます。
+                このとき、<acronym>PHP</acronym> のネイティブ型は自動的に検出され、
+                以下の表にしたがって <acronym>XML-RPC</acronym> 型に変換されます。
             </para>
 
             <table id="zend.xmlrpc.value.parameters.php-native.table-1">
@@ -120,8 +120,8 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
                 <tgroup cols="2">
                     <thead>
                         <row>
-                            <entry>PHP ネイティブ型</entry>
-                            <entry>XML-RPC 型</entry>
+                            <entry><acronym>PHP</acronym> ネイティブ型</entry>
+                            <entry><acronym>XML-RPC</acronym> 型</entry>
                         </row>
                     </thead>
                     <tbody>
@@ -161,12 +161,12 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
                 <title>空の配列はどの型に変換されるの?</title>
 
                 <para>
-                    空の配列を XML-RPC メソッドに渡すことには問題があります。
+                    空の配列を <acronym>XML-RPC</acronym> メソッドに渡すことには問題があります。
                     それが array と struct のどちらにでもとれるからです。
                     <classname>Zend_XmlRpc_Client</classname>
                     は、このような状況を検出した場合にはサーバの
                     <code>system.methodSignature</code>
-                    メソッドにリクエストを送り、どの XML-RPC
+                    メソッドにリクエストを送り、どの <acronym>XML-RPC</acronym>
                     型に変換すべきかを判断します。
                 </para>
 
@@ -176,7 +176,7 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
                     をサポートしていない場合には「リクエストに失敗した」
                     記録がサーバに残ってしまいます。この場合、
                     <classname>Zend_XmlRpc_Client</classname> は値を
-                    XML-RPC の array 型に変換します。
+                    <acronym>XML-RPC</acronym> の array 型に変換します。
                     さらに、このやりかたを使用すると
                     「配列形式の引数を指定してコールすると、
                     毎回リモートサーバへの余計な呼び出しが発生する」
@@ -184,7 +184,7 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
                 </para>
 
                 <para>
-                    この仕組みを無効にするには、XML-RPC コールの前に
+                    この仕組みを無効にするには、<acronym>XML-RPC</acronym> コールの前に
                     <code>setSkipSystemLookup()</code> メソッドをコールします。
                 </para>
 
@@ -199,7 +199,7 @@ $result = $client->call('foo.bar', array(array()));
             <title><classname>Zend_XmlRpc_Value</classname> オブジェクトをパラメータとして渡す</title>
             <para>
                 パラメータを表す <classname>Zend_XmlRpc_Value</classname>
-                のインスタンスを作成し、XML-RPC の型を指定することもできます。
+                のインスタンスを作成し、<acronym>XML-RPC</acronym> の型を指定することもできます。
                 このようにする理由には次のようなものがあります。
 
                 <itemizedlist>
@@ -214,16 +214,16 @@ $result = $client->call('foo.bar', array(array()));
                         <para>
                             プロシージャが <code>base64</code> 型や
                             <code>dateTime.iso8601</code> 型を要求していることがある
-                            (これらは PHP のネイティブ型には存在しません)。
+                            (これらは <acronym>PHP</acronym> のネイティブ型には存在しません)。
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                            自動変換が失敗する場合 (例えば、空の XML-RPC
+                            自動変換が失敗する場合 (例えば、空の <acronym>XML-RPC</acronym>
                             構造体をパラメータとして渡すことを考えましょう。
-                            これは、PHP では空の配列に対応します。しかし、
+                            これは、<acronym>PHP</acronym> では空の配列に対応します。しかし、
                             空の配列をパラメータとして渡すと、それが自動変換されたときに
-                            XML-RPC の array になってしまいます。なぜなら、
+                            <acronym>XML-RPC</acronym> の array になってしまいます。なぜなら、
                             空の配列は連想配列ではないからです)。
                         </para>
                     </listitem>
@@ -243,7 +243,7 @@ $result = $client->call('foo.bar', array(array()));
                 <tgroup cols="3">
                     <thead>
                         <row>
-                            <entry>XML-RPC 型</entry>
+                            <entry><acronym>XML-RPC</acronym> 型</entry>
                             <entry>対応する <classname>Zend_XmlRpc_Value</classname> 定数</entry>
                             <entry><classname>Zend_XmlRpc_Value</classname> オブジェクト</entry>
                         </row>
@@ -298,8 +298,8 @@ $result = $client->call('foo.bar', array(array()));
                     <title>自動変換</title>
                     <para>
                         新しい <classname>Zend_XmlRpc_Value</classname> オブジェクトを作成する際には、
-                        その値は PHP の型として設定されます。この PHP の型は、
-                        PHP のキャスト機能によって変換されます。
+                        その値は <acronym>PHP</acronym> の型として設定されます。この <acronym>PHP</acronym> の型は、
+                        <acronym>PHP</acronym> のキャスト機能によって変換されます。
                         たとえば、<classname>Zend_XmlRpc_Value_Integer</classname>
                         に文字列を渡すと、<code>(int)$value</code>
                         のように変換されます。
@@ -312,10 +312,10 @@ $result = $client->call('foo.bar', array(array()));
     <sect2 id="zend.xmlrpc.client.requests-and-responses">
         <title>サーバプロキシオブジェクト</title>
         <para>
-            リモートメソッドを XML-RPC クライアントからコールするもうひとつの方法は、
+            リモートメソッドを <acronym>XML-RPC</acronym> クライアントからコールするもうひとつの方法は、
             サーバプロキシを使用することです。
-            サーバプロキシとはリモートの XML-RPC 名前空間のプロキシとなる
-            PHP オブジェクトで、ネイティブな PHP
+            サーバプロキシとはリモートの <acronym>XML-RPC</acronym> 名前空間のプロキシとなる
+            <acronym>PHP</acronym> オブジェクトで、ネイティブな <acronym>PHP</acronym>
             オブジェクトと可能な限り同じように扱えるようにしたものです。
         </para>
 
@@ -325,7 +325,7 @@ $result = $client->call('foo.bar', array(array()));
             <code>getProxy()</code> をコールします。これは
             <classname>Zend_XmlRpc_Client_ServerProxy</classname> のインスタンスを返します。
             サーバプロキシに対するあらゆるメソッドコールはリモートに転送され、
-            パラメータも通常の PHP メソッドと同じように渡すことができます。
+            パラメータも通常の <acronym>PHP</acronym> メソッドと同じように渡すことができます。
         </para>
 
         <example id="zend.xmlrpc.client.requests-and-responses.example-1">
@@ -369,8 +369,8 @@ $hello = $test->sayHello(1, 2);         // test.Hello(1,2) は "hello" を返し
     <sect2 id="zend.xmlrpc.client.error-handling">
         <title>エラー処理</title>
         <para>
-            XML-RPC のメソッドコールで発生する可能性のあるエラーには、二種類あります。
-            HTTP のエラーと XML-RPC の fault です。<classname>Zend_XmlRpc_Client</classname>
+            <acronym>XML-RPC</acronym> のメソッドコールで発生する可能性のあるエラーには、二種類あります。
+            <acronym>HTTP</acronym> のエラーと <acronym>XML-RPC</acronym> の fault です。<classname>Zend_XmlRpc_Client</classname>
             はこれらの両方を理解するので、それぞれ独立して検出と処理が可能です。
         </para>
 
@@ -378,8 +378,8 @@ $hello = $test->sayHello(1, 2);         // test.Hello(1,2) は "hello" を返し
             <title>HTTP エラー</title>
 
             <para>
-                HTTP エラーが発生した場合、
-                つまり、たとえばリモート HTTP サーバが
+                <acronym>HTTP</acronym> エラーが発生した場合、
+                つまり、たとえばリモート <acronym>HTTP</acronym> サーバが
                 <code>404 Not Found</code> を返したような場合に
                 <classname>Zend_XmlRpc_Client_HttpException</classname> がスローされます。
             </para>
@@ -404,7 +404,7 @@ try {
             </example>
 
             <para>
-                XML-RPC クライアントの使用法にかかわらず、HTTP エラーが発生すると必ず
+                <acronym>XML-RPC</acronym> クライアントの使用法にかかわらず、<acronym>HTTP</acronym> エラーが発生すると必ず
                 <classname>Zend_XmlRpc_Client_HttpException</classname> がスローされます。
             </para>
         </sect3>
@@ -413,18 +413,18 @@ try {
             <title>XML-RPC Fault</title>
 
             <para>
-                XML-RPC の fault は、PHP の例外と似たものです。これは
-                XML-RPC メソッドのコールから返される特別な型で、
-                エラーコードとエラーメッセージを含みます。XML-RPC の fault
+                <acronym>XML-RPC</acronym> の fault は、<acronym>PHP</acronym> の例外と似たものです。これは
+                <acronym>XML-RPC</acronym> メソッドのコールから返される特別な型で、
+                エラーコードとエラーメッセージを含みます。<acronym>XML-RPC</acronym> の fault
                 は、<classname>Zend_XmlRpc_Client</classname> の使用場面によって処理方法が異なります。
             </para>
 
             <para>
                 <code>call()</code> メソッドや
                 サーバプロキシオブジェクトを使用している場合には、
-                XML-RPC の fault が発生すると
+                <acronym>XML-RPC</acronym> の fault が発生すると
                 <classname>Zend_XmlRpc_Client_FaultException</classname> がスローされます。
-                この例外のコードとメッセージは、もとの XML-RPC の fault
+                この例外のコードとメッセージは、もとの <acronym>XML-RPC</acronym> の fault
                 レスポンスの値に対応するものとなります。
             </para>
 
@@ -470,7 +470,7 @@ try {
     <sect2 id="zend.xmlrpc.client.introspection">
         <title>サーバのイントロスペクション</title>
         <para>
-            XML-RPC サーバの中には、XML-RPC の <code>system.</code> 名前空間で
+            <acronym>XML-RPC</acronym> サーバの中には、<acronym>XML-RPC</acronym> の <code>system.</code> 名前空間で
             デファクトのイントロスペクションメソッドをサポートしているものもあります。
             <classname>Zend_XmlRpc_Client</classname> は、この機能を持つサーバもサポートしています。
         </para>
@@ -514,7 +514,7 @@ $client->doRequest($request);
         </example>
 
         <para>
-            クライアントから XML-RPC メソッドのコールが
+            クライアントから <acronym>XML-RPC</acronym> メソッドのコールが
             (<code>call()</code> メソッド、
             <code>doRequest()</code> メソッドあるいはサーバプロキシによって)
             行われた場合は、最後のリクエストオブジェクトおよびその応答が常に
@@ -527,18 +527,18 @@ $client->doRequest($request);
         <title>HTTP クライアントのテスト</title>
 
         <para>
-            これまでのすべての例では、HTTP クライアントの設定を行いませんでした。
+            これまでのすべての例では、<acronym>HTTP</acronym> クライアントの設定を行いませんでした。
             このような場合、<classname>Zend_Http_Client</classname>
             の新しいインスタンスがデフォルトのオプションで作成され、それを自動的に
             <classname>Zend_XmlRpc_Client</classname> で使用します。
         </para>
 
         <para>
-            HTTP クライアントは、いつでも
+            <acronym>HTTP</acronym> クライアントは、いつでも
             <code>getHttpClient()</code> メソッドで取得できます。
-            たいていの場合はデフォルトの HTTP クライアントで用が足りるでしょう。
+            たいていの場合はデフォルトの <acronym>HTTP</acronym> クライアントで用が足りるでしょう。
             しかし、<code>setHttpClient()</code> を使用することで、
-            別の HTTP クライアントのインスタンスを使うこともできます。
+            別の <acronym>HTTP</acronym> クライアントのインスタンスを使うこともできます。
         </para>
 
         <para>

@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15615 -->
+<!-- EN-Revision: 17062 -->
 <sect1 id="zend.wildfire.chapter">
 
   <title>Zend_Wildfire</title>
 
   <para>
-    <classname>Zend_Wildfire</classname> は、PHP コードと
+    <classname>Zend_Wildfire</classname> は、<acronym>PHP</acronym> コードと
     <ulink url="http://www.wildfirehq.org/">Wildfire</ulink>
     クライアントコンポーネントとの間の通信を行うコンポーネントです。
   </para>
   <para>
     Wildfire Project の目的は、さまざまなコンポーネントと
     動的でスクリプタブルなプラグイン機構の間の通信を標準化することです。
-    現時点でもっとも力を注いでいるのは、サーバサイドの PHP
+    現時点でもっとも力を注いでいるのは、サーバサイドの <acronym>PHP</acronym>
     コードのログメッセージを
     <ulink url="http://www.getfirebug.com/">Firebug</ulink>
     <ulink url="http://getfirebug.com/logging.html">コンソール</ulink>
@@ -23,12 +23,12 @@
     Firebug へのログ出力のために
     <link linkend="zend.log.writers.firebug"><classname>Zend_Log_Writer_Firebug</classname></link>
     コンポーネントを提供しています。通信プロトコルは
-    HTTP リクエストヘッダとレスポンスヘッダを使用し、
+    <acronym>HTTP</acronym> リクエストヘッダとレスポンスヘッダを使用し、
     これによってサーバとクライアントコンポーネントの間の通信を行っています。
     ページのコンテンツに何も手を加えなくても、
     スクリプト実行時に生成したさまざまなデータをブラウザ側で記録できるのです。
-    この方式なら、AJAX リクエストのようにクリーンな JSON
-    および XML レスポンスを要求するリクエストのデバッグも行えます。
+    この方式なら、<acronym>AJAX</acronym> リクエストのようにクリーンな <acronym>JSON</acronym>
+    および <acronym>XML</acronym> レスポンスを要求するリクエストのデバッグも行えます。
   </para>
   <para>
     <link linkend="zend.db.profiler.profilers.firebug"><classname>Zend_Db_Profiler_Firebug</classname></link>

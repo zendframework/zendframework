@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 17062 -->
 <sect1 id="zend.xmlrpc.introduction">
     <title>導入</title>
     <para>
         <ulink url="http://www.xmlrpc.com/">ホームページ</ulink> によると、
-        XML-RPC とは、"XML エンコードしたデータを HTTP でやり取りすることによる、
+        <acronym>XML-RPC</acronym> とは、"<acronym>XML</acronym> エンコードしたデータを
+        <acronym>HTTP</acronym> でやり取りすることによる、
         リモートプロシージャの呼び出しです。
-        XML-RPC は可能な限りシンプルであるように設計されています。
+        <acronym>XML-RPC</acronym> は可能な限りシンプルであるように設計されています。
         にもかかわらず、複雑なデータ構造を送信し、処理し、その結果を受け取ることができます。"
         ということです。
     </para>

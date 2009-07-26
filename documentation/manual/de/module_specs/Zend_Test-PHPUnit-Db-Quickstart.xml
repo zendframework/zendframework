@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16914 -->
+<!-- EN-Revision: 17054 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.test.phpunit.db.quickstart">
     <title>Quickstart</title>
@@ -182,11 +182,14 @@ class BugsTest extends Zend_Test_PHPUnit_DatabaseTestCase
 
         $bugsTable->insert($data);
 
-        $ds = new Zend_Test_PHPUnit_Db_DataSet_QueryDataSet($this->getConnection());
+        $ds = new Zend_Test_PHPUnit_Db_DataSet_QueryDataSet(
+            $this->getConnection()
+        );
         $ds->addTable('zfbugs', 'SELECT * FROM zfbugs');
 
         $this->assertDataSetsEqual(
-            $this->createFlatXmlDataSet(dirname(__FILE__)."/_files/bugsInsertIntoAssertion.xml"),
+            $this->createFlatXmlDataSet(dirname(__FILE__)
+                                      . "/_files/bugsInsertIntoAssertion.xml"),
             $ds
         );
     }
@@ -238,7 +241,8 @@ class BugsTest extends Zend_Test_PHPUnit_DatabaseTestCase
         $ds->addTable($bugsTable);
 
         $this->assertDataSetsEqual(
-            $this->createFlatXmlDataSet(dirname(__FILE__)."/_files/bugsDeleteAssertion.xml"),
+            $this->createFlatXmlDataSet(dirname(__FILE__)
+                                      . "/_files/bugsDeleteAssertion.xml"),
             $ds
         );
     }

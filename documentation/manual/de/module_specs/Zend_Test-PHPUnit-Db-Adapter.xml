@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16914 -->
+<!-- EN-Revision: 17054 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.test.phpunit.db.adapter">
     <title>Using the Database Testing Adapter</title>
@@ -51,9 +51,15 @@ $rs = $adapter->query('SELECT ...'); // Returns Statement 1
 
     <programlisting language="php"><![CDATA[
 $adapter = new Zend_Test_DbAdapter();
-$adapter->appendStatementToStack(Zend_Test_DbStatement::createInsertStatement(1));
-$adapter->appendStatementToStack(Zend_Test_DbStatement::createUpdateStatement(2));
-$adapter->appendStatementToStack(Zend_Test_DbStatement::createDeleteStatement(10));
+$adapter->appendStatementToStack(
+    Zend_Test_DbStatement::createInsertStatement(1)
+);
+$adapter->appendStatementToStack(
+    Zend_Test_DbStatement::createUpdateStatement(2)
+);
+$adapter->appendStatementToStack(
+    Zend_Test_DbStatement::createDeleteStatement(10)
+);
 ]]></programlisting>
 
     <para>

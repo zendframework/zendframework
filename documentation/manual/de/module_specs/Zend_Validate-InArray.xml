@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16394 -->
+<!-- EN-Revision: 17054 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.in_array">
 
@@ -19,7 +19,8 @@
         </para>
 
         <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_InArray(array('key' => 'value', 'otherkey' => 'othervalue'));
+$validator = new Zend_Validate_InArray(array('key' => 'value',
+                                             'otherkey' => 'othervalue'));
 if ($validator->isValid('value')) {
     // Wert gefunden
 } else {
@@ -88,61 +89,65 @@ if ($validator->isValid('value')) {
 ]]></programlisting>
 
         <para>
-            The <emphasis>haystack</emphasis> key contains your array to validate against, and by
-            setting the <emphasis>script</emphasis> key to <constant>TRUE</constant> the validation
-            is done by using a strict type check.
+            Der <emphasis>haystack</emphasis> Schlüssel enthält das eigene Array das für die
+            Prüfung verwendet wird, und durch das Setzen des <emphasis>script</emphasis> Schlüssels
+            auf <constant>TRUE</constant> wird die Prüfung so durchgeführt das der Typ strikt
+            geprüft wird.
         </para>
 
         <para>
-            Of course you can also use the <methodname>setStrict()</methodname> method to change
-            this setting afterwards.
+            Natürlich kann man auch die <methodname>setStrict()</methodname> Methode verwenden
+            um diese Einstellung im Nachhinein zu ändern.
         </para>
 
         <note>
             <para>
-                Note that the <emphasis>strict</emphasis> setting is per default
-                <constant>FALSE</constant>.
+                Es ist zu beachten das die <emphasis>strict</emphasis> Einstellung standardmäßig
+                <constant>FALSE</constant> ist.
             </para>
         </note>
     </sect3>
 
     <sect3 id="zend.validate.set.in_array.recursive">
-        <title>Recursive array validation</title>
+        <title>Rekursive Array Prüfung</title>
 
         <para>
-            In addition to <acronym>PHP</acronym>'s <methodname>in_array()</methodname> method
-            this validator can also be used to validate multidimensional arrays.
+            Zusätzlich zu <acronym>PHP</acronym>'s <methodname>in_array()</methodname> Methode kann
+            diese Prüfung auch verwendet werden um Mehrdimensionale Arrays zu prüfen.
         </para>
 
         <para>
-            To validate multidimensional arrays you have to set the <emphasis>recursive</emphasis>
-            option.
+            Um mehrdimensionale Array zu prüfen muß die <emphasis>recursive</emphasis> Option
+            gesetzt werden.
         </para>
 
         <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_InArray(
     array(
         'haystack' => array(
-            'firstDimension' => array('key' => 'value', 'otherkey' => 'othervalue'),
-            'secondDimension' => array('some' => 'real', 'different' => 'key')),
+            'firstDimension' => array('key' => 'value',
+                                      'otherkey' => 'othervalue'),
+            'secondDimension' => array('some' => 'real',
+                                       'different' => 'key')),
         'recursive' => true
     )
 );
 
 if ($validator->isValid('value')) {
-    // value found
+    // Wert gefunden
 } else {
-    // no value found
+    // Wert nicht gefunden
 }
 ]]></programlisting>
 
         <para>
-            Your array will then be validated recursive to see if the given value is contained.
+            Das eigene Array wird das rekursiv geprüft um zu sehen ob der angegebene Wert enthalten
+            ist.
         </para>
 
         <note>
             <para>
-                Note that per default the recursive validation is turned off.
+                Es ist zu beachten das die rekursive Prüfung standardmäßig ausgeschaltet ist.
             </para>
         </note>
     </sect3>

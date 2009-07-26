@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17018 -->
+<!-- EN-Revision: 17054 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.client.migration">
 
@@ -48,12 +48,21 @@
                 <programlisting language="php"><![CDATA[
 // Zwei Dateien mit dem gleichen Namen des Formularelements als Array hochladen
 $client = new Zend_Http_Client();
-$client->setFileUpload('file1.txt', 'userfile[]', 'some raw data', 'text/plain');
-$client->setFileUpload('file2.txt', 'userfile[]', 'some other data', 'application/octet-stream');
+$client->setFileUpload('file1.txt',
+                       'userfile[]',
+                       'some raw data',
+                       'text/plain');
+$client->setFileUpload('file2.txt',
+                       'userfile[]',
+                       'some other data',
+                       'application/octet-stream');
 
-// In Zend Framework 1.8 oder älter, ist der Wert der geschützten Variable $client->files:
+// In Zend Framework 1.8 oder älter, ist der Wert der geschützten
+// Variable $client->files:
 // $client->files = array(
-//     'userfile[]' => array('file2.txt', 'application/octet-stream', 'some other data')
+//     'userfile[]' => array('file2.txt',
+                             'application/octet-stream',
+                             'some other data')
 // );
 
 // In Zend Framework 1.9 oder neuer, ist der Wert von $client->files:

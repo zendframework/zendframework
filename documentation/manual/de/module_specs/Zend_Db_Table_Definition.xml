@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16943 -->
+<!-- EN-Revision: 17054 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.table.definition">
 
@@ -100,12 +100,18 @@ $authorTable = new Zend_Db_Table('author', $definition);
 $authors = $authorTable->fetchAll();
 
 foreach ($authors as $author) {
-    echo $author->id . ': ' . $author->first_name . ' ' . $author->last_name . PHP_EOL;
+    echo $author->id
+       . ': '
+       . $author->first_name
+       . ' '
+       . $author->last_name
+       . PHP_EOL;
     $books = $author->findDependentRowset('book');
     foreach ($books as $book) {
         echo '    Buch: ' . $book->title . PHP_EOL;
         $genreOutputArray = array();
-        foreach ($book->findManyToManyRowset('genre', 'book_to_genre') as $genreRow) {
+        $genres = $book->findManyToManyRowset('genre', 'book_to_genre');
+        foreach ($genres as $genreRow) {
             $genreOutputArray[] = $genreRow->name;
         }
         echo '        Genre: ' . implode(', ', $genreOutputArray) . PHP_EOL;
@@ -180,12 +186,18 @@ $authorTable = new Zend_Db_Table('author', $definition);
 $authors = $authorTable->fetchAll();
 
 foreach ($authors as $author) {
-    echo $author->id . ': ' . $author->first_name . ' ' . $author->last_name . PHP_EOL;
+    echo $author->id
+       . ': '
+       . $author->first_name
+       . ' '
+       . $author->last_name
+       . PHP_EOL;
     $books = $author->findDependentRowset(new MyBook());
     foreach ($books as $book) {
         echo '    Buch: ' . $book->title . PHP_EOL;
         $genreOutputArray = array();
-        foreach ($book->findManyToManyRowset('genre', 'book_to_genre') as $genreRow) {
+        $genres = $book->findManyToManyRowset('genre', 'book_to_genre');
+        foreach ($genres as $genreRow) {
             $genreOutputArray[] = $genreRow->name;
         }
         echo '        Genre: ' . implode(', ', $genreOutputArray) . PHP_EOL;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16166 -->
+<!-- EN-Revision: 17054 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.searching">
     <title>Einen Index durchsuchen</title>
@@ -384,10 +384,13 @@ public function highlight($words, $colour = '#66ffff');
 /**
  * Highlight text using specified View helper or callback function.
  *
- * @param string|array $words  Words to highlight. Words could be organized using the array or string.
- * @param callback $callback   Callback method, used to transform (highlighting) text.
- * @param array    $params     Array of additionall callback parameters passed through into it
- *                             (first non-optional parameter is an HTML fragment for highlighting)
+ * @param string|array $words  Words to highlight. Words could be organized
+                               using the array or string.
+ * @param callback $callback   Callback method, used to transform
+                               (highlighting) text.
+ * @param array    $params     Array of additionall callback parameters passed
+                               through into it (first non-optional parameter
+                               is an HTML fragment for highlighting)
  * @return string
  * @throws Zend_Search_Lucene_Exception
  */
@@ -487,7 +490,8 @@ interface Zend_Search_Lucene_Search_Highlighter_Interface
     /**
      * Highlight specified words (method is invoked once per subquery)
      *
-     * @param string|array $words  Words to highlight. They could be organized using the array or string.
+     * @param string|array $words  Words to highlight. They could be
+                                   organized using the array or string.
      */
     public function highlight($words);
 }

@@ -1,6 +1,5 @@
 <?php
 
-
 require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 if (!defined('PHPUnit_MAIN_METHOD')) {

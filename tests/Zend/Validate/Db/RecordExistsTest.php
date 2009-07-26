@@ -48,10 +48,31 @@ require_once 'Zend/Validate/Db/Abstract.php';
 require_once 'Zend/Validate/Db/RecordExists.php';
 
 /**
+ * Mock No Result Adapter
+ */
+require_once dirname(__FILE__) . '/_files/Db/MockNoResult.php';
+
+/**
+ * Mock Result Adapter
+ */
+require_once dirname(__FILE__) . '/_files/Db/MockHasResult.php';
+
+/**
  *
  */
 class Zend_Validate_Db_RecordExistsTest extends PHPUnit_Framework_TestCase
 {
+    
+    /**
+     * @var Zend_Db_Adapter_Abstract
+     */
+    protected $_adapterHasResult;
+    
+    /**
+     * @var Zend_Db_Adapter_Abstract
+     */
+    protected $_adapterNoResult;
+    
     /**
      * Set up test configuration
      *
@@ -59,29 +80,8 @@ class Zend_Validate_Db_RecordExistsTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        if (!extension_loaded('pdo_sqlite')) {
-            $this->markTestSkipped('No sqlite available');
-        }
-
-        $this->_db = new Zend_Db_Adapter_Pdo_Sqlite(
-            array('dbname' => ':memory:')
-        );
-
-        Zend_Db_Table_Abstract::setDefaultAdapter($this->_db);
-
-        $createTable = 'CREATE TABLE [users] ( '
-                   . '[id] INTEGER  NOT NULL PRIMARY KEY, '
-                   . '[field1] VARCHAR(20),'
-                   . '[field2] VARCHAR(20) )';
-        $this->_db->query($createTable);
-
-        $insert1 = 'INSERT INTO users (id, field1, field2) '
-                            . 'VALUES (1, "value1", "value2")';
-        $insert2 = 'INSERT INTO users (id, field1, field2) '
-                            . 'VALUES (2, "value3", "value4")';
-
-        $this->_db->query($insert1);
-        $this->_db->query($insert2);
+        $this->_adapterHasResult = new Db_MockHasResult();
+        $this->_adapterNoResult = new Db_MockNoResult();        
 
     }
 
@@ -92,6 +92,7 @@ class Zend_Validate_Db_RecordExistsTest extends PHPUnit_Framework_TestCase
      */
     public function testBasicFindsRecord()
     {
+        Zend_Db_Table_Abstract::setDefaultAdapter($this->_adapterHasResult);
         $validator = new Zend_Validate_Db_RecordExists('users', 'field1');
         $this->assertTrue($validator->isValid('value1'));
     }
@@ -103,6 +104,7 @@ class Zend_Validate_Db_RecordExistsTest extends PHPUnit_Framework_TestCase
      */
     public function testBasicFindsNoRecord()
     {
+        Zend_Db_Table_Abstract::setDefaultAdapter($this->_adapterNoResult);
         $validator = new Zend_Validate_Db_RecordExists('users', 'field1');
         $this->assertFalse($validator->isValid('nosuchvalue'));
     }
@@ -114,6 +116,7 @@ class Zend_Validate_Db_RecordExistsTest extends PHPUnit_Framework_TestCase
      */
     public function testExcludeWithArray()
     {
+        Zend_Db_Table_Abstract::setDefaultAdapter($this->_adapterHasResult);
         $validator = new Zend_Validate_Db_RecordExists('users', 'field1', array('field' => 'id', 'value' => 1));
         $this->assertTrue($validator->isValid('value3'));
     }
@@ -126,6 +129,7 @@ class Zend_Validate_Db_RecordExistsTest extends PHPUnit_Framework_TestCase
      */
     public function testExcludeWithArrayNoRecord()
     {
+        Zend_Db_Table_Abstract::setDefaultAdapter($this->_adapterNoResult);
         $validator = new Zend_Validate_Db_RecordExists('users', 'field1', array('field' => 'id', 'value' => 1));
         $this->assertFalse($validator->isValid('nosuchvalue'));
     }
@@ -138,6 +142,7 @@ class Zend_Validate_Db_RecordExistsTest extends PHPUnit_Framework_TestCase
      */
     public function testExcludeWithString()
     {
+        Zend_Db_Table_Abstract::setDefaultAdapter($this->_adapterHasResult);
         $validator = new Zend_Validate_Db_RecordExists('users', 'field1', 'id != 1');
         $this->assertTrue($validator->isValid('value3'));
     }
@@ -150,6 +155,7 @@ class Zend_Validate_Db_RecordExistsTest extends PHPUnit_Framework_TestCase
      */
     public function testExcludeWithStringNoRecord()
     {
+        Zend_Db_Table_Abstract::setDefaultAdapter($this->_adapterNoResult);
         $validator = new Zend_Validate_Db_RecordExists('users', 'field1', 'id != 1');
         $this->assertFalse($validator->isValid('nosuchvalue'));
     }
@@ -171,9 +177,65 @@ class Zend_Validate_Db_RecordExistsTest extends PHPUnit_Framework_TestCase
         }
     }
 
-    public function tearDown()
+    /**
+     * Test that schemas are supported and run without error
+     *
+     * @return void
+     */
+    public function testWithSchema()
     {
-        $dropTable = 'DROP TABLE [users]';
-        $this->_db->query($dropTable);
+        Zend_Db_Table_Abstract::setDefaultAdapter($this->_adapterHasResult);
+        $validator = new Zend_Validate_Db_RecordExists(array('table' => 'users',
+                                                               'schema' => 'my'),
+                                                         'field1');
+        $this->assertTrue($validator->isValid('value1'));
+    }
+    
+    /**
+     * Test that schemas are supported and run without error
+     *
+     * @return void
+     */
+    public function testWithSchemaNoResult()
+    {
+        Zend_Db_Table_Abstract::setDefaultAdapter($this->_adapterNoResult);
+        $validator = new Zend_Validate_Db_RecordExists(array('table' => 'users',
+                                                               'schema' => 'my'),
+                                                         'field1');
+        $this->assertFalse($validator->isValid('value1'));
+    }
+    
+    /**
+     * Test when adapter is provided
+     *
+     * @return void
+     */
+    public function testAdapterProvided()
+    {
+        //clear the default adapter to ensure provided one is used
+        Zend_Db_Table_Abstract::setDefaultAdapter(null);
+        try {
+            $validator = new Zend_Validate_Db_RecordExists('users', 'field1', null, $this->_adapterHasResult);
+            $this->assertTrue($validator->isValid('value1'));
+        } catch (Exception $e) {
+            $this->markTestFailed('Threw an exception when adapter was provided');
+        }
+    }
+    
+    /**
+     * Test when adapter is provided
+     *
+     * @return void
+     */
+    public function testAdapterProvidedNoResult()
+    {
+        //clear the default adapter to ensure provided one is used
+        Zend_Db_Table_Abstract::setDefaultAdapter(null);
+        try {
+            $validator = new Zend_Validate_Db_RecordExists('users', 'field1', null, $this->_adapterNoResult);
+            $this->assertFalse($validator->isValid('value1'));
+        } catch (Exception $e) {
+            $this->markTestFailed('Threw an exception when adapter was provided');
+        }
     }
 }

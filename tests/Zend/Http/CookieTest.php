@@ -291,11 +291,11 @@ class Zend_Http_CookieTest extends PHPUnit_Framework_TestCase
         $cookie = Zend_Http_Cookie::fromString($cookieStr);
         $this->assertEquals($match, $cookie->match($uri));
     }
-    
+
     static public function domainMatchTestProvider()
     {
         $uri = Zend_Uri::factory('http://www.foo.com/some/file.txt');
-        
+
         return array(
             array('foo=bar; domain=.example.com;', 'http://www.example.com/foo/bar.php', true),
             array('foo=bar; domain=.example.com;', 'http://example.com/foo/bar.php', true),

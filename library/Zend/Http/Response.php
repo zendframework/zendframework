@@ -561,15 +561,15 @@ class Zend_Http_Response
     {
         $decBody = '';
 
-        // If mbstring overloads substr and strlen functions, we have to 
+        // If mbstring overloads substr and strlen functions, we have to
         // override it's internal encoding
-        if (function_exists('mb_internal_encoding') && 
+        if (function_exists('mb_internal_encoding') &&
            ((int) ini_get('mbstring.func_overload')) & 2) {
 
             $mbIntEnc = mb_internal_encoding();
             mb_internal_encoding('ASCII');
         }
-        
+
         while (trim($body)) {
             if (! preg_match("/^([\da-fA-F]+)[^\r\n]*\r\n/sm", $body, $m)) {
                 require_once 'Zend/Http/Exception.php';
@@ -581,7 +581,7 @@ class Zend_Http_Response
             $decBody .= substr($body, $cut, $length);
             $body = substr($body, $cut + $length + 2);
         }
-        
+
         if (isset($mbIntEnc)) {
             mb_internal_encoding($mbIntEnc);
         }
@@ -627,21 +627,21 @@ class Zend_Http_Response
         }
 
         /**
-         * Some servers (IIS ?) send a broken deflate response, without the 
-         * RFC-required zlib header. 
-         * 
-         * We try to detect the zlib header, and if it does not exsit we 
+         * Some servers (IIS ?) send a broken deflate response, without the
+         * RFC-required zlib header.
+         *
+         * We try to detect the zlib header, and if it does not exsit we
          * teat the body is plain DEFLATE content.
-         * 
+         *
          * This method was adapted from PEAR HTTP_Request2 by (c) Alexey Borzov
-         * 
+         *
          * @link http://framework.zend.com/issues/browse/ZF-6040
          */
         $zlibHeader = unpack('n', substr($body, 0, 2));
         if ($zlibHeader[1] % 31 == 0) {
             return gzuncompress($body);
         } else {
-            return gzinflate($body); 
+            return gzinflate($body);
         }
     }
 

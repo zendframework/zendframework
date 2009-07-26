@@ -486,12 +486,12 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test that we properly calculate the content-length of multibyte-encoded 
+     * Test that we properly calculate the content-length of multibyte-encoded
      * request body
-     * 
-     * This may file in case that mbstring overloads the substr and strlen 
-     * functions, and the mbstring internal encoding is a multibyte encoding. 
-     * 
+     *
+     * This may file in case that mbstring overloads the substr and strlen
+     * functions, and the mbstring internal encoding is a multibyte encoding.
+     *
      * @link http://framework.zend.com/issues/browse/ZF-2098
      */
     public function testMultibyteRawPostDataZF2098()
@@ -500,18 +500,18 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
         $this->_client->setUri('http://example.com');
 
         $bodyFile = dirname(__FILE__) . '/_files/ZF2098-multibytepostdata.txt';
-        
+
         $this->_client->setRawData(file_get_contents($bodyFile), 'text/plain');
         $this->_client->request('POST');
         $request = $this->_client->getLastRequest();
-        
+
         if (! preg_match('/^content-length:\s+(\d+)/mi', $request, $match)) {
             $this->fail("Unable to find content-length header in request");
         }
-        
+
         $this->assertEquals(filesize($bodyFile), (int) $match[1]);
     }
-    
+
     /**
      * Data providers
      */

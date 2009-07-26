@@ -240,7 +240,7 @@ class Zend_Http_Cookie
         if (! self::matchCookieDomain($this->getDomain(), $uri->getHost())) {
             return false;
         }
-        
+
         // Check that path matches using prefix match
         if (! self::matchCookiePath($this->getPath(), $uri->getPath())) {
             return false;
@@ -350,12 +350,12 @@ class Zend_Http_Cookie
 
     /**
      * Check if a cookie's domain matches a host name.
-     * 
+     *
      * Used by Zend_Http_Cookie and Zend_Http_CookieJar for cookie matching
-     * 
+     *
      * @param  string $cookieDomain
      * @param  string $host
-     * 
+     *
      * @return boolean
      */
     public static function matchCookieDomain($cookieDomain, $host)
@@ -364,29 +364,29 @@ class Zend_Http_Cookie
             require_once 'Zend/Http/Exception.php';
             throw new Zend_Http_Exception("\$cookieDomain is expected to be a cookie domain");
         }
-        
+
         if (! $host) {
             require_once 'Zend/Http/Exception.php';
             throw new Zend_Http_Exception("\$host is expected to be a host name");
         }
-        
+
         $cookieDomain = strtolower($cookieDomain);
         $host = strtolower($host);
-        
+
         if ($cookieDomain[0] == '.') {
             $cookieDomain = substr($cookieDomain, 1);
         }
-        
+
         // Check for either exact match or suffix match
-        return ($cookieDomain == $host || 
+        return ($cookieDomain == $host ||
                 preg_match("/\.$cookieDomain$/", $host));
     }
 
     /**
      * Check if a cookie's path matches a URL path
-     * 
+     *
      * Used by Zend_Http_Cookie and Zend_Http_CookieJar for cookie matching
-     * 
+     *
      * @param  string $cookiePath
      * @param  string $path
      * @return boolean
@@ -397,12 +397,12 @@ class Zend_Http_Cookie
             require_once 'Zend/Http/Exception.php';
             throw new Zend_Http_Exception("\$cookiePath is expected to be a cookie path");
         }
-        
+
         if (! $path) {
             require_once 'Zend/Http/Exception.php';
             throw new Zend_Http_Exception("\$path is expected to be a host name");
         }
-        
-        return (strpos($path, $cookiePath) === 0);        
+
+        return (strpos($path, $cookiePath) === 0);
     }
 }

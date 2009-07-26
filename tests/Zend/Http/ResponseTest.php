@@ -59,14 +59,14 @@ class Zend_Http_ResponseTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('0b13cb193de9450aa70a6403e2c9902f', md5($res->getBody()));
         $this->assertEquals('ad62c21c3aa77b6a6f39600f6dd553b8', md5($res->getRawBody()));
     }
-    
+
     /**
-     * Make sure wer can handle non-RFC complient "deflate" responses. 
-     * 
+     * Make sure wer can handle non-RFC complient "deflate" responses.
+     *
      * Unlike stanrdard 'deflate' response, those do not contain the zlib header
-     * and trailer. Unfortunately some buggy servers (read: IIS) send those and 
+     * and trailer. Unfortunately some buggy servers (read: IIS) send those and
      * we need to support them.
-     * 
+     *
      * @link http://framework.zend.com/issues/browse/ZF-6040
      */
     public function testNonStandardDeflateResponseZF6040()
@@ -293,13 +293,13 @@ class Zend_Http_ResponseTest extends PHPUnit_Framework_TestCase
         $body = Zend_Http_Response::extractBody($this->readResponse('response_leadingws'));
         $this->assertEquals($body, "\r\n\t  \n\r\tx", 'Extracted body is not identical to expected body');
     }
-    
+
     /**
      * Test that parsing a multibyte-encoded chunked response works.
-     * 
-     * This can potentially fail on different PHP environments - for example 
+     *
+     * This can potentially fail on different PHP environments - for example
      * when mbstring.func_overload is set to overload strlen().
-     * 
+     *
      */
     public function testMultibyteChunkedResponse()
     {

@@ -339,14 +339,14 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
 
                     // Convert the hexadecimal value to plain integer
                     $chunksize = hexdec($chunksize);
-                    
+
                     // Read next chunk
                     $read_to = ftell($this->socket) + $chunksize;
-                    
+
                     do {
                         $current_pos = ftell($this->socket);
                         if ($current_pos >= $read_to) break;
-                        
+
                         $line = @fread($this->socket, $read_to - $current_pos);
                         if ($line === false || strlen($line) === 0) {
                             $this->_checkSocketReadTimeout();
@@ -374,17 +374,17 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
 
             $current_pos = ftell($this->socket);
             $chunk = '';
-            
+
             for ($read_to = $current_pos + $headers['content-length'];
                  $read_to > $current_pos;
                  $current_pos = ftell($this->socket)) {
-                     
+
                 $chunk = @fread($this->socket, $read_to - $current_pos);
                 if ($chunk === false || strlen($chunk) === 0) {
                     $this->_checkSocketReadTimeout();
                     break;
-                } 
-                
+                }
+
                 $response .= $chunk;
 
                 // Break if the connection ended prematurely

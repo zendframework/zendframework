@@ -303,7 +303,7 @@ class Zend_Http_CookieJar implements Countable, IteratorAggregate
      * @param string $domain
      * @return array
      */
-    protected function _matchDomain($domain) 
+    protected function _matchDomain($domain)
     {
         $ret = array();
 
@@ -323,7 +323,7 @@ class Zend_Http_CookieJar implements Countable, IteratorAggregate
      * @param string $path
      * @return array
      */
-    protected function _matchPath($domains, $path) 
+    protected function _matchPath($domains, $path)
     {
         $ret = array();
 
@@ -333,7 +333,7 @@ class Zend_Http_CookieJar implements Countable, IteratorAggregate
                     if (! isset($ret[$dom])) {
                         $ret[$dom] = array();
                     }
-                    
+
                     $ret[$dom][$cpath] = $paths_array[$cpath];
                 }
             }

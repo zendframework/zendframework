@@ -624,7 +624,7 @@ $result = $cache->foobar2('1', '2');
                               </entry>
                          </row>
                          <row>
-                               <entry><emphasis>default_options</emphasis></entry>
+                              <entry><emphasis>default_options</emphasis></entry>
                               <entry><type>Array</type></entry>
                               <entry><methodname>array(...see below...)</methodname></entry>
                               <entry>
@@ -632,14 +632,15 @@ $result = $cache->foobar2('1', '2');
                                   <itemizedlist>
                                       <listitem>
                                           <para>
-                                              <emphasis>(boolean, true by default) cache</emphasis>:
-                                              cache is on if <constant>TRUE</constant>
+                                              <emphasis>(boolean, <constant>TRUE</constant> by
+                                                  default) cache</emphasis>: cache is on if
+                                              <constant>TRUE</constant>
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
-                                              <emphasis>(boolean, false by default)
-                                                  cache_with_get_variables</emphasis>: if
+                                              <emphasis>(boolean, <constant>FALSE</constant> by
+                                                  default) cache_with_get_variables</emphasis>: if
                                               <constant>TRUE</constant>,
                                               cache is still on even if there are some variables in
                                               <varname>$_GET</varname> array
@@ -647,8 +648,8 @@ $result = $cache->foobar2('1', '2');
                                       </listitem>
                                       <listitem>
                                           <para>
-                                              <emphasis>(boolean, false by default)
-                                                  cache_with_post_variables</emphasis>: if
+                                              <emphasis>(boolean, <constant>FALSE</constant> by
+                                                  default) cache_with_post_variables</emphasis>: if
                                               <constant>TRUE</constant>,
                                               cache is still on even if there are some variables in
                                               <varname>$_POST</varname> array
@@ -656,52 +657,53 @@ $result = $cache->foobar2('1', '2');
                                       </listitem>
                                       <listitem>
                                           <para>
-                                              <emphasis>(boolean, false by default)
-                                                  cache_with_session_variables</emphasis>: if
-                                              <constant>TRUE</constant>,
+                                              <emphasis>(boolean, <constant>FALSE</constant> by
+                                                  default) cache_with_session_variables</emphasis>:
+                                              if <constant>TRUE</constant>,
                                               cache is still on even if there are some variables in
                                               <varname>$_SESSION</varname> array
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
-                                              <emphasis>(boolean, false by default)
-                                                  cache_with_files_variables</emphasis>: if
-                                              <constant>TRUE</constant>,
+                                              <emphasis>(boolean, <constant>FALSE</constant> by
+                                                  default) cache_with_files_variables</emphasis>:
+                                              if <constant>TRUE</constant>,
                                               cache is still on even if there are some variables in
                                               <varname>$_FILES</varname> array
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
-                                              <emphasis>(boolean, false by default)
-                                                  cache_with_cookie_variables</emphasis>: if
-                                              <constant>TRUE</constant>,
+                                              <emphasis>(boolean, <constant>FALSE</constant> by
+                                                  default) cache_with_cookie_variables</emphasis>:
+                                              if <constant>TRUE</constant>,
                                               cache is still on even if there are some variables in
                                               <varname>$_COOKIE</varname> array
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
-                                              <emphasis>(boolean, true by default)
-                                                   make_id_with_get_variables</emphasis>: if
-                                              <constant>TRUE</constant>,
+                                              <emphasis>(boolean, <constant>TRUE</constant> by
+                                                  default) make_id_with_get_variables</emphasis>:
+                                              if <constant>TRUE</constant>,
                                               the cache id will be dependent of the content of the
                                               <varname>$_GET</varname> array
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
-                                              <emphasis>(boolean, true by default)
-                                                  make_id_with_post_variables</emphasis>: if
-                                              <constant>TRUE</constant>,
+                                              <emphasis>(boolean, <constant>TRUE</constant> by
+                                                  default) make_id_with_post_variables</emphasis>:
+                                              if <constant>TRUE</constant>,
                                               the cache id will be dependent of the content of the
                                               <varname>$_POST</varname> array
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
-                                              <emphasis>(boolean, true by default)
+                                              <emphasis>(boolean, <constant>TRUE</constant> by
+                                                  default)
                                                   make_id_with_session_variables</emphasis>: if
                                               <constant>TRUE</constant>,
                                               the cache id will be dependent of the content of
@@ -710,16 +712,17 @@ $result = $cache->foobar2('1', '2');
                                       </listitem>
                                       <listitem>
                                           <para>
-                                              <emphasis>(boolean, true by default)
-                                                  make_id_with_files_variables</emphasis>: if
-                                              <constant>TRUE</constant>,
+                                              <emphasis>(boolean, <constant>TRUE</constant> by
+                                                  default) make_id_with_files_variables</emphasis>:
+                                              if <constant>TRUE</constant>,
                                               the cache id will be dependent of the content of the
                                               <varname>$_FILES</varname> array
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
-                                              <emphasis>(boolean, true by default)
+                                              <emphasis>(boolean, <constant>TRUE</constant> by
+                                                  default)
                                                   make_id_with_cookie_variables</emphasis>: if
                                               <constant>TRUE</constant>,
                                               the cache id will be dependent of the content of
@@ -728,22 +731,24 @@ $result = $cache->foobar2('1', '2');
                                       </listitem>
                                       <listitem>
                                           <para>
-                                              <emphasis>(int, false by default)
-                                                  specific_lifetime</emphasis>: if not
+                                              <emphasis>(int, <constant>FALSE</constant> by
+                                                  default) specific_lifetime</emphasis>: if not
                                               <constant>FALSE</constant>, the
                                               given lifetime will be used for the choosen regexp
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
-                                              <emphasis>(array, array() by default) tags</emphasis>:
-                                              tags for the cache record
+                                              <emphasis>(array, <methodname>array()</methodname> by
+                                                  default) tags</emphasis>: tags for the cache
+                                              record
                                           </para>
                                       </listitem>
                                       <listitem>
                                           <para>
-                                              <emphasis>(int, null by default) priority</emphasis>:
-                                              priority (if the backend supports it)
+                                              <emphasis>(int, <constant>NULL</constant> by default)
+                                                  priority</emphasis>: priority (if the backend
+                                              supports it)
                                           </para>
                                       </listitem>
                                   </itemizedlist>

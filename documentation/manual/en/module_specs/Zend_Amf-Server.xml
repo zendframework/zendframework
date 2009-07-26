@@ -73,7 +73,7 @@ $server->addDirectory(dirname(__FILE__) .'/../package/');
             When calling remote services your source name can have underscore ("_") and dot (".")
             directory delimiters. When an underscore is used <acronym>PEAR</acronym> and Zend
             Framework class naming conventions will be respected. This means that if you call the
-            service <classname>com_Foo_Bar</classname> the server will look for the file
+            service com_Foo_Bar the server will look for the file
             <filename>Bar.php</filename> in the each of the included paths at
             <filename>com/Foo/Bar.php</filename>. If the dot notation is used for your remote
             service such as <filename>com.Foo.Bar</filename> each included path will have

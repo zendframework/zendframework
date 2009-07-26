@@ -124,7 +124,7 @@ class NewsController extends Zend_Controller_Action
         </para></listitem>
 
         <listitem><para>
-                Via <acronym>GET</acronym> parameter: <command>/news/list?format=xml</command>
+                Via <constant>GET</constant> parameter: <command>/news/list?format=xml</command>
         </para></listitem>
     </itemizedlist>
 

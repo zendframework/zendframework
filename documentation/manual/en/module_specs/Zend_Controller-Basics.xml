@@ -81,8 +81,8 @@
                     <classname>Zend_Controller_Router_Rewrite</classname>, takes a
                     <acronym>URI</acronym> endpoint as specified in
                     <classname>Zend_Controller_Request_Http</classname> and decomposes it
-                    into a controller, action, and parameters based on the path
-                    information in the <acronym>URL</acronym>. As an example, the <acronym>URL</acronym>
+                    into a controller, action, and parameters based on the path information
+                    in the <acronym>URL</acronym>. As an example, the <acronym>URL</acronym>
                     <filename>http://localhost/foo/bar/key/value</filename> would be
                     decoded to use the <emphasis>foo</emphasis> controller,
                     <emphasis>bar</emphasis> action, and specify a parameter

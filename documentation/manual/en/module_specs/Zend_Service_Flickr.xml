@@ -11,7 +11,7 @@
             <ulink url="http://www.flickr.com/services/api/">Flickr API Documentation</ulink>.
         </para>
         <para>
-            In the following example, we use the <code>tagSearch()</code> method to search for photos having "php"
+            In the following example, we use the <methodname>tagSearch()</methodname> method to search for photos having "php"
             in the tags.
         </para>
         <example id="zend.service.flickr.introduction.example-1">
@@ -29,7 +29,7 @@ foreach ($results as $result) {
         <note>
             <title>Optional parameter</title>
             <para>
-                <code>tagSearch()</code> accepts an optional second parameter as an array of options.
+                <methodname>tagSearch()</methodname> accepts an optional second parameter as an array of options.
             </para>
         </note>
     </sect2>
@@ -41,19 +41,19 @@ foreach ($results as $result) {
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>userSearch()</code>: Accepts a string query of space-delimited tags and an optional second
+                    <methodname>userSearch()</methodname>: Accepts a string query of space-delimited tags and an optional second
                     parameter as an array of search options, and returns a set of photos as a
                     <classname>Zend_Service_Flickr_ResultSet</classname> object.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>getIdByUsername()</code>: Returns a string user ID associated with the given username string.
+                    <methodname>getIdByUsername()</methodname>: Returns a string user ID associated with the given username string.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>getIdByEmail()</code>: Returns a string user ID associated with the given email address
+                    <methodname>getIdByEmail()</methodname>: Returns a string user ID associated with the given email address
                     string.
                 </para>
             </listitem>
@@ -62,7 +62,7 @@ foreach ($results as $result) {
             <title>Finding a Flickr User's Public Photos by E-Mail Address</title>
             <para>
                 In this example, we have a Flickr user's e-mail address, and we search for the user's public photos by
-                using the <code>userSearch()</code> method:
+                using the <methodname>userSearch()</methodname> method:
             </para>
             <programlisting language="php"><![CDATA[
 $flickr = new Zend_Service_Flickr('MY_API_KEY');
@@ -79,7 +79,7 @@ foreach ($results as $result) {
         <title>Finding photos From a Group Pool</title>
         <para>
             <classname>Zend_Service_Flickr</classname> allows to retrieve a group's pool photos based
-            on the group ID. Use the <code>groupPoolGetPhotos()</code> method:
+            on the group ID. Use the <methodname>groupPoolGetPhotos()</methodname> method:
         </para>
         <example id="zend.service.flickr.grouppoolgetphotos.example-1">
             <title>Retrieving a Group's Pool Photos by Group ID</title>
@@ -96,7 +96,7 @@ $flickr = new Zend_Service_Flickr('MY_API_KEY');
         <note>
             <title>Optional parameter</title>
             <para>
-                <code>groupPoolGetPhotos()</code> accepts an optional second parameter as an array of options.
+                <methodname>groupPoolGetPhotos()</methodname> accepts an optional second parameter as an array of options.
             </para>
         </note>
     </sect2>
@@ -104,7 +104,7 @@ $flickr = new Zend_Service_Flickr('MY_API_KEY');
         <title>Retrieving Flickr Image Details</title>
         <para>
             <classname>Zend_Service_Flickr</classname> makes it quick and easy to get an image's details based on a given image
-            ID. Just use the <code>getImageDetails()</code> method, as in the following example:
+            ID. Just use the <methodname>getImageDetails()</methodname> method, as in the following example:
         </para>
         <example id="zend.service.flickr.getimagedetails.example-1">
             <title>Retrieving Flickr Image Details</title>
@@ -124,7 +124,7 @@ echo "<a href=\"$image->clickUri\">Click for Image</a>\n";
     <sect2 id="zend.service.flickr.classes">
         <title>Zend_Service_Flickr Result Classes</title>
         <para>
-            The following classes are all returned by <code>tagSearch()</code> and <code>userSearch()</code>:
+            The following classes are all returned by <methodname>tagSearch()</methodname> and <methodname>userSearch()</methodname>:
             <itemizedlist>
                 <listitem><para><link linkend="zend.service.flickr.classes.resultset"><classname>Zend_Service_Flickr_ResultSet</classname></link></para></listitem>
                 <listitem><para><link linkend="zend.service.flickr.classes.result"><classname>Zend_Service_Flickr_Result</classname></link></para></listitem>
@@ -137,7 +137,7 @@ echo "<a href=\"$image->clickUri\">Click for Image</a>\n";
             <note>
                 <para>
                     Implements the <code>SeekableIterator</code> interface for easy iteration (e.g., using
-                    <code>foreach</code>), as well as direct access to a specific result using <code>seek()</code>.
+                    <code>foreach</code>), as well as direct access to a specific result using <methodname>seek()</methodname>.
                 </para>
             </note>
             <sect4 id="zend.service.flickr.classes.resultset.properties">

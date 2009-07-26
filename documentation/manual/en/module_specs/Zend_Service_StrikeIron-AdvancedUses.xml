@@ -20,7 +20,7 @@
 
       <para>
         To try a StrikeIron service that does not have a wrapper class available,
-        give the <code>wsdl</code> option to <code>getService()</code>
+        give the <code>wsdl</code> option to <methodname>getService()</methodname>
         instead of the <code>class</code> option:
 
         <programlisting language="php"><![CDATA[
@@ -68,7 +68,7 @@ echo $result->listingName;
 
       <para>
         Every StrikeIron client (subclass of <classname>Zend_Service_StrikeIron_Base</classname>)
-        contains a <code>getSoapClient()</code> method to return the underlying instance of
+        contains a <methodname>getSoapClient()</methodname> method to return the underlying instance of
         <code>SOAPClient</code> used to communicate with StrikeIron.
       </para>
 
@@ -81,12 +81,12 @@ echo $result->listingName;
       </para>
 
       <para>
-        To view a SOAP transaction, call the <code>getSoapClient()</code> method
+        To view a SOAP transaction, call the <methodname>getSoapClient()</methodname> method
         to get the <code>SOAPClient</code> instance and then call the appropriate
         methods like
-        <ulink url="http://www.php.net/manual/en/function.soap-soapclient-getlastrequest.php"><code>__getLastRequest()</code></ulink>
+        <ulink url="http://www.php.net/manual/en/function.soap-soapclient-getlastrequest.php"><methodname>__getLastRequest()</methodname></ulink>
         and
-        <ulink url="http://www.php.net/manual/en/function.soap-soapclient-getlastresponse.php"><code>__getLastRequest()</code></ulink>:
+        <ulink url="http://www.php.net/manual/en/function.soap-soapclient-getlastresponse.php"><methodname>__getLastRequest()</methodname></ulink>:
 
         <programlisting language="php"><![CDATA[
 $strikeIron =

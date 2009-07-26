@@ -147,17 +147,17 @@ $s3 = new Zend_Service_Amazon_S3();
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>createBucket()</code> creates a new bucket.
+                    <methodname>createBucket()</methodname> creates a new bucket.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>cleanBucket()</code> removes all objects that are contained in a bucket.
+                    <methodname>cleanBucket()</methodname> removes all objects that are contained in a bucket.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>removeBucket()</code> removes the bucket from the system. The bucket should be
+                    <methodname>removeBucket()</methodname> removes the bucket from the system. The bucket should be
                     empty to be removed.
                 </para>
         <example id="zend.service.amazon.s3.buckets.remove.example">
@@ -174,7 +174,7 @@ $s3->removeBucket("my-own-bucket");
             </listitem>
             <listitem>
                 <para>
-                    <code>getBuckets()</code> returns the list of the names of all buckets belonging to the
+                    <methodname>getBuckets()</methodname> returns the list of the names of all buckets belonging to the
                     user.
                 </para>
         <example id="zend.service.amazon.s3.buckets.list.example">
@@ -193,7 +193,7 @@ foreach($list as $bucket) {
             </listitem>
             <listitem>
                 <para>
-                    <code>isBucketAvailable()</code> check if the bucket exists and returns true
+                    <methodname>isBucketAvailable()</methodname> check if the bucket exists and returns true
                     if it does.
                 </para>
             </listitem>
@@ -228,7 +228,7 @@ foreach($list as $bucket) {
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>putObject($object, $data, $meta)</code> created an object with name <code>$object</code>
+                    <methodname>putObject($object, $data, $meta)</methodname> created an object with name <code>$object</code>
                     (should contain the bucket name as prefix!) having <code>$data</code> as its content.
                 </para>
                 <para>Optional <code>$meta</code> parameter is the array of metadata, which currently supports the
@@ -297,17 +297,17 @@ echo "Go to http://s3.amazonaws.com/my-own-bucket/Pictures/Me.png to see me!\n";
             </listitem>
             <listitem>
                 <para>
-                    <code>getObject($object)</code> retrieves object data from the storage by name.
+                    <methodname>getObject($object)</methodname> retrieves object data from the storage by name.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>removeObject($object)</code> removes the object from the storage.
+                    <methodname>removeObject($object)</methodname> removes the object from the storage.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>getInfo($object)</code> retrieves the metadata information about the object. The
+                    <methodname>getInfo($object)</methodname> retrieves the metadata information about the object. The
                     function will return array with metadata information. Some of the useful keys are:
                         <variablelist>
                         <varlistentry><term><code>type</code></term>
@@ -336,7 +336,7 @@ echo "Go to http://s3.amazonaws.com/my-own-bucket/Pictures/Me.png to see me!\n";
             </listitem>
             <listitem>
                 <para>
-                    <code>getObjectsByBucket($bucket)</code> returns the list of the object keys, contained
+                    <methodname>getObjectsByBucket($bucket)</methodname> returns the list of the object keys, contained
                     in the bucket.
                 </para>
         <example id="zend.service.amazon.s3.objects.list.example">
@@ -357,12 +357,12 @@ foreach($list as $name) {
             </listitem>
             <listitem>
                 <para>
-                    <code>isObjectAvailable($object)</code> checks if the object with given name exists.
+                    <methodname>isObjectAvailable($object)</methodname> checks if the object with given name exists.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>putFile($path, $object, $meta)</code> puts the content of the file in <code>$path</code>
+                    <methodname>putFile($path, $object, $meta)</methodname> puts the content of the file in <code>$path</code>
                     into the object named <code>$object</code>.
                 </para>
                 <para>

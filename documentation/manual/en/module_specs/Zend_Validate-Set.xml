@@ -42,7 +42,7 @@
             This validator is instantiated with a barcode type against which you wish to validate a
             barcode value. It currently supports "<code>UPC-A</code>" (Universal Product Code) and
             "<code>EAN-13</code>" (European Article Number) barcode types, and the
-            <code>isValid()</code> method returns true if and only if the input successfully
+            <methodname>isValid()</methodname> method returns true if and only if the input successfully
             validates against the barcode validation algorithm. You should remove all characters
             other than the digits zero through nine (0-9) from the input value before passing it on
             to the validator.
@@ -250,9 +250,9 @@ if ($validator->isValid(1)) { // token invalid
         <para>
             Returns <constant>TRUE</constant> if and only if the string length of <code>$value</code> is at
             least a minimum and no greater than a maximum (when the max option is not
-            <constant>NULL</constant>). The <code>setMin()</code> method throws an exception if the minimum
+            <constant>NULL</constant>). The <methodname>setMin()</methodname> method throws an exception if the minimum
             length is set to a value greater than the set maximum length, and the
-            <code>setMax()</code> method throws an exception if the maximum length is set to a
+            <methodname>setMax()</methodname> method throws an exception if the maximum length is set to a
             value less than the set minimum length. This class supports UTF-8 and other
             character encodings, based on the current value of <ulink
                 url="http://www.php.net/manual/en/ref.iconv.php#iconv.configuration"><code>iconv.internal_encoding</code></ulink>.

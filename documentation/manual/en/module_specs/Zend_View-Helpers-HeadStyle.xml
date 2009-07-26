@@ -68,18 +68,18 @@ $this->headStyle()->appendStyle($styles, array('conditional' => 'lt IE 7');
     </para>
 
     <para>
-        Finally, you can also use the <code>headStyle()</code> method to
+        Finally, you can also use the <methodname>headStyle()</methodname> method to
         quickly add declarations elements; the signature for this is
-        <code>headStyle($content$placement = 'APPEND', $attributes = array())</code>.
+        <methodname>headStyle($content$placement = 'APPEND', $attributes = array())</methodname>.
         <code>$placement</code> should be either 'APPEND', 'PREPEND', or 'SET'.
     </para>
 
     <para>
-        <code>HeadStyle</code> overrides each of <code>append()</code>,
-        <code>offsetSet()</code>, <code>prepend()</code>, and <code>set()</code>
+        <code>HeadStyle</code> overrides each of <methodname>append()</methodname>,
+        <methodname>offsetSet()</methodname>, <methodname>prepend()</methodname>, and <methodname>set()</methodname>
         to enforce usage of the special methods as listed above. Internally, it
         stores each item as a <code>stdClass</code> token, which it later
-        serializes using the <code>itemToString()</code> method. This allows you
+        serializes using the <methodname>itemToString()</methodname> method. This allows you
         to perform checks on the items in the stack, and optionally modify these
         items by simply modifying the object returned.
     </para>
@@ -160,13 +160,13 @@ body {
                     The style declarations will be appended to the stack. If you
                     wish for them to replace the stack or be added to the top,
                     you will need to pass 'SET' or 'PREPEND', respectively, as
-                    the first argument to <code>captureStart()</code>.
+                    the first argument to <methodname>captureStart()</methodname>.
             </para></listitem>
 
             <listitem><para>
                     If you wish to specify any additional attributes for the
                     <code>&lt;style&gt;</code> tag, pass them in an array as
-                    the second argument to <code>captureStart()</code>.
+                    the second argument to <methodname>captureStart()</methodname>.
             </para></listitem>
         </itemizedlist>
     </example>

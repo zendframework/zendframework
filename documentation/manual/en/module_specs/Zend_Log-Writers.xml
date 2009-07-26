@@ -149,7 +149,7 @@ var_dump($mock->events[0]);
 
     <para>
       There is no composite Writer object. However, a Log instance can write
-      to any number of Writers. To do this, use the <code>addWriter()</code>
+      to any number of Writers. To do this, use the <methodname>addWriter()</methodname>
       method:
 
       <programlisting language="php"><![CDATA[

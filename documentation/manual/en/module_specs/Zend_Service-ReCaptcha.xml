@@ -40,7 +40,7 @@ $recaptcha = new Zend_Service_ReCaptcha($pubKey, $privKey);
 ]]></programlisting>
 
         <para>
-            To render the reCAPTCHA, simply call the <code>getHTML()</code>
+            To render the reCAPTCHA, simply call the <methodname>getHTML()</methodname>
             method:
         </para>
 
@@ -51,7 +51,7 @@ echo $recaptcha->getHTML();
         <para>
             When the form is submitted, you should receive two fields,
             'recaptcha_challenge_field' and 'recaptcha_response_field'. Pass
-            these to the ReCaptcha object's <code>verify()</code> method:
+            these to the ReCaptcha object's <methodname>verify()</methodname> method:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -64,7 +64,7 @@ $result = $recaptcha->verify(
         <para>
             Once you have the result, test against it to see if it is valid. The
             result is a <classname>Zend_Service_ReCaptcha_Response</classname> object,
-            which provides an <code>isValid()</code> method.
+            which provides an <methodname>isValid()</methodname> method.
         </para>
 
         <programlisting language="php"><![CDATA[

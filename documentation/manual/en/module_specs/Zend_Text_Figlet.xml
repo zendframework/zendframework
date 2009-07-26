@@ -25,7 +25,7 @@
         <para>
             <classname>Zend_Text_Figlet</classname> expects your strings to be UTF-8 encoded
             by default. If this is not the case, you can supply the character
-            encoding as second parameter to the <code>render()</code> method.
+            encoding as second parameter to the <methodname>render()</methodname> method.
         </para>
     </note>
     <para>

@@ -3,10 +3,10 @@
 <sect1 id="zend.mail.attachments">
     <title>Attachments</title>
     <para>
-        Files can be attached to an e-mail using the <code>createAttachment()</code> method. The default behavior
+        Files can be attached to an e-mail using the <methodname>createAttachment()</methodname> method. The default behavior
         of <classname>Zend_Mail</classname> is to assume the attachment is a binary object (application/octet-stream),
         that it should be transferred with base64 encoding, and that it is handled as an attachment. These assumptions can be
-        overridden by passing more parameters to <code>createAttachment()</code>:
+        overridden by passing more parameters to <methodname>createAttachment()</methodname>:
     </para>
     <example id="zend.mail.attachments.example-1">
         <title>E-Mail Messages with Attachments</title>
@@ -22,7 +22,7 @@ $mail->createAttachment($myImage,
     </example>
     <para>
         If you want more control over the MIME part generated for this attachment you can use the return value
-        of <code>createAttachment()</code> to modify its attributes. The <code>createAttachment()</code> method
+        of <methodname>createAttachment()</methodname> to modify its attributes. The <methodname>createAttachment()</methodname> method
         returns a <classname>Zend_Mime_Part</classname> object:
     </para>
     <programlisting language="php"><![CDATA[
@@ -37,7 +37,7 @@ $at->filename    = 'test.gif';
 $mail->send();
 ]]></programlisting>
     <para>
-        An alternative is to create an instance of <classname>Zend_Mime_Part</classname> and add it with <code>addAttachment()</code>:
+        An alternative is to create an instance of <classname>Zend_Mime_Part</classname> and add it with <methodname>addAttachment()</methodname>:
     </para>
     <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();

@@ -176,16 +176,16 @@
                     flag true, you can indicate that an entire form should be
                     treated as an array. By default, the form's name will be
                     used as the name of the array, unless
-                    <code>setElementsBelongTo()</code> has been called. If the
+                    <methodname>setElementsBelongTo()</methodname> has been called. If the
                     form has no specified name, or if
-                    <code>setElementsBelongTo()</code> has not been set, this
+                    <methodname>setElementsBelongTo()</methodname> has not been set, this
                     flag will be ignored (as there is no array name to which
                     the elements may belong).
                 </para>
 
                 <para>
                     You may determine if a form is being treated as an array
-                    using the <code>isArray()</code> accessor.
+                    using the <methodname>isArray()</methodname> accessor.
                 </para>
             </listitem>
 
@@ -193,7 +193,7 @@
                     <classname>Zend_Form::setElementsBelongTo($array)</classname>:
                     Using this method, you can specify the name of an array to
                     which all elements of the form belong. You can determine the
-                    name using the <code>getElementsBelongTo()</code> accessor.
+                    name using the <methodname>getElementsBelongTo()</methodname> accessor.
             </para></listitem>
         </itemizedlist>
 
@@ -203,7 +203,7 @@
             <classname>Zend_Form_Element::setBelongsTo()</classname> method.
             To discover what this value is -- whether set explicitly or
             implicitly via the form -- you may use the
-            <code>getBelongsTo()</code> accessor.
+            <methodname>getBelongsTo()</methodname> accessor.
         </para>
     </sect2>
 
@@ -572,11 +572,11 @@ class RegistrationController extends Zend_Controller_Action
 
             <para>
                 Now, let's figure out how to process and display the various sub
-                forms. We can use <code>getCurrentSubForm()</code> to determine
+                forms. We can use <methodname>getCurrentSubForm()</methodname> to determine
                 if any sub forms have been submitted (false return values
                 indicate none have been displayed or submitted), and
-                <code>getNextSubForm()</code> to retrieve a form to display. We
-                can then use the form's <code>prepareSubForm()</code> method to
+                <methodname>getNextSubForm()</methodname> to retrieve a form to display. We
+                can then use the form's <methodname>prepareSubForm()</methodname> method to
                 ensure the form is ready for display.
             </para>
 

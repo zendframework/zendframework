@@ -9,8 +9,8 @@
         <title>Introduction</title>
 
         <para>
-            When you run a query against a Table class using the <code>find()</code> or
-            <code>fetchAll()</code> methods, the result is returned in an object of type
+            When you run a query against a Table class using the <methodname>find()</methodname> or
+            <methodname>fetchAll()</methodname> methods, the result is returned in an object of type
             <classname>Zend_Db_Table_Rowset_Abstract</classname>. A Rowset contains a collection of
             objects descending from <classname>Zend_Db_Table_Row_Abstract</classname>. You can
             iterate through the Rowset and access individual Row objects, reading or modifying data
@@ -24,8 +24,8 @@
         <title>Fetching a Rowset</title>
 
         <para>
-            <classname>Zend_Db_Table_Abstract</classname> provides methods <code>find()</code> and
-            <code>fetchAll()</code>, each of which returns an object of type
+            <classname>Zend_Db_Table_Abstract</classname> provides methods <methodname>find()</methodname> and
+            <methodname>fetchAll()</methodname>, each of which returns an object of type
             <classname>Zend_Db_Table_Rowset_Abstract</classname>.
         </para>
 
@@ -55,7 +55,7 @@ $rowset = $bugs->fetchAll("bug_status = 'NEW'");
             A legitimate query returns zero rows when no rows in the database match the query
             conditions. Therefore, a Rowset object might contain zero Row objects. Since
             <classname>Zend_Db_Table_Rowset_Abstract</classname> implements the
-            <code>Countable</code> interface, you can use <code>count()</code> to determine the
+            <code>Countable</code> interface, you can use <methodname>count()</methodname> to determine the
             number of Rows in the Rowset.
         </para>
 
@@ -82,7 +82,7 @@ if ($rowCount > 0) {
             <title>Reading a Single Row from a Rowset</title>
 
             <para>
-                The simplest way to access a Row from a Rowset is to use the <code>current()</code>
+                The simplest way to access a Row from a Rowset is to use the <methodname>current()</methodname>
                 method. This is particularly appropriate when the Rowset contains exactly one Row.
             </para>
 
@@ -95,7 +95,7 @@ $row    = $rowset->current();
         </example>
 
         <para>
-            If the Rowset contains zero rows, <code>current()</code> returns
+            If the Rowset contains zero rows, <methodname>current()</methodname> returns
             PHP's <constant>NULL</constant> value.
         </para>
 
@@ -141,10 +141,10 @@ foreach ($rowset as $row) {
 
             <para>
                 <code>SeekableIterator</code> allows you to seek to a position that you would like
-                the iterator to jump to. Simply use the <code>seek()</code> method for that. Pass it
+                the iterator to jump to. Simply use the <methodname>seek()</methodname> method for that. Pass it
                 an integer representing the number of the Row you would like your Rowset to point to
                 next, don't forget that it starts with index 0. If the index is wrong, ie doesn't
-                exist, an exception will be thrown. You should use <code>count()</code> to check the
+                exist, an exception will be thrown. You should use <methodname>count()</methodname> to check the
                 number of results before seeking to a position.
             </para>
 
@@ -168,9 +168,9 @@ $row9->save();
         </example>
 
             <para>
-                <code>getRow()</code> allows you to get a specific row in the Rowset, knowing its
+                <methodname>getRow()</methodname> allows you to get a specific row in the Rowset, knowing its
                 position; don't forget however that positions start with index zero. The first
-                parameter for <code>getRow()</code> is an integer for the position asked. The second
+                parameter for <methodname>getRow()</methodname> is an integer for the position asked. The second
                 optional parameter is a boolean; it tells the Rowset iterator if it must seek to
                 that position in the same time, or not (default is false). This method returns a
                 <classname>Zend_Db_Table_Row</classname> object by default. If the position
@@ -203,7 +203,7 @@ $row9->save();
         <title>Retrieving a Rowset as an Array</title>
 
         <para>
-            You can access all the data in the Rowset as an array using the <code>toArray()</code>
+            You can access all the data in the Rowset as an array using the <methodname>toArray()</methodname>
             method of the Rowset object. This returns an array containing one entry per Row. Each
             entry is an associative array having keys that correspond to column names and elements
             that correspond to the respective column values.
@@ -232,7 +232,7 @@ foreach ($rowsetArray as $rowArray) {
         </example>
 
         <para>
-            The array returned from <code>toArray()</code> is not updateable. That is, you can
+            The array returned from <methodname>toArray()</methodname> is not updateable. That is, you can
             modify values in the array as you can with any array, but changes to the array data are
             not propagated to the database.
         </para>
@@ -254,7 +254,7 @@ foreach ($rowsetArray as $rowArray) {
             <title>Serializing a Rowset</title>
 
             <para>
-                Simply use PHP's <code>serialize()</code> function to create a string containing a
+                Simply use PHP's <methodname>serialize()</methodname> function to create a string containing a
                 byte-stream representation of the Rowset object argument.
             </para>
 
@@ -275,7 +275,7 @@ $serializedRowset = serialize($rowset);
             <title>Unserializing a Serialized Rowset</title>
 
             <para>
-                Use PHP's <code>unserialize()</code> function to restore a string containing a
+                Use PHP's <methodname>unserialize()</methodname> function to restore a string containing a
                 byte-stream representation of an object. The function returns the original object.
             </para>
 
@@ -310,7 +310,7 @@ echo $row->bug_description;
         </note>
 
         <para>
-            You can reactivate a disconnected Rowset using the <code>setTable()</code> method. The
+            You can reactivate a disconnected Rowset using the <methodname>setTable()</methodname> method. The
             argument to this method is a valid object of type
             <classname>Zend_Db_Table_Abstract</classname>, which you create. Creating a Table object
             requires a live connection to the database, so by reassociating the Table with the
@@ -341,7 +341,7 @@ $row->save();
         </example>
 
         <para>
-            Reactivating a Rowset with <code>setTable()</code> also reactivates all the Row objects
+            Reactivating a Rowset with <methodname>setTable()</methodname> also reactivates all the Row objects
             contained in that Rowset.
         </para>
 

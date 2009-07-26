@@ -25,7 +25,7 @@
         <para>
             You can set options temporarily when using <code>addTranslation($data, $locale, array
             $options = array())</code> as third and optional parameter. And you can use the method
-            <code>setOptions()</code> to set the options permanently.
+            <methodname>setOptions()</methodname> to set the options permanently.
         </para>
 
         <example id="zend.translate..additional.options.example">
@@ -171,16 +171,16 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
 
         <para>
             When you want to have self defined options, you are also able to use them within all
-            adapters. The <code>setOptions()</code> method can be used to define your option.
-            <code>setOptions()</code> needs an array with the options you want to set. If an given
+            adapters. The <methodname>setOptions()</methodname> method can be used to define your option.
+            <methodname>setOptions()</methodname> needs an array with the options you want to set. If an given
             option exists it will be signed over. You can define as much options as needed as they
             will not be checked by the adapter. Just make sure not to overwrite any existing option
             which is used by an adapter.
         </para>
 
         <para>
-            To return the option you can use the <code>getOptions()</code> method. When
-            <code>getOptions()</code> is called without a parameter it will return all options set.
+            To return the option you can use the <methodname>getOptions()</methodname> method. When
+            <methodname>getOptions()</methodname> is called without a parameter it will return all options set.
             When the optional parameter is given you will only get the specified option.
         </para>
 
@@ -195,28 +195,28 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
         </para>
 
         <para>
-            The <code>getLocale()</code> method can be used to get the currently set language. It
+            The <methodname>getLocale()</methodname> method can be used to get the currently set language. It
             can either hold an instance of <classname>Zend_Locale</classname> or the identifier of
             a locale.
         </para>
 
         <para>
-            The <code>setLocale()</code> method sets a new standard language for translation. This
+            The <methodname>setLocale()</methodname> method sets a new standard language for translation. This
             prevents the need of setting the optional language parameter more than once to the
-            <code>translate()</code> method. If the given language does not exist, or no
-            translation data is available for the language, <code>setLocale()</code> tries to
+            <methodname>translate()</methodname> method. If the given language does not exist, or no
+            translation data is available for the language, <methodname>setLocale()</methodname> tries to
             downgrade to the language without the region if any was given. A language of
             <code>en_US</code> would be downgraded to <code>en</code>. When even the downgraded
             language can not be found an exception will be thrown.
         </para>
 
         <para>
-            The <code>isAvailable()</code> method checks if a given language is already available.
+            The <methodname>isAvailable()</methodname> method checks if a given language is already available.
             It returns <code>true</code> if data for the given language exist.
         </para>
 
         <para>
-            And finally the <code>getList()</code> method can be used to get all currently set
+            And finally the <methodname>getList()</methodname> method can be used to get all currently set
             languages for an adapter returned as array.
         </para>
 
@@ -249,10 +249,10 @@ if ($translate->isAvailable("fr")) {
 
             <para>
                 Note that as long as you only add new translation sources with the
-                <code>addTranslation()</code> method <classname>Zend_Translate</classname> will
+                <methodname>addTranslation()</methodname> method <classname>Zend_Translate</classname> will
                 automatically set the best fitting language for your environment when you use one
                 of the automatic locales which are '<code>auto</code>' or '<code>browser</code>'.
-                So normally you will not need to call <code>setLocale()</code>. This should only be
+                So normally you will not need to call <methodname>setLocale()</methodname>. This should only be
                 used in conjunction with automatic source detection.
             </para>
 
@@ -305,13 +305,13 @@ $translate->setLocale('it_IT');
             </example>
 
             <para>
-                After setting a language manually with the <code>setLocale()</code> method the
+                After setting a language manually with the <methodname>setLocale()</methodname> method the
                 automatic detection will be switched off and overridden.
             </para>
 
             <para>
                 If you want to use it again, you can set the language
-                <emphasis>auto</emphasis> with <code>setLocale()</code> which will reactivate
+                <emphasis>auto</emphasis> with <methodname>setLocale()</methodname> which will reactivate
                 the automatic detection for <classname>Zend_Translate</classname>.
             </para>
 
@@ -584,18 +584,18 @@ $translate = new Zend_Translate(
 
         <para>
             Normally text will be translated without any computation. But sometimes it is necessary
-            to know if a text is translated or not, therefor the <code>isTranslated()</code>
+            to know if a text is translated or not, therefor the <methodname>isTranslated()</methodname>
             method can be used.
         </para>
 
         <para>
-            <code>isTranslated($messageId, $original = false, $locale = null)</code> takes
+            <methodname>isTranslated($messageId, $original = false, $locale = null)</methodname> takes
             the text you want to check as its first parameter, and as optional third parameter the
             locale for which you want to do the check. The optional second parameter declares
             whether translation is fixed to the declared language or a lower set of translations
             can be used. If you have a text which can be returned for 'en' but not for 'en_US' you
             will normally get the translation returned, but by setting <code>$original</code> to
-            true, <code>isTranslated()</code> will return false.
+            true, <methodname>isTranslated()</methodname> will return false.
         </para>
 
         <example id="zend.translate.additional.istranslated.example">
@@ -718,12 +718,12 @@ $translate->translate('unknown string');
         </para>
 
         <para>
-            The <code>getMessageIds($locale = null)</code> method returns all known message IDs as
+            The <methodname>getMessageIds($locale = null)</methodname> method returns all known message IDs as
             array.
         </para>
 
         <para>
-            The <code>getMessages($locale = null)</code> method returns the complete translation
+            The <methodname>getMessages($locale = null)</methodname> method returns the complete translation
             source as an array. The message ID is used as key and the translation data as value.
         </para>
 
@@ -736,7 +736,7 @@ $translate->translate('unknown string');
         </para>
 
         <para>
-            Additionally the <code>getMessages()</code> method can be used to return the complete
+            Additionally the <methodname>getMessages()</methodname> method can be used to return the complete
             translation dictionary using the pseudo-locale 'all'. This will return all available
             translation data for each added locale.
         </para>

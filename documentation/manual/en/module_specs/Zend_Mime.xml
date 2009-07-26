@@ -102,17 +102,17 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>boundary()</code>: Returns the MIME boundary string.
+                    <methodname>boundary()</methodname>: Returns the MIME boundary string.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>boundaryLine()</code>: Returns the complete MIME boundary line.
+                    <methodname>boundaryLine()</methodname>: Returns the complete MIME boundary line.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>mimeEnd()</code>: Returns the complete MIME end boundary line.
+                    <methodname>mimeEnd()</methodname>: Returns the complete MIME end boundary line.
                 </para>
             </listitem>
         </itemizedlist>

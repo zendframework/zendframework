@@ -53,7 +53,7 @@
     </itemizedlist>
 
     <para>
-        The <code>headLink()</code> helper method allows specifying all
+        The <methodname>headLink()</methodname> helper method allows specifying all
         attributes necessary for a <code>&lt;link&gt;</code> element, and allows
         you to also specify placement -- whether the new element replaces all
         others, prepends (top of stack), or appends (end of stack).

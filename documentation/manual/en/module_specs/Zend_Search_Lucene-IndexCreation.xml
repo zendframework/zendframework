@@ -272,12 +272,12 @@ Zend_Search_Lucene_Storage_Directory_Filesystem::setDefaultFilePermissions(0660)
         <sect3 id="zend.search.lucene.index-creation.limitations.filesystems">
             <title>Supported Filesystems</title>
             <para>
-                <classname>Zend_Search_Lucene</classname> uses <code>flock()</code> to provide concurrent searching, index updating and optimization.
+                <classname>Zend_Search_Lucene</classname> uses <methodname>flock()</methodname> to provide concurrent searching, index updating and optimization.
             </para>
 
             <para>
                 According to the PHP <ulink url="http://www.php.net/manual/en/function.flock.php">documentation</ulink>,
-                "<code>flock()</code> will not work on NFS and many other networked file systems".
+                "<methodname>flock()</methodname> will not work on NFS and many other networked file systems".
             </para>
 
             <para>

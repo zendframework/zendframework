@@ -21,7 +21,7 @@
         <title>Normalizing Dates and Times</title>
 
         <para>
-            The <code>getDate()</code> method parses strings containing dates in localized formats. The results are
+            The <methodname>getDate()</methodname> method parses strings containing dates in localized formats. The results are
             returned in a structured array, with well-defined keys for each part of the date. In addition, the array
             will contain a key 'date_format' showing the format string used to parse the input date string. Since a
             localized date string may not contain all parts of a date/time, the key-value pairs are optional. For
@@ -31,7 +31,7 @@
         </para>
 
         <para>
-            If <code>setOption(array('fix_date' => true))</code> is set the <code>getDate()</code> method adds a key 'fixed'
+            If <methodname>setOption(array('fix_date' => true))</methodname> is set the <methodname>getDate()</methodname> method adds a key 'fixed'
             with a whole number value indicating if the input date string required "fixing" by rearranging the day,
             month, or year in the input to fit the format used.
         </para>
@@ -78,9 +78,9 @@
 
         <para>
             These specifiers (below) are a small subset of the full "ISO" set supported by <classname>Zend_Date</classname>'s
-            <code>toString()</code>. If you need to use PHP <code>date()</code> compatible format specifiers, then first
-            call <code>setOptions(array('format_type' => 'php'))</code>. And if you want to convert only one special format
-            string from PHP <code>date()</code> compatible format to "ISO" format use <code>convertPhpToIsoFormat()</code>.
+            <methodname>toString()</methodname>. If you need to use PHP <methodname>date()</methodname> compatible format specifiers, then first
+            call <methodname>setOptions(array('format_type' => 'php'))</methodname>. And if you want to convert only one special format
+            string from PHP <methodname>date()</methodname> compatible format to "ISO" format use <methodname>convertPhpToIsoFormat()</methodname>.
             Currently, the only practical difference relates to the specifier for minutes ('m' using the ISO default,
             and 'i' using the PHP date format).
         </para>
@@ -187,12 +187,12 @@ Array
         </example>
 
         <para>
-            Since <code>getDate()</code> is "locale-aware", specifying the <code>$locale</code> is sufficient for date
+            Since <methodname>getDate()</methodname> is "locale-aware", specifying the <code>$locale</code> is sufficient for date
             strings adhering to that locale's format. The option '<code>fix_date</code>' uses simple tests to
             determine if the day or month is not valid, and then applies heuristics to try and correct any detected
             problems. Note the use of '<classname>Zend_Locale_Format::STANDARD</classname>' as the value for
             '<code>date_format</code>' to prevent the use of a class-wide default date format set using
-            <code>setOptions()</code>. This forces getDate to use the default date format for <code>$locale</code>.
+            <methodname>setOptions()</methodname>. This forces getDate to use the default date format for <code>$locale</code>.
         </para>
 
         <example id="zend.locale.date.normalize.example-2">
@@ -337,7 +337,7 @@ print_r ($date);
 
         <para>
             The option '<code>fix_date</code>' uses simple tests to determine if the day or month is not
-            valid, and then applies heuristics to try and correct any detected problems. <code>getDate()</code>
+            valid, and then applies heuristics to try and correct any detected problems. <methodname>getDate()</methodname>
             automatically detects and corrects some kinds of problems with input, such as misplacing the year:
         </para>
 
@@ -361,8 +361,8 @@ print_r ($date);
         <title>Testing Dates</title>
 
         <para>
-            Use <code>checkDateFormat($inputString, array('date_format' => $format, $locale))</code> to check if a given string
-            contains all expected date parts. The <code>checkDateFormat()</code> method uses <code>getDate()</code>, but without
+            Use <methodname>checkDateFormat($inputString, array('date_format' => $format, $locale))</methodname> to check if a given string
+            contains all expected date parts. The <methodname>checkDateFormat()</methodname> method uses <methodname>getDate()</methodname>, but without
             the option <code>'fixdate'</code> to avoid returning true when the input fails to conform to the date
             format. If errors are detected in the input, such as swapped values for months and days, the
             option <code>'fixdate'</code> method will apply heuristics to "correct" dates before determining their
@@ -394,7 +394,7 @@ if (Zend_Locale_Format::checkDateFormat('13.Apr.2006',
 
         <para>
             Normally, a time will be returned with a date, if the input contains both. If the proper format is not
-            known, but the locale relevant to the user input is known, then <code>getTime()</code> should be used,
+            known, but the locale relevant to the user input is known, then <methodname>getTime()</methodname> should be used,
             because it uses the default time format for the selected locale.
         </para>
 
@@ -420,7 +420,7 @@ if (Zend_Locale_Format::getTime('13:44:42',
         <title>Testing Times</title>
 
         <para>
-            Use <code>checkDateFormat()</code> to check if a given string contains a proper time.
+            Use <methodname>checkDateFormat()</methodname> to check if a given string contains a proper time.
             The usage is exact the same as with checking Dates, only <code>date_format</code>
             should contain the parts which you expect to have.
         </para>

@@ -53,7 +53,7 @@
         <para>
             Having this filter definition established provides the foundation
             for <classname>Zend_Filter_Interface</classname>, which requires a single
-            method named <code>filter()</code> to be implemented by a filter
+            method named <methodname>filter()</methodname> to be implemented by a filter
             class.
         </para>
 
@@ -82,11 +82,11 @@ echo $htmlEntities->filter('"'); // &quot;
             instance of the filter, you can use the static method
             <classname>Zend_Filter::filterStatic()</classname> as an alternative invocation style.
             The first argument of this method is a data input value, that you
-            would pass to the <code>filter()</code> method. The second
+            would pass to the <methodname>filter()</methodname> method. The second
             argument is a string, which corresponds to the basename of the
             filter class, relative to the Zend_Filter namespace. The
-            <code>get()</code> method automatically loads the class, creates an
-            instance, and applies the <code>filter()</code> method to the data
+            <methodname>get()</methodname> method automatically loads the class, creates an
+            instance, and applies the <methodname>filter()</methodname> method to the data
             input.
 
             <programlisting language="php"><![CDATA[
@@ -110,7 +110,7 @@ echo Zend_Filter::filterStatic('"', 'HtmlEntities', array(ENT_QUOTES));
             but if you have the need to run a filter for multiple inputs,
             it's more efficient to follow the first example above,
             creating an instance of the filter object and calling its
-            <code>filter()</code> method.
+            <methodname>filter()</methodname> method.
         </para>
 
         <para>

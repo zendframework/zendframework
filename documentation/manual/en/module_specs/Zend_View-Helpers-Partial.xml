@@ -83,15 +83,15 @@
                 <listitem><para>
                         <emphasis>Object implementing toArray()
                             method</emphasis>. If an object is passed an has a
-                        <code>toArray()</code> method, the results of
-                        <code>toArray()</code> will be assigned to the view
+                        <methodname>toArray()</methodname> method, the results of
+                        <methodname>toArray()</methodname> will be assigned to the view
                         object as view variables.
                 </para></listitem>
 
                 <listitem><para>
                         <emphasis>Standard object</emphasis>. Any other object
                         will assign the results of
-                        <code>object_get_vars()</code> (essentially all public
+                        <methodname>object_get_vars()</methodname> (essentially all public
                         properties of the object) to the view object.
                 </para></listitem>
             </itemizedlist>
@@ -115,7 +115,7 @@ $view->partialLoop()->setObjectKey('model');
             <para>
                 This technique is particularly useful when passing
                 <classname>Zend_Db_Table_Rowset</classname>s to
-                <code>partialLoop()</code>, as you then have full access to your
+                <methodname>partialLoop()</methodname>, as you then have full access to your
                 row objects within the view scripts, allowing you to call
                 methods on them (such as retrieving values from parent or
                 dependent rows).
@@ -199,7 +199,7 @@ $model = array(
         <para>
             Sometime a partial will exist in a different module. If you know the
             name of the module, you can pass it as the second argument to either
-            <code>partial()</code> or <code>partialLoop()</code>, moving the
+            <methodname>partial()</methodname> or <methodname>partialLoop()</methodname>, moving the
             <code>$model</code> argument to third position.
         </para>
 

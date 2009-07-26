@@ -73,9 +73,9 @@ $this->headScript()->appendFile(
     </para>
 
     <para>
-        Finally, you can also use the <code>headScript()</code> method to
+        Finally, you can also use the <methodname>headScript()</methodname> method to
         quickly add script elements; the signature for this is
-        <code>headScript($mode = 'FILE', $spec, $placement = 'APPEND')</code>.
+        <methodname>headScript($mode = 'FILE', $spec, $placement = 'APPEND')</methodname>.
         The <code>$mode</code> is either 'FILE' or 'SCRIPT', depending on if
         you're linking a script or defining one. <code>$spec</code> is either
         the script file to link or the script source itself.
@@ -83,11 +83,11 @@ $this->headScript()->appendFile(
     </para>
 
     <para>
-        <code>HeadScript</code> overrides each of <code>append()</code>,
-        <code>offsetSet()</code>, <code>prepend()</code>, and <code>set()</code>
+        <code>HeadScript</code> overrides each of <methodname>append()</methodname>,
+        <methodname>offsetSet()</methodname>, <methodname>prepend()</methodname>, and <methodname>set()</methodname>
         to enforce usage of the special methods as listed above. Internally, it
         stores each item as a <code>stdClass</code> token, which it later
-        serializes using the <code>itemToString()</code> method. This allows you
+        serializes using the <methodname>itemToString()</methodname> method. This allows you
         to perform checks on the items in the stack, and optionally modify these
         items by simply modifying the object returned.
     </para>
@@ -122,7 +122,7 @@ $this->headScript()->appendFile(
                 url="http://www.dojotoolkit.org/">Dojo</ulink>, utilize custom
             attributes in order to modify behavior. To allow such attributes,
             you can enable them via the
-            <code>setAllowArbitraryAttributes()</code> method:
+            <methodname>setAllowArbitraryAttributes()</methodname> method:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -201,19 +201,19 @@ $('foo_form').action = action;
                     The script will be appended to the stack. If you wish for it
                     to replace the stack or be added to the top, you will need
                     to pass 'SET' or 'PREPEND', respectively, as the first
-                    argument to <code>captureStart()</code>.
+                    argument to <methodname>captureStart()</methodname>.
             </para></listitem>
 
             <listitem><para>
                     The script MIME type is assumed to be 'text/javascript'; if you
                     wish to specify a different type, you will need to pass it
-                    as the second argument to <code>captureStart()</code>.
+                    as the second argument to <methodname>captureStart()</methodname>.
             </para></listitem>
 
             <listitem><para>
                     If you wish to specify any additional attributes for the
                     <code>&lt;script&gt;</code> tag, pass them in an array as
-                    the third argument to <code>captureStart()</code>.
+                    the third argument to <methodname>captureStart()</methodname>.
             </para></listitem>
         </itemizedlist>
     </example>

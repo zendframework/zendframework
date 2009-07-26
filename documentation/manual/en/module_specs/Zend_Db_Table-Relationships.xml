@@ -316,7 +316,7 @@ $bugsAssignedToUser = $user1234->findDependentRowset('Bugs',
 
             Alternatively, you can query rows from a dependent table using a special mechanism
             called a "magic method". <classname>Zend_Db_Table_Row_Abstract</classname> invokes the
-            method: <code>findDependentRowset('&lt;TableClass&gt;', '&lt;Rule&gt;')</code> if you
+            method: <methodname>findDependentRowset('&lt;TableClass&gt;', '&lt;Rule&gt;')</methodname> if you
             invoke a method on the Row object matching either of the following patterns:
         </para>
 
@@ -458,7 +458,7 @@ $engineer = $bug1->findParentRow('Accounts', 'Engineer');
         <para>
             Alternatively, you can query rows from a parent table using a "magic method".
             <classname>Zend_Db_Table_Row_Abstract</classname> invokes the method:
-            <code>findParentRow('&lt;TableClass&gt;', '&lt;Rule&gt;')</code> if you invoke a method
+            <methodname>findParentRow('&lt;TableClass&gt;', '&lt;Rule&gt;')</methodname> if you invoke a method
             on the Row object matching either of the following patterns:
         </para>
 
@@ -876,10 +876,10 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
             <para>
                 Cascading deletes and updates defined in your <classname>Zend_Db_Table</classname>
-                classes are applied if you execute the <code>save()</code> or <code>delete()</code>
+                classes are applied if you execute the <methodname>save()</methodname> or <methodname>delete()</methodname>
                 methods on the Row class. However, if you update or delete data using another
                 interface, such as a query tool or another application, the cascading operations are
-                not applied. Even when using <code>update()</code> and <code>delete()</code> methods
+                not applied. Even when using <methodname>update()</methodname> and <methodname>delete()</methodname> methods
                 in the <classname>Zend_Db_Adapter</classname> class, cascading operations defined in
                 your <classname>Zend_Db_Table</classname> classes are not executed.
             </para>

@@ -107,7 +107,7 @@ $amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'JP');
     <sect2 id="zend.service.amazon.itemlookup">
         <title>Looking up a Specific Amazon Item by ASIN</title>
         <para>
-            The <code>itemLookup()</code> method provides the ability to fetch a particular Amazon item when
+            The <methodname>itemLookup()</methodname> method provides the ability to fetch a particular Amazon item when
             the ASIN is known.
         </para>
         <example id="zend.service.amazon.itemlookup.example.asin">
@@ -118,7 +118,7 @@ $item = $amazon->itemLookup('B0000A432X');
 ]]></programlisting>
         </example>
         <para>
-            The <code>itemLookup()</code> method also accepts an optional second parameter for handling search
+            The <methodname>itemLookup()</methodname> method also accepts an optional second parameter for handling search
             options. For full details, including a list of available options, please see the
             <ulink
                 url="http://www.amazon.com/gp/aws/sdk/main.html/103-9285448-4703844?s=AWSEcommerceService&amp;v=2005-10-05&amp;p=ApiReference/ItemLookupOperation">relevant Amazon documentation</ulink>.
@@ -135,7 +135,7 @@ $item = $amazon->itemLookup('B0000A432X');
         <title>Performing Amazon Item Searches</title>
         <para>
             Searching for items based on any of various available criteria are made simple using the
-            <code>itemSearch()</code> method, as in the following example:
+            <methodname>itemSearch()</methodname> method, as in the following example:
         </para>
         <example id="zend.service.amazon.itemsearch.example.basic">
             <title>Performing Amazon Item Searches</title>
@@ -168,7 +168,7 @@ foreach ($results as $result) {
 ]]></programlisting>
         </example>
         <para>
-            The <code>itemSearch()</code> method accepts a single array parameter for handling search
+            The <methodname>itemSearch()</methodname> method accepts a single array parameter for handling search
             options. For full details, including a list of available options, please see the
             <ulink
                 url="http://www.amazon.com/gp/aws/sdk/main.html/103-9285448-4703844?s=AWSEcommerceService&amp;v=2005-10-05&amp;p=ApiReference/ItemSearchOperation">relevant Amazon documentation</ulink>
@@ -446,7 +446,7 @@ foreach ($results as $result) {
                 <title>SeekableIterator</title>
                 <para>
                     Implements the <code>SeekableIterator</code> for easy iteration (e.g. using <code>foreach</code>), as
-                    well as direct access to a specific result using <code>seek()</code>.
+                    well as direct access to a specific result using <methodname>seek()</methodname>.
                 </para>
             </note>
             <sect4 id="zend.service.amazon.classes.resultset.totalresults">

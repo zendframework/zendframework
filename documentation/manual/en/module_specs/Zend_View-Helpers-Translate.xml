@@ -91,7 +91,7 @@ echo $this->translate('simple');
             To use the fluent interface, create an instance of
             <classname>Zend_Translate</classname> or <classname>Zend_Translate_Adapter</classname>,
             call the helper without a parameter, and call the
-            <code>setTranslator()</code> method.
+            <methodname>setTranslator()</methodname> method.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -129,7 +129,7 @@ print $translate->translate('simple'); // this returns 'einfach'
     </example>
 
     <para>
-        As already seen, the <code>translate()</code> method is used to return
+        As already seen, the <methodname>translate()</methodname> method is used to return
         the translation. Just call it with the needed messageid of your
         translation adapter. But it can also replace parameters within the
         translation string. Therefore, it accepts variable parameters in two ways:
@@ -246,7 +246,7 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
     </para>
 
     <para>
-        Of course there is also a <code>getLocale()</code> method to get the
+        Of course there is also a <methodname>getLocale()</methodname> method to get the
         currently set locale.
     </para>
 

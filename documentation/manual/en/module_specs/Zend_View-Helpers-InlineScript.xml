@@ -10,8 +10,8 @@
         helper allows you to manage both. It is derived from <link
             linkend="zend.view.helpers.initial.headscript">HeadScript</link>,
         and any method of that helper is available; however, use the
-        <code>inlineScript()</code> method in place of
-        <code>headScript()</code>.
+        <methodname>inlineScript()</methodname> method in place of
+        <methodname>headScript()</methodname>.
     </para>
 
     <note>

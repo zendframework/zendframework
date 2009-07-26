@@ -206,7 +206,7 @@ $service = new Zend_Gdata_Gbase();
             <sect4 id="zend.gdata.gbase.retrieve.query.customeritems">
                 <title>Query Customer Items Feed</title>
                 <para>
-                    To execute a query against the customer items feed, invoke <code>newItemQuery()</code> and <code>getGbaseItemFeed()</code> methods:
+                    To execute a query against the customer items feed, invoke <methodname>newItemQuery()</methodname> and <methodname>getGbaseItemFeed()</methodname> methods:
                 </para>
                 <programlisting language="php"><![CDATA[
 $service = new Zend_Gdata_Gbase($client);
@@ -224,7 +224,7 @@ $feed = $service->getGbaseItemFeed($query);
             <sect4 id="zend.gdata.gbase.retrieve.query.snippets">
                 <title>Query Snippets Feed</title>
                 <para>
-                    To execute a query against the public snippets feed, invoke <code>newSnippetQuery()</code> and <code>getGbaseSnippetFeed()</code> methods:
+                    To execute a query against the public snippets feed, invoke <methodname>newSnippetQuery()</methodname> and <methodname>getGbaseSnippetFeed()</methodname> methods:
                 </para>
                 <programlisting language="php"><![CDATA[
 $service = new Zend_Gdata_Gbase();
@@ -246,7 +246,7 @@ $feed = $service->getGbaseSnippetFeed($query);
                 Google Base items can contain item-specific attributes such as <code>&lt;g:main_ingredient&gt;</code> and <code>&lt;g:weight&gt;</code>.
             </para>
             <para>
-                To iterate through all attributes of a given item, invoke <code>getGbaseAttributes()</code> and iterate through the results:
+                To iterate through all attributes of a given item, invoke <methodname>getGbaseAttributes()</methodname> and iterate through the results:
             </para>
             <programlisting language="php"><![CDATA[
 foreach ($feed->entries as $entry) {
@@ -283,7 +283,7 @@ foreach ($feed->entries as $entry) {
         <sect3 id="zend.gdata.gbase.crud.insert">
             <title>Insert an Item</title>
             <para>
-                Items can be added by using the <code>insertGbaseItem()</code> method for the Base service:
+                Items can be added by using the <methodname>insertGbaseItem()</methodname> method for the Base service:
             </para>
             <programlisting language="php"><![CDATA[
 $service = new Zend_Gdata_Gbase($client);
@@ -368,20 +368,20 @@ $entry->save($dryRun);
 // $service->updateGbaseItem($entry, $dryRun);
 ]]></programlisting>
             <para>
-                After making the changes, either invoke <code>save($dryRun)</code> method on the <classname>Zend_Gdata_Gbase_ItemEntry</classname> object or call <code>updateGbaseItem($entry, $dryRun)</code> method on the <classname>Zend_Gdata_Gbase</classname> object to save the changes.
+                After making the changes, either invoke <methodname>save($dryRun)</methodname> method on the <classname>Zend_Gdata_Gbase_ItemEntry</classname> object or call <methodname>updateGbaseItem($entry, $dryRun)</methodname> method on the <classname>Zend_Gdata_Gbase</classname> object to save the changes.
             </para>
         </sect3>
         <sect3 id="zend.gdata.gbase.crud.delete">
             <title>Delete an Item</title>
             <para>
-                You can remove an item by calling <code>deleteGbaseItem()</code> method:
+                You can remove an item by calling <methodname>deleteGbaseItem()</methodname> method:
             </para>
             <programlisting language="php"><![CDATA[
 $dryRun = false;
 $service->deleteGbaseItem($entry, $dryRun);
 ]]></programlisting>
             <para>
-                Alternatively, you can invoke <code>delete()</code> on the <classname>Zend_Gdata_Gbase_ItemEntry</classname> object:
+                Alternatively, you can invoke <methodname>delete()</methodname> on the <classname>Zend_Gdata_Gbase_ItemEntry</classname> object:
             </para>
             <programlisting language="php"><![CDATA[
 $dryRun = false;

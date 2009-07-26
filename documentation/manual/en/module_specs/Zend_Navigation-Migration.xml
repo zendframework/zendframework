@@ -77,7 +77,7 @@ $container = new Zend_Navigation(array(
         </para>
 
         <para>
-            Since release 1.9, the <code>_renderDeepestMenu()</code> method in
+            Since release 1.9, the <methodname>_renderDeepestMenu()</methodname> method in
             <classname>Zend_View_Helper_Navigation_Menu</classname> will accept
             active pages at one level below <code>minDepth</code>, as long as
             the page has children.

@@ -37,16 +37,16 @@
         <para>
             If you've ever used the SPL interface
             <ulink url="http://www.php.net/~helly/php/ext/spl/interfaceCountable.html"><code>Countable</code></ulink>,
-            you're familiar with <code>count()</code>. As used with
+            you're familiar with <methodname>count()</methodname>. As used with
             <classname>Zend_Paginator</classname>, this is the total number of items
             in the data collection.
             Additionally, the <classname>Zend_Paginator</classname> instance provides a method
-            <code>countAllItems()</code> that proxies to the adapter
-            <code>count()</code> method.
+            <methodname>countAllItems()</methodname> that proxies to the adapter
+            <methodname>count()</methodname> method.
         </para>
 
         <para>
-            The <code>getItems()</code> method is only slightly more
+            The <methodname>getItems()</methodname> method is only slightly more
             complicated. For this, your adapter is supplied with an offset and
             the number of items to display per page. You must return the
             appropriate slice of data. For an array, that would be:
@@ -71,7 +71,7 @@ return array_slice($this->_array, $offset, $itemCountPerPage);
         <para>
             Creating your own scrolling style requires that you implement
             <classname>Zend_Paginator_ScrollingStyle_Interface</classname>, which defines
-            a single method, <code>getPages()</code>. Specifically,
+            a single method, <methodname>getPages()</methodname>. Specifically,
         </para>
 
         <para>
@@ -127,7 +127,7 @@ Zend_Paginator::addScrollingStylePrefixPath($prefix, $path);
             <classname>Zend_Paginator</classname> can be told to cache the data it has already
             passed on, preventing the adapter from fetching them each time they are used.
             To tell paginator to automatically cache the adapter's data, just pass to
-            its <code>setCache()</code> method a <classname>Zend_Cache_Core</classname> instance.
+            its <methodname>setCache()</methodname> method a <classname>Zend_Cache_Core</classname> instance.
         </para>
 
         <para>
@@ -143,7 +143,7 @@ Zend_Paginator::setCache($cache);
         <para>
             As far as <classname>Zend_Paginator</classname> has got a <classname>Zend_Cache_Core</classname> instance, data will
             be cached. Sometimes you would like not to cache data even if you already passed
-            a cache instance. You should then use <code>setCacheEnable()</code> for that.
+            a cache instance. You should then use <methodname>setCacheEnable()</methodname> for that.
         </para>
 
         <para>
@@ -160,7 +160,7 @@ $paginator->setCacheEnable(false);
         <para>
             When a cache is set, data are automatically stored in it and pulled out from
             it. It then can be useful to empty the cache manually. You can get this done by
-            calling <code>clearPageItemCache($pageNumber)</code>.
+            calling <methodname>clearPageItemCache($pageNumber)</methodname>.
             If you don't pass any parameter, the whole cache will be empty. You can optionally
             pass a parameter representing the page number to empty in the cache:
         </para>
@@ -201,7 +201,7 @@ $paginator->setItemCountPerPage(2);
 
         <para>
             It is also possible to see the data in cache and ask for them directly.
-            <code>getPageItemCache()</code> can be used for that:
+            <methodname>getPageItemCache()</methodname> can be used for that:
         </para>
 
         <para>

@@ -55,7 +55,7 @@
 
         <para>
             Probably the most important feature is the conversion into different units of measurement. The conversion of
-            a unit can be done any number of times using the method <code>convertTo()</code>. Units of measurement can
+            a unit can be done any number of times using the method <methodname>convertTo()</methodname>. Units of measurement can
             only be converted to other units of the same type (class). Therefore, it is not possible to convert (e.g.) a
             length into a weight, which would might encourage poor programming practices and allow errors to propagate
             without exceptions.
@@ -90,7 +90,7 @@ print "Ton:".$unit->convertTo(Zend_Measure_Weight::TON, 3);
         <title>Add and subtract</title>
 
         <para>
-            Measurements can be added together using <code>add()</code> and subtracted using <code>sub()</code>. Each
+            Measurements can be added together using <methodname>add()</methodname> and subtracted using <methodname>sub()</methodname>. Each
             addition will create a new object for the result. The actual object will never be changed by the class. The
             new object will be of the same type as the originating object. Dynamic objects support a fluid style of
             programming, where complex sequences of operations can be nested without risk of side-effects altering the
@@ -118,7 +118,7 @@ echo $sum; // outputs "300 cm"
             <para>
                 Adding one object to another will automatically convert it to the correct unit. It is not necessary to
                 call
-                <link linkend="zend.measure.edit.convert"><code>convertTo()</code>
+                <link linkend="zend.measure.edit.convert"><methodname>convertTo()</methodname>
                 </link>
                 before adding different units.
             </para>
@@ -150,7 +150,7 @@ echo $sum;
         <title>Compare</title>
 
         <para>
-            Measurements can also be compared, but without automatic unit conversion. Thus, <code>equals()</code>
+            Measurements can also be compared, but without automatic unit conversion. Thus, <methodname>equals()</methodname>
             returns <constant>TRUE</constant>, only if both the value and the unit of measure are identical.
         </para>
 
@@ -194,7 +194,7 @@ if ($unit->equals($unit2)) {
         <title>Compare</title>
 
         <para>
-            To determine if a measurement is less than or greater than another, use <code>compare()</code>, which
+            To determine if a measurement is less than or greater than another, use <methodname>compare()</methodname>, which
             returns 0, -1 or 1 depending on the difference between the two objects. Identical measurements will return
             0. Lesser ones will return a negative, greater ones a positive value.
         </para>
@@ -221,7 +221,7 @@ print "Greater:".$unit3->compare($unit2);
         <title>Manually change values</title>
 
         <para>
-            To change the value of a measurement explicitly, use <code>setValue()</code>. to overwrite the current
+            To change the value of a measurement explicitly, use <methodname>setValue()</methodname>. to overwrite the current
             value. The parameters are the same as the constructor.
         </para>
 
@@ -251,7 +251,7 @@ echo $unit;
         <title>Manually change types</title>
 
         <para>
-            To change the type of a measurement without altering its value use <code>setType()</code>.
+            To change the type of a measurement without altering its value use <methodname>setType()</methodname>.
         </para>
 
         <example id="zend.measure.edit.changetype.example-1">

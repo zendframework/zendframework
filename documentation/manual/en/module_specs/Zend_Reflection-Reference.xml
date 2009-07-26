@@ -21,7 +21,7 @@
 
     <para>
         Each reflection object in <classname>Zend_Reflection</classname> overrides the
-        <code>getDocblock()</code> method to return an instance of
+        <methodname>getDocblock()</methodname> method to return an instance of
         <classname>Zend_Reflection_Docblock</classname>. This class provides introspection
         into the docblocks and annotation tags.
     </para>
@@ -49,43 +49,43 @@
 
         <itemizedlist>
             <listitem><para>
-                <code>getContents()</code>: returns the full contents of the
+                <methodname>getContents()</methodname>: returns the full contents of the
                 docblock.
             </para></listitem>
 
             <listitem><para>
-                <code>getStartLine()</code>: returns the starting position of
+                <methodname>getStartLine()</methodname>: returns the starting position of
                 the docblock within the defining file.
             </para></listitem>
 
             <listitem><para>
-                <code>getEndLine()</code>: get last line of docblock within the
+                <methodname>getEndLine()</methodname>: get last line of docblock within the
                 defining file.
             </para></listitem>
 
             <listitem><para>
-                <code>getShortDescription()</code>: get the short, one-line
+                <methodname>getShortDescription()</methodname>: get the short, one-line
                 description (usually the first line of the docblock).
             </para></listitem>
 
             <listitem><para>
-                <code>getLongDescription()</code>: get the long description from
+                <methodname>getLongDescription()</methodname>: get the long description from
                 the docblock.
             </para></listitem>
 
             <listitem><para>
-                <code>hasTag($name)</code>: determine if the docblock has the
+                <methodname>hasTag($name)</methodname>: determine if the docblock has the
                 given annotation tag.
             </para></listitem>
 
             <listitem><para>
-                <code>getTag($name)</code>: Retrieve the given annotation tag
+                <methodname>getTag($name)</methodname>: Retrieve the given annotation tag
                 reflection object, or a boolean <constant>FALSE</constant> if it's not
                 present.
             </para></listitem>
 
             <listitem><para>
-                <code>getTags($filter)</code>: Retrieve all tags, or all tags
+                <methodname>getTags($filter)</methodname>: Retrieve all tags, or all tags
                 matching the given <code>$filter</code> string. The tags
                 returned will be an array of
                 <classname>Zend_Reflection_Docblock_Tag</classname> objects.
@@ -110,16 +110,16 @@
 
         <itemizedlist>
             <listitem><para>
-                <code>factory($tagDocblockLine)</code>: instantiate the
+                <methodname>factory($tagDocblockLine)</methodname>: instantiate the
                 appropriate tag reflection class and return it.
             </para></listitem>
 
             <listitem><para>
-                <code>getName()</code>: return the annotation tag name.
+                <methodname>getName()</methodname>: return the annotation tag name.
             </para></listitem>
 
             <listitem><para>
-                <code>getDescription()</code>: return the annotation
+                <methodname>getDescription()</methodname>: return the annotation
                 description.
             </para></listitem>
         </itemizedlist>
@@ -138,11 +138,11 @@
 
         <itemizedlist>
             <listitem><para>
-                <code>getType()</code>: return the parameter variable type.
+                <methodname>getType()</methodname>: return the parameter variable type.
             </para></listitem>
 
             <listitem><para>
-                <code>getVariableName()</code>: return the parameter variable
+                <methodname>getVariableName()</methodname>: return the parameter variable
                 name.
             </para></listitem>
         </itemizedlist>
@@ -162,7 +162,7 @@
 
         <itemizedlist>
             <listitem><para>
-                <code>getType()</code>: return the return type.
+                <methodname>getType()</methodname>: return the return type.
             </para></listitem>
         </itemizedlist>
     </sect2>
@@ -178,17 +178,17 @@
 
         <itemizedlist>
             <listitem><para>
-                <code>getFileName()</code>: retrieve the filename of the file
+                <methodname>getFileName()</methodname>: retrieve the filename of the file
                 being reflected.
             </para></listitem>
 
             <listitem><para>
-                <code>getStartLine()</code>: retrieve the starting line of the
+                <methodname>getStartLine()</methodname>: retrieve the starting line of the
                 file (always "1").
             </para></listitem>
 
             <listitem><para>
-                <code>getEndLine()</code> retrieve the last line / number of
+                <methodname>getEndLine()</methodname> retrieve the last line / number of
                 lines in the file.
             </para></listitem>
 
@@ -217,7 +217,7 @@
             </para></listitem>
 
             <listitem><para>
-                <code>getContents()</code>: retrieve the full contents of the
+                <methodname>getContents()</methodname>: retrieve the full contents of the
                 file.
             </para></listitem>
         </itemizedlist>
@@ -229,7 +229,7 @@
         <para>
             <classname>Zend_Reflection_Class</classname> extends
             <code>ReflectionClass</code>, and follows its API. It adds one
-            additional method, <code>getDeclaringFile()</code>, which may be
+            additional method, <methodname>getDeclaringFile()</methodname>, which may be
             used to retrieve the <classname>Zend_Reflection_File</classname> reflection
             object for the defining file.
         </para>
@@ -242,27 +242,27 @@
 
         <itemizedlist>
             <listitem><para>
-                <code>getDeclaringFile($reflectionClass = 'Zend_Reflection_File')</code>
+                <methodname>getDeclaringFile($reflectionClass = 'Zend_Reflection_File')</methodname>
             </para></listitem>
 
             <listitem><para>
-                <code>getDocblock($reflectionClass = 'Zend_Reflection_Docblock')</code>
+                <methodname>getDocblock($reflectionClass = 'Zend_Reflection_Docblock')</methodname>
             </para></listitem>
 
             <listitem><para>
-                <code>getInterfaces($reflectionClass = 'Zend_Reflection_Class')</code>
+                <methodname>getInterfaces($reflectionClass = 'Zend_Reflection_Class')</methodname>
             </para></listitem>
 
             <listitem><para>
-                <code>getMethod($reflectionClass = 'Zend_Reflection_Method')</code>
+                <methodname>getMethod($reflectionClass = 'Zend_Reflection_Method')</methodname>
             </para></listitem>
 
             <listitem><para>
-                <code>getMethods($filter = -1, $reflectionClass = 'Zend_Reflection_Method')</code>
+                <methodname>getMethods($filter = -1, $reflectionClass = 'Zend_Reflection_Method')</methodname>
             </para></listitem>
 
             <listitem><para>
-                <code>getParentClass($reflectionClass = 'Zend_Reflection_Class')</code>
+                <methodname>getParentClass($reflectionClass = 'Zend_Reflection_Class')</methodname>
             </para></listitem>
 
             <listitem><para>
@@ -329,7 +329,7 @@
             </para></listitem>
 
             <listitem><para>
-                <code>getReturn()</code>: retrieve the return type reflection
+                <methodname>getReturn()</methodname>: retrieve the return type reflection
                 object.
             </para></listitem>
         </itemizedlist>
@@ -382,7 +382,7 @@
             </para></listitem>
 
             <listitem><para>
-                <code>getType()</code>: get the parameter type.
+                <methodname>getType()</methodname>: get the parameter type.
             </para></listitem>
         </itemizedlist>
     </sect2>

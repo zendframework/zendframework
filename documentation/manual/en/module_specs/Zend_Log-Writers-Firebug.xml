@@ -82,7 +82,7 @@ $response->sendHeaders();
       <title>Setting Styles for Priorities</title>
 
       <para>
-        Built-in and user-defined priorities can be styled with the <code>setPriorityStyle()</code> method.
+        Built-in and user-defined priorities can be styled with the <methodname>setPriorityStyle()</methodname> method.
       </para>
       <programlisting language="php"><![CDATA[
 $logger->addPriority('FOO', 8);
@@ -90,7 +90,7 @@ $writer->setPriorityStyle(8, 'TRACE');
 $logger->foo('Foo Message');
 ]]></programlisting>
       <para>
-        The default style for user-defined priorities can be set with the <code>setDefaultPriorityStyle()</code> method.
+        The default style for user-defined priorities can be set with the <methodname>setDefaultPriorityStyle()</methodname> method.
       </para>
       <programlisting language="php"><![CDATA[
 $writer->setDefaultPriorityStyle('TRACE');

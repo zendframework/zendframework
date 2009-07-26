@@ -12,7 +12,7 @@
 
     <para>
         <classname>Zend_Validate_Interface</classname> defines three methods,
-        <code>isValid()</code>, <code>getMessages()</code>, and <code>getErrors()</code>, that may
+        <methodname>isValid()</methodname>, <methodname>getMessages()</methodname>, and <methodname>getErrors()</methodname>, that may
         be implemented by user classes in order to create custom validation objects. An object that
         implements <classname>Zend_Validate_Interface</classname> interface may be added to a
         validator chain with <classname>Zend_Validate::addValidator()</classname>. Such objects may
@@ -33,15 +33,15 @@
         Basic validation failure message functionality is implemented in
         <classname>Zend_Validate_Abstract</classname>. To include this functionality when creating a
         validation class, simply extend <classname>Zend_Validate_Abstract</classname>. In the
-        extending class you would implement the <code>isValid()</code> method logic and define the
+        extending class you would implement the <methodname>isValid()</methodname> method logic and define the
         message variables and message templates that correspond to the types of validation failures
-        that can occur. If a value fails your validation tests, then <code>isValid()</code> should
+        that can occur. If a value fails your validation tests, then <methodname>isValid()</methodname> should
         return <constant>FALSE</constant>. If the value passes your validation tests, then
-        <code>isValid()</code> should return <constant>TRUE</constant>.
+        <methodname>isValid()</methodname> should return <constant>TRUE</constant>.
     </para>
 
     <para>
-        In general, the <code>isValid()</code> method should not throw any exceptions, except where
+        In general, the <methodname>isValid()</methodname> method should not throw any exceptions, except where
         it is impossible to determine whether or not the input value is valid. A few examples of
         reasonable cases for throwing an exception might be if a file cannot be opened, an LDAP
         server could not be contacted, or a database connection is unavailable, where such a thing
@@ -81,11 +81,11 @@ class MyValid_Float extends Zend_Validate_Abstract
 ]]></programlisting>
 
             The class defines a template for its single validation failure message, which includes
-            the built-in magic parameter, <code>%value%</code>. The call to <code>_setValue()</code>
+            the built-in magic parameter, <code>%value%</code>. The call to <methodname>_setValue()</methodname>
             prepares the object to insert the tested value into the failure message automatically,
-            should the value fail validation. The call to <code>_error()</code> tracks a reason for
+            should the value fail validation. The call to <methodname>_error()</methodname> tracks a reason for
             validation failure. Since this class only defines one failure message, it is not
-            necessary to provide <code>_error()</code> with the name of the failure message
+            necessary to provide <methodname>_error()</methodname> with the name of the failure message
             template.
         </para>
 
@@ -170,7 +170,7 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
         </para>
 
         <para>
-            Note that if any one of the validation checks in <code>isValid()</code> fails, an
+            Note that if any one of the validation checks in <methodname>isValid()</methodname> fails, an
             appropriate failure message is prepared, and the method immediately returns
             <constant>FALSE</constant>. These validation rules are therefore sequentially dependent. That
             is, if one test should fail, there is no need to test any subsequent validation rules.
@@ -255,12 +255,12 @@ class MyValid_PasswordStrength extends Zend_Validate_Abstract
 }
 ]]></programlisting>
 
-            Note that the four criteria tests in <code>isValid()</code> do not immediately return
+            Note that the four criteria tests in <methodname>isValid()</methodname> do not immediately return
             <constant>FALSE</constant>. This allows the validation class to provide <emphasis>all</emphasis>
             of the reasons that the input password failed to meet the validation requirements. if,
             for example, a user were to input the string "<code>#$%</code>" as a password,
-            <code>isValid()</code> would cause all four validation failure messages to be returned
-            by a subsequent call to <code>getMessages()</code>.
+            <methodname>isValid()</methodname> would cause all four validation failure messages to be returned
+            by a subsequent call to <methodname>getMessages()</methodname>.
         </para>
 
     </example>

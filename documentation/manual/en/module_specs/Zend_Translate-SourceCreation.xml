@@ -125,7 +125,7 @@ $translate->addTranslation('/path/to/german.mo', 'de');
             Many gettext editors add adapter informations as empty translation string.
             This is the reason why empty strings are not translated when using the
             gettext adapter. Instead they are erased from the translation table and
-            provided by the <code>getAdapterInfo()</code> method. It will return
+            provided by the <methodname>getAdapterInfo()</methodname> method. It will return
             the adapter informations for all added gettext files as array using the
             filename as key.
         </para>
@@ -180,14 +180,14 @@ $translate = new Zend_Translate('tmx', 'path/to/mytranslation.tmx', 'en');
         <para>
             TMX files can have several languages within the same file.
             All other included languages are added automatically,
-            so you do not have to call <code>addLanguage()</code>.
+            so you do not have to call <methodname>addLanguage()</methodname>.
         </para>
 
         <para>
             If you want to have only specified languages from the source translated
             you can set the option '<code>defined_language</code>' to <constant>TRUE</constant>.
             With this option you can add the wished languages explicitly with
-            <code>addLanguage()</code>. The default value for this option is to add all
+            <methodname>addLanguage()</methodname>. The default value for this option is to add all
             languages.
         </para>
     </sect2>

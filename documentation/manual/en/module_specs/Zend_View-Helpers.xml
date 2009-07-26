@@ -18,7 +18,7 @@
         be TitleCapped; the full class name is then:
         <classname>Zend_View_Helper_FooBar</classname>. This class should contain at the
         minimum a single method, named after the helper, and camelCased:
-        <code>fooBar()</code>.
+        <methodname>fooBar()</methodname>.
     </para>
 
     <note>
@@ -36,7 +36,7 @@
         <para>
             The default helper path always points to the Zend Framework view
             helpers, i.e., 'Zend/View/Helper/'. Even if you call
-            <code>setHelperPath()</code> to overwrite the existing paths, this
+            <methodname>setHelperPath()</methodname> to overwrite the existing paths, this
             path will be set to ensure the default helpers work.
         </para>
     </note>
@@ -46,7 +46,7 @@
         <code>$this->helperName()</code>. Behind the scenes,
         <classname>Zend_View</classname> will load the
         <classname>Zend_View_Helper_HelperName</classname> class, create an object
-        instance of it, and call its <code>helperName()</code> method. The
+        instance of it, and call its <methodname>helperName()</methodname> method. The
         object instance is persistent within the <classname>Zend_View</classname>
         instance, and is reused for all future calls to
         <code>$this->helperName()</code>.
@@ -67,7 +67,7 @@
 
             <listitem><para>
                 <code>declareVars():</code> Primarily for use when using
-                <code>strictVars()</code>, this helper can be used to declare
+                <methodname>strictVars()</methodname>, this helper can be used to declare
                 template variables that may or may not already be set in the
                 view object, as well as to set default values. Arrays passed as
                 arguments to the method will be used to set default values;
@@ -193,19 +193,19 @@ echo $this->formCheckbox('foo',
 
                 <itemizedlist>
                     <listitem><para>
-                            <code>setElementStart($string)</code>; default is
+                            <methodname>setElementStart($string)</methodname>; default is
                             '&lt;ul class="errors"%s"&gt;&lt;li&gt;', where %s
                             is replaced with the attributes as specified in
                             <code>$options</code>.
                     </para></listitem>
 
                     <listitem><para>
-                            <code>setElementSeparator($string)</code>; default
+                            <methodname>setElementSeparator($string)</methodname>; default
                             is '&lt;/li&gt;&lt;li&gt;'.
                     </para></listitem>
 
                     <listitem><para>
-                            <code>setElementEnd($string)</code>; default is
+                            <methodname>setElementEnd($string)</methodname>; default is
                             '&lt;/li&gt;&lt;/ul&gt;'.
                     </para></listitem>
                 </itemizedlist>
@@ -377,8 +377,8 @@ echo $this->formCheckbox('foo',
             for <classname>Zend_View</classname> to search for helper classes. By default,
             <classname>Zend_View</classname> looks in "Zend/View/Helper/*" for helper
             classes. You can tell <classname>Zend_View</classname> to look in other
-            locations using the <code>setHelperPath()</code> and
-            <code>addHelperPath()</code> methods. Additionally, you can
+            locations using the <methodname>setHelperPath()</methodname> and
+            <methodname>addHelperPath()</methodname> methods. Additionally, you can
             indicate a class prefix to use for helpers in the path provided, to
             allow namespacing your helper classes. By default, if no class
             prefix is provided, 'Zend_View_Helper_' is assumed.
@@ -393,7 +393,7 @@ $view->setHelperPath('/path/to/more/helpers', 'My_View_Helper');
 
         <para>
             In fact, you can "stack" paths using the
-            <code>addHelperPath()</code> method. As you add paths to the stack,
+            <methodname>addHelperPath()</methodname> method. As you add paths to the stack,
             <classname>Zend_View</classname> will look at the most-recently-added path for
             the requested helper class. This allows you to add to (or even
             override) the initial distribution of helpers with your own custom
@@ -432,7 +432,7 @@ $view->addHelperPath('/other/path/to/helpers', 'Your_View_Helper');
                 <classname>Zend_View_Helper_Interface</classname> or extending
                 <classname>Zend_View_Helper_Abstract</classname> when creating your
                 helpers. Introduced in 1.6.0, these simply define a
-                <code>setView()</code> method; however, in upcoming releases, we
+                <methodname>setView()</methodname> method; however, in upcoming releases, we
                 plan to implement a strategy pattern that will simplify much of
                 the naming schema detailed below. Building off these now will
                 help you future-proof your code.
@@ -446,8 +446,8 @@ $view->addHelperPath('/other/path/to/helpers', 'Your_View_Helper');
                 name a prefix, and it is recommended that you use 'View_Helper'
                 as part of that prefix: "My_View_Helper_SpecialPurpose". (You
                 will need to pass in the prefix, with or without the trailing
-                underscore, to <code>addHelperPath()</code> or
-                <code>setHelperPath()</code>).
+                underscore, to <methodname>addHelperPath()</methodname> or
+                <methodname>setHelperPath()</methodname>).
             </para></listitem>
 
             <listitem><para>
@@ -523,7 +523,7 @@ I have seen 'The Jerk' 3 time(s).
             object -- for instance, if you need to use the registered encoding,
             or want to render another view script as part of your helper. To get
             access to the view object, your helper class should have a
-            <code>setView($view)</code> method, like the following:
+            <methodname>setView($view)</methodname> method, like the following:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -544,7 +544,7 @@ class My_View_Helper_ScriptPath
 ]]></programlisting>
 
         <para>
-            If your helper class has a <code>setView()</code> method, it will be
+            If your helper class has a <methodname>setView()</methodname> method, it will be
             called when the helper class is first instantiated, and passed the
             current view object. It is up to you to persist the object in your
             class, as well as determine how it should be accessed.

@@ -152,7 +152,7 @@ $search_results = $twitter_search->search('zend', array('lang' => 'en'));
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>getResponseType()</code> and <code>setResponseType()</code>
+                    <methodname>getResponseType()</methodname> and <methodname>setResponseType()</methodname>
                     allow you to retrieve and modify the response type of the search
                     between JSON and ATOM.
                 </para>

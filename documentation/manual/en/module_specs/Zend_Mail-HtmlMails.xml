@@ -3,8 +3,8 @@
 <sect1 id="zend.mail.html-mails">
     <title>HTML E-Mail</title>
     <para>
-        To send an e-mail in HTML format, set the body using the method <code>setBodyHTML()</code> instead of
-        <code>setBodyText()</code>. The MIME content type will automatically be set to <code>text/html</code>
+        To send an e-mail in HTML format, set the body using the method <methodname>setBodyHTML()</methodname> instead of
+        <methodname>setBodyText()</methodname>. The MIME content type will automatically be set to <code>text/html</code>
         then. If you use both HTML and Text bodies, a multipart/alternative MIME message will automatically be
         generated:
     </para>

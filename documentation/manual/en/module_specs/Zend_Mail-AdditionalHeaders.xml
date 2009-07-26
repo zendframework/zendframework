@@ -3,7 +3,7 @@
 <sect1 id="zend.mail.additional-headers">
     <title>Additional Headers</title>
     <para>
-        Arbitrary mail headers can be set by using the <code>addHeader()</code> method. It requires two
+        Arbitrary mail headers can be set by using the <methodname>addHeader()</methodname> method. It requires two
         parameters containing the name and the value of the header field. A third optional parameter determines
         if the header should have only one or multiple values:
     </para>
@@ -17,7 +17,7 @@ $mail->addHeader('X-greetingsTo', 'Dad', true);
 ]]></programlisting>
     </example>
 
-    <para>To set the Reply-To: header there exists the function <code>setReplyTo($email, $name=null)</code>,
+    <para>To set the Reply-To: header there exists the function <methodname>setReplyTo($email, $name=null)</methodname>,
         because it requires additional special escaping of the different parts (email and name).</para>
 
 </sect1>

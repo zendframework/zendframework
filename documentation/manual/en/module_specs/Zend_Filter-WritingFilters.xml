@@ -11,7 +11,7 @@
     </para>
 
     <para>
-        <classname>Zend_Filter_Interface</classname> defines a single method, <code>filter()</code>,
+        <classname>Zend_Filter_Interface</classname> defines a single method, <methodname>filter()</methodname>,
         that may be implemented by user classes. An object that implements this interface may be
         added to a filter chain with <classname>Zend_Filter::addFilter()</classname>.
     </para>

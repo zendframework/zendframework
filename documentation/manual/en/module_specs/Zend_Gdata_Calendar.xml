@@ -249,7 +249,7 @@ try {
 }
 ]]></programlisting>
         <para>
-            Calling <code>getCalendarListFeed()</code> creates a new instance of
+            Calling <methodname>getCalendarListFeed()</methodname> creates a new instance of
             <classname>Zend_Gdata_Calendar_ListFeed</classname> containing each available calendar as an
             instance of <classname>Zend_Gdata_Calendar_ListEntry</classname>. After retrieving the feed, you
             can use the iterator and accessors contained within the feed to inspect the enclosed
@@ -389,7 +389,7 @@ $query->setStartMax('2006-12-16');
             <title>Retrieving Events By Fulltext Query</title>
             <para>
                 To print out all events which contain a specific word, for example "dogfood", use
-                the <code>setQuery()</code> method when creating the query.
+                the <methodname>setQuery()</methodname> method when creating the query.
             </para>
             <programlisting language="php"><![CDATA[
 $query->setQuery("dogfood");
@@ -399,8 +399,8 @@ $query->setQuery("dogfood");
             <title>Retrieving Individual Events</title>
             <para>
                 Individual events can be retrieved by specifying their event ID as part of the
-                query. Instead of calling <code>getCalendarEventFeed()</code>,
-                <code>getCalendarEventEntry()</code> should be called instead.
+                query. Instead of calling <methodname>getCalendarEventFeed()</methodname>,
+                <methodname>getCalendarEventEntry()</methodname> should be called instead.
             </para>
             <programlisting language="php"><![CDATA[
 $query = $service->newEventQuery();
@@ -417,7 +417,7 @@ try {
 ]]></programlisting>
             <para>
                 In a similar fashion, if the event URL is known, it can be passed directly into
-                <code>getCalendarEntry()</code> to retrieve a specific event. In this case, no
+                <methodname>getCalendarEntry()</methodname> to retrieve a specific event. In this case, no
                 query object is required since the event URL contains all the necessary information
                 to retrieve the event.
             </para>
@@ -533,7 +533,7 @@ try {
             </para>
             <para>
                 Once the event has been populated, it can be uploaded to the calendar server by
-                passing it as an argument to the calendar service's <code>insertEvent()</code>
+                passing it as an argument to the calendar service's <methodname>insertEvent()</methodname>
                 function.
             </para>
             <programlisting language="php"><![CDATA[
@@ -693,12 +693,12 @@ $newEvent = $service->insertEvent($event);
         <para>
             Once an instance of an event has been obtained, the event's attributes can be locally
             modified in the same way as when creating an event. Once all modifications are
-            complete, calling the event's <code>save()</code> method will upload the changes to the
+            complete, calling the event's <methodname>save()</methodname> method will upload the changes to the
             calendar server and return a copy of the event as it was created on the server.
         </para>
         <para>
             In the event another user has modified the event since the local copy was retrieved,
-            <code>save()</code> will fail and the server will return a 409 (Conflict) status code.
+            <methodname>save()</methodname> will fail and the server will return a 409 (Conflict) status code.
             To resolve this a fresh copy of the event must be retrieved from the server before
             attempting to resubmit any modifications.
         </para>
@@ -721,8 +721,8 @@ try {
         <title>Deleting Events</title>
         <para>
             Calendar events can be deleted either by calling the calendar service's
-            <code>delete()</code> method and providing the edit URL of an event or by calling an
-            existing event's own <code>delete()</code> method.
+            <methodname>delete()</methodname> method and providing the edit URL of an event or by calling an
+            existing event's own <methodname>delete()</methodname> method.
         </para>
         <para>
             In either case, the deleted event will still show up on a user's private event feed if

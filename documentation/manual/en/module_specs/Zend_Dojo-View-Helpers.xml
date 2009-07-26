@@ -90,7 +90,7 @@
 
             <para>
                 The argument order varies from the other dijits in order to
-                keep compatibility with the standard <code>form()</code> view
+                keep compatibility with the standard <methodname>form()</methodname> view
                 helper.
             </para>
         </listitem>
@@ -164,8 +164,8 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
             signature <code>string ($id = null, $content = '', array $params =
                 array(), array $attribs = array())</code>. In all caess, if you
             pass no arguments, the helper object itself will be returned. This
-            gives you access to the <code>captureStart()</code> and
-            <code>captureEnd()</code> methods, which allow you to capture
+            gives you access to the <methodname>captureStart()</methodname> and
+            <methodname>captureEnd()</methodname> methods, which allow you to capture
             content instead of passing it to the layout container.
         </para>
 
@@ -342,10 +342,10 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
 
             <listitem>
                 <para>
-                    <code>captureEnd($id)</code>:
+                    <methodname>captureEnd($id)</methodname>:
                     finish capturing content to include in a container.
                     <code>$id</code> should refer to an id previously used with
-                    a <code>captureStart()</code> call. Returns a string
+                    a <methodname>captureStart()</methodname> call. Returns a string
                     representing the container and its contents, just as if
                     you'd simply passed content to the helper itself.
                 </para>
@@ -619,7 +619,7 @@ $view->headMeta()->appendHttpEquiv('Content-Type',
 
                     <para>
                         This will mean, of course, that you will need to ensure
-                        that the <code>headMeta()</code> placeholder is echoed
+                        that the <methodname>headMeta()</methodname> placeholder is echoed
                         in your layout script.
                     </para>
                 </note>
@@ -1122,8 +1122,8 @@ echo $view->validationTextBox(
             <code>CustomDijit</code> extends the base
             <code>DijitContainer</code> view helper, which also allows it to
             capture content (using the
-            <code>captureStart()</code>/<code>captureEnd()</code> pair of
-            methods). <code>captureStart()</code> also expects that you pass the
+            <methodname>captureStart()</methodname>/<methodname>captureEnd()</methodname> pair of
+            methods). <methodname>captureStart()</methodname> also expects that you pass the
             "dojoType" attribute to its "params" argument.
         </para>
 
@@ -1157,7 +1157,7 @@ echo $view->validationTextBox(
 
             <para>
                 If you wanted to capture content instead, simply use the
-                <code>captureStart()</code> method, and pass the "dojoType" to
+                <methodname>captureStart()</methodname> method, and pass the "dojoType" to
                 the "params" argument:
             </para>
 

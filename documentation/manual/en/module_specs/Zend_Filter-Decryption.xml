@@ -24,7 +24,7 @@
         <para>
             There is one emminent difference for you. When you did not provide a vector at
             encryption you need to get it after you encrypted the content by using the
-            <code>getVector()</code> method on the encryption filter. Without the correct vector you
+            <methodname>getVector()</methodname> method on the encryption filter. Without the correct vector you
             will not be able to decrypt the content.
         </para>
 
@@ -111,7 +111,7 @@ $filter->setEnvelopeKey(array(
 
         <para>
             Optionally it could be necessary to provide the passphrase for decrypting the keys
-            themself by using the <code>setPassphrase()</code> method.
+            themself by using the <methodname>setPassphrase()</methodname> method.
         </para>
 
         <programlisting language="php"><![CDATA[

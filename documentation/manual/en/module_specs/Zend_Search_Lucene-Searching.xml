@@ -177,9 +177,9 @@ foreach ($hits as $hit) {
             Optionally, the original <classname>Zend_Search_Lucene_Document</classname> object can be returned from the
             <classname>Zend_Search_Lucene_Search_QueryHit</classname>.
 
-            You can retrieve stored parts of the document by using the <code>getDocument()</code>
+            You can retrieve stored parts of the document by using the <methodname>getDocument()</methodname>
             method of the index object and then get them by
-            <code>getFieldValue()</code> method:
+            <methodname>getFieldValue()</methodname> method:
         </para>
         <programlisting language="php"><![CDATA[
 $index = Zend_Search_Lucene::open('/data/my_index');
@@ -221,8 +221,8 @@ foreach ($hits as $hit) {
         </para>
 
         <para>
-            <classname>Zend_Search_Lucene</classname> gives the possibility to limit result set size with <code>getResultSetLimit()</code> and
-            <code>setResultSetLimit()</code> methods:
+            <classname>Zend_Search_Lucene</classname> gives the possibility to limit result set size with <methodname>getResultSetLimit()</methodname> and
+            <methodname>setResultSetLimit()</methodname> methods:
             <programlisting language="php"><![CDATA[
 $currentResultSetLimit = Zend_Search_Lucene::getResultSetLimit();
 
@@ -362,10 +362,10 @@ public function highlightExtended($words, $callback, $params = array())
 ]]></programlisting>
         </para>
         <para>
-            To customize highlighting behavior use <code>highlightExtended()</code> method with specified callback, which takes
+            To customize highlighting behavior use <methodname>highlightExtended()</methodname> method with specified callback, which takes
             one or more parameters<footnote><para>The first is an HTML fragment for highlighting and others are callback behavior
             dependent. Returned value is a highlighted HTML fragment.</para></footnote>, or extend
-            <classname>Zend_Search_Lucene_Document_Html</classname> class and redefine <code>applyColour($stringToHighlight, $colour)</code>
+            <classname>Zend_Search_Lucene_Document_Html</classname> class and redefine <methodname>applyColour($stringToHighlight, $colour)</methodname>
             method used as a default highlighting callback.
             <footnote>
                 <para>
@@ -452,7 +452,7 @@ interface Zend_Search_Lucene_Search_Highlighter_Interface
             object is instantiated and used.
         </para>
         <para>
-            Highlighter <code>highlight()</code> method is invoked once per subquery, so it has an ability to differentiate
+            Highlighter <methodname>highlight()</methodname> method is invoked once per subquery, so it has an ability to differentiate
             highlighting for them.
         </para>
         <para>

@@ -6,14 +6,14 @@
     <para>
         When extending <classname>Zend_Navigation_Page</classname>, there is
         usually no need to override the constructor or the methods
-        <code>setOptions()</code> or <code>setConfig()</code>. The page
+        <methodname>setOptions()</methodname> or <methodname>setConfig()</methodname>. The page
         constructor takes a single parameter, an <type>Array</type> or a
         <classname>Zend_Config</classname> object, which is passed to
-        <code>setOptions()</code> or <code>setConfig()</code> respectively.
-        Those methods will in turn call <code>set()</code> method, which
+        <methodname>setOptions()</methodname> or <methodname>setConfig()</methodname> respectively.
+        Those methods will in turn call <methodname>set()</methodname> method, which
         will map options to native or custom properties. If the option
         <code>internal_id</code> is given, the method will first look for a
-        method named <code>setInternalId()</code>, and pass the option to this
+        method named <methodname>setInternalId()</methodname>, and pass the option to this
         method if it exists. If the method does not exist, the option will be
         set as a custom property of the page, and be accessible via
         <code>$internalId = $page->internal_id;</code> or
@@ -25,7 +25,7 @@
 
         <para>
             The only thing a custom page class needs to implement is the
-            <code>getHref()</code> method.
+            <methodname>getHref()</methodname> method.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -44,8 +44,8 @@ class My_Simple_Page extends Zend_Navigation_Page
 
         <para>
             When adding properties to an extended page, there is no need
-            to override/modify <code>setOptions()</code> or
-            <code>setConfig()</code>.
+            to override/modify <methodname>setOptions()</methodname> or
+            <methodname>setConfig()</methodname>.
         </para>
 
         <programlisting language="php"><![CDATA[

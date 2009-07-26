@@ -35,7 +35,7 @@
             <ulink url="http://en.wikipedia.org/wiki/Numeral">number systems</ulink>
             different from the common
             <ulink url="http://en.wikipedia.org/wiki/Decimal">decimal system</ulink>
-            (e.g. "3.14"). Numbers can be normalized with the <code>getNumber()</code> function to obtain the standard
+            (e.g. "3.14"). Numbers can be normalized with the <methodname>getNumber()</methodname> function to obtain the standard
             decimal representation. for all number-related discussions in this manual,
             <ulink url="http://en.wikipedia.org/wiki/Arabic_numerals">Arabic/European numerals (0,1,2,3,4,5,6,7,8,9)</ulink>
             are implied, unless explicitly stated otherwise. The options array may contain a 'locale' to define grouping
@@ -60,7 +60,7 @@ print $number; // will return 13524.678
             <title>Precision and Calculations</title>
 
             <para>
-                Since <code>getNumber($value, array $options = array())</code> can normalize extremely large numbers,
+                Since <methodname>getNumber($value, array $options = array())</methodname> can normalize extremely large numbers,
                 check the result carefully before using finite precision calculations, such as ordinary PHP math
                 operations. For example, <code>if ((string)int_val($number) != $number) { use
                 <ulink url="http://www.php.net/bc">BCMath</ulink>
@@ -71,7 +71,7 @@ print $number; // will return 13524.678
 
             <para>
                 Also, the precision of the resulting decimal representation can be rounded to a desired length with
-                <code>getNumber()</code> with the option <code>'precision'</code>. If no precision is given,
+                <methodname>getNumber()</methodname> with the option <code>'precision'</code>. If no precision is given,
                 no rounding occurs. Use only PHP integers to specify the precision.
             </para>
 
@@ -110,11 +110,11 @@ print $number; // will return 13524.67
         <title>Number localization</title>
 
         <para>
-            <code>toNumber($value, array $options = array())</code> can localize numbers to the following
+            <methodname>toNumber($value, array $options = array())</methodname> can localize numbers to the following
             <link linkend="zend.locale.appendix">supported locales</link>
             . This function will return a localized string of the given number in a conventional format for a specific
             locale. The 'number_format' option explicitly specifies a non-default number format for use with
-            <code>toNumber()</code>.
+            <methodname>toNumber()</methodname>.
         </para>
 
         <example id="zend.locale.number.localize.example-1">
@@ -133,14 +133,14 @@ print $number;
             <note>
                 <title>Unlimited length</title>
                 <para>
-                    <code>toNumber()</code> can localize numbers with unlimited length. It is not related to integer or
+                    <methodname>toNumber()</methodname> can localize numbers with unlimited length. It is not related to integer or
                     float limitations.
                 </para>
             </note>
         </para>
 
         <para>
-            The same way as within <code>getNumber()</code>, <code>toNumber()</code> handles precision. If no precision
+            The same way as within <methodname>getNumber()</methodname>, <methodname>toNumber()</methodname> handles precision. If no precision
             is given, the complete localized number will be returned.
         </para>
 
@@ -240,7 +240,7 @@ print $number;
         <title>Number testing</title>
 
         <para>
-            <code>isNumber($value, array $options = array())</code> checks if a given string is a number and returns
+            <methodname>isNumber($value, array $options = array())</methodname> checks if a given string is a number and returns
             true or false.
         </para>
 
@@ -263,7 +263,7 @@ if (Zend_Locale_Format::isNumber('13.445,36', array('locale' => 'de_AT')) {
         <title>Float value normalization</title>
 
         <para>
-            Floating point values can be parsed with the <code>getFloat($value, array $options = array())</code>
+            Floating point values can be parsed with the <methodname>getFloat($value, array $options = array())</methodname>
             function. A floating point value will be returned.
         </para>
 
@@ -288,7 +288,7 @@ print $number;
         <title>Floating point value localization</title>
 
         <para>
-            <code>toFloat()</code> can localize floating point values. This function will return a localized string of
+            <methodname>toFloat()</methodname> can localize floating point values. This function will return a localized string of
             the given number.
         </para>
 
@@ -313,7 +313,7 @@ print $number;
         <title>Floating point value testing</title>
 
         <para>
-            <code>isFloat($value, array $options = array())</code> checks if a given string is a floating point value
+            <methodname>isFloat($value, array $options = array())</methodname> checks if a given string is a floating point value
             and returns true or false.
         </para>
 
@@ -336,7 +336,7 @@ if (Zend_Locale_Format::isFloat('13.445,36', array('locale' => $locale)) {
         <title>Integer value normalization</title>
 
         <para>
-            Integer values can be parsed with the <code>getInteger()</code> function. A integer value will be returned.
+            Integer values can be parsed with the <methodname>getInteger()</methodname> function. A integer value will be returned.
         </para>
 
         <example id="zend.locale.integer.normalize.example-1">
@@ -358,7 +358,7 @@ print $number;
         <title>Integer point value localization</title>
 
         <para>
-            <code>toInteger($value, array $options = array())</code> can localize integer values. This function will
+            <methodname>toInteger($value, array $options = array())</methodname> can localize integer values. This function will
             return a localized string of the given number.
         </para>
 
@@ -381,7 +381,7 @@ print $number;
         <title>Integer value testing</title>
 
         <para>
-            <code>isInteger($value, array $options = array())</code> checks if a given string is a integer value and
+            <methodname>isInteger($value, array $options = array())</methodname> checks if a given string is a integer value and
             returns true or false.
         </para>
 
@@ -427,7 +427,7 @@ if (Zend_Locale_Format::isInteger('13.445', array('locale' => $locale)) {
             Suppose a web form collected a numeric input expressed using Eastern Arabic digits "١‎٠٠".
             Most software and PHP functions expect input using Arabic numerals. Fortunately, converting this input
             to its equivalent Latin numerals "100" requires little effort using
-            <code>convertNumerals($inputNumeralString, $sourceNumeralSystem, $destNumeralSystem)</code>
+            <methodname>convertNumerals($inputNumeralString, $sourceNumeralSystem, $destNumeralSystem)</methodname>
             , which returns the <code>$input</code> with numerals in the script <code>$sourceNumeralSystem</code>
             converted to the script <code>$destNumeralSystem</code>.
         </para>

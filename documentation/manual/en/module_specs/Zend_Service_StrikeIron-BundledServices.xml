@@ -28,7 +28,7 @@
           </listitem>
         </itemizedlist>
 
-        The service contains a <code>getZipCode()</code> method that will retrieve information
+        The service contains a <methodname>getZipCode()</methodname> method that will retrieve information
         about a United States ZIP code or Canadian postal code:
 
         <programlisting language="php"><![CDATA[
@@ -94,7 +94,7 @@ $status = $response->serviceStatus;
       </para>
 
       <para>
-        The service contains a <code>verifyAddressUSA()</code> method that will verify
+        The service contains a <methodname>verifyAddressUSA()</methodname> method that will verify
         an address in the United States:
 
         <programlisting language="php"><![CDATA[
@@ -155,7 +155,7 @@ if ($result->addressErrorNumber != 0) {
       </para>
 
       <para>
-        The service contains two methods, <code>getTaxRateUSA()</code> and <code>getTaxRateCanada()</code>,
+        The service contains two methods, <methodname>getTaxRateUSA()</methodname> and <methodname>getTaxRateCanada()</methodname>,
         that will retrieve sales and use tax data for the United States and Canada, respectively.
 
         <programlisting language="php"><![CDATA[

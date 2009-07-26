@@ -29,7 +29,7 @@
             To use <classname>Zend_Dom_Query</classname>, you instantiate a
             <classname>Zend_Dom_Query</classname> object, optionally passing a document to
             query (a string). Once you have a document, you can use either the
-            <code>query()</code> or <code>queryXpath()</code> methods; each
+            <methodname>query()</methodname> or <methodname>queryXpath()</methodname> methods; each
             method will return a <classname>Zend_Dom_Query_Result</classname> object with
             any matching nodes.
         </para>
@@ -153,7 +153,7 @@ foreach ($results as $result) {
 
         <para>
             <classname>Zend_Dom_Query</classname> also allows straight XPath queries
-            utilizing the <code>queryXpath()</code> method; you can pass any
+            utilizing the <methodname>queryXpath()</methodname> method; you can pass any
             valid XPath query to this method, and it will return a
             <classname>Zend_Dom_Query_Result</classname> object.
         </para>
@@ -177,45 +177,45 @@ foreach ($results as $result) {
 
             <itemizedlist>
                 <listitem><para>
-                    <code>setDocumentXml($document)</code>: specify an XML
+                    <methodname>setDocumentXml($document)</methodname>: specify an XML
                     string to query against.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>setDocumentXhtml($document)</code>: specify an XHTML
+                    <methodname>setDocumentXhtml($document)</methodname>: specify an XHTML
                     string to query against.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>setDocumentHtml($document)</code>: specify an HTML
+                    <methodname>setDocumentHtml($document)</methodname>: specify an HTML
                     string to query against.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>setDocument($document)</code>: specify a
+                    <methodname>setDocument($document)</methodname>: specify a
                     string to query against; <classname>Zend_Dom_Query</classname> will
                     then attempt to autodetect the document type.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getDocument()</code>: retrieve the original document
+                    <methodname>getDocument()</methodname>: retrieve the original document
                     string provided to the object.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getDocumentType()</code>: retrieve the document
+                    <methodname>getDocumentType()</methodname>: retrieve the document
                     type of the document provided to the object; will be one of
                     the <code>DOC_XML</code>, <code>DOC_XHTML</code>, or
                     <code>DOC_HTML</code> class constants.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>query($query)</code>: query the document using CSS
+                    <methodname>query($query)</methodname>: query the document using CSS
                     selector notation.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>queryXpath($xPathQuery)</code>: query the document
+                    <methodname>queryXpath($xPathQuery)</methodname>: query the document
                     using XPath notation.
                 </para></listitem>
             </itemizedlist>
@@ -229,25 +229,25 @@ foreach ($results as $result) {
                 implements both <code>Iterator</code> and
                 <code>Countable</code>, and as such can be used in a
                 <code>foreach</code> loop as well as with the
-                <code>count()</code> function. Additionally, it exposes the
+                <methodname>count()</methodname> function. Additionally, it exposes the
                 following methods:
             </para>
 
             <itemizedlist>
                 <listitem><para>
-                    <code>getCssQuery()</code>: return the CSS selector query
+                    <methodname>getCssQuery()</methodname>: return the CSS selector query
                     used to produce the result (if any).
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getXpathQuery()</code>: return the XPath query
+                    <methodname>getXpathQuery()</methodname>: return the XPath query
                     used to produce the result. Internally,
                     <classname>Zend_Dom_Query</classname> converts CSS selector queries to
                     XPath, so this value will always be populated.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getDocument()</code>: retrieve the DOMDocument the
+                    <methodname>getDocument()</methodname>: retrieve the DOMDocument the
                     selection was made against.
                 </para></listitem>
             </itemizedlist>

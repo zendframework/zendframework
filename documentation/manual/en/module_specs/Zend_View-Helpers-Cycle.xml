@@ -14,7 +14,7 @@
 
         <para>
             To add elements to cycle just specify them in constructor
-            or use <code>assign(array $data)</code> function
+            or use <methodname>assign(array $data)</methodname> function
         </para>
 
         <programlisting language="php"><![CDATA[

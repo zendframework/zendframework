@@ -7,9 +7,9 @@
         <classname>Zend_Layout</classname> has a variety of configuration options. These
         may be set by calling the appropriate accessors, passing an array or
         <classname>Zend_Config</classname> object to the constructor or
-        <code>startMvc()</code>, passing an array of options to
-        <code>setOptions()</code>, or passing a <classname>Zend_Config</classname> object
-        to <code>setConfig()</code>.
+        <methodname>startMvc()</methodname>, passing an array of options to
+        <methodname>setOptions()</methodname>, or passing a <classname>Zend_Config</classname> object
+        to <methodname>setConfig()</methodname>.
     </para>
 
     <itemizedlist>
@@ -18,20 +18,20 @@
                 current inflector to resolve the name provided to the
                 appropriate layout view script. By default, this value is
                 'layout' and resolves to 'layout.phtml'. Accessors
-                are <code>setLayout()</code> and <code>getLayout()</code>.
+                are <methodname>setLayout()</methodname> and <methodname>getLayout()</methodname>.
         </para></listitem>
 
         <listitem><para>
                 <emphasis>layoutPath</emphasis>: the base path to layout view
-                scripts. Accessors are <code>setLayoutPath()</code> and
-                <code>getLayoutPath()</code>.
+                scripts. Accessors are <methodname>setLayoutPath()</methodname> and
+                <methodname>getLayoutPath()</methodname>.
         </para></listitem>
 
         <listitem><para>
                 <emphasis>contentKey</emphasis>: the layout variable used for
                 default content (when used with the MVC). Default value is
-                'content'. Accessors are <code>setContentKey()</code> and
-                <code>getContentKey()</code>.
+                'content'. Accessors are <methodname>setContentKey()</methodname> and
+                <methodname>getContentKey()</methodname>.
         </para></listitem>
 
         <listitem><para>
@@ -40,8 +40,8 @@
                 layout will not be rendered (this is to prevent double-rendering
                 of the layout when the <link linkend="zend.controller.plugins.standard.errorhandler">ErrorHandler
                 plugin</link> is in use). By default, the flat is true.
-                Accessors are <code>setMvcSuccessfulActionOnly()</code> and
-                <code>getMvcSuccessfulActionOnly()</code>.
+                Accessors are <methodname>setMvcSuccessfulActionOnly()</methodname> and
+                <methodname>getMvcSuccessfulActionOnly()</methodname>.
         </para></listitem>
 
         <listitem><para>
@@ -50,8 +50,8 @@
                 attempt to use the view object registered with <link
                     linkend="zend.controller.actionhelpers.viewrenderer">the
                     ViewRenderer</link> if no view object has been passed to it
-                explicitly. Accessors are <code>setView()</code> and
-                <code>getView()</code>.
+                explicitly. Accessors are <methodname>setView()</methodname> and
+                <methodname>getView()</methodname>.
         </para></listitem>
 
         <listitem><para>
@@ -59,8 +59,8 @@
                 when using <classname>Zend_Layout</classname> with the MVC components. By
                 default, this is
                 <classname>Zend_Layout_Controller_Action_Helper_Layout</classname>.
-                Accessors are <code>setHelperClass()</code> and
-                <code>getHelperClass()</code>.
+                Accessors are <methodname>setHelperClass()</methodname> and
+                <methodname>getHelperClass()</methodname>.
         </para></listitem>
 
         <listitem><para>
@@ -68,8 +68,8 @@
                 class to use when using <classname>Zend_Layout</classname> with the MVC
                 components. By default, this is
                 <classname>Zend_Layout_Controller_Plugin_Layout</classname>. Accessors
-                are <code>setPluginClass()</code> and
-                <code>getPluginClass()</code>.
+                are <methodname>setPluginClass()</methodname> and
+                <methodname>getPluginClass()</methodname>.
         </para></listitem>
 
         <listitem><para>
@@ -77,8 +77,8 @@
                 resolving layout names to layout view script paths; see <link
                     linkend="zend.layout.advanced.inflector">the
                     <classname>Zend_Layout</classname> inflector documentation for more
-                    details</link>. Accessors are <code>setInflector()</code>
-                and <code>getInflector()</code>.
+                    details</link>. Accessors are <methodname>setInflector()</methodname>
+                and <methodname>getInflector()</methodname>.
         </para></listitem>
     </itemizedlist>
 
@@ -88,7 +88,7 @@
         <para>
             In order for the <code>helperClass</code> and
             <code>pluginClass</code> settings to have effect, they must be
-            passed in as options to <code>startMvc()</code>; if set later, they
+            passed in as options to <methodname>startMvc()</methodname>; if set later, they
             have no affect.
         </para>
     </note>
@@ -123,7 +123,7 @@ $config = new Zend_Config_Ini('/path/to/layout.ini', 'layout');
             <title>Passing options to the constructor or startMvc()</title>
 
             <para>
-                Both the constructor and the <code>startMvc()</code> static
+                Both the constructor and the <methodname>startMvc()</methodname> static
                 method can accept either an array of options or a
                 <classname>Zend_Config</classname> object with options in order to
                 configure the <classname>Zend_Layout</classname> instance.
@@ -167,7 +167,7 @@ $layout = Zend_Layout::startMvc($config);
             <para>
                 Sometimes you need to configure the <classname>Zend_Layout</classname>
                 object after it has already been instantiated;
-                <code>setOptions()</code> and <code>setConfig()</code> give you
+                <methodname>setOptions()</methodname> and <methodname>setConfig()</methodname> give you
                 a quick and easy way to do so:
             </para>
 
@@ -183,7 +183,7 @@ $layout->setConfig($options);
                 Note, however, that certain options, such as
                 <code>pluginClass</code> and <code>helperClass</code>, will have
                 no affect when passed using this method; they need to be passed
-                to the constructor or <code>startMvc()</code> method.
+                to the constructor or <methodname>startMvc()</methodname> method.
             </para>
         </example>
 

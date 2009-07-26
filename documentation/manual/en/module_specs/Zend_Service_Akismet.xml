@@ -29,7 +29,7 @@
             Akismet's origins in WordPress, this resource is called the blog
             url. This value should be passed as the second argument to the
             constructor, but may be reset at any time using the
-            <code>setBlogUrl()</code> accessor, or overridden by specifying a
+            <methodname>setBlogUrl()</methodname> accessor, or overridden by specifying a
             'blog' key in the various method calls.
         </para>
     </sect2>
@@ -58,12 +58,12 @@ if ($akismet->verifyKey($apiKey) {
 ]]></programlisting>
 
         <para>
-            If called with no arguments, <code>verifyKey()</code> uses
+            If called with no arguments, <methodname>verifyKey()</methodname> uses
             the API key provided to the constructor.
         </para>
 
         <para>
-            <code>verifyKey()</code> implements Akismet's
+            <methodname>verifyKey()</methodname> implements Akismet's
             <code>verify-key</code> REST method.
         </para>
     </sect2>
@@ -170,7 +170,7 @@ if ($akismet->verifyKey($apiKey) {
         </para>
 
         <para>
-            The <code>isSpam()</code> method will return either true or
+            The <methodname>isSpam()</methodname> method will return either true or
             false, and throw an exception if the API key is invalid.
         </para>
 
@@ -197,7 +197,7 @@ if ($akismet->isSpam($data)) {
         </example>
 
         <para>
-            <code>isSpam()</code> implements the <code>comment-check</code>
+            <methodname>isSpam()</methodname> implements the <code>comment-check</code>
             Akismet API method.
         </para>
     </sect2>
@@ -214,7 +214,7 @@ if ($akismet->isSpam($data)) {
 
         <para>
             <classname>Zend_Service_Akismet::submitSpam()</classname> takes the same data
-            array as passed to <code>isSpam()</code>, but does not return a
+            array as passed to <methodname>isSpam()</methodname>, but does not return a
             value. An exception will be raised if the API key used is invalid.
         </para>
 
@@ -236,7 +236,7 @@ $akismet->submitSpam($data));
         </example>
 
         <para>
-            <code>submitSpam()</code> implements the <code>submit-spam</code>
+            <methodname>submitSpam()</methodname> implements the <code>submit-spam</code>
             Akismet API method.
         </para>
     </sect2>
@@ -254,8 +254,8 @@ $akismet->submitSpam($data));
 
         <para>
             <classname>Zend_Service_Akismet::submitHam()</classname> takes the same data
-            array as passed to <code>isSpam()</code> or
-            <code>submitSpam()</code>, and, like <code>submitSpam()</code>, does
+            array as passed to <methodname>isSpam()</methodname> or
+            <methodname>submitSpam()</methodname>, and, like <methodname>submitSpam()</methodname>, does
             not return a value. An exception will be raised if the API key used
             is invalid.
         </para>
@@ -278,7 +278,7 @@ $akismet->submitHam($data));
         </example>
 
         <para>
-            <code>submitHam()</code> implements the <code>submit-ham</code>
+            <methodname>submitHam()</methodname> implements the <code>submit-ham</code>
             Akismet API method.
         </para>
     </sect2>
@@ -295,7 +295,7 @@ $akismet->submitHam($data));
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>getBlogUrl()</code> and <code>setBlogUrl()</code>
+                    <methodname>getBlogUrl()</methodname> and <methodname>setBlogUrl()</methodname>
                     allow you to retrieve and modify the blog URL used in
                     requests.
                 </para>
@@ -303,7 +303,7 @@ $akismet->submitHam($data));
 
             <listitem>
                 <para>
-                    <code>getApiKey()</code> and <code>setApiKey()</code>
+                    <methodname>getApiKey()</methodname> and <methodname>setApiKey()</methodname>
                     allow you to retrieve and modify the API key used in
                     requests.
                 </para>
@@ -311,7 +311,7 @@ $akismet->submitHam($data));
 
             <listitem>
                 <para>
-                    <code>getCharset()</code> and <code>setCharset()</code>
+                    <methodname>getCharset()</methodname> and <methodname>setCharset()</methodname>
                     allow you to retrieve and modify the character set used to
                     make the request.
                 </para>
@@ -319,7 +319,7 @@ $akismet->submitHam($data));
 
             <listitem>
                 <para>
-                    <code>getPort()</code> and <code>setPort()</code>
+                    <methodname>getPort()</methodname> and <methodname>setPort()</methodname>
                     allow you to retrieve and modify the TCP port used to make
                     the request.
                 </para>
@@ -327,7 +327,7 @@ $akismet->submitHam($data));
 
             <listitem>
                 <para>
-                    <code>getUserAgent()</code> and <code>setUserAgent()</code>
+                    <methodname>getUserAgent()</methodname> and <methodname>setUserAgent()</methodname>
                     allow you to retrieve and modify the HTTP user agent used to
                     make the request. Note: this is not the user_agent used in
                     data submitted to the service, but rather the value provided

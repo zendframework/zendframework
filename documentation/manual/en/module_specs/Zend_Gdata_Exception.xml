@@ -34,7 +34,7 @@ try {
                     <classname>Zend_Gdata_App_BadMethodCallException</classname>
                     indicates that a method was called for a service
                     that does not support the method. For example,
-                    the CodeSearch service does not support <code>post()</code>.
+                    the CodeSearch service does not support <methodname>post()</methodname>.
                 </para>
             </listitem>
             <listitem>

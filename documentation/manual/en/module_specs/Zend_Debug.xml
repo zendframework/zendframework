@@ -42,10 +42,10 @@ Zend_Debug::dump($var, $label=null, $echo=true);
     <para>
         It may be helpful to understand that internally,
         <classname>Zend_Debug::dump()</classname> method wraps the PHP function
-        <ulink url="http://php.net/var_dump"><code>var_dump()</code></ulink>.
+        <ulink url="http://php.net/var_dump"><methodname>var_dump()</methodname></ulink>.
         If the output stream is detected as a web presentation,
-        the output of <code>var_dump()</code> is escaped using
-        <ulink url="http://php.net/htmlspecialchars"><code>htmlspecialchars()</code></ulink>
+        the output of <methodname>var_dump()</methodname> is escaped using
+        <ulink url="http://php.net/htmlspecialchars"><methodname>htmlspecialchars()</methodname></ulink>
         and wrapped with (X)HTML <code>&lt;pre&gt;</code> tags.
     </para>
 

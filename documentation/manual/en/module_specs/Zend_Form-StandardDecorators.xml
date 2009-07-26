@@ -56,7 +56,7 @@ class Util
             The Captcha decorator is for use with the <link
                 linkend="zend.form.standardElements.captcha">CAPTCHA form
                 element</link>. It utilizes the CAPTCHA adapter's
-            <code>render()</code> method to generate the output.
+            <methodname>render()</methodname> method to generate the output.
         </para>
 
         <para>
@@ -75,7 +75,7 @@ class Util
             The Description decorator can be used to display a description set
             on a <classname>Zend_Form</classname>, <classname>Zend_Form_Element</classname>, or
             <classname>Zend_Form_DisplayGroup</classname> item; it pulls the description
-            using the object's <code>getDescription()</code> method. Common use
+            using the object's <methodname>getDescription()</methodname> method. Common use
             cases are for providing UI hints for your elements.
         </para>
 
@@ -84,16 +84,16 @@ class Util
             the description is present, then it is wrapped in an HTML
             <code>p</code> tag by default, though you may specify a tag by
             passing a <code>tag</code> option when creating the decorator, or
-            calling <code>setTag()</code>. You may additionally specify a class
+            calling <methodname>setTag()</methodname>. You may additionally specify a class
             for the tag using the <code>class</code> option or by calling
-            <code>setClass()</code>; by default, the class 'hint' is used.
+            <methodname>setClass()</methodname>; by default, the class 'hint' is used.
         </para>
 
         <para>
             The description is escaped using the view object's escaping
             mechanisms by default. You can disable this by passing a
             <constant>FALSE</constant> value to the decorator's 'escape' option or
-            <code>setEscape()</code> method.
+            <methodname>setEscape()</methodname> method.
         </para>
     </sect2>
 
@@ -148,7 +148,7 @@ class Util
         <para>
             Display groups and sub forms render their content within
             fieldsets by default. The Fieldset decorator checks for either a
-            'legend' option or a <code>getLegend()</code> method in the
+            'legend' option or a <methodname>getLegend()</methodname> method in the
             registered element, and uses that as a legend if non-empty. Any
             content passed in is wrapped in the HTML fieldset, replacing the
             original content. Any attributes set in the decorated item are
@@ -187,7 +187,7 @@ class Util
             Forms, display groups, and sub forms are collections of
             elements. In order to render these elements, they utilize the
             FormElements decorator, which iterates through all items,
-            calling <code>render()</code> on each and joining them with the
+            calling <methodname>render()</methodname> on each and joining them with the
             registered separator. It can either append or prepend content
             passed to it.
         </para>
@@ -294,17 +294,17 @@ class Util
 
         <para>
             By default, the decorator uses the element's src property, which can
-            be set with the <code>setImage()</code> method, as the image
+            be set with the <methodname>setImage()</methodname> method, as the image
             source. Additionally, the element's label will be used as the alt
             tag, and the <code>imageValue</code> (manipulated with the Image
-            element's <code>setImageValue()</code> and
-            <code>getImageValue()</code> accessors) will be used for the value.
+            element's <methodname>setImageValue()</methodname> and
+            <methodname>getImageValue()</methodname> accessors) will be used for the value.
         </para>
 
         <para>
             To specify an HTML tag with which to wrap the element, either pass a
             'tag' option to the decorator, or explicitly call
-            <code>setTag()</code>.
+            <methodname>setTag()</methodname>.
         </para>
     </sect2>
 
@@ -315,7 +315,7 @@ class Util
             Form elements typically have labels, and the Label decorator is
             used to render these labels. It proxies to the FormLabel view
             helper, and pulls the element label using the
-            <code>getLabel()</code> method of the element. If no label is
+            <methodname>getLabel()</methodname> method of the element. If no label is
             present, none is rendered. By default, labels are translated when a
             translation adapter exists and a translation for the label exists.
         </para>
@@ -325,7 +325,7 @@ class Util
             the label in that block-level tag. If the 'tag' option is
             present, and no label present, the tag is rendered with no
             content. You can specify the class to use with the tag with the
-            'class' option or by calling <code>setClass()</code>.
+            'class' option or by calling <methodname>setClass()</methodname>.
         </para>
 
         <para>
@@ -340,29 +340,29 @@ class Util
             <listitem><para>
                     <code>optionalPrefix</code>: set the text to prefix the
                     label with when the element is optional. Use the
-                    <code>setOptionalPrefix()</code> and
-                    <code>getOptionalPrefix()</code> accessors to manipulate it.
+                    <methodname>setOptionalPrefix()</methodname> and
+                    <methodname>getOptionalPrefix()</methodname> accessors to manipulate it.
             </para></listitem>
 
             <listitem><para>
                     <code>optionalSuffix</code>: set the text to append the
                     label with when the element is optional. Use the
-                    <code>setOptionalSuffix()</code> and
-                    <code>getOptionalSuffix()</code> accessors to manipulate it.
+                    <methodname>setOptionalSuffix()</methodname> and
+                    <methodname>getOptionalSuffix()</methodname> accessors to manipulate it.
             </para></listitem>
 
             <listitem><para>
                     <code>requiredPrefix</code>: set the text to prefix the
                     label with when the element is required. Use the
-                    <code>setRequiredPrefix()</code> and
-                    <code>getRequiredPrefix()</code> accessors to manipulate it.
+                    <methodname>setRequiredPrefix()</methodname> and
+                    <methodname>getRequiredPrefix()</methodname> accessors to manipulate it.
             </para></listitem>
 
             <listitem><para>
                     <code>requiredSuffix</code>: set the text to append the
                     label with when the element is required. Use the
-                    <code>setRequiredSuffix()</code> and
-                    <code>getRequiredSuffix()</code> accessors to manipulate it.
+                    <methodname>setRequiredSuffix()</methodname> and
+                    <methodname>getRequiredSuffix()</methodname> accessors to manipulate it.
             </para></listitem>
         </itemizedlist>
 
@@ -455,7 +455,7 @@ $form->setDecorators(array(
 
             <listitem><para>
                     Additionally, all options passed to the decorator via
-                    <code>setOptions()</code> that are not used internally (such
+                    <methodname>setOptions()</methodname> that are not used internally (such
                     as placement, separator, etc.) are passed to the view script
                     as view variables.
             </para></listitem>

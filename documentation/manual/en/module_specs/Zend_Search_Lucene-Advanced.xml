@@ -122,9 +122,9 @@ Searcher::initIndex();
         </para>
 
         <para>
-            <classname>Zend_Search_Lucene</classname> provides a workaround to this problem with the <code>commit()</code> method. It saves all unsaved changes and frees memory used for storing new segments.
+            <classname>Zend_Search_Lucene</classname> provides a workaround to this problem with the <methodname>commit()</methodname> method. It saves all unsaved changes and frees memory used for storing new segments.
             You are free to use the commit operation any time- or even several times- during script execution. You can still use the <classname>Zend_Search_Lucene</classname> object for searching,
-            adding or deleting document after the commit operation. But the <code>commit()</code> call guarantees that if there are no document added or deleted after the call to <code>commit()</code>, then
+            adding or deleting document after the commit operation. But the <methodname>commit()</methodname> call guarantees that if there are no document added or deleted after the call to <methodname>commit()</methodname>, then
             the <classname>Zend_Search_Lucene</classname> destructor has nothing to do and will not throw exception:
 
             <programlisting language="php"><![CDATA[

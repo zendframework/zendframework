@@ -13,11 +13,11 @@
     <para>
         The <code>HeadTitle</code> helper is a concrete implementation of the
         <link linkend="zend.view.helpers.initial.placeholder">Placeholder
-            helper</link>. It overrides the <code>toString()</code> method to
+            helper</link>. It overrides the <methodname>toString()</methodname> method to
         enforce generating a <code>&lt;title&gt;</code> element, and adds a
-        <code>headTitle()</code> method for quick and easy setting and
+        <methodname>headTitle()</methodname> method for quick and easy setting and
         aggregation of title elements. The signature for that method is
-        <code>headTitle($title, $setType = 'APPEND')</code>; by default, the
+        <methodname>headTitle($title, $setType = 'APPEND')</methodname>; by default, the
         value is appended to the stack (aggregating title segments), but you may
         also specify either 'PREPEND' (place at top of stack) or 'SET'
         (overwrite stack).

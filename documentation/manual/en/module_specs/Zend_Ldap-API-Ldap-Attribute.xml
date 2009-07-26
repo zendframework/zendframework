@@ -30,13 +30,13 @@
         <varlistentry>
             <term><code>object</code> and <code>array</code></term>
             <listitem><para>The value will be converted to a string by using
-            <code>serialize()</code>.</para></listitem>
+            <methodname>serialize()</methodname>.</para></listitem>
         </varlistentry>
 
         <varlistentry>
             <term><code>resource</code></term>
             <listitem><para>If a <code>stream</code> resource is given, the data will be
-            fetched by calling <code>stream_get_contents()</code>.</para></listitem>
+            fetched by calling <methodname>stream_get_contents()</methodname>.</para></listitem>
         </varlistentry>
 
         <varlistentry>
@@ -232,7 +232,7 @@
                         default) <code>$value</code> will be appended to the attribute.
                         <code>$value</code> can be an integer value or an array of
                         integers. Date-time-conversion according to
-                        <code>Zend_Ldap_Attribute::convertToLdapDateTimeValue()</code> will
+                        <methodname>Zend_Ldap_Attribute::convertToLdapDateTimeValue()</methodname> will
                         take place.
                     </entry>
                 </row>
@@ -252,7 +252,7 @@
                         value at the given index will be returned. If the index is out of
                         bounds, <code>null</code> will be returned. Date-time-conversion
                         according to
-                        <code>Zend_Ldap_Attribute::convertFromLdapDateTimeValue()</code>
+                        <methodname>Zend_Ldap_Attribute::convertFromLdapDateTimeValue()</methodname>
                         will take place.
                     </entry>
                 </row>

@@ -64,7 +64,7 @@
 
         <para>
             For our application, we will define a plugin, 'Initialize', that
-            runs at <code>routeStartup()</code>. This allows us to encapsulate
+            runs at <methodname>routeStartup()</methodname>. This allows us to encapsulate
             our bootstrap in an OOP interface, which also provides an easy way
             to provide a callback. Let's look at the basics of this class
             first:
@@ -163,8 +163,8 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
             Once we have that in place, we can write our tests. However, what
             about those tests that require a user is logged in? The easy
             solution is to use our application logic to do so... and fudge a
-            little by using the <code>resetRequest()</code> and
-            <code>resetResponse()</code> methods, which will allow us to
+            little by using the <methodname>resetRequest()</methodname> and
+            <methodname>resetResponse()</methodname> methods, which will allow us to
             dispatch another request.
         </para>
 

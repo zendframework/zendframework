@@ -68,7 +68,7 @@ echo $unit;
         <title>Outputting values</title>
 
         <para>
-            The value of a measurement can be output using <code>getValue()</code>.
+            The value of a measurement can be output using <methodname>getValue()</methodname>.
             <example id="zend.measure.output.value.example-1">
                 <title>Output a value</title>
                 <programlisting language="php"><![CDATA[
@@ -84,7 +84,7 @@ echo $unit->getValue();
         </para>
 
         <para>
-            The <code>getValue()</code> method accepts an optional parameter '<code>round</code>' which allows to
+            The <methodname>getValue()</methodname> method accepts an optional parameter '<code>round</code>' which allows to
             define a precision for the generated output. The standard precision is '<code>2</code>'.
         </para>
     </sect2>
@@ -94,7 +94,7 @@ echo $unit->getValue();
         <title>Output with unit of measurement</title>
 
         <para>
-            The function <code>getType()</code> returns the current unit of measurement.
+            The function <methodname>getType()</methodname> returns the current unit of measurement.
             <example id="zend.measure.output.unit.example-1">
                 <title>Outputting units</title>
                 <programlisting language="php"><![CDATA[

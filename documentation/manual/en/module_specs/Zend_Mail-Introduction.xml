@@ -38,13 +38,13 @@ $mail->send();
             <title>Minimum definitions</title>
             <para>
                 In order to send an e-mail with <classname>Zend_Mail</classname> you have to specify at least one recipient, a
-                sender (e.g., with <code>setFrom()</code>), and a message body (text and/or HTML).
+                sender (e.g., with <methodname>setFrom()</methodname>), and a message body (text and/or HTML).
             </para>
         </note>
 
         <para>
             For most mail attributes there are "get" methods to read the information stored in the mail object. For
-            further details, please refer to the API documentation. A special one is <code>getRecipients()</code>.
+            further details, please refer to the API documentation. A special one is <methodname>getRecipients()</methodname>.
             It returns an array with all recipient e-mail addresses that were added prior to the method call.
         </para>
 
@@ -76,10 +76,10 @@ $mail->setBodyText('This is the text of the mail.')
 
         <para>
             The default transport for a <classname>Zend_Mail</classname> instance is <classname>Zend_Mail_Transport_Sendmail</classname>.
-            It is essentially a wrapper to the PHP <ulink url="http://php.net/mail"><code>mail()</code></ulink> function.
-            If you wish to pass additional parameters to the <ulink url="http://php.net/mail"><code>mail()</code></ulink> function,
+            It is essentially a wrapper to the PHP <ulink url="http://php.net/mail"><methodname>mail()</methodname></ulink> function.
+            If you wish to pass additional parameters to the <ulink url="http://php.net/mail"><methodname>mail()</methodname></ulink> function,
             simply create a new transport instance and pass your parameters to the constructor. The new transport instance
-            can then act as the default <classname>Zend_Mail</classname> transport, or it can be passed to the <code>send()</code>
+            can then act as the default <classname>Zend_Mail</classname> transport, or it can be passed to the <methodname>send()</methodname>
             method of <classname>Zend_Mail</classname>.
         </para>
 
@@ -88,7 +88,7 @@ $mail->setBodyText('This is the text of the mail.')
             <title>Passing additional parameters to the Zend_Mail_Transport_Sendmail transport</title>
 
             <para>
-                This example shows how to change the Return-Path of the <ulink url="http://php.net/mail"><code>mail()</code></ulink>
+                This example shows how to change the Return-Path of the <ulink url="http://php.net/mail"><methodname>mail()</methodname></ulink>
                 function.
             </para>
 
@@ -109,7 +109,7 @@ $mail->send();
         <note>
             <title>Safe mode restrictions</title>
             <para>
-                The optional additional parameters will be cause the <ulink url="http://php.net/mail"><code>mail()</code></ulink> function to fail
+                The optional additional parameters will be cause the <ulink url="http://php.net/mail"><methodname>mail()</methodname></ulink> function to fail
                 if PHP is running in safe mode.
             </para>
         </note>

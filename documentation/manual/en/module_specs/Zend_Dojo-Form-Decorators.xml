@@ -34,10 +34,10 @@
 
         <para>
             It is important that each element have a unique ID (as fetched from
-            the element's <code>getId()</code> method). If duplicates are
-            detected within the <code>dojo()</code> view helper, the decorator
+            the element's <methodname>getId()</methodname> method). If duplicates are
+            detected within the <methodname>dojo()</methodname> view helper, the decorator
             will trigger a notice, but then create a unique ID by appending the
-            return of <code>uniqid()</code> to the identifier.
+            return of <methodname>uniqid()</methodname> to the identifier.
         </para>
 
         <para>

@@ -145,21 +145,21 @@ $loader = new Zend_Loader_PluginLoader(array(), 'foobar');
 
         <itemizedlist>
             <listitem><para>
-                    <code>getPaths($prefix = null)</code> returns all paths as
+                    <methodname>getPaths($prefix = null)</methodname> returns all paths as
                     prefix / path pairs if no <code>$prefix</code> is provided,
                     or just the paths registered for a given prefix if a
                     <code>$prefix</code> is present.
             </para></listitem>
 
             <listitem><para>
-                    <code>clearPaths($prefix = null)</code> will clear all
+                    <methodname>clearPaths($prefix = null)</methodname> will clear all
                     registered paths by default, or only those associated with a
                     given prefix, if the <code>$prefix</code> is provided and
                     present in the stack.
             </para></listitem>
 
             <listitem><para>
-                    <code>removePrefixPath($prefix, $path = null)</code> allows
+                    <methodname>removePrefixPath($prefix, $path = null)</methodname> allows
                     you to selectively remove a specific path associated with a
                     given prefix. If no <code>$path</code> is provided, all
                     paths for that prefix are removed. If a <code>$path</code>
@@ -174,15 +174,15 @@ $loader = new Zend_Loader_PluginLoader(array(), 'foobar');
 
         <para>
             Sometimes you simply want to determine if a plugin class has been
-            loaded before you perform an action. <code>isLoaded()</code> takes a
+            loaded before you perform an action. <methodname>isLoaded()</methodname> takes a
             plugin name, and returns the status.
         </para>
 
         <para>
             Another common use case for the <code>PluginLoader</code> is to
             determine fully qualified plugin class names of loaded classes;
-            <code>getClassName()</code> provides this functionality. Typically,
-            this would be used in conjunction with <code>isLoaded()</code>:
+            <methodname>getClassName()</methodname> provides this functionality. Typically,
+            this would be used in conjunction with <methodname>isLoaded()</methodname>:
         </para>
 
         <programlisting language="php"><![CDATA[

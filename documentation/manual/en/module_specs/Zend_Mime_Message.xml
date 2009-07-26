@@ -58,7 +58,7 @@
 
         <para><code>-&gt;getMime()</code> returns the instance of
         <classname>Zend_Mime</classname> that will be used to render the message when
-        <code>generateMessage()</code> is called.</para>
+        <methodname>generateMessage()</methodname> is called.</para>
 
         <para><code>-&gt;generateMessage()</code> renders the <classname>Zend_Mime_Message</classname>
         content to a string.</para>

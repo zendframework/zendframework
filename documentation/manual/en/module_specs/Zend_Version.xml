@@ -14,7 +14,7 @@
     <para>
         The static method <classname>Zend_Version::compareVersion($version)</classname>
         is based on the PHP function
-        <ulink url="http://php.net/version_compare"><code>version_compare()</code></ulink>.
+        <ulink url="http://php.net/version_compare"><methodname>version_compare()</methodname></ulink>.
         This method returns -1 if the specified version
         is older than the installed Zend Framework version, 0 if they are the same
         and +1 if the specified version is newer than the

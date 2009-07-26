@@ -51,7 +51,7 @@
 
             <para>
                 To set the domain for requests made by the service class,
-                either call <code>setDomain()</code> or specify the domain
+                either call <methodname>setDomain()</methodname> or specify the domain
                 when instantiating the service class. For example:
             </para>
 
@@ -68,7 +68,7 @@ $gdata = new Zend_Gdata_Gapps($client, $domain);
             <para>
                 Setting the domain for requests made by query classes is
                 similar to setting it for the service class-either call
-                <code>setDomain()</code> or specify the domain when creating
+                <methodname>setDomain()</methodname> or specify the domain when creating
                 the query. For example:
             </para>
 
@@ -109,7 +109,7 @@ $query = $gdata->newUserQuery($arg);
 
             <para>
                 User accounts can be created by calling the
-                <code>createUser()</code> convenience method:
+                <methodname>createUser()</methodname> convenience method:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -119,7 +119,7 @@ $gdata->createUser('foo', 'Random', 'User', '••••••••');
             <para>
                 Users can also be created by instantiating UserEntry,
                 providing a username, given name, family name, and password,
-                then calling <code>insertUser()</code> on a service object to
+                then calling <methodname>insertUser()</methodname> on a service object to
                 upload the entry to the server.
             </para>
 
@@ -147,7 +147,7 @@ $user = $gdata->insertUser($user);
 
             <para>
                 Individual user accounts can be retrieved by calling the
-                <code>retrieveUser()</code> convenience method. If the user is
+                <methodname>retrieveUser()</methodname> convenience method. If the user is
                 not found, <constant>NULL</constant> will be returned.
             </para>
 
@@ -169,7 +169,7 @@ echo 'Has Agreed To Terms: ' .
                 Users can also be retrieved by creating an
                 instance of <classname>Zend_Gdata_Gapps_UserQuery</classname>, setting its username
                 property to equal the username of the user that is to be
-                retrieved, and calling <code>getUserEntry()</code> on a
+                retrieved, and calling <methodname>getUserEntry()</methodname> on a
                 service object with that query.
             </para>
 
@@ -203,7 +203,7 @@ echo 'Has Agreed To Terms: ' .
 
             <para>
                 To retrieve all users in a domain, call the
-                <code>retrieveAllUsers()</code> convenience method.
+                <methodname>retrieveAllUsers()</methodname> convenience method.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -221,7 +221,7 @@ foreach ($feed as $user) {
             </para>
 
             <para>
-                Alternatively, call <code>getUserFeed()</code> with no
+                Alternatively, call <methodname>getUserFeed()</methodname> with no
                 options. Keep in mind that on larger
                 domains this feed may be paged by the server. For more
                 information on paging, see <xref
@@ -245,7 +245,7 @@ foreach ($feed as $user) {
             <para>
                 The easiest way to update a user account is to retrieve the
                 user as described in the previous sections, make any desired
-                changes, then call <code>save()</code> on that user. Any
+                changes, then call <methodname>save()</methodname> on that user. Any
                 changes made will be propagated to the server.
             </para>
 
@@ -310,7 +310,7 @@ $user = $user->save();
                     their user account by instead
                     <emphasis>suspending</emphasis> their user account.
                     Accounts can be suspended or restored by using the
-                    <code>suspendUser()</code> and <code>restoreUser()</code>
+                    <methodname>suspendUser()</methodname> and <methodname>restoreUser()</methodname>
                     convenience methods:
                 </para>
 
@@ -369,7 +369,7 @@ $user = $user->save();
 
             <para>
                 Deleting a user account to which you already hold a UserEntry
-                is a simple as calling <code>delete()</code> on that
+                is a simple as calling <methodname>delete()</methodname> on that
                 entry.
             </para>
 
@@ -380,7 +380,7 @@ $user->delete();
 
             <para>
                 If you do not have access to a UserEntry object for an
-                account, use the <code>deleteUser()</code> convenience method.
+                account, use the <methodname>deleteUser()</methodname> convenience method.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -411,7 +411,7 @@ $gdata->deleteUser('foo');
 
             <para>
                 Nicknames can be created by calling the
-                <code>createNickname()</code> convenience method:
+                <methodname>createNickname()</methodname> convenience method:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -421,7 +421,7 @@ $gdata->createNickname('foo', 'bar');
             <para>
                 Nicknames can also be created by instantiating NicknameEntry,
                 providing the nickname with a name and an owner, then calling
-                <code>insertNickname()</code> on a service object to upload
+                <methodname>insertNickname()</methodname> on a service object to upload
                 the entry to the server.
             </para>
 
@@ -439,7 +439,7 @@ $nickname = $gdata->insertNickname($nickname);
 
             <para>
                 Nicknames can be retrieved by calling the
-                <code>retrieveNickname()</code> convenience method. This will
+                <methodname>retrieveNickname()</methodname> convenience method. This will
                 return <constant>NULL</constant> if a user is not found.
             </para>
 
@@ -454,7 +454,7 @@ echo 'Owner: ' . $nickname->login->username . "\n";
                 Individual nicknames can also be retrieved by creating an
                 instance of <classname>Zend_Gdata_Gapps_NicknameQuery</classname>, setting its
                 nickname property to equal the nickname that is to be
-                retrieved, and calling <code>getNicknameEntry()</code> on a
+                retrieved, and calling <methodname>getNicknameEntry()</methodname> on a
                 service object with that query.
             </para>
 
@@ -481,7 +481,7 @@ echo 'Owner: ' . $nickname->login->username . "\n";
 
             <para>
                 To retrieve all nicknames associated with a given user, call
-                the convenience method <code>retrieveNicknames()</code>.
+                the convenience method <methodname>retrieveNicknames()</methodname>.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -500,7 +500,7 @@ foreach ($feed as $nickname) {
             <para>
                 Alternatively, create a new <classname>Zend_Gdata_Gapps_NicknameQuery</classname>,
                 set its username property to the desired user, and submit the
-                query by calling <code>getNicknameFeed()</code> on a service
+                query by calling <methodname>getNicknameFeed()</methodname> on a service
                 object.
             </para>
 
@@ -520,7 +520,7 @@ foreach ($feed as $nickname) {
             <title>Retrieving all nicknames in a domain</title>
             <para>
                 To retrieve all nicknames in a feed, simply call the
-                convenience method <code>retrieveAllNicknames()</code>
+                convenience method <methodname>retrieveAllNicknames()</methodname>
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -538,7 +538,7 @@ foreach ($feed as $nickname) {
             </para>
 
             <para>
-                Alternatively, call <code>getNicknameFeed()</code> on a
+                Alternatively, call <methodname>getNicknameFeed()</methodname> on a
                 service object with no arguments.
             </para>
 
@@ -558,7 +558,7 @@ foreach ($feed as $nickname) {
 
             <para>
                 Deleting a nickname to which you already hold a NicknameEntry
-                for is a simple as calling <code>delete()</code> on that
+                for is a simple as calling <methodname>delete()</methodname> on that
                 entry.
             </para>
 
@@ -569,7 +569,7 @@ $nickname->delete();
 
             <para>
                 For nicknames which you do not hold a NicknameEntry for, use
-                the <code>deleteNickname()</code> convenience method.
+                the <methodname>deleteNickname()</methodname> convenience method.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -600,7 +600,7 @@ $gdata->deleteNickname('bar');
 
             <para>
                 Email lists can be created by calling the
-                <code>createEmailList()</code> convenience method:
+                <methodname>createEmailList()</methodname> convenience method:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -610,7 +610,7 @@ $gdata->createEmailList('friends');
             <para>
                 Email lists can also be created by instantiating
                 EmailListEntry, providing a name for the list, then calling
-                <code>insertEmailList()</code> on a service object to upload
+                <methodname>insertEmailList()</methodname> on a service object to upload
                 the entry to the server.
             </para>
 
@@ -628,7 +628,7 @@ $list = $gdata->insertEmailList($list);
 
             <para>
                 To retrieve all email lists to which a particular recipient is
-                subscribed, call the <code>retrieveEmailLists()</code>
+                subscribed, call the <methodname>retrieveEmailLists()</methodname>
                 convenience method:
             </para>
 
@@ -648,7 +648,7 @@ foreach ($feed as $list) {
             <para>
                 Alternatively, create a new <classname>Zend_Gdata_Gapps_EmailListQuery</classname>,
                 set its recipient property to the desired email address, and
-                submit the query by calling <code>getEmailListFeed()</code> on
+                submit the query by calling <methodname>getEmailListFeed()</methodname> on
                 a service object.
             </para>
 
@@ -669,7 +669,7 @@ foreach ($feed as $list) {
 
             <para>
                 To retrieve all email lists in a domain, call the convenience
-                method <code>retrieveAllEmailLists()</code>.
+                method <methodname>retrieveAllEmailLists()</methodname>.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -686,7 +686,7 @@ foreach ($feed as $list) {
             </para>
 
             <para>
-                Alternatively, call <code>getEmailListFeed()</code> on a
+                Alternatively, call <methodname>getEmailListFeed()</methodname> on a
                 service object with no arguments.
             </para>
 
@@ -731,7 +731,7 @@ $gdata->deleteEmailList('friends');
 
             <para>
                 To add a recipient to an email list, simply call the
-                <code>addRecipientToEmailList()</code> convenience method:
+                <methodname>addRecipientToEmailList()</methodname> convenience method:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -744,7 +744,7 @@ $gdata->addRecipientToEmailList('bar@somewhere.com', 'friends');
             <title>Retrieving the list of subscribers to an email list</title>
 
             <para>
-                The convenience method <code>retrieveAllRecipients()</code>
+                The convenience method <methodname>retrieveAllRecipients()</methodname>
                 can be used to retrieve the list of subscribers to an email list:
             </para>
 
@@ -759,7 +759,7 @@ foreach ($feed as $recipient) {
             <para>
                 Alternatively, construct a new EmailListRecipientQuery, set
                 its emailListName property to match the desired email list,
-                and call <code>getEmailListRecipientFeed()</code> on a service
+                and call <methodname>getEmailListRecipientFeed()</methodname> on a service
                 object.
             </para>
 
@@ -785,7 +785,7 @@ foreach ($feed as $recipient) {
 
             <para>
                 To remove a recipient from an email list, call the
-                <code>removeRecipientFromEmailList()</code> convenience
+                <methodname>removeRecipientFromEmailList()</methodname> convenience
                 method:
             </para>
 
@@ -821,10 +821,10 @@ $gdata->removeRecipientFromEmailList('baz@somewhere.com', 'friends');
 
         <para>
             While the complete list of errors received is available within
-            ServiceException as an array by calling <code>getErrors()</code>,
+            ServiceException as an array by calling <methodname>getErrors()</methodname>,
             often it is convenient to know if one specific error occurred. For
             these cases the presence of an error can be determined by calling
-            <code>hasError()</code>.
+            <methodname>hasError()</methodname>.
         </para>
 
         <para>

@@ -37,7 +37,7 @@ print $server->getDate()->getIso();
             So what is happening in the background of <classname>Zend_TimeSync</classname>? First the syntax of the
             time server is checked. In our example, '<code>0.pool.ntp.org</code>' is checked and
             recognised as a possible address for a time server. Then when calling
-            <code>getDate()</code> the actual set time server is requested and it will return its own
+            <methodname>getDate()</methodname> the actual set time server is requested and it will return its own
             time. <classname>Zend_TimeSync</classname> then calculates the difference to the actual time of the
             server running the script and returns a <classname>Zend_Date</classname> object with the
             correct time.
@@ -63,7 +63,7 @@ print $server->getDate()->getIso();
             <classname>Zend_TimeSync</classname> is a simple solution that can handle multiple time servers and supports an
             automatic fallback mechanism. There are two supported ways; you can either specify an array
             of time servers when creating the instance, or you can add additional time servers to the instance
-            using the <code>addServer()</code> method.
+            using the <methodname>addServer()</methodname> method.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -178,10 +178,10 @@ print $server->getDate()->getIso();
         </para>
 
         <para>
-            With the <code>setOptions()</code> method, you can set any option. This function accepts an array where the
+            With the <methodname>setOptions()</methodname> method, you can set any option. This function accepts an array where the
             key is the option to set and the value is the value of that option. Any previously set option will
             be overwritten by the new value. If you want to know which options are set, use the
-            <code>getOptions()</code> method. It accepts either a key which returns the given option if specified,
+            <methodname>getOptions()</methodname> method. It accepts either a key which returns the given option if specified,
             or, if no key is set, it will return all set options.
         </para>
 
@@ -210,9 +210,9 @@ print "Timeout = " . Zend_TimeSync::getOptions('timeout');
         <para>
             <classname>Zend_TimeSync</classname>'s default behavior for requesting a time is to request it from the first given server.
             But sometimes it is useful to set a different time server from which to request the time.
-            This can be done with the <code>setServer()</code> method. To define the used time server
+            This can be done with the <methodname>setServer()</methodname> method. To define the used time server
             set the alias as a parameter within the method. To get the actual used time server
-            call the <code>getServer()</code> method. It accepts an alias as a parameter which
+            call the <methodname>getServer()</methodname> method. It accepts an alias as a parameter which
             defines the time server to be returned. If no parameter is given, the current time server will
             be returned.
         </para>
@@ -234,7 +234,7 @@ $server = $server->setServer('additional');
 
         <para>
             Time servers not only offer the time itself, but also additional information. You can
-            get this information with the <code>getInfo()</code> method.
+            get this information with the <methodname>getInfo()</methodname> method.
         </para>
 
         <programlisting language="php"><![CDATA[

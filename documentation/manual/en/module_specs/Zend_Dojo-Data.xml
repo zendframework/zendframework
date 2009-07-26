@@ -64,7 +64,7 @@ $data->setIdentifier('id')
 
         <para>
             You can also add a single item at a time, or append items, using
-            <code>addItem()</code> and <code>addItems()</code>.
+            <methodname>addItem()</methodname> and <methodname>addItems()</methodname>.
         </para>
 
         <example id="zend.dojo.data.usage.append">
@@ -98,7 +98,7 @@ $data->addItems($someMoreItems);
             </para></listitem>
 
             <listitem><para>
-                Objects implementing a <code>toArray()</code> method
+                Objects implementing a <methodname>toArray()</methodname> method
             </para></listitem>
 
             <listitem><para>
@@ -108,7 +108,7 @@ $data->addItems($someMoreItems);
 
         <para>
             You can attach collections of the above items via
-            <code>addItems()</code> or <code>setItems()</code> (overwrites all
+            <methodname>addItems()</methodname> or <methodname>setItems()</methodname> (overwrites all
             previously set items); when doing so, you may pass a single
             argument:
         </para>
@@ -127,7 +127,7 @@ $data->addItems($someMoreItems);
 
         <para>
             If you want to specify a field that will act as a label for the
-            item, call <code>setLabel()</code>:
+            item, call <methodname>setLabel()</methodname>:
         </para>
 
         <example id="zend.dojo.data.usage.label">
@@ -140,7 +140,7 @@ $data->setLabel('name');
 
         <para>
             Finally, you can also load a <classname>Zend_Dojo_Data</classname> item from a
-            dojo.data JSON array, using the <code>fromJson()</code> method.
+            dojo.data JSON array, using the <methodname>fromJson()</methodname> method.
         </para>
 
         <example id="zend.dojo.data.usage.populate">
@@ -218,7 +218,7 @@ $data->clearMetadata();
             All items are referenced by the identifier field. Since identifiers
             must be unique, you can use the values of this field to pull
             individual records. There are two ways to do this: with the
-            <code>getItem()</code> method, or via array notation.
+            <methodname>getItem()</methodname> method, or via array notation.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -266,7 +266,7 @@ echo count($data), " items found!";
 ]]></programlisting>
 
         <para>
-            Finally, as the class implements <code>__toString()</code>, you can
+            Finally, as the class implements <methodname>__toString()</methodname>, you can
             also cast it to JSON simply by echoing it or casting to string:
         </para>
 
@@ -286,32 +286,32 @@ $json = (string) $data; // cast to string == cast to JSON
 
             <itemizedlist>
                 <listitem><para>
-                    <code>setItems($items)</code>: set multiple items at once,
+                    <methodname>setItems($items)</methodname>: set multiple items at once,
                     overwriting any items that were previously set in the
                     object. <code>$items</code> should be an array or a
                     <code>Traversable</code> object.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>setItem($item, $id = null)</code>: set an individual
+                    <methodname>setItem($item, $id = null)</methodname>: set an individual
                     item, optionally passing an explicit identifier. Overwrites
                     the item if it is already in the collection. Valid items
                     include associative arrays, objects implementing
-                    <code>toArray()</code>, or any object with public
+                    <methodname>toArray()</methodname>, or any object with public
                     properties.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>addItem($item, $id = null)</code>: add an individual
+                    <methodname>addItem($item, $id = null)</methodname>: add an individual
                     item, optionally passing an explicit identifier. Will raise
                     an exception if the item already exists in the collection.
                     Valid items include associative arrays, objects implementing
-                    <code>toArray()</code>, or any object with public
+                    <methodname>toArray()</methodname>, or any object with public
                     properties.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>addItems($items)</code>: add multiple items at once,
+                    <methodname>addItems($items)</methodname>: add multiple items at once,
                     appending them to any current items. Will raise an exception
                     if any of the new items have an identifier matching an
                     identifier already in the collection. <code>$items</code>
@@ -319,61 +319,61 @@ $json = (string) $data; // cast to string == cast to JSON
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getItems()</code>: retrieve all items as an array of
+                    <methodname>getItems()</methodname>: retrieve all items as an array of
                     arrays.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>hasItem($id)</code>: determine whether an item with
+                    <methodname>hasItem($id)</methodname>: determine whether an item with
                     the given identifier exists in the collection.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getItem($id)</code>: retrieve an item with the given
+                    <methodname>getItem($id)</methodname>: retrieve an item with the given
                     identifier from the collection; the item returned will be an
                     associative array. If no item matches, a null value is
                     returned.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>removeItem($id)</code>: remove an item with the given
+                    <methodname>removeItem($id)</methodname>: remove an item with the given
                     identifier from the collection.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>clearItems()</code>: remove all items from the
+                    <methodname>clearItems()</methodname>: remove all items from the
                     collection.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>setIdentifier($identifier)</code>: set the name of the
+                    <methodname>setIdentifier($identifier)</methodname>: set the name of the
                     field that represents the unique identifier for each item in
                     the collection.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getIdentifier()</code>: retrieve the name of the
+                    <methodname>getIdentifier()</methodname>: retrieve the name of the
                     identifier field.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>setLabel($label)</code>: set the name of a field
+                    <methodname>setLabel($label)</methodname>: set the name of a field
                     to be used as a display label for an item.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getLabel()</code>: retrieve the label field name.
+                    <methodname>getLabel()</methodname>: retrieve the label field name.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>toArray()</code>: cast the object to an array. At a minimum, the
+                    <methodname>toArray()</methodname>: cast the object to an array. At a minimum, the
                     array will contain the keys 'identifier',
                     'items', and 'label' if a label field has been set
                     in the object.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>toJson()</code>: cast the object to a JSON
+                    <methodname>toJson()</methodname>: cast the object to a JSON
                     representation.
                 </para></listitem>
             </itemizedlist>

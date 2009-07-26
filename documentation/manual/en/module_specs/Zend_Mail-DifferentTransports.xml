@@ -4,9 +4,9 @@
     <title>Using Different Transports</title>
     <para>
         In case you want to send different e-mails through different connections, you can also pass the
-        transport object directly to <code>send()</code> without a prior call to
-        <code>setDefaultTransport()</code>. The passed object will override the default transport for the
-        actual <code>send()</code> request.
+        transport object directly to <methodname>send()</methodname> without a prior call to
+        <methodname>setDefaultTransport()</methodname>. The passed object will override the default transport for the
+        actual <methodname>send()</methodname> request.
     </para>
     <example id="zend.mail.different-transports.example-1">
         <title>Using Different Transports</title>

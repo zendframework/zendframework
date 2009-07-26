@@ -569,7 +569,7 @@
 
     <para>
         Additionally you can retrieve all message templates of a validator with
-        the method <code>getMessageTemplates()</code>. It returns you an array
+        the method <methodname>getMessageTemplates()</methodname>. It returns you an array
         with the messages a validator could return in the case of a failed validation.
     </para>
 

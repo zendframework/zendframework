@@ -147,7 +147,7 @@ $imfs->unlink('/foo.txt');
             <ulink url="http://developer.nirvanix.com/sitefiles/1000/API.html#_Toc175999879">namespaces</ulink>.
             Each namespace encapsulates a group of related operations. After getting
             an instance of <classname>Zend_Service_Nirvanix</classname>, call the
-            <code>getService()</code> method to create a proxy for the namespace
+            <methodname>getService()</methodname> method to create a proxy for the namespace
             you want to use. Above, a proxy for the <code>IMFS</code> namespace is created.
         </para>
 
@@ -164,7 +164,7 @@ $imfs->unlink('/foo.txt');
         <title>Understanding the Proxy</title>
 
         <para>
-            In the previous example, we used the <code>getService()</code> method to return
+            In the previous example, we used the <methodname>getService()</methodname> method to return
             a proxy object to the <code>IMFS</code> namespace. The proxy object allows
             you to use the Nirvanix REST service in a way that's closer to making a normal
             PHP method call, as opposed to constructing your own HTTP request objects.
@@ -174,7 +174,7 @@ $imfs->unlink('/foo.txt');
             A proxy object may provide convenience methods. These are methods that the
             <classname>Zend_Service_Nirvanix</classname> provides to simplify the use of
             the Nirvanix web services. In the previous example, the methods
-            <code>putContents()</code>, <code>getContents()</code>, and <code>unlink()</code>
+            <methodname>putContents()</methodname>, <methodname>getContents()</methodname>, and <methodname>unlink()</methodname>
             do not have direct equivalents in the REST API. They are convenience methods
             provided by <classname>Zend_Service_Nirvanix</classname> that abstract more complicated
             operations on the REST API.
@@ -207,9 +207,9 @@ $result = $imfs->renameFile(array('filePath' => '/path/to/foo.txt',
 
         <para>
             Above, a proxy for the <code>IMFS</code> namespace is created. A method,
-            <code>renameFile()</code>, is then called on the proxy. This method does not
+            <methodname>renameFile()</methodname>, is then called on the proxy. This method does not
             exist as a convenience method in the PHP code, so it is trapped by
-            <code>__call()</code> and converted into a POST request to the REST API where
+            <methodname>__call()</methodname> and converted into a POST request to the REST API where
             the associative array is used as the POST parameters.
         </para>
 
@@ -238,7 +238,7 @@ $result = $imfs->renameFile(array('filePath' => '/path/to/foo.txt',
 
         <para>
             The simplest way to examine a result from the service is to use the
-            built-in PHP functions like <code>print_r()</code>:
+            built-in PHP functions like <methodname>print_r()</methodname>:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -331,7 +331,7 @@ try {
 ]]></programlisting>
 
         <para>
-            In the example above, <code>unlink()</code> is a convenience method that wraps the
+            In the example above, <methodname>unlink()</methodname> is a convenience method that wraps the
             <code>DeleteFiles</code> command on the REST API. The <code>filePath</code> parameter required by the
             <ulink url="http://developer.nirvanix.com/sitefiles/1000/API.html#_Toc175999918">DeleteFiles</ulink>
             command contains a path that does not exist. This will result in a

@@ -121,7 +121,7 @@ Zend_Layout::startMvc();
 ]]></programlisting>
 
         <para>
-            <code>startMvc()</code> can take an optional array of options or
+            <methodname>startMvc()</methodname> can take an optional array of options or
             <classname>Zend_Config</classname> object to customize the instance; these
             options are detailed in <xref linkend="zend.layout.options" />.
         </para>
@@ -162,7 +162,7 @@ class FooController extends Zend_Controller_Action
 
         <para>
             At any time, you can fetch the <classname>Zend_Layout</classname> instance
-            registered with the MVC via the <code>getMvcInstance()</code> static
+            registered with the MVC via the <methodname>getMvcInstance()</methodname> static
             method:
         </para>
 
@@ -182,11 +182,11 @@ $layout = Zend_Layout::getMvcInstance();
 
         <para>
             As an example, let's say your code first hits
-            <code>FooController::indexAction()</code>, which renders some
+            <methodname>FooController::indexAction()</methodname>, which renders some
             content to the default response segment, and then forwards to
-            <code>NavController::menuAction()</code>, which renders content to
+            <methodname>NavController::menuAction()</methodname>, which renders content to
             the 'nav' response segment. Finally, you forward to
-            <code>CommentController::fetchAction()</code> and fetch some
+            <methodname>CommentController::fetchAction()</methodname> and fetch some
             comments, but render those to the default response segment as well
             (which appends content to that segment). Your view script could then
             render each separately:

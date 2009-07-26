@@ -71,7 +71,7 @@
         </para>
 
         <para>
-            Here is an example of common usage of the autodiscovery functionality. The <code>handle()</code>
+            Here is an example of common usage of the autodiscovery functionality. The <methodname>handle()</methodname>
             function generates the WSDL file and posts it to the browser.
 
             <programlisting language="php"><![CDATA[
@@ -87,7 +87,7 @@ $autodiscover->handle();
 
         <para>
             If you need access to the generated WSDL file either to save it to a file or
-            as an XML string you can use the <code>dump($filename)</code> or <code>toXml()</code>
+            as an XML string you can use the <methodname>dump($filename)</methodname> or <methodname>toXml()</methodname>
             functions the AutoDiscover class provides.
         </para>
 
@@ -103,7 +103,7 @@ $autodiscover->handle();
             <para>
                 As the SOAP Endpoint Uri is uses the default
                 <code>'http://' .$_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']</code>,
-                but this can be changed with the <code>setUri()</code> function or the Constructor
+                but this can be changed with the <methodname>setUri()</methodname> function or the Constructor
                 parameter of <classname>Zend_Soap_AutoDiscover</classname> class. The endpoint has to provide
                 a <classname>Zend_Soap_Server</classname> that listens to requests.
             </para>
@@ -150,7 +150,7 @@ $autodiscover->handle();
                 <listitem>
                     <para>
                         <code>'http://' .$_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']</code> is used
-                        as an URI where the WSDL is available by default but can be overwritten via <code>setUri()</code> method.
+                        as an URI where the WSDL is available by default but can be overwritten via <methodname>setUri()</methodname> method.
                     </para>
                     <para>
                          It's also used as a target namespace for all service related names (including

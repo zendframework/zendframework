@@ -237,7 +237,7 @@ $input = new Zend_Filter_Input($filters, $validators, $data);
 ]]></programlisting>
 
         <para>
-            Alternatively, use the <code>setData()</code> method, passing
+            Alternatively, use the <methodname>setData()</methodname> method, passing
             an associative array of key/value pairs the same format as
             described above.
         </para>
@@ -248,7 +248,7 @@ $input->setData($newData);
 ]]></programlisting>
 
         <para>
-            The <code>setData()</code> method redefines data in an existing
+            The <methodname>setData()</methodname> method redefines data in an existing
             Zend_Filter_Input object without changing the filtering and
             validation rules. Using this method, you can run the same rules
             against different sets of input data.
@@ -273,9 +273,9 @@ $input->setData($newData);
 
             <para>
                 If all input data pass the validation rules, the
-                <code>isValid()</code> method returns <constant>TRUE</constant>.
+                <methodname>isValid()</methodname> method returns <constant>TRUE</constant>.
                 If any field is invalid or any required field is missing,
-                <code>isValid()</code> returns <constant>FALSE</constant>.
+                <methodname>isValid()</methodname> returns <constant>FALSE</constant>.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -287,7 +287,7 @@ if ($input->isValid()) {
             <para>
                 This method accepts an optional string argument, naming
                 an individual field. If the specified field passed validation
-                and is ready for fetching, <code>isValid('fieldName')</code>
+                and is ready for fetching, <methodname>isValid('fieldName')</methodname>
                 returns <constant>TRUE</constant>.
             </para>
 
@@ -352,7 +352,7 @@ if ($input->hasUnknown()) {
 ]]></programlisting>
 
             <para>
-                The results of the <code>getMessages()</code> method is an
+                The results of the <methodname>getMessages()</methodname> method is an
                 associative array, mapping a rule name to an array of error
                 messages related to that rule. Note that the index of this
                 array is the rule name used in the rule declaration, which may
@@ -360,15 +360,15 @@ if ($input->hasUnknown()) {
             </para>
 
             <para>
-                The <code>getMessages()</code> method returns the merge of the
-                arrays returned by the <code>getInvalid()</code> and
-                <code>getMissing()</code>. These methods return subsets of the
+                The <methodname>getMessages()</methodname> method returns the merge of the
+                arrays returned by the <methodname>getInvalid()</methodname> and
+                <methodname>getMissing()</methodname>. These methods return subsets of the
                 messages, related to validation failures, or fields that were
                 declared as required but missing from the input.
             </para>
 
             <para>
-                The <code>getErrors()</code> method returns an associative array,
+                The <methodname>getErrors()</methodname> method returns an associative array,
                 mapping a rule name to an array of error identifiers. Error
                 identifiers are fixed strings, to identify the reason for a
                 validation failure, while messages can be customized.
@@ -378,9 +378,9 @@ if ($input->hasUnknown()) {
 
             <para>
                 You can specify the message returned by
-                <code>getMissing()</code> using the 'missingMessage' option,
+                <methodname>getMissing()</methodname> using the 'missingMessage' option,
                 as an argument to the Zend_Filter_Input constructor or using
-                the <code>setOptions()</code> method.
+                the <methodname>setOptions()</methodname> method.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -397,7 +397,7 @@ $input->setOptions($options);
 ]]></programlisting>
 
             <para>
-                The results of the <code>getUnknown()</code> method is an
+                The results of the <methodname>getUnknown()</methodname> method is an
                 associative array, mapping field names to field values. Field
                 names are used as the array keys in this case, instead of rule
                 names, because no rule mentions the fields considered to be
@@ -414,7 +414,7 @@ $input->setOptions($options);
                 All fields that are neither invalid, missing, nor unknown are
                 considered valid. You can get values for valid fields using a
                 magic accessor. There are also non-magic accessor methods
-                <code>getEscaped()</code> and <code>getUnescaped()</code>.
+                <methodname>getEscaped()</methodname> and <methodname>getUnescaped()</methodname>.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -434,7 +434,7 @@ $m = $input->getUnescaped('month'); // not escaped
             <note>
                 <para>
                     As shown above, you can retrieve the unescaped value using
-                    the <code>getUnescaped()</code> method, but you must write
+                    the <methodname>getUnescaped()</methodname> method, but you must write
                     code to use the value safely, and avoid security issues
                     such as vulnerability to cross-site scripting attacks.
                 </para>
@@ -452,7 +452,7 @@ $input = new Zend_Filter_Input($filters, $validators, $data, $options);
 
             <para>
                 Alternatively, you can use the
-                <code>setDefaultEscapeFilter()</code> method:
+                <methodname>setDefaultEscapeFilter()</methodname> method:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -475,12 +475,12 @@ $input->setDefaultEscapeFilter(new Zend_Filter_StringTrim());
                 the process of validation would be more complex, and it would
                 be harder to provide both escaped and unescaped versions of the
                 data. So it is recommended to declare filters to escape output
-                using <code>setDefaultEscapeFilter()</code>, not in the
+                using <methodname>setDefaultEscapeFilter()</methodname>, not in the
                 <code>$filters</code> array.
             </para>
 
             <para>
-                There is only one method <code>getEscaped()</code>, and
+                There is only one method <methodname>getEscaped()</methodname>, and
                 therefore you can specify only one filter for escaping
                 (although this filter can be a filter chain). If you need a
                 single instance of Zend_Filter_Input to return escaped output
@@ -573,7 +573,7 @@ $validators = array(
             <para>
                 If the validation of this rule fails, the rule key
                 (<code>'password'</code>) is used in the return value of
-                <code>getInvalid()</code>, not any of the fields named in
+                <methodname>getInvalid()</methodname>, not any of the fields named in
                 the 'fields' metacommand.
             </para>
 
@@ -713,10 +713,10 @@ $validators = array(
                 no validators, but the 'allowEmpty' metacommand is
                 <constant>FALSE</constant> (that is, the field is considered invalid if
                 it is empty), Zend_Filter_Input returns a default error message
-                that you can retrieve with <code>getMessages()</code>. You can
+                that you can retrieve with <methodname>getMessages()</methodname>. You can
                 specify this message using the 'notEmptyMessage' option, as an
                 argument to the Zend_Filter_Input constructor or using the
-                <code>setOptions()</code> method.
+                <methodname>setOptions()</methodname> method.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -990,8 +990,8 @@ $input = new Zend_Filter_Input($filters, $validators, $data, $options);
 ]]></programlisting>
 
         <para>
-            Alternatively, you can use the <code>addValidatorPrefixPath($prefix, $path)</code>
-            or <code>addFilterPrefixPath($prefix, $path)</code> methods, which directly
+            Alternatively, you can use the <methodname>addValidatorPrefixPath($prefix, $path)</methodname>
+            or <methodname>addFilterPrefixPath($prefix, $path)</methodname> methods, which directly
             proxy to the plugin loader that is used by Zend_Filter_Input:
         </para>
 
@@ -1018,7 +1018,7 @@ $input->addFilterPrefixPath('Foo_Namespace', 'Foo/Namespace');
 
         <note>
             <para>
-                As of version 1.5 the function <code>addNamespace($namespace)</code> was deprecated
+                As of version 1.5 the function <methodname>addNamespace($namespace)</methodname> was deprecated
                 and exchanged with the plugin loader and the <code>addFilterPrefixPath</code> and
                 <code>addValidatorPrefixPath</code> were added. Also the constant
                 <classname>Zend_Filter_Input::INPUT_NAMESPACE</classname> is now deprecated. The

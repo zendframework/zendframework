@@ -41,13 +41,13 @@ public $language;
   <sect2 id="zend.mime.part.methods">
     <title>Methods for rendering the message part to a string</title>
 
-    <para><code>getContent()</code> returns the encoded content of the
+    <para><methodname>getContent()</methodname> returns the encoded content of the
     MimePart as a string using the encoding specified in the attribute
     $encoding. Valid values are Zend_Mime::ENCODING_* Characterset conversions are
     not performed.</para>
 
     <para>
-        <code>getHeaders()</code> returns the Mime-Headers for the
+        <methodname>getHeaders()</methodname> returns the Mime-Headers for the
         MimePart as generated from the information in the publicly accessible
         attributes. The attributes of the object need to be set correctly before
         this method is called.

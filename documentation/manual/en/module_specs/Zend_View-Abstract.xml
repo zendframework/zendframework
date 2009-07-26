@@ -7,7 +7,7 @@
         <classname>Zend_View_Abstract</classname> is the base class on which
         <classname>Zend_View</classname> is built; <classname>Zend_View</classname> itself simply
         extends it and declares a concrete implementation of the
-        <code>_run()</code> method (which is invoked by <code>render()</code>).
+        <methodname>_run()</methodname> method (which is invoked by <methodname>render()</methodname>).
     </para>
 
     <para>
@@ -44,7 +44,7 @@ protected function _run()
         potentially make calls to such methods or modify critical properties
         directly. Imagine a script overwriting <code>$_path</code> or
         <code>$_file</code> inadvertently -- any further calls to
-        <code>render()</code> or view helpers would break!
+        <methodname>render()</methodname> or view helpers would break!
     </para>
 
     <para>

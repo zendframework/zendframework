@@ -62,7 +62,7 @@
                 <para>
                     <code>{get|set}Container()</code> gets/sets the navigation
                     container the helper should operate on by default, and
-                    <code>hasContainer()</code> checks if the helper
+                    <methodname>hasContainer()</methodname> checks if the helper
                     has container registered.
                 </para>
             </listitem>
@@ -72,7 +72,7 @@
                     translator used for translating labels and titles, and
                     <code>{get|set}UseTranslator()</code> controls whether
                     the translator should be enabled. The method
-                    <code>hasTranslator()</code> checks if the helper has
+                    <methodname>hasTranslator()</methodname> checks if the helper has
                     a translator registered.
                 </para>
             </listitem>
@@ -84,21 +84,21 @@
                     <classname>Zend_Acl_Role_Interface</classname>) used for
                     filtering out pages when rendering, and
                     <code>{get|set}UseAcl()</code> controls whether ACL should
-                    be enabled. The methods <code>hasAcl()</code> and
-                    <code>hasRole()</code> checks if the helper has an ACL
+                    be enabled. The methods <methodname>hasAcl()</methodname> and
+                    <methodname>hasRole()</methodname> checks if the helper has an ACL
                     instance or a role registered.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>__toString()</code>, magic method to ensure that
+                    <methodname>__toString()</methodname>, magic method to ensure that
                     helpers can be rendered by <code>echo</code>ing the
                     helper instance directly.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>render()</code>, must be implemented by concrete
+                    <methodname>render()</methodname>, must be implemented by concrete
                     helpers to do the actual rendering.
                 </para>
             </listitem>
@@ -114,7 +114,7 @@
                     setter accepts a <type>String</type> or an <code>int</code>.
                     In the case of an <code>int</code>, the helper will use
                     the given number of spaces for indentation. I.e.,
-                    <code>setIndent(4)</code> means 4 initial spaces of
+                    <methodname>setIndent(4)</methodname> means 4 initial spaces of
                     indentation. Indentation can be specified for all helpers
                     except the Sitemap helper.
                 </para>
@@ -141,7 +141,7 @@
             </listitem>
             <listitem>
                 <para>
-                    <code>__call()</code> is used for proxying calls to the
+                    <methodname>__call()</methodname> is used for proxying calls to the
                     container registered in the helper, which means you can
                     call methods on a helper as if it was a container. See <link
                         linkend="zend.view.helpers.initial.navigation.proxy.example">example</link>
@@ -150,11 +150,11 @@
             </listitem>
             <listitem>
                 <para>
-                    <code>findActive($container, $minDepth, $maxDepth)</code>
+                    <methodname>findActive($container, $minDepth, $maxDepth)</methodname>
                     is used for finding the deepest active page in the given
                     container. If depths are not given, the method will use
-                    the values retrieved from <code>getMinDepth()</code> and
-                    <code>getMaxDepth()</code>. The deepest active page must
+                    the values retrieved from <methodname>getMinDepth()</methodname> and
+                    <methodname>getMaxDepth()</methodname>. The deepest active page must
                     be between <code>$minDepth</code> and <code>$axnDepth</code>
                     inclusively. Returns an array containing a reference to the
                     found page instance and the depth at which the page was
@@ -163,14 +163,14 @@
             </listitem>
             <listitem>
                 <para>
-                    <code>htmlify()</code> renders an <code>a</code> HTML
+                    <methodname>htmlify()</methodname> renders an <code>a</code> HTML
                     element from a <classname>Zend_Navigation_Page</classname>
                     instance.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>accept()</code> is used for determining if a page
+                    <methodname>accept()</methodname> is used for determining if a page
                     should be accepted when iterating containers. This method
                     checks for page visibility and verifies that the helper's
                     role is allowed access to the page's resource/privilege.
@@ -205,7 +205,7 @@
         <title>Proxying calls to the navigation container</title>
 
         <para>
-            Navigation view helpers use the magic method <code>__call()</code>
+            Navigation view helpers use the magic method <methodname>__call()</methodname>
             to proxy method calls to the navigation container that is
             registered in the view helper.
         </para>
@@ -598,9 +598,9 @@ Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole('member');
                    <code>{get|set}Partial()</code> gets/sets a partial view
                    script that should be used for rendering breadcrumbs.
                    If a partial view script is set, the helper's
-                   <code>render()</code> method will use the
-                   <code>renderPartial()</code> method. If no partial is
-                   set, the <code>renderStraight()</code> method is used.
+                   <methodname>render()</methodname> method will use the
+                   <methodname>renderPartial()</methodname> method. If no partial is
+                   set, the <methodname>renderStraight()</methodname> method is used.
                    The helper expects the partial to be a <type>String</type>
                    or an <type>Array</type> with two elements. If the partial
                    is a <type>String</type>, it denotes the name of the partial
@@ -612,13 +612,13 @@ Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole('member');
            </listitem>
            <listitem>
                <para>
-                   <code>renderStraight()</code> is the default render
+                   <methodname>renderStraight()</methodname> is the default render
                    method.
                </para>
            </listitem>
            <listitem>
                <para>
-                   <code>renderPartial()</code> is used for rendering
+                   <methodname>renderPartial()</methodname> is used for rendering
                    using a partial view script.
                </para>
            </listitem>
@@ -707,10 +707,10 @@ Nothing, because the deepest active page is not at level 10 or deeper.
 
             <para>
                 This example shows how to render customized breadcrumbs using
-                a partial vew script. By calling <code>setPartial()</code>,
+                a partial vew script. By calling <methodname>setPartial()</methodname>,
                 you can specify a partial view script that will be used
-                when calling <code>render()</code>. When a partial is specified,
-                the <code>renderPartial()</code> method will be called. This
+                when calling <methodname>render()</methodname>. When a partial is specified,
+                the <methodname>renderPartial()</methodname> method will be called. This
                 method will find the deepest active page and pass an array
                 of pages that leads to the active page to the partial view
                 script.
@@ -774,7 +774,7 @@ Products, Foo Server, FAQ
         <para>
             Relationships can be added to page objects manually, or found
             by traversing the container registered in the helper. The method
-            <code>findRelation($page, $rel, $type)</code> will first try
+            <methodname>findRelation($page, $rel, $type)</methodname> will first try
             to find the given <code>$rel</code> of <code>$type</code> from
             the <code>$page</code> by calling <code>$page->findRel($type)</code>
             or <code>$page->findRel($type)</code>. If the <code>$page</code>
@@ -782,7 +782,7 @@ Products, Foo Server, FAQ
             relation will be used. If the <code>$page</code> instance doesn't
             have the specified <code>$type</code>, the helper will look for
             a method in the helper named <code>search$rel$type</code> (e.g.
-            <code>searchRelNext()</code> or <code>searchRevAlternate()</code>).
+            <methodname>searchRelNext()</methodname> or <methodname>searchRevAlternate()</methodname>).
             If such a method exists, it will be used for determining the
             <code>$page</code>'s relation by traversing the container.
         </para>
@@ -793,55 +793,55 @@ Products, Foo Server, FAQ
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>searchRelStart()</code>, forward 'start'
+                        <methodname>searchRelStart()</methodname>, forward 'start'
                         relation: the first page in the container.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>searchRelNext()</code>, forward 'next'
+                        <methodname>searchRelNext()</methodname>, forward 'next'
                         relation; finds the next page in the container, i.e.
                         the page after the active page.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>searchRelPrev()</code>, forward 'prev'
+                        <methodname>searchRelPrev()</methodname>, forward 'prev'
                         relation; finds the previous page, i.e. the page before
                         the active page.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>searchRelChapter()</code>, forward 'chapter'
+                        <methodname>searchRelChapter()</methodname>, forward 'chapter'
                         relations; finds all pages on level 0 except the 'start'
                         relation or the active page if it's on level 0.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>searchRelSection()</code>, forward 'section'
+                        <methodname>searchRelSection()</methodname>, forward 'section'
                         relations; finds all child pages of the active page if
                         the active page is on level 0 (a 'chapter').
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>searchRelSubsection()</code>, forward 'subsection'
+                        <methodname>searchRelSubsection()</methodname>, forward 'subsection'
                         relations; finds all child pages of the active page if
                         the active pages is on level 1 (a 'section').
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>searchRevSection()</code>, reverse 'section'
+                        <methodname>searchRevSection()</methodname>, reverse 'section'
                         relation; finds the parent of the active page if the
                         active page is on level 1 (a 'section').
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>searchRevSubsection()</code>, reverse 'subsection'
+                        <methodname>searchRevSubsection()</methodname>, reverse 'subsection'
                         relation; finds the parent of the active page if the
                         active page is on level 2 (a 'subsection').
                     </para>
@@ -1008,13 +1008,13 @@ Products, Foo Server, FAQ
            </listitem>
            <listitem>
                <para>
-                   <code>findAllRelations()</code> finds all relations of
+                   <methodname>findAllRelations()</methodname> finds all relations of
                    all types for a given page.
                </para>
            </listitem>
            <listitem>
                <para>
-                   <code>findRelation()</code> finds all relations of a given
+                   <methodname>findRelation()</methodname> finds all relations of a given
                    type from a given page.
                </para>
            </listitem>
@@ -1035,7 +1035,7 @@ Products, Foo Server, FAQ
            </listitem>
            <listitem>
                <para>
-                   <code>renderLink()</code> renders a single <code>link</code>
+                   <methodname>renderLink()</methodname> renders a single <code>link</code>
                    element.
                </para>
            </listitem>
@@ -1185,7 +1185,7 @@ Output:
             <listitem>
                 <para>
                     <code>{get|set}UlClass()</code> gets/sets the CSS class
-                    used in <code>renderMenu()</code>.
+                    used in <methodname>renderMenu()</methodname>.
                 </para>
             </listitem>
             <listitem>
@@ -1209,9 +1209,9 @@ Output:
                     <code>{get|set}Partial()</code> gets/sets a partial view
                     script that should be used for rendering menu.
                     If a partial view script is set, the helper's
-                    <code>render()</code> method will use the
-                    <code>renderPartial()</code> method. If no partial is
-                    set, the <code>renderMenu()</code> method is used.
+                    <methodname>render()</methodname> method will use the
+                    <methodname>renderPartial()</methodname> method. If no partial is
+                    set, the <methodname>renderMenu()</methodname> method is used.
                     The helper expects the partial to be a <type>String</type>
                     or an <type>Array</type> with two elements. If the partial
                     is a <type>String</type>, it denotes the name of the partial
@@ -1223,14 +1223,14 @@ Output:
             </listitem>
             <listitem>
                 <para>
-                    <code>htmlify()</code> overrides the method from the
+                    <methodname>htmlify()</methodname> overrides the method from the
                     abstract class to return <code>span</code> elements
                     if the page has no <code>href</code>.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>renderMenu($container = null, $options = array())</code>
+                    <methodname>renderMenu($container = null, $options = array())</methodname>
                     is the default render method, and will render a container as
                     a HTML <code>UL</code> list.
                 </para>
@@ -1298,13 +1298,13 @@ Output:
             </listitem>
             <listitem>
                 <para>
-                    <code>renderPartial()</code> is used for rendering the menu
+                    <methodname>renderPartial()</methodname> is used for rendering the menu
                     using a partial view script.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>renderSubMenu()</code> renders the deepest menu level
+                    <methodname>renderSubMenu()</methodname> renders the deepest menu level
                     of a container's active branch.
                 </para>
             </listitem>
@@ -1404,7 +1404,7 @@ Output:
             <para>
                 This example shows how to render a menu that is not
                 registered in the view helper by calling the
-                <code>renderMenu()</code> directly and specifying a few
+                <methodname>renderMenu()</methodname> directly and specifying a few
                 options.
             </para>
 
@@ -1436,13 +1436,13 @@ Output:
             <title>Rendering the deepest active menu</title>
 
             <para>
-                This example shows how the <code>renderSubMenu()</code>
+                This example shows how the <methodname>renderSubMenu()</methodname>
                 will render the deepest sub menu of the active branch.
             </para>
 
             <para>
-                Calling <code>renderSubMenu($container, $ulClass, $indent)</code>
-                is equivalent to calling <code>renderMenu($container, $options)</code>
+                Calling <methodname>renderSubMenu($container, $ulClass, $indent)</methodname>
+                is equivalent to calling <methodname>renderMenu($container, $options)</methodname>
                 with the following options:
             </para>
 
@@ -1725,10 +1725,10 @@ Output:
 
             <para>
                 This example shows how to render a custom menu using
-                a partial vew script. By calling <code>setPartial()</code>,
+                a partial vew script. By calling <methodname>setPartial()</methodname>,
                 you can specify a partial view script that will be used
-                when calling <code>render()</code>. When a partial is specified,
-                the <code>renderPartial()</code> method will be called. This
+                when calling <methodname>render()</methodname>. When a partial is specified,
+                the <methodname>renderPartial()</methodname> method will be called. This
                 method will assign the container to the view with the key
                 <code>container</code>.
             </para>
@@ -1921,19 +1921,19 @@ foreach ($this->container as $page) {
                 <para>
                     <code>{get|set}ServerUrl()</code> gets/sets server URL
                     that will be prepended to non-absolute URLs in the
-                    <code>url()</code> method. If no server URL is specified,
+                    <methodname>url()</methodname> method. If no server URL is specified,
                     it will be determined by the helper.
                 </para>
            </listitem>
            <listitem>
                 <para>
-                    <code>url()</code> is used to generate absolute URLs to
+                    <methodname>url()</methodname> is used to generate absolute URLs to
                     pages.
                 </para>
            </listitem>
            <listitem>
                 <para>
-                    <code>getDomSitemap()</code> generates a DOMDocument
+                    <methodname>getDomSitemap()</methodname> generates a DOMDocument
                     from a given container.
                 </para>
            </listitem>
@@ -2177,7 +2177,7 @@ echo $this->navigation()
         <itemizedlist>
            <listitem>
                <para>
-                   <code>findHelper()</code> finds the given helper,
+                   <methodname>findHelper()</methodname> finds the given helper,
                    verifies that it is a navigational helper, and injects
                    container, ACL/role and translator.
                </para>
@@ -2211,7 +2211,7 @@ echo $this->navigation()
            </listitem>
            <listitem>
                <para>
-                   <code>render()</code> proxies to the render method of
+                   <methodname>render()</methodname> proxies to the render method of
                    the default proxy.
                </para>
            </listitem>

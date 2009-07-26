@@ -28,9 +28,9 @@
         <title>Fetching a Row</title>
 
         <para>
-            <classname>Zend_Db_Table_Abstract</classname> provides methods <code>find()</code> and
-            <code>fetchAll()</code>, which each return an object of type
-            <classname>Zend_Db_Table_Rowset</classname>, and the method <code>fetchRow()</code>,
+            <classname>Zend_Db_Table_Abstract</classname> provides methods <methodname>find()</methodname> and
+            <methodname>fetchAll()</methodname>, which each return an object of type
+            <classname>Zend_Db_Table_Rowset</classname>, and the method <methodname>fetchRow()</methodname>,
             which returns an object of type <classname>Zend_Db_Table_Row</classname>.
         </para>
 
@@ -109,7 +109,7 @@ echo $row->bug_description;
             <title>Retrieving Row Data as an Array</title>
 
             <para>
-                You can access the row's data as an array using the <code>toArray()</code> method
+                You can access the row's data as an array using the <methodname>toArray()</methodname> method
                 of the Row object. This returns an associative array of the column names to the
                 column values.
             </para>
@@ -135,7 +135,7 @@ foreach ($rowArray as $column => $value) {
             </example>
 
             <para>
-                The array returned from <code>toArray()</code> is not updateable. You can modify
+                The array returned from <methodname>toArray()</methodname> is not updateable. You can modify
                 values in the array as you can with any array, but you cannot save changes to this
                 array to the database directly.
             </para>
@@ -173,7 +173,7 @@ foreach ($rowArray as $column => $value) {
             <para>
                 Using a column accessor to set a value changes the column value of the row object
                 in your application, but it does not commit the change to the database yet. You can
-                do that with the <code>save()</code> method.
+                do that with the <methodname>save()</methodname> method.
             </para>
 
             <example id="zend.db.table.row.write.set.example">
@@ -200,10 +200,10 @@ $row->save();
             <title>Inserting a new row</title>
 
             <para>
-                You can create a new row for a given table with the <code>createRow()</code> method
+                You can create a new row for a given table with the <methodname>createRow()</methodname> method
                 of the table class. You can access fields of this row with the object-oriented
                 interface, but the row is not stored in the database until you call the
-                <code>save()</code> method.
+                <methodname>save()</methodname> method.
             </para>
 
             <example id="zend.db.table.row.write.insert.example">
@@ -251,7 +251,7 @@ $newRow->save();
             <note>
 
                 <para>
-                    The <code>createRow()</code> method was called <code>fetchNew()</code> in
+                    The <methodname>createRow()</methodname> method was called <methodname>fetchNew()</methodname> in
                     earlier releases of <classname>Zend_Db_Table</classname>. You are encouraged to
                     use the new method name, even though the old name continues to work for the sake
                     of backward compatibility.
@@ -267,7 +267,7 @@ $newRow->save();
 
             <para>
                 <classname>Zend_Db_Table_Row_Abstract</classname> provides the
-                <code>setFromArray()</code> method to enable you to set several columns in a single
+                <methodname>setFromArray()</methodname> method to enable you to set several columns in a single
                 row at once, specified in an associative array that maps the column names to values.
                 You may find this method convenient for setting values both for new rows and for
                 rows you need to update.
@@ -303,7 +303,7 @@ $newRow->save();
             <title>Deleting a row</title>
 
             <para>
-                You can call the <code>delete()</code> method on a Row object. This deletes rows in
+                You can call the <methodname>delete()</methodname> method on a Row object. This deletes rows in
                 the database matching the primary key in the Row object.
             </para>
 
@@ -322,7 +322,7 @@ $row->delete();
             </example>
 
             <para>
-                You do not have to call <code>save()</code> to apply the delete; it is executed
+                You do not have to call <methodname>save()</methodname> to apply the delete; it is executed
                 against the database immediately.
             </para>
 
@@ -346,7 +346,7 @@ $row->delete();
             <title>Serializing a Row</title>
 
             <para>
-                Simply use PHP's <code>serialize()</code> function to create a string containing a
+                Simply use PHP's <methodname>serialize()</methodname> function to create a string containing a
                 byte-stream representation of the Row object argument.
             </para>
 
@@ -373,7 +373,7 @@ $serializedRow = serialize($row);
             <title>Unserializing Row Data</title>
 
             <para>
-                Use PHP's <code>unserialize()</code> function to restore a string containing a
+                Use PHP's <methodname>unserialize()</methodname> function to restore a string containing a
                 byte-stream representation of an object. The function returns the original object.
             </para>
 
@@ -420,7 +420,7 @@ echo $rowClone->bug_description;
             <title>Reactivating a Row as Live Data</title>
 
             <para>
-                You can reactivate a disconnected Row, using the <code>setTable()</code> method.
+                You can reactivate a disconnected Row, using the <methodname>setTable()</methodname> method.
                 The argument to this method is a valid object of type
                 <classname>Zend_Db_Table_Abstract</classname>, which you create. Creating a Table
                 object requires a live connection to the database, so by reassociating the Table
@@ -497,7 +497,7 @@ $bugs = new Bugs(array('rowClass' => 'MyRow'));
 
             <para>
                 If application-specific logic needs to be initialized when a row is constructed,
-                you can select to move your tasks to the <code>init()</code> method, which is
+                you can select to move your tasks to the <methodname>init()</methodname> method, which is
                 called after all row metadata has been processed. This is recommended over the
                 <code>__construct</code> method if you do not need to alter the metadata in any
                 programmatic way.
@@ -529,8 +529,8 @@ class MyApplicationRow extends Zend_Db_Table_Row_Abstract
             <title>Defining Custom Logic for Insert, Update, and Delete in Zend_Db_Table_Row</title>
 
             <para>
-                The Row class calls protected methods <code>_insert()</code>,
-                <code>_update()</code>, and <code>_delete()</code> before performing the
+                The Row class calls protected methods <methodname>_insert()</methodname>,
+                <methodname>_update()</methodname>, and <methodname>_delete()</methodname> before performing the
                 corresponding operations <code>INSERT</code>, <code>UPDATE</code>, and
                 <code>DELETE</code>. You can add logic to these methods in your custom Row
                 subclass.
@@ -539,7 +539,7 @@ class MyApplicationRow extends Zend_Db_Table_Row_Abstract
             <para>
                 If you need to do custom logic in a specific table, and the custom logic must occur
                 for every operation on that table, it may make more sense to implement your custom
-                code in the <code>insert()</code>, <code>update()</code> and <code>delete()</code>
+                code in the <methodname>insert()</methodname>, <methodname>update()</methodname> and <methodname>delete()</methodname>
                 methods of your Table class. However, sometimes it may be necessary to do custom
                 logic in the Row class.
             </para>
@@ -652,7 +652,7 @@ class Products extends Zend_Db_Table_Abstract
 
             <para>
                 If you prefer to use inflection, then you must implement the transformation
-                yourself, by overriding the <code>_transformColumn()</code> method in a custom Row
+                yourself, by overriding the <methodname>_transformColumn()</methodname> method in a custom Row
                 class, and using that custom Row class when you perform queries against your Table
                 class.
             </para>
@@ -663,7 +663,7 @@ class Products extends Zend_Db_Table_Abstract
 
                 <para>
                     This allows you to use an inflected version of the column name in the
-                    accessors. The Row class uses the <code>_transformColumn()</code> method to
+                    accessors. The Row class uses the <methodname>_transformColumn()</methodname> method to
                     change the name you use to the native column name in the database table.
                 </para>
 

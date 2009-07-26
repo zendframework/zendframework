@@ -181,7 +181,7 @@ $scheme = $uri->getScheme();  // "http"
       </example>
 
       <para>
-        The <code>getScheme()</code> instance method returns only the scheme part of
+        The <methodname>getScheme()</methodname> instance method returns only the scheme part of
         the URI object.
       </para>
 
@@ -201,7 +201,7 @@ echo $uri->getUri();  // "http://www.zend.com"
       </example>
 
       <para>
-        The <code>getUri()</code> method returns the string representation
+        The <methodname>getUri()</methodname> method returns the string representation
         of the entire URI.
       </para>
     </sect3>
@@ -229,7 +229,7 @@ $isValid = $uri->valid();  // TRUE
       </example>
 
       <para>
-        The <code>valid()</code> instance method provides a means to check that the
+        The <methodname>valid()</methodname> instance method provides a means to check that the
         URI object is still valid.
       </para>
     </sect3>

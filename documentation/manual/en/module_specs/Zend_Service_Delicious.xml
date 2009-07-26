@@ -27,8 +27,8 @@ foreach ($posts as $post) {
     <sect2 id="zend.service.delicious.retrieving_posts">
         <title>Retrieving posts</title>
         <para>
-            <classname>Zend_Service_Delicious</classname> provides three methods for retrieving posts: <code>getPosts()</code>,
-            <code>getRecentPosts()</code> and <code>getAllPosts()</code>. All of these
+            <classname>Zend_Service_Delicious</classname> provides three methods for retrieving posts: <methodname>getPosts()</methodname>,
+            <methodname>getRecentPosts()</methodname> and <methodname>getAllPosts()</methodname>. All of these
             methods return an instance of <classname>Zend_Service_Delicious_PostList</classname>, which
             holds all retrieved posts.
         </para>
@@ -66,8 +66,8 @@ public function getAllPosts($tag = null);
     <sect2 id="zend.service.delicious.postlist">
         <title>Zend_Service_Delicious_PostList</title>
         <para>
-            Instances of this class are returned by the <code>getPosts()</code>, <code>getAllPosts()</code>,
-            <code>getRecentPosts()</code>, and <code>getUserPosts()</code> methods of <classname>Zend_Service_Delicious</classname>.
+            Instances of this class are returned by the <methodname>getPosts()</methodname>, <methodname>getAllPosts()</methodname>,
+            <methodname>getRecentPosts()</methodname>, and <methodname>getUserPosts()</methodname> methods of <classname>Zend_Service_Delicious</classname>.
         </para>
         <para>
             For easier data access this class implements the <code>Countable</code>, <code>Iterator</code>, and
@@ -95,7 +95,7 @@ echo $posts[0]->getTitle();
         </example>
         <note>
             <para>
-                The <code>ArrayAccess::offsetSet()</code> and <code>ArrayAccess::offsetUnset()</code> methods
+                The <methodname>ArrayAccess::offsetSet()</methodname> and <methodname>ArrayAccess::offsetUnset()</methodname> methods
                 throw exceptions in this implementation. Thus, code like <code>unset($posts[0]);</code> and
                 <code>$posts[0] = 'A';</code> will throw exceptions because these properties are read-only.
             </para>
@@ -106,8 +106,8 @@ echo $posts[0]->getTitle();
         <example id="zend.service.delicious.postlist.example.withTags">
             <title>Filtering a Post List with Specific Tags</title>
             <para>
-                Posts may be filtered by specific tags using <code>withTags()</code>. As a convenience,
-                <code>withTag()</code> is also provided for when only a single tag needs to be specified.
+                Posts may be filtered by specific tags using <methodname>withTags()</methodname>. As a convenience,
+                <methodname>withTag()</methodname> is also provided for when only a single tag needs to be specified.
             </para>
             <programlisting language="php"><![CDATA[
 $delicious = new Zend_Service_Delicious('username', 'password');
@@ -123,7 +123,7 @@ foreach ($posts->withTags(array('php', 'zend')) as $post) {
         <example id="zend.service.delicious.postlist.example.byUrl">
             <title>Filtering a Post List by URL</title>
             <para>
-                Posts may be filtered by URL matching a specified regular expression using the <code>withUrl()</code>
+                Posts may be filtered by URL matching a specified regular expression using the <methodname>withUrl()</methodname>
                 method:
             </para>
             <programlisting language="php"><![CDATA[
@@ -170,7 +170,7 @@ $posts[0]->setTitle('New title')
     <sect2 id="zend.service.delicious.deleting_posts">
         <title>Deleting posts</title>
         <para>
-            There are two ways to delete a post, by specifying the post URL or by calling the <code>delete()</code>
+            There are two ways to delete a post, by specifying the post URL or by calling the <methodname>delete()</methodname>
             method upon a post object.
         </para>
         <example id="zend.service.delicious.deleting_posts.deleting_posts">
@@ -193,9 +193,9 @@ $delicious->deletePost($posts[0]->getUrl());
     <sect2 id="zend.service.delicious.adding_posts">
         <title>Adding new posts</title>
         <para>
-            To add a post you first need to call the <code>createNewPost()</code> method, which returns a
+            To add a post you first need to call the <methodname>createNewPost()</methodname> method, which returns a
             <classname>Zend_Service_Delicious_Post</classname> object. When you edit the post, you need to save it
-            to the del.icio.us database by calling the <code>save()</code> method.
+            to the del.icio.us database by calling the <methodname>save()</methodname> method.
         </para>
         <example id="zend.service.delicious.adding_posts.adding_a_post">
             <title>Adding a post</title>
@@ -265,22 +265,22 @@ $delicious->addBundle('newBundle', array('tag1', 'tag2'));
                 </thead>
                 <tbody>
                     <row>
-                        <entry><code>getUserFans()</code></entry>
+                        <entry><methodname>getUserFans()</methodname></entry>
                         <entry>Retrieves fans of a user</entry>
                         <entry>Array</entry>
                     </row>
                     <row>
-                        <entry><code>getUserNetwork()</code></entry>
+                        <entry><methodname>getUserNetwork()</methodname></entry>
                         <entry>Retrieves network of a user</entry>
                         <entry>Array</entry>
                     </row>
                     <row>
-                        <entry><code>getUserPosts()</code></entry>
+                        <entry><methodname>getUserPosts()</methodname></entry>
                         <entry>Retrieves posts of a user</entry>
                         <entry>Zend_Service_Delicious_PostList</entry>
                     </row>
                     <row>
-                        <entry><code>getUserTags()</code></entry>
+                        <entry><methodname>getUserTags()</methodname></entry>
                         <entry>Retrieves tags of a user</entry>
                         <entry>Array</entry>
                     </row>
@@ -312,7 +312,7 @@ print_r($delicious->getUserTags('someUser'));
         <sect3 id="zend.service.delicious.public_data.posts">
             <title>Public posts</title>
             <para>
-                When retrieving public posts with the <code>getUserPosts()</code> method, a
+                When retrieving public posts with the <methodname>getUserPosts()</methodname> method, a
                 <classname>Zend_Service_Delicious_PostList</classname> object is returned, and it contains
                 <classname>Zend_Service_Delicious_SimplePost</classname> objects, which contain basic information
                 about the posts, including URL, title, notes, and tags.
@@ -329,22 +329,22 @@ print_r($delicious->getUserTags('someUser'));
                     </thead>
                     <tbody>
                         <row>
-                            <entry><code>getNotes()</code></entry>
+                            <entry><methodname>getNotes()</methodname></entry>
                             <entry>Returns notes of a post</entry>
                             <entry>String</entry>
                         </row>
                         <row>
-                            <entry><code>getTags()</code></entry>
+                            <entry><methodname>getTags()</methodname></entry>
                             <entry>Returns tags of a post</entry>
                             <entry>Array</entry>
                         </row>
                         <row>
-                            <entry><code>getTitle()</code></entry>
+                            <entry><methodname>getTitle()</methodname></entry>
                             <entry>Returns title of a post</entry>
                             <entry>String</entry>
                         </row>
                         <row>
-                            <entry><code>getUrl()</code></entry>
+                            <entry><methodname>getUrl()</methodname></entry>
                             <entry>Returns URL of a post</entry>
                             <entry>String</entry>
                         </row>

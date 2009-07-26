@@ -5,7 +5,7 @@
     <title>View Scripts</title>
 
     <para>
-        Once your controller has assigned variables and called <code>render()</code>,
+        Once your controller has assigned variables and called <methodname>render()</methodname>,
         <classname>Zend_View</classname> then includes the requested view script and executes
         it "inside" the scope of the <classname>Zend_View</classname> instance. Therefore,
         in your view scripts, references to $this actually point to the

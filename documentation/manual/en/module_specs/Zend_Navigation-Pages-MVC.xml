@@ -7,8 +7,8 @@
         MVC pages are defined using MVC parameters known from the
         <classname>Zend_Controller</classname> component. An MVC page will use
         <classname>Zend_Controller_Action_Helper_Url</classname> internally
-        in the <code>getHref()</code> method to generate hrefs, and
-        the <code>isActive()</code> method will intersect the
+        in the <methodname>getHref()</methodname> method to generate hrefs, and
+        the <methodname>isActive()</methodname> method will intersect the
         <classname>Zend_Controller_Request_Abstract</classname> params
         with the page's params to determine if the page is active.
     </para>
@@ -55,7 +55,7 @@
                 <row>
                     <entry><code>params</code></entry>
                     <entry><type>Array</type></entry>
-                    <entry><code>array()</code></entry>
+                    <entry><methodname>array()</methodname></entry>
                     <entry>
                         User params to use when generating href to the page.
                     </entry>
@@ -195,7 +195,7 @@ $page->isActive(); // returns false
 
         <para>
             Routes can be used with MVC pages. If a page has a route, this
-            route will be used in <code>getHref()</code> to generate the URL
+            route will be used in <methodname>getHref()</methodname> to generate the URL
             for the page.
         </para>
 
@@ -205,7 +205,7 @@ $page->isActive(); // returns false
                     Note that when using the <code>route</code> property in a
                     page, you should also specify the default params that the
                     route defines (module, controller, action, etc.), otherwise
-                    the <code>isActive()</code> method will not be able to
+                    the <methodname>isActive()</methodname> method will not be able to
                     determine if the page is active. The reason for this is that
                     there is currently no way to get the default params from a
                     <classname>Zend_Controller_Router_Route_Interface</classname> object,

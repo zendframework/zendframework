@@ -76,7 +76,7 @@ $resourceLoader = new Zend_Loader_Autoloader_Resource(array(
         <para>
             Now that we have setup the base resource autoloader, we can add some
             components to it to autoload. This is done using the
-            <code>addResourceType()</code> method, which accepts three
+            <methodname>addResourceType()</methodname> method, which accepts three
             arguments: a resource "type", used internally as a reference name;
             the subdirectory path underneath the base path in which these
             resources live; and the component namespace to append to the base
@@ -91,7 +91,7 @@ $resourceLoader->addResourceType('acl', 'acls/', 'Acl')
 
         <para>
             Alternately, you could pass these as an array to
-            <code>addResourceTypes()</code>; the following is equivalent to the
+            <methodname>addResourceTypes()</methodname>; the following is equivalent to the
             above:
         </para>
 

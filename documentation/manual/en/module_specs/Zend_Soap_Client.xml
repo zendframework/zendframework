@@ -39,8 +39,8 @@
                 </listitem>
             </itemizedlist>
 
-            Both of these parameters may be set later using <code>setWsdl($wsdl)</code> and
-            <code>setOptions($options)</code> methods respectively.
+            Both of these parameters may be set later using <methodname>setWsdl($wsdl)</methodname> and
+            <methodname>setOptions($options)</methodname> methods respectively.
         </para>
 
         <note>
@@ -74,7 +74,7 @@
                 </listitem>
                 <listitem>
                     <para>
-                        'wsdl' which is equivalent to <code>setWsdl($wsdlValue)</code> call.
+                        'wsdl' which is equivalent to <methodname>setWsdl($wsdlValue)</methodname> call.
                     </para>
                     <para>
                         Changing this option may switch Zend_Soap_Client object to or from WSDL mode.

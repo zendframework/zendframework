@@ -43,7 +43,7 @@
     </para>
 
     <para>
-        You may also set meta tags using the <code>headMeta()</code> helper
+        You may also set meta tags using the <methodname>headMeta()</methodname> helper
         method, which has the following signature: <code>headMeta($content,
             $keyValue, $keyType = 'name', $modifiers = array(), $placement =
             'APPEND')</code>. <code>$keyValue</code> is the content for the key
@@ -54,11 +54,11 @@
     </para>
 
     <para>
-        <code>HeadMeta</code> overrides each of <code>append()</code>,
-        <code>offsetSet()</code>, <code>prepend()</code>, and <code>set()</code>
+        <code>HeadMeta</code> overrides each of <methodname>append()</methodname>,
+        <methodname>offsetSet()</methodname>, <methodname>prepend()</methodname>, and <methodname>set()</methodname>
         to enforce usage of the special methods as listed above. Internally, it
         stores each item as a <code>stdClass</code> token, which it later
-        serializes using the <code>itemToString()</code> method. This allows you
+        serializes using the <methodname>itemToString()</methodname> method. This allows you
         to perform checks on the items in the stack, and optionally modify these
         items by simply modifying the object returned.
     </para>

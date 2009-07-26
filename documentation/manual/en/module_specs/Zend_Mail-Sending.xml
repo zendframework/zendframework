@@ -4,7 +4,7 @@
     <title>Sending via SMTP</title>
     <para>
         To send mail via SMTP, <classname>Zend_Mail_Transport_Smtp</classname> needs to be created and registered with
-        <classname>Zend_Mail</classname> before the <code>send()</code> method is called. For all remaining
+        <classname>Zend_Mail</classname> before the <methodname>send()</methodname> method is called. For all remaining
         <classname>Zend_Mail::send()</classname> calls in the current script, the SMTP transport will then be used:
     </para>
     <example id="zend.mail.sending.example-1">
@@ -15,11 +15,11 @@ Zend_Mail::setDefaultTransport($tr);
 ]]></programlisting>
     </example>
     <para>
-        The <code>setDefaultTransport()</code> method and the constructor of
+        The <methodname>setDefaultTransport()</methodname> method and the constructor of
         <classname>Zend_Mail_Transport_Smtp</classname> are not expensive. These two lines can be processed at script
         setup time (e.g., config.inc or similar) to configure the behavior of the <classname>Zend_Mail</classname> class
         for the rest of the script. This keeps configuration information out of the application logic - whether
-        mail is sent via SMTP or <ulink url="http://php.net/mail"><code>mail()</code></ulink>, what mail server
+        mail is sent via SMTP or <ulink url="http://php.net/mail"><methodname>mail()</methodname></ulink>, what mail server
         is used, etc.
     </para>
 </sect1>

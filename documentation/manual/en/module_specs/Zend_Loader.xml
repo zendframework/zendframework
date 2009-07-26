@@ -16,7 +16,7 @@
             user input or method argument. If you are loading a file or a
             class whose name is constant, there is no benefit to using
             <classname>Zend_Loader</classname> over using traditional PHP functions such as
-            <ulink url="http://php.net/require_once"><code>require_once()</code></ulink>.
+            <ulink url="http://php.net/require_once"><methodname>require_once()</methodname></ulink>.
         </para>
     </tip>
 
@@ -28,7 +28,7 @@
             The static method <classname>Zend_Loader::loadFile()</classname> loads a PHP
             file. The file loaded may contain any PHP code.
             The method is a wrapper for the PHP function
-            <ulink url="http://php.net/include"><code>include()</code></ulink>.
+            <ulink url="http://php.net/include"><methodname>include()</methodname></ulink>.
             This method returns boolean false on failure, for example
             if the specified file does not exist.
         </para>
@@ -59,9 +59,9 @@ Zend_Loader::loadFile($filename, $dirs=null, $once=false);
         <para>
             The <code>$once</code> argument is a boolean. If <constant>TRUE</constant>,
             <classname>Zend_Loader::loadFile()</classname> uses the PHP function
-            <ulink url="http://php.net/include"><code>include_once()</code></ulink>
+            <ulink url="http://php.net/include"><methodname>include_once()</methodname></ulink>
             for loading the file, otherwise the PHP function
-            <ulink url="http://php.net/include_once"><code>include()</code></ulink>
+            <ulink url="http://php.net/include_once"><methodname>include()</methodname></ulink>
             is used.
         </para>
 
@@ -138,7 +138,7 @@ if (Zend_Loader::isReadable($filename)) {
             The <code>$filename</code> argument specifies the filename to
             check. This may contain path information.
             This method is a wrapper for the PHP function
-            <ulink url="http://php.net/is_readable"><code>is_readable()</code></ulink>.
+            <ulink url="http://php.net/is_readable"><methodname>is_readable()</methodname></ulink>.
             The PHP function does not search the <code>include_path</code>,
             while <classname>Zend_Loader::isReadable()</classname> does.
         </para>
@@ -153,10 +153,10 @@ if (Zend_Loader::isReadable($filename)) {
             The <classname>Zend_Loader</classname> class contains a method you can register with the
             PHP SPL autoloader. <classname>Zend_Loader::autoload()</classname> is the
             callback method. As a convenience, <classname>Zend_Loader</classname> provides the
-            <code>registerAutoload()</code> function to register its
-            <code>autoload()</code> method. If the <code>spl_autoload</code>
+            <methodname>registerAutoload()</methodname> function to register its
+            <methodname>autoload()</methodname> method. If the <code>spl_autoload</code>
             extension is not present in your PHP environment, then the
-            <code>registerAutoload()</code> method throws a <classname>Zend_Exception</classname>.
+            <methodname>registerAutoload()</methodname> method throws a <classname>Zend_Exception</classname>.
         </para>
 
         <example id="zend.loader.load.autoload.example">
@@ -169,15 +169,15 @@ Zend_Loader::registerAutoload();
         <para>
             After registering the Zend Framework autoload callback, you can
             reference classes from Zend Framework without having to load
-            them explicitly. The <code>autoload()</code> method uses
+            them explicitly. The <methodname>autoload()</methodname> method uses
             <classname>Zend_Loader::loadClass()</classname> automatically when you
             reference a class.
         </para>
 
         <para>
             If you have extended the <classname>Zend_Loader</classname> class, you can give an
-            optional argument to <code>registerAutoload()</code>, to specify
-            the class from which to register an <code>autoload()</code> method.
+            optional argument to <methodname>registerAutoload()</methodname>, to specify
+            the class from which to register an <methodname>autoload()</methodname> method.
         </para>
 
         <example id="zend.loader.load.autoload.example-extended">
@@ -185,11 +185,11 @@ Zend_Loader::registerAutoload();
                 extended class</title>
             <para>
                 Because of the semantics of static function references in PHP,
-                you must implement code for both <code>loadClass()</code>
-                and <code>autoload()</code>, and the <code>autoload()</code>
-                must call <code>self::loadClass()</code>. If your
-                <code>autoload()</code> method delegates to its parent to
-                call <code>self::loadClass()</code>, then it calls the
+                you must implement code for both <methodname>loadClass()</methodname>
+                and <methodname>autoload()</methodname>, and the <methodname>autoload()</methodname>
+                must call <methodname>self::loadClass()</methodname>. If your
+                <methodname>autoload()</methodname> method delegates to its parent to
+                call <methodname>self::loadClass()</methodname>, then it calls the
                 method of that name in the parent class, not the subclass.
             </para>
             <programlisting language="php"><![CDATA[
@@ -217,7 +217,7 @@ Zend_Loader::registerAutoload('My_Loader');
 
         <para>
             You can remove an autoload callback. The
-            <code>registerAutoload()</code> has an optional second argument,
+            <methodname>registerAutoload()</methodname> has an optional second argument,
             which is <constant>TRUE</constant> by default. If this argument is
             <constant>FALSE</constant>, the autoload callback is unregistered from the
             SPL autoload stack.

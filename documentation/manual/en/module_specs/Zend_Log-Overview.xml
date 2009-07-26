@@ -54,7 +54,7 @@ $logger->addWriter($writer);
 
         It is important to note that the Log must
         have at least one Writer. You can add any number of Writers using the
-        Log's <code>addWriter()</code> method.
+        Log's <methodname>addWriter()</methodname> method.
       </para>
 
       <para>
@@ -74,20 +74,20 @@ $logger = new Zend_Log($writer);
       <title>Logging Messages</title>
 
       <para>
-        To log a message, call the <code>log()</code> method of a Log instance
+        To log a message, call the <methodname>log()</methodname> method of a Log instance
         and pass it the message with a corresponding priority:
 
       <programlisting language="php"><![CDATA[
 $logger->log('Informational message', Zend_Log::INFO);
 ]]></programlisting>
 
-      The first parameter of the <code>log()</code> method is a string <code>message</code> and the second
+      The first parameter of the <methodname>log()</methodname> method is a string <code>message</code> and the second
       parameter is an integer <code>priority</code>. The priority must be one of the priorities recognized
       by the Log instance. This is explained in the next section.
     </para>
 
     <para>
-      A shortcut is also available. Instead of calling the <code>log()</code> method, you can
+      A shortcut is also available. Instead of calling the <methodname>log()</methodname> method, you can
       call a method by the same name as the priority:
 
       <programlisting language="php"><![CDATA[
@@ -105,7 +105,7 @@ $logger->emerg('Emergency message');
     <para>
       If the Log object is no longer needed, set the variable containing it to
       <constant>NULL</constant> to destroy it. This will automatically call the
-      <code>shutdown()</code> instance method of each attached Writer before
+      <methodname>shutdown()</methodname> instance method of each attached Writer before
       the Log object is destroyed:
 
       <programlisting language="php"><![CDATA[
@@ -161,7 +161,7 @@ DEBUG   = 7;  // Debug: debug messages
 
     <para>
       User-defined priorities can be added at runtime using the Log's
-      <code>addPriority()</code> method:
+      <methodname>addPriority()</methodname> method:
 
       <programlisting language="php"><![CDATA[
 $logger->addPriority('FOO', 8);
@@ -183,7 +183,7 @@ $logger->foo('Foo Message');
     <title>Understanding Log Events</title>
 
     <para>
-      When you call the <code>log()</code> method or one of its shortcuts, a
+      When you call the <methodname>log()</methodname> method or one of its shortcuts, a
       log event is created. This is simply an associative array with data
       describing the event that is passed to the writers. The following keys
       are always created in this array: <code>timestamp</code>,
@@ -198,7 +198,7 @@ $logger->foo('Foo Message');
     </para>
 
     <para>
-      To add a new item to every future event, call the <code>setEventItem()</code>
+      To add a new item to every future event, call the <methodname>setEventItem()</methodname>
       method giving a key and a value:
 
       <programlisting language="php"><![CDATA[
@@ -209,11 +209,11 @@ $logger->setEventItem('pid', getmypid());
       it with the PID of the current process. Once a new item has been
       set, it is available automatically to all writers along with all of the
       other data event data during logging. An item can be overwritten at any
-      time by calling the <code>setEventItem()</code> method again.
+      time by calling the <methodname>setEventItem()</methodname> method again.
     </para>
 
     <para>
-      Setting a new event item with <code>setEventItem()</code> causes the
+      Setting a new event item with <methodname>setEventItem()</methodname> causes the
       new item to be sent to all writers of the logger. However, this does
       not guarantee that the writers actually record the item. This is
       because the writers won't know what to do with it unless a formatter

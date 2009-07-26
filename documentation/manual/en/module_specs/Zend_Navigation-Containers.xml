@@ -28,7 +28,7 @@
             entirely empty, or take an array or a
             <classname>Zend_Config</classname> object with pages to put in the
             container. Each page in the given array/config will eventually be
-            passed to the <code>addPage()</code> method of the container class,
+            passed to the <methodname>addPage()</methodname> method of the container class,
             which means that each element in the array/config can be an array or
             a config object, or a <classname>Zend_Navigation_Page</classname>
             instance.
@@ -405,8 +405,8 @@ $container = new Zend_Navigation($config);
 
         <para>
             Adding pages to a container can be done with the methods
-            <code>addPage()</code>, <code>addPages()</code>, or
-            <code>setPages()</code>. See examples below for explanation.
+            <methodname>addPage()</methodname>, <methodname>addPages()</methodname>, or
+            <methodname>setPages()</methodname>. See examples below for explanation.
         </para>
 
         <example id="zend.navigation.containers.adding.example">
@@ -455,8 +455,8 @@ $container->setPages($pages);
         <title>Removing pages</title>
 
         <para>
-            Removing pages can be done with <code>removePage()</code> or
-            <code>removePages()</code>. The first method accepts a an instance
+            Removing pages can be done with <methodname>removePage()</methodname> or
+            <methodname>removePages()</methodname>. The first method accepts a an instance
             of a page, or an integer. The integer corresponds to the
             <code>order</code> a page has. The latter method will remove all
             pages in the container.
@@ -503,12 +503,12 @@ $container->removePages();      // removes all pages
 
         <para>
             Containers have finder methods for retrieving pages.
-            They are <code>findOneBy($property, $value)</code>,
-            <code>findAllBy($property, $value)</code>, and
-            <code>findBy($property, $value, $all = false)</code>.
+            They are <methodname>findOneBy($property, $value)</methodname>,
+            <methodname>findAllBy($property, $value)</methodname>, and
+            <methodname>findBy($property, $value, $all = false)</methodname>.
             Those methods will recursively search the container for
             pages matching the given <code>$page->$property == $value</code>.
-            The first method, <code>findOneBy()</code>, will return a
+            The first method, <methodname>findOneBy()</methodname>, will return a
             single page matching the property with the given value, or
             null if it cannot be found. The second method will return
             all pages with a property matching the given value. The third
@@ -519,13 +519,13 @@ $container->removePages();      // removes all pages
         <para>
             The finder methods can also be used magically by appending the
             property name to <code>findBy</code>, <code>findOneBy</code>, or
-            <code>findAllBy</code>, e.g. <code>findOneByLabel('Home')</code> to
+            <code>findAllBy</code>, e.g. <methodname>findOneByLabel('Home')</methodname> to
             return the first matching page with label <code>Home</code>.
-            Other combinations are <code>findByLabel(...)</code>,
-            <code>findOnyByTitle(...)</code>,
-            <code>findAllByController(...)</code>, etc. Finder
+            Other combinations are <methodname>findByLabel(...)</methodname>,
+            <methodname>findOnyByTitle(...)</methodname>,
+            <methodname>findAllByController(...)</methodname>, etc. Finder
             methods also work on custom properties, such as
-            <code>findByFoo('bar')</code>.
+            <methodname>findByFoo('bar')</methodname>.
         </para>
 
         <example id="zend.navigation.containers.finding.example">
@@ -679,14 +679,14 @@ foreach ($it as $page) {
         <title>Other operations</title>
 
         <para>
-            The method <code>hasPage(Zend_Navigation_Page $page)</code> checks
-            if the container has the given page. The method <code>hasPages()</code>
+            The method <methodname>hasPage(Zend_Navigation_Page $page)</methodname> checks
+            if the container has the given page. The method <methodname>hasPages()</methodname>
             checks if there are any pages in the container, and is equivalent
             to <code>count($container) > 1</code>.
         </para>
 
         <para>
-            The <code>toArray()</code> method converts the container and the
+            The <methodname>toArray()</methodname> method converts the container and the
             pages in it to an array. This can be useful for serializing and
             debugging.
         </para>

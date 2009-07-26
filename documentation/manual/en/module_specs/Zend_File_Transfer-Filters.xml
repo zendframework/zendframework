@@ -80,27 +80,27 @@
                     <code>setFilters(array $filters, $files =
                         null)</code>: Overwrites any existing filters with
                     the filters specified. The filters should follow the
-                    syntax for <code>addFilters()</code>.
+                    syntax for <methodname>addFilters()</methodname>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>hasFilter($name)</code>: Indicates if a
+                    <methodname>hasFilter($name)</methodname>: Indicates if a
                     filter has been registered.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getFilter($name)</code>: Returns a previously
+                    <methodname>getFilter($name)</methodname>: Returns a previously
                     registered filter.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getFilters($files = null)</code>: Returns
+                    <methodname>getFilters($files = null)</methodname>: Returns
                     registered filters; if <code>$files</code> is passed,
                     returns filters for that particular file or set of
                     files.
@@ -109,14 +109,14 @@
 
             <listitem>
                 <para>
-                    <code>removeFilter($name)</code>: Removes a previously
+                    <methodname>removeFilter($name)</methodname>: Removes a previously
                     registered filter.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>clearFilters()</code>: Clears all
+                    <methodname>clearFilters()</methodname>: Clears all
                     registered filters.
                 </para>
             </listitem>
@@ -142,8 +142,8 @@ $upload->addFilter('Rename',
             <title>Limit filters to single files</title>
 
             <para>
-                <code>addFilter()</code>, <code>addFilters()</code>, and
-                <code>setFilters()</code> each accept a final
+                <methodname>addFilter()</methodname>, <methodname>addFilters()</methodname>, and
+                <methodname>setFilters()</methodname> each accept a final
                 <code>$files</code> argument. This argument can be used to
                 specify a particular file or array of files on which to set the
                 given filter.
@@ -158,7 +158,7 @@ $upload->addFilter('Rename', 'C:\picture\uploads', 'file2');
         </example>
 
         <para>
-            Generally you should simply use the <code>addFilters()</code> method, which can be
+            Generally you should simply use the <methodname>addFilters()</methodname> method, which can be
             called multiple times.
         </para>
 
@@ -166,7 +166,7 @@ $upload->addFilter('Rename', 'C:\picture\uploads', 'file2');
             <title>Add multiple filters</title>
 
             <para>
-                Often it's simpler just to call <code>addFilter()</code> multiple times. One call
+                Often it's simpler just to call <methodname>addFilter()</methodname> multiple times. One call
                 for each filter. This also increases the readability and makes your code more
                 maintainable. As all methods provide a fluent interface you can couple the calls as
                 shown below:
@@ -305,7 +305,7 @@ $upload->addFilter('Encrypt',
 
         <para>
             At initiation you can give a string which will then be used as encoding. Or you can use
-            the <code>setEncoding()</code> method to set it afterwards.
+            the <methodname>setEncoding()</methodname> method to set it afterwards.
         </para>
 
         <example id="zend.file.transfer.filters.lowercase.example">
@@ -368,9 +368,9 @@ $upload->addFilter('LowerCase', 'ISO-8859-1');
         </itemizedlist>
 
         <para>
-            Additionally you can also use the method <code>setFile()</code> to set files, which
-            erases all previous set, <code>addFile()</code> to add a new file to existing ones, and
-            <code>getFile()</code> to get all actually set files. To simplify things, this filter
+            Additionally you can also use the method <methodname>setFile()</methodname> to set files, which
+            erases all previous set, <methodname>addFile()</methodname> to add a new file to existing ones, and
+            <methodname>getFile()</methodname> to get all actually set files. To simplify things, this filter
             understands several notations and that methods and constructor understand the same
             notations.
         </para>
@@ -482,7 +482,7 @@ $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
 
         <para>
             At initiation you can give a string which will then be used as encoding. Or you can use
-            the <code>setEncoding()</code> method to set it afterwards.
+            the <methodname>setEncoding()</methodname> method to set it afterwards.
         </para>
 
         <example id="zend.file.transfer.filters.uppercase.example">

@@ -153,7 +153,7 @@ if (isset($_POST['xmlToken'])) {
             Once the adapter has been configured, you can then use the standard
             <classname>Zend_Auth</classname> facilities to validate the provided
             information card token and authenticate the user by examining the
-            identity provided by the <code>getIdentity()</code> method.
+            identity provided by the <methodname>getIdentity()</methodname> method.
         </para>
     </sect2>
 
@@ -211,7 +211,7 @@ if (isset($_POST['xmlToken'])) {
             case with the <classname>Zend_Auth_Adapter_InfoCard</classname>, we create an
             instance of <classname>Zend_InfoCard</classname> and then set one or more SSL
             certificate public/private key pairs used by the web server. Once
-            configured, we can use the <code>process()</code> method to process
+            configured, we can use the <methodname>process()</methodname> method to process
             the information card and return the results.
         </para>
     </sect2>
@@ -232,11 +232,11 @@ if (isset($_POST['xmlToken'])) {
             <classname>Zend_InfoCard_Claims::isValid()</classname> method. Claims
             themselves can either be retrieved by simply accessing the
             identifier desired (i.e. <code>givenname</code>) as a property of
-            the object or through the <code>getClaim()</code> method.
+            the object or through the <methodname>getClaim()</methodname> method.
         </para>
 
         <para>
-            In most cases you will never need to use the <code>getClaim()</code>
+            In most cases you will never need to use the <methodname>getClaim()</methodname>
             method. However, if your <code>requiredClaims</code> mandate that
             you request claims from multiple different sources/namespaces then
             you will need to extract them explicitly using this method (simply
@@ -251,7 +251,7 @@ if (isset($_POST['xmlToken'])) {
             As part of the validation process, it is the developer's responsibility to
             examine the issuing source of the claims contained within the
             information card and to decide if that source is a trusted source of
-            information. To do so, the <code>getIssuer()</code> method is
+            information. To do so, the <methodname>getIssuer()</methodname> method is
             provided within the <classname>Zend_InfoCard_Claims</classname> object which
             returns the URI of the issuer of the information card claims.
         </para>
@@ -269,7 +269,7 @@ if (isset($_POST['xmlToken'])) {
             claim as part of the <code>requiredClaims</code> of the request. If
             this claim is requested then the <classname>Zend_InfoCard_Claims</classname>
             object will provide a unique identifier for the specific card that
-            was submitted by calling the <code>getCardID()</code> method.
+            was submitted by calling the <methodname>getCardID()</methodname> method.
         </para>
 
         <para>
@@ -350,9 +350,9 @@ public function submitinfocardAction()
             To prevent this, one must implement the
             <classname>Zend_InfoCard_Adapter_Interface</classname> and set an
             instance of this interface prior to calling either the
-            <code>process()</code> (standalone) or <code>authenticate()</code>
+            <methodname>process()</methodname> (standalone) or <methodname>authenticate()</methodname>
             method as a <classname>Zend_Auth</classname> adapter. To set this interface,
-            the <code>setAdapter()</code> method should be used. In the example below,
+            the <methodname>setAdapter()</methodname> method should be used. In the example below,
             we set a <classname>Zend_InfoCard</classname> adapter and use it in our
             application:
         </para>

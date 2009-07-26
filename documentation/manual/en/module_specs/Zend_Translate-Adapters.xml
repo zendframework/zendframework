@@ -367,9 +367,9 @@ try {
             To use caching you will just have to give a cache object to the
             <classname>Zend_Translate::setCache()</classname> method. It takes a instance of
             <classname>Zend_Cache</classname> as only parameter. Also if you use any adapter direct you
-            can use the <code>setCache()</code> method. For convenience there are also the static methods
-            <code>getCache()</code>, <code>hasCache()</code>, <code>clearCache()</code> and
-            <code>removeCache()</code>.
+            can use the <methodname>setCache()</methodname> method. For convenience there are also the static methods
+            <methodname>getCache()</methodname>, <methodname>hasCache()</methodname>, <methodname>clearCache()</methodname> and
+            <methodname>removeCache()</methodname>.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -388,7 +388,7 @@ $translate = new Zend_Translate('gettext',
                 You must set the cache <emphasis>before</emphasis> you use or initiate
                 any adapter or instance of <classname>Zend_Translate</classname>. Otherwise your translation
                 source will not be cached until you add a new source with the
-                <code>addTranslation()</code> method.
+                <methodname>addTranslation()</methodname> method.
             </para>
         </note>
 

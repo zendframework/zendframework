@@ -129,7 +129,7 @@ $validator = new Zend_Validate_EmailAddress(Zend_Validate_Hostname::ALLOW_DNS,
 $validator->hostnameValidator->setValidateIdn(false);
 ]]></programlisting>
 
-        More information on the usage of <code>setValidateIdn()</code> appears in the
+        More information on the usage of <methodname>setValidateIdn()</methodname> appears in the
         <classname>Zend_Validate_Hostname</classname> documentation.
     </para>
 
@@ -151,7 +151,7 @@ $validator->hostnameValidator->setValidateIdn(false);
 $validator->hostnameValidator->setValidateTld(false);
 ]]></programlisting>
 
-        More information on the usage of <code>setValidateTld()</code> appears in the
+        More information on the usage of <methodname>setValidateTld()</methodname> appears in the
         <classname>Zend_Validate_Hostname</classname> documentation.
     </para>
 

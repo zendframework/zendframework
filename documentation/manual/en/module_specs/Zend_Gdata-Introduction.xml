@@ -129,13 +129,13 @@
                         <classname>Zend_Gdata_Spreadsheets_CellQuery</classname>. Query classes
                         provide methods used to construct a query for data
                         to be retrieved from GData services. Methods include
-                        getters and setters like <code>setUpdatedMin()</code>,
-                        <code>setStartIndex()</code>, and
-                        <code>getPublishedMin()</code>. The query classes also
+                        getters and setters like <methodname>setUpdatedMin()</methodname>,
+                        <methodname>setStartIndex()</methodname>, and
+                        <methodname>getPublishedMin()</methodname>. The query classes also
                         have a method to generate a URL representing the
                         constructed query -- <code>getQueryUrl</code>.
                         Alternatively, the query string component of the URL
-                        can be retrieved used the <code>getQueryString()</code>
+                        can be retrieved used the <methodname>getQueryString()</methodname>
                         method.
                     </para>
                 </listitem>
@@ -182,15 +182,15 @@
                         back from services and for constructing data to be
                         sent to services. These include getters and setters
                         such as
-                        <code>setText()</code> to set the child text
-                        node of an element, <code>getText()</code> to retrieve
-                        the text node of an element, <code>getStartTime()</code>
+                        <methodname>setText()</methodname> to set the child text
+                        node of an element, <methodname>getText()</methodname> to retrieve
+                        the text node of an element, <methodname>getStartTime()</methodname>
                         to retrieve the start time attribute of a When element,
                         and other similiar methods.
                         The data model classes also include methods such as
-                        <code>getDOM()</code> to retrieve a DOM representation
+                        <methodname>getDOM()</methodname> to retrieve a DOM representation
                         of the element and all children and
-                        <code>transferFromDOM()</code> to construct a data
+                        <methodname>transferFromDOM()</methodname> to construct a data
                         model representation of a DOM tree.
                     </para>
                 </listitem>
@@ -378,7 +378,7 @@ $gdata->setMinorProtocolVersion(null);
                     query. The value of the parameter is a string.
                 </para>
                 <para>
-                    Set this parameter with the <code>setQuery()</code>
+                    Set this parameter with the <methodname>setQuery()</methodname>
                     function.
                 </para>
             </listitem>
@@ -400,7 +400,7 @@ $gdata->setMinorProtocolVersion(null);
                     <classname>Zend_Gdata_Query</classname> class and its subclasses.
                 </para>
                 <para>
-                    Set this parameter with the <code>setAlt()</code>
+                    Set this parameter with the <methodname>setAlt()</methodname>
                     function.
                 </para>
             </listitem>
@@ -413,7 +413,7 @@ $gdata->setMinorProtocolVersion(null);
                     will not exceed this value.
                 </para>
                 <para>
-                    Set this parameter with the <code>setMaxResults()</code>
+                    Set this parameter with the <methodname>setMaxResults()</methodname>
                     function.
                 </para>
             </listitem>
@@ -425,7 +425,7 @@ $gdata->setMinorProtocolVersion(null);
                     Entries before this number are skipped.
                 </para>
                 <para>
-                    Set this parameter with the <code>setStartIndex()</code>
+                    Set this parameter with the <methodname>setStartIndex()</methodname>
                     function.
                 </para>
             </listitem>
@@ -446,8 +446,8 @@ $gdata->setMinorProtocolVersion(null);
                     these parameters.
                 </para>
                 <para>
-                    Set this parameter with the <code>setUpdatedMin()</code>
-                    and <code>setUpdatedMax()</code> functions.
+                    Set this parameter with the <methodname>setUpdatedMin()</methodname>
+                    and <methodname>setUpdatedMax()</methodname> functions.
                 </para>
             </listitem>
 
@@ -477,7 +477,7 @@ echo $query->maxResults;        // returns 10
 ]]></programlisting>
 
         <para>
-            You can clear all parameters with the <code>resetParameters()</code>
+            You can clear all parameters with the <methodname>resetParameters()</methodname>
             function. This is useful to do if you reuse a <classname>Zend_Gdata</classname>
             object for multiple queries.
         </para>
@@ -497,7 +497,7 @@ $query->resetParameters();      // clears all parameters
         <title>Fetching a Feed</title>
 
         <para>
-            Use the <code>getFeed()</code> function to retrieve
+            Use the <methodname>getFeed()</methodname> function to retrieve
             a feed from a specified URI.
             This function returns an instance of class specified
             as the second argument to getFeed, which defaults to
@@ -529,7 +529,7 @@ $feed = $gdata->getFeed($query);
             the feed may be broken up into many smaller "pages" of feeds. When
             this occurs, each page will contain a link to the next page in the
             series. This link can be accessed by calling
-            <code>getLink('next')</code>. The following example shows how to
+            <methodname>getLink('next')</methodname>. The following example shows how to
             retrieve the next page of a feed:
         </para>
 
@@ -562,7 +562,7 @@ $feed = $gdata->retrieveAllEntriesForFeed($gdata->getFeed($query));
         <para>
             Keep in mind when calling this function that it may take a long
             time to complete on large feeds. You may need to increase PHP's
-            execution time limit by calling <code>set_time_limit()</code>.
+            execution time limit by calling <methodname>set_time_limit()</methodname>.
         </para>
 
     </sect2>
@@ -625,14 +625,14 @@ foreach ($feed as $entry) {
 
         <para>
             The <classname>Zend_Gdata</classname> object has a function
-            <code>insertEntry()</code> with which you can upload data to save
+            <methodname>insertEntry()</methodname> with which you can upload data to save
             new entries to Google Data services.
         </para>
 
         <para>
             You can use the data model classes for each service to construct
             the appropriate entry to post to Google's services. The
-            <code>insertEntry()</code> function will accept a child of
+            <methodname>insertEntry()</methodname> function will accept a child of
             <classname>Zend_Gdata_App_Entry</classname> as data to post to the service.
             The method returns a child of <classname>Zend_Gdata_App_Entry</classname>
             which represents the state of the entry as it was returned from
@@ -641,7 +641,7 @@ foreach ($feed as $entry) {
 
         <para>
             Alternatively, you could construct the XML structure for an entry
-            as a string and pass the string to the <code>insertEntry()</code>
+            as a string and pass the string to the <methodname>insertEntry()</methodname>
             function.
         </para>
 
@@ -673,10 +673,10 @@ echo 'The <id> of the resulting entry is: ' . $entryResult->id->text;
         <title>Deleting Entries on Google Servers</title>
 
         <para>
-            Option 1: The <classname>Zend_Gdata</classname> object has a function <code>delete()</code>
+            Option 1: The <classname>Zend_Gdata</classname> object has a function <methodname>delete()</methodname>
             with which you can delete entries from Google Data
             services. Pass the edit URL value from
-            a feed entry to the <code>delete()</code> method.
+            a feed entry to the <methodname>delete()</methodname> method.
         </para>
 
         <para>

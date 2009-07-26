@@ -22,7 +22,7 @@
         <title>Setting Values in the Registry</title>
 
         <para>
-            Use the static method <code>set()</code> to store an entry in the registry, .
+            Use the static method <methodname>set()</methodname> to store an entry in the registry, .
         </para>
 
         <example id="zend.registry.using.storing.example">
@@ -35,7 +35,7 @@ Zend_Registry::set('index', $value);
         <para>
             The value returned can be an object, an array, or a scalar.
             You can change the value stored in a specific entry of
-            the registry by calling the <code>set()</code> method to set the entry
+            the registry by calling the <methodname>set()</methodname> method to set the entry
             to a new value.
         </para>
 
@@ -51,7 +51,7 @@ Zend_Registry::set('index', $value);
 
         <para>
             To retrieve an entry from the registry, use the static
-            <code>get()</code> method.
+            <methodname>get()</methodname> method.
         </para>
 
         <example id="zend.registry.using.retrieving.example">
@@ -62,7 +62,7 @@ $value = Zend_Registry::get('index');
         </example>
 
         <para>
-            The <code>getInstance()</code> method returns the singleton registry object.
+            The <methodname>getInstance()</methodname> method returns the singleton registry object.
             This registry object is iterable, making all values stored in the registry easily accessible.
         </para>
 
@@ -115,7 +115,7 @@ $registry = new Zend_Registry(array('index' => $value));
             Once such a <classname>Zend_Registry</classname> object is instantiated,
             you can use it by calling any array object method or by setting it
             as the singleton instance for <classname>Zend_Registry</classname> with the static method
-            <code>setInstance()</code>.
+            <methodname>setInstance()</methodname>.
         </para>
 
         <example id="zend.registry.using.constructing.example-setinstance">
@@ -128,7 +128,7 @@ Zend_Registry::setInstance($registry);
         </example>
 
         <para>
-            The <code>setInstance()</code> method throws a <classname>Zend_Exception</classname>
+            The <methodname>setInstance()</methodname> method throws a <classname>Zend_Exception</classname>
             if the static registry has already been initialized.
         </para>
 
@@ -212,7 +212,7 @@ var_dump($registry->index);
 
         <para>
             To find out if a particular index in the registry
-            has been set, use the static method <code>isRegistered()</code>.
+            has been set, use the static method <methodname>isRegistered()</methodname>.
         </para>
 
         <example id="zend.registry.using.isset.example-isregistered">
@@ -226,7 +226,7 @@ if (Zend_Registry::isRegistered($index)) {
 
         <para>
             To find out if a particular index in a registry
-            array or object has a value, use the <code>isset()</code> function
+            array or object has a value, use the <methodname>isset()</methodname> function
             as you would with an ordinary array.
         </para>
 
@@ -258,7 +258,7 @@ if (isset($registry->index)) {
             If you want to add functionality to the registry, you should
             create a class that extends <classname>Zend_Registry</classname> and
             specify this class to instantiate for the singleton in the static registry.
-            Use the static method <code>setClassName()</code> to specify
+            Use the static method <methodname>setClassName()</methodname> to specify
             the class.
             <note>
                 <para>The class must be a subclass of <classname>Zend_Registry</classname>.</para>
@@ -290,13 +290,13 @@ Zend_Registry::set('index', $value);
         <para>
             Although it is not normally necessary, you can
             unset the singleton instance of the registry, if desired.
-            Use the static method <code>_unsetInstance()</code> to do so.
+            Use the static method <methodname>_unsetInstance()</methodname> to do so.
         </para>
 
         <warning>
             <title>Data Loss Risk</title>
             <para>
-                When you use <code>_unsetInstance()</code>,
+                When you use <methodname>_unsetInstance()</methodname>,
                 all data in the static registry are
                 discarded and cannot be recovered.
             </para>
@@ -304,7 +304,7 @@ Zend_Registry::set('index', $value);
 
         <para>
             You might use this method, for example, if you want to
-            use <code>setInstance()</code> or <code>setClassName()</code>
+            use <methodname>setInstance()</methodname> or <methodname>setClassName()</methodname>
             after the singleton registry object has been initialized.
             Unsetting the singleton instance allows you to use these methods
             even after the singleton registry object has been set. Using

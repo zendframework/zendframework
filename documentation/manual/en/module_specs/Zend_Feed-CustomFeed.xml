@@ -11,7 +11,7 @@
 
     <para>
         Here is an example of a custom Atom entry class that handles its own <code>myns:</code>
-        namespace entries. Note that it also makes the <code>registerNamespace()</code> call for
+        namespace entries. Note that it also makes the <methodname>registerNamespace()</methodname> call for
         you, so the end user doesn't need to worry about namespaces at all.
     </para>
 

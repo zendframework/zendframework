@@ -29,7 +29,7 @@ $formatter = new Zend_Log_Formatter_Simple($format);
 
     <para>
       A formatter is set on an individual Writer object using the Writer's
-      <code>setFormatter()</code> method:
+      <methodname>setFormatter()</methodname> method:
 
       <programlisting language="php"><![CDATA[
 $writer = new Zend_Log_Writer_Stream('php://output');

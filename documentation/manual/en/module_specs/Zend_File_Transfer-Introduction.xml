@@ -77,7 +77,7 @@ if (!$adapter->receive()) {
         <para>
             This code listing demonstrates the simplest usage of
             <classname>Zend_File_Transfer</classname>. A local destination is set with the
-            <code>setDestination</code> method, then the <code>receive()</code> method is called. If
+            <code>setDestination</code> method, then the <methodname>receive()</methodname> method is called. If
             there are any upload errors, an error will be returned.
         </para>
 
@@ -112,7 +112,7 @@ if (!$adapter->receive()) {
         <para>
             <classname>Zend_File_Transfer</classname> and its adapters support different options.
             You can set all options either by passing them to the constructor or by calling
-            <code>setOptions($options)</code>. <code>getOptions()</code> will return the options
+            <methodname>setOptions($options)</methodname>. <methodname>getOptions()</methodname> will return the options
             that are currently set. The following is a list of all supported options.
         </para>
 
@@ -143,8 +143,8 @@ if (!$adapter->receive()) {
                     <emphasis>isValid($files = null)</emphasis>: This method will check if the
                     given files are valid, based on the validators that are attached to the files.
                     If no files are specified, all files will be checked. You can call
-                    <code>isValid()</code> before calling <code>receive()</code>; in this case,
-                    <code>receive()</code> will not call <code>isValid</code> internally again when
+                    <methodname>isValid()</methodname> before calling <methodname>receive()</methodname>; in this case,
+                    <methodname>receive()</methodname> will not call <code>isValid</code> internally again when
                     receiving the file.
                 </para>
             </listitem>
@@ -243,7 +243,7 @@ $upload->receive();
         </itemizedlist>
 
         <para>
-            <code>getFileName()</code> accepts the name of the element as first parameter. If no
+            <methodname>getFileName()</methodname> accepts the name of the element as first parameter. If no
             name is given, all known filenames will be returned in an array. If the file is a
             multifile, you will also get an array. If there is only a single file a string will be
             returned.
@@ -275,12 +275,12 @@ $names = $upload->getFileName('foo');
             <para>
                 Note that the file name can change after you receive the file, because all filters
                 will be applied once the file is received. So you should always call
-                <code>getFileName()</code> after the files have been received.
+                <methodname>getFileName()</methodname> after the files have been received.
             </para>
         </note>
 
         <para>
-            <code>getFileSize()</code> returns per default the real filesize in SI notation which
+            <methodname>getFileSize()</methodname> returns per default the real filesize in SI notation which
             means you will get <code>2kB</code> instead of <code>2048</code>. If you need only the
             plain size set the <code>useByteString</code> option to false.
         </para>
@@ -303,7 +303,7 @@ $size = $upload->getFileSize();
         </example>
 
         <para>
-            <code>getHash()</code> accepts the name of a hash algorithm as first parameter. For a
+            <methodname>getHash()</methodname> accepts the name of a hash algorithm as first parameter. For a
             list of known algorithms refer to
             <ulink url="http://php.net/hash_algos">PHP's hash_algos method</ulink>. If you don't
             specify an algorithm, the <code>crc32</code> algorithm will be used by default.
@@ -333,7 +333,7 @@ $names = $upload->getHash('crc32', 'foo');
         </note>
 
         <para>
-            <code>getMimeType()</code> returns the mimetype of a file. If more than one file was
+            <methodname>getMimeType()</methodname> returns the mimetype of a file. If more than one file was
             uploaded it returns an array, otherwise a string.
         </para>
 
@@ -401,7 +401,7 @@ $names = $upload->getMimeType('foo');
 
             <para>
                 To archive this, you have to add the wished
-                <emphasis>Zend_ProgressBar_Adapter</emphasis> to <code>getProgress()</code> when you
+                <emphasis>Zend_ProgressBar_Adapter</emphasis> to <methodname>getProgress()</methodname> when you
                 are calling it the first time. For details about the right adapter to use, look into
                 the chapter <link linkend="zend.progressbar.adapters">Zend_ProgressBar Standard
                     Adapters</link>.
@@ -424,7 +424,7 @@ while (!$upload['done']) {
             </example>
 
             <para>
-                The complete handling is done by <code>getProgress()</code> for you in the
+                The complete handling is done by <methodname>getProgress()</methodname> for you in the
                 background.
             </para>
 
@@ -435,12 +435,12 @@ while (!$upload['done']) {
             <title>Using getProgress() manually</title>
 
             <para>
-                You can also work manually with <code>getProgress()</code> without the usage of
+                You can also work manually with <methodname>getProgress()</methodname> without the usage of
                 <classname>Zend_ProgressBar</classname>.
             </para>
 
             <para>
-                Call <code>getProgress()</code> without settings. It will return you an array with
+                Call <methodname>getProgress()</methodname> without settings. It will return you an array with
                 several keys. They differ according to the used PHP extension. But the following
                 keys are given independently of the extension:
             </para>

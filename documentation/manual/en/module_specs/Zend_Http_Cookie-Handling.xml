@@ -374,8 +374,8 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
             fetch cookies from a CookieJar object. Your Zend_Http_Client object
             will automatically fetch the cookies required for an HTTP request
             for you. However, you can still use 3 provided methods to fetch
-            cookies from the jar object: <code>getCookie()</code>,
-            <code>getAllCookies()</code>, and <code>getMatchingCookies()</code>.
+            cookies from the jar object: <methodname>getCookie()</methodname>,
+            <methodname>getAllCookies()</methodname>, and <methodname>getMatchingCookies()</methodname>.
             Additionnaly, iterating over the CookieJar will let you
             retrieve all the Zend_Http_Cookie objects from it.
         </para>

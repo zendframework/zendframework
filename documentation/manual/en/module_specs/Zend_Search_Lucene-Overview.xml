@@ -135,7 +135,7 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents', $contents));
             </para>
 
             <para>
-                Fields' names are defined at your discretion in the <code>addField()</code> method.
+                Fields' names are defined at your discretion in the <methodname>addField()</methodname> method.
             </para>
 
             <para>
@@ -255,8 +255,8 @@ $index->addDocument($doc);
         </para>
 
         <para>
-            <classname>Zend_Search_Lucene_Document_Html</classname> class uses the <code>DOMDocument::loadHTML()</code> and
-            <code>DOMDocument::loadHTMLFile()</code> methods to parse the source HTML, so it doesn't need HTML to be well formed or
+            <classname>Zend_Search_Lucene_Document_Html</classname> class uses the <methodname>DOMDocument::loadHTML()</methodname> and
+            <methodname>DOMDocument::loadHTMLFile()</methodname> methods to parse the source HTML, so it doesn't need HTML to be well formed or
             to be XHTML. On the other hand, it's sensitive to the encoding specified by the "meta http-equiv" header tag.
         </para>
 
@@ -273,12 +273,12 @@ $index->addDocument($doc);
         </para>
 
         <para>
-            The <code>loadHTML()</code> and <code>loadHTMLFile()</code> methods of <classname>Zend_Search_Lucene_Document_Html</classname> class
+            The <methodname>loadHTML()</methodname> and <methodname>loadHTMLFile()</methodname> methods of <classname>Zend_Search_Lucene_Document_Html</classname> class
             also have second optional argument. If it's set to true, then body content is also stored within index and can
             be retrieved from the index. By default, the body is tokenized and indexed, but not stored.
         </para>
         <para>
-            The third parameter of <code>loadHTML()</code> and <code>loadHTMLFile()</code> methods optionally specifies source HTML
+            The third parameter of <methodname>loadHTML()</methodname> and <methodname>loadHTMLFile()</methodname> methods optionally specifies source HTML
             document encoding. It's used if encoding is not specified using Content-type HTTP-EQUIV meta tag.
         </para>
 
@@ -388,7 +388,7 @@ $index->addDocument($doc);
         </para>
 
         <para>
-            The <code>loadDocxFile()</code> methods of <classname>Zend_Search_Lucene_Document_Docx</classname> class
+            The <methodname>loadDocxFile()</methodname> methods of <classname>Zend_Search_Lucene_Document_Docx</classname> class
             also have second optional argument. If it's set to true, then body content is also stored within index and can
             be retrieved from the index. By default, the body is tokenized and indexed, but not stored.
         </para>
@@ -476,7 +476,7 @@ $index->addDocument($doc);
         </para>
 
         <para>
-            The <code>loadPptxFile()</code> methods of <classname>Zend_Search_Lucene_Document_Pptx</classname> class
+            The <methodname>loadPptxFile()</methodname> methods of <classname>Zend_Search_Lucene_Document_Pptx</classname> class
             also have second optional argument. If it's set to true, then body content is also stored within index and can
             be retrieved from the index. By default, the body is tokenized and indexed, but not stored.
         </para>
@@ -561,7 +561,7 @@ $index->addDocument($doc);
         </para>
 
         <para>
-            The <code>loadXlsxFile()</code> methods of <classname>Zend_Search_Lucene_Document_Xlsx</classname> class
+            The <methodname>loadXlsxFile()</methodname> methods of <classname>Zend_Search_Lucene_Document_Xlsx</classname> class
             also have second optional argument. If it's set to true, then body content is also stored within index and can
             be retrieved from the index. By default, the body is tokenized and indexed, but not stored.
         </para>

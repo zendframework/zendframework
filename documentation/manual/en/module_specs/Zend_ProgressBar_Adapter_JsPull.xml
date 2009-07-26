@@ -11,8 +11,8 @@
         like the JSON string which is send by the jsPush adapter. The only
         difference is, that it contains an additional parameter,
         <code>finished</code>, which is either <constant>FALSE</constant> when
-        <code>update()</code> is called or <constant>TRUE</constant>, when
-        <code>finish()</code> is called.
+        <methodname>update()</methodname> is called or <constant>TRUE</constant>, when
+        <methodname>finish()</methodname> is called.
     </para>
     <para>
         You can set the adapter options either via the <code>set*</code> methods

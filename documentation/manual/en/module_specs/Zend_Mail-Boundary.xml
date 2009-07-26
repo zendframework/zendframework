@@ -5,7 +5,7 @@
     <para>
         In a multipart message, a MIME boundary for separating the different parts of the message is normally
         generated at random. In some cases, however, you might want to specify the MIME boundary that is used.
-        This can be done using the <code>setMimeBoundary()</code> method, as in the following example:
+        This can be done using the <methodname>setMimeBoundary()</methodname> method, as in the following example:
     </para>
     <example id="zend.mail.boundary.example-1">
         <title>Changing the MIME Boundary</title>

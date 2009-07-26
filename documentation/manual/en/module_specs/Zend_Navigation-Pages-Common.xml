@@ -12,9 +12,9 @@
 
     <para>
         Option keys are mapped to <code>set</code> methods. This means that
-        the option <code>order</code> maps to the method <code>setOrder()</code>,
+        the option <code>order</code> maps to the method <methodname>setOrder()</methodname>,
         and <code>reset_params</code> maps to the method
-        <code>setResetParams()</code>. If there is no setter method for
+        <methodname>setResetParams()</methodname>. If there is no setter method for
         the option, it will be set as a custom property of the page.
     </para>
 
@@ -82,7 +82,7 @@
                 <row>
                     <entry><code>rel</code></entry>
                     <entry><type>Array</type></entry>
-                    <entry><code>array()</code></entry>
+                    <entry><methodname>array()</methodname></entry>
                     <entry>
                         Specifies forward relations for the page.
                         Each element in the array is a key-value pair, where the
@@ -99,7 +99,7 @@
                 <row>
                     <entry><code>rev</code></entry>
                     <entry><type>Array</type></entry>
-                    <entry><code>array()</code></entry>
+                    <entry><methodname>array()</methodname></entry>
                     <entry>
                         Specifies reverse relations for the page. Works exactly
                         like <code>rel</code>.
@@ -170,7 +170,7 @@
                     <entry>
                         Child pages of the page. This could be an <type>Array</type>
                         or <classname>Zend_Config</classname> object containing either page
-                        options that can be passed to the <code>factory()</code>
+                        options that can be passed to the <methodname>factory()</methodname>
                         method, or actual <classname>Zend_Navigation_Page</classname>
                         instances, or a mixture of both.
                     </entry>
@@ -183,9 +183,9 @@
         <title>Custom properties</title>
         <para>
             All pages support setting and getting of custom properties by
-            use of the magic methods <code>__set($name, $value)</code>,
-            <code>__get($name)</code>, <code>__isset($name)</code> and
-            <code>__unset($name)</code>. Custom properties may have any value,
+            use of the magic methods <methodname>__set($name, $value)</methodname>,
+            <methodname>__get($name)</methodname>, <methodname>__isset($name)</methodname> and
+            <methodname>__unset($name)</methodname>. Custom properties may have any value,
             and will be included in the array that is returned from
             <code>$page->toArray()</code>, which means that pages
             can be serialized/deserialized successfully even if the pages

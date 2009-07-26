@@ -98,7 +98,7 @@ print $translate->_("Here is line one") . "\n";
 printf($translate->_("Today is the %1\$s") . "\n", date("d.m.Y"));
 ]]></programlisting>
 
-        Instead of <code>print()</code>, use the <code>printf()</code>
+        Instead of <methodname>print()</methodname>, use the <methodname>printf()</methodname>
         function and replace all parameters with <code>%1\$s</code> parts.
         The first is <code>%1\$s</code>, the second is <code>%2\$s</code>,
         and so on. This way a translation can be done without knowing

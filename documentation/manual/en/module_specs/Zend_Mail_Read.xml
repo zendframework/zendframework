@@ -174,7 +174,7 @@ $mail = new Zend_Mail_Storage_Pop3(array('host'     => 'example.com',
 
         <para>
             Messages can be fetched after you've opened the storage . You need the message number, which is a counter
-            starting with 1 for the first message. To fetch the message, you use the method <code>getMessage()</code>:
+            starting with 1 for the first message. To fetch the message, you use the method <methodname>getMessage()</methodname>:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -183,7 +183,7 @@ $message = $mail->getMessage($messageNum);
 
         <para>
             Array access is also supported, but this access method won't supported any additional parameters that could be added to
-            <code>getMessage()</code>. As long as you don't mind, and can live with the default values, you may use:
+            <methodname>getMessage()</methodname>. As long as you don't mind, and can live with the default values, you may use:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -199,7 +199,7 @@ foreach ($mail as $messageNum => $message) {
 ]]></programlisting>
 
         <para>
-            To count the messages in the storage, you can either use the method <code>countMessages()</code> or use array
+            To count the messages in the storage, you can either use the method <methodname>countMessages()</methodname> or use array
             access:
         </para>
 
@@ -211,7 +211,7 @@ $maxMessage = $mail->countMessages();
 $maxMessage = count($mail);
 ]]></programlisting>
 
-        <para>To remove a mail, you use the method <code>removeMessage()</code> or again array access:</para>
+        <para>To remove a mail, you use the method <methodname>removeMessage()</methodname> or again array access:</para>
 
         <programlisting language="php"><![CDATA[
 // method
@@ -225,12 +225,12 @@ unset($mail[$messageNum]);
     <sect2 id="zend.mail.read-message">
         <title>Working with messages</title>
 
-        <para>After you fetch the messages with <code>getMessage()</code> you want to fetch headers, the content
+        <para>After you fetch the messages with <methodname>getMessage()</methodname> you want to fetch headers, the content
         or single parts of a multipart message. All headers can be accessed via properties or the method
-        <code>getHeader()</code> if you want more control or have unusual header names. The header names are
+        <methodname>getHeader()</methodname> if you want more control or have unusual header names. The header names are
         lower-cased internally, thus the case of the header name in the mail message doesn't matter. Also headers
         with a dash can be written in camel-case. If no header is found for both notations an exception is thrown.
-        To encounter this the method <code>headerExists()</code> can be used to check the existance of a header.</para>
+        To encounter this the method <methodname>headerExists()</methodname> can be used to check the existance of a header.</para>
 
         <programlisting language="php"><![CDATA[
 // get the message object
@@ -249,7 +249,7 @@ if( isset($message->cc) ) { // or $message->headerExists('cc');
 ]]></programlisting>
 
         <para>If you have multiple headers with the same name- i.e. the Received headers- you might want an array
-        instead of a string. In this case, use the <code>getHeader()</code> method.</para>
+        instead of a string. In this case, use the <methodname>getHeader()</methodname> method.</para>
 
         <programlisting language="php"><![CDATA[
 // get header as property - the result is always a string,
@@ -273,7 +273,7 @@ if (is_string($received)) {
 }
 ]]></programlisting>
 
-        <para>The method <code>getHeaders()</code> returns all headers as array with the lower-cased name as
+        <para>The method <methodname>getHeaders()</methodname> returns all headers as array with the lower-cased name as
         key and the value as and array for multiple headers or as string for single headers.</para>
 
         <programlisting language="php"><![CDATA[
@@ -290,7 +290,7 @@ foreach ($message->getHeaders() as $name => $value) {
 ]]></programlisting>
 
         <para>If you don't have a multipart message, fetching the content is easily done via
-        <code>getContent()</code>. Unlike the headers, the content is only fetched when needed (aka late-fetch).</para>
+        <methodname>getContent()</methodname>. Unlike the headers, the content is only fetched when needed (aka late-fetch).</para>
 
         <programlisting language="php"><![CDATA[
 // output message content for HTML
@@ -299,11 +299,11 @@ echo $message->getContent();
 echo '</pre>';
 ]]></programlisting>
 
-        <para>Checking for multipart messages is done with the method <code>isMultipart()</code>. If you have
+        <para>Checking for multipart messages is done with the method <methodname>isMultipart()</methodname>. If you have
         multipart message you can get an instance of <classname>Zend_Mail_Part</classname> with the method
-        <code>getPart()</code>. <classname>Zend_Mail_Part</classname> is the base class of <classname>Zend_Mail_Message</classname>,
-        so you have the same methods: <code>getHeader()</code>, <code>getHeaders()</code>, <code>getContent()</code>,
-        <code>getPart()</code>, <code>isMultipart</code> and the properties for headers.</para>
+        <methodname>getPart()</methodname>. <classname>Zend_Mail_Part</classname> is the base class of <classname>Zend_Mail_Message</classname>,
+        so you have the same methods: <methodname>getHeader()</methodname>, <methodname>getHeaders()</methodname>, <methodname>getContent()</methodname>,
+        <methodname>getPart()</methodname>, <code>isMultipart</code> and the properties for headers.</para>
 
         <programlisting language="php"><![CDATA[
 // get the first none multipart part
@@ -317,7 +317,7 @@ echo $part->getContent();
 ]]></programlisting>
 
         <para><classname>Zend_Mail_Part</classname> also implements <code>RecursiveIterator</code>, which makes it easy to scan through all parts. And
-        for easy output, it also implements the magic method <code>__toString()</code>, which returns the content.</para>
+        for easy output, it also implements the magic method <methodname>__toString()</methodname>, which returns the content.</para>
 
         <programlisting language="php"><![CDATA[
 // output first text/plain part
@@ -345,8 +345,8 @@ if (!$foundPart) {
 
         <para>Maildir and IMAP support storing flags. The class <classname>Zend_Mail_Storage</classname> has constants for all known
         maildir and IMAP system flags, named <classname>Zend_Mail_Storage::FLAG_&lt;flagname&gt;</classname>. To check
-        for flags <classname>Zend_Mail_Message</classname> has a method called <code>hasFlag()</code>. With
-        <code>getFlags()</code> you'll get all set flags.</para>
+        for flags <classname>Zend_Mail_Message</classname> has a method called <methodname>hasFlag()</methodname>. With
+        <methodname>getFlags()</methodname> you'll get all set flags.</para>
 
         <programlisting language="php"><![CDATA[
 // find unread messages
@@ -388,7 +388,7 @@ foreach ($flags as $flag) {
 
         <para>As IMAP allows user or client defined flags, you could get flags that don't have a constant in
         <classname>Zend_Mail_Storage</classname>. Instead, they are returned as strings and can be checked the same way with
-        <code>hasFlag()</code>.</para>
+        <methodname>hasFlag()</methodname>.</para>
 
         <programlisting language="php"><![CDATA[
 // check message for client defined flags $IsSpam, $SpamTested
@@ -452,8 +452,8 @@ $mail = new Zend_Mail_Storage_Imap(array('host'     => 'example.com',
             With the method getFolders($root = null) you can get the folder hierarchy starting with the root folder or
             the given folder. It's returned as an instance of <classname>Zend_Mail_Storage_Folder</classname>, which implements
             <code>RecursiveIterator</code> and all children are also instances of <classname>Zend_Mail_Storage_Folder</classname>. Each of
-            these instances has a local and a global name returned by the methods <code>getLocalName()</code> and
-            <code>getGlobalName()</code>. The global name is the absolute name from the root folder (including
+            these instances has a local and a global name returned by the methods <methodname>getLocalName()</methodname> and
+            <methodname>getGlobalName()</methodname>. The global name is the absolute name from the root folder (including
             delimiters), the local name is the name in the parent folder.
         </para>
 
@@ -485,9 +485,9 @@ $mail = new Zend_Mail_Storage_Imap(array('host'     => 'example.com',
 
         <para>
             If you use the iterator, the key of the current element is the local name. The global name is also returned
-            by the magic method <code>__toString()</code>. Some folders may not be selectable, which means they can't
+            by the magic method <methodname>__toString()</methodname>. Some folders may not be selectable, which means they can't
             store messages and selecting them results in an error. This can be checked with the method
-            <code>isSelectable()</code>. So it's very easy to output the whole tree in a view:
+            <methodname>isSelectable()</methodname>. So it's very easy to output the whole tree in a view:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -508,8 +508,8 @@ echo '</select>';
 ]]></programlisting>
 
         <para>
-            The current selected folder is returned by the method <code>getSelectedFolder()</code>. Changing the folder
-            is done with the method <code>selectFolder()</code>, which needs the global name as parameter. If you want
+            The current selected folder is returned by the method <methodname>getSelectedFolder()</methodname>. Changing the folder
+            is done with the method <methodname>selectFolder()</methodname>, which needs the global name as parameter. If you want
             to avoid to write delimiters you can also use the properties of a <classname>Zend_Mail_Storage_Folder</classname> instance:
         </para>
 
@@ -558,8 +558,8 @@ foreach ($mail as $message) {
 
             <para>
             <classname>Zend_Mail_Storage_Mbox</classname>, <classname>Zend_Mail_Storage_Folder_Mbox</classname>, <classname>Zend_Mail_Storage_Maildir</classname> and
-            <classname>Zend_Mail_Storage_Folder_Maildir</classname> implement the magic methods <code>__sleep()</code> and
-            <code>__wakeup()</code>, which means they are serializable. This avoids parsing the files or directory tree
+            <classname>Zend_Mail_Storage_Folder_Maildir</classname> implement the magic methods <methodname>__sleep()</methodname> and
+            <methodname>__wakeup()</methodname>, which means they are serializable. This avoids parsing the files or directory tree
             more than once. The disadvantage is that your Mbox or Maildir storage should not change. Some easy checks
             may be done, like reparsing the current Mbox file if the modification time changes, or reparsing the folder
             structure if a folder has vanished (which still results in an error, but you can search for another folder
@@ -686,14 +686,14 @@ $mail = new Example_Mail_Pop3_Knock(array('host'        => 'localhost',
             <para>
             <classname>Zend_Mail_Storage_Writable_Maildir</classname> has support for Maildir++ quotas. It's disabled by default,
             but it's possible to use it manually, if the automatic checks are not desired (this means
-            <code>appendMessage()</code>, <code>removeMessage()</code> and <code>copyMessage()</code> do no checks
+            <methodname>appendMessage()</methodname>, <methodname>removeMessage()</methodname> and <methodname>copyMessage()</methodname> do no checks
             and do not add entries to the maildirsize file). If enabled, an exception is thrown if you try to write
             to the maildir and it's already over quota.
             </para>
 
             <para>
-            There are three methods used for quotas: <code>getQuota()</code>, <code>setQuota()</code> and
-            <code>checkQuota()</code>:
+            There are three methods used for quotas: <methodname>getQuota()</methodname>, <methodname>setQuota()</methodname> and
+            <methodname>checkQuota()</methodname>:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -706,7 +706,7 @@ echo 'You are ', $mail->checkQuota() ? 'over quota' : 'not over quota', "\n";
 ]]></programlisting>
 
             <para>
-            <code>checkQuota()</code> can also return a more detailed response:
+            <methodname>checkQuota()</methodname> can also return a more detailed response:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -722,7 +722,7 @@ echo $quota['size'], ' of ', $quota['quota']['size'], ' octets';
 
             <para>
             If you want to specify your own quota instead of using the one specified in the maildirsize file you
-            can do with <code>setQuota()</code>:
+            can do with <methodname>setQuota()</methodname>:
             </para>
 
             <programlisting language="php"><![CDATA[

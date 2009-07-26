@@ -21,7 +21,7 @@
         <para>
             To use Dojo view helpers, you will need to tell your view object
             where to find them. You can do this by calling
-            <code>addHelperPath()</code>:
+            <methodname>addHelperPath()</methodname>:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -30,7 +30,7 @@ $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
 
         <para>
             Alternately, you can use <classname>Zend_Dojo</classname>'s
-            <code>enableView()</code> method to do the work for you:
+            <methodname>enableView()</methodname> method to do the work for you:
         </para>
 
         <programlisting language="php"><![CDATA[

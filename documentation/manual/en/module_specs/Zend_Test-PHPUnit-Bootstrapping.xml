@@ -54,7 +54,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 
     <para>
         In cases where an object instance is necessary, we recommend performing
-        this in your <code>setUp()</code> method:
+        this in your <methodname>setUp()</methodname> method:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -71,15 +71,15 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 ]]></programlisting>
 
     <para>
-        Note the call to <code>parent::setUp()</code>; this is necessary, as
-        the <code>setUp()</code> method of
+        Note the call to <methodname>parent::setUp()</methodname>; this is necessary, as
+        the <methodname>setUp()</methodname> method of
         <classname>Zend_Test_PHPUnit_Controller_TestCase</classname> will perform the
         remainder of the bootstrapping process (which includes calling the
         callback).
     </para>
 
     <para>
-        During normal operation, the <code>setUp()</code> method will bootstrap
+        During normal operation, the <methodname>setUp()</methodname> method will bootstrap
         the application. This process first will include cleaning up the
         environment to a clean request state, resetting any plugins and
         helpers, resetting the front controller instance, and creating new

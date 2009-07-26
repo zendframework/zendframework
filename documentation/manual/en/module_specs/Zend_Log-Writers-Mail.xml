@@ -73,7 +73,7 @@ $log->error('unable to connect to database');
         <para>
             When using <classname>Zend_Log_Writer_Mail</classname> with a
             <classname>Zend_Layout</classname> instance, you have the option to set a
-            custom formatter by using the <code>setLayoutFormatter()</code>
+            custom formatter by using the <methodname>setLayoutFormatter()</methodname>
             method. If no <classname>Zend_Layout</classname>-specific entry formatter was
             specified, the formatter currently in use will be used. Full usage
             of <classname>Zend_Layout</classname> with a custom formatter is outlined
@@ -117,7 +117,7 @@ $log->error('unable to connect to database');
         <title>Subject Line Error Level Summary</title>
 
         <para>
-            The <code>setSubjectPrependText()</code> method may be used in place
+            The <methodname>setSubjectPrependText()</methodname> method may be used in place
             of <classname>Zend_Mail::setSubject()</classname> to have the email subject
             line dynamically written before the email is sent. For example, if
             the subject prepend text reads "Errors from script", the subject of

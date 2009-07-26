@@ -11,7 +11,7 @@
 $feedArray = Zend_Feed::findFeeds('http://www.example.com/news.html');
 ]]></programlisting>
     <para>
-        Here the <code>findFeeds()</code> method returns an array of
+        Here the <methodname>findFeeds()</methodname> method returns an array of
         <classname>Zend_Feed_Abstract</classname> objects that are referenced by
         <code>&lt;link&gt;</code> tags on the news.html web page. Depending on the type of each
         feed, each respective entry in the <code>$feedArray</code> array may be a

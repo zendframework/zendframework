@@ -11,7 +11,7 @@
 
     <para>
         First, you will need to dispatch a URL to test, using the
-        <code>dispatch()</code> method of the TestCase:
+        <methodname>dispatch()</methodname> method of the TestCase:
     </para>
 
     <programlisting language="php"><![CDATA[

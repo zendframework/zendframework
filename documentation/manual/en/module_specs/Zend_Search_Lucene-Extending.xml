@@ -38,13 +38,13 @@ $index->addDocument($doc);
 
         <para>
             The <classname>Zend_Search_Lucene_Analysis_Analyzer_Common</classname> class is designed to be an ancestor of all user
-            defined analyzers. User should only define the <code>reset()</code> and <code>nextToken()</code> methods,
+            defined analyzers. User should only define the <methodname>reset()</methodname> and <methodname>nextToken()</methodname> methods,
             which takes its string from the $_input member and returns tokens one by one
             (a <constant>NULL</constant> value indicates the end of the stream).
         </para>
 
         <para>
-            The <code>nextToken()</code> method should call the <code>normalize()</code> method on each
+            The <methodname>nextToken()</methodname> method should call the <methodname>normalize()</methodname> method on each
             token. This will allow you to use token filters with your analyzer.
         </para>
 
@@ -142,7 +142,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
         </para>
 
         <para>
-            Any custom filter must implement the <code>normalize()</code> method which may transform input token or signal that
+            Any custom filter must implement the <methodname>normalize()</methodname> method which may transform input token or signal that
             the current token should be skipped.
         </para>
 
@@ -431,7 +431,7 @@ abstract function getFileObject($filename);
 ]]></programlisting>
 
         <para>
-        The <code>getFileObject($filename)</code> method of a <classname>Zend_Search_Lucene_Storage_Directory</classname>
+        The <methodname>getFileObject($filename)</methodname> method of a <classname>Zend_Search_Lucene_Storage_Directory</classname>
         instance returns a <classname>Zend_Search_Lucene_Storage_File</classname> object.
         </para>
         <para>

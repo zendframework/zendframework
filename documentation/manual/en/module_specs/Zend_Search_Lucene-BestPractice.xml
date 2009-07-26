@@ -18,7 +18,7 @@
         <para>
             The <classname>Zend_Search_Lucene_Search_QueryHit</classname> <code>id</code> and <code>score</code> properties always refer
             to internal Lucene document id and hit <link linkend="zend.search.lucene.searching.results-scoring">score</link>.
-            If the indexed document has the same stored fields, you have to use the <code>getDocument()</code> method to access them:
+            If the indexed document has the same stored fields, you have to use the <methodname>getDocument()</methodname> method to access them:
 
             <programlisting language="php"><![CDATA[
 $hits = $index->find($query);
@@ -71,7 +71,7 @@ foreach ($hits as $hit) {
         </para>
 
         <para>
-            Full index optimization may be performed with the <code>optimize()</code> method:
+            Full index optimization may be performed with the <methodname>optimize()</methodname> method:
             <programlisting language="php"><![CDATA[
 $index = Zend_Search_Lucene::open($indexPath);
 
@@ -129,13 +129,13 @@ $index->optimize();
 
         <para>
             A good way to find the right value is to perform several tests with the largest document you expect to be added to the index
-            <footnote><para><code>memory_get_usage()</code> and <code>memory_get_peak_usage()</code> may be used to control
+            <footnote><para><methodname>memory_get_usage()</methodname> and <methodname>memory_get_peak_usage()</methodname> may be used to control
             memory usage.</para></footnote>. It's a best practice not to use more than a half of the allowed memory.
         </para>
 
         <para>
             <emphasis>MaxMergeDocs</emphasis> limits the segment size (in terms of documents). It therefore also limits auto-optimization time by guaranteeing
-            that the <code>addDocument()</code> method is not executed more than a certain number of times. This is very important for interactive applications.
+            that the <methodname>addDocument()</methodname> method is not executed more than a certain number of times. This is very important for interactive applications.
         </para>
 
         <para>
@@ -173,7 +173,7 @@ $index->optimize();
         </para>
 
         <para>
-            <classname>Zend_Search_Lucene</classname> checks during each <code>addDocument()</code> call to see if merging any segments may move the newly created segment
+            <classname>Zend_Search_Lucene</classname> checks during each <methodname>addDocument()</methodname> call to see if merging any segments may move the newly created segment
             into the next group. If yes, then merging is performed.
         </para>
 
@@ -265,11 +265,11 @@ $index->commit();
         </para>
 
         <para>
-            <classname>Zend_Search_Lucene</classname> provides a <code>termDocs()</code> method for retrieving documents containing specified terms.
+            <classname>Zend_Search_Lucene</classname> provides a <methodname>termDocs()</methodname> method for retrieving documents containing specified terms.
         </para>
 
         <para>
-            This is more efficient than using the <code>find()</code> method:
+            This is more efficient than using the <methodname>find()</methodname> method:
             <programlisting language="php"><![CDATA[
 // Retrieving documents with find() method using a query string
 $query = $idFieldName . ':' . $docId;
@@ -416,7 +416,7 @@ $hits = $index->find($query);
         </para>
 
         <para>
-            The default encoding may also be specified with <code>setDefaultEncoding()</code> method:
+            The default encoding may also be specified with <methodname>setDefaultEncoding()</methodname> method:
             <programlisting language="php"><![CDATA[
 Zend_Search_Lucene_Search_QueryParser::setDefaultEncoding('iso-8859-1');
 $hits = $index->find($queryStr);

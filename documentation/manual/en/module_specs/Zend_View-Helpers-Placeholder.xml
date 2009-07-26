@@ -50,28 +50,28 @@
 
         <itemizedlist>
             <listitem><para>
-                    <code>setPrefix($prefix)</code> sets text with which to
-                    prefix the content. Use <code>getPrefix()</code> at any time
+                    <methodname>setPrefix($prefix)</methodname> sets text with which to
+                    prefix the content. Use <methodname>getPrefix()</methodname> at any time
                     to determine what the current setting is.
             </para></listitem>
 
             <listitem><para>
-                    <code>setPostfix($prefix)</code> sets text with which to
-                    append the content. Use <code>getPostfix()</code> at any time
+                    <methodname>setPostfix($prefix)</methodname> sets text with which to
+                    append the content. Use <methodname>getPostfix()</methodname> at any time
                     to determine what the current setting is.
             </para></listitem>
 
             <listitem><para>
-                    <code>setSeparator($prefix)</code> sets text with which to
-                    separate aggregated content. Use <code>getSeparator()</code>
+                    <methodname>setSeparator($prefix)</methodname> sets text with which to
+                    separate aggregated content. Use <methodname>getSeparator()</methodname>
                     at any time to determine what the current setting is.
             </para></listitem>
 
             <listitem><para>
-                    <code>setIndent($prefix)</code> can be used to set an
+                    <methodname>setIndent($prefix)</methodname> can be used to set an
                     indentation value for content. If an integer is passed,
                     that number of spaces will be used; if a string is passed,
-                    the string will be used. Use <code>getIndent()</code>
+                    the string will be used. Use <methodname>getIndent()</methodname>
                     at any time to determine what the current setting is.
             </para></listitem>
         </itemizedlist>
@@ -128,7 +128,7 @@ echo $foo['bar'];
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>captureStart($type, $key)</code> begins capturing
+                    <methodname>captureStart($type, $key)</methodname> begins capturing
                     content.
                 </para>
 
@@ -150,17 +150,17 @@ echo $foo['bar'];
                 </para>
 
                 <para>
-                    <code>captureStart()</code> locks capturing until
-                    <code>captureEnd()</code> is called; you cannot nest
+                    <methodname>captureStart()</methodname> locks capturing until
+                    <methodname>captureEnd()</methodname> is called; you cannot nest
                     capturing with the same placeholder container. Doing so will
                     raise an exception.
                 </para>
             </listitem>
 
             <listitem><para>
-                    <code>captureEnd()</code> stops capturing content, and
+                    <methodname>captureEnd()</methodname> stops capturing content, and
                     places it in the container object according to how
-                    <code>captureStart()</code> was called.
+                    <methodname>captureStart()</methodname> was called.
             </para></listitem>
         </itemizedlist>
 

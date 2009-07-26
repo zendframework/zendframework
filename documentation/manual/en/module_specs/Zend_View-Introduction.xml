@@ -138,31 +138,31 @@ base/path/
 ]]></programlisting>
 
                 <para>
-                    This may be set via <code>setBasePath()</code>,
-                    <code>addBasePath()</code>, or the <code>basePath</code>
+                    This may be set via <methodname>setBasePath()</methodname>,
+                    <methodname>addBasePath()</methodname>, or the <code>basePath</code>
                     option to the constructor.
                 </para>
             </listitem>
 
             <listitem><para>
                 <code>encoding</code>: indicate the character encoding to use
-                with <code>htmlentities()</code>,
-                <code>htmlspecialchars()</code>, and other operations. Defaults
+                with <methodname>htmlentities()</methodname>,
+                <methodname>htmlspecialchars()</methodname>, and other operations. Defaults
                 to ISO-8859-1 (latin1). May be set via
-                <code>setEncoding()</code> or the <code>encoding</code> option
+                <methodname>setEncoding()</methodname> or the <code>encoding</code> option
                 to the constructor.
             </para></listitem>
 
             <listitem><para>
                 <code>escape</code>: indicate a callback to be used by
-                <code>escape()</code>. May be set via <code>setEscape()</code>
+                <methodname>escape()</methodname>. May be set via <methodname>setEscape()</methodname>
                 or the <code>escape</code> option to the constructor.
             </para></listitem>
 
             <listitem><para>
                 <code>filter</code>: indicate a filter to use after rendering
-                a view script. May be set via <code>setFilter()</code>,
-                <code>addFilter()</code>, or the <code>filter</code> option to
+                a view script. May be set via <methodname>setFilter()</methodname>,
+                <methodname>addFilter()</methodname>, or the <code>filter</code> option to
                 the constructor.
             </para></listitem>
 
@@ -170,7 +170,7 @@ base/path/
                 <code>strictVars:</code> force <classname>Zend_View</classname> to emit
                 notices and warnings when uninitialized view variables are
                 accessed. This may be set by calling
-                <code>strictVars(true)</code> or passing the
+                <methodname>strictVars(true)</methodname> or passing the
                 <code>strictVars</code> option to the constructor.
             </para></listitem>
         </itemizedlist>
@@ -261,8 +261,8 @@ $view->setUseStreamWrapper(true);
         <title>Utility Accessors</title>
 
         <para>
-            Typically, you'll only ever need to call on <code>assign()</code>,
-            <code>render()</code>, or one of the methods for setting/adding
+            Typically, you'll only ever need to call on <methodname>assign()</methodname>,
+            <methodname>render()</methodname>, or one of the methods for setting/adding
             filter, helper, and script paths. However, if you wish to extend
             <classname>Zend_View</classname> yourself, or need access to some of its
             internals, a number of accessors exist:
@@ -271,13 +271,13 @@ $view->setUseStreamWrapper(true);
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>getVars()</code> will return all assigned variables.
+                    <methodname>getVars()</methodname> will return all assigned variables.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>clearVars()</code> will clear all assigned variables;
+                    <methodname>clearVars()</methodname> will clear all assigned variables;
                     useful when you wish to re-use a view object, but want to
                     control what variables are available.
                 </para>
@@ -285,42 +285,42 @@ $view->setUseStreamWrapper(true);
 
             <listitem>
                 <para>
-                    <code>getScriptPath($script)</code> will retrieve the
+                    <methodname>getScriptPath($script)</methodname> will retrieve the
                     resolved path to a given view script.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getScriptPaths()</code> will retrieve all registered
+                    <methodname>getScriptPaths()</methodname> will retrieve all registered
                     script paths.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getHelperPath($helper)</code> will retrieve the
+                    <methodname>getHelperPath($helper)</methodname> will retrieve the
                     resolved path to the named helper class.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getHelperPaths()</code> will retrieve all registered
+                    <methodname>getHelperPaths()</methodname> will retrieve all registered
                     helper paths.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getFilterPath($filter)</code> will retrieve the
+                    <methodname>getFilterPath($filter)</methodname> will retrieve the
                     resolved path to the named filter class.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getFilterPaths()</code> will retrieve all registered
+                    <methodname>getFilterPaths()</methodname> will retrieve all registered
                     filter paths.
                 </para>
             </listitem>

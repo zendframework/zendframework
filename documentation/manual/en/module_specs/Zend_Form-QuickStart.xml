@@ -29,8 +29,8 @@ $form = new Zend_Form;
 
         <para>
             If you wish to specify the form action and method (always good
-            ideas), you can do so with the <code>setAction()</code> and
-            <code>setMethod()</code> accessors:
+            ideas), you can do so with the <methodname>setAction()</methodname> and
+            <methodname>setMethod()</methodname> accessors:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -329,7 +329,7 @@ $element->addDecorators(array(
             in an HTML <code>&lt;form&gt;</code>. The action and method you
             provided when setting up the form are provided to the
             <code>&lt;form&gt;</code> tag, as are any attributes you set via
-            <code>setAttribs()</code> and family.
+            <methodname>setAttribs()</methodname> and family.
         </para>
 
         <para>
@@ -379,8 +379,8 @@ if ($form->isValid($_POST)) {
         <para>
             With AJAX requests, you can sometimes get away with validating
             a single element, or groups of elements.
-            <code>isValidPartial()</code> will validate a partial form. Unlike
-            <code>isValid()</code>, however, if a particular key is not
+            <methodname>isValidPartial()</methodname> will validate a partial form. Unlike
+            <methodname>isValid()</methodname>, however, if a particular key is not
             present, it will not run validations for that particular element:
         </para>
 
@@ -393,8 +393,8 @@ if ($form->isValidPartial($_POST)) {
 ]]></programlisting>
 
         <para>
-            An additional method, <code>processAjax()</code>, can be used
-            for validating partial forms. Unlike <code>isValidPartial()</code>,
+            An additional method, <methodname>processAjax()</methodname>, can be used
+            for validating partial forms. Unlike <methodname>isValidPartial()</methodname>,
             it returns a JSON-formatted string containing error messages on
             failure.
         </para>
@@ -438,9 +438,9 @@ if (!$form->isValid($_POST)) {
 
         <para>
             If you want to inspect the errors, you have two methods.
-            <code>getErrors()</code> returns an associative array of element
+            <methodname>getErrors()</methodname> returns an associative array of element
             names / codes (where codes is an array of error codes).
-            <code>getMessages()</code> returns an associative array of element
+            <methodname>getMessages()</methodname> returns an associative array of element
             names / messages (where messages is an associative array of error
             code / error message pairs). If a given element does not have any
             errors, it will not be included in the array.
@@ -561,7 +561,7 @@ class UserController extends Zend_Controller_Action
             All <classname>Zend_Form</classname> classes are configurable using
             <classname>Zend_Config</classname>; you can either pass a
             <classname>Zend_Config</classname> object to the constructor or pass it in
-            with <code>setConfig()</code>. Let's look at how we might create the
+            with <methodname>setConfig()</methodname>. Let's look at how we might create the
             above form using an INI file. First, let's follow the
             recommendations, and place our configurations into sections
             reflecting the release location, and focus on the 'development'

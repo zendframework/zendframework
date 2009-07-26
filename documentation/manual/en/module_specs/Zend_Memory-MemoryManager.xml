@@ -173,7 +173,7 @@ function foo()
 
             <para>
                 You can retrieve or set the memory limit setting using the
-                <code>getMemoryLimit()</code> and <code>setMemoryLimit($newLimit)</code>
+                <methodname>getMemoryLimit()</methodname> and <methodname>setMemoryLimit($newLimit)</methodname>
                 methods:
                 <programlisting language="php"><![CDATA[
 $oldLimit = $memoryManager->getMemoryLimit();  // Get memory limit in bytes
@@ -206,7 +206,7 @@ $memoryManager->setMemoryLimit($newLimit);     // Set memory limit in bytes
 
             <para>
                 You can retrieve or set the minimum size using the
-                <code>getMinSize()</code> and <code>setMinSize($newSize)</code>
+                <methodname>getMinSize()</methodname> and <methodname>setMinSize($newSize)</methodname>
                 methods:
                 <programlisting language="php"><![CDATA[
 $oldMinSize = $memoryManager->getMinSize();  // Get MinSize in bytes

@@ -289,7 +289,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' &&
         <para>
             If you compare this example with previous examples split in to
             separate pages, you will see only the one
-            difference besides the dispatch code: <code>unset($_GET['openid_action'])</code>. This
+            difference besides the dispatch code: <methodname>unset($_GET['openid_action'])</methodname>. This
             call to <code>unset</code> is necessary to route the next request to main
             handler.
         </para>

@@ -11,7 +11,7 @@
     </para>
 
     <para>
-        Actions that result in a <code>_forward()</code> or redirect are
+        Actions that result in a <methodname>_forward()</methodname> or redirect are
         considered invalid, and will return an empty string.
     </para>
 
@@ -28,7 +28,7 @@
 
         <para>
             As an example, you may have a <code>CommentController</code> with a
-            <code>listAction()</code> method you wish to invoke in order to pull
+            <methodname>listAction()</methodname> method you wish to invoke in order to pull
             a list of comments for the current request:
         </para>
 

@@ -39,7 +39,7 @@ echo $server->handle();
         <para>
             To bootstrap <classname>Zend_XmlRpc_Server</classname>, the developer must attach one or
             more classes or functions to the server, via the
-            <code>setClass()</code> and <code>addFunction()</code> methods.
+            <methodname>setClass()</methodname> and <methodname>addFunction()</methodname> methods.
         </para>
 
         <para>
@@ -56,7 +56,7 @@ echo $server->handle();
             requested. It then returns either a
             <classname>Zend_XmlRpc_Response</classname>-based object or a
             <classname>Zend_XmlRpc_Server_Fault</classname>object. These objects both have
-            <code>__toString()</code> methods that create valid XML-RPC XML
+            <methodname>__toString()</methodname> methods that create valid XML-RPC XML
             responses, allowing them to be directly echoed.
         </para>
     </sect2>
@@ -209,7 +209,7 @@ $server->addFunction('somefunc', 'funcs');
         <para>
             To use a custom response class, use
             <classname>Zend_XmlRpc_Server::setResponseClass()</classname> prior to calling
-            <code>handle()</code>.
+            <methodname>handle()</methodname>.
         </para>
     </sect2>
 

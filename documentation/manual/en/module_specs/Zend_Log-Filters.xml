@@ -12,7 +12,7 @@
 
       <para>
         To filter before all writers, you can add any number of Filters to a
-        Log object using the <code>addFilter()</code> method:
+        Log object using the <methodname>addFilter()</methodname> method:
 
         <programlisting language="php"><![CDATA[
 $logger = new Zend_Log();

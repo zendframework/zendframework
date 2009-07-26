@@ -212,7 +212,7 @@ class Zend_Service_SlideShare_SlideShow {
         <para>
             The simplest usage of the <classname>Zend_Service_SlideShare</classname> component is the
             retrieval of a single slide show by slide show ID provided by the slideshare.net
-            application and is done by calling the <code>getSlideShow()</code> method of a
+            application and is done by calling the <methodname>getSlideShow()</methodname> method of a
             <classname>Zend_Service_SlideShare</classname> object and using the resulting
             <classname>Zend_Service_SlideShare_SlideShow</classname> object as shown.
         </para>
@@ -249,7 +249,7 @@ print "Number of views: {$slideshow->getNumViews()}<br/>\n";
 
                 <para>
                     You can retrieve slide shows from a specific account by using the
-                    <code>getSlideShowsByUsername()</code> method and providing the username from
+                    <methodname>getSlideShowsByUsername()</methodname> method and providing the username from
                     which the slide shows should be retrieved
                 </para>
             </listitem>

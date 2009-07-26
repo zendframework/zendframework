@@ -293,13 +293,13 @@ array(
             <para>
                 You can create a Zeed_Feed instance from any data source implementing
                 <classname>Zend_Feed_Builder_Interface</classname>. You just have to implement the
-                <code>getHeader()</code> and <code>getEntries()</code> methods to be able to use
+                <methodname>getHeader()</methodname> and <methodname>getEntries()</methodname> methods to be able to use
                 your object with <classname>Zend_Feed::importBuilder()</classname>. As a simple
                 reference implementation, you can use <classname>Zend_Feed_Builder</classname>,
                 which takes an array in its constructor, performs some minor validation, and then
-                can be used in the <code>importBuilder()</code> method. The <code>getHeader()</code>
+                can be used in the <methodname>importBuilder()</methodname> method. The <methodname>getHeader()</methodname>
                 method must return an instance of <classname>Zend_Feed_Builder_Header</classname>,
-                and <code>getEntries()</code> must return an array of
+                and <methodname>getEntries()</methodname> must return an array of
                 <classname>Zend_Feed_Builder_Entry</classname> instances.
             </para>
 
@@ -338,7 +338,7 @@ $rssFeedFromArray =
 
             <para>
                 To dump the contents of a <classname>Zend_Feed_Abstract</classname> instance, you
-                may use <code>send()</code> or <code>saveXml()</code> methods.
+                may use <methodname>send()</methodname> or <methodname>saveXml()</methodname> methods.
             </para>
 
             <programlisting language="php"><![CDATA[

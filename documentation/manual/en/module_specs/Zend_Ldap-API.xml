@@ -127,7 +127,7 @@
                         <entry>
                             The <acronym>LDAP</acronym> search filter used to search for accounts.
                             This string is a <ulink
-                                url="http://php.net/sprintf"><code>sprintf()</code></ulink>
+                                url="http://php.net/sprintf"><methodname>sprintf()</methodname></ulink>
                             style expression that must contain one '<emphasis>%s</emphasis>' to
                             accommodate the username. The default value is
                             '<emphasis>(&amp;(objectClass=user)(sAMAccountName=%s))</emphasis>'

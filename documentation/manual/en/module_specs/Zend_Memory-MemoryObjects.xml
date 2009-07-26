@@ -9,7 +9,7 @@
         <title>Movable</title>
 
         <para>
-            Create movable memory objects using the <code>create([$data])</code>
+            Create movable memory objects using the <methodname>create([$data])</methodname>
             method of the memory manager:
             <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->create($data);
@@ -28,7 +28,7 @@ $memObject = $memoryManager->create($data);
         <title>Locked</title>
 
         <para>
-            Create locked memory objects using the <code>createLocked([$data])</code>
+            Create locked memory objects using the <methodname>createLocked([$data])</methodname>
             method of the memory manager:
             <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->createLocked($data);
@@ -88,7 +88,7 @@ $memObject->value = substr($memObject->value, $start, $length);
 
         <para>
             An alternative way to access memory object data is to use the
-            <link linkend="zend.memory.memory-objects.api.getRef"><code>getRef()</code></link>
+            <link linkend="zend.memory.memory-objects.api.getRef"><methodname>getRef()</methodname></link>
             method. This method <emphasis>must</emphasis> be used for PHP
             versions before 5.2. It also may have to be used in some other
             cases for performance reasons.
@@ -112,7 +112,7 @@ public function &getRef();
 ]]></programlisting>
 
             <para>
-                The <code>getRef()</code> method returns reference to the object value.
+                The <methodname>getRef()</methodname> method returns reference to the object value.
             </para>
 
             <para>
@@ -124,15 +124,15 @@ public function &getRef();
             </para>
 
             <para>
-                The <code>getRef()</code> method <emphasis>must</emphasis> be
+                The <methodname>getRef()</methodname> method <emphasis>must</emphasis> be
                 used to access memory object data for PHP versions before 5.2.
             </para>
 
             <para>
                 Tracking changes to data needs additional resources.
-                The <code>getRef()</code> method returns reference to string,
+                The <methodname>getRef()</methodname> method returns reference to string,
                 which is changed directly by user application.
-                So, it's a good idea to use the <code>getRef()</code> method
+                So, it's a good idea to use the <methodname>getRef()</methodname> method
                 for value data processing:
                 <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->create($data);
@@ -156,8 +156,8 @@ for ($count = 0; $count < strlen($value); $count++) {
 public function touch();
 ]]></programlisting>
             <para>
-                The <code>touch()</code> method should be used in common with
-                <code>getRef()</code>. It signals that object value has been changed:
+                The <methodname>touch()</methodname> method should be used in common with
+                <methodname>getRef()</methodname>. It signals that object value has been changed:
                 <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->create($data);
 ...
@@ -188,7 +188,7 @@ public function lock();
 ]]></programlisting>
 
             <para>
-                The <code>lock()</code> methods locks object in memory.
+                The <methodname>lock()</methodname> methods locks object in memory.
                 It should be used to prevent swapping of some objects you choose.
                 Normally, this is not necessary, because the memory manager uses
                 an intelligent algorithm to choose candidates for swapping.
@@ -198,7 +198,7 @@ public function lock();
 
             <para>
                 Locking objects in memory also guarantees that reference
-                returned by the <code>getRef()</code> method is valid until you
+                returned by the <methodname>getRef()</methodname> method is valid until you
                 unlock the object:
                 <programlisting language="php"><![CDATA[
 $memObject1 = $memoryManager->create($data1);
@@ -232,7 +232,7 @@ public function unlock();
 ]]></programlisting>
 
             <para>
-                <code>unlock()</code> method unlocks object when it's no longer
+                <methodname>unlock()</methodname> method unlocks object when it's no longer
                 necessary to be locked. See the example above.
             </para>
 
@@ -247,7 +247,7 @@ public function isLocked();
 ]]></programlisting>
 
             <para>
-                The <code>isLocked()</code> method can be used to check if
+                The <methodname>isLocked()</methodname> method can be used to check if
                 object is locked. It returns <constant>TRUE</constant> if the object
                 is locked, or <constant>FALSE</constant> if it is not locked.
                 This is always <constant>TRUE</constant> for "locked" objects,

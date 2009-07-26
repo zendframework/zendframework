@@ -22,8 +22,8 @@ $filter2 = new Zend_Filter_Encrypt(array('adapter' => 'openssl'));
 ]]></programlisting>
 
     <para>
-        To set another adapter you can also use <code>setAdapter()</code>, and the
-        <code>getAdapter()</code> method to receive the actual set adapter.
+        To set another adapter you can also use <methodname>setAdapter()</methodname>, and the
+        <methodname>getAdapter()</methodname> method to receive the actual set adapter.
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -107,7 +107,7 @@ $filter->setAdapter('openssl');
 
         <para>
             You can get/set the encryption values also afterwards with the
-            <code>getEncryption()</code> and <code>setEncryption()</code> methods.
+            <methodname>getEncryption()</methodname> and <methodname>setEncryption()</methodname> methods.
         </para>
 
         <note>
@@ -126,8 +126,8 @@ $filter->setAdapter('openssl');
         </note>
 
         <para>
-            You can get/set the encryption vector by calling <code>getVector()</code> and
-            <code>setVector()</code>. A given string will be truncated or padded to the needed
+            You can get/set the encryption vector by calling <methodname>getVector()</methodname> and
+            <methodname>setVector()</methodname>. A given string will be truncated or padded to the needed
             vector size of the used algorithm.
         </para>
 
@@ -181,9 +181,9 @@ print $encrypted;
         </itemizedlist>
 
         <para>
-            You can get/set the public keys also afterwards with the <code>getPublicKey()</code>
-            and <code>setPublicKey()</code> methods. The private key can also be get and set with
-            the related <code>getPrivateKey()</code> and <code>setPrivateKey()</code> methods.
+            You can get/set the public keys also afterwards with the <methodname>getPublicKey()</methodname>
+            and <methodname>setPublicKey()</methodname> methods. The private key can also be get and set with
+            the related <methodname>getPrivateKey()</methodname> and <methodname>setPrivateKey()</methodname> methods.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -209,7 +209,7 @@ $filter->setPublicKey(array(
 
         <para>
             When you want to encode also the keys, then you have to provide a passphrase with the
-            <code>setPassphrase()</code> method. When you want to decode content which was encoded
+            <methodname>setPassphrase()</methodname> method. When you want to decode content which was encoded
             with a passphrase you will not only need the public key, but also the passphrase to
             decode the encrypted key.
         </para>
@@ -236,7 +236,7 @@ $filter->setPassphrase('mypassphrase');
 
         <para>
             This means for you, that you have to get the envelope keys after the encryption with the
-            <code>getEnvelopeKey()</code> method.
+            <methodname>getEnvelopeKey()</methodname> method.
         </para>
 
         <para>

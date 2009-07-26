@@ -166,7 +166,7 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>isValid($files = null)</code>: Checks the specified files using all
+                    <methodname>isValid($files = null)</methodname>: Checks the specified files using all
                     validators. <code>$files</code> may be either a real filename, the element's
                     name or the name of the temporary file.
                 </para>
@@ -198,27 +198,27 @@
                     <code>setValidators(array $validators, $files =
                         null)</code>: Overwrites any existing validators with
                     the validators specified. The validators should follow the
-                    syntax for <code>addValidators()</code>.
+                    syntax for <methodname>addValidators()</methodname>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>hasValidator($name)</code>: Indicates whether a
+                    <methodname>hasValidator($name)</methodname>: Indicates whether a
                     validator has been registered.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getValidator($name)</code>: Returns a previously
+                    <methodname>getValidator($name)</methodname>: Returns a previously
                     registered validator.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getValidators($files = null)</code>: Returns
+                    <methodname>getValidators($files = null)</methodname>: Returns
                     registered validators. If <code>$files</code> is specified,
                     returns validators for that particular file or set of
                     files.
@@ -227,14 +227,14 @@
 
             <listitem>
                 <para>
-                    <code>removeValidator($name)</code>: Removes a previously
+                    <methodname>removeValidator($name)</methodname>: Removes a previously
                     registered validator.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>clearValidators()</code>: Clears all
+                    <methodname>clearValidators()</methodname>: Clears all
                     registered validators.
                 </para>
             </listitem>
@@ -265,8 +265,8 @@ $upload->setValidators(array(
             <title>Limit Validators to Single Files</title>
 
             <para>
-                <code>addValidator()</code>, <code>addValidators()</code>, and
-                <code>setValidators()</code> each accept a final
+                <methodname>addValidator()</methodname>, <methodname>addValidators()</methodname>, and
+                <methodname>setValidators()</methodname> each accept a final
                 <code>$files</code> argument. This argument can be used to
                 specify a particular file or array of files on which to set the
                 given validator.
@@ -281,7 +281,7 @@ $upload->addValidator('Size', false, 20000, 'file2');
         </example>
 
         <para>
-            Normally, you should use the <code>addValidators()</code> method, which can be called
+            Normally, you should use the <methodname>addValidators()</methodname> method, which can be called
             multiple times.
         </para>
 
@@ -289,7 +289,7 @@ $upload->addValidator('Size', false, 20000, 'file2');
             <title>Add Multiple Validators</title>
 
             <para>
-                Often it's simpler just to call <code>addValidator()</code> multiple times with one
+                Often it's simpler just to call <methodname>addValidator()</methodname> multiple times with one
                 call for each validator. This also increases readability and makes your code more
                 maintainable. All methods provide a fluent interface, so you can couple the calls as
                 shown below:
@@ -315,14 +315,14 @@ $upload->addValidator('Size', false, 20000)
         </note>
 
         <para>
-            Last but not least, you can simply check the files using <code>isValid()</code>.
+            Last but not least, you can simply check the files using <methodname>isValid()</methodname>.
         </para>
 
         <example id="zend.file.transfer.validators.usage.exampleisvalid">
             <title>Validate the Files</title>
 
             <para>
-                <code>isValid()</code> accepts the file name of the uploaded or downloaded file, the
+                <methodname>isValid()</methodname> accepts the file name of the uploaded or downloaded file, the
                 temporary file name and or the name of the form element. If no parameter or null is
                 given all files will be validated
             </para>
@@ -344,7 +344,7 @@ if ($upload->isValid()) {
 
         <note>
             <para>
-                Note that <code>isValid()</code> will be called automatically when you receive the
+                Note that <methodname>isValid()</methodname> will be called automatically when you receive the
                 files and have not called it previously.
             </para>
         </note>
@@ -352,8 +352,8 @@ if ($upload->isValid()) {
         <para>
             When validation has failed it is a good idea to get information about the
             problems found. To get this information, you can use the methods
-            <code>getMessages()</code> which returns all validation messages as array,
-            <code>getErrors()</code> which returns all error codes, and <code>hasErrors()</code>
+            <methodname>getMessages()</methodname> which returns all validation messages as array,
+            <methodname>getErrors()</methodname> which returns all error codes, and <methodname>hasErrors()</methodname>
             which returns true as soon as a validation error has been found.
         </para>
 
@@ -401,9 +401,9 @@ if ($upload->isValid()) {
 
         <para>
             If you initiate this validator with a string or integer, the value will be used as
-            <code>max</code>. Or you can also use the methods <code>setMin()</code> and
-            <code>setMax()</code> to set both options afterwards and <code>getMin()</code> and
-            <code>getMax()</code> to retrieve the actual set values.
+            <code>max</code>. Or you can also use the methods <methodname>setMin()</methodname> and
+            <methodname>setMax()</methodname> to set both options afterwards and <methodname>getMin()</methodname> and
+            <methodname>getMax()</methodname> to retrieve the actual set values.
         </para>
 
         <example id="zend.file.transfer.validators.count.example">
@@ -493,8 +493,8 @@ $upload->addValidator('Crc32', false, array('3b3652f', 'e612b69'));
 
         <para>
             This validator accepts multiple extensions, either as a comma-delimited string, or as an
-            array. You may also use the methods <code>setExtension()</code>,
-            <code>addExtension()</code>, and <code>getExtension()</code> to set and retrieve
+            array. You may also use the methods <methodname>setExtension()</methodname>,
+            <methodname>addExtension()</methodname>, and <methodname>getExtension()</methodname> to set and retrieve
             extensions.
         </para>
 
@@ -558,8 +558,8 @@ $upload->addValidator('ExcludeExtension',
 
         <para>
             This validator accepts multiple MIME types, either as a comma-delimited string, or as an
-            array. You may also use the methods <code>setMimeType()</code>,
-            <code>addMimeType()</code>, and <code>getMimeType()</code> to set and retrieve the MIME
+            array. You may also use the methods <methodname>setMimeType()</methodname>,
+            <methodname>addMimeType()</methodname>, and <methodname>getMimeType()</methodname> to set and retrieve the MIME
             types.
         </para>
 
@@ -617,8 +617,8 @@ $upload->addValidator('ExcludeMimeType', false, 'image');
 
         <para>
             This validator accepts multiple directories, either as a comma-delimited string, or as
-            an array. You may also use the methods <code>setDirectory()</code>,
-            <code>addDirectory()</code>, and <code>getDirectory()</code> to set and retrieve
+            an array. You may also use the methods <methodname>setDirectory()</methodname>,
+            <methodname>addDirectory()</methodname>, and <methodname>getDirectory()</methodname> to set and retrieve
             directories.
         </para>
 
@@ -674,8 +674,8 @@ $upload->addValidator('Exists',
 
         <para>
             This validator accepts multiple extensions, either as a comma-delimited string, or as an
-            array. You may also use the methods <code>setExtension()</code>,
-            <code>addExtension()</code>, and <code>getExtension()</code> to set and retrieve
+            array. You may also use the methods <methodname>setExtension()</methodname>,
+            <methodname>addExtension()</methodname>, and <methodname>getExtension()</methodname> to set and retrieve
             extension values.
         </para>
 
@@ -755,9 +755,9 @@ if (!$upload->isValid('C:\temp\myfile.MO')) {
 
         <para>
             You can initialize this validator with a string, which will then be used to set the
-            <code>max</code> option. You can also use the methods <code>setMin()</code> and
-            <code>setMax()</code> to set both options after construction, along with
-            <code>getMin()</code> and <code>getMax()</code> to retrieve the values that have been
+            <code>max</code> option. You can also use the methods <methodname>setMin()</methodname> and
+            <methodname>setMax()</methodname> to set both options after construction, along with
+            <methodname>getMin()</methodname> and <methodname>getMax()</methodname> to retrieve the values that have been
             set previously.
         </para>
 
@@ -836,16 +836,16 @@ $upload->addValidator('FilesSize',
         </itemizedlist>
 
         <para>
-            The methods <code>setImageMin()</code> and <code>setImageMax()</code> also set
-            both minimum and maximum values, while the methods <code>getMin()</code> and
-            <code>getMax()</code> return the currently set values.
+            The methods <methodname>setImageMin()</methodname> and <methodname>setImageMax()</methodname> also set
+            both minimum and maximum values, while the methods <methodname>getMin()</methodname> and
+            <methodname>getMax()</methodname> return the currently set values.
         </para>
 
         <para>
-            For your convenience there are also the <code>setImageWidth()</code> and
-            <code>setImageHeight()</code> methods, which set the minimum and maximum height and
-            width of the image file. They, too, have corresponding <code>getImageWidth()</code> and
-            <code>getImageHeight()</code> methods to retrieve the currently set values.
+            For your convenience there are also the <methodname>setImageWidth()</methodname> and
+            <methodname>setImageHeight()</methodname> methods, which set the minimum and maximum height and
+            width of the image file. They, too, have corresponding <methodname>getImageWidth()</methodname> and
+            <methodname>getImageHeight()</methodname> methods to retrieve the currently set values.
         </para>
 
         <para>
@@ -975,7 +975,7 @@ $upload->addValidator('IsImage', false, 'jpeg');
                 </para>
 
                 <para>
-                    You can set multiple algorithm by calling the <code>addHash()</code> method
+                    You can set multiple algorithm by calling the <methodname>addHash()</methodname> method
                     multiple times.
                 </para>
             </listitem>
@@ -1086,15 +1086,15 @@ $upload->addValidator('Md5',
 
         <para>
             This validator accepts multiple MIME type, either as a comma-delimited string, or as an
-            array. You may also use the methods <code>setMimeType()</code>,
-            <code>addMimeType()</code>, and <code>getMimeType()</code> to set and retrieve MIME
+            array. You may also use the methods <methodname>setMimeType()</methodname>,
+            <methodname>addMimeType()</methodname>, and <methodname>getMimeType()</methodname> to set and retrieve MIME
             type.
         </para>
 
         <para>
             You can also set the magicfile which shall be used by fileinfo with the 'magicfile'
-            option. Additionally there are convenient <code>setMagicFile()</code> and
-            <code>getMagicFile()</code> methods which allow later setting and retrieving of the
+            option. Additionally there are convenient <methodname>setMagicFile()</methodname> and
+            <methodname>getMagicFile()</methodname> methods which allow later setting and retrieving of the
             magicfile parameter. This methods are available since Zend Framework 1.7.1.
         </para>
 
@@ -1171,8 +1171,8 @@ $upload->addValidator('MimeType',
 
         <para>
             This validator accepts multiple directories either as a comma-delimited string, or as an
-            array. You may also use the methods <code>setDirectory()</code>,
-            <code>addDirectory()</code>, and <code>getDirectory()</code> to set and retrieve
+            array. You may also use the methods <methodname>setDirectory()</methodname>,
+            <methodname>addDirectory()</methodname>, and <methodname>getDirectory()</methodname> to set and retrieve
             directories.
         </para>
 
@@ -1277,9 +1277,9 @@ $upload->addValidator('Sha1',
 
         <para>
             You can initialize this validator with a string, which will then be used to set the
-            <code>max</code> option. You can also use the methods <code>setMin()</code> and
-            <code>setMax()</code> to set both options after construction, along with
-            <code>getMin()</code> and <code>getMax()</code> to retrieve the values that have been
+            <code>max</code> option. You can also use the methods <methodname>setMin()</methodname> and
+            <methodname>setMax()</methodname> to set both options after construction, along with
+            <methodname>getMin()</methodname> and <methodname>getMax()</methodname> to retrieve the values that have been
             set previously.
         </para>
 
@@ -1337,9 +1337,9 @@ $upload->addValidator('Size',
 
         <para>
             If you initiate this validator with a string or integer, the value will be used as
-            <code>max</code>. Or you can also use the methods <code>setMin()</code> and
-            <code>setMax()</code> to set both options afterwards and <code>getMin()</code> and
-            <code>getMax()</code> to retrieve the actual set values.
+            <code>max</code>. Or you can also use the methods <methodname>setMin()</methodname> and
+            <methodname>setMax()</methodname> to set both options afterwards and <methodname>getMin()</methodname> and
+            <methodname>getMax()</methodname> to retrieve the actual set values.
         </para>
 
         <example id="zend.file.transfer.validators.wordcount.example">

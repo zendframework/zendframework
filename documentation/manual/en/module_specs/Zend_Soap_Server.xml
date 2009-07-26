@@ -41,7 +41,7 @@
                         <para>
                             <code>$wsdl</code>, which is an URI of a WSDL file<footnote>
                                                                                   <para>
-                                                                                      May be set later using <code>setWsdl($wsdl)</code> method.
+                                                                                      May be set later using <methodname>setWsdl($wsdl)</methodname> method.
                                                                                   </para>
                                                                               </footnote>.
                         </para>
@@ -51,7 +51,7 @@
                             <code>$options</code> - options to create SOAP server object<footnote>
                                                                                             <para>
                                                                                                 Options may be set later using
-                                                                                                <code>setOptions($options)</code> method.
+                                                                                                <methodname>setOptions($options)</methodname> method.
                                                                                             </para>
                                                                                         </footnote>.
                         </para>
@@ -83,7 +83,7 @@
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        'wsdl' which is equivalent to <code>setWsdl($wsdlValue)</code> call.
+                                        'wsdl' which is equivalent to <methodname>setWsdl($wsdlValue)</methodname> call.
                                     </para>
                                 </listitem>
                             </itemizedlist>
@@ -107,7 +107,7 @@
                 The second constructor parameter (<code>$options</code>) is an array with options to create
                 SOAP server object<footnote>
                                       <para>
-                                          Options may be set later using <code>setOptions($options)</code> method.
+                                          Options may be set later using <methodname>setOptions($options)</methodname> method.
                                       </para>
                                   </footnote>.
             </para>
@@ -202,8 +202,8 @@ $server->handle();
         </para>
 
         <para>
-            The second method of defining Web Service API is using set of functions and <code>addFunction()</code> or
-            <code>loadFunctions()</code> methods:
+            The second method of defining Web Service API is using set of functions and <methodname>addFunction()</methodname> or
+            <methodname>loadFunctions()</methodname> methods:
             <programlisting language="php"><![CDATA[
 ...
 /**
@@ -255,8 +255,8 @@ $server->handle();
 
             <para>
                 <classname>Zend_Soap_Server::handle()</classname> method takes request from the standard input stream ('php://input').
-                It may be overridden either by supplying optional parameter to the <code>handle()</code> method or
-                by setting request using <code>setRequest()</code> method:
+                It may be overridden either by supplying optional parameter to the <methodname>handle()</methodname> method or
+                by setting request using <methodname>setRequest()</methodname> method:
                 <programlisting language="php"><![CDATA[
 ...
 $server = new Zend_Soap_Server(...);
@@ -302,7 +302,7 @@ $server->handle();
             </para>
 
             <para>
-                Last processed request may be retrieved using <code>getLastRequest()</code> method as an XML string:
+                Last processed request may be retrieved using <methodname>getLastRequest()</methodname> method as an XML string:
                 <programlisting language="php"><![CDATA[
 ...
 $server = new Zend_Soap_Server(...);
@@ -319,14 +319,14 @@ $request = $server->getLastRequest();
 
             <para>
                 <classname>Zend_Soap_Server::handle()</classname> method automatically emits generated response to the output stream.
-                It may be blocked using <code>setReturnResponse()</code> with <constant>TRUE</constant> or <constant>FALSE</constant>
+                It may be blocked using <methodname>setReturnResponse()</methodname> with <constant>TRUE</constant> or <constant>FALSE</constant>
                 as a parameter<footnote>
                                 <para>
                                     Current state of the Return Response flag may be requested with
-                                    <code>setReturnResponse()</code> method.
+                                    <methodname>setReturnResponse()</methodname> method.
                                 </para>
                               </footnote>.
-                Generated response is returned by <code>handle()</code> method in this case.
+                Generated response is returned by <methodname>handle()</methodname> method in this case.
                 <programlisting language="php"><![CDATA[
 ...
 $server = new Zend_Soap_Server(...);
@@ -341,7 +341,7 @@ $response = $server->handle();
             </para>
 
             <para>
-                Last response may be also retrieved by <code>getLastResponse()</code> method for some post-processing:
+                Last response may be also retrieved by <methodname>getLastResponse()</methodname> method for some post-processing:
                 <programlisting language="php"><![CDATA[
 ...
 $server = new Zend_Soap_Server(...);

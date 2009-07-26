@@ -44,7 +44,7 @@ $progressBar->finish();
             of the loop, the progressbar status is set to finished.
         </para>
         <para>
-            You can also call the <code>update()</code> method of
+            You can also call the <methodname>update()</methodname> method of
             <classname>Zend_ProgressBar</classname> without arguments, which just
             recalculates ETA and notifies the adapter. This is useful when there
             is no data update but you want the progressbar to be updated.
@@ -58,7 +58,7 @@ $progressBar->finish();
             you can give the name of a session namespace as fourth argument
             to the constructor. In that case, the progressbar will not notify
             the adapter within the constructor, but only when you call
-            <code>update()</code> or <code>finish()</code>. Also the current
+            <methodname>update()</methodname> or <methodname>finish()</methodname>. Also the current
             value, the status text and the start time for ETA calculation will
             be fetched in the next request run again.
         </para>

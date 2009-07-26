@@ -32,8 +32,8 @@ echo $client->sayHello('Davey', 'Day')->get(); // "Hello Davey, Good Day"
                 <classname>Zend_Rest_Client</classname> attempts to make remote methods
                 look as much like native methods as possible, the only
                 difference being that you must follow the method call with one
-                of either <code>get()</code>, <code>post()</code>,
-                <code>put()</code> or <code>delete()</code>. This call may be
+                of either <methodname>get()</methodname>, <methodname>post()</methodname>,
+                <methodname>put()</methodname> or <methodname>delete()</methodname>. This call may be
                 made via method chaining or in separate method calls:
             </para>
 
@@ -73,8 +73,8 @@ if ($result->isSuccess()) {
 
         <para>
             In the example above, you can see that we use the request result as
-            an object, to call <code>isSuccess()</code>, and then because of
-            <code>__toString()</code>, we can simply <code>echo</code> the
+            an object, to call <methodname>isSuccess()</methodname>, and then because of
+            <methodname>__toString()</methodname>, we can simply <code>echo</code> the
             object to get the result. <classname>Zend_Rest_Client_Response</classname>
             will allow you to echo any scalar value. For complex types, you can
             use either array or object notation.

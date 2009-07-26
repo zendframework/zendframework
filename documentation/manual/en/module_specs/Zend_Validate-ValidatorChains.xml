@@ -32,14 +32,14 @@ if ($validatorChain->isValid($username)) {
         12 characters, and then it is checked to ensure that it contains only alphanumeric
         characters. The second validation, for alphanumeric characters, is performed regardless of
         whether the first validation, for length between 6 and 12 characters, succeeds. This means
-        that if both validations fail, <code>getMessages()</code> will return failure messages from
+        that if both validations fail, <methodname>getMessages()</methodname> will return failure messages from
         both validators.
     </para>
 
     <para>
         In some cases it makes sense to have a validator break the chain if its validation process
         fails. <classname>Zend_Validate</classname> supports such use cases with the second
-        parameter to the <code>addValidator()</code> method. By setting
+        parameter to the <methodname>addValidator()</methodname> method. By setting
         <code>$breakChainOnFailure</code> to <constant>TRUE</constant>, the added validator will break the
         chain execution upon failure, which avoids running any other validations that are determined
         to be unnecessary or inappropriate for the situation. If the above example were written as

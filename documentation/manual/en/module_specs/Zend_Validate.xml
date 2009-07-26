@@ -41,15 +41,15 @@
         <para>
             Having defined validation in this way provides the foundation for
             <classname>Zend_Validate_Interface</classname>, which defines two methods,
-            <code>isValid()</code> and <code>getMessages()</code>. The
-            <code>isValid()</code> method performs validation upon the provided
+            <methodname>isValid()</methodname> and <methodname>getMessages()</methodname>. The
+            <methodname>isValid()</methodname> method performs validation upon the provided
             value, returning <constant>TRUE</constant> if and only if the value passes
             against the validation criteria.
         </para>
 
         <para>
-            If <code>isValid()</code> returns <constant>FALSE</constant>, the
-            <code>getMessages()</code> returns an array of messages explaining
+            If <methodname>isValid()</methodname> returns <constant>FALSE</constant>, the
+            <methodname>getMessages()</methodname> returns an array of messages explaining
             the reason(s) for validation failure. The array keys are short
             strings that identify the reasons for validation failure, and the
             array values are the corresponding human-readable string messages.
@@ -62,12 +62,12 @@
 
         <note>
             <para>
-                The <code>getMessages()</code> methods return validation
+                The <methodname>getMessages()</methodname> methods return validation
                 failure information only for the most recent
-                <code>isValid()</code> call. Each call to
-                <code>isValid()</code> clears any messages and errors caused by
-                a previous <code>isValid()</code> call, because it's likely
-                that each call to <code>isValid()</code> is made for a
+                <methodname>isValid()</methodname> call. Each call to
+                <methodname>isValid()</methodname> clears any messages and errors caused by
+                a previous <methodname>isValid()</methodname> call, because it's likely
+                that each call to <methodname>isValid()</methodname> is made for a
                 different input value.
             </para>
         </note>
@@ -97,18 +97,18 @@ if ($validator->isValid($email)) {
         <title>Customizing messages</title>
 
         <para>
-            Validate classes provide a <code>setMessage()</code> method with
+            Validate classes provide a <methodname>setMessage()</methodname> method with
             which you can specify the format of a message returned by
-            <code>getMessages()</code> in case of validation failure. The
+            <methodname>getMessages()</methodname> in case of validation failure. The
             first argument of this method is a string containing the error
             message. You can include tokens in this string which will be
             substituted with data relevant to the validator. The token
             <code>%value%</code> is supported by all validators; this is
-            substituted with the value you passed to <code>isValid()</code>.
+            substituted with the value you passed to <methodname>isValid()</methodname>.
             Other tokens may be supported on a case-by-case basis in each
             validation class. For example, <code>%max%</code> is a token
             supported by <classname>Zend_Validate_LessThan</classname>.
-            The <code>getMessageVariables()</code> method returns an array
+            The <methodname>getMessageVariables()</methodname> method returns an array
             of variable tokens supported by the validator.
         </para>
 
@@ -116,7 +116,7 @@ if ($validator->isValid($email)) {
             The second optional argument is a string that identifies the
             validation failure message template to be set, which is useful when
             a validation class defines more than one cause for failure. If you
-            omit the second argument, <code>setMessage()</code> assumes the
+            omit the second argument, <methodname>setMessage()</methodname> assumes the
             message you specify should be used for the first message template
             declared in the validation class. Many validation classes only have
             one error message template defined, so there is no need to specify
@@ -142,7 +142,7 @@ if (!$validator->isValid('word')) {
         </para>
 
         <para>
-            You can set multiple messages using the <code>setMessages()</code>
+            You can set multiple messages using the <methodname>setMessages()</methodname>
             method. Its argument is an array containing key/message pairs.
 
             <programlisting language="php"><![CDATA[
@@ -164,7 +164,7 @@ $validator->setMessages( array(
             name as the message tokens supported by a given validation class.
             The <code>value</code> property is always available in a validator;
             it is the value you specified as the argument of
-            <code>isValid()</code>. Other properties may be supported on a
+            <methodname>isValid()</methodname>. Other properties may be supported on a
             case-by-case basis in each validation class.
 
             <programlisting language="php"><![CDATA[
@@ -193,11 +193,11 @@ if (!validator->isValid('word')) {
             instance of the validator, you can use the static method
             <classname>Zend_Validate::is()</classname> as an alternative invocation
             style. The first argument of this method is a data input value,
-            that you would pass to the <code>isValid()</code> method. The
+            that you would pass to the <methodname>isValid()</methodname> method. The
             second argument is a string, which corresponds to the basename of
             the validation class, relative to the <classname>Zend_Validate</classname>
-            namespace. The <code>is()</code> method automatically loads the
-            class, creates an instance, and applies the <code>isValid()</code>
+            namespace. The <methodname>is()</methodname> method automatically loads the
+            class, creates an instance, and applies the <methodname>isValid()</methodname>
             method to the data input.
 
             <programlisting language="php"><![CDATA[
@@ -221,9 +221,9 @@ if (Zend_Validate::is($value, 'Between', array(1, 12))) {
         </para>
 
         <para>
-            The <code>is()</code> method returns a boolean value, the same as
-            the <code>isValid()</code> method. When using the static
-            <code>is()</code> method, validation failure messages are not
+            The <methodname>is()</methodname> method returns a boolean value, the same as
+            the <methodname>isValid()</methodname> method. When using the static
+            <methodname>is()</methodname> method, validation failure messages are not
             available.
         </para>
 
@@ -232,7 +232,7 @@ if (Zend_Validate::is($value, 'Between', array(1, 12))) {
             but if you have the need to run a validator for multiple inputs,
             it's more efficient to use the non-static usage, creating an
             instance of the validator object and calling its
-            <code>isValid()</code> method.
+            <methodname>isValid()</methodname> method.
         </para>
 
         <para>
@@ -322,10 +322,10 @@ if (Zend_Validate::is($value, 'OtherValidator', array(1, 12)) {
         <title>Translating messages</title>
 
         <para>
-            Validate classes provide a <code>setTranslator()</code> method with
+            Validate classes provide a <methodname>setTranslator()</methodname> method with
             which you can specify a instance of <classname>Zend_Translate</classname> which
             will translate the messages in case of a validation failure. The
-            <code>getTranslator()</code> method returns the set translator instance.
+            <methodname>getTranslator()</methodname> method returns the set translator instance.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -340,9 +340,9 @@ $validator->setTranslator($translate);
 ]]></programlisting>
 
         <para>
-            With the static <code>setDefaultTranslator()</code> method you can set
+            With the static <methodname>setDefaultTranslator()</methodname> method you can set
             a instance of <classname>Zend_Translate</classname> which will be used for all
-            validation classes, and can be retrieved with <code>getDefaultTranslator()</code>.
+            validation classes, and can be retrieved with <methodname>getDefaultTranslator()</methodname>.
             This prevents you from setting a translator manually for all validator classes,
             and simplifies your code.
         </para>
@@ -365,8 +365,8 @@ Zend_Validate::setDefaultTranslator($translate);
 
         <para>
             Sometimes it is necessary to disable the translator within a validator.
-            To archive this you can use the <code>setDisableTranslator()</code> method,
-            which accepts a boolean parameter, and <code>translatorIsDisabled()</code>
+            To archive this you can use the <methodname>setDisableTranslator()</methodname> method,
+            which accepts a boolean parameter, and <methodname>translatorIsDisabled()</methodname>
             to get the set value.
         </para>
 
@@ -379,7 +379,7 @@ if (!$validator->isTranslatorDisabled()) {
 
         <para>
             It is also possible to use a translator instead of setting own messages with
-            <code>setMessage()</code>. But doing so, you should keep in mind, that the
+            <methodname>setMessage()</methodname>. But doing so, you should keep in mind, that the
             translator works also on messages you set your own.
         </para>
 

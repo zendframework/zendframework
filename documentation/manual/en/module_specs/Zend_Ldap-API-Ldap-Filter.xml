@@ -132,7 +132,7 @@
                         parameters will be escaped and substituted into <code>$mask</code>
                         by using
                         <ulink url="http://php.net/sprintf">
-                        <code>sprintf()</code></ulink>
+                        <methodname>sprintf()</methodname></ulink>
                     </entry>
                 </row>
                 <row>
@@ -173,7 +173,7 @@
                     <entry><code>string __toString()</code></entry>
                     <entry>
                         Returns a string representation of the filter. Proxies to
-                        <code>Zend_Ldap_Filter::toString()</code>.
+                        <methodname>Zend_Ldap_Filter::toString()</methodname>.
                     </entry>
                 </row>
                 <row>
@@ -223,7 +223,7 @@
                     </entry>
                     <entry>
                         Undoes the conversion done by
-                        <code>Zend_Ldap_Filter::escapeValue()</code>. Converts any
+                        <methodname>Zend_Ldap_Filter::escapeValue()</methodname>. Converts any
                         sequences of a backslash followed by two hex digits into the
                         corresponding character.
                     </entry>

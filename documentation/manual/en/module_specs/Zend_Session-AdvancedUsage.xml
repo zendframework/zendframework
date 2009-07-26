@@ -58,11 +58,11 @@ php_value session.auto_start 0
             <listitem>
                 <para>
                     Wrong: Do not use PHP's
-                    <ulink url="http://www.php.net/session_start"><code>session_start()</code></ulink> function
-                    directly. If you use <code>session_start()</code> directly, and then start using
+                    <ulink url="http://www.php.net/session_start"><methodname>session_start()</methodname></ulink> function
+                    directly. If you use <methodname>session_start()</methodname> directly, and then start using
                     <classname>Zend_Session_Namespace</classname>, an exception will be thrown by
                     <classname>Zend_Session::start()</classname> ("session has already been started"). If you call
-                    <code>session_start()</code> after using <classname>Zend_Session_Namespace</classname> or calling
+                    <methodname>session_start()</methodname> after using <classname>Zend_Session_Namespace</classname> or calling
                     <classname>Zend_Session::start()</classname>, an error of level <code>E_NOTICE</code> will be generated, and
                     the call will be ignored.
                 </para>
@@ -125,8 +125,8 @@ php_value session.auto_start 0
 
         <para>
             Session namespaces can be locked, to prevent further alterations to the data in that namespace. Use
-            <code>lock()</code> to make a specific namespace read-only, <code>unLock()</code> to make a read-only
-            namespace read-write, and <code>isLocked()</code> to test if a namespace has been previously locked. Locks
+            <methodname>lock()</methodname> to make a specific namespace read-only, <methodname>unLock()</methodname> to make a read-only
+            namespace read-write, and <methodname>isLocked()</methodname> to test if a namespace has been previously locked. Locks
             are transient and do not persist from one request to the next. Locking the namespace has no effect on setter
             methods of objects stored in the namespace, but does prevent the use of the namespace's setter method to
             remove or replace objects stored directly in the namespace. Similarly, locking
@@ -435,19 +435,19 @@ echo $myNamespace->someArray['foo']; // prints "bar"
             using Zend_Session require extra attention, because closing (<classname>Zend_Session::writeClose()</classname>), or
             destroying a session (<classname>Zend_Session::destroy()</classname>) prevents any further setting or unsetting of
             keys in any instance of <classname>Zend_Session_Namespace</classname>. This behavior is a direct result of the
-            underlying ext/session mechanism and PHP's <code>session_destroy()</code> and
-            <code>session_write_close()</code>, which have no "undo" mechanism to facilitate setup/teardown with unit
+            underlying ext/session mechanism and PHP's <methodname>session_destroy()</methodname> and
+            <methodname>session_write_close()</methodname>, which have no "undo" mechanism to facilitate setup/teardown with unit
             tests.
         </para>
 
         <para>
-            To work around this, see the unit test <code>testSetExpirationSeconds()</code> in
+            To work around this, see the unit test <methodname>testSetExpirationSeconds()</methodname> in
             <code>SessionTest.php</code> and <code>SessionTestHelper.php</code>, both located in
-            <code>tests/Zend/Session</code>, which make use of PHP's <code>exec()</code> to launch a separate process.
+            <code>tests/Zend/Session</code>, which make use of PHP's <methodname>exec()</methodname> to launch a separate process.
             The new process more accurately simulates a second, successive request from a browser. The separate process
             begins with a "clean" session, just like any PHP script execution for a web request. Also, any changes to
             <code>$_SESSION</code> made in the calling process become available to the child process, provided the
-            parent closed the session before using <code>exec()</code>.
+            parent closed the session before using <methodname>exec()</methodname>.
         </para>
 
         <example id="zend.session.advanced_usage.testing.example">

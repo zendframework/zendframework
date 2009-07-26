@@ -141,8 +141,8 @@ foreach ($aNamespace as $index => $value) {
         <title>Accessors for Session Namespaces</title>
 
         <para>
-            <classname>Zend_Session_Namespace</classname> implements the <code>__get()</code>, <code>__set()</code>,
-            <code>__isset()</code>, and <code>__unset()</code>
+            <classname>Zend_Session_Namespace</classname> implements the <methodname>__get()</methodname>, <methodname>__set()</methodname>,
+            <methodname>__isset()</methodname>, and <methodname>__unset()</methodname>
             <ulink url="http://www.php.net/manual/en/language.oop5.overloading.php">magic methods</ulink>, which should
             not be invoked directly, except from within a subclass. Instead, the normal operators automatically invoke
             these methods, such as in the following example:

@@ -93,19 +93,19 @@ $form = new Zend_Form($config);
 
         <itemizedlist>
             <listitem><para>
-                <code>setPluginLoader($loader, $type)</code>: $loader is the
+                <methodname>setPluginLoader($loader, $type)</methodname>: $loader is the
                 plugin loader object itself, while type is one of the types
                 specified above. This sets the plugin loader for the given type
                 to the newly specified loader object.
             </para></listitem>
 
             <listitem><para>
-                <code>getPluginLoader($type)</code>: retrieves the plugin loader
+                <methodname>getPluginLoader($type)</methodname>: retrieves the plugin loader
                 associated with $type.
             </para></listitem>
 
             <listitem><para>
-                <code>addPrefixPath($prefix, $path, $type = null)</code>: adds a
+                <methodname>addPrefixPath($prefix, $path, $type = null)</methodname>: adds a
                 prefix/path association to the loader specified by $type. If
                 $type is null, it will attempt to add the path to all loaders,
                 by appending the prefix with each of "_Element" and
@@ -116,7 +116,7 @@ $form = new Zend_Form($config);
             </para></listitem>
 
             <listitem><para>
-                <code>addPrefixPaths(array $spec)</code>: allows you to add many
+                <methodname>addPrefixPaths(array $spec)</methodname>: allows you to add many
                 paths at once to one or more plugin loaders. It expects each
                 array item to be an array with the keys 'path', 'prefix', and
                 'type'.
@@ -131,8 +131,8 @@ $form = new Zend_Form($config);
 
         <itemizedlist>
             <listitem><para>
-                <code>addElementPrefixPath($prefix, $path, $type = null)</code>:
-                Just like <code>addPrefixPath()</code>, you must specify a class
+                <methodname>addElementPrefixPath($prefix, $path, $type = null)</methodname>:
+                Just like <methodname>addPrefixPath()</methodname>, you must specify a class
                 prefix and a path. <code>$type</code>, when specified, must be
                 one of the plugin loader types specified by
                 <classname>Zend_Form_Element</classname>; see the <link
@@ -144,8 +144,8 @@ $form = new Zend_Form($config);
             </para></listitem>
 
             <listitem><para>
-                <code>addDisplayGroupPrefixPath($prefix, $path)</code>:
-                Just like <code>addPrefixPath()</code>, you must specify a class
+                <methodname>addDisplayGroupPrefixPath($prefix, $path)</methodname>:
+                Just like <methodname>addPrefixPath()</methodname>, you must specify a class
                 prefix and a path; however, since display groups only support
                 decorators as plugins, no <code>$type</code> is necessary.
             </para></listitem>
@@ -173,7 +173,7 @@ $form = new Zend_Form($config);
 
         <para>
             The most basic method for adding an element is
-            <code>addElement()</code>. This method can take either an object of
+            <methodname>addElement()</methodname>. This method can take either an object of
             type <classname>Zend_Form_Element</classname> (or of a class extending
             <classname>Zend_Form_Element</classname>), or arguments for building a new
             element -- including the element type, name, and any configuration
@@ -203,7 +203,7 @@ $form->addElement('text', 'foo', array('label' => 'Foo:'));
             <title>addElement() Implements Fluent Interface</title>
 
             <para>
-                <code>addElement()</code> implements a fluent interface; that is
+                <methodname>addElement()</methodname> implements a fluent interface; that is
                 to say, it returns the <classname>Zend_Form</classname> object, and not
                 the element. This is done to allow you to chain together
                 multiple addElement() methods or other form methods that
@@ -213,21 +213,21 @@ $form->addElement('text', 'foo', array('label' => 'Foo:'));
 
             <para>
                 If you wish to return the element instead, use
-                <code>createElement()</code>, which is outlined below. Be aware,
-                however, that <code>createElement()</code> does not attach the
+                <methodname>createElement()</methodname>, which is outlined below. Be aware,
+                however, that <methodname>createElement()</methodname> does not attach the
                 element to the form.
             </para>
 
             <para>
-                Internally, <code>addElement()</code> actually uses
-                <code>createElement()</code> to create the element before
+                Internally, <methodname>addElement()</methodname> actually uses
+                <methodname>createElement()</methodname> to create the element before
                 attaching it to the form.
             </para>
         </note>
 
         <para>
             Once an element has been added to the form, you can retrieve it by
-            name. This can be done either by using the <code>getElement()</code>
+            name. This can be done either by using the <methodname>getElement()</methodname>
             method or by using overloading to access the element as an object
             property:
         </para>
@@ -244,7 +244,7 @@ $foo = $form->foo;
             Occasionally, you may want to create an element without attaching it
             to the form (for instance, if you wish to make use of the various
             plugin paths registered with the form, but wish to later attach the
-            object to a sub form). The <code>createElement()</code> method
+            object to a sub form). The <methodname>createElement()</methodname> method
             allows you to do so:
         </para>
 
@@ -260,8 +260,8 @@ $username = $form->createElement('text', 'username');
                 After validating a form, you will typically need to retrieve the
                 values so you can perform other operations, such as updating a
                 database or notifying a web service. You can retrieve all values
-                for all elements using <code>getValues()</code>;
-                <code>getValue($name)</code> allows you to retrieve a single
+                for all elements using <methodname>getValues()</methodname>;
+                <methodname>getValue($name)</methodname> allows you to retrieve a single
                 element's value by element name:
             </para>
 
@@ -276,7 +276,7 @@ $value = $form->getValue('foo');
             <para>
                 Sometimes you'll want to populate the form with specified values
                 prior to rendering. This can be done with either the
-                <code>setDefaults()</code> or <code>populate()</code>
+                <methodname>setDefaults()</methodname> or <methodname>populate()</methodname>
                 methods:
             </para>
 
@@ -288,7 +288,7 @@ $form->populate($data);
             <para>
                 On the flip side, you may want to clear a form after populating
                 or validating it; this can be done using the
-                <code>reset()</code> method:
+                <methodname>reset()</methodname> method:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -342,8 +342,8 @@ $form->addElementPrefixPath('My_Foo_Decorator',
 
                 <para>
                     You can set decorators for all elements.
-                    <code>setElementDecorators()</code> accepts an array of
-                    decorators, just like <code>setDecorators()</code>, and will
+                    <methodname>setElementDecorators()</methodname> accepts an array of
+                    decorators, just like <methodname>setDecorators()</methodname>, and will
                     overwrite any previously set decorators in each element. In
                     this example, we set the decorators to simply a ViewHelper
                     and a Label:
@@ -363,7 +363,7 @@ $form->setElementDecorators(array(
                 <para>
                     You can also set decorators for a subset of elements,
                     either by inclusion or exclusion. The second argument to
-                    <code>setElementDecorators()</code> may be an array of
+                    <methodname>setElementDecorators()</methodname> may be an array of
                     element names; by default, specifying such an array will
                     set the specified decorators on those elements only. You
                     may also pass a third argument, a flag indicating whether
@@ -420,7 +420,7 @@ $form->setElementDecorators(
                     <title>Some Decorators are Inappropriate for Some Elements</title>
 
                     <para>
-                        While <code>setElementDecorators()</code> may seem like
+                        While <methodname>setElementDecorators()</methodname> may seem like
                         a good solution, there are some cases where it may
                         actually end up with unexpected results. For example,
                         the various button elements (Submit, Button, Reset)
@@ -448,7 +448,7 @@ $form->setElementDecorators(
 
                 <para>
                     In some cases, you may want to apply the same filter to all
-                    elements; a common case is to <code>trim()</code> all values:
+                    elements; a common case is to <methodname>trim()</methodname> all values:
                 </para>
 
         <programlisting language="php"><![CDATA[
@@ -466,75 +466,75 @@ $form->setElementFilters(array('StringTrim'));
 
             <itemizedlist>
                 <listitem><para>
-                    <code>createElement($element, $name = null, $options = null)</code>
+                    <methodname>createElement($element, $name = null, $options = null)</methodname>
                 </para></listitem>
 
                 <listitem><para>
-                    <code>addElement($element, $name = null, $options = null)</code>
+                    <methodname>addElement($element, $name = null, $options = null)</methodname>
                 </para></listitem>
 
                 <listitem><para>
-                    <code>addElements(array $elements)</code>
+                    <methodname>addElements(array $elements)</methodname>
                 </para></listitem>
 
                 <listitem><para>
-                    <code>setElements(array $elements)</code>
+                    <methodname>setElements(array $elements)</methodname>
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getElement($name)</code>
+                    <methodname>getElement($name)</methodname>
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getElements()</code>
+                    <methodname>getElements()</methodname>
                 </para></listitem>
 
                 <listitem><para>
-                    <code>removeElement($name)</code>
+                    <methodname>removeElement($name)</methodname>
                 </para></listitem>
 
                 <listitem><para>
-                    <code>clearElements()</code>
+                    <methodname>clearElements()</methodname>
                 </para></listitem>
 
                 <listitem><para>
-                    <code>setDefaults(array $defaults)</code>
+                    <methodname>setDefaults(array $defaults)</methodname>
                 </para></listitem>
 
                 <listitem><para>
-                    <code>setDefault($name, $value)</code>
+                    <methodname>setDefault($name, $value)</methodname>
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getValue($name)</code>
+                    <methodname>getValue($name)</methodname>
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getValues()</code>
+                    <methodname>getValues()</methodname>
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getUnfilteredValue($name)</code>
+                    <methodname>getUnfilteredValue($name)</methodname>
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getUnfilteredValues()</code>
+                    <methodname>getUnfilteredValues()</methodname>
                 </para></listitem>
 
                 <listitem><para>
-                    <code>setElementFilters(array $filters)</code>
+                    <methodname>setElementFilters(array $filters)</methodname>
                 </para></listitem>
 
                 <listitem><para>
-                    <code>setElementDecorators(array $decorators)</code>
+                    <methodname>setElementDecorators(array $decorators)</methodname>
                 </para></listitem>
 
                 <listitem><para>
-                    <code>addElementPrefixPath($prefix, $path, $type = null)</code>
+                    <methodname>addElementPrefixPath($prefix, $path, $type = null)</methodname>
                 </para></listitem>
 
                 <listitem><para>
-                    <code>addElementPrefixPaths(array $spec)</code>
+                    <methodname>addElementPrefixPaths(array $spec)</methodname>
                 </para></listitem>
             </itemizedlist>
         </sect3>
@@ -555,7 +555,7 @@ $form->setElementFilters(array('StringTrim'));
             The base class for display groups is
             <classname>Zend_Form_DisplayGroup</classname>. While it can be instantiated
             directly, it is usually best to use <classname>Zend_Form</classname>'s
-            <code>addDisplayGroup()</code> method to do so. This method takes an
+            <methodname>addDisplayGroup()</methodname> method to do so. This method takes an
             array of elements as its first argument, and a name for the display
             group as its second argument. You may optionally pass in an array of
             options or a <classname>Zend_Config</classname> object as the third argument.
@@ -573,7 +573,7 @@ $form->addDisplayGroup(array('username', 'password'), 'login');
 
         <para>
             You can access display groups using the
-            <code>getDisplayGroup()</code> method, or via overloading using the
+            <methodname>getDisplayGroup()</methodname> method, or via overloading using the
             display group's name:
         </para>
 
@@ -625,7 +625,7 @@ $form->addDisplayGroup(
                     By default, display groups inherit whichever decorator paths
                     the form uses; however, if they should look in alternate
                     locations, you can use the
-                    <code>addDisplayGroupPrefixPath()</code> method.
+                    <methodname>addDisplayGroupPrefixPath()</methodname> method.
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -638,8 +638,8 @@ $form->addDisplayGroupPrefixPath('My_Foo_Decorator', 'My/Foo/Decorator');
 
                 <para>
                     You can set decorators for all display groups.
-                    <code>setDisplayGroupDecorators()</code> accepts an array of
-                    decorators, just like <code>setDecorators()</code>, and will
+                    <methodname>setDisplayGroupDecorators()</methodname> accepts an array of
+                    decorators, just like <methodname>setDecorators()</methodname>, and will
                     overwrite any previously set decorators in each display
                     group. In this example, we set the decorators to simply a
                     fieldset (the FormElements decorator is necessary to ensure
@@ -662,7 +662,7 @@ $form->setDisplayGroupDecorators(array(
                 By default, <classname>Zend_Form</classname> uses the
                 <classname>Zend_Form_DisplayGroup</classname> class for display groups.
                 You may find you need to extend this class in order to provided
-                custom functionality. <code>addDisplayGroup()</code> does not
+                custom functionality. <methodname>addDisplayGroup()</methodname> does not
                 allow passing in a concrete instance, but does allow specifying
                 the class to use as one of its options, using the
                 'displayGroupClass' key:
@@ -710,47 +710,47 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
 
             <itemizedlist>
                 <listitem><para>
-                    <code>addDisplayGroup(array $elements, $name, $options = null)</code>
+                    <methodname>addDisplayGroup(array $elements, $name, $options = null)</methodname>
                 </para></listitem>
 
                 <listitem><para>
-                    <code>addDisplayGroups(array $groups)</code>
+                    <methodname>addDisplayGroups(array $groups)</methodname>
                 </para></listitem>
 
                 <listitem><para>
-                    <code>setDisplayGroups(array $groups)</code>
+                    <methodname>setDisplayGroups(array $groups)</methodname>
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getDisplayGroup($name)</code>
+                    <methodname>getDisplayGroup($name)</methodname>
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getDisplayGroups()</code>
+                    <methodname>getDisplayGroups()</methodname>
                 </para></listitem>
 
                 <listitem><para>
-                    <code>removeDisplayGroup($name)</code>
+                    <methodname>removeDisplayGroup($name)</methodname>
                 </para></listitem>
 
                 <listitem><para>
-                    <code>clearDisplayGroups()</code>
+                    <methodname>clearDisplayGroups()</methodname>
                 </para></listitem>
 
                 <listitem><para>
-                    <code>setDisplayGroupDecorators(array $decorators)</code>
+                    <methodname>setDisplayGroupDecorators(array $decorators)</methodname>
                 </para></listitem>
 
                 <listitem><para>
-                    <code>addDisplayGroupPrefixPath($prefix, $path)</code>
+                    <methodname>addDisplayGroupPrefixPath($prefix, $path)</methodname>
                 </para></listitem>
 
                 <listitem><para>
-                    <code>setDefaultDisplayGroupClass($class)</code>
+                    <methodname>setDefaultDisplayGroupClass($class)</methodname>
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getDefaultDisplayGroupClass($class)</code>
+                    <methodname>getDefaultDisplayGroupClass($class)</methodname>
                 </para></listitem>
             </itemizedlist>
         </sect3>
@@ -766,45 +766,45 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
             <itemizedlist>
                 <listitem><para>Configuration:</para>
                     <itemizedlist>
-                        <listitem><para><code>setOptions(array $options)</code></para></listitem>
+                        <listitem><para><methodname>setOptions(array $options)</methodname></para></listitem>
 
                         <listitem>
-                            <para><code>setConfig(Zend_Config $config)</code></para>
+                            <para><methodname>setConfig(Zend_Config $config)</methodname></para>
                         </listitem>
                     </itemizedlist>
                 </listitem>
 
                 <listitem><para>Metadata:</para>
                     <itemizedlist>
-                        <listitem><para><code>setAttrib($key, $value)</code></para></listitem>
+                        <listitem><para><methodname>setAttrib($key, $value)</methodname></para></listitem>
 
-                        <listitem><para><code>addAttribs(array $attribs)</code></para></listitem>
+                        <listitem><para><methodname>addAttribs(array $attribs)</methodname></para></listitem>
 
-                        <listitem><para><code>setAttribs(array $attribs)</code></para></listitem>
+                        <listitem><para><methodname>setAttribs(array $attribs)</methodname></para></listitem>
 
-                        <listitem><para><code>getAttrib($key)</code></para></listitem>
+                        <listitem><para><methodname>getAttrib($key)</methodname></para></listitem>
 
-                        <listitem><para><code>getAttribs()</code></para></listitem>
+                        <listitem><para><methodname>getAttribs()</methodname></para></listitem>
 
-                        <listitem><para><code>removeAttrib($key)</code></para></listitem>
+                        <listitem><para><methodname>removeAttrib($key)</methodname></para></listitem>
 
-                        <listitem><para><code>clearAttribs()</code></para></listitem>
+                        <listitem><para><methodname>clearAttribs()</methodname></para></listitem>
 
-                        <listitem><para><code>setName($name)</code></para></listitem>
+                        <listitem><para><methodname>setName($name)</methodname></para></listitem>
 
-                        <listitem><para><code>getName()</code></para></listitem>
+                        <listitem><para><methodname>getName()</methodname></para></listitem>
 
-                        <listitem><para><code>setDescription($value)</code></para></listitem>
+                        <listitem><para><methodname>setDescription($value)</methodname></para></listitem>
 
-                        <listitem><para><code>getDescription()</code></para></listitem>
+                        <listitem><para><methodname>getDescription()</methodname></para></listitem>
 
-                        <listitem><para><code>setLegend($legend)</code></para></listitem>
+                        <listitem><para><methodname>setLegend($legend)</methodname></para></listitem>
 
-                        <listitem><para><code>getLegend()</code></para></listitem>
+                        <listitem><para><methodname>getLegend()</methodname></para></listitem>
 
-                        <listitem><para><code>setOrder($order)</code></para></listitem>
+                        <listitem><para><methodname>setOrder($order)</methodname></para></listitem>
 
-                        <listitem><para><code>getOrder()</code></para></listitem>
+                        <listitem><para><methodname>getOrder()</methodname></para></listitem>
                     </itemizedlist>
                 </listitem>
 
@@ -812,7 +812,7 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
                     <itemizedlist>
                         <listitem>
                             <para>
-                                <code>createElement($type, $name, array $options = array())</code>
+                                <methodname>createElement($type, $name, array $options = array())</methodname>
                             </para>
                         </listitem>
 
@@ -823,17 +823,17 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
                             </para>
                         </listitem>
 
-                        <listitem><para><code>addElements(array $elements)</code></para></listitem>
+                        <listitem><para><methodname>addElements(array $elements)</methodname></para></listitem>
 
-                        <listitem><para><code>setElements(array $elements)</code></para></listitem>
+                        <listitem><para><methodname>setElements(array $elements)</methodname></para></listitem>
 
-                        <listitem><para><code>getElement($name)</code></para></listitem>
+                        <listitem><para><methodname>getElement($name)</methodname></para></listitem>
 
-                        <listitem><para><code>getElements()</code></para></listitem>
+                        <listitem><para><methodname>getElements()</methodname></para></listitem>
 
-                        <listitem><para><code>removeElement($name)</code></para></listitem>
+                        <listitem><para><methodname>removeElement($name)</methodname></para></listitem>
 
-                        <listitem><para><code>clearElements()</code></para></listitem>
+                        <listitem><para><methodname>clearElements()</methodname></para></listitem>
                     </itemizedlist>
                 </listitem>
 
@@ -841,52 +841,52 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
                     <itemizedlist>
                         <listitem>
                             <para>
-                                <code>setPluginLoader(Zend_Loader_PluginLoader $loader)</code>
+                                <methodname>setPluginLoader(Zend_Loader_PluginLoader $loader)</methodname>
                             </para>
                         </listitem>
 
-                        <listitem><para><code>getPluginLoader()</code></para></listitem>
+                        <listitem><para><methodname>getPluginLoader()</methodname></para></listitem>
 
-                        <listitem><para><code>addPrefixPath($prefix, $path)</code></para></listitem>
+                        <listitem><para><methodname>addPrefixPath($prefix, $path)</methodname></para></listitem>
 
-                        <listitem><para><code>addPrefixPaths(array $spec)</code></para></listitem>
+                        <listitem><para><methodname>addPrefixPaths(array $spec)</methodname></para></listitem>
                     </itemizedlist>
                 </listitem>
 
                 <listitem><para>Decorators:</para>
                     <itemizedlist>
                         <listitem>
-                            <para><code>addDecorator($decorator, $options = null)</code></para>
+                            <para><methodname>addDecorator($decorator, $options = null)</methodname></para>
                         </listitem>
 
                         <listitem>
-                            <para><code>addDecorators(array $decorators)</code></para>
+                            <para><methodname>addDecorators(array $decorators)</methodname></para>
                         </listitem>
 
                         <listitem>
-                            <para><code>setDecorators(array $decorators)</code></para>
+                            <para><methodname>setDecorators(array $decorators)</methodname></para>
                         </listitem>
 
-                        <listitem><para><code>getDecorator($name)</code></para></listitem>
+                        <listitem><para><methodname>getDecorator($name)</methodname></para></listitem>
 
-                        <listitem><para><code>getDecorators()</code></para></listitem>
+                        <listitem><para><methodname>getDecorators()</methodname></para></listitem>
 
-                        <listitem><para><code>removeDecorator($name)</code></para></listitem>
+                        <listitem><para><methodname>removeDecorator($name)</methodname></para></listitem>
 
-                        <listitem><para><code>clearDecorators()</code></para></listitem>
+                        <listitem><para><methodname>clearDecorators()</methodname></para></listitem>
                     </itemizedlist>
                 </listitem>
 
                 <listitem><para>Rendering:</para>
                     <itemizedlist>
                         <listitem>
-                            <para><code>setView(Zend_View_Interface $view = null)</code></para>
+                            <para><methodname>setView(Zend_View_Interface $view = null)</methodname></para>
                         </listitem>
 
-                        <listitem><para><code>getView()</code></para></listitem>
+                        <listitem><para><methodname>getView()</methodname></para></listitem>
 
                         <listitem>
-                            <para><code>render(Zend_View_Interface $view = null)</code></para>
+                            <para><methodname>render(Zend_View_Interface $view = null)</methodname></para>
                         </listitem>
                     </itemizedlist>
                 </listitem>
@@ -900,11 +900,11 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
                             </para>
                         </listitem>
 
-                        <listitem><para><code>getTranslator()</code></para></listitem>
+                        <listitem><para><methodname>getTranslator()</methodname></para></listitem>
 
-                        <listitem><para><code>setDisableTranslator($flag)</code></para></listitem>
+                        <listitem><para><methodname>setDisableTranslator($flag)</methodname></para></listitem>
 
-                        <listitem><para><code>translatorIsDisabled()</code></para></listitem>
+                        <listitem><para><methodname>translatorIsDisabled()</methodname></para></listitem>
                     </itemizedlist>
                 </listitem>
             </itemizedlist>
@@ -954,7 +954,7 @@ $form->addSubForm($subForm, 'subform');
 
         <para>
             You can retrieve a sub form using either
-            <code>getSubForm($name)</code> or overloading using the sub form
+            <methodname>getSubForm($name)</methodname> or overloading using the sub form
             name:
         </para>
 
@@ -980,7 +980,7 @@ $subForm = $form->subform;
                 elements, however, sub forms inherit most functionality from the
                 master form object, and the only real operation that may need to
                 be performed globally is setting decorators for sub forms. For
-                this purpose, there is the <code>setSubFormDecorators()</code>
+                this purpose, there is the <methodname>setSubFormDecorators()</methodname>
                 method. In the next example, we'll set the decorator for all
                 subforms to be simply a fieldset (the FormElements decorator is
                 needed to ensure its elements are iterated):
@@ -1003,35 +1003,35 @@ $form->setSubFormDecorators(array(
 
             <itemizedlist>
                 <listitem><para>
-                    <code>addSubForm(Zend_Form $form, $name, $order = null)</code>
+                    <methodname>addSubForm(Zend_Form $form, $name, $order = null)</methodname>
                 </para></listitem>
 
                 <listitem><para>
-                    <code>addSubForms(array $subForms)</code>
+                    <methodname>addSubForms(array $subForms)</methodname>
                 </para></listitem>
 
                 <listitem><para>
-                    <code>setSubForms(array $subForms)</code>
+                    <methodname>setSubForms(array $subForms)</methodname>
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getSubForm($name)</code>
+                    <methodname>getSubForm($name)</methodname>
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getSubForms()</code>
+                    <methodname>getSubForms()</methodname>
                 </para></listitem>
 
                 <listitem><para>
-                    <code>removeSubForm($name)</code>
+                    <methodname>removeSubForm($name)</methodname>
                 </para></listitem>
 
                 <listitem><para>
-                    <code>clearSubForms()</code>
+                    <methodname>clearSubForms()</methodname>
                 </para></listitem>
 
                 <listitem><para>
-                    <code>setSubFormDecorators(array $decorators)</code>
+                    <methodname>setSubFormDecorators(array $decorators)</methodname>
                 </para></listitem>
             </itemizedlist>
         </sect3>
@@ -1216,7 +1216,7 @@ $form = new Zend_Form(array('disableLoadDefaultDecorators' => true));
             <para>
                 To get around this, you can use aliases. Instead of passing a
                 decorator or decorator name as the first argument to
-                <code>addDecorator()</code>, pass an array with a single
+                <methodname>addDecorator()</methodname>, pass an array with a single
                 element, with the alias pointing to the decorator object or
                 name:
             </para>
@@ -1230,8 +1230,8 @@ $form = $element->getDecorator('FooBar');
 ]]></programlisting>
 
             <para>
-                In the <code>addDecorators()</code> and
-                <code>setDecorators()</code> methods, you will need to pass
+                In the <methodname>addDecorators()</methodname> and
+                <methodname>setDecorators()</methodname> methods, you will need to pass
                 the 'decorator' option in the array representing the decorator:
             </para>
 
@@ -1265,42 +1265,42 @@ $fooBar  = $form->getDecorator('FooBar');
 
         <itemizedlist>
                 <listitem><para>
-                    <code>addDecorator($decorator, $options = null)</code>
+                    <methodname>addDecorator($decorator, $options = null)</methodname>
                 </para></listitem>
 
                 <listitem><para>
-                    <code>addDecorators(array $decorators)</code>
+                    <methodname>addDecorators(array $decorators)</methodname>
                 </para></listitem>
 
                 <listitem><para>
-                    <code>setDecorators(array $decorators)</code>
+                    <methodname>setDecorators(array $decorators)</methodname>
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getDecorator($name)</code>
+                    <methodname>getDecorator($name)</methodname>
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getDecorators()</code>
+                    <methodname>getDecorators()</methodname>
                 </para></listitem>
 
                 <listitem><para>
-                    <code>removeDecorator($name)</code>
+                    <methodname>removeDecorator($name)</methodname>
                 </para></listitem>
 
                 <listitem><para>
-                    <code>clearDecorators()</code>
+                    <methodname>clearDecorators()</methodname>
                 </para></listitem>
         </itemizedlist>
 
         <para>
             <classname>Zend_Form</classname> also uses overloading to allow rendering
-            specific decorators. <code>__call()</code> will intercept methods
+            specific decorators. <methodname>__call()</methodname> will intercept methods
             that lead with the text 'render' and use the remainder of the method
             name to lookup a decorator; if found, it will then render that
             <emphasis>single</emphasis> decorator. Any arguments passed to the
             method call will be used as content to pass to the decorator's
-            <code>render()</code> method. As an example:
+            <methodname>render()</methodname> method. As an example:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -1328,7 +1328,7 @@ echo $form->renderFieldset("<p>This is fieldset content</p>");
         </para>
 
         <para>
-            To validate a full form, use the <code>isValid()</code> method:
+            To validate a full form, use the <methodname>isValid()</methodname> method:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -1338,13 +1338,13 @@ if (!$form->isValid($_POST)) {
 ]]></programlisting>
 
         <para>
-            <code>isValid()</code> will validate every required element, and any
+            <methodname>isValid()</methodname> will validate every required element, and any
             unrequired element contained in the submitted data.
         </para>
 
         <para>
             Sometimes you may need to validate only a subset of the data; for
-            this, use <code>isValidPartial($data)</code>:
+            this, use <methodname>isValidPartial($data)</methodname>:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -1354,7 +1354,7 @@ if (!$form->isValidPartial($data)) {
 ]]></programlisting>
 
         <para>
-            <code>isValidPartial()</code> only attempts to validate those items
+            <methodname>isValidPartial()</methodname> only attempts to validate those items
             in the data for which there are matching elements; if an element is
             not represented in the data, it is skipped.
         </para>
@@ -1362,7 +1362,7 @@ if (!$form->isValidPartial($data)) {
         <para>
             When validating elements or groups of elements for an AJAX request,
             you will typically be validating a subset of the form, and want the
-            response back in JSON. <code>processAjax()</code> does precisely
+            response back in JSON. <methodname>processAjax()</methodname> does precisely
             that:
         </para>
 
@@ -1379,8 +1379,8 @@ $json = $form->processAjax($data);
 
         <para>
             For forms that fail validation, you can retrieve both error codes
-            and error messages, using <code>getErrors()</code> and
-            <code>getMessages()</code>, respectively:
+            and error messages, using <methodname>getErrors()</methodname> and
+            <methodname>getMessages()</methodname>, respectively:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -1390,8 +1390,8 @@ $messages = $form->getMessages();
 
         <note>
             <para>
-                Since the messages returned by <code>getMessages()</code> are an
-                array of error code/message pairs, <code>getErrors()</code> is
+                Since the messages returned by <methodname>getMessages()</methodname> are an
+                array of error code/message pairs, <methodname>getErrors()</methodname> is
                 typically not needed.
             </para>
         </note>
@@ -1409,7 +1409,7 @@ $messages = $form->getMessages('username');
         <note>
             <para>
                 Note: When validating elements, <classname>Zend_Form</classname> sends a
-                second argument to each element's <code>isValid()</code> method:
+                second argument to each element's <methodname>isValid()</methodname> method:
                 the array of data being validated. This can then be used by
                 individual validators to allow them to utilize other submitted
                 values when determining the validity of the data. An example
@@ -1432,50 +1432,50 @@ $messages = $form->getMessages('username');
 
             <itemizedlist>
                 <listitem><para>
-                    <code>addErrorMessage($message)</code>: add an error message
+                    <methodname>addErrorMessage($message)</methodname>: add an error message
                     to display on form validation errors. You may call this more
                     than once, and new messages are appended to the stack.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>addErrorMessages(array $messages)</code>: add multiple
+                    <methodname>addErrorMessages(array $messages)</methodname>: add multiple
                     error messages to display on form validation errors.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>setErrorMessages(array $messages)</code>: add multiple
+                    <methodname>setErrorMessages(array $messages)</methodname>: add multiple
                     error messages to display on form validation errors,
                     overwriting all previously set error messages.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getErrorMessages()</code>: retrieve the list of
+                    <methodname>getErrorMessages()</methodname>: retrieve the list of
                     custom error messages that have been defined.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>clearErrorMessages()</code>: remove all custom error
+                    <methodname>clearErrorMessages()</methodname>: remove all custom error
                     messages that have been defined.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>markAsError()</code>: mark the form as having
+                    <methodname>markAsError()</methodname>: mark the form as having
                     failed validation.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>addError($message)</code>: add a message to the custom
+                    <methodname>addError($message)</methodname>: add a message to the custom
                     error messages stack and flag the form as invalid.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>addErrors(array $messages)</code>: add several
+                    <methodname>addErrors(array $messages)</methodname>: add several
                     messages to the custom error messages stack and flag the
                     form as invalid.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>setErrors(array $messages)</code>: overwrite the
+                    <methodname>setErrors(array $messages)</methodname>: overwrite the
                     custom error messages stack with the provided messages and
                     flag the form as invalid.
                 </para></listitem>
@@ -1498,9 +1498,9 @@ $messages = $form->getMessages('username');
         <itemizedlist>
             <listitem><para>Configuration and Options:</para>
                 <itemizedlist>
-                    <listitem><para><code>setOptions(array $options)</code></para></listitem>
+                    <listitem><para><methodname>setOptions(array $options)</methodname></para></listitem>
 
-                    <listitem><para><code>setConfig(Zend_Config $config)</code></para></listitem>
+                    <listitem><para><methodname>setConfig(Zend_Config $config)</methodname></para></listitem>
                 </itemizedlist>
             </listitem>
 
@@ -1513,90 +1513,90 @@ $messages = $form->getMessages('username');
                         </para>
                     </listitem>
 
-                    <listitem><para><code>getPluginLoader($type = null)</code></para></listitem>
+                    <listitem><para><methodname>getPluginLoader($type = null)</methodname></para></listitem>
 
                     <listitem>
                         <para><code>addPrefixPath($prefix, $path, $type = null) </code></para>
                     </listitem>
 
-                    <listitem><para><code>addPrefixPaths(array $spec)</code></para></listitem>
+                    <listitem><para><methodname>addPrefixPaths(array $spec)</methodname></para></listitem>
 
                     <listitem>
-                        <para><code>addElementPrefixPath($prefix, $path, $type = null)</code></para>
+                        <para><methodname>addElementPrefixPath($prefix, $path, $type = null)</methodname></para>
                     </listitem>
 
                     <listitem>
-                        <para><code>addElementPrefixPaths(array $spec)</code></para>
+                        <para><methodname>addElementPrefixPaths(array $spec)</methodname></para>
                     </listitem>
 
                     <listitem>
-                        <para><code>addDisplayGroupPrefixPath($prefix, $path)</code></para>
+                        <para><methodname>addDisplayGroupPrefixPath($prefix, $path)</methodname></para>
                     </listitem>
                 </itemizedlist>
             </listitem>
 
             <listitem><para>Metadata:</para>
                 <itemizedlist>
-                    <listitem><para><code>setAttrib($key, $value)</code></para></listitem>
+                    <listitem><para><methodname>setAttrib($key, $value)</methodname></para></listitem>
 
-                    <listitem><para><code>addAttribs(array $attribs)</code></para></listitem>
+                    <listitem><para><methodname>addAttribs(array $attribs)</methodname></para></listitem>
 
-                    <listitem><para><code>setAttribs(array $attribs)</code></para></listitem>
+                    <listitem><para><methodname>setAttribs(array $attribs)</methodname></para></listitem>
 
-                    <listitem><para><code>getAttrib($key)</code></para></listitem>
+                    <listitem><para><methodname>getAttrib($key)</methodname></para></listitem>
 
-                    <listitem><para><code>getAttribs()</code></para></listitem>
+                    <listitem><para><methodname>getAttribs()</methodname></para></listitem>
 
-                    <listitem><para><code>removeAttrib($key)</code></para></listitem>
+                    <listitem><para><methodname>removeAttrib($key)</methodname></para></listitem>
 
-                    <listitem><para><code>clearAttribs()</code></para></listitem>
+                    <listitem><para><methodname>clearAttribs()</methodname></para></listitem>
 
-                    <listitem><para><code>setAction($action)</code></para></listitem>
+                    <listitem><para><methodname>setAction($action)</methodname></para></listitem>
 
-                    <listitem><para><code>getAction()</code></para></listitem>
+                    <listitem><para><methodname>getAction()</methodname></para></listitem>
 
-                    <listitem><para><code>setMethod($method)</code></para></listitem>
+                    <listitem><para><methodname>setMethod($method)</methodname></para></listitem>
 
-                    <listitem><para><code>getMethod()</code></para></listitem>
+                    <listitem><para><methodname>getMethod()</methodname></para></listitem>
 
-                    <listitem><para><code>setName($name)</code></para></listitem>
+                    <listitem><para><methodname>setName($name)</methodname></para></listitem>
 
-                    <listitem><para><code>getName()</code></para></listitem>
+                    <listitem><para><methodname>getName()</methodname></para></listitem>
                 </itemizedlist>
             </listitem>
 
             <listitem><para>Elements:</para>
                 <itemizedlist>
-                    <listitem><para><code>addElement($element, $name = null, $options = null)</code></para></listitem>
+                    <listitem><para><methodname>addElement($element, $name = null, $options = null)</methodname></para></listitem>
 
-                    <listitem><para><code>addElements(array $elements)</code></para></listitem>
+                    <listitem><para><methodname>addElements(array $elements)</methodname></para></listitem>
 
-                    <listitem><para><code>setElements(array $elements)</code></para></listitem>
+                    <listitem><para><methodname>setElements(array $elements)</methodname></para></listitem>
 
-                    <listitem><para><code>getElement($name)</code></para></listitem>
+                    <listitem><para><methodname>getElement($name)</methodname></para></listitem>
 
-                    <listitem><para><code>getElements()</code></para></listitem>
+                    <listitem><para><methodname>getElements()</methodname></para></listitem>
 
-                    <listitem><para><code>removeElement($name)</code></para></listitem>
+                    <listitem><para><methodname>removeElement($name)</methodname></para></listitem>
 
-                    <listitem><para><code>clearElements()</code></para></listitem>
+                    <listitem><para><methodname>clearElements()</methodname></para></listitem>
 
-                    <listitem><para><code>setDefaults(array $defaults)</code></para></listitem>
+                    <listitem><para><methodname>setDefaults(array $defaults)</methodname></para></listitem>
 
-                    <listitem><para><code>setDefault($name, $value)</code></para></listitem>
+                    <listitem><para><methodname>setDefault($name, $value)</methodname></para></listitem>
 
-                    <listitem><para><code>getValue($name)</code></para></listitem>
+                    <listitem><para><methodname>getValue($name)</methodname></para></listitem>
 
-                    <listitem><para><code>getValues()</code></para></listitem>
+                    <listitem><para><methodname>getValues()</methodname></para></listitem>
 
-                    <listitem><para><code>getUnfilteredValue($name)</code></para></listitem>
+                    <listitem><para><methodname>getUnfilteredValue($name)</methodname></para></listitem>
 
-                    <listitem><para><code>getUnfilteredValues()</code></para></listitem>
+                    <listitem><para><methodname>getUnfilteredValues()</methodname></para></listitem>
 
-                    <listitem><para><code>setElementFilters(array $filters)</code></para></listitem>
+                    <listitem><para><methodname>setElementFilters(array $filters)</methodname></para></listitem>
 
                     <listitem>
-                        <para><code>setElementDecorators(array $decorators)</code></para>
+                        <para><methodname>setElementDecorators(array $decorators)</methodname></para>
                     </listitem>
                 </itemizedlist>
             </listitem>
@@ -1604,23 +1604,23 @@ $messages = $form->getMessages('username');
             <listitem><para>Sub forms:</para>
                 <itemizedlist>
                     <listitem>
-                        <para><code>addSubForm(Zend_Form $form, $name, $order = null)</code></para>
+                        <para><methodname>addSubForm(Zend_Form $form, $name, $order = null)</methodname></para>
                     </listitem>
 
-                    <listitem><para><code>addSubForms(array $subForms)</code></para></listitem>
+                    <listitem><para><methodname>addSubForms(array $subForms)</methodname></para></listitem>
 
-                    <listitem><para><code>setSubForms(array $subForms)</code></para></listitem>
+                    <listitem><para><methodname>setSubForms(array $subForms)</methodname></para></listitem>
 
-                    <listitem><para><code>getSubForm($name)</code></para></listitem>
+                    <listitem><para><methodname>getSubForm($name)</methodname></para></listitem>
 
-                    <listitem><para><code>getSubForms()</code></para></listitem>
+                    <listitem><para><methodname>getSubForms()</methodname></para></listitem>
 
-                    <listitem><para><code>removeSubForm($name)</code></para></listitem>
+                    <listitem><para><methodname>removeSubForm($name)</methodname></para></listitem>
 
-                    <listitem><para><code>clearSubForms()</code></para></listitem>
+                    <listitem><para><methodname>clearSubForms()</methodname></para></listitem>
 
                     <listitem>
-                        <para><code>setSubFormDecorators(array $decorators)</code></para>
+                        <para><methodname>setSubFormDecorators(array $decorators)</methodname></para>
                     </listitem>
                 </itemizedlist>
             </listitem>
@@ -1629,72 +1629,72 @@ $messages = $form->getMessages('username');
                 <itemizedlist>
                     <listitem>
                         <para>
-                            <code>addDisplayGroup(array $elements, $name, $options = null)</code>
+                            <methodname>addDisplayGroup(array $elements, $name, $options = null)</methodname>
                         </para>
                     </listitem>
 
-                    <listitem><para><code>addDisplayGroups(array $groups)</code></para></listitem>
+                    <listitem><para><methodname>addDisplayGroups(array $groups)</methodname></para></listitem>
 
-                    <listitem><para><code>setDisplayGroups(array $groups)</code></para></listitem>
+                    <listitem><para><methodname>setDisplayGroups(array $groups)</methodname></para></listitem>
 
-                    <listitem><para><code>getDisplayGroup($name)</code></para></listitem>
+                    <listitem><para><methodname>getDisplayGroup($name)</methodname></para></listitem>
 
-                    <listitem><para><code>getDisplayGroups()</code></para></listitem>
+                    <listitem><para><methodname>getDisplayGroups()</methodname></para></listitem>
 
-                    <listitem><para><code>removeDisplayGroup($name)</code></para></listitem>
+                    <listitem><para><methodname>removeDisplayGroup($name)</methodname></para></listitem>
 
-                    <listitem><para><code>clearDisplayGroups()</code></para></listitem>
+                    <listitem><para><methodname>clearDisplayGroups()</methodname></para></listitem>
 
                     <listitem>
-                        <para><code>setDisplayGroupDecorators(array $decorators)</code></para>
+                        <para><methodname>setDisplayGroupDecorators(array $decorators)</methodname></para>
                     </listitem>
                 </itemizedlist>
             </listitem>
 
             <listitem><para>Validation</para>
                 <itemizedlist>
-                    <listitem><para><code>populate(array $values)</code></para></listitem>
+                    <listitem><para><methodname>populate(array $values)</methodname></para></listitem>
 
-                    <listitem><para><code>isValid(array $data)</code></para></listitem>
+                    <listitem><para><methodname>isValid(array $data)</methodname></para></listitem>
 
-                    <listitem><para><code>isValidPartial(array $data)</code></para></listitem>
+                    <listitem><para><methodname>isValidPartial(array $data)</methodname></para></listitem>
 
-                    <listitem><para><code>processAjax(array $data)</code></para></listitem>
+                    <listitem><para><methodname>processAjax(array $data)</methodname></para></listitem>
 
-                    <listitem><para><code>persistData()</code></para></listitem>
+                    <listitem><para><methodname>persistData()</methodname></para></listitem>
 
-                    <listitem><para><code>getErrors($name = null)</code></para></listitem>
+                    <listitem><para><methodname>getErrors($name = null)</methodname></para></listitem>
 
-                    <listitem><para><code>getMessages($name = null)</code></para></listitem>
+                    <listitem><para><methodname>getMessages($name = null)</methodname></para></listitem>
                 </itemizedlist>
             </listitem>
 
             <listitem><para>Rendering:</para>
                 <itemizedlist>
                     <listitem>
-                        <para><code>setView(Zend_View_Interface $view = null)</code></para>
+                        <para><methodname>setView(Zend_View_Interface $view = null)</methodname></para>
                     </listitem>
 
-                    <listitem><para><code>getView()</code></para></listitem>
+                    <listitem><para><methodname>getView()</methodname></para></listitem>
 
                     <listitem>
-                        <para><code>addDecorator($decorator, $options = null)</code></para>
+                        <para><methodname>addDecorator($decorator, $options = null)</methodname></para>
                     </listitem>
 
-                    <listitem><para><code>addDecorators(array $decorators)</code></para></listitem>
+                    <listitem><para><methodname>addDecorators(array $decorators)</methodname></para></listitem>
 
-                    <listitem><para><code>setDecorators(array $decorators)</code></para></listitem>
+                    <listitem><para><methodname>setDecorators(array $decorators)</methodname></para></listitem>
 
-                    <listitem><para><code>getDecorator($name)</code></para></listitem>
+                    <listitem><para><methodname>getDecorator($name)</methodname></para></listitem>
 
-                    <listitem><para><code>getDecorators()</code></para></listitem>
+                    <listitem><para><methodname>getDecorators()</methodname></para></listitem>
 
-                    <listitem><para><code>removeDecorator($name)</code></para></listitem>
+                    <listitem><para><methodname>removeDecorator($name)</methodname></para></listitem>
 
-                    <listitem><para><code>clearDecorators()</code></para></listitem>
+                    <listitem><para><methodname>clearDecorators()</methodname></para></listitem>
 
                     <listitem>
-                        <para><code>render(Zend_View_Interface $view = null)</code></para>
+                        <para><methodname>render(Zend_View_Interface $view = null)</methodname></para>
                     </listitem>
                 </itemizedlist>
             </listitem>
@@ -1703,15 +1703,15 @@ $messages = $form->getMessages('username');
                 <itemizedlist>
                     <listitem>
                         <para>
-                            <code>setTranslator(Zend_Translate_Adapter $translator = null)</code>
+                            <methodname>setTranslator(Zend_Translate_Adapter $translator = null)</methodname>
                         </para>
                     </listitem>
 
-                    <listitem><para><code>getTranslator()</code></para></listitem>
+                    <listitem><para><methodname>getTranslator()</methodname></para></listitem>
 
-                    <listitem><para><code>setDisableTranslator($flag)</code></para></listitem>
+                    <listitem><para><methodname>setDisableTranslator($flag)</methodname></para></listitem>
 
-                    <listitem><para><code>translatorIsDisabled()</code></para></listitem>
+                    <listitem><para><methodname>translatorIsDisabled()</methodname></para></listitem>
                 </itemizedlist>
             </listitem>
         </itemizedlist>
@@ -1722,7 +1722,7 @@ $messages = $form->getMessages('username');
 
         <para>
             <classname>Zend_Form</classname> is fully configurable via
-            <code>setOptions()</code> and <code>setConfig()</code> (or by
+            <methodname>setOptions()</methodname> and <methodname>setConfig()</methodname> (or by
             passing options or a <classname>Zend_Config</classname> object to the
             constructor). Using these methods, you can specify form elements,
             display groups, decorators, and metadata.
@@ -1733,7 +1733,7 @@ $messages = $form->getMessages('username');
             <classname>Zend_Form</classname> method, then the value provided will be
             passed to that method. If the accessor does not exist, the key is
             assumed to reference an attribute, and will be passed to
-            <code>setAttrib()</code>.
+            <methodname>setAttrib()</methodname>.
         </para>
 
         <para>
@@ -1743,17 +1743,17 @@ $messages = $form->getMessages('username');
         <itemizedlist>
             <listitem><para>
                     <code>prefixPaths</code> will be passed to
-                    <code>addPrefixPaths()</code>
+                    <methodname>addPrefixPaths()</methodname>
             </para></listitem>
 
             <listitem><para>
                 <code>elementPrefixPaths</code> will be passed to
-                <code>addElementPrefixPaths()</code>
+                <methodname>addElementPrefixPaths()</methodname>
             </para></listitem>
 
             <listitem><para>
                 <code>displayGroupPrefixPaths</code> will be passed to
-                <code>addDisplayGroupPrefixPaths()</code>
+                <methodname>addDisplayGroupPrefixPaths()</methodname>
             </para></listitem>
 
             <listitem>
@@ -1859,7 +1859,7 @@ decorators.form.decorator = "Form"
 
         <para>
             The most typical use case would be to use the
-            <code>init()</code> method to setup specific form elements and
+            <methodname>init()</methodname> method to setup specific form elements and
             configuration:
         </para>
 
@@ -1928,7 +1928,7 @@ $form = new My_Form_Login();
         <para>
             Another common reason for extension is to define a set of
             default decorators. You can do this by overriding the
-            <code>loadDefaultDecorators()</code> method:
+            <methodname>loadDefaultDecorators()</methodname> method:
         </para>
 
         <programlisting language="php"><![CDATA[

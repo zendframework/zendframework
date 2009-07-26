@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16831 -->
+<!-- EN-Revision: 16885 -->
 <appendix id="coding-standard">
   <title>Zend Framework PHP 標準コーディング規約</title>
     <sect1 id="coding-standard.overview">
@@ -1032,6 +1032,9 @@ switch ($numPeople) {
  *
  * LICENSE: ライセンスに関する情報
  *
+ * @category   Zend
+ * @package    Zend_Magic
+ * @subpackage Wand
  * @copyright  2008 Zend Technologies
  * @license    http://framework.zend.com/license   BSD License
  * @version    $Id:$
@@ -1039,6 +1042,23 @@ switch ($numPeople) {
  * @since      File available since Release 1.5.0
 */
 ]]></programlisting>
+
+                <para>
+                    <property>@category</property> アノテーションの値は "Zend" でなければなりません。
+                </para>
+
+                <para>
+                    <property>@package</property> アノテーションも必須で、
+                    ファイルに含まれるクラスのコンポーネント名と同じでなければなりません。
+                    一般的には、これは "Zend" プレフィックスとコンポーネント名のふたつの部分からなります。
+                </para>
+
+                <para>
+                    <property>@subpackage</property> アノテーションはオプションです。
+                    指定する場合は、サブコンポーネント名からクラスのプレフィックスを除いたものとしなければなりません。
+                    上の例の場合は、ファイルに含まれるクラス名が "Zend_Magic_Wand" であるか、
+                    そのクラス名をプレフィックスの一部として使っているのでしょう。
+                </para>
             </sect3>
 
             <sect3 id="coding-standards.inline-documentation.classes">
@@ -1055,6 +1075,9 @@ switch ($numPeople) {
  *
  * クラスについての長い説明 (もしあれば)...
  *
+ * @category   Zend
+ * @package    Zend_Magic
+ * @subpackage Wand
  * @copyright  2008 Zend Technologies
  * @license    http://framework.zend.com/license   BSD License
  * @version    Release: @package_version@
@@ -1063,6 +1086,23 @@ switch ($numPeople) {
  * @deprecated Class deprecated in Release 2.0.0
  */
 ]]></programlisting>
+
+                <para>
+                    <property>@category</property> アノテーションの値は "Zend" でなければなりません。
+                </para>
+
+                <para>
+                    <property>@package</property> アノテーションも必須で、
+                    そのクラスが属するコンポーネントの名前と同じでなければなりません。
+                    一般的には、これは "Zend" プレフィックスとコンポーネント名のふたつの部分からなります。
+                </para>
+
+                <para>
+                    <property>@subpackage</property> アノテーションはオプションです。
+                    指定する場合は、サブコンポーネント名からクラスのプレフィックスを除いたものとしなければなりません。
+                    上の例の場合は、ファイルに含まれるクラス名が "Zend_Magic_Wand" であるか、
+                    そのクラス名をプレフィックスの一部として使っているのでしょう。
+                </para>
             </sect3>
 
             <sect3 id="coding-standards.inline-documentation.functions">

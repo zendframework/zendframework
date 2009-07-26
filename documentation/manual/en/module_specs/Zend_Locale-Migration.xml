@@ -91,7 +91,7 @@
                 <methodname>disableCache()</methodname> method.
             </para>
 
-            <example id="zend.locale.migration.fromonesixtooneseven.example">
+            <example id="zend.locale.migration.fromoneseventooneeight.example">
                 <title>Disabling default caching</title>
 
                 <programlisting language="php"><![CDATA[

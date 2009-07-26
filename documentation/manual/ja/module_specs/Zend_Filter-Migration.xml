@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 17095 -->
+<sect1 id="zend.filter.migration">
+    <title>前バージョンからの移行</title>
+
+    <para>
+        この章は、主に<classname>Zend_Filter</classname>でなされる下位互換性破壊を文書化して、
+        前バージョンからの移行を手伝う役目を果たさなければなりません。
+    </para>
+
+    <sect2 id="zend.filter.migration.zf2105">
+        <title>バージョン 1.9以前からの移行</title>
+
+        <para>
+            1.9のリリース以前は、<classname>Zend_Filter</classname>では、
+            static <methodname>get()</methodname>メソッドを使うことができました。
+            リリース1.9と同時に、このメソッドは、より描写的な
+            <methodname>filterStatic()</methodname>に名前を変更されました。
+            古い <methodname>get()</methodname> メソッドは非推奨に区分されます。
+        </para>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

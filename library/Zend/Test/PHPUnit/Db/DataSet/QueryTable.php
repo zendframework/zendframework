@@ -65,4 +65,22 @@ class Zend_Test_PHPUnit_Db_DataSet_QueryTable extends PHPUnit_Extensions_Databas
             $this->data = $stmt->fetchAll(Zend_Db::FETCH_ASSOC);
         }
     }
+
+    /**
+     * Create Table Metadata
+     */
+    protected function createTableMetaData()
+    {
+        if ($this->tableMetaData === NULL)
+        {
+            $this->loadData();
+            $keys = array();
+            if(count($this->data) > 0) {
+                $keys = array_keys($this->data[0]);
+            }
+            $this->tableMetaData = new PHPUnit_Extensions_Database_DataSet_DefaultTableMetaData(
+                $this->tableName, $keys
+            );
+        }
+    }
 }

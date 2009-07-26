@@ -103,8 +103,25 @@ class Zend_Test_PHPUnit_Db_DataSet_QueryTableTest extends Zend_Test_PHPUnit_Db_D
         $this->decorateConnectionGetConnectionWith($adapterMock);
 
         $queryTable = new Zend_Test_PHPUnit_Db_DataSet_QueryTable("foo", $fixtureSql, $this->connectionMock);
-        $queryTable->getRowCount();
-        $queryTable->getRowCount();
+        $this->assertEquals(1, $queryTable->getRowCount());
+        $this->assertEquals(1, $queryTable->getRowCount());
         $row = $queryTable->getRow(0);
+        $this->assertEquals(array('foo' => 'bar'), $row);
+    }
+
+    public function testQueryTableWithoutRows()
+    {
+        $statementMock = new Zend_Test_DbStatement();
+        $adapterMock = new Zend_Test_DbAdapter();
+        $adapterMock->appendStatementToStack($statementMock);
+
+        $this->decorateConnectionGetConnectionWith($adapterMock);
+        $queryTable = new Zend_Test_PHPUnit_Db_DataSet_QueryTable("foo", null, $this->connectionMock);
+
+        $metadata = $queryTable->getTableMetaData();
+        $this->assertType('PHPUnit_Extensions_Database_DataSet_ITableMetaData', $metadata);
+        $this->assertEquals(array(), $metadata->getColumns());
+        $this->assertEquals(array(), $metadata->getPrimaryKeys());
+        $this->assertEquals("foo", $metadata->getTableName());
     }
 }

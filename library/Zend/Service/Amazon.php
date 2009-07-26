@@ -21,6 +21,10 @@
  * @version    $Id$
  */
 
+/**
+ * @see Zend_Rest_Client
+ */
+require_once 'Zend/Rest/Client.php';
 
 /**
  * @category   Zend
@@ -39,6 +43,16 @@ class Zend_Service_Amazon
     public $appId;
 
     /**
+     * @var string
+     */ 
+    protected $_secretKey = null;
+
+    /**
+     * @var string
+     */
+    protected $_baseUri = null;
+
+    /**
      * List of Amazon Web Service base URLs, indexed by country code
      *
      * @var array
@@ -55,7 +69,7 @@ class Zend_Service_Amazon
      *
      * @var Zend_Rest_Client
      */
-    protected $_rest;
+    protected $_rest = null;
 
 
     /**
@@ -66,11 +80,12 @@ class Zend_Service_Amazon
      * @throws Zend_Service_Exception
      * @return Zend_Service_Amazon
      */
-    public function __construct($appId, $countryCode = 'US')
+    public function __construct($appId, $countryCode = 'US', $secretKey = null)
     {
         $this->appId = (string) $appId;
-        $countryCode = (string) $countryCode;
+        $this->_secretKey = $secretKey;
 
+        $countryCode = (string) $countryCode;
         if (!isset($this->_baseUriList[$countryCode])) {
             /**
              * @see Zend_Service_Exception
@@ -79,11 +94,7 @@ class Zend_Service_Amazon
             throw new Zend_Service_Exception("Unknown country code: $countryCode");
         }
 
-        /**
-         * @see Zend_Rest_Client
-         */
-        require_once 'Zend/Rest/Client.php';
-        $this->_rest = new Zend_Rest_Client($this->_baseUriList[$countryCode]);
+        $this->_baseUri = $this->_baseUriList[$countryCode];
     }
 
 
@@ -97,10 +108,13 @@ class Zend_Service_Amazon
      */
     public function itemSearch(array $options)
     {
+        $client = $this->getRestClient();
+        $client->setUri($this->_baseUri);
+
         $defaultOptions = array('ResponseGroup' => 'Small');
         $options = $this->_prepareOptions('ItemSearch', $options, $defaultOptions);
-        $this->_rest->getHttpClient()->resetParameters();
-        $response = $this->_rest->restGet('/onca/xml', $options);
+        $client->getHttpClient()->resetParameters();
+        $response = $client->restGet('/onca/xml', $options);
 
         if ($response->isError()) {
             /**
@@ -134,19 +148,23 @@ class Zend_Service_Amazon
      */
     public function itemLookup($asin, array $options = array())
     {
-        $defaultOptions = array('IdType' => 'ASIN', 'ResponseGroup' => 'Small');
+        $client = $this->getRestClient();
+        $client->setUri($this->_baseUri);
+        $client->getHttpClient()->resetParameters();
+
+        $defaultOptions = array('ResponseGroup' => 'Small');
         $options['ItemId'] = (string) $asin;
         $options = $this->_prepareOptions('ItemLookup', $options, $defaultOptions);
-        $this->_rest->getHttpClient()->resetParameters();
-        $response = $this->_rest->restGet('/onca/xml', $options);
+        $response = $client->restGet('/onca/xml', $options);
 
         if ($response->isError()) {
             /**
              * @see Zend_Service_Exception
              */
             require_once 'Zend/Service/Exception.php';
-            throw new Zend_Service_Exception('An error occurred sending request. Status code: '
-                                           . $response->getStatus());
+            throw new Zend_Service_Exception(
+                'An error occurred sending request. Status code: ' . $response->getStatus()
+            );
         }
 
         $dom = new DOMDocument();
@@ -179,7 +197,22 @@ class Zend_Service_Amazon
      */
     public function getRestClient()
     {
+        if($this->_rest === null) {
+            $this->_rest = new Zend_Rest_Client();
+        }
         return $this->_rest;
+    }
+
+    /**
+     * Set REST client
+     *
+     * @param Zend_Rest_Client
+     * @return Zend_Service_Amazon
+     */
+    public function setRestClient(Zend_Rest_Client $client)
+    {
+        $this->_rest = $client;
+        return $this;
     }
 
 
@@ -193,9 +226,10 @@ class Zend_Service_Amazon
      */
     protected function _prepareOptions($query, array $options, array $defaultOptions)
     {
-        $options['SubscriptionId'] = $this->appId;
+        $options['AWSAccessKeyId'] = $this->appId;
         $options['Service']        = 'AWSECommerceService';
         $options['Operation']      = (string) $query;
+        $options['Version']        = '2005-10-05';
 
         // de-canonicalize out sort key
         if (isset($options['ResponseGroup'])) {
@@ -208,7 +242,53 @@ class Zend_Service_Amazon
         }
 
         $options = array_merge($defaultOptions, $options);
+
+        if($this->_secretKey !== null) {
+            $options['Timestamp'] = gmdate("Y-m-d\TH:i:s\Z");;
+            ksort($options);
+            $options['Signature'] = self::computeSignature($this->_baseUri, $this->_secretKey, $options);
+        }
+
         return $options;
+    }
+
+    /**
+     * Compute Signature for Authentication with Amazon Product Advertising Webservices
+     *
+     * @param  string $baseUri
+     * @param  string $secretKey
+     * @param  array $options
+     * @return string
+     */
+    static public function computeSignature($baseUri, $secretKey, array $options)
+    {
+        require_once "Zend/Crypt/Hmac.php";
+
+        $signature = self::buildRawSignature($baseUri, $options);
+        return base64_encode(
+            Zend_Crypt_Hmac::compute($secretKey, 'sha256', $signature, Zend_Crypt_Hmac::BINARY)
+        );
+    }
+
+    /**
+     * Build the Raw Signature Text
+     *
+     * @param  string $baseUri
+     * @param  array $options
+     * @return string
+     */
+    static public function buildRawSignature($baseUri, $options)
+    {
+        ksort($options);
+        $params = array();
+        foreach($options AS $k => $v) {
+            $params[] = $k."=".rawurlencode($v);
+        }
+
+        return sprintf("GET\n%s\n/onca/xml\n%s",
+            str_replace('http://', '', $baseUri),
+            implode("&", $params)
+        );
     }
 
 

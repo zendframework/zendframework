@@ -41,15 +41,17 @@
             </itemizedlist>
         </para>
         <para>
-            In order to use <classname>Zend_Service_Amazon</classname>, you should already have an Amazon developer API key. To
-            get a key and for more information, please visit the
-            <ulink url="http://www.amazon.com/gp/aws/landing.html">Amazon Web Services</ulink> web site.
+            In order to use <classname>Zend_Service_Amazon</classname>, you should already have an Amazon developer API key
+            aswell as a secret key. To get a key and for more information, please visit the
+            <ulink url="http://aws.amazon.com/">Amazon Web Services</ulink> web site. As of August 15th, 2009 you can
+            only use the Amazon Product Advertising API through <classname>Zend_Service_Amazon</classname>, when specifying
+            the additional secret key.
         </para>
         <note>
             <title>Attention</title>
             <para>
-                Your Amazon developer API key is linked to your Amazon identity,
-                so take appropriate measures to keep your API key private.
+                Your Amazon developer API and secret keys are linked to your Amazon identity,
+                so take appropriate measures to keep them private.
             </para>
         </note>
         <example id="zend.service.amazon.introduction.example.itemsearch">
@@ -58,7 +60,7 @@
                 In this example, we search for PHP books at Amazon and loop through the results, printing them.
             </para>
             <programlisting language="php"><![CDATA[
-$amazon = new Zend_Service_Amazon('AMAZON_API_KEY');
+$amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'US', 'AMAZON_SECRET_KEY');
 $results = $amazon->itemSearch(array('SearchIndex' => 'Books',
                                      'Keywords' => 'php'));
 foreach ($results as $result) {
@@ -73,7 +75,7 @@ foreach ($results as $result) {
                 resembles the Fluent Interface design pattern.
             </para>
             <programlisting language="php"><![CDATA[
-$query = new Zend_Service_Amazon_Query('AMAZON_API_KEY');
+$query = new Zend_Service_Amazon_Query('AMAZON_API_KEY', 'US, 'AMAZON_SECRET_KEY');
 $query->category('Books')->Keywords('PHP');
 $results = $query->search();
 foreach ($results as $result) {
@@ -93,7 +95,7 @@ foreach ($results as $result) {
             <title>Choosing an Amazon Web Service Country</title>
             <programlisting language="php"><![CDATA[
 // Connect to Amazon in Japan
-$amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'JP');
+$amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'JP', 'AMAZON_SECRET_KEY');
 ]]></programlisting>
         </example>
         <note>
@@ -113,7 +115,7 @@ $amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'JP');
         <example id="zend.service.amazon.itemlookup.example.asin">
             <title>Looking up a Specific Amazon Item by ASIN</title>
             <programlisting language="php"><![CDATA[
-$amazon = new Zend_Service_Amazon('AMAZON_API_KEY');
+$amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'US', 'AMAZON_SECRET_KEY');
 $item = $amazon->itemLookup('B0000A432X');
 ]]></programlisting>
         </example>
@@ -140,7 +142,7 @@ $item = $amazon->itemLookup('B0000A432X');
         <example id="zend.service.amazon.itemsearch.example.basic">
             <title>Performing Amazon Item Searches</title>
             <programlisting language="php"><![CDATA[
-$amazon = new Zend_Service_Amazon('AMAZON_API_KEY');
+$amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'US', 'AMAZON_SECRET_KEY');
 $results = $amazon->itemSearch(array('SearchIndex' => 'Books',
                                      'Keywords' => 'php'));
 foreach ($results as $result) {
@@ -155,7 +157,7 @@ foreach ($results as $result) {
                 in the response.
             </para>
             <programlisting language="php"><![CDATA[
-$amazon = new Zend_Service_Amazon('AMAZON_API_KEY');
+$amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'US', 'AMAZON_SECRET_KEY');
 $results = $amazon->itemSearch(array(
     'SearchIndex'   => 'Books',
     'Keywords'      => 'php',
@@ -201,7 +203,7 @@ foreach ($results as $result) {
                     respective values:
                 </para>
                 <programlisting language="php"><![CDATA[
-$query = new Zend_Service_Amazon_Query('MY_API_KEY');
+$query = new Zend_Service_Amazon_Query('MY_API_KEY', 'US', 'AMAZON_SECRET_KEY');
 $query->Category('Books')->Keywords('PHP');
 $results = $query->search();
 foreach ($results as $result) {

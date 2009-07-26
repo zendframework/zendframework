@@ -80,9 +80,21 @@ class Zend_Service_Amazon_OnlineTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->_amazon = new Zend_Service_Amazon(constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID'));
+        if(!defined('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID') || !defined('TESTS_ZEND_SERVICE_AMAZON_ONLINE_SECRETKEY')) {
+            $this->markTestSkipped('Constants AccessKeyId and SecretKey have to be set.');
+        }
 
-        $this->_query = new Zend_Service_Amazon_Query(constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID'));
+        $this->_amazon = new Zend_Service_Amazon(
+            TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID,
+            'US',
+            TESTS_ZEND_SERVICE_AMAZON_ONLINE_SECRETKEY
+        );
+
+        $this->_query = new Zend_Service_Amazon_Query(
+            TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID,
+            'US',
+            TESTS_ZEND_SERVICE_AMAZON_ONLINE_SECRETKEY
+        );
 
         $this->_httpClientAdapterSocket = new Zend_Http_Client_Adapter_Socket();
 
@@ -96,7 +108,7 @@ class Zend_Service_Amazon_OnlineTest extends PHPUnit_Framework_TestCase
 
     /**
      * Ensures that itemSearch() works as expected when searching for PHP books
-     *
+     * @group ItemSearchPhp
      * @return void
      */
     public function testItemSearchBooksPhp()

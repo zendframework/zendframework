@@ -145,4 +145,75 @@ class Zend_Service_Amazon_OfflineTest extends PHPUnit_Framework_TestCase
 
         $similarproduct = new Zend_Service_Amazon_SimilarProduct($product);
     }
+
+    public function dataSignatureEncryption()
+    {
+        return array(
+            array(
+                'http://webservices.amazon.com',
+                array(
+                    'Service' => 'AWSECommerceService',
+                    'AWSAccessKeyId' => '00000000000000000000',
+                    'Operation' => 'ItemLookup',
+                    'ItemId' => '0679722769',
+                    'ResponseGroup' => 'ItemAttributes,Offers,Images,Reviews',
+                    'Version' => '2009-01-06',
+                    'Timestamp' => '2009-01-01T12:00:00Z',
+                ),
+                "GET\n".
+                "webservices.amazon.com\n".
+                "/onca/xml\n".
+                "AWSAccessKeyId=00000000000000000000&ItemId=0679722769&Operation=I".
+                "temLookup&ResponseGroup=ItemAttributes%2COffers%2CImages%2CReview".
+                "s&Service=AWSECommerceService&Timestamp=2009-01-01T12%3A00%3A00Z&".
+                "Version=2009-01-06",
+                'Nace%2BU3Az4OhN7tISqgs1vdLBHBEijWcBeCqL5xN9xg%3D'
+            ),
+            array(
+                'http://ecs.amazonaws.co.uk',
+                array(
+                    'Service' => 'AWSECommerceService',
+                    'AWSAccessKeyId' => '00000000000000000000',
+                    'Operation' => 'ItemSearch',
+                    'Actor' => 'Johnny Depp',
+                    'ResponseGroup' => 'ItemAttributes,Offers,Images,Reviews,Variations',
+                    'Version' => '2009-01-01',
+                    'SearchIndex' => 'DVD',
+                    'Sort' => 'salesrank',
+                    'AssociateTag' => 'mytag-20',
+                    'Timestamp' => '2009-01-01T12:00:00Z',
+                ),
+                "GET\n".
+                "ecs.amazonaws.co.uk\n".
+                "/onca/xml\n".
+                "AWSAccessKeyId=00000000000000000000&Actor=Johnny%20Depp&Associate".
+                "Tag=mytag-20&Operation=ItemSearch&ResponseGroup=ItemAttributes%2C".
+                "Offers%2CImages%2CReviews%2CVariations&SearchIndex=DVD&Service=AW".
+                "SECommerceService&Sort=salesrank&Timestamp=2009-01-01T12%3A00%3A0".
+                "0Z&Version=2009-01-01",
+                'TuM6E5L9u%2FuNqOX09ET03BXVmHLVFfJIna5cxXuHxiU%3D',
+            ),
+        );
+    }
+
+    /**
+     * Checking if signature Encryption due on August 15th for Amazon Webservice API is working correctly.
+     *
+     * @dataProvider dataSignatureEncryption
+     * @group ZF-7033
+     */
+    public function testSignatureEncryption($baseUri, $params, $expectedStringToSign, $expectedSignature)
+    {
+        $this->assertEquals(
+            $expectedStringToSign,
+            Zend_Service_Amazon::buildRawSignature($baseUri, $params)
+        );
+
+        $this->assertEquals(
+            $expectedSignature,
+            rawurlencode(Zend_Service_Amazon::computeSignature(
+                $baseUri, '1234567890', $params
+            ))
+        );
+    }
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 16470 -->
+<!-- EN-Revision: 16917 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.config.adapters.ini">
     <title>Zend_Config_Ini</title>
@@ -35,7 +35,7 @@
         <title>Séparateur de clé</title>
         <para>
             Par défaut, le séparateur de clé est le caractère point (<emphasis>.</emphasis>),
-            cependant cela peut être changé en changeant la clé <emphasis>nestSeparator</emphasis>
+            cependant cela peut être changé en changeant la clé <property>nestSeparator</property>
             de <varname>$options</varname>
             en construisant l'objet
             <classname>Zend_Config_Ini</classname>. Par exemple&#160;:
@@ -124,20 +124,24 @@ echo $config->database->params->dbname; // affiche "dbname"
                         </entry>
                     </row>
                     <row>
-                        <entry><varname>$options = false</varname></entry>
+                        <entry>
+                            <varname>$options</varname> (par défault <constant>FALSE</constant>)
+                        </entry>
                         <entry>
                             Tableau d'options. Les clés suivantes sont supportées&#160;:
                             <itemizedlist>
                                 <listitem>
-                                    <para><emphasis>allowModifications</emphasis> : Mettre à
-                                    <constant>TRUE</constant> pour permettre la modification du
-                                    fichier chargé. Par défaut à <constant>FALSE</constant>.
+                                    <para><emphasis><property>allowModifications</property></emphasis>&#160;:
+                                    Mettre à <constant>TRUE</constant> pour permettre la
+                                    modification du fichier chargé. Par défaut à
+                                    <constant>FALSE</constant>.
                                     </para>
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        <emphasis>nestSeparator</emphasis> : Caractère à utiliser
-                                        en tant que séparateur d'imbrication. Par défaut ".".
+                                        <emphasis><property>nestSeparator</property></emphasis>&#160;:
+                                        Caractère à utiliser en tant que séparateur d'imbrication.
+                                        Par défaut ".".
                                     </para>
                                 </listitem>
                             </itemizedlist>

@@ -193,10 +193,11 @@ $config = new Zend_Config_Xml($string, 'staging');
         <title>Espace de noms XML de Zend_Config</title>
 
         <para>
-            <classname>Zend_Config</classname> possède son propre espace de noms, qui ajoute
-            des fonctionnalités additionnelles lors du processus d'analyse. Pour tirer avantage
-            de celui-ci, vous devez définir l'espace de noms avec l'<acronym>URI</acronym>
-            <filename>http://framework.zend.com/xml/zend-config-xml/1.0/</filename> dans
+            <classname>Zend_Config</classname> possède son propre espace de noms
+            <acronym>XML</acronym>, qui ajoute des fonctionnalités additionnelles lors du
+            processus d'analyse. Pour tirer avantage de celui-ci, vous devez définir l'espace
+            de noms avec l'<acronym>URI</acronym>
+            <filename>http://framework.zend.com/xml/zesnd-config-xml/1.0/</filename> dans
             votre noeud racine de configuration.
         </para>
 

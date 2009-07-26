@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16015 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.actionhelpers.flashmessenger">
     <title>FlashMessenger</title>
@@ -8,13 +8,14 @@
         <title>Introduction</title>
 
         <para>
-            L'aide <code>FlashMessenger</code> vous permet de fournir les messages dont
+            L'aide <emphasis>FlashMessenger</emphasis> vous permet de fournir les messages dont
             l'utilisateur pourrait avoir besoin dans la requête suivante. Pour accomplir ceci,
-            <code>FlashMessenger</code> utilise <classname>Zend_Session_Namespace</classname> pour
+            <emphasis>FlashMessenger</emphasis> utilise
+            <classname>Zend_Session_Namespace</classname> pour
             stocker les messages à retrouver dans la prochaine requête. C'est généralement une
             bonne idée si vous planifiez d'utiliser <classname>Zend_Session</classname> ou
             <classname>Zend_Session_Namespace</classname>, que vous initialisez avec
-            <classname>Zend_Session::start()</classname> dans votre fichier d'amorçage. (Reportez
+            <methodname>Zend_Session::start()</methodname> dans votre fichier d'amorçage. (Reportez
             vous à la documentation de
             <link linkend="zend.session.advanced_usage.starting_a_session">Zend_Session</link>pour
             plus de détails sur son utilisation.)
@@ -26,9 +27,9 @@
 
         <para>
             L'exemple ci-dessous vous montre l'utilisation du flash messenger dans sa forme
-            la plus basique. Quand l'action <code>/some/my</code> est appelée, il ajoute le message
-            "Sauvegarde réalisée&#160;!". Une requête suivante vers l'action
-            <code>/some/my-next-request</code> le retrouvera (ainsi que le détruira).
+            la plus basique. Quand l'action <filename>/some/my</filename> est appelée, il ajoute
+            le message "Sauvegarde réalisée&#160;!". Une requête suivante vers l'action
+            <filename>/some/my-next-request</filename> le retrouvera (ainsi que le détruira).
         </para>
 
         <programlisting language="php"><![CDATA[

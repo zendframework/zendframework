@@ -152,4 +152,20 @@ if ($validator->isValid($username)) {
 $validator = new Zend_Validate_Db_RecordExists('users', 'id', null, $dbAdapter);
 ]]></programlisting>
     </sect3>
+    
+    <sect3 id="zend.validate.db.database-schemas">
+        <title>Database Schemas</title>
+
+        <para>
+            You can specify a schema within your database for adapters such as
+            PostgreSQL and DB/2 by simply supplying an array with 
+            <code>table</code> and <code>schema</code> keys. As in the example 
+            below:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_Db_RecordExists(array('table' => 'users',
+                                                     'schema' => 'my'), 'id');
+]]></programlisting>
+    </sect3>
 </sect2>

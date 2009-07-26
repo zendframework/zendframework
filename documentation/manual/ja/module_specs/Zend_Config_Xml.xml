@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16924 -->
+<!-- EN-Revision: 16945 -->
 <sect1 id="zend.config.adapters.xml">
     <title>Zend_Config_Xml</title>
     <para>

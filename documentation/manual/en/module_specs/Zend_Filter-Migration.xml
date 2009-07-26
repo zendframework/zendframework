@@ -17,7 +17,7 @@
             the usage of the static <methodname>get()</methodname> method. As with
             release 1.9 this method has been renamed to
             <methodname>filterStatic()</methodname> to be more descriptive. The
-            old <methodname>get()</methodname> method is marked as depreciated.
+            old <methodname>get()</methodname> method is marked as deprecated.
         </para>
     </sect2>
 </sect1>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15998 -->
+<!-- EN-Revision: 16924 -->
 <sect1 id="zend.config.adapters.xml">
     <title>Zend_Config_Xml</title>
     <para>
@@ -164,6 +164,53 @@ $string = <<<EOT
 EOT;
 
 $config = new Zend_Config_Xml($string, 'staging');
+]]></programlisting>
+    </note>
+<note>
+        <title>Zend_Config XML 名前空間</title>
+        <para>
+            <classname>Zend_Config</classname> は独自の <acronym>XML</acronym>
+            名前空間を持っており、パース処理に機能を追加することができます。
+            これを使用するには、名前空間 <acronym>URI</acronym>
+            <filename>http://framework.zend.com/xml/zend-config-xml/1.0/</filename>
+            をルートノードで定義しなければなりません。
+        </para>
+
+        <para>
+            この名前空間を有効にすると、<acronym>PHP</acronym>
+            の定数を設定ファイル内で使用できるようになります。
+            <emphasis>extends</emphasis> 属性が新しい名前空間に移動し、
+            <constant>NULL</constant> 名前空間では非推奨となります。
+            これは、Zend Framework 2.0 で完全に削除される予定です。
+        </para>
+        <programlisting language="xml"><![CDATA[
+$string = <<<EOT
+<?xml version="1.0"?>
+<config xmlns:zf="http://framework.zend.com/xml/zend-config-xml/1.0/">
+    <production>
+        <includePath>
+            <zf:const zf:name="APPLICATION_PATH"/>/library</includePath>
+        <db>
+            <adapter value="pdo_mysql"/>
+            <params>
+                <host value="db.example.com"/>
+            </params>
+        </db>
+    </production>
+    <staging zf:extends="production">
+        <db>
+            <params>
+                <host value="dev.example.com"/>
+            </params>
+        </db>
+    </staging>
+</config>
+EOT;
+
+define('APPLICATION_PATH', dirname(__FILE__));
+$config = new Zend_Config_Xml($string, 'staging');
+
+echo $config->includePath; // "/var/www/something/library" と表示します
 ]]></programlisting>
     </note>
 </sect1>

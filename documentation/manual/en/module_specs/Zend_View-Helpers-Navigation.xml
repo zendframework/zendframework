@@ -11,44 +11,46 @@
 
     <para>
         There are 5 built-in helpers:
+    </para>
 
-        <itemizedlist>
-            <listitem>
-                <para>
-                    <link
-                        linkend="zend.view.helpers.initial.navigation.breadcrumbs">Breadcrumbs</link>,
-                    used for rendering the path to the currently active page.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <link linkend="zend.view.helpers.initial.navigation.links">Links</link>,
-                    used for rendering navigational head links (e.g.
-                    <code>&lt;link rel="next" href="..." /&gt;</code>)
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <link linkend="zend.view.helpers.initial.navigation.menu">Menu</link>,
-                    used for rendering menus.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <link linkend="zend.view.helpers.initial.navigation.sitemap">Sitemap</link>,
-                    used for rendering sitemaps conforming to the
-                    <ulink url="http://www.sitemaps.org/protocol.php">Sitemaps XML format</ulink>.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <link
-                        linkend="zend.view.helpers.initial.navigation.navigation">Navigation</link>,
-                    used for proxying calls to other navigational helpers.
-                </para>
-            </listitem>
-        </itemizedlist>
+    <itemizedlist>
+        <listitem>
+            <para>
+                <link
+                    linkend="zend.view.helpers.initial.navigation.breadcrumbs">Breadcrumbs</link>,
+                used for rendering the path to the currently active page.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <link linkend="zend.view.helpers.initial.navigation.links">Links</link>,
+                used for rendering navigational head links (e.g.
+                <code>&lt;link rel="next" href="..." /&gt;</code>)
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <link linkend="zend.view.helpers.initial.navigation.menu">Menu</link>,
+                used for rendering menus.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <link linkend="zend.view.helpers.initial.navigation.sitemap">Sitemap</link>,
+                used for rendering sitemaps conforming to the
+                <ulink url="http://www.sitemaps.org/protocol.php">Sitemaps XML format</ulink>.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <link
+                    linkend="zend.view.helpers.initial.navigation.navigation">Navigation</link>,
+                used for proxying calls to other navigational helpers.
+            </para>
+        </listitem>
+    </itemizedlist>
 
+    <para>
         All built-in helpers extend
         <classname>Zend_View_Helper_Navigation_HelperAbstract</classname>, which
         adds integration with <link linkend="zend.acl">ACL</link> and
@@ -56,140 +58,142 @@
         implements the interface
         <classname>Zend_View_Helper_Navigation_Helper</classname>, which
         defines the following methods:
+    </para>
 
-        <itemizedlist>
-            <listitem>
-                <para>
-                    <code>{get|set}Container()</code> gets/sets the navigation
-                    container the helper should operate on by default, and
-                    <methodname>hasContainer()</methodname> checks if the helper
-                    has container registered.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <code>{get|set}Translator()</code> gets/sets the
-                    translator used for translating labels and titles, and
-                    <code>{get|set}UseTranslator()</code> controls whether
-                    the translator should be enabled. The method
-                    <methodname>hasTranslator()</methodname> checks if the helper has
-                    a translator registered.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <code>{get|set}Acl()</code>, <code>{get|set}Role()</code>,
-                    gets/sets ACL (<classname>Zend_Acl</classname>) instance and
-                    role (<type>String</type> or
-                    <classname>Zend_Acl_Role_Interface</classname>) used for
-                    filtering out pages when rendering, and
-                    <code>{get|set}UseAcl()</code> controls whether ACL should
-                    be enabled. The methods <methodname>hasAcl()</methodname> and
-                    <methodname>hasRole()</methodname> checks if the helper has an ACL
-                    instance or a role registered.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <methodname>__toString()</methodname>, magic method to ensure that
-                    helpers can be rendered by <code>echo</code>ing the
-                    helper instance directly.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <methodname>render()</methodname>, must be implemented by concrete
-                    helpers to do the actual rendering.
-                </para>
-            </listitem>
-         </itemizedlist>
+    <itemizedlist>
+        <listitem>
+            <para>
+                <code>{get|set}Container()</code> gets/sets the navigation
+                container the helper should operate on by default, and
+                <methodname>hasContainer()</methodname> checks if the helper
+                has container registered.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <code>{get|set}Translator()</code> gets/sets the
+                translator used for translating labels and titles, and
+                <code>{get|set}UseTranslator()</code> controls whether
+                the translator should be enabled. The method
+                <methodname>hasTranslator()</methodname> checks if the helper has
+                a translator registered.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <code>{get|set}Acl()</code>, <code>{get|set}Role()</code>,
+                gets/sets ACL (<classname>Zend_Acl</classname>) instance and
+                role (<type>String</type> or
+                <classname>Zend_Acl_Role_Interface</classname>) used for
+                filtering out pages when rendering, and
+                <code>{get|set}UseAcl()</code> controls whether ACL should
+                be enabled. The methods <methodname>hasAcl()</methodname> and
+                <methodname>hasRole()</methodname> checks if the helper has an ACL
+                instance or a role registered.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <methodname>__toString()</methodname>, magic method to ensure that
+                helpers can be rendered by <code>echo</code>ing the
+                helper instance directly.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <methodname>render()</methodname>, must be implemented by concrete
+                helpers to do the actual rendering.
+            </para>
+        </listitem>
+     </itemizedlist>
 
+    <para>
          In addition to the method stubs from the interface, the abstract
          class also implements the following methods:
-
-         <itemizedlist>
-            <listitem>
-                <para>
-                    <code>{get|set}Indent()</code> gets/set indentation. The
-                    setter accepts a <type>String</type> or an <code>int</code>.
-                    In the case of an <code>int</code>, the helper will use
-                    the given number of spaces for indentation. I.e.,
-                    <methodname>setIndent(4)</methodname> means 4 initial spaces of
-                    indentation. Indentation can be specified for all helpers
-                    except the Sitemap helper.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <code>{get|set}MinDepth()</code> gets/set the minimum depth
-                    a page must have to be included by the helper. Setting
-                    <constant>NULL</constant> means no minimum depth.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <code>{get|set}MaxDepth()</code> gets/set the maximum depth
-                    a page can have to be included by the helper. Setting
-                    <constant>NULL</constant> means no maximum depth.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <code>{get|set}RenderInvisible()</code> gets/set whether to
-                    render items that have been marked as invisible or not.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <methodname>__call()</methodname> is used for proxying calls to the
-                    container registered in the helper, which means you can
-                    call methods on a helper as if it was a container. See <link
-                        linkend="zend.view.helpers.initial.navigation.proxy.example">example</link>
-                    below.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <methodname>findActive($container, $minDepth, $maxDepth)</methodname>
-                    is used for finding the deepest active page in the given
-                    container. If depths are not given, the method will use
-                    the values retrieved from <methodname>getMinDepth()</methodname> and
-                    <methodname>getMaxDepth()</methodname>. The deepest active page must
-                    be between <varname>$minDepth</varname> and <varname>$axnDepth</varname>
-                    inclusively. Returns an array containing a reference to the
-                    found page instance and the depth at which the page was
-                    found.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <methodname>htmlify()</methodname> renders an <code>a</code> HTML
-                    element from a <classname>Zend_Navigation_Page</classname>
-                    instance.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <methodname>accept()</methodname> is used for determining if a page
-                    should be accepted when iterating containers. This method
-                    checks for page visibility and verifies that the helper's
-                    role is allowed access to the page's resource/privilege.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <code>static setDefaultAcl()</code> is used for setting
-                    a defualt ACL object that will be used by helpers.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <code>static setDefaultRole()</code> is used for setting
-                    a default ACL that will be used by helpers
-                </para>
-            </listitem>
-        </itemizedlist>
     </para>
+
+     <itemizedlist>
+        <listitem>
+            <para>
+                <code>{get|set}Indent()</code> gets/set indentation. The
+                setter accepts a <type>String</type> or an <code>int</code>.
+                In the case of an <code>int</code>, the helper will use
+                the given number of spaces for indentation. I.e.,
+                <methodname>setIndent(4)</methodname> means 4 initial spaces of
+                indentation. Indentation can be specified for all helpers
+                except the Sitemap helper.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <code>{get|set}MinDepth()</code> gets/set the minimum depth
+                a page must have to be included by the helper. Setting
+                <constant>NULL</constant> means no minimum depth.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <code>{get|set}MaxDepth()</code> gets/set the maximum depth
+                a page can have to be included by the helper. Setting
+                <constant>NULL</constant> means no maximum depth.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <code>{get|set}RenderInvisible()</code> gets/set whether to
+                render items that have been marked as invisible or not.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <methodname>__call()</methodname> is used for proxying calls to the
+                container registered in the helper, which means you can
+                call methods on a helper as if it was a container. See <link
+                    linkend="zend.view.helpers.initial.navigation.proxy.example">example</link>
+                below.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <methodname>findActive($container, $minDepth, $maxDepth)</methodname>
+                is used for finding the deepest active page in the given
+                container. If depths are not given, the method will use
+                the values retrieved from <methodname>getMinDepth()</methodname> and
+                <methodname>getMaxDepth()</methodname>. The deepest active page must
+                be between <varname>$minDepth</varname> and <varname>$axnDepth</varname>
+                inclusively. Returns an array containing a reference to the
+                found page instance and the depth at which the page was
+                found.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <methodname>htmlify()</methodname> renders an <code>a</code> HTML
+                element from a <classname>Zend_Navigation_Page</classname>
+                instance.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <methodname>accept()</methodname> is used for determining if a page
+                should be accepted when iterating containers. This method
+                checks for page visibility and verifies that the helper's
+                role is allowed access to the page's resource/privilege.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <code>static setDefaultAcl()</code> is used for setting
+                a defualt ACL object that will be used by helpers.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <code>static setDefaultRole()</code> is used for setting
+                a default ACL that will be used by helpers
+            </para>
+        </listitem>
+    </itemizedlist>
 
     <para>
         If a navigation container is not explicitly set in a helper using
@@ -246,14 +250,12 @@ $this->navigation()->addPage(array(
             proxies to if the proxied helper doesn't already have a translator.
         </para>
 
-        <para>
-            <note>
-                <para>
-                    There is no translation in the sitemap helper, since there
-                    are no page labels or titles involved in an XML sitemap.
-                </para>
-            </note>
-        </para>
+        <note>
+            <para>
+                There is no translation in the sitemap helper, since there
+                are no page labels or titles involved in an XML sitemap.
+            </para>
+        </note>
     </sect4>
 
     <sect4 id="zend.view.helpers.initial.navigation.acl">
@@ -299,34 +301,35 @@ $this->navigation()->addPage(array(
 
         <para>
             Notes on the setup:
-            <itemizedlist>
-                <listitem>
-                    <para>
-                        The domain for the site is <code>www.example.com</code>.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        Interesting page properties are marked with a comment.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        Unless otherwise is stated in other examples, the user
-                        is requesting the URL
-                        <code>http://www.example.com/products/server/faq/</code>,
-                        which translates to the page labeled <code>FAQ</code>
-                        under <code>Foo Server</code>.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        The assumed ACL and router setup is shown below the
-                        container setup.
-                    </para>
-                </listitem>
-            </itemizedlist>
         </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    The domain for the site is <code>www.example.com</code>.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Interesting page properties are marked with a comment.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Unless otherwise is stated in other examples, the user
+                    is requesting the URL
+                    <code>http://www.example.com/products/server/faq/</code>,
+                    which translates to the page labeled <code>FAQ</code>
+                    under <code>Foo Server</code>.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    The assumed ACL and router setup is shown below the
+                    container setup.
+                </para>
+            </listitem>
+        </itemizedlist>
 
         <programlisting language="php"><![CDATA[
 /*
@@ -782,7 +785,8 @@ Products, Foo Server, FAQ
             relation will be used. If the <varname>$page</varname> instance doesn't
             have the specified <varname>$type</varname>, the helper will look for
             a method in the helper named <code>search$rel$type</code> (e.g.
-            <methodname>searchRelNext()</methodname> or <methodname>searchRevAlternate()</methodname>).
+            <methodname>searchRelNext()</methodname> or
+            <methodname>searchRevAlternate()</methodname>).
             If such a method exists, it will be used for determining the
             <varname>$page</varname>'s relation by traversing the container.
         </para>
@@ -790,64 +794,65 @@ Products, Foo Server, FAQ
         <para>
             Not all relations can be determined by traversing the container.
             These are the relations that will be found by searching:
-            <itemizedlist>
-                <listitem>
-                    <para>
-                        <methodname>searchRelStart()</methodname>, forward 'start'
-                        relation: the first page in the container.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <methodname>searchRelNext()</methodname>, forward 'next'
-                        relation; finds the next page in the container, i.e.
-                        the page after the active page.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <methodname>searchRelPrev()</methodname>, forward 'prev'
-                        relation; finds the previous page, i.e. the page before
-                        the active page.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <methodname>searchRelChapter()</methodname>, forward 'chapter'
-                        relations; finds all pages on level 0 except the 'start'
-                        relation or the active page if it's on level 0.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <methodname>searchRelSection()</methodname>, forward 'section'
-                        relations; finds all child pages of the active page if
-                        the active page is on level 0 (a 'chapter').
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <methodname>searchRelSubsection()</methodname>, forward 'subsection'
-                        relations; finds all child pages of the active page if
-                        the active pages is on level 1 (a 'section').
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <methodname>searchRevSection()</methodname>, reverse 'section'
-                        relation; finds the parent of the active page if the
-                        active page is on level 1 (a 'section').
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <methodname>searchRevSubsection()</methodname>, reverse 'subsection'
-                        relation; finds the parent of the active page if the
-                        active page is on level 2 (a 'subsection').
-                    </para>
-                </listitem>
-            </itemizedlist>
         </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <methodname>searchRelStart()</methodname>, forward 'start'
+                    relation: the first page in the container.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <methodname>searchRelNext()</methodname>, forward 'next'
+                    relation; finds the next page in the container, i.e.
+                    the page after the active page.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <methodname>searchRelPrev()</methodname>, forward 'prev'
+                    relation; finds the previous page, i.e. the page before
+                    the active page.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <methodname>searchRelChapter()</methodname>, forward 'chapter'
+                    relations; finds all pages on level 0 except the 'start'
+                    relation or the active page if it's on level 0.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <methodname>searchRelSection()</methodname>, forward 'section'
+                    relations; finds all child pages of the active page if
+                    the active page is on level 0 (a 'chapter').
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <methodname>searchRelSubsection()</methodname>, forward 'subsection'
+                    relations; finds all child pages of the active page if
+                    the active pages is on level 1 (a 'section').
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <methodname>searchRevSection()</methodname>, reverse 'section'
+                    relation; finds the parent of the active page if the
+                    active page is on level 1 (a 'section').
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <methodname>searchRevSubsection()</methodname>, reverse 'subsection'
+                    relation; finds the parent of the active page if the
+                    active page is on level 2 (a 'subsection').
+                </para>
+            </listitem>
+        </itemizedlist>
 
         <note>
             <para>
@@ -900,97 +905,97 @@ Products, Foo Server, FAQ
             <itemizedlist>
                 <listitem>
                     <para>
-                        <classname>Zend_View_Helper_Navigation_Link::RENDER_ALTERNATE</classname>
+                        <constant>Zend_View_Helper_Navigation_Link::RENDER_ALTERNATE</constant>
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_View_Helper_Navigation_Link::RENDER_STYLESHEET</classname>
+                        <constant>Zend_View_Helper_Navigation_Link::RENDER_STYLESHEET</constant>
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_View_Helper_Navigation_Link::RENDER_START</classname>
+                        <constant>Zend_View_Helper_Navigation_Link::RENDER_START</constant>
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_View_Helper_Navigation_Link::RENDER_NEXT</classname>
+                        <constant>Zend_View_Helper_Navigation_Link::RENDER_NEXT</constant>
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_View_Helper_Navigation_Link::RENDER_PREV</classname>
+                        <constant>Zend_View_Helper_Navigation_Link::RENDER_PREV</constant>
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_View_Helper_Navigation_Link::RENDER_CONTENTS</classname>
+                        <constant>Zend_View_Helper_Navigation_Link::RENDER_CONTENTS</constant>
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_View_Helper_Navigation_Link::RENDER_INDEX</classname>
+                        <constant>Zend_View_Helper_Navigation_Link::RENDER_INDEX</constant>
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_View_Helper_Navigation_Link::RENDER_GLOSSARY</classname>
+                        <constant>Zend_View_Helper_Navigation_Link::RENDER_GLOSSARY</constant>
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_View_Helper_Navigation_Link::RENDER_COPYRIGHT</classname>
+                        <constant>Zend_View_Helper_Navigation_Link::RENDER_COPYRIGHT</constant>
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_View_Helper_Navigation_Link::RENDER_CHAPTER</classname>
+                        <constant>Zend_View_Helper_Navigation_Link::RENDER_CHAPTER</constant>
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_View_Helper_Navigation_Link::RENDER_SECTION</classname>
+                        <constant>Zend_View_Helper_Navigation_Link::RENDER_SECTION</constant>
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_View_Helper_Navigation_Link::RENDER_SUBSECTION</classname>
+                        <constant>Zend_View_Helper_Navigation_Link::RENDER_SUBSECTION</constant>
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_View_Helper_Navigation_Link::RENDER_APPENDIX</classname>
+                        <constant>Zend_View_Helper_Navigation_Link::RENDER_APPENDIX</constant>
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_View_Helper_Navigation_Link::RENDER_HELP</classname>
+                        <constant>Zend_View_Helper_Navigation_Link::RENDER_HELP</constant>
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_View_Helper_Navigation_Link::RENDER_BOOKMARK</classname>
+                        <constant>Zend_View_Helper_Navigation_Link::RENDER_BOOKMARK</constant>
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_View_Helper_Navigation_Link::RENDER_CUSTOM</classname>
+                        <constant>Zend_View_Helper_Navigation_Link::RENDER_CUSTOM</constant>
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_View_Helper_Navigation_Link::RENDER_ALL</classname>
+                        <constant>Zend_View_Helper_Navigation_Link::RENDER_ALL</constant>
                     </para>
                 </listitem>
             </itemizedlist>
         </para>
 
         <para>
-            The constants from <code>RENDER_ALTERNATE</code> to
-            <code>RENDER_BOOKMARK</code> denote standard HTML link types.
-            <code>RENDER_CUSTOM</code> denotes non-standard relations that
-            specified in pages. <code>RENDER_ALL</code> denotes standard and
+            The constants from <constant>RENDER_ALTERNATE</constant> to
+            <constant>RENDER_BOOKMARK</constant> denote standard HTML link types.
+            <constant>RENDER_CUSTOM</constant> denotes non-standard relations that
+            specified in pages. <constant>RENDER_ALL</constant> denotes standard and
             non-standard relations.
         </para>
 
@@ -1002,7 +1007,7 @@ Products, Foo Server, FAQ
            <listitem>
                <para>
                    <code>{get|set}RenderFlag()</code> gets/sets the render
-                   flag. Default is <code>RENDER_ALL</code>. See examples
+                   flag. Default is <constant>RENDER_ALL</constant>. See examples
                    below on how to set the render flag.
                </para>
            </listitem>

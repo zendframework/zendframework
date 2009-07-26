@@ -30,7 +30,7 @@
             adapter to get started with translation business.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $english = array(
     'message1' => 'message1',
     'message2' => 'message2',
@@ -51,7 +51,7 @@ $translate->addTranslation($deutsch, 'de');
             include it and look for the array. See the following example for details:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // myarray.php
 return array(
     'message1' => 'Nachricht1',
@@ -87,7 +87,7 @@ $translate = new Zend_Translate('array', '/path/to/myarray.php', 'de');
             This tool also supports you during the translation process itself.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // We accume that we have created the mo files and translated them
 $translate = new Zend_Translate('gettext', '/path/to/english.mo', 'en');
 $translate->addTranslation('/path/to/german.mo', 'de');
@@ -130,7 +130,7 @@ $translate->addTranslation('/path/to/german.mo', 'de');
             filename as key.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Getting the adapter informations
 $translate = new Zend_Translate('gettext', '/path/to/english.mo', 'en');
 print_r($translate->getAdapterInfo());
@@ -153,7 +153,7 @@ print_r($translate->getAdapterInfo());
 
         <example id="zend.translate.sourcecreation.tmx.example">
             <title>Example TMX file</title>
-            <programlisting role="xml"><![CDATA[
+            <programlisting language="xml"><![CDATA[
 <?xml version="1.0" ?>
 <!DOCTYPE tmx SYSTEM "tmx14.dtd">
 <tmx version="1.4">
@@ -172,7 +172,7 @@ print_r($translate->getAdapterInfo());
   </tu>
 ]]></programlisting>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate('tmx', 'path/to/mytranslation.tmx', 'en');
 ]]></programlisting>
         </example>
@@ -210,7 +210,7 @@ message1;Nachricht1
 message2;Nachricht2
 ]]></programlisting>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate('csv', '/path/to/mytranslation.csv', 'de');
 $translate->addTranslation('path/to/other.csv', 'fr');
 ]]></programlisting>
@@ -249,7 +249,7 @@ message2,"Nachricht,2"
 "message3,",Nachricht3
 ]]></programlisting>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate(
     'csv',
     '/path/to/mytranslation.csv',
@@ -292,7 +292,7 @@ Message_2="Nachricht 2 (de)"
 Message_3="Nachricht :3 (de)"
 ]]></programlisting>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate('ini', '/path/to/mytranslation.ini', 'de');
 $translate->addTranslation('/path/to/other.ini', 'it');
 ]]></programlisting>

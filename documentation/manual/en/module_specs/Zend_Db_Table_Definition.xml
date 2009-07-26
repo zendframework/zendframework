@@ -89,7 +89,6 @@ $definition = new Zend_Db_Table_Definition(array(
             correspond to the data model described above:
         </para>
 
-
         <example id="zend.db.table.definition.example2">
 
             <title>Interacting with the described definition</title>
@@ -119,7 +118,6 @@ foreach ($authors as $author) {
 ]]></programlisting>
 
         </example>
-
 
     </sect2>
 
@@ -202,7 +200,6 @@ foreach ($authors as $author) {
         echo '        Genre: ' . implode(', ', $genreOutputArray) . PHP_EOL;
     }
 }
-
 ]]></programlisting>
 
         </example>

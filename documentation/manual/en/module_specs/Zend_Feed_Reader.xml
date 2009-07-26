@@ -1358,7 +1358,8 @@ class My_FeedReader_Extension_JungleBooks_Feed
             'jungle', 'http://example.com/junglebooks/rss/module/1.0/'
         );
     }
-}]]></programlisting>
+}
+]]></programlisting>
 
             <para>
                 Let's repeat the last example using a custom Extension to show the

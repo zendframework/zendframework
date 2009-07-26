@@ -57,7 +57,7 @@
                 translation.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate('gettext', '/path/to/german.mo', 'de');
 $translate->plural('Car', 'Cars', $number);
 ]]></programlisting>
@@ -92,7 +92,7 @@ $translate->plural('Car', 'Cars', $number);
                 example would have to be defined like below.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate('gettext', '/path/to/german.mo', 'de');
 $translate->translate(array('Car', 'Cars', $number));
 ]]></programlisting>
@@ -113,7 +113,7 @@ $translate->translate(array('Car', 'Cars', $number));
                 messageId's are russian and not english.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate('gettext', '/path/to/german.mo', 'de');
 $translate->translate(array('Car',
                             'Cars first plural',
@@ -207,7 +207,7 @@ $translate->translate(array('Car',
                 An array with plural definitions has to look like the following example.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 array(
     'plural_0' => array(
         'plural_0 (ru)',
@@ -226,7 +226,7 @@ array(
                 with real content and translation from english source to german.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 array(
     'Car' => array(
         'Auto',
@@ -252,7 +252,7 @@ array(
                 A csv file with plural definitions has to look like the following example.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 "plural_0";"plural_0 (ru)";"plural_1 (ru)";"plural_2 (ru)";"plural_3 (ru)"
 "plural_1";
 ]]></programlisting>

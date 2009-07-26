@@ -69,7 +69,8 @@ $container = new Zend_Navigation(array(
     'minDepth'         => 1,
     'onlyActiveBranch' => true,
     'renderParents'    => false
-)); ?>]]></programlisting>
+)); ?>
+]]></programlisting>
 
         <para>
             Before release 1.9, the code snippet above would output nothing.
@@ -94,6 +95,7 @@ $container = new Zend_Navigation(array(
     <li>
         <a href="#">Studio</a>
     </li>
-</ul>]]></programlisting>
+</ul>
+]]></programlisting>
     </sect2>
 </sect1>

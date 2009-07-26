@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16845 -->
+<!-- EN-Revision: 17087 -->
 <sect1 id="zend.date.constants">
 
     <title>日付関数全般用の定数</title>
@@ -972,7 +972,7 @@ print $date->toString("'Era:GGGG='GGGG, ' Date:yy.MMMM.dd'yy.MMMM.dd");
                     <row>
                         <entry>e</entry>
                         <entry>曜日番号 (一桁)</entry>
-                        <entry>Zend_Date::WEEKDAY_NARROW</entry>
+                        <entry>Zend_Date::WEEKDAY_DIGIT</entry>
                         <entry><emphasis>4</emphasis>
                         </entry>
                     </row>

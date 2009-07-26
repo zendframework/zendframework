@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 17027 -->
 <sect1 id="zend.http.client">
     <title>導入</title>
     <para>
@@ -17,7 +17,7 @@
         <para>
             クラスのコンストラクタには、オプションの引数として URL を指定することができます
             (文字列か Zend_Uri_Http オブジェクトのどちらでも可能です)。
-            また、オプションで設定パラメータの配列を指定することもできます。
+            また、配列あるいは Zend_Config オブジェクトで設定オプションを指定することもできます。
             どちらも省略することが可能で、その場合は後から
             setUri() メソッドや setConfig() メソッドで指定します。
             <example id="zend.http.client.introduction.example-1">
@@ -33,6 +33,10 @@ $client->setUri('http://example.org');
 $client->setConfig(array(
     'maxredirects' => 0,
     'timeout'      => 30));
+
+// Zend_Config オブジェクトを使ってクライアントの設定を行うこともできます
+$config = new Zend_Config_Ini('httpclient.ini, 'secure');
+$client->setConfig($config);
 ]]></programlisting>
             </example>
 
@@ -50,8 +54,8 @@ $client->setConfig(array(
     <sect2 id="zend.http.client.configuration">
         <title>設定パラメータ</title>
         <para>
-            コンストラクタおよび setConfig() メソッドでは
-            設定パラメータの連想配列を受け取ります。
+            コンストラクタおよび setConfig() メソッドでは、
+            設定パラメータの連想配列あるいは Zend_Config オブジェクトを受け取ります。
             これらのパラメータは、設定してもしなくてもかまいません。
             すべてのパラメータにはデフォルト値があります。
             <table id="zend.http.client.configuration.table">

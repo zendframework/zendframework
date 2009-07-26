@@ -8,15 +8,16 @@
         <classname>Zend_Controller_Router_Route</classname> est la route par défaut intégrée
         dans le routeur de réécriture (RewriteRouter). Ce routeur combine les deux avantages que
         sont la simplicité d'utilisation et la flexibilité. Chaque route est définie par une
-        correspondance d'URL, statique ou dynamique, et des valeurs par défaut peuvent être
-        fournies, de même que des valeurs obligatoires.
+        correspondance d'<acronym>URL</acronym>, statique ou dynamique, et des valeurs par défaut
+        peuvent être fournies, de même que des valeurs obligatoires.
     </para>
 
     <para>
         Imaginons une application ayant besoin de posséder une page en décrivant l'auteur.
         Nous voulons que lorsque le navigateur pointe vers
-        <code>http://domaine.fr/auteur/martel</code>, la page d'informations en question puisse
-        apparaître, au sujet de "martel". La route pour une telle URL pourrait être&#160;:
+        <filename>http://domaine.fr/auteur/martel</filename>, la page d'informations en question
+        puisse apparaître, au sujet de "martel". La route pour une telle <acronym>URL</acronym>
+        pourrait être&#160;:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -32,12 +33,12 @@ $router->addRoute('user', $route);
 ]]></programlisting>
 
     <para>
-        Le premier paramètre du constructeur de
-        <classname>Zend_Controller_Router_Route</classname> est la définition de la route à
-        analyser avec l'URL. Les définitions des routes sont des parties statiques et dynamiques,
-        séparées par des slashs ("/"). Les parties statiques sont juste du texte brut&#160;:
-        <code>auteur</code>. Les dynamiques, appelées variables, sont repérées grâce à un caractère
-        deux-points (:) devant la variable&#160;: <code>:username</code>.
+        Le premier paramètre du constructeur de <classname>Zend_Controller_Router_Route</classname>
+        est la définition de la route à analyser avec l'<acronym>URL</acronym>. Les définitions
+        des routes sont des parties statiques et dynamiques, séparées par des slashs ("/").
+        Les parties statiques sont juste du texte brut&#160;: <emphasis>auteur</emphasis>. Les
+        dynamiques, appelées variables, sont repérées grâce à un caractère
+        deux-points (:) devant la variable&#160;: <emphasis>:username</emphasis>.
     </para>
 
     <note>
@@ -45,18 +46,19 @@ $router->addRoute('user', $route);
         <para>
             Pour identifier une variable dans un schéma de routage (après le deux-points), en
             théorie n'importe quel caractère fait l'affaire (sauf le slash "/"). Cependant il est
-            conseillé de n'utiliser que des caractères que PHP comprend comme étant des noms de
-            variables valides. Les implémentations futures de ce comportement peuvent changer,
-            altérant ainsi votre code.
+            conseillé de n'utiliser que des caractères que <acronym>PHP</acronym> comprend comme
+            étant des noms de variables valides. Les implémentations futures de ce comportement
+            peuvent changer, altérant ainsi votre code.
         </para>
     </note>
 
     <para>
         Cette route exemple devrait être utilisée lorsque le navigateur pointe vers
-        <code>http://domaine.fr/auteur/martel</code>, et dans un tel cas, tous les paramètres de la
-        requête seront injectés dans l'objet <classname>Zend_Controller_Request</classname> et
-        seront accessibles à travers votre <code>ProfileController</code>. Les variables retournées
-        par cet exemple peuvent être représentées par le tableau suivant&#160;:
+        <filename>http://domaine.fr/auteur/martel</filename>, et dans un tel cas, tous les
+        paramètres de la requête seront injectés dans l'objet
+        <classname>Zend_Controller_Request</classname> et
+        seront accessibles à travers votre <classname>ProfileController</classname>. Les variables
+        retournées par cet exemple peuvent être représentées par le tableau suivant&#160;:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -69,11 +71,11 @@ $values = array(
 
     <para>
         Plus tard, <classname>Zend_Controller_Dispatcher_Standard</classname> va distribuer
-        vers la méthode <code>userinfoAction()</code> de <code>ProfileController</code> (dans le
-        module par défaut) selon ces valeurs. A cet endroit, il sera possible d'accéder à toutes
-        les variables de la requête grâce à
-        <classname>Zend_Controller_Action::_getParam()</classname> ou
-        <classname>Zend_Controller_Request::getParam()</classname>&#160;:
+        vers la méthode <methodname>userinfoAction()</methodname> de
+        <classname>ProfileController</classname> (dans le module par défaut) selon ces valeurs.
+        A cet endroit, il sera possible d'accéder à toutes les variables de la requête grâce à
+        <methodname>Zend_Controller_Action::_getParam()</methodname> ou
+        <methodname>Zend_Controller_Request::getParam()</methodname>&#160;:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -121,18 +123,19 @@ $router->addRoute('archive', $route);
 ]]></programlisting>
 
         <para>
-            L'exemple ci-dessus établira une correspondance avec les URL comme
-            <code>http://domaine.fr/archive/2005</code> et <code>http://exemple.fr/archive</code>.
-            Dans ce dernier cas, la variable de l'année (<code>annee</code>) aura la valeur
-            2006.
+            L'exemple ci-dessus établira une correspondance avec les <acronym>URL</acronym> comme
+            <filename>http://domaine.fr/archive/2005</filename> et
+            <filename>http://exemple.fr/archive</filename>. Dans ce dernier cas, la variable de
+            l'année (<emphasis>annee</emphasis>) aura la valeur 2006.
         </para>
 
         <para>
             L'exemple ci-dessus injecte ainsi un paramètre représentant une année
-            (<code>annee</code>). Si aucune information de contrôleur ou d'actions n'est présente,
-            alors ceux par défaut seront utilisés (ils sont définis dans
+            (<emphasis>annee</emphasis>). Si aucune information de contrôleur ou d'actions n'est
+            présente, alors ceux par défaut seront utilisés (ils sont définis dans
             <classname>Zend_Controller_Dispatcher_Abstract</classname>). Pour que l'exemple soit
-            plus intuitif, spécifions des contrôleur/action par défaut dans notre route&#160;:
+            plus intuitif, spécifions des paires contrôleur et action par défaut dans notre
+            route&#160;:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -148,8 +151,8 @@ $router->addRoute('archive', $route);
 ]]></programlisting>
 
         <para>
-            Cette route va alors donner une distribution vers la méthode <code>showAction()</code>
-            de <code>ArchiveController</code>.
+            Cette route va alors donner une distribution vers la méthode
+            <methodname>showAction()</methodname> de <classname>ArchiveController</classname>.
         </para>
 
     </sect4>
@@ -179,10 +182,11 @@ $router->addRoute('archive', $route);
 
         <para>
             Avec une telle définition de route, comme ci-dessus, le routeur n'établira une
-            correspondance que si la variable "<code>annee</code>" contient une donnée
-            numérique&#160;: <code>http://domaine.fr/archive/2345</code>. Une URL comme
-            <code>http://exemple.annee/archive/test</code> ne sera pas captée (matchée) par cette
-            route, et le contrôle sera passé à la route suivante, etc.
+            correspondance que si la variable "<emphasis>annee</emphasis>" contient une donnée
+            numérique&#160;: <filename>http://domaine.fr/archive/2345</filename>. Une
+            <acronym>URL</acronym> comme <filename>http://exemple.annee/archive/test</filename>
+            ne sera pas captée (matchée) par cette route, et le contrôle sera passé à la route
+            suivante, etc.
         </para>
 
     </sect4>

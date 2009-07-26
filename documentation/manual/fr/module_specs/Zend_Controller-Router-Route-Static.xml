@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 16180 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.router.routes.static">
 
@@ -21,8 +21,8 @@ $router->addRoute('login', $route);
 ]]></programlisting>
 
     <para>
-        La route ci-dessus correspond à l'URL <code>http://domain.com/login</code>, et
-        distribue l'action <code>AuthController::loginAction()</code>.
+        La route ci-dessus correspond à l'URL <filename>http://domain.com/login</filename>, et
+        distribue l'action <methodname>AuthController::loginAction()</methodname>.
     </para>
 
     <note id="zend.controller.router.routes.static.warning">

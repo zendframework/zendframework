@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16914 -->
+<!-- EN-Revision: 16920 -->
 <sect1 id="zend.db.adapter">
 
     <title>Zend_Db_Adapter</title>
@@ -1684,10 +1684,26 @@ $db->closeConnection();
         <note>
             <title>Zend_Db は持続的な接続をサポートしていますか？</title>
             <para>
-                <classname>Zend_Db</classname> では、持続的な接続の使用はサポートしていません。
+                はい。<classname>Zend_Db</classname> のアダプタの設定
+                (driver_configuration ではありません) で、
+                <code>persistent</code> フラグを true に設定することで対応します。
             </para>
+
+            <example id="zend.db.adapter.connecting.persistence.example">
+                <title>Using the Persitence Flag with the Oracle Adapter</title>
+                <programlisting language="php"><![CDATA[
+$db = Zend_Db::factory('Oracle', array(
+    'host'       => '127.0.0.1',
+    'username'   => 'webuser',
+    'password'   => 'xxxxxxxx',
+    'dbname'     => 'test',
+    'persistent' => true
+));
+]]></programlisting>
+            </example>
+
             <para>
-                持続的な接続を使用すると、RDBMS サーバに余計な接続がたまってしまいます。
+                持続的な接続を使用すると、RDBMS サーバに余計な接続がたまってしまうことに注意しましょう。
                 接続作成時のオーバーヘッドが減ることによるパフォーマンスの向上よりも、
                 それによって引き起こされる問題のほうが多くなりえます。
             </para>
@@ -1701,6 +1717,11 @@ $db->closeConnection();
                 持続的な接続を使用すると、
                 別の PHP リクエストが作成したデータに
                 誤ってアクセスしてしまう危険が生じてしまいます。
+            </para>
+            <para>
+                現在、Zend_Db が持続的接続をサポートしているのは
+                Oracle、DB2 そして PDO アダプタ
+                (PHP が指定します) のみです。
             </para>
         </note>
 

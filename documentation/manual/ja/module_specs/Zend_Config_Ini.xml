@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16674 -->
+<!-- EN-Revision: 16917 -->
 <sect1 id="zend.config.adapters.ini">
     <title>Zend_Config_Ini</title>
 
@@ -128,8 +128,21 @@ echo $config->database->params->dbname; // "dbname" と出力します
                     <entry><varname>$options</varname> (デフォルトは <constant>FALSE</constant>)</entry>
                     <entry>オプションの配列。以下のキーをサポートしています。
                         <itemizedlist>
-                            <listitem><para><property>allowModifications</property>: <constant>TRUE</constant> を指定すると、読み込んだファイルを後で変更することができます。デフォルトは <constant>FALSE</constant> です。</para></listitem>
-                            <listitem><para><property>nestSeparator</property>: ネストの区切り文字として使用する文字を設定します。デフォルトは "." です。</para></listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis><property>allowModifications</property></emphasis>:
+                                    <constant>TRUE</constant> を指定すると、
+                                    読み込んだファイルを後で変更することができます。
+                                    デフォルトは <constant>FALSE</constant> です。
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis><property>nestSeparator</property></emphasis>:
+                                    ネストの区切り文字として使用する文字を設定します。
+                                    デフォルトは "." です。
+                                </para>
+                            </listitem>
                         </itemizedlist>
                     </entry>
                 </row>

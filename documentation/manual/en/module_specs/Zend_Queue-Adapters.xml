@@ -31,6 +31,13 @@
 
         <listitem>
             <para>
+                <ulink url="http://www.zend.com/en/products/platform/">Zend Platform's</ulink> Job 
+                Queue.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
                 A local array. Useful for unit testing.
             </para>
         </listitem>
@@ -275,6 +282,34 @@ $queue = Zend_Queue::factory('Db', $options);
             </itemizedlist>
         </sect3>
 
+        <sect3 id="zend.queue.adapters.configuration.platformjq">
+            <title>Zend Platform Job Queue - Zend_Queue_Adapter_PlatformJobQueue</title>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                         <emphasis>$options['daemonOptions']['host'] = '127.0.0.1:10003';</emphasis>
+                    </para>
+
+                    <para>
+                        The hostname and port corresponding to the Zend Platform Job Queue daemon 
+                        you will use. (Required)
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                         <emphasis>$options['daemonOptions']['password'] = '1234';</emphasis>
+                    </para>
+
+                    <para>
+                        The password required for accessing the Zend Platform Job Queue daemon. 
+                        (Required)
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </sect3>
+
         <sect3 id="zend.queue.adapters.configuration.array">
             <title>Array - Zend_Queue_Adapter_Array</title>
 
@@ -409,6 +444,213 @@ $queue = Zend_Queue::factory('Db', $options);
                         <methodname>count()</methodname> or <methodname>count($adapter)</methodname>
                         - MemcacheQ does not support a method for counting the number of items in
                         a queue. Calling this function will throw an error.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </sect3>
+
+        <sect3 id="zend.queue.adapters.notes.platformjq">
+            <title>Zend Platform Job Queue</title>
+
+            <para>
+                Job Queue is a feature of Zend Platform's Enterprise Solution offering. It is not a 
+                traditional message queue, and instead allows you to queue a script to execute, 
+                along with the parameters you wish to pass to it. You can find out more about Job 
+                Queue <ulink url="http://www.zend.com/en/products/platform/">on the zend.com 
+                    website</ulink>.
+            </para>
+
+            <para>
+                The following is a list of methods where this adapter's behavior diverges from the 
+                standard offerings:
+            </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <methodname>create()</methodname> - Zend Platform does not have the concept
+                        of discrete queues; instead, it allows administrators to provide scripts for
+                        processing jobs. Since adding new scripts is restricted to the 
+                        administration interface, this method simply throws an exception indicating 
+                        the action is forbidden.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>isExists()</methodname> - Just like 
+                        <methodname>create()</methodname>, since Job Queue does not have a notion of
+                        named queues, this method throws an exception when invoked.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>delete()</methodname> - similar to 
+                        <methodname>create()</methodname>, deletion of JQ scripts is not possible 
+                        except via the admin interface; this method raises an exception.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>getQueues()</methodname> - Zend Platform does not allow 
+                        introspection into the attached job handling scripts via the API. This 
+                        method throws an exception.
+                    </para>
+                </listitem>
+
+                <listitems>
+                    <para>
+                        <methodname>count()</methodname> - returns the total number of jobs 
+                        currently active in the Job Queue.
+                    </para>
+                </listitems>
+
+                <listitem>
+                    <para>
+                        <methodname>send()</methodname> - this method is perhaps the one method that
+                        diverges most from other adapters.  The <varname>$message</varname> argument 
+                        may be one of three possible types, and will operate differently based on 
+                        the value passed:
+                    </para>
+
+                    <itemizedlist>
+                        <listitem>
+                            <para>
+                                <acronym>string</acronym> - the name of a script registered with Job
+                                Queue to invoke. If passed in this way, no arguments are provided to
+                                the script.
+                            </para>
+                        </listitem>
+
+                        <listitem>
+                            <para>
+                                <acronym>array</acronym> - an array of values with which to 
+                                configure a <classname>ZendApi_Job</classname> object. These may 
+                                include the following:
+                            </para>
+
+                            <itemizedlist>
+                                <listitem>
+                                    <para>
+                                        <varname>script</varname> - the name of the Job Queue script
+                                        to invoke.  (Required)
+                                    </para>
+                                </listitem>
+
+                                <listitem>
+                                    <para>
+                                        <varname>priority</varname> - the job priority to use when 
+                                        registering with the queue.
+                                    </para>
+                                </listitem>
+
+                                <listitem>
+                                    <para>
+                                        <varname>name</varname> - a short string describing the job.
+                                    </para>
+                                </listitem>
+
+                                <listitem>
+                                    <para>
+                                        <varname>predecessor</varname> - the ID of a job on which 
+                                        this one depends, and which must be executed before this one
+                                        may begin.
+                                    </para>
+                                </listitem>
+
+                                <listitem>
+                                    <para>
+                                        <varname>preserved</varname> - whether or not to retain the
+                                        job within the Job Queue history. By default, off; pass a 
+                                        true value to retain it.
+                                    </para>
+                                </listitem>
+
+                                <listitem>
+                                    <para>
+                                        <varname>user_variables</varname> - an associative array of
+                                        all variables you wish to have in scope during job execution
+                                        (similar to named arguments).
+                                    </para>
+                                </listitem>
+
+                                <listitem>
+                                    <para>
+                                        <varname>interval</varname> - how often, in seconds, the job
+                                        should run. By default, this is set to 0, indicating it 
+                                        should run once, and once only.
+                                    </para>
+                                </listitem>
+
+                                <listitem>
+                                    <para>
+                                        <varname>end_time</varname> - an expiry time, past which the
+                                        job should not run.  If the job was set to run only once, 
+                                        and <varname>end_time</varname> has passed, then the job 
+                                        will not be executed. If the job was set to run on an 
+                                        interval, it will not execute again once 
+                                        <varname>end_time</varname> has passed.
+                                    </para>
+                                </listitem>
+
+                                <listitem>
+                                    <para>
+                                        <varname>schedule_time</varname> - a <acronym>UNIX</acronym>
+                                        timestamp indicating when to run the job; by default, 0, 
+                                        indicating the job should run as soon as possible.
+                                    </para>
+                                </listitem>
+
+                                <listitem>
+                                    <para>
+                                        <varname>application_id</varname> - the application 
+                                        identifier of the job. By default, this is null, indicating
+                                        that one will be automatically assigned by the queue, if the
+                                        queue was assigned an application ID.
+                                    </para>
+                                </listitem>
+                            </itemizedlist>
+
+                            <para>
+                                As noted, only the <varname>script</varname> argument is required; 
+                                all others are simply available to allow passing more fine-grained 
+                                detail on how and when to run the job.
+                            </para>
+                        </listitem>
+
+                        <listitem>
+                            <para>
+                                <classname>ZendApi_Job</classname> - finally, you may simply pass a
+                                <classname>ZendApi_Job</classname> instance, and it will be passed 
+                                along to Platform's Job Queue.
+                            </para>
+                        </listitem>
+                    </itemizedlist>
+
+                    <para>
+                        In all instances, <methodname>send()</methodname> returns a 
+                        <classname>Zend_Queue_Message_PlatformJob</classname> object, which provides
+                        access to the <classname>ZendApi_Job</classname> object used to communicate 
+                        with Job Queue.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>receive()</methodname> - retrieves a list of active jobs from 
+                        Job Queue. Each job in the returned set will be an instance of 
+                        <classname>Zend_Queue_Message_PlatformJob</classname>.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>deleteMessage()</methodname> - since this adapter only works 
+                        with Job Queue, this method expects the provided <varname>$message</varname> 
+                        to be a <classname>Zend_Queue_Message_PlatformJob</classname> instance, and 
+                        will throw an exception otherwise.
                     </para>
                 </listitem>
             </itemizedlist>

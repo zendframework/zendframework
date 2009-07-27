@@ -1245,6 +1245,12 @@ abstract class Zend_File_Transfer_Adapter_Abstract
                 require_once 'Zend/File/Transfer/Exception.php';
                 throw new Zend_File_Transfer_Exception("The mimetype of file '{$value['name']}' could not been detected");
             }
+
+            // delete additional info
+            $pos = strpos($result[$key], ';');
+            if ($pos !== false) {
+                $result[$key] = substr($result[$key], 0, $pos);
+            }
         }
 
         if (count($result) == 1) {

@@ -134,7 +134,7 @@ for ($count = 0; $count < $index->maxDoc(); $count++) {
             reorganization. See Lucene index file formats for details
             (<ulink url="http://lucene.apache.org/java/docs/fileformats.html">http://lucene.apache.org/java/docs/fileformats.html</ulink>)
             <footnote>
-                <para>The currently supported Lucene index file format is version 2.3 (starting from ZF 1.6).</para>
+                <para>The currently supported Lucene index file format is version 2.3 (starting from Zend Framework 1.6).</para>
             </footnote>.
             New documents are added to the index by creating new segment.
         </para>
@@ -220,14 +220,14 @@ $index->optimize();
             <para>
                 Lucene Java and Luke (Lucene Index Toolbox - <ulink url="http://www.getopt.org/luke/">http://www.getopt.org/luke/</ulink>)
                 can also be used to optimize an index. Latest Luke release (v0.8) is based on Lucene v2.3 and compatible with
-                current implementation of <classname>Zend_Search_Lucene</classname> component (ZF 1.6). Earlier versions of <classname>Zend_Search_Lucene</classname> implementations
+                current implementation of <classname>Zend_Search_Lucene</classname> component (Zend Framework 1.6). Earlier versions of <classname>Zend_Search_Lucene</classname> implementations
                 need another versions of Java Lucene tools to be compatible:
                 <itemizedlist>
                     <listitem>
-                        <para>ZF 1.5 - Java Lucene 2.1 (Luke tool v0.7.1 - <ulink url="http://www.getopt.org/luke/luke-0.7.1/"/>)</para>
+                        <para>Zend Framework 1.5 - Java Lucene 2.1 (Luke tool v0.7.1 - <ulink url="http://www.getopt.org/luke/luke-0.7.1/"/>)</para>
                     </listitem>
                     <listitem>
-                        <para>ZF 1.0 - Java Lucene 1.4 - 2.1 (Luke tool v0.6 - <ulink url="http://www.getopt.org/luke/luke-0.6/"/>)</para>
+                        <para>Zend Framework 1.0 - Java Lucene 1.4 - 2.1 (Luke tool v0.6 - <ulink url="http://www.getopt.org/luke/luke-0.6/"/>)</para>
                     </listitem>
                 </itemizedlist>
             </para>

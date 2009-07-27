@@ -28,7 +28,7 @@
         <title>Using Zend_Db_Table as a concrete class</title>
 
         <para>
-            As of ZF 1.9, you can instantiate <classname>Zend_Db_Table</classname>. This added benefit is that
+            As of Zend Framework 1.9, you can instantiate <classname>Zend_Db_Table</classname>. This added benefit is that
             you do not have to extend a base class and configure it to do simple operations
             such as selecting, inserting, updating and deleteing on a single table. Below
             is an example of the simplest of use cases.

@@ -249,7 +249,7 @@ Zend_Session::setOptions($config->toArray());
         <title>Session Identifiers</title>
 
         <para>
-            Introduction: Best practice in relation to using sessions with ZF calls for using a browser cookie (i.e.
+            Introduction: Best practice in relation to using sessions with Zend Framework calls for using a browser cookie (i.e.
             a normal cookie stored in your web browser), instead of embedding a unique session identifier in URLs as
             a means to track individual users. By default this component uses only cookies to maintain session
             identifiers. The cookie's value is the unique identifier of your browser's session. PHP's ext/session

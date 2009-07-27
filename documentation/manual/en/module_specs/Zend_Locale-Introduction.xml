@@ -380,7 +380,7 @@ $date = new Zend_Date();
         <title>ZF Locale-Aware Classes</title>
 
         <para>
-            In the ZF, locale-aware classes rely on <classname>Zend_Locale</classname> to
+            In the Zend Framework, locale-aware classes rely on <classname>Zend_Locale</classname> to
             automatically select a locale, as explained above. For example, in a Zend Framework web
             application, constructing a date using <classname>Zend_Date</classname> without
             specifying a locale results in an object with a locale based on information provided by

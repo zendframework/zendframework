@@ -20,7 +20,7 @@
             but they are somewhat more performant.
             <footnote>
                 <para>
-                It's a limitation of current ZF version. It will be eliminated in future versions.
+                It's a limitation of current Zend Framework version. It will be eliminated in future versions.
                 But unattached pages will always give better (more optimal) result for sharing pages between documents.
                 </para>
             </footnote>

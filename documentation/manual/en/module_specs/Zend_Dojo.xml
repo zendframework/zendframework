@@ -27,7 +27,7 @@
         javascript source, unit tests, and build tools. You can symlink this
         into your javascript directory, copy it, or use the build tool to create
         your own custom build to include in your project. Alternatively, you can
-        use one of the Content Delivery Networks that offer Dojo (ZF supports
+        use one of the Content Delivery Networks that offer Dojo (Zend Framework supports
         both the official AOL CDN as well as the Google CDN).
     </para>
 </sect1>

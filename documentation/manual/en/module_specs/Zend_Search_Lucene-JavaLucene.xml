@@ -13,7 +13,7 @@
         <para>
           A detailed description of this format is available here:
           <ulink url="http://lucene.apache.org/java/docs/fileformats.html"/>
-          <footnote><para>The currently supported Lucene index file format version is 2.3 (starting from ZF 1.6).</para></footnote>.
+          <footnote><para>The currently supported Lucene index file format version is 2.3 (starting from Zend Framework 1.6).</para></footnote>.
         </para>
     </sect2>
 

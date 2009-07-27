@@ -33,8 +33,8 @@
                 Previous <classname>Zend_Search_Lucene</classname> implementations support the Lucene 1.4 (1.9) - 2.1 index formats.
             </para>
             <para>
-                Starting from ZF 1.5 any index created using pre-2.1 index format is automatically upgraded to Lucene 2.1 format
-                after the <classname>Zend_Search_Lucene</classname> update and will not be compatible with <classname>Zend_Search_Lucene</classname> implementations included into ZF 1.0.x.
+                Starting from Zend Framework 1.5 any index created using pre-2.1 index format is automatically upgraded to Lucene 2.1 format
+                after the <classname>Zend_Search_Lucene</classname> update and will not be compatible with <classname>Zend_Search_Lucene</classname> implementations included into Zend Framework 1.0.x.
             </para>
         </note>
     </sect2>
@@ -314,7 +314,7 @@ $headerLinksArray = $doc->getHeaderLinks();
         </para>
 
         <para>
-            Starting from ZF 1.6 it's also possible to exclude links with <code>rel</code> attribute set to <code>'nofollow'</code>.
+            Starting from Zend Framework 1.6 it's also possible to exclude links with <code>rel</code> attribute set to <code>'nofollow'</code>.
             Use <methodname>Zend_Search_Lucene_Document_Html::setExcludeNoFollowLinks($true)</methodname> to turn on this option.
         </para>
         <para>

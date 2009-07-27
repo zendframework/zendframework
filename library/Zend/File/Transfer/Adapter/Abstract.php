@@ -1220,10 +1220,11 @@ abstract class Zend_File_Transfer_Adapter_Abstract
             }
 
             if (class_exists('finfo', false)) {
+                $const = defined('FILEINFO_MIME_TYPE') ? FILEINFO_MIME_TYPE : FILEINFO_MIME;
                 if (!empty($value['options']['magicFile'])) {
-                    $mime = new finfo(FILEINFO_MIME, $value['options']['magicFile']);
+                    $mime = new finfo($const, $value['options']['magicFile']);
                 } else {
-                    $mime = new finfo(FILEINFO_MIME);
+                    $mime = new finfo($const);
                 }
 
                 if ($mime !== false) {
@@ -1244,12 +1245,6 @@ abstract class Zend_File_Transfer_Adapter_Abstract
             if (empty($result[$key])) {
                 require_once 'Zend/File/Transfer/Exception.php';
                 throw new Zend_File_Transfer_Exception("The mimetype of file '{$value['name']}' could not been detected");
-            }
-
-            // delete additional info
-            $pos = strpos($result[$key], ';');
-            if ($pos !== false) {
-                $result[$key] = substr($result[$key], 0, $pos);
             }
         }
 

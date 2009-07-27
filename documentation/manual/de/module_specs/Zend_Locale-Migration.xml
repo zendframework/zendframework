@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17068 -->
+<!-- EN-Revision: 17097 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.migration">
 
@@ -94,7 +94,7 @@
                 <methodname>disableCache()</methodname> Methode abgeschaltet werden.
             </para>
 
-            <example id="zend.locale.migration.fromonesixtooneseven.example">
+            <example id="zend.locale.migration.fromoneseventooneeight.example">
                 <title>Standardmäßiges Caching abschalten</title>
 
                 <programlisting language="php"><![CDATA[

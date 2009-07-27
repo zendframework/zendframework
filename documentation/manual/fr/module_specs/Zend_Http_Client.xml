@@ -18,9 +18,10 @@
 
         <para>
             Le constructeur de classe accepte deux paramètres : l'URI (ou un objet
-            <code><classname>Zend_Uri_Http</classname></code>), et un tableau de configuration. Ils
-            peuvent aussi être définis avec des méthodes plus tard : <methodname>setUri()</methodname> et
-            <methodname>setConfig()</methodname>. <example id="zend.http.client.introduction.example-1">
+            <code><classname>Zend_Uri_Http</classname></code>), et un tableau ou un objet Zend_Config
+            d'options de configuration. Ils peuvent aussi être définis avec des méthodes plus tard :
+            <methodname>setUri()</methodname> et <methodname>setConfig()</methodname>.
+            <example id="zend.http.client.introduction.example-1">
                     <title>Instanciation d'un objet Zend_Http_Client</title>
 
                     <programlisting language="php"><![CDATA[
@@ -34,6 +35,10 @@ $client->setUri('http://example.org');
 $client->setConfig(array(
     'maxredirects' => 0,
     'timeout'      => 30));
+
+// You can also use a Zend_Config object to set the client's configuration
+$config = new Zend_Config_Ini('httpclient.ini, 'secure');
+$client->setConfig($config);
 ]]></programlisting>
                 </example>
             </para>
@@ -56,8 +61,9 @@ $client->setConfig(array(
 
         <para>
             Le constructeur et <methodname>setConfig()</methodname> acceptent un tableau associatif de
-            paramètre de configuration. Fixer ces paramètres est optionnel, ils ont tous une valeur
-            par défaut. <table id="zend.http.client.configuration.table">
+            paramètre de configuration, ou un objet Zend_Config. Fixer ces paramètres est optionnel,
+            ils ont tous une valeur par défaut.
+                <table id="zend.http.client.configuration.table">
                     <title>Zend_Http_Client : paramètres de configuration</title>
 
                     <tgroup cols="4">

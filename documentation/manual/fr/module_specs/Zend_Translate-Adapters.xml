@@ -207,6 +207,20 @@
                 traductions lui-même. N'utilisez pas cet adaptateur comme source de traduction
                 générique.
             </para>
+
+            <warning>
+                <title>Regression in PHP 5.3</title>
+
+                <para>
+                    Prior to PHP 5.3, <functionname>parse_ini_file()</functionname> and 
+                    <functionname>parse_ini_string()</functionname> handled non-ASCII characters 
+                    within INI option keys worked without an issue. However, starting with PHP 5.3,
+                    any such keys will now be silently dropped in the returned array from either 
+                    function. If you had keys utilizing UTF-8 or Latin-1 characters, you may find 
+                    your translations no longer work when using the INI adapter. If this is the 
+                    case, we recommend utilizing a different adapter.
+                </para>
+            </warning>
         </sect3>
 
         <sect3 id="zend.translate.adapter.tbx">

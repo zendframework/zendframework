@@ -45,17 +45,19 @@
 
         <para>
             Pour pouvoir utiliser <classname>Zend_Service_Amazon</classname>, vous devez avant
-            tout avoir une clé "developer <acronym>API</acronym>" Amazon. Pour obtenir une telle clé et pour plus
-            d'informations, vous pouvez visitez le site Web <ulink
-            url="http://www.amazon.com/gp/aws/landing.html">Amazon Web Services</ulink>.
+            tout avoir une clé "developer <acronym>API</acronym>" Amazon ainsi que votre clé
+            secrète. Pour obtenir une telle clé et pour plus d'informations, vous pouvez visitez
+            le site Web <ulink url="http://aws.amazon.com/">Amazon Web Services</ulink>.
+            A partir du 15 août 2009, vous ne pourrez utiliser l'API Amazon à travers
+            <classname>Zend_Service_Amazon</classname>, quand spécifiant la clé secrète.
         </para>
 
         <note>
             <title>Attention</title>
 
             <para>
-                Votre clé "developer <acronym>API</acronym>" est liée à votre identité Amazon, donc faites en
-                sorte de conserver votre clé d'API privée.
+                Votre clé "developer <acronym>API</acronym>" et votre clé secret sont liées à votre
+                identité Amazon, donc faites en sorte de les conserver privées.
             </para>
         </note>
 
@@ -68,7 +70,7 @@
             </para>
 
             <programlisting language="php"><![CDATA[
-$amazon = new Zend_Service_Amazon('AMAZON_API_KEY');
+$amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'US', 'AMAZON_SECRET_KEY');
 $response = $amazon->itemSearch(array('SearchIndex' => 'Books',
                                       'Keywords' => 'php'));
 $results = $amazon->itemSearch(array('SearchIndex' => 'Books',
@@ -89,7 +91,9 @@ foreach ($results as $result) {
             </para>
 
             <programlisting language="php"><![CDATA[
-$query = new Zend_Service_Amazon_Query('AMAZON_API_KEY');
+$query = new Zend_Service_Amazon_Query('AMAZON_API_KEY',
+                                       'US',
+                                       'AMAZON_SECRET_KEY');
 $query->category('Books')->Keywords('PHP');
 $results = $query->search();
 foreach ($results as $result) {
@@ -114,7 +118,7 @@ foreach ($results as $result) {
 
             <programlisting language="php"><![CDATA[
 // Connexion à Amazon France
-$amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'FR');
+$amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'FR', 'AMAZON_SECRET_KEY');
 ]]></programlisting>
         </example>
 
@@ -140,7 +144,7 @@ $amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'FR');
             <title>Rechercher une produit Amazon spécifique avec son ASIN</title>
 
             <programlisting language="php"><![CDATA[
-$amazon = new Zend_Service_Amazon('AMAZON_API_KEY');
+$amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'US', 'AMAZON_SECRET_KEY');
 $item = $amazon->itemLookup('B0000A432X');
 ]]></programlisting>
         </example>
@@ -177,7 +181,7 @@ $item = $amazon->itemLookup('B0000A432X');
             <title>Lancer des recherches de produits sur Amazon</title>
 
             <programlisting language="php"><![CDATA[
-$amazon = new Zend_Service_Amazon('AMAZON_API_KEY');
+$amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'US', 'AMAZON_SECRET_KEY');
 $results = $amazon->itemSearch(array('SearchIndex' => 'Books',
                                      'Keywords' => 'php'));
 foreach ($results as $result) {
@@ -195,7 +199,7 @@ foreach ($results as $result) {
             </para>
 
             <programlisting language="php"><![CDATA[
-$amazon = new Zend_Service_Amazon('AMAZON_API_KEY');
+$amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'US', 'AMAZON_SECRET_KEY');
 $results = $amazon->itemSearch(array(
     'SearchIndex'   => 'Books',
     'Keywords'      => 'php',
@@ -258,7 +262,7 @@ foreach ($results as $result) {
                 </para>
 
                 <programlisting language="php"><![CDATA[
-$query = new Zend_Service_Amazon_Query('MY_API_KEY');
+$query = new Zend_Service_Amazon_Query('MY_API_KEY', 'US', 'AMAZON_SECRET_KEY');
 $query->Category('Books')->Keywords('PHP');
 $results = $query->search();
 foreach ($results as $result) {

@@ -1876,6 +1876,68 @@ if (!is_null($version)) {
             </itemizedlist>
         </sect3>
 
+        <sect3 id="zend.db.adapter.adapter-notes.sqlsrv">
+            <title>Microsoft SQL Server</title>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        Specify this Adapter to the <methodname>factory()</methodname> method with the name 'Sqlsrv'.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        This Adapter uses the <acronym>PHP</acronym> extension sqlsrv
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Microsoft <acronym>SQL</acronym> Server does not support sequences, so
+                        <methodname>lastInsertId()</methodname> ignores primary key argument and
+                        returns the last value generated for an  key if a table name is specified
+                        or a last insert query returned id. The
+                        <methodname>lastSequenceId()</methodname> method returns
+                        <constant>NULL</constant>.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <classname>Zend_Db_Adapter_Sqlsrv</classname> sets
+                        <constant>QUOTED_IDENTIFIER ON</constant> immediately after connecting to
+                        a <acronym>SQL</acronym> Server database. This makes the driver use the
+                        standard <acronym>SQL</acronym> identifier delimiter symbol
+                        (<emphasis>"</emphasis>) instead of the proprietary square-brackets
+                        syntax <acronym>SQL</acronym> Server uses for delimiting identifiers.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        You can specify <property>driver_options</property> as a key in the options
+                        array. The value can be a anything from here <ulink
+                            url="http://msdn.microsoft.com/en-us/library/cc296161(SQL.90).aspx">http://msdn.microsoft.com/en-us/library/cc296161(SQL.90).aspx</ulink>.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        You can use <methodname>setTransactionIsolationLevel()</methodname> to set
+                        isolation level for current connection. The value can be
+                        <constant>SQLSRV_TXN_READ_UNCOMMITTED</constant>,
+                        <constant>SQLSRV_TXN_READ_COMMITTED</constant>,
+                        <constant>SQLSRV_TXN_REPEATABLE_READ</constant>,
+                        <constant>SQLSRV_TXN_SNAPSHOT</constant> or
+                        <constant>SQLSRV_TXN_SERIALIZABLE</constant>.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        As of Zend Framework 1.9, the minimal supported build of the
+                        <acronym>PHP</acronym> <acronym>SQL</acronym> Server extension from
+                        Microsoft is 1.0.1924.0. and the <acronym>MSSQL</acronym> Server Native
+                        Client version 9.00.3042.00.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </sect3>
+
         <sect3 id="zend.db.adapter.adapter-notes.pdo-ibm">
             <title>PDO pour IBM DB2 et Informix Dynamic Server (IDS)</title>
 

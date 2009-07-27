@@ -952,6 +952,13 @@ class Zend_Search_Lucene implements Zend_Search_Lucene_Interface
             $fieldNames = $this->getFieldNames();
             $sortArgs   = array();
 
+            // PHP 5.3 now expects all arguments to array_multisort be passed by
+            // reference; since constants can't be passed by reference, create 
+            // some placeholder variables.
+            $sortReg    = SORT_REGULAR;
+            $sortAsc    = SORT_ASC;
+            $sortNum    = SORT_NUMERIC;
+
             require_once 'Zend/Search/Lucene/Exception.php';
             for ($count = 1; $count < count($argList); $count++) {
                 $fieldName = $argList[$count];
@@ -979,32 +986,32 @@ class Zend_Search_Lucene implements Zend_Search_Lucene_Interface
                     $valuesArray[] = $value;
                 }
 
-                $sortArgs[] = $valuesArray;
+                $sortArgs[] = &$valuesArray;
 
                 if ($count + 1 < count($argList)  &&  is_integer($argList[$count+1])) {
                     $count++;
-                    $sortArgs[] = $argList[$count];
+                    $sortArgs[] = &$argList[$count];
 
                     if ($count + 1 < count($argList)  &&  is_integer($argList[$count+1])) {
                         $count++;
-                        $sortArgs[] = $argList[$count];
+                        $sortArgs[] = &$argList[$count];
                     } else {
                         if ($argList[$count] == SORT_ASC  || $argList[$count] == SORT_DESC) {
-                            $sortArgs[] = SORT_REGULAR;
+                            $sortArgs[] = &$sortReg;
                         } else {
-                            $sortArgs[] = SORT_ASC;
+                            $sortArgs[] = &$sortAsc;
                         }
                     }
                 } else {
-                    $sortArgs[] = SORT_ASC;
-                    $sortArgs[] = SORT_REGULAR;
+                    $sortArgs[] = &$sortAsc;
+                    $sortArgs[] = &$sortReg;
                 }
             }
 
             // Sort by id's if values are equal
-            $sortArgs[] = $ids;
-            $sortArgs[] = SORT_ASC;
-            $sortArgs[] = SORT_NUMERIC;
+            $sortArgs[] = &$ids;
+            $sortArgs[] = &$sortAsc;
+            $sortArgs[] = &$sortNum;
 
             // Array to be sorted
             $sortArgs[] = &$hits;

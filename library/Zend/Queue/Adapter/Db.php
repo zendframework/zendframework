@@ -279,12 +279,11 @@ class Zend_Queue_Adapter_Db extends Zend_Queue_Adapter_AdapterAbstract
             $queue = $this->_queue;
         }
 
+        if (is_scalar($message)) {
+            $message = (string) $message;
+        }
         if (is_string($message)) {
             $message = trim($message);
-        } elseif (is_scalar($message)) {
-            $message = (string) $message;
-        } else {
-            $message = serialize($message);
         }
 
         if (!$this->isExists($queue->getName())) {

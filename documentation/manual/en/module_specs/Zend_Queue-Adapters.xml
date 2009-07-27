@@ -500,12 +500,12 @@ $queue = Zend_Queue::factory('Db', $options);
                     </para>
                 </listitem>
 
-                <listitems>
+                <listitem>
                     <para>
                         <methodname>count()</methodname> - returns the total number of jobs 
                         currently active in the Job Queue.
                     </para>
-                </listitems>
+                </listitem>
 
                 <listitem>
                     <para>

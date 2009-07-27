@@ -14,45 +14,76 @@
  *
  * @category   Zend
  * @package    Zend_Pdf
+ * @subpackage Actions
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: Action.php 16978 2009-07-22 19:59:40Z alexander $
  */
+
+/** Zend_Pdf_ElementFactory */
+require_once 'Zend/Pdf/ElementFactory.php';
 
 
 /**
- * PHP Array (OO wrapper)
- * Used to be returned by reference by __get() methods
+ * PDF name tree representation class
+ *
+ * @todo implement lazy resource loading so resources will be really loaded at access time
  *
  * @package    Zend_Pdf
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @todo       also implement Countable for PHP 5.1 but not yet to stay 5.0 compatible
  */
-class Zend_Pdf_PhpArray implements ArrayAccess, Iterator, Countable {
+class Zend_Pdf_NameTree implements ArrayAccess, Iterator, Countable
+{
     /**
-     * Array element
-     * @var mixed
+     * Elements
+     * Array of name => object tree entries
+     *
+     * @var array
      */
     protected $_items = array();
-
 
     /**
      * Object constructor
      *
-     * @param array $srcArray
+     * @param $rootDictionary root of name dictionary
      */
-    public function __construct($srcArray = null)
+    public function __construct(Zend_Pdf_Element $rootDictionary)
     {
-        if ($srcArray === null) {
-            reset($this->_items);
-        } else if (is_array($srcArray)) {
-            $this->_items = $srcArray;
+        if ($rootDictionary->getType() != Zend_Pdf_Element::TYPE_DICTIONARY) {
+            require_once 'Zend/Pdf/Exception.php';
+            throw new Zend_Pdf_Exception('Name tree root must be a dictionary.');
+        }
+
+        $intermediateNodes = array();
+        $leafNodes         = array();
+        if ($rootDictionary->Kids !== null) {
+            $intermediateNodes[] = $rootDictionary;
         } else {
-            throw new Exception('Array can be initialized only by other array');
+            $leafNodes[] = $rootDictionary;
+        }
+
+        while (count($intermediateNodes) != 0) {
+            $newIntermediateNodes = array();
+            foreach ($intermediateNodes as $node) {
+                foreach ($node->Kids->items as $childNode) {
+                    if ($childNode->Kids !== null) {
+                        $newIntermediateNodes[] = $childNode;
+                    } else {
+                        $leafNodes[] = $childNode;
+                    }
+                }
+            }
+            $intermediateNodes = $newIntermediateNodes;
+        }
+
+        foreach ($leafNodes as $leafNode) {
+            $destinationsCount = count($leafNode->Names->items)/2;
+            for ($count = 0; $count < $destinationsCount; $count++) {
+                $this->_items[$leafNode->Names->items[$count*2]->value] = $leafNode->Names->items[$count*2 + 1];
+            }
         }
     }
-
 
     public function current()
     {
@@ -116,14 +147,8 @@ class Zend_Pdf_PhpArray implements ArrayAccess, Iterator, Countable {
         $this->_items = array();
     }
 
-    /**
-     * Defined by Countable interface
-     *
-     * @return int
-     */
     public function count()
     {
         return count($this->_items);
     }
 }
-

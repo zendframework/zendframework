@@ -208,7 +208,7 @@ class Zend_Pdf_Element_Object extends Zend_Pdf_Element
      */
     public function __call($method, $args)
     {
-    	return call_user_func_array(array($this->_value, $method), $args);
+        return call_user_func_array(array($this->_value, $method), $args);
     }
 
 
@@ -218,6 +218,16 @@ class Zend_Pdf_Element_Object extends Zend_Pdf_Element
     public function touch()
     {
         $this->_factory->markAsModified($this);
+    }
+
+    /**
+     * Return object, which can be used to identify object and its references identity
+     *
+     * @return Zend_Pdf_Element_Object
+     */
+    public function getObject()
+    {
+        return $this;
     }
 
     /**

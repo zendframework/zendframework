@@ -42,15 +42,17 @@ abstract class Zend_Pdf_Target
      * @throws Zend_Pdf_Exception
      */
     public static function load(Zend_Pdf_Element $resource) {
-        if ($resource->getType() == Zend_Pdf_Element::TYPE_ARRAY) {
-            // Resource is an array, just treat it as an explicit destination array
-            return Zend_Pdf_Destination::load($resource);
-        } else if ($resource->getType() == Zend_Pdf_Element::TYPE_DICTIONARY) {
+        if ($resource->getType() == Zend_Pdf_Element::TYPE_DICTIONARY) {
             // Load destination as appropriate action
             return Zend_Pdf_Action::load($resource);
+        } else if ($resource->getType() == Zend_Pdf_Element::TYPE_ARRAY  ||
+                   $resource->getType() == Zend_Pdf_Element::TYPE_NAME   ||
+                   $resource->getType() == Zend_Pdf_Element::TYPE_STRING) {
+            // Resource is an array, just treat it as an explicit destination array
+            return Zend_Pdf_Destination::load($resource);
         } else {
             require_once 'Zend/Pdf/Exception.php';
-            throw new Zend_Pdf_Exception( 'PDF named destination entry must be an array or dictionary.' );
+            throw new Zend_Pdf_Exception( 'Wrong resource type.' );
         }
     }
 

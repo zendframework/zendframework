@@ -318,7 +318,7 @@ class Zend_Pdf_ProcessingTest extends PHPUnit_Framework_TestCase
 
         // Test accessing protected variables and their default content
         $this->assertEquals(array(), $pdf->_originalProperties);
-        $this->assertEquals(array(), $pdf->_namedActions);
+        $this->assertEquals(array(), $pdf->_namedTargets);
 
         $pdfpage = new ExtendedZendPdfPage(Zend_Pdf_Page::SIZE_A4);
         // Test accessing protected variables and their default content

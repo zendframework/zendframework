@@ -26,6 +26,12 @@ require_once 'Zend/Pdf/ElementFactory.php';
 /** Zend_Pdf_Outline */
 require_once 'Zend/Pdf/Outline.php';
 
+/** Zend_Pdf_Destination */
+require_once 'Zend/Pdf/Destination.php';
+
+/** Zend_Pdf_Action */
+require_once 'Zend/Pdf/Action.php';
+
 
 /**
  * PDF outline representation class
@@ -39,12 +45,12 @@ require_once 'Zend/Pdf/Outline.php';
  */
 class Zend_Pdf_Outline_Created extends Zend_Pdf_Outline
 {
-	/**
-	 * Outline title.
-	 *
-	 * @var string
-	 */
-	protected $_title;
+    /**
+     * Outline title.
+     *
+     * @var string
+     */
+    protected $_title;
 
     /**
      * Color to be used for the outline entry’s text.
@@ -84,26 +90,26 @@ class Zend_Pdf_Outline_Created extends Zend_Pdf_Outline
 
 
     /**
-	 * Get outline title.
-	 *
-	 * @return string
-	 */
-	public function getTitle()
-	{
-		return $this->_title;
-	}
+     * Get outline title.
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->_title;
+    }
 
-	/**
-	 * Set outline title
-	 *
-	 * @param string $title
+    /**
+     * Set outline title
+     *
+     * @param string $title
      * @return Zend_Pdf_Outline
-	 */
-	public function setTitle($title)
-	{
-		$this->_title = $title;
-		return $this;
-	}
+     */
+    public function setTitle($title)
+    {
+        $this->_title = $title;
+        return $this;
+    }
 
     /**
      * Returns true if outline item is displayed in italic
@@ -176,7 +182,7 @@ class Zend_Pdf_Outline_Created extends Zend_Pdf_Outline
     /**
      * Get outline target.
      *
-     * @return Zend_Pdf_Destination|Zend_Pdf_Action|string
+     * @return Zend_Pdf_Target
      */
     public function getTarget()
     {
@@ -187,38 +193,46 @@ class Zend_Pdf_Outline_Created extends Zend_Pdf_Outline
      * Set outline target.
      * Null means no target
      *
-     * @param Zend_Pdf_Destination|Zend_Pdf_Action|string $target
+     * @param Zend_Pdf_Target|string $target
      * @return Zend_Pdf_Outline
+     * @throws Zend_Pdf_Exception
      */
-    public function setTarget($target)
+    public function setTarget($target = null)
     {
-    	if ($target !== null  && is_string($target) &&  !$target instanceof Zend_Pdf_Destination  &&  !$target instanceof Zend_Pdf_Action) {
-    		require_once 'Zend/Pdf/Exception.php';
-    		throw new Zend_Pdf_Exception('Outline target has to be Zend_Pdf_Destination or Zend_Pdf_Action object, string or null');
-    	}
-        $this->_target = $target;
+        if (is_string($target)) {
+            require_once 'Zend/Pdf/Destination/Named.php';
+            $target = new Zend_Pdf_Destination_Named($target);
+        }
+
+        if ($target === null  ||  $target instanceof Zend_Pdf_Target) {
+            $this->_target = $target;
+        } else {
+            require_once 'Zend/Pdf/Exception.php';
+            throw new Zend_Pdf_Exception('Outline target has to be Zend_Pdf_Destination or Zend_Pdf_Action object or string');
+        }
+
         return $this;
     }
 
 
-	/**
+    /**
      * Object constructor
      *
      * @param array $options
      * @throws Zend_Pdf_Exception
-	 */
-	public function __construct($options = array())
-	{
-		if (!isset($options['title'])) {
-			require_once 'Zend/Pdf/Exception.php';
-			throw new Zend_Pdf_Exception('Title parameter is required.');
-		}
+     */
+    public function __construct($options = array())
+    {
+        if (!isset($options['title'])) {
+            require_once 'Zend/Pdf/Exception.php';
+            throw new Zend_Pdf_Exception('Title parameter is required.');
+        }
 
-		$this->setOptions($options);
-	}
+        $this->setOptions($options);
+    }
 
     /**
-     * Dump Outline and it's child outlines into PDF structures
+     * Dump Outline and its child outlines into PDF structures
      *
      * Returns dictionary indirect object or reference
      *
@@ -227,26 +241,35 @@ class Zend_Pdf_Outline_Created extends Zend_Pdf_Outline
      * @param boolean $updateNavigation  Update navigation flag
      * @param Zend_Pdf_Element $parent   Parent outline dictionary reference
      * @param Zend_Pdf_Element $prev     Previous outline dictionary reference
+     * @param SplObjectStorage $processedOutlines  List of already processed outlines
      * @return Zend_Pdf_Element
+     * @throws Zend_Pdf_Exception
      */
-    public function dumpOutline(Zend_Pdf_ElementFactory_Interface $factory, $updateNavigation, Zend_Pdf_Element $parent, Zend_Pdf_Element $prev = null)
+    public function dumpOutline(Zend_Pdf_ElementFactory_Interface $factory,
+                                                                  $updateNavigation,
+                                                 Zend_Pdf_Element $parent,
+                                                 Zend_Pdf_Element $prev = null,
+                                                 SplObjectStorage $processedOutlines = null)
     {
-    	$outlineDictionary = $factory->newObject(new Zend_Pdf_Element_Dictionary());
+        if ($processedOutlines === null) {
+            $processedOutlines = new SplObjectStorage();
+        }
+        $processedOutlines->attach($this);
 
-    	$outlineDictionary->Title = new Zend_Pdf_Element_String($this->getTitle());
+        $outlineDictionary = $factory->newObject(new Zend_Pdf_Element_Dictionary());
 
-    	$target = $this->getTarget();
+        $outlineDictionary->Title = new Zend_Pdf_Element_String($this->getTitle());
+
+        $target = $this->getTarget();
         if ($target === null) {
             // Do nothing
-        } else if (is_string($target)) {
-            $outlineDictionary->Dest = new Zend_Pdf_Element_String($target);
         } else if ($target instanceof Zend_Pdf_Destination) {
-            $outlineDictionary->Dest = $target->getTarget();
+            $outlineDictionary->Dest = $target->getResource();
         } else if ($target instanceof Zend_Pdf_Action) {
-            $outlineDictionary->A    = $target->getDestinationArray()->items[0];
+            $outlineDictionary->A    = $target->getResource();
         } else {
             require_once 'Zend/Pdf/Exception.php';
-            throw new Zend_Pdf_Exception('Outline target has to be Zend_Pdf_Destination or Zend_Pdf_Action object, string or null');
+            throw new Zend_Pdf_Exception('Outline target has to be Zend_Pdf_Destination, Zend_Pdf_Action object or null');
         }
 
         $color = $this->getColor();
@@ -259,8 +282,8 @@ class Zend_Pdf_Outline_Created extends Zend_Pdf_Outline
         }
 
         if ($this->isItalic()  ||  $this->isBold()) {
-        	$outlineDictionary->F = new Zend_Pdf_Element_Numeric(($this->isItalic()? 1 : 0)  |   // Bit 1 - Italic
-        	                                                     ($this->isBold()?   2 : 0));    // Bit 2 - Bold
+            $outlineDictionary->F = new Zend_Pdf_Element_Numeric(($this->isItalic()? 1 : 0)  |   // Bit 1 - Italic
+                                                                 ($this->isBold()?   2 : 0));    // Bit 2 - Bold
         }
 
 
@@ -269,11 +292,16 @@ class Zend_Pdf_Outline_Created extends Zend_Pdf_Outline
 
         $lastChild = null;
         foreach ($this->childOutlines as $childOutline) {
+            if ($processedOutlines->contains($childOutline)) {
+                require_once 'Zend/Pdf/Exception.php';
+                throw new Zend_Pdf_Exception('Outlines cyclyc reference is detected.');
+            }
+
             if ($lastChild === null) {
-                $lastChild = $childOutline->dumpOutline($factory, true, $outlineDictionary);
+                $lastChild = $childOutline->dumpOutline($factory, true, $outlineDictionary, null, $processedOutlines);
                 $outlineDictionary->First = $lastChild;
             } else {
-                $childOutlineDictionary = $childOutline->dumpOutline($factory, true, $outlineDictionary, $lastChild);
+                $childOutlineDictionary = $childOutline->dumpOutline($factory, true, $outlineDictionary, $lastChild, $processedOutlines);
                 $lastChild->Next = $childOutlineDictionary;
                 $lastChild       = $childOutlineDictionary;
             }

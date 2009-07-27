@@ -256,11 +256,11 @@ class Zend_Pdf_DestinationTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($destination instanceof Zend_Pdf_Destination_Zoom);
         $this->assertEquals($destination->getResource()->toString(), '[4 0 R /XYZ 0 842 0.5 ]');
 
-        $destination = Zend_Pdf_Destination_Fit::create($page2->getPageDictionary());
+        $destination = Zend_Pdf_Destination_Fit::create($page2);
         $this->assertTrue($destination instanceof Zend_Pdf_Destination_Fit);
         $this->assertEquals($destination->getResource()->toString(), '[4 0 R /Fit ]');
 
-        $destination = Zend_Pdf_Destination_FitHorizontally::create($page2->getPageDictionary(), 842);
+        $destination = Zend_Pdf_Destination_FitHorizontally::create($page2, 842);
         $this->assertTrue($destination instanceof Zend_Pdf_Destination_FitHorizontally);
         $this->assertEquals($destination->getResource()->toString(), '[4 0 R /FitH 842 ]');
 

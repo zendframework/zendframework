@@ -130,6 +130,18 @@ class Zend_Pdf_ElementFactory_Proxy implements Zend_Pdf_ElementFactory_Interface
     }
 
     /**
+     * Clean enumeration shift cache.
+     * Has to be used after PDF render operation to let followed updates be correct.
+     *
+     * @param Zend_Pdf_ElementFactory_Interface $factory
+     * @return integer
+     */
+    public function cleanEnumerationShiftCache()
+    {
+        return $this->_factory->cleanEnumerationShiftCache();
+    }
+
+    /**
      * Retrive object enumeration shift.
      *
      * @param Zend_Pdf_ElementFactory_Interface $factory

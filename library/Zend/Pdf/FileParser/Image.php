@@ -35,11 +35,11 @@ require_once 'Zend/Pdf/FileParser.php';
  */
 abstract class Zend_Pdf_FileParser_Image extends Zend_Pdf_FileParser
 {
-	/**
-	 * Image Type
-	 *
-	 * @var integer
-	 */
+    /**
+     * Image Type
+     *
+     * @var integer
+     */
     protected $imageType;
 
     /**

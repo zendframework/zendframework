@@ -726,6 +726,7 @@ class Zend_Pdf_Page
      * returns array of Zend_Pdf_Resource_Font_Extracted objects
      *
      * @return array
+     * @throws Zend_Pdf_Exception
      */
     public function extractFonts()
     {
@@ -743,21 +744,21 @@ class Zend_Pdf_Page
 
             if (! ($fontDictionary instanceof Zend_Pdf_Element_Reference  ||
                    $fontDictionary instanceof Zend_Pdf_Element_Object) ) {
-                // Font dictionary has to be an indirect object or object reference
-                continue;
+                require_once 'Zend/Pdf/Exception.php';
+                throw new Zend_Pdf_Exception('Font dictionary has to be an indirect object or object reference.');
             }
 
-            $fontResourcesUnique[$fontDictionary->toString($this->_objFactory)] = $fontDictionary;
+            $fontResourcesUnique[spl_object_hash($fontDictionary->getObject())] = $fontDictionary;
         }
 
         $fonts = array();
         require_once 'Zend/Pdf/Exception.php';
-        foreach ($fontResourcesUnique as $resourceReference => $fontDictionary) {
+        foreach ($fontResourcesUnique as $resourceId => $fontDictionary) {
             try {
                 // Try to extract font
                 $extractedFont = new Zend_Pdf_Resource_Font_Extracted($fontDictionary);
 
-                $fonts[$resourceReference] = $extractedFont;
+                $fonts[$resourceId] = $extractedFont;
             } catch (Zend_Pdf_Exception $e) {
                 if ($e->getMessage() != 'Unsupported font type.') {
                     throw $e;
@@ -774,6 +775,7 @@ class Zend_Pdf_Page
      * $fontName should be specified in UTF-8 encoding
      *
      * @return Zend_Pdf_Resource_Font_Extracted|null
+     * @throws Zend_Pdf_Exception
      */
     public function extractFont($fontName)
     {
@@ -784,14 +786,24 @@ class Zend_Pdf_Page
 
         $fontResources = $this->_pageDictionary->Resources->Font;
 
+        $fontResourcesUnique = array();
+
         require_once 'Zend/Pdf/Exception.php';
         foreach ($fontResources->getKeys() as $fontResourceName) {
             $fontDictionary = $fontResources->$fontResourceName;
 
             if (! ($fontDictionary instanceof Zend_Pdf_Element_Reference  ||
                    $fontDictionary instanceof Zend_Pdf_Element_Object) ) {
-                // Font dictionary has to be an indirect object or object reference
+                require_once 'Zend/Pdf/Exception.php';
+                throw new Zend_Pdf_Exception('Font dictionary has to be an indirect object or object reference.');
+            }
+
+            $resourceId = spl_object_hash($fontDictionary->getObject());
+            if (isset($fontResourcesUnique[$resourceId])) {
                 continue;
+            } else {
+                // Mark resource as processed
+                $fontResourcesUnique[$resourceId] = 1;
             }
 
             if ($fontDictionary->BaseFont->value != $fontName) {

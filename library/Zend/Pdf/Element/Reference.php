@@ -165,12 +165,12 @@ class Zend_Pdf_Element_Reference extends Zend_Pdf_Element
      */
     private function _dereference()
     {
-    	if (($obj = $this->_factory->fetchObject($this->_objNum . ' ' . $this->_genNum)) === null) {
+        if (($obj = $this->_factory->fetchObject($this->_objNum . ' ' . $this->_genNum)) === null) {
             $obj = $this->_context->getParser()->getObject(
                            $this->_context->getRefTable()->getOffset($this->_objNum . ' ' . $this->_genNum . ' R'),
                            $this->_context
                                                           );
-    	}
+        }
 
         if ($obj === null ) {
             $this->_ref = new Zend_Pdf_Element_Null();
@@ -181,10 +181,9 @@ class Zend_Pdf_Element_Reference extends Zend_Pdf_Element
             throw new Zend_Pdf_Exception('Incorrect reference to the object');
         }
 
-        $this->_ref = $obj;
-        $this->setParentObject($obj);
-
         $this->_factory->registerObject($obj, $this->_objNum . ' ' . $this->_genNum);
+
+        $this->_ref = $obj;
     }
 
     /**
@@ -199,6 +198,19 @@ class Zend_Pdf_Element_Reference extends Zend_Pdf_Element
         $this->_ref->touch();
     }
 
+    /**
+     * Return object, which can be used to identify object and its references identity
+     *
+     * @return Zend_Pdf_Element_Object
+     */
+    public function getObject()
+    {
+        if ($this->_ref === null) {
+            $this->_dereference();
+        }
+
+        return $this->_ref;
+    }
 
     /**
      * Get handler

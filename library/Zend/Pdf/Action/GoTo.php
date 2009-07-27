@@ -37,65 +37,78 @@ require_once 'Zend/Pdf/Destination.php';
  */
 class Zend_Pdf_Action_GoTo extends Zend_Pdf_Action
 {
-	/**
-	 * Create new Zend_Pdf_Action_GoTo object using specified destination
-	 *
-	 * Object is created based on a provided dictionary. That allows to choose if it's
-	 * a direct or inderect object attached to some objects factory
-	 *
-	 * @param Zend_Pdf_Element|Zend_Pdf_Destination|string $destination
-	 * @param Zend_Pdf_ElementFactory $objectFactory
-	 * @return Zend_Pdf_Action_GoTo
-	 * @throws Zend_Pdf_Exception
-	 */
-	public static function create($destination, $objectFactory = null)
+    /**
+     * GoTo Action destination
+     *
+     * @var Zend_Pdf_Destination
+     */
+    protected $_destination;
+
+
+    /**
+     * Object constructor
+     *
+     * @param Zend_Pdf_Element_Dictionary $dictionary
+     * @param SplObjectStorage            $processedActions  list of already processed action dictionaries, used to avoid cyclic references
+     * @throws Zend_Pdf_Exception
+     */
+    public function __construct(Zend_Pdf_Element $dictionary, SplObjectStorage $processedActions)
     {
-    	if ($objectFactory === null) {
-    		$dictionary = new Zend_Pdf_Element_Dictionary();
-    	} else {
-    		$dictionary = $objectFactory->newObject(new Zend_Pdf_Element_Dictionary());
-    	}
+        parent::__construct($dictionary, $processedActions);
 
-        if ($dictionary->getType() != Zend_Pdf_Element::TYPE_DICTIONARY) {
-            require_once 'Zend/Pdf/Exception.php';
-            throw new Zend_Pdf_Exception('$dictionary mast be a direct or an indirect dictionary object.');
-        }
-    	$dictionary->Type = new Zend_Pdf_Element_Name('Action');
-    	$dictionary->S    = new Zend_Pdf_Element_Name('GoTo');
-    	$dictionary->Next = null;
-
-    	if (is_string($destination)) {
-            // Named destination
-            $dictionary->D = new Zend_Pdf_Element_String($destination);
-    	} else if ($destination instanceof Zend_Pdf_Element_Array) {
-    		// DestinationArray
-            $dictionary->D = $destination;
-    	} else if ($destination instanceof Zend_Pdf_Destination) {
-    		$dictionary->D = $destination->getResource();
-    	} else {
-    		require_once 'Zend/Pdf/Exception.php';
-    		throw new Zend_Pdf_Exception('Wrong $destination parameter type');
-    	}
-
-    	return new Zend_Pdf_Action_GoTo($dictionary, null, new SplObjectStorage());
+        $this->_destination = Zend_Pdf_Destination::load($dictionary->D);
     }
 
-	/**
-	 * Returns goto action destination
-	 * (Zend_Pdf_Element_Name or Zend_Pdf_Element_String for named destinations
-	 * or Zend_Pdf_Array for explicit destinations)
-	 *
-	 * @return Zend_Pdf_Destination|string
-	 */
-	public function getDestination()
-	{
-		$destination = $this->_actionDictionary->D;
-
-		if ($destination instanceof Zend_Pdf_Element_Name  ||  $destination instanceof Zend_Pdf_Element_String) {
-			return $destination->value;
+    /**
+     * Create new Zend_Pdf_Action_GoTo object using specified destination
+     *
+     * @param Zend_Pdf_Destination|string $destination
+     * @return Zend_Pdf_Action_GoTo
+     */
+    public static function create($destination)
+    {
+        if (is_string($destination)) {
+            require_once 'Zend/Pdf/Destination/Named.php';
+            $destination = Zend_Pdf_Destination_Named::create($destination);
         }
 
-		return Zend_Pdf_Destination::load($this->_actionDictionary->D);
-	}
+        if (!$destination instanceof Zend_Pdf_Destination) {
+            require_once 'Zend/Pdf/Exception.php';
+            throw new Zend_Pdf_Exception('$destination parameter must be a Zend_Pdf_Destination object or string.');
+        }
+
+        $dictionary = new Zend_Pdf_Element_Dictionary();
+        $dictionary->Type = new Zend_Pdf_Element_Name('Action');
+        $dictionary->S    = new Zend_Pdf_Element_Name('GoTo');
+        $dictionary->Next = null;
+           $dictionary->D    = $destination->getResource();
+
+        return new Zend_Pdf_Action_GoTo($dictionary, new SplObjectStorage());
+    }
+
+    /**
+     * Set goto action destination
+     *
+     * @return Zend_Pdf_Action_GoTo $destination
+     */
+    public function setDestination(Zend_Pdf_Destination $destination)
+    {
+        $this->_destination = $destination;
+
+        $this->_actionDictionary->touch();
+        $this->_actionDictionary->D = $destination->getResource();
+
+        return $this;
+    }
+
+    /**
+     * Get goto action destination
+     *
+     * @return Zend_Pdf_Destination
+     */
+    public function getDestination()
+    {
+        return $this->_destination;
+    }
 }
 

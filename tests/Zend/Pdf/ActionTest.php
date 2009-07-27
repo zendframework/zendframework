@@ -14,6 +14,12 @@ require_once 'Zend/Pdf/ElementFactory.php';
 /** Zend_Pdf */
 require_once 'Zend/Pdf.php';
 
+/** Zend_Pdf_RecursivelyIteratableObjectsContainer */
+require_once 'Zend/Pdf/RecursivelyIteratableObjectsContainer.php';
+
+/** Zend_Pdf_ElementFactory */
+require_once 'Zend/Pdf/ElementFactory.php';
+
 
 /** PHPUnit Test Case */
 require_once 'PHPUnit/Framework/TestCase.php';
@@ -140,16 +146,21 @@ class Zend_Pdf_ActionTest extends PHPUnit_Framework_TestCase
 
         $action = Zend_Pdf_Action::load($dictionary);
 
-        $this->assertEquals(20, count($action->getAllActions()));
+        $actionsCount = 0;
+        $iterator = new RecursiveIteratorIterator(new Zend_Pdf_RecursivelyIteratableObjectsContainer(array($action)),
+                                                  RecursiveIteratorIterator::SELF_FIRST);
+        foreach ($iterator as $chainedAction) {
+        	$actionsCount++;
+        }
 
-        $action->clean();
+        $this->assertEquals(20, $actionsCount);
     }
 
     public function testExtract()
     {
         $dictionary = new Zend_Pdf_Element_Dictionary();
         $dictionary->Type = new Zend_Pdf_Element_Name('Action');
-        $dictionary->S    = new Zend_Pdf_Element_Name('GoTo');
+        $dictionary->S    = new Zend_Pdf_Element_Name('GoToR');
         $dictionary->D    = new Zend_Pdf_Element_String('SomeNamedDestination');
 
         $action2Dictionary = new Zend_Pdf_Element_Dictionary();
@@ -255,86 +266,44 @@ class Zend_Pdf_ActionTest extends PHPUnit_Framework_TestCase
 
         $action = Zend_Pdf_Action::load($dictionary);
 
-        foreach ($action->getAllActions() as $action) {
-            if ($action instanceof Zend_Pdf_Action_Thread) {
-                $root = $action->extract();
+        $actionsToClean        = array();
+        $deletionCandidateKeys = array();
+        $iterator = new RecursiveIteratorIterator($action, RecursiveIteratorIterator::SELF_FIRST);
+        foreach ($iterator as $chainedAction) {
+            if ($chainedAction instanceof Zend_Pdf_Action_GoTo) {
+                $actionsToClean[]        = $iterator->getSubIterator();
+                $deletionCandidateKeys[] = $iterator->getSubIterator()->key();
             }
         }
-        $this->assertTrue($root instanceof Zend_Pdf_Action_GoTo);
-        $this->assertEquals(18, count($root->getAllActions()));
-
-        foreach ($root->getAllActions() as $action) {
-            if ($action instanceof Zend_Pdf_Action_Goto) {
-                $root = $action->extract();
-            }
+        foreach ($actionsToClean as $id => $action) {
+            unset($action->next[$deletionCandidateKeys[$id]]);
         }
-        $this->assertTrue($root instanceof Zend_Pdf_Action_GoToR);
-        $this->assertEquals(16, count($root->getAllActions()));
+        $actionsCount = 0;
+        $iterator = new RecursiveIteratorIterator(new Zend_Pdf_RecursivelyIteratableObjectsContainer(array($action)),
+                                                  RecursiveIteratorIterator::SELF_FIRST);
+        foreach ($iterator as $chainedAction) {
+            $actionsCount++;
+        }
+        $this->assertEquals(18, $actionsCount);
 
-        $root->rebuildSubtree();
-
+        $action->dumpAction(new Zend_Pdf_ElementFactory(1));
         $this->assertEquals(
-            $root->getResource()->toString(),
-            '<</Type /Action /S /GoToR '
-            . "/Next [<</Type /Action /S /GoToE >> <</Type /Action /S /Launch >> <</Type /Action /S /URI >> <</Type /Action /S /Sound >> <</Type /Action /S /Movie >> \n"
-            .        "<</Type /Action /S /Hide >> <</Type /Action /S /Named >> <</Type /Action /S /SubmitForm >> <</Type /Action /S /ResetForm >> <</Type /Action /S /ImportData >> \n"
-            .        "<</Type /Action /S /JavaScript >> <</Type /Action /S /SetOCGState >> <</Type /Action /S /Rendition >> <</Type /Action /S /Trans >> \n"
-            .        '<</Type /Action /S /GoTo3DView >> ] >>');
-
-        $root->clean();
-    }
-
-    public function testAttach()
-    {
-        $action1Dictionary = new Zend_Pdf_Element_Dictionary();
-        $action1Dictionary->Type = new Zend_Pdf_Element_Name('Action');
-        $action1Dictionary->S    = new Zend_Pdf_Element_Name('GoTo');
-        $action1Dictionary->D    = new Zend_Pdf_Element_String('Destination 1');
-        $action1 = Zend_Pdf_Action::load($action1Dictionary);
-
-
-        $action2Dictionary = new Zend_Pdf_Element_Dictionary();
-        $action2Dictionary->Type = new Zend_Pdf_Element_Name('Action');
-        $action2Dictionary->S    = new Zend_Pdf_Element_Name('Thread');
-        $action2Dictionary->D    = new Zend_Pdf_Element_String('Destination 2');
-        $action2Dictionary->Next = new Zend_Pdf_Element_Array();
-
-        $leafAction = new Zend_Pdf_Element_Dictionary();
-        $leafAction->Type = new Zend_Pdf_Element_Name('Action');
-        $leafAction->S    = new Zend_Pdf_Element_Name('GoTo');
-        $leafAction->D    = new Zend_Pdf_Element_String('Destination 3');
-        $action2Dictionary->Next->items[] = $leafAction;
-
-        $leafAction = new Zend_Pdf_Element_Dictionary();
-        $leafAction->Type = new Zend_Pdf_Element_Name('Action');
-        $leafAction->S    = new Zend_Pdf_Element_Name('GoToR');
-        $action2Dictionary->Next->items[] = $leafAction;
-
-        $action2 = Zend_Pdf_Action::load($action2Dictionary);
-
-        $action1->attach($action2);
-        $action1->rebuildSubtree();
-
-        $this->assertEquals(
-            $action1->getResource()->toString(),
-            '<</Type /Action /S /GoTo /D (Destination 1) '
-            . '/Next <</Type /Action /S /Thread /D (Destination 2) '
-            .         '/Next [<</Type /Action /S /GoTo /D (Destination 3) >> <</Type /Action /S /GoToR >> ] >> >>');
-
-        $action1->clean();
+            $action->getResource()->toString(),
+            '<</Type /Action '
+            . '/S /Thread '
+            . '/D (NamedDestination 2) '
+            . '/Next [1 0 R 2 0 R 3 0 R 4 0 R 5 0 R 6 0 R 7 0 R 8 0 R 9 0 R 10 0 R 11 0 R 12 0 R 13 0 R 14 0 R 15 0 R 16 0 R 17 0 R ] >>');
     }
 
     public function testCreate()
     {
     	$action1 = Zend_Pdf_Action_GoTo::create('SomeNamedDestination');
-    	$action1->attach(Zend_Pdf_Action_GoTo::create('AnotherNamedDestination'));
+    	$action1->next[] = Zend_Pdf_Action_GoTo::create('AnotherNamedDestination');
 
-    	$action1->rebuildSubtree();
+        $action1->dumpAction(new Zend_Pdf_ElementFactory(1));
 
     	$this->assertEquals($action1->getResource()->toString(),
-    	                    '<</Type /Action /S /GoTo /D (SomeNamedDestination) /Next <</Type /Action /S /GoTo /D (AnotherNamedDestination) >> >>');
-
-    	$action1->clean();
+    	                    '<</Type /Action /S /GoTo /D (SomeNamedDestination) /Next 1 0 R >>');
     }
 
     public function testCreate1()
@@ -347,12 +316,11 @@ class Zend_Pdf_ActionTest extends PHPUnit_Framework_TestCase
     	$destination = Zend_Pdf_Destination_Fit::create($page2);
 
         $action = Zend_Pdf_Action_GoTo::create($destination);
-        $action->rebuildSubtree();
+
+        $action->dumpAction(new Zend_Pdf_ElementFactory(1));
 
         $this->assertEquals($action->getResource()->toString(),
                             '<</Type /Action /S /GoTo /D [4 0 R /Fit ] >>');
-
-        $action->clean();
     }
 
     public function testGetDestination()
@@ -364,9 +332,7 @@ class Zend_Pdf_ActionTest extends PHPUnit_Framework_TestCase
 
         $action = Zend_Pdf_Action::load($dictionary);
 
-        $this->assertEquals($action->getDestination(), 'SomeNamedDestination');
-
-        $action->clean();
+        $this->assertEquals($action->getDestination()->getName(), 'SomeNamedDestination');
     }
 
     public function testGetDestination2()
@@ -374,14 +340,16 @@ class Zend_Pdf_ActionTest extends PHPUnit_Framework_TestCase
         $pdf = new Zend_Pdf();
         $page1 = $pdf->newPage(Zend_Pdf_Page::SIZE_A4);
         $page2 = $pdf->newPage(Zend_Pdf_Page::SIZE_A4);
+        $page3 = $pdf->newPage(Zend_Pdf_Page::SIZE_A4);  // Page created, but not included into pages list
+
+        $pdf->pages[] = $page1;
+        $pdf->pages[] = $page2;
 
         require_once 'Zend/Pdf/Destination/Fit.php';
-        $destination = Zend_Pdf_Destination_Fit::create($page2);
+        $action1 = Zend_Pdf_Action_GoTo::create(Zend_Pdf_Destination_Fit::create($page2));
+        $action2 = Zend_Pdf_Action_GoTo::create(Zend_Pdf_Destination_Fit::create($page3));
 
-        $action = Zend_Pdf_Action_GoTo::create($destination);
-
-        $this->assertTrue($action->getDestination() == $destination);
-
-        $action->clean();
+        $this->assertTrue($pdf->resolveDestination($action1->getDestination()) === $page2);
+        $this->assertTrue($pdf->resolveDestination($action2->getDestination()) === null);
     }
 }

@@ -257,7 +257,6 @@ class Zend_Pdf_ElementFactory implements Zend_Pdf_ElementFactory_Interface
     /**
      * Calculate object enumeration shift.
      *
-     * @internal
      * @param Zend_Pdf_ElementFactory_Interface $factory
      * @return integer
      */
@@ -287,6 +286,22 @@ class Zend_Pdf_ElementFactory implements Zend_Pdf_ElementFactory_Interface
 
         $this->_shiftCalculationCache[$factory->_factoryId] = -1;
         return -1;
+    }
+
+    /**
+     * Clean enumeration shift cache.
+     * Has to be used after PDF render operation to let followed updates be correct.
+     *
+     * @param Zend_Pdf_ElementFactory_Interface $factory
+     * @return integer
+     */
+    public function cleanEnumerationShiftCache()
+    {
+        $this->_shiftCalculationCache = array();
+
+        foreach ($this->_attachedFactories as $attached) {
+            $attached->cleanEnumerationShiftCache();
+        }
     }
 
     /**
@@ -429,9 +444,9 @@ class Zend_Pdf_ElementFactory implements Zend_Pdf_ElementFactory_Interface
      */
     public function fetchObject($refString)
     {
-    	if (!isset($this->_registeredObjects[$refString])) {
-    		return null;
-    	}
+        if (!isset($this->_registeredObjects[$refString])) {
+            return null;
+        }
         return $this->_registeredObjects[$refString];
     }
 

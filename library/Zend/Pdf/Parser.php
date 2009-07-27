@@ -135,7 +135,7 @@ class Zend_Pdf_Parser
      */
     public function getPDFVersion()
     {
-    	return $this->_pdfVersion;
+        return $this->_pdfVersion;
     }
 
     /**

@@ -17,16 +17,14 @@
  * @subpackage Destination
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: Fit.php 16971 2009-07-22 18:05:45Z mikaelkael $
  */
 
-/** Zend_Pdf_Destination_Explicit */
-require_once 'Zend/Pdf/Destination/Explicit.php';
+/** Zend_Pdf_Destination */
+require_once 'Zend/Pdf/Destination.php';
 
 
 /**
- * Zend_Pdf_Destination_Fit explicit detination
- *
  * Destination array: [page /Fit]
  *
  * Display the page designated by page, with its contents magnified just enough
@@ -40,30 +38,60 @@ require_once 'Zend/Pdf/Destination/Explicit.php';
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Pdf_Destination_Fit extends Zend_Pdf_Destination_Explicit
+class Zend_Pdf_Destination_Named extends Zend_Pdf_Destination
 {
     /**
-     * Create destination object
+     * Destination name
      *
-     * @param Zend_Pdf_Page|integer $page  Page object or page number
-     * @return Zend_Pdf_Destination_Fit
+     * @var Zend_Pdf_Element_Name|Zend_Pdf_Element_String
+     */
+    protected $_nameElement;
+
+    /**
+     * Named destination object constructor
+     *
+     * @param $resource
      * @throws Zend_Pdf_Exception
      */
-    public static function create($page)
+    public function __construct(Zend_Pdf_Element $resource)
     {
-        $destinationArray = new Zend_Pdf_Element_Array();
-
-        if ($page instanceof Zend_Pdf_Page) {
-            $destinationArray->items[] = $page->getPageDictionary();
-        } else if (is_integer($page)) {
-            $destinationArray->items[] = new Zend_Pdf_Element_Numeric($page);
-        } else {
+        if ($resource->getType() != Zend_Pdf_Element::TYPE_NAME  &&  $resource->getType() != Zend_Pdf_Element::TYPE_STRING) {
             require_once 'Zend/Pdf/Exception.php';
-            throw new Zend_Pdf_Exception('Page entry must be a Zend_Pdf_Page object or a page number.');
+            throw new Zend_Pdf_Exception('Named destination resource must be a PDF name or a PDF string.');
         }
 
-        $destinationArray->items[] = new Zend_Pdf_Element_Name('Fit');
+        $this->_nameElement = $resource;
+    }
 
-        return new Zend_Pdf_Destination_Fit($destinationArray);
+    /**
+     * Create named destination object
+     *
+     * @param string $name
+     * @return Zend_Pdf_Destination_Named
+     */
+    public static function create($name)
+    {
+        return new Zend_Pdf_Destination_Named(new Zend_Pdf_Element_String($name));
+    }
+
+    /**
+     * Get name
+     *
+     * @return Zend_Pdf_Element
+     */
+    public function getName()
+    {
+        return $this->_nameElement->value;
+    }
+
+    /**
+     * Get resource
+     *
+     * @internal
+     * @return Zend_Pdf_Element
+     */
+    public function getResource()
+    {
+        return $this->_nameElement;
     }
 }

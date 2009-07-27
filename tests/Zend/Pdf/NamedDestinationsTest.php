@@ -35,7 +35,6 @@ class Zend_Pdf_NamedDestinationsTest extends PHPUnit_Framework_TestCase
         $pdf->pages[] = $page2;
 
 
-        $this->assertTrue(count($pdf->getNamedActions()) == 0);
         $this->assertTrue(count($pdf->getNamedDestinations()) == 0);
 
         require_once 'Zend/Pdf/Destination/Fit.php';
@@ -43,9 +42,9 @@ class Zend_Pdf_NamedDestinationsTest extends PHPUnit_Framework_TestCase
         $destination2 = Zend_Pdf_Destination_Fit::create($page2);
         $action1 = Zend_Pdf_Action_GoTo::create($destination1);
 
-        $pdf->setNamedAction('GoToPage1', $action1);
-        $this->assertTrue($pdf->getNamedAction('GoToPage1') === $action1);
-        $this->assertTrue($pdf->getNamedAction('GoToPage9') === null);
+        $pdf->setNamedDestination('GoToPage1', $action1);
+        $this->assertTrue($pdf->getNamedDestination('GoToPage1') === $action1);
+        $this->assertTrue($pdf->getNamedDestination('GoToPage9') === null);
 
         $pdf->setNamedDestination('Page2', $destination2);
         $this->assertTrue($pdf->getNamedDestination('Page2') === $destination2);
@@ -56,7 +55,7 @@ class Zend_Pdf_NamedDestinationsTest extends PHPUnit_Framework_TestCase
         $pdf->setNamedDestination('Page9_1', Zend_Pdf_Destination_Fit::create(9)); // will be egnored
 
         $action3 = Zend_Pdf_Action_GoTo::create(Zend_Pdf_Destination_Fit::create($page3));
-        $pdf->setNamedAction('GoToPage3', $action3);
+        $pdf->setNamedDestination('GoToPage3', $action3);
 
         $this->assertTrue(strpos($pdf->render(), '[(GoToPage1) <</Type /Action /S /GoTo /D [3 0 R /Fit ] >> (Page1) [3 0 R /Fit ] (Page1_1) [1 /Fit ] (Page2) [4 0 R /Fit ] ]') !== false);
     }
